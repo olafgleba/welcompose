@@ -13,7 +13,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/tmp/mysql-4.1.sock;dbname=oak"
+dsn = "mysql:unix_socket=/tmp/mysql-4.1.sock;dbname=oak;table_alias_constants=true"
 username = "root"
 password = 
 debug = false;
