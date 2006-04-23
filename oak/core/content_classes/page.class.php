@@ -194,6 +194,7 @@ public function selectPage ($id)
 			`content_pages`.`template_set` AS `template_set`,
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
+			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`protect` AS `protect`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
@@ -283,6 +284,7 @@ public function selectPages ($params = array())
 			`content_pages`.`template_set` AS `template_set`,
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
+			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`protect` AS `protect`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
@@ -328,6 +330,39 @@ public function selectPages ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Selects index page. Returns array with the complete page
+ * information.
+ *
+ * @throws Content_PageException
+ * @return array
+ */
+public function selectIndexPage ()
+{
+	// get id of the index page
+	$sql = "
+		SELECT 
+			`content_pages`.`id` AS `id`
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		WHERE
+			`content_pages`.`index_page` = '1'
+		LIMIT
+			1
+	";
+	
+	// execute query
+	$result = (int)$this->base->db->select($sql, 'field');
+	
+	// make sure that there is some index page
+	if ($result < 1) {
+		throw new Content_PageException("Unable to find an index page");
+	}
+	
+	// return complete page information
+	return $this->selectPage($result);
 }
 
 // end of class

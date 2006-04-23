@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 22.04.2006 21:20:38
+-- Created on: 24.04.2006 00:10:59
 -- Diagram Version: 
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=0;
@@ -227,10 +227,12 @@ CREATE TABLE `content_pages` (
   `name` varchar(255),
   `name_url` varchar(255),
   `protect` enum('0','1') DEFAULT '0',
+  `index_page` enum('0','1') DEFAULT '0',
   PRIMARY KEY(`id`),
   INDEX `navigation`(`node`),
   INDEX `type`(`type`),
   INDEX `template_set`(`template_set`),
+  INDEX `index_page`(`index_page`),
   CONSTRAINT `content_pages.type2content_page_types.id` FOREIGN KEY (`type`)
     REFERENCES `content_page_types`(`id`)
       ON DELETE CASCADE
