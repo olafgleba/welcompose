@@ -358,7 +358,7 @@ public function selectIndexPage ()
 	
 	// make sure that there is some index page
 	if ($result < 1) {
-		throw new Content_PageException("Unable to find an index page");
+		return array();
 	}
 	
 	// return complete page information
