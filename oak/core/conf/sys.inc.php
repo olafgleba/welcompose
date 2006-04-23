@@ -22,4 +22,8 @@ debug = false;
 store_www = "/oak/trunk/oak/images"
 store_disk = "/www/oak/trunk/oak/images"
 
+[caching]
+index.php_mode = 0
+index.php_lifetime = 0
+
 ; */ ?>
