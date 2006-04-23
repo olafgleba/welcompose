@@ -61,13 +61,15 @@ define("OAK_REGEX_TEMPLATE_RESOURCE", "=^([a-z0-9-_]+).([0-9]+)$=i");
 define("OAK_REGEX_SMARTY_VAR_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
 // Defines regular expression for strings containing
-// the name of a shop class (only for usage
-// in Smarty plugins).
+// the name of a namespace (only for usage in Smarty plugins).
 define("OAK_REGEX_SMARTY_CLASS_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
 // Defines regular expression for strings containing
-// the name of a shop class' method (only for usage
-// in Smarty plugins).
+// the name of a class (only for usage in Smarty plugins).
+define("OAK_REGEX_SMARTY_CLASS_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
+
+// Defines regular expression for strings containing
+// the name of a class' method (only for usage in Smarty plugins).
 define("OAK_REGEX_SMARTY_METHOD_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
 // Defines regular expression for strings containing
