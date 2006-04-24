@@ -60,19 +60,30 @@ try {
 	$BASE->utility->smarty->caching = (int)$BASE->_conf['caching']['index.php_mode'];
 	$BASE->utility->smarty->cache_lifetime = (int)$BASE->_conf['caching']['index.php_lifetime'];
 	
-	// define constant CURRENT_PAGE
+	// get page information
 	$PAGE = load('content:page');
-	define(CURRENT_PAGE, $PAGE->selectIndexPage());
+	$page_information = $PAGE->selectIndexPage();
+	
+	// define constant CURRENT_PAGE
+	define(OAK_CURRENT_PAGE, $page_information['id']);
 	
 	// inject page id to mimic behaviour of a normal page
-	$_GET['page'] = $_POST['page'] = $_REQUEST['page'] = CURRENT_PAGE;
+	$_GET['page'] = $_POST['page'] = $_REQUEST['page'] = OAK_CURRENT_PAGE;
 	
 	// import url params
 	$import_globals_path = dirname(__FILE__).'/import_globals.inc.php';
 	require(Base_Compat::fixDirectorySeparator($import_globals_path));
-		
+	
 	// prepare template name
-	define("OAK_TEMPLATE_NAME", sprintf("dom:page.%u", CURRENT_PAGE));
+	switch ((string)$page_information['page_type_name']) {
+		case 'weblog':
+				define("OAK_TEMPLATE_NAME", 'weblog_index');
+			break;
+		case 'simple_page':
+				define("OAK_TEMPLATE_NAME", 'simple_page_index');
+			break;
+	}
+	define("OAK_TEMPLATE", sprintf("dom:%s.%u", OAK_TEMPLATE_NAME, OAK_CURRENT_PAGE));
 	
 	// display page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
