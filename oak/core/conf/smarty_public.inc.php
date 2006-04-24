@@ -36,7 +36,7 @@ if (!defined('SMARTY_DIR')) {
 	define('SMARTY_DIR', dirname(__FILE__).'/smarty/');
 }
 if (!defined('SMARTY_TPL_DIR')) {
-	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../smarty/'));
+	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../../smarty/'));
 }
 
 // load the oak resource plugin
