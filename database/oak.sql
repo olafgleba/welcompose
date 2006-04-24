@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 24.04.2006 00:10:59
+-- Created on: 24.04.2006 12:45:18
 -- Diagram Version: 
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=0;
@@ -120,6 +120,8 @@ CREATE TABLE `templating_templates` (
   `name` varchar(255),
   `description` text,
   `content` text,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `type`(`type`),
   CONSTRAINT `templating_templates.type2templating_template_types.id` FOREIGN KEY (`type`)
