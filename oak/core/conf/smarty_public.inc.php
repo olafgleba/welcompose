@@ -39,15 +39,15 @@ if (!defined('SMARTY_TPL_DIR')) {
 	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../smarty/'));
 }
 
-// load the db resource plugin
-require_once(SMARTY_DIR.'/software_extensions/resource.db.php');
+// load the oak resource plugin
+require_once(SMARTY_DIR.'software_extensions/resource.oak.php');
 $resource_functions = array(
-	"dbresource_FetchTemplate",
-	"dbresource_FetchTimestamp",
-	"dbresource_isSecure",
-	"dbresource_isTrusted"
+	"oakresource_FetchTemplate",
+	"oakresource_FetchTimestamp",
+	"oakresource_isSecure",
+	"oakresource_isTrusted"
 );
-$smarty->register_resource("dom", $resource_functions);
+$smarty->register_resource("oak", $resource_functions);
 unset($resource_functions);
 
 // configure smarty
