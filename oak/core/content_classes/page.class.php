@@ -195,13 +195,19 @@ public function selectPage ($id)
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
 			`content_pages`.`index_page` AS `index_page`,
-			`content_pages`.`protect` AS `protect`
+			`content_pages`.`protect` AS `protect`,
+			`content_page_types`.`id` AS `page_type_id`,
+			`content_page_types`.`name` AS `page_type_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		LEFT JOIN
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`node` = `content_nodes`.`id`
+		LEFT JOIN
+			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		  ON
+			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
 			1
 	";
@@ -285,13 +291,19 @@ public function selectPages ($params = array())
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
 			`content_pages`.`index_page` AS `index_page`,
-			`content_pages`.`protect` AS `protect`
+			`content_pages`.`protect` AS `protect`,
+			`content_page_types`.`id` AS `page_type_id`,
+			`content_page_types`.`name` AS `page_type_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		LEFT JOIN
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`node` = `content_nodes`.`id`
+		LEFT JOIN
+			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		  ON
+			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
 			1
 	";
