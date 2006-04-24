@@ -87,7 +87,7 @@ try {
 	
 	// display page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display(OAK_TEMPLATE_NAME, OAK_TEMPLATE_KEY);
+	$BASE->utility->smarty->display(OAK_TEMPLATE, OAK_TEMPLATE_KEY);
 	
 	@ob_end_flush();
 	exit;
