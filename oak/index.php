@@ -83,7 +83,7 @@ try {
 				define("OAK_TEMPLATE_NAME", 'simple_page_index');
 			break;
 	}
-	define("OAK_TEMPLATE", sprintf("dom:%s.%u", OAK_TEMPLATE_NAME, OAK_CURRENT_PAGE));
+	define("OAK_TEMPLATE", sprintf("oak:%s.%u", OAK_TEMPLATE_NAME, OAK_CURRENT_PAGE));
 	
 	// display page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

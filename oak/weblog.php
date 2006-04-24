@@ -73,7 +73,7 @@ try {
 	require(Base_Compat::fixDirectorySeparator($import_globals_path));
 	
 	// prepare template name
-	define("OAK_TEMPLATE", sprintf("dom:weblog_index.%u", OAK_CURRENT_PAGE));
+	define("OAK_TEMPLATE", sprintf("oak:weblog_index.%u", OAK_CURRENT_PAGE));
 	
 	// display page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
