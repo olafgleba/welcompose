@@ -51,6 +51,11 @@ if (!defined('SMARTY_ADMIN_TPL_DIR')) {
 	define('SMARTY_ADMIN_TPL_DIR', implode(DIRECTORY_SEPARATOR, $path_parts));
 }
 
+// configure i18n
+require(SMARTY_ADMIN_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'Smarty_GettextHelper.class.php');
+require(SMARTY_ADMIN_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'compiler.i18n.php');
+$smarty->register_compiler_function('i18n', 'smarty_compiler_i18n');
+
 // configure smarty
 $smarty->debug = false;
 $smarty->template_dir = SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'templates';
