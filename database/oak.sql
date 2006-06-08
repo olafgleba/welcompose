@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 05.06.2006 22:48:44
--- Diagram Version: 5
+-- Created on: 06.06.2006 10:46:46
+-- Diagram Version: 6
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -29,9 +29,6 @@ CREATE TABLE `application_schema_info` (
 )
 TYPE=INNODB;
 
-INSERT INTO `application_schema_info` (`version`) VALUES ('@@schema_version@@');
-
-
 -- Drop table application_project_owners
 DROP TABLE IF EXISTS `application_project_owners`;
 
@@ -41,9 +38,6 @@ CREATE TABLE `application_project_owners` (
 )
 TYPE=INNODB;
 
-INSERT INTO `application_project_owners` (`id`) VALUES (NULL);
-
-
 -- Drop table application_projects
 DROP TABLE IF EXISTS `application_projects`;
 
@@ -52,6 +46,8 @@ CREATE TABLE `application_projects` (
   `owner` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   `url_name` varchar(255),
+  `date_modified` timestamp(14),
+  `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `owner`(`owner`),
   CONSTRAINT `application_projects.owner2application_project_owners.id` FOREIGN KEY (`owner`)

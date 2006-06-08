@@ -1,0 +1,12 @@
+{if count($projects) > 1}
+<form action="../application/projects_choose.php" method="post">
+<div id="projects">
+<select class="fselect">
+{foreach from=$projects item=_project}
+<option value="{$_project.id}"{if $_project.id == $oak_current_project} selected="selected"{/if}>{$_project.name}</option>
+{/foreach}
+</select>
+<input class="submitbut90" type="submit" name="send" value="{i18n load}" title="{i18n Load project}" />
+<!--projects --></div>
+</form>
+{/if}

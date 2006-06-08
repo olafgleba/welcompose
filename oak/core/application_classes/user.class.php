@@ -338,6 +338,13 @@ public function selectUsers ($params = array())
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
+public function initUserAdmin ()
+{
+	define('OAK_CURRENT_USER', 1);
+	
+	return 1;
+}
+
 // end of class
 }
 
