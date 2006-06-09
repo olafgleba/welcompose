@@ -45,7 +45,7 @@ background: #fff url(../img/icons/page-add.gif) 0 0 no-repeat;
 }
 a.new:hover, a.new:active, a.new:focus {
 margin-left: 20px;
-background: #fff url(../img/icons/page-add.gif) 0 -51px no-repeat;
+background: #fff url(../img/icons/page-add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
 margin-left: 25px;
@@ -53,7 +53,7 @@ background: #fff url(../img/icons/page-edit.gif) 0 0 no-repeat;
 }
 a.edit:hover, a.edit:active, a.edit:focus {
 margin-left: 25px;
-background: #fff url(../img/icons/page-edit.gif) 0 -51px no-repeat;
+background: #fff url(../img/icons/page-edit.gif) 0 -45px no-repeat;
 }
 a.delete:link, a.delete:visited {
 margin-left: 20px;
