@@ -44,7 +44,7 @@
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- hli --></div>
 
-
+{if !empty($navigations)}
 <table summary="{i18n Available navigations}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
@@ -64,7 +64,9 @@
 </tr>
 {/foreach}
 </table>
-
+{else}
+<p>{i18n No navigation has been created yet}</p>
+{/if}
 
 <!-- content --></div>
 
