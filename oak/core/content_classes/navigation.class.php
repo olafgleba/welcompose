@@ -208,6 +208,7 @@ public function selectNavigation ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>project, int, optional: Project id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -219,6 +220,7 @@ public function selectNavigation ($id)
 public function selectNavigations ($params = array())
 {
 	// define some vars
+	$project = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -231,6 +233,7 @@ public function selectNavigations ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'project':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -244,12 +247,19 @@ public function selectNavigations ($params = array())
 	$sql = "
 		SELECT 
 			`content_navigations`.`id` AS `id`,
+			`content_navigations`.`project` AS `project`,
 			`content_navigations`.`name` AS `name`
 		FROM
 			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE 
 			1
 	";
+	
+	// add where clauses
+	if (!empty($project) && is_numeric($project)) {
+		$sql .= " AND `content_navigations`.`project` = :project ";
+		$bind_params['project'] = (int)$project;
+	}
 	
 	// add sorting
 	$sql .= " ORDER BY `content_navigations`.`name` ";

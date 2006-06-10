@@ -322,6 +322,23 @@ background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
 color: #00AE2C;
 background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
 }
+.subnavigation {
+float: right;
+width: 474px;
+height: 22px;
+background: transparent url(../img/bg-subnavigation.gif) 0 0 no-repeat;
+}
+.subnavigation a:link, .subnavigation a:visited {
+margin: 0 0 0 245px;
+line-height: 22px;
+font-weight: bold;
+padding-left: 25px;
+background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
+}
+.subnavigation a:hover, .subnavigation a:active, .subnavigation a:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
+}
 /* Box mit abgerundeten Ecken #efefef */
 .ef {
 background: transparent; 

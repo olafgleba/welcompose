@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <meta name="language" content="de" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta http-equiv="imagetoolbar" content="no" /> 
+  <title>{i18n Oak Admin &ndash; Navigations}</title>
+  <link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+  <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+</head>
+
+<body>
+<div id="container">
+
+
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>Oak</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="contents"}
+
+{include file="_inc_projects_load.html"}
+
+<div id="main">
+
+{include file="_inc_contents_topsubnav.html" subarea="navigations"}
+
+<div id="brc"><p><a href="#">{i18n Contents}</a> &#62; {i18n Navigations}</p></div>
+
+<div id="content">
+
+<h1>{i18n Navigations}</h1>
+
+<div class="subnavigation"><a href="navigations_add.php">{i18n Add new}</a></div>
+
+<div class="hli ef">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<h2>&nbsp;</h2>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli --></div>
+
+
+<table summary="{i18n Available navigations}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page">{i18n Name}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$navigations item=_navigation}
+<tr>
+<td class="page"><span>{$_navigation.name}</span></td>
+<td><a class="edit" href="navigations_edit.php?id={$_navigation.id}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="navigations_delete.php?id={$_navigation.id}" title="{i18n Delete}"></a></td>
+</tr>
+{/foreach}
+</table>
+
+
+<!-- content --></div>
+
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>
