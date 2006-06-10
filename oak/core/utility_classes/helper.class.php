@@ -285,6 +285,36 @@ protected function _urlTranslationTable ()
 			);
 }
 
+/**
+ * Tests array of sql data for pear errors. Takes array with sql data
+ * as first argument, returns bool.
+ *
+ * @throws Utility_HelperException
+ * @param array Sql data
+ * @return bool
+ */
+public function testSqlDataForPearErrors (&$sqlData)
+{
+	if (!is_array($sqlData)) {
+		throw new Utility_HelperException('Input for parameter sqlData is not an array');
+	}
+	foreach ($sqlData as $_key => $_value) {
+		if (!is_scalar($_key)) {
+			throw new Utility_HelperException("Some key in sql data array is not scalar");
+		} 
+		if ($_value instanceof PEAR_Error) {
+			throw new Utility_HelperException(sprintf("Element %s's value is of type PEAR_Error: %s",
+				$_key, $_value->getMessage()));
+		}
+		if (!is_scalar($_value)) {
+			throw new Utility_HelperException("Element $_key in bind params array is not scalar");
+		}
+	}
+	reset($sqlData);
+	
+	return true;
+}
+
 // end of class
 }
 
