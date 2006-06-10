@@ -58,7 +58,7 @@ protected function __construct()
 		
 		// establish database connection
 		$this->base->loadClass('database');
-		
+				
 	} catch (Exception $e) {
 		
 		// trigger error
@@ -95,6 +95,9 @@ public function addNavigation ($sqlData)
 		throw new Content_NavigationException('Input for parameter sqlData is not an array');	
 	}
 	
+	// make sure that the navigation will be assigned to the right project
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
 	return $this->base->db->insert(OAK_DB_CONTENT_NAVIGATIONS, $sqlData);
 }
@@ -120,11 +123,12 @@ public function updateNavigation ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -148,11 +152,12 @@ public function deleteNavigation ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
