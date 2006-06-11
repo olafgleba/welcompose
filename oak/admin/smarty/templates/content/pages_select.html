@@ -2,19 +2,33 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
- <head>
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-  <meta name="language" content="de" />
-  <meta name="MSSmartTagsPreventParsing" content="true" />
-  <meta http-equiv="imagetoolbar" content="no" /> 
-  <title>{i18n Oak Admin &ndash; Pages}</title>
-  <link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
-  <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Pages}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+  
+<script type="text/javascript">
+var response = '';
+var selection = '';
+var form_attr = '';
+</script>
+
+<script type="text/javascript" src="../static/libs/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
 </head>
 
 <body>
 <div id="container">
-
 
 <div id="logo">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
@@ -22,13 +36,27 @@
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- logo --></div>
 
-{include file="_inc_topnav.html" area="contents"}
-
 {include file="_inc_projects_load.html"}
+
+{include file="_inc_topnav.html" area="contents"}
 
 <div id="main">
 
-{include file="_inc_contents_topsubnav.html" subarea="pages"}
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic" class="f9">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul id="topsubnav">
+<li><a class="on" href="#">Pages<span></span></a></li>
+<li><a href="navigations_select.php">Navigations<span></span></a></li>
+<li><a href="pagetypes_select.php">Page types<span></span></a></li>
+</ul>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+</div>
+<!-- topnavcon static eof -->
 
 <div id="brc"><p><a href="#">Contents</a> &#62; Pages</p></div>
 
@@ -42,7 +70,6 @@
 <h2>Navigation 1</h2>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- hli --></div>
-
 
 
 <table summary="Seiten und Struktur der Hauptnavigation">
@@ -267,9 +294,8 @@
 
 <!-- content --></div>
 
-
 <!-- main --></div>
-<p class="copyright">Administrator: <a href="mailto:webmaster@nn.de">webmaster@nn.de</a> Copyright 2005 &copy; <a href="http://www.sopic.com/">Sopic GmbH</a></p>
+{include file="_inc_footer.html"}
 <!-- container --></div>
 </body>
 </html>

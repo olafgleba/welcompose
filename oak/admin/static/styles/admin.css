@@ -266,6 +266,12 @@ background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
 
+/* TOPSUBNAVIGATION STATIC */
+#topsubnavconstatic {
+width: 956px;
+padding-top: 2em;
+}
+
 /* BREADCRUMB */
 #brc {
 width: 852px;

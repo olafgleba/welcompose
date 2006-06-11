@@ -2,19 +2,34 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
- <head>
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-  <meta name="language" content="de" />
-  <meta name="MSSmartTagsPreventParsing" content="true" />
-  <meta http-equiv="imagetoolbar" content="no" /> 
-  <title>{i18n Oak Admin &ndash; Navigations}</title>
-  <link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
-  <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Navigations}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+</head>
+
+<script type="text/javascript">
+var response = '';
+var selection = '';
+var form_attr = '';
+</script>
+
+<script type="text/javascript" src="../static/libs/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
 </head>
 
 <body>
 <div id="container">
-
 
 <div id="logo">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
@@ -28,7 +43,21 @@
 
 <div id="main">
 
-{include file="_inc_contents_topsubnav.html" subarea="navigations"}
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic" class="f9">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul id="topsubnav">
+<li><a href="pages_select.php">Pages<span></span></a></li>
+<li><a class="on" href="#">Navigations<span></span></a></li>
+<li><a href="pagetypes_select.php">Page types<span></span></a></li>
+</ul>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+</div>
+<!-- topnavcon static eof -->
 
 <div id="brc"><p><a href="#">{i18n Contents}</a> &#62; {i18n Navigations}</p></div>
 
@@ -69,7 +98,6 @@
 {/if}
 
 <!-- content --></div>
-
 
 <!-- main --></div>
 
