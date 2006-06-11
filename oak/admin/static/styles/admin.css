@@ -470,6 +470,12 @@ display: block;
 float: left;
 width: 140px;
 }
+label span .required {
+display: inline;
+float: none;
+width: 5px;
+color: #f00;
+}
 
 input.short, input.medium, input.long, input.title {
 width: 130px;
@@ -514,4 +520,23 @@ font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
 margin: 10px  0 0 140px;
+}
+
+/* ERRORS */
+
+#responseError {
+color: #fff;
+background: #FFEAEA;
+width: 605px;
+margin: 10px 0;
+}
+#responseError ul {
+list-style-type: square;
+margin: 5px 0 5px 30px;
+font-weight: bold;
+}
+#responseError li {
+color: #f00;
+background: transparent;
+padding: 2px 0;
 }
