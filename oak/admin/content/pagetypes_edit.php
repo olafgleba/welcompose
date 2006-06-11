@@ -93,6 +93,7 @@ try {
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', OAK_REGEX_PAGE_TYPE_NAME);
 
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update page type'),
