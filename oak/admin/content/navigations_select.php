@@ -86,10 +86,7 @@ try {
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
 	// get available navigations
-	$select_params = array(
-		'project' => OAK_CURRENT_PROJECT
-	);
-	$BASE->utility->smarty->assign('navigations', $NAVIGATION->selectNavigations($select_params));
+	$BASE->utility->smarty->assign('navigations', $NAVIGATION->selectNavigations());
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
