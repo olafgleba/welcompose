@@ -279,6 +279,63 @@ public function selectNavigations ($params = array())
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
+/**
+ * Tests given navigation name for uniqueness. Takes the navigation
+ * name as first argument and an optional navigation id as second
+ * argument. If the navigation id is given, this navigation won't be
+ * considered when checking for uniqueness (useful for updates).
+ * Returns boolean true if navigation name is unique.
+ *
+ * @throws Content_NavigationException
+ * @param string Navigation name
+ * @param int Navigation id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new Content_NavigationException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Content_NavigationException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Content_NavigationException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+		WHERE
+			`project` = :project
+		  AND
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 // end of class
 }
 

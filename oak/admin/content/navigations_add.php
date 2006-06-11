@@ -76,6 +76,7 @@ try {
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('navigation', 'post');
+	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $NAVIGATION);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
@@ -83,6 +84,7 @@ try {
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	$FORM->addRule('name', gettext('A navigation with this name already exists'), 'testForNameUniqueness');
 
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add navigation'),
