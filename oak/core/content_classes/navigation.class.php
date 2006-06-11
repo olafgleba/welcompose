@@ -216,7 +216,6 @@ public function selectNavigation ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
- * <li>project, int, optional: Project id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -228,7 +227,6 @@ public function selectNavigation ($id)
 public function selectNavigations ($params = array())
 {
 	// define some vars
-	$project = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -241,7 +239,6 @@ public function selectNavigations ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'project':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
