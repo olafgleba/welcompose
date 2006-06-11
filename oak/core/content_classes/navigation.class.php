@@ -179,19 +179,22 @@ public function selectNavigation ($id)
 		throw new Content_NavigationException('Input for parameter id is not numeric');
 	}
 	
-	// initialize bind params
-	$bind_params = array();
-	
 	// prepare query
 	$sql = "
 		SELECT 
 			`content_navigations`.`id` AS `id`,
+			`content_navigations`.`project` AS `project`,
 			`content_navigations`.`name` AS `name`
 		FROM
 			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE 
-			1
+			`content_navigations`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// prepare where clauses
 	if (!empty($id) && is_numeric($id)) {
@@ -257,14 +260,13 @@ public function selectNavigations ($params = array())
 		FROM
 			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE 
-			1
+			`content_navigations`.`project` = :project
 	";
 	
-	// add where clauses
-	if (!empty($project) && is_numeric($project)) {
-		$sql .= " AND `content_navigations`.`project` = :project ";
-		$bind_params['project'] = (int)$project;
-	}
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add sorting
 	$sql .= " ORDER BY `content_navigations`.`name` ";
