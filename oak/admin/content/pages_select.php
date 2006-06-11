@@ -69,7 +69,11 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
-		
+
+	// load navigation class
+	/* @var $NAVIGATION Content_Navigation */
+	$NAVIGATION = load('content:navigation');
+	
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
@@ -84,6 +88,17 @@ try {
 		'order_macro' => 'NAME'
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
+	
+	// select available navigations
+	$navigations = $NAVIGATION->selectNavigations();
+	$BASE->utility->smarty->assign('navigations', $navigations);
+	
+	// get pages
+	/*
+	foreach ($navigations as $_navigations) {
+		
+	}
+	*/
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

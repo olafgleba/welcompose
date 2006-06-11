@@ -58,158 +58,24 @@ var form_attr = '';
 </div>
 <!-- topnavcon static eof -->
 
-<div id="brc"><p><a href="#">Contents</a> &#62; Pages</p></div>
+<div id="brc"><p><a href="#">{i18n Contents}</a> &#62; {i18n Pages}</p></div>
 
 <div id="content">
 
-<h1>Pages</h1>
+<h1>{i18n Pages}</h1>
 
+{if empty($navigations)}
+<p>No navigation and no page has been created yet. Please create a <a href="navigations_select.php">navigation</a> first.</p>
+{else}
+{foreach from=$navigations item=_navigation}
 <div class="navigation"></div>
 <div class="hli ef">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<h2>Navigation 1</h2>
+<h2>{$_navigation.name}</h2>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- hli --></div>
 
-
-<table summary="Seiten und Struktur der Hauptnavigation">
-<tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-</tr>
-<tr>
-<th class="page">Page structure:</th>
-<th colspan="2">Position</th>
-<th>New page</th>
-<th>Edit contents</th>
-<th>Delete page</th>
-</tr>
-<tr>
-<td class="page"><span>Startseite</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page"><span>News/Presse</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page"><span>&Uuml;ber Uns</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page2">Unser Team</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page2">Referenzen</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page2">Veranstaltungen</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page">Jobs</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page2">Ausbildung</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page3">Vertrieb</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page4">Vertrieb A</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page5">Vertrieb AA</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page">Produkte</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page">Downloads <img src="../static/img/icons/lock.gif" width="11" height="12" alt="Gesch&uuml;tzer Bereich" /></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page">Links</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-</table>
-
-<div class="navigation"></div>
-<div class="hli ef">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<h2>Navigation 2</h2>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
-<!-- hli --></div>
-
-<table summary="Seiten und Struktur der Hauptnavigation">
+<table summary="{i18n Page structure}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="32" height="1" alt="" /></td>
@@ -219,79 +85,23 @@ var form_attr = '';
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">Page structure:</th>
-<th colspan="2">Position</th>
-<th>New page</th>
-<th>Edit contents</th>
-<th>Delete page</th>
+<th class="page">{i18n Page structure}</th>
+<th colspan="2">{i18n Move}</th>
+<th>{i18n Add}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
 </tr>
 <tr>
-<td class="page"><span>Kontakt</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page"><span>Impressum</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page"><span>Anfahrt</span></td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-<tr>
-<td class="page">Blog</td>
-<td><a class="down" href="#" title="Down"></a></td>
-<td><a class="up" href="#" title="Up"></a></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
-<td><a class="edit" href="#" title="Edit page contents"></a></td>
-<td><a class="delete" href="#" title="Delete page"></a></td>
-</tr>
-</table>
-
-<div class="navigation"></div>
-<div class="hli ef">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<h2>Navigation 3</h2>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
-<!-- hli --></div>
-
-<table summary="Seiten und Struktur der Hauptnavigation">
-<tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="32" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="32" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-</tr>
-<tr>
-<th class="page">Page structure:</th>
-<th colspan="2">Position</th>
-<th>New page</th>
-<th>Edit contents</th>
-<th>Delete page</th>
-</tr>
-<tr>
-<td class="page">No pages available</td>
+<td class="page">{i18n No page has been created yet}</td>
 <td></td>
 <td></td>
-<td><a class="new" href="#" title="Add new page"></a></td>
+<td><a class="new" href="pages_add.php" title="{i18n Add new page}"></a></td>
 <td></td>
 <td></td>
 </tr>
 </table>
-
+{/foreach}
+{/if}
 <!-- content --></div>
 
 <!-- main --></div>
