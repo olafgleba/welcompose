@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 06.06.2006 10:46:46
--- Diagram Version: 6
+-- Created on: 11.06.2006 15:56:23
+-- Diagram Version: 7
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -217,6 +217,7 @@ CREATE TABLE `content_page_types` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `editable` enum('0','1') DEFAULT '1',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
@@ -454,7 +455,6 @@ CREATE TABLE `content_simple_forms` (
   `email_subject` varchar(255),
   `date_modified` timestamp(14),
   `date_added` datetime,
-  `id_FK` int(11) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY(`id`),
   INDEX `user`(`user`),
   INDEX `page`(`page`),
