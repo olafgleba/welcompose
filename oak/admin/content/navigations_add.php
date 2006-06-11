@@ -182,7 +182,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: navigations_select.php");
+		header("Location: navigations_add.php");
 		exit;
 	}
 } catch (Exception $e) {
