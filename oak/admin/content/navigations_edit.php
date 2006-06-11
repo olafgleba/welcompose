@@ -115,12 +115,12 @@ try {
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 	
-	    // build $session
+	    // build session
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
 	    );
 	    
-	    // assign $_SESSION to smarty
+	    // assign prepared session array to smarty
 	    $BASE->utility->smarty->assign('session', $session);
 	    
 	    // empty $_SESSION
@@ -128,13 +128,13 @@ try {
 	        $_SESSION['response'] = '';
 	    }
 	    
-	    // build request
+	    // build request array
 	    $request = array(
 			'response' => Base_Cnc::filterRequest($_REQUEST['response'], OAK_REGEX_NUMERIC)
 	    );
 	    
-	    // assign $_REQUEST to smarty
-	    $BASE->utility->smarty->assign('request', $_REQUEST);
+	    // assign prepared request array to smarty
+	    $BASE->utility->smarty->assign('request', $request);
 
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);

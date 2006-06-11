@@ -117,8 +117,8 @@ try {
 			'response' => Base_Cnc::filterRequest($_REQUEST['response'], OAK_REGEX_NUMERIC)
 	    );
 	    
-	    // assign $_REQUEST to smarty
-	    $BASE->utility->smarty->assign('request', $_REQUEST);
+	    // assign prepared request array to smarty
+	    $BASE->utility->smarty->assign('request', $request);
 
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
