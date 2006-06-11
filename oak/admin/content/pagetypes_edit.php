@@ -79,6 +79,7 @@ try {
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page_type', 'post');
+	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $PAGETYPE);
 	
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
@@ -94,7 +95,9 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', OAK_REGEX_PAGE_TYPE_NAME);
-
+	$FORM->addRule('name', gettext('A page type with the given name already exists'),
+		'testForNameUniqueness', $FORM->exportValue('id'));
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update page type'),
 		array('class' => 'submitbut140'));
