@@ -22,7 +22,7 @@
 
 function validate(elem)
 {	
-	var url		= 'validate.js.php';
+	var url		= '../validate.js.php';
 	var elemID	= $(elem).getAttribute('id');
 	var elemVal	= $F(elem);
 	var pars	= 'elemID=' + elemID + '&elemVal=' + elemVal;

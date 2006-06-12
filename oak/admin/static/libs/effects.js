@@ -74,7 +74,7 @@ Element.setOpacity = function(element, value){
  
 Element.getInlineOpacity = function(element){  
   return $(element).style.opacity || '';
-}  
+} 
 
 Element.childrenWithClassName = function(element, className, findFirst) {
   return [$A($(element).getElementsByTagName('*'))[findFirst ? 'detect' : 'select']( function(c) { 

@@ -1,6 +1,6 @@
 /**
  * Project: Oak
- * File: oak.xhr.js
+ * File: oak.extend_effects.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -19,19 +19,3 @@
  * @package Oak
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
- 
-Effect.AppearNew = function(element) {
-  element = $(element);
-  var options = Object.extend({
-  from: (element.getStyle('display') == 'none' ? 0.0 : element.getOpacity() || 0.0),
-  to:   1.0,
-  // force Safari to render floated elements properly
-  afterFinishInternal: function(effect) {
-    effect.element.forceRerendering();
-  },
-  beforeSetup: function(effect) {
-    effect.element.setOpacity(effect.options.from);
-    effect.element.show(); 
-  }}, arguments[1] || {});
-  return new Effect.Opacity(element,options);
-}

@@ -75,11 +75,11 @@ var definitions = {
 	},
 	'#main input' : function(el){
 		el.onfocus = function(){
-			mFocus(this, '','#6699cc','dotted');
+			mFocus(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			mBlur(this, '','red','solid');
+			mBlur(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){
@@ -88,11 +88,11 @@ var definitions = {
 	},
 	'#main textarea' : function(el){
 		el.onfocus = function(){
-			mFocus(this, '','#6699cc','dotted');
+			mFocus(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			mBlur(this, '','red','solid');
+			mBlur(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){

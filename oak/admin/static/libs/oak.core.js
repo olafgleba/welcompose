@@ -205,10 +205,9 @@ function initLoad ()
  */
 function getHeaderVars ()
 {
-   if (typeof response != 'undefined' && $('response')) {
+   if (typeof response != 'undefined' && $('rp')) {
        if (response == 1) {
-            return new Effect.Fade('response', {duration: 0.5, delay: 2.5}) + 
-                   new Effect.Highlight('response', {duration: 10.5, delay: 0.0, startcolor: '#d1e1f0'});
+            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
        }
    }
 
@@ -273,15 +272,3 @@ function showHash ()
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

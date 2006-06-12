@@ -299,6 +299,16 @@ padding: 1px 0 1px 10px;
 display: block;
 width: 607px;
 }
+.hli_bx {
+display: block;
+width: 710px;
+margin-top: 20px;
+}
+.hli_rp {
+display: block;
+width: 710px;
+margin-top: 20px;
+}
 .hli_ov h2 {
 background: #efefef;
 width: 607px;
@@ -377,8 +387,8 @@ margin: 0 2px;
 margin: 0 1px;
 }
 /* Ende Box mit abgerundeten Ecken #efefef */
-/* Box mit abgerundeten Ecken #efefef */
-.ef {
+/* Box mit abgerundeten Ecken #f9f9f9 */
+.f9 {
 background: transparent; 
 }
 .f9 .xtop, 
@@ -408,7 +418,39 @@ margin: 0 2px;
 .f9 .xb3 {
 margin: 0 1px;
 }
-/* Ende Box mit abgerundeten Ecken #efefef */
+/* Ende Box mit abgerundeten Ecken #f9f9f9 */
+/* Box mit abgerundeten Ecken #d1e1f0 */
+.d1 {
+background: transparent; 
+}
+.d1 .xtop, 
+.d1 .xbottom {
+display: block; 
+background: transparent;
+font-size: 1px;
+}
+.d1 .xb1, .d1 .xb2, .d1 .xb3 {
+display: block; 
+overflow: hidden;
+}
+.d1 .xb1, .d1 .xb2, .d1 .xb3 {
+height: 1px;
+}
+.d1 .xb2, 
+.d1 .xb3 {
+background: #d1e1f0; 
+}
+.d1 .xb1 {
+margin: 0 3px; 
+background: #d1e1f0;
+}
+.d1 .xb2 {
+margin: 0 2px; 
+}
+.d1 .xb3 {
+margin: 0 1px;
+}
+/* Ende Box mit abgerundeten Ecken #d1e1f0 */
 /* Box mit abgerundeten Ecken #b66 */
 .b6 {
 background: transparent; 
@@ -442,15 +484,44 @@ margin: 0 1px;
 }
 /* Ende Box mit abgerundeten Ecken #b66 */
 
+
+/* BOXES */
+ul.req {
+line-height: 1.2em;
+padding: 4px 15px;
+background: #d1e1f0;
+font-weight: bold;
+color: red;
+list-style-position: inside;
+}
+
+#rp {
+display: block;
+background-color: transparent;
+margin: 0;
+padding: 0;
+}
+#rp h1, #rp p {
+margin: 0;
+padding: 10px 10px 0 10px;
+background-color: #d1e1f0;
+}
+#rp h1 {
+color: red;
+}
+#rp p {
+padding: 0 10px 10px 10px;
+}
+
 /* FORMs */
 form.botbg {
-width: 607px;
+width: 710px;
 padding-bottom: 20px;
 margin-top: 20px;
 background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
-width: 607px;
+width: 710px;
 padding: 20px 10px 0 10px;
 background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
 }
@@ -458,7 +529,7 @@ label {
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 565px;
+width: 465px;
 margin: 15px 0 0 0;
 }
 label.cont {
@@ -470,7 +541,7 @@ display: block;
 float: left;
 width: 140px;
 }
-label span .required {
+label span span {
 display: inline;
 float: none;
 width: 5px;
@@ -520,10 +591,21 @@ font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
 margin: 10px  0 0 140px;
+cursor: pointer;
 }
 
-/* ERRORS */
+/* VALIDATE */
+p.validate {
+padding: 6px 0 0 0;
+}
+p.validate img {
+vertical-align: middle;
+padding-right: 3px;
+}
 
+
+/* ERRORS */
+/*
 #responseError {
 color: #fff;
 background: #FFEAEA;
@@ -540,3 +622,4 @@ color: #f00;
 background: transparent;
 padding: 2px 0;
 }
+*/
