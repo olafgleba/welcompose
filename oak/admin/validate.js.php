@@ -59,7 +59,7 @@ try {
 		$reg = '';
 		$desc = '';
 		
-		switch ($_POST['elemID']) {
+		switch ((string)$_POST['elemID']) {
 			case 'name':
 				$reg = OAK_REGEX_ALPHANUMERIC;
 				$desc = gettext('Nur Zahlen und Buchstaben erlaubt');
