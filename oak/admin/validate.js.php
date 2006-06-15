@@ -52,52 +52,23 @@ try {
 	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
-
-
-	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_ALPHANUMERIC)) {
-		
-		$reg = '';
-		$desc = '';
-		
+	
+	// map field id names to regexps and error messages 
+	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
-			case 'name':
-				$reg = OAK_REGEX_ALPHANUMERIC;
-				$desc = gettext('Nur Zahlen und Buchstaben erlaubt');
-			break;
-			case 'number':
-				$reg = OAK_REGEX_NUMERIC;
-				$desc = gettext('Nur Zahlen');
-			break;
-			case 'url':
-				$reg = OAK_REGEX_URL;
-				$desc = gettext('Unvollständiger URL');
-			break;
+			case 'navigation_name':
+					$reg = OAK_REGEX_NON_EMPTY;
+					$desc = gettext('Field may not be empty');
+				break;
+			case 'page_type_name':
+					$reg = OAK_REGEX_PAGE_TYPE_NAME;
+					$desc = gettext('Only capitalized prefixed literal string');
+				break;
 			default :
-				$reg;
+				$reg = null;
+				$desc = null;
 		}	
 	}
-	
-	
-	// preparation for later use
-	// every relevant regex defined with gettext strings
-/*	
-	$reg = SHOP_REGEX_NUMERIC;
-	$desc = gettext('Only nummeric input are allowed');
-	
-	$reg = SHOP_REGEX_ALPHANUMERIC;
-	$desc = gettext('Only alphanummeric input are allowed');
-	
-	$reg = SHOP_REGEX_ARTICLE_NUMBER;
-	$desc = gettext('Only alphanummeric input are allowed');
-	
-	$reg = SHOP_REGEX_MANUFACTURER_ARTICLE_NUMBER;
-	$desc = gettext('Only alphanummeric input are allowed');
-	
-	$reg = SHOP_REGEX_EAN;
-	$desc = gettext('Only nummeric input is allowed with maximal ');
-	
-	*/	
-
 	
 	if (!empty($_POST['elemVal'])) {
 		if (!empty($reg)) {

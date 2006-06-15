@@ -12,9 +12,9 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
  
 <script type="text/javascript">
-var response = '';
-var selection = '';
-var form_attr = '';
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
 </script>
 
 <script type="text/javascript" src="../static/libs/prototype.js"></script>
@@ -73,13 +73,26 @@ var form_attr = '';
 <!-- hli_ov --></div>
 
 {if !empty($form.errors)}
-<div id="responseError">
-<ul class="showRequired">
+<div class="hli_bx d1">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-</div>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli_bx --></div>
+{/if}
+
+{if $session.response == 1}
+<div id="rp">
+<div class="hli_rp d1">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<h1>{i18n Your input was successfully saved!}</h1>
+<p>{i18n To apply further input, please repeat fill in the form}</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli_rp --></div>
+<!-- rp --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>
@@ -89,8 +102,8 @@ var form_attr = '';
 
 {$form.hidden}
 
-<label class="cont" for="name"><span>{$form.name.label}</span>
-{$form.name.html}</label>
+<label class="cont" for="page_type_name"><span>{$form.name.label}</span>
+{$form.name.html}</label><span id="page_type_name_container"></span>
 
 {$form.submit.html}
 

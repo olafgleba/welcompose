@@ -82,6 +82,12 @@ define("OAK_REGEX_TAG_FIRST_CHAR_CLEANUP", "=[^a-z0-9]=");
 
 // Defines regular expression for strings containing a
 // page type name
-define("OAK_REGEX_PAGE_TYPE_NAME", "=^([^OAK])([A-Z0-9]+)_([A-Z0-9_]+)$=")
+define("OAK_REGEX_PAGE_TYPE_NAME", "=^([^OAK])([A-Z0-9]+)_([A-Z0-9_]+)$=");
 
+// Defines regular expression for strings containing a
+// field id name
+define("OAK_REGEX_FORM_FIELD_ID", "=^([a-z0-9-_]+)$=i");
+
+// Defines regular expression for non empty strings
+define("OAK_REGEX_NON_EMPTY", "=^.+$=");
 ?>
