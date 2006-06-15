@@ -149,8 +149,7 @@ function mBlur (inst, bgcolor, bcolor, bstyle)
 function setCorrespondingFocus (elem, attr)
 {
 	instId = elem.parentNode.parentNode.getAttribute(attr);	
-	inst = document.getElementsByName(instId)[0];	
-	inst.focus();
+	$(instId).focus();
 }
 
 /**
