@@ -12,9 +12,9 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript">
-var response = '';
-var selection = '';
-var form_attr = '';
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
 </script>
 
 <script type="text/javascript" src="../static/libs/prototype.js"></script>
@@ -29,7 +29,6 @@ var form_attr = '';
 
 <body>
 <div id="container">
-
 
 <div id="logo">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
@@ -52,8 +51,8 @@ var form_attr = '';
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
 <li><a href="pages_select.php">Pages<span></span></a></li>
-<li><a class="on" href="#">Navigations<span></span></a></li>
-<li><a href="pagetypes_select.php">Page types<span></span></a></li>
+<li><a class="on" href="navigations_select.php">Navigations<span></span></a></li>
+<li><a href="pagetypes_select.php">Page Types<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -73,13 +72,15 @@ var form_attr = '';
 <!-- hli_ov --></div>
 
 {if !empty($form.errors)}
-<div id="responseError">
-<ul class="showRequired">
+<div class="hli_bx d1">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-</div>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli_bx --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>
@@ -89,8 +90,9 @@ var form_attr = '';
 
 {$form.hidden}
 
-<label class="cont" for="name"><span>{$form.name.label}</span>
+<label class="cont" for="name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#">(?)</a></span></span>
 {$form.name.html}</label>
+<p class="validate" id="name_container"></p>
 
 {$form.submit.html}
 

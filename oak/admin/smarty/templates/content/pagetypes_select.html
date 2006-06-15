@@ -10,12 +10,11 @@
 <title>{i18n Oak Admin &ndash; Page Types}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
-</head>
 
 <script type="text/javascript">
-var response = '';
-var selection = '';
-var form_attr = '';
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
 </script>
 
 <script type="text/javascript" src="../static/libs/prototype.js"></script>
@@ -53,7 +52,7 @@ var form_attr = '';
 <ul id="topsubnav">
 <li><a href="pages_select.php">Pages<span></span></a></li>
 <li><a href="navigations_select.php">Navigations<span></span></a></li>
-<li><a class="on" href="#">Page Types<span></span></a></li>
+<li class="on">Page Types</li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -74,7 +73,7 @@ var form_attr = '';
 <!-- hli --></div>
 
 {if !empty($page_types)}
-<table summary="{i18n Available page types}">
+<table summary="{i18n Available Page Types}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>

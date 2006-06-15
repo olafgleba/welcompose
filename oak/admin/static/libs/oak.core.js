@@ -148,7 +148,7 @@ function mBlur (inst, bgcolor, bcolor, bstyle)
 
 function setCorrespondingFocus (elem, attr)
 {
-	instId = elem.previousSibling.getAttribute(attr);	
+	instId = elem.parentNode.parentNode.getAttribute(attr);	
 	inst = document.getElementsByName(instId)[0];	
 	inst.focus();
 }
@@ -162,7 +162,7 @@ function setCorrespondingFocus (elem, attr)
  */
 function getHelp (elem, attr)
 {	
-	processId = elem.previousSibling.getAttribute(attr);
+	processId = elem.parentNode.parentNode.getAttribute(attr);	
 	elem.className = helpClassRemove;
 	Element.update(elem, helpHtmlHide);
 	Behaviour.apply();	
@@ -177,8 +177,8 @@ function getHelp (elem, attr)
  */
 function removeHelp (elem, attr)
 {	
-	processIdRemove = elem.previousSibling.getAttribute(attr);
-	processId_after = $(processIdRemove).nextSibling;
+	processIdRemove = elem.parentNode.parentNode.getAttribute(attr);
+	processId_after = $(processIdRemove).nextSibling;	
 	elem.className = helpClass;
 	Element.hide(processId_after);
 	Element.update(elem, helpHtmlShow);

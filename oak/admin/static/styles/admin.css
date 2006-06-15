@@ -25,7 +25,7 @@ margin: 10px 0 15px 10px;
 h2, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input {
+p a, li a, th a, td a, label select, label input, label p, label span span a {
 font-size: 100%;
 } 
 a {
@@ -266,6 +266,17 @@ background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
 
+#topsubnav li.on {
+position: relative;
+display: block;
+float: left;
+font-weight: normal;
+padding: 2px 25px 2px 27px;
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
+text-decoration: none;
+}
+
 /* TOPSUBNAVIGATION STATIC */
 #topsubnavconstatic {
 width: 956px;
@@ -485,7 +496,7 @@ margin: 0 1px;
 /* Ende Box mit abgerundeten Ecken #b66 */
 
 
-/* BOXES */
+/* ERRORS */
 ul.req {
 line-height: 1.2em;
 padding: 4px 15px;
@@ -494,7 +505,6 @@ font-weight: bold;
 color: red;
 list-style-position: inside;
 }
-
 #rp {
 display: block;
 background-color: transparent;
@@ -513,6 +523,7 @@ color: red;
 padding: 0 10px 10px 10px;
 }
 
+
 /* FORMs */
 form.botbg {
 width: 710px;
@@ -529,22 +540,19 @@ label {
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 465px;
+width: 455px;
 margin: 15px 0 0 0;
 }
 label.cont {
 float: left;
 margin: 5px 0;
 }
-label span {
+label span.bez {
 display: block; 
 float: left;
 width: 140px;
 }
-label span span {
-display: inline;
-float: none;
-width: 5px;
+label span.req {
 color: #f00;
 }
 
@@ -594,15 +602,26 @@ margin: 10px  0 0 140px;
 cursor: pointer;
 }
 
-/* VALIDATE */
-p.validate {
-padding: 6px 0 0 0;
-}
-p.validate img {
-vertical-align: middle;
-padding-right: 3px;
-}
 
+/* VALIDATE */
+#content p.validate {
+float: left;
+display: block;
+width: 225px;
+height: 1.5em;
+line-height: 1.5em;
+margin: 5px 0 0 0;
+}
+#content p.validate img {
+vertical-align: middle;
+}
+#content .help p { 
+display: block; 
+width: 400px; 
+color: #fff; 
+background: blue; 
+margin: 5px 5px 5px 140px; 
+}
 
 /* ERRORS */
 /*

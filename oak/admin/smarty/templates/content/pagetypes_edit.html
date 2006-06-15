@@ -53,7 +53,7 @@ var form_attr = '{$form.attributes}';
 <ul id="topsubnav">
 <li><a href="pages_select.php">Pages<span></span></a></li>
 <li><a href="navigations_select.php">Navigations<span></span></a></li>
-<li><a class="on" href="#">Page Types<span></span></a></li>
+<li><a class="on" href="pagetypes_select.php">Page Types<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -91,8 +91,9 @@ var form_attr = '{$form.attributes}';
 
 {$form.hidden}
 
-<label class="cont" for="page_type_name"><span>{$form.name.label}</span>
-{$form.name.html}</label><span id="page_type_name_container"></span>
+<label class="cont" for="page_type_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#">(?)</a></span></span>
+{$form.name.html}</label>
+<p class="validate" id="page_type_name_container"></p>
 
 {$form.submit.html}
 

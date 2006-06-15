@@ -30,7 +30,6 @@ var form_attr = '{$form.attributes}';
 <body>
 <div id="container">
 
-
 <div id="logo">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <p>Oak</p>
@@ -52,8 +51,8 @@ var form_attr = '{$form.attributes}';
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
 <li><a href="pages_select.php">Pages<span></span></a></li>
-<li><a class="on" href="#">Navigations<span></span></a></li>
-<li><a href="pagetypes_select.php">Page types<span></span></a></li>
+<li><a class="on" href="navigations_select.php">Navigations<span></span></a></li>
+<li><a href="pagetypes_select.php">Page Types<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -102,9 +101,9 @@ var form_attr = '{$form.attributes}';
 
 {$form.hidden}
 
-<label class="cont" for="name"><span>{$form.name.label}</span>
+<label class="cont" for="name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#">(?)</a></span></span>
 {$form.name.html}</label>
-<span id="name_container"></span>
+<p class="validate" id="name_container"></p>
 
 {$form.submit.html}
 

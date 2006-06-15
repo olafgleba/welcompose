@@ -6,7 +6,7 @@ if (isset($renderer)) {
 		{$label}<span style="color:red;">*</span>
 	{else}
 		{if $required}
-			{$label}<span class="required">*</span>
+			{$label}<span class="req">*</span>
 		{else}
 			{$label}
 		{/if}      
@@ -18,7 +18,7 @@ if (isset($renderer)) {
 		{$label}<span style="color:red;">*</span>
 	{else}
 		{if $required}
-			{$label}<span class="required">*</span>
+			{$label}<span class="req">*</span>
 		{else}
 			{$label}
 		{/if}      

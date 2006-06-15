@@ -73,12 +73,12 @@ try {
 	if (!empty($_POST['elemVal'])) {
 		if (!empty($reg)) {
 			if (Base_Cnc::filterRequest($_POST['elemVal'], $reg)) {
-				print '<p class="validate"><img src="../static/img/icons/success.gif" /></p>';
+				print '<img src="../static/img/icons/success.gif" />';
 			} else {
-				print '<p class="validate"><img src="../static/img/icons/error.gif" /> '.$desc.'</p>';
+				print '<img src="../static/img/icons/error.gif" /> '.$desc;
 			}
 		} else {
-			print '<p class="validate"><img src="../static/img/icons/success.gif" /></p>';
+			print '<img src="../static/img/icons/success.gif" />';
 		}
 	} else {
 		//print save empty -> safari doesn't recognized empty properly

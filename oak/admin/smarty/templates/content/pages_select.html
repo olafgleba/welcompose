@@ -12,9 +12,9 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
   
 <script type="text/javascript">
-var response = '';
-var selection = '';
-var form_attr = '';
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
 </script>
 
 <script type="text/javascript" src="../static/libs/prototype.js"></script>
@@ -50,9 +50,9 @@ var form_attr = '';
 <div id="topsubnavconstatic" class="f9">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
-<li><a class="on" href="#">Pages<span></span></a></li>
+<li class="on">Pages</a></li>
 <li><a href="navigations_select.php">Navigations<span></span></a></li>
-<li><a href="pagetypes_select.php">Page types<span></span></a></li>
+<li><a href="pagetypes_select.php">Page Types<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
