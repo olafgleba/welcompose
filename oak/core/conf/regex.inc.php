@@ -90,4 +90,8 @@ define("OAK_REGEX_FORM_FIELD_ID", "=^([a-z0-9-_]+)$=i");
 
 // Defines regular expression for non empty strings
 define("OAK_REGEX_NON_EMPTY", "=^.+$=");
+
+// Defines regular expression for the help template
+// names
+define("OAK_REGEX_HELP", "=^([a-z0-9-_]+)$=i");
 ?>
