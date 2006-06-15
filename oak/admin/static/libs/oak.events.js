@@ -46,6 +46,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.usr' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=users', navLyOne);
+			return false;
+		}
+	},	
 	'.tem' : function(el){
 		el.onclick = function(){ 
 			xhrNav(parseNavUrl + '?page=templates', navLyOne);
