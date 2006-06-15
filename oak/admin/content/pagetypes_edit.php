@@ -189,9 +189,6 @@ try {
 			throw $e;
 		}
 	
-		// add response to session
-		$_SESSION['response'] = 1;
-	
 		// redirect
 		$SESSION->save();
 		
