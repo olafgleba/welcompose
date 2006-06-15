@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Application_Group {
+class User_Group {
 	
 	/**
 	 * Singleton
@@ -69,34 +69,34 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_Group object.
+ * Singleton. Returns instance of the User_Group object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Application_Group::$instance == null) {
-		Application_Group::$instance = new Application_Group(); 
+	if (User_Group::$instance == null) {
+		User_Group::$instance = new User_Group(); 
 	}
-	return Application_Group::$instance;
+	return User_Group::$instance;
 }
 
 /**
  * Adds group to the group table. Takes a field=>value array
  * with the group data as first argument. Returns insert id.
  * 
- * @throws Application_GroupException
+ * @throws User_GroupException
  * @param array Row data
  * @return int Group id
  */
 public function addGroup ($sqlData)
 {
 	if (!is_array($sqlData)) {
-		throw new Application_GroupException('Input for parameter sqlData is not an array');	
+		throw new User_GroupException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_GROUPS, $sqlData);
+	return $this->base->db->insert(OAK_DB_User_GroupS, $sqlData);
 }
 
 /**
@@ -104,7 +104,7 @@ public function addGroup ($sqlData)
  * array with the new row data as second argument. Returns amount of
  * affected rows.
  *
- * @throws Application_GroupException
+ * @throws User_GroupException
  * @param int Group id
  * @param array Row data
  * @return int Affected rows
@@ -113,10 +113,10 @@ public function updateGroup ($id, $sqlData)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_GroupException('Input for parameter id is not an array');
+		throw new User_GroupException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_GroupException('Input for parameter sqlData is not an array');	
+		throw new User_GroupException('Input for parameter sqlData is not an array');	
 	}
 	
 	// prepare where clause
@@ -128,7 +128,7 @@ public function updateGroup ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_GROUPS, $sqlData,
+	return $this->base->db->update(OAK_DB_User_GroupS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -136,7 +136,7 @@ public function updateGroup ($id, $sqlData)
  * Removes group from the user group table. Takes the user group id as
  * first argument. Returns amount of affected rows.
  * 
- * @throws Application_GroupException
+ * @throws User_GroupException
  * @param int Group id
  * @return int Amount of affected rows
  */
@@ -144,7 +144,7 @@ public function deleteGroup ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_GroupException('Input for parameter id is not numeric');
+		throw new User_GroupException('Input for parameter id is not numeric');
 	}
 	
 	// prepare where clause
@@ -156,14 +156,14 @@ public function deleteGroup ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_GROUPS, $where, $bind_params);
+	return $this->base->db->delete(OAK_DB_User_GroupS, $where, $bind_params);
 }
 
 /**
  * Selects group. Takes the group id as first argument.
  * Returns array.
  * 
- * @throws Application_GroupException
+ * @throws User_GroupException
  * @param int Group id
  * @return array
  */
@@ -171,7 +171,7 @@ public function selectGroup ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_GroupException('Input for parameter id is not numeric');
+		throw new User_GroupException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -180,17 +180,17 @@ public function selectGroup ($id)
 	// prepare query
 	$sql = "
 		SELECT 
-			`application_groups`.`id` AS `id`,
-			`application_groups`.`name` AS `name`
+			`User_Groups`.`id` AS `id`,
+			`User_Groups`.`name` AS `name`
 		FROM
-			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
+			".OAK_DB_User_GroupS." AS `User_Groups`
 		WHERE 
 			1
 	";
 	
 	// prepare where clauses
 	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `application_groups`.`id` = :id ";
+		$sql .= " AND `User_Groups`.`id` = :id ";
 		$bind_params['id'] = (int)$id;
 	}
 	
@@ -212,7 +212,7 @@ public function selectGroup ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_GroupException
+ * @throws User_GroupException
  * @param array Select params
  * @return array
  */
@@ -225,7 +225,7 @@ public function selectGroups ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_GroupException('Input for parameter params is not an array');	
+		throw new User_GroupException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -236,23 +236,23 @@ public function selectGroups ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_GroupException("Unknown parameter $_key");
+				throw new User_GroupException("Unknown parameter $_key");
 		}
 	}
 	
 	// prepare query
 	$sql = "
 		SELECT 
-			`application_groups`.`id` AS `id`,
-			`application_groups`.`name` AS `name`
+			`User_Groups`.`id` AS `id`,
+			`User_Groups`.`name` AS `name`
 		FROM
-			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
+			".OAK_DB_User_GroupS." AS `User_Groups`
 		WHERE 
 			1
 	";
 	
 	// add sorting
-	$sql .= " ORDER BY `application_groups`.`name` ";
+	$sql .= " ORDER BY `User_Groups`.`name` ";
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
@@ -268,6 +268,6 @@ public function selectGroups ($params = array())
 // end of class
 }
 
-class Application_GroupException extends Exception { }
+class User_GroupException extends Exception { }
 
 ?>

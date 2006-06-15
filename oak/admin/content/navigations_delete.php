@@ -60,7 +60,7 @@ try {
 
 	// load user class
 	/* @var $USER Application_User */
-	$USER = load('application:user');
+	$USER = load('user:user');
 	
 	// load project class
 	/* @var $PROJECT Application_Project */

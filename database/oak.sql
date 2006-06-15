@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 14.06.2006 23:04:01
+-- Created on: 15.06.2006 16:05:19
 -- Diagram Version: 26
 -- =============================================================================
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,10 +23,10 @@ CREATE TABLE `application_schema_info` (
 )
 TYPE=INNODB;
 
--- Drop table application_users
-DROP TABLE IF EXISTS `application_users`;
+-- Drop table user_users
+DROP TABLE IF EXISTS `user_users`;
 
-CREATE TABLE `application_users` (
+CREATE TABLE `user_users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(50),
   `email` varchar(255),
@@ -81,8 +81,8 @@ CREATE TABLE `application_projects` (
   `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `owner`(`owner`),
-  CONSTRAINT `application_projects.owner2application_users.id` FOREIGN KEY (`owner`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `application_projects.owner2user_users.id` FOREIGN KEY (`owner`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -138,57 +138,57 @@ CREATE TABLE `templating_template_sets` (
 )
 TYPE=INNODB;
 
--- Drop table application_groups
-DROP TABLE IF EXISTS `application_groups`;
+-- Drop table user_groups
+DROP TABLE IF EXISTS `user_groups`;
 
-CREATE TABLE `application_groups` (
+CREATE TABLE `user_groups` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `application_groups.project2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `user_groups.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
 
--- Drop table application_users2application_groups
-DROP TABLE IF EXISTS `application_users2application_groups`;
+-- Drop table user_users2user_groups
+DROP TABLE IF EXISTS `user_users2user_groups`;
 
-CREATE TABLE `application_users2application_groups` (
+CREATE TABLE `user_users2user_groups` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `group` int(11) UNSIGNED NOT NULL,
   `user` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
   INDEX `group`(`group`),
   INDEX `user`(`user`),
-  CONSTRAINT `application_groups.id2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `user_groups.id2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `application_users.id2application_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `application_groups`(`id`)
+  CONSTRAINT `user_users.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
 
--- Drop table application_users2application_projects
-DROP TABLE IF EXISTS `application_users2application_projects`;
+-- Drop table user_users2application_projects
+DROP TABLE IF EXISTS `user_users2application_projects`;
 
-CREATE TABLE `application_users2application_projects` (
+CREATE TABLE `user_users2application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `user` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
-  CONSTRAINT `application_users.id2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `user_users.id2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `application_projects.id2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `application_projects.id2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -264,15 +264,15 @@ CREATE TABLE `templating_template_types` (
 )
 TYPE=INNODB;
 
--- Drop table application_rights
-DROP TABLE IF EXISTS `application_rights`;
+-- Drop table user_rights
+DROP TABLE IF EXISTS `user_rights`;
 
-CREATE TABLE `application_rights` (
+CREATE TABLE `user_rights` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   PRIMARY KEY(`id`),
-  CONSTRAINT `application_rights.project2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `user_rights.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -358,22 +358,22 @@ CREATE TABLE `templating_templates` (
 )
 TYPE=INNODB;
 
--- Drop table application_groups2application_rights
-DROP TABLE IF EXISTS `application_groups2application_rights`;
+-- Drop table user_groups2user_rights
+DROP TABLE IF EXISTS `user_groups2user_rights`;
 
-CREATE TABLE `application_groups2application_rights` (
+CREATE TABLE `user_groups2user_rights` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `group` int(11) UNSIGNED NOT NULL,
   `right` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
   INDEX `group`(`group`),
   INDEX `right`(`right`),
-  CONSTRAINT `application_groups.id2application_rights.id` FOREIGN KEY (`right`)
-    REFERENCES `application_rights`(`id`)
+  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
+    REFERENCES `user_rights`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `application_rights.id2application_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `application_groups`(`id`)
+  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -512,11 +512,11 @@ CREATE TABLE `content_pages2application_groups` (
   PRIMARY KEY(`id`),
   INDEX `page`(`page`),
   INDEX `group`(`group`),
-  CONSTRAINT `content_pages.id2application_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `application_groups`(`id`)
+  CONSTRAINT `content_pages.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `application_groups.id2content_pages.id` FOREIGN KEY (`page`)
+  CONSTRAINT `user_groups.id2content_pages.id` FOREIGN KEY (`page`)
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -571,8 +571,8 @@ CREATE TABLE `content_simple_pages` (
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_page.user2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `content_simple_page.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `content_simple_page.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
@@ -611,8 +611,8 @@ CREATE TABLE `content_blog_postings` (
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `content_blog_postings.user2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `content_blog_postings.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `content_blog_postings.text_conv2application_text_conv.id` FOREIGN KEY (`text_converter`)
@@ -643,8 +643,8 @@ CREATE TABLE `content_simple_forms` (
   PRIMARY KEY(`id`),
   INDEX `user`(`user`),
   INDEX `page`(`page`),
-  CONSTRAINT `content_simple_forms.user2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `content_simple_forms.page2content_pages.id` FOREIGN KEY (`page`)
@@ -725,8 +725,8 @@ CREATE TABLE `community_blog_comments` (
   PRIMARY KEY(`id`),
   INDEX `posting`(`posting`),
   INDEX `user`(`user`),
-  CONSTRAINT `community_blog_comments.user2application_users.id` FOREIGN KEY (`user`)
-    REFERENCES `application_users`(`id`)
+  CONSTRAINT `community_blog_comments.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `community_blog_comments.posting2content_blog_postings.id` FOREIGN KEY (`posting`)

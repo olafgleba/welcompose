@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Application_User {
+class User_User {
 	
 	/**
 	 * Singleton
@@ -69,34 +69,34 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_User object.
+ * Singleton. Returns instance of the User_User object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Application_User::$instance == null) {
-		Application_User::$instance = new Application_User(); 
+	if (User_User::$instance == null) {
+		User_User::$instance = new User_User(); 
 	}
-	return Application_User::$instance;
+	return User_User::$instance;
 }
 
 /**
  * Adds user to the user table. Takes a field=>value array with user
  * data as first argument. Returns insert id. 
  * 
- * @throws Application_UserException
+ * @throws User_UserException
  * @param array Row data
  * @return int User id
  */
 public function addUser ($sqlData)
 {
 	if (!is_array($sqlData)) {
-		throw new Application_UserException('Input for parameter sqlData is not an array');	
+		throw new User_UserException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_USERS, $sqlData);
+	return $this->base->db->insert(OAK_DB_User_UserS, $sqlData);
 }
 
 /**
@@ -104,7 +104,7 @@ public function addUser ($sqlData)
  * array with the new user data as second argument. Returns amount
  * of affected rows.
  *
- * @throws Application_UserException
+ * @throws User_UserException
  * @param int User id
  * @param array Row data
  * @return int Affected rows
@@ -113,10 +113,10 @@ public function updateUser ($id, $sqlData)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_UserException('Input for parameter id is not an array');
+		throw new User_UserException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_UserException('Input for parameter sqlData is not an array');	
+		throw new User_UserException('Input for parameter sqlData is not an array');	
 	}
 	
 	// prepare where clause
@@ -128,7 +128,7 @@ public function updateUser ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_USERS, $sqlData,
+	return $this->base->db->update(OAK_DB_User_UserS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -136,7 +136,7 @@ public function updateUser ($id, $sqlData)
  * Removes user from the user table. Takes the user id as first argument.
  * Returns amount of affected rows
  * 
- * @throws Application_UserException
+ * @throws User_UserException
  * @param int User id
  * @return int Amount of affected rows
  */
@@ -144,7 +144,7 @@ public function deleteUser ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_UserException('Input for parameter id is not numeric');
+		throw new User_UserException('Input for parameter id is not numeric');
 	}
 	
 	// prepare where clause
@@ -156,14 +156,14 @@ public function deleteUser ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_USERS, $where, $bind_params);
+	return $this->base->db->delete(OAK_DB_User_UserS, $where, $bind_params);
 }
 
 /**
  * Selects one user. Takes the user id as first argument.
  * Returns array with user information.
  * 
- * @throws Application_UserException
+ * @throws User_UserException
  * @param int User id
  * @return array
  */
@@ -171,7 +171,7 @@ public function selectUser ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_UserException('Input for parameter id is not numeric');
+		throw new User_UserException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -180,32 +180,32 @@ public function selectUser ($id)
 	// prepare query
 	$sql = "
 		SELECT 
-			`application_users`.`id` AS `id`,
-			`application_users`.`group` AS `group`,
-			`application_users`.`name` AS `name`,
-			`application_users`.`email` AS `email`,
-			`application_users`.`homepage` AS `homepage`,
-			`application_users`.`pwd` AS `pwd`,
-			`application_users`.`public_email` AS `public_email`,
-			`application_users`.`public_profile` AS `public_profile`,
-			`application_users`.`author` AS `author`,
-			`application_users`.`date_modified` AS `date_modified`,
-			`application_users`.`date_added` AS `date_added`,
+			`User_Users`.`id` AS `id`,
+			`User_Users`.`group` AS `group`,
+			`User_Users`.`name` AS `name`,
+			`User_Users`.`email` AS `email`,
+			`User_Users`.`homepage` AS `homepage`,
+			`User_Users`.`pwd` AS `pwd`,
+			`User_Users`.`public_email` AS `public_email`,
+			`User_Users`.`public_profile` AS `public_profile`,
+			`User_Users`.`author` AS `author`,
+			`User_Users`.`date_modified` AS `date_modified`,
+			`User_Users`.`date_added` AS `date_added`,
 			`application_groups`.`id` AS `group_id`,
 			`application_groups`.`name` AS `group_name`
 		FROM
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_User_UserS." AS `User_Users`
 		LEFT JOIN
 			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
 		ON
-			`application_users`.`group` = `application_groups`.`id`
+			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 
 			1
 	";
 	
 	// prepare where clauses
 	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `application_users`.`id` = :id ";
+		$sql .= " AND `User_Users`.`id` = :id ";
 		$bind_params['id'] = (int)$id;
 	}
 	
@@ -237,7 +237,7 @@ public function selectUser ($id)
  * </li>
  * </ul>
  * 
- * @throws Application_UserException
+ * @throws User_UserException
  * @param array Select params
  * @return array
  */
@@ -254,7 +254,7 @@ public function selectUsers ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_UserException('Input for parameter params is not an array');	
+		throw new User_UserException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -271,38 +271,38 @@ public function selectUsers ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_UserException("Unknown parameter $_key");
+				throw new User_UserException("Unknown parameter $_key");
 		}
 	}
 	
 	// define order macros
 	$macros = array(
-		'NAME' => '`application_users`.`name`',
-		'DATE_ADDED' => '`application_users`.`date_added`'
+		'NAME' => '`User_Users`.`name`',
+		'DATE_ADDED' => '`User_Users`.`date_added`'
 	);
 	
 	// prepare query
 	$sql = "
 		SELECT 
-			`application_users`.`id` AS `id`,
-			`application_users`.`group` AS `group`,
-			`application_users`.`name` AS `name`,
-			`application_users`.`email` AS `email`,
-			`application_users`.`homepage` AS `homepage`,
-			`application_users`.`pwd` AS `pwd`,
-			`application_users`.`public_email` AS `public_email`,
-			`application_users`.`public_profile` AS `public_profile`,
-			`application_users`.`author` AS `author`,
-			`application_users`.`date_modified` AS `date_modified`,
-			`application_users`.`date_added` AS `date_added`,
+			`User_Users`.`id` AS `id`,
+			`User_Users`.`group` AS `group`,
+			`User_Users`.`name` AS `name`,
+			`User_Users`.`email` AS `email`,
+			`User_Users`.`homepage` AS `homepage`,
+			`User_Users`.`pwd` AS `pwd`,
+			`User_Users`.`public_email` AS `public_email`,
+			`User_Users`.`public_profile` AS `public_profile`,
+			`User_Users`.`author` AS `author`,
+			`User_Users`.`date_modified` AS `date_modified`,
+			`User_Users`.`date_added` AS `date_added`,
 			`application_groups`.`id` AS `group_id`,
 			`application_groups`.`name` AS `group_name`
 		FROM
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_User_UserS." AS `User_Users`
 		LEFT JOIN
 			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
 		  ON
-			`application_users`.`group` = `application_groups`.`id`
+			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 
 			1
 	";
@@ -313,11 +313,11 @@ public function selectUsers ($params = array())
 		$bind_params['group'] = (int)$group;
 	}
 	if (!empty($name) && is_scalar($name)) {
-		$sql .= " AND `application_users`.`name` = :name ";
+		$sql .= " AND `User_Users`.`name` = :name ";
 		$bind_params['name'] = (int)$name;
 	}
 	if (!empty($author) && is_numeric($author)) {
-		$sql .= " AND `application_users`.`author` = :author ";
+		$sql .= " AND `User_Users`.`author` = :author ";
 		$bind_params['author'] = (int)$author;
 	}
 	
@@ -348,6 +348,6 @@ public function initUserAdmin ()
 // end of class
 }
 
-class Application_UserException extends Exception { }
+class User_UserException extends Exception { }
 
 ?>
