@@ -540,7 +540,7 @@ label {
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 455px;
+width: 680px;
 margin: 15px 0 0 0;
 }
 label.cont {
@@ -567,6 +567,7 @@ input.medium {
 width: 200px;
 }
 input.long {
+float: left;
 width: 300px;
 }
 input.title {
@@ -604,41 +605,25 @@ cursor: pointer;
 
 
 /* VALIDATE */
-#content p.validate {
+#content span.validate {
 float: left;
-display: block;
+display: block; 
 width: 225px;
 height: 1.5em;
 line-height: 1.5em;
-margin: 5px 0 0 0;
+padding-left: 5px;
 }
-#content p.validate img {
+#content span.validate img {
 vertical-align: middle;
 }
-#content .help p { 
-display: block; 
-width: 400px; 
-color: #fff; 
-background: blue; 
-margin: 5px 5px 5px 140px; 
-}
 
-/* ERRORS */
-/*
-#responseError {
-color: #fff;
-background: #FFEAEA;
-width: 605px;
-margin: 10px 0;
+
+/* HELP */
+#content p.help {
+float: left;
+display: block;
+line-height: 1.5em;
+width: 300px;
+margin: 0;
+padding-left: 140px;
 }
-#responseError ul {
-list-style-type: square;
-margin: 5px 0 5px 30px;
-font-weight: bold;
-}
-#responseError li {
-color: #f00;
-background: transparent;
-padding: 2px 0;
-}
-*/

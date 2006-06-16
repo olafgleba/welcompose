@@ -105,10 +105,10 @@ function xhrHelpDone(url, target)
 	try {
 		if (req.readyState == 4) {
 			if (req.status == 200) {
-				new Insertion.After(target, req.responseText);				
-				var target_after = $(target).nextSibling;
+				new Insertion.After($(target).parentNode, req.responseText);				
+				var target_after = $(target).parentNode.nextSibling;
 				Element.hide(target_after);
-				new Effect.Appear(target_after, {duration: 0.30});
+				new Effect.Appear(target_after, {duration: 0.60});
 				Behaviour.apply();
 			} else {
 	  			throw new devError(req.statusText);
