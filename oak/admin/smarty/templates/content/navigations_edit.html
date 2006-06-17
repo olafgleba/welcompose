@@ -25,6 +25,11 @@ var form_attr = '{$form.attributes}';
 <script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
 <script type="text/javascript" src="../static/libs/oak.events.js"></script>
 <script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
 </head>
 
 <body>
@@ -91,7 +96,7 @@ var form_attr = '{$form.attributes}';
 {$form.hidden}
 
 
-<label class="cont" for="name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#">(?)</a></span></span>
+<label class="cont" for="name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
 {$form.name.html}<span class="validate" id="name_container"></span></label>
 
 

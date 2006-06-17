@@ -56,8 +56,8 @@ var helpClassRemove	= 'iHelpRemove';
  * find: html templates
  * used: oak.core.js
  */
-var helpHtmlShow	= '<a href="#" title="' + showHelp + '">(?)</a>';
-var helpHtmlHide	= '<a href="#" title="' + hideHelp + '">(X)</a>';
+var helpHtmlShow	= '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" /></a>';
+var helpHtmlHide	= '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" /></a>';
 
 /**
  * Define debug output
@@ -122,6 +122,7 @@ function devError(msg)
 devError.prototype = new Error;
 
 
+
 /**
  * DOM triggers to attach onEvent behaviours
  *
@@ -148,7 +149,7 @@ function mBlur (inst, bgcolor, bcolor, bstyle)
 
 function setCorrespondingFocus (elem, attr)
 {
-	instId = elem.parentNode.parentNode.attributes[attr].value;
+	instId = elem.parentNode.parentNode.getAttribute(attr);
 	$(instId).focus();
 }
 
@@ -161,7 +162,7 @@ function setCorrespondingFocus (elem, attr)
  */
 function getHelp (elem, attr)
 {	
-	processId = elem.parentNode.parentNode.attributes[attr].value;
+	processId = elem.parentNode.parentNode.getAttribute(attr);
 	elem.className = helpClassRemove;
 	Element.update(elem, helpHtmlHide);
 	Behaviour.apply();	
@@ -176,7 +177,7 @@ function getHelp (elem, attr)
  */
 function removeHelp (elem, attr)
 {	
-	processIdRemove = elem.parentNode.parentNode.attributes[attr].value;
+	processIdRemove = elem.parentNode.parentNode.getAttribute(attr);
 	processId_after = $(processIdRemove).parentNode.nextSibling;	
 	elem.className = helpClass;
 	Element.hide(processId_after);

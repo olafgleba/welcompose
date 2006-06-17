@@ -627,3 +627,7 @@ width: 300px;
 margin: 0;
 padding-left: 140px;
 }
+
+.iHelp img, .iHelpRemove img {
+vertical-align: middle;
+}
