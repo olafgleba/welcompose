@@ -59,7 +59,7 @@ try {
 	$SESSION = load('base:session');
 	
 	// load user class
-	/* @var $USER Application_User */
+	/* @var $USER User_User */
 	$USER = load('user:user');
 	
 	// load project class
