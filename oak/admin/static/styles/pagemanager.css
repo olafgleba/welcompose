@@ -1,27 +1,33 @@
-#content table {
+table {
 border-collapse: collapse;
 margin: 10px 10px 30px 10px;
 }
-#content table th {
+table th {
 padding: 0 0 5px 0;
 }
-#content table td {
+table td {
 padding: 4px 0 4px 0;
 border-bottom: 1px solid #efefef;
 }
-#content td.mini {
+.mini {
 font-size: 1px;
 line-height: 1px;
 border: 0 none;
 }
-/*
-#content td.page {width: 475px;}
-#content td.down {width: 32px;}
-#content td.up {width: 32px;}
-#content td.new {width: 90px;}
-#content td.edit {width: 90px;}
-#content td.delete {width: 90px;}
-*/
+.page {width: 475px;}
+.down {width: 32px;}
+.up {width: 32px;}
+.new {width: 90px;}
+.edit {width: 90px;}
+.delete {width: 90px;}
+
+.user .page {width: 150px;}
+.user .email {width: 230px;}
+.user .proj {width: 175px;}
+.user .ugrp {width: 175px;}
+.user .edit {width: 70px;}
+.user .delete {width: 70px;}
+
 a.down, a.up, a.new, a.edit, a.delete {
 display: block;
 width: 20px;
@@ -48,58 +54,44 @@ margin-left: 20px;
 background: #fff url(../img/icons/page-add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
-margin-left: 25px;
 background: #fff url(../img/icons/page-edit.gif) 0 0 no-repeat;
 }
 a.edit:hover, a.edit:active, a.edit:focus {
-margin-left: 25px;
 background: #fff url(../img/icons/page-edit.gif) 0 -45px no-repeat;
 }
 a.delete:link, a.delete:visited {
-margin-left: 20px;
 background: #fff url(../img/icons/page-delete.gif) 0 0 no-repeat;
 }
 a.delete:hover, a.delete:active, a.delete:focus {
-margin-left: 20px;
 background: #fff url(../img/icons/page-delete.gif) 0 -46px no-repeat;
 }    
-
-#content th.page,
-#content td.page, 
-#content td.page1,
-#content td.page2, 
-#content td.page3,
-#content td.page4, 
-#content td.page5 {
+.page, .page1, .page2, .page3, .page4, .page5 {
 text-align: left;
 }
-#content td.page2 {
+.page2 {
 padding-left: 15px;
 background: transparent url(../img/icons/page2.gif) left no-repeat;
 }
-#content td.page3 {
+.page3 {
 padding-left: 26px;
 background: transparent url(../img/icons/page3.gif) left no-repeat;
 }
-#content td.page4 {
+.page4 {
 padding-left: 37px;
 background: transparent url(../img/icons/page4.gif) left no-repeat;
 }
-#content td.page5 {
+.page5 {
 padding-left: 48px;
 background: transparent url(../img/icons/page5.gif) left no-repeat;
 }
 
-
-#content th,
-#content td {
+th, td {
 text-align: left;
 }
-#content table img {
+table img {
 vertical-align: bottom;
 }
-
-#content fieldset h2 {
+fieldset h2 {
 margin: 20px 0 5px 0;
 }
 
