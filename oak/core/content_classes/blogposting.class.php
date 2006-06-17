@@ -221,7 +221,7 @@ public function selectBlogPosting ($id)
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		ON
 			`content_blog_postings`.`user` = `application_users`.`id`
 		LEFT JOIN
@@ -357,7 +357,7 @@ public function selectBlogPostings ($params = array())
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		ON
 			`content_blog_postings`.`user` = `application_users`.`id`
 		LEFT JOIN
@@ -448,7 +448,7 @@ public function countBlogPostings ($params = array())
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		ON
 			`content_blog_postings`.`user` = `application_users`.`id`
 		LEFT JOIN

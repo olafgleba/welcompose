@@ -196,7 +196,7 @@ public function selectUser ($id)
 		FROM
 			".OAK_DB_User_UserS." AS `User_Users`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
+			".OAK_DB_USER_GROUPS." AS `application_groups`
 		ON
 			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 
@@ -300,7 +300,7 @@ public function selectUsers ($params = array())
 		FROM
 			".OAK_DB_User_UserS." AS `User_Users`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_GROUPS." AS `application_groups`
+			".OAK_DB_USER_GROUPS." AS `application_groups`
 		  ON
 			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 

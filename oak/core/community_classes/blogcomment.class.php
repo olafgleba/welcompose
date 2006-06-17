@@ -221,7 +221,7 @@ public function selectBlogComment ($id)
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		  ON
 			`community_blog_comments`.`user` = `application_users`.`id`
 		WHERE 
@@ -341,7 +341,7 @@ public function selectBlogComments ($params = array())
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		  ON
 			`community_blog_comments`.`user` = `application_users`.`id`
 		WHERE 
@@ -432,7 +432,7 @@ public function countBlogComments ($params = array())
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		  ON
 			`community_blog_comments`.`user` = `application_users`.`id`
 		WHERE 

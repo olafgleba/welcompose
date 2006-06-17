@@ -32,12 +32,10 @@
  */
 
 // application table aliases
-define("OAK_DB_APPLICATION_GROUPS", "application_groups");
 define("OAK_DB_APPLICATION_PING_SERVICES", "application_ping_services");
 define("OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS", "application_ping_service_configurations");
 define("OAK_DB_APPLICATION_PROJECTS", "application_projects");
 define("OAK_DB_APPLICATION_TEXT_CONVERTER", "application_text_converter");
-define("OAK_DB_APPLICATION_USERS", "application_users");
 
 // community table aliases
 define("OAK_DB_COMMUNITY_BLOG_COMMENTS", "community_blog_comments");
@@ -50,7 +48,7 @@ define("OAK_DB_CONTENT_BOXES", "content_boxes");
 define("OAK_DB_CONTENT_NAVIGATIONS", "content_navigations");
 define("OAK_DB_CONTENT_NODES", "content_nodes");
 define("OAK_DB_CONTENT_PAGES", "content_pages");
-define("OAK_DB_CONTENT_PAGES2APPLICATION_GROUPS", "content_pages2application_groups");
+define("OAK_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2application_groups");
 define("OAK_DB_CONTENT_PAGE_TYPES", "content_page_types");
 define("OAK_DB_CONTENT_SIMPLE_PAGE", "content_simple_page");
 
@@ -64,5 +62,9 @@ define("OAK_DB_TEMPLATING_TEMPLATES", "templating_templates");
 define("OAK_DB_TEMPLATING_TEMPLATE_SETS", "templating_template_sets");
 define("OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES", "templating_template_sets2templating_templates");
 define("OAK_DB_TEMPLATING_TEMPLATE_TYPES", "templating_template_types");
+
+// user table aliases
+define("OAK_DB_USER_GROUPS", "user_groups");
+define("OAK_DB_USER_USERS", "user_users");
 
 ?>

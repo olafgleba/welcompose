@@ -215,7 +215,7 @@ public function selectSimplePage ($id)
 		FROM
 			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		ON
 			`content_simple_pages`.`user` = `application_users`.`id`
 		LEFT JOIN
@@ -342,7 +342,7 @@ public function selectSimplePages ($params = array())
 		FROM
 			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_USERS." AS `application_users`
+			".OAK_DB_USER_USERS." AS `application_users`
 		ON
 			`content_simple_pages`.`user` = `application_users`.`id`
 		LEFT JOIN
