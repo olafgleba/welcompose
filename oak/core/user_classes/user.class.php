@@ -96,7 +96,7 @@ public function addUser ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_User_UserS, $sqlData);
+	return $this->base->db->insert(OAK_DB_USER_USERS, $sqlData);
 }
 
 /**
@@ -128,7 +128,7 @@ public function updateUser ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_User_UserS, $sqlData,
+	return $this->base->db->update(OAK_DB_USER_USERS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -156,7 +156,7 @@ public function deleteUser ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_User_UserS, $where, $bind_params);
+	return $this->base->db->delete(OAK_DB_USER_USERS, $where, $bind_params);
 }
 
 /**
@@ -194,7 +194,7 @@ public function selectUser ($id)
 			`application_groups`.`id` AS `group_id`,
 			`application_groups`.`name` AS `group_name`
 		FROM
-			".OAK_DB_User_UserS." AS `User_Users`
+			".OAK_DB_USER_USERS." AS `User_Users`
 		LEFT JOIN
 			".OAK_DB_USER_GROUPS." AS `application_groups`
 		ON
@@ -298,7 +298,7 @@ public function selectUsers ($params = array())
 			`application_groups`.`id` AS `group_id`,
 			`application_groups`.`name` AS `group_name`
 		FROM
-			".OAK_DB_User_UserS." AS `User_Users`
+			".OAK_DB_USER_USERS." AS `User_Users`
 		LEFT JOIN
 			".OAK_DB_USER_GROUPS." AS `application_groups`
 		  ON

@@ -96,7 +96,7 @@ public function addGroup ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_User_GroupS, $sqlData);
+	return $this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
 }
 
 /**
@@ -128,7 +128,7 @@ public function updateGroup ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_User_GroupS, $sqlData,
+	return $this->base->db->update(OAK_DB_USER_GROUPS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -156,7 +156,7 @@ public function deleteGroup ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_User_GroupS, $where, $bind_params);
+	return $this->base->db->delete(OAK_DB_USER_GROUPS, $where, $bind_params);
 }
 
 /**
@@ -183,7 +183,7 @@ public function selectGroup ($id)
 			`User_Groups`.`id` AS `id`,
 			`User_Groups`.`name` AS `name`
 		FROM
-			".OAK_DB_User_GroupS." AS `User_Groups`
+			".OAK_DB_USER_GROUPS." AS `User_Groups`
 		WHERE 
 			1
 	";
@@ -246,7 +246,7 @@ public function selectGroups ($params = array())
 			`User_Groups`.`id` AS `id`,
 			`User_Groups`.`name` AS `name`
 		FROM
-			".OAK_DB_User_GroupS." AS `User_Groups`
+			".OAK_DB_USER_GROUPS." AS `User_Groups`
 		WHERE 
 			1
 	";
