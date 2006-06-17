@@ -2216,7 +2216,7 @@ public function selectNode ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_UserException
+ * @throws Utility_NestedsetException
  * @param array Select params
  * @return array
  */
@@ -2232,7 +2232,7 @@ public function selectNodes ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_UserException('Input for parameter params is not an array');	
+		throw new Utility_NestedsetException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -2246,7 +2246,7 @@ public function selectNodes ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_UserException("Unknown parameter $_key");
+				throw new Utility_NestedsetException("Unknown parameter $_key");
 		}
 	}
 	
