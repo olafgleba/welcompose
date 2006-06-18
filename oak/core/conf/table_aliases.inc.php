@@ -66,5 +66,6 @@ define("OAK_DB_TEMPLATING_TEMPLATE_TYPES", "templating_template_types");
 // user table aliases
 define("OAK_DB_USER_GROUPS", "user_groups");
 define("OAK_DB_USER_USERS", "user_users");
+define("OAK_DB_USER_USERS2APPLICATION_PROJECTS", "user_users2application_projects");
 
 ?>

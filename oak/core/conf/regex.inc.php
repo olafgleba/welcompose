@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * $Id: regex.inc.php 2 2006-03-20 11:43:20Z andreas $
+ * $Id$
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -94,4 +94,12 @@ define("OAK_REGEX_NON_EMPTY", "=^.+$=");
 // Defines regular expression for the help template
 // names
 define("OAK_REGEX_HELP", "=^([a-z0-9-_]+)$=i");
+
+// Defines regular expression for strings containing
+// a file name of a php script
+define("OAK_REGEX_FILE_NAME_PHP", '=^([a-z0-9-_]+)\.php$=i');
+
+// Defines regular expression for strings containing
+// a group name
+define("OAK_REGEX_GROUP_NAME", "=^(?!OAK)([A-Z0-9]+)_([A-Z0-9_]+)$=");
 ?>

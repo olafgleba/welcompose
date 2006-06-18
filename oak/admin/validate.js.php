@@ -56,6 +56,10 @@ try {
 	// map field id names to regexps and error messages 
 	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
+			case 'group_name':
+					$reg = OAK_REGEX_GROUP_NAME;
+					$desc = gettext('Only capitalized prefixed literal string');
+				break;
 			case 'navigation_name':
 					$reg = OAK_REGEX_NON_EMPTY;
 					$desc = gettext('Field may not be empty');

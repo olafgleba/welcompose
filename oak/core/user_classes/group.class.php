@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * $Id: group.class.php 2 2006-03-20 11:43:20Z andreas $
+ * $Id$
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -95,6 +95,9 @@ public function addGroup ($sqlData)
 		throw new User_GroupException('Input for parameter sqlData is not an array');	
 	}
 	
+	// make sure that the new group will be assigned to the current project
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
 	return $this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
 }
@@ -120,11 +123,12 @@ public function updateGroup ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project  AND `editable` = '1' ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -148,11 +152,12 @@ public function deleteGroup ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project AND `editable` = '1' ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -180,17 +185,32 @@ public function selectGroup ($id)
 	// prepare query
 	$sql = "
 		SELECT 
-			`User_Groups`.`id` AS `id`,
-			`User_Groups`.`name` AS `name`
+			`user_groups`.`id` AS `id`,
+			`user_groups`.`project` AS `project`,
+			`user_groups`.`name` AS `name`,
+			`user_groups`.`description` AS `description`,
+			`user_groups`.`editable` AS `editable`,
+			`user_groups`.`date_modified` AS `date_modified`,
+			`user_groups`.`date_added` AS `date_added`,
+			`application_projects`.`id` AS `project_id`,
+			`application_projects`.`owner` AS `project_owner`,
+			`application_projects`.`name` AS `project_name`,
+			`application_projects`.`url_name` AS `project_url_name`,
+			`application_projects`.`date_modified` AS `project_date_modified`,
+			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `User_Groups`
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		LEFT JOIN
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		  ON
+			`user_groups`.`project` = `application_projects`.`id`
 		WHERE 
 			1
 	";
 	
 	// prepare where clauses
 	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `User_Groups`.`id` = :id ";
+		$sql .= " AND `user_groups`.`id` = :id ";
 		$bind_params['id'] = (int)$id;
 	}
 	
@@ -208,6 +228,7 @@ public function selectGroup ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>project, int, required: Project id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -219,6 +240,8 @@ public function selectGroup ($id)
 public function selectGroups ($params = array())
 {
 	// define some vars
+	$project = null;
+	$project_in = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -231,28 +254,74 @@ public function selectGroups ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'project':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
+				break;
+			case 'project_in':
+					$$_key = (array)$_value;
 				break;
 			default:
 				throw new User_GroupException("Unknown parameter $_key");
 		}
 	}
 	
+	// if no project is given, query all projects of the current user
+	if (empty($project) || !is_numeric($project)) {
+		// load project class
+		$PROJECT = load('application:project');
+		
+		// get user's projects
+		$possible_projects = $PROJECT->selectProjects(array('user' => OAK_CURRENT_USER));
+		
+		// prepare the sql-in-array
+		$project_in = array();
+		foreach ($possible_projects as $_project) {
+			$project_in[] = (int)$_project['id'];
+		}
+	}
+	
 	// prepare query
 	$sql = "
 		SELECT 
-			`User_Groups`.`id` AS `id`,
-			`User_Groups`.`name` AS `name`
+			`user_groups`.`id` AS `id`,
+			`user_groups`.`project` AS `project`,
+			`user_groups`.`name` AS `name`,
+			`user_groups`.`description` AS `description`,
+			`user_groups`.`editable` AS `editable`,
+			`user_groups`.`date_modified` AS `date_modified`,
+			`user_groups`.`date_added` AS `date_added`,
+			`application_projects`.`id` AS `project_id`,
+			`application_projects`.`owner` AS `project_owner`,
+			`application_projects`.`name` AS `project_name`,
+			`application_projects`.`url_name` AS `project_url_name`,
+			`application_projects`.`date_modified` AS `project_date_modified`,
+			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `User_Groups`
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		LEFT JOIN
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		  ON
+			`user_groups`.`project` = `application_projects`.`id`
 		WHERE 
 			1
 	";
 	
+	// add where clauses
+	if (!empty($project) && is_numeric($project)) {
+		$sql .= " AND `application_projects`.`id` = :project ";
+		$bind_params['project'] = (int)$project;
+	}
+	if (!is_null($project_in) && count($project_in) > 0) {
+		if (Base_Cnc::testArrayForNumericKeys($project_in) && Base_Cnc::testArrayForNumericValues($project_in)) {
+			$sql .= " AND `application_projects`.`id` IN ( :project_in ) ";
+			$bind_params['project_in'] = implode(', ', $project_in);
+		}
+	}
+	
 	// add sorting
-	$sql .= " ORDER BY `User_Groups`.`name` ";
+	$sql .= " ORDER BY `user_groups`.`name` ";
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
@@ -261,8 +330,66 @@ public function selectGroups ($params = array())
 	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
 		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
 	}
-
+	
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests given group name for uniqueness. Takes the group name as
+ * first argument and an optional group id as second argument. If
+ * the group id is given, this group won't be considered when checking
+ * for uniqueness (useful for updates). Returns boolean true if group
+ * name is unique.
+ *
+ * @throws User_GroupException
+ * @param string Group name
+ * @param int Group id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new User_GroupException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new User_GroupException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new User_GroupException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		WHERE
+			`project` = :project
+		  AND
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+	
 }
 
 // end of class

@@ -1,7 +1,9 @@
 {if count($projects) > 1}
 <form action="../application/projects_choose.php" method="post">
+<input type="hidden" name="go_back_area" value="{$go_back_area}" />
+<input type="hidden" name="go_back_file" value="{$go_back_file}" />
 <div id="projects">
-<select class="fselect">
+<select name="id" class="fselect">
 {foreach from=$projects item=_project}
 <option value="{$_project.id}"{if $_project.id == $oak_current_project} selected="selected"{/if}>{$_project.name}</option>
 {/foreach}
