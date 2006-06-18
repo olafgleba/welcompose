@@ -181,7 +181,6 @@ public function selectUser ($id)
 	$sql = "
 		SELECT 
 			`User_Users`.`id` AS `id`,
-			`User_Users`.`group` AS `group`,
 			`User_Users`.`name` AS `name`,
 			`User_Users`.`email` AS `email`,
 			`User_Users`.`homepage` AS `homepage`,
@@ -190,15 +189,9 @@ public function selectUser ($id)
 			`User_Users`.`public_profile` AS `public_profile`,
 			`User_Users`.`author` AS `author`,
 			`User_Users`.`date_modified` AS `date_modified`,
-			`User_Users`.`date_added` AS `date_added`,
-			`application_groups`.`id` AS `group_id`,
-			`application_groups`.`name` AS `group_name`
+			`User_Users`.`date_added` AS `date_added`
 		FROM
 			".OAK_DB_USER_USERS." AS `User_Users`
-		LEFT JOIN
-			".OAK_DB_USER_GROUPS." AS `application_groups`
-		ON
-			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 
 			1
 	";
@@ -285,7 +278,6 @@ public function selectUsers ($params = array())
 	$sql = "
 		SELECT 
 			`User_Users`.`id` AS `id`,
-			`User_Users`.`group` AS `group`,
 			`User_Users`.`name` AS `name`,
 			`User_Users`.`email` AS `email`,
 			`User_Users`.`homepage` AS `homepage`,
@@ -294,15 +286,9 @@ public function selectUsers ($params = array())
 			`User_Users`.`public_profile` AS `public_profile`,
 			`User_Users`.`author` AS `author`,
 			`User_Users`.`date_modified` AS `date_modified`,
-			`User_Users`.`date_added` AS `date_added`,
-			`application_groups`.`id` AS `group_id`,
-			`application_groups`.`name` AS `group_name`
+			`User_Users`.`date_added` AS `date_added`
 		FROM
 			".OAK_DB_USER_USERS." AS `User_Users`
-		LEFT JOIN
-			".OAK_DB_USER_GROUPS." AS `application_groups`
-		  ON
-			`User_Users`.`group` = `application_groups`.`id`
 		WHERE 
 			1
 	";
