@@ -22,19 +22,18 @@
  
 
 
+/**
+* Duplicated Function related to oak.core.js
+* Single comments indicates the concerning lines
+*/
+
+
 function setCorrespondingFocus (elem, attr)
 {
 	instId = elem.parentNode.parentNode.attributes[attr].value; // attributes[attr].value
 	$(instId).focus();
 }
 
-/**
- * Get help IDs and print string in html templates
- * used : oak.events.js
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- */
 function getHelp (elem, attr)
 {	
 	processId = elem.parentNode.parentNode.attributes[attr].value; // attributes[attr].value
@@ -43,13 +42,6 @@ function getHelp (elem, attr)
 	Behaviour.apply();	
 }
 
-/**
- * Get help IDs and print string in html templates
- * used : oak.events.js
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- */
 function removeHelp (elem, attr)
 {	
 	processIdRemove = elem.parentNode.parentNode.attributes[attr].value; // attributes[attr].value

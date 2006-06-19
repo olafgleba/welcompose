@@ -135,7 +135,7 @@ color: #00AE2C;
 background: transparent;
 text-decoration: none;
 }
-#topnav .con span {
+#topnav .con span, #topnav .conon span {
 position: absolute;
 top: -72px;
 left: 10px;
@@ -147,7 +147,7 @@ background: transparent url(../img/icons/contents.jpg) 0 0 no-repeat;
 #topnav .con:hover span, #topnav .con:active span, #topnav .con:focus span, #topnav .conon span {
 background: transparent url(../img/icons/contents.jpg) 0 -130px no-repeat;
 }
-#topnav .med span {
+#topnav .med span, #topnav .medon span {
 position: absolute;
 top: -72px;
 left: 10px;
@@ -156,22 +156,34 @@ width: 94px;
 height: 65px;
 background: transparent url(../img/icons/media.jpg) 0 0 no-repeat;
 }
-#topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span #topnav .medon span {
+#topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
 background: transparent url(../img/icons/media.jpg) 0 -130px no-repeat;
 }
-#topnav .com span {
+#topnav .com span, #topnav .comon span {
 position: absolute;
-top: -72px;
-left: 20px;
+top: -75px;
+left: 10px;
 display: block;
-width: 55px;
+width: 60px;
 height: 65px;
-background: transparent url(../img/icons/community.jpg) 0 0 no-repeat;
+background: transparent url(../img/icons/community.gif) 0 0 no-repeat;
 }
 #topnav .com:hover span, #topnav .com:active span, #topnav .com:focus span, #topnav .comon span {
-background: transparent url(../img/icons/community.jpg) 0 -130px no-repeat;
+background: transparent url(../img/icons/community.gif) 0 -110px no-repeat;
 }
-#topnav .tem span {
+#topnav .usr span, #topnav .usron span {
+position: absolute;
+top: -75px;
+left: 6px;
+display: block;
+width: 60px;
+height: 65px;
+background: transparent url(../img/icons/users.gif) 0 0 no-repeat;
+}
+#topnav .usr:hover span, #topnav .usr:active span, #topnav .usr:focus span, #topnav .usron span {
+background: transparent url(../img/icons/users.gif) 0 -108px no-repeat;
+}
+#topnav .tem span, #topnav .temon span {
 position: absolute;
 top: -72px;
 left: 2px;
@@ -183,7 +195,7 @@ background: transparent url(../img/icons/templating.jpg) 0 0 no-repeat;
 #topnav .tem:hover span, #topnav .tem:active span, #topnav .tem:focus span, #topnav .temon span {
 background: transparent url(../img/icons/templating.jpg) 0 -130px no-repeat;
 }
-#topnav .set span {
+#topnav .set span, #topnav .seton span {
 position: absolute;
 top: -72px;
 left: 8px;
@@ -665,7 +677,6 @@ vertical-align: middle;
 
 /* HELP */
 #content p.help {
-float: left;
 display: block;
 line-height: 1.5em;
 width: 300px;
@@ -689,3 +700,9 @@ visibility: hidden;
 height: 1%; 
 }
 /* End hide from IE-mac */
+
+
+/* DIVERSES */
+.clearb {
+clear: both;
+}

@@ -117,7 +117,7 @@ try {
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
-
+		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);

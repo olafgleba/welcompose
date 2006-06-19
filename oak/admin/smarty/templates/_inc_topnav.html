@@ -1,12 +1,12 @@
 <div id="topnavcon" class="ef">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topnav">
-<li><a class="con" href="#">Contents<span></span></a></li>
-<li><a class="med" href="#">Media Library<span></span></a></li>
-<li><a class="com" href="#">Community<span></span></a></li>
-<li><a class="usr" href="#">Users<span></span></a></li>
-<li><a class="tem" href="#">Templating<span></span></a></li>
-<li><a class="set" href="#">Settings<span></span></a></li>
+<li><a {if $area == 'contents'}class="conon"{else}class="con"{/if} href="#">Contents<span></span></a></li>
+<li><a {if $area == 'media'}class="medon"{else}class="med"{/if} href="#">Media Library<span></span></a></li>
+<li><a {if $area == 'community'}class="comon"{else}class="com"{/if} href="#">Community<span></span></a></li>
+<li><a {if $area == 'users'}class="usron"{else}class="usr"{/if} href="#">Users<span></span></a></li>
+<li><a {if $area == 'templating'}class="temon"{else}class="tem"{/if} href="#">Templating<span></span></a></li>
+<li><a {if $area == 'settings'}class="seton"{else}class="set"{/if} href="#">Settings<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- topnavcon --></div>
