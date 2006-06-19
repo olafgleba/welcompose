@@ -151,7 +151,7 @@ try {
 		
 		// display the form
 		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('user/groups_add.html', OAK_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('user/groups_edit.html', OAK_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
