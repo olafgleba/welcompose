@@ -161,23 +161,23 @@ background: transparent url(../img/icons/media.jpg) 0 -130px no-repeat;
 }
 #topnav .com span, #topnav .comon span {
 position: absolute;
-top: -75px;
+top: -82px;
 left: 10px;
 display: block;
 width: 60px;
-height: 65px;
+height: 72px;
 background: transparent url(../img/icons/community.gif) 0 0 no-repeat;
 }
 #topnav .com:hover span, #topnav .com:active span, #topnav .com:focus span, #topnav .comon span {
-background: transparent url(../img/icons/community.gif) 0 -110px no-repeat;
+background: transparent url(../img/icons/community.gif) 0 -107px no-repeat;
 }
 #topnav .usr span, #topnav .usron span {
 position: absolute;
-top: -75px;
+top: -82px;
 left: 6px;
 display: block;
 width: 60px;
-height: 65px;
+height: 72px;
 background: transparent url(../img/icons/users.gif) 0 0 no-repeat;
 }
 #topnav .usr:hover span, #topnav .usr:active span, #topnav .usr:focus span, #topnav .usron span {
