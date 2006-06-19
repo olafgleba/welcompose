@@ -138,7 +138,7 @@ text-decoration: none;
 #topnav .con span, #topnav .conon span {
 position: absolute;
 top: -68px;
-left: 10px;
+left: 14px;
 display: block;
 width: 66px;
 height: 72px;
@@ -162,7 +162,7 @@ background: transparent url(../img/icons/media.gif) 0 -130px no-repeat;
 #topnav .com span, #topnav .comon span {
 position: absolute;
 top: -72px;
-left: 10px;
+left: 15px;
 display: block;
 width: 60px;
 height: 72px;
@@ -173,8 +173,8 @@ background: transparent url(../img/icons/community.gif) 0 -122px no-repeat;
 }
 #topnav .usr span, #topnav .usron span {
 position: absolute;
-top: -72px;
-left: 6px;
+top: -71px;
+left: 2px;
 display: block;
 width: 60px;
 height: 72px;
@@ -198,7 +198,7 @@ background: transparent url(../img/icons/templating.gif) 0 -130px no-repeat;
 #topnav .set span, #topnav .seton span {
 position: absolute;
 top: -69px;
-left: 8px;
+left: 7px;
 display: block;
 width: 60px;
 height: 60px;
