@@ -229,6 +229,10 @@ public function selectProjects ($params = array())
 			`application_projects`.`date_added` AS `date_added`
 		FROM
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		LEFT JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE 
 			1
 	";
@@ -237,6 +241,10 @@ public function selectProjects ($params = array())
 	if (!empty($owner) && is_numeric($owner)) {
 		$sql .= " AND `application_projects`.`owner` = :owner ";
 		$bind_params['owner'] = (int)$owner;
+	}
+	if (!empty($user) && is_numeric($user)) {
+		$sql .= " AND `user_users2application_projects`.`user` = :user ";
+		$bind_params['user'] = (int)$user;
 	}
 	if (!empty($name) && is_scalar($name)) {
 		$sql .= " AND `application_projects`.`name` = :name ";
@@ -366,7 +374,8 @@ public function project_exists ($id)
 }
 
 /**
- * Makes sure that a user session is always attached to a project. 
+ * Makes sure that a user session is always attached to a project. Returns
+ * id of the current project.
  *
  * @throws Application_ProjectException
  * @param int User id
@@ -374,9 +383,17 @@ public function project_exists ($id)
  */
 public function initProjectAdmin ($user)
 {
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new Application_ProjectExpception("Input for parameter user is expected to be numeric");
+	}
+	
+	// load cookie class
+	$COOKIE = load('utility:cookie');
+		
 	// let's see if there's a valid project id embedded in the cookie
-	$current_project = BASE_Cnc::filterRequest($_COOKIE['oak_admin']['current_project'],
-		OAK_REGEX_NUMERIC);
+	$current_project = $COOKIE->adminGetCurrentProject();
+	$current_project = BASE_Cnc::filterRequest($current_project, OAK_REGEX_NUMERIC);
 	
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
@@ -401,7 +418,10 @@ public function initProjectAdmin ($user)
 		if (!empty($result[0]['id']) && is_numeric($result[0]['id']) && intval($result[0]['id']) > 0) {
 			// define constant
 			define('OAK_CURRENT_PROJECT', (int)$result[0]['id']);
-
+			
+			// put the project id into the cookie
+			$COOKIE->adminSwitchCurrentProject(OAK_CURRENT_PROJECT);
+			
 			// return id of the current project
 			return OAK_CURRENT_PROJECT;
 			
@@ -410,6 +430,32 @@ public function initProjectAdmin ($user)
 			throw new Application_ProjectException("Unable to find a usable project");
 		}
 	}
+}
+
+/**
+ * Switches current project. Takes the id of the new project as
+ * first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool
+ */
+public function switchProject ($new_project)
+{
+	if (empty($new_project) || is_numeric($new_project)) {
+		// do access check here
+		if (true == false) {
+			throw new Application_ProjectException("You are not allowed to execute this operation");
+		}
+		
+		// get cookie class
+		$COOKIE = load('utility:cookie');
+		
+		// switch project
+		return $COOKIE->adminSwitchCurrentProject($new_project);
+	}
+	
+	return false;
 }
 
 // end of class

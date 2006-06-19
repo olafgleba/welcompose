@@ -125,14 +125,14 @@ try {
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 	
-	    // build $session
+	    // prepare session array
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
 	    );
 	    
-	    // assign $_SESSION to smarty
+	    // assign prepared session array to smarty
 	    $BASE->utility->smarty->assign('session', $session);
-	    
+		
 	    // empty $_SESSION
 	    if (!empty($_SESSION['response'])) {
 	        $_SESSION['response'] = '';

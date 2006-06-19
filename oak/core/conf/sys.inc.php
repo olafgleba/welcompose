@@ -6,6 +6,7 @@ debug = true
 dev = false
 lang = "de"
 error_length = 0
+app_key = "!@R;&x.{Su}d&VcU#j5I\:)mU.2?!_."
 
 [locales]
 all = "de_CH"
