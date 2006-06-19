@@ -8,7 +8,7 @@ border: 0 none;
 body {
 font: 95% Arial, Helvetica, sans-serif;
 color: #333;
-background: #d9d9d9 url(../img/bg-body.gif); 
+background: #d9d9d9 url(../img/bg_body.gif); 
 padding: 16px 0 16px 0;
 text-align: center;
 }
@@ -47,13 +47,13 @@ background: #0c3;
 #container {
 position: relative;
 width: 986px;
-background: #fff url(../img/bg-header.gif) 0 0 no-repeat;
+background: #fff url(../img/bg_header.gif) 0 0 no-repeat;
 margin: 0 auto;
 text-align: left;
 }
 #container p.copyright {
 width: 971px;
-background: transparent url(../img/bg-container-bottom.gif) 0 20px no-repeat;
+background: transparent url(../img/bg_container_bottom.gif) 0 20px no-repeat;
 padding: 20px 15px 5px 0;
 margin: 0;
 text-align: right;
@@ -288,12 +288,12 @@ padding-top: 2em;
 width: 852px;
 margin: 10px 0 20px 0;
 color: #000;
-background: transparent url(../img/bc-right.gif) 100% 5px no-repeat;
+background: transparent url(../img/bc_right.gif) 100% 5px no-repeat;
 }
 #brc p {
 margin: 5px 0;
 padding: 2px 0 8px 8px;
-background: transparent url(../img/bc-left.gif) 2px 0 no-repeat;
+background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
 }
 
 .hli {
@@ -330,18 +330,19 @@ padding: 1px 0 1px 10px;
 float: right;
 width: 474px;
 height: 22px;
-background: transparent url(../img/bg-navigation.gif) 0 0 no-repeat;
+background: transparent url(../img/bg_secnav474_nonav_c.gif) 0 0 no-repeat;
 }
 .overview {
 float: right;
-width: 341px;
+width: 956px;
 height: 22px;
-background: transparent url(../img/bg-overview-sm.gif) 0 0 no-repeat;
+background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
 }
 .overview a:link, .overview a:visited {
 margin: 0 0 0 110px;
 line-height: 22px;
 font-weight: bold;
+margin-left: 725px;
 padding-left: 25px;
 background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
 }
@@ -371,7 +372,7 @@ background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
 .long {
 float: left;
 width: 956px;
-background: transparent url(../img/bg-subnavigation-long.gif) 0 0 no-repeat;
+background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
 }
 .long a:link, .long a:visited, .long a:hover, .long a:active, .long a:focus {
 margin: 0 0 0 725px;
@@ -583,7 +584,6 @@ width: 680px;
 margin: 15px 0 0 0;
 }
 label.cont {
-float: left;
 margin: 5px 0;
 }
 label span.bez {
