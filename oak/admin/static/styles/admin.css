@@ -154,14 +154,14 @@ left: 10px;
 display: block;
 width: 94px;
 height: 65px;
-background: transparent url(../img/icons/media.jpg) 0 0 no-repeat;
+background: transparent url(../img/icons/media.gif) 0 0 no-repeat;
 }
 #topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
-background: transparent url(../img/icons/media.jpg) 0 -130px no-repeat;
+background: transparent url(../img/icons/media.gif) 0 -130px no-repeat;
 }
 #topnav .com span, #topnav .comon span {
 position: absolute;
-top: -75px;
+top: -72px;
 left: 10px;
 display: block;
 width: 60px;
@@ -169,11 +169,11 @@ height: 72px;
 background: transparent url(../img/icons/community.gif) 0 0 no-repeat;
 }
 #topnav .com:hover span, #topnav .com:active span, #topnav .com:focus span, #topnav .comon span {
-background: transparent url(../img/icons/community.gif) 0 -115px no-repeat;
+background: transparent url(../img/icons/community.gif) 0 -122px no-repeat;
 }
 #topnav .usr span, #topnav .usron span {
 position: absolute;
-top: -76px;
+top: -72px;
 left: 6px;
 display: block;
 width: 60px;
@@ -181,7 +181,7 @@ height: 72px;
 background: transparent url(../img/icons/users.gif) 0 0 no-repeat;
 }
 #topnav .usr:hover span, #topnav .usr:active span, #topnav .usr:focus span, #topnav .usron span {
-background: transparent url(../img/icons/users.gif) 0 -115px no-repeat;
+background: transparent url(../img/icons/users.gif) 0 -122px no-repeat;
 }
 #topnav .tem span, #topnav .temon span {
 position: absolute;
@@ -190,22 +190,22 @@ left: 2px;
 display: block;
 width: 94px;
 height: 65px;
-background: transparent url(../img/icons/templating.jpg) 0 0 no-repeat;
+background: transparent url(../img/icons/templating.gif) 0 0 no-repeat;
 }
 #topnav .tem:hover span, #topnav .tem:active span, #topnav .tem:focus span, #topnav .temon span {
-background: transparent url(../img/icons/templating.jpg) 0 -130px no-repeat;
+background: transparent url(../img/icons/templating.gif) 0 -130px no-repeat;
 }
 #topnav .set span, #topnav .seton span {
 position: absolute;
-top: -72px;
+top: -69px;
 left: 8px;
 display: block;
 width: 60px;
 height: 60px;
-background: transparent url(../img/icons/settings.jpg) 0 0 no-repeat;
+background: transparent url(../img/icons/settings.gif) 0 0 no-repeat;
 }
 #topnav .set:hover span, #topnav .set:active span, #topnav .set:focus span, #topnav .seton span {
-background: transparent url(../img/icons/settings.jpg) 0 -130px no-repeat;
+background: transparent url(../img/icons/settings.gif) 0 -125px no-repeat;
 }
 /* TOPNAVIGATION STOP */
 
@@ -636,9 +636,10 @@ padding: 5px;
 textarea.short50 {
 float: left;
 border: 1px solid #666;
+font: 100% Arial, Helvetica, sans-serif;
 width: 293px;
 height: 50px;
-padding: 5px;
+padding: 3px;
 margin: 0;
 }
 .flselect {
