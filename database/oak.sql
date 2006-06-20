@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 18.06.2006 13:43:33
--- Diagram Version: 28
+-- Created on: 20.06.2006 22:51:19
+-- Diagram Version: 30
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -25,13 +25,10 @@ TYPE=INNODB;
 
 CREATE TABLE `user_users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(50),
   `email` varchar(255),
-  `homepage` varchar(255),
   `pwd` varchar(255),
-  `public_email` enum('0','1') DEFAULT '0',
-  `public_profile` enum('0','1') DEFAULT '0',
-  `author` enum('0','1') DEFAULT '0',
+  `author` enum('0','1') NOT NULL DEFAULT '0',
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
   `date_modified` timestamp(14),
   `date_added` datetime,
   `_sync` varchar(255),
