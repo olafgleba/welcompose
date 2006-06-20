@@ -33,8 +33,20 @@ var definitions = {
 			xhrNav(parseNavUrl + '?page=contents', navLyOne);
 			return false;
 		}
+	},	
+	'.conon' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=contents', navLyOne);
+			return false;
+		}
 	},
 	'.med' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=library', navLyOne);
+			return false;
+		}
+	},
+	'.medon' : function(el){
 		el.onclick = function(){ 
 			xhrNav(parseNavUrl + '?page=library', navLyOne);
 			return false;
@@ -45,8 +57,20 @@ var definitions = {
 			xhrNav(parseNavUrl + '?page=community', navLyOne);
 			return false;
 		}
+	},	
+	'.comon' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=community', navLyOne);
+			return false;
+		}
 	},
 	'.usr' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=users', navLyOne);
+			return false;
+		}
+	},
+	'.usron' : function(el){
 		el.onclick = function(){ 
 			xhrNav(parseNavUrl + '?page=users', navLyOne);
 			return false;
@@ -57,8 +81,20 @@ var definitions = {
 			xhrNav(parseNavUrl + '?page=templates', navLyOne);
 			return false;
 		}
+	},	
+	'.temon' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=templates', navLyOne);
+			return false;
+		}
 	},
 	'.set' : function(el){
+		el.onclick = function(){ 
+			xhrNav(parseNavUrl + '?page=settings', navLyOne);
+			return false;
+		}
+	},
+	'.seton' : function(el){
 		el.onclick = function(){ 
 			xhrNav(parseNavUrl + '?page=settings', navLyOne);
 			return false;

@@ -192,9 +192,7 @@ function removeHelp (elem, attr)
 function initLoad ()
 {	
 	getHeaderVars();
-	getFormName(form_attr);
-	
-	
+	getFormName(form_attr);	
 }
 
 /**
@@ -210,23 +208,6 @@ function getHeaderVars ()
             return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
        }
    }
-
-  /*
-  if (typeof selection != 'undefined' && $('displayOptions') && $('displayHideOptions')) {
-       try {
-   			if (selection == 1) {
-           		Element.hide(displayOptions);
-           		Element.show(displayHideOptions);
-       		}      
-       		if (selection == 0) {
-           		Element.show(displayOptions);
-           		Element.hide(displayHideOptions);
-       		}
-		} catch (e) {
-		applyError(e);
-		}
-   }*/
-   
 }
    
 /**
@@ -246,29 +227,4 @@ function getHeaderVars ()
 		
 		form_name = content.substring(6);
 	}
-}
-
-
-
-function makeHash (elem)
-{
-	//stringHref = elem.document.URL;
-	
-	//stringHref = elem.getAttribute(attr);
-	//window.location.hash = stringHref;
-	//return stringHref;
-	
-	newHash = elem.attributes[href].value;
-	location.hash = newHash;
-	//alert (newHash);
-
-
-}
-
-function showHash ()
-{
-	alert ('hash: ' + window.location.hash);
-	//window.location.hash = stringHref;
-
-
 }
