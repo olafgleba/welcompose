@@ -134,7 +134,7 @@ text-decoration: none;
 }
 #topnav .con span, #topnav .conon span {
 position: absolute;
-top: -68px;
+top: -67px;
 left: 14px;
 display: block;
 width: 66px;
@@ -182,7 +182,7 @@ background: transparent url(../img/icons/users.gif) 0 -122px no-repeat;
 }
 #topnav .tem span, #topnav .temon span {
 position: absolute;
-top: -72px;
+top: -70px;
 left: 2px;
 display: block;
 width: 94px;
@@ -190,7 +190,7 @@ height: 65px;
 background: transparent url(../img/icons/templating.gif) 0 0 no-repeat;
 }
 #topnav .tem:hover span, #topnav .tem:active span, #topnav .tem:focus span, #topnav .temon span {
-background: transparent url(../img/icons/templating.gif) 0 -130px no-repeat;
+background: transparent url(../img/icons/templating.gif) 0 -123px no-repeat;
 }
 #topnav .set span, #topnav .seton span {
 position: absolute;
