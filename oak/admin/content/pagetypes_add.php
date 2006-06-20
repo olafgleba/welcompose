@@ -101,7 +101,11 @@ try {
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
-	
+		
+		// assign paths
+		$BASE->utility->smarty->assign('oak_admin_root_www',
+			$BASE->_conf['path']['oak_admin_root_www']);
+		
 	    // build session
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)

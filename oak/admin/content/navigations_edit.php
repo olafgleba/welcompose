@@ -118,6 +118,10 @@ try {
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
+		// assign paths
+		$BASE->utility->smarty->assign('oak_admin_root_www',
+			$BASE->_conf['path']['oak_admin_root_www']);
+		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);

@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: articlegroups_add.php 2 2006-03-20 11:43:20Z andreas $
+ * $Id$
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -77,7 +77,11 @@ try {
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
-		
+	
+	// assign paths
+	$BASE->utility->smarty->assign('oak_admin_root_www',
+		$BASE->_conf['path']['oak_admin_root_www']);
+	
 	// assign current user and project id
 	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
