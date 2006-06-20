@@ -55,8 +55,8 @@ var form_attr = '{$form.attributes}';
 <div id="topsubnavconstatic" class="f9">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
-<li><a href="users_select.php">Users</a><span></span></a></li>
-<li class="on">Groups<span></span></li>
+<li><a href="users_select.php">{i18n Users}</a><span></span></a></li>
+<li class="on">{i18n Groups}<span></span></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -83,8 +83,8 @@ var form_attr = '{$form.attributes}';
 <th class="page">{i18n Name} <span class="az"></span> <span class="za"></span></th>
 <th class="email">{i18n Description}</th>
 <th class="proj">{i18n Project} <span class="az"></span> <span class="za"></span></th>
-<th>Edit</th>
-<th>Delete</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
 </tr>
 {foreach from=$groups item=_group}
 <tr>
