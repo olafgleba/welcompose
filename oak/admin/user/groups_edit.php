@@ -90,7 +90,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'long'));
+		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
@@ -99,7 +99,7 @@ try {
 		$FORM->exportValue('id'));
 	
 	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'group_description', 'class' => 'short50', 'cols' => 3));
+		array('id' => 'group_description', 'class' => 'w293h50', 'cols' => 3));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
 	

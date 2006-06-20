@@ -90,7 +90,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'name', 'maxlength' => 255, 'class' => 'long'));
+		array('id' => 'name', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');

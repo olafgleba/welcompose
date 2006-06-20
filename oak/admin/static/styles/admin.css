@@ -460,7 +460,8 @@ label span.req {
 color: #f00;
 }
 
-input.short, input.medium, input.long, input.title {
+input.short, input.medium, input.long, input.title, 
+input.w130, input.w200, input.w300, input.w580 {
 width: 130px;
 border: 1px solid #666;
 padding: 2px 2px;
