@@ -146,7 +146,7 @@ background: transparent url(../img/icons/contents.gif) 0 -125px no-repeat;
 }
 #topnav .med span, #topnav .medon span {
 position: absolute;
-top: -67px;
+top: -69px;
 left: 28px;
 display: block;
 width: 94px;
@@ -154,7 +154,7 @@ height: 65px;
 background: transparent url(../img/icons/media.gif) 0 0 no-repeat;
 }
 #topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
-background: transparent url(../img/icons/media.gif) 0 -126px no-repeat;
+background: transparent url(../img/icons/media.gif) 0 -122px no-repeat;
 }
 #topnav .com span, #topnav .comon span {
 position: absolute;
