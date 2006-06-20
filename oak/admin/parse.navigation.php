@@ -53,6 +53,10 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
+	// assign paths
+	$BASE->utility->smarty->assign('oak_admin_root_www',
+		$BASE->_conf['path']['oak_admin_root_www']);
+	
 	// get page name
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
 	

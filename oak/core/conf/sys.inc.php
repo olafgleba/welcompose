@@ -1,5 +1,7 @@
 ; <?php /*
 [path]
+oak_admin_root_www = /oak/trunk/oak/admin
+oak_public_root_www = /oak/trunk/oak
 
 [environment]
 debug = true
