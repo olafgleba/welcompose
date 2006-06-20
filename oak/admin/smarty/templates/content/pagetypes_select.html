@@ -55,9 +55,9 @@ var form_attr = '{$form.attributes}';
 <div id="topsubnavconstatic" class="f9">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
-<li><a href="pages_select.php">Pages<span></span></a></li>
-<li><a href="navigations_select.php">Navigations<span></span></a></li>
-<li class="on">Page Types</li>
+<li><a href="pages_select.php">{i18n Pages}<span></span></a></li>
+<li><a href="navigations_select.php">{i18n Navigations}<span></span></a></li>
+<li class="on">{i18n Page Types}</li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -87,11 +87,11 @@ var form_attr = '{$form.attributes}';
 {foreach from=$page_types item=_page_type}
 <tr>
 {if $_page_type.editable}
-<td class="page"><span>{$_page_type.name}</span></td>
-<td><a class="edit" href="pagetypes_edit.php?id={$_page_type.id}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="pagetypes_delete.php?id={$_page_type.id}" title="{i18n Delete}"></a></td>
+<td class="page"><span>{$_page_type.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="pagetypes_edit.php?id={$_page_type.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pagetypes_delete.php?id={$_page_type.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 {else}
-<td class="page"><span>{$_page_type.name} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
+<td class="page"><span>{$_page_type.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 {/if}

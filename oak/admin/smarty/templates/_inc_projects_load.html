@@ -5,7 +5,7 @@
 <div id="projects">
 <select name="id" class="fselect">
 {foreach from=$projects item=_project}
-<option value="{$_project.id}"{if $_project.id == $oak_current_project} selected="selected"{/if}>{$_project.name}</option>
+<option value="{$_project.id|escape:"htmlall"}"{if $_project.id == $oak_current_project} selected="selected"{/if}>{$_project.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 <input class="submitbut90" type="submit" name="send" value="{i18n load}" title="{i18n Load project}" />

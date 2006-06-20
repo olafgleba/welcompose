@@ -56,9 +56,9 @@ var form_attr = '';
 <div id="topsubnavconstatic" class="f9">
 <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <ul id="topsubnav">
-<li><a href="pages_select.php">Pages<span></span></a></li>
-<li class="on">Navigations</li>
-<li><a href="pagetypes_select.php">Page Types<span></span></a></li>
+<li><a href="pages_select.php">{i18n Pages}<span></span></a></li>
+<li class="on">{i18n Navigations}</li>
+<li><a href="pagetypes_select.php">{i18n Page Types}<span></span></a></li>
 </ul>
 <b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
@@ -87,9 +87,9 @@ var form_attr = '';
 </tr>
 {foreach from=$navigations item=_navigation}
 <tr>
-<td class="page"><span>{$_navigation.name}</span></td>
-<td><a class="edit" href="navigations_edit.php?id={$_navigation.id}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="navigations_delete.php?id={$_navigation.id}" title="{i18n Delete}"></a></td>
+<td class="page"><span>{$_navigation.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="navigations_edit.php?id={$_navigation.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="navigations_delete.php?id={$_navigation.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
