@@ -64,7 +64,7 @@ try {
 	header("Content-Type: text/javascript");
 	
 	// fetch javascript
-	if (!empty($_REQUEST['file']) && Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_JS)) {
+	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_JS))) {
 		preg_match("=^((oak+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
 		$BASE->utility->smarty->display($matches[1], $_SERVER['REQUEST_URI']);
 	}
