@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: validate.js.php
+ * File: parse.js.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -53,45 +53,22 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
-	// map field id names to regexps and error messages 
-	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
-		switch ((string)$_POST['elemID']) {
-			case 'group_name':
-					$reg = OAK_REGEX_GROUP_NAME;
-					$desc = gettext('Only capitalized prefixed literal string');
-				break;
-			case 'navigation_name':
-					$reg = OAK_REGEX_NON_EMPTY;
-					$desc = gettext('Field may not be empty');
-				break;
-			case 'page_type_name':
-					$reg = OAK_REGEX_PAGE_TYPE_NAME;
-					$desc = gettext('Only capitalized prefixed literal string');
-				break;
-			default :
-				$reg = null;
-				$desc = null;
-		}	
+	// delimiters for js files
+	$BASE->utility->smarty->left_delimiter = '<%';
+	$BASE->utility->smarty->right_delimiter = '%>';
+	
+	// set new tpl dir
+	$BASE->utility->smarty->template_dir = dirname(__FILE__).'/static/libs';
+	
+	// set header
+	header("Content-Type: text/javascript");
+	
+	// fetch javascript
+	if (!empty($_REQUEST['file']) && Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_JS)) {
+		preg_match("=^((oak+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
+		$BASE->utility->smarty->display($matches[1], $_SERVER['REQUEST_URI']);
 	}
 	
-	if (!empty($_POST['elemVal'])) {
-		if (!empty($reg)) {
-			if (Base_Cnc::filterRequest($_POST['elemVal'], $reg)) {
-				print '<img src="../static/img/icons/success.gif" />';
-			} else {
-				print '<img src="../static/img/icons/error.gif" /> '.$desc;
-			}
-		} else {
-			print '<img src="../static/img/icons/success.gif" />';
-		}
-	} else {
-		// print non-breaking space
-		// safari doesn't recognized void properly
-		print '&nbsp;';
-	}
-	
-	
-		
 	// flush the buffer
 	@ob_end_flush();
 	exit;

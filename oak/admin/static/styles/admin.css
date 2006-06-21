@@ -97,7 +97,20 @@ margin: 0 2px;
 #logo .xb3 {
 margin: 0 1px;
 }
-/* LOGO STOP */
+/* LOGO EOF */
+
+/* MAIN START */
+#main {
+margin: 0 15px 0 15px;
+padding-top: 100px;
+}
+#content {
+margin: 20px 0;
+}
+#content p {
+margin: 10px 0 10px 10px;
+}
+/* MAIN EOF */
 
 /* TOPNAVIGATION START */
 #topnavcon {
@@ -146,7 +159,7 @@ background: transparent url(../img/icons/contents.gif) 0 -125px no-repeat;
 }
 #topnav .med span, #topnav .medon span {
 position: absolute;
-top: -69px;
+top: -70px;
 left: 28px;
 display: block;
 width: 94px;
@@ -154,7 +167,7 @@ height: 65px;
 background: transparent url(../img/icons/media.gif) 0 0 no-repeat;
 }
 #topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
-background: transparent url(../img/icons/media.gif) 0 -122px no-repeat;
+background: transparent url(../img/icons/media.gif) 0 -123px no-repeat;
 }
 #topnav .com span, #topnav .comon span {
 position: absolute;
@@ -204,7 +217,7 @@ background: transparent url(../img/icons/settings.gif) 0 0 no-repeat;
 #topnav .set:hover span, #topnav .set:active span, #topnav .set:focus span, #topnav .seton span {
 background: transparent url(../img/icons/settings.gif) 0 -125px no-repeat;
 }
-/* TOPNAVIGATION STOP */
+/* TOPNAVIGATION EOF */
 
 /* SEARCH START */
 #projects {
@@ -232,18 +245,8 @@ border: 1px solid #666666;
 }
 /* SEARCH STOP */
 
-#main {
-margin: 0 15px 0 15px;
-padding-top: 100px;
-}
-#content {
-margin: 20px 0;
-}
-#content p {
-margin: 10px 0 10px 10px;
-}
 
-/* TOPSUBNAVIGATION */
+/* TOPSUBNAVIGATION START */
 #topsubnavcon {
 width: 956px;
 padding-top: 2em;
@@ -274,7 +277,6 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
-
 #topsubnav li.on {
 position: relative;
 display: block;
@@ -285,14 +287,16 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
+/* TOPSUBNAVIGATION EOF */
 
-/* TOPSUBNAVIGATION STATIC */
+/* TOPSUBNAVIGATION STATIC START */
 #topsubnavconstatic {
 width: 956px;
 padding-top: 2em;
 }
+/* TOPSUBNAVIGATION STATIC EOF*/
 
-/* BREADCRUMB */
+/* BREADCRUMB START */
 #brc {
 width: 852px;
 margin: 10px 0 20px 0;
@@ -304,7 +308,9 @@ margin: 5px 0;
 padding: 2px 0 8px 8px;
 background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
 }
-/* HEADLINE */
+/* BREADCRUMB EOF */
+
+/* HEADLINE START */
 .hli {
 display: block;
 width: 474px;
@@ -315,17 +321,6 @@ width: 474px;
 wid\th: 464px;
 padding: 1px 0 1px 10px;
 }
-/*
-.hli_ov {
-display: block;
-width: 607px;
-}
-.hli_ov h2 {
-background: #efefef;
-width: 607px;
-wid\th: 597px;
-padding: 1px 0 1px 10px;
-}*/
 .hli_bx {
 display: block;
 width: 710px;
@@ -371,8 +366,140 @@ background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
 color: #00AE2C;
 background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
 }
+/* HEADLINE EOF */
 
-/* FILTER (PROJECTS/GROUPS) */
+/* BOXES Start */
+/* BOX MIT ABGERUNDETEN ECKEN #EFEFEF */
+.ef {
+background: transparent; 
+}
+.ef .xtop, 
+.ef .xbottom {
+display: block; 
+background: transparent;
+font-size: 1px;
+}
+.ef .xb1, .ef .xb2, .ef .xb3 {
+display: block; 
+overflow: hidden;
+}
+.ef .xb1, .ef .xb2, .ef .xb3 {
+height: 1px;
+}
+.ef .xb2, 
+.ef .xb3 {
+background: #efefef; 
+}
+.ef .xb1 {
+margin: 0 3px; 
+background: #efefef;
+}
+.ef .xb2 {
+margin: 0 2px; 
+}
+.ef .xb3 {
+margin: 0 1px;
+}
+/* ENDE BOX MIT ABGERUNDETEN ECKEN #EFEFEF */
+/* BOX MIT ABGERUNDETEN ECKEN #F9F9F9 */
+.f9 {
+background: transparent; 
+}
+.f9 .xtop, 
+.f9 .xbottom {
+display: block; 
+background: transparent;
+font-size: 1px;
+}
+.f9 .xb1, .f9 .xb2, .f9 .xb3 {
+display: block; 
+overflow: hidden;
+}
+.f9 .xb1, .f9 .xb2, .f9 .xb3 {
+height: 1px;
+}
+.f9 .xb2, 
+.f9 .xb3 {
+background: #f9f9f9; 
+}
+.f9 .xb1 {
+margin: 0 3px; 
+background: #f9f9f9;
+}
+.f9 .xb2 {
+margin: 0 2px; 
+}
+.f9 .xb3 {
+margin: 0 1px;
+}
+/* ENDE BOX MIT ABGERUNDETEN ECKEN #F9F9F9 */
+/* BOX MIT ABGERUNDETEN ECKEN #D1E1F0 */
+.d1 {
+background: transparent; 
+}
+.d1 .xtop, 
+.d1 .xbottom {
+display: block; 
+background: transparent;
+font-size: 1px;
+}
+.d1 .xb1, .d1 .xb2, .d1 .xb3 {
+display: block; 
+overflow: hidden;
+}
+.d1 .xb1, .d1 .xb2, .d1 .xb3 {
+height: 1px;
+}
+.d1 .xb2, 
+.d1 .xb3 {
+background: #d1e1f0; 
+}
+.d1 .xb1 {
+margin: 0 3px; 
+background: #d1e1f0;
+}
+.d1 .xb2 {
+margin: 0 2px; 
+}
+.d1 .xb3 {
+margin: 0 1px;
+}
+/* ENDE BOX MIT ABGERUNDETEN ECKEN #D1E1F0 */
+/* BOX MIT ABGERUNDETEN ECKEN #B66 */
+.b6 {
+background: transparent; 
+}
+.b6 .xtop, 
+.b6 .xbottom {
+display: block; 
+background: transparent;
+font-size: 1px;
+}
+.b6 .xb1, .b6 .xb2, .b6 .xb3 {
+display: block; 
+overflow: hidden;
+}
+.b6 .xb1, .b6 .xb2, .b6 .xb3 {
+height: 1px;
+}
+.b6 .xb2, 
+.b6 .xb3 {
+background: #666; 
+}
+.b6 .xb1 {
+margin: 0 3px; 
+background: #666;
+}
+.b6 .xb2 {
+margin: 0 2px; 
+}
+.b6 .xb3 {
+margin: 0 1px;
+}
+/* ENDE BOX MIT ABGERUNDETEN ECKEN #B66 */
+/* BOXES Start */
+
+/* FILTER (PROJECTS/GROUPS) START */
 .filter {
 margin: 10px 0 0 10px;
 }
@@ -400,8 +527,9 @@ padding: 0;
 border: 1px solid #666;
 line-height: 1.5em;
 }
+/* FILTER (PROJECTS/GROUPS) EOF */
 
-/* ERRORS */
+/* ERRORS START */
 ul.req {
 line-height: 1.2em;
 padding: 4px 15px;
@@ -427,8 +555,9 @@ color: red;
 #rp p {
 padding: 0 10px 10px 10px;
 }
+/* ERRORS EOF */
 
-/* FORMs */
+/* FORMS START */
 form.botbg {
 width: 710px;
 padding-bottom: 20px;
@@ -458,7 +587,6 @@ width: 140px;
 label span.req {
 color: #f00;
 }
-
 input.short, input.medium, input.long, input.title, 
 input.w130, input.w200, input.w300, input.w580 {
 width: 130px;
@@ -515,8 +643,9 @@ padding: 0 0 0 5px;
 margin: 10px  0 0 140px;
 cursor: pointer;
 }
+/* FORMS EOF */
 
-/* VALIDATE */
+/* VALIDATE START */
 #content span.validate {
 float: left;
 display: block; 
@@ -528,8 +657,9 @@ padding-left: 5px;
 #content span.validate img {
 vertical-align: middle;
 }
+/* VALIDATE EOF */
 
-/* HELP */
+/* HELP START */
 #content p.help {
 display: block;
 line-height: 1.5em;
@@ -540,138 +670,9 @@ padding-left: 140px;
 .iHelp img, .iHelpRemove img {
 vertical-align: middle;
 }
+/* HELP EOF */
 
-
-/* Box mit abgerundeten Ecken #efefef */
-.ef {
-background: transparent; 
-}
-.ef .xtop, 
-.ef .xbottom {
-display: block; 
-background: transparent;
-font-size: 1px;
-}
-.ef .xb1, .ef .xb2, .ef .xb3 {
-display: block; 
-overflow: hidden;
-}
-.ef .xb1, .ef .xb2, .ef .xb3 {
-height: 1px;
-}
-.ef .xb2, 
-.ef .xb3 {
-background: #efefef; 
-}
-.ef .xb1 {
-margin: 0 3px; 
-background: #efefef;
-}
-.ef .xb2 {
-margin: 0 2px; 
-}
-.ef .xb3 {
-margin: 0 1px;
-}
-/* Ende Box mit abgerundeten Ecken #efefef */
-/* Box mit abgerundeten Ecken #f9f9f9 */
-.f9 {
-background: transparent; 
-}
-.f9 .xtop, 
-.f9 .xbottom {
-display: block; 
-background: transparent;
-font-size: 1px;
-}
-.f9 .xb1, .f9 .xb2, .f9 .xb3 {
-display: block; 
-overflow: hidden;
-}
-.f9 .xb1, .f9 .xb2, .f9 .xb3 {
-height: 1px;
-}
-.f9 .xb2, 
-.f9 .xb3 {
-background: #f9f9f9; 
-}
-.f9 .xb1 {
-margin: 0 3px; 
-background: #f9f9f9;
-}
-.f9 .xb2 {
-margin: 0 2px; 
-}
-.f9 .xb3 {
-margin: 0 1px;
-}
-/* Ende Box mit abgerundeten Ecken #f9f9f9 */
-/* Box mit abgerundeten Ecken #d1e1f0 */
-.d1 {
-background: transparent; 
-}
-.d1 .xtop, 
-.d1 .xbottom {
-display: block; 
-background: transparent;
-font-size: 1px;
-}
-.d1 .xb1, .d1 .xb2, .d1 .xb3 {
-display: block; 
-overflow: hidden;
-}
-.d1 .xb1, .d1 .xb2, .d1 .xb3 {
-height: 1px;
-}
-.d1 .xb2, 
-.d1 .xb3 {
-background: #d1e1f0; 
-}
-.d1 .xb1 {
-margin: 0 3px; 
-background: #d1e1f0;
-}
-.d1 .xb2 {
-margin: 0 2px; 
-}
-.d1 .xb3 {
-margin: 0 1px;
-}
-/* Ende Box mit abgerundeten Ecken #d1e1f0 */
-/* Box mit abgerundeten Ecken #b66 */
-.b6 {
-background: transparent; 
-}
-.b6 .xtop, 
-.b6 .xbottom {
-display: block; 
-background: transparent;
-font-size: 1px;
-}
-.b6 .xb1, .b6 .xb2, .b6 .xb3 {
-display: block; 
-overflow: hidden;
-}
-.b6 .xb1, .b6 .xb2, .b6 .xb3 {
-height: 1px;
-}
-.b6 .xb2, 
-.b6 .xb3 {
-background: #666; 
-}
-.b6 .xb1 {
-margin: 0 3px; 
-background: #666;
-}
-.b6 .xb2 {
-margin: 0 2px; 
-}
-.b6 .xb3 {
-margin: 0 1px;
-}
-/* Ende Box mit abgerundeten Ecken #b66 */
-
-/* CLEARFIX */
+/* CLEARFIX START */
 .clearfix:after {
 content: "."; 
 display: block; 
@@ -684,9 +685,11 @@ visibility: hidden;
 height: 1%; 
 }
 /* End hide from IE-mac */
+/* CLEARFIX EOF */
 
 
-/* DIVERSES */
+/* DIVERSES START */
 .clearb {
 clear: both;
 }
+/* DIVERSES EOF */
