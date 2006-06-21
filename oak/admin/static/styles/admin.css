@@ -155,11 +155,11 @@ height: 72px;
 background: transparent url(../img/icons/contents.gif) 0 0 no-repeat;
 }
 #topnav .con:hover span, #topnav .con:active span, #topnav .con:focus span, #topnav .conon span {
-background: transparent url(../img/icons/contents.gif) 0 -125px no-repeat;
+background: transparent url(../img/icons/contents.gif) 0 -110px no-repeat;
 }
 #topnav .med span, #topnav .medon span {
 position: absolute;
-top: -70px;
+top: -69px;
 left: 28px;
 display: block;
 width: 94px;
@@ -167,11 +167,11 @@ height: 65px;
 background: transparent url(../img/icons/media.gif) 0 0 no-repeat;
 }
 #topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
-background: transparent url(../img/icons/media.gif) 0 -123px no-repeat;
+background: transparent url(../img/icons/media.gif) 0 -108px no-repeat;
 }
 #topnav .com span, #topnav .comon span {
 position: absolute;
-top: -72px;
+top: -71px;
 left: 15px;
 display: block;
 width: 60px;
@@ -179,11 +179,11 @@ height: 72px;
 background: transparent url(../img/icons/community.gif) 0 0 no-repeat;
 }
 #topnav .com:hover span, #topnav .com:active span, #topnav .com:focus span, #topnav .comon span {
-background: transparent url(../img/icons/community.gif) 0 -122px no-repeat;
+background: transparent url(../img/icons/community.gif) 0 -107px no-repeat;
 }
 #topnav .usr span, #topnav .usron span {
 position: absolute;
-top: -71px;
+top: -70px;
 left: 2px;
 display: block;
 width: 60px;
@@ -191,19 +191,19 @@ height: 72px;
 background: transparent url(../img/icons/users.gif) 0 0 no-repeat;
 }
 #topnav .usr:hover span, #topnav .usr:active span, #topnav .usr:focus span, #topnav .usron span {
-background: transparent url(../img/icons/users.gif) 0 -122px no-repeat;
+background: transparent url(../img/icons/users.gif) 0 -108px no-repeat;
 }
 #topnav .tem span, #topnav .temon span {
 position: absolute;
 top: -70px;
-left: 2px;
+left: 12px;
 display: block;
 width: 94px;
 height: 65px;
 background: transparent url(../img/icons/templating.gif) 0 0 no-repeat;
 }
 #topnav .tem:hover span, #topnav .tem:active span, #topnav .tem:focus span, #topnav .temon span {
-background: transparent url(../img/icons/templating.gif) 0 -123px no-repeat;
+background: transparent url(../img/icons/templating.gif) 0 -108px no-repeat;
 }
 #topnav .set span, #topnav .seton span {
 position: absolute;
@@ -215,7 +215,7 @@ height: 60px;
 background: transparent url(../img/icons/settings.gif) 0 0 no-repeat;
 }
 #topnav .set:hover span, #topnav .set:active span, #topnav .set:focus span, #topnav .seton span {
-background: transparent url(../img/icons/settings.gif) 0 -125px no-repeat;
+background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
 }
 /* TOPNAVIGATION EOF */
 
