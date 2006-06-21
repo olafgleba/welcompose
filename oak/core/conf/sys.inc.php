@@ -21,6 +21,7 @@ username = "root"
 password = 
 table_alias_constants = true
 debug = false;
+backticks = true;
 
 [image]
 store_www = "/oak/trunk/oak/images"
