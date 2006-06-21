@@ -95,6 +95,10 @@ define("OAK_REGEX_NON_EMPTY", "=^.+$=");
 // names
 define("OAK_REGEX_HELP", "=^([a-z0-9-_]+)$=i");
 
+// Defines regular expression for javascript file
+// names (exclude thirdparty javascript files)
+define("OAK_REGEX_JS", '=^(oak+)\.([a-z_]+)\.js$=i');
+
 // Defines regular expression for strings containing
 // a file name of a php script
 define("OAK_REGEX_FILE_NAME_PHP", '=^([a-z0-9-_]+)\.php$=i');
