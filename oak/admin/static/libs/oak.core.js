@@ -56,8 +56,8 @@ var helpClassRemove	= 'iHelpRemove';
  * find: html templates
  * used: oak.core.js
  */
-var helpHtmlShow	= '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" /></a>';
-var helpHtmlHide	= '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" /></a>';
+var helpHtmlShow	= '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" alt="" /></a>';
+var helpHtmlHide	= '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';
 
 /**
  * Define debug output
@@ -220,11 +220,11 @@ function getHeaderVars ()
  function getFormName (attr)
 {	
 	if (typeof attr != 'undefined') {
-		var content = attr.match(/(name="(\w+))/g);
+		var content = attr.match(/(id="(\w+))/g);
 	
 		// object -> string conversion
 		content = "" + content + "";
 		
-		form_name = content.substring(6);
+		form_id = content.substring(4);
 	}
 }

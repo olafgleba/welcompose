@@ -1,7 +1,9 @@
 {if count($projects) > 1}
 <form action="../application/projects_choose.php" method="post">
+<fieldset>
 <input type="hidden" name="go_back_area" value="{$go_back_area}" />
 <input type="hidden" name="go_back_file" value="{$go_back_file}" />
+</fieldset>
 <div id="projects">
 <select name="id" class="fselect">
 {foreach from=$projects item=_project}

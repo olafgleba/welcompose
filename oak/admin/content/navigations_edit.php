@@ -113,6 +113,11 @@ try {
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
 		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
+		
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty

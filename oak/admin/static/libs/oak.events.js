@@ -103,7 +103,7 @@ var definitions = {
 	'.iHelp' : function(el){
 		el.onclick = function(){
 			getHelp(this, 'for');
-			xhrHelp(parseHelpUrl + '?page=' + form_name + '_' + processId, processId);
+			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + processId, processId);
 			setCorrespondingFocus(this, 'for');
 			return false;
 		}

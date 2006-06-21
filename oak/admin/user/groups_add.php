@@ -88,7 +88,7 @@ try {
 	$FORM->addRule('name', gettext('A group with this name already exists'), 'testForNameUniqueness');
 	
 	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'group_description', 'class' => 'w293h50', 'cols' => 3));
+		array('id' => 'group_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
 	
@@ -102,6 +102,11 @@ try {
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
 		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
+		
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
