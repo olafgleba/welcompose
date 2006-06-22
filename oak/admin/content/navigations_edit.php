@@ -75,7 +75,7 @@ try {
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// select navigation from database
-	$navigation = $NAVIGATION->selectNavigation(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$navigation = $NAVIGATION->selectNavigation(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('navigation', 'post');
@@ -103,8 +103,8 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
-		'id' => BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC),
-		'name' => BASE_Cnc::ifsetor($navigation['name'], null)
+		'id' => Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC),
+		'name' => Base_Cnc::ifsetor($navigation['name'], null)
 	));
 	
 	// validate it

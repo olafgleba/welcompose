@@ -62,7 +62,7 @@ try {
 	
 	// get page information
 	$PAGE = load('content:page');
-	$page_information = $PAGE->selectPage(BASE_Cnc::filterRequest($_REQUEST['page'],
+	$page_information = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'],
 		OAK_REGEX_NUMERIC));
 	
 	// define constant CURRENT_PAGE

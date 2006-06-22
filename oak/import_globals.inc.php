@@ -33,7 +33,7 @@
 
 // default vars
 $get = array(
-	'page' => BASE_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC)
+	'page' => Base_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC)
 );
 
 $session = array(

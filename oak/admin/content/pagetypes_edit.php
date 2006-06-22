@@ -75,7 +75,7 @@ try {
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// get page type
-	$page_type = $PAGETYPE->selectPageType(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$page_type = $PAGETYPE->selectPageType(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page_type', 'post');
@@ -104,8 +104,8 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
-		'id' => BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC),
-		'name' => BASE_Cnc::ifsetor($page_type['name'], null)
+		'id' => Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC),
+		'name' => Base_Cnc::ifsetor($page_type['name'], null)
 	));
 	
 	// validate it

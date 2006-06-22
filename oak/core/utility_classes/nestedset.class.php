@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * $Id: nestedset.class.php 41 2006-04-22 16:18:57Z andreas $
+ * $Id$
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -143,7 +143,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					
 					// prepare bind params
 					$bind_params = array(
-						'old_sorting' => BASE_Cnc::ifsetor($result['sorting'], 0),
+						'old_sorting' => Base_Cnc::ifsetor($result['sorting'], 0),
 						'navigation' => $navigation
 					);
 					
@@ -168,7 +168,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					
 					// prepare bind params
 					$bind_params = array(
-						'old_sorting' => BASE_Cnc::ifsetor($result['sorting'], 0),
+						'old_sorting' => Base_Cnc::ifsetor($result['sorting'], 0),
 						'navigation' => $navigation
 					);
 					
@@ -176,7 +176,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					$this->base->db->execute($sql, $bind_params);
 					
 					// set sorting
-					$sorting = BASE_Cnc::ifsetor($result['sorting'], 0) + 1;
+					$sorting = Base_Cnc::ifsetor($result['sorting'], 0) + 1;
 				break;
 			default:
 				throw new Utility_NestedsetException("Unknown position constant supplied");

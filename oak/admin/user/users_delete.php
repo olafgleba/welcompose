@@ -87,10 +87,10 @@ try {
 		$BASE->db->begin();
 		
 		// detach user from groups
-		$USER->mapUserToGroup(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$USER->mapUserToGroup(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// detach user from project
-		$USER->detachUserFromProject(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$USER->detachUserFromProject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();

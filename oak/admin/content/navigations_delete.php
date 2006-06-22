@@ -87,7 +87,7 @@ try {
 		$BASE->db->begin();
 		
 		// delete row
-		$NAVIGATION->deleteNavigation(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$NAVIGATION->deleteNavigation(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();

@@ -87,7 +87,7 @@ try {
 		$BASE->db->begin();
 		
 		// delete row
-		$GROUP->deleteGroup(BASE_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$GROUP->deleteGroup(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();

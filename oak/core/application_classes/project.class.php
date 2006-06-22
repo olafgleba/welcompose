@@ -23,7 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * $Id: project.class.php 2 2006-03-20 11:43:20Z andreas $
+ * $Id$
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -393,7 +393,7 @@ public function initProjectAdmin ($user)
 		
 	// let's see if there's a valid project id embedded in the cookie
 	$current_project = $COOKIE->adminGetCurrentProject();
-	$current_project = BASE_Cnc::filterRequest($current_project, OAK_REGEX_NUMERIC);
+	$current_project = Base_Cnc::filterRequest($current_project, OAK_REGEX_NUMERIC);
 	
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
