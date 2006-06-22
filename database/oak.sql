@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 22.06.2006 21:50:43
--- Diagram Version: 34
+-- Created on: 22.06.2006 22:12:24
+-- Diagram Version: 36
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -54,6 +54,8 @@ TYPE=INNODB;
 CREATE TABLE `user_rights` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255),
+  `description` text,
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY(`id`)
 )
 TYPE=INNODB;
