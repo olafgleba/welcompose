@@ -115,15 +115,15 @@ try {
 	
 	// checkbox for author
 	$FORM->addElement('checkbox', 'author', gettext('Author'), null,
-		array('id' => 'user_author'));
+		array('id' => 'user_author', 'class' => 'chbx'));
 	$FORM->applyFilter('author', 'trim');
 	$FORM->applyFilter('author', 'strip_tags');
 	$FORM->addRule('author', gettext('The field author accepts only 0 or 1'),
 		'regex', OAK_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for active
-	$FORM->addElement('checkbox', 'active', gettext('active'), null,
-		array('id' => 'user_active'));
+	$FORM->addElement('checkbox', 'active', gettext('Active'), null,
+		array('id' => 'user_active', 'class' => 'chbx'));
 	$FORM->applyFilter('active', 'trim');
 	$FORM->applyFilter('active', 'strip_tags');
 	$FORM->addRule('active', gettext('The field active accepts only 0 or 1'),

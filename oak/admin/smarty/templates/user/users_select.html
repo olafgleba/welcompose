@@ -62,18 +62,20 @@ var form_attr = '{$form.attributes}';
 </div>
 <!-- topnavcon static eof -->
 
-<div id="brc"><p><a href="#">{i18n Users}</a> &#62; {i18n Users}</p></div>
+<div id="brc"><p>{i18n USERS}: {i18n Users}</p></div>
 
 <div id="content">
 
 <h1>{i18n Users}</h1>
 
 <div class="secnav474_nav_x"><a href="users_add.php">{i18n Add new}</a></div>
+<br class="clearb" />
 
 <div class="filter clearfix">
 {if !empty($groups)}
 <h2>{i18n Filter:}</h2>
 <form action="users_select.php" method="get">
+<fieldset>
 <label for="group">{i18n User Group}</label> 
 <select id="group" name="group">
 <option selected="selected">{i18n Please choose...}</option>
@@ -82,6 +84,7 @@ var form_attr = '{$form.attributes}';
 {/foreach}
 </select>
 <input type="submit" value="{i18n Filter}">
+</fieldset>
 </form>
 {/if}
 <!-- filter --></div>

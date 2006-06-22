@@ -141,15 +141,9 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'.back .noLine' : function(el){
-		el.onclick = function(){
-			top.window.history.go(-1);
-			return false;
-		}
-	},
 	'#lFloatInitSubmit' : function(el){
 		el.onclick = function(){
-			Element.show("lFloatIndicator");
+			Element.show("indicator");
 		}
 	}
 

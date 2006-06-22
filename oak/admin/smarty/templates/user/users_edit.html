@@ -62,7 +62,7 @@ var form_attr = '{$form.attributes}';
 </div>
 <!-- topnavcon static eof -->
 
-<div id="brc"><p><a href="#">&nbsp;{i18n Users}</a> &#62; <a href="users_select.php">{i18n Users}</a> &#62; {i18n Edit User}</p></div>
+<div id="brc"><p>{i18n USERS}: <a href="users_select.php">{i18n Users}</a> &#62; {i18n Edit User}</p></div>
 
 <div id="content">
 
@@ -111,10 +111,10 @@ var form_attr = '{$form.attributes}';
 {$form.password.html}<span class="validate" id="user_password_container"></span></label>
 
 <label class="cont" for="user_author"><span class="bez">{$form.author.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
-{$form.author.html}<span class="validate" id="user_author_container"></span></label>
+{$form.author.html}</label>
 
 <label class="cont" for="user_active"><span class="bez">{$form.active.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
-{$form.active.html}<span class="validate" id="user_active_container"></span></label>
+{$form.active.html}</label>
 
 {$form.submit.html}
 

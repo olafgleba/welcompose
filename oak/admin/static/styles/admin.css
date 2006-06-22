@@ -611,11 +611,12 @@ label {
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 680px;
+width: 695px;
 margin: 15px 0 0 0;
 }
 label.cont {
 margin: 5px 0;
+padding: 5px 0 0 0;
 }
 label span.bez {
 display: block; 
@@ -635,6 +636,9 @@ background: #fff;
 }
 input.medium, input.w200 {
 width: 200px;
+}
+input.w20 {
+width: 20px;
 }
 input.long, input.w300 {
 float: left;
@@ -687,7 +691,7 @@ cursor: pointer;
 #content span.validate {
 float: left;
 display: block; 
-width: 225px;
+width: 240px;
 height: 1.5em;
 line-height: 1.5em;
 padding-left: 5px;
