@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Users}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript">
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>{i18n Oak}</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="users"}
+
+{include file="_inc_projects_load.html" go_back_area="user" go_back_file="users_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic" class="f9">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul id="topsubnav">
+<li class="on">{i18n Users}<span></span></li>
+<li><a href="groups_select.php">{i18n Groups}</a><span></span></li>
+</ul>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+</div>
+<!-- topnavcon static eof -->
+
+<div id="brc"><p><a href="#">{i18n Users}</a> &#62; {i18n Users}</p></div>
+
+<div id="content">
+
+<h1>{i18n Users}</h1>
+
+<div class="secnav474_nav_x"><a href="users_add.php">{i18n Add new}</a></div>
+
+<div class="filter clearfix">
+{if !empty($groups)}
+<h2>{i18n Filter:}</h2>
+<form action="users_select.php" method="get">
+<label for="group">{i18n User Group}</label> 
+<select id="group" name="group">
+<option selected="selected">{i18n Please choose...}</option>
+{foreach from=$groups item=_group}
+<option value="{$_group.id|escape:"htmlall"}">{$_group.name|escape:"htmlall"}</option>
+{/foreach}
+</select>
+<input type="submit" value="{i18n Filter}">
+</form>
+{/if}
+<!-- filter --></div>
+
+<table summary="{i18n User List}" class="user">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="230" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page">{i18n E-mail} <span class="az"></span> <span class="za"></span></th>
+<th class="email">{i18n Group}</th>
+<th class="proj">{i18n Project} <span class="az"></span> <span class="za"></span></th>
+<th class="proj">{i18n Author} <span class="az"></span> <span class="za"></span></th>
+<th class="proj">{i18n Active} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$users item=_user}
+<tr>
+<td>{$_user.email|escape:"htmlall"}</td>
+<td>{$_user.group_name|escape:"htmlall"|nl2br}</td>
+<td>{$_user.project_name|escape:"htmlall"|nl2br}</td>
+<td>{if $_user.author}{i18n yes}{else}{i18n no}{/if}</td>
+<td>{if $_user.active}{i18n yes}{else}{i18n no}{/if}</td>
+{if $_user.editable}
+<td><a class="edit" href="users_edit.php?id={$_user.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="users_delete.php?id={$_user.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+{else}
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+{/if}
+{/foreach}
+</table>
+
+<!-- content --></div>
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

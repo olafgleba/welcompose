@@ -68,6 +68,14 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
+			case 'user_email':
+					$reg = OAK_REGEX_EMAIL;
+					$desc = gettext('Invalid e-mail address');
+				break;
+			case 'user_password':
+					$reg = OAK_REGEX_PASSWORD;
+					$desc = gettext('Five characters or more, no whitespace');
+				break;
 			default :
 				$reg = null;
 				$desc = null;

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Add User}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+ 
+<script type="text/javascript">
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>{i18n Oak}</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="users"}
+
+{include file="_inc_projects_load.html" go_back_area="user" go_back_file="users_add.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic" class="f9">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul id="topsubnav">
+<li><a href="users_select.php" class="on">{i18n Users}<span></span></a></li>
+<li><a href="groups_select.php">{i18n Groups}<span></span></a></li>
+</ul>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+</div>
+<!-- topnavcon static eof -->
+
+<div id="brc"><p><a href="#">&nbsp;{i18n Users}</a> &#62; <a href="users_select.php">{i18n Users}</a> &#62; {i18n Add User}</p></div>
+
+<div id="content">
+
+<h1>{i18n Add User}</h1>
+
+<div class="secnav710_nav_x"><a href="users_select.php">{i18n Users}</a></div>
+<br class="clearb" />
+
+{if !empty($form.errors)}
+<div class="hli_bx d1">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli_bx --></div>
+{/if}
+
+{if $session.response == 1}
+<div id="rp">
+<div class="hli_rp d1">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<h1>{i18n Your input was successfully saved!}</h1>
+<p>{i18n To apply further input, please repeat fill in the form}</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- hli_rp --></div>
+<!-- rp --></div>
+{/if}
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
+
+<fieldset class="topbg">
+
+{$form.hidden}
+
+<label class="cont" for="user_group"><span class="bez">{$form.group.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
+{$form.group.html}</label>
+
+<label class="cont" for="user_email"><span class="bez">{$form.email.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
+{$form.email.html}<span class="validate" id="user_email_container"></span></label>
+
+<label class="cont" for="user_password"><span class="bez">{$form.password.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
+{$form.password.html}<span class="validate" id="user_password_container"></span></label>
+
+<label class="cont" for="user_author"><span class="bez">{$form.author.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
+{$form.author.html}<span class="validate" id="user_author_container"></span></label>
+
+<label class="cont" for="user_active"><span class="bez">{$form.active.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" /></a></span></span>
+{$form.active.html}<span class="validate" id="user_active_container"></span></label>
+
+{$form.submit.html}
+
+</fieldset>
+</form>
+
+<!-- content --></div>
+
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

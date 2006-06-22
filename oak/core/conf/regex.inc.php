@@ -106,4 +106,17 @@ define("OAK_REGEX_FILE_NAME_PHP", '=^([a-z0-9-_]+)\.php$=i');
 // Defines regular expression for strings containing
 // a group name
 define("OAK_REGEX_GROUP_NAME", "=^(?!OAK)([A-Z0-9]+)_([A-Z0-9_]+)$=");
+
+// Defines regular expression for strings containing 
+// only zero or one.
+define("OAK_REGEX_ZERO_OR_ONE", "=^[0-1]$=");
+
+// Defines regular expression for strings containing
+// a user password
+define("OAK_REGEX_PASSWORD", "=^\S{5,}$=");
+
+// Defines regular expression for strings containing
+// an email address
+define("OAK_REGEX_EMAIL", "=^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+(\.[\w\!\#\$\%\&\'\*\+\-\~\/\^\`\|\{\}]+)*))@((\[(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))\])|(((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9]))\.((25[0-5])|(2[0-4][0-9])|([0-1]?[0-9]?[0-9])))|((([A-Za-z0-9\-])+\.)+[A-Za-z\-]+))$=");
+
 ?>
