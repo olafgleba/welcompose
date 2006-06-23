@@ -122,7 +122,7 @@ try {
 	
 	// multi select for rights
 	$multi_select = $FORM->addElement('select', 'rights', gettext('Rights'), $rights,
-		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 5));
+		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 20));
 	$multi_select->setSelected($selected_rights);
 	
 	// submit button
