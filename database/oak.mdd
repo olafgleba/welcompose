@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
 <DBMODEL Version="1.0" TYPE="MySQL">
-<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="36" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-06-22 22:12:05" Description="" Annotation="" ZoomFac="100.00" XPos="974" YPos="1350" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
+<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="39" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-06-23 23:26:53" Description="" Annotation="" ZoomFac="100.00" XPos="985" YPos="800" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
 <DATABASE Name="oak" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
 
 <STAMPS>
@@ -439,20 +439,27 @@
 </COLUMN>
 <COLUMN ID="1084" Name="user" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1085" Name="content_raw" DomainID="-1" Pos="3" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="8734" Name="status" DomainID="-1" Pos="3" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1086" Name="content" DomainID="-1" Pos="4" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="1085" Name="content_raw" DomainID="-1" Pos="4" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1087" Name="edited" DomainID="-1" Pos="5" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+<COLUMN ID="1086" Name="content" DomainID="-1" Pos="5" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1088" Name="date_modified" DomainID="-1" Pos="6" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="8735" Name="original_raw" DomainID="-1" Pos="6" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1089" Name="date_added" DomainID="-1" Pos="7" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="8736" Name="original" DomainID="-1" Pos="7" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="1087" Name="edited" DomainID="-1" Pos="8" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+</COLUMN>
+<COLUMN ID="1088" Name="date_modified" DomainID="-1" Pos="9" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="1089" Name="date_added" DomainID="-1" Pos="10" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
 </COLUMNS>
 <REFERENCES_END>
 <REFERENCE_END ID="1102" />
 <REFERENCE_END ID="1107" />
+<REFERENCE_END ID="8742" />
 </REFERENCES_END>
 <INDEXES>
 <INDEX ID="1090" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
@@ -468,6 +475,11 @@
 <INDEX ID="1178" Name="user" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
 <INDEXCOLUMN ID="1084" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="8737" Name="status" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="8734" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDEXES>
@@ -1298,6 +1310,24 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
+<ENTITY ID="8738" Name="community_blog_comment_statuses" XPos="1240" YPos="1370" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="8739" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="8740" Name="name" DomainID="-1" Pos="1" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_BEGIN>
+<REFERENCE_BEGIN ID="8742" />
+</REFERENCES_BEGIN>
+<INDEXES>
+<INDEX ID="8741" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="8739" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
 </ENTITIES>
 <REFERENCES>
 <REFERENCE ID="1022" Name="content_pages.type2content_page_types.id" SOURCE="1016" DESTINATION="1000" FKIDS="1017=1007\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1019" AutoColumnIDs="" />
@@ -1353,6 +1383,7 @@
 <REFERENCE ID="8713" Name="media_documents.category2media_document_categories" SOURCE="8708" DESTINATION="1160" FKIDS="8709=8712\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8711" AutoColumnIDs="" />
 <REFERENCE ID="8729" Name="application_projects.id2user_rights.id" SOURCE="8649" DESTINATION="8720" FKIDS="8650=8723\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8652" AutoColumnIDs="" />
 <REFERENCE ID="8731" Name="user_rights.id2application_projects.id" SOURCE="8458" DESTINATION="8720" FKIDS="8459=8722\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
+<REFERENCE ID="8742" Name="community_blog_comments2community_blog_comment_statuses" SOURCE="8738" DESTINATION="1082" FKIDS="8739=8734\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="2" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8741" AutoColumnIDs="8743\n" />
 </REFERENCES>
 <NOTES>
 </NOTES>
