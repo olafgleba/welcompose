@@ -408,7 +408,7 @@ public function mapUserToGroup ($user, $group = null)
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
 	}
-	if (!empty($group) && !is_numeric($group)) {
+	if (!empty($group) || !is_numeric($group)) {
 		throw new User_UserException("Input for parameter group is expected to bei either null or numeric");
 	}
 	

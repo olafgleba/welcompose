@@ -335,6 +335,109 @@ public function selectGroups ($params = array())
 }
 
 /**
+ * Maps groups to one or more rights. Takes group id as first argument,
+ * a list of right ids as second argument. Returns boolean true.
+ *
+ * If the list of right ids is omitted, the group will be detached from
+ * all groups.
+ *
+ * @throws User_GroupException
+ * @param int group id
+ * @param array Right ids
+ * @return bool
+ */
+public function mapGroupToRights ($group, $rights = array())
+{
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException("Input for parameter group is expected to be numeric");
+	}
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException("Input for parameter group is expected to be numeric");
+	}
+	
+	// detach group from all rights
+	$sql = "
+		DELETE FROM
+			 ".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		USING
+			`user_groups2user_rights`
+		LEFT JOIN
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		ON
+			`user_groups2user_rights`.`group` = `user_groups`.`id`
+		WHERE
+			`user_groups2user_rights`.`group` = :group
+		AND
+			`user_groups`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'group' => (int)$group,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query
+	$this->base->db->execute($sql, $bind_params);
+	
+	// add new links if necessary
+	foreach ($rights as $_right) {
+		
+		// input check
+		if (!empty($_right) && is_numeric($_right)) {
+			
+			// prepare sql data
+			$sqlData = array(
+				'group' => (int)$group,
+				'right' => (int)$_right
+			);
+			
+			// insert new link
+			$this->base->db->insert(OAK_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Selects links between the given group and their associated rights. Takes
+ * the group id as first argument. Returns array.
+ *
+ * @throws User_GroupException
+ * @param int Group id
+ * @return array
+ */
+public function selectGroupToRightsMap ($group)
+{
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException("Input for parameter group is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`id`,
+			`group`,
+			`right`
+		FROM
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		WHERE
+			`group` = :group
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'group' => $group
+	);
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
  * Tests given group name for uniqueness. Takes the group name as
  * first argument and an optional group id as second argument. If
  * the group id is given, this group won't be considered when checking

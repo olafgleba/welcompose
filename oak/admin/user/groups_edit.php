@@ -69,13 +69,29 @@ try {
 	// load group class
 	/* @var $GROUP User_Group */
 	$GROUP = load('user:group');
-		
+	
+	// load right class
+	/* @var $RIGHT User_Right */
+	$RIGHT = load('user:right');
+	
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// get group
 	$group = $GROUP->selectGroup(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		
+	// prepare rights
+	$rights = array();
+	foreach ($RIGHT->selectRights() as $_right) {
+		$rights[(int)$_right['id']] = htmlspecialchars($_right['name']);
+	}
+	
+	// get selected rights
+	$selected_rights = array();
+	foreach ($GROUP->selectGroupToRightsMap(Base_Cnc::ifsetor($group['id'], null)) as $_link) {
+		$selected_rights[] = $_link['right'];
+	}
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('group', 'post');
@@ -98,10 +114,16 @@ try {
 	$FORM->addRule('name', gettext('A group with this name already exists'), 'testForNameUniqueness',
 		$FORM->exportValue('id'));
 	
+	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
 		array('id' => 'group_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
+	
+	// multi select for rights
+	$multi_select = $FORM->addElement('select', 'rights', gettext('Rights'), $rights,
+		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 5));
+	$multi_select->setSelected($selected_rights);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Edit group'),
@@ -186,6 +208,9 @@ try {
 			
 			// execute operation
 			$GROUP->updateGroup($FORM->exportValue('id'), $sqlData);
+			
+			// map group to rights
+			$GROUP->mapGroupToRights($FORM->exportValue('id'), $FORM->exportValue('rights'));
 			
 			// commit
 			$BASE->db->commit();

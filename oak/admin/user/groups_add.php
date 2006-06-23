@@ -69,10 +69,20 @@ try {
 	// load group class
 	/* @var $GROUP User_Group */
 	$GROUP = load('user:group');
-		
+	
+	// load right class
+	/* @var $RIGHT User_Right */
+	$RIGHT = load('user:right');
+	
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	
+	// prepare rights
+	$rights = array();
+	foreach ($RIGHT->selectRights() as $_right) {
+		$rights[(int)$_right['id']] = htmlspecialchars($_right['name']);
+	}
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('group', 'post');
@@ -87,10 +97,17 @@ try {
 	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', OAK_REGEX_GROUP_NAME);
 	$FORM->addRule('name', gettext('A group with this name already exists'), 'testForNameUniqueness');
 	
+	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
 		array('id' => 'group_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
+	
+	// multi select for rights
+	$FORM->addElement('select', 'rights', gettext('Rights'), $rights,
+		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 5));
+	$FORM->applyFilter('rights', 'trim');
+	$FORM->applyFilter('rights', 'strip_tags');
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add group'),
@@ -170,7 +187,10 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$GROUP->addGroup($sqlData);
+			$group_id = $GROUP->addGroup($sqlData);
+			
+			// map group to rights
+			$GROUP->mapGroupToRights($group_id, $FORM->exportValue('rights'));
 			
 			// commit
 			$BASE->db->commit();
