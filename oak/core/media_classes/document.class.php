@@ -245,7 +245,7 @@ public function selectDocuments ($params = array())
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'order_macro':
-					$$_key = (int)$_value;
+					$$_key = (string)$_value;
 				break;
 			case 'start':
 			case 'limit':
