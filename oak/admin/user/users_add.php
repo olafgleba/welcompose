@@ -198,8 +198,6 @@ try {
 		$sqlData = array();
 		$sqlData['email'] = $FORM->exportValue('email');
 		$sqlData['secret'] = crypt($FORM->exportValue('password'));
-		$sqlData['author'] = (string)intval($FORM->exportValue('author'));
-		$sqlData['active'] = (string)intval($FORM->exportValue('active'));
 		$sqlData['editable'] = "1";
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
@@ -219,7 +217,8 @@ try {
 			$USER->mapUserToGroup($user_id, $FORM->exportValue('group'));
 			
 			// map user to project
-			$USER->mapUserToProject($user_id);
+			$USER->mapUserToProject($user_id, (int)$FORM->exportValue('active'),
+				(int)$FORM->exportValue('author'));
 			
 			// commit
 			$BASE->db->commit();

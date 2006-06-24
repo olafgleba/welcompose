@@ -183,11 +183,11 @@ public function selectUser ($id)
 			`user_users`.`id` AS `id`,
 			`user_users`.`email` AS `email`,
 			`user_users`.`secret` AS `secret`,
-			`user_users`.`author` AS `author`,
 			`user_users`.`editable` AS `editable`,
-			`user_users`.`active` AS `active`,
 			`user_users`.`date_modified` AS `date_modified`,
 			`user_users`.`date_added` AS `date_added`,
+			`user_users2application_projects`.`author` AS `author`,
+			`user_users2application_projects`.`active` AS `active`,
 			`user_groups`.`id` AS `group_id`,
 			`user_groups`.`project` AS `group_project`,
 			`user_groups`.`name` AS `group_name`,
@@ -311,9 +311,9 @@ public function selectUsers ($params = array())
 			`user_users`.`id` AS `id`,
 			`user_users`.`email` AS `email`,
 			`user_users`.`secret` AS `secret`,
-			`user_users`.`author` AS `author`,
 			`user_users`.`editable` AS `editable`,
-			`user_users`.`active` AS `active`,
+			`user_users2application_projects`.`active` AS `active`,
+			`user_users2application_projects`.`author` AS `author`,
 			`user_users`.`date_modified` AS `date_modified`,
 			`user_users`.`date_added` AS `date_added`,
 			`user_groups`.`id` AS `group_id`,
@@ -408,7 +408,7 @@ public function mapUserToGroup ($user, $group = null)
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
 	}
-	if (!empty($group) || !is_numeric($group)) {
+	if (!empty($group) && !is_numeric($group)) {
 		throw new User_UserException("Input for parameter group is expected to bei either null or numeric");
 	}
 	
@@ -453,16 +453,16 @@ public function mapUserToGroup ($user, $group = null)
 }
 
 /**
- * Maps user to the current project. Takes user id as first argument.
- * Returns link id. To detach a user from a project, see
- * User_User::detachUserFromProject().
+ * Maps user to the current project. Takes user id as first argument, activity and
+ * author switch as second and third argument. Returns link id. To detach a user from
+ * a project, see User_User::detachUserFromProject().
  * 
  * @throws User_UserException
  * @param int User id
  * @param int Group id
  * @return int Link id
  */
-public function mapUserToProject ($user)
+public function mapUserToProject ($user, $active = 1, $author = 0)
 {
 	// input check
 	if (empty($user) || !is_numeric($user)) {
@@ -475,7 +475,9 @@ public function mapUserToProject ($user)
 	// prepare sql data
 	$sqlData = array(
 		'user' => (int)$user,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => OAK_CURRENT_PROJECT,
+		'active' => (((int)$active === 1) ? "1" : "0"),
+		'author' => (((int)$author === 1) ? "1" : "0")
 	);
 	
 	// create new mapping
@@ -563,6 +565,50 @@ public function testForUniqueEmail ($email, $id = null)
 		return true;
 	}
 	
+}
+
+/**
+ * Finds out, whether a user is deletable or not. Takes the user id as first
+ * argument. Returns bool.
+ *
+ * @throws User_UserException
+ * @param int User id
+ * @return bool
+ */
+public function isDeletable ($user)
+{
+	// check input
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException("Input for parameter user is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users`.`id` = :user
+		AND 
+			`user_users`.`editable` = '1'
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => (int)$user
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) < 1) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 public function initUserAdmin ()

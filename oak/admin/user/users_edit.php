@@ -212,9 +212,7 @@ try {
 		$sqlData['email'] = $FORM->exportValue('email');
 		if ($FORM->exportValue('password') != "") {
 			$sqlData['secret'] = crypt($FORM->exportValue('password'));
-		}
-		$sqlData['author'] = (string)intval($FORM->exportValue('author'));
-		$sqlData['active'] = (string)intval($FORM->exportValue('active'));
+		}		
 		
 		// check sql data
 		$HELPER = load('utility:helper');
@@ -232,7 +230,8 @@ try {
 			$USER->mapUserToGroup($FORM->exportValue('id'), $FORM->exportValue('group'));
 			
 			// map user to project
-			$USER->mapUserToProject($FORM->exportValue('id'));
+			$USER->mapUserToProject($FORM->exportValue('id'), (int)$FORM->exportValue('active'),
+				(int)$FORM->exportValue('author'));
 			
 			// commit
 			$BASE->db->commit();

@@ -92,6 +92,11 @@ try {
 		// detach user from project
 		$USER->detachUserFromProject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
+		// if the user is deletable, remove it
+		if ($USER->isDeletable(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC))) {
+			$USER->deleteUser(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		}
+		
 		// commit transaction
 		$BASE->db->commit();
 	} catch (Exception $e) {
