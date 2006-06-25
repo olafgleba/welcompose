@@ -54,6 +54,7 @@ define("OAK_DB_CONTENT_SIMPLE_PAGE", "content_simple_page");
 
 // media table aliases
 define("OAK_DB_MEDIA_DOCUMENTS", "media_documents");
+define("OAK_DB_MEDIA_DOCUMENT_CATEGORIES", "media_document_categories");
 define("OAK_DB_MEDIA_IMAGES", "media_images");
 define("OAK_DB_MEDIA_IMAGE_THUMBNAILS", "media_image_thumbnails");
 
