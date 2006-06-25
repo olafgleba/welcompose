@@ -36,9 +36,7 @@ var form_attr = '{$form.attributes}';
 <div id="container">
 
 <div id="logo">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <p>{i18n Oak}</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- logo --></div>
 
 {include file="_inc_topnav.html" area="users"}
@@ -52,14 +50,12 @@ var form_attr = '{$form.attributes}';
 <!-- topnavcon dynamic eof -->
 
 <!-- topnavcon static -->
-<div id="topsubnavconstatic" class="f9">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<div id="topsubnavconstatic"">
 <ul id="topsubnav">
 <li><a href="users_select.php">{i18n Users}<span></span></a></li>
 <li><a href="groups_select.php">{i18n Groups}<span></span></a></li>
 <li><a href="rights_select.php" class="on">{i18n Rights}<span></span></a></li>
 </ul>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 </div>
 <!-- topnavcon static eof -->
 
@@ -73,24 +69,20 @@ var form_attr = '{$form.attributes}';
 <br class="clearb" />
 
 {if !empty($form.errors)}
-<div class="hli_bx d1">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<div class="hli_bx">
 <ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- hli_bx --></div>
 {/if}
 
 {if $session.response == 1}
 <div id="rp">
-<div class="hli_rp d1">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<div class="hli_rp">
 <h1>{i18n Your input was successfully saved!}</h1>
 <p>{i18n To apply further input, please repeat fill in the form}</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- hli_rp --></div>
 <!-- rp --></div>
 {/if}
