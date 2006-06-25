@@ -14,10 +14,20 @@ text-align: center;
 }
 
 h1 {
+position: relative;
 font-size: 1.5em;
 font-weight: normal;
 color: #0c3;
 margin: 10px 0 15px 10px;
+}
+h1 .users {
+position: absolute;
+left: 870px;
+top: 0.3em;
+display: block;
+height: 56px;
+width: 60px;
+background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
 h2, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
@@ -62,13 +72,14 @@ position: absolute;
 top: 19px;
 left: 767px;
 width: 200px;
-background: transparent; 
+background: transparent url(../img/bg_logo.gif) 0 0 repeat-y; 
+padding-top: 3px;
 }
 #logo p {
 font-weight: bold;
 color: #fff;
-background: #0c3;
-padding-left: 7px;
+background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+padding: 0 0 3px 7px;
 }
 #logo .xtop, 
 #logo .xbottom {
@@ -118,11 +129,14 @@ position: absolute;
 top: 99px;
 left: 14px;
 width: 956px;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topnavcon_bot.gif) left bottom no-repeat;
 }
 #topnav {
 list-style: none;
 width: 956px;
-background: #efefef;
+padding-top: 3px;
+background: #efefef url(../img/bg_topnav.gif) 0 0 no-repeat;
 height: 1.5em;
 }
 #topnav li {
@@ -223,11 +237,14 @@ background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
 #topsubnavcon {
 width: 956px;
 padding-top: 2em;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
 }
 #topsubnav {
 list-style: none;
 width: 956px;
-background: #f9f9f9;
+padding-top: 3px;
+background: #f9f9f9 url(../img/bg_topsubnav.gif) 0 0 no-repeat;
 height: 1.25em;
 }
 #topsubnavdynamic {
@@ -273,6 +290,8 @@ text-decoration: none;
 #topsubnavconstatic {
 width: 956px;
 padding-top: 2em;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
 }
 /* TOPSUBNAVIGATION STATIC EOF*/
 
@@ -320,12 +339,14 @@ background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
 .hli {
 display: block;
 width: 474px;
+padding: 3px 0 0 0;
+background: transparent url(../img/bg_hli474_top.gif) 0 0 no-repeat;
 }
 .hli h2 {
-background: #efefef;
+background: transparent url(../img/bg_hli474_bot.gif) left bottom no-repeat;
 width: 474px;
 wid\th: 464px;
-padding: 1px 0 1px 10px;
+padding: 0 0 4px 10px;
 }
 .hli_bx {
 display: block;
@@ -539,7 +560,8 @@ margin: 0 1px;
 
 /* FILTER (PROJECTS/GROUPS) START */
 .filter {
-margin: 10px 0 0 10px;
+margin: 0 0 0 10px;
+padding: 10px 0 0 0;
 }
 .filter h2 {
 display: block;
@@ -599,7 +621,7 @@ padding: 0 10px 10px 10px;
 form.botbg {
 width: 710px;
 padding-bottom: 20px;
-margin-top: 20px;
+padding-top: 20px;
 background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
@@ -611,7 +633,7 @@ label {
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 695px;
+width: 710px;
 margin: 15px 0 0 0;
 }
 label.cont {
@@ -634,28 +656,28 @@ padding: 2px 2px;
 color: #000;
 background: #fff;
 }
-input.medium, input.w200 {
+input.w200 {
 width: 200px;
 }
 input.w20 {
 width: 20px;
 }
-input.long, input.w300 {
+input.w300 {
 float: left;
 width: 300px;
 }
-input.title, input.w580 {
+input.w580 {
 width: 580px;
 font-weight: bold;
 }
-textarea.contents, textarea.w575h400 {
+textarea.w575h400 {
 border: 1px solid #666;
 width: 575px;
 height: 400px;
 margin: 0 0 20px 0;
 padding: 5px;
 }
-textarea.short50, textarea.w298h50 {
+textarea.w298h50 {
 float: left;
 border: 1px solid #666;
 font: 100% Arial, Helvetica, sans-serif;
@@ -663,6 +685,9 @@ width: 298px;
 height: 50px;
 padding: 3px;
 margin: 0;
+}
+select.multisel {
+width: 300px;
 }
 .flselect {
 margin: 1px 5px 0 0;

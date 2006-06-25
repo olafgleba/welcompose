@@ -14,19 +14,6 @@ font-size: 1px;
 line-height: 1px;
 border: 0 none;
 }
-.page {width: 475px;}
-.down {width: 32px;}
-.up {width: 32px;}
-.new {width: 90px;}
-.edit {width: 90px;}
-.delete {width: 90px;}
-
-.user .page {width: 150px;}
-.user .email {width: 230px;}
-.user .proj {width: 175px;}
-.user .ugrp {width: 175px;}
-.user .edit {width: 70px;}
-.user .delete {width: 70px;}
 
 a.down, a.up, a.new, a.edit, a.delete {
 display: block;
@@ -46,11 +33,9 @@ a.up:hover, a.up:active, a.up:focus {
 background: #fff url(../img/icons/up.gif) 0 -44px no-repeat;
 }
 a.new:link, a.new:visited {
-margin-left: 20px;
 background: #fff url(../img/icons/page-add.gif) 0 0 no-repeat;
 }
 a.new:hover, a.new:active, a.new:focus {
-margin-left: 20px;
 background: #fff url(../img/icons/page-add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
