@@ -88,7 +88,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add image category'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submitbut200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

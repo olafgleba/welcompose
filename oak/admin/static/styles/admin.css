@@ -335,6 +335,13 @@ width: 956px;
 height: 22px;
 background: transparent url(../img/bg_secnav710_nav_x.gif) 0 0 no-repeat;
 }
+/* HEADLINE LONG NO CONTENT BUT LONG NAV ON RIGHT SIDE */
+.secnav710_navplus_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav710_navplus_x.gif) 0 0 no-repeat;
+}
 /* HEADLINE SHORT NO CONTENT BU NAV ON RIGHT SIDE */
 .secnav474_nav_x {
 float: right;
@@ -342,7 +349,8 @@ width: 956px;
 height: 22px;
 background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
 }
-.secnav710_nav_x a:link, .secnav710_nav_x a:visited, 
+.secnav710_nav_x a:link, .secnav710_nav_x a:visited,
+.secnav710_navplus_x a:link, .secnav710_navplus_x a:visited,
 .secnav474_nav_x a:link, .secnav474_nav_x a:visited {
 margin: 0 0 0 110px;
 line-height: 22px;
@@ -351,7 +359,8 @@ margin-left: 725px;
 padding-left: 25px;
 background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
 }
-.secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus, 
+.secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus,
+.secnav710_navplus_x a:hover, .secnav710_navplus_x a:active, .secnav710_navplus_x a:focus,
 .secnav474_nav_x a:hover, .secnav474_nav_x a:active, .secnav474_nav_x a:focus {
 color: #00AE2C;
 background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
@@ -513,6 +522,19 @@ text-align: left;
 background: #666 url(../img/submitbut140.gif) no-repeat;
 color: #fff;
 width: 140px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 10px  0 0 140px;
+cursor: pointer;
+}
+input.submitbut200 {
+text-align: left;
+background: #666 url(../img/submitbut200.gif) no-repeat;
+color: #fff;
+width: 200px;
 height: 20px;
 font-size: 80%;
 font-weight: bold;

@@ -100,7 +100,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update document category'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submitbut200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
