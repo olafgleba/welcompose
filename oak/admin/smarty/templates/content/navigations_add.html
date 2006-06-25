@@ -69,21 +69,19 @@ var form_attr = '{$form.attributes}';
 <br class="clearb" />
 
 {if !empty($form.errors)}
-<div class="hli_bx">
+<div id="error">
 <ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-<!-- hli_bx --></div>
+<!-- error --></div>
 {/if}
 
 {if $session.response == 1}
 <div id="rp">
-<div class="hli_rp">
 <h1>{i18n Your input was successfully saved!}</h1>
 <p>{i18n To apply further input, please repeat fill in the form}</p>
-<!-- hli_rp --></div>
 <!-- rp --></div>
 {/if}
 

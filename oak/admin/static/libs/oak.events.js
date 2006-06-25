@@ -141,9 +141,15 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'#lFloatInitSubmit' : function(el){
+	'#indicator' : function(el){
 		el.onclick = function(){
 			Element.show("indicator");
+		}
+	},
+	'.slide' : function(el){
+		el.onclick = function(){
+			slide(this);
+			return false;
 		}
 	}
 

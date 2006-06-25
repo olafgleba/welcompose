@@ -69,22 +69,13 @@ var form_attr = '{$form.attributes}';
 <br class="clearb" />
 
 {if !empty($form.errors)}
-<div class="hli_bx">
+<div id="error">
 <ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-<!-- hli_bx --></div>
-{/if}
-
-{if $session.response == 1}
-<div id="rp">
-<div class="hli_rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
-<!-- hli_rp --></div>
-<!-- rp --></div>
+<!-- error --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>
@@ -97,12 +88,10 @@ var form_attr = '{$form.attributes}';
 <label class="cont" for="group_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}<span class="validate" id="group_name_container"></span></label>
 
-<label class="cont" for="group_description"><span class="bez">{$form.description.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04" for="group_description"><span class="bez">{$form.description.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.description.html}</label>
 
-<br class="clearb" />
-
-<label class="cont" for="group_rights"><span class="bez">{$form.rights.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h13" for="group_rights"><span class="bez">{$form.rights.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.rights.html}</label>
 
 {$form.submit.html}

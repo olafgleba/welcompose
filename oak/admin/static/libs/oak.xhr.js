@@ -77,7 +77,7 @@ function xhrNavDone(url, target)
  */
 function xhrHelp(url, target)
 {
-	try {	
+	try {
 		if (window.XMLHttpRequest) {
 			req = new XMLHttpRequest();
 	 	} else if (window.ActiveXObject) {
@@ -108,7 +108,7 @@ function xhrHelpDone(url, target)
 				new Insertion.After($(target).parentNode, req.responseText);				
 				var target_after = $(target).parentNode.nextSibling;
 				Element.hide(target_after);
-				new Effect.Appear(target_after, {duration: 0.60});
+				new Effect.Appear(target_after, {duration: 0.8});
 				Behaviour.apply();
 			} else {
 	  			throw new devError(req.statusText);
@@ -118,5 +118,8 @@ function xhrHelpDone(url, target)
 		applyError(e);
 	}
 }
+
+
+
 
 

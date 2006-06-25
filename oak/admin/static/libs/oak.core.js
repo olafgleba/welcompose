@@ -228,3 +228,54 @@ function getHeaderVars ()
 		form_id = content.substring(4);
 	}
 }
+
+
+
+
+function slide (elem)
+{
+	var build = elem.parentNode.parentNode;
+	var target = build.nextSibling;
+	var newtarget = target.nextSibling;
+	
+	//build.style.backgroundColor = 'red';
+	
+	//alert (target.getAttribute('class'));
+	
+	Element.show(newtarget);
+	//new Effect.SlideDown(target, {duration: 0.60});
+	Behaviour.apply();
+
+	
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

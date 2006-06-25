@@ -211,6 +211,12 @@ background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
 width: 956px;
 padding-top: 2em;
 padding-bottom: 3px;
+background: transparent url(../img/bg_topsubnavcon_active_bot.gif) left bottom no-repeat;
+}
+#topsubnavconstatic {
+width: 956px;
+padding-top: 2em;
+padding-bottom: 3px;
 background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
 }
 #topsubnav {
@@ -223,7 +229,8 @@ height: 1.25em;
 #topsubnavdynamic {
 list-style: none;
 width: 956px;
-background: #fffde6;
+padding-top: 3px;
+background: #fffde6 url(../img/bg_topsubnav_active.gif) 0 0 no-repeat;;
 height: 1.25em;
 }
 #topsubnav li, #topsubnavdynamic li {
@@ -259,14 +266,6 @@ text-decoration: none;
 }
 /* TOPSUBNAVIGATION EOF */
 
-/* TOPSUBNAVIGATION STATIC START */
-#topsubnavconstatic {
-width: 956px;
-padding-top: 2em;
-padding-bottom: 3px;
-background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
-}
-/* TOPSUBNAVIGATION STATIC EOF*/
 
 /* SEARCH START */
 #projects {
@@ -321,16 +320,7 @@ width: 474px;
 wid\th: 464px;
 padding: 0 0 4px 10px;
 }
-.hli_bx {
-display: block;
-width: 710px;
-margin-top: 20px;
-}
-.hli_rp {
-display: block;
-width: 710px;
-margin-top: 20px;
-}
+
 /* HEADLINE ON RIGHT BESIDES CONTENT */
 .secnav474_nonav_c {
 float: right;
@@ -400,30 +390,35 @@ line-height: 1.5em;
 /* FILTER (PROJECTS/GROUPS) EOF */
 
 /* ERRORS, RESPONSE START */
-ul.req {
+#error {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+#error ul.req {
 line-height: 1.2em;
 padding: 4px 15px;
-background: #d1e1f0;
 font-weight: bold;
 color: red;
 list-style-position: inside;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 #rp {
 display: block;
-background-color: transparent;
-margin: 0;
-padding: 0;
-}
-#rp h1, #rp p {
-margin: 0;
-padding: 10px 10px 0 10px;
-background-color: #d1e1f0;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 #rp h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
 color: red;
 }
 #rp p {
+margin: 0;
 padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 /* ERRORS, RESPONSE EOF */
 
@@ -449,6 +444,12 @@ margin: 15px 0 0 0;
 label.cont {
 margin: 5px 0;
 padding: 5px 0 0 0;
+}
+label.cont.h04 {
+height: 4.7em;
+}
+label.cont.h13 {
+height: 13em;
 }
 label span.bez {
 display: block; 
@@ -497,6 +498,7 @@ margin: 0;
 }
 select.multisel {
 width: 300px;
+border: 1px solid #666;
 }
 .flselect {
 margin: 1px 5px 0 0;

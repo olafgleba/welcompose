@@ -105,7 +105,7 @@ try {
 	
 	// multi select for rights
 	$FORM->addElement('select', 'rights', gettext('Rights'), $rights,
-		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 20));
+		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
 	$FORM->applyFilter('rights', 'trim');
 	$FORM->applyFilter('rights', 'strip_tags');
 	

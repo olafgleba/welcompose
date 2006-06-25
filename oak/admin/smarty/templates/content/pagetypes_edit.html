@@ -70,13 +70,13 @@ var form_attr = '{$form.attributes}';
 <br class="clearb" />
 
 {if !empty($form.errors)}
-<div class="hli_bx">
+<div id="error">
 <ul class="req">
 {foreach from=$form.errors item="error"}
 	<li>{$error}</li>
 {/foreach}
 </ul>
-<!-- hli_bx --></div>
+<!-- error --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>
