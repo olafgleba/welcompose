@@ -458,7 +458,7 @@ label.cont.h04 {
 height: 4.7em;
 }
 label.cont.h13 {
-height: 13em;
+height: 13.0em;
 }
 label span.bez {
 display: block; 
@@ -527,7 +527,7 @@ font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
-margin: 10px  0 0 140px;
+margin: 20px  0 0 140px;
 cursor: pointer;
 }
 input.submitbut200 {
@@ -540,7 +540,7 @@ font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
-margin: 10px  0 0 140px;
+margin: 20px  0 0 140px;
 cursor: pointer;
 }
 /* FORMS EOF */
@@ -593,3 +593,15 @@ height: 1%;
 clear: both;
 }
 /* DIVERSES EOF */
+
+
+/* TABLES SLIDES */
+.outer {
+visibility: collapse;
+background-color: transparent;
+}
+.inner {
+display: none;
+background-color: yellow;
+}
+/* TABLES SLIDES EOF */

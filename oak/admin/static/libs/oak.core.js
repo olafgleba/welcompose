@@ -213,8 +213,6 @@ function getHeaderVars ()
 /**
  * Get actual form name 
  * used: initLoad()
- * used: oak.events.js
- * find: behaviours.js -> .iHelp
  *
  */
  function getFormName (attr)
@@ -225,30 +223,67 @@ function getHeaderVars ()
 		// object -> string conversion
 		content = "" + content + "";
 		
+		// push var to the global scope
 		form_id = content.substring(4);
 	}
 }
 
 
-
-
-function slide (elem)
+/**
+ * Hide table(s) row(s)
+ * used : oak.events.js
+ *
+ * @param {var} elem actual element to process
+ */
+ function hidetblsettime (elem)
 {
-	var build = elem.parentNode.parentNode;
-	var target = build.nextSibling;
-	var newtarget = target.nextSibling;
-	
-	//build.style.backgroundColor = 'red';
-	
-	//alert (target.getAttribute('class'));
-	
-	Element.show(newtarget);
-	//new Effect.SlideDown(target, {duration: 0.60});
-	Behaviour.apply();
-
-	
+	// process outer table tr
+	elem.style.visibility = 'collapse';
+}
 
 
+
+/**
+ * Hide table(s) row(s) and inner div
+ * used : oak.events.js
+ *
+ * @param {string} elem actual element
+ */
+ function hidetbl (elem)
+{	
+	var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	
+	// e.g. <name_of_file>?id=<var>
+	var bid = getHref.split('id=');
+	
+	// push var to the global scope
+	obid = $('o_' + bid[1]);	
+
+	// process inner div
+	Effect.Fade('i_' + bid[1],{duration: 1.0});
+
+}
+
+
+/**
+ * Show table(s) row(s) and inner div
+ * used : oak.events.js
+ *
+ * @param {string} elem actual element
+ */
+ function showtbl (elem)
+{	
+	var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	
+	// e.g. <name_of_file>?id=<var>
+	var bid = getHref.split('id=');
+	
+	// process outer table tr
+	$('o_' + bid[1]).style.visibility = 'visible';
+	
+	// process inner div
+	Element.hide('i_' + bid[1]);
+	Effect.Appear('i_' + bid[1],{duration: 1.0});
 
 }
 

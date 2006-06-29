@@ -146,9 +146,16 @@ var definitions = {
 			Element.show("indicator");
 		}
 	},
-	'.slide' : function(el){
+	'.hidetbl' : function(el){
 		el.onclick = function(){
-			slide(this);
+			hidetbl(this);
+			setTimeout("hidetblsettime(obid)", 1100);
+			return false;
+		}
+	},
+	'.showtbl' : function(el){
+		el.onclick = function(){
+			showtbl(this);
 			return false;
 		}
 	}
