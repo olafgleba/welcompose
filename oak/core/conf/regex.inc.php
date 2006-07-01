@@ -45,11 +45,11 @@ define("OAK_REGEX_URL", "=^((ht|f)tp(s?))\://([0-9a-z\-]+\.)+[a-z]{2,6}(\:[0-9]+
 
 // Defines regular expression for the template type
 // names
-define("OAK_REGEX_TEMPLATE_TYPE", "=^([a-z0-9-_]+)$=i");
+define("OAK_REGEX_TEMPLATE_TYPE_NAME", "=^([a-z0-9_]+)$=i");
 
 // Defines regular expression for the template set
 // names
-define("OAK_REGEX_TEMPLATE_SET", "=^([a-z0-9-_]+)$=i");
+define("OAK_REGEX_TEMPLATE_SET_NAME", "=^([a-z0-9_]+)$=i");
 
 // Defines regular expression for the template
 // resource names

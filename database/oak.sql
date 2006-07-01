@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 24.06.2006 23:57:25
--- Diagram Version: 45
+-- Created on: 01.07.2006 22:23:36
+-- Diagram Version: 46
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -244,6 +244,8 @@ CREATE TABLE `templating_template_types` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `description` text,
+  `editable` enum('0','1') DEFAULT '0',
   PRIMARY KEY(`id`),
   CONSTRAINT `templating_template_types.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)

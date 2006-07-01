@@ -95,6 +95,9 @@ public function addTemplateType ($sqlData)
 		throw new Templating_TemplatetypeException('Input for parameter sqlData is not an array');	
 	}
 	
+	// make sure that the new template type will be assigned to the current project
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
 	return $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 }
@@ -120,11 +123,12 @@ public function updateTemplateType ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project AND `editable` = '1' ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -149,11 +153,12 @@ public function deleteTemplateType ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project AND `editable` = '1' ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -183,21 +188,25 @@ public function selectTemplateType ($id)
 	$sql = "
 		SELECT
 			`templating_template_types`.`id` AS `id`,
-			`templating_template_types`.`name` AS `name`
+			`templating_template_types`.`project` AS `project`,
+			`templating_template_types`.`name` AS `name`,
+			`templating_template_types`.`description` AS `description`,
+			`templating_template_types`.`editable` AS `editable`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		WHERE 
+			`templating_template_types`.`id` = :id
+		  AND
+			`templating_template_types`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `templating_template_types`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -246,12 +255,20 @@ public function selectTemplateTypes ($params = array())
 	$sql = "
 		SELECT
 			`templating_template_types`.`id` AS `id`,
-			`templating_template_types`.`name` AS `name`
+			`templating_template_types`.`project` AS `project`,
+			`templating_template_types`.`name` AS `name`,
+			`templating_template_types`.`description` AS `description`,
+			`templating_template_types`.`editable` AS `editable`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
-		WHERE
-			1
+		WHERE 
+			`templating_template_types`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add sorting
 	$sql .= " ORDER BY `templating_template_types`.`name` ";
@@ -263,8 +280,65 @@ public function selectTemplateTypes ($params = array())
 	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
 		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
 	}
-
+	
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests given template type name for uniqueness. Takes the template type
+ * name as first argument and an optional template type id as second argument.
+ * If the template type id is given, this template type won't be considered
+ * when checking for uniqueness (useful for updates). Returns boolean true if
+ * template type name is unique.
+ *
+ * @throws Templating_TemplatetypeException
+ * @param string Template type name
+ * @param int Template type id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new Templating_TemplatetypeException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Templating_TemplatetypeException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Templating_TemplatetypeException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		WHERE
+			`project` = :project
+		  AND
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 // end of class
