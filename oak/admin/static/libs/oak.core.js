@@ -286,31 +286,3 @@ function getHeaderVars ()
 	Effect.Appear('i_' + bid[1],{duration: 1.0});
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

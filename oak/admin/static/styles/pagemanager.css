@@ -33,22 +33,22 @@ a.up:hover, a.up:active, a.up:focus {
 background: #fff url(../img/icons/up.gif) 0 -44px no-repeat;
 }
 a.new:link, a.new:visited {
-background: #fff url(../img/icons/page-add.gif) 0 0 no-repeat;
+background: #fff url(../img/icons/page_add.gif) 0 0 no-repeat;
 }
 a.new:hover, a.new:active, a.new:focus {
-background: #fff url(../img/icons/page-add.gif) 0 -46px no-repeat;
+background: #fff url(../img/icons/page_add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
-background: #fff url(../img/icons/page-edit.gif) 0 0 no-repeat;
+background: #fff url(../img/icons/page_edit.gif) 0 0 no-repeat;
 }
 a.edit:hover, a.edit:active, a.edit:focus {
-background: #fff url(../img/icons/page-edit.gif) 0 -45px no-repeat;
+background: #fff url(../img/icons/page_edit.gif) 0 -45px no-repeat;
 }
 a.delete:link, a.delete:visited {
-background: #fff url(../img/icons/page-delete.gif) 0 0 no-repeat;
+background: #fff url(../img/icons/page_delete.gif) 0 0 no-repeat;
 }
 a.delete:hover, a.delete:active, a.delete:focus {
-background: #fff url(../img/icons/page-delete.gif) 0 -46px no-repeat;
+background: #fff url(../img/icons/page_delete.gif) 0 -46px no-repeat;
 }    
 .page, .page1, .page2, .page3, .page4, .page5 {
 text-align: left;
