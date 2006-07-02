@@ -72,6 +72,10 @@ try {
 					$reg = OAK_REGEX_RIGHT_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
+			case 'template_set_name':
+					$reg = OAK_REGEX_TEMPLATE_SET_NAME;
+					$desc = gettext('Alphanumeric literal string with dashes');
+				break;
 			case 'template_type_name':
 					$reg = OAK_REGEX_TEMPLATE_TYPE_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');

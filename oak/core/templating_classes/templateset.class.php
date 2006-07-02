@@ -95,6 +95,9 @@ public function addTemplateSet ($sqlData)
 		throw new Templating_TemplatesetException('Input for parameter sqlData is not an array');	
 	}
 	
+	// make sure that the new template set will be assigned to the current project
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
 	return $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
 }
@@ -120,11 +123,12 @@ public function updateTemplateSet ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -149,11 +153,12 @@ public function deleteTemplateSet ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -183,22 +188,24 @@ public function selectTemplateSet ($id)
 	$sql = "
 		SELECT
 			`templating_template_sets`.`id` AS `id`,
+			`templating_template_sets`.`project` AS `project`,
 			`templating_template_sets`.`name` AS `name`,
 			`templating_template_sets`.`description` AS `description`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE 
+			`templating_template_sets`.`id` = :id
+		  AND
+			`templating_template_sets`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `templating_template_sets`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -247,13 +254,19 @@ public function selectTemplateSets ($params = array())
 	$sql = "
 		SELECT
 			`templating_template_sets`.`id` AS `id`,
+			`templating_template_sets`.`project` AS `project`,
 			`templating_template_sets`.`name` AS `name`,
 			`templating_template_sets`.`description` AS `description`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE
-			1
+			`templating_template_sets`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add sorting
 	$sql .= " ORDER BY `templating_template_sets`.`name` ";
@@ -267,6 +280,63 @@ public function selectTemplateSets ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests given template set name for uniqueness. Takes the template set
+ * name as first argument and an optional template set id as second argument.
+ * If the template set id is given, this template set won't be considered
+ * when checking for uniqueness (useful for updates). Returns boolean true if
+ * template set name is unique.
+ *
+ * @throws Templating_TemplatesetException
+ * @param string Template set name
+ * @param int Template set id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new Templating_TemplatesetException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Templating_TemplatesetException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Templating_TemplatesetException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+		WHERE
+			`project` = :project
+		  AND
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 // end of class
