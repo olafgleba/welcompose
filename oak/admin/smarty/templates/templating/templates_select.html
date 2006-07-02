@@ -116,6 +116,7 @@ var form_attr = '{$form.attributes}';
 <td><a class="edit" href="templates_edit.php?id={$_templates.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="templates_delete.php?id={$_templates.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
+{* Anfang js tr; *}
 <tr id="o_{$_templates.id}" class="outer">
 <td></td>
 <td colspan="6">
@@ -125,6 +126,7 @@ var form_attr = '{$form.attributes}';
 </div>
 </td>
 </tr>
+{* EOF js tr; *}
 {/foreach}
 </table>
 {else}
