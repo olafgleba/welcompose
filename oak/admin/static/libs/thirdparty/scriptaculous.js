@@ -20,7 +20,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var Scriptaculous = {
-  Version: '1.6',
+  Version: '1.6.1',
   require: function(libraryName) {
     // inserting via DOM fails in Safari 2.0, so brute force approach
     document.write('<script type="text/javascript" src="'+libraryName+'"></script>');
@@ -38,7 +38,7 @@ var Scriptaculous = {
     }).each( function(s) {
       var path = s.src.replace(/scriptaculous\.js(\?.*)?$/,'');
       var includes = s.src.match(/\?.*load=([a-z,]*)/);
-      (includes ? includes[1] : 'effects,../oak.extend_effects').split(',').each(
+      (includes ? includes[1] : 'effects').split(',').each(
        function(include) { Scriptaculous.require(path+include+'.js') });
     });
   }
