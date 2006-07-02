@@ -29,7 +29,7 @@ height: 56px;
 width: 60px;
 background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
-h2, p, a, li, th, td, select, label, input {
+h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
 p a, li a, th a, td a, label select, label input, label p, label span span a {
@@ -370,7 +370,7 @@ background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
 /* FILTER (PROJECTS/GROUPS) START */
 .filter {
 margin: 0 0 0 10px;
-padding: 10px 0 0 0;
+padding: 10px 0 20px 0;
 }
 .filter h2 {
 display: block;
@@ -544,6 +544,39 @@ margin: 20px  0 0 140px;
 cursor: pointer;
 }
 /* FORMS EOF */
+
+/* SEITENNAVIGATION - MEHR ALS 10 EINTRAEGE */
+h3.pagenav {
+margin-left: 5px;
+float: left;
+font-weight: normal;;
+}
+ul.pagenav {
+list-style: none;
+width: 870px;
+height: 1.5em;
+}
+.pagenav li {
+display: inline;
+}
+.pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
+display: block;
+float: left;
+margin: 0 5px;
+padding: 0 5px;
+background: #fff;
+color: #000;
+border: 1px solid #d9d9d9;
+}
+.pagenav li.on {
+border-color: #00cc33;
+background: #fff;
+}
+.pagenav a:hover, .pagenav a:active, .pagenav a:focus {
+text-decoration: none;
+color: #fff;
+background: #00cc33
+}
 
 /* VALIDATE START */
 #content span.validate {
