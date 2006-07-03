@@ -119,7 +119,6 @@ try {
 	$BASE->utility->smarty->assign('template_count', $template_count);
 	
 	// prepare and assign page index
-	var_dump($template_count);
 	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($template_count, 20));
 	
 	// get available template types
