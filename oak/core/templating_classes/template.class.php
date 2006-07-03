@@ -96,7 +96,14 @@ public function addTemplate ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATES, $sqlData);
+	
+	// test if the new template belongs to the current project
+	if (!$this->templateBelongsToCurrentProject($insert_id)) {
+		throw new Templating_TemplateException('Created template does not belong to current project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -133,8 +140,15 @@ public function updateTemplate ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_TEMPLATING_TEMPLATES, $sqlData,
-		$where, $bind_params);	
+	$affected_rows = $this->base->db->update(OAK_DB_TEMPLATING_TEMPLATES, $sqlData,
+		$where, $bind_params);
+	
+	// test if the new template belongs to the current project
+	if (!$this->templateBelongsToCurrentProject($id)) {
+		throw new Templating_TemplateException('Created template does not belong to current project');
+	}
+	
+	return $affected_rows;
 }
 
 /**
@@ -439,6 +453,9 @@ public function mapTemplateToSets ($template, $sets = array())
 		throw new Templating_TemplateException('Given template does not belong to the current project');
 	}
 	
+	// load template set class
+	$TEMPLATESET = load('templating:templateset');
+	
 	// prepare query to remove all existing links to the current template
 	$sql = "
 		DELETE FROM
@@ -466,7 +483,7 @@ public function mapTemplateToSets ($template, $sets = array())
 	
 	// add new links
 	foreach ($sets as $_set) {
-		if (!empty($_set) && is_numeric($_set) && $this->setBelongsToCurrentProject($_set)) {
+		if (!empty($_set) && is_numeric($_set) && $TEMPLATESET->templateSetBelongsToCurrentProject($_set)) {
 			$this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES,
 				array('template' => $template, 'set' => $_set));
 		}
@@ -552,47 +569,6 @@ public function templateBelongsToCurrentProject ($template)
 	// prepare bind params
 	$bind_params = array(
 		'template' => (int)$template,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// execute query and evaluate result
-	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Checks whether the given template set belongs to the current project or not. Takes
- * the id of the template set as first argument. Returns bool.
- *
- * @throws Templating_TemplateException
- * @param int Template set id
- * @return bool
- */
-public function setBelongsToCurrentProject ($set)
-{
-	// input check
-	if (empty($set) || !is_numeric($set)) {
-		throw new Templating_TemplateException('Input for parameter set is expected to be a numeric value');
-	}
-	
-	// prepare query
-	$sql = "
-		SELECT
-			COUNT(*)
-		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
-		WHERE
-			`templating_template_sets`.`id` = :set
-		  AND
-			`templating_template_sets`.`project` = :project
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'set' => (int)$set,
 		'project' => OAK_CURRENT_PROJECT
 	);
 	

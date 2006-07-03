@@ -285,6 +285,47 @@ public function selectTemplateTypes ($params = array())
 }
 
 /**
+ * Checks whether the given template type belongs to the current project or not. Takes
+ * the id of the template type as first argument. Returns bool.
+ *
+ * @throws Templating_TemplatetypeException
+ * @param int Template type id
+ * @return bool
+ */
+public function templateTypeBelongsToCurrentProject ($type)
+{
+	// input check
+	if (empty($type) || !is_numeric($type)) {
+		throw new Templating_TemplatetypeException('Input for parameter type is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		WHERE
+			`templating_template_types`.`id` = :type
+		  AND
+			`templating_template_types`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'type' => (int)$type,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
  * Tests given template type name for uniqueness. Takes the template type
  * name as first argument and an optional template type id as second argument.
  * If the template type id is given, this template type won't be considered

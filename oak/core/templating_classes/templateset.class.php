@@ -283,6 +283,47 @@ public function selectTemplateSets ($params = array())
 }
 
 /**
+ * Checks whether the given template set belongs to the current project or not. Takes
+ * the id of the template set as first argument. Returns bool.
+ *
+ * @throws Templating_TemplatesetException
+ * @param int Template set id
+ * @return bool
+ */
+public function templateSetBelongsToCurrentProject ($set)
+{
+	// input check
+	if (empty($set) || !is_numeric($set)) {
+		throw new Templating_TemplatesetException('Input for parameter set is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+		WHERE
+			`templating_template_sets`.`id` = :set
+		  AND
+			`templating_template_sets`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'set' => (int)$set,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
  * Tests given template set name for uniqueness. Takes the template set
  * name as first argument and an optional template set id as second argument.
  * If the template set id is given, this template set won't be considered
