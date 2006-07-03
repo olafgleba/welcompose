@@ -338,6 +338,81 @@ public function selectTemplates ($params = array())
 }
 
 /**
+ * Method to count templates. Takes key=>value with count params as first
+ * argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>type, int, optional: Template type id</li>
+ * <li>set, int, optional: Template set id</li>
+ * </ul>
+ * 
+ * @throws Templating_TemplateException
+ * @param array Count params
+ * @return array
+ */
+public function countTemplates ($params = array())
+{
+	// define some vars
+	$type = null;
+	$set = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Templating_TemplateException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'type':
+			case 'set':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Templating_TemplateException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(DISTINCT `templating_templates`.`id`) AS `total`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		  ON
+			`templating_templates`.`type` = `templating_template_types`.`id`
+		LEFT JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
+		  ON
+			`templating_templates`.`id` = `tts2tt`.`template`
+		WHERE
+			`templating_template_types`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($type) && is_numeric($type)) {
+		$sql .= " AND `templating_template_types`.`id` = :type ";
+		$bind_params['type'] = $type;
+	}
+	if (!empty($set) && is_numeric($set)) {
+		$sql .= " AND `tts2tt`.`set` = :set ";
+		$bind_params['set'] = $set;
+	}
+	
+	return $this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
  * Maps template to template sets. Takes template id as first argument,
  * array with list of set ids as second argument. Returns boolean true.
  * 

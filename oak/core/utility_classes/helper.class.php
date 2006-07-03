@@ -315,6 +315,50 @@ public function testSqlDataForPearErrors (&$sqlData)
 	return true;
 }
 
+/**
+ * Calculates a page index on basis of the total item count and the number
+ * of items per page. Taks the total item count as first argument, the number
+ * of items per page as second argument. Returns array.
+ * 
+ * @throws Utility_HelperException
+ * @param int Total item count
+ * @param int Number of items per page
+ * @return array
+ */
+public function calculatePageIndex ($total_items, $interval)
+{
+	// input check
+	if (!is_numeric($total_items)) {
+		throw new Utility_HelperException('Input for parameter total_items is not numeric');
+	}
+	if (!is_numeric($interval)) {
+		throw new Utility_HelperException('Input for parameter interval is not numeric');
+	}
+	
+	if ($total_items == 0) {
+		$index = array();
+	} else {
+		$pages = ceil($total_items / $interval);
+		
+		$index = array();
+		for ($i=1;$i<$pages+1;$i++) {
+			$index[] = array(
+							'page' => $i,
+							'last' => ($i - 2) * $interval,
+							'self' => ($i - 1) * $interval,
+							'next' => $i * $interval
+						);
+		}
+		foreach ($index as $_key => $_value) {
+			if ($_value['last'] < 0) {
+				$index[$_key]['last'] = null;
+			}
+		}
+	}
+	
+	return $index;
+}
+
 // end of class
 }
 

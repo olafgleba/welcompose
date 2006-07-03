@@ -77,7 +77,11 @@ try {
 	// load templateset class
 	/* @var $TEMPLATESET Templating_Templateset */
 	$TEMPLATESET = load('templating:templateset');
-		
+	
+	// load helper class
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('utility:helper');
+	
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
@@ -100,9 +104,23 @@ try {
 	// get available templates
 	$select_params = array(
 		'set' => Base_Cnc::filterRequest($_REQUEST['set'], OAK_REGEX_NUMERIC),
-		'type' => Base_Cnc::filterRequest($_REQUEST['type'], OAK_REGEX_NUMERIC)
+		'type' => Base_Cnc::filterRequest($_REQUEST['type'], OAK_REGEX_NUMERIC),
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
+		'limit' => 20
 	);
 	$BASE->utility->smarty->assign('templates', $TEMPLATE->selectTemplates($select_params));
+	
+	// count available templates
+	$select_params = array(
+		'set' => Base_Cnc::filterRequest($_REQUEST['set'], OAK_REGEX_NUMERIC),
+		'type' => Base_Cnc::filterRequest($_REQUEST['type'], OAK_REGEX_NUMERIC)
+	);
+	$template_count = $TEMPLATE->countTemplates($select_params);
+	$BASE->utility->smarty->assign('template_count', $template_count);
+	
+	// prepare and assign page index
+	var_dump($template_count);
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($template_count, 20));
 	
 	// get available template types
 	$BASE->utility->smarty->assign('template_types', $TEMPLATETYPE->selectTemplateTypes());
@@ -113,7 +131,8 @@ try {
 	// import and assign request params
 	$request = array(
 		'set' => Base_Cnc::filterRequest($_REQUEST['set'], OAK_REGEX_NUMERIC),
-		'type' => Base_Cnc::filterRequest($_REQUEST['type'], OAK_REGEX_NUMERIC)
+		'type' => Base_Cnc::filterRequest($_REQUEST['type'], OAK_REGEX_NUMERIC),
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	

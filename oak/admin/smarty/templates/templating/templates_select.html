@@ -93,6 +93,18 @@ var form_attr = '{$form.attributes}';
 {/if}
 <!-- filter --></div>
 
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="templates_select.php?set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
 {if !empty($templates)}
 <table summary="{i18n Available Templates}">
 <tr>
@@ -114,7 +126,7 @@ var form_attr = '{$form.attributes}';
 <th class="">Duplicate</th>
 <th>Edit</th>
 <th>Delete</th>
-</tr>
+</tr>{debug}
 {foreach from=$templates item=_template}
 <tr>
 <td>{$_template.name|escape:"htmlall"}</td>
@@ -139,6 +151,18 @@ var form_attr = '{$form.attributes}';
 {* EOF js tr; *}
 {/foreach}
 </table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="templates_select.php?set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
 {else}
 <p>{i18n No template has been created yet.}</p>
 {/if}
