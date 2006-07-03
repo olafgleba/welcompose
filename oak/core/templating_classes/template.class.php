@@ -119,6 +119,11 @@ public function updateTemplate ($id, $sqlData)
 		throw new Templating_TemplateException('Input for parameter sqlData is not an array');	
 	}
 	
+	// let's see if the given template belongs to the current project
+	if (!$this->templateBelongsToCurrentProject($id)) {
+		throw new Templating_TemplateException('Given template does not belong to the current project');
+	}
+	
 	// prepare where clause
 	$where = " WHERE `id` = :id ";
 	
@@ -147,17 +152,30 @@ public function deleteTemplate ($id)
 		throw new Templating_TemplateException('Input for parameter id is not numeric');
 	}
 	
-	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	// prepare query
+	$sql = "
+		DELETE FROM
+			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		USING
+			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		  ON
+			`templating_templates`.`type` = `templating_template_types`.`id`
+		WHERE
+			`templating_templates`.`id` = :id
+		  AND
+			`templating_template_types`.`project` = :project
+	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATES,	
-		$where, $bind_params);
+	return $this->base->db->execute($sql, $bind_params);
 }
 
 /**
@@ -187,25 +205,29 @@ public function selectTemplate ($id)
 			`templating_templates`.`description` AS `description`,
 			`templating_templates`.`content` AS `content`,
 			`templating_template_types`.`id` AS `type_id`,
-			`templating_template_types`.`name` AS `type_name`
+			`templating_template_types`.`project` AS `type_project`,
+			`templating_template_types`.`name` AS `type_name`,
+			`templating_template_types`.`description` AS `type_description`,
+			`templating_template_types`.`editable` AS `type_editable`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		  ON
 			`templating_templates`.`type` = `templating_template_types`.`id`
 		WHERE 
+			`templating_templates`.`id` = :id
+		  AND
+			`templating_template_types`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `templating_templates`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -265,20 +287,28 @@ public function selectTemplates ($params = array())
 			`templating_templates`.`description` AS `description`,
 			`templating_templates`.`content` AS `content`,
 			`templating_template_types`.`id` AS `type_id`,
-			`templating_template_types`.`name` AS `type_name`
+			`templating_template_types`.`project` AS `type_project`,
+			`templating_template_types`.`name` AS `type_name`,
+			`templating_template_types`.`description` AS `type_description`,
+			`templating_template_types`.`editable` AS `type_editable`
 		FROM
 			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		  ON
 			`templating_templates`.`type` = `templating_template_types`.`id`
 		LEFT JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
-		ON
+		  ON
 			`templating_templates`.`id` = `tts2tt`.`template`
 		WHERE
-			1
+			`templating_template_types`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($type) && is_numeric($type)) {
@@ -289,6 +319,9 @@ public function selectTemplates ($params = array())
 		$sql .= " AND `tts2tt`.`set` = :set ";
 		$bind_params['set'] = $set;
 	}
+	
+	// aggregate result set
+	$sql .= " GROUP BY `templating_templates`.`id` ";
 	
 	// add sorting
 	$sql .= " ORDER BY `templating_templates`.`name` ";
@@ -326,27 +359,236 @@ public function mapTemplateToSets ($template, $sets = array())
 		throw new Templating_TemplateException('Input for parameter sets is expected to be an array');	
 	}
 	
-	// prepare where clause
-	$where = " WHERE `template` = :template ";
+	// let's see if the given template belongs to the current project
+	if (!$this->templateBelongsToCurrentProject($template)) {
+		throw new Templating_TemplateException('Given template does not belong to the current project');
+	}
+	
+	// prepare query to remove all existing links to the current template
+	$sql = "
+		DELETE FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
+		USING
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+		  ON
+			`tts2tt`.`set` = `templating_template_sets`.`id`
+		WHERE
+			`tts2tt`.`template` = :template
+		AND
+			`templating_template_sets`.`project` = :project
+	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'template' => $template
+		'template' => (int)$template,
+		'project' => (int)OAK_CURRENT_PROJECT
 	);
 	
 	// remove all existing links to the current template
-	$this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES,
-		$where, $bind_params);
+	$this->base->db->execute($sql, $bind_params);
 	
 	// add new links
 	foreach ($sets as $_set) {
-		if (!empty($_set) && is_numeric($_set)) {
+		if (!empty($_set) && is_numeric($_set) && $this->setBelongsToCurrentProject($_set)) {
 			$this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES,
 				array('template' => $template, 'set' => $_set));
 		}
 	}
 	
 	return true;
+}
+
+/**
+ * Selects links between the given template and its associated template sets. Takes
+ * the template id as first argument. Returns array.
+ *
+ * @throws Templating_TemplateException
+ * @param int Group id
+ * @return array
+ */
+public function selectTemplateToSetsMap ($template)
+{
+	// input check
+	if (empty($template) || !is_numeric($template)) {
+		throw new Templating_TemplateException("Input for parameter template is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`tts2tt`.`id` AS `id`,
+			`tts2tt`.`template` AS `template`,
+			`tts2tt`.`set` AS `set`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+		  ON
+			`tts2tt`.`set` = `templating_template_sets`.`id`
+		WHERE
+			`tts2tt`.`template` = :template
+		  AND
+			`templating_template_sets`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'template' => (int)$template,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Checks whether the given template belongs to the current project or not. Takes
+ * the id of the template as first argument. Returns bool.
+ *
+ * @throws Templating_TemplateException
+ * @param int Template id
+ * @return bool
+ */
+public function templateBelongsToCurrentProject ($template)
+{
+	// input check
+	if (empty($template) || !is_numeric($template)) {
+		throw new Templating_TemplateException('Input for parameter template is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		  ON
+			`templating_templates`.`type` = `templating_template_types`.`id`
+		WHERE
+			`templating_templates`.`id` = :template
+		AND
+			`templating_template_types`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'template' => (int)$template,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Checks whether the given template set belongs to the current project or not. Takes
+ * the id of the template set as first argument. Returns bool.
+ *
+ * @throws Templating_TemplateException
+ * @param int Template set id
+ * @return bool
+ */
+public function setBelongsToCurrentProject ($set)
+{
+	// input check
+	if (empty($set) || !is_numeric($set)) {
+		throw new Templating_TemplateException('Input for parameter set is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+		WHERE
+			`templating_template_sets`.`id` = :set
+		  AND
+			`templating_template_sets`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'set' => (int)$set,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Tests given template name for uniqueness. Takes the template name as
+ * first argument and an optional template id as second argument. If
+ * the template id is given, this template won't be considered when checking
+ * for uniqueness (useful for updates). Returns boolean true if template
+ * name is unique.
+ *
+ * @throws Templating_TemplateException
+ * @param string Template name
+ * @param int Template id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new Templating_TemplateException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Templating_TemplateException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Templating_TemplateException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		JOIN
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		  ON
+			`templating_templates`.`type` = `templating_template_types`.`id`
+		WHERE
+			`templating_templates`.`name` = :name
+		AND
+			`templating_template_types`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `templating_templates`.`id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+	
 }
 
 /**
