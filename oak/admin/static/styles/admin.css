@@ -32,7 +32,7 @@ background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input, label p, label span span a {
+p a, li a, th a, td a, label select, label input, label p, label span span a, td label {
 font-size: 100%;
 } 
 a {
@@ -460,6 +460,9 @@ height: 4.7em;
 label.cont.h13 {
 height: 13.0em;
 }
+label.cont.h34 {
+height: 34.0em;
+}
 label span.bez {
 display: block; 
 float: left;
@@ -489,17 +492,18 @@ input.w580 {
 width: 580px;
 font-weight: bold;
 }
-textarea.w575h400 {
+textarea {
+font: 100% verdana, ariel, sans-serif;
 border: 1px solid #666;
-width: 575px;
+}
+textarea.w530h400 {
+width: 530px;
 height: 400px;
 margin: 0 0 20px 0;
 padding: 5px;
 }
 textarea.w298h50 {
 float: left;
-border: 1px solid #666;
-font: 100% Arial, Helvetica, sans-serif;
 width: 298px;
 height: 50px;
 padding: 3px;
@@ -635,6 +639,7 @@ background-color: transparent;
 }
 .inner {
 display: none;
-background-color: yellow;
+background: #d9d9d9 url(../img/bg_slides.gif);
+padding: 1em 0 1em 0;
 }
 /* TABLES SLIDES EOF */

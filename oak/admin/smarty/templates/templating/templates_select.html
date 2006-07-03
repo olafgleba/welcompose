@@ -132,7 +132,7 @@ var form_attr = '{$form.attributes}';
 <td>{$_template.name|escape:"htmlall"}</td>
 <td>{$_template.type_name|escape:"htmlall"}</td>
 <td>{$_template.description|escape:"htmlall"}</td>
-<td><a class="upload showtbl" href="{$_template.id}" title="{i18n Upload}"></a></td>
+<td><a class="upload showtbl" href="#" id="{$_template.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="templates_download.php?id={$_template.id|escape:"htmlall"}" title="{i18n Download}"></a></td>
 <td><em>Duplicate</em></td>
 <td><a class="edit" href="templates_edit.php?id={$_template.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
@@ -140,9 +140,8 @@ var form_attr = '{$form.attributes}';
 </tr>
 {* Anfang js tr; *}
 <tr id="o_{$_template.id}" class="outer">
-<td></td>
-<td colspan="7">
-<div id="i_{$_template.id}" class="inner">
+<td colspan="8">
+<div id="i_{$_template.id}" class="inner"
 <label class="cont" for="upload"><span class="bez">{i18n Upload} <span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="Help" /></a></span></span> 
 <input class="w400" type="file" maxlength="#" accept="#"></label>
 </div>

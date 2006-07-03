@@ -251,16 +251,17 @@ function getHeaderVars ()
  */
  function hidetbl (elem)
 {	
-	var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	//var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	var getId = elem.getAttribute('id');
 	
 	// e.g. <name_of_file>?id=<var>
-	var bid = getHref.split('id=');
+	//var bid = getHref.split('id=');
 	
 	// push var to the global scope
-	obid = $('o_' + bid[1]);	
+	obid = $('o_' + getId);	
 
 	// process inner div
-	Effect.Fade('i_' + bid[1],{duration: 1.0});
+	Effect.Fade('i_' + getId,{duration: 1.0});
 
 }
 
@@ -273,16 +274,16 @@ function getHeaderVars ()
  */
  function showtbl (elem)
 {	
-	var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	//var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+	var getId = elem.getAttribute('id');
 	
 	// e.g. <name_of_file>?id=<var>
-	var bid = getHref.split('id=');
+	//var bid = getHref.split('id=');
 	
 	// process outer table tr
-	$('o_' + bid[1]).style.visibility = 'visible';
+	$('o_' + getId).style.visibility = 'visible';
 	
 	// process inner div
-	Element.hide('i_' + bid[1]);
-	Effect.Appear('i_' + bid[1],{duration: 1.0});
-
+	Element.hide('i_' + getId);
+	Effect.Appear('i_' + getId,{duration: 1.0});
 }

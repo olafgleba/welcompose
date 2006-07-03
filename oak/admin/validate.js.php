@@ -79,7 +79,7 @@ try {
 			case 'template_type_name':
 					$reg = OAK_REGEX_TEMPLATE_TYPE_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
-				break;				
+				break;
 			case 'user_email':
 					$reg = OAK_REGEX_EMAIL;
 					$desc = gettext('Invalid e-mail address');

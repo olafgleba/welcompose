@@ -113,18 +113,13 @@ var form_attr = '{$form.attributes}';
 <td>{if $_user.author}{i18n yes}{else}{i18n no}{/if}</td>
 <td>{if $_user.active}{i18n yes}{else}{i18n no}{/if}</td>
 {if $_user.editable}
-<td><a href="#" class="showtbl">slidedown</a>&nbsp;<a class="edit" href="users_edit.php?id={$_user.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a href="#" class="hidetbl">slideup</a>&nbsp;<a class="delete" href="users_delete.php?id={$_user.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="users_edit.php?id={$_user.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="users_delete.php?id={$_user.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 {else}
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 {/if}
 </tr>
-{if $_user.editable}
-<tr class="outer" id="o_{$_user.id}">
-<td colspan="7"><div class="inner" id="i_{$_user.id}">Content</div></td>
-</tr>
-{/if}
 {/foreach}
 </table>
 
