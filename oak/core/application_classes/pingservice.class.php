@@ -95,6 +95,9 @@ public function addPingService ($sqlData)
 		throw new Application_PingserviceException('Input for parameter sqlData is not an array');	
 	}
 	
+	// make sure that the new ping service will be assigned to the current project
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
 	return $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICES, $sqlData);
 }
@@ -120,11 +123,12 @@ public function updatePingService ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -149,11 +153,12 @@ public function deletePingService ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -182,25 +187,26 @@ public function selectPingService ($id)
 	$sql = "
 		SELECT 
 			`application_ping_services`.`id` AS `id`,
+			`application_ping_services`.`project` AS `project`,
 			`application_ping_services`.`name` AS `name`,
 			`application_ping_services`.`host` AS `host`,
 			`application_ping_services`.`port` AS `port`,
-			`application_ping_services`.`http_version` AS `http_version`,
 			`application_ping_services`.`path` AS `path`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_pingservices`
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		WHERE 
+			`application_ping_services`.`id` = :id
+		  AND
+			`application_ping_services`.`project` = :project
+		LIMIT 
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `application_ping_services`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -252,13 +258,17 @@ public function selectPingServices ($params = array())
 			`application_ping_services`.`name` AS `name`,
 			`application_ping_services`.`host` AS `host`,
 			`application_ping_services`.`port` AS `port`,
-			`application_ping_services`.`http_version` AS `http_version`,
 			`application_ping_services`.`path` AS `path`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_pingservices`
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		WHERE 
-			1
+			`application_ping_services`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add sorting
 	$sql .= " ORDER BY `application_ping_services`.`name` ";
@@ -272,6 +282,63 @@ public function selectPingServices ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests given ping service name for uniqueness. Takes the ping service
+ * name as first argument and an optional ping service id as second argument.
+ * If the ping service id is given, this ping service won't be considered
+ * when checking for uniqueness (useful for updates). Returns boolean true if
+ * ping service name is unique.
+ *
+ * @throws Application_PingserviceException
+ * @param string Ping service name
+ * @param int Ping service id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	// input check
+	if (empty($name)) {
+		throw new Application_PingserviceException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Application_PingserviceException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Application_PingserviceException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+		WHERE
+			`project` = :project
+		  AND
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 // end of class

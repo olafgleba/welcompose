@@ -123,4 +123,12 @@ define("OAK_REGEX_EMAIL", "=^((\"[^\"\f\n\r\t\v\b]+\")|([\w\!\#\$\%\&\'\*\+\-\~\
 // right name
 define("OAK_REGEX_RIGHT_NAME", "=^(?!OAK)([A-Z0-9]+)_([A-Z0-9_]+)$=");
 
+// Defines regular expression for strings containing a
+// ping service host
+define("OAK_REGEX_PING_SERVICE_HOST", "=^([a-z0-9.-]+)$=i");
+
+// Defines regular expression for strings containing a
+// ping service path
+define("OAK_REGEX_PING_SERVICE_PATH", "=^/([a-z0-9.-\/]*)$=i");
+
 ?>

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 01.07.2006 22:23:36
--- Diagram Version: 46
+-- Created on: 04.07.2006 18:34:47
+-- Diagram Version: 47
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -30,12 +30,11 @@ CREATE TABLE `user_users` (
 TYPE=INNODB;
 
 CREATE TABLE `application_ping_services` (
-  `id` int(11) UNSIGNED NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   `host` varchar(255),
   `port` int(11) UNSIGNED,
-  `http_version` varchar(255),
   `path` varchar(255),
   PRIMARY KEY(`id`),
   INDEX `project`(`project`)

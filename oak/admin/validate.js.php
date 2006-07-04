@@ -68,6 +68,18 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
+			case 'ping_service_host':
+					$reg = OAK_REGEX_PING_SERVICE_HOST;
+					$desc = gettext('Alphanumeric with dots and hyphens');
+				break;
+			case 'ping_service_path':
+					$reg = OAK_REGEX_PING_SERVICE_PATH;
+					$desc = gettext('Alphanumeric string with slashes');
+				break;
+			case 'ping_service_port':
+					$reg = OAK_REGEX_NUMERIC;
+					$desc = gettext('Numbers only');
+				break;
 			case 'right_name':
 					$reg = OAK_REGEX_RIGHT_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');

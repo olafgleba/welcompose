@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Ping Services}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript">
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse.js.php?file=oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<p>{i18n Oak}</p>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="application"}
+
+{include file="_inc_projects_load.html" go_back_area="application" go_back_file="pingservices_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic">
+<ul id="topsubnav">
+<li><a href="settings_edit.php">{i18n Settings}<span></span></a></li>
+<li class="on">{i18n Ping Services}</li>
+<li><a href="textconverters_select.php">{i18n Text Converters}<span></span></a></li>
+</ul>
+</div>
+<!-- topnavcon static eof -->
+
+<div id="brc"><p>{i18n SETTINGS}: {i18n Ping Services}</p></div>
+
+<div id="content">
+
+<h1>{i18n Ping Services}</h1>
+
+<div class="secnav474_nav_x"><a href="pingservices_add.php">{i18n Add new}</a></div>
+<br class="clearb" />
+
+{if !empty($ping_services)}
+<table summary="{i18n Available Ping Services}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page">{i18n Name}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$ping_services item=_ping_service}
+<tr>
+<td class="template"><span>{$_ping_service.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="pingservices_edit.php?id={$_ping_service.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pingservices_delete.php?id={$_ping_service.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+</tr>
+{/foreach}
+</table>
+{else}
+<p>{i18n No ping service has been created yet.}</p>
+{/if}
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>
