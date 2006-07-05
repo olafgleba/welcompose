@@ -92,6 +92,10 @@ try {
 					$reg = OAK_REGEX_TEMPLATE_TYPE_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
+			case 'text_converter_internal_name':
+					$reg = OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
+					$desc = gettext('Alphanumeric literal string with dashes');
+				break;
 			case 'user_email':
 					$reg = OAK_REGEX_EMAIL;
 					$desc = gettext('Invalid e-mail address');

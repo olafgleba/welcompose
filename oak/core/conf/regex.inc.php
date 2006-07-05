@@ -131,4 +131,8 @@ define("OAK_REGEX_PING_SERVICE_HOST", "=^([a-z0-9.-]+)$=i");
 // ping service path
 define("OAK_REGEX_PING_SERVICE_PATH", "=^/([a-z0-9.-\/]*)$=i");
 
+// Defines regular expression fro strings containing an
+// internal text converter name
+define("OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
+
 ?>
