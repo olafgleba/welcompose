@@ -35,8 +35,27 @@ class HTML_QuickForm_Rule_In_Array_Keys extends HTML_QuickForm_Rule
 	 */
     function validate($selected_key, $array)
     {
-		if (array_key_exists($selected_key, $array)) {
+		// if input for paramater array is not an array, simply return false.
+		if (!is_array($array)) {
+			return false;
+		}
+		
+		// we can either receive an array, a scalar value or something
+		// else as selected key
+		if (is_array($selected_key)) {
+			foreach ($selected_key as $_key) {
+				if (!is_scalar($_key) || !array_key_exists($_key, $array)) {
+					return false;
+				}
+			}
+			
 			return true;
+		} elseif (is_scalar($selected_key)) {
+			if (array_key_exists($selected_key, $array)) {
+				return true;
+			} else {
+				return false;
+			}			
 		} else {
 			return false;
 		}
