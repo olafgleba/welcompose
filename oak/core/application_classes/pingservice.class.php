@@ -285,6 +285,55 @@ public function selectPingServices ($params = array())
 }
 
 /**
+ * Method to count the available ping services. Takes key=>value
+ * array with count params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * No params supported.
+ * 
+ * @throws Application_PingserviceException
+ * @param array Count params
+ * @return array
+ */
+public function countPingServices ($params = array())
+{
+	// define some vars
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Application_PingserviceException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			default:
+				throw new Application_PingserviceException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+		WHERE 
+			`application_ping_services`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and return result
+	return (int)$this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
  * Tests given ping service name for uniqueness. Takes the ping service
  * name as first argument and an optional ping service id as second argument.
  * If the ping service id is given, this ping service won't be considered
@@ -292,7 +341,7 @@ public function selectPingServices ($params = array())
  * ping service name is unique.
  *
  * @throws Application_PingserviceException
- *Â @param string Ping service name
+ * @param string Ping service name
  * @param int Ping service id
  * @return bool
  */

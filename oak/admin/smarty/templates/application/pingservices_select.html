@@ -69,6 +69,18 @@ var form_attr = '{$form.attributes}';
 <br class="clearb" />
 
 {if !empty($ping_services)}
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pingservices_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
 <table summary="{i18n Available Ping Services}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
@@ -88,6 +100,18 @@ var form_attr = '{$form.attributes}';
 </tr>
 {/foreach}
 </table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pingservices_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
 {else}
 <p>{i18n No ping service has been created yet.}</p>
 {/if}

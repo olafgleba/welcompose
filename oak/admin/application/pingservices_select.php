@@ -69,7 +69,11 @@ try {
 	// load pingservice class
 	/* @var $PINGSERVICE Application_Pingservice */
 	$PINGSERVICE = load('application:pingservice');
-		
+	
+	// load helper class
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('utility:helper');
+	
 	// init user and project
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
@@ -90,7 +94,24 @@ try {
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
 	// get available ping services
-	$BASE->utility->smarty->assign('ping_services', $PINGSERVICE->selectPingServices());
+	$select_params = array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
+		'limit' => 20
+	);
+	$BASE->utility->smarty->assign('ping_services', $PINGSERVICE->selectPingServices($select_params));
+	
+	// count available ping services
+	$services_count = $PINGSERVICE->countPingServices();
+	$BASE->utility->smarty->assign('ping_services_count', $services_count);
+	
+	// prepare and assign page index
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($services_count, 20));
+	
+	// import and assign request params
+	$request = array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
+	);
+	$BASE->utility->smarty->assign('request', $request);
 	
 	// display the template
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
