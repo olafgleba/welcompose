@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Blog Comment Statuses}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript">
+var response = '{$session.response}';
+var selection = '{$session.selection}';
+var form_attr = '{$form.attributes}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse.js.php?file=oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<p>{i18n Oak}</p>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="community"}
+
+{include file="_inc_projects_load.html" go_back_area="community" go_back_file="blogcommentstatuses_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topnavcon static -->
+<div id="topsubnavconstatic">
+<ul id="topsubnav">
+<li><a href="blogcomments_select.php">{i18n Blog Comments}<span></span></a></li>
+<li class="on">{i18n Blog Comment Statuses}</li>
+</ul>
+</div>
+<!-- topnavcon static eof -->
+
+<div id="brc"><p>{i18n COMMUNITY}: {i18n Blog Comment Statuses}</p></div>
+
+<div id="content">
+
+<h1>{i18n Blog Comment Statuses}</h1>
+
+<div class="secnav474_nav_x"><a href="blogcommentstatuses_add.php">{i18n Add new}</a></div>
+<br class="clearb" />
+
+{if !empty($blog_comment_statuses)}
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="blogcommentstatuses_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
+<table summary="{i18n Available Blog Comment Statuses}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page">{i18n Name}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$blog_comment_statuses item=_blog_comment_status}
+<tr>
+{if $_blog_comment_status.editable}
+<td class="template"><span>{$_blog_comment_status.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="blogcommentstatuses_delete.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+{else}
+<td class="template"><span>{$_blog_comment_status.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+{/if}
+</tr>
+{/foreach}
+</table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="blogcommentstatuses_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
+{else}
+<p>{i18n No blog comment status has been created yet.}</p>
+{/if}
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

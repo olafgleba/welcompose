@@ -38,6 +38,7 @@ define("OAK_DB_APPLICATION_PROJECTS", "application_projects");
 define("OAK_DB_APPLICATION_TEXT_CONVERTERS", "application_text_converters");
 
 // community table aliases
+define("OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES", "community_blog_comment_statuses");
 define("OAK_DB_COMMUNITY_BLOG_COMMENTS", "community_blog_comments");
 
 // content table aliases

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 04.07.2006 18:34:47
--- Diagram Version: 47
+-- Created on: 05.07.2006 14:41:18
+-- Diagram Version: 51
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -10,11 +10,6 @@ CREATE DATABASE IF NOT EXISTS `oak`;
 USE `oak`;
 
 SET FOREIGN_KEY_CHECKS=0;
-
-CREATE TABLE `application_schema_info` (
-  `version` int(11) UNSIGNED
-)
-TYPE=INNODB;
 
 CREATE TABLE `user_users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -26,6 +21,11 @@ CREATE TABLE `user_users` (
   `_sync` varchar(255),
   PRIMARY KEY(`id`),
   INDEX `_sync`(`_sync`)
+)
+TYPE=INNODB;
+
+CREATE TABLE `application_schema_info` (
+  `version` int(11) UNSIGNED
 )
 TYPE=INNODB;
 
@@ -50,13 +50,6 @@ CREATE TABLE `user_rights` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `community_blog_comment_statuses` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  PRIMARY KEY(`id`)
-)
-TYPE=INNODB;
-
 CREATE TABLE `application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `owner` int(11) UNSIGNED NOT NULL,
@@ -68,6 +61,19 @@ CREATE TABLE `application_projects` (
   INDEX `owner`(`owner`),
   CONSTRAINT `application_projects.owner2user_users.id` FOREIGN KEY (`owner`)
     REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `media_document_categories` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -86,13 +92,28 @@ CREATE TABLE `content_navigations` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `media_document_categories` (
+CREATE TABLE `community_blog_comment_statuses` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `community_blog_comment_statuses.project2application_project.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_page_types` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `editable` enum('0','1') DEFAULT '1',
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -130,38 +151,6 @@ CREATE TABLE `templating_template_sets` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `content_page_types` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `editable` enum('0','1') DEFAULT '1',
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
-CREATE TABLE `user_rights2application_projects` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `right` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  INDEX `right`(`right`),
-  CONSTRAINT `application_projects.id2user_rights.id` FOREIGN KEY (`right`)
-    REFERENCES `user_rights`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `user_rights.id2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
 CREATE TABLE `user_groups2user_rights` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `group` int(11) UNSIGNED NOT NULL,
@@ -174,6 +163,24 @@ CREATE TABLE `user_groups2user_rights` (
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `user_users2user_groups` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `group` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `group`(`group`),
+  INDEX `user`(`user`),
+  CONSTRAINT `user_groups.id2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `user_users.id2user_groups.id` FOREIGN KEY (`group`)
     REFERENCES `user_groups`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -198,19 +205,19 @@ CREATE TABLE `user_users2application_projects` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `user_users2user_groups` (
+CREATE TABLE `user_rights2application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
+  `project` int(11) UNSIGNED NOT NULL,
+  `right` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(`id`),
-  INDEX `group`(`group`),
-  INDEX `user`(`user`),
-  CONSTRAINT `user_groups.id2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
+  INDEX `project`(`project`),
+  INDEX `right`(`right`),
+  CONSTRAINT `application_projects.id2user_rights.id` FOREIGN KEY (`right`)
+    REFERENCES `user_rights`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `user_users.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
+  CONSTRAINT `user_rights.id2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )

@@ -56,6 +56,10 @@ try {
 	// map field id names to regexps and error messages 
 	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
+			case 'blog_comment_status_name':
+					$reg = OAK_REGEX_BLOG_COMMENT_STATUS_NAME;
+					$desc = gettext('Only capitalized literal string');
+				break;			
 			case 'group_name':
 					$reg = OAK_REGEX_GROUP_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
