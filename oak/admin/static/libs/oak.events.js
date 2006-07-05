@@ -128,7 +128,7 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'#main textarea' : function(el){
+	'#content textarea' : function(el){
 		el.onfocus = function(){
 			mFocus(this, '','#0c3','dotted');
 			return false;
@@ -141,9 +141,14 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'#indicator' : function(el){
+	'.submitbut200' : function(el){
 		el.onclick = function(){
-			Element.show("indicator");
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+	},
+	'.submitbut140' : function(el){
+		el.onclick = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
 	'.hidetbl' : function(el){
