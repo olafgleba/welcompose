@@ -284,6 +284,7 @@ height: 20px;
 font-size: 80%;
 border: 0 none;
 padding: 0 0 0 5px;
+cursor: pointer;
 }
 #projects .fselect {
 margin: 1px 5px 0 0;
@@ -603,6 +604,9 @@ line-height: 1.5em;
 width: 300px;
 margin: 0;
 padding-left: 140px;
+}
+.iHelp a, .iHelpRemove a {
+background-color: #fff;
 }
 .iHelp img, .iHelpRemove img {
 vertical-align: middle;
