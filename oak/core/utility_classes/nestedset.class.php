@@ -85,6 +85,108 @@ public function instance()
 }
 
 /**
+ * Wrapper around all the other create* functions. It takes over the decision 
+ * process which of all the other create* functions to use.
+ *
+ * @throws Utility_NestedsetException
+ * @param int Navigation id
+ * @param int Reference node id
+ * @param int Position information
+ * @return int Insert id
+ */
+public function createNode ($navigation, $reference = null, $position = null)
+{
+	// input check
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+	}
+	if (!empty($reference) && !is_numeric($reference)) {
+		throw new Utility_NestedsetException("Input for parameter reference is expected to be numeric");
+	}
+	if (!empty($position) && !is_numeric($position)) {
+		throw new Utility_NestedsetException("Input for parameter position is expected to be numeric");
+	}
+	
+	// if there's no reference node, we have to create a root node
+	if (empty($reference)) {
+		return $this->createRootNode($navigation);
+	}
+		
+	// now, the reference node can only be a normal node. so we've to look
+	// at $position to decide which create* function to use
+	switch ($position) {
+		case UTILITY_NESTEDSET_CREATE_BEFORE:
+				return $this->createNodeAbove($navigation, $reference, $position);
+			break;
+		case UTILITY_NESTEDSET_CREATE_AFTER:
+				return $this->createNodeBelow($navigation, $reference, $position);
+			break;
+		default:
+			throw new Utility_NestedsetException("Unknown position supplied");
+	}
+}
+
+/**
+ * Wrapper around the different delete* functions. Decides which of all the
+ * different delete functions to use.
+ * 
+ * @throws Utility_NestedsetException
+ * @param int Navigation id
+ * @param int Node id
+ * @return int Amount of affected rows
+ */
+public function deleteNode ($navigation, $node)
+{
+	// input check
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+	}
+	if (empty($node) || !is_numeric($node)) {
+		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+	}
+	
+	// let's see if it's a root node
+	if ($this->root_node($node, $navigation)) {
+		return $this->deleteRootNode($navigation, $node);
+	} else {
+		return $this->deleteNodeInTree($navigation, $node);
+	}
+}
+
+/**
+ * Wrapper around the different move* functions. Deciedes which of all the
+ * different move functions to use.
+ * 
+ * @throws Utility_NestedsetException
+ * @param int Navigation id
+ * @param int Node id
+ * @param string Move direction
+ * @return bool
+ */
+public function moveNode ($navigation, $node, $direction = "down")
+{
+	// input check
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Utility_NestedsetException("Input for parameter navigation is not numeric");
+	}
+	if (empty($node) || !is_numeric($node)) {
+		throw new Utility_NestedsetException("Input for parameter node is not numeric");
+	}
+	if ($direction !== 'down' && $direction !== 'up') {
+		throw new Utility_NestedsetException("Move direction can either be up or down");
+	}
+	
+	switch ((string)$direction) {
+		case 'up':
+				return $this->moveAboveInTree($navigation, $node);
+			break;
+		case 'down':
+				return $this->moveBelowInTree($navigation, $node);
+			break;
+	}
+}
+
+/**
  * Creates new root node. Takes the navigation id as first argument, the
  * id of the reference node after or before the new node will be created
  * as second argument and the positioning information as third argument.
@@ -123,7 +225,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 	
 	// if the reference node exists, look at the position constant and place the
 	// new node according to it.
-	if ($this->node_exists($reference)) {
+	if (!empty($reference) && $this->node_exists($reference)) {
 		// get reference node
 		$result = $this->selectNode($reference);
 		
@@ -423,87 +525,104 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// get node
 	$node = $this->selectNode($node_id);
 	
-	// make sure that we don't try to move a root node or a sub root node
-	if ((int)$node['lft'] < 1 || (int)$node['lft'] > 2) {
-		throw new Utility_NestedsetException("Cannot move nodes with a lft > 2");
+	// make sure that we don't try to move a normal node
+	if ((int)$node['lft'] > 2) {
+		return $this->moveAboveInTree($navigation, $node_id);
 	}
 	
-	// move the first root node at the end of the navigation structure. we need
-	// to take the node out of its tree and turn its first child into the root node.
-	if ((int)$node['lft'] === 1 && (int)$node['sorting'] === (int)$this->selectMinSorting($navigation)) {
-		// and we need the sibling below too
+	$sibling_one_level_deeper = $this->selectSiblingAboveOneLevelDeeper($navigation, $node['id']);
+	$sibling = $this->selectSiblingAbove($navigation, $node['id']);
+	
+	if (empty($sibling_one_level_deeper)) {
+		$sibling_one_level_deeper = $sibling;
+	}
+	
+	// get min/max sorting
+	$max_sorting = $this->selectMaxSorting($navigation);
+	$min_sorting = $this->selectMinSorting($navigation);
+	
+	// Handles move if the current node is the only node in the navigation.
+	//
+	// Test 1 <---
+	//
+	if ($node['lft'] == 1 && $node['rgt'] == 2 && $node['sorting'] == $min_sorting && $node['sorting'] == $max_sorting) {
+		// nothing has to be done here
+		break;
+	
+	// handles move if the current node is top-most node in the navigation and it
+	// has no childs
+	//
+	// Test 1  <---
+	// Test 2
+	// 
+	// We have move 'Test 1' at the end of the navigation:
+	// 
+	// Test 2
+	// Test 1  <---
+	//
+	} elseif ($node['lft'] == 1 && $node['sorting'] == $min_sorting && ($node['rgt'] - $node['lft']) == 1) {
+		// adjust sorting
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`sorting` = `sorting` - 1
+			WHERE
+				`sorting` > :sorting
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'sorting' => (int)$node['sorting'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// now, we have to turn the sibling below the current
+		// node into a real root node.
+		$sqlData = array(
+			'sorting' => (int)$this->selectMaxSorting($navigation) + 1
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		
+	// handles move if the current node is top-most node in the navigation.
+	//
+	// Test 1  <---
+	// - Test 2
+	// - - Test 3
+	// - Test 4
+	// Test 5
+	// 
+	// We have move 'Test 1' at the end of the navigation:
+	// 
+	// Test 2
+	// - Test 3
+	// - Test 4
+	// Test 5
+	// Test 1  <---
+	//	
+	} elseif ($node['lft'] == 1 && $node['sorting'] == $min_sorting && ($node['rgt'] - $node['lft']) > 1) {
+		// our first task is to get the sibling *below* the current node
+		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
 		
-		// now we need to fix the old tree. turn the first child of the current node
-		// into the new root node. lot of work :(
-	
-		// update level
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`level` = `level` - 1
-			WHERE
-				`root_node` = :root_node
-			AND
-				`lft` >= :lft
-			AND
-				`rgt` <= :rgt
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id'],
-			'lft' => (int)$sibling_below['lft'],
-			'rgt' => (int)$sibling_below['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update rgt and lft in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`lft` = `lft` - 1,
-				`rgt` = `rgt` - 1
-			WHERE
-				`root_node` = :root_node
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update lfts and rgts in the rest of the tree that's not
-		// within the subtree of the new root node... um, what!?
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`lft` = `lft` - 1,
-				`rgt` = `rgt` - 1
-			WHERE
-				`root_node` = :root_node
-			AND
-				`rgt` >= :rgt
-		"; 
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id'],
-			'rgt' => (int)$sibling_below['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update root node in the whole tree
+		// the next step is to swap the parent ids and root node ids
+		// of the current node with them of the sibling below. 
+		// let's start with the root node ids.
 		$sql = "
 			UPDATE
 				`".OAK_DB_CONTENT_NODES."`
@@ -511,290 +630,47 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 				`root_node` = :new_root_node
 			WHERE
 				`root_node` = :old_root_node
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'new_root_node' => (int)$sibling_below['id'],
-			'old_root_node' => (int)$node['id']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update parents in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`parent` = :new_parent
-			WHERE
-				`parent` = :old_parent
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'new_parent' => (int)$sibling_below['id'],
-			'old_parent' => (int)$node['id']
-		);
-		
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update new root node
-		$sqlData = array(
-			'parent' => null,
-			'rgt' => (int)$node['rgt'] - 2
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-		
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$sibling_below['id']
-		);
-		
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-		
-		// move current node away
-		$sqlData = array(
-			'root_node' => (int)$node['id'],
-			'parent' => null,
-			'lft' => 1,
-			'rgt' => 2,
-			'level' => 1,
-			'sorting' => $this->selectMaxSorting($navigation) + 1
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-		
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$node['id']
-		);
-		
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-	} elseif ((int)$node['lft'] === 1) {
-		// the level difference between the current node and the sibling
-		// may be bigger than 1. so we neet to use a different lookup 
-		// function
-		$real_sibling = $this->selectSiblingAboveOneLevelDeeper($navigation, $node['id']);
-		
-		// and we need the sibling below too
-		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']); 
-		
-		// update rgts in the new tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`rgt` = `rgt` + 2
-			WHERE
-				`root_node` = :root_node
 			AND
-				`rgt` > :rgt
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$real_sibling['root_node'],
-			'rgt' => (int)$real_sibling['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// move the current node
-		$sqlData = array(
-			'root_node' => (int)$real_sibling['root_node'],
-			'parent' => (is_numeric($real_sibling['parent']) ? $real_sibling['parent'] : null),
-			'lft' => (int)$real_sibling['rgt'] + 1,
-			'rgt' => (int)$real_sibling['rgt'] + 2,
-			'level' => (int)$real_sibling['level'],
-			'sorting' => (int)$real_sibling['sorting']
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-		
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$node['id']
-		);
-		
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-		
-		// now we need to fix the old tree. turn the first child of the current node
-		// into the new root node. lot of work :(
-	
-		// update level
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`level` = `level` - 1
-			WHERE
-				`root_node` = :root_node
-			AND
-				`lft` >= :lft
-			AND
-				`rgt` <= :rgt
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id'],
-			'lft' => (int)$sibling_below['lft'],
-			'rgt' => (int)$sibling_below['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update rgt and lft in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`lft` = `lft` - 1,
-				`rgt` = `rgt` - 1
-			WHERE
-				`root_node` = :root_node
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update lfts and rgts in the rest of the tree that's not
-		// within the subtree of the new root node... um, what!?
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`lft` = `lft` - 1,
-				`rgt` = `rgt` - 1
-			WHERE
-				`root_node` = :root_node
-			AND
-				`rgt` >= :rgt
-		"; 
-		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$node['id'],
-			'rgt' => (int)$sibling_below['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update root node in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`root_node` = :new_root_node
-			WHERE
-				`root_node` = :old_root_node
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'new_root_node' => (int)$sibling_below['id'],
-			'old_root_node' => (int)$node['id']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update parents in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`parent` = :new_parent
-			WHERE
-				`parent` = :old_parent
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'new_parent' => (int)$sibling_below['id'],
-			'old_parent' => (int)$node['id']
-		);
-		
-		$this->base->db->execute($sql, $bind_params);
-		
-		// update new root node
-		$sqlData = array(
-			'parent' => null,
-			'rgt' => (int)$node['rgt'] - 2
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-		
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$sibling_below['id']
-		);
-		
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
-	} else {
-		// update sorting of old tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`sorting` = `sorting` + 1
-			WHERE
 				`navigation` = :navigation
-			AND
-				`sorting` >= :sorting
 		";
-		
+	
 		// prepare bind params
 		$bind_params = array(
-			'navigation' => (int)$navigation,
-			'sorting' => (int)$node['sorting']
+			'old_root_node' => (int)$node['id'],
+			'new_root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
 		);
 		
 		// execute query
-		$this->base->db->execute($sql, $bind_params);
+		$this->base->db->execute($sql, $bind_params);		
 		
-		// update parents in old sub tree
+		// now the parent ids
 		$sql = "
 			UPDATE
 				`".OAK_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
+				`parent` = :old_parent
+			AND
 				`root_node` = :root_node
 			AND
-				`parent` = :old_parent
+				`navigation` = :navigation
 		";
-		
+	
 		// prepare bind params
 		$bind_params = array(
-			'new_parent' => (int)$node['parent'],
-			'root_node' => (int)$node['root_node'],
-			'old_parent' => (int)$node['id']
+			'old_parent' => (int)$node['id'],
+			'new_parent' => (int)$sibling_below['id'],
+			'root_node' => (int)$sibling_below['root_node'],
+			'navigation' => (int)$navigation
 		);
-		
+	
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
 		
-		// lower lfts, rgts and level in old sub tree
+		// so, now we have to fix the old tree. our first task is to fix the subtree
+		// of our new root node. let's start with the lfts, rgts and the level.
 		$sql = "
 			UPDATE
 				`".OAK_DB_CONTENT_NODES."`
@@ -803,73 +679,82 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 				`rgt` = `rgt` - 1,
 				`level` = `level` - 1
 			WHERE
-				`root_node` = :root_node
-			AND
 				`lft` > :lft
 			AND
 				`rgt` < :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
 		";
-		
+	
 		// prepare bind params
 		$bind_params = array(
-			'root_node' => (int)$node['root_node'],
-			'lft' => (int)$node['lft'],
-			'rgt' => (int)$node['rgt']
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
 		);
 		
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
 		
-		// lower lfts in the rest of the old tree
+		// the next task is to fix the rest of the tree. we should be done
+		// with lft and rgt adjustments.
 		$sql = "
 			UPDATE
 				`".OAK_DB_CONTENT_NODES."`
 			SET
-				`lft` = `lft` - 2
-			WHERE
-				`root_node` = :root_node
-			AND
-				`lft` > :rgt
-		";
-		
-		// prepare bind aprams
-		$bind_params = array(
-			'root_node' => (int)$node['root_node'],
-			'rgt' => (int)$node['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);		
-		
-		// lower rgt in the rest of the old tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
+				`lft` = `lft` - 2,
 				`rgt` = `rgt` - 2
 			WHERE
+				`lft` > :rgt
+			AND
 				`root_node` = :root_node
 			AND
-				`rgt` > :rgt
+				`navigation` = :navigation
 		";
-		
+	
 		// prepare bind params
 		$bind_params = array(
-			'root_node' => (int)$node['root_node'],
-			'rgt' => (int)$node['rgt']
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
 		);
 		
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
 		
-		// turn current node into root node
+		// now, we have to turn the sibling below the current
+		// node into a real root node.
 		$sqlData = array(
-			'root_node' => (int)$node['id'],
+			'root_node' => $sibling_below['id'],
+			'parent' => null,
+			'lft' => 1,
+			'rgt' => (int)$node['rgt'] - 2,
+			'level' => 1
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		
+		// now, the last task is to take the node out of the tree and to
+		// place it at the end of the navigation.
+		$sqlData = array(
+			'root_node' => $node['id'],
 			'parent' => null,
 			'lft' => 1,
 			'rgt' => 2,
 			'level' => 1,
-			'sorting' => (int)$node['sorting']
+			'sorting' => (int)$this->selectMaxSorting($navigation) + 1
 		);
 		
 		// prepare where clause
@@ -881,7 +766,603 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+	
+	// Handles move if node is a root node (but not the top-most root node) and the
+	// sibling above has no childs
+	//
+	// Test 1
+	// Test 2 <---
+	// - Test 3
+	// - - Test 4
+	// - Test 5
+	// Test 6
+	// 
+	// We have turn 'Test 2' into a child of 'Test 1':
+	// 
+	// Test 1
+	// - Test 2 <---
+	// Test 3
+	// - Test 4  
+	// - Test 5
+	// Test 6
+	//
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling['rgt'] - $sibling['lft']) == 1) {
+		// our first task is to get the sibling *below* the current node
+		// because we'll probably neeed a new root node
+		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
+		
+		// the next step is to swap the parent ids and root node ids
+		// of the current node with them of the sibling below. 
+		// let's start with the root node ids.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`root_node` = :new_root_node
+			WHERE
+				`root_node` = :old_root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'old_root_node' => (int)$node['id'],
+			'new_root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// now the parent ids
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'old_parent' => (int)$node['id'],
+			'new_parent' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// so, now we have to fix the old tree. our first task is to fix the subtree
+		// of our new root node. let's start with the lfts, rgts and the level.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 1,
+				`rgt` = `rgt` - 1,
+				`level` = `level` - 1
+			WHERE
+				`lft` > :lft
+			AND
+				`rgt` < :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// the next task is to fix the rest of the tree. we should be done
+		// with lft and rgt adjustments.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 2,
+				`rgt` = `rgt` - 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// now, we have to turn the sibling below the current
+		// node into a real root node.
+		$sqlData = array(
+			'root_node' => $sibling_below['id'],
+			'parent' => null,
+			'lft' => 1,
+			'rgt' => (int)$node['rgt'] - 2,
+			'level' => 1
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
+		
+		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		
+		// now, the last task is to take the node out of the tree and to
+		// place it at the end of the tree above. first, we have to adjust
+		// the lfts/rgts. let's start with the lfts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` + 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_one_level_deeper['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// adjust rgts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`rgt` = `rgt` + 2
+			WHERE
+				`rgt` >= :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_one_level_deeper['root_node'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// take the node out of the current tree and put it in the tree above
+		$sqlData = array(
+			'root_node' => $sibling_one_level_deeper['root_node'],
+			'parent' => $sibling_one_level_deeper['id'],
+			'lft' => $sibling_one_level_deeper['rgt'],
+			'rgt' => $sibling_one_level_deeper['rgt'] + 1,
+			'level' => $sibling_one_level_deeper['level'] + 1,
+			'sorting' => $sibling_one_level_deeper['sorting']
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+
+	// handles move if the current node is a root node (not the top-most) and the
+	// sibling above has one or more childs.
+	//
+	// Test 1
+	// - Test 2
+	// - - Test 3
+	// Test 4 <---
+	// - Test 5
+	// - - Test 6
+	// - Test 7
+	// Test 8
+	// 
+	// We have turn 'Test 2' into a child of 'Test 1':
+	// 
+	// Test 1
+	// - Test 2
+	// - - Test 3
+	// - Test 4  <---
+	// Test 5
+	// - Test 6
+	// - Test 7
+	// Test 8
+	//
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling['rgt'] - $sibling['lft']) > 1) {
+		// our first task is to get the sibling *below* the current node
+		// because we'll probably neeed a new root node
+		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
+		
+		// the next step is to swap the parent ids and root node ids
+		// of the current node with them of the sibling below. 
+		// let's start with the root node ids.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`root_node` = :new_root_node
+			WHERE
+				`root_node` = :old_root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'old_root_node' => (int)$node['id'],
+			'new_root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// now the parent ids
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'old_parent' => (int)$node['id'],
+			'new_parent' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// so, now we have to fix the old tree. our first task is to fix the subtree
+		// of our new root node. let's start with the lfts, rgts and the level.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 1,
+				`rgt` = `rgt` - 1,
+				`level` = `level` - 1
+			WHERE
+				`lft` > :lft
+			AND
+				`rgt` < :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// the next task is to fix the rest of the tree. we should be done
+		// with lft and rgt adjustments.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 2,
+				`rgt` = `rgt` - 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_below['rgt'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// now, we have to turn the sibling below the current
+		// node into a real root node.
+		$sqlData = array(
+			'root_node' => $sibling_below['id'],
+			'parent' => null,
+			'lft' => 1,
+			'rgt' => (int)$node['rgt'] - 2,
+			'level' => 1
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		
+		// now, the last task is to take the node out of the tree and to
+		// place it at the end of the tree above. first, we have to adjust
+		// the lfts/rgts. let's start with the lfts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` + 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_one_level_deeper['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// adjust rgts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`rgt` = `rgt` + 2
+			WHERE
+				`rgt` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_one_level_deeper['root_node'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// take the node out of the current tree and put it in the tree above
+		$sqlData = array(
+			'root_node' => $sibling_one_level_deeper['root_node'],
+			'parent' => $sibling_one_level_deeper['parent'],
+			'lft' => $sibling_one_level_deeper['rgt'] + 1,
+			'rgt' => $sibling_one_level_deeper['rgt'] + 2,
+			'level' => $sibling_one_level_deeper['level'],
+			'sorting' => $sibling_one_level_deeper['sorting']
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		
+	// handles move if the current node is the only	node in its tree and
+	// the next node above is a root node too.
+	//
+	// Test 1
+	// - Test 2 <---
+	// - - Test 3
+	// - Test 4
+	// Test 5
+	// 
+	// We have turn 'Test 2' into a new root node above 'Test 1':
+	// 
+	// Test 2 <---
+	// Test 1
+	// - Test 3
+	// - Test 4
+	// Test 5
+	//
+	} elseif ($sibling['id'] == $node['parent']) {
+		// higher the sorting of the current tree and all trees below
+		// adjust sorting of the node above
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`sorting` = `sorting` + 1
+			WHERE
+				`sorting` >= :sorting
+			AND
+				`navigation` = :navigation
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'sorting' => (int)$node['sorting'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// take current node out of the tree and turn it into a root node
+		$sqlData = array(
+			'root_node' => $node['id'],
+			'parent' => null,
+			'lft' => 1,
+			'rgt' => 2,
+			'level' => 1,
+			'sorting' => $node['sorting']
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+		
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		
+		// now we have to care about possible childs of the current node. let's start
+		// with the parent adjustment.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+			AND
+				`navigation` = :navigation
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'new_parent' => (int)$sibling['id'],
+			'old_parent' => (int)$node['id'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// now we have to adjust the lfts, rgts and the level
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 1,
+				`rgt` = `rgt` - 1,
+				`level` = `level` - 1
+			WHERE
+				`lft` > :lft
+			AND
+				`rgt` < :rgt
+			AND
+				`navigation` = :navigation
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'lft' => (int)$node['lft'],
+			'rgt' => (int)$node['rgt'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// and at last task, we have to adjust the lfts and the rgts in the rest of the tree.
+		// let's start with the lfts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 2
+			WHERE
+				`lft` > :lft
+			AND
+				`rgt` > :rgt
+			AND
+				`navigation` = :navigation
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'lft' => (int)$node['rgt'],
+			'rgt' => (int)$node['rgt'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// and now the rgts
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`rgt` = `rgt` - 2
+			WHERE
+				`rgt` > :rgt
+			AND
+				`navigation` = :navigation
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$node['rgt'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);			
 	}
 	
 	return true;
@@ -919,7 +1400,7 @@ public function moveAboveInTree ($navigation, $node_id)
 	
 	// make sure that we don't try to move a root node or a sub root node
 	if ((int)$node['lft'] === 1 || (int)$node['lft'] === 2) {
-		throw new Utility_NestedsetException("Cannot move root or sub root node (lft < 2)");
+		return $this->moveAboveAcrossTrees($navigation, $node_id);
 	}
 	
 	// get sibling above
@@ -1383,6 +1864,11 @@ public function moveBelowAcrossTrees ($navigation, $node_id)
 	// get sibling below
 	$sibling_below = $this->selectSiblingBelow($navigation, $node_id);
 	
+	// make sure that we don't try to move within a tree
+	if (is_array($sibling_below) &&  $sibling_below['root_node'] == $node['root_node'] && $node['lft'] > 1) {
+		return $this->moveBelowInTree($navigation, $node_id);
+	}
+	
 	// if it's a root node and that one with the highest sorting,
 	// let's move it at the beginning of the whole navigation structure
 	if ((int)$node['lft'] === 1 && !is_array($sibling_below) && $this->selectMaxSorting($navigation) == $node['sorting']) {
@@ -1422,88 +1908,7 @@ public function moveBelowAcrossTrees ($navigation, $node_id)
 
 		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-	// nodes with a lft of 1 are root nodes, we have to place them somewhere
-	// in the tree and have to create a new root node. so let's change its
-	// position with that one of the sibling below.
-	} elseif ((int)$node['lft'] === 1 && $sibling_below['lft'] > 1) {
-		// decrease level of all subnodes of the sibling below
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`lft` = `lft` + 1,
-				`rgt` = `rgt` + 1,
-				`level` = `level` - 1
-			WHERE
-				`root_node` = :root_node
-			AND
-				`rgt` <= :rgt
-		";
 		
-		// prepare bind params
-		$bind_params = array(
-			'root_node' => (int)$sibling_below['root_node'],
-			'rgt' => (int)$sibling_below['rgt']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
-		
-		// turn sibling below into root node
-		$sqlData = array(
-			'parent' => (int)$sibling_below['id'],
-			'lft' => (int)$sibling_below['lft'],
-			'rgt' => (int)$sibling_below['lft'] + 1,
-			'level' => (int)$sibling_below['level']
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$node['id']
-		);
-
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-		
-		// turn root node into replacement of sibling below
-		$sqlData = array(
-			'parent' => null,
-			'lft' => 1,
-			'rgt' => (int)$node['rgt']
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$sibling_below['id']
-		);
-
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-		
-		// update root node in the whole tree
-		$sql = "
-			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
-			SET
-				`root_node` = :new_root_node
-			WHERE
-				`root_node` = :old_root_node
-		";
-		
-		// prepare bind params
-		$bind_params = array(
-			'new_root_node' => (int)$sibling_below['id'],
-			'old_root_node' => (int)$node['id']
-		);
-		
-		// execute query
-		$this->base->db->execute($sql, $bind_params);
 	// take current node out of its tree and create a new tree
 	// the the current node as its root node
 	} elseif ($node['lft'] > 1 && ($sibling_below['lft'] == 1 || !is_array($sibling_below))) {
@@ -1693,12 +2098,12 @@ public function moveBelowInTree ($navigation, $node_id)
 	// get sibling below
 	$sibling_below = $this->selectSiblingBelow($navigation, $node_id);
 	
-	// make sure that we don't try to move root nodes
-	if ((int)$node['lft'] === 1) {
+	// make sure that we don't try to move root nodes across multiple trees
+	if ((int)$node['lft'] === 1 && (int)$sibling_below['root_node'] !== (int)$node['root_node']) {
 		return $this->moveBelowAcrossTrees($navigation, $node_id);
 	}
 	// make sure that we don't try to move across multiple trees
-	if ((int)$node['level'] == 2 && (!is_array($sibling_below) || (int)$sibling_below['root_node'] !== (int)$node['root_node'])) {
+	if ((int)$node['level'] === 2 && (!is_array($sibling_below) || (int)$sibling_below['root_node'] !== (int)$node['root_node'])) {
 		return $this->moveBelowAcrossTrees($navigation, $node_id);
 	}
 	
@@ -1764,7 +2169,90 @@ public function moveBelowInTree ($navigation, $node_id)
 
 		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-		
+	
+	// nodes with a lft of 1 are root nodes, we have to place them somewhere
+	// in the tree and have to create a new root node. so let's change its
+	// position with that one of the sibling below.
+	} elseif ((int)$node['lft'] === 1 && $sibling_below['lft'] > 1) {
+		// decrease level of all subnodes of the sibling below
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` + 1,
+				`rgt` = `rgt` + 1,
+				`level` = `level` - 1
+			WHERE
+				`root_node` = :root_node
+			AND
+				`rgt` <= :rgt
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'root_node' => (int)$sibling_below['root_node'],
+			'rgt' => (int)$sibling_below['rgt']
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
+		// turn sibling below into root node
+		$sqlData = array(
+			'parent' => (int)$sibling_below['id'],
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['lft'] + 1,
+			'level' => (int)$sibling_below['level']
+		);
+
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+
+		// turn root node into replacement of sibling below
+		$sqlData = array(
+			'parent' => null,
+			'lft' => 1,
+			'rgt' => (int)$node['rgt']
+		);
+
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
+
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+
+		// update root node in the whole tree
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`root_node` = :new_root_node
+			WHERE
+				`root_node` = :old_root_node
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'new_root_node' => (int)$sibling_below['id'],
+			'old_root_node' => (int)$node['id']
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
 	// if the current node and the following node are on the same level,
 	// turn the current node into a child of the following node
 	} elseif ((int)$node['parent'] === (int)$sibling_below['parent']) {
@@ -2054,7 +2542,7 @@ public function deleteRootNode ($navigation, $node_id)
  * @param int Node id
  * @return int Amount of affected rows
  */
-public function deleteNode ($navigation, $node_id)
+public function deleteNodeInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
@@ -2674,7 +3162,7 @@ public function node_exists ($node, $navigation = null)
 	if (empty($node) && !is_numeric($node)) {
 		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
 	}
-	if (!empty($node) && !is_numeric($node)) {
+	if (!empty($navigation) && !is_numeric($navigation)) {
 		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
 	}
 	
@@ -2702,6 +3190,40 @@ public function node_exists ($node, $navigation = null)
 	
 	// evaluate query
 	if ((int)$this->base->db->select($sql, 'field', $bind_params) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Tests whether a node is a root node or not. Takes the node id as
+ * first argument and the navigation id as optional second argument.
+ * Returns bool.
+ * 
+ * @throws Utility_NestedsetException
+ * @param int Node id
+ * @param int Navigation id
+ * @return bool
+ */
+public function root_node ($node, $navigation = null)
+{
+	// input check
+	if (empty($node) && !is_numeric($node)) {
+		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+	}
+	if (!empty($node) && !is_numeric($node)) {
+		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+	}
+	if (!$this->node_exists($node, $navigation)) {
+		throw new Utility_NestedsetException("Node does not exist");
+	}
+	
+	// get node
+	$result = $this->selectNode($node);
+	
+	// evaluate result
+	if ($result['root_node'] == $result['id']) {
 		return true;
 	} else {
 		return false;
