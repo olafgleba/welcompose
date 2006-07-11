@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: pages_select.php
+ * File: pages_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -69,10 +69,6 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
-
-	// load navigation class
-	/* @var $NAVIGATION Content_Navigation */
-	$NAVIGATION = load('content:navigation');
 	
 	// init user and project
 	$USER->initUserAdmin();
@@ -85,36 +81,33 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
-	
-	// select available projects
-	$select_params = array(
-		'user' => OAK_CURRENT_USER,
-		'order_macro' => 'NAME'
-	);
-	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
-	
-	// select available navigations
-	$navigations = $NAVIGATION->selectNavigations();
-	$BASE->utility->smarty->assign('navigations', $navigations);
-	
-	// get pages
-	$page_arrays = array();
-	foreach ($navigations as $_navigation) {
-		$select_params = array(
-			'navigation' => (int)$_navigation['id']
-		);
-		$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
-	}
-	$BASE->utility->smarty->assign('page_arrays', $page_arrays);
-	
-	// display the page
-	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_select.html', OAK_TEMPLATE_KEY);
-		
-	// flush the buffer
-	@ob_end_flush();
-	exit;
 
+	// get page
+	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		
+	// clean buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
+
+	// redirect
+	switch((string)$page['page_type_name']) {
+		case 'OAK_BLOG':
+				header("Location: pages_blogs_postings_select.php");
+			exit;
+		case 'OAK_SIMPLE_FORM':
+				header("Location: pages_simpleforms_content_edit.php");
+			exit;
+		case 'OAK_SIMPLE_PAGE':
+				header("Location: pages_simplepages_content_edit.php");
+			exit;
+		case 'OAK_URL':
+				header("Location: pages_url_meta_edit.php");
+			exit;
+		default:
+				header("Location: pages_select.php");
+			exit;
+	}
 } catch (Exception $e) {
 	// clean buffer
 	if (!$BASE->debug_enabled()) {

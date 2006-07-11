@@ -240,7 +240,6 @@ public function selectGroup ($id)
 public function selectGroups ($params = array())
 {
 	// define some vars
-	$project = null;
 	$project_in = null;
 	$start = null;
 	$limit = null;
@@ -254,7 +253,6 @@ public function selectGroups ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'project':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -300,25 +298,27 @@ public function selectGroups ($params = array())
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
 			".OAK_DB_USER_GROUPS." AS `user_groups`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_groups`.`project` = `application_projects`.`id`
 		WHERE 
-			1
+			`user_groups`.`project` = :project
 	";
 	
-	// add where clauses
-	if (!empty($project) && is_numeric($project)) {
-		$sql .= " AND `application_projects`.`id` = :project ";
-		$bind_params['project'] = (int)$project;
-	}
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	/*
 	if (!is_null($project_in) && count($project_in) > 0) {
 		if (Base_Cnc::testArrayForNumericKeys($project_in) && Base_Cnc::testArrayForNumericValues($project_in)) {
 			$sql .= " AND `application_projects`.`id` IN ( :project_in ) ";
 			$bind_params['project_in'] = implode(', ', $project_in);
 		}
 	}
+	*/
 	
 	// add sorting
 	$sql .= " ORDER BY `user_groups`.`name` ";
@@ -435,6 +435,46 @@ public function selectGroupToRightsMap ($group)
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests whether given group belongs to current project. Takes the group
+ * id as first argument. Returns boolean true or false.
+ *
+ * @throws User_GroupException
+ * @param int Group id
+ * @return bool
+ */
+public function groupBelongsToCurrentProject ($group)
+{
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException('Input for parameter group is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		WHERE
+			`user_groups`.`id` = :group
+		AND
+			`user_groups`.`project` = :project
+	";
+	// prepare bind params
+	$bind_params = array(
+		'group' => (int)$group,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**

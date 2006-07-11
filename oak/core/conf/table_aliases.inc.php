@@ -49,9 +49,9 @@ define("OAK_DB_CONTENT_BOXES", "content_boxes");
 define("OAK_DB_CONTENT_NAVIGATIONS", "content_navigations");
 define("OAK_DB_CONTENT_NODES", "content_nodes");
 define("OAK_DB_CONTENT_PAGES", "content_pages");
-define("OAK_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2application_groups");
+define("OAK_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2user_groups");
 define("OAK_DB_CONTENT_PAGE_TYPES", "content_page_types");
-define("OAK_DB_CONTENT_SIMPLE_PAGE", "content_simple_page");
+define("OAK_DB_CONTENT_SIMPLE_PAGES", "content_simple_pages");
 
 // media table aliases
 define("OAK_DB_MEDIA_DOCUMENTS", "media_documents");

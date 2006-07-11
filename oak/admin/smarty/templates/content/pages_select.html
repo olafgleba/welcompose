@@ -62,9 +62,7 @@ var form_attr = '{$form.attributes}';
 <div id="brc"><p>{i18n CONTENTS}: {i18n Pages}</p></div>
 
 <div id="content">
-
 <h1>{i18n Pages}</h1>
-
 {if empty($navigations)}
 <p>No navigation and no page has been created yet. Please create a <a href="navigations_select.php">navigation</a> first.</p>
 {else}
@@ -90,14 +88,28 @@ var form_attr = '{$form.attributes}';
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
+{assign var="navigation_id" value=$_navigation.id}
+{if count($page_arrays.$navigation_id) > 0}
+{foreach from=$page_arrays.$navigation_id item=_page}
+<tr>
+<td class="page{if $_page.level > 1}{$_page.level|escape:htmlall}{/if}">{$_page.name|escape:"htmlall"} ((id){$_page.id}, (rn){$_page.root_node}, (p){$_page.parent}, (l){$_page.lft}, (r){$_page.rgt}, (l){$_page.level}, (s){$_page.sorting})</td>
+<td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down" title="Down"></a></td>
+<td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up" title="Up"></td>
+<td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}&amp;reference={$_page.id|escape:"url"}" title="{i18n Add new page}"></a></td>
+<td><a class="edit" href="pages_edit.php?id={$_page.id|escape:"url"}" title="Edit page contents"></a></td>
+<td><a class="delete" href="pages_delete.php?id={$_page.id|escape:"url"}" title="Delete page"></a></td>
+</tr>
+{/foreach}
+{else}
 <tr>
 <td class="page">{i18n No page has been created yet}</td>
 <td></td>
 <td></td>
-<td><a class="new" href="pages_add.php" title="{i18n Add new page}"></a></td>
+<td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}" title="{i18n Add new page}"></a></td>
 <td></td>
 <td></td>
 </tr>
+{/if}
 </table>
 {/foreach}
 {/if}

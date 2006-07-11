@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 05.07.2006 14:41:18
--- Diagram Version: 51
+-- Created on: 09.07.2006 17:27:58
+-- Diagram Version: 57
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -366,9 +366,8 @@ CREATE TABLE `templating_template_sets2templating_templates` (
 TYPE=INNODB;
 
 CREATE TABLE `content_pages` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `project` int(11) UNSIGNED NOT NULL,
-  `node` int(11) UNSIGNED NOT NULL,
   `type` int(11) UNSIGNED NOT NULL,
   `template_set` int(11) UNSIGNED,
   `name` varchar(255),
@@ -381,7 +380,6 @@ CREATE TABLE `content_pages` (
   `image_big` int(11) UNSIGNED,
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  INDEX `navigation`(`node`),
   INDEX `type`(`type`),
   INDEX `template_set`(`template_set`),
   INDEX `index_page`(`index_page`),
@@ -395,10 +393,6 @@ CREATE TABLE `content_pages` (
   CONSTRAINT `content_pages.template_set2templating_template_sets.id` FOREIGN KEY (`template_set`)
     REFERENCES `templating_template_sets`(`id`)
       ON DELETE SET NULL
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_pages.node2content_nodes.id` FOREIGN KEY (`node`)
-    REFERENCES `content_nodes`(`id`)
-      ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `content_pages.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
@@ -415,6 +409,10 @@ CREATE TABLE `content_pages` (
   CONSTRAINT `content_pages.image_big2media_images.id` FOREIGN KEY (`image_big`)
     REFERENCES `media_images`(`id`)
       ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_pages.id2content_nodes.id` FOREIGN KEY (`id`)
+    REFERENCES `content_nodes`(`id`)
+      ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
@@ -519,9 +517,8 @@ CREATE TABLE `content_boxes` (
 TYPE=INNODB;
 
 CREATE TABLE `content_simple_pages` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `user` int(11) UNSIGNED NOT NULL,
-  `page` int(11) UNSIGNED NOT NULL,
   `title` varchar(255),
   `title_url` varchar(255),
   `content_raw` text,
@@ -531,9 +528,8 @@ CREATE TABLE `content_simple_pages` (
   `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `user`(`user`),
-  UNIQUE INDEX `page`(`page`),
   INDEX `text_converter`(`text_converter`),
-  CONSTRAINT `content_simple_page.page2content_pages.id` FOREIGN KEY (`page`)
+  CONSTRAINT `content_simple_page.id2content_pages.id` FOREIGN KEY (`id`)
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
@@ -586,15 +582,14 @@ CREATE TABLE `content_blog_postings` (
 TYPE=INNODB;
 
 CREATE TABLE `content_simple_forms` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `user` int(11) UNSIGNED NOT NULL,
-  `page` int(11) UNSIGNED NOT NULL,
   `title` varchar(255),
   `title_url` varchar(255),
   `content_raw` text,
   `content` text,
   `text_converter` int(11) UNSIGNED,
-  `type` enum('personal','business') DEFAULT 'personal',
+  `type` enum('personal','business') NOT NULL DEFAULT 'personal',
   `email_from` varchar(255),
   `email_to` varchar(255),
   `email_subject` varchar(255),
@@ -602,12 +597,11 @@ CREATE TABLE `content_simple_forms` (
   `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `user`(`user`),
-  INDEX `page`(`page`),
   CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
     REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_forms.page2content_pages.id` FOREIGN KEY (`page`)
+  CONSTRAINT `content_simple_forms.id2content_pages.id` FOREIGN KEY (`id`)
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,

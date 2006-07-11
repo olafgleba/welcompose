@@ -189,7 +189,6 @@ public function selectPage ($id)
 			`content_nodes`.`rgt` AS `rgt`,
 			`content_nodes`.`level` AS `level`,
 			`content_nodes`.`sorting` AS `sorting`,
-			`content_pages`.`node` AS `node`,
 			`content_pages`.`type` AS `type`,
 			`content_pages`.`template_set` AS `template_set`,
 			`content_pages`.`name` AS `name`,
@@ -200,11 +199,11 @@ public function selectPage ($id)
 			`content_page_types`.`name` AS `page_type_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
-			`content_pages`.`node` = `content_nodes`.`id`
-		LEFT JOIN
+			`content_pages`.`id` = `content_nodes`.`id`
+		JOIN
 			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
@@ -248,6 +247,11 @@ public function selectPage ($id)
 public function selectPages ($params = array())
 {
 	// define some vars
+	$navigation = null;
+	$root_node = null;
+	$parent = null;
+	$level = null;
+	$sorting = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -285,7 +289,6 @@ public function selectPages ($params = array())
 			`content_nodes`.`rgt` AS `rgt`,
 			`content_nodes`.`level` AS `level`,
 			`content_nodes`.`sorting` AS `sorting`,
-			`content_pages`.`node` AS `node`,
 			`content_pages`.`type` AS `type`,
 			`content_pages`.`template_set` AS `template_set`,
 			`content_pages`.`name` AS `name`,
@@ -296,11 +299,11 @@ public function selectPages ($params = array())
 			`content_page_types`.`name` AS `page_type_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
-			`content_pages`.`node` = `content_nodes`.`id`
-		LEFT JOIN
+			`content_pages`.`id` = `content_nodes`.`id`
+		JOIN
 			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
@@ -376,6 +379,179 @@ public function selectIndexPage ()
 	// return complete page information
 	return $this->selectPage($result);
 }
+
+/**
+ * Maps template to template sets. Takes template id as first argument,
+ * array with list of set ids as second argument. Returns boolean true.
+ * 
+ * If an empty array is passed as sets, all existing links will be
+ * removed.
+ *
+ * @throws throw new Templating_TemplateException
+ * @param int Template id
+ * @param array Template set ids
+ * @return bool
+ */
+public function mapPageToGroups ($page, $groups = array())
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException("Input for parameter page is not numeric");
+	}
+	if (!is_array($groups)) {
+		throw new Content_PageException("Input for parameter groups is expected to be an array");
+	}
+	
+	// let's see if the given template belongs to the current project
+	if (!$this->pageBelongsToCurrentProject($page)) {
+		throw new Templating_TemplateException('Given page does not belong to the current project');
+	}
+	
+	// load group class
+	$GROUP = load('user:group');
+	
+	// prepare query to remove all existing links to the current template
+	$sql = "
+		DELETE FROM
+			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+		USING
+			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_pages2user_groups`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages2user_groups`.`page` = :page
+		AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'page' => (int)$page,
+		'project' => (int)OAK_CURRENT_PROJECT
+	);
+	
+	// remove all existing links to the given page
+	$this->base->db->execute($sql, $bind_params);
+	
+	// add new links
+	foreach ($groups as $_group) {
+		if (!empty($_group) && is_numeric($_group) && $GROUP->groupBelongsToCurrentProject($_group)) {
+			$this->base->db->insert(OAK_DB_CONTENT_PAGES2USER_GROUPS, array('page' => $page, 'group' => $_group));
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Tests whether given page belongs to current project. Takes the page
+ * id as first argument. Returns boolean true or false.
+ *
+ * @throws Content_PageException
+ * @param int Page id
+ * @return bool
+ */
+public function pageBelongsToCurrentProject ($page)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		WHERE
+			`content_pages`.`id` = :page
+		AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'page' => (int)$page,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Prepares table structure for the selected page types. This task has to
+ * be executed directly after the page creation. Takes the id of the just
+ * created page as first argument. Returns boolean true.
+ * 
+ * @throws Content_PageException
+ * @param int Page id
+ * @return bool
+ */
+public function initPageContents ($page)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page  is expected to be numeric');
+	}
+	
+	// test if page belongs to current project
+	if (!$this->pageBelongsToCurrentProject($page)) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
+	// get page information
+	$page_info = $this->selectPage($page);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
+	// handle the different page types
+	switch((string)$page_info['page_type_name']) {
+		case 'OAK_SIMPLE_FORM':
+				// prepare sql data
+				$sqlData = array(
+					'id' => $page_info['id'],
+					'user' => OAK_CURRENT_USER,
+					'title' => $page_info['name'],
+					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'date_added' => date('Y-m-d H:i:s')
+				);
+				
+				// create simple form
+				$SIMPLEFORM = load('content:simpleform');
+				$SIMPLEFORM->addSimpleForm($sqlData);
+			break;
+		case 'OAK_SIMPLE_PAGE':
+				// prepare sql data
+				$sqlData = array(
+					'id' => $page_info['id'],
+					'user' => OAK_CURRENT_USER,
+					'title' => $page_info['name'],
+					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'date_added' => date('Y-m-d H:i:s')
+				);
+				
+				// create simple page
+				$SIMPLEPAGE = load('content:simplepage');
+				$SIMPLEPAGE->addSimplePage($sqlData);
+			break;
+		case 'OAK_BLOG':
+		case 'OAK_URL':
+		default:
+			break;
+	}
+	
+	return true;
+}
+
 
 // end of class
 }
