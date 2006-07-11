@@ -784,6 +784,114 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	// Handles move if node is a root node (but not the top-most root node) and the
+	// sibling above has no childs and the sibling below is a root node
+	//
+	// Test 1
+	// Test 2 <---
+	// Test 3
+	// 
+	// We have turn 'Test 2' into a child of 'Test 1':
+	// 
+	// Test 1
+	// - Test 2 <---
+	// Test 3
+	//
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1 &&
+	($node['rgt'] - $node['lft']) == 1) {
+		
+		// now, the first task is to take the node out of the tree and to
+		// place it at the end of the tree above. first, we have to adjust
+		// the lfts/rgts. let's start with the lfts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` + 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['id'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
+		// adjust rgts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`rgt` = `rgt` + 2
+			WHERE
+				`rgt` >= :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['root_node'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
+		// take the node out of the current tree and put it in the tree above
+		$sqlData = array(
+			'root_node' => $sibling_above_one_level_deeper['root_node'],
+			'parent' => $sibling_above_one_level_deeper['id'],
+			'lft' => $sibling_above_one_level_deeper['rgt'],
+			'rgt' => $sibling_above_one_level_deeper['rgt'] + 1,
+			'level' => $sibling_above_one_level_deeper['level'] + 1,
+			'sorting' => $sibling_above_one_level_deeper['sorting']
+		);
+
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		
+		// the last task is to close the sorting gap
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`sorting` = `sorting` - 1
+			WHERE
+				`sorting` > :sorting
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'sorting' => (int)$node['sorting'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+	// Handles move if node is a root node (but not the top-most root node) and the
 	// sibling above has no childs
 	//
 	// Test 1
@@ -802,7 +910,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 5
 	// Test 6
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1) {
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1 &&
+	($node['rgt'] - $node['lft']) > 1) {
 		// our first task is to get the sibling *below* the current node
 		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
@@ -871,7 +980,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			AND
 				`navigation` = :navigation
 		";
-	
+
 		// prepare bind params
 		$bind_params = array(
 			'lft' => (int)$sibling_below['lft'],
@@ -879,10 +988,10 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			'root_node' => (int)$sibling_below['id'],
 			'navigation' => (int)$navigation
 		);
-		
+	
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
-		
+	
 		// the next task is to fix the rest of the tree. we should be done
 		// with lft and rgt adjustments.
 		$sql = "
@@ -898,17 +1007,17 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			AND
 				`navigation` = :navigation
 		";
-	
+
 		// prepare bind params
 		$bind_params = array(
 			'rgt' => (int)$sibling_below['rgt'],
 			'root_node' => (int)$sibling_below['id'],
 			'navigation' => (int)$navigation
 		);
-		
+	
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
-		
+	
 		// now, we have to turn the sibling below the current
 		// node into a real root node.
 		$sqlData = array(
@@ -918,17 +1027,17 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			'rgt' => (int)$node['rgt'] - 2,
 			'level' => 1
 		);
-		
+	
 		// prepare where clause
 		$where = " WHERE `id` = :id ";
-		
+	
 		// prepare bind params
 		$bind_params = array(
 			'id' => (int)$sibling_below['id']
 		);
-		
+	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// now, the last task is to take the node out of the tree and to
 		// place it at the end of the tree above. first, we have to adjust
@@ -1378,6 +1487,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		
 		// execute query
 		$this->base->db->execute($sql, $bind_params);			
+	} else {
+		throw new Utility_NestedsetException("Move not implemented");
 	}
 	
 	return true;
