@@ -306,7 +306,7 @@ public function testSqlDataForPearErrors (&$sqlData)
 			throw new Utility_HelperException(sprintf("Element %s's value is of type PEAR_Error: %s",
 				$_key, $_value->getMessage()));
 		}
-		if (!is_scalar($_value)) {
+		if (!is_null($_value) && !is_scalar($_value)) {
 			throw new Utility_HelperException("Element $_key in bind params array is not scalar");
 		}
 	}
