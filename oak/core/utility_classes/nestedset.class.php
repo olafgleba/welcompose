@@ -352,6 +352,12 @@ public function createNodeAbove ($navigation, $reference)
 	// get reference node
 	$reference_node = $this->selectNode($reference);
 	
+	// if the reference node is a root node, we need to use the special
+	// method for root node creation
+	if ($reference_node['lft'] == 1) {
+		return 	$this->createRootNode ($navigation, $reference, UTILITY_NESTEDSET_CREATE_BEFORE);
+	}
+	
 	// update lft of future siblings
 	$sql = "
 		UPDATE
@@ -363,16 +369,16 @@ public function createNodeAbove ($navigation, $reference)
 		AND
 			`lft` >= :lft
 	";
-	
+
 	// prepare bind params
 	$bind_params = array(
 		'root_node' => (int)$reference_node['root_node'],
 		'lft' => (int)$reference_node['lft'] 
 	);
-	
+
 	// execute query
 	$this->base->db->execute($sql, $bind_params);
-	
+
 	// update rgt of future siblings
 	$sql = "
 		UPDATE
@@ -384,16 +390,16 @@ public function createNodeAbove ($navigation, $reference)
 		AND
 			`rgt` >= :lft
 	";
-	
+
 	// prepare bind params
 	$bind_params = array(
 		'root_node' => (int)$reference_node['root_node'],
 		'lft' => (int)$reference_node['lft']
 	);
-	
+
 	// execute query
 	$this->base->db->execute($sql, $bind_params);
-	
+
 	// prepare sql data
 	$sqlData = array(
 		'navigation' => (int)$navigation,
@@ -404,7 +410,7 @@ public function createNodeAbove ($navigation, $reference)
 		'level' => (int)$reference_node['level'],
 		'sorting' => (int)$reference_node['sorting']
 	);
-	
+
 	// insert node
 	return $this->base->db->insert(OAK_DB_CONTENT_NODES, $sqlData);
 }
