@@ -2508,6 +2508,7 @@ public function moveBelowInTree ($navigation, $node_id)
 		$sqlData = array(
 			'lft' => (int)$sibling_below['lft'] - 1,
 			'rgt' => (int)$sibling_below['rgt'] + 1,
+			'parent' => (int)$node['parent']
 		);
 		
 		// prepare where clause
