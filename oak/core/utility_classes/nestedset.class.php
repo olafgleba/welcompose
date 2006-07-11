@@ -530,11 +530,26 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		return $this->moveAboveInTree($navigation, $node_id);
 	}
 	
-	$sibling_one_level_deeper = $this->selectSiblingAboveOneLevelDeeper($navigation, $node['id']);
-	$sibling = $this->selectSiblingAbove($navigation, $node['id']);
+	// get sibling above and the sibling above that's one level deeper. we need them
+	// both 'cos of the following case:
+	// 
+	// Test 1
+	// - Test 2
+	// - - Test 3
+	// Test 4 <---
+	//
+	// let's imaginge we're going to move 'Test 4'. in our model we're expecting that
+	// 'Test 4' will be turned into a child of 'Test 1'. But selectSiblingAbove() will
+	// return 'Test 3' as new reference point, so that 'Test 4' would be a child of
+	// 'Test 2' -- and that's not what we want. siblingAboveOneLevelDeeper() returns
+	// 'Test 2', so that we can turn 'Test 4' into a child of 'Test 1'.	
+	$sibling_above_one_level_deeper = $this->selectSiblingAboveOneLevelDeeper($navigation, $node['id']);
+	$sibling_above = $this->selectSiblingAbove($navigation, $node['id']);
 	
-	if (empty($sibling_one_level_deeper)) {
-		$sibling_one_level_deeper = $sibling;
+	// if there's no sibling above that's one level deeper, take the sibling above
+	// as an alias so that our rules below still work.
+	if (empty($sibling_above_one_level_deeper)) {
+		$sibling_above_one_level_deeper = $sibling_above;
 	}
 	
 	// get min/max sorting
@@ -642,7 +657,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute query
-		$this->base->db->execute($sql, $bind_params);		
+		$this->base->db->execute($sql, $bind_params);
 		
 		// now the parent ids
 		$sql = "
@@ -787,7 +802,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 5
 	// Test 6
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling['rgt'] - $sibling['lft']) == 1) {
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling_above['rgt'] - $sibling_above['lft']) == 1) {
 		// our first task is to get the sibling *below* the current node
 		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
@@ -933,8 +948,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_one_level_deeper['id'],
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['id'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -957,8 +972,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_one_level_deeper['root_node'],
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['root_node'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -967,12 +982,12 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		
 		// take the node out of the current tree and put it in the tree above
 		$sqlData = array(
-			'root_node' => $sibling_one_level_deeper['root_node'],
-			'parent' => $sibling_one_level_deeper['id'],
-			'lft' => $sibling_one_level_deeper['rgt'],
-			'rgt' => $sibling_one_level_deeper['rgt'] + 1,
-			'level' => $sibling_one_level_deeper['level'] + 1,
-			'sorting' => $sibling_one_level_deeper['sorting']
+			'root_node' => $sibling_above_one_level_deeper['root_node'],
+			'parent' => $sibling_above_one_level_deeper['id'],
+			'lft' => $sibling_above_one_level_deeper['rgt'],
+			'rgt' => $sibling_above_one_level_deeper['rgt'] + 1,
+			'level' => $sibling_above_one_level_deeper['level'] + 1,
+			'sorting' => $sibling_above_one_level_deeper['sorting']
 		);
 		
 		// prepare where clause
@@ -1009,7 +1024,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 7
 	// Test 8
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling['rgt'] - $sibling['lft']) > 1) {
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling_above['rgt'] - $sibling_above['lft']) > 1) {
 		// our first task is to get the sibling *below* the current node
 		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
@@ -1155,8 +1170,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_one_level_deeper['id'],
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['id'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -1179,8 +1194,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_one_level_deeper['root_node'],
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['root_node'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -1189,12 +1204,12 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		
 		// take the node out of the current tree and put it in the tree above
 		$sqlData = array(
-			'root_node' => $sibling_one_level_deeper['root_node'],
-			'parent' => $sibling_one_level_deeper['parent'],
-			'lft' => $sibling_one_level_deeper['rgt'] + 1,
-			'rgt' => $sibling_one_level_deeper['rgt'] + 2,
-			'level' => $sibling_one_level_deeper['level'],
-			'sorting' => $sibling_one_level_deeper['sorting']
+			'root_node' => $sibling_above_one_level_deeper['root_node'],
+			'parent' => $sibling_above_one_level_deeper['parent'],
+			'lft' => $sibling_above_one_level_deeper['rgt'] + 1,
+			'rgt' => $sibling_above_one_level_deeper['rgt'] + 2,
+			'level' => $sibling_above_one_level_deeper['level'],
+			'sorting' => $sibling_above_one_level_deeper['sorting']
 		);
 		
 		// prepare where clause
@@ -1225,7 +1240,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 4
 	// Test 5
 	//
-	} elseif ($sibling['id'] == $node['parent']) {
+	} elseif ($sibling_above['id'] == $node['parent']) {
 		// higher the sorting of the current tree and all trees below
 		// adjust sorting of the node above
 		$sql = "
@@ -1284,7 +1299,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		
 		// prepare bind params
 		$bind_params = array(
-			'new_parent' => (int)$sibling['id'],
+			'new_parent' => (int)$sibling_above['id'],
 			'old_parent' => (int)$node['id'],
 			'navigation' => (int)$navigation
 		);
@@ -2108,6 +2123,7 @@ public function moveBelowInTree ($navigation, $node_id)
 	}
 	
 	if ($sibling_below['level'] <= ($node['level'] - 1)) {
+		throw new Exception("Blah!");
 		// get sibling one level higher
 		$sibling_above = $this->selectSiblingAboveOneLevelHigher($navigation, $node_id);
 		
