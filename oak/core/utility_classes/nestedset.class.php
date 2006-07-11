@@ -804,7 +804,6 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	//
 	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1 &&
 	($node['rgt'] - $node['lft']) == 1) {
-		
 		// now, the first task is to take the node out of the tree and to
 		// place it at the end of the tree above. first, we have to adjust
 		// the lfts/rgts. let's start with the lfts.
@@ -823,14 +822,14 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_above_one_level_deeper['id'],
+			'rgt' => (int)$sibling_above['rgt'],
+			'root_node' => (int)$sibling_above['id'],
 			'navigation' => (int)$navigation
 		);
-
+		
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
-
+		
 		// adjust rgts.
 		$sql = "
 			UPDATE
@@ -847,8 +846,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 
 		// prepare bind params
 		$bind_params = array(
-			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
-			'root_node' => (int)$sibling_above_one_level_deeper['root_node'],
+			'rgt' => (int)$sibling_above['rgt'],
+			'root_node' => (int)$sibling_above['root_node'],
 			'navigation' => (int)$navigation
 		);
 
@@ -857,12 +856,12 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 
 		// take the node out of the current tree and put it in the tree above
 		$sqlData = array(
-			'root_node' => $sibling_above_one_level_deeper['root_node'],
-			'parent' => $sibling_above_one_level_deeper['id'],
-			'lft' => $sibling_above_one_level_deeper['rgt'],
-			'rgt' => $sibling_above_one_level_deeper['rgt'] + 1,
-			'level' => $sibling_above_one_level_deeper['level'] + 1,
-			'sorting' => $sibling_above_one_level_deeper['sorting']
+			'root_node' => $sibling_above['root_node'],
+			'parent' => $sibling_above['id'],
+			'lft' => $sibling_above['rgt'],
+			'rgt' => $sibling_above['rgt'] + 1,
+			'level' => $sibling_above['level'] + 1,
+			'sorting' => $sibling_above['sorting']
 		);
 
 		// prepare where clause
