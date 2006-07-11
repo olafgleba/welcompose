@@ -92,6 +92,10 @@ try {
 		
 		// get page
 		$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+
+		// lock the table
+		$lock = sprintf(" LOCK TABLES `%s` WRITE ", OAK_DB_CONTENT_NODES);
+		$BASE->db->execute($lock);
 		
 		// move node
 		$NESTEDSET->moveNode(
@@ -99,6 +103,9 @@ try {
 			Base_Cnc::ifsetor($page['id'], null),
 			Base_Cnc::filterRequest($_REQUEST['direction'], OAK_REGEX_ALPHANUMERIC)
 		);
+		
+		// remove lock
+		$BASE->db->execute(" UNLOCK TABLES ");
 		
 		// commit transaction
 		$BASE->db->commit();
