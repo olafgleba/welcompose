@@ -802,7 +802,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 5
 	// Test 6
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling_above['rgt'] - $sibling_above['lft']) == 1) {
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1) {
 		// our first task is to get the sibling *below* the current node
 		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
@@ -1024,7 +1024,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 7
 	// Test 8
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && ($sibling_above['rgt'] - $sibling_above['lft']) > 1) {
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] > 1) {
 		// our first task is to get the sibling *below* the current node
 		// because we'll probably neeed a new root node
 		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
@@ -2122,8 +2122,24 @@ public function moveBelowInTree ($navigation, $node_id)
 		return $this->moveBelowAcrossTrees($navigation, $node_id);
 	}
 	
-	if ($sibling_below['level'] <= ($node['level'] - 1)) {
-		throw new Exception("Blah!");
+	// Handles move if the current node is at the end of a subtree
+	// or at the end of the whole tree and the level difference
+	// between the current node and the sibling below is bigger
+	// than one.
+	// 
+	// Test 1
+	// - Test 2
+	// - - Test 3 <---
+	// Test 4
+	// 
+	// Moving test 3 should result in:
+	//
+	// Test 1
+	// - Test 2
+	// - Test 3 <---
+	// Test 4
+	//
+	if ((int)$sibling_below['level'] <= ($node['level'] - 1)) {
 		// get sibling one level higher
 		$sibling_above = $this->selectSiblingAboveOneLevelHigher($navigation, $node_id);
 		
@@ -2189,6 +2205,17 @@ public function moveBelowInTree ($navigation, $node_id)
 	// nodes with a lft of 1 are root nodes, we have to place them somewhere
 	// in the tree and have to create a new root node. so let's change its
 	// position with that one of the sibling below.
+	//
+	// Test 1 <---
+	// - Test 2 
+	// - - Test 3
+	// 
+	// moving 'Test 1' should result in:
+	//
+	// Test 2
+	// - Test 1 <---
+	// - - Test 3
+	//
 	} elseif ((int)$node['lft'] === 1 && $sibling_below['lft'] > 1) {
 		// decrease level of all subnodes of the sibling below
 		$sql = "
@@ -2270,7 +2297,18 @@ public function moveBelowInTree ($navigation, $node_id)
 		$this->base->db->execute($sql, $bind_params);
 
 	// if the current node and the following node are on the same level,
-	// turn the current node into a child of the following node
+	// turn the current node into a child of the following node.
+	//
+	// Test 1
+	// - Test 2 <---
+	// - Test 3
+	//
+	// moving 'Test 3' should result in:
+	//
+	// Test 1
+	// - Test 3
+	// - - Test 2 <---	
+	//
 	} elseif ((int)$node['parent'] === (int)$sibling_below['parent']) {
 		// turn the current node into a child of the following node
 		$sqlData = array(
@@ -2306,9 +2344,23 @@ public function moveBelowInTree ($navigation, $node_id)
 
 		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+
 	// that handles moves if the sibling below is a child of the current node and
 	// the sibling below the sibling below is a child of the sibling below -- everything's
 	// clear? ;)
+	//
+	// Test 1
+	// - Test 2 <---
+	// - - Test 3
+	// - - - Test 4
+	//
+	// moving 'Test 2' should result in:
+	//
+	// Test 1
+	// - Test 3 
+	// - - Test 2 <---
+	// - - Test 4
+	//
 	} else {
 		// make room for the current node in the subtree
 		$sql = "
