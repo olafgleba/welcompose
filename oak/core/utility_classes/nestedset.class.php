@@ -1426,14 +1426,14 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
-				`id` = :id
+				`sorting` > :sorting
 			AND
 				`navigation` = :navigation
 		";
 
 		// prepare bind params
 		$bind_params = array(
-			'id' => (int)$sibling_below['id'],
+			'sorting' => (int)$node['sorting'],
 			'navigation' => (int)$navigation
 		);
 
@@ -3648,6 +3648,9 @@ protected function testSanity ($whole_tree)
 			return false;
 		}
 		if (empty($_node['rgt']) || $_node['rgt'] < 2) {
+			return false;
+		}
+		if ($_node['lft'] >= $_node['rgt']) {
 			return false;
 		}
 		if ((!is_null($_node['parent']) && $_node['parent'] < 1) || $_node['parent'] == $_node['id']) {
