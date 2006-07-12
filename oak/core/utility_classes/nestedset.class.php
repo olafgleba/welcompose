@@ -1537,6 +1537,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			AND
 				`rgt` < :rgt
 			AND
+				`root_node` = :root_node
+			AND
 				`navigation` = :navigation
 		";
 		
@@ -1544,6 +1546,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		$bind_params = array(
 			'lft' => (int)$node['lft'],
 			'rgt' => (int)$node['rgt'],
+			'root_node' => (int)$node['root_node'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -1562,6 +1565,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			AND
 				`rgt` > :rgt
 			AND
+				`root_node` = :root_node
+			AND
 				`navigation` = :navigation
 		";
 		
@@ -1569,6 +1574,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		$bind_params = array(
 			'lft' => (int)$node['rgt'],
 			'rgt' => (int)$node['rgt'],
+			'root_node' => (int)$node['root_node'],
 			'navigation' => (int)$navigation
 		);
 		
@@ -1584,12 +1590,15 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			WHERE
 				`rgt` > :rgt
 			AND
+				`root_node` = :root_node
+			AND
 				`navigation` = :navigation
 		";
 		
 		// prepare bind params
 		$bind_params = array(
 			'rgt' => (int)$node['rgt'],
+			'root_node' => (int)$node['root_node'],
 			'navigation' => (int)$navigation
 		);
 		
