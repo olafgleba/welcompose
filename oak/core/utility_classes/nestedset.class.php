@@ -562,13 +562,16 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	$max_sorting = $this->selectMaxSorting($navigation);
 	$min_sorting = $this->selectMinSorting($navigation);
 	
+	// get sibling below 
+	$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
+	
 	// Handles move if the current node is the only node in the navigation.
 	//
 	// Test 1 <---
 	//
 	if ($node['lft'] == 1 && $node['rgt'] == 2 && $node['sorting'] == $min_sorting && $node['sorting'] == $max_sorting) {
 		// nothing has to be done here
-		break;
+		return true;
 	
 	// handles move if the current node is top-most node in the navigation and it
 	// has no childs
@@ -637,10 +640,6 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// Test 1  <---
 	//	
 	} elseif ($node['lft'] == 1 && $node['sorting'] == $min_sorting && ($node['rgt'] - $node['lft']) > 1) {
-		// our first task is to get the sibling *below* the current node
-		// because we'll probably neeed a new root node
-		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
-		
 		// the next step is to swap the parent ids and root node ids
 		// of the current node with them of the sibling below. 
 		// let's start with the root node ids.
@@ -917,10 +916,6 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	//
 	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] == 1 &&
 	($node['rgt'] - $node['lft']) > 1) {
-		// our first task is to get the sibling *below* the current node
-		// because we'll probably neeed a new root node
-		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
-		
 		// the next step is to swap the parent ids and root node ids
 		// of the current node with them of the sibling below. 
 		// let's start with the root node ids.
@@ -1138,11 +1133,8 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	// - Test 7
 	// Test 8
 	//
-	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting && $sibling_above['lft'] > 1) {
-		// our first task is to get the sibling *below* the current node
-		// because we'll probably neeed a new root node
-		$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
-		
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting &&
+	$sibling_above['lft'] > 1 && $sibling_below['lft'] > 1) {
 		// the next step is to swap the parent ids and root node ids
 		// of the current node with them of the sibling below. 
 		// let's start with the root node ids.
@@ -1234,17 +1226,17 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			AND
 				`navigation` = :navigation
 		";
-	
+
 		// prepare bind params
 		$bind_params = array(
 			'rgt' => (int)$sibling_below['rgt'],
 			'root_node' => (int)$sibling_below['id'],
 			'navigation' => (int)$navigation
 		);
-		
+	
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
-		
+	
 		// now, we have to turn the sibling below the current
 		// node into a real root node.
 		$sqlData = array(
@@ -1254,17 +1246,17 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 			'rgt' => (int)$node['rgt'] - 2,
 			'level' => 1
 		);
-		
+	
 		// prepare where clause
 		$where = " WHERE `id` = :id ";
-		
+	
 		// prepare bind params
 		$bind_params = array(
 			'id' => (int)$sibling_below['id']
 		);
-		
+	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// now, the last task is to take the node out of the tree and to
 		// place it at the end of the tree above. first, we have to adjust
@@ -1337,6 +1329,117 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
+	// handles move if the current node is a root node (not the top-most) and the
+	// sibling above has one or more childs.
+	//
+	// Test 1
+	// - Test 2
+	// - - Test 3
+	// Test 4 <---
+	// Test 5
+	// 
+	// We have turn 'Test 2' into a child of 'Test 1':
+	// 
+	// Test 1
+	// - Test 2
+	// - - Test 3
+	// - Test 4  <---
+	// Test 5
+	//
+	} elseif ($node['lft'] == 1  && $node['sorting'] != $min_sorting &&
+	$sibling_above['lft'] > 1 && ($sibling_below['lft'] == 1 || empty($sibling_below))) {
+		// the first task is to take the node out of the tree and to
+		// place it at the end of the tree above. first, we have to adjust
+		// the lfts/rgts. let's start with the lfts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` + 2
+			WHERE
+				`lft` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['id'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
+		// adjust rgts.
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`rgt` = `rgt` + 2
+			WHERE
+				`rgt` > :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'rgt' => (int)$sibling_above_one_level_deeper['rgt'],
+			'root_node' => (int)$sibling_above_one_level_deeper['root_node'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+
+		// take the node out of the current tree and put it in the tree above
+		$sqlData = array(
+			'root_node' => $sibling_above_one_level_deeper['root_node'],
+			'parent' => $sibling_above_one_level_deeper['parent'],
+			'lft' => $sibling_above_one_level_deeper['rgt'] + 1,
+			'rgt' => $sibling_above_one_level_deeper['rgt'] + 2,
+			'level' => $sibling_above_one_level_deeper['level'],
+			'sorting' => $sibling_above_one_level_deeper['sorting']
+		);
+
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
+
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+
+		// fix the sorting of the node below
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`sorting` = `sorting` - 1
+			WHERE
+				`id` = :id
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+				
 	// handles move if the current node is the only	node in its tree and
 	// the next node above is a root node too.
 	//
@@ -2411,6 +2514,31 @@ public function moveBelowInTree ($navigation, $node_id)
 
 		// execute query
 		$this->base->db->execute($sql, $bind_params);
+		
+		// update parent in the whole tree
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation` = :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'new_parent' => (int)$sibling_below['id'],
+			'old_parent' => (int)$node['id'],
+			'root_node' => (int)$sibling_below['id'],
+			'navigation' => (int)$navigation
+		);
+
+		// execute query
+		$this->base->db->execute($sql, $bind_params);		
 
 	// if the current node and the following node are on the same level,
 	// turn the current node into a child of the following node.
@@ -2477,8 +2605,35 @@ public function moveBelowInTree ($navigation, $node_id)
 	// - - Test 2 <---
 	// - - Test 4
 	//
-	} else {
-		// make room for the current node in the subtree
+	} elseif ($node['id'] == $sibling_below['parent'] && $node['lft'] > 1) {
+		// turn childs of the current node into siblings. first step is to
+		// update the parent:
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation`= :navigation
+		";
+
+		// prepare bind params
+		$bind_params = array(
+			'new_parent' => (int)$node['parent'],
+			'old_parent' => (int)$node['id'],
+			'root_node' => (int)$node['root_node'],
+			'navigation' => (int)$navigation
+		);
+		
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+		
+		// the next step is to higher the lfts and rgts and
+		// to lower the level
 		$sql = "
 			UPDATE
 				`".OAK_DB_CONTENT_NODES."`
@@ -2487,42 +2642,27 @@ public function moveBelowInTree ($navigation, $node_id)
 				`rgt` = `rgt` + 1,
 				`level` = `level` - 1
 			WHERE
-				`root_node` = :root_node
-			AND
 				`lft` > :lft
 			AND
 				`rgt` < :rgt
+			AND
+				`root_node` = :root_node
+			AND
+				`navigation`= :navigation
 		";
-		
+
 		// prepare bind params
 		$bind_params = array(
-			'root_node' => (int)$node['root_node'],
 			'lft' => (int)$node['lft'],
-			'rgt' => (int)$node['rgt']
+			'rgt' => (int)$node['rgt'],
+			'root_node' => (int)$node['root_node'],
+			'navigation' => (int)$navigation
 		);
 		
 		// execute query
-		$this->base->db->execute($sql, $bind_params);
+		$this->base->db->execute($sql, $bind_params);		 
 		
-		// adjust lft/rgt of sibling below of the current node
-		$sqlData = array(
-			'lft' => (int)$sibling_below['lft'] - 1,
-			'rgt' => (int)$sibling_below['rgt'] + 1,
-			'parent' => (int)$node['parent']
-		);
-		
-		// prepare where clause
-		$where = " WHERE `id` = :id ";
-
-		// prepare bind params
-		$bind_params = array(
-			'id' => (int)$sibling_below['id']
-		);
-
-		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
-		
-		// turn the current node into a child of the sibling below
+		// swap the current node with the sibling below
 		$sqlData = array(
 			'parent' => (int)$sibling_below['id'],
 			'lft' => (int)$sibling_below['lft'],
@@ -2539,7 +2679,29 @@ public function moveBelowInTree ($navigation, $node_id)
 		);
 
 		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		
+		// swap the sibling below with the current node
+		$sqlData = array(
+			'parent' => (int)$node['parent'],
+			'lft' => (int)$node['lft'],
+			'rgt' => (int)$node['lft'] + 3,
+			'level' => (int)$node['level']
+		);
+		
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
+
+		// execute update
 		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		
+	} else {
+		throw new Utility_NestedsetException("Move not implemented");
 	}
 	
 	return true;
@@ -3413,6 +3575,272 @@ public function root_node ($node, $navigation = null)
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Executes consistency check on a a navigationt tree. Takes the navigation
+ * id as first argument. Returns bool.
+ *
+ * @throws Utility_NestedsetException
+ * @param int Navigation id
+ * @return bool
+ */
+public function testConsistency ($navigation)
+{
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+	}
+	
+	// get the whole tree
+	$whole_tree = $this->selectNodes(array('navigation' => $navigation));
+	
+	// execute sanity test
+	if (!$this->testSanity($whole_tree)) {
+		throw new Utility_NestedsetException("Consistency test failed at sanity test");
+	}
+	
+	// execute root node test
+	if (!$this->testForRootNodes($whole_tree)) {
+		throw new Utility_NestedsetException("Consistency test failed at root node test");
+	}
+	
+	// execute nested set test
+	if (!$this->testNestedSets($whole_tree)) {
+		throw new Utility_NestedsetException("Consistency test failed at nested set test");
+	}
+	
+	return true;
+}
+
+/**
+ * Tests if all the numbers and identifiers in the navigation tree seem to make sense.
+ * Takes an array with all nodes of a navigation (as returned by selectNodes()) as
+ * first argument. Returns bool.
+ *
+ * @throws Utility_NestedsetException
+ * @param array Navigation tree
+ * @return bool
+ */
+protected function testSanity ($whole_tree)
+{
+	// input check
+	if (!is_array($whole_tree)) {
+		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+	}
+	
+	foreach ($whole_tree as $_node) {
+		if (empty($_node['id']) || $_node['id'] < 1) {
+			return false;
+		}
+		if (empty($_node['root_node']) || $_node['root_node'] < 1) {
+			return false;
+		}
+		if (empty($_node['lft']) || $_node['lft'] < 1) {
+			return false;
+		}
+		if (empty($_node['rgt']) || $_node['rgt'] < 2) {
+			return false;
+		}
+		if ((!is_null($_node['parent']) && $_node['parent'] < 1) || $_node['parent'] == $_node['id']) {
+			return false;
+		}
+		if (empty($_node['level']) || $_node['level'] < 1) {
+			return false;
+		}
+		if ($_node['id'] == $_node['root_node'] && (!empty($_node['parent']) || $_node['lft'] != 1 || $_node['level'] != 1)) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Tests if there's at least one root node in the navigation tree. Takes an array
+ * with all nodes of a navigation (as returned by selectNodes()) as first argument.
+ * Returns bool.
+ *
+ * @throws Utility_NestedsetException
+ * @param array Navigation tree
+ * @return bool
+ */
+protected function testForRootNodes ($whole_tree)
+{
+	// input check
+	if (!is_array($whole_tree)) {
+		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+	}
+	
+	// if there's no node at all, we can skip this test
+	if (count($whole_tree) < 1) {
+		return true;
+	}
+	
+	foreach ($whole_tree as $_node) {
+		if (!empty($_node['id']) && $_node['id'] == $_node['root_node'] && $_node['lft'] == 1) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+/**
+ * Tests if the nested set structure is valid. Takes an array with all nodes
+ * of a navigation (as returned by selectNodes()) as first argument. Returns
+ * bool.
+ * 
+ * @throws Utility_NestedsetException
+ * @param array Navigation tree
+ * @return bool
+ */
+protected function testNestedSets ($whole_tree)
+{
+	// input check
+	if (!is_array($whole_tree)) {
+		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+	}
+	
+	// if there's no node at all, we can skip this test
+	if (count($whole_tree) < 1) {
+		return true;
+	}
+	
+	$last_node = array();
+	foreach ($whole_tree as $_node) {
+		
+		// if there's no last node, the current node must be a root node
+		if (empty($last_node)) {
+			if ($_node['id'] != $_node['root_node'] || $_node['lft'] != 1 || !is_null($_node['parent'])) {
+				Base_Error::setMessage("First node is not root node");
+				return false;
+			}
+
+			$last_node = $_node;
+			continue;
+		}
+		
+		if ($_node['lft'] == $last_node['rgt']) {
+			Base_Error::setMessage("Lft current node may not match rgt of last node");
+			return false;
+		}
+				
+		// if the root node of the last node is not the same as the root node
+		// of the current node, the current node must be a root node.
+		if ($last_node['root_node'] != $_node['root_node'] && $_node['id'] == $_node['root_node']) {
+			
+			// if the rgt minus the lft of the last node is bigger than one, it cannot be the last
+			// node in its tree. therefore something must be wrong...
+			if (($last_node['rgt'] - $last_node['lft']) > 1) {
+				Base_Error::setMessage("Rgt of last node is not lft of current node minus 1");
+				return false;
+			}
+			
+			// if the sorting of the current node minus the sorting of the last node is not
+			// one, something must be wrong.
+			if (($_node['sorting'] - $last_node['sorting']) != 1) {
+				Base_Error::setMessage("Sorting of last node is not sorting of current node plus 1");
+				return false;
+			}
+			
+			// now, go to the next node
+			$last_node = $_node;
+			continue;
+		}
+		
+		// if the lft of the current node minus the lft of the last node equals 1, 
+		// the last node must be the parent of the current node and they must share
+		// the same root node and sorting. the level of the current node minus the
+		// level of the last node has to be one too.
+		if (($_node['lft'] - $last_node['lft']) == 1) {
+			if ($last_node['id'] != $_node['parent'] || is_null($_node['parent'])) {
+				Base_Error::setMessage("Parent does not match parent of last node ");
+				return false;
+			}
+			if ($last_node['root_node'] != $_node['root_node']) {
+				Base_Error::setMessage("Root node does not match root node of last node");
+				return false;
+			}
+			if (($_node['level'] - $last_node['level']) != 1) {
+				Base_Error::setMessage("Level of last node is not level of current node plus 1");
+				return false;
+			}
+			if ($last_node['sorting'] != $_node['sorting']) {
+				Base_Error::setMessage("Sorting does not match sorting of last node");
+				return false;
+			}
+		}
+		
+		// if the lft of the current node minus the rgt of the last node 
+		// equals 1, the last node must be a sibling of the current node.
+		// therefore they must have the same level, the same root node, 
+		// the same parent and the same sorting.
+		if (($_node['lft'] - $last_node['rgt']) == 1) {
+			if ($last_node['level'] != $_node['level']) {
+				Base_Error::setMessage("Level does not match level of last node");
+				return false;
+			}
+			if ($last_node['root_node'] != $_node['root_node']) {
+				Base_Error::setMessage("Root node does not match root node of last node");
+				return false;
+			}
+			if ($last_node['parent'] != $_node['parent'] || is_null($_node['parent'])) {
+				Base_Error::setMessage("Parent does not match parent of last node");
+				return false;
+			}
+			if ($last_node['sorting'] != $_node['sorting']) {
+				Base_Error::setMessage("Sorting does not match sorting of last node");
+				return false;
+			}
+		}
+		
+		// if the lft of the current node minus the lft of the last node is
+		// bigger than one and the lft of the current node minus the rgt of
+		// the last node, the level of the current node must be smaller than
+		// the level of the last node.
+		if (($_node['lft'] - $last_node['lft']) > 1 && ($_node['lft'] - $last_node['rgt']) > 1) {
+			if ($_node['level'] >= $last_node['level']) {
+				Base_Error::setMessage("Level is not smaller than the level of the last node");
+				return false;
+			}
+			
+			
+			// look for the sibling above of the current node
+			$sibling_found = false;
+			foreach ($whole_tree as $_possible_sibling) {
+				if ($_node['lft'] == ($_possible_sibling['rgt'] + 1)) {
+					// mark that we've found a sibling
+					$sibling_found = true;
+					
+					// let's compare the current node with the possible sibling.
+					if ($_node['parent'] != $_possible_sibling['parent']) {
+						Base_Error::setMessage("Parent does not match parent of possible sibling");
+						return false;
+					}
+					if ($_node['level'] != $_possible_sibling['level']) {
+						Base_Error::setMessage("Level does not match level of possible sibling");
+						return false;
+					}
+					if ($_node['sorting'] != $_possible_sibling['sorting']) {
+						Base_Error::setMessage("Sorting does not match sorting of possible sibling");
+						return false;
+					}
+					
+					break 2;
+				}
+			}
+			
+			// if there was no sibling found, there's something wrong.
+			if (!$sibling_found) {
+				Base_Error::setMessage("Sibling was not found");
+				return false;
+			}
+		} 
+		
+		$last_node = $_node;
+	}
+	
+	return true;
 }
 
 // end of class
