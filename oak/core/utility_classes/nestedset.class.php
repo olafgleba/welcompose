@@ -85,8 +85,8 @@ public function instance()
 }
 
 /**
- * Wrapper around all the other create* functions. It takes over the decision 
- * process which of all the other create* functions to use.
+ * Wrapper around all the other create* functions. Decides which of all the
+ * different create* functions to use.
  *
  * @throws Utility_NestedsetException
  * @param int Navigation id
@@ -178,10 +178,10 @@ public function moveNode ($navigation, $node, $direction = "down")
 	
 	switch ((string)$direction) {
 		case 'up':
-				return $this->moveAboveInTree($navigation, $node);
+				return $this->moveUpInTree($navigation, $node);
 			break;
 		case 'down':
-				return $this->moveBelowInTree($navigation, $node);
+				return $this->moveDownInTree($navigation, $node);
 			break;
 	}
 }
@@ -502,7 +502,7 @@ public function createNodeBelow ($navigation, $reference)
 }
 
 /**
- * Moves node above across two trees. Takes the navigation id as first
+ * Moves node up across two trees. Takes the navigation id as first
  * argument, the id of the node to move as second argument. Returns
  * boolean true.
  * 
@@ -513,7 +513,7 @@ public function createNodeBelow ($navigation, $reference)
  * @param int Node id
  * @return bool
  */
-public function moveAboveAcrossTrees ($navigation, $node_id)
+public function moveUpAcrossTrees ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
@@ -533,7 +533,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 	
 	// make sure that we don't try to move a normal node
 	if ((int)$node['lft'] > 2) {
-		return $this->moveAboveInTree($navigation, $node_id);
+		return $this->moveUpInTree($navigation, $node_id);
 	}
 	
 	// get sibling above and the sibling above that's one level deeper. we need them
@@ -1612,7 +1612,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
 }
 
 /**
- * Moves node above in tree. Takes the navigation id as first
+ * Moves node up in tree. Takes the navigation id as first
  * argument, the id of the node to move as second argument.
  * Returns boolean true.
  *
@@ -1623,7 +1623,7 @@ public function moveAboveAcrossTrees ($navigation, $node_id)
  * @param int Node id
  * @return bool
  */
-public function moveAboveInTree ($navigation, $node_id)
+public function moveUpInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
@@ -1643,7 +1643,7 @@ public function moveAboveInTree ($navigation, $node_id)
 	
 	// make sure that we don't try to move a root node or a sub root node
 	if ((int)$node['lft'] === 1 || (int)$node['lft'] === 2) {
-		return $this->moveAboveAcrossTrees($navigation, $node_id);
+		return $this->moveUpAcrossTrees($navigation, $node_id);
 	}
 	
 	// get sibling above
@@ -2075,7 +2075,7 @@ public function moveAboveInTree ($navigation, $node_id)
 }
 
 /**
- * Moves node below across a tree. Takes the navigation id as first
+ * Moves node down across a tree. Takes the navigation id as first
  * argument, the id of the node to move as second argument. Returns
  * boolean true.
  * 
@@ -2084,7 +2084,7 @@ public function moveAboveInTree ($navigation, $node_id)
  * @param int Node id
  * @return bool
  */
-public function moveBelowAcrossTrees ($navigation, $node_id)
+public function moveDownAcrossTrees ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
@@ -2110,7 +2110,7 @@ public function moveBelowAcrossTrees ($navigation, $node_id)
 	
 	// make sure that we don't try to move within a tree
 	if (is_array($sibling_below) &&  $sibling_below['root_node'] == $node['root_node'] && $node['lft'] > 1) {
-		return $this->moveBelowInTree($navigation, $node_id);
+		return $this->moveDownInTree($navigation, $node_id);
 	}
 	
 	// if it's a root node and that one with the highest sorting,
@@ -2310,7 +2310,7 @@ public function moveBelowAcrossTrees ($navigation, $node_id)
 }
 
 /**
- * Moves node below in tree. Takes the navigation id as first argument,
+ * Moves node down in tree. Takes the navigation id as first argument,
  * the id of the node to move as second argument. Returns boolean true.
  *
  * @throws Utility_NestedsetException
@@ -2318,7 +2318,7 @@ public function moveBelowAcrossTrees ($navigation, $node_id)
  * @param int Node id
  * @return bool
  */
-public function moveBelowInTree ($navigation, $node_id)
+public function moveDownInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
@@ -2344,11 +2344,11 @@ public function moveBelowInTree ($navigation, $node_id)
 	
 	// make sure that we don't try to move root nodes across multiple trees
 	if ((int)$node['lft'] === 1 && (int)$sibling_below['root_node'] !== (int)$node['root_node']) {
-		return $this->moveBelowAcrossTrees($navigation, $node_id);
+		return $this->moveDownAcrossTrees($navigation, $node_id);
 	}
 	// make sure that we don't try to move across multiple trees
 	if ((int)$node['level'] === 2 && (!is_array($sibling_below) || (int)$sibling_below['root_node'] !== (int)$node['root_node'])) {
-		return $this->moveBelowAcrossTrees($navigation, $node_id);
+		return $this->moveDownAcrossTrees($navigation, $node_id);
 	}
 	
 	// Handles move if the current node is at the end of a subtree
