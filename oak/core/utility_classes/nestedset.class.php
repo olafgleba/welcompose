@@ -2756,140 +2756,189 @@ public function deleteRootNode ($navigation, $node_id)
 	// and we need the sibling below too
 	$sibling_below = $this->selectSiblingBelow($navigation, $node['id']);
 	
-	// now we need to fix the old tree. turn the first child of the current node
-	// into the new root node. lot of work :(
+	// handles deletion if the sibling below is not a root node
+	// 
+	// Test 1 <---
+	// - Test 2
+	//	
+	if ($sibling_below['lft'] > 1) {
+		// now we need to fix the old tree. turn the first child of the current node
+		// into the new root node. lot of work :(
+	
+		// update level
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`level` = `level` - 1
+			WHERE
+				`root_node` = :root_node
+			AND
+				`lft` >= :lft
+			AND
+				`rgt` <= :rgt
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'root_node' => (int)$node['id'],
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['rgt']
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+	
+		// update rgt and lft in the whole tree
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 1,
+				`rgt` = `rgt` - 1
+			WHERE
+				`root_node` = :root_node
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'root_node' => (int)$node['id']
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+	
+		// update lfts and rgts in the rest of the tree that's not
+		// within the subtree of the new root node... um, what!?
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`lft` = `lft` - 1,
+				`rgt` = `rgt` - 1
+			WHERE
+				`root_node` = :root_node
+			AND
+				`rgt` >= :rgt
+		"; 
+	
+		// prepare bind params
+		$bind_params = array(
+			'root_node' => (int)$node['id'],
+			'rgt' => (int)$sibling_below['rgt']
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+	
+		// update root node in the whole tree
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`root_node` = :new_root_node
+			WHERE
+				`root_node` = :old_root_node
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'new_root_node' => (int)$sibling_below['id'],
+			'old_root_node' => (int)$node['id']
+		);
+	
+		// execute query
+		$this->base->db->execute($sql, $bind_params);
+	
+		// update parents in the whole tree
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`parent` = :new_parent
+			WHERE
+				`parent` = :old_parent
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'new_parent' => (int)$sibling_below['id'],
+			'old_parent' => (int)$node['id']
+		);
+	
+		$this->base->db->execute($sql, $bind_params);
+		
+		// update new root node
+		$sqlData = array(
+			'parent' => null,
+			'rgt' => (int)$node['rgt'] - 2
+		);
 
-	// update level
-	$sql = "
-		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
-		SET
-			`level` = `level` - 1
-		WHERE
-			`root_node` = :root_node
-		AND
-			`lft` >= :lft
-		AND
-			`rgt` <= :rgt
-	";
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$sibling_below['id']
+		);
 	
-	// prepare bind params
-	$bind_params = array(
-		'root_node' => (int)$node['id'],
-		'lft' => (int)$sibling_below['lft'],
-		'rgt' => (int)$sibling_below['rgt']
-	);
+		// execute update
+		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
-	// execute query
-	$this->base->db->execute($sql, $bind_params);
+		// remove the current node
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
 	
-	// update rgt and lft in the whole tree
-	$sql = "
-		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
-		SET
-			`lft` = `lft` - 1,
-			`rgt` = `rgt` - 1
-		WHERE
-			`root_node` = :root_node
-	";
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
 	
-	// prepare bind params
-	$bind_params = array(
-		'root_node' => (int)$node['id']
-	);
+		// execute update
+		return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);
 	
-	// execute query
-	$this->base->db->execute($sql, $bind_params);
+	// handles deletion of root nodes if the sibling below is 
+	// a root node too.
+	//
+	// Test 1 <--
+	// Test 2
+	// 
+	} elseif ($sibling_below['lft'] == 1 || empty($sibling_below)) {
+		// update sorting
+		$sql = "
+			UPDATE
+				`".OAK_DB_CONTENT_NODES."`
+			SET
+				`sorting` = `sorting` - 1
+			WHERE
+				`sorting` > :sorting
+			AND
+				`navigation` = :navigation
+		";
 	
-	// update lfts and rgts in the rest of the tree that's not
-	// within the subtree of the new root node... um, what!?
-	$sql = "
-		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
-		SET
-			`lft` = `lft` - 1,
-			`rgt` = `rgt` - 1
-		WHERE
-			`root_node` = :root_node
-		AND
-			`rgt` >= :rgt
-	"; 
+		// prepare bind params
+		$bind_params = array(
+			'sorting' => (int)$node['sorting'],
+			'navigation' => (int)$navigation
+		);
 	
-	// prepare bind params
-	$bind_params = array(
-		'root_node' => (int)$node['id'],
-		'rgt' => (int)$sibling_below['rgt']
-	);
+		$this->base->db->execute($sql, $bind_params);		
+		
+		// remove the current node
+		// prepare where clause
+		$where = " WHERE `id` = :id ";
+		
+		// prepare bind params
+		$bind_params = array(
+			'id' => (int)$node['id']
+		);
 	
-	// execute query
-	$this->base->db->execute($sql, $bind_params);
-	
-	// update root node in the whole tree
-	$sql = "
-		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
-		SET
-			`root_node` = :new_root_node
-		WHERE
-			`root_node` = :old_root_node
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'new_root_node' => (int)$sibling_below['id'],
-		'old_root_node' => (int)$node['id']
-	);
-	
-	// execute query
-	$this->base->db->execute($sql, $bind_params);
-	
-	// update parents in the whole tree
-	$sql = "
-		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
-		SET
-			`parent` = :new_parent
-		WHERE
-			`parent` = :old_parent
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'new_parent' => (int)$sibling_below['id'],
-		'old_parent' => (int)$node['id']
-	);
-	
-	$this->base->db->execute($sql, $bind_params);
-	
-	// update new root node
-	$sqlData = array(
-		'parent' => null,
-		'rgt' => (int)$node['rgt'] - 2
-	);
-	
-	// prepare where clause
-	$where = " WHERE `id` = :id ";
-	
-	// prepare bind params
-	$bind_params = array(
-		'id' => (int)$sibling_below['id']
-	);
-	
-	// execute update
-	$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
-	
-	// remove the current node
-	// prepare where clause
-	$where = " WHERE `id` = :id ";
-	
-	// prepare bind params
-	$bind_params = array(
-		'id' => (int)$node['id']
-	);
-	
-	// execute update
-	return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);
+		// execute update
+		return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);
+				
+	} else {
+		throw new Utility_NestedsetException("Deletion not implemented");
+	}
 }
 
 /**
