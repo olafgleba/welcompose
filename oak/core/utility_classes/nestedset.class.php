@@ -1911,6 +1911,7 @@ public function moveAboveInTree ($navigation, $node_id)
 		// if the next sibling is more than one level deeper, we have so search for
 		// the closest sibling that's only one level deeper 
 		if (((int)$sibling['level'] - (int)$node['level']) > 1) {
+			
 			// get the node where to append the current node to
 			$real_sibling = $this->selectSiblingAboveOneLevelDeeper($navigation, $node['id']);
 			
@@ -1937,7 +1938,7 @@ public function moveAboveInTree ($navigation, $node_id)
 			
 			// execute query
 			$this->base->db->execute($sql, $bind_params);
-			
+			var_dump($real_sibling);
 			// update node
 			$sqlData = array(
 				'parent' => $real_sibling['parent'],
@@ -3342,6 +3343,8 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
 		AND
 			(
 				`lft` < :lft
+			  AND
+				`root_node` = :root_node
 			OR
 				`sorting` < :sorting
 			)
@@ -3356,6 +3359,7 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
 		'navigation' => (int)$navigation,
 		'level' => (int)$node['level'] + 1,
 		'lft' => (int)$node['lft'],
+		'root_node' => (int)$node['root_node'],
 		'sorting' => (int)$node['sorting']
 	);
 	
