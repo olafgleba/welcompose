@@ -2606,6 +2606,7 @@ public function moveBelowInTree ($navigation, $node_id)
 	// - Test 2 <---
 	// - - Test 3
 	// - - - Test 4
+	// - - Test 5
 	//
 	// moving 'Test 2' should result in:
 	//
@@ -2613,8 +2614,10 @@ public function moveBelowInTree ($navigation, $node_id)
 	// - Test 3 
 	// - - Test 2 <---
 	// - - Test 4
+	// - - Test 5
 	//
 	} elseif ($node['id'] == $sibling_below['parent'] && $node['lft'] > 1) {
+
 		// turn childs of the current node into siblings. first step is to
 		// update the parent:
 		$sql = "
@@ -2632,7 +2635,7 @@ public function moveBelowInTree ($navigation, $node_id)
 
 		// prepare bind params
 		$bind_params = array(
-			'new_parent' => (int)$node['parent'],
+			'new_parent' => (int)$sibling_below['id'],
 			'old_parent' => (int)$node['id'],
 			'root_node' => (int)$node['root_node'],
 			'navigation' => (int)$navigation
@@ -2662,8 +2665,8 @@ public function moveBelowInTree ($navigation, $node_id)
 
 		// prepare bind params
 		$bind_params = array(
-			'lft' => (int)$node['lft'],
-			'rgt' => (int)$node['rgt'],
+			'lft' => (int)$sibling_below['lft'],
+			'rgt' => (int)$sibling_below['rgt'],
 			'root_node' => (int)$node['root_node'],
 			'navigation' => (int)$navigation
 		);
@@ -2694,7 +2697,7 @@ public function moveBelowInTree ($navigation, $node_id)
 		$sqlData = array(
 			'parent' => (int)$node['parent'],
 			'lft' => (int)$node['lft'],
-			'rgt' => (int)$node['lft'] + 3,
+			'rgt' => $node['rgt'],
 			'level' => (int)$node['level']
 		);
 		
@@ -3136,6 +3139,86 @@ public function selectNodes ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);	
+}
+
+/**
+ * Method to count the nodes. Takes key=>value array
+ * with count params as first argument. Returns int.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>navigation, int, optional: Navigation id</li>
+ * <li>root_node, int, optional: Root node id</li>
+ * <li>parent, int, optional: Parent node id</li>
+ * </ul>
+ * 
+ * @throws Utility_NestedsetException
+ * @param array Count params
+ * @return int
+ */
+public function countNodes ($params = array())
+{
+	// define some vars
+	$navigation = null;
+	$root_node = null;
+	$parent = null;
+	$lft_bigger_than = null;
+	$rgt_smaller_than = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Utility_NestedsetException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'navigation':
+			case 'root_node':
+			case 'parent':
+			case 'lft_bigger_than':
+			case 'rgt_smaller_than':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Utility_NestedsetException("Unknown parameter $_key");
+		}
+	}
+	
+	$sql = "
+		SELECT
+			COUNT(*) AS `total` 
+		FROM
+			`".OAK_DB_CONTENT_NODES."`
+		WHERE
+			1
+	";
+
+	// prepare where clauses
+	if (!empty($navigation) && is_numeric($navigation)) {
+		$sql .= " AND `navigation` = :navigation ";
+		$bind_params['navigation'] = (int)$navigation;
+	}
+	if (!empty($root_node) && is_numeric($root_node)) {
+		$sql .= " AND `root_node` = :root_node ";
+		$bind_params['root_node'] = (int)$root_node;
+	}
+	if (!empty($parent) && is_numeric($parent)) {
+		$sql .= " AND `parent` = :parent ";
+		$bind_params['parent'] = (int)$parent;
+	}
+	if (!empty($lft_bigger_than) && is_numeric($lft_bigger_than)) {
+		$sql .= " AND `lft` > :lft_bigger_than ";
+		$bind_params['lft_bigger_than'] = (int)$lft_bigger_than;
+	}
+	if (!empty($rgt_smaller_than) && is_numeric($rgt_smaller_than)) {
+		$sql .= " AND `rgt` < :rgt_smaller_than ";
+		$bind_params['rgt_smaller_than'] = (int)$rgt_smaller_than;
+	}
+
+	return $this->base->db->select($sql, 'field', $bind_params);	
 }
 
 /**
@@ -3820,6 +3903,10 @@ protected function testNestedSets ($whole_tree)
 			// look for the sibling above of the current node
 			$sibling_found = false;
 			foreach ($whole_tree as $_possible_sibling) {
+				if ($_node['root_node'] != $_possible_sibling['root_node']) {
+					continue;
+				}
+				
 				if ($_node['lft'] == ($_possible_sibling['rgt'] + 1)) {
 					// mark that we've found a sibling
 					$sibling_found = true;
