@@ -21,16 +21,16 @@ width: 20px;
 height: 20px;
 }
 a.down:link, a.down:visited {
-background: #fff url(../img/icons/down.gif) 0 0 no-repeat ;
+background: #fff url(../img/icons/down.gif) 0 0 no-repeat;
 }
 a.down:hover, a.down:active, a.down:focus {
-background: #fff url(../img/icons/down.gif) 0 -44px no-repeat ;
+background: #fff url(../img/icons/down.gif) 0 -51px no-repeat;
 }
 a.up:link, a.up:visited {
 background: #fff url(../img/icons/up.gif) 0 0 no-repeat;
 } 
 a.up:hover, a.up:active, a.up:focus {
-background: #fff url(../img/icons/up.gif) 0 -44px no-repeat;
+background: #fff url(../img/icons/up.gif) 0 -51px no-repeat;
 }
 a.new:link, a.new:visited {
 background: #fff url(../img/icons/page_add.gif) 0 0 no-repeat;
@@ -80,6 +80,10 @@ background: transparent url(../img/icons/page4.gif) left no-repeat;
 .page5 {
 padding-left: 48px;
 background: transparent url(../img/icons/page5.gif) left no-repeat;
+}
+.page6 {
+padding-left: 59px;
+background: transparent url(../img/icons/page6.gif) left no-repeat;
 }
 
 th, td {
