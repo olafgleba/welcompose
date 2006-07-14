@@ -175,7 +175,7 @@ try {
 	
 	// checkbox for protect
 	$FORM->addElement('checkbox', 'protect', gettext('Protect'), null,
-		array('id' => 'page_user_protect', 'class' => 'chbx'));
+		array('id' => 'page_protect', 'class' => 'chbx'));
 	$FORM->applyFilter('protect', 'trim');
 	$FORM->applyFilter('protect', 'strip_tags');
 	$FORM->addRule('protect', gettext('The field protect accepts only 0 or 1'),
