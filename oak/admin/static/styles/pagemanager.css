@@ -15,7 +15,7 @@ line-height: 1px;
 border: 0 none;
 }
 
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.download {
+a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate {
 display: block;
 width: 20px;
 height: 20px;
@@ -50,11 +50,23 @@ background: #fff url(../img/icons/page_delete.gif) 0 0 no-repeat;
 a.delete:hover, a.delete:active, a.delete:focus {
 background: #fff url(../img/icons/page_delete.gif) 0 -46px no-repeat;
 }
+a.duplicate:link, a.duplicate:visited {
+background: #fff url(../img/icons/duplicate.gif) 0 0 no-repeat;
+} 
+a.duplicate:hover, a.duplicate:active, a.duplicate:focus {
+background: #fff url(../img/icons/duplicate.gif) 0 -44px no-repeat;
+}
 a.upload:link, a.upload:visited {
 background: #fff url(../img/icons/upload.gif) 0 0 no-repeat;
 } 
 a.upload:hover, a.upload:active, a.upload:focus {
 background: #fff url(../img/icons/upload.gif) 0 -44px no-repeat;
+}
+a.uploadhide:link, a.uploadhide:visited {
+background: #fff url(../img/icons/uploadhide.gif) 0 0 no-repeat;
+} 
+a.uploadhide:hover, a.uploadhide:active, a.uploadhide:focus {
+background: #fff url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
 }
 a.download:link, a.download:visited {
 background: #fff url(../img/icons/download.gif) 0 0 no-repeat;

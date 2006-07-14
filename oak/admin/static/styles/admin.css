@@ -32,9 +32,10 @@ background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input, label p, label span span a, td label {
+p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p {
 font-size: 100%;
-} 
+}
+
 a {
 text-decoration: none;
 }
@@ -444,6 +445,9 @@ width: 710px;
 padding: 20px 10px 0 10px;
 background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
 }
+fieldset.void {
+font-size: 100%;
+}
 label {
 display: block;
 height: 1.5em;
@@ -517,11 +521,16 @@ border: 1px solid #666;
 .flselect {
 margin: 1px 5px 0 0;
 padding: 0;
-border: 1px solid #666666;
+border: 1px solid #666;
 }
 input.chbx {
 border-color: #666;
 }
+/* Reset for inner table definition */
+td input.submitbut140, td input.submitbut200 {
+font-size: 100%;
+}
+/* eof Reset for inner table definition */
 input.submitbut140 {
 text-align: left;
 background: #666 url(../img/submitbut140.gif) no-repeat;
@@ -634,7 +643,6 @@ height: 1%;
 clear: both;
 }
 /* DIVERSES EOF */
-
 
 /* TABLES SLIDES */
 .outer {

@@ -103,15 +103,15 @@ var definitions = {
 	'.iHelp' : function(el){
 		el.onclick = function(){
 			getHelp(this, 'for');
-			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + processId, processId);
-			setCorrespondingFocus(this, 'for');
+			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + process_id, target_id);
+			//setCorrespondingFocus(this, 'for');
 			return false;
 		}
 	},
 	'.iHelpRemove' : function(el){
 		el.onclick = function(){
 			removeHelp(this, 'for');
-			setCorrespondingFocus(this, 'for');
+			//setCorrespondingFocus(this, 'for');
 			return false;
 		}
 	},
@@ -154,7 +154,7 @@ var definitions = {
 	'.hidetbl' : function(el){
 		el.onclick = function(){
 			hidetbl(this);
-			setTimeout("hidetblsettime(obid)", 1100);
+			setTimeout("hidetblsettime(obid)", 400);
 			return false;
 		}
 	},

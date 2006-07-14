@@ -51,6 +51,14 @@ var helpClass		= 'iHelp';
 var helpClassRemove	= 'iHelpRemove';
 
 /**
+ * Define the used tbl upload class names
+ * defines cascading styles to fit background images
+ * used: oak.core.js
+ */
+var uploadClass		= 'upload showtbl';
+var uploadClassHide	= 'uploadhide hidetbl';
+
+/**
  * Build help strings delivered within DOM (innerHTML)
  * must corresponding to html notation -> html templates
  * find: html templates
@@ -122,6 +130,16 @@ function devError(msg)
 devError.prototype = new Error;
 
 
+/**
+ * Collect loads for init onLoad
+ * called by Behaviour.addLoadEvent
+ */
+function initLoad ()
+{	
+	getHeaderVars();
+	//getFormName(form_attributes);		
+}
+
 
 /**
  * DOM triggers to attach onEvent behaviours
@@ -162,10 +180,23 @@ function setCorrespondingFocus (elem, attr)
  */
 function getHelp (elem, attr)
 {	
-	processId = elem.parentNode.parentNode.getAttribute(attr);
+	process_id = elem.parentNode.parentNode.getAttribute(attr);
+	
+	//get id from parent form
+	form_id = elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+	
+	// build target for func xhr()
+	target_id = process_id;
+	
+	// tbl handling (e.g. _digits) to avoid multiple help files
+	var _fetch = process_id.replace(/(_(\d+))/, '');	
+	if (_fetch) {
+		process_id = _fetch;
+	}
+	
 	elem.className = helpClassRemove;
 	Element.update(elem, helpHtmlHide);
-	Behaviour.apply();	
+	Behaviour.apply();
 }
 
 /**
@@ -177,22 +208,12 @@ function getHelp (elem, attr)
  */
 function removeHelp (elem, attr)
 {	
-	processIdRemove = elem.parentNode.parentNode.getAttribute(attr);
-	processId_after = $(processIdRemove).parentNode.nextSibling;	
+	process_id_remove = elem.parentNode.parentNode.getAttribute(attr);
+	process_id_after = $(process_id_remove).parentNode.nextSibling;	
 	elem.className = helpClass;
-	Element.hide(processId_after);
 	Element.update(elem, helpHtmlShow);
+	Effect.Fade(process_id_after,{duration: 0.5});
 	Behaviour.apply();
-}
-
-/**
- * Collect loads for init onLoad
- * called by Behaviour.addLoadEvent
- */
-function initLoad ()
-{	
-	getHeaderVars();
-	getFormName(form_attr);	
 }
 
 /**
@@ -215,18 +236,29 @@ function getHeaderVars ()
  * used: initLoad()
  *
  */
- function getFormName (attr)
+/*
+function getFormName (attributes)
 {	
-	if (typeof attr != 'undefined') {
-		var content = attr.match(/(id="(\w+))/g);
 	
-		// object -> string conversion
-		content = "" + content + "";
+	if (attributes != '') {
 		
+		var _con = attributes.match(/(id="(\w+))/g);
+		
+		if (_con) {
+			var _content = _con;
+			
+			// object -> string conversion
+			_content = String(_content);
+			
+			_content = _content.substring(4);
+		} else {
+			_content = attributes;
+		}	
+			
 		// push var to the global scope
-		form_id = content.substring(4);
+		form_id = _content;
 	}
-}
+}*/
 
 
 /**
@@ -250,18 +282,20 @@ function getHeaderVars ()
  * @param {string} elem actual element
  */
  function hidetbl (elem)
-{	
-	//var getHref = elem.nextSibling.nextSibling.getAttribute('href');
+{
 	var getId = elem.getAttribute('id');
 	
-	// e.g. <name_of_file>?id=<var>
-	//var bid = getHref.split('id=');
+	// e.g. t_<var>
+	var bid = getId.split('t_');
 	
 	// push var to the global scope
-	obid = $('o_' + getId);	
+	obid = $('o_' + bid[1]);
 
 	// process inner div
-	Effect.Fade('i_' + getId,{duration: 1.0});
+	Effect.Fade('i_' + bid[1],{duration: 0.6});
+	
+	elem.className = uploadClass;
+	Behaviour.apply();
 
 }
 
@@ -274,16 +308,18 @@ function getHeaderVars ()
  */
  function showtbl (elem)
 {	
-	//var getHref = elem.nextSibling.nextSibling.getAttribute('href');
 	var getId = elem.getAttribute('id');
 	
-	// e.g. <name_of_file>?id=<var>
-	//var bid = getHref.split('id=');
+	// e.g. t_<var>
+	var bid = getId.split('t_');
 	
 	// process outer table tr
-	$('o_' + getId).style.visibility = 'visible';
+	$('o_' + bid[1]).style.visibility = 'visible';
 	
 	// process inner div
-	Element.hide('i_' + getId);
-	Effect.Appear('i_' + getId,{duration: 1.0});
+	Element.hide('i_' + bid[1]);
+	Effect.Appear('i_' + bid[1],{duration: 0.8});
+	
+	elem.className = uploadClassHide;
+	Behaviour.apply();
 }
