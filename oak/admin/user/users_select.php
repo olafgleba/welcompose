@@ -90,10 +90,7 @@ try {
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
 	// get existing user groups
-	$select_params = array(
-		'project' => OAK_CURRENT_PROJECT
-	);
-	$BASE->utility->smarty->assign("groups", $GROUP->selectGroups($select_params));
+	$BASE->utility->smarty->assign("groups", $GROUP->selectGroups());
 	
 	// get existing users
 	$select_params = array(

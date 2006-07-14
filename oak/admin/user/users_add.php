@@ -76,10 +76,7 @@ try {
 	
 	// prepare group array
 	$groups = array();
-	$select_params = array(
-		'project' => OAK_CURRENT_PROJECT
-	);
-	foreach ($GROUP->selectGroups($select_params) as $_group) {
+	foreach ($GROUP->selectGroups() as $_group) {
 		$groups[(int)$_group['id']] = htmlspecialchars($_group['name']);
 	}
 	
