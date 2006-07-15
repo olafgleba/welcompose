@@ -183,57 +183,64 @@ public function selectSimplePage ($id)
 		SELECT 
 			`content_simple_pages`.`id` AS `id`,
 			`content_simple_pages`.`user` AS `user`,
-			`content_simple_pages`.`page` AS `page`,
 			`content_simple_pages`.`title` AS `title`,
 			`content_simple_pages`.`title_url` AS `title_url`,
 			`content_simple_pages`.`content_raw` AS `content_raw`,
 			`content_simple_pages`.`content` AS `content`,
+			`content_simple_pages`.`text_converter` AS `text_converter`,
+			`content_simple_pages`.`meta_use` AS `meta_use`,
+			`content_simple_pages`.`meta_title_raw` AS `meta_title_raw`,
+			`content_simple_pages`.`meta_title` AS `meta_title`,
+			`content_simple_pages`.`meta_keywords` AS `meta_keywords`,
+			`content_simple_pages`.`meta_description` AS `meta_description`,
 			`content_simple_pages`.`date_modified` AS `date_modified`,
 			`content_simple_pages`.`date_added` AS `date_added`,
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`homepage` AS `user_homepage`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
 			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
+			`content_pages`.`project` AS `page_project`,
 			`content_pages`.`type` AS `page_type`,
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_simple_pages`.`user` = `application_users`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		ON
-			`content_simple_pages`.`page` = `content_pages`.`id`
+			`content_simple_pages`.`id` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		ON
+			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
+			`content_simple_pages`.`id` = :id
+		AND
+			`content_pages`.`project` = :current_project
+		AND
+			`content_simple_pages`.`user` = :current_user
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `content_simple_pages`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'current_project' => (int)OAK_CURRENT_PROJECT,
+		'current_user' => (int)OAK_CURRENT_USER
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);

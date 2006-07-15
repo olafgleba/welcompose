@@ -443,6 +443,70 @@ public function testForUniqueInternalName ($name, $id = null)
 	}
 }
 
+/**
+ * Applies text converter to the given text. Takes the text converter id
+ * as first argument, the string with the text to convert as second
+ * argument. Returns converted string.
+ *
+ * @throws Application_TextconverterException
+ * @param int Text converter id
+ * @param string Text to convert
+ * @return string Converted text
+ */
+public function applyTextConverter ($id, $text)
+{
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Application_TextconverterException('Input for parameter id is not numeric');
+	}
+	if (!is_scalar($text)) {
+		throw new Application_TextconverterException("Input for parameter text is expected to be scalar");
+	}
+	
+	// get text converter
+	$text_converter = $this->selectTextConverter($id);
+	
+	// let's see if a plug-in path is registred
+	if (empty($this->base->_conf['plugins']['textconverter_dir'])) {
+		throw new Application_TextconverterException("No text converter plug-in directory configured");
+	}
+	if (!is_dir($this->base->_conf['plugins']['textconverter_dir'])) {
+		throw new Application_TextconverterException("Configured text converter plug-in path is not a directory");
+	}
+		
+	// check text converter
+	if (empty($text_converter)) {
+		throw new Applicatin_TextconverterException("Requested text converter is not registred");
+	}
+	if (empty($text_converter['internal_name'])) {
+		throw new Application_TextconverterException("No internal text converter name defined");
+	}
+	if (!preg_match(OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME, $text_converter['internal_name'])) {
+		throw new Application_TextconverterException("Internal text converter name is invalid");
+	}
+	
+	// prepare path to text converter
+	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
+		"oak_plugin_textconverter_".$text_converter['internal_name'].".php";
+	if (!file_exists($path)) {
+		throw new Application_TextconverterException("Unable to find text converter plug-in");
+	}
+	
+	// include text converter file
+	require($path);
+	
+	// prepare function name
+	$function_name = sprintf("oak_plugin_textconverter_%s", $text_converter['internal_name']);
+	
+	// let's see if the text converter function exists
+	if (!function_exists($function_name)) {
+		throw new Application_TextconverterException("Text converter plug-in function does not exist");
+	}
+
+	// apply text converter
+	return call_user_func($function_name, $text);
+}
+
 // end of class
 }
 

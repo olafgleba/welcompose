@@ -93,16 +93,16 @@ try {
 	// redirect
 	switch((string)$page['page_type_name']) {
 		case 'OAK_BLOG':
-				header("Location: pages_blogs_postings_select.php");
+				header("Location: pages_blogs_postings_select.php?id=".$page['id']);
 			exit;
 		case 'OAK_SIMPLE_FORM':
-				header("Location: pages_simpleforms_content_edit.php");
+				header("Location: pages_simpleforms_content_edit.php?id=".$page['id']);
 			exit;
 		case 'OAK_SIMPLE_PAGE':
-				header("Location: pages_simplepages_content_edit.php");
+				header("Location: pages_simplepages_content_edit.php?id=".$page['id']);
 			exit;
 		case 'OAK_URL':
-				header("Location: pages_url_meta_edit.php");
+				header("Location: pages_url_meta_edit.php?id=".$page['id']);
 			exit;
 		default:
 				header("Location: pages_select.php");

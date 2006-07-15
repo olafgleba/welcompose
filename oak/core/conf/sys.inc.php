@@ -31,4 +31,7 @@ store_disk = "/www/oak/trunk/oak/images"
 index.php_mode = 0
 index.php_lifetime = 0
 
+[plugins]
+textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
+
 ; */ ?>

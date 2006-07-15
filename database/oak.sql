@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 09.07.2006 17:27:58
--- Diagram Version: 57
+-- Created on: 14.07.2006 22:21:00
+-- Diagram Version: 60
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -524,6 +524,11 @@ CREATE TABLE `content_simple_pages` (
   `content_raw` text,
   `content` text,
   `text_converter` int(11) UNSIGNED,
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),
