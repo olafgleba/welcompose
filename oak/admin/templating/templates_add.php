@@ -128,7 +128,7 @@ try {
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'template_content', 'class' => 'w530h400', 'cols' => 3, 'rows' => 2));
+		array('id' => 'template_content', 'class' => 'w540h400', 'cols' => 3, 'rows' => 2));
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add template'),

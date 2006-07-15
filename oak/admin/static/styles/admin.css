@@ -505,21 +505,21 @@ display: block;
 height: 1.5em;
 line-height: 1.5em;
 width: 710px;
-margin: 15px 0 0 0;
+margin: 5px 0 0 0;
 }
 label.cont {
 margin: 5px 0;
-padding: 5px 0 0 0;
-height: 3em;
+padding: 18px 0 0 0;
+height: 1.5em;
 }
 label.cont.h04 {
 height: 4.7em;
 }
 label.cont.h13 {
-height: 13.0em;
+height: 13em;
 }
 label.cont.h34 {
-height: 34.0em;
+height: 34em;
 }
 label span.bez {
 display: block; 

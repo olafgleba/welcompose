@@ -104,14 +104,14 @@ var definitions = {
 		el.onclick = function(){
 			getHelp(this, 'for');
 			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + process_id, target_id);
-			//setCorrespondingFocus(this, 'for');
+			setCorrespondingFocus(this, 'for');
 			return false;
 		}
 	},
 	'.iHelpRemove' : function(el){
 		el.onclick = function(){
 			removeHelp(this, 'for');
-			//setCorrespondingFocus(this, 'for');
+			setCorrespondingFocus(this, 'for');
 			return false;
 		}
 	},
