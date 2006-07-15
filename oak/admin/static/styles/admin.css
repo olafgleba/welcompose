@@ -214,13 +214,15 @@ padding-top: 2em;
 padding-bottom: 3px;
 background: transparent url(../img/bg_topsubnavcon_active_bot.gif) left bottom no-repeat;
 }
-#topsubnavconstatic {
+#topsubnavconstatic, 
+#subnavconstatic {
 width: 956px;
 padding-top: 2em;
 padding-bottom: 3px;
 background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
 }
-#topsubnav {
+#topsubnav, 
+#subnav {
 list-style: none;
 width: 956px;
 padding-top: 3px;
@@ -255,7 +257,8 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
-#topsubnav li.on {
+#topsubnav li.on, 
+#subnav li.on {
 position: relative;
 display: block;
 float: left;
@@ -507,6 +510,7 @@ margin: 15px 0 0 0;
 label.cont {
 margin: 5px 0;
 padding: 5px 0 0 0;
+height: 3em;
 }
 label.cont.h04 {
 height: 4.7em;
@@ -525,7 +529,7 @@ width: 140px;
 label span.req {
 color: #f00;
 }
-input.w130, input.w200, input.w300, input.w580 {
+input.w130, input.w200, input.w300, input.w540, input.w580 {
 width: 130px;
 border: 1px solid #666;
 padding: 2px 2px;
@@ -542,6 +546,10 @@ input.w300 {
 float: left;
 width: 300px;
 }
+input.w540 {
+width: 540px;
+font-weight: bold;
+}
 input.w580 {
 width: 580px;
 font-weight: bold;
@@ -550,11 +558,12 @@ textarea {
 font: 100% verdana, ariel, sans-serif;
 border: 1px solid #666;
 }
-textarea.w530h400 {
-width: 530px;
+textarea.w540h400 {
+float: left;
+width: 540px;
 height: 400px;
 margin: 0 0 20px 0;
-padding: 5px;
+padding: 3px;
 }
 textarea.w298h50 {
 float: left;
