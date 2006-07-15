@@ -446,6 +446,49 @@ public function mapPageToGroups ($page, $groups = array())
 }
 
 /**
+ * Selects page to groups map. Takes the page id as first
+ * argument. Returns array.
+ * 
+ * @throws Content_PageException
+ * @param int Page id 
+ * @return array
+ */
+public function selectPageToGroupsMap ($page)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException("Input for parameter page is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`content_pages2user_groups`.`id`,
+			`content_pages2user_groups`.`page`,
+			`content_pages2user_groups`.`group`
+		FROM
+			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+		 	`content_pages2user_groups`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages2user_groups`.`page` = :page
+		AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'page' => (int)$page,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
  * Tests whether given page belongs to current project. Takes the page
  * id as first argument. Returns boolean true or false.
  *
