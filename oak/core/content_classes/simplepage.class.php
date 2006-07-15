@@ -188,6 +188,7 @@ public function selectSimplePage ($id)
 			`content_simple_pages`.`content_raw` AS `content_raw`,
 			`content_simple_pages`.`content` AS `content`,
 			`content_simple_pages`.`text_converter` AS `text_converter`,
+			`content_simple_pages`.`apply_macros` AS `apply_macros`,
 			`content_simple_pages`.`meta_use` AS `meta_use`,
 			`content_simple_pages`.`meta_title_raw` AS `meta_title_raw`,
 			`content_simple_pages`.`meta_title` AS `meta_title`,

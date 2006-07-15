@@ -36,7 +36,7 @@ function oak_plugin_textmacro_strip_tags ($str)
 		trigger_error("Input for parameter str is expected to be scalar", E_USER_ERROR);
 	}
 	
-	return strip_tags($str)
+	return strip_tags($str);
 }
 
 ?>

@@ -78,6 +78,10 @@ try {
 	/* @var $TEXTCONVERTER Application_Textconverter */
 	$TEXTCONVERTER = load('application:textconverter');
 	
+	// load textmacro class
+	/* @var $TEXTMACRO Application_Textmacro */
+	$TEXTMACRO = load('application:textmacro');
+	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
 	$HELPER = load('utility:helper');
@@ -130,6 +134,14 @@ try {
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
 		'in_array_keys', $text_converters);
 	
+	// checkbox for apply_macros
+	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
+		array('id' => 'simple_page_apply_macros', 'class' => 'chbx'));
+	$FORM->applyFilter('apply_macros', 'trim');
+	$FORM->applyFilter('apply_macros', 'strip_tags');
+	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', OAK_REGEX_ZERO_OR_ONE);
+	
 	// checkbox for meta_use
 	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
 		array('id' => 'simple_page_meta_use', 'class' => 'chbx'));
@@ -166,6 +178,7 @@ try {
 		'title' => Base_Cnc::ifsetor($simple_page['title'], null),
 		'content' => Base_Cnc::ifsetor($simple_page['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($simple_page['text_converter'], null),
+		'apply_macros' => Base_Cnc::ifsetor($simple_page['apply_macros'], null),
 		'meta_use' => Base_Cnc::ifsetor($simple_page['meta_use'], null),
 		'meta_title' => Base_Cnc::ifsetor($simple_page['meta_title_raw'], null),
 		'meta_keywords' => Base_Cnc::ifsetor($simple_page['meta_keywords'], null),
@@ -236,19 +249,41 @@ try {
 		$sqlData['title'] = $FORM->exportValue('title');
 		$sqlData['title_url'] = $HELPER->createMeaningfulString($FORM->exportValue('title'));
 		$sqlData['content_raw'] = $FORM->exportValue('content');
+		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
+		$sqlData['apply_macros'] = ($FORM->exportValue('apply_macros') > 0) ? 
+			$FORM->exportValue('apply_macros') : null;
 		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
 		
-		// apply text converter if required
-		if ($FORM->exportValue('text_converter') > 0) {
-			$sqlData['content'] = $TEXTCONVERTER->applyTextConverter(
-				$FORM->exportValue('text_converter'),
-				$FORM->exportValue('content')
-			);
+		// apply text macros and text converter if required
+		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+			// extract content
+			$content = $FORM->exportValue('content');
+			
+			// apply startup and pre text converter text macros 
+			if ($FORM->exportValue('apply_macros') > 0) {
+				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+			}
+			
+			// apply text converter
+			if ($FORM->exportValue('text_converter') > 0) {
+				$content = $TEXTCONVERTER->applyTextConverter(
+					$FORM->exportValue('text_converter'),
+					$content
+				);
+			}
+			
+			// apply post text converter and shutdown text macros 
+			if ($FORM->exportValue('apply_macros') > 0) {
+				$content = $TEXTMACRO->applyTextMacros($content, 'post');
+			}
+			
+			// assign content to sql data array
+			$sqlData['content'] = $content;
 		}
 		
 		// prepare custom meta tags

@@ -499,14 +499,14 @@ public function applyTextMacros ($text, $stage = "pre")
 			if (empty($_macro['internal_name'])) {
 				throw new Application_TextmacroException("No internal text macro name defined");
 			}
-			if (!preg_match(OAK_REGEX_TEXT_MACRO_INTERNAL_NAME, $text_macro['internal_name'])) {
+			if (!preg_match(OAK_REGEX_TEXT_MACRO_INTERNAL_NAME, $_macro['internal_name'])) {
 				throw new Application_TextmacroException("Internal text macro name is invalid");
 			}
 			
 			// prepare path to text macro
 			$path = $this->base->_conf['plugins']['textmacro_dir'].DIRECTORY_SEPARATOR.
-				"oak_plugin_textmacro_".$text_macro['internal_name'].".php";
-				
+				"oak_plugin_textmacro_".$_macro['internal_name'].".php";
+			
 			if (!file_exists($path)) {
 				throw new Application_TextmacroException("Unable to find text macro plug-in");
 			}
@@ -515,7 +515,7 @@ public function applyTextMacros ($text, $stage = "pre")
 			require($path);
 
 			// prepare function name
-			$function_name = sprintf("oak_plugin_textmacro_%s", $text_macro['internal_name']);
+			$function_name = sprintf("oak_plugin_textmacro_%s", $_macro['internal_name']);
 
 			// let's see if the text macro function exists
 			if (!function_exists($function_name)) {

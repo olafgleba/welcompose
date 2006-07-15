@@ -33,6 +33,6 @@ index.php_lifetime = 0
 
 [plugins]
 textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
-textmacros_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
+textmacro_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
 
 ; */ ?>
