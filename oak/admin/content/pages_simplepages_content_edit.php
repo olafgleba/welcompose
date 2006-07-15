@@ -105,7 +105,7 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('page', 'post');
+	$FORM = $BASE->utility->loadQuickForm('simple_page', 'post');
 	
 	// hidden for navigation
 	$FORM->addElement('hidden', 'id');
@@ -255,6 +255,7 @@ try {
 		$sqlData['apply_macros'] = ($FORM->exportValue('apply_macros') > 0) ? 
 			$FORM->exportValue('apply_macros') : null;
 		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
@@ -288,7 +289,9 @@ try {
 		
 		// prepare custom meta tags
 		if ($FORM->exportValue('meta_use') == 1) { 
-			$sqlData['meta_title'] = $FORM->exportValue('meta_title');
+			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
+			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
+				$FORM->exportValue('meta_title'));
 			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
 			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
 		}

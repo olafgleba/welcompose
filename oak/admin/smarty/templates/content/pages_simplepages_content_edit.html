@@ -61,8 +61,8 @@ var selection = '{$session.selection}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-<li><a href="pages_simplepages_content_edit.php?id={$page.id|escape:"url"}">{i18n Edit Content}<span></span></a></li>
-<li><a href="pages_simplepages_metadata_edit.php?id={$page.id|escape:"url"}">{i18n Edit Metadata}<span></span></a></li>
+<li class="on">{i18n Edit Content}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Edit Metadata}<span></span></a></li>
 <li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 </ul>
 </div>
