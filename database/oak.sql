@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 14.07.2006 22:21:00
--- Diagram Version: 60
+-- Created on: 15.07.2006 15:29:28
+-- Diagram Version: 65
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -24,6 +24,15 @@ CREATE TABLE `user_users` (
 )
 TYPE=INNODB;
 
+CREATE TABLE `user_rights` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255),
+  `description` text,
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY(`id`)
+)
+TYPE=INNODB;
+
 CREATE TABLE `application_schema_info` (
   `version` int(11) UNSIGNED
 )
@@ -38,15 +47,6 @@ CREATE TABLE `application_ping_services` (
   `path` varchar(255),
   PRIMARY KEY(`id`),
   INDEX `project`(`project`)
-)
-TYPE=INNODB;
-
-CREATE TABLE `user_rights` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255),
-  `description` text,
-  `editable` enum('0','1') NOT NULL DEFAULT '1',
-  PRIMARY KEY(`id`)
 )
 TYPE=INNODB;
 
@@ -66,13 +66,14 @@ CREATE TABLE `application_projects` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `media_document_categories` (
+CREATE TABLE `community_blog_comment_statuses` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `community_blog_comment_statuses.project2application_project.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -92,14 +93,15 @@ CREATE TABLE `content_navigations` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `community_blog_comment_statuses` (
+CREATE TABLE `application_text_macros` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
-  `editable` enum('0','1') NOT NULL DEFAULT '1',
+  `internal_name` varchar(255),
+  `type` enum('pre','post','startup','shutdown') DEFAULT 'pre',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `community_blog_comment_statuses.project2application_project.id` FOREIGN KEY (`project`)
+  CONSTRAINT `application_textmacros.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -114,6 +116,19 @@ CREATE TABLE `content_page_types` (
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `media_document_categories` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
@@ -151,19 +166,19 @@ CREATE TABLE `templating_template_sets` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `user_groups2user_rights` (
+CREATE TABLE `user_users2application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group` int(11) UNSIGNED NOT NULL,
-  `right` int(11) UNSIGNED NOT NULL,
+  `project` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `active` enum('0','1') DEFAULT '1',
+  `author` enum('0','1') DEFAULT '0',
   PRIMARY KEY(`id`),
-  INDEX `group`(`group`),
-  INDEX `right`(`right`),
-  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
-    REFERENCES `user_rights`(`id`)
+  CONSTRAINT `user_users.id2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
-  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
+  CONSTRAINT `application_projects.id2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -187,24 +202,6 @@ CREATE TABLE `user_users2user_groups` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `user_users2application_projects` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  `active` enum('0','1') DEFAULT '1',
-  `author` enum('0','1') DEFAULT '0',
-  PRIMARY KEY(`id`),
-  CONSTRAINT `user_users.id2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `application_projects.id2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
 CREATE TABLE `user_rights2application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
@@ -218,6 +215,24 @@ CREATE TABLE `user_rights2application_projects` (
       ON UPDATE CASCADE,
   CONSTRAINT `user_rights.id2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `user_groups2user_rights` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `group` int(11) UNSIGNED NOT NULL,
+  `right` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `group`(`group`),
+  INDEX `right`(`right`),
+  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
+    REFERENCES `user_rights`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
@@ -500,6 +515,7 @@ CREATE TABLE `content_boxes` (
   `content_raw` text,
   `content` text,
   `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),
@@ -510,39 +526,6 @@ CREATE TABLE `content_boxes` (
       ON DELETE CASCADE
       ON UPDATE CASCADE,
   CONSTRAINT `content_boxes.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
-    REFERENCES `application_text_converters`(`id`)
-      ON DELETE SET NULL
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
-CREATE TABLE `content_simple_pages` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255),
-  `title_url` varchar(255),
-  `content_raw` text,
-  `content` text,
-  `text_converter` int(11) UNSIGNED,
-  `meta_use` enum('0','1') DEFAULT '0',
-  `meta_title_raw` varchar(255),
-  `meta_title` varchar(255),
-  `meta_keywords` text,
-  `meta_description` text,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `user`(`user`),
-  INDEX `text_converter`(`text_converter`),
-  CONSTRAINT `content_simple_page.id2content_pages.id` FOREIGN KEY (`id`)
-    REFERENCES `content_pages`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_page.user2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_page.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
     REFERENCES `application_text_converters`(`id`)
       ON DELETE SET NULL
       ON UPDATE CASCADE
@@ -560,6 +543,7 @@ CREATE TABLE `content_blog_postings` (
   `content_raw` text,
   `content` text,
   `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
   `draft` enum('0','1') DEFAULT '0',
   `ping` enum('0','1') DEFAULT '1',
   `comments_enable` enum('0','1') DEFAULT '1',
@@ -586,6 +570,40 @@ CREATE TABLE `content_blog_postings` (
 )
 TYPE=INNODB;
 
+CREATE TABLE `content_simple_pages` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `user`(`user`),
+  INDEX `text_converter`(`text_converter`),
+  CONSTRAINT `content_simple_page.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_page.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_page.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
 CREATE TABLE `content_simple_forms` (
   `id` int(11) UNSIGNED NOT NULL,
   `user` int(11) UNSIGNED NOT NULL,
@@ -594,6 +612,7 @@ CREATE TABLE `content_simple_forms` (
   `content_raw` text,
   `content` text,
   `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
   `type` enum('personal','business') NOT NULL DEFAULT 'personal',
   `email_from` varchar(255),
   `email_to` varchar(255),

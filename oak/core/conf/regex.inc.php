@@ -135,6 +135,10 @@ define("OAK_REGEX_PING_SERVICE_PATH", "=^/([a-z0-9.-\/]*)$=i");
 // internal text converter name
 define("OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
+// Defines regular expression for strings containing an
+// internal text macro name
+define("OAK_REGEX_TEXT_MACRO_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
+
 // Defines regular expression for strings containing a
 // blog comment status name
 define("OAK_REGEX_BLOG_COMMENT_STATUS_NAME", "=^([A-Z0-9_]+)$=");

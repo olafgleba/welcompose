@@ -36,6 +36,7 @@ define("OAK_DB_APPLICATION_PING_SERVICES", "application_ping_services");
 define("OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS", "application_ping_service_configurations");
 define("OAK_DB_APPLICATION_PROJECTS", "application_projects");
 define("OAK_DB_APPLICATION_TEXT_CONVERTERS", "application_text_converters");
+define("OAK_DB_APPLICATION_TEXT_MACROS", "application_text_macros");
 
 // community table aliases
 define("OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES", "community_blog_comment_statuses");
