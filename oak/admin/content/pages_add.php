@@ -285,7 +285,7 @@ try {
 			
 			// map page to groups
 			if (intval($FORM->exportValue('protect')) === 1) {
-				$PAGE->mapPageToGroups($page_id, $FORM->exportValue('groups'));
+				$PAGE->mapPageToGroups($page_id, (array)$FORM->exportValue('groups'));
 			}
 			
 			// init page contents
