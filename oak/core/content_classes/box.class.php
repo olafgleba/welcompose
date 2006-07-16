@@ -185,37 +185,29 @@ public function selectBox ($id)
 			`content_boxes`.`name` AS `name`,
 			`content_boxes`.`content_raw` AS `content_raw`,
 			`content_boxes`.`content` AS `content`,
+			`content_boxes`.`text_converter` AS `text_converter`,
+			`content_boxes`.`apply_macros` AS `apply_macros`,
 			`content_boxes`.`date_modified` AS `date_modified`,
-			`content_boxes`.`date_added` AS `date_added`,
-			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
-			`content_pages`.`type` AS `page_type`,
-			`content_pages`.`template_set` AS `page_template_set`,
-			`content_pages`.`name` AS `page_name`,
-			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_boxes`.`date_added` AS `date_added`
 		FROM
 			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
+			`content_boxes`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `content_boxes`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => $id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -271,28 +263,24 @@ public function selectBoxes ($params = array())
 			`content_boxes`.`name` AS `name`,
 			`content_boxes`.`content_raw` AS `content_raw`,
 			`content_boxes`.`content` AS `content`,
+			`content_boxes`.`text_converter` AS `text_converter`,
+			`content_boxes`.`apply_macros` AS `apply_macros`,
 			`content_boxes`.`date_modified` AS `date_modified`,
-			`content_boxes`.`date_added` AS `date_added`,
-			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
-			`content_pages`.`type` AS `page_type`,
-			`content_pages`.`template_set` AS `page_template_set`,
-			`content_pages`.`name` AS `page_name`,
-			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_boxes`.`date_added` AS `date_added`
 		FROM
 			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
-		WHERE 
-			1
+		WHERE
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT 
+	);
 	
 	// add where clauses
 	if (!empty($page) && is_numeric($page)) {
@@ -312,6 +300,156 @@ public function selectBoxes ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Method to count boxes. Takes key=>value array with count params as first
+ * argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Page id</li>
+ * </ul>
+ * 
+ * @throws Content_BoxException
+ * @param array Count params
+ * @return array
+ */
+public function countBoxes ($params = array())
+{
+	// define some vars
+	$page = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_BoxException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'page':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Content_BoxException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_boxes`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($page) && is_numeric($page)) {
+		$sql .= " AND `content_pages`.`id` = :page ";
+		$bind_params['page'] = $page;
+	}
+	
+	return (int)$this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
+ * Tests given box name for uniqueness. Takes the box name as first
+ * argument and an array consisting of page id and optional box id as
+ * second argument. If the box id is given, this box won't be
+ * considered when checking for uniqueness (useful for updates).
+ * Returns boolean true if box name is unique.
+ * 
+ * Sample for $page_id_array():
+ * 
+ * <code>
+ * $page_id_array = array(
+ *     'page' => $page,
+ *     'id' => $id
+ * );
+ * </code>
+ *
+ * @throws Content_BoxException
+ * @param string Box name
+ * @param array Page id and box id
+ * @return bool
+ */
+public function testForUniqueName ($name, $page_id_array)
+{
+	// input check
+	if (empty($name)) {
+		throw new Content_BoxException("Input for parameter name is not expected to be empty");
+	}
+	if (empty($page_id_array) || !is_array($page_id_array)) {
+		throw new Content_BoxException("Input for parameter page_id_array is expected to be an array");
+	}
+	if (!is_scalar($name)) {
+		throw new Content_BoxException("Input for parameter name is expected to be scalar");
+	}
+	
+	// extract page_id_array
+	$page = Base_Cnc::ifsetor($page_id_array['page'], null);
+	$id = Base_Cnc::ifsetor($page_id_array['id'], null);
+	
+	// finish input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new ContentBoxException("Input for parameter page is expected to be numeric");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Content_BoxException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_boxes`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+		  AND
+			`content_boxes`.`page` = :page
+		  AND
+			`content_boxes`.`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'page' => (int)$page,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `content_boxes`.`id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+	
 }
 
 // end of class
