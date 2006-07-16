@@ -252,8 +252,7 @@ try {
 		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = ($FORM->exportValue('apply_macros') > 0) ? 
-			$FORM->exportValue('apply_macros') : null;
+		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
 		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
 		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
