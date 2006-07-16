@@ -64,7 +64,7 @@ var uploadClassHide	= 'uploadhide hidetbl';
  * Comprehensive colors application wide
  * used: oak.core.js
  */
- var applicationTextColor = '#0c3';
+ var applicationTextColor = '#009a26';
 
 /**
  * Build help strings delivered within DOM (innerHTML)
