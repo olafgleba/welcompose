@@ -115,6 +115,21 @@ var definitions = {
 			return false;
 		}
 	},
+	'.iHelpLvTwo' : function(el){
+		el.onclick = function(){
+			getHelpLvTwo(this, 'for');
+			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + process_id, target_id);
+			setCorrespondingFocus(this, 'for');
+			return false;
+		}
+	},
+	'.iHelpRemoveLvTwo' : function(el){
+		el.onclick = function(){
+			removeHelpLvTwo(this, 'for');
+			setCorrespondingFocus(this, 'for');
+			return false;
+		}
+	},
 	'#main input' : function(el){
 		el.onfocus = function(){
 			mFocus(this, '','#0c3','dotted');
@@ -163,8 +178,12 @@ var definitions = {
 			showtbl(this);
 			return false;
 		}
+	},
+	'#simple_page_meta_use' : function(el){
+		el.onclick = function(){
+			getCheckboxStatus(new Array('simple_page_meta_use'));
+		}
 	}
-
 };
 Behaviour.register(definitions);
 Behaviour.addLoadEvent(initLoad); 

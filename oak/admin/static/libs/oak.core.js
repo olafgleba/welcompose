@@ -47,8 +47,10 @@ var navLyThree	= 'ly3';
  * Define the used help class names
  * used: oak.events.js
  */
-var helpClass		= 'iHelp';
-var helpClassRemove	= 'iHelpRemove';
+var helpClass				= 'iHelp';
+var helpClassRemove			= 'iHelpRemove';
+var helpClassLvTwo			= 'iHelpLvTwo';
+var helpClassRemoveLvTwo	= 'iHelpRemoveLvTwo';
 
 /**
  * Define the used tbl upload class names
@@ -57,6 +59,12 @@ var helpClassRemove	= 'iHelpRemove';
  */
 var uploadClass		= 'upload showtbl';
 var uploadClassHide	= 'uploadhide hidetbl';
+
+/**
+ * Comprehensive colors application wide
+ * used: oak.core.js
+ */
+ var applicationTextColor = '#0c3';
 
 /**
  * Build help strings delivered within DOM (innerHTML)
@@ -137,7 +145,25 @@ devError.prototype = new Error;
 function initLoad ()
 {	
 	getHeaderVars();
-	//getFormName(form_attributes);		
+	if (typeof checkbox_status != 'undefined') {
+		getCheckboxStatusOnLoad(checkbox_status);
+	}
+}
+
+
+/**
+ * Get header Vars on initialize
+ * used: initLoad()
+ *
+ * return string
+ */
+function getHeaderVars ()
+{
+   if (typeof response != 'undefined' && $('rp')) {
+       if (response == 1) {
+            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
+       }
+   }
 }
 
 
@@ -216,50 +242,127 @@ function removeHelp (elem, attr)
 	Behaviour.apply();
 }
 
+
+
 /**
- * Get header Vars on initialize
- * used: initLoad()
+ * Get help IDs and print string in html templates
+ * Level 2
+ * used : oak.events.js
  *
- * return string
+ * @param {string} elem actual element
+ * @param {string} attr attribute of DOM node to process (e.g. ID)
  */
-function getHeaderVars ()
+function getHelpLvTwo (elem, attr)
+{	
+	process_id = elem.parentNode.parentNode.getAttribute(attr);
+	
+	//get id from parent form
+	form_id = elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+	
+	// build target for func xhr()
+	target_id = process_id;
+	
+	// tbl handling (e.g. _digits) to avoid multiple help files
+	var _fetch = process_id.replace(/(_(\d+))/, '');	
+	if (_fetch) {
+		process_id = _fetch;
+	}
+	
+	elem.className = helpClassRemoveLvTwo;
+	Element.update(elem, helpHtmlHide);
+	Behaviour.apply();
+}
+
+
+/**
+ * Get help IDs and print string in html templates
+ * Level 2
+ * used : oak.events.js
+ *
+ * @param {string} elem actual element
+ * @param {string} attr attribute of DOM node to process (e.g. ID)
+ */
+function removeHelpLvTwo (elem, attr)
+{	
+	process_id_remove = elem.parentNode.parentNode.getAttribute(attr);
+	process_id_after = $(process_id_remove).parentNode.nextSibling;	
+	elem.className = helpClassLvTwo;
+	Element.update(elem, helpHtmlShow);
+	Effect.Fade(process_id_after,{duration: 0.5});
+	Behaviour.apply();
+}
+
+
+
+
+/**
+ * Get form field (Checkbox) status on user event
+ * used : oak.events.js
+ * find: html templates
+ *
+ * @param {array} elems actual elements
+ */
+ function getCheckboxStatus (elems)
 {
-   if (typeof response != 'undefined' && $('rp')) {
-       if (response == 1) {
-            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
-       }
-   }
+	for (var e = 0; e < elems.length; e++) {
+		
+		// build new div
+		var range = String(elems[e])  + '_container';
+		
+		if ($(range)) {
+			if ($(elems[e]).checked == true) {
+
+			allNodes = document.getElementsByClassName("bez");
+			
+			for (var i = 0; i < allNodes.length; i++) {
+   				var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+   				if (_process == range) {
+   					allNodes[i].style.color = applicationTextColor;
+   				}
+   			}
+				Element.hide($(range));
+				Effect.Appear($(range),{duration: 0.6});
+			} else {
+				Effect.Fade($(range),{duration: 0.6});
+			}
+		}
+	}
+}
+
+
+/**
+ * Get form field (Checkbox) status on onload event
+ * used : oak.events.js
+ * find: html templates
+ *
+ * @param {array} elems actual elements
+ */
+ function getCheckboxStatusOnLoad (elems)
+{
+	for (var e = 0; e < elems.length; e++) {
+		
+		// object -> string conversion
+		var range = String(elems[e])  + '_container';
+		
+		if ($(range)) {
+			if ($(elems[e]).checked == true) {
+
+			allNodes = document.getElementsByClassName("bez");
+			
+			for (var i = 0; i < allNodes.length; i++) {
+   				var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+   				if (_process == range) {
+   					allNodes[i].style.color = applicationTextColor;
+   				}
+   			}
+				Element.show(range);
+			} else {
+				Element.hide(range);
+			}
+		}
+	}
 }
    
-/**
- * Get actual form name 
- * used: initLoad()
- *
- */
-/*
-function getFormName (attributes)
-{	
-	
-	if (attributes != '') {
-		
-		var _con = attributes.match(/(id="(\w+))/g);
-		
-		if (_con) {
-			var _content = _con;
-			
-			// object -> string conversion
-			_content = String(_content);
-			
-			_content = _content.substring(4);
-		} else {
-			_content = attributes;
-		}	
-			
-		// push var to the global scope
-		form_id = _content;
-	}
-}*/
-
 
 /**
  * Hide table(s) row(s)

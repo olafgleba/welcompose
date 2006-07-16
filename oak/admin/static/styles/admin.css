@@ -672,10 +672,10 @@ width: 300px;
 margin: 0;
 padding-left: 140px;
 }
-.iHelp a, .iHelpRemove a {
+.iHelp a, .iHelpRemove a, .iHelpLvTwo a, .iHelpRemoveLvTwo a {
 background-color: #fff;
 }
-.iHelp img, .iHelpRemove img {
+.iHelp img, .iHelpRemove img, .iHelpLvTwo img, .iHelpRemoveLvTwo img {
 vertical-align: middle;
 }
 /* HELP EOF */
