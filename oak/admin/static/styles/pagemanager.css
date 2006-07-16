@@ -15,7 +15,7 @@ line-height: 1px;
 border: 0 none;
 }
 
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate {
+a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move {
 display: block;
 width: 20px;
 height: 20px;
@@ -73,6 +73,12 @@ background: #fff url(../img/icons/download.gif) 0 0 no-repeat;
 } 
 a.download:hover, a.download:active, a.download:focus {
 background: #fff url(../img/icons/download.gif) 0 -44px no-repeat;
+}
+a.move:link, a.move:visited {
+background: #fff url(../img/icons/move.gif) 0 0 no-repeat;
+} 
+a.move:hover, a.move:active, a.move:focus {
+background: #fff url(../img/icons/move.gif) 0 -44px no-repeat;
 }
 .page, .page1, .page2, .page3, .page4, .page5 {
 text-align: left;
