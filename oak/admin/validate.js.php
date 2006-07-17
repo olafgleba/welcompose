@@ -108,6 +108,10 @@ try {
 					$reg = OAK_REGEX_PASSWORD;
 					$desc = gettext('Five characters or more, no whitespace');
 				break;
+			case 'box_name':
+					$reg = OAK_REGEX_NON_EMPTY;
+					$desc = gettext('Field may not be empty');
+				break;
 			default :
 				$reg = null;
 				$desc = null;

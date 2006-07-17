@@ -150,7 +150,6 @@ function initLoad ()
 	}
 }
 
-
 /**
  * Get header Vars on initialize
  * used: initLoad()
@@ -165,7 +164,6 @@ function getHeaderVars ()
        }
    }
 }
-
 
 /**
  * DOM triggers to attach onEvent behaviours
@@ -184,14 +182,32 @@ function mFocus (inst, bgcolor, bcolor, bstyle)
 	inst.style.borderStyle = bstyle;
 }
 
-function mBlur (inst, bgcolor, bcolor, bstyle)
+/**
+ * DOM triggers to attach onEvent behaviours
+ *
+ * used : oak.events.js
+ *
+ * @param {string} inst actual ID
+ * @param {string} bgcolor defined background color
+ * @param {string} bcolor defined border color
+ * @param {string} bstyle defined border attr (e.g. dotted)
+ */
+ function mBlur (inst, bgcolor, bcolor, bstyle)
 {
 	inst.style.backgroundColor = bgcolor;
 	inst.style.borderColor = bcolor;
 	inst.style.borderStyle = bstyle;
 }
 
-function setCorrespondingFocus (elem, attr)
+/**
+ * Set Focus on Form Element
+ *
+ * used : oak.events.js
+ *
+ * @param {string} elem actual element
+ * @param {string} attr attribute of DOM node to process (e.g. ID)
+ */
+ function setCorrespondingFocus (elem, attr)
 {
 	instId = elem.parentNode.parentNode.getAttribute(attr);
 	$(instId).focus();
@@ -242,8 +258,6 @@ function removeHelp (elem, attr)
 	Behaviour.apply();
 }
 
-
-
 /**
  * Get help IDs and print string in html templates
  * Level 2
@@ -273,7 +287,6 @@ function getHelpLvTwo (elem, attr)
 	Behaviour.apply();
 }
 
-
 /**
  * Get help IDs and print string in html templates
  * Level 2
@@ -291,9 +304,6 @@ function removeHelpLvTwo (elem, attr)
 	Effect.Fade(process_id_after,{duration: 0.5});
 	Behaviour.apply();
 }
-
-
-
 
 /**
  * Get form field (Checkbox) status on user event
@@ -329,7 +339,6 @@ function removeHelpLvTwo (elem, attr)
 	}
 }
 
-
 /**
  * Get form field (Checkbox) status on onload event
  * used : oak.events.js
@@ -363,7 +372,6 @@ function removeHelpLvTwo (elem, attr)
 	}
 }
    
-
 /**
  * Hide table(s) row(s)
  * used : oak.events.js
@@ -375,8 +383,6 @@ function removeHelpLvTwo (elem, attr)
 	// process outer table tr
 	elem.style.visibility = 'collapse';
 }
-
-
 
 /**
  * Hide table(s) row(s) and inner div
@@ -401,7 +407,6 @@ function removeHelpLvTwo (elem, attr)
 	Behaviour.apply();
 
 }
-
 
 /**
  * Show table(s) row(s) and inner div
