@@ -1,3 +1,43 @@
+/**
+ * Project: Oak
+ * File: oak.pagemanager.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id$
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Oak
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+ 
+/* 
+Flags to search:
+
+Parent scopes:
+%G -> Generic
+%S -> Structure
+%T -> Tables
+%F -> Forms
+%M -> Miscellaneous
+
+Child scopes:
+
+syntax: '=<name_to_search_for>'
+
+example: '=errors'
+*/
+
+/* %T =tables */
 table {
 border-collapse: collapse;
 margin: 10px 10px 20px 10px;
@@ -9,12 +49,14 @@ table td {
 padding: 4px 0 4px 0;
 border-bottom: 1px solid #efefef;
 }
-.mini {
-font-size: 1px;
-line-height: 1px;
-border: 0 none;
+th, td {
+text-align: left;
+}
+table img {
+vertical-align: bottom;
 }
 
+/* %T =links */
 a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move {
 display: block;
 width: 20px;
@@ -80,40 +122,8 @@ background: #fff url(../img/icons/move.gif) 0 0 no-repeat;
 a.move:hover, a.move:active, a.move:focus {
 background: #fff url(../img/icons/move.gif) 0 -44px no-repeat;
 }
-.page, .page1, .page2, .page3, .page4, .page5 {
-text-align: left;
-}
-.page2 {
-padding-left: 15px;
-background: transparent url(../img/icons/page2.gif) left no-repeat;
-}
-.page3 {
-padding-left: 26px;
-background: transparent url(../img/icons/page3.gif) left no-repeat;
-}
-.page4 {
-padding-left: 37px;
-background: transparent url(../img/icons/page4.gif) left no-repeat;
-}
-.page5 {
-padding-left: 48px;
-background: transparent url(../img/icons/page5.gif) left no-repeat;
-}
-.page6 {
-padding-left: 59px;
-background: transparent url(../img/icons/page6.gif) left no-repeat;
-}
 
-th, td {
-text-align: left;
-}
-table img {
-vertical-align: bottom;
-}
-fieldset h2 {
-margin: 20px 0 5px 0;
-}
-
+/* %T =buttons */
 #buttons {
 margin: 20px 0;
 }
@@ -138,4 +148,41 @@ border: 1px solid #000;
 margin: 0 20px;
 padding: 0px 15px;
 font-family: Arial, Helvetica, sans-serif;
+}
+
+/* %T =pages */
+.page, .page1, .page2, .page3, .page4, .page5 {
+text-align: left;
+}
+.page2 {
+padding-left: 15px;
+background: transparent url(../img/icons/page2.gif) left no-repeat;
+}
+.page3 {
+padding-left: 26px;
+background: transparent url(../img/icons/page3.gif) left no-repeat;
+}
+.page4 {
+padding-left: 37px;
+background: transparent url(../img/icons/page4.gif) left no-repeat;
+}
+.page5 {
+padding-left: 48px;
+background: transparent url(../img/icons/page5.gif) left no-repeat;
+}
+.page6 {
+padding-left: 59px;
+background: transparent url(../img/icons/page6.gif) left no-repeat;
+}
+
+/* %T =forms */
+fieldset h2 {
+margin: 20px 0 5px 0;
+}
+
+/* %M =mini */
+.mini {
+font-size: 1px;
+line-height: 1px;
+border: 0 none;
 }

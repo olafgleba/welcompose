@@ -1,3 +1,44 @@
+/**
+ * Project: Oak
+ * File: oak.admin.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id$
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Oak
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/* 
+Flags to search:
+
+Parent scopes:
+%G -> Generic
+%S -> Structure
+%T -> Tables
+%F -> Forms
+%M -> Miscellaneous
+
+Child scopes:
+
+syntax: '=<name_to_search_for>'
+
+example: '=errors'
+*/
+
+
+/* %G = */
 * {
 margin: 0;
 padding: 0;
@@ -12,7 +53,6 @@ background: #d9d9d9 url(../img/bg_body.gif);
 padding: 16px 0 16px 0;
 text-align: center;
 }
-
 h1 {
 position: relative;
 font-size: 1.5em;
@@ -36,6 +76,7 @@ p a, li a, th a, td a, label select, label input, label p, label span span a, td
 font-size: 100%;
 }
 
+/* %G =links */
 a {
 text-decoration: none;
 }
@@ -52,6 +93,9 @@ a:active, a:focus {
 color: #fff;
 background: #0c3;
 }
+
+
+/* %S =container */
 #container {
 position: relative;
 width: 986px;
@@ -67,7 +111,79 @@ margin: 0;
 text-align: right;
 }
 
-/* LOGO START */
+/* %S =main */
+#main {
+margin: 0 15px 0 15px;
+padding-top: 100px;
+}
+
+/* %S =content */
+#content {
+margin: 20px 0;
+}
+#content p {
+margin: 10px 0 10px 10px;
+}
+
+/* %S =headline */
+.hli {
+display: block;
+width: 474px;
+padding: 3px 0 0 0;
+background: transparent url(../img/bg_hli474_top.gif) 0 0 no-repeat;
+}
+.hli h2 {
+background: transparent url(../img/bg_hli474_bot.gif) left bottom no-repeat;
+width: 474px;
+wid\th: 464px;
+padding: 0 0 4px 10px;
+}
+/* headline on right besides content */
+.secnav474_nonav_c {
+float: right;
+width: 474px;
+height: 22px;
+background: transparent url(../img/bg_secnav474_nonav_c.gif) 0 0 no-repeat;
+}
+/* headline long no content but nav on right side */
+.secnav710_nav_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav710_nav_x.gif) 0 0 no-repeat;
+}
+/* headline long no content but long nav on right side */
+.secnav710_navplus_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav710_navplus_x.gif) 0 0 no-repeat;
+}
+/* headline short no content bu nav on right side */
+.secnav474_nav_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
+}
+.secnav710_nav_x a:link, .secnav710_nav_x a:visited,
+.secnav710_navplus_x a:link, .secnav710_navplus_x a:visited,
+.secnav474_nav_x a:link, .secnav474_nav_x a:visited {
+margin: 0 0 0 110px;
+line-height: 22px;
+font-weight: bold;
+margin-left: 725px;
+padding-left: 25px;
+background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
+}
+.secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus,
+.secnav710_navplus_x a:hover, .secnav710_navplus_x a:active, .secnav710_navplus_x a:focus,
+.secnav474_nav_x a:hover, .secnav474_nav_x a:active, .secnav474_nav_x a:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
+}
+
+/* %H =logo */
 #logo {
 position: absolute;
 top: 19px;
@@ -82,22 +198,8 @@ color: #fff;
 background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
 padding: 0 0 3px 7px;
 }
-/* LOGO EOF */
 
-/* MAIN START */
-#main {
-margin: 0 15px 0 15px;
-padding-top: 100px;
-}
-#content {
-margin: 20px 0;
-}
-#content p {
-margin: 10px 0 10px 10px;
-}
-/* MAIN EOF */
-
-/* TOPNAVIGATION START */
+/* %N =top */
 #topnavcon {
 position: absolute;
 top: 99px;
@@ -205,9 +307,9 @@ background: transparent url(../img/icons/settings.gif) 0 0 no-repeat;
 #topnav .set:hover span, #topnav .set:active span, #topnav .set:focus span, #topnav .seton span {
 background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
 }
-/* TOPNAVIGATION EOF */
 
-/* TOPSUBNAVIGATION START */
+
+/* %N =sub */
 #topsubnavcon {
 width: 956px;
 padding-top: 2em;
@@ -268,11 +370,8 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
-/* TOPSUBNAVIGATION EOF */
 
-
-
-/* TOPSUBSUBNAVIGATION START */
+/* %N =subsub */
 #topsubsubnavconstatic {
 width: 956px;
 padding-top: 0.2em;
@@ -316,176 +415,41 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
-/* TOPSUBSUBNAVIGATION EOF */
 
-
-
-/* SEARCH START */
-#projects {
-position: absolute;
-top: 103px;
-right: 20px;
-width: 17em;
-text-align: right;
+/* %N =side */
+h3.pagenav {
+margin-left: 5px;
+float: left;
+font-weight: normal;;
 }
-input.submitbut90 {
-text-align: left;
-background: #666 url(../img/submitbut.gif) 100% 0 no-repeat;
-color: #fff;
-width: 90px;
-height: 20px;
-font-size: 80%;
-border: 0 none;
-padding: 0 0 0 5px;
-cursor: pointer;
+ul.pagenav {
+list-style: none;
+width: 870px;
+height: 1.5em;
 }
-#projects .fselect {
-margin: 1px 5px 0 0;
-padding: 0;
-font-size: 80%;
-border: 1px solid #666666;
+.pagenav li {
+display: inline;
 }
-/* SEARCH STOP */
-
-/* BREADCRUMB START */
-#brc {
-width: 852px;
-margin: 10px 0 20px 0;
+.pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
+display: block;
+float: left;
+margin: 0 5px;
+padding: 0 5px;
+background: #fff;
 color: #000;
-background: transparent url(../img/bc_right.gif) 100% 5px no-repeat;
+border: 1px solid #d9d9d9;
 }
-#brc p {
-margin: 5px 0;
-padding: 2px 0 8px 8px;
-background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
+.pagenav li.on {
+border-color: #00cc33;
+background: #fff;
 }
-/* BREADCRUMB EOF */
-
-/* HEADLINE START */
-.hli {
-display: block;
-width: 474px;
-padding: 3px 0 0 0;
-background: transparent url(../img/bg_hli474_top.gif) 0 0 no-repeat;
-}
-.hli h2 {
-background: transparent url(../img/bg_hli474_bot.gif) left bottom no-repeat;
-width: 474px;
-wid\th: 464px;
-padding: 0 0 4px 10px;
+.pagenav a:hover, .pagenav a:active, .pagenav a:focus {
+text-decoration: none;
+color: #fff;
+background: #00cc33
 }
 
-/* HEADLINE ON RIGHT BESIDES CONTENT */
-.secnav474_nonav_c {
-float: right;
-width: 474px;
-height: 22px;
-background: transparent url(../img/bg_secnav474_nonav_c.gif) 0 0 no-repeat;
-}
-/* HEADLINE LONG NO CONTENT BUT NAV ON RIGHT SIDE */
-.secnav710_nav_x {
-float: right;
-width: 956px;
-height: 22px;
-background: transparent url(../img/bg_secnav710_nav_x.gif) 0 0 no-repeat;
-}
-/* HEADLINE LONG NO CONTENT BUT LONG NAV ON RIGHT SIDE */
-.secnav710_navplus_x {
-float: right;
-width: 956px;
-height: 22px;
-background: transparent url(../img/bg_secnav710_navplus_x.gif) 0 0 no-repeat;
-}
-/* HEADLINE SHORT NO CONTENT BU NAV ON RIGHT SIDE */
-.secnav474_nav_x {
-float: right;
-width: 956px;
-height: 22px;
-background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
-}
-.secnav710_nav_x a:link, .secnav710_nav_x a:visited,
-.secnav710_navplus_x a:link, .secnav710_navplus_x a:visited,
-.secnav474_nav_x a:link, .secnav474_nav_x a:visited {
-margin: 0 0 0 110px;
-line-height: 22px;
-font-weight: bold;
-margin-left: 725px;
-padding-left: 25px;
-background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
-}
-.secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus,
-.secnav710_navplus_x a:hover, .secnav710_navplus_x a:active, .secnav710_navplus_x a:focus,
-.secnav474_nav_x a:hover, .secnav474_nav_x a:active, .secnav474_nav_x a:focus {
-color: #00AE2C;
-background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
-}
-/* HEADLINE EOF */
-
-/* FILTER (PROJECTS/GROUPS) START */
-.filter {
-margin: 0 0 0 10px;
-padding: 10px 0 20px 0;
-}
-.filter h2 {
-display: block;
-float: left;
-width: auto;
-line-height: 1.5em;
-padding: 0;
-margin-right: 10px;
-}
-.filter label {
-font-size: 75%;
-display: block;
-float: left;
-line-height: 1.5em;
-width: auto;
-margin: 0 5px 0 15px;
-}
-.filter select {
-display: block;
-float: left;
-margin: 1px 0;
-padding: 0;
-border: 1px solid #666;
-line-height: 1.5em;
-}
-/* FILTER (PROJECTS/GROUPS) EOF */
-
-/* ERRORS, RESPONSE START */
-#error {
-display: block;
-width: 710px;
-margin-top: 20px;
-background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
-}
-#error ul.req {
-line-height: 1.2em;
-padding: 4px 15px;
-font-weight: bold;
-color: red;
-list-style-position: inside;
-background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
-}
-#rp {
-display: block;
-width: 710px;
-margin-top: 20px;
-background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
-}
-#rp h1 {
-margin: 0;
-padding: 10px 10px 0 10px;
-color: red;
-}
-#rp p {
-margin: 0;
-padding: 0 10px 10px 10px;
-background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
-}
-/* ERRORS, RESPONSE EOF */
-
-/* FORMS START */
+/* %F =forms */
 form.botbg {
 width: 956px;
 padding-bottom: 20px;
@@ -615,42 +579,47 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
 cursor: pointer;
 }
-/* FORMS EOF */
 
-/* SEITENNAVIGATION - MEHR ALS 10 EINTRAEGE */
-h3.pagenav {
-margin-left: 5px;
-float: left;
-font-weight: normal;;
+/* %M =search */
+#projects {
+position: absolute;
+top: 103px;
+right: 20px;
+width: 17em;
+text-align: right;
 }
-ul.pagenav {
-list-style: none;
-width: 870px;
-height: 1.5em;
+#projects .fselect {
+margin: 1px 5px 0 0;
+padding: 0;
+font-size: 80%;
+border: 1px solid #666666;
 }
-.pagenav li {
-display: inline;
-}
-.pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
-display: block;
-float: left;
-margin: 0 5px;
-padding: 0 5px;
-background: #fff;
-color: #000;
-border: 1px solid #d9d9d9;
-}
-.pagenav li.on {
-border-color: #00cc33;
-background: #fff;
-}
-.pagenav a:hover, .pagenav a:active, .pagenav a:focus {
-text-decoration: none;
+input.submitbut90 {
+text-align: left;
+background: #666 url(../img/submitbut.gif) 100% 0 no-repeat;
 color: #fff;
-background: #00cc33
+width: 90px;
+height: 20px;
+font-size: 80%;
+border: 0 none;
+padding: 0 0 0 5px;
+cursor: pointer;
 }
 
-/* VALIDATE START */
+/* %M =breadcrumb */
+#brc {
+width: 852px;
+margin: 10px 0 20px 0;
+color: #000;
+background: transparent url(../img/bc_right.gif) 100% 5px no-repeat;
+}
+#brc p {
+margin: 5px 0;
+padding: 2px 0 8px 8px;
+background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
+}
+
+/* %M =validate */
 #content span.validate {
 float: left;
 display: block; 
@@ -662,9 +631,8 @@ padding-left: 5px;
 #content span.validate img {
 vertical-align: middle;
 }
-/* VALIDATE EOF */
 
-/* HELP START */
+/* %M =help */
 #content p.help {
 display: block;
 line-height: 1.5em;
@@ -678,9 +646,83 @@ background-color: #fff;
 .iHelp img, .iHelpRemove img, .iHelpLvTwo img, .iHelpRemoveLvTwo img {
 vertical-align: middle;
 }
-/* HELP EOF */
 
-/* CLEARFIX START */
+/* %M =filter */
+.filter {
+margin: 0 0 0 10px;
+padding: 10px 0 20px 0;
+}
+.filter h2 {
+display: block;
+float: left;
+width: auto;
+line-height: 1.5em;
+padding: 0;
+margin-right: 10px;
+}
+.filter label {
+font-size: 75%;
+display: block;
+float: left;
+line-height: 1.5em;
+width: auto;
+margin: 0 5px 0 15px;
+}
+.filter select {
+display: block;
+float: left;
+margin: 1px 0;
+padding: 0;
+border: 1px solid #666;
+line-height: 1.5em;
+}
+
+/* %M =errors */
+#error {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+#error ul.req {
+line-height: 1.2em;
+padding: 4px 15px;
+font-weight: bold;
+color: red;
+list-style-position: inside;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+/* %M =response */
+#rp {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+#rp h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#rp p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+/* %M =mediacolumn */
+#mediacolumn {
+float: right;
+width: 238px;
+height: 600px;
+background: red;
+}
+
+/* %M =misc */
+.clearb {
+clear: both;
+}
 .clearfix:after {
 content: "."; 
 display: block; 
@@ -693,16 +735,8 @@ visibility: hidden;
 height: 1%; 
 }
 /* End hide from IE-mac */
-/* CLEARFIX EOF */
 
-
-/* DIVERSES START */
-.clearb {
-clear: both;
-}
-/* DIVERSES EOF */
-
-/* TABLES SLIDES */
+/* For table slides */
 .outer {
 visibility: collapse;
 background-color: transparent;
@@ -711,13 +745,4 @@ background-color: transparent;
 display: none;
 background: #d9d9d9 url(../img/bg_slides.gif);
 padding: 1em 0 1em 0;
-}
-/* TABLES SLIDES EOF */
-
-/* COLUMN */
-#column {
-float: right;
-width: 238px;
-height: 600px;
-background: red;
 }
