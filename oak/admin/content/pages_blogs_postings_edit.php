@@ -110,7 +110,7 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('box', 'post');
+	$FORM = $BASE->utility->loadQuickForm('blog_posting', 'post');
 	
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
@@ -127,14 +127,14 @@ try {
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
 
 	// textfield for title
-	$FORM->addElement('text', 'title', gettext('Name'),
+	$FORM->addElement('text', 'title', gettext('Title'),
 		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w540'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
 
 	// textarea for summary
-	$FORM->addElement('textarea', 'summary', gettext('Content'),
+	$FORM->addElement('textarea', 'summary', gettext('Summary'),
 		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
 	$FORM->applyFilter('summary', 'trim');
 	
@@ -212,7 +212,7 @@ try {
 		'apply_macros' => Base_Cnc::ifsetor($blog_posting['apply_macros'], null),
 		'tags' => $BLOGTAG->_serializedTagArrayToString(Base_Cnc::ifsetor($blog_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($blog_posting['draft'], null),
-		'ping' => Base_Cnc::ifsetor($blog_posting['ping'], null),
+		'ping' => 0,
 		'comments_enable' => Base_Cnc::ifsetor($blog_posting['comments_enable'], null),
 		'trackbacks_enable' => Base_Cnc::ifsetor($blog_posting['trackbacks_enable'], null)
 	));
