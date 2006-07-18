@@ -89,6 +89,126 @@ public function instance()
 }
 
 /**
+ * Adds tags of a posting. Takes the page id as first argument, the posting
+ * id second argument and the tag word list as third argument.
+ * 
+ * @throws Content_BlogtagException
+ * @param int Page id
+ * @param int Posting id
+ * @param array Tag array
+ * @return bool
+ */
+public function addPostingTags ($page, $posting, $tags)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw Content_BlogtagException('Input for parameter page is not numeric');
+	}
+	if (empty($posting) || !is_numeric($posting)) {
+		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+	}
+	if (!is_array($tags)) {
+		throw new Content_BlogtagException('Input for parameter tags is not an array');
+	}
+	
+	// loop through the tags and add them
+	foreach ($tags as $_tag) {
+		if (!empty($_tag)) {
+			$this->addBlogTag($page, $posting, $_tag);	
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Update tags of a posting. Takes the page id as first argument,
+ * the posting id as second argument and the new tag list as third
+ * argument. Fetches the old tag list from the database and calculates
+ * the differences. Tags that are no longer required will be removed,
+ * new ones will be added.
+ * 
+ * @throws Content_BlogtagException
+ * @param int Page id
+ * @param int Posting id
+ * @param array Tag array
+ * @return bool
+ */
+public function updatePostingTags ($page, $posting, $tags)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_BlogtagException('Input for parameter page is not numeric');
+	}
+	if (empty($posting) || !is_numeric($posting)) {
+		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+	}
+	if (!is_array($tags)) {
+		throw new Content_BlogtagException('Input for parameter tags is not an array');
+	}	
+	
+	// prepare old tags
+	$old_tags = array();
+	$params = array(
+		'page' => $page,
+		'posting' => $posting
+	);
+	foreach ($this->selectBlogTags($params) as $_old_tag) {
+		$old_tags[] = $_old_tag['word'];
+	}
+	
+	// discover the tags which we have to delete
+	$to_delete = array_diff($old_tags, $tags);
+	
+	// delete them
+	foreach ($to_delete as $_tag) {
+		$this->deleteBlogTag($page, $posting, $_tag);	
+	}
+	
+	// discover the tags which we have to add
+	$to_add = array_diff($tags, $old_tags);
+	
+	// add them
+	foreach ($to_add as $_tag) {
+		$this->addBlogTag($page, $posting, $_tag);	
+	}
+	
+	return true;
+}
+
+/**
+ * Deletes all tags of a posting. Takes the page id as first argument,
+ * the posting id as second argument. Returns bool.
+ * 
+ * @throws blogtagException
+ * @param int Page id
+ * @param int Posting id
+ * @param array Tag array
+ * @return bool
+ */
+public function deletePostingTags ($page, $posting)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw Content_BlogtagException('Input for parameter page is not numeric');
+	}
+	if (empty($posting) || !is_numeric($posting)) {
+		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+	}
+	
+	// get the tags and delete them
+	$params = array(
+		'page' => $page,
+		'posting' => $posting
+	);
+	foreach ($this->selectBlogTags($params) as $_tag) {
+		$this->deleteBlogTag($page, $posting, $_tag['word']);
+	}
+	
+	return true;
+}
+
+/**
  * Inserts a blog tag into the blog tag database. Takes the page 
  * id as first argument, the blog posting that the tag will be
  * linked to as second argument and the tag word as third argument.
@@ -115,8 +235,7 @@ protected function addBlogTag ($page, $posting, $tag)
 	}
 	
 	// load helper class
-	require_once(dirname(__FILE__).'/../loader.php');
-	$HELPER = load('helper');
+	$HELPER = load('utility:helper');
 	
 	// check if tag already exists
 	if ($this->tag_exists($page, $tag) === false) {
@@ -129,10 +248,10 @@ protected function addBlogTag ($page, $posting, $tag)
 			'page' => $page,
 			'first_char' => $first_char,
 			'word' => $tag,
-			'word_url' => $HELPER->createMeaningfulUrl($tag),
+			'word_url' => $HELPER->createMeaningfulString($tag),
 			'occurrences' => 1
 		);
-		$tag_id = $this->base->db->insert('`content_blog_tags`', $data);
+		$tag_id = $this->base->db->insert(OAK_DB_CONTENT_BLOG_TAGS, $data);
 		
 		// create link between posting and tag
 		$this->addLink($posting, $tag_id);
@@ -186,7 +305,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 				// increment the occurrences
 				$sql = "
 					UPDATE
-						`content_blog_tags`
+						".OAK_DB_CONTENT_BLOG_TAGS."
 					SET
 						`occurrences` = `occurrences` + 1
 					WHERE
@@ -209,7 +328,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 				// decrement the occurrences
 				$sql = "
 					UPDATE
-						`content_blog_tags`
+						".OAK_DB_CONTENT_BLOG_TAGS."
 					SET
 						`occurrences` = `occurrences` - 1
 					WHERE
@@ -288,7 +407,7 @@ protected function deleteBlogTag ($page, $posting, $tag)
  * @param int Tag word id
  * @return array
  */
-public function selectTag ($id)
+public function selectBlogTag ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
@@ -300,20 +419,28 @@ public function selectTag ($id)
 		SELECT
 			`content_blog_tags`.`id` AS `id`,
 			`content_blog_tags`.`page` AS `page`,
+			`content_blog_tags`.`first_char` AS `first_char`,
 			`content_blog_tags`.`word` AS `word`,
 			`content_blog_tags`.`word_url` AS `word_url`,
 			`content_blog_tags`.`occurrences` AS `occurrences`
 		FROM
-			`content_blog_tags`
+			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_tags`.`page` = `content_pages`.`id`
 		WHERE
 			`content_blog_tags`.`id` = :id
+		  AND
+			`content_pages`.`project` = OAK_CURRENT_PROJECT
 		LIMIT
 			1
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => $id
+		'id' => $id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -385,32 +512,40 @@ public function selectBlogTags ($params = array())
 		'OCCURRENCES' => '`content_blog_tags`.`occurrences`'
 	);
 	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
 	// compose sql query
 	$sql = "
 		SELECT
 			`content_blog_tags`.`id` AS `id`,
 			`content_blog_tags`.`page` AS `page`,
+			`content_blog_tags`.`first_char` AS `first_char`,
 			`content_blog_tags`.`word` AS `word`,
 			`content_blog_tags`.`word_url` AS `word_url`,
-			`content_blog_tags`.`occurrences` AS `occurrences`,
-			`content_blog_postings`.`id` AS `posting_id`
+			`content_blog_tags`.`occurrences` AS `occurrences`
 		FROM
-			`content_blog_tags`
-		LEFT JOIN
-			`content_blog_tags2content_blog_postings`
+			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		JOIN
+			".OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
 		  ON
 			`content_blog_tags`.`id` = `content_blog_tags2content_blog_postings`.`tag`
-		LEFT JOIN
-			`blog_postings`
+		JOIN
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
-			`content_blog_tags2content_blog_postings`.`posting` = `blog_postings`.`id`
-		LEFT JOIN
-			`pages`
+			`content_blog_tags2content_blog_postings`.`posting` = `content_blog_postings`.`id`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`blog_postings`.`page` = `pages`.`id`
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($posting) && is_numeric($posting)) {
@@ -467,20 +602,27 @@ public function tag_exists ($page, $tag)
 	// pepare query
 	$sql = "
 		SELECT
-			`id`
+			`content_blog_tags`.`id`
 		FROM
-			`content_blog_tags`
+			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_tags`.`page` = `content_pages`.`id`
 		WHERE
-			`word` = :word
+			`content_blog_tags`.`word` = :word
 		  AND
-			`page` = :page
+			`content_blog_tags`.`page` = :page
+		  AND
+			`content_pages`.`project` = :project
 		LIMIT 1
 	";
 	
 	// prepare bind params
 	$bind_params = array(
 		'word' => $tag,
-		'page' => $page
+		'page' => $page,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query an return tag id
@@ -519,7 +661,7 @@ public function link_exists ($posting, $tag)
 		SELECT
 			`id`
 		FROM
-			`content_blog_tags2content_blog_postings`
+			".OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
 		WHERE
 			`posting` = :posting
 		  AND
@@ -668,6 +810,16 @@ public function _tagArrayToString ($array)
 		// the string
 		return (string)trim(implode($this->_tag_separator.' ', $array));
 	}
+}
+
+public function _serializedTagArrayToString ($string)
+{
+	return $this->_tagArrayToString(unserialize((string)$string));
+}
+
+public function _tagStringToSerializedArray ($string)
+{
+	return serialize($this->_tagStringToArray((string)$string));
 }
 
 // End of class

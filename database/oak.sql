@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 15.07.2006 15:29:28
--- Diagram Version: 65
+-- Created on: 18.07.2006 15:14:58
+-- Diagram Version: 71
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -456,7 +456,7 @@ CREATE TABLE `content_blog_tags` (
   `page` int(11) UNSIGNED NOT NULL,
   `first_char` char(1),
   `word` varchar(255),
-  `word_url` int(255),
+  `word_url` varchar(255),
   `occurrences` int(11) UNSIGNED,
   PRIMARY KEY(`id`),
   INDEX `page`(`page`),
@@ -548,7 +548,12 @@ CREATE TABLE `content_blog_postings` (
   `ping` enum('0','1') DEFAULT '1',
   `comments_enable` enum('0','1') DEFAULT '1',
   `comment_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
-  `tag_count` int(11) UNSIGNED,
+  `trackbacks_enable` enum('0','1') DEFAULT '1',
+  `trackback_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `pingbacks_enable` enum('0','1') DEFAULT '1',
+  `pingback_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `tag_count` int(11) UNSIGNED DEFAULT '0',
+  `tag_array` text,
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),

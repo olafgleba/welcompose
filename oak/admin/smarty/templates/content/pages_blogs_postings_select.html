@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Pages &#62; Blog Postings}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript">
+var response			= '{$session.response}';
+var selection			= '{$session.selection}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse.js.php?file=oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.xhr.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+<!--[if IE]>
+<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<p>{i18n Oak}</p>
+<!-- logo --></div>
+
+{include file="_inc_topnav.html" area="contents"}
+
+{include file="_inc_projects_load.html" go_back_area="content" go_back_file="pages_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+<!-- topsubnavcon static -->
+<div id="topsubnavconstatic">
+<ul id="topsubnav">
+<li><a class="on" href="pages_select.php">{i18n Pages}<span></span></a></li>
+<li><a href="navigations_select.php">{i18n Navigations}<span></span></a></li>
+<li><a href="pagetypes_select.php">{i18n Page Types}<span></span></a></li>
+</ul>
+</div>
+<!-- topsubnavcon static eof -->
+
+<!-- topsubsubnavcon static -->
+<div id="topsubsubnavconstatic">
+<ul id="topsubsubnav">
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+<li class="on">{i18n Blog Postings}</li>
+<li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+<li><a href="pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+</ul>
+</div>
+<!-- topsubsubnavcon static eof -->
+
+<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {i18n Blog Postings}</p></div>
+
+<div id="content">
+
+<h1>{i18n Blog Postings}</h1>
+
+<div class="secnav474_nav_x"><a href="pages_blogs_postings_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<br class="clearb" />
+
+<div class="filter clearfix">
+{if $total_posting_count > 0}
+<h2>{i18n Filter:}</h2>
+<form action="pages_blogs_postings_select.php" method="get">
+<fieldset>
+<input type="hidden" name="page" value="{$page.id|escape:"htmlall"}" />
+<label for="timeframe">{i18n Timeframe}</label> 
+<select id="timeframe" name="timeframe">
+<option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
+<option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
+{/foreach}
+</select>
+<label for="draft">{i18n Draft}</label> 
+<select id="draft" name="draft">
+<option{if empty($request.draft)} selected="selected"{/if}>{i18n Please choose...}</option>
+<option value="1"{if $request.draft == "1"} selected="selected"{/if}>{i18n Yes}</option>
+<option value="0"{if $request.draft == "0"} selected="selected"{/if}>{i18n No}</option>
+</select>
+<input type="submit" value="{i18n Filter}" />
+</fieldset>
+</form>
+{/if}
+<!-- filter --></div>
+
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;draft={$request.draft|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
+{if !empty($blog_postings)}
+<table summary="{i18n Available Blog Postings}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="385" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="template_name">{i18n Title} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Date} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Comments} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Trackbacks} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$blog_postings item=_posting}
+<tr>
+<td>{$_posting.title|escape:"htmlall"}</td>
+<td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%I:%S %Z"}</td>
+<td>{$_posting.comment_count|escape:"htmlall"}</td>
+<td>{$_posting.trackback_count|escape:"htmlall"}</td>
+<td><a class="edit" href="pages_blogs_postings_edit.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pages_blogs_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}" title="{i18n Delete}"></a></td>
+</tr>
+{/foreach}
+</table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;draft={$request.draft|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
+{else}
+<p>{i18n No blog posting has been created yet.}</p>
+{/if}
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

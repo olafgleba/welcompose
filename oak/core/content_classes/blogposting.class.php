@@ -194,52 +194,64 @@ public function selectBlogPosting ($id)
 			`content_blog_postings`.`ping` AS `ping`,
 			`content_blog_postings`.`comments_enable` AS `comments_enable`,
 			`content_blog_postings`.`comment_count` AS `comment_count`,
+			`content_blog_postings`.`trackbacks_enable` AS `trackbacks_enable`,
+			`content_blog_postings`.`trackback_count` AS `trackback_count`,
+			`content_blog_postings`.`pingbacks_enable` AS `pingbacks_enable`,
+			`content_blog_postings`.`pingback_count` AS `pingback_count`,
+			`content_blog_postings`.`tag_count` AS `tag_count`,
+			`content_blog_postings`.`tag_array` AS `tag_array`,
 			`content_blog_postings`.`date_modified` AS `date_modified`,
 			`content_blog_postings`.`date_added` AS `date_added`,
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`homepage` AS `user_homepage`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
 			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
+			`content_pages`.`project` AS `page_project`,
 			`content_pages`.`type` AS `page_type`,
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_blog_postings`.`user` = `application_users`.`id`
-		LEFT JOIN
+		JOIN
+			".OAK_DB_USER_USERS." AS `user_users`
+		  ON
+			`content_blog_postings`.`user` = `user_users`.`id`
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		ON
+		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`			
 		WHERE
+			`content_blog_postings`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+		  AND
+			`user_users`.`id` = :user
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `content_blog_postings`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT,
+		'user' => OAK_CURRENT_USER
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -278,6 +290,7 @@ public function selectBlogPostings ($params = array())
 	$user = null;
 	$page = null;
 	$draft = null;
+	$timeframe = null;
 	$order_macro = null;
 	$start = null;
 	$limit = null;
@@ -291,15 +304,18 @@ public function selectBlogPostings ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'order_marco':
+			case 'timeframe':
+			case 'order_macro':
 					$$_key = (string)$_value;
 				break;
 			case 'user':
 			case 'page':
-			case 'draft':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
+				break;
+			case 'draft':
+					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			default:
 				throw new Content_BlogpostingException("Unknown parameter $_key");
@@ -309,10 +325,12 @@ public function selectBlogPostings ($params = array())
 	// define order macros
 	$macros = array(
 		'USER_NAME' => '`application_users`.`name`',
-		'PAGE' => '`content_blog_postings`.`page`',
-		'DATE_ADDED' => '`content_blog_postings`.`date_added` AS `date_added`',
+		'DATE_ADDED' => '`content_blog_postings`.`date_added`',
 		'DATE_MODIFIED' => '`content_blog_postings`.`date_modified`'
 	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
 	
 	// prepare query
 	$sql = "
@@ -330,56 +348,73 @@ public function selectBlogPostings ($params = array())
 			`content_blog_postings`.`ping` AS `ping`,
 			`content_blog_postings`.`comments_enable` AS `comments_enable`,
 			`content_blog_postings`.`comment_count` AS `comment_count`,
+			`content_blog_postings`.`trackbacks_enable` AS `trackbacks_enable`,
+			`content_blog_postings`.`trackback_count` AS `trackback_count`,
+			`content_blog_postings`.`pingbacks_enable` AS `pingbacks_enable`,
+			`content_blog_postings`.`pingback_count` AS `pingback_count`,
+			`content_blog_postings`.`tag_count` AS `tag_count`,
+			`content_blog_postings`.`tag_array` AS `tag_array`,
 			`content_blog_postings`.`date_modified` AS `date_modified`,
 			`content_blog_postings`.`date_added` AS `date_added`,
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`homepage` AS `user_homepage`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
 			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
+			`content_pages`.`project` AS `page_project`,
 			`content_pages`.`type` AS `page_type`,
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_blog_postings`.`user` = `application_users`.`id`
-		LEFT JOIN
+		JOIN
+			".OAK_DB_USER_USERS." AS `user_users`
+		  ON
+			`content_blog_postings`.`user` = `user_users`.`id`
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		ON
+		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
+		$sql .= " AND `user_users`.`id` = :user ";
 		$bind_params['user'] = $user;
 	}
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
 	}
-	if (is_numeric($draft)) {
+	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
-		$bind_params['draft'] = $draft;
+		$bind_params['draft'] = (string)$draft;
+	}
+	if (!empty($timeframe)) {
+		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
+			$timeframe);
 	}
 	
 	// add sorting
@@ -421,6 +456,7 @@ public function countBlogPostings ($params = array())
 	$user = null;
 	$page = null;
 	$draft = null;
+	$timeframe = null;
 	$bind_params = array();
 	
 	// input check
@@ -428,13 +464,21 @@ public function countBlogPostings ($params = array())
 		throw new Content_BlogpostingException('Input for parameter params is not an array');	
 	}
 	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'user':
 			case 'page':
-			case 'draft':
 					$$_key = (int)$_value;
+				break;
+			case 'timeframe':
+					$$_key = (string)$_value;
+				break;
+			case 'draft':
+					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			default:
 				throw new Content_BlogpostingException("Unknown parameter $_key");
@@ -444,16 +488,16 @@ public function countBlogPostings ($params = array())
 	// prepare query
 	$sql = "
 		SELECT 
-			COUNT (*) AS `total`
+			COUNT(*) AS `total`
 		FROM
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_blog_postings`.`user` = `application_users`.`id`
-		LEFT JOIN
+		JOIN
+			".OAK_DB_USER_USERS." AS `user_users`
+		  ON
+			`content_blog_postings`.`user` = `user_users`.`id`
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		ON
+		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
 			1
@@ -471,6 +515,10 @@ public function countBlogPostings ($params = array())
 	if (is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
 		$bind_params['draft'] = $draft;
+	}
+	if (!empty($timeframe)) {
+		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
+			$timeframe);
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);

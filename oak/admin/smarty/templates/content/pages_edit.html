@@ -61,9 +61,16 @@ var selection = '{$session.selection}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Edit Content}<span></span></a></li>
-<li class="on">{i18n Edit Metadata}</li>
+{if $page.page_type_name == 'OAK_SIMPLEPAGE'}
+<li class="on">{i18n Metadata}</li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
+<li><a href="boxes_select.php?page={$page.id|escape:"url"}"  class="on">{i18n Boxes}<span></span></a></li>
+{elseif $page.page_type_name == 'OAK_BLOG'}
+<li class="on">{i18n Metadata}</li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+<li><a href="pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+{/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->

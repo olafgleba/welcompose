@@ -143,4 +143,8 @@ define("OAK_REGEX_TEXT_MACRO_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 // blog comment status name
 define("OAK_REGEX_BLOG_COMMENT_STATUS_NAME", "=^([A-Z0-9_]+)$=");
 
+// Defines regular expression for strings containing a
+// timeframe
+define("OAK_REGEX_TIMEFRAME", "=^([a-z0-9_]+)$=");
+
 ?>

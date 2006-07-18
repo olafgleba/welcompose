@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: pages_edit.php
+ * File: pages_blogs_postings_delete.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -69,6 +69,14 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
+
+	// load blogposting class
+	/* @var $BLOGPOSTING Content_Blogposting */
+	$BLOGPOSTING = load('content:blogposting');
+	
+	// load blogtag class
+	/* @var $BLOGTAG Content_Blogtag */
+	$BLOGTAG = load('content:blogtag');
 	
 	// init user and project
 	$USER->initUserAdmin();
@@ -82,32 +90,45 @@ try {
 	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
 
-	// get page
-	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	try {
+		// start transaction
+		$BASE->db->begin();
 		
+		// get page
+		$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC));
+		
+		// make sure that we got a page and page id
+		if (is_null(Base_Cnc::ifsetor($page['id'], null))) {
+			header("Location: pages_select.php");
+			exit;
+		}
+		
+		// delete tags
+		$BLOGTAG->deletePostingTags(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC), 
+			Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		
+		// delete row
+		$BLOGPOSTING->deleteBlogPosting(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		
+		// commit transaction
+		$BASE->db->commit();
+	} catch (Exception $e) {
+		// do rollback
+		$BASE->db->rollback();
+		
+		// re-throw exception
+		throw $e;
+	}
+
 	// clean buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
 
-	// redirect
-	switch((string)$page['page_type_name']) {
-		case 'OAK_BLOG':
-				header("Location: pages_blogs_postings_select.php?page=".$page['id']);
-			exit;
-		case 'OAK_SIMPLE_FORM':
-				header("Location: pages_simpleforms_content_edit.php?id=".$page['id']);
-			exit;
-		case 'OAK_SIMPLE_PAGE':
-				header("Location: pages_simplepages_content_edit.php?id=".$page['id']);
-			exit;
-		case 'OAK_URL':
-				header("Location: pages_url_meta_edit.php?id=".$page['id']);
-			exit;
-		default:
-				header("Location: pages_select.php");
-			exit;
-	}
+	// go back to overview page
+	header("Location: pages_blogs_postings_select.php?page=".(int)$page['id']);
+	exit;
+
 } catch (Exception $e) {
 	// clean buffer
 	if (!$BASE->debug_enabled()) {

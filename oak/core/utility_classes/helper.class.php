@@ -137,6 +137,292 @@ public function _sqlForOrderMacro ($definition, $macros)
 }
 
 /**
+ * Returns array with available timeframes.
+ * 
+ * @return array
+ */
+public function getTimeframes ()
+{
+	return array(
+		'today' => gettext('Today'),
+		'yesterday' => gettext('Yesterday'),
+		'two_days_ago' => gettext('Two days ago'),
+		'three_days_ago' => gettext('Three days ago'),
+		'four_days_ago' => gettext('Four days ago'),
+		'five_days_ago' => gettext('Five days ago'),
+		'six_days_ago' => gettext('Six days ago'),
+		'seven_days_ago' => gettext('Seven days ago'),
+		'this_week' => gettext('This week'),
+		'last_week' => gettext('Last week'),
+		'two_weeks_ago' => gettext('Two weeks ago'),
+		'three_weeks_ago' => gettext('Three weeks ago'),
+		'four_weeks_ago' => gettext('Four weeks ago'),
+		'this_month' => gettext('This month'),
+		'last_month' => gettext('Last month'),
+		'two_months_ago' => gettext('Two months ago'),
+		'three_months_ago' => gettext('Three months ago'),
+		'four_months_ago' => gettext('Four months ago'),
+		'five_months_ago' => gettext('Five months ago'),
+		'six_months_ago' => gettext('Six months ago'),
+		'half_year_ago' => gettext('Half year ago'),
+		'one_year_ago' => gettext('One year ago'),
+		'two_years_ago' => gettext('Two years ago'),
+		'three_years_ago' => gettext('Three years ago'),
+		'four_years_ago' => gettext('Four years ago'),
+		'five_years_ago' => gettext('Five years ago')
+	);
+}
+
+/**
+ * Creates sql fragment for given timeframe. Takes the name of the
+ * date field as first argument, the name of the timeframe as second
+ * argument. Returns string.
+ * 
+ * See Utility_Helper::getTimeframes() for a list of supported 
+ * timeframes. 
+ * 
+ * @throws Utility_HelperException
+ * @param string Date field name
+ * @param string Timeframe name
+ * @return string Sql fragment
+ */
+public function _sqlForTimeframe ($field, $timeframe)
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("Input for parameter field is expected to be a non-empty string");
+	}
+	if (empty($timeframe) || !is_scalar($timeframe)) {
+		throw new Utility_HelperException("Input for parameter timeframe is expected to be a non-empty string");
+	}
+	if (!preg_match(OAK_REGEX_TIMEFRAME, $timeframe)) {
+		throw new Utility_HelperException("Invalid timeframe supplied");
+	}
+	
+	// let's define now as a var, so we can play around with different dates
+	$now = strtotime('now');
+	
+	// let's fix date('w') 'cos weeks of normal people start with monday
+	$w = (date('w', $now) == 0) ? 7 : date('w', $now);
+	
+	switch ((string)$timeframe) {
+		case 'today':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('today', $now));
+			
+			// compose and return sql fragment
+			return sprintf("%s > '%s'", $field, $timeframe_start);
+		case 'yesterday':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('yesterday', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('yesterday', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'two_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('2 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('2 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'three_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('3 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('3 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'four_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('4 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('4 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'five_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('5 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('5 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'six_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('6 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('6 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'seven_days_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime('7 days ago', $now));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime('7 days ago', $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'this_week':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", $now - (86400 * ($w - 1)));
+			
+			// compose and return sql fragment
+			return sprintf("%s > '%s'", $field, $timeframe_start);
+		case 'last_week':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime(sprintf("%s -1 week",
+				date('Y-m-d', $now - (86400 * ($w - 1))))));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime(date('Y-m-d',
+				$now - (86400 * ($w - 1)) - 86400)));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'two_weeks_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime(sprintf("%s -2 weeks",
+				date('Y-m-d', $now - (86400 * ($w - 1))))));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime(sprintf("%s -1 week",
+				date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'three_weeks_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime(sprintf("%s -3 weeks",
+				date('Y-m-d', $now - (86400 * ($w - 1))))));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime(sprintf("%s -2 weeks",
+				date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'four_weeks_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-d 00:00:00", strtotime(sprintf("%s -4 weeks",
+				date('Y-m-d', $now - (86400 * ($w - 1))))));
+			$timeframe_end = date("Y-m-d 23:59:59", strtotime(sprintf("%s -3 weeks",
+				date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'this_month':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", $now);
+
+			// compose and return sql fragment
+			return sprintf("%s > '%s'", $field, $timeframe_start);
+		case 'last_month':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -1 month', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -1 month', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'two_months_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -2 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -2 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'three_months_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -3 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -3 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'four_months_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -4 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -4 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'five_months_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -5 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -5 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'six_months_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'half_year_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -12 months', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'one_year_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -2 years', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -1 year', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'two_years_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -3 years', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -2 years', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'three_years_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -4 years', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -3 years', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'four_years_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -5 years', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -4 years', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		case 'five_years_ago':
+			// calculate timeframe start/end
+			$timeframe_start = date("Y-m-01 00:00:00", strtotime(sprintf('%s -6 years', date("Y-m-15", $now)), $now));
+			$timeframe_end = date("Y-m-t 23:59:59", strtotime(sprintf('%s -5 years', date("Y-m-15", $now)), $now));
+
+			// compose and return sql fragment
+			return sprintf("%s BETWEEN '%s' AND '%s'", $field, $timeframe_start,
+				$timeframe_end);
+		default:
+			throw new Utility_HelperException("Unknown timeframe supplied");
+	}
+	
+}
+
+/**
  * Applies markdown on given string. Takes the string to convert as
  * first argument, the information if HTML should be stripped before
  * using markdown as second argument. Returns the converted string.
