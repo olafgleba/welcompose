@@ -98,7 +98,7 @@ public function addPingServiceConfiguration ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATION,
+	return $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 		$sqlData);
 }
 
@@ -132,7 +132,7 @@ public function updatePingServiceConfiguration ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATION,
+	return $this->base->db->update(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 		$sqlData, $where, $bind_params);	
 }
 
@@ -161,7 +161,7 @@ public function deletePingServiceConfiguration ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATION,
+	return $this->base->db->delete(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 			$where, $bind_params);
 }
 
@@ -191,31 +191,32 @@ public function selectPingServiceConfiguration ($id)
 			`application_ping_services`.`name` AS `ping_service_name`,
 			`application_ping_services`.`host` AS `ping_service_host`,
 			`application_ping_services`.`port` AS `ping_service_port`,
-			`application_ping_services`.`http_version` AS `ping_service_http_version`,
 			`application_ping_services`.`path` AS `ping_service_path`,
 			`application_ping_service_configurations`.`id` AS `id`,
+			`application_ping_service_configurations`.`page` AS `page`,
 			`application_ping_service_configurations`.`site_name` AS `site_name`,
 			`application_ping_service_configurations`.`site_url` AS `site_url`,
 			`application_ping_service_configurations`.`site_index` AS `site_index`,
 			`application_ping_service_configurations`.`site_feed` AS `site_feed`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATION." AS `application_ping_service_configurations`
-		LEFT JOIN
+			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+		JOIN
 			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
+			`application_ping_service_configurations`.`id` = :id
+		  AND
+			`application_ping_services`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `application_ping_service_configurations`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -274,7 +275,6 @@ public function selectPingServiceConfigurations ($params = array())
 			`application_ping_services`.`name` AS `ping_service_name`,
 			`application_ping_services`.`host` AS `ping_service_host`,
 			`application_ping_services`.`port` AS `ping_service_port`,
-			`application_ping_services`.`http_version` AS `ping_service_http_version`,
 			`application_ping_services`.`path` AS `ping_service_path`,
 			`application_ping_service_configurations`.`id` AS `id`,
 			`application_ping_service_configurations`.`page` AS `page`,
@@ -284,14 +284,19 @@ public function selectPingServiceConfigurations ($params = array())
 			`application_ping_service_configurations`.`site_index` AS `site_index`,
 			`application_ping_service_configurations`.`site_feed` AS `site_feed`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATION." AS `application_ping_service_configurations`
-		LEFT JOIN
+			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+		JOIN
 			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
-			1
+			`application_ping_services`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($page) && is_numeric($page)) {
@@ -315,6 +320,77 @@ public function selectPingServiceConfigurations ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Method to count ping service configurations. Takes key=>value array
+ * with count params as first argument. Returns int.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Page id</li>
+ * <li>ping_service, int, optional: Ping service id</li> 
+ * </ul>
+ * 
+ * @throws Application_PingserviceconfigurationException
+ * @param array Count params
+ * @return array
+ */
+public function countPingServiceConfigurations ($params = array())
+{
+	// define some vars
+	$page = null;
+	$ping_service = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Application_PingserviceconfigurationException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'page':
+			case 'ping_service':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Application_PingserviceconfigurationException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+		JOIN
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+		  ON
+			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
+		WHERE 
+			`application_ping_services`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($page) && is_numeric($page)) {
+		$sql .= " AND `application_ping_service_configurations`.`page` = :page ";
+		$bind_params['page'] = $page;
+	}
+	if (!empty($ping_service) && is_numeric($ping_service)) {
+		$sql .= " AND `application_ping_service_configurations`.`ping_service` = :ping_service ";
+		$bind_params['ping_service'] = $ping_service;
+	}
+	
+	return $this->base->db->select($sql, 'field', $bind_params);
 }
 
 // end of class

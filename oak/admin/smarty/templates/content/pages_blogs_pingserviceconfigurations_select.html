@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Pages &#62; Boxes}</title>
+<title>{i18n Oak Admin &ndash; Pages &#62; Ping Service Configurations}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
 
@@ -61,27 +61,21 @@ var selection			= '{$session.selection}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-{if $page.page_type_name == 'OAK_SIMPLEPAGE'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
-<li>{i18n Boxes}<span></span></a></li>
-{elseif $page.page_type_name == 'OAK_BLOG'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
-{/if}
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
+<li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+<li class="on">{i18n Ping Services}</li>
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {i18n Boxes}</p></div>
+<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {i18n Ping Services}</p></div>
 
 <div id="content">
 
-<h1>{i18n Boxes}</h1>
+<h1>{i18n Ping Services}</h1>
 
-<div class="secnav474_nav_x"><a href="boxes_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="pages_blogs_pingserviceconfigurations_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
 <br class="clearb" />
 
 {if count($page_index) > 1}
@@ -91,28 +85,34 @@ var selection			= '{$session.selection}';
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="boxes_select.php?page={$page.id|escape:"url"}&amp;set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>
 {/if}
-{if !empty($boxes)}
-<table summary="{i18n Available Boxes}">
+{if !empty($ping_service_configurations)}
+<table summary="{i18n Available Blog Postings}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">Name <span class="az"></span> <span class="za"></span></th>
-<th>Edit</th>
-<th>Delete</th>
+<th class="template_name">{i18n Ping Service Name} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Site Name} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Site URL} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
 </tr>
-{foreach from=$boxes item=_box}
+{foreach from=$ping_service_configurations item=_configuration}
 <tr>
-<td>{$_box.name|escape:"htmlall"}</td>
-<td><a class="edit" href="boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td>{$_configuration.ping_service_name|escape:"htmlall"}</td>
+<td>{$_configuration.site_name|escape:"htmlall"}</td>
+<td>{$_configuration.site_url|escape:"htmlall"}</td>
+<td><a class="edit" href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
@@ -123,13 +123,13 @@ var selection			= '{$session.selection}';
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="boxes_select.php?page={$page.id|escape:"url"}&amp;set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>
 {/if}
 {else}
-<p>{i18n No box has been created yet.}</p>
+<p>{i18n No ping service has been configured yet.}</p>
 {/if}
 
 <!-- content --></div>

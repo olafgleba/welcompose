@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: pages_blogs_postings_select.php
+ * File: pages_blogs_pingserviceconfigurations_select.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -69,10 +69,14 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
-
-	// load blogposting class
-	/* @var $BLOGPOSTING Content_Blogposting */
-	$BLOGPOSTING = load('content:blogposting');
+	
+	// load pingservice class
+	/* @var $PINGSERVICE Application_Pingservice */
+	$PINGSERVICE = load('application:pingservice');
+	
+	// load pingserviceconfiguration class
+	/* @var $PINGSERVICECONFIGURATION Application_Pingserviceconfiguration */
+	$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -107,52 +111,34 @@ try {
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC));
 	$BASE->utility->smarty->assign('page', $page);
 	
-	// get blog postings
-	$blog_postings = $BLOGPOSTING->selectBlogPostings(array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
-		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], OAK_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], OAK_REGEX_NUMERIC),
+	// get ping service configurations
+	$ping_service_configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array(
+		'page' => $page['id'],
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
-		'limit' => 20,
-		'order_macro' => 'DATE_ADDED:DESC'
+		'limit' => 20
 	));
-	$BASE->utility->smarty->assign('blog_postings', $blog_postings);
+	$BASE->utility->smarty->assign('ping_service_configurations', $ping_service_configurations);
 	
-	// count available blog postings
+	// count available ping service configurations
 	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
-		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], OAK_REGEX_ALPHANUMERIC),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], OAK_REGEX_NUMERIC)
+		'page' => $page['id']
 	);
-	$posting_count = $BLOGPOSTING->countBlogPostings($select_params);
-	$BASE->utility->smarty->assign('posting_count', $posting_count);
-	
-	// count total amount of blog postings
-	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC)
-	);
-	$total_posting_count = $BLOGPOSTING->countBlogPostings($select_params);
-	$BASE->utility->smarty->assign('total_posting_count', $total_posting_count);
-
+	$configuration_count = $PINGSERVICECONFIGURATION->countPingServiceConfigurations($select_params);
+	$BASE->utility->smarty->assign('configuration_count', $configuration_count);
 	
 	// prepare and assign page index
-	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($posting_count, 20));
-	
-	// get and assign timeframes
-	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($configuration_count, 20));
 	
 	// import and assign request params
 	$request = array(
-		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], OAK_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], OAK_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_blogs_postings_select.html', OAK_TEMPLATE_KEY);
-		
+	$BASE->utility->smarty->display('content/pages_blogs_pingserviceconfigurations_select.html', OAK_TEMPLATE_KEY);
+	
 	// flush the buffer
 	@ob_end_flush();
 	exit;

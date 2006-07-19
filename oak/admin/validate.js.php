@@ -72,6 +72,12 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
+			case 'ping_service_configuration_site_url':
+			case 'ping_service_configuration_site_index':
+			case 'ping_service_configuration_site_feed':
+					$reg = OAK_REGEX_URL;
+					$desc = gettext('Full URL with protocol (http:// etc.)');
+				break;
 			case 'ping_service_host':
 					$reg = OAK_REGEX_PING_SERVICE_HOST;
 					$desc = gettext('Alphanumeric with dots and hyphens');

@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Pages &#62; Add Blog Posting}</title>
+<title>{i18n Oak Admin &ndash; Pages &#62; Edit Ping Service}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
  
@@ -62,21 +62,22 @@ var selection = '{$session.selection}';
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}" class="on">{i18n Blog Postings}<span></span></a></li>
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
-<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}" class="on">{i18n Ping Services}<span></span></a></li>
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
 <div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62;
-	<a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}</a> &#62; {i18n Add Blog Posting}</p></div>
+	<a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}</a> &#62;
+	{i18n Edit Ping Service}</p></div>
 
 <div id="content">
 
-<h1>{i18n Add Blog Posting}</h1>
+<h1>{i18n Edit Ping Service}</h1>
 
-<div class="secnav710_nav_x"><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}</a></div>
+<div class="secnav710_nav_x"><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -103,35 +104,20 @@ var selection = '{$session.selection}';
 
 {$form.hidden}
 
-<label class="cont" for="blog_posting_title"><span class="bez">{$form.title.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.title.html}</label>
+<label class="cont" for="ping_service_configuration_ping_service"><span class="bez">{$form.ping_service.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.ping_service.html}</label>
 
-<label class="cont h34" for="blog_posting_summary"><span class="bez">{$form.summary.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.summary.html}</label>
+<label class="cont" for="ping_service_configuration_site_name"><span class="bez">{$form.site_name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.site_name.html}</label>
 
-<label class="cont h34" for="blog_posting_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.content.html}</label>
+<label class="cont" for="ping_service_configuration_site_url"><span class="bez">{$form.site_url.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.site_url.html}<span class="validate" id="ping_service_configuration_site_url_container"></span></label>
 
-<label class="cont" for="blog_posting_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.text_converter.html}</label>
+<label class="cont" for="ping_service_configuration_site_index"><span class="bez">{$form.site_index.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.site_index.html}<span class="validate" id="ping_service_configuration_site_index_container"></span></label>
 
-<label class="cont" for="blog_posting_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.apply_macros.html}</label>
-
-<label class="cont h34" for="blog_posting_tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.tags.html}</label>
-
-<label class="cont" for="blog_posting_draft"><span class="bez">{$form.draft.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.draft.html}</label>
-
-<label class="cont" for="blog_posting_ping"><span class="bez">{$form.ping.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.ping.html}</label>
-
-<label class="cont" for="blog_posting_comments_enable"><span class="bez">{$form.comments_enable.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.comments_enable.html}</label>
-
-<label class="cont" for="blog_posting_trackbacks_enable"><span class="bez">{$form.trackbacks_enable.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.trackbacks_enable.html}</label>
+<label class="cont" for="ping_service_configuration_site_feed"><span class="bez">{$form.site_feed.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.site_feed.html}<span class="validate" id="ping_service_configuration_site_feed_container"></span></label>
 
 {$form.submit.html}
 
