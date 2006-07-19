@@ -61,10 +61,10 @@ var selection			= '{$session.selection}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-{if $page.page_type_name == 'OAK_SIMPLEPAGE'}
+{if $page.page_type_name == 'OAK_SIMPLE_PAGE'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
-<li>{i18n Boxes}<span></span></a></li>
+<li class="on">{i18n Boxes}</li>
 {elseif $page.page_type_name == 'OAK_BLOG'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
