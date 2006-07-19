@@ -122,7 +122,7 @@ try {
 	$FORM->addRule('site_name', gettext('Please enter a site name'), 'required');
 	
 	// textfield for site_url
-	$FORM->addElement('text', 'site_url', gettext('Site URL'),
+	$FORM->addElement('text', 'site_url', gettext('Weblog URL'),
 		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('site_url', 'trim');
 	$FORM->applyFilter('site_url', 'strip_tags');
@@ -130,7 +130,7 @@ try {
 	$FORM->addRule('site_url', gettext('Please enter a valid site URL'), 'regex', OAK_REGEX_URL);
 	
 	// textfield for site_index
-	$FORM->addElement('text', 'site_index', gettext('Home page URL'),
+	$FORM->addElement('text', 'site_index', gettext('Changes URL'),
 		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('site_index', 'trim');
 	$FORM->applyFilter('site_index', 'strip_tags');
