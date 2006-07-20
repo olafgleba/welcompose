@@ -52,6 +52,7 @@ define("OAK_DB_CONTENT_NODES", "content_nodes");
 define("OAK_DB_CONTENT_PAGES", "content_pages");
 define("OAK_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2user_groups");
 define("OAK_DB_CONTENT_PAGE_TYPES", "content_page_types");
+define("OAK_DB_CONTENT_SIMPLE_FORMS", "content_simple_forms");
 define("OAK_DB_CONTENT_SIMPLE_PAGES", "content_simple_pages");
 
 // media table aliases

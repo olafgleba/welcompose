@@ -146,7 +146,7 @@ try {
 		array('id' => 'page_position'));
 	$FORM->applyFilter('position', 'trim');
 	$FORM->applyFilter('position', 'strip_tags');
-	//$FORM->addRule('position', gettext('Please choose position'), 'required');
+	$FORM->addRule('position', gettext('Please choose position'), 'required');
 	$FORM->addRule('position', gettext('Chosen position is out of range'), 'in_array_keys', $positions);
 	
 	// textfield for name
@@ -275,6 +275,7 @@ try {
 			$sqlData['project'] = OAK_CURRENT_PROJECT;
 			$sqlData['template_set'] = $FORM->exportValue('template_set');
 			$sqlData['name'] = $FORM->exportValue('name');
+			$sqlData['name_url'] = $HELPER->createMeaningfulString($FORM->exportValue('name'));
 			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['protect'] = $FORM->exportValue('protect');
 			

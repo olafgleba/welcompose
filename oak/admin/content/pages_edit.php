@@ -223,6 +223,7 @@ try {
 		// create the article group
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['name_url'] = $HELPER->createMeaningfulString($FORM->exportValue('name'));
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
 		$sqlData['protect'] = $FORM->exportValue('protect');
 		

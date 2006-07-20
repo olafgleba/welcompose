@@ -73,6 +73,10 @@ var selection = '{$session.selection}';
 {elseif $page.page_type_name == 'OAK_URL'}
 <li class="on">{i18n Metadata}</li>
 <li><a href="pages_urls_content_edit.php?id={$page.id|escape:"url"}">{i18n URL Page}<span></span></a></li>
+{elseif $page.page_type_name == 'OAK_SIMPLE_FORM'}
+<li class="on">{i18n Metadata}</li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
+<li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 {/if}
 </ul>
 </div>
