@@ -93,7 +93,7 @@ try {
 	
 	// textfield for title
 	$FORM->addElement('text', 'url', gettext('Target URL'),
-		array('id' => 'url_page_url', 'maxlength' => 255, 'class' => 'w540'));
+		array('id' => 'url_page_url', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('url', 'trim');
 	$FORM->applyFilter('url', 'strip_tags');
 	$FORM->addRule('url', gettext('Please enter a target URL'), 'required');

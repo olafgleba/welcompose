@@ -128,14 +128,14 @@ try {
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w540'));
+		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
 
 	// textarea for summary
 	$FORM->addElement('textarea', 'summary', gettext('Summary'),
-		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
 	$FORM->applyFilter('summary', 'trim');
 	
 	// textarea for content
@@ -161,7 +161,7 @@ try {
 	
 	// textarea for tags
 	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
 	$FORM->applyFilter('tags', 'trim');
 	$FORM->applyFilter('tags', 'strip_tags');
 	
@@ -199,7 +199,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update blog posting'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submitbut200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
