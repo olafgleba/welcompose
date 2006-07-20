@@ -108,7 +108,7 @@ function getHeaderVars ()
 {
    if (typeof response != 'undefined' && $('rp')) {
        if (response == 1) {
-            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
+            return new Effect.Fade('rp', {duration: 0.8, delay: 2.0})
        }
    }
 }
@@ -180,11 +180,11 @@ function Help ()
 }
 
 // methoden
-function show (elem, attr, level)
+function show (elem, level)
 {
 	// properties
 	this.elem = elem;
-	this.attr = attr;
+	this.attr = 'for'
 	this.level = level;
 
 	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
@@ -214,11 +214,11 @@ function show (elem, attr, level)
 	Behaviour.apply();
 }
 
-function hide (elem, attr, level)
+function hide (elem, level)
 {
 	// properties
 	this.elem = elem;
-	this.attr = attr;
+	this.attr = 'for';
 	this.level = level;
 
 	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);

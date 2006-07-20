@@ -102,25 +102,25 @@ var definitions = {
 	},
 	'.iHelp' : function(el){
 		el.onclick = function(){
-			Help.show(this, 'for');
+			Help.show(this);
 			return false;
 		}
 	},
 	'.iHelpRemove' : function(el){
 		el.onclick = function(){
-			Help.hide(this, 'for');
+			Help.hide(this);
 			return false;
 		}
 	},
 	'.iHelpLevelTwo' : function(el){
 		el.onclick = function(){
-			Help.show(this, 'for', '2');
+			Help.show(this, '2');
 			return false;
 		}
 	},
 	'.iHelpRemoveLevelTwo' : function(el){
 		el.onclick = function(){
-			Help.hide(this, 'for', '2');
+			Help.hide(this, '2');
 			return false;
 		}
 	},
