@@ -107,7 +107,7 @@ try {
 		$BASE->db->commit();
 	} catch (Exception $e) {
 		// do rollback
-		//$BASE->db->rollback();
+		$BASE->db->rollback();
 		
 		// re-throw exception
 		throw $e;

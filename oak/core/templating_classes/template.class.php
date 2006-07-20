@@ -120,7 +120,7 @@ public function updateTemplate ($id, $sqlData)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplateException('Input for parameter id is not an array');
+		throw new Templating_TemplateException('Input for parameter id is not numeric');
 	}
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplateException('Input for parameter sqlData is not an array');	

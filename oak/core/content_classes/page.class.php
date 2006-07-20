@@ -597,6 +597,10 @@ public function initPageContents ($page)
 	return true;
 }
 
+public function movePageAway ($page_id, $new_navigation)
+{
+	
+}
 
 // end of class
 }
