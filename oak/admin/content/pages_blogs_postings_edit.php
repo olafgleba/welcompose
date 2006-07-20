@@ -135,7 +135,7 @@ try {
 
 	// textarea for summary
 	$FORM->addElement('textarea', 'summary', gettext('Summary'),
-		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
+		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
 	$FORM->applyFilter('summary', 'trim');
 	
 	// textarea for content

@@ -529,6 +529,13 @@ height: 400px;
 margin: 0 0 20px 0;
 padding: 3px;
 }
+textarea.w540h150 {
+float: left;
+width: 540px;
+height: 150px;
+margin: 0 0 20px 0;
+padding: 3px;
+}
 textarea.w298h50 {
 float: left;
 width: 298px;
@@ -711,8 +718,8 @@ padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 
-/* %M =mediacolumn */
-#mediacolumn {
+/* %M =column */
+#column {
 float: right;
 width: 238px;
 height: 600px;
