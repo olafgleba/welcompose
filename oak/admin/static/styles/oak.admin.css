@@ -640,10 +640,10 @@ width: 300px;
 margin: 0;
 padding-left: 140px;
 }
-.iHelp a, .iHelpRemove a, .iHelpLvTwo a, .iHelpRemoveLvTwo a {
+.iHelp a, .iHelpRemove a, .iHelpLevelTwo a, .iHelpRemoveLevelTwo a {
 background-color: #fff;
 }
-.iHelp img, .iHelpRemove img, .iHelpLvTwo img, .iHelpRemoveLvTwo img {
+.iHelp img, .iHelpRemove img, .iHelpLevelTwo img, .iHelpRemoveLevelTwo img {
 vertical-align: middle;
 }
 

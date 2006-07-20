@@ -102,41 +102,35 @@ var definitions = {
 	},
 	'.iHelp' : function(el){
 		el.onclick = function(){
-			getHelp(this, 'for');
-			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + process_id, target_id);
-			setCorrespondingFocus(this, 'for');
+			Help.show(this, 'for');
 			return false;
 		}
 	},
 	'.iHelpRemove' : function(el){
 		el.onclick = function(){
-			removeHelp(this, 'for');
-			setCorrespondingFocus(this, 'for');
+			Help.hide(this, 'for');
 			return false;
 		}
 	},
-	'.iHelpLvTwo' : function(el){
+	'.iHelpLevelTwo' : function(el){
 		el.onclick = function(){
-			getHelpLvTwo(this, 'for');
-			xhrHelp(parseHelpUrl + '?page=' + form_id + '_' + process_id, target_id);
-			setCorrespondingFocus(this, 'for');
+			Help.show(this, 'for', '2');
 			return false;
 		}
 	},
-	'.iHelpRemoveLvTwo' : function(el){
+	'.iHelpRemoveLevelTwo' : function(el){
 		el.onclick = function(){
-			removeHelpLvTwo(this, 'for');
-			setCorrespondingFocus(this, 'for');
+			Help.hide(this, 'for', '2');
 			return false;
 		}
 	},
 	'#main input' : function(el){
 		el.onfocus = function(){
-			mFocus(this, '','#0c3','dotted');
+			doFocus(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			mBlur(this, '','#000','solid');
+			doBlur(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){
@@ -145,11 +139,11 @@ var definitions = {
 	},
 	'#content textarea' : function(el){
 		el.onfocus = function(){
-			mFocus(this, '','#0c3','dotted');
+			doFocus(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			mBlur(this, '','#000','solid');
+			doBlur(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){
@@ -166,16 +160,16 @@ var definitions = {
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
-	'.hidetbl' : function(el){
+	'.hideTableRow' : function(el){
 		el.onclick = function(){
-			hidetbl(this);
-			setTimeout("hidetblsettime(obid)", 400);
+			hideTableRow(this);
+			setTimeout("hideTableRowSetTime(obid)", 400);
 			return false;
 		}
 	},
-	'.showtbl' : function(el){
+	'.showTableRow' : function(el){
 		el.onclick = function(){
-			showtbl(this);
+			showTableRow(this);
 			return false;
 		}
 	},

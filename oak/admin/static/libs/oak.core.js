@@ -47,18 +47,18 @@ var navLyThree	= 'ly3';
  * Define the used help class names
  * used: oak.events.js
  */
-var helpClass				= 'iHelp';
-var helpClassRemove			= 'iHelpRemove';
-var helpClassLvTwo			= 'iHelpLvTwo';
-var helpClassRemoveLvTwo	= 'iHelpRemoveLvTwo';
+var helpClass					= 'iHelp';
+var helpClassRemove				= 'iHelpRemove';
+var helpClassLevelTwo			= 'iHelpLevelTwo';
+var helpClassRemoveLevelTwo		= 'iHelpRemoveLevelTwo';
 
 /**
  * Define the used tbl upload class names
  * defines cascading styles to fit background images
  * used: oak.core.js
  */
-var uploadClass		= 'upload showtbl';
-var uploadClassHide	= 'uploadhide hidetbl';
+var uploadClass		= 'upload showTableRow';
+var uploadClassHide	= 'uploadhide hideTableRow';
 
 /**
  * Comprehensive colors application wide
@@ -85,6 +85,33 @@ var helpHtmlHide	= '<a href="#" title="' + hideHelp + '"><img src="../static/img
 var debug = 1;
 
 
+
+/**
+ * Collect loads for init onLoad
+ * called by Behaviour.addLoadEvent
+ */
+function initLoad ()
+{	
+	getHeaderVars();
+	if (typeof checkbox_status != 'undefined') {
+		getCheckboxStatusOnLoad(checkbox_status);
+	}
+}
+
+/**
+ * Get header Vars on initialize
+ * used: initLoad()
+ *
+ * return string
+ */
+function getHeaderVars ()
+{
+   if (typeof response != 'undefined' && $('rp')) {
+       if (response == 1) {
+            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
+       }
+   }
+}
 
 /**
  * Error handling
@@ -138,65 +165,114 @@ function devError(msg)
 devError.prototype = new Error;
 
 
-/**
- * Collect loads for init onLoad
- * called by Behaviour.addLoadEvent
- */
-function initLoad ()
-{	
-	getHeaderVars();
-	if (typeof checkbox_status != 'undefined') {
-		getCheckboxStatusOnLoad(checkbox_status);
+// constructor
+function Help ()
+{
+	// eigenschaften
+	this.helpClass = helpClass;
+	this.helpClassRemove = helpClassRemove;
+	this.helpClassLevelTwo = helpClassLevelTwo;
+	this.helpClassRemoveLevelTwo = helpClassRemoveLevelTwo;
+		
+	// methoden
+	this.show = show;
+	this.hide = hide;
+}
+
+// methoden
+function show (elem, attr, level)
+{
+	// properties
+	this.elem = elem;
+	this.attr = attr;
+	this.level = level;
+
+	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+	
+	switch (this.level) {
+		case '2' :
+			this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+			this.elem.className = this.helpClassRemoveLevelTwo;
+		break;
+		default :
+			this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+			this.elem.className = this.helpClassRemove;	
 	}
+
+	this.target = this.processId;
+	this.fetch = this.processId.replace(/(_(\d+))/, '');	
+	if (this.fetch) {
+		this.processId = this.fetch;
+	}
+	this.url = parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+	
+	// methods
+	this.setCorrespondingFocus		= _setCorrespondingFocus(this.elem, this.attr);
+	this.getCorrespondingContent	= _getCorrespondingContent(this.url, this.target);
+	
+	Element.update(this.elem, helpHtmlHide);
+	Behaviour.apply();
 }
 
-/**
- * Get header Vars on initialize
- * used: initLoad()
- *
- * return string
- */
-function getHeaderVars ()
+function hide (elem, attr, level)
 {
-   if (typeof response != 'undefined' && $('rp')) {
-       if (response == 1) {
-            return new Effect.Fade('rp', {duration: 0.8, delay: 2.5})
-       }
-   }
+	// properties
+	this.elem = elem;
+	this.attr = attr;
+	this.level = level;
+
+	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+	this.processIdAfter = $(this.processId).parentNode.nextSibling;
+	
+	switch (this.level) {
+		case '2' :
+				this.elem.className = this.helpClassLevelTwo;
+			break;
+		default :
+				this.elem.className = this.helpClass;
+		
+	}
+
+	Effect.Fade(this.processIdAfter,{duration: 0.5});
+	Element.update(this.elem, helpHtmlShow);
+	Behaviour.apply();	
 }
 
-/**
- * DOM triggers to attach onEvent behaviours
- *
- * used : oak.events.js
- *
- * @param {string} inst actual ID
- * @param {string} bgcolor defined background color
- * @param {string} bcolor defined border color
- * @param {string} bstyle defined border attr (e.g. dotted)
- */
-function mFocus (inst, bgcolor, bcolor, bstyle)
-{
-	inst.style.backgroundColor = bgcolor;
-	inst.style.borderColor = bcolor;
-	inst.style.borderStyle = bstyle;
-}
 
-/**
- * DOM triggers to attach onEvent behaviours
- *
- * used : oak.events.js
- *
- * @param {string} inst actual ID
- * @param {string} bgcolor defined background color
- * @param {string} bcolor defined border color
- * @param {string} bstyle defined border attr (e.g. dotted)
- */
- function mBlur (inst, bgcolor, bcolor, bstyle)
+function _getCorrespondingContent(url, target)
 {
-	inst.style.backgroundColor = bgcolor;
-	inst.style.borderColor = bcolor;
-	inst.style.borderStyle = bstyle;
+	try {
+		if (window.XMLHttpRequest) {
+			req = new XMLHttpRequest();
+	 	} else if (window.ActiveXObject) {
+			req = new ActiveXObject("Microsoft.XMLHTTP");
+	  	}
+	 	if (req != undefined) {
+			req.open('GET', url, true);
+			req.onreadystatechange = function() {_getCorrespondingContentDone(url, target);};
+			req.send('');
+	  	}
+	} catch (e) {
+		applyError(e);
+	}
+}  
+
+function _getCorrespondingContentDone(url, target)
+{  
+	try {
+		if (req.readyState == 4) {
+			if (req.status == 200) {
+				new Insertion.After($(target).parentNode, req.responseText);				
+				var target_after = $(target).parentNode.nextSibling;
+				Element.hide(target_after);
+				Effect.Appear(target_after, {duration: 0.8});
+			} else {
+	  			throw new devError(req.statusText);
+			}
+		}
+	} catch (e) {
+		applyError(e);
+	}
 }
 
 /**
@@ -207,103 +283,51 @@ function mFocus (inst, bgcolor, bcolor, bstyle)
  * @param {string} elem actual element
  * @param {string} attr attribute of DOM node to process (e.g. ID)
  */
- function setCorrespondingFocus (elem, attr)
+ function _setCorrespondingFocus (elem, attr)
 {
-	instId = elem.parentNode.parentNode.getAttribute(attr);
-	$(instId).focus();
+	var inst = elem.parentNode.parentNode.getAttribute(attr);
+	$(inst).focus();
+}
+
+// instance obj
+var Help = new Help();
+
+
+
+/**
+ * DOM triggers to attach onEvent behaviours
+ *
+ * used : oak.events.js
+ *
+ * @param {string} inst actual ID
+ * @param {string} bgcolor defined background color
+ * @param {string} bcolor defined border color
+ * @param {string} bstyle defined border attr (e.g. dotted)
+ */
+function doFocus (inst, bgcolor, bcolor, bstyle)
+{
+	inst.style.backgroundColor = bgcolor;
+	inst.style.borderColor = bcolor;
+	inst.style.borderStyle = bstyle;
 }
 
 /**
- * Get help IDs and print string in html templates
+ * DOM triggers to attach onEvent behaviours
+ *
  * used : oak.events.js
  *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
+ * @param {string} inst actual ID
+ * @param {string} bgcolor defined background color
+ * @param {string} bcolor defined border color
+ * @param {string} bstyle defined border attr (e.g. dotted)
  */
-function getHelp (elem, attr)
-{	
-	process_id = elem.parentNode.parentNode.getAttribute(attr);
-	
-	//get id from parent form
-	form_id = elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-	
-	// build target for func xhr()
-	target_id = process_id;
-	
-	// tbl handling (e.g. _digits) to avoid multiple help files
-	var _fetch = process_id.replace(/(_(\d+))/, '');	
-	if (_fetch) {
-		process_id = _fetch;
-	}
-	
-	elem.className = helpClassRemove;
-	Element.update(elem, helpHtmlHide);
-	Behaviour.apply();
+ function doBlur (inst, bgcolor, bcolor, bstyle)
+{
+	inst.style.backgroundColor = bgcolor;
+	inst.style.borderColor = bcolor;
+	inst.style.borderStyle = bstyle;
 }
 
-/**
- * Get help IDs and print string in html templates
- * used : oak.events.js
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- */
-function removeHelp (elem, attr)
-{	
-	process_id_remove = elem.parentNode.parentNode.getAttribute(attr);
-	process_id_after = $(process_id_remove).parentNode.nextSibling;	
-	elem.className = helpClass;
-	Element.update(elem, helpHtmlShow);
-	Effect.Fade(process_id_after,{duration: 0.5});
-	Behaviour.apply();
-}
-
-/**
- * Get help IDs and print string in html templates
- * Level 2
- * used : oak.events.js
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- */
-function getHelpLvTwo (elem, attr)
-{	
-	process_id = elem.parentNode.parentNode.getAttribute(attr);
-	
-	//get id from parent form
-	form_id = elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-	
-	// build target for func xhr()
-	target_id = process_id;
-	
-	// tbl handling (e.g. _digits) to avoid multiple help files
-	var _fetch = process_id.replace(/(_(\d+))/, '');	
-	if (_fetch) {
-		process_id = _fetch;
-	}
-	
-	elem.className = helpClassRemoveLvTwo;
-	Element.update(elem, helpHtmlHide);
-	Behaviour.apply();
-}
-
-/**
- * Get help IDs and print string in html templates
- * Level 2
- * used : oak.events.js
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- */
-function removeHelpLvTwo (elem, attr)
-{	
-	process_id_remove = elem.parentNode.parentNode.getAttribute(attr);
-	process_id_after = $(process_id_remove).parentNode.nextSibling;	
-	elem.className = helpClassLvTwo;
-	Element.update(elem, helpHtmlShow);
-	Effect.Fade(process_id_after,{duration: 0.5});
-	Behaviour.apply();
-}
 
 /**
  * Get form field (Checkbox) status on user event
@@ -378,7 +402,7 @@ function removeHelpLvTwo (elem, attr)
  *
  * @param {var} elem actual element to process
  */
- function hidetblsettime (elem)
+ function hideTableRowSetTime (elem)
 {
 	// process outer table tr
 	elem.style.visibility = 'collapse';
@@ -390,7 +414,7 @@ function removeHelpLvTwo (elem, attr)
  *
  * @param {string} elem actual element
  */
- function hidetbl (elem)
+ function hideTableRow (elem)
 {
 	var getId = elem.getAttribute('id');
 	
@@ -414,7 +438,7 @@ function removeHelpLvTwo (elem, attr)
  *
  * @param {string} elem actual element
  */
- function showtbl (elem)
+ function showTableRow (elem)
 {	
 	var getId = elem.getAttribute('id');
 	

@@ -70,57 +70,6 @@ function xhrNavDone(url, target)
 }
 
 
-/**
- * Connect by XHR to intergrate external help files
- *
- * @param {string} url path
- * @param {var} target to build by DOM
- */
-function xhrHelp(url, target)
-{
-	try {
-		if (window.XMLHttpRequest) {
-			req = new XMLHttpRequest();
-	 	} else if (window.ActiveXObject) {
-			req = new ActiveXObject("Microsoft.XMLHTTP");
-	  	}
-	 	if (req != undefined) {
-			req.open('GET', url, true);
-			req.onreadystatechange = function() {xhrHelpDone(url, target);};
-			req.send('');
-	  	}
-	} catch (e) {
-		applyError(e);
-	}
-}  
-
-/**
- * Process XHR to intergrate external help files
- * used: func xhr()
- *
- * @param {string} url path
- * @param {var} target to build by DOM
- */
-function xhrHelpDone(url, target)
-{  
-	try {
-		if (req.readyState == 4) {
-			if (req.status == 200) {
-				new Insertion.After($(target).parentNode, req.responseText);				
-				var target_after = $(target).parentNode.nextSibling;
-				Element.hide(target_after);
-				new Effect.Appear(target_after, {duration: 0.8});
-				Behaviour.apply();
-			} else {
-	  			throw new devError(req.statusText);
-			}
-		}
-	} catch (e) {
-		applyError(e);
-	}
-}
-
-
 
 
 
