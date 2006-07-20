@@ -102,7 +102,7 @@ try {
 				header("Location: pages_simplepages_content_edit.php?id=".$page['id']);
 			exit;
 		case 'OAK_URL':
-				header("Location: pages_url_meta_edit.php?id=".$page['id']);
+				header("Location: pages_urls_content_edit.php?id=".$page['id']);
 			exit;
 		default:
 				header("Location: pages_select.php");
