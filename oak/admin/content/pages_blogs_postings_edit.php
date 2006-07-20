@@ -355,6 +355,24 @@ try {
 			throw $e;
 		}
 		
+		// issue pings if required
+		if ($FORM->exportValue('ping') == 1) {	
+			
+			// load ping service configuration class
+			$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
+			
+			// load ping service class
+			$PINGSERVICE = load('application:pingservice');
+			
+			// get configured ping service configurations
+			$configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array('page' => $page['id']));
+			
+			// issue pings
+			foreach ($configurations as $_configuration) {
+				$PINGSERVICE->pingService($_configuration['id']);
+			}
+		}
+		
 		// redirect
 		$SESSION->save();
 		

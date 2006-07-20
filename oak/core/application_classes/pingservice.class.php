@@ -390,6 +390,73 @@ public function testForUniqueName ($name, $id = null)
 	}
 }
 
+/**
+ * Notifies ping service. Takes the id of the ping service configuration
+ * to use as first argument. Returns true.
+ * 
+ * @throws Application_PingserviceException
+ * @param int Ping service configuration id
+ * @return bool
+ */
+public function pingService ($configuration_id)
+{
+	// input check
+	if (empty($configuration_id) || !is_numeric($configuration_id)) {
+		throw new Application_PingserviceException("Input for parameter configuration_id is not numeric");
+	}
+	
+	// load ping service configuration class
+	$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
+	
+	// get service configuration
+	$configuration = $PINGSERVICECONFIGURATION->selectPingServiceConfiguration($configuration_id);
+	
+	// make sure that we got the configuration
+	if (empty($configuration) || !is_array($configuration)) {
+		throw new Application_PingserviceException("Requested ping service configuration does not exist");
+	}
+	
+	// get service
+	$service = $this->selectPingService($configuration['ping_service_id']);
+	
+	// make sure that we got the service
+	if (empty($service) || !is_array($service)) {
+		throw new Application_PingserviceException("Requested ping service does not exist");
+	}
+		
+	// load PEAR::XML_RPC
+	require_once "XML/RPC.php";
+	
+	// initialize new XML-RPC client
+	$client = new XML_RPC_Client($service['path'], $service['host'], $service['port']);
+	
+	// prepare the ping message using weblogs.com's extendedPing interface 
+	$message = new XML_RPC_MESSAGE('weblogUpdates.extendedPing');
+	$message->addParam(new XML_RPC_VALUE($configuration['site_name'], 'string'));
+	$message->addParam(new XML_RPC_VALUE($configuration['site_url'], 'string'));
+	$message->addParam(new XML_RPC_VALUE($configuration['site_index'], 'string'));
+	$message->addParam(new XML_RPC_VALUE($configuration['site_feed'], 'string'));
+	
+	// send notification
+	$response = $client->send($message, 5);
+	
+	// convert response object into struct
+	$response_struct = $response->value();
+	
+	// get response error
+	$error = $response_struct->structmem('flerror')->getVal();
+		
+	// get response message
+	$message = $response_struct->structmem('message')->getVal();	
+	
+	// evaluate error code
+	if ($error > 0)  {
+		throw new Application_PingserviceException("Ping failed, reason: ".strip_tags($message));
+	} else {
+		return true;
+	}
+}
+
 // end of class
 }
 
