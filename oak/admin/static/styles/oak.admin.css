@@ -415,6 +415,18 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
+#topsubsubnav li.current {
+position: relative;
+display: block;
+float: right;
+font-weight: normal;
+padding: 2px 110px 2px 15px;
+color: #000;
+text-decoration: none;
+}
+#topsubsubnav li.current span.choosed {
+font-weight: bold;
+}
 
 /* %N =side */
 h3.pagenav {

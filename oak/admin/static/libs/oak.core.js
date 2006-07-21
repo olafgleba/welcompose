@@ -262,7 +262,6 @@ Cn.hide = function (elem, level)
 	}
 }
 
-
 // instance obj
 Help = new Help();
 
@@ -294,10 +293,10 @@ Cn.show = function (name, target)
 		
 		switch (this.target) {
 			case '2' :
-				this.target = navLyTwo;
-			break;
+					this.target = navLyTwo;
+				break;
 			default :
-				this.target = navLyOne;	
+					this.target = navLyOne;	
 		}
 		
 		if (typeof this.req != 'undefined') {
