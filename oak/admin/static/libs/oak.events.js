@@ -30,73 +30,73 @@
 var definitions = {
 	'.con' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=contents', navLyOne);
+			Navigation.show('contents');
 			return false;
 		}
 	},	
 	'.conon' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=contents', navLyOne);
+			Navigation.show('contents');
 			return false;
 		}
 	},
 	'.med' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=library', navLyOne);
+			Navigation.show('library');
 			return false;
 		}
 	},
 	'.medon' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=library', navLyOne);
+			Navigation.show('library');
 			return false;
 		}
 	},
 	'.com' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=community', navLyOne);
+			Navigation.show('community');
 			return false;
 		}
 	},	
 	'.comon' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=community', navLyOne);
+			Navigation.show('community');
 			return false;
 		}
 	},
 	'.usr' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=users', navLyOne);
+			Navigation.show('users');
 			return false;
 		}
 	},
 	'.usron' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=users', navLyOne);
+			Navigation.show('users');
 			return false;
 		}
 	},	
 	'.tem' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=templates', navLyOne);
+			Navigation.show('templates');
 			return false;
 		}
 	},	
 	'.temon' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=templates', navLyOne);
+			Navigation.show('templates');
 			return false;
 		}
 	},
 	'.set' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=settings', navLyOne);
+			Navigation.show('settings');
 			return false;
 		}
 	},
 	'.seton' : function(el){
 		el.onclick = function(){ 
-			xhrNav(parseNavUrl + '?page=settings', navLyOne);
+			Navigation.show('settings');
 			return false;
 		}
 	},

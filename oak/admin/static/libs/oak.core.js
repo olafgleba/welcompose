@@ -47,7 +47,7 @@ var navLyThree	= 'ly3';
  * Define the used help class names
  * used: oak.events.js
  */
-var helpClass					= 'iHelp';
+ helpClass					= 'iHelp';
 var helpClassRemove				= 'iHelpRemove';
 var helpClassLevelTwo			= 'iHelpLevelTwo';
 var helpClassRemoveLevelTwo		= 'iHelpRemoveLevelTwo';
@@ -165,109 +165,202 @@ function devError(msg)
 devError.prototype = new Error;
 
 
+
+
 // constructor
 function Help ()
 {
-	// eigenschaften
-	this.helpClass = helpClass;
-	this.helpClassRemove = helpClassRemove;
-	this.helpClassLevelTwo = helpClassLevelTwo;
-	this.helpClassRemoveLevelTwo = helpClassRemoveLevelTwo;
-		
-	// methoden
-	this.show = show;
-	this.hide = hide;
-}
-
-// methoden
-function show (elem, level)
-{
-	// properties
-	this.elem = elem;
-	this.attr = 'for'
-	this.level = level;
-
-	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
-	
-	switch (this.level) {
-		case '2' :
-			this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-			this.elem.className = this.helpClassRemoveLevelTwo;
-		break;
-		default :
-			this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-			this.elem.className = this.helpClassRemove;	
-	}
-
-	this.target = this.processId;
-	this.fetch = this.processId.replace(/(_(\d+))/, '');	
-	if (this.fetch) {
-		this.processId = this.fetch;
-	}
-	this.url = parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
-	
-	// methods
-	this.setCorrespondingFocus		= _setCorrespondingFocus(this.elem, this.attr);
-	this.getCorrespondingContent	= _getCorrespondingContent(this.url, this.target);
-	
-	Element.update(this.elem, helpHtmlHide);
-	Behaviour.apply();
-}
-
-function hide (elem, level)
-{
-	// properties
-	this.elem = elem;
-	this.attr = 'for';
-	this.level = level;
-
-	this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
-	this.processIdAfter = $(this.processId).parentNode.nextSibling;
-	
-	switch (this.level) {
-		case '2' :
-				this.elem.className = this.helpClassLevelTwo;
-			break;
-		default :
-				this.elem.className = this.helpClass;
-		
-	}
-
-	Effect.Fade(this.processIdAfter,{duration: 0.5});
-	Element.update(this.elem, helpHtmlShow);
-	Behaviour.apply();	
-}
-
-
-function _getCorrespondingContent(url, target)
-{
 	try {
-		if (window.XMLHttpRequest) {
-			req = new XMLHttpRequest();
-	 	} else if (window.ActiveXObject) {
-			req = new ActiveXObject("Microsoft.XMLHTTP");
-	  	}
-	 	if (req != undefined) {
-			req.open('GET', url, true);
-			req.onreadystatechange = function() {_getCorrespondingContentDone(url, target);};
-			req.send('');
-	  	}
+		// properties
+		this.helpClass = helpClass;
+		this.helpClassRemove = helpClassRemove;
+		this.helpClassLevelTwo = helpClassLevelTwo;
+		this.helpClassRemoveLevelTwo = helpClassRemoveLevelTwo;
+		this.parseHelpUrl = parseHelpUrl;
+		
+		// methods
+		this.req = _buildXMLHTTPRequest();
+		
 	} catch (e) {
 		applyError(e);
 	}
-}  
+}
 
-function _getCorrespondingContentDone(url, target)
+Cn = Help.prototype;
+
+Cn.show = function (elem, level)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'for'
+		this.level = level;
+		this.setCorrespondingFocus = _setCorrespondingFocus(this.elem, this.attr);
+		
+		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		
+		switch (this.level) {
+			case '2' :
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.elem.className = this.helpClassRemoveLevelTwo;
+				break;
+			default :
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.elem.className = this.helpClassRemove;	
+		}
+	
+		this.target = this.processId;
+	
+		this.fetch = this.processId.replace(/(_(\d+))/, '');	
+		if (this.fetch) {
+			this.processId = this.fetch;
+		}
+		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+			
+		if (typeof this.req != 'undefined') {
+		
+			var url		= this.url;
+			var target	= this.target;
+		
+			_req.open('GET', url, true);
+			_req.onreadystatechange = function () { _processHelp(url,target);};
+			_req.send('');
+		}
+	
+		Element.update(this.elem, helpHtmlHide);
+		Behaviour.apply();
+		
+	} catch (e) {
+		applyError(e);
+	}
+}
+
+Cn.hide = function (elem, level)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'for';
+		this.level = level;
+	
+		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		this.processIdAfter = $(this.processId).parentNode.nextSibling;
+		
+		switch (this.level) {
+			case '2' :
+					this.elem.className = this.helpClassLevelTwo;
+				break;
+			default :
+					this.elem.className = this.helpClass;	
+		}
+		Effect.Fade(this.processIdAfter,{duration: 0.5});
+		Element.update(this.elem, helpHtmlShow);
+		Behaviour.apply();
+		
+	} catch (e) {
+		applyError(e);
+	}
+}
+
+
+// instance obj
+Help = new Help();
+
+
+// constructor
+function Navigation ()
+{
+	try {
+		// properties
+		this.navLyOne = navLyOne;
+		this.navLyTwo = navLyTwo;
+		
+		// methods
+		this.req = _buildXMLHTTPRequest();
+		
+	} catch (e) {
+		applyError(e);
+	}
+}
+
+Cn = Navigation.prototype;
+
+Cn.show = function (name, target)
+{
+	try {
+		// properties
+		this.name = name;
+		this.url = parseNavUrl + '?page=' + this.name;	
+		
+		switch (this.target) {
+			case '2' :
+				this.target = navLyTwo;
+			break;
+			default :
+				this.target = navLyOne;	
+		}
+		
+		if (typeof this.req != 'undefined') {
+		
+			var url		= this.url;
+			var target	= this.target;
+		
+			_req.open('GET', url, true);
+			_req.onreadystatechange = function () { _processNavigation(url,target);};
+			_req.send('');
+		}
+	} catch (e) {
+		applyError(e);
+	}
+}
+
+// instance obj
+Navigation = new Navigation();
+
+
+// private
+function _buildXMLHTTPRequest ()
+{
+	try {
+		if (window.XMLHttpRequest) {
+			_req = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			_req = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		return _req;
+	} catch (e) {
+		applyError(e);
+	}
+} 
+
+function _processHelp(url, target)
 {  
 	try {
-		if (req.readyState == 4) {
-			if (req.status == 200) {
-				new Insertion.After($(target).parentNode, req.responseText);				
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {
+				new Insertion.After($(target).parentNode, _req.responseText);				
 				var target_after = $(target).parentNode.nextSibling;
 				Element.hide(target_after);
 				Effect.Appear(target_after, {duration: 0.8});
 			} else {
-	  			throw new devError(req.statusText);
+	  			throw new devError(_req.statusText);
+			}
+		}
+	} catch (e) {
+		applyError(e);
+	}
+}
+
+function _processNavigation(url, target)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {
+				Element.hide($('topsubnavconstatic'));
+				Element.update(target, _req.responseText);
+				Behaviour.apply();
+			} else {
+	  			throw new devError(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -289,8 +382,8 @@ function _getCorrespondingContentDone(url, target)
 	$(inst).focus();
 }
 
-// instance obj
-var Help = new Help();
+
+
 
 
 
