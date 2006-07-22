@@ -126,11 +126,11 @@ var definitions = {
 	},
 	'#main input' : function(el){
 		el.onfocus = function(){
-			doFocus(this, '','#0c3','dotted');
+			Forms.setOnEvent(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			doBlur(this, '','#000','solid');
+			Forms.setOnEvent(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){
@@ -139,11 +139,11 @@ var definitions = {
 	},
 	'#content textarea' : function(el){
 		el.onfocus = function(){
-			doFocus(this, '','#0c3','dotted');
+			Forms.setOnEvent(this, '','#0c3','dotted');
 			return false;
 		}
 		el.onblur = function(){
-			doBlur(this, '','#000','solid');
+			Forms.setOnEvent(this, '','#000','solid');
 			return false;
 		}
 		el.onkeyup = function(){
@@ -175,9 +175,9 @@ var definitions = {
 	},
 	'#simple_page_meta_use' : function(el){
 		el.onclick = function(){
-			getCheckboxStatus(new Array('simple_page_meta_use'));
+			Status.getCbx(new Array('simple_page_meta_use'));
 		}
 	}
 };
 Behaviour.register(definitions);
-Behaviour.addLoadEvent(initLoad); 
+Behaviour.addLoadEvent(OakInit.load); 
