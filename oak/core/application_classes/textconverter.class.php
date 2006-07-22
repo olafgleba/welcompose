@@ -99,7 +99,15 @@ public function addTextConverter ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+	
+	// test if created text converter belongs to current user/project
+	if (!$this->textConverterBelongsToCurrentUser($insert_id)) {
+		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+	}
+	
+	// return insert id
+	return (int)$insert_id;
 }
 
 /**
@@ -120,6 +128,11 @@ public function updateTextConverter ($id, $sqlData)
 	}
 	if (!is_array($sqlData)) {
 		throw new Application_TextconverterException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if text converter belongs to current user/project
+	if (!$this->textConverterBelongsToCurrentUser($id)) {
+		throw new Application_TextconverterException("Text converter does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -150,6 +163,11 @@ public function deleteTextConverter ($id)
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextconverterException('Input for parameter id is not numeric');
+	}
+	
+	// test if text converter belongs to current user/project
+	if (!$this->textConverterBelongsToCurrentUser($id)) {
+		throw new Application_TextconverterException("Text converter does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -463,6 +481,11 @@ public function applyTextConverter ($id, $text)
 		throw new Application_TextconverterException("Input for parameter text is expected to be scalar");
 	}
 	
+	// test if text converter belongs to current user/project
+	if (!$this->textConverterBelongsToCurrentUser($id)) {
+		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+	}
+	
 	// get text converter
 	$text_converter = $this->selectTextConverter($id);
 	
@@ -505,6 +528,75 @@ public function applyTextConverter ($id, $text)
 
 	// apply text converter
 	return call_user_func($function_name, $text);
+}
+
+/**
+ * Tests whether given text converter belongs to current project. Takes the
+ * text converter id as first argument. Returns bool.
+ *
+ * @throws Application_TextconverterException
+ * @param int Text converter id
+ * @return int bool
+ */
+public function textConverterBelongsToCurrentProject ($text_converter)
+{
+	// input check
+	if (empty($text_converter) || !is_numeric($text_converter)) {
+		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+		WHERE
+			`application_text_converters`.`id` = :text_converter
+		AND
+			`application_text_converters`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'text_converter' => (int)$text_converter,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether text converter belongs to current user or not. Takes
+ * the text converter id as first argument. Returns bool.
+ *
+ * @throws Application_TextconverterException
+ * @param int Text converter id
+ * @return bool
+ */
+public function textConverterBelongsToCurrentUser ($text_converter)
+{
+	// input check
+	if (empty($text_converter) || !is_numeric($text_converter)) {
+		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->textConverterBelongsToCurrentProject($text_converter)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
