@@ -765,3 +765,31 @@ display: none;
 background: #d9d9d9 url(../img/bg_slides.gif);
 padding: 1em 0 1em 0;
 }
+
+/* LOGIN - BODY-ID #LOGIN */
+body#login  {
+padding-top: 50px;
+}
+#login #container {
+position: relative;
+width: 740px;
+background: #fff url(../img/bg_header_login.gif) 0 0 no-repeat;
+margin: 0 auto;
+text-align: left;
+}
+#login #logo {
+position: absolute;
+top: 19px;
+left: 519px;
+width: 200px;
+background: transparent url(../img/bg_logo.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+#login #main {
+margin: 0 15px 0 15px;
+padding-top: 70px;
+padding-bottom: 15px;
+}
+#login form.botbg {
+width: 710px;
+}
