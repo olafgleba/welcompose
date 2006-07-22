@@ -91,6 +91,12 @@ public function instance()
  */
 public function addTextConverter ($sqlData)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'add')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Application_TextconverterException('Input for parameter sqlData is not an array');	
 	}
@@ -122,6 +128,11 @@ public function addTextConverter ($sqlData)
 */
 public function updateTextConverter ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'update')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextconverterException('Input for parameter id is not an array');
@@ -160,6 +171,11 @@ public function updateTextConverter ($id, $sqlData)
  */
 public function deleteTextConverter ($id)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'delete')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextconverterException('Input for parameter id is not numeric');
@@ -193,6 +209,11 @@ public function deleteTextConverter ($id)
  */
 public function selectTextConverter ($id)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextconverterException('Input for parameter id is not numeric');
@@ -245,6 +266,11 @@ public function selectTextConverter ($id)
  */
 public function selectTextConverters ($params = array())
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -313,6 +339,11 @@ public function selectTextConverters ($params = array())
  */
 public function countTextConverters ($params = array())
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -361,6 +392,11 @@ public function countTextConverters ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Application_TextconverterException("Input for parameter name is not expected to be empty");
@@ -418,6 +454,11 @@ public function testForUniqueName ($name, $id = null)
  */
 public function testForUniqueInternalName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Application_TextconverterException("Input for parameter name is not expected to be empty");
@@ -473,6 +514,11 @@ public function testForUniqueInternalName ($name, $id = null)
  */
 public function applyTextConverter ($id, $text)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextconverterException('Input for parameter id is not numeric');
@@ -540,6 +586,11 @@ public function applyTextConverter ($id, $text)
  */
 public function textConverterBelongsToCurrentProject ($text_converter)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($text_converter) || !is_numeric($text_converter)) {
 		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
@@ -581,6 +632,11 @@ public function textConverterBelongsToCurrentProject ($text_converter)
  */
 public function textConverterBelongsToCurrentUser ($text_converter)
 {
+	// access check
+	if (!oak_check_access('textconverter', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($text_converter) || !is_numeric($text_converter)) {
 		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
