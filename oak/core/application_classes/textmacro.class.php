@@ -99,7 +99,15 @@ public function addTextMacro ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData);
+	
+	// test if macro belongs to current project/user
+	if (!$this->textMacroBelongsToCurrentUser($insert_id)) {
+		throw new Application_TextmacroException("Created text macro does not belong to current user or project");
+	}
+	
+	// return insert id
+	return (int)$insert_id;
 }
 
 /**
@@ -120,6 +128,11 @@ public function updateTextMacro ($id, $sqlData)
 	}
 	if (!is_array($sqlData)) {
 		throw new Application_TextmacroException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if macro belongs to current project/user
+	if (!$this->textMacroBelongsToCurrentUser($id)) {
+		throw new Application_TextmacroException("Text macro does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -150,6 +163,11 @@ public function deleteTextMacro ($id)
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextmacroException('Input for parameter id is not numeric');
+	}
+	
+	// test if macro belongs to current project/user
+	if (!$this->textMacroBelongsToCurrentUser($id)) {
+		throw new Application_TextmacroException("Text macro does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -495,6 +513,11 @@ public function applyTextMacros ($text, $stage = "pre")
 	// apply text macros
 	foreach ($macros as $_stage => $_macros) {
 		foreach ($_macros as $_macro) {
+			// test if macro belongs to current project/user
+			if (!$this->textMacroBelongsToCurrentUser($_macro)) {
+				throw new Application_TextmacroException("Text macro does not belong to current user or project");
+			}
+			
 			// check internal name
 			if (empty($_macro['internal_name'])) {
 				throw new Application_TextmacroException("No internal text macro name defined");
@@ -528,6 +551,75 @@ public function applyTextMacros ($text, $stage = "pre")
 	}
 
 	return $text; 
+}
+
+/**
+ * Tests whether given text macro belongs to current project. Takes the
+ * text macro id as first argument. Returns bool.
+ *
+ * @throws Application_TextmacroException
+ * @param int Text macro id
+ * @return int bool
+ */
+public function textMacroBelongsToCurrentProject ($text_macro)
+{
+	// input check
+	if (empty($text_macro) || !is_numeric($text_macro)) {
+		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+		WHERE
+			`application_text_macros`.`id` = :text_macro
+		AND
+			`application_text_macros`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'text_macro' => (int)$text_macro,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether text macro belongs to current user or not. Takes
+ * the text macro id as first argument. Returns bool.
+ *
+ * @throws Application_TextmacroException
+ * @param int Text macro id
+ * @return bool
+ */
+public function textMacroBelongsToCurrentUser ($text_macro)
+{
+	// input check
+	if (empty($text_macro) || !is_numeric($text_macro)) {
+		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->textMacroBelongsToCurrentProject($text_macro)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class

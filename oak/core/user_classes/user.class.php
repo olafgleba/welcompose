@@ -618,6 +618,53 @@ public function initUserAdmin ()
 	return 1;
 }
 
+/**
+ * Tests whether user belongs to current project. Takes user
+ * id as first argument. Returns bool.
+ *
+ * @throws User_UserException
+ * @param int User id
+ * @return bool
+ */
+public function userBelongsToCurrentProject ($user)
+{
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException('Input for parameter user is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users`.`id` = :user
+		  AND
+			`user_users2application_projects`.`project` = :project
+		  AND
+			`user_users2application_projects`.`active` = '1'
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => (int)$user,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 // end of class
 }
 
