@@ -31,6 +31,11 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
+function oak_check_access ($area = null, $right = null)
+{
+	return true;
+}
+
 class User_User {
 	
 	/**

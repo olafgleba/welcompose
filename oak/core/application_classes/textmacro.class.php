@@ -91,6 +91,12 @@ public function instance()
  */
 public function addTextMacro ($sqlData)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'add')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Application_TextmacroException('Input for parameter sqlData is not an array');	
 	}
@@ -122,6 +128,11 @@ public function addTextMacro ($sqlData)
 */
 public function updateTextMacro ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'update')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextmacroException('Input for parameter id is not an array');
@@ -160,6 +171,11 @@ public function updateTextMacro ($id, $sqlData)
  */
 public function deleteTextMacro ($id)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'delete')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextmacroException('Input for parameter id is not numeric');
@@ -193,6 +209,11 @@ public function deleteTextMacro ($id)
  */
 public function selectTextMacro ($id)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_TextmacroException('Input for parameter id is not numeric');
@@ -248,6 +269,11 @@ public function selectTextMacro ($id)
  */
 public function selectTextMacros ($params = array())
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$type = null;
 	$start = null;
@@ -339,6 +365,11 @@ public function selectTextMacros ($params = array())
  */
 public function countTextMacros ($params = array())
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -373,6 +404,7 @@ public function countTextMacros ($params = array())
 	// execute query and return result
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
 }
+
 /**
  * Tests given text macro name for uniqueness. Takes the text macro
  * name as first argument and an optional text macro id as second argument.
@@ -387,6 +419,11 @@ public function countTextMacros ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Application_TextmacroException("Input for parameter name is not expected to be empty");
@@ -442,6 +479,11 @@ public function testForUniqueName ($name, $id = null)
  */
 public function applyTextMacros ($text, $stage = "pre")
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (!is_scalar($text)) {
 		throw new Application_TextmacroException("Input for parameter text is expected to be scalar");
@@ -563,6 +605,11 @@ public function applyTextMacros ($text, $stage = "pre")
  */
 public function textMacroBelongsToCurrentProject ($text_macro)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($text_macro) || !is_numeric($text_macro)) {
 		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
@@ -604,6 +651,11 @@ public function textMacroBelongsToCurrentProject ($text_macro)
  */
 public function textMacroBelongsToCurrentUser ($text_macro)
 {
+	// access check
+	if (!oak_check_access('textmacro', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($text_macro) || !is_numeric($text_macro)) {
 		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
