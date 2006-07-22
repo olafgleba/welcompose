@@ -91,6 +91,11 @@ public function instance()
  */
 public function addPingService ($sqlData)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'add')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	if (!is_array($sqlData)) {
 		throw new Application_PingserviceException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +104,14 @@ public function addPingService ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICES, $sqlData);
+
+	// test if ping service belongs to current user/project
+	if (!$this->pingServiceBelongsToCurrentUser($insert_id)) {
+		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +126,22 @@ public function addPingService ($sqlData)
 */
 public function updatePingService ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'update')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_PingserviceException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Application_PingserviceException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if ping service belongs to current user/project
+	if (!$this->pingServiceBelongsToCurrentUser($id)) {
+		throw new Application_PingserviceException("Ping service does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -147,9 +169,19 @@ public function updatePingService ($id, $sqlData)
  */
 public function deletePingService ($id)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'delete')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_PingserviceException('Input for parameter id is not numeric');
+	}
+	
+	// test if ping service belongs to current user/project
+	if (!$this->pingServiceBelongsToCurrentUser($id)) {
+		throw new Application_PingserviceException("Ping service does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -175,6 +207,11 @@ public function deletePingService ($id)
  */
 public function selectPingService ($id)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_PingserviceException('Input for parameter id is not numeric');
@@ -229,6 +266,11 @@ public function selectPingService ($id)
  */
 public function selectPingServices ($params = array())
 {
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -298,6 +340,11 @@ public function selectPingServices ($params = array())
  */
 public function countPingServices ($params = array())
 {
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -347,6 +394,11 @@ public function countPingServices ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Application_PingserviceException("Input for parameter name is not expected to be empty");
@@ -400,6 +452,11 @@ public function testForUniqueName ($name, $id = null)
  */
 public function pingService ($configuration_id)
 {
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+		
 	// input check
 	if (empty($configuration_id) || !is_numeric($configuration_id)) {
 		throw new Application_PingserviceException("Input for parameter configuration_id is not numeric");
@@ -407,6 +464,11 @@ public function pingService ($configuration_id)
 	
 	// load ping service configuration class
 	$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
+	
+	// test if ping service belongs to current user/project 
+	if (!$PINGSERVICECONFIGURATION->pingServiceConfigurationBelongsToCurrentUser($configuration_id)) {
+		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+	}
 	
 	// get service configuration
 	$configuration = $PINGSERVICECONFIGURATION->selectPingServiceConfiguration($configuration_id);
@@ -418,6 +480,11 @@ public function pingService ($configuration_id)
 	
 	// get service
 	$service = $this->selectPingService($configuration['ping_service_id']);
+	
+	// test if ping service belongs to current user/project
+	if (!$this->pingServiceBelongsToCurrentUser($service['id'])) {
+		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+	}
 	
 	// make sure that we got the service
 	if (empty($service) || !is_array($service)) {
@@ -455,6 +522,85 @@ public function pingService ($configuration_id)
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Tests whether given ping service belongs to current project. Takes the
+ * ping service id as first argument. Returns bool.
+ *
+ * @throws Application_PingserviceException
+ * @param int Ping service id
+ * @return int bool
+ */
+public function pingServiceBelongsToCurrentProject ($ping_service)
+{
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_TextmacroException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($ping_service) || !is_numeric($ping_service)) {
+		throw new Application_TextmacroException('Input for parameter ping_service is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+		WHERE
+			`application_ping_services`.`id` = :ping_service
+		AND
+			`application_ping_services`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'ping_service' => (int)$ping_service,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether ping service belongs to current user or not. Takes
+ * the ping service id as first argument. Returns bool.
+ *
+ * @throws Application_PingserviceException
+ * @param int Ping service id
+ * @return bool
+ */
+public function pingServiceBelongsToCurrentUser ($ping_service)
+{
+	// access check
+	if (!oak_check_access('pingservice', 'select')) {
+		throw new Application_PingserviceException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($ping_service) || !is_numeric($ping_service)) {
+		throw new Application_PingserviceException('Input for parameter ping_service is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->pingServiceBelongsToCurrentProject($ping_service)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
