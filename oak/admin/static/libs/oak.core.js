@@ -414,7 +414,7 @@ Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 /**
  * Implements method of prototype class Help
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class
+ * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
  * @throws applyError on exception
  */
 function Help_show (elem, level)
@@ -467,7 +467,7 @@ function Help_show (elem, level)
 /**
  * Implements method of prototype class Help
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class
+ * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
  */
 function Help_hide (elem, level)
