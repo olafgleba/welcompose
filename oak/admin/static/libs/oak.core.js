@@ -29,21 +29,6 @@
  * @version $Id$ 
  */
  
- 
-/**
- * Define the used tbl upload class names
- * defines cascading styles to fit background images
- * used: oak.core.js
- */
-var uploadClass		= 'upload showTableRow';
-var uploadClassHide	= 'uploadhide hideTableRow';
-
-/**
- * Comprehensive colors application wide
- * used: oak.core.js
- */
- var applicationTextColor = '#009a26';
-
 
 /**
  * Define debug output
@@ -107,7 +92,7 @@ function Base ()
 		 * Define the used table upload class names.
  		 * Cascading styles to fit background images
 		 */
-		 this.uploadClassHide = 'upload hideTableRow';
+		this.uploadClassHide = 'uploadhide hideTableRow';
 		
 		/**
 		 * Comprehensive colors application wide
@@ -268,7 +253,6 @@ function Base_isNull(elem) {
 function OakInit ()
 {
 	try {
-		// methods
 
 		
 	} catch (e) {
@@ -288,70 +272,84 @@ OakInit.prototype.getCbxStatus = OakInit_getCbxStatus;
 
 
 /**
- * Implements method <show> of prototype class Help
- * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class
+ * Implements method of prototype class OakInit
+ * @param {global} checkbox_status
+ * @see Base Base is the base class for this
  * @throws applyError on exception
  */
 function OakInit_load ()
 {	
-	OakInit.getVars();
-	
-	if (typeof checkbox_status != 'undefined' && OakInit.isArray(checkbox_status)) {
-		OakInit.getCbxStatus(checkbox_status);
+	try {
+		OakInit.getVars();
+		
+		if (typeof checkbox_status != 'undefined' && OakInit.isArray(checkbox_status)) {
+			OakInit.getCbxStatus(checkbox_status);
+		}
+	} catch (e) {
+		_applyError(e);
 	}
 }
 
 
 /**
- * Implements method <show> of prototype class Help
- * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class
+ * Implements method of prototype class OakInit
+ * @param {global} response 
+ * @param {global} selection
  * @throws applyError on exception
+ * @see Base Base is the base class for this
+ * @return new Effect Instance
  */
 function OakInit_getVars ()
 {
-   if (typeof response != 'undefined' && $('rp')) {
-       if (response == 1) {
-            return new Effect.Fade('rp', {duration: 0.8, delay: 2.0})
-       }
-   }
-   if (typeof selection != 'undefined' && $('sel')) {
-       if (response == 1) {
-            return new Effect.Fade('sel', {duration: 0.8, delay: 2.0})
-       }
-   }
+	try {
+		if (typeof response != 'undefined' && $('rp')) {
+			if (response == 1) {
+				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0})
+			}
+		}
+	   if (typeof selection != 'undefined' && $('sel')) {
+			if (selection == 1) {
+				return new Effect.Fade('sel', {duration: 0.8, delay: 2.0})
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
 /**
- * Implements method <show> of prototype class Help
- * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class
+ * Implements method of prototype class OakInit
+ * @param {array} elem Array of one or more Elements
+ * @see Base Base is the base class for this
  * @throws applyError on exception
  */
 function OakInit_getCbxStatus (elems)
 {
-	for (var e = 0; e < elems.length; e++) {
-		
-		// object -> string conversion
-		var range = String(elems[e])  + '_container';
-		
-		if ($(range)) {
-			if ($(elems[e]).checked == true) {
-
-			allNodes = document.getElementsByClassName("bez");
+	try {
+		for (var e = 0; e < elems.length; e++) {
 			
-			for (var i = 0; i < allNodes.length; i++) {
-   				var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
-   				if (_process == range) {
-   					allNodes[i].style.color = applicationTextColor;
-   				}
-   			}
-				Element.show(range);
-			} else {
-				Element.hide(range);
+			// object -> string conversion
+			var range = String(elems[e])  + '_container';
+			
+			if ($(range)) {
+				if ($(elems[e]).checked == true) {
+	
+				allNodes = document.getElementsByClassName("bez");
+				
+				for (var i = 0; i < allNodes.length; i++) {
+					var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+					if (_process == range) {
+						allNodes[i].style.color = applicationTextColor;
+					}
+				}
+					Element.show(range);
+				} else {
+					Element.hide(range);
+				}
 			}
 		}
+	} catch (e) {
+		_applyError(e);
 	}
 }
 
@@ -367,7 +365,6 @@ OakInit = new OakInit();
  * @class This is the basic Error class wich is throwed by explicit setting  
  * @constructor
  * @param {string} msg exception error message presented by catch statement
- * @throws MemoryException if there is no more memory 
  */
 function DevError(msg) 
 {
@@ -385,16 +382,13 @@ DevError.prototype = new Error;
 /**
  * Construct a new Help object
  * @class This is the basic Help class 
- * @constructor
- * @throws MemoryException if there is no more memory 
+ * @constructor 
  * @throws applyError on exception
  * @see Base Base is the base class for this
  */
 function Help ()
 {
 	try {
-		// methods
-
 		/**
 		 * Get new XMLHttpRequest Object by private function
 		 */
@@ -414,9 +408,11 @@ Help.prototype = new Base();
  */
 Help.prototype.show = Help_show;
 Help.prototype.hide = Help_hide;
+Help.prototype.process = Help_process;
+Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
- * Implements method <show> of prototype class Help
+ * Implements method of prototype class Help
  * @param {string} elem Actual element
  * @param {string} level Wich depth of implementation to apply css class
  * @throws applyError on exception
@@ -428,7 +424,6 @@ function Help_show (elem, level)
 		this.elem = elem;
 		this.attr = 'for'
 		this.level = level;
-		this.setCorrespondingFocus = _setCorrespondingFocus(this.elem, this.attr);
 		
 		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
 		
@@ -456,10 +451,11 @@ function Help_show (elem, level)
 			var target	= this.target;
 		
 			_req.open('GET', url, true);
-			_req.onreadystatechange = function () { _processHelp(url,target);};
+			_req.onreadystatechange = function () { Help.process(url,target);};
 			_req.send('');
 		}
-	
+		
+		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
 		Behaviour.apply();
 		
@@ -469,7 +465,7 @@ function Help_show (elem, level)
 }
 
 /**
- * Implements method <hide> of prototype class Help
+ * Implements method of prototype class Help
  * @param {string} elem Actual element
  * @param {string} level Wich depth of implementation to apply css class
  * @throws applyError on exception
@@ -502,6 +498,42 @@ function Help_hide (elem, level)
 }
 
 /**
+ * Implements method of prototype class Help
+ * @param {string} url path
+ * @param {string} target Wich layer div should be used
+ * @throws applyError on exception
+ * @throws DevError on condition
+ */
+function Help_process (url, target)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {
+				new Insertion.After($(target).parentNode, _req.responseText);				
+				var target_after = $(target).parentNode.nextSibling;
+				Element.hide(target_after);
+				Effect.Appear(target_after, {duration: 0.8});
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Help
+ * @param {string} elem actual element
+ * @param {string} attr attribute of DOM node to process
+ */
+ function Help_setCorrespondingFocus (elem, attr)
+{
+	this.inst = elem.parentNode.parentNode.getAttribute(attr);
+	$(this.inst).focus();
+}
+
+/**
  * Building new instance for class Help
  */
 Help = new Help();
@@ -511,15 +543,12 @@ Help = new Help();
  * Construct a new Navigation object
  * @class This is the basic Navigation class 
  * @constructor
- * @throws MemoryException if there is no more memory 
  * @throws applyError on exception
  * @see Base Base is the base class for this
  */
 function Navigation ()
 {
-	try {		
-		// methods
-		
+	try {
 		/**
 		 * Get new XMLHttpRequest Object by private function
 		 */
@@ -537,11 +566,12 @@ Navigation.prototype = new Base();
  * Instance Methods from prototype @class Navigation
  */
 Navigation.prototype.show = Navigation_show;
+Navigation.prototype.process = Navigation_process;
 
 /**
- * Implements method <show> of prototype class Navigation
+ * Implements method of prototype class Navigation
  * @param {string} name The name of the file to catch
- * @param {string} target Wich depth of implementation to apply css class
+ * @param {string} target Wich layer div should be used
  * @throws applyError on exception
  */
 function Navigation_show (name, target)
@@ -565,8 +595,32 @@ function Navigation_show (name, target)
 			var target	= this.target;
 		
 			_req.open('GET', url, true);
-			_req.onreadystatechange = function () { _processNavigation(url,target);};
+			_req.onreadystatechange = function () { Navigation.process(url,target);};
 			_req.send('');
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Navigation
+ * @param {string} url path
+ * @param {string} target Wich layer div should be used
+ * @throws applyError on exception
+ * @throws DevError on condition
+ */
+ function Navigation_process (url, target)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {
+				Element.hide($('topsubnavconstatic'));
+				Element.update(target, _req.responseText);
+				Behaviour.apply();
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
 		}
 	} catch (e) {
 		_applyError(e);
@@ -583,16 +637,13 @@ Navigation = new Navigation();
  * Construct a new Forms object
  * @class This is the basic class to process Forms/fields 
  * @constructor
- * @throws MemoryException if there is no more memory 
  * @throws applyError on exception
  * @see Base Base is the base class for this
  */
 function Forms ()
 {
 	try {		
-		// methods
-
-		
+	
 	} catch (e) {
 		_applyError(e);
 	}
@@ -612,6 +663,7 @@ Forms.prototype.setOnEvent = Forms_setOnEvent;
  * @param {string} bgcolor Defined background color
  * @param {string} bcolor Defined border color
  * @param {string} bstyle Defined border style attr
+ * @throws applyError on exception
  */
 function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 {
@@ -637,23 +689,21 @@ Forms = new Forms();
 
 /**
  * Construct a new Status object
- * @class This is the basic Navigation class 
+ * @class This is the basic Status class 
  * @constructor
- * @throws MemoryException if there is no more memory 
  * @throws applyError on exception
  * @see Base Base is the base class for this
  */
 function Status ()
 {
-	try {		
-		// methods
+	try {
 				
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-/* Inherit from Forms */
+/* Inherit from Base */
 Status.prototype = new Base();
 
 /**
@@ -662,7 +712,7 @@ Status.prototype = new Base();
 Status.prototype.getCbx = Status_getCbx;
 
 /**
- * Implements method <getCheckboxes> of prototype class Status
+ * Implements method of prototype class Status
  * @param {array} elems actual elements
  * @throws applyError on exception
  */
@@ -672,26 +722,28 @@ function Status_getCbx (elems)
 		// properties		
 		this.elems = elems;
 		
-		for (var e = 0; e < this.elems.length; e++) {
-			
-			// build new div
-			var range = String(this.elems[e])  + '_container';
-			
-			if ($(range)) {
-				if ($(this.elems[e]).checked == true) {
-	
-				allNodes = document.getElementsByClassName("bez");
+		if (Status.isArray(this.elems)) {
+			for (var e = 0; e < this.elems.length; e++) {
 				
-				for (var i = 0; i < allNodes.length; i++) {
-					var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
-					if (_process == range) {
-						allNodes[i].style.color = this.applicationTextColor;
+				// build new div
+				var range = String(this.elems[e])  + '_container';
+				
+				if ($(range)) {
+					if ($(this.elems[e]).checked == true) {
+		
+					allNodes = document.getElementsByClassName("bez");
+					
+					for (var i = 0; i < allNodes.length; i++) {
+						var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+						if (_process == range) {
+							allNodes[i].style.color = this.applicationTextColor;
+						}
 					}
-				}
-					Element.hide($(range));
-					Effect.Appear($(range),{duration: 0.6});
-				} else {
-					Effect.Fade($(range),{duration: 0.6});
+						Element.hide($(range));
+						Effect.Appear($(range),{duration: 0.6});
+					} else {
+						Effect.Fade($(range),{duration: 0.6});
+					}
 				}
 			}
 		}
@@ -701,10 +753,120 @@ function Status_getCbx (elems)
 }
 
 /**
- * Building new instance for @class Navigation
+ * Building new instance for @class Status
  */
 Status = new Status();
 
+
+
+
+
+/**
+ * Construct a new Tables object
+ * @class This is the basic Table class 
+ * @constructor
+ * @throws applyError on exception
+ * @see Base Base is the base class for this
+ */
+function Tables ()
+{
+	try {
+				
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/* Inherit from Base */
+Tables.prototype = new Base();
+
+
+/**
+ * Instance Methods from prototype @class Tables
+ */
+Tables.prototype.showRow = Tables_showRow;
+Tables.prototype.hideRow = Tables_hideRow;
+Tables.prototype.collapseRow = Tables_collapseRow;
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element to process
+ * @throws applyError on exception
+ */
+ function Tables_collapseRow (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		
+		// process outer table tr
+		$(this.elem).style.visibility = 'collapse';
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Tables_hideRow (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.id = elem.getAttribute('id');
+		this.bid = this.id.split('t_');
+		this.obid = String('o_' + this.bid[1]);
+		this.ibid = String('i_' + this.bid[1]);
+	
+		// process inner div
+		Effect.Fade(this.ibid,{duration: 0.6});
+		
+		// process outer table tr
+		setTimeout("Tables.collapseRow('"+ this.obid +"')", 400);
+		
+		this.elem.className = uploadClass;
+		Behaviour.apply();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Tables_showRow (elem)
+{	
+	try {
+		// properties
+		this.elem = elem;
+		this.id = elem.getAttribute('id');
+		this.bid = this.id.split('t_');
+		this.obid = String('o_' + this.bid[1]);
+		this.ibid = String('i_' + this.bid[1]);
+		
+		// process outer table tr
+		$(this.obid).style.visibility = 'visible';
+		
+		// process inner div
+		Element.hide(this.ibid);
+		Effect.Appear(this.ibid,{duration: 0.8});
+		
+		this.elem.className = this.uploadClassHide;
+		Behaviour.apply();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Building new instance for @class Tables
+ */
+Tables = new Tables();
 
 
 
@@ -741,6 +903,7 @@ function _applyError (exception)
  * Build new XMLHTTPRequest Instance
  * @private
  * @return _req
+ * @throws applyError on exception
  */
 function _buildXMLHTTPRequest ()
 {
@@ -754,137 +917,4 @@ function _buildXMLHTTPRequest ()
 	} catch (e) {
 		_applyError(e);
 	}
-} 
-
-/**
- * Get the corresponding help file and process it
- *
- * @private
- * @param {string} url path
- * @param {string} target Wich layer div should be used
- * @throws applyError on exception
- * @throws DevError on condition
- */
- function _processHelp (url, target)
-{  
-	try {
-		if (_req.readyState == 4) {
-			if (_req.status == 200) {
-				new Insertion.After($(target).parentNode, _req.responseText);				
-				var target_after = $(target).parentNode.nextSibling;
-				Element.hide(target_after);
-				Effect.Appear(target_after, {duration: 0.8});
-			} else {
-	  			throw new DevError(_req.statusText);
-			}
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Get the corresponding help file and process it
- *
- * @private
- * @param {string} url path
- * @param {string} target Wich layer div should be used
- * @throws applyError on exception
- * @throws DevError on condition
- */
- function _processNavigation (url, target)
-{  
-	try {
-		if (_req.readyState == 4) {
-			if (_req.status == 200) {
-				Element.hide($('topsubnavconstatic'));
-				Element.update(target, _req.responseText);
-				Behaviour.apply();
-			} else {
-	  			throw new DevError(_req.statusText);
-			}
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Set Focus on Form Element
- * @private
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process
- */
- function _setCorrespondingFocus (elem, attr)
-{
-	var inst = elem.parentNode.parentNode.getAttribute(attr);
-	$(inst).focus();
-}
-
-
-
-
-
-
-
-
-   
-/**
- * Hide table(s) row(s)
- * used : oak.events.js
- *
- * @param {var} elem actual element to process
- */
- function hideTableRowSetTime (elem)
-{
-	// process outer table tr
-	elem.style.visibility = 'collapse';
-}
-
-/**
- * Hide table(s) row(s) and inner div
- * used : oak.events.js
- *
- * @param {string} elem actual element
- */
- function hideTableRow (elem)
-{
-	var getId = elem.getAttribute('id');
-	
-	// e.g. t_<var>
-	var bid = getId.split('t_');
-	
-	// push var to the global scope
-	obid = $('o_' + bid[1]);
-
-	// process inner div
-	Effect.Fade('i_' + bid[1],{duration: 0.6});
-	
-	elem.className = uploadClass;
-	Behaviour.apply();
-
-}
-
-/**
- * Show table(s) row(s) and inner div
- * used : oak.events.js
- *
- * @param {string} elem actual element
- */
- function showTableRow (elem)
-{	
-	var getId = elem.getAttribute('id');
-	
-	// e.g. t_<var>
-	var bid = getId.split('t_');
-	
-	// process outer table tr
-	$('o_' + bid[1]).style.visibility = 'visible';
-	
-	// process inner div
-	Element.hide('i_' + bid[1]);
-	Effect.Appear('i_' + bid[1],{duration: 0.8});
-	
-	elem.className = uploadClassHide;
-	Behaviour.apply();
 }

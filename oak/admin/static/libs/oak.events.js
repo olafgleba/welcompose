@@ -22,10 +22,6 @@
  
 /**
  * trigger functions depending on CSS class DOM events
- *
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process (e.g. ID)
- * @return {string} processId build ID for further manipulation, used in func xhrHelp()
  */
 var definitions = {
 	'.con' : function(el){
@@ -162,14 +158,13 @@ var definitions = {
 	},
 	'.hideTableRow' : function(el){
 		el.onclick = function(){
-			hideTableRow(this);
-			setTimeout("hideTableRowSetTime(obid)", 400);
+			Tables.hideRow(this);
 			return false;
 		}
 	},
 	'.showTableRow' : function(el){
 		el.onclick = function(){
-			showTableRow(this);
+			Tables.showRow(this);
 			return false;
 		}
 	},
