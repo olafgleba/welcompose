@@ -91,12 +91,25 @@ public function instance()
  */
 public function addBlogPosting ($sqlData)
 {
+	// access check
+	if (!oak_check_access('blogposting', 'add')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_BlogpostingException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_BLOG_POSTINGS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_BLOG_POSTINGS, $sqlData);
+	
+	// test if blog posting belongs to current user
+	if (!$this->blogPostingBelongsToCurrentUser($insert_id)) {
+		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -111,12 +124,22 @@ public function addBlogPosting ($sqlData)
 */
 public function updateBlogPosting ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('blogposting', 'update')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BlogpostingException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_BlogpostingException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if blog posting belongs to current user
+	if (!$this->blogPostingBelongsToCurrentUser($id)) {
+		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -143,9 +166,19 @@ public function updateBlogPosting ($id, $sqlData)
  */
 public function deleteBlogPosting ($id)
 {
+	// access check
+	if (!oak_check_access('blogposting', 'delete')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BlogpostingException('Input for parameter id is not numeric');
+	}
+	
+	// test if blog posting belongs to current user
+	if (!$this->blogPostingBelongsToCurrentUser($id)) {
+		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -170,6 +203,11 @@ public function deleteBlogPosting ($id)
  */
 public function selectBlogPosting ($id)
 {
+	// access check
+	if (!oak_check_access('blogposting', 'select')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BlogpostingException('Input for parameter id is not numeric');
@@ -286,6 +324,11 @@ public function selectBlogPosting ($id)
  */
 public function selectBlogPostings ($params = array())
 {
+	// access check
+	if (!oak_check_access('blogposting', 'select')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$user = null;
 	$page = null;
@@ -452,6 +495,11 @@ public function selectBlogPostings ($params = array())
  */
 public function countBlogPostings ($params = array())
 {
+	// access check
+	if (!oak_check_access('blogposting', 'select')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$user = null;
 	$page = null;
@@ -500,8 +548,13 @@ public function countBlogPostings ($params = array())
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($user) && is_numeric($user)) {
@@ -522,6 +575,89 @@ public function countBlogPostings ($params = array())
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
+ * Tests whether given blog posting belongs to current project. Takes the
+ * blog posting id as first argument. Returns bool.
+ *
+ * @throws Content_BlogpostingException
+ * @param int Blog posting id
+ * @return int bool
+ */
+public function blogPostingBelongsToCurrentProject ($blog_posting)
+{
+	// access check
+	if (!oak_check_access('blogposting', 'select')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($blog_posting) || !is_numeric($blog_posting)) {
+		throw new Content_BlogpostingException('Input for parameter blog_posting is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		WHERE
+			`content_blog_postings`.`id` = :blog_posting
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'blog_posting' => (int)$blog_posting,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether blog posting belongs to current user or not. Takes
+ * the blog posting id as first argument. Returns bool.
+ *
+ * @throws Content_BlogpostingException
+ * @param int Blog posting id
+ * @return bool
+ */
+public function blogPostingBelongsToCurrentUser ($blog_posting)
+{
+	// access check
+	if (!oak_check_access('blogposting', 'select')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($blog_posting) || !is_numeric($blog_posting)) {
+		throw new Content_BlogpostingException('Input for parameter blog_posting is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->blogPostingBelongsToCurrentProject($blog_posting)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
