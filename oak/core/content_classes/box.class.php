@@ -91,12 +91,25 @@ public function instance()
  */
 public function addBox ($sqlData)
 {
+	// access check
+	if (!oak_check_access('box', 'add')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_BoxException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_BOXES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_BOXES, $sqlData);
+	
+	// test if box belongs tu current user/project
+	if (!$this->boxBelongsToCurrentUser($insert_id)) {
+		throw new Content_BoxException('Box does not belong to current user/project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -111,12 +124,22 @@ public function addBox ($sqlData)
 */
 public function updateBox ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('box', 'update')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BoxException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_BoxException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if box belongs tu current user/project
+	if (!$this->boxBelongsToCurrentUser($id)) {
+		throw new Content_BoxException('Box does not belong to current user/project');
 	}
 	
 	// prepare where clause
@@ -142,9 +165,19 @@ public function updateBox ($id, $sqlData)
  */
 public function deleteBox ($id)
 {
+	// access check
+	if (!oak_check_access('box', 'delete')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BoxException('Input for parameter id is not numeric');
+	}
+	
+	// test if box belongs tu current user/project
+	if (!$this->boxBelongsToCurrentUser($id)) {
+		throw new Content_BoxException('Box does not belong to current user/project');
 	}
 	
 	// prepare where clause
@@ -169,6 +202,11 @@ public function deleteBox ($id)
  */
 public function selectBox ($id)
 {
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_BoxException('Input for parameter id is not numeric');
@@ -231,6 +269,11 @@ public function selectBox ($id)
  */
 public function selectBoxes ($params = array())
 {
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$page = null;
 	$start = null;
@@ -318,6 +361,11 @@ public function selectBoxes ($params = array())
  */
 public function countBoxes ($params = array())
 {
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$page = null;
 	$bind_params = array();
@@ -389,6 +437,11 @@ public function countBoxes ($params = array())
  */
 public function testForUniqueName ($name, $page_id_array)
 {
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Content_BoxException("Input for parameter name is not expected to be empty");
@@ -406,7 +459,7 @@ public function testForUniqueName ($name, $page_id_array)
 	
 	// finish input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new ContentBoxException("Input for parameter page is expected to be numeric");
+		throw new Content_BoxException("Input for parameter page is expected to be numeric");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
 		throw new Content_BoxException("Input for parameter id is expected to be numeric");
@@ -451,6 +504,90 @@ public function testForUniqueName ($name, $page_id_array)
 	}
 	
 }
+
+/**
+ * Tests whether given box belongs to current project. Takes the
+ * box id as first argument. Returns bool.
+ *
+ * @throws Content_BoxException
+ * @param int Box id
+ * @return int bool
+ */
+public function boxBelongsToCurrentProject ($box)
+{
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($box) || !is_numeric($box)) {
+		throw new Content_BoxException('Input for parameter box is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_boxes`.`page` = `content_pages`.`id`
+		WHERE
+			`content_boxes`.`id` = :box
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'box' => (int)$box,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether box belongs to current user or not. Takes
+ * the box id as first argument. Returns bool.
+ *
+ * @throws Content_BoxException
+ * @param int box id
+ * @return bool
+ */
+public function boxBelongsToCurrentUser ($box)
+{
+	// access check
+	if (!oak_check_access('box', 'select')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($box) || !is_numeric($box)) {
+		throw new Content_BoxException('Input for parameter box is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->boxBelongsToCurrentProject($box)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
 
 // end of class
 }
