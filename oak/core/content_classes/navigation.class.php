@@ -91,6 +91,11 @@ public function instance()
  */
 public function addNavigation ($sqlData)
 {
+	// access check
+	if (!oak_check_access('navigation', 'add')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	if (!is_array($sqlData)) {
 		throw new Content_NavigationException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +104,14 @@ public function addNavigation ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_NAVIGATIONS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_NAVIGATIONS, $sqlData);
+	
+	// test if navigation belongs to current user/project
+	if (!$this->navigationBelongsToCurrentUser($insert_id)) {
+		throw new Content_NavigationException('Navigation does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +126,22 @@ public function addNavigation ($sqlData)
 */
 public function updateNavigation ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('navigation', 'update')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_NavigationException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_NavigationException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if navigation belongs to current user/project
+	if (!$this->navigationBelongsToCurrentUser($id)) {
+		throw new Content_NavigationException('Navigation does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -146,9 +168,19 @@ public function updateNavigation ($id, $sqlData)
  */
 public function deleteNavigation ($id)
 {
+	// access check
+	if (!oak_check_access('navigation', 'delete')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_NavigationException('Input for parameter id is not numeric');
+	}
+	
+	// test if navigation belongs to current user/project
+	if (!$this->navigationBelongsToCurrentUser($id)) {
+		throw new Content_NavigationException('Navigation does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -174,6 +206,11 @@ public function deleteNavigation ($id)
  */
 public function selectNavigation ($id)
 {
+	// access check
+	if (!oak_check_access('navigation', 'select')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_NavigationException('Input for parameter id is not numeric');
@@ -226,6 +263,11 @@ public function selectNavigation ($id)
  */
 public function selectNavigations ($params = array())
 {
+	// access check
+	if (!oak_check_access('navigation', 'select')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -293,6 +335,11 @@ public function selectNavigations ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('navigation', 'select')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Content_NavigationException("Input for parameter name is not expected to be empty");
@@ -334,6 +381,85 @@ public function testForUniqueName ($name, $id = null)
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Tests whether given navigation belongs to current project. Takes the
+ * navigation id as first argument. Returns bool.
+ *
+ * @throws Content_NavigationException
+ * @param int Navigation id
+ * @return int bool
+ */
+public function navigationBelongsToCurrentProject ($navigation)
+{
+	// access check
+	if (!oak_check_access('navigation', 'select')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Content_NavigationException('Input for parameter navigation is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+		WHERE
+			`content_navigations`.`id` = :navigation
+		  AND
+			`content_navigations`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'navigation' => (int)$navigation,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether navigation belongs to current user or not. Takes
+ * the navigation id as first argument. Returns bool.
+ *
+ * @throws Content_NavigationException
+ * @param int navigation id
+ * @return bool
+ */
+public function navigationBelongsToCurrentUser ($navigation)
+{
+	// access check
+	if (!oak_check_access('navigation', 'select')) {
+		throw new Content_NavigationException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($navigation) || !is_numeric($navigation)) {
+		throw new Content_NavigationException('Input for parameter navigation is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->navigationBelongsToCurrentProject($navigation)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
