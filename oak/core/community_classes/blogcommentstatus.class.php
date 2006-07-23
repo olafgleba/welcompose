@@ -464,9 +464,9 @@ public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 		FROM
 			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE
-			`application_blog_comment_statuses`.`id` = :blog_comment_status
+			`community_blog_comment_statuses`.`id` = :blog_comment_status
 		AND
-			`application_blog_comment_statuses`.`project` = :project
+			`community_blog_comment_statuses`.`project` = :project
 	";
 	
 	// prepare bind params
