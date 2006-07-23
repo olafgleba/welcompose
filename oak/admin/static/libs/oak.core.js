@@ -21,9 +21,9 @@
  */
  
 /** 
- * @fileoverview This file is the essential base of the oak javascript processing.
- * It describes all core functions. 
- * Need call to oak.strings.js for i18n separation
+ * @fileoverview This file is the essential Oak javascript enviroment.
+ * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
+ * to make it unnecessary to loop this core file through the i18n parser.
  *
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
