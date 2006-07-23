@@ -91,6 +91,12 @@ public function instance()
  */
 public function addBlogCommentStatus ($sqlData)
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'add')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Community_BlogcommentstatusException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +105,12 @@ public function addBlogCommentStatus ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData);
+	
+	// test if blog comment status belongs to current project/user
+	if (!$this->blogCommentStatusBelongsToCurrentUser($insert_id)) {
+		throw new Community_BlogcommentstatusException("Blog comment status does not belong to current user or project");
+	}
 }
 
 /**
@@ -114,12 +125,22 @@ public function addBlogCommentStatus ($sqlData)
 */
 public function updateBlogCommentStatus ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'update')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Community_BlogcommentstatusException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Community_BlogcommentstatusException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if blog comment status belongs to current project/user
+	if (!$this->blogCommentStatusBelongsToCurrentUser($id)) {
+		throw new Community_BlogcommentstatusException("Blog comment status does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -147,9 +168,19 @@ public function updateBlogCommentStatus ($id, $sqlData)
  */
 public function deleteBlogCommentStatus ($id)
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'delete')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Community_BlogcommentstatusException('Input for parameter id is not numeric');
+	}
+	
+	// test if blog comment status belongs to current project/user
+	if (!$this->blogCommentStatusBelongsToCurrentUser($id)) {
+		throw new Community_BlogcommentstatusException("Blog comment status does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -175,6 +206,11 @@ public function deleteBlogCommentStatus ($id)
  */
 public function selectBlogCommentStatus ($id)
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Community_BlogcommentstatusException('Input for parameter id is not numeric');
@@ -227,6 +263,11 @@ public function selectBlogCommentStatus ($id)
  */
 public function selectBlogCommentStatuses ($params = array())
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -295,6 +336,11 @@ public function selectBlogCommentStatuses ($params = array())
  */
 public function countBlogCommentStatuses ($params = array())
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -343,6 +389,11 @@ public function countBlogCommentStatuses ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Community_BlogcommentstatusException("Input for parameter name is not expected to be empty");
@@ -384,6 +435,85 @@ public function testForUniqueName ($name, $id = null)
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Tests whether given blog comment status belongs to current project. Takes
+ * the blog comment status id as first argument. Returns bool.
+ *
+ * @throws Community_BlogcommentstatusException
+ * @param int Blog commen status id
+ * @return int bool
+ */
+public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
+{
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($blog_comment_status) || !is_numeric($blog_comment_status)) {
+		throw new Community_BlogcommentstatusException('Input for parameter blog_comment_status is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+		WHERE
+			`application_blog_comment_statuses`.`id` = :blog_comment_status
+		AND
+			`application_blog_comment_statuses`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'blog_comment_status' => (int)$blog_comment_status,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether blog comment status belongs to current user or not. Takes
+ * the blog comment status id as first argument. Returns bool.
+ *
+ * @throws Community_Blogcommenstatus
+ * @param int Blog comment status id
+ * @return bool
+ */
+public function blogCommentStatusBelongsToCurrentUser ($blog_comment_status)
+{
+	// access check
+	if (!oak_check_access('blogcommentstatus', 'select')) {
+		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($blog_comment_status) || !is_numeric($blog_comment_status)) {
+		throw new Community_BlogcommentstatusException('Input for parameter blog_comment_status is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->blogCommentStatusBelongsToCurrentProject($blog_comment_status)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
