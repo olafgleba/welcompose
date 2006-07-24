@@ -91,12 +91,25 @@ public function instance()
  */
 public function addSimplePage ($sqlData)
 {
+	// access check
+	if (!oak_check_access('simplepage', 'use')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_SimplepageException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData);
+	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData);
+	
+	// test if simple page belongs to current user/project
+	if (!$this->simplePageBelongsToCurrentUser($sqlData['id'])) {
+		throw new Content_SimplepageException('Simple page does not belong to current user or project');
+	}
+	
+	return $sqlData['id'];
 }
 
 /**
@@ -111,12 +124,22 @@ public function addSimplePage ($sqlData)
 */
 public function updateSimplePage ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('simplepage', 'manage')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimplepageException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_SimplepageException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if simple page belongs to current user/project
+	if (!$this->simplePageBelongsToCurrentUser($id)) {
+		throw new Content_SimplepageException('Simple page does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -143,9 +166,19 @@ public function updateSimplePage ($id, $sqlData)
  */
 public function deleteSimplePage ($id)
 {
+	// access check
+	if (!oak_check_access('simplepage', 'manage')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimplepageException('Input for parameter id is not numeric');
+	}
+	
+	// test if simple page belongs to current user/project
+	if (!$this->simplePageBelongsToCurrentUser($id)) {
+		throw new Content_SimplepageException('Simple page does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -170,6 +203,11 @@ public function deleteSimplePage ($id)
  */
 public function selectSimplePage ($id)
 {
+	// access check
+	if (!oak_check_access('simplepage', 'use')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimplepageException('Input for parameter id is not numeric');
@@ -229,9 +267,9 @@ public function selectSimplePage ($id)
 		WHERE
 			`content_simple_pages`.`id` = :id
 		AND
-			`content_pages`.`project` = :current_project
+			`content_pages`.`project` = :project
 		AND
-			`content_simple_pages`.`user` = :current_user
+			`content_simple_pages`.`user` = :user
 		LIMIT
 			1
 	";
@@ -239,8 +277,8 @@ public function selectSimplePage ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'current_project' => (int)OAK_CURRENT_PROJECT,
-		'current_user' => (int)OAK_CURRENT_USER
+		'project' => (int)OAK_CURRENT_PROJECT,
+		'user' => (int)OAK_CURRENT_USER
 	);
 	
 	// execute query and return result
@@ -261,7 +299,6 @@ public function selectSimplePage ($id)
  * <li>order_marco, string, otpional: How to sort the result set.
  * Supported macros:
  *    <ul>
- *        <li>USER_NAME: sort by user name</li>
  *        <li>PAGE: sorty by page id</li>
  *        <li>DATE_MODIFIED: sorty by date modified</li>
  *        <li>DATE_ADDED: sort by date added</li>
@@ -275,6 +312,11 @@ public function selectSimplePage ($id)
  */
 public function selectSimplePages ($params = array())
 {
+	// access check
+	if (!oak_check_access('simplepage', 'use')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
 	// define some vars
 	$user = null;
 	$page = null;
@@ -307,7 +349,6 @@ public function selectSimplePages ($params = array())
 	
 	// define order macros
 	$macros = array(
-		'USER_NAME' => '`application_users`.`name`',
 		'PAGE' => '`content_simple_pages`.`page`',
 		'DATE_ADDED' => '`content_simple_pages`.`date_added` AS `date_added`',
 		'DATE_MODIFIED' => '`content_simple_pages`.`date_modified`'
@@ -318,52 +359,61 @@ public function selectSimplePages ($params = array())
 		SELECT 
 			`content_simple_pages`.`id` AS `id`,
 			`content_simple_pages`.`user` AS `user`,
-			`content_simple_pages`.`page` AS `page`,
 			`content_simple_pages`.`title` AS `title`,
 			`content_simple_pages`.`title_url` AS `title_url`,
 			`content_simple_pages`.`content_raw` AS `content_raw`,
 			`content_simple_pages`.`content` AS `content`,
+			`content_simple_pages`.`text_converter` AS `text_converter`,
+			`content_simple_pages`.`apply_macros` AS `apply_macros`,
+			`content_simple_pages`.`meta_use` AS `meta_use`,
+			`content_simple_pages`.`meta_title_raw` AS `meta_title_raw`,
+			`content_simple_pages`.`meta_title` AS `meta_title`,
+			`content_simple_pages`.`meta_keywords` AS `meta_keywords`,
+			`content_simple_pages`.`meta_description` AS `meta_description`,
 			`content_simple_pages`.`date_modified` AS `date_modified`,
 			`content_simple_pages`.`date_added` AS `date_added`,
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`homepage` AS `user_homepage`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
 			`content_pages`.`id` AS `page_id`,
-			`content_pages`.`navigation` AS `page_navigation`,
-			`content_pages`.`root_node` AS `page_root_node`,
-			`content_pages`.`parent` AS `page_parent`,
-			`content_pages`.`level` AS `page_level`,
-			`content_pages`.`sorting` AS `page_sorting`,
+			`content_pages`.`project` AS `page_project`,
 			`content_pages`.`type` AS `page_type`,
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
-			`content_pages`.`protect` AS `page_protect`
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_simple_pages`.`user` = `application_users`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		ON
-			`content_simple_pages`.`page` = `content_pages`.`id`
+			`content_simple_pages`.`id` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		ON
+			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
+		$sql .= " AND `user_users`.`id` = :user ";
 		$bind_params['user'] = $user;
 	}
 	if (!empty($page) && is_numeric($page)) {
@@ -386,6 +436,89 @@ public function selectSimplePages ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests whether given simple page belongs to current project. Takes the
+ * simple page id as first argument. Returns bool.
+ *
+ * @throws Content_SimplepageException
+ * @param int Simple page id
+ * @return int bool
+ */
+public function simplePageBelongsToCurrentProject ($simple_page)
+{
+	// access check
+	if (!oak_check_access('simplepage', 'use')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
+	// input check
+	if (empty($simple_page) || !is_numeric($simple_page)) {
+		throw new Content_SimplepageException('Input for parameter simple_page is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_simple_pages`.`id` = `content_pages`.`id`
+		WHERE
+			`content_simple_pages`.`id` = :simple_page
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'simple_page' => (int)$simple_page,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether simple page belongs to current user or not. Takes
+ * the simple page id as first argument. Returns bool.
+ *
+ * @throws Content_SimplepageException
+ * @param int Simple page id
+ * @return bool
+ */
+public function simplePageBelongsToCurrentUser ($simple_page)
+{
+	// access check
+	if (!oak_check_access('simplepage', 'use')) {
+		throw new Content_SimplepageException("You are not allowed to perpage this action");
+	}
+	
+	// input check
+	if (empty($simple_page) || !is_numeric($simple_page)) {
+		throw new Content_SimplepageException('Input for parameter simple_page is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->simplePageBelongsToCurrentProject($simple_page)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
