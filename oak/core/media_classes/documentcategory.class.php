@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Media_DocumentCategory {
+class Media_Documentcategory {
 	
 	/**
 	 * Singleton
@@ -69,37 +69,50 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Media_DocumentCategory object.
+ * Singleton. Returns instance of the Media_Documentcategory object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Media_DocumentCategory::$instance == null) {
-		Media_DocumentCategory::$instance = new Media_DocumentCategory(); 
+	if (Media_Documentcategory::$instance == null) {
+		Media_Documentcategory::$instance = new Media_Documentcategory(); 
 	}
-	return Media_DocumentCategory::$instance;
+	return Media_Documentcategory::$instance;
 }
 
 /**
  * Adds document category to the document category table. Takes a field=>value
  * array with category data as first argument. Returns insert id. 
  * 
- * @throws Media_DocumentCategoryException
+ * @throws Media_DocumentcategoryException
  * @param array Row data
  * @return int Document category id
  */
-public function addDocumentCategory ($sqlData)
+public function addDocumentcategory ($sqlData)
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'manage')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
-		throw new Media_DocumentCategoryException('Input for parameter sqlData is not an array');	
+		throw new Media_DocumentcategoryException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new row will be assigned to the current project
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_MEDIA_DOCUMENT_CATEGORIES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_MEDIA_DOCUMENT_CATEGORIES, $sqlData);
+
+	// test if document category belongs to current project/user
+	if (!$this->documentCategoryBelongsToCurrentUser($insert_id)) {
+		throw new Media_DocumentcategoryException('Document category does not belong to current project or user');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -107,19 +120,29 @@ public function addDocumentCategory ($sqlData)
  * field=>value array with the new category data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Media_DocumentCategoryException
+ * @throws Media_DocumentcategoryException
  * @param int Document category id
  * @param array Row data
  * @return int Affected rows
 */
-public function updateDocumentCategory ($id, $sqlData)
+public function updateDocumentcategory ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'manage')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Media_DocumentCategoryException('Input for parameter id is not an array');
+		throw new Media_DocumentcategoryException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Media_DocumentCategoryException('Input for parameter sqlData is not an array');	
+		throw new Media_DocumentcategoryException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if document category belongs to current project/user
+	if (!$this->documentCategoryBelongsToCurrentUser($id)) {
+		throw new Media_DocumentcategoryException('Document category does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -140,15 +163,25 @@ public function updateDocumentCategory ($id, $sqlData)
  * Removes document category from the document category table. Takes the
  * category id as first argument. Returns amount of affected rows.
  * 
- * @throws Media_DocumentCategoryException
+ * @throws Media_DocumentcategoryException
  * @param int Document category id
  * @return int Amount of affected rows
  */
-public function deleteDocumentCategory ($id)
+public function deleteDocumentcategory ($id)
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'manage')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Media_DocumentCategoryException('Input for parameter id is not numeric');
+		throw new Media_DocumentcategoryException('Input for parameter id is not numeric');
+	}
+	
+	// test if document category belongs to current project/user
+	if (!$this->documentCategoryBelongsToCurrentUser($id)) {
+		throw new Media_DocumentcategoryException('Document category does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -168,15 +201,20 @@ public function deleteDocumentCategory ($id)
  * Selects one document category. Takes the category id as first argument.
  * Returns array with category information.
  * 
- * @throws Media_DocumentCategoryException
+ * @throws Media_DocumentcategoryException
  * @param int Document category id
  * @return array
  */
-public function selectDocumentCategory ($id)
+public function selectDocumentcategory ($id)
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Media_DocumentCategoryException('Input for parameter id is not numeric');
+		throw new Media_DocumentcategoryException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -219,12 +257,17 @@ public function selectDocumentCategory ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Media_DocumentCategoryException
+ * @throws Media_DocumentcategoryException
  * @param array Select params
  * @return array
  */
 public function selectDocumentCategories ($params = array())
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -232,7 +275,7 @@ public function selectDocumentCategories ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Media_DocumentCategoryException('Input for parameter params is not an array');	
+		throw new Media_DocumentcategoryException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -243,7 +286,7 @@ public function selectDocumentCategories ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Media_DocumentCategoryException("Unknown parameter $_key");
+				throw new Media_DocumentcategoryException("Unknown parameter $_key");
 		}
 	}
 	
@@ -285,6 +328,11 @@ public function selectDocumentCategories ($params = array())
  */
 public function countDocumentCategories ()
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -316,15 +364,20 @@ public function countDocumentCategories ()
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($name)) {
-		throw new User_DocumentCategoryException("Input for parameter name is not expected to be empty");
+		throw new User_DocumentcategoryException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new User_DocumentCategoryException("Input for parameter name is expected to be scalar");
+		throw new User_DocumentcategoryException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new User_DocumentCategoryException("Input for parameter id is expected to be numeric");
+		throw new User_DocumentcategoryException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -360,9 +413,88 @@ public function testForUniqueName ($name, $id = null)
 	
 }
 
+/**
+ * Tests whether given document category belongs to current project. Takes the
+ * document category id as first argument. Returns bool.
+ *
+ * @throws Media_DocumentcategoryException
+ * @param int Document category id
+ * @return int bool
+ */
+public function documentCategoryBelongsToCurrentProject ($document_category)
+{
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
+	if (empty($document_category) || !is_numeric($document_category)) {
+		throw new Media_DocumentcategoryException('Input for parameter document_category is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_MEDIA_DOCUMENT_CATEGORIES." AS `media_document_categories`
+		WHERE
+			`media_document_categories`.`id` = :document_category
+		  AND
+			`media_document_categories`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'document_category' => (int)$document_category,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether document category belongs to current user or not. Takes
+ * the document category id as first argument. Returns bool.
+ *
+ * @throws Media_DocumentcategoryException
+ * @param int Document category id
+ * @return bool
+ */
+public function documentCategoryBelongsToCurrentUser ($document_category)
+{
+	// access check
+	if (!oak_check_access('documentcategory', 'use')) {
+		throw new Media_DocumentcategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
+	if (empty($document_category) || !is_numeric($document_category)) {
+		throw new Media_DocumentcategoryException('Input for parameter document_category is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->documentCategoryBelongsToCurrentProject($document_category)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
 // end of class
 }
 
-class Media_DocumentCategoryException extends Exception { }
+class Media_DocumentcategoryException extends Exception { }
 
 ?>
