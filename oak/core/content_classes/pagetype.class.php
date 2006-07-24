@@ -91,6 +91,12 @@ public function instance()
  */
 public function addPageType ($sqlData)
 {
+	// access check
+	if (!oak_check_access('pagetype', 'manage')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_PagetypeException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +105,14 @@ public function addPageType ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_PAGE_TYPES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_PAGE_TYPES, $sqlData);
+	
+	// test if page type belongs to current user/project
+	if (!$this->pageTypeBelongsToCurrentUser($insert_id)) {
+		throw new Content_PagetypeException('Page type does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +127,22 @@ public function addPageType ($sqlData)
 */
 public function updatePageType ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('pagetype', 'manage')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PagetypeException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_PagetypeException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if page type belongs to current user/project
+	if (!$this->pageTypeBelongsToCurrentUser($id)) {
+		throw new Content_PagetypeException('Page type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -146,9 +169,19 @@ public function updatePageType ($id, $sqlData)
  */
 public function deletePageType ($id)
 {
+	// access check
+	if (!oak_check_access('pagetype', 'manage')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PagetypeException('Input for parameter id is not numeric');
+	}
+	
+	// test if page type belongs to current user/project
+	if (!$this->pageTypeBelongsToCurrentUser($id)) {
+		throw new Content_PagetypeException('Page type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -174,6 +207,11 @@ public function deletePageType ($id)
  */
 public function selectPageType ($id)
 {
+	// access check
+	if (!oak_check_access('pagetype', 'use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PagetypeException('Input for parameter id is not numeric');
@@ -227,6 +265,11 @@ public function selectPageType ($id)
  */
 public function selectPageTypes ($params = array())
 {
+	// access check
+	if (!oak_check_access('pagetype', 'use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -295,6 +338,11 @@ public function selectPageTypes ($params = array())
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('pagetype', 'use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Content_PagetypeException("Input for parameter name is not expected to be empty");
@@ -336,7 +384,85 @@ public function testForUniqueName ($name, $id = null)
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Tests whether given page type belongs to current project. Takes the
+ * page type id as first argument. Returns bool.
+ *
+ * @throws Content_PagetypeException
+ * @param int Page type id
+ * @return int bool
+ */
+public function pageTypeBelongsToCurrentProject ($page_type)
+{
+	// access check
+	if (!oak_check_access('pagetype', 'use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
 	
+	// input check
+	if (empty($page_type) || !is_numeric($page_type)) {
+		throw new Content_PagetypeException('Input for parameter page_type is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		WHERE
+			`content_page_types`.`id` = :page_type
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'page_type' => (int)$page_type,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether page type belongs to current user or not. Takes
+ * the page type id as first argument. Returns bool.
+ *
+ * @throws Content_PagetypeException
+ * @param int Page type id
+ * @return bool
+ */
+public function pageTypeBelongsToCurrentUser ($page_type)
+{
+	// access check
+	if (!oak_check_access('pagetype', 'use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($page_type) || !is_numeric($page_type)) {
+		throw new Content_PagetypeException('Input for parameter page_type is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->pageTypeBelongsToCurrentProject($page_type)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
