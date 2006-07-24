@@ -91,6 +91,12 @@ public function instance()
  */
 public function addImageCategory ($sqlData)
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'manage')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Media_ImageCategoryException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +105,14 @@ public function addImageCategory ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_MEDIA_DOCUMENT_CATEGORIES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_MEDIA_IMAGE_CATEGORIES, $sqlData);
+	
+	// test if image category belongs to current project/user
+	if (!$this->imageCategoryBelongsToCurrentUser($insert_id)) {
+		throw new Media_ImageCategoryException("Image category does not belong to current user or project");
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +127,22 @@ public function addImageCategory ($sqlData)
 */
 public function updateImageCategory ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'manage')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ImageCategoryException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Media_ImageCategoryException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if image category belongs to current project/user
+	if (!$this->imageCategoryBelongsToCurrentUser($id)) {
+		throw new Media_ImageCategoryException("Image category does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -132,7 +155,7 @@ public function updateImageCategory ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_MEDIA_DOCUMENT_CATEGORIES, $sqlData,
+	return $this->base->db->update(OAK_DB_MEDIA_IMAGE_CATEGORIES, $sqlData,
 		$where, $bind_params);
 }
 
@@ -146,9 +169,19 @@ public function updateImageCategory ($id, $sqlData)
  */
 public function deleteImageCategory ($id)
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'manage')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ImageCategoryException('Input for parameter id is not numeric');
+	}
+	
+	// test if image category belongs to current project/user
+	if (!$this->imageCategoryBelongsToCurrentUser($id)) {
+		throw new Media_ImageCategoryException("Image category does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -161,7 +194,7 @@ public function deleteImageCategory ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_MEDIA_DOCUMENT_CATEGORIES, $where, $bind_params);
+	return $this->base->db->delete(OAK_DB_MEDIA_IMAGE_CATEGORIES, $where, $bind_params);
 }
 
 /**
@@ -174,6 +207,11 @@ public function deleteImageCategory ($id)
  */
 public function selectImageCategory ($id)
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ImageCategoryException('Input for parameter id is not numeric');
@@ -189,7 +227,7 @@ public function selectImageCategory ($id)
 			`media_image_categories`.`project` AS `project`,
 			`media_image_categories`.`name` AS `name`
 		FROM
-			".OAK_DB_MEDIA_DOCUMENT_CATEGORIES." AS `media_image_categories`
+			".OAK_DB_MEDIA_IMAGE_CATEGORIES." AS `media_image_categories`
 		WHERE 
 			`media_image_categories`.`id` = :id
 		  AND
@@ -225,6 +263,11 @@ public function selectImageCategory ($id)
  */
 public function selectImageCategories ($params = array())
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -254,7 +297,7 @@ public function selectImageCategories ($params = array())
 			`media_image_categories`.`project` AS `project`,
 			`media_image_categories`.`name` AS `name`
 		FROM
-			".OAK_DB_MEDIA_DOCUMENT_CATEGORIES." AS `media_image_categories`
+			".OAK_DB_MEDIA_IMAGE_CATEGORIES." AS `media_image_categories`
 		WHERE 
 			`media_image_categories`.`project` = :project
 		ORDER BY
@@ -285,6 +328,11 @@ public function selectImageCategories ($params = array())
  */
 public function countImageCategories ()
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// define some vars
 	$bind_params = array();
 	
@@ -293,7 +341,7 @@ public function countImageCategories ()
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_MEDIA_DOCUMENT_CATEGORIES." AS `media_image_categories`
+			".OAK_DB_MEDIA_IMAGE_CATEGORIES." AS `media_image_categories`
 		WHERE 
 			1
 	";
@@ -316,6 +364,11 @@ public function countImageCategories ()
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new User_ImageCategoryException("Input for parameter name is not expected to be empty");
@@ -332,7 +385,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_MEDIA_DOCUMENT_CATEGORIES." AS `media_image_categories`
+			".OAK_DB_MEDIA_IMAGE_CATEGORIES." AS `media_image_categories`
 		WHERE
 			`project` = :project
 		  AND
@@ -358,6 +411,85 @@ public function testForUniqueName ($name, $id = null)
 		return true;
 	}
 	
+}
+
+/**
+ * Tests whether given image category belongs to current project. Takes the
+ * image category id as first argument. Returns bool.
+ *
+ * @throws Media_ImageCategoryException
+ * @param int Image category id
+ * @return int bool
+ */
+public function imageCategoryBelongsToCurrentProject ($image_category)
+{
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
+	if (empty($image_category) || !is_numeric($image_category)) {
+		throw new Media_ImageCategoryException('Input for parameter image_category is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_MEDIA_IMAGE_CATEGORIES." AS `media_image_categories`
+		WHERE
+			`media_image_categories`.`id` = :image_category
+		  AND
+			`media_image_categories`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'image_category' => (int)$image_category,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether image category belongs to current user or not. Takes
+ * the image category id as first argument. Returns bool.
+ *
+ * @throws Media_ImageCategoryException
+ * @param int Image category id
+ * @return bool
+ */
+public function imageCategoryBelongsToCurrentUser ($image_category)
+{
+	// access check
+	if (!oak_check_access('imagecategory', 'use')) {
+		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+	}
+	
+	// input check
+	if (empty($image_category) || !is_numeric($image_category)) {
+		throw new Media_ImageCategoryException('Input for parameter image_category is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->imageCategoryBelongsToCurrentProject($image_category)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
