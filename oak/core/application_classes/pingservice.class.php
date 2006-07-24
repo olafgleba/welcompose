@@ -92,7 +92,7 @@ public function instance()
 public function addPingService ($sqlData)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'add')) {
+	if (!oak_check_access('pingservice', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function addPingService ($sqlData)
 public function updatePingService ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'update')) {
+	if (!oak_check_access('pingservice', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updatePingService ($id, $sqlData)
 public function deletePingService ($id)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'delete')) {
+	if (!oak_check_access('pingservice', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -208,7 +208,7 @@ public function deletePingService ($id)
 public function selectPingService ($id)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -267,7 +267,7 @@ public function selectPingService ($id)
 public function selectPingServices ($params = array())
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -341,7 +341,7 @@ public function selectPingServices ($params = array())
 public function countPingServices ($params = array())
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -395,7 +395,7 @@ public function countPingServices ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -453,7 +453,7 @@ public function testForUniqueName ($name, $id = null)
 public function pingService ($configuration_id)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 		
@@ -535,7 +535,7 @@ public function pingService ($configuration_id)
 public function pingServiceBelongsToCurrentProject ($ping_service)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -581,7 +581,7 @@ public function pingServiceBelongsToCurrentProject ($ping_service)
 public function pingServiceBelongsToCurrentUser ($ping_service)
 {
 	// access check
-	if (!oak_check_access('pingservice', 'select')) {
+	if (!oak_check_access('pingservice', 'use')) {
 		throw new Application_PingserviceException("You are not allowed to perform this action");
 	}
 	

@@ -92,7 +92,7 @@ public function instance()
 public function addNavigation ($sqlData)
 {
 	// access check
-	if (!oak_check_access('navigation', 'add')) {
+	if (!oak_check_access('navigation', 'manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function addNavigation ($sqlData)
 public function updateNavigation ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('navigation', 'update')) {
+	if (!oak_check_access('navigation', 'manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -169,7 +169,7 @@ public function updateNavigation ($id, $sqlData)
 public function deleteNavigation ($id)
 {
 	// access check
-	if (!oak_check_access('navigation', 'delete')) {
+	if (!oak_check_access('navigation', 'manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -207,7 +207,7 @@ public function deleteNavigation ($id)
 public function selectNavigation ($id)
 {
 	// access check
-	if (!oak_check_access('navigation', 'select')) {
+	if (!oak_check_access('navigation', 'use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -264,7 +264,7 @@ public function selectNavigation ($id)
 public function selectNavigations ($params = array())
 {
 	// access check
-	if (!oak_check_access('navigation', 'select')) {
+	if (!oak_check_access('navigation', 'use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -336,7 +336,7 @@ public function selectNavigations ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('navigation', 'select')) {
+	if (!oak_check_access('navigation', 'use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -394,7 +394,7 @@ public function testForUniqueName ($name, $id = null)
 public function navigationBelongsToCurrentProject ($navigation)
 {
 	// access check
-	if (!oak_check_access('navigation', 'select')) {
+	if (!oak_check_access('navigation', 'use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -440,7 +440,7 @@ public function navigationBelongsToCurrentProject ($navigation)
 public function navigationBelongsToCurrentUser ($navigation)
 {
 	// access check
-	if (!oak_check_access('navigation', 'select')) {
+	if (!oak_check_access('navigation', 'use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	

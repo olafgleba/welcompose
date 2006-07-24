@@ -92,7 +92,7 @@ public function instance()
 public function addTextConverter ($sqlData)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'add')) {
+	if (!oak_check_access('textconverter', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -129,7 +129,7 @@ public function addTextConverter ($sqlData)
 public function updateTextConverter ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'update')) {
+	if (!oak_check_access('textconverter', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -172,7 +172,7 @@ public function updateTextConverter ($id, $sqlData)
 public function deleteTextConverter ($id)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'delete')) {
+	if (!oak_check_access('textconverter', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -210,7 +210,7 @@ public function deleteTextConverter ($id)
 public function selectTextConverter ($id)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -267,7 +267,7 @@ public function selectTextConverter ($id)
 public function selectTextConverters ($params = array())
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -340,7 +340,7 @@ public function selectTextConverters ($params = array())
 public function countTextConverters ($params = array())
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -393,7 +393,7 @@ public function countTextConverters ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -455,7 +455,7 @@ public function testForUniqueName ($name, $id = null)
 public function testForUniqueInternalName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -515,7 +515,7 @@ public function testForUniqueInternalName ($name, $id = null)
 public function applyTextConverter ($id, $text)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -587,7 +587,7 @@ public function applyTextConverter ($id, $text)
 public function textConverterBelongsToCurrentProject ($text_converter)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -633,7 +633,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 public function textConverterBelongsToCurrentUser ($text_converter)
 {
 	// access check
-	if (!oak_check_access('textconverter', 'select')) {
+	if (!oak_check_access('textconverter', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	

@@ -94,7 +94,7 @@ public function instance()
 public function addPingServiceConfiguration ($sqlData)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'add')) {
+	if (!oak_check_access('pingserviceconfiguration', 'manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -130,7 +130,7 @@ public function addPingServiceConfiguration ($sqlData)
 public function updatePingServiceConfiguration ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'update')) {
+	if (!oak_check_access('pingserviceconfiguration', 'manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -173,7 +173,7 @@ public function updatePingServiceConfiguration ($id, $sqlData)
 public function deletePingServiceConfiguration ($id)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'delete')) {
+	if (!oak_check_access('pingserviceconfiguration', 'manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -213,7 +213,7 @@ public function deletePingServiceConfiguration ($id)
 public function selectPingServiceConfiguration ($id)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'select')) {
+	if (!oak_check_access('pingserviceconfiguration', 'use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -284,7 +284,7 @@ public function selectPingServiceConfiguration ($id)
 public function selectPingServiceConfigurations ($params = array())
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'select')) {
+	if (!oak_check_access('pingserviceconfiguration', 'use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -386,7 +386,7 @@ public function selectPingServiceConfigurations ($params = array())
 public function countPingServiceConfigurations ($params = array())
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'select')) {
+	if (!oak_check_access('pingserviceconfiguration', 'use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -455,7 +455,7 @@ public function countPingServiceConfigurations ($params = array())
 public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_configuration)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'select')) {
+	if (!oak_check_access('pingserviceconfiguration', 'use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -506,7 +506,7 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
 public function pingServiceConfigurationBelongsToCurrentUser ($ping_service_configuration)
 {
 	// access check
-	if (!oak_check_access('pingserviceconfiguration', 'select')) {
+	if (!oak_check_access('pingserviceconfiguration', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	

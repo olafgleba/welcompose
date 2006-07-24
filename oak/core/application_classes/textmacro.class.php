@@ -92,7 +92,7 @@ public function instance()
 public function addTextMacro ($sqlData)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'add')) {
+	if (!oak_check_access('textmacro', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -129,7 +129,7 @@ public function addTextMacro ($sqlData)
 public function updateTextMacro ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'update')) {
+	if (!oak_check_access('textmacro', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -172,7 +172,7 @@ public function updateTextMacro ($id, $sqlData)
 public function deleteTextMacro ($id)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'delete')) {
+	if (!oak_check_access('textmacro', 'manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -210,7 +210,7 @@ public function deleteTextMacro ($id)
 public function selectTextMacro ($id)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -270,7 +270,7 @@ public function selectTextMacro ($id)
 public function selectTextMacros ($params = array())
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -366,7 +366,7 @@ public function selectTextMacros ($params = array())
 public function countTextMacros ($params = array())
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -420,7 +420,7 @@ public function countTextMacros ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -480,7 +480,7 @@ public function testForUniqueName ($name, $id = null)
 public function applyTextMacros ($text, $stage = "pre")
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -606,7 +606,7 @@ public function applyTextMacros ($text, $stage = "pre")
 public function textMacroBelongsToCurrentProject ($text_macro)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -652,7 +652,7 @@ public function textMacroBelongsToCurrentProject ($text_macro)
 public function textMacroBelongsToCurrentUser ($text_macro)
 {
 	// access check
-	if (!oak_check_access('textmacro', 'select')) {
+	if (!oak_check_access('textmacro', 'use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	

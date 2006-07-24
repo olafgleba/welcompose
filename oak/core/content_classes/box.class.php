@@ -92,7 +92,7 @@ public function instance()
 public function addBox ($sqlData)
 {
 	// access check
-	if (!oak_check_access('box', 'add')) {
+	if (!oak_check_access('box', 'manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -125,7 +125,7 @@ public function addBox ($sqlData)
 public function updateBox ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('box', 'update')) {
+	if (!oak_check_access('box', 'manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -166,7 +166,7 @@ public function updateBox ($id, $sqlData)
 public function deleteBox ($id)
 {
 	// access check
-	if (!oak_check_access('box', 'delete')) {
+	if (!oak_check_access('box', 'manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -203,7 +203,7 @@ public function deleteBox ($id)
 public function selectBox ($id)
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -270,7 +270,7 @@ public function selectBox ($id)
 public function selectBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -362,7 +362,7 @@ public function selectBoxes ($params = array())
 public function countBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -438,7 +438,7 @@ public function countBoxes ($params = array())
 public function testForUniqueName ($name, $page_id_array)
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -516,7 +516,7 @@ public function testForUniqueName ($name, $page_id_array)
 public function boxBelongsToCurrentProject ($box)
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -566,7 +566,7 @@ public function boxBelongsToCurrentProject ($box)
 public function boxBelongsToCurrentUser ($box)
 {
 	// access check
-	if (!oak_check_access('box', 'select')) {
+	if (!oak_check_access('box', 'use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
