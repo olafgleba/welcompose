@@ -83,7 +83,7 @@ public function instance()
 
 /**
  * Adds page to the page table. Takes a field=>value array with
- * page data as first argument. Returns insert id. 
+ * page data as first argument. Returns insert id.
  * 
  * @throws Content_PageException
  * @param array Row data
@@ -91,13 +91,27 @@ public function instance()
  */
 public function addPage ($sqlData)
 {
+	// access check
+	if (!oak_check_access('page', 'manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_PageException('Input for parameter sqlData is not an array');	
 	}
 	
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_PAGES, $sqlData);
+	$this->base->db->insert(OAK_DB_CONTENT_PAGES, $sqlData);
+	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($sqlData['id'])) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
+	return (int)$sqlData['id'];
 }
 
 /**
@@ -112,6 +126,11 @@ public function addPage ($sqlData)
 */
 public function updatePage ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('page', 'manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PageException('Input for parameter id is not an array');
@@ -120,12 +139,18 @@ public function updatePage ($id, $sqlData)
 		throw new Content_PageException('Input for parameter sqlData is not an array');	
 	}
 	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($id)) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -143,17 +168,28 @@ public function updatePage ($id, $sqlData)
  */
 public function deletePage ($id)
 {
+	// access check
+	if (!oak_check_access('page', 'manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PageException('Input for parameter id is not numeric');
 	}
 	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($id)) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
 	// prepare where clause
-	$where = " WHERE `id` = :id ";
+	$where = " WHERE `id` = :id AND `project` = :project";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -170,6 +206,11 @@ public function deletePage ($id)
  */
 public function selectPage ($id)
 {
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_PageException('Input for parameter id is not numeric');
@@ -182,6 +223,7 @@ public function selectPage ($id)
 	$sql = "
 		SELECT 
 			`content_pages`.`id` AS `id`,
+			`content_pages`.`project` AS `project`,
 			`content_nodes`.`navigation` AS `navigation`,
 			`content_nodes`.`root_node` AS `root_node`,
 			`content_nodes`.`parent` AS `parent`,
@@ -194,8 +236,8 @@ public function selectPage ($id)
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
 			`content_pages`.`url` AS `url`,
-			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`index_page` AS `index_page`,
 			`content_page_types`.`id` AS `page_type_id`,
 			`content_page_types`.`name` AS `page_type_name`
 		FROM
@@ -209,17 +251,18 @@ public function selectPage ($id)
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
+			`content_pages`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `content_pages`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -247,6 +290,11 @@ public function selectPage ($id)
  */
 public function selectPages ($params = array())
 {
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$navigation = null;
 	$root_node = null;
@@ -283,6 +331,7 @@ public function selectPages ($params = array())
 	$sql = "
 		SELECT 
 			`content_pages`.`id` AS `id`,
+			`content_pages`.`project` AS `project`,
 			`content_nodes`.`navigation` AS `navigation`,
 			`content_nodes`.`root_node` AS `root_node`,
 			`content_nodes`.`parent` AS `parent`,
@@ -295,8 +344,8 @@ public function selectPages ($params = array())
 			`content_pages`.`name` AS `name`,
 			`content_pages`.`name_url` AS `name_url`,
 			`content_pages`.`url` AS `url`,
-			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`index_page` AS `index_page`,
 			`content_page_types`.`id` AS `page_type_id`,
 			`content_page_types`.`name` AS `page_type_name`
 		FROM
@@ -310,8 +359,13 @@ public function selectPages ($params = array())
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($navigation) && is_numeric($navigation)) {
@@ -358,6 +412,11 @@ public function selectPages ($params = array())
  */
 public function selectIndexPage ()
 {
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// get id of the index page
 	$sql = "
 		SELECT 
@@ -366,16 +425,28 @@ public function selectIndexPage ()
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		WHERE
 			`content_pages`.`index_page` = '1'
+		  AND
+			`content_pages`.`project` = :project
 		LIMIT
 			1
 	";
 	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
 	// execute query
-	$result = (int)$this->base->db->select($sql, 'field');
+	$result = (int)$this->base->db->select($sql, 'field', $bind_params);
 	
 	// make sure that there is some index page
 	if ($result < 1) {
 		throw new Content_PageException("Unable to find an index page");
+	}
+	
+	// test if found page belongs to current user/project
+	if (!$this->pageBelongsToCurrentUser($result)) {
+		throw new Templating_TemplateException('Page does not belong to the current project');
 	}
 	
 	// return complete page information
@@ -396,6 +467,11 @@ public function selectIndexPage ()
  */
 public function mapPageToGroups ($page, $groups = array())
 {
+	// access check
+	if (!oak_check_access('page', 'manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page) || !is_numeric($page)) {
 		throw new Content_PageException("Input for parameter page is not numeric");
@@ -405,7 +481,7 @@ public function mapPageToGroups ($page, $groups = array())
 	}
 	
 	// let's see if the given template belongs to the current project
-	if (!$this->pageBelongsToCurrentProject($page)) {
+	if (!$this->pageBelongsToCurrentUser($page)) {
 		throw new Templating_TemplateException('Given page does not belong to the current project');
 	}
 	
@@ -439,7 +515,7 @@ public function mapPageToGroups ($page, $groups = array())
 	
 	// add new links
 	foreach ($groups as $_group) {
-		if (!empty($_group) && is_numeric($_group) && $GROUP->groupBelongsToCurrentProject($_group)) {
+		if (!empty($_group) && is_numeric($_group) && $GROUP->groupBelongsToCurrentUser($_group)) {
 			$this->base->db->insert(OAK_DB_CONTENT_PAGES2USER_GROUPS, array('page' => $page, 'group' => $_group));
 		}
 	}
@@ -457,9 +533,19 @@ public function mapPageToGroups ($page, $groups = array())
  */
 public function selectPageToGroupsMap ($page)
 {
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page) || !is_numeric($page)) {
 		throw new Content_PageException("Input for parameter page is expected to be numeric");
+	}
+	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($page)) {
+		throw new Content_PageException('Given page does not belong to current project');
 	}
 	
 	// prepare query
@@ -491,47 +577,6 @@ public function selectPageToGroupsMap ($page)
 }
 
 /**
- * Tests whether given page belongs to current project. Takes the page
- * id as first argument. Returns boolean true or false.
- *
- * @throws Content_PageException
- * @param int Page id
- * @return bool
- */
-public function pageBelongsToCurrentProject ($page)
-{
-	// input check
-	if (empty($page) || !is_numeric($page)) {
-		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
-	}
-	
-	// prepare query
-	$sql = "
-		SELECT
-			COUNT(*)
-		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		WHERE
-			`content_pages`.`id` = :page
-		AND
-			`content_pages`.`project` = :project
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'page' => (int)$page,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// execute query and evaluate result
-	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
  * Prepares table structure for the selected page types. This task has to
  * be executed directly after the page creation. Takes the id of the just
  * created page as first argument. Returns boolean true.
@@ -542,13 +587,18 @@ public function pageBelongsToCurrentProject ($page)
  */
 public function initPageContents ($page)
 {
+	// access check
+	if (!oak_check_access('page', 'manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page) || !is_numeric($page)) {
 		throw new Content_PageException('Input for parameter page  is expected to be numeric');
 	}
 	
-	// test if page belongs to current project
-	if (!$this->pageBelongsToCurrentProject($page)) {
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($page)) {
 		throw new Content_PageException('Given page does not belong to current project');
 	}
 	
@@ -597,9 +647,83 @@ public function initPageContents ($page)
 	return true;
 }
 
-public function movePageAway ($page_id, $new_navigation)
+/**
+ * Tests whether given page belongs to current project. Takes the
+ * page id as first argument. Returns bool.
+ *
+ * @throws Content_PageException
+ * @param int Page id
+ * @return int bool
+ */
+public function pageBelongsToCurrentProject ($page)
 {
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+		
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
+	}
 	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		WHERE
+			`content_pages`.`id` = :page
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'page' => (int)$page,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether page belongs to current user or not. Takes
+ * the page id as first argument. Returns bool.
+ *
+ * @throws Content_PageException
+ * @param int page id
+ * @return bool
+ */
+public function pageBelongsToCurrentUser ($page)
+{
+	// access check
+	if (!oak_check_access('page', 'use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->pageBelongsToCurrentProject($page)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
