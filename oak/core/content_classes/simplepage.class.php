@@ -93,7 +93,7 @@ public function addSimplePage ($sqlData)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'use')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -126,7 +126,7 @@ public function updateSimplePage ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'manage')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -168,7 +168,7 @@ public function deleteSimplePage ($id)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'manage')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -205,7 +205,7 @@ public function selectSimplePage ($id)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'use')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -314,7 +314,7 @@ public function selectSimplePages ($params = array())
 {
 	// access check
 	if (!oak_check_access('simplepage', 'use')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -450,7 +450,7 @@ public function simplePageBelongsToCurrentProject ($simple_page)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'use')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -500,7 +500,7 @@ public function simplePageBelongsToCurrentUser ($simple_page)
 {
 	// access check
 	if (!oak_check_access('simplepage', 'use')) {
-		throw new Content_SimplepageException("You are not allowed to perpage this action");
+		throw new Content_SimplepageException("You are not allowed to perform this action");
 	}
 	
 	// input check
