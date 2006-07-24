@@ -91,12 +91,25 @@ public function instance()
  */
 public function addSimpleForm ($sqlData)
 {
+	// access check
+	if (!oak_check_access('simpleform', 'manage')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Content_SimpleformException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_CONTENT_SIMPLE_FORMS, $sqlData);
+	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_FORMS, $sqlData);
+	
+	// test if simple form belongs to current user/project
+	if (!$this->simpleFormBelongsToCurrentUser($sqlData['id'])) {
+		throw new Content_SimpleformException('Simple form does not belong to current user or project');
+	}
+	
+	return $sqlData['id'];
 }
 
 /**
@@ -111,12 +124,22 @@ public function addSimpleForm ($sqlData)
 */
 public function updateSimpleForm ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('simpleform', 'manage')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimpleformException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Content_SimpleformException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if simple form belongs to current user/project
+	if (!$this->simpleFormBelongsToCurrentUser($id)) {
+		throw new Content_SimpleformException('Simple form does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -143,9 +166,19 @@ public function updateSimpleForm ($id, $sqlData)
  */
 public function deleteSimpleForm ($id)
 {
+	// access check
+	if (!oak_check_access('simpleform', 'manage')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimpleformException('Input for parameter id is not numeric');
+	}
+	
+	// test if simple form belongs to current user/project
+	if (!$this->simpleFormBelongsToCurrentUser($id)) {
+		throw new Content_SimpleformException('Simple form does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -170,6 +203,11 @@ public function deleteSimpleForm ($id)
  */
 public function selectSimpleForm ($id)
 {
+	// access check
+	if (!oak_check_access('simpleform', 'use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Content_SimpleformException('Input for parameter id is not numeric');
@@ -228,9 +266,7 @@ public function selectSimpleForm ($id)
 		WHERE
 			`content_simple_forms`.`id` = :id
 		AND
-			`content_pages`.`project` = :current_project
-		AND
-			`content_simple_forms`.`user` = :current_user
+			`content_pages`.`project` = :project
 		LIMIT
 			1
 	";
@@ -238,8 +274,7 @@ public function selectSimpleForm ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'current_project' => (int)OAK_CURRENT_PROJECT,
-		'current_user' => (int)OAK_CURRENT_USER
+		'project' => (int)OAK_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -260,7 +295,6 @@ public function selectSimpleForm ($id)
  * <li>order_marco, string, otpional: How to sort the result set.
  * Supported macros:
  *    <ul>
- *        <li>USER_NAME: sort by user name</li>
  *        <li>FORM: sorty by form id</li>
  *        <li>DATE_MODIFIED: sorty by date modified</li>
  *        <li>DATE_ADDED: sort by date added</li>
@@ -274,6 +308,11 @@ public function selectSimpleForm ($id)
  */
 public function selectSimpleForms ($params = array())
 {
+	// access check
+	if (!oak_check_access('simpleform', 'use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$user = null;
 	$form = null;
@@ -306,9 +345,8 @@ public function selectSimpleForms ($params = array())
 	
 	// define order macros
 	$macros = array(
-		'USER_NAME' => '`application_users`.`name`',
-		'FORM' => '`content_simple_forms`.`form`',
-		'DATE_ADDED' => '`content_simple_forms`.`date_added` AS `date_added`',
+		'FORM' => '`content_simple_forms`.`id`',
+		'DATE_ADDED' => '`content_simple_forms`.`date_added`',
 		'DATE_MODIFIED' => '`content_simple_forms`.`date_modified`'
 	);
 	
@@ -329,49 +367,52 @@ public function selectSimpleForms ($params = array())
 			`content_simple_forms`.`email_subject` AS `email_subject`,
 			`content_simple_forms`.`date_modified` AS `date_modified`,
 			`content_simple_forms`.`date_added` AS `date_added`,
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`homeform` AS `user_homeform`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
 			`content_pages`.`id` AS `form_id`,
-			`content_pages`.`navigation` AS `form_navigation`,
-			`content_pages`.`root_node` AS `form_root_node`,
-			`content_pages`.`parent` AS `form_parent`,
-			`content_pages`.`level` AS `form_level`,
-			`content_pages`.`sorting` AS `form_sorting`,
+			`content_pages`.`project` AS `form_project`,
 			`content_pages`.`type` AS `form_type`,
 			`content_pages`.`template_set` AS `form_template_set`,
 			`content_pages`.`name` AS `form_name`,
 			`content_pages`.`name_url` AS `form_name_url`,
-			`content_pages`.`protect` AS `form_protect`
+			`content_pages`.`url` AS `form_url`,
+			`content_pages`.`protect` AS `form_protect`,
+			`content_pages`.`index_page` AS `form_index_page`,
+			`content_pages`.`image_small` AS `form_image_small`,
+			`content_pages`.`image_medium` AS `form_image_medium`,
+			`content_pages`.`image_big` AS `form_image_big`
 		FROM
 			".OAK_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
-		ON
-			`content_simple_forms`.`user` = `application_users`.`id`
-		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		ON
-			`content_simple_forms`.`form` = `content_pages`.`id`
+			`content_simple_forms`.`id` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		ON
+			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
+		$sql .= " AND `content_simple_forms`.`id` = :user ";
 		$bind_params['user'] = $user;
 	}
 	if (!empty($form) && is_numeric($form)) {
-		$sql .= " AND `content_pages`.`id` = :form ";
+		$sql .= " AND `content_simple_forms`.`id` = :form ";
 		$bind_params['form'] = $form;
 	}
 	
@@ -390,6 +431,89 @@ public function selectSimpleForms ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests whether given simple form belongs to current project. Takes the
+ * simple form id as first argument. Returns bool.
+ *
+ * @throws Content_SimpleformException
+ * @param int Simple form id
+ * @return int bool
+ */
+public function simpleFormBelongsToCurrentProject ($simple_form)
+{
+	// access check
+	if (!oak_check_access('simpleform', 'use')) {
+		throw new Content_SimpleformException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($simple_form) || !is_numeric($simple_form)) {
+		throw new Content_SimpleformException('Input for parameter simple_form is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_simple_forms`.`id` = `content_pages`.`id`
+		WHERE
+			`content_simple_forms`.`id` = :simple_form
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'simple_form' => (int)$simple_form,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Test whether simple form belongs to current user or not. Takes
+ * the simple form id as first argument. Returns bool.
+ *
+ * @throws Content_SimpleformException
+ * @param int Simple form id
+ * @return bool
+ */
+public function simpleFormBelongsToCurrentUser ($simple_form)
+{
+	// access check
+	if (!oak_check_access('simpleform', 'use')) {
+		throw new Content_SimpleformException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($simple_form) || !is_numeric($simple_form)) {
+		throw new Content_SimpleformException('Input for parameter simple_form is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->simpleFormBelongsToCurrentProject($simple_form)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
