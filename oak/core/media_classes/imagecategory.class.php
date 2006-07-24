@@ -93,7 +93,7 @@ public function addImageCategory ($sqlData)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'manage')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -129,7 +129,7 @@ public function updateImageCategory ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'manage')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -171,7 +171,7 @@ public function deleteImageCategory ($id)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'manage')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -209,7 +209,7 @@ public function selectImageCategory ($id)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -265,7 +265,7 @@ public function selectImageCategories ($params = array())
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -330,7 +330,7 @@ public function countImageCategories ()
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -366,7 +366,7 @@ public function testForUniqueName ($name, $id = null)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -425,7 +425,7 @@ public function imageCategoryBelongsToCurrentProject ($image_category)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -471,7 +471,7 @@ public function imageCategoryBelongsToCurrentUser ($image_category)
 {
 	// access check
 	if (!oak_check_access('imagecategory', 'use')) {
-		throw new Media_ImageCategoryException("You are not allowed to percategory this action");
+		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
 	// input check
