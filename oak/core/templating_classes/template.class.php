@@ -91,6 +91,11 @@ public function instance()
  */
 public function addTemplate ($sqlData)
 {
+	// access check
+	if (!oak_check_access('template', 'manage')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplateException('Input for parameter sqlData is not an array');	
 	}
@@ -98,9 +103,9 @@ public function addTemplate ($sqlData)
 	// insert row
 	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATES, $sqlData);
 	
-	// test if the new template belongs to the current project
-	if (!$this->templateBelongsToCurrentProject($insert_id)) {
-		throw new Templating_TemplateException('Created template does not belong to current project');
+	// test if the new template belongs to the current user/project
+	if (!$this->templateBelongsToCurrentUser($insert_id)) {
+		throw new Templating_TemplateException('Template does not belong to current project or user');
 	}
 	
 	return $insert_id;
@@ -118,6 +123,11 @@ public function addTemplate ($sqlData)
 */
 public function updateTemplate ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('template', 'manage')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplateException('Input for parameter id is not numeric');
@@ -126,9 +136,9 @@ public function updateTemplate ($id, $sqlData)
 		throw new Templating_TemplateException('Input for parameter sqlData is not an array');	
 	}
 	
-	// let's see if the given template belongs to the current project
-	if (!$this->templateBelongsToCurrentProject($id)) {
-		throw new Templating_TemplateException('Given template does not belong to the current project');
+	// test if the new template belongs to the current user/project
+	if (!$this->templateBelongsToCurrentUser($id)) {
+		throw new Templating_TemplateException('Template does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -143,11 +153,6 @@ public function updateTemplate ($id, $sqlData)
 	$affected_rows = $this->base->db->update(OAK_DB_TEMPLATING_TEMPLATES, $sqlData,
 		$where, $bind_params);
 	
-	// test if the new template belongs to the current project
-	if (!$this->templateBelongsToCurrentProject($id)) {
-		throw new Templating_TemplateException('Created template does not belong to current project');
-	}
-	
 	return $affected_rows;
 }
 
@@ -161,9 +166,19 @@ public function updateTemplate ($id, $sqlData)
  */
 public function deleteTemplate ($id)
 {
+	// access check
+	if (!oak_check_access('template', 'manage')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplateException('Input for parameter id is not numeric');
+	}
+	
+	// test if the new template belongs to the current user/project
+	if (!$this->templateBelongsToCurrentUser($id)) {
+		throw new Templating_TemplateException('Template does not belong to current project or user');
 	}
 	
 	// prepare query
@@ -202,6 +217,11 @@ public function deleteTemplate ($id)
  */
 public function selectTemplate ($id)
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplateException('Input for parameter id is not numeric');
@@ -266,6 +286,11 @@ public function selectTemplate ($id)
  */
 public function selectTemplates ($params = array())
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$type = null;
 	$set = null;
@@ -368,6 +393,11 @@ public function selectTemplates ($params = array())
  */
 public function countTemplates ($params = array())
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$type = null;
 	$set = null;
@@ -440,6 +470,11 @@ public function countTemplates ($params = array())
  */
 public function mapTemplateToSets ($template, $sets = array())
 {
+	// access check
+	if (!oak_check_access('template', 'manage')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($template) || !is_numeric($template)) {
 		throw new Templating_TemplateException('Input for parameter template is expected to be a numeric value');
@@ -483,7 +518,7 @@ public function mapTemplateToSets ($template, $sets = array())
 	
 	// add new links
 	foreach ($sets as $_set) {
-		if (!empty($_set) && is_numeric($_set) && $TEMPLATESET->templateSetBelongsToCurrentProject($_set)) {
+		if (!empty($_set) && is_numeric($_set) && $TEMPLATESET->templateSetBelongsToCurrentUser($_set)) {
 			$this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES,
 				array('template' => $template, 'set' => $_set));
 		}
@@ -502,6 +537,11 @@ public function mapTemplateToSets ($template, $sets = array())
  */
 public function selectTemplateToSetsMap ($template)
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($template) || !is_numeric($template)) {
 		throw new Templating_TemplateException("Input for parameter template is expected to be numeric");
@@ -581,6 +621,39 @@ public function templateBelongsToCurrentProject ($template)
 }
 
 /**
+ * Tests whether template belongs to current user or not. Takes
+ * the template id as first argument. Returns bool.
+ *
+ * @throws Templating_TemplateException
+ * @param int Template id
+ * @return bool
+ */
+public function templateBelongsToCurrentUser ($template)
+{
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($template) || !is_numeric($template)) {
+		throw new Templating_TemplateException('Input for parameter template is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->templateBelongsToCurrentProject($template)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
+/**
  * Tests given template name for uniqueness. Takes the template name as
  * first argument and an optional template id as second argument. If
  * the template id is given, this template won't be considered when checking
@@ -594,6 +667,11 @@ public function templateBelongsToCurrentProject ($template)
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Templating_TemplateException("Input for parameter name is not expected to be empty");
@@ -657,6 +735,11 @@ public function testForUniqueName ($name, $id = null)
  */
 public function smartyFetchTemplate ($page_id, $template_type_name)
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page_id) || !is_numeric($page_id)) {
 		throw new Templating_TemplateException("Input for parameter page_id is not numeric");
@@ -671,24 +754,26 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 			`templating_templates`.`content` AS `template`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		  ON
 			`content_pages`.`template_set` = `templating_template_sets`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `templating_template_sets2templating_templates`
 		  ON
 			`templating_template_sets`.`id` = `templating_template_sets2templating_templates`.`set`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
 		  ON
 			`templating_template_sets2templating_templates`.`template` = `templating_templates`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		  ON
 			`templating_templates`.`type` = `templating_template_types`.`id`		
 		WHERE
 			`content_pages`.`id` = :page_id
+		AND
+			`content_pages`.`project` = :project
 		AND
 			`templating_template_types`.`name` = :template_type_name
 		LIMIT
@@ -698,6 +783,7 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 	// prepare bind params
 	$bind_params = array(
 		'page_id' => $page_id,
+		'project' => OAK_CURRENT_PROJECT,
 		'template_name' => $template_type_name
 	);
 	
@@ -720,6 +806,11 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
  */
 public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
 {
+	// access check
+	if (!oak_check_access('template', 'use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page_id) || !is_numeric($page_id)) {
 		throw new Templating_TemplateException("Input for parameter page_id is not numeric");
@@ -734,24 +825,26 @@ public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
 			UNIX_TIMESTAMP(`templating_templates`.`date_modified`) AS `timestamp`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		  ON
 			`content_pages`.`template_set` = `templating_template_sets`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `templating_template_sets2templating_templates`
 		  ON
 			`templating_template_sets`.`id` = `templating_template_sets2templating_templates`.`set`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
 		  ON
 			`templating_template_sets2templating_templates`.`template` = `templating_templates`.`id`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		  ON
 			`templating_templates`.`type` = `templating_template_types`.`id`		
 		WHERE
 			`content_pages`.`id` = :page_id
+		AND
+			`content_pages`.`project` = :project
 		AND
 			`templating_template_types`.`name` = :template_type_name
 		LIMIT
@@ -761,6 +854,7 @@ public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
 	// prepare bind params
 	$bind_params = array(
 		'page_id' => $page_id,
+		'project' => OAK_CURRENT_PROJECT,
 		'template_name' => $template_type_name
 	);
 	
