@@ -91,6 +91,12 @@ public function instance()
  */
 public function addTemplateType ($sqlData)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'manage')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplatetypeException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +105,14 @@ public function addTemplateType ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+	
+	// test if template type belongs to current user/project
+	if (!$this->templateTypeBelongsToCurrentUser($insert_id)) {
+		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +127,22 @@ public function addTemplateType ($sqlData)
 */
 public function updateTemplateType ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'manage')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatetypeException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplatetypeException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if template type belongs to current user/project
+	if (!$this->templateTypeBelongsToCurrentUser($id)) {
+		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -147,9 +170,19 @@ public function updateTemplateType ($id, $sqlData)
  */
 public function deleteTemplateType ($id)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'manage')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatetypeException('Input for parameter id is not numeric');
+	}
+	
+	// test if template type belongs to current user/project
+	if (!$this->templateTypeBelongsToCurrentUser($id)) {
+		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -176,6 +209,11 @@ public function deleteTemplateType ($id)
  */
 public function selectTemplateType ($id)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'use')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatetypeException('Input for parameter id is not numeric');
@@ -229,6 +267,11 @@ public function selectTemplateType ($id)
  */
 public function selectTemplateTypes ($params = array())
 {
+	// access check
+	if (!oak_check_access('templatetype', 'use')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -294,6 +337,11 @@ public function selectTemplateTypes ($params = array())
  */
 public function templateTypeBelongsToCurrentProject ($type)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'use')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($type) || !is_numeric($type)) {
 		throw new Templating_TemplatetypeException('Input for parameter type is expected to be a numeric value');
@@ -326,6 +374,39 @@ public function templateTypeBelongsToCurrentProject ($type)
 }
 
 /**
+ * Tests whether template type belongs to current user or not. Takes
+ * the template type id as first argument. Returns bool.
+ *
+ * @throws Templating_TemplateTypeException
+ * @param int Template type id
+ * @return bool
+ */
+public function templateTypeBelongsToCurrentUser ($template_type)
+{
+	// access check
+	if (!oak_check_access('templatetype', 'use')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($template_type) || !is_numeric($template_type)) {
+		throw new Templating_TemplateTypeException('Input for parameter template tyoe is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->templateTypeBelongsToCurrentProject($template_type)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
+/**
  * Tests given template type name for uniqueness. Takes the template type
  * name as first argument and an optional template type id as second argument.
  * If the template type id is given, this template type won't be considered
@@ -339,6 +420,11 @@ public function templateTypeBelongsToCurrentProject ($type)
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('templatetype', 'use')) {
+		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Templating_TemplatetypeException("Input for parameter name is not expected to be empty");
