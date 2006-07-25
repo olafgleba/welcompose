@@ -93,7 +93,7 @@ public function addGroup ($sqlData)
 {
 	// access check
 	if (!oak_check_access('group', 'manage')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -129,7 +129,7 @@ public function updateGroup ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('group', 'manage')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -171,7 +171,7 @@ public function deleteGroup ($id)
 {
 	// access check
 	if (!oak_check_access('group', 'manage')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -209,7 +209,7 @@ public function selectGroup ($id)
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -279,7 +279,7 @@ public function selectGroups ($params = array())
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -365,7 +365,7 @@ public function mapGroupToRights ($group, $rights = array())
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -446,7 +446,7 @@ public function selectGroupToRightsMap ($group)
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -490,7 +490,7 @@ public function groupBelongsToCurrentProject ($group)
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -527,7 +527,7 @@ public function groupBelongsToCurrentProject ($group)
  * Tests whether group belongs to current user or not. Takes
  * the group id as first argument. Returns bool.
  *
- * @throws Templating_GroupException
+ * @throws User_GroupException
  * @param int Group id
  * @return bool
  */
@@ -535,12 +535,12 @@ public function groupBelongsToCurrentUser ($group)
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($group) || !is_numeric($group)) {
-		throw new Templating_GroupException('Input for parameter group is expected to be a numeric value');
+		throw new User_GroupException('Input for parameter group is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -572,7 +572,7 @@ public function testForUniqueName ($name, $id = null)
 {
 	// access check
 	if (!oak_check_access('group', 'use')) {
-		throw new Templating_GroupException("You are not allowed to perform this action");
+		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// input check
