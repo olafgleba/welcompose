@@ -91,6 +91,11 @@ public function instance()
  */
 public function addTemplateSet ($sqlData)
 {
+	// access check
+	if (!oak_check_access('templateset', 'manage')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplatesetException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +104,14 @@ public function addTemplateSet ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
+	
+	// test if template set belongs to current user/project
+	if (!$this->templateSetBelongsToCurrentUser($insert_id)) {
+		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +126,22 @@ public function addTemplateSet ($sqlData)
 */
 public function updateTemplateSet ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('templateset', 'manage')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatesetException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new Templating_TemplatesetException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if template set belongs to current user/project
+	if (!$this->templateSetBelongsToCurrentUser($id)) {
+		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -147,9 +169,19 @@ public function updateTemplateSet ($id, $sqlData)
  */
 public function deleteTemplateSet ($id)
 {
+	// access check
+	if (!oak_check_access('templateset', 'manage')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatesetException('Input for parameter id is not numeric');
+	}
+	
+	// test if template set belongs to current user/project
+	if (!$this->templateSetBelongsToCurrentUser($id)) {
+		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -176,6 +208,11 @@ public function deleteTemplateSet ($id)
  */
 public function selectTemplateSet ($id)
 {
+	// access check
+	if (!oak_check_access('templateset', 'use')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Templating_TemplatesetException('Input for parameter id is not numeric');
@@ -228,6 +265,11 @@ public function selectTemplateSet ($id)
  */
 public function selectTemplateSets ($params = array())
 {
+	// access check
+	if (!oak_check_access('templateset', 'use')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -292,6 +334,11 @@ public function selectTemplateSets ($params = array())
  */
 public function templateSetBelongsToCurrentProject ($set)
 {
+	// access check
+	if (!oak_check_access('templateset', 'use')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($set) || !is_numeric($set)) {
 		throw new Templating_TemplatesetException('Input for parameter set is expected to be a numeric value');
@@ -324,6 +371,40 @@ public function templateSetBelongsToCurrentProject ($set)
 }
 
 /**
+ * Tests whether template set belongs to current user or not. Takes
+ * the template set id as first argument. Returns bool.
+ *
+ * @throws Templating_TemplateSetException
+ * @param int Template set id
+ * @return bool
+ */
+public function templateSetBelongsToCurrentUser ($template_set)
+{
+	// access check
+	if (!oak_check_access('templateset', 'use')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($template_set) || !is_numeric($template_set)) {
+		throw new Templating_TemplateSetException('Input for parameter template is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->templateSetBelongsToCurrentProject($template_set)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
+
+/**
  * Tests given template set name for uniqueness. Takes the template set
  * name as first argument and an optional template set id as second argument.
  * If the template set id is given, this template set won't be considered
@@ -337,6 +418,11 @@ public function templateSetBelongsToCurrentProject ($set)
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('templateset', 'use')) {
+		throw new Templating_TemplateSetException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new Templating_TemplatesetException("Input for parameter name is not expected to be empty");
