@@ -91,6 +91,12 @@ public function instance()
  */
 public function addGroup ($sqlData)
 {
+	// access check
+	if (!oak_check_access('group', 'manage')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new User_GroupException('Input for parameter sqlData is not an array');	
 	}
@@ -99,7 +105,14 @@ public function addGroup ($sqlData)
 	$sqlData['project'] = OAK_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+	
+	// test if group belongs to current project/user
+	if (!$this->groupBelongsToCurrentUser($insert_id)) {
+		throw new User_GroupException('Group does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -114,12 +127,22 @@ public function addGroup ($sqlData)
  */
 public function updateGroup ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('group', 'manage')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_GroupException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
 		throw new User_GroupException('Input for parameter sqlData is not an array');	
+	}
+	
+	// test if group belongs to current project/user
+	if (!$this->groupBelongsToCurrentUser($id)) {
+		throw new User_GroupException('Group does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -146,9 +169,19 @@ public function updateGroup ($id, $sqlData)
  */
 public function deleteGroup ($id)
 {
+	// access check
+	if (!oak_check_access('group', 'manage')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_GroupException('Input for parameter id is not numeric');
+	}
+	
+	// test if group belongs to current project/user
+	if (!$this->groupBelongsToCurrentUser($id)) {
+		throw new User_GroupException('Group does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -174,6 +207,11 @@ public function deleteGroup ($id)
  */
 public function selectGroup ($id)
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_GroupException('Input for parameter id is not numeric');
@@ -204,18 +242,19 @@ public function selectGroup ($id)
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_groups`.`project` = `application_projects`.`id`
-		WHERE 
+		WHERE
+			`user_groups`.`id` = :id
+		  AND
+			`user_groups`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `user_groups`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -228,7 +267,6 @@ public function selectGroup ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
- * <li>project, int, required: Project id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -239,8 +277,12 @@ public function selectGroup ($id)
  */
 public function selectGroups ($params = array())
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
-	$project_in = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -257,26 +299,8 @@ public function selectGroups ($params = array())
 			case 'limit':
 					$$_key = (int)$_value;
 				break;
-			case 'project_in':
-					$$_key = (array)$_value;
-				break;
 			default:
 				throw new User_GroupException("Unknown parameter $_key");
-		}
-	}
-	
-	// if no project is given, query all projects of the current user
-	if (empty($project) || !is_numeric($project)) {
-		// load project class
-		$PROJECT = load('application:project');
-		
-		// get user's projects
-		$possible_projects = $PROJECT->selectProjects(array('user' => OAK_CURRENT_USER));
-		
-		// prepare the sql-in-array
-		$project_in = array();
-		foreach ($possible_projects as $_project) {
-			$project_in[] = (int)$_project['id'];
 		}
 	}
 	
@@ -311,15 +335,6 @@ public function selectGroups ($params = array())
 		'project' => OAK_CURRENT_PROJECT
 	);
 	
-	/*
-	if (!is_null($project_in) && count($project_in) > 0) {
-		if (Base_Cnc::testArrayForNumericKeys($project_in) && Base_Cnc::testArrayForNumericValues($project_in)) {
-			$sql .= " AND `application_projects`.`id` IN ( :project_in ) ";
-			$bind_params['project_in'] = implode(', ', $project_in);
-		}
-	}
-	*/
-	
 	// add sorting
 	$sql .= " ORDER BY `user_groups`.`name` ";
 	
@@ -348,12 +363,22 @@ public function selectGroups ($params = array())
  */
 public function mapGroupToRights ($group, $rights = array())
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($group) || !is_numeric($group)) {
 		throw new User_GroupException("Input for parameter group is expected to be numeric");
 	}
 	if (empty($group) || !is_numeric($group)) {
 		throw new User_GroupException("Input for parameter group is expected to be numeric");
+	}
+	
+	// test if group belongs to current project/user
+	if (!$this->groupBelongsToCurrentUser($group)) {
+		throw new User_GroupException('Group does not belong to current user or project');
 	}
 	
 	// detach group from all rights
@@ -381,11 +406,19 @@ public function mapGroupToRights ($group, $rights = array())
 	// execute query
 	$this->base->db->execute($sql, $bind_params);
 	
+	// load right class
+	$RIGHT = load('user:right');
+	
 	// add new links if necessary
 	foreach ($rights as $_right) {
 		
 		// input check
 		if (!empty($_right) && is_numeric($_right)) {
+			
+			// test if right belongs to current project/user
+			if (!$RIGHT->rightBelongsToCurrentUser($_right)) {
+				throw new User_GroupException("Right does not belong to current user or project");
+			}
 			
 			// prepare sql data
 			$sqlData = array(
@@ -411,6 +444,11 @@ public function mapGroupToRights ($group, $rights = array())
  */
 public function selectGroupToRightsMap ($group)
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($group) || !is_numeric($group)) {
 		throw new User_GroupException("Input for parameter group is expected to be numeric");
@@ -426,11 +464,14 @@ public function selectGroupToRightsMap ($group)
 			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		WHERE
 			`group` = :group
+		  AND
+			`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'group' => $group
+		'group' => $group,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -447,6 +488,11 @@ public function selectGroupToRightsMap ($group)
  */
 public function groupBelongsToCurrentProject ($group)
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($group) || !is_numeric($group)) {
 		throw new User_GroupException('Input for parameter group is expected to be a numeric value');
@@ -478,6 +524,39 @@ public function groupBelongsToCurrentProject ($group)
 }
 
 /**
+ * Tests whether group belongs to current user or not. Takes
+ * the group id as first argument. Returns bool.
+ *
+ * @throws Templating_GroupException
+ * @param int Group id
+ * @return bool
+ */
+public function groupBelongsToCurrentUser ($group)
+{
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new Templating_GroupException('Input for parameter group is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->groupBelongsToCurrentProject($group)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
+}
+
+/**
  * Tests given group name for uniqueness. Takes the group name as
  * first argument and an optional group id as second argument. If
  * the group id is given, this group won't be considered when checking
@@ -491,6 +570,11 @@ public function groupBelongsToCurrentProject ($group)
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('group', 'use')) {
+		throw new Templating_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new User_GroupException("Input for parameter name is not expected to be empty");
