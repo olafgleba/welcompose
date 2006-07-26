@@ -188,9 +188,6 @@ try {
 			// execute operation
 			$RIGHT->updateRight($FORM->exportValue('id'), $sqlData);
 			
-			// map right to current project
-			$RIGHT->mapRightToProject($FORM->exportValue('id'));
-			
 			// commit
 			$BASE->db->commit();
 		} catch (Exception $e) {

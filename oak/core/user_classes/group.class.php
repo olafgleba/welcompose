@@ -457,15 +457,19 @@ public function selectGroupToRightsMap ($group)
 	// prepare query
 	$sql = "
 		SELECT
-			`id`,
-			`group`,
-			`right`
+			`user_groups2user_rights`.`id`,
+			`user_groups2user_rights`.`group`,
+			`user_groups2user_rights`.`right`
 		FROM
 			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		JOIN
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		  ON
+			`user_groups2user_rights`.`right` = `user_rights`.`id`
 		WHERE
-			`group` = :group
+			`user_groups2user_rights`.`group` = :group
 		  AND
-			`project` = :project
+			`user_rights`.`project` = :project
 	";
 	
 	// prepare bind params

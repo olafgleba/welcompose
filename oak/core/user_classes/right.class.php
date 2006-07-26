@@ -91,12 +91,27 @@ public function instance()
  */
 public function addRight ($sqlData)
 {
+	// access check
+	if (!oak_check_access('right', 'manage')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new User_RightException('Input for parameter sqlData is not an array');	
 	}
 	
+	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	
 	// insert row
-	return $this->base->db->insert(OAK_DB_USER_RIGHTS, $sqlData);
+	$insert_id = $this->base->db->insert(OAK_DB_USER_RIGHTS, $sqlData);
+	
+	// test if right belongs to current user/project
+	if (!$this->rightBelongsToCurrentUser($insert_id)) {
+		throw new User_RightException('Right does not belong to current user or project');
+	}
+	
+	return $insert_id;
 }
 
 /**
@@ -111,6 +126,11 @@ public function addRight ($sqlData)
  */
 public function updateRight ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('right', 'manage')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_RightException('Input for parameter id is not an array');
@@ -119,12 +139,18 @@ public function updateRight ($id, $sqlData)
 		throw new User_RightException('Input for parameter sqlData is not an array');	
 	}
 	
+	// test if right belongs to current user/project
+	if (!$this->rightBelongsToCurrentUser($id)) {
+		throw new User_RightException('Right does not belong to current user or project');
+	}
+	
 	// prepare where clause
-	$where = " WHERE `id` = :id AND `editable` = '1' ";
+	$where = " WHERE `id` = :id AND `editable` = '1' AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// update row
@@ -142,17 +168,28 @@ public function updateRight ($id, $sqlData)
  */
 public function deleteRight ($id)
 {
+	// access check
+	if (!oak_check_access('right', 'manage')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_RightException('Input for parameter id is not numeric');
 	}
 	
+	// test if right belongs to current user/project
+	if (!$this->rightBelongsToCurrentUser($id)) {
+		throw new User_RightException('Right does not belong to current user or project');
+	}
+	
 	// prepare where clause
-	$where = " WHERE `id` = :id AND `editable` = '1' ";
+	$where = " WHERE `id` = :id AND `editable` = '1' AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
-		'id' => (int)$id
+		'id' => (int)$id,
+		'project' => (int)OAK_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -169,6 +206,11 @@ public function deleteRight ($id)
  */
 public function selectRight ($id)
 {
+	// access check
+	if (!oak_check_access('right', 'use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_RightException('Input for parameter id is not numeric');
@@ -181,29 +223,16 @@ public function selectRight ($id)
 	$sql = "
 		SELECT 
 			`user_rights`.`id` AS `id`,
+			`user_rights`.`project` AS `project`,
 			`user_rights`.`name` AS `name`,
 			`user_rights`.`description` AS `description`,
-			`user_rights`.`editable` AS `editable`,
-			`application_projects`.`id` AS `project_id`,
-			`application_projects`.`owner` AS `project_owner`,
-			`application_projects`.`name` AS `project_name`,
-			`application_projects`.`url_name` AS `project_url_name`,
-			`application_projects`.`date_modified` AS `project_date_modified`,
-			`application_projects`.`date_added` AS `project_date_added`
+			`user_rights`.`editable` AS `editable`
 		FROM
 			".OAK_DB_USER_RIGHTS." AS `user_rights`
-		LEFT JOIN
-			".OAK_DB_USER_RIGHTS2APPLICATION_PROJECTS." AS `user_rights2application_projects`
-		  ON
-			`user_rights`.`id` = `user_rights2application_projects`.`right`
-		LEFT JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
-		  ON
-			`user_rights2application_projects`.`project` = `application_projects`.`id`
-		WHERE 
+		WHERE
 			`user_rights`.`id` = :id
 		  AND
-			`application_projects`.`id` = :project
+			`user_rights`.`project` = :project
 		LIMIT
 			1
 	";
@@ -235,6 +264,11 @@ public function selectRight ($id)
  */
 public function selectRights ($params = array())
 {
+	// access check
+	if (!oak_check_access('right', 'use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$start = null;
 	$limit = null;
@@ -261,27 +295,14 @@ public function selectRights ($params = array())
 	$sql = "
 		SELECT 
 			`user_rights`.`id` AS `id`,
+			`user_rights`.`project` AS `project`,
 			`user_rights`.`name` AS `name`,
 			`user_rights`.`description` AS `description`,
-			`user_rights`.`editable` AS `editable`,
-			`application_projects`.`id` AS `project_id`,
-			`application_projects`.`owner` AS `project_owner`,
-			`application_projects`.`name` AS `project_name`,
-			`application_projects`.`url_name` AS `project_url_name`,
-			`application_projects`.`date_modified` AS `project_date_modified`,
-			`application_projects`.`date_added` AS `project_date_added`
+			`user_rights`.`editable` AS `editable`
 		FROM
 			".OAK_DB_USER_RIGHTS." AS `user_rights`
-		LEFT JOIN
-			".OAK_DB_USER_RIGHTS2APPLICATION_PROJECTS." AS `user_rights2application_projects`
-		  ON
-			`user_rights`.`id` = `user_rights2application_projects`.`right`
-		LEFT JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
-		  ON
-			`user_rights2application_projects`.`project` = `application_projects`.`id`
 		WHERE 
-			`application_projects`.`id` = :project	
+			`user_rights`.`project` = :project
 	";
 	
 	// prepare bind params
@@ -304,63 +325,6 @@ public function selectRights ($params = array())
 }
 
 /**
- * Maps right to the current project. Takes right id as first argument.
- * Returns link id. To detach a right from a project, see
- * User_Right::detachRightFromProject().
- * 
- * @throws User_RightException
- * @param int Right id
- * @return int Link id
- */
-public function mapRightToProject ($right)
-{
-	// input check
-	if (empty($right) || !is_numeric($right)) {
-		throw new User_RightException("Input for parameter right is expected to be numeric");
-	}
-	
-	// detach right from project
-	$this->detachRightFromProject($right);
-	
-	// prepare sql data
-	$sqlData = array(
-		'right' => (int)$right,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// create new mapping
-	return $this->base->db->insert(OAK_DB_USER_RIGHTS2APPLICATION_PROJECTS, $sqlData);
-}
-
-/**
- * Detaches right from current project. Takes right id as
- * first argument. Returns amount of affected rows.
- *
- * @throws User_RightException
- * @param int Right id
- * @return int Amount of affected rows
- */
-public function detachRightFromProject ($right)
-{
-	// input check
-	if (empty($right) || !is_numeric($right)) {
-		throw new User_RightException("Input for parameter right is expected to be numeric");
-	}
-	
-	// prepare where clause
-	$where = " WHERE `right` = :right AND `project` = :project ";
-	
-	// prepare bind params
-	$bind_params = array(
-		'right' => (int)$right,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// delete right<->project mapping
-	return $this->base->db->delete(OAK_DB_USER_RIGHTS2APPLICATION_PROJECTS, $where, $bind_params);
-}
-
-/**
  * Tests given right name for uniqueness. Takes the right name as
  * first argument and an optional right id as second argument. If
  * the right id is given, this right won't be considered when checking
@@ -374,6 +338,11 @@ public function detachRightFromProject ($right)
  */
 public function testForUniqueName ($name, $id = null)
 {
+	// access check
+	if (!oak_check_access('right', 'use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name)) {
 		throw new User_RightException("Input for parameter name is not expected to be empty");
@@ -393,11 +362,14 @@ public function testForUniqueName ($name, $id = null)
 			".OAK_DB_USER_RIGHTS." AS `user_rights`
 		WHERE
 			`name` = :name
+		  AND
+			`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'name' => $name
+		'name' => $name,
+		'project' => (int)$project
 	);
 	
 	// if id isn't empty, add id check
@@ -412,7 +384,84 @@ public function testForUniqueName ($name, $id = null)
 	} else {
 		return true;
 	}
+}
+
+/**
+ * Tests whether given right belongs to current project. Takes the right
+ * id as first argument. Returns boolean true or false.
+ *
+ * @throws User_RightException
+ * @param int Right id
+ * @return bool
+ */
+public function rightBelongsToCurrentProject ($right)
+{
+	// access check
+	if (!oak_check_access('right', 'use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
 	
+	// input check
+	if (empty($right) || !is_numeric($right)) {
+		throw new User_RightException('Input for parameter right is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		WHERE
+			`user_rights`.`id` = :right
+		AND
+			`user_rights`.`project` = :project
+	";
+	// prepare bind params
+	$bind_params = array(
+		'right' => (int)$right,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Tests whether right belongs to current user or not. Takes
+ * the right id as first argument. Returns bool.
+ *
+ * @throws User_RightException
+ * @param int Right id
+ * @return bool
+ */
+public function rightBelongsToCurrentUser ($right)
+{
+	// access check
+	if (!oak_check_access('right', 'use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($right) || !is_numeric($right)) {
+		throw new User_RightException('Input for parameter right is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->rightBelongsToCurrentProject($right)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class

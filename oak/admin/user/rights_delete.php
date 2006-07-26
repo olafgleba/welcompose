@@ -86,20 +86,8 @@ try {
 		// start transaction
 		$BASE->db->begin();
 		
-		// first, we have to get the right to see if it's one we can only detach from
-		// or one that's deletable.
-		$right = $RIGHT->selectRight(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-		
-		if (isset($right['editable']) && $right['editable']) {
-			// detach from current project
-			$RIGHT->detachRightFromProject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-			
-			// delete row
-			$RIGHT->deleteRight(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-		} else {
-			// detach from current project
-			$RIGHT->detachRightFromProject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));			
-		}
+		// delete row
+		$RIGHT->deleteRight(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();

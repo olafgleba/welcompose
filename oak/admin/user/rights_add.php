@@ -155,6 +155,7 @@ try {
 		
 		// create the article group
 		$sqlData = array();
+		$sqlData['project'] = OAK_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['editable'] = "1";
@@ -170,9 +171,6 @@ try {
 			
 			// execute operation
 			$right_id = $RIGHT->addRight($sqlData);
-			
-			// map right to current project
-			$RIGHT->mapRightToProject($right_id);
 			
 			// commit
 			$BASE->db->commit();

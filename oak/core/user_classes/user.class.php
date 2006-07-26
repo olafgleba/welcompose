@@ -96,6 +96,12 @@ public function instance()
  */
 public function addUser ($sqlData)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
 	if (!is_array($sqlData)) {
 		throw new User_UserException('Input for parameter sqlData is not an array');	
 	}
@@ -116,6 +122,11 @@ public function addUser ($sqlData)
 */
 public function updateUser ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_UserException('Input for parameter id is not numeric');
@@ -147,6 +158,11 @@ public function updateUser ($id, $sqlData)
  */
 public function deleteUser ($id)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_UserException('Input for parameter id is not numeric');
@@ -174,6 +190,11 @@ public function deleteUser ($id)
  */
 public function selectUser ($id)
 {
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_UserException('Input for parameter id is not numeric');
@@ -272,6 +293,11 @@ public function selectUser ($id)
  */
 public function selectUsers ($params = array())
 {
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$group = null;
 	$name = null;
@@ -409,6 +435,11 @@ public function selectUsers ($params = array())
  */
 public function mapUserToGroup ($user, $group = null)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
@@ -423,7 +454,7 @@ public function mapUserToGroup ($user, $group = null)
 			 ".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		USING
 			`user_users2user_groups`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_USER_GROUPS." AS `user_groups`
 		ON
 			`user_users2user_groups`.`group` = `user_groups`.`id`
@@ -444,6 +475,14 @@ public function mapUserToGroup ($user, $group = null)
 	
 	// if group is not empty, add new link
 	if (!empty($group) && is_numeric($group)) {	
+		// load group class
+		$GROUP = load('user:group');
+		
+		// test if group belongs to current user
+		if (!$GROUP->groupBelongsToCurrentUser($group)) {
+			throw new User_UserException('Group does not belong to current project');
+		}
+		
 		// prepare sql data
 		$sqlData = array(
 			'user' => (int)$user,
@@ -469,6 +508,11 @@ public function mapUserToGroup ($user, $group = null)
  */
 public function mapUserToProject ($user, $active = 1, $author = 0)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
@@ -499,6 +543,11 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
  */
 public function detachUserFromProject ($user)
 {
+	// access check
+	if (!oak_check_access('user', 'manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
@@ -531,6 +580,11 @@ public function detachUserFromProject ($user)
  */
 public function testForUniqueEmail ($email, $id = null)
 {
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($email)) {
 		throw new User_GroupException("Input for parameter email is not expected to be empty");
@@ -582,6 +636,11 @@ public function testForUniqueEmail ($email, $id = null)
  */
 public function isDeletable ($user)
 {
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// check input
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
@@ -633,6 +692,11 @@ public function initUserAdmin ()
  */
 public function userBelongsToCurrentProject ($user)
 {
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException('Input for parameter user is expected to be a numeric value');
@@ -668,6 +732,39 @@ public function userBelongsToCurrentProject ($user)
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Tests whether user belongs to current user or not. Takes
+ * the user id as first argument. Returns bool.
+ *
+ * @throws User_GroupException
+ * @param int Group id
+ * @return bool
+ */
+public function userBelongsToCurrentUser ($user)
+{
+	// access check
+	if (!oak_check_access('user', 'use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_GroupException('Input for parameter user is expected to be a numeric value');
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	if (!$this->userBelongsToCurrentProject($user)) {
+		return false;
+	}
+	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+		return false;
+	}
+	
+	return true;
 }
 
 // end of class
