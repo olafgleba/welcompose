@@ -59,6 +59,7 @@ define("OAK_DB_CONTENT_SIMPLE_PAGES", "content_simple_pages");
 define("OAK_DB_MEDIA_DOCUMENTS", "media_documents");
 define("OAK_DB_MEDIA_DOCUMENT_CATEGORIES", "media_document_categories");
 define("OAK_DB_MEDIA_IMAGES", "media_images");
+define("OAK_DB_MEDIA_IMAGE_CATEGORIES", "media_image_categories");
 define("OAK_DB_MEDIA_IMAGE_THUMBNAILS", "media_image_thumbnails");
 
 // templating table aliases
@@ -71,7 +72,6 @@ define("OAK_DB_TEMPLATING_TEMPLATE_TYPES", "templating_template_types");
 define("OAK_DB_USER_GROUPS", "user_groups");
 define("OAK_DB_USER_GROUPS2USER_RIGHTS", "user_groups2user_rights");
 define("OAK_DB_USER_RIGHTS", "user_rights");
-define("OAK_DB_USER_RIGHTS2APPLICATION_PROJECTS", "user_rights2application_projects");
 define("OAK_DB_USER_USERS", "user_users");
 define("OAK_DB_USER_USERS2APPLICATION_PROJECTS", "user_users2application_projects");
 define("OAK_DB_USER_USERS2USER_GROUPS", "user_users2user_groups");

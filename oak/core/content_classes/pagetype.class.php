@@ -415,7 +415,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 		WHERE
 			`content_page_types`.`id` = :page_type
 		  AND
-			`content_pages`.`project` = :project
+			`content_page_types`.`project` = :project
 	";
 	
 	// prepare bind params

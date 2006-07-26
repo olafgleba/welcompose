@@ -95,7 +95,8 @@ try {
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('An image category with the given name already exists'), 'testForNameUniqueness');
+	$FORM->addRule('name', gettext('An image category with the given name already exists'),
+		'testForNameUniqueness', $FORM->exportValue('id'));
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update image category'),
