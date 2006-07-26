@@ -1,0 +1,1 @@
+<?php header("Location: content/pages_select.php"); ?>

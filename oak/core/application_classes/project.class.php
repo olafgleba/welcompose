@@ -385,7 +385,7 @@ public function initProjectAdmin ($user)
 {
 	// input check
 	if (empty($user) || !is_numeric($user)) {
-		throw new Application_ProjectExpception("Input for parameter user is expected to be numeric");
+		throw new Application_ProjectException("Input for parameter user is expected to be numeric");
 	}
 	
 	// load cookie class
@@ -398,6 +398,17 @@ public function initProjectAdmin ($user)
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
 	if (!is_null($current_project) && $this->project_exists($current_project)) {
+		// load user class
+		$USER = load('user:user');
+		
+		// let's see if the current user is part of the current project
+		if (!$USER->userIsAuthor($user, $current_project)) {
+			throw new Application_ProjectException("User is not an author of the found project");
+		}
+		if (!$USER->userIsActive($user, $current_project)) {
+			throw new Application_ProjectException("User is not active");
+		}
+		
 		// define constant
 		define('OAK_CURRENT_PROJECT', (int)$current_project);
 		
@@ -418,6 +429,17 @@ public function initProjectAdmin ($user)
 		if (!empty($result[0]['id']) && is_numeric($result[0]['id']) && intval($result[0]['id']) > 0) {
 			// define constant
 			define('OAK_CURRENT_PROJECT', (int)$result[0]['id']);
+			
+			// load user class
+			$USER = load('user:user');
+
+			// let's see if the current user is part of the current project
+			if (!$USER->userIsAuthor($user, OAK_CURRENT_PROJECT)) {
+				throw new Application_ProjectException("User is not an author of the found project");
+			}
+			if (!$USER->userIsActive($user, OAK_CURRENT_PROJECT)) {
+				throw new Application_ProjectException("User is not active");
+			}
 			
 			// put the project id into the cookie
 			$COOKIE->adminSwitchCurrentProject(OAK_CURRENT_PROJECT);

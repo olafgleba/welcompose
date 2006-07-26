@@ -274,7 +274,7 @@ public function selectUser ($id)
  * 
  * <ul>
  * <li>group, int, optional: User group id</li>
- * <li>name, string, optional: User name</li>
+ * <li>email, string, optional: E-mail address</li>
  * <li>author, int, optional: Author bit (either 0 or 1)</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
@@ -300,7 +300,7 @@ public function selectUsers ($params = array())
 	
 	// define some vars
 	$group = null;
-	$name = null;
+	$email = null;
 	$author = null;
 	$start = null;
 	$limit = null;
@@ -315,7 +315,7 @@ public function selectUsers ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'name':
+			case 'email':
 			case 'order_marco':
 					$$_key = (string)$_value;
 				break;
@@ -622,8 +622,7 @@ public function testForUniqueEmail ($email, $id = null)
 		return false;
 	} else {
 		return true;
-	}
-	
+	}	
 }
 
 /**
@@ -675,11 +674,312 @@ public function isDeletable ($user)
 	}
 }
 
+/**
+ * Proceeds user login. Compares supplied email address and secret
+ * with the email addresses and secrets stored in database. If the
+ * the combination of email address and secret is found, the user id
+ * will be stored in the current session.
+ *
+ * Please be aware that a successful login is not a guarantee, that the
+ * current user is active or an author. Please use functions like
+ * User_User::userIsAuthor() or User_User::userIsActive() to check
+ * this.
+ *
+ * Takes the email address of the user to login as first argument,
+ * its secret as second argument. Returns bool.
+ * 
+ * @throws User_UserException
+ * @param string E-mail address
+ * @param string Secret
+ * @return bool
+ */
+public function login ($input_email, $input_secret)
+{
+	// input check
+	if (empty($input_secret)) {
+		throw new User_UserException('Input for parameter input_secret is not expected to be empty');
+	}
+	if (empty($input_email)) {
+		throw new User_UserException('Input for parameter input_email is not expected to be empty');
+	}
+	
+	// let's see if email/secret matches the email/secret stored in database
+	if (!$this->testSecret($input_secret, $input_email)) {
+		throw new User_UserException("Invalid login");
+	}
+	
+	// get user's encrypted secret
+	$sql = "
+		SELECT
+			`id`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		WHERE
+			`user_users`.`email` = :email
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'email' => $input_email
+	);
+	
+	// get user id from database
+	$id = $this->base->db->select($sql, 'field', $bind_params);
+	
+	// save user id to session
+	$_SESSION['admin']['user'] = $id;
+	
+	return true;
+}
+
+/**
+ * Tests if current visitor is logged into the admin area using
+ * the user id supplied by the current session. Returns bool.
+ * 
+ * Please be aware that positive return value is not a guarantee,
+ * that the current user is active or an author. Please use functions
+ * like User_User::userIsAuthor() or User_User::userIsActive() to
+ * check this.
+ * 
+ * @return bool
+ */
+public function userIsLoggedIntoAdmin ()
+{
+	// import user id from session
+	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
+	
+	if (is_null($user_id)) {
+		return false;
+	}
+	
+	// make sure that the user exists
+	if (!$this->userExists($user_id)) {
+		return false;
+	}
+	
+	return true;
+}
+
+/** 
+ * Sets OAK_CURRENT_USER constant using the user id saved in the
+ * open session. Returns user id.
+ *
+ * @throws User_UserException
+ * @return int User id
+ */
 public function initUserAdmin ()
 {
-	define('OAK_CURRENT_USER', 1);
+	// import user id from session
+	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
 	
-	return 1;
+	// make sure that the user exists
+	if (!$this->userExists($user_id)) {
+		throw new User_UserException("User does not exist");
+	}
+	
+	// define constant for current user
+	define('OAK_CURRENT_USER', $user_id);
+	
+	// return id of current user
+	return $user_id;
+}
+
+public function userExists ($user, $project = null)
+{
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException('Input for parameter user is not expected to be empty');
+	}
+	if (!empty($project) && !is_numeric($project)) {
+		throw new User_UserException('Input for parameter project is not expected to be empty');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		LEFT JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users`.`id` = :user
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $user
+	);
+	
+	// add where clauses
+	if (!empty($project)) {
+		$sql .= " AND `user_users2application_projects`.`project` = :project ";
+		$bind_params['project'] = $project;
+	}
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) < 1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Tests if given user is an author of the given project. Takes
+ * the user id as first argument, the project id as second
+ * argument. Returns bool.
+ * 
+ * @throws User_UserException
+ * @param int User id
+ * @param int Project id
+ * @return bool
+ */ 
+public function userIsAuthor ($user, $project)
+{
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException('Input for parameter user is not expected to be empty');
+	}
+	if (empty($project) || !is_numeric($project)) {
+		throw new User_UserException('Input for parameter project is not expected to be empty');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users`.`id` = :user
+		AND
+			`user_users2application_projects`.`project` = :project 
+		AND
+			`user_users2application_projects`.`author` = '1'
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $user,
+		'project' => $project
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) < 1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Test if user is an active user of the given project. Takes
+ * the user id as first argument, the project id as second
+ * argument. Returns bool.
+ * 
+ * @throws User_UserException
+ * @param int User id
+ * @param int Project id
+ * @return bool
+ */
+public function userIsActive ($user, $project)
+{
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException('Input for parameter user is not expected to be empty');
+	}
+	if (empty($project) || !is_numeric($project)) {
+		throw new User_UserException('Input for parameter project is not expected to be empty');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users`.`id` = :user
+		AND
+			`user_users2application_projects`.`project` = :project 
+		AND
+			`user_users2application_projects`.`active` = '1'
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $user,
+		'project' => $project
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) < 1) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Tests if given secret matches the secret stored in the database. Takes
+ * user's secret as first argument and user's email address as second
+ * argument. Returns bool.
+ *
+ * @throws User_UserException
+ * @param string Secret
+ * @param string E-mail address
+ * @return bool 
+ */
+public function testSecret ($input_secret, $input_email)
+{
+	// input test
+	if (empty($input_secret)) {
+		throw new User_UserException('Input for parameter input_secret is not expected to be empty');
+	}
+	if (empty($input_email)) {
+		throw new User_UserException('Input for parameter input_email is not expected to be empty');
+	}	
+	
+	// get user's encrypted secret
+	$sql = "
+		SELECT
+			`secret`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		WHERE
+			`user_users`.`email` = :email
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'email' => $input_email
+	);
+	
+	// get secret from database
+	$secret = $this->base->db->select($sql, 'field', $bind_params);
+	
+	// if the secret is empty, return false
+	if (empty($secret)) {
+		return false;
+	}
+	
+	// test password
+	if (crypt($input_secret, $secret) === $secret) {
+		return true;
+	}
+	
+	return false;
 }
 
 /**

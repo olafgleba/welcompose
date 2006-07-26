@@ -71,6 +71,10 @@ try {
 	$TEMPLATETYPE = load('templating:templatetype');
 		
 	// init user and project
+	if (!$USER->userIsLoggedIntoAdmin()) {
+		header("Location: ../login.php");
+		exit;
+	}
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	

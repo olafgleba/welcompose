@@ -71,6 +71,10 @@ try {
 	$RIGHT = load('user:right');
 		
 	// init user and project
+	if (!$USER->userIsLoggedIntoAdmin()) {
+		header("Location: ../login.php");
+		exit;
+	}
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
