@@ -92,7 +92,7 @@ public function instance()
 public function addDocumentCategory ($sqlData)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'manage')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Manage')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -128,7 +128,7 @@ public function addDocumentCategory ($sqlData)
 public function updateDocumentCategory ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'manage')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Manage')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updateDocumentCategory ($id, $sqlData)
 public function deleteDocumentCategory ($id)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'manage')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Manage')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -208,7 +208,7 @@ public function deleteDocumentCategory ($id)
 public function selectDocumentCategory ($id)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -264,7 +264,7 @@ public function selectDocumentCategory ($id)
 public function selectDocumentCategories ($params = array())
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -329,7 +329,7 @@ public function selectDocumentCategories ($params = array())
 public function countDocumentCategories ()
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -365,7 +365,7 @@ public function countDocumentCategories ()
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -424,7 +424,7 @@ public function testForUniqueName ($name, $id = null)
 public function documentCategoryBelongsToCurrentProject ($document_category)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -470,7 +470,7 @@ public function documentCategoryBelongsToCurrentProject ($document_category)
 public function documentCategoryBelongsToCurrentUser ($document_category)
 {
 	// access check
-	if (!oak_check_access('documentcategory', 'use')) {
+	if (!oak_check_access('Media', 'DocumentCategory', 'Use')) {
 		throw new Media_DocumentCategoryException("You are not allowed to perform this action");
 	}
 	

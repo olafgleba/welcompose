@@ -92,7 +92,7 @@ public function instance()
 public function addGroup ($sqlData)
 {
 	// access check
-	if (!oak_check_access('group', 'manage')) {
+	if (!oak_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -128,7 +128,7 @@ public function addGroup ($sqlData)
 public function updateGroup ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('group', 'manage')) {
+	if (!oak_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updateGroup ($id, $sqlData)
 public function deleteGroup ($id)
 {
 	// access check
-	if (!oak_check_access('group', 'manage')) {
+	if (!oak_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -208,7 +208,7 @@ public function deleteGroup ($id)
 public function selectGroup ($id)
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -278,11 +278,12 @@ public function selectGroup ($id)
 public function selectGroups ($params = array())
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
+	$user = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -295,6 +296,7 @@ public function selectGroups ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'user':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -326,6 +328,10 @@ public function selectGroups ($params = array())
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_groups`.`project` = `application_projects`.`id`
+		LEFT JOIN
+			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		  ON
+			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE 
 			`user_groups`.`project` = :project
 	";
@@ -334,6 +340,12 @@ public function selectGroups ($params = array())
 	$bind_params = array(
 		'project' => OAK_CURRENT_PROJECT
 	);
+	
+	// add where clauses
+	if (!empty($user)) {
+		$sql .= " AND `user_users2user_groups`.`user` = :user ";
+		$bind_params['user'] = (int)$user;
+	}
 	
 	// add sorting
 	$sql .= " ORDER BY `user_groups`.`name` ";
@@ -364,7 +376,7 @@ public function selectGroups ($params = array())
 public function mapGroupToRights ($group, $rights = array())
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -445,7 +457,7 @@ public function mapGroupToRights ($group, $rights = array())
 public function selectGroupToRightsMap ($group)
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -493,7 +505,7 @@ public function selectGroupToRightsMap ($group)
 public function groupBelongsToCurrentProject ($group)
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -538,7 +550,7 @@ public function groupBelongsToCurrentProject ($group)
 public function groupBelongsToCurrentUser ($group)
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -575,7 +587,7 @@ public function groupBelongsToCurrentUser ($group)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('group', 'use')) {
+	if (!oak_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	

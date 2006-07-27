@@ -92,7 +92,7 @@ public function instance()
 public function addTemplateSet ($sqlData)
 {
 	// access check
-	if (!oak_check_access('templateset', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function addTemplateSet ($sqlData)
 public function updateTemplateSet ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('templateset', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updateTemplateSet ($id, $sqlData)
 public function deleteTemplateSet ($id)
 {
 	// access check
-	if (!oak_check_access('templateset', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -209,7 +209,7 @@ public function deleteTemplateSet ($id)
 public function selectTemplateSet ($id)
 {
 	// access check
-	if (!oak_check_access('templateset', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -266,7 +266,7 @@ public function selectTemplateSet ($id)
 public function selectTemplateSets ($params = array())
 {
 	// access check
-	if (!oak_check_access('templateset', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -335,7 +335,7 @@ public function selectTemplateSets ($params = array())
 public function templateSetBelongsToCurrentProject ($set)
 {
 	// access check
-	if (!oak_check_access('templateset', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -381,7 +381,7 @@ public function templateSetBelongsToCurrentProject ($set)
 public function templateSetBelongsToCurrentUser ($template_set)
 {
 	// access check
-	if (!oak_check_access('templateset', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -419,7 +419,7 @@ public function templateSetBelongsToCurrentUser ($template_set)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('templateset', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	

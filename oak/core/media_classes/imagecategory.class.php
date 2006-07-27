@@ -92,7 +92,7 @@ public function instance()
 public function addImageCategory ($sqlData)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'manage')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Manage')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -128,7 +128,7 @@ public function addImageCategory ($sqlData)
 public function updateImageCategory ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'manage')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Manage')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updateImageCategory ($id, $sqlData)
 public function deleteImageCategory ($id)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'manage')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Manage')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -208,7 +208,7 @@ public function deleteImageCategory ($id)
 public function selectImageCategory ($id)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -264,7 +264,7 @@ public function selectImageCategory ($id)
 public function selectImageCategories ($params = array())
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -329,7 +329,7 @@ public function selectImageCategories ($params = array())
 public function countImageCategories ()
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -365,7 +365,7 @@ public function countImageCategories ()
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -424,7 +424,7 @@ public function testForUniqueName ($name, $id = null)
 public function imageCategoryBelongsToCurrentProject ($image_category)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	
@@ -470,7 +470,7 @@ public function imageCategoryBelongsToCurrentProject ($image_category)
 public function imageCategoryBelongsToCurrentUser ($image_category)
 {
 	// access check
-	if (!oak_check_access('imagecategory', 'use')) {
+	if (!oak_check_access('Media', 'ImageCategory', 'Use')) {
 		throw new Media_ImageCategoryException("You are not allowed to perform this action");
 	}
 	

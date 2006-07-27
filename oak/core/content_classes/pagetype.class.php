@@ -92,7 +92,7 @@ public function instance()
 public function addPageType ($sqlData)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'manage')) {
+	if (!oak_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -128,7 +128,7 @@ public function addPageType ($sqlData)
 public function updatePageType ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'manage')) {
+	if (!oak_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -170,7 +170,7 @@ public function updatePageType ($id, $sqlData)
 public function deletePageType ($id)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'manage')) {
+	if (!oak_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -208,7 +208,7 @@ public function deletePageType ($id)
 public function selectPageType ($id)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'use')) {
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -266,7 +266,7 @@ public function selectPageType ($id)
 public function selectPageTypes ($params = array())
 {
 	// access check
-	if (!oak_check_access('pagetype', 'use')) {
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -339,7 +339,7 @@ public function selectPageTypes ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'use')) {
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -397,7 +397,7 @@ public function testForUniqueName ($name, $id = null)
 public function pageTypeBelongsToCurrentProject ($page_type)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'use')) {
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -443,7 +443,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 public function pageTypeBelongsToCurrentUser ($page_type)
 {
 	// access check
-	if (!oak_check_access('pagetype', 'use')) {
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	

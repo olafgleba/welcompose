@@ -78,7 +78,7 @@ try {
 	$FORM->applyFilter('secret', 'trim');
 	$FORM->applyFilter('secret', 'strip_tags');
 	$FORM->addRule('secret', gettext('Please enter your password'), 'required');
-	$FORM->addRule('secret', gettext('Invalid passowrd'), 'testSecret', $FORM->exportValue('email'));
+	$FORM->addRule('secret', gettext('Invalid password'), 'testSecret', $FORM->exportValue('email'));
 		
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Login'),

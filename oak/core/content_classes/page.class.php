@@ -92,7 +92,7 @@ public function instance()
 public function addPage ($sqlData)
 {
 	// access check
-	if (!oak_check_access('page', 'manage')) {
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function addPage ($sqlData)
 public function updatePage ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('page', 'manage')) {
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -169,7 +169,7 @@ public function updatePage ($id, $sqlData)
 public function deletePage ($id)
 {
 	// access check
-	if (!oak_check_access('page', 'manage')) {
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -207,7 +207,7 @@ public function deletePage ($id)
 public function selectPage ($id)
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -291,7 +291,7 @@ public function selectPage ($id)
 public function selectPages ($params = array())
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -413,7 +413,7 @@ public function selectPages ($params = array())
 public function selectIndexPage ()
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -468,7 +468,7 @@ public function selectIndexPage ()
 public function mapPageToGroups ($page, $groups = array())
 {
 	// access check
-	if (!oak_check_access('page', 'manage')) {
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -534,7 +534,7 @@ public function mapPageToGroups ($page, $groups = array())
 public function selectPageToGroupsMap ($page)
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -588,7 +588,7 @@ public function selectPageToGroupsMap ($page)
 public function initPageContents ($page)
 {
 	// access check
-	if (!oak_check_access('page', 'manage')) {
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -658,7 +658,7 @@ public function initPageContents ($page)
 public function pageBelongsToCurrentProject ($page)
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 		
@@ -704,7 +704,7 @@ public function pageBelongsToCurrentProject ($page)
 public function pageBelongsToCurrentUser ($page)
 {
 	// access check
-	if (!oak_check_access('page', 'use')) {
+	if (!oak_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	

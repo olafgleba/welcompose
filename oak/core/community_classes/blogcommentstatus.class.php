@@ -92,7 +92,7 @@ public function instance()
 public function addBlogCommentStatus ($sqlData)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'manage')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -126,7 +126,7 @@ public function addBlogCommentStatus ($sqlData)
 public function updateBlogCommentStatus ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'manage')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -169,7 +169,7 @@ public function updateBlogCommentStatus ($id, $sqlData)
 public function deleteBlogCommentStatus ($id)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'manage')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -207,7 +207,7 @@ public function deleteBlogCommentStatus ($id)
 public function selectBlogCommentStatus ($id)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -264,7 +264,7 @@ public function selectBlogCommentStatus ($id)
 public function selectBlogCommentStatuses ($params = array())
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -337,7 +337,7 @@ public function selectBlogCommentStatuses ($params = array())
 public function countBlogCommentStatuses ($params = array())
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -390,7 +390,7 @@ public function countBlogCommentStatuses ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -448,7 +448,7 @@ public function testForUniqueName ($name, $id = null)
 public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	
@@ -494,7 +494,7 @@ public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 public function blogCommentStatusBelongsToCurrentUser ($blog_comment_status)
 {
 	// access check
-	if (!oak_check_access('blogcommentstatus', 'use')) {
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogcommentstatusException("You are not allowed to perform this action");
 	}
 	

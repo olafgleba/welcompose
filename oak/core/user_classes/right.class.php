@@ -92,7 +92,7 @@ public function instance()
 public function addRight ($sqlData)
 {
 	// access check
-	if (!oak_check_access('right', 'manage')) {
+	if (!oak_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function addRight ($sqlData)
 public function updateRight ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('right', 'manage')) {
+	if (!oak_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -169,7 +169,7 @@ public function updateRight ($id, $sqlData)
 public function deleteRight ($id)
 {
 	// access check
-	if (!oak_check_access('right', 'manage')) {
+	if (!oak_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -207,7 +207,7 @@ public function deleteRight ($id)
 public function selectRight ($id)
 {
 	// access check
-	if (!oak_check_access('right', 'use')) {
+	if (!oak_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -254,6 +254,7 @@ public function selectRight ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>group, int, optional: Group id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -265,11 +266,12 @@ public function selectRight ($id)
 public function selectRights ($params = array())
 {
 	// access check
-	if (!oak_check_access('right', 'use')) {
+	if (!oak_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
+	$group = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -282,6 +284,7 @@ public function selectRights ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'group':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -301,6 +304,10 @@ public function selectRights ($params = array())
 			`user_rights`.`editable` AS `editable`
 		FROM
 			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		LEFT JOIN
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE 
 			`user_rights`.`project` = :project
 	";
@@ -309,6 +316,12 @@ public function selectRights ($params = array())
 	$bind_params = array(
 		'project' => OAK_CURRENT_PROJECT
 	);
+	
+	// add where clauses
+	if (!empty($group)) {
+		$sql .= " AND `user_groups2user_rights`.`group` = :group ";
+		$bind_params['group'] = $group;
+	}
 	
 	// add sorting
 	$sql .= " ORDER BY `user_rights`.`name` ";
@@ -339,7 +352,7 @@ public function selectRights ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('right', 'use')) {
+	if (!oak_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -397,7 +410,7 @@ public function testForUniqueName ($name, $id = null)
 public function rightBelongsToCurrentProject ($right)
 {
 	// access check
-	if (!oak_check_access('right', 'use')) {
+	if (!oak_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -442,7 +455,7 @@ public function rightBelongsToCurrentProject ($right)
 public function rightBelongsToCurrentUser ($right)
 {
 	// access check
-	if (!oak_check_access('right', 'use')) {
+	if (!oak_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	

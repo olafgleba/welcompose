@@ -92,7 +92,7 @@ public function instance()
 public function addBlogPosting ($sqlData)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'manage')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -125,7 +125,7 @@ public function addBlogPosting ($sqlData)
 public function updateBlogPosting ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'manage')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -167,7 +167,7 @@ public function updateBlogPosting ($id, $sqlData)
 public function deleteBlogPosting ($id)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'manage')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -204,7 +204,7 @@ public function deleteBlogPosting ($id)
 public function selectBlogPosting ($id)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'use')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -325,7 +325,7 @@ public function selectBlogPosting ($id)
 public function selectBlogPostings ($params = array())
 {
 	// access check
-	if (!oak_check_access('blogposting', 'use')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -496,7 +496,7 @@ public function selectBlogPostings ($params = array())
 public function countBlogPostings ($params = array())
 {
 	// access check
-	if (!oak_check_access('blogposting', 'use')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -588,7 +588,7 @@ public function countBlogPostings ($params = array())
 public function blogPostingBelongsToCurrentProject ($blog_posting)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'use')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -638,7 +638,7 @@ public function blogPostingBelongsToCurrentProject ($blog_posting)
 public function blogPostingBelongsToCurrentUser ($blog_posting)
 {
 	// access check
-	if (!oak_check_access('blogposting', 'use')) {
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	

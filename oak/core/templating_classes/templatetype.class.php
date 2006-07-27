@@ -92,7 +92,7 @@ public function instance()
 public function addTemplateType ($sqlData)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -128,7 +128,7 @@ public function addTemplateType ($sqlData)
 public function updateTemplateType ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -171,7 +171,7 @@ public function updateTemplateType ($id, $sqlData)
 public function deleteTemplateType ($id)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'manage')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -210,7 +210,7 @@ public function deleteTemplateType ($id)
 public function selectTemplateType ($id)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -268,7 +268,7 @@ public function selectTemplateType ($id)
 public function selectTemplateTypes ($params = array())
 {
 	// access check
-	if (!oak_check_access('templatetype', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -338,7 +338,7 @@ public function selectTemplateTypes ($params = array())
 public function templateTypeBelongsToCurrentProject ($type)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -384,7 +384,7 @@ public function templateTypeBelongsToCurrentProject ($type)
 public function templateTypeBelongsToCurrentUser ($template_type)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -421,7 +421,7 @@ public function templateTypeBelongsToCurrentUser ($template_type)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('templatetype', 'use')) {
+	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	

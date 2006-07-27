@@ -92,7 +92,7 @@ public function instance()
 public function addSimpleForm ($sqlData)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'manage')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -125,7 +125,7 @@ public function addSimpleForm ($sqlData)
 public function updateSimpleForm ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'manage')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -167,7 +167,7 @@ public function updateSimpleForm ($id, $sqlData)
 public function deleteSimpleForm ($id)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'manage')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -204,7 +204,7 @@ public function deleteSimpleForm ($id)
 public function selectSimpleForm ($id)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'use')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -309,7 +309,7 @@ public function selectSimpleForm ($id)
 public function selectSimpleForms ($params = array())
 {
 	// access check
-	if (!oak_check_access('simpleform', 'use')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
 		throw new Content_BlogpostingException("You are not allowed to perform this action");
 	}
 	
@@ -444,7 +444,7 @@ public function selectSimpleForms ($params = array())
 public function simpleFormBelongsToCurrentProject ($simple_form)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'use')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
 		throw new Content_SimpleformException("You are not allowed to perform this action");
 	}
 	
@@ -494,7 +494,7 @@ public function simpleFormBelongsToCurrentProject ($simple_form)
 public function simpleFormBelongsToCurrentUser ($simple_form)
 {
 	// access check
-	if (!oak_check_access('simpleform', 'use')) {
+	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
 		throw new Content_SimpleformException("You are not allowed to perform this action");
 	}
 	

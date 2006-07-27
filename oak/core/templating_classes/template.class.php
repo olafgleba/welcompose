@@ -92,7 +92,7 @@ public function instance()
 public function addTemplate ($sqlData)
 {
 	// access check
-	if (!oak_check_access('template', 'manage')) {
+	if (!oak_check_access('Templating', 'Template', 'Manage')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -124,7 +124,7 @@ public function addTemplate ($sqlData)
 public function updateTemplate ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('template', 'manage')) {
+	if (!oak_check_access('Templating', 'Template', 'Manage')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -167,7 +167,7 @@ public function updateTemplate ($id, $sqlData)
 public function deleteTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('template', 'manage')) {
+	if (!oak_check_access('Templating', 'Template', 'Manage')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -218,7 +218,7 @@ public function deleteTemplate ($id)
 public function selectTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -287,7 +287,7 @@ public function selectTemplate ($id)
 public function selectTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -394,7 +394,7 @@ public function selectTemplates ($params = array())
 public function countTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -471,7 +471,7 @@ public function countTemplates ($params = array())
 public function mapTemplateToSets ($template, $sets = array())
 {
 	// access check
-	if (!oak_check_access('template', 'manage')) {
+	if (!oak_check_access('Templating', 'Template', 'Manage')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -538,7 +538,7 @@ public function mapTemplateToSets ($template, $sets = array())
 public function selectTemplateToSetsMap ($template)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -585,6 +585,11 @@ public function selectTemplateToSetsMap ($template)
  */
 public function templateBelongsToCurrentProject ($template)
 {
+	// access check
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($template) || !is_numeric($template)) {
 		throw new Templating_TemplateException('Input for parameter template is expected to be a numeric value');
@@ -631,7 +636,7 @@ public function templateBelongsToCurrentProject ($template)
 public function templateBelongsToCurrentUser ($template)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -668,7 +673,7 @@ public function templateBelongsToCurrentUser ($template)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -736,7 +741,7 @@ public function testForUniqueName ($name, $id = null)
 public function smartyFetchTemplate ($page_id, $template_type_name)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
@@ -807,7 +812,7 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
 {
 	// access check
-	if (!oak_check_access('template', 'use')) {
+	if (!oak_check_access('Templating', 'Template', 'Use')) {
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	

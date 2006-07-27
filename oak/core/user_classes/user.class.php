@@ -31,9 +31,16 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-function oak_check_access ($area = null, $right = null)
+/**
+ * Wrapper for User_User::userCheckAccess();
+ */
+function oak_check_access ($area = null, $component = null, $action = null)
 {
-	return true;
+	// get instance of user class
+	$USER = User_User::instance();
+	
+	// run access check
+	return $USER->userCheckAccess($area, $component, $action);
 }
 
 class User_User {
@@ -97,7 +104,7 @@ public function instance()
 public function addUser ($sqlData)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -123,7 +130,7 @@ public function addUser ($sqlData)
 public function updateUser ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -159,7 +166,7 @@ public function updateUser ($id, $sqlData)
 public function deleteUser ($id)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -191,7 +198,7 @@ public function deleteUser ($id)
 public function selectUser ($id)
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -294,7 +301,7 @@ public function selectUser ($id)
 public function selectUsers ($params = array())
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -436,7 +443,7 @@ public function selectUsers ($params = array())
 public function mapUserToGroup ($user, $group = null)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -509,7 +516,7 @@ public function mapUserToGroup ($user, $group = null)
 public function mapUserToProject ($user, $active = 1, $author = 0)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -544,7 +551,7 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 public function detachUserFromProject ($user)
 {
 	// access check
-	if (!oak_check_access('user', 'manage')) {
+	if (!oak_check_access('User', 'User', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -581,7 +588,7 @@ public function detachUserFromProject ($user)
 public function testForUniqueEmail ($email, $id = null)
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -636,7 +643,7 @@ public function testForUniqueEmail ($email, $id = null)
 public function isDeletable ($user)
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -729,6 +736,58 @@ public function login ($input_email, $input_secret)
 	// save user id to session
 	$_SESSION['admin']['user'] = $id;
 	
+	// init project admin
+	$PROJECT = load('application:project');
+	$PROJECT->initProjectAdmin($id);
+	
+	// get user's rights
+	$sql = "
+		SELECT
+			`user_rights`.`id`,
+			`user_rights`.`name`
+		FROM
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		JOIN
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
+		JOIN
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		  ON
+			`user_groups2user_rights`.`group` = `user_groups`.`id`
+		  AND
+			`user_groups`.`project` = `user_rights`.`project`
+		JOIN
+			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		  ON
+			`user_groups`.`id` = `user_users2user_groups`.`group`
+		WHERE
+			`user_users2user_groups`.`user` = :user
+		  AND
+			`user_rights`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $id,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// prepare rights array
+	$_SESSION['admin']['rights'] = array();
+	foreach ($this->base->db->select($sql, 'multi', $bind_params) as $_right) {
+		$_SESSION['admin']['rights'][(int)$_right['id']] = $_right['name'];
+	}
+	
+	// get group
+	$GROUP = load('user:group');
+	foreach ($GROUP->selectGroups(array('user' => $id)) as $_group) {
+		if (!empty($_group['id']) && is_numeric($_group['id'])) {
+			$_SESSION['admin']['group'] = $_group['id'];
+			break;
+		}
+	}
+	
 	return true;
 }
 
@@ -784,6 +843,16 @@ public function initUserAdmin ()
 	return $user_id;
 }
 
+/**
+ * Finds out whether user exists or nut. Takes the user id
+ * as first argument, the project id as second argument.
+ * Returns bool.
+ * 
+ * @throws User_UserException
+ * @param int User id
+ * @param int Project id
+ * @return bool
+ */
 public function userExists ($user, $project = null)
 {
 	// input check
@@ -983,6 +1052,54 @@ public function testSecret ($input_secret, $input_email)
 }
 
 /**
+ * Test if user has access to given area/component/action. Takes the
+ * area name as first argument, the component name as second argument
+ * and the action name as third argument. Returns bool.
+ * 
+ * @throws User_UserException
+ * @param string Area name
+ * @param string Component name
+ * @param string Action name
+ * @return bool
+ */
+public function userCheckAccess($area = null, $component = null, $action = null) 
+{
+	// if every parameter is null, we can simply return true
+	if (is_null($area) && is_null($component) && is_null($action)) {
+		return true;
+	}
+	
+	// build right components array
+	$action_components = array();
+	if (!empty($area) && !is_null(Base_Cnc::filterRequest($area, OAK_REGEX_ALPHANUMERIC))) {
+		$action_components[] = strtoupper($area);
+	}
+	if (!empty($component) && !is_null(Base_Cnc::filterRequest($component, OAK_REGEX_ALPHANUMERIC))) {
+		$action_components[] = strtoupper($component);
+	}
+	if (!empty($action) && !is_null(Base_Cnc::filterRequest($action, OAK_REGEX_ALPHANUMERIC))) {
+		$action_components[] = strtoupper($action);
+	}
+		
+	// turn components array into string
+	$action_string = implode('_', $action_components);
+	
+	// make sure that there's a rights array
+	if (empty($_SESSION['admin']['rights']) || !is_array($_SESSION['admin']['rights'])) {
+		throw new User_UserException("No rights array found");
+	}
+	
+	// look for the right string in the list of user rights
+	foreach ($_SESSION['admin']['rights'] as $_right_id => $_right) {
+		if ($_right === $action_string) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+/**
  * Tests whether user belongs to current project. Takes user
  * id as first argument. Returns bool.
  *
@@ -993,7 +1110,7 @@ public function testSecret ($input_secret, $input_email)
 public function userBelongsToCurrentProject ($user)
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -1045,7 +1162,7 @@ public function userBelongsToCurrentProject ($user)
 public function userBelongsToCurrentUser ($user)
 {
 	// access check
-	if (!oak_check_access('user', 'use')) {
+	if (!oak_check_access('User', 'User', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
