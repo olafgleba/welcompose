@@ -339,7 +339,7 @@ function OakInit_getCbxStatus (elems)
 				for (var i = 0; i < allNodes.length; i++) {
 					var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
 					if (_process == range) {
-						allNodes[i].style.color = applicationTextColor;
+						allNodes[i].style.color = this.applicationTextColor;
 					}
 				}
 					Element.show(range);
