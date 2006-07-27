@@ -827,7 +827,7 @@ function Tables_hideRow (elem)
 		// process outer table tr
 		setTimeout("Tables.collapseRow('"+ this.obid +"')", 400);
 		
-		this.elem.className = uploadClass;
+		this.elem.className = this.uploadClass;
 		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
