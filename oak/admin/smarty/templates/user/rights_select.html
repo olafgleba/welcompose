@@ -68,24 +68,21 @@ var selection = '{$session.selection}';
 
 <table summary="{i18n Right List}" class="user">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="405" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="175" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="400" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name} <span class="az"></span> <span class="za"></span></th>
-<th class="email">{i18n Description}</th>
-<th class="proj">{i18n Project} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Description} <span class="az"></span> <span class="za"></span></th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$rights item=_right}
 <tr>
-<td>{$_right.name|escape:"htmlall"}</td>
+<td>{$_right.name|escape:"htmlall"|wordwrap:45:"<br />\n":true}</td>
 <td>{$_right.description|escape:"htmlall"|nl2br}</td>
-<td>{$_right.project_name|escape:"htmlall"}</td>
 {if $_right.editable}
 <td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
