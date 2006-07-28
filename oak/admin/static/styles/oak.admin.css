@@ -488,13 +488,18 @@ margin: 5px 0;
 padding: 18px 0 0 0;
 height: 1.5em;
 }
+label.contmedia {
+margin: 5px 0;
+padding: 5px 0 0 0;
+height: 1.5em;
+}
 label.cont.h04 {
 height: 4.7em;
 }
 label.cont.h13 {
 height: 13em;
 }
-label.cont.h34 {
+label.cont.h34, label.contmedia.h34 {
 height: 34em;
 }
 label span.bez {
@@ -733,7 +738,7 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 float: right;
 width: 238px;
 height: 600px;
-background: red;
+background: transparent;
 }
 
 /* %M =misc */
@@ -790,4 +795,20 @@ padding-bottom: 15px;
 }
 #login form.botbg {
 width: 710px;
+}
+
+
+
+
+#mmanager {
+display: block;
+width: 690px;
+margin: 30px 0 0 0;
+padding: 0;
+}
+
+#mmanager span.bez {
+display: block; 
+float: left;
+width: 140px;
 }
