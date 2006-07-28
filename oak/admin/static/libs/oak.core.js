@@ -332,7 +332,7 @@ function OakInit_getCbxStatus (elems)
 			var range = String(elems[e])  + '_container';
 			
 			if ($(range)) {
-				if ($(elems[e]).checked == true) {
+				if ($(elems[e]).checked === true) {
 	
 				allNodes = document.getElementsByClassName("bez");
 				
@@ -357,27 +357,6 @@ function OakInit_getCbxStatus (elems)
  * Building new instance for class Help
  */
 OakInit = new OakInit();
-
-
-
-/**
- * Construct a new DevError object
- * @class This is the basic Error class wich is throwed by explicit setting  
- * @constructor
- * @param {string} msg exception error message presented by catch statement
- */
-function DevError(msg) 
-{
-	this.name = 'DevError';
-	this.message = msg;
-}
-
-/**
- * Building new instance for obj DevError to throw errors
- * at specific points within functions
- */
-DevError.prototype = new Error;
-
 
 /**
  * Construct a new Help object
@@ -729,7 +708,7 @@ function Status_getCbx (elems)
 				var range = String(this.elems[e])  + '_container';
 				
 				if ($(range)) {
-					if ($(this.elems[e]).checked == true) {
+					if ($(this.elems[e]).checked === true) {
 		
 					allNodes = document.getElementsByClassName("bez");
 					
@@ -898,6 +877,24 @@ function _applyError (exception)
 	}
 	alert (errStr);
 }
+
+/**
+ * Construct a new DevError object
+ * @class This is the basic Error class wich is throwed by explicit setting  
+ * @constructor
+ * @param {string} msg exception error message presented by catch statement
+ */
+function DevError(msg) 
+{
+	this.name = 'DevError';
+	this.message = msg;
+}
+
+/**
+ * Building new instance for obj DevError to throw errors
+ * at specific points within functions
+ */
+DevError.prototype = new Error;
 
 /**
  * Build new XMLHTTPRequest Instance
