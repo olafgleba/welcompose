@@ -304,12 +304,12 @@ function OakInit_getVars ()
 	try {
 		if (typeof response != 'undefined' && $('rp')) {
 			if (response == 1) {
-				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0})
+				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0});
 			}
 		}
 	   if (typeof selection != 'undefined' && $('sel')) {
 			if (selection == 1) {
-				return new Effect.Fade('sel', {duration: 0.8, delay: 2.0})
+				return new Effect.Fade('sel', {duration: 0.8, delay: 2.0});
 			}
 		}
 	} catch (e) {
@@ -401,7 +401,7 @@ function Help_show (elem, level)
 	try {
 		// properties
 		this.elem = elem;
-		this.attr = 'for'
+		this.attr = 'for';
 		this.level = level;
 		
 		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
@@ -426,11 +426,11 @@ function Help_show (elem, level)
 			
 		if (typeof this.req != 'undefined') {
 		
-			var url		= this.url;
-			var target	= this.target;
+			var _url		= this.url;
+			var _target		= this.target;
 		
-			_req.open('GET', url, true);
-			_req.onreadystatechange = function () { Help.process(url,target);};
+			_req.open('GET', _url, true);
+			_req.onreadystatechange = function () { Help.process(_url,_target);};
 			_req.send('');
 		}
 		
@@ -550,17 +550,17 @@ Navigation.prototype.process = Navigation_process;
 /**
  * Implements method of prototype class Navigation
  * @param {string} name The name of the file to catch
- * @param {string} target Wich layer div should be used
+ * @param {string} level Wich layer div should be used
  * @throws applyError on exception
  */
-function Navigation_show (name, target)
+function Navigation_show (name, level)
 {
 	try {
 		// properties
 		this.name = name;
-		this.url = this.parseNavUrl + '?page=' + this.name;	
+		this.url = this.parseNavUrl + '?page=' + this.name;
 		
-		switch (this.target) {
+		switch (this.level) {
 			case '2' :
 					this.target = this.navLyTwo;
 				break;
@@ -570,11 +570,11 @@ function Navigation_show (name, target)
 		
 		if (typeof this.req != 'undefined') {
 		
-			var url		= this.url;
-			var target	= this.target;
+			var _url		= this.url;
+			var _target		= this.target;
 		
-			_req.open('GET', url, true);
-			_req.onreadystatechange = function () { Navigation.process(url,target);};
+			_req.open('GET', _url, true);
+			_req.onreadystatechange = function () { Navigation.process(_url,_target);};
 			_req.send('');
 		}
 	} catch (e) {
@@ -894,7 +894,7 @@ function DevError(msg)
  * Building new instance for obj DevError to throw errors
  * at specific points within functions
  */
-DevError.prototype = new Error;
+DevError.prototype = new Error();
 
 /**
  * Build new XMLHTTPRequest Instance
