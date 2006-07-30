@@ -340,7 +340,7 @@ public function countProjects ($params = array())
  * @param int Project id
  * @return bool
  */
-public function project_exists ($id) 
+public function projectExists ($id) 
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
@@ -397,7 +397,7 @@ public function initProjectAdmin ($user)
 	
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
-	if (!is_null($current_project) && $this->project_exists($current_project)) {
+	if (!is_null($current_project) && $this->projectExists($current_project)) {
 		// load user class
 		$USER = load('user:user');
 		
