@@ -1,0 +1,21 @@
+{include file="header.html"}
+
+<div id="main">
+<h1>Error</h1>
+</div>
+<div id="main">
+
+<div class="lFloat">
+
+<p>An error occured on file {$file} at line {$line}</p>
+
+<p>with the following message: {$message}</p>
+<p>Errorcode is: {$code}<br />
+Trace:<br />
+{$trace_string|nl2br}
+</p>
+
+</div>
+
+<!-- main --></div>
+{include file="footer.html"}
