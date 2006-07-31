@@ -50,12 +50,8 @@ function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	$page_id = trim($tpl_name_parts[1]);
 
 	// get template source
-	try {
-		$tpl_source = $TEMPLATE->smartyFetchTemplate($page_id, $template_type_name);
-		return true;
-	} catch (Exception $e) {
-		return false;
-	}
+	$tpl_source = $TEMPLATE->smartyFetchTemplate($page_id, $template_type_name);
+	return true;
 }
 
 function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
@@ -75,14 +71,10 @@ function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	$tpl_name_parts = explode('.', $tpl_name);
 	$template_type_name = trim($tpl_name_parts[0]);
 	$page_id = trim($tpl_name_parts[1]);
-
+	
 	// get template source
-	try {
-		$tpl_timestamp = $TEMPLATE->smartyFetchTemplateTimestamp($page_id, $template_type_name);
-		return true;
-	} catch (Exception $e) {
-		return false;
-	}
+	$tpl_timestamp = $TEMPLATE->smartyFetchTemplateTimestamp($page_id, $template_type_name);
+	return true;
 }
 
 function oakresource_isSecure ($tpl_name, &$smarty)

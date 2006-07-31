@@ -268,8 +268,6 @@ public function selectSimplePage ($id)
 			`content_simple_pages`.`id` = :id
 		AND
 			`content_pages`.`project` = :project
-		AND
-			`content_simple_pages`.`user` = :user
 		LIMIT
 			1
 	";
@@ -277,8 +275,7 @@ public function selectSimplePage ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => (int)OAK_CURRENT_PROJECT,
-		'user' => (int)OAK_CURRENT_USER
+		'project' => (int)OAK_CURRENT_PROJECT
 	);
 	
 	// execute query and return result

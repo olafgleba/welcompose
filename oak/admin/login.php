@@ -22,6 +22,9 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
+// define area constant
+define('OAK_CURRENT_AREA', 'ADMIN');
+
 // get loader
 $path_parts = array(
 	dirname(__FILE__),
@@ -117,7 +120,7 @@ try {
 		$FORM->freeze();
 		
 		// log in user
-		$USER->login($FORM->exportValue('email'), $FORM->exportValue('secret'));
+		$USER->logIntoAdmin($FORM->exportValue('email'), $FORM->exportValue('secret'));
 		
 		// redirect
 		$SESSION->save();

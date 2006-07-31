@@ -197,11 +197,6 @@ public function deleteUser ($id)
  */
 public function selectUser ($id)
 {
-	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
-	}
-	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_UserException('Input for parameter id is not numeric');
@@ -300,11 +295,6 @@ public function selectUser ($id)
  */
 public function selectUsers ($params = array())
 {
-	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
-	}
-	
 	// define some vars
 	$group = null;
 	$email = null;
@@ -426,6 +416,53 @@ public function selectUsers ($params = array())
 	}
 	
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Returns anonymous user of the current project. Throws exception
+ * if no anonymous user can be found. 
+ * 
+ * @throws User_UserException
+ * @return array
+ */
+public function selectAnonymousUser ()
+{
+	$sql = "
+		SELECT
+			`user_users`.`id` AS `id`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		JOIN
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		  ON
+			`user_users2application_projects`.`project` = `application_projects`.`id`
+		WHERE
+			`user_users`.`email` = 'OAK_ANONYMOUS'
+		  AND
+			`application_projects`.`id` = :project
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query
+	$result = (int)$this->base->db->select($sql, 'field', $bind_params);
+	
+	// make sure that there is some anonymous user
+	if ($result < 1) {
+		throw new User_UserException("Unable to find the anonymouser user of the current project");
+	}
+	
+	// return complete user information
+	return $this->selectUser($result);
 }
 
 /**
@@ -700,7 +737,7 @@ public function isDeletable ($user)
  * @param string Secret
  * @return bool
  */
-public function login ($input_email, $input_secret)
+public function logIntoAdmin ($input_email, $input_secret)
 {
 	// input check
 	if (empty($input_secret)) {
@@ -819,6 +856,87 @@ public function userIsLoggedIntoAdmin ()
 	return true;
 }
 
+public function logIntoPublicAreaAsAnonymous ($anon_user)
+{
+	// let's see if this user is really an anonymous user
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		WHERE
+			`user_users`.`id` = :id
+		  AND
+			`user_users`.`email` = 'OAK_ANONYMOUS'
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => $anon_user
+	);
+	
+	// evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) !== 1) {
+		throw new User_UserException('Given user does not exist or is not an anonymous user');
+	}
+	
+	// make sure that the user id is empty, so that a new "login" will be done
+	// on every new request
+	$_SESSION['public_area']['user'] = null;
+	
+	// get user's rights
+	$sql = "
+		SELECT
+			`user_rights`.`id`,
+			`user_rights`.`name`
+		FROM
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		JOIN
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
+		JOIN
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		  ON
+			`user_groups2user_rights`.`group` = `user_groups`.`id`
+		  AND
+			`user_groups`.`project` = `user_rights`.`project`
+		JOIN
+			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		  ON
+			`user_groups`.`id` = `user_users2user_groups`.`group`
+		WHERE
+			`user_users2user_groups`.`user` = :user
+		  AND
+			`user_rights`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $anon_user,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// prepare rights array
+	$_SESSION['public_area']['rights'] = array();
+	foreach ($this->base->db->select($sql, 'multi', $bind_params) as $_right) {
+		$_SESSION['public_area']['rights'][(int)$_right['id']] = $_right['name'];
+	}
+	
+	// get group
+	$GROUP = load('user:group');
+	foreach ($GROUP->selectGroups(array('user' => $anon_user)) as $_group) {
+		if (!empty($_group['id']) && is_numeric($_group['id'])) {
+			$_SESSION['public_area']['group'] = $_group['id'];
+			break;
+		}
+	}
+	
+	return true;
+}
+
 /** 
  * Sets OAK_CURRENT_USER constant using the user id saved in the
  * open session. Returns user id.
@@ -841,6 +959,47 @@ public function initUserAdmin ()
 	
 	// return id of current user
 	return $user_id;
+}
+
+/**
+ * Initialises "user environment" for the public area. Sets the
+ * OAK_CURRENT_USER and the OAK_CURRENT_USER_ANONYMOUS constants
+ * using the saved user id in the open session or the anonymous
+ * user configured for the current project. Returns user id.
+ *
+ * @return int User id
+ */
+public function initUserPublicArea ()
+{
+	// import user id from session
+	$user_id = Base_Cnc::filterRequest($_SESSION['public']['user'], OAK_REGEX_NUMERIC);
+	
+	// if there's no user id or the user does not exist, register the
+	// user as anonymous user
+	if (is_null($user_id) || !$this->userExists($user_id) || !$this->userBelongsToCurrentProject($user_id)) {
+		// get anonymous user of the current project
+		$anon_user = $this->selectAnonymousUser();
+		
+		// now we have to login the guy here as anonymous user. sucks a bit, but
+		// what else shall we do?
+		$this->logIntoPublicAreaAsAnonymous($anon_user['id']);
+		
+		// define constant for current user
+		define('OAK_CURRENT_USER', (int)$anon_user['id']);
+		
+		// define anon user constant
+		define('OAK_CURRENT_USER_ANONYMOUS', true);
+		
+		return OAK_CURRENT_USER;
+	} else {
+		// define constant for current user
+		define('OAK_CURRENT_USER', (int)$user_id);
+		
+		// define anon user constant
+		define('OAK_CURRENT_USER_ANONYMOUS', false);
+		
+		return OAK_CURRENT_USER;
+	}
 }
 
 /**
@@ -1084,15 +1243,29 @@ public function userCheckAccess($area = null, $component = null, $action = null)
 	// turn components array into string
 	$action_string = implode('_', $action_components);
 	
-	// make sure that there's a rights array
-	if (empty($_SESSION['admin']['rights']) || !is_array($_SESSION['admin']['rights'])) {
-		throw new User_UserException("No rights array found");
-	}
+	if (OAK_CURRENT_AREA == "ADMIN") {
+		// make sure that there's a rights array
+		if (empty($_SESSION['admin']['rights']) || !is_array($_SESSION['admin']['rights'])) {
+			throw new User_UserException("No rights array found");
+		}
 	
-	// look for the right string in the list of user rights
-	foreach ($_SESSION['admin']['rights'] as $_right_id => $_right) {
-		if ($_right === $action_string) {
-			return true;
+		// look for the right string in the list of user rights
+		foreach ($_SESSION['admin']['rights'] as $_right_id => $_right) {
+			if ($_right === $action_string) {
+				return true;
+			}
+		}
+	} elseif (OAK_CURRENT_AREA == "PUBLIC") {
+		// make sure that there's a rights array
+		if (empty($_SESSION['public_area']['rights']) || !is_array($_SESSION['public_area']['rights'])) {
+			throw new User_UserException("No rights array found");
+		}
+		
+		// look for the right string in the list of user rights
+		foreach ($_SESSION['public_area']['rights'] as $_right_id => $_right) {
+			if ($_right === $action_string) {
+				return true;
+			}
 		}
 	}
 	

@@ -22,6 +22,9 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
+// define area constant
+define('OAK_CURRENT_AREA', 'ADMIN');
+
 // get loader
 $path_parts = array(
 	dirname(__FILE__),
@@ -100,6 +103,10 @@ try {
 	// select available navigations
 	$navigations = $NAVIGATION->selectNavigations();
 	$BASE->utility->smarty->assign('navigations', $navigations);
+	
+	// let's see how many index pages there are
+	$index_page_count = $PAGE->countPages(array('index_page' => 1));
+	$BASE->utility->smarty->assign('index_page_count', $index_page_count);
 	
 	// get pages
 	$page_arrays = array();

@@ -404,6 +404,120 @@ public function selectPages ($params = array())
 }
 
 /**
+ * Method to count pages. Takes key=>value array with counting
+ * params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>index_page, int, optional: whether to select index pages (0/1)</li>
+ * <li>navigation, int, optional: Navigation id</li>
+ * <li>root_node, int, optional: Root node id</li>
+ * <li>parent, int, optional: Parent node id</li>
+ * <li>level, int, optional: Level count</li>
+ * <li>sorting, int, optional: Sorting count</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws Content_PageException
+ * @param array Count params
+ * @return array
+ */
+public function countPages ($params = array())
+{
+	// access check
+	if (!oak_check_access('Content', 'Page', 'Use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$index_page = null;
+	$navigation = null;
+	$root_node = null;
+	$parent = null;
+	$level = null;
+	$sorting = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_PageException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'index_page':
+			case 'navigation':
+			case 'root_node':
+			case 'parent':
+			case 'level':
+			case 'sorting':
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Content_PageException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(DISTINCT `content_pages`.`id`) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
+		JOIN
+			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		  ON
+			`content_pages`.`type` = `content_page_types`.`id`
+		WHERE 
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($index_page) && is_numeric($index_page)) {
+		$sql .= " AND `content_pages`.`index_page` = :index_page ";
+		$bind_params['index_page'] = (string)$index_page;
+	}
+	if (!empty($navigation) && is_numeric($navigation)) {
+		$sql .= " AND `content_nodes`.`navigation` = :navigation ";
+		$bind_params['navigation'] = $navigation;
+	}
+	if (!empty($root_node) && is_numeric($root_node)) {
+		$sql .= " AND `content_nodes`.`root_node` = :root_node ";
+		$bind_params['root_node'] = $root_node;
+	}
+	if (!empty($parent) && is_numeric($parent)) {
+		$sql .= " AND `content_nodes`.`parent` = :parent ";
+		$bind_params['parent'] = $parent;
+	}
+	if (!empty($level) && is_numeric($level)) {
+		$sql .= " AND `content_nodes`.`level` = :level ";
+		$bind_params['level'] = $level;
+	}
+	if (!empty($sorting) && is_numeric($sorting)) {
+		$sql .= " AND `content_nodes`.`sorting` = :sorting ";
+		$bind_params['sorting'] = $sorting;
+	}
+	
+	return (int)$this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
  * Selects index page. Returns array with the complete page
  * information.
  *
@@ -724,6 +838,45 @@ public function pageBelongsToCurrentUser ($page)
 	}
 	
 	return true;
+}
+
+/**
+ * Sets index page to given page id. Takes the page id as
+ * first argument. Returns amount of affected rows. 
+ * 
+ * @throws Content_PageException
+ * @param int Page id
+ * @return int Affected rows
+ */
+public function setIndexPage ($page)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
+	}
+	
+	// unset all existing index pages.
+	$sql = "
+		UPDATE
+			".OAK_DB_CONTENT_PAGES." 
+		SET
+			`index_page` = '0'
+		WHERE
+			`index_page` = '1'
+		  AND
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute update
+	$this->base->db->execute($sql, $bind_params);
+	
+	// set given page as index page
+	return $this->updatePage($page, array('index_page' => '1'));
 }
 
 // end of class

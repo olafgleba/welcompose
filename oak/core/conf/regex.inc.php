@@ -62,7 +62,7 @@ define("OAK_REGEX_SMARTY_VAR_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
 // Defines regular expression for strings containing
 // the name of a namespace (only for usage in Smarty plugins).
-define("OAK_REGEX_SMARTY_CLASS_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
+define("OAK_REGEX_SMARTY_NS_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
 // Defines regular expression for strings containing
 // the name of a class (only for usage in Smarty plugins).
@@ -146,5 +146,9 @@ define("OAK_REGEX_BLOG_COMMENT_STATUS_NAME", "=^([A-Z0-9_]+)$=");
 // Defines regular expression for strings containing a
 // timeframe
 define("OAK_REGEX_TIMEFRAME", "=^([a-z0-9_]+)$=");
+
+// Defines regular expression for strings containing a
+// project's url name
+define("OAK_REGEX_PROJECT_URL_NAME", "=^([0-9a-z-]+)$=i");
 
 ?>

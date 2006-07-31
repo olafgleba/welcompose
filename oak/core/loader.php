@@ -93,7 +93,8 @@
  */
 function load ($token)
 {
-	switch (strtolower($token)) {
+	$token = strtolower($token);
+	switch ((string)$token) {
 		// handling of own/modified classes goes here
 		
 		// unified class loader

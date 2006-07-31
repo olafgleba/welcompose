@@ -22,6 +22,9 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
+// define area constant
+define('OAK_CURRENT_AREA', 'ADMIN');
+
 // get loader
 $path_parts = array(
 	dirname(__FILE__),
@@ -137,6 +140,14 @@ try {
 	$FORM->addRule('template_set', gettext('Chosen template set is out of range'), 'in_array_keys',
 		$template_sets);
 	
+	// checkbox for index_page
+	$FORM->addElement('checkbox', 'index_page', gettext('Index page'), null,
+		array('id' => 'page_index_page', 'class' => 'chbx'));
+	$FORM->applyFilter('index_page', 'trim');
+	$FORM->applyFilter('index_page', 'strip_tags');
+	$FORM->addRule('index_page', gettext('The field index_page accepts only 0 or 1'),
+		'regex', OAK_REGEX_ZERO_OR_ONE);
+	
 	// checkbox for protect
 	$FORM->addElement('checkbox', 'protect', gettext('Protect'), null,
 		array('id' => 'page_protect', 'class' => 'chbx'));
@@ -161,6 +172,7 @@ try {
 		'id' => Base_Cnc::ifsetor($page['id'], null),
 		'name' => Base_Cnc::ifsetor($page['name'], null),
 		'template_set' => Base_Cnc::ifsetor($page['template_set'], null),
+		'index_page' => Base_Cnc::ifsetor($page['index_page'], null),
 		'protect' => Base_Cnc::ifsetor($page['protect'], null),
 		'groups' => $selected_groups
 	));
@@ -229,6 +241,7 @@ try {
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['name_url'] = $HELPER->createMeaningfulString($FORM->exportValue('name'));
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
+		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
 		
 		// test sql data for pear errors
@@ -247,6 +260,11 @@ try {
 				$PAGE->mapPageToGroups($FORM->exportValue('id'), (array)$FORM->exportValue('groups'));
 			} else {
 				$PAGE->mapPageToGroups($FORM->exportValue('id'), array());
+			}
+			
+			// look at the index page field
+			if (intval($FORM->exportValue('index_page')) === 1) {
+				$PAGE->setIndexPage($FORM->exportValue('id'));
 			}
 			
 			// commit

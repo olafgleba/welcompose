@@ -333,6 +333,85 @@ public function countProjects ($params = array())
 }
 
 /**
+ * Looks for default project and returns array with project
+ * information. Throws exception if no default project
+ * can be found.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
+public function selectDefaultProject ()
+{
+	// get id of the default project
+	$sql = "
+		SELECT 
+			`application_projects`.`id` AS `id`
+		FROM
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		WHERE
+			`application_projects`.`default` = '1'
+		LIMIT
+			1
+	";
+	
+	// execute query
+	$result = (int)$this->base->db->select($sql, 'field');
+	
+	// make sure that there is some default page
+	if ($result < 1) {
+		throw new Application_ProjectException("Unable to find a default project");
+	}
+	
+	// return complete project information
+	return $this->selectProject($result);
+}
+
+/**
+ * Looks for a project with the given url name and returns array 
+ * with project information. Throws exception if no project with
+ * the given name can be found.
+ * 
+ * @throws Application_ProjectException
+ * @param string Project's url name
+ * @return array
+ */
+public function selectProjectUsingUrlName ($url_name)
+{
+	// input check
+	if (empty($url_name) || !preg_match(OAK_REGEX_PROJECT_URL_NAME, $url_name)) {
+		throw new Application_ProjectException("Input for project's url name may not be empty");
+	}
+	
+	// get id of the default project
+	$sql = "
+		SELECT 
+			`application_projects`.`id` AS `id`
+		FROM
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		WHERE
+			`application_projects`.`url_name` = :url_name
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'url_name' => $url_name
+	);
+	
+	// execute query
+	$result = (int)$this->base->db->select($sql, 'field', $bind_params);
+	
+	// make sure that there is some default page
+	if ($result < 1) {
+		throw new Application_ProjectException("Unable to find a project with the given name");
+	}
+	
+	// return complete project information
+	return $this->selectProject($result);
+}
+
+/**
  * Checks if a project with the given id exists or not. Takes the
  * project id as first argument, returns bool.
  *
@@ -451,6 +530,41 @@ public function initProjectAdmin ($user)
 		} else {
 			throw new Application_ProjectException("Unable to find a usable project");
 		}
+	}
+}
+
+/** 
+ * Sets OAK_CURRENT_PROJECT constant. Returns id of the current
+ * project.
+ * 
+ * @return int Project id
+ */ 
+public function initProjectPublicArea ()
+{
+	// get user supplied project name
+	$user_supplied_name = Base_Cnc::filterRequest($_REQUEST['project'],
+		OAK_REGEX_PROJECT_URL_NAME);
+		
+	// if the user supplied name is null, we need to look for the default
+	// project
+	if (is_null($user_supplied_name)) {
+		// get default project
+		$default_project = $this->selectDefaultProject();
+		
+		// define current project constant
+		define("OAK_CURRENT_PROJECT", (int)$default_project['id']);
+		
+		// return project id
+		return (int)$default_project['id'];
+	} else {
+		// let's see if the project exists
+		$project = $this->selectProjectUsingName($user_supplied_name);
+		
+		// define current project constant
+		define("OAK_CURRENT_PROJECT", (int)$project['id']);
+		
+		// return project id
+		return (int)$project['id'];
 	}
 }
 

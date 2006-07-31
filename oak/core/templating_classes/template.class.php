@@ -789,7 +789,7 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 	$bind_params = array(
 		'page_id' => $page_id,
 		'project' => OAK_CURRENT_PROJECT,
-		'template_name' => $template_type_name
+		'template_type_name' => $template_type_name
 	);
 	
 	// execute query and return result
@@ -860,7 +860,7 @@ public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
 	$bind_params = array(
 		'page_id' => $page_id,
 		'project' => OAK_CURRENT_PROJECT,
-		'template_name' => $template_type_name
+		'template_type_name' => $template_type_name
 	);
 	
 	// execute query and return result

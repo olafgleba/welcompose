@@ -58,7 +58,8 @@ function smarty_function_select_named ($params, &$smarty)
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'ns':
-					$ns = (string)$_ns;
+					$ns = (string)$_value;
+				break;
 			case 'var':
 					$var = (string)$_value;
 				break;
@@ -90,7 +91,7 @@ function smarty_function_select_named ($params, &$smarty)
 
 	// load requested class
 	$OBJECT = load($ns.':'.$class);
-
+	
 	// check if the requested method is callable
 	if (!is_callable(array($OBJECT, $method))) {
 		throw new Exception("select_named: Requested method is not callable");	

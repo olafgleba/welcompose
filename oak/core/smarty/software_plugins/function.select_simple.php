@@ -58,7 +58,8 @@ function smarty_function_select_simple ($params, &$smarty)
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'ns':
-					$ns = (string)$_ns;
+					$ns = (string)$_value;
+				break;
 			case 'var':
 					$var = (string)$_value;
 				break;

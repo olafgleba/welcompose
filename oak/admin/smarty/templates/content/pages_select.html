@@ -61,11 +61,20 @@ var selection = '{$session.selection}';
 
 <div id="content">
 <h1>{i18n Pages}</h1>
+
 {if empty($navigations)}
 <p>No navigation and no page has been created yet. Please create a <a href="navigations_select.php">navigation</a> first.</p>
 {else}
+
+{if $index_page_count < 1}
+<p>{i18n Define one index page. If don't do that, your webpage won't be usable.}</p>
+{elseif $index_page_count > 1}
+<p>{i18n You defined more than one index page. Please reduce the amount of index pages to one.}</p>
+{/if}
+
 {foreach from=$navigations item=_navigation}
 <div class="secnav474_nonav_c"></div>
+
 <div class="hli">
 <h2>{$_navigation.name|escape:"htmlall"}</h2>
 <!-- hli --></div>

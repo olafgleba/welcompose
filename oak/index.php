@@ -31,6 +31,9 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
+// define current area constant
+define('OAK_CURRENT_AREA', 'PUBLIC');
+
 // get loader
 $path_parts = array(
 	dirname(__FILE__),
@@ -60,12 +63,20 @@ try {
 	$BASE->utility->smarty->caching = (int)$BASE->_conf['caching']['index.php_mode'];
 	$BASE->utility->smarty->cache_lifetime = (int)$BASE->_conf['caching']['index.php_lifetime'];
 	
+	// init project for public area
+	$PROJECT = load('application:project');
+	$PROJECT->initProjectPublicArea();
+	
+	// init user for public area
+	$USER = load('user:user');
+	$USER->initUserPublicArea();
+		
 	// get page information
 	$PAGE = load('content:page');
-	$page_information = $PAGE->selectIndexPage();
+	$page = $PAGE->selectIndexPage();
 	
 	// define constant CURRENT_PAGE
-	define(OAK_CURRENT_PAGE, $page_information['id']);
+	define('OAK_CURRENT_PAGE', $page['id']);
 	
 	// inject page id to mimic behaviour of a normal page
 	$_GET['page'] = $_POST['page'] = $_REQUEST['page'] = OAK_CURRENT_PAGE;
@@ -74,12 +85,18 @@ try {
 	$import_globals_path = dirname(__FILE__).'/import_globals.inc.php';
 	require(Base_Compat::fixDirectorySeparator($import_globals_path));
 	
+	// assign page information to smarty
+	$BASE->utility->smarty->assign('page', $page);
+	
 	// prepare template name
-	switch ((string)$page_information['page_type_name']) {
-		case 'weblog':
+	switch ((string)$page['page_type_name']) {
+		case 'OAK_BLOG':
 				define("OAK_TEMPLATE_NAME", 'weblog_index');
 			break;
-		case 'simple_page':
+		case 'OAK_SIMPLE_PAGE':
+				define("OAK_TEMPLATE_NAME", 'simple_page_index');
+			break;
+		case 'OAK_SIMPLE_FORM':
 				define("OAK_TEMPLATE_NAME", 'simple_page_index');
 			break;
 	}
@@ -93,7 +110,9 @@ try {
 	exit;
 } catch (Exception $e) {
 	// clean buffer
-	@ob_end_clean();
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
 	
 	// raise error
 	Base_Error::triggerException($BASE->utility->smarty, $e);	
