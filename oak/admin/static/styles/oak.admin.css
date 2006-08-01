@@ -488,19 +488,14 @@ margin: 5px 0;
 padding: 18px 0 0 0;
 height: 1.5em;
 }
-label.contmedia {
-margin: 5px 0;
-padding: 5px 0 0 0;
-height: 1.5em;
-}
 label.cont.h04 {
 height: 4.7em;
 }
 label.cont.h13 {
 height: 13em;
 }
-label.cont.h34, label.contmedia.h34 {
-height: 34em;
+label.cont.h46 {
+height: 46em;
 }
 label span.bez {
 display: block; 
@@ -539,10 +534,10 @@ textarea {
 font: 100% verdana, ariel, sans-serif;
 border: 1px solid #666;
 }
-textarea.w540h400 {
+textarea.w540h550 {
 float: left;
 width: 540px;
-height: 400px;
+height: 550px;
 padding: 3px;
 }
 textarea.w540h150 {
@@ -659,7 +654,7 @@ vertical-align: middle;
 display: block;
 line-height: 1.5em;
 width: 300px;
-margin: 0;
+margin: 0 0 10px 0;
 padding-left: 140px;
 }
 .iHelp a, .iHelpRemove a, .iHelpLevelTwo a, .iHelpRemoveLevelTwo a {
@@ -804,7 +799,7 @@ width: 710px;
 display: block;
 width: 690px;
 margin: 20px 0 0 0;
-padding: 0;
+padding-left: 140px;
 }
 
 #mmanager span.bez {

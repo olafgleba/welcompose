@@ -915,3 +915,17 @@ function _buildXMLHTTPRequest ()
 		_applyError(e);
 	}
 }
+
+
+// development code
+/*
+function clearInputs(cssSelector) {
+        $$(cssSelector + " input").each(function(el) {
+           el.disabled = false;
+           if (el.type=="text") { el.value = ""; }
+           if (el.type=="checkbox") { el.checked = false; }
+        });
+
+        $$(cssSelector + " textarea").each(function(el) { el.disabled = false; el.value = ""; } );
+}
+*/

@@ -136,7 +136,7 @@ try {
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'simple_form_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h400'));
+		array('id' => 'simple_form_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
 	
 	// select for text_converter

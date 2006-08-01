@@ -21,7 +21,7 @@
  */
  
 /**
- * trigger functions depending on CSS class DOM events
+ * trigger class methods depending on CSS class DOM events
  */
 var definitions = {
 	'.con' : function(el){
