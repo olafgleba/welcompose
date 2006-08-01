@@ -98,7 +98,51 @@ var checkbox_status = new Array('simple_page_meta_use');
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 
-<div id="column"></div>
+<div id="column">
+<form action="" method="post" id="mediamanager">
+<fieldset>
+
+<div id="mmtopic"><h2>MEDIA MANAGER</h2><span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></div>
+
+<div id="mmnavcon">
+<ul id="mmnav">
+<li><a class="mm_upload" href="#">Upload</a></li>
+<li><a class="mm_local" href="#">myLocal</a></li>
+<li><a class="mm_flickr" href="#">myFlickr</a></li>
+</ul>
+</div>
+
+<div class="mmwrap">
+<label for="include_types">{i18n Includ following types}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<div class="spread">
+<input id="include_types" class="chbx" name="include_types" type="checkbox" value="1" /><span class="cbxspread">Documents</span>
+<input id="include_types" class="chbx" name="include_types" type="checkbox" value="2" /><span class="cbxspread">Images</span>
+<input id="include_types" class="chbx" name="include_types" type="checkbox" value="3" /><span class="cbxspread">Casts</span>
+</div>
+</div>
+
+<div class="mmwrap">
+<label for="tags">{i18n Find by tags}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<input class="w220" type="text" id="tags" />
+<label for="timeframe">{i18n Find by timeframe}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<select id="timeframe" name="timeframe">
+<option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
+<option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
+{/foreach}
+</select>
+</div>
+
+<div id="mmwrapcontent">
+dd
+</div>
+
+<div id="mmwrappager"><a href="#">Page 1 of 10</a></div>
+
+</fieldset>
+</form>
+
+</div>
 
 <fieldset class="topbg">
 
