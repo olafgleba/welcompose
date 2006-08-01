@@ -113,7 +113,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 </div>
 
 <div class="mmwrap">
-<label for="include_types">{i18n Includ following types}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<label for="include_types">{i18n Includ following types}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
 <div class="spread">
 <input id="include_types" class="chbx" name="include_types" type="checkbox" value="1" /><span class="cbxspread">Documents</span>
 <input id="include_types" class="chbx" name="include_types" type="checkbox" value="2" /><span class="cbxspread">Images</span>
@@ -122,9 +122,9 @@ var checkbox_status = new Array('simple_page_meta_use');
 </div>
 
 <div class="mmwrap">
-<label for="tags">{i18n Find by tags}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<label for="tags">{i18n Find by tags}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
 <input class="w220" type="text" id="tags" />
-<label for="timeframe">{i18n Find by timeframe}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></label>
+<label for="timeframe">{i18n Find by timeframe}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
 <select id="timeframe" name="timeframe">
 <option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
