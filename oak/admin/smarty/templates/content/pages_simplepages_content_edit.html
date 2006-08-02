@@ -95,42 +95,35 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- rp --></div>
 {/if}
 
-<form class="botbg"{$form.attributes}>
-{$form.javascript}
-
 <div id="column">
 <form action="" method="post" id="mediamanager">
 <fieldset>
 
-<div id="mmtopic"><h2>MEDIA MANAGER</h2><span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></div>
+<h2>MEDIA MANAGER<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
 
-<div id="mmnavcon">
 <ul id="mmnav">
 <li><a class="mm_upload" href="#">Upload</a></li>
 <li><a class="mm_local" href="#">myLocal</a></li>
 <li><a class="mm_flickr" href="#">myFlickr</a></li>
 </ul>
-</div>
+
+<fieldset class="mmwrap">
+<p>{i18n Includ following types}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></p>
+<label for="include_types_doc"><input id="include_types_doc" class="chbx" name="include_types" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
+<label for="include_types_img"><input id="include_types_img" class="chbx" name="include_types" type="checkbox" value="2" /><span class="cbxspread">Images</span></label>
+<label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
+</fieldset>
 
 <div class="mmwrap">
-<label for="include_types">{i18n Includ following types}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
-<div class="spread">
-<input id="include_types" class="chbx" name="include_types" type="checkbox" value="1" /><span class="cbxspread">Documents</span>
-<input id="include_types" class="chbx" name="include_types" type="checkbox" value="2" /><span class="cbxspread">Images</span>
-<input id="include_types" class="chbx" name="include_types" type="checkbox" value="3" /><span class="cbxspread">Casts</span>
-</div>
-</div>
-
-<div class="mmwrap">
-<label for="tags">{i18n Find by tags}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
-<input class="w220" type="text" id="tags" />
-<label for="timeframe">{i18n Find by timeframe}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></label>
+<label for="tags"><span class="bez">{i18n Find by tags}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<input class="w220" type="text" id="tags" /></label>
+<label for="timeframe"><span class="bez">{i18n Find by timeframe}<span class="iHelp"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <select id="timeframe" name="timeframe">
 <option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
 <option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
-</select>
+</select></label>
 </div>
 
 <div id="mmwrapcontent">
@@ -143,6 +136,9 @@ dd
 </form>
 
 </div>
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
 
 <fieldset class="topbg">
 

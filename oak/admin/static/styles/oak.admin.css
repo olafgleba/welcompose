@@ -463,15 +463,15 @@ background: #00cc33
 
 /* %F =forms */
 form.botbg {
-width: 956px;
-padding-bottom: 20px;
-padding-top: 20px;
+width: 710px;
+padding: 20px 0;
 background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
 width: 690px;
 padding: 20px 10px 0 10px;
 background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
+overflow: hidden;
 }
 fieldset.void {
 font-size: 100%;
@@ -733,36 +733,34 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 
 
 
-
-
 /* %M =column */
 #column {
 float: right;
-width: 238px;
+width: 236px;
 height: 556px;
-padding: 80px 0 0 0;
+padding: 100px 0 0 0;
 background: transparent;
-font-size: 0.85em;
+overflow: hidden;
 }
-#mmtopic {
+form#mediamanager {
+width: 236px;
+overflow: hidden;
+padding: 0;
+background: transparent;
+}
+#column h2 {
 display: block;
 background: #efefef;
-padding: 3px 5px;
-height: 1.7em;
-margin-bottom: 3px;
-}
-#mmtopic h2 {
-display: inline;
-}
-#mmnavcon {
-display: block;
-background: #f9f9f9;
-padding: 3px 5px;
-margin-bottom: 3px;
+padding: 7px 5px;
+margin: 0 0 3px 0;
 }
 #mmnav {
-list-style: none;
+display: block;
+background: #f9f9f9;
+padding: 3px 5px 3px 5px;
+margin-bottom: 3px;
 height: 1.5em;
+list-style: none;
 }
 #mmnav li {
 display: inline;
@@ -771,22 +769,34 @@ display: inline;
 position: relative;
 display: block;
 float: left;
+font-size: 80%;
+padding: 2px 10px 2px 17px;
+text-decoration: none;
 }
-#mmnav  a:link, #mmnav  a:visited {
+#mmnav a:link, #mmnav a:visited {
 color: #000;
-padding: 2px 10px 2px 20px;
-background: transparent url(../img/icons/link.gif) 2px -2px no-repeat;
+background: transparent url(../img/icons/link.gif) 0 -2px no-repeat;
 }
 #mmnav  a:hover, #mmnav  a:active, #mmnav  a:focus {
 color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
-text-decoration: none;
 }
 .mmwrap {
 display: block;
 background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
+}
+#column .mmwrap p {
+margin: 5px 5px 5px 2px;
+}
+#column .mmwrap select {
+font-size: 80%;
+}
+#column .mmwrap label {
+display: inline;
+font-size: 80%;
+width: auto;
 }
 #mmwrapcontent {
 display: block;
@@ -806,16 +816,17 @@ margin-bottom: 3px;
 display: block;
 height: 1.5em;
 line-height: 1.5em;
-width: 238px;
 margin: 5px 0 0 0;
 }
-#column span.cbxspread {
-margin: 0 10px 0 5px;
-}
-#column .spread {
+#column label span.bez {
+display: block; 
+float: none;
+width: 220px;
 margin: 5px 0 2px 0;
 }
-
+#column span.cbxspread {
+margin: 0 3px 0 3px;
+}
 
 
 
