@@ -56,21 +56,11 @@ function Base ()
 		 * Define the used help class names
 		 */
 		this.helpClass = 'iHelp';
-		
-		/**
-		 * Define the used help class names
-		 */
 		this.helpClassRemove = 'iHelpRemove';
-		
-		/**
-		 * Define the used help class names
-		 */
 		this.helpClassLevelTwo = 'iHelpLevelTwo';
-		
-		/**
-		 * Define the used help class names
-		 */
 		this.helpClassRemoveLevelTwo = 'iHelpRemoveLevelTwo';
+		this.helpClassMM = 'iHelpMM';
+		this.helpClassRemoveMM = 'iHelpRemoveMM';
 		
 		/**
 		 * Define the div IDs for the navigation layers
@@ -83,6 +73,11 @@ function Base ()
 		this.navLyTwo = 'ly2';
 		
 		/**
+		 * Define the div ID for several help layers
+		 */
+		this.helpLyMM = 'lyMediamanager';
+		
+		/**
 		 * Define the used table upload class names.
  		 * Cascading styles to fit background images
 		 */
@@ -93,6 +88,18 @@ function Base ()
  		 * Cascading styles to fit background images
 		 */
 		this.uploadClassHide = 'uploadhide hideTableRow';
+		
+		/**
+		 * Define the used table upload class names.
+ 		 * Cascading styles to fit background images
+		 */
+		this.mediamanagerClass = 'showMediamanagerElement';
+
+		/**
+		 * Define the used table upload class names.
+ 		 * Cascading styles to fit background images
+		 */
+		this.mediamanagerClassHide = 'hideMediamanagerElement';
 		
 		/**
 		 * Comprehensive colors application wide
@@ -110,6 +117,18 @@ function Base ()
 		 * Must corresponding to html notation
 		 */
 		 this.helpHtmlHide = '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';		
+
+		/**
+		 * Build help strings delivered within DOM.
+		 * Must corresponding to html notation
+		 */
+		this.elementHtmlShow = '<a href="#" title="' + showElement + '"><img src="../static/img/icons/open.gif" alt="" /></a>';
+
+		/**
+		 * Build help strings delivered within DOM.
+		 * Must corresponding to html notation
+		 */
+		 this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';		
 
 		/**
 		 * Path for XHMLHTTPRequest imported files
@@ -388,12 +407,22 @@ Help.prototype = new Base();
 Help.prototype.show = Help_show;
 Help.prototype.hide = Help_hide;
 Help.prototype.process = Help_process;
+Help.prototype.showMM = Help_showMM;
+Help.prototype.hideMM = Help_hideMM;
+Help.prototype.processMM = Help_processMM;
+
+
+
 Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
  * Implements method of prototype class Help
+ * This is for usual use of the help class within the normal <form> document flow
+ * The param 'level' ist the most important part of this method
+ * because it distincts how the DOM Tree will be processed
+ *
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
+ * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (eg. level 1)
  * @throws applyError on exception
  */
 function Help_show (elem, level)
@@ -418,6 +447,9 @@ function Help_show (elem, level)
 	
 		this.target = this.processId;
 	
+		// Are we within a foreach loop table (eg. with ascending ids)?
+		// If true, erase digits, so there is no need to build separat help files on the same topic
+		// example: name_3.html -> name.html
 		this.fetch = this.processId.replace(/(_(\d+))/, '');	
 		if (this.fetch) {
 			this.processId = this.fetch;
@@ -445,6 +477,9 @@ function Help_show (elem, level)
 
 /**
  * Implements method of prototype class Help
+ * The param 'level' ist the most important part of this method
+ * because it distincts how the DOM Tree will be processed
+ *
  * @param {string} elem Actual element
  * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
@@ -478,6 +513,8 @@ function Help_hide (elem, level)
 
 /**
  * Implements method of prototype class Help
+ * Get and display the html help files
+ *
  * @param {string} url path
  * @param {string} target Wich layer div should be used
  * @throws applyError on exception
@@ -492,6 +529,99 @@ function Help_process (url, target)
 				var target_after = $(target).parentNode.nextSibling;
 				Element.hide(target_after);
 				Effect.Appear(target_after, {duration: 0.8});
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Help
+ * This method is used for the media manager
+ *
+ * @param {string} elem Actual element
+ * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
+ * @throws applyError on exception
+ */
+function Help_showMM (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute('id');
+		this.processId = this.formId;
+		this.target = this.helpLyMM;
+		this.elem.className = this.helpClassRemoveMM;
+	
+		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+			
+		if (typeof this.req != 'undefined') {
+		
+			var _url		= this.url;
+			var _target		= this.target;
+		
+			_req.open('GET', _url, true);
+			_req.onreadystatechange = function () { Help.processMM(_url,_target);};
+			_req.send('');
+		}
+		
+		Effect.Fade('mmhide',{duration: 0.4});
+		Element.update(this.elem, this.helpHtmlHide);
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Help
+ * This method is used for the media manager
+ *
+ * @param {string} elem Actual element
+ * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
+ * @throws applyError on exception
+ */
+function Help_hideMM (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.processId = 'mmhide';
+		
+		this.elem.className = this.helpClassMM;
+		
+		Effect.Fade(this.helpLyMM,{duration: 0.4});
+		Element.hide(this.processId);
+		Effect.Appear(this.processId, {duration: 0.4, delay: 0.4});
+		Element.update(this.elem, this.helpHtmlShow);
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Help
+ * Get and display the html help file for the media manager
+ *
+ * @param {string} url path
+ * @param {string} target Wich layer div should be used
+ * @throws applyError on exception
+ * @throws DevError on condition
+ */
+function Help_processMM (url, target)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {				
+				Element.update (target, _req.responseText);
+				Element.hide(target);
+				Effect.Appear(target, {duration: 0.4, delay: 0.4});
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -737,9 +867,6 @@ function Status_getCbx (elems)
 Status = new Status();
 
 
-
-
-
 /**
  * Construct a new Tables object
  * @class This is the basic Table class 
@@ -795,16 +922,16 @@ function Tables_hideRow (elem)
 	try {
 		// properties
 		this.elem = elem;
-		this.id = elem.getAttribute('id');
+		this.id = this.elem.getAttribute('id');
 		this.bid = this.id.split('t_');
 		this.obid = String('o_' + this.bid[1]);
 		this.ibid = String('i_' + this.bid[1]);
 	
 		// process inner div
-		Effect.Fade(this.ibid,{duration: 0.6});
+		Effect.Fade(this.ibid,{duration: 0.8});
 		
 		// process outer table tr
-		setTimeout("Tables.collapseRow('"+ this.obid +"')", 400);
+		setTimeout("Tables.collapseRow('"+ this.obid +"')", 800);
 		
 		this.elem.className = this.uploadClass;
 		Behaviour.apply();
@@ -823,7 +950,7 @@ function Tables_showRow (elem)
 	try {
 		// properties
 		this.elem = elem;
-		this.id = elem.getAttribute('id');
+		this.id = this.elem.getAttribute('id');
 		this.bid = this.id.split('t_');
 		this.obid = String('o_' + this.bid[1]);
 		this.ibid = String('i_' + this.bid[1]);
@@ -847,6 +974,81 @@ function Tables_showRow (elem)
  */
 Tables = new Tables();
 
+
+/**
+ * Construct a new Mediamanager object
+ * @class This is the basic Mediamanager class 
+ * @constructor
+ * @throws applyError on exception
+ * @see Base Base is the base class for this
+ */
+function Mediamanager ()
+{
+	try {
+				
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/* Inherit from Base */
+Mediamanager.prototype = new Base();
+
+
+/**
+ * Instance Methods from prototype @class Mediamanager
+ */
+Mediamanager.prototype.showElement = Mediamanager_showElement;
+Mediamanager.prototype.hideElement = Mediamanager_hideElement;
+
+/**
+ * Implements method of prototype class Mediamanager
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Mediamanager_hideElement (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
+		
+		this.elem.className = this.mediamanagerClass;
+		Effect.Fade(this.target,{duration: 0.6});
+		Element.update(this.elem, this.elementHtmlShow);
+		
+		Behaviour.apply();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Mediamanager_showElement (elem)
+{	
+	try {
+		// properties
+		this.elem = elem;
+		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
+		
+		this.elem.className = this.mediamanagerClassHide;
+		Effect.Appear(this.target,{duration: 0.6});
+		Element.update(this.elem, this.elementHtmlHide);
+		
+		Behaviour.apply();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Building new instance for @class Mediamanager
+ */
+Mediamanager = new Mediamanager();
 
 
 /**

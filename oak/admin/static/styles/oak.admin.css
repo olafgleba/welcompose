@@ -72,7 +72,7 @@ background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p, #column h2, #column li, #column label, #column select, #column a {
+p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p, #column li, #column label, #column select, #column a {
 font-size: 100%;
 }
 
@@ -660,10 +660,25 @@ width: 300px;
 margin: 0 0 10px 0;
 padding-left: 140px;
 }
-.iHelp a, .iHelpRemove a, .iHelpLevelTwo a, .iHelpRemoveLevelTwo a {
-background-color: #fff;
+
+.iHelp a,
+.iHelpRemove a,
+.iHelpLevelTwo a,
+.iHelpRemoveLevelTwo a,
+.iHelpMM a,
+.iHelpRemoveMM a,
+.showMediamanagerElement a,
+.hideMediamanagerElement a {
+background-color: transparent;
 }
-.iHelp img, .iHelpRemove img, .iHelpLevelTwo img, .iHelpRemoveLevelTwo img {
+.iHelp img,
+.iHelpRemove img,
+.iHelpLevelTwo img,
+.iHelpRemoveLevelTwo img,
+.iHelpMM img,
+.iHelpRemoveMM img,
+.showMediamanagerElement img,
+.hideMediamanagerElement img {
 vertical-align: middle;
 }
 
@@ -737,7 +752,7 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 #column {
 float: right;
 width: 236px;
-height: 556px;
+height: 660px;
 padding: 100px 0 0 0;
 background: transparent;
 overflow: hidden;
@@ -748,10 +763,17 @@ overflow: hidden;
 padding: 0;
 background: transparent;
 }
+form#mediamanager p.help {
+display: block;
+line-height: 1.5em;
+width: 226px;
+margin: 8px 5px 8px 5px;
+padding: 0;
+}
 #column h2 {
 display: block;
 background: #efefef;
-padding: 7px 5px;
+padding: 3px 5px;
 margin: 0 0 3px 0;
 }
 #mmnav {
@@ -759,7 +781,7 @@ display: block;
 background: #f9f9f9;
 padding: 3px 5px 3px 5px;
 margin-bottom: 3px;
-height: 1.5em;
+height: 1.9em;
 list-style: none;
 }
 #mmnav li {
@@ -790,9 +812,6 @@ margin-bottom: 3px;
 #column .mmwrap p {
 margin: 5px 5px 5px 2px;
 }
-#column .mmwrap select {
-font-size: 80%;
-}
 #column .mmwrap label {
 display: inline;
 font-size: 80%;
@@ -800,17 +819,17 @@ width: auto;
 }
 #mmwrapcontent {
 display: block;
-height: 318px;
+height: 310px;
+font-size: 80%;
 background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
 }
 #mmwrappager {
 display: block;
-height: 16px;
 background: #f9f9f9;
-padding: 3px 5px;
-margin-bottom: 3px;
+font-size: 80%;
+padding: 2px 5px 5px 5px;
 }
 #column label {
 display: block;
@@ -822,14 +841,18 @@ margin: 5px 0 0 0;
 display: block; 
 float: none;
 width: 220px;
-margin: 5px 0 2px 0;
+margin: 2px 0 2px 0;
 }
 #column span.cbxspread {
 margin: 0 3px 0 3px;
 }
 
-
-
+#include_types_wrap {
+display: none;
+}
+#timeframe_wrap {
+display: none;
+}
 
 
 

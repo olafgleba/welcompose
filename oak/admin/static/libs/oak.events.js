@@ -120,6 +120,42 @@ var definitions = {
 			return false;
 		}
 	},
+	'.iHelpMM' : function(el){
+		el.onclick = function(){
+			Help.showMM(this);
+			return false;
+		}
+	},
+	'.iHelpRemoveMM' : function(el){
+		el.onclick = function(){
+			Help.hideMM(this);
+			return false;
+		}
+	},
+	'.hideTableRow' : function(el){
+		el.onclick = function(){
+			Tables.hideRow(this);
+			return false;
+		}
+	},
+	'.showTableRow' : function(el){
+		el.onclick = function(){
+			Tables.showRow(this);
+			return false;
+		}
+	},
+	'.showMediamanagerElement' : function(el){
+		el.onclick = function(){
+			Mediamanager.showElement(this);
+			return false;
+		}
+	},
+	'.hideMediamanagerElement' : function(el){
+		el.onclick = function(){
+			Mediamanager.hideElement(this);
+			return false;
+		}
+	},
 	'#main input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -154,18 +190,6 @@ var definitions = {
 	'.submitbut140' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
-		}
-	},
-	'.hideTableRow' : function(el){
-		el.onclick = function(){
-			Tables.hideRow(this);
-			return false;
-		}
-	},
-	'.showTableRow' : function(el){
-		el.onclick = function(){
-			Tables.showRow(this);
-			return false;
 		}
 	},
 	'#simple_page_meta_use' : function(el){
