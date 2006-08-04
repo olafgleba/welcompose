@@ -86,6 +86,14 @@ public function getMainTemplateName ();
  */
 public function getRedirectLocationSelf ();
 
+/**
+ * Returns information whether to skip authentication
+ * or not.
+ * 
+ * @return bool
+ */
+public function skipAuthentication ();
+
 }
 
 ?>

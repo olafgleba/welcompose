@@ -478,6 +478,17 @@ public function getRequiredTemplate ()
 	return $tpl;
 }
 
+/**
+ * Returns information whether to skip authentication
+ * or not.
+ * 
+ * @return bool
+ */
+public function skipAuthentication ()
+{
+	return false;
+}
+
 // end of class
 }
 
