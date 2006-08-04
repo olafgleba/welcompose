@@ -151,4 +151,8 @@ define("OAK_REGEX_TIMEFRAME", "=^([a-z0-9_]+)$=");
 // project's url name
 define("OAK_REGEX_PROJECT_URL_NAME", "=^([0-9a-z-]+)$=i");
 
+// Defines regular expression for strings containing a phone
+// number.
+define("OAK_REGEX_PHONE_NUMBER", "=^([0-9-\/\(\)+\s]+)$=i");
+
 ?>

@@ -89,10 +89,11 @@
  * WHEN IT COMES TO AN UPDATE!
  * 
  * @param string Name of the class to load
+ * @param bool Array of arguments to be passed to the singleton
  * @return object
  */
-function load ($token)
-{
+function load ($token, $args = array())
+{	
 	$token = strtolower($token);
 	switch ((string)$token) {
 		// handling of own/modified classes goes here
@@ -130,7 +131,7 @@ function load ($token)
 				}
 			}
 			
-			return call_user_func(array($class_name, 'instance'));
+			return call_user_func_array(array($class_name, 'instance'), $args);
 	}
 }
 

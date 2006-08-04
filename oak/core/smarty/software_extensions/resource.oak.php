@@ -51,6 +51,14 @@ function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 
 	// get template source
 	$tpl_source = $TEMPLATE->smartyFetchTemplate($page_id, $template_type_name);
+	
+	// when the template source is empty, we cannot distinguish whether
+	// the template couldn't be found or the template is empty. So let's
+	// throw a more or less meaningful exception.
+	if (empty($tpl_source)) {
+		throw new Exception("Template not found or empty");
+	}
+	
 	return true;
 }
 
@@ -72,9 +80,14 @@ function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	$template_type_name = trim($tpl_name_parts[0]);
 	$page_id = trim($tpl_name_parts[1]);
 	
-	// get template source
+	// get template timestamp
 	$tpl_timestamp = $TEMPLATE->smartyFetchTemplateTimestamp($page_id, $template_type_name);
-	return true;
+	
+	if (!empty($tpl_timestamp)) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function oakresource_isSecure ($tpl_name, &$smarty)
