@@ -70,8 +70,9 @@ class Display_SimpleFormIndex implements Display {
  * 
  * @param array Project information
  * @param array Page information
+ * @param array Simple form content
  */
-public function __construct($project_info, $page_info)
+public function __construct($project_info, $page_info, $simple_form)
 {
 	try {
 		// get base instance
@@ -95,13 +96,13 @@ public function __construct($project_info, $page_info)
 	if (!is_array($page_info)) {
 		throw new Display_SimpleFormIndex("Input for parameter page_info is expected to be an array");
 	}
+	if (!is_array($simple_form)) {
+		throw new Display_SimpleFormIndex("Input for parameter simple_form is expected to be an array");
+	}
 	
 	$this->_project_info = $project_info;
 	$this->_page_info = $page_info;
-	
-	// get simple form
-	$SIMPLEFORM = load('content:simpleform');
-	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(OAK_CURRENT_PAGE);
+	$this->_simple_form = $simple_form;
 }
 
 /**
@@ -113,11 +114,12 @@ public function __construct($project_info, $page_info)
  * 
  * @param array Project information
  * @param array Page information
+ * @param array Simple form content
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info)
+public static function instance($project_info, $page_info, $simple_form = array())
 {
-	return new Display_SimpleFormIndex($project_info, $page_info);
+	return new Display_SimpleFormIndex($project_info, $page_info, $simple_form);
 }
 
 /**
