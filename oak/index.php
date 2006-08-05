@@ -85,20 +85,18 @@ try {
 	
 	// import action
 	$action = Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC);
-	$action = (!is_null($action) ? $action : 'index');
+	$action = (!is_null($action) ? $action : 'Index');
 	
 	// create display class name from action and page id
 	switch ((string)$page['page_type_name']) {
 		case 'OAK_BLOG':
-				$action_class_name = ucfirst(strtolower($action));
-				$display_class = "Display:Blog".$action_class_name;
+				$display_class = "Display:Blog".$action;
 				
 				// prepare args
 				$args = array($project, $page);
 			break;
 		case 'OAK_SIMPLE_PAGE':
-				$action_class_name = ucfirst(strtolower($action));
-				$display_class = "Display:SimplePage".$action_class_name;
+				$display_class = "Display:SimplePage".$action;
 				
 				// get simple page
 				$SIMPLEPAGE = load('content:simplepage');
@@ -111,8 +109,7 @@ try {
 				$args = array($project, $page, $simple_page);
 			break;
 		case 'OAK_SIMPLE_FORM':
-				$action_class_name = ucfirst(strtolower($action));
-				$display_class = "Display:SimpleForm".$action_class_name;
+				$display_class = "Display:SimpleForm".$action;
 				
 				// get simple form
 				$SIMPLEFORM = load('content:simpleform');

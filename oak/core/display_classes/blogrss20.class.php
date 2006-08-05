@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: simplepageindex.class.php
+ * File: blogrss20.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -25,7 +25,7 @@
 // load the display interface
 require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'display.interface.php');
 
-class Display_SimplePageIndex implements Display {
+class Display_BlogRss20 implements Display {
 	
 	/**
 	 * Singleton
@@ -55,13 +55,6 @@ class Display_SimplePageIndex implements Display {
 	 */
 	protected $_page_info = array();
 	
-	/**
-	 * Container for simple page information
-	 * 
-	 * @var array
-	 */
-	protected $_simple_page = array();
-	
 /**
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array
@@ -70,9 +63,8 @@ class Display_SimplePageIndex implements Display {
  * 
  * @param array Project information
  * @param array Page information
- * @param array Simple page content
  */
-public function __construct($project_info, $page_info, $simple_page)
+public function __construct($project_info, $page_info)
 {
 	try {
 		// get base instance
@@ -91,18 +83,14 @@ public function __construct($project_info, $page_info, $simple_page)
 	
 	// input check
 	if (!is_array($project_info)) {
-		throw new Display_SimplePageIndex("Input for parameter project_info is expected to be an array");
+		throw new Display_BlogRss20("Input for parameter project_info is expected to be an array");
 	}
 	if (!is_array($page_info)) {
-		throw new Display_SimplePageIndex("Input for parameter page_info is expected to be an array");
-	}
-	if (!is_array($simple_page)) {
-		throw new Display_SimplePageIndex("Input for parameter simple_page is expected to be an array");
+		throw new Display_BlogRss20("Input for parameter page_info is expected to be an array");
 	}
 	
 	$this->_project_info = $project_info;
 	$this->_page_info = $page_info;
-	$this->_simple_page = $simple_page;
 }
 
 /**
@@ -114,12 +102,12 @@ public function __construct($project_info, $page_info, $simple_page)
  * 
  * @param array Project information
  * @param array Page information
- * @param array Simple page content
+ * @param array Page content
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info, $simple_page = array())
+public static function instance($project_info, $page_info, $content_info = array())
 {
-	return new Display_SimplePageIndex($project_info, $page_info, $simple_page);
+	return new Display_BlogRss20($project_info, $page_info);
 }
 
 /**
@@ -162,7 +150,7 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
-	return "oak:simple_page_index.".OAK_CURRENT_PAGE;
+	return "oak:blog_rss20.".OAK_CURRENT_PAGE;
 }
 
 /**
@@ -174,7 +162,7 @@ public function getMainTemplateName ()
 public function getRedirectLocationSelf ()
 {
 	if ($this->_page['index_page']) {
-		return sprintf("Location: index.php?page=%u&action=Index", $this->_page['id']);
+		return sprintf("Location: index.php?page=%u&action=Rss20", $this->_page['id']);
 	} else {
 		return 'index.php';
 	}
@@ -194,6 +182,6 @@ public function skipAuthentication ()
 // end of class
 }
 
-class Display_SimplePageIndexException extends Exception { }
+class Display_BlogRss20Exception extends Exception { }
 
 ?>

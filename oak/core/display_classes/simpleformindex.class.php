@@ -452,7 +452,7 @@ public function getBusinessMailTemplateName ()
 public function getRedirectLocationSelf ()
 {
 	if ($this->_page['index_page']) {
-		return sprintf("Location: index.php?page=%u&action=index", $this->_page['id']);
+		return sprintf("Location: index.php?page=%u&action=Index", $this->_page['id']);
 	} else {
 		return 'index.php';
 	}
