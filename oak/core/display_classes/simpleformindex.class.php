@@ -215,6 +215,7 @@ protected function renderPersonalForm ()
 		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.oak') ?
 			$FORM->exportValue('email') : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
+		$headers['Reply-To'] = $FORM->exportValue('email');
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
@@ -367,6 +368,7 @@ protected function renderBusinessForm ()
 		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.oak') ?
 			$FORM->exportValue('email') : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
+		$headers['Reply-To'] = $FORM->exportValue('email');
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
