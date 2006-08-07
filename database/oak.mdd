@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
 <DBMODEL Version="1.0" TYPE="MySQL">
-<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="74" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-07-30 15:18:26" Description="" Annotation="" ZoomFac="100.00" XPos="377" YPos="1750" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
+<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="76" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-08-06 22:53:59" Description="" Annotation="" ZoomFac="100.00" XPos="619" YPos="1150" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
 <DATABASE Name="oak" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
 
 <STAMPS>
@@ -991,6 +991,7 @@
 <REFERENCE_BEGIN ID="8756" />
 <REFERENCE_BEGIN ID="8776" />
 <REFERENCE_BEGIN ID="8786" />
+<REFERENCE_BEGIN ID="8798" />
 </REFERENCES_BEGIN>
 <REFERENCES_END>
 <REFERENCE_END ID="8700" />
@@ -1158,7 +1159,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="8649" Name="user_rights" XPos="1410" YPos="1750" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="8649" Name="user_rights" XPos="1450" YPos="1870" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="8650" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
@@ -1190,7 +1191,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="8656" Name="user_groups2user_rights" XPos="1480" YPos="1480" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="8656" Name="user_groups2user_rights" XPos="1450" YPos="1650" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="8663" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
@@ -1392,6 +1393,30 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
+<ENTITY ID="8791" Name="community_anti_spam_plugins" XPos="1460" YPos="1460" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="8792" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="8793" Name="project" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="8794" Name="name" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="8795" Name="internal_name" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="8796" Name="priority" DomainID="-1" Pos="4" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="0" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_END>
+<REFERENCE_END ID="8798" />
+</REFERENCES_END>
+<INDEXES>
+<INDEX ID="8797" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="8792" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
 </ENTITIES>
 <REFERENCES>
 <REFERENCE ID="1022" Name="content_pages.type2content_page_types.id" SOURCE="1016" DESTINATION="1000" FKIDS="1017=1007\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1019" AutoColumnIDs="" />
@@ -1451,6 +1476,7 @@
 <REFERENCE ID="8759" Name="content_pages.id2content_nodes.id" SOURCE="1254" DESTINATION="1000" FKIDS="1255=1001\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1263" AutoColumnIDs="" />
 <REFERENCE ID="8776" Name="application_textmacros.project2application_projects.id" SOURCE="8458" DESTINATION="8769" FKIDS="8459=8771\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8786" Name="user_rights.project2application_projects.id" SOURCE="8458" DESTINATION="8649" FKIDS="8459=8784\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
+<REFERENCE ID="8798" Name="community_anti_spam_plugins.project2application_projects.id" SOURCE="8458" DESTINATION="8791" FKIDS="8459=8793\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="8799\n" />
 </REFERENCES>
 <NOTES>
 </NOTES>

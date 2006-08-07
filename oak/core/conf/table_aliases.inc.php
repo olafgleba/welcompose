@@ -39,6 +39,7 @@ define("OAK_DB_APPLICATION_TEXT_CONVERTERS", "application_text_converters");
 define("OAK_DB_APPLICATION_TEXT_MACROS", "application_text_macros");
 
 // community table aliases
+define("OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS", "community_anti_spam_plugins");
 define("OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES", "community_blog_comment_statuses");
 define("OAK_DB_COMMUNITY_BLOG_COMMENTS", "community_blog_comments");
 

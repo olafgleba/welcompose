@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Blog Comment Statuses}</title>
+<title>{i18n Oak Admin &ndash; Anti Spam Plugins}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
 
@@ -39,7 +39,7 @@ var selection = '{$session.selection}';
 
 {include file="_inc_topnav.html" area="community"}
 
-{include file="_inc_projects_load.html" go_back_area="community" go_back_file="blogcommentstatuses_select.php"}
+{include file="_inc_projects_load.html" go_back_area="community" go_back_file="antispamplugins_select.php"}
 
 <div id="main">
 
@@ -51,22 +51,22 @@ var selection = '{$session.selection}';
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
 <li><a href="blogcomments_select.php">{i18n Blog Comments}<span></span></a></li>
-<li class="on">{i18n Blog Comment Statuses}</li>
-<li><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}<span></span></a></li>
+<li><a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}<span></span></a></li>
+<li class="on">{i18n Anti Spam Plugins}</li>
 </ul>
 </div>
 <!-- topsubnavcon static eof -->
 
-<div id="brc"><p>{i18n COMMUNITY}: {i18n Blog Comment Statuses}</p></div>
+<div id="brc"><p>{i18n COMMUNITY}: {i18n Anti Spam Plugins}</p></div>
 
 <div id="content">
 
-<h1>{i18n Blog Comment Statuses}</h1>
+<h1>{i18n Anti Spam Plugins}</h1>
 
-<div class="secnav474_nav_x"><a href="blogcommentstatuses_add.php">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="antispamplugins_add.php">{i18n Add new}</a></div>
 <br class="clearb" />
 
-{if !empty($blog_comment_statuses)}
+{if !empty($anti_spam_plugins)}
 {if count($page_index) > 1}
 <h3 class="pagenav">{i18n Pages:} </h3> 
 <ul class="pagenav"> 
@@ -74,12 +74,12 @@ var selection = '{$session.selection}';
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="blogcommentstatuses_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+<li><a href="antispamplugins_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
 {/if}
 {/foreach}
 </ul>
 {/if}
-<table summary="{i18n Available Blog Comment Statuses}">
+<table summary="{i18n Available Anti Spam Plugins}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
@@ -90,17 +90,11 @@ var selection = '{$session.selection}';
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
-{foreach from=$blog_comment_statuses item=_blog_comment_status}
+{foreach from=$anti_spam_plugins item=_anti_spam_plugin}
 <tr>
-{if $_blog_comment_status.editable}
-<td class="template"><span>{$_blog_comment_status.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="blogcommentstatuses_delete.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
-{else}
-<td class="template"><span>{$_blog_comment_status.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-{/if}
+<td class="template"><span>{$_anti_spam_plugin.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="antispamplugins_edit.php?id={$_anti_spam_plugin.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="antispamplugins_delete.php?id={$_anti_spam_plugin.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
@@ -111,13 +105,13 @@ var selection = '{$session.selection}';
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="blogcommentstatuses_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+<li><a href="antispamplugins_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
 {/if}
 {/foreach}
 </ul>
 {/if}
 {else}
-<p>{i18n No blog comment status has been created yet.}</p>
+<p>{i18n No anti spam plugin has been created yet.}</p>
 {/if}
 
 <!-- content --></div>

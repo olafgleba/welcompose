@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Edit Blog Comment Status}</title>
+<title>{i18n Oak Admin &ndash; Add Anti Spam Plugin}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
  
@@ -39,7 +39,7 @@ var selection = '{$session.selection}';
 
 {include file="_inc_topnav.html" area="community"}
 
-{include file="_inc_projects_load.html" go_back_area="community" go_back_file="blogcommentstatuses_select.php"}
+{include file="_inc_projects_load.html" go_back_area="community" go_back_file="blogcommentstatuses_add.php"}
 
 <div id="main">
 
@@ -51,19 +51,19 @@ var selection = '{$session.selection}';
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
 <li><a href="blogcomments_select.php">{i18n Blog Comments}<span></span></a></li>
-<li><a href="blogcommentstatuses_select.php" class="on">{i18n Blog Comment Statuses}<span></span></a></li>
-<li><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}<span></span></a></li>
+<li><a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}<span></span></a></li>
+<li><a href="antispamplugins_select.php" class="on">{i18n Anti Spam Plugins}<span></span></a></li>
 </ul>
 </div>
 <!-- topsubnavcon static eof -->
 
-<div id="brc"><p>{i18n COMMUNITY}: <a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}</a> &#62; {i18n Edit Blog Comment Status}</p></div>
+<div id="brc"><p>{i18n COMMUNITY}: <a href="antispamplugins_select.php">{i18n Anti Spam Plugins}</a> &#62; {i18n Add Anti Spam Plugin}</p></div>
 
 <div id="content">
 
-<h1>{i18n Edit Blog Comment Statuses}</h1>
+<h1>{i18n Add Anti Spam Plugin}</h1>
 
-<div class="secnav710_navplus_x"><a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}</a></div>
+<div class="secnav710_navplus_x"><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -90,8 +90,14 @@ var selection = '{$session.selection}';
 
 {$form.hidden}
 
-<label class="cont" for="blog_comment_status_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.name.html}<span class="validate" id="blog_comment_status_name_container"></span></label>
+<label class="cont" for="anti_spam_plugin_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.name.html}</label>
+
+<label class="cont" for="anti_spam_plugin_internal_name"><span class="bez">{$form.internal_name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.internal_name.html}<span class="validate" id="anti_spam_plugin_internal_name_container"></span></label>
+
+<label class="cont" for="anti_spam_plugin_priority"><span class="bez">{$form.priority.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.priority.html}</label>
 
 {$form.submit.html}
 
