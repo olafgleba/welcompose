@@ -467,12 +467,8 @@ public function initProjectAdmin ($user)
 		throw new Application_ProjectException("Input for parameter user is expected to be numeric");
 	}
 	
-	// load cookie class
-	$COOKIE = load('utility:cookie');
-		
-	// let's see if there's a valid project id embedded in the cookie
-	$current_project = $COOKIE->adminGetCurrentProject();
-	$current_project = Base_Cnc::filterRequest($current_project, OAK_REGEX_NUMERIC);
+	// get current project id from session
+	$current_project = Base_Cnc::filterRequest($_SESSION['admin']['project'], OAK_REGEX_NUMERIC); 
 	
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
@@ -493,43 +489,8 @@ public function initProjectAdmin ($user)
 		
 		// return id of the current project
 		return OAK_CURRENT_PROJECT;
-		
-	// if the project id is invalid or if there isn't a project with the given id,
-	// simply fetch one of the other projects.
 	} else {
-		// search project table for one of the other projects
-		$select_params = array(
-			'order_macro' => 'NAME',
-			'limit' => 1
-		);
-		$result = $this->selectProjects($select_params);
-		
-		// let's see if we found a project
-		if (!empty($result[0]['id']) && is_numeric($result[0]['id']) && intval($result[0]['id']) > 0) {
-			// define constant
-			define('OAK_CURRENT_PROJECT', (int)$result[0]['id']);
-			
-			// load user class
-			$USER = load('user:user');
-
-			// let's see if the current user is part of the current project
-			if (!$USER->userIsAuthor($user, OAK_CURRENT_PROJECT)) {
-				throw new Application_ProjectException("User is not an author of the found project");
-			}
-			if (!$USER->userIsActive($user, OAK_CURRENT_PROJECT)) {
-				throw new Application_ProjectException("User is not active");
-			}
-			
-			// put the project id into the cookie
-			$COOKIE->adminSwitchCurrentProject(OAK_CURRENT_PROJECT);
-			
-			// return id of the current project
-			return OAK_CURRENT_PROJECT;
-			
-		// ok. there's no usable project. let's give up.
-		} else {
-			throw new Application_ProjectException("Unable to find a usable project");
-		}
+		throw new Application_ProjectException("No usable project found");
 	}
 }
 
@@ -558,7 +519,7 @@ public function initProjectPublicArea ()
 		return (int)$default_project['id'];
 	} else {
 		// let's see if the project exists
-		$project = $this->selectProjectUsingName($user_supplied_name);
+		$project = $this->selectProjectUsingUrlName($user_supplied_name);
 		
 		// define current project constant
 		define("OAK_CURRENT_PROJECT", (int)$project['id']);
@@ -578,17 +539,15 @@ public function initProjectPublicArea ()
  */
 public function switchProject ($new_project)
 {
+	// access check
+	if (!oak_check_access(null, null, null)) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
 	if (empty($new_project) || is_numeric($new_project)) {
-		// do access check here
-		if (true == false) {
-			throw new Application_ProjectException("You are not allowed to execute this operation");
-		}
-		
-		// get cookie class
-		$COOKIE = load('utility:cookie');
-		
-		// switch project
-		return $COOKIE->adminSwitchCurrentProject($new_project);
+		// load login class
+		$LOGIN = load('user:login');
+		return $LOGIN->switchAdminProject($new_project);
 	}
 	
 	return false;

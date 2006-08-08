@@ -65,6 +65,10 @@ try {
 	/* @var $USER User_User */
 	$USER = load('user:user');
 	
+	// load login class
+	/* @var $LOGIN User_Login */
+	$LOGIN = load('User:Login');
+	
 	// load project class
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
@@ -98,7 +102,7 @@ try {
 	$GROUP = load('user:group');
 	
 	// init user and project
-	if (!$USER->userIsLoggedIntoAdmin()) {
+	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
 		exit;
 	}

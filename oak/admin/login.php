@@ -64,9 +64,13 @@ try {
 	/* @var $USER User_User */
 	$USER = load('user:user');
 	
+	// load login class
+	/* @var $LOGIN User_Login */
+	$LOGIN = load('User:Login');
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('login', 'post');
-	$FORM->registerRule('testSecret', 'callback', 'testSecret', $USER);
+	$FORM->registerRule('testSecret', 'callback', 'testSecret', $LOGIN);
 	
 	// textfield for name
 	$FORM->addElement('text', 'email', gettext('E-mail address'), 
@@ -119,8 +123,11 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// log in user
-		$USER->logIntoAdmin($FORM->exportValue('email'), $FORM->exportValue('secret'));
+		// load login class
+		$LOGIN = load('user:login');
+		
+		// log into admin area
+		$LOGIN->logIntoAdmin($FORM->exportValue('email'), $FORM->exportValue('secret'));
 		
 		// redirect
 		$SESSION->save();

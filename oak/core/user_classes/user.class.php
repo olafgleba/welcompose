@@ -105,7 +105,7 @@ public function addUser ($sqlData)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -131,7 +131,7 @@ public function updateUser ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -167,7 +167,7 @@ public function deleteUser ($id)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -197,6 +197,11 @@ public function deleteUser ($id)
  */
 public function selectUser ($id)
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new User_UserException('Input for parameter id is not numeric');
@@ -295,6 +300,11 @@ public function selectUser ($id)
  */
 public function selectUsers ($params = array())
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$group = null;
 	$email = null;
@@ -427,6 +437,11 @@ public function selectUsers ($params = array())
  */
 public function selectAnonymousUser ()
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	$sql = "
 		SELECT
 			`user_users`.`id` AS `id`
@@ -481,7 +496,7 @@ public function mapUserToGroup ($user, $group = null)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -554,7 +569,7 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -589,7 +604,7 @@ public function detachUserFromProject ($user)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Manage')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -626,18 +641,18 @@ public function testForUniqueEmail ($email, $id = null)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($email)) {
-		throw new User_GroupException("Input for parameter email is not expected to be empty");
+		throw new User_UserException("Input for parameter email is not expected to be empty");
 	}
 	if (!is_scalar($email)) {
-		throw new User_GroupException("Input for parameter email is expected to be scalar");
+		throw new User_UserException("Input for parameter email is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new User_GroupException("Input for parameter id is expected to be numeric");
+		throw new User_UserException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -681,7 +696,7 @@ public function isDeletable ($user)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// check input
@@ -718,225 +733,6 @@ public function isDeletable ($user)
 	}
 }
 
-/**
- * Proceeds user login. Compares supplied email address and secret
- * with the email addresses and secrets stored in database. If the
- * the combination of email address and secret is found, the user id
- * will be stored in the current session.
- *
- * Please be aware that a successful login is not a guarantee, that the
- * current user is active or an author. Please use functions like
- * User_User::userIsAuthor() or User_User::userIsActive() to check
- * this.
- *
- * Takes the email address of the user to login as first argument,
- * its secret as second argument. Returns bool.
- * 
- * @throws User_UserException
- * @param string E-mail address
- * @param string Secret
- * @return bool
- */
-public function logIntoAdmin ($input_email, $input_secret)
-{
-	// input check
-	if (empty($input_secret)) {
-		throw new User_UserException('Input for parameter input_secret is not expected to be empty');
-	}
-	if (empty($input_email)) {
-		throw new User_UserException('Input for parameter input_email is not expected to be empty');
-	}
-	
-	// let's see if email/secret matches the email/secret stored in database
-	if (!$this->testSecret($input_secret, $input_email)) {
-		throw new User_UserException("Invalid login");
-	}
-	
-	// get user's encrypted secret
-	$sql = "
-		SELECT
-			`id`
-		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
-		WHERE
-			`user_users`.`email` = :email
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'email' => $input_email
-	);
-	
-	// get user id from database
-	$id = $this->base->db->select($sql, 'field', $bind_params);
-	
-	// save user id to session
-	$_SESSION['admin']['user'] = $id;
-	
-	// init project admin
-	$PROJECT = load('application:project');
-	$PROJECT->initProjectAdmin($id);
-	
-	// get user's rights
-	$sql = "
-		SELECT
-			`user_rights`.`id`,
-			`user_rights`.`name`
-		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
-		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
-		  ON
-			`user_rights`.`id` = `user_groups2user_rights`.`right`
-		JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
-		  ON
-			`user_groups2user_rights`.`group` = `user_groups`.`id`
-		  AND
-			`user_groups`.`project` = `user_rights`.`project`
-		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
-		  ON
-			`user_groups`.`id` = `user_users2user_groups`.`group`
-		WHERE
-			`user_users2user_groups`.`user` = :user
-		  AND
-			`user_rights`.`project` = :project
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'user' => $id,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// prepare rights array
-	$_SESSION['admin']['rights'] = array();
-	foreach ($this->base->db->select($sql, 'multi', $bind_params) as $_right) {
-		$_SESSION['admin']['rights'][(int)$_right['id']] = $_right['name'];
-	}
-	
-	// get group
-	$GROUP = load('user:group');
-	foreach ($GROUP->selectGroups(array('user' => $id)) as $_group) {
-		if (!empty($_group['id']) && is_numeric($_group['id'])) {
-			$_SESSION['admin']['group'] = $_group['id'];
-			break;
-		}
-	}
-	
-	return true;
-}
-
-/**
- * Tests if current visitor is logged into the admin area using
- * the user id supplied by the current session. Returns bool.
- * 
- * Please be aware that positive return value is not a guarantee,
- * that the current user is active or an author. Please use functions
- * like User_User::userIsAuthor() or User_User::userIsActive() to
- * check this.
- * 
- * @return bool
- */
-public function userIsLoggedIntoAdmin ()
-{
-	// import user id from session
-	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
-	
-	if (is_null($user_id)) {
-		return false;
-	}
-	
-	// make sure that the user exists
-	if (!$this->userExists($user_id)) {
-		return false;
-	}
-	
-	return true;
-}
-
-public function logIntoPublicAreaAsAnonymous ($anon_user)
-{
-	// let's see if this user is really an anonymous user
-	$sql = "
-		SELECT
-			COUNT(*) AS `total`
-		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
-		WHERE
-			`user_users`.`id` = :id
-		  AND
-			`user_users`.`email` = 'OAK_ANONYMOUS'
-		LIMIT
-			1
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'id' => $anon_user
-	);
-	
-	// evaluate result
-	if (intval($this->base->db->select($sql, 'field', $bind_params)) !== 1) {
-		throw new User_UserException('Given user does not exist or is not an anonymous user');
-	}
-	
-	// make sure that the user id is empty, so that a new "login" will be done
-	// on every new request
-	$_SESSION['public_area']['user'] = null;
-	
-	// get user's rights
-	$sql = "
-		SELECT
-			`user_rights`.`id`,
-			`user_rights`.`name`
-		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
-		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
-		  ON
-			`user_rights`.`id` = `user_groups2user_rights`.`right`
-		JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
-		  ON
-			`user_groups2user_rights`.`group` = `user_groups`.`id`
-		  AND
-			`user_groups`.`project` = `user_rights`.`project`
-		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
-		  ON
-			`user_groups`.`id` = `user_users2user_groups`.`group`
-		WHERE
-			`user_users2user_groups`.`user` = :user
-		  AND
-			`user_rights`.`project` = :project
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'user' => $anon_user,
-		'project' => OAK_CURRENT_PROJECT
-	);
-	
-	// prepare rights array
-	$_SESSION['public_area']['rights'] = array();
-	foreach ($this->base->db->select($sql, 'multi', $bind_params) as $_right) {
-		$_SESSION['public_area']['rights'][(int)$_right['id']] = $_right['name'];
-	}
-	
-	// get group
-	$GROUP = load('user:group');
-	foreach ($GROUP->selectGroups(array('user' => $anon_user)) as $_group) {
-		if (!empty($_group['id']) && is_numeric($_group['id'])) {
-			$_SESSION['public_area']['group'] = $_group['id'];
-			break;
-		}
-	}
-	
-	return true;
-}
-
 /** 
  * Sets OAK_CURRENT_USER constant using the user id saved in the
  * open session. Returns user id.
@@ -946,6 +742,11 @@ public function logIntoPublicAreaAsAnonymous ($anon_user)
  */
 public function initUserAdmin ()
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// import user id from session
 	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
 	
@@ -971,21 +772,25 @@ public function initUserAdmin ()
  */
 public function initUserPublicArea ()
 {
+	// access check
+	if (!oak_check_access(null, null, null)) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// import user id from session
-	$user_id = Base_Cnc::filterRequest($_SESSION['public']['user'], OAK_REGEX_NUMERIC);
+	$user_id = Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'], OAK_REGEX_NUMERIC);
 	
 	// if there's no user id or the user does not exist, register the
 	// user as anonymous user
 	if (is_null($user_id) || !$this->userExists($user_id) || !$this->userBelongsToCurrentProject($user_id)) {
-		// get anonymous user of the current project
-		$anon_user = $this->selectAnonymousUser();
 		
-		// now we have to login the guy here as anonymous user. sucks a bit, but
-		// what else shall we do?
-		$this->logIntoPublicAreaAsAnonymous($anon_user['id']);
+		// perform login as anonymous user
+		$LOGIN = load('User:Login');
+		$LOGIN->logIntoPublicAreaAsAnonymous();
 		
 		// define constant for current user
-		define('OAK_CURRENT_USER', (int)$anon_user['id']);
+		define('OAK_CURRENT_USER', Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'],
+			OAK_REGEX_NUMERIC));
 		
 		// define anon user constant
 		define('OAK_CURRENT_USER_ANONYMOUS', true);
@@ -1014,6 +819,11 @@ public function initUserPublicArea ()
  */
 public function userExists ($user, $project = null)
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException('Input for parameter user is not expected to be empty');
@@ -1067,6 +877,11 @@ public function userExists ($user, $project = null)
  */ 
 public function userIsAuthor ($user, $project)
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException('Input for parameter user is not expected to be empty');
@@ -1119,6 +934,11 @@ public function userIsAuthor ($user, $project)
  */
 public function userIsActive ($user, $project)
 {
+	// access check
+	if (!oak_check_access('User', 'User', 'Use')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException('Input for parameter user is not expected to be empty');
@@ -1157,57 +977,6 @@ public function userIsActive ($user, $project)
 	} else {
 		return true;
 	}
-}
-
-/**
- * Tests if given secret matches the secret stored in the database. Takes
- * user's secret as first argument and user's email address as second
- * argument. Returns bool.
- *
- * @throws User_UserException
- * @param string Secret
- * @param string E-mail address
- * @return bool 
- */
-public function testSecret ($input_secret, $input_email)
-{
-	// input test
-	if (empty($input_secret)) {
-		throw new User_UserException('Input for parameter input_secret is not expected to be empty');
-	}
-	if (empty($input_email)) {
-		throw new User_UserException('Input for parameter input_email is not expected to be empty');
-	}	
-	
-	// get user's encrypted secret
-	$sql = "
-		SELECT
-			`secret`
-		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
-		WHERE
-			`user_users`.`email` = :email
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'email' => $input_email
-	);
-	
-	// get secret from database
-	$secret = $this->base->db->select($sql, 'field', $bind_params);
-	
-	// if the secret is empty, return false
-	if (empty($secret)) {
-		return false;
-	}
-	
-	// test password
-	if (crypt($input_secret, $secret) === $secret) {
-		return true;
-	}
-	
-	return false;
 }
 
 /**
@@ -1257,12 +1026,15 @@ public function userCheckAccess($area = null, $component = null, $action = null)
 		}
 	} elseif (OAK_CURRENT_AREA == "PUBLIC") {
 		// make sure that there's a rights array
-		if (empty($_SESSION['public_area']['rights']) || !is_array($_SESSION['public_area']['rights'])) {
+		if (empty($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'])) {
+			throw new User_UserException("No rights array found");
+		}
+		if (!is_array($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'])) {
 			throw new User_UserException("No rights array found");
 		}
 		
 		// look for the right string in the list of user rights
-		foreach ($_SESSION['public_area']['rights'] as $_right_id => $_right) {
+		foreach ($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] as $_right_id => $_right) {
 			if ($_right === $action_string) {
 				return true;
 			}
@@ -1284,7 +1056,7 @@ public function userBelongsToCurrentProject ($user)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -1328,7 +1100,7 @@ public function userBelongsToCurrentProject ($user)
  * Tests whether user belongs to current user or not. Takes
  * the user id as first argument. Returns bool.
  *
- * @throws User_GroupException
+ * @throws User_UserException
  * @param int Group id
  * @return bool
  */
@@ -1336,12 +1108,12 @@ public function userBelongsToCurrentUser ($user)
 {
 	// access check
 	if (!oak_check_access('User', 'User', 'Use')) {
-		throw new User_GroupException("You are not allowed to perform this action");
+		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($user) || !is_numeric($user)) {
-		throw new User_GroupException('Input for parameter user is expected to be a numeric value');
+		throw new User_UserException('Input for parameter user is expected to be a numeric value');
 	}
 	
 	// load user class
