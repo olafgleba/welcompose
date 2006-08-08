@@ -453,9 +453,169 @@ public function switchAdminProject ($new_project)
 	return true;
 }
 
+/**
+ * Performs user login into public area. Compares supplied email address
+ * and secret with the email addresses and secrets stored in database. If
+ * the the combination of email address and secret is found, the user id
+ * will be stored in the current session.
+ *
+ * Takes the email address of the user to login as first argument,
+ * its secret as second argument. Returns bool.
+ * 
+ * @throws User_LoginException
+ * @param string E-mail address
+ * @param string Secret
+ * @return bool
+ */
 public function logIntoPublicArea ($input_email, $input_secret)
 {
+	// input check
+	if (empty($input_secret)) {
+		throw new User_LoginException('Input for parameter input_secret is not expected to be empty');
+	}
+	if (empty($input_email)) {
+		throw new User_LoginException('Input for parameter input_email is not expected to be empty');
+	}
 	
+	// let's see if email/secret matches the email/secret stored in database
+	if (!$this->testSecret($input_secret, $input_email)) {
+		throw new User_LoginException("Invalid login");
+	}
+	
+	// as we know now that the user is authenticated, we need to get it's id
+	$sql = "
+		SELECT
+			`id`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		WHERE
+			`user_users`.`email` = :email
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'email' => $input_email
+	);
+	
+	// get user id from database
+	$user = $this->base->db->select($sql, 'field', $bind_params);
+	
+	// the next step is to look for projects where the user is active
+	$sql = "
+		SELECT
+			`application_projects`.`id`
+		FROM
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`application_projects`.`id` = `user_users2application_projects`.`project`
+		WHERE
+			`user_users2application_projects`.`user` = :user
+		  AND
+			`user_users2application_projects`.`active` = '1'
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => $user
+	);
+	
+	// get user id from database
+	$possible_projects = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// if the list of possible projects is empty, we have to skip here
+	if (empty($possible_projects)) {
+		throw new User_LoginException("No usable project found");
+	}
+	
+	// let's see if the project where the user likes to switch to is in the
+	// list of possible projects
+	$project = null;
+	foreach ($possible_projects as $_project) {
+		if (OAK_CURRENT_PROJECT == $_project['id'] && !empty($_project['id']) && is_numeric($_project['id'])) {
+			$project = $_project['id'];
+			break;
+		}
+	}
+	
+	// if there's no current project, we have to stop here.
+	if (is_null($project)) {
+		throw new User_LoginException("No usable project found");
+	}
+	
+	// ok, we have now the user id and the current project id. now we
+	// need to get its group and its access rights. let's start with
+	// its user group.
+	$sql = "
+		SELECT
+			`user_groups`.`id`
+		FROM
+			".OAK_DB_USER_GROUPS." AS `user_groups`
+		JOIN
+			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		  ON
+			`user_groups`.`id` = `user_users2user_groups`.`group`
+		WHERE
+			`user_groups`.`project` = :project
+		  AND
+			`user_users2user_groups`.`user` = :user
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => $project,
+		'user' => $user
+	);
+	
+	// get possible group
+	$possible_group = $this->base->db->select($sql, 'row', $bind_params);
+	
+	// make sure that we got a group
+	if (empty($possible_group) || empty($possible_group['id']) || !is_numeric($possible_group['id'])) {
+		throw new User_LoginException("No usable group found");
+	}
+	$group = $possible_group['id'];
+	
+	// get access rights
+	$sql = "
+		SELECT
+			`user_rights`.`id`,
+			`user_rights`.`name`
+		FROM
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		JOIN
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
+		WHERE
+			`user_groups2user_rights`.`group` = :group
+		  AND
+			`user_rights`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'group' => $group,
+		'project' => $project
+	);
+	
+	// execute query
+	$access_rights = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// now it's time to save everything to the session/cookie
+	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'] = $user;
+	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'] = $group;
+	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] = array();
+	
+	foreach ($access_rights as $_right) {
+		$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'][(int)$_right['id']] = $_right['name'];
+	}
+	
+	// we're done
+	return true;
 }
 
 /**

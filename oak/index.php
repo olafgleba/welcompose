@@ -50,6 +50,10 @@ try {
 	$smarty_public_conf = dirname(__FILE__).'/core/conf/smarty_public.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_public_conf), true);
 	
+	// start session
+	/* @var $SESSION session */
+	$SESSION = load('base:session');
+	
 	// init project for public area
 	$PROJECT = load('application:project');
 	$PROJECT->initProjectPublicArea();
