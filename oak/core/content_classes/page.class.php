@@ -879,6 +879,49 @@ public function setIndexPage ($page)
 	return $this->updatePage($page, array('index_page' => '1'));
 }
 
+/**
+ * Checks if current user has access to given page. Takes the page id
+ * as first argument, the flag, if the page has to be protected or not,
+ * as second argument. Returns bool.
+ *
+ * @throws Content_PageException
+ * @param int Page id
+ * @param bool Protect flag
+ * @return bool
+ */
+public function checkAccess ($page, $protect_flag)
+{
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
+	}
+	
+	// if the protect flag is false, we don't have to protect this page
+	if (!$protect_flag) {
+		return true;
+	}
+	
+	// get the user group of the current user
+	$group = Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'],
+		OAK_REGEX_NUMERIC);
+	
+	// if there's not group, we can't grant access
+	if (is_null($group)) {
+		return false;
+	}
+	
+	// get the page-to-groups map so that we can see if the group of
+	// the user may access this page. 
+	$map = $this->selectPageToGroupsMap($page);
+	foreach ($map as $_node) {
+		if ($_node['group'] == $group) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 // end of class
 }
 

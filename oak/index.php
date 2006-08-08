@@ -87,6 +87,11 @@ try {
 	$action = Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC);
 	$action = (!is_null($action) ? $action : 'Index');
 	
+	// authenticate user if required
+	if (!$PAGE->checkAccess($page['id'], $page['protect'])) {
+		$action = 'Login';
+	}
+	
 	// create display class name from action and page id
 	switch ((string)$page['page_type_name']) {
 		case 'OAK_BLOG':
