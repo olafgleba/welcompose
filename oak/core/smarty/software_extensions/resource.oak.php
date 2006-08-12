@@ -56,7 +56,7 @@ function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	// the template couldn't be found or the template is empty. So let's
 	// throw a more or less meaningful exception.
 	if (empty($tpl_source)) {
-		throw new Exception("Template not found or empty");
+		throw new Exception('Template not found or empty: '.$tpl_name);
 	}
 	
 	return true;
