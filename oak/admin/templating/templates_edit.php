@@ -263,7 +263,10 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-	
+		
+		// add response to session
+		$_SESSION['response'] = 1;
+		
 		// redirect
 		$SESSION->save();
 		
@@ -273,7 +276,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: templates_select.php");
+		header("Location: templates_edit.php?id=".$FORM->exportValue('id'));
 		exit;
 	}
 } catch (Exception $e) {
