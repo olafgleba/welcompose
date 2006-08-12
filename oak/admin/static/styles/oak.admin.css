@@ -582,7 +582,7 @@ input.chbx {
 border-color: #666;
 }
 /* Reset for inner table definition */
-td input.submitbut140, td input.submitbut200 {
+td input.submitbut140, td input.submitbut200, td select {
 font-size: 100%;
 }
 /* eof Reset for inner table definition */
