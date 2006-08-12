@@ -562,7 +562,7 @@ public function applyTextConverter ($id, $text)
 	}
 	
 	// include text converter file
-	require($path);
+	require_once($path);
 	
 	// prepare function name
 	$function_name = sprintf("oak_plugin_textconverter_%s", $text_converter['internal_name']);
