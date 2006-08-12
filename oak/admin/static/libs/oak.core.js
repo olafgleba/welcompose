@@ -59,8 +59,8 @@ function Base ()
 		this.helpClassRemove = 'iHelpRemove';
 		this.helpClassLevelTwo = 'iHelpLevelTwo';
 		this.helpClassRemoveLevelTwo = 'iHelpRemoveLevelTwo';
-		this.helpClassMM = 'iHelpMM';
-		this.helpClassRemoveMM = 'iHelpRemoveMM';
+		this.helpClassMediamanager = 'iHelpMediamanager';
+		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
 		
 		/**
 		 * Define the div IDs for the navigation layers
@@ -75,7 +75,17 @@ function Base ()
 		/**
 		 * Define the div ID for several help layers
 		 */
-		this.helpLyMM = 'lyMediamanager';
+		this.helpLyMediamanager = 'lyMediamanager';
+		
+		/**
+		 * Define the div ID for several help layers
+		 */
+		this.helpLyMediamanagerMyLocal = 'lyMediamanagerMyLocal';
+		
+		/**
+		 * Define the div ID for several help layers
+		 */
+		this.helpLyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
 		
 		/**
 		 * Define the used table upload class names.
@@ -407,9 +417,9 @@ Help.prototype = new Base();
 Help.prototype.show = Help_show;
 Help.prototype.hide = Help_hide;
 Help.prototype.process = Help_process;
-Help.prototype.showMM = Help_showMM;
-Help.prototype.hideMM = Help_hideMM;
-Help.prototype.processMM = Help_processMM;
+Help.prototype.showMediamanager = Help_showMediamanager;
+Help.prototype.hideMediamanager = Help_hideMediamanager;
+Help.prototype.processMediamanager = Help_processMediamanager;
 
 
 
@@ -546,15 +556,16 @@ function Help_process (url, target)
  * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
  * @throws applyError on exception
  */
-function Help_showMM (elem)
+function Help_showMediamanager (elem)
 {
 	try {
 		// properties
 		this.elem = elem;
 		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute('id');
 		this.processId = this.formId;
-		this.target = this.helpLyMM;
-		this.elem.className = this.helpClassRemoveMM;
+		this.target = this.helpLyMediamanager;
+		this.elem.className = this.helpClassRemoveMediamanager;
+		this.toHide = this.helpLyMediamanagerMyLocal;
 	
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
 			
@@ -564,11 +575,10 @@ function Help_showMM (elem)
 			var _target		= this.target;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Help.processMM(_url,_target);};
+			_req.onreadystatechange = function () { Help.processMediamanager(_url,_target);};
 			_req.send('');
 		}
-		
-		Effect.Fade('mmhide',{duration: 0.4});
+		Element.hide(this.toHide);
 		Element.update(this.elem, this.helpHtmlHide);
 		Behaviour.apply();
 		
@@ -585,18 +595,18 @@ function Help_showMM (elem)
  * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
  */
-function Help_hideMM (elem)
+function Help_hideMediamanager (elem)
 {
 	try {
 		// properties
 		this.elem = elem;
-		this.processId = 'mmhide';
+		this.toHide = this.helpLyMediamanager;
+		this.toShow = this.helpLyMediamanagerMyLocal;
 		
-		this.elem.className = this.helpClassMM;
-		
-		Effect.Fade(this.helpLyMM,{duration: 0.4});
-		Element.hide(this.processId);
-		Effect.Appear(this.processId, {duration: 0.4, delay: 0.4});
+		this.elem.className = this.helpClassMediamanager;
+	
+		Element.hide(this.toHide);
+		Element.show(this.toShow);
 		Element.update(this.elem, this.helpHtmlShow);
 		Behaviour.apply();
 		
@@ -614,14 +624,13 @@ function Help_hideMM (elem)
  * @throws applyError on exception
  * @throws DevError on condition
  */
-function Help_processMM (url, target)
+function Help_processMediamanager (url, target)
 {  
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
 				Element.update (target, _req.responseText);
-				Element.hide(target);
-				Effect.Appear(target, {duration: 0.4, delay: 0.4});
+				Element.show(target);
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -1001,6 +1010,38 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 
+
+/**
+ * Check Option Occurrences and adjust height of content div
+ * @private
+ * @throws applyError on exception
+ */
+function _checkOccurrences (elems)
+{
+	try {
+		var res = elems.match(/block/gi);
+	
+		if (Mediamanager.isNull(res)) {
+			Element.setStyle('mmwrapcontent', {height: '386px'});
+		} else {
+			switch (res.length) {
+				case 1 :
+						Element.setStyle('mmwrapcontent', {height: '365px'});
+					break;
+				case 2 :
+						Element.setStyle('mmwrapcontent', {height: '344px'});
+					break;
+				case 3 :
+						Element.setStyle('mmwrapcontent', {height: '323px'});
+					break;
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
 /**
  * Implements method of prototype class Mediamanager
  * @param {string} elem actual element
@@ -1013,11 +1054,21 @@ function Mediamanager_hideElement (elem)
 		this.elem = elem;
 		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
 		
+		Element.hide(this.target);
 		this.elem.className = this.mediamanagerClass;
-		Effect.Fade(this.target,{duration: 0.6});
+		//Effect.Fade(this.target,{duration: 0.6});
 		Element.update(this.elem, this.elementHtmlShow);
-		
 		Behaviour.apply();
+				
+		var tagsElem = Element.getStyle('tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('timeframe_wrap', 'display');
+		var includeTypesElem = Element.getStyle('include_types_wrap', 'display');
+		
+		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
+		
+		_checkOccurrences (collectElems);
+		
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1035,11 +1086,20 @@ function Mediamanager_showElement (elem)
 		this.elem = elem;
 		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
 		
+		Element.show(this.target);
+	//	Effect.Appear(this.target,{duration: 0.6});
 		this.elem.className = this.mediamanagerClassHide;
-		Effect.Appear(this.target,{duration: 0.6});
 		Element.update(this.elem, this.elementHtmlHide);
-		
 		Behaviour.apply();
+				
+		var tagsElem = Element.getStyle('tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('timeframe_wrap', 'display');
+		var includeTypesElem = Element.getStyle('include_types_wrap', 'display');
+		
+		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
+		
+		_checkOccurrences (collectElems);
+		
 	} catch (e) {
 		_applyError(e);
 	}

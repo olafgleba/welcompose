@@ -120,15 +120,15 @@ var definitions = {
 			return false;
 		}
 	},
-	'.iHelpMM' : function(el){
+	'.iHelpMediamanager' : function(el){
 		el.onclick = function(){
-			Help.showMM(this);
+			Help.showMediamanager(this);
 			return false;
 		}
 	},
-	'.iHelpRemoveMM' : function(el){
+	'.iHelpRemoveMediamanager' : function(el){
 		el.onclick = function(){
-			Help.hideMM(this);
+			Help.hideMediamanager(this);
 			return false;
 		}
 	},

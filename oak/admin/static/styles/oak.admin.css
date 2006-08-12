@@ -72,7 +72,8 @@ background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p, #column li, #column label, #column select, #column a {
+p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p,
+#column li, #column label, #column select, #column a {
 font-size: 100%;
 }
 
@@ -197,6 +198,18 @@ font-weight: bold;
 color: #fff;
 background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
 padding: 0 0 3px 7px;
+}
+
+/* %H =logout */
+#logout {
+position: absolute;
+top: 48px;
+left: 917px;
+width: auto;
+}
+#logout a:link, #logout a:visited {
+color: #fff;
+font-weight: bold;
 }
 
 /* %N =top */
@@ -505,7 +518,7 @@ width: 140px;
 label span.req {
 color: #f00;
 }
-input.w130, input.w200, input.w220, input.w300, input.w540, input.w580 {
+input.w130, input.w200, input.w300, input.w540, input.w580 {
 width: 130px;
 border: 1px solid #666;
 padding: 2px 2px;
@@ -665,8 +678,8 @@ padding-left: 140px;
 .iHelpRemove a,
 .iHelpLevelTwo a,
 .iHelpRemoveLevelTwo a,
-.iHelpMM a,
-.iHelpRemoveMM a,
+.iHelpMediamanager a,
+.iHelpRemoveMediamanager a,
 .showMediamanagerElement a,
 .hideMediamanagerElement a {
 background-color: transparent;
@@ -675,8 +688,8 @@ background-color: transparent;
 .iHelpRemove img,
 .iHelpLevelTwo img,
 .iHelpRemoveLevelTwo img,
-.iHelpMM img,
-.iHelpRemoveMM img,
+.iHelpMediamanager img,
+.iHelpRemoveMediamanager img,
 .showMediamanagerElement img,
 .hideMediamanagerElement img {
 vertical-align: middle;
@@ -752,8 +765,8 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 #column {
 float: right;
 width: 236px;
-height: 660px;
-padding: 100px 0 0 0;
+height: 750px;
+padding: 96px 0 0 0;
 background: transparent;
 overflow: hidden;
 }
@@ -770,6 +783,9 @@ width: 226px;
 margin: 8px 5px 8px 5px;
 padding: 0;
 }
+form#mediamanager fieldset {
+padding: 4px 5px;
+}
 #column h2 {
 display: block;
 background: #efefef;
@@ -779,9 +795,9 @@ margin: 0 0 3px 0;
 #mmnav {
 display: block;
 background: #f9f9f9;
-padding: 3px 5px 3px 5px;
+padding: 3px 5px;
 margin-bottom: 3px;
-height: 1.9em;
+height: 1.4em;
 list-style: none;
 }
 #mmnav li {
@@ -792,7 +808,7 @@ position: relative;
 display: block;
 float: left;
 font-size: 80%;
-padding: 2px 10px 2px 17px;
+padding: 2px 10px 3px 17px;
 text-decoration: none;
 }
 #mmnav a:link, #mmnav a:visited {
@@ -803,6 +819,17 @@ background: transparent url(../img/icons/link.gif) 0 -2px no-repeat;
 color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
 }
+#mmnav  li.on {
+position: relative;
+display: block;
+float: left;
+font-size: 80%;
+padding: 2px 10px 3px 17px;
+text-decoration: none;
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
+}
+
 .mmwrap {
 display: block;
 background: #f9f9f9;
@@ -810,7 +837,7 @@ padding: 3px 5px;
 margin-bottom: 3px;
 }
 #column .mmwrap p {
-margin: 5px 5px 5px 2px;
+margin: 2px 5px 2px 2px;
 }
 #column .mmwrap label {
 display: inline;
@@ -819,7 +846,7 @@ width: auto;
 }
 #mmwrapcontent {
 display: block;
-height: 310px;
+height: 365px;
 font-size: 80%;
 background: #f9f9f9;
 padding: 3px 5px;
@@ -847,11 +874,15 @@ margin: 2px 0 2px 0;
 margin: 0 3px 0 3px;
 }
 
+
 #include_types_wrap {
 display: none;
 }
 #timeframe_wrap {
 display: none;
+}
+#tags_wrap {
+display: block;
 }
 
 

@@ -939,7 +939,8 @@ Element.Methods = {
     for (var i = 0; i < arguments.length; i++) {
       var element = $(arguments[i]);
       //mod olaf 
-      element.style.display = 'block';
+      //element.style.display = '';
+	  element.style.display = 'block';
     }
   },
 

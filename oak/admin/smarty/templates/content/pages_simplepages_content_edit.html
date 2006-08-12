@@ -39,6 +39,8 @@ var checkbox_status = new Array('simple_page_meta_use');
 <p>{i18n Oak}</p>
 <!-- logo --></div>
 
+<div id="logout"><a href="#">Logout <img... /></a></div>
+
 {include file="_inc_topnav.html" area="contents"}
 
 {include file="_inc_projects_load.html" go_back_area="content" go_back_file="pages_select.php"}
@@ -95,26 +97,30 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- rp --></div>
 {/if}
 
+<!-- column -->
 <div id="column">
 <form action="" method="post" id="mediamanager">
 
 <fieldset>
 
-<h2>MEDIA MANAGER<span class="iHelpMM"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
+<h2>MEDIA MANAGER<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
 
 <!-- help -->
 <div id="lyMediamanager"></div>
 <!-- help eof -->
 
-<!-- mmhide -->
-<div id="mmhide">
-
+<!-- mediamanager container (myLocal) -->
+<div id="lyMediamanagerMyLocal">
+	
+<!-- mediamanager navigation (active: mm_myLocal) -->
 <ul id="mmnav">
 <li><a class="mm_upload" href="#">Upload</a></li>
-<li><a class="mm_local" href="#">myLocal</a></li>
-<li><a class="mm_flickr" href="#">myFlickr</a></li>
+<li class="on"><span class="mm_myLocal">myLocal</span></li>
+<li><a class="mm_myFlickr" href="#">myFlickr</a></li>
 </ul>
+<!-- mediamanager navigation (active: mm_myLocal) eof -->
 
+<!-- element (include_types) wrap -->
 <fieldset class="mmwrap">
 <p class="include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
 <span id="include_types_wrap">
@@ -123,15 +129,19 @@ var checkbox_status = new Array('simple_page_meta_use');
 <label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types[]" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
 </span>
 </fieldset>
+<!-- element (include_types) wrap -->
 
+<!-- element (tags) wrap -->
 <div class="mmwrap">
 <label for="mm_tags" class="tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="tags_wrap">
-<input class="w220" type="text" id="mm_tags" />
+<input class="w200" type="text" id="mm_tags" />
 </span>
 </label>
 </div>
+<!-- element (tags) wrap eof -->
 
+<!-- element (timeframe) wrap -->
 <div class="mmwrap">
 <label for="mm_timeframe" class="timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="timeframe_wrap">
@@ -144,20 +154,29 @@ var checkbox_status = new Array('simple_page_meta_use');
 </span>
 </label>
 </div>
+<!-- element (timeframe) wrap eof -->
 
+<!-- mediamanager content -->
 <div id="mmwrapcontent">
-dd
+content
 </div>
+<!-- mediamanager content eof -->
 
-<div id="mmwrappager">Page <a href="#">1 of 10</a></div>
+<!-- mediamanager pager -->
+<div id="mmwrappager">Page <a href="#">1 of 10</a>
+	
+</div>
+<!-- mediamanager pager eof -->
 
 </div>
-<!-- mmhide eof -->
+<!-- mediamanager container eof -->
 
 </fieldset>
 </form>
 
 </div>
+<!-- column -->
+
 
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
