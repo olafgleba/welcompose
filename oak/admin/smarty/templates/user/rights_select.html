@@ -66,6 +66,19 @@ var selection = '{$session.selection}';
 <div class="secnav474_nav_x"><a href="rights_add.php">{i18n Add new}</a></div>
 <br class="clearb" />
 
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="rights_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
+{if !empty($rights)}
 <table summary="{i18n Right List}" class="user">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="340" height="1" alt="" /></td>
@@ -99,6 +112,21 @@ var selection = '{$session.selection}';
 </tr>
 {/foreach}
 </table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="rights_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
+{else}
+<p>{i18n No right has been created yet.}</p>
+{/if}
 
 <!-- content --></div>
 <!-- main --></div>

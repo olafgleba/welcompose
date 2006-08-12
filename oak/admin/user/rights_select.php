@@ -77,6 +77,10 @@ try {
 	/* @var $RIGHT User_Right */
 	$RIGHT = load('user:right');
 	
+	// load helper class
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('utility:helper');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -101,7 +105,24 @@ try {
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
 	// get existing rights
-	$BASE->utility->smarty->assign("rights", $RIGHT->selectRights());
+	$select_params = array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
+		'limit' => 20
+	);
+	$BASE->utility->smarty->assign("rights", $RIGHT->selectRights($select_params));
+	
+	// count available rights
+	$right_count = $RIGHT->countRights();
+	$BASE->utility->smarty->assign('right_count', $right_count);
+	
+	// prepare and assign page index
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($right_count, 20));
+	
+	// import and assign request params
+	$request = array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
+	);
+	$BASE->utility->smarty->assign('request', $request);
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

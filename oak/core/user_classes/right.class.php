@@ -338,6 +338,75 @@ public function selectRights ($params = array())
 }
 
 /**
+ * Method to count user rights. Takes key=>value array
+ * with counting params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>group, int, optional: Group id</li>
+ * </ul>
+ * 
+ * @throws User_RightException
+ * @param array Count params
+ * @return int
+ */
+public function countRights ($params = array())
+{
+	// access check
+	if (!oak_check_access('User', 'Right', 'Use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$group = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new User_RightException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'group':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new User_RightException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_RIGHTS." AS `user_rights`
+		LEFT JOIN
+			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
+		WHERE 
+			`user_rights`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($group)) {
+		$sql .= " AND `user_groups2user_rights`.`group` = :group ";
+		$bind_params['group'] = $group;
+	}
+	
+	return (int)$this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
  * Tests given right name for uniqueness. Takes the right name as
  * first argument and an optional right id as second argument. If
  * the right id is given, this right won't be considered when checking
