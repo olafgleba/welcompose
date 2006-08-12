@@ -240,6 +240,9 @@ public function selectBlogPosting ($id)
 			`content_blog_postings`.`tag_array` AS `tag_array`,
 			`content_blog_postings`.`date_modified` AS `date_modified`,
 			`content_blog_postings`.`date_added` AS `date_added`,
+			`content_blog_postings`.`day_added` AS `day_added`,
+			`content_blog_postings`.`month_added` AS `month_added`,
+			`content_blog_postings`.`year_added` AS `year_added`,
 			`content_nodes`.`id` AS `node_id`,
 			`content_nodes`.`navigation` AS `node_navigation`,
 			`content_nodes`.`root_node` AS `node_root_node`,
@@ -399,6 +402,9 @@ public function selectBlogPostings ($params = array())
 			`content_blog_postings`.`tag_array` AS `tag_array`,
 			`content_blog_postings`.`date_modified` AS `date_modified`,
 			`content_blog_postings`.`date_added` AS `date_added`,
+			`content_blog_postings`.`day_added` AS `day_added`,
+			`content_blog_postings`.`month_added` AS `month_added`,
+			`content_blog_postings`.`year_added` AS `year_added`,
 			`content_nodes`.`id` AS `node_id`,
 			`content_nodes`.`navigation` AS `node_navigation`,
 			`content_nodes`.`root_node` AS `node_root_node`,
@@ -575,6 +581,307 @@ public function countBlogPostings ($params = array())
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
+ * Selects years with blog postings. Takes field=>key array with select
+ * params as first argument. Returns array with years.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Return only blog postings assigned to this page</li>
+ * <li>order_macro, string, optional: Sorting instructions</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws Content_BlogPostingException
+ * @param array
+ * @return array
+ */
+public function selectDifferentYears ($params)
+{
+	// define some vars
+	$page = null;
+	$order_macro = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_BlogPostingException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'page':
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
+			default:
+				throw new Content_BlogPostingException("Unknown parameter $_key");
+		}
+	}
+	
+	// define order macros
+	$macros = array(
+		'DATE_ADDED' => '`date_added`',
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`date_added` AS `timestamp`,
+			`year_added` AS `year`
+		FROM
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		WHERE
+			1
+	";
+	
+	if (!empty($page)) {
+		$sql .= sprintf(" AND `page` = :page ");
+		$bind_params['page'] = $page;
+	}
+		
+	// aggregate result set
+	$sql .=	" GROUP BY `year` ";
+	
+	// add sorting
+	if (!empty($order_macro)) {
+		$HELPER = load('utility:helper');
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	}
+	
+	// add limits etc.
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u ", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u ", $start, $limit);
+	}
+
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Selects months with blog postings. Takes field=>key array with select
+ * params as first argument. Returns array with months and years.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Return only blog postings assigned to this page</li>
+ * <li>year, int, optional: Return only blog postings added in that year</li>
+ * <li>order_macro, string, optional: Sorting instructions</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws Content_BlogPostingException
+ * @param array Select params
+ * @return array
+ */
+public function selectDifferentMonths ($params)
+{
+	// define some vars
+	$page = null;
+	$year = null;
+	$order_macro = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new blogpostingException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ($_key) {
+			case 'page':	
+			case 'year':	
+			case 'start':	
+			case 'limit':		
+					$$_key = (int)$_value;
+				break;
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
+			default:
+				throw new blogpostingException("Unknown parameter $_key");
+		}
+	}
+	
+	// define order macros
+	$macros = array(
+		'DATE_ADDED' => '`date_added`',
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`date_added` AS `timestamp`,
+			`year_added` AS `year`,
+			`month_added` AS `month`
+		FROM
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		WHERE
+			1
+	";
+	
+	// add where clauses
+	if (!empty($page)) {
+		$sql .= " AND `page` = :page ";
+		$bind_params['page'] = $page;
+	}
+	if (!empty($year)) {
+		$sql .= sprintf(" AND `year_added` = :year ");
+		$bind_params['year'] = $year;
+	}
+	
+	// aggregate result set
+	$sql .=	" GROUP BY `month_added`, `year_added` ";
+	
+	// add sorting
+	if (!empty($order_macro)) {
+		$HELPER = load('utility:helper');
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	}
+	
+	// add limits etc.
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u ", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u ", $start, $limit);
+	}
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Selects days with blog postings. Takes field=>key array with select params
+ * as first argument. Returns array with days, months and years.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Return only blog postings assigned to this page</li>
+ * <li>year, int, optional: Return only blog postings added in that year</li>
+ * <li>month, int, optional: Return only blog postings added in that month</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws Content_BlogPostingException
+ * @param array Select params
+ * @return array
+ */
+public function selectDifferentDays ($params)
+{
+	// define some vars
+	$page = null;
+	$year = null;
+	$month = null;
+	$order_macro = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new blogpostingException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ($_key) {
+			case 'page':	
+			case 'year':	
+			case 'month':	
+			case 'start':	
+			case 'limit':		
+					$$_key = (int)$_value;
+				break;
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
+			default:
+				throw new blogpostingException("Unknown parameter $_key");
+		}
+	}
+	
+	// define order macros
+	$macros = array(
+		'DATE_ADDED' => '`date_added`',
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
+	// prepare query
+	$sql = "
+		SELECT
+			date_added AS timestamp,
+			date_added_year AS year,
+			date_added_month AS month,
+			date_added_day AS day
+		FROM
+			blog_postings
+		WHERE
+			1
+	";
+	
+	// add where clauses
+	if (!empty($page)) {
+		$sql .= " AND `page` = :page ";
+		$bind_params['page'] = $page;
+	}
+	if (!empty($year)) {
+		$sql .= sprintf(" AND `year_added` = :year ");
+		$bind_params['year'] = $year;
+	}
+	if (!empty($month)) {
+		$sql .= sprintf(" AND `month_added` = :month ");
+		$bind_params['month'] = $month;
+	}
+	
+	// aggregate result set
+	$sql .=	" GROUP BY `day_added`, `month_added`, `year_added` ";
+	
+	// add sorting
+	if (!empty($order_macro)) {
+		$HELPER = load('utility:helper');
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	}
+		
+	// add limits etc.
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u ", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u ", $start, $limit);
+	}
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
 /**

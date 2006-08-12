@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 06.08.2006 22:54:29
--- Diagram Version: 76
+-- Created on: 12.08.2006 23:35:35
+-- Diagram Version: 80
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -36,8 +36,9 @@ CREATE TABLE `application_ping_services` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `application_schema_info` (
-  `version` int(11) UNSIGNED
+CREATE TABLE `application_info` (
+  `application_version` int(11) UNSIGNED,
+  `schema_version` int(11) UNSIGNED
 )
 TYPE=INNODB;
 
@@ -561,10 +562,16 @@ CREATE TABLE `content_blog_postings` (
   `tag_array` text,
   `date_modified` timestamp(14),
   `date_added` datetime,
+  `day_added` char(2),
+  `month_added` char(2),
+  `year_added` char(4),
   PRIMARY KEY(`id`),
   INDEX `page`(`page`),
   INDEX `user`(`user`),
   INDEX `text_converter`(`text_converter`),
+  INDEX `day_added`(`day_added`),
+  INDEX `month_added`(`month_added`),
+  INDEX `year_added`(`year_added`),
   CONSTRAINT `content_blog_postings.page2content_pages.id` FOREIGN KEY (`page`)
     REFERENCES `content_pages`(`id`)
       ON DELETE CASCADE
@@ -649,8 +656,11 @@ TYPE=INNODB;
 CREATE TABLE `community_blog_comments` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `posting` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED,
   `status` int(11) UNSIGNED,
+  `name` varchar(255),
+  `email` varchar(255),
+  `homepage` varchar(255),
   `content_raw` text,
   `content` text,
   `original_raw` text,
