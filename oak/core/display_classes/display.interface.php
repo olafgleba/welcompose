@@ -80,11 +80,20 @@ public function getMainTemplateName ();
 
 /**
  * Returns the redirect location of the the current
- * document (~ $PHP_SELF without it's problems).
+ * document (~ $PHP_SELF without it's problems) with the
+ * Location: header prepended.
  * 
  * @return string
  */
 public function getRedirectLocationSelf ();
+
+/**
+ * Returns the redirect location of the the current
+ * document (~ $PHP_SELF without it's problems).
+ * 
+ * @return string
+ */
+public function getLocationSelf ();
 
 /**
  * Returns information whether to skip authentication

@@ -147,7 +147,8 @@ public function render ()
 protected function renderPersonalForm ()
 {
 	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post');
+	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
+		$this->getLocationSelf());
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'),
@@ -257,7 +258,8 @@ protected function renderBusinessForm ()
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post');
+	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
+		$this->getLocationSelf());
 	
 	// select for salutation
 	$FORM->addElement('select', 'salutation', gettext('Salutation'), $salutations,
@@ -447,16 +449,28 @@ public function getBusinessMailTemplateName ()
 
 /**
  * Returns the redirect location of the the current
- * document (~ $PHP_SELF without it's problems).
+ * document (~ $PHP_SELF without it's problems) with the
+ * Location: header prepended.
  * 
  * @return string
  */
 public function getRedirectLocationSelf ()
 {
-	if ($this->_page['index_page']) {
-		return sprintf("Location: index.php?page=%u&action=Index", $this->_page['id']);
-	} else {
+	return "Location: ".$this->getLocationSelf();
+}
+
+/**
+ * Returns the redirect location of the the current
+ * document (~ $PHP_SELF without it's problems).
+ * 
+ * @return string
+ */
+public function getLocationSelf ()
+{
+	if ($this->_page_info['index_page']) {
 		return 'index.php';
+	} else {
+		return sprintf("index.php?page=%u&action=Index", $this->_page_info['id']);
 	}
 }
 

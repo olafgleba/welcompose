@@ -155,16 +155,28 @@ public function getMainTemplateName ()
 
 /**
  * Returns the redirect location of the the current
- * document (~ $PHP_SELF without it's problems).
+ * document (~ $PHP_SELF without it's problems) with the
+ * Location: header prepended.
  * 
  * @return string
  */
 public function getRedirectLocationSelf ()
 {
-	if ($this->_page['index_page']) {
-		return sprintf("Location: index.php?page=%u&action=ArchiveMonth", $this->_page['id']);
-	} else {
+	return "Location: ".$this->getLocationSelf();
+}
+
+/**
+ * Returns the redirect location of the the current
+ * document (~ $PHP_SELF without it's problems).
+ * 
+ * @return string
+ */
+public function getLocationSelf ()
+{
+	if ($this->_page_info['index_page']) {
 		return 'index.php';
+	} else {
+		return sprintf("index.php?page=%u&action=ArchiveMonth", $this->_page_info['id']);
 	}
 }
 
