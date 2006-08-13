@@ -31,6 +31,40 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
+/**
+ * Whitelist for select plugins. Prevents undesired execution of
+ * internal functions/methods. Takes the namespace name as first
+ * argument, the class name as second argument and the method name
+ * as third argument. These will be tested against the whitelist
+ * patterns defined within the function. Returns true if the
+ * argument combination passed the whitelist.
+ * 
+ * @param string Namespace name
+ * @param string Class name
+ * @param string Method name
+ * @param bool 
+ */
+function oak_smarty_select_whitelist ($ns, $class, $method)
+{
+	// configure white list
+	$whitelist = array(
+		array(
+			'namespaces' => '=^(.*)$=',
+			'classes' => '=^(.*)$=',
+			'methods' => '=^select([a-z]+)$=i'
+		)
+	);
+	
+	foreach ($whitelist as $_entry) {
+		if (preg_match($_entry['namespaces'], $ns) && preg_match($_entry['classes'], $class)
+		&& preg_match($_entry['methods'], $method)) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 // define constants
 if (!defined('SMARTY_DIR')) {
 	define('SMARTY_DIR', dirname(__FILE__).'/smarty/');

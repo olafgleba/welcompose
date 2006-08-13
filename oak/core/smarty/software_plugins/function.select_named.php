@@ -40,15 +40,6 @@ function smarty_function_select_named ($params, &$smarty)
 	$method = null;
 	$select_params = array();
 	
-	// load class loader
-	$path_parts = array(
-		dirname(__FILE__),
-		'..',
-		'..',
-		'loader.php'
-	);
-	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
-	
 	// check input vars
 	if (!is_array($params)) {
 		throw new Exception("select_named: Functions params are not in an array");	
@@ -88,7 +79,21 @@ function smarty_function_select_named ($params, &$smarty)
 	if (is_null($method) || !preg_match(OAK_REGEX_SMARTY_METHOD_NAME, $method)) {
 		throw new Exception("select_named: Invalid method name supplied");
 	}
-
+	
+	// let's see if we can safely call the desired method
+	if (!oak_smarty_select_whitelist($ns, $class, $method)) {
+		throw new Exception("select_named: Function call did not pass the whitelist");	
+	}
+	
+	// load class loader
+	$path_parts = array(
+		dirname(__FILE__),
+		'..',
+		'..',
+		'loader.php'
+	);
+	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
+	
 	// load requested class
 	$OBJECT = load($ns.':'.$class);
 	
