@@ -51,7 +51,7 @@ function oak_smarty_select_whitelist ($ns, $class, $method)
 		array(
 			'namespaces' => '=^(.*)$=',
 			'classes' => '=^(.*)$=',
-			'methods' => '=^select([a-z]+)$=i'
+			'methods' => '=^(select|count)([a-z]+)$=i'
 		)
 	);
 	
