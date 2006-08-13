@@ -420,9 +420,6 @@ Help.prototype.process = Help_process;
 Help.prototype.showMediamanager = Help_showMediamanager;
 Help.prototype.hideMediamanager = Help_hideMediamanager;
 Help.prototype.processMediamanager = Help_processMediamanager;
-
-
-
 Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
@@ -1016,23 +1013,27 @@ Mediamanager.prototype.hideElement = Mediamanager_hideElement;
  * @private
  * @throws applyError on exception
  */
-function _checkOccurrences (elems)
+function _checkOccurrences (elems, prefix)
 {
 	try {
 		var res = elems.match(/block/gi);
 	
 		if (Mediamanager.isNull(res)) {
-			Element.setStyle('mmwrapcontent', {height: '386px'});
+			Element.setStyle(prefix + 'mmwrapcontent', {height: '386px'});
+			Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '379px'});
 		} else {
 			switch (res.length) {
 				case 1 :
-						Element.setStyle('mmwrapcontent', {height: '365px'});
+						Element.setStyle(prefix + 'mmwrapcontent', {height: '365px'});
+						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '358px'});
 					break;
 				case 2 :
-						Element.setStyle('mmwrapcontent', {height: '344px'});
+						Element.setStyle(prefix + 'mmwrapcontent', {height: '344px'});
+						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '337px'});
 					break;
 				case 3 :
-						Element.setStyle('mmwrapcontent', {height: '323px'});
+						Element.setStyle(prefix + 'mmwrapcontent', {height: '323px'});
+						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '316px'});
 					break;
 			}
 		}
@@ -1060,14 +1061,23 @@ function Mediamanager_hideElement (elem)
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
 				
-		var tagsElem = Element.getStyle('tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('timeframe_wrap', 'display');
-		var includeTypesElem = Element.getStyle('include_types_wrap', 'display');
+		var res = this.target.match(/^myLocal/i);
+		if (res) {
+			var prefix = 'myLocal_';
+			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
+			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
+			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
+		} else {
+			var prefix = 'myFlickr_';
+			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
+			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
+			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
+		}
 		
 		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
 		
-		_checkOccurrences (collectElems);
-		
+		_checkOccurrences (collectElems, prefix);
+	
 		
 	} catch (e) {
 		_applyError(e);
@@ -1085,20 +1095,30 @@ function Mediamanager_showElement (elem)
 		// properties
 		this.elem = elem;
 		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
-		
+
 		Element.show(this.target);
 	//	Effect.Appear(this.target,{duration: 0.6});
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.apply();
-				
-		var tagsElem = Element.getStyle('tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('timeframe_wrap', 'display');
-		var includeTypesElem = Element.getStyle('include_types_wrap', 'display');
+	
+		var res = this.target.match(/^myLocal/i);
+		if (res) {
+			var prefix = 'myLocal_';
+			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
+			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
+			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
+		} else {
+			var prefix = 'myFlickr_';
+			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
+			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
+			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
+		}
 		
 		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
 		
-		_checkOccurrences (collectElems);
+		_checkOccurrences (collectElems, prefix);
+	
 		
 	} catch (e) {
 		_applyError(e);

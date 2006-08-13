@@ -39,7 +39,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 <p>{i18n Oak}</p>
 <!-- logo --></div>
 
-<div id="logout"><a href="#">Logout <img... /></a></div>
+<div id="logout"><a href="#">Logout</a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -99,10 +99,9 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- column -->
 <div id="column">
+
 <form action="" method="post" id="mediamanager">
-
 <fieldset>
-
 <h2>MEDIA MANAGER<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
 
 <!-- help -->
@@ -111,9 +110,9 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- mediamanager container (myLocal) -->
 <div id="lyMediamanagerMyLocal">
-	
+
 <!-- mediamanager navigation (active: mm_myLocal) -->
-<ul id="mmnav">
+<ul class="mmnav">
 <li><a class="mm_upload" href="#">Upload</a></li>
 <li class="on"><span class="mm_myLocal">myLocal</span></li>
 <li><a class="mm_myFlickr" href="#">myFlickr</a></li>
@@ -122,8 +121,8 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- element (include_types) wrap -->
 <fieldset class="mmwrap">
-<p class="include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
-<span id="include_types_wrap">
+<p class="myLocal_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
+<span id="myLocal_include_types_wrap">
 <label for="include_types_doc"><input id="include_types_doc" class="chbx" name="include_types[]" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
 <label for="include_types_img"><input id="include_types_img" class="chbx" name="include_types[]" type="checkbox" value="2" /><span class="cbxspread">Images</span></label>
 <label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types[]" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
@@ -133,9 +132,9 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- element (tags) wrap -->
 <div class="mmwrap">
-<label for="mm_tags" class="tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
-<span id="tags_wrap">
-<input class="w200" type="text" id="mm_tags" />
+<label for="myLocal_mm_tags" class="myLocal_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<span id="myLocal_tags_wrap">
+<input class="w200" type="text" id="myLocal_mm_tags" />
 </span>
 </label>
 </div>
@@ -143,12 +142,12 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
-<label for="mm_timeframe" class="timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="timeframe_wrap">
-<select id="mm_timeframe" name="mm_timeframe">
-<option{if empty($request.mm_timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
-{foreach from=$mm_timeframes key=_mm_timeframe_value item=_mm_timeframe_name}
-<option value="{$_mm_timeframe_value}"{if $request.mm_timeframe == $_mm_timeframe_value} selected="selected"{/if}>{$_mm_timeframe_name}</option>
+<label for="myLocal_mm_timeframe" class="myLocal_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="myLocal_timeframe_wrap">
+<select id="myLocal_mm_timeframe" name="myLocal_mm_timeframe">
+<option{if empty($request.myLocal_mm_timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$myLocal_mm_timeframes key=_myLocal_mm_timeframe_value item=_myLocal_mm_timeframe_name}
+<option value="{$_myLocal_mm_timeframe_value}"{if $request.myLocal_mm_timeframe == $_myLocal_mm_timeframe_value} selected="selected"{/if}>{$_myLocal_mm_timeframe_name}</option>
 {/foreach}
 </select>
 </span>
@@ -157,19 +156,95 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- element (timeframe) wrap eof -->
 
 <!-- mediamanager content -->
-<div id="mmwrapcontent">
-content
+<div id="myLocal_mmwrapcontent">
+
+<!-- mediamanager content populate -->
+<div id="myLocal_mmwrapcontentToPopulate">
+content wo man sehen kann wie weit er geht und wann er umbricht
+</div>
+<!-- mediamanager content populate eof -->
 </div>
 <!-- mediamanager content eof -->
 
 <!-- mediamanager pager -->
-<div id="mmwrappager">Page <a href="#">1 of 10</a>
-	
+<div class="mmwrappager">
+Page <a href="#">1 of 10</a>	
 </div>
 <!-- mediamanager pager eof -->
 
 </div>
-<!-- mediamanager container eof -->
+<!-- mediamanager container (myLocal) eof -->
+
+
+
+<!-- mediamanager container (myFlickr) -->
+<div id="lyMediamanagerMyFlickr">
+	
+<!-- mediamanager navigation (active: mm_myFlickr) -->
+<ul class="mmnav">
+<li><a class="mm_upload" href="#">Upload</a></li>
+<li><a class="mm_myLocal" href="#">myLocal</a></li>
+<li class="on"><span class="mm_myFlickr">myFlickr</span></li>
+</ul>
+<!-- mediamanager navigation (active: mm_myFlickr) eof -->
+
+<!-- element (include_types) wrap -->
+<fieldset class="mmwrap">
+<p class="myFlickr_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
+<span id="myFlickr_include_types_wrap">
+	<label for="include_types_doc"><input id="include_types_doc" class="chbx" name="include_types[]" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
+	<label for="include_types_img"><input id="include_types_img" class="chbx" name="include_types[]" type="checkbox" value="2" /><span class="cbxspread">Images</span></label>
+	<label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types[]" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
+</span>
+</fieldset>
+<!-- element (include_types) wrap -->
+
+<!-- element (tags) wrap -->
+<div class="mmwrap">
+<label for="myFlickr_mm_tags" class="myFlickr_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<span id="myFlickr_tags_wrap">
+<input class="w200" type="text" id="myFlickr_mm_tags" />
+</span>
+</label>
+</div>
+<!-- element (tags) wrap eof -->
+
+<!-- element (timeframe) wrap -->
+<div class="mmwrap">
+<label for="myFlickr_mm_timeframe" class="myFlickr_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="myFlickr_timeframe_wrap">
+<select id="myFlickr_mm_timeframe" name="myFlickr_mm_timeframe">
+<option{if empty($request.myFlickr_mm_timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$myFlickr_mm_timeframes key=_myFlickr_mm_timeframe_value item=_mm_myFlickr_timeframe_name}
+<option value="{$_myFlickr_mm_timeframe_value}"{if $request.myFlickr_mm_timeframe == $_myFlickr_mm_timeframe_value} selected="selected"{/if}>{$_myFlickr_mm_timeframe_name}</option>
+{/foreach}
+</select>
+</span>
+</label>
+</div>
+<!-- element (timeframe) wrap eof -->
+
+<!-- mediamanager content -->
+<div id="myFlickr_mmwrapcontent">
+
+<!-- mediamanager content populate -->
+<div id="myFlickr_mmwrapcontentToPopulate">
+flickr content wo man sehen kann wie weit er geht und wann er umbricht
+</div>
+<!-- mediamanager content populate eof -->
+
+</div>
+<!-- mediamanager content eof -->
+
+<!-- mediamanager pager -->
+<div class="mmwrappager">
+Page <a href="#">1 of 10</a>	
+</div>
+<!-- mediamanager pager eof -->
+
+</div>
+<!-- mediamanager container (myFlickr) eof -->
+
 
 </fieldset>
 </form>

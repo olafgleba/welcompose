@@ -73,7 +73,7 @@ h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
 p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p,
-#column li, #column label, #column select, #column a {
+#column a {
 font-size: 100%;
 }
 
@@ -792,7 +792,7 @@ background: #efefef;
 padding: 3px 5px;
 margin: 0 0 3px 0;
 }
-#mmnav {
+.mmnav {
 display: block;
 background: #f9f9f9;
 padding: 3px 5px;
@@ -800,10 +800,10 @@ margin-bottom: 3px;
 height: 1.4em;
 list-style: none;
 }
-#mmnav li {
+.mmnav li {
 display: inline;
 }
-#mmnav  li a {
+.mmnav li a {
 position: relative;
 display: block;
 float: left;
@@ -811,15 +811,15 @@ font-size: 80%;
 padding: 2px 10px 3px 17px;
 text-decoration: none;
 }
-#mmnav a:link, #mmnav a:visited {
+.mmnav a:link, .mmnav a:visited {
 color: #000;
 background: transparent url(../img/icons/link.gif) 0 -2px no-repeat;
 }
-#mmnav  a:hover, #mmnav  a:active, #mmnav  a:focus {
+.mmnav a:hover, .mmnav a:active, .mmnav a:focus {
 color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
 }
-#mmnav  li.on {
+.mmnav li.on {
 position: relative;
 display: block;
 float: left;
@@ -844,7 +844,7 @@ display: inline;
 font-size: 80%;
 width: auto;
 }
-#mmwrapcontent {
+#myLocal_mmwrapcontent, #myFlickr_mmwrapcontent {
 display: block;
 height: 365px;
 font-size: 80%;
@@ -852,7 +852,14 @@ background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
 }
-#mmwrappager {
+#myLocal_mmwrapcontentToPopulate, #myFlickr_mmwrapcontentToPopulate {
+display: block;
+height: 358px;
+background: #fff;
+border: 1px solid #999;
+padding: 3px 5px;
+}
+.mmwrappager {
 display: block;
 background: #f9f9f9;
 font-size: 80%;
@@ -875,15 +882,32 @@ margin: 0 3px 0 3px;
 }
 
 
-#include_types_wrap {
+#myLocal_include_types_wrap {
 display: none;
 }
-#timeframe_wrap {
+#myLocal_timeframe_wrap {
 display: none;
 }
-#tags_wrap {
+#myLocal_tags_wrap {
 display: block;
 }
+#myFlickr_include_types_wrap {
+display: none;
+}
+#myFlickr_timeframe_wrap {
+display: none;
+}
+#myFlickr_tags_wrap {
+display: block;
+}
+
+#lyMediamanagerMyLocal {
+display: block;
+}
+#lyMediamanagerMyFlickr {
+display: none;
+}
+
 
 
 
