@@ -140,6 +140,10 @@ try {
 	// execute the renderer
 	$DISPLAY->render();
 	
+	// assign action, script name
+	$BASE->utility->smarty->assign('action', $action);
+	$BASE->utility->smarty->assign('SCRIPT_NAME', $DISPLAY->getLocationSelf());
+	
 	// enable/disable caching
 	$BASE->utility->smarty->caching = $DISPLAY->getMainTemplateCacheMode();
 	$BASE->utility->smarty->cache_lifetime = $DISPLAY->getMainTemplateCacheLifeTime();

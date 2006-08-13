@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: function.page_index.php
+ * File: function.get_url.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -31,53 +31,56 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-function smarty_function_page_index ($params, &$smarty)
+function smarty_function_get_url ($params, &$smarty)
 {
 	// define some vars
-	$var = null;
-	$item_count = null;
-	$interval = null;
+	$page = null;
+	$action = null;
+	$query_params = array();
 	
 	// check input vars
 	if (!is_array($params)) {
-		throw new Exception("page_index: Functions params are not in an array");	
+		throw new Exception("get_url: Functions params are not in an array");	
 	}
 	
-	// import params
+	// separate function params from the rest
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'var':
-					$$_key = (string)$_value;
-				break;
-			case 'item_count':
-			case 'interval':
+			case 'page':
 					$$_key = (int)$_value;
 				break;
+			case 'action':
+					$$_key = (string)$_value;
+				break;
 			default:
-					throw new Exception("page_index: Unknown argument");
+					$query_params[$_key] = $_value;
 				break;
 		}
 	}
 	
 	// check input
-	if (is_null($var) || !preg_match(OAK_REGEX_SMARTY_VAR_NAME, $var)) {
-		throw new Exception("page_index: Invalid var name supplied");
+	if (is_null($page) || !is_numeric($page)) {
+		throw new Exception("get_url: Invalid page id supplied");
+	}
+	if (is_null($action) || !preg_match(OAK_REGEX_ALPHANUMERIC, $action)) {
+		throw new Exception("get_url: Invalid action supplied");
 	}
 	
-	// load class loader
-	$path_parts = array(
-		dirname(__FILE__),
-		'..',
-		'..',
-		'loader.php'
-	);
-	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
+	// load Net_URL
+	require_once 'Net/URL.php';
+	$URL = new Net_URL('index.php');
 	
-	// load Utility_Helper class
-	$HELPER = load('Utility:Helper');
-		
-	// execute method and return requested data
-	$smarty->assign($var, $HELPER->calculatePageIndex($item_count, $interval));
+	// add page/action to url
+	$URL->addQueryString('page', $page);
+	$URL->addQueryString('action', $action);
+	
+	// append query params to url
+	foreach ($query_params as $_key => $_value) {
+		$URL->addQueryString($_key, $_value);
+	}
+	
+	// return generated url
+	return $URL->getUrl();
 }
 
 ?>

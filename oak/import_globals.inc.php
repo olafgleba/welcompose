@@ -33,7 +33,19 @@
 
 // default vars
 $get = array(
-	'page' => Base_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC)
+	'action' => Base_Cnc::filterRequest($_GET['action'], OAK_REGEX_ALPHANUMERIC),
+	'month' => Base_Cnc::filterRequest($_GET['month'], OAK_REGEX_NUMERIC),
+	'page' => Base_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC),
+	'start' => Base_Cnc::filterRequest($_GET['start'], OAK_REGEX_NUMERIC),
+	'year' => Base_Cnc::filterRequest($_GET['year'], OAK_REGEX_NUMERIC)
+);
+
+$request = array(
+	'action' => Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC),
+	'month' => Base_Cnc::filterRequest($_REQUEST['month'], OAK_REGEX_NUMERIC),
+	'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
+	'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
+	'year' => Base_Cnc::filterRequest($_REQUEST['year'], OAK_REGEX_NUMERIC)
 );
 
 $session = array(
@@ -42,6 +54,7 @@ $session = array(
 
 // assign get, session etc.
 $BASE->utility->smarty->assign('get', $get);
+$BASE->utility->smarty->assign('request', $request);
 $BASE->utility->smarty->assign('session', $session);
 
 ?>

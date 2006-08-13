@@ -308,13 +308,14 @@ public function selectBlogPosting ($id)
  * <li>user, int, optional: User/author id</li>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
+ * <li>year_added, string, optional: four digit year number</li>
+ * <li>month_added, string, optional: two digit month number</li>
+ * <li>day_added, string, optional: two digit day number</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * <li>order_marco, string, otpional: How to sort the result set.
  * Supported macros:
  *    <ul>
- *        <li>USER_NAME: sort by user name</li>
- *        <li>PAGE: sorty by page id</li>
  *        <li>DATE_MODIFIED: sorty by date modified</li>
  *        <li>DATE_ADDED: sort by date added</li>
  *    </ul>
@@ -336,6 +337,9 @@ public function selectBlogPostings ($params = array())
 	$user = null;
 	$page = null;
 	$draft = null;
+	$year_added = null;
+	$month_added = null;
+	$day_added = null;
 	$timeframe = null;
 	$order_macro = null;
 	$start = null;
@@ -350,6 +354,9 @@ public function selectBlogPostings ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'year_added':
+			case 'month_added':
+			case 'day_added':
 			case 'timeframe':
 			case 'order_macro':
 					$$_key = (string)$_value;
@@ -370,7 +377,6 @@ public function selectBlogPostings ($params = array())
 	
 	// define order macros
 	$macros = array(
-		'USER_NAME' => '`application_users`.`name`',
 		'DATE_ADDED' => '`content_blog_postings`.`date_added`',
 		'DATE_MODIFIED' => '`content_blog_postings`.`date_modified`'
 	);
@@ -460,6 +466,18 @@ public function selectBlogPostings ($params = array())
 	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
 		$bind_params['draft'] = (string)$draft;
+	}
+	if (!is_null($year_added) && is_numeric($year_added)) {
+		$sql .= " AND `content_blog_postings`.`year_added` = :year_added ";
+		$bind_params['year_added'] = (string)$year_added;
+	}
+	if (!is_null($month_added) && is_numeric($month_added)) {
+		$sql .= " AND `content_blog_postings`.`month_added` = :month_added ";
+		$bind_params['month_added'] = (string)$month_added;
+	}
+	if (!is_null($day_added) && is_numeric($day_added)) {
+		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
+		$bind_params['day_added'] = (string)$day_added;
 	}
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
