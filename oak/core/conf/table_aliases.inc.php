@@ -48,6 +48,7 @@ define("OAK_DB_CONTENT_BLOG_POSTINGS", "content_blog_postings");
 define("OAK_DB_CONTENT_BLOG_TAGS", "content_blog_tags");
 define("OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS", "content_blog_tags2content_blog_postings");
 define("OAK_DB_CONTENT_BOXES", "content_boxes");
+define("OAK_DB_CONTENT_GLOBAL_BOXES", "content_global_boxes");
 define("OAK_DB_CONTENT_NAVIGATIONS", "content_navigations");
 define("OAK_DB_CONTENT_NODES", "content_nodes");
 define("OAK_DB_CONTENT_PAGES", "content_pages");
