@@ -39,7 +39,6 @@
  */
 var debug = 1;
 
-
 /**
  * Construct the base class
  * @class This is the basic class 
@@ -452,7 +451,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemove;	
 		}
 	
-		this.target = this.processId;
+		this.ttarget = this.processId;
 	
 		// Are we within a foreach loop table (eg. with ascending ids)?
 		// If true, erase digits, so there is no need to build separat help files on the same topic
@@ -466,10 +465,10 @@ function Help_show (elem, level)
 		if (typeof this.req != 'undefined') {
 		
 			var _url		= this.url;
-			var _target		= this.target;
+			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Help.process(_url,_target);};
+			_req.onreadystatechange = function () { Help.process(_url,_ttarget);};
 			_req.send('');
 		}
 		
@@ -509,7 +508,7 @@ function Help_hide (elem, level)
 			default :
 					this.elem.className = this.helpClass;	
 		}
-		Effect.Fade(this.processIdAfter,{duration: 0.5});
+		Effect.Fade(this.processIdAfter,{duration: 0.7});
 		Element.update(this.elem, this.helpHtmlShow);
 		Behaviour.apply();
 		
@@ -527,15 +526,15 @@ function Help_hide (elem, level)
  * @throws applyError on exception
  * @throws DevError on condition
  */
-function Help_process (url, target)
+function Help_process (url, ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
-				new Insertion.After($(target).parentNode, _req.responseText);				
-				var target_after = $(target).parentNode.nextSibling;
-				Element.hide(target_after);
-				Effect.Appear(target_after, {duration: 0.8});
+				new Insertion.After($(ttarget).parentNode, _req.responseText);				
+				var ttarget_after = $(ttarget).parentNode.nextSibling;
+				Element.hide(ttarget_after);
+				Effect.Appear(ttarget_after, {duration: 0.8});
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -552,6 +551,7 @@ function Help_process (url, target)
  * @param {string} elem Actual element
  * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
  * @throws applyError on exception
+ * @return {string} gMediamanagerLayer
  */
 function Help_showMediamanager (elem)
 {
@@ -560,24 +560,34 @@ function Help_showMediamanager (elem)
 		this.elem = elem;
 		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute('id');
 		this.processId = this.formId;
-		this.target = this.helpLyMediamanager;
+		this.ttarget = this.helpLyMediamanager;
 		this.elem.className = this.helpClassRemoveMediamanager;
-		this.toHide = this.helpLyMediamanagerMyLocal;
-	
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+				
+		// which layer to process
+		var catchMyLocal = Element.getStyle(this.helpLyMediamanagerMyLocal, 'display');		
+		if( catchMyLocal == 'block') {
+			this.toHide = this.helpLyMediamanagerMyLocal;
+		} else {
+			this.toHide = this.helpLyMediamanagerMyFlickr;
+		}
 			
 		if (typeof this.req != 'undefined') {
 		
 			var _url		= this.url;
-			var _target		= this.target;
+			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Help.processMediamanager(_url,_target);};
+			_req.onreadystatechange = function () { Help.processMediamanager(_url,_ttarget);};
 			_req.send('');
 		}
 		Element.hide(this.toHide);
 		Element.update(this.elem, this.helpHtmlHide);
 		Behaviour.apply();
+		
+		// build global var as reference for method hideMediamanager
+		gMediamanagerLayer = this.toHide;
+		return gMediamanagerLayer;
 		
 	} catch (e) {
 		_applyError(e);
@@ -598,8 +608,7 @@ function Help_hideMediamanager (elem)
 		// properties
 		this.elem = elem;
 		this.toHide = this.helpLyMediamanager;
-		this.toShow = this.helpLyMediamanagerMyLocal;
-		
+		this.toShow = gMediamanagerLayer;
 		this.elem.className = this.helpClassMediamanager;
 	
 		Element.hide(this.toHide);
@@ -621,13 +630,13 @@ function Help_hideMediamanager (elem)
  * @throws applyError on exception
  * @throws DevError on condition
  */
-function Help_processMediamanager (url, target)
+function Help_processMediamanager (url, ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
-				Element.update (target, _req.responseText);
-				Element.show(target);
+				Element.update (ttarget, _req.responseText);
+				Element.show(ttarget);
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -698,19 +707,19 @@ function Navigation_show (name, level)
 		
 		switch (this.level) {
 			case '2' :
-					this.target = this.navLyTwo;
+					this.ttarget = this.navLyTwo;
 				break;
 			default :
-					this.target = this.navLyOne;	
+					this.ttarget = this.navLyOne;	
 		}
 		
 		if (typeof this.req != 'undefined') {
 		
 			var _url		= this.url;
-			var _target		= this.target;
+			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Navigation.process(_url,_target);};
+			_req.onreadystatechange = function () { Navigation.process(_url,_ttarget);};
 			_req.send('');
 		}
 	} catch (e) {
@@ -725,13 +734,13 @@ function Navigation_show (name, level)
  * @throws applyError on exception
  * @throws DevError on condition
  */
- function Navigation_process (url, target)
+ function Navigation_process (url, ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
-				Element.update(target, _req.responseText);
+				Element.update(ttarget, _req.responseText);
 				Behaviour.apply();
 			} else {
 	  			throw new DevError(_req.statusText);
@@ -979,156 +988,6 @@ function Tables_showRow (elem)
  * Building new instance for @class Tables
  */
 Tables = new Tables();
-
-
-/**
- * Construct a new Mediamanager object
- * @class This is the basic Mediamanager class 
- * @constructor
- * @throws applyError on exception
- * @see Base Base is the base class for this
- */
-function Mediamanager ()
-{
-	try {
-				
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/* Inherit from Base */
-Mediamanager.prototype = new Base();
-
-
-/**
- * Instance Methods from prototype @class Mediamanager
- */
-Mediamanager.prototype.showElement = Mediamanager_showElement;
-Mediamanager.prototype.hideElement = Mediamanager_hideElement;
-
-
-/**
- * Check Option Occurrences and adjust height of content div
- * @private
- * @throws applyError on exception
- */
-function _checkOccurrences (elems, prefix)
-{
-	try {
-		var res = elems.match(/block/gi);
-	
-		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mmwrapcontent', {height: '386px'});
-			Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '379px'});
-		} else {
-			switch (res.length) {
-				case 1 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '365px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '358px'});
-					break;
-				case 2 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '344px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '337px'});
-					break;
-				case 3 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '323px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '316px'});
-					break;
-			}
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-/**
- * Implements method of prototype class Mediamanager
- * @param {string} elem actual element
- * @throws applyError on exception
- */
-function Mediamanager_hideElement (elem)
-{
-	try {
-		// properties
-		this.elem = elem;
-		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
-		
-		Element.hide(this.target);
-		this.elem.className = this.mediamanagerClass;
-		//Effect.Fade(this.target,{duration: 0.6});
-		Element.update(this.elem, this.elementHtmlShow);
-		Behaviour.apply();
-				
-		var res = this.target.match(/^myLocal/i);
-		if (res) {
-			var prefix = 'myLocal_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		} else {
-			var prefix = 'myFlickr_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		}
-		
-		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
-		
-		_checkOccurrences (collectElems, prefix);
-	
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * @param {string} elem actual element
- * @throws applyError on exception
- */
-function Mediamanager_showElement (elem)
-{	
-	try {
-		// properties
-		this.elem = elem;
-		this.target = String(this.elem.parentNode.parentNode.getAttribute('class') + '_wrap');
-
-		Element.show(this.target);
-	//	Effect.Appear(this.target,{duration: 0.6});
-		this.elem.className = this.mediamanagerClassHide;
-		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.apply();
-	
-		var res = this.target.match(/^myLocal/i);
-		if (res) {
-			var prefix = 'myLocal_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		} else {
-			var prefix = 'myFlickr_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		}
-		
-		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
-		
-		_checkOccurrences (collectElems, prefix);
-	
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Building new instance for @class Mediamanager
- */
-Mediamanager = new Mediamanager();
 
 
 /**

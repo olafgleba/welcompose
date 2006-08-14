@@ -156,6 +156,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_myLocal' : function(el){
+		el.onclick = function(){
+			Mediamanager.switchLayer(this);
+			return false;
+		}
+	},
+	'a.mm_myFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.switchLayer(this);
+			return false;
+		}
+	},
 	'#main input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
