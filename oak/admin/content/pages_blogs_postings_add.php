@@ -286,6 +286,9 @@ try {
 		$sqlData['comments_enable'] = (string)intval($FORM->exportValue('comments_enable'));
 		$sqlData['trackbacks_enable'] = (string)intval($FORM->exportValue('trackbacks_enable'));
 		$sqlData['date_added'] = date("Y-m-d H:i:s");
+		$sqlData['year_added'] = date("Y");
+		$sqlData['month_added'] = date("m");
+		$sqlData['day_added'] = date("d");
 		
 		// prepare tags
 		$sqlData['tag_array'] = $BLOGTAG->_tagStringToSerializedArray($FORM->exportValue('tags'));
