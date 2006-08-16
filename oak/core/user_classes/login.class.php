@@ -454,6 +454,17 @@ public function switchAdminProject ($new_project)
 }
 
 /**
+ * Terminates admin session.
+ *
+ * @return true
+ */
+public function logOutFromAdmin ()
+{
+	$_SESSION['admin'] = array();
+	return true;
+}
+
+/**
  * Performs user login into public area. Compares supplied email address
  * and secret with the email addresses and secrets stored in database. If
  * the the combination of email address and secret is found, the user id
