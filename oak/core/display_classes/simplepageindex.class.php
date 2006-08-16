@@ -46,14 +46,14 @@ class Display_SimplePageIndex implements Display {
 	 * 
 	 * @var array
 	 */
-	protected $_project_info = array();
+	protected $_project = array();
 	
 	/**
 	 * Container for page information
 	 * 
 	 * @var array
 	 */
-	protected $_page_info = array();
+	protected $_page = array();
 	
 	/**
 	 * Container for simple page information
@@ -73,7 +73,7 @@ class Display_SimplePageIndex implements Display {
  * @param array Page information
  * @param array Simple page content
  */
-public function __construct($project_info, $page_info)
+public function __construct($project, $page)
 {
 	try {
 		// get base instance
@@ -91,16 +91,16 @@ public function __construct($project_info, $page_info)
 	}
 	
 	// input check
-	if (!is_array($project_info)) {
-		throw new Display_SimplePageIndexException("Input for parameter project_info is expected to be an array");
+	if (!is_array($project)) {
+		throw new Display_SimplePageIndexException("Input for parameter project is expected to be an array");
 	}
-	if (!is_array($page_info)) {
-		throw new Display_SimplePageIndexException("Input for parameter page_info is expected to be an array");
+	if (!is_array($page)) {
+		throw new Display_SimplePageIndexException("Input for parameter page is expected to be an array");
 	}
 	
 	// assign project, page info to class properties
-	$this->_project_info = $project_info;
-	$this->_page_info = $page_info;
+	$this->_project = $project;
+	$this->_page = $page;
 	
 	// get simple page
 	$SIMPLEPAGE = load('Content:SimplePage');
@@ -121,9 +121,9 @@ public function __construct($project_info, $page_info)
  * @param array Page information
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info)
+public static function instance($project, $page)
 {
-	return new Display_SimplePageIndex($project_info, $page_info);
+	return new Display_SimplePageIndex($project, $page);
 }
 
 /**
@@ -189,10 +189,10 @@ public function getRedirectLocationSelf ()
  */
 public function getLocationSelf ()
 {
-	if ($this->_page_info['index_page']) {
+	if ($this->_page['index_page']) {
 		return 'index.php';
 	} else {
-		return sprintf("index.php?page=%u&action=Index", $this->_page_info['id']);
+		return sprintf("index.php?page=%u&action=Index", $this->_page['id']);
 	}
 }
 

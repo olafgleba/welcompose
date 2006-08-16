@@ -46,14 +46,14 @@ class Display_SimpleFormLogin extends Display_SystemLogin {
 	 * 
 	 * @var array
 	 */
-	protected $_project_info = array();
+	protected $_project = array();
 	
 	/**
 	 * Container for page information
 	 * 
 	 * @var array
 	 */
-	protected $_page_info = array();
+	protected $_page = array();
 	
 	/**
 	 * Container for simple form information
@@ -72,7 +72,7 @@ class Display_SimpleFormLogin extends Display_SystemLogin {
  * @param array Project information
  * @param array Page information
  */
-public function __construct($project_info, $page_info)
+public function __construct($project, $page)
 {
 	try {
 		// get base instance
@@ -90,16 +90,16 @@ public function __construct($project_info, $page_info)
 	}
 	
 	// input check
-	if (!is_array($project_info)) {
-		throw new Display_SimpleFormLoginException("Input for parameter project_info is expected to be an array");
+	if (!is_array($project)) {
+		throw new Display_SimpleFormLoginException("Input for parameter project is expected to be an array");
 	}
-	if (!is_array($page_info)) {
-		throw new Display_SimpleFormLoginException("Input for parameter page_info is expected to be an array");
+	if (!is_array($page)) {
+		throw new Display_SimpleFormLoginException("Input for parameter page is expected to be an array");
 	}
 	
 	// assign project, page info to class properties
-	$this->_project_info = $project_info;
-	$this->_page_info = $page_info;
+	$this->_project = $project;
+	$this->_page = $page;
 	
 	// get simple form
 	$SIMPLEFORM = load('Content:SimpleForm');
@@ -120,9 +120,9 @@ public function __construct($project_info, $page_info)
  * @param array Page information
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info)
+public static function instance($project, $page)
 {
-	return new Display_SimpleFormLogin($project_info, $page_info);
+	return new Display_SimpleFormLogin($project, $page);
 }
 
 // end of class
