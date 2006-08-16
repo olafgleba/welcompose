@@ -100,42 +100,19 @@ try {
 	switch ((string)$page['page_type_name']) {
 		case 'OAK_BLOG':
 				$display_class = "Display:Blog".$action;
-				
-				// prepare args
-				$args = array($project, $page);
 			break;
 		case 'OAK_SIMPLE_PAGE':
 				$display_class = "Display:SimplePage".$action;
-				
-				// get simple page
-				$SIMPLEPAGE = load('content:simplepage');
-				$simple_page = $SIMPLEPAGE->selectSimplePage(OAK_CURRENT_PAGE);
-				
-				// assign simple page to smarty
-				$BASE->utility->smarty->assign('simple_page', $simple_page);
-				
-				// prepare args
-				$args = array($project, $page, $simple_page);
 			break;
 		case 'OAK_SIMPLE_FORM':
 				$display_class = "Display:SimpleForm".$action;
-				
-				// get simple form
-				$SIMPLEFORM = load('content:simpleform');
-				$simple_form = $SIMPLEFORM->selectSimpleForm(OAK_CURRENT_PAGE);
-				
-				// assign simple form to smarty
-				$BASE->utility->smarty->assign('simple_form', $simple_form);
-				
-				// prepare args
-				$args = array($project, $page, $simple_form);
 			break;
 		default:
 			throw new Exception("Unknown page type requested");
 	}
 	
 	// call the display class
-	$DISPLAY = load($display_class, $args);
+	$DISPLAY = load($display_class, array($project, $page));
 	
 	// execute the renderer
 	$DISPLAY->render();

@@ -59,11 +59,11 @@ class Display_SystemLogin implements Display {
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array
  * with the information about the current page as second
- * argumenht.
+ * argument.
  * 
+ * @throws Display_SystemLoginException
  * @param array Project information
  * @param array Page information
- * @param array Simple form content
  */
 public function __construct($project_info, $page_info)
 {
@@ -84,10 +84,10 @@ public function __construct($project_info, $page_info)
 	
 	// input check
 	if (!is_array($project_info)) {
-		throw new Display_SystemLogin("Input for parameter project_info is expected to be an array");
+		throw new Display_SystemLoginException("Input for parameter project_info is expected to be an array");
 	}
 	if (!is_array($page_info)) {
-		throw new Display_SystemLogin("Input for parameter page_info is expected to be an array");
+		throw new Display_SystemLoginException("Input for parameter page_info is expected to be an array");
 	}
 	
 	$this->_project_info = $project_info;
@@ -103,10 +103,9 @@ public function __construct($project_info, $page_info)
  * 
  * @param array Project information
  * @param array Page information
- * @param array Content info
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info, $content_info = array())
+public static function instance($project_info, $page_info)
 {
 	return new Display_SystemLogin($project_info, $page_info);
 }

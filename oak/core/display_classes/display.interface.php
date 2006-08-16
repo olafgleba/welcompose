@@ -46,7 +46,7 @@ public function __construct($project_info, $page_info);
  * @param array Page information
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info, $content_info = array());
+public static function instance($project_info, $page_info);
 
 /**
  * Default method that will be called from the display script

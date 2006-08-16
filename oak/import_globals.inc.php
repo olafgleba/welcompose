@@ -36,6 +36,7 @@ $get = array(
 	'action' => Base_Cnc::filterRequest($_GET['action'], OAK_REGEX_ALPHANUMERIC),
 	'month' => Base_Cnc::filterRequest($_GET['month'], OAK_REGEX_NUMERIC),
 	'page' => Base_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC),
+	'posting' => Base_Cnc::filterRequest($_GET['posting'], OAK_REGEX_NUMERIC),
 	'start' => Base_Cnc::filterRequest($_GET['start'], OAK_REGEX_NUMERIC),
 	'year' => Base_Cnc::filterRequest($_GET['year'], OAK_REGEX_NUMERIC)
 );
@@ -44,6 +45,7 @@ $request = array(
 	'action' => Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC),
 	'month' => Base_Cnc::filterRequest($_REQUEST['month'], OAK_REGEX_NUMERIC),
 	'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
+	'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], OAK_REGEX_NUMERIC),
 	'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
 	'year' => Base_Cnc::filterRequest($_REQUEST['year'], OAK_REGEX_NUMERIC)
 );

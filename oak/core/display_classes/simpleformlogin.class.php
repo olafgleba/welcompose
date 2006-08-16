@@ -66,13 +66,13 @@ class Display_SimpleFormLogin extends Display_SystemLogin {
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array
  * with the information about the current page as second
- * argument, the simple page content as third argument.
+ * argument.
  * 
+ * @throws Display_SimpleFormLoginException
  * @param array Project information
  * @param array Page information
- * @param array Simple form content
  */
-public function __construct($project_info, $page_info, $simple_form)
+public function __construct($project_info, $page_info)
 {
 	try {
 		// get base instance
@@ -96,13 +96,17 @@ public function __construct($project_info, $page_info, $simple_form)
 	if (!is_array($page_info)) {
 		throw new Display_SimpleFormLoginException("Input for parameter page_info is expected to be an array");
 	}
-	if (!is_array($simple_form)) {
-		throw new Display_SimpleFormLoginException("Input for parameter simple_form is expected to be an array");
-	}
 	
+	// assign project, page info to class properties
 	$this->_project_info = $project_info;
 	$this->_page_info = $page_info;
-	$this->_simple_form = $simple_form;
+	
+	// get simple form
+	$SIMPLEFORM = load('Content:SimpleForm');
+	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(OAK_CURRENT_PAGE);
+	
+	// assign simple form to smarty
+	$this->base->utility->smarty->assign('simple_form', $this->_simple_form);
 }
 
 /**
@@ -114,12 +118,11 @@ public function __construct($project_info, $page_info, $simple_form)
  * 
  * @param array Project information
  * @param array Page information
- * @param array Simple form content
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info, $simple_form = array())
+public static function instance($project_info, $page_info)
 {
-	return new Display_SimpleFormLogin($project_info, $page_info, $simple_form);
+	return new Display_SimpleFormLogin($project_info, $page_info);
 }
 
 // end of class

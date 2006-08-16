@@ -281,8 +281,6 @@ public function selectBlogPosting ($id)
 			`content_blog_postings`.`id` = :id
 		  AND
 			`content_pages`.`project` = :project
-		  AND
-			`user_users`.`id` = :user
 		LIMIT
 			1
 	";
@@ -290,8 +288,7 @@ public function selectBlogPosting ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT,
-		'user' => OAK_CURRENT_USER
+		'project' => OAK_CURRENT_PROJECT
 	);
 	
 	// execute query and return result

@@ -56,11 +56,11 @@ class Display_BlogArchiveYear implements Display {
 	protected $_page_info = array();
 	
 /**
- * Creates new instance of display driver. Takes an array
- * with the project information as first argument, an array
- * with the information about the current page as second
- * argument, the simple page content as third argument.
+ * Creates new instance of display driver. Takes an array with the project
+ * information as first argument, an array with the information about the
+ * current page as second argument.
  * 
+ * @throws Display_BlogArchiveYearException
  * @param array Project information
  * @param array Page information
  */
@@ -83,12 +83,13 @@ public function __construct($project_info, $page_info)
 	
 	// input check
 	if (!is_array($project_info)) {
-		throw new Display_BlogArchiveYear("Input for parameter project_info is expected to be an array");
+		throw new Display_BlogArchiveYearException("Input for parameter project_info is expected to be an array");
 	}
 	if (!is_array($page_info)) {
-		throw new Display_BlogArchiveYear("Input for parameter page_info is expected to be an array");
+		throw new Display_BlogArchiveYearException("Input for parameter page_info is expected to be an array");
 	}
 	
+	// assign project, page info to class properties
 	$this->_project_info = $project_info;
 	$this->_page_info = $page_info;
 }
@@ -102,10 +103,9 @@ public function __construct($project_info, $page_info)
  * 
  * @param array Project information
  * @param array Page information
- * @param array Page content
  * @return object New display driver instance
  */
-public static function instance($project_info, $page_info, $content_info = array())
+public static function instance($project_info, $page_info)
 {
 	return new Display_BlogArchiveYear($project_info, $page_info);
 }
