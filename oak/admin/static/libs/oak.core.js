@@ -165,6 +165,9 @@ Base.prototype.isUndefined = Base_isUndefined;
 Base.prototype.isNumber = Base_isNumber;
 Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
+Base.prototype.isIE = Base_isIE;
+Base.prototype.unsupportsEffects = Base_unsupportsEffects;
+Base.prototype.unsupportsElems = Base_unsupportsElems;
 
 
 /**
@@ -267,7 +270,73 @@ function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
 }
 
+/**
+ * Implements method of prototype class Base
+ * Simply examine id IE is on air
+ * @requires Base The Base Class
+ */
+function Base_isIE(elem) {
+    
+	if (navigator.appVersion.indexOf("MSIE")!=-1){
+		return true;
+	} else {
+		return false;
+	}
+}
 
+/**
+ * Implements method of prototype class Base
+ * Simply examine id IE is on air
+ * @requires Base The Base Class
+ */
+function Base_unsupportsEffects() {
+	
+	this.browser = _setBrowserString();
+	
+	if ((this.browser == "Internet Explorer") || (this.browser == "Safari")) {
+		return true;
+	} else { 
+		return false;
+	}
+}
+
+/**
+ * Implements method of prototype class Base
+ * Simply examine id IE is on air
+ * @requires Base The Base Class
+ */
+function Base_unsupportsElems() {
+	
+	this.browser = _setBrowserString();
+	
+	if (this.browser == "Internet Explorer") {
+		return true;
+	} else { 
+		return false;
+	}
+}
+
+function _compare (string) {
+	var res = detect.indexOf(string) + 1;
+	return res;
+}
+
+function _setBrowserString () {
+	
+	detect = navigator.userAgent.toLowerCase();
+	var browser;
+	
+	if (_compare('safari')) {
+		browser = 'Safari';
+	}
+	else if (_compare('msie')) {
+		browser = 'Internet Explorer';
+	}
+	else {
+		browser = 'Unknown Browser';
+	}
+	return browser;
+}
 
 
 /**
@@ -448,8 +517,9 @@ function Help_show (elem, level)
 				break;
 			default :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-					this.elem.className = this.helpClassRemove;	
+					this.elem.className = this.helpClassRemove;
 		}
+		
 	
 		this.ttarget = this.processId;
 	
@@ -510,8 +580,7 @@ function Help_hide (elem, level)
 		}
 		Effect.Fade(this.processIdAfter,{duration: 0.7});
 		Element.update(this.elem, this.helpHtmlShow);
-		Behaviour.apply();
-		
+		Behaviour.apply();	
 	} catch (e) {
 		_applyError(e);
 	}
@@ -558,7 +627,8 @@ function Help_showMediamanager (elem)
 	try {
 		// properties
 		this.elem = elem;
-		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute('id');
+		this.attr = 'id';
+		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute(this.attr);
 		this.processId = this.formId;
 		this.ttarget = this.helpLyMediamanager;
 		this.elem.className = this.helpClassRemoveMediamanager;

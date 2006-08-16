@@ -202,9 +202,17 @@ function Mediamanager_switchLayer (elem)
 		var res = this.ttarget.match(/myLocal$/gi);
 		
 		if (res) {
-			Effect.Appear(this.helpLyMediamanagerMyFlickr,{duration: 0.7});
+			if (Mediamanager.unsupportsEffects()) {
+				Element.show(this.helpLyMediamanagerMyFlickr);
+			} else {
+				Effect.Appear(this.helpLyMediamanagerMyFlickr,{duration: 0.6});
+			}
 		} else {
-			Effect.Appear(this.helpLyMediamanagerMyLocal,{duration: 0.7});
+			if (Mediamanager.unsupportsEffects()) {
+				Element.show(this.helpLyMediamanagerMyLocal);
+			} else {
+				Effect.Appear(this.helpLyMediamanagerMyLocal,{duration: 0.6});
+			}
 		}
 	} catch (e) {
 		_applyError(e);
