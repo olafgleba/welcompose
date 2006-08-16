@@ -101,7 +101,7 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('global_boxes', 'post');
+	$FORM = $BASE->utility->loadQuickForm('global_box', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GLOBALBOX);
 	
 	// hidden for id
@@ -113,7 +113,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'page_type_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'global_box_name', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
@@ -122,12 +122,12 @@ try {
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'box_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
+		array('id' => 'global_box_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
 	
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
-		array('id' => 'box_text_converter'));
+		array('id' => 'global_box_text_converter'));
 	$FORM->applyFilter('text_converter', 'trim');
 	$FORM->applyFilter('text_converter', 'strip_tags');
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
@@ -135,7 +135,7 @@ try {
 	
 	// checkbox for apply_macros
 	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'box_apply_macros', 'class' => 'chbx'));
+		array('id' => 'global_box_apply_macros', 'class' => 'chbx'));
 	$FORM->applyFilter('apply_macros', 'trim');
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
