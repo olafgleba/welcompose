@@ -844,7 +844,7 @@ display: inline;
 font-size: 80%;
 width: auto;
 }
-#myLocal_mmwrapcontent, #myFlickr_mmwrapcontent {
+#myLocal_mm_content, #myFlickr_mm_content {
 display: block;
 height: 365px;
 font-size: 80%;
@@ -852,14 +852,14 @@ background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
 }
-#myLocal_mmwrapcontentToPopulate, #myFlickr_mmwrapcontentToPopulate {
+#myLocal_mm_contentToPopulate, #myFlickr_mm_contentToPopulate {
 display: block;
 height: 358px;
 background: #fff;
-border: 1px solid #999;
+border: 1px solid #ebebeb;
 padding: 3px 5px;
 }
-.mmwrappager {
+.mm_pager {
 display: block;
 background: #f9f9f9;
 font-size: 80%;
@@ -882,13 +882,13 @@ margin: 0 1px 0 2px;
 }
 
 
-#myLocal_include_types_wrap {
+#mm_include_types_wrap {
 display: none;
 }
-#myLocal_timeframe_wrap {
+#mm_timeframe_wrap {
 display: none;
 }
-#myLocal_tags_wrap {
+#mm_tags_wrap {
 display: block;
 }
 #myFlickr_include_types_wrap {
@@ -936,7 +936,7 @@ background-color: transparent;
 .inner {
 display: none;
 background: #d9d9d9 url(../img/bg_slides.gif);
-padding: 1em 0 1em 0;
+padding: 0 0 1em 0;
 }
 
 /* LOGIN - BODY-ID #LOGIN */

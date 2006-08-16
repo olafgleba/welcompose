@@ -21,7 +21,7 @@
  */
  
 /** 
- * @fileoverview This file is the essential Oak javascript enviroment.
+ * @fileoverview This file is the essential Mediamanager javascript enviroment.
  * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
  * to make it unnecessary to loop this core file through the i18n parser.
  *
@@ -40,6 +40,7 @@
 function Mediamanager ()
 {
 	try {
+		// properties
 				
 	} catch (e) {
 		_applyError(e);
@@ -57,6 +58,10 @@ Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 
+Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
+Mediamanager.prototype.invokeTagsInput = Mediamanager_invokeTagsInput;
+Mediamanager.prototype.checkElemValues = Mediamanager_checkElemValues;
+
 
 /**
  * Implements private method of prototype class Mediamanager
@@ -66,27 +71,36 @@ Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
  * @param {string} prefix actual divs to process (myLocal, myFlickr)
  * @throws applyError on exception
  */
-function _checkOccurrences (elems, prefix)
+function _checkOccurrences (elems)
 {
 	try {
-		var res = elems.match(/block/gi);
+				
+		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+
+		if (myLocal == 'block') {
+			var prefix = 'myLocal_';
+		} else {
+			var prefix = 'myFlickr_';
+		}
+		
+		var res = elems.match(/block/gi);	
 	
 		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mmwrapcontent', {height: '386px'});
-			Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '379px'});
+			Element.setStyle(prefix + 'mm_content', {height: '386px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '379px'});
 		} else {
 			switch (res.length) {
 				case 1 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '365px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '358px'});
+						Element.setStyle(prefix + 'mm_content', {height: '365px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '358px'});
 					break;
 				case 2 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '344px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '337px'});
+						Element.setStyle(prefix + 'mm_content', {height: '344px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '337px'});
 					break;
 				case 3 :
-						Element.setStyle(prefix + 'mmwrapcontent', {height: '323px'});
-						Element.setStyle(prefix + 'mmwrapcontentToPopulate', {height: '316px'});
+						Element.setStyle(prefix + 'mm_content', {height: '323px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '316px'});
 					break;
 			}
 		}
@@ -109,28 +123,22 @@ function Mediamanager_hideElement (elem)
 		this.attr = 'class';
 		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
 		
-		Element.hide(this.ttarget);
-		//Effect.Fade(this.ttarget,{duration: 0.6});
+		if (Mediamanager.unsupportsEffects('safari_exception')) {
+			Element.hide(this.ttarget);
+		} else {
+			Effect.Fade(this.ttarget,{duration: 0.8});
+		}
 		this.elem.className = this.mediamanagerClass;
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
-				
-		var res = this.ttarget.match(/^myLocal/i);
-		if (res) {
-			var prefix = 'myLocal_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		} else {
-			var prefix = 'myFlickr_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		}
 		
-		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
-		
-		_checkOccurrences (collectElems, prefix);
+		// needed to set appropriate height of content to populate div
+		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+
+		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);		
+		_checkOccurrences (collectElems);
 	
 		
 	} catch (e) {
@@ -151,28 +159,23 @@ function Mediamanager_showElement (elem)
 		this.attr = 'class';
 		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
 
-		Element.show(this.ttarget);
-	//	Effect.Appear(this.ttarget,{duration: 0.6});
+		if (Mediamanager.unsupportsEffects('safari_exception')) {
+			Element.show(this.ttarget);
+		} else {
+			Element.hide(this.ttarget);
+			Effect.Appear(this.ttarget,{duration: 0.7});
+		}
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.apply();
 	
-		var res = this.ttarget.match(/^myLocal/i);
-		if (res) {
-			var prefix = 'myLocal_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		} else {
-			var prefix = 'myFlickr_';
-			var tagsElem = Element.getStyle(prefix + 'tags_wrap', 'display');
-			var timeframeElem = Element.getStyle(prefix + 'timeframe_wrap', 'display');
-			var includeTypesElem = Element.getStyle(prefix + 'include_types_wrap', 'display');
-		}
+		// needed to set appropriate height of content to populate div
+		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 		
-		var collectElems = String(tagsElem + timeframeElem + includeTypesElem);
-		
-		_checkOccurrences (collectElems, prefix);
+		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+		_checkOccurrences (collectElems);
 	
 		
 	} catch (e) {
@@ -180,14 +183,7 @@ function Mediamanager_showElement (elem)
 	}
 }
 
-/**
- * Implements private method of prototype class Mediamanager
- * Check Option Occurrences and adjust height of content div
- * @private
- * @param {string} elems actual element
- * @param {string} prefix actual divs to process (myLocal, myFlickr)
- * @throws applyError on exception
- */
+
 function Mediamanager_switchLayer (elem)
 {
 	try {
@@ -218,6 +214,46 @@ function Mediamanager_switchLayer (elem)
 		_applyError(e);
 	}
 }
+
+
+
+
+function Mediamanager_invokeInputs ()
+{
+	//alert (Mediamanager.checkElemValues());
+	
+	document.write (Mediamanager.checkElemValues());
+}
+
+function Mediamanager_invokeTagsInput ()
+{
+	alert (Mediamanager.checkElemValues());
+	
+	// delay needed
+
+}
+
+
+function Mediamanager_checkElemValues ()
+{
+	var getStatus = {
+		mm_include_types_doc : $F('mm_include_types_doc'),
+		mm_include_types_img : $F('mm_include_types_img'),
+		mm_include_types_cast : $F('mm_include_types_cast'),
+		mm_tags : $F('mm_tags'),
+		mm_timeframe : $F('mm_timeframe')
+	};
+	
+	var output = $H(getStatus);
+	return output.toQueryString();
+	
+	
+}
+
+
+
+
+
 
 /**
  * Building new instance for @class Mediamanager

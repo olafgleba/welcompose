@@ -194,6 +194,24 @@ var definitions = {
 			validate(this);
 		}
 	},
+	'#mm_include_types_wrap' : function(el){
+		el.onclick = function(){
+			Mediamanager.invokeInputs(this);
+			//return false;
+		}
+	},
+	'#mm_tags' : function(el){
+		el.onkeyup = function(){
+			Mediamanager.invokeInputs(this);
+			//return false;
+		}
+	},
+	'#mm_timeframe' : function(el){
+		el.onkeyup = function(){
+			Mediamanager.invokeInputs(this);
+			//return false;
+		}
+	},
 	'.submitbut200' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';

@@ -165,7 +165,6 @@ Base.prototype.isUndefined = Base_isUndefined;
 Base.prototype.isNumber = Base_isNumber;
 Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
-Base.prototype.isIE = Base_isIE;
 Base.prototype.unsupportsEffects = Base_unsupportsEffects;
 Base.prototype.unsupportsElems = Base_unsupportsElems;
 
@@ -275,25 +274,12 @@ function Base_isNull(elem) {
  * Simply examine id IE is on air
  * @requires Base The Base Class
  */
-function Base_isIE(elem) {
-    
-	if (navigator.appVersion.indexOf("MSIE")!=-1){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Implements method of prototype class Base
- * Simply examine id IE is on air
- * @requires Base The Base Class
- */
-function Base_unsupportsEffects() {
+function Base_unsupportsEffects(exception) {
 	
 	this.browser = _setBrowserString();
+	this.exception = exception;
 	
-	if ((this.browser == "Internet Explorer") || (this.browser == "Safari")) {
+	if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
 		return true;
 	} else { 
 		return false;
@@ -308,7 +294,7 @@ function Base_unsupportsEffects() {
 function Base_unsupportsElems() {
 	
 	this.browser = _setBrowserString();
-	
+
 	if (this.browser == "Internet Explorer") {
 		return true;
 	} else { 
@@ -578,7 +564,11 @@ function Help_hide (elem, level)
 			default :
 					this.elem.className = this.helpClass;	
 		}
-		Effect.Fade(this.processIdAfter,{duration: 0.7});
+		if (Help.unsupportsEffects('safari_exception')) {
+			Element.hide(this.processIdAfter);
+		} else {
+			Effect.Fade(this.processIdAfter,{duration: 0.7});
+		}
 		Element.update(this.elem, this.helpHtmlShow);
 		Behaviour.apply();	
 	} catch (e) {
@@ -602,8 +592,12 @@ function Help_process (url, ttarget)
 			if (_req.status == 200) {
 				new Insertion.After($(ttarget).parentNode, _req.responseText);				
 				var ttarget_after = $(ttarget).parentNode.nextSibling;
-				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after, {duration: 0.8});
+				if (Help.unsupportsEffects('safari_exception')) {
+					Element.show(ttarget_after);
+				} else {
+					Element.hide(ttarget_after);
+					Effect.Appear(ttarget_after,{duration: 0.7});
+				}
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -651,7 +645,11 @@ function Help_showMediamanager (elem)
 			_req.onreadystatechange = function () { Help.processMediamanager(_url,_ttarget);};
 			_req.send('');
 		}
-		Element.hide(this.toHide);
+		if (Help.unsupportsEffects()) {
+			Element.hide(this.toHide);
+		} else {
+			Effect.Fade(this.toHide,{duration: 0.7});
+		}
 		Element.update(this.elem, this.helpHtmlHide);
 		Behaviour.apply();
 		
@@ -681,8 +679,18 @@ function Help_hideMediamanager (elem)
 		this.toShow = gMediamanagerLayer;
 		this.elem.className = this.helpClassMediamanager;
 	
-		Element.hide(this.toHide);
-		Element.show(this.toShow);
+		if (Help.unsupportsEffects()) {
+			Element.hide(this.toHide);
+			Element.show(this.toShow);
+		} else {
+			Element.hide(this.toHide);
+			Element.hide(this.toShow);
+			Effect.Appear(this.toShow,{duration: 0.7});
+		}
+
+		//Element.hide(this.toHide);
+		//Element.show(this.toShow);
+		
 		Element.update(this.elem, this.helpHtmlShow);
 		Behaviour.apply();
 		
@@ -706,7 +714,12 @@ function Help_processMediamanager (url, ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
 				Element.update (ttarget, _req.responseText);
-				Element.show(ttarget);
+				if (Help.unsupportsEffects()) {
+					Element.show(ttarget);
+				} else {
+					Element.hide(this.ttarget);
+					Effect.Appear(this.ttarget,{duration: 0.7});
+				}
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -925,18 +938,26 @@ function Status_getCbx (elems)
 				if ($(range)) {
 					if ($(this.elems[e]).checked === true) {
 		
-					allNodes = document.getElementsByClassName("bez");
+						allNodes = document.getElementsByClassName("bez");
 					
-					for (var i = 0; i < allNodes.length; i++) {
-						var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
-						if (_process == range) {
-							allNodes[i].style.color = this.applicationTextColor;
+						for (var i = 0; i < allNodes.length; i++) {
+							var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+							if (_process == range) {
+								allNodes[i].style.color = this.applicationTextColor;
+							}
 						}
-					}
-						Element.hide($(range));
-						Effect.Appear($(range),{duration: 0.6});
+						if (Status.unsupportsEffects('safari_exception')) {
+							Element.show($(range));
+						} else {
+							Element.hide($(range));
+							Effect.Appear($(range),{duration: 0.6});
+						}
 					} else {
-						Effect.Fade($(range),{duration: 0.6});
+						if (Status.unsupportsEffects('safari_exception')) {
+							Element.hide($(range));
+						} else {
+							Effect.Fade($(range),{duration: 0.6});
+						}
 					}
 				}
 			}
@@ -1013,8 +1034,12 @@ function Tables_hideRow (elem)
 		this.ibid = String('i_' + this.bid[1]);
 	
 		// process inner div
-		Effect.Fade(this.ibid,{duration: 0.8});
-		
+		if (Tables.unsupportsEffects('safari_exception')) {
+			Element.hide(this.ibid);
+		} else {
+			Effect.Fade(this.ibid,{duration: 0.8});
+		}
+			
 		// process outer table tr
 		setTimeout("Tables.collapseRow('"+ this.obid +"')", 800);
 		
@@ -1044,8 +1069,12 @@ function Tables_showRow (elem)
 		$(this.obid).style.visibility = 'visible';
 		
 		// process inner div
-		Element.hide(this.ibid);
-		Effect.Appear(this.ibid,{duration: 0.8});
+		if (Tables.unsupportsEffects('safari_exception')) {
+			Element.show(this.ibid);
+		} else {
+			Element.hide(this.ibid);
+			Effect.Appear(this.ibid,{duration: 0.7});
+		}
 		
 		this.elem.className = this.uploadClassHide;
 		Behaviour.apply();
@@ -1126,17 +1155,3 @@ function _buildXMLHTTPRequest ()
 		_applyError(e);
 	}
 }
-
-
-// development code
-/*
-function clearInputs(cssSelector) {
-        $$(cssSelector + " input").each(function(el) {
-           el.disabled = false;
-           if (el.type=="text") { el.value = ""; }
-           if (el.type=="checkbox") { el.checked = false; }
-        });
-
-        $$(cssSelector + " textarea").each(function(el) { el.disabled = false; el.value = ""; } );
-}
-*/
