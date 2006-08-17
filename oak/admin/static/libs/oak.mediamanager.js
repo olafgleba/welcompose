@@ -59,8 +59,7 @@ Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
-Mediamanager.prototype.invokeTagsInput = Mediamanager_invokeTagsInput;
-Mediamanager.prototype.checkElemValues = Mediamanager_checkElemValues;
+Mediamanager.prototype.checkElems = Mediamanager_checkElems;
 
 
 /**
@@ -122,12 +121,9 @@ function Mediamanager_hideElement (elem)
 		this.elem = elem;
 		this.attr = 'class';
 		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+
+		Element.hide(this.ttarget);
 		
-		if (Mediamanager.unsupportsEffects('safari_exception')) {
-			Element.hide(this.ttarget);
-		} else {
-			Effect.Fade(this.ttarget,{duration: 0.8});
-		}
 		this.elem.className = this.mediamanagerClass;
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
@@ -158,13 +154,8 @@ function Mediamanager_showElement (elem)
 		this.elem = elem;
 		this.attr = 'class';
 		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-
-		if (Mediamanager.unsupportsEffects('safari_exception')) {
-			Element.show(this.ttarget);
-		} else {
-			Element.hide(this.ttarget);
-			Effect.Appear(this.ttarget,{duration: 0.7});
-		}
+		
+		Element.show(this.ttarget);
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.apply();
@@ -220,23 +211,30 @@ function Mediamanager_switchLayer (elem)
 
 function Mediamanager_invokeInputs ()
 {
-	//alert (Mediamanager.checkElemValues());
+	var elems = Mediamanager.checkElems();
 	
-	document.write (Mediamanager.checkElemValues());
+	//alert (elems);
+	var url = '../mediamanager.ajax.php';
+	var pars = elems;
+	
+	var myAjax = new Ajax.Request(
+		url,
+		{
+			method : 'get',
+			parameters : pars,
+			onComplete : showResponse
+		});	
 }
 
-function Mediamanager_invokeTagsInput ()
+function showResponse(req)
 {
-	alert (Mediamanager.checkElemValues());
-	
-	// delay needed
-
+	$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
 }
 
 
-function Mediamanager_checkElemValues ()
+function Mediamanager_checkElems ()
 {
-	var getStatus = {
+	var getElems = {
 		mm_include_types_doc : $F('mm_include_types_doc'),
 		mm_include_types_img : $F('mm_include_types_img'),
 		mm_include_types_cast : $F('mm_include_types_cast'),
@@ -244,16 +242,9 @@ function Mediamanager_checkElemValues ()
 		mm_timeframe : $F('mm_timeframe')
 	};
 	
-	var output = $H(getStatus);
-	return output.toQueryString();
-	
-	
+	var o = $H(getElems);
+	return o.toQueryString();
 }
-
-
-
-
-
 
 /**
  * Building new instance for @class Mediamanager

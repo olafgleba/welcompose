@@ -18,7 +18,6 @@ var checkbox_status = new Array('simple_page_meta_use');
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/selector-addon-v1.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
 <script type="text/javascript" src="../parse.js.php?file=oak.strings.js"></script>
@@ -111,28 +110,28 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- mediamanager navigation (active: mm_myLocal) -->
 <ul class="mmnav">
-<li><a class="mm_upload" href="#">Upload</a></li>
 <li class="on"><span class="mm_myLocal">myLocal</span></li>
 <li><a class="mm_myFlickr" href="#">myFlickr</a></li>
+<li><a class="mm_upload" href="#">Upload</a></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myLocal) eof -->
 
 <!-- element (include_types) wrap -->
 <fieldset class="mmwrap">
-<p class="myLocal_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
-<span id="myLocal_include_types_wrap">
-<label for="include_types_doc"><input id="include_types_doc" class="chbx" name="include_types[]" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
-<label for="include_types_img"><input id="include_types_img" class="chbx" name="include_types[]" type="checkbox" value="2" /><span class="cbxspread">Images</span></label>
-<label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types[]" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
+<p class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
+<span id="mm_include_types_wrap">
+<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" name="mm_include_types_doc" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
+<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" name="mm_include_types_img" type="checkbox" value="1" /><span class="cbxspread">Images</span></label>
+<label for="mm_include_types_cast"><input id="mm_include_types_cast" class="chbx" name="mm_include_types_cast" type="checkbox" value="1" /><span class="cbxspread">Casts</span></label>
 </span>
 </fieldset>
 <!-- element (include_types) wrap -->
 
 <!-- element (tags) wrap -->
 <div class="mmwrap">
-<label for="myLocal_mm_tags" class="myLocal_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
-<span id="myLocal_tags_wrap">
-<input class="w200" type="text" id="myLocal_mm_tags" />
+<label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<span id="mm_tags_wrap">
+<input class="w200" type="text" id="mm_tags" />
 </span>
 </label>
 </div>
@@ -140,13 +139,12 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
-<label for="myLocal_mm_timeframe" class="myLocal_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="myLocal_timeframe_wrap">
-<select id="myLocal_mm_timeframe" name="myLocal_mm_timeframe">
-<option{if empty($request.myLocal_mm_timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
-{foreach from=$myLocal_mm_timeframes key=_myLocal_mm_timeframe_value item=_myLocal_mm_timeframe_name}
-<option value="{$_myLocal_mm_timeframe_value}"{if $request.myLocal_mm_timeframe == $_myLocal_mm_timeframe_value} selected="selected"{/if}>{$_myLocal_mm_timeframe_name}</option>
-{/foreach}
+<label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_timeframe_wrap">
+<select id="mm_timeframe" name="mm_timeframe">
+<option value="0">{i18n Please choose...}</option>
+<option value="1">{i18n nabend}</option>
+<option value="2">{i18n moin}</option>
 </select>
 </span>
 </label>
@@ -154,18 +152,18 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- element (timeframe) wrap eof -->
 
 <!-- mediamanager content -->
-<div id="myLocal_mmwrapcontent">
+<div id="myLocal_mm_content">
 
 <!-- mediamanager content populate -->
-<div id="myLocal_mmwrapcontentToPopulate">
-content wo man sehen kann wie weit er geht und wann er umbricht
+<div id="myLocal_mm_contentToPopulate">
+content myLocal
 </div>
 <!-- mediamanager content populate eof -->
 </div>
 <!-- mediamanager content eof -->
 
 <!-- mediamanager pager -->
-<div class="mmwrappager">
+<div class="mm_pager">
 Page <a href="#">1 of 10</a>	
 </div>
 <!-- mediamanager pager eof -->
@@ -180,7 +178,6 @@ Page <a href="#">1 of 10</a>
 	
 <!-- mediamanager navigation (active: mm_myFlickr) -->
 <ul class="mmnav">
-<li><a class="mm_upload" href="#">Upload</a></li>
 <li><a class="mm_myLocal" href="#">myLocal</a></li>
 <li class="on"><span class="mm_myFlickr">myFlickr</span></li>
 </ul>
@@ -223,10 +220,10 @@ Page <a href="#">1 of 10</a>
 <!-- element (timeframe) wrap eof -->
 
 <!-- mediamanager content -->
-<div id="myFlickr_mmwrapcontent">
+<div id="myFlickr_mm_content">
 
 <!-- mediamanager content populate -->
-<div id="myFlickr_mmwrapcontentToPopulate">
+<div id="myFlickr_mm_contentToPopulate">
 flickr content wo man sehen kann wie weit er geht und wann er umbricht
 </div>
 <!-- mediamanager content populate eof -->
@@ -235,7 +232,7 @@ flickr content wo man sehen kann wie weit er geht und wann er umbricht
 <!-- mediamanager content eof -->
 
 <!-- mediamanager pager -->
-<div class="mmwrappager">
+<div class="mm_pager">
 Page <a href="#">1 of 10</a>	
 </div>
 <!-- mediamanager pager eof -->

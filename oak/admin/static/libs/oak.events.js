@@ -200,14 +200,14 @@ var definitions = {
 			//return false;
 		}
 	},
-	'#mm_tags' : function(el){
-		el.onkeyup = function(){
+	/*'#mm_tags' : function(el){
+		el.onkeydown = function(){
 			Mediamanager.invokeInputs(this);
 			//return false;
 		}
-	},
+	},*/
 	'#mm_timeframe' : function(el){
-		el.onkeyup = function(){
+		el.onchange = function(){
 			Mediamanager.invokeInputs(this);
 			//return false;
 		}
