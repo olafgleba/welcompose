@@ -162,7 +162,6 @@ try {
 		$sqlData = array();
 		$sqlData['project'] = OAK_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['editable'] = "1";
 		
 		// check sql data
 		$HELPER = load('utility:helper');

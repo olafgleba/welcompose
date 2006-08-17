@@ -89,6 +89,12 @@ try {
 	$plugin = $ANTISPAMPLUGIN->selectAntiSpamPlugin(Base_Cnc::filterRequest($_REQUEST['id'],
 		OAK_REGEX_NUMERIC));
 	
+	// prepare types
+	$types = array(
+		'comment' => gettext('Comment plugin'),
+		'trackback' => gettext('Trackback plugin')
+	);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('anti_spam_plugin', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $ANTISPAMPLUGIN);
@@ -99,6 +105,14 @@ try {
 	$FORM->applyFilter('id', 'strip_tags');
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	
+	// select for type
+	$FORM->addElement('select', 'type', gettext('Plugin type'), $types,
+		array('id' => 'anti_spam_plugin_type'));
+	$FORM->applyFilter('type', 'trim');
+	$FORM->applyFilter('type', 'strip_tags');
+	$FORM->addRule('type', gettext('Chosen plugin type is out of range'),
+		'in_array_keys', $types);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
@@ -126,6 +140,14 @@ try {
 	$FORM->addRule('priority', gettext('Please enter a priority'), 'required');
 	$FORM->addRule('priority', gettext('Please enter a numeric priority'), 'numeric');
 	
+	// checkbox for active
+	$FORM->addElement('checkbox', 'active', gettext('Active'), null,
+		array('id' => 'anti_spam_plugin_active', 'class' => 'chbx'));
+	$FORM->applyFilter('active', 'trim');
+	$FORM->applyFilter('active', 'strip_tags');
+	$FORM->addRule('active', gettext('The field whether the plugin is active accepts only 0 or 1'),
+		'regex', OAK_REGEX_ZERO_OR_ONE);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update anti spam plugin'),
 		array('class' => 'submitbut200'));
@@ -133,9 +155,11 @@ try {
 	// set defaults
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($plugin['id'], null),
+		'type' => Base_Cnc::ifsetor($plugin['type'], null),
 		'name' => Base_Cnc::ifsetor($plugin['name'], null),
 		'internal_name' => Base_Cnc::ifsetor($plugin['internal_name'], null),
-		'priority' => Base_Cnc::ifsetor($plugin['priority'], null)
+		'priority' => Base_Cnc::ifsetor($plugin['priority'], null),
+		'active' => Base_Cnc::ifsetor($plugin['active'], null)
 	));
 		
 	// validate it
@@ -197,9 +221,11 @@ try {
 		// create the article group
 		$sqlData = array();
 		$sqlData['project'] = OAK_CURRENT_PROJECT;
+		$sqlData['type'] = $FORM->exportValue('type');
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['priority'] = $FORM->exportValue('priority');
+		$sqlData['active'] = $FORM->exportValue('active');
 		
 		// check sql data
 		$HELPER = load('utility:helper');

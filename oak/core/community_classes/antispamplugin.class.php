@@ -224,9 +224,11 @@ public function selectAntiSpamPlugin ($id)
 		SELECT 
 			`community_anti_spam_plugins`.`id` AS `id`,
 			`community_anti_spam_plugins`.`project` AS `project`,
+			`community_anti_spam_plugins`.`type` AS `type`,
 			`community_anti_spam_plugins`.`name` AS `name`,
 			`community_anti_spam_plugins`.`internal_name` AS `internal_name`,
-			`community_anti_spam_plugins`.`priority` AS `priority`
+			`community_anti_spam_plugins`.`priority` AS `priority`,
+			`community_anti_spam_plugins`.`active` AS `active`
 		FROM
 			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE 
@@ -310,9 +312,11 @@ public function selectAntiSpamPlugins ($params = array())
 		SELECT 
 			`community_anti_spam_plugins`.`id` AS `id`,
 			`community_anti_spam_plugins`.`project` AS `project`,
+			`community_anti_spam_plugins`.`type` AS `type`,
 			`community_anti_spam_plugins`.`name` AS `name`,
 			`community_anti_spam_plugins`.`internal_name` AS `internal_name`,
-			`community_anti_spam_plugins`.`priority` AS `priority`
+			`community_anti_spam_plugins`.`priority` AS `priority`,
+			`community_anti_spam_plugins`.`active` AS `active`
 		FROM
 			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE 
