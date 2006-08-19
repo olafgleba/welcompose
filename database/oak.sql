@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 17.08.2006 17:38:38
--- Diagram Version: 99
+-- Created on: 19.08.2006 12:36:27
+-- Diagram Version: 107
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -11,17 +11,17 @@ USE `oak`;
 
 SET FOREIGN_KEY_CHECKS=0;
 
--- Drop table application_info
-DROP TABLE IF EXISTS `application_info`;
-
-CREATE TABLE `application_info` (
-  `application_version` int(11) UNSIGNED,
-  `schema_version` int(11) UNSIGNED
+CREATE TABLE `application_ping_services` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `host` varchar(255),
+  `port` int(11) UNSIGNED,
+  `path` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`)
 )
 TYPE=INNODB;
-
--- Drop table user_users
-DROP TABLE IF EXISTS `user_users`;
 
 CREATE TABLE `user_users` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -36,23 +36,11 @@ CREATE TABLE `user_users` (
 )
 TYPE=INNODB;
 
--- Drop table application_ping_services
-DROP TABLE IF EXISTS `application_ping_services`;
-
-CREATE TABLE `application_ping_services` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `host` varchar(255),
-  `port` int(11) UNSIGNED,
-  `path` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`)
+CREATE TABLE `application_info` (
+  `application_version` int(11) UNSIGNED,
+  `schema_version` int(11) UNSIGNED
 )
 TYPE=INNODB;
-
--- Drop table application_projects
-DROP TABLE IF EXISTS `application_projects`;
 
 CREATE TABLE `application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -73,9 +61,6 @@ CREATE TABLE `application_projects` (
 )
 TYPE=INNODB;
 
--- Drop table application_text_converters
-DROP TABLE IF EXISTS `application_text_converters`;
-
 CREATE TABLE `application_text_converters` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
@@ -90,8 +75,48 @@ CREATE TABLE `application_text_converters` (
 )
 TYPE=INNODB;
 
--- Drop table community_anti_spam_plugins
-DROP TABLE IF EXISTS `community_anti_spam_plugins`;
+CREATE TABLE `user_rights` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `description` text,
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `user_rights.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `community_blog_comment_statuses` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `community_blog_comment_statuses.project2application_project.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `application_text_macros` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `internal_name` varchar(255),
+  `type` enum('pre','post','startup','shutdown') DEFAULT 'pre',
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `application_textmacros.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
 
 CREATE TABLE `community_anti_spam_plugins` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -110,26 +135,50 @@ CREATE TABLE `community_anti_spam_plugins` (
 )
 TYPE=INNODB;
 
--- Drop table application_text_macros
-DROP TABLE IF EXISTS `application_text_macros`;
-
-CREATE TABLE `application_text_macros` (
+CREATE TABLE `media_document_categories` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
-  `internal_name` varchar(255),
-  `type` enum('pre','post','startup','shutdown') DEFAULT 'pre',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `application_textmacros.project2application_projects.id` FOREIGN KEY (`project`)
+  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
 
--- Drop table community_blog_trackback_statuses
-DROP TABLE IF EXISTS `community_blog_trackback_statuses`;
+CREATE TABLE `media_image_categories` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `media_image_categories.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `templating_global_files` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `name_on_disk` varchar(255),
+  `mime_type` varchar(255),
+  `size` int(11) UNSIGNED,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  INDEX `name`(`name`),
+  CONSTRAINT `templating_global_files.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
 
 CREATE TABLE `community_blog_trackback_statuses` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -143,58 +192,6 @@ CREATE TABLE `community_blog_trackback_statuses` (
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
-
--- Drop table content_page_types
-DROP TABLE IF EXISTS `content_page_types`;
-
-CREATE TABLE `content_page_types` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `editable` enum('0','1') DEFAULT '1',
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_navigations
-DROP TABLE IF EXISTS `content_navigations`;
-
-CREATE TABLE `content_navigations` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `content_navigations.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table community_blog_comment_statuses
-DROP TABLE IF EXISTS `community_blog_comment_statuses`;
-
-CREATE TABLE `community_blog_comment_statuses` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `community_blog_comment_statuses.project2application_project.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table templating_template_sets
-DROP TABLE IF EXISTS `templating_template_sets`;
 
 CREATE TABLE `templating_template_sets` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -210,8 +207,63 @@ CREATE TABLE `templating_template_sets` (
 )
 TYPE=INNODB;
 
--- Drop table user_groups
-DROP TABLE IF EXISTS `user_groups`;
+CREATE TABLE `templating_template_types` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `description` text,
+  `editable` enum('0','1') DEFAULT '0',
+  PRIMARY KEY(`id`),
+  CONSTRAINT `templating_template_types.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `templating_templates` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `description` text,
+  `content` text,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `type`(`type`),
+  CONSTRAINT `templating_templates.type2templating_template_types.id` FOREIGN KEY (`type`)
+    REFERENCES `templating_template_types`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_navigations` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `content_navigations.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_page_types` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `editable` enum('0','1') DEFAULT '1',
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `content_page_types.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
 
 CREATE TABLE `user_groups` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -230,30 +282,6 @@ CREATE TABLE `user_groups` (
 )
 TYPE=INNODB;
 
--- Drop table user_users2user_groups
-DROP TABLE IF EXISTS `user_users2user_groups`;
-
-CREATE TABLE `user_users2user_groups` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `group`(`group`),
-  INDEX `user`(`user`),
-  CONSTRAINT `user_groups.id2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `user_users.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table user_users2application_projects
-DROP TABLE IF EXISTS `user_users2application_projects`;
-
 CREATE TABLE `user_users2application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
@@ -271,9 +299,6 @@ CREATE TABLE `user_users2application_projects` (
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
-
--- Drop table content_global_boxes
-DROP TABLE IF EXISTS `content_global_boxes`;
 
 CREATE TABLE `content_global_boxes` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -300,8 +325,108 @@ CREATE TABLE `content_global_boxes` (
 )
 TYPE=INNODB;
 
--- Drop table community_settings
-DROP TABLE IF EXISTS `community_settings`;
+CREATE TABLE `user_users2user_groups` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `group` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `group`(`group`),
+  INDEX `user`(`user`),
+  CONSTRAINT `user_groups.id2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `user_users.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `user_groups2user_rights` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `group` int(11) UNSIGNED NOT NULL,
+  `right` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `group`(`group`),
+  INDEX `right`(`right`),
+  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
+    REFERENCES `user_rights`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `media_images` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `category` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `name_on_disk` varchar(255),
+  `mime_type` varchar(255),
+  `width` int(11) UNSIGNED,
+  `height` int(11) UNSIGNED,
+  `size` int(11) UNSIGNED,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  INDEX `category`(`category`),
+  CONSTRAINT `media_images.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `media_images.category2media_image_categories.id` FOREIGN KEY (`category`)
+    REFERENCES `media_image_categories`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `media_documents` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `category` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `name_on_disk` varchar(255),
+  `mime_type` varchar(255),
+  `size` int(11) UNSIGNED,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `media_documents.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `media_documents.category2media_document_categories` FOREIGN KEY (`category`)
+    REFERENCES `media_document_categories`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `templating_template_sets2templating_templates` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `template` int(11) UNSIGNED NOT NULL,
+  `set` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `template`(`template`),
+  INDEX `set`(`set`),
+  CONSTRAINT `templating_templates.id2templating_template_sets.id` FOREIGN KEY (`set`)
+    REFERENCES `templating_template_sets`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `templating_template_sets.id2templating_templates.id` FOREIGN KEY (`template`)
+    REFERENCES `templating_templates`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
 
 CREATE TABLE `community_settings` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -372,75 +497,43 @@ CREATE TABLE `community_settings` (
 )
 TYPE=INNODB;
 
--- Drop table user_rights
-DROP TABLE IF EXISTS `user_rights`;
-
-CREATE TABLE `user_rights` (
+CREATE TABLE `templating_global_templates` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   `description` text,
-  `editable` enum('0','1') NOT NULL DEFAULT '1',
+  `content` text,
+  `mime_type` varchar(50),
+  `date_modified` timestamp(14),
+  `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
-  CONSTRAINT `user_rights.project2application_projects.id` FOREIGN KEY (`project`)
+  INDEX `name`(`name`),
+  CONSTRAINT `templating_global_templates.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
 
--- Drop table templating_template_types
-DROP TABLE IF EXISTS `templating_template_types`;
-
-CREATE TABLE `templating_template_types` (
+CREATE TABLE `media_image_thumbnails` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
+  `image` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
-  `description` text,
-  `editable` enum('0','1') DEFAULT '0',
+  `name_on_disk` varchar(255),
+  `width` int(11) UNSIGNED,
+  `height` int(11) UNSIGNED,
+  `size` int(11) UNSIGNED,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
   PRIMARY KEY(`id`),
-  CONSTRAINT `templating_template_types.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
+  INDEX `image`(`image`),
+  CONSTRAINT `media_image_thumbnails.image2media_images.id` FOREIGN KEY (`image`)
+    REFERENCES `media_images`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
-
--- Drop table media_document_categories
-DROP TABLE IF EXISTS `media_document_categories`;
-
-CREATE TABLE `media_document_categories` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `media_document_categories.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table media_image_categories
-DROP TABLE IF EXISTS `media_image_categories`;
-
-CREATE TABLE `media_image_categories` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `media_image_categories.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_nodes
-DROP TABLE IF EXISTS `content_nodes`;
 
 CREATE TABLE `content_nodes` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -458,126 +551,6 @@ CREATE TABLE `content_nodes` (
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
-
--- Drop table templating_templates
-DROP TABLE IF EXISTS `templating_templates`;
-
-CREATE TABLE `templating_templates` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `description` text,
-  `content` text,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `type`(`type`),
-  CONSTRAINT `templating_templates.type2templating_template_types.id` FOREIGN KEY (`type`)
-    REFERENCES `templating_template_types`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table user_groups2user_rights
-DROP TABLE IF EXISTS `user_groups2user_rights`;
-
-CREATE TABLE `user_groups2user_rights` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group` int(11) UNSIGNED NOT NULL,
-  `right` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `group`(`group`),
-  INDEX `right`(`right`),
-  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
-    REFERENCES `user_rights`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table media_images
-DROP TABLE IF EXISTS `media_images`;
-
-CREATE TABLE `media_images` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `category` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `name_on_disk` varchar(255),
-  `mime_type` varchar(255),
-  `width` int(11) UNSIGNED,
-  `height` int(11) UNSIGNED,
-  `size` int(11) UNSIGNED,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  INDEX `category`(`category`),
-  CONSTRAINT `media_images.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `media_images.category2media_image_categories.id` FOREIGN KEY (`category`)
-    REFERENCES `media_image_categories`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table media_documents
-DROP TABLE IF EXISTS `media_documents`;
-
-CREATE TABLE `media_documents` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `project` int(11) UNSIGNED NOT NULL,
-  `category` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `name_on_disk` varchar(255),
-  `mime_type` varchar(255),
-  `size` int(11) UNSIGNED,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `project`(`project`),
-  CONSTRAINT `media_documents.project2application_projects.id` FOREIGN KEY (`project`)
-    REFERENCES `application_projects`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `media_documents.category2media_document_categories` FOREIGN KEY (`category`)
-    REFERENCES `media_document_categories`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table templating_template_sets2templating_templates
-DROP TABLE IF EXISTS `templating_template_sets2templating_templates`;
-
-CREATE TABLE `templating_template_sets2templating_templates` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `template` int(11) UNSIGNED NOT NULL,
-  `set` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `template`(`template`),
-  INDEX `set`(`set`),
-  CONSTRAINT `templating_templates.id2templating_template_sets.id` FOREIGN KEY (`set`)
-    REFERENCES `templating_template_sets`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `templating_template_sets.id2templating_templates.id` FOREIGN KEY (`template`)
-    REFERENCES `templating_templates`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_pages
-DROP TABLE IF EXISTS `content_pages`;
 
 CREATE TABLE `content_pages` (
   `id` int(11) UNSIGNED NOT NULL,
@@ -631,31 +604,6 @@ CREATE TABLE `content_pages` (
 )
 TYPE=INNODB;
 
--- Drop table media_image_thumbnails
-DROP TABLE IF EXISTS `media_image_thumbnails`;
-
-CREATE TABLE `media_image_thumbnails` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `image` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255),
-  `name_on_disk` varchar(255),
-  `width` int(11) UNSIGNED,
-  `height` int(11) UNSIGNED,
-  `size` int(11) UNSIGNED,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `image`(`image`),
-  CONSTRAINT `media_image_thumbnails.image2media_images.id` FOREIGN KEY (`image`)
-    REFERENCES `media_images`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_blog_tags
-DROP TABLE IF EXISTS `content_blog_tags`;
-
 CREATE TABLE `content_blog_tags` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `page` int(11) UNSIGNED NOT NULL,
@@ -672,55 +620,6 @@ CREATE TABLE `content_blog_tags` (
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
-
--- Drop table content_pages2user_groups
-DROP TABLE IF EXISTS `content_pages2user_groups`;
-
-CREATE TABLE `content_pages2user_groups` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `page` int(11) UNSIGNED NOT NULL,
-  `group` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `page`(`page`),
-  INDEX `group`(`group`),
-  CONSTRAINT `content_pages.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `user_groups.id2content_pages.id` FOREIGN KEY (`page`)
-    REFERENCES `content_pages`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table application_ping_service_configurations
-DROP TABLE IF EXISTS `application_ping_service_configurations`;
-
-CREATE TABLE `application_ping_service_configurations` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `page` int(11) UNSIGNED NOT NULL,
-  `ping_service` int(11) UNSIGNED NOT NULL,
-  `site_name` varchar(255),
-  `site_url` varchar(255),
-  `site_index` varchar(255),
-  `site_feed` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `page`(`page`),
-  INDEX `ping_service`(`ping_service`),
-  CONSTRAINT `application_ping_services.id2content_pages.id` FOREIGN KEY (`page`)
-    REFERENCES `content_pages`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_pages.id2application_ping_services.id` FOREIGN KEY (`ping_service`)
-    REFERENCES `application_ping_services`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_boxes
-DROP TABLE IF EXISTS `content_boxes`;
 
 CREATE TABLE `content_boxes` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -747,8 +646,111 @@ CREATE TABLE `content_boxes` (
 )
 TYPE=INNODB;
 
--- Drop table content_blog_postings
-DROP TABLE IF EXISTS `content_blog_postings`;
+CREATE TABLE `application_ping_service_configurations` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page` int(11) UNSIGNED NOT NULL,
+  `ping_service` int(11) UNSIGNED NOT NULL,
+  `site_name` varchar(255),
+  `site_url` varchar(255),
+  `site_index` varchar(255),
+  `site_feed` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `page`(`page`),
+  INDEX `ping_service`(`ping_service`),
+  CONSTRAINT `application_ping_services.id2content_pages.id` FOREIGN KEY (`page`)
+    REFERENCES `content_pages`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_pages.id2application_ping_services.id` FOREIGN KEY (`ping_service`)
+    REFERENCES `application_ping_services`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_pages2user_groups` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page` int(11) UNSIGNED NOT NULL,
+  `group` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `page`(`page`),
+  INDEX `group`(`group`),
+  CONSTRAINT `content_pages.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `user_groups.id2content_pages.id` FOREIGN KEY (`page`)
+    REFERENCES `content_pages`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_simple_pages` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `user`(`user`),
+  INDEX `text_converter`(`text_converter`),
+  CONSTRAINT `content_simple_page.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_page.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_page.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_simple_forms` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `type` enum('personal','business') NOT NULL DEFAULT 'personal',
+  `email_from` varchar(255),
+  `email_to` varchar(255),
+  `email_subject` varchar(255),
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `user`(`user`),
+  CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_forms.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_forms.text_converter2text_converters.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
 
 CREATE TABLE `content_blog_postings` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -799,45 +801,65 @@ CREATE TABLE `content_blog_postings` (
 )
 TYPE=INNODB;
 
--- Drop table content_simple_pages
-DROP TABLE IF EXISTS `content_simple_pages`;
-
-CREATE TABLE `content_simple_pages` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
+CREATE TABLE `media_podcasts` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `blog_posting` int(11) UNSIGNED,
+  `type` enum('document','audio','video') DEFAULT 'audio',
   `title` varchar(255),
-  `title_url` varchar(255),
-  `content_raw` text,
-  `content` text,
-  `text_converter` int(11) UNSIGNED,
-  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
-  `meta_use` enum('0','1') DEFAULT '0',
-  `meta_title_raw` varchar(255),
-  `meta_title` varchar(255),
-  `meta_keywords` text,
-  `meta_description` text,
+  `pub_date` datetime,
+  `author` varchar(255),
+  `block` enum('0','1') DEFAULT '0',
+  `duration` int(11) UNSIGNED,
+  `explicit` enum('0','1') DEFAULT '0',
+  `keywords` varchar(255),
+  `subtitle` varchar(255),
+  `summary` text,
+  `file_name` varchar(255),
+  `file_name_on_disk` varchar(255),
+  `file_mime_type` varchar(255),
+  `file_size` int(11) UNSIGNED,
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),
-  INDEX `user`(`user`),
-  INDEX `text_converter`(`text_converter`),
-  CONSTRAINT `content_simple_page.id2content_pages.id` FOREIGN KEY (`id`)
-    REFERENCES `content_pages`(`id`)
+  INDEX `blog_posting`(`blog_posting`),
+  CONSTRAINT `media_podcasts.blog_posting2content_blog_postings.id` FOREIGN KEY (`blog_posting`)
+    REFERENCES `content_blog_postings`(`id`)
       ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_page.user2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_page.text_converter2application_text_converter.id` FOREIGN KEY (`text_converter`)
-    REFERENCES `application_text_converters`(`id`)
-      ON DELETE SET NULL
       ON UPDATE CASCADE
 )
 TYPE=INNODB;
 
--- Drop table community_blog_comments
-DROP TABLE IF EXISTS `community_blog_comments`;
+CREATE TABLE `media_podcast_categories` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `podcast` int(11) UNSIGNED NOT NULL,
+  `category` varchar(255),
+  `subcategory` varchar(255),
+  PRIMARY KEY(`id`),
+  INDEX `podcast`(`podcast`),
+  CONSTRAINT `media_podcast_categories2media_podcasts.id` FOREIGN KEY (`podcast`)
+    REFERENCES `media_podcasts`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `content_blog_tags2content_blog_postings` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `posting` int(11) UNSIGNED NOT NULL,
+  `tag` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `posting`(`posting`),
+  INDEX `tag`(`tag`),
+  CONSTRAINT `content_blog_postings.id2content_blog_tags.id` FOREIGN KEY (`posting`)
+    REFERENCES `content_blog_postings`(`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  CONSTRAINT `content_blog_tags.id2content_blog_postings.id` FOREIGN KEY (`tag`)
+    REFERENCES `content_blog_tags`(`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+)
+TYPE=INNODB;
 
 CREATE TABLE `community_blog_comments` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -871,110 +893,6 @@ CREATE TABLE `community_blog_comments` (
     REFERENCES `community_blog_comment_statuses`(`id`)
       ON DELETE SET NULL
       ON UPDATE SET NULL
-)
-TYPE=INNODB;
-
--- Drop table content_simple_forms
-DROP TABLE IF EXISTS `content_simple_forms`;
-
-CREATE TABLE `content_simple_forms` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255),
-  `title_url` varchar(255),
-  `content_raw` text,
-  `content` text,
-  `text_converter` int(11) UNSIGNED,
-  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
-  `type` enum('personal','business') NOT NULL DEFAULT 'personal',
-  `email_from` varchar(255),
-  `email_to` varchar(255),
-  `email_subject` varchar(255),
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `user`(`user`),
-  CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_forms.id2content_pages.id` FOREIGN KEY (`id`)
-    REFERENCES `content_pages`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_forms.text_converter2text_converters.id` FOREIGN KEY (`text_converter`)
-    REFERENCES `application_text_converters`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table media_podcasts
-DROP TABLE IF EXISTS `media_podcasts`;
-
-CREATE TABLE `media_podcasts` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `blog_posting` int(11) UNSIGNED,
-  `type` enum('document','audio','video') DEFAULT 'audio',
-  `title` varchar(255),
-  `pub_date` datetime,
-  `author` varchar(255),
-  `block` enum('0','1') DEFAULT '0',
-  `duration` int(11) UNSIGNED,
-  `explicit` enum('0','1') DEFAULT '0',
-  `keywords` varchar(255),
-  `subtitle` varchar(255),
-  `summary` text,
-  `file_name` varchar(255),
-  `file_name_on_disk` varchar(255),
-  `file_mime_type` varchar(255),
-  `file_size` int(11) UNSIGNED,
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `blog_posting`(`blog_posting`),
-  CONSTRAINT `media_podcasts.blog_posting2content_blog_postings.id` FOREIGN KEY (`blog_posting`)
-    REFERENCES `content_blog_postings`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table media_podcast_categories
-DROP TABLE IF EXISTS `media_podcast_categories`;
-
-CREATE TABLE `media_podcast_categories` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `podcast` int(11) UNSIGNED NOT NULL,
-  `category` varchar(255),
-  `subcategory` varchar(255),
-  PRIMARY KEY(`id`),
-  INDEX `podcast`(`podcast`),
-  CONSTRAINT `media_podcast_categories2media_podcasts.id` FOREIGN KEY (`podcast`)
-    REFERENCES `media_podcasts`(`id`)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
-)
-TYPE=INNODB;
-
--- Drop table content_blog_tags2content_blog_postings
-DROP TABLE IF EXISTS `content_blog_tags2content_blog_postings`;
-
-CREATE TABLE `content_blog_tags2content_blog_postings` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `posting` int(11) UNSIGNED NOT NULL,
-  `tag` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `posting`(`posting`),
-  INDEX `tag`(`tag`),
-  CONSTRAINT `content_blog_postings.id2content_blog_tags.id` FOREIGN KEY (`posting`)
-    REFERENCES `content_blog_postings`(`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  CONSTRAINT `content_blog_tags.id2content_blog_postings.id` FOREIGN KEY (`tag`)
-    REFERENCES `content_blog_tags`(`id`)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION
 )
 TYPE=INNODB;
 
