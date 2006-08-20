@@ -66,6 +66,8 @@ define("OAK_DB_MEDIA_IMAGE_CATEGORIES", "media_image_categories");
 define("OAK_DB_MEDIA_IMAGE_THUMBNAILS", "media_image_thumbnails");
 
 // templating table aliases
+define("OAK_DB_TEMPLATING_GLOBAL_FILES", "templating_global_files");
+define("OAK_DB_TEMPLATING_GLOBAL_TEMPLATES", "templating_global_templates");
 define("OAK_DB_TEMPLATING_TEMPLATES", "templating_templates");
 define("OAK_DB_TEMPLATING_TEMPLATE_SETS", "templating_template_sets");
 define("OAK_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES", "templating_template_sets2templating_templates");

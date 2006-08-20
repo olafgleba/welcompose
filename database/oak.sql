@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 19.08.2006 12:36:27
--- Diagram Version: 107
+-- Created on: 20.08.2006 16:00:32
+-- Diagram Version: 108
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -165,6 +165,7 @@ CREATE TABLE `templating_global_files` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `description` text,
   `name_on_disk` varchar(255),
   `mime_type` varchar(255),
   `size` int(11) UNSIGNED,

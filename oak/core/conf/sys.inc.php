@@ -27,6 +27,10 @@ backticks = true;
 store_www = "/oak/trunk/oak/images"
 store_disk = "/www/oak/trunk/oak/images"
 
+[file]
+store_www = "/oak/trunk/oak/files"
+store_disk = "/www/oak/trunk/oak/files"
+
 [caching]
 index.php_mode = 0
 index.php_lifetime = 0
