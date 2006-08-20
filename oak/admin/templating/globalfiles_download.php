@@ -102,7 +102,7 @@ try {
 	
 	// print download headers
 	header("Content-Type: application/octet-stream");
-	header("Content-Disposition: attachment; filename=".$global_file['name']);
+	header("Content-Disposition: attachment; filename=".urlencode($global_file['name']));
 	
 	// print file
 	print file_get_contents($path_to_file);

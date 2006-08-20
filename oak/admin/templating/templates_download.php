@@ -98,7 +98,7 @@ try {
 	
 	// print download headers
 	header("Content-Type: application/octet-stream");
-	header("Content-Disposition: attachment; filename=".$filename);
+	header("Content-Disposition: attachment; filename=".urlencode($filename));
 	
 	// print template source code
 	print $template['content'];
