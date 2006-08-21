@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes" encoding="UTF-8" ?>
 <DBMODEL Version="1.0" TYPE="MySQL">
-<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="109" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-08-21 14:44:50" Description="" Annotation="" ZoomFac="100.00" XPos="1598" YPos="200" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
+<MODELSETTINGS MDDVERSION="1.8.8 (build 238)" ModelProject="oak" ModelName="oak" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="120" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" ModelUpdated="2006-08-21 22:40:12" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PageOrientation="1" PageFormat="7" MarginTop="10" MarginLeft="10" MarginRight="10" MarginBottom="10" MarginHeader="5" MarginFooter="5" PrintHAlign="0" PrintVAlign="0" HeaderID="0" FooterID="0" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
 <DATABASE Name="oak" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
 
 <STAMPS>
@@ -271,7 +271,7 @@
 <REFERENCES_BEGIN>
 <REFERENCE_BEGIN ID="1077" />
 <REFERENCE_BEGIN ID="1107" />
-<REFERENCE_BEGIN ID="8530" />
+<REFERENCE_BEGIN ID="9311" />
 </REFERENCES_BEGIN>
 <REFERENCES_END>
 <REFERENCE_END ID="1055" />
@@ -680,40 +680,54 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="1152" Name="media_images" XPos="150" YPos="480" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="1152" Name="media_objects" XPos="30" YPos="390" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="1153" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
 <COLUMN ID="8494" Name="project" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="8671" Name="category" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+<COLUMN ID="9287" Name="type" DomainID="-1" Pos="2" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="1" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\aimage\a,\adocument\a,\aaudio\a,\avideo\a,\aother\a" DefaultValue="" Comments="">
 </COLUMN>
 <COLUMN ID="1154" Name="name" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1155" Name="name_on_disk" DomainID="-1" Pos="4" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="9289" Name="description" DomainID="-1" Pos="4" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="8527" Name="mime_type" DomainID="-1" Pos="5" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="9290" Name="tags" DomainID="-1" Pos="5" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1157" Name="width" DomainID="-1" Pos="6" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="1155" Name="file_name_on_disk" DomainID="-1" Pos="6" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1158" Name="height" DomainID="-1" Pos="7" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="8527" Name="file_mime_type" DomainID="-1" Pos="7" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1159" Name="size" DomainID="-1" Pos="8" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="1157" Name="file_width" DomainID="-1" Pos="8" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1248" Name="date_modified" DomainID="-1" Pos="9" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="1158" Name="file_height" DomainID="-1" Pos="9" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
-<COLUMN ID="1249" Name="date_added" DomainID="-1" Pos="10" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+<COLUMN ID="1159" Name="file_size" DomainID="-1" Pos="10" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9291" Name="preview_name_on_disk" DomainID="-1" Pos="11" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9292" Name="preview_mime_type" DomainID="-1" Pos="12" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9293" Name="preview_height" DomainID="-1" Pos="13" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9294" Name="preview_width" DomainID="-1" Pos="14" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9295" Name="preview_size" DomainID="-1" Pos="15" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="1248" Name="date_modified" DomainID="-1" Pos="16" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="1249" Name="date_added" DomainID="-1" Pos="17" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
 </COLUMNS>
 <REFERENCES_BEGIN>
-<REFERENCE_BEGIN ID="1245" />
 <REFERENCE_BEGIN ID="8701" />
 <REFERENCE_BEGIN ID="8703" />
 <REFERENCE_BEGIN ID="8704" />
+<REFERENCE_BEGIN ID="9309" />
+<REFERENCE_BEGIN ID="9326" />
 </REFERENCES_BEGIN>
 <REFERENCES_END>
 <REFERENCE_END ID="8496" />
-<REFERENCE_END ID="8677" />
 </REFERENCES_END>
 <INDEXES>
 <INDEX ID="1156" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
@@ -726,47 +740,9 @@
 <INDEXCOLUMN ID="8494" />
 </INDEXCOLUMNS>
 </INDEX>
-<INDEX ID="8672" Name="category" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEX ID="9288" Name="type" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
-<INDEXCOLUMN ID="8671" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
-</ENTITY>
-<ENTITY ID="1160" Name="media_documents" XPos="310" YPos="1010" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="1161" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8490" Name="project" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8712" Name="category" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1162" Name="name" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1163" Name="name_on_disk" DomainID="-1" Pos="4" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8526" Name="mime_type" DomainID="-1" Pos="5" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1166" Name="size" DomainID="-1" Pos="6" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1252" Name="date_modified" DomainID="-1" Pos="7" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1253" Name="date_added" DomainID="-1" Pos="8" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_END>
-<REFERENCE_END ID="8492" />
-<REFERENCE_END ID="8713" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="1167" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="1161" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="8491" Name="project" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8490" />
+<INDEXCOLUMN ID="9287" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDEXES>
@@ -886,43 +862,6 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="1236" Name="media_image_thumbnails" XPos="540" YPos="80" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="1237" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1238" Name="image" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1239" Name="name" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1240" Name="name_on_disk" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1241" Name="width" DomainID="-1" Pos="4" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1242" Name="height" DomainID="-1" Pos="5" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1243" Name="size" DomainID="-1" Pos="6" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1250" Name="date_modified" DomainID="-1" Pos="7" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="1251" Name="date_added" DomainID="-1" Pos="8" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_END>
-<REFERENCE_END ID="1245" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="1244" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="1237" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="1247" Name="image" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="1238" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
-</ENTITY>
 <ENTITY ID="1254" Name="content_nodes" XPos="1480" YPos="690" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="1255" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
@@ -1013,13 +952,10 @@
 <REFERENCE_BEGIN ID="8475" />
 <REFERENCE_BEGIN ID="8484" />
 <REFERENCE_BEGIN ID="8488" />
-<REFERENCE_BEGIN ID="8492" />
 <REFERENCE_BEGIN ID="8496" />
 <REFERENCE_BEGIN ID="8499" />
 <REFERENCE_BEGIN ID="8504" />
 <REFERENCE_BEGIN ID="8686" />
-<REFERENCE_BEGIN ID="8746" />
-<REFERENCE_BEGIN ID="8751" />
 <REFERENCE_BEGIN ID="8756" />
 <REFERENCE_BEGIN ID="8776" />
 <REFERENCE_BEGIN ID="8786" />
@@ -1063,91 +999,6 @@
 <COLUMN ID="8799" Name="schema_version" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
 </COLUMNS>
-</ENTITY>
-<ENTITY ID="8507" Name="media_podcasts" XPos="330" YPos="1280" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="8508" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8509" Name="blog_posting" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8565" Name="type" DomainID="-1" Pos="2" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\adocument\a,\aaudio\a,\avideo\a" DefaultValue="\aaudio\a" Comments="">
-</COLUMN>
-<COLUMN ID="8510" Name="title" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8511" Name="pub_date" DomainID="-1" Pos="4" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8512" Name="author" DomainID="-1" Pos="5" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8513" Name="block" DomainID="-1" Pos="6" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
-</COLUMN>
-<COLUMN ID="8514" Name="duration" DomainID="-1" Pos="7" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8515" Name="explicit" DomainID="-1" Pos="8" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
-</COLUMN>
-<COLUMN ID="8516" Name="keywords" DomainID="-1" Pos="9" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8517" Name="subtitle" DomainID="-1" Pos="10" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8518" Name="summary" DomainID="-1" Pos="11" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8519" Name="file_name" DomainID="-1" Pos="12" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8520" Name="file_name_on_disk" DomainID="-1" Pos="13" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8521" Name="file_mime_type" DomainID="-1" Pos="14" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8522" Name="file_size" DomainID="-1" Pos="15" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8523" Name="date_modified" DomainID="-1" Pos="16" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8524" Name="date_added" DomainID="-1" Pos="17" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_BEGIN>
-<REFERENCE_BEGIN ID="8542" />
-</REFERENCES_BEGIN>
-<REFERENCES_END>
-<REFERENCE_END ID="8530" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="8525" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8508" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="8532" Name="blog_posting" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8509" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
-</ENTITY>
-<ENTITY ID="8533" Name="media_podcast_categories" XPos="140" YPos="1860" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="8534" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8538" Name="podcast" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8535" Name="category" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8536" Name="subcategory" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_END>
-<REFERENCE_END ID="8542" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="8537" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8534" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="8539" Name="podcast" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8538" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
 </ENTITY>
 <ENTITY ID="8543" Name="content_simple_forms" XPos="800" YPos="1140" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
@@ -1261,34 +1112,6 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="8673" Name="media_image_categories" XPos="280" YPos="180" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="8674" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8748" Name="project" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8675" Name="name" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_BEGIN>
-<REFERENCE_BEGIN ID="8677" />
-</REFERENCES_BEGIN>
-<REFERENCES_END>
-<REFERENCE_END ID="8751" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="8676" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8674" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="8749" Name="project" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8748" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
-</ENTITY>
 <ENTITY ID="8681" Name="user_users2application_projects" XPos="1250" YPos="2080" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="8682" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
@@ -1341,34 +1164,6 @@
 <INDEX ID="8694" Name="user" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
 <INDEXCOLUMN ID="8692" />
-</INDEXCOLUMNS>
-</INDEX>
-</INDEXES>
-</ENTITY>
-<ENTITY ID="8708" Name="media_document_categories" XPos="130" YPos="790" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
-<COLUMNS>
-<COLUMN ID="8709" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8745" Name="project" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
-</COLUMN>
-<COLUMN ID="8710" Name="name" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
-</COLUMN>
-</COLUMNS>
-<REFERENCES_BEGIN>
-<REFERENCE_BEGIN ID="8713" />
-</REFERENCES_BEGIN>
-<REFERENCES_END>
-<REFERENCE_END ID="8746" />
-</REFERENCES_END>
-<INDEXES>
-<INDEX ID="8711" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8709" />
-</INDEXCOLUMNS>
-</INDEX>
-<INDEX ID="8750" Name="project" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
-<INDEXCOLUMNS>
-<INDEXCOLUMN ID="8745" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDEXES>
@@ -1732,6 +1527,104 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
+<ENTITY ID="9296" Name="content_blog_podcasts" XPos="150" YPos="960" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="9297" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9298" Name="blog_posting" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9299" Name="media_object" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9300" Name="title" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9301" Name="pub_date" DomainID="-1" Pos="4" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9302" Name="author" DomainID="-1" Pos="5" Datatype="14" Type="VARCHAR" Width="50" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9303" Name="block" DomainID="-1" Pos="6" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+</COLUMN>
+<COLUMN ID="9304" Name="duration" DomainID="-1" Pos="7" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9305" Name="explicit" DomainID="-1" Pos="8" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+</COLUMN>
+<COLUMN ID="9306" Name="keywords" DomainID="-1" Pos="9" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9307" Name="summary" DomainID="-1" Pos="10" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_END>
+<REFERENCE_END ID="9309" />
+<REFERENCE_END ID="9311" />
+</REFERENCES_END>
+<INDEXES>
+<INDEX ID="9308" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9297" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9312" Name="blog_posting" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9298" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9313" Name="media_object" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9299" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
+<ENTITY ID="9314" Name="media_tags" XPos="580" YPos="50" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="9315" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9316" Name="word" DomainID="-1" Pos="1" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9317" Name="occurrences" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_BEGIN>
+<REFERENCE_BEGIN ID="9328" />
+</REFERENCES_BEGIN>
+<INDEXES>
+<INDEX ID="9318" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9315" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
+<ENTITY ID="9319" Name="media_objects2media_tags" XPos="270" YPos="170" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="9320" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9321" Name="object" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9322" Name="tag" DomainID="-1" Pos="2" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_END>
+<REFERENCE_END ID="9326" />
+<REFERENCE_END ID="9328" />
+</REFERENCES_END>
+<INDEXES>
+<INDEX ID="9325" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9320" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9323" Name="object" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9321" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9324" Name="tag" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9322" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
 </ENTITIES>
 <REFERENCES>
 <REFERENCE ID="1022" Name="content_pages.type2content_page_types.id" SOURCE="1016" DESTINATION="1000" FKIDS="1017=1007\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1019" AutoColumnIDs="" />
@@ -1753,7 +1646,6 @@
 <REFERENCE ID="1219" Name="content_pages.id2application_ping_services.id" SOURCE="1069" DESTINATION="1208" FKIDS="1070=1211\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1076" AutoColumnIDs="" />
 <REFERENCE ID="1227" Name="content_pages.id2user_groups.id" SOURCE="1104" DESTINATION="1222" FKIDS="1113=1225\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1115" AutoColumnIDs="" />
 <REFERENCE ID="1229" Name="user_groups.id2content_pages.id" SOURCE="1000" DESTINATION="1222" FKIDS="1001=1224\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1013" AutoColumnIDs="" />
-<REFERENCE ID="1245" Name="media_image_thumbnails.image2media_images.id" SOURCE="1152" DESTINATION="1236" FKIDS="1153=1238\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="" />
 <REFERENCE ID="1266" Name="content_nodes.navigation2content_navigation.id" SOURCE="1024" DESTINATION="1254" FKIDS="1025=1256\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1027" AutoColumnIDs="" />
 <REFERENCE ID="1273" Name="content_simple_page.text_converter2application_text_converter.id" SOURCE="1267" DESTINATION="1030" FKIDS="1268=1272\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1271" AutoColumnIDs="" />
 <REFERENCE ID="1276" Name="content_boxes.text_converter2application_text_converter.id" SOURCE="1267" DESTINATION="1187" FKIDS="1268=1275\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1271" AutoColumnIDs="" />
@@ -1763,18 +1655,14 @@
 <REFERENCE ID="8475" Name="templating_template_sets2application_projects.id" SOURCE="8458" DESTINATION="1120" FKIDS="8459=8474\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8484" Name="application_text_converters.project2application_projects.id" SOURCE="8458" DESTINATION="1267" FKIDS="8459=8482\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8488" Name="user_groups.project2application_projects.id" SOURCE="8458" DESTINATION="1104" FKIDS="8459=8486\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
-<REFERENCE ID="8492" Name="media_documents.project2application_projects.id" SOURCE="8458" DESTINATION="1160" FKIDS="8459=8490\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8496" Name="media_images.project2application_projects.id" SOURCE="8458" DESTINATION="1152" FKIDS="8459=8494\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8499" Name="content_page_types.project2application_projects.id" SOURCE="8458" DESTINATION="1016" FKIDS="8459=8498\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8504" Name="content_pages.project2application_projects.id" SOURCE="8458" DESTINATION="1000" FKIDS="8459=8502\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
-<REFERENCE ID="8530" Name="media_podcasts.blog_posting2content_blog_postings.id" SOURCE="1041" DESTINATION="8507" FKIDS="1042=8509\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1052" AutoColumnIDs="" />
-<REFERENCE ID="8542" Name="media_podcast_categories2media_podcasts.id" SOURCE="8507" DESTINATION="8533" FKIDS="8508=8538\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8525" AutoColumnIDs="" />
 <REFERENCE ID="8561" Name="content_simple_forms.user2user_users.id" SOURCE="1080" DESTINATION="8543" FKIDS="1092=8556\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1101" AutoColumnIDs="" />
 <REFERENCE ID="8563" Name="content_simple_forms.id2content_pages.id" SOURCE="1000" DESTINATION="8543" FKIDS="1001=8544\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1013" AutoColumnIDs="" />
 <REFERENCE ID="8564" Name="content_simple_forms.text_converter2text_converters.id" SOURCE="1267" DESTINATION="8543" FKIDS="1268=8548\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1271" AutoColumnIDs="" />
 <REFERENCE ID="8668" Name="user_groups.id2user_rights.id" SOURCE="8649" DESTINATION="8656" FKIDS="8650=8665\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8652" AutoColumnIDs="" />
 <REFERENCE ID="8670" Name="user_rights.id2user_groups.id" SOURCE="1104" DESTINATION="8656" FKIDS="1113=8664\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1115" AutoColumnIDs="" />
-<REFERENCE ID="8677" Name="media_images.category2media_image_categories.id" SOURCE="8673" DESTINATION="1152" FKIDS="8674=8671\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8676" AutoColumnIDs="" />
 <REFERENCE ID="8686" Name="user_users.id2application_projects.id" SOURCE="8458" DESTINATION="8681" FKIDS="8459=8683\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8688" Name="application_projects.id2user_users.id" SOURCE="1080" DESTINATION="8681" FKIDS="1092=8684\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1101" AutoColumnIDs="" />
 <REFERENCE ID="8696" Name="user_groups.id2user_users.id" SOURCE="1080" DESTINATION="8689" FKIDS="1092=8692\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1101" AutoColumnIDs="" />
@@ -1783,10 +1671,7 @@
 <REFERENCE ID="8701" Name="content_pages.image_small2media_images.id" SOURCE="1152" DESTINATION="1000" FKIDS="1153=8646\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="" />
 <REFERENCE ID="8703" Name="content_pages.image_medium2media_images.id" SOURCE="1152" DESTINATION="1000" FKIDS="1153=8647\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="" />
 <REFERENCE ID="8704" Name="content_pages.image_big2media_images.id" SOURCE="1152" DESTINATION="1000" FKIDS="1153=8648\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="" />
-<REFERENCE ID="8713" Name="media_documents.category2media_document_categories" SOURCE="8708" DESTINATION="1160" FKIDS="8709=8712\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8711" AutoColumnIDs="" />
 <REFERENCE ID="8742" Name="community_blog_comments2community_blog_comment_statuses" SOURCE="8738" DESTINATION="1082" FKIDS="8739=8734\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="2" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8741" AutoColumnIDs="" />
-<REFERENCE ID="8746" Name="media_document_categories.project2application_projects.id" SOURCE="8458" DESTINATION="8708" FKIDS="8459=8745\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
-<REFERENCE ID="8751" Name="media_image_categories.project2application_projects.id" SOURCE="8458" DESTINATION="8673" FKIDS="8459=8748\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8756" Name="community_blog_comment_statuses.project2application_project.id" SOURCE="8458" DESTINATION="8738" FKIDS="8459=8754\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="8759" Name="content_pages.id2content_nodes.id" SOURCE="1254" DESTINATION="1000" FKIDS="1255=1001\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1263" AutoColumnIDs="" />
 <REFERENCE ID="8776" Name="application_textmacros.project2application_projects.id" SOURCE="8458" DESTINATION="8769" FKIDS="8459=8771\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
@@ -1806,6 +1691,10 @@
 <REFERENCE ID="8886" Name="community_blog_trackback_statuses.project2application_project.id" SOURCE="8458" DESTINATION="8877" FKIDS="8459=8879\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="9042" Name="templating_global_files.project2application_projects.id" SOURCE="8458" DESTINATION="9024" FKIDS="8459=9031\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
 <REFERENCE ID="9052" Name="templating_global_templates.project2application_projects.id" SOURCE="8458" DESTINATION="9043" FKIDS="8459=9045\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
+<REFERENCE ID="9309" Name="content_blog_podcasts.media_object2media_object.id" SOURCE="1152" DESTINATION="9296" FKIDS="1153=9299\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="" />
+<REFERENCE ID="9311" Name="content_blog_podcasts.blog_posting2content_blog_postings.id" SOURCE="1041" DESTINATION="9296" FKIDS="1042=9298\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1052" AutoColumnIDs="" />
+<REFERENCE ID="9326" Name="media_objects.id2media_tags.id" SOURCE="1152" DESTINATION="9319" FKIDS="1153=9321\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1156" AutoColumnIDs="9327\n" />
+<REFERENCE ID="9328" Name="media_tags.id2media_objects.id" SOURCE="9314" DESTINATION="9319" FKIDS="9315=9322\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="9318" AutoColumnIDs="" />
 </REFERENCES>
 <NOTES>
 </NOTES>

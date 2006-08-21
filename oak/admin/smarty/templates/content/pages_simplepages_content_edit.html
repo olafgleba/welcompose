@@ -143,9 +143,10 @@ var checkbox_status = new Array('simple_page_meta_use');
 <label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_timeframe_wrap">
 <select id="mm_timeframe" name="mm_timeframe">
-<option value="0">{i18n Please choose...}</option>
-<option value="1">{i18n nabend}</option>
-<option value="2">{i18n moin}</option>
+<option value="">{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe item=_timeframe_name}
+<option value="{$_timeframe}">{$_timeframe_name}</option>
+{/foreach}
 </select>
 </span>
 </label>

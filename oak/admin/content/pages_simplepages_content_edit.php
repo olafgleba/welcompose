@@ -243,6 +243,9 @@ try {
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
+		// get and assign timeframes
+		$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
+		
 		// display the form
 		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 		$BASE->utility->smarty->display('content/pages_simplepages_content_edit.html', OAK_TEMPLATE_KEY);
