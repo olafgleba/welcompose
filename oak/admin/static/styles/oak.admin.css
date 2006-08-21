@@ -494,7 +494,7 @@ overflow: hidden;
 fieldset.void {
 font-size: 100%;
 }
-fieldset h2 {
+fieldset.topbg h2, fieldset.within h2 {
 font-size: 1.0em;
 font-weight: normal;
 padding: 10px 10px 0 0px;
