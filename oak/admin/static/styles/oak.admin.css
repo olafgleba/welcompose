@@ -478,6 +478,7 @@ background: #00cc33
 form.botbg {
 width: 710px;
 padding: 20px 0;
+border: 1px solid red;
 background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
@@ -486,8 +487,19 @@ padding: 20px 10px 0 10px;
 background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
 overflow: hidden;
 }
+fieldset.within {
+width: 690px;
+padding: 20px 10px 0 10px;
+overflow: hidden;
+}
 fieldset.void {
 font-size: 100%;
+}
+legend {
+font-size: 1.0em;
+font-weight: normal;
+color: #0c3;
+padding-top: 60px;
 }
 label {
 display: block;
@@ -514,6 +526,11 @@ label span.bez {
 display: block; 
 float: left;
 width: 140px;
+}
+label span.bez260 {
+display: block; 
+float: left;
+width: 260px;
 }
 label span.req {
 color: #f00;
@@ -610,6 +627,19 @@ font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
+cursor: pointer;
+}
+input.submitbut200bez260 {
+text-align: left;
+background: #666 url(../img/submitbut200.gif) no-repeat;
+color: #fff;
+width: 200px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 20px  0 0 260px;
 cursor: pointer;
 }
 

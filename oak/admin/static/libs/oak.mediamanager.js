@@ -212,8 +212,6 @@ function Mediamanager_switchLayer (elem)
 function Mediamanager_invokeInputs ()
 {
 	var elems = Mediamanager.checkElems();
-	
-	//alert (elems);
 	var url = '../mediamanager.ajax.php';
 	var pars = elems;
 	
