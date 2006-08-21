@@ -130,6 +130,14 @@ try {
 	$FORM->addRule('mime_type', gettext('Selected mime type is out of range'), 'in_array_keys',
 		$mime_types);
 	
+	// checkbox for change delimiter
+	$FORM->addElement('checkbox', 'change_delimiter', gettext('Change delimiter'), null,
+		array('id' => 'global_template_change_delimiter', 'class' => 'chbx'));
+	$FORM->applyFilter('change_delimiter', 'trim');
+	$FORM->applyFilter('change_delimiter', 'strip_tags');
+	$FORM->addRule('change_delimiter', gettext('The field whether to change the delimiver accepts only 0 or 1'),
+		'regex', OAK_REGEX_ZERO_OR_ONE);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add global template'),
 		array('class' => 'submitbut200'));
@@ -196,6 +204,7 @@ try {
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['mime_type'] = $FORM->exportValue('mime_type');
+		$sqlData['change_delimiter'] = (string)intval($FORM->exportValue('change_delimiter'));
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
 		// check sql data

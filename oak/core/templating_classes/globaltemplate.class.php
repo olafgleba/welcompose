@@ -231,6 +231,7 @@ public function selectGlobalTemplate ($id)
 			`templating_global_templates`.`description` AS `description`,
 			`templating_global_templates`.`content` AS `content`,
 			`templating_global_templates`.`mime_type` AS `mime_type`,
+			`templating_global_templates`.`change_delimiter` AS `change_delimiter`,
 			`templating_global_templates`.`date_modified` AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM
@@ -306,6 +307,7 @@ public function selectGlobalTemplates ($params = array())
 			`templating_global_templates`.`description` AS `description`,
 			`templating_global_templates`.`content` AS `content`,
 			`templating_global_templates`.`mime_type` AS `mime_type`,
+			`templating_global_templates`.`change_delimiter` AS `change_delimiter`,
 			`templating_global_templates`.`date_modified` AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM

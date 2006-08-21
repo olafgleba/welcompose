@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 20.08.2006 16:00:32
--- Diagram Version: 108
+-- Created on: 21.08.2006 14:46:12
+-- Diagram Version: 109
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -505,6 +505,7 @@ CREATE TABLE `templating_global_templates` (
   `description` text,
   `content` text,
   `mime_type` varchar(50),
+  `change_delimiter` enum('0','1') DEFAULT '0',
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),
