@@ -53,7 +53,7 @@ var selection = '{$session.selection}';
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
 <li><a href="blogcomments_select.php">{i18n Blog Comments}<span></span></a></li>
-<li><a href="blogcommentstatuses_select.php" class="on">{i18n Blog Comment Statuses}<span></span></a></li>
+<li><a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}<span></span></a></li>
 <li><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}<span></span></a></li>
 <li class="on">{i18n Community Settings}</li>
 </ul>
@@ -93,7 +93,7 @@ var selection = '{$session.selection}';
 
 {$form.hidden}
 
-<legend>Comments</legend>
+<h2>Comments</h2>
 
 <label class="cont" for="settings_blog_comment_display_status"><span class="bez260">{$form.blog_comment_display_status.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.blog_comment_display_status.html}</label>
@@ -125,7 +125,7 @@ var selection = '{$session.selection}';
 </fieldset>
 
 <fieldset class="within">
-<legend>Trackbacks</legend>
+<h2>Trackbacks</h2>
 	
 <label class="cont" for="settings_blog_trackback_display_status"><span class="bez260">{$form.blog_trackback_display_status.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.blog_trackback_display_status.html}</label>

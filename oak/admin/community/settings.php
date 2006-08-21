@@ -107,7 +107,7 @@ try {
 	$FORM = $BASE->utility->loadQuickForm('settings', 'post');
 		
 	// select for comment display status
-	$FORM->addElement('select', 'blog_comment_display_status', gettext('Comment display status'),
+	$FORM->addElement('select', 'blog_comment_display_status', gettext('Display status'),
 		$blog_comment_statuses, array('id' => 'settings_blog_comment_display_status'));
 	$FORM->applyFilter('blog_comment_display_status', 'trim');
 	$FORM->applyFilter('blog_comment_display_status', 'strip_tags');
@@ -115,7 +115,7 @@ try {
 		'in_array_keys', $blog_comment_statuses);
 	
 	// select for comment default status
-	$FORM->addElement('select', 'blog_comment_default_status', gettext('Comment default status'),
+	$FORM->addElement('select', 'blog_comment_default_status', gettext('Default status'),
 		$blog_comment_statuses, array('id' => 'settings_blog_comment_default_status'));
 	$FORM->applyFilter('blog_comment_default_status', 'trim');
 	$FORM->applyFilter('blog_comment_default_status', 'strip_tags');
@@ -123,7 +123,7 @@ try {
 		'in_array_keys', $blog_comment_statuses);
 	
 	// select for comment spam status
-	$FORM->addElement('select', 'blog_comment_spam_status', gettext('Comment spam status'),
+	$FORM->addElement('select', 'blog_comment_spam_status', gettext('Spam status'),
 		$blog_comment_statuses, array('id' => 'settings_blog_comment_spam_status'));
 	$FORM->applyFilter('blog_comment_spam_status', 'trim');
 	$FORM->applyFilter('blog_comment_spam_status', 'strip_tags');
@@ -131,7 +131,7 @@ try {
 		'in_array_keys', $blog_comment_statuses);
 	
 	// select for comment ham status
-	$FORM->addElement('select', 'blog_comment_ham_status', gettext('Comment ham status'),
+	$FORM->addElement('select', 'blog_comment_ham_status', gettext('Ham status'),
 		$blog_comment_statuses, array('id' => 'settings_blog_comment_ham_status'));
 	$FORM->applyFilter('blog_comment_ham_status', 'trim');
 	$FORM->applyFilter('blog_comment_ham_status', 'strip_tags');
@@ -147,7 +147,7 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);
 	
 	// textfield for timeframe threshold
-	$FORM->addElement('text', 'blog_comment_timeframe_threshold', gettext('Comment timeframe threshold'), 
+	$FORM->addElement('text', 'blog_comment_timeframe_threshold', gettext('Timeframe threshold'), 
 		array('id' => 'settings_blog_comment_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_comment_timeframe_threshold', 'trim');
 	$FORM->applyFilter('blog_comment_timeframe_threshold', 'strip_tags');
@@ -165,7 +165,7 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);
 	
 	// textfield for bayes autolearn threshold
-	$FORM->addElement('text', 'blog_comment_bayes_autolearn_threshold', gettext('Comment bayes autolearn threshold'), 
+	$FORM->addElement('text', 'blog_comment_bayes_autolearn_threshold', gettext('Bayes autolearn threshold'), 
 		array('id' => 'settings_blog_comment_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_comment_bayes_autolearn_threshold', 'trim');
 	$FORM->applyFilter('blog_comment_bayes_autolearn_threshold', 'strip_tags');
@@ -175,7 +175,7 @@ try {
 		gettext('Please enter a numeric comment bayes autolearn threshold'), 'numeric');
 	
 	// textfield for bayes spam threshold
-	$FORM->addElement('text', 'blog_comment_bayes_spam_threshold', gettext('Comment bayes spam threshold'), 
+	$FORM->addElement('text', 'blog_comment_bayes_spam_threshold', gettext('Bayes spam threshold'), 
 		array('id' => 'settings_blog_comment_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_comment_bayes_spam_threshold', 'trim');
 	$FORM->applyFilter('blog_comment_bayes_spam_threshold', 'strip_tags');
@@ -185,7 +185,7 @@ try {
 		gettext('Please enter a numeric comment bayes spam threshold'), 'numeric');
 	
 	// select for trackback display status
-	$FORM->addElement('select', 'blog_trackback_display_status', gettext('Trackback display status'),
+	$FORM->addElement('select', 'blog_trackback_display_status', gettext('Display status'),
 		$blog_trackback_statuses, array('id' => 'settings_blog_trackback_display_status'));
 	$FORM->applyFilter('blog_trackback_display_status', 'trim');
 	$FORM->applyFilter('blog_trackback_display_status', 'strip_tags');
@@ -193,7 +193,7 @@ try {
 		'in_array_keys', $blog_trackback_statuses);
 
 	// select for trackback default status
-	$FORM->addElement('select', 'blog_trackback_default_status', gettext('Trackback default status'),
+	$FORM->addElement('select', 'blog_trackback_default_status', gettext('Default status'),
 		$blog_trackback_statuses, array('id' => 'settings_blog_trackback_default_status'));
 	$FORM->applyFilter('blog_trackback_default_status', 'trim');
 	$FORM->applyFilter('blog_trackback_default_status', 'strip_tags');
@@ -201,7 +201,7 @@ try {
 		'in_array_keys', $blog_trackback_statuses);
 
 	// select for trackback spam status
-	$FORM->addElement('select', 'blog_trackback_spam_status', gettext('Trackback spam status'),
+	$FORM->addElement('select', 'blog_trackback_spam_status', gettext('Spam status'),
 		$blog_trackback_statuses, array('id' => 'settings_blog_trackback_spam_status'));
 	$FORM->applyFilter('blog_trackback_spam_status', 'trim');
 	$FORM->applyFilter('blog_trackback_spam_status', 'strip_tags');
@@ -209,7 +209,7 @@ try {
 		'in_array_keys', $blog_trackback_statuses);
 
 	// select for trackback ham status
-	$FORM->addElement('select', 'blog_trackback_ham_status', gettext('Trackback ham status'),
+	$FORM->addElement('select', 'blog_trackback_ham_status', gettext('Ham status'),
 		$blog_trackback_statuses, array('id' => 'settings_blog_trackback_ham_status'));
 	$FORM->applyFilter('blog_trackback_ham_status', 'trim');
 	$FORM->applyFilter('blog_trackback_ham_status', 'strip_tags');
@@ -217,7 +217,7 @@ try {
 		'in_array_keys', $blog_trackback_statuses);
 			
 	// textfield for timeframe threshold
-	$FORM->addElement('text', 'blog_trackback_timeframe_threshold', gettext('Comment timeframe threshold'), 
+	$FORM->addElement('text', 'blog_trackback_timeframe_threshold', gettext('Timeframe threshold'), 
 		array('id' => 'settings_blog_trackback_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_trackback_timeframe_threshold', 'trim');
 	$FORM->applyFilter('blog_trackback_timeframe_threshold', 'strip_tags');
@@ -235,7 +235,7 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);
 
 	// textfield for bayes autolearn threshold
-	$FORM->addElement('text', 'blog_trackback_bayes_autolearn_threshold', gettext('Comment bayes autolearn threshold'), 
+	$FORM->addElement('text', 'blog_trackback_bayes_autolearn_threshold', gettext('Bayes autolearn threshold'), 
 		array('id' => 'settings_blog_trackback_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_trackback_bayes_autolearn_threshold', 'trim');
 	$FORM->applyFilter('blog_trackback_bayes_autolearn_threshold', 'strip_tags');
@@ -245,7 +245,7 @@ try {
 		gettext('Please enter a numeric trackback bayes autolearn threshold'), 'numeric');
 
 	// textfield for bayes spam threshold
-	$FORM->addElement('text', 'blog_trackback_bayes_spam_threshold', gettext('Comment bayes spam threshold'), 
+	$FORM->addElement('text', 'blog_trackback_bayes_spam_threshold', gettext('Bayes spam threshold'), 
 		array('id' => 'settings_blog_trackback_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('blog_trackback_bayes_spam_threshold', 'trim');
 	$FORM->applyFilter('blog_trackback_bayes_spam_threshold', 'strip_tags');
