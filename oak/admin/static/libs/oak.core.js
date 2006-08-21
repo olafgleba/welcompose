@@ -865,7 +865,7 @@ Forms.prototype = new Base();
 Forms.prototype.setOnEvent = Forms_setOnEvent;
 
 /**
- * DOM triggers to attach onEvent behaviours
+ * DOM triggers by onEvent behaviours
  * @param {string} elem Actual element
  * @param {string} bgcolor Defined background color
  * @param {string} bcolor Defined border color

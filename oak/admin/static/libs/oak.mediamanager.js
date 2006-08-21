@@ -85,21 +85,21 @@ function _checkOccurrences (elems)
 		var res = elems.match(/block/gi);	
 	
 		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mm_content', {height: '386px'});
-			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '379px'});
+			Element.setStyle(prefix + 'mm_content', {height: '385px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '376px'});
 		} else {
 			switch (res.length) {
 				case 1 :
-						Element.setStyle(prefix + 'mm_content', {height: '365px'});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '358px'});
+						Element.setStyle(prefix + 'mm_content', {height: '364px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '355px'});
 					break;
 				case 2 :
-						Element.setStyle(prefix + 'mm_content', {height: '344px'});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '337px'});
+						Element.setStyle(prefix + 'mm_content', {height: '343px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '334px'});
 					break;
 				case 3 :
-						Element.setStyle(prefix + 'mm_content', {height: '323px'});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '316px'});
+						Element.setStyle(prefix + 'mm_content', {height: '322px'});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: '313px'});
 					break;
 			}
 		}
@@ -132,6 +132,8 @@ function Mediamanager_hideElement (elem)
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		
+		//alert (Element.getStyle('mm_include_types_wrap', 'height'));
 
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);		
 		_checkOccurrences (collectElems);
@@ -156,6 +158,7 @@ function Mediamanager_showElement (elem)
 		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
 		
 		Element.show(this.ttarget);
+		
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.apply();
@@ -164,6 +167,8 @@ function Mediamanager_showElement (elem)
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		
+	//	alert (Element.getStyle('mm_include_types_wrap', 'height'));
 		
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 		_checkOccurrences (collectElems);
@@ -175,9 +180,23 @@ function Mediamanager_showElement (elem)
 }
 
 
-function Mediamanager_switchLayer (elem)
+function Mediamanager_switchLayer (toShow, toHide)
 {
 	try {
+		// properties
+		this.toShow = $(toShow);
+		this.toHide = $(toHide);
+	
+		Element.hide(this.toHide);
+
+		if (Mediamanager.unsupportsEffects()) {
+			Element.show(this.toShow);
+		} else {
+			Effect.Appear(this.toShow,{duration: 0.4});
+		}
+		
+
+/*
 		// properties
 		this.elem = elem;
 		this.attr = 'id';
@@ -201,6 +220,8 @@ function Mediamanager_switchLayer (elem)
 				Effect.Appear(this.helpLyMediamanagerMyLocal,{duration: 0.6});
 			}
 		}
+		
+*/
 	} catch (e) {
 		_applyError(e);
 	}

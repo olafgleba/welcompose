@@ -478,7 +478,6 @@ background: #00cc33
 form.botbg {
 width: 710px;
 padding: 20px 0;
-border: 1px solid red;
 background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
@@ -713,15 +712,16 @@ padding-left: 140px;
 .showMediamanagerElement a,
 .hideMediamanagerElement a {
 background-color: transparent;
+text-decoration: none;
 }
-.iHelp img,
-.iHelpRemove img,
-.iHelpLevelTwo img,
-.iHelpRemoveLevelTwo img,
-.iHelpMediamanager img,
-.iHelpRemoveMediamanager img,
-.showMediamanagerElement img,
-.hideMediamanagerElement img {
+.iHelp a img,
+.iHelpRemove a img,
+.iHelpLevelTwo a img,
+.iHelpRemoveLevelTwo a img,
+.iHelpMediamanager a img,
+.iHelpRemoveMediamanager a img,
+.showMediamanagerElement a img,
+.hideMediamanagerElement a img{
 vertical-align: middle;
 }
 
@@ -827,7 +827,7 @@ display: block;
 background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
-height: 1.4em;
+height: 20px;
 list-style: none;
 }
 .mmnav li {
@@ -876,7 +876,7 @@ width: auto;
 }
 #myLocal_mm_content, #myFlickr_mm_content {
 display: block;
-height: 365px;
+height: 364px;
 font-size: 80%;
 background: #f9f9f9;
 padding: 3px 5px;
@@ -884,7 +884,7 @@ margin-bottom: 3px;
 }
 #myLocal_mm_contentToPopulate, #myFlickr_mm_contentToPopulate {
 display: block;
-height: 358px;
+height: 355px;
 background: #fff;
 border: 1px solid #ebebeb;
 padding: 3px 5px;
@@ -907,19 +907,28 @@ float: none;
 width: 217px;
 margin: 2px 0 2px 0;
 }
+#column span span.bez {
+display: block;
+width: 217px;
+margin: 2px 0 2px 0;
+font-size: 80%;
+}
+
 #column span.cbxspread {
-margin: 0 1px 0 2px;
+margin: 5px 1px 0 2px;
 }
 
 
 #mm_include_types_wrap {
 display: none;
-}
-#mm_timeframe_wrap {
-display: none;
+/* set height because label here is float */
+height: 21px;
 }
 #mm_tags_wrap {
 display: block;
+}
+#mm_timeframe_wrap {
+display: none;
 }
 #myFlickr_include_types_wrap {
 display: none;

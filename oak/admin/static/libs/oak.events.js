@@ -158,17 +158,17 @@ var definitions = {
 	},
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
-			Mediamanager.switchLayer(this);
+			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');
 			return false;
 		}
 	},
 	'a.mm_myFlickr' : function(el){
 		el.onclick = function(){
-			Mediamanager.switchLayer(this);
+			Mediamanager.switchLayer('lyMediamanagerMyFlickr', 'lyMediamanagerMyLocal');
 			return false;
 		}
 	},
-	'#main input' : function(el){
+	'.botbg input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
 			return false;
@@ -181,7 +181,7 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'#content textarea' : function(el){
+	'.botbg textarea' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
 			return false;
