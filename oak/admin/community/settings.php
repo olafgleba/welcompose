@@ -256,7 +256,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update community settings'),
-		array('class' => 'submitbut200bez260'));
+		array('class' => 'submit200bez260'));
 	
 	// set defaults
 	$FORM->setDefaults(array(

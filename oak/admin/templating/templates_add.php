@@ -143,7 +143,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add template'),
-		array('class' => 'submitbut200'));
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

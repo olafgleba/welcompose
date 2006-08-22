@@ -166,7 +166,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update box'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submit140'));
 	
 	// set defaults
 	$FORM->setDefaults(array(

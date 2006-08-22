@@ -212,12 +212,17 @@ var definitions = {
 			//return false;
 		}
 	},
-	'.submitbut200' : function(el){
+	'.submit90' : function(el){
+		el.onclick = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator90.gif) no-repeat';
+		}
+	},
+	'.submit200' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
-	'.submitbut140' : function(el){
+	'.submit140' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}

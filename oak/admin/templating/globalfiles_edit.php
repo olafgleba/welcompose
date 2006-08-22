@@ -108,7 +108,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update global file'),
-		array('class' => 'submitbut200'));
+		array('class' => 'submit200'));
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),

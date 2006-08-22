@@ -161,7 +161,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Duplicate template'),
-		array('class' => 'submitbut200'));
+		array('class' => 'submit200'));
 		
 	// set defaults
 	$FORM->setDefaults(array(

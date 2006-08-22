@@ -190,7 +190,7 @@ position: absolute;
 top: 19px;
 left: 767px;
 width: 200px;
-background: transparent url(../img/bg_logo.gif) 0 0 repeat-y; 
+background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
 padding-top: 3px;
 }
 #logo p {
@@ -219,13 +219,13 @@ top: 99px;
 left: 14px;
 width: 956px;
 padding-bottom: 3px;
-background: transparent url(../img/bg_topnavcon_bot.gif) left bottom no-repeat;
+background: transparent url(../img/bg_topnav_bot.gif) left bottom no-repeat;
 }
 #topnav {
 list-style: none;
 width: 956px;
 padding-top: 3px;
-background: #efefef url(../img/bg_topnav.gif) 0 0 no-repeat;
+background: #efefef url(../img/bg_topnav_top.gif) 0 0 no-repeat;
 height: 1.5em;
 }
 #topnav li {
@@ -327,28 +327,28 @@ background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
 width: 956px;
 padding-top: 2em;
 padding-bottom: 3px;
-background: transparent url(../img/bg_topsubnavcon_active_bot.gif) left bottom no-repeat;
+background: transparent url(../img/bg_topsubnav_active_bot.gif) left bottom no-repeat;
 }
 #topsubnavconstatic, 
 #subnavconstatic {
 width: 956px;
 padding-top: 2em;
 padding-bottom: 3px;
-background: transparent url(../img/bg_topsubnavcon_bot.gif) left bottom no-repeat;
+background: transparent url(../img/bg_topsubnav_bot.gif) left bottom no-repeat;
 }
 #topsubnav, 
 #subnav {
 list-style: none;
 width: 956px;
 padding-top: 3px;
-background: #f9f9f9 url(../img/bg_topsubnav.gif) 0 0 no-repeat;
+background: #f9f9f9 url(../img/bg_topsubnav_top.gif) 0 0 no-repeat;
 height: 1.25em;
 }
 #topsubnavdynamic {
 list-style: none;
 width: 956px;
 padding-top: 3px;
-background: #fffde6 url(../img/bg_topsubnav_active.gif) 0 0 no-repeat;;
+background: #fffde6 url(../img/bg_topsubnav_active_top.gif) 0 0 no-repeat;;
 height: 1.25em;
 }
 #topsubnav li, #topsubnavdynamic li {
@@ -389,13 +389,13 @@ text-decoration: none;
 width: 956px;
 padding-top: 0.2em;
 padding-bottom: 3px;
-background: transparent url(../img/bg_topsubsubnavcon_bot.gif) left bottom no-repeat;
+background: transparent url(../img/bg_topsubsubnav_bot.gif) left bottom no-repeat;
 }
 #topsubsubnav {
 list-style: none;
 width: 956px;
 padding-top: 3px;
-background: #f9f9f9 url(../img/bg_topsubsubnav.gif) 0 0 no-repeat;
+background: #f9f9f9 url(../img/bg_topsubsubnav_top.gif) 0 0 no-repeat;
 height: 1.25em;
 }
 #topsubsubnav li {
@@ -598,13 +598,13 @@ input.chbx {
 border-color: #666;
 }
 /* Reset for inner table definition */
-td input.submitbut140, td input.submitbut200, td select {
+td input.submit140, td input.submit200, td select {
 font-size: 100%;
 }
 /* eof Reset for inner table definition */
-input.submitbut140 {
+input.submit140 {
 text-align: left;
-background: #666 url(../img/submitbut140.gif) no-repeat;
+background: #666 url(../img/submit140.gif) no-repeat;
 color: #fff;
 width: 140px;
 height: 20px;
@@ -615,9 +615,9 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
 cursor: pointer;
 }
-input.submitbut200 {
+input.submit200 {
 text-align: left;
-background: #666 url(../img/submitbut200.gif) no-repeat;
+background: #666 url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -628,9 +628,9 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
 cursor: pointer;
 }
-input.submitbut200bez260 {
+input.submit200bez260 {
 text-align: left;
-background: #666 url(../img/submitbut200.gif) no-repeat;
+background: #666 url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -656,9 +656,9 @@ padding: 0;
 font-size: 80%;
 border: 1px solid #666666;
 }
-input.submitbut90 {
+input.submit90 {
 text-align: left;
-background: #666 url(../img/submitbut.gif) 100% 0 no-repeat;
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
 color: #fff;
 width: 90px;
 height: 20px;

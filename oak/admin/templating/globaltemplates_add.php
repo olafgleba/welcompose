@@ -140,7 +140,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add global template'),
-		array('class' => 'submitbut200'));
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

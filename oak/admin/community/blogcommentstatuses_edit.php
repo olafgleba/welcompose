@@ -112,7 +112,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update blog comment status'),
-		array('class' => 'submitbut200'));
+		array('class' => 'submit200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(

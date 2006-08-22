@@ -143,7 +143,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update global box'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submit140'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
