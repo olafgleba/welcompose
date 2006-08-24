@@ -618,6 +618,7 @@ public function logIntoPublicArea ($input_email, $input_secret)
 	
 	// now it's time to save everything to the session/cookie
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'] = $user;
+	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'] = false;
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'] = $group;
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] = array();
 	
@@ -738,6 +739,7 @@ public function logIntoPublicAreaAsAnonymous ()
 	
 	// now it's time to save everything to the session/cookie
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'] = $user;
+	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'] = true;
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'] = $group;
 	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] = array();
 	

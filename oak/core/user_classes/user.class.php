@@ -780,9 +780,13 @@ public function initUserPublicArea ()
 	// import user id from session
 	$user_id = Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'], OAK_REGEX_NUMERIC);
 	
+	// import anon user bit form session
+	$anon = Base_Cnc::ifsetor($_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'], null);
+	$anon = (bool)$anon;
+	
 	// if there's no user id or the user does not exist, register the
 	// user as anonymous user
-	if (is_null($user_id) || !$this->userExists($user_id) || !$this->userBelongsToCurrentProject($user_id)) {
+	if (is_null($user_id) || $anon || !$this->userExists($user_id) || !$this->userBelongsToCurrentProject($user_id)) {
 		
 		// perform login as anonymous user
 		$LOGIN = load('User:Login');
