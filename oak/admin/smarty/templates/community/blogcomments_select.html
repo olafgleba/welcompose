@@ -103,6 +103,7 @@ var selection = '{$session.selection}';
 {/if}
 <!-- filter --></div>
 
+{if count($blog_comments) > 0}
 {if count($page_index) > 1}
 <h3 class="pagenav">{i18n Pages:} </h3> 
 <ul class="pagenav"> 
@@ -173,7 +174,9 @@ var selection = '{$session.selection}';
 {/foreach}
 </ul>
 {/if}
-
+{else}
+<p>{i18n No blog comment has been created yet.}</p>
+{/if}
 <!-- content --></div>
 <!-- main --></div>
 
