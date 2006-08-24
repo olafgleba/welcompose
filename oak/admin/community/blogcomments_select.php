@@ -134,6 +134,10 @@ try {
 	$BASE->utility->smarty->assign('blog_comments',
 		$BLOGCOMMENT->selectBlogComments($select_params));
 	
+	// get total comment count
+	$total_comment_count = $BLOGCOMMENT->countBlogComments();
+	$BASE->utility->smarty->assign('total_blog_comment_count', $total_comment_count);
+	
 	// count available blog comments
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
@@ -149,6 +153,7 @@ try {
 	// import and assign request params
 	$request = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
+		'status' => Base_Cnc::filterRequest($_REQUEST['status'], OAK_REGEX_TIMEFRAME),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], OAK_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
 	);

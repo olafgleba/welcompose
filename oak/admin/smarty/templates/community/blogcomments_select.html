@@ -69,16 +69,16 @@ var selection = '{$session.selection}';
 <br class="clearb" />
 
 <div class="filter clearfix">
-{if !empty($blog_comments)}
+{if $total_blog_comment_count > 0}
 <h2>{i18n Filter:}</h2>
-<form action="users_select.php" method="get">
+<form action="blogcomments_select.php" method="get">
 <fieldset>
-<label for="group">{i18n Blog}</label> 
-<select id="group" name="group">
+<label for="page">{i18n Blog}</label> 
+<select id="page" name="page">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$pages item=_page}
 {if $_page.page_type_name == "OAK_BLOG"}
-<option value="{$_page.id|escape:"htmlall"}">{$_page.name|escape:"htmlall"}</option>
+<option value="{$_page.id|escape:"htmlall"}"{if $request.page == $_page.id} selected="selected"{/if}>{$_page.name|escape:"htmlall"}</option>
 {/if}
 {/foreach}
 </select>
@@ -86,14 +86,14 @@ var selection = '{$session.selection}';
 <select id="status" name="status">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$blog_comment_statuses item=_status}
-<option value="{$_status.id|escape:"htmlall"}">{$_status.name|escape:"htmlall"}</option>
+<option value="{$_status.id|escape:"htmlall"}"{if $request.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 <label for="timeframe">{i18n Timeframe}</label> 
 <select id="timeframe" name="timeframe">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
-<option value="{$_timeframe|escape:"htmlall"}">{$_timeframe_name|escape:"htmlall"}</option>
+<option value="{$_timeframe|escape:"htmlall"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 <input type="submit" value="{i18n Filter}" />

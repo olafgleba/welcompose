@@ -333,6 +333,9 @@ public function selectBlogComments ($params = array())
 		'DATE_ADDED' => '`content_blog_postings`.`date_added`'
 	);
 	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
 	// prepare query
 	$sql = "
 		SELECT
@@ -423,11 +426,19 @@ public function selectBlogComments ($params = array())
 		$sql .= " AND `content_blog_postings`.`page` = :page ";
 		$bind_params['page'] = $page;
 	}
+	if (!empty($status) && is_numeric($status)) {
+		$sql .= " AND `community_blog_comments`.`status` = :status ";
+		$bind_params['status'] = $status;
+	}
 	if (!empty($posting) && is_numeric($posting)) {
 		$sql .= " AND `content_blog_postings`.`id` = :posting ";
 		$bind_params['posting'] = $posting;
 	}
-		
+	if (!empty($timeframe)) {
+		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`community_blog_comments`.`date_added`',
+			$timeframe);
+	}
+	
 	// add sorting
 	if (!empty($order_macro)) {
 		$HELPER = load('utility:helper');
