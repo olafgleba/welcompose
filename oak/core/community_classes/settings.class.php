@@ -108,6 +108,7 @@ public function getSettings ()
 			`community_settings`.`blog_comment_bayes_autolearn`,
 			`community_settings`.`blog_comment_bayes_autolearn_threshold`,
 			`community_settings`.`blog_comment_bayes_spam_threshold`,
+			`community_settings`.`blog_comment_text_converter`,
 			`community_settings`.`blog_trackback_display_status`,
 			`community_settings`.`blog_trackback_default_status`,
 			`community_settings`.`blog_trackback_spam_status`,

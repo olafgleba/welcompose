@@ -59,11 +59,9 @@ define("OAK_DB_CONTENT_SIMPLE_FORMS", "content_simple_forms");
 define("OAK_DB_CONTENT_SIMPLE_PAGES", "content_simple_pages");
 
 // media table aliases
-define("OAK_DB_MEDIA_DOCUMENTS", "media_documents");
-define("OAK_DB_MEDIA_DOCUMENT_CATEGORIES", "media_document_categories");
-define("OAK_DB_MEDIA_IMAGES", "media_images");
-define("OAK_DB_MEDIA_IMAGE_CATEGORIES", "media_image_categories");
-define("OAK_DB_MEDIA_IMAGE_THUMBNAILS", "media_image_thumbnails");
+define("OAK_DB_MEDIA_OBJECTS", "media_objects");
+define("OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS", "media_objects2media_tags");
+define("OAK_DB_MEDIA_TAGS", "media_tags");
 
 // templating table aliases
 define("OAK_DB_TEMPLATING_GLOBAL_FILES", "templating_global_files");

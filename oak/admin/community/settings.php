@@ -79,6 +79,10 @@ try {
 	// load Community_BlogCommentStatus
 	$BLOGCOMMENTSTATUS = load('Community:BlogCommentStatus');
 	
+	// load Application_TextConverter
+	/* @var $TEXTCONVERTER Application_Textconverter */
+	$TEXTCONVERTER = load('Application:TextConverter');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -102,6 +106,14 @@ try {
 	$blog_trackback_statuses = array(
 		'' => gettext('None')	
 	);
+	
+	// prepare text converters array
+	$text_converters = array(
+		'' => gettext('None')
+	);
+	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
+		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
+	}
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('settings', 'post');
@@ -183,6 +195,14 @@ try {
 		gettext('Please enter a comment bayes spam threshold'), 'required');
 	$FORM->addRule('blog_comment_bayes_spam_threshold',
 		gettext('Please enter a numeric comment bayes spam threshold'), 'numeric');
+	
+	// select for comment text converter
+	$FORM->addElement('select', 'blog_comment_text_converter', gettext('Text converter to apply'),
+		$text_converters, array('id' => 'settings_blog_comment_text_converter'));
+	$FORM->applyFilter('blog_comment_text_converter', 'trim');
+	$FORM->applyFilter('blog_comment_text_converter', 'strip_tags');
+	$FORM->addRule('blog_comment_text_converter', gettext('Chosen blog comment text converter is out of range'),
+		'in_array_keys', $text_converters);
 	
 	// select for trackback display status
 	$FORM->addElement('select', 'blog_trackback_display_status', gettext('Display status'),
@@ -269,6 +289,7 @@ try {
 		'blog_comment_bayes_autolearn' => Base_Cnc::ifsetor($settings['blog_comment_bayes_autolearn'], null),
 		'blog_comment_bayes_autolearn_threshold' => Base_Cnc::ifsetor($settings['blog_comment_bayes_autolearn_threshold'], null),
 		'blog_comment_bayes_spam_threshold' => Base_Cnc::ifsetor($settings['blog_comment_bayes_spam_threshold'], null),
+		'blog_comment_text_converter' => Base_Cnc::ifsetor($settings['blog_comment_text_converter'], null),
 		'blog_trackback_display_status' => Base_Cnc::ifsetor($settings['blog_trackback_display_status'], null),
 		'blog_trackback_default_status' => Base_Cnc::ifsetor($settings['blog_trackback_default_status'], null),
 		'blog_trackback_spam_status' => Base_Cnc::ifsetor($settings['blog_trackback_spam_status'], null),
@@ -346,6 +367,7 @@ try {
 		$sqlData['blog_comment_bayes_autolearn'] = $FORM->exportValue('blog_comment_bayes_autolearn');
 		$sqlData['blog_comment_bayes_autolearn_threshold'] = $FORM->exportValue('blog_comment_bayes_autolearn_threshold');
 		$sqlData['blog_comment_bayes_spam_threshold'] = $FORM->exportValue('blog_comment_bayes_spam_threshold');
+		$sqlData['blog_comment_text_converter'] = $FORM->exportValue('blog_comment_text_converter');
 		$sqlData['blog_trackback_display_status'] = $FORM->exportValue('blog_trackback_display_status');
 		$sqlData['blog_trackback_default_status'] = $FORM->exportValue('blog_trackback_default_status');
 		$sqlData['blog_trackback_spam_status'] = $FORM->exportValue('blog_trackback_spam_status');

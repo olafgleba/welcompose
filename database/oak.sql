@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 21.08.2006 22:43:01
--- Diagram Version: 120
+-- Created on: 24.08.2006 15:49:37
+-- Diagram Version: 124
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -56,6 +56,7 @@ DROP TABLE IF EXISTS `media_tags`;
 
 CREATE TABLE `media_tags` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `first_char` char(1),
   `word` varchar(255),
   `occurrences` int(11) UNSIGNED NOT NULL,
   PRIMARY KEY(`id`)
@@ -481,6 +482,7 @@ CREATE TABLE `community_settings` (
   `blog_comment_bayes_autolearn` enum('0','1') DEFAULT '1',
   `blog_comment_bayes_autolearn_threshold` decimal(6,5) UNSIGNED,
   `blog_comment_bayes_spam_threshold` decimal(6,5) UNSIGNED,
+  `blog_comment_text_converter` int(11) UNSIGNED,
   `blog_trackback_display_status` int(11) UNSIGNED,
   `blog_trackback_default_status` int(11) UNSIGNED,
   `blog_trackback_spam_status` int(11) UNSIGNED,
@@ -499,6 +501,7 @@ CREATE TABLE `community_settings` (
   INDEX `blog_trackback_default_status`(`blog_trackback_default_status`),
   INDEX `blog_trackback_possible_spam_status`(`blog_trackback_spam_status`),
   INDEX `blog_trackback_possible_ham_status`(`blog_trackback_ham_status`),
+  INDEX `blog_comment_text_converter`(`blog_comment_text_converter`),
   CONSTRAINT `community_settings.project2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
@@ -533,6 +536,10 @@ CREATE TABLE `community_settings` (
       ON UPDATE CASCADE,
   CONSTRAINT `community_settings.trackback_possible_spam_status2cbtc.id` FOREIGN KEY (`blog_trackback_spam_status`)
     REFERENCES `community_blog_trackback_statuses`(`id`)
+      ON DELETE SET NULL
+      ON UPDATE CASCADE,
+  CONSTRAINT `community_settings.blog_comment_text_converter2atc.id` FOREIGN KEY (`blog_comment_text_converter`)
+    REFERENCES `application_text_converters`(`id`)
       ON DELETE SET NULL
       ON UPDATE CASCADE
 )
