@@ -93,7 +93,7 @@ public function addTextConverter ($sqlData)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -130,7 +130,7 @@ public function updateTextConverter ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -173,7 +173,7 @@ public function deleteTextConverter ($id)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -211,7 +211,7 @@ public function selectTextConverter ($id)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -268,7 +268,7 @@ public function selectTextConverters ($params = array())
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -341,7 +341,7 @@ public function countTextConverters ($params = array())
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -394,7 +394,7 @@ public function testForUniqueName ($name, $id = null)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -456,7 +456,7 @@ public function testForUniqueInternalName ($name, $id = null)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -516,7 +516,7 @@ public function applyTextConverter ($id, $text)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -588,7 +588,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -634,7 +634,7 @@ public function textConverterBelongsToCurrentUser ($text_converter)
 {
 	// access check
 	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
 	// input check
