@@ -30,6 +30,8 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <body>
 <div id="container">
+	
+<div id="lyLowerOpacity"> </div>
 
 <div id="logo">
 <p>{i18n Oak}</p>
@@ -69,7 +71,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- topsubsubnavcon static eof -->
 
 <div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Edit Simple Page}</p></div>
-
+	
 <div id="content">
 
 <h1>{i18n Edit Simple Page}</h1>
@@ -99,7 +101,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <form action="" method="post" id="mediamanager">
 <fieldset>
-<h2>MEDIA MANAGER<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
+<h2>{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
 
 <!-- help -->
 <div id="lyMediamanager"></div>
@@ -110,9 +112,9 @@ var checkbox_status = new Array('simple_page_meta_use');
 
 <!-- mediamanager navigation (active: mm_myLocal) -->
 <ul class="mmnav">
-<li class="on"><span class="mm_myLocal">myLocal</span></li>
-<li><a class="mm_myFlickr" href="#">myFlickr</a></li>
-<li><a class="mm_upload" href="#">Upload</a></li>
+<li class="on"><span class="mm_myLocal">{i18n myLocal}</span></li>
+<li><a class="mm_myFlickr" href="#">{i18n myFlickr}</a></li>
+<li><a class="mm_upload" href="#">{i18n Upload}</a></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myLocal) eof -->
 
@@ -180,8 +182,8 @@ Page <a href="#">1 of 10</a>
 	
 <!-- mediamanager navigation (active: mm_myFlickr) -->
 <ul class="mmnav">
-<li><a class="mm_myLocal" href="#">myLocal</a></li>
-<li class="on"><span class="mm_myFlickr">myFlickr</span></li>
+<li><a class="mm_myLocal" href="#">{i18n myLocal}</a></li>
+<li class="on"><span class="mm_myFlickr">{i18n myFlickr}</span></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myFlickr) eof -->
 
@@ -295,6 +297,10 @@ Page <a href="#">1 of 10</a>
 
 {include file="_inc_footer.html"}
 
+<!-- media Window Container -->
+<div id="mm_modalContainer"> </div>
+<!-- media Window Container eof -->
 <!-- container --></div>
+
 </body>
 </html>

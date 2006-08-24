@@ -156,6 +156,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_upload' : function(el){
+		el.onclick = function(){
+			Mediamanager.uploadMedia();
+			return false;
+		}
+	},
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');
@@ -225,6 +231,13 @@ var definitions = {
 	'.submit140' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
+		}
+	},
+	'.hide200' : function(el){
+		el.onclick = function(){
+			Element.hide($('mm_modalContainer'));
+			Element.hide($('lyLowerOpacity'));
+			return false;
 		}
 	},
 	'#simple_page_meta_use' : function(el){

@@ -641,6 +641,19 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 260px;
 cursor: pointer;
 }
+input.hide200 {
+text-align: left;
+background: #666 url(../img/submit200.gif) no-repeat;
+color: #fff;
+width: 200px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 20px  0 0 140px;
+cursor: pointer;
+}
 
 /* %M =search */
 #projects {
@@ -800,6 +813,41 @@ padding: 96px 0 0 0;
 background: transparent;
 overflow: hidden;
 }
+#column h2 {
+display: block;
+background: #efefef;
+padding: 3px 5px;
+margin: 0 0 3px 0;
+}
+#column label {
+display: block;
+height: 1.5em;
+line-height: 1.5em;
+margin: 5px 0 0 0;
+}
+#column label span.bez {
+display: block; 
+float: none;
+width: 217px;
+margin: 2px 0 2px 0;
+}
+#column span span.bez {
+display: block;
+width: 217px;
+margin: 2px 0 2px 0;
+font-size: 80%;
+}
+#column span.cbxspread {
+margin: 5px 1px 0 2px;
+}
+#column .mmwrap p {
+margin: 2px 5px 2px 2px;
+}
+#column .mmwrap label {
+display: inline;
+font-size: 80%;
+width: auto;
+}
 form#mediamanager {
 width: 236px;
 overflow: hidden;
@@ -815,12 +863,6 @@ padding: 0;
 }
 form#mediamanager fieldset {
 padding: 4px 5px;
-}
-#column h2 {
-display: block;
-background: #efefef;
-padding: 3px 5px;
-margin: 0 0 3px 0;
 }
 .mmnav {
 display: block;
@@ -866,14 +908,6 @@ background: #f9f9f9;
 padding: 3px 5px;
 margin-bottom: 3px;
 }
-#column .mmwrap p {
-margin: 2px 5px 2px 2px;
-}
-#column .mmwrap label {
-display: inline;
-font-size: 80%;
-width: auto;
-}
 #myLocal_mm_content, #myFlickr_mm_content {
 display: block;
 height: 364px;
@@ -895,29 +929,6 @@ background: #f9f9f9;
 font-size: 80%;
 padding: 2px 5px 5px 5px;
 }
-#column label {
-display: block;
-height: 1.5em;
-line-height: 1.5em;
-margin: 5px 0 0 0;
-}
-#column label span.bez {
-display: block; 
-float: none;
-width: 217px;
-margin: 2px 0 2px 0;
-}
-#column span span.bez {
-display: block;
-width: 217px;
-margin: 2px 0 2px 0;
-font-size: 80%;
-}
-
-#column span.cbxspread {
-margin: 5px 1px 0 2px;
-}
-
 
 #mm_include_types_wrap {
 display: none;
@@ -945,6 +956,47 @@ display: block;
 }
 #lyMediamanagerMyFlickr {
 display: none;
+}
+
+
+/* %M =upload */
+#mm_modalContainer {
+display: none;
+position: absolute;
+width: 740px;
+top: 400px;
+left: 120px;
+background: #fff;
+z-index: 2;
+}
+
+#mm_modalContainer h2 {
+background: #efefef;
+padding: 3px 8px;
+margin: 0 0 3px 0;
+border: 1px solid #ccc;
+}
+#mm_modalContainer h2 span {
+color: #00AE2C;
+}
+#mm_modalBody {
+padding: 3px 8px;
+min-height: 200px;
+border: 1px solid #ebebeb;
+background: #f9f9f9;
+z-index: 2;
+}
+
+/* %M =opacity */
+#lyLowerOpacity{
+display: none;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 1;
+}
+#lyLowerOpacity img{
+opacity: 0.9;
 }
 
 

@@ -41,6 +41,11 @@ function Mediamanager ()
 {
 	try {
 		// properties
+		
+		/**
+		 * Get new XMLHttpRequest Object by private function
+		 */
+		this.req = _buildXMLHTTPRequest();
 				
 	} catch (e) {
 		_applyError(e);
@@ -59,7 +64,12 @@ Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
-Mediamanager.prototype.checkElems = Mediamanager_checkElems;
+Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
+
+Mediamanager.prototype.uploadMedia = Mediamanager_uploadMedia;
+Mediamanager.prototype.processUploadMedia = Mediamanager_processUploadMedia;
+
+Mediamanager.prototype.lowerOpacity = Mediamanager_lowerOpacity;
 
 
 /**
@@ -111,6 +121,8 @@ function _checkOccurrences (elems)
 
 /**
  * Implements method of prototype class Mediamanager
+ * Hide Formfield Element
+ *
  * @param {string} elem actual element
  * @throws applyError on exception
  */
@@ -128,12 +140,10 @@ function Mediamanager_hideElement (elem)
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
 		
-		// needed to set appropriate height of content to populate div
+		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-		
-		//alert (Element.getStyle('mm_include_types_wrap', 'height'));
 
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);		
 		_checkOccurrences (collectElems);
@@ -146,6 +156,8 @@ function Mediamanager_hideElement (elem)
 
 /**
  * Implements method of prototype class Mediamanager
+ * Display Formfield Element
+ * 
  * @param {string} elem actual element
  * @throws applyError on exception
  */
@@ -163,12 +175,10 @@ function Mediamanager_showElement (elem)
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.apply();
 	
-		// needed to set appropriate height of content to populate div
+		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-		
-	//	alert (Element.getStyle('mm_include_types_wrap', 'height'));
 		
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 		_checkOccurrences (collectElems);
@@ -180,6 +190,14 @@ function Mediamanager_showElement (elem)
 }
 
 
+/**
+ * Implements method of prototype class Mediamanager
+ * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
+ *
+ * @param {string} toShow div to display
+ * @param {string} toHide div to hide
+ * @throws applyError on exception
+ */
 function Mediamanager_switchLayer (toShow, toHide)
 {
 	try {
@@ -194,34 +212,73 @@ function Mediamanager_switchLayer (toShow, toHide)
 		} else {
 			Effect.Appear(this.toShow,{duration: 0.4});
 		}
-		
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
-/*
-		// properties
-		this.elem = elem;
-		this.attr = 'id';
-		this.ttarget = this.elem.parentNode.parentNode.parentNode.getAttribute(this.attr);
-		this.sel = this.elem.getAttribute('class');
-		
-		Element.hide(this.ttarget);
-		
-		var res = this.ttarget.match(/myLocal$/gi);
-		
-		if (res) {
-			if (Mediamanager.unsupportsEffects()) {
-				Element.show(this.helpLyMediamanagerMyFlickr);
-			} else {
-				Effect.Appear(this.helpLyMediamanagerMyFlickr,{duration: 0.6});
-			}
-		} else {
-			if (Mediamanager.unsupportsEffects()) {
-				Element.show(this.helpLyMediamanagerMyLocal);
-			} else {
-				Effect.Appear(this.helpLyMediamanagerMyLocal,{duration: 0.6});
-			}
-		}
-		
-*/
+
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeInputs ()
+{
+	try {
+		var elems = Mediamanager.checkMyLocalElems();
+		var url = '../mediamanager.ajax.php';
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : showResponse
+			});	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function showResponse(req)
+{
+	try {
+		$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_checkMyLocalElems ()
+{
+	try {
+		var getElems = {
+			mm_include_types_doc : $F('mm_include_types_doc'),
+			mm_include_types_img : $F('mm_include_types_img'),
+			mm_include_types_cast : $F('mm_include_types_cast'),
+			mm_tags : $F('mm_tags'),
+			mm_timeframe : $F('mm_timeframe')
+		};
+	
+		var o = $H(getElems);
+		return o.toQueryString();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -230,40 +287,85 @@ function Mediamanager_switchLayer (toShow, toHide)
 
 
 
-function Mediamanager_invokeInputs ()
+function Mediamanager_uploadMedia ()
 {
-	var elems = Mediamanager.checkElems();
-	var url = '../mediamanager.ajax.php';
-	var pars = elems;
-	
-	var myAjax = new Ajax.Request(
-		url,
-		{
-			method : 'get',
-			parameters : pars,
-			onComplete : showResponse
-		});	
+	try {
+		// properties
+		this.url = '../mediamanager/mediamanager_upload.php';
+		this.ttarget = $('mm_modalContainer');
+		
+		Mediamanager.lowerOpacity();
+		
+		if (typeof this.req != 'undefined') {
+		
+			var _url		= this.url;
+			var _ttarget	= this.ttarget;
+		
+			_req.open('GET', _url, true);
+			_req.onreadystatechange = function () { Mediamanager.processUploadMedia(_url,_ttarget);};
+			_req.send('');
+		}
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
-function showResponse(req)
-{
-	$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
+
+
+function Mediamanager_processUploadMedia (url, ttarget)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {				
+				Element.update (ttarget, _req.responseText);
+				if (Mediamanager.unsupportsEffects('safari')) {
+					Element.show(ttarget);
+				} else {
+					Element.hide(this.ttarget);
+					Effect.Appear(this.ttarget,{duration: 0.7});
+				}
+				Behaviour.apply();
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
 
-function Mediamanager_checkElems ()
-{
-	var getElems = {
-		mm_include_types_doc : $F('mm_include_types_doc'),
-		mm_include_types_img : $F('mm_include_types_img'),
-		mm_include_types_cast : $F('mm_include_types_cast'),
-		mm_tags : $F('mm_tags'),
-		mm_timeframe : $F('mm_timeframe')
-	};
-	
-	var o = $H(getElems);
-	return o.toQueryString();
+function Mediamanager_lowerOpacity ()
+{       
+	try {
+ 		// properties
+        this.cLeft = '0px';
+        this.cTop = '0px';
+        this.cPosition = 'absolute';
+        this.cDisplay = 'block';
+        this.imagePath = '../static/img/bg_overlay.png';
+		this.lyContainer = $("container");   
+        this.buildHeight = this.lyContainer.offsetHeight;
+        this.buildWidth = this.lyContainer.offsetWidth;
+		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
+		this.ttarget_lower = $('lyLowerOpacity');
+
+        if (this.ttarget_lower) {
+
+		 	this.ttarget_lower.style.display = this.cDisplay;
+			this.ttarget_lower.style.position = this.cPosition;
+			this.ttarget_lower.style.top = this.cTop;
+			this.ttarget_lower.style.left = this.cLeft;
+			this.ttarget_lower.style.height = this.buildHeight + 'px';
+			this.ttarget_lower.style.width = this.buildWidth + 'px';
+			
+			Element.update(this.ttarget_lower, this.imageStr);
+        }
+	} catch (e) {
+		_applyError(e);
+	}
 }
+
 
 /**
  * Building new instance for @class Mediamanager
