@@ -182,60 +182,92 @@ public function selectBlogComment ($id)
 	// prepare query
 	$sql = "
 		SELECT
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
-			`content_blog_postings`.`id` AS `posting_id`,
-			`content_blog_postings`.`page` AS `posting_page`,
-			`content_blog_postings`.`user` AS `posting_user`,
-			`content_blog_postings`.`title` AS `posting_title`,
-			`content_blog_postings`.`title_url` AS `posting_title_url`,
-			`content_blog_postings`.`summary_raw` AS `posting_summary_raw`,
-			`content_blog_postings`.`summary` AS `posting_summary`,
-			`content_blog_postings`.`content_raw` AS `posting_content_raw`,
-			`content_blog_postings`.`content` AS `posting_content`,
-			`content_blog_postings`.`draft` AS `posting_draft`,
-			`content_blog_postings`.`ping` AS `posting_ping`,
-			`content_blog_postings`.`comments_enable` AS `posting_comments_enable`,
-			`content_blog_postings`.`date_modified` AS `posting_date_modified`,
-			`content_blog_postings`.`date_added` AS `posting_date_added`,
 			`community_blog_comments`.`id` AS `id`,
 			`community_blog_comments`.`posting` AS `posting`,
 			`community_blog_comments`.`user` AS `user`,
+			`community_blog_comments`.`status` AS `status`,
+			`community_blog_comments`.`name` AS `name`,
+			`community_blog_comments`.`email` AS `email`,
+			`community_blog_comments`.`homepage` AS `homepage`,
 			`community_blog_comments`.`content_raw` AS `content_raw`,
 			`community_blog_comments`.`content` AS `content`,
+			`community_blog_comments`.`original_raw` AS `original_raw`,
+			`community_blog_comments`.`original` AS `original`,
+			`community_blog_comments`.`spam_report` AS `spam_report`,
 			`community_blog_comments`.`edited` AS `edited`,
 			`community_blog_comments`.`date_modified` AS `date_modified`,
-			`community_blog_comments`.`date_added` AS `date_added`
+			`community_blog_comments`.`date_added` AS `date_added`,
+			`content_blog_postings`.`id` AS `blog_posting_id`,
+			`content_blog_postings`.`page` AS `blog_posting_page`,
+			`content_blog_postings`.`user` AS `blog_posting_user`,
+			`content_blog_postings`.`title` AS `blog_posting_title`,
+			`content_blog_postings`.`title_url` AS `blog_posting_title_url`,
+			`content_blog_postings`.`summary_raw` AS `blog_posting_summary_raw`,
+			`content_blog_postings`.`summary` AS `blog_posting_summary`,
+			`content_blog_postings`.`content_raw` AS `blog_posting_content_raw`,
+			`content_blog_postings`.`content` AS `blog_posting_content`,
+			`content_blog_postings`.`draft` AS `blog_posting_draft`,
+			`content_blog_postings`.`ping` AS `blog_posting_ping`,
+			`content_blog_postings`.`comments_enable` AS `blog_posting_comments_enable`,
+			`content_blog_postings`.`comment_count` AS `blog_posting_comment_count`,
+			`content_blog_postings`.`trackbacks_enable` AS `blog_posting_trackbacks_enable`,
+			`content_blog_postings`.`trackback_count` AS `blog_posting_trackback_count`,
+			`content_blog_postings`.`pingbacks_enable` AS `blog_posting_pingbacks_enable`,
+			`content_blog_postings`.`pingback_count` AS `blog_posting_pingback_count`,
+			`content_blog_postings`.`tag_count` AS `blog_posting_tag_count`,
+			`content_blog_postings`.`tag_array` AS `blog_posting_tag_array`,
+			`content_blog_postings`.`date_modified` AS `blog_posting_date_modified`,
+			`content_blog_postings`.`date_added` AS `blog_posting_date_added`,
+			`content_blog_postings`.`day_added` AS `blog_posting_day_added`,
+			`content_blog_postings`.`month_added` AS `blog_posting_month_added`,
+			`content_blog_postings`.`year_added` AS `blog_posting_year_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
+			`content_pages`.`id` AS `page_id`,
+			`content_pages`.`project` AS `page_project`,
+			`content_pages`.`type` AS `page_type`,
+			`content_pages`.`template_set` AS `page_template_set`,
+			`content_pages`.`name` AS `page_name`,
+			`content_pages`.`name_url` AS `page_name_url`,
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`community_blog_comments`.`user` = `application_users`.`id`
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE 
+			`community_blog_comments` = :id
+		  AND
+			`content_pages`.`project` = :project
+		LIMIT
 			1
 	";
 	
-	// prepare where clauses
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `community_blog_comments`.`id` = :id ";
-		$bind_params['id'] = (int)$id;
-	}
-	
-	// add limits
-	$sql .= ' LIMIT 1';
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
@@ -249,7 +281,7 @@ public function selectBlogComment ($id)
  * 
  * <ul>
  * <li>page, int, optional: Page id</li>
- * <li>user, int, optional: User id</li>
+ * <li>status, int, optional: Blog comment status id</li>
  * <li>posting, int, optional: Posting id</li>
  * <li>order_macro, string, optional: Sorting instruction</li>
  * <li>start, int, optional: row offset</li>
@@ -266,6 +298,7 @@ public function selectBlogComments ($params = array())
 	$page = null;
 	$user = null;
 	$posting = null;
+	$status = null;
 	$order_macro = null;
 	$start = null;
 	$limit = null;
@@ -279,12 +312,13 @@ public function selectBlogComments ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'timeframe':
 			case 'order_macro':
 					$$_key = (string)$_value;
 				break;
 			case 'page':
-			case 'user':
 			case 'posting':
+			case 'status':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -302,60 +336,92 @@ public function selectBlogComments ($params = array())
 	// prepare query
 	$sql = "
 		SELECT
-			`application_users`.`id` AS `user_id`,
-			`application_users`.`group` AS `user_group`,
-			`application_users`.`name` AS `user_name`,
-			`application_users`.`email` AS `user_email`,
-			`application_users`.`pwd` AS `user_pwd`,
-			`application_users`.`public_email` AS `user_public_email`,
-			`application_users`.`public_profile` AS `user_public_profile`,
-			`application_users`.`author` AS `user_author`,
-			`application_users`.`date_modified` AS `user_date_modified`,
-			`application_users`.`date_added` AS `user_date_added`,
-			`content_blog_postings`.`id` AS `posting_id`,
-			`content_blog_postings`.`page` AS `posting_page`,
-			`content_blog_postings`.`user` AS `posting_user`,
-			`content_blog_postings`.`title` AS `posting_title`,
-			`content_blog_postings`.`title_url` AS `posting_title_url`,
-			`content_blog_postings`.`summary_raw` AS `posting_summary_raw`,
-			`content_blog_postings`.`summary` AS `posting_summary`,
-			`content_blog_postings`.`content_raw` AS `posting_content_raw`,
-			`content_blog_postings`.`content` AS `posting_content`,
-			`content_blog_postings`.`draft` AS `posting_draft`,
-			`content_blog_postings`.`ping` AS `posting_ping`,
-			`content_blog_postings`.`comments_enable` AS `posting_comments_enable`,
-			`content_blog_postings`.`date_modified` AS `posting_date_modified`,
-			`content_blog_postings`.`date_added` AS `posting_date_added`,
 			`community_blog_comments`.`id` AS `id`,
 			`community_blog_comments`.`posting` AS `posting`,
 			`community_blog_comments`.`user` AS `user`,
+			`community_blog_comments`.`status` AS `status`,
+			`community_blog_comments`.`name` AS `name`,
+			`community_blog_comments`.`email` AS `email`,
+			`community_blog_comments`.`homepage` AS `homepage`,
 			`community_blog_comments`.`content_raw` AS `content_raw`,
 			`community_blog_comments`.`content` AS `content`,
+			`community_blog_comments`.`original_raw` AS `original_raw`,
+			`community_blog_comments`.`original` AS `original`,
+			`community_blog_comments`.`spam_report` AS `spam_report`,
 			`community_blog_comments`.`edited` AS `edited`,
 			`community_blog_comments`.`date_modified` AS `date_modified`,
-			`community_blog_comments`.`date_added` AS `date_added`
+			`community_blog_comments`.`date_added` AS `date_added`,
+			`content_blog_postings`.`id` AS `blog_posting_id`,
+			`content_blog_postings`.`page` AS `blog_posting_page`,
+			`content_blog_postings`.`user` AS `blog_posting_user`,
+			`content_blog_postings`.`title` AS `blog_posting_title`,
+			`content_blog_postings`.`title_url` AS `blog_posting_title_url`,
+			`content_blog_postings`.`summary_raw` AS `blog_posting_summary_raw`,
+			`content_blog_postings`.`summary` AS `blog_posting_summary`,
+			`content_blog_postings`.`content_raw` AS `blog_posting_content_raw`,
+			`content_blog_postings`.`content` AS `blog_posting_content`,
+			`content_blog_postings`.`draft` AS `blog_posting_draft`,
+			`content_blog_postings`.`ping` AS `blog_posting_ping`,
+			`content_blog_postings`.`comments_enable` AS `blog_posting_comments_enable`,
+			`content_blog_postings`.`comment_count` AS `blog_posting_comment_count`,
+			`content_blog_postings`.`trackbacks_enable` AS `blog_posting_trackbacks_enable`,
+			`content_blog_postings`.`trackback_count` AS `blog_posting_trackback_count`,
+			`content_blog_postings`.`pingbacks_enable` AS `blog_posting_pingbacks_enable`,
+			`content_blog_postings`.`pingback_count` AS `blog_posting_pingback_count`,
+			`content_blog_postings`.`tag_count` AS `blog_posting_tag_count`,
+			`content_blog_postings`.`tag_array` AS `blog_posting_tag_array`,
+			`content_blog_postings`.`date_modified` AS `blog_posting_date_modified`,
+			`content_blog_postings`.`date_added` AS `blog_posting_date_added`,
+			`content_blog_postings`.`day_added` AS `blog_posting_day_added`,
+			`content_blog_postings`.`month_added` AS `blog_posting_month_added`,
+			`content_blog_postings`.`year_added` AS `blog_posting_year_added`,
+			`content_nodes`.`id` AS `node_id`,
+			`content_nodes`.`navigation` AS `node_navigation`,
+			`content_nodes`.`root_node` AS `node_root_node`,
+			`content_nodes`.`parent` AS `node_parent`,
+			`content_nodes`.`lft` AS `node_lft`,
+			`content_nodes`.`rgt` AS `node_rgt`,
+			`content_nodes`.`level` AS `node_level`,
+			`content_nodes`.`sorting` AS `node_sorting`,
+			`content_pages`.`id` AS `page_id`,
+			`content_pages`.`project` AS `page_project`,
+			`content_pages`.`type` AS `page_type`,
+			`content_pages`.`template_set` AS `page_template_set`,
+			`content_pages`.`name` AS `page_name`,
+			`content_pages`.`name_url` AS `page_name_url`,
+			`content_pages`.`url` AS `page_url`,
+			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`image_small` AS `page_image_small`,
+			`content_pages`.`image_medium` AS `page_image_medium`,
+			`content_pages`.`image_big` AS `page_image_big`
 		FROM
 			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`community_blog_comments`.`user` = `application_users`.`id`
-		WHERE 
-			1
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		JOIN
+			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
+		WHERE
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_blog_postings`.`page` = :page ";
 		$bind_params['page'] = $page;
-	}
-	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
-		$bind_params['user'] = $user;
 	}
 	if (!empty($posting) && is_numeric($posting)) {
 		$sql .= " AND `content_blog_postings`.`id` = :posting ";
@@ -387,7 +453,7 @@ public function selectBlogComments ($params = array())
  * 
  * <ul>
  * <li>page, int, optional: Page id</li>
- * <li>user, int, optional: User id</li>
+ * <li>status, int, optional: Blog comment status id</li>
  * <li>posting, int, optional: Posting id</li>
  * </ul>
  * 
@@ -399,7 +465,7 @@ public function countBlogComments ($params = array())
 {
 	// define some vars
 	$page = null;
-	$user = null;
+	$status = null;
 	$posting = null;
 	$bind_params = array();
 	
@@ -411,8 +477,11 @@ public function countBlogComments ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'timeframe':
+					$$_key = (string)$_value;
+				break;
 			case 'page':
-			case 'user':
+			case 'status':
 			case 'posting':
 					$$_key = (int)$_value;
 				break;
@@ -424,29 +493,30 @@ public function countBlogComments ($params = array())
 	// prepare query
 	$sql = "
 		SELECT
-			COUNT (*) AS `total`
+			COUNT(*) AS `total`
 		FROM
 			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
-		LEFT JOIN
+		JOIN
 			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
-		LEFT JOIN
-			".OAK_DB_USER_USERS." AS `application_users`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`community_blog_comments`.`user` = `application_users`.`id`
-		WHERE 
-			1
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_blog_postings`.`page` = :page ";
 		$bind_params['page'] = $page;
-	}
-	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
-		$bind_params['user'] = $user;
 	}
 	if (!empty($posting) && is_numeric($posting)) {
 		$sql .= " AND `content_blog_postings`.`id` = :posting ";

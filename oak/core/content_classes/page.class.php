@@ -280,6 +280,7 @@ public function selectPage ($id)
  * <li>parent, int, optional: Parent node id</li>
  * <li>level, int, optional: Level count</li>
  * <li>sorting, int, optional: Sorting count</li>
+ * <li>type, int, optional: Page type id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
@@ -301,6 +302,7 @@ public function selectPages ($params = array())
 	$parent = null;
 	$level = null;
 	$sorting = null;
+	$type = null;
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -318,6 +320,7 @@ public function selectPages ($params = array())
 			case 'parent':
 			case 'level':
 			case 'sorting':
+			case 'type':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
@@ -387,6 +390,10 @@ public function selectPages ($params = array())
 	if (!empty($sorting) && is_numeric($sorting)) {
 		$sql .= " AND `content_nodes`.`sorting` = :sorting ";
 		$bind_params['sorting'] = $sorting;
+	}
+	if (!empty($type) && is_numeric($type)) {
+		$sql .= " AND `content_pages`.`type` = :type ";
+		$bind_params['type'] = $type;
 	}
 	
 	// add sorting

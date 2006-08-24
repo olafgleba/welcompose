@@ -69,15 +69,31 @@ var selection = '{$session.selection}';
 <br class="clearb" />
 
 <div class="filter clearfix">
-{if !empty($groups)}
+{if !empty($blog_comments)}
 <h2>{i18n Filter:}</h2>
 <form action="users_select.php" method="get">
 <fieldset>
-<label for="group">{i18n Blogs}</label> 
+<label for="group">{i18n Blog}</label> 
 <select id="group" name="group">
 <option selected="selected">{i18n Please choose...}</option>
-{foreach from=$groups item=_group}
-<option value="{$_group.id|escape:"htmlall"}">{$_group.name|escape:"htmlall"}</option>
+{foreach from=$pages item=_page}
+{if $_page.page_type_name == "OAK_BLOG"}
+<option value="{$_page.id|escape:"htmlall"}">{$_page.name|escape:"htmlall"}</option>
+{/if}
+{/foreach}
+</select>
+<label for="status">{i18n Status}</label> 
+<select id="status" name="status">
+<option selected="selected">{i18n Please choose...}</option>
+{foreach from=$blog_comment_statuses item=_status}
+<option value="{$_status.id|escape:"htmlall"}">{$_status.name|escape:"htmlall"}</option>
+{/foreach}
+</select>
+<label for="timeframe">{i18n Timeframe}</label> 
+<select id="timeframe" name="timeframe">
+<option selected="selected">{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe item=_timeframe_name}
+<option value="{$_timeframe|escape:"htmlall"}">{$_timeframe_name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 <input type="submit" value="{i18n Filter}" />
@@ -86,6 +102,18 @@ var selection = '{$session.selection}';
 {/if}
 <!-- filter --></div>
 
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="blogcomments_select.php?page={$request.page|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
 <table summary="{i18n Blog Comments List}" class="user">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
@@ -105,37 +133,45 @@ var selection = '{$session.selection}';
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
-{foreach from=$users item=_user}
+{foreach from=$blog_comments item=_comment}
 <tr>
-<td>{$_user.email|escape:"htmlall"}</td>
-<td>{$_user.group_name|escape:"htmlall"|nl2br}</td>
+<td>{$_comment.page_name|escape:"htmlall"}</td>
+<td>{$_comment.blog_posting_title|escape:"htmlall"|nl2br}</td>
 <td>
-{if $_user.author}{i18n yes}{else}{i18n no}{/if}<br />
-{$_user.email|escape:"htmlall"}<br />
-{$_user.homepage|escape:"htmlall"|nl2br}</td>
-<td>Comments...</td>
-{if $_user.editable}
+{if !empty($_comment.user)}{i18n yes}{else}{i18n no}{/if}<br />
+{$_comment.name|escape:"htmlall"}<br />
+{$_comment.email|escape:"htmlall"}<br />
+{$_comment.homepage|escape:"htmlall"|nl2br}</td>
+<td>{$_comment.content_raw}</td>
 <td>
-<form action="users_select.php" method="get">
+<form action="blogcomments_statuschange.php" method="post">
 <fieldset>
-<select id="group" name="group" class="flselect">
-<option selected="selected">{i18n Please choose...}</option>
-{foreach from=$groups item=_group}
-<option value="{$_group.id|escape:"htmlall"}">{$_group.name|escape:"htmlall"}</option>
+<select id="status" name="status" class="flselect">
+<option value="">&nbsp;</option>
+{foreach from=$blog_comment_statuses item=_status}
+<option value="{$_status.id|escape:"htmlall"}"{if $_comment.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 </fieldset>
 </form>
 </td>
-<td><a class="edit" href="users_edit.php?id={$_user.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="users_delete.php?id={$_user.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
-{else}
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-{/if}
+<td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="blogcomments_select.php?page={$request.page|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
 
 <!-- content --></div>
 <!-- main --></div>
