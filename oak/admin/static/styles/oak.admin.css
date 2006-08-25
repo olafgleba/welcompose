@@ -838,7 +838,8 @@ margin: 2px 0 2px 0;
 font-size: 80%;
 }
 #column span.cbxspread {
-margin: 5px 1px 0 2px;
+margin: 5px 8px 0 2px;
+line-height: 1.8em;
 }
 #column .mmwrap p {
 margin: 2px 5px 2px 2px;
@@ -933,7 +934,7 @@ padding: 2px 5px 5px 5px;
 #mm_include_types_wrap {
 display: none;
 /* set height because label here is float */
-height: 21px;
+height: 41px;
 }
 #mm_tags_wrap {
 display: block;
