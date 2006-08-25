@@ -95,6 +95,12 @@ var checkbox_status = new Array('simple_page_meta_use');
 <p>{i18n To apply further input, please repeat fill in the form}</p>
 <!-- rp --></div>
 {/if}
+{if $session.response == 2}
+<div id="rp">
+<h1>{i18n Your media was successfully saved!}</h1>
+<p>{i18n To apply further media files, please launch the upload window once again.}</p>
+<!-- rp --></div>
+{/if}
 
 <!-- column -->
 <div id="column">
@@ -114,7 +120,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 <ul class="mmnav">
 <li class="on"><span class="mm_myLocal">{i18n myLocal}</span></li>
 <li><a class="mm_myFlickr" href="#">{i18n myFlickr}</a></li>
-<li><a class="mm_upload" href="#">{i18n Upload}</a></li>
+<li><a class="mm_upload" href="?identifier={if isset($page)}{$page.id}{else}{$id}{/if}">{i18n Upload}</a></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myLocal) eof -->
 

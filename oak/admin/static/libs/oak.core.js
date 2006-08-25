@@ -386,7 +386,7 @@ function OakInit_getVars ()
 {
 	try {
 		if (typeof response != 'undefined' && $('rp')) {
-			if (response == 1) {
+			if (response == 1 || response == 2) {
 				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0});
 			}
 		}

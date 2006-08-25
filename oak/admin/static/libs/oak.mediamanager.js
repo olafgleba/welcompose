@@ -62,6 +62,8 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
+Mediamanager.prototype.hideModal = Mediamanager_hideModal;
+Mediamanager.prototype.setHide = Mediamanager_setHide;
 
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
@@ -192,6 +194,51 @@ function Mediamanager_showElement (elem)
 
 /**
  * Implements method of prototype class Mediamanager
+ *
+ * @throws applyError on exception
+ */
+function Mediamanager_setHide (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		
+		// process outer table tr
+		//$(this.elem).style.visibility = 'collapse';
+		Element.hide($(this.elem));
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ *
+ * @throws applyError on exception
+ */
+function Mediamanager_hideModal ()
+{
+	try {
+		// properties		
+		this.modalWindow = $('mm_modalContainer');
+		this.lyLowerOpacity = 'lyLowerOpacity';
+		
+		if (Mediamanager.unsupportsEffects()) {
+			Element.hide(this.modalWindow);
+		} else {
+			Effect.Fade(this.modalWindow,{duration: 0.7});
+		}
+
+		setTimeout("Mediamanager.setHide('"+ this.lyLowerOpacity +"')", 900);
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Mediamanager
  * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
  *
  * @param {string} toShow div to display
@@ -291,7 +338,8 @@ function Mediamanager_uploadMedia ()
 {
 	try {
 		// properties
-		this.url = '../mediamanager/mediamanager_upload.php';
+		this.identifier = window.location.href;
+		this.url = '../mediamanager/mediamanager_upload.php?identifier=' + this.identifier;
 		this.ttarget = $('mm_modalContainer');
 		
 		Mediamanager.lowerOpacity();

@@ -235,8 +235,7 @@ var definitions = {
 	},
 	'.hide200' : function(el){
 		el.onclick = function(){
-			Element.hide($('mm_modalContainer'));
-			Element.hide($('lyLowerOpacity'));
+			Mediamanager.hideModal();
 			return false;
 		}
 	},

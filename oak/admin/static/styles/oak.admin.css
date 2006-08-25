@@ -123,7 +123,7 @@ padding-top: 100px;
 margin: 20px 0;
 }
 #content p {
-margin: 10px 0 10px 10px;
+margin: 10px 0 10px 0;
 }
 
 /* %S =headline */
@@ -708,10 +708,10 @@ vertical-align: middle;
 }
 
 /* %M =help */
-#content p.help {
+p.help {
 display: block;
 line-height: 1.5em;
-width: 300px;
+width: 305px;
 margin: 0 0 10px 0;
 padding-left: 140px;
 }

@@ -83,32 +83,36 @@ try {
 	
 	
 	// default media types
-	$media_types = array (
-			'document' => gettext('Document'),
+	$types = array (
 			'image' => gettext('Image'),
+			'document' => gettext('Document'),
+			'audio' => gettext('Audio'),
 			'video' => gettext('Video'),
-			'cast' => gettext('Podcast')
+			'other' => gettext('Other')
 			);
 			
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
 	
+	// hidden for identifier (js)
+	$FORM->addElement('hidden', 'identifier');
+	
 	// select for media types
-	$FORM->addElement('select', 'media_types', gettext('Media types'), $media_types,
-		array('id' => 'media_types'));
-	$FORM->addRule('media_types', gettext('Please select a media type'), 'required');
+	$FORM->addElement('select', 'types', gettext('Media types'), $types,
+		array('id' => 'types'));
+	$FORM->addRule('types', gettext('Please select a media type'), 'required');
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'media_type_description', gettext('Description'),
-		array('id' => 'media_type_description', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('media_type_description', 'trim');
-	$FORM->applyFilter('media_type_description', 'strip_tags');
+	$FORM->addElement('textarea', 'description', gettext('Description'),
+		array('id' => 'description', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('description', 'trim');
+	$FORM->applyFilter('description', 'strip_tags');
 	
 	// textarea for tags
-	$FORM->addElement('textarea', 'media_type_tags', gettext('Tags'),
-		array('id' => 'media_type_tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('media_type_tags', 'trim');
-	$FORM->applyFilter('media_type_tags', 'strip_tags');	
+	$FORM->addElement('textarea', 'tags', gettext('Tags'),
+		array('id' => 'tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('tags', 'trim');
+	$FORM->applyFilter('tags', 'strip_tags');	
 	
 	
 	// submit button
@@ -119,7 +123,12 @@ try {
 	$FORM->addElement('reset', 'reset', gettext('Stop and hide'),
 		array('class' => 'hide200'));
 	
-	
+
+	// set defaults
+	$FORM->setDefaults(array(
+		'identifier' => $_REQUEST['identifier']
+	));
+			
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
@@ -155,14 +164,14 @@ try {
 
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
 
 		// select available projects
 		$select_params = array(
 			'user' => OAK_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
-		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
+		
+		//$BASE->utility->smarty->assign('identifier', $_REQUEST['identifier']);
 
 		// display the form
 		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -175,14 +184,21 @@ try {
 	} else {
 		// freeze the form
 		$FORM->freeze();
-
-		// create the article group
+		
+		// prepare sql data
 		$sqlData = array();
+		$sqlData['types'] = $FORM->exportValue('types');
+		$sqlData['description'] = $FORM->exportValue('description');
+		$sqlData['tags'] = $FORM->exportValue('tags');
 		
 
 		// insert it
 		try {
-			// action
+			// begin transaction
+			$BASE->db->begin();
+			
+			// execute operation
+			//$BOX->addBox($sqlData);
 
 			// commit
 			$BASE->db->commit();
@@ -206,7 +222,7 @@ try {
 		}
 
 		// redirect
-		//header("Location: templates_add.php");
+		header("Location: ".$_REQUEST['identifier']);
 		exit;
 	}
 } catch (Exception $e) {

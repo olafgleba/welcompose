@@ -9,22 +9,14 @@
 
 {$form.hidden}
 
-<label for="media_types" class="media_types"><span class="bez">{i18n Media types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_timeframe_wrap">
-<select id="mm_timeframe" name="mm_timeframe">
-<option value="">{i18n Please choose...}</option>
-{foreach from=$media_types key=_media_type item=_timeframe_name}
-<option value="{$_timeframe}">{$_timeframe_name}</option>
-{/foreach}
-</select>
-</span>
-</label>
+<label class="cont" for="types"><span class="bez">{$form.types.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.types.html}</label>
 
-<label class="cont h13" for="media_type_description"><span class="bez">{$form.media_type_description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.media_type_description.html}</label>
+<label class="cont h13" for="description"><span class="bez">{$form.description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.description.html}</label>
 
-<label class="cont h13" for="media_type_tags"><span class="bez">{$form.media_type_tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.media_type_tags.html}</label>
+<label class="cont h13" for="tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.tags.html}</label>
 
 {$form.submit.html}
 {$form.reset.html}
