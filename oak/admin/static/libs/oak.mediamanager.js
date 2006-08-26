@@ -69,7 +69,6 @@ Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
 
 Mediamanager.prototype.uploadMedia = Mediamanager_uploadMedia;
-Mediamanager.prototype.processUploadMedia = Mediamanager_processUploadMedia;
 
 Mediamanager.prototype.lowerOpacity = Mediamanager_lowerOpacity;
 
@@ -314,7 +313,7 @@ function Mediamanager_invokeInputs ()
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : showResponse
+				onComplete : showResponseMediamanager
 			});	
 	} catch (e) {
 		_applyError(e);
@@ -328,7 +327,7 @@ function Mediamanager_invokeInputs ()
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function showResponse(req)
+function showResponseMediamanager(req)
 {
 	try {
 		$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
@@ -364,51 +363,45 @@ function Mediamanager_checkMyLocalElems ()
 }
 
 
-
-
 function Mediamanager_uploadMedia ()
 {
 	try {
-		// properties
-		this.identifier = window.location.href;
-		this.url = '../mediamanager/mediamanager_upload.php?identifier=' + this.identifier;
-		this.ttarget = $('mm_modalContainer');
 		
 		Mediamanager.lowerOpacity();
 		
-		if (typeof this.req != 'undefined') {
-		
-			var _url		= this.url;
-			var _ttarget	= this.ttarget;
-		
-			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Mediamanager.processUploadMedia(_url,_ttarget);};
-			_req.send('');
+		if (Mediamanager.unsupportsEffects()) {
+			Element.show('mm_modalContainer');
+		} else {
+			Effect.Appear('mm_modalContainer',{duration: 0.4});
 		}
+
+		var url = '../mediamanager/mediamanager_upload.php';
+		var pars = '';
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : showResponseMediamanagerUpload
+			});	
+			
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-
-
-function Mediamanager_processUploadMedia (url, ttarget)
-{  
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function showResponseMediamanagerUpload(req)
+{
 	try {
-		if (_req.readyState == 4) {
-			if (_req.status == 200) {				
-				Element.update (ttarget, _req.responseText);
-				if (Mediamanager.unsupportsEffects('safari')) {
-					Element.show(ttarget);
-				} else {
-					Element.hide(this.ttarget);
-					Effect.Appear(this.ttarget,{duration: 0.7});
-				}
-				Behaviour.apply();
-			} else {
-	  			throw new DevError(_req.statusText);
-			}
-		}
+		$('mm_modalContainer').innerHTML = req.responseText;
 	} catch (e) {
 		_applyError(e);
 	}

@@ -22,220 +22,37 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
-// define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+// na, dann printe mal schön ;)
 
-// get loader
-$path_parts = array(
-	dirname(__FILE__),
-	'..',
-	'..',
-	'core',
-	'loader.php'
-);
-$loader_path = implode(DIRECTORY_SEPARATOR, $path_parts);
-require($loader_path);
+/*
+Form/HTML müsste so in etwa so aussehen:
 
-// start base
-/* @var $BASE base */
-$BASE = load('base:base');
 
-// deregister globals
-$deregister_globals_path = dirname(__FILE__).'/../../core/includes/deregister_globals.inc.php';
-require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
+<h2>MEDIA MANAGER <span>UPLOAD MEDIA</span></h2>
 
-try {
-	// start output buffering
-	@ob_start();
-	
-	// load smarty
-	$smarty_admin_conf = dirname(__FILE__).'/../../core/conf/smarty_admin.inc.php';
-	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
-	
-	// load gettext
-	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
-	include(Base_Compat::fixDirectorySeparator($gettext_path));
-	gettextInitSoftware($BASE->_conf['locales']['all']);
-	
-	// start session
-	/* @var $SESSION session */
-	$SESSION = load('base:session');
+<div id="mm_modalBody">
 
-	// load user class
-	/* @var $USER User_User */
-	$USER = load('user:user');
-	
-	// load login class
-	/* @var $LOGIN User_Login */
-	$LOGIN = load('User:Login');
-	
-	// load project class
-	/* @var $PROJECT Application_Project */
-	$PROJECT = load('application:project');
-		
-	// init user and project
-	if (!$LOGIN->loggedIntoAdmin()) {
-		header("Location: ../login.php");
-		exit;
-	}
-	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
-	
-	
-	// default media types
-	$types = array (
-			'image' => gettext('Image'),
-			'document' => gettext('Document'),
-			'audio' => gettext('Audio'),
-			'video' => gettext('Video'),
-			'other' => gettext('Other')
-			);
-			
-	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
-	
-	// hidden for identifier (js)
-	$FORM->addElement('hidden', 'identifier');
-	
-	// select for media types
-	$FORM->addElement('select', 'types', gettext('Media types'), $types,
-		array('id' => 'types'));
-	$FORM->addRule('types', gettext('Please select a media type'), 'required');
-	
-	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'description', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
-	// textarea for tags
-	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');	
-	
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Upload Media'),
-		array('class' => 'submit200'));
+<form class="botbg" action="whatever" method="post" id="media_upload">
+<fieldset class="topbg">
 
-	// submit button
-	$FORM->addElement('reset', 'reset', gettext('Stop and hide'),
-		array('class' => 'hide200'));
-	
+<label class="cont h13" for="media_upload_description"><span class="bez">Media Description<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<textarea id="media_upload_description" cols="3" rows="2" class="w540h150" name="description"></textarea></label>
 
-	// set defaults
-	$FORM->setDefaults(array(
-		'identifier' => $_REQUEST['identifier']
-	));
-			
-	// validate it
-	if (!$FORM->validate()) {
-		// render it
-		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+<label class="cont h13" for="media_upload_tags"><span class="bez">Media Tags<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<textarea id="media_upload_tags" cols="3" rows="2" class="w540h150" name="tags"></textarea></label>
 
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
+<input class="submit200" name="submit" value="Upload Media" type="submit" />
+<input class="hide200" name="hide" value="Stop and hide" type="button" />
 
-		$FORM->accept($renderer);
+</fieldset>
+</form>
 
-		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+</div>
 
-		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
 
-	    // build session
-	    $session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
-	    );
 
-	    // assign prepared session array to smarty
-	    $BASE->utility->smarty->assign('session', $session);
+**/
 
-	    // empty $_SESSION
-	    if (!empty($_SESSION['response'])) {
-	        $_SESSION['response'] = '';
-	    }
 
-		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-
-		// select available projects
-		$select_params = array(
-			'user' => OAK_CURRENT_USER,
-			'order_macro' => 'NAME'
-		);
-		
-		//$BASE->utility->smarty->assign('identifier', $_REQUEST['identifier']);
-
-		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/mediamanager_upload.html', OAK_TEMPLATE_KEY);
-
-		// flush the buffer
-		@ob_end_flush();
-
-		exit;
-	} else {
-		// freeze the form
-		$FORM->freeze();
-		
-		// prepare sql data
-		$sqlData = array();
-		$sqlData['types'] = $FORM->exportValue('types');
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['tags'] = $FORM->exportValue('tags');
-		
-
-		// insert it
-		try {
-			// begin transaction
-			$BASE->db->begin();
-			
-			// execute operation
-			//$BOX->addBox($sqlData);
-
-			// commit
-			$BASE->db->commit();
-		} catch (Exception $e) {
-			// do rollback
-			$BASE->db->rollback();
-
-			// re-throw exception
-			throw $e;
-		}
-
-		// add response to session
-		$_SESSION['response'] = 2;
-
-		// redirect
-		$SESSION->save();
-
-		// clean the buffer
-		if (!$BASE->debug_enabled()) {
-			@ob_end_clean();
-		}
-
-		// redirect
-		header("Location: ".$_REQUEST['identifier']);
-		exit;
-	}
-} catch (Exception $e) {
-	// clean the buffer
-	if (!$BASE->debug_enabled()) {
-		@ob_end_clean();
-	}
-
-	// raise error
-	Base_Error::triggerException($BASE->utility->smarty, $e);	
-
-	// exit
-	exit;
-}
 
 ?>
