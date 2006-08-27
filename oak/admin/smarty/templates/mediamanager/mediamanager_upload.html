@@ -2,6 +2,23 @@
 
 <div id="mm_modalBody">
 	
+{if !empty($form.errors)}
+<div id="error">
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<!-- error --></div>
+{/if}
+
+{if $session.response == 1}
+<div id="rp">
+<h1>{i18n Your input was successfully saved!}</h1>
+<p>{i18n To apply further input, please repeat fill in the form}</p>
+<!-- rp --></div>
+{/if}
+	
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 
