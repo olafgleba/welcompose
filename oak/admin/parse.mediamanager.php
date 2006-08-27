@@ -59,7 +59,7 @@ try {
 	// get page name
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
 	
-	// display the correlated navigation template
+	// display the correlated mediamanager template
 	$BASE->utility->smarty->display('mediamanager/'.$page.'.html');
 		
 	// flush the buffer

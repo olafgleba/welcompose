@@ -505,6 +505,7 @@ function Mediamanager_checkSubmittedFormElems ()
 	try {
 		var getElems = {
 			types : $F('types'),
+			file : $F('file'),
 			description : $F('description'),
 			tags : $F('tags')
 		};
