@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: navigations_select.php
+ * File: mediamanager_upload.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -22,37 +22,219 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
-// na, dann printe mal schön ;)
+// define area constant
+define('OAK_CURRENT_AREA', 'ADMIN');
 
-/*
-Form/HTML müsste so in etwa so aussehen:
+// get loader
+$path_parts = array(
+	dirname(__FILE__),
+	'..',
+	'..',
+	'core',
+	'loader.php'
+);
+$loader_path = implode(DIRECTORY_SEPARATOR, $path_parts);
+require($loader_path);
+
+// start base
+/* @var $BASE base */
+$BASE = load('base:base');
+
+// deregister globals
+$deregister_globals_path = dirname(__FILE__).'/../../core/includes/deregister_globals.inc.php';
+require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
+
+try {
+	// start output buffering
+	@ob_start();
+
+	// load smarty
+	$smarty_admin_conf = dirname(__FILE__).'/../../core/conf/smarty_admin.inc.php';
+	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
+
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
+
+	// start session
+	/* @var $SESSION session */
+	$SESSION = load('base:session');
+
+	// load user class
+	/* @var $USER User_User */
+	$USER = load('user:user');
+
+	// load login class
+	/* @var $LOGIN User_Login */
+	$LOGIN = load('User:Login');
+
+	// load project class
+	/* @var $PROJECT Application_Project */
+	$PROJECT = load('application:project');
+
+	// init user and project
+	if (!$LOGIN->loggedIntoAdmin()) {
+		header("Location: ../login.php");
+		exit;
+	}
+	$USER->initUserAdmin();
+	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	
+	// default media types
+	$types = array (
+			'image' => gettext('Image'),
+			'document' => gettext('Document'),
+			'audio' => gettext('Audio'),
+			'video' => gettext('Video'),
+			'other' => gettext('Other')
+			);
+
+	// start new HTML_QuickForm
+	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
+	
+	// select for media types
+	$FORM->addElement('select', 'types', gettext('Media types'), $types,
+		array('id' => 'types'));
+	$FORM->addRule('types', gettext('Please select a media type'), 'required');
+	
+	// file upload field
+	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
+		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
+	
+	// textarea for description
+	$FORM->addElement('textarea', 'description', gettext('Description'),
+		array('id' => 'description', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('description', 'trim');
+	$FORM->applyFilter('description', 'strip_tags');
+	
+	// textarea for tags
+	$FORM->addElement('textarea', 'tags', gettext('Tags'),
+		array('id' => 'tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('tags', 'trim');
+	$FORM->applyFilter('tags', 'strip_tags');	
+	
+	// submit button
+	$FORM->addElement('button', 'submit', gettext('Upload'),
+		array('class' => 'submitAjaxForm200'));
+
+	// reset button
+	$FORM->addElement('reset', 'reset', gettext('Cancel'),
+		array('class' => 'hide200'));
+	
+	// validate it
+	if (!$FORM->validate()) {
+		// render it
+		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
+
+		$FORM->accept($renderer);
+
+		// assign the form to smarty
+		$BASE->utility->smarty->assign('form', $renderer->toArray());
+
+		// assign paths
+		$BASE->utility->smarty->assign('oak_admin_root_www',
+			$BASE->_conf['path']['oak_admin_root_www']);
+
+	    // build session
+	    $session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
+	    );
+
+	    // assign prepared session array to smarty
+	    $BASE->utility->smarty->assign('session', $session);
+
+	    // empty $_SESSION
+	    if (!empty($_SESSION['response'])) {
+	        $_SESSION['response'] = '';
+	    }
+
+		// assign current user and project id
+		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
+
+		// select available projects
+		$select_params = array(
+			'user' => OAK_CURRENT_USER,
+			'order_macro' => 'NAME'
+		);
+
+		//$BASE->utility->smarty->assign('identifier', $_REQUEST['identifier']);
+
+		// display the form
+		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/mediamanager_upload.html', OAK_TEMPLATE_KEY);
+
+		// flush the buffer
+		@ob_end_flush();
+
+		exit;
+	} else {
+		// freeze the form
+		$FORM->freeze();
+		
+		var_dump($file_upload);
+		
+		/*
+		// prepare sql data
+		$sqlData = array();
+		$sqlData['types'] = $FORM->exportValue('types');
+		$sqlData['description'] = $FORM->exportValue('description');
+		$sqlData['tags'] = $FORM->exportValue('tags');
 
 
-<h2>MEDIA MANAGER <span>UPLOAD MEDIA</span></h2>
+		// insert it
+		try {
+			// begin transaction
+			$BASE->db->begin();
 
-<div id="mm_modalBody">
+			// execute operation
+			//$BOX->addBox($sqlData);
 
-<form class="botbg" action="whatever" method="post" id="media_upload">
-<fieldset class="topbg">
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
 
-<label class="cont h13" for="media_upload_description"><span class="bez">Media Description<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-<textarea id="media_upload_description" cols="3" rows="2" class="w540h150" name="description"></textarea></label>
+			// re-throw exception
+			throw $e;
+		}
 
-<label class="cont h13" for="media_upload_tags"><span class="bez">Media Tags<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-<textarea id="media_upload_tags" cols="3" rows="2" class="w540h150" name="tags"></textarea></label>
+		// add response to session
+		$_SESSION['response'] = 2;
 
-<input class="submit200" name="submit" value="Upload Media" type="submit" />
-<input class="hide200" name="hide" value="Stop and hide" type="button" />
+		// redirect
+		$SESSION->save();
 
-</fieldset>
-</form>
+		// clean the buffer
+		if (!$BASE->debug_enabled()) {
+			@ob_end_clean();
+		}
+		
+		// redirect
+		header("Location: ".$_REQUEST['identifier']);
+		exit;
+		
+		*/
+	}
+} catch (Exception $e) {
+	// clean the buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
 
-</div>
+	// raise error
+	Base_Error::triggerException($BASE->utility->smarty, $e);	
 
-
-
-**/
-
-
+	// exit
+	exit;
+}
 
 ?>
