@@ -521,6 +521,6 @@ function Mediamanager_checkSubmittedFormElems ()
 
 
 /**
- * Building new instance for @class Mediamanager
+ * Building new instance for @class Mediamananager
  */
 Mediamanager = new Mediamanager();
