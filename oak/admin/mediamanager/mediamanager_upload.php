@@ -101,7 +101,7 @@ try {
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
+	//$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
@@ -113,7 +113,8 @@ try {
 	$FORM->addElement('textarea', 'tags', gettext('Tags'),
 		array('id' => 'tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');	
+	$FORM->applyFilter('tags', 'strip_tags');
+	$FORM->addRule('tags', gettext('Please name tags'), 'required');	
 	
 	// submit button
 	$FORM->addElement('button', 'submit', gettext('Upload'),

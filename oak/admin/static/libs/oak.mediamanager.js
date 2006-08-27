@@ -468,8 +468,8 @@ function Mediamanager_submitAjaxForm ()
 		var myAjax = new Ajax.Request(
 			url,
 			{
-				method : 'get',
-				parameters : pars,
+				method : 'post',
+				postBody : pars,
 				onComplete : showResponseSubmitAjaxForm
 			});	
 	} catch (e) {
