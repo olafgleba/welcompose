@@ -471,7 +471,7 @@ function Mediamanager_submitAjaxForm ()
 				method : 'post',
 				postBody : pars,
 				onComplete : showResponseSubmitAjaxForm
-			});	
+			});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -489,6 +489,7 @@ function showResponseSubmitAjaxForm(req)
 	try {
 		// was gefüllt soll, ist noch offen, abhängig vom processing
 		$('mm_modalContainer').innerHTML = req.responseText;
+		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
 	}

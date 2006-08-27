@@ -108,6 +108,7 @@ try {
 		array('id' => 'description', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
+	$FORM->addRule('description', gettext('Please name description'), 'required');
 	
 	// textarea for tags
 	$FORM->addElement('textarea', 'tags', gettext('Tags'),
