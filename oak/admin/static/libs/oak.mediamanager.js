@@ -69,8 +69,12 @@ Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
 
 Mediamanager.prototype.uploadMedia = Mediamanager_uploadMedia;
+Mediamanager.prototype.processUploadMedia = Mediamanager_processUploadMedia;
 
 Mediamanager.prototype.lowerOpacity = Mediamanager_lowerOpacity;
+
+Mediamanager.prototype.submitAjaxForm = Mediamanager_submitAjaxForm;
+Mediamanager.prototype.checkSubmittedFormElems = Mediamanager_checkSubmittedFormElems;
 
 
 /**
@@ -313,7 +317,7 @@ function Mediamanager_invokeInputs ()
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : showResponseMediamanager
+				onComplete : showResponseInvokeInputs
 			});	
 	} catch (e) {
 		_applyError(e);
@@ -327,7 +331,7 @@ function Mediamanager_invokeInputs ()
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function showResponseMediamanager(req)
+function showResponseInvokeInputs(req)
 {
 	try {
 		$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
@@ -363,45 +367,50 @@ function Mediamanager_checkMyLocalElems ()
 }
 
 
+
+
 function Mediamanager_uploadMedia ()
 {
 	try {
+		// properties
+		this.url = '../mediamanager/mediamanager_upload.php';
+		this.ttarget = $('mm_modalContainer');
 		
 		Mediamanager.lowerOpacity();
 		
-		if (Mediamanager.unsupportsEffects()) {
-			Element.show('mm_modalContainer');
-		} else {
-			Effect.Appear('mm_modalContainer',{duration: 0.4});
+		if (typeof this.req != 'undefined') {
+		
+			var _url		= this.url;
+			var _ttarget	= this.ttarget;
+		
+			_req.open('GET', _url, true);
+			_req.onreadystatechange = function () { Mediamanager.processUploadMedia(_url,_ttarget);};
+			_req.send('');
 		}
-
-		var url = '../mediamanager/mediamanager_upload.php';
-		var pars = '';
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				parameters : pars,
-				onComplete : showResponseMediamanagerUpload
-			});	
-			
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function showResponseMediamanagerUpload(req)
-{
+
+
+function Mediamanager_processUploadMedia (url, ttarget)
+{  
 	try {
-		$('mm_modalContainer').innerHTML = req.responseText;
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {				
+				Element.update (ttarget, _req.responseText);
+				if (Mediamanager.unsupportsEffects('safari')) {
+					Element.show(ttarget);
+				} else {
+					Element.hide(this.ttarget);
+					Effect.Appear(this.ttarget,{duration: 0.7});
+				}
+				Behaviour.apply();
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
+		}
 	} catch (e) {
 		_applyError(e);
 	}
@@ -438,6 +447,75 @@ function Mediamanager_lowerOpacity ()
 		_applyError(e);
 	}
 }
+
+
+
+
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_submitAjaxForm ()
+{
+	try {
+		var elems = Mediamanager.checkSubmittedFormElems();
+		var url = '../mediamanager/mediamanager_upload.php';
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : showResponseSubmitAjaxForm
+			});	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function showResponseSubmitAjaxForm(req)
+{
+	try {
+		// was gefüllt soll, ist noch offen, abhängig vom processing
+		$('mm_modalBody').innerHTML = req.responseText;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_checkSubmittedFormElems ()
+{
+	try {
+		var getElems = {
+			types : $F('types'),
+			description : $F('description'),
+			tags : $F('tags')
+		};
+	
+		var o = $H(getElems);
+		return o.toQueryString();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 
 /**

@@ -233,6 +233,12 @@ var definitions = {
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
+	'.submitAjaxForm200' : function(el){
+		el.onclick = function(){
+			Mediamanager.submitAjaxForm(this);
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+	},
 	'.hide200' : function(el){
 		el.onclick = function(){
 			Mediamanager.hideModal();

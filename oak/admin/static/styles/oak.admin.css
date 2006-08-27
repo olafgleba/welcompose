@@ -628,6 +628,19 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
 cursor: pointer;
 }
+input.submitAjaxForm200 {
+text-align: left;
+background: #666 url(../img/submit200.gif) no-repeat;
+color: #fff;
+width: 200px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 20px  0 0 140px;
+cursor: pointer;
+}
 input.submit200bez260 {
 text-align: left;
 background: #666 url(../img/submit200.gif) no-repeat;
@@ -983,7 +996,7 @@ color: #00AE2C;
 #mm_modalBody {
 padding: 3px 8px;
 min-height: 200px;
-border: 1px solid #ebebeb;
+border: 1px solid #ccc;
 background: #f9f9f9;
 z-index: 2;
 }
