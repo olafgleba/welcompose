@@ -100,7 +100,7 @@ try {
 	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
-		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
 	
 	// textarea for description

@@ -487,8 +487,8 @@ function Mediamanager_submitAjaxForm ()
 function showResponseSubmitAjaxForm(req)
 {
 	try {
-		// was gefÃ¼llt soll, ist noch offen, abhÃ¤ngig vom processing
-		$('mm_modalBody').innerHTML = req.responseText;
+		// was gefüllt soll, ist noch offen, abhängig vom processing
+		$('mm_modalContainer').innerHTML = req.responseText;
 	} catch (e) {
 		_applyError(e);
 	}
