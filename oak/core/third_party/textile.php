@@ -566,7 +566,7 @@ class Textile
             ([\s[{(]|[[:punct:]])?       # $pre
             "                            # start
             (' . $this->c . ')           # $atts
-            ([^"]+)                      # $text
+            ([^"(]+)                      # $text
             \s?
             (?:\(([^)]+)\)(?="))?        # $title
             ":
