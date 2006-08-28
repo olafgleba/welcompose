@@ -96,22 +96,8 @@ try {
 		$action = 'Login';
 	}
 	
-	// create display class name from action and page id
-	switch ((string)$page['page_type_name']) {
-		case 'OAK_BLOG':
-				$display_class = "Display:Blog".$action;
-			break;
-		case 'OAK_SIMPLE_PAGE':
-				$display_class = "Display:SimplePage".$action;
-			break;
-		case 'OAK_SIMPLE_FORM':
-				$display_class = "Display:SimpleForm".$action;
-			break;
-		default:
-			throw new Exception("Unknown page type requested");
-	}
-	
 	// call the display class
+	$display_class = "Display:".$page['page_type_internal_name'].$action;
 	$DISPLAY = load($display_class, array($project, $page));
 	
 	// execute the renderer

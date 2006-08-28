@@ -75,6 +75,10 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
+			case 'page_type_internal_name':
+					$reg = OAK_REGEX_PAGE_TYPE_INTERNAL_NAME;
+					$desc = gettext('Literal string, CamelCase');
+				break;
 			case 'ping_service_configuration_site_url':
 			case 'ping_service_configuration_site_index':
 			case 'ping_service_configuration_site_feed':

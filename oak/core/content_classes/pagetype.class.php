@@ -223,6 +223,7 @@ public function selectPageType ($id)
 			`content_page_types`.`id` AS `id`,
 			`content_page_types`.`project` AS `project`,
 			`content_page_types`.`name` AS `name`,
+			`content_page_types`.`internal_name` AS `internal_name`,
 			`content_page_types`.`editable` AS `editable`
 		FROM
 			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
@@ -298,6 +299,7 @@ public function selectPageTypes ($params = array())
 			`content_page_types`.`id` AS `id`,
 			`content_page_types`.`project` AS `project`,
 			`content_page_types`.`name` AS `name`,
+			`content_page_types`.`internal_name` AS `internal_name`,
 			`content_page_types`.`editable` AS `editable`
 		FROM
 			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
@@ -364,6 +366,69 @@ public function testForUniqueName ($name, $id = null)
 			`project` = :project
 		  AND
 			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Tests given internal page type name for uniqueness. Takes the
+ * internal page type name as first argument and an optional page
+ * type id as second argument. If the page type id is given, this
+ * page type won't be considered when checking for uniqueness
+ * (useful for updates). Returns boolean true if the internal page
+ * type name is unique.
+ *
+ * @throws Content_PagetypeException
+ * @param string Internal page type name
+ * @param int Page type id
+ * @return bool
+ */
+public function testForUniqueInternalName ($name, $id = null)
+{
+	// access check
+	if (!oak_check_access('Content', 'PageType', 'Use')) {
+		throw new Content_PagetypeException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($name)) {
+		throw new Content_PagetypeException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Content_PagetypeException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Content_PagetypeException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		WHERE
+			`project` = :project
+		  AND
+			`internal_name` = :name
 	";
 	
 	// prepare bind params

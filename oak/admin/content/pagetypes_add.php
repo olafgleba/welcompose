@@ -80,6 +80,7 @@ try {
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page_type', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $PAGETYPE);
+	$FORM->registerRule('testForInternalNameUniqueness', 'callback', 'testForUniqueInternalName', $PAGETYPE);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
@@ -89,6 +90,17 @@ try {
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', OAK_REGEX_PAGE_TYPE_NAME);
 	$FORM->addRule('name', gettext('A page type with the given name already exists'), 'testForNameUniqueness');
+	
+	// textfield for internal_name
+	$FORM->addElement('text', 'internal_name', gettext('Internal name'), 
+		array('id' => 'page_type_internal_name', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('internal_name', 'trim');
+	$FORM->applyFilter('internal_name', 'strip_tags');
+	$FORM->addRule('internal_name', gettext('Please enter an internal name'), 'required');
+	$FORM->addRule('internal_name', gettext('Please enter a valid internal name'), 'regex',
+		OAK_REGEX_PAGE_TYPE_INTERNAL_NAME);
+	$FORM->addRule('internal_name', gettext('A page type with the given internal name already exists'),
+		'testForInternalNameUniqueness');
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add page type'),
@@ -154,6 +166,7 @@ try {
 		$sqlData = array();
 		$sqlData['project'] = OAK_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['editable'] = "1";
 		
 		// check sql data

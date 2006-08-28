@@ -101,6 +101,17 @@ try {
 	$FORM->addRule('name', gettext('A page type with the given name already exists'),
 		'testForNameUniqueness', $FORM->exportValue('id'));
 	
+	// textfield for internal_name
+	$FORM->addElement('text', 'internal_name', gettext('Internal name'), 
+		array('id' => 'page_type_internal_name', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('internal_name', 'trim');
+	$FORM->applyFilter('internal_name', 'strip_tags');
+	$FORM->addRule('internal_name', gettext('Please enter an internal name'), 'required');
+	$FORM->addRule('internal_name', gettext('Please enter a valid internal name'), 'regex',
+		OAK_REGEX_PAGE_TYPE_INTERNAL_NAME);
+	$FORM->addRule('internal_name', gettext('A page type with the given internal name already exists'),
+		'testForInternalNameUniqueness', $FORM->exportValue('id'));
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update page type'),
 		array('class' => 'submit140'));
@@ -108,7 +119,8 @@ try {
 	// set defaults
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC),
-		'name' => Base_Cnc::ifsetor($page_type['name'], null)
+		'name' => Base_Cnc::ifsetor($page_type['name'], null),
+		'internal_name' => Base_Cnc::ifsetor($page_type['internal_name'], null)
 	));
 	
 	// validate it
@@ -157,6 +169,7 @@ try {
 		// create the article group
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		
 		// check sql data
 		$HELPER = load('utility:helper');

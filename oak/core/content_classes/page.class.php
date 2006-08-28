@@ -239,7 +239,8 @@ public function selectPage ($id)
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_page_types`.`id` AS `page_type_id`,
-			`content_page_types`.`name` AS `page_type_name`
+			`content_page_types`.`name` AS `page_type_name`,
+			`content_page_types`.`internal_name` AS `page_type_internal_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN
@@ -349,8 +350,8 @@ public function selectPages ($params = array())
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
-			`content_page_types`.`id` AS `page_type_id`,
-			`content_page_types`.`name` AS `page_type_name`
+			`content_page_types`.`name` AS `page_type_name`,
+			`content_page_types`.`internal_name` AS `page_type_internal_name`
 		FROM
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN

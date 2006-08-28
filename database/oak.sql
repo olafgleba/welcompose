@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 24.08.2006 23:10:32
--- Diagram Version: 125
+-- Created on: 28.08.2006 13:58:52
+-- Diagram Version: 127
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -119,6 +119,7 @@ CREATE TABLE `application_text_converters` (
   `project` int(11) UNSIGNED NOT NULL,
   `internal_name` varchar(255),
   `name` varchar(255),
+  `default` enum('0','1') DEFAULT '0',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   CONSTRAINT `application_text_converters.project2application_projects.id` FOREIGN KEY (`project`)
@@ -275,6 +276,7 @@ CREATE TABLE `content_page_types` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
+  `internal_name` varchar(255),
   `editable` enum('0','1') DEFAULT '1',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
