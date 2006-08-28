@@ -580,7 +580,7 @@ class Textile
 // -------------------------------------------------------------
     function fLink($m)
     {
-        list(, $pre, $atts, $text, $title, $url, $slash, $post) = $m;
+        list(, $pre, , $atts, $text, $title, $url, $slash, $post) = $m;
 
         $url = $this->checkRefs($url);
 
