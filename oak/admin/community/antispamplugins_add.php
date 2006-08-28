@@ -114,7 +114,7 @@ try {
 	
 	// textfield for internal name
 	$FORM->addElement('text', 'internal_name', gettext('Internal name'), 
-		array('id' => 'anti_spam_plugin_internal_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'anti_spam_plugin_internal_name', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('internal_name', 'trim');
 	$FORM->applyFilter('internal_name', 'strip_tags');
 	$FORM->addRule('internal_name', gettext('Please enter an internal name'), 'required');

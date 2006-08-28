@@ -118,12 +118,12 @@ try {
 	$FORM->addRule('tags', gettext('Please name tags'), 'required');	
 	
 	// submit button
-	$FORM->addElement('button', 'submit', gettext('Upload'),
-		array('class' => 'submitAjaxForm200'));
+	$FORM->addElement('submit', 'submit', gettext('Upload'),
+		array('class' => 'submit200'));
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'hide200'));
+		array('class' => 'cancel200'));
 	
 	// validate it
 	if (!$FORM->validate()) {

@@ -104,7 +104,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'email', gettext('E-mail'), 
-		array('id' => 'user_email', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'user_email', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('email', 'trim');
 	$FORM->applyFilter('email', 'strip_tags');
 	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
@@ -114,7 +114,7 @@ try {
 	
 	// textfield for homepage
 	$FORM->addElement('password', 'password', gettext('Password'), 
-		array('id' => 'user_password', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'user_password', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('password', 'trim');
 	$FORM->applyFilter('password', 'strip_tags');
 	$FORM->addRule('password', gettext('Please enter a password'), 'required');

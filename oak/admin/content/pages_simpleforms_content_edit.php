@@ -169,7 +169,7 @@ try {
 	
 	// textfield for email_from
 	$FORM->addElement('text', 'email_from', gettext('From: address'),
-		array('id' => 'simple_form_email_from', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_email_from', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('email_from', 'trim');
 	$FORM->applyFilter('email_from', 'strip_tags');
 	$FORM->addRule('email_from', gettext('Please enter a From: address'), 'required');
@@ -177,7 +177,7 @@ try {
 	
 	// textfield for email_to
 	$FORM->addElement('text', 'email_to', gettext('To: address'),
-		array('id' => 'simple_form_email_to', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_email_to', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('email_to', 'trim');
 	$FORM->applyFilter('email_to', 'strip_tags');
 	$FORM->addRule('email_to', gettext('Please enter a To: address'), 'required');

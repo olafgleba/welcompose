@@ -111,7 +111,7 @@ try {
 	
 	// textfield for host
 	$FORM->addElement('text', 'host', gettext('Host'), 
-		array('id' => 'ping_service_host', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_host', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('host', 'trim');
 	$FORM->applyFilter('host', 'strip_tags');
 	$FORM->addRule('host', gettext('Please enter a host name'), 'required');
@@ -119,7 +119,7 @@ try {
 	
 	// textfield for port
 	$FORM->addElement('text', 'port', gettext('Port'), 
-		array('id' => 'ping_service_port', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_port', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('port', 'trim');
 	$FORM->applyFilter('port', 'strip_tags');
 	$FORM->addRule('port', gettext('Please enter a port number'), 'required');
@@ -127,7 +127,7 @@ try {
 	
 	// textfield for path
 	$FORM->addElement('text', 'path', gettext('Path'), 
-		array('id' => 'ping_service_path', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_path', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('path', 'trim');
 	$FORM->applyFilter('path', 'strip_tags');
 	$FORM->addRule('path', gettext('Please enter a request path'), 'required');

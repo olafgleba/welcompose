@@ -117,7 +117,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');

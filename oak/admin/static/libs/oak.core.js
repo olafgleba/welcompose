@@ -167,6 +167,9 @@ Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
 Base.prototype.unsupportsEffects = Base_unsupportsEffects;
 Base.prototype.unsupportsElems = Base_unsupportsElems;
+Base.prototype.unsupportsElems = Base_unsupportsElems;
+Base.prototype.defineWindowX = Base_defineWindowX;
+Base.prototype.defineWindowY = Base_defineWindowY;
 
 
 /**
@@ -274,15 +277,20 @@ function Base_isNull(elem) {
  * Simply examine id IE is on air
  * @requires Base The Base Class
  */
-function Base_unsupportsEffects(exception) {
-	
-	this.browser = _setBrowserString();
-	this.exception = exception;
-	
-	if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
-		return true;
-	} else { 
-		return false;
+function Base_unsupportsEffects(exception)
+{	
+	try {
+		//properties
+		this.browser = _setBrowserString();
+		this.exception = exception;
+			
+		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
+			return true;
+		} else { 
+			return false;
+		}
+	} catch (e) {
+		_applyError(e);
 	}
 }
 
@@ -291,37 +299,116 @@ function Base_unsupportsEffects(exception) {
  * Simply examine id IE is on air
  * @requires Base The Base Class
  */
-function Base_unsupportsElems() {
-	
-	this.browser = _setBrowserString();
-
-	if (this.browser == "Internet Explorer") {
-		return true;
-	} else { 
-		return false;
+function Base_unsupportsElems()
+{	
+	try {
+		//properties
+		this.browser = _setBrowserString();
+		
+		if (this.browser == "Internet Explorer") {
+			return true;
+		} else { 
+			return false;
+		}
+	} catch (e) {
+		_applyError(e);
 	}
 }
 
-function _compare (string) {
-	var res = detect.indexOf(string) + 1;
-	return res;
+function _compare (string)
+{
+	try {
+		var res = detect.indexOf(string) + 1;
+		return res;
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
-function _setBrowserString () {
+function _setBrowserString ()
+{
+	try {			
+		detect = navigator.userAgent.toLowerCase();
+		var browser;
+
+		if (_compare('safari')) {
+			browser = 'Safari';
+		}
+		else if (_compare('msie')) {
+			browser = 'Internet Explorer';
+		}
+		else {
+			browser = 'Unknown Browser';
+		}
+		return browser;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Base
+ * Examine the giving var is empty
+ * @requires Base The Base Class
+ * @param {var} elem Actual element
+ * @return Boolean true or false
+ */
+function Base_defineWindowX (elemWidth)
+{
+	try {
+		//properties
+		this.el = elemWidth;
+		var x;
+		
+		if (self.innerHeight) {
+			// all except Explorer {
+			x = Math.round(self.innerWidth) - (Math.round(this.el));
+		}
+		else if (document.documentElement && document.documentElement.clientHeight) {
+			// Explorer 6 Strict Mode
+			x = Math.round(document.documentElement.clientWidth) - (Math.round(this.el));
+		}
+		else if (document.body) {
+			// other Explorers
+			x = Math.round(document.body.clientWidth) - (Math.round(this.el));
+		}
+		x = Math.round(x/2);
+		return x;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Base
+ * Examine the giving var is empty
+ * @requires Base The Base Class
+ * @param {var} elem Actual element
+ * @return Boolean true or false
+ */
+function Base_defineWindowY ()
+{
+	try {
+		//properties
+		var y;
 	
-	detect = navigator.userAgent.toLowerCase();
-	var browser;
-	
-	if (_compare('safari')) {
-		browser = 'Safari';
+		if (self.innerHeight) { 
+		// all except Explorer
+			y = Math.round(self.innerHeight/6);
+		}
+		else if (document.documentElement && document.documentElement.clientHeight) {
+			// Explorer 6 Strict Mode
+			y = Math.round(document.documentElement.clientHeight/6);
+		}
+		else if (document.body) {
+			// other Explorers
+			y = Math.round(document.body.clientHeight/6)																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				;
+		}
+		return y;
+	} catch (e) {
+		_applyError(e);
 	}
-	else if (_compare('msie')) {
-		browser = 'Internet Explorer';
-	}
-	else {
-		browser = 'Unknown Browser';
-	}
-	return browser;
 }
 
 

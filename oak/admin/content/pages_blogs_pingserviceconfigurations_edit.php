@@ -145,7 +145,7 @@ try {
 	
 	// textfield for site_url
 	$FORM->addElement('text', 'site_url', gettext('Weblog URL'),
-		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('site_url', 'trim');
 	$FORM->applyFilter('site_url', 'strip_tags');
 	$FORM->addRule('site_url', gettext('Please enter a site URL'), 'required');
@@ -153,7 +153,7 @@ try {
 	
 	// textfield for site_index
 	$FORM->addElement('text', 'site_index', gettext('Changes URL'),
-		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('site_index', 'trim');
 	$FORM->applyFilter('site_index', 'strip_tags');
 	$FORM->addRule('site_index', gettext('Please enter a home page URL'), 'required');
@@ -161,7 +161,7 @@ try {
 	
 	// textfield for site_feed
 	$FORM->addElement('text', 'site_feed', gettext('Feed URL'),
-		array('id' => 'ping_service_configuration_site_feed', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'ping_service_configuration_site_feed', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('site_feed', 'trim');
 	$FORM->applyFilter('site_feed', 'strip_tags');
 	$FORM->addRule('site_feed', gettext('Please enter a feed URL'), 'required');

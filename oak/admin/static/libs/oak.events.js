@@ -158,7 +158,7 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Mediamanager.uploadMedia();
+			Helper.launchPopup('740','604','../mediamanager/mediamanager_upload.php','upload');
 			return false;
 		}
 	},
@@ -174,7 +174,7 @@ var definitions = {
 			return false;
 		}
 	},
-	'.botbg input' : function(el){
+	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
 			return false;
@@ -183,19 +183,23 @@ var definitions = {
 			Forms.setOnEvent(this, '','#000','solid');
 			return false;
 		}
+	},
+	'textarea' : function(el){
+		el.onfocus = function(){
+			Forms.setOnEvent(this, '','#0c3','dotted');
+			return false;
+		}
+		el.onblur = function(){
+			Forms.setOnEvent(this, '','#000','solid');
+			return false;
+		}
+	},
+	'input.validate' : function(el){
 		el.onkeyup = function(){
 			validate(this);
 		}
 	},
-	'.botbg textarea' : function(el){
-		el.onfocus = function(){
-			Forms.setOnEvent(this, '','#0c3','dotted');
-			return false;
-		}
-		el.onblur = function(){
-			Forms.setOnEvent(this, '','#000','solid');
-			return false;
-		}
+	'textarea.validate' : function(el){
 		el.onkeyup = function(){
 			validate(this);
 		}
@@ -233,15 +237,9 @@ var definitions = {
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
-	'.submitAjaxForm200' : function(el){
+	'.cancel200' : function(el){
 		el.onclick = function(){
-			Mediamanager.submitAjaxForm(this);
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
-		}
-	},
-	'.hide200' : function(el){
-		el.onclick = function(){
-			Mediamanager.hideModal();
+			Helper.closePopup(this);
 			return false;
 		}
 	},

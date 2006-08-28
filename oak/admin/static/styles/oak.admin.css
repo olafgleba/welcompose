@@ -628,19 +628,6 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
 cursor: pointer;
 }
-input.submitAjaxForm200 {
-text-align: left;
-background: #666 url(../img/submit200.gif) no-repeat;
-color: #fff;
-width: 200px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
-margin: 20px  0 0 140px;
-cursor: pointer;
-}
 input.submit200bez260 {
 text-align: left;
 background: #666 url(../img/submit200.gif) no-repeat;
@@ -654,7 +641,7 @@ padding: 0 0 0 5px;
 margin: 20px  0 0 260px;
 cursor: pointer;
 }
-input.hide200 {
+input.cancel200 {
 text-align: left;
 background: #666 url(../img/submit200.gif) no-repeat;
 color: #fff;
@@ -974,20 +961,18 @@ display: none;
 
 
 /* %M =upload */
+body#mediamanager_modalWindow {
+padding: 0;
+margin: 0;
+}
 #mm_modalContainer {
-display: none;
-position: absolute;
-width: 740px;
-top: 400px;
-left: 120px;
-background: #fff;
-z-index: 2;
+text-align: left;
 }
 
 #mm_modalContainer h2 {
 background: #efefef;
-padding: 3px 8px;
-margin: 0 0 3px 0;
+padding: 8px 8px;
+margin: 0;
 border: 1px solid #ccc;
 }
 #mm_modalContainer h2 span {
@@ -996,8 +981,7 @@ color: #00AE2C;
 #mm_modalBody {
 padding: 3px 8px;
 min-height: 200px;
-border: 1px solid #ccc;
-background: #f9f9f9;
+background: #fff;
 z-index: 2;
 }
 
@@ -1010,7 +994,7 @@ left: 0;
 z-index: 1;
 }
 #lyLowerOpacity img{
-opacity: 0.9;
+opacity: 0.7;
 }
 
 

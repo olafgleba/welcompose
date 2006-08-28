@@ -62,19 +62,9 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
-Mediamanager.prototype.hideModal = Mediamanager_hideModal;
-Mediamanager.prototype.setHide = Mediamanager_setHide;
 
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
-
-Mediamanager.prototype.uploadMedia = Mediamanager_uploadMedia;
-Mediamanager.prototype.processUploadMedia = Mediamanager_processUploadMedia;
-
-Mediamanager.prototype.lowerOpacity = Mediamanager_lowerOpacity;
-
-Mediamanager.prototype.submitAjaxForm = Mediamanager_submitAjaxForm;
-Mediamanager.prototype.checkSubmittedFormElems = Mediamanager_checkSubmittedFormElems;
 
 
 /**
@@ -226,50 +216,6 @@ function Mediamanager_showElement (elem)
 	}
 }
 
-
-/**
- * Implements method of prototype class Mediamanager
- *
- * @throws applyError on exception
- */
-function Mediamanager_setHide (elem)
-{
-	try {
-		// properties
-		this.elem = elem;
-		
-		Element.hide($(this.elem));
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- *
- * @throws applyError on exception
- */
-function Mediamanager_hideModal ()
-{
-	try {
-		// properties		
-		this.modalWindow = $('mm_modalContainer');
-		this.lyLowerOpacity = 'lyLowerOpacity';
-		
-		if (Mediamanager.unsupportsEffects()) {
-			Element.hide(this.modalWindow);
-		} else {
-			Effect.Fade(this.modalWindow,{duration: 0.7});
-		}
-
-		setTimeout("Mediamanager.setHide('"+ this.lyLowerOpacity +"')", 900);
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
 /**
  * Implements method of prototype class Mediamanager
  * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
@@ -365,160 +311,6 @@ function Mediamanager_checkMyLocalElems ()
 		_applyError(e);
 	}
 }
-
-
-
-
-function Mediamanager_uploadMedia ()
-{
-	try {
-		// properties
-		this.url = '../mediamanager/mediamanager_upload.php';
-		this.ttarget = $('mm_modalContainer');
-		
-		Mediamanager.lowerOpacity();
-		
-		if (typeof this.req != 'undefined') {
-		
-			var _url		= this.url;
-			var _ttarget	= this.ttarget;
-		
-			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Mediamanager.processUploadMedia(_url,_ttarget);};
-			_req.send('');
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-
-function Mediamanager_processUploadMedia (url, ttarget)
-{  
-	try {
-		if (_req.readyState == 4) {
-			if (_req.status == 200) {				
-				Element.update (ttarget, _req.responseText);
-				if (Mediamanager.unsupportsEffects('safari')) {
-					Element.show(ttarget);
-				} else {
-					Element.hide(this.ttarget);
-					Effect.Appear(this.ttarget,{duration: 0.7});
-				}
-				Behaviour.apply();
-			} else {
-	  			throw new DevError(_req.statusText);
-			}
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-function Mediamanager_lowerOpacity ()
-{       
-	try {
- 		// properties
-        this.cLeft = '0px';
-        this.cTop = '0px';
-        this.cPosition = 'absolute';
-        this.cDisplay = 'block';
-        this.imagePath = '../static/img/bg_overlay.png';
-		this.lyContainer = $("container");   
-        this.buildHeight = this.lyContainer.offsetHeight;
-        this.buildWidth = this.lyContainer.offsetWidth;
-		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
-		this.ttarget_lower = $('lyLowerOpacity');
-
-        if (this.ttarget_lower) {
-
-		 	this.ttarget_lower.style.display = this.cDisplay;
-			this.ttarget_lower.style.position = this.cPosition;
-			this.ttarget_lower.style.top = this.cTop;
-			this.ttarget_lower.style.left = this.cLeft;
-			this.ttarget_lower.style.height = this.buildHeight + 'px';
-			this.ttarget_lower.style.width = this.buildWidth + 'px';
-			
-			Element.update(this.ttarget_lower, this.imageStr);
-        }
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-
-
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_submitAjaxForm ()
-{
-	try {
-		var elems = Mediamanager.checkSubmittedFormElems();
-		var url = '../mediamanager/mediamanager_upload.php';
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'post',
-				postBody : pars,
-				onComplete : showResponseSubmitAjaxForm
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function showResponseSubmitAjaxForm(req)
-{
-	try {
-		// was gefüllt soll, ist noch offen, abhängig vom processing
-		$('mm_modalContainer').innerHTML = req.responseText;
-		Behaviour.apply();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_checkSubmittedFormElems ()
-{
-	try {
-		var getElems = {
-			types : $F('types'),
-			file : $F('file'),
-			description : $F('description'),
-			tags : $F('tags')
-		};
-	
-		var o = $H(getElems);
-		return o.toQueryString();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
 
 /**
  * Building new instance for @class Mediamananager
