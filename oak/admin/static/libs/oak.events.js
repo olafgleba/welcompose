@@ -180,7 +180,9 @@ var definitions = {
 			return false;
 		}
 		el.onblur = function(){
-			Forms.setOnEvent(this, '','#000','solid');
+			if (this.type != 'reset' && this.type != 'submit') {
+				Forms.setOnEvent(this, '','#000','solid');
+			}
 			return false;
 		}
 	},
