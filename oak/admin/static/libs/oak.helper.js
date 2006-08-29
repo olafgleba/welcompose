@@ -3,7 +3,7 @@
  * @class This is the basic Helper class for miscellaneous methods
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
+ * @see Helper Helper is the base class for this
  */
 function Helper ()
 {
@@ -15,7 +15,7 @@ function Helper ()
 	}
 }
 
-/* Inherit from Base */
+/* Inherit from Helper */
 Helper.prototype = new Base();
 
 
@@ -25,6 +25,10 @@ Helper.prototype = new Base();
 Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.lowerOpacity = Helper_lowerOpacity;
+Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
+Helper.prototype.unsupportsElems = Helper_unsupportsElems;
+Helper.prototype.defineWindowX = Helper_defineWindowX;
+Helper.prototype.defineWindowY = Helper_defineWindowY;
 
 
 
@@ -40,8 +44,8 @@ function Helper_launchPopup (width, height, url, name)
 		this.ttargetHeight = height;
 		this.ttarget = window.open(this.ttargetUrl, this.ttargetName, 
 				"scrollbars=yes,width="+this.ttargetWidth+",height="+this.ttargetHeight+"");
-		this.resWidth = Mediamanager.defineWindowX(this.ttargetWidth);
-		this.resHeight = Mediamanager.defineWindowY();
+		this.resWidth = Helper.defineWindowX(this.ttargetWidth);
+		this.resHeight = Helper.defineWindowY();
 		
 		this.ttarget.moveBy(this.resWidth, this.resHeight);
 		this.ttarget.focus();
@@ -88,6 +92,158 @@ function Helper_lowerOpacity ()
 			
 			Element.update(this.ttarget_lower, this.imageStr);
         }
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @requires Helper The Helper Class
+ */
+function Helper_unsupportsEffects(exception)
+{	
+	try {
+		//properties
+		this.browser = _setBrowserString();
+		this.exception = exception;
+			
+		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
+			return true;
+		} else { 
+			return false;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @requires Helper The Helper Class
+ */
+function Helper_unsupportsElems()
+{	
+	try {
+		//properties
+		this.browser = _setBrowserString();
+		
+		if (this.browser == "Internet Explorer") {
+			return true;
+		} else { 
+			return false;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @private
+ * @requires Helper The Helper Class
+ */
+function _compare (string)
+{
+	try {
+		var res = detect.indexOf(string) + 1;
+		return res;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @private
+ * @requires Helper The Helper Class
+ */
+function _setBrowserString ()
+{
+	try {			
+		detect = navigator.userAgent.toLowerCase();
+		var browser;
+
+		if (_compare('safari')) {
+			browser = 'Safari';
+		}
+		else if (_compare('msie')) {
+			browser = 'Internet Explorer';
+		}
+		else {
+			browser = 'Unknown Browser';
+		}
+		return browser;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Helper
+ * Examine the giving var is empty
+ * @requires Helper The Helper Class
+ * @param {var} elem Actual element
+ * @return Boolean true or false
+ */
+function Helper_defineWindowX (elemWidth)
+{
+	try {
+		//properties
+		this.el = elemWidth;
+		var x;
+		
+		if (self.innerHeight) {
+			// all except Explorer {
+			x = Math.round(self.innerWidth) - (Math.round(this.el));
+		}
+		else if (document.documentElement && document.documentElement.clientHeight) {
+			// Explorer 6 Strict Mode
+			x = Math.round(document.documentElement.clientWidth) - (Math.round(this.el));
+		}
+		else if (document.body) {
+			// other Explorers
+			x = Math.round(document.body.clientWidth) - (Math.round(this.el));
+		}
+		x = Math.round(x/2);
+		return x;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Examine the giving var is empty
+ * @requires Helper The Helper Class
+ * @param {var} elem Actual element
+ * @return Boolean true or false
+ */
+function Helper_defineWindowY ()
+{
+	try {
+		//properties
+		var y;
+	
+		if (self.innerHeight) { 
+		// all except Explorer
+			y = Math.round(self.innerHeight/6);
+		}
+		else if (document.documentElement && document.documentElement.clientHeight) {
+			// Explorer 6 Strict Mode
+			y = Math.round(document.documentElement.clientHeight/6);
+		}
+		else if (document.body) {
+			// other Explorers
+			y = Math.round(document.body.clientHeight/6)																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				;
+		}
+		return y;
 	} catch (e) {
 		_applyError(e);
 	}

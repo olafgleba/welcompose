@@ -165,11 +165,6 @@ Base.prototype.isUndefined = Base_isUndefined;
 Base.prototype.isNumber = Base_isNumber;
 Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
-Base.prototype.unsupportsEffects = Base_unsupportsEffects;
-Base.prototype.unsupportsElems = Base_unsupportsElems;
-Base.prototype.unsupportsElems = Base_unsupportsElems;
-Base.prototype.defineWindowX = Base_defineWindowX;
-Base.prototype.defineWindowY = Base_defineWindowY;
 
 
 /**
@@ -270,145 +265,6 @@ function Base_isEmpty(elem) {
  */
 function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
-}
-
-/**
- * Implements method of prototype class Base
- * Simply examine id IE is on air
- * @requires Base The Base Class
- */
-function Base_unsupportsEffects(exception)
-{	
-	try {
-		//properties
-		this.browser = _setBrowserString();
-		this.exception = exception;
-			
-		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
-			return true;
-		} else { 
-			return false;
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Base
- * Simply examine id IE is on air
- * @requires Base The Base Class
- */
-function Base_unsupportsElems()
-{	
-	try {
-		//properties
-		this.browser = _setBrowserString();
-		
-		if (this.browser == "Internet Explorer") {
-			return true;
-		} else { 
-			return false;
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-function _compare (string)
-{
-	try {
-		var res = detect.indexOf(string) + 1;
-		return res;
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-function _setBrowserString ()
-{
-	try {			
-		detect = navigator.userAgent.toLowerCase();
-		var browser;
-
-		if (_compare('safari')) {
-			browser = 'Safari';
-		}
-		else if (_compare('msie')) {
-			browser = 'Internet Explorer';
-		}
-		else {
-			browser = 'Unknown Browser';
-		}
-		return browser;
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-/**
- * Implements method of prototype class Base
- * Examine the giving var is empty
- * @requires Base The Base Class
- * @param {var} elem Actual element
- * @return Boolean true or false
- */
-function Base_defineWindowX (elemWidth)
-{
-	try {
-		//properties
-		this.el = elemWidth;
-		var x;
-		
-		if (self.innerHeight) {
-			// all except Explorer {
-			x = Math.round(self.innerWidth) - (Math.round(this.el));
-		}
-		else if (document.documentElement && document.documentElement.clientHeight) {
-			// Explorer 6 Strict Mode
-			x = Math.round(document.documentElement.clientWidth) - (Math.round(this.el));
-		}
-		else if (document.body) {
-			// other Explorers
-			x = Math.round(document.body.clientWidth) - (Math.round(this.el));
-		}
-		x = Math.round(x/2);
-		return x;
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Base
- * Examine the giving var is empty
- * @requires Base The Base Class
- * @param {var} elem Actual element
- * @return Boolean true or false
- */
-function Base_defineWindowY ()
-{
-	try {
-		//properties
-		var y;
-	
-		if (self.innerHeight) { 
-		// all except Explorer
-			y = Math.round(self.innerHeight/6);
-		}
-		else if (document.documentElement && document.documentElement.clientHeight) {
-			// Explorer 6 Strict Mode
-			y = Math.round(document.documentElement.clientHeight/6);
-		}
-		else if (document.body) {
-			// other Explorers
-			y = Math.round(document.body.clientHeight/6)																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				;
-		}
-		return y;
-	} catch (e) {
-		_applyError(e);
-	}
 }
 
 
@@ -651,7 +507,7 @@ function Help_hide (elem, level)
 			default :
 					this.elem.className = this.helpClass;	
 		}
-		if (Help.unsupportsEffects('safari_exception')) {
+		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.processIdAfter);
 		} else {
 			Effect.Fade(this.processIdAfter,{duration: 0.7});
@@ -679,7 +535,7 @@ function Help_process (url, ttarget)
 			if (_req.status == 200) {
 				new Insertion.After($(ttarget).parentNode, _req.responseText);				
 				var ttarget_after = $(ttarget).parentNode.nextSibling;
-				if (Help.unsupportsEffects('safari_exception')) {
+				if (Helper.unsupportsEffects('safari_exception')) {
 					Element.show(ttarget_after);
 				} else {
 					Element.hide(ttarget_after);
@@ -732,7 +588,7 @@ function Help_showMediamanager (elem)
 			_req.onreadystatechange = function () { Help.processMediamanager(_url,_ttarget);};
 			_req.send('');
 		}
-		if (Help.unsupportsEffects()) {
+		if (Helper.unsupportsEffects()) {
 			Element.hide(this.toHide);
 		} else {
 			Effect.Fade(this.toHide,{duration: 0.7});
@@ -766,7 +622,7 @@ function Help_hideMediamanager (elem)
 		this.toShow = gMediamanagerLayer;
 		this.elem.className = this.helpClassMediamanager;
 	
-		if (Help.unsupportsEffects()) {
+		if (Helper.unsupportsEffects()) {
 			Element.hide(this.toHide);
 			Element.show(this.toShow);
 		} else {
@@ -801,7 +657,7 @@ function Help_processMediamanager (url, ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
 				Element.update (ttarget, _req.responseText);
-				if (Help.unsupportsEffects()) {
+				if (Helper.unsupportsEffects()) {
 					Element.show(ttarget);
 				} else {
 					Element.hide(this.ttarget);
@@ -1033,14 +889,14 @@ function Status_getCbx (elems)
 								allNodes[i].style.color = this.applicationTextColor;
 							}
 						}
-						if (Status.unsupportsEffects('safari_exception')) {
+						if (Helper.unsupportsEffects('safari_exception')) {
 							Element.show($(range));
 						} else {
 							Element.hide($(range));
 							Effect.Appear($(range),{duration: 0.6});
 						}
 					} else {
-						if (Status.unsupportsEffects('safari_exception')) {
+						if (Helper.unsupportsEffects('safari_exception')) {
 							Element.hide($(range));
 						} else {
 							Effect.Fade($(range),{duration: 0.6});
@@ -1121,7 +977,7 @@ function Tables_hideRow (elem)
 		this.ibid = String('i_' + this.bid[1]);
 	
 		// process inner div
-		if (Tables.unsupportsEffects('safari_exception')) {
+		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.ibid);
 		} else {
 			Effect.Fade(this.ibid,{duration: 0.8});
@@ -1156,7 +1012,7 @@ function Tables_showRow (elem)
 		$(this.obid).style.visibility = 'visible';
 		
 		// process inner div
-		if (Tables.unsupportsEffects('safari_exception')) {
+		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.show(this.ibid);
 		} else {
 			Element.hide(this.ibid);

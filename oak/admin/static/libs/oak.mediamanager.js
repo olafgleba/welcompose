@@ -233,7 +233,7 @@ function Mediamanager_switchLayer (toShow, toHide)
 	
 		Element.hide(this.toHide);
 
-		if (Mediamanager.unsupportsEffects()) {
+		if (Helper.unsupportsEffects()) {
 			Element.show(this.toShow);
 		} else {
 			Effect.Appear(this.toShow,{duration: 0.4});
