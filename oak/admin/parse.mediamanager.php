@@ -39,6 +39,10 @@ require($loader_path);
 /* @var $BASE base */
 $BASE = load('base:base');
 
+// load helper class
+/* @var $HELPER Utility_Helper */
+$HELPER = load('utility:helper');
+
 // deregister globals
 $deregister_globals_path = dirname(__FILE__).'/../core/includes/deregister_globals.inc.php';
 require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
@@ -58,6 +62,9 @@ try {
 	
 	// get page name
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
+	
+	// get and assign timeframes
+	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
 	
 	// display the correlated mediamanager template
 	$BASE->utility->smarty->display('mediamanager/'.$page.'.html');

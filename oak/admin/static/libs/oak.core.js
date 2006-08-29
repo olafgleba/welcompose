@@ -149,6 +149,11 @@ function Base ()
 		 */
 		this.parseNavUrl = '../parse.navigation.php';
 		
+		/**
+		 * Path for XHMLHTTPRequest imported files
+		 */
+		this.parseMedUrl = '../parse.mediamanager.php';
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -279,7 +284,10 @@ function Base_isNull(elem) {
 function OakInit ()
 {
 	try {
-
+		/**
+		 * Get new XMLHttpRequest Object by private function
+		 */
+		this.req = _buildXMLHTTPRequest();
 		
 	} catch (e) {
 		_applyError(e);
@@ -295,7 +303,7 @@ OakInit.prototype = new Base();
 OakInit.prototype.load = OakInit_load;
 OakInit.prototype.getVars = OakInit_getVars;
 OakInit.prototype.getCbxStatus = OakInit_getCbxStatus;
-
+OakInit.prototype.processOakInit = OakInit_processOakInit;
 
 /**
  * Implements method of prototype class OakInit
@@ -329,7 +337,7 @@ function OakInit_getVars ()
 {
 	try {
 		if (typeof response != 'undefined' && $('rp')) {
-			if (response == 1 || response == 2) {
+			if (response == 1) {
 				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0});
 			}
 		}
@@ -337,6 +345,22 @@ function OakInit_getVars ()
 			if (selection == 1) {
 				return new Effect.Fade('sel', {duration: 0.8, delay: 2.0});
 			}
+		}
+	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
+			if (mediamanager == 1) {
+				this.url = this.parseMedUrl + '?page=mediamanager';
+				if (typeof this.req != 'undefined') {
+		
+					var _url		= this.url;
+					var _ttarget	= 'column';
+		
+					_req.open('GET', _url, true);
+					_req.onreadystatechange = function () { OakInit.processOakInit(_ttarget);};
+					_req.send('');
+				}
+				//return new Effect.Fade('sel', {duration: 0.8, delay: 2.0});
+			}
+		//alert ('jo');
 		}
 	} catch (e) {
 		_applyError(e);
@@ -380,6 +404,31 @@ function OakInit_getCbxStatus (elems)
 }
 
 /**
+ * Implements method of prototype class Help
+ * Get and display the html help files
+ *
+ * @param {string} url path
+ * @param {string} target Wich layer div should be used
+ * @throws applyError on exception
+ * @throws DevError on condition
+ */
+function OakInit_processOakInit (ttarget)
+{  
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {
+				Element.update(ttarget, _req.responseText);
+				Behaviour.apply();
+			} else {
+	  			throw new DevError(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
  * Building new instance for class Help
  */
 OakInit = new OakInit();
@@ -413,7 +462,7 @@ Help.prototype = new Base();
  */
 Help.prototype.show = Help_show;
 Help.prototype.hide = Help_hide;
-Help.prototype.process = Help_process;
+Help.prototype.processHelp = Help_processHelp;
 Help.prototype.showMediamanager = Help_showMediamanager;
 Help.prototype.hideMediamanager = Help_hideMediamanager;
 Help.prototype.processMediamanager = Help_processMediamanager;
@@ -467,7 +516,7 @@ function Help_show (elem, level)
 			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Help.process(_url,_ttarget);};
+			_req.onreadystatechange = function () { Help.processHelp(_ttarget);};
 			_req.send('');
 		}
 		
@@ -523,12 +572,11 @@ function Help_hide (elem, level)
  * Implements method of prototype class Help
  * Get and display the html help files
  *
- * @param {string} url path
  * @param {string} target Wich layer div should be used
  * @throws applyError on exception
  * @throws DevError on condition
  */
-function Help_process (url, ttarget)
+function Help_processHelp (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
@@ -585,7 +633,7 @@ function Help_showMediamanager (elem)
 			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Help.processMediamanager(_url,_ttarget);};
+			_req.onreadystatechange = function () { Help.processMediamanager(_ttarget);};
 			_req.send('');
 		}
 		if (Helper.unsupportsEffects()) {
@@ -651,7 +699,7 @@ function Help_hideMediamanager (elem)
  * @throws applyError on exception
  * @throws DevError on condition
  */
-function Help_processMediamanager (url, ttarget)
+function Help_processMediamanager (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
@@ -745,7 +793,7 @@ function Navigation_show (name, level)
 			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Navigation.process(_url,_ttarget);};
+			_req.onreadystatechange = function () { Navigation.process(_ttarget);};
 			_req.send('');
 		}
 	} catch (e) {
@@ -755,12 +803,11 @@ function Navigation_show (name, level)
 
 /**
  * Implements method of prototype class Navigation
- * @param {string} url path
  * @param {string} target Wich layer div should be used
  * @throws applyError on exception
  * @throws DevError on condition
  */
- function Navigation_process (url, ttarget)
+ function Navigation_process (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
