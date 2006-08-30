@@ -407,6 +407,11 @@ public function countGlobalFiles ($params = array())
  */
 public function moveGlobalFileToStore ($name, $path)
 {
+	// access check
+	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($name) || !is_scalar($name)) {
 		throw new Templating_GlobalFileException("Input for parameter name is expected to be a non-empty scalar value");
@@ -441,6 +446,11 @@ public function moveGlobalFileToStore ($name, $path)
  */
 public function removeGlobalFileFromStore ($global_file)
 {
+	// access check
+	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($global_file) || !is_numeric($global_file)) {
 		throw new Templating_GlobalFileException("Input for parameter global_file is expected to be numeric");
