@@ -152,7 +152,7 @@ function Base ()
 		/**
 		 * Path for XHMLHTTPRequest imported files
 		 */
-		this.parseMedUrl = '../parse.mediamanager.php';
+		this.parseMedUrl = '../mediamanager/parse.mediamanager.php';
 		
 	} catch (e) {
 		_applyError(e);
@@ -522,7 +522,7 @@ function Help_show (elem, level)
 		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-		Behaviour.apply();
+		//Behaviour.apply();
 		
 	} catch (e) {
 		_applyError(e);
@@ -556,13 +556,13 @@ function Help_hide (elem, level)
 			default :
 					this.elem.className = this.helpClass;	
 		}
-		if (Helper.unsupportsEffects('safari_exception')) {
+	//	if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.processIdAfter);
-		} else {
+		/*} else {
 			Effect.Fade(this.processIdAfter,{duration: 0.7});
-		}
+		}*/
 		Element.update(this.elem, this.helpHtmlShow);
-		Behaviour.apply();	
+		//Behaviour.apply();	
 	} catch (e) {
 		_applyError(e);
 	}
