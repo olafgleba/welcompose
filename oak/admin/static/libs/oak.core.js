@@ -152,7 +152,7 @@ function Base ()
 		/**
 		 * Path for XHMLHTTPRequest imported files
 		 */
-		this.parseMedUrl = '../mediamanager/parse.mediamanager.php';
+		this.parseMedUrl = '../mediamanager/mediamanager.php';
 		
 	} catch (e) {
 		_applyError(e);
