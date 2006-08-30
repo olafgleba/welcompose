@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 28.08.2006 13:58:52
--- Diagram Version: 127
+-- Created on: 30.08.2006 16:17:18
+-- Diagram Version: 128
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -89,9 +89,9 @@ CREATE TABLE `media_objects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `project` int(11) UNSIGNED NOT NULL,
   `type` enum('image','document','audio','video','other') NOT NULL,
-  `name` varchar(255),
   `description` text,
   `tags` text,
+  `file_name` varchar(255),
   `file_name_on_disk` varchar(255),
   `file_mime_type` varchar(255),
   `file_width` int(11) UNSIGNED,

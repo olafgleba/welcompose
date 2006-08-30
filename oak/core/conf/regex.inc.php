@@ -163,4 +163,8 @@ define("OAK_REGEX_PHONE_NUMBER", "=^([0-9-\/\(\)+\s]+)$=i");
 // internal anti spam plugin name
 define("OAK_REGEX_ANTI_SPAM_PLUGIN_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$=i");
 
+// Defines regular expression for strings containing a
+// hex number
+define("OAK_REGEX_HEX", "=^([a-f0-9]+)$=i");
+
 ?>
