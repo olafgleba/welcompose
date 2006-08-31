@@ -255,7 +255,7 @@ function Mediamanager_invokeInputs ()
 {
 	try {
 		var elems = Mediamanager.checkMyLocalElems();
-		var url = '../mediamanager.ajax.php';
+		var url = '../mediamanager/mediamanager.php';
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
