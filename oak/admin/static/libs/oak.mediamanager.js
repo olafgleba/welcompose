@@ -280,7 +280,8 @@ function Mediamanager_invokeInputs ()
 function showResponseInvokeInputs(req)
 {
 	try {
-		$('myLocal_mm_contentToPopulate').innerHTML = req.responseText;
+		$('column').innerHTML = req.responseText;
+		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
 	}
