@@ -40,10 +40,6 @@ require($loader_path);
 /* @var $BASE base */
 $BASE = load('base:base');
 
-// load helper class
-/* @var $HELPER Utility_Helper */
-$HELPER = load('utility:helper');
-
 // deregister globals
 $deregister_globals_path = dirname(__FILE__).'/../../core/includes/deregister_globals.inc.php';
 require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
@@ -51,15 +47,42 @@ require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
 try {
 	// start output buffering
 	@ob_start();
-	
+
 	// load smarty
 	$smarty_admin_conf = dirname(__FILE__).'/../../core/conf/smarty_admin.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
-	
+
 	// load gettext
 	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
+
+	// load Base_Session
+	$SESSION = load('Base:Session');
+
+	// load User_User
+	$USER = load('User:User');
+
+	// load User_Login
+	/* @var $LOGIN User_Login */
+	$LOGIN = load('User:Login');
+
+	// load Application_Project
+	$PROJECT = load('Application:Project');
+	
+	// load Media_Object
+	$OBJECT = load('Media:Object');
+	
+	// load Utility_Helper
+	$HELPER = load('Utility:Helper');
+	
+	// init user and project
+	if (!$LOGIN->loggedIntoAdmin()) {
+		header("Location: ../login.php");
+		exit;
+	}
+	$USER->initUserAdmin();
+	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// get page name
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
@@ -67,8 +90,36 @@ try {
 	// get and assign timeframes
 	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
 	
+	// prepare select params
+	$select_params = array(
+		'documents' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
+		'images' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
+		'podcasts' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_cast'], OAK_REGEX_ZERO_OR_ONE),
+		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
+		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
+		'limit' => 5
+		//'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
+	);
+	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
+	
+	// assign request params
+	$request = array(
+		'documents' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
+		'images' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
+		'podcasts' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_cast'], OAK_REGEX_ZERO_OR_ONE),
+		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
+		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
+	);
+	$BASE->utility->smarty->assign('request', $request);
+	
+	// assign image path
+	$BASE->utility->smarty->assign('image_store_www', $BASE->_conf['image']['store_www']);
+	
 	// display the correlated mediamanager template
-	$BASE->utility->smarty->display('mediamanager/'.$page.'.html');
+	$BASE->utility->smarty->display('mediamanager/mediamanager.html');
 		
 	// flush the buffer
 	@ob_end_flush();

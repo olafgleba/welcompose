@@ -61,42 +61,18 @@
 
 <!-- mediamanager content populate -->
 <div id="myLocal_mm_contentToPopulate">
+{php} echo date('r'); {/php}
+
 <table class="mm_content">
+{foreach from=$objects item=_object}
 <tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="../static/img/icons/help.gif" alt="" width="40" height="40" /></a></td>
-<td class="mm_meta">Titel des Dokuments</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Treat as Podcast}"></a></td>
+<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a></td>
+<td class="mm_meta">{$_object.file_name|truncate:30|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
+<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Use for podcast}"></a></td>
 <td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
 <td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
 </tr>
-<tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="../static/img/icons/help.gif" alt="" width="40" height="40" /></a></td>
-<td class="mm_meta">Titel des Dokuments</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Treat as Podcast}"></a></td>
-<td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
-<td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
-</tr>
-<tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="../static/img/icons/help.gif" alt="" width="40" height="40" /></a></td>
-<td class="mm_meta">Titel des Dokuments</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Treat as Podcast}"></a></td>
-<td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
-<td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
-</tr>
-<tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="../static/img/icons/help.gif" alt="" width="40" height="40" /></a></td>
-<td class="mm_meta">Titel des Dokuments</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Treat as Podcast}"></a></td>
-<td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
-<td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
-</tr>
-<tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="../static/img/icons/help.gif" alt="" width="40" height="40" /></a></td>
-<td class="mm_meta">Titel des Dokuments</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Treat as Podcast}"></a></td>
-<td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
-<td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
-</tr>
+{/foreach}
 </table>
 </div>
 <!-- mediamanager content populate eof -->
@@ -111,8 +87,6 @@ Page <a href="#">1 of 10</a>
 
 </div>
 <!-- mediamanager container (myLocal) eof -->
-
-
 
 <!-- mediamanager container (myFlickr) -->
 <div id="lyMediamanagerMyFlickr">

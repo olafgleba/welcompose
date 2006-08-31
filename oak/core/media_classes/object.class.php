@@ -189,9 +189,9 @@ public function selectObject ($id)
 			`media_objects`.`id` AS `id`,
 			`media_objects`.`project` AS `project`,
 			`media_objects`.`type` AS `type`,
-			`media_objects`.`name` AS `name`,
 			`media_objects`.`description` AS `description`,
 			`media_objects`.`tags` AS `tags`,
+			`media_objects`.`file_name` AS `file_name`,
 			`media_objects`.`file_name_on_disk` AS `file_name_on_disk`,
 			`media_objects`.`file_width` AS `file_width`,
 			`media_objects`.`file_height` AS `file_height`,
@@ -299,15 +299,18 @@ public function selectObjects ($params = array())
 		'DATE_MODIFIED' => '`media_objects`.`date_modified`'
 	);
 	
+	// load Utility_Helper
+	$HELPER = load('Utility:Helper');
+	
 	// prepare query
 	$sql = "
-		SELECT DISTINCT
+		SELECT
 			`media_objects`.`id` AS `id`,
 			`media_objects`.`project` AS `project`,
 			`media_objects`.`type` AS `type`,
-			`media_objects`.`name` AS `name`,
 			`media_objects`.`description` AS `description`,
 			`media_objects`.`tags` AS `tags`,
+			`media_objects`.`file_name` AS `file_name`,
 			`media_objects`.`file_name_on_disk` AS `file_name_on_disk`,
 			`media_objects`.`file_width` AS `file_width`,
 			`media_objects`.`file_height` AS `file_height`,
@@ -332,14 +335,28 @@ public function selectObjects ($params = array())
 		  ON
 			`media_objects2media_tags`.`tag` = `media_tags`.`id`
 		WHERE
-			1
+			`media_objects`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($timeframe)) {
+		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`media_objects`.`date_added`',
+			$timeframe);
+	}
 	
 	// add sorting
 	if (!empty($order_macro)) {
 		$HELPER = load('utility:helper');
 		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
 	}
+	
+	// aggregate result set
+	$sql .= " GROUP BY `media_objects`.`id` ";
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {

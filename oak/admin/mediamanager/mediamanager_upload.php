@@ -198,7 +198,7 @@ try {
 			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
 			
 			// create thumbnail
-			$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 200, 200, true, 'ffffff');
+			$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 40, 40, true, 'ffffff');
 			
 			// if the file on disk is an image, get the image size
 			list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
@@ -226,13 +226,19 @@ try {
 			$HELPER = load('utility:helper');
 			$HELPER->testSqlDataForPearErrors($sqlData);
 			
+			// load tag class
+			$TAG = load('Media:Tag');
+			
 			// insert it
 			try {
 				// begin transaction
 				$BASE->db->begin();
 				
 				// insert row into database
-				$OBJECT->addObject($sqlData);
+				$object = $OBJECT->addObject($sqlData);
+				
+				// insert tags
+				$TAG->addTags($object, $TAG->_tagStringToArray($FORM->exportValue('tags')));
 				
 				// commit
 				$BASE->db->commit();

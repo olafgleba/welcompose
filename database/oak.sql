@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 30.08.2006 16:17:18
--- Diagram Version: 128
+-- Created on: 31.08.2006 17:02:23
+-- Diagram Version: 130
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -42,15 +42,6 @@ CREATE TABLE `application_info` (
 )
 TYPE=INNODB;
 
-CREATE TABLE `media_tags` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_char` char(1),
-  `word` varchar(255),
-  `occurrences` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`)
-)
-TYPE=INNODB;
-
 CREATE TABLE `application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `owner` int(11) UNSIGNED NOT NULL,
@@ -65,6 +56,22 @@ CREATE TABLE `application_projects` (
   INDEX `default`(`default`),
   CONSTRAINT `application_projects.owner2user_users.id` FOREIGN KEY (`owner`)
     REFERENCES `user_users`(`id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
+TYPE=INNODB;
+
+CREATE TABLE `media_tags` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `first_char` char(1),
+  `word` varchar(255),
+  `word_url` varchar(255),
+  `occurrences` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `media_tags.project2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 )
