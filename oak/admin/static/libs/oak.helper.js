@@ -49,9 +49,21 @@ function Helper_launchPopup (width, height, url, name)
 		
 		this.ttarget.moveBy(this.resWidth, this.resHeight);
 		this.ttarget.focus();
+		
+		//this.spitout = _wname(this.ttargetName);
+
+	//	alert(_observedPopup);
+		
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+
+function _wname (win)
+{
+	_name = win;
+	return _name;
 }
 
 

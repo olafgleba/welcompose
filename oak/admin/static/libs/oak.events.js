@@ -158,7 +158,7 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','604','../mediamanager/mediamanager_upload.php','upload');
+			Helper.launchPopup('740','604','../mediamanager/mediamanager_upload.php','media_upload');
 			return false;
 		}
 	},

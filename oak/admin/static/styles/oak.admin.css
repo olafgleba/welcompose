@@ -808,7 +808,7 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 #column {
 float: right;
 width: 236px;
-height: 750px;
+height: 752px;
 padding: 96px 0 0 0;
 background: transparent;
 overflow: hidden;
@@ -911,24 +911,25 @@ margin-bottom: 3px;
 }
 #myLocal_mm_content, #myFlickr_mm_content {
 display: block;
-height: 364px;
+height: 365px;
 font-size: 80%;
 background: #f9f9f9;
-padding: 3px 5px;
+padding: 2px 2px;
 margin-bottom: 3px;
 }
 #myLocal_mm_contentToPopulate, #myFlickr_mm_contentToPopulate {
 display: block;
-height: 355px;
+height: 362px;
 background: #fff;
 border: 1px solid #ebebeb;
-padding: 3px 5px;
+padding: 0;
+overflow: auto;
 }
 .mm_pager {
 display: block;
 background: #f9f9f9;
 font-size: 80%;
-padding: 2px 5px 5px 5px;
+padding: 4px 5px 4px 5px;
 }
 
 #mm_include_types_wrap {
@@ -957,6 +958,29 @@ display: block;
 }
 #lyMediamanagerMyFlickr {
 display: none;
+}
+
+
+#myLocal_mm_contentToPopulate table {
+margin: 4px 4px;
+}
+#myLocal_mm_contentToPopulate td {
+padding: 2px 0 4px 0;
+}
+.mm_media {
+width: 50px;
+}
+.mm_meta {
+width: 90px;
+}
+.mm_casts {
+width: 30px;
+}
+.mm_edit {
+width: 30px;
+}
+.mm_del {
+width: 30px;
 }
 
 

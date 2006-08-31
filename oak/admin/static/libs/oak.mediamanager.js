@@ -90,39 +90,39 @@ function _checkOccurrences (elems, exception)
 		var res = elems.match(/block/gi);	
 	
 		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mm_content', {height: '385px'});
-			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '376px'});
+			Element.setStyle(prefix + 'mm_content', {height: '386px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '383px'});
 		} else {
 			switch (res.length) {
 				case 1 :
 						if (exception) {
-							var cHeight = '344px';
-							var pHeight = '335px';
+							var cHeight = '345px';
+							var pHeight = '342px';
 						} else {
-							var cHeight = '364px';
-							var pHeight = '355px';
+							var cHeight = '365px';
+							var pHeight = '362px';
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 2 :
 						if (exception) {
-							var cHeight = '323px';
-							var pHeight = '314px';
+							var cHeight = '324px';
+							var pHeight = '321px';
 						} else {
-							var cHeight = '343px';
-							var pHeight = '334px';
+							var cHeight = '344px';
+							var pHeight = '341px';
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 3 :
 						if (exception) {
-							var cHeight = '302px';
-							var pHeight = '293px';
+							var cHeight = '303px';
+							var pHeight = '300px';
 						} else {
-							var cHeight = '322px';
-							var pHeight = '313px';
+							var cHeight = '323px';
+							var pHeight = '320px';
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});

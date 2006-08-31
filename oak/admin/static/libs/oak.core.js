@@ -358,10 +358,27 @@ function OakInit_getVars ()
 					_req.onreadystatechange = function () { OakInit.processOakInit(_ttarget);};
 					_req.send('');
 				}
-				//return new Effect.Fade('sel', {duration: 0.8, delay: 2.0});
 			}
-		//alert ('jo');
 		}
+	  /* if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
+			if (toObservePopup == 1) {
+				alert (observedPopup);
+				if (observedPopup.closed == true) {
+					$('lyLowerOpacity').style.display = 'none';
+				}
+
+			}
+		}*/
+		
+if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
+  
+if (_name.closed == true) {
+    alert("Fenster wurde geschlossen");
+  } else {
+    alert("Fenster noch offen");
+  }
+}
+
 	} catch (e) {
 		_applyError(e);
 	}
