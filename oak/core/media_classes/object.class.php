@@ -231,7 +231,6 @@ public function selectObject ($id)
  * <ul>
  * <li>type, string, optional: Returns objects with given type</li>
  * <li>types, array, optional: Returns objects with given types</li>
- * <li>tag, string, optional: Returns objects with given tag</li>
  * <li>tags, array, optional: Returns objects with given tags</li>
  * <li>timeframe, string, optional: Returns objects from given timeframe</li>
  * <li>start, int, optional: row offset</li>
@@ -254,7 +253,7 @@ public function selectObjects ($params = array())
 {
 	// define some vars
 	$type = null;
-	$tag = null;
+	$types = null;
 	$timeframe = null;
 	$tags = null;
 	$order_macro = null;
@@ -271,19 +270,15 @@ public function selectObjects ($params = array())
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'type':
-			case 'tag':
+			case 'tags':
 			case 'order_macro':
 			case 'timeframe':
 					$$_key = (string)$_value;
 				break;
-			case 'documents':
-			case 'images':
-			case 'podcasts':
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
 				break;
-			case 'tags':
 			case 'types':
 					$$_key = (array)$_value;
 				break;
@@ -301,6 +296,9 @@ public function selectObjects ($params = array())
 	
 	// load Utility_Helper
 	$HELPER = load('Utility:Helper');
+	
+	// load Media_Tag
+	$TAG = load('Media:Tag');
 	
 	// prepare query
 	$sql = "
@@ -344,19 +342,31 @@ public function selectObjects ($params = array())
 	);
 	
 	// add where clauses
+	if (!empty($type)) {
+		$sql .= " AND '`media_objects`.`type` = :type ";
+		$bind_param['type'] = $type;
+	}
+	if (!empty($types)) {
+		$sql .= " AND ".$HELPER->_sqlInFromArray('`media_objects`.`type`',
+			$this->_flipTypes($types));
+	}
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`media_objects`.`date_added`',
 			$timeframe);
 	}
+	if (!empty($tags)) {
+		$sql .= " AND ".$HELPER->_sqlLikeFromArray('`media_tags`.`word`',
+			$TAG->_prepareTagStringForQuery($tags));
+	}
+	
+	// aggregate result set
+	$sql .= " GROUP BY `media_objects`.`id` ";
 	
 	// add sorting
 	if (!empty($order_macro)) {
 		$HELPER = load('utility:helper');
 		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
 	}
-	
-	// aggregate result set
-	$sql .= " GROUP BY `media_objects`.`id` ";
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
@@ -365,7 +375,7 @@ public function selectObjects ($params = array())
 	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
 		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
 	}
-
+	
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
@@ -702,6 +712,29 @@ public function imageStoreIsReady ()
 	}
 	
 	return true;
+}
+
+/**
+ * Flips keys and values in type array.
+ * 
+ * @throws Media_ObjectException
+ * @param array
+ * @return array
+ */
+protected function _flipTypes ($types)
+{
+	// input check
+	if (!is_array($types)) {
+		throw new Media_ObjectException("types is supposed to be an array");
+	}
+	
+	$tmp_types = array();
+	foreach ($types as $_key => $_value) {
+		if ($_value) {
+			$tmp_types[] = $_key;
+		}
+	}
+	return $tmp_types;
 }
 
 // end of class

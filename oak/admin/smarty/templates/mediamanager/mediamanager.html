@@ -21,11 +21,11 @@
 <div class="mmwrap">
 <span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_include_types_wrap">
-<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1" /><span class="cbxspread">Images</span></label>
-<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
-<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1" /><span class="cbxspread">Audio</span></label>
-<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1" /><span class="cbxspread">Video</span></label>
-<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1" /><span class="cbxspread">Other</span></label>
+<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.types.image} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
+<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.types.document} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
+<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.types.audio} checked="checked"{/if} /><span class="cbxspread">{i18n Audio}</span></label>
+<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1"{if $request.types.video} checked="checked"{/if} /><span class="cbxspread">{i18n Video}</span></label>
+<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1"{if $request.types.other} checked="checked"{/if} /><span class="cbxspread">{i18n Other}</span></label>
 </span>
 </span>
 </div>
@@ -35,7 +35,7 @@
 <div class="mmwrap">
 <label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
-<input class="w200" type="text" id="mm_tags" />
+<input class="w200" type="text" id="mm_tags" value="{$request.tags|escape:"htmlall"}" />
 </span>
 </label>
 </div>
@@ -48,7 +48,7 @@
 <select id="mm_timeframe" name="mm_timeframe">
 <option value="">{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
-<option value="{$_timeframe}">{$_timeframe_name}</option>
+<option value="{$_timeframe}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
 </select>
 </span>
@@ -61,19 +61,19 @@
 
 <!-- mediamanager content populate -->
 <div id="myLocal_mm_contentToPopulate">
-{php} echo date('r'); {/php}
 
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
-<td class="mm_media"><a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a></td>
-<td class="mm_meta">{$_object.file_name|truncate:30|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
-<td class="mm_casts"><a class="makepodcast" href="#" title="{i18n Use for podcast}"></a></td>
+<td class="mm_media">{if $_object.type == 'image'}<a class="insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{/if}</td>
+<td class="mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
+<td class="mm_casts">{if $_object.type == 'document' || $_object.type == 'audio' || $_object.type == 'video'}<a class="makepodcast" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}</td>
 <td class="mm_edit"><a class="edit" href="#" title="{i18n Edit}"></a></td>
 <td class="mm_del"><a class="delete" href="#" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
+
 </div>
 <!-- mediamanager content populate eof -->
 </div>

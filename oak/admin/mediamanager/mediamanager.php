@@ -92,22 +92,30 @@ try {
 	
 	// prepare select params
 	$select_params = array(
-		'documents' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
-		'images' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
-		'podcasts' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_cast'], OAK_REGEX_ZERO_OR_ONE),
+		'types' => array(
+			'document' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
+			'image' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
+			'audio' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_audio'], OAK_REGEX_ZERO_OR_ONE),
+			'video' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_video'], OAK_REGEX_ZERO_OR_ONE),
+			'other' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_other'], OAK_REGEX_ZERO_OR_ONE)
+		),
 		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
+		'order_macro' => 'DATE_ADDED:DESC',
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
 		'limit' => 5
-		//'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
 	// assign request params
 	$request = array(
-		'documents' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
-		'images' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
-		'podcasts' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_cast'], OAK_REGEX_ZERO_OR_ONE),
+		'types' => array(
+			'document' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE),
+			'image' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE),
+			'audio' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_audio'], OAK_REGEX_ZERO_OR_ONE),
+			'video' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_video'], OAK_REGEX_ZERO_OR_ONE),
+			'other' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_other'], OAK_REGEX_ZERO_OR_ONE)
+		),
 		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),

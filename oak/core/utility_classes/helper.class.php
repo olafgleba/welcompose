@@ -137,6 +137,99 @@ public function _sqlForOrderMacro ($definition, $macros)
 }
 
 /**
+ * Generates IN clause for database queries. Takes the field to search as
+ * first argument, the values for the IN clause as second argument. Returns
+ * string with sql query fragment. Sample:
+ * 
+ * <code>
+ * echo $helper->_sqlInFromArray('id', array(1, 2));
+ * // result:
+ * // id IN (1, 2)
+ * </code>
+ * 
+ * @throws Utility_HelperException
+ * @param string Field name
+ * @param array Search values
+ * @return string
+ */
+public function _sqlInFromArray ($field, $values)
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("field is expected to be a non empty scalar value");
+	}
+	if (!is_array($values)) {
+		throw new Utility_HelperException("values is expected to be an array");
+	}
+	
+	// if the value array is empty, return 1
+	if (count($values) < 1) {
+		return " 1 ";
+	}
+	
+	// quote values
+	foreach ($values as $_key => $_value) {
+		$values[$_key] = $this->base->db->quote($_value, PDO::PARAM_STR);
+	}
+	
+	return sprintf(' %s IN ( %s ) ', $field, implode(', ', $values));
+}
+
+/**
+ * Generates multiple LIKE clauses for database queries from array of
+ * search values. Takes the field to search as first argument, the values
+ * for the LIKE clauses as second argument and an optional concatenation
+ * operator as third argument. Returns string with sql query fragment. Sample:
+ *
+ * <code>
+ * echo $helper->_sqlLikeFromArray('id', array(1, 2), 'AND');
+ * // result:
+ * // id LIKE 1 AND LIKE 2
+ *
+ * echo $helper->_sqlLikeFromArray('id', array(1, 2), 'OR');
+ * // result:
+ * // id LIKE 1 OR LIKE 2
+ * </code>
+ * 
+ * @throws Utility_HelperException
+ * @param string Field name
+ * @param array Search values
+ * @param string Concatenation operator
+ * @return string
+ */
+public function _sqlLikeFromArray ($field, $values, $concat = 'OR')
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("field is expected to be a non empty scalar value");
+	}
+	if (!is_array($values)) {
+		throw new Utility_HelperException("values is expected to be an array");
+	}
+	if ($concat != 'AND' && $concat != 'OR') {
+		throw new Utility_HelperException("concat can be either AND or OR");
+	}
+	
+	// if the value array is empty, return 1
+	if (count($values) < 1) {
+		return " 1 ";
+	}
+	
+	// quote values
+	$fragments = array();
+	foreach ($values as $_key => $_value) {
+		 $fragments[] = sprintf(" %s LIKE %s ", $field,
+			$this->base->db->quote($_value, PDO::PARAM_STR));
+	}
+	
+	if ($concat == 'AND') {
+		return implode(' AND ', $fragments);
+	} else {
+		return implode(' OR ', $fragments);
+	}
+}
+
+/**
  * Returns array with available timeframes.
  * 
  * @return array

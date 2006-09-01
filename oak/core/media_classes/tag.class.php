@@ -776,6 +776,32 @@ public function _tagArrayToString ($array)
 	}
 }
 
+/**
+ * Prepares tag string for tag query. Takes a string of tags, each
+ * separated by Tag::_tag_separator, as first argument. Returns array.
+ *
+ * @throws Media_TagException
+ * @param string Tag string
+ * @return array Tag array
+ */
+public function _prepareTagStringForQuery ($string)
+{
+	// input check
+	if (!is_scalar($string)) {
+		throw new Media_TagException('Input for parameter string is not scalar');	
+	}
+
+	// explode string and clean the parts
+	$tags = array();
+	foreach (explode($this->_tag_separator, $string) as $_part) {
+		if (!empty($_part)) {
+			$tags[] = trim($_part)."%";
+		}
+	}
+	
+	return $tags;
+}
+
 // End of class
 }
 
