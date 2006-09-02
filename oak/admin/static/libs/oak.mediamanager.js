@@ -268,7 +268,7 @@ function Mediamanager_deleteMediaItem (elem)
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : _showResponse
+				onComplete : Mediamanager.invokeInputs
 			});	
 					
 		
