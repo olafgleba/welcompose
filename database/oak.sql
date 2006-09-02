@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 31.08.2006 17:02:23
--- Diagram Version: 130
+-- Created on: 02.09.2006 11:29:36
+-- Diagram Version: 131
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -46,13 +46,13 @@ CREATE TABLE `application_projects` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `owner` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
-  `url_name` varchar(255),
+  `name_url` varchar(255),
   `default` enum('0','1') DEFAULT '0',
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),
   INDEX `owner`(`owner`),
-  INDEX `url_name`(`url_name`),
+  INDEX `name_url`(`name_url`),
   INDEX `default`(`default`),
   CONSTRAINT `application_projects.owner2user_users.id` FOREIGN KEY (`owner`)
     REFERENCES `user_users`(`id`)

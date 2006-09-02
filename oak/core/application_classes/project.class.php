@@ -129,7 +129,7 @@ public function selectProject ($id)
 			`application_projects`.`id` AS `id`,
 			`application_projects`.`owner` AS `owner`,
 			`application_projects`.`name` AS `name`,
-			`application_projects`.`url_name` AS `url_name`,
+			`application_projects`.`name_url` AS `name_url`,
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
@@ -224,7 +224,7 @@ public function selectProjects ($params = array())
 			`application_projects`.`id` AS `id`,
 			`application_projects`.`owner` AS `owner`,
 			`application_projects`.`name` AS `name`,
-			`application_projects`.`url_name` AS `url_name`,
+			`application_projects`.`name_url` AS `name_url`,
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
@@ -375,10 +375,10 @@ public function selectDefaultProject ()
  * @param string Project's url name
  * @return array
  */
-public function selectProjectUsingUrlName ($url_name)
+public function selectProjectUsingUrlName ($name_url)
 {
 	// input check
-	if (empty($url_name) || !preg_match(OAK_REGEX_PROJECT_URL_NAME, $url_name)) {
+	if (empty($name_url) || !preg_match(OAK_REGEX_PROJECT_NAME_URL, $name_url)) {
 		throw new Application_ProjectException("Input for project's url name may not be empty");
 	}
 	
@@ -389,14 +389,14 @@ public function selectProjectUsingUrlName ($url_name)
 		FROM
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
-			`application_projects`.`url_name` = :url_name
+			`application_projects`.`name_url` = :name_url
 		LIMIT
 			1
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'url_name' => $url_name
+		'name_url' => $name_url
 	);
 	
 	// execute query
@@ -504,7 +504,7 @@ public function initProjectPublicArea ()
 {
 	// get user supplied project name
 	$user_supplied_name = Base_Cnc::filterRequest($_REQUEST['project'],
-		OAK_REGEX_PROJECT_URL_NAME);
+		OAK_REGEX_PROJECT_NAME_URL);
 		
 	// if the user supplied name is null, we need to look for the default
 	// project

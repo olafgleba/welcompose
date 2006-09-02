@@ -39,4 +39,7 @@ index.php_lifetime = 0
 textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
 textmacro_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
 
+[urls]
+blog_item = "/<page_name_url>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title_url>/"
+
 ; */ ?>

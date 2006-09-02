@@ -231,7 +231,7 @@ public function selectUser ($id)
 			`application_projects`.`id` AS `project_id`,
 			`application_projects`.`owner` AS `project_owner`,
 			`application_projects`.`name` AS `project_name`,
-			`application_projects`.`url_name` AS `project_url_name`,
+			`application_projects`.`name_url` AS `project_name_url`,
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
@@ -364,7 +364,7 @@ public function selectUsers ($params = array())
 			`application_projects`.`id` AS `project_id`,
 			`application_projects`.`owner` AS `project_owner`,
 			`application_projects`.`name` AS `project_name`,
-			`application_projects`.`url_name` AS `project_url_name`,
+			`application_projects`.`name_url` AS `project_name_url`,
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
