@@ -715,6 +715,11 @@ public function removeImageThumbnail ($object)
 		return false;
 	}
 	
+	// if there's no thumbnail, we can skip here too
+	if (empty($file['preview_name_on_disk'])) {
+		return false;
+	}
+	
 	// prepare path to file on disk
 	$path = $this->getPathToThumbnail($file['preview_name_on_disk']);
 	
