@@ -221,20 +221,18 @@ var definitions = {
 	'#mm_include_types_wrap' : function(el){
 		el.onclick = function(){
 			Mediamanager.invokeInputs(this);
-			return false;
 		}
-	}/*,
+	},
 	'#mm_tags' : function(el){
 		el.onkeyup = function(){
-			setTimeout("Mediamanager.invokeTags()", 800);
+			//setTimeout("Mediamanager.invokeTags()", 800);
 			//Mediamanager.initializeTagSearch();
-			return false;
+			Mediamanager.invokeTags()
 		}
-	}*/,
+	},
 	'#mm_timeframe' : function(el){
 		el.onchange = function(){
 			Mediamanager.invokeInputs(this);
-			return false;
 		}
 	},
 	'.submit90' : function(el){

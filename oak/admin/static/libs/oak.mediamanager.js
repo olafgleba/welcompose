@@ -268,7 +268,7 @@ function Mediamanager_deleteMediaItem (elem)
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : Mediamanager.invokeInputs
+				onComplete : _showResponse
 			});	
 					
 		
@@ -277,32 +277,17 @@ function Mediamanager_deleteMediaItem (elem)
 	}
 }
 
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _showResponseDeleteMediaItem(req)
+
+function _showResponse(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
 		
 		Behaviour.apply();
-		
-		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-	/*	$('mm_tags').setAttribute("autocomplete","off");
-		
-		$('mm_tags').focus();
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
-		
-		Behaviour.apply();*/
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
 
 /**
  * Implements method of prototype class Mediamanager
@@ -316,11 +301,14 @@ function Mediamanager_invokeInputs ()
 		var elems = Mediamanager.checkMyLocalElems();
 		var url = '../mediamanager/mediamanager.php';
 		var pars = elems;
+		
+	//	_whileParsing();
 	
 		var myAjax = new Ajax.Request(
 			url,
 			{
 				method : 'get',
+				onLoading : _loader,
 				parameters : pars,
 				onComplete : _showResponseInvokeInputs
 			});	
@@ -329,6 +317,14 @@ function Mediamanager_invokeInputs ()
 	}
 }
 
+function _loader ()
+{
+	try {
+		Element.show('indicator');
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Tables
@@ -401,12 +397,12 @@ function _showResponseInvokeInputs(req)
 		Behaviour.apply();
 		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-	/*	$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_tags').setAttribute("autocomplete","off");
 		
 		$('mm_tags').focus();
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
 		
-		Behaviour.apply();*/
+		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
 	}

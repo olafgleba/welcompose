@@ -102,6 +102,8 @@ try {
 
 		// work to be done for the schweizer
 		
+		print $_REQUEST['id'];
+		
 		
 		
 		

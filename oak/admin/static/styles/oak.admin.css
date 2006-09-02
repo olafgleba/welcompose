@@ -1021,7 +1021,17 @@ z-index: 1;
 opacity: 0.4;
 }
 
+#indicator {
+display:  none;
+}
 
+#myLocal_mm_contentToPopulate #indicator {
+position:  relative;
+width:  210px;
+left:  0;
+top:  45%;
+text-align:  center;
+}
 
 /* %M =misc */
 .clearb {
