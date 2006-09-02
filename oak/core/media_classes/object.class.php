@@ -91,6 +91,11 @@ public function instance()
  */
 public function addObject ($sqlData)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (!is_array($sqlData)) {
 		throw new Media_ObjectException('Input for parameter sqlData is not an array');	
@@ -115,6 +120,11 @@ public function addObject ($sqlData)
 */
 public function updateObject ($id, $sqlData)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ObjectException('Input for parameter id is not an array');
@@ -147,6 +157,11 @@ public function updateObject ($id, $sqlData)
  */
 public function deleteObject ($id)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ObjectException('Input for parameter id is not numeric');
@@ -175,6 +190,11 @@ public function deleteObject ($id)
  */
 public function selectObject ($id)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Media_ObjectException('Input for parameter id is not numeric');
@@ -251,6 +271,11 @@ public function selectObject ($id)
  */
 public function selectObjects ($params = array())
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$type = null;
 	$types = null;
@@ -386,6 +411,11 @@ public function selectObjects ($params = array())
  */
 public function countObjects ()
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// prepare query
 	$sql = "
 		SELECT 
@@ -480,15 +510,19 @@ public function removeObjectFromStore ($object)
 	}
 	
 	// prepare path to file on disk
-	$path = $this->getPathToObject($file['name_on_disk']);
+	$path = $this->getPathToObject($file['file_name_on_disk']);
 	
 	// unlink object
 	if (file_exists($path)) {
 		if (unlink($path)) {
 			// update object in database
 			$sqlData = array(
-				'name' => null,
-				'name_on_disk' => null
+				'file_name' => null,
+				'file_name_on_disk' => null,
+				'file_mime_type' => null,
+				'file_width' => null,
+				'file_height' => null,
+				'file_size' => null
 			);
 			$this->updateObject($file['id'], $sqlData);
 			
@@ -533,6 +567,11 @@ public function removeObjectFromStore ($object)
  */
 public function createImageThumbnail ($orig_name, $object_name, $width, $height, $fill_up = false, $hex = null)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($orig_name) || !is_scalar($orig_name)) {
 		throw new Media_ObjectException("orig_name is supposed to be a non-empty scalar value");
@@ -646,6 +685,60 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
 }
 
 /**
+ * Remove thumbnail. Takes the object id as first argument.
+ * Returns bool.
+ *
+ * @throws Media_ObjectException
+ * @param int Object id
+ * @return bool
+ */
+public function removeImageThumbnail ($object)
+{
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($object) || !is_numeric($object)) {
+		throw new Media_ObjectException("Input for parameter object is expected to be numeric");
+	}
+	if (!$this->imageStoreIsReady()) {
+		throw new Media_ObjectException("Image store is not ready");
+	}
+	
+	// get object
+	$file = $this->selectObject($object);
+	
+	// if the object is empty, we can skip here
+	if (empty($file)) {
+		return false;
+	}
+	
+	// prepare path to file on disk
+	$path = $this->getPathToThumbnail($file['preview_name_on_disk']);
+	
+	// unlink object
+	if (file_exists($path)) {
+		if (unlink($path)) {
+			// update object in database
+			$sqlData = array(
+				'preview_name_on_disk' => null,
+				'preview_mime_type' => null,
+				'preview_height' => null,
+				'preview_width' => null,
+				'preview_size' => null
+			);
+			$this->updateObject($file['id'], $sqlData);
+			
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+/**
  * Returns full path to media object. Takes media object name on disk
  * as frist argument. Please note that the object doesn't have to exist
  * to get the path to a object.
@@ -655,6 +748,11 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
  */
 public function getPathToObject ($object_name)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($object_name) || !is_scalar($object_name)) {
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
@@ -673,6 +771,11 @@ public function getPathToObject ($object_name)
  */
 public function getPathToThumbnail ($object_name)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($object_name) || !is_scalar($object_name)) {
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
@@ -688,6 +791,11 @@ public function getPathToThumbnail ($object_name)
  */
 public function imageStoreIsReady ()
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// get configured path
 	$path = $this->base->_conf['image']['store_disk'];
 	
@@ -723,6 +831,11 @@ public function imageStoreIsReady ()
  */
 protected function _flipTypes ($types)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (!is_array($types)) {
 		throw new Media_ObjectException("types is supposed to be an array");

@@ -77,6 +77,10 @@ try {
 	/* @var $OBJECT Media_Object */
 	$OBJECT = load('Media:Object');
 	
+	// load Media_Tag
+	/* @var $TAG Media_Tag */
+	$TAG = load('Media:Tag');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -97,15 +101,13 @@ try {
 		// start transaction
 		$BASE->db->begin();
 		
-		// delete media Item
+		// decrease tags
+		$TAG->deleteTags(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
-
-		// work to be done for the schweizer
-		
-		print $_REQUEST['id'];
-		
-		
-		
+		// delete media item
+		$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$OBJECT->deleteObject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();
@@ -121,7 +123,7 @@ try {
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
-
+	
 	exit;
 
 } catch (Exception $e) {
