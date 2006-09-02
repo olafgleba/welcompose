@@ -63,7 +63,12 @@ Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 
+Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
+Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
+Mediamanager.prototype.triggerInputTags = Mediamanager_triggerInputTags;
+Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
+
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
 
 
@@ -243,6 +248,60 @@ function Mediamanager_switchLayer (toShow, toHide)
 	}
 }
 
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_deleteMediaItem (elem)
+{
+	try {
+		// properties
+		var url = '../mediamanager/mediamanager_delete.php';
+		var pars = 'id=' + elem.name;
+		
+		//alert (elems);
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Mediamanager.invokeInputs
+			});	
+					
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseDeleteMediaItem(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		
+		Behaviour.apply();
+		
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+	/*	$('mm_tags').setAttribute("autocomplete","off");
+		
+		$('mm_tags').focus();
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
+		
+		Behaviour.apply();*/
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 
 /**
@@ -263,7 +322,64 @@ function Mediamanager_invokeInputs ()
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : showResponseInvokeInputs
+				onComplete : _showResponseInvokeInputs
+			});	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element to process
+ * @throws applyError on exception
+ */
+function Mediamanager_triggerInputTags ()
+{
+	try {
+		setTimeout("Mediamanager.invokeTags()", 800);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element to process
+ * @throws applyError on exception
+ */
+function Mediamanager_initializeTagSearch ()
+{
+	try {
+		setTimeout("Mediamanager.invokeTags()", 300);
+		return true;
+		//Mediamanager.triggerInputTags();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeTags ()
+{
+	try {
+		var elems = Mediamanager.checkMyLocalElems();
+		var url = '../mediamanager/mediamanager.php';
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : _showResponseInvokeInputs
 			});	
 	} catch (e) {
 		_applyError(e);
@@ -277,11 +393,20 @@ function Mediamanager_invokeInputs ()
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function showResponseInvokeInputs(req)
+function _showResponseInvokeInputs(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
+		
 		Behaviour.apply();
+		
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+	/*	$('mm_tags').setAttribute("autocomplete","off");
+		
+		$('mm_tags').focus();
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
+		
+		Behaviour.apply();*/
 	} catch (e) {
 		_applyError(e);
 	}
@@ -303,7 +428,8 @@ function Mediamanager_checkMyLocalElems ()
 			mm_include_types_video : $F('mm_include_types_video'),
 			mm_include_types_other : $F('mm_include_types_other'),
 			mm_tags : $F('mm_tags'),
-			mm_timeframe : $F('mm_timeframe')
+			mm_timeframe : $F('mm_timeframe'),
+			mm_limit : 500
 		};
 	
 		var o = $H(getElems);

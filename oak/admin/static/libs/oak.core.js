@@ -359,17 +359,22 @@ function OakInit_getVars ()
 					_req.send('');
 				}
 			}
+			
 		}
 	  /* if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
 			if (toObservePopup == 1) {
-				alert (observedPopup);
-				if (observedPopup.closed == true) {
+				if (typeof _observedPopup != 'undefined') {
+					alert (_observedPopup);
+				} else {
+					alert ('kommt nix');
+				}if (observedPopup.closed == true) {
 					$('lyLowerOpacity').style.display = 'none';
 				}
 
 			}
 		}*/
-		
+
+/*		
 if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
   
 if (_name.closed == true) {
@@ -377,7 +382,7 @@ if (_name.closed == true) {
   } else {
     alert("Fenster noch offen");
   }
-}
+}*/
 
 	} catch (e) {
 		_applyError(e);
@@ -436,6 +441,8 @@ function OakInit_processOakInit (ttarget)
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 				Behaviour.apply();
+				
+			//	Event.observe('mm_tags','keyup', Mediamanager.initializeTagSearch, false);
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -539,7 +546,7 @@ function Help_show (elem, level)
 		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-		//Behaviour.apply();
+		Behaviour.apply();
 		
 	} catch (e) {
 		_applyError(e);
@@ -573,13 +580,13 @@ function Help_hide (elem, level)
 			default :
 					this.elem.className = this.helpClass;	
 		}
-	//	if (Helper.unsupportsEffects('safari_exception')) {
+		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.processIdAfter);
-		/*} else {
+		} else {
 			Effect.Fade(this.processIdAfter,{duration: 0.7});
-		}*/
+		}
 		Element.update(this.elem, this.helpHtmlShow);
-		//Behaviour.apply();	
+		Behaviour.apply();	
 	} catch (e) {
 		_applyError(e);
 	}
@@ -695,9 +702,6 @@ function Help_hideMediamanager (elem)
 			Element.hide(this.toShow);
 			Effect.Appear(this.toShow,{duration: 0.7});
 		}
-
-		//Element.hide(this.toHide);
-		//Element.show(this.toShow);
 		
 		Element.update(this.elem, this.helpHtmlShow);
 		Behaviour.apply();

@@ -95,7 +95,7 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
+	$FORM = $BASE->utility->loadQuickForm('media_edit', 'post');
 	
 	// select for media types
 	$FORM->addElement('select', 'type', gettext('Media types'), $types,
@@ -123,7 +123,7 @@ try {
 	$FORM->addRule('tags', gettext('Please add at least one tag'), 'required');	
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Upload Media'),
+	$FORM->addElement('submit', 'submit', gettext('Update Media'),
 		array('class' => 'submit200'));
 
 	// reset button
@@ -174,7 +174,7 @@ try {
 
 		// display the form
 		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/mediamanager_upload.html', OAK_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('mediamanager/mediamanager_edit.html', OAK_TEMPLATE_KEY);
 
 		// flush the buffer
 		@ob_end_flush();
@@ -263,7 +263,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: mediamanager_upload.php");
+		header("Location: mediamanager_edit.php");
 		exit;
 	}
 } catch (Exception $e) {

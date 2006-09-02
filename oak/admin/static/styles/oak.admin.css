@@ -967,19 +967,19 @@ margin: 4px 4px;
 #myLocal_mm_contentToPopulate td {
 padding: 2px 0 4px 0;
 }
-.mm_media {
+.td_mm_media {
 width: 50px;
 }
-.mm_meta {
+.td_mm_meta {
 width: 90px;
 }
-.mm_casts {
+.td_mm_casts {
 width: 30px;
 }
-.mm_edit {
+.td_mm_edit {
 width: 30px;
 }
-.mm_del {
+.td_mm_delete {
 width: 30px;
 }
 
@@ -1018,7 +1018,7 @@ left: 0;
 z-index: 1;
 }
 #lyLowerOpacity img{
-opacity: 0.7;
+opacity: 0.4;
 }
 
 

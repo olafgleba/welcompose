@@ -158,7 +158,19 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','604','../mediamanager/mediamanager_upload.php','media_upload');
+			Helper.launchPopup('740','604','media_upload','mm_upload');
+			return false;
+		}
+	},
+	'a.mm_edit' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('740','604','media_edit','mm_edit', this);
+			return false;
+		}
+	},
+	'a.mm_delete' : function(el){
+		el.onclick = function(){
+			Mediamanager.deleteMediaItem(this);
 			return false;
 		}
 	},
@@ -173,7 +185,7 @@ var definitions = {
 			Mediamanager.switchLayer('lyMediamanagerMyFlickr', 'lyMediamanagerMyLocal');
 			return false;
 		}
-	},
+	}/*,
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -185,7 +197,7 @@ var definitions = {
 			}
 			return false;
 		}
-	},
+	}*/,
 	'textarea' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -209,19 +221,20 @@ var definitions = {
 	'#mm_include_types_wrap' : function(el){
 		el.onclick = function(){
 			Mediamanager.invokeInputs(this);
-			//return false;
+			return false;
 		}
-	},
-	/*'#mm_tags' : function(el){
-		el.onkeydown = function(){
-			Mediamanager.invokeInputs(this);
-			//return false;
+	}/*,
+	'#mm_tags' : function(el){
+		el.onkeyup = function(){
+			setTimeout("Mediamanager.invokeTags()", 800);
+			//Mediamanager.initializeTagSearch();
+			return false;
 		}
-	},*/
+	}*/,
 	'#mm_timeframe' : function(el){
 		el.onchange = function(){
 			Mediamanager.invokeInputs(this);
-			//return false;
+			return false;
 		}
 	},
 	'.submit90' : function(el){

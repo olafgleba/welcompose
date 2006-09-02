@@ -32,13 +32,25 @@ Helper.prototype.defineWindowY = Helper_defineWindowY;
 
 
 
-function Helper_launchPopup (width, height, url, name)
+function Helper_launchPopup (width, height, name, trigger, elem)
 {
 	try {
 		Helper.lowerOpacity();
 		
 		// properties
-		this.ttargetUrl = url;
+		this.elem = elem;
+		this.trigger = trigger;
+		
+		switch (this.trigger) {
+			case 'mm_upload' :
+					this.url = '../mediamanager/mediamanager_upload.php';
+				break;
+			case 'mm_edit' :
+					this.url = '../mediamanager/mediamanager_edit.php?id=' + this.elem.name;
+				break;
+		}
+		// properties
+		this.ttargetUrl = this.url;
 		this.ttargetName = name;
 		this.ttargetWidth = width;
 		this.ttargetHeight = height;
@@ -51,8 +63,12 @@ function Helper_launchPopup (width, height, url, name)
 		this.ttarget.focus();
 		
 		//this.spitout = _wname(this.ttargetName);
-
-	//	alert(_observedPopup);
+		
+		//win = this.ttargetName;
+		//return win;
+		//_observedPopup = this.ttargetName;
+	//	return _observedPopup;
+		//alert(_observedPopup);
 		
 	} catch (e) {
 		_applyError(e);
@@ -60,11 +76,6 @@ function Helper_launchPopup (width, height, url, name)
 }
 
 
-function _wname (win)
-{
-	_name = win;
-	return _name;
-}
 
 
 function Helper_closePopup ()
@@ -72,6 +83,9 @@ function Helper_closePopup ()
 	try {
 		self.close();
 		top.parent.opener.$('lyLowerOpacity').style.display = 'none';
+		
+		//Mediamanager.invokeInputs();
+		
 	} catch (e) {
 		_applyError(e);
 	}

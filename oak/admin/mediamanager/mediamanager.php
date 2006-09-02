@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: parse.navigation.php
+ * File: mediamanager.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -103,7 +103,7 @@ try {
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'order_macro' => 'DATE_ADDED:DESC',
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
-		'limit' => 5
+		'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
@@ -121,6 +121,7 @@ try {
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
 		'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
 	);
+	
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// assign image path
