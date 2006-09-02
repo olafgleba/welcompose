@@ -141,7 +141,6 @@ public function updateTags ($object, $tags)
 	// prepare old tags
 	$old_tags = array();
 	$params = array(
-		'project' => $project,
 		'object' => $object
 	);
 	foreach ($this->selectTags($params) as $_old_tag) {

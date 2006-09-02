@@ -94,8 +94,18 @@ try {
 		'other' => gettext('Other')
 	);
 	
+	// get object
+	$object = $OBJECT->selectObject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_edit', 'post');
+	
+	// hidden for id
+	$FORM->addElement('hidden', 'id');
+	$FORM->applyFilter('id', 'trim');
+	$FORM->applyFilter('id', 'strip_tags');
+	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
+	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
 	// select for media types
 	$FORM->addElement('select', 'type', gettext('Media types'), $types,
@@ -107,7 +117,6 @@ try {
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
@@ -129,6 +138,14 @@ try {
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Close'),
 		array('class' => 'cancel200'));
+	
+	// set defaults
+	$FORM->setDefaults(array(
+		'id' => Base_Cnc::ifsetor($object['id'], null),
+		'type' => Base_Cnc::ifsetor($object['type'], null),
+		'description' => Base_Cnc::ifsetor($object['description'], null),
+		'tags' => Base_Cnc::ifsetor($object['tags'], null)
+	));
 	
 	// validate it
 	if (!$FORM->validate()) {
@@ -184,6 +201,40 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
+		// load helper class
+		$HELPER = load('utility:helper');
+		
+		// load tag class
+		$TAG = load('Media:Tag');
+		
+		$sqlData['type'] = $FORM->exportValue('type');
+		$sqlData['description'] = $FORM->exportValue('description');
+		$sqlData['tags'] = $FORM->exportValue('tags');
+		
+		// check sql data
+		$HELPER->testSqlDataForPearErrors($sqlData);
+		
+		// insert it
+		try {
+			// begin transaction
+			$BASE->db->begin();
+			
+			// update tags
+			$TAG->updateTags($FORM->exportValue('id'), $TAG->_tagStringToArray($FORM->exportValue('tags')));
+			
+			// update row in database
+			$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
+			
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
+			
+			// re-throw exception
+			throw $e;
+		}
+		
 		// handle file upload
 		if ($file_upload->isUploadedFile()) {
 			// get file data
@@ -193,6 +244,10 @@ try {
 			foreach ($data as $_key => $_value) {
 				$data[$_key] = trim(strip_tags($_value));
 			}
+			
+			// remove old thumbnail and object
+			$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), OAK_REGEX_NUMERIC));
+			$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), OAK_REGEX_NUMERIC));
 			
 			// move file to file store
 			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
@@ -205,10 +260,6 @@ try {
 			
 			// prepare sql data
 			$sqlData = array();
-			$sqlData['project'] = OAK_CURRENT_PROJECT;
-			$sqlData['type'] = $FORM->exportValue('type');
-			$sqlData['description'] = $FORM->exportValue('description');
-			$sqlData['tags'] = $FORM->exportValue('tags');
 			$sqlData['file_name'] = $data['name'];
 			$sqlData['file_name_on_disk'] = $name_on_disk;
 			$sqlData['file_mime_type'] = $data['type'];
@@ -220,25 +271,17 @@ try {
 			$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
 			$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
 			$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
-			$sqlData['date_added'] = date('Y-m-d H:i:s');
 			
 			// check sql data
-			$HELPER = load('utility:helper');
 			$HELPER->testSqlDataForPearErrors($sqlData);
-			
-			// load tag class
-			$TAG = load('Media:Tag');
 			
 			// insert it
 			try {
 				// begin transaction
 				$BASE->db->begin();
 				
-				// insert row into database
-				$object = $OBJECT->addObject($sqlData);
-				
-				// insert tags
-				$TAG->addTags($object, $TAG->_tagStringToArray($FORM->exportValue('tags')));
+				// update row in database
+				$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
 				
 				// commit
 				$BASE->db->commit();
@@ -263,7 +306,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: mediamanager_edit.php");
+		header("Location: mediamanager_edit.php?id=".$FORM->exportValue('id'));
 		exit;
 	}
 } catch (Exception $e) {
