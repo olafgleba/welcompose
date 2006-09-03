@@ -221,6 +221,7 @@ function Mediamanager_showElement (elem)
 	}
 }
 
+
 /**
  * Implements method of prototype class Mediamanager
  * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
@@ -260,30 +261,17 @@ function Mediamanager_deleteMediaItem (elem)
 		// properties
 		var url = '../mediamanager/mediamanager_delete.php';
 		var pars = 'id=' + elem.name;
-		
-		//alert (elems);
 
 		var myAjax = new Ajax.Request(
 			url,
 			{
 				method : 'get',
+				onLoading : _loader,
 				parameters : pars,
 				onComplete : Mediamanager.invokeInputs
 			});	
 					
 		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-function _showResponse(req)
-{
-	try {
-		$('column').innerHTML = req.responseText;
-		
-		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -298,11 +286,17 @@ function _showResponse(req)
 function Mediamanager_invokeInputs ()
 {
 	try {
+	//	_preserveElementStatus ();
+/*	
+	var neu = $('mm_include_types_wrap').parentNode.getAttribute('class');
+	
+	alert (neu);*/
+		
+
+		
 		var elems = Mediamanager.checkMyLocalElems();
 		var url = '../mediamanager/mediamanager.php';
 		var pars = elems;
-		
-	//	_whileParsing();
 	
 		var myAjax = new Ajax.Request(
 			url,
@@ -311,16 +305,7 @@ function Mediamanager_invokeInputs ()
 				onLoading : _loader,
 				parameters : pars,
 				onComplete : _showResponseInvokeInputs
-			});	
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-function _loader ()
-{
-	try {
-		Element.show('indicator');
+			});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -374,13 +359,115 @@ function Mediamanager_invokeTags ()
 			url,
 			{
 				method : 'get',
+				onLoading : _loader,
 				parameters : pars,
 				onComplete : _showResponseInvokeInputs
-			});	
+			});
 	} catch (e) {
 		_applyError(e);
 	}
 }
+
+
+function _loader ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName('mm_content')[0];
+		Element.hide(hideContentTable);
+		Element.show('indicator');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+function _preserveElementStatus ()
+{	
+	try {
+	
+		previous_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		previous_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		previous_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+	
+		previousElems = new Array (previous_includeTypesElem, previous_tagsElem, previous_timeframeElem);
+		return previousElems;
+		//alert (includeTypesElem + ', ' + tagsElem + ', ' + timeframeElem);
+		
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+function _showElementAfterAjaxInvoke (ttarget)
+{	
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'class';
+		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+		
+		Element.show(this.ttarget);
+		
+		this.elem.className = this.mediamanagerClassHide;
+		Element.update(this.elem, this.elementHtmlHide);
+		Behaviour.apply();
+	
+		// needed to set appropriate height of content of div to populate
+		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		
+		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+		
+		if (includeTypesElem == 'block') {
+			var rows = '1';
+		} else {
+			var rows = '';
+		}
+		_checkOccurrences (collectElems, rows);
+	
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function _hideElementAfterAjaxInvoke (elem)
+{	
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'class';
+		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+		
+		Element.hide(this.ttarget);
+		
+		this.elem.className = this.mediamanagerClass;
+		Element.update(this.elem, this.elementHtmlShow);
+		Behaviour.apply();
+	
+		// needed to set appropriate height of content of div to populate
+		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		
+		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+		
+		if (includeTypesElem == 'block') {
+			var rows = '1';
+		} else {
+			var rows = '';
+		}
+		_checkOccurrences (collectElems, rows);
+	
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Implements method of prototype class Mediamanager
@@ -392,9 +479,30 @@ function Mediamanager_invokeTags ()
 function _showResponseInvokeInputs(req)
 {
 	try {
+		
+		//alert ('set: ' +previousElems);
+		
 		$('column').innerHTML = req.responseText;
 		
-		Behaviour.apply();
+	/*	Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
+		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElems[3]});
+	*/	
+
+	/*	
+		for (var i = 0; i < previousElems.length; i++) {		
+			var range = previousElems[i];
+			if (range == 'block') {
+				//Mediamanager.showElement();
+				this.elem.className = this.mediamanagerClassHide;
+				Element.update(this.elem, this.elementHtmlHide);
+				alert ('zeigen');
+			} else {
+				//Mediamanager.hideElement();
+				alert ('verstecken');
+			}
+		}
+*/
 		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
@@ -403,6 +511,8 @@ function _showResponseInvokeInputs(req)
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
 		
 		Behaviour.apply();
+		
+		neu = 1;
 	} catch (e) {
 		_applyError(e);
 	}

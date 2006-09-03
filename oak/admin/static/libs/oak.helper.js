@@ -61,15 +61,6 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 		
 		this.ttarget.moveBy(this.resWidth, this.resHeight);
 		this.ttarget.focus();
-		
-		//this.spitout = _wname(this.ttargetName);
-		
-		//win = this.ttargetName;
-		//return win;
-		//_observedPopup = this.ttargetName;
-	//	return _observedPopup;
-		//alert(_observedPopup);
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -81,11 +72,21 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 function Helper_closePopup ()
 {       
 	try {
-		self.close();
-		top.parent.opener.$('lyLowerOpacity').style.display = 'none';
+		/* invoke function in parent window */
+		self.opener.$('lyLowerOpacity').style.display = 'none';
+		self.opener.Mediamanager.invokeInputs();
 		
-		//Mediamanager.invokeInputs();
-		
+		/* disable all elements */
+		var form_id = document.forms[0].getAttribute('id');
+	
+		e = Form.getElements(form_id);
+			for(i = 0; i < e.length; i++) {
+    			e[i].disabled = true;
+			}
+			
+		/* has to be a timeout since the opened window has
+		 to be present til process function in parent is executed */
+		setTimeout ("self.close()", 400);
 	} catch (e) {
 		_applyError(e);
 	}

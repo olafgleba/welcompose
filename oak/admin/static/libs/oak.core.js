@@ -361,29 +361,6 @@ function OakInit_getVars ()
 			}
 			
 		}
-	  /* if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
-			if (toObservePopup == 1) {
-				if (typeof _observedPopup != 'undefined') {
-					alert (_observedPopup);
-				} else {
-					alert ('kommt nix');
-				}if (observedPopup.closed == true) {
-					$('lyLowerOpacity').style.display = 'none';
-				}
-
-			}
-		}*/
-
-/*		
-if (typeof toObservePopup != 'undefined' && OakInit.isNumber(toObservePopup)) {
-  
-if (_name.closed == true) {
-    alert("Fenster wurde geschlossen");
-  } else {
-    alert("Fenster noch offen");
-  }
-}*/
-
 	} catch (e) {
 		_applyError(e);
 	}
