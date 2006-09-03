@@ -40,6 +40,11 @@ textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
 textmacro_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
 
 [urls]
+simple_page_index = "/<page_name_url>/"
+simple_form_index = "/<page_name_url>/"
+blog_index = "/<page_name_url>/<start>/"
 blog_item = "/<page_name_url>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title_url>/"
+blog_archive_year = "/<page_name_url>/<posting_year_added>/"
+blog_archive_month = "/<page_name_url>/<posting_year_added>/<posting_month_added>/"
 
 ; */ ?>

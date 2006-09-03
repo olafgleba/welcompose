@@ -617,6 +617,11 @@ public function countBlogPostings ($params = array())
  */
 public function selectDifferentYears ($params)
 {
+	// access check
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$page = null;
 	$order_macro = null;
@@ -710,6 +715,11 @@ public function selectDifferentYears ($params)
  */
 public function selectDifferentMonths ($params)
 {
+	// access check
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$page = null;
 	$year = null;
@@ -811,6 +821,11 @@ public function selectDifferentMonths ($params)
  */
 public function selectDifferentDays ($params)
 {
+	// access check
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
 	// define some vars
 	$page = null;
 	$year = null;
@@ -898,6 +913,137 @@ public function selectDifferentDays ($params)
 	// execute query and return result
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
+
+/**
+ * Resolves blog posting using the available url params. Returns the
+ * blog posting id on success or throws an exception on failure.
+ * 
+ * The function either expects the plain blog posting id
+ * (~ $_REQUEST['posting']) or a  combination consisting of the
+ * following parameters:
+ *
+ * <ul>
+ * <li>year: Four digit year number when the posting was added</li>
+ * <li>month: Two digit month number when the posting was added</li>
+ * <li>day: Two digit day number when the posting was added</li>
+ * <li>title: Url title of the blog posting</li>
+ * </ul>
+ * 
+ * @throws Content_BlogPostingException
+ * @return int
+ */
+public function resolveBlogPosting ()
+{
+	// access check
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
+		throw new Content_BlogpostingException("You are not allowed to perform this action");
+	}
+	
+	// let's see if there's a posting id in the request url
+	$posting_id = Base_Cnc::filterRequest($_REQUEST['posting'], OAK_REGEX_NUMERIC);
+	
+	if (!is_null($posting_id)) {
+		if ($this->blogPostingExists($posting_id)) {
+			return $posting_id;
+		} else {
+			throw new Content_BlogPostingException("Blog posting could not be found");
+		}
+	}
+	
+	// if there's no blog posting id in the url, we have to look for it
+	// using date and title_url
+	
+	// prepare date added
+	$date_added = sprintf("%s-%s-%s%%",
+		Base_Cnc::filterRequest($_REQUEST['year'], OAK_REGEX_NUMERIC),
+		Base_Cnc::filterRequest($_REQUEST['month'], OAK_REGEX_NUMERIC),
+		Base_Cnc::filterRequest($_REQUEST['day'], OAK_REGEX_NUMERIC)
+	);
+	
+	// prepare query
+	$sql = "
+		SELECT
+		 	`id`
+		FROM
+			".OAK_DB_CONTENT_BLOG_POSTINGS."
+		WHERE
+			`title_url` = :title_url
+		  AND
+			`date_added` LIKE :date_added
+		  AND
+			`page` = :page
+		LIMIT 1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'title_url' => Base_Cnc::filterRequest($_REQUEST['title'], OAK_REGEX_MEANINGFUL_STRING),
+		'date_added' => $date_added,
+		'page' => OAK_CURRENT_PAGE
+	);
+	
+	// execute query and evaluate result
+	$result = intval($this->base->db->select($sql, 'field', $bind_params));
+	if ($result > 1) {
+		return $result;
+	} else {
+		throw new Content_BlogPostingException("Blog posting could not be found");
+	}
+}
+
+/**
+ * Tests if blog posting exists. Takes the id of the blog posting
+ * as first argument. Returns bool.
+ *
+ * @throws Content_BlogPostingException
+ * @param int Blog posting id
+ * @return bool
+ */
+public function blogPostingExists ($id)
+{
+	// access check
+	if (!oak_check_access('Content', 'BlogPosting', 'Use')) {
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Content_BlogPostingException('Input for parameter id is not numeric');
+	}
+	
+	// initialize bind params
+	$bind_params = array();
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		WHERE
+			`content_blog_postings`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 /**
  * Tests whether given blog posting belongs to current project. Takes the
