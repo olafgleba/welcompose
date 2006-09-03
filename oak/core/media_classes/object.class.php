@@ -657,6 +657,9 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
 		// fill the canvas with the background color
 		imagefill($filled_image, 0, 0, $color);
 		
+		// fill the canvas with the background color
+		imagefill($filled_image, $width - 1, $height - 1, $color);
+		
 		// reassign variables
 		$image_p = $filled_image;
 	}
