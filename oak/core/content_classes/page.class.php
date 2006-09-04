@@ -920,6 +920,11 @@ public function pageBelongsToCurrentUser ($page)
  */
 public function setIndexPage ($page)
 {
+	// access check
+	if (!oak_check_access('Content', 'Page', 'Manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($page) || !is_numeric($page)) {
 		throw new Content_PageException('Input for parameter page is expected to be a numeric value');
@@ -1004,6 +1009,11 @@ public function checkAccess ($page, $protect_flag)
  */
 public function resolvePage ()
 {
+	// access check
+	if (!oak_check_access('Content', 'Page', 'Use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
 	// get page id and url name from url
 	$page_id = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC);
 	$page_name = Base_Cnc::filterRequest($_REQUEST['page_name'], OAK_REGEX_MEANINGFUL_STRING);
