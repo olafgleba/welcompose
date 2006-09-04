@@ -67,15 +67,7 @@ try {
 	
 	// get page information
 	$PAGE = load('content:page');
-	$possible_page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC);
-	if (is_null($possible_page)) {
-		$page = $PAGE->selectIndexPage();
-	} else {
-		$page = $PAGE->selectPage($possible_page);
-		if (empty($page)) {
-			throw new Exception("Requested page not found");
-		}
-	}
+	$page = $PAGE->selectPage($PAGE->resolvePage());
 	
 	// define constant CURRENT_PAGE
 	define('OAK_CURRENT_PAGE', $page['id']);

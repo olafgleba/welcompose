@@ -240,10 +240,16 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
+		// test url name for uniqueness
+		$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+		if (!$PAGE->testForUniqueUrlName($url_name, $FORM->exportValue('id'))) {
+			$url_name = $url_name.'-'.$FORM->exportValue('id');
+		}
+		
 		// create the article group
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['name_url'] = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+		$sqlData['name_url'] = $url_name;
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');

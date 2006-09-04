@@ -288,13 +288,19 @@ try {
 			$page_id = $NESTEDSET->createNode($FORM->exportValue('navigation'), $FORM->exportValue('reference'),
 				$FORM->exportValue('position'));
 			
+			// test url name for uniqueness
+			$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+			if (!$PAGE->testForUniqueUrlName($url_name)) {
+				$url_name = $url_name.'-'.$page_id;
+			}
+			
 			// prepare sql data for page create
 			$sqlData = array();
 			$sqlData['id'] = $page_id;
 			$sqlData['project'] = OAK_CURRENT_PROJECT;
 			$sqlData['template_set'] = $FORM->exportValue('template_set');
 			$sqlData['name'] = $FORM->exportValue('name');
-			$sqlData['name_url'] = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+			$sqlData['name_url'] = $url_name;
 			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['index_page'] = $FORM->exportValue('index_page');
 			$sqlData['protect'] = $FORM->exportValue('protect');

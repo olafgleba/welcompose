@@ -770,6 +770,68 @@ public function initPageContents ($page)
 }
 
 /**
+ * Tests given url name of a page for uniqueness. Takes the page's url
+ * name as first argument and an optional page id as second argument. If
+ * the page id is given, this page type won't be considered when checking
+ * for uniqueness (useful for updates). Returns boolean true if page name
+ * is unique.
+ *
+ * @throws Content_PagetypeException
+ * @param string Page name
+ * @param int Page id
+ * @return bool
+ */
+public function testForUniqueUrlName ($name, $id = null)
+{
+	// access check
+	if (!oak_check_access('Content', 'Page', 'Use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($name)) {
+		throw new Content_PageException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Content_PageException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Content_PageException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		WHERE
+			`project` = :project
+		  AND
+			`name_url` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
  * Tests whether given page belongs to current project. Takes the
  * page id as first argument. Returns bool.
  *
@@ -928,6 +990,118 @@ public function checkAccess ($page, $protect_flag)
 	}
 	
 	return false;
+}
+
+/**
+ * Resolves page using the available url params. Returns the page id on
+ * success or throws an exception on failure.
+ * 
+ * The function either expects the plain page id (~ $_REQUEST['page']) or
+ * the url name of a page (~ $_REQUEST['page_name]).
+ * 
+ * @throws Content_BlogPostingException
+ * @return int
+ */
+public function resolvePage ()
+{
+	// get page id and url name from url
+	$page_id = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC);
+	$page_name = Base_Cnc::filterRequest($_REQUEST['page_name'], OAK_REGEX_MEANINGFUL_STRING);
+	
+	if (!is_null($page_id)) {
+		if ($this->pageExists($page_id)) {
+			return (int)$page_id;
+		} else {
+			throw new Content_PageException("Requested page could not be found");
+		}
+	} elseif (!is_null($page_name)) {
+		// resolve page by name
+		$sql = "
+			SELECT
+			 	`id`
+			FROM
+				".OAK_DB_CONTENT_PAGES."
+			WHERE
+				`name_url` = :name_url
+			  AND
+				`project` = :project
+			LIMIT 1
+		";
+	
+		// prepare bind params
+		$bind_params = array(
+			'name_url' => (string)$page_name,
+			'project' => OAK_CURRENT_PROJECT
+		);
+	
+		// execute query and evaluate result
+		$result = intval($this->base->db->select($sql, 'field', $bind_params));
+		if ($result > 1) {
+			return (int)$result;
+		} else {
+			throw new Content_PageException("Requested page could not be found");
+		}
+	} else {
+		// get index get
+		$page = $this->selectIndexPage();
+		
+		// if there's an index page, return it's id. if not, throw an
+		// exception
+		if (!is_null(Base_Cnc::filterRequest($page['id'], OAK_REGEX_NUMERIC))) {
+			return (int)$page['id'];
+		} else {
+			throw new Content_PageException("Requested page could not be found");
+		}
+	}
+}
+
+/**
+ * Tests whether page exists or not. Takes the page id as first
+ * argument. Returns bool.
+ *
+ * @throws Content_PageException
+ * @param int Page id
+ * @return bool
+ */ 
+public function pageExists ($id)
+{
+	// access check
+	if (!oak_check_access('Content', 'Page', 'Use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Content_PageException('Input for parameter id is not numeric');
+	}
+	
+	// initialize bind params
+	$bind_params = array();
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		WHERE
+			`content_pages`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // end of class

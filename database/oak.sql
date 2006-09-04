@@ -1,6 +1,6 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 02.09.2006 11:29:36
+-- Created on: 04.09.2006 21:46:36
 -- Diagram Version: 131
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
@@ -552,6 +552,7 @@ CREATE TABLE `content_pages` (
   INDEX `image_small`(`image_small`),
   INDEX `image_medium`(`image_medium`),
   INDEX `image_big`(`image_big`),
+  UNIQUE INDEX `name_url`(`name_url`),
   CONSTRAINT `content_pages.type2content_page_types.id` FOREIGN KEY (`type`)
     REFERENCES `content_page_types`(`id`)
       ON DELETE CASCADE
