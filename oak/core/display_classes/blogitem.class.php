@@ -343,7 +343,6 @@ public function getRedirectLocationSelf ()
 public function getLocationSelf ()
 {
 	$definition = array(
-		'<project_id>' => $this->_project['id'],
 		'<project_name_url>' => $this->_project['name_url'],
 		'<page_id>' => $this->_page['id'],
 		'<page_name_url>' => $this->_page['name_url'],
