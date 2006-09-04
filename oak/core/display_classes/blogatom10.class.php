@@ -175,11 +175,22 @@ public function getRedirectLocationSelf ()
  */
 public function getLocationSelf ()
 {
-	if ($this->_page['index_page']) {
-		return 'index.php';
-	} else {
-		return sprintf("index.php?page=%u&action=Atom10", $this->_page['id']);
+	$definition = array(
+		'<project_name_url>' => $this->_project['name_url'],
+		'<page_id>' => $this->_page['id'],
+		'<page_name_url>' => $this->_page['name_url'],
+		'<action>' => 'Atom10',
+		'<start>' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
+	);
+	
+	$patterns = array();
+	$replacements = array();
+	foreach ($definition as $_pattern => $_replacement) {
+		$patterns[] = $_pattern;
+		$replacements[] = $_replacement;
 	}
+	
+	return str_replace($patterns, $replacements, $this->base->_conf['urls']['blog_atom10']);
 }
 
 /**

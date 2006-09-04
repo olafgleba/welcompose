@@ -173,11 +173,22 @@ public function getRedirectLocationSelf ()
  */
 public function getLocationSelf ()
 {
-	if ($this->_page['index_page']) {
-		return 'index.php';
-	} else {
-		return sprintf("index.php?page=%u&action=ArchiveYear", $this->_page['id']);
+	$definition = array(
+		'<project_name_url>' => $this->_project['name_url'],
+		'<page_id>' => $this->_page['id'],
+		'<page_name_url>' => $this->_page['name_url'],
+		'<action>' => 'ArchiveYear',
+		'<posting_year_added>' => $this->_posting['year_added']
+	);
+	
+	$patterns = array();
+	$replacements = array();
+	foreach ($definition as $_pattern => $_replacement) {
+		$patterns[] = $_pattern;
+		$replacements[] = $_replacement;
 	}
+	
+	return str_replace($patterns, $replacements, $this->base->_conf['urls']['blog_archive_month']);
 }
 /**
  * Returns information whether to skip authentication
