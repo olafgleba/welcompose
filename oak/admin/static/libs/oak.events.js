@@ -185,7 +185,7 @@ var definitions = {
 			Mediamanager.switchLayer('lyMediamanagerMyFlickr', 'lyMediamanagerMyLocal');
 			return false;
 		}
-	}/*,
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -197,7 +197,7 @@ var definitions = {
 			}
 			return false;
 		}
-	}*/,
+	},
 	'textarea' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -221,13 +221,6 @@ var definitions = {
 	'#mm_include_types_wrap' : function(el){
 		el.onclick = function(){
 			Mediamanager.invokeInputs(this);
-		}
-	},
-	'#mm_tags' : function(el){
-		el.onkeyup = function(){
-			//setTimeout("Mediamanager.invokeTags()", 800);
-			//Mediamanager.initializeTagSearch();
-			Mediamanager.invokeTags()
 		}
 	},
 	'#mm_timeframe' : function(el){

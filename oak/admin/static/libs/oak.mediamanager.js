@@ -66,7 +66,6 @@ Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
-Mediamanager.prototype.triggerInputTags = Mediamanager_triggerInputTags;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
 
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
@@ -138,7 +137,6 @@ function _checkOccurrences (elems, exception)
 		_applyError(e);
 	}
 }
-
 
 /**
  * Implements method of prototype class Mediamanager
@@ -290,9 +288,8 @@ function Mediamanager_invokeInputs ()
 /*	
 	var neu = $('mm_include_types_wrap').parentNode.getAttribute('class');
 	
-	alert (neu);*/
-		
-
+	alert (neu);
+*/
 		
 		var elems = Mediamanager.checkMyLocalElems();
 		var url = '../mediamanager/mediamanager.php';
@@ -311,19 +308,6 @@ function Mediamanager_invokeInputs ()
 	}
 }
 
-/**
- * Implements method of prototype class Tables
- * @param {string} elem actual element to process
- * @throws applyError on exception
- */
-function Mediamanager_triggerInputTags ()
-{
-	try {
-		setTimeout("Mediamanager.invokeTags()", 800);
-	} catch (e) {
-		_applyError(e);
-	}
-}
 
 /**
  * Implements method of prototype class Tables
@@ -333,9 +317,16 @@ function Mediamanager_triggerInputTags ()
 function Mediamanager_initializeTagSearch ()
 {
 	try {
-		setTimeout("Mediamanager.invokeTags()", 300);
-		return true;
-		//Mediamanager.triggerInputTags();
+		// clear the keyPressDelay if it exists from before
+		if (this.keyPressDelay) {
+			window.clearTimeout(this.keyPressDelay);
+		}
+	
+		//if ($('mm_tags').value != '') {
+		if ($('mm_tags').value >= '') {
+			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 800);
+		}
+		//return true;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -361,20 +352,8 @@ function Mediamanager_invokeTags ()
 				method : 'get',
 				onLoading : _loader,
 				parameters : pars,
-				onComplete : _showResponseInvokeInputs
+				onComplete : _showResponseInvokeTagInputs
 			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-function _loader ()
-{
-	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[0];
-		Element.hide(hideContentTable);
-		Element.show('indicator');
 	} catch (e) {
 		_applyError(e);
 	}
@@ -385,13 +364,21 @@ function _preserveElementStatus ()
 {	
 	try {
 	
-		previous_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		previous_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		previous_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 	
-		previousElems = new Array (previous_includeTypesElem, previous_tagsElem, previous_timeframeElem);
-		return previousElems;
+	//	previousElems = new Array (previous_includeTypesElem, previous_tagsElem, previous_timeframeElem);
+		//return previousElems;
 		//alert (includeTypesElem + ', ' + tagsElem + ', ' + timeframeElem);
+		
+		var includeType = $('mm_include_types_wrap').parentNode.firstChild;	
+		var inner = includeType.lastChild.getAttribute('class');
+		
+	//	inner.className = this.mediamanagerClassHide;
+	//	Element.update(inner, this.elementHtmlHide);
+		
+		alert (inner); 
 		
 		
 	} catch (e) {
@@ -412,40 +399,6 @@ function _showElementAfterAjaxInvoke (ttarget)
 		
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.apply();
-	
-		// needed to set appropriate height of content of div to populate
-		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-		
-		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
-		
-		if (includeTypesElem == 'block') {
-			var rows = '1';
-		} else {
-			var rows = '';
-		}
-		_checkOccurrences (collectElems, rows);
-	
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-function _hideElementAfterAjaxInvoke (elem)
-{	
-	try {
-		// properties
-		this.elem = elem;
-		this.attr = 'class';
-		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-		
-		Element.hide(this.ttarget);
-		
-		this.elem.className = this.mediamanagerClass;
-		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
 	
 		// needed to set appropriate height of content of div to populate
@@ -504,15 +457,59 @@ function _showResponseInvokeInputs(req)
 		}
 */
 		
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseInvokeTagInputs(req)
+{
+	try {
+		
+		//alert ('set: ' +previousElems);
+		
+		$('column').innerHTML = req.responseText;
+		
+	/*	Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
+		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElems[3]});
+	*/	
+
+	/*	
+		for (var i = 0; i < previousElems.length; i++) {		
+			var range = previousElems[i];
+			if (range == 'block') {
+				//Mediamanager.showElement();
+				this.elem.className = this.mediamanagerClassHide;
+				Element.update(this.elem, this.elementHtmlHide);
+				alert ('zeigen');
+			} else {
+				//Mediamanager.hideElement();
+				alert ('verstecken');
+			}
+		}
+*/
+		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
 		
-		$('mm_tags').focus();
+		$('mm_tags').focus();	
+		
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
+		
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
 		Behaviour.apply();
 		
-		neu = 1;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -540,6 +537,17 @@ function Mediamanager_checkMyLocalElems ()
 	
 		var o = $H(getElems);
 		return o.toQueryString();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function _loader ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName('mm_content')[0];
+		Element.hide(hideContentTable);
+		Element.show('indicator');
 	} catch (e) {
 		_applyError(e);
 	}

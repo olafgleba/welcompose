@@ -154,6 +154,8 @@ function Base ()
 		 */
 		this.parseMedUrl = '../mediamanager/mediamanager.php';
 		
+		this.keyPressDelay = null;
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -270,9 +272,9 @@ function Base_isEmpty(elem) {
  */
 function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
-}
+}	
 
-
+	
 /**
  * Construct a new OakInit object
  * @class This is the Init class to call on load of page  
@@ -324,7 +326,6 @@ function OakInit_load ()
 	}
 }
 
-
 /**
  * Implements method of prototype class OakInit
  * @param {global} response 
@@ -348,6 +349,7 @@ function OakInit_getVars ()
 		}
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
+						
 				this.url = this.parseMedUrl + '?page=mediamanager';
 				if (typeof this.req != 'undefined') {
 		
@@ -417,9 +419,13 @@ function OakInit_processOakInit (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
-				Behaviour.apply();
-				
-			//	Event.observe('mm_tags','keyup', Mediamanager.initializeTagSearch, false);
+			Behaviour.apply();	
+			
+			// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+			$('mm_tags').setAttribute("autocomplete","off");
+			
+			Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
