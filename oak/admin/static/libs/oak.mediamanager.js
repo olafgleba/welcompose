@@ -456,7 +456,9 @@ function _showResponseInvokeInputs(req)
 			}
 		}
 */
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
+		$('column').focus();
 		Behaviour.apply();
 		
 	} catch (e) {
