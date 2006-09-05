@@ -556,7 +556,7 @@ public function applyTextMacros ($text, $stage = "pre")
 	foreach ($macros as $_stage => $_macros) {
 		foreach ($_macros as $_macro) {
 			// test if macro belongs to current project/user
-			if (!$this->textMacroBelongsToCurrentUser($_macro)) {
+			if (!$this->textMacroBelongsToCurrentUser($_macro['id'])) {
 				throw new Application_TextmacroException("Text macro does not belong to current user or project");
 			}
 			
