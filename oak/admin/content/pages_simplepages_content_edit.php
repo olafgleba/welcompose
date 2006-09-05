@@ -136,7 +136,7 @@ try {
 	$FORM->addElement('textarea', 'content', gettext('Content'),
 		array('id' => 'simple_page_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
-	
+		
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
 		array('id' => 'simple_page_text_converter'));

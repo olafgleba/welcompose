@@ -66,9 +66,9 @@
 <tr>
 <td class="td_mm_media">{if $_object.type == 'image'}<a class="mm_insertMedia" href="#" title="{i18n Insert this Media in your Content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{/if}</td>
 <td class="td_mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
-<td class="td_mm_casts">{if $_object.type == 'document' || $_object.type == 'audio' || $_object.type == 'video'}<a class="mm_makecasts" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}</td>
-<td class="td_mm_edit"><a class="mm_edit" href="#" name="{$_object.id}" title="{i18n Edit}"></a></td>
-<td class="td_mm_del"><a class="mm_delete" href="#" name="{$_object.id}" title="{i18n Delete}"></a></td>
+<td class="td_mm_casts">{if $_object.type == 'document' || $_object.type == 'audio' || $_object.type == 'video'}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}</td>
+<td class="td_mm_edit"><a class="mm_edit" href="#" id="{$_object.id}" title="{i18n Edit}"></a></td>
+<td class="td_mm_del"><a class="mm_delete" href="#" id="{$_object.id}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

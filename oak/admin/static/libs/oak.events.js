@@ -174,6 +174,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_cast' : function(el){
+		el.onclick = function(){
+			Mediamanager.mediaToPodcast(this);
+			return false;
+		}
+	},
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');

@@ -68,7 +68,7 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 					this.url = '../mediamanager/mediamanager_upload.php';
 				break;
 			case 'mm_edit' :
-					this.url = '../mediamanager/mediamanager_edit.php?id=' + this.elem.name;
+					this.url = '../mediamanager/mediamanager_edit.php?id=' + this.elem.id;
 				break;
 		}
 		// properties

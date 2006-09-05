@@ -62,7 +62,7 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
-
+Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
@@ -247,6 +247,41 @@ function Mediamanager_switchLayer (toShow, toHide)
 	}
 }
 
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Show Podcast layer and fill media player
+ *
+ * @param {string} toShow div to display
+ * @param {string} toHide div to hide
+ * @throws applyError on exception
+ */
+function Mediamanager_mediaToPodcast (elem)
+{
+	try {
+		// properties
+		this.toShow = $('podcast_container');
+		
+		Element.show(this.toShow);
+		Element.scrollTo(this.toShow);
+
+		var url = '../mediamanager/mediamanager_media_to_podcast.php';
+		var pars = 'id=' + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : _showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 /**
  * Implements method of prototype class Mediamanager
  * Fires the ajax request
@@ -258,7 +293,7 @@ function Mediamanager_deleteMediaItem (elem)
 	try {
 		// properties
 		var url = '../mediamanager/mediamanager_delete.php';
-		var pars = 'id=' + elem.name;
+		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
 			url,
@@ -267,9 +302,7 @@ function Mediamanager_deleteMediaItem (elem)
 				onLoading : _loader,
 				parameters : pars,
 				onComplete : Mediamanager.invokeInputs
-			});	
-					
-		
+			});		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -528,6 +561,29 @@ function _showResponseInvokeTagInputs(req)
 	}
 }
 
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseMediaToPodcast(req)
+{
+	try {
+		
+		Element.show('podcast_container_loader');
+		Element.hide('indicatorPodcast');
+		$('mediafile').innerHTML = req.responseText;
+		
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 /**
  * Implements method of prototype class Mediamanager
  * Fires the ajax request
@@ -561,6 +617,17 @@ function _loader ()
 		var hideContentTable = document.getElementsByClassName('mm_content')[0];
 		Element.hide(hideContentTable);
 		Element.show('indicator');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function _loaderMediaToPodcast ()
+{
+	try {
+		var hideContentTable = $('podcast_container_loader');
+		Element.hide(hideContentTable);
+		Element.show('indicatorPodcast');
 	} catch (e) {
 		_applyError(e);
 	}

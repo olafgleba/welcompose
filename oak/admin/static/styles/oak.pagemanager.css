@@ -57,7 +57,7 @@ vertical-align: bottom;
 }
 
 /* %T =links */
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.mm_makecasts, a.mm_edit, a.mm_delete {
+a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.mm_cast, a.mm_edit, a.mm_delete {
 display: block;
 width: 20px;
 height: 20px;
@@ -122,10 +122,10 @@ background: #fff url(../img/icons/move.gif) 0 0 no-repeat;
 a.move:hover, a.move:active, a.move:focus {
 background: #fff url(../img/icons/move.gif) 0 -44px no-repeat;
 }
-a.mm_makecasts:link, a.mm_makecasts:visited {
+a.mm_cast:link, a.mm_cast:visited {
 background: #fff url(../img/icons/makepodcast.gif) 0 0 no-repeat;
 } 
-a.mm_makecasts:hover, a.mm_makecasts:active, a.mm_makecast:focus {
+a.mm_cast:hover, a.mm_cast:active, a.mm_cast:focus {
 background: #fff url(../img/icons/makepodcast.gif) 0 -44px no-repeat;
 }
 a.mm_edit:link, a.mm_edit:visited {

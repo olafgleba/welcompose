@@ -1022,7 +1022,7 @@ opacity: 0.4;
 }
 
 #indicator {
-display:  none;
+display: none;
 }
 
 #myLocal_mm_contentToPopulate #indicator {
@@ -1031,6 +1031,35 @@ width:  210px;
 left:  0;
 top:  45%;
 text-align:  center;
+}
+
+#podcast_container {
+display: none;
+background: #d9d9d9 url(../img/bg_slides.gif);
+}
+#indicatorPodcast {
+display: none;
+}
+#podcast_container #indicatorPodcast {
+position:  relative;
+width:  690px;
+left:  0;
+top:  45%;
+text-align:  center;
+}
+
+#emulateFieldsetTop {
+width: 690px;
+padding: 20px 10px 0 10px;
+margin: 20px 0 0 0;
+background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
+overflow: hidden;
+}
+#emulateFieldsetBot {
+width: 710px;
+padding: 20px 0;
+margin: 0 0 20px 0;
+background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 
 /* %M =misc */
