@@ -1,4 +1,26 @@
 /**
+ * Project: Oak
+ * File: oak.helper.js
+ *
+ * Copyright (c) 2004-2005 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id$
+ *
+ * @copyright 2006 creatics media.systems
+ * @author Olaf Gleba
+ * @package Oak
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/**
  * Construct a new Helper object
  * @class This is the basic Helper class for miscellaneous methods
  * @constructor
@@ -84,9 +106,10 @@ function Helper_closePopup ()
     			e[i].disabled = true;
 			}
 			
-		/* has to be a timeout since the opened window has
+		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
 		setTimeout ("self.close()", 400);
+		
 	} catch (e) {
 		_applyError(e);
 	}

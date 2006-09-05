@@ -1,6 +1,6 @@
 /**
  * Project: Oak
- * File: oak.core.js
+ * File: oak.mediamanager.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.core.js 327 2006-08-13 09:36:41Z olaf $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
@@ -26,7 +26,7 @@
  * to make it unnecessary to loop this core file through the i18n parser.
  *
  * @author Olaf Gleba og@creatics.de
- * @version $Id: oak.core.js 327 2006-08-13 09:36:41Z olaf $ 
+ * @version $Id$ 
  */
 
 
@@ -284,7 +284,7 @@ function Mediamanager_deleteMediaItem (elem)
 function Mediamanager_invokeInputs ()
 {
 	try {
-	//	_preserveElementStatus ();
+		_preserveElementStatus ();
 /*	
 	var neu = $('mm_include_types_wrap').parentNode.getAttribute('class');
 	
@@ -372,13 +372,23 @@ function _preserveElementStatus ()
 		//return previousElems;
 		//alert (includeTypesElem + ', ' + tagsElem + ', ' + timeframeElem);
 		
+		/* dom processing
 		var includeType = $('mm_include_types_wrap').parentNode.firstChild;	
 		var inner = includeType.lastChild.getAttribute('class');
+		var tag = includeType.lastChild.nodeName;
+		*/
 		
-	//	inner.className = this.mediamanagerClassHide;
-	//	Element.update(inner, this.elementHtmlHide);
+		// by ID with index
+		includeType = document.getElementsByClassName('showMediamanagerElement')[0];
+		//alert (includeType.innerHTML);
 		
-		alert (inner); 
+	//	includeType.className = this.mediamanagerClassHide;
+		//Element.update($(includeType), this.elementHtmlHide);
+		
+		$(includeType).innerHTML = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
+		Behaviour.apply();
+		
+		//alert (inner); 
 		
 		
 	} catch (e) {
@@ -459,6 +469,7 @@ function _showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
 		$('column').focus();
+		
 		Behaviour.apply();
 		
 	} catch (e) {

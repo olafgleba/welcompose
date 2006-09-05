@@ -154,6 +154,9 @@ function Base ()
 		 */
 		this.parseMedUrl = '../mediamanager/mediamanager.php';
 		
+		/**
+		 * Path for XHMLHTTPRequest imported files
+		 */
 		this.keyPressDelay = null;
 		
 	} catch (e) {
