@@ -171,4 +171,8 @@ define("OAK_REGEX_HEX", "=^([a-f0-9]+)$=i");
 // url-friendly representation of a string
 define("OAK_REGEX_MEANINGFUL_STRING", "=^([0-9a-z-]+)$=i");
 
+// Defines regular expression to turn action names into
+// url pattern names.
+define("OAK_REGEX_ACTION_TO_URL_PATTERN", "~(?<=[a-z])([A-Z0-9])~");
+
 ?>

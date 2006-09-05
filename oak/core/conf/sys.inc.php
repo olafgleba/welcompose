@@ -40,13 +40,13 @@ textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
 textmacro_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
 
 [urls]
-simple_page_index = "/<page_name_url>/"
-simple_form_index = "/<page_name_url>/"
-blog_index = "/<page_name_url>/<start>/"
-blog_atom10 = "/<page_name_url>/<start>/"
-blog_rss20 = "/<page_name_url>/<start>/"
-blog_item = "/<page_name_url>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title_url>/"
-blog_archive_year = "/<page_name_url>/<posting_year_added>/"
-blog_archive_month = "/<page_name_url>/<posting_year_added>/<posting_month_added>/"
+simple_page_index = "/<page_name>/"
+simple_form_index = "/<page_name>/"
+blog_index = "/<page_name>/<start>/"
+blog_atom_10 = "/<page_name>/<start>/"
+blog_rss_20 = "/<page_name>/<start>/"
+blog_item = "/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_archive_year = "/<page_name>/<posting_year_added>/"
+blog_archive_month = "/<page_name>/<posting_year_added>/<posting_month_added>/"
 
 ; */ ?>
