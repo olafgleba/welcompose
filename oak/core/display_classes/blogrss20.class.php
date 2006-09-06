@@ -174,22 +174,22 @@ public function getRedirectLocationSelf ()
  */
 public function getLocationSelf ()
 {
-	$definition = array(
-		'<project_name_url>' => $this->_project['name_url'],
-		'<page_id>' => $this->_page['id'],
-		'<page_name_url>' => $this->_page['name_url'],
-		'<action>' => 'Rss20',
-		'<start>' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
+	// prepare params
+	$params = array(
+		'page_id' => $this->_page['id'],
+		'action' => 'Rss20'
 	);
 	
-	$patterns = array();
-	$replacements = array();
-	foreach ($definition as $_pattern => $_replacement) {
-		$patterns[] = $_pattern;
-		$replacements[] = $_replacement;
-	}
+	// send params to url generator. we hope to get back something useful.
+	$URLGENERATOR = load('Utility:UrlGenerator');
+	$url = $URLGENERATOR->generateInternalLink($params);
 	
-	return str_replace($patterns, $replacements, $this->base->_conf['urls']['blog_rss20']);
+	// return the url or a hash mark if the url is empty 
+	if (empty($url)) {
+		return '#';
+	} else {
+		return $url;
+	}
 }
 
 /**
