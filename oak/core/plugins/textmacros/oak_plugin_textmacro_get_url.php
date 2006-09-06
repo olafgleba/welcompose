@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak_Plugins
- * File: oak_plugin_textmacro_oak_url.php
+ * File: oak_plugin_textmacro_get_url.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -24,12 +24,12 @@
 
 /** 
  * Replaces link generator instructions with real urls. Format looks
- * something like this: {oak_url arg1=value1 arg2="value2"} 
+ * something like this: {get_url arg1=value1 arg2="value2"} 
  *
  * @param string Text
  * @return string
  */
-function oak_plugin_textmacro_oak_url ($str)
+function oak_plugin_textmacro_get_url ($str)
 {
 	// input check
 	if (!is_scalar($str)) {
@@ -37,17 +37,17 @@ function oak_plugin_textmacro_oak_url ($str)
 	}
 	
 	// parse link generator instructions and replace them with real urls
-	return preg_replace_callback("={oak_url(.*?)}=i",
-		'oak_plugin_textmacro_oak_url_callback', $str);
+	return preg_replace_callback("={get_url(.*?)}=i",
+		'oak_plugin_textmacro_get_url_callback', $str);
 }
 
 /**
- * Callback function for the oak_url text macro.
+ * Callback function for the get_url text macro.
  *
  * @param array
  * @return string
  */
-function oak_plugin_textmacro_oak_url_callback ($args)
+function oak_plugin_textmacro_get_url_callback ($args)
 {
 	// input check
 	if (!is_array($args)) {

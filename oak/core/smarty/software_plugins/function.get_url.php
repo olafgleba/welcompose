@@ -33,54 +33,16 @@
 
 function smarty_function_get_url ($params, &$smarty)
 {
-	// define some vars
-	$page = null;
-	$action = null;
-	$query_params = array();
+	// send params to url generator. we hope to get back something useful.
+	$URLGENERATOR = load('Utility:UrlGenerator');
+	$url = $URLGENERATOR->generateInternalLink($params);
 	
-	// check input vars
-	if (!is_array($params)) {
-		throw new Exception("get_url: Functions params are not in an array");	
+	// return the url or a hash mark if the url is empty 
+	if (empty($url)) {
+		return '#';
+	} else {
+		return $url;
 	}
-	
-	// separate function params from the rest
-	foreach ($params as $_key => $_value) {
-		switch ((string)$_key) {
-			case 'page':
-					$$_key = (int)$_value;
-				break;
-			case 'action':
-					$$_key = (string)$_value;
-				break;
-			default:
-					$query_params[$_key] = $_value;
-				break;
-		}
-	}
-	
-	// check input
-	if (is_null($page) || !is_numeric($page)) {
-		throw new Exception("get_url: Invalid page id supplied");
-	}
-	if (is_null($action) || !preg_match(OAK_REGEX_ALPHANUMERIC, $action)) {
-		throw new Exception("get_url: Invalid action supplied");
-	}
-	
-	// load Net_URL
-	require_once 'Net/URL.php';
-	$URL = new Net_URL('index.php');
-	
-	// add page/action to url
-	$URL->addQueryString('page', $page);
-	$URL->addQueryString('action', $action);
-	
-	// append query params to url
-	foreach ($query_params as $_key => $_value) {
-		$URL->addQueryString($_key, $_value);
-	}
-	
-	// return generated url
-	return $URL->getUrl();
 }
 
 ?>

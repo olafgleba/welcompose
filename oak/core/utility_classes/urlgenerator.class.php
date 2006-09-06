@@ -57,7 +57,6 @@ class Utility_UrlGenerator {
 		'page_id' => '<page_id>',
 		'page_name' => '<page_name>',
 		'action' => '<action>',
-		'start' => '<start>',
 		'posting_id' => '<posting_id>',
 		'posting_title' => '<posting_title>',
 		'posting_year_added' => '<posting_year_added>',
@@ -218,6 +217,12 @@ public function generateInternalLink ($args = array())
 		strtolower(preg_replace(OAK_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $current_page['page_type_internal_name'])),
 		strtolower(preg_replace(OAK_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $action))
 	);
+	
+	// if the page where the link should point to is the index page, we have to use a different url pattern that
+	// ommits the page name
+	if ($current_page['index_page']) {
+		$url_pattern_name = $url_pattern_name."_start";
+	}
 	
 	// if the url pattern does not exist, we can return false
 	if (!array_key_exists($url_pattern_name, $this->base->_conf['urls'])) {
