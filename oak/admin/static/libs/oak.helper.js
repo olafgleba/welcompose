@@ -108,7 +108,7 @@ function Helper_closePopup ()
 			
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
-		setTimeout ("self.close()", 400);
+		setTimeout ("self.close()", 1000);
 		
 	} catch (e) {
 		_applyError(e);

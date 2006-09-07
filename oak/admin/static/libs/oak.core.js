@@ -58,6 +58,8 @@ function Base ()
 		this.helpClassRemove = 'iHelpRemove';
 		this.helpClassLevelTwo = 'iHelpLevelTwo';
 		this.helpClassRemoveLevelTwo = 'iHelpRemoveLevelTwo';
+		this.helpClassLevelThree = 'iHelpLevelThree';
+		this.helpClassRemoveLevelThree = 'iHelpRemoveLevelThree';
 		this.helpClassMediamanager = 'iHelpMediamanager';
 		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
 		
@@ -503,11 +505,14 @@ function Help_show (elem, level)
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelTwo;
 				break;
+			case '3' :
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.elem.className = this.helpClassRemoveLevelThree;
+				break;
 			default :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemove;
 		}
-		
 	
 		this.ttarget = this.processId;
 	
@@ -562,6 +567,9 @@ function Help_hide (elem, level)
 		switch (this.level) {
 			case '2' :
 					this.elem.className = this.helpClassLevelTwo;
+				break;
+			case '3' :
+					this.elem.className = this.helpClassLevelThree;
 				break;
 			default :
 					this.elem.className = this.helpClass;	

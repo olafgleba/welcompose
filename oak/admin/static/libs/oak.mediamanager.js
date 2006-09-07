@@ -317,7 +317,7 @@ function Mediamanager_deleteMediaItem (elem)
 function Mediamanager_invokeInputs ()
 {
 	try {
-		_preserveElementStatus ();
+		//	_preserveElementStatus ();
 /*	
 	var neu = $('mm_include_types_wrap').parentNode.getAttribute('class');
 	
@@ -419,7 +419,7 @@ function _preserveElementStatus ()
 		//Element.update($(includeType), this.elementHtmlHide);
 		
 		$(includeType).innerHTML = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
-		Behaviour.apply();
+	//	Behaviour.apply();
 		
 		//alert (inner); 
 		
@@ -573,10 +573,17 @@ function _showResponseMediaToPodcast(req)
 {
 	try {
 		
-		Element.show('podcast_container_loader');
-		Element.hide('indicatorPodcast');
-		$('mediafile').innerHTML = req.responseText;
-		
+		//Element.show('podcast_container_loader');
+		$('mediafile_container').innerHTML = req.responseText;
+				
+		if (Helper.unsupportsEffects('safari')) {
+			Element.show('podcast_container_loader');
+			Element.hide('indicatorPodcast');
+		} else {
+			//Element.hide('podcast_container_loader');
+			Effect.Appear('podcast_container_loader',{duration: 1.8});
+			Effect.Fade('indicatorPodcast', {duration: 0.4});
+		}
 		Behaviour.apply();
 		
 	} catch (e) {

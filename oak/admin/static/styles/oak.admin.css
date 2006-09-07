@@ -720,6 +720,8 @@ padding-left: 140px;
 .iHelpRemove a,
 .iHelpLevelTwo a,
 .iHelpRemoveLevelTwo a,
+.iHelpLevelThree a,
+.iHelpRemoveLevelThree a,
 .iHelpMediamanager a,
 .iHelpRemoveMediamanager a,
 .showMediamanagerElement a,
@@ -731,6 +733,8 @@ text-decoration: none;
 .iHelpRemove a img,
 .iHelpLevelTwo a img,
 .iHelpRemoveLevelTwo a img,
+.iHelpLevelThree a img,
+.iHelpRemoveLevelThree a img,
 .iHelpMediamanager a img,
 .iHelpRemoveMediamanager a img,
 .showMediamanagerElement a img,
@@ -1029,13 +1033,58 @@ display: none;
 position:  relative;
 width:  210px;
 left:  0;
-top:  45%;
+top:  40%;
 text-align:  center;
 }
 
+
+
 #podcast_container {
 display: none;
-background: #d9d9d9 url(../img/bg_slides.gif);
+}
+#podcast_container h2 {
+float:  left;
+margin-top: 0;
+}
+#podcast_container #mediafile_container {
+float: right;
+width: 550px;
+}
+#podcast_container #mediafile_actiontab {
+float: right;
+text-align: right;
+margin-top: 6px;
+width: 550px;
+background: transparent url(../img/bg_innerform550.gif) left top no-repeat;
+}
+#podcast_container #mediafile_actiontab a:link,
+#podcast_container #mediafile_actiontab a:visited {
+line-height: 22px;
+padding-left: 25px;
+padding-right: 8px;
+margin-left: 25px;
+background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
+}
+#podcast_container #mediafile_actiontab a:hover,
+#podcast_container #mediafile_actiontab a:active,
+#podcast_container #mediafile_actiontab a:focus {
+background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
+}
+#podcast_container #mediafile_metadata {
+float: right;
+text-align: left;
+margin-top: 6px;
+width: 550px;
+}
+#podcast_container #mediafile_metadata p {
+line-height: 140%;
+}
+#podcast_container #mediafile_player {
+float: right;
+text-align: left;
+margin-top: 6px;
+width: 550px;
+background: transparent url(../img/bg_slides.gif) top left;
 }
 #indicatorPodcast {
 display: none;
@@ -1043,24 +1092,29 @@ display: none;
 #podcast_container #indicatorPodcast {
 position:  relative;
 width:  690px;
-left:  0;
-top:  45%;
+height: 459px;
 text-align:  center;
+}
+#podcast_container #indicatorPodcast img {
+position:  relative;
+top:  40%;
 }
 
 #emulateFieldsetTop {
 width: 690px;
 padding: 20px 10px 0 10px;
 margin: 20px 0 0 0;
-background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
+background: transparent url(../img/bg_fieldset_inner.gif) left top no-repeat;
 overflow: hidden;
 }
 #emulateFieldsetBot {
 width: 710px;
 padding: 20px 0;
 margin: 0 0 20px 0;
-background: transparent url(../img/bg_form.gif) left bottom no-repeat;
+background: transparent url(../img/bg_form_inner.gif) left bottom no-repeat;
 }
+
+
 
 /* %M =misc */
 .clearb {
