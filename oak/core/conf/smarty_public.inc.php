@@ -73,7 +73,7 @@ if (!defined('SMARTY_TPL_DIR')) {
 	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../../smarty/'));
 }
 
-// load the oak resource plugin
+// load the oak resource plugins
 require_once(SMARTY_DIR.'software_extensions/resource.oak.php');
 $resource_functions = array(
 	"oakresource_FetchTemplate",
@@ -82,6 +82,16 @@ $resource_functions = array(
 	"oakresource_isTrusted"
 );
 $smarty->register_resource("oak", $resource_functions);
+unset($resource_functions);
+
+require_once(SMARTY_DIR.'software_extensions/resource.oakgtpl.php');
+$resource_functions = array(
+	"oakgtplresource_FetchTemplate",
+	"oakgtplresource_FetchTimestamp",
+	"oakgtplresource_isSecure",
+	"oakgtplresource_isTrusted"
+);
+$smarty->register_resource("oakgtpl", $resource_functions);
 unset($resource_functions);
 
 // configure smarty
