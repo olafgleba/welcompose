@@ -485,6 +485,61 @@ public function removeGlobalFileFromStore ($global_file)
 }
 
 /**
+ * Selects one global file. Takes the global file name as first
+ * argument. Returns array with global file information.
+ * 
+ * @throws Templating_GlobalFileException
+ * @param int Global file name
+ * @return array
+ */
+public function selectGlobalFileUsingName ($name)
+{
+	// access check
+	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($name) || !is_scalar($name)) {
+		throw new Templating_GlobalFileException('Input for parameter name is expected to be a non-empty scalar numeric');
+	}
+	
+	// initialize bind params
+	$bind_params = array();
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`templating_global_files`.`id` AS `id`,
+			`templating_global_files`.`project` AS `project`,
+			`templating_global_files`.`name` AS `name`,
+			`templating_global_files`.`description` AS `description`,
+			`templating_global_files`.`name_on_disk` AS `name_on_disk`,
+			`templating_global_files`.`mime_type` AS `mime_type`,
+			`templating_global_files`.`size` AS `size`,
+			`templating_global_files`.`date_modified` AS `date_modified`,
+			`templating_global_files`.`date_added` AS `date_added`
+		FROM
+			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+		WHERE 
+			`templating_global_files`.`name` = :name
+		  AND
+			`templating_global_files`.`project` = :project
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'name' => (string)$name,
+		'project' => OAK_CURRENT_PROJECT
+	);
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'row', $bind_params);
+}
+
+/**
  * Checks whether the given global file belongs to the current project or not.
  * Takes the id of the global file as first argument. Returns bool.
  *

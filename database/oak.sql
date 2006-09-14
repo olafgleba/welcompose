@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 04.09.2006 21:46:36
--- Diagram Version: 131
+-- Created on: 10.09.2006 23:05:47
+-- Diagram Version: 132
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -742,6 +742,8 @@ CREATE TABLE `content_blog_postings` (
   `summary` text,
   `content_raw` text,
   `content` text,
+  `feed_summary_raw` text,
+  `feed_summary` text,
   `text_converter` int(11) UNSIGNED,
   `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
   `draft` enum('0','1') DEFAULT '0',
