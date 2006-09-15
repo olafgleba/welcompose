@@ -1,0 +1,16 @@
+<sect1 id="crash_course.introduction">
+	<title>Einführung</title>
+	<para>
+		Diese Einführung zeigt die Einrichtung einer Webseite mit Hilfe von Oak vom Anfang bis zum Ende.
+		Vorausgesetzt wird eine betriebsbereite Installation von Oak.
+	</para>
+	
+	<para>
+		Im Gegensatz zu vielen anderen Teilen in diesem Handbuch werden nicht alle Vorgänge bis ins
+		Detail erklärt. Denn es geht primär darum, die Abläufe und die Konzepte von Oak zu vermitteln.
+		Die bedeutet, dass Sie im Rahmen dieses Crash-Kurses nicht alle technischen Finessen kennen lernen
+		werden. Sie sollen damit vielmehr in die Lage versetzt werden, selber die Software zu erforschen,
+		um dann alleine (und vielleicht mit Hilfe des Handbuchs) das gesamte Potential des Produkts
+		ausreizen zu können. 
+	</para>
+</sect1>

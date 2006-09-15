@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
+[
+    <!ENTITY % magic.fixup SYSTEM "./entities.ent">
+    %magic.fixup;
+]>
+<book id="manual" lang="de">
+	<bookinfo>
+		<title>Oak Benutzerhandbuch</title>
+		<subtitle>Oak Publishing System</subtitle>
+		<pubdate><?dbtimestamp format="Y-m-d"?></pubdate>
+		<copyright>
+			<year>2006</year>
+			<holder>sopic GmbH (<ulink url="http://www.sopic.com" />)</holder>
+		</copyright>
+	</bookinfo>
+	
+	<chapter id="crash-course">
+		<title>Crash-Kurs</title>
+		&crash_course.introduction;
+		&crash_course.hello_world;
+	</chapter>
+	
+	&appendix.licensing;
+	
+	<index id="the.index" />
+</book>
