@@ -56,5 +56,6 @@ blog_archive_year = "/oak/trunk/oak/<page_name>/<posting_year_added>/"
 blog_archive_year_start = "/oak/trunk/oak/<posting_year_added>/"
 blog_archive_month = "/oak/trunk/oak/<page_name>/<posting_year_added>/<posting_month_added>/"
 blog_archive_month_start = "/oak/trunk/oak/<posting_year_added>/<posting_month_added>/"
+global_template_url = "/oak/trunk/oak/global_template.php?name=<global_file_name>&project=<project_name>"
 
 ; */ ?>

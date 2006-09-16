@@ -417,7 +417,7 @@ public function selectProjectUsingUrlName ($name_url)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool
+ *Â @return bool
  */
 public function projectExists ($id) 
 {
@@ -514,6 +514,7 @@ public function initProjectPublicArea ()
 		
 		// define current project constant
 		define("OAK_CURRENT_PROJECT", (int)$default_project['id']);
+		define("OAK_CURRENT_PROJECT_NAME", $default_project['name_url']);
 		
 		// return project id
 		return (int)$default_project['id'];
@@ -523,6 +524,7 @@ public function initProjectPublicArea ()
 		
 		// define current project constant
 		define("OAK_CURRENT_PROJECT", (int)$project['id']);
+		define("OAK_CURRENT_PROJECT_NAME", $project['name_url']);
 		
 		// return project id
 		return (int)$project['id'];

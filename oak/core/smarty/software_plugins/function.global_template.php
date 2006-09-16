@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: function.global_file.php
+ * File: function.global_template.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -31,14 +31,14 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-function smarty_function_global_file ($params, &$smarty)
+function smarty_function_global_template ($params, &$smarty)
 {
 	// define some vars
 	$name = null;
 	
 	// check input vars
 	if (!is_array($params)) {
-		throw new Exception("global_file: Functions params are not in an array");	
+		throw new Exception("global_template: Functions params are not in an array");	
 	}
 	
 	// import params
@@ -48,7 +48,7 @@ function smarty_function_global_file ($params, &$smarty)
 					$$_key = (string)$_value;
 				break;
 			default:
-					throw new Exception("global_file: Unknown argument");
+					throw new Exception("global_template: Unknown argument");
 				break;
 		}
 	}
@@ -62,20 +62,29 @@ function smarty_function_global_file ($params, &$smarty)
 	);
 	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
 	
-	// load global file class
-	$GLOBALFILE = load('Templating:GlobalFile');
+	// load base instance
+	$BASE = load('Base:Base');
 	
-	// get global file
-	$file = $GLOBALFILE->selectGlobalFileUsingName($name);
+	// get url
+	$url = $BASE->_conf['urls']['global_template_url'];
 	
-	// make sure that there's a file
-	if (empty($file['name_on_disk'])) {
-		throw new Exception("File not found");
-	}
+	// prepare patterns
+	$patterns = array(
+		'<project_id>',
+		'<project_name>',
+		'<global_file_name>'
+	);
+	ksort($patterns);
 	
-	// execute method and return requested data
-	return sprintf("%s/%s", $GLOBALFILE->base->_conf['file']['store_www'],
-		$file['name_on_disk']);
+	// prepare replacements
+	$replacements = array(
+		OAK_CURRENT_PROJECT,
+		OAK_CURRENT_PROJECT_NAME,
+		$name
+	);
+	ksort($replacements);
+	
+	return str_replace($patterns, $replacements, $url);
 }
 
 ?>

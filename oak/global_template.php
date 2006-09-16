@@ -73,8 +73,8 @@ try {
 	
 	// change delimiter if required
 	if (isset($template['change_delimiter']) && $template['change_delimiter']) {
-		$BASE->utility->smarty->left_delimiter = '%';
-		$BASE->utility->smarty->right_delimiter = '%';
+		$BASE->utility->smarty->left_delimiter = '<%';
+		$BASE->utility->smarty->right_delimiter = '%>';
 	}
 	
 	// preparge the template name
@@ -82,7 +82,7 @@ try {
 	
 	// display page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display("oakgtpl:skel.sql", OAK_TEMPLATE_KEY);
+	$BASE->utility->smarty->display(OAK_TEMPLATE, OAK_TEMPLATE_KEY);
 	
 	@ob_end_flush();
 	exit;
