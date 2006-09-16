@@ -915,7 +915,7 @@ margin-bottom: 3px;
 }
 #myLocal_mm_content, #myFlickr_mm_content {
 display: block;
-height: 365px;
+height: 386px;
 font-size: 80%;
 background: #f9f9f9;
 padding: 2px 2px;
@@ -923,7 +923,7 @@ margin-bottom: 3px;
 }
 #myLocal_mm_contentToPopulate, #myFlickr_mm_contentToPopulate {
 display: block;
-height: 362px;
+height: 383px;
 background: #fff;
 border: 1px solid #ebebeb;
 padding: 0;
@@ -942,7 +942,7 @@ display: none;
 height: 41px;
 }
 #mm_tags_wrap {
-display: block;
+display: none;
 }
 #mm_timeframe_wrap {
 display: none;

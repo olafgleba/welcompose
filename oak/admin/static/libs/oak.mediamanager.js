@@ -282,11 +282,13 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 		
 		collectElems = String(previousElems[0] + previousElems[1] + previousElems[2]);
 
+		// give first field includeTypes a little more space
+		// since we have two rows here
 		if (previousElems[0] == 'block') {
 			var rows = 1;
 		}
 		_checkOccurrences (collectElems, rows);
-		
+				
 		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
 		
 		if (previousElems[0] == 'block') {
@@ -476,12 +478,11 @@ function Mediamanager_invokeTags ()
  */
 function _showResponseInvokeInputs(req)
 {
-	try {	
+	try {
 		$('column').innerHTML = req.responseText;
-		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		$('column').focus();
-		
+		Mediamanager.setCurrentElementStatusMyLocal();
 		Behaviour.apply();
 		
 	} catch (e) {
