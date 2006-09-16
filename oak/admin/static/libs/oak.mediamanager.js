@@ -62,85 +62,18 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
+Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
+Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
+Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
 Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
-Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
-
-Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
-
-
-/**
- * Implements private method of prototype class Mediamanager
- * Check Option Occurrences and adjust height of content div
- * @private
- * @param {string} elems actual element
- * @param {string} prefix actual divs to process (myLocal, myFlickr)
- * @throws applyError on exception
- */
-function _checkOccurrences (elems, exception)
-{
-	try {
-				
-		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
-
-		if (myLocal == 'block') {
-			var prefix = 'myLocal_';
-		} else {
-			var prefix = 'myFlickr_';
-		}
-		
-		var res = elems.match(/block/gi);	
-	
-		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mm_content', {height: '386px'});
-			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '383px'});
-		} else {
-			switch (res.length) {
-				case 1 :
-						if (exception) {
-							var cHeight = '345px';
-							var pHeight = '342px';
-						} else {
-							var cHeight = '365px';
-							var pHeight = '362px';
-						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
-					break;
-				case 2 :
-						if (exception) {
-							var cHeight = '324px';
-							var pHeight = '321px';
-						} else {
-							var cHeight = '344px';
-							var pHeight = '341px';
-						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
-					break;
-				case 3 :
-						if (exception) {
-							var cHeight = '303px';
-							var pHeight = '300px';
-						} else {
-							var cHeight = '323px';
-							var pHeight = '320px';
-						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
-					break;		
-			}
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
+Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 
 /**
  * Implements method of prototype class Mediamanager
- * Hide Formfield Element
+ * Hide Mediamanager Element
  *
  * @param {string} elem actual element
  * @throws applyError on exception
@@ -167,9 +100,7 @@ function Mediamanager_hideElement (elem)
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 		
 		if (includeTypesElem == 'block') {
-			var rows = '1';
-		} else {
-			var rows = '';
+			var rows = 1;
 		}
 		_checkOccurrences (collectElems, rows);	
 		
@@ -180,7 +111,7 @@ function Mediamanager_hideElement (elem)
 
 /**
  * Implements method of prototype class Mediamanager
- * Display Formfield Element
+ * Show Mediamanager Element
  * 
  * @param {string} elem actual element
  * @throws applyError on exception
@@ -207,9 +138,7 @@ function Mediamanager_showElement (elem)
 		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 		
 		if (includeTypesElem == 'block') {
-			var rows = '1';
-		} else {
-			var rows = '';
+			var rows = 1;
 		}
 		_checkOccurrences (collectElems, rows);
 	
@@ -247,13 +176,141 @@ function Mediamanager_switchLayer (toShow, toHide)
 	}
 }
 
+/**
+ * Implements private method of prototype class Mediamanager
+ * Check Option Occurrences and adjust height of content div
+ *
+ * @private
+ * @param {string} elems actual element
+ * @param {string} exception 
+ * @throws applyError on exception
+ */
+function _checkOccurrences (elems, exception)
+{
+	try {
+				
+		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+
+		if (myLocal == 'block') {
+			var prefix = 'myLocal_';
+		} else {
+			var prefix = 'myFlickr_';
+		}
+		
+		var res = elems.match(/block/gi);	
+	
+		if (Mediamanager.isNull(res)) {
+			Element.setStyle(prefix + 'mm_content', {height: '386px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '383px'});
+		} else {
+			switch (res.length) {
+				case 1 :
+						if (Mediamanager.isUndefined(exception) !== true) {
+							var cHeight = '345px';
+							var pHeight = '342px';
+						} else {
+							var cHeight = '365px';
+							var pHeight = '362px';
+						}
+						Element.setStyle(prefix + 'mm_content', {height: cHeight});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
+					break;
+				case 2 :
+						if (Mediamanager.isUndefined(exception) !== true) {
+							var cHeight = '324px';
+							var pHeight = '321px';
+						} else {
+							var cHeight = '344px';
+							var pHeight = '341px';
+						}
+						Element.setStyle(prefix + 'mm_content', {height: cHeight});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
+					break;
+				case 3 :
+						if (Mediamanager.isUndefined(exception) !== true) {
+							var cHeight = '303px';
+							var pHeight = '300px';
+						} else {
+							var cHeight = '323px';
+							var pHeight = '320px';
+						}
+						Element.setStyle(prefix + 'mm_content', {height: cHeight});
+						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
+					break;		
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements private method of prototype class Mediamanager
+ * Check elements display status for further use in func setCurrentElementStatusMyLocal
+ * @private
+ * @throws applyError on exception
+ */
+function Mediamanager_preserveElementStatusMyLocal ()
+{	
+	try {
+	
+		var current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+	
+		// make global -> use in func setCurrentElementStatusMyLocal
+		previousElems = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements private method of prototype class Mediamanager
+ * Sets elements class and html correponding the previous status
+ * @private
+ * @throws applyError on exception
+ */
+function Mediamanager_setCurrentElementStatusMyLocal ()
+{	
+	try {
+		
+		Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
+		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElems[2]});
+		
+		collectElems = String(previousElems[0] + previousElems[1] + previousElems[2]);
+
+		if (previousElems[0] == 'block') {
+			var rows = 1;
+		}
+		_checkOccurrences (collectElems, rows);
+		
+		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
+		
+		if (previousElems[0] == 'block') {
+			parentElem[0].lastChild.className = this.mediamanagerClassHide;
+			parentElem[0].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElems[1] == 'block') {
+			parentElem[1].lastChild.className = this.mediamanagerClassHide;
+			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElems[2] == 'block') {
+			parentElem[2].lastChild.className = this.mediamanagerClassHide;
+			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Mediamanager
  * Show Podcast layer and fill media player
  *
- * @param {string} toShow div to display
- * @param {string} toHide div to hide
+ * @param {string} elem element (id) to process
  * @throws applyError on exception
  */
 function Mediamanager_mediaToPodcast (elem)
@@ -284,25 +341,45 @@ function Mediamanager_mediaToPodcast (elem)
 
 /**
  * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
  * @throws applyError on exception
  */
-function Mediamanager_deleteMediaItem (elem)
+function _showResponseMediaToPodcast(req)
 {
 	try {
-		// properties
-		var url = '../mediamanager/mediamanager_delete.php';
-		var pars = 'id=' + elem.id;
+		$('mediafile_container').innerHTML = req.responseText;
+				
+		if (Helper.unsupportsEffects('safari')) {
+			Element.show('podcast_container_loader');
+			Element.hide('indicatorPodcast');
+		} else {
+			Effect.Appear('podcast_container_loader',{duration: 1.8});
+			Effect.Fade('indicatorPodcast', {duration: 0.4});
+		}
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loader,
-				parameters : pars,
-				onComplete : Mediamanager.invokeInputs
-			});		
+/**
+ * Implements method of prototype class Mediamanager
+ * fires temporary actions while processing the ajax call
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _loaderMediaToPodcast ()
+{
+	try {
+		var hideContentTable = $('podcast_container_loader');
+		Element.hide(hideContentTable);
+		Element.show('indicatorPodcast');
 	} catch (e) {
 		_applyError(e);
 	}
@@ -317,12 +394,7 @@ function Mediamanager_deleteMediaItem (elem)
 function Mediamanager_invokeInputs ()
 {
 	try {
-		//	_preserveElementStatus ();
-/*	
-	var neu = $('mm_include_types_wrap').parentNode.getAttribute('class');
-	
-	alert (neu);
-*/
+		Mediamanager.preserveElementStatusMyLocal ();
 		
 		var elems = Mediamanager.checkMyLocalElems();
 		var url = '../mediamanager/mediamanager.php';
@@ -343,8 +415,10 @@ function Mediamanager_invokeInputs ()
 
 
 /**
- * Implements method of prototype class Tables
- * @param {string} elem actual element to process
+ * Implements method of prototype class Mediamanager
+ * set a delay for firing the ajax search invoke
+ * special handling for tag search
+ * 
  * @throws applyError on exception
  */
 function Mediamanager_initializeTagSearch ()
@@ -354,12 +428,9 @@ function Mediamanager_initializeTagSearch ()
 		if (this.keyPressDelay) {
 			window.clearTimeout(this.keyPressDelay);
 		}
-	
-		//if ($('mm_tags').value != '') {
 		if ($('mm_tags').value >= '') {
 			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 800);
 		}
-		//return true;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -375,6 +446,8 @@ function Mediamanager_initializeTagSearch ()
 function Mediamanager_invokeTags ()
 {
 	try {
+		Mediamanager.preserveElementStatusMyLocal ();
+		
 		var elems = Mediamanager.checkMyLocalElems();
 		var url = '../mediamanager/mediamanager.php';
 		var pars = elems;
@@ -393,114 +466,20 @@ function Mediamanager_invokeTags ()
 }
 
 
-function _preserveElementStatus ()
-{	
-	try {
-	
-		current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-	
-	//	previousElems = new Array (previous_includeTypesElem, previous_tagsElem, previous_timeframeElem);
-		//return previousElems;
-		//alert (includeTypesElem + ', ' + tagsElem + ', ' + timeframeElem);
-		
-		/* dom processing
-		var includeType = $('mm_include_types_wrap').parentNode.firstChild;	
-		var inner = includeType.lastChild.getAttribute('class');
-		var tag = includeType.lastChild.nodeName;
-		*/
-		
-		// by ID with index
-		includeType = document.getElementsByClassName('showMediamanagerElement')[0];
-		//alert (includeType.innerHTML);
-		
-	//	includeType.className = this.mediamanagerClassHide;
-		//Element.update($(includeType), this.elementHtmlHide);
-		
-		$(includeType).innerHTML = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
-	//	Behaviour.apply();
-		
-		//alert (inner); 
-		
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-function _showElementAfterAjaxInvoke (ttarget)
-{	
-	try {
-		// properties
-		this.elem = elem;
-		this.attr = 'class';
-		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-		
-		Element.show(this.ttarget);
-		
-		this.elem.className = this.mediamanagerClassHide;
-		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.apply();
-	
-		// needed to set appropriate height of content of div to populate
-		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-		
-		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
-		
-		if (includeTypesElem == 'block') {
-			var rows = '1';
-		} else {
-			var rows = '';
-		}
-		_checkOccurrences (collectElems, rows);
-	
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
 /**
  * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
+ * @private
  * @param {object} req JSON response
  * @throws applyError on exception
  */
 function _showResponseInvokeInputs(req)
 {
-	try {
-		
-		//alert ('set: ' +previousElems);
-		
+	try {	
 		$('column').innerHTML = req.responseText;
-		
-	/*	Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
-		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
-		Element.setStyle('mm_timeframe_wrap', {display: previousElems[3]});
-	*/	
-
-	/*	
-		for (var i = 0; i < previousElems.length; i++) {		
-			var range = previousElems[i];
-			if (range == 'block') {
-				//Mediamanager.showElement();
-				this.elem.className = this.mediamanagerClassHide;
-				Element.update(this.elem, this.elementHtmlHide);
-				alert ('zeigen');
-			} else {
-				//Mediamanager.hideElement();
-				alert ('verstecken');
-			}
-		}
-*/
+		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		
 		$('column').focus();
 		
 		Behaviour.apply();
@@ -514,6 +493,7 @@ function _showResponseInvokeInputs(req)
  * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
+ * @private
  * @param {object} req JSON response
  * @throws applyError on exception
  */
@@ -521,37 +501,14 @@ function _showResponseInvokeTagInputs(req)
 {
 	try {
 		
-		//alert ('set: ' +previousElems);
-		
 		$('column').innerHTML = req.responseText;
-		
-	/*	Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
-		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
-		Element.setStyle('mm_timeframe_wrap', {display: previousElems[3]});
-	*/	
 
-	/*	
-		for (var i = 0; i < previousElems.length; i++) {		
-			var range = previousElems[i];
-			if (range == 'block') {
-				//Mediamanager.showElement();
-				this.elem.className = this.mediamanagerClassHide;
-				Element.update(this.elem, this.elementHtmlHide);
-				alert ('zeigen');
-			} else {
-				//Mediamanager.hideElement();
-				alert ('verstecken');
-			}
-		}
-*/
-		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
 		
-		$('mm_tags').focus();	
-		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');
-		
+		$('mm_tags').focus();		
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		Mediamanager.setCurrentElementStatusMyLocal();	
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
 		Behaviour.apply();
@@ -561,31 +518,20 @@ function _showResponseInvokeTagInputs(req)
 	}
 }
 
-
 /**
  * Implements method of prototype class Mediamanager
- * Populate on JSON response
+ * fires temporary actions while processing the ajax call
  *
+ * @private
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _showResponseMediaToPodcast(req)
+function _loader ()
 {
 	try {
-		
-		//Element.show('podcast_container_loader');
-		$('mediafile_container').innerHTML = req.responseText;
-				
-		if (Helper.unsupportsEffects('safari')) {
-			Element.show('podcast_container_loader');
-			Element.hide('indicatorPodcast');
-		} else {
-			//Element.hide('podcast_container_loader');
-			Effect.Appear('podcast_container_loader',{duration: 1.8});
-			Effect.Fade('indicatorPodcast', {duration: 0.4});
-		}
-		Behaviour.apply();
-		
+		var hideContentTable = document.getElementsByClassName('mm_content')[0];
+		Element.hide(hideContentTable);
+		Element.show('indicator');
 	} catch (e) {
 		_applyError(e);
 	}
@@ -618,23 +564,27 @@ function Mediamanager_checkMyLocalElems ()
 	}
 }
 
-function _loader ()
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request to delete an item
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_deleteMediaItem (elem)
 {
 	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[0];
-		Element.hide(hideContentTable);
-		Element.show('indicator');
-	} catch (e) {
-		_applyError(e);
-	}
-}
+		// properties
+		var url = '../mediamanager/mediamanager_delete.php';
+		var pars = 'id=' + elem.id;
 
-function _loaderMediaToPodcast ()
-{
-	try {
-		var hideContentTable = $('podcast_container_loader');
-		Element.hide(hideContentTable);
-		Element.show('indicatorPodcast');
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loader,
+				parameters : pars,
+				onComplete : Mediamanager.invokeInputs
+			});		
 	} catch (e) {
 		_applyError(e);
 	}
