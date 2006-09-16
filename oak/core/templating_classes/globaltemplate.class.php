@@ -417,7 +417,7 @@ public function smartyFetchGlobalTemplateTimestamp ($name)
 	// prepare query
 	$sql = "
 		SELECT
-			`templating_global_templates`.`date_modified` AS `date_modified`
+			UNIX_TIMESTAMP(`templating_global_templates`.`date_modified`) AS `date_modified`
 		FROM
 			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE 
@@ -580,7 +580,7 @@ public function globalTemplateBelongsToCurrentUser ($global_template)
  * global template name is unique.
  *
  * @throws Templating_GlobalTemplateException
- * @param string Global template name
+ *Â @param string Global template name
  * @param int Global template id
  * @return bool
  */
