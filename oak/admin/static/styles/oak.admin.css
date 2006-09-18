@@ -942,7 +942,7 @@ display: none;
 height: 41px;
 }
 #mm_tags_wrap {
-display: none;
+display: block;
 }
 #mm_timeframe_wrap {
 display: none;

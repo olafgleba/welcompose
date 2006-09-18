@@ -88,7 +88,7 @@ function Mediamanager_hideElement (elem)
 
 		Element.hide(this.ttarget);
 		
-		this.elem.className = this.mediamanagerClass;
+		this.elem.className = this.mediamanagerClassShow;
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.apply();
 		
@@ -102,6 +102,7 @@ function Mediamanager_hideElement (elem)
 		if (includeTypesElem == 'block') {
 			var rows = 1;
 		}
+		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);	
 		
 	} catch (e) {
@@ -140,6 +141,7 @@ function Mediamanager_showElement (elem)
 		if (includeTypesElem == 'block') {
 			var rows = 1;
 		}
+		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
 	
 		
@@ -259,7 +261,7 @@ function Mediamanager_preserveElementStatusMyLocal ()
 		var current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 	
 		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElems = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
+		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
 		
 	} catch (e) {
 		_applyError(e);
@@ -276,30 +278,32 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 {	
 	try {
 		
-		Element.setStyle('mm_include_types_wrap', {display: previousElems[0]});
-		Element.setStyle('mm_tags_wrap', {display: previousElems[1]});
-		Element.setStyle('mm_timeframe_wrap', {display: previousElems[2]});
+		Element.setStyle('mm_include_types_wrap', {display: previousElemsStatus[0]});
+		Element.setStyle('mm_tags_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElemsStatus[2]});
 		
-		collectElems = String(previousElems[0] + previousElems[1] + previousElems[2]);
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
 
 		// give first field includeTypes a little more space
 		// since we have two rows here
-		if (previousElems[0] == 'block') {
+		if (previousElemsStatus[0] == 'block') {
 			var rows = 1;
 		}
+		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
 				
+		// get all relevant spans
 		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
 		
-		if (previousElems[0] == 'block') {
+		if (previousElemsStatus[0] == 'block') {
 			parentElem[0].lastChild.className = this.mediamanagerClassHide;
 			parentElem[0].lastChild.innerHTML = this.elementHtmlHide;
 		}
-		if (previousElems[1] == 'block') {
-			parentElem[1].lastChild.className = this.mediamanagerClassHide;
-			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
+		if (previousElemsStatus[1] == 'none') {
+			parentElem[1].lastChild.className = this.mediamanagerClassShow;
+			parentElem[1].lastChild.innerHTML = this.elementHtmlShow;
 		}
-		if (previousElems[2] == 'block') {
+		if (previousElemsStatus[2] == 'block') {
 			parentElem[2].lastChild.className = this.mediamanagerClassHide;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
 		}	

@@ -92,7 +92,7 @@ function Base ()
 		 * Define the used table upload class names.
  		 * Cascading styles to fit background images
 		 */
-		this.uploadClass = 'upload showTableRow';
+		this.uploadClassShow = 'upload showTableRow';
 
 		/**
 		 * Define the used table upload class names.
@@ -104,7 +104,7 @@ function Base ()
 		 * Define the used table upload class names.
  		 * Cascading styles to fit background images
 		 */
-		this.mediamanagerClass = 'showMediamanagerElement';
+		this.mediamanagerClassShow = 'showMediamanagerElement';
 
 		/**
 		 * Define the used table upload class names.
@@ -1048,7 +1048,7 @@ function Tables_hideRow (elem)
 		// process outer table tr
 		setTimeout("Tables.collapseRow('"+ this.obid +"')", 800);
 		
-		this.elem.className = this.uploadClass;
+		this.elem.className = this.uploadClassShow;
 		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
