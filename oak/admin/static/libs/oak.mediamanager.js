@@ -103,8 +103,10 @@ function Mediamanager_hideElement (elem)
 			var rows = 1;
 		}
 		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);	
+		_checkOccurrences (collectElems, rows);
 		
+		setTimeout("Mediamanager.invokeInputs()", 15);
+			
 	} catch (e) {
 		_applyError(e);
 	}
@@ -143,7 +145,8 @@ function Mediamanager_showElement (elem)
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
-	
+		
+		setTimeout("Mediamanager.invokeInputs()", 15);
 		
 	} catch (e) {
 		_applyError(e);
@@ -202,39 +205,45 @@ function _checkOccurrences (elems, exception)
 		var res = elems.match(/block/gi);	
 	
 		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mm_content', {height: '386px'});
-			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '383px'});
+			Element.setStyle(prefix + 'mm_content', {height: '413px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '410px'});
 		} else {
 			switch (res.length) {
 				case 1 :
 						if (Mediamanager.isUndefined(exception) !== true) {
-							var cHeight = '345px';
-							var pHeight = '342px';
+							var cHeight = '372px';
+							var pHeight = '369px';
+							countItems = 7;
 						} else {
-							var cHeight = '365px';
-							var pHeight = '362px';
+							var cHeight = '392px';
+							var pHeight = '389px';
+							countItems = 8;
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 2 :
 						if (Mediamanager.isUndefined(exception) !== true) {
-							var cHeight = '324px';
-							var pHeight = '321px';
+							var cHeight = '351px';
+							var pHeight = '348px';
+							countItems = 7;
 						} else {
-							var cHeight = '344px';
-							var pHeight = '341px';
+							var cHeight = '371px';
+							var pHeight = '368px';
+							countItems = 7;
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 3 :
 						if (Mediamanager.isUndefined(exception) !== true) {
-							var cHeight = '303px';
-							var pHeight = '300px';
+							var cHeight = '330px';
+							var pHeight = '327px';
+							countItems = 6;
 						} else {
-							var cHeight = '323px';
-							var pHeight = '320px';
+							var cHeight = '330px';
+							var pHeight = '327px';
+							countItems = 6;
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
@@ -306,7 +315,8 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 		if (previousElemsStatus[2] == 'block') {
 			parentElem[2].lastChild.className = this.mediamanagerClassHide;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
-		}	
+		}
+		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -430,6 +440,9 @@ function Mediamanager_invokeInputs ()
 function Mediamanager_initializeTagSearch ()
 {
 	try {
+		// initialize global
+		var countItems;
+		
 		// clear the keyPressDelay if it exists from before
 		if (this.keyPressDelay) {
 			window.clearTimeout(this.keyPressDelay);
@@ -484,9 +497,10 @@ function _showResponseInvokeInputs(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
+		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		$('column').focus();
-		Mediamanager.setCurrentElementStatusMyLocal();
+		
 		Behaviour.apply();
 		
 	} catch (e) {
@@ -559,10 +573,10 @@ function Mediamanager_checkMyLocalElems ()
 			mm_include_types_other : $F('mm_include_types_other'),
 			mm_tags : $F('mm_tags'),
 			mm_timeframe : $F('mm_timeframe'),
-			mm_limit : 500
+			mm_limit : countItems
 		};
-	
 		var o = $H(getElems);
+		countItems = null;
 		return o.toQueryString();
 	} catch (e) {
 		_applyError(e);
