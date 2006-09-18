@@ -138,4 +138,104 @@
 		<para>Und damit ist es Zeit, Ihnen zu gratulieren. Denn Sie haben soeben Ihre erste einfache Webseite mit Oak erstellt.</para>
 		
 	</sect2>
+	
+	<sect2 id="crash_course.hello_world.style">
+		<title>Hello World mit Stil</title>
+		
+		<para>Bisher haben wir unsere eigene Vorlage vorbereitet, in Oak integriert und mit der Datenbank verbunden. Allerdings sieht unser &laquo;Hello World&raquo; noch recht uninspiriert aus. Also ist es Zeit, ihm mit CSS ein wenig Farbe zu verleihen.</para>
+		
+		<note>
+			<para>
+				Es liegt uns fern, Ihnen vorschreiben zu wollen, wie Sie Ihre Webseiten gestalten. Allerdings soll darauf hingewiesen werden, dass tabellenfreies Design und &laquo;High-end CSS&raquo; Oak und den Anwendern deutlich besser bekommt als Layout-Tabellen und grosse Mengen von Inline-Styles. Konsultieren Sie bitte, bevor Sie sich an die ersten HTML-Vorlagen für Oak setzen, unsere Hinweise zur Verwendung von CSS und zur Kombination von CSS und den mit Oak mitgelieferten Textkonvertern. 
+			</para>
+		</note>
+		
+		<para>Wie bereits bei der Vorlage handelt es sich um ein ganz einfaches Style Sheet, das Überschrift und Fliesstext einen anderen Font und eine andere Schriftgrösse verpassen soll. Zudem soll ein kleines Logo integriert werden, das über das Style Sheet eingebunden wird.</para>
+		
+		<programlisting role="css"><![CDATA[body {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+    background-position: 20px 10px;
+    margin-left: 40px;
+    margin-top: 70px;
+}
+
+h1 {
+    font-size: 1.9em;
+    font-style: italic;
+}
+
+p {
+	font-size: 1em;
+}
+]]></programlisting>
+	
+		<para>Normalerweise würde man dieses Style Sheet nun auf der Festplatte abspeichern und beispielsweise mit einem FTP-Client auf den Server transferieren. Dies geht auch bei Oak, allerdings ist dies nicht &laquo;the way to go&raquo;. Da Oak dazu in der Lage ist, mehrere Webseiten mit einer Software-Installation zu betreiben und in diesen Szenarien die Anwender meist keinen FTP-Zugang o.ä. erhalten, sind spezielle Funktionen zur Integration von Style Sheets, JavaScript usw. integriert.</para>
+		
+		<orderedlist>
+			<listitem>Gehen Sie in Oak zum Bereich <emphasis>Templating</emphasis> und klicken dort auf <emphasis>Global Templates</emphasis>. Klicken Sie dort dann auf <emphasis>Add new</emphasis>.</listitem>
+			<listitem>Geben Sie beim Feld <emphasis>Name</emphasis> einen Namen für Ihr Style Sheet an. Der Einfachheit halber bietet es sich an, einen Dateinamen wie <filename>style.css</filename> zu verwenden.</listitem>
+			<listitem>Kopieren Sie das vorbereitete Style Sheet in die Zwischenablage und fügen es in das Feld <emphasis>Content</emphasis> ein.</listitem>
+			<listitem>Wählen Sie beim Feld <emphasis>MIME Type</emphasis> den Eintrag <code>text/css</code> aus.</listitem>
+			<listitem>Kreuzen Sie nun noch <emphasis>Change Delimiter</emphasis> and und klicken dann auf <emphasis>Add global template</emphasis>, um das Style Sheet zu speichern.</listitem>
+		</orderedlist>
+		
+		<para>Jetzt ist das Style Sheet in Oak registriert und kann wie ein herkömmliches auf der Festplatte verknüpfte Style Sheet mit der Vorlage verknüpft werden. Gehen Sie zu diesem Zweck im Bereich <emphasis>Templating</emphasis> zum Bereich <emphasis>Templates</emphasis> und klicken bei der Vorlage <code>Startseite</code> auf das Icon zum Bearbeiten der Vorlage.</para>
+		
+		<para>Referenzieren Sie nun das Style Sheet im Header der Vorlage unter Verwendung der folgenden HTML-Anweisung:</para>
+		
+		<programlisting role="css"><![CDATA[<link rel="stylesheet" type="text/css" href="{global_template name="style.css"}" />]]></programlisting>
+		
+		<para>Der komplette Quellcode Ihrer Vorlage sollte nun so aussehen:</para>
+		
+		<programlisting role="html"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+    <meta http-equiv="content-Type" content="text/html; charset=iso-8859-1" />
+    <title>{$simple_page.title}</title>
+    <link rel="stylesheet" type="text/css" href="{global_template name="style.css"}" />
+</head>
+
+<body>
+    <h1>{$simple_page.title}</h1>
+    {$simple_page.content}
+</body>
+</html>
+]]></programlisting>
+		
+		<para>Öffnen Sie nun wieder ein zweites Browser-Fenster und gehen Sie ins Installationsverzeichnis. Wenn Sie alles richtig gemacht haben, sollten Sie sehen, dass Überschrift und Fliesstext weiter vom Rand entfernt sind als vorher und dass die Überschrift 1 (&lt;h1&gt;) kursiv gesetzt ist. Ebenfalls angezeigt werden sollte ein Logo, doch fehlt es. Doch keine Sorge, das ist nicht Ihr Fehler. Beheben wir gleich.</para>
+		
+		<figure>
+			<title>&laquo;Hello World&raquo; mit anderem Font</title>
+			<graphic fileref="../images/crash_course.hello_world.integrate_template.hello_world_with_oak_and_font_style.png"></graphic>
+		</figure>
+		
+		<para>
+			Genauso wie Style Sheets in Oak abgelegt werden können respektive müssen, wird auch mit Bildern verfahren, die in Style Sheets referenziert werden. Sie müssen zuerst in Oak registriert werden, damit sie im Style Sheet referenziert werden können.
+		</para>
+		
+		<orderedlist>
+			<listitem>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Unterbereich <emphasis>Global Files</emphasis> und klicken Sie dort auf <emphasis>Add new</emphasis>.</listitem>.
+			<listitem>Wählen Sie beim Feld <emphasis>File</emphasis> das Logo aus, das im Style Sheet referenziert werden soll. In diesem Fall handelt es sich um die Datei <filename>logo.png</filename>.</listitem>
+		</orderedlist>
+		
+		<para>
+			Somit wäre das Logo bereits in Oak registriert. Nun muss es noch mit dem Style Sheet verknüpft werden.
+		</para>
+		
+		<orderedlist>
+			<listitem>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Punkt <emphasis>Global Templates</emphasis> und klicken Sie beim Style Sheet <filename>style.css</filename> auf das Icon unter der Überschrift <emphasis>Edit</emphasis>.</listitem>
+			<listitem>Suchen Sie im Feld <emphasis>Content</emphasis> die CSS-Anweisung <code><![CDATA[background-image: url(logo.png);]]></code> und ersetzen Sie sie mit <code><![CDATA[background-image: url(<%global_file name="logo.png"%>);]]></code>.</listitem>
+			<listitem>Klicken Sie am Ende des Formulars auf <emphasis>Update global template</emphasis>.</listitem>
+		</orderedlist>
+		
+		<para>Öffnen Sie nun wieder ein zweites Browser-Fenster und gehen Sie ins Installationsverzeichnis. Wenn Sie alles richtig gemacht haben, sollte nun auch das Logo erscheinen.</para>
+		
+		<figure>
+			<title>&laquo;Hello World&raquo; mit anderem Font und Logo</title>
+			<graphic fileref="../images/crash_course.hello_world.integrate_template.hello_world_with_oak_and_font_and_logo_style.png"></graphic>
+		</figure>
+	</sect2>
 </sect1>
