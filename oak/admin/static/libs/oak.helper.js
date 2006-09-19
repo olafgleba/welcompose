@@ -46,11 +46,14 @@ Helper.prototype = new Base();
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.closePopup = Helper_closePopup;
+Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
 Helper.prototype.lowerOpacity = Helper_lowerOpacity;
 Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
 Helper.prototype.unsupportsElems = Helper_unsupportsElems;
 Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
+Helper.prototype.showNextNode = Helper_showNextNode;
+Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 
 
 
@@ -70,6 +73,8 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 			case 'mm_edit' :
 					this.url = '../mediamanager/mediamanager_edit.php?id=' + this.elem.id;
 				break;
+			case 'pages_internal_links' :
+					this.url = '../content/pages_links_select.php?target=' + this.elem.name;
 		}
 		// properties
 		this.ttargetUrl = this.url;
@@ -108,7 +113,22 @@ function Helper_closePopup ()
 			
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
-		setTimeout ("self.close()", 1000);
+		setTimeout ("self.close()", 1200);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_closeLinksPopup ()
+{       
+	try {
+		/* invoke function in parent window */
+		self.opener.$('lyLowerOpacity').style.display = 'none';
+			
+		/* set a timeout since the opened window has
+		 to be present til process function in parent is executed */
+		setTimeout ("self.close()", 100);
 		
 	} catch (e) {
 		_applyError(e);
@@ -291,13 +311,127 @@ function Helper_defineWindowY ()
 		}
 		else if (document.body) {
 			// other Explorers
-			y = Math.round(document.body.clientHeight/6)																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				;
+			y = Math.round(document.body.clientHeight/6);
 		}
 		return y;
 	} catch (e) {
 		_applyError(e);
 	}
 }
+
+/**
+ * Implements method of prototype class Helper
+ * Display next url level
+ * @requires Helper The Helper Class
+ */
+function Helper_showNextNode(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode;
+		
+		if (sourceNode.id != 'thirdNode') {
+			var nextNode = sourceNode.nextSibling;
+			nextNode = nextNode.nextSibling.getAttribute('id');
+			
+			if (Helper.unsupportsEffects('safari_exception')) {
+				Element.show(nextNode);
+			} else {
+				Effect.Appear(nextNode,{duration: 0.6});
+			}
+		}
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLink(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var target = formTarget;
+		
+		var build;
+		build = '<a href="';
+		build += elem.id;
+		build += '">';
+		
+		strStart = build;
+		strEnd = '</a>';
+			
+		// describeLink is defined in oak.strings.js
+		_insertTags(target, strStart, strEnd, describeLink);
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert Content into Textareas
+ * taken from http://sourceforge.net/projects/wikipedia
+ *
+ * @private
+ * @throws applyError on exception
+ */
+function _insertTags(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		var txtarea = opener.$(id);
+		// IE
+		if(opener.document.selection) {
+			var theSelection = opener.document.selection.createRange().text;
+			if(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+			} else {
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			if(!myText) { myText=sampleText;}
+			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+			} else {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			tagOpen=tagOpen.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Building new instance for @class Helper

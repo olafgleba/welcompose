@@ -170,7 +170,7 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','604','media_upload','mm_upload');
+			Helper.launchPopup('740','604','media_upload','mm_upload', this);
 			return false;
 		}
 	},
@@ -244,6 +244,30 @@ var definitions = {
 	'#mm_timeframe' : function(el){
 		el.onchange = function(){
 			Mediamanager.invokeInputs(this);
+		}
+	},
+	'.act_internalLink' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('740','604','pages_links_select','pages_internal_links', this);
+			return false;
+		}
+	},
+	'.act_setInternalLink' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLink(this);
+			return false;
+		}
+	},
+	'.close' : function(el){
+		el.onclick = function(){
+			Helper.closeLinksPopup(this);
+			return false;
+		}
+	},
+	'.showNextNode' : function(el){
+		el.onclick = function(){
+			Helper.showNextNode(this);
+			return false;
 		}
 	},
 	'.submit90' : function(el){

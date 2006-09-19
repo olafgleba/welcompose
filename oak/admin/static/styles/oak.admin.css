@@ -73,13 +73,14 @@ h2, h3, h4, p, a, li, th, td, select, label, input {
 font-size: 0.80em;
 }
 p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p,
-#column a, #act a {
+#column a, fieldset.topbg .act a {
 font-size: 100%;
 }
 
 /* %G =links */
 a {
 text-decoration: none;
+cursor: pointer;
 }
 a:link, a:visited {
 color: #00AE2C;
@@ -518,11 +519,15 @@ height: 4.7em;
 label.cont.h13 {
 height: 13em;
 }
+label.cont.h13act {
+padding: 0;
+height: 13em;
+}
 label.cont.h46 {
 height: 46em;
 }
 label.cont.h46act {
-padding: 00;
+padding: 0;
 height: 46em;
 }
 label span.bez {
@@ -992,30 +997,112 @@ width: 30px;
 }
 
 
-/* %M =upload */
-body#mediamanager_modalWindow {
+/* %M =popup */
+body#modalWindow {
 padding: 0;
 margin: 0;
 }
-#mm_modalContainer {
+#modalContainer {
 text-align: left;
 }
 
-#mm_modalContainer h2 {
+#modalContainer h2 {
 background: #efefef;
 padding: 8px 8px;
 margin: 0;
 border: 1px solid #ccc;
 }
-#mm_modalContainer h2 span {
+#modalContainer h2 span {
 color: #00AE2C;
 }
-#mm_modalBody {
-padding: 3px 8px;
-min-height: 200px;
-background: #fff;
-z-index: 2;
+#modalContainer h2 span.close {
+margin-left: 420px;
 }
+#modalContainer h2 span.close a {
+font-weight: bold;
+font-size: 100%;
+}
+#modalBody {
+padding: 3px 8px;
+min-height: 555px;
+background: #fff;
+}
+
+
+table#secondNode,
+table#thirdNode {
+display: none;
+float: left;
+width: 225px;
+padding: 0;
+margin: 0 2px 0 0;
+border: 0 none;
+background: #f9f9f9;
+}
+table#firstNode,
+table#secondNode,
+table#thirdNode {
+float: left;
+width: 225px;
+padding: 0;
+margin: 0 2px 0 0;
+border: 0 none;
+background: #f9f9f9;
+}
+table#firstNode td,
+table#secondNode td,
+table#thirdNode td {
+border-color: #fff;
+vertical-align: top;
+}
+table#firstNode td.initialNode,
+table#secondNode td.initialNode,
+table#thirdNode td.initialNode {
+width: 205px;
+}
+table#firstNode td.nextNode,
+table#secondNode td.nextNode,
+table#thirdNode td.nextNode {
+width: 20px;
+}
+#firstNode a,
+#secondNode a,
+#thirdNode a {
+position: relative;
+display: block;
+font-size: 100%;
+padding: 3px 17px 3px 17px;
+margin: 0 2px 0 2px;
+text-decoration: none;
+}
+#firstNode a:link, #firstNode a:visited,
+#secondNode a:link, #secondNode a:visited,
+#thirdNode a:link, #thirdNode a:visited {
+color: #000;
+background: transparent url(../img/icons/link.gif) 0 -1px no-repeat;
+}
+#firstNode a:hover, #firstNode a:active, #firstNode a:focus,
+#secondNode a:hover, #secondNode a:active, #secondNode a:focus,
+#thirdNode a:hover, #thirdNode a:active, #thirdNode a:focus {
+color: #00AE2C;
+background: #f2f2f2 url(../img/icons/link.gif) 0 -43px no-repeat;
+}
+#firstNode a.showNextNode:link, #firstNode a.showNextNode:visited,
+#secondNode a.showNextNode:link, #secondNode a.showNextNode:visited,
+#thirdNode a.showNextNode:link, #thirdNode a.showNextNode:visited {
+color: #000;
+padding: 0;
+margin: 3px 0 0 0;
+background: transparent url(../img/icons/open.gif) 0 0 no-repeat;
+}
+#firstNode a.showNextNode:hover, #firstNode a.showNextNode:active, #firstNode a.showNextNode:focus,
+#secondNode a.showNextNode:hover, #secondNode a.showNextNode:active, #secondNode a.showNextNode:focus,
+#thirdNode a.showNextNode:hover, #thirdNode a.showNextNode:active, #thirdNode a.showNextNode:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/close.gif) 0 0 no-repeat;
+}
+
+
 
 /* %M =opacity */
 #lyLowerOpacity{
@@ -1029,10 +1116,10 @@ z-index: 1;
 opacity: 0.4;
 }
 
+
 #indicator {
 display: none;
 }
-
 #myLocal_mm_contentToPopulate #indicator {
 position:  relative;
 width:  210px;
@@ -1040,8 +1127,6 @@ left:  0;
 top:  40%;
 text-align:  center;
 }
-
-
 
 #podcast_container {
 display: none;
@@ -1177,17 +1262,16 @@ width: 710px;
 }
 
 
-#act {
-display: block;
-margin: 0;
-padding: 0;
+.act {
+display: block; 
+width: auto;
 }
 .actnav {
 display: block;
 background: #f9f9f9;
 border: 1px solid #efefef;
 padding: 2px 5px;
-margin: 23px 0 0 140px;
+margin: 23px 2px 0 140px;
 height: 16px;
 list-style: none;
 }
@@ -1199,7 +1283,7 @@ position: relative;
 display: block;
 float: left;
 font-size: 80%;
-padding: 1px 10px 2px 17px;
+padding: 1px 10px 2px 19px;
 text-decoration: none;
 }
 .actnav a:link, .actnav a:visited {
@@ -1215,7 +1299,7 @@ position: relative;
 display: block;
 float: left;
 font-size: 80%;
-padding: 2px 10px 3px 17px;
+padding: 2px 10px 3px 19px;
 text-decoration: none;
 color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;

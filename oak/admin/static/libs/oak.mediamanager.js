@@ -440,9 +440,6 @@ function Mediamanager_invokeInputs ()
 function Mediamanager_initializeTagSearch ()
 {
 	try {
-		// initialize global
-		var countItems;
-		
 		// clear the keyPressDelay if it exists from before
 		if (this.keyPressDelay) {
 			window.clearTimeout(this.keyPressDelay);
@@ -565,6 +562,11 @@ function _loader ()
 function Mediamanager_checkMyLocalElems ()
 {
 	try {
+		if (typeof countItems == 'undefined') {
+			// initialize global with 'save' display
+			countItems = 0;
+		};
+		
 		var getElems = {
 			mm_include_types_img : $F('mm_include_types_img'),
 			mm_include_types_doc : $F('mm_include_types_doc'),
@@ -576,7 +578,7 @@ function Mediamanager_checkMyLocalElems ()
 			mm_limit : countItems
 		};
 		var o = $H(getElems);
-		countItems = null;
+		//countItems = null;
 		return o.toQueryString();
 	} catch (e) {
 		_applyError(e);
