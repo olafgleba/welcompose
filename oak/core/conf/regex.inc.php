@@ -175,4 +175,7 @@ define("OAK_REGEX_MEANINGFUL_STRING", "=^([0-9a-z-]+)$=i");
 // url pattern names.
 define("OAK_REGEX_ACTION_TO_URL_PATTERN", "~(?<=[a-z])([A-Z0-9])~");
 
+// Defines regular expression for css Identifier.
+define("OAK_REGEX_CSS_IDENTIFIER", "=^([a-z_]+)$=i");
+
 ?>
