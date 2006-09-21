@@ -37,15 +37,24 @@ var formTarget = '{$target}';
 <div id="modalBody">
 	
 <table id="firstNode">
-{* hier dat erste foreach fuer den schweizer *}
+{foreach from=$navigations item=_navigation}
 <tr>
-<td class="initialNode"><a class="act_setInternalLink" id="{literal}{get_url page=1}{/literal}" href="#" title="{i18n Insert this link}">Link</a></td>
-{* if sub links vorhanden *}
-<td class="nextNode"><a class="showNextNode" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
-{* else *}
-{* <td>&nbsp;</td> *}
+<td colspan="2">{$_navigation.name|escape:"htmlall"}</td>
 </tr>
-{* eof foreach *}
+{assign var="navigation_id" value=$_navigation.id}
+{if count($page_arrays.$navigation_id) > 0}
+{foreach from=$page_arrays.$navigation_id item=_page}
+<tr>
+<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert this link}">{$_page.name|escape:"htmlall"}</a></td>
+{if $_page.page_type_name == 'OAK_BLOG'}
+<td class="nextNode"><a class="showNextNode" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
+{else}
+<td>&nbsp;</td>
+{/if}
+</tr>
+{/foreach}
+{/if}
+{/foreach}
 </table>
 
 <table id="secondNode">

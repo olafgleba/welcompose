@@ -75,7 +75,11 @@ try {
 	
 	// load page class
 	/* @var $PAGE Content_Page */
-	$PAGE = load('content:page');
+	$PAGE = load('Content:Page');
+	
+	// load navigation class
+	/* @var $NAVIGATION Content_Navigation */
+	$NAVIGATION = load('Content:Navigation');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -99,6 +103,20 @@ try {
 	
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
+	
+	// select available navigations
+	$navigations = $NAVIGATION->selectNavigations();
+	$BASE->utility->smarty->assign('navigations', $navigations);
+	
+	// get pages
+	$page_arrays = array();
+	foreach ($navigations as $_navigation) {
+		$select_params = array(
+			'navigation' => (int)$_navigation['id']
+		);
+		$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
+	}
+	$BASE->utility->smarty->assign('page_arrays', $page_arrays);
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
