@@ -1034,7 +1034,9 @@ min-height: 555px;
 background: #fff;
 }
 
-
+#modalBody table td {
+color: #00AE2C;
+}
 table#secondNode,
 table#thirdNode {
 display: none;
@@ -1099,13 +1101,13 @@ background: #f2f2f2 url(../img/icons/link.gif) 0 -43px no-repeat;
 color: #000;
 padding: 0;
 margin: 3px 0 0 0;
-background: transparent url(../img/icons/open.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/arrow_right.gif) -1px 0 no-repeat;
 }
 #firstNode a.showNextNode:hover, #firstNode a.showNextNode:active, #firstNode a.showNextNode:focus,
 #secondNode a.showNextNode:hover, #secondNode a.showNextNode:active, #secondNode a.showNextNode:focus,
 #thirdNode a.showNextNode:hover, #thirdNode a.showNextNode:active, #thirdNode a.showNextNode:focus {
 color: #00AE2C;
-background: transparent url(../img/icons/close.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/arrow_right_on.gif) -1px 0 no-repeat;
 }
 
 #indicator_pagesLinks {

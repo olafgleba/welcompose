@@ -426,7 +426,7 @@ function OakInit_processOakInit (ttarget)
 			$('mm_tags').setAttribute("autocomplete","off");
 			
 			Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		
+			
 			} else {
 	  			throw new DevError(_req.statusText);
 			}

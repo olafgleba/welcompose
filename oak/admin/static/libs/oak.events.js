@@ -298,4 +298,4 @@ var definitions = {
 	}
 };
 Behaviour.register(definitions);
-Behaviour.addLoadEvent(OakInit.load); 
+Behaviour.addLoadEvent(OakInit.load);
