@@ -99,10 +99,6 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 function Helper_closePopup ()
 {       
 	try {
-		/* invoke function in parent window */
-		self.opener.$('lyLowerOpacity').style.display = 'none';
-		self.opener.Mediamanager.invokeInputs();
-		
 		/* disable all elements */
 		var form_id = document.forms[0].getAttribute('id');
 	
@@ -110,7 +106,11 @@ function Helper_closePopup ()
 			for(i = 0; i < e.length; i++) {
     			e[i].disabled = true;
 			}
-			
+
+		/* invoke function in parent window */
+		self.opener.$('lyLowerOpacity').style.display = 'none';
+		self.opener.Mediamanager.invokeInputs();
+					
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
 		setTimeout ("self.close()", 1200);
@@ -257,10 +257,10 @@ function _setBrowserString ()
 
 /**
  * Implements method of prototype class Helper
- * Examine the giving var is empty
+ * Center the new window depending on giving Width (elemWith)
  * @requires Helper The Helper Class
- * @param {var} elem Actual element
- * @return Boolean true or false
+ * @param {var} elemWidth Actual element
+ * @return number calculated width
  */
 function Helper_defineWindowX (elemWidth)
 {
@@ -290,10 +290,9 @@ function Helper_defineWindowX (elemWidth)
 
 /**
  * Implements method of prototype class Helper
- * Examine the giving var is empty
+ * Center the new window depending on browser window Height
  * @requires Helper The Helper Class
- * @param {var} elem Actual element
- * @return Boolean true or false
+ * @return number calculated height
  */
 function Helper_defineWindowY ()
 {
@@ -327,24 +326,112 @@ function Helper_defineWindowY ()
 function Helper_showNextNode(elem)
 {
 	try {
-		// delivered from within smarty assign
+		// get source node id from element
 		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode;
 		
+		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = sourceNode.nextSibling;
 			nextNode = nextNode.nextSibling.getAttribute('id');
-			
-			if (Helper.unsupportsEffects('safari_exception')) {
-				Element.show(nextNode);
-			} else {
-				Effect.Appear(nextNode,{duration: 0.6});
-			}
 		}
 
+		var url = this.parsePagesLinksContentUrl;
+		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
+		
+		if (nextNode == 'secondNode') {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onLoading : _loaderPagesLinks,
+				onComplete : _showResponsePagesSecondLinks
+			});
+		}
+		else if (nextNode == 'thirdNode') {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onLoading : _loaderPagesLinks,
+				onComplete : _showResponsePagesThirdLinks
+			});
+		}
 	} catch (e) {
 		_applyError(e);
 	}
 }
+
+/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponsePagesSecondLinks(req)
+{
+	try {		
+		if (Helper.unsupportsEffects('safari_exception')) {
+			Element.hide('indicator_pagesLinks');
+			Element.show('secondNode');
+		} else {
+			Effect.Fade('indicator_pagesLinks', {duration: 0.4});
+			Effect.Appear('secondNode',{duration: 0.6});
+		}
+		$('secondNode').innerHTML = req.responseText;		
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponsePagesThirdLinks(req)
+{
+	try {
+		if (Helper.unsupportsEffects('safari_exception')) {
+			Element.hide('indicator_pagesLinks');
+			Element.show('thirdNode');
+		} else {
+			Effect.Fade('indicator_pagesLinks', {duration: 0.4});
+			Effect.Appear('thirdNode',{duration: 0.6});
+		}	
+		$('thirdNode').innerHTML = req.responseText;		
+		Behaviour.apply();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * fires temporary actions while processing the ajax call
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _loaderPagesLinks ()
+{
+	try {
+		Element.show('indicator_pagesLinks');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Implements method of prototype class Helper
@@ -377,7 +464,6 @@ function Helper_insertInternalLink(elem)
 /**
  * Insert Content into Textareas
  * taken from http://sourceforge.net/projects/wikipedia
- *
  * @private
  * @throws applyError on exception
  */

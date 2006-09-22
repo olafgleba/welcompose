@@ -145,19 +145,15 @@ function Base ()
 		 * Path for XHMLHTTPRequest imported files
 		 */
 		this.parseHelpUrl = '../parse.help.php';
-
-		/**
-		 * Path for XHMLHTTPRequest imported files
-		 */
 		this.parseNavUrl = '../parse.navigation.php';
-		
-		/**
-		 * Path for XHMLHTTPRequest imported files
-		 */
 		this.parseMedUrl = '../mediamanager/mediamanager.php';
+		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
+		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
+		this.parsePagesLinksContentUrl = '../content/pages_links_select.php';
 		
 		/**
-		 * Path for XHMLHTTPRequest imported files
+		 * Mediamanager related
+		 * Used in func Mediamanager.initializeTagSearch()
 		 */
 		this.keyPressDelay = null;
 		

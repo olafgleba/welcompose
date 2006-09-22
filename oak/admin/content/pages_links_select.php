@@ -104,6 +104,30 @@ try {
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
 	
+			
+	// Ajax request
+	if (!empty($_REQUEST['nextNode'])) {
+		
+		// das ist die ID, die bei klick auf '+' zeichen mitgegeben wird
+		$BASE->utility->smarty->assign('id', Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		
+		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		if ($_REQUEST['nextNode'] == 'secondNode') {
+			
+			// hier php zeug um die subnavi fuer einen naveintrag der 1.ebene zu holen
+			
+			$BASE->utility->smarty->display('content/pages_links_select_second.ajax.html', OAK_TEMPLATE_KEY);
+		}
+		if ($_REQUEST['nextNode'] == 'thirdNode') {
+			
+			// hier php zeug um die subnavi fuer einen naveintrag der 2.ebene zu holen
+			
+			$BASE->utility->smarty->display('content/pages_links_select_third.ajax.html', OAK_TEMPLATE_KEY);
+		}	
+		// stop further parsing alter smarty display
+		exit;	
+	}
+	
 	// select available navigations
 	$navigations = $NAVIGATION->selectNavigations();
 	$BASE->utility->smarty->assign('navigations', $navigations);

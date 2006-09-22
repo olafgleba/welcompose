@@ -104,9 +104,6 @@ function Mediamanager_hideElement (elem)
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
-		
-		setTimeout("Mediamanager.invokeInputs()", 15);
-			
 	} catch (e) {
 		_applyError(e);
 	}
@@ -145,9 +142,6 @@ function Mediamanager_showElement (elem)
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
-		
-		setTimeout("Mediamanager.invokeInputs()", 15);
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -338,7 +332,7 @@ function Mediamanager_mediaToPodcast (elem)
 		Element.show(this.toShow);
 		Element.scrollTo(this.toShow);
 
-		var url = '../mediamanager/mediamanager_media_to_podcast.php';
+		var url = this.parseMedCastsUrl;
 		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
@@ -413,7 +407,7 @@ function Mediamanager_invokeInputs ()
 		Mediamanager.preserveElementStatusMyLocal ();
 		
 		var elems = Mediamanager.checkMyLocalElems();
-		var url = '../mediamanager/mediamanager.php';
+		var url = this.parseMedUrl;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -465,7 +459,7 @@ function Mediamanager_invokeTags ()
 		Mediamanager.preserveElementStatusMyLocal ();
 		
 		var elems = Mediamanager.checkMyLocalElems();
-		var url = '../mediamanager/mediamanager.php';
+		var url = this.parseMedUrl;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -499,7 +493,6 @@ function _showResponseInvokeInputs(req)
 		$('column').focus();
 		
 		Behaviour.apply();
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -595,7 +588,7 @@ function Mediamanager_deleteMediaItem (elem)
 {
 	try {
 		// properties
-		var url = '../mediamanager/mediamanager_delete.php';
+		var url = this.parseMedDeleteUrl;
 		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
