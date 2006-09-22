@@ -1036,16 +1036,11 @@ background: #fff;
 
 #modalBody table td {
 color: #00AE2C;
+padding-left: 10px;
 }
 table#secondNode,
 table#thirdNode {
 display: none;
-float: left;
-width: 225px;
-padding: 0;
-margin: 0 2px 0 0;
-border: 0 none;
-background: #f9f9f9;
 }
 table#firstNode,
 table#secondNode,
@@ -1066,7 +1061,7 @@ vertical-align: top;
 table#firstNode td.initialNode,
 table#secondNode td.initialNode,
 table#thirdNode td.initialNode {
-width: 205px;
+width: 215px;
 }
 table#firstNode td.nextNode,
 table#secondNode td.nextNode,
