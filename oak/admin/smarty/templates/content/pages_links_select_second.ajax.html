@@ -1,9 +1,13 @@
-{* hier dat zweite foreach fuer den schweizer *}
 <tr>
-<td class="initialNode"><a class="act_setInternalLink" id="{literal}{get_url page=2 subpage=1}{/literal}" href="#" title="{i18n Insert this link}">Link 2</a></td>
-{* if sub links vorhanden *}
-<td class="nextNode"><a class="showNextNode" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
-{* else *}
-{* <td>&nbsp;</td> *}
+<td>{i18n Yearly Archives}</td>
+<td class="nextNode"><a class="showNextNode" id="{$page_id|escape:"htmlall"}" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
 </tr>
-{* eof foreach *}
+<tr>
+<td colspan="2">{i18n Blog Postings}</td>
+</tr>
+{foreach from=$blog_postings item=_blog_posting}
+<tr>
+<td class="initialNode"><a class="act_setInternalLink" id="{literal}{get_url page=2 subpage=1}{/literal}" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:25:"...":true|escape:"htmlall"}</a></td>
+<td>&nbsp;</td>
+</tr>
+{/foreach}

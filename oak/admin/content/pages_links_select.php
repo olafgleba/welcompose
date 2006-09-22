@@ -104,48 +104,83 @@ try {
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
 	
-			
-	// Ajax request
-	if (!empty($_REQUEST['nextNode'])) {
-		
-		// das ist die ID, die bei klick auf '+' zeichen mitgegeben wird
-		$BASE->utility->smarty->assign('id', Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-		
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		if ($_REQUEST['nextNode'] == 'secondNode') {
-			
-			// hier php zeug um die subnavi fuer einen naveintrag der 1.ebene zu holen
-			
-			$BASE->utility->smarty->display('content/pages_links_select_second.ajax.html', OAK_TEMPLATE_KEY);
-		}
-		if ($_REQUEST['nextNode'] == 'thirdNode') {
-			
-			// hier php zeug um die subnavi fuer einen naveintrag der 2.ebene zu holen
-			
-			$BASE->utility->smarty->display('content/pages_links_select_third.ajax.html', OAK_TEMPLATE_KEY);
-		}	
-		// stop further parsing alter smarty display
-		exit;	
-	}
-	
-	// select available navigations
-	$navigations = $NAVIGATION->selectNavigations();
-	$BASE->utility->smarty->assign('navigations', $navigations);
-	
-	// get pages
-	$page_arrays = array();
-	foreach ($navigations as $_navigation) {
-		$select_params = array(
-			'navigation' => (int)$_navigation['id']
-		);
-		$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
-	}
-	$BASE->utility->smarty->assign('page_arrays', $page_arrays);
-	
-	// display the page
+	// prepare template key
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_links_select.html', OAK_TEMPLATE_KEY);
+	
+	// display template depending on the selection level
+	if (empty($_REQUEST['nextNode'])) {
 		
+		// select available navigations
+		$navigations = $NAVIGATION->selectNavigations();
+		$BASE->utility->smarty->assign('navigations', $navigations);
+
+		// get pages
+		$page_arrays = array();
+		foreach ($navigations as $_navigation) {
+			$select_params = array(
+				'navigation' => (int)$_navigation['id']
+			);
+			$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
+		}
+		$BASE->utility->smarty->assign('page_arrays', $page_arrays);
+		
+		// display the page
+		$BASE->utility->smarty->display('content/pages_links_select.html', OAK_TEMPLATE_KEY);
+		
+	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
+		// at the moment, we know, that the only page type reaching level 2 or 3 is
+		// of type OAK_BLOG. so we can assume working with a page of type OAK_BLOG.
+		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC);
+		
+		// load blog posting class
+		$BLOGPOSTING = load('Content:BlogPosting');
+		
+		// get max. 100 blog postings
+		$select_params = array(
+			'page' => $page_id,
+			'order_macro' => 'DATE_ADDED:DESC',
+			'limit' => 100
+		);
+		$blog_postings = $BLOGPOSTING->selectBlogPostings($select_params);
+		$BASE->utility->smarty->assign('blog_postings', $blog_postings);
+		
+		// assign page id
+		$BASE->utility->smarty->assign('page_id', $page_id);
+		
+		// display the page
+		$BASE->utility->smarty->display('content/pages_links_select_second.ajax.html', OAK_TEMPLATE_KEY);
+		
+	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'thirdNode') {
+		// at the moment, we know, that the only page type reaching level 2 or 3 is
+		// of type OAK_BLOG. so we can assume working with a page of type OAK_BLOG.
+		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC);
+		
+		// load blog posting class
+		$BLOGPOSTING = load('Content:BlogPosting');
+		
+		// get the yearly archives
+		$select_params = array(
+			'page' => $page_id,
+			'order_macro' => 'DATE_ADDED:DESC'
+		);
+		$yearly_archives = $BLOGPOSTING->selectDifferentYears($select_params);
+		$BASE->utility->smarty->assign('yearly_archives', $yearly_archives);
+		
+		// get monthly archives
+		$select_params = array(
+			'page' => $page_id,
+			'order_macro' => 'DATE_ADDED:DESC'
+		);
+		$monthly_archives = $BLOGPOSTING->selectDifferentMonths($select_params);
+		$BASE->utility->smarty->assign('monthly_archives', $monthly_archives);
+		
+		// assign page id
+		$BASE->utility->smarty->assign('page_id', $page_id);
+		
+		// display the page
+		$BASE->utility->smarty->display('content/pages_links_select_third.ajax.html', OAK_TEMPLATE_KEY);
+	}
+	
 	// flush the buffer
 	@ob_end_flush();
 	exit;
