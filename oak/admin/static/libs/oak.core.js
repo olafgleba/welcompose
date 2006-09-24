@@ -147,6 +147,8 @@ function Base ()
 		this.parseHelpUrl = '../parse.help.php';
 		this.parseNavUrl = '../parse.navigation.php';
 		this.parseMedUrl = '../mediamanager/mediamanager.php';
+		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
+		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
 		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
 		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
 		this.parsePagesLinksContentUrl = '../content/pages_links_select.php';
@@ -420,12 +422,13 @@ function OakInit_processOakInit (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
-			Behaviour.apply();	
+				
+				Behaviour.apply();
 			
-			// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-			$('mm_tags').setAttribute("autocomplete","off");
+				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+				$('mm_tags').setAttribute("autocomplete","off");
 			
-			Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+				Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 			
 			} else {
 	  			throw new DevError(_req.statusText);
@@ -864,6 +867,7 @@ Forms.prototype = new Base();
  * Instance Methods from prototype @class Forms
  */
 Forms.prototype.setOnEvent = Forms_setOnEvent;
+Forms.prototype.storeFocus = Forms_storeFocus;
 
 /**
  * DOM triggers by onEvent behaviours
@@ -884,6 +888,21 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 		this.elem.style.backgroundColor = this.bgcolor;
 		this.elem.style.borderColor = this.bcolor;
 		this.elem.style.borderStyle = this.bstyle;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Store focus for later use
+ * define as global
+ * @param {string} elem Actual element
+ * @throws applyError on exception
+ */
+function Forms_storeFocus (elem)
+{
+	try {
+		storedFocus = elem.id;
 	} catch (e) {
 		_applyError(e);
 	}

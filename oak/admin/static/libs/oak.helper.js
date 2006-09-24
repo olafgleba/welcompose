@@ -453,7 +453,7 @@ function Helper_insertInternalLink(elem)
 		strEnd = '</a>';
 			
 		// describeLink is defined in oak.strings.js
-		_insertTags(target, strStart, strEnd, describeLink);
+		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
@@ -462,12 +462,12 @@ function Helper_insertInternalLink(elem)
 }
 
 /**
- * Insert Content into Textareas
+ * Insert Content into Textareas from Popup
  * taken from http://sourceforge.net/projects/wikipedia
  * @private
  * @throws applyError on exception
  */
-function _insertTags(id, tagOpen, tagClose, sampleText)
+function _insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 {
 	try {
 		var txtarea = opener.$(id);
@@ -513,6 +513,63 @@ function _insertTags(id, tagOpen, tagClose, sampleText)
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert Content into Textareas
+ * taken from http://sourceforge.net/projects/wikipedia
+ * @private
+ * @throws applyError on exception
+ */
+function _insertTags(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		var txtarea = $(id);
+		// IE
+		if(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			if(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+			} else {
+				document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			if(!myText) { myText=sampleText;}
+			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+			} else {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			tagOpen=tagOpen.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
 	} catch (e) {
 		_applyError(e);
 	}

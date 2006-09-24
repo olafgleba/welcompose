@@ -192,6 +192,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_insertImageItem' : function(el){
+		el.onclick = function(){
+			Mediamanager.insertImageItem(this);
+			return false;
+		}
+	},
+	'a.mm_insertDocumentItem' : function(el){
+		el.onclick = function(){
+			Mediamanager.insertDocumentItem(this);
+			return false;
+		}
+	},
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');
@@ -219,6 +231,7 @@ var definitions = {
 	'textarea' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
+			Forms.storeFocus(this);
 			return false;
 		}
 		el.onblur = function(){

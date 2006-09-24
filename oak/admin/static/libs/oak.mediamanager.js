@@ -70,6 +70,8 @@ Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
+Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
+Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
 
 /**
  * Implements method of prototype class Mediamanager
@@ -521,7 +523,6 @@ function _showResponseInvokeTagInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
 		Behaviour.apply();
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -599,6 +600,69 @@ function Mediamanager_deleteMediaItem (elem)
 				parameters : pars,
 				onComplete : Mediamanager.invokeInputs
 			});		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request to delete an item
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_insertImageItem (elem)
+{
+	try {
+		// global var comes from Forms.storeFocus() and oak.strings.js
+		if (typeof storedFocus == 'undefined') {
+			alert(selectTextarea); 
+		} else {
+			var target = storedFocus;
+	
+			var build;
+			build = '{get_image id="';
+			build += elem.id;
+			build += '"}';
+		
+			strStart = build;
+			
+			_insertTags(target, strStart, '' , '');
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request to delete an item
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_insertDocumentItem (elem)
+{
+	try {
+		// global var comes from Forms.storeFocus() and oak.strings.js
+		if (typeof storedFocus == 'undefined') {
+			alert(selectTextarea); 
+		} else {
+			var target = storedFocus;
+	
+			var build;
+			build = '<a href="';
+			build += '{get_document id="';
+			build += elem.id;
+			build += '"}';
+			build += '">';
+		
+			strStart = build;
+			strEnd = '</a>';
+			
+			_insertTags(target, strStart, strEnd , describeLink);
+		}
+		
 	} catch (e) {
 		_applyError(e);
 	}

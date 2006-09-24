@@ -103,8 +103,8 @@ try {
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'order_macro' => 'DATE_ADDED:DESC',
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
-		'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
-		//'limit' => 4
+		//'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
+		'limit' => 4
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
