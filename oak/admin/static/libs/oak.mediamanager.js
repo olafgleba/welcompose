@@ -62,6 +62,7 @@ Mediamanager.prototype = new Base();
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
+Mediamanager.prototype.toggleExtendedView = Mediamanager_toggleExtendedView;
 Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
 Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
 Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
@@ -171,6 +172,38 @@ function Mediamanager_switchLayer (toShow, toHide)
 			Element.show(this.toShow);
 		} else {
 			Effect.Appear(this.toShow,{duration: 0.4});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
+ *
+ * @param {string} toShow div to display
+ * @param {string} toHide div to hide
+ * @throws applyError on exception
+ */
+function Mediamanager_toggleExtendedView (elem)
+{
+	try {
+
+		if (elem.value == 'Show details') {
+			elem.value = 'Hide details';
+			if (Helper.unsupportsEffects('safari')) {
+				Element.show('extendedView');
+			} else {
+				Effect.Appear('extendedView',{duration: 0.4});
+			}
+		} else {
+			elem.value = 'Show details';
+			if (Helper.unsupportsEffects('safari')) {
+				Element.hide('extendedView');
+			} else {
+				Effect.Fade('extendedView',{duration: 0.4});
+			}
 		}
 	} catch (e) {
 		_applyError(e);

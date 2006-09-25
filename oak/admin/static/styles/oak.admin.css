@@ -613,7 +613,7 @@ font-size: 100%;
 /* eof Reset for inner table definition */
 input.submit140 {
 text-align: left;
-background: #666 url(../img/submit140.gif) no-repeat;
+background: #0c3 url(../img/submit140.gif) no-repeat;
 color: #fff;
 width: 140px;
 height: 20px;
@@ -626,7 +626,7 @@ cursor: pointer;
 }
 input.submit200 {
 text-align: left;
-background: #666 url(../img/submit200.gif) no-repeat;
+background: #0c3 url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -634,12 +634,12 @@ font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
-margin: 20px  0 0 140px;
+margin: 20px 0 0 140px;
 cursor: pointer;
 }
 input.submit200bez260 {
 text-align: left;
-background: #666 url(../img/submit200.gif) no-repeat;
+background: #0c3 url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -647,12 +647,12 @@ font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
-margin: 20px  0 0 260px;
+margin: 20px 0 0 260px;
 cursor: pointer;
 }
 input.cancel200 {
 text-align: left;
-background: #666 url(../img/submit200.gif) no-repeat;
+background: #0c3 url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -660,7 +660,7 @@ font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
-margin: 20px  0 0 140px;
+margin: 20px 0 0 140px;
 cursor: pointer;
 }
 
@@ -1122,8 +1122,6 @@ z-index: 1;
 #lyLowerOpacity img{
 opacity: 0.4;
 }
-
-
 #indicator {
 display: none;
 }
@@ -1135,81 +1133,93 @@ top:  40%;
 text-align:  center;
 }
 
+
+
 #podcast_container {
 display: none;
+margin: 15px 0 0 140px;
+padding: 0 20px 20px 20px;
+background: #f9f9f9;
 }
 #podcast_container h2 {
-float:  left;
 margin-top: 0;
+font-size: 1.3em;
 }
-#podcast_container #mediafile_container {
-float: right;
-width: 550px;
-}
-#podcast_container #mediafile_actiontab {
-float: right;
-text-align: right;
-margin-top: 6px;
-width: 550px;
-background: transparent url(../img/bg_innerform550.gif) left top no-repeat;
-}
-#podcast_container #mediafile_actiontab a:link,
-#podcast_container #mediafile_actiontab a:visited {
-line-height: 22px;
-padding-left: 25px;
-padding-right: 8px;
-margin-left: 25px;
-background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
-}
-#podcast_container #mediafile_actiontab a:hover,
-#podcast_container #mediafile_actiontab a:active,
-#podcast_container #mediafile_actiontab a:focus {
-background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
-}
-#podcast_container #mediafile_metadata {
-float: right;
-text-align: left;
-margin-top: 6px;
-width: 550px;
+#podcast_container #extendedView {
+display: none; 
+margin-top: 15px;
+border-top: 1px solid #0c3;	
+width: auto;
 }
 #podcast_container #mediafile_metadata p {
-line-height: 140%;
+width: 510px;
+line-height: 150%;
+clear: both;
+}
+#podcast_container #mediafile_metadata span.fir {
+float: left;
+width: 120px;
+font-weight: bold;
+}
+#podcast_container #mediafile_metadata span.sec {
+float: left;
+width: 120px;
 }
 #podcast_container #mediafile_player {
-float: right;
 text-align: left;
-margin-top: 6px;
-width: 550px;
-background: transparent url(../img/bg_slides.gif) top left;
+margin: 25px 0 25px 120px;
+width: auto;
 }
+
 #indicatorPodcast {
 display: none;
 }
-#podcast_container #indicatorPodcast {
+#indicatorPodcast {
 position:  relative;
-width:  690px;
-height: 459px;
+width: 520px;
+height: 105px;
 text-align:  center;
 }
-#podcast_container #indicatorPodcast img {
+#indicatorPodcast img {
 position:  relative;
 top:  40%;
 }
 
-#emulateFieldsetTop {
-width: 690px;
-padding: 20px 10px 0 10px;
-margin: 20px 0 0 0;
-background: transparent url(../img/bg_fieldset_inner.gif) left top no-repeat;
-overflow: hidden;
+#podcast_container label.cont {
+width: 520px;
+margin: 5px 0 5px 0;
+padding: 18px 0 0 0;
+height: 1.5em;
 }
-#emulateFieldsetBot {
-width: 710px;
-padding: 20px 0;
-margin: 0 0 20px 0;
-background: transparent url(../img/bg_form_inner.gif) left bottom no-repeat;
+#podcast_container label span.bez {
+display: block; 
+float: left;
+width: 120px;
 }
-
+input.toggleExtendedView120, input.showIDThree120, input.discardPodcast120 {
+float: left;
+text-align: left;
+background: #0c3 url(../img/submit120.gif) no-repeat;
+color: #fff;
+width: 120px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 20px 0 0 10px;
+cursor: pointer;
+}
+input.toggleExtendedView120  {
+margin: 20px 0 0 120px;
+}
+#podcast_container p.help {
+display: block;
+line-height: 1.5em;
+width: 305px;
+margin: 0 0 10px 0;
+padding-left: 120px;
+}
 
 
 /* %M =misc */

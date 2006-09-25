@@ -155,55 +155,85 @@ try {
 	$FORM->applyFilter('content', 'trim');
 
 
-
 	// podcast layer
-	
+		
 	// textfield for title
-	$FORM->addElement('text', 'blog_posting_podcast_title', gettext('Title'),
+	$FORM->addElement('text', 'podcast_title', gettext('Title'),
 		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_posting_podcast_title', 'trim');
-	$FORM->applyFilter('blog_posting_podcast_title', 'strip_tags');
-	$FORM->addRule('blog_posting_podcast_title', gettext('Please enter a title for the podcast'), 'required');	
+	$FORM->applyFilter('podcast_title', 'trim');
+	$FORM->applyFilter('podcast_title', 'strip_tags');	
 	
-	// textarea for description
-	$FORM->addElement('textarea', 'blog_posting_podcast_description', gettext('Description'),
-		array('id' => 'blog_posting_podcast_description', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('blog_posting_podcast_description', 'trim');	
+	// collect for description
+	$casts_description = array(
+		'1' => gettext('Use Feed Description'),
+		'0' => gettext('No Description')
+		);
+
+	// select for description
+	$FORM->addElement('select', 'podcast_description', gettext('Description'), $casts_description,
+		array('id' => 'blog_posting_podcast_description'));
+	$FORM->applyFilter('podcast_description', 'trim');
+	$FORM->applyFilter('podcast_description', 'strip_tags');
+
+	// collect for summary
+	$casts_summary = array(
+		'1' => gettext('Use Feed Summary'),
+		'0' => gettext('No Summary')
+		);
+			
+	// select for summary
+	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $casts_summary,
+		array('id' => 'blog_posting_podcast_summary'));
+	$FORM->applyFilter('podcast_summary', 'trim');
+	$FORM->applyFilter('podcast_summary', 'strip_tags');
+	
+	// collect for keywords
+	$casts_keywords= array(
+		'1' => gettext('Use Feed Keywords'),
+		'0' => gettext('No Keywords')
+		);
+			
+	// select for keywords
+	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $casts_keywords,
+		array('id' => 'blog_posting_podcast_keywords'));
+	$FORM->applyFilter('podcast_keywords', 'trim');
+	$FORM->applyFilter('podcast_keywords', 'strip_tags');	
 	
 	// textfield for author
-	$FORM->addElement('text', 'blog_posting_podcast_author', gettext('Title'),
+	$FORM->addElement('text', 'podcast_author', gettext('Author'),
 		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_posting_podcast_author', 'trim');
-	$FORM->applyFilter('blog_posting_podcast_author', 'strip_tags');
-	$FORM->addRule('blog_posting_podcast_author', gettext('Please name an author of the podcast'), 'required');	
+	$FORM->applyFilter('podcast_author', 'trim');
+	$FORM->applyFilter('podcast_author', 'strip_tags');
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'blog_posting_podcast_explicit', gettext('Explicit'), null,
+	$FORM->addElement('checkbox', 'podcast_explicit', gettext('Explicit'), null,
 		array('id' => 'blog_posting_podcast_explicit', 'class' => 'chbx'));
-	$FORM->applyFilter('blog_posting_podcast_explicit', 'trim');
-	$FORM->applyFilter('blog_posting_podcast_explicit', 'strip_tags');
-	$FORM->addRule('blog_posting_explicit', gettext('The field whether a ping should be issued accepts only 0 or 1'),
+	$FORM->applyFilter('podcast_explicit', 'trim');
+	$FORM->applyFilter('podcast_explicit', 'strip_tags');
+	$FORM->addRule('podcast_explicit', gettext('The field whether a ping should be issued accepts only 0 or 1'),
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'blog_posting_podcast_block', gettext('Blog Appearance'), null,
+	$FORM->addElement('checkbox', 'podcast_block', gettext('Blog Appearance'), null,
 		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'));
-	$FORM->applyFilter('blog_posting_podcast_block', 'trim');
-	$FORM->applyFilter('blog_posting_podcast_block', 'strip_tags');
-	$FORM->addRule('blog_posting_podcast_block', gettext('Prevent an episode or podcast from appearing'),
+	$FORM->applyFilter('podcast_block', 'trim');
+	$FORM->applyFilter('podcast_block', 'strip_tags');
+	$FORM->addRule('podcast_block', gettext('Prevent an episode or podcast from appearing'),
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
-	// textarea for internal tags
-	$FORM->addElement('textarea', 'blog_posting_podcast_tags', gettext('Internal Tags'),
-		array('id' => 'blog_posting_podcast_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
-	$FORM->applyFilter('blog_posting_podcast_tags', 'trim');
-	$FORM->applyFilter('blog_posting_podcast_tags', 'strip_tags');	
+	// submit button
+	$FORM->addElement('button', 'toggleExtendedView', gettext('Show details'),
+		array('class' => 'toggleExtendedView120'));
+		
+	$FORM->addElement('button', 'showIDThree', gettext('Show ID3'),
+		array('class' => 'showIDThree120'));
+
+	$FORM->addElement('button', 'discardPodcast', gettext('Discard cast'),
+		array('class' => 'discardPodcast120'));
+			
+	// podcast layer eof	
 	
-	
-	
-	
-	
-	
+		
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
 		array('id' => 'blog_posting_text_converter'));

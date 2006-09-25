@@ -132,41 +132,51 @@ var mediamanager = 1;
 {$form.content.html}</label>
 
 
-<div id="podcast_container">	
-<div id="emulateFieldsetTop"></div>
-
+<div id="podcast_container">
 <div id="podcast_container_loader">
 <h2>Podcast</h2>
 
 <div id="mediafile_container"></div>
+
+{$form.toggleExtendedView.html}
+{$form.showIDThree.html}
+{$form.discardPodcast.html}
+
 <br class="clearb" />
+
+<div id="extendedView">
+<label class="cont" for="blog_posting_podcast_title"><span class="bez">{$form.podcast_title.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_title.html}</label>	
 	
-<label class="cont" for="blog_posting_podcast_title"><span class="bez">{$form.blog_posting_podcast_title.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_title.html}</label>	
-	
-<label class="cont h13" for="blog_posting_podcast_description"><span class="bez">{$form.blog_posting_podcast_description.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_description.html}</label>	
+<label class="cont" for="blog_posting_podcast_description"><span class="bez">{$form.podcast_description.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_description.html}</label>
 
-<label class="cont" for="blog_posting_podcast_author"><span class="bez">{$form.blog_posting_podcast_author.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_author.html}</label>
+<label class="cont" for="blog_posting_podcast_summary"><span class="bez">{$form.podcast_summary.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_summary.html}</label>
 
-<label class="cont" for="blog_posting_podcast_explicit"><span class="bez">{$form.blog_posting_podcast_explicit.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_explicit.html}</label>
+<label class="cont" for="blog_posting_podcast_keywords"><span class="bez">{$form.podcast_keywords.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_keywords.html}</label>
 
-<label class="cont" for="blog_posting_podcast_block"><span class="bez">{$form.blog_posting_podcast_block.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_block.html}</label>
+<label class="cont" for="blog_posting_podcast_author"><span class="bez">{$form.podcast_author.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_author.html}</label>
 
-<label class="cont h04" for="blog_posting_podcast_tags"><span class="bez">{$form.blog_posting_podcast_tags.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.blog_posting_podcast_tags.html}</label>
+<label class="cont" for="blog_posting_podcast_explicit"><span class="bez">{$form.podcast_explicit.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_explicit.html}</label>
+
+<label class="cont" for="blog_posting_podcast_block"><span class="bez">{$form.podcast_block.label}<span class="iHelpLevelThree"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.podcast_block.html}</label>
+
+<br class="clearb" />
 
 </div>
-<!-- eof podcast_container_loader" -->
+<!-- eof extendedView -->
+</div>
+<!-- eof podcast_container_loader -->
 
 <span id="indicatorPodcast"><img src="../static/img/indicator.gif" alt="" /></span>
 
-<div id="emulateFieldsetBot"></div>	
 </div>
-<!-- eof podcast_container" -->
+<!-- eof podcast_container -->
 	
 <label class="cont" for="blog_posting_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.text_converter.html}</label>

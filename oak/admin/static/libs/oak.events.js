@@ -283,6 +283,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.toggleExtendedView120' : function(el){
+		el.onclick = function(){
+			Mediamanager.toggleExtendedView(this);
+			return false;
+		}
+	},
 	'.submit90' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator90.gif) no-repeat';

@@ -102,30 +102,11 @@ try {
 		$BASE->db->begin();
 		
 		// Andreas:  $_REQUEST['id'] ist die gelieferte var für den DB collect
-		
-		// action tab
-		print '<div id="mediafile_actiontab">';
-		print '<a class="mm_edit_inner" id="'.$_REQUEST['id'].'" href="#">'.gettext('Change Podcast Media File').'</a>';
-		print '<a class="mm_discard_inner" href="#">'.gettext('Discard Podcast').'</a>';
-		print '</div>';
-		// action tab eof
-		
-		// media metadata
-		print '<div id="mediafile_metadata">';
-		print '<p>';
-		print gettext('Filename').': <filename>'.'<br/>';
-		print gettext('Media type').': <type>'.'<br/>';
-		print gettext('Duration').': <duration>'.'<br/>';
-		// und was du sonst noch hier willst...
-		print '</p>';
-		print '</div>';
-		
-		// media player
-		print '<div id="mediafile_player">';
-		print '<p>';
-		// noch nicht vorhanden
-		print '</p>';
-		print '</div>';
+	
+		$BASE->utility->smarty->assign('id', $_REQUEST['id']);	
+	
+		// display the correlated mediamanager template
+		$BASE->utility->smarty->display('mediamanager/mediamanager_media_to_podcast.html');
 		
 		// commit transaction
 		$BASE->db->commit();

@@ -366,6 +366,14 @@ function OakInit_getVars ()
 			}
 			
 		}
+	   if (typeof popup != 'undefined' && OakInit.isNumber(popup)) {
+			if (popup == 1) {
+				if( event.ctrlKey && event.keyCode == 87) {
+					alert ('is aktiv');
+				}
+			}
+			
+		}
 	} catch (e) {
 		_applyError(e);
 	}
@@ -505,7 +513,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemoveLevelTwo;
 				break;
 			case '3' :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
