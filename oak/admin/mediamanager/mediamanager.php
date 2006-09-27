@@ -104,7 +104,7 @@ try {
 		'order_macro' => 'DATE_ADDED:DESC',
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
 		//'limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC)
-		'limit' => 4
+		'limit' => 100
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	

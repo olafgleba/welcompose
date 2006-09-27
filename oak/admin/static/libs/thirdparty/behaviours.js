@@ -33,6 +33,15 @@ var Behaviour = {
 		}
 	},
 	
+	 reapply : function (rule) {
+        for (h = 0; sheet = Behaviour.list[h]; h++) {
+          if (!sheet[rule]) continue;
+          var list = document.getElementsBySelector(rule);
+          for (var i = 0; element = list[i]; i++)
+            sheet[rule](element);
+        }
+	  },
+	
 	addLoadEvent : function(func){
 		var oldonload = window.onload;
 		

@@ -37,3 +37,6 @@ var showElement = '<%i18n Show this element%>';
 
 var describeLink = '<%i18n Your link description%>';
 var selectTextarea = '<%i18n Please set focus on the textarea where to put the media in%>';
+
+var showDetails = '<%i18n Show details%>';
+var hideDetails = '<%i18n Hide details%>';

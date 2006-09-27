@@ -56,7 +56,6 @@ Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 
 
-
 function Helper_launchPopup (width, height, name, trigger, elem)
 {
 	try {
@@ -88,13 +87,12 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 		
 		this.ttarget.moveBy(this.resWidth, this.resHeight);
 		this.ttarget.focus();
+		
+		popTarget = this.ttarget;
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
-
-
 
 function Helper_closePopup ()
 {       

@@ -1140,6 +1140,7 @@ display: none;
 margin: 15px 0 0 140px;
 padding: 0 20px 20px 20px;
 background: #f9f9f9;
+border: 1px solid #efefef;
 }
 #podcast_container h2 {
 margin-top: 0;
@@ -1151,10 +1152,18 @@ margin-top: 15px;
 border-top: 1px solid #0c3;	
 width: auto;
 }
+#podcast_container #mediafile_metadata {
+margin: 0;
+padding: 0;
+border: 1px solid transparent;
+}
 #podcast_container #mediafile_metadata p {
+display: block;
 width: 510px;
-line-height: 150%;
-clear: both;
+line-height: 130%;
+margin: 0;
+padding: 0;
+clear: left;
 }
 #podcast_container #mediafile_metadata span.fir {
 float: left;
@@ -1167,8 +1176,8 @@ width: 120px;
 }
 #podcast_container #mediafile_player {
 text-align: left;
-margin: 25px 0 25px 120px;
-width: auto;
+margin: 35px 0 5px 120px;
+height: auto;
 }
 
 #indicatorPodcast {

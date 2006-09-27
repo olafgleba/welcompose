@@ -544,7 +544,9 @@ function Help_show (elem, level)
 		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-		Behaviour.apply();
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
 		_applyError(e);
@@ -579,7 +581,7 @@ function Help_hide (elem, level)
 					this.elem.className = this.helpClassLevelThree;
 				break;
 			default :
-					this.elem.className = this.helpClass;	
+					this.elem.className = this.helpClass;
 		}
 		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.processIdAfter);
@@ -587,7 +589,10 @@ function Help_hide (elem, level)
 			Effect.Fade(this.processIdAfter,{duration: 0.7});
 		}
 		Element.update(this.elem, this.helpHtmlShow);
-		Behaviour.apply();	
+		
+		//Behaviour.apply();	
+		Behaviour.reapply('.' + this.elem.className);
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -667,7 +672,9 @@ function Help_showMediamanager (elem)
 			Effect.Fade(this.toHide,{duration: 0.7});
 		}
 		Element.update(this.elem, this.helpHtmlHide);
-		Behaviour.apply();
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.' + this.elem.className);
 		
 		// build global var as reference for method hideMediamanager
 		gMediamanagerLayer = this.toHide;
@@ -705,7 +712,9 @@ function Help_hideMediamanager (elem)
 		}
 		
 		Element.update(this.elem, this.helpHtmlShow);
-		Behaviour.apply();
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
 		_applyError(e);
@@ -836,7 +845,8 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
-				Behaviour.apply();
+				//Behaviour.apply();
+				Behaviour.reapply('#' + ttarget);
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -1072,7 +1082,9 @@ function Tables_hideRow (elem)
 		setTimeout("Tables.collapseRow('"+ this.obid +"')", 800);
 		
 		this.elem.className = this.uploadClassShow;
-		Behaviour.apply();
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.showTableRow');
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1105,7 +1117,9 @@ function Tables_showRow (elem)
 		}
 		
 		this.elem.className = this.uploadClassHide;
-		Behaviour.apply();
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.hideTableRow');
 	} catch (e) {
 		_applyError(e);
 	}

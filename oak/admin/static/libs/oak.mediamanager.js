@@ -93,7 +93,7 @@ function Mediamanager_hideElement (elem)
 		
 		this.elem.className = this.mediamanagerClassShow;
 		Element.update(this.elem, this.elementHtmlShow);
-		Behaviour.apply();
+		Behaviour.reapply('.showMediamanagerElement');
 		
 		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
@@ -131,7 +131,7 @@ function Mediamanager_showElement (elem)
 		
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.apply();
+		Behaviour.reapply('.hideMediamanagerElement');
 	
 		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
@@ -190,15 +190,15 @@ function Mediamanager_toggleExtendedView (elem)
 {
 	try {
 
-		if (elem.value == 'Show details') {
-			elem.value = 'Hide details';
+		if (elem.value == showDetails) {
+			elem.value = hideDetails;
 			if (Helper.unsupportsEffects('safari')) {
 				Element.show('extendedView');
 			} else {
 				Effect.Appear('extendedView',{duration: 0.4});
 			}
 		} else {
-			elem.value = 'Show details';
+			elem.value = showDetails;
 			if (Helper.unsupportsEffects('safari')) {
 				Element.hide('extendedView');
 			} else {
@@ -345,7 +345,10 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 			parentElem[2].lastChild.className = this.mediamanagerClassHide;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
 		}
-		Behaviour.apply();
+		
+		// observe if needed at least
+		//Behaviour.apply();
+
 	} catch (e) {
 		_applyError(e);
 	}
@@ -397,14 +400,11 @@ function _showResponseMediaToPodcast(req)
 	try {
 		$('mediafile_container').innerHTML = req.responseText;
 				
-		if (Helper.unsupportsEffects('safari')) {
+			// dont be able to use appear here, bevcause Effect.Opacity don't use display: block
 			Element.show('podcast_container_loader');
 			Element.hide('indicatorPodcast');
-		} else {
-			Effect.Appear('podcast_container_loader',{duration: 1.8});
-			Effect.Fade('indicatorPodcast', {duration: 0.4});
-		}
-		Behaviour.apply();
+			// observe if needed at least
+			//Behaviour.apply();
 		
 	} catch (e) {
 		_applyError(e);
@@ -526,7 +526,7 @@ function _showResponseInvokeInputs(req)
 		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		$('column').focus();
-		
+
 		Behaviour.apply();
 	} catch (e) {
 		_applyError(e);
