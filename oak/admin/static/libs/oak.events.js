@@ -216,6 +216,16 @@ var definitions = {
 			return false;
 		}
 	},
+	'#mm_include_types_wrap' : function(el){
+		el.onclick = function(){
+			Mediamanager.invokeInputs(this);
+		}
+	},
+	'#mm_timeframe' : function(el){
+		el.onchange = function(){
+			Mediamanager.invokeInputs(this);
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -249,16 +259,6 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'#mm_include_types_wrap' : function(el){
-		el.onclick = function(){
-			Mediamanager.invokeInputs(this);
-		}
-	},
-	'#mm_timeframe' : function(el){
-		el.onchange = function(){
-			Mediamanager.invokeInputs(this);
-		}
-	},
 	'.act_internalLink' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('740','604','pages_links_select','pages_internal_links', this);
@@ -271,12 +271,6 @@ var definitions = {
 			return false;
 		}
 	},
-	'.close' : function(el){
-		el.onclick = function(){
-			Helper.closeLinksPopup(this);
-			return false;
-		}
-	},
 	'.showNextNode' : function(el){
 		el.onclick = function(){
 			Helper.showNextNode(this);
@@ -286,6 +280,12 @@ var definitions = {
 	'.toggleExtendedView120' : function(el){
 		el.onclick = function(){
 			Mediamanager.toggleExtendedView(this);
+			return false;
+		}
+	},
+	'.close' : function(el){
+		el.onclick = function(){
+			Helper.closeLinksPopup(this);
 			return false;
 		}
 	},

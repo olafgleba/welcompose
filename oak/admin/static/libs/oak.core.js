@@ -431,7 +431,21 @@ function OakInit_processOakInit (ttarget)
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 				
-				Behaviour.apply();
+				//Behaviour.apply();
+				Behaviour.reapply('a.mm_edit');
+				Behaviour.reapply('a.mm_upload');
+				Behaviour.reapply('a.mm_delete');
+				Behaviour.reapply('a.mm_cast');
+				Behaviour.reapply('a.mm_insertImageItem');
+				Behaviour.reapply('a.mm_insertDocumentItem');
+				Behaviour.reapply('a.mm_myLocal');
+				Behaviour.reapply('a.mm_myFlickr');
+				Behaviour.reapply('#mm_include_types_wrap');
+				Behaviour.reapply('#mm_timeframe');
+				Behaviour.reapply('.showMediamanagerElement');
+				Behaviour.reapply('.hideMediamanagerElement');
+				Behaviour.reapply('.iHelpMediamanager');
+				Behaviour.reapply('.iHelpRemoveMediamanager');
 			
 				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 				$('mm_tags').setAttribute("autocomplete","off");
@@ -666,11 +680,8 @@ function Help_showMediamanager (elem)
 			_req.onreadystatechange = function () { Help.processMediamanager(_ttarget);};
 			_req.send('');
 		}
-		if (Helper.unsupportsEffects()) {
-			Element.hide(this.toHide);
-		} else {
-			Effect.Fade(this.toHide,{duration: 0.7});
-		}
+	
+		Element.hide(this.toHide);
 		Element.update(this.elem, this.helpHtmlHide);
 		
 		//Behaviour.apply();
@@ -846,7 +857,6 @@ function Navigation_show (name, level)
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
 				//Behaviour.apply();
-				Behaviour.reapply('#' + ttarget);
 			} else {
 	  			throw new DevError(_req.statusText);
 			}

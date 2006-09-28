@@ -93,7 +93,7 @@ function Mediamanager_hideElement (elem)
 		
 		this.elem.className = this.mediamanagerClassShow;
 		Element.update(this.elem, this.elementHtmlShow);
-		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.' + this.elem.className);
 		
 		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
@@ -131,7 +131,7 @@ function Mediamanager_showElement (elem)
 		
 		this.elem.className = this.mediamanagerClassHide;
 		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.' + this.elem.className);
 	
 		// needed to set appropriate height of content of div to populate
 		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
@@ -400,7 +400,7 @@ function _showResponseMediaToPodcast(req)
 	try {
 		$('mediafile_container').innerHTML = req.responseText;
 				
-			// dont be able to use appear here, bevcause Effect.Opacity don't use display: block
+			// dont be able to use appear here, because Effect.Opacity don't use display: block
 			Element.show('podcast_container_loader');
 			Element.hide('indicatorPodcast');
 			// observe if needed at least
@@ -527,7 +527,23 @@ function _showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		$('column').focus();
 
-		Behaviour.apply();
+		//Behaviour.apply();
+		
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');
+
 	} catch (e) {
 		_applyError(e);
 	}
@@ -555,7 +571,22 @@ function _showResponseInvokeTagInputs(req)
 		Mediamanager.setCurrentElementStatusMyLocal();	
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
-		Behaviour.apply();
+		//Behaviour.apply();
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');
+		
 	} catch (e) {
 		_applyError(e);
 	}
