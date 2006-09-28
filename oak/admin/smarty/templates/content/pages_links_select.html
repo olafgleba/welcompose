@@ -45,7 +45,7 @@ var formTarget = '{$target}';
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
+<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
 {if $_page.page_type_name == 'OAK_BLOG'}
 <td class="nextNode"><a class="showNextNode" id="{$_page.id}" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
 {else}

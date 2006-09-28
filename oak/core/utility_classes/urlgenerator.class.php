@@ -191,25 +191,29 @@ public function generateInternalLink ($args = array())
 	$page_id = $current_page['id'];
 	$page_name = $current_page['name_url'];
 	
-	// if posting_id is set, we need to get the blog posting so that we've something
-	// to fill the variables like posting_title with
-	if (!empty($posting_id) && is_numeric($posting_id) && $current_page['page_type_name'] == 'OAK_BLOG') {
-		$BLOGPOSTING = load('Content:BlogPosting');
-		$blog_posting = $BLOGPOSTING->selectBlogPosting($posting_id);
-		
-		// if there's no blog posting, the url cannot be valid and we have to
-		// return false
-		if (empty($blog_posting)) {
-			return false;
+	// if the page type of the current page is OAK_BLOG, we need to execute
+	// some additional checks because we may have to link to the single
+	// blog postings or to the archives.
+	if ($current_page['page_type_name'] == 'OAK_BLOG') {
+		// if posting_id is set, we need to get the blog posting so that we've something
+		// to fill the variables like posting_title with
+		if (!empty($posting_id) && is_numeric($posting_id)) {
+			$BLOGPOSTING = load('Content:BlogPosting');
+			$blog_posting = $BLOGPOSTING->selectBlogPosting($posting_id);
+			
+			// if there's no blog posting, the url cannot be valid and we have to
+			// return false
+			if (empty($blog_posting)) {
+				return false;
+			}
+			
+			// fill the variables with the blog posting info
+			$posting_title = $blog_posting['title_url'];
+			$posting_year_added = $blog_posting['year_added'];
+			$posting_month_added = $blog_posting['month_added'];
+			$posting_day_added = $blog_posting['day_added'];
 		}
-		
-		// fill the variables with the blog posting info
-		$posting_title = $blog_posting['title_url'];
-		$posting_year_added = $blog_posting['year_added'];
-		$posting_month_added = $blog_posting['month_added'];
-		$posting_day_added = $blog_posting['day_added'];
 	}
-	
 	// the next step to get an url is to look at the page type and the action so that we
 	// can fetch the right url pattern from the sys.inc.php.
 	$action = (empty($action) ? 'Index' : $action);

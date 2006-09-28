@@ -7,7 +7,7 @@
 </tr>
 {foreach from=$blog_postings item=_blog_posting}
 <tr>
-<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page={$page_id} subpage={$_blog_posting.id}{literal}}{/literal}" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:25:"...":true|escape:"htmlall"}</a></td>
+<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page_id={$page_id} action=Item posting_id={$_blog_posting.id}{literal}}{/literal}" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:25:"...":true|escape:"htmlall"}</a></td>
 <td>&nbsp;</td>
 </tr>
 {/foreach}
