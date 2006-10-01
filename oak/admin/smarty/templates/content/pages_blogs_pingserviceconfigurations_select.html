@@ -64,12 +64,11 @@ var selection			= '{$session.selection}';
 <li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li><a href="boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 <li class="on">{i18n Ping Services}</li>
-<li class="current">{i18n Page}: <span class="choosed">{$page.name}</span></li>
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {i18n Ping Services}</p></div>
+<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Ping Services}</p></div>
 
 <div id="content">
 
