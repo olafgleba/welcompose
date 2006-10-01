@@ -1,0 +1,27 @@
+<div id="mediafile_metadata">
+<p><span class="fir">{i18n Filename}:</span><span class="sec">variable</span></p>
+<p><span class="fir">{i18n Media type}:</span><span class="sec">variable</span></p>
+<p><span class="fir">{i18n Duration}:</span><span class="sec">variable</span></p>
+</div>
+
+<div id="mediafile_player">
+{if $_type == 1}	
+<object type="application/x-shockwave-flash" data="../static/includes/emff_stationary.swf?src=<pfad_zur_mediadatei>" width="201" height="41">
+<param name="movie" value="../static/includes/emff_stationary.swf?src=<pfad_zur_mediadatei>" />
+<param name="quality" value="high" />
+</object>
+{else}
+<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab"
+width="320" height="256">
+<param name="src" value="<pfad_zur_mediadatei>" /> 
+<param name="controller" value="true" /> 
+<param name="autoplay" value="false" />
+<!--[if !IE]>
+<object type="video/quicktime" data="<pfad_zur_mediadatei>" width="320" height="256">
+<param name="autoplay" value="false" />
+<param name="controller" value="true" />
+ </object>
+<![endif]-->
+</object>
+{/if}
+</div>
