@@ -1,7 +1,6 @@
 <div id="mediafile_metadata">
-<p><span class="fir">{i18n Filename}:</span><span class="sec">{$object.file_name}</span></p>
-<p><span class="fir">{i18n Media type}:</span><span class="sec">variable</span></p>
-<p><span class="fir">{i18n Duration}:</span><span class="sec">variable</span></p>
+<p><span class="fir">{i18n Filename}:</span><span class="sec">{if $object.file_mime_type == 'application/pdf'}<a href="{get_www_path_to_object name=$object.file_name_on_disk}" target="_blank" title="Opens in new Window">{$object.file_name}</a>{else}{$object.file_name}{/if}</span></p>
+<p><span class="fir">{i18n Media type}:</span><span class="sec">{$object.file_mime_type}</span></p>
 </div>
 
 <div id="mediafile_player">
@@ -10,18 +9,18 @@
 <param name="movie" value="../static/includes/emff_stationary.swf?src={get_www_path_to_object name=$object.file_name_on_disk}" />
 <param name="quality" value="high" />
 </object>
-{elseif $object.file_mime_type == 'video/quicktime'}
-<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab"
-width="320" height="256">
+{elseif $object.file_mime_type == 'video/quicktime' || $object.file_mime_type == 'video/mp4' || $object.file_mime_type == 'audio/x-m4a' || $object.file_mime_type == 'video/x-m4v' || $object.file_mime_type == 'audio/x-wav'}
+<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="320" height="{if $object.file_mime_type == 'audio/x-wav' || $object.file_mime_type == 'audio/x-m4a'}30{else}256{/if}">
 <param name="src" value="{get_www_path_to_object name=$object.file_name_on_disk}" /> 
 <param name="controller" value="true" /> 
 <param name="autoplay" value="true" />
-<!--[if !IE]>
-<object type="video/quicktime" data="{get_www_path_to_object name=$object.file_name_on_disk}" width="320" height="256">
+<!--[if !IE]>-->
+<object type="video/quicktime" data="{get_www_path_to_object name=$object.file_name_on_disk}" width="320" 
+height="{if $object.file_mime_type == 'audio/x-wav' || $object.file_mime_type == 'audio/x-m4a'}30{else}256{/if}">
 <param name="autoplay" value="false" />
 <param name="controller" value="true" />
  </object>
-<![endif]-->
+<!--<![endif]-->
 </object>
 {/if}
 </div>

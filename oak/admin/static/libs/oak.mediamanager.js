@@ -662,7 +662,7 @@ function Mediamanager_deleteMediaItem (elem)
 				method : 'get',
 				onLoading : _loader,
 				parameters : pars,
-				onComplete : Mediamanager.invokeInputs
+				onComplete : function () {Mediamanager.invokeInputs();}
 			});		
 	} catch (e) {
 		_applyError(e);
