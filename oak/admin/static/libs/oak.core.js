@@ -144,8 +144,8 @@ function Base ()
 		/**
 		 * Path for XHMLHTTPRequest imported files
 		 */
-		this.parseHelpUrl = '../parse.help.php';
-		this.parseNavUrl = '../parse.navigation.php';
+		this.parseHelpUrl = '../parse/parse.help.php';
+		this.parseNavUrl = '../parse/parse.navigation.php';
 		this.parseMedUrl = '../mediamanager/mediamanager.php';
 		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
 		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';

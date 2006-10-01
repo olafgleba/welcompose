@@ -54,6 +54,7 @@ Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
 Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
+Helper.prototype.confirmAction = Helper_confirmAction;
 
 
 function Helper_launchPopup (width, height, name, trigger, elem)
@@ -170,6 +171,7 @@ function Helper_lowerOpacity ()
  * Implements method of prototype class Helper
  * Simply examine id IE is on air
  * @requires Helper The Helper Class
+ * @throws applyError on exception
  */
 function Helper_unsupportsEffects(exception)
 {	
@@ -192,6 +194,7 @@ function Helper_unsupportsEffects(exception)
  * Implements method of prototype class Helper
  * Simply examine id IE is on air
  * @requires Helper The Helper Class
+ * @throws applyError on exception
  */
 function Helper_unsupportsElems()
 {	
@@ -214,6 +217,7 @@ function Helper_unsupportsElems()
  * Simply examine id IE is on air
  * @private
  * @requires Helper The Helper Class
+ * @throws applyError on exception
  */
 function _compare (string)
 {
@@ -256,8 +260,8 @@ function _setBrowserString ()
 /**
  * Implements method of prototype class Helper
  * Center the new window depending on giving Width (elemWith)
- * @requires Helper The Helper Class
  * @param {var} elemWidth Actual element
+ * @throws applyError on exception
  * @return number calculated width
  */
 function Helper_defineWindowX (elemWidth)
@@ -289,7 +293,7 @@ function Helper_defineWindowX (elemWidth)
 /**
  * Implements method of prototype class Helper
  * Center the new window depending on browser window Height
- * @requires Helper The Helper Class
+ * @throws applyError on exception
  * @return number calculated height
  */
 function Helper_defineWindowY ()
@@ -319,7 +323,8 @@ function Helper_defineWindowY ()
 /**
  * Implements method of prototype class Helper
  * Display next url level
- * @requires Helper The Helper Class
+ * @param {var} elem Actual element
+ * @throws applyError on exception
  */
 function Helper_showNextNode(elem)
 {
@@ -574,6 +579,25 @@ function _insertTags(id, tagOpen, tagClose, sampleText)
 }
 
 
+/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * @param {var} elem Actual element
+ * @throws applyError on exception
+ */
+function Helper_confirmAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelNav);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
 /**
  * Building new instance for @class Helper
  */

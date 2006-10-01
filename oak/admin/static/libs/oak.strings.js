@@ -40,3 +40,5 @@ var selectTextarea = '<%i18n Please set focus on the textarea where to put the m
 
 var showDetails = '<%i18n Show details%>';
 var hideDetails = '<%i18n Hide details%>';
+
+var confirmMsgDelNav = '<%i18n Do you really want to delete the choosen navigation? Every page related to this navigation will be deleted too.%>';

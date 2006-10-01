@@ -29,6 +29,7 @@ define('OAK_CURRENT_AREA', 'ADMIN');
 $path_parts = array(
 	dirname(__FILE__),
 	'..',
+	'..',
 	'core',
 	'loader.php'
 );
@@ -40,7 +41,7 @@ require($loader_path);
 $BASE = load('base:base');
 
 // deregister globals
-$deregister_globals_path = dirname(__FILE__).'/../core/includes/deregister_globals.inc.php';
+$deregister_globals_path = dirname(__FILE__).'/../../core/includes/deregister_globals.inc.php';
 require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
 
 try {
@@ -48,11 +49,11 @@ try {
 	@ob_start();
 	
 	// load smarty
-	$smarty_admin_conf = dirname(__FILE__).'/../core/conf/smarty_admin.inc.php';
+	$smarty_admin_conf = dirname(__FILE__).'/../../core/conf/smarty_admin.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
 	
 	// load gettext
-	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
+	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	

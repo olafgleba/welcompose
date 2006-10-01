@@ -19,15 +19,11 @@ var selection = '';
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse.js.php?file=oak.strings.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
 <script type="text/javascript" src="../static/libs/oak.core.js"></script>
 <script type="text/javascript" src="../static/libs/oak.helper.js"></script>
 <script type="text/javascript" src="../static/libs/oak.events.js"></script>
 <script type="text/javascript" src="../static/libs/oak.validation.js"></script>
-
-<!--[if IE]>
-<script type="text/javascript" src="../static/libs/oak.core.ie.js"></script>
-<![endif]-->
 
 </head>
 
@@ -86,7 +82,7 @@ var selection = '';
 <tr>
 <td class="page"><span>{$_navigation.name|escape:"htmlall"}</span></td>
 <td><a class="edit" href="navigations_edit.php?id={$_navigation.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="navigations_delete.php?id={$_navigation.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirm" href="navigations_delete.php?id={$_navigation.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
