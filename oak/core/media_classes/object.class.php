@@ -213,10 +213,12 @@ public function selectObject ($id)
 			`media_objects`.`tags` AS `tags`,
 			`media_objects`.`file_name` AS `file_name`,
 			`media_objects`.`file_name_on_disk` AS `file_name_on_disk`,
+			`media_objects`.`file_mime_type` AS `file_mime_type`,
 			`media_objects`.`file_width` AS `file_width`,
 			`media_objects`.`file_height` AS `file_height`,
 			`media_objects`.`file_size` AS `file_size`,
 			`media_objects`.`preview_name_on_disk` AS `preview_name_on_disk`,
+			`media_objects`.`preview_mime_type` AS `preview_mime_type`,
 			`media_objects`.`preview_width` AS `preview_width`,
 			`media_objects`.`preview_height` AS `preview_height`,
 			`media_objects`.`preview_size` AS `preview_size`,
@@ -768,6 +770,30 @@ public function getPathToObject ($object_name)
 	
 	return $this->base->_conf['image']['store_disk'].DIR_SEP.$object_name;
 }
+
+/**
+ * Returns full www path to media object. Takes media object name on disk
+ * as frist argument. Please note that the object doesn't have to exist
+ * to get the path to a object.
+ *
+ * @param string Object name
+ * @return mixed
+ */
+public function getWwwPathToObject ($object_name)
+{
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($object_name) || !is_scalar($object_name)) {
+		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
+	}
+	
+	return $this->base->_conf['image']['store_www'].DIR_SEP.$object_name;
+}
+
 
 /**
  * Returns full path to media thumbnail. Takes the media object name on

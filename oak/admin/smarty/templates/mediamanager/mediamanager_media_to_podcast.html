@@ -1,23 +1,23 @@
 <div id="mediafile_metadata">
-<p><span class="fir">{i18n Filename}:</span><span class="sec">variable</span></p>
+<p><span class="fir">{i18n Filename}:</span><span class="sec">{$object.file_name}</span></p>
 <p><span class="fir">{i18n Media type}:</span><span class="sec">variable</span></p>
 <p><span class="fir">{i18n Duration}:</span><span class="sec">variable</span></p>
 </div>
 
 <div id="mediafile_player">
-{if $_type == 1}	
-<object type="application/x-shockwave-flash" data="../static/includes/emff_stationary.swf?src=<pfad_zur_mediadatei>" width="201" height="41">
-<param name="movie" value="../static/includes/emff_stationary.swf?src=<pfad_zur_mediadatei>" />
+{if $object.file_mime_type == 'audio/mpeg'}	
+<object type="application/x-shockwave-flash" data="../static/includes/emff_stationary.swf?src={get_www_path_to_object name=$object.file_name_on_disk}" width="201" height="41">
+<param name="movie" value="../static/includes/emff_stationary.swf?src={get_www_path_to_object name=$object.file_name_on_disk}" />
 <param name="quality" value="high" />
 </object>
-{else}
+{elseif $object.file_mime_type == 'video/quicktime'}
 <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab"
 width="320" height="256">
-<param name="src" value="<pfad_zur_mediadatei>" /> 
+<param name="src" value="{get_www_path_to_object name=$object.file_name_on_disk}" /> 
 <param name="controller" value="true" /> 
-<param name="autoplay" value="false" />
+<param name="autoplay" value="true" />
 <!--[if !IE]>
-<object type="video/quicktime" data="<pfad_zur_mediadatei>" width="320" height="256">
+<object type="video/quicktime" data="{get_www_path_to_object name=$object.file_name_on_disk}" width="320" height="256">
 <param name="autoplay" value="false" />
 <param name="controller" value="true" />
  </object>

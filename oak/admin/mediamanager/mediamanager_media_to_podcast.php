@@ -101,15 +101,10 @@ try {
 		// start transaction
 		$BASE->db->begin();
 		
-		// Andreas:  $_REQUEST['id'] ist die gelieferte var für den DB collect
-	
-		$BASE->utility->smarty->assign('id', $_REQUEST['id']);
+		// get media object
+		$object = $OBJECT->selectObject($_REQUEST['id']);
+		$BASE->utility->smarty->assign('object', $object);
 		
-		// das hier ist nur eine tmp statische weiche um mal ein mov auszuprobieren
-		// 0 = kein flash, sondern video/quicktime
-		// s. html template mediamanager_media_to_podcast.html
-		$BASE->utility->smarty->assign('_type', 1);	
-	
 		// display the correlated mediamanager template
 		$BASE->utility->smarty->display('mediamanager/mediamanager_media_to_podcast.html');
 		

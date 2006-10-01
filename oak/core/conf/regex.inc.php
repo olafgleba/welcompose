@@ -178,4 +178,7 @@ define("OAK_REGEX_ACTION_TO_URL_PATTERN", "~(?<=[a-z])([A-Z0-9])~");
 // Defines regular expression for css Identifier.
 define("OAK_REGEX_CSS_IDENTIFIER", "=^([a-z_]+)$=i");
 
+// Defines regular expression for object file names.
+define("OAK_REGEX_OBJECT_FILENAME", "=^([a-z0-9-_\. ]+)$=i");
+
 ?>
