@@ -534,7 +534,7 @@ function Help_show (elem, level)
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemove;
 		}
-	
+	 
 		this.ttarget = this.processId;
 	
 		// Are we within a foreach loop table (eg. with ascending ids)?
@@ -770,7 +770,8 @@ function Help_processMediamanager (ttarget)
  function Help_setCorrespondingFocus (elem, attr)
 {
 	this.inst = elem.parentNode.parentNode.getAttribute(attr);
-	$(this.inst).focus();
+	//alert (this.inst);
+	//$(this.inst).focus();
 }
 
 /**

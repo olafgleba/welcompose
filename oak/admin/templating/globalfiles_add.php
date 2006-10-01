@@ -99,7 +99,7 @@ try {
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'template_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
+		array('id' => 'global_file_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
 	
