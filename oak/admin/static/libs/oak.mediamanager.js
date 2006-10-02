@@ -685,7 +685,7 @@ function Mediamanager_insertImageItem (elem)
 			var target = storedFocus;
 	
 			var build;
-			build = '{get_image id="';
+			build = '{get_media id="';
 			build += elem.id;
 			build += '"}';
 		
@@ -716,7 +716,7 @@ function Mediamanager_insertDocumentItem (elem)
 	
 			var build;
 			build = '<a href="';
-			build += '{get_document id="';
+			build += '{get_media id="';
 			build += elem.id;
 			build += '"}';
 			build += '">';

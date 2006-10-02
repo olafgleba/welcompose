@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: pluginutil.class.php
+ * File: pluginutility.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Utility_PluginUtil {
+class Utility_PluginUtility {
 	
 	/**
 	 * Singleton
@@ -69,36 +69,36 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Utility_PluginUtil object.
+ * Singleton. Returns instance of the Utility_PluginUtility object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Utility_PluginUtil::$instance == null) {
-		Utility_PluginUtil::$instance = new Utility_PluginUtil(); 
+	if (Utility_PluginUtility::$instance == null) {
+		Utility_PluginUtility::$instance = new Utility_PluginUtility(); 
 	}
-	return Utility_PluginUtil::$instance;
+	return Utility_PluginUtility::$instance;
 }
 
 /**
- * Returns PCRE search pattern for extraction of a text converter tag. Takes the name
- * of the text converter tag as first argument. The second argument is a switch to
+ * Returns PCRE search pattern for extraction of a text macro tag. Takes the name
+ * of the text macro tag as first argument. The second argument is a switch to
  * enable/disable multi line tags. 
  *
- * @throws Utility_PluginUtilException
+ * @throws Utility_PluginUtilityException
  * @param string Tag name
  * @param bool Multi line tags
  * @return string
  */
-public function getTextConverterTagPattern ($name, $dotall = false)
+public function getTextMacroTagPattern ($name, $dotall = false)
 {
 	// test name
 	if (empty($name) || !preg_match(OAK_REGEX_TEXT_MACRO_INTERNAL_NAME, $name)) {
-		throw new Utility_PluginUtilException("name is expected to be a valid internal text macro name");
+		throw new Utility_PluginUtilityException("name is expected to be a valid internal text macro name");
 	}
 	if (!is_bool($dotall)) {
-		throw new Utility_PluginUtilException("dotall is expected to be boolean");
+		throw new Utility_PluginUtilityException("dotall is expected to be boolean");
 	}
 	
 	// prepare pattern
@@ -109,23 +109,23 @@ public function getTextConverterTagPattern ($name, $dotall = false)
 }
 
 /**
- * Creates key=>value array from a text converter tag string. Takes array with
+ * Creates key=>value array from a text macro tag string. Takes array with
  * preg_replace_callback() output as first argument. The second argument is a switch
  * to enable/disable key/value security/sanitizing. Returns array.
  * 
- * @throws Utility_PluginUtilException
+ * @throws Utility_PluginUtilityException
  * @param array preg_replace_callback() output
  * @param bool Enable/disable security
  * @return array
  */
-public function getTextConverterTagArgs ($args, $security = true)
+public function getTextMacroTagArgs ($args, $security = true)
 {
 	// input check
 	if (!is_array($args)) {
-		throw new Utility_PluginUtilException("Input for parameter args is expected to be an array");
+		throw new Utility_PluginUtilityException("Input for parameter args is expected to be an array");
 	}
 	if (!is_bool($security)) {
-		throw new Utility_PluginUtilException("security is expected to be boolean");
+		throw new Utility_PluginUtilityException("security is expected to be boolean");
 	}
 	
 	// import params from args array
@@ -148,6 +148,6 @@ public function getTextConverterTagArgs ($args, $security = true)
 // end of class
 }
 
-class Utility_PluginUtilException extends Exception { }
+class Utility_PluginUtilityException extends Exception { }
 
 ?>

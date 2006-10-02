@@ -794,6 +794,35 @@ public function getWwwPathToObject ($object_name)
 	return $this->base->_conf['image']['store_www'].DIR_SEP.$object_name;
 }
 
+/**
+ * Takes media object id  as frist argument. Returns full www path to
+ * media object.
+ *
+ * @param string Object id
+ * @return mixed
+ */
+public function getWwwPathToObjectUsingId ($object_id)
+{
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($object_id) || !is_scalar($object_id)) {
+		throw new Media_ObjectException("Object id is supposed to be a non-empty numeric value");
+	}
+	
+	// get object
+	$object = $this->selectObject($object_id);
+	
+	// if there's no file name on disk, return an empty url
+	if (empty($object['file_name_on_disk'])) {
+		return "";
+	} else {
+		return $this->base->_conf['image']['store_www'].DIR_SEP.$object['file_name_on_disk'];
+	}
+}
 
 /**
  * Returns full path to media thumbnail. Takes the media object name on
