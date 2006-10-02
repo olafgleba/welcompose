@@ -112,7 +112,7 @@ try {
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
-	// get available blog comment statuses
+	// get available Blog Comment Status
 	$BASE->utility->smarty->assign('blog_comment_statuses',
 		$BLOGCOMMENTSTATUS->selectBlogCommentStatuses());
 	

@@ -104,7 +104,7 @@ try {
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
-	// get available blog comment statuses
+	// get available Blog Comment Status
 	$select_params = array(
 		'order_macro' => 'NAME',
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),

@@ -36,9 +36,9 @@ var selection = '{$session.selection}';
 
 <div id="logout"><a href="../logout.php">{i18n Logout}</a></div>
 
-{include file="_inc_topnav.html" area="users"}
+{include file="_inc_topnav.html" area="community"}
 
-{include file="_inc_projects_load.html" go_back_area="user" go_back_file="users_select.php"}
+{include file="_inc_projects_load.html" go_back_area="community" go_back_file="blogcommments_select.php"}
 
 <div id="main">
 
@@ -50,7 +50,7 @@ var selection = '{$session.selection}';
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
 <li class="on">{i18n Blog Comments}</li>
-<li><a href="blogcommentstatuses_select.php">{i18n Blog Comment Statuses}<span></span></a></li>
+<li><a href="blogcommentstatuses_select.php">{i18n Blog Comment Status}<span></span></a></li>
 <li><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}<span></span></a></li>
 <li><a href="settings.php">{i18n Community Settings}<span></span></a></li>
 </ul>

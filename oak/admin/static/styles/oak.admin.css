@@ -1243,6 +1243,10 @@ width: 305px;
 margin: 0 0 10px 0;
 padding-left: 120px;
 }
+/* not in use yet */
+input.showIDThree120  {
+display: none;
+}
 
 
 /* %M =misc */

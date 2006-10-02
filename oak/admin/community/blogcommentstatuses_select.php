@@ -104,7 +104,7 @@ try {
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
-	// get available blog comment statuses
+	// get available Blog Comment Status
 	$select_params = array(
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
 		'limit' => 20
@@ -112,7 +112,7 @@ try {
 	$BASE->utility->smarty->assign('blog_comment_statuses',
 		$BLOGCOMMENTSTATUS->selectBlogCommentStatuses($select_params));
 	
-	// count available blog comment statuses
+	// count available Blog Comment Status
 	$status_count = $BLOGCOMMENTSTATUS->countBlogCommentStatuses();
 	$BASE->utility->smarty->assign('blog_comment_status_count', $status_count);
 	

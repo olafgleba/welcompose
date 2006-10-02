@@ -94,7 +94,7 @@ try {
 	// get settings
 	$settings = $SETTINGS->getSettings();
 	
-	// get blog comment statuses
+	// get Blog Comment Status
 	$blog_comment_statuses = array(
 		'' => gettext('None')
 	);
