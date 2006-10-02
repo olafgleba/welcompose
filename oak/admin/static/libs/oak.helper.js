@@ -56,17 +56,18 @@ Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
+Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.confirmAction = Helper_confirmAction;
 
 
 function Helper_launchPopup (width, height, name, trigger, elem)
 {
 	try {
-		Helper.lowerOpacity();
-		
 		// properties
 		this.elem = elem;
 		this.trigger = trigger;
+		
+		Helper.lowerOpacity();
 		
 		switch (this.trigger) {
 			case 'mm_upload' :
@@ -79,10 +80,12 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 					this.url = '../content/pages_links_select.php?target=' + this.elem.name;
 				break;
 			case 'globaltemplates_internal_links' :
-					this.url = '../templating/globaltemplates_links_select.php?target=' + this.elem.name;
+					Helper.getDelimiterValue();
+					this.url = '../templating/globaltemplates_links_select.php?target=' + this.elem.name + '&delimiter=' + val;
 				break;
 			case 'globalfiles_internal_links' :
-					this.url = '../templating/globalfiles_links_select.php?target=' + this.elem.name;
+					Helper.getDelimiterValue();
+					this.url = '../templating/globalfiles_links_select.php?target=' + this.elem.name + '&delimiter=' + val;
 				break;
 		}
 		// properties
@@ -528,6 +531,26 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 		_applyError(e);
 	}
 }
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_getDelimiterValue()
+{
+	try {
+		// make global for further use in func Helper.launchPopup()
+		if ($('global_template_change_delimiter')) {
+			val = $F('global_template_change_delimiter');
+		} else {
+			val = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Insert Content into Textareas from Popup

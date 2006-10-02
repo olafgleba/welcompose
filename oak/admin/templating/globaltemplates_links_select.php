@@ -109,6 +109,9 @@ try {
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
 	
+	// assign delimiter field value
+	$BASE->utility->smarty->assign('delimiter', Base_Cnc::filterRequest($_REQUEST['delimiter'], OAK_REGEX_NUMERIC));
+	
 	// prepare template key
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 	$BASE->utility->smarty->display('templating/globaltemplates_links_select.html', OAK_TEMPLATE_KEY);

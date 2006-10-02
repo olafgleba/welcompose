@@ -15,7 +15,6 @@
 var response = '{$session.response}';
 var selection = '{$session.selection}';
 var formTarget = '{$target}';
-
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -24,7 +23,6 @@ var formTarget = '{$target}';
 <script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
 <script type="text/javascript" src="../static/libs/oak.core.js"></script>
 <script type="text/javascript" src="../static/libs/oak.helper.js"></script>
-<script type="text/javascript" src="../static/libs/oak.mediamanager.js"></script>
 <script type="text/javascript" src="../static/libs/oak.events.js"></script>
 
 </head>
@@ -41,7 +39,7 @@ var formTarget = '{$target}';
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="initialNode"><a class="act_setInternalLinkGlobalTemplates" id="{literal}{{/literal}get_globaltemplate_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
+<td class="initialNode"><a class="act_setInternalLinkGlobalTemplates" id="{if !empty($delimiter)}{literal}<%{/literal}{else}{literal}{{/literal}{/if}get_globaltemplate_url page_id={$_page.id}{if !empty($delimiter)}{literal}%>{/literal}{else}{literal}}{/literal}{/if}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
 </tr>
 {/foreach}
 {/if}
