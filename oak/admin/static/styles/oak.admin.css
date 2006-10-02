@@ -1045,16 +1045,29 @@ display: none;
 /* eof */
 
 /* internal links - templates */
-#modalContainer #templates h2 span.close {
-margin-left: 150px;
+#modalContainer #globaltemplates h2 span.close {
+margin-left: 30px;
 }
 /* eof */
 
 /* internal links - global templates */
-#modalContainer #globaltemplates h2 span.close {
-margin-left: 90px;
+#modalContainer #globalfiles h2 span.close {
+margin-left: 50px;
 }
 /* eof */
+
+/* internal links - global templates, global files */
+#modalContainer #globalfiles table#firstNode,
+#modalContainer #globaltemplates table#firstNode {
+float: left;
+width: 385px;
+padding: 0;
+margin: 0 2px 0 0;
+border: 0 none;
+background: #f9f9f9;
+}
+/* eof */
+
 
 table#firstNode,
 table#secondNode,
@@ -1327,7 +1340,7 @@ position: relative;
 display: block;
 float: left;
 font-size: 80%;
-padding: 1px 10px 2px 19px;
+padding: 1px 20px 2px 19px;
 text-decoration: none;
 }
 .actnav a:link, .actnav a:visited {

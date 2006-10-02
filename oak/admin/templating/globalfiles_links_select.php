@@ -111,7 +111,7 @@ try {
 	
 	// prepare template key
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('templating/templates_links_select.html', OAK_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('templating/globalfiles_links_select.html', OAK_TEMPLATE_KEY);
 /*	
 	// display template depending on the selection level
 	if (empty($_REQUEST['nextNode'])) {

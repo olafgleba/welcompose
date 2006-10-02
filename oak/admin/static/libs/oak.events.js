@@ -270,7 +270,7 @@ var definitions = {
 			Helper.insertInternalLink(this);
 			return false;
 		}
-	},
+	}/*,
 	'.act_internalLinkTemplates' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('490','604','templates_links_select','templates_internal_links', this);
@@ -282,16 +282,22 @@ var definitions = {
 			Helper.insertInternalLinkTemplates(this);
 			return false;
 		}
-	},
+	}*/,
 	'.act_internalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('490','604','globaltemplates_links_select','globaltemplates_internal_links', this);
+			Helper.launchPopup('420','604','globaltemplates_links_select','globaltemplates_internal_links', this);
 			return false;
 		}
 	},
 	'.act_setInternalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
 			Helper.insertInternalLinkGlobalTemplates(this);
+			return false;
+		}
+	},
+	'.act_internalLinkGlobalFiles' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('420','604','globalfiles_links_select','globalfiles_internal_links', this);
 			return false;
 		}
 	},

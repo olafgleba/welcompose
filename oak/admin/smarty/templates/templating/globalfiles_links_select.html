@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Templates &ndash; Internal Links}</title>
+<title>{i18n Oak Admin &ndash; Global Files &ndash; Internal Links}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
  
@@ -32,34 +32,16 @@ var formTarget = '{$target}';
 <body id="modalWindow">
 
 <div id="modalContainer">
-<div id="templates">
-<h2>{i18n TEMPLATES} <span>{i18n INSERT INTERNAL LINKS}</span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
+<div id="globalfiles">
+<h2>{i18n GLOBAL FILES} <span>{i18n INSERT INTERNAL LINKS}</span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
 
 <div id="modalBody">
 	
 <table id="firstNode">
-<tr>
-<td colspan="2">{i18n Global templates}</td>
-</tr>
-{if count($page_arrays.$navigation_id) > 0}
-{foreach from=$page_arrays.$navigation_id item=_page}
-<tr>
-<td class="initialNode"><a class="act_setInternalLinkTemplates" id="{literal}{{/literal}get_template_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
-<td>&nbsp;</td>
-</tr>
-{/foreach}
-{/if}
-</table>
-
-<table id="secondNode">
-<tr>
-<td colspan="2">{i18n Global files}</td>
-</tr>
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
 <td class="initialNode"><a class="act_setInternalLinkGlobalFiles" id="{literal}{{/literal}get_globalfiles_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
-<td>&nbsp;</td>
 </tr>
 {/foreach}
 {/if}
