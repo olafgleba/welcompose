@@ -507,16 +507,8 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 		// delivered from within smarty assign
 		var target = formTarget;
 		
-		var build;
-		build = '<a href="';
-		build += elem.id;
-		build += '">';
-		
-		strStart = build;
-		strEnd = '</a>';
-			
 		// describeLink is defined in oak.strings.js
-		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
+		_insertTagsFromPopup(target, elem.id, "", "");
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
