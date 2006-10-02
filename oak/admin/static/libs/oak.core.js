@@ -353,7 +353,7 @@ function OakInit_getVars ()
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
-				this.url = this.parseMedUrl + '?page=mediamanager';
+				this.url = this.parseMedUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
 				if (typeof this.req != 'undefined') {
 		
 					var _url		= this.url;

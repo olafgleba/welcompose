@@ -85,7 +85,7 @@ try {
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// get page name
-	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
+//	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
 	
 	// get and assign timeframes
 	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
@@ -124,6 +124,8 @@ try {
 	);
 	
 	$BASE->utility->smarty->assign('request', $request);
+	
+	$BASE->utility->smarty->assign('pagetype', Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC));
 	
 	// assign image path
 	$BASE->utility->smarty->assign('image_store_www', $BASE->_conf['image']['store_www']);

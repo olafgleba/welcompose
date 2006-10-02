@@ -1,6 +1,6 @@
 <form action="" method="post" id="mediamanager">
 <fieldset>
-<h2>{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
+<h2>{$pagetype}{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2>
 
 <!-- help -->
 <div id="lyMediamanager"></div>
@@ -61,9 +61,13 @@
 
 <!-- mediamanager content populate -->
 <div id="myLocal_mm_contentToPopulate">
+
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
+
+{* du hast die smarty var $pagetype zur Verfügung *}
+
 <td class="td_mm_media">{if $_object.type == 'image'}<a class="mm_insertImageItem" id="{$_object.id}" href="#" title="{i18n Insert this image to your content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{/if}{if $_object.type == 'document'}<a class="mm_insertDocumentItem" id="{$_object.id}" href="#" title="{i18n Insert this document to your content}">Insert</a>{/if}
 </td>
 <td class="td_mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>

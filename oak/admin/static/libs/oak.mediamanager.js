@@ -632,7 +632,8 @@ function Mediamanager_checkMyLocalElems ()
 			mm_include_types_other : $F('mm_include_types_other'),
 			mm_tags : $F('mm_tags'),
 			mm_timeframe : $F('mm_timeframe'),
-			mm_limit : countItems
+			mm_limit : countItems,
+			mm_pagetype : pagetype
 		};
 		var o = $H(getElems);
 		//countItems = null;
