@@ -30,6 +30,8 @@ var selection = '{$session.selection}';
 <body>
 <div id="container">
 
+<div id="lyLowerOpacity"> </div>
+
 <div id="logo">
 <p>{i18n Oak}</p>
 <!-- logo --></div>
@@ -100,7 +102,13 @@ var selection = '{$session.selection}';
 <label class="cont h04" for="template_description"><span class="bez">{$form.description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.description.html}</label>
 
-<label class="cont h46" for="template_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<div class="act">
+<ul class="actnav">
+<li><a class="act_internalLinkTemplates" name="template_content" href="#">{i18n Insert internal link}</a></li>
+</ul>
+</div>
+
+<label class="cont h46act" for="template_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.content.html}</label>
 
 <label class="cont h13" for="template_sets"><span class="bez">{$form.sets.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>

@@ -180,10 +180,9 @@ function Mediamanager_switchLayer (toShow, toHide)
 
 /**
  * Implements method of prototype class Mediamanager
- * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
+ * Toggle Extended View on Podcasts (show Details)
  *
- * @param {string} toShow div to display
- * @param {string} toHide div to hide
+ * @param {var} elem Actual elem to toggle 
  * @throws applyError on exception
  */
 function Mediamanager_toggleExtendedView (elem)
@@ -397,14 +396,14 @@ function Mediamanager_mediaToPodcast (elem)
  */
 function _showResponseMediaToPodcast(req)
 {
-	try {
+	try {		
 		$('mediafile_container').innerHTML = req.responseText;
-				
-			// dont be able to use appear here, because Effect.Opacity don't use display: block
-			Element.show('podcast_container_loader');
-			Element.hide('indicatorPodcast');
-			// observe if needed at least
-			//Behaviour.apply();
+			
+		// dont be able to use appear here, because Effect.Opacity don't use display: block
+		Element.hide('indicatorPodcast');
+		Element.show('podcast_container_loader');		
+		// observe if needed at least
+		Behaviour.apply();
 		
 	} catch (e) {
 		_applyError(e);

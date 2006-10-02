@@ -54,6 +54,9 @@ Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
 Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
+Helper.prototype.insertInternalLinkTemplates = Helper_insertInternalLinkTemplates;
+Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
+Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
 Helper.prototype.confirmAction = Helper_confirmAction;
 
 
@@ -75,6 +78,13 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 				break;
 			case 'pages_internal_links' :
 					this.url = '../content/pages_links_select.php?target=' + this.elem.name;
+				break;
+			case 'templates_internal_links' :
+					this.url = '../templating/templates_links_select.php?target=' + this.elem.name;
+				break;
+			case 'globaltemplates_internal_links' :
+					this.url = '../templating/globaltemplates_links_select.php?target=' + this.elem.name;
+				break;
 		}
 		// properties
 		this.ttargetUrl = this.url;
@@ -442,6 +452,90 @@ function _loaderPagesLinks ()
  * @requires Helper The Helper Class
  */
 function Helper_insertInternalLink(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var target = formTarget;
+		
+		var build;
+		build = '<a href="';
+		build += elem.id;
+		build += '">';
+		
+		strStart = build;
+		strEnd = '</a>';
+			
+		// describeLink is defined in oak.strings.js
+		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLinkTemplates(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var target = formTarget;
+		
+		var build;
+		build = '<a href="';
+		build += elem.id;
+		build += '">';
+		
+		strStart = build;
+		strEnd = '</a>';
+			
+		// describeLink is defined in oak.strings.js
+		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLinkGlobalTemplates(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var target = formTarget;
+		
+		var build;
+		build = '<a href="';
+		build += elem.id;
+		build += '">';
+		
+		strStart = build;
+		strEnd = '</a>';
+			
+		// describeLink is defined in oak.strings.js
+		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLinkGlobalFiles(elem)
 {
 	try {
 		// delivered from within smarty assign

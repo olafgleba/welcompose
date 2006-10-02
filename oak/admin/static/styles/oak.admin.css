@@ -1005,7 +1005,6 @@ margin: 0;
 #modalContainer {
 text-align: left;
 }
-
 #modalContainer h2 {
 background: #efefef;
 padding: 8px 8px;
@@ -1015,33 +1014,48 @@ border: 1px solid #ccc;
 #modalContainer h2 span {
 color: #00AE2C;
 }
-#modalContainer h2 span.close {
-margin-left: 420px;
-}
 #modalContainer h2 span.close a {
 font-weight: bold;
 font-size: 100%;
-}
-#modalContainer h2 span#indicator_pagesLinks {
-position: absolute;
-top: 1px;
-left: 570px;
-height: 30px;
 }
 #modalBody {
 padding: 3px 8px;
 min-height: 555px;
 background: #fff;
 }
-
 #modalBody table td {
 color: #00AE2C;
 padding-left: 10px;
 }
-table#secondNode,
-table#thirdNode {
+
+/* internal links - pages */
+#modalContainer #pages h2 span.close {
+margin-left: 420px;
+}
+#modalContainer #pages h2 span#indicator_pagesLinks {
+position: absolute;
+top: 1px;
+left: 570px;
+height: 30px;
+}
+#pages table#secondNode,
+#pages table#thirdNode {
 display: none;
 }
+/* eof */
+
+/* internal links - templates */
+#modalContainer #templates h2 span.close {
+margin-left: 165px;
+}
+/* eof */
+
+/* internal links - global templates */
+#modalContainer #globaltemplates h2 span.close {
+margin-left: 105px;
+}
+/* eof */
+
 table#firstNode,
 table#secondNode,
 table#thirdNode {

@@ -271,6 +271,42 @@ var definitions = {
 			return false;
 		}
 	},
+	'.act_internalLinkTemplates' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('490','604','templates_links_select','templates_internal_links', this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkTemplates' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkTemplates(this);
+			return false;
+		}
+	},
+	'.act_internalLinkGlobalTemplates' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('490','604','globaltemplates_links_select','globaltemplates_internal_links', this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkGlobalTemplates' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkGlobalTemplates(this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkGlobalFiles' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkGlobalFiles(this);
+			return false;
+		}
+	},
+	'.close' : function(el){
+		el.onclick = function(){
+			Helper.closeLinksPopup(this);
+			return false;
+		}
+	},
 	'.showNextNode' : function(el){
 		el.onclick = function(){
 			Helper.showNextNode(this);
@@ -280,12 +316,6 @@ var definitions = {
 	'.toggleExtendedView120' : function(el){
 		el.onclick = function(){
 			Mediamanager.toggleExtendedView(this);
-			return false;
-		}
-	},
-	'.close' : function(el){
-		el.onclick = function(){
-			Helper.closeLinksPopup(this);
 			return false;
 		}
 	},
