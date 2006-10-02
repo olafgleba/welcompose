@@ -1046,13 +1046,13 @@ display: none;
 
 /* internal links - templates */
 #modalContainer #templates h2 span.close {
-margin-left: 165px;
+margin-left: 150px;
 }
 /* eof */
 
 /* internal links - global templates */
 #modalContainer #globaltemplates h2 span.close {
-margin-left: 105px;
+margin-left: 90px;
 }
 /* eof */
 
