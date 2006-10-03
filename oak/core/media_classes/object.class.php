@@ -337,6 +337,7 @@ public function selectObjects ($params = array())
 			`media_objects`.`tags` AS `tags`,
 			`media_objects`.`file_name` AS `file_name`,
 			`media_objects`.`file_name_on_disk` AS `file_name_on_disk`,
+			`media_objects`.`file_mime_type` AS `file_mime_type`,
 			`media_objects`.`file_width` AS `file_width`,
 			`media_objects`.`file_height` AS `file_height`,
 			`media_objects`.`file_size` AS `file_size`,
