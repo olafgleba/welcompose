@@ -157,6 +157,10 @@ try {
 
 	// podcast layer
 		
+	// hidden for id
+	$FORM->addElement('hidden', 'mediafile_id', '', array('id' => 'mediafile_id'));
+	$FORM->applyFilter('mediafile_id', 'trim');
+	
 	// textfield for title
 	$FORM->addElement('text', 'podcast_title', gettext('Title'),
 		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));

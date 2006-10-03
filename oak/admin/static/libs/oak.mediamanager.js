@@ -73,6 +73,7 @@ Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
+Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
 
 /**
  * Implements method of prototype class Mediamanager
@@ -368,6 +369,9 @@ function Mediamanager_mediaToPodcast (elem)
 		
 		Element.show(this.toShow);
 		Element.scrollTo(this.toShow);
+		
+		// set hidden field value
+		$('mediafile_id').value = elem.id;
 
 		var url = this.parseMedCastsUrl;
 		var pars = 'id=' + elem.id;
@@ -403,7 +407,7 @@ function _showResponseMediaToPodcast(req)
 		Element.hide('indicatorPodcast');
 		Element.show('podcast_container_loader');		
 		// observe if needed at least
-		Behaviour.apply();
+		//Behaviour.apply();
 		
 	} catch (e) {
 		_applyError(e);
@@ -525,8 +529,6 @@ function _showResponseInvokeInputs(req)
 		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		$('column').focus();
-
-		//Behaviour.apply();
 		
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
@@ -570,7 +572,6 @@ function _showResponseInvokeTagInputs(req)
 		Mediamanager.setCurrentElementStatusMyLocal();	
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		
-		//Behaviour.apply();
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
@@ -726,6 +727,30 @@ function Mediamanager_insertDocumentItem (elem)
 			
 			_insertTags(target, strStart, strEnd , describeLink);
 		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Get rid off podcast
+ *
+ * @param {var} elem Actual elem to get rid off 
+ * @throws applyError on exception
+ */
+function Mediamanager_discardPodcast (elem)
+{
+	try {
+		// discard hidden field value
+		$('mediafile_id').value = '';
+		
+			if (Helper.unsupportsEffects('safari')) {
+				Element.hide('podcast_container');
+			} else {
+				Effect.Fade('podcast_container',{duration: 0.4});
+			}
 		
 	} catch (e) {
 		_applyError(e);

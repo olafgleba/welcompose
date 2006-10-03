@@ -17,6 +17,7 @@ var Behaviour = {
 		});
 	},
 	
+	
 	apply : function(){
 		for (h=0;sheet=Behaviour.list[h];h++){
 			for (selector in sheet){

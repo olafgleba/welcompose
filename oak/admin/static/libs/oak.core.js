@@ -151,7 +151,10 @@ function Base ()
 		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
 		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
 		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
-		this.parsePagesLinksContentUrl = '../content/pages_links_select.php';
+		this.parseMedDiscCastsUrl = '../mediamanager/mediamanager_discard_podcast.php';
+		this.parsePagesLinksUrl = '../content/pages_links_select.php';
+		this.parseGlobalTemplatesLinksUrl = '../templating/globaltemplates_links_select.php';
+		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
 		
 		/**
 		 * Mediamanager related
@@ -431,7 +434,6 @@ function OakInit_processOakInit (ttarget)
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 				
-				//Behaviour.apply();
 				Behaviour.reapply('a.mm_edit');
 				Behaviour.reapply('a.mm_upload');
 				Behaviour.reapply('a.mm_delete');

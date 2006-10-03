@@ -57,7 +57,7 @@ Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
-Helper.prototype.confirmAction = Helper_confirmAction;
+Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 
 
 function Helper_launchPopup (width, height, name, trigger, elem)
@@ -71,21 +71,21 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 		
 		switch (this.trigger) {
 			case 'mm_upload' :
-					this.url = '../mediamanager/mediamanager_upload.php';
+					this.url = this.parseMedUploadUrl;
 				break;
 			case 'mm_edit' :
-					this.url = '../mediamanager/mediamanager_edit.php?id=' + this.elem.id;
+					this.url = this.parseMedEditUrl + '?id=' + this.elem.id;
 				break;
 			case 'pages_internal_links' :
-					this.url = '../content/pages_links_select.php?target=' + this.elem.name;
+					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name;
 				break;
 			case 'globaltemplates_internal_links' :
 					Helper.getDelimiterValue();
-					this.url = '../templating/globaltemplates_links_select.php?target=' + this.elem.name + '&delimiter=' + val;
+					this.url = this.parseGlobalTemplatesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + val;
 				break;
 			case 'globalfiles_internal_links' :
 					Helper.getDelimiterValue();
-					this.url = '../templating/globalfiles_links_select.php?target=' + this.elem.name + '&delimiter=' + val;
+					this.url = this.parseGlobalFilesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + val;
 				break;
 		}
 		// properties
@@ -350,7 +350,7 @@ function Helper_showNextNode(elem)
 			nextNode = nextNode.nextSibling.getAttribute('id');
 		}
 
-		var url = this.parsePagesLinksContentUrl;
+		var url = this.parsePagesLinksUrl;
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
 		
 		if (nextNode == 'secondNode') {
@@ -397,7 +397,7 @@ function _showResponsePagesSecondLinks(req)
 			Effect.Appear('secondNode',{duration: 0.6});
 		}
 		$('secondNode').innerHTML = req.responseText;		
-		Behaviour.apply();
+		Behaviour.apply($('modalContainer'));
 		
 	} catch (e) {
 		_applyError(e);
@@ -423,7 +423,7 @@ function _showResponsePagesThirdLinks(req)
 			Effect.Appear('thirdNode',{duration: 0.6});
 		}	
 		$('thirdNode').innerHTML = req.responseText;		
-		Behaviour.apply();
+		Behaviour.apply($('modalContainer'));
 		
 	} catch (e) {
 		_applyError(e);
@@ -658,7 +658,7 @@ function _insertTags(id, tagOpen, tagClose, sampleText)
  * @param {var} elem Actual element
  * @throws applyError on exception
  */
-function Helper_confirmAction(elem)
+function Helper_confirmDelNavAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelNav);
