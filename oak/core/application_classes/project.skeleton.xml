@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<skeleton>
+	<users>
+		<user>
+			<email>OAK_ANONYMOUS</email>
+			<secret/>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</user>
+	</users>
+	<groups>
+		<group>
+			<name>OAK_ADMIN</name>
+			<description>Group for super users that can do everything.</description>
+			<editable>0</editable>
+		</group>
+		<group>
+			<name>OAK_REGULAR</name>
+			<description>Group for regular users that are allowed to edit pages and to perform certain administrative tasks like blog comment moderation.</description>
+			<editable>0</editable>
+		</group>
+		<group>
+			<name>OAK_ANONYMOUS</name>
+			<description>Group for anonymous users that are only allowed to access the public area of the website.</description> 
+			<editable>0</editable>
+		</group>
+	</groups>
+	<rights>
+		<right>
+			<name>APPLICATION_PINGSERVICE_USE</name>
+			<description>Allows usage of ping services.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_PINGSERVICE_MANAGE</name>
+			<description>Allows management of ping services.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_PINGSERVICECONFIGURATION_USE</name>
+			<description>Allows usage of ping service configurations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_PINGSERVICECONFIGURATION_MANAGE</name>
+			<description>Allows management of ping service configurations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_TEXTCONVERTER_USE</name>
+			<description>Allows usage of text converters.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_TEXTCONVERTER_MANAGE</name>
+			<description>Allows management of text converters.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_TEXTMACRO_USE</name>
+			<description>Allows usage of text macros.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_TEXTMACRO_MANAGE</name>
+			<description>Allows management of text macros.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_ANTISPAMPLUGIN_USE</name>
+			<description>Allows usage of anti spam plug-ins.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_ANTISPAMPLUGIN_MANAGE</name>
+			<description>Allows management of anti spam plug-ins.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_BLOGCOMMENTSTATUS_USE</name>
+			<description>Allows usage of blog comment statuses.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_BLOGCOMMENTSTATUS_MANAGE</name>
+			<description>Allows management of blog comment statuses.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_BLOGCOMMENT_USE</name>
+			<description>Allows usage of blog comments.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_BLOGCOMMENT_MANAGE</name>
+			<description>Allows management of blog comments.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BLOGPOSTING_USE</name>
+			<description>Allows usage of blog postings.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BLOGPOSTING_MANAGE</name>
+			<description>Allows management of blog postings.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BOX_USE</name>
+			<description>Allows usage of boxes.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BOX_MANAGE</name>
+			<description>Allows management of boxes.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_GLOBALBOX_USE</name>
+			<description>Allows usage of global boxes.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_GLOBALBOX_MANAGE</name>
+			<description>Allows management of global boxes.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_NAVIGATION_USE</name>
+			<description>Allows usage of navigations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_NAVIGATION_MANAGE</name>
+			<description>Allows management of navigations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_PAGE_USE</name>
+			<description>Allows usage of pages.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_PAGE_MANAGE</name>
+			<description>Allows management of pages.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_PAGETYPE_USE</name>
+			<description>Allows usage of page types.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_PAGETYPE_MANAGE</name>
+			<description>Allows management of page types.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEFORM_USE</name>
+			<description>Allows usage of simple forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEFORM_MANAGE</name>
+			<description>Allows management of simple forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEPAGE_USE</name>
+			<description>Allows usage of simple pages.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEPAGE_MANAGE</name>
+			<description>Allows management of simple pages.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>MEDIA_OBJECT_USE</name>
+			<description>Allows usage of media objects.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>MEDIA_OBJECT_MANAGE</name>
+			<description>Allows management of media objects.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATE_USE</name>
+			<description>Allows usage of templates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATE_MANAGE</name>
+			<description>Allows management of templates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATESET_USE</name>
+			<description>Allows usage of template sets.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATESET_MANAGE</name>
+			<description>Allows management of template sets.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATETYPE_USE</name>
+			<description>Allows usage of template types.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_TEMPLATETYPE_MANAGE</name>
+			<description>Allows management of template types.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_GROUP_USE</name>
+			<description>Allows usage of user groups.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_GROUP_MANAGE</name>
+			<description>Allows management of user groups.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_RIGHT_USE</name>
+			<description>Allows usage of user rights.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_RIGHT_MANAGE</name>
+			<description>Allows management of user rights.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_USER_USE</name>
+			<description>Allows usage of users.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>USER_USER_MANAGE</name>
+			<description>Allows management of users.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+	</rights>
+	<page-types>
+		<page-type>
+			<name>OAK_BLOG</name>
+			<editable>0</editable>
+		</page-type>
+	</page-types>
+	<template-types>
+		<template-type>
+			<name>simple_page_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_form_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+	</template-types>
+	<text-macros/>
+	<text-converters/>
+	<anti-spam-plugins/>
+</skeleton>

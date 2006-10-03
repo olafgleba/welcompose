@@ -44,6 +44,8 @@ class Application_Project {
 	 * @var object
 	 */
 	public $base = null;
+	
+	protected $_skeleton = null;
 
 /**
  * Start instance of base class, load configuration and
@@ -417,7 +419,7 @@ public function selectProjectUsingUrlName ($name_url)
  *
  * @throws Application_ProjectException
  * @param int Project id
- *Â @return bool
+ * @return bool
  */
 public function projectExists ($id) 
 {
@@ -553,6 +555,409 @@ public function switchProject ($new_project)
 	}
 	
 	return false;
+}
+
+public function initFromSkeleton ($project)
+{
+	echo '<pre>';
+	$this->syncRightsWithSkeleton($project);
+	$this->syncLinksBetweenGroupsAndRightsWithSkeleton($project);
+	echo '</pre>';
+}
+
+protected function loadSkeleton ()
+{
+	// create simplexml object from project skeleton if there's none
+	if (!($this->_skeleton instanceof SimpleXMLElement)) {
+		$path = dirname(__FILE__).DIRECTORY_SEPARATOR.'project.skeleton.xml';
+		$this->_skeleton = simplexml_load_file($path);
+	}
+	
+	// let's see if the object creation was successful
+	if (!($this->_skeleton instanceof SimpleXMLElement)) {
+		throw new Application_ProjectException("Import of project skeleton definition failed");
+	}
+	
+	return $this->_skeleton;
+}
+
+protected function getRightsFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect rights
+	$rights = array();
+	$result = $skeleton->xpath("/skeleton/rights/right");
+	while (list(, $right) = each($result)) {
+		// extract list of groups
+		$groups = array();
+		foreach ($right->groups->name as $group) {
+			$groups[] = utf8_decode($group);
+		}
+		
+		// append right to list of rights
+		$rights[] = array(
+			'name' => utf8_decode($right->name),
+			'description' => utf8_decode($right->description),
+			'editable' => utf8_decode($right->editable),
+			'groups' => $groups
+		);
+	}
+	
+	return $rights;
+}
+
+protected function getGroupsFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect groups
+	$groups = array();
+	$result = $skeleton->xpath("/skeleton/groups/group");
+	while (list(, $group) = each($result)) {
+		// append group to list of groups
+		$groups[] = array(
+			'name' => utf8_decode($group->name),
+			'description' => utf8_decode($group->description),
+			'editable' => utf8_decode($group->editable)
+		);
+	}
+	
+	return $groups;
+}
+
+
+protected function getUsersFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect users
+	$users = array();
+	$result = $skeleton->xpath("/skeleton/users/user");
+	while (list(, $user) = each($result)) {
+		// extract list of groups
+		$groups = array();
+		foreach ($user->groups->name as $group) {
+			$groups[] = utf8_decode($group);
+		}
+		
+		// append user to list of users
+		$users[] = array(
+			'email' => utf8_decode($user->email),
+			'secret' => utf8_decode($user->secret),
+			'editable' => utf8_decode($user->editable),
+			'groups' => $groups
+		);
+	}
+	
+	return $users;
+}
+
+protected function getPageTypesFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect page types
+	$page_types = array();
+	$result = $skeleton->xpath("/skeleton/page-types/page-type");
+	while (list(, $page_type) = each($result)) {
+		// append page type to list of page types
+		$page_types[] = array(
+			'name' => utf8_decode($page_type->name),
+			'internal_name' => utf8_decode($page_type->internal_name),
+			'editable' => utf8_decode($page_type->editable)
+		);
+	}
+	
+	return $page_types;
+}
+
+protected function getTemplateTypesFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect template types
+	$template_types = array();
+	$result = $skeleton->xpath("/skeleton/template-types/template-type");
+	while (list(, $template_type) = each($result)) {
+		// append template type to list of template types
+		$template_types[] = array(
+			'name' => utf8_decode($template_type->name),
+			'description' => utf8_decode($template_type->description),
+			'editable' => utf8_decode($template_type->editable)
+		);
+	}
+	
+	return $template_types;
+}
+
+/**
+ * Synchronises rights in database with the list of rights deposited
+ * in the skeleton. Rights in the database that are not in the
+ * skeleton anymore will be removed, differences in descriptions etc.
+ * will be synchronised and new rights in the skeleton will be added.
+ * Links between rights and groups won't be updated.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncRightsWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// get rights from skeleton
+	$skeleton_rights = $this->getRightsFromSkeleton();
+	
+	// prepare query to get rights from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`
+		FROM
+			".OAK_DB_USER_RIGHTS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get rights from database
+	$database_rights = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete rights from database
+	foreach ($database_rights as $_right) {
+		// compare list of rights in skeleton and database. database rights that
+		// are not found in the list of skeleton rights have to be dropped.
+		$drop = true;
+		foreach ($skeleton_rights as $_skel_right) {
+			if ($_right['name'] == $_skel_right['name']) {
+				$drop = false;
+			}
+		}
+		
+		// if the drop bit is true, we have to remove the database right
+		if ($drop === true) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_right['id']
+			);
+			
+			// drop right
+			$this->base->db->delete(OAK_DB_USER_RIGHTS, $where, $bind_params);
+		}
+	}
+	
+	// now we have to add missing rights to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_rights as $_right) {
+		// compare list of rights in skeleton and database. skeleton rights that
+		// are not found in the list of database rights have to be added. rights that
+		// exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_rights as $_db_right) {
+			if ($_right['name'] == $_db_right['name']) {
+				// look at description/editable bit and update them if
+				// necessessary
+				$update = false;
+				
+				if ($_right['description'] != $_db_right['description']) {
+					$update = true;
+				} elseif ((int)$_right['editable'] != (int)$_db_right['editable']) {
+					$update = true;
+				}
+				
+				// update rights if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'description' => $_right['description'],
+						'editable' => (int)$_right['editable']
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_right['id']
+					);
+					
+					// update right
+					$this->base->db->update(OAK_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the right into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_right['name'],
+				'description' => $_right['description'],
+				'editable' => (int)$_right['editable']
+			);
+			
+			// insert right
+			$this->base->db->insert(OAK_DB_USER_RIGHTS, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// prepare query to get groups from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`,
+			`date_modified`,
+			`date_added`
+		FROM
+			".OAK_DB_USER_GROUPS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get groups from database
+	$database_groups = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// prepare query to get rights from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`
+		FROM
+			".OAK_DB_USER_RIGHTS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get rights from database
+	$database_rights = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// get rights from skeleton
+	$skeleton_rights = $this->getRightsFromSkeleton();
+	
+	// loop through all skeleton rights to create new links between groups
+	// and rights 
+	foreach ($skeleton_rights as $_right) {
+		// search for right in the list of database rights to get its id
+		foreach ($database_rights as $_db_right) {
+			if ($_db_right['name']== $_right['name']) {
+				$current_right = (int)$_db_right['id'];
+			}
+		}
+		
+		// if the current right could not be found, we have to skip the
+		// current right
+		if (empty($current_right)) {
+			continue;
+		}
+		
+		// delete all links between the current right and it's associated
+		// groups
+		$sql = "
+			DELETE FROM
+				".OAK_DB_USER_GROUPS2USER_RIGHTS."
+			WHERE
+				`right` = :right
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'right' => (int)$current_right
+		);
+		
+		// drop rows
+		$this->base->db->execute($sql, $bind_params);
+		
+		// create new links between rights and groups
+		foreach ($_right['groups'] as $_group) {
+			// search for group in the list of database groups to get its id
+			foreach ($database_groups as $_db_group) {
+				if ($_db_group['name'] == $_group) {
+					// prepare sql data to create new link
+					$sqlData = array(
+						'group' => (int)$_db_group['id'],
+						'right' => (int)$current_right
+					);
+					
+					// create new link
+					$this->base->db->insert(OAK_DB_USER_GROUPS2USER_RIGHTS,
+						$sqlData);
+				}
+			}
+		}
+	}
+}
+
+protected function syncGroupsWithSkeleton ()
+{
+	
+}
+
+protected function syncUsersWithSkeleton ()
+{
+	
+}
+
+protected function syncPageTypesWithSkeleton ()
+{
+	
+}
+
+
+protected function syncTemplateTypesWithSkeleton ()
+{
+	
 }
 
 // end of class

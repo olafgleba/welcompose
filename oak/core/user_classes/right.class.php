@@ -323,6 +323,9 @@ public function selectRights ($params = array())
 		$bind_params['group'] = $group;
 	}
 	
+	// add result set aggregation
+	$sql .= " GROUP BY `user_rights`.`id` ";
+	
 	// add sorting
 	$sql .= " ORDER BY `user_rights`.`name` ";
 	
@@ -381,7 +384,7 @@ public function countRights ($params = array())
 	// prepare query
 	$sql = "
 		SELECT 
-			COUNT(*) AS `total`
+			COUNT(DISTINCT `user_rights`.`id`) AS `total`
 		FROM
 			".OAK_DB_USER_RIGHTS." AS `user_rights`
 		LEFT JOIN
