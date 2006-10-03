@@ -325,6 +325,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.changeBlogCommentStatus' : function(el){
+		el.onchange = function(){
+			Helper.changeBlogCommentStatus(this);
+			return false;
+		}
+	},
 	'.submit90' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator90.gif) no-repeat';

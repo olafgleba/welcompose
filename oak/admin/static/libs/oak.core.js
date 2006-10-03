@@ -155,6 +155,7 @@ function Base ()
 		this.parsePagesLinksUrl = '../content/pages_links_select.php';
 		this.parseGlobalTemplatesLinksUrl = '../templating/globaltemplates_links_select.php';
 		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
+		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
 		
 		/**
 		 * Mediamanager related
@@ -345,12 +346,12 @@ function OakInit_getVars ()
 	try {
 		if (typeof response != 'undefined' && $('rp')) {
 			if (response == 1) {
-				return new Effect.Fade('rp', {duration: 0.8, delay: 2.0});
+				return new Effect.Fade('rp', {duration: 0.8, delay: 1.5});
 			}
 		}
 	   if (typeof selection != 'undefined' && $('sel')) {
 			if (selection == 1) {
-				return new Effect.Fade('sel', {duration: 0.8, delay: 2.0});
+				return new Effect.Fade('sel', {duration: 0.8, delay: 1.5});
 			}
 		}
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {

@@ -58,6 +58,7 @@ Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGl
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
+Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 
 
 function Helper_launchPopup (width, height, name, trigger, elem)
@@ -677,13 +678,75 @@ function Helper_confirmDelNavAction(elem)
 *
 * return string
 */
-function getSelectedTheme (f, path)
-{
-	var sel;
-	sel = f.options[f.selectedIndex].value;
-	window.location.href = path + '?theme=' + escape(sel);
+function Helper_changeBlogCommentStatus (elem)
+{	
+	try {
+		var statusId;
+		var commentId;
+		
+		// get status value
+		statusId = elem.options[elem.selectedIndex].value;
+	
+		// find blog comment id
+		commentId = elem.parentNode.parentNode.parentNode;
+		commentId = commentId.nextSibling.nextSibling;	
+		commentId = String(commentId.firstChild);
+		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");
+		
+	//	alert ('status: ' + statusId + ' comment: ' + commentId);
+
+		// properties
+		var url = this.parseBlogCommmentStatusChangeUrl;
+		var pars = 'status_id=' + statusId + '&comment_id=' + commentId;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderChangeBlogCommentStatus,
+				parameters : pars,
+				onComplete : _showResponseChangeBlogCommentStatus
+			});		
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
+/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseChangeBlogCommentStatus(req)
+{
+	try {
+	
+		Effect.Fade('indicator', {duration: 0.8});		
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * fires temporary actions while processing the ajax call
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _loaderChangeBlogCommentStatus ()
+{
+	try {
+		Element.show('indicator');
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Building new instance for @class Helper

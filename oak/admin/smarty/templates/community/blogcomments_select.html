@@ -63,6 +63,8 @@ var selection = '{$session.selection}';
 
 <h1>{i18n Blog Comments}</h1>
 
+<span id="indicator"><img src="../static/img/indicator.gif" alt="" /></span>
+
 <div class="secnav474_nav_x">&nbsp;</div>
 <br class="clearb" />
 
@@ -94,7 +96,7 @@ var selection = '{$session.selection}';
 <option value="{$_timeframe|escape:"htmlall"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"htmlall"}</option>
 {/foreach}
 </select>
-<input type="submit" value="{i18n Filter}" />
+&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
 {/if}
@@ -113,7 +115,7 @@ var selection = '{$session.selection}';
 {/foreach}
 </ul>
 {/if}
-<table summary="{i18n Blog Comments List}" class="user">
+<table summary="{i18n Blog Comments List}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
@@ -143,9 +145,9 @@ var selection = '{$session.selection}';
 {$_comment.homepage|escape:"htmlall"|nl2br}</td>
 <td>{$_comment.content_raw}</td>
 <td>
-<form action="blogcomments_statuschange.php" method="post">
+<form action="" method="post">
 <fieldset>
-<select id="status" name="status" class="flselect">
+<select id="item_status" name="item_status" class="changeBlogCommentStatus">
 <option value="">&nbsp;</option>
 {foreach from=$blog_comment_statuses item=_status}
 <option value="{$_status.id|escape:"htmlall"}"{if $_comment.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
