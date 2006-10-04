@@ -689,11 +689,9 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		commentId = commentId.nextSibling.nextSibling;	
+		commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;	
 		commentId = String(commentId.firstChild);
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");
-		
-	//	alert ('status: ' + statusId + ' comment: ' + commentId);
 
 		// properties
 		var url = this.parseBlogCommmentStatusChangeUrl;
@@ -706,7 +704,7 @@ function Helper_changeBlogCommentStatus (elem)
 				onLoading : _loaderChangeBlogCommentStatus,
 				parameters : pars,
 				onComplete : _showResponseChangeBlogCommentStatus
-			});		
+			});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -723,9 +721,7 @@ function Helper_changeBlogCommentStatus (elem)
 function _showResponseChangeBlogCommentStatus(req)
 {
 	try {
-	
-		Effect.Fade('indicator', {duration: 0.8});		
-		
+		Effect.Fade('indicator', {duration: 0.8});
 	} catch (e) {
 		_applyError(e);
 	}

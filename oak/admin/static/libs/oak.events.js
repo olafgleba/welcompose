@@ -146,13 +146,13 @@ var definitions = {
 	},
 	'.hideTableRow' : function(el){
 		el.onclick = function(){
-			Tables.hideRow(this);
+			Tables.hideTableRow(this);
 			return false;
 		}
 	},
 	'.showTableRow' : function(el){
 		el.onclick = function(){
-			Tables.showRow(this);
+			Tables.showTableRow(this);
 			return false;
 		}
 	},

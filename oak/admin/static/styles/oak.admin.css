@@ -1287,7 +1287,20 @@ background-color: transparent;
 .inner {
 display: none;
 background: #d9d9d9 url(../img/bg_slides.gif);
-padding: 0 0 1em 0;
+padding: 0 0 1em 20px;
+}
+.inner h3 {
+padding: 10px 0 0 0;
+margin: 0;
+font-size: 100%;
+}
+.inner p {
+padding: 0;
+margin: 0;
+line-height: 140%;
+}
+.indicator {
+display: none;
 }
 
 /* LOGIN - BODY-ID #LOGIN */

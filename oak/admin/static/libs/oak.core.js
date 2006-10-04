@@ -1048,16 +1048,16 @@ Tables.prototype = new Base();
 /**
  * Instance Methods from prototype @class Tables
  */
-Tables.prototype.showRow = Tables_showRow;
-Tables.prototype.hideRow = Tables_hideRow;
-Tables.prototype.collapseRow = Tables_collapseRow;
+Tables.prototype.showTableRow = Tables_showTableRow;
+Tables.prototype.hideTableRow = Tables_hideTableRow;
+Tables.prototype.collapseTableRow = Tables_collapseTableRow;
 
 /**
  * Implements method of prototype class Tables
  * @param {string} elem actual element to process
  * @throws applyError on exception
  */
- function Tables_collapseRow (elem)
+ function Tables_collapseTableRow (elem)
 {
 	try {
 		// properties
@@ -1075,47 +1075,13 @@ Tables.prototype.collapseRow = Tables_collapseRow;
  * @param {string} elem actual element
  * @throws applyError on exception
  */
-function Tables_hideRow (elem)
-{
-	try {
-		// properties
-		this.elem = elem;
-		this.id = this.elem.getAttribute('id');
-		this.bid = this.id.split('t_');
-		this.obid = String('o_' + this.bid[1]);
-		this.ibid = String('i_' + this.bid[1]);
-	
-		// process inner div
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide(this.ibid);
-		} else {
-			Effect.Fade(this.ibid,{duration: 0.8});
-		}
-			
-		// process outer table tr
-		setTimeout("Tables.collapseRow('"+ this.obid +"')", 800);
-		
-		this.elem.className = this.uploadClassShow;
-		
-		//Behaviour.apply();
-		Behaviour.reapply('.showTableRow');
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Tables
- * @param {string} elem actual element
- * @throws applyError on exception
- */
-function Tables_showRow (elem)
+function Tables_showTableRow (elem)
 {	
 	try {
 		// properties
 		this.elem = elem;
 		this.id = this.elem.getAttribute('id');
-		this.bid = this.id.split('t_');
+		this.bid = this.id.split('e_');
 		this.obid = String('o_' + this.bid[1]);
 		this.ibid = String('i_' + this.bid[1]);
 		
@@ -1129,11 +1095,51 @@ function Tables_showRow (elem)
 			Element.hide(this.ibid);
 			Effect.Appear(this.ibid,{duration: 0.7});
 		}
-		
+
+		// coloring top row
+		this.elem.parentNode.parentNode.style.color = '#0c3';
+				
 		this.elem.className = this.uploadClassHide;
 		
 		//Behaviour.apply();
 		Behaviour.reapply('.hideTableRow');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Tables
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Tables_hideTableRow (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.id = this.elem.getAttribute('id');
+		this.bid = this.id.split('e_');
+		this.obid = String('o_' + this.bid[1]);
+		this.ibid = String('i_' + this.bid[1]);
+		
+		// process inner div
+		if (Helper.unsupportsEffects('safari_exception')) {
+			Element.hide(this.ibid);
+		} else {
+			Effect.Fade(this.ibid,{duration: 0.8});
+		}
+			
+		// process outer table tr
+		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 800);
+		
+		// coloring top row
+		this.elem.parentNode.parentNode.style.color = '#333';
+
+		this.elem.className = this.uploadClassShow;
+		
+		//Behaviour.apply();
+		Behaviour.reapply('.showTableRow');
 	} catch (e) {
 		_applyError(e);
 	}

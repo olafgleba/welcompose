@@ -57,7 +57,7 @@ vertical-align: bottom;
 }
 
 /* %T =links */
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.mm_cast, a.mm_edit, a.mm_delete {
+a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.comment, a.commenthide a.mm_cast, a.mm_edit, a.mm_delete {
 display: block;
 width: 20px;
 height: 20px;
@@ -121,6 +121,18 @@ background: #fff url(../img/icons/move.gif) 0 0 no-repeat;
 } 
 a.move:hover, a.move:active, a.move:focus {
 background: #fff url(../img/icons/move.gif) 0 -44px no-repeat;
+}
+a.comment:link, a.comment:visited {
+background: #fff url(../img/icons/upload.gif) 0 0 no-repeat;
+} 
+a.comment:hover, a.upload:active, a.comment:focus {
+background: #fff url(../img/icons/upload.gif) 0 -44px no-repeat;
+}
+a.commenthide:link, a.commenthide:visited {
+background: #fff url(../img/icons/uploadhide.gif) 0 0 no-repeat;
+} 
+a.commenthide:hover, a.commenthide:active, a.commenthide:focus {
+background: #fff url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
 }
 a.mm_cast:link, a.mm_cast:visited {
 background: #fff url(../img/icons/makepodcast.gif) 0 0 no-repeat;

@@ -63,8 +63,6 @@ var selection = '{$session.selection}';
 
 <h1>{i18n Blog Comments}</h1>
 
-<span id="indicator"><img src="../static/img/indicator.gif" alt="" /></span>
-
 <div class="secnav474_nav_x">&nbsp;</div>
 <br class="clearb" />
 
@@ -118,19 +116,21 @@ var selection = '{$session.selection}';
 <table summary="{i18n Blog Comments List}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="145" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="220" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="140" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Blog-Name} <span class="az"></span> <span class="za"></span></th>
 <th class="email">{i18n Posting Title}</th>
 <th class="proj">{i18n Author} <span class="az"></span> <span class="za"></span></th>
-<th class="proj">{i18n Comment} <span class="az"></span> <span class="za"></span></th>
 <th class="proj">{i18n Status} <span class="az"></span> <span class="za"></span></th>
+<th></th>
+<th>{i18n View Comment}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
@@ -139,25 +139,40 @@ var selection = '{$session.selection}';
 <td>{$_comment.page_name|escape:"htmlall"}</td>
 <td>{$_comment.blog_posting_title|escape:"htmlall"|nl2br}</td>
 <td>
-{if !empty($_comment.user)}{i18n yes}{else}{i18n no}{/if}<br />
-{$_comment.name|escape:"htmlall"}<br />
+{i18n User}: {if !empty($_comment.user)}{i18n yes}{else}{i18n no}{/if}<br />
+{i18n Name}: {$_comment.name|escape:"htmlall"}<br />
 {$_comment.email|escape:"htmlall"}<br />
 {$_comment.homepage|escape:"htmlall"|nl2br}</td>
-<td>{$_comment.content_raw}</td>
 <td>
 <form action="" method="post">
 <fieldset>
-<select id="item_status" name="item_status" class="changeBlogCommentStatus">
+<select class="item_status changeBlogCommentStatus" name="item_status">
 <option value="">&nbsp;</option>
 {foreach from=$blog_comment_statuses item=_status}
 <option value="{$_status.id|escape:"htmlall"}"{if $_comment.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
 </fieldset>
+<td><span id="indicator"><img src="../static/img/indicator.gif" height="22" width="22" alt="" /></span></td>
 </form>
 </td>
+<td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
 <td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+</tr>
+<tr id="o_{$_comment.id}" class="outer">
+<td colspan="8">
+<div id="i_{$_comment.id}" class="inner">
+<fieldset>
+<h3>{i18n Comment}</h3>
+<p>{$_comment.content_raw}</p>
+<h3>{i18n Spam report}</h3>
+<p>{$_comment.spam_report}</p>
+<h3>{i18n Edited}</h3>
+<p>{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
+</fieldset>
+</div>
+</td>
 </tr>
 {/foreach}
 </table>

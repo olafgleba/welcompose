@@ -86,7 +86,7 @@ var selection			= '{$session.selection}';
 <option value="{$_template_type.id|escape:"htmlall"}"{if $request.type == $_template_type.id} selected="selected"{/if}>{$_template_type.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
-<input type="submit" value="{i18n Filter}" />
+&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
 {/if}
@@ -131,7 +131,7 @@ var selection			= '{$session.selection}';
 <td>{$_template.name|escape:"htmlall"}</td>
 <td>{$_template.type_name|escape:"htmlall"}</td>
 <td>{$_template.description|escape:"htmlall"}</td>
-<td><a class="upload showTableRow" href="#" id="t_{$_template.id}" title="{i18n Upload}"></a></td>
+<td><a class="upload showTableRow" href="#" id="e_{$_template.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="templates_download.php?id={$_template.id|escape:"htmlall"}" title="{i18n Download}"></a></td>
 <td><a class="duplicate" href="templates_copy.php?id={$_template.id|escape:"htmlall"}" title="{i18n Duplicate}"></a></td>
 <td><a class="edit" href="templates_edit.php?id={$_template.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
