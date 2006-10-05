@@ -146,7 +146,8 @@ function Base ()
 		 */
 		this.parseHelpUrl = '../parse/parse.help.php';
 		this.parseNavUrl = '../parse/parse.navigation.php';
-		this.parseMedUrl = '../mediamanager/mediamanager.php';
+		this.parseMedLocalUrl = '../mediamanager/mediamanager_local.php';
+		this.parseMedFlickrUrl = '../mediamanager/mediamanager_flickr.php';
 		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
 		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
 		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
@@ -357,7 +358,7 @@ function OakInit_getVars ()
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
-				this.url = this.parseMedUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
+				this.url = this.parseMedLocalUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
 				if (typeof this.req != 'undefined') {
 		
 					var _url		= this.url;
@@ -445,6 +446,9 @@ function OakInit_processOakInit (ttarget)
 				Behaviour.reapply('a.mm_myFlickr');
 				Behaviour.reapply('#mm_include_types_wrap');
 				Behaviour.reapply('#mm_timeframe');
+				Behaviour.reapply('#mm_user');
+				Behaviour.reapply('#mm_photoset');
+				Behaviour.reapply('#mm_flickrtags');
 				Behaviour.reapply('.showMediamanagerElement');
 				Behaviour.reapply('.hideMediamanagerElement');
 				Behaviour.reapply('.iHelpMediamanager');

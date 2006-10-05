@@ -56,12 +56,11 @@
 </div>
 <!-- element (timeframe) wrap eof -->
 
-<!-- mediamanager content -->
+<!-- mediamanager (myLocal) content -->
 <div id="myLocal_mm_content">
 
 <!-- mediamanager content populate -->
 <div id="myLocal_mm_contentToPopulate">
-
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
@@ -90,6 +89,9 @@ Page <a href="#">1 of 10</a>
 </div>
 <!-- mediamanager container (myLocal) eof -->
 
+
+
+
 <!-- mediamanager container (myFlickr) -->
 <div id="lyMediamanagerMyFlickr">
 	
@@ -100,48 +102,51 @@ Page <a href="#">1 of 10</a>
 </ul>
 <!-- mediamanager navigation (active: mm_myFlickr) eof -->
 
-<!-- element (include_types) wrap -->
-<fieldset class="mmwrap">
-<p class="myFlickr_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span></p>
-<span id="myFlickr_include_types_wrap">
-	<label for="include_types_doc"><input id="include_types_doc" class="chbx" name="include_types[]" type="checkbox" value="1" /><span class="cbxspread">Documents</span></label>
-	<label for="include_types_img"><input id="include_types_img" class="chbx" name="include_types[]" type="checkbox" value="2" /><span class="cbxspread">Images</span></label>
-	<label for="include_types_cast"><input id="include_types_cast" class="chbx" name="include_types[]" type="checkbox" value="3" /><span class="cbxspread">Casts</span></label>
-</span>
-</fieldset>
-<!-- element (include_types) wrap -->
-
-<!-- element (tags) wrap -->
+<!-- element (user) wrap -->
 <div class="mmwrap">
-<label for="myFlickr_mm_tags" class="myFlickr_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
-<span id="myFlickr_tags_wrap">
-<input class="w200" type="text" id="myFlickr_mm_tags" />
+<label for="mm_user" class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<span id="mm_user_wrap">
+<!--><input class="w200" type="text" id="mm_user" />-->
+<input id="mm_user" class="chbx" type="checkbox" value="1" /><span class="cbxspread">{i18n Images}</span>
 </span>
 </label>
 </div>
-<!-- element (tags) wrap eof -->
+<!-- element (user) wrap eof -->
 
-<!-- element (timeframe) wrap -->
+<!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="myFlickr_mm_timeframe" class="myFlickr_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="myFlickr_timeframe_wrap">
-<select id="myFlickr_mm_timeframe" name="myFlickr_mm_timeframe">
-<option{if empty($request.myFlickr_mm_timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
-{foreach from=$myFlickr_mm_timeframes key=_myFlickr_mm_timeframe_value item=_mm_myFlickr_timeframe_name}
-<option value="{$_myFlickr_mm_timeframe_value}"{if $request.myFlickr_mm_timeframe == $_myFlickr_mm_timeframe_value} selected="selected"{/if}>{$_myFlickr_mm_timeframe_name}</option>
-{/foreach}
-</select>
+<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by photoset}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_photoset_wrap">
+<input class="w200" type="text" id="mm_photoset" />
 </span>
 </label>
 </div>
-<!-- element (timeframe) wrap eof -->
+<!-- element (photoset) wrap -->
 
-<!-- mediamanager content -->
+<!-- element (photoset) wrap -->
+<div class="mmwrap">
+<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by flickr tags}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_flickrtags_wrap">
+<input class="w200" type="text" id="mm_flickrtags" />
+</span>
+</label>
+</div>
+<!-- element (photoset) wrap -->
+
+<!-- mediamanager (myFlickr) content -->
 <div id="myFlickr_mm_content">
 
 <!-- mediamanager content populate -->
 <div id="myFlickr_mm_contentToPopulate">
-flickr content wo man sehen kann wie weit er geht und wann er umbricht
+<table class="mm_content">
+{foreach from=$flickrobjects item=_flickrobject}
+<tr>
+<td class="td_mm_media"><a href="#">{$_flickrobject.user}</a></td>
+<td colspan="4">{$_flickrobject.photoset} und {$_flickrobject.flickrtags}</td>
+</tr>
+{/foreach}
+</table>
+<span id="indicator"><img src="../static/img/indicator.gif" alt="" /></span>
 </div>
 <!-- mediamanager content populate eof -->
 

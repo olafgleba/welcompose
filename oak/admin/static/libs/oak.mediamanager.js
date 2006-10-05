@@ -63,7 +63,7 @@ Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 Mediamanager.prototype.toggleExtendedView = Mediamanager_toggleExtendedView;
-Mediamanager.prototype.checkMyLocalElems = Mediamanager_checkMyLocalElems;
+Mediamanager.prototype.checkElemsMyLocal = Mediamanager_checkElemsMyLocal;
 Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
 Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
 Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
@@ -74,6 +74,11 @@ Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
 Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
+
+Mediamanager.prototype.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
+Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
+Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
+Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
 
 /**
  * Implements method of prototype class Mediamanager
@@ -97,17 +102,28 @@ function Mediamanager_hideElement (elem)
 		Behaviour.reapply('.' + this.elem.className);
 		
 		// needed to set appropriate height of content of div to populate
-		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
 
-		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
-		
-		if (includeTypesElem == 'block') {
-			var rows = 1;
+		if (myLocal == 'block') {
+			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+			
+			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			
+			if (includeTypesElem == 'block') {
+				var rows = 1;
+			}
+		} else {
+			var userElem = Element.getStyle('mm_user_wrap', 'display');
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
+			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+			
+			var collectElems = String(userElem + photosetElem + flickrtagsElem);
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -135,17 +151,28 @@ function Mediamanager_showElement (elem)
 		Behaviour.reapply('.' + this.elem.className);
 	
 		// needed to set appropriate height of content of div to populate
-		var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-		
-		var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
-		
-		if (includeTypesElem == 'block') {
-			var rows = 1;
+		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+
+		if (myLocal == 'block') {
+			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+			
+			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			
+			if (includeTypesElem == 'block') {
+				var rows = 1;
+			}
+		} else {
+			var userElem = Element.getStyle('mm_user_wrap', 'display');
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
+			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+			
+			var collectElems = String(userElem + photosetElem + flickrtagsElem);
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -442,10 +469,10 @@ function _loaderMediaToPodcast ()
 function Mediamanager_invokeInputs ()
 {
 	try {
-		Mediamanager.preserveElementStatusMyLocal ();
+		Mediamanager.preserveElementStatusMyLocal();
 		
-		var elems = Mediamanager.checkMyLocalElems();
-		var url = this.parseMedUrl;
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -494,10 +521,10 @@ function Mediamanager_initializeTagSearch ()
 function Mediamanager_invokeTags ()
 {
 	try {
-		Mediamanager.preserveElementStatusMyLocal ();
+		Mediamanager.preserveElementStatusMyLocal();
 		
-		var elems = Mediamanager.checkMyLocalElems();
-		var url = this.parseMedUrl;
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -540,6 +567,9 @@ function _showResponseInvokeInputs(req)
 		Behaviour.reapply('a.mm_myFlickr');
 		Behaviour.reapply('#mm_include_types_wrap');
 		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
@@ -582,6 +612,9 @@ function _showResponseInvokeTagInputs(req)
 		Behaviour.reapply('a.mm_myFlickr');
 		Behaviour.reapply('#mm_include_types_wrap');
 		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
@@ -617,7 +650,7 @@ function _loader ()
  * 
  * @throws applyError on exception
  */
-function Mediamanager_checkMyLocalElems ()
+function Mediamanager_checkElemsMyLocal ()
 {
 	try {
 		if (typeof countItems == 'undefined') {
@@ -752,6 +785,201 @@ function Mediamanager_discardPodcast (elem)
 				Effect.Fade('podcast_container',{duration: 0.4});
 			}
 		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+
+
+
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeInputsMyFlickr ()
+{
+	try {
+		
+		//alert ('hallo, allo');
+		
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMyFlickr,
+				parameters : pars,
+				onComplete : _showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseInvokeInputsMyFlickr(req)
+{
+	try {
+		
+		$('column').innerHTML = req.responseText;
+	
+		Element.hide('lyMediamanagerMyLocal');
+		Element.show('lyMediamanagerMyFlickr');
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		$('column').focus();
+		
+		
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * fires temporary actions while processing the ajax call
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _loaderMyFlickr ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName('mm_content')[1];
+		Element.hide(hideContentTable);
+		Element.show('indicator');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements private method of prototype class Mediamanager
+ * Check elements display status for further use in func setCurrentElementStatusMyLocal
+ * @private
+ * @throws applyError on exception
+ */
+function Mediamanager_preserveElementStatusMyFlickr ()
+{	
+	try {
+	
+		var current_userElem = Element.getStyle('mm_user_wrap', 'display');
+		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
+		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+	
+		// make global -> use in func setCurrentElementStatusMyLocal
+		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements private method of prototype class Mediamanager
+ * Sets elements class and html correponding the previous status
+ * @private
+ * @throws applyError on exception
+ */
+function Mediamanager_setCurrentElementStatusMyFlickr ()
+{	
+	try {
+		
+		Element.setStyle('mm_user_wrap', {display: previousElemsStatus[0]});
+		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[2]});
+		
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+		
+		var rows;
+		// set appropriate height and width of surrounding divs
+		_checkOccurrences (collectElems, rows);
+				
+		// get all relevant spans
+		var parentElem = $('lyMediamanagerMyFlickr').getElementsByClassName('bez');
+		
+		if (previousElemsStatus[0] == 'none') {
+			parentElem[0].lastChild.className = this.mediamanagerClassShow;
+			parentElem[0].lastChild.innerHTML = this.elementHtmlShow;
+		}
+		if (previousElemsStatus[1] == 'block') {
+			parentElem[1].lastChild.className = this.mediamanagerClassHide;
+			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElemsStatus[2] == 'block') {
+			parentElem[2].lastChild.className = this.mediamanagerClassHide;
+			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		
+		// observe if needed at least
+		//Behaviour.apply();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_checkElemsMyFlickr ()
+{
+	try {
+		if (typeof countItems == 'undefined') {
+			// initialize global with 'save' display
+			countItems = 0;
+		};
+		
+		var getElems = {
+			mm_user : $F('mm_user'),
+			mm_photoset : $F('mm_photoset'),
+			mm_flickrtags : $F('mm_flickrtags'),
+			mm_limit : countItems,
+			mm_pagetype : pagetype
+		};
+		var o = $H(getElems);
+		//countItems = null;
+		return o.toQueryString();
 	} catch (e) {
 		_applyError(e);
 	}

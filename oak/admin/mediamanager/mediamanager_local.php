@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: mediamanager.php
+ * File: mediamanager_local.php
  *
  * Copyright (c) 2006 sopic GmbH
  *

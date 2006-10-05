@@ -226,6 +226,11 @@ var definitions = {
 			Mediamanager.invokeInputs(this);
 		}
 	},
+	'#mm_user' : function(el){
+		el.onclick = function(){
+			Mediamanager.invokeInputsMyFlickr(this);
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');

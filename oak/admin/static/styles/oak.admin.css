@@ -945,6 +945,10 @@ font-size: 80%;
 padding: 4px 5px 4px 5px;
 }
 
+/* Local */
+#lyMediamanagerMyLocal {
+display: block;
+}
 #mm_include_types_wrap {
 display: none;
 /* set height because label here is float */
@@ -956,28 +960,24 @@ display: block;
 #mm_timeframe_wrap {
 display: none;
 }
-#myFlickr_include_types_wrap {
-display: none;
-}
-#myFlickr_timeframe_wrap {
-display: none;
-}
-#myFlickr_tags_wrap {
-display: block;
-}
-
-#lyMediamanagerMyLocal {
-display: block;
-}
+/* Flickr */
 #lyMediamanagerMyFlickr {
 display: none;
 }
+#mm_user_wrap {
+display: block;
+}
+#mm_photoset_wrap {
+display: none;
+}
+#mm_flickrtags_wrap {
+display: none;
+}
 
-
-#myLocal_mm_contentToPopulate table {
+#myLocal_mm_contentToPopulate table, #myFlickr_mm_contentToPopulate table {
 margin: 4px 4px;
 }
-#myLocal_mm_contentToPopulate td {
+#myLocal_mm_contentToPopulate td, #myFlickr_mm_contentToPopulate td {
 padding: 2px 0 4px 0;
 }
 .td_mm_media {
@@ -995,6 +995,8 @@ width: 30px;
 .td_mm_delete {
 width: 30px;
 }
+
+
 
 
 /* %M =popup */
