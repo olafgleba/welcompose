@@ -29,6 +29,12 @@ var selection = '{$session.selection}';
 
 <body>
 <div id="container">
+	
+<div id="lyLowerOpacity"> </div>
+<div id="statuschange">
+<h1>{i18n Change of comment status successfully saved!}</h1>
+<p></p>	
+</div>
 
 <div id="logo">
 <p>{i18n Oak}</p>
@@ -165,11 +171,11 @@ var selection = '{$session.selection}';
 <div id="i_{$_comment.id}" class="inner">
 <fieldset>
 <h3>{i18n Comment}</h3>
-<p>{$_comment.content_raw}</p>
+<p class="content">{$_comment.content_raw}</p>
 <h3>{i18n Spam report}</h3>
-<p>{$_comment.spam_report}</p>
+<p class="content">{$_comment.spam_report}</p>
 <h3>{i18n Edited}</h3>
-<p>{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
+<p class="content">{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
 </fieldset>
 </div>
 </td>

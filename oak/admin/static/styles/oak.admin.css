@@ -1034,9 +1034,9 @@ margin-left: 420px;
 }
 #modalContainer #pages h2 span#indicator_pagesLinks {
 position: absolute;
-top: 1px;
+top: 3px;
 left: 570px;
-height: 30px;
+height: 25px;
 }
 #pages table#secondNode,
 #pages table#thirdNode {
@@ -1294,13 +1294,31 @@ padding: 10px 0 0 0;
 margin: 0;
 font-size: 100%;
 }
-.inner p {
+.inner p.content {
 padding: 0;
 margin: 0;
 line-height: 140%;
 }
-.indicator {
+#statuschange {
 display: none;
+}
+#statuschange {
+position:  absolute;
+top: 40%;
+left: 15%;
+width: 710px;
+background: transparent url(../img/bg_statuschange_top.gif) 0 0 no-repeat;
+z-index: 2;
+}
+#statuschange h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#statuschange p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_statuschange_bot.gif) left bottom no-repeat;
 }
 
 /* LOGIN - BODY-ID #LOGIN */

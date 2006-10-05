@@ -122,7 +122,7 @@ function Helper_closePopup ()
 		/* invoke function in parent window */
 		self.opener.$('lyLowerOpacity').style.display = 'none';
 		self.opener.Mediamanager.invokeInputs();
-					
+		
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
 		setTimeout ("self.close()", 1200);
@@ -131,6 +131,7 @@ function Helper_closePopup ()
 		_applyError(e);
 	}
 }
+
 
 function Helper_closeLinksPopup ()
 {       
@@ -209,13 +210,14 @@ function Helper_unsupportsEffects(exception)
  * @requires Helper The Helper Class
  * @throws applyError on exception
  */
-function Helper_unsupportsElems()
+function Helper_unsupportsElems(exception)
 {	
 	try {
 		//properties
 		this.browser = _setBrowserString();
+		this.exception = exception;
 		
-		if (this.browser == "Internet Explorer") {
+		if ((this.browser == "Internet Explorer" && !this.exception) || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;
@@ -347,8 +349,8 @@ function Helper_showNextNode(elem)
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
-			var nextNode = sourceNode.nextSibling;
-			nextNode = nextNode.nextSibling.getAttribute('id');
+			var nextNode = sourceNode.nextSibling.nextSibling;
+			nextNode = nextNode.getAttribute('id');
 		}
 
 		var url = this.parsePagesLinksUrl;
@@ -689,7 +691,13 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;	
+		if (Helper.unsupportsElems()) {
+			// safari fails on whitespaces
+			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling;
+		} else {
+			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+		}	
+		//alert (commentId);
 		commentId = String(commentId.firstChild);
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");
 
@@ -721,7 +729,8 @@ function Helper_changeBlogCommentStatus (elem)
 function _showResponseChangeBlogCommentStatus(req)
 {
 	try {
-		Effect.Fade('indicator', {duration: 0.8});
+		setTimeout("Effect.Fade('statuschange', {duration: 0.6})", 2200);
+		setTimeout("$('lyLowerOpacity').style.display = 'none';", 3000);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -738,7 +747,8 @@ function _showResponseChangeBlogCommentStatus(req)
 function _loaderChangeBlogCommentStatus ()
 {
 	try {
-		Element.show('indicator');
+		Helper.lowerOpacity();
+		Effect.Appear('statuschange', {duration: 0.6, delay: 0.2});
 	} catch (e) {
 		_applyError(e);
 	}

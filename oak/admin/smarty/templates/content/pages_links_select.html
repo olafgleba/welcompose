@@ -31,10 +31,9 @@ var formTarget = '{$target}';
 
 <div id="modalContainer">
 <div id="pages">
-<h2>{i18n PAGES} <span>{i18n INSERT INTERNAL LINKS}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" /></span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
+<h2>{i18n PAGES} <span>{i18n INSERT INTERNAL LINKS}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
 
 <div id="modalBody">
-	
 <table id="firstNode">
 {foreach from=$navigations item=_navigation}
 <tr>
@@ -55,14 +54,11 @@ var formTarget = '{$target}';
 {/if}
 {/foreach}
 </table>
-
 <table id="secondNode">
 </table>
-
 <table id="thirdNode">
 </table>
 <br class="clearb" />
-
 </div>
 </div>
 </div>
