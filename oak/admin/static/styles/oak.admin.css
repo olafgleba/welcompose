@@ -1151,10 +1151,10 @@ z-index: 1;
 #lyLowerOpacity img{
 opacity: 0.4;
 }
-#indicator {
+#indicator_local, #indicator_flickr {
 display: none;
 }
-#myLocal_mm_contentToPopulate #indicator {
+#myLocal_mm_contentToPopulate #indicator_local, #myFlickr_mm_contentToPopulate #indicator_flickr {
 position:  relative;
 width:  210px;
 left:  0;

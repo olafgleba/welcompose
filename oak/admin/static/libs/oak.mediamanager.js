@@ -75,7 +75,8 @@ Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
 Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
 
-Mediamanager.prototype.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
+Mediamanager.prototype.invokeTagsMyFlickr = Mediamanager_invokeTagsMyFlickr;
+Mediamanager.prototype.initializeTagSearchMyFlickr = Mediamanager_initializeTagSearchMyFlickr;
 Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
 Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
 Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
@@ -555,6 +556,9 @@ function _showResponseInvokeInputs(req)
 		$('column').innerHTML = req.responseText;
 		Mediamanager.setCurrentElementStatusMyLocal();
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		$('column').focus();
 		
 		Behaviour.reapply('a.mm_edit');
@@ -596,11 +600,17 @@ function _showResponseInvokeTagInputs(req)
 
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_user').setAttribute("autocomplete","off");
+		$('mm_photoset').setAttribute("autocomplete","off");
+		$('mm_flickrtags').setAttribute("autocomplete","off");
 		
 		$('mm_tags').focus();		
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
 		Mediamanager.setCurrentElementStatusMyLocal();	
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
@@ -638,7 +648,7 @@ function _loader ()
 	try {
 		var hideContentTable = document.getElementsByClassName('mm_content')[0];
 		Element.hide(hideContentTable);
-		Element.show('indicator');
+		Element.show('indicator_local');
 	} catch (e) {
 		_applyError(e);
 	}
@@ -794,6 +804,27 @@ function Mediamanager_discardPodcast (elem)
 
 
 
+/**
+ * Implements method of prototype class Mediamanager
+ * set a delay for firing the ajax search invoke
+ * special handling for tag search
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_initializeTagSearchMyFlickr ()
+{
+	try {
+		// clear the keyPressDelay if it exists from before
+		if (this.keyPressDelay) {
+			window.clearTimeout(this.keyPressDelay);
+		}
+		if ($('mm_user').value >= '' || $('mm_photoset').value >= '' || $('mm_flickrtags').value >= '') {
+			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTagsMyFlickr()", 800);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Mediamanager
@@ -801,25 +832,22 @@ function Mediamanager_discardPodcast (elem)
  * 
  * @throws applyError on exception
  */
-function Mediamanager_invokeInputsMyFlickr ()
+function Mediamanager_invokeTagsMyFlickr ()
 {
 	try {
-		
-		//alert ('hallo, allo');
-		
 		Mediamanager.preserveElementStatusMyFlickr();
 		
 		var elems = Mediamanager.checkElemsMyFlickr();
 		var url = this.parseMedFlickrUrl;
 		var pars = elems;
-
+	
 		var myAjax = new Ajax.Request(
 			url,
 			{
 				method : 'get',
 				onLoading : _loaderMyFlickr,
 				parameters : pars,
-				onComplete : _showResponseInvokeInputsMyFlickr
+				onComplete : _showResponseInvokeTagsMyFlickr
 			});
 	} catch (e) {
 		_applyError(e);
@@ -834,19 +862,25 @@ function Mediamanager_invokeInputsMyFlickr ()
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _showResponseInvokeInputsMyFlickr(req)
+function _showResponseInvokeTagsMyFlickr(req)
 {
 	try {
-		
 		$('column').innerHTML = req.responseText;
 	
+		Mediamanager.setCurrentElementStatusMyFlickr();
 		Element.hide('lyMediamanagerMyLocal');
 		Element.show('lyMediamanagerMyFlickr');
 		
-		Mediamanager.setCurrentElementStatusMyFlickr();
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+		$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_user').setAttribute("autocomplete","off");
+		$('mm_photoset').setAttribute("autocomplete","off");
+		$('mm_flickrtags').setAttribute("autocomplete","off");
+						
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		$('column').focus();
-		
+		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);		
 		
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
@@ -884,7 +918,7 @@ function _loaderMyFlickr ()
 	try {
 		var hideContentTable = document.getElementsByClassName('mm_content')[1];
 		Element.hide(hideContentTable);
-		Element.show('indicator');
+		Element.show('indicator_flickr');
 	} catch (e) {
 		_applyError(e);
 	}
