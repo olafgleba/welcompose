@@ -938,6 +938,16 @@ border: 1px solid #ebebeb;
 padding: 0;
 overflow: auto;
 }
+#indicator_local, #indicator_flickr {
+display: none;
+}
+#myLocal_mm_contentToPopulate #indicator_local, #myFlickr_mm_contentToPopulate #indicator_flickr {
+position:  relative;
+width:  210px;
+left:  0;
+top:  40%;
+text-align:  center;
+}
 .mm_pager {
 display: block;
 background: #f9f9f9;
@@ -1150,16 +1160,6 @@ z-index: 1;
 }
 #lyLowerOpacity img{
 opacity: 0.4;
-}
-#indicator_local, #indicator_flickr {
-display: none;
-}
-#myLocal_mm_contentToPopulate #indicator_local, #myFlickr_mm_contentToPopulate #indicator_flickr {
-position:  relative;
-width:  210px;
-left:  0;
-top:  40%;
-text-align:  center;
 }
 
 

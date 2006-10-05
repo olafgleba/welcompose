@@ -298,8 +298,8 @@ function _checkOccurrences (elems, exception)
 							var pHeight = '327px';
 							countItems = 6;
 						} else {
-							var cHeight = '330px';
-							var pHeight = '327px';
+							var cHeight = '350px';
+							var pHeight = '347px';
 							countItems = 6;
 						}
 						Element.setStyle(prefix + 'mm_content', {height: cHeight});
@@ -962,6 +962,7 @@ function Mediamanager_setCurrentElementStatusMyFlickr ()
 		
 		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
 		
+		// nothing to set here
 		var rows;
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
