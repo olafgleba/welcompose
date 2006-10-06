@@ -104,7 +104,9 @@ function Mediamanager_hideElement (elem)
 		
 		// needed to set appropriate height of content of div to populate
 		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
 
+		// myLocal
 		if (myLocal == 'block') {
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
@@ -115,12 +117,17 @@ function Mediamanager_hideElement (elem)
 			if (includeTypesElem == 'block') {
 				var rows = 1;
 			}
-		} else {
+		}
+		// myFlickr
+		else if (myFlickr == 'block') {
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			
 			var collectElems = String(userElem + photosetElem + flickrtagsElem);
+			
+			// do nothing on var
+			var rows = '';
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
@@ -153,7 +160,9 @@ function Mediamanager_showElement (elem)
 	
 		// needed to set appropriate height of content of div to populate
 		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
 
+		// myLocal
 		if (myLocal == 'block') {
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
@@ -164,12 +173,17 @@ function Mediamanager_showElement (elem)
 			if (includeTypesElem == 'block') {
 				var rows = 1;
 			}
-		} else {
+		}
+		// myFlickr
+		else if (myFlickr == 'block') {
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			
 			var collectElems = String(userElem + photosetElem + flickrtagsElem);
+			
+			// do nothing on var
+			var rows = '';
 		}
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
@@ -267,7 +281,7 @@ function _checkOccurrences (elems, exception)
 		} else {
 			switch (res.length) {
 				case 1 :
-						if (Mediamanager.isUndefined(exception) !== true) {
+						if (Mediamanager.isNumber(exception) === true) {
 							var cHeight = '372px';
 							var pHeight = '369px';
 							countItems = 7;
@@ -280,7 +294,7 @@ function _checkOccurrences (elems, exception)
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 2 :
-						if (Mediamanager.isUndefined(exception) !== true) {
+						if (Mediamanager.isNumber(exception) === true) {
 							var cHeight = '351px';
 							var pHeight = '348px';
 							countItems = 7;
@@ -293,7 +307,7 @@ function _checkOccurrences (elems, exception)
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 3 :
-						if (Mediamanager.isUndefined(exception) !== true) {
+						if (Mediamanager.isNumber(exception) === true) {
 							var cHeight = '330px';
 							var pHeight = '327px';
 							countItems = 6;
@@ -352,6 +366,7 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 
 		// give first field includeTypes a little more space
 		// since we have two rows here
+		// bool
 		if (previousElemsStatus[0] == 'block') {
 			var rows = 1;
 		}
@@ -554,13 +569,15 @@ function _showResponseInvokeInputs(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
+		
 		Mediamanager.setCurrentElementStatusMyLocal();
+		
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
 		$('column').focus();
 		
+		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
@@ -594,24 +611,21 @@ function _showResponseInvokeInputs(req)
  */
 function _showResponseInvokeTagInputs(req)
 {
-	try {
-		
+	try {	
 		$('column').innerHTML = req.responseText;
-
+		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
-		$('mm_user').setAttribute("autocomplete","off");
-		$('mm_photoset').setAttribute("autocomplete","off");
 		$('mm_flickrtags').setAttribute("autocomplete","off");
 		
-		$('mm_tags').focus();		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
-		Mediamanager.setCurrentElementStatusMyLocal();	
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
+		Mediamanager.setCurrentElementStatusMyLocal();
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		$('mm_tags').focus();
+		
+		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
@@ -818,7 +832,7 @@ function Mediamanager_initializeTagSearchMyFlickr ()
 		if (this.keyPressDelay) {
 			window.clearTimeout(this.keyPressDelay);
 		}
-		if ($('mm_user').value >= '' || $('mm_photoset').value >= '' || $('mm_flickrtags').value >= '') {
+		if ($('mm_flickrtags').value >= '') {
 			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTagsMyFlickr()", 800);
 		}
 	} catch (e) {
@@ -866,22 +880,21 @@ function _showResponseInvokeTagsMyFlickr(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
-	
-		Mediamanager.setCurrentElementStatusMyFlickr();
-		Element.hide('lyMediamanagerMyLocal');
 		Element.show('lyMediamanagerMyFlickr');
+		Element.hide('lyMediamanagerMyLocal');
 		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
-		$('mm_user').setAttribute("autocomplete","off");
-		$('mm_photoset').setAttribute("autocomplete","off");
 		$('mm_flickrtags').setAttribute("autocomplete","off");
-						
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);		
 		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
+		$('mm_flickrtags').focus();
+								
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
@@ -935,11 +948,11 @@ function Mediamanager_preserveElementStatusMyFlickr ()
 	try {
 	
 		var current_userElem = Element.getStyle('mm_user_wrap', 'display');
-		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 	
 		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
+		previousElemsStatus = new Array (current_userElem, current_flickrtagsElem, current_photosetElem);
 		
 	} catch (e) {
 		_applyError(e);
@@ -957,13 +970,14 @@ function Mediamanager_setCurrentElementStatusMyFlickr ()
 	try {
 		
 		Element.setStyle('mm_user_wrap', {display: previousElemsStatus[0]});
-		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[1]});
-		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[2]});
+		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[2]});
 		
 		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
 		
-		// nothing to set here
-		var rows;
+		// do nothing on var
+		var rows = '';
+			
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
 				
@@ -1007,8 +1021,8 @@ function Mediamanager_checkElemsMyFlickr ()
 		
 		var getElems = {
 			mm_user : $F('mm_user'),
-			mm_photoset : $F('mm_photoset'),
 			mm_flickrtags : $F('mm_flickrtags'),
+			mm_photoset : $F('mm_photoset'),
 			mm_limit : countItems,
 			mm_pagetype : pagetype
 		};

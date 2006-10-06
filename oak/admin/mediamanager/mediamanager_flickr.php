@@ -84,16 +84,50 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
-	// get page name
-//	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
+
+	/*
 	
+	Testweise kann folgender API-Key genommen werden:
+	11bcda9f77519a4f44121ce5ee5b6a8f
+	
+	Ich brauche sicher folgende wrapper:
+	
+	flickr.people.findByUsername
+	flickr.urls.getUserPhotos
+	flickr.photos.search
+	flickr.photosets.getList
+	flickr.photosets.getPhotos
+
+	als Argumente brauchen wir immer
+	
+	api_key
+	user_id, bzw. photoset_id
+	
+	bei flickr.photos.search noch mind. das argument 'tags' (da ist die funktionalität des input feldes, das MM nutzt)
+
+
+	Procedere soll folgend skizziert werden:
+	
+	- Bei Aufruf des Tabs myFlickr ist nur der 'Flickr User' Input offen.
+	- Um myFlickr überhaupt nutzen zu können, wird es einen Button geben (noch nicht drin!, 6.10.),
+	  der einen Request an Flickr schickt.
+	  und erstmal das select 'Find by photosets' über die nsid des Users füllt.
+	- 'Find by Flickr tags' macht das, was der title aussagt. Es wird innerhalb des user accounts nach
+	   bilder mit den entsprechenen tags gesucht. Kommaseparierte Angaben sind möglich.
+	- Bei auswahl eines sets in 'Find by photoset' werden die jeweiligen bilder des sets zusammengesucht und angezeigt.
+	
+	*/
+
+	// wat unten kommt, ist nur zum testing (gewesen)
+
 	// prepare select params
-	$select_params = array(
+	$request = array(
 		'user' => $_REQUEST['mm_user'],
 		'photoset' => $_REQUEST['mm_photoset'],
 		'flickrtags' => $_REQUEST['mm_flickrtags']
 	);
-	$BASE->utility->smarty->assign('flickrobjects', $select_params);
+	
+	$BASE->utility->smarty->assign('request', $request);
 	
 	$BASE->utility->smarty->assign('pagetype', Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC));
 	

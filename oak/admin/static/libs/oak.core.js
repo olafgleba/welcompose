@@ -436,6 +436,7 @@ function OakInit_processOakInit (ttarget)
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 				
+				Behaviour.reapply('input');
 				Behaviour.reapply('a.mm_edit');
 				Behaviour.reapply('a.mm_upload');
 				Behaviour.reapply('a.mm_delete');
@@ -456,14 +457,9 @@ function OakInit_processOakInit (ttarget)
 			
 				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 				$('mm_tags').setAttribute("autocomplete","off");
-				$('mm_user').setAttribute("autocomplete","off");
-				$('mm_photoset').setAttribute("autocomplete","off");
 				$('mm_flickrtags').setAttribute("autocomplete","off");
 			
 				Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
-				// Flickr
-				Event.observe($('mm_user'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-				Event.observe($('mm_photoset'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 			
 			} else {

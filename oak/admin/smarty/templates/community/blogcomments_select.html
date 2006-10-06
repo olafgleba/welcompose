@@ -124,8 +124,7 @@ var selection = '{$session.selection}';
 <td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="140" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="220" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
@@ -135,7 +134,6 @@ var selection = '{$session.selection}';
 <th class="email">{i18n Posting Title}</th>
 <th class="proj">{i18n Author} <span class="az"></span> <span class="za"></span></th>
 <th class="proj">{i18n Status} <span class="az"></span> <span class="za"></span></th>
-<th></th>
 <th>{i18n View Comment}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
@@ -159,7 +157,6 @@ var selection = '{$session.selection}';
 {/foreach}
 </select>
 </fieldset>
-<td><span id="indicator"><img src="../static/img/indicator.gif" height="22" width="22" alt="" /></span></td>
 </form>
 </td>
 <td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
@@ -167,7 +164,7 @@ var selection = '{$session.selection}';
 <td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_comment.id}" class="outer">
-<td colspan="8">
+<td colspan="7">
 <div id="i_{$_comment.id}" class="inner">
 <fieldset>
 <h3>{i18n Comment}</h3>

@@ -106,7 +106,7 @@ Page <a href="#">1 of 10</a>
 <div class="mmwrap">
 <span class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_user_wrap">
-<input class="w200" type="text" id="mm_user" />
+<input class="w200" type="text" id="mm_user" value="{$request.user|escape:"htmlall"}" />
 </span>
 </span>
 </div>
@@ -114,9 +114,9 @@ Page <a href="#">1 of 10</a>
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by photoset}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_photoset_wrap">
-<input class="w200" type="text" id="mm_photoset" />
+<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_flickrtags_wrap">
+<input class="w200" type="text" id="mm_flickrtags" value="{$request.flickrtags|escape:"htmlall"}" />
 </span>
 </label>
 </div>
@@ -124,9 +124,14 @@ Page <a href="#">1 of 10</a>
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by flickr tags}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_flickrtags_wrap">
-<input class="w200" type="text" id="mm_flickrtags" />
+<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by Flickr photoset}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_photoset_wrap">
+<select id="mm_photoset">
+<option value="">{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe item=_timeframe_name}
+<option value="{$_timeframe}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
+{/foreach}
+</select>
 </span>
 </label>
 </div>
@@ -138,10 +143,10 @@ Page <a href="#">1 of 10</a>
 <!-- mediamanager content populate -->
 <div id="myFlickr_mm_contentToPopulate">
 <table class="mm_content">
-{foreach from=$flickrobjects item=_flickrobject}
+{foreach from=$request key=_item item=_item_val}
 <tr>
-<td class="td_mm_media"><a href="#">{$_flickrobject.user}</a></td>
-<td colspan="4">{$_flickrobject.photoset} und {$_flickrobject.flickrtags}</td>
+<td class="td_mm_media"><a href="#">{$_item_val}</a></td>
+<td colspan="4">{$_item_val} und {$_item_val}</td>
 </tr>
 {/foreach}
 </table>
