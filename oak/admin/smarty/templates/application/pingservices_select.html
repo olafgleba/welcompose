@@ -92,8 +92,8 @@ var response = '{$session.response}';
 {foreach from=$ping_services item=_ping_service}
 <tr>
 <td class="template"><span>{$_ping_service.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="pingservices_edit.php?id={$_ping_service.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="pingservices_delete.php?id={$_ping_service.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="pingservices_edit.php?id={$_ping_service.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pingservices_delete.php?id={$_ping_service.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

@@ -102,9 +102,9 @@ var selection			= '{$session.selection}';
 <td>{$_global_template.name|escape:"htmlall"}</td>
 <td>{$_global_template.description|escape:"htmlall"}</td>
 <td><a class="upload showTableRow" href="#" id="t_{$_global_template.id}" title="{i18n Upload}"></a></td>
-<td><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"htmlall"}" title="{i18n Download}"></a></td>
-<td><a class="edit" href="globaltemplates_edit.php?id={$_global_template.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="globaltemplates_delete.php?id={$_global_template.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"url"}" title="{i18n Download}"></a></td>
+<td><a class="edit" href="globaltemplates_edit.php?id={$_global_template.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_template.id}" class="outer">
 <td colspan="6">

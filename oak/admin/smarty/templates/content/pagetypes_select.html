@@ -81,8 +81,8 @@ var response = '{$session.response}';
 <tr>
 {if $_page_type.editable}
 <td class="page"><span>{$_page_type.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="pagetypes_edit.php?id={$_page_type.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="pagetypes_delete.php?id={$_page_type.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="pagetypes_edit.php?id={$_page_type.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="pagetypes_delete.php?id={$_page_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td class="page"><span>{$_page_type.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
 <td>&nbsp;</td>

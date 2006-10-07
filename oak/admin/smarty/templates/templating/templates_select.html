@@ -132,10 +132,10 @@ var selection			= '{$session.selection}';
 <td>{$_template.type_name|escape:"htmlall"}</td>
 <td>{$_template.description|escape:"htmlall"}</td>
 <td><a class="upload showTableRow" href="#" id="e_{$_template.id}" title="{i18n Upload}"></a></td>
-<td><a class="download" href="templates_download.php?id={$_template.id|escape:"htmlall"}" title="{i18n Download}"></a></td>
-<td><a class="duplicate" href="templates_copy.php?id={$_template.id|escape:"htmlall"}" title="{i18n Duplicate}"></a></td>
-<td><a class="edit" href="templates_edit.php?id={$_template.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="templates_delete.php?id={$_template.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="download" href="templates_download.php?id={$_template.id|escape:"url"}" title="{i18n Download}"></a></td>
+<td><a class="duplicate" href="templates_copy.php?id={$_template.id|escape:"url"}" title="{i18n Duplicate}"></a></td>
+<td><a class="edit" href="templates_edit.php?id={$_template.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="templates_delete.php?id={$_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_template.id}" class="outer">
 <td colspan="8">

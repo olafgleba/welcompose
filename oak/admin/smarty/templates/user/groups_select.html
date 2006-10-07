@@ -85,8 +85,8 @@ var response = '{$session.response}';
 <td>{$_group.description|escape:"htmlall"|nl2br}</td>
 <td>{$_group.project_name|escape:"htmlall"}</td>
 {if $_group.editable}
-<td><a class="edit" href="groups_edit.php?id={$_group.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="groups_delete.php?id={$_group.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="groups_edit.php?id={$_group.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="groups_delete.php?id={$_group.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td>&nbsp;</td>
 <td>&nbsp;</td>

@@ -92,8 +92,8 @@ var response = '{$session.response}';
 {foreach from=$blog_comment_statuses item=_blog_comment_status}
 <tr>
 <td class="template"><span>{$_blog_comment_status.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="blogcommentstatuses_delete.php?id={$_blog_comment_status.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="blogcommentstatuses_delete.php?id={$_blog_comment_status.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

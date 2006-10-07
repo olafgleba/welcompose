@@ -101,8 +101,8 @@ var response = '{$session.response}';
 <td>{$_right.description|escape:"htmlall"|nl2br}</td>
 <td>&nbsp;</td>
 {if $_right.editable}
-<td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td>&nbsp;</td>
 <td>&nbsp;</td>

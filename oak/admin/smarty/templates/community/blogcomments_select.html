@@ -159,8 +159,8 @@ var response = '{$session.response}';
 </form>
 </td>
 <td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
-<td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_comment.id}" class="outer">
 <td colspan="7">

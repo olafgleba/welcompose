@@ -98,8 +98,8 @@ var response = '{$session.response}';
 <td class="template"><span>{$_anti_spam_plugin.name|escape:"htmlall"}</span></td>
 <td class="template"><span>{if $_anti_spam_plugin.type == 'comment'}{i18n Comment plugin}{elseif $_anti_spam_plugin.type == 'trackback'}{i18n Trackback plugin}{/if}</span></td>
 <td class="template"><span>{if $_anti_spam_plugin.active}{i18n yes}{else}{i18n no}{/if}</span></td>
-<td><a class="edit" href="antispamplugins_edit.php?id={$_anti_spam_plugin.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="antispamplugins_delete.php?id={$_anti_spam_plugin.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="antispamplugins_edit.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="antispamplugins_delete.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

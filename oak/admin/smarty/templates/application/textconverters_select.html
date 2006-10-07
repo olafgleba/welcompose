@@ -92,8 +92,8 @@ var response = '{$session.response}';
 {foreach from=$text_converters item=_text_converter}
 <tr>
 <td class="template"><span>{$_text_converter.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

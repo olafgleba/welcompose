@@ -92,8 +92,8 @@ var response = '{$session.response}';
 {foreach from=$text_macros item=_text_macro}
 <tr>
 <td class="template"><span>{$_text_macro.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="textmacros_edit.php?id={$_text_macro.id|escape:"htmlall"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="textmacros_delete.php?id={$_text_macro.id|escape:"htmlall"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="textmacros_edit.php?id={$_text_macro.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="textmacros_delete.php?id={$_text_macro.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
