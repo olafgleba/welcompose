@@ -121,10 +121,10 @@ function Mediamanager_hideElement (elem)
 		// myFlickr
 		else if (myFlickr == 'block') {
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
-			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			
-			var collectElems = String(userElem + photosetElem + flickrtagsElem);
+			var collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
 			// do nothing on var
 			var rows = '';
@@ -177,10 +177,10 @@ function Mediamanager_showElement (elem)
 		// myFlickr
 		else if (myFlickr == 'block') {
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
-			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			
-			var collectElems = String(userElem + photosetElem + flickrtagsElem);
+			var collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
 			// do nothing on var
 			var rows = '';
