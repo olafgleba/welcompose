@@ -91,7 +91,7 @@ try {
 
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add navigation'),
-		array('class' => 'submit140'));
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

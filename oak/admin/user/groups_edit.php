@@ -138,7 +138,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Edit group'),
-		array('class' => 'submit140'));
+		array('class' => 'submit200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(

@@ -341,6 +341,11 @@ var definitions = {
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
+	'.submit200bez260' : function(el){
+		el.onclick = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+	},
 	'.submit140' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';

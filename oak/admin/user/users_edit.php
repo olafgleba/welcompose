@@ -148,7 +148,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Edit user'),
-		array('class' => 'submit140'));
+		array('class' => 'submit200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
