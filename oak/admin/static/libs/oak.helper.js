@@ -217,7 +217,7 @@ function Helper_unsupportsElems(exception)
 		this.browser = _setBrowserString();
 		this.exception = exception;
 		
-		if ((this.browser == "Internet Explorer" && !this.exception) || (this.browser == "Safari" && !this.exception)) {
+		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;

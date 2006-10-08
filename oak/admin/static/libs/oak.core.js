@@ -529,7 +529,12 @@ function Help_show (elem, level)
 		this.attr = 'for';
 		this.level = level;
 		
-		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		// IE cannot handle getAttribute('for') correctly
+		if (Helper.unsupportsElems('safari')) {
+			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
+		} else {
+			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		}
 		
 		switch (this.level) {
 			case '2' :
@@ -594,7 +599,12 @@ function Help_hide (elem, level)
 		this.attr = 'for';
 		this.level = level;
 	
-		this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		// IE cannot handle getAttribute('for') correctly
+		if (Helper.unsupportsElems('safari')) {
+			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
+		} else {
+			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
+		}
 		this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
 		switch (this.level) {
