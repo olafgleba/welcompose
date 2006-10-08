@@ -536,6 +536,8 @@ function Help_show (elem, level)
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
 		}
 		
+		alert (this.processIdAfter + ' , ' + this.processId);
+		
 		switch (this.level) {
 			case '2' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
