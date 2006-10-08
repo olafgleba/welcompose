@@ -541,16 +541,13 @@ function Help_show (elem, level)
 			case '2' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelTwo;
-					alert ('2: ' + this.formId);
 				break;
 			case '3' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelThree;
-					alert ('3: ' + this.formId);
-
 				break;
 			default :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
 					this.elem.className = this.helpClassRemove;
 					alert ('default: ' + this.formId);
 		}
