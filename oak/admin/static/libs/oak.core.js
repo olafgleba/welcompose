@@ -547,7 +547,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
-					this.formId = String(this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemove;
 		}
 	 
@@ -577,8 +577,8 @@ function Help_show (elem, level)
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
 		
-		//Behaviour.apply();
-		Behaviour.reapply('.' + this.elem.className);
+		Behaviour.apply();
+		//Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
 		_applyError(e);
