@@ -535,7 +535,7 @@ function Help_show (elem, level)
 		} else {
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
 		}
-		this.processIdAfter = $(this.processId).parentNode.nextSibling;
+		//this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
 		switch (this.level) {
 			case '2' :
@@ -547,7 +547,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.formId = String(this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id'));
 					this.elem.className = this.helpClassRemove;
 		}
 	 
