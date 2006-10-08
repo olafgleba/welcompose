@@ -547,7 +547,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes[this.attr].value;
 					this.elem.className = this.helpClassRemove;
 		}
 	 
