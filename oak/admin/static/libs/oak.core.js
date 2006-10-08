@@ -530,11 +530,11 @@ function Help_show (elem, level)
 		this.level = level;
 		
 		// IE cannot handle getAttribute('for') correctly
-		if (Helper.unsupportsElems('safari')) {
+		/*if (Helper.unsupportsElems('safari')) {
 			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
-		} else {
+		} else {*/
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
-		}
+		//}
 		
 		alert (this.processIdAfter + ' , ' + this.processId);
 		
