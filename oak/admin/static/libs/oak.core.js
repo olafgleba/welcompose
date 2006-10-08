@@ -541,14 +541,18 @@ function Help_show (elem, level)
 			case '2' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelTwo;
+					alert ('2: ' + this.formId);
 				break;
 			case '3' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemoveLevelThree;
+					alert ('3: ' + this.formId);
+
 				break;
 			default :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemove;
+					alert ('default: ' + this.formId);
 		}
 	 
 		this.ttarget = this.processId;
@@ -561,8 +565,6 @@ function Help_show (elem, level)
 			this.processId = this.fetch;
 		}
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
-		
-		alert (this.formId);
 			
 		if (typeof this.req != 'undefined') {
 		
@@ -577,8 +579,8 @@ function Help_show (elem, level)
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
 		
-		Behaviour.apply();
-		//Behaviour.reapply('.' + this.elem.className);
+		//Behaviour.apply();
+		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
 		_applyError(e);
