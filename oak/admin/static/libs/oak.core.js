@@ -547,7 +547,7 @@ function Help_show (elem, level)
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes[this.attr].value;
+					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
 					this.elem.className = this.helpClassRemove;
 		}
 	 
@@ -562,7 +562,7 @@ function Help_show (elem, level)
 		}
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
 		
-		alert (this.url);
+		alert (this.formId);
 			
 		if (typeof this.req != 'undefined') {
 		
