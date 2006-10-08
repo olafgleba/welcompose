@@ -535,6 +535,7 @@ function Help_show (elem, level)
 		} else {*/
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
 		//}
+		this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
 		alert (this.processIdAfter + ' , ' + this.processId);
 		
