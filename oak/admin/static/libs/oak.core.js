@@ -537,8 +537,6 @@ function Help_show (elem, level)
 		}
 		this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
-		alert (this.processIdAfter + ' , ' + this.processId);
-		
 		switch (this.level) {
 			case '2' :
 					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
@@ -563,6 +561,8 @@ function Help_show (elem, level)
 			this.processId = this.fetch;
 		}
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+		
+		alert (this.url);
 			
 		if (typeof this.req != 'undefined') {
 		
