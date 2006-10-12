@@ -176,6 +176,46 @@ public function _sqlInFromArray ($field, $values)
 }
 
 /**
+ * Generates NOT IN clause for database queries. Takes the field to search as
+ * first argument, the values for the NOT IN clause as second argument. Returns
+ * string with sql query fragment. Sample:
+ * 
+ * <code>
+ * echo $helper->_sqlNotInFromArray('id', array(1, 2));
+ * // result:
+ * // id NOT IN (1, 2)
+ * </code>
+ * 
+ * @throws Utility_HelperException
+ * @param string Field name
+ * @param array Search values
+ * @return string
+ */
+public function _sqlNotInFromArray ($field, $values)
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("field is expected to be a non empty scalar value");
+	}
+	if (!is_array($values)) {
+		throw new Utility_HelperException("values is expected to be an array");
+	}
+	
+	// if the value array is empty, return 1
+	if (count($values) < 1) {
+		return " 1 ";
+	}
+	
+	// quote values
+	foreach ($values as $_key => $_value) {
+		$values[$_key] = $this->base->db->quote($_value, PDO::PARAM_STR);
+	}
+	
+	return sprintf(' %s NOT IN ( %s ) ', $field, implode(', ', $values));
+}
+
+
+/**
  * Generates multiple LIKE clauses for database queries from array of
  * search values. Takes the field to search as first argument, the values
  * for the LIKE clauses as second argument and an optional concatenation
@@ -513,6 +553,177 @@ public function _sqlForTimeframe ($field, $timeframe)
 			throw new Utility_HelperException("Unknown timeframe supplied");
 	}
 	
+}
+
+/**
+ * Calculates start/end dates for given timeframe. Takes the name
+ * of the timeframe as first argument. Returns array with to values:
+ * timeframe_start and timeframe end.
+ * 
+ * See Utility_Helper::getTimeframes() for a list of supported 
+ * timeframes. 
+ * 
+ * @throws Utility_HelperException
+ * @param string Timeframe name
+ * @return array
+ */
+public function datesForTimeframe ($timeframe)
+{
+	if (empty($timeframe) || !is_scalar($timeframe)) {
+		throw new Utility_HelperException("Input for parameter timeframe is expected to be a non-empty string");
+	}
+	if (!preg_match(OAK_REGEX_TIMEFRAME, $timeframe)) {
+		throw new Utility_HelperException("Invalid timeframe supplied");
+	}
+	
+	// let's define now as a var, so we can play around with different dates
+	$now = strtotime('now');
+	
+	// let's fix date('w') 'cos weeks of normal people start with monday
+	$w = (date('w', $now) == 0) ? 7 : date('w', $now);
+	
+	switch ((string)$timeframe) {
+		case 'today':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('today', $now)),
+				'timeframe_end' => date("Y-m-d H:i:s", strtotime('today', $now))
+			);
+		case 'yesterday':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('yesterday', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('yesterday', $now))
+			);
+		case 'two_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('2 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('2 days ago', $now))
+			);
+		case 'three_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('3 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('3 days ago', $now))
+			);
+		case 'four_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('4 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('4 days ago', $now))
+			);
+		case 'five_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('5 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('5 days ago', $now))
+			);
+		case 'six_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('6 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('6 days ago', $now))
+			);
+		case 'seven_days_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime('7 days ago', $now)),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime('7 days ago', $now))
+			);
+		case 'this_week':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", $now - (86400 * ($w - 1))),
+				'timeframe_end' => date("Y-m-d H:i:s", $now)
+			);
+		case 'last_week':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime(sprintf("%s -1 week",
+					date('Y-m-d', $now - (86400 * ($w - 1)))))),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime(date('Y-m-d',
+					$now - (86400 * ($w - 1)) - 86400)))
+			);
+		case 'two_weeks_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime(sprintf("%s -2 weeks",
+					date('Y-m-d', $now - (86400 * ($w - 1)))))),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime(sprintf("%s -1 week",
+					date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))))
+			);
+		case 'three_weeks_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime(sprintf("%s -3 weeks",
+					date('Y-m-d', $now - (86400 * ($w - 1)))))),
+				'timeframe_end' => date("Y-m-d 23:59:59", strtotime(sprintf("%s -2 weeks",
+					date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))))
+			);
+		case 'four_weeks_ago':
+			return array(
+				'timeframe_start' => date("Y-m-d 00:00:00", strtotime(sprintf("%s -4 weeks",
+					date('Y-m-d', $now - (86400 * ($w - 1)))))),
+					'timeframe_end' => date("Y-m-d 23:59:59", strtotime(sprintf("%s -3 weeks",
+					date('Y-m-d', $now - (86400 * ($w - 1)) - 86400))))
+				);
+		case 'this_month':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", $now),
+				'timeframe_end' => date("Y-m-d 00:00:00", $now),
+			);
+		case 'last_month':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -1 month', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -1 month', date("Y-m-15", $now)), $now))
+			);
+		case 'two_months_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -2 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -2 months', date("Y-m-15", $now)), $now))
+			);
+		case 'three_months_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -3 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -3 months', date("Y-m-15", $now)), $now))
+			);
+		case 'four_months_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -4 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -4 months', date("Y-m-15", $now)), $now))
+			);
+		case 'five_months_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -5 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -5 months', date("Y-m-15", $now)), $now))
+			);
+		case 'six_months_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now))
+			);
+		case 'half_year_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -12 months', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -6 months', date("Y-m-15", $now)), $now))
+			);
+		case 'one_year_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -2 years', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -1 year', date("Y-m-15", $now)), $now))
+			);
+		case 'two_years_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -3 years', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -2 years', date("Y-m-15", $now)), $now))
+			);
+		case 'three_years_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -4 years', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -3 years', date("Y-m-15", $now)), $now))
+			);
+		case 'four_years_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -5 years', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -4 years', date("Y-m-15", $now)), $now))
+			);
+		case 'five_years_ago':
+			return array(
+				'timeframe_start' => date("Y-m-01 00:00:00", strtotime(sprintf('%s -6 years', date("Y-m-15", $now)), $now)),
+				'timeframe_end' => date("Y-m-t 23:59:59", strtotime(sprintf('%s -5 years', date("Y-m-15", $now)), $now))
+			);
+		default:
+			throw new Utility_HelperException("Unknown timeframe supplied");
+	}
 }
 
 /**

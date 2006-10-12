@@ -58,4 +58,7 @@ blog_archive_month = "/oak/trunk/oak/<page_name>/<posting_year_added>/<posting_m
 blog_archive_month_start = "/oak/trunk/oak/<posting_year_added>/<posting_month_added>/"
 global_template_url = "/oak/trunk/oak/global_template.php?name=<global_file_name>&project=<project_name>"
 
+[flickr]
+api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"
+
 ; */ ?>

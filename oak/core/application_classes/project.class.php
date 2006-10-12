@@ -830,6 +830,18 @@ protected function syncRightsWithSkeleton ($project)
 	return true;
 }
 
+/**
+ * Synchronises links between groups and rights using the skeleton.
+ * Only links to rights that are configured in the skeleton will
+ * be touched. So it's recommended that you first run the functions
+ * to sync rights and groups with the skeleton.
+ *
+ * Takes the project id as fisrt argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool
+ */
 protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 {
 	// input check
@@ -937,23 +949,531 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 			}
 		}
 	}
+	
+	return bool;
 }
 
-protected function syncGroupsWithSkeleton ()
+/**
+ * Synchronises groups in database with the list of groups deposited
+ * in the skeleton. Groups in the database that are not in the
+ * skeleton anymore will be removed, differences in descriptions etc.
+ * will be synchronised and new groups in the skeleton will be added.
+ * 
+ * Takes the project id as first argument and a boolean value whether
+ * obsolete groups (= not mentioned in the skeleton anymore) should be
+ * dropped or not. Returns bool.
+ * 
+ * Note: The paramater $drop_obsolete should be used with care. That's
+ * because the sync function cannot distinguish whether a group was
+ * created from skeleton or by the user through the admin interface. So
+ * if drop_obsolete evaluates to true, groups created by the user would
+ * be deleted too.
+ * 
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @param bool Drop obsolete groups
+ * @return bool 
+ */
+protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 {
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	if (!is_bool($drop_obselete)) {
+		throw new Application_ProjectException("Input for parameter drop_obsolete is exptected to be bool");
+	}
 	
+	// get groups from skeleton
+	$skeleton_groups = $this->getGroupsFromSkeleton();
+	
+	// prepare query to get groups from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`
+		FROM
+			".OAK_DB_USER_GROUPS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get groups from database
+	$database_groups = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete groups from database if
+	// we're supposed to do so
+	if ($drop_obsolete === true) {
+		foreach ($database_groups as $_group) {
+			// compare list of groups in skeleton and database. database groups that
+			// are not found in the list of skeleton groups have to be dropped.
+			$drop = true;
+			foreach ($skeleton_groups as $_skel_group) {
+				if ($_group['name'] == $_skel_group['name']) {
+					$drop = false;
+				}
+			}
+		
+			// if the drop bit is true, we have to remove the database group
+			if ($drop === true) {
+				// prepare where clause
+				$where = " WHERE `id` = :id ";
+			
+				// prepare bind params
+				$bind_params = array(
+					'id' => $_group['id']
+				);
+			
+				// drop group
+				$this->base->db->delete(OAK_DB_USER_GROUPS, $where, $bind_params);
+			}
+		}
+	}
+	
+	// now we have to add missing groups to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_groups as $_group) {
+		// compare list of groups in skeleton and database. skeleton groups that
+		// are not found in the list of database groups have to be added. groups that
+		// exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_groups as $_db_group) {
+			if ($_group['name'] == $_db_group['name']) {
+				// look at description/editable bit and update them if
+				// necessessary
+				$update = false;
+				
+				if ($_group['description'] != $_db_group['description']) {
+					$update = true;
+				} elseif ((int)$_group['editable'] != (int)$_db_group['editable']) {
+					$update = true;
+				}
+				
+				// update groups if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'description' => $_group['description'],
+						'editable' => (int)$_group['editable']
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_group['id']
+					);
+					
+					// update group
+					$this->base->db->update(OAK_DB_USER_GROUPS, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the group into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_group['name'],
+				'description' => $_group['description'],
+				'editable' => (int)$_group['editable']
+			);
+			
+			// insert group
+			$this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+		}
+	}
+	
+	return true;
 }
 
-protected function syncUsersWithSkeleton ()
+/**
+ * Sychronises users with skeleton. Adds new users and updates existing
+ * ones. If drop_obsolete is true, obsolete/orphaned users will be deleted.
+ * A user is obsolete or orphaned, if it's not attached to any project.
+ * 
+ * Takes the project id as first argument and a boolean value whether
+ * obsolete/orphaned users should be deleted as second argument. Returns
+ * bool.
+ * 
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @param bool Drop obsolete
+ * @return bool
+ */
+protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 {
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
 	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
+	// get users from skeleton
+	$skeleton_users = $this->getUsersFromSkeleton();
+	
+	// collect email addresses of skeleton users
+	$email_addresses = array();
+	foreach ($skeleton_users as $_user) {
+		$email_addresses[] = $_user['email'];
+	}
+	
+	// prepare query to get users from database
+	$sql = "
+		SELECT
+			`id`,
+			`email`,
+			`secret`,
+			`editable`
+		FROM
+			".OAK_DB_USER_USERS."
+		WHERE
+			1
+	";
+	
+	// add IN clause to reduce result set size
+	$sql .= " AND ".$HELPER->_sqlInFromArray('`email`', $email_addresses);
+	
+	// get users from database
+	$database_users = $this->base->db->select($sql, 'multi', array());
+	
+	// now we have to add missing users to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_users as $_user) {
+		// compare list of users in skeleton and database. skeleton users that
+		// are not found in the list of database users have to be added. users that
+		// exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_users as $_db_user) {
+			if ($_user['email'] == $_db_user['email']) {
+				// look at secret/editable bit and update them if
+				// necessessary
+				$update = false;
+				
+				if ($_user['secret'] != $_db_user['secret']) {
+					$update = true;
+				} elseif ((int)$_user['editable'] != (int)$_db_user['editable']) {
+					$update = true;
+				}
+				
+				// update users if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'secret' => $_user['secret'],
+						'editable' => (int)$_user['editable']
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'id' => (int)$_db_user['id']
+					);
+					
+					// update user
+					$this->base->db->update(OAK_DB_USER_USERS, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the user into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'email' => $_user['email'],
+				'secret' => $_user['secret'],
+				'editable' => (int)$_user['editable'],
+				'date_added' => date('Y-m-d H:i:s')
+			);
+			
+			// insert user
+			$this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+		}
+	}
+	
+	// drop obsolete/orphaned users if we're supposed to do so.
+	if ($drop_obsolete === true) {
+		// prepare query to get users from database
+		$sql = "
+			DELETE FROM
+				".OAK_DB_USER_USERS." AS `user_users`
+			USING
+				`user_users`
+			LEFT JOIN
+				".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			  ON
+				`user_users`.`id` = `user_users2application_projects`.`user`
+			WHERE
+				`user_users2application_projects`.`id` IS NULL
+		";
+
+		// add IN clause to reduce result set size
+		$sql .= " AND ".$HELPER->_sqlNotInFromArray('`email`', $email_addresses);
+		
+		// drop obsolete users
+		$this->base->db->execute($sql);
+	}
+	
+	return true;
+}
+
+/**
+ * Synchronises links between users and projects with skeleton.
+ * Only users that are configured in the skeleton will be touched.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ * 
+ * @throws Application_ProjectException
+ * @param in Project Id
+ * @return bool
+ */
+public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
+	// get users from skeleton
+	$skeleton_users = $this->getUsersFromSkeleton();
+	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
+	// get users from skeleton
+	$skeleton_users = $this->getUsersFromSkeleton();
+	
+	// collect email addresses of skeleton users
+	$email_addresses = array();
+	foreach ($skeleton_users as $_user) {
+		$email_addresses[] = $_user['email'];
+	}
+	
+	// prepare query to get users from database
+	$sql = "
+		SELECT
+			`user_users`.`id`,
+			`user_users`.`email`,
+			`user_users`.`secret`,
+			`user_users`.`editable`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		LEFT JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users2application_projects`.`user` = :project
+	";
+	
+	// add IN clause to reduce result set size
+	$sql .= " AND ".$HELPER->_sqlInFromArray('`email`', $email_addresses);
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get users from database
+	$database_users = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	foreach ($skeleton_users as $_user) {
+		foreach ($database_users as $_db_user) {
+			if ($_user['email'] == $_db_user['email']) {
+				$current_user = $_user['id'];
+			}
+		}
+		
+		// if the current user could not be found, we have to skip the
+		// current user
+		if (empty($current_user)) {
+			continue;
+		}
+		
+		// delete all links between the current user and it's associated
+		// groups
+		$sql = "
+			DELETE FROM
+				".OAK_DB_USER_USERS2APPLICATION_PROJECTS."
+			WHERE
+				`user` = :user
+			  AND
+				`project` = :project
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'user' => (int)$current_user,
+			'project' => (int)$project
+		);
+		
+		// drop rows
+		$this->base->db->execute($sql, $bind_params);
+		
+		// create new link
+		$sqlData = array(
+			'user' => $current_user,
+			'project' => $project,
+			'active' => (int)$_user['active'],
+			'author' => (int)$_user['author']
+		);
+		
+		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS);
+	}
+	
+	return true;
+}
+
+/**
+ * Synchronises links between users and groups with skeleton.
+ * Only users configured in the skeleton will be touched.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ * 
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool
+ */
+protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// prepare query to get groups from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`
+		FROM
+			".OAK_DB_USER_GROUPS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get groups from database
+	$database_groups = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// prepare query to get users from database
+	$sql = "
+		SELECT
+			`user_users`.`id`,
+			`user_users`.`email`,
+			`user_users`.`secret`,
+			`user_users`.`editable`
+		FROM
+			".OAK_DB_USER_USERS." AS `user_users`
+		JOIN
+			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+		  ON
+			`user_users`.`id` = `user_users2application_projects`.`user`
+		WHERE
+			`user_users2application_projects`.`user` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get users from database
+	$database_users = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// get users from skeleton
+	$skeleton_users = $this->getUsersFromSkeleton();
+	
+	// loop through all skeleton users to create new links between groups
+	// and users 
+	foreach ($skeleton_users as $_user) {
+		// search for user in the list of database users to get its id
+		foreach ($database_users as $_db_user) {
+			if ($_db_user['name']== $_user['name']) {
+				$current_user = (int)$_db_user['id'];
+			}
+		}
+		
+		// if the current user could not be found, we have to skip the
+		// current user
+		if (empty($current_user)) {
+			continue;
+		}
+		
+		// delete all links between the current user and it's associated
+		// groups
+		$sql = "
+			DELETE FROM
+				".OAK_DB_USER_USERS2USER_GROUPS."
+			WHERE
+				`user` = :user
+		";
+		
+		// prepare bind params
+		$bind_params = array(
+			'user' => (int)$current_user
+		);
+		
+		// drop rows
+		$this->base->db->execute($sql, $bind_params);
+		
+		// create new links between users and groups
+		foreach ($_user['groups'] as $_group) {
+			// search for group in the list of database groups to get its id
+			foreach ($database_groups as $_db_group) {
+				if ($_db_group['name'] == $_group) {
+					// prepare sql data to create new link
+					$sqlData = array(
+						'group' => (int)$_db_group['id'],
+						'user' => (int)$current_user
+					);
+					
+					// create new link
+					$this->base->db->insert(OAK_DB_USER_GROUPS2USER_USERS,
+						$sqlData);
+				}
+			}
+		}
+	}
+	
+	return bool;
 }
 
 protected function syncPageTypesWithSkeleton ()
 {
 	
 }
-
 
 protected function syncTemplateTypesWithSkeleton ()
 {
