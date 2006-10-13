@@ -3,7 +3,7 @@
 	<users>
 		<user>
 			<email>default@oak.local</email>
-			<secret>aaQSqAReePlq6</secret>
+			<secret>UXanocuwh2u2I</secret>
 			<editable>1</editable>
 			<active>1</active>
 			<author>1</author>
@@ -27,16 +27,19 @@
 			<name>OAK_ADMIN</name>
 			<description>Group for super users that can do everything.</description>
 			<editable>0</editable>
+			<creator_group>1</creator_group>
 		</group>
 		<group>
 			<name>OAK_REGULAR</name>
 			<description>Group for regular users that are allowed to edit pages and to perform certain administrative tasks like blog comment moderation.</description>
 			<editable>0</editable>
+			<creator_group>0</creator_group>
 		</group>
 		<group>
 			<name>OAK_ANONYMOUS</name>
 			<description>Group for anonymous users that are only allowed to access the public area of the website.</description> 
 			<editable>0</editable>
+			<creator_group>0</creator_group>
 		</group>
 	</groups>
 	<rights>

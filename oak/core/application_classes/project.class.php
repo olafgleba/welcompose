@@ -104,19 +104,75 @@ public function addProject ($sqlData)
 }
 
 /**
- * Not implemented in the free version of this software.
+ * Updates project. Takes the project id as first argument, a field=>value
+ * array with the new row data as second argument. Returns amount of
+ * affected rows.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @param array Row data
+ * @return int Affected rows
  */
 public function updateProject ($id, $sqlData)
 {
-	return false;
+	/*
+	// access check
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Application_ProjectException("You are not allowed to perform this action");
+	}
+	*/
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Application_ProjectException('Input for parameter id is not an array');
+	}
+	if (!is_array($sqlData)) {
+		throw new Application_ProjectException('Input for parameter sqlData is not an array');	
+	}
+	
+	// prepare where clause
+	$where = " WHERE `id` = :id AND `editable` = '1' ";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id
+	);
+	
+	// update row
+	return $this->base->db->update(OAK_DB_APPLICATION_PROJECTS, $sqlData,
+		$where, $bind_params);	
 }
 
 /**
- * Not implemented in the free version of this software.
+ * Removes project from the project table. Takes the project id as
+ * first argument. Returns amount of affected rows.
+ * 
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return int Amount of affected rows
  */
 public function deleteProject ($id)
 {
-	return false;
+	/*
+	// access check
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Application_ProjectException("You are not allowed to perform this action");
+	}
+	*/
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Application_ProjectException('Input for parameter id is not numeric');
+	}
+	
+	// prepare where clause
+	$where = " WHERE `id` = :id AND `editable` = '1' ";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$id
+	);
+	
+	// execute query
+	return $this->base->db->delete(OAK_DB_APPLICATION_PROJECTS, $where, $bind_params);
 }
 
 /**
@@ -499,19 +555,25 @@ public function testForUniqueName ($name, $id = null)
 		throw new Application_ProjectException("Input for parameter id is expected to be numeric");
 	}
 	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
 	// prepare query
 	$sql = "
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `application_projects`
+			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
 			`name` = :name
+		  OR
+			`name_url` = :name_url
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'name' => $name
+		'name' => $name,
+		'name_url' => $HELPER->createMeaningfulString($name)
 	);
 	
 	// if id isn't empty, add id check
@@ -737,7 +799,8 @@ protected function getGroupsFromSkeleton ()
 		$groups[] = array(
 			'name' => utf8_decode($group->name),
 			'description' => utf8_decode($group->description),
-			'editable' => utf8_decode($group->editable)
+			'editable' => utf8_decode($group->editable),
+			'creator_group' => utf8_decode($group->creator_group)
 		);
 	}
 	
@@ -1527,6 +1590,16 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 	}
 	
+	// create link to current user
+	$sqlData = array(
+		'user' => OAK_CURRENT_USER,
+		'project' => $project,
+		'active' => "1",
+		'author' => "1"
+	);
+	
+	$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+	
 	return true;
 }
 
@@ -1594,6 +1667,9 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 	// get users from database
 	$database_users = $this->base->db->select($sql, 'multi', $bind_params);
 	
+	// get skeleton groups
+	$skeleton_groups = $this->getGroupsFromSkeleton();
+	
 	// get users from skeleton
 	$skeleton_users = $this->getUsersFromSkeleton();
 	
@@ -1648,6 +1724,25 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 					$sqlData = array(
 						'group' => (int)$_db_group['id'],
 						'user' => (int)$current_user
+					);
+					
+					// create new link
+					$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
+						$sqlData);
+				}
+			}
+		}
+	}
+	
+	// create link between current user and creator group
+	foreach ($skeleton_groups as $_skel_group) {
+		if ($_skel_group['creator_group']) {
+			foreach ($database_groups as $_db_group) {
+				if ($_db_group['name'] == $_skel_group['name']) {
+					// prepare sql data to create new link
+					$sqlData = array(
+						'group' => (int)$_db_group['id'],
+						'user' => (int)OAK_CURRENT_USER
 					);
 					
 					// create new link
