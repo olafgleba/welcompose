@@ -83,6 +83,67 @@ Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrent
 
 /**
  * Implements method of prototype class Mediamanager
+ * Show Mediamanager Element
+ * 
+ * @param {string} elem actual element
+ * @throws applyError on exception
+ */
+function Mediamanager_showElement (elem)
+{	
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'class';
+		// IE fails on func getAttribute() with argument 'class'
+		if (Helper.unsupportsElems('safari_exception')) {
+			this.ttarget = String(this.elem.parentNode.parentNode.attributes[this.attr].value + '_wrap');
+		} else {
+			this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+		}
+		
+		Element.show(this.ttarget);
+		
+		this.elem.className = this.mediamanagerClassHide;
+		Element.update(this.elem, this.elementHtmlHide);
+		Behaviour.reapply('.' + this.elem.className);
+	
+		// needed to set appropriate height of content of div to populate
+		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
+		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
+
+		// myLocal
+		if (myLocal == 'block') {
+			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+			
+			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			
+			if (includeTypesElem == 'block') {
+				var rows = 1;
+			}
+		}
+		// myFlickr
+		else if (myFlickr == 'block') {
+			var userElem = Element.getStyle('mm_user_wrap', 'display');
+			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
+			
+			var collectElems = String(userElem + flickrtagsElem + photosetElem);
+			
+			// do nothing on var
+			var rows = '';
+		}
+		// set appropriate height and width of surrounding divs
+		_checkOccurrences (collectElems, rows);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
  * Hide Mediamanager Element
  *
  * @param {string} elem actual element
@@ -94,7 +155,12 @@ function Mediamanager_hideElement (elem)
 		// properties
 		this.elem = elem;
 		this.attr = 'class';
-		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+		// IE fails on func getAttribute() with argument 'class'
+		if (Helper.unsupportsElems('safari_exception')) {
+			this.ttarget = String(this.elem.parentNode.parentNode.attributes[this.attr].value + '_wrap');
+		} else {
+			this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
+		}
 
 		Element.hide(this.ttarget);
 		
@@ -139,63 +205,6 @@ function Mediamanager_hideElement (elem)
 
 /**
  * Implements method of prototype class Mediamanager
- * Show Mediamanager Element
- * 
- * @param {string} elem actual element
- * @throws applyError on exception
- */
-function Mediamanager_showElement (elem)
-{	
-	try {
-		// properties
-		this.elem = elem;
-		this.attr = 'class';
-		this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-		
-		Element.show(this.ttarget);
-		
-		this.elem.className = this.mediamanagerClassHide;
-		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.reapply('.' + this.elem.className);
-	
-		// needed to set appropriate height of content of div to populate
-		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
-		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
-
-		// myLocal
-		if (myLocal == 'block') {
-			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-			
-			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
-			
-			if (includeTypesElem == 'block') {
-				var rows = 1;
-			}
-		}
-		// myFlickr
-		else if (myFlickr == 'block') {
-			var userElem = Element.getStyle('mm_user_wrap', 'display');
-			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
-			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
-			
-			var collectElems = String(userElem + flickrtagsElem + photosetElem);
-			
-			// do nothing on var
-			var rows = '';
-		}
-		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-/**
- * Implements method of prototype class Mediamanager
  * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
  *
  * @param {string} toShow div to display
@@ -234,14 +243,14 @@ function Mediamanager_toggleExtendedView (elem)
 
 		if (elem.value == showDetails) {
 			elem.value = hideDetails;
-			if (Helper.unsupportsEffects('safari')) {
+			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.show('extendedView');
 			} else {
 				Effect.Appear('extendedView',{duration: 0.4});
 			}
 		} else {
 			elem.value = showDetails;
-			if (Helper.unsupportsEffects('safari')) {
+			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.hide('extendedView');
 			} else {
 				Effect.Fade('extendedView',{duration: 0.4});
@@ -803,7 +812,7 @@ function Mediamanager_discardPodcast (elem)
 		// discard hidden field value
 		$('mediafile_id').value = '';
 		
-			if (Helper.unsupportsEffects('safari')) {
+			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.hide('podcast_container');
 			} else {
 				Effect.Fade('podcast_container',{duration: 0.4});

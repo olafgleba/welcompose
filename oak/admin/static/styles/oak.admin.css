@@ -349,7 +349,7 @@ height: 1.25em;
 list-style: none;
 width: 956px;
 padding-top: 3px;
-background: #fffde6 url(../img/bg_topsubnav_active_top.gif) 0 0 no-repeat;;
+background: #f9f9f9 url(../img/bg_topsubnav_active_top.gif) 0 0 no-repeat;;
 height: 1.25em;
 }
 #topsubnav li, #topsubnavdynamic li {
@@ -788,6 +788,9 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
+* html #error {
+margin-top: 50px;
+}
 #error ul.req {
 line-height: 1.2em;
 padding: 4px 15px;
@@ -803,6 +806,9 @@ display: block;
 width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+* html #rp {
+margin-top: 50px;
 }
 #rp h1 {
 margin: 0;
@@ -1035,6 +1041,9 @@ padding: 3px 8px;
 min-height: 555px;
 background: #fff;
 }
+* html #modalBody {
+height: 555px;
+}
 #modalBody table td {
 color: #00AE2C;
 padding-left: 10px;
@@ -1050,8 +1059,8 @@ top: 3px;
 left: 570px;
 height: 25px;
 }
-#pages table#secondNode,
-#pages table#thirdNode {
+#pages #secondNode,
+#pages #thirdNode {
 display: none;
 }
 /* eof */
@@ -1069,8 +1078,8 @@ margin-left: 50px;
 /* eof */
 
 /* internal links - global templates, global files */
-#modalContainer #globalfiles table#firstNode,
-#modalContainer #globaltemplates table#firstNode {
+#modalContainer #globalfiles #firstNode table,
+#modalContainer #globaltemplates #firstNode table {
 float: left;
 width: 385px;
 padding: 0;
@@ -1081,9 +1090,9 @@ background: #f9f9f9;
 /* eof */
 
 
-table#firstNode,
-table#secondNode,
-table#thirdNode {
+#firstNode table,
+#secondNode table,
+#thirdNode table {
 float: left;
 width: 225px;
 padding: 0;
@@ -1091,21 +1100,21 @@ margin: 0 2px 0 0;
 border: 0 none;
 background: #f9f9f9;
 }
-table#firstNode td,
-table#secondNode td,
-table#thirdNode td {
+#firstNode table td,
+#secondNode table td,
+#thirdNode table td {
 border-color: #fff;
 vertical-align: top;
 }
-table#firstNode td.initialNode,
-table#secondNode td.initialNode,
-table#thirdNode td.initialNode {
+#firstNode table td.initialNode,
+#secondNode table td.initialNode,
+#thirdNode table td.initialNode {
 width: 215px;
 }
-table#firstNode td.nextNode,
-table#secondNode td.nextNode,
-table#thirdNode td.nextNode {
-width: 20px;
+#firstNode table td.nextNode,
+#secondNode table td.nextNode,
+#thirdNode table td.nextNode {
+width: 25px;
 }
 #firstNode a,
 #secondNode a,
@@ -1148,19 +1157,19 @@ display: none;
 }
 
 
-
 /* %M =opacity */
-#lyLowerOpacity{
+#lyLowerOpacity {
 display: none;
 position: absolute;
 top: 0;
 left: 0;
 z-index: 1;
 }
-#lyLowerOpacity img{
+#lyLowerOpacity img {
 opacity: 0.4;
+-moz-opacity: 0.4;
+filter:alpha(opacity=40);
 }
-
 
 
 #podcast_container {

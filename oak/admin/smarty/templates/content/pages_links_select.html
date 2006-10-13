@@ -34,7 +34,8 @@ var formTarget = '{$target}';
 <h2>{i18n PAGES} <span>{i18n INSERT INTERNAL LINKS}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
 
 <div id="modalBody">
-<table id="firstNode">
+<div id="firstNode">
+<table>
 {foreach from=$navigations item=_navigation}
 <tr>
 <td colspan="2">{$_navigation.name|escape:"htmlall"}</td>
@@ -54,10 +55,9 @@ var formTarget = '{$target}';
 {/if}
 {/foreach}
 </table>
-<table id="secondNode">
-</table>
-<table id="thirdNode">
-</table>
+</div>
+<div id="secondNode"></div>
+<div id="thirdNode"></div>
 <br class="clearb" />
 </div>
 </div>

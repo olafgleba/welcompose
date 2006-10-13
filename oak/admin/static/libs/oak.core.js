@@ -350,11 +350,6 @@ function OakInit_getVars ()
 				return new Effect.Fade('rp', {duration: 0.8, delay: 1.5});
 			}
 		}
-	   if (typeof selection != 'undefined' && $('sel')) {
-			if (selection == 1) {
-				return new Effect.Fade('sel', {duration: 0.8, delay: 1.5});
-			}
-		}
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
@@ -367,14 +362,6 @@ function OakInit_getVars ()
 					_req.open('GET', _url, true);
 					_req.onreadystatechange = function () { OakInit.processOakInit(_ttarget);};
 					_req.send('');
-				}
-			}
-			
-		}
-	   if (typeof popup != 'undefined' && OakInit.isNumber(popup)) {
-			if (popup == 1) {
-				if( event.ctrlKey && event.keyCode == 87) {
-					alert ('is aktiv');
 				}
 			}
 			
@@ -529,27 +516,39 @@ function Help_show (elem, level)
 		this.attr = 'for';
 		this.level = level;
 		
-		// IE cannot handle getAttribute('for') correctly
-		if (Helper.unsupportsElems('safari')) {
+		// IE fails on func getAttribute() with argument 'for'
+		if (Helper.unsupportsElems('safari_exception')) {
 			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
 		} else {
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
 		}
-		//this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
 		switch (this.level) {
 			case '2' :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					// IE fails on func getAttribute() with argument 'id', because it conflicts with 
+					// universal ID (used in edit files for hidden input)
+					if (Helper.unsupportsElems('safari_exception')) {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
+					} else {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					}
 					this.elem.className = this.helpClassRemoveLevelTwo;
 				break;
 			case '3' :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					if (Helper.unsupportsElems('safari_exception')) {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
+					} else {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					}
 					this.elem.className = this.helpClassRemoveLevelThree;
 				break;
 			default :
-					this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
+					if (Helper.unsupportsElems('safari_exception')) {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
+					} else {
+						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+					}
 					this.elem.className = this.helpClassRemove;
-					alert ('default: ' + this.formId);
 		}
 	 
 		this.ttarget = this.processId;
@@ -602,7 +601,7 @@ function Help_hide (elem, level)
 		this.level = level;
 	
 		// IE cannot handle getAttribute('for') correctly
-		if (Helper.unsupportsElems('safari')) {
+		if (Helper.unsupportsElems('safari_exception')) {
 			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
 		} else {
 			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
@@ -622,7 +621,7 @@ function Help_hide (elem, level)
 		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide(this.processIdAfter);
 		} else {
-			Effect.Fade(this.processIdAfter,{duration: 0.7});
+			Effect.Fade(this.processIdAfter,{duration: 0.4});
 		}
 		Element.update(this.elem, this.helpHtmlShow);
 		
@@ -653,7 +652,7 @@ function Help_processHelp (ttarget)
 					Element.show(ttarget_after);
 				} else {
 					Element.hide(ttarget_after);
-					Effect.Appear(ttarget_after,{duration: 0.7});
+					Effect.Appear(ttarget_after,{duration: 0.8});
 				}
 			} else {
 	  			throw new DevError(_req.statusText);

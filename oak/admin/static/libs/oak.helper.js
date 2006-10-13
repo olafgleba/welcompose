@@ -349,8 +349,14 @@ function Helper_showNextNode(elem)
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
-			var nextNode = sourceNode.nextSibling.nextSibling;
-			nextNode = nextNode.getAttribute('id');
+			// IE fails on func getAttribute() with argument 'id'
+			if (Helper.unsupportsElems('safari_exception')) {
+				var nextNode = sourceNode.nextSibling;
+				nextNode = nextNode.attributes['id'].value;
+			} else {
+				var nextNode = sourceNode.nextSibling.nextSibling;
+				nextNode = nextNode.getAttribute('id');
+			}
 		}
 
 		var url = this.parsePagesLinksUrl;
@@ -400,7 +406,8 @@ function _showResponsePagesSecondLinks(req)
 			Effect.Appear('secondNode',{duration: 0.6});
 		}
 		$('secondNode').innerHTML = req.responseText;		
-		Behaviour.apply($('modalContainer'));
+		Behaviour.reapply('.act_setInternalLink');
+		Behaviour.reapply('.showNextNode');
 		
 	} catch (e) {
 		_applyError(e);
@@ -426,7 +433,8 @@ function _showResponsePagesThirdLinks(req)
 			Effect.Appear('thirdNode',{duration: 0.6});
 		}	
 		$('thirdNode').innerHTML = req.responseText;		
-		Behaviour.apply($('modalContainer'));
+		Behaviour.reapply('.act_setInternalLink');
+		Behaviour.reapply('.showNextNode');
 		
 	} catch (e) {
 		_applyError(e);
@@ -518,26 +526,6 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 		_applyError(e);
 	}
 }
-
-/**
- * Implements method of prototype class Helper
- * Insert internal link string
- * @requires Helper The Helper Class
- */
-function Helper_getDelimiterValue()
-{
-	try {
-		// make global for further use in func Helper.launchPopup()
-		if ($('global_template_change_delimiter')) {
-			val = $F('global_template_change_delimiter');
-		} else {
-			val = '';
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
 
 /**
  * Insert Content into Textareas from Popup
@@ -653,6 +641,24 @@ function _insertTags(id, tagOpen, tagClose, sampleText)
 	}
 }
 
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_getDelimiterValue()
+{
+	try {
+		// make global for further use in func Helper.launchPopup()
+		if ($('global_template_change_delimiter')) {
+			val = $F('global_template_change_delimiter');
+		} else {
+			val = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Helper
@@ -691,13 +697,6 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		if (Helper.unsupportsElems()) {
-			// safari fails on whitespaces
-			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling;
-		} else {
-			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-		}	
-		//alert (commentId);
 		commentId = String(commentId.firstChild);
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");
 

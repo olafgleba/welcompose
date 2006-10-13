@@ -1,4 +1,4 @@
-<tbody>
+<table>
 <tr>
 <td>{i18n Yearly Archives}</td>
 <td class="nextNode"><a class="showNextNode" id="{$page_id|escape:"htmlall"}" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
@@ -11,5 +11,5 @@
 <td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page_id={$page_id} action=Item posting_id={$_blog_posting.id}{literal}}{/literal}" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:25:"...":true|escape:"htmlall"}</a></td>
 <td>&nbsp;</td>
 </tr>
-</tbody>
 {/foreach}
+</table>
