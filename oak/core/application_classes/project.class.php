@@ -88,7 +88,19 @@ public function instance()
  */
 public function addProject ($sqlData)
 {
-	return false;
+	/*
+	// access check
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Application_ProjectException("You are not allowed to perform this action");
+	}
+	*/
+	// input check
+	if (!is_array($sqlData)) {
+		throw new Application_ProjectException('Input for parameter sqlData is not an array');	
+	}
+	
+	// insert row
+	return $this->base->db->insert(OAK_DB_APPLICATION_PROJECTS, $sqlData);
 }
 
 /**
@@ -162,7 +174,6 @@ public function selectProject ($id)
  * <ul>
  * <li>owner, int, optional: Project owner id</li>
  * <li>name, string, optional: Project name</li>
- * <li>user, int, optional: User id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * <li>order_marco, string, otpional: How to sort the result set.
@@ -236,22 +247,25 @@ public function selectProjects ($params = array())
 		  ON
 			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE 
-			1
+			`user_users2application_projects`.`user` = :user
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => OAK_CURRENT_USER
+	);
 	
 	// prepare where clauses
 	if (!empty($owner) && is_numeric($owner)) {
 		$sql .= " AND `application_projects`.`owner` = :owner ";
 		$bind_params['owner'] = (int)$owner;
 	}
-	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `user_users2application_projects`.`user` = :user ";
-		$bind_params['user'] = (int)$user;
-	}
 	if (!empty($name) && is_scalar($name)) {
 		$sql .= " AND `application_projects`.`name` = :name ";
 		$bind_params['name'] = (int)$name;
 	}
+	
+	$sql .= " GROUP BY `application_projects`.`id` ";
 	
 	// add sorting
 	if (!empty($order_macro)) {
@@ -455,6 +469,66 @@ public function projectExists ($id)
 }
 
 /**
+ * Tests given project name for uniqueness. Takes the project name as
+ * first argument and an optional project id as second argument. If
+ * the project id is given, this project won't be considered when checking
+ * for uniqueness (useful for updates). Returns boolean true if project
+ * name is unique.
+ *
+ * @throws Application_ProjectException
+ * @param string Project name
+ * @param int Project id
+ * @return bool
+ */
+public function testForUniqueName ($name, $id = null)
+{
+	/*
+	// access check
+	if (!oak_check_access('Application', 'Project', 'Use')) {
+		throw new Application_ProjectException("You are not allowed to perform this action");
+	}
+	*/
+	// input check
+	if (empty($name)) {
+		throw new Application_ProjectException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Application_ProjectException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Application_ProjectException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_USER_GROUPS." AS `application_projects`
+		WHERE
+			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
  * Makes sure that a user session is always attached to a project. Returns
  * id of the current project.
  *
@@ -557,14 +631,44 @@ public function switchProject ($new_project)
 	return false;
 }
 
+/**
+ * Initializes project using the provided skeleton definition.
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_Project
+ * @param int Project id
+ * @return bool
+ */
 public function initFromSkeleton ($project)
 {
-	echo '<pre>';
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// init project
 	$this->syncRightsWithSkeleton($project);
+	$this->syncGroupsWithSkeleton($project);
 	$this->syncLinksBetweenGroupsAndRightsWithSkeleton($project);
-	echo '</pre>';
+	$this->syncUsersWithSkeleton($project);
+	$this->syncLinksBetweenUsersAndProjectsWithSkeleton($project);
+	$this->syncLinksBetweenUsersAndGroupsWithSkeleton($project);
+	$this->syncPageTypesWithSkeleton($project);
+	$this->syncTemplateTypesWithSkeleton($project);
+	$this->syncTextMacrosWithSkeleton($project);
+	$this->syncTextConvertersWithSkeleton($project);
+
+	return true;
 }
 
+/**
+ * Loads skeleton from xml file and stores result in self::_skeleton. If
+ * the skeleton was already loaded once, the function will return the cached
+ * result.
+ *
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function loadSkeleton ()
 {
 	// create simplexml object from project skeleton if there's none
@@ -581,6 +685,12 @@ protected function loadSkeleton ()
 	return $this->_skeleton;
 }
 
+/**
+ * Returns array of rights configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function getRightsFromSkeleton ()
 {
 	// get skeleton
@@ -608,6 +718,12 @@ protected function getRightsFromSkeleton ()
 	return $rights;
 }
 
+/**
+ * Returns array of groups configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function getGroupsFromSkeleton ()
 {
 	// get skeleton
@@ -628,7 +744,12 @@ protected function getGroupsFromSkeleton ()
 	return $groups;
 }
 
-
+/**
+ * Returns array of users configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function getUsersFromSkeleton ()
 {
 	// get skeleton
@@ -649,6 +770,8 @@ protected function getUsersFromSkeleton ()
 			'email' => utf8_decode($user->email),
 			'secret' => utf8_decode($user->secret),
 			'editable' => utf8_decode($user->editable),
+			'active' => utf8_decode($user->active),
+			'author' => utf8_decode($user->author),
 			'groups' => $groups
 		);
 	}
@@ -656,6 +779,12 @@ protected function getUsersFromSkeleton ()
 	return $users;
 }
 
+/**
+ * Returns array of page types configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function getPageTypesFromSkeleton ()
 {
 	// get skeleton
@@ -676,6 +805,12 @@ protected function getPageTypesFromSkeleton ()
 	return $page_types;
 }
 
+/**
+ * Returns array of template types configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
 protected function getTemplateTypesFromSkeleton ()
 {
 	// get skeleton
@@ -694,6 +829,57 @@ protected function getTemplateTypesFromSkeleton ()
 	}
 	
 	return $template_types;
+}
+
+/**
+ * Returns array of text macros configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
+protected function getTextMacrosFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect text macros
+	$text_macros = array();
+	$result = $skeleton->xpath("/skeleton/text-macros/text-macro");
+	while (list(, $text_macro) = each($result)) {
+		// append text macro to list of text macros
+		$text_macros[] = array(
+			'name' => utf8_decode($text_macro->name),
+			'internal_name' => utf8_decode($text_macro->internal_name),
+			'type' => utf8_decode($text_macro->type)
+		);
+	}
+	
+	return $text_macros;
+}
+
+/**
+ * Returns array of text converters configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
+protected function getTextConvertersFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect text converters
+	$text_converters = array();
+	$result = $skeleton->xpath("/skeleton/text-converters/text-converter");
+	while (list(, $text_converter) = each($result)) {
+		// append text converter to list of text converters
+		$text_converters[] = array(
+			'name' => utf8_decode($text_converter->name),
+			'internal_name' => utf8_decode($text_converter->internal_name)
+		);
+	}
+	
+	return $text_converters;
 }
 
 /**
@@ -791,7 +977,7 @@ protected function syncRightsWithSkeleton ($project)
 					// prepare sql data
 					$sqlData = array(
 						'description' => $_right['description'],
-						'editable' => (int)$_right['editable']
+						'editable' => (string)intval($_right['editable'])
 					);
 					
 					// prepare where clause
@@ -819,7 +1005,7 @@ protected function syncRightsWithSkeleton ($project)
 				'project' => (int)$project,
 				'name' => $_right['name'],
 				'description' => $_right['description'],
-				'editable' => (int)$_right['editable']
+				'editable' => (string)intval($_right['editable'])
 			);
 			
 			// insert right
@@ -950,7 +1136,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 		}
 	}
 	
-	return bool;
+	return true;
 }
 
 /**
@@ -980,7 +1166,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 	if (empty($project) || !is_numeric($project)) {
 		throw new Application_ProjectException("Input for parameter project is not numeric");
 	}
-	if (!is_bool($drop_obselete)) {
+	if (!is_bool($drop_obsolete)) {
 		throw new Application_ProjectException("Input for parameter drop_obsolete is exptected to be bool");
 	}
 	
@@ -1062,7 +1248,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 					// prepare sql data
 					$sqlData = array(
 						'description' => $_group['description'],
-						'editable' => (int)$_group['editable']
+						'editable' => (string)intval($_group['editable'])
 					);
 					
 					// prepare where clause
@@ -1090,7 +1276,8 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 				'project' => (int)$project,
 				'name' => $_group['name'],
 				'description' => $_group['description'],
-				'editable' => (int)$_group['editable']
+				'editable' => (string)intval($_group['editable']),
+				'date_added' => date('Y-m-d H:i:s')
 			);
 			
 			// insert group
@@ -1177,7 +1364,7 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 					// prepare sql data
 					$sqlData = array(
 						'secret' => $_user['secret'],
-						'editable' => (int)$_user['editable']
+						'editable' => (string)intval($_user['editable'])
 					);
 					
 					// prepare where clause
@@ -1203,12 +1390,12 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 			$sqlData = array(
 				'email' => $_user['email'],
 				'secret' => $_user['secret'],
-				'editable' => (int)$_user['editable'],
+				'editable' => (string)intval($_user['editable']),
 				'date_added' => date('Y-m-d H:i:s')
 			);
 			
 			// insert user
-			$this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+			$this->base->db->insert(OAK_DB_USER_USERS, $sqlData);
 		}
 	}
 	
@@ -1287,24 +1474,19 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
-			`user_users2application_projects`.`user` = :project
+			1
 	";
 	
 	// add IN clause to reduce result set size
 	$sql .= " AND ".$HELPER->_sqlInFromArray('`email`', $email_addresses);
 	
-	// prepare bind params
-	$bind_params = array(
-		'project' => (int)$project
-	);
-	
 	// get users from database
-	$database_users = $this->base->db->select($sql, 'multi', $bind_params);
+	$database_users = $this->base->db->select($sql, 'multi', array());
 	
 	foreach ($skeleton_users as $_user) {
 		foreach ($database_users as $_db_user) {
 			if ($_user['email'] == $_db_user['email']) {
-				$current_user = $_user['id'];
+				$current_user = $_db_user['id'];
 			}
 		}
 		
@@ -1338,11 +1520,11 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		$sqlData = array(
 			'user' => $current_user,
 			'project' => $project,
-			'active' => (int)$_user['active'],
-			'author' => (int)$_user['author']
+			'active' => (string)intval($_user['active']),
+			'author' => (string)intval($_user['author'])
 		);
 		
-		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS);
+		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 	}
 	
 	return true;
@@ -1401,7 +1583,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
-			`user_users2application_projects`.`user` = :project
+			`user_users2application_projects`.`project` = :project
 	";
 	
 	// prepare bind params
@@ -1420,7 +1602,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 	foreach ($skeleton_users as $_user) {
 		// search for user in the list of database users to get its id
 		foreach ($database_users as $_db_user) {
-			if ($_db_user['name']== $_user['name']) {
+			if ($_db_user['email']== $_user['email']) {
 				$current_user = (int)$_db_user['id'];
 			}
 		}
@@ -1435,14 +1617,23 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		// groups
 		$sql = "
 			DELETE FROM
-				".OAK_DB_USER_USERS2USER_GROUPS."
+				".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			USING
+				`user_users2user_groups`
+			JOIN
+				".OAK_DB_USER_GROUPS." AS `user_groups`
+			  ON
+				`user_users2user_groups`.`group` = `user_groups`.`id`
 			WHERE
-				`user` = :user
+				`user_users2user_groups`.`user` = :user
+			  AND
+				`user_groups`.`project` = :project
 		";
 		
 		// prepare bind params
 		$bind_params = array(
-			'user' => (int)$current_user
+			'user' => (int)$current_user,
+			'project' => (int)$project
 		);
 		
 		// drop rows
@@ -1460,24 +1651,541 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 					);
 					
 					// create new link
-					$this->base->db->insert(OAK_DB_USER_GROUPS2USER_USERS,
+					$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
 						$sqlData);
 				}
 			}
 		}
 	}
 	
-	return bool;
+	return true;
 }
 
-protected function syncPageTypesWithSkeleton ()
+/**
+ * Synchronises page types in database with the list of page types
+ * deposited in the skeleton. Page types in the database that are not
+ * in the skeleton anymore will be removed, differences in descriptions
+ * etc. will be synchronised and new page types in the skeleton will be
+ * added.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncPageTypesWithSkeleton ($project)
 {
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
 	
+	// get page types from skeleton
+	$skeleton_page_types = $this->getPageTypesFromSkeleton();
+	
+	// prepare query to get page types from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`internal_name`,
+			`editable`
+		FROM
+			".OAK_DB_CONTENT_PAGE_TYPES."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get rights from database
+	$database_page_types = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete page tpyes from database
+	foreach ($database_page_types as $_page_type) {
+		// compare list of page types in skeleton and database. database page types
+		// that are not found in the list of skeleton page types have to be dropped.
+		$drop = true;
+		foreach ($skeleton_page_types as $_skel_page_type) {
+			if ($_page_type['name'] == $_skel_page_type['name']) {
+				$drop = false;
+			}
+		}
+		
+		// if the drop bit is true, we have to remove the database page type
+		if ($drop === true) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_right['id']
+			);
+			
+			// drop right
+			$this->base->db->delete(OAK_DB_CONTENT_PAGE_TYPES, $where, $bind_params);
+		}
+	}
+	
+	// now we have to add missing page types to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_page_types as $_page_type) {
+		// compare list of page types in skeleton and database. skeleton page types that
+		// are not found in the list of database page types have to be added. page types
+		// that exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_page_types as $_db_page_type) {
+			if ($_page_type['name'] == $_db_page_type['name']) {
+				// look at internal name/editable bit and update them if
+				// necessessary
+				$update = false;
+				
+				if ($_page_type['internal_name'] != $_db_page_type['internal_name']) {
+					$update = true;
+				} elseif ((int)$_page_type['editable'] != (int)$_db_page_type['editable']) {
+					$update = true;
+				}
+				
+				// update page_types if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'internal_name' => $_page_type['internal_name'],
+						'editable' => (string)intval($_page_type['editable'])
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_page_type['id']
+					);
+					
+					// update page_type
+					$this->base->db->update(OAK_DB_CONTENT_PAGE_TYPES, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the page_type into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_page_type['name'],
+				'internal_name' => $_page_type['internal_name'],
+				'editable' => (string)intval($_page_type['editable'])
+			);
+			
+			// insert page_type
+			$this->base->db->insert(OAK_DB_CONTENT_PAGE_TYPES, $sqlData);
+		}
+	}
+	
+	return true;
 }
 
-protected function syncTemplateTypesWithSkeleton ()
+/**
+ * Synchronises template types in database with the list of template types
+ * deposited in the skeleton. Template types in the database that are not
+ * in the skeleton anymore will be removed, differences in descriptions
+ * etc. will be synchronised and new template types in the skeleton will be
+ * added.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncTemplateTypesWithSkeleton ($project)
 {
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
 	
+	// get template types from skeleton
+	$skeleton_template_types = $this->getTemplateTypesFromSkeleton();
+	
+	// prepare query to get template types from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`description`,
+			`editable`
+		FROM
+			".OAK_DB_TEMPLATING_TEMPLATE_TYPES."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get template_types from database
+	$database_template_types = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete template tpyes from database
+	foreach ($database_template_types as $_template_type) {
+		// compare list of template types in skeleton and database. database template types
+		// that are not found in the list of skeleton template types have to be dropped.
+		$drop = true;
+		foreach ($skeleton_template_types as $_skel_template_type) {
+			if ($_template_type['name'] == $_skel_template_type['name']) {
+				$drop = false;
+			}
+		}
+		
+		// if the drop bit is true, we have to remove the database template type
+		if ($drop === true) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_template_type['id']
+			);
+			
+			// drop template_type
+			$this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $where, $bind_params);
+		}
+	}
+	
+	// now we have to add missing template types to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_template_types as $_template_type) {
+		// compare list of template types in skeleton and database. skeleton template types that
+		// are not found in the list of database template types have to be added. template types
+		// that exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_template_types as $_db_template_type) {
+			if ($_template_type['name'] == $_db_template_type['name']) {
+				// look at internal name/editable bit and update them if
+				// necessessary
+				$update = false;
+				
+				if ($_template_type['description'] != $_db_template_type['description']) {
+					$update = true;
+				} elseif ((int)$_template_type['editable'] != (int)$_db_template_type['editable']) {
+					$update = true;
+				}
+				
+				// update template_types if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'description' => $_template_type['description'],
+						'editable' => (string)intval($_template_type['editable'])
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_template_type['id']
+					);
+					
+					// update template_type
+					$this->base->db->update(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the template_type into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_template_type['name'],
+				'description' => $_template_type['description'],
+				'editable' => (string)intval($_template_type['editable'])
+			);
+			
+			// insert template_type
+			$this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Synchronises text macros in database with the list of text macros
+ * deposited in the skeleton. Text macros in the database that are not
+ * in the skeleton anymore will be removed, differences in internal_names
+ * etc. will be synchronised and new text macros in the skeleton will be
+ * added.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncTextMacrosWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// get text macros from skeleton
+	$skeleton_text_macros = $this->getTextMacrosFromSkeleton();
+	
+	// prepare query to get text macros from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`internal_name`,
+			`type`
+		FROM
+			".OAK_DB_APPLICATION_TEXT_MACROS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get text_macros from database
+	$database_text_macros = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete text tpyes from database
+	foreach ($database_text_macros as $_text_macro) {
+		// compare list of text macros in skeleton and database. database text macros
+		// that are not found in the list of skeleton text macros have to be dropped.
+		$drop = true;
+		foreach ($skeleton_text_macros as $_skel_text_macro) {
+			if ($_text_macro['internal_name'] == $_skel_text_macro['internal_name']) {
+				$drop = false;
+			}
+		}
+		
+		// if the drop bit is true, we have to remove the database text macro
+		if ($drop === true) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_text_macro['id']
+			);
+			
+			// drop text_macro
+			$this->base->db->delete(OAK_DB_APPLICATION_TEXT_MACROS, $where, $bind_params);
+		}
+	}
+	
+	// now we have to add missing text macros to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_text_macros as $_text_macro) {
+		// compare list of text macros in skeleton and database. skeleton text macros that
+		// are not found in the list of database text macros have to be added. text macros
+		// that exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_text_macros as $_db_text_macro) {
+			if ($_text_macro['internal_name'] == $_db_text_macro['internal_name']) {
+				// look at name update it if necessessary
+				$update = false;
+				
+				if ($_text_macro['name'] != $_db_text_macro['name']) {
+					$update = true;
+				}
+				
+				// update text macros if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'name' => $_text_macro['name'],
+						'type' => (int)$_text_macro['type']
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_text_macro['id']
+					);
+					
+					// update text_macro
+					$this->base->db->update(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the text_macro into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_text_macro['name'],
+				'internal_name' => $_text_macro['internal_name'],
+				'type' => $_text_macro['type']
+			);
+			
+			// insert text_macro
+			$this->base->db->insert(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Synchronises text converters in database with the list of text converters
+ * deposited in the skeleton. Text converters in the database that are not
+ * in the skeleton anymore will be removed, differences in internal_names
+ * etc. will be synchronised and new text converters in the skeleton will be
+ * added.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncTextConvertersWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// get text converters from skeleton
+	$skeleton_text_converters = $this->getTextConvertersFromSkeleton();
+	
+	// prepare query to get text converters from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`,
+			`internal_name`
+		FROM
+			".OAK_DB_APPLICATION_TEXT_CONVERTERS."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get text_converters from database
+	$database_text_converters = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// on the next few lines we're going to drop obsolete text tpyes from database
+	foreach ($database_text_converters as $_text_converter) {
+		// compare list of text converters in skeleton and database. database text converters
+		// that are not found in the list of skeleton text converters have to be dropped.
+		$drop = true;
+		foreach ($skeleton_text_converters as $_skel_text_converter) {
+			if ($_text_converter['internal_name'] == $_skel_text_converter['internal_name']) {
+				$drop = false;
+			}
+		}
+		
+		// if the drop bit is true, we have to remove the database text converter
+		if ($drop === true) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_text_converter['id']
+			);
+			
+			// drop text_converter
+			$this->base->db->delete(OAK_DB_APPLICATION_TEXT_CONVERTERS, $where, $bind_params);
+		}
+	}
+	
+	// now we have to add missing text converters to the database and to sync differences
+	// between skeleton and database
+	foreach ($skeleton_text_converters as $_text_converter) {
+		// compare list of text converters in skeleton and database. skeleton text converters that
+		// are not found in the list of database text converters have to be added. text converters
+		// that exist have to be checked for differences and updated.
+		$add = true;
+		foreach ($database_text_converters as $_db_text_converter) {
+			if ($_text_converter['internal_name'] == $_db_text_converter['internal_name']) {
+				// look at name and update it if necessessary
+				$update = false;
+				
+				if ($_text_converter['name'] != $_db_text_converter['name']) {
+					$update = true;
+				}
+				
+				// update text converters if necessary
+				if ($update === true) {
+					// prepare sql data
+					$sqlData = array(
+						'name' => $_text_converter['name']
+					);
+					
+					// prepare where clause
+					$where = " WHERE `id` = :id AND `project` = :project ";
+					
+					// prepare bind params
+					$bind_params = array(
+						'project' => $project,
+						'id' => (int)$_db_text_converter['id']
+					);
+					
+					// update text_converter
+					$this->base->db->update(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData, $where, $bind_params);
+				}
+				
+				// set add bit to false
+				$add = false;
+			}
+		}
+		
+		// if the add bit is still true, we have to insert the text_converter into the database
+		if ($add === true) {
+			// prepare insert data
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_text_converter['name'],
+				'internal_name' => $_text_converter['internal_name']
+			);
+			
+			// insert text_converter
+			$this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+		}
+	}
+	
+	return true;
 }
 
 // end of class

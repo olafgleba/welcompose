@@ -2,9 +2,21 @@
 <skeleton>
 	<users>
 		<user>
+			<email>default@oak.local</email>
+			<secret>aaQSqAReePlq6</secret>
+			<editable>1</editable>
+			<active>1</active>
+			<author>1</author>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</user>
+		<user>
 			<email>OAK_ANONYMOUS</email>
 			<secret/>
 			<editable>0</editable>
+			<active>1</active>
+			<author>0</author>
 			<groups>
 				<name>OAK_ANONYMOUS</name>
 			</groups>
@@ -434,6 +446,22 @@
 	<page-types>
 		<page-type>
 			<name>OAK_BLOG</name>
+			<internal_name>Blog</internal_name>
+			<editable>0</editable>
+		</page-type>
+		<page-type>
+			<name>OAK_SIMPLE_PAGE</name>
+			<internal_name>SimplePage</internal_name>
+			<editable>0</editable>
+		</page-type>
+		<page-type>
+			<name>OAK_SIMPLE_FORM</name>
+			<internal_name>SimpleForm</internal_name>
+			<editable>0</editable>
+		</page-type>
+		<page-type>
+			<name>OAK_URL</name>
+			<internal_name>Url</internal_name>
 			<editable>0</editable>
 		</page-type>
 	</page-types>
@@ -449,7 +477,26 @@
 			<editable>0</editable>
 		</template-type>
 	</template-types>
-	<text-macros/>
-	<text-converters/>
-	<anti-spam-plugins/>
+	<text-converters>
+		<text-converter>
+			<name>Markdown</name>
+			<internal_name>markdown</internal_name>
+		</text-converter>
+		<text-converter>
+			<name>Textile</name>
+			<internal_name>textile</internal_name>
+		</text-converter>
+	</text-converters>
+	<text-macros>
+		<text-macro>
+			<name>Bundled Media URL Generator</name>
+			<internal_name>get_media</internal_name>
+			<type>pre</type>
+		</text-macro>
+		<text-macro>
+			<name>Bundled URL Generator</name>
+			<internal_name>get_url</internal_name>
+			<type>pre</type>
+		</text-macro>
+	</text-macros>
 </skeleton>
