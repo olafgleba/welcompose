@@ -187,6 +187,9 @@ define("OAK_REGEX_FLICKR_NSID", "=^([a-z0-9\@]+)$=i");
 // Defines regular expression for flickr URLs
 define("OAK_REGEX_FLICKR_URL", "=^http\:\/\/www.flickr.com(/\S*)?$=i");
 
+// Defines regular expression for flickr screennames
+define("OAK_REGEX_FLICKR_SCREENNAME", "=^([a-z0-9\s]+)$=i");
+
 // Defines regular expression for strings containing a date
 // in datetime format
 define("OAK_REGEX_DATETIME", "=^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}$=i");

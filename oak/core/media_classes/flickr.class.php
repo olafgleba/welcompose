@@ -130,7 +130,7 @@ public function instance()
 public function peopleFindByUsername ($username)
 {
 	// input check
-	if (empty($username) || !preg_match(OAK_REGEX_ALPHANUMERIC, $username)) {
+	if (empty($username) || !preg_match(OAK_REGEX_FLICKR_SCREENNAME, $username)) {
 		throw new Media_FlickrException("Invalid username supplied");
 	}
 	
@@ -161,7 +161,7 @@ public function peopleFindByUsername ($username)
 	
 	// get nsid and username from response
 	$user_id = Base_Cnc::filterRequest(trim((string)$sx['nsid']), OAK_REGEX_FLICKR_NSID);
-	$username = Base_Cnc::filterRequest(trim((string)$sx->username), OAK_REGEX_ALPHANUMERIC);
+	$username = Base_Cnc::filterRequest(trim((string)$sx->username), OAK_REGEX_FLICKR_SCREENNAME);
 	
 	// pack and return array
 	return array(
@@ -508,7 +508,7 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 	$id = Base_Cnc::filterRequest(trim((string)$sx['id']), OAK_REGEX_NUMERIC);
 	$primary = Base_Cnc::filterRequest(trim((string)$sx['primary']), OAK_REGEX_NUMERIC);
 	$owner = Base_Cnc::filterRequest(trim((string)$sx['owner']), OAK_REGEX_FLICKR_NSID);
-	$ownername = Base_Cnc::filterRequest(trim((string)$sx['ownername']), OAK_REGEX_ALPHANUMERIC);
+	$ownername = Base_Cnc::filterRequest(trim((string)$sx['ownername']), OAK_REGEX_FLICKR_SCREENNAME);
 	$page = Base_Cnc::filterRequest(trim((string)$sx['page']), OAK_REGEX_NUMERIC);
 	$per_page = Base_Cnc::filterRequest(trim((string)$sx['per_page']), OAK_REGEX_NUMERIC);
 	$pages = Base_Cnc::filterRequest(trim((string)$sx['pages']), OAK_REGEX_NUMERIC);

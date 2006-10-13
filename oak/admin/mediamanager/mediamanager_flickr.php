@@ -83,25 +83,50 @@ try {
 	}
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
-
-	$user_params = $FLICKR->peopleFindByUsername($_REQUEST['mm_user']);
 	
-	$photosets_params = $FLICKR->photosetsGetList($user_params['user_id']);
+	// import request params
+	$request = array(
+		'mm_user' => Base_Cnc::filterRequest($_REQUEST['mm_user'], OAK_REGEX_FLICKR_SCREENNAME),
+		'mm_photoset' => Base_Cnc::filterRequest($_REQUEST['mm_photoset'], OAK_REGEX_NUMERIC),
+		'mm_flickrtags' => trim(strip_tags(Base_Cnc::ifsetor($_REQUEST['mm_flickrtags'], null))),
+		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC)
+	);
 	
-	$BASE->utility->smarty->assign('photosets', $FLICKR->photosetsGetList($user_params['user_id']));
-
-	// prepare select params
-       $request = array(
-               'user' => $_REQUEST['mm_user'],
-               'photoset' => $_REQUEST['mm_photoset'],
-               'flickrtags' => $_REQUEST['mm_flickrtags']
-       );
-
-    $BASE->utility->smarty->assign('request', $request);
+	// find flickr user using it's name
+	$user = array();
+	if (!is_null($request['mm_user'])) {
+		$user = $FLICKR->peopleFindByUsername($request['mm_user']);
+	}
+	$BASE->utility->smarty->assign('user', $user);
 	
-	$BASE->utility->smarty->assign('pagetype', Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC));
+	// get user's photosets
+	$photosets = array();
+	if (is_array($user) && !empty($user['user_id'])) {
+		$photosets = $FLICKR->photosetsGetList($user['user_id']);
+	}
+	$BASE->utility->smarty->assign('photosets', $photosets);
 	
-	// display the correlated mediamanager template
+	// get user's photos using the photoset or the supplied tags
+	$photos = array();
+	if (!is_null($request['mm_photoset'])) {
+		$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 4);
+	} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
+		// prepare search params
+		$params = array(
+			'tags' => $request['mm_flickrtags'],
+			'per_page' => 4
+		);
+		
+		// look for photos matching the supplied criteria
+		$photos = $FLICKR->photosSearch($params);
+	}
+	$BASE->utility->smarty->assign('photos', $photos);
+		
+	// assign request params
+	$BASE->utility->smarty->assign('request', $request);
+	$BASE->utility->smarty->assign('pagetype', $request['mm_pagetype']);
+	
+	// display the template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');
 		
 	// flush the buffer
