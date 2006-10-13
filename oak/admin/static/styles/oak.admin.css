@@ -543,12 +543,18 @@ width: 260px;
 label span.req {
 color: #f00;
 }
-input.w130, input.w200, input.w300, input.w540, input.w580 {
+input.w130, input.w150, input.w200, input.w300, input.w540, input.w580 {
 width: 130px;
 border: 1px solid #666;
 padding: 2px 2px;
 color: #000;
 background: #fff;
+}
+input.w130 {
+width: 130px;
+}
+input.w150 {
+width: 150px;
 }
 input.w200 {
 width: 200px;
@@ -611,6 +617,17 @@ td input.submit140, td input.submit200, td select {
 font-size: 100%;
 }
 /* eof Reset for inner table definition */
+input.submit90 {
+text-align: left;
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+color: #fff;
+width: 90px;
+height: 20px;
+font-size: 80%;
+border: 0 none;
+padding: 0 0 0 5px;
+cursor: pointer;
+}
 input.submit140 {
 text-align: left;
 background: #0c3 url(../img/submit140.gif) no-repeat;
@@ -663,6 +680,17 @@ padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
 cursor: pointer;
 }
+input#submitFlickrFindByUsername {
+text-align: left;
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+color: #fff;
+width: 50px;
+height: 20px;
+font-size: 80%;
+border: 0 none;
+padding: 0 0 0 5px;
+cursor: pointer;
+}
 
 /* %M =search */
 #projects {
@@ -677,17 +705,6 @@ margin: 1px 5px 0 0;
 padding: 0;
 font-size: 80%;
 border: 1px solid #666666;
-}
-input.submit90 {
-text-align: left;
-background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
-color: #fff;
-width: 90px;
-height: 20px;
-font-size: 80%;
-border: 0 none;
-padding: 0 0 0 5px;
-cursor: pointer;
 }
 
 /* %M =breadcrumb */

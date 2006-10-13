@@ -437,6 +437,7 @@ function OakInit_processOakInit (ttarget)
 				Behaviour.reapply('#mm_user');
 				Behaviour.reapply('#mm_photoset');
 				Behaviour.reapply('#mm_flickrtags');
+				Behaviour.reapply('#submitFlickrFindByUsername');
 				Behaviour.reapply('.showMediamanagerElement');
 				Behaviour.reapply('.hideMediamanagerElement');
 				Behaviour.reapply('.iHelpMediamanager');
@@ -1081,8 +1082,13 @@ Tables.prototype.collapseTableRow = Tables_collapseTableRow;
 		// properties
 		this.elem = elem;
 		
-		// process outer table tr
-		$(this.elem).style.visibility = 'collapse';
+		// process inner div
+		if (Helper.unsupportsEffects('safari_exception')) {
+			return false;
+		} else {
+			// process outer table tr
+			$(this.elem).style.visibility = 'collapse';
+		}
 	} catch (e) {
 		_applyError(e);
 	}

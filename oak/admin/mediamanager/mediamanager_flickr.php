@@ -83,6 +83,29 @@ try {
 	}
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+
+
+	//$BASE->utility->smarty->assign('user', $FLICKR->peopleFindByUsername($_REQUEST['mm_user']));
+	
+	$user_params = $FLICKR->peopleFindByUsername($_REQUEST['mm_user']);
+	
+	$photosets_params = $FLICKR->photosetsGetList($user_params['user_id']);
+	
+	print_r ($photosets_params);
+	exit;
+	
+	//	$BASE->utility->smarty->assign('photosets', $FLICKR->photosetsGetList($user_params['user_id']));
+
+	// prepare select params
+       $request = array(
+               'user' => $_REQUEST['mm_user'],
+               'photoset' => $_REQUEST['mm_photoset'],
+               'flickrtags' => $_REQUEST['mm_flickrtags']
+       );
+
+    $BASE->utility->smarty->assign('request', $request);
+	
+	$BASE->utility->smarty->assign('pagetype', Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC));
 	
 	// display the correlated mediamanager template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');

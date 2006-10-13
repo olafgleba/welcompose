@@ -81,6 +81,8 @@ Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
 Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
 Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
 
+Mediamanager.prototype.intializeUserMyFlickr = Mediamanager_intializeUserMyFlickr;
+
 /**
  * Implements method of prototype class Mediamanager
  * Show Mediamanager Element
@@ -823,10 +825,6 @@ function Mediamanager_discardPodcast (elem)
 	}
 }
 
-
-
-
-
 /**
  * Implements method of prototype class Mediamanager
  * set a delay for firing the ajax search invoke
@@ -879,6 +877,53 @@ function Mediamanager_invokeTagsMyFlickr ()
 
 /**
  * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_intializeUserMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderInitializeUserMyFlickr,
+				parameters : pars,
+				onComplete : _showResponseInvokeTagsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * fires temporary actions while processing the ajax call
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _loaderInitializeUserMyFlickr ()
+{
+	try {
+		$('submitFlickrFindByUsername').style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+
+/**
+ * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
  * @private
@@ -891,6 +936,9 @@ function _showResponseInvokeTagsMyFlickr(req)
 		$('column').innerHTML = req.responseText;
 		Element.show('lyMediamanagerMyFlickr');
 		Element.hide('lyMediamanagerMyLocal');
+		
+		// reset button
+		$('submitFlickrFindByUsername').style.background = '#666 url(../static/img/submit90.gif) no-repeat';
 		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");
@@ -917,6 +965,7 @@ function _showResponseInvokeTagsMyFlickr(req)
 		Behaviour.reapply('#mm_user');
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submitFlickrFindByUsername');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');

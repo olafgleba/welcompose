@@ -232,7 +232,7 @@ var definitions = {
 			return false;
 		}
 		el.onblur = function(){
-			if (this.type != 'reset' && this.type != 'submit') {
+			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button') {
 				Forms.setOnEvent(this, '','#000','solid');
 			}
 			return false;
@@ -328,6 +328,12 @@ var definitions = {
 	'.changeBlogCommentStatus' : function(el){
 		el.onchange = function(){
 			Helper.changeBlogCommentStatus(this);
+			return false;
+		}
+	},
+	'#submitFlickrFindByUsername' : function(el){
+		el.onclick = function(){
+			Mediamanager.intializeUserMyFlickr(this);
 			return false;
 		}
 	},

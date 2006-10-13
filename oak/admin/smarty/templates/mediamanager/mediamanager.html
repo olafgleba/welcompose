@@ -106,7 +106,8 @@ Page <a href="#">1 of 10</a>
 <div class="mmwrap">
 <span class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_user_wrap">
-<input class="w200" type="text" id="mm_user" value="{$request.user|escape:"htmlall"}" />
+<input class="w150" type="text" id="mm_user" value="{$request.user|escape:"htmlall"}" />
+<input type="button" id="submitFlickrFindByUsername" value="{i18n Search}" />
 </span>
 </span>
 </div>
@@ -128,8 +129,8 @@ Page <a href="#">1 of 10</a>
 <span id="mm_photoset_wrap">
 <select id="mm_photoset">
 <option value="">{i18n Please choose...}</option>
-{foreach from=$timeframes key=_timeframe item=_timeframe_name}
-<option value="{$_timeframe}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
+{foreach from=$photosets key=_photosets item=_photosets_name}
+<option value="{$_photosets}"{if $request.photosets == $_photosets} selected="selected"{/if}>{$_photosets_name}</option>
 {/foreach}
 </select>
 </span>
@@ -142,11 +143,12 @@ Page <a href="#">1 of 10</a>
 
 <!-- mediamanager content populate -->
 <div id="myFlickr_mm_contentToPopulate">
+User:{$request.user}
 <table class="mm_content">
-{foreach from=$request key=_item item=_item_val}
+{foreach from=$user key=_user item=_user_name}
 <tr>
-<td class="td_mm_media"><a href="#">{$_item_val}</a></td>
-<td colspan="4">{$_item_val} und {$_item_val}</td>
+<td class="td_mm_media"><a href="#">{$_user_name}</a></td>
+<td colspan="4">{$_user}</td>
 </tr>
 {/foreach}
 </table>
