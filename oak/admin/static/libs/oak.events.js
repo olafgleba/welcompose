@@ -226,6 +226,11 @@ var definitions = {
 			Mediamanager.invokeInputs(this);
 		}
 	},
+	'#mm_photoset' : function(el){
+		el.onchange = function(){
+			Mediamanager.invokeTagsMyFlickr(this);
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
@@ -333,7 +338,7 @@ var definitions = {
 	},
 	'#submitFlickrFindByUsername' : function(el){
 		el.onclick = function(){
-			Mediamanager.intializeUserMyFlickr(this);
+			Mediamanager.initializeUserMyFlickr(this);
 			return false;
 		}
 	},

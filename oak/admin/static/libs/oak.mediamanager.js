@@ -80,8 +80,7 @@ Mediamanager.prototype.initializeTagSearchMyFlickr = Mediamanager_initializeTagS
 Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
 Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
 Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
-
-Mediamanager.prototype.intializeUserMyFlickr = Mediamanager_intializeUserMyFlickr;
+Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
 
 /**
  * Implements method of prototype class Mediamanager
@@ -881,7 +880,7 @@ function Mediamanager_invokeTagsMyFlickr ()
  * 
  * @throws applyError on exception
  */
-function Mediamanager_intializeUserMyFlickr ()
+function Mediamanager_initializeUserMyFlickr ()
 {
 	try {
 		Mediamanager.preserveElementStatusMyFlickr();
@@ -939,6 +938,12 @@ function _showResponseInvokeTagsMyFlickr(req)
 		
 		// reset button
 		$('submitFlickrFindByUsername').style.background = '#666 url(../static/img/submit90.gif) no-repeat';
+		
+		// show option inputs
+		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
+		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
+		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
 		
 		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 		$('mm_tags').setAttribute("autocomplete","off");

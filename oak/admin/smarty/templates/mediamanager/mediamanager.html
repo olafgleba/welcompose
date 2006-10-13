@@ -115,9 +115,14 @@ Page <a href="#">1 of 10</a>
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_flickrtags_wrap">
-<input class="w200" type="text" id="mm_flickrtags" value="{$request.flickrtags|escape:"htmlall"}" />
+<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by Flickr photoset}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_photoset_wrap">
+<select id="mm_photoset">
+<option value="">{i18n Please choose...}</option>
+{foreach from=$photosets item=_photosets}
+<option value="{$_photosets.id}"{if $request.photosets == $_photosets} selected="selected"{/if}>{$_photosets.title|truncate:25:"..."}</option>
+{/foreach}
+</select>
 </span>
 </label>
 </div>
@@ -125,14 +130,9 @@ Page <a href="#">1 of 10</a>
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by Flickr photoset}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_photoset_wrap">
-<select id="mm_photoset">
-<option value="">{i18n Please choose...}</option>
-{foreach from=$photosets key=_photosets item=_photosets_name}
-<option value="{$_photosets}"{if $request.photosets == $_photosets} selected="selected"{/if}>{$_photosets_name}</option>
-{/foreach}
-</select>
+<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_flickrtags_wrap">
+<input class="w200" type="text" id="mm_flickrtags" value="{$request.flickrtags|escape:"htmlall"}" />
 </span>
 </label>
 </div>

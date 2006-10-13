@@ -84,17 +84,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 
-
-	//$BASE->utility->smarty->assign('user', $FLICKR->peopleFindByUsername($_REQUEST['mm_user']));
-	
 	$user_params = $FLICKR->peopleFindByUsername($_REQUEST['mm_user']);
 	
 	$photosets_params = $FLICKR->photosetsGetList($user_params['user_id']);
 	
-	print_r ($photosets_params);
-	exit;
-	
-	//	$BASE->utility->smarty->assign('photosets', $FLICKR->photosetsGetList($user_params['user_id']));
+	$BASE->utility->smarty->assign('photosets', $FLICKR->photosetsGetList($user_params['user_id']));
 
 	// prepare select params
        $request = array(

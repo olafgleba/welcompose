@@ -1006,6 +1006,12 @@ display: none;
 #mm_photoset_wrap {
 display: none;
 }
+#lyMediamanagerMyFlickr label.mm_flickrtags {
+visibility: hidden;
+}
+#lyMediamanagerMyFlickr label.mm_photoset {
+visibility: hidden;
+}
 
 #myLocal_mm_contentToPopulate table, #myFlickr_mm_contentToPopulate table {
 margin: 4px 4px;
