@@ -200,6 +200,8 @@ public function selectProject ($id)
 			`application_projects`.`owner` AS `owner`,
 			`application_projects`.`name` AS `name`,
 			`application_projects`.`name_url` AS `name_url`,
+			`application_projects`.`default` AS `default`,
+			`application_projects`.`editable` AS `editable`,
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
@@ -294,6 +296,8 @@ public function selectProjects ($params = array())
 			`application_projects`.`owner` AS `owner`,
 			`application_projects`.`name` AS `name`,
 			`application_projects`.`name_url` AS `name_url`,
+			`application_projects`.`default` AS `default`,
+			`application_projects`.`editable` AS `editable`,
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
@@ -565,9 +569,11 @@ public function testForUniqueName ($name, $id = null)
 		FROM
 			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
-			`name` = :name
-		  OR
-			`name_url` = :name_url
+			(
+				`name` = :name
+		  	  OR
+				`name_url` = :name_url
+			)
 	";
 	
 	// prepare bind params
