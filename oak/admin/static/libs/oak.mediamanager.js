@@ -1123,7 +1123,7 @@ function Mediamanager_insertImageItemFlickr (elem)
 			
 				buildSrc = '<img src="';
 				buildSrc += splitSource[0] + sel_select_value + splitSource[1];
-				buildSrc += ' />';
+				buildSrc += '" />';
 				buildHrefStart = '<a href="';
 				buildHrefStart += sel_hidden;
 				buildHrefStart += '">';
