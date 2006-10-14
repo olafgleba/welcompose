@@ -208,7 +208,6 @@ public function selectObject ($id)
 		SELECT 
 			`media_objects`.`id` AS `id`,
 			`media_objects`.`project` AS `project`,
-			`media_objects`.`type` AS `type`,
 			`media_objects`.`description` AS `description`,
 			`media_objects`.`tags` AS `tags`,
 			`media_objects`.`file_name` AS `file_name`,
@@ -251,8 +250,6 @@ public function selectObject ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
- * <li>type, string, optional: Returns objects with given type</li>
- * <li>types, array, optional: Returns objects with given types</li>
  * <li>tags, array, optional: Returns objects with given tags</li>
  * <li>timeframe, string, optional: Returns objects from given timeframe</li>
  * <li>start, int, optional: row offset</li>
@@ -279,8 +276,6 @@ public function selectObjects ($params = array())
 	}
 	
 	// define some vars
-	$type = null;
-	$types = null;
 	$timeframe = null;
 	$tags = null;
 	$order_macro = null;
@@ -296,7 +291,6 @@ public function selectObjects ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
-			case 'type':
 			case 'tags':
 			case 'order_macro':
 			case 'timeframe':
@@ -305,9 +299,6 @@ public function selectObjects ($params = array())
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
-				break;
-			case 'types':
-					$$_key = (array)$_value;
 				break;
 			default:
 				throw new Media_ObjectException("Unknown parameter $_key");
@@ -332,7 +323,6 @@ public function selectObjects ($params = array())
 		SELECT
 			`media_objects`.`id` AS `id`,
 			`media_objects`.`project` AS `project`,
-			`media_objects`.`type` AS `type`,
 			`media_objects`.`description` AS `description`,
 			`media_objects`.`tags` AS `tags`,
 			`media_objects`.`file_name` AS `file_name`,
@@ -370,14 +360,6 @@ public function selectObjects ($params = array())
 	);
 	
 	// add where clauses
-	if (!empty($type)) {
-		$sql .= " AND '`media_objects`.`type` = :type ";
-		$bind_param['type'] = $type;
-	}
-	if (!empty($types)) {
-		$sql .= " AND ".$HELPER->_sqlInFromArray('`media_objects`.`type`',
-			$this->_flipTypes($types));
-	}
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`media_objects`.`date_added`',
 			$timeframe);
