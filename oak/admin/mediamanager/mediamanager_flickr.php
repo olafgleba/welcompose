@@ -129,7 +129,6 @@ try {
 		
 	// assign request params
 	$BASE->utility->smarty->assign('request', $request);
-	$BASE->utility->smarty->assign('pagetype', $request['mm_pagetype']);
 	
 	// display the template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');
