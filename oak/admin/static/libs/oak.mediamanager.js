@@ -1095,11 +1095,7 @@ function Mediamanager_insertImageItemFlickr (elem)
 		} else {
 			var target = storedFocus;
 	
-			var build;
-			build = '{get_media id="';
-			build += elem.firstChild.src;
-			build += '"}';
-		
+			var build = elem.firstChild.src;
 			strStart = build;
 			
 			_insertTags(target, strStart, '' , '');
