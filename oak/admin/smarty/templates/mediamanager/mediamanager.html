@@ -67,7 +67,7 @@
 <td class="td_mm_media">{if $_object.type == 'image'}<a class="mm_insertImageItem" id="{$_object.id}" href="#" title="{i18n Insert this image to your content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{/if}{if $_object.type == 'document'}<a class="mm_insertDocumentItem" id="{$_object.id}" href="#" title="{i18n Insert this document to your content}">Insert</a>{/if}
 </td>
 <td class="td_mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
-<td class="td_mm_casts">{if $pagetype == 2}{if $_object.type == 'document' || $_object.type == 'audio' || $_object.type == 'video'}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}{/if}
+<td class="td_mm_casts">{if $request.mm_pagetype == 2}{if $_object.type == 'document' || $_object.type == 'audio' || $_object.type == 'video'}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}{/if}
 </td>
 <td class="td_mm_edit"><a class="mm_edit" href="#" id="{$_object.id}" title="{i18n Edit}"></a></td>
 <td class="td_mm_del"><a class="mm_delete" href="#" id="{$_object.id}" title="{i18n Delete}"></a></td>

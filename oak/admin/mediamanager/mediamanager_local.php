@@ -138,9 +138,6 @@ try {
 	// assign request params
 	$BASE->utility->smarty->assign('request', $request);
 	
-	// assign page type
-	$BASE->utility->smarty->assign('pagetype', $request['mm_pagetype']);
-	
 	// assign image path
 	$BASE->utility->smarty->assign('image_store_www', $BASE->_conf['image']['store_www']);
 	
