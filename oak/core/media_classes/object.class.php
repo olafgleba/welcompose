@@ -250,6 +250,8 @@ public function selectObject ($id)
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>types, array, optional: Return only objects that belong to the given
+ * generic types</li>
  * <li>tags, array, optional: Returns objects with given tags</li>
  * <li>timeframe, string, optional: Returns objects from given timeframe</li>
  * <li>start, int, optional: row offset</li>
@@ -279,6 +281,7 @@ public function selectObjects ($params = array())
 	$timeframe = null;
 	$tags = null;
 	$order_macro = null;
+	$types = array();
 	$start = null;
 	$limit = null;
 	$bind_params = array();
@@ -299,6 +302,9 @@ public function selectObjects ($params = array())
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
+				break;
+			case 'types':
+					$$_key = (array)$_value;
 				break;
 			default:
 				throw new Media_ObjectException("Unknown parameter $_key");
@@ -367,6 +373,9 @@ public function selectObjects ($params = array())
 	if (!empty($tags)) {
 		$sql .= " AND ".$HELPER->_sqlLikeFromArray('`media_tags`.`word`',
 			$TAG->_prepareTagStringForQuery($tags));
+	}
+	if (!empty($types) && is_array($types)) {
+		$sql .= " AND ".$this->sqlForGenericTypes('`media_objects`.`file_mime_type`', $types);
 	}
 	
 	// aggregate result set
@@ -894,6 +903,165 @@ protected function _flipTypes ($types)
 		}
 	}
 	return $tmp_types;
+}
+
+/**
+ * Returns list of generic image types.
+ *
+ * @return array
+ */
+public function getGenericTypes ()
+{
+	return array(
+		'image',
+		'document',
+		'audio',
+		'video',
+		'other'
+	);
+}
+
+/**
+ * Returns list of mime types that belong to the given generic
+ * type. Valid generic types:
+ *
+ * <ul>
+ * <li>image</li>
+ * <li>document</li>
+ * <li>audio</li>
+ * <li>video</li>
+ * <li>other</li>
+ * </ul>
+ *
+ * @throws Media_ObjectException
+ * @param string
+ * @return array
+ */
+public function genericTypesToMimeTypes ($generic_type)
+{
+	switch ((string)$generic_type) {
+		case 'image':
+			return array(
+				'gif' => 'image/gif',
+				'jpg' => 'image/jpeg',
+				'png' => 'image/png',
+				'tiff' => 'image/tif'
+			);
+		case 'document':
+			return array(
+				'pdf' => 'application/pdf',
+				'doc' => 'application/msword',
+				'rtf' => 'application/rtf',
+				'xls' => 'application/vnd.ms-excel',
+				'ppt' => 'application/vnd.ms-powerpoint',
+			);
+		case 'audio':
+			return array(
+				'mp3' => 'audio/mpeg',
+				'm4a' => 'audio/x-m4a'
+			);
+		case 'video':
+			return array(
+				'mp4' => 'video/mp4',
+				'm4v' => 'video/x-m4v',
+				'mov' => 'video/quicktime'
+			);
+		case 'other':
+			return array();
+		default:
+			throw new Media_ObjectException("Unknown generic type supplied");
+	}
+}
+
+/**
+ * Generates sql fragment to select objects that belong to the
+ * different generic types. Takes the name of the mime type as
+ * first argument, the list of generic types that should be
+ * queried as second argument. Returns string.
+ *
+ * @throws Media_ObjectException
+ * @param string
+ * @param array
+ * @return string
+ */
+protected function sqlForGenericTypes ($field, $types)
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Media_ObjectException("Input for parameter field is expected to be a non-empty scalar value");
+	}
+	if (!is_array($types)) {
+		throw new Media_ObjectException("Input for parameter types is not an array");
+	}
+	
+	// load helper class
+	$HELPER = load('Utility:Helper');
+	
+	// generate list of mime types that belong to the given generic types
+	$in_types = array();
+	foreach ($types as $_type) {
+		if ($_type != 'other') {
+			$in_types = array_merge($in_types, $this->genericTypesToMimeTypes($_type));
+		}
+	}
+	
+	// generate list of mime types that match the generic "other" type
+	$not_in_types = array();
+	foreach ($types as $_type) {
+		if ($_type == 'other') {
+			foreach ($this->getGenericTypes() as $_generic_type) {
+				if ($_generic_type != 'other') {
+					$not_in_types = array_merge($not_in_types,
+						$this->genericTypesToMimeTypes($_generic_type));
+				}
+			}
+		}
+	}
+	// prepare sql fragment
+	$sql = array();
+	if (!empty($in_types)) {
+		$sql[] = $HELPER->_sqlInFromArray($field, $in_types);
+	}
+	if (!empty($not_in_types)) {
+		$sql[] = $HELPER->_sqlNotInFromArray($field, $not_in_types);
+	}
+	
+	// generate and return sql fragment
+	return implode(' OR ', $sql);
+}
+
+/**
+ * Returns name of a fancy icon for the given mime type. Takes the
+ * mime type name as first argument. If the given mime type could not
+ * be found, the name of a generic icon will be returned.
+ * 
+ * @throws Media_ObjectExpception
+ * @param string
+ * @return string
+ */
+public function mimeTypeToIcon ($mime_type)
+{
+	// input check
+	if (empty($mime_type) || !preg_match(OAK_REGEX_MIME_TYPE, $mime_type)) {
+		throw new Media_ObjectException("Invalid mime type supplied");
+	}
+	
+	// icon list
+	$icons = array(
+		'application/pdf' => 'pdf.gif',
+		'text/plain' => 'plain.gif',
+		'text/html' => 'html.gif'
+	);
+	
+	// search icon array and return the right icon
+	foreach ($icons as $_mime_type => $_icon) {
+		if ($mime_type == $_mime_type) {
+			return $_icon;
+		}
+	}
+	
+	// return default icon
+	return 'generic.gif';
 }
 
 // end of class

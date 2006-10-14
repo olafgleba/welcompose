@@ -107,13 +107,6 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
-	// select for media types
-	$FORM->addElement('select', 'type', gettext('Media types'), $types,
-		array('id' => 'type'));
-	$FORM->addRule('type', gettext('Please select a media type'), 'required');
-	$FORM->addRule('type', gettext('Selected media type is out of range'),
-		'in_array_keys', $types);
-	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
@@ -207,7 +200,6 @@ try {
 		// load tag class
 		$TAG = load('Media:Tag');
 		
-		$sqlData['type'] = $FORM->exportValue('type');
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['tags'] = $FORM->exportValue('tags');
 		

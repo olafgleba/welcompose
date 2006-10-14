@@ -97,13 +97,6 @@ try {
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
 	
-	// select for media types
-	$FORM->addElement('select', 'type', gettext('Media types'), $types,
-		array('id' => 'type'));
-	$FORM->addRule('type', gettext('Please select a media type'), 'required');
-	$FORM->addRule('type', gettext('Selected media type is out of range'),
-		'in_array_keys', $types);
-	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
@@ -206,7 +199,6 @@ try {
 			// prepare sql data
 			$sqlData = array();
 			$sqlData['project'] = OAK_CURRENT_PROJECT;
-			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['description'] = $FORM->exportValue('description');
 			$sqlData['tags'] = $FORM->exportValue('tags');
 			$sqlData['file_name'] = $data['name'];

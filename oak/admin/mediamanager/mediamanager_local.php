@@ -84,14 +84,30 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
-	// get page name
-//	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
-	
 	// get and assign timeframes
 	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
 	
+	// prepare types for select
+	$types = array();
+	if (Base_Cnc::ifsetor($_REQUEST['mm_include_types_doc'], null) == 1) {
+		$types[] = 'document';
+	}
+	if (Base_Cnc::ifsetor($_REQUEST['mm_include_types_img'], null) == 1) {
+		$types[] = 'image';
+	}
+	if (Base_Cnc::ifsetor($_REQUEST['mm_include_types_audio'], null) == 1) {
+		$types[] = 'audio';
+	}
+	if (Base_Cnc::ifsetor($_REQUEST['mm_include_types_video'], null) == 1) {
+		$types[] = 'video';
+	}
+	if (Base_Cnc::ifsetor($_REQUEST['mm_include_types_other'], null) == 1) {
+		$types[] = 'other';
+	}
+	
 	// prepare select params
 	$select_params = array(
+		'types' => $types,
 		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'order_macro' => 'DATE_ADDED:DESC',
@@ -102,6 +118,13 @@ try {
 	
 	// assign request params
 	$request = array(
+		'types' => array( 
+			'document' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'], OAK_REGEX_ZERO_OR_ONE), 
+			'image' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'], OAK_REGEX_ZERO_OR_ONE), 
+			'audio' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_audio'], OAK_REGEX_ZERO_OR_ONE), 
+			'video' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_video'], OAK_REGEX_ZERO_OR_ONE), 
+			'other' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_other'], OAK_REGEX_ZERO_OR_ONE) 
+		),
 		'tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
