@@ -143,6 +143,7 @@ Page <a href="#">1 of 10</a>
 
 <!-- mediamanager content populate -->
 <div id="myFlickr_mm_contentToPopulate">
+{if empty($error)}
 <table class="mm_content">
 {foreach from=$photos.photos item=_photo}
 <tr>
@@ -151,6 +152,9 @@ Page <a href="#">1 of 10</a>
 </tr>
 {/foreach}
 </table>
+{else}
+{$error}
+{/if}
 <span id="indicator_flickr"><img src="../static/img/indicator.gif" alt="" /></span>
 </div>
 <!-- mediamanager content populate eof -->

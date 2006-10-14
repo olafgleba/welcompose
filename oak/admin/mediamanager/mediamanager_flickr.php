@@ -92,35 +92,40 @@ try {
 		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC)
 	);
 	
-	// find flickr user using it's name
-	$user = array();
-	if (!is_null($request['mm_user'])) {
-		$user = $FLICKR->peopleFindByUsername($request['mm_user']);
-	}
-	$BASE->utility->smarty->assign('user', $user);
+	try {
+		// find flickr user using it's name
+		$user = array();
+		if (!is_null($request['mm_user'])) {
+			$user = $FLICKR->peopleFindByUsername($request['mm_user']);
+		}
+		$BASE->utility->smarty->assign('user', $user);
 	
-	// get user's photosets
-	$photosets = array();
-	if (is_array($user) && !empty($user['user_id'])) {
-		$photosets = $FLICKR->photosetsGetList($user['user_id']);
-	}
-	$BASE->utility->smarty->assign('photosets', $photosets);
+		// get user's photosets
+		$photosets = array();
+		if (is_array($user) && !empty($user['user_id'])) {
+			$photosets = $FLICKR->photosetsGetList($user['user_id']);
+		}
+		$BASE->utility->smarty->assign('photosets', $photosets);
 	
-	// get user's photos using the photoset or the supplied tags
-	$photos = array();
-	if (!is_null($request['mm_photoset'])) {
-		$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5);
-	} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
-		// prepare search params
-		$params = array(
-			'tags' => $request['mm_flickrtags'],
-			'per_page' => 5
-		);
+		// get user's photos using the photoset or the supplied tags
+		$photos = array();
+		if (!is_null($request['mm_photoset'])) {
+			$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5);
+		} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
+			// prepare search params
+			$params = array(
+				'user_id' => $user['user_id'],
+				'tags' => $request['mm_flickrtags'],
+				'per_page' => 5
+			);
 		
-		// look for photos matching the supplied criteria
-		$photos = $FLICKR->photosSearch($params);
+			// look for photos matching the supplied criteria
+			$photos = $FLICKR->photosSearch($params);
+		}
+		$BASE->utility->smarty->assign('photos', $photos);
+	} catch (Exception $e) {
+		$BASE->utility->smarty->assign('error', $e->getMessage());
 	}
-	$BASE->utility->smarty->assign('photos', $photos);
 		
 	// assign request params
 	$BASE->utility->smarty->assign('request', $request);
@@ -128,7 +133,7 @@ try {
 	
 	// display the template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');
-		
+	
 	// flush the buffer
 	@ob_end_flush();
 	exit;
