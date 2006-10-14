@@ -21,11 +21,11 @@
 <div class="mmwrap">
 <span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_include_types_wrap">
-<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.types.image} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
-<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.types.document} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
-<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.types.audio} checked="checked"{/if} /><span class="cbxspread">{i18n Audio}</span></label>
-<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1"{if $request.types.video} checked="checked"{/if} /><span class="cbxspread">{i18n Video}</span></label>
-<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1"{if $request.types.other} checked="checked"{/if} /><span class="cbxspread">{i18n Other}</span></label>
+<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_img} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
+<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_doc} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
+<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_audio} checked="checked"{/if} /><span class="cbxspread">{i18n Audio}</span></label>
+<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_video} checked="checked"{/if} /><span class="cbxspread">{i18n Video}</span></label>
+<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_other} checked="checked"{/if} /><span class="cbxspread">{i18n Other}</span></label>
 </span>
 </span>
 </div>
@@ -35,7 +35,7 @@
 <div class="mmwrap">
 <label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
-<input class="w200" type="text" id="mm_tags" value="{$request.tags|escape:"htmlall"}" />
+<input class="w200" type="text" id="mm_tags" value="{$request.mm_tags|escape:"htmlall"}" />
 </span>
 </label>
 </div>
@@ -48,7 +48,7 @@
 <select id="mm_timeframe" name="mm_timeframe">
 <option value="">{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
-<option value="{$_timeframe}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
+<option value="{$_timeframe}"{if $request.mm_timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
 </select>
 </span>
