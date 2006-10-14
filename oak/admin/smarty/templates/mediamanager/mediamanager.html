@@ -107,7 +107,7 @@ Page <a href="#">1 of 10</a>
 <span class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_user_wrap">
 <input class="w150" type="text" id="mm_user" value="{$request.mm_user|escape:"htmlall"}" />
-<input type="button" id="submitFlickrFindByUsername" value="{i18n Search}" />
+<input type="button" id="submit55" value="{i18n Load}" />
 </span>
 </span>
 </div>
@@ -146,7 +146,7 @@ Page <a href="#">1 of 10</a>
 <table class="mm_content">
 {foreach from=$photos.photos item=_photo}
 <tr>
-<td class="td_mm_media"><a href="#"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="75" height="75" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
+<td class="td_mm_media_flickr"><a class="mm_insertImageItemFlickr" href="#"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
 <td colspan="4">{$_photo.title|escape:"htmlall"}</td>
 </tr>
 {/foreach}

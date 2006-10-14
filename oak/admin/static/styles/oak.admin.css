@@ -680,15 +680,15 @@ padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
 cursor: pointer;
 }
-input#submitFlickrFindByUsername {
+input#submit55 {
 text-align: left;
-background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+background: #666 url(../img/submit55.gif) 100% 0 no-repeat;
 color: #fff;
-width: 50px;
+width: 55px;
 height: 20px;
 font-size: 80%;
 border: 0 none;
-padding: 0 0 0 5px;
+padding: 0 0 0 2px;
 cursor: pointer;
 }
 
@@ -1021,6 +1021,9 @@ padding: 2px 0 4px 0;
 }
 .td_mm_media {
 width: 50px;
+}
+.td_mm_media_flickr {
+width: 70px;
 }
 .td_mm_meta {
 width: 90px;

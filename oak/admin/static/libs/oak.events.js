@@ -198,6 +198,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_insertImageItemFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.insertImageItemFlickr(this);
+			return false;
+		}
+	},
 	'a.mm_insertDocumentItem' : function(el){
 		el.onclick = function(){
 			Mediamanager.insertDocumentItem(this);
@@ -336,15 +342,16 @@ var definitions = {
 			return false;
 		}
 	},
-	'#submitFlickrFindByUsername' : function(el){
+	'#submit55' : function(el){
 		el.onclick = function(){
+			this.style.background = '#666 url(../static/img/submitindicator55.gif) no-repeat';
 			Mediamanager.initializeUserMyFlickr(this);
 			return false;
 		}
 	},
 	'.submit90' : function(el){
 		el.onclick = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator90.gif) no-repeat';
+			this.style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
 		}
 	},
 	'.submit200' : function(el){

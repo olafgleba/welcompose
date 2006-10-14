@@ -81,6 +81,7 @@ Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
 Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
 Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
 Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
+Mediamanager.prototype.insertImageItemFlickr = Mediamanager_insertImageItemFlickr;
 
 /**
  * Implements method of prototype class Mediamanager
@@ -593,6 +594,7 @@ function _showResponseInvokeInputs(req)
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
 		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
 		Behaviour.reapply('a.mm_insertDocumentItem');
 		Behaviour.reapply('a.mm_myLocal');
 		Behaviour.reapply('a.mm_myFlickr');
@@ -601,6 +603,7 @@ function _showResponseInvokeInputs(req)
 		Behaviour.reapply('#mm_user');
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
@@ -641,6 +644,7 @@ function _showResponseInvokeTagInputs(req)
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
 		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
 		Behaviour.reapply('a.mm_insertDocumentItem');
 		Behaviour.reapply('a.mm_myLocal');
 		Behaviour.reapply('a.mm_myFlickr');
@@ -649,6 +653,7 @@ function _showResponseInvokeTagInputs(req)
 		Behaviour.reapply('#mm_user');
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
@@ -893,7 +898,6 @@ function Mediamanager_initializeUserMyFlickr ()
 			url,
 			{
 				method : 'get',
-				onLoading : _loaderInitializeUserMyFlickr,
 				parameters : pars,
 				onComplete : _showResponseInvokeTagsMyFlickr
 			});
@@ -901,25 +905,6 @@ function Mediamanager_initializeUserMyFlickr ()
 		_applyError(e);
 	}
 }
-
-/**
- * Implements method of prototype class Mediamanager
- * fires temporary actions while processing the ajax call
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _loaderInitializeUserMyFlickr ()
-{
-	try {
-		$('submitFlickrFindByUsername').style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
 
 /**
  * Implements method of prototype class Mediamanager
@@ -935,9 +920,6 @@ function _showResponseInvokeTagsMyFlickr(req)
 		$('column').innerHTML = req.responseText;
 		Element.show('lyMediamanagerMyFlickr');
 		Element.hide('lyMediamanagerMyLocal');
-		
-		// reset button
-		$('submitFlickrFindByUsername').style.background = '#666 url(../static/img/submit90.gif) no-repeat';
 		
 		// show option inputs
 		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
@@ -962,6 +944,7 @@ function _showResponseInvokeTagsMyFlickr(req)
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
 		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
 		Behaviour.reapply('a.mm_insertDocumentItem');
 		Behaviour.reapply('a.mm_myLocal');
 		Behaviour.reapply('a.mm_myFlickr');
@@ -970,7 +953,7 @@ function _showResponseInvokeTagsMyFlickr(req)
 		Behaviour.reapply('#mm_user');
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submitFlickrFindByUsername');
+		Behaviour.reapply('#submit55');
 		Behaviour.reapply('.showMediamanagerElement');
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
@@ -1011,11 +994,11 @@ function Mediamanager_preserveElementStatusMyFlickr ()
 	try {
 	
 		var current_userElem = Element.getStyle('mm_user_wrap', 'display');
-		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
-	
+		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');	
+		
 		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElemsStatus = new Array (current_userElem, current_flickrtagsElem, current_photosetElem);
+		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
 		
 	} catch (e) {
 		_applyError(e);
@@ -1033,8 +1016,8 @@ function Mediamanager_setCurrentElementStatusMyFlickr ()
 	try {
 		
 		Element.setStyle('mm_user_wrap', {display: previousElemsStatus[0]});
-		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[1]});
-		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[2]});
+		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[2]});
 		
 		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
 		
@@ -1092,6 +1075,36 @@ function Mediamanager_checkElemsMyFlickr ()
 		var o = $H(getElems);
 		//countItems = null;
 		return o.toQueryString();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request to delete an item
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_insertImageItemFlickr (elem)
+{
+	try {
+		// global var comes from Forms.storeFocus() and oak.strings.js
+		if (typeof storedFocus == 'undefined') {
+			alert(selectTextarea); 
+		} else {
+			var target = storedFocus;
+	
+			var build;
+			build = '{get_media id="';
+			build += elem.firstChild.src;
+			build += '"}';
+		
+			strStart = build;
+			
+			_insertTags(target, strStart, '' , '');
+		}
+		
 	} catch (e) {
 		_applyError(e);
 	}

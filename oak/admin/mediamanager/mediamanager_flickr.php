@@ -109,12 +109,12 @@ try {
 	// get user's photos using the photoset or the supplied tags
 	$photos = array();
 	if (!is_null($request['mm_photoset'])) {
-		$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 4);
+		$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5);
 	} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
 		// prepare search params
 		$params = array(
 			'tags' => $request['mm_flickrtags'],
-			'per_page' => 4
+			'per_page' => 5
 		);
 		
 		// look for photos matching the supplied criteria

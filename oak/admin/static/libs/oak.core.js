@@ -429,6 +429,7 @@ function OakInit_processOakInit (ttarget)
 				Behaviour.reapply('a.mm_delete');
 				Behaviour.reapply('a.mm_cast');
 				Behaviour.reapply('a.mm_insertImageItem');
+				Behaviour.reapply('a.mm_insertImageItemFlickr');
 				Behaviour.reapply('a.mm_insertDocumentItem');
 				Behaviour.reapply('a.mm_myLocal');
 				Behaviour.reapply('a.mm_myFlickr');
@@ -437,7 +438,7 @@ function OakInit_processOakInit (ttarget)
 				Behaviour.reapply('#mm_user');
 				Behaviour.reapply('#mm_photoset');
 				Behaviour.reapply('#mm_flickrtags');
-				Behaviour.reapply('#submitFlickrFindByUsername');
+				Behaviour.reapply('#submit55');
 				Behaviour.reapply('.showMediamanagerElement');
 				Behaviour.reapply('.hideMediamanagerElement');
 				Behaviour.reapply('.iHelpMediamanager');
