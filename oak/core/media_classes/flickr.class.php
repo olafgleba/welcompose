@@ -153,15 +153,18 @@ public function peopleFindByUsername ($username)
 	
 	// test if flickr request was successful
 	if ($response->faultCode() != 0) {
-		throw new Media_FlickrException("Flickr request failed, reason: ".strip_tags($response->faultString()));
+		$fault_string = strip_tags(utf8_decode($response->faultString()));
+		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
 	}
 	
 	// get xml from response and pipe it to simplexml
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get nsid and username from response
-	$user_id = Base_Cnc::filterRequest(trim((string)$sx['nsid']), OAK_REGEX_FLICKR_NSID);
-	$username = Base_Cnc::filterRequest(trim((string)$sx->username), OAK_REGEX_FLICKR_SCREENNAME);
+	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
+		OAK_REGEX_FLICKR_NSID);
+	$username = Base_Cnc::filterRequest($this->flickrValue($sx->username),
+		OAK_REGEX_FLICKR_SCREENNAME);
 	
 	// pack and return array
 	return array(
@@ -210,15 +213,18 @@ public function urlsGetUserPhotos ($user_id)
 	
 	// test if flickr request was successful
 	if ($response->faultCode() != 0) {
-		throw new Media_FlickrException("Flickr request failed, reason: ".strip_tags($response->faultString()));
+		$fault_string = strip_tags(utf8_decode($response->faultString()));
+		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
 	}
 	
 	// get xml from response and pipe it to simplexml
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get nsid and url from response
-	$user_id = Base_Cnc::filterRequest(trim((string)$sx['nsid']), OAK_REGEX_FLICKR_NSID);
-	$url = Base_Cnc::filterRequest(trim((string)$sx['url']), OAK_REGEX_FLICKR_URL);
+	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
+		OAK_REGEX_FLICKR_NSID);
+	$url = Base_Cnc::filterRequest($this->flickrValue($sx['url']),
+		OAK_REGEX_FLICKR_URL);
 	
 	// pack and return array
 	return array(
@@ -267,10 +273,15 @@ public function photosSearch ($search_params)
 	foreach ($search_params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'user_id':
+					if (empty($_value) || !preg_match(OAK_REGEX_FLICKR_NSID, $_value)) {
+						throw new Media_FlickrException("Invalid nsid supplied");
+					}
+					$flickr_params[$_key] = new XML_RPC_Value((string)$_value);
+				break;
 			case 'tags':
 			case 'text':
 			case 'extra':
-					$flickr_params[$_key] = new XML_RPC_Value((string)$_value);
+					$flickr_params[$_key] = new XML_RPC_Value(strip_tags((string)$_value));
 				break;
 			case 'per_page':
 			case 'page':
@@ -334,30 +345,31 @@ public function photosSearch ($search_params)
 	
 	// test if flickr request was successful
 	if ($response->faultCode() != 0) {
-		throw new Media_FlickrException("Flickr request failed, reason: ".strip_tags($response->faultString()));
+		$fault_string = strip_tags(utf8_decode($response->faultString()));
+		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
 	}
 	
 	// get xml from response and pipe it to simplexml
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$page = Base_Cnc::filterRequest(trim((string)$sx['page']), OAK_REGEX_FLICKR_NSID);
-	$pages = Base_Cnc::filterRequest(trim((string)$sx['pages']), OAK_REGEX_NUMERIC);
-	$perpage = Base_Cnc::filterRequest(trim((string)$sx['perpage']), OAK_REGEX_NUMERIC);
-	$total = Base_Cnc::filterRequest(trim((string)$sx['total']), OAK_REGEX_NUMERIC);
+	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), OAK_REGEX_FLICKR_NSID);
+	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), OAK_REGEX_NUMERIC);
+	$perpage = Base_Cnc::filterRequest($this->flickrValue($sx['perpage']), OAK_REGEX_NUMERIC);
+	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), OAK_REGEX_NUMERIC);
 	
 	// get pictures from response
 	$photos = array();
 	foreach ($sx->xpath('/photos/photo') as $_photo) {
 		$photos[] = array(
-			'id' => Base_Cnc::filterRequest(trim((string)$_photo['id']), OAK_REGEX_NUMERIC),
-			'owner' => Base_Cnc::filterRequest(trim((string)$_photo['owner']), OAK_REGEX_FLICKR_NSID),
-			'secret' => Base_Cnc::filterRequest(trim((string)$_photo['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest(trim((string)$_photo['server']), OAK_REGEX_NUMERIC),
-			'title' => strip_tags(trim((string)$_photo['title'])),
-			'ispublic' => Base_Cnc::filterRequest(trim((string)$_photo['ispublic']), OAK_REGEX_ZERO_OR_ONE),
-			'isfriend' => Base_Cnc::filterRequest(trim((string)$_photo['isfriend']), OAK_REGEX_ZERO_OR_ONE),
-			'isfamily' => Base_Cnc::filterRequest(trim((string)$_photo['isfamily']), OAK_REGEX_ZERO_OR_ONE)
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), OAK_REGEX_NUMERIC),
+			'owner' => Base_Cnc::filterRequest($this->flickrValue($_photo['owner']), OAK_REGEX_FLICKR_NSID),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), OAK_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), OAK_REGEX_NUMERIC),
+			'title' => $this->flickrValue($_photo['title']),
+			'ispublic' => Base_Cnc::filterRequest($this->flickrValue($_photo['ispublic']), OAK_REGEX_ZERO_OR_ONE),
+			'isfriend' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfriend']), OAK_REGEX_ZERO_OR_ONE),
+			'isfamily' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfamily']), OAK_REGEX_ZERO_OR_ONE)
 		);
 	}
 	
@@ -406,26 +418,27 @@ public function photosetsGetList ($user_id)
 	
 	// test if flickr request was successful
 	if ($response->faultCode() != 0) {
-		throw new Media_FlickrException("Flickr request failed, reason: ".strip_tags($response->faultString()));
+		$fault_string = strip_tags(utf8_decode($response->faultString()));
+		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
 	}
 	
 	// get xml from response and pipe it to simplexml
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$cancreate = Base_Cnc::filterRequest(trim((string)$sx['cancreate']), OAK_REGEX_ZERO_OR_ONE);
+	$cancreate = Base_Cnc::filterRequest($this->flickrValue($sx['cancreate']), OAK_REGEX_ZERO_OR_ONE);
 	
 	// get photosets from response
 	$photosets = array();
 	foreach ($sx->xpath('/photosets/photoset') as $_photoset) {
 		$photosets[] = array(
-			'id' => Base_Cnc::filterRequest(trim((string)$_photoset['id']), OAK_REGEX_NUMERIC),
-			'primary' => Base_Cnc::filterRequest(trim((string)$_photoset['primary']), OAK_REGEX_NUMERIC),
-			'secret' => Base_Cnc::filterRequest(trim((string)$_photoset['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest(trim((string)$_photoset['server']), OAK_REGEX_NUMERIC),
-			'photos' => Base_Cnc::filterRequest(trim((string)$_photoset['photos']), OAK_REGEX_NUMERIC),
-			'title' => strip_tags(trim((string)$_photoset->title)),
-			'description' => strip_tags(trim((string)$_photoset->description))
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photoset['id']), OAK_REGEX_NUMERIC),
+			'primary' => Base_Cnc::filterRequest($this->flickrValue($_photoset['primary']), OAK_REGEX_NUMERIC),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photoset['secret']), OAK_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photoset['server']), OAK_REGEX_NUMERIC),
+			'photos' => Base_Cnc::filterRequest($this->flickrValue($_photoset['photos']), OAK_REGEX_NUMERIC),
+			'title' => $this->flickrValue($_photoset->title),
+			'description' => $this->flickrValue($_photoset->description)
 		);
 	}
 	
@@ -498,40 +511,41 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 	
 	// test if flickr request was successful
 	if ($response->faultCode() != 0) {
-		throw new Media_FlickrException("Flickr request failed, reason: ".strip_tags($response->faultString()));
+		$fault_string = strip_tags(utf8_decode($response->faultString()));
+		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
 	}
 	
 	// get xml from response and pipe it to simplexml
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$id = Base_Cnc::filterRequest(trim((string)$sx['id']), OAK_REGEX_NUMERIC);
-	$primary = Base_Cnc::filterRequest(trim((string)$sx['primary']), OAK_REGEX_NUMERIC);
-	$owner = Base_Cnc::filterRequest(trim((string)$sx['owner']), OAK_REGEX_FLICKR_NSID);
-	$ownername = Base_Cnc::filterRequest(trim((string)$sx['ownername']), OAK_REGEX_FLICKR_SCREENNAME);
-	$page = Base_Cnc::filterRequest(trim((string)$sx['page']), OAK_REGEX_NUMERIC);
-	$per_page = Base_Cnc::filterRequest(trim((string)$sx['per_page']), OAK_REGEX_NUMERIC);
-	$pages = Base_Cnc::filterRequest(trim((string)$sx['pages']), OAK_REGEX_NUMERIC);
-	$total = Base_Cnc::filterRequest(trim((string)$sx['total']), OAK_REGEX_NUMERIC);
+	$id = Base_Cnc::filterRequest($this->flickrValue($sx['id']), OAK_REGEX_NUMERIC);
+	$primary = Base_Cnc::filterRequest($this->flickrValue($sx['primary']), OAK_REGEX_NUMERIC);
+	$owner = Base_Cnc::filterRequest($this->flickrValue($sx['owner']), OAK_REGEX_FLICKR_NSID);
+	$ownername = Base_Cnc::filterRequest($this->flickrValue($sx['ownername']), OAK_REGEX_FLICKR_SCREENNAME);
+	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), OAK_REGEX_NUMERIC);
+	$per_page = Base_Cnc::filterRequest($this->flickrValue($sx['per_page']), OAK_REGEX_NUMERIC);
+	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), OAK_REGEX_NUMERIC);
+	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), OAK_REGEX_NUMERIC);
 	
 	// get photos from response
 	$photos = array();
 	foreach ($sx->xpath('/photoset/photo') as $_photo) {
 		$photos[] = array(
-			'id' => Base_Cnc::filterRequest(trim((string)$_photo['id']), OAK_REGEX_NUMERIC),
-			'secret' => Base_Cnc::filterRequest(trim((string)$_photo['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest(trim((string)$_photo['server']), OAK_REGEX_NUMERIC),
-			'title' => strip_tags(trim((string)$_photo['title'])),
-			'isprimary' => Base_Cnc::filterRequest(trim((string)$_photo['isprimary']), OAK_REGEX_NUMERIC),
-			'license' => Base_Cnc::filterRequest(trim((string)$_photo['license']), OAK_REGEX_NUMERIC),
-			'dateupload' => Base_Cnc::filterRequest(trim((string)$_photo['dateupload']), OAK_REGEX_NUMERIC),
-			'datetaken' => Base_Cnc::filterRequest(trim((string)$_photo['datetaken']), OAK_REGEX_DATETIME),
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), OAK_REGEX_NUMERIC),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), OAK_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), OAK_REGEX_NUMERIC),
+			'title' => $this->flickrValue($_photo['title']),
+			'isprimary' => Base_Cnc::filterRequest($this->flickrValue($_photo['isprimary']), OAK_REGEX_NUMERIC),
+			'license' => Base_Cnc::filterRequest($this->flickrValue($_photo['license']), OAK_REGEX_NUMERIC),
+			'dateupload' => Base_Cnc::filterRequest($this->flickrValue($_photo['dateupload']), OAK_REGEX_NUMERIC),
+			'datetaken' => Base_Cnc::filterRequest($this->flickrValue($_photo['datetaken']), OAK_REGEX_DATETIME),
 			'datetakengranularity' =>
-				Base_Cnc::filterRequest(trim((string)$_photo['datetakengranularity']), OAK_REGEX_NUMERIC),
-			'ownername' => Base_Cnc::filterRequest(trim((string)$_photo['ownername']), OAK_REGEX_ALPHANUMERIC),
-			'iconserver' => Base_Cnc::filterRequest(trim((string)$_photo['iconserver']), OAK_REGEX_NUMERIC),
-			'originalformat' => Base_Cnc::filterRequest(trim((string)$_photo['originalformat']), OAK_REGEX_ALPHANUMERIC),
-			'lastupdate' => Base_Cnc::filterRequest(trim((string)$_photo['lastupdate']), OAK_REGEX_NUMERIC)
+				Base_Cnc::filterRequest($this->flickrValue($_photo['datetakengranularity']), OAK_REGEX_NUMERIC),
+			'ownername' => Base_Cnc::filterRequest($this->flickrValue($_photo['ownername']), OAK_REGEX_ALPHANUMERIC),
+			'iconserver' => Base_Cnc::filterRequest($this->flickrValue($_photo['iconserver']), OAK_REGEX_NUMERIC),
+			'originalformat' => Base_Cnc::filterRequest($this->flickrValue($_photo['originalformat']), OAK_REGEX_ALPHANUMERIC),
+			'lastupdate' => Base_Cnc::filterRequest($this->flickrValue($_photo['lastupdate']), OAK_REGEX_NUMERIC)
 		);
 	}
 	
@@ -547,6 +561,28 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 		'total' => $total,
 		'photos' => $photos
 	);
+}
+
+/**
+ * Prepares data received from flickr for internal processing. The input
+ * will be casted to string, converted from utf8 to iso and all tags
+ * will be stripped.
+ *
+ * @param mixed
+ * @return string
+ */
+protected function flickrValue ($value)
+{
+	// cast to string
+	$value = (string)$value;
+	
+	// decode utf8
+	$value = utf8_decode($value);
+	
+	// strip tags
+	$value = strip_tags($value);
+	
+	return trim($value);
 }
 
 // end of class
