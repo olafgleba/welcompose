@@ -1094,11 +1094,53 @@ function Mediamanager_insertImageItemFlickr (elem)
 			alert(selectTextarea); 
 		} else {
 			var target = storedFocus;
-	
-			var build = elem.firstChild.src;
-			strStart = build;
 			
-			_insertTags(target, strStart, '' , '');
+			// collect values
+			var identify = elem.parentNode.parentNode;
+			
+			// get sizes
+			var sel_select = identify.getElementsByTagName('select')[0];			
+			var sel_select_value = sel_select.options[sel_select.selectedIndex].value;
+			
+			// URL to flickr photo page
+			var sel_hidden = identify.getElementsByTagName('input')[0].value;
+					
+			// build strings 			
+			// preview URL
+			var source = elem.firstChild.src;
+			
+			// get rid of size suffix
+			var splitSource = source.split('_s');
+			
+			// ensure selection has used
+			if (sel_select_value != 1) {
+				
+				//initialize vars
+				var buildSrc;
+				var buildHrefStart;
+				var buildHrefEnd;
+				var buildComplete;
+			
+				buildSrc = '<img src="';
+				buildSrc += splitSource[0] + sel_select_value + splitSource[1];
+				buildSrc += ' />';
+				buildHrefStart = '<a href="';
+				buildHrefStart += sel_hidden;
+				buildHrefStart += '">';
+				buildHrefEnd = '</a>';
+				
+				buildComplete = buildHrefStart + buildSrc + buildHrefEnd;
+				
+				var strStart = buildComplete;
+				
+				//alert (buildComplete);
+		
+				_insertTags(target, strStart, '' , '');
+				
+			 } else {
+				// alert message is defined in oak.strings.js
+				alert (alertOnSelectImageSize);
+			}
 		}
 		
 	} catch (e) {

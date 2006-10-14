@@ -148,7 +148,19 @@ Page <a href="#">1 of 10</a>
 {foreach from=$photos.photos item=_photo}
 <tr>
 <td class="td_mm_media_flickr"><a class="mm_insertImageItemFlickr" href="#"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
-<td colspan="4">{$_photo.title|escape:"htmlall"}</td>
+<td colspan="4">{$_photo.title|escape:"htmlall"}
+<p>
+<select id="size" name="size">
+<option value="1">{i18n Image sizes...}</option>
+<option value="_s">{i18n Small (75px, square)}</option>
+<option value="_t">{i18n Thumbnail (100px)}</option>
+<option value="_m">{i18n Small (240px)}</option>
+<option value="">{i18n Medium (500px)}</option>
+<option value="_b">{i18n Large (1024px)}</option>
+</select>
+<input type="hidden" value="http://www.flickr.com/photos/{$user.user_id}/{$_photo.id}/" />
+</p>
+</td>
 </tr>
 {/foreach}
 </table>

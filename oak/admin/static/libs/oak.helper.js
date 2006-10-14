@@ -478,7 +478,7 @@ function Helper_insertInternalLink(elem)
 		strStart = build;
 		strEnd = '</a>';
 			
-		// describeLink is defined in oak.strings.js
+		// alert message(describeLink) is defined in oak.strings.js
 		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
 	
 		Helper.closeLinksPopup();
@@ -498,7 +498,6 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 		// delivered from within smarty assign
 		var target = formTarget;
 		
-		// describeLink is defined in oak.strings.js
 		_insertTagsFromPopup(target, elem.id, "", "");
 	
 		Helper.closeLinksPopup();
@@ -518,7 +517,6 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 		// delivered from within smarty assign
 		var target = formTarget;
 		
-		// describeLink is defined in oak.strings.js
 		_insertTagsFromPopup(target, elem.id, "", "");
 	
 		Helper.closeLinksPopup();
