@@ -1048,9 +1048,10 @@ public function mimeTypeToIcon ($mime_type)
 	
 	// icon list
 	$icons = array(
-		'application/pdf' => 'pdf.gif',
-		'text/plain' => 'plain.gif',
-		'text/html' => 'html.gif'
+		'application/pdf' => 'document.jpg',
+		'audio/x-m4a' => 'music.jpg',
+		'audio/mpeg' => 'music.jpg',
+		'video/quicktime' => 'movie.jpg'
 	);
 	
 	// search icon array and return the right icon
