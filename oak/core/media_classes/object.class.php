@@ -907,11 +907,17 @@ protected function _flipTypes ($types)
 
 /**
  * Returns list of generic image types.
- *
+ * 
+ * @throws Media_ObjectException
  * @return array
  */
 public function getGenericTypes ()
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	return array(
 		'image',
 		'document',
@@ -939,6 +945,11 @@ public function getGenericTypes ()
  */
 public function genericTypesToMimeTypes ($generic_type)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	switch ((string)$generic_type) {
 		case 'image':
 			return array(
@@ -974,6 +985,34 @@ public function genericTypesToMimeTypes ($generic_type)
 }
 
 /**
+ * Tests if object with given mime type can be used for a podcast.
+ * Returns bool.
+ * 
+ * @throws Media_ObjectException
+ * @param string Object's mime type
+ * @return bool
+ */
+public function isPodcastFormat ($mime_type)
+{
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	switch ((string)$mime_type) {
+		case 'application/pdf':
+		case 'audio/mpeg':
+		case 'audio/x-m4a':
+		case 'video/mp4':
+		case 'video/quicktime':
+		case 'video/x-m4v':
+			return true;
+		default:
+			return false;
+	}
+}
+
+/**
  * Generates sql fragment to select objects that belong to the
  * different generic types. Takes the name of the mime type as
  * first argument, the list of generic types that should be
@@ -986,6 +1025,11 @@ public function genericTypesToMimeTypes ($generic_type)
  */
 protected function sqlForGenericTypes ($field, $types)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($field) || !is_scalar($field)) {
 		throw new Media_ObjectException("Input for parameter field is expected to be a non-empty scalar value");
@@ -1041,6 +1085,11 @@ protected function sqlForGenericTypes ($field, $types)
  */
 public function mimeTypeToIcon ($mime_type)
 {
+	// access check
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (empty($mime_type) || !preg_match(OAK_REGEX_MIME_TYPE, $mime_type)) {
 		throw new Media_ObjectException("Invalid mime type supplied");
