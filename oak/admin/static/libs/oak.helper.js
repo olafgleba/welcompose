@@ -61,7 +61,7 @@ Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 
 
-function Helper_launchPopup (width, height, name, trigger, elem)
+function Helper_launchPopup (width, height, nname, trigger, elem)
 {
 	try {
 		// properties
@@ -91,7 +91,7 @@ function Helper_launchPopup (width, height, name, trigger, elem)
 		}
 		// properties
 		this.ttargetUrl = this.url;
-		this.ttargetName = name;
+		this.ttargetName = nname;
 		this.ttargetWidth = width;
 		this.ttargetHeight = height;
 		this.ttarget = window.open(this.ttargetUrl, this.ttargetName, 
@@ -468,7 +468,7 @@ function Helper_insertInternalLink(elem)
 {
 	try {
 		// delivered from within smarty assign
-		var target = formTarget;
+		var ttarget = formTarget;
 		
 		var build;
 		build = '<a href="';
@@ -479,9 +479,9 @@ function Helper_insertInternalLink(elem)
 		strEnd = '</a>';
 			
 		// alert message(describeLink) is defined in oak.strings.js
-		_insertTagsFromPopup(target, strStart, strEnd, describeLink);
+		_insertTagsFromPopup(ttarget, strStart, strEnd, describeLink);
 	
-		Helper.closeLinksPopup();
+		//Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -534,7 +534,18 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 function _insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 {
 	try {
-		var txtarea = opener.$(id);
+		/*
+		We have to separate here, because the IE6 is too dump to differ between elements
+		which has the same value on different atrributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/
+	 	if (Helper.unsupportsElems('safari_exception')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = opener.document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = opener.$(id);
+		}
 		// IE
 		if(opener.document.selection) {
 			var theSelection = opener.document.selection.createRange().text;
@@ -591,7 +602,18 @@ function _insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 function _insertTags(id, tagOpen, tagClose, sampleText)
 {
 	try {
-		var txtarea = $(id);
+		/*
+		We have to separate here, because the IE6 is too dump to differ between elements
+		which has the same value on different atrributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/
+	 	if (Helper.unsupportsElems('safari_exception')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = $(id);
+		}
 		// IE
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;

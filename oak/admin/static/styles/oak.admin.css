@@ -983,6 +983,14 @@ background: #f9f9f9;
 font-size: 80%;
 padding: 4px 5px 4px 5px;
 }
+.mm_pager a:link, .mm_pager a:visited {
+padding: 1px 5px 1px 5px;
+font-weight: bold;
+}
+.mm_pager a:hover, .mm_pager a:active, .mm_pager a:focus {
+background-color:  #0c3;
+color: #fff;
+}
 
 /* Local */
 #lyMediamanagerMyLocal {
