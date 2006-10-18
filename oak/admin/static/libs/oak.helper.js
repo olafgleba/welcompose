@@ -481,7 +481,7 @@ function Helper_insertInternalLink(elem)
 		// alert message(describeLink) is defined in oak.strings.js
 		_insertTagsFromPopup(ttarget, strStart, strEnd, describeLink);
 	
-		//Helper.closeLinksPopup();
+		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
 	}

@@ -234,7 +234,7 @@ var definitions = {
 	},
 	'#mm_photoset' : function(el){
 		el.onchange = function(){
-			Mediamanager.invokeTagsMyFlickr(this);
+			Mediamanager.invokeInputsMyFlickr(this);
 		}
 	},
 	'input' : function(el){

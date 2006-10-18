@@ -76,6 +76,7 @@ Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
 Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
 
 Mediamanager.prototype.invokeTagsMyFlickr = Mediamanager_invokeTagsMyFlickr;
+Mediamanager.prototype.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
 Mediamanager.prototype.initializeTagSearchMyFlickr = Mediamanager_initializeTagSearchMyFlickr;
 Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
 Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
@@ -506,7 +507,7 @@ function Mediamanager_invokeInputs ()
 			url,
 			{
 				method : 'get',
-				onLoading : _loader,
+				onLoading : _loaderMyLocal,
 				parameters : pars,
 				onComplete : _showResponseInvokeInputs
 			});
@@ -558,7 +559,7 @@ function Mediamanager_invokeTags ()
 			url,
 			{
 				method : 'get',
-				onLoading : _loader,
+				onLoading : _loaderMyLocal,
 				parameters : pars,
 				onComplete : _showResponseInvokeTagInputs
 			});
@@ -631,12 +632,13 @@ function _showResponseInvokeTagInputs(req)
 		$('mm_tags').setAttribute("autocomplete","off");
 		$('mm_flickrtags').setAttribute("autocomplete","off");
 		
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
 		Mediamanager.setCurrentElementStatusMyLocal();
+		
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
 		$('mm_tags').focus();
+		
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
@@ -672,7 +674,7 @@ function _showResponseInvokeTagInputs(req)
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _loader ()
+function _loaderMyLocal ()
 {
 	try {
 		var hideContentTable = document.getElementsByClassName('mm_content')[0];
@@ -733,7 +735,7 @@ function Mediamanager_deleteMediaItem (elem)
 			url,
 			{
 				method : 'get',
-				onLoading : _loader,
+				onLoading : _loaderMyLocal,
 				parameters : pars,
 				onComplete : function () {Mediamanager.invokeInputs();}
 			});		
@@ -885,6 +887,34 @@ function Mediamanager_invokeTagsMyFlickr ()
  * 
  * @throws applyError on exception
  */
+function Mediamanager_invokeInputsMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMyFlickr,
+				parameters : pars,
+				onComplete : _showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
 function Mediamanager_initializeUserMyFlickr ()
 {
 	try {
@@ -899,7 +929,7 @@ function Mediamanager_initializeUserMyFlickr ()
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : _showResponseInvokeTagsMyFlickr
+				onComplete : _showResponseInvokeInputsMyFlickr
 			});
 	} catch (e) {
 		_applyError(e);
@@ -932,6 +962,7 @@ function _showResponseInvokeTagsMyFlickr(req)
 		$('mm_flickrtags').setAttribute("autocomplete","off");
 		
 		Mediamanager.setCurrentElementStatusMyFlickr();
+
 		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
 		$('mm_flickrtags').focus();
 								
@@ -958,6 +989,60 @@ function _showResponseInvokeTagsMyFlickr(req)
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
 		Behaviour.reapply('.iHelpRemoveMediamanager');
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseInvokeInputsMyFlickr(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		Element.show('lyMediamanagerMyFlickr');
+		Element.hide('lyMediamanagerMyLocal');
+		
+		// show option inputs
+		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
+		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
+		Element.setStyle(mm_photoset[0], {visibility: 'visible'});	
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+		
+		$('column').focus();
+								
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Behaviour.reapply('input');
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');		
 
 	} catch (e) {
 		_applyError(e);

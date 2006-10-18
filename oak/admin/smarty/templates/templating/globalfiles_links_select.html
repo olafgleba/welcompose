@@ -13,7 +13,6 @@
  
 <script type="text/javascript">
 var response = '{$session.response}';
-
 var formTarget = '{$target}';
 </script>
 
@@ -28,23 +27,21 @@ var formTarget = '{$target}';
 </head>
 
 <body id="modalWindow">
-
 <div id="modalContainer">
 <div id="globalfiles">
 <h2>{i18n GLOBAL FILES} <span>{i18n CREATE REFERENCE}</span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
 
 <div id="modalBody">
-	
-<table id="firstNode">
+<div id="firstNode">
+<table>
 {foreach from=$global_files item=_file}
 <tr>
 <td class="initialNode"><a class="act_setInternalLinkGlobalFiles" id="{if !empty($delimiter)}{literal}<%{/literal}{else}{literal}{{/literal}{/if}global_file name=&quot;{$_file.name}&quot;{if !empty($delimiter)}{literal}%>{/literal}{else}{literal}}{/literal}{/if}" href="#" title="{i18n Insert link}">{$_file.name|escape:"htmlall"}</a></td>
 </tr>
 {/foreach}
 </table>
-
+</div>
 <br class="clearb" />
-
 </div>
 </div>
 </div>
