@@ -345,7 +345,7 @@ function Helper_showNextNode(elem)
 {
 	try {
 		// get source node id from element
-		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode;
+		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
