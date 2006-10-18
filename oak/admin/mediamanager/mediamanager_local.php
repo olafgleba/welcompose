@@ -103,7 +103,7 @@ try {
 		'mm_timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
 		'mm_start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
 		'mm_limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC),
-		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC)
+		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_PAGE_TYPE)
 	);
 	
 	// prepare types for select

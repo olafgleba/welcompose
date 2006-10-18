@@ -81,6 +81,10 @@ define("OAK_REGEX_ORDER_MACRO", "=^((([A-Z-_]+)(:DESC|:ASC|)(;(?!$)|$))+)$=");
 define("OAK_REGEX_TAG_FIRST_CHAR_CLEANUP", "=[^a-z0-9]=");
 
 // Defines regular expression for strings containing a
+// page type
+define("OAK_REGEX_PAGE_TYPE", "=^([A-Z0-9]+)_([A-Z0-9_]+)$=");
+
+// Defines regular expression for strings containing a
 // page type name
 define("OAK_REGEX_PAGE_TYPE_NAME", "=^(?!OAK)([A-Z0-9]+)_([A-Z0-9_]+)$=");
 
