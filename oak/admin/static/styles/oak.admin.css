@@ -204,13 +204,18 @@ padding: 0 0 3px 7px;
 /* %H =logout */
 #logout {
 position: absolute;
-top: 48px;
-left: 917px;
+top: 44px;
+left: 915px;
 width: auto;
 }
 #logout a:link, #logout a:visited {
-color: #fff;
-font-weight: bold;
+display: block;
+width: 60px;
+height: 40px;
+background: transparent url(../img/icons/logout.gif) 0 0 no-repeat;
+}
+#logout a:hover, #logout a:active, #logout a:focus {
+background: transparent url(../img/icons/logout.gif) 0 -123px no-repeat;
 }
 
 /* %N =top */
