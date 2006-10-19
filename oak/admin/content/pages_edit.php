@@ -286,7 +286,10 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-		
+
+		// add response to session
+		$_SESSION['response'] = 1;
+				
 		// redirect
 		$SESSION->save();
 		

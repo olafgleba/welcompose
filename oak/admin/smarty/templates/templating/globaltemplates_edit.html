@@ -10,10 +10,6 @@
 <title>{i18n Oak Admin &ndash; Edit Global Template}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
- 
-<script type="text/javascript">
-var response = '{$session.response}';
-</script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
@@ -76,13 +72,6 @@ var response = '{$session.response}';
 {/foreach}
 </ul>
 <!-- error --></div>
-{/if}
-
-{if $session.response == 1}
-<div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
-<!-- rp --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>
