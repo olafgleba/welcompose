@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
  
 <script type="text/javascript">
-var response = '{$session.response}';
 var mediamanager = 1;
 var pagetype = '{$page.page_type_name}';
 </script>
@@ -26,6 +25,12 @@ var pagetype = '{$page.page_type_name}';
 <script type="text/javascript" src="../static/libs/oak.mediamanager.js"></script>
 <script type="text/javascript" src="../static/libs/oak.validation.js"></script>
 <script type="text/javascript" src="../static/libs/oak.events.js"></script>
+
+{if !empty($form.errors)}
+<script type="text/javascript">
+var podcast = 1;
+</script>
+{/if}
 
 </head>
 

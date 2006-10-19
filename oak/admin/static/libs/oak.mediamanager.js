@@ -67,6 +67,7 @@ Mediamanager.prototype.checkElemsMyLocal = Mediamanager_checkElemsMyLocal;
 Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
 Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
 Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
+Mediamanager.prototype.mediaToPodcastOnRefresh = Mediamanager_mediaToPodcastOnRefresh;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
@@ -430,6 +431,41 @@ function Mediamanager_mediaToPodcast (elem)
 
 		var url = this.parseMedCastsUrl;
 		var pars = 'id=' + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : _showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Show Podcast layer and fill media player
+ *
+ * @param {string} elem element (id) to process
+ * @throws applyError on exception
+ */
+function Mediamanager_mediaToPodcastOnRefresh ()
+{
+	try {
+		// properties
+		this.toShow = $('podcast_container');
+		
+		Element.show(this.toShow);
+
+		// get hidden field value
+		var mediafile_id = $('mediafile_id').value;
+
+		var url = this.parseMedCastsUrl;
+		var pars = 'id=' + mediafile_id;
 
 		var myAjax = new Ajax.Request(
 			url,

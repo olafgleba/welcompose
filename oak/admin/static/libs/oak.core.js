@@ -350,6 +350,11 @@ function OakInit_getVars ()
 				return new Effect.Fade('rp', {duration: 0.8, delay: 1.5});
 			}
 		}
+		if (typeof podcast != 'undefined' && OakInit.isNumber(podcast)) {
+			if (podcast == 1) {
+				Mediamanager.mediaToPodcastOnRefresh();
+			}
+		}
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
