@@ -247,6 +247,7 @@ function Mediamanager_toggleExtendedView (elem)
 
 		if (elem.value == showDetails) {
 			elem.value = hideDetails;
+			$('podcast_details_display').value = '1';
 			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.show('extendedView');
 			} else {
@@ -254,6 +255,7 @@ function Mediamanager_toggleExtendedView (elem)
 			}
 		} else {
 			elem.value = showDetails;
+			$('podcast_details_display').value = '';
 			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.hide('extendedView');
 			} else {
@@ -494,11 +496,15 @@ function _showResponseMediaToPodcast(req)
 	try {		
 		$('mediafile_container').innerHTML = req.responseText;
 			
-		// dont be able to use appear here, because Effect.Opacity don't use display: block
+		// dont be able to use appear here, because
+		// Effect.Opacity don't use display: block
 		Element.hide('indicatorPodcast');
-		Element.show('podcast_container_loader');		
-		// observe if needed at least
-		//Behaviour.apply();
+		Element.show('podcast_container_loader');
+		
+		if ($('podcast_details_display').value == 1) {
+			document.getElementsByName('toggleExtendedView')[0].value = hideDetails;
+			$('extendedView').style.display = 'block';
+		}
 		
 	} catch (e) {
 		_applyError(e);
