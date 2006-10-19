@@ -222,7 +222,7 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'podcast_block', gettext('Blog Appearance'), null,
+	$FORM->addElement('checkbox', 'podcast_block', gettext('Block Appearance'), null,
 		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'));
 	$FORM->applyFilter('podcast_block', 'trim');
 	$FORM->applyFilter('podcast_block', 'strip_tags');

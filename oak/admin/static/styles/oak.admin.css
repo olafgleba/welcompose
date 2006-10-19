@@ -1244,16 +1244,16 @@ clear: left;
 }
 #podcast_container #mediafile_metadata span.fir {
 float: left;
-width: 120px;
+width: 140px;
 font-weight: bold;
 }
 #podcast_container #mediafile_metadata span.sec {
 float: left;
-width: 120px;
+width: 140px;
 }
 #podcast_container #mediafile_player {
 text-align: left;
-margin: 35px 0 5px 120px;
+margin: 35px 0 5px 140px;
 height: auto;
 }
 
@@ -1280,7 +1280,7 @@ height: 1.5em;
 #podcast_container label span.bez {
 display: block; 
 float: left;
-width: 120px;
+width: 140px;
 }
 input.toggleExtendedView120, input.showIDThree120, input.discardPodcast120 {
 float: left;
@@ -1297,14 +1297,14 @@ margin: 20px 0 0 10px;
 cursor: pointer;
 }
 input.toggleExtendedView120  {
-margin: 20px 0 0 120px;
+margin: 20px 0 0 140px;
 }
 #podcast_container p.help {
 display: block;
 line-height: 1.5em;
 width: 305px;
 margin: 0 0 10px 0;
-padding-left: 120px;
+padding-left: 140px;
 }
 /* not in use yet */
 input.showIDThree120  {
