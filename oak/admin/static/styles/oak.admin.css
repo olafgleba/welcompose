@@ -747,6 +747,14 @@ width: 305px;
 margin: 0 0 10px 0;
 padding-left: 140px;
 }
+/* for community/settings.php/html -> span class bez260 */
+p.helpbez260 {
+display: block;
+line-height: 1.5em;
+width: 305px;
+margin: 0 0 10px 0;
+padding-left: 260px;
+}
 
 .iHelp a,
 .iHelpRemove a,
