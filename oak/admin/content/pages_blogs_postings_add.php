@@ -97,6 +97,12 @@ try {
 	/* @var $HELPER Utility_Helper */
 	$HELPER = load('utility:helper');
 	
+	// load Content_BlogPodcast class
+	$BLOGPODCAST = load('Content:BlogPodcast');
+	
+	// load Content_BlogPodcastCategory class
+	$BLOGPODCASTCATEGORY = load('Content:BlogPodcastCategory');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -115,6 +121,33 @@ try {
 	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
 		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
 	}
+	
+	// prepare podcast category array
+	$podcast_categories = array();
+	foreach ($BLOGPODCASTCATEGORY->selectBlogPodcastCategories() as  $_category) {
+		$podcast_categories[(int)$_category['id']] = htmlspecialchars($_category['name']);
+	}
+	$podcast_categories_with_empty = array_merge(array("" => ""), $podcast_categories);
+	
+	// prepare summary/description/keyword source selects for podcasts
+	$podcast_description_sources = array(
+		'summary' => gettext('Use summary'),
+		'content' => gettext('Use content'),
+		'feed_summary' => gettext('Use feed summary'),
+		'empty' => gettext('Leave it empty')
+	);
+	
+	$podcast_summary_sources = array(
+		'summary' => gettext('Use summary'),
+		'content' => gettext('Use content'),
+		'feed_summary' => gettext('Use feed summary'),
+		'empty' => gettext('Leave it empty')
+	);
+	
+	$podcast_keywords_sources = array(
+		'tags' => gettext('Use tags'),
+		'empty' => gettext('Leave it empty')
+	);
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('blog_posting', 'post');
@@ -143,55 +176,104 @@ try {
 		array('id' => 'blog_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
 	
-	// podcast layer
-		
+	/*
+	 * Podcast layer
+	 */
+	
+	// hidden for podcast id
+	$FORM->addElement('hidden', 'podcast_id', '', array('id' => 'podcast_id'));
+	$FORM->applyFilter('podcast_id', 'trim');
+	$FORM->applyFilter('podcast_id', 'strip_tags');
+	$FORM->addRule('podcast_id', gettext('The podcast id is expected to be numeric'), 'numeric');
+	
+	// hidden for mediafile id
+	$FORM->addElement('hidden', 'podcast_media_object', '', array('id' => 'podcast_media_object'));
+	$FORM->applyFilter('podcast_media_object', 'trim');
+	$FORM->applyFilter('podcast_media_object', 'strip_tags');
+	$FORM->addRule('podcast_media_object', gettext('The media file id is expected to be numeric'), 'numeric');
+	
+	// hidden for display status
+	$FORM->addElement('hidden', 'podcast_details_display', '', array('id' => 'podcast_details_display'));
+	$FORM->applyFilter('podcast_details_display', 'trim');
+	$FORM->addRule('id', gettext('Podcast details display is expected to be numeric'), 'numeric');
+	
 	// textfield for title
 	$FORM->addElement('text', 'podcast_title', gettext('Title'),
 		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('podcast_title', 'trim');
-	$FORM->applyFilter('podcast_title', 'strip_tags');	
+	$FORM->applyFilter('podcast_title', 'strip_tags');
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_title', gettext('Please enter a podcast title'), 'required');
+	}
 	
-	// collect for description
-	$casts_description = array(
-		'1' => gettext('Use Feed Description'),
-		'0' => gettext('No Description')
-		);
-
 	// select for description
-	$FORM->addElement('select', 'podcast_description', gettext('Description'), $casts_description,
+	$FORM->addElement('select', 'podcast_description', gettext('Description'), $podcast_description_sources,
 		array('id' => 'blog_posting_podcast_description'));
 	$FORM->applyFilter('podcast_description', 'trim');
 	$FORM->applyFilter('podcast_description', 'strip_tags');
-
-	// collect for summary
-	$casts_summary = array(
-		'1' => gettext('Use Feed Summary'),
-		'0' => gettext('No Summary')
-		);
-			
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_description', gettext('Please select a podcast description source'), 'required');
+	}
+	$FORM->addRule('podcast_description', gettext('Podcast description source is out of range'),
+		'in_array_keys', $podcast_description_sources);
+	
 	// select for summary
-	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $casts_summary,
+	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $podcast_summary_sources,
 		array('id' => 'blog_posting_podcast_summary'));
 	$FORM->applyFilter('podcast_summary', 'trim');
 	$FORM->applyFilter('podcast_summary', 'strip_tags');
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_summary', gettext('Please select a podcast summary source'), 'required');
+	}
+	$FORM->addRule('podcast_summary', gettext('Podcast summary source is out of range'),
+		'in_array_keys', $podcast_summary_sources);
 	
-	// collect for keywords
-	$casts_keywords= array(
-		'1' => gettext('Use Feed Keywords'),
-		'0' => gettext('No Keywords')
-		);
-			
 	// select for keywords
-	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $casts_keywords,
+	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $podcast_keywords_sources,
 		array('id' => 'blog_posting_podcast_keywords'));
 	$FORM->applyFilter('podcast_keywords', 'trim');
-	$FORM->applyFilter('podcast_keywords', 'strip_tags');	
+	$FORM->applyFilter('podcast_keywords', 'strip_tags');
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_keywords', gettext('Please select a podcast keyword source'), 'required');
+	}
+	$FORM->addRule('podcast_keywords', gettext('Podcast keywords source is out of range'),
+		'in_array_keys', $podcast_keywords_sources);
 	
+	// select for category_1
+	$FORM->addElement('select', 'podcast_category_1', gettext('Category 1'), $podcast_categories,
+		array('id' => 'blog_posting_podcast_category_1'));
+	$FORM->applyFilter('podcast_category_1', 'trim');
+	$FORM->applyFilter('podcast_category_1', 'strip_tags');
+	$FORM->addRule('podcast_category_1', gettext('Podcast category 1 is out of range'),
+		'in_array_keys', $podcast_categories);
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_category_1', gettext('Please select a podcast category'), 'required');
+	}
+	
+	// select for category_2
+	$FORM->addElement('select', 'podcast_category_2', gettext('Category 2'), $podcast_categories_with_empty,
+		array('id' => 'blog_posting_podcast_category_2'));
+	$FORM->applyFilter('podcast_category_2', 'trim');
+	$FORM->applyFilter('podcast_category_2', 'strip_tags');	
+	$FORM->addRule('podcast_category_2', gettext('Podcast category 2 is out of range'),
+		'in_array_keys', $podcast_categories_with_empty);
+	
+	// select for category_3
+	$FORM->addElement('select', 'podcast_category_3', gettext('Category 3'), $podcast_categories_with_empty,
+		array('id' => 'blog_posting_podcast_category_3'));
+	$FORM->applyFilter('podcast_category_3', 'trim');
+	$FORM->applyFilter('podcast_category_3', 'strip_tags');	
+	$FORM->addRule('podcast_category_3', gettext('Podcast category 3 is out of range'),
+		'in_array_keys', $podcast_categories_with_empty);
+
 	// textfield for author
 	$FORM->addElement('text', 'podcast_author', gettext('Author'),
 		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('podcast_author', 'trim');
 	$FORM->applyFilter('podcast_author', 'strip_tags');
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_author', gettext('Please enter a podcast author'), 'required');
+	}
 	
 	// checkbox for explicit
 	$FORM->addElement('checkbox', 'podcast_explicit', gettext('Explicit'), null,
@@ -202,11 +284,11 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'podcast_block', gettext('Blog Appearance'), null,
+	$FORM->addElement('checkbox', 'podcast_block', gettext('Block'), null,
 		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'));
 	$FORM->applyFilter('podcast_block', 'trim');
 	$FORM->applyFilter('podcast_block', 'strip_tags');
-	$FORM->addRule('podcast_block', gettext('Prevent an episode or podcast from appearing'),
+	$FORM->addRule('podcast_block', gettext('The field whether an episode should be blocked accepts only 0 or 1'),
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// submit button
@@ -215,11 +297,13 @@ try {
 		
 	$FORM->addElement('button', 'showIDThree', gettext('Show ID3'),
 		array('class' => 'showIDThree120'));
-
+	
 	$FORM->addElement('button', 'discardPodcast', gettext('Discard cast'),
 		array('class' => 'discardPodcast120'));
-			
-	// podcast layer eof
+	
+	/*
+	 * End of podcast layer
+	 */
 	
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
@@ -429,6 +513,46 @@ try {
 			
 			// re-throw exception
 			throw $e;
+		}
+		
+		/*
+		 * Process podcast
+		 */
+		if ($FORM->exportValue('podcast_media_object') != "") {
+			// prepare sql data
+			$sqlData = array();
+			$sqlData['blog_posting'] = (int)$posting_id;
+			$sqlData['media_object'] = (int)$FORM->exportValue('podcast_media_object');
+			$sqlData['title'] = $FORM->exportValue('podcast_title');
+			$sqlData['description_source'] = $FORM->exportValue('podcast_description');
+			$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
+			$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
+			$sqlData['category_1'] = $FORM->exportValue('podcast_category_1');
+			//$sqlData['category_2'] = $FORM->exportValue('podcast_category_2');
+			//$sqlData['category_3'] = $FORM->exportValue('podcast_category_3');
+			$sqlData['author'] = $FORM->exportValue('podcast_author');
+			$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
+			$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
+			var_dump($sqlData);
+			// test sql data for pear errors
+			$HELPER->testSqlDataForPearErrors($sqlData);
+			
+			// insert it
+			try {
+				// begin transaction
+				$BASE->db->begin();
+				
+				$BLOGPODCAST->addBlogPodcast($sqlData);
+				
+				// commit
+				$BASE->db->commit();
+			} catch (Exception $e) {
+				// do rollback
+				$BASE->db->rollback();
+			
+				// re-throw exception
+				throw $e;
+			}
 		}
 		
 		// issue pings if required

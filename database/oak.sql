@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 20.10.2006 09:09:51
--- Diagram Version: 153
+-- Created on: 20.10.2006 16:32:25
+-- Diagram Version: 155
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -968,8 +968,8 @@ CREATE TABLE `content_blog_podcasts` (
   `keywords_source` enum('tags','empty') DEFAULT 'tags',
   `keywords` text,
   `category_1` int(11) UNSIGNED NOT NULL,
-  `category_2` int(11) UNSIGNED NOT NULL,
-  `category_3` int(11) UNSIGNED NOT NULL,
+  `category_2` int(11) UNSIGNED,
+  `category_3` int(11) UNSIGNED,
   `pub_date` datetime,
   `author` varchar(50),
   `block` enum('0','1') DEFAULT '0',
