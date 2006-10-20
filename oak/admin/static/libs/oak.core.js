@@ -345,14 +345,19 @@ function OakInit_load ()
 function OakInit_getVars ()
 {
 	try {
-		if (typeof response != 'undefined' && $('rp')) {
+		if (typeof response != 'undefined') {
 			if (response == 1) {
-				return new Effect.Fade('rp', {duration: 0.8, delay: 1.5});
+				Effect.Fade('rp', {duration: 0.8, delay: 1.5});
 			}
 		}
 		if (typeof podcast != 'undefined' && OakInit.isNumber(podcast)) {
 			if (podcast == 1) {
-				Mediamanager.mediaToPodcastOnRefresh();
+				Mediamanager.mediaToPodcastOnLoad();
+			}
+		}
+		if ($('podcast_media_object')) {
+			if ($('podcast_media_object').value != '') {
+				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
 	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
@@ -453,8 +458,8 @@ function OakInit_processOakInit (ttarget)
 				$('mm_tags').setAttribute("autocomplete","off");
 				$('mm_flickrtags').setAttribute("autocomplete","off");
 			
-				Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
-				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+				//Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
+				//Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 			
 			} else {
 	  			throw new DevError(_req.statusText);

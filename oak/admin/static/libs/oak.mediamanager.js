@@ -67,7 +67,7 @@ Mediamanager.prototype.checkElemsMyLocal = Mediamanager_checkElemsMyLocal;
 Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
 Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
 Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
-Mediamanager.prototype.mediaToPodcastOnRefresh = Mediamanager_mediaToPodcastOnRefresh;
+Mediamanager.prototype.mediaToPodcastOnLoad = Mediamanager_mediaToPodcastOnLoad;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
@@ -455,7 +455,7 @@ function Mediamanager_mediaToPodcast (elem)
  * @param {string} elem element (id) to process
  * @throws applyError on exception
  */
-function Mediamanager_mediaToPodcastOnRefresh ()
+function Mediamanager_mediaToPodcastOnLoad ()
 {
 	try {
 		// properties
@@ -485,6 +485,36 @@ function Mediamanager_mediaToPodcastOnRefresh ()
 
 /**
  * Implements method of prototype class Mediamanager
+ * Get rid off podcast
+ *
+ * @param {var} elem Actual elem to get rid off 
+ * @throws applyError on exception
+ */
+function Mediamanager_discardPodcast (elem)
+{
+	try {
+		// get hidden field value
+		var podcast_media_object = $('podcast_media_object').value;
+
+		var url = this.parseMedDiscCastsUrl;
+		var pars = 'id=' + podcast_media_object;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : _showResponseDiscardPodcast
+			});	
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
  * @private
@@ -504,8 +534,31 @@ function _showResponseMediaToPodcast(req)
 		if ($('podcast_details_display').value == 1) {
 			document.getElementsByName('toggleExtendedView')[0].value = hideDetails;
 			$('extendedView').style.display = 'block';
-		}
-		
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseDiscardPodcast(req)
+{
+	try {
+		// set hidden field value
+		$('podcast_media_object').value = '';			
+			
+		if (Helper.unsupportsEffects('safari_exception')) {
+			Element.hide('podcast_container');
+		} else {
+			Effect.Fade('podcast_container',{duration: 0.4});
+		}		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -843,30 +896,6 @@ function Mediamanager_insertDocumentItem (elem)
 			
 			_insertTags(target, strStart, strEnd , describeLink);
 		}
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Get rid off podcast
- *
- * @param {var} elem Actual elem to get rid off 
- * @throws applyError on exception
- */
-function Mediamanager_discardPodcast (elem)
-{
-	try {
-		// discard hidden field value
-		$('podcast_media_object').value = '';
-		
-			if (Helper.unsupportsEffects('safari_exception')) {
-				Element.hide('podcast_container');
-			} else {
-				Effect.Fade('podcast_container',{duration: 0.4});
-			}
 		
 	} catch (e) {
 		_applyError(e);
