@@ -458,8 +458,8 @@ function OakInit_processOakInit (ttarget)
 				$('mm_tags').setAttribute("autocomplete","off");
 				$('mm_flickrtags').setAttribute("autocomplete","off");
 			
-				//Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
-				//Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+				Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
+				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 			
 			} else {
 	  			throw new DevError(_req.statusText);
