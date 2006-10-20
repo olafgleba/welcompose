@@ -73,9 +73,8 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('Application:Project');
 	
-	// load Media_Object
-	/* @var $OBJECT Media_Object */
-	$OBJECT = load('Media:Object');
+	// load Content_BlogPodcast class
+	$BLOGPODCAST = load('Content:BlogPodcast');
 	
 	// load Media_Tag
 	/* @var $TAG Media_Tag */
@@ -101,14 +100,9 @@ try {
 		// start transaction
 		$BASE->db->begin();
 		
-		// decrease tags
-	/*	$TAG->deleteTags(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		// drop podcast
+		$BLOGPODCAST->deleteBlogPodcast(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 		
-		// delete media item
-		$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-		$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-		$OBJECT->deleteObject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-	*/	
 		// commit transaction
 		$BASE->db->commit();
 	} catch (Exception $e) {
