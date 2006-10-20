@@ -109,6 +109,9 @@ public function addBlogPodcast ($sqlData)
 		throw new Content_BlogPodcastException('Blog podcast does not belong to current project or user');
 	}
 	
+	// update metadata
+	$this->updateMetadataFromSelectedSources($insert_id);
+	
 	return $insert_id;
 }
 
@@ -151,8 +154,14 @@ public function updateBlogPodcast ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
-		$where, $bind_params);	
+	$affected_rows = $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
+		$where, $bind_params);
+	
+	// update metadata
+	$this->updateMetadataFromSelectedSources($id);
+	
+	// return amount of affected rows
+	return $affected_rows;
 }
 
 /**
@@ -248,7 +257,7 @@ public function selectBlogPodcast ($id)
 		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`content_blog_podcasts`.`page` = `content_pages`.`id`
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
 			`content_blog_podcasts`.`id` = :id
 		  AND
@@ -369,7 +378,7 @@ public function selectBlogPodcasts ($params = array())
 		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`content_blog_podcasts`.`page` = `content_pages`.`id`
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
 			`content_pages`.`project` = :project
 	";
@@ -485,6 +494,101 @@ public function countBlogPodcasts ($params = array())
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
 }
+
+/**
+ * Updates metadata from selected sources. Takes the podcast id
+ * as first argument. Returns amount of affected rows.
+ *
+ * @throws Content_BlogPodcastException
+ * @param int Podcast id
+ * @return int Affected rows
+ */
+protected function updateMetadataFromSelectedSources ($podcast_id)
+{
+	// access check
+	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+		throw new Content_BlogPodcastException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($podcast_id) || !is_numeric($podcast_id)) {
+		throw new Content_BlogPodcastException('Input for parameter podcast_id is not numeric');
+	}
+	
+	// test if blog podcast belongs to current user
+	if (!$this->blogPodcastBelongsToCurrentUser($podcast_id)) {
+		throw new Content_BlogPodcastException('Blog podcast does not belong to current project or user');
+	}
+	
+	// load blog posting class
+	$BLOGPOSTING = load('Content:BlogPosting');
+	
+	// get podcast
+	$podcast = $this->selectBlogPodcast($podcast_id);
+	
+	// get blog posting
+	$blog_posting = $BLOGPOSTING->selectBlogPosting($podcast['blog_posting']);
+	
+	// init sql data array
+	$sqlData = array();
+	
+	// update description
+	switch ($podcast['description_source']) {
+		case 'summary':
+				$sqlData['description'] = $blog_posting['summary'];
+			break;
+		case 'content':
+				$sqlData['description'] = $blog_posting['content'];
+			break;
+		case 'feed_summary':
+				$sqlData['description'] = $blog_posting['feed_summary'];
+			break;
+		case 'empty':
+		default:
+				$sqlData['description'] = null;
+			break;
+	}
+	
+	// update summary
+	switch ($podcast['summary_source']) {
+		case 'summary':
+				$sqlData['summary'] = $blog_posting['summary'];
+			break;
+		case 'content':
+				$sqlData['summary'] = $blog_posting['content'];
+			break;
+		case 'feed_summary':
+				$sqlData['summary'] = $blog_posting['feed_summary'];
+			break;
+		case 'empty':
+		default:
+				$sqlData['summary'] = null;
+			break;
+	}
+	
+	// update keywords
+	switch ($podcast['keywords_source']) {
+		case 'tags':
+				$sqlData['keywords'] = $blog_posting['tag_array'];
+			break;
+		case 'empty':
+		default:
+				$sqlData['keywords'] = serialize(array());
+			break;
+	}
+	
+	// prepare where clause
+	$where = " WHERE `id` = :id ";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$podcast_id
+	);
+	
+	// update row
+	return $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
+		$where, $bind_params);
+} 
 
 /**
  * Tests whether given blog podcast belongs to current project. Takes the
