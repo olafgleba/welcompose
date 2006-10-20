@@ -124,10 +124,11 @@ try {
 	
 	// prepare podcast category array
 	$podcast_categories = array();
+	$podcast_categories_with_empty = array("" => "");
 	foreach ($BLOGPODCASTCATEGORY->selectBlogPodcastCategories() as  $_category) {
 		$podcast_categories[(int)$_category['id']] = htmlspecialchars($_category['name']);
+		$podcast_categories_with_empty[(int)$_category['id']] = htmlspecialchars($_category['name']);
 	}
-	$podcast_categories_with_empty = array_merge(array("" => ""), $podcast_categories);
 	
 	// prepare summary/description/keyword source selects for podcasts
 	$podcast_description_sources = array(
