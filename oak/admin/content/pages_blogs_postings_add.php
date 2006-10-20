@@ -527,9 +527,12 @@ try {
 			$sqlData['description_source'] = $FORM->exportValue('podcast_description');
 			$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
 			$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
-			$sqlData['category_1'] = $FORM->exportValue('podcast_category_1');
-			//$sqlData['category_2'] = $FORM->exportValue('podcast_category_2');
-			//$sqlData['category_3'] = $FORM->exportValue('podcast_category_3');
+			$sqlData['category_1'] = (($FORM->exportValue('podcast_category_1') == "") ? null :
+				$FORM->exportValue('podcast_category_1'));
+			$sqlData['category_2'] = (($FORM->exportValue('podcast_category_2') == "") ? null :
+				$FORM->exportValue('podcast_category_2'));
+			$sqlData['category_3'] = (($FORM->exportValue('podcast_category_3') == "") ? null :
+				$FORM->exportValue('podcast_category_3'));
 			$sqlData['author'] = $FORM->exportValue('podcast_author');
 			$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
 			$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
