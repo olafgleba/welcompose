@@ -131,6 +131,7 @@ try {
 	foreach ($BLOGPODCASTCATEGORY->selectBlogPodcastCategories() as  $_category) {
 		$podcast_categories[(int)$_category['id']] = htmlspecialchars($_category['name']);
 	}
+	$podcast_categories_with_empty = array_merge(array("" => ""), $podcast_categories);
 	
 	// prepare summary/description/keyword source selects for podcasts
 	$podcast_description_sources = array(
@@ -256,28 +257,34 @@ try {
 	$FORM->applyFilter('podcast_category_1', 'strip_tags');
 	$FORM->addRule('podcast_category_1', gettext('Podcast category 1 is out of range'),
 		'in_array_keys', $podcast_categories);
-
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_category_1', gettext('Please select a podcast category'), 'required');
+	}
+	
 	// select for category_2
-	$FORM->addElement('select', 'podcast_category_2', gettext('Category 2'), $podcast_categories,
+	$FORM->addElement('select', 'podcast_category_2', gettext('Category 2'), $podcast_categories_with_empty,
 		array('id' => 'blog_posting_podcast_category_2'));
 	$FORM->applyFilter('podcast_category_2', 'trim');
 	$FORM->applyFilter('podcast_category_2', 'strip_tags');	
 	$FORM->addRule('podcast_category_2', gettext('Podcast category 2 is out of range'),
-		'in_array_keys', $podcast_categories);
+		'in_array_keys', $podcast_categories_with_empty);
 	
 	// select for category_3
-	$FORM->addElement('select', 'podcast_category_3', gettext('Category 3'), $podcast_categories,
+	$FORM->addElement('select', 'podcast_category_3', gettext('Category 3'), $podcast_categories_with_empty,
 		array('id' => 'blog_posting_podcast_category_3'));
 	$FORM->applyFilter('podcast_category_3', 'trim');
 	$FORM->applyFilter('podcast_category_3', 'strip_tags');	
 	$FORM->addRule('podcast_category_3', gettext('Podcast category 3 is out of range'),
-		'in_array_keys', $podcast_categories);
+		'in_array_keys', $podcast_categories_with_empty);
 
 	// textfield for author
 	$FORM->addElement('text', 'podcast_author', gettext('Author'),
 		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('podcast_author', 'trim');
 	$FORM->applyFilter('podcast_author', 'strip_tags');
+	if ($FORM->exportValue('podcast_media_object') != "") {
+		$FORM->addRule('podcast_author', gettext('Please enter a podcast author'), 'required');
+	}
 	
 	// checkbox for explicit
 	$FORM->addElement('checkbox', 'podcast_explicit', gettext('Explicit'), null,
@@ -335,6 +342,7 @@ try {
 	$FORM->addElement('textarea', 'feed_summary', gettext('Feed Summary'),
 		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
 	$FORM->applyFilter('feed_summary', 'trim');
+	$FORM->applyFilter('feed_summary', 'strip_tags');
 	
 	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
