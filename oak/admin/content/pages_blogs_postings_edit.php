@@ -532,39 +532,49 @@ try {
 			throw $e;
 		}
 		
-		// process podcast
-		$sqlData = array();
-		$sqlData['title'] = $FORM->exportValue('podcast_title');
-		$sqlData['media_object'] = $FORM->exportValue('mediafile_id');
-		$sqlData['description_source'] = $FORM->exportValue('podcast_description');
-		$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
-		$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
-		$sqlData['category_1'] = $FORM->exportValue('podcast_category_1');
-		$sqlData['category_2'] = $FORM->exportValue('podcast_category_2');
-		$sqlData['category_3'] = $FORM->exportValue('podcast_category_3');
-		$sqlData['author'] = $FORM->exportValue('podcast_author');
-		$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
-		$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
+		/*
+		 * Process podcast
+		 */
+		if ($FORM->exportValue('mediafile_id') != "") {
+			// prepare sql data
+			$sqlData = array();
+			$sqlData['blog_posting'] = $FORM->exportValue('id');
+			$sqlData['title'] = $FORM->exportValue('podcast_title');
+			$sqlData['media_object'] = $FORM->exportValue('mediafile_id');
+			$sqlData['description_source'] = $FORM->exportValue('podcast_description');
+			$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
+			$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
+			$sqlData['category_1'] = $FORM->exportValue('podcast_category_1');
+			$sqlData['category_2'] = $FORM->exportValue('podcast_category_2');
+			$sqlData['category_3'] = $FORM->exportValue('podcast_category_3');
+			$sqlData['author'] = $FORM->exportValue('podcast_author');
+			$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
+			$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
 		
-		// test sql data for pear errors
-		$HELPER->testSqlDataForPearErrors($sqlData);
+			// test sql data for pear errors
+			$HELPER->testSqlDataForPearErrors($sqlData);
 		
-		// insert it
-		try {
-			// begin transaction
-			$BASE->db->begin();
+			// insert it
+			try {
+				// begin transaction
+				$BASE->db->begin();
+				
+				// insert or update podcast depending whether there's a podcast id or not
+				if ($FORM->exportValue('podcast_id') == "") {
+					$BLOGPODCAST->addBlogPodcast($sqlData);
+				} else {
+					$BLOGPODCAST->updateBlogPodcast($FORM->exportValue('podcast_id'), $sqlData);
+				}
+				
+				// commit
+				$BASE->db->commit();
+			} catch (Exception $e) {
+				// do rollback
+				$BASE->db->rollback();
 			
-			// execute operation
-			$BLOGPODCAST->updateBlogPodcast($FORM->exportValue('podcast_id'), $sqlData);
-			
-			// commit
-			$BASE->db->commit();
-		} catch (Exception $e) {
-			// do rollback
-			$BASE->db->rollback();
-			
-			// re-throw exception
-			throw $e;
+				// re-throw exception
+				throw $e;
+			}
 		}
 		
 		// issue pings if required
