@@ -429,7 +429,7 @@ function Mediamanager_mediaToPodcast (elem)
 		Element.scrollTo(this.toShow);
 		
 		// set hidden field value
-		$('mediafile_id').value = elem.id;
+		$('media_object').value = elem.id;
 
 		var url = this.parseMedCastsUrl;
 		var pars = 'id=' + elem.id;
@@ -464,10 +464,10 @@ function Mediamanager_mediaToPodcastOnRefresh ()
 		Element.show(this.toShow);
 
 		// get hidden field value
-		var mediafile_id = $('mediafile_id').value;
+		var media_object = $('media_object').value;
 
 		var url = this.parseMedCastsUrl;
-		var pars = 'id=' + mediafile_id;
+		var pars = 'id=' + media_object;
 
 		var myAjax = new Ajax.Request(
 			url,
@@ -860,7 +860,7 @@ function Mediamanager_discardPodcast (elem)
 {
 	try {
 		// discard hidden field value
-		$('mediafile_id').value = '';
+		$('media_object').value = '';
 		
 			if (Helper.unsupportsEffects('safari_exception')) {
 				Element.hide('podcast_container');

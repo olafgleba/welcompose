@@ -197,10 +197,10 @@ try {
 	$FORM->addRule('podcast_id', gettext('The podcast id is expected to be numeric'), 'numeric');
 	
 	// hidden for mediafile id
-	$FORM->addElement('hidden', 'mediafile_id', '', array('id' => 'mediafile_id'));
-	$FORM->applyFilter('mediafile_id', 'trim');
-	$FORM->applyFilter('mediafile_id', 'strip_tags');
-	$FORM->addRule('mediafile_id', gettext('The media file id is expected to be numeric'), 'numeric');
+	$FORM->addElement('hidden', 'media_object', '', array('id' => 'media_object'));
+	$FORM->applyFilter('media_object', 'trim');
+	$FORM->applyFilter('media_object', 'strip_tags');
+	$FORM->addRule('media_object', gettext('The media file id is expected to be numeric'), 'numeric');
 	
 	// hidden for display status
 	$FORM->addElement('hidden', 'podcast_details_display', '', array('id' => 'podcast_details_display'));
@@ -212,7 +212,7 @@ try {
 		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('podcast_title', 'trim');
 	$FORM->applyFilter('podcast_title', 'strip_tags');
-	if ($FORM->exportValue('mediafile_id') != "") {
+	if ($FORM->exportValue('media_object') != "") {
 		$FORM->addRule('podcast_title', gettext('Please enter a podcast title'), 'required');
 	}
 	
@@ -221,7 +221,7 @@ try {
 		array('id' => 'blog_posting_podcast_description'));
 	$FORM->applyFilter('podcast_description', 'trim');
 	$FORM->applyFilter('podcast_description', 'strip_tags');
-	if ($FORM->exportValue('mediafile_id') != "") {
+	if ($FORM->exportValue('media_object') != "") {
 		$FORM->addRule('podcast_description', gettext('Please select a podcast description source'), 'required');
 	}
 	$FORM->addRule('podcast_description', gettext('Podcast description source is out of range'),
@@ -232,7 +232,7 @@ try {
 		array('id' => 'blog_posting_podcast_summary'));
 	$FORM->applyFilter('podcast_summary', 'trim');
 	$FORM->applyFilter('podcast_summary', 'strip_tags');
-	if ($FORM->exportValue('mediafile_id') != "") {
+	if ($FORM->exportValue('media_object') != "") {
 		$FORM->addRule('podcast_summary', gettext('Please select a podcast summary source'), 'required');
 	}
 	$FORM->addRule('podcast_summary', gettext('Podcast summary source is out of range'),
@@ -243,7 +243,7 @@ try {
 		array('id' => 'blog_posting_podcast_keywords'));
 	$FORM->applyFilter('podcast_keywords', 'trim');
 	$FORM->applyFilter('podcast_keywords', 'strip_tags');
-	if ($FORM->exportValue('mediafile_id') != "") {
+	if ($FORM->exportValue('media_object') != "") {
 		$FORM->addRule('podcast_keywords', gettext('Please select a podcast keyword source'), 'required');
 	}
 	$FORM->addRule('podcast_keywords', gettext('Podcast keywords source is out of range'),
@@ -387,7 +387,7 @@ try {
 		'ping' => 0,
 		'comments_enable' => Base_Cnc::ifsetor($blog_posting['comments_enable'], null),
 		'trackbacks_enable' => Base_Cnc::ifsetor($blog_posting['trackbacks_enable'], null),
-		'mediafile_id' => Base_Cnc::ifsetor($blog_posting['podcast_media_object'], null),
+		'media_object' => Base_Cnc::ifsetor($blog_posting['podcast_media_object'], null),
 		'podcast_id' => Base_Cnc::ifsetor($blog_posting['podcast_id'], null),
 		'podcast_title' => Base_Cnc::ifsetor($blog_posting['podcast_title'], null),
 		'podcast_description' => Base_Cnc::ifsetor($blog_posting['podcast_description_source'], null),
@@ -535,12 +535,12 @@ try {
 		/*
 		 * Process podcast
 		 */
-		if ($FORM->exportValue('mediafile_id') != "") {
+		if ($FORM->exportValue('media_object') != "") {
 			// prepare sql data
 			$sqlData = array();
 			$sqlData['blog_posting'] = $FORM->exportValue('id');
 			$sqlData['title'] = $FORM->exportValue('podcast_title');
-			$sqlData['media_object'] = $FORM->exportValue('mediafile_id');
+			$sqlData['media_object'] = $FORM->exportValue('media_object');
 			$sqlData['description_source'] = $FORM->exportValue('podcast_description');
 			$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
 			$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
