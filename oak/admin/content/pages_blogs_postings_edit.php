@@ -93,6 +93,12 @@ try {
 	/* @var $TEXTMACRO Application_Textmacro */
 	$TEXTMACRO = load('application:textmacro');
 	
+	// load Content_BlogPodcast class
+	$BLOGPODCAST = load('Content:BlogPodcast');
+	
+	// load Content_BlogPodcastCategory class
+	$BLOGPODCASTCATEGORY = load('Content:BlogPodcastCategory');
+	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
 	$HELPER = load('utility:helper');
@@ -119,6 +125,32 @@ try {
 	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
 		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
 	}
+	
+	// prepare podcast category array
+	$podcast_categories = array();
+	foreach ($BLOGPODCASTCATEGORY->selectBlogPodcastCategories() as  $_category) {
+		$podcast_categories[(int)$_category['id']] = htmlspecialchars($_category['name']);
+	}
+	
+	// prepare summary/description/keyword source selects for podcasts
+	$podcast_description_sources = array(
+		'summary' => gettext('Use summary'),
+		'content' => gettext('Use content'),
+		'feed_summary' => gettext('Use feed summary'),
+		'empty' => gettext('Leave it empty')
+	);
+	
+	$podcast_summary_sources = array(
+		'summary' => gettext('Use summary'),
+		'content' => gettext('Use content'),
+		'feed_summary' => gettext('Use feed summary'),
+		'empty' => gettext('Leave it empty')
+	);
+	
+	$podcast_keywords_sources = array(
+		'tags' => gettext('Use tags'),
+		'empty' => gettext('Leave it empty')
+	);
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('blog_posting', 'post');
@@ -153,60 +185,94 @@ try {
 	$FORM->addElement('textarea', 'content', gettext('Content'),
 		array('id' => 'blog_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
-
-
-	// podcast layer
-		
+	
+	/*
+	 * Podcast layer
+	 */
+	
+	// hidden for podcast id
+	$FORM->addElement('hidden', 'podcast_id', '', array('id' => 'podcast_id'));
+	$FORM->applyFilter('podcast_id', 'trim');
+	$FORM->applyFilter('podcast_id', 'strip_tags');
+	$FORM->addRule('podcast_id', gettext('The podcast id is expected to be numeric'), 'numeric');
+	
 	// hidden for mediafile id
 	$FORM->addElement('hidden', 'mediafile_id', '', array('id' => 'mediafile_id'));
 	$FORM->applyFilter('mediafile_id', 'trim');
+	$FORM->applyFilter('mediafile_id', 'strip_tags');
+	$FORM->addRule('mediafile_id', gettext('The media file id is expected to be numeric'), 'numeric');
 	
 	// hidden for display status
 	$FORM->addElement('hidden', 'podcast_details_display', '', array('id' => 'podcast_details_display'));
 	$FORM->applyFilter('podcast_details_display', 'trim');
+	$FORM->addRule('id', gettext('Podcast details display is expected to be numeric'), 'numeric');
 	
 	// textfield for title
 	$FORM->addElement('text', 'podcast_title', gettext('Title'),
 		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('podcast_title', 'trim');
-	$FORM->applyFilter('podcast_title', 'strip_tags');	
+	$FORM->applyFilter('podcast_title', 'strip_tags');
+	if ($FORM->exportValue('mediafile_id') != "") {
+		$FORM->addRule('podcast_title', gettext('Please enter a podcast title'), 'required');
+	}
 	
-	// collect for description
-	$casts_description = array(
-		'1' => gettext('Use Feed Description'),
-		'0' => gettext('No Description')
-		);
-
 	// select for description
-	$FORM->addElement('select', 'podcast_description', gettext('Description'), $casts_description,
+	$FORM->addElement('select', 'podcast_description', gettext('Description'), $podcast_description_sources,
 		array('id' => 'blog_posting_podcast_description'));
 	$FORM->applyFilter('podcast_description', 'trim');
 	$FORM->applyFilter('podcast_description', 'strip_tags');
-
-	// collect for summary
-	$casts_summary = array(
-		'1' => gettext('Use Feed Summary'),
-		'0' => gettext('No Summary')
-		);
-			
+	if ($FORM->exportValue('mediafile_id') != "") {
+		$FORM->addRule('podcast_description', gettext('Please select a podcast description source'), 'required');
+	}
+	$FORM->addRule('podcast_description', gettext('Podcast description source is out of range'),
+		'in_array_keys', $podcast_description_sources);
+	
 	// select for summary
-	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $casts_summary,
+	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $podcast_summary_sources,
 		array('id' => 'blog_posting_podcast_summary'));
 	$FORM->applyFilter('podcast_summary', 'trim');
 	$FORM->applyFilter('podcast_summary', 'strip_tags');
+	if ($FORM->exportValue('mediafile_id') != "") {
+		$FORM->addRule('podcast_summary', gettext('Please select a podcast summary source'), 'required');
+	}
+	$FORM->addRule('podcast_summary', gettext('Podcast summary source is out of range'),
+		'in_array_keys', $podcast_summary_sources);
 	
-	// collect for keywords
-	$casts_keywords= array(
-		'1' => gettext('Use Feed Keywords'),
-		'0' => gettext('No Keywords')
-		);
-			
 	// select for keywords
-	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $casts_keywords,
+	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $podcast_keywords_sources,
 		array('id' => 'blog_posting_podcast_keywords'));
 	$FORM->applyFilter('podcast_keywords', 'trim');
-	$FORM->applyFilter('podcast_keywords', 'strip_tags');	
+	$FORM->applyFilter('podcast_keywords', 'strip_tags');
+	if ($FORM->exportValue('mediafile_id') != "") {
+		$FORM->addRule('podcast_keywords', gettext('Please select a podcast keyword source'), 'required');
+	}
+	$FORM->addRule('podcast_keywords', gettext('Podcast keywords source is out of range'),
+		'in_array_keys', $podcast_keywords_sources);
 	
+	// select for category_1
+	$FORM->addElement('select', 'podcast_category_1', gettext('Category 1'), $podcast_categories,
+		array('id' => 'blog_posting_podcast_category_1'));
+	$FORM->applyFilter('podcast_category_1', 'trim');
+	$FORM->applyFilter('podcast_category_1', 'strip_tags');
+	$FORM->addRule('podcast_category_1', gettext('Podcast category 1 is out of range'),
+		'in_array_keys', $podcast_categories);
+
+	// select for category_2
+	$FORM->addElement('select', 'podcast_category_2', gettext('Category 2'), $podcast_categories,
+		array('id' => 'blog_posting_podcast_category_2'));
+	$FORM->applyFilter('podcast_category_2', 'trim');
+	$FORM->applyFilter('podcast_category_2', 'strip_tags');	
+	$FORM->addRule('podcast_category_2', gettext('Podcast category 2 is out of range'),
+		'in_array_keys', $podcast_categories);
+	
+	// select for category_3
+	$FORM->addElement('select', 'podcast_category_3', gettext('Category 3'), $podcast_categories,
+		array('id' => 'blog_posting_podcast_category_3'));
+	$FORM->applyFilter('podcast_category_3', 'trim');
+	$FORM->applyFilter('podcast_category_3', 'strip_tags');	
+	$FORM->addRule('podcast_category_3', gettext('Podcast category 3 is out of range'),
+		'in_array_keys', $podcast_categories);
+
 	// textfield for author
 	$FORM->addElement('text', 'podcast_author', gettext('Author'),
 		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'));
@@ -222,11 +288,11 @@ try {
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'podcast_block', gettext('Block Appearance'), null,
+	$FORM->addElement('checkbox', 'podcast_block', gettext('Block'), null,
 		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'));
 	$FORM->applyFilter('podcast_block', 'trim');
 	$FORM->applyFilter('podcast_block', 'strip_tags');
-	$FORM->addRule('podcast_block', gettext('Prevent an episode or podcast from appearing'),
+	$FORM->addRule('podcast_block', gettext('The field whether an episode should be blocked accepts only 0 or 1'),
 		'regex', OAK_REGEX_ZERO_OR_ONE);	
 	
 	// submit button
@@ -235,13 +301,14 @@ try {
 		
 	$FORM->addElement('button', 'showIDThree', gettext('Show ID3'),
 		array('class' => 'showIDThree120'));
-
+	
 	$FORM->addElement('button', 'discardPodcast', gettext('Discard cast'),
 		array('class' => 'discardPodcast120'));
-			
-	// podcast layer eof	
 	
-		
+	/*
+	 * End of podcast layer
+	 */
+	
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
 		array('id' => 'blog_posting_text_converter'));
@@ -263,6 +330,11 @@ try {
 		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
 	$FORM->applyFilter('tags', 'trim');
 	$FORM->applyFilter('tags', 'strip_tags');
+	
+	// textarea for feed_summary
+	$FORM->addElement('textarea', 'feed_summary', gettext('Feed Summary'),
+		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+	$FORM->applyFilter('feed_summary', 'trim');
 	
 	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
@@ -307,13 +379,26 @@ try {
 		'title' => Base_Cnc::ifsetor($blog_posting['title'], null),
 		'summary' => Base_Cnc::ifsetor($blog_posting['summary_raw'], null),
 		'content' => Base_Cnc::ifsetor($blog_posting['content_raw'], null),
+		'feed_summary' => Base_Cnc::ifsetor($blog_posting['feed_summary_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($blog_posting['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($blog_posting['apply_macros'], null),
 		'tags' => $BLOGTAG->_serializedTagArrayToString(Base_Cnc::ifsetor($blog_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($blog_posting['draft'], null),
 		'ping' => 0,
 		'comments_enable' => Base_Cnc::ifsetor($blog_posting['comments_enable'], null),
-		'trackbacks_enable' => Base_Cnc::ifsetor($blog_posting['trackbacks_enable'], null)
+		'trackbacks_enable' => Base_Cnc::ifsetor($blog_posting['trackbacks_enable'], null),
+		'mediafile_id' => Base_Cnc::ifsetor($blog_posting['podcast_media_object'], null),
+		'podcast_id' => Base_Cnc::ifsetor($blog_posting['podcast_id'], null),
+		'podcast_title' => Base_Cnc::ifsetor($blog_posting['podcast_title'], null),
+		'podcast_description' => Base_Cnc::ifsetor($blog_posting['podcast_description_source'], null),
+		'podcast_summary' => Base_Cnc::ifsetor($blog_posting['podcast_summary_source'], null),
+		'podcast_keywords' => Base_Cnc::ifsetor($blog_posting['podcast_keywords_source'], null),
+		'podcast_category_1' => Base_Cnc::ifsetor($blog_posting['podcast_category_1'], null),
+		'podcast_category_2' => Base_Cnc::ifsetor($blog_posting['podcast_category_2'], null),
+		'podcast_category_3' => Base_Cnc::ifsetor($blog_posting['podcast_category_3'], null),
+		'podcast_author' => Base_Cnc::ifsetor($blog_posting['podcast_author'], null),
+		'podcast_explicit' => Base_Cnc::ifsetor($blog_posting['podcast_explicit'], null),
+		'podcast_block' => Base_Cnc::ifsetor($blog_posting['podcast_block'], null)
 	));
 	
 	// validate it
@@ -370,6 +455,8 @@ try {
 		$sqlData['summary'] = $FORM->exportValue('summary');
 		$sqlData['content_raw'] = $FORM->exportValue('content');
 		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['feed_summary_raw'] = $FORM->exportValue('feed_summary');
+		$sqlData['feed_summary'] = $FORM->exportValue('feed_summary');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
@@ -386,11 +473,13 @@ try {
 			// extract summary/content
 			$summary = $FORM->exportValue('summary');
 			$content = $FORM->exportValue('content');
+			$feed_summary = $FORM->exportValue('feed_summary');
 
 			// apply startup and pre text converter text macros 
 			if ($FORM->exportValue('apply_macros') > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'pre');
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'pre');
 			}
 
 			// apply text converter
@@ -409,11 +498,13 @@ try {
 			if ($FORM->exportValue('apply_macros') > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'post');
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
+				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'post');
 			}
 
 			// assign summary/content to sql data array
 			$sqlData['summary'] = $summary;
 			$sqlData['content'] = $content;
+			$sqlData['feed_summary'] = $feed_summary;
 		}
 
 		// test sql data for pear errors
@@ -430,6 +521,41 @@ try {
 			// update tags
 			$BLOGTAG->updatePostingTags($FORM->exportValue('page'), $FORM->exportValue('id'),
 				$BLOGTAG->_tagStringToArray($FORM->exportValue('tags')));
+			
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
+			
+			// re-throw exception
+			throw $e;
+		}
+		
+		// process podcast
+		$sqlData = array();
+		$sqlData['title'] = $FORM->exportValue('podcast_title');
+		$sqlData['media_object'] = $FORM->exportValue('mediafile_id');
+		$sqlData['description_source'] = $FORM->exportValue('podcast_description');
+		$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
+		$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
+		$sqlData['category_1'] = $FORM->exportValue('podcast_category_1');
+		$sqlData['category_2'] = $FORM->exportValue('podcast_category_2');
+		$sqlData['category_3'] = $FORM->exportValue('podcast_category_3');
+		$sqlData['author'] = $FORM->exportValue('podcast_author');
+		$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
+		$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
+		
+		// test sql data for pear errors
+		$HELPER->testSqlDataForPearErrors($sqlData);
+		
+		// insert it
+		try {
+			// begin transaction
+			$BASE->db->begin();
+			
+			// execute operation
+			$BLOGPODCAST->updateBlogPodcast($FORM->exportValue('podcast_id'), $sqlData);
 			
 			// commit
 			$BASE->db->commit();

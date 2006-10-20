@@ -45,6 +45,8 @@ define("OAK_DB_COMMUNITY_BLOG_COMMENTS", "community_blog_comments");
 define("OAK_DB_COMMUNITY_SETTINGS", "community_settings");
 
 // content table aliases
+define("OAK_DB_CONTENT_BLOG_PODCASTS", "content_blog_podcasts");
+define("OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES", "content_blog_podcast_categories");
 define("OAK_DB_CONTENT_BLOG_POSTINGS", "content_blog_postings");
 define("OAK_DB_CONTENT_BLOG_TAGS", "content_blog_tags");
 define("OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS", "content_blog_tags2content_blog_postings");

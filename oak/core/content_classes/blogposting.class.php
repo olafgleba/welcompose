@@ -243,6 +243,20 @@ public function selectBlogPosting ($id)
 			`content_blog_postings`.`day_added` AS `day_added`,
 			`content_blog_postings`.`month_added` AS `month_added`,
 			`content_blog_postings`.`year_added` AS `year_added`,
+			`content_blog_podcasts`.`id` AS `podcast_id`,
+			`content_blog_podcasts`.`media_object` AS `podcast_media_object`,
+			`content_blog_podcasts`.`title` AS `podcast_title`,
+			`content_blog_podcasts`.`description_source` AS `podcast_description_source`,
+			`content_blog_podcasts`.`summary_source` AS `podcast_summary_source`,
+			`content_blog_podcasts`.`keywords_source` AS `podcast_keywords_source`,
+			`content_blog_podcasts`.`category_1` AS `podcast_category_1`,
+			`content_blog_podcasts`.`category_2` AS `podcast_category_2`,
+			`content_blog_podcasts`.`category_3` AS `podcast_category_3`,
+			`content_blog_podcasts`.`pub_date` AS `podcast_pub_date`,
+			`content_blog_podcasts`.`author` AS `podcast_author`,
+			`content_blog_podcasts`.`block` AS `podcast_block`,
+			`content_blog_podcasts`.`duration` AS `podcast_duration`,
+			`content_blog_podcasts`.`explicit` AS `podcast_explicit`,
 			`content_nodes`.`id` AS `node_id`,
 			`content_nodes`.`navigation` AS `node_navigation`,
 			`content_nodes`.`root_node` AS `node_root_node`,
@@ -276,7 +290,11 @@ public function selectBlogPosting ($id)
 		JOIN
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
-			`content_pages`.`id` = `content_nodes`.`id`			
+			`content_pages`.`id` = `content_nodes`.`id`
+		LEFT JOIN
+			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+		  ON
+			`content_blog_postings`.`id` = `content_blog_podcasts`.`blog_posting`
 		WHERE
 			`content_blog_postings`.`id` = :id
 		  AND
@@ -408,6 +426,20 @@ public function selectBlogPostings ($params = array())
 			`content_blog_postings`.`day_added` AS `day_added`,
 			`content_blog_postings`.`month_added` AS `month_added`,
 			`content_blog_postings`.`year_added` AS `year_added`,
+			`content_blog_podcasts`.`id` AS `podcast_id`,
+			`content_blog_podcasts`.`media_object` AS `podcast_media_object`,
+			`content_blog_podcasts`.`title` AS `podcast_title`,
+			`content_blog_podcasts`.`description_source` AS `podcast_description_source`,
+			`content_blog_podcasts`.`summary_source` AS `podcast_summary_source`,
+			`content_blog_podcasts`.`keywords_source` AS `podcast_keywords_source`,
+			`content_blog_podcasts`.`category_1` AS `podcast_category_1`,
+			`content_blog_podcasts`.`category_2` AS `podcast_category_2`,
+			`content_blog_podcasts`.`category_3` AS `podcast_category_3`,
+			`content_blog_podcasts`.`pub_date` AS `podcast_pub_date`,
+			`content_blog_podcasts`.`author` AS `podcast_author`,
+			`content_blog_podcasts`.`block` AS `podcast_block`,
+			`content_blog_podcasts`.`duration` AS `podcast_duration`,
+			`content_blog_podcasts`.`explicit` AS `podcast_explicit`,
 			`content_nodes`.`id` AS `node_id`,
 			`content_nodes`.`navigation` AS `node_navigation`,
 			`content_nodes`.`root_node` AS `node_root_node`,
@@ -442,6 +474,10 @@ public function selectBlogPostings ($params = array())
 			".OAK_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
+		LEFT JOIN
+			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+		  ON
+			`content_blog_postings`.`id` = `content_blog_podcasts`.`blog_posting`
 		WHERE
 			`content_pages`.`project` = :project
 	";
