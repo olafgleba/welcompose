@@ -73,9 +73,9 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load blogcommentstatus class
-	/* @var $BLOGCOMMENTSTATUS Community_Blogcommentstatus */
-	$BLOGCOMMENTSTATUS = load('community:blogcommentstatus');
+	// load Community_BlogComment
+	/* @var $BLOGCOMMENT Community_BlogComment */
+	$BLOGCOMMENT = load('Community:BlogComment');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
@@ -97,8 +97,17 @@ try {
 		// start transaction
 		$BASE->db->begin();
 		
-		// status id = $_REQUEST['status_id']	
-		// comment id = $_REQUEST['comment_id']
+		// import params
+		$comment_id = Base_Cnc::filterRequest($_REQUEST['comment_id'], OAK_REGEX_NUMERIC);
+		$status_id = Base_Cnc::filterRequest($_REQUEST['status_id'], OAK_REGEX_NUMERIC);
+		
+		// prepare sql data
+		$sqlData = array(
+			'status' => (int)$status_id
+		);
+		
+		// update blog comment
+		$BLOGCOMMENT->updateBlogComment($comment_id, $sqlData);
 		
 		// commit transaction
 		$BASE->db->commit();
