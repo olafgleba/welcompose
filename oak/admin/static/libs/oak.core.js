@@ -373,9 +373,8 @@ function OakInit_getVars ()
 					_req.onreadystatechange = function () { OakInit.processOakInit(_ttarget);};
 					_req.send('');
 				}
-			}
-			
-		}
+			}	
+		}	
 	} catch (e) {
 		_applyError(e);
 	}

@@ -192,9 +192,10 @@ function Helper_unsupportsEffects(exception)
 	try {
 		//properties
 		this.browser = _setBrowserString();
+		this.version = _setBrowserStringVersion();
 		this.exception = exception;
 			
-		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
+		if ((this.browser == "Internet Explorer" && this.version < '7') || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;
@@ -215,13 +216,15 @@ function Helper_unsupportsElems(exception)
 	try {
 		//properties
 		this.browser = _setBrowserString();
+		this.version = _setBrowserStringVersion();
 		this.exception = exception;
 		
-		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
+		if ((this.browser == "Internet Explorer" && this.version < '7') || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;
 		}
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -237,7 +240,8 @@ function Helper_unsupportsElems(exception)
 function _compare (string)
 {
 	try {
-		var res = detect.indexOf(string) + 1;
+		res = detect.indexOf(string) + 1;
+		thestring = string;
 		return res;
 	} catch (e) {
 		_applyError(e);
@@ -266,6 +270,59 @@ function _setBrowserString ()
 			browser = 'Unknown Browser';
 		}
 		return browser;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @private
+ * @requires Helper The Helper Class
+ */
+function _setBrowserStringVersion ()
+{
+	try {			
+		_setBrowserString();
+		var version;
+		
+		version = detect.charAt(res + thestring.length);
+
+		return version;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * @private
+ * @requires Helper The Helper Class
+ */
+function _setBrowserStringOS ()
+{
+	try {			
+		detect = navigator.userAgent.toLowerCase();
+		var os;
+		
+		if (_compare('linux')) {
+			os = 'Linux';
+		}
+		else if (_compare('x11')) {
+			os = 'Unix';
+		}
+		else if (_compare('win')) {
+			os = 'Windows';
+		}
+		else if (_compare('mac')) {
+			os = 'Mac';
+		}
+		else {
+			os = 'Unknown operating system';
+		}
+		return os;
 	} catch (e) {
 		_applyError(e);
 	}
