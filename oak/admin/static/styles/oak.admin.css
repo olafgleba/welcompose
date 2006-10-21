@@ -1040,6 +1040,19 @@ visibility: hidden;
 visibility: hidden;
 }
 
+/* related to safari bug
+* http://bugs.webkit.org/show_bug.cgi?id=6991
+*/
+#mm_user_wrap table {
+margin: 0;
+padding: 0;
+}
+#mm_user_wrap table td {
+margin: 0;
+padding: 0 2px 0 0;
+font-size: 100%;
+}
+
 #myLocal_mm_contentToPopulate table, #myFlickr_mm_contentToPopulate table {
 margin: 4px 4px;
 }

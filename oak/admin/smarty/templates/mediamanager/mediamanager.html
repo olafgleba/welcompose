@@ -107,11 +107,16 @@ Page <a class="pager" id="" href="#" title="{i18n Previous}">&lt;</a>1 of 10<a c
 <div class="mmwrap">
 <span class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_user_wrap">
-<input class="w150" type="text" id="mm_user" value="{$request.mm_user|escape:"htmlall"}" />
-<input type="button" id="submit55" value="{i18n Load}" />
+<table>
+<tr>
+<td><input class="w150" type="text" id="mm_user" value="{$request.mm_user|escape:"htmlall"}" /></td>
+<td><input type="button" id="submit55" value="{i18n Load}" /></td>
+</tr>
+</table>
 </span>
 </span>
 </div>
+<!-- surrounding table on user inputs is needed for safari -> see http://bugs.webkit.org/show_bug.cgi?id=6991 -->
 <!-- element (user) wrap eof -->
 
 <!-- element (photoset) wrap -->
