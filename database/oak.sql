@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 20.10.2006 16:32:25
--- Diagram Version: 155
+-- Created on: 21.10.2006 20:56:11
+-- Diagram Version: 157
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -384,6 +384,8 @@ CREATE TABLE `content_blog_podcast_categories` (
   `name` varchar(255),
   `category` varchar(255),
   `subcategory` varchar(255),
+  `date_added` datetime,
+  `date_modified` timestamp(14),
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   CONSTRAINT `content_blog_podcast_categories.project2application_projects.id` FOREIGN KEY (`project`)
