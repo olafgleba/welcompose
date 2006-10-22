@@ -774,8 +774,14 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		commentId = String(commentId.firstChild);
-		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");
+		// Safari whitespace #textNode behaviour
+		if (Helper.unsupportsElems()) {
+			commentId = commentId.nextSibling.nextSibling.nextSibling.firstChild;
+		} else {
+			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.firstChild;
+		}
+		commentId = String(commentId.href);
+		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");		
 
 		// properties
 		var url = this.parseBlogCommmentStatusChangeUrl;
