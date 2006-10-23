@@ -965,6 +965,7 @@ public function genericTypesToMimeTypes ($generic_type)
 				'rtf' => 'application/rtf',
 				'xls' => 'application/vnd.ms-excel',
 				'ppt' => 'application/vnd.ms-powerpoint',
+				'zip' => 'application/zip'
 			);
 		case 'audio':
 			return array(
@@ -1097,10 +1098,17 @@ public function mimeTypeToIcon ($mime_type)
 	
 	// icon list
 	$icons = array(
-		'application/pdf' => 'document.jpg',
-		'audio/x-m4a' => 'music.jpg',
-		'audio/mpeg' => 'music.jpg',
-		'video/quicktime' => 'movie.jpg'
+		'application/pdf' => 'pdf.jpg',
+		'application/msword' => 'doc.jpg',
+		'application/rtf' => 'rtf.jpg',
+		'application/vnd.ms-excel' => 'xls.jpg',
+		'application/vnd.ms-powerpoint' => 'ppt.jpg',
+		'application/zip' => 'zip.jpg',
+		'audio/x-m4a' => 'audio.jpg',
+		'audio/mpeg' => 'audio.jpg',
+		'video/mp4' => 'video.jpg',
+		'video/x-m4v' => 'video.jpg',
+		'video/quicktime' => 'video.jpg'
 	);
 	
 	// search icon array and return the right icon
@@ -1111,7 +1119,7 @@ public function mimeTypeToIcon ($mime_type)
 	}
 	
 	// return default icon
-	return 'generic.gif';
+	return 'generic.jpg';
 }
 
 // end of class
