@@ -199,6 +199,6 @@ define("OAK_REGEX_FLICKR_SCREENNAME", "=^([a-z0-9\s]+)$=i");
 define("OAK_REGEX_DATETIME", "=^[0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}\:[0-9]{2}\:[0-9]{2}$=i");
 
 // Defines regular expression for strings containing a mime type
-define("OAK_REGEX_MIME_TYPE", "=^([a-z0-9-_]+)\/([a-z0-9-_]+)$=i");
+define("OAK_REGEX_MIME_TYPE", "=^([a-z0-9-_]+)\/([a-z0-9-_\.]+)$=i");
 
 ?>
