@@ -66,7 +66,7 @@ var response = '{$session.response}';
 
 <h1>{i18n Add Podcast Category}</h1>
 
-<div class="secnav710_nav_x"><a href="podcastcategories_select.php">{i18n Podcast Categories}</a></div>
+<div class="secnav710_navplus_x"><a href="podcastcategories_select.php">{i18n Podcast Categories}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -85,10 +85,6 @@ var response = '{$session.response}';
 <p>{i18n To apply further input, please repeat fill in the form}</p>
 <!-- rp --></div>
 {/if}
-
-<!-- column -->
-<div id="column"></div>
-<!-- column -->
 
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
