@@ -242,6 +242,12 @@ var definitions = {
 			this.style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
 		}
 	},
+	'.submit200upload' : function(el){
+		el.onclick = function(){
+			Helper.showFileUploadMessage();
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+	},
 	'.submit200' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';

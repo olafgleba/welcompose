@@ -48,6 +48,7 @@ Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
 Helper.prototype.lowerOpacity = Helper_lowerOpacity;
+Helper.prototype.lowerOpacityOnUpload = Helper_lowerOpacityOnUpload;
 Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
 Helper.prototype.unsupportsElems = Helper_unsupportsElems;
 Helper.prototype.defineWindowX = Helper_defineWindowX;
@@ -59,6 +60,7 @@ Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobal
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
+Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
 
 
 function Helper_launchPopup (width, height, nname, trigger, elem)
@@ -180,6 +182,36 @@ function Helper_lowerOpacity ()
 	}
 }
 
+function Helper_lowerOpacityOnUpload ()
+{       
+	try {
+ 		// properties
+        this.cLeft = '0px';
+        this.cTop = '0px';
+        this.cPosition = 'absolute';
+        this.cDisplay = 'block';
+        this.imagePath = '../static/img/bg_overlay.png';
+		this.lyContainer = $("modalWindow");   
+        this.buildHeight = this.lyContainer.offsetHeight;
+        this.buildWidth = this.lyContainer.offsetWidth;
+		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
+		this.ttarget_lower = $('lyLowerOpacity');
+
+        if (this.ttarget_lower) {
+
+		 	this.ttarget_lower.style.display = this.cDisplay;
+			this.ttarget_lower.style.position = this.cPosition;
+			this.ttarget_lower.style.top = this.cTop;
+			this.ttarget_lower.style.left = this.cLeft;
+			this.ttarget_lower.style.height = this.buildHeight + 'px';
+			this.ttarget_lower.style.width = this.buildWidth + 'px';
+			
+			Element.update(this.ttarget_lower, this.imageStr);
+        }
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Helper
@@ -831,6 +863,16 @@ function _loaderChangeBlogCommentStatus ()
 	try {
 		Helper.lowerOpacity();
 		Effect.Appear('statuschange', {duration: 0.6, delay: 0.2});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_showFileUploadMessage()
+{
+	try {
+		Helper.lowerOpacityOnUpload();
+		Effect.Appear('uploadMessage', {duration: 0.4});
 	} catch (e) {
 		_applyError(e);
 	}

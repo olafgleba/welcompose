@@ -665,6 +665,19 @@ padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
 cursor: pointer;
 }
+input.submit200upload {
+text-align: left;
+background: #0c3 url(../img/submit200.gif) no-repeat;
+color: #fff;
+width: 200px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 0 0 0 5px;
+margin: 20px 0 0 140px;
+cursor: pointer;
+}
 input.submit200bez260 {
 text-align: left;
 background: #0c3 url(../img/submit200.gif) no-repeat;
@@ -1375,11 +1388,13 @@ padding: 0;
 margin: 0;
 line-height: 140%;
 }
+
+/* Messages */
 #statuschange {
 display: none;
 }
 #statuschange {
-position:  absolute;
+position: absolute;
 top: 40%;
 left: 15%;
 width: 710px;
@@ -1396,6 +1411,28 @@ margin: 0;
 padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_statuschange_bot.gif) left bottom no-repeat;
 }
+#uploadMessage {
+display: none;
+}
+#uploadMessage {
+position: absolute;
+top: 40%;
+left: 15%;
+width: 500px;
+background: transparent url(../img/bg_uploadmessage_top.gif) 0 0 no-repeat;
+z-index: 2;
+}
+#uploadMessage h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#uploadMessage p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_uploadmessage_bot.gif) left bottom no-repeat;
+}
+/* Messages eof */
 
 /* LOGIN - BODY-ID #LOGIN */
 body#login  {

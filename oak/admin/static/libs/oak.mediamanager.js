@@ -552,13 +552,17 @@ function _showResponseDiscardPodcast(req)
 {
 	try {
 		// set hidden field value
-		$('podcast_media_object').value = '';			
-			
+		$('podcast_media_object').value = '';	
+		
+		/* debug */
+		$('podcast_container').innerHTML = req.responseText;		
+		
+		/*	
 		if (Helper.unsupportsEffects('safari_exception')) {
 			Element.hide('podcast_container');
 		} else {
 			Effect.Fade('podcast_container',{duration: 0.4});
-		}		
+		}*/			
 	} catch (e) {
 		_applyError(e);
 	}
