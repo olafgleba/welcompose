@@ -686,7 +686,7 @@ function _showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		$('column').focus();
+		$(this).focus();
 		
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
@@ -1093,7 +1093,7 @@ function _showResponseInvokeInputsMyFlickr(req)
 		
 		Mediamanager.setCurrentElementStatusMyFlickr();
 		
-		$('column').focus();
+		$(this).focus();
 								
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);

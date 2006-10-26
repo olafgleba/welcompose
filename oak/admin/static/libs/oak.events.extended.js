@@ -225,16 +225,19 @@ var definitions = {
 	'#mm_include_types_wrap' : function(el){
 		el.onclick = function(){
 			Mediamanager.invokeInputs(this);
+			return false;
 		}
 	},
 	'#mm_timeframe' : function(el){
 		el.onchange = function(){
 			Mediamanager.invokeInputs(this);
+			return false;
 		}
 	},
 	'#mm_photoset' : function(el){
 		el.onchange = function(){
 			Mediamanager.invokeInputsMyFlickr(this);
+			return false;
 		}
 	},
 	'input' : function(el){

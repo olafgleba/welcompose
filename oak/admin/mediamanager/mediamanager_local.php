@@ -131,7 +131,7 @@ try {
 		'timeframe' => $request['mm_timeframe'],
 		'order_macro' => 'DATE_ADDED:DESC',
 		'start' => $request['mm_start'],
-		'limit' => (($request['mm_limit'] < 1) ? 7 : $request['mm_limit'])
+		'limit' => (($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
