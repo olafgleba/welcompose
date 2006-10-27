@@ -100,7 +100,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add blog comment status'),
-		array('class' => 'submit200'));
+		array('class' => 'submit240'));
 		
 	// validate it
 	if (!$FORM->validate()) {

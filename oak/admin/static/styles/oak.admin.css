@@ -503,7 +503,7 @@ font-size: 100%;
 fieldset.topbg h2, fieldset.within h2 {
 font-size: 1.0em;
 font-weight: normal;
-padding: 10px 10px 0 0px;
+padding: 0 10px 0 0;
 color: #0c3;
 }
 label {
@@ -628,92 +628,68 @@ td input.submit140, td input.submit200, td select {
 font-size: 100%;
 }
 /* eof Reset for inner table definition */
-input.submit90 {
+
+input#submit55,
+input.submit90,
+input.submit140,
+input.submit200,
+input.submit200upload,
+input.submit200bez260,
+input.cancel200,
+input.submit240,
+input.submit240bez260 {
 text-align: left;
-background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
-color: #fff;
-width: 90px;
 height: 20px;
 font-size: 80%;
+font-weight: bold;
+color: #fff;
 border: 0 none;
-padding: 0 0 0 5px;
+padding: 0 0 2px 3px;
 cursor: pointer;
+}
+
+input#submit55 {
+background: #666 url(../img/submit55.gif) 100% 0 no-repeat;
+width: 55px;
+}
+input.submit90 {
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+width: 90px;
 }
 input.submit140 {
-text-align: left;
 background: #0c3 url(../img/submit140.gif) no-repeat;
-color: #fff;
 width: 140px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
 margin: 20px  0 0 140px;
-cursor: pointer;
 }
 input.submit200 {
-text-align: left;
 background: #0c3 url(../img/submit200.gif) no-repeat;
-color: #fff;
 width: 200px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
-cursor: pointer;
 }
 input.submit200upload {
-text-align: left;
 background: #0c3 url(../img/submit200.gif) no-repeat;
-color: #fff;
 width: 200px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
-cursor: pointer;
 }
 input.submit200bez260 {
-text-align: left;
 background: #0c3 url(../img/submit200.gif) no-repeat;
-color: #fff;
 width: 200px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
 margin: 20px 0 0 260px;
-cursor: pointer;
 }
 input.cancel200 {
-text-align: left;
 background: #0c3 url(../img/submit200.gif) no-repeat;
-color: #fff;
 width: 200px;
-height: 20px;
-font-size: 80%;
-font-weight: bold;
-border: 0 none;
-padding: 0 0 0 5px;
 margin: 20px 0 0 140px;
-cursor: pointer;
 }
-input#submit55 {
-text-align: left;
-background: #666 url(../img/submit55.gif) 100% 0 no-repeat;
-color: #fff;
-width: 55px;
-height: 20px;
-font-size: 80%;
-border: 0 none;
-padding: 0 0 0 2px;
-cursor: pointer;
+input.submit240 {
+background: #0c3 url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 140px;
+}
+input.submit240bez260 {
+background: #0c3 url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 260px;
 }
 
 /* %M =search */

@@ -125,6 +125,11 @@ var definitions = {
 			this.style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
 		}
 	},
+	'.submit140' : function(el){
+		el.onclick = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
+		}
+	},
 	'.submit200' : function(el){
 		el.onclick = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
@@ -135,9 +140,14 @@ var definitions = {
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
-	'.submit140' : function(el){
+	'.submit240' : function(el){
 		el.onclick = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
+			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
+		}
+	},
+	'.submit240bez260' : function(el){
+		el.onclick = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
 		}
 	}
 };

@@ -36,11 +36,11 @@ var hideElement = '<%i18n Hide this element%>';
 var showElement = '<%i18n Show this element%>';
 
 var describeLink = '<%i18n Your link description%>';
-var selectTextarea = '<%i18n Please set focus on the textarea where to put the media in%>';
+var selectTextarea = '<%i18n Please set focus on the text area into which you wish the media to be placed.%>';
 
 var showDetails = '<%i18n Show details%>';
 var hideDetails = '<%i18n Hide details%>';
 
-var confirmMsgDelNav = '<%i18n Do you really want to delete the choosen navigation? Every page related to this navigation will be deleted too.%>';
+var confirmMsgDelNav = '<%i18n Are you sure you want to delete the chosen navigation? Every page related to this navigation will be deleted too.%>';
 
-var alertOnSelectImageSize = '<%i18n Please select an display size for the image to insert.%>';
+var alertOnSelectImageSize = '<%i18n Please select a Flickr.com supplied image size.%>';
