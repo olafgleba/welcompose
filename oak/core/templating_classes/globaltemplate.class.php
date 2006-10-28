@@ -28,7 +28,7 @@
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
  * @package Oak
- * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
 class Templating_GlobalTemplate {
