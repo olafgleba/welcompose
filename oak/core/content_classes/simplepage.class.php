@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Content_Simplepage {
+class Content_SimplePage {
 	
 	/**
 	 * Singleton
@@ -69,16 +69,16 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Content_Simplepage object.
+ * Singleton. Returns instance of the Content_SimplePage object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Content_Simplepage::$instance == null) {
-		Content_Simplepage::$instance = new Content_Simplepage(); 
+	if (Content_SimplePage::$instance == null) {
+		Content_SimplePage::$instance = new Content_SimplePage(); 
 	}
-	return Content_Simplepage::$instance;
+	return Content_SimplePage::$instance;
 }
 
 /**
@@ -86,7 +86,7 @@ public function instance()
  * first argument and a field=>value array with simple page data as
  * second argument. Returns insert id. 
  * 
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Page id
  * @param array Row data
  * @return int Simple page
@@ -95,7 +95,7 @@ public function addSimplePage ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -103,7 +103,7 @@ public function addSimplePage ($id, $sqlData)
 		throw new Content_SimplePageException('Input for parameter id is not numeric');
 	}
 	if (!is_array($sqlData)) {
-		throw new Content_SimplepageException('Input for parameter sqlData is not an array');	
+		throw new Content_SimplePageException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the simple page will be associated to the correct page
@@ -114,7 +114,7 @@ public function addSimplePage ($id, $sqlData)
 	
 	// test if simple page belongs to current user/project
 	if (!$this->simplePageBelongsToCurrentUser($id) {
-		throw new Content_SimplepageException('Simple page does not belong to current user or project');
+		throw new Content_SimplePageException('Simple page does not belong to current user or project');
 	}
 	
 	return (int)$id;
@@ -125,7 +125,7 @@ public function addSimplePage ($id, $sqlData)
  * field=>value array with the new simple page data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Simple page id
  * @param array Row data
  * @return int Affected rows
@@ -134,20 +134,20 @@ public function updateSimplePage ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimplepageException('Input for parameter id is not an array');
+		throw new Content_SimplePageException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Content_SimplepageException('Input for parameter sqlData is not an array');	
+		throw new Content_SimplePageException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if simple page belongs to current user/project
 	if (!$this->simplePageBelongsToCurrentUser($id)) {
-		throw new Content_SimplepageException('Simple page does not belong to current user or project');
+		throw new Content_SimplePageException('Simple page does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -168,7 +168,7 @@ public function updateSimplePage ($id, $sqlData)
  * simple page id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Simple page id
  * @return int Amount of affected rows
  */
@@ -176,17 +176,17 @@ public function deleteSimplePage ($id)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimplepageException('Input for parameter id is not numeric');
+		throw new Content_SimplePageException('Input for parameter id is not numeric');
 	}
 	
 	// test if simple page belongs to current user/project
 	if (!$this->simplePageBelongsToCurrentUser($id)) {
-		throw new Content_SimplepageException('Simple page does not belong to current user or project');
+		throw new Content_SimplePageException('Simple page does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -205,7 +205,7 @@ public function deleteSimplePage ($id)
  * Selects one simple page. Takes the simple page id as first
  * argument. Returns array with simple page information.
  * 
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Simple page id
  * @return array
  */
@@ -213,12 +213,12 @@ public function selectSimplePage ($id)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimplepageException('Input for parameter id is not numeric');
+		throw new Content_SimplePageException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -311,7 +311,7 @@ public function selectSimplePage ($id)
  * </li>
  * </ul>
  * 
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param array Select params
  * @return array
  */
@@ -319,7 +319,7 @@ public function selectSimplePages ($params = array())
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -332,7 +332,7 @@ public function selectSimplePages ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Content_SimplepageException('Input for parameter params is not an array');	
+		throw new Content_SimplePageException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -348,7 +348,7 @@ public function selectSimplePages ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Content_SimplepageException("Unknown parameter $_key");
+				throw new Content_SimplePageException("Unknown parameter $_key");
 		}
 	}
 	
@@ -447,7 +447,7 @@ public function selectSimplePages ($params = array())
  * Tests whether given simple page belongs to current project. Takes the
  * simple page id as first argument. Returns bool.
  *
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Simple page id
  * @return int bool
  */
@@ -455,12 +455,12 @@ public function simplePageBelongsToCurrentProject ($simple_page)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($simple_page) || !is_numeric($simple_page)) {
-		throw new Content_SimplepageException('Input for parameter simple_page is expected to be a numeric value');
+		throw new Content_SimplePageException('Input for parameter simple_page is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -497,7 +497,7 @@ public function simplePageBelongsToCurrentProject ($simple_page)
  * Test whether simple page belongs to current user or not. Takes
  * the simple page id as first argument. Returns bool.
  *
- * @throws Content_SimplepageException
+ * @throws Content_SimplePageException
  * @param int Simple page id
  * @return bool
  */
@@ -505,12 +505,12 @@ public function simplePageBelongsToCurrentUser ($simple_page)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
-		throw new Content_SimplepageException("You are not allowed to perform this action");
+		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($simple_page) || !is_numeric($simple_page)) {
-		throw new Content_SimplepageException('Input for parameter simple_page is expected to be a numeric value');
+		throw new Content_SimplePageException('Input for parameter simple_page is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -529,6 +529,6 @@ public function simplePageBelongsToCurrentUser ($simple_page)
 // end of class
 }
 
-class Content_SimplepageException extends Exception { }
+class Content_SimplePageException extends Exception { }
 
 ?>
