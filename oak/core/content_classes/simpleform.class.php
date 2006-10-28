@@ -93,7 +93,7 @@ public function addSimpleForm ($sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -126,7 +126,7 @@ public function updateSimpleForm ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -168,7 +168,7 @@ public function deleteSimpleForm ($id)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -205,7 +205,7 @@ public function selectSimpleForm ($id)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
@@ -310,7 +310,7 @@ public function selectSimpleForms ($params = array())
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
