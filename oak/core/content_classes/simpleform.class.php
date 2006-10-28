@@ -31,7 +31,7 @@
  * @license http://www.opensource.org/licenses/apache2.0.php Apache License, Version 2.0
  */
 
-class Content_Simpleform {
+class Content_SimpleForm {
 	
 	/**
 	 * Singleton
@@ -69,23 +69,23 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Content_Simpleform object.
+ * Singleton. Returns instance of the Content_SimpleForm object.
  * 
  * @return object
  */
 public function instance()
 { 
-	if (Content_Simpleform::$instance == null) {
-		Content_Simpleform::$instance = new Content_Simpleform(); 
+	if (Content_SimpleForm::$instance == null) {
+		Content_SimpleForm::$instance = new Content_SimpleForm(); 
 	}
-	return Content_Simpleform::$instance;
+	return Content_SimpleForm::$instance;
 }
 
 /**
  * Adds simple form to the simple form table. Takes a field=>value
  * array with simple form data as first argument. Returns insert id. 
  * 
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param array Row data
  * @return int Simple form
  */
@@ -98,7 +98,7 @@ public function addSimpleForm ($sqlData)
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Content_SimpleformException('Input for parameter sqlData is not an array');	
+		throw new Content_SimpleFormException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
@@ -106,7 +106,7 @@ public function addSimpleForm ($sqlData)
 	
 	// test if simple form belongs to current user/project
 	if (!$this->simpleFormBelongsToCurrentUser($sqlData['id'])) {
-		throw new Content_SimpleformException('Simple form does not belong to current user or project');
+		throw new Content_SimpleFormException('Simple form does not belong to current user or project');
 	}
 	
 	return $sqlData['id'];
@@ -117,7 +117,7 @@ public function addSimpleForm ($sqlData)
  * field=>value array with the new simple form data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param int Simple form id
  * @param array Row data
  * @return int Affected rows
@@ -131,15 +131,15 @@ public function updateSimpleForm ($id, $sqlData)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimpleformException('Input for parameter id is not an array');
+		throw new Content_SimpleFormException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Content_SimpleformException('Input for parameter sqlData is not an array');	
+		throw new Content_SimpleFormException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if simple form belongs to current user/project
 	if (!$this->simpleFormBelongsToCurrentUser($id)) {
-		throw new Content_SimpleformException('Simple form does not belong to current user or project');
+		throw new Content_SimpleFormException('Simple form does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -160,7 +160,7 @@ public function updateSimpleForm ($id, $sqlData)
  * simple form id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param int Simple form id
  * @return int Amount of affected rows
  */
@@ -173,12 +173,12 @@ public function deleteSimpleForm ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimpleformException('Input for parameter id is not numeric');
+		throw new Content_SimpleFormException('Input for parameter id is not numeric');
 	}
 	
 	// test if simple form belongs to current user/project
 	if (!$this->simpleFormBelongsToCurrentUser($id)) {
-		throw new Content_SimpleformException('Simple form does not belong to current user or project');
+		throw new Content_SimpleFormException('Simple form does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -197,7 +197,7 @@ public function deleteSimpleForm ($id)
  * Selects one simple form. Takes the simple form id as first
  * argument. Returns array with simple form information.
  * 
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param int Simple form id
  * @return array
  */
@@ -210,7 +210,7 @@ public function selectSimpleForm ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_SimpleformException('Input for parameter id is not numeric');
+		throw new Content_SimpleFormException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -302,7 +302,7 @@ public function selectSimpleForm ($id)
  * </li>
  * </ul>
  * 
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param array Select params
  * @return array
  */
@@ -323,7 +323,7 @@ public function selectSimpleForms ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Content_SimpleformException('Input for parameter params is not an array');	
+		throw new Content_SimpleFormException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -339,7 +339,7 @@ public function selectSimpleForms ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Content_SimpleformException("Unknown parameter $_key");
+				throw new Content_SimpleFormException("Unknown parameter $_key");
 		}
 	}
 	
@@ -437,7 +437,7 @@ public function selectSimpleForms ($params = array())
  * Tests whether given simple form belongs to current project. Takes the
  * simple form id as first argument. Returns bool.
  *
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param int Simple form id
  * @return int bool
  */
@@ -445,12 +445,12 @@ public function simpleFormBelongsToCurrentProject ($simple_form)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
-		throw new Content_SimpleformException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($simple_form) || !is_numeric($simple_form)) {
-		throw new Content_SimpleformException('Input for parameter simple_form is expected to be a numeric value');
+		throw new Content_SimpleFormException('Input for parameter simple_form is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -487,7 +487,7 @@ public function simpleFormBelongsToCurrentProject ($simple_form)
  * Test whether simple form belongs to current user or not. Takes
  * the simple form id as first argument. Returns bool.
  *
- * @throws Content_SimpleformException
+ * @throws Content_SimpleFormException
  * @param int Simple form id
  * @return bool
  */
@@ -495,12 +495,12 @@ public function simpleFormBelongsToCurrentUser ($simple_form)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Use')) {
-		throw new Content_SimpleformException("You are not allowed to perform this action");
+		throw new Content_SimpleFormException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($simple_form) || !is_numeric($simple_form)) {
-		throw new Content_SimpleformException('Input for parameter simple_form is expected to be a numeric value');
+		throw new Content_SimpleFormException('Input for parameter simple_form is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -519,6 +519,6 @@ public function simpleFormBelongsToCurrentUser ($simple_form)
 // end of class
 }
 
-class Content_SimpleformException extends Exception { }
+class Content_SimpleFormException extends Exception { }
 
 ?>
