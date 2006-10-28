@@ -744,7 +744,7 @@ public function initPageContents ($page)
 				
 				// create simple form
 				$SIMPLEFORM = load('content:simpleform');
-				$SIMPLEFORM->addSimpleForm($sqlData);
+				$SIMPLEFORM->addSimpleForm($page_info['id'], $sqlData);
 			break;
 		case 'OAK_SIMPLE_PAGE':
 				// prepare sql data
@@ -758,7 +758,7 @@ public function initPageContents ($page)
 				
 				// create simple page
 				$SIMPLEPAGE = load('content:simplepage');
-				$SIMPLEPAGE->addSimplePage($sqlData);
+				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
 		case 'OAK_BLOG':
 		case 'OAK_URL':

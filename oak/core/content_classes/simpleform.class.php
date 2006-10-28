@@ -82,14 +82,16 @@ public function instance()
 }
 
 /**
- * Adds simple form to the simple form table. Takes a field=>value
- * array with simple form data as first argument. Returns insert id. 
+ * Adds simple form to the simple form table. Takes the page id as first argument,
+ * a field=>value array with simple form data as second argument. Returns insert
+ * id. 
  * 
  * @throws Content_SimpleFormException
+ * @param int Page id
  * @param array Row data
  * @return int Simple form
  */
-public function addSimpleForm ($sqlData)
+public function addSimpleForm ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimpleForm', 'Manage')) {
@@ -98,18 +100,24 @@ public function addSimpleForm ($sqlData)
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Content_SimpleFormException('Input for parameter sqlData is not an array');	
+		throw new Content_SimpleFormException('Input for parameter sqlData is not an array');
 	}
+	if (empty($id) || !is_numeric($id)) {
+		throw new Content_SimpleFormException('Input for parameter sqlData is not numeric');
+	}
+	
+	// make sure that the simple form will be associated to the correct page
+	$sqlData['id'] = $id;
 	
 	// insert row
 	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_FORMS, $sqlData);
 	
 	// test if simple form belongs to current user/project
-	if (!$this->simpleFormBelongsToCurrentUser($sqlData['id'])) {
+	if (!$this->simpleFormBelongsToCurrentUser($id)) {
 		throw new Content_SimpleFormException('Simple form does not belong to current user or project');
 	}
 	
-	return $sqlData['id'];
+	return (int)$page;
 }
 
 /**

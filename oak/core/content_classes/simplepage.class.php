@@ -82,14 +82,16 @@ public function instance()
 }
 
 /**
- * Adds simple page to the simple page table. Takes a field=>value
- * array with simple page data as first argument. Returns insert id. 
+ * Adds simple page to the simple page table. Takes the page id as
+ * first argument and a field=>value array with simple page data as
+ * second argument. Returns insert id. 
  * 
  * @throws Content_SimplepageException
+ * @param int Page id
  * @param array Row data
  * @return int Simple page
  */
-public function addSimplePage ($sqlData)
+public function addSimplePage ($id, $sqlData)
 {
 	// access check
 	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
@@ -97,19 +99,25 @@ public function addSimplePage ($sqlData)
 	}
 	
 	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Content_SimplePageException('Input for parameter id is not numeric');
+	}
 	if (!is_array($sqlData)) {
 		throw new Content_SimplepageException('Input for parameter sqlData is not an array');	
 	}
+	
+	// make sure that the simple page will be associated to the correct page
+	$sqlData['id'] = $id;
 	
 	// insert row
 	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData);
 	
 	// test if simple page belongs to current user/project
-	if (!$this->simplePageBelongsToCurrentUser($sqlData['id'])) {
+	if (!$this->simplePageBelongsToCurrentUser($id) {
 		throw new Content_SimplepageException('Simple page does not belong to current user or project');
 	}
 	
-	return $sqlData['id'];
+	return (int)$id;
 }
 
 /**
