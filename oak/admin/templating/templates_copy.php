@@ -131,6 +131,8 @@ try {
 	$FORM->applyFilter('type', 'trim');
 	$FORM->applyFilter('type', 'strip_tags');
 	$FORM->addRule('type', gettext('Please select a template type'), 'required');
+	$FORM->addRule('type', gettext('Selected template type is out of range'), 'in_array_keys',
+		$template_types);
 	
 	// select for set
 	$template_set_element = $FORM->addElement('select', 'sets', gettext('Sets'), $template_sets,
@@ -139,6 +141,8 @@ try {
 	$FORM->applyFilter('set', 'trim');
 	$FORM->applyFilter('set', 'strip_tags');
 	$FORM->addRule('set', gettext('Please select a template set'), 'required');
+	$FORM->addRule('set', gettext('Selected template set is out of range'), 'in_array_keys',
+		$template_sets);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 

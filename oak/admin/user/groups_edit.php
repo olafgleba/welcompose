@@ -135,6 +135,8 @@ try {
 	$multi_select = $FORM->addElement('select', 'rights', gettext('Rights'), $rights,
 		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
 	$multi_select->setSelected($selected_rights);
+	$FORM->addRule('rights', gettext('Selected right is out of range'), 'in_array_keys',
+		$rights);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Edit group'),

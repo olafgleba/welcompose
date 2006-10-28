@@ -131,6 +131,8 @@ try {
 	$FORM->applyFilter('type', 'trim');
 	$FORM->applyFilter('type', 'strip_tags');
 	$FORM->addRule('type', gettext('Please select a template type'), 'required');
+	$FORM->addRule('type', gettext('Selected type is out of range'), 'in_array_keys',
+		$template_types);
 	
 	// select for set
 	$template_set_element = $FORM->addElement('select', 'sets', gettext('Sets'), $template_sets,
@@ -139,6 +141,8 @@ try {
 	$FORM->applyFilter('set', 'trim');
 	$FORM->applyFilter('set', 'strip_tags');
 	$FORM->addRule('set', gettext('Please select a template set'), 'required');
+	$FORM->addRule('set', gettext('Selected set is out of range'), 'in_array_keys',
+		$template_sets);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
@@ -192,19 +196,19 @@ try {
 		$BASE->utility->smarty->assign('oak_admin_root_www',
 			$BASE->_conf['path']['oak_admin_root_www']);
 		
-	    // build session
-	    $session = array(
+		// build session
+		$session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
-	    );
-	    
-	    // assign prepared session array to smarty
-	    $BASE->utility->smarty->assign('session', $session);
-	    
-	    // empty $_SESSION
-	    if (!empty($_SESSION['response'])) {
-	        $_SESSION['response'] = '';
-	    }
-	    
+		);
+		
+		// assign prepared session array to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
+		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);

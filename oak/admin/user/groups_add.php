@@ -119,6 +119,8 @@ try {
 		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
 	$FORM->applyFilter('rights', 'trim');
 	$FORM->applyFilter('rights', 'strip_tags');
+	$FORM->addRule('rights', gettext('Selected right is out of range'), 'in_array_keys',
+		$rights);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add group'),
@@ -144,19 +146,19 @@ try {
 		$BASE->utility->smarty->assign('oak_admin_root_www',
 			$BASE->_conf['path']['oak_admin_root_www']);
 		
-	    // build $session
-	    $session = array(
+		// build $session
+		$session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
-	    );
-	    
-	    // assign $_SESSION to smarty
-	    $BASE->utility->smarty->assign('session', $session);
-	    
-	    // empty $_SESSION
-	    if (!empty($_SESSION['response'])) {
-	        $_SESSION['response'] = '';
-	    }
-	    
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
+		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);

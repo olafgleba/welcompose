@@ -111,6 +111,8 @@ try {
 	$FORM->applyFilter('group', 'trim');
 	$FORM->applyFilter('group', 'strip_tags');
 	$FORM->addRule('group', gettext('Please select a group'), 'required');
+	$FORM->addRule('group', gettext('Selected group is out of range'), 'in_array_keys',
+		$groups);
 	
 	// textfield for name
 	$FORM->addElement('text', 'email', gettext('E-mail'), 
