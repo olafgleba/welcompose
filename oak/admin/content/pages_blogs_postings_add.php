@@ -150,6 +150,13 @@ try {
 		'empty' => gettext('Leave it empty')
 	);
 	
+	// prepare podcast explicit array
+	$podcast_explicit = array(
+		'yes' => gettext('yes'),
+		'clean' => gettext('clean'),
+		'no' => gettext('no')
+	);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('blog_posting', 'post');
 	
@@ -276,13 +283,13 @@ try {
 		$FORM->addRule('podcast_author', gettext('Please enter a podcast author'), 'required');
 	}
 	
-	// checkbox for explicit
-	$FORM->addElement('checkbox', 'podcast_explicit', gettext('Explicit'), null,
-		array('id' => 'blog_posting_podcast_explicit', 'class' => 'chbx'));
+	// select for explicit
+	$FORM->addElement('select', 'podcast_explicit', gettext('Explicit'), $podcast_explicit,
+		array('id' => 'blog_posting_podcast_explicit'));
 	$FORM->applyFilter('podcast_explicit', 'trim');
-	$FORM->applyFilter('podcast_explicit', 'strip_tags');
-	$FORM->addRule('podcast_explicit', gettext('The field whether a ping should be issued accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);	
+	$FORM->applyFilter('podcast_explicit', 'strip_tags');	
+	$FORM->addRule('podcast_explicit', gettext('Podcast explicit is out of range'),
+		'in_array_keys', $podcast_explicit);
 	
 	// checkbox for explicit
 	$FORM->addElement('checkbox', 'podcast_block', gettext('Block'), null,
@@ -290,7 +297,7 @@ try {
 	$FORM->applyFilter('podcast_block', 'trim');
 	$FORM->applyFilter('podcast_block', 'strip_tags');
 	$FORM->addRule('podcast_block', gettext('The field whether an episode should be blocked accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);	
+		'regex', OAK_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('button', 'toggleExtendedView', gettext('Show details'),
@@ -536,8 +543,8 @@ try {
 				$FORM->exportValue('podcast_category_3'));
 			$sqlData['author'] = $FORM->exportValue('podcast_author');
 			$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
-			$sqlData['explicit'] = (string)intval($FORM->exportValue('podcast_explicit'));
-			var_dump($sqlData);
+			$sqlData['explicit'] = $FORM->exportValue('podcast_explicit');
+			
 			// test sql data for pear errors
 			$HELPER->testSqlDataForPearErrors($sqlData);
 			

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 21.10.2006 20:56:11
--- Diagram Version: 157
+-- Created on: 29.10.2006 20:00:12
+-- Diagram Version: 159
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -976,7 +976,7 @@ CREATE TABLE `content_blog_podcasts` (
   `author` varchar(50),
   `block` enum('0','1') DEFAULT '0',
   `duration` int(11) UNSIGNED,
-  `explicit` enum('0','1') DEFAULT '0',
+  `explicit` enum('yes','no','clean') DEFAULT 'no',
   `date_added` datetime,
   `date_modified` timestamp(14),
   PRIMARY KEY(`id`),
