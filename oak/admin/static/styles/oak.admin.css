@@ -846,6 +846,26 @@ padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 
+#content .rp_note {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+* html #content .rp_note {
+margin-top: 50px;
+}
+#content .rp_note h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#content .rp_note p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
 
 
 /* %M =column */

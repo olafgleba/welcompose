@@ -801,9 +801,13 @@ function Help_processMediamanager (ttarget)
  */
  function Help_setCorrespondingFocus (elem, attr)
 {
-	this.inst = elem.parentNode.parentNode.getAttribute(attr);
-	//alert (this.inst);
-	//$(this.inst).focus();
+	// IE fails on func getAttribute() with argument 'for'
+	if (Helper.unsupportsElems('safari_exception')) {
+		this.inst = elem.parentNode.parentNode.attributes[this.attr].value;
+	} else {
+		this.inst = elem.parentNode.parentNode.getAttribute(attr);
+	}
+	$(this.inst).focus();
 }
 
 /**
