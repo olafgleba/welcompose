@@ -78,6 +78,13 @@ var response = '{$session.response}';
 <!-- error --></div>
 {/if}
 
+{if $template_type_count < 1}
+<div class="rp_note">
+<h1>{i18n You have not yet created a template type!}</h1>
+<p>{i18n To create one, go to the <a href="templatetypes_select.php">template type type overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
 {if $session.response == 1}
 <div id="rp">
 <h1>{i18n Your input was successfully saved!}</h1>

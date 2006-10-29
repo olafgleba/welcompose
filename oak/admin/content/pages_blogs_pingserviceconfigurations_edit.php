@@ -205,7 +205,10 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
-
+		
+		// calculate and assign ping service count
+		$BASE->utility->smarty->assign('ping_service_count', count($ping_services));
+		
 		// select available projects
 		$select_params = array(
 			'user' => OAK_CURRENT_USER,

@@ -70,6 +70,14 @@
 <!-- error --></div>
 {/if}
 
+{if $group_count < 1}
+<div class="rp_note">
+<h1>{i18n You have not yet created a user group!}</h1>
+<p>{i18n To create one, go to the <a href="groups_select.php">user group overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
+
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 

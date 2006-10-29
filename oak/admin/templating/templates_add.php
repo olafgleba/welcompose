@@ -186,6 +186,9 @@ try {
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
 		
+		// calculate and assign template type count
+		$BASE->utility->smarty->assign('template_type_count', count($template_types));
+		
 		// select available projects
 		$select_params = array(
 			'user' => OAK_CURRENT_USER,
