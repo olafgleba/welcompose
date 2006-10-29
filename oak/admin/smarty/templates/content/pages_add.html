@@ -79,6 +79,20 @@ var response = '{$session.response}';
 <!-- error --></div>
 {/if}
 
+{if $page_type_count < 1}
+<div class="rp_note">
+<h1>{i18n You have not yet created a page type!}</h1>
+<p>{i18n To create one, go to the <a href="pagetypes_select.php">page type overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
+{if $template_set_count < 1}
+<div class="rp_note">
+<h1>{i18n You have not yet created a template set!}</h1>
+<p>{i18n To create one, go to the <a href="../templating/templatesets_select.php">template set overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
 {if $session.response == 1}
 <div id="rp">
 <h1>{i18n Your input was successfully saved!}</h1>
@@ -90,7 +104,6 @@ var response = '{$session.response}';
 {$form.javascript}
 
 <fieldset class="topbg">
-
 {$form.hidden}
 
 <label class="cont" for="page_position"><span class="bez">{$form.position.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
