@@ -90,7 +90,7 @@
 <td class="mini"><img src="../static/img/spacer.gif" width="52" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="75" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="75" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+{if count($navigations) > 1}<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>{/if}
 <td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
 </tr>
 <tr>
@@ -98,7 +98,7 @@
 <th colspan="2">{i18n Move}</th>
 <th>{i18n Add}</th>
 <th>{i18n Edit}</th>
-<th>{i18n Move away}</th>
+{if count($navigations) > 1}<th>{i18n Move away}</th>{/if}
 <th>{i18n Delete}</th>
 </tr>
 {assign var="navigation_id" value=$_navigation.id}
@@ -110,7 +110,7 @@
 <td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up" title="Up"></td>
 <td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}&amp;reference={$_page.id|escape:"url"}" title="{i18n Add new page}"></a></td>
 <td><a class="edit" href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="Edit page contents"></a></td>
-<td><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="Move page to another navigation"></a></td>
+{if count($navigations) > 1}<td><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="Move page to another navigation"></a></td>{/if}
 <td><a class="delete" href="pages_delete.php?id={$_page.id|escape:"url"}" title="Delete page"></a></td>
 </tr>
 {/foreach}
@@ -121,7 +121,7 @@
 <td></td>
 <td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}" title="{i18n Add new page}"></a></td>
 <td></td>
-<td></td>
+{if count($navigations) > 1}<td></td>{/if}
 <td></td>
 </tr>
 {/if}

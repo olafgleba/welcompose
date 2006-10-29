@@ -72,6 +72,14 @@
 <!-- error --></div>
 {/if}
 
+{if $navigation_count < 1}
+<div class="rp_note">
+<h1>{i18n There is no navigation where you can move this node to!}</h1>
+<p>{i18n To create one, go to the <a href="navigations_select.php">navigation overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
+
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 

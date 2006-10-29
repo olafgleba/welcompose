@@ -163,6 +163,9 @@ try {
 		// assign page
 		$BASE->utility->smarty->assign('page', $page);
 		
+		// calculate and assign navigation count
+		$BASE->utility->smarty->assign('navigation_count', count($navigations));
+		
 		// select available projects
 		$select_params = array(
 			'user' => OAK_CURRENT_USER,
