@@ -104,7 +104,7 @@ public function addSimplePage ($id, $sqlData)
 	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData);
 	
 	// test if simple page belongs to current user/project
-	if (!$this->simplePageBelongsToCurrentUser($id) {
+	if (!$this->simplePageBelongsToCurrentUser($id)) {
 		throw new Content_SimplePageException('Simple page does not belong to current user or project');
 	}
 	
