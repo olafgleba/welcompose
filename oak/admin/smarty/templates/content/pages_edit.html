@@ -100,6 +100,13 @@ var response = '{$session.response}';
 <!-- error --></div>
 {/if}
 
+{if $template_set_count < 1}
+<div class="rp_note">
+<h1>{i18n You have not yet created a template set!}</h1>
+<p>{i18n To create one, go to the <a href="../templating/templatesets_select.php">template set overview page</a>.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
 {if $session.response == 1}
 <div id="rp">
 <h1>{i18n Your input was successfully saved!}</h1>

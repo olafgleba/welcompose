@@ -201,6 +201,11 @@ try {
 		$BASE->utility->smarty->assign('oak_admin_root_www',
 			$BASE->_conf['path']['oak_admin_root_www']);
 		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
+		);
+		
 		// assign $_SESSION to smarty
 		$BASE->utility->smarty->assign('session', $session);
 		
@@ -212,6 +217,9 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		
+		// assign template set count
+		$BASE->utility->smarty->assign('template_set_count', count($template_sets));
 		
 		// assign page
 		$BASE->utility->smarty->assign('page', $page);
