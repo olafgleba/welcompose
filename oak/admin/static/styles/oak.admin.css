@@ -865,6 +865,11 @@ margin: 0;
 padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
+#content .rp_note img { 
+float: right;
+margin: 6px 6px 6px 20px;
+}
+
 
 
 
@@ -1255,7 +1260,7 @@ background: #f9f9f9;
 border: 1px solid #efefef;
 }
 #podcast_container h2 {
-margin-top: 0;
+margin-top: 0.6em;
 font-size: 1.3em;
 }
 #podcast_container #extendedView {
