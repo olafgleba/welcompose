@@ -935,6 +935,9 @@ public function calculatePageIndex ($total_items, $interval)
 			if ($_value['last'] < 0) {
 				$index[$_key]['last'] = null;
 			}
+			if ($_value['page'] == $_value['total_pages']) {
+				$index[$_key]['next'] = null;
+			}
 		}
 	}
 	
