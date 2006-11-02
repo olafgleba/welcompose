@@ -555,6 +555,50 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 }
 
 /**
+ * Creates page index from the value of total existing pages provieded
+ * by Flickr. Takes the total page count as first argument. Returns array.
+ * 
+ * @throws Media_FlickrException
+ * @param int Page count
+ * @return array
+ */
+public function _flickrPageIndex ($pages)
+{
+	// input check
+	if (!is_numeric($pages)) {
+		throw new Media_FlickrException("Input for parameter pages is not numeric");
+	}
+	
+	// initialize index
+	$index = array();
+	
+	if (empty($pages)) {
+		return array();
+	} else {
+		for ($i=1;$i<$pages+1;$i++) {
+			$index[] = array(
+				'page' => $i,
+				'last' => $i - 1,
+				'self' => $i,
+				'next' => $i + 1,
+				'total_pages' => $pages
+			);
+		}
+		
+		foreach ($index as $_key => $_value) {
+			if ($_value['last'] < 1) {
+				$index[$_key]['last'] = null;
+			}
+			if ($_value['page'] == $_value['total_pages']) {
+				$index[$_key]['next'] = null;
+			}
+		}
+	}
+	
+	return $index;
+}
+
+/**
  * Prepares data received from flickr for internal processing. The input
  * will be casted to string, converted from utf8 to iso and all tags
  * will be stripped.

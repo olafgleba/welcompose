@@ -89,7 +89,9 @@ try {
 		'mm_user' => Base_Cnc::filterRequest($_REQUEST['mm_user'], OAK_REGEX_FLICKR_SCREENNAME),
 		'mm_photoset' => Base_Cnc::filterRequest($_REQUEST['mm_photoset'], OAK_REGEX_NUMERIC),
 		'mm_flickrtags' => trim(strip_tags(Base_Cnc::ifsetor($_REQUEST['mm_flickrtags'], null))),
-		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC)
+		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC),
+		'mm_start' => ((Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC) > 0) ?
+			(int)$_REQUEST['mm_start'] : 1)
 	);
 	
 	try {
@@ -110,12 +112,14 @@ try {
 		// get user's photos using the photoset or the supplied tags
 		$photos = array();
 		if (!is_null($request['mm_photoset'])) {
-			$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5);
+			$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5,
+				$request['mm_start']);
 		} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
 			// prepare search params
 			$params = array(
 				'user_id' => $user['user_id'],
 				'tags' => $request['mm_flickrtags'],
+				'page' => $request['mm_start'],
 				'per_page' => 5
 			);
 		
@@ -123,6 +127,10 @@ try {
 			$photos = $FLICKR->photosSearch($params);
 		}
 		$BASE->utility->smarty->assign('photos', $photos);
+		
+		// create page index
+		$page_count = intval(Base_Cnc::ifsetor($photos['pages'], null));
+		$BASE->utility->smarty->assign('page_index', $FLICKR->_flickrPageIndex($page_count));
 	} catch (Exception $e) {
 		$BASE->utility->smarty->assign('error', $e->getMessage());
 	}
