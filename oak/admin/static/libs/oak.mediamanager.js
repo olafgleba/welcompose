@@ -70,6 +70,7 @@ Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
 Mediamanager.prototype.mediaToPodcastOnLoad = Mediamanager_mediaToPodcastOnLoad;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
+Mediamanager.prototype.invokePager = Mediamanager_invokePager;
 Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
@@ -667,6 +668,33 @@ function Mediamanager_invokeTags ()
 	}
 }
 
+/**
+ * Implements method of prototype class Mediamanager
+ * Fires the ajax request
+ * 
+ * @throws applyError on exception
+ */
+function Mediamanager_invokePager (elem)
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
+		var pars = 'mm_start=' + elem.id + '&' + elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : _loaderMyLocal,
+				parameters : pars,
+				onComplete : _showResponseInvokeInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
 
 /**
  * Implements method of prototype class Mediamanager
@@ -693,6 +721,7 @@ function _showResponseInvokeInputs(req)
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.pager');
 		Behaviour.reapply('a.mm_insertImageItem');
 		Behaviour.reapply('a.mm_insertImageItemFlickr');
 		Behaviour.reapply('a.mm_insertDocumentItem');

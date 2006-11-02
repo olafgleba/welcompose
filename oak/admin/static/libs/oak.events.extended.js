@@ -240,6 +240,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.pager' : function(el){
+		el.onclick = function(){
+			Mediamanager.invokePager(this);
+			return false;
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');
