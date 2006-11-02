@@ -390,25 +390,77 @@ public function selectObjects ($params = array())
 }
 
 /**
- * Counts objects saved in the object table. Returns int.
+ * Counts objects saved in the media object table.
  * 
- * @return int
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>types, array, optional: Return only objects that belong to the given
+ * generic types</li>
+ * <li>tags, array, optional: Returns objects with given tags</li>
+ * <li>timeframe, string, optional: Returns objects from given timeframe</li>
+ * </ul>
+ * 
+ * @throws Media_ObjectException
+ * @param array Count params
+ * @return array
  */
-public function countObjects ()
+public function countObjects ($params = array())
 {
 	// access check
 	if (!oak_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
+	// define some vars
+	$timeframe = null;
+	$tags = null;
+	$types = array();
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Media_ObjectException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'tags':
+			case 'timeframe':
+					$$_key = (string)$_value;
+				break;
+			case 'types':
+					$$_key = (array)$_value;
+				break;
+			default:
+				throw new Media_ObjectException("Unknown parameter $_key");
+		}
+	}
+	
+	
+	// load Utility_Helper
+	$HELPER = load('Utility:Helper');
+	
+	// load Media_Tag
+	$TAG = load('Media:Tag');
+	
 	// prepare query
 	$sql = "
-		SELECT 
-			COUNT(*) AS `total`
+		SELECT
+			COUNT(DISTINCT `media_objects`.`id`)
 		FROM
 			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
-		WHERE 
-			`project` = :project
+		LEFT JOIN
+			".OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_objects2media_tags`
+		  ON
+			`media_objects`.`id` = `media_objects2media_tags`.`object`
+		LEFT JOIN
+			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+		  ON
+			`media_objects2media_tags`.`tag` = `media_tags`.`id`
+		WHERE
+			`media_objects`.`project` = :project
 	";
 	
 	// prepare bind params
@@ -416,7 +468,20 @@ public function countObjects ()
 		'project' => OAK_CURRENT_PROJECT
 	);
 	
-	return $this->base->db->select($sql, 'field', $bind_params);
+	// add where clauses
+	if (!empty($timeframe)) {
+		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`media_objects`.`date_added`',
+			$timeframe);
+	}
+	if (!empty($tags)) {
+		$sql .= " AND ".$HELPER->_sqlLikeFromArray('`media_tags`.`word`',
+			$TAG->_prepareTagStringForQuery($tags));
+	}
+	if (!empty($types) && is_array($types)) {
+		$sql .= " AND ".$this->sqlForGenericTypes('`media_objects`.`file_mime_type`', $types);
+	}
+	
+	return (int)$this->base->db->select($sql, 'field', $bind_params);
 }
 
 /**
