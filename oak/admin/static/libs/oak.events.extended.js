@@ -246,6 +246,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.pager_myFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.invokePagerMyFlickr(this);
+			return false;
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			Forms.setOnEvent(this, '','#0c3','dotted');

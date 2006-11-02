@@ -438,6 +438,7 @@ function OakInit_processOakInit (ttarget)
 				Behaviour.reapply('a.mm_delete');
 				Behaviour.reapply('a.mm_cast');
 				Behaviour.reapply('a.pager');
+				Behaviour.reapply('a.pager_myFlickr');
 				Behaviour.reapply('a.mm_insertImageItem');
 				Behaviour.reapply('a.mm_insertImageItemFlickr');
 				Behaviour.reapply('a.mm_insertDocumentItem');

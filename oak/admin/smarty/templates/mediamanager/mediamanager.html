@@ -85,19 +85,14 @@
 {if count($page_index) > 1}
 <div class="mm_pager">
 {foreach from=$page_index item=_item}
-
 {if $_item.page == 1 && $_item.self != $request.mm_start}
-	<a class="pager" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
+<a class="pager" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
 {/if}
-
-{if $_item.self == $request.mm_start}
-	{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages} {if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
 {/if}
-
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
-	<a class="pager" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
+<a class="pager" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
 {/if}
-
 {/foreach}
 </div>
 {/if}
@@ -197,9 +192,20 @@
 <!-- mediamanager content eof -->
 
 <!-- mediamanager pager -->
+{if count($page_index) > 1}
 <div class="mm_pager">
-Page <a class="pager" id="" href="#" title="{i18n Previous}">&lt;</a>1 of 10<a class="pager" id="" href="#" title="{i18n Next}">&gt;</a>	
+{foreach from=$page_index item=_item}
+{if $_item.page == 1 && $_item.self != $request.mm_start}
+<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
+{/if}
+{if $_item.self == $request.mm_start}{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{/if}
+{if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
+<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
+{/if}
+{/foreach}
 </div>
+{/if}
 <!-- mediamanager pager eof -->
 
 </div>
