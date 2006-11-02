@@ -85,7 +85,7 @@
 {if count($page_index) > 1}
 <div class="mm_pager">
 {foreach from=$page_index item=_item}
-{if $_item.self == $request.start}
+{if $_item.self == $request.mm_start}
 {i18n Page} {if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>	
 {/if}
 {/foreach}
