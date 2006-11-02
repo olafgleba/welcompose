@@ -682,6 +682,9 @@ function Mediamanager_invokePager (elem)
 		var elems = Mediamanager.checkElemsMyLocal();
 		var url = this.parseMedLocalUrl;
 		var pars = 'mm_start=' + elem.id + '&' + elems;
+		
+		//alert (elem.id);
+		
 	
 		var myAjax = new Ajax.Request(
 			url,
@@ -773,6 +776,7 @@ function _showResponseInvokeTagInputs(req)
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.pager');
 		Behaviour.reapply('a.mm_insertImageItem');
 		Behaviour.reapply('a.mm_insertImageItemFlickr');
 		Behaviour.reapply('a.mm_insertDocumentItem');
@@ -836,6 +840,7 @@ function Mediamanager_checkElemsMyLocal ()
 			mm_tags : $F('mm_tags'),
 			mm_timeframe : $F('mm_timeframe'),
 			mm_limit : countItems,
+		//	mm_start : countItems,
 			mm_pagetype : pagetype
 		};
 		var o = $H(getElems);

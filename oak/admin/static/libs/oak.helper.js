@@ -160,7 +160,7 @@ function Helper_lowerOpacity ()
         this.cPosition = 'absolute';
         this.cDisplay = 'block';
         this.imagePath = '../static/img/bg_overlay.png';
-		this.lyContainer = $("container");   
+		this.lyContainer = $('container');   
         this.buildHeight = this.lyContainer.offsetHeight;
         this.buildWidth = this.lyContainer.offsetWidth;
 		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
@@ -191,7 +191,7 @@ function Helper_lowerOpacityOnUpload ()
         this.cPosition = 'absolute';
         this.cDisplay = 'block';
         this.imagePath = '../static/img/bg_overlay.png';
-		this.lyContainer = $("modalWindow");   
+		this.lyContainer = $('modalWindow');   
         this.buildHeight = this.lyContainer.offsetHeight;
         this.buildWidth = this.lyContainer.offsetWidth;
 		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
