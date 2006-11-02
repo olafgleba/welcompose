@@ -83,7 +83,13 @@
 
 <!-- mediamanager pager -->
 <div class="mm_pager">
-Page <a class="pager" id="{$request.start}" href="#" title="{i18n Previous}">&lt;</a>1 of 10<a class="pager" id="{$request.start}" href="#" title="{i18n Next}">&gt;</a>	
+{if count($page_index) > 1}
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+{i18n Page} {if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>	
+{/if}
+{/foreach}
+{/if}
 </div>
 <!-- mediamanager pager eof -->
 

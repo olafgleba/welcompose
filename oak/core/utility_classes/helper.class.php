@@ -927,7 +927,8 @@ public function calculatePageIndex ($total_items, $interval)
 							'page' => $i,
 							'last' => ($i - 2) * $interval,
 							'self' => ($i - 1) * $interval,
-							'next' => $i * $interval
+							'next' => $i * $interval,
+							'total_pages' => $pages
 						);
 		}
 		foreach ($index as $_key => $_value) {

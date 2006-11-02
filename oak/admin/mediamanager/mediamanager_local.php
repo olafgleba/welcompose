@@ -135,6 +135,19 @@ try {
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
+	// count objects
+	$count_params = array(
+		'types' => $types,
+		'tags' => $request['mm_tags'],
+		'timeframe' => $request['mm_timeframe']
+	);
+	$object_count = $OBJECT->countObjects($count_params);
+	$BASE->utility->smarty->assign('object_count', $object_count);
+	
+	// create page index
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($object_count,
+		(($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])));
+	
 	// assign request params
 	$BASE->utility->smarty->assign('request', $request);
 	
