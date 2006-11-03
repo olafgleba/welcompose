@@ -63,7 +63,8 @@ $GLOBALS['_HTML_QuickForm_registered_rules'] = array(
     'nonzero'       => array('html_quickform_rule_regex',    'HTML/QuickForm/Rule/Regex.php'),
     'callback'      => array('html_quickform_rule_callback', 'HTML/QuickForm/Rule/Callback.php'),
     'compare'       => array('html_quickform_rule_compare',  'HTML/QuickForm/Rule/Compare.php'),
-    'in_array_keys' => array('html_quickform_rule_in_array_keys', 'HTML/QuickForm/Rule/In_Array_Keys.php')
+    'in_array_keys' => array('html_quickform_rule_in_array_keys', 'HTML/QuickForm/Rule/In_Array_Keys.php'),
+    'is_equal'      => array('html_quickform_rule_is_equal', 'HTML/QuickForm/Rule/Is_Equal.php')
 );
 
 // {{{ error codes

@@ -42,6 +42,13 @@ class Display_SimpleFormIndex implements Display {
 	public $base = null;
 	
 	/**
+	 * Reference to captcha class
+	 * 
+	 * @var object
+	 */
+	public $captcha = null;
+	
+	/**
 	 * Container for project information
 	 * 
 	 * @var array
@@ -106,6 +113,9 @@ public function __construct($project, $page)
 	
 	// assign simple form to smarty
 	$this->base->utility->smarty->assign('simple_form', $this->_simple_form);
+	
+	// load captcha class
+	$this->captcha = load('Utility:Captcha');
 }
 
 /**
@@ -175,12 +185,23 @@ protected function renderPersonalForm ()
 	$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
 		OAK_REGEX_URL);
 	
-	// terxtarea for message
+	// textarea for message
 	$FORM->addElement('textarea', 'message', gettext('Message'),
 		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'w300h200'));
 	$FORM->applyFilter('message', 'trim');
 	$FORM->applyFilter('message', 'strip_tags');
 	$FORM->addRule('message', gettext('Please enter a message'), 'required');
+	
+	// textfield for captcha if the captcha is enabled
+	if ($this->_simple_form['use_captcha'] != 'no') {
+		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+		$FORM->applyFilter('_qf_captcha', 'trim');
+		$FORM->applyFilter('_qf_captcha', 'strip_tags');
+		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
+		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
+			$this->captcha->captchaValue());
+	}
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
@@ -238,9 +259,28 @@ protected function renderPersonalForm ()
 	$FORM->removeAttribute('target');
 	
 	$FORM->accept($renderer);
-
+	
 	// assign the form to smarty
 	$this->base->utility->smarty->assign('form', $renderer->toArray());
+	
+	// generate captcha if required
+	if ($this->_simple_form['use_captcha'] != 'no') {
+		// captcha generation
+		if ($this->_simple_form['use_captcha'] == 'image') {
+			// generate image captcha
+			$captcha = $this->captcha->createCaptcha('image');
+			
+			// let's tell the template that the captcha is an image
+			$this->base->utility->smarty->assign('captcha_type', 'image');
+		} elseif ($this->_simple_form['use_captcha'] == 'numeral') { 
+			// generate numeral captcha
+			// $captcha = $this->captcha->createCaptcha('numeral');
+			
+			// let's tell the template that the captcha is an numeral captcha 
+			$this->base->utility->smarty->assign('captcha_type', 'numeral');
+		}
+		$this->base->utility->smarty->assign('captcha', $captcha);
+	}
 	
 	return true;
 }
@@ -331,6 +371,17 @@ protected function renderBusinessForm ()
 	$FORM->applyFilter('message', 'strip_tags');
 	$FORM->addRule('message', gettext('Please enter a message'), 'required');
 	
+	// textfield for captcha if the captcha is enabled
+	if ($this->_simple_form['use_captcha'] != 'no') {
+		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+		$FORM->applyFilter('_qf_captcha', 'trim');
+		$FORM->applyFilter('_qf_captcha', 'strip_tags');
+		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
+		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
+			$this->captcha->captchaValue());
+	}
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
 		array('class' => 'submitbut100'));
@@ -392,9 +443,28 @@ protected function renderBusinessForm ()
 	$FORM->removeAttribute('target');
 	
 	$FORM->accept($renderer);
-
+	
 	// assign the form to smarty
 	$this->base->utility->smarty->assign('form', $renderer->toArray());
+	
+	// generate captcha if required
+	if ($this->_simple_form['use_captcha'] != 'no') {
+		// captcha generation
+		if ($this->_simple_form['use_captcha'] == 'image') {
+			// generate image captcha
+			$captcha = $this->captcha->createCaptcha('image');
+			
+			// let's tell the template that the captcha is an image
+			$this->base->utility->smarty->assign('captcha_type', 'image');
+		} elseif ($this->_simple_form['use_captcha'] == 'numeral') { 
+			// generate numeral captcha
+			// $captcha = $this->captcha->createCaptcha('numeral');
+			
+			// let's tell the template that the captcha is an numeral captcha 
+			$this->base->utility->smarty->assign('captcha_type', 'numeral');
+		}
+		$this->base->utility->smarty->assign('captcha', $captcha);
+	}
 	
 	return true;
 }
@@ -471,6 +541,7 @@ public function getLocationSelf ()
 {
 	// prepare params
 	$params = array(
+		'project' => $this->_project['name_url'],
 		'page_id' => $this->_page['id'],
 		'action' => 'Index'
 	);

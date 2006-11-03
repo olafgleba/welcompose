@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: oak
--- Created on: 29.10.2006 20:00:12
--- Diagram Version: 159
+-- Created on: 03.11.2006 23:10:32
+-- Diagram Version: 164
 -- =============================================================================
 DROP DATABASE IF EXISTS `oak`;
 
@@ -623,7 +623,7 @@ CREATE TABLE `community_settings` (
   `blog_comment_default_status` int(11) UNSIGNED,
   `blog_comment_spam_status` int(11) UNSIGNED,
   `blog_comment_ham_status` int(11) UNSIGNED,
-  `blog_comment_use_captcha` enum('0','1') DEFAULT '1',
+  `blog_comment_use_captcha` enum('no','image','numeral') DEFAULT 'no',
   `blog_comment_timeframe_threshold` int(11) UNSIGNED,
   `blog_comment_bayes_autolearn` enum('0','1') DEFAULT '1',
   `blog_comment_bayes_autolearn_threshold` decimal(6,5) UNSIGNED,
@@ -838,6 +838,7 @@ CREATE TABLE `content_simple_forms` (
   `email_from` varchar(255),
   `email_to` varchar(255),
   `email_subject` varchar(255),
+  `use_captcha` enum('no','image','numeral') DEFAULT 'no',
   `date_modified` timestamp(14),
   `date_added` datetime,
   PRIMARY KEY(`id`),

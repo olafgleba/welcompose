@@ -113,6 +113,13 @@ try {
 		'personal' => gettext('Personal form')
 	);
 	
+	// prepare captcha types array
+	$captcha_types = array(
+		'no' => gettext('Disable captcha'),
+		'image' => gettext('Use image captcha'),
+		'numeral' => gettext('Use numeral captcha')
+	);
+	
 	// prepare text converters array
 	$text_converters = array(
 		'' => gettext('None')
@@ -190,6 +197,14 @@ try {
 	$FORM->applyFilter('email_subject', 'strip_tags');
 	$FORM->addRule('email_subject', gettext('Please enter a subject'), 'required');
 	
+	// select for use_captcha
+	$FORM->addElement('select', 'use_captcha', gettext('Use captcha'), $captcha_types,
+		array('id' => 'simple_form_use_captcha'));
+	$FORM->applyFilter('use_captcha', 'trim');
+	$FORM->applyFilter('use_captcha', 'strip_tags');
+	$FORM->addRule('use_captcha', gettext('Chosen captcha type is out of range'),
+		'in_array_keys', $captcha_types);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update form'),
 		array('class' => 'submit200'));
@@ -204,7 +219,8 @@ try {
 		'type' => Base_Cnc::ifsetor($simple_form['type'], null),
 		'email_from' => Base_Cnc::ifsetor($simple_form['email_from'], null),
 		'email_to' => Base_Cnc::ifsetor($simple_form['email_to'], null),
-		'email_subject' => Base_Cnc::ifsetor($simple_form['email_subject'], null)
+		'email_subject' => Base_Cnc::ifsetor($simple_form['email_subject'], null),
+		'use_captcha' => Base_Cnc::ifsetor($simple_form['use_captcha'], null)
 	));
 	
 	// validate it
@@ -266,6 +282,7 @@ try {
 		$sqlData['email_from'] = $FORM->exportValue('email_from');
 		$sqlData['email_to'] = $FORM->exportValue('email_to');
 		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
+		$sqlData['use_captcha'] = $FORM->exportValue('use_captcha');
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
