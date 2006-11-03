@@ -94,6 +94,13 @@ try {
 	// get settings
 	$settings = $SETTINGS->getSettings();
 	
+	// prepare captcha types array
+	$captcha_types = array(
+		'no' => gettext('Disable captcha'),
+		'image' => gettext('Use image captcha'),
+		'numeral' => gettext('Use numeral captcha')
+	);
+	
 	// get Blog Comment Status
 	$blog_comment_statuses = array(
 		'' => gettext('None')
@@ -150,13 +157,13 @@ try {
 	$FORM->addRule('blog_comment_ham_status', gettext('Chosen comment ham status is out of range'),
 		'in_array_keys', $blog_comment_statuses);
 	
-	// checkbox for use captcha
-	$FORM->addElement('checkbox', 'blog_comment_use_captcha', gettext('Use CAPTCHAs'), null,
-		array('id' => 'community_settings_blog_comment_use_captcha', 'class' => 'chbx'));
+	// select for comment ham status
+	$FORM->addElement('select', 'blog_comment_use_captcha', gettext('Use captcha'),
+		$captcha_types, array('id' => 'community_settings_blog_comment_use_captcha'));
 	$FORM->applyFilter('blog_comment_use_captcha', 'trim');
 	$FORM->applyFilter('blog_comment_use_captcha', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether to use comment captchas accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+	$FORM->addRule('blog_comment_use_captcha', gettext('Chosen captcha type is out of range'),
+		'in_array_keys', $captcha_types);
 	
 	// textfield for timeframe threshold
 	$FORM->addElement('text', 'blog_comment_timeframe_threshold', gettext('Timeframe threshold'), 
@@ -364,7 +371,7 @@ try {
 		$sqlData['blog_comment_ham_status'] = $FORM->exportValue('blog_comment_ham_status');
 		$sqlData['blog_comment_use_captcha'] = $FORM->exportValue('blog_comment_use_captcha');
 		$sqlData['blog_comment_timeframe_threshold'] = $FORM->exportValue('blog_comment_timeframe_threshold');
-		$sqlData['blog_comment_bayes_autolearn'] = $FORM->exportValue('blog_comment_bayes_autolearn');
+		$sqlData['blog_comment_bayes_autolearn'] = (string)intval($FORM->exportValue('blog_comment_bayes_autolearn'));
 		$sqlData['blog_comment_bayes_autolearn_threshold'] = $FORM->exportValue('blog_comment_bayes_autolearn_threshold');
 		$sqlData['blog_comment_bayes_spam_threshold'] = $FORM->exportValue('blog_comment_bayes_spam_threshold');
 		$sqlData['blog_comment_text_converter'] = $FORM->exportValue('blog_comment_text_converter');
@@ -373,7 +380,7 @@ try {
 		$sqlData['blog_trackback_spam_status'] = $FORM->exportValue('blog_trackback_spam_status');
 		$sqlData['blog_trackback_ham_status'] = $FORM->exportValue('blog_trackback_ham_status');
 		$sqlData['blog_trackback_timeframe_threshold'] = $FORM->exportValue('blog_trackback_timeframe_threshold');
-		$sqlData['blog_trackback_bayes_autolearn'] = $FORM->exportValue('blog_trackback_bayes_autolearn');
+		$sqlData['blog_trackback_bayes_autolearn'] = (string)intval($FORM->exportValue('blog_trackback_bayes_autolearn'));
 		$sqlData['blog_trackback_bayes_autolearn_threshold'] = $FORM->exportValue('blog_trackback_bayes_autolearn_threshold');
 		$sqlData['blog_trackback_bayes_spam_threshold'] = $FORM->exportValue('blog_trackback_bayes_spam_threshold');
 		
