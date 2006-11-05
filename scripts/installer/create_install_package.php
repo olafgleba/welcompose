@@ -400,7 +400,8 @@ protected function writeFilesToPackage ()
  */
 protected function printHelp ()
 {
-	$this->printStderr("Oak Setup Generator 0.1 ($Id$)\r\n");
+	$rev = '$Id$';
+	$this->printStderr("Oak Setup Generator 0.1 ($rev)\r\n");
 	$this->printStderr("(c) 2006 sopic GmbH\r\n");
 	$this->printStderr("Licensed below the terms of the Open Software License 2.1.\r\n");
 	$this->printStderr("\r\n");
