@@ -130,8 +130,10 @@ public function createInstallPackage ()
 	$this->createContentList($this->_software_directory);
 	
 	// remove old versions of the package file
-	unlink($this->_output_file);
-
+	if (file_exists($this->_output_file)) {
+		unlink($this->_output_file);
+	}
+	
 	// write the installer code to package
 	$this->writeInstallerCodeToPackage();
 	
