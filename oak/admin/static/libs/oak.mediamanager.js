@@ -100,12 +100,7 @@ function Mediamanager_showElement (elem)
 		// properties
 		this.elem = elem;
 		this.attr = 'class';
-		// IE fails on func getAttribute() with argument 'class'
-		if (Helper.unsupportsElems('safari_exception')) {
-			this.ttarget = String(this.elem.parentNode.parentNode.attributes[this.attr].value + '_wrap');
-		} else {
-			this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-		}
+		this.ttarget = Helper.getAttrParentNode(this.attr, this.elem, 2) + '_wrap';
 		
 		Element.show(this.ttarget);
 		
@@ -114,8 +109,8 @@ function Mediamanager_showElement (elem)
 		Behaviour.reapply('.' + this.elem.className);
 	
 		// needed to set appropriate height of content of div to populate
-		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
-		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
+		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
+		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
 		// myLocal
 		if (myLocal == 'block') {
@@ -161,12 +156,7 @@ function Mediamanager_hideElement (elem)
 		// properties
 		this.elem = elem;
 		this.attr = 'class';
-		// IE fails on func getAttribute() with argument 'class'
-		if (Helper.unsupportsElems('safari_exception')) {
-			this.ttarget = String(this.elem.parentNode.parentNode.attributes[this.attr].value + '_wrap');
-		} else {
-			this.ttarget = String(this.elem.parentNode.parentNode.getAttribute(this.attr) + '_wrap');
-		}
+		this.ttarget = Helper.getAttrParentNode(this.attr, this.elem, 2) + '_wrap';
 
 		Element.hide(this.ttarget);
 		
@@ -175,8 +165,8 @@ function Mediamanager_hideElement (elem)
 		Behaviour.reapply('.' + this.elem.className);
 		
 		// needed to set appropriate height of content of div to populate
-		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
-		var myFlickr = Element.getStyle('lyMediamanagerMyFlickr', 'display');
+		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
+		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
 		// myLocal
 		if (myLocal == 'block') {
@@ -225,12 +215,7 @@ function Mediamanager_switchLayer (toShow, toHide)
 		this.toHide = $(toHide);
 	
 		Element.hide(this.toHide);
-
-		if (Helper.unsupportsEffects()) {
-			Element.show(this.toShow);
-		} else {
-			Effect.Appear(this.toShow,{duration: 0.4});
-		}
+		Effect.Appear(this.toShow,{duration: 0.4});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -250,19 +235,11 @@ function Mediamanager_toggleExtendedView (elem)
 		if (elem.value == showDetails) {
 			elem.value = hideDetails;
 			$('podcast_details_display').value = '1';
-			if (Helper.unsupportsEffects('safari_exception')) {
-				Element.show('extendedView');
-			} else {
-				Effect.Appear('extendedView',{duration: 0.4});
-			}
+			Effect.Appear('extendedView',{duration: 0.4});
 		} else {
 			elem.value = showDetails;
 			$('podcast_details_display').value = '';
-			if (Helper.unsupportsEffects('safari_exception')) {
-				Element.hide('extendedView');
-			} else {
-				Effect.Fade('extendedView',{duration: 0.4});
-			}
+			Effect.Fade('extendedView',{duration: 0.4});
 		}
 	} catch (e) {
 		_applyError(e);
@@ -560,11 +537,8 @@ function _showResponseDiscardPodcast(req)
 		$('podcast_container').innerHTML = req.responseText;		
 		
 		/*	
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide('podcast_container');
-		} else {
-			Effect.Fade('podcast_container',{duration: 0.4});
-		}*/			
+		Effect.Fade('podcast_container',{duration: 0.4});
+		*/			
 	} catch (e) {
 		_applyError(e);
 	}
@@ -675,14 +649,18 @@ function Mediamanager_invokeTags ()
  * 
  * @throws applyError on exception
  */
-function Mediamanager_invokePager (elem)
+function Mediamanager_invokePager (elem, pager_page)
 {
 	try {
 		Mediamanager.preserveElementStatusMyLocal();
 		
 		var elems = Mediamanager.checkElemsMyLocal();
 		var url = this.parseMedLocalUrl;
-		var pars = 'mm_start=' + elem.id + '&' + elems;
+		if (typeof pager_page != 'undefined') {
+			var pars = 'mm_start=' + pager_page + '&' + elems;
+		} else {
+			var pars = 'mm_start=' + elem.id + '&' + elems;
+		}
 
 		var myAjax = new Ajax.Request(
 			url,
@@ -715,7 +693,9 @@ function _showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		$(this).focus();
+		//Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		//$(this).focus();
+		//$('column').focus();	
 		
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
@@ -764,12 +744,12 @@ function _showResponseInvokeTagInputs(req)
 		
 		Mediamanager.setCurrentElementStatusMyLocal();
 		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
-		$('mm_tags').focus();
-		
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		$('mm_tags').focus();
+			
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_upload');
@@ -843,8 +823,8 @@ function Mediamanager_checkElemsMyLocal ()
 			mm_pagetype : pagetype
 		};
 		var o = $H(getElems);
-		//countItems = null;
 		return o.toQueryString();
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1080,67 +1060,6 @@ function Mediamanager_initializeUserMyFlickr ()
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _showResponseInvokeTagsMyFlickr(req)
-{
-	try {
-		$('column').innerHTML = req.responseText;
-		Element.show('lyMediamanagerMyFlickr');
-		Element.hide('lyMediamanagerMyLocal');
-		
-		// show option inputs
-		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
-		var mm_photoset = document.getElementsByClassName('mm_photoset');
-		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
-		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
-		
-		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-		$('mm_tags').setAttribute("autocomplete","off");
-		$('mm_flickrtags').setAttribute("autocomplete","off");
-		
-		Mediamanager.setCurrentElementStatusMyFlickr();
-
-		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
-		$('mm_flickrtags').focus();
-								
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
-		Behaviour.reapply('input');
-		Behaviour.reapply('a.mm_edit');
-		Behaviour.reapply('a.mm_upload');
-		Behaviour.reapply('a.mm_delete');
-		Behaviour.reapply('a.mm_cast');
-		Behaviour.reapply('a.pager');
-		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
-		Behaviour.reapply('a.mm_myLocal');
-		Behaviour.reapply('a.mm_myFlickr');
-		Behaviour.reapply('#mm_include_types_wrap');
-		Behaviour.reapply('#mm_timeframe');
-		Behaviour.reapply('#mm_user');
-		Behaviour.reapply('#mm_photoset');
-		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
-		Behaviour.reapply('.iHelpMediamanager');
-		Behaviour.reapply('.iHelpRemoveMediamanager');
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
 function _showResponseInvokeInputsMyFlickr(req)
 {
 	try {
@@ -1155,8 +1074,6 @@ function _showResponseInvokeInputsMyFlickr(req)
 		Element.setStyle(mm_photoset[0], {visibility: 'visible'});	
 		
 		Mediamanager.setCurrentElementStatusMyFlickr();
-		
-		$(this).focus();
 								
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
@@ -1183,6 +1100,67 @@ function _showResponseInvokeInputsMyFlickr(req)
 		Behaviour.reapply('.hideMediamanagerElement');
 		Behaviour.reapply('.iHelpMediamanager');
 		Behaviour.reapply('.iHelpRemoveMediamanager');		
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Mediamanager
+ * Populate on JSON response
+ *
+ * @private
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function _showResponseInvokeTagsMyFlickr(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		Element.show('lyMediamanagerMyFlickr');
+		Element.hide('lyMediamanagerMyLocal');
+		
+		// show option inputs
+		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
+		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
+		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
+		
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+		$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_flickrtags').setAttribute("autocomplete","off");
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+								
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
+		$('mm_flickrtags').focus();
+		
+		Behaviour.reapply('input');
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.pager');
+		Behaviour.reapply('a.pager_myFlickr');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');
 
 	} catch (e) {
 		_applyError(e);

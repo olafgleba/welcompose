@@ -108,30 +108,6 @@ var definitions = {
 			return false;
 		}
 	},
-	'.iHelpLevelTwo' : function(el){
-		el.onclick = function(){
-			Help.show(this, '2');
-			return false;
-		}
-	},
-	'.iHelpLevelThree' : function(el){
-		el.onclick = function(){
-			Help.show(this, '3');
-			return false;
-		}
-	},
-	'.iHelpRemoveLevelTwo' : function(el){
-		el.onclick = function(){
-			Help.hide(this, '2');
-			return false;
-		}
-	},
-	'.iHelpRemoveLevelThree' : function(el){
-		el.onclick = function(){
-			Help.hide(this, '3');
-			return false;
-		}
-	},
 	'.hideTableRow' : function(el){
 		el.onclick = function(){
 			Tables.hideTableRow(this);

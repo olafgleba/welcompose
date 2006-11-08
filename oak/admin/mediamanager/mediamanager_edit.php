@@ -96,7 +96,14 @@ try {
 	
 	// get object
 	$object = $OBJECT->selectObject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
-	
+
+	// get pager_page value
+	if (!empty($_REQUEST['pager_page'])) {
+		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], OAK_REGEX_NUMERIC);
+	} else {
+		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], OAK_REGEX_NUMERIC);
+	}
+		
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_edit', 'post');
 	
@@ -106,6 +113,9 @@ try {
 	$FORM->applyFilter('id', 'strip_tags');
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	
+	// hidden field for pager_page
+	$FORM->addElement('hidden', 'pager_page');
 	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
@@ -137,7 +147,8 @@ try {
 		'id' => Base_Cnc::ifsetor($object['id'], null),
 		'type' => Base_Cnc::ifsetor($object['type'], null),
 		'description' => Base_Cnc::ifsetor($object['description'], null),
-		'tags' => Base_Cnc::ifsetor($object['tags'], null)
+		'tags' => Base_Cnc::ifsetor($object['tags'], null),
+		'pager_page' => Base_Cnc::ifsetor($pager_page, null)
 	));
 	
 	// validate it
@@ -160,7 +171,10 @@ try {
 		$BASE->utility->smarty->assign('oak_admin_root_www',
 			$BASE->_conf['path']['oak_admin_root_www']);
 
-	    // build session
+		// assign delivered pager location
+		$BASE->utility->smarty->assign('pager_page', $pager_page);
+		
+	 	// build session
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
 	    );
@@ -288,6 +302,9 @@ try {
 		
 		// add response to session
 		$_SESSION['response'] = 1;
+		
+		// add pager_page to session
+		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
 		// redirect
 		$SESSION->save();

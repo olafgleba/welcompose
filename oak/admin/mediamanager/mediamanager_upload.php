@@ -94,8 +94,18 @@ try {
 		'other' => gettext('Other')
 	);
 	
+	// get pager_page value
+	if (!empty($_REQUEST['pager_page'])) {
+		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], OAK_REGEX_NUMERIC);
+	} else {
+		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], OAK_REGEX_NUMERIC);
+	}
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
+	
+	// hidden field for pager_page
+	$FORM->addElement('hidden', 'pager_page');
 	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
@@ -122,6 +132,11 @@ try {
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Close'),
 		array('class' => 'cancel200'));
+		
+	// set defaults
+	$FORM->setDefaults(array(
+		'pager_page' => Base_Cnc::ifsetor($pager_page, null)
+	));
 	
 	// validate it
 	if (!$FORM->validate()) {
@@ -143,7 +158,10 @@ try {
 		$BASE->utility->smarty->assign('oak_admin_root_www',
 			$BASE->_conf['path']['oak_admin_root_www']);
 
-	    // build session
+		// assign delivered pager location
+		$BASE->utility->smarty->assign('pager_page', $pager_page);
+		
+	 	// build session
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
 	    );
@@ -245,6 +263,9 @@ try {
 		
 		// add response to session
 		$_SESSION['response'] = 1;
+		
+		// add pager_page to session
+		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
 		// redirect
 		$SESSION->save();

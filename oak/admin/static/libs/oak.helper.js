@@ -58,9 +58,16 @@ Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
+Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
+
+Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
+Helper.prototype.getAttr = Helper_getAttr;
+Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
+Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
+Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 
 
 function Helper_launchPopup (width, height, nname, trigger, elem)
@@ -74,10 +81,12 @@ function Helper_launchPopup (width, height, nname, trigger, elem)
 		
 		switch (this.trigger) {
 			case 'mm_upload' :
-					this.url = this.parseMedUploadUrl;
+					Helper.getPagerPage();
+					this.url = this.parseMedUploadUrl + '?pager_page=' + pager_page;
 				break;
 			case 'mm_edit' :
-					this.url = this.parseMedEditUrl + '?id=' + this.elem.id;
+					Helper.getPagerPage();
+					this.url = this.parseMedEditUrl + '?id=' + this.elem.id + '&pager_page=' + pager_page;
 				break;
 			case 'pages_internal_links' :
 					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name;
@@ -104,7 +113,7 @@ function Helper_launchPopup (width, height, nname, trigger, elem)
 		this.ttarget.moveBy(this.resWidth, this.resHeight);
 		this.ttarget.focus();
 		
-		popTarget = this.ttarget;
+		//popTarget = this.ttarget;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -123,7 +132,7 @@ function Helper_closePopup ()
 
 		/* invoke function in parent window */
 		self.opener.$('lyLowerOpacity').style.display = 'none';
-		self.opener.Mediamanager.invokeInputs();
+		self.opener.Mediamanager.invokePager('', pager_page);
 		
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
@@ -227,7 +236,7 @@ function Helper_unsupportsEffects(exception)
 		this.version = _setBrowserStringVersion();
 		this.exception = exception;
 			
-		if ((this.browser == "Internet Explorer" && this.version < '7') || (this.browser == "Safari" && !this.exception)) {
+		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;
@@ -251,7 +260,7 @@ function Helper_unsupportsElems(exception)
 		this.version = _setBrowserStringVersion();
 		this.exception = exception;
 		
-		if ((this.browser == "Internet Explorer" && this.version < '7') || (this.browser == "Safari" && !this.exception)) {
+		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
 			return true;
 		} else { 
 			return false;
@@ -438,14 +447,7 @@ function Helper_showNextNode(elem)
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
-			// IE fails on func getAttribute() with argument 'id'
-			if (Helper.unsupportsElems('safari_exception')) {
-				var nextNode = sourceNode.nextSibling;
-				nextNode = nextNode.attributes['id'].value;
-			} else {
-				var nextNode = sourceNode.nextSibling.nextSibling;
-				nextNode = nextNode.getAttribute('id');
-			}
+			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 		}
 
 		var url = this.parsePagesLinksUrl;
@@ -486,14 +488,9 @@ function Helper_showNextNode(elem)
  */
 function _showResponsePagesSecondLinks(req)
 {
-	try {		
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide('indicator_pagesLinks');
-			Element.show('secondNode');
-		} else {
-			Effect.Fade('indicator_pagesLinks', {duration: 0.4});
-			Effect.Appear('secondNode',{duration: 0.6});
-		}
+	try {
+		Effect.Fade('indicator_pagesLinks', {duration: 0.4});
+		Effect.Appear('secondNode',{duration: 0.6});
 		$('secondNode').innerHTML = req.responseText;		
 		Behaviour.reapply('.act_setInternalLink');
 		Behaviour.reapply('.showNextNode');
@@ -514,13 +511,8 @@ function _showResponsePagesSecondLinks(req)
 function _showResponsePagesThirdLinks(req)
 {
 	try {
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide('indicator_pagesLinks');
-			Element.show('thirdNode');
-		} else {
-			Effect.Fade('indicator_pagesLinks', {duration: 0.4});
-			Effect.Appear('thirdNode',{duration: 0.6});
-		}	
+		Effect.Fade('indicator_pagesLinks', {duration: 0.4});
+		Effect.Appear('thirdNode',{duration: 0.6});	
 		$('thirdNode').innerHTML = req.responseText;		
 		Behaviour.reapply('.act_setInternalLink');
 		Behaviour.reapply('.showNextNode');
@@ -587,7 +579,7 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 		// delivered from within smarty assign
 		var target = formTarget;
 		
-		_insertTagsFromPopup(target, elem.id, "", "");
+		_insertTagsFromPopup(target, elem.id, '', '');
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
@@ -606,7 +598,7 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 		// delivered from within smarty assign
 		var target = formTarget;
 		
-		_insertTagsFromPopup(target, elem.id, "", "");
+		_insertTagsFromPopup(target, elem.id, '', '');
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
@@ -624,8 +616,8 @@ function _insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 {
 	try {
 		/*
-		We have to separate here, because the IE6 is too dump to differ between elements
-		which has the same value on different atrributes (name, id)	
+		We have to separate here, because the IE6 seems to be too dump to differ between elements
+		which has the same value on different attributes (name, id)	
 		So we serve IE by object forms[elements], while Mozilla be able to use 
 		the standard (pointing the element by document.getElementById()
 		*/
@@ -692,8 +684,8 @@ function _insertTags(id, tagOpen, tagClose, sampleText)
 {
 	try {
 		/*
-		We have to separate here, because the IE6 is too dump to differ between elements
-		which has the same value on different atrributes (name, id)	
+		We have to separate here, because the IE6 seems to be too dump to differ between elements
+		which has the same value on different attributes (name, id)	
 		So we serve IE by object forms[elements], while Mozilla be able to use 
 		the standard (pointing the element by document.getElementById()
 		*/
@@ -771,6 +763,24 @@ function Helper_getDelimiterValue()
 
 /**
  * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_getPagerPage()
+{
+	try {
+		if($('pager_page')) {
+			pager_page = $('pager_page').firstChild.nodeValue;
+		} else {
+			pager_page = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
  * Confirm action
  * If true, use the giving href to process
  * @param {var} elem Actual element
@@ -806,12 +816,7 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		// Safari whitespace #textNode behaviour
-		if (Helper.unsupportsElems()) {
-			commentId = commentId.nextSibling.nextSibling.nextSibling.firstChild;
-		} else {
-			commentId = commentId.nextSibling.nextSibling.nextSibling.nextSibling.firstChild;
-		}
+		commentId = Helper.getNextSiblingFirstChild(commentId, 4);
 		commentId = String(commentId.href);
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");		
 
@@ -843,8 +848,8 @@ function Helper_changeBlogCommentStatus (elem)
 function _showResponseChangeBlogCommentStatus(req)
 {
 	try {
-		setTimeout("Effect.Fade('statuschange', {duration: 0.6})", 2200);
-		setTimeout("$('lyLowerOpacity').style.display = 'none';", 3000);
+		setTimeout("Effect.Fade('statuschange', {duration: 0.6})", 2000);
+		setTimeout("$('lyLowerOpacity').style.display = 'none';", 2800);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -876,6 +881,68 @@ function Helper_showFileUploadMessage()
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+function Helper_getAttrParentNode (attr, elem, level)
+{
+	this.browser = _setBrowserString();
+
+	for (var a = elem; level > 0; level--) {
+		a = a.parentNode;
+	}
+		
+	if (this.browser == 'Internet Explorer')
+		return a.attributes[attr].value;
+	else
+		return a.getAttribute(attr);
+}
+
+function Helper_getAttr (attr, elem)
+{
+	this.browser = _setBrowserString();
+		
+	if (this.browser == 'Internet Explorer')
+		return elem.attributes[attr].value;
+	else
+		return elem.getAttribute(attr);
+}
+
+function Helper_getAttrNextSibling (attr, elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'Internet Explorer')
+		level-- ;
+
+	for (var a = elem; level > 0; level--) {
+		a = a.nextSibling;
+	}
+		
+	if (this.browser == 'Internet Explorer')
+		return a.attributes[attr].value;
+	else
+		return a.getAttribute(attr);
+}
+
+function Helper_getNextSiblingFirstChild (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'Internet Explorer' || this.browser == 'Safari')
+		level-- ;
+
+	for (var a = elem; level > 0; level--) {
+		a = a.nextSibling;
+	}
+	return a.firstChild;
+}
+
+function Helper_getDataParentNode (elem, level)
+{
+	for (var a = elem; level > 0; level--) {
+		a = a.parentNode;
+	}
+	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
 }
 
 /**

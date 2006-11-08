@@ -96,6 +96,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'.iHelp' : function(el){
+		el.onclick = function(){
+			Help.show(this);
+			return false;
+		}
+	},
+	'.iHelpRemove' : function(el){
+		el.onclick = function(){
+			Help.hide(this);
+			return false;
+		}
+	},
 	'.hideTableRow' : function(el){
 		el.onclick = function(){
 			Tables.hideTableRow(this);

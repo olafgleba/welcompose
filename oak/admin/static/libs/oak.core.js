@@ -2,7 +2,7 @@
  * Project: Oak
  * File: oak.core.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
@@ -21,38 +21,41 @@
  */
  
 /** 
- * @fileoverview This file is the essential Oak javascript enviroment.
+ * @fileoverview This file is the essential Oak javascript core class.
  * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
  * to make it unnecessary to loop this core file through the i18n parser.
+ * 
  *
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
  
-
 /**
  * Define debug output
- * @static
- * defined values:
+ *
+ * Switch differs how try/catch will handle exceptions
+ * 0 = no debug output
  * 1 = development
  * 2 = production
+ *
+ * @static
  */
 var debug = 1;
 
 /**
  * Construct the base class
- * @class This is the basic class 
+ * 
+ * @class This class is essential for the oak javascript enviroment.
+ * It predefines some properties and methods which are supposed to used in nearly every inherit class.
+ *   
  * @constructor
- * @throws MemoryException if there is no more memory 
  * @throws applyError on exception
  */
 function Base ()
 {
 	try {
-		// Properties
-
 		/**
-		 * Define the used help class names
+		 * Define help class names application wide
 		 */
 		this.helpClass = 'iHelp';
 		this.helpClassRemove = 'iHelpRemove';
@@ -64,54 +67,35 @@ function Base ()
 		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
 		
 		/**
-		 * Define the div IDs for the navigation layers
-		 */
-		this.navLyOne = 'ly1';
-
-		/**
-		 * Define the div IDs for the navigation layers
-		 */
-		this.navLyTwo = 'ly2';
-		
-		/**
-		 * Define the div ID for several help layers
+		 * Define divs for Mediamanager layers
+		 * Must corresponding to html notation
 		 */
 		this.helpLyMediamanager = 'lyMediamanager';
-		
-		/**
-		 * Define the div ID for several help layers
-		 */
-		this.helpLyMediamanagerMyLocal = 'lyMediamanagerMyLocal';
-		
-		/**
-		 * Define the div ID for several help layers
-		 */
-		this.helpLyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
-		
-		/**
-		 * Define the used table upload class names.
- 		 * Cascading styles to fit background images
-		 */
-		this.uploadClassShow = 'upload showTableRow';
-
-		/**
-		 * Define the used table upload class names.
- 		 * Cascading styles to fit background images
-		 */
-		this.uploadClassHide = 'uploadhide hideTableRow';
+		this.lyMediamanagerMyLocal = 'lyMediamanagerMyLocal';		
+		this.lyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
 		
 		/**
 		 * Define the used table upload class names.
  		 * Cascading styles to fit background images
 		 */
 		this.mediamanagerClassShow = 'showMediamanagerElement';
-
-		/**
-		 * Define the used table upload class names.
- 		 * Cascading styles to fit background images
-		 */
 		this.mediamanagerClassHide = 'hideMediamanagerElement';
 		
+		/**
+		 * Define divs for navigation layers
+		 * Must corresponding to html notation
+		 */
+		this.navLyOne = 'ly1';
+		this.navLyTwo = 'ly2';
+		
+		/**
+		 * Define used table upload class names.
+ 		 * Cascading styles to fit background images
+		 * Must corresponding to html notation
+		 */
+		this.uploadClassShow = 'upload showTableRow';
+		this.uploadClassHide = 'uploadhide hideTableRow';
+
 		/**
 		 * Comprehensive colors application wide
 		 */
@@ -122,27 +106,12 @@ function Base ()
 		 * Must corresponding to html notation
 		 */
 		this.helpHtmlShow = '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" alt="" /></a>';
-
-		/**
-		 * Build help strings delivered within DOM.
-		 * Must corresponding to html notation
-		 */
-		 this.helpHtmlHide = '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';		
-
-		/**
-		 * Build help strings delivered within DOM.
-		 * Must corresponding to html notation
-		 */
+		this.helpHtmlHide = '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';
 		this.elementHtmlShow = '<a href="#" title="' + showElement + '"><img src="../static/img/icons/open.gif" alt="" /></a>';
+		this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
 
 		/**
-		 * Build help strings delivered within DOM.
-		 * Must corresponding to html notation
-		 */
-		 this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';		
-
-		/**
-		 * Path for XHMLHTTPRequest imported files
+		 * Paths for XHMLHTTPRequest imported files
 		 */
 		this.parseHelpUrl = '../parse/parse.help.php';
 		this.parseNavUrl = '../parse/parse.navigation.php';
@@ -180,7 +149,12 @@ Base.prototype.isUndefined = Base_isUndefined;
 Base.prototype.isNumber = Base_isNumber;
 Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
+Base.prototype.trim = Base_trim;
 
+
+function Base_trim(elem) {
+  return elem.replace(/^\s*|\s*$/g, "");
+}
 
 /**
  * Implements method of prototype class Base
@@ -397,14 +371,14 @@ function OakInit_getCbxStatus (elems)
 			if ($(range)) {
 				if ($(elems[e]).checked === true) {
 	
-				allNodes = document.getElementsByClassName("bez");
+					allNodes = document.getElementsByClassName("bez");
 				
-				for (var i = 0; i < allNodes.length; i++) {
-					var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
-					if (_process == range) {
-						allNodes[i].style.color = this.applicationTextColor;
+					for (var i = 0; i < allNodes.length; i++) {
+						var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
+						if (_process == range) {
+							allNodes[i].style.color = this.applicationTextColor;
+						}
 					}
-				}
 					Element.show(range);
 				} else {
 					Element.hide(range);
@@ -521,58 +495,31 @@ Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
  * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (eg. level 1)
  * @throws applyError on exception
  */
-function Help_show (elem, level)
+function Help_show (elem)
 {
 	try {
 		// properties
 		this.elem = elem;
+		this.elem.className = this.helpClassRemove;
 		this.attr = 'for';
-		this.level = level;
-		
-		// IE fails on func getAttribute() with argument 'for'
-		if (Helper.unsupportsElems('safari_exception')) {
-			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
-		} else {
-			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
-		}
-		
-		switch (this.level) {
-			case '2' :
-					// IE fails on func getAttribute() with argument 'id', because it conflicts with 
-					// universal ID (used in edit files for hidden input)
-					if (Helper.unsupportsElems('safari_exception')) {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
-					} else {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-					}
-					this.elem.className = this.helpClassRemoveLevelTwo;
-				break;
-			case '3' :
-					if (Helper.unsupportsElems('safari_exception')) {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
-					} else {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-					}
-					this.elem.className = this.helpClassRemoveLevelThree;
-				break;
-			default :
-					if (Helper.unsupportsElems('safari_exception')) {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.attributes['id'].value;
-					} else {
-						this.formId = this.elem.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
-					}
-					this.elem.className = this.helpClassRemove;
-		}
-	 
+		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
 		this.ttarget = this.processId;
-	
-		// Are we within a foreach loop table (eg. with ascending ids)?
-		// If true, erase digits, so there is no need to build separat help files on the same topic
-		// example: name_3.html -> name.html
-		this.fetch = this.processId.replace(/(_(\d+))/, '');	
-		if (this.fetch) {
-			this.processId = this.fetch;
-		}
+				
+		var i = this.processId.match(/_\d+/);
+		
+		if (document.getElementsByClassName('botbg')[0] && !i) {
+			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		} 
+		
+		else if (document.getElementsByClassName('botbg')[0] && i) {
+			this.processId = this.processId.replace(/_\d+/, '');
+			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		
+		} else {
+			this.processId = this.processId.replace(/_\d+/, '');
+			this.formId = Helper.getDataParentNode(this.elem, 1);
+		}	
+			
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
 			
 		if (typeof this.req != 'undefined') {
@@ -587,8 +534,7 @@ function Help_show (elem, level)
 		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-		
-		//Behaviour.apply();
+
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
@@ -605,40 +551,22 @@ function Help_show (elem, level)
  * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
  */
-function Help_hide (elem, level)
+function Help_hide (elem)
 {
 	try {
 		// properties
 		this.elem = elem;
 		this.attr = 'for';
-		this.level = level;
-	
-		// IE cannot handle getAttribute('for') correctly
-		if (Helper.unsupportsElems('safari_exception')) {
-			this.processId = this.elem.parentNode.parentNode.attributes[this.attr].value;
-		} else {
-			this.processId = this.elem.parentNode.parentNode.getAttribute(this.attr);
-		}
+		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
 		this.processIdAfter = $(this.processId).parentNode.nextSibling;
 		
-		switch (this.level) {
-			case '2' :
-					this.elem.className = this.helpClassLevelTwo;
-				break;
-			case '3' :
-					this.elem.className = this.helpClassLevelThree;
-				break;
-			default :
-					this.elem.className = this.helpClass;
-		}
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide(this.processIdAfter);
-		} else {
-			Effect.Fade(this.processIdAfter,{duration: 0.4});
-		}
-		Element.update(this.elem, this.helpHtmlShow);
+		this.elem.className = this.helpClass;
 		
-		//Behaviour.apply();	
+		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.4});
+
+		Help.setCorrespondingFocus(this.elem, this.attr);
+		Element.update(this.elem, this.helpHtmlShow);
+	
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
@@ -661,12 +589,8 @@ function Help_processHelp (ttarget)
 			if (_req.status == 200) {
 				new Insertion.After($(ttarget).parentNode, _req.responseText);				
 				var ttarget_after = $(ttarget).parentNode.nextSibling;
-				if (Helper.unsupportsEffects('safari_exception')) {
-					Element.show(ttarget_after);
-				} else {
-					Element.hide(ttarget_after);
-					Effect.Appear(ttarget_after,{duration: 0.8});
-				}
+				Element.hide(ttarget_after);
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -690,19 +614,19 @@ function Help_showMediamanager (elem)
 	try {
 		// properties
 		this.elem = elem;
+		this.elem.className = this.helpClassRemoveMediamanager;
 		this.attr = 'id';
-		this.formId = this.elem.parentNode.parentNode.parentNode.getAttribute(this.attr);
+		this.formId = Helper.getAttrParentNode(this.attr, this.elem, 3);
 		this.processId = this.formId;
 		this.ttarget = this.helpLyMediamanager;
-		this.elem.className = this.helpClassRemoveMediamanager;
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
 				
 		// which layer to process
-		var catchMyLocal = Element.getStyle(this.helpLyMediamanagerMyLocal, 'display');		
+		var catchMyLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');		
 		if( catchMyLocal == 'block') {
-			this.toHide = this.helpLyMediamanagerMyLocal;
+			this.toHide = this.lyMediamanagerMyLocal;
 		} else {
-			this.toHide = this.helpLyMediamanagerMyFlickr;
+			this.toHide = this.lyMediamanagerMyFlickr;
 		}
 			
 		if (typeof this.req != 'undefined') {
@@ -717,8 +641,7 @@ function Help_showMediamanager (elem)
 	
 		Element.hide(this.toHide);
 		Element.update(this.elem, this.helpHtmlHide);
-		
-		//Behaviour.apply();
+
 		Behaviour.reapply('.' + this.elem.className);
 		
 		// build global var as reference for method hideMediamanager
@@ -757,8 +680,7 @@ function Help_hideMediamanager (elem)
 		}
 		
 		Element.update(this.elem, this.helpHtmlShow);
-		
-		//Behaviour.apply();
+
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
@@ -803,12 +725,7 @@ function Help_processMediamanager (ttarget)
  */
  function Help_setCorrespondingFocus (elem, attr)
 {
-	// IE fails on func getAttribute() with argument 'for'
-	if (Helper.unsupportsElems('safari_exception')) {
-		this.inst = elem.parentNode.parentNode.attributes[this.attr].value;
-	} else {
-		this.inst = elem.parentNode.parentNode.getAttribute(attr);
-	}
+	this.inst = Helper.getAttrParentNode(attr, elem, 2);
 	$(this.inst).focus();
 }
 
@@ -895,7 +812,6 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
-				//Behaviour.apply();
 			} else {
 	  			throw new DevError(_req.statusText);
 			}
@@ -1033,18 +949,10 @@ function Status_getCbx (elems)
 								allNodes[i].style.color = this.applicationTextColor;
 							}
 						}
-						if (Helper.unsupportsEffects('safari_exception')) {
-							Element.show($(range));
-						} else {
-							Element.hide($(range));
-							Effect.Appear($(range),{duration: 0.6});
-						}
+						Element.hide($(range));
+						Effect.Appear($(range),{duration: 0.6});
 					} else {
-						if (Helper.unsupportsEffects('safari_exception')) {
-							Element.hide($(range));
-						} else {
-							Effect.Fade($(range),{duration: 0.6});
-						}
+						Effect.Fade($(range),{duration: 0.6});
 					}
 				}
 			}
@@ -1129,15 +1037,11 @@ function Tables_showTableRow (elem)
 		$(this.obid).style.visibility = 'visible';
 		
 		// process inner div
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.show(this.ibid);
-		} else {
-			Element.hide(this.ibid);
-			Effect.Appear(this.ibid,{duration: 0.7});
-		}
+		Element.hide(this.ibid);
+		Effect.Appear(this.ibid,{duration: 0.7});
 
 		// coloring top row
-		this.elem.parentNode.parentNode.style.color = '#0c3';
+		this.elem.parentNode.parentNode.style.color = this.applicationTextColor;
 				
 		this.elem.className = this.uploadClassHide;
 		
@@ -1164,17 +1068,13 @@ function Tables_hideTableRow (elem)
 		this.ibid = String('i_' + this.bid[1]);
 		
 		// process inner div
-		if (Helper.unsupportsEffects('safari_exception')) {
-			Element.hide(this.ibid);
-		} else {
-			Effect.Fade(this.ibid,{duration: 0.8});
-		}
+		Effect.Fade(this.ibid,{duration: 0.8});
 			
 		// process outer table tr
 		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 800);
 		
 		// coloring top row
-		this.elem.parentNode.parentNode.style.color = '#333';
+		this.elem.parentNode.parentNode.style.color = '';
 
 		this.elem.className = this.uploadClassShow;
 		
@@ -1202,6 +1102,9 @@ function _applyError (exception)
 	var errStr;
 	
 	switch (debug) {
+		case 0 :
+			return false;
+		break;
 		case 1 :
 			errStr = exception + '\r\n' 
 					+ exception.fileName + '\r\n' 
