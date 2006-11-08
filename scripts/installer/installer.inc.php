@@ -22,21 +22,166 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
-$spi = new Setup_PackageExtractor();
-$spi->exportFiles();
-
 class Setup_PackageExtractor {
 	
+	/**
+	 * Container where the recovered directory index will
+	 * be stored 
+	 *
+	 * @param array
+	 */
 	protected $_dir_index = array();
 	
+	/**
+	 * Directory where the software should be installed to.
+	 *
+	 * @param string 
+	 */
 	protected $_install_dir = array();
+	
+	/**
+	 * Default chmod value that will be applied to files.
+	 *
+	 * @param int
+	 */
+	protected $_default_file_mask = 0644;
+	
+	/**
+	 * Default chmod value that will be applied to directories.
+	 *
+	 * @param int
+	 */
+	protected $_default_dir_mask = 0755;
+	
+	/**
+	 * Chmod value that will be applied to files that are supposed
+	 * to be writable.
+	 * 
+	 * @param int
+	 */
+	protected $_writable_file_mask = 0666;
+	
+	/**
+	 * Chmod value that will be applied to directories that are
+	 * supposed to be writable.
+	 * 
+	 * @param int
+	 */
+	protected $_writable_dir_mask = 0777;
+	
+	/**
+	 * List of files that are supposed to be writable after extraction
+	 *
+	 * @param array
+	 */
+	protected $_writable_files = array(
+		
+	);
+	
+	/**
+	 * List of directories that are supposed to be writable after extraction
+	 *
+	 * @param array
+	 */
+	protected $_writable_dirs = array(
+		'/admin/smarty/compiled',
+		'/smarty/compiled',
+		'/smarty/cache',
+		'/files/media',
+		'/files/global_templates',
+		'/tmp',
+		'/tmp/captchas',
+		'/tmp/installer',
+		'/tmp/updater'
+	);
 
-public function exportFiles ()
+/**
+ * Sets default chmod mode for files. Please note that you
+ * have to supply a four digit long octal mode value.
+ *
+ * @throws Setup_PackageExtractorException
+ * @param int 
+ */
+public function setDefaultFileMask ($mode)
 {
-	$this->getDirectoryIndex();
-	$this->_install_dir = dirname(__FILE__).DIRECTORY_SEPARATOR.'test';
+	// input check
+	if (!is_numeric($mode) || !strlen($mode) != 4) {
+		throw new Setup_PackageExtractorException("Invalid mode supplied");
+	}
+	
+	$this->_default_file_mask = $mode;
+}
+
+/**
+ * Sets default chmod mode for directories. Please note that you
+ * have to supply a four digit long octal mode value.
+ *
+ * @throws Setup_PackageExtractorException
+ * @param int 
+ */
+public function setDefaultDirMask ($mode)
+{
+	// input check
+	if (!is_numeric($mode) || !strlen($mode) != 4) {
+		throw new Setup_PackageExtractorException("Invalid mode supplied");
+	}
+	
+	$this->_default_dir_mask = $mode;
+}
+
+/**
+ * Sets chmod mode for files that are supposed to be writable.
+ * Please note that you have to supply a four digit long octal
+ * mode value.
+ *
+ * @throws Setup_PackageExtractorException
+ * @param int 
+ */
+public function setWritableFileMask ($mode)
+{
+	// input check
+	if (!is_numeric($mode) || !strlen($mode) != 4) {
+		throw new Setup_PackageExtractorException("Invalid mode supplied");
+	}
+	
+	$this->_writable_file_mask = $mode;
+}
+
+/**
+ * Sets chmod mode for directories that are supposed to be writable.
+ * Please note that you have to supply a four digit long octal
+ * mode value.
+ *
+ * @throws Setup_PackageExtractorException
+ * @param int 
+ */
+public function setWritableDirMask ($mode)
+{
+	// input check
+	if (!is_numeric($mode) || !strlen($mode) != 4) {
+		throw new Setup_PackageExtractorException("Invalid mode supplied");
+	}
+	
+	$this->_writable_dir_mask = $mode;
+}
+
+/**
+ * Controller function that extracts the install package. It takes care of
+ * the directory structur spawning, the file extraction and the required
+ * chmod adjustments. Takes the path to the install dir as first argument.
+ * 
+ * Attention: The path will be evaluated relative to the installer package.
+ */
+public function exportPackage ($install_dir)
+{
+	// spawn directory structure
 	$this->spawnDirectoryStructure();
+	
+	// extract the files
 	$this->extractFiles();
+	
+	// execute chmod adjustments
+	$this->chmodFiles();
 }
 
 /**
@@ -148,6 +293,9 @@ protected function spawnDirectoryStructure ()
 	// prepare install directory
 	$this->prepareInstallDirectory();
 	
+	// get directory index
+	$this->getDirectoryIndex();
+	
 	foreach ($this->_dir_index as $_dir) {
 		// prepare complete path to the parent of the directory to create
 		$path_parts = array(
@@ -182,6 +330,9 @@ protected function spawnDirectoryStructure ()
 			if (@mkdir($path) === false) {
 				throw new Setup_PackageExtractorException("Unable to spawn directory stucture; directory creation failed");
 			}
+			
+			// change rights
+			chmod($path, $this->_default_dir_mask);
 		}
 	}
 }
@@ -329,21 +480,57 @@ protected function saveExtractedFileToDisk ($directory, $file_name, $file_conten
 	
 	// write file to disk
 	file_put_contents($path, $file_contents);
+	
+	// change rights
+	chmod($path, $this->_default_file_mask);
 }
 
+/**
+ * Prepares install directory which means that it tries to create the install
+ * directory if it does not exist.
+ *
+ * @throws Setup_PackageExtractorException
+ */
 protected function prepareInstallDirectory ()
 {
-	// try to create the install dir if it does not exist
-	if (!is_dir($this->_install_dir)) {
-		if (@mkdir($this->_install_dir) === false) {
-			throw new Setup_PackageExtractorException("Failed to create not existing install directory");
-		}
+	// make sure that the install dir doesn't start and end with a slash
+	if (substr($this->_install_dir, 0, 1) == '/') {
+		$this->_install_dir = substr($this->_install_dir, 1);
+	}
+	if (substr($this->_install_dir, -1, 1) == '/') {
+		$this->_install_dir = substr($this->_install_dir, 0, -1);
+	}
+	
+	foreach (explode('/', $this->_install_dir) as $_dir) {
+		$path .= $_dir.'/';
+		if (!empty($_dir) && !is_dir($path)) {
+			if (@mkdir($path) === false) {
+				throw new Setup_PackageExtractorException("Failed to create not existing install directory");
+			}
+			
+			// change rights
+			chmod($path, $this->_default_dir_mask);
+		} 
 	}
 }
 
+/**
+ * Changes rights of dirs and files listed in self::_writable_dirs and
+ * self::_writable_files.
+ */
 protected function chmodFiles ()
 {
-	
+	// chmod dirs and files
+	foreach ($this->_writable_dirs as $_dir) {
+		if (@chmod($this->_install_dir.$_dir, $this->_writable_dir_mask) === false) {
+			throw new Setup_PackageExtractorException("Failed to chmod $_dir");
+		}
+	}
+	foreach ($this->_writable_files as $_file) {
+		if (@chmod($this->_install_dir.$_dir, $this->_writable_file_mask) === false) {
+			throw new Setup_PackageExtractorException("Failed to chmod $_file");
+		}
+	}
 }
 
 // end of class
