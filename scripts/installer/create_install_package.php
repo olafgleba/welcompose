@@ -70,7 +70,29 @@ class Setup_PackageGenerator {
 	 *
 	 * @var string
 	 */
-	protected $_installer_script = null;
+	protected $_package_extractor_script = null;
+	
+	/**
+	 * Installer type that should be packaged
+	 *
+	 * @var string
+	 */
+	protected $_installer_type = 'web';
+	
+	/**
+	 * Whether the usage instructions should be displayed or not
+	 * 
+	 * @bool
+	 */
+	protected $_help = false;
+	
+	/**
+	 * Path where the html templates and the images
+	 * of the web installer can be found.
+	 *
+	 * @var string
+	 */
+	protected $_web_installer_dir = null;
 	
 	/**
 	 * Strings that mark the start and end of the
@@ -122,7 +144,7 @@ public function createInstallPackage ()
 	(file_exists($this->_output_file) && !is_writable($this->_output_file))) {
 		$this->triggerError("Package file not writable.\r\n");
 	}
-	if (!file_exists($this->_installer_script)) {
+	if (!file_exists($this->_package_extractor_script)) {
 		$this->triggerError("Installer code file does not exist.\r\n");
 	}
 	
@@ -195,31 +217,42 @@ protected function importArgs ()
 				$this->_compress = false;
 			}
 		}
-		// handle --installer_script=<file> argument
-		if (preg_match('=^-{2}installer_script\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
+		// handle --package-extractor-script=<file> argument
+		if (preg_match('=^-{2}package-extractor-script\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
 			if (!file_exists($matches[1])) {
 				$this->triggerError("Installer script does not exist.\r\n");
 			} else {
-				$this->_installer_script = $matches[1];
+				$this->_package_extractor_script = $matches[1];
 			}
 		}
-		// handle --software_directory=<directory> argument
-		if (preg_match('=^-{2}software_directory\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
+		// handle --software-directory=<directory> argument
+		if (preg_match('=^-{2}software-directory\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
 			if (!is_dir($matches[1])) {
 				$this->triggerError("Software directory is a file or does not exist.\r\n");
 			} else {
 				$this->_software_directory = $matches[1];
 			}
 		}
-		// handle --output_file=<file> argument
-		if (preg_match('=^-{2}output_file\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
+		// handle --output-file=<file> argument
+		if (preg_match('=^-{2}output-file\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
 			if (is_dir($matches[1])) {
 				$this->triggerError("Output file already exists and is a directory.\r\n");
 			} else {
 				$this->_output_file = $matches[1];
 			}
 		}
-		
+		// handle --installer-type=<type> argument
+		if (preg_match('=^-{2}installer-type\=\"?\'?(web)\"?\'?$=', $_arg, $matches)) {
+			$this->_installer_type = $matches[1];
+		}
+		// handle --web-installer-dir=<path> argument
+		if (preg_match('=^-{2}web-installer-dir\=\"?\'?(.*?)\"?\'?$=', $_arg, $matches)) {
+			if (!is_dir($matches[1])) {
+				$this->triggerError("Web installer directory could not be found.\r\n");
+			} else {
+				$this->_web_installer_dir = $matches[1];
+			}
+		}
 	}
 	
 	// if $this->_help is true, we have to output the usage instructions
@@ -232,14 +265,20 @@ protected function importArgs ()
 	if (is_null($this->_compress)) {
 		$this->triggerError("Invalid or no value for argument --compress supplied.\r\n");
 	}
-	if (empty($this->_installer_script)) {
-		$this->triggerError("No value for argument --installer_script supplied.\r\n");
+	if (empty($this->_package_extractor_script)) {
+		$this->triggerError("No value for argument --package-extractor-script supplied.\r\n");
 	}
 	if (empty($this->_software_directory)) {
-		$this->triggerError("No value for argument --software_directory supplied.\r\n");
+		$this->triggerError("No value for argument --software-directory supplied.\r\n");
 	}
 	if (empty($this->_output_file)) {
-		$this->triggerError("No value for argument --output_file supplied.\r\n");
+		$this->triggerError("No value for argument --output-file supplied.\r\n");
+	}
+	if (empty($this->_installer_type)) {
+		$this->triggerError("No installer type using --installer-type definied\r\n");
+	}
+	if ($this->_installer_type == 'web' && empty($this->_web_installer_dir)) {
+		$this->triggerError("No value for argument --web-installer-dir definied\r\n");
 	}
 }
 
@@ -288,9 +327,15 @@ protected function createContentList ($path)
  */
 protected function writeInstallerCodeToPackage ()
 {
-	// write installer code to package
-	file_put_contents($this->_output_file, file_get_contents($this->_installer_script)."\r\n",
+	// pack the web installer into the install package if this is a webinstaller package
+	if ($this->_installer_type == 'web') {
+		$this->packWebInstaller();
+	}
+	
+	// write package extractor code to package
+	file_put_contents($this->_output_file, file_get_contents($this->_package_extractor_script)."\r\n",
 		FILE_APPEND);
+	
 }
 
 /**
@@ -409,23 +454,31 @@ protected function printHelp ()
 	$this->printStderr("\r\n");
 	$this->printStderr("Usage: php create_install_package.php \\\r\n");
 	$this->printStderr("           --compress=<true|false> \\\r\n");
-	$this->printStderr("           --installer_script=<install script file> \\\r\n");
-	$this->printStderr("           --software_directory=<software dir to package> \\\r\n");
-	$this->printStderr("           --output_file=<file to write the install package to>\r\n");
+	$this->printStderr("           --package-extractor-script=<file with package extractor> \\\r\n");
+	$this->printStderr("           --software-directory=<software dir to package> \\\r\n");
+	$this->printStderr("           --output-file=<file to write the install package to> \\\r\n");
+	$this->printStderr("           --installer-type=<web> \\\r\n");
+	$this->printStderr("           --web-installer-dir=<path to web installer>\r\n");
 	$this->printStderr("\r\n");
 	$this->printStderr("Arguments:\r\n");
 	$this->printStderr("    --compress:\r\n");
 	$this->printStderr("        Deflate file contents and serialized structures to create a smaller\r\n");
 	$this->printStderr("        install package. Use true to enable and false to disable.\r\n");
 	$this->printStderr("        compression.\r\n\r\n");
-	$this->printStderr("    --installer_script:\r\n");
-	$this->printStderr("        Path to the file that contains the php install script that will\r\n");
-	$this->printStderr("        be included at top of the install package.\r\n\r\n");
-	$this->printStderr("    --software_directory:\r\n");
+	$this->printStderr("    --package-extractor-script:\r\n");
+	$this->printStderr("        Path to the file that contains the php package extractor script that\r\n");
+	$this->printStderr("        will be included at top of the install package.\r\n\r\n");
+	$this->printStderr("    --software-directory:\r\n");
 	$this->printStderr("        Full path to the root directory of the software to package.\r\n\r\n");
 	$this->printStderr("    --output_file:\r\n");
 	$this->printStderr("        Path to the file which the install package will be written to. If\r\n");
 	$this->printStderr("        the file already exists, it will be overwritten.\r\n\r\n");
+	$this->printStderr("    --installer-type:\r\n");
+	$this->printStderr("        Type of installer that should be packaged. Supported values:\r\n");
+	$this->printStderr("        web.\r\n\r\n");
+	$this->printStderr("    --web-installer-dir:\r\n");
+	$this->printStderr("        Path to the directory with the web installer files. Only required\r\n");
+	$this->printStderr("        when you're going to create a package with web installer.\r\n\r\n");
 }
 
 /**
@@ -462,6 +515,94 @@ protected function printStderr ($message)
 {
 	// write error message to stderr
 	file_put_contents('php://stderr', $message);
+}
+
+/**
+ * Includes the web installer into the install package.
+ */
+protected function packWebInstaller ()
+{
+	// write zlib constant definition to installer package
+	$constant_definition = sprintf("<?php define('OAK_ZLIB_PACKAGE', %s); ?>\r\n",
+		($this->_compress ? 'true' : 'false'));
+	file_put_contents($this->_output_file, $constant_definition, FILE_APPEND);
+	
+	// prepare path to web installer html template
+	$file_path = $this->_web_installer_dir.DIRECTORY_SEPARATOR."package_installer.html";
+	
+	// read the html template of the web installer
+	$data = file_get_contents($file_path);
+	
+	// write the web installer html template to the output file
+	file_put_contents($this->_output_file, $data, FILE_APPEND);
+	
+	// pack the web installer images
+	$this->packWebInstallerImages();
+}
+
+/**
+ * Takes all the images required to display the web installer and
+ * writes them as base64 encoded data with a display function to the
+ * installer file.
+ */
+protected function packWebInstallerImages ()
+{
+	// write php open tag to output file
+	file_put_contents($this->_output_file, "<?php\r\n\r\n", FILE_APPEND);
+	
+	// open web installer dir
+	$dir = dir($this->_web_installer_dir);
+	
+	// loop through the dir contents
+	while (false !== ($file = $dir->read())) {
+		// skip links
+		if ($file == '.' || $file == '..') {
+			continue;
+		}
+		
+		// import graphics
+		$content = null;
+		if (preg_match("=(jpg|gif|png)$=", $file)) {
+			// prepare full path to file
+			$file_path = $dir->path.DIRECTORY_SEPARATOR.$file;
+			
+			// get image data and encode it to chunked base64
+			$binary_data = chunk_split(base64_encode(file_get_contents($file_path)));
+			
+			// prepare the name of the function that will be used to display the image
+			$function_name = preg_replace("=[^a-z0-9]=", null, $file);
+			
+			// prepare header hat will be inserted into the generated code
+			if (preg_match("=\.gif$=", $file)) {
+				$header = 'Content-Type: image/gif';
+			} elseif (preg_match("=\.jpg$=", $file)) {
+				$header = 'Content-Type: image/jpeg';
+			} elseif (preg_match("=\.png$=", $file)) {
+				$header = 'Content-Type: image/png';
+			}
+			
+			// generate code
+			$content .= "function web_installer_display_".$function_name." ()\r\n";
+			$content .= "{\r\n";
+			$content .= "	header('$header');\r\n";
+			$content .= "	\r\n";
+			$content .= "	\$binary_data = trim('\r\n";
+			$content .= $binary_data."\r\n";
+			$content .= "	');\r\n";
+			$content .= "	\r\n";
+			$content .= "	echo base64_decode(\$binary_data);\r\n";
+			$content .= "}\r\n\r\n";
+			
+			// write generated code to installer file
+			file_put_contents($this->_output_file, $content, FILE_APPEND);
+		}
+	}
+	
+	// close dir handle
+	$dir->close();
+	
+	// write php close tag to installer file
+	file_put_contents($this->_output_file, "?>\r\n", FILE_APPEND);
 }
 
 // end of class

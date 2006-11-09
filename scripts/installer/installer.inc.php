@@ -94,6 +94,28 @@ class Setup_PackageExtractor {
 		'/tmp/installer',
 		'/tmp/updater'
 	);
+	
+	/**
+	 * Strings that mark the start and end of the
+	 * directory index in the installer package.
+	 * 
+	 * @var array
+	 */
+	protected $_dir_index_markers = array(
+		'start' => '-----BEGIN DIRECTORY INDEX-----',
+		'end' => '-----END DIRECTORY INDEX-----'
+	);
+	
+	/**
+	 * Strings that mark the start and end of a
+	 * file in the installer package.
+	 * 
+	 * @var array
+	 */	
+	protected $_file_markers = array(
+		'start' => '-----BEGIN FILE-----',
+		'end' => '-----END FILE-----'
+	);
 
 /**
  * Sets default chmod mode for files. Please note that you
@@ -105,11 +127,11 @@ class Setup_PackageExtractor {
 public function setDefaultFileMask ($mode)
 {
 	// input check
-	if (!is_numeric($mode) || !strlen($mode) != 4) {
+	if (!is_numeric($mode) || strlen($mode) != 4) {
 		throw new Setup_PackageExtractorException("Invalid mode supplied");
 	}
 	
-	$this->_default_file_mask = $mode;
+	$this->_default_file_mask = (int)$mode;
 }
 
 /**
@@ -122,11 +144,11 @@ public function setDefaultFileMask ($mode)
 public function setDefaultDirMask ($mode)
 {
 	// input check
-	if (!is_numeric($mode) || !strlen($mode) != 4) {
+	if (!is_numeric($mode) || strlen($mode) != 4) {
 		throw new Setup_PackageExtractorException("Invalid mode supplied");
 	}
 	
-	$this->_default_dir_mask = $mode;
+	$this->_default_dir_mask = (int)$mode;
 }
 
 /**
@@ -140,11 +162,11 @@ public function setDefaultDirMask ($mode)
 public function setWritableFileMask ($mode)
 {
 	// input check
-	if (!is_numeric($mode) || !strlen($mode) != 4) {
+	if (!is_numeric($mode) || strlen($mode) != 4) {
 		throw new Setup_PackageExtractorException("Invalid mode supplied");
 	}
 	
-	$this->_writable_file_mask = $mode;
+	$this->_writable_file_mask = (int)$mode;
 }
 
 /**
@@ -158,11 +180,11 @@ public function setWritableFileMask ($mode)
 public function setWritableDirMask ($mode)
 {
 	// input check
-	if (!is_numeric($mode) || !strlen($mode) != 4) {
+	if (!is_numeric($mode) || strlen($mode) != 4) {
 		throw new Setup_PackageExtractorException("Invalid mode supplied");
 	}
 	
-	$this->_writable_dir_mask = $mode;
+	$this->_writable_dir_mask = (int)$mode;
 }
 
 /**
@@ -171,9 +193,18 @@ public function setWritableDirMask ($mode)
  * chmod adjustments. Takes the path to the install dir as first argument.
  * 
  * Attention: The path will be evaluated relative to the installer package.
+ *
+ * @throws Setup_PackageExtractorException
+ * @param string Install dir
  */
 public function exportPackage ($install_dir)
 {
+	// set install dir
+	if (empty($install_dir) || !is_scalar($install_dir)) {
+		throw new Setup_PackageExtractorException("Install dir must be a non empty scalar value");
+	}
+	$this->_install_dir = $install_dir;
+	
 	// spawn directory structure
 	$this->spawnDirectoryStructure();
 	
@@ -214,7 +245,7 @@ protected function getDirectoryIndex ()
 			
 			// if we reached the end of the directory index, we can stop here
 			// with reading and break the while loop.
-			if ($buffer == "-----END DIRECTORY INDEX-----") {
+			if ($buffer == $this->_dir_index_markers['end']) {
 				break;
 			}
 			
@@ -254,7 +285,7 @@ protected function getDirectoryIndex ()
 			} 
 			
 			// after we reached the start marker, we can enable reading
-			if ($buffer == "-----BEGIN DIRECTORY INDEX-----") {
+			if ($buffer == $this->_dir_index_markers['start']) {
 				$read = true;
 				
 				// increment the line number
@@ -332,7 +363,7 @@ protected function spawnDirectoryStructure ()
 			}
 			
 			// change rights
-			chmod($path, $this->_default_dir_mask);
+			chmod($path, octdec($this->_default_dir_mask));
 		}
 	}
 }
@@ -362,7 +393,7 @@ protected function extractFiles ()
 			// read the file line by line
 			$buffer = trim(fgets($fp));
 			
-			if ($buffer == "-----END FILE-----") {
+			if ($buffer == $this->_file_markers['end']) {
 				// if the file is compressed, uncompress it
 				if ($compressed) {
 					$file = gzinflate($file);
@@ -421,7 +452,7 @@ protected function extractFiles ()
 				continue;
 			}
 			
-			if ($buffer == "-----BEGIN FILE-----") {
+			if ($buffer == $this->_file_markers['start']) {
 				// reset vars for the file
 				$file = null;
 				$file_name = null;
@@ -482,7 +513,7 @@ protected function saveExtractedFileToDisk ($directory, $file_name, $file_conten
 	file_put_contents($path, $file_contents);
 	
 	// change rights
-	chmod($path, $this->_default_file_mask);
+	chmod($path, octdec($this->_default_file_mask));
 }
 
 /**
@@ -509,7 +540,7 @@ protected function prepareInstallDirectory ()
 			}
 			
 			// change rights
-			chmod($path, $this->_default_dir_mask);
+			chmod($path, octdec($this->_default_dir_mask));
 		} 
 	}
 }
@@ -522,12 +553,12 @@ protected function chmodFiles ()
 {
 	// chmod dirs and files
 	foreach ($this->_writable_dirs as $_dir) {
-		if (@chmod($this->_install_dir.$_dir, $this->_writable_dir_mask) === false) {
+		if (@chmod($this->_install_dir.$_dir, octdec($this->_writable_dir_mask)) === false) {
 			throw new Setup_PackageExtractorException("Failed to chmod $_dir");
 		}
 	}
 	foreach ($this->_writable_files as $_file) {
-		if (@chmod($this->_install_dir.$_dir, $this->_writable_file_mask) === false) {
+		if (@chmod($this->_install_dir.$_dir, octdec($this->_writable_file_mask)) === false) {
 			throw new Setup_PackageExtractorException("Failed to chmod $_file");
 		}
 	}

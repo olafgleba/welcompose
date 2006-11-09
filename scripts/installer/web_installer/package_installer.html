@@ -1,0 +1,450 @@
+<?php
+
+ob_start();
+
+// handle requests for image files that are part of the package installer.
+// display them using their function and exit afterwards.
+if (!empty($_REQUEST['file'])) {
+	$function_name = "web_installer_display_".preg_replace("=[^a-z0-9]=", null, $_REQUEST['file']);
+	if (function_exists($function_name)) {
+		call_user_func($function_name);
+		exit;
+	}
+}
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta name="language" content="de" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta http-equiv="imagetoolbar" content="no" /> 
+	<title>Oak Package Installer</title>
+	<style>
+	<!--
+		* {
+		margin: 0;
+		padding: 0;
+		}
+		html, body, fieldset, a img {
+		border: 0 none;
+		}
+		body {
+		font: 95% Arial, Helvetica, sans-serif;
+		color: #333;
+		background: #d9d9d9 url(<?php echo basename(__FILE__); ?>?file=bg_body.gif); 
+		padding: 12px 0 0 0;
+		text-align: center;
+		}
+
+		h1 {
+		font-size: 2em;
+		font-weight: normal;
+		color: #0c3;
+		margin: 40px 0 15px 10px;
+		}
+		h2, p, a, li, th, td, select, label, input, legend {
+		font-size: 0.80em;
+		}
+		p a, li a, th a, td a, label select, label input, label p, label span span a {
+		font-size: 100%;
+		} 
+		a {
+		text-decoration: none;
+		}
+		a:link, a:visited {
+		color: #00AE2C;
+		background: transparent;
+		}
+		a:hover {
+		color: #00AE2C;
+		background: transparent;
+		text-decoration: underline;
+		}
+		a:active, a:focus {
+		color: #fff;
+		background: #0c3;
+		}
+		#container {
+		position: relative;
+		width: 768px;
+		min-height: 800px;
+		background: #fff url(<?php echo basename(__FILE__); ?>?file=bg_container.gif) 0 0 repeat-y;
+		margin: 0 auto;
+		text-align: left;
+		}
+		#container p.copyright {
+		margin: 80px 20px 0 20px;
+		padding-bottom: 20px;
+		text-align: right;
+		}
+		#header {
+		width: 768px;
+		height: 170px;
+		background: transparent url(<?php echo basename(__FILE__); ?>?file=bg_header.gif) 0 0 no-repeat;
+		}
+
+		/* LOGO START */
+		#logo {
+		position: absolute;
+		top: 25px;
+		left: 494px;
+		width: 250px;
+		background: transparent; 
+		}
+		#logo p {
+		color: #fff;
+		background: #0c3;
+		padding-left: 7px;
+		font-size: 20px;
+		}
+		#logo .xtop, 
+		#logo .xbottom {
+		display: block; 
+		background: transparent;
+		font-size: 1px;
+		}
+		#logo .xb1, #logo .xb2, #logo .xb3 {
+		display: block; 
+		overflow: hidden;
+		}
+		#logo .xb1, #logo .xb2, #logo .xb3 {
+		height: 1px;
+		}
+		#logo .xb2, 
+		#logo .xb3 {
+		background: #0c3; 
+		}
+		#logo .xb1 {
+		margin: 0 3px; 
+		background: #0c3;
+		}
+		#logo .xb2 {
+		margin: 0 2px; 
+		}
+		#logo .xb3 {
+		margin: 0 1px;
+		}
+		/* LOGO STOP */
+
+		#content {
+		margin: 19px;
+		width: 730px;
+		}
+		#content p {
+		margin: 10px;
+		}
+
+		/* FORMs */
+		form.botbg {
+		width: 729px;
+		padding: 15px 0 20px 0;
+		background: transparent url(<?php echo basename(__FILE__); ?>?file=bg_fieldset_bot.gif) left bottom no-repeat;
+		}
+		fieldset.topbg {
+		width: 729px;
+		padding: 10px 0 0 0;
+		background: transparent url(<?php echo basename(__FILE__); ?>?file=bg_fieldset_top.gif) left top no-repeat;
+		}
+		fieldset h2 {
+		font-weight: normal;
+		margin: 0 0 5px 15px;
+		padding-top: 15px;
+		}
+		legend {
+		margin: 20px 0 5px 5px;
+		padding: 0;
+		}
+		label {
+		display: block;
+		width: 700px;
+		margin: 15px 0 0 15px;
+		clear: both;
+		}
+		label.cont { 
+		padding: 5px 0;
+		margin: 0 0 0 15px;
+		clear: both;
+		height: 1.6em;
+		}
+		label.cont50 {
+		padding: 5px 0;
+		margin: 0;
+		clear: both;
+		height: 5em;
+		}
+		label .bez280, label .bez200 {
+		display: block; 
+		float: left;
+		width: 280px;
+		height: 1.6em;
+		vertical-align: middle;
+		margin-right: 5px;
+		font-weight: bold;
+		}
+		label .bez200 {
+		width: 200px;
+		}
+		label .req {
+		color: #f00;
+		}
+		input.w100, input.w200, input.w300, input.w580 {
+		border: 1px solid #ccc;
+		padding: 2px 2px;
+		color: #000;
+		background: #fff;
+		}
+		input.w100 {
+		width: 100px;
+		}
+		input.w200 {
+		width: 200px;
+		}
+		input.w300 {
+		float: left;
+		width: 300px;
+		}
+		input.w580 {
+		width: 580px;
+		font-weight: bold;
+		}
+		textarea.w450h300 {
+		width: 450px;
+		height: 300px;
+		border: 1px solid #ccc;
+		margin-left: 220px;
+		}
+		input.chbx {
+		border-color: #666;
+		}
+		input.submitbut140, input.submitbut130 {
+		float: left;
+		text-align: left;
+		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=submitbut140_green.gif) no-repeat;
+		color: #fff;
+		width: 140px;
+		height: 20px;
+		font-size: 80%;
+		font-weight: bold;
+		border: 0 none;
+		padding: 0 0 0 5px;
+		margin: 10px  0 0 220px;
+		cursor: pointer;
+		}
+		input.submitbut130 {
+		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=submitbut130_green.gif) no-repeat;
+		color: #fff;
+		width: 130px;
+		}
+		input.m300 {
+		margin-left: 300px;
+		}
+		a.submitbut140gray, a.submitbut140gray:link, a.submitbut140gray:visited,
+		a.submitbut130gray, a.submitbut130gray:link, a.submitbut130gray:visited {
+		display: block;
+		float: left;
+		text-align: left;
+		background: #ccc url(<?php echo basename(__FILE__); ?>?file=submitbut140_gray.gif) no-repeat;
+		color: #fff;
+		width: 135px;
+		height: 20px;
+		line-height: 20px;
+		font-size: 80%;
+		font-weight: bold;
+		border: 0 none;
+		padding: 0 0 0 5px;
+		margin: 10px  0 0 10px;
+		cursor: pointer;
+		}
+		a.submitbut130gray, a.submitbut130gray:link, a.submitbut130gray:visited {
+		background: #ccc url(<?php echo basename(__FILE__); ?>?file=submitbut130_gray.gif) no-repeat;
+		color: #fff;
+		width: 125px;
+		}
+		.submits {
+		display: block;
+		height: 1.5em;
+		clear: both;
+		padding: 15px 0;
+		}
+
+		/* HELP */
+		#content p.help {
+		float: left;
+		display: block;
+		line-height: 1.5em;
+		width: 300px;
+		margin: 0;
+		padding-left: 140px;
+		}
+		.iHelp img, .iHelpRemove img {
+		vertical-align: middle;
+		}
+		/* CLEARFIX */
+		.clearfix:after {
+		content: "."; 
+		display: block; 
+		height: 0; 
+		clear: both; 
+		visibility: hidden;
+		}
+		/* Hides from IE-mac \*/
+		* html .clearfix { 
+		height: 1%; 
+		}
+		/* End hide from IE-mac */
+	// -->
+	</style>
+</head>
+
+<body>
+<div id="container">
+
+<div id="header"> 
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>Oak Package Installer</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+<div id="topnavcon">
+&nbsp;
+<!-- topnavcon --></div>
+
+<!-- header --></div>
+
+<div id="content">
+
+<h1>Package Installation</h1>
+
+<p>Welcome to the Oak Package Installer. It will install all the files on your webspace that are required
+to launch the setup procedure. The setup procedure will guide you through the configuration of your Oak
+installation.</p>
+
+<?php
+
+	// make sure the zlib extension is present if this install package is a compressed one
+	if (OAK_ZLIB_PACKAGE && !extension_loaded('zlib'))  {
+		echo "<p><strong>Warning:</strong> This a compressed install package, but the zlib extension is not installed. ".
+				"Please download a <em>uncompressed</em> install package.</p>";
+	}
+
+	if (!OAK_ZLIB_PACKAGE || extension_loaded('zlib')) {
+		
+		if (!empty($_REQUEST['install_dir'])) {
+			try {
+				// validate input for install dir
+				if (!preg_match("=^(/[a-z0-9-_\.]*)+$=i", $_REQUEST['install_dir'])) {
+					throw new Exception("Invalid install dir supplied");
+				}
+				$install_dir = trim($_REQUEST['install_dir']);
+				
+				// validate input for default file mask
+				if (!preg_match("=^[0-9]{4}$=i", $_REQUEST['default_file_mask'])) {
+					throw new Exception("Invalid value as default file mask supplied");
+				}
+				$default_file_mask = trim($_REQUEST['default_file_mask']);
+				
+				// validate input for default directory mask
+				if (!preg_match("=^[0-9]{4}$=i", $_REQUEST['default_directory_mask'])) {
+					throw new Exception("Invalid value as default directory mask supplied");
+				}
+				$default_directory_mask = trim($_REQUEST['default_directory_mask']);
+				
+				// validate input for writable file mask
+				if (!preg_match("=^[0-9]{4}$=i", $_REQUEST['writable_file_mask'])) {
+					throw new Exception("Invalid value as writable file mask supplied");
+				}
+				$writable_file_mask = trim($_REQUEST['writable_file_mask']);
+				
+				// validate input for writable directory mask
+				if (!preg_match("=^[0-9]{4}$=i", $_REQUEST['writable_directory_mask'])) {
+					throw new Exception("Invalid value as writable directory mask supplied");
+				}
+				$writable_directory_mask = trim($_REQUEST['writable_directory_mask']);
+				
+				// create new Setup_PackageExtractor object
+				$spe = new Setup_PackageExtractor();
+				
+				// set file/directory masks
+				$spe->setDefaultFileMask($default_file_mask);
+				$spe->setDefaultDirMask($default_directory_mask);
+				$spe->setWritableFileMask($writable_file_mask);
+				$spe->setWritableDirMask($writable_directory_mask);
+				
+				// extract package
+				$spe->exportPackage($install_dir);
+				
+				// prepare install dir for redirect
+				if (substr($install_dir, 0, 1) == '/') {
+					$install_dir = substr($install_dir, 1);
+				} 
+				if (substr($install_dir, -1, 1) != '/') {
+					$install_dir = $install_dir.'/';
+				}
+				
+				// go to the setup
+				header("Location: ".$install_dir.'setup/');
+				exit;
+			
+			} catch (Exception $e) {
+				?>
+				
+				<p><strong>An error occurred:</strong> <?php echo $e->getMessage(); ?></p>
+				
+				<?php
+			}
+		}
+?>
+
+<form class="botbg" method="post" action="<?php echo basename(__FILE__); ?>">
+<fieldset class="topbg">
+
+<fieldset>
+<h2>Path setup</h2>
+<p>Please enter the directory where Oak should be installed in. The path will be evaluated relative to the installer package.</p>
+<label class="cont" for="install_dir"><span class="bez280">Install directory</span> 
+<input class="w300" type="text" name="install_dir" maxlength="355" value="<?php echo (!empty($_REQUEST['install_dir']) ? htmlspecialchars(trim(strip_tags($_REQUEST['install_dir']))) : '/oak'); ?>" /></label>
+</fieldset>
+
+<fieldset>
+<h2>Expert options</h2>
+<p>Leave alone if you don't know what to insert here.</p>
+<label class="cont" for="default_file_mask"><span class="bez280">Default file mask</span> 
+<input class="w300" type="text" name="default_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_file_mask']))) : "0644"); ?>" /></label>
+
+<label class="cont" for="default_directory_mask"><span class="bez280">Default directory mask</span> 
+<input class="w300" type="text" name="default_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_directory_mask']))) : "0755"); ?>" /></label>
+
+<label class="cont" for="writable_file_mask"><span class="bez280">Writable file mask</span> 
+<input class="w300" type="text" name="writable_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['writable_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['writable_file_mask']))) : "0666"); ?>" /></label>
+
+<label class="cont" for="writable_directory_mask"><span class="bez280">Writable directory mask</span> 
+<input class="w300" type="text" name="writable_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['writable_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['writable_directory_mask']))) : "0777"); ?>" /></label>
+</fieldset>
+
+<p>If you submit the form, the package will be extracted on your webspace. That may take some seconds.</p>
+
+<div class="submits">
+<input class="submitbut130 m300" type="submit" value="Go to next step" />
+</div>
+
+</fieldset>
+</form>
+
+<?php
+	
+	}
+	
+?>
+
+<!-- content --></div>
+
+
+<p class="copyright">Oak Package Installer (<?php if (OAK_ZLIB_PACKAGE) { ?>compressed version<?php } else { ?>uncompressed version<?php } ?>) for Oak 1.0. &copy; sopic GmbH </a></p>
+<!-- container --></div>
+</body>
+</html>
