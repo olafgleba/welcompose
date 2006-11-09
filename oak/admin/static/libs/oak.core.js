@@ -21,11 +21,9 @@
  */
  
 /** 
- * @fileoverview This file is the essential Oak javascript core class.
- * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
- * to make it unnecessary to loop this core file through the i18n parser.
+ * @fileoverview This is the essential Oak javascript file.
+ * It contains the Base Class all other classes derived from.
  * 
- *
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
@@ -46,7 +44,8 @@ var debug = 1;
  * Construct the base class
  * 
  * @class This class is essential for the oak javascript enviroment.
- * It predefines some properties and methods which are supposed to used in nearly every inherit class.
+ * It predefines some properties and methods which are supposed to
+ * used in nearly every derived class.
  *   
  * @constructor
  * @throws applyError on exception
@@ -55,7 +54,7 @@ function Base ()
 {
 	try {
 		/**
-		 * Define help class names application wide
+		 * Define help classes
 		 */
 		this.helpClass = 'iHelp';
 		this.helpClassRemove = 'iHelpRemove';
@@ -67,7 +66,7 @@ function Base ()
 		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
 		
 		/**
-		 * Define divs for Mediamanager layers
+		 * Define divs (id) for Mediamanager layers
 		 * Must corresponding to html notation
 		 */
 		this.helpLyMediamanager = 'lyMediamanager';
@@ -75,14 +74,13 @@ function Base ()
 		this.lyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
 		
 		/**
-		 * Define the used table upload class names.
- 		 * Cascading styles to fit background images
+		 * Define Mediamanager Element classes
 		 */
 		this.mediamanagerClassShow = 'showMediamanagerElement';
 		this.mediamanagerClassHide = 'hideMediamanagerElement';
 		
 		/**
-		 * Define divs for navigation layers
+		 * Define divs (id) for navigation layers
 		 * Must corresponding to html notation
 		 */
 		this.navLyOne = 'ly1';
@@ -97,7 +95,7 @@ function Base ()
 		this.uploadClassHide = 'uploadhide hideTableRow';
 
 		/**
-		 * Comprehensive colors application wide
+		 * Comprehensive color application wide
 		 */
 		this.applicationTextColor = '#009a26';
 		
@@ -111,7 +109,7 @@ function Base ()
 		this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
 
 		/**
-		 * Paths for XHMLHTTPRequest imported files
+		 * URLs
 		 */
 		this.parseHelpUrl = '../parse/parse.help.php';
 		this.parseNavUrl = '../parse/parse.navigation.php';
@@ -128,7 +126,7 @@ function Base ()
 		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
 		
 		/**
-		 * Mediamanager related
+		 * Reset formely value
 		 * Used in func Mediamanager.initializeTagSearch()
 		 */
 		this.keyPressDelay = null;
@@ -150,11 +148,6 @@ Base.prototype.isNumber = Base_isNumber;
 Base.prototype.isEmpty = Base_isEmpty;
 Base.prototype.isNull = Base_isNull;
 Base.prototype.trim = Base_trim;
-
-
-function Base_trim(elem) {
-  return elem.replace(/^\s*|\s*$/g, "");
-}
 
 /**
  * Implements method of prototype class Base
@@ -254,6 +247,16 @@ function Base_isEmpty(elem) {
  */
 function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
+}
+/**
+ * Implements method of prototype class Base
+ * Deletes whitespaces in given string
+ * @requires Base The Base Class
+ * @param {var} elem Actual element
+ * @return elem
+ */
+function Base_trim(elem) {
+  return elem.replace(/^\s*|\s*$/g, "");
 }	
 
 	

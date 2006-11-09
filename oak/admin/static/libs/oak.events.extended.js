@@ -135,12 +135,14 @@ var definitions = {
 	'.showMediamanagerElement' : function(el){
 		el.onclick = function(){
 			Mediamanager.showElement(this);
+			Mediamanager.invokePager(this);
 			return false;
 		}
 	},
 	'.hideMediamanagerElement' : function(el){
 		el.onclick = function(){
 			Mediamanager.hideElement(this);
+			Mediamanager.invokePager(this);
 			return false;
 		}
 	},

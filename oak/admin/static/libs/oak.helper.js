@@ -2,7 +2,7 @@
  * Project: Oak
  * File: oak.helper.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
@@ -18,6 +18,14 @@
  * @author Olaf Gleba
  * @package Oak
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/** 
+ * @fileoverview This file comprised javascript helper functions.
+ * It contains functions that may be used application wide.
+ * 
+ * @author Olaf Gleba og@creatics.de
+ * @version $Id$ 
  */
 
 /**

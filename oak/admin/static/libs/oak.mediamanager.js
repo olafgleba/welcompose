@@ -2,7 +2,7 @@
  * Project: Oak
  * File: oak.mediamanager.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
