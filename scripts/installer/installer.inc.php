@@ -531,6 +531,9 @@ protected function prepareInstallDirectory ()
 	if (substr($this->_install_dir, -1, 1) == '/') {
 		$this->_install_dir = substr($this->_install_dir, 0, -1);
 	}
+	if (empty($this->_install_dir)) {
+		$this->_install_dir = ".";
+	}
 	
 	foreach (explode('/', $this->_install_dir) as $_dir) {
 		$path .= $_dir.'/';

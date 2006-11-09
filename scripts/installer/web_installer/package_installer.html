@@ -382,6 +382,9 @@ installation.</p>
 				if (substr($install_dir, 0, 1) == '/') {
 					$install_dir = substr($install_dir, 1);
 				} 
+				if (empty($install_dir)) {
+					$install_dir = '.';
+				}
 				if (substr($install_dir, -1, 1) != '/') {
 					$install_dir = $install_dir.'/';
 				}
