@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: parse.navigation.php 448 2006-10-01 06:03:33Z olaf $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba

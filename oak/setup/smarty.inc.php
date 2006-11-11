@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  * 
- * $Id: smarty_admin.inc.php 559 2006-10-28 20:25:08Z andreas $
+ * $Id$
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf

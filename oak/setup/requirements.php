@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: globalboxes_add.php 571 2006-10-29 22:53:26Z andreas $
+ * $Id$
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf

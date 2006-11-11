@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: validate.js.php 380 2006-08-28 13:52:49Z andreas $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
