@@ -244,11 +244,13 @@ var definitions = {
 	},
 	'input' : function(el){
 		el.onfocus = function(){
-			Forms.setOnEvent(this, '','#0c3','dotted');
+			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
+				Forms.setOnEvent(this, '','#0c3','dotted');
+			}
 			return false;
 		}
 		el.onblur = function(){
-			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button') {
+			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
 				Forms.setOnEvent(this, '','#000','solid');
 			}
 			return false;
@@ -348,45 +350,39 @@ var definitions = {
 		}
 	},
 	'#submit55' : function(el){
-		el.onclick = function(){
-			this.style.background = '#666 url(../static/img/submitindicator55.gif) no-repeat';
+		el.onfocus = function(){
 			Mediamanager.initializeUserMyFlickr(this);
 			return false;
+			this.style.background = '#666 url(../static/img/submitindicator55.gif) no-repeat';
 		}
 	},
 	'.submit90' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#666 url(../static/img/submitindicator90.gif) no-repeat';
 		}
 	},
 	'.submit140' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
 	'.submit200' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
 	'.submit200bez260' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
-	'.cancel200' : function(el){
-		el.onclick = function(){
-			Helper.closePopup(this);
-			return false;
-		}
-	},
 	'.submit240' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
 		}
 	},
 	'.submit240bez260' : function(el){
-		el.onclick = function(){
+		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
 		}
 	},

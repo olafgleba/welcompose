@@ -809,7 +809,8 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-* html #error {
+/* IE 6, IE 7 */
+* html #error, *+html #error {
 margin-top: 50px;
 }
 #error ul.req {
@@ -828,7 +829,8 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-* html #rp {
+/* IE 6, IE 7 */
+* html #rp, *+html #rp {
 margin-top: 50px;
 }
 #rp h1 {
@@ -848,7 +850,8 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-* html #content .rp_note {
+/* IE 6, IE 7 */
+* html .rp_note, *+html .rp_note {
 margin-top: 50px;
 }
 #content .rp_note h1 {
