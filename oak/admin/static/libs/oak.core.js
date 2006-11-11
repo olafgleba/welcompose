@@ -21,15 +21,16 @@
  */
  
 /** 
- * @fileoverview This is the essential Oak javascript file.
- * It contains the Base Class all other classes derived from.
+ * @fileoverview This is the core Oak javascript file. 
  * 
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
  
+
+
 /**
- * Define debug output
+ * Define debug output string
  *
  * Switch differs how try/catch will handle exceptions
  * 0 = no debug output
@@ -37,36 +38,133 @@
  * 2 = production
  *
  * @static
+ * @link See oak.string.js for the strings
  */
-var debug = 1;
+var debug = 2;
 
 /**
- * Construct the base class
+ * Build new XMLHTTPRequest object instance
+ *
+ * @private
+ * @throws applyError on exception
+ * @return XMLHTTPRequest object instance
+ * @type object
+ */
+function _buildXMLHTTPRequest ()
+{
+	try {
+		if (window.XMLHttpRequest) {
+			_req = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			_req = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		return _req;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Alerted String (errStr) contains exception params with different
+ * provided debug information.
+ *
+ * @private
+ * @param {object} exception error obj presented by catch statement
+ */
+function _applyError (exception)
+{
+	var errStr;
+	
+	switch (debug) {
+		case 0 :
+			return false;
+		break;
+		case 1 :
+			errStr = exception + '\r\n' 
+					+ exception.fileName + '\r\n' 
+					+ exception.lineNumber;
+		break;
+		case 2 :
+			errStr = e_msg_str_prefix + '\r\n\r\n' 
+					+ exception + '\r\n' 
+					+ exception.fileName + '\r\n' 
+					+ exception.lineNumber + '\r\n\r\n' 
+					+ e_msg_str_suffix;
+		break;
+		default :
+			errStr = exception;
+	}
+	alert (errStr);
+}
+
+
+
+
+/**
+ * Constructs the Errors class
+ *
+ * @class The Errors class tracks all manually thrown
+ * errors. Scope application wide. Mainly used in all
+ * processXXX functions to track errors on xhr state, which
+ * are not processed by the try/catch structure.
+ *
+ * expample:
+ * < throw new Errors(object); > 
+ *
+ * Prototype Methods:
  * 
- * @class This class is essential for the oak javascript enviroment.
- * It predefines some properties and methods which are supposed to
- * used in nearly every derived class.
- *   
+ * Right now there are not methods defined
+ *
+ *
+ * 
+ * @constructor
+ * @param {string} name exception error message presented by catch statement
+ * @param {string} msg exception error message presented by catch statement
+ */
+function Errors(msg) 
+{
+	//this.name = 'Error';
+	this.message = msg;
+}
+
+/**
+ * Building new instance for @class Errors
+ */
+Errors.prototype = new Error();
+
+
+
+
+/**
+ * Constructs the Base class
+ * 
+ * @class This class is the most important class in the oak
+ * javascript enviroment, cause all other classes derived from that class.
+ * It predefines properties which are supposed to be used application wide.
+ *
+ * Prototype Methods:
+ * 
+ * Right now there are not methods defined
+ *
+ *
  * @constructor
  * @throws applyError on exception
+ * @see Base
  */
 function Base ()
 {
 	try {
 		/**
-		 * Define help classes
+		 * Define application wide help classes
 		 */
 		this.helpClass = 'iHelp';
 		this.helpClassRemove = 'iHelpRemove';
-		this.helpClassLevelTwo = 'iHelpLevelTwo';
-		this.helpClassRemoveLevelTwo = 'iHelpRemoveLevelTwo';
-		this.helpClassLevelThree = 'iHelpLevelThree';
-		this.helpClassRemoveLevelThree = 'iHelpRemoveLevelThree';
 		this.helpClassMediamanager = 'iHelpMediamanager';
 		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
 		
 		/**
-		 * Define divs (id) for Mediamanager layers
+		 * Define help class for mediamanager
+		 * Define divs (id) for mediamanager layers
 		 * Must corresponding to html notation
 		 */
 		this.helpLyMediamanager = 'lyMediamanager';
@@ -74,10 +172,12 @@ function Base ()
 		this.lyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
 		
 		/**
-		 * Define Mediamanager Element classes
+		 * Define mediamanager element classes
 		 */
 		this.mediamanagerClassShow = 'showMediamanagerElement';
 		this.mediamanagerClassHide = 'hideMediamanagerElement';
+		this.mediamanagerClassShowMyFlickr = 'showMediamanagerElementMyFlickr';
+		this.mediamanagerClassHideMyFlickr = 'hideMediamanagerElementMyFlickr';
 		
 		/**
 		 * Define divs (id) for navigation layers
@@ -87,7 +187,7 @@ function Base ()
 		this.navLyTwo = 'ly2';
 		
 		/**
-		 * Define used table upload class names.
+		 * Define used table action (upload) class names.
  		 * Cascading styles to fit background images
 		 * Must corresponding to html notation
 		 */
@@ -100,7 +200,7 @@ function Base ()
 		this.applicationTextColor = '#009a26';
 		
 		/**
-		 * Build help strings delivered within DOM.
+		 * Help strings supposed to delivered within DOM.
 		 * Must corresponding to html notation
 		 */
 		this.helpHtmlShow = '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" alt="" /></a>';
@@ -109,7 +209,7 @@ function Base ()
 		this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
 
 		/**
-		 * URLs
+		 * Paths for dynamically imported files
 		 */
 		this.parseHelpUrl = '../parse/parse.help.php';
 		this.parseNavUrl = '../parse/parse.navigation.php';
@@ -126,7 +226,7 @@ function Base ()
 		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
 		
 		/**
-		 * Reset formely value
+		 * Reset formerly value
 		 * Used in func Mediamanager.initializeTagSearch()
 		 */
 		this.keyPressDelay = null;
@@ -136,8 +236,7 @@ function Base ()
 	}
 }
 
-
-// Base Class Methods
+/* Methods of prototype @class Base */
 Base.prototype.isArray = Base_isArray;
 Base.prototype.isBoolean = Base_isBoolean;
 Base.prototype.isString = Base_isString;
@@ -150,9 +249,9 @@ Base.prototype.isNull = Base_isNull;
 Base.prototype.trim = Base_trim;
 
 /**
- * Implements method of prototype class Base
  * Examine the giving var is an array
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -160,9 +259,9 @@ function Base_isArray(elem) {
     return Base.prototype.isObject(elem) && elem.constructor == Array;
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is true oder false
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -170,9 +269,9 @@ function Base_isBoolean(elem) {
     return typeof elem == 'boolean';
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is a string
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -180,9 +279,9 @@ function Base_isBoolean(elem) {
     return typeof elem == 'string';
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is an object
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -190,9 +289,9 @@ function Base_isObject(elem) {
     return (elem && typeof elem == 'object') || Base.prototype.isFunction(elem);
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is a function
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -200,9 +299,9 @@ function Base_isFunction(elem) {
     return typeof elem == 'function';
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is undefined
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -210,9 +309,9 @@ function Base_isUndefined(elem) {
     return typeof elem == 'undefined';
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is a number
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -220,9 +319,9 @@ function Base_isNumber(elem) {
     return typeof elem == 'number' && isFinite(elem);
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is empty
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -239,9 +338,9 @@ function Base_isEmpty(elem) {
     return true;
 }
 /**
- * Implements method of prototype class Base
  * Examine the giving var is Null
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -249,62 +348,80 @@ function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
 }
 /**
- * Implements method of prototype class Base
  * Deletes whitespaces in given string
- * @requires Base The Base Class
+ *
+ * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return elem
  */
 function Base_trim(elem) {
   return elem.replace(/^\s*|\s*$/g, "");
-}	
+}
 
 	
+
+
 /**
- * Construct a new OakInit object
- * @class This is the Init class to call on load of page  
+ * Constructs the Init class
+ * 
+ * @class The Init class is supposed to used on load of page
+ *
+ * Prototype methods:
+ * 
+ * load()
+ * Init function of the class. All functions supposed to be called
+ * on load must take place here.
+ *
+ * getVars()
+ * Getter function for different actions to be executed depending
+ * on delivered variables defined in the html markup.
+ *
+ * getCbxStatus()
+ * Show/hide a group of form elements and color their labels.
+ * Depending on delivered variable in the html markup.
+ *
+ * processInit()
+ * Update content with XMLHttpRequest response.
+ *
+ *
+ * @see Base
  * @constructor
- * @throws MemoryException if there is no more memory 
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
-function OakInit ()
+function Init ()
 {
 	try {
-		/**
-		 * Get new XMLHttpRequest Object by private function
-		 */
+		// new XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
-		
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-/* Inherit from Base */
-OakInit.prototype = new Base();
+/* Inherit from Base class */
+Init.prototype = new Base();
+
+/* Methods of prototype @class Init */
+Init.prototype.load = Init_load;
+Init.prototype.getVars = Init_getVars;
+Init.prototype.getCbxStatus = Init_getCbxStatus;
+Init.prototype.processInit = Init_processInit;
 
 /**
- * Instance Methods from prototype @class OakInit
- */
-OakInit.prototype.load = OakInit_load;
-OakInit.prototype.getVars = OakInit_getVars;
-OakInit.prototype.getCbxStatus = OakInit_getCbxStatus;
-OakInit.prototype.processOakInit = OakInit_processOakInit;
-
-/**
- * Implements method of prototype class OakInit
+ * Implements method of prototype class Init.
+ * All functions supposed to be called on load must take place here.
+ * 
  * @param {global} checkbox_status
- * @see Base Base is the base class for this
+ * @see Base
  * @throws applyError on exception
  */
-function OakInit_load ()
+function Init_load ()
 {	
 	try {
-		OakInit.getVars();
+		Init.getVars();
 		
-		if (typeof checkbox_status != 'undefined' && OakInit.isArray(checkbox_status)) {
-			OakInit.getCbxStatus(checkbox_status);
+		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
+			Init.getCbxStatus(checkbox_status);
 		}
 	} catch (e) {
 		_applyError(e);
@@ -312,22 +429,27 @@ function OakInit_load ()
 }
 
 /**
- * Implements method of prototype class OakInit
- * @param {global} response 
- * @param {global} selection
+ * Implements method of prototype class Init.
+ * Getter function for different actions to be executed depending
+ * on delivered variables defined in the html markup.
+ * 
+ * @param {var} response 
+ * @param {var} selection
+ * @param {var} mediamanager
+ * @param {var} pagetype
+ * @requires Base The Oak core javascript class
+ * @see Base
  * @throws applyError on exception
- * @see Base Base is the base class for this
- * @return new Effect Instance
  */
-function OakInit_getVars ()
+function Init_getVars ()
 {
 	try {
 		if (typeof response != 'undefined') {
 			if (response == 1) {
-				Effect.Fade('rp', {duration: 0.8, delay: 1.5});
+				Effect.Fade('rp', {duration: 0.6, delay: 1.2});
 			}
 		}
-		if (typeof podcast != 'undefined' && OakInit.isNumber(podcast)) {
+		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {
 				Mediamanager.mediaToPodcastOnLoad();
 			}
@@ -337,7 +459,7 @@ function OakInit_getVars ()
 				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
-	   if (typeof mediamanager != 'undefined' && OakInit.isNumber(mediamanager)) {
+	   if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
 				this.url = this.parseMedLocalUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
@@ -347,7 +469,7 @@ function OakInit_getVars ()
 					var _ttarget	= 'column';
 		
 					_req.open('GET', _url, true);
-					_req.onreadystatechange = function () { OakInit.processOakInit(_ttarget);};
+					_req.onreadystatechange = function () { Init.processInit(_ttarget);};
 					_req.send('');
 				}
 			}	
@@ -358,12 +480,16 @@ function OakInit_getVars ()
 }
 
 /**
- * Implements method of prototype class OakInit
- * @param {array} elem Array of one or more Elements
+ * Implements method of prototype class Init.
+ * Show/hide a group of form elements and color their labels.
+ * Depending on delivered variable in the html markup.
+ *
+ * @param {array} elem array of element(s)
+ * @requires Base The Oak core javascript class
  * @see Base Base is the base class for this
  * @throws applyError on exception
  */
-function OakInit_getCbxStatus (elems)
+function Init_getCbxStatus (elems)
 {
 	try {
 		for (var e = 0; e < elems.length; e++) {
@@ -394,43 +520,22 @@ function OakInit_getCbxStatus (elems)
 }
 
 /**
- * Implements method of prototype class Help
- * Get and display the html help files
+ * Implements method of prototype class Init.
+ * Update content with XMLHttpRequest response.
  *
- * @param {string} url path
- * @param {string} target Wich layer div should be used
+ * @param {string} ttarget Wich layer div should be used
+ * @requires Base The Oak core javascript class
+ * @throws Errors on req object status code other than 200
  * @throws applyError on exception
- * @throws DevError on condition
  */
-function OakInit_processOakInit (ttarget)
+function Init_processInit (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 				
-				Behaviour.reapply('input');
-				Behaviour.reapply('a.mm_edit');
-				Behaviour.reapply('a.mm_upload');
-				Behaviour.reapply('a.mm_delete');
-				Behaviour.reapply('a.mm_cast');
-				Behaviour.reapply('a.pager');
-				Behaviour.reapply('a.pager_myFlickr');
-				Behaviour.reapply('a.mm_insertImageItem');
-				Behaviour.reapply('a.mm_insertImageItemFlickr');
-				Behaviour.reapply('a.mm_insertDocumentItem');
-				Behaviour.reapply('a.mm_myLocal');
-				Behaviour.reapply('a.mm_myFlickr');
-				Behaviour.reapply('#mm_include_types_wrap');
-				Behaviour.reapply('#mm_timeframe');
-				Behaviour.reapply('#mm_user');
-				Behaviour.reapply('#mm_photoset');
-				Behaviour.reapply('#mm_flickrtags');
-				Behaviour.reapply('#submit55');
-				Behaviour.reapply('.showMediamanagerElement');
-				Behaviour.reapply('.hideMediamanagerElement');
-				Behaviour.reapply('.iHelpMediamanager');
-				Behaviour.reapply('.iHelpRemoveMediamanager');
+				Helper.applyBehaviour();
 			
 				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 				$('mm_tags').setAttribute("autocomplete","off");
@@ -440,7 +545,7 @@ function OakInit_processOakInit (ttarget)
 				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 			
 			} else {
-	  			throw new DevError(_req.statusText);
+	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -449,25 +554,55 @@ function OakInit_processOakInit (ttarget)
 }
 
 /**
- * Building new instance for class Help
+ * Building new object instance of class Init
  */
-OakInit = new OakInit();
+Init = new Init();
+
+
+
+
+
+
 
 /**
- * Construct a new Help object
- * @class This is the basic Help class 
- * @constructor 
+ * Constructs the Help class
+ * 
+ * @class The Help class is the appropriate class for
+ * the help enviroment. The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * show()
+ * 
+ *
+ * hide()
+ * 
+ *
+ * processHelp()
+ * 
+ *
+ * showMediamanager()
+ * 
+ *
+ * hideMediamanager()
+ * 
+ *
+ * processMediamanager()
+ * 
+ *
+ *
+ * setCorrespondingFocus()
+ * 
+ *
+ * @see Base
+ * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Help ()
 {
 	try {
-		/**
-		 * Get new XMLHttpRequest Object by private function
-		 */
+		// new XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -578,12 +713,13 @@ function Help_hide (elem)
 }
 
 /**
- * Implements method of prototype class Help
- * Get and display the html help files
+ * Implements method of prototype class Help.
+ * Update content with XMLHttpRequest response.
  *
- * @param {string} target Wich layer div should be used
+ * @param {string} ttarget Wich layer div should be used
+ * @requires Base The Oak core javascript class
+ * @throws Errors on req object status code other than 200
  * @throws applyError on exception
- * @throws DevError on condition
  */
 function Help_processHelp (ttarget)
 {  
@@ -595,7 +731,7 @@ function Help_processHelp (ttarget)
 				Element.hide(ttarget_after);
 				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
 			} else {
-	  			throw new DevError(_req.statusText);
+	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -692,13 +828,13 @@ function Help_hideMediamanager (elem)
 }
 
 /**
- * Implements method of prototype class Help
- * Get and display the html help file for the media manager
+ * Implements method of prototype class Help.
+ * Update content with XMLHttpRequest response.
  *
- * @param {string} url path
- * @param {string} target Wich layer div should be used
+ * @param {string} ttarget Wich layer div should be used
+ * @requires Base The Oak core javascript class
+ * @throws Errors on req object status code other than 200
  * @throws applyError on exception
- * @throws DevError on condition
  */
 function Help_processMediamanager (ttarget)
 {  
@@ -713,7 +849,7 @@ function Help_processMediamanager (ttarget)
 					Effect.Appear(this.ttarget,{duration: 0.7});
 				}
 			} else {
-	  			throw new DevError(_req.statusText);
+	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -726,33 +862,46 @@ function Help_processMediamanager (ttarget)
  * @param {string} elem actual element
  * @param {string} attr attribute of DOM node to process
  */
- function Help_setCorrespondingFocus (elem, attr)
+function Help_setCorrespondingFocus (elem, attr)
 {
 	this.inst = Helper.getAttrParentNode(attr, elem, 2);
 	$(this.inst).focus();
 }
 
 /**
- * Building new instance for class Help
+ * Building new object instance of class Help
  */
 Help = new Help();
 
 
+
+
+
+
+
 /**
- * Construct a new Navigation object
- * @class This is the basic Navigation class 
+ * Constructs the Navigation class
+ * 
+ * @class The Navigation class do all the navigation XMLHTTPRequest
+ * processing stuff. The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * show()
+ * 
+ *
+ * processNavigation()
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Navigation ()
 {
 	try {
-		/**
-		 * Get new XMLHttpRequest Object by private function
-		 */
+		// new XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -765,7 +914,7 @@ Navigation.prototype = new Base();
  * Instance Methods from prototype @class Navigation
  */
 Navigation.prototype.show = Navigation_show;
-Navigation.prototype.process = Navigation_process;
+Navigation.prototype.processNavigation = Navigation_processNavigation;
 
 /**
  * Implements method of prototype class Navigation
@@ -794,7 +943,7 @@ function Navigation_show (name, level)
 			var _ttarget	= this.ttarget;
 		
 			_req.open('GET', _url, true);
-			_req.onreadystatechange = function () { Navigation.process(_ttarget);};
+			_req.onreadystatechange = function () { Navigation.processNavigation(_ttarget);};
 			_req.send('');
 		}
 	} catch (e) {
@@ -803,12 +952,15 @@ function Navigation_show (name, level)
 }
 
 /**
- * Implements method of prototype class Navigation
- * @param {string} target Wich layer div should be used
+ * Implements method of prototype class Navigation.
+ * Update content with XMLHttpRequest response.
+ *
+ * @param {string} ttarget Wich layer div should be used
+ * @requires Base The Oak core javascript class
+ * @throws Errors on req object status code other than 200
  * @throws applyError on exception
- * @throws DevError on condition
  */
- function Navigation_process (ttarget)
+ function Navigation_processNavigation (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
@@ -816,7 +968,7 @@ function Navigation_show (name, level)
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
 			} else {
-	  			throw new DevError(_req.statusText);
+	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -825,22 +977,39 @@ function Navigation_show (name, level)
 }
 
 /**
- * Building new instance for @class Navigation
+ * Building new object instance of class Navigation
  */
 Navigation = new Navigation();
 
 
+
+
+
+
+
+
 /**
- * Construct a new Forms object
- * @class This is the basic class to process Forms/fields 
+ * Constructs the Forms class
+ * 
+ * @class The Forms class is supposed be used for forms processing.
+ * The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * setOnEvent()
+ * 
+ *
+ * storeFocus()
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Forms ()
 {
 	try {		
-	
+		// no properties
 	} catch (e) {
 		_applyError(e);
 	}
@@ -895,22 +1064,39 @@ function Forms_storeFocus (elem)
 }
 
 /**
- * Building new instance for @class Forms
+ * Building new object instance of class Forms
  */
 Forms = new Forms();
 
 
+
+
+
+
+
+
 /**
- * Construct a new Status object
- * @class This is the basic Status class 
+ * Constructs the Status class
+ * 
+ * @class The Status class is supposed to be used to handle
+ * all change of status events within the interface.
+ * The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * getCbx()
+ * Show/hide a group of form elements and color their labels.
+ * Depending on delivered variable in the html markup.
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Status ()
 {
 	try {
-				
+		// no properties		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -966,22 +1152,42 @@ function Status_getCbx (elems)
 }
 
 /**
- * Building new instance for @class Status
+ * Building new object instance of class Status
  */
 Status = new Status();
 
 
+
+
+
+
+
 /**
- * Construct a new Tables object
- * @class This is the basic Table class 
+ * Constructs the Tables class
+ * 
+ * @class The Tables class faces all action that are related 
+ * to html tables, because the mostly needs extra treatment.
+ * The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * showTableRow()
+ *  
+ *
+ * hideTableRow()
+ *
+ *
+ * collapseTableRow()
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Tables ()
 {
 	try {
-				
+		// no properties		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1089,77 +1295,6 @@ function Tables_hideTableRow (elem)
 }
 
 /**
- * Building new instance for @class Tables
+ * Building new object instance of class Tables
  */
 Tables = new Tables();
-
-
-/**
- * Error handling
- * String contains exception param with different provided debug information
- * @private
- * @param {string} exception error presented by catch statement
- */
-function _applyError (exception)
-{
-	var errStr;
-	
-	switch (debug) {
-		case 0 :
-			return false;
-		break;
-		case 1 :
-			errStr = exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber;
-		break;
-		case 2 :
-			errStr = e_msg_str_prefix + '\r\n\r\n' 
-					+ exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber + '\r\n\r\n' 
-					+ e_msg_str_suffix;
-		break;
-		default :
-			errStr = exception;
-	}
-	alert (errStr);
-}
-
-/**
- * Construct a new DevError object
- * @class This is the basic Error class wich is throwed by explicit setting  
- * @constructor
- * @param {string} msg exception error message presented by catch statement
- */
-function DevError(msg) 
-{
-	this.name = 'DevError';
-	this.message = msg;
-}
-
-/**
- * Building new instance for obj DevError to throw errors
- * at specific points within functions
- */
-DevError.prototype = new Error();
-
-/**
- * Build new XMLHTTPRequest Instance
- * @private
- * @return _req
- * @throws applyError on exception
- */
-function _buildXMLHTTPRequest ()
-{
-	try {
-		if (window.XMLHttpRequest) {
-			_req = new XMLHttpRequest();
-		} else if (window.ActiveXObject) {
-			_req = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		return _req;
-	} catch (e) {
-		_applyError(e);
-	}
-}

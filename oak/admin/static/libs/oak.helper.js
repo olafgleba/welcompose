@@ -28,29 +28,108 @@
  * @version $Id$ 
  */
 
+
+
 /**
- * Construct a new Helper object
- * @class This is the basic Helper class for miscellaneous methods
+ * Constructs the Helper class
+ * 
+ * @class The Mediamanager class miscellaneous is the appropriate class for
+ * the help enviroment. The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * launchPopup()
+ * 
+ *
+ * closePopup()
+ * 
+ *
+ * closeLinksPopup()
+ * 
+ *
+ * lowerOpacity()
+ * 
+ *
+ * lowerOpacityOnUpload()
+ * 
+ *
+ * unsupportsEffects()
+ * 
+ *
+ * unsupportsElems()
+ * 
+ * 
+ * defineWindowX()
+ * 
+ *
+ * defineWindowY()
+ * 
+ *
+ * showNextNode()
+ * 
+ *
+ * insertInternalLink()
+ * 
+ *
+ * insertInternalLinkGlobalTemplates()
+ * 
+ *
+ * insertInternalLinkGlobalFiles()
+ * 
+ *
+ * getDelimiterValue()
+ * 
+ *
+ * getPagerPage()
+ * 
+ *
+ * confirmDelNavAction()
+ * 
+ *
+ * changeBlogCommentStatus()
+ * 
+ *
+ * showFileUploadMessage()
+ * 
+ *
+ * getAttrParentNode()
+ * 
+ *
+ * getAttr()
+ * 
+ *
+ * getAttrNextSibling()
+ * 
+ *
+ * getNextSiblingFirstChild()
+ * 
+ *
+ * getDataParentNode()
+ * 
+ *
+ * applyBehaviour()
+ * 
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Helper Helper is the base class for this
  */
 function Helper ()
 {
 	try {
-		// properties
-				
+		// no properties		
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-/* Inherit from Helper */
+/* Inherit from Base */
 Helper.prototype = new Base();
 
 
 /**
- * Instance Methods from prototype @class Mediamanager
+ * Instance Methods from prototype @class Helper
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.closePopup = Helper_closePopup;
@@ -70,12 +149,12 @@ Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
-
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.applyBehaviour = Helper_applyBehaviour;
 
 
 function Helper_launchPopup (width, height, nname, trigger, elem)
@@ -953,7 +1032,35 @@ function Helper_getDataParentNode (elem, level)
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
 }
 
+function Helper_applyBehaviour ()
+{
+		Behaviour.reapply('input');
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.pager');
+		Behaviour.reapply('a.pager_myFlickr');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
+		Behaviour.reapply('.showMediamanagerElement');
+		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.showMediamanagerElementMyFlickr');
+		Behaviour.reapply('.hideMediamanagerElementMyFlickr');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');	
+}
+
 /**
- * Building new instance for @class Helper
+ * Building new object instance of class Helper
  */
 Helper = new Helper();

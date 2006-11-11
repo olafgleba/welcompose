@@ -164,4 +164,4 @@ var definitions = {
 	}
 };
 Behaviour.register(definitions);
-Behaviour.addLoadEvent(OakInit.load);
+Behaviour.addLoadEvent(Init.load);

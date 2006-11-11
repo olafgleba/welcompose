@@ -146,6 +146,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'.showMediamanagerElementMyFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.showElement(this);
+			return false;
+		}
+	},
+	'.hideMediamanagerElementMyFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.hideElement(this);
+			return false;
+		}
+	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('740','630','media_upload','mm_upload', this);
@@ -385,4 +397,4 @@ var definitions = {
 	}
 };
 Behaviour.register(definitions);
-Behaviour.addLoadEvent(OakInit.load);
+Behaviour.addLoadEvent(Init.load);

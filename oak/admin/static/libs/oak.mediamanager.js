@@ -22,31 +22,130 @@
  
 /** 
  * @fileoverview This file is the essential Mediamanager javascript enviroment.
- * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
- * to make it unnecessary to loop this core file through the i18n parser.
  *
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
 
 
+
 /**
- * Construct a new Mediamanager object
- * @class This is the basic Mediamanager class 
+ * Constructs the Mediamanager class
+ * 
+ * @class The Mediamanager class is the appropriate class for
+ * the help enviroment. The scope is application wide.
+ *
+ * Prototype methods:
+ * 
+ * showElement()
+ * 
+ *
+ * hideElement()
+ * 
+ *
+ * switchLayer()
+ * 
+ *
+ * toggleExtendedView()
+ * 
+ *
+ * checkElemsMyLocal()
+ * 
+ *
+ * preserveElementStatusMyLocal()
+ * 
+ *
+ * setCurrentElementStatusMyLocal()
+ * 
+ * 
+ * showElement()
+ * 
+ *
+ * hideElement()
+ * 
+ *
+ * switchLayer()
+ * 
+ *
+ * toggleExtendedView()
+ * 
+ *
+ * checkElemsMyLocal()
+ * 
+ *
+ * preserveElementStatusMyLocal()
+ * 
+ *
+ * setCurrentElementStatusMyLocal()
+ * 
+ *
+ * mediaToPodcast()
+ * 
+ *
+ * mediaToPodcastOnLoad()
+ * 
+ *
+ * invokeInputs()
+ * 
+ *
+ * invokeTags()
+ * 
+ *
+ * invokePager()
+ * 
+ *
+ * initializeTagSearch()
+ * 
+ *
+ * deleteMediaItem()
+ * 
+ *
+ * insertImageItem()
+ * 
+ *
+ * insertDocumentItem()
+ * 
+ *
+ * discardPodcast()
+ * 
+ *
+ * invokeTagsMyFlickr()
+ * 
+ * 
+ * invokeInputsMyFlickr()
+ * 
+ *
+ * invokePagerMyFlickr()
+ * 
+ *
+ * initializeTagSearchMyFlickr()
+ * 
+ *
+ * checkElemsMyFlickr()
+ * 
+ *
+ * preserveElementStatusMyFlickr()
+ * 
+ *
+ * setCurrentElementStatusMyFlickr()
+ * 
+ *
+ * initializeUserMyFlickr()
+ * 
+ * 
+ * insertImageItemFlickr()
+ * 
+ *
+ *
+ * @see Base
  * @constructor
  * @throws applyError on exception
- * @see Base Base is the base class for this
  */
 function Mediamanager ()
 {
 	try {
-		// properties
-		
-		/**
-		 * Get new XMLHttpRequest Object by private function
-		 */
+		// new XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
-				
 	} catch (e) {
 		_applyError(e);
 	}
@@ -103,10 +202,6 @@ function Mediamanager_showElement (elem)
 		this.ttarget = Helper.getAttrParentNode(this.attr, this.elem, 2) + '_wrap';
 		
 		Element.show(this.ttarget);
-		
-		this.elem.className = this.mediamanagerClassHide;
-		Element.update(this.elem, this.elementHtmlHide);
-		Behaviour.reapply('.' + this.elem.className);
 	
 		// needed to set appropriate height of content of div to populate
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
@@ -114,6 +209,8 @@ function Mediamanager_showElement (elem)
 
 		// myLocal
 		if (myLocal == 'block') {
+			this.elem.className = this.mediamanagerClassHide;
+			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
@@ -126,6 +223,8 @@ function Mediamanager_showElement (elem)
 		}
 		// myFlickr
 		else if (myFlickr == 'block') {
+			this.elem.className = this.mediamanagerClassHideMyFlickr;
+			
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
@@ -135,6 +234,9 @@ function Mediamanager_showElement (elem)
 			// do nothing on var
 			var rows = '';
 		}
+		Element.update(this.elem, this.elementHtmlHide);
+		Behaviour.reapply('.' + this.elem.className);
+		
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
 		
@@ -160,16 +262,14 @@ function Mediamanager_hideElement (elem)
 
 		Element.hide(this.ttarget);
 		
-		this.elem.className = this.mediamanagerClassShow;
-		Element.update(this.elem, this.elementHtmlShow);
-		Behaviour.reapply('.' + this.elem.className);
-		
 		// needed to set appropriate height of content of div to populate
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
 		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
 		// myLocal
 		if (myLocal == 'block') {
+			this.elem.className = this.mediamanagerClassShow;
+			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
@@ -182,6 +282,8 @@ function Mediamanager_hideElement (elem)
 		}
 		// myFlickr
 		else if (myFlickr == 'block') {
+			this.elem.className = this.mediamanagerClassShowMyFlickr;
+			
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
@@ -191,6 +293,10 @@ function Mediamanager_hideElement (elem)
 			// do nothing on var
 			var rows = '';
 		}
+		
+		Element.update(this.elem, this.elementHtmlShow);
+		Behaviour.reapply('.' + this.elem.className);
+		
 		// set appropriate height and width of surrounding divs
 		_checkOccurrences (collectElems, rows);
 		
@@ -695,30 +801,9 @@ function _showResponseInvokeInputs(req)
 		
 		//Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
 		//$(this).focus();
-		//$('column').focus();	
+		//$('column').focus();
 		
-		Behaviour.reapply('input');
-		Behaviour.reapply('a.mm_edit');
-		Behaviour.reapply('a.mm_upload');
-		Behaviour.reapply('a.mm_delete');
-		Behaviour.reapply('a.mm_cast');
-		Behaviour.reapply('a.pager');
-		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
-		Behaviour.reapply('a.mm_myLocal');
-		Behaviour.reapply('a.mm_myFlickr');
-		Behaviour.reapply('#mm_include_types_wrap');
-		Behaviour.reapply('#mm_timeframe');
-		Behaviour.reapply('#mm_user');
-		Behaviour.reapply('#mm_photoset');
-		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
-		Behaviour.reapply('.iHelpMediamanager');
-		Behaviour.reapply('.iHelpRemoveMediamanager');
+		Helper.applyBehaviour();
 
 	} catch (e) {
 		_applyError(e);
@@ -750,28 +835,7 @@ function _showResponseInvokeTagInputs(req)
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
 		$('mm_tags').focus();
 			
-		Behaviour.reapply('input');
-		Behaviour.reapply('a.mm_edit');
-		Behaviour.reapply('a.mm_upload');
-		Behaviour.reapply('a.mm_delete');
-		Behaviour.reapply('a.mm_cast');
-		Behaviour.reapply('a.pager');
-		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
-		Behaviour.reapply('a.mm_myLocal');
-		Behaviour.reapply('a.mm_myFlickr');
-		Behaviour.reapply('#mm_include_types_wrap');
-		Behaviour.reapply('#mm_timeframe');
-		Behaviour.reapply('#mm_user');
-		Behaviour.reapply('#mm_photoset');
-		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
-		Behaviour.reapply('.iHelpMediamanager');
-		Behaviour.reapply('.iHelpRemoveMediamanager');
+		Helper.applyBehaviour();
 		
 	} catch (e) {
 		_applyError(e);
@@ -1078,28 +1142,7 @@ function _showResponseInvokeInputsMyFlickr(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		Behaviour.reapply('input');
-		Behaviour.reapply('a.mm_edit');
-		Behaviour.reapply('a.mm_upload');
-		Behaviour.reapply('a.mm_delete');
-		Behaviour.reapply('a.mm_cast');
-		Behaviour.reapply('a.pager');
-		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
-		Behaviour.reapply('a.mm_myLocal');
-		Behaviour.reapply('a.mm_myFlickr');
-		Behaviour.reapply('#mm_include_types_wrap');
-		Behaviour.reapply('#mm_timeframe');
-		Behaviour.reapply('#mm_user');
-		Behaviour.reapply('#mm_photoset');
-		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
-		Behaviour.reapply('.iHelpMediamanager');
-		Behaviour.reapply('.iHelpRemoveMediamanager');		
+		Helper.applyBehaviour();	
 
 	} catch (e) {
 		_applyError(e);
@@ -1139,28 +1182,7 @@ function _showResponseInvokeTagsMyFlickr(req)
 		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
 		$('mm_flickrtags').focus();
 		
-		Behaviour.reapply('input');
-		Behaviour.reapply('a.mm_edit');
-		Behaviour.reapply('a.mm_upload');
-		Behaviour.reapply('a.mm_delete');
-		Behaviour.reapply('a.mm_cast');
-		Behaviour.reapply('a.pager');
-		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
-		Behaviour.reapply('a.mm_myLocal');
-		Behaviour.reapply('a.mm_myFlickr');
-		Behaviour.reapply('#mm_include_types_wrap');
-		Behaviour.reapply('#mm_timeframe');
-		Behaviour.reapply('#mm_user');
-		Behaviour.reapply('#mm_photoset');
-		Behaviour.reapply('#mm_flickrtags');
-		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
-		Behaviour.reapply('.iHelpMediamanager');
-		Behaviour.reapply('.iHelpRemoveMediamanager');
+		Helper.applyBehaviour();
 
 	} catch (e) {
 		_applyError(e);
@@ -1234,15 +1256,15 @@ function Mediamanager_setCurrentElementStatusMyFlickr ()
 		var parentElem = $('lyMediamanagerMyFlickr').getElementsByClassName('bez');
 		
 		if (previousElemsStatus[0] == 'none') {
-			parentElem[0].lastChild.className = this.mediamanagerClassShow;
+			parentElem[0].lastChild.className = this.mediamanagerClassShowMyFlickr;
 			parentElem[0].lastChild.innerHTML = this.elementHtmlShow;
 		}
 		if (previousElemsStatus[1] == 'block') {
-			parentElem[1].lastChild.className = this.mediamanagerClassHide;
+			parentElem[1].lastChild.className = this.mediamanagerClassHideMyFlickr;
 			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
 		}
 		if (previousElemsStatus[2] == 'block') {
-			parentElem[2].lastChild.className = this.mediamanagerClassHide;
+			parentElem[2].lastChild.className = this.mediamanagerClassHideMyFlickr;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
 		}
 		
@@ -1335,8 +1357,6 @@ function Mediamanager_insertImageItemFlickr (elem)
 				buildComplete = buildHrefStart + buildSrc + buildHrefEnd;
 				
 				var strStart = buildComplete;
-				
-				//alert (buildComplete);
 		
 				_insertTags(target, strStart, '' , '');
 				
@@ -1352,6 +1372,6 @@ function Mediamanager_insertImageItemFlickr (elem)
 }
 
 /**
- * Building new instance for @class Mediamananager
+ * Building new object instance of class Mediamanager
  */
 Mediamanager = new Mediamanager();

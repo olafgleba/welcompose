@@ -752,27 +752,23 @@ padding-left: 260px;
 
 .iHelp a,
 .iHelpRemove a,
-.iHelpLevelTwo a,
-.iHelpRemoveLevelTwo a,
-.iHelpLevelThree a,
-.iHelpRemoveLevelThree a,
 .iHelpMediamanager a,
 .iHelpRemoveMediamanager a,
 .showMediamanagerElement a,
-.hideMediamanagerElement a {
+.hideMediamanagerElement a,
+.showMediamanagerElementMyFlickr a,
+.hideMediamanagerElementMyFlickr a {
 background-color: transparent;
 text-decoration: none;
 }
 .iHelp a img,
 .iHelpRemove a img,
-.iHelpLevelTwo a img,
-.iHelpRemoveLevelTwo a img,
-.iHelpLevelThree a img,
-.iHelpRemoveLevelThree a img,
 .iHelpMediamanager a img,
 .iHelpRemoveMediamanager a img,
 .showMediamanagerElement a img,
-.hideMediamanagerElement a img{
+.hideMediamanagerElement a img,
+.showMediamanagerElementMyFlickr a img,
+.hideMediamanagerElementMyFlickr a img {
 vertical-align: middle;
 }
 
@@ -1044,16 +1040,16 @@ display: none;
 #mm_user_wrap {
 display: block;
 }
+#mm_photoset_wrap {
+display: block;
+}
 #mm_flickrtags_wrap {
 display: none;
 }
-#mm_photoset_wrap {
-display: none;
-}
-#lyMediamanagerMyFlickr label.mm_flickrtags {
+#lyMediamanagerMyFlickr label.mm_photoset {
 visibility: hidden;
 }
-#lyMediamanagerMyFlickr label.mm_photoset {
+#lyMediamanagerMyFlickr label.mm_flickrtags {
 visibility: hidden;
 }
 
