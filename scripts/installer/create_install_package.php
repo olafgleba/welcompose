@@ -11,7 +11,7 @@
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
  *
- * This file is licensed under the terms of the Open Software License
+ * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-2.1.php
  * 
  * $Id$
@@ -19,7 +19,7 @@
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
  * @package Oak
- * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License 3.0
  */
 
 $spg = new Setup_PackageGenerator();
@@ -450,7 +450,7 @@ protected function printHelp ()
 	$rev = '$Date$';
 	$this->printStderr("Oak Setup Generator 0.1 ($rev)\r\n");
 	$this->printStderr("(c) 2006 sopic GmbH\r\n");
-	$this->printStderr("Licensed below the terms of the Open Software License 2.1.\r\n");
+	$this->printStderr("Licensed below the terms of the Open Software License 3.0 2.1.\r\n");
 	$this->printStderr("\r\n");
 	$this->printStderr("Usage: php create_install_package.php \\\r\n");
 	$this->printStderr("           --compress=<true|false> \\\r\n");

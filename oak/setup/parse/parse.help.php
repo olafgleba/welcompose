@@ -11,7 +11,7 @@
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
  *
- * This file is licensed under the terms of the Open Software License
+ * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-2.1.php
  *
  * $Id: parse.help.php 448 2006-10-01 06:03:33Z olaf $
@@ -19,7 +19,7 @@
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
  * @package Oak
- * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License 3.0
  */
 
 // define area constant

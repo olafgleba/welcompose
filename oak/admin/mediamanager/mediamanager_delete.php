@@ -11,7 +11,7 @@
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
  *
- * This file is licensed under the terms of the Open Software License
+ * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-2.1.php
  *
  * $Id: boxes_delete.php 308 2006-08-08 12:42:23Z andreas $
@@ -19,7 +19,7 @@
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
  * @package Oak
- * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License 3.0
  */
 
 // define area constant
