@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <meta name="language" content="de" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta http-equiv="imagetoolbar" content="no" /> 
+  <title>Oak Setup</title>
+  <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+</head>
+
+<body>
+<div id="container">
+
+<div id="header"> 
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>Oak Setup</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+<div id="topnavcon">
+<ul id="topnav">
+<li class="one">Licence<span></span></li>
+<li class="two on">Requirements<span></span></li>
+<li class="three">Database<span></span></li>
+<li class="four">Configuration<span></span></li>
+<li class="five">Finish<span></span></li>
+</ul>
+<!-- topnavcon --></div>
+
+<!-- header --></div>
+
+<div id="content">
+
+<h1>Requirements</h1>
+<p>Please make sure that your webspace meets all the requirements. If any errors or warnings occur,
+please consult the install manual how to fix it. There are instructions how to tell you webspace
+provier about it too.</p>
+
+<p>Attention: Please not that we're only checking the capabilities of php here. This test does not
+check if your database is new enough.</p> 
+
+{if !empty($form.errors)}
+<div id="error">
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<!-- error --></div>
+{/if}
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
+
+<fieldset class="topbg">
+
+{$form.hidden}
+
+<fieldset>
+
+<h2>Checking for available extensions</h2>
+
+<table>
+<tr>
+<td>Extension</td>
+<td>Status</td>
+</tr>
+{foreach from=$extension_statuses key=_extension item=_status}
+<tr>
+<td>
+{$_extension|escape:"htmlall"}
+</td>
+<td class="marker_{$_status.marker|escape:"htmlall"}">
+{$_status.text|escape:"htmlall"}
+</td>
+</tr>
+{/foreach}
+</table>
+
+<h2>Checking for up-to-date versions</h2>
+
+<table>
+<tr>
+<td>Software</td>
+<td>Status</td>
+</tr>
+{foreach from=$software_statuses key=_software item=_status}
+<tr>
+<td>
+{$_software|escape:"htmlall"}
+</td>
+<td class="marker_{$_status.marker|escape:"htmlall"}">
+{$_status.text|escape:"htmlall"}
+</td>
+</tr>
+{/foreach}
+</table>
+
+<dl>
+<dt class="marker_error">Red</dt>
+<dd>Oak won't work</dd>
+<dt class="marker_warning">Orange</dt>
+<dd>Oak may work -- don't blame us for errors</dd>
+<dt class="marker_fine">Green</dt>
+<dd>Everything's fine</dd>
+</dl>
+</fieldset>
+
+{if $error_counter == 0}
+<div class="submits">
+<a href="database.php" class="submitbut140">Go to next step</a>
+</div>
+{/if}
+
+</fieldset>
+</form>
+
+
+<!-- content --></div>
+
+
+<p class="copyright">Administrator: <a href="mailto:webmaster@nn.de">webmaster@nn.de</a> Copyright 2005 &copy; <a href="http://www.sopic.com/">Sopic GmbH</a></p>
+<!-- container --></div>
+</body>
+</html>

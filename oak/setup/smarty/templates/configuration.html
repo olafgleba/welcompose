@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <meta name="language" content="de" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta http-equiv="imagetoolbar" content="no" /> 
+  <title>Oak Setup</title>
+  <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+</head>
+
+<body>
+<div id="container">
+
+<div id="header"> 
+<div id="logo">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
+<p>Oak Setup</p>
+<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<!-- logo --></div>
+
+<div id="topnavcon">
+<ul id="topnav">
+<li class="one">Licence<span></span></li>
+<li class="two">Requirements<span></span></li>
+<li class="three">Database<span></span></li>
+<li class="four on">Configuration<span></span></li>
+<li class="five">Finish<span></span></li>
+</ul>
+<!-- topnavcon --></div>
+
+<!-- header --></div>
+
+<div id="content">
+
+<h1>Configuration</h1>
+<p>You'll be asked for the name of your default project and the language to use in the admin area of Oak.</p>
+
+{if !empty($form.errors)}
+<div id="error">
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<!-- error --></div>
+{/if}
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
+
+<fieldset class="topbg">
+
+{$form.hidden}
+
+<fieldset>
+
+<label class="cont" for="configuration_project"><span class="bez280">{$form.project.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.project.html}</label>
+
+<label class="cont" for="configuration_admin_language"><span class="bez280">{$form.admin_language.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.admin_language.html}</label>
+
+<label class="cont" for="configuration_locale"><span class="bez280">{$form.locale.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.locale.html}<span class="validate" id="configuration_locale_container"></span></label>
+
+</fieldset>
+
+<div class="submits">
+{$form.submit.html}
+</div>
+
+</fieldset>
+</form>
+
+
+<!-- content --></div>
+
+
+<p class="copyright">Administrator: <a href="mailto:webmaster@nn.de">webmaster@nn.de</a> Copyright 2005 &copy; <a href="http://www.sopic.com/">Sopic GmbH</a></p>
+<!-- container --></div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+; <?php /*
+[path]
+oak_admin_root_www = {$configuration.root_www}/admin
+oak_public_root_www = {$configuration.root_www}
+
+[environment]
+debug = false
+dev = false
+lang = "{$configuration.admin_language}"
+error_length = 0
+app_key = "{$configuration.app_key}"
+
+[locales]
+all = "{$configuration.locale}"
+
+[database]
+driver = "pdo"
+dsn = "{$configuration.dsn}"
+username = "{$configuration.user}"
+password = "{$configuration.password}"
+table_alias_constants = true
+debug = false
+backticks = true
+
+[media]
+store_www = "{$configuration.root_www}/files/media"
+store_disk = "{$configuration.root_disk}/files/media"
+
+[global_file]
+store_www = "{$configuration.root_www}/files/global_files"
+store_disk = "{$configuration.root_disk}/files/global_files"
+
+[caching]
+index.php_mode = 0
+index.php_lifetime = 0
+
+[plugins]
+textconverter_dir = "{$configuration.root_disk}/core/plugins/textconverters"
+textmacro_dir = "{$configuration.root_disk}/core/plugins/textmacros"
+
+[urls]
+simple_page_index = "{$configuration.root_www}/<page_name>/"
+simple_page_index_start = "{$configuration.root_www}/"
+simple_form_index = "{$configuration.root_www}/<page_name>/"
+simple_form_index_start = "{$configuration.root_www}/"
+blog_index = "/<page_name>/<start>/"
+blog_index_start = "{$configuration.root_www}/"
+blog_atom_10 = "{$configuration.root_www}/<page_name>/Atom10/"
+blog_atom_10_start = "{$configuration.root_www}/Atom10/"
+blog_rss_20 = "{$configuration.root_www}/<page_name>/Rss20/"
+blog_rss_20_start = "{$configuration.root_www}/Rss20/"
+blog_item = "{$configuration.root_www}/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_item_start = "{$configuration.root_www}/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_archive_year = "{$configuration.root_www}/<page_name>/<posting_year_added>/"
+blog_archive_year_start = "{$configuration.root_www}/<posting_year_added>/"
+blog_archive_month = "{$configuration.root_www}/<page_name>/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_start = "{$configuration.root_www}/<posting_year_added>/<posting_month_added>/"
+global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&project=<project_name>"
+
+[flickr]
+api_key = ""
+
+; */ ?>
