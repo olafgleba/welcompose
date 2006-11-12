@@ -1,5 +1,6 @@
 XSLTPROC=@XSLTPROC@
 XMLLINT=@XMLLINT@
+FOP=@FOP@
 
 # Subdirs that contain docs
 DOCS=appendix crash_course
@@ -10,9 +11,12 @@ export XML_CATALOG_FILES
 all: build/docbook-xsl entities.ent check manual.xml html
 
 clean:
-	-rm html/*.html
+	-rm -rf html/
+	-rm -rf pdf/
 
-pdf: entities.ent
+pdf: check entities.ent
+	$(XSLTPROC) --output pdf/manual.fo ./build/fo.xsl manual.xml
+	$(FOP) pdf/manual.fo pdf/manual.pdf | grep -v "\[ERROR\]"
 
 entities.ent: ./build/mkentities.sh $(DOCS)
 	./build/mkentities.sh $(DOCS) > .ent

@@ -6,14 +6,14 @@ You can use almost every text editor to edit the manual as long as it supports U
 Building your own manual (Unix-like environments)
 =================================================
 
-You'll need at least xsltproc to build your own manual. It's normally part of the development packages of libxml2 (like libxml2-dev oder libxml2-devel).
+You'll need at least xmllint and xsltproc to build a html version of the manual. xmllint is normally part of a package like libxml2-utils. xsltproc is part of the development packages of libxml2 like libxml2-dev or libxml2-devel.
 
-To get a readable manual:
+To get a readable manual, use:
 
 $ cd manual
 $ make
 
-That will go through all the subdirectories (like de/, en/ etc.) and build the manuals for each language. The manuals can be found in */html. 
+That will go through all the subdirectories (like de/, en/ etc.) and build the html manuals for each language. The manuals can be found in */html. 
 
 If you only like to build the manual of one language (eg. de):
 
@@ -21,6 +21,13 @@ $ cd manual/de
 $ autoconf
 $ ./configure 
 $ make
+
+Getting a pdf from the xml sources is a bit trickier. You'll need a recent Java VM and Apache FOP (http://xmlgraphics.apache.org/fop/). Pick a binary distribution (they include "-bin" in their names) of FOP 0.20.x. DO NOT USE A NEWER VERSION LIKE 0.91. THEY WON'T WORK AT THE MOMENT. After you unpacked the binary distribution, make sure JAVA_HOME points to the home directory of the Java VM. To gnerate the PDF, use:
+
+$ cd manual/de
+$ autoconf
+$ ./configure --with-fop=/path/to/fop/fop.sh
+$ make pdf
 
 Building your own manual (Windows)
 ==================================

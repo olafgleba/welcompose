@@ -5,3 +5,5 @@ config.status
 autom4te.cache
 entities.ent
 Makefile
+html
+pdf

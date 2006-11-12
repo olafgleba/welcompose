@@ -2,6 +2,7 @@ AC_INIT(Makefile.in)
 
 XSLTPROC=xsltproc
 XMLLINT=xmllint
+FOP=fop
 
 AC_ARG_WITH(xsltproc, AC_HELP_STRING([--with-xsltproc],[Path to xsltproc]),
 	[
@@ -21,8 +22,18 @@ AC_ARG_WITH(xmllint, AC_HELP_STRING([--with-xmllint],[Path to xmllint]),
 )
 AC_PATH_PROG(XMLLINT,  $XMLLINT)
 
+AC_ARG_WITH(fop, AC_HELP_STRING([--with-fop],[Path to Apache FOP executable (shell script, batch file)]),
+	[
+		if test -x "$withval" ; then
+			FOP="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(FOP,  $FOP)
+
 AC_SUBST(XSLTPROC)
 AC_SUBST(XMLLINT)
+AC_SUBST(FOP)
 AC_OUTPUT(Makefile)
 
 cat > config.nice <<EOT
@@ -30,6 +41,7 @@ cat > config.nice <<EOT
 ./configure \
     --with-xsltproc='$XSLTPROC' \
     --with-xmllint='$XMLLINT'
+    --with-fop='$FOP'
 
 EOT
 chmod +x config.nice
