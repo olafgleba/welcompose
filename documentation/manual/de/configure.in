@@ -1,41 +1,11 @@
 AC_INIT(Makefile.in)
 
-XINC=xinc
-XEP=xep
-FOP=fop
 XSLTPROC=xsltproc
 XMLLINT=xmllint
 
-AC_ARG_WITH(xep, AC_HELP_STRING([--with-xep],[Path to RenderX XEP]),
-	[
-		if test "x$withval" != "xno"; then
-			XEP="$withval"
-		fi
-	]
-)
-AC_PATH_PROG(XEP, $XEP)
-
-AC_ARG_WITH(xinc, AC_HELP_STRING([--with-xinc],[Path to lunasil XINC]),
-	[
-		if test "x$withval" != "xno"; then
-			XINC="$withval"
-		fi
-	]
-)
-AC_PATH_PROG(XINC, $XINC)
-
-AC_ARG_WITH(fop, AC_HELP_STRING([--with-fop],[Path to Apache FOP]),
-	[
-		if test "x$withval" != "xno"; then
-			FOP="$withval"
-		fi
-	]
-)
-AC_PATH_PROG(FOP, $FOP)
-
 AC_ARG_WITH(xsltproc, AC_HELP_STRING([--with-xsltproc],[Path to xsltproc]),
 	[
-		if test "x$withval" != "xno"; then
+		if test -x "$withval" ; then
 			XSLTPROC="$withval"
 		fi
 	]
@@ -44,30 +14,22 @@ AC_PATH_PROG(XSLTPROC, $XSLTPROC)
 
 AC_ARG_WITH(xmllint, AC_HELP_STRING([--with-xmllint],[Path to xmllint]),
 	[
-		if test "x$withval" != "xno"; then
+		if test -x "$withval" ; then
 			XMLLINT="$withval"
 		fi
 	]
 )
 AC_PATH_PROG(XMLLINT,  $XMLLINT)
 
-AC_SUBST(XINC)
-AC_SUBST(XEP)
-AC_SUBST(FOP)
 AC_SUBST(XSLTPROC)
 AC_SUBST(XMLLINT)
-HERE=`pwd`
-AC_SUBST(HERE)
 AC_OUTPUT(Makefile)
 
 cat > config.nice <<EOT
 #!/bin/sh
 ./configure \
     --with-xsltproc='$XSLTPROC' \
-    --with-xmllint='$XMLLINT' \
-    --with-fop='$FOP' \
-    --with-xinc='$XINC' \
-    --with-xep='$XEP'
+    --with-xmllint='$XMLLINT'
 
 EOT
 chmod +x config.nice
