@@ -3,7 +3,6 @@ XINC=@XINC@
 FOP=@FOP@
 XSLTPROC=@XSLTPROC@
 XMLLINT=@XMLLINT@
-ECSRC=@ECSRC@
 HERE=@HERE@
 
 # Subdirs that contain docs

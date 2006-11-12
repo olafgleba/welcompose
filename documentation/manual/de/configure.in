@@ -51,21 +51,11 @@ AC_ARG_WITH(xmllint, AC_HELP_STRING([--with-xmllint],[Path to xmllint]),
 )
 AC_PATH_PROG(XMLLINT,  $XMLLINT)
 
-ECSRC=../trunk
-AC_ARG_WITH(ecsrc, AC_HELP_STRING([--with-ecsrc],[Path to the ecelerity source]),
-	[
-		if test "x$withval" != "xno"; then
-			ECSRC="$withval"
-		fi
-	]
-)
-
 AC_SUBST(XINC)
 AC_SUBST(XEP)
 AC_SUBST(FOP)
 AC_SUBST(XSLTPROC)
 AC_SUBST(XMLLINT)
-AC_SUBST(ECSRC)
 HERE=`pwd`
 AC_SUBST(HERE)
 AC_OUTPUT(Makefile)
@@ -73,7 +63,6 @@ AC_OUTPUT(Makefile)
 cat > config.nice <<EOT
 #!/bin/sh
 ./configure \
-    --with-ecsrc='$ECSRC' \
     --with-xsltproc='$XSLTPROC' \
     --with-xmllint='$XMLLINT' \
     --with-fop='$FOP' \
