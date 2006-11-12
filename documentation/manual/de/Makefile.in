@@ -20,9 +20,7 @@ pdf: entities.ent
 
 entities.ent: ./build/mkentities.sh $(DOCS)
 	./build/mkentities.sh $(DOCS) > .ent
-	if [ ! -f entities.ent ] || [ ! cmp entities.ent .ent ]; then mv .ent entities.ent ; fi
-
-# Build the docs in HTML format
+	if [ ! -f "entities.ent" ] || [ ! "`cmp entities.ent .ent`" ]; then mv ".ent" "entities.ent" ; fi
 
 html: html/index.html 
 
@@ -32,8 +30,6 @@ html/index.html: manual.xml build/html.xsl
 check: entities.ent
 	$(XMLLINT) --valid --noout --postvalid manual.xml
 
-# need to touch the dir because the timestamp in the tarball
-# is older than that of the tarball :)
 build/docbook-xsl: build/docbook-xsl-1.69.1.tgz
 	cd build && tar xzf docbook-xsl-1.69.1.tgz && touch docbook-xsl
 
