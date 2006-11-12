@@ -2,6 +2,7 @@ XEP=@XEP@
 XINC=@XINC@
 FOP=@FOP@
 XSLTPROC=@XSLTPROC@
+XMLLINT=@XMLLINT@
 ECSRC=@ECSRC@
 HERE=@HERE@
 
@@ -11,14 +12,14 @@ DOCS=appendix crash_course
 XML_CATALOG_FILES=./build/docbook-xsl/catalog.xml
 export XML_CATALOG_FILES FOP
 
-all:	build/docbook-xsl entities.ent manual.xml html
+all: build/docbook-xsl entities.ent manual.xml html
 
 clean:
 	-rm html/*.html
 
-pdf:	entities.ent
+pdf: entities.ent
 
-entities.ent:	./build/mkentities.sh $(DOCS)
+entities.ent: ./build/mkentities.sh $(DOCS)
 	./build/mkentities.sh $(DOCS) > .ent
 	if [ ! -f entities.ent ] || [ ! cmp entities.ent .ent ]; then mv .ent entities.ent ; fi
 
@@ -29,8 +30,8 @@ html: html/index.html
 html/index.html: manual.xml build/html.xsl
 	$(XSLTPROC) --output html/index.html ./build/html.xsl manual.xml
 
-check: manual.xml
-	xmllint --valid --noout --postvalid manual.xml
+check: entities.ent
+	$(XMLLINT) --valid --noout --postvalid manual.xml
 
 # need to touch the dir because the timestamp in the tarball
 # is older than that of the tarball :)

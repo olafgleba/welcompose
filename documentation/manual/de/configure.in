@@ -4,17 +4,18 @@ XINC=xinc
 XEP=xep
 FOP=fop
 XSLTPROC=xsltproc
+XMLLINT=xmllint
 
-AC_ARG_WITH(xep, [  --with-xep   Where to find RenderX XEP],
+AC_ARG_WITH(xep, AC_HELP_STRING([--with-xep],[Path to RenderX XEP]),
 	[
 		if test "x$withval" != "xno"; then
 			XEP="$withval"
 		fi
 	]
 )
-AC_PATH_PROG(XEP,  $XEP)
+AC_PATH_PROG(XEP, $XEP)
 
-AC_ARG_WITH(xinc, [  --with-xinc  Where to find lunasil XINC],
+AC_ARG_WITH(xinc, AC_HELP_STRING([--with-xinc],[Path to lunasil XINC]),
 	[
 		if test "x$withval" != "xno"; then
 			XINC="$withval"
@@ -23,26 +24,35 @@ AC_ARG_WITH(xinc, [  --with-xinc  Where to find lunasil XINC],
 )
 AC_PATH_PROG(XINC, $XINC)
 
-AC_ARG_WITH(fop, [  --with-fop  Where to find Apache FOP],
+AC_ARG_WITH(fop, AC_HELP_STRING([--with-fop],[Path to Apache FOP]),
 	[
 		if test "x$withval" != "xno"; then
 			FOP="$withval"
 		fi
 	]
 )
-AC_PATH_PROG(FOP,  $FOP)
+AC_PATH_PROG(FOP, $FOP)
 
-AC_ARG_WITH(xsltproc, [  --with-xsltproc  Where to find xsltproc],
+AC_ARG_WITH(xsltproc, AC_HELP_STRING([--with-xsltproc],[Path to xsltproc]),
 	[
 		if test "x$withval" != "xno"; then
 			XSLTPROC="$withval"
 		fi
 	]
 )
-AC_PATH_PROG(XSLTPROC,  $XSLTPROC)
+AC_PATH_PROG(XSLTPROC, $XSLTPROC)
+
+AC_ARG_WITH(xmllint, AC_HELP_STRING([--with-xmllint],[Path to xmllint]),
+	[
+		if test "x$withval" != "xno"; then
+			XMLLINT="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(XMLLINT,  $XMLLINT)
 
 ECSRC=../trunk
-AC_ARG_WITH(ecsrc, [  --with-ecsrc  Where to find the ecelerity source],
+AC_ARG_WITH(ecsrc, AC_HELP_STRING([--with-ecsrc],[Path to the ecelerity source]),
 	[
 		if test "x$withval" != "xno"; then
 			ECSRC="$withval"
@@ -54,6 +64,7 @@ AC_SUBST(XINC)
 AC_SUBST(XEP)
 AC_SUBST(FOP)
 AC_SUBST(XSLTPROC)
+AC_SUBST(XMLLINT)
 AC_SUBST(ECSRC)
 HERE=`pwd`
 AC_SUBST(HERE)
@@ -64,6 +75,7 @@ cat > config.nice <<EOT
 ./configure \
     --with-ecsrc='$ECSRC' \
     --with-xsltproc='$XSLTPROC' \
+    --with-xmllint='$XMLLINT' \
     --with-fop='$FOP' \
     --with-xinc='$XINC' \
     --with-xep='$XEP'
