@@ -13,6 +13,7 @@ all: build/docbook-xsl entities.ent check manual.xml html
 clean:
 	-rm -rf html/
 	-rm -rf pdf/
+	-rm -rf build/docbook-xsl
 
 pdf: check entities.ent
 	$(XSLTPROC) --output pdf/manual.fo ./build/fo.xsl manual.xml
@@ -30,5 +31,5 @@ html/index.html: manual.xml build/html.xsl
 check: entities.ent
 	$(XMLLINT) --valid --noout --postvalid manual.xml
 
-build/docbook-xsl: build/docbook-xsl-1.69.1.tgz
-	cd build && tar xzf docbook-xsl-1.69.1.tgz && touch docbook-xsl
+build/docbook-xsl:
+	cd build && tar xfj `ls docbook*.bz2` && mv "`ls docbook*.bz2 | sed 's/\.tar\.bz2//'`" "docbook-xsl"
