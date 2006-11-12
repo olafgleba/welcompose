@@ -8,28 +8,29 @@ DOCS=appendix crash_course
 XML_CATALOG_FILES=./build/docbook-xsl/catalog.xml
 export XML_CATALOG_FILES
 
-all: build/docbook-xsl entities.ent check manual.xml html
+all: html-single-file pdf
 
 clean:
 	-rm -rf html/
 	-rm -rf pdf/
 	-rm -rf build/docbook-xsl
 
-pdf: check entities.ent
+pdf: prepare-docbook-xsl entities.ent check
 	$(XSLTPROC) --output pdf/manual.fo ./build/fo.xsl manual.xml
-	$(FOP) pdf/manual.fo pdf/manual.pdf | grep -v "\[ERROR\]"
+	$(FOP) pdf/manual.fo pdf/manual.pdf
 
-entities.ent: ./build/mkentities.sh $(DOCS)
-	./build/mkentities.sh $(DOCS) > .ent
-	mv ".ent" "entities.ent"
-
-html: html/index.html 
-
-html/index.html: manual.xml build/html.xsl
+html-single-file: prepare-docbook-xsl entities.ent check
 	$(XSLTPROC) --output html/index.html ./build/html.xsl manual.xml
 
-check: entities.ent
+check: prepare-docbook-xsl entities.ent
 	$(XMLLINT) --valid --noout --postvalid manual.xml
 
-build/docbook-xsl:
+# Preparation macros
+
+prepare-docbook-xsl:
 	cd build && tar xfj `ls docbook*.bz2` && mv "`ls docbook*.bz2 | sed 's/\.tar\.bz2//'`" "docbook-xsl"
+
+entities.ent:
+	./build/mkentities.sh $(DOCS)
+	./build/mkentities.sh $(DOCS) > .ent
+	mv ".ent" "entities.ent"
