@@ -10,25 +10,17 @@ You'll need at least xsltproc to build your own manual. It's normally part of th
 
 To get a readable manual:
 
-$ cd de/
+$ cd manual
+$ make
+
+That will go through all the subdirectories (like de/, en/ etc.) and build the manuals for each language. The manuals can be found in */html. 
+
+If you only like to build the manual of one language (eg. de):
+
+$ cd manual/de
 $ autoconf
-$ ./configure
+$ ./configure 
 $ make
-
-A successful run should print out something like that:
-
-$ make
-/opt/local/bin/xsltproc --output html/index.html ./build/html.xsl manual.xml
-Computing chunks...
-Writing ./crash_course.hello_world.html for sect1(crash_course.hello_world)
-Writing ./crash-course.html for chapter(crash-course)
-Writing ./licensing.html for appendix(licensing)
-Writing ./the.index.html for index(the.index)
-Writing ./index.html for book(manual)
-Writing HTML.manifest
-$ 
-
-You'll find your manual in de/html.
 
 Building your own manual (Windows)
 ==================================
