@@ -36,19 +36,19 @@
 		<para>Um die Vorlage in Oak zu integrieren, melden Sie sich bei Oak an und wechseln in den Bereich <emphasis>Templating</emphasis>. Zuerst muss ein Template Set angelegt werden:</para>
 		
 		<orderedlist>
-			<listitem>Klicken Sie auf <emphasis>Template Sets</emphasis> und dort dann auf <emphasis>Add new</emphasis>.</listitem>
-			<listitem>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen des neuen Template Sets ein. Im Beispiel verwenden wir <code>default_template_set</code>.</listitem>
-			<listitem>Klicken Sie auf <emphasis>Add template set</emphasis>.</listitem>
+			<listitem><para>Klicken Sie auf <emphasis>Template Sets</emphasis> und dort dann auf <emphasis>Add new</emphasis>.</para></listitem>
+			<listitem><para>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen des neuen Template Sets ein. Im Beispiel verwenden wir <code>default_template_set</code>.</para></listitem>
+			<listitem><para>Klicken Sie auf <emphasis>Add template set</emphasis>.</para></listitem>
 		</orderedlist>
 		
 		<para>Nun muss die Vorlage in Oak integriert werden.</para>
 		
 		<orderedlist>
-			<listitem>Klicken Sie auf <emphasis>Templates</emphasis> und dort dann auf <emphasis>Add new</emphasis>.</listitem>
-			<listitem>Wählen Sie beim Feld <emphasis>Type</emphasis> aus der Liste den Eintrag <code>simple_page_index</code> aus.</listitem>
-			<listitem>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen der Vorlage ein. Schreiben Sie <code>Startseite</code> in das Feld.</listitem>
-			<listitem>Kopieren Sie nun unsere Vorlage (die gesamte Vorlage) aus dem Abschnitt <link linkend="crash_course.hello_world.prepare_template">Vorlage vorbereiten</link> in die Zwischenablage und fügen sie in das Feld <emphasis>Content</emphasis> ein.</listitem>
-			<listitem>Scrollen Sie an das Ende des Formulars und wählen bei <emphasis>Sets</emphasis> das vorher angelegte Template Seit <code>default_template_set</code> aus. Klicken Sie dann auf <emphasis>Add template</emphasis>.</listitem>
+			<listitem><para>Klicken Sie auf <emphasis>Templates</emphasis> und dort dann auf <emphasis>Add new</emphasis>.</para></listitem>
+			<listitem><para>Wählen Sie beim Feld <emphasis>Type</emphasis> aus der Liste den Eintrag <code>simple_page_index</code> aus.</para></listitem>
+			<listitem><para>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen der Vorlage ein. Schreiben Sie <code>Startseite</code> in das Feld.</para></listitem>
+			<listitem><para>Kopieren Sie nun unsere Vorlage (die gesamte Vorlage) aus dem Abschnitt <link linkend="crash_course.hello_world.prepare_template">Vorlage vorbereiten</link> in die Zwischenablage und fügen sie in das Feld <emphasis>Content</emphasis> ein.</para></listitem>
+			<listitem><para>Scrollen Sie an das Ende des Formulars und wählen bei <emphasis>Sets</emphasis> das vorher angelegte Template Seit <code>default_template_set</code> aus. Klicken Sie dann auf <emphasis>Add template</emphasis>.</para></listitem>
 		</orderedlist>
 		
 		<para>
@@ -56,15 +56,15 @@
 		</para>
 		
 		<orderedlist>
-			<listitem>Klicken Sie in der Hauptnavigation auf <emphasis>Contents</emphasis> und dann auf <emphasis>Navigations</emphasis>.</listitem>
-			<listitem>Klicken Sie nun auf <emphasis>Add new</emphasis>.</listitem>
-			<listitem>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen ihrer Navigation ein. Im Beispiel verwenden wir <code>Hauptnavigation</code>.</listitem>
-			<listitem>Klicken Sie nun auf <emphasis>Add navigation</emphasis>.</listitem>
-			<listitem>Gehen Sie nun zur Subnavigation und klicken Sie dort auf den Bereich <emphasis>Pages</emphasis>. Sie gelangen so zum Pagemanager. Dort sehen Sie bereits die Navigation, die Sie soeben angelegt haben, eingeblendet. Klicken Sie unter dem grauen Balken, der mit <emphasis>Hauptnavigation</emphasis> beschriftet ist, auf das grüne Icon mit dem Plus unter der Überschrift <emphasis>Add</emphasis>.</listitem>
-			<listitem>Ignorieren Sie das Feld <emphasis>Position</emphasis> und gehen direkt zum Feld <emphasis>Name</emphasis>. Geben Sie dort den Namen der Seite, also <code>Startseite</code> ein.</listitem>
-			<listitem>Wechseln Sie nun zum Feld <emphasis>Type</emphasis> und selektieren Sie in der Auswahlliste den Eintrag <code>OAK_SIMPLE_PAGE</code>.</listitem>
-			<listitem>Stellen Sie sicher, dass beim Feld <emphasis>Template set</emphasis> das von uns erstellte Template Set <code>default_template_set</code> ausgewählt ist.</listitem>
-			<listitem>Kreuzen Sie das Feld <emphasis>Index page</emphasis> an und klicken dann auf <emphasis>Add page</emphasis>.</listitem>
+			<listitem><para>Klicken Sie in der Hauptnavigation auf <emphasis>Contents</emphasis> und dann auf <emphasis>Navigations</emphasis>.</para></listitem>
+			<listitem><para>Klicken Sie nun auf <emphasis>Add new</emphasis>.</para></listitem>
+			<listitem><para>Geben Sie beim Feld <emphasis>Name</emphasis> den Namen ihrer Navigation ein. Im Beispiel verwenden wir <code>Hauptnavigation</code>.</para></listitem>
+			<listitem><para>Klicken Sie nun auf <emphasis>Add navigation</emphasis>.</para></listitem>
+			<listitem><para>Gehen Sie nun zur Subnavigation und klicken Sie dort auf den Bereich <emphasis>Pages</emphasis>. Sie gelangen so zum Pagemanager. Dort sehen Sie bereits die Navigation, die Sie soeben angelegt haben, eingeblendet. Klicken Sie unter dem grauen Balken, der mit <emphasis>Hauptnavigation</emphasis> beschriftet ist, auf das grüne Icon mit dem Plus unter der Überschrift <emphasis>Add</emphasis>.</para></listitem>
+			<listitem><para>Ignorieren Sie das Feld <emphasis>Position</emphasis> und gehen direkt zum Feld <emphasis>Name</emphasis>. Geben Sie dort den Namen der Seite, also <code>Startseite</code> ein.</para></listitem>
+			<listitem><para>Wechseln Sie nun zum Feld <emphasis>Type</emphasis> und selektieren Sie in der Auswahlliste den Eintrag <code>OAK_SIMPLE_PAGE</code>.</para></listitem>
+			<listitem><para>Stellen Sie sicher, dass beim Feld <emphasis>Template set</emphasis> das von uns erstellte Template Set <code>default_template_set</code> ausgewählt ist.</para></listitem>
+			<listitem><para>Kreuzen Sie das Feld <emphasis>Index page</emphasis> an und klicken dann auf <emphasis>Add page</emphasis>.</para></listitem>
 		</orderedlist>
 		
 		<para>
@@ -89,10 +89,10 @@
 		</para>
 		
 		<orderedlist>
-			<listitem>Klicken Sie auf <emphasis>Contents</emphasis> und dann auf <emphasis>Pages</emphasis>. Nun haben Sie den Pagemanager vor sich.</listitem>
-			<listitem>Gehen Sie zum grauen Balken, der mit <code>Hauptnavigation</code> beschriftet ist und klicken Sie bei der im letzten Abschnitt angelegten Seite <code>Startseite</code> auf das grüne Icon mit dem Stift unter der Überschrift <emphasis>Edit</emphasis>.</listitem>
-			<listitem>Gehen Sie zum Feld <emphasis>Title</emphasis> und ersetzen den bestehenden Titel <code>Startseite</code> mit <code>Hello World mit Oak!</code>.</listitem>
-			<listitem>Schreiben Sie nun bei <emphasis>Content</emphasis> einen Satz wie <code>Dies ist Text aus der Datenbank.</code> hinein und klicken Sie auf <emphasis>Update page</emphasis>.</listitem> 
+			<listitem><para>Klicken Sie auf <emphasis>Contents</emphasis> und dann auf <emphasis>Pages</emphasis>. Nun haben Sie den Pagemanager vor sich.</para></listitem>
+			<listitem><para>Gehen Sie zum grauen Balken, der mit <code>Hauptnavigation</code> beschriftet ist und klicken Sie bei der im letzten Abschnitt angelegten Seite <code>Startseite</code> auf das grüne Icon mit dem Stift unter der Überschrift <emphasis>Edit</emphasis>.</para></listitem>
+			<listitem><para>Gehen Sie zum Feld <emphasis>Title</emphasis> und ersetzen den bestehenden Titel <code>Startseite</code> mit <code>Hello World mit Oak!</code>.</para></listitem>
+			<listitem><para>Schreiben Sie nun bei <emphasis>Content</emphasis> einen Satz wie <code>Dies ist Text aus der Datenbank.</code> hinein und klicken Sie auf <emphasis>Update page</emphasis>.</para></listitem> 
 		</orderedlist>
 		
 		<para>
@@ -100,11 +100,11 @@
 		</para>
 		
 		<orderedlist>
-			<listitem>Klicken Sie auf der Zeile mit dem Namen <code>Startseite</code> auf das grüne Icon mit dem Stift unter dem Titel <emphasis>Edit</emphasis>.</listitem>
-			<listitem>Suchen Sie nun den <code>&lt;title&gt;</code> und löschen den Text <code>Hello World!</code>. Ersetzen Sie ihn mit folgendem &laquo;Text&raquo;: <code>{$simple_page.title}</code>.</listitem>.
-			<listitem>Wiederholen Sie den letzten Schritt mit der Überschrift &lt;h1&gt;</listitem>
-			<listitem>Ersetzen Sie nun den Fliesstext (&lt;p&gt;) inklusive des &lt;p&gt;-Tags mit folgendem Text: <code>{$simple_page.content}</code>.</listitem>
-			<listitem>Klicken Sie jetzt auf <emphasis>Update template</emphasis>.</listitem>
+			<listitem><para>Klicken Sie auf der Zeile mit dem Namen <code>Startseite</code> auf das grüne Icon mit dem Stift unter dem Titel <emphasis>Edit</emphasis>.</para></listitem>
+			<listitem><para>Suchen Sie nun den <code>&lt;title&gt;</code> und löschen den Text <code>Hello World!</code>. Ersetzen Sie ihn mit folgendem &laquo;Text&raquo;: <code>{$simple_page.title}</code>.</para></listitem>
+			<listitem><para>Wiederholen Sie den letzten Schritt mit der Überschrift &lt;h1&gt;</para></listitem>
+			<listitem><para>Ersetzen Sie nun den Fliesstext (&lt;p&gt;) inklusive des &lt;p&gt;-Tags mit folgendem Text: <code>{$simple_page.content}</code>.</para></listitem>
+			<listitem><para>Klicken Sie jetzt auf <emphasis>Update template</emphasis>.</para></listitem>
 		</orderedlist>
 		
 		<para>
@@ -174,11 +174,11 @@ p {
 		<para>Normalerweise würde man dieses Style Sheet nun auf der Festplatte abspeichern und beispielsweise mit einem FTP-Client auf den Server transferieren. Dies geht auch bei Oak, allerdings ist dies nicht &laquo;the way to go&raquo;. Da Oak dazu in der Lage ist, mehrere Webseiten mit einer Software-Installation zu betreiben und in diesen Szenarien die Anwender meist keinen FTP-Zugang o.ä. erhalten, sind spezielle Funktionen zur Integration von Style Sheets, JavaScript usw. integriert.</para>
 		
 		<orderedlist>
-			<listitem>Gehen Sie in Oak zum Bereich <emphasis>Templating</emphasis> und klicken dort auf <emphasis>Global Templates</emphasis>. Klicken Sie dort dann auf <emphasis>Add new</emphasis>.</listitem>
-			<listitem>Geben Sie beim Feld <emphasis>Name</emphasis> einen Namen für Ihr Style Sheet an. Der Einfachheit halber bietet es sich an, einen Dateinamen wie <filename>style.css</filename> zu verwenden.</listitem>
-			<listitem>Kopieren Sie das vorbereitete Style Sheet in die Zwischenablage und fügen es in das Feld <emphasis>Content</emphasis> ein.</listitem>
-			<listitem>Wählen Sie beim Feld <emphasis>MIME Type</emphasis> den Eintrag <code>text/css</code> aus.</listitem>
-			<listitem>Kreuzen Sie nun noch <emphasis>Change Delimiter</emphasis> and und klicken dann auf <emphasis>Add global template</emphasis>, um das Style Sheet zu speichern.</listitem>
+			<listitem><para>Gehen Sie in Oak zum Bereich <emphasis>Templating</emphasis> und klicken dort auf <emphasis>Global Templates</emphasis>. Klicken Sie dort dann auf <emphasis>Add new</emphasis>.</para></listitem>
+			<listitem><para>Geben Sie beim Feld <emphasis>Name</emphasis> einen Namen für Ihr Style Sheet an. Der Einfachheit halber bietet es sich an, einen Dateinamen wie <filename>style.css</filename> zu verwenden.</para></listitem>
+			<listitem><para>Kopieren Sie das vorbereitete Style Sheet in die Zwischenablage und fügen es in das Feld <emphasis>Content</emphasis> ein.</para></listitem>
+			<listitem><para>Wählen Sie beim Feld <emphasis>MIME Type</emphasis> den Eintrag <code>text/css</code> aus.</para></listitem>
+			<listitem><para>Kreuzen Sie nun noch <emphasis>Change Delimiter</emphasis> and und klicken dann auf <emphasis>Add global template</emphasis>, um das Style Sheet zu speichern.</para></listitem>
 		</orderedlist>
 		
 		<para>Jetzt ist das Style Sheet in Oak registriert und kann wie ein herkömmliches auf der Festplatte verknüpfte Style Sheet mit der Vorlage verknüpft werden. Gehen Sie zu diesem Zweck im Bereich <emphasis>Templating</emphasis> zum Bereich <emphasis>Templates</emphasis> und klicken bei der Vorlage <code>Startseite</code> auf das Icon zum Bearbeiten der Vorlage.</para>
@@ -217,8 +217,8 @@ p {
 		</para>
 		
 		<orderedlist>
-			<listitem>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Unterbereich <emphasis>Global Files</emphasis> und klicken Sie dort auf <emphasis>Add new</emphasis>.</listitem>.
-			<listitem>Wählen Sie beim Feld <emphasis>File</emphasis> das Logo aus, das im Style Sheet referenziert werden soll. In diesem Fall handelt es sich um die Datei <filename>logo.png</filename>.</listitem>
+			<listitem><para>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Unterbereich <emphasis>Global Files</emphasis> und klicken Sie dort auf <emphasis>Add new</emphasis>.</para></listitem>
+			<listitem><para>Wählen Sie beim Feld <emphasis>File</emphasis> das Logo aus, das im Style Sheet referenziert werden soll. In diesem Fall handelt es sich um die Datei <filename>logo.png</filename>.</para></listitem>
 		</orderedlist>
 		
 		<para>
@@ -226,9 +226,9 @@ p {
 		</para>
 		
 		<orderedlist>
-			<listitem>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Punkt <emphasis>Global Templates</emphasis> und klicken Sie beim Style Sheet <filename>style.css</filename> auf das Icon unter der Überschrift <emphasis>Edit</emphasis>.</listitem>
-			<listitem>Suchen Sie im Feld <emphasis>Content</emphasis> die CSS-Anweisung <code><![CDATA[background-image: url(logo.png);]]></code> und ersetzen Sie sie mit <code><![CDATA[background-image: url(<%global_file name="logo.png"%>);]]></code>.</listitem>
-			<listitem>Klicken Sie am Ende des Formulars auf <emphasis>Update global template</emphasis>.</listitem>
+			<listitem><para>Gehen Sie im Bereich <emphasis>Templating</emphasis> zum Punkt <emphasis>Global Templates</emphasis> und klicken Sie beim Style Sheet <filename>style.css</filename> auf das Icon unter der Überschrift <emphasis>Edit</emphasis>.</para></listitem>
+			<listitem><para>Suchen Sie im Feld <emphasis>Content</emphasis> die CSS-Anweisung <code><![CDATA[background-image: url(logo.png);]]></code> und ersetzen Sie sie mit <code><![CDATA[background-image: url(<%global_file name="logo.png"%>);]]></code>.</para></listitem>
+			<listitem><para>Klicken Sie am Ende des Formulars auf <emphasis>Update global template</emphasis>.</para></listitem>
 		</orderedlist>
 		
 		<para>Öffnen Sie nun wieder ein zweites Browser-Fenster und gehen Sie ins Installationsverzeichnis. Wenn Sie alles richtig gemacht haben, sollte nun auch das Logo erscheinen.</para>
