@@ -20,7 +20,7 @@ pdf: entities.ent
 
 entities.ent: ./build/mkentities.sh $(DOCS)
 	./build/mkentities.sh $(DOCS) > .ent
-	if [ ! -f "entities.ent" ] || [ ! "`cmp entities.ent .ent`" ]; then mv ".ent" "entities.ent" ; fi
+	if [ ! -f "entities.ent" ] || [ -n "`cmp entities.ent .ent`" ]; then mv ".ent" "entities.ent" ; fi
 
 html: html/index.html 
 
