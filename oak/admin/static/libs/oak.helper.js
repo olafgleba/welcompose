@@ -856,8 +856,8 @@ function Helper_getDelimiterValue()
 function Helper_getPagerPage()
 {
 	try {
-		if($('pager_page')) {
-			pager_page = $('pager_page').firstChild.nodeValue;
+		if($('pager_page_container')) {
+			pager_page = $('pager_page_container').firstChild.nodeValue;
 		} else {
 			pager_page = '';
 		}

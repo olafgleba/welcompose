@@ -378,6 +378,10 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
+#topsubnav a.highlight:link, #topsubnav a.highlight:visited, #topsubnavdynamic a.highlight:link, #topsubnavdynamic a.highlight:visited {
+color: #000;
+background: transparent;
+}
 #topsubnav li.on, 
 #subnav li.on {
 position: relative;
@@ -810,7 +814,7 @@ margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 6, IE 7 */
-* html #error, *+html #error {
+* html #container #error, *+html #container #error {
 margin-top: 50px;
 }
 #error ul.req {
@@ -830,7 +834,7 @@ margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 6, IE 7 */
-* html #rp, *+html #rp {
+* html #container #rp, #container *+html #rp {
 margin-top: 50px;
 }
 #rp h1 {
@@ -877,7 +881,7 @@ margin: 6px 6px 6px 20px;
 float: right;
 width: 236px;
 height: 752px;
-padding: 96px 0 0 0;
+padding: 100px 0 0 0;
 background: transparent;
 overflow: hidden;
 }
@@ -1017,7 +1021,7 @@ font-weight: bold;
 background-color:  #0c3;
 color: #fff;
 }
-.mm_pager span#pager_page {
+.mm_pager span#pager_page_container {
 display: none;
 }
 
@@ -1120,11 +1124,12 @@ font-size: 100%;
 }
 #modalBody {
 padding: 3px 8px;
-min-height: 555px;
+min-height: 590px;
 background: #fff;
 }
-* html #modalBody {
-height: 555px;
+/* IE 6, IE 7 */
+* html #modalBody, *+html #modalBody {
+height: 590px;
 }
 #modalBody table td {
 color: #00AE2C;
@@ -1133,7 +1138,7 @@ padding-left: 10px;
 
 /* internal links - pages */
 #modalContainer #pages h2 span.close {
-margin-left: 420px;
+margin-left: 435px;
 }
 #modalContainer #pages h2 span#indicator_pagesLinks {
 position: absolute;
@@ -1147,15 +1152,15 @@ display: none;
 }
 /* eof */
 
-/* internal links - templates */
+/* internal links - global templates */
 #modalContainer #globaltemplates h2 span.close {
-margin-left: 30px;
+margin-left: 65px;
 }
 /* eof */
 
-/* internal links - global templates */
+/* internal links - global files */
 #modalContainer #globalfiles h2 span.close {
-margin-left: 50px;
+margin-left: 95px;
 }
 /* eof */
 
@@ -1171,7 +1176,12 @@ background: #f9f9f9;
 }
 /* eof */
 
-
+#pages #firstNode,
+#pages #secondNode,
+#pages #thirdNode {
+float: left;
+width: auto;
+}
 #firstNode table,
 #secondNode table,
 #thirdNode table {
@@ -1340,6 +1350,20 @@ cursor: pointer;
 }
 input.toggleExtendedView120  {
 margin: 20px 0 0 140px;
+}
+/* IE 6, IE 7 */
+* html input.toggleExtendedView120,
+* html input.showIDThree120,
+* html input.discardPodcast120,
+*+html input.toggleExtendedView120,
+*+html input.showIDThree120,
+*+html input.discardPodcast120 {
+margin: 10px 0 10px 10px;
+}
+/* IE 6, IE 7 */
+* html input.toggleExtendedView120,
+*+html input.toggleExtendedView120 {
+margin: 10px 0 10px 140px;
 }
 #podcast_container p.help {
 display: block;

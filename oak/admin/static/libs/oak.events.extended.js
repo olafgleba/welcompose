@@ -160,13 +160,13 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','630','media_upload','mm_upload', this);
+			Helper.launchPopup('745','634','media_upload','mm_upload', this);
 			return false;
 		}
 	},
 	'a.mm_edit' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','630','media_edit','mm_edit', this);
+			Helper.launchPopup('745','634','media_edit','mm_edit', this);
 			return false;
 		}
 	},
@@ -279,7 +279,7 @@ var definitions = {
 	},
 	'.act_internalLink' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','604','pages_links_select','pages_internal_links', this);
+			Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
 			return false;
 		}
 	},
@@ -291,7 +291,7 @@ var definitions = {
 	},
 	'.act_internalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('420','604','globaltemplates_links_select','globaltemplates_internal_links', this);
+			Helper.launchPopup('420','634','globaltemplates_links_select','globaltemplates_internal_links', this);
 			return false;
 		}
 	},
@@ -350,7 +350,7 @@ var definitions = {
 		}
 	},
 	'#submit55' : function(el){
-		el.onfocus = function(){
+		el.onclick = function(){
 			Mediamanager.initializeUserMyFlickr(this);
 			return false;
 			this.style.background = '#666 url(../static/img/submitindicator55.gif) no-repeat';

@@ -186,6 +186,9 @@ try {
 	    if (!empty($_SESSION['response'])) {
 	        $_SESSION['response'] = '';
 	    }
+	    if (!empty($_SESSION['pager_page'])) {
+	        $_SESSION['pager_page'] = '';
+	    }
 
 		// assign current user and project id
 		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);

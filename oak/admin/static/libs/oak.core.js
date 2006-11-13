@@ -40,7 +40,7 @@
  * @static
  * @link See oak.string.js for the strings
  */
-var debug = 2;
+var debug = 1;
 
 /**
  * Build new XMLHTTPRequest object instance
@@ -934,7 +934,7 @@ function Navigation_show (name, level)
 					this.ttarget = this.navLyTwo;
 				break;
 			default :
-					this.ttarget = this.navLyOne;	
+					this.ttarget = this.navLyOne;
 		}
 		
 		if (typeof this.req != 'undefined') {
@@ -967,6 +967,16 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
+				
+				/*
+				var range = $('topsubnavdynamic').getElementsByTagName('a');
+				
+				for (i = 0; i < range.length; i++) {
+					range[i].style.color = 'red';
+				}
+				*/
+				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
+					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
 			} else {
 	  			throw new Errors(_req.statusText);
 			}

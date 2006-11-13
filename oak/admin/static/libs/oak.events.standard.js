@@ -157,7 +157,7 @@ var definitions = {
 	},
 	'.act_internalLink' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('740','604','pages_links_select','pages_internal_links', this);
+			Helper.launchPopup('740','634','pages_links_select','pages_internal_links', this);
 			return false;
 		}
 	},
@@ -169,7 +169,7 @@ var definitions = {
 	},
 	'.act_internalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('420','604','globaltemplates_links_select','globaltemplates_internal_links', this);
+			Helper.launchPopup('420','634','globaltemplates_links_select','globaltemplates_internal_links', this);
 			return false;
 		}
 	},
@@ -181,7 +181,7 @@ var definitions = {
 	},
 	'.act_internalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('420','604','globalfiles_links_select','globalfiles_internal_links', this);
+			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
 			return false;
 		}
 	},
@@ -228,6 +228,8 @@ var definitions = {
 	'.submit200upload' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+		el.onclick = function(){
 			Helper.showFileUploadMessage();
 		}
 	},
@@ -242,7 +244,7 @@ var definitions = {
 		}
 	},
 	'.cancel200' : function(el){
-		el.onfocus = function(){
+		el.onclick = function(){
 			Helper.closePopup(this);
 			return false;
 		}
