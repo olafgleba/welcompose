@@ -1,0 +1,29 @@
+XSLTPROC=@XSLTPROC@
+XMLLINT=@XMLLINT@
+FOP=@FOP@
+TAR=@TAR@
+SED=@SED@
+
+all: html-chunk pdf
+
+clean: clean-pdf clean-html-chunk
+
+pdf: prepare-docbook-xsl check
+	$(XSLTPROC) --xinclude --output pdf/manual.fo ../docbook.d/fo.xsl manual.xml
+	$(FOP) pdf/manual.fo pdf/manual.pdf
+
+html-chunk: prepare-docbook-xsl check
+	$(XSLTPROC) --xinclude --output output/html-chunk/index.html ../docbook.d/html-chunk.xsl manual.xml
+
+check: prepare-docbook-xsl
+	$(XMLLINT) --xinclude --noout --postvalid --noent manual.xml
+
+prepare-docbook-xsl:
+	cd ../docbook.d && rm -rf "docbook-xsl" && $(TAR) xfj `ls docbook*.bz2` && \
+		mv "`ls docbook*.bz2 | $(SED) 's/\.tar\.bz2//'`" "docbook-xsl" && touch "docbook-xsl"
+
+clean-pdf:
+	-rm -rf output/pdf
+
+clean-html-chunk:
+	-rm -rf output/html-chunk
