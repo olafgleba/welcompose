@@ -1,0 +1,65 @@
+AC_INIT(Makefile.in)
+
+XSLTPROC="xsltproc"
+XMLLINT="xmllint"
+FOP="fop"
+
+AC_ARG_WITH(XSLTPROC, AC_HELP_STRING([--with-xsltproc],[Path to xsltproc]),
+	[
+		if test -x "$withval" ; then
+			XSLTPROC="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(XSLTPROC, $XSLTPROC)
+
+AC_ARG_WITH(XMLLINT, AC_HELP_STRING([--with-xmllint],[Path to xmllint]),
+	[
+		if test -x "$withval" ; then
+			XMLLINT="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(XMLLINT, $XMLLINT)
+
+AC_ARG_WITH(FOP, AC_HELP_STRING([--with-fop],[Path to Apache FOP executable (shell script, batch file)]),
+	[
+		if test -x "$withval" ; then
+			FOP="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(FOP, $FOP)
+
+AC_PATH_PROG(TAR, [tar], [tar])
+AC_PATH_PROG(SED, [sed], [sed])
+AC_PATH_PROGS(BZIP2, [bzip2 bunzip2])
+
+if test -z "$XSLTPROC" ; then
+	AC_MSG_ERROR([xsltproc from libxml2 required])
+fi
+if test -z "$XMLLINT" ; then
+	AC_MSG_ERROR([xmllint from libxml2 required])
+fi
+if test -z "$TAR" ; then
+	AC_MSG_ERROR([GNU tar required])
+fi
+if test -z "$SED" ; then
+	AC_MSG_ERROR([GNU sed required])
+fi
+if test -z "$BZIP2" ; then
+	AC_MSG_ERROR([Cannot find bzip2 or bunzip2])
+fi
+
+AC_OUTPUT(Makefile)
+
+cat > config.nice <<EOT
+#!/bin/sh
+./configure \
+    --with-xsltproc='$XSLTPROC' \
+    --with-xmllint='$XMLLINT'
+    --with-fop='$FOP'
+
+EOT
+chmod +x config.nice
+
