@@ -1,9 +1,0 @@
-configure
-config.nice
-config.log
-config.status
-autom4te.cache
-entities.ent
-Makefile
-html
-pdf
