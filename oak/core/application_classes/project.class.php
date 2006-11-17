@@ -716,6 +716,7 @@ public function initFromSkeleton ($project)
 	$this->syncTemplateTypesWithSkeleton($project);
 	$this->syncTextMacrosWithSkeleton($project);
 	$this->syncTextConvertersWithSkeleton($project);
+	$this->syncPodcastCategoriesWithSkeleton($project);
 
 	return true;
 }
@@ -940,6 +941,37 @@ protected function getTextConvertersFromSkeleton ()
 	}
 	
 	return $text_converters;
+}
+
+/**
+ * Returns array of podcast categories configured in the skeleton.
+ * 
+ * @throws Application_ProjectException
+ * @return array
+ */
+protected function getPodcastCategoriesFromSkeleton ()
+{
+	// get skeleton
+	$skeleton = $this->loadSkeleton();
+	
+	// collect podcast_categories
+	$podcast_categories = array();
+	$result = $skeleton->xpath("/skeleton/podcast_categories/podcast_category");
+	while (list(, $podcast_category) = each($result)) {
+		// extract list of subcategories
+		$subcategories = array();
+		foreach ($podcast_category->subcategories->name as $subcategory) {
+			$subcategories[] = utf8_decode($subcategory);
+		}
+		
+		// append podcast category to list of podcast categories
+		$podcast_categories[] = array(
+			'name' => utf8_decode($podcast_category->name),
+			'subcategories' => $subcategories
+		);
+	}
+	
+	return $podcast_categories;
 }
 
 /**
@@ -2274,6 +2306,150 @@ protected function syncTextConvertersWithSkeleton ($project)
 			
 			// insert text_converter
 			$this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Synchronises podcast categories in database with the list of podcast categories
+ * deposited in the skeleton. Podcast categories in the database that are not
+ * in the skeleton anymore will be removed, differences will be synchronised and
+ * new podcast categories in the skeleton will be added.
+ * 
+ * Takes the project id as first argument. Returns bool.
+ *
+ * @throws Application_ProjectException
+ * @param int Project id
+ * @return bool 
+ */
+protected function syncPodcastCategoriesWithSkeleton ($project)
+{
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// get podcast categories from skeleton
+	$skeleton_podcast_categories = $this->getPodcastCategoriesFromSkeleton();
+	
+	// prepare query to get podcast categories from database
+	$sql = "
+		SELECT
+			`id`,
+			`project`,
+			`name`
+		FROM
+			".OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES."
+		WHERE
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// get podcast_categories from database
+	$database_podcast_categories = $this->base->db->select($sql, 'multi', $bind_params);
+	
+	// sync podcast categories from skeleton with database
+	foreach ($skeleton_podcast_categories as $_category) {
+		$add = true;
+		foreach ($database_podcast_categories as $_db_category) {
+			if ($_db_category['name'] == $_category['name']) {
+				$add = false;
+				break;
+			}
+		}
+		
+		if ($add) {
+			$sqlData = array(
+				'project' => (int)$project,
+				'name' => $_category['name'],
+				'category' => $_category['name'],
+				'date_added' => date('Y-m-d H:i:s')
+			);
+			
+			$this->base->db->insert(OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
+		}
+		
+		// sync podcast subcategories from skeleton with database
+		foreach ($_category['subcategories'] as $_subcategory) {
+			// compose category name from category and subcategory name
+			$name = $_category['name'].' > '.$_subcategory;
+			
+			$add = true;
+			foreach ($database_podcast_categories as $_db_category) {
+				if ($_db_category['name'] == $name) {
+					$add = false;
+					break;
+				}
+			}
+		
+			if ($add) {
+				$sqlData = array(
+					'project' => (int)$project,
+					'name' => $name,
+					'category' => $_category['name'],
+					'subcategory' => $_subcategory,
+					'date_added' => date('Y-m-d H:i:s')
+				);
+			
+				$this->base->db->insert(OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
+			}
+		}
+	}
+	
+	// sync podcast categories from database with skeleton
+	foreach ($database_podcast_categories as $_category) {
+		$delete = true;
+		foreach ($skeleton_podcast_categories as $_skel_category) {
+			if ($_skel_category['name'] == $_category['name']) {
+				$delete = false;
+				break;
+			}
+		}
+		
+		if ($delete) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_category['id']
+			);
+			
+			// drop podcast category
+			$this->base->db->delete(OAK_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
+		}
+		
+		// sync podcast categories from database with skeleton
+		$delete = true;
+		foreach ($skeleton_podcast_categories as $_skel_category) {
+			foreach ($_skel_category['subcategories'] as $_skel_subcategory) {
+				// compose category name from category and subcategory name
+				$name = $_skel_category['name'].' > '.$_skel_subcategory;
+				
+				if ($name == $_category['name']) {
+					$delete = false;
+					break;
+				}
+			}
+		}
+		
+		if ($delete) {
+			// prepare where clause
+			$where = " WHERE `id` = :id ";
+			
+			// prepare bind params
+			$bind_params = array(
+				'id' => $_category['id']
+			);
+			
+			// drop podcast category
+			$this->base->db->delete(OAK_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
 		}
 	}
 	

@@ -502,4 +502,127 @@
 			<type>pre</type>
 		</text-macro>
 	</text-macros>
+	<podcast_categories>
+		<podcast_category>
+			<name>Arts</name>
+			<subcategories>
+				<name>Design</name>
+				<name>Fashion &amp; Beauty</name>
+				<name>Food</name>
+				<name>Literature</name>
+				<name>Performing Arts</name>
+				<name>Visual Arts</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Business</name>
+			<subcategories>
+				<name>Business News</name>
+				<name>Careers</name>
+				<name>Investing</name>
+				<name>Management &amp; Marketing</name>
+				<name>Shopping</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Comedy</name>
+			<subcategories/>
+		</podcast_category>
+		<podcast_category>
+			<name>Education</name>
+			<subcategories>
+				<name>Education Technology</name>
+				<name>Higher Education</name>
+				<name>K-12</name>
+				<name>Language Courses</name>
+				<name>Training</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Games &amp; Hobbies</name>
+			<subcategories>
+				<name>Automotive</name>
+				<name>Aviation</name>
+				<name>Hobbies</name>
+				<name>Other Games</name>
+				<name>Video Games</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Government &amp; Organizations</name>
+			<subcategories>
+				<name>Local</name>
+				<name>National</name>
+				<name>Non-Profit</name>
+				<name>Regional</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Health</name>
+			<subcategories>
+				<name>Alternative Health</name>
+				<name>Fitness &amp; Nutrition</name>
+				<name>Self-Help</name>
+				<name>Sexuality</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Kids &amp; Familiy</name>
+			<subcategories/>
+		</podcast_category>
+		<podcast_category>
+			<name>News &amp; Politics</name>
+			<subcategories/>
+		</podcast_category>
+		<podcast_category>
+			<name>Religion &amp; Spirituality</name>
+			<subcategories>
+				<name>Buddhism</name>
+				<name>Christianity</name>
+				<name>Hinduism</name>
+				<name>Islam</name>
+				<name>Judaism</name>
+				<name>Other</name>
+				<name>Spirituality</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Science &amp; Medicine</name>
+			<subcategories>
+				<name>Medicine</name>
+				<name>Natural Sciences</name>
+				<name>Social Sciences</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Society &amp; Culture</name>
+			<subcategories>
+				<name>History</name>
+				<name>Personal Journals</name>
+				<name>Places &amp; Travel</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Sports &amp; Recreation</name>
+			<subcategories>
+				<name>Amateur</name>
+				<name>College &amp; High School</name>
+				<name>Outdoor</name>
+				<name>Professional</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>Technology</name>
+			<subcategories>
+				<name>Gadgets</name>
+				<name>Tech News</name>
+				<name>Podcasting</name>
+				<name>Software How-To</name>
+			</subcategories>
+		</podcast_category>
+		<podcast_category>
+			<name>TV &amp; Film</name>
+			<subcategories/>
+		</podcast_category>
+	</podcast_categories>
 </skeleton>
