@@ -277,7 +277,7 @@ function setup_database_version_test_callback ($database, &$FORM) {
 	}
 	
 	$version_number = preg_replace("=(.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)=", '$2', $version['Value']);
-	if (version_compare($version_number, '5.0.15', '<')) {
+	if (version_compare($version_number, '4.1.7', '<')) {
 		return false;
 	} else {
 		return true;
