@@ -140,6 +140,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelTplType' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplTypeAction(this);
+			return false;
+		}
+	},
+	'.confirmDelTplSets' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplSetsAction(this);
+			return false;
+		}
+	},
 	'.changeBlogCommentStatus' : function(el){
 		el.onchange = function(){
 			Helper.changeBlogCommentStatus(this);

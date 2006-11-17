@@ -42,5 +42,7 @@ var showDetails = '<%i18n Show details%>';
 var hideDetails = '<%i18n Hide details%>';
 
 var confirmMsgDelNav = '<%i18n Are you sure you want to delete the chosen navigation? Every page related to this navigation will be deleted too.%>';
+var confirmMsgDelTplType = '<%i18n Are you sure you want to delete the chosen template type? Every template that uses this type will be deleted too.%>';
+var confirmMsgDelTplSets = '<%i18n Are you sure you want to delete the chosen template set? Every template that uses this set will be deleted too.%>'
 
 var alertOnSelectImageSize = '<%i18n Please select a Flickr.com supplied image size.%>';

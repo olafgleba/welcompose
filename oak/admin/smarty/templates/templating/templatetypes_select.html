@@ -79,7 +79,7 @@
 {if $_template_type.editable}
 <td class="template"><span>{$_template_type.name|escape:"htmlall"}</span></td>
 <td><a class="edit" href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirmDelTplType" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td class="page"><span>{$_template_type.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
 <td>&nbsp;</td>

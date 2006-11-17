@@ -86,6 +86,12 @@
  * confirmDelNavAction()
  * 
  *
+ * confirmDelTplTypeAction()
+ * 
+ *
+ * confirmDelTplSetsAction()
+ * 
+ *
  * changeBlogCommentStatus()
  * 
  *
@@ -147,6 +153,8 @@ Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobal
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
+Helper.prototype.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
+Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
@@ -877,6 +885,46 @@ function Helper_confirmDelNavAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelNav);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * @param {var} elem Actual element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelTplTypeAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelTplType);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * @param {var} elem Actual element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelTplSetsAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelTplSets);
 
 		if (v == true) {
 			window.location.href = elem.href;
