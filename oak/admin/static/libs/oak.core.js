@@ -968,14 +968,18 @@ function Navigation_show (name, level)
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
 				
-				/*
-				var range = $('topsubnavdynamic').getElementsByTagName('a');
+				
+				/*var range = $('topsubnavdynamic').getElementsByTagName('a');
 				
 				for (i = 0; i < range.length; i++) {
 					range[i].style.color = 'red';
-				}
-				*/
+				}*/
+				
+				/*
 				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
+					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
+					*/
+				new Effect.Highlight($('topsubnavdynamic'), 
 					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
 			} else {
 	  			throw new Errors(_req.statusText);
