@@ -463,7 +463,7 @@ public function countBlogPodcasts ($params = array())
 		JOIN
 			".OAK_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
-			`content_blog_podcasts`.`page` = `content_pages`.`id`
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
 			`content_pages`.`project` = :project
 	";
@@ -580,6 +580,64 @@ protected function updateMetadataFromSelectedSources ($podcast_id)
 	return $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
 		$where, $bind_params);
 } 
+
+/**
+ * Test whether blog podcast exists. Takes the podcast id as first argument,
+ * returns bool.
+ *
+ * @throws Content_BlogPodcastException
+ * @param int
+ * @return bool
+ */
+public function blogPodcastExists ($podcast_id)
+{
+	// access check
+	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+		throw new Content_BlogPodcastException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($podcast_id) || !is_numeric($podcast_id)) {
+		throw new Content_BlogPodcastException('Input for parameter podcast_id is not numeric');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+		JOIN
+			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		  ON
+			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
+		JOIN
+			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
+		WHERE
+			`content_blog_podcasts`.`id` = :id
+		  AND
+			`content_pages`.`project` = :project
+		LIMIT 1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => OAK_CURRENT_PROJECT,
+		'id' => $podcast_id,
+	);
+	
+	// get blog podcast count
+	$result = (int)$this->base->db->select($sql, 'field', $bind_params);
+	
+	// evaluate result
+	if ($result == 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 /**
  * Tests whether given blog podcast belongs to current project. Takes the

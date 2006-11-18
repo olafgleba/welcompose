@@ -101,7 +101,10 @@ try {
 		$BASE->db->begin();
 		
 		// drop podcast
-		$BLOGPODCAST->deleteBlogPodcast(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$podcast_id = Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC);
+		if ($BLOGPODCAST->blogPodcastExists($podcast_id)) {
+			$BLOGPODCAST->deleteBlogPodcast($podcast_id);
+		}
 		
 		// commit transaction
 		$BASE->db->commit();
