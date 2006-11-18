@@ -77,6 +77,22 @@
 <!-- rp_note --></div>
 <br class="clearb" />
 {/if}
+{if $package_warning}
+<div class="rp_note">
+<img src="../static/img/warning.gif" alt="" />
+<h1>{i18n Install package still present!}</h1>
+<p>{i18n This is a severe security risk. Please remove the install package.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
+{if $setup_warning}
+<div class="rp_note">
+<img src="../static/img/warning.gif" alt="" />
+<h1>{i18n Setup directory still present!}</h1>
+<p>{i18n This is a severe security risk. Please remove the setup directory.}</p>
+<!-- rp_note --></div>
+<br class="clearb" />
+{/if}
 
 {foreach from=$navigations item=_navigation}
 <div class="secnav474_nonav_c"></div>

@@ -122,6 +122,12 @@ try {
 	}
 	$BASE->utility->smarty->assign('page_arrays', $page_arrays);
 	
+	// do we have to display warning because of existing install files?
+	$package_file = Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/../../installer.php');
+	$setup_dir = Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/../../setup');
+	$BASE->utility->smarty->assign('package_warning', file_exists($package_file));
+	$BASE->utility->smarty->assign('setup_warning', file_exists($setup_dir));
+	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 	$BASE->utility->smarty->display('content/pages_select.html', OAK_TEMPLATE_KEY);
