@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: hiddenselect.php,v 1.4 2005/06/24 17:58:29 avb Exp $
+// $Id: hiddenselect.php,v 1.5 2006/10/07 21:18:41 avb Exp $
 
 require_once('HTML/QuickForm/select.php');
 
@@ -72,6 +72,10 @@ class HTML_QuickForm_hiddenselect extends HTML_QuickForm_select
      */
     function toHtml()
     {
+        if (empty($this->_values)) {
+            return '';
+        }
+
         $tabs    = $this->_getTabs();
         $name    = $this->getPrivateName();
         $strHtml = '';

@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: QuickForm.php,v 1.160 2005/08/04 21:15:23 avb Exp $
+// $Id: QuickForm.php,v 1.162 2006/10/07 20:12:17 avb Exp $
 
 require_once('PEAR.php');
 require_once('HTML/Common.php');
@@ -812,8 +812,14 @@ class HTML_QuickForm extends HTML_Common {
             return $this->getElementValue($elementName);
 
         } elseif (false !== ($pos = strpos($elementName, '['))) {
-            $base = substr($elementName, 0, $pos);
-            $idx  = "['" . str_replace(array(']', '['), array('', "']['"), substr($elementName, $pos + 1, -1)) . "']";
+            $base = str_replace(
+                        array('\\', '\''), array('\\\\', '\\\''), 
+                        substr($elementName, 0, $pos)
+                    );
+            $idx  = "['" . str_replace(
+                        array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"), 
+                        substr($elementName, $pos + 1, -1)
+                    ) . "']";
             if (isset($this->_submitValues[$base])) {
                 $value = eval("return (isset(\$this->_submitValues['{$base}']{$idx})) ? \$this->_submitValues['{$base}']{$idx} : null;");
             }
@@ -899,14 +905,18 @@ class HTML_QuickForm extends HTML_Common {
      * Set error message for a form element
      *
      * @param     string    $element    Name of form element to set error for
-     * @param     string    $message    Error message
+     * @param     string    $message    Error message, if empty then removes the current error message
      * @since     1.0       
      * @access    public
      * @return    void
      */
-    function setElementError($element,$message)
+    function setElementError($element, $message = null)
     {
-        $this->_errors[$element] = $message;
+        if (!empty($message)) {
+            $this->_errors[$element] = $message;
+        } else {
+            unset($this->_errors[$element]);
+        }
     } // end func setElementError
          
      // }}}
@@ -990,7 +1000,7 @@ class HTML_QuickForm extends HTML_Common {
             $this->_elementIndex[$elementName] = array_shift($this->_duplicateIndex[$elementName]);
         }
         if ($removeRules) {
-            unset($this->_rules[$elementName]);
+            unset($this->_rules[$elementName], $this->_errors[$elementName]);
         }
         return $el;
     } // end func removeElement
@@ -1208,7 +1218,10 @@ class HTML_QuickForm extends HTML_Common {
                     if (false === strpos($elName, '[')) {
                         $this->_submitValues[$elName] = $this->_recursiveFilter($filter, $value);
                     } else {
-                        $idx  = "['" . str_replace(array(']', '['), array('', "']['"), $elName) . "']";
+                        $idx  = "['" . str_replace(
+                                    array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"), 
+                                    $elName
+                                ) . "']";
                         eval("\$this->_submitValues{$idx} = \$this->_recursiveFilter(\$filter, \$value);");
                     }
                 }
@@ -1233,7 +1246,7 @@ class HTML_QuickForm extends HTML_Common {
         if (is_array($value)) {
             $cleanValues = array();
             foreach ($value as $k => $v) {
-                $cleanValues[$k] = $this->_recursiveFilter($filter, $value[$k]);
+                $cleanValues[$k] = $this->_recursiveFilter($filter, $v);
             }
             return $cleanValues;
         } else {
@@ -1288,7 +1301,7 @@ class HTML_QuickForm extends HTML_Common {
      */
     function isTypeRegistered($type)
     {
-        return isset($GLOBALS['HTML_QUICKFORM_ELEMENT_TYPES'][$type]);
+        return isset($GLOBALS['HTML_QUICKFORM_ELEMENT_TYPES'][strtolower($type)]);
     } // end func isTypeRegistered
 
     // }}}
@@ -1458,7 +1471,7 @@ class HTML_QuickForm extends HTML_Common {
     {
         if (count($this->_rules) == 0 && count($this->_formRules) == 0 && 
             $this->isSubmitted()) {
-            return true;
+            return (0 == count($this->_errors));
         } elseif (!$this->isSubmitted()) {
             return false;
         }
@@ -1469,7 +1482,7 @@ class HTML_QuickForm extends HTML_Common {
         foreach ($this->_rules as $target => $rules) {
             $submitValue = $this->getSubmitValue($target);
 
-            foreach ($rules as $elementName => $rule) {
+            foreach ($rules as $rule) {
                 if ((isset($rule['group']) && isset($this->_errors[$rule['group']])) ||
                      isset($this->_errors[$target])) {
                     continue 2;
@@ -1485,8 +1498,14 @@ class HTML_QuickForm extends HTML_Common {
                         if (false === ($pos = strpos($target, '['))) {
                             $isUpload = !empty($this->_submitFiles[$target]);
                         } else {
-                            $base = substr($target, 0, $pos);
-                            $idx  = "['" . str_replace(array(']', '['), array('', "']['"), substr($target, $pos + 1, -1)) . "']";
+                            $base = str_replace(
+                                        array('\\', '\''), array('\\\\', '\\\''),
+                                        substr($target, 0, $pos) 
+                                    ); 
+                            $idx  = "['" . str_replace(
+                                        array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"), 
+                                        substr($target, $pos + 1, -1)
+                                    ) . "']";
                             eval("\$isUpload = isset(\$this->_submitFiles['{$base}']['name']{$idx});");
                         }
                         if ($isUpload && (!isset($submitValue['error']) || 0 != $submitValue['error'])) {
@@ -1721,7 +1740,7 @@ class HTML_QuickForm extends HTML_Common {
                     } elseif ($dependent) {
                         $element   =  array();
                         $element[] =& $this->getElement($elementName);
-                        foreach ($rule['dependent'] as $idx => $elName) {
+                        foreach ($rule['dependent'] as $elName) {
                             $element[] =& $this->getElement($elName);
                         }
                     } else {

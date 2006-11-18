@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: select.php,v 1.29 2005/07/22 17:30:51 avb Exp $
+// $Id: select.php,v 1.31 2006/06/03 12:03:46 avb Exp $
 
 require_once('HTML/QuickForm/element.php');
 
@@ -363,7 +363,7 @@ class HTML_QuickForm_select extends HTML_QuickForm_element {
         if (isset($values)) {
             $this->setValue($values);
         }
-        $fetchMode = ($textCol && $valueCol) ? DB_FETCHMODE_ASSOC : DB_FETCHMODE_DEFAULT;
+        $fetchMode = ($textCol && $valueCol) ? DB_FETCHMODE_ASSOC : DB_FETCHMODE_ORDERED;
         while (is_array($row = $result->fetchRow($fetchMode)) ) {
             if ($fetchMode == DB_FETCHMODE_ASSOC) {
                 $this->addOption($row[$textCol], $row[$valueCol]);
@@ -584,9 +584,9 @@ class HTML_QuickForm_select extends HTML_QuickForm_element {
             $value = $this->_findValue($caller->_constantValues);
             if (null === $value) {
                 $value = $this->_findValue($caller->_submitValues);
-                // Fix for bug #4465
+                // Fix for bug #4465 & #5269
                 // XXX: should we push this to element::onQuickFormEvent()?
-                if (null === $value && !$caller->isSubmitted()) {
+                if (null === $value && (!$caller->isSubmitted() || !$this->getMultiple())) {
                     $value = $this->_findValue($caller->_defaultValues);
                 }
             }

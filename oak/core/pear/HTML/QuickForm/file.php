@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.19 2004/10/09 19:26:00 avb Exp $
+// $Id: file.php,v 1.22 2006/10/07 20:12:17 avb Exp $
 
 require_once("HTML/QuickForm/input.php");
 
@@ -192,6 +192,7 @@ class HTML_QuickForm_file extends HTML_QuickForm_input
      * @param    string  Destination directory path
      * @param    string  New file name
      * @access   public
+     * @return   bool    Whether the file was moved successfully
      */
     function moveUploadedFile($dest, $fileName = '')
     {
@@ -199,11 +200,7 @@ class HTML_QuickForm_file extends HTML_QuickForm_input
             $dest .= '/';
         }
         $fileName = ($fileName != '') ? $fileName : basename($this->_value['name']);
-        if (move_uploaded_file($this->_value['tmp_name'], $dest . $fileName)) {
-            return true;
-        } else {
-            return false;
-        }
+        return move_uploaded_file($this->_value['tmp_name'], $dest . $fileName); 
     } // end func moveUploadedFile
     
     // }}}
@@ -325,8 +322,14 @@ class HTML_QuickForm_file extends HTML_QuickForm_input
         if (isset($_FILES[$elementName])) {
             return $_FILES[$elementName];
         } elseif (false !== ($pos = strpos($elementName, '['))) {
-            $base  = substr($elementName, 0, $pos);
-            $idx   = "['" . str_replace(array(']', '['), array('', "']['"), substr($elementName, $pos + 1, -1)) . "']";
+            $base  = str_replace(
+                        array('\\', '\''), array('\\\\', '\\\''),
+                        substr($elementName, 0, $pos)
+                    ); 
+            $idx   = "['" . str_replace(
+                        array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"),
+                        substr($elementName, $pos + 1, -1)
+                     ) . "']";
             $props = array('name', 'type', 'size', 'tmp_name', 'error');
             $code  = "if (!isset(\$_FILES['{$base}']['name']{$idx})) {\n" .
                      "    return null;\n" .

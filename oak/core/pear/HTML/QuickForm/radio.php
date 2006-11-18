@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: radio.php,v 1.17 2004/02/28 22:10:16 avb Exp $
+// $Id: radio.php,v 1.18 2006/10/07 15:18:16 avb Exp $
 
 require_once('HTML/QuickForm/input.php');
 
@@ -203,7 +203,7 @@ class HTML_QuickForm_radio extends HTML_QuickForm_input
                         $value = $this->_findValue($caller->_defaultValues);
                     }
                 }
-                if ($value == $this->getValue()) {
+                if (!is_null($value) && $value == $this->getValue()) {
                     $this->setChecked(true);
                 } else {
                     $this->setChecked(false);

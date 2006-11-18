@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id: element.php,v 1.33 2005/06/24 17:58:29 avb Exp $
+// $Id: element.php,v 1.34 2006/10/07 20:12:17 avb Exp $
 
 require_once('HTML/Common.php');
 
@@ -335,7 +335,10 @@ class HTML_QuickForm_element extends HTML_Common
         if (isset($values[$elementName])) {
             return $values[$elementName];
         } elseif (strpos($elementName, '[')) {
-            $myVar = "['" . str_replace(array(']', '['), array('', "']['"), $elementName) . "']";
+            $myVar = "['" . str_replace(
+                         array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"), 
+                         $elementName
+                     ) . "']";
             return eval("return (isset(\$values$myVar)) ? \$values$myVar : null;");
         } else {
             return null;
@@ -467,7 +470,10 @@ class HTML_QuickForm_element extends HTML_Common
                 return array($name => $value);
             } else {
                 $valueAry = array();
-                $myIndex  = "['" . str_replace(array(']', '['), array('', "']['"), $name) . "']";
+                $myIndex  = "['" . str_replace(
+                                array('\\', '\'', ']', '['), array('\\\\', '\\\'', '', "']['"), 
+                                $name
+                            ) . "']";
                 eval("\$valueAry$myIndex = \$value;");
                 return $valueAry;
             }

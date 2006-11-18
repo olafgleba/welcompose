@@ -16,7 +16,7 @@
 // | Author: Ron McClain <ron@humaniq.com>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: ObjectFlexy.php,v 1.7 2005/06/17 20:00:57 avb Exp $
+// $Id: ObjectFlexy.php,v 1.8 2006/10/07 20:12:17 avb Exp $
 
 require_once("HTML/QuickForm/Renderer/Object.php");
 
@@ -141,9 +141,12 @@ class HTML_QuickForm_Renderer_ObjectFlexy extends HTML_QuickForm_Renderer_Object
         // Create an element key from the name
         if (false !== ($pos = strpos($ret->name, '[')) || is_object($this->_currentGroup)) {
             if (!$pos) {
-                $keys = '->{\'' . $ret->name . '\'}';
+                $keys = '->{\'' . str_replace(array('\\', '\''), array('\\\\', '\\\''), $ret->name) . '\'}';
             } else {
-                $keys = '->{\'' . str_replace(array('[', ']'), array('\'}->{\'', ''), $ret->name) . '\'}';
+                $keys = '->{\'' . str_replace(
+                            array('\\', '\'', '[', ']'), array('\\\\', '\\\'', '\'}->{\'', ''), 
+                            $ret->name
+                        ) . '\'}';
             }
             // special handling for elements in native groups
             if (is_object($this->_currentGroup)) {
@@ -160,11 +163,11 @@ class HTML_QuickForm_Renderer_ObjectFlexy extends HTML_QuickForm_Renderer_Object
         } elseif (0 == strlen($ret->name)) {
             $keys = '->{\'element_' . $this->_elementIdx . '\'}';
         } else {
-            $keys = '->{\'' . $ret->name . '\'}';
+            $keys = '->{\'' . str_replace(array('\\', '\''), array('\\\\', '\\\''), $ret->name) . '\'}';
         }
         // for radios: add extra key from value
         if ('radio' == $ret->type && '[]' != substr($keys, -2)) {
-            $keys .= '->{\'' . $ret->value . '\'}';
+            $keys .= '->{\'' . str_replace(array('\\', '\''), array('\\\\', '\\\''), $ret->value) . '\'}';
         }
         $ret->keys = $keys;
         $this->_elementIdx++;
