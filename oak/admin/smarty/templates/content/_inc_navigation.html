@@ -2,7 +2,7 @@
 <!-- topsubnavcon static -->
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
-{if oak_check_access('Content', 'Pages', 'Manage')}
+{if oak_check_access('Content', 'Page', 'Manage')}
 	{if oak_admin_navigation_is_self('pages_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Pages}</li>
 	{else}
