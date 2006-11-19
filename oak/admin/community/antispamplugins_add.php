@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// prepare types
 	$types = array(
 		'comment' => gettext('Comment plugin'),

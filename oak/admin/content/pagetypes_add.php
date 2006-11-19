@@ -81,6 +81,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'PageType', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page_type', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $PAGETYPE);

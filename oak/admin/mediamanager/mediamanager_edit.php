@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Media', 'Object', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// default media types
 	$types = array (
 		'image' => gettext('Image'),

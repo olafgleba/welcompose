@@ -88,6 +88,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get and assign timeframes
 	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
 	

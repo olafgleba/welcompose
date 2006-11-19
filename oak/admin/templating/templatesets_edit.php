@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get template set
 	$template_set = $TEMPLATESET->selectTemplateSet(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

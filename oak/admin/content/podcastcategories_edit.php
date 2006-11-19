@@ -85,6 +85,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'BlogPodcastCategory', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get podcast category
 	$category = $PODCASTCATEGORY->selectBlogPodcastCategory(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

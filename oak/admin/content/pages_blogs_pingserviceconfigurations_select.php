@@ -101,6 +101,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// make sure, that the page parameter is present
 	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC))) {
 		header("Location: pages_select.php");

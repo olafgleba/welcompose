@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('User', 'Right', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// select right
 	$right = $RIGHT->selectRight(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

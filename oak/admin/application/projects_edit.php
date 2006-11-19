@@ -88,6 +88,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get project
 	$project = $PROJECT->selectProject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

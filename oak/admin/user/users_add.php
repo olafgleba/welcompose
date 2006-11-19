@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('User', 'User', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// prepare group array
 	$groups = array();
 	foreach ($GROUP->selectGroups() as $_group) {

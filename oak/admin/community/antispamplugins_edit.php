@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get anti spam plugin
 	$plugin = $ANTISPAMPLUGIN->selectAntiSpamPlugin(Base_Cnc::filterRequest($_REQUEST['id'],
 		OAK_REGEX_NUMERIC));

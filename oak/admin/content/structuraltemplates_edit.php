@@ -85,6 +85,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'StructuralTemplate', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get structural template
 	$template_id = Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC);
 	$structural_template = $STRUCTURALTEMPLATE->selectStructuralTemplate($template_id);

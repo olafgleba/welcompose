@@ -95,6 +95,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Community', 'Settings', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get settings
 	$settings = $SETTINGS->getSettings();
 	

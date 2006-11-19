@@ -88,6 +88,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Media', 'Object', 'Use')) {
+		throw new Exception("Access denied");
+	}
+	
 	// import request params
 	$request = array(
 		'mm_user' => Base_Cnc::filterRequest($_REQUEST['mm_user'], OAK_REGEX_FLICKR_SCREENNAME),

@@ -85,6 +85,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'BlogPodcastCategory', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('podcast_category', 'post');
 	$FORM->registerRule('testForCategoryNameUniqueness', 'callback', 'testForUniqueCategoryName',

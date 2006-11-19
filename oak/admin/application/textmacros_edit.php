@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Application', 'TextMacro', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get text macro
 	$text_macro = $TEXTMACRO->selectTextMacro(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

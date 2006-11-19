@@ -93,6 +93,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get global template
 	$global_template = $GLOBALTEMPLATE->selectGlobalTemplate(Base_Cnc::filterRequest($_REQUEST['id'],
 		OAK_REGEX_NUMERIC));

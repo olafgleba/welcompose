@@ -89,6 +89,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// assign paths
 	$BASE->utility->smarty->assign('oak_admin_root_www',
 		$BASE->_conf['path']['oak_admin_root_www']);

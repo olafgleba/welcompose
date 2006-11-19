@@ -93,6 +93,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'GlobalBox', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// prepare text converters array
 	$text_converters = array(
 		'' => gettext('None')

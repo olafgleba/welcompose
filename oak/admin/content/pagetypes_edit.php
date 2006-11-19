@@ -81,6 +81,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Content', 'PageType', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get page type
 	$page_type = $PAGETYPE->selectPageType(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	

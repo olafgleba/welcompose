@@ -97,6 +97,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Templating', 'Template', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// prepare template types
 	$template_types = array();
 	foreach ($TEMPLATETYPE->selectTemplateTypes() as $_template_type) {

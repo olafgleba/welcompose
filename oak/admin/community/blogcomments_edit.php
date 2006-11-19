@@ -93,6 +93,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Community', 'BlogComment', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// get blog comment
 	$blog_comment = $BLOGCOMMENT->selectBlogComment(Base_Cnc::filterRequest($_REQUEST['id'],
 		OAK_REGEX_NUMERIC));

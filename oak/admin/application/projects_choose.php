@@ -85,6 +85,11 @@ try {
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
+	// check access
+	if (!oak_check_access('Application', 'Project', 'Manage')) {
+		throw new Exception("Access denied");
+	}
+	
 	// assign current user and project id
 	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
