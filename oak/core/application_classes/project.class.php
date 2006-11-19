@@ -1712,6 +1712,13 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		foreach ($database_users as $_db_user) {
 			if ($_db_user['email']== $_user['email']) {
 				$current_user = (int)$_db_user['id'];
+				
+				// if the user from the database is the CURRENT_USER,
+				// we have to set a flag that prevents double creation
+				// of links between CURRENT_USER and the groups
+				if ($current_user == OAK_CURRENT_USER) {
+					define("OAK_CURRENT_USER_LINK_CREATED", true);
+				}
 			}
 		}
 		
@@ -1766,20 +1773,23 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		}
 	}
 	
-	// create link between current user and creator group
-	foreach ($skeleton_groups as $_skel_group) {
-		if ($_skel_group['creator_group']) {
-			foreach ($database_groups as $_db_group) {
-				if ($_db_group['name'] == $_skel_group['name']) {
-					// prepare sql data to create new link
-					$sqlData = array(
-						'group' => (int)$_db_group['id'],
-						'user' => (int)OAK_CURRENT_USER
-					);
+	// create link between current user and creator group if it wasn't
+	// created yet
+	if (!defined("OAK_CURRENT_USER_LINK_CREATED")) {
+		foreach ($skeleton_groups as $_skel_group) {
+			if ($_skel_group['creator_group']) {
+				foreach ($database_groups as $_db_group) {
+					if ($_db_group['name'] == $_skel_group['name']) {
+						// prepare sql data to create new link
+						$sqlData = array(
+							'group' => (int)$_db_group['id'],
+							'user' => (int)OAK_CURRENT_USER
+						);
 					
-					// create new link
-					$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
-						$sqlData);
+						// create new link
+						$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
+							$sqlData);
+					}
 				}
 			}
 		}
