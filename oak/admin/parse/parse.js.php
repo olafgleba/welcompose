@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: parse.js.php 291 2006-07-31 19:46:13Z andreas $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
