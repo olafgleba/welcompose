@@ -1540,12 +1540,6 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 	// get users from skeleton
 	$skeleton_users = $this->getUsersFromSkeleton();
 	
-	// load helper class
-	$HELPER = load('Utility:Helper');
-	
-	// get users from skeleton
-	$skeleton_users = $this->getUsersFromSkeleton();
-	
 	// collect email addresses of skeleton users
 	$email_addresses = array();
 	foreach ($skeleton_users as $_user) {
@@ -1579,6 +1573,14 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		foreach ($database_users as $_db_user) {
 			if ($_user['email'] == $_db_user['email']) {
 				$current_user = $_db_user['id'];
+				
+				// if the user from the database is the CURRENT_USER,
+				// we have to set a flag that prevents double creation
+				// of links between CURRENT_USER and the project
+				// to be created
+				if ($current_user == OAK_CURRENT_USER) {
+					define("OAK_CURRENT_USER_LINK_CREATED", true);
+				}
 			}
 		}
 		
@@ -1619,15 +1621,16 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 	}
 	
-	// create link to current user
-	$sqlData = array(
-		'user' => OAK_CURRENT_USER,
-		'project' => $project,
-		'active' => "1",
-		'author' => "1"
-	);
-	
-	$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+	// create link to current user if it wasn't done yet
+	if (!defined("OAK_CURRENT_USER_LINK_CREATED")) {
+		$sqlData = array(
+			'user' => OAK_CURRENT_USER,
+			'project' => $project,
+			'active' => "1",
+			'author' => "1"
+		);
+		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+	}
 	
 	return true;
 }
