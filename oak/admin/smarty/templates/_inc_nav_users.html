@@ -1,8 +1,14 @@
 <div id="topsubnavcon">
 <ul id="topsubnavdynamic">
+{if oak_check_access('User', 'User', 'Manage')}
 <li><a href="{$oak_admin_root_www}/user/users_select.php">{i18n Users}</a></li>
+{/if}
+{if oak_check_access('User', 'Group', 'Manage')}
 <li><a href="{$oak_admin_root_www}/user/groups_select.php">{i18n Groups}</a></li>
+{/if}
+{if oak_check_access('User', 'Right', 'Manage')}
 <li><a href="{$oak_admin_root_www}/user/rights_select.php">{i18n Rights}</a></li>
+{/if}
 <li><a class="highlight" href="">&nbsp;</a></li>
 </ul>
 <!-- topnavcon --></div>

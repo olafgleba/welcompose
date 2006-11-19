@@ -1,11 +1,28 @@
 <div id="topsubnavcon">
 <ul id="topsubnavdynamic">
+{if 
+	   oak_check_access('Content', 'Page', 'Manage')
+	|| oak_check_access('Content', 'BlogPosting', 'Manage')
+	|| oak_check_access('Content', 'SimpleForm', 'Manage')
+	|| oak_check_access('Content', 'SimplePage', 'Manage')
+}
 <li><a href="{$oak_admin_root_www}/content/pages_select.php">{i18n Pages}</a></li>
+{/if}
+{if oak_check_access('Content', 'GlobalBox', 'Manage')}
 <li><a href="{$oak_admin_root_www}/content/globalboxes_select.php">{i18n Global Boxes}</a></li>
+{/if}
+{if oak_check_access('Content', 'Navigation', 'Manage')}
 <li><a href="{$oak_admin_root_www}/content/navigations_select.php">{i18n Navigations}</a></li>
+{/if}
+{if oak_check_access('Content', 'PageType', 'Manage')}
 <li><a href="{$oak_admin_root_www}/content/pagetypes_select.php">{i18n Page Types}</a></li>
+{/if}
+{if oak_check_access('Content', 'StructuralTemplate', 'Manage')}
 <li><a href="{$oak_admin_root_www}/content/structuraltemplates_select.php">{i18n Structural Templates}</a></li>
+{/if}
+{if oak_check_access('Content', 'BlogPodcastCategory', 'Manage')}
 <li><a href="{$oak_admin_root_www}/content/podcastcategories_select.php">{i18n Podcast Categories}</a></li>
+{/if}
 <li><a class="highlight" href="">&nbsp;</a></li>
 </ul>
 <!-- topnavcon --></div>

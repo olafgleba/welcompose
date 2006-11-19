@@ -56,6 +56,26 @@ try {
 	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
+
+	// start Base_Session
+	/* @var $SESSION session */
+	$SESSION = load('base:session');
+
+	// load User_User class
+	/* @var $USER User_User */
+	$USER = load('User:User');
+	
+	// load User_Login class
+	/* @var $LOGIN User_Login */
+	$LOGIN = load('User:Login');
+	
+	// load Application_Project class
+	/* @var $PROJECT Application_Project */
+	$PROJECT = load('Application:Project');
+	
+	// init user and project
+	$USER->initUserAdmin();
+	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
 	
 	// assign paths
 	$BASE->utility->smarty->assign('oak_admin_root_www',

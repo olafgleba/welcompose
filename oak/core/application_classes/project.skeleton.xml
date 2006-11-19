@@ -78,6 +78,24 @@
 			</groups>
 		</right>
 		<right>
+			<name>APPLICATION_PROJECT_USE</name>
+			<description>Allows usage of text projects.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_PROJECT_MANAGE</name>
+			<description>Allows management of text projects.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
 			<name>APPLICATION_TEXTCONVERTER_USE</name>
 			<description>Allows usage of text converters.</description>
 			<editable>0</editable>
@@ -165,6 +183,24 @@
 			<groups>
 				<name>OAK_ADMIN</name>
 				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_SETTINGS_USE</name>
+			<description>Allows usage of community settings.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>COMMUNITY_SETTINGS_MANAGE</name>
+			<description>Allows management of community settings.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -389,6 +425,42 @@
 			<groups>
 				<name>OAK_ADMIN</name>
 				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_GLOBALFILE_USE</name>
+			<description>Allows usage of global files.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_GLOBALFILE_MANAGE</name>
+			<description>Allows management of global files.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_GLOBALTEMPLATE_USE</name>
+			<description>Allows usage of global templates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>TEMPLATING_GLOBALTEMPLATE_MANAGE</name>
+			<description>Allows management of global templates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
 			</groups>
 		</right>
 		<right>
