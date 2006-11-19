@@ -1,29 +1,35 @@
+{* application *}
 <!-- topsubnavcon static -->
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
+{if oak_check_access('Application', 'Project', 'Manage')}
 	{if oak_admin_navigation_is_self('projects_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Projects}</li>
 	{else}
 		<li><a href="projects_select.php"{if oak_admin_navigation_in_area('projects_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Projects}<span></span></a></li>
 	{/if}
-
+{/if}
+{if oak_check_access('Application', 'PingService', 'Manage')}
 	{if oak_admin_navigation_is_self('pingservices_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Ping Services}</li>
 	{else}
 		<li><a href="pingservices_select.php"{if oak_admin_navigation_in_area('pingservices_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Ping Services}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Application', 'TextConverter', 'Manage')}
 	{if oak_admin_navigation_is_self('textconverters_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Text Converters}</li>
 	{else}
 		<li><a href="textconverters_select.php"{if oak_admin_navigation_in_area('textconverters_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Text Converters}<span></span></a></li>
 	{/if}
-
+{/if}
+{if oak_check_access('Application', 'TextMacro', 'Manage')}
 	{if oak_admin_navigation_is_self('textmacros_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Text Macros}</li>
 	{else}
 		<li><a href="textmacros_select.php"{if oak_admin_navigation_in_area('textmacros_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Text Macros}<span></span></a></li>
 	{/if}
+{/if}
 </ul>
 </div>
 <!-- topsubnavcon static eof -->

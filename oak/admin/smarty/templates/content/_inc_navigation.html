@@ -1,42 +1,49 @@
+{* Content *}
 <!-- topsubnavcon static -->
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
+{if oak_check_access('Content', 'Pages', 'Manage')}
 	{if oak_admin_navigation_is_self('pages_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Pages}</li>
 	{else}
 		<li><a href="pages_select.php"{if oak_admin_navigation_in_area('pages_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Pages}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Content', 'GlobalBox', 'Manage')}
 	{if oak_admin_navigation_is_self('globalboxes_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Global Boxes}</li>
 	{else}
 		<li><a href="globalboxes_select.php"{if oak_admin_navigation_in_area('globalboxes_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Global Boxes}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Content', 'Navigation', 'Manage')}
 	{if oak_admin_navigation_is_self('navigations_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Navigations}</li>
 	{else}
 		<li><a href="navigations_select.php"{if oak_admin_navigation_in_area('navigations_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Navigations}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Content', 'PageType', 'Manage')}
 	{if oak_admin_navigation_is_self('pagetypes_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Page Types}</li>
 	{else}
 		<li><a href="pagetypes_select.php"{if oak_admin_navigation_in_area('pagetypes_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Page Types}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Content', 'StructuralTemplate', 'Manage')}
 	{if oak_admin_navigation_is_self('structuraltemplates_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Structural Templates}</li>
 	{else}
 		<li><a href="structuraltemplates_select.php"{if oak_admin_navigation_in_area('structuraltemplates_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Structural Templates}<span></span></a></li>
 	{/if}
-	
+{/if}
+{if oak_check_access('Content', 'BlogPodcastCategory', 'Manage')}
 	{if oak_admin_navigation_is_self('podcastcategories_select.php', $SCRIPT_NAME)}
 		<li class="on">{i18n Podcast Categories}</li>
 	{else}
 		<li><a href="podcastcategories_select.php"{if oak_admin_navigation_in_area('podcastcategories_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Podcast Categories}<span></span></a></li>
 	{/if}
-	
+{/if}
 </ul>
 </div>
 <!-- topsubnavcon static eof -->
