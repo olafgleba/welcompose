@@ -1100,8 +1100,8 @@ function Helper_applyBehaviour ()
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
 		Behaviour.reapply('#submit55');
-		Behaviour.reapply('.showMediamanagerElement');
-		Behaviour.reapply('.hideMediamanagerElement');
+		Behaviour.reapply('.showMediamanagerElementMyLocal');
+		Behaviour.reapply('.hideMediamanagerElementMyLocal');
 		Behaviour.reapply('.showMediamanagerElementMyFlickr');
 		Behaviour.reapply('.hideMediamanagerElementMyFlickr');
 		Behaviour.reapply('.iHelpMediamanager');

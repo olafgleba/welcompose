@@ -132,14 +132,14 @@ var definitions = {
 			return false;
 		}
 	},
-	'.showMediamanagerElement' : function(el){
+	'.showMediamanagerElementMyLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.showElement(this);
 			Mediamanager.invokePager(this);
 			return false;
 		}
 	},
-	'.hideMediamanagerElement' : function(el){
+	'.hideMediamanagerElementMyLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.hideElement(this);
 			Mediamanager.invokePager(this);

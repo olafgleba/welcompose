@@ -209,7 +209,7 @@ function Mediamanager_showElement (elem)
 
 		// myLocal
 		if (myLocal == 'block') {
-			this.elem.className = this.mediamanagerClassHide;
+			this.elem.className = this.mediamanagerClassHideMyLocal;
 			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
@@ -268,7 +268,7 @@ function Mediamanager_hideElement (elem)
 
 		// myLocal
 		if (myLocal == 'block') {
-			this.elem.className = this.mediamanagerClassShow;
+			this.elem.className = this.mediamanagerClassShowMyLocal;
 			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
@@ -477,15 +477,15 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
 		
 		if (previousElemsStatus[0] == 'block') {
-			parentElem[0].lastChild.className = this.mediamanagerClassHide;
+			parentElem[0].lastChild.className = this.mediamanagerClassHideMyLocal;
 			parentElem[0].lastChild.innerHTML = this.elementHtmlHide;
 		}
 		if (previousElemsStatus[1] == 'none') {
-			parentElem[1].lastChild.className = this.mediamanagerClassShow;
+			parentElem[1].lastChild.className = this.mediamanagerClassShowMyLocal;
 			parentElem[1].lastChild.innerHTML = this.elementHtmlShow;
 		}
 		if (previousElemsStatus[2] == 'block') {
-			parentElem[2].lastChild.className = this.mediamanagerClassHide;
+			parentElem[2].lastChild.className = this.mediamanagerClassHideMyLocal;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
 		}
 		
@@ -579,10 +579,10 @@ function Mediamanager_discardPodcast (elem)
 {
 	try {
 		// get hidden field value
-		var podcast_media_object = $('podcast_media_object').value;
+		var podcast_id = $('podcast_id').value;
 
 		var url = this.parseMedDiscCastsUrl;
-		var pars = 'id=' + podcast_media_object;
+		var pars = 'id=' + podcast_id;
 
 		var myAjax = new Ajax.Request(
 			url,
@@ -637,14 +637,11 @@ function _showResponseDiscardPodcast(req)
 {
 	try {
 		// set hidden field value
+		$('podcast_id').value = '';
 		$('podcast_media_object').value = '';	
-		
-		/* debug */
-		$('podcast_container').innerHTML = req.responseText;		
-		
-		/*	
+	
 		Effect.Fade('podcast_container',{duration: 0.4});
-		*/			
+					
 	} catch (e) {
 		_applyError(e);
 	}

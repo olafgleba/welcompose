@@ -38,7 +38,7 @@
  * 2 = production
  *
  * @static
- * @link See oak.string.js for the strings
+ * @link See oak.string.js for the strings content
  */
 var debug = 1;
 
@@ -105,25 +105,22 @@ function _applyError (exception)
  *
  * @class The Errors class tracks all manually thrown
  * errors. Scope application wide. Mainly used in all
- * processXXX functions to track errors on xhr state, which
+ * process_xxx functions to track errors on xhr state, which
  * are not processed by the try/catch structure.
  *
- * expample:
+ * example:
  * < throw new Errors(object); > 
  *
  * Prototype Methods:
  * 
- * Right now there are not methods defined
+ * **Right now there are not methods defined**
  *
  *
- * 
  * @constructor
- * @param {string} name exception error message presented by catch statement
- * @param {string} msg exception error message presented by catch statement
+ * @param {string} msg Exception error message presented by catch statement
  */
 function Errors(msg) 
 {
-	//this.name = 'Error';
 	this.message = msg;
 }
 
@@ -135,63 +132,127 @@ Errors.prototype = new Error();
 
 
 
+
+
 /**
  * Constructs the Base class
  * 
- * @class This class is the most important class in the oak
+ * @class This class is the most important class of the oak
  * javascript enviroment, cause all other classes derived from that class.
- * It predefines properties which are supposed to be used application wide.
+ * It predefines properties and methods which are supposed to be used application wide.
  *
  * Prototype Methods:
  * 
- * Right now there are not methods defined
+ * isArray()
+ * Examine the giving var is of type Array
+ *
+ * isBoolean()
+ * Examine the giving var is of type Bool
+ *
+ * isString()
+ * Examine the giving var is of type String
+ *
+ * isObject()
+ * Examine the giving var is of type Object
+ *
+ * isFunction()
+ * Examine the giving var is a function
+ *
+ * isUndefined()
+ * Examine the giving var is undefined
+ *
+ * isNumber()
+ * Examine the giving var is of type Number
+ *
+ * isEmpty()
+ * Examine the giving var has no values
+ *
+ * isNull()
+ * Examine the giving var is Null
+ *
+ * trim()
+ * Delete whitspaces before and after the giving string
  *
  *
  * @constructor
  * @throws applyError on exception
- * @see Base
  */
 function Base ()
 {
 	try {
 		/**
-		 * Define application wide help classes
+		 * Help class
 		 */
 		this.helpClass = 'iHelp';
-		this.helpClassRemove = 'iHelpRemove';
-		this.helpClassMediamanager = 'iHelpMediamanager';
-		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
-		
+
 		/**
-		 * Define help class for mediamanager
-		 * Define divs (id) for mediamanager layers
-		 * Must corresponding to html notation
+		 * Help class
+		 */
+		this.helpClassRemove = 'iHelpRemove';
+
+		/**
+		 * Help class
+		 */
+		this.helpClassMediamanager = 'iHelpMediamanager';
+
+		/**
+		 * Help class
+		 */
+		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
+
+		/**
+		 * Help div for mediamanager
 		 */
 		this.helpLyMediamanager = 'lyMediamanager';
+
+		/**
+		 * MyLocal div (mediamanager)
+		 */
 		this.lyMediamanagerMyLocal = 'lyMediamanagerMyLocal';		
+
+		/**
+		 * MyFlickr div (mediamanager)
+		 */
 		this.lyMediamanagerMyFlickr = 'lyMediamanagerMyFlickr';
 		
 		/**
-		 * Define mediamanager element classes
+		 * Element class for myLocal (mediamanager)
 		 */
-		this.mediamanagerClassShow = 'showMediamanagerElement';
-		this.mediamanagerClassHide = 'hideMediamanagerElement';
+		this.mediamanagerClassShowMyLocal = 'showMediamanagerElementMyLocal';
+
+		/**
+		 * Element class for myLocal (mediamanager)
+		 */
+		this.mediamanagerClassHideMyLocal = 'hideMediamanagerElementMyLocal';
+
+		/**
+		 * Element class for myFlickr (mediamanager)
+		 */
 		this.mediamanagerClassShowMyFlickr = 'showMediamanagerElementMyFlickr';
+
+		/**
+		 * Element class for myFlickr (mediamanager)
+		 */
 		this.mediamanagerClassHideMyFlickr = 'hideMediamanagerElementMyFlickr';
 		
 		/**
-		 * Define divs (id) for navigation layers
-		 * Must corresponding to html notation
+		 * First level div for dynamic xhr navigation
 		 */
 		this.navLyOne = 'ly1';
+
+		/**
+		 * Second level div for dynamic xhr navigation
+		 */
 		this.navLyTwo = 'ly2';
 		
 		/**
-		 * Define used table action (upload) class names.
- 		 * Cascading styles to fit background images
-		 * Must corresponding to html notation
+		 * Element class for upload button used in tables
 		 */
 		this.uploadClassShow = 'upload showTableRow';
+
+		/**
+		 * Element class for upload button used in tables
+		 */
 		this.uploadClassHide = 'uploadhide hideTableRow';
 
 		/**
@@ -200,36 +261,95 @@ function Base ()
 		this.applicationTextColor = '#009a26';
 		
 		/**
-		 * Help strings supposed to delivered within DOM.
-		 * Must corresponding to html notation
+		 * Help string supposed to delivered within the DOM.
 		 */
 		this.helpHtmlShow = '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" alt="" /></a>';
-		this.helpHtmlHide = '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';
-		this.elementHtmlShow = '<a href="#" title="' + showElement + '"><img src="../static/img/icons/open.gif" alt="" /></a>';
-		this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
 
 		/**
-		 * Paths for dynamically imported files
+		 * Help string supposed to delivered within the DOM.
 		 */
-		this.parseHelpUrl = '../parse/parse.help.php';
-		this.parseNavUrl = '../parse/parse.navigation.php';
-		this.parseMedLocalUrl = '../mediamanager/mediamanager_local.php';
-		this.parseMedFlickrUrl = '../mediamanager/mediamanager_flickr.php';
-		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
-		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
-		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
-		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
-		this.parseMedDiscCastsUrl = '../mediamanager/mediamanager_discard_podcast.php';
-		this.parsePagesLinksUrl = '../content/pages_links_select.php';
-		this.parseGlobalTemplatesLinksUrl = '../templating/globaltemplates_links_select.php';
-		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
-		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
-		
+		this.helpHtmlHide = '<a href="#" title="' + hideHelp + '"><img src="../static/img/icons/help_off.gif" alt="" /></a>';
+
+		/**
+		 * Element string supposed to delivered within the DOM (mediamanager).
+		 */
+		this.elementHtmlShow = '<a href="#" title="' + showElement + '"><img src="../static/img/icons/open.gif" alt="" /></a>';
+
+		/**
+		 * Element string supposed to delivered within the DOM (mediamanager).
+		 */
+		this.elementHtmlHide = '<a href="#" title="' + hideElement + '"><img src="../static/img/icons/close.gif" alt="" /></a>';
+
 		/**
 		 * Reset formerly value
 		 * Used in func Mediamanager.initializeTagSearch()
 		 */
 		this.keyPressDelay = null;
+		
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseHelpUrl = '../parse/parse.help.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseNavUrl = '../parse/parse.navigation.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedLocalUrl = '../mediamanager/mediamanager_local.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedFlickrUrl = '../mediamanager/mediamanager_flickr.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedDiscCastsUrl = '../mediamanager/mediamanager_discard_podcast.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parsePagesLinksUrl = '../content/pages_links_select.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseGlobalTemplatesLinksUrl = '../templating/globaltemplates_links_select.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
 		
 	} catch (e) {
 		_applyError(e);
@@ -249,9 +369,8 @@ Base.prototype.isNull = Base_isNull;
 Base.prototype.trim = Base_trim;
 
 /**
- * Examine the giving var is an array
+ * Examine the giving var is of type Array
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -259,9 +378,8 @@ function Base_isArray(elem) {
     return Base.prototype.isObject(elem) && elem.constructor == Array;
 }
 /**
- * Examine the giving var is true oder false
+ * Examine the giving var is of type Bool
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -269,9 +387,8 @@ function Base_isBoolean(elem) {
     return typeof elem == 'boolean';
 }
 /**
- * Examine the giving var is a string
+ * Examine the giving var is of type String
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -279,9 +396,8 @@ function Base_isBoolean(elem) {
     return typeof elem == 'string';
 }
 /**
- * Examine the giving var is an object
+ * Examine the giving var is of type Object
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -291,7 +407,6 @@ function Base_isObject(elem) {
 /**
  * Examine the giving var is a function
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -301,7 +416,6 @@ function Base_isFunction(elem) {
 /**
  * Examine the giving var is undefined
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -309,9 +423,8 @@ function Base_isUndefined(elem) {
     return typeof elem == 'undefined';
 }
 /**
- * Examine the giving var is a number
+ * Examine the giving var has no values
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -321,7 +434,6 @@ function Base_isNumber(elem) {
 /**
  * Examine the giving var is empty
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -340,7 +452,6 @@ function Base_isEmpty(elem) {
 /**
  * Examine the giving var is Null
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return Boolean true or false
  */
@@ -348,11 +459,11 @@ function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
 }
 /**
- * Deletes whitespaces in given string
+ * Delete whitspaces before and after the giving string
  *
- * @requires Base The Oak core javascript class
  * @param {var} elem Actual element
  * @return elem
+ * @type String
  */
 function Base_trim(elem) {
   return elem.replace(/^\s*|\s*$/g, "");
@@ -373,12 +484,12 @@ function Base_trim(elem) {
  * on load must take place here.
  *
  * getVars()
- * Getter function for different actions to be executed depending
- * on delivered variables defined in the html markup.
+ * Getter function for different actions to be executed.
+ * Depends on delivered variables defined in the html markup.
  *
  * getCbxStatus()
  * Show/hide a group of form elements and color their labels.
- * Depending on delivered variable in the html markup.
+ * Depends on delivered variable in the html markup.
  *
  * processInit()
  * Update content with XMLHttpRequest response.
@@ -391,7 +502,7 @@ function Base_trim(elem) {
 function Init ()
 {
 	try {
-		// new XMLHttpRequest object
+		// instance XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
 	} catch (e) {
 		_applyError(e);
@@ -408,11 +519,8 @@ Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
 
 /**
- * Implements method of prototype class Init.
  * All functions supposed to be called on load must take place here.
  * 
- * @param {global} checkbox_status
- * @see Base
  * @throws applyError on exception
  */
 function Init_load ()
@@ -429,16 +537,9 @@ function Init_load ()
 }
 
 /**
- * Implements method of prototype class Init.
- * Getter function for different actions to be executed depending
- * on delivered variables defined in the html markup.
+ * Getter function for different actions to be executed.
+ * Depends on delivered variables defined in the html markup.
  * 
- * @param {var} response 
- * @param {var} selection
- * @param {var} mediamanager
- * @param {var} pagetype
- * @requires Base The Oak core javascript class
- * @see Base
  * @throws applyError on exception
  */
 function Init_getVars ()
@@ -459,7 +560,7 @@ function Init_getVars ()
 				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
-	   if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
+		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
 						
 				this.url = this.parseMedLocalUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
@@ -480,21 +581,17 @@ function Init_getVars ()
 }
 
 /**
- * Implements method of prototype class Init.
  * Show/hide a group of form elements and color their labels.
- * Depending on delivered variable in the html markup.
+ * Depends on delivered variable in the html markup.
  *
- * @param {array} elem array of element(s)
- * @requires Base The Oak core javascript class
- * @see Base Base is the base class for this
+ * @param {array} elems Array of element(s)
  * @throws applyError on exception
  */
 function Init_getCbxStatus (elems)
 {
 	try {
 		for (var e = 0; e < elems.length; e++) {
-			
-			// object -> string conversion
+
 			var range = String(elems[e])  + '_container';
 			
 			if ($(range)) {
@@ -520,11 +617,9 @@ function Init_getCbxStatus (elems)
 }
 
 /**
- * Implements method of prototype class Init.
  * Update content with XMLHttpRequest response.
  *
- * @param {string} ttarget Wich layer div should be used
- * @requires Base The Oak core javascript class
+ * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
  */
@@ -534,7 +629,7 @@ function Init_processInit (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
-				
+		
 				Helper.applyBehaviour();
 			
 				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
@@ -542,8 +637,7 @@ function Init_processInit (ttarget)
 				$('mm_flickrtags').setAttribute("autocomplete","off");
 			
 				Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);	
-				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-			
+				Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);	
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -573,26 +667,27 @@ Init = new Init();
  * Prototype methods:
  * 
  * show()
- * 
+ * Import related help file depending on actual element pointer.
+ * Show help html element.
  *
  * hide()
- * 
+ * Hide help html element.
  *
  * processHelp()
- * 
+ * Update content with XMLHttpRequest response.
  *
  * showMediamanager()
- * 
+ * Import related help file depending on actual element pointer.
+ * Show help html element.
  *
  * hideMediamanager()
- * 
+ * Hide help html element.
  *
  * processMediamanager()
- * 
- *
+ * Update content with XMLHttpRequest response.
  *
  * setCorrespondingFocus()
- * 
+ * Set Focus related to pointed element.
  *
  * @see Base
  * @constructor
@@ -601,13 +696,12 @@ Init = new Init();
 function Help ()
 {
 	try {
-		// new XMLHttpRequest object
+		// instance XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
 
 /* Inherit from Base */
 Help.prototype = new Base();
@@ -624,13 +718,10 @@ Help.prototype.processMediamanager = Help_processMediamanager;
 Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
- * Implements method of prototype class Help
- * This is for usual use of the help class within the normal <form> document flow
- * The param 'level' ist the most important part of this method
- * because it distincts how the DOM Tree will be processed
+ * Import related help file depending on actual element pointer.
+ * Show help html element.
  *
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (eg. level 1)
  * @throws applyError on exception
  */
 function Help_show (elem)
@@ -681,12 +772,9 @@ function Help_show (elem)
 }
 
 /**
- * Implements method of prototype class Help
- * The param 'level' ist the most important part of this method
- * because it distincts how the DOM Tree will be processed
+ * Hide help html element.
  *
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
  */
 function Help_hide (elem)
@@ -713,11 +801,9 @@ function Help_hide (elem)
 }
 
 /**
- * Implements method of prototype class Help.
  * Update content with XMLHttpRequest response.
  *
- * @param {string} ttarget Wich layer div should be used
- * @requires Base The Oak core javascript class
+ * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
  */
@@ -740,13 +826,12 @@ function Help_processHelp (ttarget)
 }
 
 /**
- * Implements method of prototype class Help
- * This method is used for the media manager
+ * Import related help file depending on actual element pointer.
+ * Show help html element.
  *
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class; can be empty/not set (= level 1)
  * @throws applyError on exception
- * @return {string} gMediamanagerLayer
+ * @returns {global} gMediamanagerLayer
  */
 function Help_showMediamanager (elem)
 {
@@ -793,11 +878,9 @@ function Help_showMediamanager (elem)
 }
 
 /**
- * Implements method of prototype class Help
- * This method is used for the media manager
+ * Hide help html element.
  *
  * @param {string} elem Actual element
- * @param {string} level Wich depth of implementation to apply css class; can be empty/non set (= level 1)
  * @throws applyError on exception
  */
 function Help_hideMediamanager (elem)
@@ -828,11 +911,9 @@ function Help_hideMediamanager (elem)
 }
 
 /**
- * Implements method of prototype class Help.
  * Update content with XMLHttpRequest response.
  *
- * @param {string} ttarget Wich layer div should be used
- * @requires Base The Oak core javascript class
+ * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
  */
@@ -858,9 +939,10 @@ function Help_processMediamanager (ttarget)
 }
 
 /**
- * Implements method of prototype class Help
- * @param {string} elem actual element
- * @param {string} attr attribute of DOM node to process
+ * Set Focus related to pointed element.
+ *
+ * @param {string} elem Actual element
+ * @param {string} attr Node Attribute
  */
 function Help_setCorrespondingFocus (elem, attr)
 {
@@ -888,10 +970,10 @@ Help = new Help();
  * Prototype methods:
  * 
  * show()
- * 
+ * Import related navigation file depending on actual element pointer.
  *
  * processNavigation()
- *
+ * Update content with XMLHttpRequest response.
  *
  * @see Base
  * @constructor
@@ -900,7 +982,7 @@ Help = new Help();
 function Navigation ()
 {
 	try {
-		// new XMLHttpRequest object
+		// instance XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
 	} catch (e) {
 		_applyError(e);
@@ -917,9 +999,10 @@ Navigation.prototype.show = Navigation_show;
 Navigation.prototype.processNavigation = Navigation_processNavigation;
 
 /**
- * Implements method of prototype class Navigation
- * @param {string} name The name of the file to catch
- * @param {string} level Wich layer div should be used
+ * Import related navigation file depending on actual element pointer.
+ * 
+ * @param {string} name The name of page
+ * @param {string} level Layer to process
  * @throws applyError on exception
  */
 function Navigation_show (name, level)
@@ -952,11 +1035,9 @@ function Navigation_show (name, level)
 }
 
 /**
- * Implements method of prototype class Navigation.
  * Update content with XMLHttpRequest response.
  *
- * @param {string} ttarget Wich layer div should be used
- * @requires Base The Oak core javascript class
+ * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
  */
@@ -974,13 +1055,13 @@ function Navigation_show (name, level)
 				for (i = 0; i < range.length; i++) {
 					range[i].style.color = 'red';
 				}*/
-				
-				/*
+					
 				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
 					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
-					*/
-				new Effect.Highlight($('topsubnavdynamic'), 
+					
+				/*new Effect.Highlight($('topsubnavdynamic'), 
 					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
+				*/
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -1005,16 +1086,17 @@ Navigation = new Navigation();
 /**
  * Constructs the Forms class
  * 
- * @class The Forms class is supposed be used for forms processing.
+ * @class The Forms class is the appropriate class for forms processing.
  * The scope is application wide.
  *
  * Prototype methods:
  * 
  * setOnEvent()
- * 
+ * Used to style elements depending on given params
  *
  * storeFocus()
- *
+ * Tracks the actual Focus and makes it available application wide.
+ * This is actual used to fire alerts within mediamanager.
  *
  * @see Base
  * @constructor
@@ -1039,11 +1121,12 @@ Forms.prototype.setOnEvent = Forms_setOnEvent;
 Forms.prototype.storeFocus = Forms_storeFocus;
 
 /**
- * DOM triggers by onEvent behaviours
+ * Used to style elements depending on given params
+ * 
  * @param {string} elem Actual element
- * @param {string} bgcolor Defined background color
- * @param {string} bcolor Defined border color
- * @param {string} bstyle Defined border style attr
+ * @param {string} bgcolor Define background color
+ * @param {string} bcolor Define border color
+ * @param {string} bstyle Define border style attribute
  * @throws applyError on exception
  */
 function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
@@ -1063,8 +1146,9 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 }
 
 /**
- * Store focus for later use
- * define as global
+ * Tracks the actual Focus and makes it available application wide.
+ * This is actual used to fire alerts within mediamanager.
+ *
  * @param {string} elem Actual element
  * @throws applyError on exception
  */
@@ -1125,8 +1209,10 @@ Status.prototype = new Base();
 Status.prototype.getCbx = Status_getCbx;
 
 /**
- * Implements method of prototype class Status
- * @param {array} elems actual elements
+ * Show/hide a group of form elements and color their labels.
+ * Depends on delivered variable in the html markup.
+ *
+ * @param {array} elems Array of element(s)
  * @throws applyError on exception
  */
 function Status_getCbx (elems)
@@ -1180,19 +1266,19 @@ Status = new Status();
  * Constructs the Tables class
  * 
  * @class The Tables class faces all action that are related 
- * to html tables, because the mostly needs extra treatment.
+ * to html tables, because they mostly needs extra treatment.
  * The scope is application wide.
  *
  * Prototype methods:
  * 
  * showTableRow()
- *  
+ * Show formely hidden table row depending on actual element pointer.
  *
  * hideTableRow()
- *
+ * Hide visible table row depending on actual element pointer.
  *
  * collapseTableRow()
- *
+ * Gives some browsers some extra treatment.
  *
  * @see Base
  * @constructor
@@ -1219,30 +1305,8 @@ Tables.prototype.hideTableRow = Tables_hideTableRow;
 Tables.prototype.collapseTableRow = Tables_collapseTableRow;
 
 /**
- * Implements method of prototype class Tables
- * @param {string} elem actual element to process
- * @throws applyError on exception
- */
- function Tables_collapseTableRow (elem)
-{
-	try {
-		// properties
-		this.elem = elem;
-		
-		// process inner div
-		if (Helper.unsupportsEffects('safari_exception')) {
-			return false;
-		} else {
-			// process outer table tr
-			$(this.elem).style.visibility = 'collapse';
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Tables
+ * Show formely hidden table row depending on actual element pointer.
+ * 
  * @param {string} elem actual element
  * @throws applyError on exception
  */
@@ -1267,8 +1331,7 @@ function Tables_showTableRow (elem)
 		this.elem.parentNode.parentNode.style.color = this.applicationTextColor;
 				
 		this.elem.className = this.uploadClassHide;
-		
-		//Behaviour.apply();
+
 		Behaviour.reapply('.hideTableRow');
 	} catch (e) {
 		_applyError(e);
@@ -1276,7 +1339,8 @@ function Tables_showTableRow (elem)
 }
 
 /**
- * Implements method of prototype class Tables
+ * Hide visible table row depending on actual element pointer.
+ * 
  * @param {string} elem actual element
  * @throws applyError on exception
  */
@@ -1300,9 +1364,32 @@ function Tables_hideTableRow (elem)
 		this.elem.parentNode.parentNode.style.color = '';
 
 		this.elem.className = this.uploadClassShow;
-		
-		//Behaviour.apply();
+
 		Behaviour.reapply('.showTableRow');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Gives some browsers some extra treatment.
+ *
+ * @param {string} elem actual element to process
+ * @throws applyError on exception
+ */
+ function Tables_collapseTableRow (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		
+		// process inner div
+		if (Helper.unsupportsEffects('safari_exception')) {
+			return false;
+		} else {
+			// process outer table tr
+			$(this.elem).style.visibility = 'collapse';
+		}
 	} catch (e) {
 		_applyError(e);
 	}

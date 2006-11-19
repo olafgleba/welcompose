@@ -758,8 +758,8 @@ padding-left: 260px;
 .iHelpRemove a,
 .iHelpMediamanager a,
 .iHelpRemoveMediamanager a,
-.showMediamanagerElement a,
-.hideMediamanagerElement a,
+.showMediamanagerElementMyLocal a,
+.hideMediamanagerElementMyLocal a,
 .showMediamanagerElementMyFlickr a,
 .hideMediamanagerElementMyFlickr a {
 background-color: transparent;
@@ -769,8 +769,8 @@ text-decoration: none;
 .iHelpRemove a img,
 .iHelpMediamanager a img,
 .iHelpRemoveMediamanager a img,
-.showMediamanagerElement a img,
-.hideMediamanagerElement a img,
+.showMediamanagerElementMyLocal a img,
+.hideMediamanagerElementMyLocal a img,
 .showMediamanagerElementMyFlickr a img,
 .hideMediamanagerElementMyFlickr a img {
 vertical-align: middle;
