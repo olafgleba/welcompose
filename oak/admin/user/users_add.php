@@ -105,6 +105,13 @@ try {
 		$groups);
 	
 	// textfield for name
+	$FORM->addElement('text', 'name', gettext('Name'), 
+		array('id' => 'user_name', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('name', 'trim');
+	$FORM->applyFilter('name', 'strip_tags');
+	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	
+	// textfield for name
 	$FORM->addElement('text', 'email', gettext('E-mail'), 
 		array('id' => 'user_email', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('email', 'trim');
@@ -114,7 +121,7 @@ try {
 	$FORM->addRule('email', gettext('A user with this e-mail address already exists'),
 		'testForEmailUniqueness');
 	
-	// textfield for homepage
+	// textfield for password
 	$FORM->addElement('password', 'password', gettext('Password'), 
 		array('id' => 'user_password', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('password', 'trim');
@@ -122,6 +129,14 @@ try {
 	$FORM->addRule('password', gettext('Please enter a password'), 'required');
 	$FORM->addRule('password', gettext('Please enter a password with at least five characters'),
 		'minlength', 5);
+	
+	// textfield for homepage
+	$FORM->addElement('text', 'homepage', gettext('Homepage'), 
+		array('id' => 'user_homepage', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('homepage', 'trim');
+	$FORM->applyFilter('homepage', 'strip_tags');
+	$FORM->addRule('homepage', gettext("Please enter a valid homepage URL"), 'regex',
+		OAK_REGEX_URL);
 	
 	// checkbox for author
 	$FORM->addElement('checkbox', 'author', gettext('Author'), null,
@@ -209,8 +224,10 @@ try {
 		
 		// create the article group
 		$sqlData = array();
+		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['email'] = $FORM->exportValue('email');
 		$sqlData['secret'] = crypt($FORM->exportValue('password'));
+		$sqlData['homepage'] = $FORM->exportValue('homepage');
 		$sqlData['editable'] = "1";
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		

@@ -105,6 +105,13 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
+	// textfield for name
+	$FORM->addElement('text', 'name', gettext('Name'), 
+		array('id' => 'user_name', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('name', 'trim');
+	$FORM->applyFilter('name', 'strip_tags');
+	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	
 	// select for group
 	$FORM->addElement('select', 'group', gettext('Group'), $groups,
 		array('id' => 'user_group'));
@@ -132,6 +139,14 @@ try {
 	$FORM->addRule('password', gettext('Please enter a password with at least five characters'),
 		'minlength', 5);
 	
+	// textfield for homepage
+	$FORM->addElement('text', 'homepage', gettext('Homepage'), 
+		array('id' => 'user_homepage', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('homepage', 'trim');
+	$FORM->applyFilter('homepage', 'strip_tags');
+	$FORM->addRule('homepage', gettext("Please enter a valid homepage URL"), 'regex',
+		OAK_REGEX_URL);
+	
 	// checkbox for author
 	$FORM->addElement('checkbox', 'author', gettext('Author'), null,
 		array('id' => 'user_author', 'class' => 'chbx'));
@@ -156,7 +171,9 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($user['id'], null),
 		'group' => Base_Cnc::ifsetor($user['group_id'], null),
+		'name' => Base_Cnc::ifsetor($user['name'], null),
 		'email' => Base_Cnc::ifsetor($user['email'], null),
+		'homepage' => Base_Cnc::ifsetor($user['homepage'], null),
 		'author' => Base_Cnc::ifsetor($user['author'], null),
 		'active' => Base_Cnc::ifsetor($user['active'], null)
 	));
@@ -209,7 +226,9 @@ try {
 		
 		// create the article group
 		$sqlData = array();
+		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['email'] = $FORM->exportValue('email');
+		$sqlData['homepage'] = $FORM->exportValue('homepage');
 		if ($FORM->exportValue('password') != "") {
 			$sqlData['secret'] = crypt($FORM->exportValue('password'));
 		}		

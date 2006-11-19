@@ -205,8 +205,10 @@ public function selectUser ($id)
 	$sql = "
 		SELECT 
 			`user_users`.`id` AS `id`,
+			`user_users`.`name` AS `name`,
 			`user_users`.`email` AS `email`,
 			`user_users`.`secret` AS `secret`,
+			`user_users`.`homepage` AS `homepage`,
 			`user_users`.`editable` AS `editable`,
 			`user_users`.`date_modified` AS `date_modified`,
 			`user_users`.`date_added` AS `date_added`,
@@ -338,8 +340,10 @@ public function selectUsers ($params = array())
 	$sql = "
 		SELECT 
 			`user_users`.`id` AS `id`,
+			`user_users`.`name` AS `name`,
 			`user_users`.`email` AS `email`,
 			`user_users`.`secret` AS `secret`,
+			`user_users`.`homepage` AS `homepage`,
 			`user_users`.`editable` AS `editable`,
 			`user_users2application_projects`.`active` AS `active`,
 			`user_users2application_projects`.`author` AS `author`,

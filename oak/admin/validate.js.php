@@ -79,6 +79,7 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_INTERNAL_NAME;
 					$desc = gettext('Literal string, CamelCase');
 				break;
+			case 'user_homepage':
 			case 'ping_service_configuration_site_url':
 			case 'ping_service_configuration_site_index':
 			case 'ping_service_configuration_site_feed':
