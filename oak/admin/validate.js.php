@@ -79,6 +79,7 @@ try {
 					$reg = OAK_REGEX_PAGE_TYPE_INTERNAL_NAME;
 					$desc = gettext('Literal string, CamelCase');
 				break;
+			case 'blog_comment_homepage':
 			case 'user_homepage':
 			case 'ping_service_configuration_site_url':
 			case 'ping_service_configuration_site_index':
@@ -114,6 +115,7 @@ try {
 					$reg = OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
+			case 'blog_comment_email':
 			case 'simple_form_email_from':
 			case 'simple_form_email_to':
 			case 'user_email':

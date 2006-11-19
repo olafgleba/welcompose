@@ -247,7 +247,7 @@ public function selectBlogComment ($id)
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE 
-			`community_blog_comments` = :id
+			`community_blog_comments`.`id` = :id
 		  AND
 			`content_pages`.`project` = :project
 		LIMIT
