@@ -7,7 +7,7 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Pages &#62; Boxes}</title>
+<title>{i18n Oak Admin &ndash; Structural Templates}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
 
@@ -33,7 +33,7 @@
 
 {include file="_inc_topnav.html" area="contents"}
 
-{include file="_inc_projects_load.html" go_back_area="content" go_back_file="pages_select.php"}
+{include file="_inc_projects_load.html" go_back_area="content" go_back_file="structuraltemplates_select.php"}
 
 <div id="main">
 
@@ -44,44 +44,23 @@
 <!-- topsubnavcon static -->
 <div id="topsubnavconstatic">
 <ul id="topsubnav">
-<li><a class="on" href="pages_select.php">{i18n Pages}<span></span></a></li>
+<li><a href="pages_select.php">{i18n Pages}<span></span></a></li>
 <li><a href="globalboxes_select.php">{i18n Global Boxes}<span></span></a></li>
 <li><a href="navigations_select.php">{i18n Navigations}<span></span></a></li>
 <li><a href="pagetypes_select.php">{i18n Page Types}<span></span></a></li>
-<li><a href="structuraltemplates_select.php">{i18n Structural Templates}<span></span></a></li>
+<li class="on">{i18n Structural Templates}</li>
 <li><a href="podcastcategories_select.php">{i18n Podcast Categories}<span></span></a></li>
 </ul>
 </div>
 <!-- topsubnavcon static eof -->
 
-<!-- topsubsubnavcon static -->
-<div id="topsubsubnavconstatic">
-<ul id="topsubsubnav">
-{if $page.page_type_name == 'OAK_SIMPLE_PAGE'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-{elseif $page.page_type_name == 'OAK_BLOG'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
-{elseif $page.page_type_name == 'OAK_SIMPLE_FORM'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-{/if}
-</ul>
-</div>
-<!-- topsubsubnavcon static eof -->
-
-<div id="brc"><p>{i18n CONTENTS}: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Boxes}</p></div>
+<div id="brc"><p>{i18n CONTENTS}: {i18n Structural Templates}</p></div>
 
 <div id="content">
 
-<h1>{i18n Boxes}</h1>
+<h1>{i18n Structural templates}</h1>
 
-<div class="secnav474_nav_x"><a href="boxes_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="structuraltemplates_add.php">{i18n Add new}</a></div>
 <br class="clearb" />
 
 {if count($page_index) > 1}
@@ -91,28 +70,28 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="boxes_select.php?page={$page.id|escape:"url"}&amp;set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="structuraltemplates_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>
 {/if}
-{if !empty($boxes)}
-<table summary="{i18n Available Boxes}">
+{if !empty($structural_templates)}
+<table summary="{i18n Available structural templates}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">Name <span class="az"></span> <span class="za"></span></th>
-<th>Edit</th>
-<th>Delete</th>
+<th class="page">{i18n Name}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
 </tr>
-{foreach from=$boxes item=_box}
+{foreach from=$structural_templates item=_template}
 <tr>
-<td>{$_box.name|escape:"htmlall"}</td>
-<td><a class="edit" href="boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="page"><span>{$_template.name|escape:"htmlall"}</span></td>
+<td><a class="edit" href="structuraltemplates_edit.php?id={$_template.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="structuraltemplates_delete.php?id={$_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
@@ -123,13 +102,13 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="boxes_select.php?page={$page.id|escape:"url"}&amp;set={$request.set|escape:"url"}&amp;type={$request.type|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="structuraltemplates_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>
 {/if}
 {else}
-<p>{i18n No box has been created yet.}</p>
+<p>{i18n No structural template has been created yet}</p>
 {/if}
 
 <!-- content --></div>

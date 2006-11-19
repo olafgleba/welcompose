@@ -168,6 +168,43 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_BLOGPODCAST_USE</name>
+			<description>Allows usage of podcasts.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BLOGPODCAST_MANAGE</name>
+			<description>Allows management of podcasts.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BLOGPODCASTCATEGORY_USE</name>
+			<description>Allows usage of podcast categories.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+				<name>OAK_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_BLOGPODCASTCATEGORY_MANAGE</name>
+			<description>Allows management of podcast categories.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_BLOGPOSTING_USE</name>
 			<description>Allows usage of blog postings.</description>
 			<editable>0</editable>
@@ -312,6 +349,23 @@
 		<right>
 			<name>CONTENT_SIMPLEPAGE_MANAGE</name>
 			<description>Allows management of simple pages.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+				<name>OAK_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_STRUCTURALTEMPLATE_MANAGE</name>
+			<description>Allows management of structural templates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>OAK_ADMIN</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_STRUCTURALTEMPLATE_USE</name>
+			<description>Allows usage of structural templates.</description>
 			<editable>0</editable>
 			<groups>
 				<name>OAK_ADMIN</name>
