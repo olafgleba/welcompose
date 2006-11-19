@@ -44,6 +44,10 @@ $BASE = load('base:base');
 $deregister_globals_path = dirname(__FILE__).'/../../core/includes/deregister_globals.inc.php';
 require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
 
+// admin_navigation
+$admin_navigation_path = dirname(__FILE__).'/../../core/includes/admin_navigation.inc.php';
+require(Base_Compat::fixDirectorySeparator($admin_navigation_path));
+
 try {
 	// start output buffering
 	@ob_start();

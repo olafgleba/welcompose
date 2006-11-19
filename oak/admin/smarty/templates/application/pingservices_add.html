@@ -45,16 +45,7 @@ var response = '{$session.response}';
 <div id="ly1"></div>
 <!-- topnavcon dynamic eof -->
 
-<!-- topsubnavcon static -->
-<div id="topsubnavconstatic">
-<ul id="topsubnav">
-<li><a href="projects_select.php">{i18n Projects}<span></span></a></li>
-<li><a href="pingservices_select.php" class="on">{i18n Ping Services}<span></span></a></li>
-<li><a href="textconverters_select.php">{i18n Text Converters}<span></span></a></li>
-<li><a href="textmacros_select.php">{i18n Text Macros}<span></span></a></li>
-</ul>
-</div>
-<!-- topsubnavcon static eof -->
+{include file="application/_inc_navigation.html"}
 
 <div id="brc"><p>{i18n SETTINGS}: <a href="pingservices_select.php">{i18n Ping Services}</a> &#62; {i18n Add Ping Service}</p></div>
 
