@@ -24,8 +24,8 @@
 
 function oak_admin_navigation_in_area ($link, $file_path)
 {
-	$link_area = preg_replace("=^([a-z]+)_(add|edit|select).php$=", '$1', $link);
-	$current_file_area = preg_replace("=^([a-z]+)_(add|edit|select).php$=", '$1', basename($file_path));
+	$link_area = preg_replace("=^([a-z]+)(.*)=", '$1', $link);
+	$current_file_area = preg_replace("=^([a-z]+)(.*)=", '$1', basename($file_path));
 	
 	if ($link_area == $current_file_area) {
 		return true;
