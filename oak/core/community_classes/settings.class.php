@@ -79,6 +79,11 @@ public function instance()
  */
 public function getSettings ()
 {
+	// access check
+	if (!oak_check_access('Community', 'Settings', 'Use')) {
+		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
+	}
+	
 	// make sure that the settings exist. otherwise initialise
 	// a configuration for the current project.
 	if (!$this->settingsExist()) {
@@ -135,6 +140,11 @@ public function getSettings ()
  */
 public function saveSettings ($settings)
 {
+	// access check
+	if (!oak_check_access('Community', 'Settings', 'Manage')) {
+		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
+	}
+	
 	// input check
 	if (!is_array($settings)) {
 		throw new Community_SettingsException("Input for parameter settings is not an array");
@@ -173,6 +183,11 @@ public function saveSettings ($settings)
  */
 protected function settingsExist ()
 {
+	// access check
+	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
+	}
+	
 	// prepare query
 	$sql = "
 		SELECT
@@ -204,6 +219,11 @@ protected function settingsExist ()
  */
 protected function settingsInit ()
 {
+	// access check
+	if (!oak_check_access('Community', 'Settings', 'Manage')) {
+		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
+	}
+	
 	// make sure that there are no orphaned rows with settings
 	$where = " WHERE `project` = :project ";
 	$bind_params = array('project' => OAK_CURRENT_PROJECT);
