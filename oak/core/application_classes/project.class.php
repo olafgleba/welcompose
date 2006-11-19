@@ -79,12 +79,11 @@ public function instance()
  */
 public function addProject ($sqlData)
 {
-	/*
 	// access check
 	if (!oak_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
-	*/
+	
 	// input check
 	if (!is_array($sqlData)) {
 		throw new Application_ProjectException('Input for parameter sqlData is not an array');	
@@ -106,12 +105,11 @@ public function addProject ($sqlData)
  */
 public function updateProject ($id, $sqlData)
 {
-	/*
 	// access check
 	if (!oak_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
-	*/
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_ProjectException('Input for parameter id is not an array');
@@ -143,12 +141,11 @@ public function updateProject ($id, $sqlData)
  */
 public function deleteProject ($id)
 {
-	/*
 	// access check
 	if (!oak_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
-	*/
+	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
 		throw new Application_ProjectException('Input for parameter id is not numeric');
