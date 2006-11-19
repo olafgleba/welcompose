@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: boxes_delete.php
+ * File: pages_boxes_delete.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -138,7 +138,7 @@ try {
 	}
 
 	// go back to overview page
-	header("Location: boxes_select.php?page=".(int)$page['id']);
+	header("Location: pages_boxes_select.php?page=".(int)$page['id']);
 	exit;
 
 } catch (Exception $e) {

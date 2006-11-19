@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: boxes_delete.php 308 2006-08-08 12:42:23Z andreas $
+ * $Id: pages_boxes_delete.php 308 2006-08-08 12:42:23Z andreas $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf

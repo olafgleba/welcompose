@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: boxes_edit.php
+ * File: pages_boxes_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -223,7 +223,7 @@ try {
 		
 		// display the form
 		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/boxes_edit.html', OAK_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/pages_boxes_edit.html', OAK_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
@@ -300,7 +300,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: boxes_select.php?page=".$FORM->exportValue('page'));
+		header("Location: pages_boxes_select.php?page=".$FORM->exportValue('page'));
 		exit;
 	}
 } catch (Exception $e) {

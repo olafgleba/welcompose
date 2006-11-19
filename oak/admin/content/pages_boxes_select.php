@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: boxes_select.php
+ * File: pages_boxes_select.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -153,7 +153,7 @@ try {
 	
 	// display the page
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/boxes_select.html', OAK_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('content/pages_boxes_select.html', OAK_TEMPLATE_KEY);
 		
 	// flush the buffer
 	@ob_end_flush();
