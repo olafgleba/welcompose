@@ -303,13 +303,25 @@ var definitions = {
 	},
 	'.act_internalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('420','604','globalfiles_links_select','globalfiles_internal_links', this);
+			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
 			return false;
 		}
 	},
 	'.act_setInternalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
 			Helper.insertInternalLinkGlobalFiles(this);
+			return false;
+		}
+	},
+	'.act_internalLinkStructuralTemplates' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkStructuralTemplates' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkStructuralTemplates(this);
 			return false;
 		}
 	},

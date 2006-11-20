@@ -191,6 +191,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'.act_internalLinkStructuralTemplates' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkStructuralTemplates' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkStructuralTemplates(this);
+			return false;
+		}
+	},
 	'.close' : function(el){
 		el.onclick = function(){
 			Helper.closeLinksPopup(this);

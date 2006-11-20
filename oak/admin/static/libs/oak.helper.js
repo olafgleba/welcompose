@@ -150,6 +150,7 @@ Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
+Helper.prototype.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
@@ -193,6 +194,9 @@ function Helper_launchPopup (width, height, nname, trigger, elem)
 			case 'globalfiles_internal_links' :
 					Helper.getDelimiterValue();
 					this.url = this.parseGlobalFilesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + val;
+				break;
+			case 'structuraltemplates_internal_links' :
+					this.url = this.parseStructuralTemplatesLinksUrl + '?target=' + this.elem.name;
 				break;
 		}
 		// properties
@@ -688,6 +692,25 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
  * @requires Helper The Helper Class
  */
 function Helper_insertInternalLinkGlobalFiles(elem)
+{
+	try {
+		// delivered from within smarty assign
+		var target = formTarget;
+		
+		_insertTagsFromPopup(target, elem.id, '', '');
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLinkStructuralTemplates(elem)
 {
 	try {
 		// delivered from within smarty assign

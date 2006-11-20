@@ -1162,11 +1162,17 @@ margin-left: 65px;
 #modalContainer #globalfiles h2 span.close {
 margin-left: 95px;
 }
+
+/* internal links - structural templates */
+#modalContainer #structuraltemplates h2 span.close {
+margin-left: 95px;
+}
 /* eof */
 
 /* internal links - global templates, global files */
 #modalContainer #globalfiles #firstNode table,
-#modalContainer #globaltemplates #firstNode table {
+#modalContainer #globaltemplates #firstNode table,
+#modalContainer #structuraltemplates #firstNode table {
 float: left;
 width: 385px;
 padding: 0;
