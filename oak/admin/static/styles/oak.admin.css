@@ -721,7 +721,7 @@ background: transparent;
 #brc p {
 margin: 5px 0;
 padding: 3px 0 8px 26px;
-background: transparent url(../img/bc_left.gif) 15px 1px no-repeat;
+background: transparent url(../img/bc_left.gif) 15px 3px no-repeat;
 }
 #brc img {
 vertical-align: top;
