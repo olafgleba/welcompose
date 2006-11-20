@@ -716,12 +716,16 @@ border: 1px solid #666666;
 width: 852px;
 margin: 10px 0 20px 0;
 color: #000;
-background: transparent url(../img/bc_right.gif) 100% 5px no-repeat;
+background: transparent;
 }
 #brc p {
 margin: 5px 0;
-padding: 2px 0 8px 8px;
-background: transparent url(../img/bc_left.gif) 2px 0 no-repeat;
+padding: 2px 0 8px 26px;
+background: transparent url(../img/bc_left.gif) 15px 1px no-repeat;
+}
+#brc img {
+vertical-align: top;
+padding-left: 2px;
 }
 
 /* %M =validate */
