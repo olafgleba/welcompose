@@ -109,17 +109,20 @@ try {
 	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
 	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
 
-	
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
 	
-	// get global files
+	// assign template content 
+	if (!empty($_REQUEST['id'])) {
+		$template = $STRUCTURALTEMPLATE->selectStructuralTemplate(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		$BASE->utility->smarty->assign('template', $template);
+	}
+	
+	// get structural templates
 	$structural_templates = $STRUCTURALTEMPLATE->selectStructuralTemplates();
 	$BASE->utility->smarty->assign('structural_templates', $structural_templates);
 	
-	// prepare template key
-	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/structuraltemplates_links_select.html', OAK_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('content/structuraltemplates_links_select.html');
 	
 	// flush the buffer
 	@ob_end_flush();

@@ -796,9 +796,8 @@ function _showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		//Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
-		//$(this).focus();
-		//$('column').focus();
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		$('mm_tags').focus();
 		
 		Helper.applyBehaviour();
 
@@ -1138,6 +1137,9 @@ function _showResponseInvokeInputsMyFlickr(req)
 								
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		//Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
+		//$('mm_flickrtags').focus();
 		
 		Helper.applyBehaviour();	
 

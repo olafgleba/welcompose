@@ -19,7 +19,7 @@
 
 <!-- element (include_types) wrap -->
 <div class="mmwrap">
-<span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElementMyLocal"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_include_types_wrap">
 <label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_img} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
 <label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_doc} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
@@ -33,7 +33,7 @@
 
 <!-- element (tags) wrap -->
 <div class="mmwrap">
-<label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElement"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElementMyLocal"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
 <input class="w200" type="text" id="mm_tags" value="{$request.mm_tags|escape:"htmlall"}" />
 </span>
@@ -43,7 +43,7 @@
 
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
-<label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElement"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElementMyLocal"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_timeframe_wrap">
 <select id="mm_timeframe" name="mm_timeframe">
 <option value="">{i18n Please choose...}</option>
@@ -198,7 +198,7 @@
 {if $_item.page == 1 && $_item.self != $request.mm_start}
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>

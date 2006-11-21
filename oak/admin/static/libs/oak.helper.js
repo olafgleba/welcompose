@@ -647,9 +647,6 @@ function _loaderPagesLinks ()
 function Helper_insertInternalLink(elem)
 {
 	try {
-		// delivered from within smarty assign
-		var ttarget = formTarget;
-		
 		var build;
 		build = '<a href="';
 		build += elem.id;
@@ -659,7 +656,7 @@ function Helper_insertInternalLink(elem)
 		strEnd = '</a>';
 			
 		// alert message(describeLink) is defined in oak.strings.js
-		_insertTagsFromPopup(ttarget, strStart, strEnd, describeLink);
+		_insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
@@ -675,11 +672,7 @@ function Helper_insertInternalLink(elem)
 function Helper_insertInternalLinkGlobalTemplates(elem)
 {
 	try {
-		// delivered from within smarty assign
-		var target = formTarget;
-		
-		_insertTagsFromPopup(target, elem.id, '', '');
-	
+		_insertTagsFromPopup(formTarget, elem.id, '', '');	
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -694,11 +687,7 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 function Helper_insertInternalLinkGlobalFiles(elem)
 {
 	try {
-		// delivered from within smarty assign
-		var target = formTarget;
-		
-		_insertTagsFromPopup(target, elem.id, '', '');
-	
+		_insertTagsFromPopup(formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -713,12 +702,42 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 function Helper_insertInternalLinkStructuralTemplates(elem)
 {
 	try {
-		// delivered from within smarty assign
-		var target = formTarget;
 		
-		_insertTagsFromPopup(target, elem.id, '', '');
+		var url = this.parseStructuralTemplatesLinksUrl;
+		var pars = 'id=' + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : _showResponseStructuralTemplates
+			});
 	
-		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function _showResponseStructuralTemplates(req)
+{
+	try {
+		
+		// filter responseText on html element
+		var extract = req.responseText.match(/(<!--\s+<span id="template_content">)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/gm);
+		
+		// strip the html element, get raw content
+		var raw_content = String(extract).replace(/(.*?)(>)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/, "$3");
+		
+		// set hidden field value
+		_insertTagsFromPopup(formTarget, raw_content, '', '');	
+	
+		Helper.closeLinksPopup();					
 	} catch (e) {
 		_applyError(e);
 	}
