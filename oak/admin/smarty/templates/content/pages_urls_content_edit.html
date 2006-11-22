@@ -46,8 +46,12 @@
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li class="on">{i18n URL Page}</li>
+{if oak_check_access('Content', 'Page', 'Manage')}
+	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+{/if}
+{if oak_check_access('Content', 'Page', 'Manage')}
+	<li class="on">{i18n URL Page}</li>
+{/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->

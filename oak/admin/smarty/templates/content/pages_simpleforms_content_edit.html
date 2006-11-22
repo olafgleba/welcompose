@@ -54,9 +54,15 @@ var pagetype = '{$page.page_type_name}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li class="on">{i18n Simple Form}</li>
-<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+{if oak_check_access('Content', 'Page', 'Manage')}
+	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+{/if}
+{if oak_check_access('Content', 'SimpleForm', 'Manage')}
+	<li class="on">{i18n Simple Form}</li>
+{/if}
+{if oak_check_access('Content', 'Box', 'Manage')}
+	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+{/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
