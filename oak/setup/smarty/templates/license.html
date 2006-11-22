@@ -15,10 +15,9 @@
 <div id="container">
 
 <div id="header"> 
+
 <div id="logo">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<p>Oak Setup</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<p>{i18n Oak Setup}</p>
 <!-- logo --></div>
 
 <div id="topnavcon">
@@ -55,8 +54,8 @@
 
 {$form.hidden}
 
-<fieldset>
-<div style="width: 450px; height: 300px; overflow: auto;">
+
+<div id="licence">
 <h2>Open Software License (&quot;OSL&quot;) v. 3.0</h2>
 
 <p>This Open Software License (the &quot;License&quot;) applies to any
@@ -64,26 +63,26 @@ original work of authorship (the &quot;Original Work&quot;) whose owner (the
 &quot;Licensor&quot;) has placed the following licensing notice adjacent to
 the copyright notice for the Original Work:</p>
 
-<strong>Licensed under the Open Software License version 3.0</strong>
+<p><strong>Licensed under the Open Software License version 3.0</strong></p>
 
-<ol style="list-style: decimal inside;">
+<ol>
 <li><strong>Grant of Copyright License</strong>. Licensor grants You a worldwide,
 royalty-free, non-exclusive, sublicensable license, for the duration of the
 copyright, to do the following:
 
-	<ol style="list-style:lower-latin inside">
-	<li>to reproduce the Original Work in copies, either alone or as part of a
-	collective work;</li>
-	<li>to translate, adapt, alter, transform, modify, or arrange the Original
-	Work, thereby creating derivative works (&quot;Derivative Works&quot;) based
-	upon the Original Work;</li>
-	<li>to distribute or communicate copies of the Original Work and Derivative
-	Works to the public, <span style="text-decoration:underline;">with the proviso
-	that copies of Original Work or Derivative Works that You distribute or
-	communicate shall be licensed under this Open Software License</span>;</li>
-	<li>to perform the Original Work publicly; and</li>
-	<li>to display the Original Work publicly.</li>
-	</ol>
+<ol>
+<li>to reproduce the Original Work in copies, either alone or as part of a
+collective work;</li>
+<li>to translate, adapt, alter, transform, modify, or arrange the Original
+Work, thereby creating derivative works (&quot;Derivative Works&quot;) based
+upon the Original Work;</li>
+<li>to distribute or communicate copies of the Original Work and Derivative
+Works to the public, <span>with the proviso
+that copies of Original Work or Derivative Works that You distribute or
+communicate shall be licensed under this Open Software License</span>;</li>
+<li>to perform the Original Work publicly; and</li>
+<li>to display the Original Work publicly.</li>
+</ol>
 
 </li>
 
@@ -244,18 +243,12 @@ certification process.</li>
 <label class="cont" for="license_confirm_license"><span class="bez">{$form.confirm_license.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.confirm_license.html}</label>
 
-</fieldset>
-
-<div class="submits">
 {$form.submit.html}
-</div>
 
 </fieldset>
 </form>
 
-
 <!-- content --></div>
-
 
 <p class="copyright">Administrator: <a href="mailto:webmaster@nn.de">webmaster@nn.de</a> Copyright 2005 &copy; <a href="http://www.sopic.com/">Sopic GmbH</a></p>
 <!-- container --></div>

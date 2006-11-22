@@ -138,7 +138,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submit140'));
 		
 	// validate it
 	if (!$FORM->validate()) {

@@ -15,10 +15,9 @@
 <div id="container">
 
 <div id="header"> 
+
 <div id="logo">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<p>Oak Setup</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<p>{i18n Oak Setup}</p>
 <!-- logo --></div>
 
 <div id="topnavcon">
@@ -66,8 +65,8 @@ check if your database is new enough.</p>
 
 <table>
 <tr>
-<td>Extension</td>
-<td>Status</td>
+<td class="extension">Extension</td>
+<td class="status">Status</td>
 </tr>
 {foreach from=$extension_statuses key=_extension item=_status}
 <tr>
@@ -85,8 +84,8 @@ check if your database is new enough.</p>
 
 <table>
 <tr>
-<td>Software</td>
-<td>Status</td>
+<td class="software">Software</td>
+<td class="status">Status</td>
 </tr>
 {foreach from=$software_statuses key=_software item=_status}
 <tr>
@@ -100,20 +99,25 @@ check if your database is new enough.</p>
 {/foreach}
 </table>
 
-<dl>
-<dt class="marker_error">Red</dt>
-<dd>Oak won't work</dd>
-<dt class="marker_warning">Orange</dt>
-<dd>Oak may work -- don't blame us for errors</dd>
-<dt class="marker_fine">Green</dt>
-<dd>Everything's fine</dd>
-</dl>
+<table>
+<tr>
+<td class="status_indicator marker_error">Red</td>
+<td class="status_indicator_text">Oak won't work</td>
+</tr>
+<tr>
+<td class="status_indicator marker_warning">Orange</td>
+<td class="status_indicator_text">Oak may work -- don't blame us for errors</td>
+</tr>
+<tr>
+<td class="status_indicator marker_fine">Green</td>
+<td class="status_indicator_text">Everything's fine</td>
+</tr>
+</table>
+
 </fieldset>
 
 {if $error_counter == 0}
-<div class="submits">
-<a href="database.php" class="submitbut140">Go to next step</a>
-</div>
+<a href="database.php" class="submit140">Go to next step</a>
 {/if}
 
 </fieldset>
