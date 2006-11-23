@@ -49,8 +49,8 @@ try {
 	@ob_start();
 	
 	// load smarty
-	$smarty_admin_conf = dirname(__FILE__).'/../../core/conf/smarty_admin.inc.php';
-	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
+	$smarty_update_conf = dirname(__FILE__).'/../smarty.inc.php';
+	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
 	// load gettext
 	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
@@ -68,8 +68,8 @@ try {
 	header("Content-Type: text/javascript");
 	
 	// fetch javascript
-	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_JS))) {
-		preg_match("=^((oak+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
+	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_SETUP_JS))) {
+		preg_match("=^((oak.setup+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
 		$BASE->utility->smarty->display($matches[1], $_SERVER['REQUEST_URI']);
 	}
 	

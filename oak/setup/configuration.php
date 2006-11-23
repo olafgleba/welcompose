@@ -86,7 +86,7 @@ try {
 	
 	// textfield for locale
 	$FORM->addElement('text', 'locale', gettext('Locale'),
-		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('locale', 'trim');
 	$FORM->applyFilter('locale', 'strip_tags');
 	$FORM->addRule('locale', gettext('Please enter a locale to use'), 'required');
@@ -99,7 +99,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submitbut140'));
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

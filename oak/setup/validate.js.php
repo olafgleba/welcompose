@@ -48,8 +48,8 @@ try {
 	@ob_start();
 	
 	// load smarty
-	$smarty_admin_conf = dirname(__FILE__).'/../core/conf/smarty_admin.inc.php';
-	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_admin_conf), true);
+	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
+	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
 	// load gettext
 	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
@@ -59,73 +59,9 @@ try {
 	// map field id names to regexps and error messages 
 	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
-			case 'blog_comment_status_name':
-					$reg = OAK_REGEX_BLOG_COMMENT_STATUS_NAME;
-					$desc = gettext('Only capitalized literal string');
-				break;			
-			case 'group_name':
-					$reg = OAK_REGEX_GROUP_NAME;
-					$desc = gettext('Only capitalized prefixed literal string');
-				break;
-			case 'navigation_name':
-					$reg = OAK_REGEX_NON_EMPTY;
-					$desc = gettext('Field may not be empty');
-				break;
-			case 'page_type_name':
-					$reg = OAK_REGEX_PAGE_TYPE_NAME;
-					$desc = gettext('Only capitalized prefixed literal string');
-				break;
-			case 'page_type_internal_name':
-					$reg = OAK_REGEX_PAGE_TYPE_INTERNAL_NAME;
-					$desc = gettext('Literal string, CamelCase');
-				break;
-			case 'ping_service_configuration_site_url':
-			case 'ping_service_configuration_site_index':
-			case 'ping_service_configuration_site_feed':
-					$reg = OAK_REGEX_URL;
-					$desc = gettext('Full URL with protocol (http:// etc.)');
-				break;
-			case 'ping_service_host':
-					$reg = OAK_REGEX_PING_SERVICE_HOST;
-					$desc = gettext('Alphanumeric with dots and hyphens');
-				break;
-			case 'ping_service_path':
-					$reg = OAK_REGEX_PING_SERVICE_PATH;
-					$desc = gettext('Alphanumeric string with slashes');
-				break;
-			case 'ping_service_port':
-					$reg = OAK_REGEX_NUMERIC;
-					$desc = gettext('Numbers only');
-				break;
-			case 'right_name':
-					$reg = OAK_REGEX_RIGHT_NAME;
-					$desc = gettext('Only capitalized prefixed literal string');
-				break;
-			case 'template_set_name':
-					$reg = OAK_REGEX_TEMPLATE_SET_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
-				break;
-			case 'template_type_name':
-					$reg = OAK_REGEX_TEMPLATE_TYPE_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
-				break;
-			case 'text_converter_internal_name':
-					$reg = OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
-				break;
-			case 'simple_form_email_from':
-			case 'simple_form_email_to':
-			case 'user_email':
-					$reg = OAK_REGEX_EMAIL;
-					$desc = gettext('Invalid e-mail address');
-				break;
-			case 'user_password':
-					$reg = OAK_REGEX_PASSWORD;
-					$desc = gettext('Five characters or more, no whitespace');
-				break;
-			case 'box_name':
-					$reg = OAK_REGEX_NON_EMPTY;
-					$desc = gettext('Field may not be empty');
+			case 'database_database':
+					$reg = OAK_REGEX_ALPHANUMERIC;
+					$desc = gettext('Literal...');
 				break;
 			default :
 				$reg = null;
@@ -136,12 +72,12 @@ try {
 	if (!empty($_POST['elemVal'])) {
 		if (!empty($reg)) {
 			if (Base_Cnc::filterRequest($_POST['elemVal'], $reg)) {
-				print '<img src="../static/img/icons/success.gif" />';
+				print '<img src="static/img/icons/success.gif" />';
 			} else {
-				print '<img src="../static/img/icons/error.gif" /> '.$desc;
+				print '<img src="static/img/icons/error.gif" /> '.$desc;
 			}
 		} else {
-			print '<img src="../static/img/icons/success.gif" />';
+			print '<img src="static/img/icons/success.gif" />';
 		}
 	} else {
 		// print non-breaking space

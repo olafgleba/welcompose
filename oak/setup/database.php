@@ -74,7 +74,7 @@ try {
 	
 	// textfield for database
 	$FORM->addElement('text', 'database', gettext('Database'), 
-		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('database', 'trim');
 	$FORM->applyFilter('database', 'strip_tags');
 	$FORM->addRule('database', gettext('Please enter a database to use'), 'required');
@@ -113,7 +113,7 @@ try {
 	
 	// textfield for port
 	$FORM->addElement('text', 'port', gettext('Port'), 
-		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('port', 'trim');
 	$FORM->applyFilter('port', 'strip_tags');
 	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
@@ -138,7 +138,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submit140'));
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

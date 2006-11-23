@@ -71,7 +71,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submit200'));
+		array('class' => 'submit200nomargin'));
 		
 	// validate it
 	if (!$FORM->validate()) {

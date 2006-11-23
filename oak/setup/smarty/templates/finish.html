@@ -9,16 +9,25 @@
   <meta http-equiv="imagetoolbar" content="no" /> 
   <title>Oak Setup</title>
   <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+
+<script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="parse/parse.js.php?file=oak.setup.strings.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.core.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.helper.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.events.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.validation.js"></script>
+
 </head>
 
 <body>
 <div id="container">
 
 <div id="header"> 
+
 <div id="logo">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
-<p>Oak Setup</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
+<p>{i18n Oak Setup}</p>
 <!-- logo --></div>
 
 <div id="topnavcon">
@@ -39,10 +48,11 @@
 <p>You have successfully completed the setup procedure. Oak is now ready to run.</p>
 
 <p>When you click on the button at the end of the page, you will be redirected to the
-admin interface. Your login credentials:</p>
+admin interface.</p>
 
-<p>Username: default@oak.local<br/>
-Password: default</p>
+<p>Your login credentials:</p>
+<p>Username: <strong>default@oak.local</strong><br/>
+Password: <strong>default</strong></p>
 
 <p>Please change your login credentials as soon as possible.<p>
 
@@ -51,8 +61,8 @@ work, a warning will appear in the admin area that will advise you to do it by h
 
 <p>Thank you for choosing Oak.</p>
 
-<div class="submits">
-<a href="cleanup.php" class="submitbut140">Go to admin area</a>
+<div class="linkconfinish">
+<a href="cleanup.php" class="submit200finish">Go to admin area</a>
 </div>
 
 <!-- content --></div>

@@ -9,6 +9,16 @@
   <meta http-equiv="imagetoolbar" content="no" /> 
   <title>Oak Setup</title>
   <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+
+<script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="parse/parse.js.php?file=oak.setup.strings.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.core.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.helper.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.events.js"></script>
+<script type="text/javascript" src="static/libs/oak.setup.validation.js"></script>
+
 </head>
 
 <body>
@@ -39,7 +49,7 @@
 please consult the install manual how to fix it. There are instructions how to tell you webspace
 provier about it too.</p>
 
-<p>Attention: Please not that we're only checking the capabilities of php here. This test does not
+<p><strong>Attention</strong>: Please not that we're only checking the capabilities of php here. This test does not
 check if your database is new enough.</p> 
 
 {if !empty($form.errors)}
@@ -59,10 +69,7 @@ check if your database is new enough.</p>
 
 {$form.hidden}
 
-<fieldset>
-
 <h2>Checking for available extensions</h2>
-
 <table>
 <tr>
 <td class="extension">Extension</td>
@@ -81,7 +88,6 @@ check if your database is new enough.</p>
 </table>
 
 <h2>Checking for up-to-date versions</h2>
-
 <table>
 <tr>
 <td class="software">Software</td>
@@ -114,10 +120,10 @@ check if your database is new enough.</p>
 </tr>
 </table>
 
-</fieldset>
-
 {if $error_counter == 0}
-<a href="database.php" class="submit140">Go to next step</a>
+<div class="linkcon">
+<a href="database.php" class="submit200">Go to next step</a>
+</div>
 {/if}
 
 </fieldset>
