@@ -124,6 +124,13 @@ try {
 	file_put_contents($config_path, $BASE->utility->smarty->fetch('sys.inc.txt'));
 	
 	/**
+	 * reload configuration
+	 */
+	
+	$BASE->reloadConfiguration();
+	$BASE->reconfigureLocales();
+	
+	/**
 	 * create database
 	 */
 	
