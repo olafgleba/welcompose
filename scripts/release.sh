@@ -25,8 +25,8 @@ cd oak-trunk
 # move database schema to setup directory
 cp database/oak.sql oak/setup/oak.sql
 
-# empty sys.inc.php
-echo "" > oak/core/conf/sys.inc.php
+# replace sys.inc.php with sys.inc.php-dist
+mv oak/core/conf/sys.inc.php-dist oak/core/conf/sys.inc.php
 
 # remove database & doc directory
 rm -rf database
