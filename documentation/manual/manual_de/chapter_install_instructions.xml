@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="install_instructions">
+	<title>Installation</title>
+	
+	<sect1 id="install_instructions.requirements">
+		<title>Voraussetzungen</title>
+		
+		<para>
+			Um Oak erfolgreich in Betrieb nehmen zu können, werden folgende
+			Komponenten benötigt:
+		</para>
+		
+		<itemizedlist>
+			<listitem>
+				<para>
+					Unixoides Betriebssystem (Linux, BSD, MacOS X), ggf. Windows
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Webserver mit PHP-Unterstützung (Apache, Lighttpd,
+					Cherokee etc.)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					PHP 5.0.3 oder höher (PHP 5.1.3 oder höher
+					empfohlen)
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					MySQL 4.1.7 oder höher (MySQL 5.0.15 oder höher
+					empfohlen)
+				</para>
+			</listitem>
+		</itemizedlist>
+
+		<para>
+			PHP muss zudem mit folgenden Erweiterungen (Extensions)
+			ausgestattet sein:
+		</para>
+
+		<itemizedlist>
+			<listitem>
+				<para>dom</para>
+			</listitem>
+			<listitem>
+				<para>gd</para>
+			</listitem>
+			<listitem>
+				<para>gettext</para>
+			</listitem>
+			<listitem>
+				<para>pcre</para>
+			</listitem>
+			<listitem>
+				<para>pdo</para>
+			</listitem>
+			<listitem>
+				<para>pdo_mysql</para>
+			</listitem>
+			<listitem>
+				<para>session</para>
+			</listitem>
+			<listitem>
+				<para>simplexml</para>
+			</listitem>
+			<listitem>
+				<para>xml</para>
+			</listitem>
+		</itemizedlist>
+
+		<para>
+			Bei der Benutzung von PHP früher als Version 5.1.3 muss eine
+			aktuelle Version von PDO (1.0.3 oder höher) respektive PDO
+			MySQL (1.0.2 oder höher) installiert sein. Sind Sie nicht
+			sicher, ob der Zielserver über die nötigen Voraussetzungen
+			verfügt, führen Sie das Setup-Programm von Oak aus. In
+			Schritt 2 und 3 wird Oak die aktuelle Serverkonfiguration
+			ermitteln und Ihnen sagen können, ob die Voraussetzungen
+			erfüllt werden. Sollte dem nicht der Fall sein, wird
+			gleichzeitig darauf hingewiesen, welche Versionen
+			installiert sein müssen, um die optimale Funktionsfähigkeit
+			von Oak zu garantieren. Sollte eine oder mehrere
+			Erweiterungen nicht vorhanden oder zu alt sein, können diese
+			mit Hilfe des PECL Installers (Linux, BSD, MacOS X)
+			nachgeladen oder im Fall von Windows von der PHP-Webseite
+			als vorkompilierte DLLs bezogen werden.
+		</para>
+		
+		<tip>
+		<para>
+			Wenn Sie wissen wollen, welche PHP-Version und welche
+			Erweiterungen installiert sind, können Sie auch mit dem
+			PHP-Befehl <function>phpinfo();</function> die <link
+			linkend="good_to_know.phpinfo">Server-Konfiguration
+			auslesen</link>.
+		</para>
+		</tip>
+		
+		<para>Externe Ressourcen:</para>
+		
+		<itemizedlist>
+			<listitem>
+				<para>
+					<ulink type="external" url="http://pecl.php.net/">Verzeichnis
+					von PHP-Erweiterungen</ulink>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<ulink type="external"
+					url="http://www.php.net/manual/en/install.pecl.php">Installation
+					von PECL-Erweiterungen</ulink>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<ulink type="external"
+					url="http://pecl4win.php.net/">Vorkompilierte PHP-Erweiterungen
+					für Windows</ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
+		
+		<para>
+			Wenn Sie Oak auf einem Shared Hosting Account installieren
+			wollen und nicht alle Voraussetzungen erfüllt sind, wenden
+			Sie sich bitte an den Support Ihres Providers und verweisen
+			Sie auf diese Seite. Die meisten Webhoster rüsten die
+			benötigten Funktionen gerne nach.
+		</para>
+	</sect1>
+	
+	<sect1 id="install_instructions.install_oak">
+		<title>Oak installieren</title>
+		
+		<sect2 id="install_instructions.installation.install_type">
+			<title>Installations-Art wählen</title>
+			
+			<para>
+				Oak kann auf verschiedene Arten installiert werden, die
+				sich jeweils im Schwierigkeitsgrad unterscheiden. Im
+				Moment stehen zwei Möglichkeiten zur Verfügung: Die
+				Nutzung des Package Installers oder die manuelle
+				Installation.
+			</para>
+			<para>
+				Für alle Anwender wird die Verwendung des Package
+				Installers empfohlen. Dabei muss nur eine Datei auf den
+				Server kopiert und die Schreibrechte eines einzigen
+				Ordners verändert werden. Um den Rest kümmert sich der
+				Package Installer, der die restlichen Dateien auf den
+				Server kopiert und die Schreibrechte anpasst, bevor der
+				Konfigurationsassistent gestartet wird.
+			</para>
+			
+			<para>
+				Die manuelle Installation sollte nur dann zum Einsatz
+				kommen, wenn Probleme mit dem Package Installer
+				auftreten. Bei der manuellen Installation müssen im
+				Gegensatz zum Package Installer alle Dateien von Hand
+				auf den Zielserver kopiert und die Schreibrechte
+				ebenfalls manuell angepasst werden. Nachher kann
+				allerdings wie beim Package Installer der
+				Konfigurations-Assistent zur Einrichtung von Oak
+				verwendet werden.
+			</para>
+		</sect2>
+		
+		<sect2 id="install_instructions.installation.package_installer">
+			<title>Package Installer</title>
+			
+			<para>
+				Der Package Installer ist vergleichbar mit einem
+				selbstextrahierenden Zip-Archiv, wie man es
+				beispielsweise von WinZip her kennt. Es handelt sich um
+				eine einzige PHP-Datei, in der die einzelnen Dateien von
+				Oak, sowohl Programmcode als auch Bilder, in einer
+				codierten Form vorliegen. Diese werden beim Aufruf des
+				Package Installers in einen vom Anwender definierten
+				Ordner entpackt.
+			</para>
+			
+			<para>
+				Der Package Installer ist in zwei verschiedenen
+				Varianten erhältlich. Bei der einen Version sind die im
+				Paket enthaltenen Dateien komprimiert und benötigen PHPs
+				zlib-Erweiterung, um entpackt werden zu können. Dadurch
+				ist die Dateigrösse des Installer Package kleiner. Die
+				zlib-Erweiterung ist auf den meisten Servern vorhanden,
+				sodass die Verwendung des komprimierten Package
+				Installer in der Regel die richtige Wahl ist. Die andere Version
+				ist unkomprimiert und kann auf allen Servern verwendet werden,
+				die die nötigen Voraussetzungen für Oak erfüllen.
+			</para>
+			
+			<para>
+				In der Verwendung unterscheiden sich die beiden
+				Package-Installer-Varianten dagegen nicht.
+			</para>
+			
+			<tip>
+				<para>
+					Wenn Sie nicht sicher sind, ob die zlib-Erweiterung
+					auf Ihrem Webserver vorhanden ist, können Sie mit
+					dem PHP-Befehl <function>phpinfo()</function>
+					die <link linkend="good_to_know.phpinfo">Server-Konfiguration
+					auslesen</link>. Suchen Sie in der Ausgabe von
+					<function>phpinfo()</function> nach dem Abschnitt
+					<package>zlib</package>. Ist dieser vorhanden, können Sie
+					die komprimierte Version des Package Installer verwenden.
+				</para>
+			</tip>
+			
+			<sect3 id="install_instructions.installation.package_installer.copy_to_server">
+				<title>Package Installer auf den Server verschieben</title>
+				
+				<para>
+					Nachdem Sie die Oak-Distribution vom Download-Server
+					heruntergeladen haben, müssen Sie sie mit dem jeweiligen
+					Kompressionsprogramm entpacken.
+				</para>
+				
+				<warning>
+					<para>
+						Verwenden Sie als Windows-Anwender nur die Zip-Archive.
+						Entpackungsprogramme wie WinZip verursachen in einigen
+						älteren Versionen Probleme mit den Unix-Tarballs, die
+						ebenfalls zum Download angeboten werden
+						(<filename>*.tar.gz</filename> und
+						<filename>*.tar.bz2</filename>).
+					</para>
+				</warning>
+				
+				<tip>
+					<para>
+						Verfügen Sie als Windows-Anwender über kein
+						passendes Kompressionsprogramm, ist das freie
+						Programm <ulink url="http://www.7-zip.org/">7-Zip</ulink>
+						eine gute Wahl.
+					</para>
+				</tip>
+				
+				<para>
+					Nach dem Entpacken finden Sie einen Ordner mit dem Namen
+					<filename>oak</filename> auf der Festplatte.
+					Dort drin sind die beiden verschiedenen Installer Packages
+					enthalten. Die Datei <filename>installer-zlib.php</filename>
+					ist der komprimierte Package Installer, die Datei
+					<filename>installer.php</filename> ist der unkomprimierte
+					Package Installer. Verwenden Sie nun ein FTP-Programm
+					(oder eine ähnliche Software), um den gewünschten Installer
+					auf Ihren Webserver zu verschieben.
+				</para>	
+				
+				<tip>
+					<para>
+						Für alle Anwender, die kein Programm zur Hand
+						haben, um das Installer Package auf den Webserver zu
+						übertragen, hält der Anhang eine <link
+						linkend="good_to_know.ftp_clients">Liste mit passenden 
+						Programmen für Windows und Mac bereit</link>.
+					</para>
+				</tip>
+				
+				<para>
+					Nun muss noch das Verzeichnis vorbereitet werden, in das Oak
+					installiert werden soll. Legen Sie dazu mit dem FTP-Programm
+					(oder einer ähnlichen Software) ein Verzeichnis auf dem
+					Webserver an, sofern Sie nicht ein bereits vorhandenes
+					Verzeichnis verwenden wollen.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="install_instructions.installation.package_installer.chmod">
+				<title>Schreibrechte anpassen</title>
+				
+				<note>
+					<para>
+						Wenn Sie Oak auf einem Windows-<emphasis>Server</emphasis>
+						einsetzen, können Sie diesen Abschnitt überspringen.
+					</para>
+				</note>
+				
+				<para>
+					Damit der Package Installer (und damit der Webserver) die
+					Dateien auf dem Server extrahieren kann, müssen die
+					Schreibrechte des Installationsordners angepasst werden.
+					Um die Schreibrechte des Installationsordners zu verändern,
+					reicht bei den meisten Dateitransferprogrammen ein
+					Rechtsklick auf den jeweiligen Ordner. Der Dialog um
+					die Schreibrechte zu verändern, verbirgt sich meist
+					hinter einem Kontekt-Menüeintrag wie
+					<guimenuitem>Information</guimenuitem>,
+					<guimenuitem>Eigenschaften</guimenuitem> oder 
+					<guimenuitem>chmod</guimenuitem>.					
+				</para>
+				
+				<para>
+					Welche Schreibrechte genau gesetzt werden müssen, kann von 
+					Server zu Server relativ stark variieren. Auf der sicheren
+					Seite sind Sie, wenn Sie alle verfügbaren Rechte an den
+					Ordner vergeben. Bei den meisten Datentransferprogrammen
+					erfolgt dies, indem Sie Checkboxen anklicken &ndash; und
+					zwar alle (siehe
+					<xref linkend="install_instructions.installation.package_installer.chmod.chmod_sample"/>).
+					Ist die Eingabe eines oktalen Werts (Zahl) möglich, müssen
+					Sie entweder 777 angeben (wenn nur drei Ziffern akzeptiert
+					werden) respektive 0777 (wenn vier Ziffern akzeptiert
+					werden).
+				</para>
+				
+				<figure id="install_instructions.installation.package_installer.chmod.chmod_sample">
+					<title>Schreibrechte verändern</title>
+					<graphic fileref="images/install_instructions.installation.package_installer.chmod.chmod_sample.png"/>
+				</figure>
+				
+				<para>
+					Ist es nicht möglich, die Schreibrechte des
+					Installationsordners von Oak zu verändern, weil Sie
+					beispielsweise nicht über die nötigen Rechte verfügen,
+					müssen Sie die <link
+					linkend="install_instructions.installation.manual_installation">manuelle
+					Installation verwenden</link>.
+				</para>
+			</sect3>
+			
+			<sect3 id="install_instructions.installation.package_installer.execute">
+				<title>Package Installer ausführen</title>
+				
+				<para>
+					Rufen Sie nun den Package Installer mit dem Webbrowser auf,
+					indem Sie die Adresse zur 
+					<filename>installer-zlib.php</filename> (für den
+					komprimierten Installer) oder zur
+					<filename>installer.php</filename> (für den unkomprimierten
+					Installer) in die Adresszeile Ihres Browsers eingeben. Es
+					sollte nun ein Formular mit der Überschrift
+					<emphasis>Package Installation</emphasis> erscheinen.
+				</para>
+				
+				<para>
+					Sehen Sie statt eines Formulars eine Meldung wie
+					<computeroutput>This a compressed install package, but the
+					zlib extension is not installed. Please download a 
+					uncompressed install package.</computeroutput>, dann verfügt
+					Ihr Webserver nicht über die zlib-Erweiterung und kann das
+					Installer Package nicht lesen. Entfernen Sie die
+					<filename>installer-zlib.php</filename> und ersetzen Sie sie
+					durch die Datei <filename>installer.php</filename>, bevor
+					Sie den Package Installer wieder aufrufen. Sie verwenden
+					dann den unkomprimierten Package Installer.
+				</para>
+				
+				<figure id="install_instructions.installation.package_installer.execute.sample">
+					<title>Oak Package Installer</title>
+					<graphic fileref="images/install_instructions.installation.package_installer.execute.sample.png"/>
+				</figure>
+				
+				<para>
+					Das Formular des Package Installer ist in zwei Abschnitte
+					aufgeteilt. Einmal in <emphasis>Path setup</emphasis> und
+					einmal in <emphasis>Expert options</emphasis>.
+				</para>
+				
+				<para>
+					Beim <emphasis>Path setup</emphasis> geht es darum, den
+					Installationsordner, in den die Oak-Dateien kopiert werden
+					sollen, im Feld <guilabel>Install directory</guilabel>
+					anzugeben. Die Eingabe wird dabei vom Installer
+					Package aus interpretiert. Wollen Sie Oak in den Ordner
+					<medialabel>cms</medialabel> installieren, der sich
+					unterhalb des Installer Package befindet, müssen Sie
+					<userinput>/cms</userinput> als Pfad eingeben. Möchten Sie
+					dagegen Oak in demselben Ordner wie das Installer Package
+					installieren, ist <userinput>/</userinput> die richtige
+					Eingabe.
+				</para>
+				
+				<warning>
+					<para>Benutzen Sie beim <emphasis>Path setup</emphasis> nur
+						<foreignphrase>Forward Slashes</foreignphrase> (also
+						<userinput>/</userinput>), um Verzeichnisse zu separieren,
+						selbst wenn Sie sich auf Windows befinden. Verwenden
+						Sie keine <foreignphrase>Backslashes</foreignphrase>
+						(also <userinput>\</userinput>) wie bei Windows üblich!
+					</para>
+				</warning>
+				
+				<para>
+					Im Rahmen der <emphasis>Expert options</emphasis> kann
+					beeinflusst werden, mit welchen Rechten der Package Installer
+					die Dateien auf dem Webserver ablegt. Wenn Sie nicht
+					genau wissen, was Sie tun, sollten Sie die Voreinstellungen
+					belassen und zum nächsten Schritt übergehen, indem Sie
+					auf <guibutton>Go to next step</guibutton> klicken! Der
+					Package Installer entpackt dann alle Dateien und leitet
+					Sie dann zum <link
+					linkend="install_instructions.configure_oak">Setup
+					weiter</link>.
+				</para>
+				
+				<para>
+					Der Package Installer unterscheidet zwischen zwei
+					Typen von Dateien respektive Verzeichnissen:
+					beschreibbaren und nicht beschreibbaren.
+					Beschreibbare Dateien respektive Verzeichnisse
+					müssen nach der Extraktion der Dateien für den
+					Webserver beschreibbar bleiben, damit beispielsweise
+					Bilder auf dem Webserver abgelegt werden können.
+					Alle anderen Dateien und Verzeichnisse müssen nur
+					lesbar sein. Dies muss beachtet werden, wenn Sie die
+					Rechte anpassen, mit denen die Dateien auf dem
+					Webserver abgelegt werden sollen.
+				</para>
+
+				<para>
+					Weiter müssen Sie darauf aufpassen, dass Sie sich
+					nicht selber den Zugriff auf die Dateien respektive
+					Verzeichnisse verwehren. Dies kann passieren, wenn
+					Sie die Rechte beispielsweise so definieren, dass
+					nur der Webserver, aber keine anderen Benutzer die
+					Dateien oder Verzeichnisse lesen darf, und der
+					Webserver die Dateien nicht mit dem Benutzer
+					respektive der Gruppe Ihres Benutzer-Accounts
+					anlegt.
+				</para>
+				
+				<para>
+					Die Rechte für die nicht beschreibbaren Dateien respektive
+					Verzeichnisse werden über die beiden Felder
+					<guilabel>Default file mask</guilabel> (für Dateien)
+					respektive <guilabel>Default directory mask</guilabel>
+					(für Verzeichnisse) gesteuert. Die Rechte für die
+					beschreibbaren Dateien über die Felder
+					<guilabel>Writable file mask</guilabel> (für Dateien)
+					respektive <guilabel>Writable directory mask</guilabel>
+					(für Verzeichnisse) geregelt. Achten Sie darauf, einen
+					oktalen chmod-Wert mit führender Null anzugeben (z.B.
+					<userinput>0777</userinput>).
+				</para>
+				
+				<para>
+					Nachdem Sie Rechte angepasst haben, können Sie auf 
+					<guibutton>Go to next step</guibutton> klicken! Der
+					Package Installer entpackt dann alle Dateien und leitet
+					Sie zum <link
+					linkend="install_instructions.configure_oak">Setup
+					weiter</link>.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="install_instructions.installation.manual_installation">
+			<title/>
+			<para/>
+		</sect2>
+	</sect1>
+	
+	<sect1 id="install_instructions.configure_oak">
+		<title/>
+		<para/>
+	</sect1>
+</chapter>

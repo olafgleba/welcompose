@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="good_to_know">
+	<title>Gut zu wissen...</title>
+	
+	<sect1 id="good_to_know.phpinfo">
+		<title>PHP-Konfiguration auslesen</title>
+		<para>
+			Um die PHP-Konfiguration eines Servers auszulesen, muss eine
+			leere Textdatei angelegt werden. Diese kann beispielsweise
+			<filename>server-info.php</filename>
+			genannt werden. Kopieren Sie dann folgenden Code in die
+			Datei:
+		</para>
+		
+		<programlisting language="php">
+			<![CDATA[<?php phpinfo(); ?>]]>
+		</programlisting>
+		
+		<para>
+			Speichern Sie nun die Datei auf Ihrem Server und rufen Sie
+			sie mit dem Webbrowser auf. Es werden Ihnen nun sämtliche
+			Konfigurationseinstellungen und aktivierte Erweiterungen
+			angezeigt.
+		</para>
+		
+		<warning>
+			<para>
+				Vergessen Sie nicht, die Datei
+				<filename>server-info.php</filename>
+				nach Gebrauch wieder vom Server zu entfernen.
+			</para>
+		</warning>
+	</sect1>
+	
+	<sect1 id="good_to_know.ftp_clients">
+		<title>FTP-Programme für Windows und Mac</title>
+		
+		<para>
+			Benötigen Sie ein FTP-Programm, ist beispielsweise
+			<ulink url="http://filezilla.sourceforge.net/">FileZilla</ulink>
+			eine gute Wahl. Für Mac bietet sich die Nutzung von
+			<ulink url="http://cyberduck.ch/">Cyberduck</ulink> an. Beide
+			Programme sind frei verfügbar und in verschiedenen Sprachen
+			erhältlich. Cyberduck ermöglicht auch Verbindungen über SSH
+			(SFTP respektive SCP). Benötigen Sie so einen Client für Windows,
+			ist <ulink url="http://winscp.net/">WinSCP</ulink> eine gute Wahl.
+		</para>
+	</sect1>
+</appendix>
