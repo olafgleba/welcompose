@@ -74,6 +74,7 @@ try {
 			$full_path = $dir->path.DIRECTORY_SEPARATOR.$file;
 			if (is_dir($full_path)) {
 				setup_rm_rf($full_path);
+				@rmdir($full_path);
 			} else {
 				@unlink($full_path);
 			}
@@ -81,6 +82,7 @@ try {
 		$dir->close();
 	}
 	setup_rm_rf(dirname(__FILE__));
+	@rmdir($full_path);
 	
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {
