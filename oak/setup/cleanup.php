@@ -82,7 +82,7 @@ try {
 		$dir->close();
 	}
 	setup_rm_rf(dirname(__FILE__));
-	@rmdir($full_path);
+	@rmdir(dirname(__FILE__));
 	
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {
