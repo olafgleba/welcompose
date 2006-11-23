@@ -417,10 +417,10 @@ installation.</p>
 <h2>Expert options</h2>
 <p>Leave alone if you don't know what to insert here.</p>
 <label class="cont" for="default_file_mask"><span class="bez280">Default file mask</span> 
-<input class="w300" type="text" name="default_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_file_mask']))) : "0644"); ?>" /></label>
+<input class="w300" type="text" name="default_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_file_mask']))) : "0666"); ?>" /></label>
 
 <label class="cont" for="default_directory_mask"><span class="bez280">Default directory mask</span> 
-<input class="w300" type="text" name="default_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_directory_mask']))) : "0755"); ?>" /></label>
+<input class="w300" type="text" name="default_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_directory_mask']))) : "0777"); ?>" /></label>
 
 <label class="cont" for="writable_file_mask"><span class="bez280">Writable file mask</span> 
 <input class="w300" type="text" name="writable_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['writable_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['writable_file_mask']))) : "0666"); ?>" /></label>
