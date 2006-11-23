@@ -57,14 +57,6 @@ try {
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
 	
-	// start Application_Project
-	/* @var $PROJECT Application_Project */
-	$PROJECT = load('Application:Project');
-	
-	// start Utility_Helper
-	/* @var $HELPER Utility_Helper */
-	$HELPER = load('Utility:Helper');
-	
 	// let's see if the user passed step one
 	if (empty($_SESSION['setup']['license_confirm_license']) || !$_SESSION['setup']['license_confirm_license']) {
 		header("Location: license.php");
@@ -134,6 +126,14 @@ try {
 	/**
 	 * create database
 	 */
+	
+	// start Application_Project
+	/* @var $PROJECT Application_Project */
+	$PROJECT = load('Application:Project');
+
+	// start Utility_Helper
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('Utility:Helper');
 	
 	// establish database connection
 	$BASE->loadClass('database');
