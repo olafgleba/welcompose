@@ -4,9 +4,9 @@ FOP=@FOP@
 TAR=@TAR@
 SED=@SED@
 
-all: html-chunk pdf
+all: html-single-page html-chunk pdf
 
-clean: clean-pdf clean-html-chunk
+clean: clean-pdf clean-html-chunk clean-html-single-page
 
 pdf: prepare-docbook-xsl check
 	$(XSLTPROC) --xinclude --output pdf/manual.fo ../docbook.d/fo.xsl manual.xml
@@ -14,7 +14,14 @@ pdf: prepare-docbook-xsl check
 
 html-chunk: prepare-docbook-xsl check
 	$(XSLTPROC) --xinclude --output output/html-chunk/index.html ../docbook.d/html-chunk.xsl manual.xml
-
+	-rm -rf output/html-chunk/images
+	cp -R images output/html-chunk
+	
+html-single-page: prepare-docbook-xsl check
+	$(XSLTPROC) --xinclude --output output/html-single-page/index.html ../docbook.d/html-single-page.xsl manual.xml
+	-rm -rf output/html-single-page/images
+	cp -R images output/html-single-page
+	
 check: prepare-docbook-xsl
 	$(XMLLINT) --xinclude --noout --postvalid --noent manual.xml
 
@@ -27,3 +34,6 @@ clean-pdf:
 
 clean-html-chunk:
 	-rm -rf output/html-chunk
+
+clean-html-single-page:
+	-rm -rf output/html-single-page
