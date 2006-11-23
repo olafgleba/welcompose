@@ -821,7 +821,7 @@ function Help_processHelp (ttarget)
 				Element.hide(ttarget_after);
 				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
 			} else {
-	  			throw new Errors(_req.statusText);
+	  			//throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {

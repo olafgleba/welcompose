@@ -94,6 +94,7 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.showDependingFormfield = Helper_showDependingFormfield;
 
 
 /**
@@ -304,6 +305,26 @@ function Helper_getDataParentNode (elem, level)
 	}
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
 }
+
+
+function Helper_showDependingFormfield (elem)
+{
+	var f;
+		
+	// get status value
+	f = elem.options[elem.selectedIndex].value;
+	
+	if (f == 'socket') {	
+		$('_host').style.display = 'none';
+		$('_port').style.display = 'none';
+		$('_socket').style.display = 'block';
+	} else {
+		$('_host').style.display = 'block';
+		$('_port').style.display = 'block';
+		$('_socket').style.display = 'none';
+	}
+}
+
 
 /**
  * Building new object instance of class Helper

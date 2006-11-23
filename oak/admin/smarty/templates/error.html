@@ -1,7 +1,71 @@
-<p>{i18n An error occured on file} {$file} {i18n at line} {$line}</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<p>{i18n with the following message}: {$message}</p>
-<p>{i18n Errorcode is}: {$code}<br />
-{i18n Trace}:<br />
-{$trace_string|nl2br}
-</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Oak Admin &ndash; Navigations}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
+<script type="text/javascript" src="../static/libs/oak.core.js"></script>
+<script type="text/javascript" src="../static/libs/oak.helper.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.small.js"></script>
+<script type="text/javascript" src="../static/libs/oak.validation.js"></script>
+
+</head>
+
+<body id="errormsg">
+<div id="container">
+
+<div id="logo">
+<p>{i18n Oak}</p>
+<!-- logo --></div>
+
+<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+
+<div id="main">
+<div id="content">
+
+<h1>{i18n An error occured}!</h1>
+
+<table>
+<tr>
+<td class="msglabel">{i18n In file}:</td>
+<td class="msgcontent">{$file}</td>
+</tr>
+<tr>
+<td class="msglabel">{i18n At line}:</td>
+<td class="msgcontent">{$line}</td>
+</tr>
+<tr>
+<td class="msglabel">{i18n With message}:</td>
+<td class="msgcontent"><strong>{$message}</strong></td>
+</tr>
+<tr>
+<td class="msglabel">{i18n Errorcode}:</td>
+<td class="msgcontent">{$code}</td>
+</tr>
+<tr>
+<td class="msglabel">{i18n Trace}:</td>
+<td class="msgcontent">{$trace_string|nl2br}</td>
+</tr>
+</table>
+
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

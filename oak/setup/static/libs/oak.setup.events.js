@@ -36,6 +36,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'#database_connection_method' : function(el){
+		el.onchange = function(){
+			Helper.showDependingFormfield(this);
+			return false;
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {

@@ -448,6 +448,10 @@ text-decoration: none;
 vertical-align: middle;
 }
 
+#_socket {
+display: none;
+}
+
 
 /* CLEARFIX */
 .clearfix:after {
