@@ -431,6 +431,18 @@ padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 
+/* error.html */
+body#errormsg h2 {
+position: relative;
+font-size: 1.0em;
+font-weight: normal;
+color: #000;
+margin: 30px 0 15px 22px;
+}
+body#errormsg h2 span {
+color: #0c3;
+font-weight: bold;
+}
 
 /* HELP */
 #content p.help {
