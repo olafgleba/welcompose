@@ -75,7 +75,7 @@ class Setup_PackageExtractor {
 	 * @param array
 	 */
 	protected $_writable_files = array(
-		
+		'/core/conf/sys.inc.php'
 	);
 	
 	/**
