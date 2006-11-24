@@ -738,8 +738,8 @@
 			<warning>
 				<para>
 					Bitte bachten Sie, dass bei diesem Schritt nur die
-					Fähigkeiten von PHP und nicht des Datenbank-Servers
-					geprüft werden, weil dies zu diesem Zeitpunkt noch
+					Fähigkeiten von PHP und nicht diejenigen des Datenbank-Servers
+					geprüft werden, weil letzteres zu diesem Zeitpunkt noch
 					nicht möglich ist. Das heisst, dass das Setup Sie zum
 					nächsten Schritt übergehen lässt, selbst wenn der
 					Datenbank-Server nicht für den Betrieb mit Oak
