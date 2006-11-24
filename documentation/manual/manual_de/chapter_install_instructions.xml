@@ -459,7 +459,158 @@
 		<sect2 id="install_instructions.installation.manual_installation">
 			<title>Manuelle Installation</title>
 			
-			<para/>
+			<sect3 id="install_instructions.installation.manual_installation.copy_to_server">
+				<title>Dateien auf den Server verschieben</title>
+				
+				<para>
+					Bei der manuellen Installation müssen im Gegensatz zum Package
+					Installer die Programm-Dateien von Oak manuell auf den Webserver
+					übertragen und auch die Schreibrechte von Hand vergeben werden.
+					Für die manuelle Installation benötigen Sie eine
+					Oak-Distribution mit dem Kürzel <filename>-src</filename> im
+					Namen, beispielsweise <filename>oak-1.2.3-src.tar.gz</filename>.
+					Nachdem Sie die Datei heruntergeladen haben, muss sie entpackt
+					werden.
+				</para>
+				
+				<warning>
+					<para>
+						Verwenden Sie als Windows-Anwender nur die Zip-Archive.
+						Entpackungsprogramme wie WinZip verursachen in einigen
+						älteren Versionen Probleme mit den Unix-Tarballs, die
+						ebenfalls zum Download angeboten werden
+						(<filename>*.tar.gz</filename> und
+						<filename>*.tar.bz2</filename>).
+					</para>
+				</warning>
+				
+				<tip>
+					<para>
+						Verfügen Sie als Windows-Anwender über kein
+						passendes Kompressionsprogramm, ist das freie
+						Programm <ulink url="http://www.7-zip.org/">7-Zip</ulink>
+						eine gute Wahl.
+					</para>
+				</tip>
+				
+				<para>
+					Verwenden Sie nun ein Dateitransfer-Programm, um die
+					Dateien von Oak auf den Webserver zu transferieren.
+					Verschieben Sie die Dateien in das von Ihnen gewünschte
+					Installationsverzeichnis. Sofern dieses noch nicht
+					existiert, legen Sie es vorher an.
+				</para>
+				
+				<tip>
+					<para>
+						Für alle Anwender, die kein Programm zur Hand
+						haben, um das Installer Package auf den Webserver zu
+						übertragen, hält der Anhang eine <link
+						linkend="good_to_know.ftp_clients">Liste mit passenden 
+						Programmen für Windows und Mac bereit</link>.
+					</para>
+				</tip>
+				
+				<figure id="install_instructions.installation.manual_installation.copy_to_server.transfer">
+					<title>Oak-Dateien auf Server transferieren</title>
+					<graphic fileref="images/install_instructions.installation.manual_installation.copy_to_server.transfer.png"/>
+				</figure>
+			</sect3>
+			
+			<sect3 id="install_instructions.installation.manual_installation.chmod">
+				<title>Schreibrechte anpassen</title>
+				
+				<para>
+					Damit Oak Dateien wie Bilder auf dem Server ablegen kann,
+					müssen die Schreibrechte diverser Verzeichnisse und
+					Dateien angepasst werden. Um die Schreibrechte zu verändern,
+					reicht bei den meisten Dateitransferprogrammen ein
+					Rechtsklick auf den jeweiligen Ordner respektive Datei.
+					Der Dialog um die Schreibrechte zu verändern, verbirgt sich
+					meist hinter einem Kontekt-Menüeintrag wie
+					<guimenuitem>Information</guimenuitem>,
+					<guimenuitem>Eigenschaften</guimenuitem> oder 
+					<guimenuitem>chmod</guimenuitem>.					
+				</para>
+				
+				<para>
+					Welche Schreibrechte genau gesetzt werden müssen, kann von 
+					Server zu Server relativ stark variieren. Auf der sicheren
+					Seite sind Sie, wenn Sie alle verfügbaren Rechte an
+					Ordner respektive Dateien vergeben. Bei den meisten
+					Datentransferprogrammen erfolgt dies, indem Sie Checkboxen
+					anklicken &ndash; siehe	<xref
+					linkend="install_instructions.installation.manual_installation.chmod.chmod_file_sample"/> und <xref
+					linkend="install_instructions.installation.manual_installation.chmod.chmod_directory_sample"/>.
+					Ist die Eingabe eines oktalen Werts (Zahl) möglich, müssen
+					Sie für Verzeichnisse entweder 777 angeben (wenn nur drei
+					Ziffern akzeptiert werden) respektive 0777 (wenn vier
+					Ziffern akzeptiert werden). Bei Dateien reicht 666
+					respektive 0666.
+				</para>
+				
+				<figure id="install_instructions.installation.manual_installation.chmod.chmod_file_sample">
+					<title>Schreibrechte von Dateien verändern</title>
+					<graphic fileref="images/install_instructions.installation.manual_installation.chmod.chmod_file_sample.png"/>
+				</figure>
+				
+				<figure id="install_instructions.installation.manual_installation.chmod.chmod_directory_sample">
+					<title>Schreibrechte von Verzeichnissen verändern</title>
+					<graphic fileref="images/install_instructions.installation.manual_installation.chmod.chmod_directory_sample.png"/>
+				</figure>
+				
+				<para>
+					Geändert werden müssen die Schreibrechte von folgenden
+					Verzeichnissen:
+				</para>
+				
+				<itemizedlist id="install_instructions.installation.manual_installation.chmod.dirs_to_change">
+					<listitem>
+						<para>admin/smarty/compiled/</para>
+					</listitem>
+					<listitem>
+						<para>smarty/compiled/</para>
+					</listitem>
+					<listitem>
+						<para>smarty/cache/</para>
+					</listitem>
+					<listitem>
+						<para>files/media/</para>
+					</listitem>
+					<listitem>
+						<para>files/global_templates/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/captchas/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/installer/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/updater/</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Ebenfalls angepasst werden müssen folgende Dateien:
+				</para>
+
+				<itemizedlist id="install_instructions.installation.manual_installation.chmod.files_to_change">
+					<listitem>
+						<para>core/conf/sys.inc.php</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Nachdem dies erledigt ist, können Sie die <link
+					linkend="install_instructions.configure_oak">Setup-Prozedur</link>
+					aufrufen und mit der Konfiguration von Oak fortfahren.
+				</para>
+				
+			</sect3>
 		</sect2>
 	</sect1>
 	
