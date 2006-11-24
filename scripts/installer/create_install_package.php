@@ -470,7 +470,7 @@ protected function printHelp ()
 	$this->printStderr("        will be included at top of the install package.\r\n\r\n");
 	$this->printStderr("    --software-directory:\r\n");
 	$this->printStderr("        Full path to the root directory of the software to package.\r\n\r\n");
-	$this->printStderr("    --output_file:\r\n");
+	$this->printStderr("    --output-file:\r\n");
 	$this->printStderr("        Path to the file which the install package will be written to. If\r\n");
 	$this->printStderr("        the file already exists, it will be overwritten.\r\n\r\n");
 	$this->printStderr("    --installer-type:\r\n");
