@@ -6,7 +6,6 @@ oak_public_root_www =
 [environment]
 debug = false
 dev = false
-lang = 
 error_length = 0
 app_key = 
 

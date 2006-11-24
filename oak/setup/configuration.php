@@ -77,13 +77,6 @@ try {
 	$FORM->applyFilter('project', 'strip_tags');
 	$FORM->addRule('project', gettext('Please enter a project name'), 'required');
 	
-	// textfield for language
-	$FORM->addElement('text', 'language', gettext('Language'),
-		array('id' => 'configuration_language', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('language', 'trim');
-	$FORM->applyFilter('language', 'strip_tags');
-	$FORM->addRule('language', gettext('Please enter a language'), 'required');
-	
 	// textfield for locale
 	$FORM->addElement('text', 'locale', gettext('Locale'),
 		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -131,7 +124,6 @@ try {
 		
 		// save inputs to session
 		$_SESSION['setup']['configuration_project'] = $FORM->exportValue('project');
-		$_SESSION['setup']['configuration_language'] = $FORM->exportValue('language');
 		$_SESSION['setup']['configuration_locale'] = $FORM->exportValue('locale');
 		
 		// redirect

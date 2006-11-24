@@ -6,7 +6,6 @@ oak_public_root_www = {$configuration.root_www}
 [environment]
 debug = false
 dev = false
-lang = "{$configuration.admin_language}"
 error_length = 0
 app_key = "{$configuration.app_key}"
 

@@ -2,7 +2,7 @@
 
 /**
  * Project: Oak
- * File: requirements.php
+ * File: setup.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -66,8 +66,7 @@ try {
 		header("Location: database.php");
 		exit;
 	}
-	if (empty($_SESSION['setup']['configuration_project']) || empty($_SESSION['setup']['configuration_admin_language'])
-	|| empty($_SESSION['setup']['configuration_locale'])) {
+	if (empty($_SESSION['setup']['configuration_project']) || empty($_SESSION['setup']['configuration_locale'])) {
 		header("Location: configuration.php");
 		exit;
 	}
@@ -111,7 +110,6 @@ try {
 	$configuration = array(
 		'root_www' => preg_replace("=^(.*?)/setup(.*)=", '$1', $_SERVER['SCRIPT_NAME']),
 		'root_disk' => preg_replace("=^(.*?)/setup(.*)=", '$1', dirname(__FILE__)),
-		'admin_language' => $_SESSION['setup']['configuration_admin_language'],
 		'locale' => $_SESSION['setup']['configuration_locale'],
 		'app_key' => Base_Cnc::uniqueId(),
 		'dsn' => $dsn,

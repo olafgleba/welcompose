@@ -6,7 +6,6 @@ oak_public_root_www = /oak/trunk/oak
 [environment]
 debug = true
 dev = false
-lang = "de"
 error_length = 0
 app_key = "!@R;&x.{Su}d&VcU#j5I\:)mU.2?!_."
 
