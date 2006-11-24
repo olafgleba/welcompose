@@ -39,12 +39,11 @@ if (!empty($_REQUEST['file'])) {
 		padding: 12px 0 0 0;
 		text-align: center;
 		}
-
 		h1 {
 		font-size: 2em;
 		font-weight: normal;
 		color: #0c3;
-		margin: 40px 0 15px 10px;
+		margin: 40px 0 15px 22px;
 		}
 		h2, p, a, li, th, td, select, label, input, legend {
 		font-size: 0.80em;
@@ -91,42 +90,18 @@ if (!empty($_REQUEST['file'])) {
 		#logo {
 		position: absolute;
 		top: 25px;
-		left: 494px;
-		width: 250px;
-		background: transparent; 
+		left: 475px;
+		width: 265px;
+		background: transparent url(<?php echo basename(__FILE__); ?>?file=bg_logo_top.gif) 0 0 repeat-y; 
+		padding-top: 3px;
 		}
 		#logo p {
 		color: #fff;
 		background: #0c3;
 		padding-left: 7px;
-		font-size: 20px;
-		}
-		#logo .xtop, 
-		#logo .xbottom {
-		display: block; 
-		background: transparent;
-		font-size: 1px;
-		}
-		#logo .xb1, #logo .xb2, #logo .xb3 {
-		display: block; 
-		overflow: hidden;
-		}
-		#logo .xb1, #logo .xb2, #logo .xb3 {
-		height: 1px;
-		}
-		#logo .xb2, 
-		#logo .xb3 {
-		background: #0c3; 
-		}
-		#logo .xb1 {
-		margin: 0 3px; 
-		background: #0c3;
-		}
-		#logo .xb2 {
-		margin: 0 2px; 
-		}
-		#logo .xb3 {
-		margin: 0 1px;
+		padding-bottom: 3px;
+		font-size: 25px;
+		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=bg_logo_bot.gif) left bottom no-repeat;
 		}
 		/* LOGO STOP */
 
@@ -135,7 +110,13 @@ if (!empty($_REQUEST['file'])) {
 		width: 730px;
 		}
 		#content p {
-		margin: 10px;
+		margin: 0 120px 15px 22px;
+		line-height: 130%;
+		}
+		#content p.warning {
+		margin: 25px 120px 5px 22px;
+		line-height: 130%;
+		color: #f00;
 		}
 
 		/* FORMs */
@@ -149,140 +130,65 @@ if (!empty($_REQUEST['file'])) {
 		padding: 10px 0 0 0;
 		background: transparent url(<?php echo basename(__FILE__); ?>?file=bg_fieldset_top.gif) left top no-repeat;
 		}
-		fieldset h2 {
+		fieldset.topbg h2, fieldset.topbg h2 {
+		font-size: 1.0em;
 		font-weight: normal;
-		margin: 0 0 5px 15px;
-		padding-top: 15px;
+		padding: 15px 10px 4px 22px;
+		color: #0c3;
 		}
-		legend {
-		margin: 20px 0 5px 5px;
-		padding: 0;
+		fieldset.expert {
+		margin-bottom: 30px;
+		}
+		fieldset.expert h2.expert {
+		padding: 45px 10px 6px 22px;
+		}
+		#content fieldset.topbg p {
+		margin-bottom: 5px;
 		}
 		label {
 		display: block;
-		width: 700px;
-		margin: 15px 0 0 15px;
-		clear: both;
+		height: 1.5em;
+		line-height: 1.5em;
+		width: 690px;
+		margin: 5px 0 0 0;
 		}
-		label.cont { 
-		padding: 5px 0;
-		margin: 0 0 0 15px;
-		clear: both;
-		height: 1.6em;
+		label.cont {
+		margin: 5px 0;
+		padding: 18px 0 0 22px;
+		height: 1.5em;
 		}
-		label.cont50 {
-		padding: 5px 0;
-		margin: 0;
-		clear: both;
-		height: 5em;
-		}
-		label .bez280, label .bez200 {
+		label span.bez {
 		display: block; 
 		float: left;
-		width: 280px;
-		height: 1.6em;
-		vertical-align: middle;
-		margin-right: 5px;
-		font-weight: bold;
+		width: 180px;
 		}
-		label .bez200 {
-		width: 200px;
-		}
-		label .req {
-		color: #f00;
-		}
-		input.w100, input.w200, input.w300, input.w580 {
-		border: 1px solid #ccc;
+		input.w300 {
+		width: 130px;
+		border: 1px solid #666;
 		padding: 2px 2px;
 		color: #000;
 		background: #fff;
-		}
-		input.w100 {
-		width: 100px;
-		}
-		input.w200 {
-		width: 200px;
 		}
 		input.w300 {
 		float: left;
 		width: 300px;
 		}
-		input.w580 {
-		width: 580px;
-		font-weight: bold;
-		}
-		textarea.w450h300 {
-		width: 450px;
-		height: 300px;
-		border: 1px solid #ccc;
-		margin-left: 220px;
-		}
-		input.chbx {
-		border-color: #666;
-		}
-		input.submitbut140, input.submitbut130 {
-		float: left;
+		input.submit200 {
 		text-align: left;
-		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=submitbut140_green.gif) no-repeat;
-		color: #fff;
-		width: 140px;
 		height: 20px;
 		font-size: 80%;
 		font-weight: bold;
+		color: #fff;
 		border: 0 none;
-		padding: 0 0 0 5px;
-		margin: 10px  0 0 220px;
+		padding: 0 0 2px 3px;
 		cursor: pointer;
 		}
-		input.submitbut130 {
-		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=submitbut130_green.gif) no-repeat;
-		color: #fff;
-		width: 130px;
-		}
-		input.m300 {
-		margin-left: 300px;
-		}
-		a.submitbut140gray, a.submitbut140gray:link, a.submitbut140gray:visited,
-		a.submitbut130gray, a.submitbut130gray:link, a.submitbut130gray:visited {
-		display: block;
-		float: left;
-		text-align: left;
-		background: #ccc url(<?php echo basename(__FILE__); ?>?file=submitbut140_gray.gif) no-repeat;
-		color: #fff;
-		width: 135px;
-		height: 20px;
-		line-height: 20px;
-		font-size: 80%;
-		font-weight: bold;
-		border: 0 none;
-		padding: 0 0 0 5px;
-		margin: 10px  0 0 10px;
-		cursor: pointer;
-		}
-		a.submitbut130gray, a.submitbut130gray:link, a.submitbut130gray:visited {
-		background: #ccc url(<?php echo basename(__FILE__); ?>?file=submitbut130_gray.gif) no-repeat;
-		color: #fff;
-		width: 125px;
-		}
-		.submits {
-		display: block;
-		height: 1.5em;
-		clear: both;
-		padding: 15px 0;
+		input.submit200 {
+		background: #0c3 url(<?php echo basename(__FILE__); ?>?file=submit200.gif) no-repeat;
+		width: 200px;
+		margin: 20px 0 0 204px;
 		}
 
-		/* HELP */
-		#content p.help {
-		float: left;
-		display: block;
-		line-height: 1.5em;
-		width: 300px;
-		margin: 0;
-		padding-left: 140px;
-		}
-		.iHelp img, .iHelpRemove img {
-		vertical-align: middle;
-		}
 		/* CLEARFIX */
 		.clearfix:after {
 		content: "."; 
@@ -305,9 +211,7 @@ if (!empty($_REQUEST['file'])) {
 
 <div id="header"> 
 <div id="logo">
-<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b></b>
 <p>Oak Package Installer</p>
-<b class="xbottom"><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b>
 <!-- logo --></div>
 
 <div id="topnavcon">
@@ -328,7 +232,7 @@ installation.</p>
 
 	// make sure the zlib extension is present if this install package is a compressed one
 	if (OAK_ZLIB_PACKAGE && !extension_loaded('zlib'))  {
-		echo "<p><strong>Warning:</strong> This a compressed install package, but the zlib extension is not installed. ".
+		echo "<p class=\"warning\"><strong>Warning:</strong> This a compressed install package, but the zlib extension is not installed. ".
 				"Please download a <em>uncompressed</em> install package.</p>";
 	}
 
@@ -396,7 +300,7 @@ installation.</p>
 			} catch (Exception $e) {
 				?>
 				
-				<p><strong>An error occurred:</strong> <?php echo $e->getMessage(); ?></p>
+				<p class="warning"><strong>An error occurred:</strong> <?php echo $e->getMessage(); ?></p>
 				
 				<?php
 			}
@@ -409,31 +313,29 @@ installation.</p>
 <fieldset>
 <h2>Path setup</h2>
 <p>Please enter the directory where Oak should be installed in. The path will be evaluated relative to the installer package.</p>
-<label class="cont" for="install_dir"><span class="bez280">Install directory</span> 
+<label class="cont" for="install_dir"><span class="bez"><strong>Install directory</strong></span> 
 <input class="w300" type="text" name="install_dir" maxlength="355" value="<?php echo (!empty($_REQUEST['install_dir']) ? htmlspecialchars(trim(strip_tags($_REQUEST['install_dir']))) : '/oak'); ?>" /></label>
 </fieldset>
 
-<fieldset>
-<h2>Expert options</h2>
+<fieldset class="expert">
+<h2 class="expert">Expert options</h2>
 <p>Leave alone if you don't know what to insert here.</p>
-<label class="cont" for="default_file_mask"><span class="bez280">Default file mask</span> 
+<label class="cont" for="default_file_mask"><span class="bez">Default file mask</span> 
 <input class="w300" type="text" name="default_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_file_mask']))) : "0666"); ?>" /></label>
 
-<label class="cont" for="default_directory_mask"><span class="bez280">Default directory mask</span> 
+<label class="cont" for="default_directory_mask"><span class="bez">Default directory mask</span> 
 <input class="w300" type="text" name="default_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['default_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['default_directory_mask']))) : "0777"); ?>" /></label>
 
-<label class="cont" for="writable_file_mask"><span class="bez280">Writable file mask</span> 
+<label class="cont" for="writable_file_mask"><span class="bez">Writable file mask</span> 
 <input class="w300" type="text" name="writable_file_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['writable_file_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['writable_file_mask']))) : "0666"); ?>" /></label>
 
-<label class="cont" for="writable_directory_mask"><span class="bez280">Writable directory mask</span> 
+<label class="cont" for="writable_directory_mask"><span class="bez">Writable directory mask</span> 
 <input class="w300" type="text" name="writable_directory_mask" maxlength="355" value="<?php echo (!empty($_REQUEST['writable_directory_mask']) ? htmlspecialchars(trim(strip_tags($_REQUEST['writable_directory_mask']))) : "0777"); ?>" /></label>
 </fieldset>
 
 <p>If you submit the form, the package will be extracted on your webspace. That may take some seconds.</p>
 
-<div class="submits">
-<input class="submitbut130 m300" type="submit" value="Go to next step" />
-</div>
+<input class="submit200" type="submit" value="Go to next step" />
 
 </fieldset>
 </form>
