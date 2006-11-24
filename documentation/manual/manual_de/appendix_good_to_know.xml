@@ -14,9 +14,9 @@
 			Datei:
 		</para>
 		
-		<programlisting language="php">
-			<![CDATA[<?php phpinfo(); ?>]]>
-		</programlisting>
+		<programlisting language="php"><![CDATA[
+<?php phpinfo(); ?>
+]]></programlisting>
 		
 		<para>
 			Speichern Sie nun die Datei auf Ihrem Server und rufen Sie
