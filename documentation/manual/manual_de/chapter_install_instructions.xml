@@ -617,6 +617,365 @@
 	<sect1 id="install_instructions.configure_oak">
 		<title>Oak konfigurieren</title>
 		
-		<para/>
+		<para>
+			Die Setup-Prozedur unterstützt Sie bei der Erst-Konfiguration von
+			Oak. Ein Assistent wird Ihnen bei der Einrichtung der Datenbank-
+			Verbindung sowie der Initialisierung der Datenbank-Struktur
+			zur Seite zu stehen.
+		</para>
+		
+		<para>
+			Die Setup-Prozedur befindet sich im Ordner <filename>setup/</filename>
+			im Installationsverzeichnis von Oak.
+		</para>
+		
+		<sect2 id="install_instructions.configure_oak.license">
+			<title>Lizenzierung</title>
+			
+			<para>
+				Im ersten Schritt geht es um die Lizenzierung der Software.
+				Es wird Ihnen die jeweils aktuelle Version des Oak-Lizenztexts
+				zum Studium vorgelegt und gefragt, ob Sie mit den
+				Lizenzbedingungen einverstanden sind. Nur dann &ndash; und nur
+				dann &ndash; kann die Setup-Prozedur ausgeführt und Oak benutzt
+				werden. Die Lizenz akzeptieren Sie mit einem Klick auf die
+				Checkbox <guilabel>Confirm license</guilabel>. Klicken
+				Sie dann auf die Schaltfläche <guibutton>Go to next
+				step</guibutton>, um zum nächsten Schritt zu gelangen.
+			</para>
+			
+			<para>
+				Die Lizenzierung der Software wird zusammen mit den verschieden
+				Lizenzmodellen im Kapitel <xref linkend="licensing"/> im Detail
+				besprochen.
+			</para>
+		</sect2>
+		
+		<sect2 id="install_instructions.configure_oak.requirements">
+			<title>Voraussetzungen</title>
+			
+			<para>
+				In diesem Schritt wird vom Setup-Assistenten überprüft,
+				ob der Webserver, auf dem Oak installiert werden soll, die
+				nötigen Voraussetzungen für einen reibungslosen Betrieb
+				erfüllt. Die Ermittlung der Daten erfolgt anhand hinterlegter
+				Tests auf Versionsnummern und das Vorhandensein bestimmter
+				Funktionen. Tests können entweder Fehlschlagen (rote
+				Warnmeldung neben der getesteten Komponente), eine Warnung
+				verursachen (orange Warnmeldung) oder passieren (grüne
+				Meldung).
+			</para>
+			
+			<variablelist>
+				<title>Interpretation der Test-Resultate</title>
+				<varlistentry>
+					<term>
+						Fehlgeschlagener Test (rot)
+					</term>
+					<listitem>
+						<para>
+							Die benötigte Komponente konnte entweder gar nicht
+							oder nur in einer veralteten Version vorgefunden
+							werden, mit der das Setup nicht durchgeführt werden
+							kann. Konsultieren Sie den Abschnitt
+							<xref linkend="install_instructions.requirements"/>,
+							um das Problem zu beheben.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						Warnung (orange)
+					</term>
+					<listitem>
+						<para>
+							Die benötigte Komponente konnte gefunden werden,
+							allerdings verfügt sie nicht über eine optimale
+							Kompatibilität zu Oak. Meist handelt es sich um
+							veraltete Versionen. Die Installation kann zwar
+							ohne weitere Aktionen vorausgesetzt werden,
+							allerdings kann das reibungslose Funktionieren von
+							Oak nicht garantiert werden. Wir empfehlen deshalb
+							die Behebung des Problems. Konsultieren Sie
+							den Abschnitt
+							<xref linkend="install_instructions.requirements"/>,
+							für weitere Informationen.
+						</para>
+						
+						<para>
+							Komponenten, die nicht zwingend benötigt werden 
+							und nicht installiert sind, verursachen ebenfalls
+							Warnungen. Konsultieren Sie den Handbuch-Abschnitt
+							<xref linkend="install_instructions.requirements"/>,
+							um das Problem zu beheben.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						Passierter Test (grün)
+					</term>
+					<listitem>
+						<para>
+							Die komponente konnte gefunden werden und entspricht
+							den Anforderungen von Oak.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<tip>
+				<para>
+					Wegen der stetig fortschreitenden Entwicklung aller
+					beteiligter Software-Produkte (Webserver, Datenbank usw.)
+					sowie der Komplexität der Produkte kann nicht garantiert
+					werden, dass die Aussagen der Testroutinen immer korrekt
+					sind. Sollten Probleme auftauchen, wenden Sie sich bitte
+					an den Support.
+				</para>
+			</tip>
+			
+			<warning>
+				<para>
+					Bitte bachten Sie, dass bei diesem Schritt nur die
+					Fähigkeiten von PHP und nicht des Datenbank-Servers
+					geprüft werden, weil dies zu diesem Zeitpunkt noch
+					nicht möglich ist. Das heisst, dass das Setup Sie zum
+					nächsten Schritt übergehen lässt, selbst wenn der
+					Datenbank-Server nicht für den Betrieb mit Oak
+					geeignet ist. Der Test des Datenbank-Servers erfolgt
+					zu einem späteren Zeitpunkt (siehe <xref
+					linkend="install_instructions.configure_oak.database"/>).
+				</para>
+			</warning>
+			
+			<para>
+				Sollten alle Voraussetzungen erfüllt sein, können Sie mit
+				einem Klick auf <guibutton>Go to next step</guibutton> zum
+				nächsten Schritt übergehen.
+			</para>
+		</sect2>
+		
+		<sect2 id="install_instructions.configure_oak.database">
+			<title>Datenbank</title>
+			
+			<para>
+				Damit Oak eine Verbindung zur Datenbank aufnehmen kann, müssen
+				die Verbindungsparameter konfiguriert werden.
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term>
+						<guilabel>Database</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Name der Datenbank, in der die Tabellenstruktur für
+							Oak erzeugt werden soll. Achten Sie bitte darauf,
+							dass die Datenbank leer ist.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>User</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Name des Benutzers, der zur Verbindung mit dem
+							Datenbank-Server verwendet werden soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Password</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Password, das zur Verbindung mit der Datenbank
+							verwendet werden soll. Wird die Verbindung ohne
+							Passwort hergestellt, lassen Sie dieses Feld leer.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Connection method</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Legt fest, auf welche Weise die Verbindung mit dem
+							Datenbank-Server herstellt werden soll. 
+						</para>
+						
+						<para>
+							Bei der Auswahl von
+							<menuchoice>
+								<guimenuitem>TCP/IP</guimenuitem>
+							</menuchoice>
+							wird eine Verbindung über das Netzwerk
+							hergestellt. Dies ist normalerweise auf
+							Windows und bei Installationen, bei denen
+							sich der Datenbank-Server auf einer anderen
+							Maschine befindet, der Fall.
+						</para>
+
+						<para>
+							Ein
+							<menuchoice>
+								<guimenuitem>Unix socket</guimenuitem>
+							</menuchoice>
+							wird dagegen meist auf Linux, BSD usw.
+							verwendet, wenn der Datenbank-Server sich
+							auf derselben Maschine wie der Webserver
+							befindet.
+						</para>
+
+						<para>
+							Wenn Sie unsicher sind, welche Auswahl Sie treffen
+							sollen, wenden Sie sich bitte an den Support
+							Ihres Providers.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Host (nur bei TCP/IP)</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Geben Sie die IP-Adresse oder den Namen des
+							Datenbank-Servers (beispielsweise
+							<userinput>localhost</userinput>) ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Port (nur bei TCP/IP)</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Geben Sie die Port-Nummer an, auf dem der
+							Datenbank-Server Verbindungen entgegen
+							nimmt. Wenn Sie keine Port-Nummer eingeben,
+							wird der Standard-Port (in Fall von MySQL
+							3306) verwendet.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>
+							Unix socket (nur bei Unix Socket)
+						</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Pfad zum Unix-Socket, über den der Datenbank-Server
+							angesprochen werden kann. Normalerweise
+							<filename>/tmp/mysql.sock</filename>. Wenn Sie
+							unsicher sind, was Sie eingeben sollen, wenden
+							Sie sich bitte an den Support Ihres Providers.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Nachdem Sie alle Daten eingegeben haben, können Sie das Formular
+				mit einem Klick auf <guibutton>Go to next step</guibutton>
+				absenden. Daraufhin werden die Eingaben überprüft und versucht,
+				eine Verbindung mit dem Datenbank-Server herzustellen. Schlägt
+				dies Fehl, wird eine Fehlermeldung angezeigt. Korrigieren Sie
+				daraufhin die Eingaben und versuchen Sie es nochmals. Sind
+				alle Eingaben richtig, werden Sie zum nächsten Schritt geführt.
+			</para>
+		</sect2>
+		
+		<sect2 id="install_instructions.configure_oak.configuration">
+			<title>Konfiguration</title>
+			
+			<para>
+				Bei diesem Schritt geht es darum, die wichtigsten
+				Grundeinstellungen vorzunehmen.
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term>
+						<guilabel>Project</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Name des ersten Projekts, das Oak anlegen soll.
+							Als Name können Sie beispielsweise den aktuellen
+							Domain-Namen verwenden (wie
+							<userinput>domain.tld</userinput>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Locale</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Mit dem <foreignphrase>Locale</foreignphrase> wird
+							festgelegt, welches Gebietsschema für die Anzeige
+							von Oak verwendet wird. Es wird damit unter anderem
+							die Sprache der Administrationsoberfläche bestimmt.
+							Für mögliche Eingaben und deren Folgen konsultieren
+							Sie bitte <xref linkend="localization"/>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Wenn Sie auf <guibutton>Go to next step</guibutton> klicken,
+				um zum nächsten Schritt zu gelangen, wird zuerst die eigentliche
+				Konfiguration ausgeführt, also die Konfigurationsdateien auf
+				die Festplatte geschrieben und die Datenbank-Struktur erzeugt.
+			</para>
+			
+			<tip>
+				<para>
+					Sollten bei der Ausführung des Setups Probleme
+					auftreten, wenden Sie sich bitte an den Support.
+				</para>
+			</tip>
+		</sect2>
+		
+		<sect2 id="install_instructions.configure_oak.finish">
+			<title>Setup abschliessen</title>
+			
+			<para>
+				Herzlichen Glückwunsch! Das Setup wurde erfolgreich ausgeführt
+				und Oak ist nun Betriebsbereit. Verwenden Sie den angezeigten
+				Benutzernamen und Passwort, um sich in die Admin-Oberfläche 
+				einzuloggen.
+			</para>
+			
+			<para>
+				Wenn Sie auf die Schaltfläche <guibutton>Go to admin
+				area</guibutton> klicken, werden Sie automatisch zum
+				Login für den Admin-Bereich weitergeleitet. Vorher wird
+				aber automatisch versucht, das Setup-Verzeichnis zu
+				löschen. Kontrollieren Sie unbedingt, ob das Setup-Verzeichnis
+				erfolgreich gelöscht werden konnte.
+			</para>
+			
+			<warning>
+				<para>
+					Wenn Sie den Package Installer verwendet haben, löschen
+					Sie ihn unbedingt. Sonst kann jeder Besucher Ihrer
+					Webseite diese löschen. Dies gilt auch für das
+					Setup-Verzeichnis!
+				</para>
+			</warning>
+		</sect2>
 	</sect1>
 </chapter>

@@ -15,6 +15,10 @@
 	<!-- chapters -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_install_instructions.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_localization.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_licensing.xml" />
 	
 	<!-- appendix -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
