@@ -605,6 +605,51 @@
 			<description/>
 			<editable>0</editable>
 		</template-type>
+		<template-type>
+			<name>simple_form_personal_form_mail</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_form_business_form_mail</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_rss20</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_atom10</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_podcast_itms</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_item</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_archive_year</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_archive_month</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
 	</template-types>
 	<text-converters>
 		<text-converter>
