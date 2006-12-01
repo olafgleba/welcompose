@@ -1,0 +1,21 @@
+body {
+font: 95%/140% Verdana, Arial, Helvetica, sans-serif;
+}
+.book {
+margin: 0 auto;
+max-width: 600px;
+}
+h1, h2, h3 {
+font-family: Arial,Arial, Helvetica, sans-serif;
+}
+.title {
+color: #00AE2C;
+height: auto;
+margin: 40px 0 15px 0;
+}
+.subtitle {
+color: #666;
+}
+li p {
+margin: 2px 0;
+}
