@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="templating">
+	<title>Vorlagen</title>
+	
+	<sect1 id="templating.page_template_relations">
+		<title>Vorlagen mit Seiten verbinden</title>
+		
+		<para>
+			Bei den meisten Publishing Systemen werden die Vorlagen auf
+			der Festplatte des Webservers abgelegt und zwar je eine pro
+			Script. Ruft der Besucher die Startseite
+			<filename>index.php</filename> auf, wird die Vorlage
+			<filename>index.html</filename> geladen, um die Seite anzuzeigen.
+			Ruft der Besucher die News-Seite <filename>news/index.php</filename>
+			auf, wird die Vorlage <filename>news/index.html</filename> geladen,
+			um die News-Seite anzuzeigen. Dies ist bei Oak grundsätzlich nicht
+			anders, unterscheidet sich aber in der Anwendung, da die Vorlagen in
+			der Datenbank gespeichert und über die Administrationsoberfläche
+			verwaltet werden.
+		</para>
+		
+		<para>
+			Die Vorlagen, die sonst auf der Festplatte abgelegt werden,
+			unterscheiden sich nicht von denjenigen, die über das
+			Administrationsinterface angelegt werden &ndash; ausser vielleicht
+			diesbezüglich, dass man zusätzliche Meta-Informationen
+			<footnote>
+				<para>
+					Die Meta-Informationen sollten nicht mit den Meta-Tags
+					im Kopf-Bereich von HTML-Dokumenten verwechselt werden.
+				</para>
+			</footnote>
+			wie einen frei definierbaren Vorlagen-Namen (wie
+			<userinput>Vorlage Weihnachtsaktion auf Startseite</userinput>) und
+			eine Beschreibung speichern kann.
+		</para>
+		
+		<para>
+			Der grosse Unterschied besteht in der Verknüpfung der einzelnen
+			Seiten mit den Vorlagen. Diese ist sehr flexibel gestaltet,
+			damit man für jede Seite andere Vorlagen definieren kann, wenn
+			man dies benötigt. Man kann es sogar soweit treiben, mehrere
+			Vorlagen für ein und dieselbe Seite anzulegen, die dann per
+			Knopfdruck gewechselt werden. Gesteuert wird dieses Verhalten
+			über zwei Eigenschaften:
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Template Types (Vorlagen-Typen)</term>
+				<listitem>
+					<para>
+						Mit den Vorlagen-Typen wird gesteuert, welche Vorlage
+						bei welchem Seiten-Typ zum Einsatz kommt. So kann dafür
+						gesorgt werden, dass die Vorlage für ein
+						Kontakt-Formular dazu benutzt wird, ein Kontakt-Formular
+						anzuzeigen und nicht etwa der Anzeige einer normalen
+						Inhaltsseite dient, die nicht ein Kontaktformular
+						sondern ein Impressum darstellen soll.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Template Sets (Vorlagen-Sets)</term>
+				<listitem>
+					<para>
+						Vorlagen-Sets dienen dazu, eine Reihe von Vorlagen
+						zusammenzufassen, und zwar je eine Vorlage von
+						jedem Vorlagen-Typ. Diese "Vorlagen-Bündel"
+						werden dann jeweils einer Seite zugeordnet, die
+						dann die jeweils benötigten Vorlagen aus dem
+						Set "herauszieht". 
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Ein Beispiel dürfte Licht ins abstrakte Dunkel bringen: Ein
+			Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt
+			werden. Also wird eine Vorlage
+			<userinput>Kontaktformular Konferenzrückfragen</userinput> angelegt.
+			Damit Oak weiss, dass das <userinput>Kontaktformular
+			Konferenzrückfragen</userinput> eine Vorlage für ein Kontaktformular
+			ist, muss ihr der passende Vorlagen-Typ
+			<code>simple_form_index</code> zugeordnet werden. Da mehrere
+			Vorlagen mit demselben Vorlagen-Typ <code>simple_form_index</code>
+			existieren, muss Oak noch gesagt werden, welche von den
+			Formular-Vorlagen es für das
+			<userinput>Kontaktformular Konferenzrückfragen</userinput> benutzen
+			soll. Dazu wird das Kontaktformular dem Vorlagen-Set 
+			<userinput>Konferenz</userinput> zugeordnet und dieses wiederum
+			der Seite <userinput>Konferenzrückfragen</userinput>.
+		</para>
+		
+		<para>
+			Wenn jetzt ein Besucher das Kontaktformular für die
+			Konferenzrückfragen aufruft, weiss Oak, dass es eine Vorlage des
+			Typs <code>simple_form_index</code> braucht, denn schliesslich
+			handelt sich um ein Formular. Und da das Vorlagen-Set
+			<userinput>Konferenz</userinput> mit der Seite verknüpft ist,
+			weiss Oak, dass es aus diesem Vorlagen-Set die Vorlage mit dem
+			Typ <code>simple_form_index</code> auslesen muss und gelangt
+			zur Vorlage mit dem Namen <userinput>Kontaktformular
+			Konferenzrückfragen</userinput> &ndash; et voilà, die Seite wird
+			angezeigt.
+		</para>
+		
+		<para>
+			Den Prozess zur Vorlagen-Auswahl illustriert die Grafik
+			<xref linkend="templating.page_template_relations.decision_process"/>
+			näherungsweise. Aufgerufen wird eine Produktseite, der das
+			Vorlagen-Set Produkte zugeordnet ist und eine Vorlage vom Typ
+			1 benötigt.
+		</para>
+		
+		<figure id="templating.page_template_relations.decision_process">
+			<title>Prozess zur Vorlagen-Auswahl</title>
+			<graphic fileref="images/templating.page_template_relations.decision_process.png"/>
+		</figure>
+	</sect1>
+</chapter>

@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="crash_course">
+	<title>Crash-Kurs</title>
+	
+	<para>
+		Die Erstellung von Webseiten mit Oak ist auf den ersten Blick nicht
+		ganz einfach. Dies liegt vor allem daran, dass etliche Komponenten
+		an der Anzeige einer Seite mitwirken und sie darum entsprechend
+		konfiguriert werden müssen. In diesem Crash-Kurs geht es darum,
+		Sie ohne grosse Umschweife an die Erstellung einer einfachen 
+		Webseite heranzuführen, ohne sich zu intensiv mit dem Wieso und Warum
+		zu beschäftigen. Allerdings sind an vielen Stellen die ausführlichen
+		Beschreibungen, die an anderer Stelle in diesem Handbuch vorkommen,
+		referenziert.
+	</para>
+	
+	<para>
+		Zur Umsetzung haben wir eine Test-Webseite erstellt, die weder besonders
+		hübsch noch besonders aussergewöhnlich ist, dafür einfach genug, um
+		nicht den Blick auf das Wesentliche zu trüben &ndash; die Bedienung
+		von Oak.
+	</para>
+	
+	<figure id="crash_course.demo_website">
+		<title>Screenshot der Demo-Webseite</title>
+		<graphic fileref="images/crash_course.demo_website.png"/>
+	</figure>
+	
+	<para>
+		Die wichtigsten Code-Fragmente sind auch hier im Handbuch zu finden. 
+		Sie sollten zum Verständnis des Vorgehens ausreichend sein, sind aber
+		nicht komplett, sodass sich nicht die gesamte Demo-Webseite damit
+		nachvollziehen lässt. Wer alle Schritte komplett nachvollziehen möchte,
+		kann den Quellcode der Demo-Webseite vom Oak-Download-Server beziehen.
+	</para>
+	
+	<note>
+		<para>
+			Sollten Sie Probleme beim Verständnis der Beispiele haben,
+			schlagen Sie die Detail-Erklärungen im Handbuch nach. Sollte
+			dies nicht ausreichen, können Sie sich an die User-Community
+			wenden. Dort sind viele Leute versammelt, die bereits mit
+			Oak arbeiten und Ihnen bei Ihren Verständnisproblemen helfen
+			können.
+		</para>
+	</note>
+	
+	<sect1 id="crash_course.preparation">
+		<title>Vorbereitungen</title>
+		
+		<para>
+			Wer sich die Demo-Webseite anschaut, sieht, dass sie einfach
+			aufgebaut ist: Eine Navigation oben, drei Inhaltsseiten mit
+			Fliesstext und ein Kontaktformular. Bevor damit begonnen werden
+			kann, die Navigation und die einzelnen Seiten anzulegen, muss
+			zuerst ein <foreignphrase>Template Set</foreignphrase> erzeugt
+			werden &ndash; denn ohne <foreignphrase>Template Set</foreignphrase>
+			kann keine Seite angelegt werden.
+		</para>
+		
+		<para>
+			Um ein <foreignphrase>Template Set</foreignphrase> anzulegen,
+			klicken Sie zuerst auf den Navigationspunkt
+			<guibutton>Templating</guibutton> und dann auf den Unterabschnitt
+			<guibutton>Template Sets</guibutton>. Von dort gelangen Sie über
+			den Link <guibutton>Add new</guibutton> zur Eingabemaske, um ein
+			neues <foreignphrase>Template Set</foreignphrase> anzulegen. 
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Geben Sie in das Feld <guilabel>Name</guilabel> einen
+						Namen für das <foreignphrase>Template Set</foreignphrase>
+						an. Wählen Sie einen möglichst beschreibenden Namen
+						wie <userinput>Standardaussehen</userinput>. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>
+						In das Feld <guilabel>Description</guilabel> können
+						Sie optional einen Beschreibungstext für das
+						<foreignphrase>Template Set</foreignphrase> angeben,
+						der dessen Verwendungszweck näher beschreibt. Dies
+						bietet sich bei der Verwendung von nur einem
+						<foreignphrase>Template Set</foreignphrase> wie jetzt
+						weniger an, kann bei grösseren Webseiten mit vielen
+						<foreignphrase>Template Sets</foreignphrase> aber
+						praktisch sein.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie nun auf die Schaltfläche <guibutton>Add template
+			set</guibutton>, um das <foreignphrase>Template Set</foreignphrase>
+			anzulegen.
+		</para>
+	</sect1>
+	
+	<sect1 id="crash_course.create_pages">
+		<title>Seiten anlegen</title>
+		
+		<para>
+			Nachdem das erste <foreignphrase>Template Set</foreignphrase>
+			angelegt wurde, kann mit der eigentlichen Arbeit begonnen werden.
+			Zuerst muss die erste und einzige Navigation angelegt
+			werden. Klicken Sie dazu auf den Navigationspunkt
+			<guibutton>Contents</guibutton> und dann auf den Menüpunkt
+			<guibutton>Navigations</guibutton>. Von dort aus gelangen Sie über
+			den Link <guibutton>Add new</guibutton> zur Eingabemaske, um 
+			eine Navigation zu erzeugen.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Geben Sie in das Feld <guilabel>Name</guilabel> einen
+						Namen für die Navigation ein an. Wählen Sie einen
+						möglichst beschreibenden Namen wie
+						<userinput>Hauptnavigation</userinput>. 
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie dann auf die Schaltfläche <guibutton>Add
+			navigation</guibutton>, um die Navigation anzulegen.
+		</para>
+		
+		<para>
+			Um die vier Seiten Startseite, Inhalt, Kontakt und Impressum
+			anzulegen, müssen Sie zum Abschnitt <guibutton>Pages</guibutton>
+			wechseln. Dort sollten Sie bereits die &ndash; noch leere &ndash;
+			Hauptnavigation sehen. Lassen Sie sich dabei von der Warnung
+			<foreignphrase>Please define an index page!</foreignphrase> nicht
+			verwirren; sie verschwindet, sobald die erste Seite angelegt wurde.
+			Über das grüne Symbol unter der Überschrift <guilabel>Add</guilabel>
+			gelangen Sie zur Eingabemaske, um die Seiten anzulegen. Wir
+			beginnen mit der Seite <guilabel>Startseite</guilabel>.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Position</term>
+				<listitem>
+					<para>
+						Die Position bestimmt, wie die neue Seite in
+						Relation zum Menüpunkt, neben dem der Anwender auf
+						das Symbol zum Hinzufügen einer Seite geklickt hat,
+						in die Navigation eingefügt wird. Belassen Sie die
+						Auswahl bei der Option <guimenuitem>Create node
+						below</guimenuitem>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Geben Sie hier die Beschriftung des Menüpunkts ein,
+						also <userinput>Startseite</userinput>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>
+						Der Seitentyp bestimmt, welche Inhalte in der Seite
+						gespeichert werden können. Da es sich um eine Seite
+						handelt, die nur aus Fliesstext besteht, wählen
+						Sie <guimenuitem>OAK_SIMPLE_PAGE</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Template set</term>
+				<listitem>
+					<para>
+						Mit dem <foreignphrase>Template Set</foreignphrase> wird
+						bestimmt, welche Vorlagen zur Anzeige der Seite
+						verwendet werden sollen. Wählen Sie hier das
+						<foreignphrase>Template Set</foreignphrase> aus,
+						das wir im <xref linkend="crash_course.preparation"/>
+						angelegt haben, also
+						<userinput>Standardaussehen</userinput>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Index page</term>
+				<listitem>
+					<para>
+						Setzen Sie hier einen Haken, um festzulegen, dass die
+						<userinput>Startseite</userinput> als erste Seite
+						angezeigt werden soll, wenn Ihre Homepage aufgerufen
+						wird.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Die Felder <guilabel>Protect</guilabel> und
+			<guilabel>Groups</guilabel> benötigen wir zur Umsetzung der
+			Demo-Webseite nicht, darum können sie vorerst beiseite gelassen
+			werden. Klicken Sie jetzt auf <guibutton>Add page</guibutton>, 
+			um die Seite hinzuzufügen. Sie kommen dann zur Seitenübersicht
+			zurück und sollten die <userinput>Startseite</userinput> als
+			erste Seite in der Hauptnavigation sehen.
+		</para>
+		
+		<para>
+			Nun muss für die Seite Inhalte die Prozedur wiederholt werden.
+			Klicken Sie wieder auf das grüne Symbol unter der
+			Spaltenüberschrift <guilabel>Add</guilabel> in der Zeile der
+			Seite <userinput>Startseite</userinput>. Sie kommen wieder
+			zur Eingabemaske. Belassen Sie das Feld
+			<guilabel>Position</guilabel> wieder in der Standard-Auswahl
+			<guimenuitem>Create node below</guimenuitem>. Geben Sie beim
+			Feld <guilabel>Name</guilabel> den Namen der Seite, als 
+			<userinput>Inhalte</userinput> ein. Wählen Sie bei
+			<guilabel>Type</guilabel> wiederum den Seiten-Typ
+			<guimenuitem>OAK_SIMPLE_PAGE</guimenuitem> aus und bei
+			<guilabel>Template set</guilabel> unser 
+			<foreignphrase>Template Set</foreignphrase>
+			<userinput>Standardaussehen</userinput>. Die restlichen Felder
+			können Sie so belassen, wie sie sind.
+		</para>
+		
+		<warning>
+			<para>
+				Setzen Sie keinen Haken mehr beim Feld
+				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
+				eine <foreignphrase>Index page</foreignphrase> geben und
+				dies ist schon die Seite <userinput>Startseite</userinput>.
+			</para>
+		</warning>
+		
+		<para>
+			Nach dem Klick auf die Schaltfläche <guibutton>Add page</guibutton>
+			gelangen Sie wieder auf die Seitenübersicht. Sie sehen nun 
+			die Seite <userinput>Inhalte</userinput> unter der Seite
+			<userinput>Startseite</userinput>, allerdings um eine Ebene
+			eingerückt. Um sie auszurücken, klicken Sie auf der Zeile
+			der Seite <userinput>Inhalte</userinput> unter
+			<guilabel>Move</guilabel> auf den Pfeil nach unten. 
+		</para>
+		
+		<para>
+			Für das Kontakt-Formular und das Impressum muss die ganze
+			Prozedur noch je einmal wiederholt werden. Achten Sie beim
+			Kontakt-Formular darauf, als Seitentyp
+			<guimenuitem>OAK_SIMPLE_FORM</guimenuitem> auszuwählen.
+		</para>
+		
+		<figure id="crash_course.create_pages.created_pages">
+			<title>Angelegte Seiten</title>
+			<graphic fileref="images/crash_course.create_pages.created_pages.png"/>
+		</figure>
+	</sect1>
+	
+	<sect1 id="crash_course.fill_homepage_with_contents">
+		<title>Startseite mit Inhalten füllen</title>
+		
+		<para>
+			Jetzt ist es Zeit, die Startseite mit Inhalten zu befüllen.
+			Suchen Sie dazu in der Navigationsstruktur nach der Zeile
+			mit dem Eintrag <userinput>Startseite</userinput> und klicken
+			Sie daneben auf das Symbol in der Spalte <guilabel>Edit</guilabel>.
+			Sie gelangen damit zur Eingabemaske.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Title</term>
+				<listitem>
+					<para>
+						Dieses Feld bestimmt den Seitentitel. Standardmässig
+						wird der Name des Navigationspunkts, in diesem Fall
+						also <userinput>Startseite</userinput> verwendet.
+						Ersetzen Sie ihn nun durch
+						<userinput>Hello World</userinput>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Content</term>
+				<listitem>
+					<para>
+						Hier kommt der Fliesstext für die Seite hinein. Fügen
+						Sie ein paar Zeilen Beispieltext wie 
+						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
+						&ndash; zwei Abschnitte sind eine gute Wahl.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Text converter</term>
+				<listitem>
+					<para>
+						Wählen Sie aus der Liste den Eintrag
+						<guimenuitem>Textile</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Apply text macros</term>
+				<listitem>
+					<para>
+						Setzen Sie hier einen Haken in die Checkbox.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Das Feld <guilabel>Custom meta tags</guilabel> können Sie für
+			den Moment ignorieren und auf die Schaltfläche 
+			<guibutton>Update page</guibutton> klicken. Die Inhalte werden
+			nun gespeichert und Sie wieder zur Seitenübersicht weitergeleitet.
+		</para>
+		
+		<para>
+			Wenn Sie nun den öffentlichen Bereich von Oak aufrufen, werden
+			Sie sehen, dass noch keine Inhalte angezeigt werden, sondern
+			eine Fehlermeldung. Dies liegt daran, dass noch keine Vorlage
+			vorhanden ist, was im
+			<xref linkend="crash_course.connect_homepage_with_template"/> behoben wird.
+		</para>
+	</sect1>
+	
+	<sect1 id="crash_course.connect_homepage_with_template">
+		<title>Startseite mit Vorlage verbinden</title>
+		
+		<para></para>
+	</sect1>
+</chapter>
