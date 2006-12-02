@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="reference">
+	<title>Referenz</title>
+	
+	<sect1 id="reference.list_of_template_types">
+		<title>Liste der Vorlagen-Typen</title>
+		
+		<sect2 id="reference.list_of_template_types.blog">
+			<title>Blog</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term>blog_archive_month</term>
+					<listitem>
+						<para>
+							Vorlage für monatliches Blog-Archiv.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_archive_year</term>
+					<listitem>
+						<para>
+							Vorlage für jährliches Blog-Archiv.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_atom10</term>
+					<listitem>
+						<para>
+							Vorlage für ATOM-1.0-Feed vom Blog.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_index</term>
+					<listitem>
+						<para>
+							Hauptvorlage für Blogs. Zeigt Übersicht über die
+							vorhandenen Blog Postings an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_item</term>
+					<listitem>
+						<para>
+							Vorlage zur Anzeige eines einzelnen Blog Postings
+							und dessen Kommentaren.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_podcast_itms</term>
+					<listitem>
+						<para>
+							Vorlage für Podcast-Feed nach iTMS-Spezifikation
+							<footnote>
+								<para>
+									siehe
+									<ulink
+										url="http://www.apple.com/itunes/store/podcaststechspecs.html" />
+								</para>
+							</footnote>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>blog_rss20</term>
+					<listitem>
+						<para>
+							Vorlage für RSS-2.0-Feed vom Blog.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="reference.list_of_template_types.simple_form">
+			<title>Simple Forms</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term>simple_form_business_form_mail</term>
+					<listitem>
+						<para>
+							Vorlage für E-Mails, die beim Ausfüllen eines
+							Business Simple Form verschickt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>simple_form_index</term>
+					<listitem>
+						<para>
+							Hauptvorlage für Formulare. Zeigt das eigentliche
+							Simple Form an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>simple_form_personal_form_mail</term>
+					<listitem>
+						<para>
+							Vorlage für E-Mails, die beim Ausfüllen eines
+							Personal Simple Form verschickt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="reference.list_of_template_types.simple_page">
+			<title>Simple Page</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term>simple_page_index</term>
+					<listitem>
+						<para>
+							Hauptvorlage für Simple Page. Zeigt die eigentliche
+							Simple Page an.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+	</sect1>
+</appendix>

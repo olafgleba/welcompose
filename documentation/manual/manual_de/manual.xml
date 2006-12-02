@@ -27,4 +27,6 @@
 	<!-- appendix -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="appendix_good_to_know.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="appendix_reference.xml" />
 </book>
