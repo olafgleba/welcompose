@@ -95,6 +95,13 @@
 			der Seite <userinput>Konferenzrückfragen</userinput>.
 		</para>
 		
+		<note>
+			<para>
+				Eine vollständige Liste der Vorlagen-Typen finden Sie in
+				<xref linkend="reference.list_of_template_types"/>
+			</para>
+		</note>
+		
 		<para>
 			Wenn jetzt ein Besucher das Kontaktformular für die
 			Konferenzrückfragen aufruft, weiss Oak, dass es eine Vorlage des
