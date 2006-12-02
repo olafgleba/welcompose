@@ -1,9 +1,29 @@
+
+body,html {
+margin: 0;
+padding: 0;
+}
 body {
 font: 95%/140% Verdana, Arial, Helvetica, sans-serif;
 }
-.book {
+.navheader {
+color: #666;
+font-family: Arial, Helvetica, sans-serif;
+background: #fafafa;
+padding-bottom: 5px;
+border-bottom: 1px solid #ccc;
+}
+.navfooter {
+color: #666;
+font-family: Arial, Helvetica, sans-serif;
+background: #fafafa;
+padding-top: 5px;
+border-top: 1px solid #ccc;
+}
+
+.book, .chapter, .sect1, .sect2, .sect3, .appendix {
 margin: 0 auto;
-max-width: 600px;
+max-width: 700px;
 }
 h1, h2, h3 {
 font-family: Arial,Arial, Helvetica, sans-serif;
@@ -18,4 +38,20 @@ color: #666;
 }
 li p {
 margin: 2px 0;
+}
+
+.tip table {
+border: 1px solid #090;
+background: #EDF9F0;
+margin: 10px 0;
+}
+.note table {
+border: 1px solid #009;
+background: #EDEDF8;
+margin: 10px 0;
+}
+.warning table {
+border: 1px solid #c00;
+background: #FBEDED;
+margin: 10px 0;
 }
