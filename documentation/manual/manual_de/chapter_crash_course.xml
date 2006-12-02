@@ -292,7 +292,7 @@
 						wird der Name des Navigationspunkts, in diesem Fall
 						also <userinput>Startseite</userinput> verwendet.
 						Ersetzen Sie ihn nun durch
-						<userinput>Hello World</userinput>.
+						<userinput>Willkommen zur Demo!</userinput>.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -345,6 +345,267 @@
 	<sect1 id="crash_course.connect_homepage_with_template">
 		<title>Startseite mit Vorlage verbinden</title>
 		
-		<para></para>
+		<para>
+			Um die Startseite mit einer Vorlage zu verbinden, müssen Sie in den
+			Bereich <guibutton>Templating</guibutton> wechseln und zwar zum
+			Unterabschnitt <guibutton>Templates</guibutton>. Klicken Sie dann
+			auf <guibutton>Add new</guibutton>, um zur Eingabemaske zum
+			Anlegen einer Vorlage zu gelangen. Diese muss nun befüllt werden.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>
+						Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+						den Eintrag <guimenuitem>simple_page_index</guimenuitem>
+						aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Name der Vorlage. Dient zur späteren Identifizierung
+						derselben. Geben Sie einen beschreibenden Namen wie
+						<userinput>Vorlage Startseite</userinput> ein.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>
+						Hier können sie optional den Zweck der Vorlage
+						beschreiben.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Content</term>
+				<listitem>
+					<para>
+						In dieses Feld gehört der HTML-Code für die Vorlage.
+						Öffnen Sie die Datei <filename>index.html</filename>
+						aus dem Demo-Webseiten-Paket, das Sie von unserem
+						Download-Server heruntergeladen haben, und kopieren
+						Sie den gesamten HTML-Code in das Textfeld.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Sets</term>
+				<listitem>
+					<para>
+						Mit diesem Feld wird die Vorlage einem Vorlagen-Set
+						zugeordnet. Klicken Sie auf die Option 
+						<guimenuitem>Standardaussehen</guimenuitem>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie nun auf die Schaltfläche
+			<guibutton>Add template</guibutton>,um die Vorlage zu speichern.
+			Wenn Sie jetzt den öffentlichen Bereich aufrufen, werden Sie jetzt
+			den gerenderten HTML-Code sehen, den Sie soeben in die Vorlage
+			eingefügt haben &ndash; allerdings ohne Bilder und Style
+			Sheets.
+		</para>
+		
+		<para>
+			Nun geht es darum, dass die Inhalte angezeigt werden, die vorher
+			in der Datenbank abgelegt wurden. Gehen Sie dazu zur
+			Vorlagen-Übersicht zurück und klicken Sie beim soeben angelegten
+			Template auf das Symbol unter der Überschrift 
+			<guilabel>Edit</guilabel>. Sie kommen dann wieder zur Eingabemaske
+			zurück.
+		</para>
+		
+		<para>
+			Zuerst wird der Title-Tag geändert. Er soll statt
+			<userinput>Welcompose - Hello World!</userinput> zuerst den
+			Namen des aktuellen Navigationspunkts und dann den Webseiten-Namen
+			enthalten. Ersetzen Sie dazu den Title-Tag durch folgenden Code:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<title>{$page.name} &ndash; Demo-Webseite</title>
+]]></programlisting>
+
+		<para>
+			Wenn Sie nun auf die Schaltfläche <guibutton>Update
+			template</guibutton> klicken, wird die Vorlage gespeichert und Sie
+			können die Ausgabeseite neu laden. Wenn Sie alles richtig gemacht
+			haben, wird als Seitentitel <computeroutput>Startseite &ndash;
+			Demo-Webseite</computeroutput> angezeigt.
+		</para>
+		
+		<para>
+			Ändern wir nun Titel und Fliesstext. Ersetzen Sie den H1-Tag durch
+			den Seitentitel und den Fliesstext, indem Sie den Bereich von
+			<code><![CDATA[<div id="content">]]></code> bis zum Kommentar
+			<code><![CDATA[<!-- content -->]]></code> durch folgenden Code
+			austauschen:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<div id="content">
+	<h1>{$simple_page.title}</h1>
+	{$simple_page.content}
+<!-- content --></div>
+]]></programlisting>
+
+		<para>
+			Wenn Sie nun die Vorlage wieder speichern und die Ausgabe neu
+			laden, sollten Sie als Überschrift den Seitentitel und als
+			Inhalt den Fliesstext sehen, die Sie vor kurzem in die Datenbank
+			eingefügt haben. 
+		</para>
+		
+		<para>
+			Jetzt gilt es noch dafür zu sorgen, dass die Navigation von
+			Oak erzeugt wird. Ersetzen Sie dazu die Liste in
+			<code><![CDATA[<div id="navi">]]></code> durch folgenden Code:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<ul>
+{select_named ns="Content" class="Page" method="selectPages" var="pages"}
+{foreach from=$pages item=_page}
+	{if $_page.id == OAK_CURRENT_PAGE}
+		<li class="on">{$_page.name}</li>
+	{else}
+		<li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
+	{/if}
+{/foreach}
+</ul>
+]]></programlisting>
+
+		<para>
+			Nachdem Sie die Vorlage wieder gespeichert haben, können Sie
+			die Ausgabeseite nochmals laden, worauf jetzt auch die Navigation
+			von Oak erzeugt wird. Jetzt ist es Zeit, Style Sheets und Logos
+			einzubinden, was im <xref linkend="crash_course.style_homepage"/>
+			geschieht.
+		</para>
+		
+		<figure id="crash_course.connect_homepage_with_template.end_result">
+			<title>Vorlage mit Inhalten aus Datenbank</title>
+			<graphic fileref="images/crash_course.connect_homepage_with_template.end_result.png"/>
+		</figure>
+	</sect1>
+	
+	<sect1 id="crash_course.style_homepage">
+		<title>Logos und Style Sheets einbinden</title>
+		
+		<para>
+			Wie die Vorlagen müssen auch Style Sheets über die Admin-Oberfläche
+			verwaltet werden. Um das Style Sheet für die Demo-Seite zu
+			integrieren, müssen Sie zum Unterabschnitt <guibutton>Global
+			Templates</guibutton> wechseln. Klicken Sie dort auf
+			<guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Geben Sie hier den Namen des Style Sheets an. Da das 
+						Style Sheet in den Vorlagen über den Namen referenziert
+						wird, empfiehlt es sich, "Dateinamen" wie
+						<filename>style.css</filename> zu verwenden.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>
+						Hier können Sie eine optionale Beschreibung für
+						die Style-Sheet-Datei eingeben.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Content</term>
+				<listitem>
+					<para>
+						Kopieren Sie in dieses Feld die Inhalte der
+						<filename>oak1.css</filename> hinein.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>MIME Type</term>
+				<listitem>
+					<para>
+						Wählen Sie den Eintrag
+						<guimenuitem>text/css</guimenuitem> aus der Liste
+						aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Change delimiter</term>
+				<listitem>
+					<para>
+						Setzen Sie einen Haken, da sonst die geschweiften
+						Klammern in den Style Sheets vor Fehler sorgen.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie nun auf die Schaltfläche <guibutton>Add global
+			template</guibutton>, um die CSS-Datei zu speichern.
+		</para>
+		
+		<para>
+			Nun kann die CSS-Datei mit der Vorlage verknüpft werden.
+			Gehen Sie dazu wieder zurück zur Eingabemaske für die
+			Vorlage, die Sie vorher angelegt haben. Suchen Sie nach der
+			Referenzierung der Style-Sheet-Datei:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<link type="text/css" rel="stylesheet" href="styles/oak1.css" media="screen, projection" />
+]]></programlisting>
+
+		<para>
+			Löschen Sie nun die Referenz auf die Datei
+			<filename>styles/oak1.css</filename> und platzieren Sie den
+			Cursor zwischen den Anführungszeichen. Klicken Sie nun auf
+			den Link <guibutton>Reference Global Template</guibutton> über
+			dem Textfeld. Es öffnet sich ein Pop-up, in dem die bisher
+			angelegten Global Files gelistet werden. Klicken Sie auf die
+			soeben angelegte <filename>style.css</filename>, worauf sich das
+			Pop-up schliesst und der Code 
+			<code>{global_template name="style.css"}</code> als
+			Style-Sheet-Referenz eingefügt wird. Die gesamte Anweisung
+			sieht nun so aus:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<link type="text/css" rel="stylesheet" href="{global_template name="style.css"}"
+	media="screen, projection" />
+]]></programlisting>
+
+		<para>
+			Speichern Sie die Vorlage und aktualisieren Sie die Ausgabeseite.
+			Wenn Sie alles richtig gemacht haben, sollten die Inhalte jetzt
+			"gestylt" sein (siehe
+			<xref linkend="crash_course.style_homepage.styled_homepage"/>).
+		</para>
+		
+		<figure id="crash_course.style_homepage.styled_homepage">
+			<title>Startseite mit verknüpftem Style Sheet</title>
+			<graphic fileref="images/crash_course.style_homepage.styled_homepage.png"/>
+		</figure>
 	</sect1>
 </chapter>
