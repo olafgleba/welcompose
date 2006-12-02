@@ -38,14 +38,15 @@
 		<title>FTP-Programme für Windows und Mac</title>
 		
 		<para>
-			Benötigen Sie ein FTP-Programm, ist beispielsweise
+			Benötigen Sie ein FTP-Programm für Windows, ist beispielsweise
 			<ulink url="http://filezilla.sourceforge.net/">FileZilla</ulink>
 			eine gute Wahl. Für Mac bietet sich die Nutzung von
 			<ulink url="http://cyberduck.ch/">Cyberduck</ulink> an. Beide
 			Programme sind frei verfügbar und in verschiedenen Sprachen
 			erhältlich. Cyberduck ermöglicht auch Verbindungen über SSH
 			(SFTP respektive SCP). Benötigen Sie so einen Client für Windows,
-			ist <ulink url="http://winscp.net/">WinSCP</ulink> eine gute Wahl.
+			kommt unter anderem <ulink url="http://winscp.net/">WinSCP</ulink>
+			in Frage.
 		</para>
 	</sect1>
 </appendix>
