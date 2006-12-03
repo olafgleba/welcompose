@@ -607,5 +607,215 @@
 			<title>Startseite mit verknüpftem Style Sheet</title>
 			<graphic fileref="images/crash_course.style_homepage.styled_homepage.png"/>
 		</figure>
+		
+		<para>
+			Nun muss noch das Logo eingebunden wird. Wechseln dazu zum
+			Unterabschnitt <guibutton>Global Files</guibutton> und klicken
+			Sie dort auf <guibutton>Add new</guibutton>, um zur Eingabemaske
+			zu gelangen.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>File</term>
+				<listitem>
+					<para>
+						Auswahl für die Datei, die von der Anwenderfestplatte
+						auf den Server hochgeladen werden soll. Wählen Sie die
+						Datei <filename>images/logo.jpg</filename> aus dem
+						Paket der Demo-Webseite aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>
+						Optionale Beschreibung der hochzuladenden Datei.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie auf die Schaltfläche <guibutton>Add global
+			file</guibutton>, um das Logo hochzuladen. Kehren Sie dann wieder
+			zur Vorlage zurück und suchen Sie den Code für die Einbindung des
+			Logos:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<a href="index.html" title="zur Startseite"><img src="images/logo.jpg"
+	width="193" height="31" alt=">Ihr Logo" /></a>
+]]></programlisting>
+
+		<para>
+			Entfernen Sie nun die Referenz <filename>images/logo.jpg</filename>
+			und setzen Sie den Cursor zwischen die beiden Anführungszeichen,
+			bevor Sie auf <guibutton>Reference Global File</guibutton> klicken.
+			Es öffnet sich ein Pop-up, das die vorhandenen Global Files listet.
+			Wählen Sie das soeben hochgeladene Logo aus, indem sie auf dessen
+			Namen klicken. Das Pop-up schliesst sich und es wird der Code
+			<code>{global_file name="logo.jpg"}</code> eingesetzt. Der gesamte
+			Code zur Einbindung des Logos sieht nun so aus:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<a href="index.html" title="zur Startseite"><img src="{global_file name="logo.jpg"}"
+	width="193" height="31" alt=">Ihr Logo" /></a>
+]]></programlisting>
+
+		<para>
+			Speichern Sie nun die Vorlage und laden Sie die Ausgabeseite
+			neu &ndash; die Startseite erscheint nun mit Logo (siehe
+			<xref linkend="crash_course.style_homepage.homepage_with_logo"/>).
+		</para>
+		
+		<figure id="crash_course.style_homepage.homepage_with_logo">
+			<title>Startseite mit Logo</title>
+			<graphic fileref="images/crash_course.style_homepage.homepage_with_logo.png"/>
+		</figure>
+	</sect1>
+	
+	<sect1 id="crash_course.style_homepage_content">
+		<title>Inhalt gestalten</title>
+		
+		<para>
+			Wie man in <xref linkend="crash_course.demo_website"/> sieht,
+			gehören zum Fliesstext Untertitel und ein Bild. Dies soll nun
+			nachgetragen werden. Wechseln Sie dazu wieder zum Bereich
+			<guibutton>Contents</guibutton> und dann zum Unterbereich
+			<guibutton>Pages</guibutton>. Klicken Sie dort auf das Symbol
+			zum Editieren der Startseite.
+		</para>
+		
+		<para>
+			Zuerst kümmern wir uns um die Textformatierung. Trennen Sie die
+			ersten zwei Sätze des ersten Abschnitts mit zwei Zeilenumbrüchen
+			von dem Rest des Abschnitts ab. Setzen Sie nun das Code-Fragment
+			<code>p(teaser). </code> davor, um dem P-Tag, der den ersten
+			Abschnitt einschliesst, die CSS-Klasse <code>teaser</code>
+			mitzugeben.
+		</para>
+		
+		<warning>
+			<para>
+				 Achten Sie dabei darauf, dass Sie nach dem Punkt bei
+				<code>p(teaser). </code> das Leerzeichen nicht vergessen,
+				da sonst die Anweisung nicht funktioniert!
+			</para>
+		</warning>
+		
+		<para>
+			Nun müssen wir noch den Untertitel setzen. Setzen Sie den Cursor
+			an das Ende vom ersten Abschnitt, geben Sie zwei Zeilenumbrüche
+			ein und fügen dann den Code <code>h2. Das ist ein Untertitel</code>
+			ein. Die ersten zwei Abschnitte des Fliesstextes sollten nun so
+			aussehen:
+		</para>
+		
+		<programlisting language="textile"><![CDATA[
+p(teaser). Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In
+consequat dolor id elit. Pellentesque habitant morbi tristique senectus et
+netus et malesuada fames ac turpis egestas.
+
+h2. Das ist ein Untertitel
+
+Cras urna. Cum sociis natoque penatibus et magnis dis parturient montes,
+nascetur ridiculus mus. Nam egestas porttitor nisl. Aenean dapibus dictum
+magna...
+]]></programlisting>
+		
+		<para>
+			Speichern Sie nun die Seite und laden die Ausgabeseite neu.
+			Der erste Abschnitt sollte nun von
+			<code><![CDATA[<p class="teaser">]]></code> eingeschlossen und 
+			orange sein. Auf ihn folgt dann der Untertitel H2.
+		</para>
+		
+		<para>
+			Nachdem dies geschafft ist, kommt nun das Bild hinzu. Öffnen Sie
+			dazu wieder die Startseite und setzen Sie den Cursor nach
+			die Anweisung <code>p(teaser). </code> beim ersten Abschnitt. Geben
+			Sie nun zwei Ausrufezeichen ein (<code>!!</code>) und platzieren
+			Sie den Cursor zwischen den beiden Ausrufezeichen.
+		</para>
+		
+		<para>
+			Gehen Sie nun zum Media Manager rechts neben dem Textfeld. Klicken
+			Sie dort auf <guibutton>Upload</guibutton>. Es öffnet sich ein 
+			Pop-up.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>File</term>
+				<listitem>
+					<para>
+						Dient zur Auswahl des Bildes, das hochgeladen werden
+						soll. Wählen Sie das Bild
+						<filename>images/physalis.jpg</filename> aus, das 
+						Bestandteil der Demo-Webseite ist.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Description</term>
+				<listitem>
+					<para>
+						Hier können Sie eine optionale Beschreibung des
+						Bildes eingeben.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Tags</term>
+				<listitem>
+					<para>
+						Geben Sie hier Schlüsselwörter ein, die ihnen beim
+						Wiederfinden des Bildes helfen, jeweils getrennt durch
+						ein Komma. Beispiel:
+						<userinput>Physalis, Blume, orange</userinput>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie nun auf <guibutton>Upload Media</guibutton>, um 
+			das Bild hochzuladen. Das Pop-up schliesst sich und Sie sollten
+			eine verkleinerte Version des Bildes rechts im Mediamanager sehen.
+			Klicken Sie nun auf die verkleinerte Version des Bildes und es wird
+			der Code <code>{get_media id="1"}</code> zwischen die beiden
+			Ausrufezeichen eingefügt. Der ganze erste Abschnitt sieht nun so
+			aus:
+		</para>
+		
+		<programlisting language="textile"><![CDATA[
+p(teaser). !{get_media id="1"}! Lorem ipsum dolor sit amet, consectetuer
+adipiscing elit. In consequat dolor id elit. Pellentesque habitant morbi
+tristique senectus et netus et malesuada fames ac turpis egestas.
+]]></programlisting>
+		
+		<note>
+			<para>
+				Bei der Bildreferenz <code>{get_media id="1"}</code> kann
+				der Wert der Bild-ID abweichen, wenn Sie bereits vorher
+				Bilder in den Mediamanager eingefügt haben. Eine Referenz
+				wie <code>{get_media id="32"}</code> kann somit auch korrekt
+				sein.
+			</para>
+		</note>
+		
+		<para>
+			Speichern Sie nun die Webseite und laden die Ausgabeseite. Sie
+			sollen nun das Resultat Ihrer Anpassungen samt Bild sehen (siehe
+			<xref linkend="crash_course.style_homepage_content.styled_homepage_content_with_image"/>).
+		</para>
+		
+		<figure id="crash_course.style_homepage_content.styled_homepage_content_with_image">
+			<title>Startseite mit Teaser, Untertitel und Bild</title>
+			<graphic fileref="images/crash_course.style_homepage_content.styled_homepage_content_with_image.png"/>
+		</figure>
 	</sect1>
 </chapter>
