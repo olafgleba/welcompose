@@ -20,6 +20,12 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
+/** 
+ * @fileoverview The string repository for all classes.  
+ * 
+ * @author Olaf Gleba og@creatics.de
+ * @version $Id$ 
+ */
 
 /**
  * debug output strings (used with debug state 2)

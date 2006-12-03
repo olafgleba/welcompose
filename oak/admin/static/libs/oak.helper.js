@@ -116,6 +116,8 @@
  * applyBehaviour()
  * 
  *
+ * validate()
+ * 
  *
  * @see Base
  * @constructor
@@ -164,6 +166,7 @@ Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.applyBehaviour = Helper_applyBehaviour;
+Helper.prototype.validate = Helper_validate;
 
 
 function Helper_launchPopup (width, height, nname, trigger, elem)
@@ -1150,6 +1153,26 @@ function Helper_applyBehaviour ()
 		Behaviour.reapply('.iHelpRemoveMediamanager');	
 }
 
+
+function Helper_validate(elem)
+{	
+	var url		= this.validateUrl;
+	elemID		= $(elem).getAttribute('id');
+	var elemVal	= $F(elem);
+	var pars	= 'elemID=' + elemID + '&elemVal=' + elemVal;
+	var container = elemID + '_container';
+	
+	var myAjax = new Ajax.Updater ( 
+		{
+			failure: container,
+			success: container
+		},
+		url,
+		{
+			method: 'post',
+			parameters: pars
+		});		
+}
 /**
  * Building new object instance of class Helper
  */

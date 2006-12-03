@@ -20,6 +20,13 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  
+/** 
+ * @fileoverview This defines the event handling through lib Behaviour. Used for all content pages which contains popups exclude the mediamanager.  
+ * 
+ * @author Olaf Gleba og@creatics.de
+ * @version $Id: oak.core.js 673 2006-11-23 21:46:53Z olaf $ 
+ */
+
 /**
  * trigger class methods depending on CSS class DOM events
  */
@@ -147,12 +154,12 @@ var definitions = {
 	},
 	'input.validate' : function(el){
 		el.onkeyup = function(){
-			validate(this);
+			Helper.validate(this);
 		}
 	},
 	'textarea.validate' : function(el){
 		el.onkeyup = function(){
-			validate(this);
+			Helper.validate(this);
 		}
 	},
 	'.act_internalLink' : function(el){

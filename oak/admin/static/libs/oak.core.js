@@ -355,6 +355,11 @@ function Base ()
 		 * Path for dynamically imported file
 		 */
 		this.parseStructuralTemplatesLinksUrl = '../content/structuraltemplates_links_select.php';
+
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.validateUrl = '../validate.js.php';
 	} catch (e) {
 		_applyError(e);
 	}
