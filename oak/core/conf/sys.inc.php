@@ -22,13 +22,13 @@ table_alias_constants = true
 debug = false;
 backticks = true;
 
-[image]
-store_www = "/oak/trunk/oak/images"
-store_disk = "/www/oak/trunk/oak/images"
+[media]
+store_www = "/oak/trunk/oak/files/media"
+store_disk = "/www/oak/trunk/oak/files/media"
 
-[file]
-store_www = "/oak/trunk/oak/files"
-store_disk = "/www/oak/trunk/oak/files"
+[global_file]
+store_www = "/oak/trunk/oak/files/global_files"
+store_disk = "/oak/trunk/oak/files/global_files"
 
 [caching]
 index.php_mode = 0

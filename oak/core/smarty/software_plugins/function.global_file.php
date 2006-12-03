@@ -65,7 +65,7 @@ function smarty_function_global_file ($params, &$smarty)
 	}
 	
 	// execute method and return requested data
-	return sprintf("%s/%s", $GLOBALFILE->base->_conf['file']['store_www'],
+	return sprintf("%s/%s", $GLOBALFILE->base->_conf['global_file']['store_www'],
 		$file['name_on_disk']);
 }
 

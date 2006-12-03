@@ -161,7 +161,7 @@ try {
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// assign image path
-	$BASE->utility->smarty->assign('image_store_www', $BASE->_conf['image']['store_www']);
+	$BASE->utility->smarty->assign('media_store_www', $BASE->_conf['media']['store_www']);
 	
 	// display the correlated mediamanager template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');
