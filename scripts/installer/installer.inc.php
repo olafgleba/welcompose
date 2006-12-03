@@ -88,7 +88,7 @@ class Setup_PackageExtractor {
 		'/smarty/compiled',
 		'/smarty/cache',
 		'/files/media',
-		'/files/global_templates',
+		'/files/global_files',
 		'/tmp',
 		'/tmp/captchas',
 		'/tmp/installer',
