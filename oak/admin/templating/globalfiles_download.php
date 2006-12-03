@@ -102,7 +102,7 @@ try {
 	$global_file = $GLOBALFILE->selectGlobalFile(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
 	
 	// prepare path to file
-	$path_to_file = $BASE->_conf['file']['store_disk'].DIR_SEP.$global_file['name_on_disk'];
+	$path_to_file = $BASE->_conf['global_file']['store_disk'].DIR_SEP.$global_file['name_on_disk'];
 	
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {

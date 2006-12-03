@@ -816,7 +816,7 @@ public function getPathToObject ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['image']['store_disk'].DIR_SEP.$object_name;
+	return $this->base->_conf['media']['store_disk'].DIR_SEP.$object_name;
 }
 
 /**
@@ -892,7 +892,7 @@ public function getPathToThumbnail ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['image']['store_disk'].DIR_SEP.$object_name;
+	return $this->base->_conf['media']['store_disk'].DIR_SEP.$object_name;
 }
 
 /**
@@ -908,7 +908,7 @@ public function imageStoreIsReady ()
 	}
 	
 	// get configured path
-	$path = $this->base->_conf['image']['store_disk'];
+	$path = $this->base->_conf['media']['store_disk'];
 	
 	// clear stat cache
 	clearstatcache();
