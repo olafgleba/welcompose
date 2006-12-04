@@ -64,7 +64,7 @@
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
-<td class="td_mm_media">{if !empty($_object.preview_name_on_disk)}<a class="mm_insertImageItem" id="{$_object.id}" href="#" title="{i18n Insert this image to your content}"><img src="{$image_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{else}<a class="mm_insertDocumentItem" id="{$_object.id}" href="#" title="{i18n Insert this document to your content}"><img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" /></a>{/if} 
+<td class="td_mm_media">{if !empty($_object.preview_name_on_disk)}<a class="mm_insertImageItem" id="{$_object.id}" href="#" title="{i18n Insert this image to your content}"><img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" /></a>{else}<a class="mm_insertDocumentItem" id="{$_object.id}" href="#" title="{i18n Insert this document to your content}"><img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" /></a>{/if} 
 </td>
 <td class="td_mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}

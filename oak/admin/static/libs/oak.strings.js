@@ -28,6 +28,14 @@
  */
 
 /**
+ * CAUTION!
+ *
+ * DONT EVER CHANGE THE CONTENTS OF THESE STRINGS!!!
+ * ALL LOCALISATION IS DONE IN THE APPROPRIATE LANGUAGE FILE
+ * SEE DOCUMENATION
+ */
+
+/**
  * debug output strings (used with debug state 2)
  */
 var e_msg_str_prefix = '<%i18n An javascript error occured: %>';

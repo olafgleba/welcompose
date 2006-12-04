@@ -26,29 +26,37 @@
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
- 
+
 
 
 /**
- * Define debug output string
+ * Define debug output string. 
  *
- * Switch differs how try/catch will handle exceptions
- * 0 = no debug output
- * 1 = development
- * 2 = production
+ * Switch differs how try/catch will handle exceptions.<br />
+ * 0 = No debug output<br />
+ * 1 = Development<br />
+ * 2 = Production
  *
- * @static
- * @link See oak.string.js for the strings content
+ * @type Bool
  */
-var debug = 1;
+function _debug ()
+{
+	debug = 1;
+}
 
 /**
- * Build new XMLHTTPRequest object instance
+ * Build new XMLHTTPRequest object instance.
+ * Used in classes constructor wherever an XMLHTTPRequest is needed.
  *
- * @private
+ * <br /><br />Example:
+ * <pre><code>
+// instance XMLHttpRequest object
+this.req = _buildXMLHTTPRequest();
+ * </code></pre>
+ *
  * @throws applyError on exception
- * @return XMLHTTPRequest object instance
- * @type object
+ * @return Object XMLHTTPRequest object instance
+ * @type Object
  */
 function _buildXMLHTTPRequest ()
 {
@@ -64,11 +72,19 @@ function _buildXMLHTTPRequest ()
 	}
 }
 
+
 /**
  * Alerted String (errStr) contains exception params with different
  * provided debug information.
  *
- * @private
+ * <br /><br />Example:
+ * <pre><code>
+try {
+	<contents>
+} catch (e) {
+	_applyError(e);
+}</code></pre>
+ * 
  * @param {object} exception error obj presented by catch statement
  */
 function _applyError (exception)
@@ -104,20 +120,16 @@ function _applyError (exception)
  * Constructs the Errors class
  *
  * @class The Errors class tracks all manually thrown
- * errors. Scope application wide. Mainly used in all
+ * errors. It is inherited from the standard javascript error class prototype.
+ * Scope application wide. Mainly used in all
  * process_xxx functions to track errors on xhr state, which
- * are not processed by the try/catch structure.
+ * are not traped by the try/catch structure.
  *
- * example:
- * < throw new Errors(object); > 
- *
- * Prototype Methods:
- * 
- * **Right now there are not methods defined**
- *
+ * <br /><br />Example:
+ * <pre><code>throw new Errors(object);</code></pre>
  *
  * @constructor
- * @param {string} msg Exception error message presented by catch statement
+ * @param {string} msg Exception error message
  */
 function Errors(msg) 
 {
@@ -140,39 +152,6 @@ Errors.prototype = new Error();
  * @class This class is the most important class of the oak
  * javascript enviroment, cause all other classes derived from that class.
  * It predefines properties and methods which are supposed to be used application wide.
- *
- * Prototype Methods:
- * 
- * isArray()
- * Examine the giving var is of type Array
- *
- * isBoolean()
- * Examine the giving var is of type Bool
- *
- * isString()
- * Examine the giving var is of type String
- *
- * isObject()
- * Examine the giving var is of type Object
- *
- * isFunction()
- * Examine the giving var is a function
- *
- * isUndefined()
- * Examine the giving var is undefined
- *
- * isNumber()
- * Examine the giving var is of type Number
- *
- * isEmpty()
- * Examine the giving var has no values
- *
- * isNull()
- * Examine the giving var is Null
- *
- * trim()
- * Delete whitspaces before and after the giving string
- *
  *
  * @constructor
  * @throws applyError on exception
@@ -468,7 +447,7 @@ function Base_isNull(elem) {
     return typeof elem == 'object' && !elem;
 }
 /**
- * Delete whitspaces before and after the giving string
+ * Delete whitspaces at begin and end of the delivered string
  *
  * @param {var} elem Actual element
  * @return elem
@@ -478,33 +457,33 @@ function Base_trim(elem) {
   return elem.replace(/^\s*|\s*$/g, "");
 }
 
-	
 
 
 /**
  * Constructs the Init class
  * 
- * @class The Init class is supposed to used on load of page
+ * @class The Init class is supposed to be used on load of page.
+ * <br />
+ * Right now the function <em>Init_load()</em> is used as an argument for the thirdparty lib method
+ * <em>Behaviour.addLoadEvent(Init.load);</em> and is not supposed to called manually. If you
+ * you want something to happen on load of page, add another prototype function (e.g. <em>Init_getVars();</em>) to class Init
+ * and call it within the <em>load()</em> function instead.
  *
- * Prototype methods:
- * 
- * load()
- * Init function of the class. All functions supposed to be called
- * on load must take place here.
+ * <br /><br />Example (Schema):
+ * <pre><code>
+function Init_load ()
+{	
+	try {
+		// Do something while page load
+		Init.getVars();
+		...
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+ * </code></pre>
  *
- * getVars()
- * Getter function for different actions to be executed.
- * Depends on delivered variables defined in the html markup.
- *
- * getCbxStatus()
- * Show/hide a group of form elements and color their labels.
- * Depends on delivered variable in the html markup.
- *
- * processInit()
- * Update content with XMLHttpRequest response.
- *
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -528,13 +507,18 @@ Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
 
 /**
- * All functions supposed to be called on load must take place here.
+ * All functions supposed to be called on load must take place within this function.
+ * 
  * 
  * @throws applyError on exception
  */
 function Init_load ()
 {	
 	try {
+		// DONT EVER CHANGE THIS FUNCTION CALL
+		// set global debug var first
+		_debug();
+		
 		Init.getVars();
 		
 		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
@@ -546,8 +530,8 @@ function Init_load ()
 }
 
 /**
- * Getter function for different actions to be executed.
- * Depends on delivered variables defined in the html markup.
+ * Getter function for several actions to be executed on load of page.
+ * Depends on delivered variable in the html markup.
  * 
  * @throws applyError on exception
  */
@@ -590,8 +574,11 @@ function Init_getVars ()
 }
 
 /**
- * Show/hide a group of form elements and color their labels.
+ * Show/hide a group of form elements and color their labels on load of page.
  * Depends on delivered variable in the html markup.
+ * <br />
+ * For properly use or/and enhancement of this feature, please have a look on
+ * the online project support area.
  *
  * @param {array} elems Array of element(s)
  * @throws applyError on exception
@@ -672,33 +659,27 @@ Init = new Init();
  * 
  * @class The Help class is the appropriate class for
  * the help enviroment. The scope is application wide.
+ * For consistent reason, it comprises the help handling of the Mediamanger too.
  *
- * Prototype methods:
+ * <br /><br />Schema:
+ * <pre><code>
+function Help_show ()
+{	
+	try {
+		&bull; Get form id attribute
+		&bull; Get form field id attribute (processID)
+		&bull; Build url
+		&bull; Get appropriate help html (XMLHttpRequest)
+		&bull; Set corresponding focus on form field element
+		&bull; Reapply corresponding form field help markup css class
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+ * </code></pre>
  * 
- * show()
- * Import related help file depending on actual element pointer.
- * Show help html element.
  *
- * hide()
- * Hide help html element.
- *
- * processHelp()
- * Update content with XMLHttpRequest response.
- *
- * showMediamanager()
- * Import related help file depending on actual element pointer.
- * Show help html element.
- *
- * hideMediamanager()
- * Hide help html element.
- *
- * processMediamanager()
- * Update content with XMLHttpRequest response.
- *
- * setCorrespondingFocus()
- * Set Focus related to pointed element.
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -740,7 +721,7 @@ function Help_show (elem)
 		this.elem = elem;
 		this.elem.className = this.helpClassRemove;
 		this.attr = 'for';
-		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
+		this.processId = Helper.getAtrParentNode(this.attr, this.elem, 2);
 		this.ttarget = this.processId;
 				
 		var i = this.processId.match(/_\d+/);
@@ -977,7 +958,6 @@ Help = new Help();
  * processing stuff. The scope is application wide.
  *
  * Prototype methods:
- * 
  * show()
  * Import related navigation file depending on actual element pointer.
  *
