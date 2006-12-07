@@ -370,7 +370,7 @@
 					<para>
 						Name der Vorlage. Dient zur späteren Identifizierung
 						derselben. Geben Sie einen beschreibenden Namen wie
-						<userinput>Vorlage Startseite</userinput> ein.
+						<userinput>Vorlage Inhaltsseiten</userinput> ein.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -816,6 +816,302 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		<figure id="crash_course.style_homepage_content.styled_homepage_content_with_image">
 			<title>Startseite mit Teaser, Untertitel und Bild</title>
 			<graphic fileref="images/crash_course.style_homepage_content.styled_homepage_content_with_image.png"/>
+		</figure>
+	</sect1>
+	
+	<sect1 id="crash_course.fill_contents_and_imprint">
+		<title>Inhalts-Seite und Impressum befüllen</title>
+		
+		<para>
+			Neben der Startseite haben wir mit der Seite Inhalt und der Seite
+			Impressum noch zwei weitere Seiten. Wenn Sie die beiden Seiten
+			über die Navigationspunkte aufrufen, sehen Sie bereits dieselbe
+			Vorlage, die für die Startseite verwendet wurde, und den
+			eingeblendeten Seitentitel. 
+		</para>
+		
+		<para>
+			Wenn Sie die beiden Seiten mit Inhalten befüllen wollen, können
+			Sie dies tun, indem Sie neben dem jeweiligen Seitentitel in der
+			Seitenübersicht auf das Symbol unter der Überschrift Edit klicken.
+		</para>
+	</sect1>
+	
+	<sect1 id="crash_course.implement_contact_form">
+		<title>Kontaktformular erstellen</title>
+		
+		<para>
+			Zu guter Letzt bleibt noch die Erstellung des Kontaktformulars.
+			Klicken Sie in der Seitenübersicht auf das Symbol zum Editieren
+			des Formulars.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Title</term>
+				<listitem>
+					<para>
+						Die Überschrift der Seite. Die Vorbelegung mit
+						dem Seitennamen <userinput>Kontakt</userinput> können
+						Sie bestehen lassen.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Content</term>
+				<listitem>
+					<para>
+						Hier können Sie einen Beschreibungstext zum Formular
+						einfügen und damit beispielsweise die Besucher
+						darüber informieren, wie lange sie auf eine Antwort
+						warten müssen.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Text converter</term>
+				<listitem>
+					<para>
+						Wenn Sie wie bei der Startseite Text-Formatierungen
+						verwenden wollen, wählen Sie hier die Option
+						Textile aus dem Menü aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Apply text macros</term>
+				<listitem>
+					<para>
+						Setzen Sie hier einen Haken, damit eventuell vorhandene
+						Links im Feld Content erzeugt werden.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Form type</term>
+				<listitem>
+					<para>
+						Der Form Type bestimmt, aus welchen Feldern das Formular
+						aufgebaut ist. Das <guimenuitem>Personal
+						form</guimenuitem> besteht aus den Feldern Name,
+						E-Mail-Adresse, Homepage und Nachricht. Das 
+						<guimenuitem>Business form</guimenuitem> enthält die
+						Felder Vorname, Nachname, Adresse, Ort, Telefonnummer,
+						E-Mail-Adresse, Nachricht und eine Checkbox, bei der
+						der Besucher auswählen kann, ob er zurückgerufen
+						werden will oder nicht. Wählen Sie den Eintrag
+						<guimenuitem>Personal form</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>From: address</term>
+				<listitem>
+					<para>
+						Die Adresse, mit der die vom Formular erzeugte
+						E-Mail versendet werden soll.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>To: address</term>
+				<listitem>
+					<para>
+						Die E-Mail-Adresse, an die die vom Formular erzeugte
+						E-Mail versendet werden soll.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Subject</term>
+				<listitem>
+					<para>
+						Betreff, der in die Nachricht eingefügt werden soll,
+						die vom Formular versendet wird.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Use captcha</term>
+				<listitem>
+					<para>
+						Definiert, ob ein Bild in das Formular eingebettet
+						werden soll, in dem Text enthalten ist, der vom
+						Besucher abgetippt werden soll. Schützt gegen
+						Formular-Spam. Belassen Sie hier die Voreinstellung
+						<guimenuitem>Disable captcha</guimenuitem>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Klicken Sie nun auf <guibutton>Update form</guibutton>, um Ihre
+			Eingaben zu speichern. Wechseln Sie nun zum Bereich
+			<guibutton>Templating</guibutton> und dort zum Unterbereich
+			<guibutton>Templates</guibutton>. Denn es muss noch eine
+			Vorlage für das Formular angelegt werden.
+		</para>
+		
+		<para>
+			Suchen Sie nach der Vorlage, die Sie für die Inhaltsseiten
+			verwendet haben. Klicken Sie beim Eintrag auf das Symbol
+			<guilabel>Duplicate</guilabel>. Damit kann die bestehende
+			Vorlage weiterverwendet und (mit leichten Änderungen) unter
+			einem anderen Namen abgespeichert werden.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>
+						Ändern Sie den Vorlagen-Typ von 
+						<guimenuitem>simple_page_index</guimenuitem> auf
+						<guimenuitem>simple_form_index</guimenuitem>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Ändern Sie den Vorlagennamen auf <userinput>Vorlage
+						Kontaktformular</userinput>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Lassen Sie anderen Felder vorerst unangetastet und klicken
+			Sie auf die Schaltfläche <guibutton>Duplicate template</guibutton>.
+			Wenn Sie jetzt die Ausgabeseite für das Kontaktformular aufrufen,
+			sehen Sie, dass der Inhaltsbereich noch leer ist. Aber das
+			wird sich gleich ändern.
+		</para>
+		
+		<para>
+			Klicken Sie in der Vorlagenübersicht neben der Vorlage
+			Kontaktformular auf das Symbol zum Bearbeiten der Vorlage. Suchen
+			Sie den Inhaltsbereich, der mit
+			<code><![CDATA[<div id="content">]]></code> beginnt.
+		</para>
+		
+		<para>
+			Ersetzen Sie den Platzhalter zwischen den H1-Tags durch
+			<code>{$simple_form.title}</code>. Der komplette neue H1-Tag:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<h1>{$simple_form.title}</h1>
+]]></programlisting>
+
+		<para>
+			Aktualisieren Sie die Ausgabeseite. Der Titel Kontakt sollte
+			nun erscheinen.
+		</para>
+		
+		<para>
+			Nun muss das Formular eingebunden werden. Ersetzen Sie dazu
+			am besten den von <code><![CDATA[<div id="content">]]></code>
+			umschlossenen Bereich durch folgenden Code:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<div id="content">
+	<h1>{$simple_form.title}</h1>
+	
+	{$simple_form.content}
+	
+	{if !empty($form.errors)}
+	<ul>
+	{foreach from=$form.errors item="error"}
+		<li>{$error}</li>
+	{/foreach}
+	</ul>
+	{/if}
+	
+	<form {$form.attributes}>
+	{$form.javascript}
+	<fieldset>
+	{$form.hidden}
+	
+	<label for="name">{$form.name.label} {$form.name.html}</label>
+	<label for="email">{$form.email.label} {$form.email.html}</label>
+	<label for="homepage">{$form.homepage.label} {$form.homepage.html}</label>
+	<label for="message">{$form.message.label} {$form.message.html}</label>
+	
+	{$form.submit.html}
+	</form>
+<!-- content --></div>
+]]></programlisting>
+		
+		<para>
+			Speichern Sie nun wieder die Vorlage und aktualisieren Sie die
+			Ausgabeseite. Sie erhalten dann das Formular angezeigt. Allerdings
+			ist es noch nicht ganz einsatzbereit, denn die Vorlagen für die
+			E-Mails, die versendet werden sollen, werden auch noch benötigt.
+			Verlassen Sie die Eingabemaske für die Formularvorlage und gehen
+			Sie zur Vorlagenübersicht zurück. Klicken Sie dort auf den Link
+			<guibutton>Add new</guibutton>, um ein neues Formular anlegen 
+			zu können.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>
+						Wählen Sie
+						<guimenuitem>simple_form_personal_form_mail</guimenuitem>
+						als Vorlagen-Typ aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>Geben Sie einen Vorlagennamen wie <userinput>Vorlage
+					E-Mail Kontaktformular</userinput> ein.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Sets</term>
+				<listitem>
+					<para>
+						Wählen Sie das aktuelle Vorlagen-Set
+						<guimenuitem>Standardaussehen</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Als <guilabel>Content</guilabel> fügen Sie folgenden Code ein:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+E-Mail von {$form_data.now|date_format:"%d.%m.%Y, %H:%M:%S"}:
+
+Name: {$form_data.name}
+E-Mail: {$form_data.email}
+Homepage: {$form_data.homepage}
+
+{$form_data.message|wordwrap:65}
+]]></programlisting>
+		
+		<para>
+			Klicken Sie auf die Schaltfläche <guibutton>Add template</guibutton>,
+			um die Vorlage zu speichern. Jetzt können Sie das Formular auf
+			der Ausgabeseite ausfüllen und absenden. Wenn Sie alles richtig
+			eingegeben haben, sollten Sie in den nächsten Minuten ein
+			E-Mail mit Ihren Formulareingaben in der Inbox haben.
+		</para>
+		
+		<figure id="crash_course.implement_contact_form.generated_form_mail">
+			<title>Vom Kontaktformular erzeugte E-Mail</title>
+			<graphic fileref="images/crash_course.implement_contact_form.generated_form_mail.png"/>
 		</figure>
 	</sect1>
 </chapter>
