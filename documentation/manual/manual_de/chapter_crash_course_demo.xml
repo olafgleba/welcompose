@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<chapter id="crash_course">
-	<title>Crash-Kurs</title>
+<chapter id="crash_course_demo">
+	<title>Crash-Kurs: Demo-Webseite</title>
 	
 	<para>
 		Die Erstellung von Webseiten mit Oak ist auf den ersten Blick nicht
@@ -23,9 +23,9 @@
 		von Oak.
 	</para>
 	
-	<figure id="crash_course.demo_website">
+	<figure id="crash_course_demo.demo_website">
 		<title>Screenshot der Demo-Webseite</title>
-		<graphic fileref="images/crash_course.demo_website.png"/>
+		<graphic fileref="images/crash_course_demo.demo_website.png"/>
 	</figure>
 	
 	<para>
@@ -47,7 +47,7 @@
 		</para>
 	</note>
 	
-	<sect1 id="crash_course.preparation">
+	<sect1 id="crash_course_demo.preparation">
 		<title>Vorbereitungen</title>
 		
 		<para>
@@ -106,7 +106,7 @@
 		</para>
 	</sect1>
 	
-	<sect1 id="crash_course.create_pages">
+	<sect1 id="crash_course_demo.create_pages">
 		<title>Seiten anlegen</title>
 		
 		<para>
@@ -193,7 +193,7 @@
 						bestimmt, welche Vorlagen zur Anzeige der Seite
 						verwendet werden sollen. Wählen Sie hier das
 						<foreignphrase>Template Set</foreignphrase> aus,
-						das wir im <xref linkend="crash_course.preparation"/>
+						das wir im <xref linkend="crash_course_demo.preparation"/>
 						angelegt haben, also
 						<userinput>Standardaussehen</userinput>.
 					</para>
@@ -266,13 +266,13 @@
 			<guimenuitem>OAK_SIMPLE_FORM</guimenuitem> auszuwählen.
 		</para>
 		
-		<figure id="crash_course.create_pages.created_pages">
+		<figure id="crash_course_demo.create_pages.created_pages">
 			<title>Angelegte Seiten</title>
-			<graphic fileref="images/crash_course.create_pages.created_pages.png"/>
+			<graphic fileref="images/crash_course_demo.create_pages.created_pages.png"/>
 		</figure>
 	</sect1>
 	
-	<sect1 id="crash_course.fill_homepage_with_contents">
+	<sect1 id="crash_course_demo.fill_homepage_with_contents">
 		<title>Startseite mit Inhalten füllen</title>
 		
 		<para>
@@ -338,11 +338,11 @@
 			Sie sehen, dass noch keine Inhalte angezeigt werden, sondern
 			eine Fehlermeldung. Dies liegt daran, dass noch keine Vorlage
 			vorhanden ist, was im
-			<xref linkend="crash_course.connect_homepage_with_template"/> behoben wird.
+			<xref linkend="crash_course_demo.connect_homepage_with_template"/> behoben wird.
 		</para>
 	</sect1>
 	
-	<sect1 id="crash_course.connect_homepage_with_template">
+	<sect1 id="crash_course_demo.connect_homepage_with_template">
 		<title>Startseite mit Vorlage verbinden</title>
 		
 		<para>
@@ -489,17 +489,17 @@
 			Nachdem Sie die Vorlage wieder gespeichert haben, können Sie
 			die Ausgabeseite nochmals laden, worauf jetzt auch die Navigation
 			von Oak erzeugt wird. Jetzt ist es Zeit, Style Sheets und Logos
-			einzubinden, was im <xref linkend="crash_course.style_homepage"/>
+			einzubinden, was im <xref linkend="crash_course_demo.style_homepage"/>
 			geschieht.
 		</para>
 		
-		<figure id="crash_course.connect_homepage_with_template.end_result">
+		<figure id="crash_course_demo.connect_homepage_with_template.end_result">
 			<title>Vorlage mit Inhalten aus Datenbank</title>
-			<graphic fileref="images/crash_course.connect_homepage_with_template.end_result.png"/>
+			<graphic fileref="images/crash_course_demo.connect_homepage_with_template.end_result.png"/>
 		</figure>
 	</sect1>
 	
-	<sect1 id="crash_course.style_homepage">
+	<sect1 id="crash_course_demo.style_homepage">
 		<title>Logos und Style Sheets einbinden</title>
 		
 		<para>
@@ -600,12 +600,12 @@
 			Speichern Sie die Vorlage und aktualisieren Sie die Ausgabeseite.
 			Wenn Sie alles richtig gemacht haben, sollten die Inhalte jetzt
 			"gestylt" sein (siehe
-			<xref linkend="crash_course.style_homepage.styled_homepage"/>).
+			<xref linkend="crash_course_demo.style_homepage.styled_homepage"/>).
 		</para>
 		
-		<figure id="crash_course.style_homepage.styled_homepage">
+		<figure id="crash_course_demo.style_homepage.styled_homepage">
 			<title>Startseite mit verknüpftem Style Sheet</title>
-			<graphic fileref="images/crash_course.style_homepage.styled_homepage.png"/>
+			<graphic fileref="images/crash_course_demo.style_homepage.styled_homepage.png"/>
 		</figure>
 		
 		<para>
@@ -668,20 +668,20 @@
 		<para>
 			Speichern Sie nun die Vorlage und laden Sie die Ausgabeseite
 			neu &ndash; die Startseite erscheint nun mit Logo (siehe
-			<xref linkend="crash_course.style_homepage.homepage_with_logo"/>).
+			<xref linkend="crash_course_demo.style_homepage.homepage_with_logo"/>).
 		</para>
 		
-		<figure id="crash_course.style_homepage.homepage_with_logo">
+		<figure id="crash_course_demo.style_homepage.homepage_with_logo">
 			<title>Startseite mit Logo</title>
-			<graphic fileref="images/crash_course.style_homepage.homepage_with_logo.png"/>
+			<graphic fileref="images/crash_course_demo.style_homepage.homepage_with_logo.png"/>
 		</figure>
 	</sect1>
 	
-	<sect1 id="crash_course.style_homepage_content">
+	<sect1 id="crash_course_demo.style_homepage_content">
 		<title>Inhalt gestalten</title>
 		
 		<para>
-			Wie man in <xref linkend="crash_course.demo_website"/> sieht,
+			Wie man in <xref linkend="crash_course_demo.demo_website"/> sieht,
 			gehören zum Fliesstext Untertitel und ein Bild. Dies soll nun
 			nachgetragen werden. Wechseln Sie dazu wieder zum Bereich
 			<guibutton>Contents</guibutton> und dann zum Unterbereich
@@ -810,16 +810,16 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		<para>
 			Speichern Sie nun die Webseite und laden die Ausgabeseite. Sie
 			sollen nun das Resultat Ihrer Anpassungen samt Bild sehen (siehe
-			<xref linkend="crash_course.style_homepage_content.styled_homepage_content_with_image"/>).
+			<xref linkend="crash_course_demo.style_homepage_content.styled_homepage_content_with_image"/>).
 		</para>
 		
-		<figure id="crash_course.style_homepage_content.styled_homepage_content_with_image">
+		<figure id="crash_course_demo.style_homepage_content.styled_homepage_content_with_image">
 			<title>Startseite mit Teaser, Untertitel und Bild</title>
-			<graphic fileref="images/crash_course.style_homepage_content.styled_homepage_content_with_image.png"/>
+			<graphic fileref="images/crash_course_demo.style_homepage_content.styled_homepage_content_with_image.png"/>
 		</figure>
 	</sect1>
 	
-	<sect1 id="crash_course.fill_contents_and_imprint">
+	<sect1 id="crash_course_demo.fill_contents_and_imprint">
 		<title>Inhalts-Seite und Impressum befüllen</title>
 		
 		<para>
@@ -837,7 +837,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		</para>
 	</sect1>
 	
-	<sect1 id="crash_course.implement_contact_form">
+	<sect1 id="crash_course_demo.implement_contact_form">
 		<title>Kontaktformular erstellen</title>
 		
 		<para>
@@ -1109,9 +1109,9 @@ Homepage: {$form_data.homepage}
 			E-Mail mit Ihren Formulareingaben in der Inbox haben.
 		</para>
 		
-		<figure id="crash_course.implement_contact_form.generated_form_mail">
+		<figure id="crash_course_demo.implement_contact_form.generated_form_mail">
 			<title>Vom Kontaktformular erzeugte E-Mail</title>
-			<graphic fileref="images/crash_course.implement_contact_form.generated_form_mail.png"/>
+			<graphic fileref="images/crash_course_demo.implement_contact_form.generated_form_mail.png"/>
 		</figure>
 	</sect1>
 </chapter>
