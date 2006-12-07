@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="url_rewriting">
+	<title>URL Rewriting</title>
+	
+	<para>
+		Standardmässig verwendet Oak parameterisierte URLs, um die
+		Inhalte auszuwählen, die angezeigt werden sollen. Ein typischer
+		URL zum Aufruf einer Seite sieht etwa so aus:
+		<code><![CDATA[index.php?project_name=default&page_name=kontakt&action=Index]]></code>
+	</para>
+	
+	<para>
+		Diese Form von URLs ist weder besonders benutzer- noch
+		suchmaschinenfreundlich. Um dies zu ändern, muss an zwei Orten
+		die Hand angelegt werden: Einmal am Webserver und einmal in der
+		Konfiguration von Oak. Dabei werden die parameterisierten URLs
+		quasi auf Verzeichnisse und Dateinamen abgebildet, auch wenn
+		diese gar nicht existieren. 
+	</para>
+	
+	<para>
+		Den URL
+		<code><![CDATA[index.php?project_name=default&page_name=kontakt&action=Index]]></code>
+		könnte man so schreiben: <code>/default/kontakt/index.php</code>. Das
+		erste Verzeichnis steht für den URL-Parameter project_name, das
+		zweite Verzeichnis für den URL-Paramter page_name und der Dateiname
+		index.php für den URL-Parameter action. Jetzt braucht man nur den
+		Webserver anweisen, die Informationen aus dem URL zu extrahieren und
+		den entsprechenden URL-Parametern zuzuweisen.
+	</para>
+	
+	<para>
+		Die meisten Webserver &ndash; ob Apache, Lighttpd oder Cherokee &ndash;
+		stellen entsprechende Funktionalität bereit. Dabei wird in einer
+		Konfigurationsdatei definiert, welcher Teil des URL auf welchen
+		Parameter abgebildet. Verwendet werden dabei Reguläre Ausdrücke
+		<footnote>
+			<para>
+				<ulink
+					url="http://de.wikipedia.org/wiki/Reguläre_Ausdrücke" />
+			</para>
+		</footnote>. So ein Konfigurationssatz wird Rewrite Map genannt.
+	</para>
+	
+	<para>
+		Oak selber muss dazu angewiesen werden, URLs mit dem korrekten
+		Format zu erzeugen. Dies kann über einige wenige Zeilen in der
+		Systemkonfiguration erledigt werden. 
+	</para>
+	
+	<sect1 id="url_rewriting.configure_the_webserver">
+		<title>Webserver für URL Rewriting konfigurieren</title>
+		
+		<para>
+			Das Pfadlayout einer Rewrite Map muss nicht immer gleich sein.
+			Das heisst, dass man es den eigenen Wünschen anpassen kann,
+			solange alle Parameter irgendwo in der URL untergebracht
+			werden können. Zudem kann der Parameter project_name weggelassen
+			werden, wenn Oak nur ein einzelnes Projekt betreiben soll. 
+			Es verwendet dann automatisch das Standard-Projekt.  
+		</para>
+		
+		<sect2 id="url_rewriting.configure_the_webserver.apache">
+		 	<title>Apache 1.3.x und 2.x</title>
+		 	
+		 	<para>
+		 		In Apache 1.3.x und 2.x wird das URL Rewriting vom
+		 		Apache-Modul mod_rewrite
+		 		<footnote>
+		 			<para>
+		 				<ulink
+		 					url="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html" />
+		 			</para>
+		 		</footnote>
+		 		bereitgestellt. Konfiguriert werden kann das URL
+		 		Rewriting in der Server-Konfigurationsdatei httpd.conf
+		 		oder im jeweiligen Installationsordner von Oak in einer
+		 		Datei namens
+		 		<filename>.htaccess</filename>.
+		 	</para>
+		 	
+		 	<note>
+		 		<para>
+		 			Das Apache-Modul mod_rewrite ist nicht auf jedem
+		 			Webserver aktiviert. Wenn Sie nicht sicher sind, ob
+		 			es aktiviert ist, wenden Sie sich bitte an den
+		 			Provider-Support.
+		 		</para>
+		 	</note>
+		 	
+		 	<programlisting><![CDATA[
+RewriteEngine on
+
+Bla bla bla
+		 	]]></programlisting>
+		</sect2>
+	</sect1>
+</chapter>
