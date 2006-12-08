@@ -75,14 +75,14 @@ $resource_functions = array(
 $smarty->register_resource("wcom", $resource_functions);
 unset($resource_functions);
 
-require_once(SMARTY_DIR.'software_extensions/resource.oakgtpl.php');
+require_once(SMARTY_DIR.'software_extensions/resource.wcomgtpl.php');
 $resource_functions = array(
-	"oakgtplresource_FetchTemplate",
-	"oakgtplresource_FetchTimestamp",
-	"oakgtplresource_isSecure",
-	"oakgtplresource_isTrusted"
+	"wcomgtplresource_FetchTemplate",
+	"wcomgtplresource_FetchTimestamp",
+	"wcomgtplresource_isSecure",
+	"wcomgtplresource_isTrusted"
 );
-$smarty->register_resource("oakgtpl", $resource_functions);
+$smarty->register_resource("wcomgtpl", $resource_functions);
 unset($resource_functions);
 
 // configure smarty

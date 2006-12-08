@@ -78,7 +78,7 @@ try {
 	}
 	
 	// preparge the template name
-	define("WCOM_TEMPLATE", sprintf("oakgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)));
+	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)));
 	
 	// display page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

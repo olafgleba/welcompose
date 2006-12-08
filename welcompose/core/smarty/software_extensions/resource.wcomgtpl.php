@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: resource.oakgtpl.php
+ * File: resource.wcomgtpl.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -22,7 +22,7 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-function oakgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
+function wcomgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 {
 	// test input
 	if (empty($tpl_name) || !is_scalar($tpl_name)) {
@@ -53,7 +53,7 @@ function oakgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	return true;
 }
 
-function oakgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
+function wcomgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 {
 	// test input
 	if (empty($tpl_name) || !is_scalar($tpl_name)) {
@@ -76,12 +76,12 @@ function oakgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	}
 }
 
-function oakgtplresource_isSecure ($tpl_name, &$smarty)
+function wcomgtplresource_isSecure ($tpl_name, &$smarty)
 {
     return true;
 }
 
-function oakgtplresource_isTrusted($tpl_name, &$smarty)
+function wcomgtplresource_isTrusted($tpl_name, &$smarty)
 {
     // not used for templates
 }
