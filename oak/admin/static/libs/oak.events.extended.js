@@ -21,7 +21,7 @@
  */
 
 /** 
- * @fileoverview This defines the event handling through lib Behaviour. Used for all content pages which contains the mediamanager.  
+ * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages which contains the mediamanager.  
  * 
  * @author Olaf Gleba og@creatics.de
  * @version $Id: oak.core.js 673 2006-11-23 21:46:53Z olaf $ 
@@ -290,9 +290,9 @@ var definitions = {
 			return false;
 		}
 	},
-	'.act_setInternalLink' : function(el){
+	'.act_internalLinkNoHref' : function(el){
 		el.onclick = function(){
-			Helper.insertInternalLink(this);
+			Helper.launchPopup('740','634','pages_links_select','pages_internal_links_NoHref', this);
 			return false;
 		}
 	},
@@ -302,33 +302,15 @@ var definitions = {
 			return false;
 		}
 	},
-	'.act_setInternalLinkGlobalTemplates' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkGlobalTemplates(this);
-			return false;
-		}
-	},
 	'.act_internalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
 			return false;
 		}
 	},
-	'.act_setInternalLinkGlobalFiles' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkGlobalFiles(this);
-			return false;
-		}
-	},
 	'.act_internalLinkStructuralTemplates' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkStructuralTemplates' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkStructuralTemplates(this);
 			return false;
 		}
 	},

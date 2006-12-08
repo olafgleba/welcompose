@@ -23,11 +23,11 @@ var pager_page = '{$pager_page}';
 <script type="text/javascript" src="../static/libs/oak.core.js"></script>
 <script type="text/javascript" src="../static/libs/oak.helper.js"></script>
 <script type="text/javascript" src="../static/libs/oak.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/oak.events.standard.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.popup.js"></script>
 
 </head>
 
-<body id="modalWindow">
+<body id="modalWindow" onunload="Helper.closePopupTrack()">
 
 <div id="modalContainer">
 <h2>{i18n MEDIA MANAGER} <span>{i18n EDIT MEDIA}</span></h2>

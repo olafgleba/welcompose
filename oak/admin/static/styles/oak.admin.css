@@ -742,10 +742,17 @@ vertical-align: middle;
 }
 
 /* %M =help */
-#content p.help {
+#content p.help, #modalBody p.help {
 display: block;
 line-height: 1.5em;
 width: 305px;
+margin: 0 0 10px 0;
+padding-left: 140px;
+}
+#content p.helpTextarea540, #modalBody p.helpTextarea540 {
+display: block;
+line-height: 1.5em;
+width: 540px;
 margin: 0 0 10px 0;
 padding-left: 140px;
 }

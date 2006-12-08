@@ -115,7 +115,7 @@ try {
 		
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_edit', 'post');
-	
+
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
 	$FORM->applyFilter('id', 'trim');

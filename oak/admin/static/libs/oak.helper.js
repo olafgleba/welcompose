@@ -21,7 +21,7 @@
  */
 
 /** 
- * @fileoverview This file comprised javascript helper functions.
+ * @fileoverview Comprised javascript helper functions.
  * It contains functions that may be used application wide.
  * 
  * @author Olaf Gleba og@creatics.de
@@ -36,90 +36,6 @@
  * @class The Mediamanager class miscellaneous is the appropriate class for
  * the help enviroment. The scope is application wide.
  *
- * Prototype methods:
- * 
- * launchPopup()
- * 
- *
- * closePopup()
- * 
- *
- * closeLinksPopup()
- * 
- *
- * lowerOpacity()
- * 
- *
- * lowerOpacityOnUpload()
- * 
- *
- * unsupportsEffects()
- * 
- *
- * unsupportsElems()
- * 
- * 
- * defineWindowX()
- * 
- *
- * defineWindowY()
- * 
- *
- * showNextNode()
- * 
- *
- * insertInternalLink()
- * 
- *
- * insertInternalLinkGlobalTemplates()
- * 
- *
- * insertInternalLinkGlobalFiles()
- * 
- *
- * getDelimiterValue()
- * 
- *
- * getPagerPage()
- * 
- *
- * confirmDelNavAction()
- * 
- *
- * confirmDelTplTypeAction()
- * 
- *
- * confirmDelTplSetsAction()
- * 
- *
- * changeBlogCommentStatus()
- * 
- *
- * showFileUploadMessage()
- * 
- *
- * getAttrParentNode()
- * 
- *
- * getAttr()
- * 
- *
- * getAttrNextSibling()
- * 
- *
- * getNextSiblingFirstChild()
- * 
- *
- * getDataParentNode()
- * 
- *
- * applyBehaviour()
- * 
- *
- * validate()
- * 
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -142,6 +58,8 @@ Helper.prototype = new Base();
 Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
+Helper.prototype.closePopupTrack = Helper_closePopupTrack;
+Helper.prototype.closePopupTrackNoAlert = Helper_closePopupTrackNoAlert;
 Helper.prototype.lowerOpacity = Helper_lowerOpacity;
 Helper.prototype.lowerOpacityOnUpload = Helper_lowerOpacityOnUpload;
 Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
@@ -150,6 +68,7 @@ Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
 Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
+Helper.prototype.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
 Helper.prototype.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
@@ -167,6 +86,9 @@ Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.applyBehaviour = Helper_applyBehaviour;
 Helper.prototype.validate = Helper_validate;
+Helper.prototype.insertTagsFromPopup = Helper_insertTagsFromPopup;
+Helper.prototype.insertTags = Helper_insertTags;
+
 
 
 function Helper_launchPopup (width, height, nname, trigger, elem)
@@ -189,6 +111,9 @@ function Helper_launchPopup (width, height, nname, trigger, elem)
 				break;
 			case 'pages_internal_links' :
 					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name;
+				break;
+			case 'pages_internal_links_NoHref' :
+					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name + '&control=NoHref';
 				break;
 			case 'globaltemplates_internal_links' :
 					Helper.getDelimiterValue();
@@ -227,7 +152,7 @@ function Helper_closePopup ()
 		/* disable all elements */
 		var form_id = document.forms[0].getAttribute('id');
 	
-		e = Form.getElements(form_id);
+		var e = Form.getElements(form_id);
 			for(i = 0; i < e.length; i++) {
     			e[i].disabled = true;
 			}
@@ -235,6 +160,9 @@ function Helper_closePopup ()
 		/* invoke function in parent window */
 		self.opener.$('lyLowerOpacity').style.display = 'none';
 		self.opener.Mediamanager.invokePager('', pager_page);
+		
+		/* Needed for func closePopupTrack(noAlert) */
+		audit = true;
 		
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
@@ -251,10 +179,56 @@ function Helper_closeLinksPopup ()
 	try {
 		/* invoke function in parent window */
 		self.opener.$('lyLowerOpacity').style.display = 'none';
-			
+
+		/* Needed for func closePopupTrack(NoAlert) */
+		audit = true;
+					
 		/* set a timeout since the opened window has
 		 to be present til process function in parent is executed */
 		setTimeout ("self.close()", 100);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_closePopupTrack (elem)
+{       
+	try {
+		
+		if (typeof audit == 'undefined') {
+			audit = false;
+		}
+		if (typeof submitted == 'undefined') {
+			submitted = false;
+		}
+
+		if (audit !== true && submitted !== true) {
+			self.opener.$('lyLowerOpacity').style.display = 'none';
+			self.opener.alert(alertOnClosePopup);
+			// reset global vars
+			audit = false;
+			submitted = false;
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_closePopupTrackNoAlert (elem)
+{       
+	try {
+		
+		if (typeof audit == 'undefined') {
+			audit = false;
+		}
+
+		if (audit !== true) {
+			self.opener.$('lyLowerOpacity').style.display = 'none';
+			// reset global vars
+			audit = false;
+		}
 		
 	} catch (e) {
 		_applyError(e);
@@ -553,7 +527,7 @@ function Helper_showNextNode(elem)
 		}
 
 		var url = this.parsePagesLinksUrl;
-		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
+		var pars = 'id=' + elem.id +'&nextNode=' + nextNode + '&control=' + control;
 		
 		if (nextNode == 'secondNode') {
 		var myAjax = new Ajax.Request(
@@ -595,6 +569,7 @@ function _showResponsePagesSecondLinks(req)
 		Effect.Appear('secondNode',{duration: 0.6});
 		$('secondNode').innerHTML = req.responseText;		
 		Behaviour.reapply('.act_setInternalLink');
+		Behaviour.reapply('.act_setInternalLinkNoHref');
 		Behaviour.reapply('.showNextNode');
 		
 	} catch (e) {
@@ -617,6 +592,7 @@ function _showResponsePagesThirdLinks(req)
 		Effect.Appear('thirdNode',{duration: 0.6});	
 		$('thirdNode').innerHTML = req.responseText;		
 		Behaviour.reapply('.act_setInternalLink');
+		Behaviour.reapply('.act_setInternalLinkNoHref');
 		Behaviour.reapply('.showNextNode');
 		
 	} catch (e) {
@@ -657,10 +633,24 @@ function Helper_insertInternalLink(elem)
 		
 		strStart = build;
 		strEnd = '</a>';
-			
-		// alert message(describeLink) is defined in oak.strings.js
-		_insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
+		
+		Helper.insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
 	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * @requires Helper The Helper Class
+ */
+function Helper_insertInternalLinkNoHref(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -675,7 +665,7 @@ function Helper_insertInternalLink(elem)
 function Helper_insertInternalLinkGlobalTemplates(elem)
 {
 	try {
-		_insertTagsFromPopup(formTarget, elem.id, '', '');	
+		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');	
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -690,7 +680,7 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 function Helper_insertInternalLinkGlobalFiles(elem)
 {
 	try {
-		_insertTagsFromPopup(formTarget, elem.id, '', '');
+		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -738,145 +728,9 @@ function _showResponseStructuralTemplates(req)
 		var raw_content = String(extract).replace(/(.*?)(>)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/, "$3");
 		
 		// set hidden field value
-		_insertTagsFromPopup(formTarget, raw_content, '', '');	
+		Helper.insertTagsFromPopup(formTarget, raw_content, '', '');	
 	
 		Helper.closeLinksPopup();					
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert Content into Textareas from Popup
- * taken from http://sourceforge.net/projects/wikipedia
- * @private
- * @throws applyError on exception
- */
-function _insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
-{
-	try {
-		/*
-		We have to separate here, because the IE6 seems to be too dump to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
-		*/
-	 	if (Helper.unsupportsElems('safari_exception')) {
-			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
-			var txtarea = opener.document.forms[_form_name].elements[id];
-		} else {
-			var txtarea = opener.$(id);
-		}
-		// IE
-		if(opener.document.selection) {
-			var theSelection = opener.document.selection.createRange().text;
-			if(!theSelection) { theSelection=sampleText;}
-			txtarea.focus();
-			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
-				theSelection = theSelection.substring(0, theSelection.length - 1);
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
-			} else {
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
-			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
-		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
-	 		var startPos = txtarea.selectionStart;
-			var endPos = txtarea.selectionEnd;
-			var scrollTop=txtarea.scrollTop;
-			var myText = (txtarea.value).substring(startPos, endPos);
-			if(!myText) { myText=sampleText;}
-			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
-			} else {
-				subst = tagOpen + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
-			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
-			txtarea.selectionStart=cPos;
-			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += tagOpen + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			tagOpen=tagOpen.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
-			txtarea.focus();
-		}
-		// reposition cursor if possible
-		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert Content into Textareas
- * taken from http://sourceforge.net/projects/wikipedia
- * @private
- * @throws applyError on exception
- */
-function _insertTags(id, tagOpen, tagClose, sampleText)
-{
-	try {
-		/*
-		We have to separate here, because the IE6 seems to be too dump to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
-		*/
-	 	if (Helper.unsupportsElems('safari_exception')) {
-			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
-			var txtarea = document.forms[_form_name].elements[id];
-		} else {
-			var txtarea = $(id);
-		}
-		// IE
-		if(document.selection) {
-			var theSelection = document.selection.createRange().text;
-			if(!theSelection) { theSelection=sampleText;}
-			txtarea.focus();
-			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
-				theSelection = theSelection.substring(0, theSelection.length - 1);
-				document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
-			} else {
-				document.selection.createRange().text = tagOpen + theSelection + tagClose;
-			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
-		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
-	 		var startPos = txtarea.selectionStart;
-			var endPos = txtarea.selectionEnd;
-			var scrollTop=txtarea.scrollTop;
-			var myText = (txtarea.value).substring(startPos, endPos);
-			if(!myText) { myText=sampleText;}
-			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
-			} else {
-				subst = tagOpen + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
-			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
-			txtarea.selectionStart=cPos;
-			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += tagOpen + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			tagOpen=tagOpen.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
-			txtarea.focus();
-		}
-		// reposition cursor if possible
-		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1173,6 +1027,143 @@ function Helper_validate(elem)
 			parameters: pars
 		});		
 }
+
+/**
+ * Insert Content into Textareas from Popup
+ * taken from http://sourceforge.net/projects/wikipedia
+ *
+ * @throws applyError on exception
+ */
+function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		/*
+		We have to separate here, because the IE6 seems to be too dumb to differ between elements
+		which has the same value on different attributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/
+	 	if (Helper.unsupportsElems('safari_exception')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = opener.document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = opener.$(id);
+		}
+		// IE
+		if(opener.document.selection) {
+			var theSelection = opener.document.selection.createRange().text;
+			if(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+			} else {
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			if(!myText) { myText=sampleText;}
+			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+			} else {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			tagOpen=tagOpen.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert Content into Textareas
+ * taken from http://sourceforge.net/projects/wikipedia
+ *
+ * @throws applyError on exception
+ */
+function Helper_insertTags(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		/*
+		We have to separate here, because the IE6 seems to be too dumb to differ between elements
+		which has the same value on different attributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/
+	 	if (Helper.unsupportsElems('safari_exception')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = $(id);
+		}
+		// IE
+		if(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			if(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+			} else {
+				document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			if(!myText) { myText=sampleText;}
+			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+			} else {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			tagOpen=tagOpen.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 /**
  * Building new object instance of class Helper
  */

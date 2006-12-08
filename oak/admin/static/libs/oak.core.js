@@ -21,12 +21,11 @@
  */
  
 /** 
- * @fileoverview This is the core Oak javascript file. 
+ * @fileoverview The main Oak javascript enviroment. 
  * 
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
  */
-
 
 
 /**
@@ -74,9 +73,9 @@ function _buildXMLHTTPRequest ()
 
 
 /**
- * Alerted String (errStr) contains exception params with different
- * provided debug information.
- *
+ * Display exception alert within the try/catch handling
+ * relating to given debug variable value.
+ * 
  * <br /><br />Example:
  * <pre><code>
 try {
@@ -143,14 +142,11 @@ Errors.prototype = new Error();
 
 
 
-
-
-
 /**
  * Constructs the Base class
  * 
- * @class This class is the most important class of the oak
- * javascript enviroment, cause all other classes derived from that class.
+ * @class The base class is the most important class of the oak
+ * javascript enviroment, cause all other classes (exclude Errors) are inherited from that class.
  * It predefines properties and methods which are supposed to be used application wide.
  *
  * @constructor
@@ -650,35 +646,12 @@ Init = new Init();
 
 
 
-
-
-
-
 /**
  * Constructs the Help class
  * 
  * @class The Help class is the appropriate class for
  * the help enviroment. The scope is application wide.
  * For consistent reason, it comprises the help handling of the Mediamanger too.
- *
- * <br /><br />Schema:
- * <pre><code>
-function Help_show ()
-{	
-	try {
-		&bull; Get form id attribute
-		&bull; Get form field id attribute (processID)
-		&bull; Build url
-		&bull; Get appropriate help html (XMLHttpRequest)
-		&bull; Set corresponding focus on form field element
-		&bull; Reapply corresponding form field help markup css class
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
- * </code></pre>
- * 
  *
  * @constructor
  * @throws applyError on exception
@@ -708,9 +681,10 @@ Help.prototype.processMediamanager = Help_processMediamanager;
 Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
- * Import related help file depending on actual element pointer.
  * Show help html element.
+ * Import related help file depending on actual element pointer.
  *
+ * @see #processHelp
  * @param {string} elem Actual element
  * @throws applyError on exception
  */
@@ -721,7 +695,7 @@ function Help_show (elem)
 		this.elem = elem;
 		this.elem.className = this.helpClassRemove;
 		this.attr = 'for';
-		this.processId = Helper.getAtrParentNode(this.attr, this.elem, 2);
+		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
 		this.ttarget = this.processId;
 				
 		var i = this.processId.match(/_\d+/);
@@ -793,6 +767,7 @@ function Help_hide (elem)
 /**
  * Update content with XMLHttpRequest response.
  *
+ * @see #show
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
@@ -807,7 +782,7 @@ function Help_processHelp (ttarget)
 				Element.hide(ttarget_after);
 				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
 			} else {
-	  			//throw new Errors(_req.statusText);
+	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
@@ -816,9 +791,12 @@ function Help_processHelp (ttarget)
 }
 
 /**
+ * Show Mediamanager help html element.
  * Import related help file depending on actual element pointer.
- * Show help html element.
+ * We have to return the hide state as a global var to provide
+ * which layer we must show on method hideMediamanger 
  *
+ * @see #processMediamanager
  * @param {string} elem Actual element
  * @throws applyError on exception
  * @returns {global} gMediamanagerLayer
@@ -858,7 +836,7 @@ function Help_showMediamanager (elem)
 
 		Behaviour.reapply('.' + this.elem.className);
 		
-		// build global var as reference for method hideMediamanager
+		// global var as pointer for method hideMediamanager
 		gMediamanagerLayer = this.toHide;
 		return gMediamanagerLayer;
 		
@@ -868,7 +846,7 @@ function Help_showMediamanager (elem)
 }
 
 /**
- * Hide help html element.
+ * Hide Mediamanager help html element.
  *
  * @param {string} elem Actual element
  * @throws applyError on exception
@@ -903,6 +881,7 @@ function Help_hideMediamanager (elem)
 /**
  * Update content with XMLHttpRequest response.
  *
+ * @see #showMediamanager
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
@@ -947,24 +926,12 @@ Help = new Help();
 
 
 
-
-
-
-
 /**
  * Constructs the Navigation class
  * 
  * @class The Navigation class do all the navigation XMLHTTPRequest
  * processing stuff. The scope is application wide.
- *
- * Prototype methods:
- * show()
- * Import related navigation file depending on actual element pointer.
- *
- * processNavigation()
- * Update content with XMLHttpRequest response.
- *
- * @see Base
+ * 
  * @constructor
  * @throws applyError on exception
  */
@@ -989,7 +956,9 @@ Navigation.prototype.processNavigation = Navigation_processNavigation;
 
 /**
  * Import related navigation file depending on actual element pointer.
+ * Here var <em>level</em> distinguish which markup layer to use.
  * 
+ * @see #processNavigation
  * @param {string} name The name of page
  * @param {string} level Layer to process
  * @throws applyError on exception
@@ -1026,6 +995,7 @@ function Navigation_show (name, level)
 /**
  * Update content with XMLHttpRequest response.
  *
+ * @see #show
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
@@ -1037,20 +1007,10 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
-				
-				
-				/*var range = $('topsubnavdynamic').getElementsByTagName('a');
-				
-				for (i = 0; i < range.length; i++) {
-					range[i].style.color = 'red';
-				}*/
-					
+	
 				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
 					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
-					
-				/*new Effect.Highlight($('topsubnavdynamic'), 
-					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
-				*/
+
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -1067,27 +1027,12 @@ Navigation = new Navigation();
 
 
 
-
-
-
-
-
 /**
- * Constructs the Forms class
+ * Constructs the Forms class.
  * 
- * @class The Forms class is the appropriate class for forms processing.
+ * @class The Forms class handles all actions related to html form elements.
  * The scope is application wide.
  *
- * Prototype methods:
- * 
- * setOnEvent()
- * Used to style elements depending on given params
- *
- * storeFocus()
- * Tracks the actual Focus and makes it available application wide.
- * This is actual used to fire alerts within mediamanager.
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -1111,6 +1056,11 @@ Forms.prototype.storeFocus = Forms_storeFocus;
 
 /**
  * Used to style elements depending on given params
+ *
+ * <br /><br />Example:
+ * <pre><code>
+Forms.setOnEvent(this, '','#0c3','dotted');
+ * </code></pre>
  * 
  * @param {string} elem Actual element
  * @param {string} bgcolor Define background color
@@ -1135,8 +1085,8 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 }
 
 /**
- * Tracks the actual Focus and makes it available application wide.
- * This is actual used to fire alerts within mediamanager.
+ * Tracks the actual focus and makes it available application wide.
+ * This actual is used to fire alerts within the Mediamanager.
  *
  * @param {string} elem Actual element
  * @throws applyError on exception
@@ -1157,26 +1107,13 @@ Forms = new Forms();
 
 
 
-
-
-
-
-
 /**
  * Constructs the Status class
  * 
- * @class The Status class is supposed to be used to handle
- * all change of status events within the interface.
+ * @class The Status class is supposed to handle
+ * all change of status events within the html interface.
  * The scope is application wide.
  *
- * Prototype methods:
- * 
- * getCbx()
- * Show/hide a group of form elements and color their labels.
- * Depending on delivered variable in the html markup.
- *
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -1200,6 +1137,9 @@ Status.prototype.getCbx = Status_getCbx;
 /**
  * Show/hide a group of form elements and color their labels.
  * Depends on delivered variable in the html markup.
+ * <br />
+ * For properly use or/and enhancement of this feature, please have a look on
+ * the online project support area.
  *
  * @param {array} elems Array of element(s)
  * @throws applyError on exception
@@ -1247,29 +1187,13 @@ Status = new Status();
 
 
 
-
-
-
-
 /**
  * Constructs the Tables class
  * 
  * @class The Tables class faces all action that are related 
- * to html tables, because they mostly needs extra treatment.
+ * to html tables, because they mostly need extra treatment.
  * The scope is application wide.
  *
- * Prototype methods:
- * 
- * showTableRow()
- * Show formely hidden table row depending on actual element pointer.
- *
- * hideTableRow()
- * Hide visible table row depending on actual element pointer.
- *
- * collapseTableRow()
- * Gives some browsers some extra treatment.
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -1295,6 +1219,9 @@ Tables.prototype.collapseTableRow = Tables_collapseTableRow;
 
 /**
  * Show formely hidden table row depending on actual element pointer.
+ * <br />
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
  * 
  * @param {string} elem actual element
  * @throws applyError on exception
@@ -1329,6 +1256,9 @@ function Tables_showTableRow (elem)
 
 /**
  * Hide visible table row depending on actual element pointer.
+ * <br />
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
  * 
  * @param {string} elem actual element
  * @throws applyError on exception
@@ -1362,6 +1292,9 @@ function Tables_hideTableRow (elem)
 
 /**
  * Gives some browsers some extra treatment.
+ * <br />
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
  *
  * @param {string} elem actual element to process
  * @throws applyError on exception

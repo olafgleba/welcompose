@@ -13,6 +13,7 @@
  
 <script type="text/javascript">
 var formTarget = '{$target}';
+var control = '{$control}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -21,11 +22,11 @@ var formTarget = '{$target}';
 <script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
 <script type="text/javascript" src="../static/libs/oak.core.js"></script>
 <script type="text/javascript" src="../static/libs/oak.helper.js"></script>
-<script type="text/javascript" src="../static/libs/oak.events.standard.js"></script>
+<script type="text/javascript" src="../static/libs/oak.events.popup.js"></script>
 
 </head>
 
-<body id="modalWindow">
+<body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
 
 <div id="modalContainer">
 <div id="pages">
@@ -42,7 +43,7 @@ var formTarget = '{$target}';
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="initialNode"><a class="act_setInternalLink" id="{literal}{{/literal}get_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
+<td class="initialNode"><a class="{if !empty($control)}act_setInternalLink{$control}{else}act_setInternalLink{/if}" id="{literal}{{/literal}get_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
 {if $_page.page_type_name == 'OAK_BLOG'}
 <td class="nextNode"><a class="showNextNode" id="{$_page.id}" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
 {else}

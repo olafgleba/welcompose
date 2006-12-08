@@ -21,7 +21,7 @@
  */
  
 /** 
- * @fileoverview This file is the essential Mediamanager javascript enviroment.
+ * @fileoverview The Mediamanager javascript enviroment.
  *
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
@@ -32,119 +32,27 @@
 /**
  * Constructs the Mediamanager class
  * 
- * @class The Mediamanager class is the appropriate class for
- * the help enviroment. The scope is application wide.
+ * @class The Mediamanager class embed all media maintenance.
+ * <br />
+ * The <em>Mediamanager</em> is a component within content pages
+ * both to maintain all sorts of media (upload, edit, delete) and a repository
+ * to pick up from while building content pages.
+ * <br /><br />
+ * At present there are two layers (<em>myLocal</em> and <em>myFlickr</em>)
+ * with different treatments implemented.
+ *<br />
+ * <em>myLocal</em> handles all the media formerly uploaded into the local structure.
+ * <br />
+ * <em>myFlickr</em> is a integration of some API methods of the WebService Flickr.com to 
+ * allow to integrate Flickr.com photos into sides contents.
  *
- * Prototype methods:
- * 
- * showElement()
- * 
- *
- * hideElement()
- * 
- *
- * switchLayer()
- * 
- *
- * toggleExtendedView()
- * 
- *
- * checkElemsMyLocal()
- * 
- *
- * preserveElementStatusMyLocal()
- * 
- *
- * setCurrentElementStatusMyLocal()
- * 
- * 
- * showElement()
- * 
- *
- * hideElement()
- * 
- *
- * switchLayer()
- * 
- *
- * toggleExtendedView()
- * 
- *
- * checkElemsMyLocal()
- * 
- *
- * preserveElementStatusMyLocal()
- * 
- *
- * setCurrentElementStatusMyLocal()
- * 
- *
- * mediaToPodcast()
- * 
- *
- * mediaToPodcastOnLoad()
- * 
- *
- * invokeInputs()
- * 
- *
- * invokeTags()
- * 
- *
- * invokePager()
- * 
- *
- * initializeTagSearch()
- * 
- *
- * deleteMediaItem()
- * 
- *
- * insertImageItem()
- * 
- *
- * insertDocumentItem()
- * 
- *
- * discardPodcast()
- * 
- *
- * invokeTagsMyFlickr()
- * 
- * 
- * invokeInputsMyFlickr()
- * 
- *
- * invokePagerMyFlickr()
- * 
- *
- * initializeTagSearchMyFlickr()
- * 
- *
- * checkElemsMyFlickr()
- * 
- *
- * preserveElementStatusMyFlickr()
- * 
- *
- * setCurrentElementStatusMyFlickr()
- * 
- *
- * initializeUserMyFlickr()
- * 
- * 
- * insertImageItemFlickr()
- * 
- *
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
 function Mediamanager ()
 {
 	try {
-		// new XMLHttpRequest object
+		// instance XMLHttpRequest object
 		this.req = _buildXMLHTTPRequest();
 	} catch (e) {
 		_applyError(e);
@@ -158,52 +66,81 @@ Mediamanager.prototype = new Base();
 /**
  * Instance Methods from prototype @class Mediamanager
  */
+
+/**
+ * Common methods
+ */
 Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
-Mediamanager.prototype.toggleExtendedView = Mediamanager_toggleExtendedView;
+Mediamanager.prototype.checkOccurrences = Mediamanager_checkOccurrences;
+
+/**
+ * MyLocal methods
+ */
 Mediamanager.prototype.checkElemsMyLocal = Mediamanager_checkElemsMyLocal;
 Mediamanager.prototype.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
 Mediamanager.prototype.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
+Mediamanager.prototype.toggleExtendedView = Mediamanager_toggleExtendedView;
 Mediamanager.prototype.mediaToPodcast = Mediamanager_mediaToPodcast;
 Mediamanager.prototype.mediaToPodcastOnLoad = Mediamanager_mediaToPodcastOnLoad;
+Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
+Mediamanager.prototype.showResponseMediaToPodcast = Mediamanager_showResponseMediaToPodcast;
+Mediamanager.prototype.showResponseDiscardPodcast = Mediamanager_showResponseDiscardPodcast;
+Mediamanager.prototype.loaderMediaToPodcast = Mediamanager_loaderMediaToPodcast;
+Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
 Mediamanager.prototype.invokeInputs = Mediamanager_invokeInputs;
 Mediamanager.prototype.invokeTags = Mediamanager_invokeTags;
 Mediamanager.prototype.invokePager = Mediamanager_invokePager;
-Mediamanager.prototype.initializeTagSearch = Mediamanager_initializeTagSearch;
+Mediamanager.prototype.showResponseInvokeInputs = Mediamanager_showResponseInvokeInputs;
+Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseInvokeTagInputs;
+Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.insertImageItem = Mediamanager_insertImageItem;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
-Mediamanager.prototype.discardPodcast = Mediamanager_discardPodcast;
 
+/**
+ * MyFlickr methods
+ */
+Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
+Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
+Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
 Mediamanager.prototype.invokeTagsMyFlickr = Mediamanager_invokeTagsMyFlickr;
 Mediamanager.prototype.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
 Mediamanager.prototype.invokePagerMyFlickr = Mediamanager_invokePagerMyFlickr;
 Mediamanager.prototype.initializeTagSearchMyFlickr = Mediamanager_initializeTagSearchMyFlickr;
-Mediamanager.prototype.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
-Mediamanager.prototype.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
-Mediamanager.prototype.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
+Mediamanager.prototype.showResponseInvokeInputsMyFlickr = Mediamanager_showResponseInvokeInputsMyFlickr;
+Mediamanager.prototype.showResponseInvokeTagsMyFlickr = Mediamanager_showResponseInvokeTagsMyFlickr;
+Mediamanager.prototype.loaderMyFlickr = Mediamanager_loaderMyFlickr;
 Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
 Mediamanager.prototype.insertImageItemFlickr = Mediamanager_insertImageItemFlickr;
 
+
 /**
- * Implements method of prototype class Mediamanager
  * Show Mediamanager Element
+ * <br />
+ * Beside simply showing the element, the display styles of 
+ * all other elements be temporarily saved and populated into
+ * func <em>checkOccurrences()</em> to ensure that the
+ * Media Manager content(s) container always adapt to the show/hide
+ * display status of the elements. 
+ * <br />
+ * In addition to that we perform conditions to distinguish which 
+ * layer (<em>myLocal</em>, <em>myFlickr</em>) is active.
  * 
+ * @see #checkOccurrences
  * @param {string} elem actual element
  * @throws applyError on exception
  */
 function Mediamanager_showElement (elem)
 {	
 	try {
-		// properties
 		this.elem = elem;
 		this.attr = 'class';
 		this.ttarget = Helper.getAttrParentNode(this.attr, this.elem, 2) + '_wrap';
 		
 		Element.show(this.ttarget);
-	
-		// needed to set appropriate height of content of div to populate
+
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
 		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
@@ -217,6 +154,7 @@ function Mediamanager_showElement (elem)
 			
 			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 			
+			// give option 'Include Types' a little more space since we have two rows here
 			if (includeTypesElem == 'block') {
 				var rows = 1;
 			}
@@ -231,92 +169,88 @@ function Mediamanager_showElement (elem)
 			
 			var collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
-			// do nothing on var
+			// do nothing, not needed here
 			var rows = '';
 		}
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.reapply('.' + this.elem.className);
 		
-		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);
-		
+		Mediamanager.checkOccurrences(collectElems, rows);
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
 /**
- * Implements method of prototype class Mediamanager
  * Hide Mediamanager Element
+ * <br />
+ * Beside simply hiding the element, the display styles of 
+ * all other elements be temporarily saved and populated into
+ * func <em>checkOccurrences()</em> to ensure that the
+ * Media Manager content(s) container always adapt to the show/hide
+ * display status of the elements.
+ * <br />
+ * In addition to that we perform conditions to distinguish which 
+ * layer (<em>myLocal</em>, <em>myFlickr</em>) is active.
  *
+ * @see #checkOccurrences
  * @param {string} elem actual element
  * @throws applyError on exception
  */
 function Mediamanager_hideElement (elem)
 {
 	try {
-		// properties
 		this.elem = elem;
 		this.attr = 'class';
 		this.ttarget = Helper.getAttrParentNode(this.attr, this.elem, 2) + '_wrap';
 
 		Element.hide(this.ttarget);
-		
-		// needed to set appropriate height of content of div to populate
+
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
 		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
 		// myLocal
 		if (myLocal == 'block') {
-			this.elem.className = this.mediamanagerClassShowMyLocal;
-			
+			this.elem.className = this.mediamanagerClassShowMyLocal;			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-			
+			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');			
 			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 			
+			// give option 'Include Types' a little more space since we have two rows here
 			if (includeTypesElem == 'block') {
 				var rows = 1;
 			}
 		}
 		// myFlickr
 		else if (myFlickr == 'block') {
-			this.elem.className = this.mediamanagerClassShowMyFlickr;
-			
+			this.elem.className = this.mediamanagerClassShowMyFlickr;			
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
-			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
-			
+			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');			
 			var collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
-			// do nothing on var
+			// do nothing, not needed here
 			var rows = '';
 		}
 		
 		Element.update(this.elem, this.elementHtmlShow);
 		Behaviour.reapply('.' + this.elem.className);
 		
-		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);
-		
+		Mediamanager.checkOccurrences(collectElems, rows);
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
 /**
- * Implements method of prototype class Mediamanager
- * Switch layer on a(link) event e.g. a.mm_myLocal, a.mm_myFlickr
+ * Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>). 
  *
- * @param {string} toShow div to display
- * @param {string} toHide div to hide
+ * @param {string} toShow Layer to display
+ * @param {string} toHide Layer to hide
  * @throws applyError on exception
  */
 function Mediamanager_switchLayer (toShow, toHide)
 {
 	try {
-		// properties
 		this.toShow = $(toShow);
 		this.toHide = $(toHide);
 	
@@ -328,43 +262,23 @@ function Mediamanager_switchLayer (toShow, toHide)
 }
 
 /**
- * Implements method of prototype class Mediamanager
- * Toggle Extended View on Podcasts (show Details)
+ * Adjust height of Media Manager content(s) div.
+ * <br />
+ * Evaluates the params (array) and perfoms a switch condition
+ * with array length index as the attribute. Used everytime there
+ * is a need for a asynchron refresh launched within other functions.
  *
- * @param {var} elem Actual elem to toggle 
- * @throws applyError on exception
- */
-function Mediamanager_toggleExtendedView (elem)
-{
-	try {
-
-		if (elem.value == showDetails) {
-			elem.value = hideDetails;
-			$('podcast_details_display').value = '1';
-			Effect.Appear('extendedView',{duration: 0.4});
-		} else {
-			elem.value = showDetails;
-			$('podcast_details_display').value = '';
-			Effect.Fade('extendedView',{duration: 0.4});
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements private method of prototype class Mediamanager
- * Check Option Occurrences and adjust height of content div
- *
- * @private
+ * @see #showElement
+ * @see #hideElement
+ * @see #setCurrentElementStatusMyLocal
+ * @see #setCurrentElementStatusMyFlickr
  * @param {string} elems actual element
  * @param {string} exception 
  * @throws applyError on exception
  */
-function _checkOccurrences (elems, exception)
+function Mediamanager_checkOccurrences (elems, exception)
 {
-	try {
-				
+	try {				
 		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
 
 		if (myLocal == 'block') {
@@ -427,440 +341,18 @@ function _checkOccurrences (elems, exception)
 }
 
 /**
- * Implements private method of prototype class Mediamanager
- * Check elements display status for further use in func setCurrentElementStatusMyLocal
- * @private
- * @throws applyError on exception
- */
-function Mediamanager_preserveElementStatusMyLocal ()
-{	
-	try {
-	
-		var current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
-		var current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
-		var current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
-	
-		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements private method of prototype class Mediamanager
- * Sets elements class and html correponding the previous status
- * @private
- * @throws applyError on exception
- */
-function Mediamanager_setCurrentElementStatusMyLocal ()
-{	
-	try {
-		
-		Element.setStyle('mm_include_types_wrap', {display: previousElemsStatus[0]});
-		Element.setStyle('mm_tags_wrap', {display: previousElemsStatus[1]});
-		Element.setStyle('mm_timeframe_wrap', {display: previousElemsStatus[2]});
-		
-		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
-
-		// give first field includeTypes a little more space
-		// since we have two rows here
-		// bool
-		if (previousElemsStatus[0] == 'block') {
-			var rows = 1;
-		}
-		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);
-				
-		// get all relevant spans
-		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
-		
-		if (previousElemsStatus[0] == 'block') {
-			parentElem[0].lastChild.className = this.mediamanagerClassHideMyLocal;
-			parentElem[0].lastChild.innerHTML = this.elementHtmlHide;
-		}
-		if (previousElemsStatus[1] == 'none') {
-			parentElem[1].lastChild.className = this.mediamanagerClassShowMyLocal;
-			parentElem[1].lastChild.innerHTML = this.elementHtmlShow;
-		}
-		if (previousElemsStatus[2] == 'block') {
-			parentElem[2].lastChild.className = this.mediamanagerClassHideMyLocal;
-			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
-		}
-		
-		// observe if needed at least
-		//Behaviour.apply();
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Show Podcast layer and fill media player
- *
- * @param {string} elem element (id) to process
- * @throws applyError on exception
- */
-function Mediamanager_mediaToPodcast (elem)
-{
-	try {
-		// properties
-		this.toShow = $('podcast_container');
-		
-		Element.show(this.toShow);
-		Element.scrollTo(this.toShow);
-		
-		// set hidden field value
-		$('podcast_media_object').value = elem.id;
-
-		var url = this.parseMedCastsUrl;
-		var pars = 'id=' + elem.id;
-
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMediaToPodcast,
-				parameters : pars,
-				onComplete : _showResponseMediaToPodcast
-			});	
-			
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Show Podcast layer and fill media player
- *
- * @param {string} elem element (id) to process
- * @throws applyError on exception
- */
-function Mediamanager_mediaToPodcastOnLoad ()
-{
-	try {
-		// properties
-		this.toShow = $('podcast_container');
-		
-		Element.show(this.toShow);
-
-		// get hidden field value
-		var podcast_media_object = $('podcast_media_object').value;
-
-		var url = this.parseMedCastsUrl;
-		var pars = 'id=' + podcast_media_object;
-
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMediaToPodcast,
-				parameters : pars,
-				onComplete : _showResponseMediaToPodcast
-			});	
-			
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Get rid off podcast
- *
- * @param {var} elem Actual elem to get rid off 
- * @throws applyError on exception
- */
-function Mediamanager_discardPodcast (elem)
-{
-	try {
-		// get hidden field value
-		var podcast_id = $('podcast_id').value;
-
-		var url = this.parseMedDiscCastsUrl;
-		var pars = 'id=' + podcast_id;
-
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMediaToPodcast,
-				parameters : pars,
-				onComplete : _showResponseDiscardPodcast
-			});	
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _showResponseMediaToPodcast(req)
-{
-	try {		
-		$('mediafile_container').innerHTML = req.responseText;
-			
-		// dont be able to use appear here, because
-		// Effect.Opacity don't use display: block
-		Element.hide('indicatorPodcast');
-		Element.show('podcast_container_loader');
-		
-		if ($('podcast_details_display').value == 1) {
-			document.getElementsByName('toggleExtendedView')[0].value = hideDetails;
-			$('extendedView').style.display = 'block';
-		}		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _showResponseDiscardPodcast(req)
-{
-	try {
-		// set hidden field value
-		$('podcast_id').value = '';
-		$('podcast_media_object').value = '';	
-	
-		Effect.Fade('podcast_container',{duration: 0.4});
-					
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * fires temporary actions while processing the ajax call
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _loaderMediaToPodcast ()
-{
-	try {
-		var hideContentTable = $('podcast_container_loader');
-		Element.hide(hideContentTable);
-		Element.show('indicatorPodcast');
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
+ * Collects the media manager form elements values as a hash
+ * and returns it as a query string.
+ * <br />
+ * Global var <em>mm_limit</em> is filled in #checkOccurrences.
+ * <br />
+ * Global var <em>mm_pagetype</em> comes from definition in the
+ * html markup. Needed to decide if ioci  
  * 
- * @throws applyError on exception
- */
-function Mediamanager_invokeInputs ()
-{
-	try {
-		Mediamanager.preserveElementStatusMyLocal();
-		
-		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyLocal,
-				parameters : pars,
-				onComplete : _showResponseInvokeInputs
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-/**
- * Implements method of prototype class Mediamanager
- * set a delay for firing the ajax search invoke
- * special handling for tag search
- * 
- * @throws applyError on exception
- */
-function Mediamanager_initializeTagSearch ()
-{
-	try {
-		// clear the keyPressDelay if it exists from before
-		if (this.keyPressDelay) {
-			window.clearTimeout(this.keyPressDelay);
-		}
-		if ($('mm_tags').value >= '') {
-			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 800);
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_invokeTags ()
-{
-	try {
-		Mediamanager.preserveElementStatusMyLocal();
-		
-		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyLocal,
-				parameters : pars,
-				onComplete : _showResponseInvokeTagInputs
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_invokePager (elem, pager_page)
-{
-	try {
-		Mediamanager.preserveElementStatusMyLocal();
-		
-		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
-		if (typeof pager_page != 'undefined') {
-			var pars = 'mm_start=' + pager_page + '&' + elems;
-		} else {
-			var pars = 'mm_start=' + elem.id + '&' + elems;
-		}
-
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyLocal,
-				parameters : pars,
-				onComplete : _showResponseInvokeInputs
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _showResponseInvokeInputs(req)
-{
-	try {
-		$('column').innerHTML = req.responseText;
-		
-		Mediamanager.setCurrentElementStatusMyLocal();
-		
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
-		$('mm_tags').focus();
-		
-		Helper.applyBehaviour();
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _showResponseInvokeTagInputs(req)
-{
-	try {	
-		$('column').innerHTML = req.responseText;
-		
-		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-		$('mm_tags').setAttribute("autocomplete","off");
-		$('mm_flickrtags').setAttribute("autocomplete","off");
-		
-		Mediamanager.setCurrentElementStatusMyLocal();
-		
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
-		$('mm_tags').focus();
-			
-		Helper.applyBehaviour();
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * fires temporary actions while processing the ajax call
- *
- * @private
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function _loaderMyLocal ()
-{
-	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[0];
-		Element.hide(hideContentTable);
-		Element.show('indicator_local');
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
+ * @see #invokeInputs
+ * @see #invokePager
+ * @see #invokeTags
+ * @see #checkOccurrences
  * @throws applyError on exception
  */
 function Mediamanager_checkElemsMyLocal ()
@@ -891,15 +383,477 @@ function Mediamanager_checkElemsMyLocal ()
 }
 
 /**
- * Implements method of prototype class Mediamanager
+ * Check elements display status
+ *
+ * @see #setCurrentElementStatusMyLocal
+ * @throws applyError on exception
+ */
+function Mediamanager_preserveElementStatusMyLocal ()
+{	
+	try {	
+		var current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
+		var current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
+	
+		// make global -> use in func setCurrentElementStatusMyLocal
+		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Sets elements class and html correponding the previous status
+ *
+ * @see #checkOccurrences
+ * @throws applyError on exception
+ */
+function Mediamanager_setCurrentElementStatusMyLocal ()
+{	
+	try {		
+		Element.setStyle('mm_include_types_wrap', {display: previousElemsStatus[0]});
+		Element.setStyle('mm_tags_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElemsStatus[2]});
+		
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+
+		// give option 'Include Types' a little more space since we have two rows here
+		if (previousElemsStatus[0] == 'block') {
+			var rows = 1;
+		}
+		// set appropriate height and width of surrounding divs
+		Mediamanager.checkOccurrences(collectElems, rows);
+				
+		// get all relevant spans
+		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
+		
+		// corresponding DOM chang on class Names
+		if (previousElemsStatus[0] == 'block') {
+			parentElem[0].lastChild.className = this.mediamanagerClassHideMyLocal;
+			parentElem[0].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElemsStatus[1] == 'none') {
+			parentElem[1].lastChild.className = this.mediamanagerClassShowMyLocal;
+			parentElem[1].lastChild.innerHTML = this.elementHtmlShow;
+		}
+		if (previousElemsStatus[2] == 'block') {
+			parentElem[2].lastChild.className = this.mediamanagerClassHideMyLocal;
+			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Toggle Extended View on Podcasts (show Details)
+ *
+ * @param {var} elem Actual elem to toggle 
+ * @throws applyError on exception
+ */
+function Mediamanager_toggleExtendedView (elem)
+{
+	try {
+		if (elem.value == showDetails) {
+			elem.value = hideDetails;
+			$('podcast_details_display').value = '1';
+			Effect.Appear('extendedView',{duration: 0.4});
+		} else {
+			elem.value = showDetails;
+			$('podcast_details_display').value = '';
+			Effect.Fade('extendedView',{duration: 0.4});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Show Podcast layer and fill media player
+ *
+ * @see #loaderMediaToPodcast
+ * @see #showResponseMediaToPodcast
+ * @param {string} elem element (id) to process
+ * @throws applyError on exception
+ */
+function Mediamanager_mediaToPodcast (elem)
+{
+	try {
+		this.toShow = $('podcast_container');
+		
+		Element.show(this.toShow);
+		Element.scrollTo(this.toShow);
+		
+		// set hidden field value
+		$('podcast_media_object').value = elem.id;
+
+		var url = this.parseMedCastsUrl;
+		var pars = 'id=' + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Show Podcast layer and fill media player
+ *
+ * @see #loaderMediaToPodcast
+ * @see #showResponseMediaToPodcast
+ * @param {string} elem element (id) to process
+ * @throws applyError on exception
+ */
+function Mediamanager_mediaToPodcastOnLoad ()
+{
+	try {
+		this.toShow = $('podcast_container');
+		
+		Element.show(this.toShow);
+
+		// get hidden field value
+		var podcast_media_object = $('podcast_media_object').value;
+
+		var url = this.parseMedCastsUrl;
+		var pars = 'id=' + podcast_media_object;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Get rid off podcast
+ *
+ * @see #loaderMediaToPodcast
+ * @see #showResponseDiscardPodcast
+ * @param {var} elem Actual elem to get rid off 
+ * @throws applyError on exception
+ */
+function Mediamanager_discardPodcast (elem)
+{
+	try {
+		// get hidden field value
+		var podcast_id = $('podcast_id').value;
+
+		var url = this.parseMedDiscCastsUrl;
+		var pars = 'id=' + podcast_id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseDiscardPodcast
+			});	
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on JSON response
+ *
+ * @see #mediaToPodcast
+ * @see #mediaToPodcastOnLoad
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseMediaToPodcast(req)
+{
+	try {		
+		$('mediafile_container').innerHTML = req.responseText;
+			
+		// dont be able to use appear here, because
+		// Effect.Opacity don't use display: block
+		Element.hide('indicatorPodcast');
+		Element.show('podcast_container_loader');
+		
+		if ($('podcast_details_display').value == 1) {
+			document.getElementsByName('toggleExtendedView')[0].value = hideDetails;
+			$('extendedView').style.display = 'block';
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on JSON response
+ *
+ * @see #discardPodcast
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseDiscardPodcast(req)
+{
+	try {
+		// set hidden field value
+		$('podcast_id').value = '';
+		$('podcast_media_object').value = '';	
+	
+		Effect.Fade('podcast_container',{duration: 0.4});
+					
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * fires temporary actions while processing the ajax call
+ *
+ * @see #mediaToPodcast
+ * @see #mediaToPodcastOnLoad
+ * @see #discardPodcast
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_loaderMediaToPodcast ()
+{
+	try {
+		var hideContentTable = $('podcast_container_loader');
+		Element.hide(hideContentTable);
+		Element.show('indicatorPodcast');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Set a delay for firing the ajax search invoke
+ * special handling for tag search
+ * 
+ * @see #invokeTags
+ * @throws applyError on exception
+ */
+function Mediamanager_initializeTagSearch ()
+{
+	try {
+		// clear the keyPressDelay if it exists from before
+		if (this.keyPressDelay) {
+			window.clearTimeout(this.keyPressDelay);
+		}
+		if ($('mm_tags').value >= '') {
+			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 800);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyLocal
+ * @see #checkElemsMyLocal
+ * @see #loaderMyLocal
+ * @see #showResponseInvokeInputs
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeInputs ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyLocal
+ * @see #checkElemsMyLocal
+ * @see #loaderMyLocal
+ * @see #showResponseInvokeTagInputs
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeTags ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeTagInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyLocal
+ * @see #checkElemsMyLocal
+ * @see #loaderMyLocal
+ * @see #showResponseInvokeInputs
+ * @throws applyError on exception
+ */
+function Mediamanager_invokePager (elem, pager_page)
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = this.parseMedLocalUrl;
+		if (typeof pager_page != 'undefined') {
+			var pars = 'mm_start=' + pager_page + '&' + elems;
+		} else {
+			var pars = 'mm_start=' + elem.id + '&' + elems;
+		}
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on JSON response
+ *
+ * @see #setCurrentElementStatusMyLocal
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #invokeInputs
+ * @see #invokePager
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseInvokeInputs(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		
+		Mediamanager.setCurrentElementStatusMyLocal();
+		
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		$('mm_tags').focus();
+		
+		Helper.applyBehaviour();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on JSON response
+ *
+ * @see #setCurrentElementStatusMyLocal
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #invokeTags
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseInvokeTagInputs(req)
+{
+	try {	
+		$('column').innerHTML = req.responseText;
+		
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+		$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_flickrtags').setAttribute("autocomplete","off");
+		
+		Mediamanager.setCurrentElementStatusMyLocal();
+		
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		$('mm_tags').focus();
+			
+		Helper.applyBehaviour();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * fires temporary actions while processing the ajax call
+ *
+ * @see #setCurrentElementStatusMyLocal
+ * @see #initializeTagSearch
+ * @see #invokePager
+ * @see #invokeTags
+ * @param {object} req JSON response
+ * @throws applyError on exception
+ */
+function Mediamanager_loaderMyLocal ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName('mm_content')[0];
+		Element.hide(hideContentTable);
+		Element.show('indicator_local');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
  * Fires the ajax request to delete an item
  * 
+ * @see #loaderMyLocal
+ * @see #invokeInputs
  * @throws applyError on exception
  */
 function Mediamanager_deleteMediaItem (elem)
 {
 	try {
-		// properties
 		var url = this.parseMedDeleteUrl;
 		var pars = 'id=' + elem.id;
 
@@ -907,7 +861,7 @@ function Mediamanager_deleteMediaItem (elem)
 			url,
 			{
 				method : 'get',
-				onLoading : _loaderMyLocal,
+				onLoading : Mediamanager.loaderMyLocal,
 				parameters : pars,
 				onComplete : function () {Mediamanager.invokeInputs();}
 			});		
@@ -917,15 +871,14 @@ function Mediamanager_deleteMediaItem (elem)
 }
 
 /**
- * Implements method of prototype class Mediamanager
  * Fires the ajax request to delete an item
  * 
+ * @see Helper#insertTags
  * @throws applyError on exception
  */
 function Mediamanager_insertImageItem (elem)
 {
 	try {
-		// global var comes from Forms.storeFocus() and oak.strings.js
 		if (typeof storedFocus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
@@ -936,26 +889,24 @@ function Mediamanager_insertImageItem (elem)
 			build += elem.id;
 			build += '"}';
 		
-			strStart = build;
+			var strStart = build;
 			
-			_insertTags(target, strStart, '' , '');
-		}
-		
+			Helper.insertTags(target, strStart, '' , '');
+		}	
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
 /**
- * Implements method of prototype class Mediamanager
  * Fires the ajax request to delete an item
  * 
+ * @see Helper#insertTags
  * @throws applyError on exception
  */
 function Mediamanager_insertDocumentItem (elem)
 {
 	try {
-		// global var comes from Forms.storeFocus() and oak.strings.js
 		if (typeof storedFocus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
@@ -971,8 +922,38 @@ function Mediamanager_insertDocumentItem (elem)
 			strStart = build;
 			strEnd = '</a>';
 			
-			_insertTags(target, strStart, strEnd , describeLink);
-		}
+			Helper.insertTags(target, strStart, strEnd , describeLink);
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #invokeInputsMyFlickr
+ * @see #invokePagerMyFlickr
+ * @see #invokeTagsMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_checkElemsMyFlickr ()
+{
+	try {
+		if (typeof countItems == 'undefined') {
+			// initialize global with 'save' display
+			countItems = 0;
+		};
+		
+		var getElems = {
+			mm_user : $F('mm_user'),
+			mm_flickrtags : $F('mm_flickrtags'),
+			mm_photoset : $F('mm_photoset'),
+			mm_limit : countItems,
+			mm_pagetype : pagetype
+		};
+		var o = $H(getElems);
+		return o.toQueryString();
 		
 	} catch (e) {
 		_applyError(e);
@@ -980,10 +961,167 @@ function Mediamanager_insertDocumentItem (elem)
 }
 
 /**
+ * Check elements display status
+ * 
+ * @see #setCurrentElementStatusMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_preserveElementStatusMyFlickr ()
+{	
+	try {	
+		var current_userElem = Element.getStyle('mm_user_wrap', 'display');
+		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
+		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');	
+		
+		// make global -> use in func setCurrentElementStatusMyFlickr
+		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Sets elements class and html correponding the previous status
+ * 
+ * @see #checkOccurrences
+ * @throws applyError on exception
+ */
+function Mediamanager_setCurrentElementStatusMyFlickr ()
+{	
+	try {		
+		Element.setStyle('mm_user_wrap', {display: previousElemsStatus[0]});
+		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[1]});
+		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[2]});
+		
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+		
+		// do nothing on var
+		var rows = '';
+			
+		// set appropriate height and width of surrounding divs
+		Mediamanager.checkOccurrences(collectElems, rows);
+				
+		// get all relevant spans
+		var parentElem = $('lyMediamanagerMyFlickr').getElementsByClassName('bez');
+		
+		// corresponding DOM chang on class Names
+		if (previousElemsStatus[0] == 'none') {
+			parentElem[0].lastChild.className = this.mediamanagerClassShowMyFlickr;
+			parentElem[0].lastChild.innerHTML = this.elementHtmlShow;
+		}
+		if (previousElemsStatus[1] == 'block') {
+			parentElem[1].lastChild.className = this.mediamanagerClassHideMyFlickr;
+			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElemsStatus[2] == 'block') {
+			parentElem[2].lastChild.className = this.mediamanagerClassHideMyFlickr;
+			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyFlickr
+ * @see #checkElemsMyFlickr
+ * @see #loaderMyFlickr
+ * @see #showResponseInvokeTagsMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeTagsMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeTagsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
  * Implements method of prototype class Mediamanager
- * set a delay for firing the ajax search invoke
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyFlickr
+ * @see #checkElemsMyFlickr
+ * @see #loaderMyFlickr
+ * @see #showResponseInvokeInputsMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_invokeInputsMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Fires the ajax request
+ * 
+ * @see #preserveElementStatusMyFlickr
+ * @see #checkElemsMyFlickr
+ * @see #loaderMyFlickr
+ * @see #showResponseInvokeInputsMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_invokePagerMyFlickr (elem)
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = 'mm_start=' + elem.id + '&' + elems;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Set a delay for firing the ajax search invoke
  * special handling for tag search
  * 
+ * @see #invokeTagsMyFlickr
  * @throws applyError on exception
  */
 function Mediamanager_initializeTagSearchMyFlickr ()
@@ -1003,124 +1141,18 @@ function Mediamanager_initializeTagSearchMyFlickr ()
 
 /**
  * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_invokeTagsMyFlickr ()
-{
-	try {
-		Mediamanager.preserveElementStatusMyFlickr();
-		
-		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyFlickr,
-				parameters : pars,
-				onComplete : _showResponseInvokeTagsMyFlickr
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_invokeInputsMyFlickr ()
-{
-	try {
-		Mediamanager.preserveElementStatusMyFlickr();
-		
-		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyFlickr,
-				parameters : pars,
-				onComplete : _showResponseInvokeInputsMyFlickr
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_invokePagerMyFlickr (elem)
-{
-	try {
-		Mediamanager.preserveElementStatusMyFlickr();
-		
-		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
-		var pars = 'mm_start=' + elem.id + '&' + elems;
-
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : _loaderMyFlickr,
-				parameters : pars,
-				onComplete : _showResponseInvokeInputsMyFlickr
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
- * 
- * @throws applyError on exception
- */
-function Mediamanager_initializeUserMyFlickr ()
-{
-	try {
-		Mediamanager.preserveElementStatusMyFlickr();
-		
-		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
-		var pars = elems;
-	
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				parameters : pars,
-				onComplete : _showResponseInvokeInputsMyFlickr
-			});
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
- * @private
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #initializeUserMyFlickr
+ * @see #invokePagerMyFlickr
+ * @see #invokeInputsMyFlickr
+ * @see Helper#applyBehaviour
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _showResponseInvokeInputsMyFlickr(req)
+function Mediamanager_showResponseInvokeInputsMyFlickr(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
@@ -1138,9 +1170,6 @@ function _showResponseInvokeInputsMyFlickr(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		//Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
-		//$('mm_flickrtags').focus();
-		
 		Helper.applyBehaviour();	
 
 	} catch (e) {
@@ -1149,14 +1178,16 @@ function _showResponseInvokeInputsMyFlickr(req)
 }
 
 /**
- * Implements method of prototype class Mediamanager
  * Populate on JSON response
  *
- * @private
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #invokeTagsMyFlickr
+ * @see Helper#applyBehaviour
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _showResponseInvokeTagsMyFlickr(req)
+function Mediamanager_showResponseInvokeTagsMyFlickr(req)
 {
 	try {
 		$('column').innerHTML = req.responseText;
@@ -1189,14 +1220,15 @@ function _showResponseInvokeTagsMyFlickr(req)
 }
 
 /**
- * Implements method of prototype class Mediamanager
  * fires temporary actions while processing the ajax call
  *
- * @private
+ * @see #invokeInputsMyFlickr
+ * @see #invokePagerMyFlickr
+ * @see #invokeTagsMyFlickr
  * @param {object} req JSON response
  * @throws applyError on exception
  */
-function _loaderMyFlickr ()
+function Mediamanager_loaderMyFlickr ()
 {
 	try {
 		var hideContentTable = document.getElementsByClassName('mm_content')[1];
@@ -1208,112 +1240,45 @@ function _loaderMyFlickr ()
 }
 
 /**
- * Implements private method of prototype class Mediamanager
- * Check elements display status for further use in func setCurrentElementStatusMyLocal
- * @private
- * @throws applyError on exception
- */
-function Mediamanager_preserveElementStatusMyFlickr ()
-{	
-	try {
-	
-		var current_userElem = Element.getStyle('mm_user_wrap', 'display');
-		var current_photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
-		var current_flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');	
-		
-		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements private method of prototype class Mediamanager
- * Sets elements class and html correponding the previous status
- * @private
- * @throws applyError on exception
- */
-function Mediamanager_setCurrentElementStatusMyFlickr ()
-{	
-	try {
-		
-		Element.setStyle('mm_user_wrap', {display: previousElemsStatus[0]});
-		Element.setStyle('mm_photoset_wrap', {display: previousElemsStatus[1]});
-		Element.setStyle('mm_flickrtags_wrap', {display: previousElemsStatus[2]});
-		
-		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
-		
-		// do nothing on var
-		var rows = '';
-			
-		// set appropriate height and width of surrounding divs
-		_checkOccurrences (collectElems, rows);
-				
-		// get all relevant spans
-		var parentElem = $('lyMediamanagerMyFlickr').getElementsByClassName('bez');
-		
-		if (previousElemsStatus[0] == 'none') {
-			parentElem[0].lastChild.className = this.mediamanagerClassShowMyFlickr;
-			parentElem[0].lastChild.innerHTML = this.elementHtmlShow;
-		}
-		if (previousElemsStatus[1] == 'block') {
-			parentElem[1].lastChild.className = this.mediamanagerClassHideMyFlickr;
-			parentElem[1].lastChild.innerHTML = this.elementHtmlHide;
-		}
-		if (previousElemsStatus[2] == 'block') {
-			parentElem[2].lastChild.className = this.mediamanagerClassHideMyFlickr;
-			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
-		}
-		
-		// observe if needed at least
-		//Behaviour.apply();
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
  * Implements method of prototype class Mediamanager
  * Fires the ajax request
  * 
+ * @see #preserveElementStatusMyFlickr
+ * @see #checkElemsMyFlickr
+ * @see #loaderMyFlickr
+ * @see #showResponseInvokeInputsMyFlickr
  * @throws applyError on exception
  */
-function Mediamanager_checkElemsMyFlickr ()
+function Mediamanager_initializeUserMyFlickr ()
 {
 	try {
-		if (typeof countItems == 'undefined') {
-			// initialize global with 'save' display
-			countItems = 0;
-		};
+		Mediamanager.preserveElementStatusMyFlickr();
 		
-		var getElems = {
-			mm_user : $F('mm_user'),
-			mm_flickrtags : $F('mm_flickrtags'),
-			mm_photoset : $F('mm_photoset'),
-			mm_limit : countItems,
-			mm_pagetype : pagetype
-		};
-		var o = $H(getElems);
-		//countItems = null;
-		return o.toQueryString();
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = this.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
 /**
- * Implements method of prototype class Mediamanager
  * Fires the ajax request to delete an item
  * 
+ * @see Helper#insertTags
  * @throws applyError on exception
  */
 function Mediamanager_insertImageItemFlickr (elem)
 {
 	try {
-		// global var comes from Forms.storeFocus() and oak.strings.js
 		if (typeof storedFocus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
@@ -1357,10 +1322,9 @@ function Mediamanager_insertImageItemFlickr (elem)
 				
 				var strStart = buildComplete;
 		
-				_insertTags(target, strStart, '' , '');
+				Helper.insertTags(target, strStart, '' , '');
 				
 			 } else {
-				// alert message is defined in oak.strings.js
 				alert (alertOnSelectImageSize);
 			}
 		}

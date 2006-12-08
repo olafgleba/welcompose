@@ -113,6 +113,9 @@ try {
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], OAK_REGEX_CSS_IDENTIFIER));
 	
+	// assign control var the distinguish js parsing
+	$BASE->utility->smarty->assign('control', Base_Cnc::filterRequest($_REQUEST['control'], OAK_REGEX_ALPHANUMERIC));
+	
 	// prepare template key
 	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 	
@@ -132,6 +135,8 @@ try {
 			$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
 		}
 		$BASE->utility->smarty->assign('page_arrays', $page_arrays);
+		
+		
 		
 		// display the page
 		$BASE->utility->smarty->display('content/pages_links_select.html', OAK_TEMPLATE_KEY);

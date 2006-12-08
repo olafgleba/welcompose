@@ -30,9 +30,9 @@
 /**
  * CAUTION!
  *
- * DONT EVER CHANGE THE CONTENTS OF THESE STRINGS!!!
+ * DONT EVER CHANGE THE CONTENT OF THESE STRINGS!!!
  * ALL LOCALISATION IS DONE IN THE APPROPRIATE LANGUAGE FILE
- * SEE DOCUMENATION
+ * PLEASE SEE DOCUMENATION
  */
 
 /**
@@ -60,3 +60,5 @@ var confirmMsgDelTplType = '<%i18n Are you sure you want to delete the chosen te
 var confirmMsgDelTplSets = '<%i18n Are you sure you want to delete the chosen template set? Every template that uses this set will be deleted too.%>'
 
 var alertOnSelectImageSize = '<%i18n Please select a Flickr.com supplied image size.%>';
+
+var alertOnClosePopup = '<%i18n The display of the Media Manager was not updated!\\n\\nPlease solely close the window with the corresponding CLOSE button within the launched window. Otherwise the Media Manager does not reflect the current state after editing or adding media.\\n\\nThis advice does not affect other page functionality.%>';

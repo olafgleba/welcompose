@@ -21,7 +21,7 @@
  */
 
 /** 
- * @fileoverview This defines the event handling through lib Behaviour. Used for all select and content pages which excludes popups and the mediamanager.  
+ * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all select and content pages which excludes popups and the mediamanager.  
  * 
  * @author Olaf Gleba og@creatics.de
  * @version $Id: oak.core.js 673 2006-11-23 21:46:53Z olaf $ 
@@ -139,6 +139,26 @@ var definitions = {
 				Forms.setOnEvent(this, '','#000','solid');
 			}
 			return false;
+		}
+	},
+	'textarea' : function(el){
+		el.onfocus = function(){
+			Forms.setOnEvent(this, '','#0c3','dotted');
+			return false;
+		}
+		el.onblur = function(){
+			Forms.setOnEvent(this, '','#000','solid');
+			return false;
+		}
+	},
+	'input.validate' : function(el){
+		el.onkeyup = function(){
+			Helper.validate(this);
+		}
+	},
+	'textarea.validate' : function(el){
+		el.onkeyup = function(){
+			Helper.validate(this);
 		}
 	},
 	'.confirmDelNav' : function(el){
