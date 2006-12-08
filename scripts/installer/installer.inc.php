@@ -561,7 +561,7 @@ protected function chmodFiles ()
 		}
 	}
 	foreach ($this->_writable_files as $_file) {
-		if (@chmod($this->_install_dir.$_dir, octdec($this->_writable_file_mask)) === false) {
+		if (@chmod($this->_install_dir.$_file, octdec($this->_writable_file_mask)) === false) {
 			throw new Setup_PackageExtractorException("Failed to chmod $_file");
 		}
 	}
