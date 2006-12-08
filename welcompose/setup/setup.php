@@ -170,7 +170,7 @@ try {
 	 * create user 
 	 */
 	$sqlData = array(
-		'email' => 'default@wcom.local',
+		'email' => 'default@welcompose.local',
 		'date_added' => date('Y-m-d H:i:s')
 	);
 	
