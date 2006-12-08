@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: captcha.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -40,7 +40,7 @@ class Utility_Captcha {
 	 * Session key name where to save the captcha value to
 	 * @var string
 	 */
-	protected $_session_key = "_oak_captcha";
+	protected $_session_key = "_wcom_captcha";
 
 /**
  * Start instance of base class, load configuration and
@@ -196,7 +196,7 @@ protected function getImageCaptchaSavePath ()
  */
 protected function getImageCaptchaWwwPath ()
 {
-	return $this->base->_conf['path']['oak_public_root_www'].'/tmp/captchas/'.
+	return $this->base->_conf['path']['wcom_public_root_www'].'/tmp/captchas/'.
 		$this->getImageCaptchaFilename();
 }
 

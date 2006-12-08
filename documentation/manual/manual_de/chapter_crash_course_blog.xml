@@ -11,8 +11,8 @@
 	
 	<para>
 		Auch in diesem Crash-Kurs gehen wir von einer jungfräulichen
-		Oak-Installation aus. Wenn Sie bereits Seiten angelegt haben und
-		Oak nicht neu installieren wollen, können Sie einfach die alten
+		Welcompose-Installation aus. Wenn Sie bereits Seiten angelegt haben und
+		Welcompose nicht neu installieren wollen, können Sie einfach die alten
 		Inhalte löschen, bevor Sie mit dem Crash-Kurs beginnen.
 	</para>
 	
@@ -70,7 +70,7 @@
 				<listitem>
 					<para>
 						Um ein Blog auf der Startseite betreiben zu können,
-						muss der Seiten-Typ <guimenuitem>OAK_BLOG</guimenuitem>
+						muss der Seiten-Typ <guimenuitem>WCOM_BLOG</guimenuitem>
 						ausgewählt werden.
 					</para>
 				</listitem>
@@ -112,7 +112,7 @@
 		<para>
 			Für das Kontaktformular geben Sie den Seitennamen
 			<userinput>Kontakt</userinput> an. Als Seiten-Typ müssen Sie
-			<guimenuitem>OAK_SIMPLE_FORM</guimenuitem> auswählen und
+			<guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> auswählen und
 			als Vorlagen-Set <guimenuitem>Blog</guimenuitem>. Die restlichen
 			Optionen können Sie auf den Standardeinstellungen belassen.
 			Nachdem Sie die Seite gespeichert haben, kommen Sie wieder zurück
@@ -135,8 +135,8 @@
 			Wiederholen Sie diesen Vorgang für den Link zur Webseite,
 			mit der die Software erstellt wurde. Geben Sie als Seitennamen
 			den Namen des Navigationspunkts ein, also <userinput>Made with
-			Oak</userinput>. Als Seiten-Typ müssen Sie 
-			<guimenuitem>OAK_URL</guimenuitem> auswählen. Vergessen Sie nicht,
+			Welcompose</userinput>. Als Seiten-Typ müssen Sie 
+			<guimenuitem>WCOM_URL</guimenuitem> auswählen. Vergessen Sie nicht,
 			die Seite nach dem Speichern auszurücken! 
 		</para>
 	</sect1>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: setup.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -144,7 +144,7 @@ try {
 	$BASE->loadClass('database');
 	
 	// read sql file
-	$sql_path = Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/oak.sql');
+	$sql_path = Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/wcom.sql');
 	
 	$contents = null;
 	$handle = @fopen($sql_path, "r");
@@ -170,13 +170,13 @@ try {
 	 * create user 
 	 */
 	$sqlData = array(
-		'email' => 'default@oak.local',
+		'email' => 'default@wcom.local',
 		'date_added' => date('Y-m-d H:i:s')
 	);
 	
-	$user_id = $BASE->db->insert(OAK_DB_USER_USERS, $sqlData);
+	$user_id = $BASE->db->insert(WCOM_DB_USER_USERS, $sqlData);
 	
-	define("OAK_CURRENT_USER", $user_id);
+	define("WCOM_CURRENT_USER", $user_id);
 	
 	// create new project
 	$sqlData = array(
@@ -187,7 +187,7 @@ try {
 		'editable' => '1',
 		'date_added' => date('Y-m-d H:i:s')
 	);
-	$project_id = $BASE->db->insert(OAK_DB_APPLICATION_PROJECTS, $sqlData);
+	$project_id = $BASE->db->insert(WCOM_DB_APPLICATION_PROJECTS, $sqlData);
 	
 	// init the project from skeleton
 	$PROJECT->initFromSkeleton($project_id);

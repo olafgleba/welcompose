@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: right.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addRight ($sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Manage')) {
+	if (!wcom_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -92,10 +92,10 @@ public function addRight ($sqlData)
 		throw new User_RightException('Input for parameter sqlData is not an array');	
 	}
 	
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_USER_RIGHTS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_USER_RIGHTS, $sqlData);
 	
 	// test if right belongs to current user/project
 	if (!$this->rightBelongsToCurrentUser($insert_id)) {
@@ -118,7 +118,7 @@ public function addRight ($sqlData)
 public function updateRight ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Manage')) {
+	if (!wcom_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -141,11 +141,11 @@ public function updateRight ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_USER_RIGHTS, $sqlData,
+	return $this->base->db->update(WCOM_DB_USER_RIGHTS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -160,7 +160,7 @@ public function updateRight ($id, $sqlData)
 public function deleteRight ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Manage')) {
+	if (!wcom_check_access('User', 'Right', 'Manage')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -180,11 +180,11 @@ public function deleteRight ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => (int)OAK_CURRENT_PROJECT
+		'project' => (int)WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_USER_RIGHTS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_USER_RIGHTS, $where, $bind_params);
 }
 
 /**
@@ -198,7 +198,7 @@ public function deleteRight ($id)
 public function selectRight ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -219,7 +219,7 @@ public function selectRight ($id)
 			`user_rights`.`description` AS `description`,
 			`user_rights`.`editable` AS `editable`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		WHERE
 			`user_rights`.`id` = :id
 		  AND
@@ -231,7 +231,7 @@ public function selectRight ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -257,7 +257,7 @@ public function selectRight ($id)
 public function selectRights ($params = array())
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -294,9 +294,9 @@ public function selectRights ($params = array())
 			`user_rights`.`description` AS `description`,
 			`user_rights`.`editable` AS `editable`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		LEFT JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE 
@@ -305,7 +305,7 @@ public function selectRights ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -348,7 +348,7 @@ public function selectRights ($params = array())
 public function countRights ($params = array())
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -377,9 +377,9 @@ public function countRights ($params = array())
 		SELECT 
 			COUNT(DISTINCT `user_rights`.`id`) AS `total`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		LEFT JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE 
@@ -388,7 +388,7 @@ public function countRights ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -415,7 +415,7 @@ public function countRights ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -435,7 +435,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		WHERE
 			`name` = :name
 		  AND
@@ -473,7 +473,7 @@ public function testForUniqueName ($name, $id = null)
 public function rightBelongsToCurrentProject ($right)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -487,7 +487,7 @@ public function rightBelongsToCurrentProject ($right)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		WHERE
 			`user_rights`.`id` = :right
 		AND
@@ -496,7 +496,7 @@ public function rightBelongsToCurrentProject ($right)
 	// prepare bind params
 	$bind_params = array(
 		'right' => (int)$right,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -518,7 +518,7 @@ public function rightBelongsToCurrentProject ($right)
 public function rightBelongsToCurrentUser ($right)
 {
 	// access check
-	if (!oak_check_access('User', 'Right', 'Use')) {
+	if (!wcom_check_access('User', 'Right', 'Use')) {
 		throw new User_RightException("You are not allowed to perform this action");
 	}
 	
@@ -533,7 +533,7 @@ public function rightBelongsToCurrentUser ($right)
 	if (!$this->rightBelongsToCurrentProject($right)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

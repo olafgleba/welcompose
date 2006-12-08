@@ -5,7 +5,7 @@
 	<title>Crash-Kurs: Demo-Webseite</title>
 	
 	<para>
-		Die Erstellung von Webseiten mit Oak ist auf den ersten Blick nicht
+		Die Erstellung von Webseiten mit Welcompose ist auf den ersten Blick nicht
 		ganz einfach. Dies liegt vor allem daran, dass etliche Komponenten
 		an der Anzeige einer Seite mitwirken und sie darum entsprechend
 		konfiguriert werden müssen. In diesem Crash-Kurs geht es darum,
@@ -20,7 +20,7 @@
 		Zur Umsetzung haben wir eine Test-Webseite erstellt, die weder besonders
 		hübsch noch besonders aussergewöhnlich ist, dafür einfach genug, um
 		nicht den Blick auf das Wesentliche zu trüben &ndash; die Bedienung
-		von Oak.
+		von Welcompose.
 	</para>
 	
 	<figure id="crash_course_demo.demo_website">
@@ -33,7 +33,7 @@
 		Sie sollten zum Verständnis des Vorgehens ausreichend sein, sind aber
 		nicht komplett, sodass sich nicht die gesamte Demo-Webseite damit
 		nachvollziehen lässt. Wer alle Schritte komplett nachvollziehen möchte,
-		kann den Quellcode der Demo-Webseite vom Oak-Download-Server beziehen.
+		kann den Quellcode der Demo-Webseite vom Welcompose-Download-Server beziehen.
 	</para>
 	
 	<note>
@@ -42,7 +42,7 @@
 			schlagen Sie die Detail-Erklärungen im Handbuch nach. Sollte
 			dies nicht ausreichen, können Sie sich an die User-Community
 			wenden. Dort sind viele Leute versammelt, die bereits mit
-			Oak arbeiten und Ihnen bei Ihren Verständnisproblemen helfen
+			Welcompose arbeiten und Ihnen bei Ihren Verständnisproblemen helfen
 			können.
 		</para>
 	</note>
@@ -181,7 +181,7 @@
 						Der Seitentyp bestimmt, welche Inhalte in der Seite
 						gespeichert werden können. Da es sich um eine Seite
 						handelt, die nur aus Fliesstext besteht, wählen
-						Sie <guimenuitem>OAK_SIMPLE_PAGE</guimenuitem> aus.
+						Sie <guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> aus.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -233,7 +233,7 @@
 			Feld <guilabel>Name</guilabel> den Namen der Seite, als 
 			<userinput>Inhalte</userinput> ein. Wählen Sie bei
 			<guilabel>Type</guilabel> wiederum den Seiten-Typ
-			<guimenuitem>OAK_SIMPLE_PAGE</guimenuitem> aus und bei
+			<guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> aus und bei
 			<guilabel>Template set</guilabel> unser 
 			<foreignphrase>Template Set</foreignphrase>
 			<userinput>Standardaussehen</userinput>. Die restlichen Felder
@@ -263,7 +263,7 @@
 			Für das Kontakt-Formular und das Impressum muss die ganze
 			Prozedur noch je einmal wiederholt werden. Achten Sie beim
 			Kontakt-Formular darauf, als Seitentyp
-			<guimenuitem>OAK_SIMPLE_FORM</guimenuitem> auszuwählen.
+			<guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> auszuwählen.
 		</para>
 		
 		<figure id="crash_course_demo.create_pages.created_pages">
@@ -334,7 +334,7 @@
 		</para>
 		
 		<para>
-			Wenn Sie nun den öffentlichen Bereich von Oak aufrufen, werden
+			Wenn Sie nun den öffentlichen Bereich von Welcompose aufrufen, werden
 			Sie sehen, dass noch keine Inhalte angezeigt werden, sondern
 			eine Fehlermeldung. Dies liegt daran, dass noch keine Vorlage
 			vorhanden ist, was im
@@ -468,7 +468,7 @@
 		
 		<para>
 			Jetzt gilt es noch dafür zu sorgen, dass die Navigation von
-			Oak erzeugt wird. Ersetzen Sie dazu die Liste in
+			Welcompose erzeugt wird. Ersetzen Sie dazu die Liste in
 			<code><![CDATA[<div id="navi">]]></code> durch folgenden Code:
 		</para>
 		
@@ -476,7 +476,7 @@
 <ul>
 {select_named ns="Content" class="Page" method="selectPages" var="pages"}
 {foreach from=$pages item=_page}
-	{if $_page.id == OAK_CURRENT_PAGE}
+	{if $_page.id == WCOM_CURRENT_PAGE}
 		<li class="on">{$_page.name}</li>
 	{else}
 		<li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
@@ -488,7 +488,7 @@
 		<para>
 			Nachdem Sie die Vorlage wieder gespeichert haben, können Sie
 			die Ausgabeseite nochmals laden, worauf jetzt auch die Navigation
-			von Oak erzeugt wird. Jetzt ist es Zeit, Style Sheets und Logos
+			von Welcompose erzeugt wird. Jetzt ist es Zeit, Style Sheets und Logos
 			einzubinden, was im <xref linkend="crash_course_demo.style_homepage"/>
 			geschieht.
 		</para>
@@ -536,7 +536,7 @@
 				<listitem>
 					<para>
 						Kopieren Sie in dieses Feld die Inhalte der
-						<filename>oak1.css</filename> hinein.
+						<filename>wcom1.css</filename> hinein.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -574,12 +574,12 @@
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<link type="text/css" rel="stylesheet" href="styles/oak1.css" media="screen, projection" />
+<link type="text/css" rel="stylesheet" href="styles/wcom1.css" media="screen, projection" />
 ]]></programlisting>
 
 		<para>
 			Löschen Sie nun die Referenz auf die Datei
-			<filename>styles/oak1.css</filename> und platzieren Sie den
+			<filename>styles/wcom1.css</filename> und platzieren Sie den
 			Cursor zwischen den Anführungszeichen. Klicken Sie nun auf
 			den Link <guibutton>Reference Global Template</guibutton> über
 			dem Textfeld. Es öffnet sich ein Pop-up, in dem die bisher

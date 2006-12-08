@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: simpleformindex.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -109,7 +109,7 @@ public function __construct($project, $page)
 	
 	// get simple form
 	$SIMPLEFORM = load('Content:SimpleForm');
-	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(OAK_CURRENT_PAGE);
+	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(WCOM_CURRENT_PAGE);
 	
 	// assign simple form to smarty
 	$this->base->utility->smarty->assign('simple_form', $this->_simple_form);
@@ -183,7 +183,7 @@ protected function renderPersonalForm ()
 	$FORM->applyFilter('homepage', 'trim');
 	$FORM->applyFilter('homepage', 'strip_tags');
 	$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
-		OAK_REGEX_URL);
+		WCOM_REGEX_URL);
 	
 	// textarea for message
 	$FORM->addElement('textarea', 'message', gettext('Message'),
@@ -236,7 +236,7 @@ protected function renderPersonalForm ()
 		
 		// headers
 		$headers = array();
-		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.oak') ?
+		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
 			$FORM->exportValue('email') : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
 		$headers['Reply-To'] = $FORM->exportValue('email');
@@ -343,7 +343,7 @@ protected function renderBusinessForm ()
 	$FORM->applyFilter('call_back', 'trim');
 	$FORM->applyFilter('call_back', 'strip_tags');
 	$FORM->addRule('call_back', gettext('The field call_back accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for phone
 	$FORM->addElement('text', 'phone', gettext('Phone'),
@@ -354,7 +354,7 @@ protected function renderBusinessForm ()
 		$FORM->addRule('phone', gettext('Please enter your phone number'), 'required');
 	}
 	$FORM->addRule('phone', gettext('Please enter a valid phone number'), 'regex',
-		OAK_REGEX_PHONE_NUMBER);
+		WCOM_REGEX_PHONE_NUMBER);
 	
 	// textfield for email
 	$FORM->addElement('text', 'email', gettext('E-mail address'),
@@ -420,7 +420,7 @@ protected function renderBusinessForm ()
 		
 		// headers
 		$headers = array();
-		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.oak') ?
+		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
 			$FORM->exportValue('email') : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
 		$headers['Reply-To'] = $FORM->exportValue('email');
@@ -496,7 +496,7 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
-	return "oak:simple_form_index.".OAK_CURRENT_PAGE;
+	return "wcom:simple_form_index.".WCOM_CURRENT_PAGE;
 }
 
 /**
@@ -506,7 +506,7 @@ public function getMainTemplateName ()
  */
 public function getPersonalMailTemplateName ()
 {
-	return "oak:simple_form_personal_form_mail.".OAK_CURRENT_PAGE;
+	return "wcom:simple_form_personal_form_mail.".WCOM_CURRENT_PAGE;
 }
 
 /**
@@ -516,7 +516,7 @@ public function getPersonalMailTemplateName ()
  */
 public function getBusinessMailTemplateName ()
 {
-	return "oak:simple_form_business_form_mail.".OAK_CURRENT_PAGE;
+	return "wcom:simple_form_business_form_mail.".WCOM_CURRENT_PAGE;
 }
 
 /**

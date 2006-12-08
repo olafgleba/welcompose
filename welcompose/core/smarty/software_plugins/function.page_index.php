@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: function.page_index.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -51,7 +51,7 @@ function smarty_function_page_index ($params, &$smarty)
 	}
 	
 	// check input
-	if (is_null($var) || !preg_match(OAK_REGEX_SMARTY_VAR_NAME, $var)) {
+	if (is_null($var) || !preg_match(WCOM_REGEX_SMARTY_VAR_NAME, $var)) {
 		throw new Exception("page_index: Invalid var name supplied");
 	}
 	

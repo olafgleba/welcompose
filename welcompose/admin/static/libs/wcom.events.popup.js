@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.events.js
+ * Project: Welcompose
+ * File: wcom.events.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,11 +12,11 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.events.js 517 2006-10-18 17:48:05Z olaf $
+ * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
  *
  * @copyright 2004-2005 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  
@@ -24,7 +24,7 @@
  * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages which contains popups exclude the mediamanager.  
  * 
  * @author Olaf Gleba og@creatics.de
- * @version $Id: oak.core.js 673 2006-11-23 21:46:53Z olaf $ 
+ * @version $Id: wcom.core.js 673 2006-11-23 21:46:53Z olaf $ 
  */
 
 /**

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Project: Oak
- * File: resource.oak.php
+ * Project: Welcompose
+ * File: resource.wcom.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -30,7 +30,7 @@ function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	// checks the provided template resource name. the template resource name
 	// consists of two parts, the template type name and the page id, separated
 	// by a dot. sample: test.12
-	if (!preg_match(OAK_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
+	if (!preg_match(WCOM_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
 		$smarty->trigger_error("Template resource name $tpl_name is invalid", E_USER_ERROR);
 		return false;
 	}
@@ -61,7 +61,7 @@ function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	// checks the provided template resource name. the template resource name
 	// consists of two parts, the template type name and the page id, separated
 	// by a dot. sample: test.12
-	if (!preg_match(OAK_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
+	if (!preg_match(WCOM_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
 		$smarty->trigger_error("Template resource name $tpl_name is invalid", E_USER_ERROR);
 		return false;
 	}

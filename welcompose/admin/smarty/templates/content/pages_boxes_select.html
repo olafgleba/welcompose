@@ -7,17 +7,17 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Pages &#62; Boxes}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
+<title>{i18n Welcompose Admin &ndash; Pages &#62; Boxes}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
-<script type="text/javascript" src="../static/libs/oak.core.js"></script>
-<script type="text/javascript" src="../static/libs/oak.helper.js"></script>
-<script type="text/javascript" src="../static/libs/oak.events.small.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.small.js"></script>
 
 </head>
 
@@ -25,7 +25,7 @@
 <div id="container">
 
 <div id="logo">
-<p>{i18n Oak}</p>
+<p>{i18n Welcompose}</p>
 <!-- logo --></div>
 
 <div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
@@ -45,16 +45,16 @@
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-{if $page.page_type_name == 'OAK_SIMPLE_PAGE'}
+{if $page.page_type_name == 'WCOM_SIMPLE_PAGE'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
 <li class="on">{i18n Boxes}</li>
-{elseif $page.page_type_name == 'OAK_BLOG'}
+{elseif $page.page_type_name == 'WCOM_BLOG'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li class="on">{i18n Boxes}</li>
 <li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
-{elseif $page.page_type_name == 'OAK_SIMPLE_FORM'}
+{elseif $page.page_type_name == 'WCOM_SIMPLE_FORM'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
 <li class="on">{i18n Boxes}</li>

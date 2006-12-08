@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: parse.navigation.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -79,14 +79,14 @@ try {
 	
 	// init user and project
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// assign paths
-	$BASE->utility->smarty->assign('oak_admin_root_www',
-		$BASE->_conf['path']['oak_admin_root_www']);
+	$BASE->utility->smarty->assign('wcom_admin_root_www',
+		$BASE->_conf['path']['wcom_admin_root_www']);
 	
 	// get page name
-	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_ALPHANUMERIC);
+	$page = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_ALPHANUMERIC);
 	
 	// display the correlated navigation template
 	$BASE->utility->smarty->display('_inc_nav_'.$page.'.html');

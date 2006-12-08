@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.mediamanager.js
+ * Project: Welcompose
+ * File: wcom.mediamanager.js
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -16,7 +16,7 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  

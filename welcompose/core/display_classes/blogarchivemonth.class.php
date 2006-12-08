@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogarchivemonth.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -150,7 +150,7 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
-	return "oak:blog_archive_month.".OAK_CURRENT_PAGE;
+	return "wcom:blog_archive_month.".WCOM_CURRENT_PAGE;
 }
 
 /**
@@ -178,9 +178,9 @@ public function getLocationSelf ()
 		'page_id' => $this->_page['id'],
 		'action' => 'ArchiveMonth',
 		'posting_year_added' => Base_Cnc::filterRequest($_REQUEST['posting_year_added'],
-			OAK_REGEX_NUMERIC),
+			WCOM_REGEX_NUMERIC),
 		'posting_month_added' => Base_Cnc::filterRequest($_REQUEST['posting_month_added'],
-			OAK_REGEX_NUMERIC)
+			WCOM_REGEX_NUMERIC)
 	);
 	
 	// send params to url generator. we hope to get back something useful.

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: box.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addBox ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Manage')) {
+	if (!wcom_check_access('Content', 'Box', 'Manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -93,7 +93,7 @@ public function addBox ($sqlData)
 	}
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_BOXES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_BOXES, $sqlData);
 	
 	// test if box belongs tu current user/project
 	if (!$this->boxBelongsToCurrentUser($insert_id)) {
@@ -116,7 +116,7 @@ public function addBox ($sqlData)
 public function updateBox ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Manage')) {
+	if (!wcom_check_access('Content', 'Box', 'Manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -142,7 +142,7 @@ public function updateBox ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_BOXES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_BOXES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -157,7 +157,7 @@ public function updateBox ($id, $sqlData)
 public function deleteBox ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Manage')) {
+	if (!wcom_check_access('Content', 'Box', 'Manage')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -180,7 +180,7 @@ public function deleteBox ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_BOXES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_BOXES, $where, $bind_params);
 }
 
 /**
@@ -194,7 +194,7 @@ public function deleteBox ($id)
 public function selectBox ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -219,9 +219,9 @@ public function selectBox ($id)
 			`content_boxes`.`date_modified` AS `date_modified`,
 			`content_boxes`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
@@ -235,7 +235,7 @@ public function selectBox ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => $id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -261,7 +261,7 @@ public function selectBox ($id)
 public function selectBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -302,9 +302,9 @@ public function selectBoxes ($params = array())
 			`content_boxes`.`date_modified` AS `date_modified`,
 			`content_boxes`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
@@ -313,7 +313,7 @@ public function selectBoxes ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT 
+		'project' => WCOM_CURRENT_PROJECT 
 	);
 	
 	// add where clauses
@@ -353,7 +353,7 @@ public function selectBoxes ($params = array())
 public function countBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -382,9 +382,9 @@ public function countBoxes ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
@@ -393,7 +393,7 @@ public function countBoxes ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -429,7 +429,7 @@ public function countBoxes ($params = array())
 public function testForUniqueName ($name, $page_id_array)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -461,9 +461,9 @@ public function testForUniqueName ($name, $page_id_array)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
@@ -476,7 +476,7 @@ public function testForUniqueName ($name, $page_id_array)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'page' => (int)$page,
 		'name' => $name
 	);
@@ -507,7 +507,7 @@ public function testForUniqueName ($name, $page_id_array)
 public function boxBelongsToCurrentProject ($box)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -521,9 +521,9 @@ public function boxBelongsToCurrentProject ($box)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BOXES." AS `content_boxes`
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_boxes`.`page` = `content_pages`.`id`
 		WHERE
@@ -535,7 +535,7 @@ public function boxBelongsToCurrentProject ($box)
 	// prepare bind params
 	$bind_params = array(
 		'box' => (int)$box,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -557,7 +557,7 @@ public function boxBelongsToCurrentProject ($box)
 public function boxBelongsToCurrentUser ($box)
 {
 	// access check
-	if (!oak_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Content_BoxException("You are not allowed to perform this action");
 	}
 	
@@ -572,7 +572,7 @@ public function boxBelongsToCurrentUser ($box)
 	if (!$this->boxBelongsToCurrentProject($box)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

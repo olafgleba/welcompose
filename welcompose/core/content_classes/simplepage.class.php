@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: simplepage.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -85,7 +85,7 @@ public function instance()
 public function addSimplePage ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Manage')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -101,7 +101,7 @@ public function addSimplePage ($id, $sqlData)
 	$sqlData['id'] = $id;
 	
 	// insert row
-	$this->base->db->insert(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData);
+	$this->base->db->insert(WCOM_DB_CONTENT_SIMPLE_PAGES, $sqlData);
 	
 	// test if simple page belongs to current user/project
 	if (!$this->simplePageBelongsToCurrentUser($id)) {
@@ -124,7 +124,7 @@ public function addSimplePage ($id, $sqlData)
 public function updateSimplePage ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Manage')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -150,7 +150,7 @@ public function updateSimplePage ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_SIMPLE_PAGES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_SIMPLE_PAGES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -166,7 +166,7 @@ public function updateSimplePage ($id, $sqlData)
 public function deleteSimplePage ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Manage')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Manage')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -189,7 +189,7 @@ public function deleteSimplePage ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_SIMPLE_PAGES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_SIMPLE_PAGES, $where, $bind_params);
 }
 
 /**
@@ -203,7 +203,7 @@ public function deleteSimplePage ($id)
 public function selectSimplePage ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Use')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -254,13 +254,13 @@ public function selectSimplePage ($id)
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`
 		FROM
-			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+			".WCOM_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		ON
 			`content_simple_pages`.`id` = `content_pages`.`id`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
@@ -274,7 +274,7 @@ public function selectSimplePage ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => (int)OAK_CURRENT_PROJECT
+		'project' => (int)WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -309,7 +309,7 @@ public function selectSimplePage ($id)
 public function selectSimplePages ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Use')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -389,13 +389,13 @@ public function selectSimplePages ($params = array())
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`
 		FROM
-			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+			".WCOM_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		ON
 			`content_simple_pages`.`id` = `content_pages`.`id`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
@@ -404,7 +404,7 @@ public function selectSimplePages ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -445,7 +445,7 @@ public function selectSimplePages ($params = array())
 public function simplePageBelongsToCurrentProject ($simple_page)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Use')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -459,9 +459,9 @@ public function simplePageBelongsToCurrentProject ($simple_page)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+			".WCOM_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_simple_pages`.`id` = `content_pages`.`id`
 		WHERE
@@ -473,7 +473,7 @@ public function simplePageBelongsToCurrentProject ($simple_page)
 	// prepare bind params
 	$bind_params = array(
 		'simple_page' => (int)$simple_page,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -495,7 +495,7 @@ public function simplePageBelongsToCurrentProject ($simple_page)
 public function simplePageBelongsToCurrentUser ($simple_page)
 {
 	// access check
-	if (!oak_check_access('Content', 'SimplePage', 'Use')) {
+	if (!wcom_check_access('Content', 'SimplePage', 'Use')) {
 		throw new Content_SimplePageException("You are not allowed to perform this action");
 	}
 	
@@ -510,7 +510,7 @@ public function simplePageBelongsToCurrentUser ($simple_page)
 	if (!$this->simplePageBelongsToCurrentProject($simple_page)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

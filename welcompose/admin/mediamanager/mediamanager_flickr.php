@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: mediamanager_flickr.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -86,20 +86,20 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
 	// import request params
 	$request = array(
-		'mm_user' => Base_Cnc::filterRequest($_REQUEST['mm_user'], OAK_REGEX_FLICKR_SCREENNAME),
-		'mm_photoset' => Base_Cnc::filterRequest($_REQUEST['mm_photoset'], OAK_REGEX_NUMERIC),
+		'mm_user' => Base_Cnc::filterRequest($_REQUEST['mm_user'], WCOM_REGEX_FLICKR_SCREENNAME),
+		'mm_photoset' => Base_Cnc::filterRequest($_REQUEST['mm_photoset'], WCOM_REGEX_NUMERIC),
 		'mm_flickrtags' => trim(strip_tags(Base_Cnc::ifsetor($_REQUEST['mm_flickrtags'], null))),
-		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_NUMERIC),
-		'mm_start' => ((Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC) > 0) ?
+		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], WCOM_REGEX_NUMERIC),
+		'mm_start' => ((Base_Cnc::filterRequest($_REQUEST['mm_start'], WCOM_REGEX_NUMERIC) > 0) ?
 			(int)$_REQUEST['mm_start'] : 1)
 	);
 	

@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.core.js
+ * Project: Welcompose
+ * File: wcom.core.js
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -16,12 +16,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  
 /** 
- * @fileoverview The main Oak javascript enviroment. 
+ * @fileoverview The main Welcompose javascript enviroment. 
  * 
  * @author Olaf Gleba og@creatics.de
  * @version $Id$ 
@@ -145,7 +145,7 @@ Errors.prototype = new Error();
 /**
  * Constructs the Base class
  * 
- * @class The base class is the most important class of the oak
+ * @class The base class is the most important class of the wcom
  * javascript enviroment, cause all other classes (exclude Errors) are inherited from that class.
  * It predefines properties and methods which are supposed to be used application wide.
  *

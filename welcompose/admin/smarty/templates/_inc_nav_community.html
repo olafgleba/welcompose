@@ -1,16 +1,16 @@
 <div id="topsubnavcon">
 <ul id="topsubnavdynamic">
-{if oak_check_access('Community', 'BlogComment', 'Manage')}
-<li><a href="{$oak_admin_root_www}/community/blogcomments_select.php">{i18n Blog Comments}</a></li>
+{if wcom_check_access('Community', 'BlogComment', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/community/blogcomments_select.php">{i18n Blog Comments}</a></li>
 {/if}
-{if oak_check_access('Community', 'BlogCommentStatus', 'Manage')}
-<li><a href="{$oak_admin_root_www}/community/blogcommentstatuses_select.php">{i18n Blog Comment Status}</a></li>
+{if wcom_check_access('Community', 'BlogCommentStatus', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/community/blogcommentstatuses_select.php">{i18n Blog Comment Status}</a></li>
 {/if}
-{if oak_check_access('Community', 'AntiSpamPlugin', 'Manage')}
-<li><a href="{$oak_admin_root_www}/community/antispamplugins_select.php">{i18n Anti Spam Plugins}</a></li>
+{if wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/community/antispamplugins_select.php">{i18n Anti Spam Plugins}</a></li>
 {/if}
-{if oak_check_access('Community', 'Settings', 'Manage')}
-<li><a href="{$oak_admin_root_www}/community/settings.php">{i18n Community Settings}</a></li>
+{if wcom_check_access('Community', 'Settings', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/community/settings.php">{i18n Community Settings}</a></li>
 {/if}
 <li><a class="highlight" href="">&nbsp;</a></li>
 </ul>

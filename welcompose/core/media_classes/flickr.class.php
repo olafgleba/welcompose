@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: flickr.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -70,7 +70,7 @@ protected function __construct()
 		
 		// get api key
 		$this->_api_key = $this->base->_conf['flickr']['api_key'];
-		if (empty($this->_api_key) || !preg_match(OAK_REGEX_ALPHANUMERIC, $this->_api_key)) {
+		if (empty($this->_api_key) || !preg_match(WCOM_REGEX_ALPHANUMERIC, $this->_api_key)) {
 			throw new Media_FlickrException("No Flickr API key found");
 		}
 		
@@ -121,7 +121,7 @@ public function instance()
 public function peopleFindByUsername ($username)
 {
 	// input check
-	if (empty($username) || !preg_match(OAK_REGEX_FLICKR_SCREENNAME, $username)) {
+	if (empty($username) || !preg_match(WCOM_REGEX_FLICKR_SCREENNAME, $username)) {
 		throw new Media_FlickrException("Invalid username supplied");
 	}
 	
@@ -153,9 +153,9 @@ public function peopleFindByUsername ($username)
 	
 	// get nsid and username from response
 	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
-		OAK_REGEX_FLICKR_NSID);
+		WCOM_REGEX_FLICKR_NSID);
 	$username = Base_Cnc::filterRequest($this->flickrValue($sx->username),
-		OAK_REGEX_FLICKR_SCREENNAME);
+		WCOM_REGEX_FLICKR_SCREENNAME);
 	
 	// pack and return array
 	return array(
@@ -181,7 +181,7 @@ public function peopleFindByUsername ($username)
 public function urlsGetUserPhotos ($user_id)
 {
 	// input check
-	if (!preg_match(OAK_REGEX_FLICKR_NSID, $user_id)) {
+	if (!preg_match(WCOM_REGEX_FLICKR_NSID, $user_id)) {
 		throw new Media_FlickrException("Invalid nsid supplied");
 	}
 	
@@ -213,9 +213,9 @@ public function urlsGetUserPhotos ($user_id)
 	
 	// get nsid and url from response
 	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
-		OAK_REGEX_FLICKR_NSID);
+		WCOM_REGEX_FLICKR_NSID);
 	$url = Base_Cnc::filterRequest($this->flickrValue($sx['url']),
-		OAK_REGEX_FLICKR_URL);
+		WCOM_REGEX_FLICKR_URL);
 	
 	// pack and return array
 	return array(
@@ -264,7 +264,7 @@ public function photosSearch ($search_params)
 	foreach ($search_params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'user_id':
-					if (empty($_value) || !preg_match(OAK_REGEX_FLICKR_NSID, $_value)) {
+					if (empty($_value) || !preg_match(WCOM_REGEX_FLICKR_NSID, $_value)) {
 						throw new Media_FlickrException("Invalid nsid supplied");
 					}
 					$flickr_params[$_key] = new XML_RPC_Value((string)$_value);
@@ -344,23 +344,23 @@ public function photosSearch ($search_params)
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), OAK_REGEX_FLICKR_NSID);
-	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), OAK_REGEX_NUMERIC);
-	$perpage = Base_Cnc::filterRequest($this->flickrValue($sx['perpage']), OAK_REGEX_NUMERIC);
-	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), OAK_REGEX_NUMERIC);
+	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), WCOM_REGEX_FLICKR_NSID);
+	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), WCOM_REGEX_NUMERIC);
+	$perpage = Base_Cnc::filterRequest($this->flickrValue($sx['perpage']), WCOM_REGEX_NUMERIC);
+	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), WCOM_REGEX_NUMERIC);
 	
 	// get pictures from response
 	$photos = array();
 	foreach ($sx->xpath('/photos/photo') as $_photo) {
 		$photos[] = array(
-			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), OAK_REGEX_NUMERIC),
-			'owner' => Base_Cnc::filterRequest($this->flickrValue($_photo['owner']), OAK_REGEX_FLICKR_NSID),
-			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), OAK_REGEX_NUMERIC),
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), WCOM_REGEX_NUMERIC),
+			'owner' => Base_Cnc::filterRequest($this->flickrValue($_photo['owner']), WCOM_REGEX_FLICKR_NSID),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), WCOM_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), WCOM_REGEX_NUMERIC),
 			'title' => $this->flickrValue($_photo['title']),
-			'ispublic' => Base_Cnc::filterRequest($this->flickrValue($_photo['ispublic']), OAK_REGEX_ZERO_OR_ONE),
-			'isfriend' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfriend']), OAK_REGEX_ZERO_OR_ONE),
-			'isfamily' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfamily']), OAK_REGEX_ZERO_OR_ONE)
+			'ispublic' => Base_Cnc::filterRequest($this->flickrValue($_photo['ispublic']), WCOM_REGEX_ZERO_OR_ONE),
+			'isfriend' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfriend']), WCOM_REGEX_ZERO_OR_ONE),
+			'isfamily' => Base_Cnc::filterRequest($this->flickrValue($_photo['isfamily']), WCOM_REGEX_ZERO_OR_ONE)
 		);
 	}
 	
@@ -386,7 +386,7 @@ public function photosSearch ($search_params)
 public function photosetsGetList ($user_id)
 {
 	// input check
-	if (!preg_match(OAK_REGEX_FLICKR_NSID, $user_id)) {
+	if (!preg_match(WCOM_REGEX_FLICKR_NSID, $user_id)) {
 		throw new Media_FlickrException("Invalid nsid supplied");
 	}
 	
@@ -417,17 +417,17 @@ public function photosetsGetList ($user_id)
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$cancreate = Base_Cnc::filterRequest($this->flickrValue($sx['cancreate']), OAK_REGEX_ZERO_OR_ONE);
+	$cancreate = Base_Cnc::filterRequest($this->flickrValue($sx['cancreate']), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// get photosets from response
 	$photosets = array();
 	foreach ($sx->xpath('/photosets/photoset') as $_photoset) {
 		$photosets[] = array(
-			'id' => Base_Cnc::filterRequest($this->flickrValue($_photoset['id']), OAK_REGEX_NUMERIC),
-			'primary' => Base_Cnc::filterRequest($this->flickrValue($_photoset['primary']), OAK_REGEX_NUMERIC),
-			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photoset['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest($this->flickrValue($_photoset['server']), OAK_REGEX_NUMERIC),
-			'photos' => Base_Cnc::filterRequest($this->flickrValue($_photoset['photos']), OAK_REGEX_NUMERIC),
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photoset['id']), WCOM_REGEX_NUMERIC),
+			'primary' => Base_Cnc::filterRequest($this->flickrValue($_photoset['primary']), WCOM_REGEX_NUMERIC),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photoset['secret']), WCOM_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photoset['server']), WCOM_REGEX_NUMERIC),
+			'photos' => Base_Cnc::filterRequest($this->flickrValue($_photoset['photos']), WCOM_REGEX_NUMERIC),
 			'title' => $this->flickrValue($_photoset->title),
 			'description' => $this->flickrValue($_photoset->description)
 		);
@@ -456,16 +456,16 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 	$per_page = 500, $page = 1)
 {
 	// input check
-	if (empty($photoset_id) || !preg_match(OAK_REGEX_NUMERIC, $photoset_id)) {
+	if (empty($photoset_id) || !preg_match(WCOM_REGEX_NUMERIC, $photoset_id)) {
 		throw new Media_FlickrException("Invalid photoset_id supplied");
 	}
 	if (!is_null($privacy_filter) && ($privacy_filter < 1 || $privacy_filter > 5)) {
 		throw new Media_FlickrException("Invalid privacy_filter supplied");
 	}
-	if (!preg_match(OAK_REGEX_NUMERIC, $per_page)) {
+	if (!preg_match(WCOM_REGEX_NUMERIC, $per_page)) {
 		throw new Media_FlickrException("Invalid input for parameter per_page supplied");
 	}
-	if (!preg_match(OAK_REGEX_NUMERIC, $page)) {
+	if (!preg_match(WCOM_REGEX_NUMERIC, $page)) {
 		throw new Media_FlickrException("Invalid input for parameter page supplied");
 	}
 	
@@ -510,33 +510,33 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
 	
 	// get metadata from response
-	$id = Base_Cnc::filterRequest($this->flickrValue($sx['id']), OAK_REGEX_NUMERIC);
-	$primary = Base_Cnc::filterRequest($this->flickrValue($sx['primary']), OAK_REGEX_NUMERIC);
-	$owner = Base_Cnc::filterRequest($this->flickrValue($sx['owner']), OAK_REGEX_FLICKR_NSID);
-	$ownername = Base_Cnc::filterRequest($this->flickrValue($sx['ownername']), OAK_REGEX_FLICKR_SCREENNAME);
-	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), OAK_REGEX_NUMERIC);
-	$per_page = Base_Cnc::filterRequest($this->flickrValue($sx['per_page']), OAK_REGEX_NUMERIC);
-	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), OAK_REGEX_NUMERIC);
-	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), OAK_REGEX_NUMERIC);
+	$id = Base_Cnc::filterRequest($this->flickrValue($sx['id']), WCOM_REGEX_NUMERIC);
+	$primary = Base_Cnc::filterRequest($this->flickrValue($sx['primary']), WCOM_REGEX_NUMERIC);
+	$owner = Base_Cnc::filterRequest($this->flickrValue($sx['owner']), WCOM_REGEX_FLICKR_NSID);
+	$ownername = Base_Cnc::filterRequest($this->flickrValue($sx['ownername']), WCOM_REGEX_FLICKR_SCREENNAME);
+	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), WCOM_REGEX_NUMERIC);
+	$per_page = Base_Cnc::filterRequest($this->flickrValue($sx['per_page']), WCOM_REGEX_NUMERIC);
+	$pages = Base_Cnc::filterRequest($this->flickrValue($sx['pages']), WCOM_REGEX_NUMERIC);
+	$total = Base_Cnc::filterRequest($this->flickrValue($sx['total']), WCOM_REGEX_NUMERIC);
 	
 	// get photos from response
 	$photos = array();
 	foreach ($sx->xpath('/photoset/photo') as $_photo) {
 		$photos[] = array(
-			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), OAK_REGEX_NUMERIC),
-			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), OAK_REGEX_ALPHANUMERIC),
-			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), OAK_REGEX_NUMERIC),
+			'id' => Base_Cnc::filterRequest($this->flickrValue($_photo['id']), WCOM_REGEX_NUMERIC),
+			'secret' => Base_Cnc::filterRequest($this->flickrValue($_photo['secret']), WCOM_REGEX_ALPHANUMERIC),
+			'server' => Base_Cnc::filterRequest($this->flickrValue($_photo['server']), WCOM_REGEX_NUMERIC),
 			'title' => $this->flickrValue($_photo['title']),
-			'isprimary' => Base_Cnc::filterRequest($this->flickrValue($_photo['isprimary']), OAK_REGEX_NUMERIC),
-			'license' => Base_Cnc::filterRequest($this->flickrValue($_photo['license']), OAK_REGEX_NUMERIC),
-			'dateupload' => Base_Cnc::filterRequest($this->flickrValue($_photo['dateupload']), OAK_REGEX_NUMERIC),
-			'datetaken' => Base_Cnc::filterRequest($this->flickrValue($_photo['datetaken']), OAK_REGEX_DATETIME),
+			'isprimary' => Base_Cnc::filterRequest($this->flickrValue($_photo['isprimary']), WCOM_REGEX_NUMERIC),
+			'license' => Base_Cnc::filterRequest($this->flickrValue($_photo['license']), WCOM_REGEX_NUMERIC),
+			'dateupload' => Base_Cnc::filterRequest($this->flickrValue($_photo['dateupload']), WCOM_REGEX_NUMERIC),
+			'datetaken' => Base_Cnc::filterRequest($this->flickrValue($_photo['datetaken']), WCOM_REGEX_DATETIME),
 			'datetakengranularity' =>
-				Base_Cnc::filterRequest($this->flickrValue($_photo['datetakengranularity']), OAK_REGEX_NUMERIC),
-			'ownername' => Base_Cnc::filterRequest($this->flickrValue($_photo['ownername']), OAK_REGEX_ALPHANUMERIC),
-			'iconserver' => Base_Cnc::filterRequest($this->flickrValue($_photo['iconserver']), OAK_REGEX_NUMERIC),
-			'originalformat' => Base_Cnc::filterRequest($this->flickrValue($_photo['originalformat']), OAK_REGEX_ALPHANUMERIC),
-			'lastupdate' => Base_Cnc::filterRequest($this->flickrValue($_photo['lastupdate']), OAK_REGEX_NUMERIC)
+				Base_Cnc::filterRequest($this->flickrValue($_photo['datetakengranularity']), WCOM_REGEX_NUMERIC),
+			'ownername' => Base_Cnc::filterRequest($this->flickrValue($_photo['ownername']), WCOM_REGEX_ALPHANUMERIC),
+			'iconserver' => Base_Cnc::filterRequest($this->flickrValue($_photo['iconserver']), WCOM_REGEX_NUMERIC),
+			'originalformat' => Base_Cnc::filterRequest($this->flickrValue($_photo['originalformat']), WCOM_REGEX_ALPHANUMERIC),
+			'lastupdate' => Base_Cnc::filterRequest($this->flickrValue($_photo['lastupdate']), WCOM_REGEX_NUMERIC)
 		);
 	}
 	

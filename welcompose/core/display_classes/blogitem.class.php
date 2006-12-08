@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogitem.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -189,7 +189,7 @@ public function render ()
 		$FORM->applyFilter('homepage', 'trim');
 		$FORM->applyFilter('homepage', 'strip_tags');
 		$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
-			OAK_REGEX_URL);
+			WCOM_REGEX_URL);
 		
 		// terxtarea for message
 		$FORM->addElement('textarea', 'comment', gettext('Comment'),
@@ -238,7 +238,7 @@ public function render ()
 			// prepare sql data
 			$sqlData = array();
 			$sqlData['posting'] = $this->_posting['id'];
-			$sqlData['user'] = ((OAK_CURRENT_USER_ANONYMOUS !== true) ? OAK_CURRENT_USER : null); 
+			$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null); 
 			$sqlData['status'] = $this->_settings['blog_comment_default_status'];
 			$sqlData['name'] = $FORM->exportValue('name');
 			$sqlData['email'] = $FORM->exportValue('email');
@@ -359,7 +359,7 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
-	return "oak:blog_item.".OAK_CURRENT_PAGE;
+	return "wcom:blog_item.".WCOM_CURRENT_PAGE;
 }
 
 /**

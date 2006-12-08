@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pages_boxes_select.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -95,49 +95,49 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Content', 'Box', 'Manage')) {
+	if (!wcom_check_access('Content', 'Box', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// make sure, that the page parameter is present
-	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC))) {
+	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC))) {
 		header("Location: pages_select.php");
 		exit;
 	}
 	
 	// assign paths
-	$BASE->utility->smarty->assign('oak_admin_root_www',
-		$BASE->_conf['path']['oak_admin_root_www']);
+	$BASE->utility->smarty->assign('wcom_admin_root_www',
+		$BASE->_conf['path']['wcom_admin_root_www']);
 	
 	// assign current user and project id
-	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 	
 	// select available projects
 	$select_params = array(
-		'user' => OAK_CURRENT_USER,
+		'user' => WCOM_CURRENT_USER,
 		'order_macro' => 'NAME'
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
 	// get boxes
 	$boxes = $BOX->selectBoxes(array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
+		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => 20
 	));
 	$BASE->utility->smarty->assign('boxes', $boxes);
 	
 	// get page
-	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC));
+	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
 	$BASE->utility->smarty->assign('page', $page);
 	
 	// count available boxes
 	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC)
+		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC)
 	);
 	$box_count = $BOX->countBoxes($select_params);
 	$BASE->utility->smarty->assign('box_count', $box_count);
@@ -147,13 +147,13 @@ try {
 	
 	// import and assign request params
 	$request = array(
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC)
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// display the page
-	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_boxes_select.html', OAK_TEMPLATE_KEY);
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	$BASE->utility->smarty->display('content/pages_boxes_select.html', WCOM_TEMPLATE_KEY);
 		
 	// flush the buffer
 	@ob_end_flush();

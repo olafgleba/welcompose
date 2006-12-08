@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: parse.js.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -68,8 +68,8 @@ try {
 	header("Content-Type: text/javascript");
 	
 	// fetch javascript
-	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], OAK_REGEX_SETUP_JS))) {
-		preg_match("=^((oak.setup+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
+	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], WCOM_REGEX_SETUP_JS))) {
+		preg_match("=^((wcom.setup+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
 		$BASE->utility->smarty->display($matches[1], $_SERVER['REQUEST_URI']);
 	}
 	

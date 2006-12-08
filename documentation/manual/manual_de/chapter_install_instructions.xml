@@ -8,7 +8,7 @@
 		<title>Voraussetzungen</title>
 		
 		<para>
-			Um Oak erfolgreich in Betrieb nehmen zu können, werden folgende
+			Um Welcompose erfolgreich in Betrieb nehmen zu können, werden folgende
 			Komponenten benötigt:
 		</para>
 		
@@ -78,13 +78,13 @@
 			aktuelle Version von PDO (1.0.3 oder höher) respektive PDO
 			MySQL (1.0.2 oder höher) installiert sein. Sind Sie nicht
 			sicher, ob der Zielserver über die nötigen Voraussetzungen
-			verfügt, führen Sie das Setup-Programm von Oak aus. In
-			Schritt 2 und 3 wird Oak die aktuelle Serverkonfiguration
+			verfügt, führen Sie das Setup-Programm von Welcompose aus. In
+			Schritt 2 und 3 wird Welcompose die aktuelle Serverkonfiguration
 			ermitteln und Ihnen sagen können, ob die Voraussetzungen
 			erfüllt werden. Sollte dem nicht der Fall sein, wird
 			gleichzeitig darauf hingewiesen, welche Versionen
 			installiert sein müssen, um die optimale Funktionsfähigkeit
-			von Oak zu garantieren. Sollte eine oder mehrere
+			von Welcompose zu garantieren. Sollte eine oder mehrere
 			Erweiterungen nicht vorhanden oder zu alt sein, können diese
 			mit Hilfe des PECL Installers (Linux, BSD, MacOS X)
 			nachgeladen oder im Fall von Windows von der PHP-Webseite
@@ -127,7 +127,7 @@
 		</itemizedlist>
 		
 		<para>
-			Wenn Sie Oak auf einem Shared Hosting Account installieren
+			Wenn Sie Welcompose auf einem Shared Hosting Account installieren
 			wollen und nicht alle Voraussetzungen erfüllt sind, wenden
 			Sie sich bitte an den Support Ihres Providers und verweisen
 			Sie auf diese Seite. Die meisten Webhoster rüsten die
@@ -135,14 +135,14 @@
 		</para>
 	</sect1>
 	
-	<sect1 id="install_instructions.install_oak">
-		<title>Oak installieren</title>
+	<sect1 id="install_instructions.install_wcom">
+		<title>Welcompose installieren</title>
 		
 		<sect2 id="install_instructions.installation.install_type">
 			<title>Installations-Art wählen</title>
 			
 			<para>
-				Oak kann auf verschiedene Arten installiert werden, die
+				Welcompose kann auf verschiedene Arten installiert werden, die
 				sich jeweils im Schwierigkeitsgrad unterscheiden. Im
 				Moment stehen zwei Möglichkeiten zur Verfügung: Die
 				Nutzung des Package Installers oder die manuelle
@@ -166,7 +166,7 @@
 				auf den Zielserver kopiert und die Schreibrechte
 				ebenfalls manuell angepasst werden. Nachher kann
 				allerdings wie beim Package Installer der
-				Konfigurations-Assistent zur Einrichtung von Oak
+				Konfigurations-Assistent zur Einrichtung von Welcompose
 				verwendet werden.
 			</para>
 		</sect2>
@@ -179,7 +179,7 @@
 				selbstextrahierenden Zip-Archiv, wie man es
 				beispielsweise von WinZip her kennt. Es handelt sich um
 				eine einzige PHP-Datei, in der die einzelnen Dateien von
-				Oak, sowohl Programmcode als auch Bilder, in einer
+				Welcompose, sowohl Programmcode als auch Bilder, in einer
 				codierten Form vorliegen. Diese werden beim Aufruf des
 				Package Installers in einen vom Anwender definierten
 				Ordner entpackt.
@@ -195,7 +195,7 @@
 				sodass die Verwendung des komprimierten Package
 				Installer in der Regel die richtige Wahl ist. Die andere Version
 				ist unkomprimiert und kann auf allen Servern verwendet werden,
-				die die nötigen Voraussetzungen für Oak erfüllen.
+				die die nötigen Voraussetzungen für Welcompose erfüllen.
 			</para>
 			
 			<para>
@@ -220,7 +220,7 @@
 				<title>Package Installer auf den Server verschieben</title>
 				
 				<para>
-					Nachdem Sie die Oak-Distribution vom Download-Server
+					Nachdem Sie die Welcompose-Distribution vom Download-Server
 					heruntergeladen haben, müssen Sie sie mit dem jeweiligen
 					Kompressionsprogramm entpacken.
 				</para>
@@ -247,7 +247,7 @@
 				
 				<para>
 					Nach dem Entpacken finden Sie einen Ordner mit dem Namen
-					<filename>oak</filename> auf der Festplatte.
+					<filename>wcom</filename> auf der Festplatte.
 					Dort drin sind die beiden verschiedenen Installer Packages
 					enthalten. Die Datei <filename>installer-zlib.php</filename>
 					ist der komprimierte Package Installer, die Datei
@@ -268,7 +268,7 @@
 				</tip>
 				
 				<para>
-					Nun muss noch das Verzeichnis vorbereitet werden, in das Oak
+					Nun muss noch das Verzeichnis vorbereitet werden, in das Welcompose
 					installiert werden soll. Legen Sie dazu mit dem FTP-Programm
 					(oder einer ähnlichen Software) ein Verzeichnis auf dem
 					Webserver an, sofern Sie nicht ein bereits vorhandenes
@@ -282,7 +282,7 @@
 				
 				<note>
 					<para>
-						Wenn Sie Oak auf einem Windows-<emphasis>Server</emphasis>
+						Wenn Sie Welcompose auf einem Windows-<emphasis>Server</emphasis>
 						einsetzen, können Sie diesen Abschnitt überspringen.
 					</para>
 				</note>
@@ -322,7 +322,7 @@
 				
 				<para>
 					Ist es nicht möglich, die Schreibrechte des
-					Installationsordners von Oak zu verändern, weil Sie
+					Installationsordners von Welcompose zu verändern, weil Sie
 					beispielsweise nicht über die nötigen Rechte verfügen,
 					müssen Sie die <link
 					linkend="install_instructions.installation.manual_installation">manuelle
@@ -358,7 +358,7 @@
 				</para>
 				
 				<figure id="install_instructions.installation.package_installer.execute.sample">
-					<title>Oak Package Installer</title>
+					<title>Welcompose Package Installer</title>
 					<graphic fileref="images/install_instructions.installation.package_installer.execute.sample.png"/>
 				</figure>
 				
@@ -370,14 +370,14 @@
 				
 				<para>
 					Beim <emphasis>Path setup</emphasis> geht es darum, den
-					Installationsordner, in den die Oak-Dateien kopiert werden
+					Installationsordner, in den die Welcompose-Dateien kopiert werden
 					sollen, im Feld <guilabel>Install directory</guilabel>
 					anzugeben. Die Eingabe wird dabei vom Installer
-					Package aus interpretiert. Wollen Sie Oak in den Ordner
+					Package aus interpretiert. Wollen Sie Welcompose in den Ordner
 					<medialabel>cms</medialabel> installieren, der sich
 					unterhalb des Installer Package befindet, müssen Sie
 					<userinput>/cms</userinput> als Pfad eingeben. Möchten Sie
-					dagegen Oak in demselben Ordner wie das Installer Package
+					dagegen Welcompose in demselben Ordner wie das Installer Package
 					installieren, ist <userinput>/</userinput> die richtige
 					Eingabe.
 				</para>
@@ -401,7 +401,7 @@
 					auf <guibutton>Go to next step</guibutton> klicken! Der
 					Package Installer entpackt dann alle Dateien und leitet
 					Sie dann zum <link
-					linkend="install_instructions.configure_oak">Setup
+					linkend="install_instructions.configure_wcom">Setup
 					weiter</link>.
 				</para>
 				
@@ -450,7 +450,7 @@
 					<guibutton>Go to next step</guibutton> klicken! Der
 					Package Installer entpackt dann alle Dateien und leitet
 					Sie zum <link
-					linkend="install_instructions.configure_oak">Setup
+					linkend="install_instructions.configure_wcom">Setup
 					weiter</link>.
 				</para>
 			</sect3>
@@ -464,11 +464,11 @@
 				
 				<para>
 					Bei der manuellen Installation müssen im Gegensatz zum Package
-					Installer die Programm-Dateien von Oak manuell auf den Webserver
+					Installer die Programm-Dateien von Welcompose manuell auf den Webserver
 					übertragen und auch die Schreibrechte von Hand vergeben werden.
 					Für die manuelle Installation benötigen Sie eine
-					Oak-Distribution mit dem Kürzel <filename>-src</filename> im
-					Namen, beispielsweise <filename>oak-1.2.3-src.tar.gz</filename>.
+					Welcompose-Distribution mit dem Kürzel <filename>-src</filename> im
+					Namen, beispielsweise <filename>wcom-1.2.3-src.tar.gz</filename>.
 					Nachdem Sie die Datei heruntergeladen haben, muss sie entpackt
 					werden.
 				</para>
@@ -495,7 +495,7 @@
 				
 				<para>
 					Verwenden Sie nun ein Dateitransfer-Programm, um die
-					Dateien von Oak auf den Webserver zu transferieren.
+					Dateien von Welcompose auf den Webserver zu transferieren.
 					Verschieben Sie die Dateien in das von Ihnen gewünschte
 					Installationsverzeichnis. Sofern dieses noch nicht
 					existiert, legen Sie es vorher an.
@@ -512,7 +512,7 @@
 				</tip>
 				
 				<figure id="install_instructions.installation.manual_installation.copy_to_server.transfer">
-					<title>Oak-Dateien auf Server transferieren</title>
+					<title>Welcompose-Dateien auf Server transferieren</title>
 					<graphic fileref="images/install_instructions.installation.manual_installation.copy_to_server.transfer.png"/>
 				</figure>
 			</sect3>
@@ -521,7 +521,7 @@
 				<title>Schreibrechte anpassen</title>
 				
 				<para>
-					Damit Oak Dateien wie Bilder auf dem Server ablegen kann,
+					Damit Welcompose Dateien wie Bilder auf dem Server ablegen kann,
 					müssen die Schreibrechte diverser Verzeichnisse und
 					Dateien angepasst werden. Um die Schreibrechte zu verändern,
 					reicht bei den meisten Dateitransferprogrammen ein
@@ -606,38 +606,38 @@
 				
 				<para>
 					Nachdem dies erledigt ist, können Sie die <link
-					linkend="install_instructions.configure_oak">Setup-Prozedur</link>
-					aufrufen und mit der Konfiguration von Oak fortfahren.
+					linkend="install_instructions.configure_wcom">Setup-Prozedur</link>
+					aufrufen und mit der Konfiguration von Welcompose fortfahren.
 				</para>
 				
 			</sect3>
 		</sect2>
 	</sect1>
 	
-	<sect1 id="install_instructions.configure_oak">
-		<title>Oak konfigurieren</title>
+	<sect1 id="install_instructions.configure_wcom">
+		<title>Welcompose konfigurieren</title>
 		
 		<para>
 			Die Setup-Prozedur unterstützt Sie bei der Erst-Konfiguration von
-			Oak. Ein Assistent wird Ihnen bei der Einrichtung der Datenbank-
+			Welcompose. Ein Assistent wird Ihnen bei der Einrichtung der Datenbank-
 			Verbindung sowie der Initialisierung der Datenbank-Struktur
 			zur Seite zu stehen.
 		</para>
 		
 		<para>
 			Die Setup-Prozedur befindet sich im Ordner <filename>setup/</filename>
-			im Installationsverzeichnis von Oak.
+			im Installationsverzeichnis von Welcompose.
 		</para>
 		
-		<sect2 id="install_instructions.configure_oak.license">
+		<sect2 id="install_instructions.configure_wcom.license">
 			<title>Lizenzierung</title>
 			
 			<para>
 				Im ersten Schritt geht es um die Lizenzierung der Software.
-				Es wird Ihnen die jeweils aktuelle Version des Oak-Lizenztexts
+				Es wird Ihnen die jeweils aktuelle Version des Welcompose-Lizenztexts
 				zum Studium vorgelegt und gefragt, ob Sie mit den
 				Lizenzbedingungen einverstanden sind. Nur dann &ndash; und nur
-				dann &ndash; kann die Setup-Prozedur ausgeführt und Oak benutzt
+				dann &ndash; kann die Setup-Prozedur ausgeführt und Welcompose benutzt
 				werden. Die Lizenz akzeptieren Sie mit einem Klick auf die
 				Checkbox <guilabel>Confirm license</guilabel>. Klicken
 				Sie dann auf die Schaltfläche <guibutton>Go to next
@@ -651,12 +651,12 @@
 			</para>
 		</sect2>
 		
-		<sect2 id="install_instructions.configure_oak.requirements">
+		<sect2 id="install_instructions.configure_wcom.requirements">
 			<title>Voraussetzungen</title>
 			
 			<para>
 				In diesem Schritt wird vom Setup-Assistenten überprüft,
-				ob der Webserver, auf dem Oak installiert werden soll, die
+				ob der Webserver, auf dem Welcompose installiert werden soll, die
 				nötigen Voraussetzungen für einen reibungslosen Betrieb
 				erfüllt. Die Ermittlung der Daten erfolgt anhand hinterlegter
 				Tests auf Versionsnummern und das Vorhandensein bestimmter
@@ -691,11 +691,11 @@
 						<para>
 							Die benötigte Komponente konnte gefunden werden,
 							allerdings verfügt sie nicht über eine optimale
-							Kompatibilität zu Oak. Meist handelt es sich um
+							Kompatibilität zu Welcompose. Meist handelt es sich um
 							veraltete Versionen. Die Installation kann zwar
 							ohne weitere Aktionen vorausgesetzt werden,
 							allerdings kann das reibungslose Funktionieren von
-							Oak nicht garantiert werden. Wir empfehlen deshalb
+							Welcompose nicht garantiert werden. Wir empfehlen deshalb
 							die Behebung des Problems. Konsultieren Sie
 							den Abschnitt
 							<xref linkend="install_instructions.requirements"/>,
@@ -718,7 +718,7 @@
 					<listitem>
 						<para>
 							Die komponente konnte gefunden werden und entspricht
-							den Anforderungen von Oak.
+							den Anforderungen von Welcompose.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -742,10 +742,10 @@
 					geprüft werden, weil letzteres zu diesem Zeitpunkt noch
 					nicht möglich ist. Das heisst, dass das Setup Sie zum
 					nächsten Schritt übergehen lässt, selbst wenn der
-					Datenbank-Server nicht für den Betrieb mit Oak
+					Datenbank-Server nicht für den Betrieb mit Welcompose
 					geeignet ist. Der Test des Datenbank-Servers erfolgt
 					zu einem späteren Zeitpunkt (siehe <xref
-					linkend="install_instructions.configure_oak.database"/>).
+					linkend="install_instructions.configure_wcom.database"/>).
 				</para>
 			</warning>
 			
@@ -756,11 +756,11 @@
 			</para>
 		</sect2>
 		
-		<sect2 id="install_instructions.configure_oak.database">
+		<sect2 id="install_instructions.configure_wcom.database">
 			<title>Datenbank</title>
 			
 			<para>
-				Damit Oak eine Verbindung zur Datenbank aufnehmen kann, müssen
+				Damit Welcompose eine Verbindung zur Datenbank aufnehmen kann, müssen
 				die Verbindungsparameter konfiguriert werden.
 			</para>
 			
@@ -772,7 +772,7 @@
 					<listitem>
 						<para>
 							Name der Datenbank, in der die Tabellenstruktur für
-							Oak erzeugt werden soll. Achten Sie bitte darauf,
+							Welcompose erzeugt werden soll. Achten Sie bitte darauf,
 							dass die Datenbank leer ist.
 						</para>
 					</listitem>
@@ -895,7 +895,7 @@
 			</para>
 		</sect2>
 		
-		<sect2 id="install_instructions.configure_oak.configuration">
+		<sect2 id="install_instructions.configure_wcom.configuration">
 			<title>Konfiguration</title>
 			
 			<para>
@@ -910,7 +910,7 @@
 					</term>
 					<listitem>
 						<para>
-							Name des ersten Projekts, das Oak anlegen soll.
+							Name des ersten Projekts, das Welcompose anlegen soll.
 							Als Name können Sie beispielsweise den aktuellen
 							Domain-Namen verwenden (wie
 							<userinput>domain.tld</userinput>).
@@ -925,7 +925,7 @@
 						<para>
 							Mit dem <foreignphrase>Locale</foreignphrase> wird
 							festgelegt, welches Gebietsschema für die Anzeige
-							von Oak verwendet wird. Es wird damit unter anderem
+							von Welcompose verwendet wird. Es wird damit unter anderem
 							die Sprache der Administrationsoberfläche bestimmt.
 							Für mögliche Eingaben und deren Folgen konsultieren
 							Sie bitte <xref linkend="localization"/>
@@ -949,12 +949,12 @@
 			</tip>
 		</sect2>
 		
-		<sect2 id="install_instructions.configure_oak.finish">
+		<sect2 id="install_instructions.configure_wcom.finish">
 			<title>Setup abschliessen</title>
 			
 			<para>
 				Herzlichen Glückwunsch! Das Setup wurde erfolgreich ausgeführt
-				und Oak ist nun Betriebsbereit. Verwenden Sie den angezeigten
+				und Welcompose ist nun Betriebsbereit. Verwenden Sie den angezeigten
 				Benutzernamen und Passwort, um sich in die Admin-Oberfläche 
 				einzuloggen.
 			</para>

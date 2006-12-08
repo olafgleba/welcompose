@@ -1,7 +1,7 @@
 ; <?php /*
 [path]
-oak_admin_root_www = /oak/trunk/oak/admin
-oak_public_root_www = /oak/trunk/oak
+wcom_admin_root_www = /wcom/trunk/wcom/admin
+wcom_public_root_www = /wcom/trunk/wcom
 
 [environment]
 debug = true
@@ -15,7 +15,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/tmp/mysql-4.1.sock;dbname=oak"
+dsn = "mysql:unix_socket=/tmp/mysql-4.1.sock;dbname=wcom"
 username = "root"
 password = 
 table_alias_constants = true
@@ -23,39 +23,39 @@ debug = false;
 backticks = true;
 
 [media]
-store_www = "/oak/trunk/oak/files/media"
-store_disk = "/www/oak/trunk/oak/files/media"
+store_www = "/wcom/trunk/wcom/files/media"
+store_disk = "/www/wcom/trunk/wcom/files/media"
 
 [global_file]
-store_www = "/oak/trunk/oak/files/global_files"
-store_disk = "/oak/trunk/oak/files/global_files"
+store_www = "/wcom/trunk/wcom/files/global_files"
+store_disk = "/wcom/trunk/wcom/files/global_files"
 
 [caching]
 index.php_mode = 0
 index.php_lifetime = 0
 
 [plugins]
-textconverter_dir = "/www/oak/trunk/oak/core/plugins/textconverters"
-textmacro_dir = "/www/oak/trunk/oak/core/plugins/textmacros"
+textconverter_dir = "/www/wcom/trunk/wcom/core/plugins/textconverters"
+textmacro_dir = "/www/wcom/trunk/wcom/core/plugins/textmacros"
 
 [urls]
-simple_page_index = "/oak/trunk/oak/<page_name>/"
-simple_page_index_start = "/oak/trunk/oak/"
-simple_form_index = "/oak/trunk/oak/<page_name>/"
-simple_form_index_start = "/oak/trunk/oak/"
+simple_page_index = "/wcom/trunk/wcom/<page_name>/"
+simple_page_index_start = "/wcom/trunk/wcom/"
+simple_form_index = "/wcom/trunk/wcom/<page_name>/"
+simple_form_index_start = "/wcom/trunk/wcom/"
 blog_index = "/<page_name>/<start>/"
-blog_index_start = "/oak/trunk/oak/"
-blog_atom_10 = "/oak/trunk/oak/<page_name>/Atom10/"
-blog_atom_10_start = "/oak/trunk/oak/Atom10/"
-blog_rss_20 = "/oak/trunk/oak/<page_name>/Rss20/"
-blog_rss_20_start = "/oak/trunk/oak/Rss20/"
-blog_item = "/oak/trunk/oak/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
-blog_item_start = "/oak/trunk/oak/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
-blog_archive_year = "/oak/trunk/oak/<page_name>/<posting_year_added>/"
-blog_archive_year_start = "/oak/trunk/oak/<posting_year_added>/"
-blog_archive_month = "/oak/trunk/oak/<page_name>/<posting_year_added>/<posting_month_added>/"
-blog_archive_month_start = "/oak/trunk/oak/<posting_year_added>/<posting_month_added>/"
-global_template_url = "/oak/trunk/oak/global_template.php?name=<global_file_name>&project=<project_name>"
+blog_index_start = "/wcom/trunk/wcom/"
+blog_atom_10 = "/wcom/trunk/wcom/<page_name>/Atom10/"
+blog_atom_10_start = "/wcom/trunk/wcom/Atom10/"
+blog_rss_20 = "/wcom/trunk/wcom/<page_name>/Rss20/"
+blog_rss_20_start = "/wcom/trunk/wcom/Rss20/"
+blog_item = "/wcom/trunk/wcom/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_item_start = "/wcom/trunk/wcom/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_archive_year = "/wcom/trunk/wcom/<page_name>/<posting_year_added>/"
+blog_archive_year_start = "/wcom/trunk/wcom/<posting_year_added>/"
+blog_archive_month = "/wcom/trunk/wcom/<page_name>/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_start = "/wcom/trunk/wcom/<posting_year_added>/<posting_month_added>/"
+global_template_url = "/wcom/trunk/wcom/global_template.php?name=<global_file_name>&project=<project_name>"
 
 [flickr]
 api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"

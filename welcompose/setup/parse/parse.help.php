@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: parse.help.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -58,7 +58,7 @@ try {
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
 	// get page name
-	$page = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_HELP);
+	$page = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_HELP);
 	
 	// display the correlated navigation template
 	$BASE->utility->smarty->display('help/'.$page.'.html');

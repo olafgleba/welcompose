@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: function.mm_is_podcast_format.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -33,8 +33,8 @@ function smarty_function_mm_is_podcast_format ($params, &$smarty)
 	$OBJECT = load('Media:Object');
 	
 	// import mime type & var name from params array
-	$mime_type = Base_Cnc::filterRequest($params['mime_type'], OAK_REGEX_MIME_TYPE);
-	$var = Base_Cnc::filterRequest($params['var'], OAK_REGEX_SMARTY_VAR_NAME);
+	$mime_type = Base_Cnc::filterRequest($params['mime_type'], WCOM_REGEX_MIME_TYPE);
+	$var = Base_Cnc::filterRequest($params['var'], WCOM_REGEX_SMARTY_VAR_NAME);
 	
 	// find out if the object with the given mime type can be used for a podcast
 	// and assign the result to the var with the given name.

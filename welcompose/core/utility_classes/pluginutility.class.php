@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pluginutility.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -85,7 +85,7 @@ public function instance()
 public function getTextMacroTagPattern ($name, $dotall = false)
 {
 	// test name
-	if (empty($name) || !preg_match(OAK_REGEX_TEXT_MACRO_INTERNAL_NAME, $name)) {
+	if (empty($name) || !preg_match(WCOM_REGEX_TEXT_MACRO_INTERNAL_NAME, $name)) {
 		throw new Utility_PluginUtilityException("name is expected to be a valid internal text macro name");
 	}
 	if (!is_bool($dotall)) {

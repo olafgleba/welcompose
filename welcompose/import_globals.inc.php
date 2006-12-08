@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: import_globals.inc.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,27 +18,27 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // default vars
 $get = array(
-	'action' => Base_Cnc::filterRequest($_GET['action'], OAK_REGEX_ALPHANUMERIC),
-	'month' => Base_Cnc::filterRequest($_GET['month'], OAK_REGEX_NUMERIC),
-	'page' => Base_Cnc::filterRequest($_GET['page'], OAK_REGEX_NUMERIC),
-	'posting' => Base_Cnc::filterRequest($_GET['posting'], OAK_REGEX_NUMERIC),
-	'start' => Base_Cnc::filterRequest($_GET['start'], OAK_REGEX_NUMERIC),
-	'year' => Base_Cnc::filterRequest($_GET['year'], OAK_REGEX_NUMERIC)
+	'action' => Base_Cnc::filterRequest($_GET['action'], WCOM_REGEX_ALPHANUMERIC),
+	'month' => Base_Cnc::filterRequest($_GET['month'], WCOM_REGEX_NUMERIC),
+	'page' => Base_Cnc::filterRequest($_GET['page'], WCOM_REGEX_NUMERIC),
+	'posting' => Base_Cnc::filterRequest($_GET['posting'], WCOM_REGEX_NUMERIC),
+	'start' => Base_Cnc::filterRequest($_GET['start'], WCOM_REGEX_NUMERIC),
+	'year' => Base_Cnc::filterRequest($_GET['year'], WCOM_REGEX_NUMERIC)
 );
 
 $request = array(
-	'action' => Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC),
-	'month' => Base_Cnc::filterRequest($_REQUEST['month'], OAK_REGEX_NUMERIC),
-	'page' => Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC),
-	'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], OAK_REGEX_NUMERIC),
-	'start' => Base_Cnc::filterRequest($_REQUEST['start'], OAK_REGEX_NUMERIC),
-	'year' => Base_Cnc::filterRequest($_REQUEST['year'], OAK_REGEX_NUMERIC)
+	'action' => Base_Cnc::filterRequest($_REQUEST['action'], WCOM_REGEX_ALPHANUMERIC),
+	'month' => Base_Cnc::filterRequest($_REQUEST['month'], WCOM_REGEX_NUMERIC),
+	'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+	'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
+	'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+	'year' => Base_Cnc::filterRequest($_REQUEST['year'], WCOM_REGEX_NUMERIC)
 );
 
 $session = array(

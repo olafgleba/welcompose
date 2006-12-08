@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: login.class.php
  * 
  * Copylogin (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copylogin 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -106,7 +106,7 @@ public function logIntoAdmin ($input_email, $input_secret)
 		SELECT
 			`id`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		WHERE
 			`user_users`.`email` = :email
 	";
@@ -125,9 +125,9 @@ public function logIntoAdmin ($input_email, $input_secret)
 		SELECT
 			`application_projects`.`id`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE
@@ -190,9 +190,9 @@ public function logIntoAdmin ($input_email, $input_secret)
 		SELECT
 			`user_groups`.`id`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE
@@ -224,9 +224,9 @@ public function logIntoAdmin ($input_email, $input_secret)
 			`user_rights`.`id`,
 			`user_rights`.`name`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE
@@ -271,8 +271,8 @@ public function logIntoAdmin ($input_email, $input_secret)
 public function loggedIntoAdmin ()
 {
 	// import user and project id from session
-	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
-	$project_id = Base_Cnc::filterRequest($_SESSION['admin']['project'], OAK_REGEX_NUMERIC);
+	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], WCOM_REGEX_NUMERIC);
+	$project_id = Base_Cnc::filterRequest($_SESSION['admin']['project'], WCOM_REGEX_NUMERIC);
 	
 	if (is_null($user_id)) {
 		return false;
@@ -316,7 +316,7 @@ public function switchAdminProject ($new_project)
 	}
 	
 	// get user id from session
-	$user = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
+	$user = Base_Cnc::filterRequest($_SESSION['admin']['user'], WCOM_REGEX_NUMERIC);
 	
 	// the first step is to look for projects where the user is active and
 	// an author.
@@ -324,9 +324,9 @@ public function switchAdminProject ($new_project)
 		SELECT
 			`application_projects`.`id`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE
@@ -372,9 +372,9 @@ public function switchAdminProject ($new_project)
 		SELECT
 			`user_groups`.`id`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE
@@ -406,9 +406,9 @@ public function switchAdminProject ($new_project)
 			`user_rights`.`id`,
 			`user_rights`.`name`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE
@@ -489,7 +489,7 @@ public function logIntoPublicArea ($input_email, $input_secret)
 		SELECT
 			`id`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		WHERE
 			`user_users`.`email` = :email
 	";
@@ -507,9 +507,9 @@ public function logIntoPublicArea ($input_email, $input_secret)
 		SELECT
 			`application_projects`.`id`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE
@@ -535,7 +535,7 @@ public function logIntoPublicArea ($input_email, $input_secret)
 	// list of possible projects
 	$project = null;
 	foreach ($possible_projects as $_project) {
-		if (OAK_CURRENT_PROJECT == $_project['id'] && !empty($_project['id']) && is_numeric($_project['id'])) {
+		if (WCOM_CURRENT_PROJECT == $_project['id'] && !empty($_project['id']) && is_numeric($_project['id'])) {
 			$project = $_project['id'];
 			break;
 		}
@@ -553,9 +553,9 @@ public function logIntoPublicArea ($input_email, $input_secret)
 		SELECT
 			`user_groups`.`id`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE
@@ -587,9 +587,9 @@ public function logIntoPublicArea ($input_email, $input_secret)
 			`user_rights`.`id`,
 			`user_rights`.`name`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE
@@ -608,13 +608,13 @@ public function logIntoPublicArea ($input_email, $input_secret)
 	$access_rights = $this->base->db->select($sql, 'multi', $bind_params);
 	
 	// now it's time to save everything to the session/cookie
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'] = $user;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'] = false;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'] = $group;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] = array();
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['user'] = $user;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['anon'] = false;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['group'] = $group;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'] = array();
 	
 	foreach ($access_rights as $_right) {
-		$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'][(int)$_right['id']] = $_right['name'];
+		$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'][(int)$_right['id']] = $_right['name'];
 	}
 	
 	// we're done
@@ -634,13 +634,13 @@ public function logIntoPublicAreaAsAnonymous ()
 		SELECT
 			`user_users`.`id`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
-			`user_users`.`email` = 'OAK_ANONYMOUS'
+			`user_users`.`email` = 'WCOM_ANONYMOUS'
 		  AND
 			`user_users2application_projects`.`project` = :project
 		LIMIT
@@ -649,7 +649,7 @@ public function logIntoPublicAreaAsAnonymous ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -668,9 +668,9 @@ public function logIntoPublicAreaAsAnonymous ()
 		SELECT
 			`user_groups`.`id`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE
@@ -683,7 +683,7 @@ public function logIntoPublicAreaAsAnonymous ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'user' => $user
 	);
 	
@@ -702,9 +702,9 @@ public function logIntoPublicAreaAsAnonymous ()
 			`user_rights`.`id`,
 			`user_rights`.`name`
 		FROM
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		JOIN
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		  ON
 			`user_rights`.`id` = `user_groups2user_rights`.`right`
 		WHERE
@@ -716,7 +716,7 @@ public function logIntoPublicAreaAsAnonymous ()
 	// prepare bind params
 	$bind_params = array(
 		'group' => $group,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -726,16 +726,16 @@ public function logIntoPublicAreaAsAnonymous ()
 	if (!array_key_exists('public_area', $_SESSION) || !is_array($_SESSION['public_area'])) {
 		$_SESSION['public_area'] = array();
 	}
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT] = array();
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT] = array();
 	
 	// now it's time to save everything to the session/cookie
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'] = $user;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'] = true;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'] = $group;
-	$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] = array();
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['user'] = $user;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['anon'] = true;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['group'] = $group;
+	$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'] = array();
 	
 	foreach ($access_rights as $_right) {
-		$_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'][(int)$_right['id']] = $_right['name'];
+		$_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'][(int)$_right['id']] = $_right['name'];
 	}
 	
 	// we're done
@@ -767,7 +767,7 @@ public function testSecret ($input_secret, $input_email)
 		SELECT
 			`secret`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		WHERE
 			`user_users`.`email` = :email
 	";

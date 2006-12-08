@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: antispam.interface.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,11 +18,11 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-interface Oak_AntiSpam_Comment {
+interface Welcompose_AntiSpam_Comment {
 
 /**
  * Creates new instance of anti spam plugin. Takes the user supplied
@@ -32,7 +32,7 @@ interface Oak_AntiSpam_Comment {
  *
  * If any of the arguments is empty, simply pass an empty string.
  *
- * @throws Oak_AntiSpam_CommentException
+ * @throws Welcompose_AntiSpam_CommentException
  * @param string Name
  * @param string Email address
  * @param string Homepage URL
@@ -64,7 +64,7 @@ public function getPluginName ();
 /**
  * Sets wheter the posting user is registered or not.
  *
- * @throws Oak_AntiSpam_CommentException
+ * @throws Welcompose_AntiSpam_CommentException
  * @param bool
  */
 public function setRegisteredUser ($flag);
@@ -72,7 +72,7 @@ public function setRegisteredUser ($flag);
 /**
  * Returns current state of registered user flag.
  *
- * @throws Oak_AntiSpam_CommentException
+ * @throws Welcompose_AntiSpam_CommentException
  * @return bool
  */
 public function getRegisteredUser ();

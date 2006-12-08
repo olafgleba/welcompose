@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogcomment.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -87,7 +87,7 @@ public function addBlogComment ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_COMMUNITY_BLOG_COMMENTS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_COMMUNITY_BLOG_COMMENTS, $sqlData);
 }
 
 /**
@@ -119,7 +119,7 @@ public function updateBlogComment ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_COMMUNITY_BLOG_COMMENTS, $sqlData,
+	return $this->base->db->update(WCOM_DB_COMMUNITY_BLOG_COMMENTS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -148,7 +148,7 @@ public function deleteBlogComment ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_COMMUNITY_BLOG_COMMENTS,	
+	return $this->base->db->delete(WCOM_DB_COMMUNITY_BLOG_COMMENTS,	
 		$where, $bind_params);
 }
 
@@ -233,17 +233,17 @@ public function selectBlogComment ($id)
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE 
@@ -257,7 +257,7 @@ public function selectBlogComment ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -390,17 +390,17 @@ public function selectBlogComments ($params = array())
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		WHERE
@@ -409,7 +409,7 @@ public function selectBlogComments ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -497,13 +497,13 @@ public function countBlogComments ($params = array())
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`community_blog_comments`.`posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -512,7 +512,7 @@ public function countBlogComments ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses

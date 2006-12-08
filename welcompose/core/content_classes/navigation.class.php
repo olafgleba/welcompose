@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: navigation.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addNavigation ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Manage')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -92,10 +92,10 @@ public function addNavigation ($sqlData)
 	}
 	
 	// make sure that the navigation will be assigned to the right project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_NAVIGATIONS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_NAVIGATIONS, $sqlData);
 	
 	// test if navigation belongs to current user/project
 	if (!$this->navigationBelongsToCurrentUser($insert_id)) {
@@ -118,7 +118,7 @@ public function addNavigation ($sqlData)
 public function updateNavigation ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Manage')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -141,11 +141,11 @@ public function updateNavigation ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_NAVIGATIONS, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_NAVIGATIONS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -160,7 +160,7 @@ public function updateNavigation ($id, $sqlData)
 public function deleteNavigation ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Manage')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Manage')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -180,11 +180,11 @@ public function deleteNavigation ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_NAVIGATIONS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_NAVIGATIONS, $where, $bind_params);
 }
 
 /**
@@ -198,7 +198,7 @@ public function deleteNavigation ($id)
 public function selectNavigation ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Use')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -214,14 +214,14 @@ public function selectNavigation ($id)
 			`content_navigations`.`project` AS `project`,
 			`content_navigations`.`name` AS `name`
 		FROM
-			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE 
 			`content_navigations`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// prepare where clauses
@@ -255,7 +255,7 @@ public function selectNavigation ($id)
 public function selectNavigations ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Use')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -288,14 +288,14 @@ public function selectNavigations ($params = array())
 			`content_navigations`.`project` AS `project`,
 			`content_navigations`.`name` AS `name`
 		FROM
-			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE 
 			`content_navigations`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -327,7 +327,7 @@ public function selectNavigations ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Use')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -347,7 +347,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE
 			`project` = :project
 		  AND
@@ -356,7 +356,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -385,7 +385,7 @@ public function testForUniqueName ($name, $id = null)
 public function navigationBelongsToCurrentProject ($navigation)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Use')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -399,7 +399,7 @@ public function navigationBelongsToCurrentProject ($navigation)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
 		WHERE
 			`content_navigations`.`id` = :navigation
 		  AND
@@ -409,7 +409,7 @@ public function navigationBelongsToCurrentProject ($navigation)
 	// prepare bind params
 	$bind_params = array(
 		'navigation' => (int)$navigation,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -431,7 +431,7 @@ public function navigationBelongsToCurrentProject ($navigation)
 public function navigationBelongsToCurrentUser ($navigation)
 {
 	// access check
-	if (!oak_check_access('Content', 'Navigation', 'Use')) {
+	if (!wcom_check_access('Content', 'Navigation', 'Use')) {
 		throw new Content_NavigationException("You are not allowed to perform this action");
 	}
 	
@@ -446,7 +446,7 @@ public function navigationBelongsToCurrentUser ($navigation)
 	if (!$this->navigationBelongsToCurrentProject($navigation)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

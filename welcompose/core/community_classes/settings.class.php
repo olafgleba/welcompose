@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: settings.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -80,7 +80,7 @@ public function instance()
 public function getSettings ()
 {
 	// access check
-	if (!oak_check_access('Community', 'Settings', 'Use')) {
+	if (!wcom_check_access('Community', 'Settings', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -114,7 +114,7 @@ public function getSettings ()
 			`community_settings`.`blog_trackback_bayes_autolearn_threshold`,
 			`community_settings`.`blog_trackback_bayes_spam_threshold`
 		FROM
-			".OAK_DB_COMMUNITY_SETTINGS." AS `community_settings`
+			".WCOM_DB_COMMUNITY_SETTINGS." AS `community_settings`
 		WHERE
 			`community_settings`.`project` = :project
 		LIMIT
@@ -123,7 +123,7 @@ public function getSettings ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return array
@@ -141,7 +141,7 @@ public function getSettings ()
 public function saveSettings ($settings)
 {
 	// access check
-	if (!oak_check_access('Community', 'Settings', 'Manage')) {
+	if (!wcom_check_access('Community', 'Settings', 'Manage')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -168,11 +168,11 @@ public function saveSettings ($settings)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update configuration
-	return $this->base->db->update(OAK_DB_COMMUNITY_SETTINGS, $settings, $where, $bind_params);
+	return $this->base->db->update(WCOM_DB_COMMUNITY_SETTINGS, $settings, $where, $bind_params);
 }
 
 /**
@@ -184,7 +184,7 @@ public function saveSettings ($settings)
 protected function settingsExist ()
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -193,14 +193,14 @@ protected function settingsExist ()
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_SETTINGS." AS `community_settings`
+			".WCOM_DB_COMMUNITY_SETTINGS." AS `community_settings`
 		WHERE
 			`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -220,18 +220,18 @@ protected function settingsExist ()
 protected function settingsInit ()
 {
 	// access check
-	if (!oak_check_access('Community', 'Settings', 'Manage')) {
+	if (!wcom_check_access('Community', 'Settings', 'Manage')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
 	// make sure that there are no orphaned rows with settings
 	$where = " WHERE `project` = :project ";
-	$bind_params = array('project' => OAK_CURRENT_PROJECT);
-	$this->base->db->delete(OAK_DB_COMMUNITY_SETTINGS, $where, $bind_params);
+	$bind_params = array('project' => WCOM_CURRENT_PROJECT);
+	$this->base->db->delete(WCOM_DB_COMMUNITY_SETTINGS, $where, $bind_params);
 	
 	// prepare sql data
 	$sqlData = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'blog_comment_use_captcha' => "0",
 		'blog_comment_timeframe_threshold' => 0,
 		'blog_comment_bayes_autolearn' => "0",
@@ -244,7 +244,7 @@ protected function settingsInit ()
 	);
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_COMMUNITY_SETTINGS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_COMMUNITY_SETTINGS, $sqlData);
 }
 
 // end of class

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: admin_navigation.inc.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,11 +18,11 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-function oak_admin_navigation_in_area ($link, $file_path)
+function wcom_admin_navigation_in_area ($link, $file_path)
 {
 	$link_area = preg_replace("=^([a-z]+)(.*)=", '$1', $link);
 	$current_file_area = preg_replace("=^([a-z]+)(.*)=", '$1', basename($file_path));
@@ -34,7 +34,7 @@ function oak_admin_navigation_in_area ($link, $file_path)
 	}
 }
 
-function oak_admin_navigation_is_self ($link, $file_path)
+function wcom_admin_navigation_is_self ($link, $file_path)
 {
 	$current_file_name = basename($file_path);
 	

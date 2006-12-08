@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globalfiles_add.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -91,10 +91,10 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -133,12 +133,12 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 		
 		// build session
 		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
 		);
 		
 		// assign prepared session array to smarty
@@ -150,19 +150,19 @@ try {
 		}
 		
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('templating/globalfiles_add.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('templating/globalfiles_add.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
@@ -187,7 +187,7 @@ try {
 			
 			// prepare sql data
 			$sqlData = array();
-			$sqlData['project'] = OAK_CURRENT_PROJECT;
+			$sqlData['project'] = WCOM_CURRENT_PROJECT;
 			$sqlData['name'] = $data['name'];
 			$sqlData['description'] = $FORM->exportValue('description');
 			$sqlData['name_on_disk'] = $name_on_disk;

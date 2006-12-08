@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: antispamplugin.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addAntiSpamPlugin ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addAntiSpamPlugin ($sqlData)
 	}
 	
 	// make sure that the new anti spam plugin will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $sqlData);
 	
 	// test if anti spam plugin belongs to current project/user
 	if (!$this->antiSpamPluginBelongsToCurrentUser($insert_id)) {
@@ -117,7 +117,7 @@ public function addAntiSpamPlugin ($sqlData)
 public function updateAntiSpamPlugin ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -140,11 +140,11 @@ public function updateAntiSpamPlugin ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $sqlData,
+	return $this->base->db->update(WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $sqlData,
 		$where, $bind_params);
 }
 
@@ -160,7 +160,7 @@ public function updateAntiSpamPlugin ($id, $sqlData)
 public function deleteAntiSpamPlugin ($id)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -180,11 +180,11 @@ public function deleteAntiSpamPlugin ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS, $where, $bind_params);
 }
 
 /**
@@ -198,7 +198,7 @@ public function deleteAntiSpamPlugin ($id)
 public function selectAntiSpamPlugin ($id)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -221,7 +221,7 @@ public function selectAntiSpamPlugin ($id)
 			`community_anti_spam_plugins`.`priority` AS `priority`,
 			`community_anti_spam_plugins`.`active` AS `active`
 		FROM
-			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
+			".WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE 
 			`community_anti_spam_plugins`.`id` = :id
 		  AND
@@ -233,7 +233,7 @@ public function selectAntiSpamPlugin ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -259,7 +259,7 @@ public function selectAntiSpamPlugin ($id)
 public function selectAntiSpamPlugins ($params = array())
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -309,14 +309,14 @@ public function selectAntiSpamPlugins ($params = array())
 			`community_anti_spam_plugins`.`priority` AS `priority`,
 			`community_anti_spam_plugins`.`active` AS `active`
 		FROM
-			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
+			".WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE 
 			`community_anti_spam_plugins`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -351,7 +351,7 @@ public function selectAntiSpamPlugins ($params = array())
 public function countAntiSpamPlugins ($params = array())
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -376,14 +376,14 @@ public function countAntiSpamPlugins ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
+			".WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE 
 			`community_anti_spam_plugins`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -405,7 +405,7 @@ public function countAntiSpamPlugins ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -425,7 +425,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
+			".WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE
 			`project` = :project
 		  AND
@@ -434,7 +434,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -463,7 +463,7 @@ public function testForUniqueName ($name, $id = null)
 public function antiSpamPluginBelongsToCurrentProject ($anti_spam_plugin)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -477,7 +477,7 @@ public function antiSpamPluginBelongsToCurrentProject ($anti_spam_plugin)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
+			".WCOM_DB_COMMUNITY_ANTI_SPAM_PLUGINS." AS `community_anti_spam_plugins`
 		WHERE
 			`community_anti_spam_plugins`.`id` = :anti_spam_plugin
 		AND
@@ -487,7 +487,7 @@ public function antiSpamPluginBelongsToCurrentProject ($anti_spam_plugin)
 	// prepare bind params
 	$bind_params = array(
 		'anti_spam_plugin' => (int)$anti_spam_plugin,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -509,7 +509,7 @@ public function antiSpamPluginBelongsToCurrentProject ($anti_spam_plugin)
 public function antiSpamPluginBelongsToCurrentUser ($anti_spam_plugin)
 {
 	// access check
-	if (!oak_check_access('Community', 'AntiSpamPlugin', 'Use')) {
+	if (!wcom_check_access('Community', 'AntiSpamPlugin', 'Use')) {
 		throw new Community_AntiSpamPluginException("You are not allowed to perform this action");
 	}
 	
@@ -524,7 +524,7 @@ public function antiSpamPluginBelongsToCurrentUser ($anti_spam_plugin)
 	if (!$this->antiSpamPluginBelongsToCurrentProject($anti_spam_plugin)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

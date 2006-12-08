@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globalfile.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addGlobalFile ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addGlobalFile ($sqlData)
 	}
 	
 	// make sure that the new global file will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_GLOBAL_FILES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_TEMPLATING_GLOBAL_FILES, $sqlData);
 	
 	// test if global file belongs to current user/project
 	if (!$this->globalFileBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addGlobalFile ($sqlData)
 public function updateGlobalFile ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -142,11 +142,11 @@ public function updateGlobalFile ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_TEMPLATING_GLOBAL_FILES, $sqlData,
+	return $this->base->db->update(WCOM_DB_TEMPLATING_GLOBAL_FILES, $sqlData,
 		$where, $bind_params);
 }
 
@@ -162,7 +162,7 @@ public function updateGlobalFile ($id, $sqlData)
 public function deleteGlobalFile ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -187,11 +187,11 @@ public function deleteGlobalFile ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_TEMPLATING_GLOBAL_FILES,	
+	return $this->base->db->delete(WCOM_DB_TEMPLATING_GLOBAL_FILES,	
 		$where, $bind_params);
 }
 
@@ -206,7 +206,7 @@ public function deleteGlobalFile ($id)
 public function selectGlobalFile ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -231,7 +231,7 @@ public function selectGlobalFile ($id)
 			`templating_global_files`.`date_modified` AS `date_modified`,
 			`templating_global_files`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE 
 			`templating_global_files`.`id` = :id
 		  AND
@@ -243,7 +243,7 @@ public function selectGlobalFile ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -268,7 +268,7 @@ public function selectGlobalFile ($id)
 public function selectGlobalFiles ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -307,14 +307,14 @@ public function selectGlobalFiles ($params = array())
 			`templating_global_files`.`date_modified` AS `date_modified`,
 			`templating_global_files`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE
 			`templating_global_files`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -348,7 +348,7 @@ public function selectGlobalFiles ($params = array())
 public function countGlobalFiles ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -373,14 +373,14 @@ public function countGlobalFiles ($params = array())
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE
 			`templating_global_files`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
@@ -399,7 +399,7 @@ public function countGlobalFiles ($params = array())
 public function moveGlobalFileToStore ($name, $path)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -438,7 +438,7 @@ public function moveGlobalFileToStore ($name, $path)
 public function removeGlobalFileFromStore ($global_file)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -486,7 +486,7 @@ public function removeGlobalFileFromStore ($global_file)
 public function selectGlobalFileUsingName ($name)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -511,7 +511,7 @@ public function selectGlobalFileUsingName ($name)
 			`templating_global_files`.`date_modified` AS `date_modified`,
 			`templating_global_files`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE 
 			`templating_global_files`.`name` = :name
 		  AND
@@ -523,7 +523,7 @@ public function selectGlobalFileUsingName ($name)
 	// prepare bind params
 	$bind_params = array(
 		'name' => (string)$name,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -541,7 +541,7 @@ public function selectGlobalFileUsingName ($name)
 public function globalFileBelongsToCurrentProject ($file)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -555,7 +555,7 @@ public function globalFileBelongsToCurrentProject ($file)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE
 			`templating_global_files`.`id` = :file
 		  AND
@@ -565,7 +565,7 @@ public function globalFileBelongsToCurrentProject ($file)
 	// prepare bind params
 	$bind_params = array(
 		'file' => (int)$file,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -587,7 +587,7 @@ public function globalFileBelongsToCurrentProject ($file)
 public function globalFileBelongsToCurrentUser ($global_file)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -602,7 +602,7 @@ public function globalFileBelongsToCurrentUser ($global_file)
 	if (!$this->globalFileBelongsToCurrentProject($global_file)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -624,7 +624,7 @@ public function globalFileBelongsToCurrentUser ($global_file)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
 	}
 	
@@ -644,7 +644,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
 		WHERE
 			`project` = :project
 		  AND
@@ -653,7 +653,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	

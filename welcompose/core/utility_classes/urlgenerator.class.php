@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: urlgenerator.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -141,7 +141,7 @@ public function generateInternalLink ($args = array())
 	if (empty($this->_project)) {
 		// get current project
 		$PROJECT = load('Application:Project');
-		$this->_project = $PROJECT->selectProject(OAK_CURRENT_PROJECT);
+		$this->_project = $PROJECT->selectProject(WCOM_CURRENT_PROJECT);
 	}
 	if (empty($this->_pages)) {
 		// get pages
@@ -182,10 +182,10 @@ public function generateInternalLink ($args = array())
 	$page_id = $current_page['id'];
 	$page_name = $current_page['name_url'];
 	
-	// if the page type of the current page is OAK_BLOG, we need to execute
+	// if the page type of the current page is WCOM_BLOG, we need to execute
 	// some additional checks because we may have to link to the single
 	// blog postings or to the archives.
-	if ($current_page['page_type_name'] == 'OAK_BLOG') {
+	if ($current_page['page_type_name'] == 'WCOM_BLOG') {
 		// if posting_id is set, we need to get the blog posting so that we've something
 		// to fill the variables like posting_title with
 		if (!empty($posting_id) && is_numeric($posting_id)) {
@@ -209,8 +209,8 @@ public function generateInternalLink ($args = array())
 	// can fetch the right url pattern from the sys.inc.php.
 	$action = (empty($action) ? 'Index' : $action);
 	$url_pattern_name = sprintf("%s_%s",
-		strtolower(preg_replace(OAK_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $current_page['page_type_internal_name'])),
-		strtolower(preg_replace(OAK_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $action))
+		strtolower(preg_replace(WCOM_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $current_page['page_type_internal_name'])),
+		strtolower(preg_replace(WCOM_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $action))
 	);
 	
 	// if the page where the link should point to is the index page, we have to use a different url pattern that

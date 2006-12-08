@@ -1,7 +1,7 @@
 ; <?php /*
 [path]
-oak_admin_root_www = 
-oak_public_root_www = 
+wcom_admin_root_www = 
+wcom_public_root_www = 
 
 [environment]
 debug = false

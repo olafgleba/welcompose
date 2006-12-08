@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogtag.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -231,7 +231,7 @@ protected function addBlogTag ($page, $posting, $tag)
 	// check if tag already exists
 	if ($this->tag_exists($page, $tag) === false) {
 		// create "first char" 
-		$word = preg_replace(OAK_REGEX_TAG_FIRST_CHAR_CLEANUP, null, strtolower($tag));
+		$word = preg_replace(WCOM_REGEX_TAG_FIRST_CHAR_CLEANUP, null, strtolower($tag));
 		$first_char = substr($word, 0, 1);
 		
 		// create tag
@@ -242,7 +242,7 @@ protected function addBlogTag ($page, $posting, $tag)
 			'word_url' => $HELPER->createMeaningfulString($tag),
 			'occurrences' => 1
 		);
-		$tag_id = $this->base->db->insert(OAK_DB_CONTENT_BLOG_TAGS, $data);
+		$tag_id = $this->base->db->insert(WCOM_DB_CONTENT_BLOG_TAGS, $data);
 		
 		// create link between posting and tag
 		$this->addLink($posting, $tag_id);
@@ -296,7 +296,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 				// increment the occurrences
 				$sql = "
 					UPDATE
-						".OAK_DB_CONTENT_BLOG_TAGS."
+						".WCOM_DB_CONTENT_BLOG_TAGS."
 					SET
 						`occurrences` = `occurrences` + 1
 					WHERE
@@ -319,7 +319,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 				// decrement the occurrences
 				$sql = "
 					UPDATE
-						".OAK_DB_CONTENT_BLOG_TAGS."
+						".WCOM_DB_CONTENT_BLOG_TAGS."
 					SET
 						`occurrences` = `occurrences` - 1
 					WHERE
@@ -415,15 +415,15 @@ public function selectBlogTag ($id)
 			`content_blog_tags`.`word_url` AS `word_url`,
 			`content_blog_tags`.`occurrences` AS `occurrences`
 		FROM
-			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_tags`.`page` = `content_pages`.`id`
 		WHERE
 			`content_blog_tags`.`id` = :id
 		  AND
-			`content_pages`.`project` = OAK_CURRENT_PROJECT
+			`content_pages`.`project` = WCOM_CURRENT_PROJECT
 		LIMIT
 			1
 	";
@@ -431,7 +431,7 @@ public function selectBlogTag ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => $id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -516,17 +516,17 @@ public function selectBlogTags ($params = array())
 			`content_blog_tags`.`word_url` AS `word_url`,
 			`content_blog_tags`.`occurrences` AS `occurrences`
 		FROM
-			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
 		  ON
 			`content_blog_tags`.`id` = `content_blog_tags2content_blog_postings`.`tag`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_tags2content_blog_postings`.`posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -535,7 +535,7 @@ public function selectBlogTags ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -595,9 +595,9 @@ public function tag_exists ($page, $tag)
 		SELECT
 			`content_blog_tags`.`id`
 		FROM
-			".OAK_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_tags`.`page` = `content_pages`.`id`
 		WHERE
@@ -613,7 +613,7 @@ public function tag_exists ($page, $tag)
 	$bind_params = array(
 		'word' => $tag,
 		'page' => $page,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query an return tag id
@@ -652,7 +652,7 @@ public function link_exists ($posting, $tag)
 		SELECT
 			`id`
 		FROM
-			".OAK_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2content_blog_postings`
 		WHERE
 			`posting` = :posting
 		  AND

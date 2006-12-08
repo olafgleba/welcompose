@@ -8,7 +8,7 @@
 <script>
 function asd() {
 	
-		parent.document.title="oak.core.js Overview";
+		parent.document.title="wcom.core.js Overview";
 	
 }
 </script>
@@ -68,7 +68,7 @@ function asd() {
 <hr>
 <center>
 	
-	   <h2>oak.core.js</h2>
+	   <h2>wcom.core.js</h2>
 	
 </center>
 
@@ -78,11 +78,11 @@ function asd() {
 <h4>Summary</h4>
 <p>
 	
-		This file is the essential Oak javascript enviroment.
- It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
+		This file is the essential Welcompose javascript enviroment.
+ It describes all core classes and functions. It is needed to call wcom.strings.js before embedding this file,
  to make it unnecessary to loop this core file through the i18n parser.
 
- <BR/><BR/><B>Version: </B>$Id: oak.core.js 257 2006-07-23 14:25:49Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
+ <BR/><BR/><B>Version: </B>$Id: wcom.core.js 257 2006-07-23 14:25:49Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
  <BR/>
 	
 </p>
@@ -130,7 +130,7 @@ function asd() {
     </tr>
     
     <tr bgcolor="white" class="TableRowColor">
-    <td width="15%"><b><a href="OakInit.html">OakInit</a></b></td>
+    <td width="15%"><b><a href="WelcomposeInit.html">WelcomposeInit</a></b></td>
     <td>This is the Init class to call on load of page  
  </td>
     </tr>
@@ -157,8 +157,8 @@ function asd() {
 
 
         <pre class="sourceview"><span class="comment">/**
- * Project: Oak
- * File: oak.core.js
+ * Project: Welcompose
+ * File: wcom.core.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -170,21 +170,21 @@ function asd() {
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.core.js 257 2006-07-23 14:25:49Z olaf $
+ * $Id: wcom.core.js 257 2006-07-23 14:25:49Z olaf $
  *
  * <span class="attrib">@copyright</span> 2006 creatics media.systems
  * <span class="attrib">@author</span> Olaf Gleba
- * <span class="attrib">@package</span> Oak
+ * <span class="attrib">@package</span> Welcompose
  * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */</span>
  
 <span class="comment">/** 
- * <span class="attrib">@fileoverview</span> This file is the essential Oak javascript enviroment.
- * It describes all core classes and functions. It is needed to call oak.strings.js before embedding this file,
+ * <span class="attrib">@fileoverview</span> This file is the essential Welcompose javascript enviroment.
+ * It describes all core classes and functions. It is needed to call wcom.strings.js before embedding this file,
  * to make it unnecessary to loop this core file through the i18n parser.
  *
  * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
- * <span class="attrib">@version</span> $Id: oak.core.js 257 2006-07-23 14:25:49Z olaf $ 
+ * <span class="attrib">@version</span> $Id: wcom.core.js 257 2006-07-23 14:25:49Z olaf $ 
  */</span>
  
 
@@ -401,14 +401,14 @@ Base.<span class="reserved">prototype</span>.isNull = Base_isNull;
 
 
 <span class="comment">/**
- * Construct a new OakInit object
+ * Construct a new WelcomposeInit object
  * <span class="attrib">@class</span> This is the Init class to call on load of page  
  * <span class="attrib">@constructor</span>
  * <span class="attrib">@throws</span> MemoryException if there is no more memory 
  * <span class="attrib">@throws</span> applyError on exception
  * <span class="attrib">@see</span> Base Base is the base class for this
  */</span>
-<span class="reserved">function</span> OakInit ()
+<span class="reserved">function</span> WelcomposeInit ()
 {
 	try {
 
@@ -419,29 +419,29 @@ Base.<span class="reserved">prototype</span>.isNull = Base_isNull;
 }
 
 <span class="comment">/* Inherit from Base */</span>
-OakInit.<span class="reserved">prototype</span> = new Base();
+WelcomposeInit.<span class="reserved">prototype</span> = new Base();
 
 <span class="comment">/**
- * Instance Methods from prototype <span class="attrib">@class</span> OakInit
+ * Instance Methods from prototype <span class="attrib">@class</span> WelcomposeInit
  */</span>
-OakInit.<span class="reserved">prototype</span>.load = OakInit_load;
-OakInit.<span class="reserved">prototype</span>.getVars = OakInit_getVars;
-OakInit.<span class="reserved">prototype</span>.getCbxStatus = OakInit_getCbxStatus;
+WelcomposeInit.<span class="reserved">prototype</span>.load = WelcomposeInit_load;
+WelcomposeInit.<span class="reserved">prototype</span>.getVars = WelcomposeInit_getVars;
+WelcomposeInit.<span class="reserved">prototype</span>.getCbxStatus = WelcomposeInit_getCbxStatus;
 
 
 <span class="comment">/**
- * Implements method of prototype class OakInit
+ * Implements method of prototype class WelcomposeInit
  * <span class="attrib">@param</span> {global} checkbox_status
  * <span class="attrib">@see</span> Base Base is the base class for this
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> OakInit_load ()
+<span class="reserved">function</span> WelcomposeInit_load ()
 {	
 	try {
-		OakInit.getVars();
+		WelcomposeInit.getVars();
 		
-		<span class="reserved">if</span> (typeof checkbox_status != <span class="literal">'undefined'</span> &amp;&amp; OakInit.isArray(checkbox_status)) {
-			OakInit.getCbxStatus(checkbox_status);
+		<span class="reserved">if</span> (typeof checkbox_status != <span class="literal">'undefined'</span> &amp;&amp; WelcomposeInit.isArray(checkbox_status)) {
+			WelcomposeInit.getCbxStatus(checkbox_status);
 		}
 	} catch (e) {
 		_applyError(e);
@@ -450,14 +450,14 @@ OakInit.<span class="reserved">prototype</span>.getCbxStatus = OakInit_getCbxSta
 
 
 <span class="comment">/**
- * Implements method of prototype class OakInit
+ * Implements method of prototype class WelcomposeInit
  * <span class="attrib">@param</span> {global} response 
  * <span class="attrib">@param</span> {global} selection
  * <span class="attrib">@throws</span> applyError on exception
  * <span class="attrib">@see</span> Base Base is the base class for this
  * <span class="attrib">@return</span> new Effect Instance
  */</span>
-<span class="reserved">function</span> OakInit_getVars ()
+<span class="reserved">function</span> WelcomposeInit_getVars ()
 {
 	try {
 		<span class="reserved">if</span> (typeof response != <span class="literal">'undefined'</span> &amp;&amp; $(<span class="literal">'rp'</span>)) {
@@ -476,12 +476,12 @@ OakInit.<span class="reserved">prototype</span>.getCbxStatus = OakInit_getCbxSta
 }
 
 <span class="comment">/**
- * Implements method of prototype class OakInit
+ * Implements method of prototype class WelcomposeInit
  * <span class="attrib">@param</span> {array} elem Array of one or more Elements
  * <span class="attrib">@see</span> Base Base is the base class for this
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> OakInit_getCbxStatus (elems)
+<span class="reserved">function</span> WelcomposeInit_getCbxStatus (elems)
 {
 	try {
 		<span class="reserved">for</span> (var e = 0; e &lt; elems.length; e++) {
@@ -514,7 +514,7 @@ OakInit.<span class="reserved">prototype</span>.getCbxStatus = OakInit_getCbxSta
 <span class="comment">/**
  * Building new instance for class Help
  */</span>
-OakInit = new OakInit();
+WelcomposeInit = new WelcomposeInit();
 
 
 

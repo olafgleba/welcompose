@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: database.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -78,7 +78,7 @@ try {
 	$FORM->applyFilter('database', 'trim');
 	$FORM->applyFilter('database', 'strip_tags');
 	$FORM->addRule('database', gettext('Please enter a database to use'), 'required');
-	$FORM->addRule('database', gettext('Please enter a valid database name'), OAK_REGEX_DATABASE_NAME);
+	$FORM->addRule('database', gettext('Please enter a valid database name'), WCOM_REGEX_DATABASE_NAME);
 	
 	// textfield for user
 	$FORM->addElement('text', 'user', gettext('User'), 
@@ -157,8 +157,8 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('database.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('database.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

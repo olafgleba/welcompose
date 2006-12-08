@@ -11,38 +11,38 @@ if [ ! -x "`which php`" ] ; then
 fi
 
 # remove directories from previous exports
-rm -rf oak-trunk
+rm -rf wcom-trunk
 
 # create package output directory
-mkdir "oak-$BUILD_NUMBER"
+mkdir "wcom-$BUILD_NUMBER"
 
 # export trunk
-svn export https://www.dotthink.net/svn/Oak/trunk oak-trunk
+svn export https://www.dotthink.net/svn/Welcompose/trunk wcom-trunk
 
-# cd to oak trunk
-cd oak-trunk
+# cd to wcom trunk
+cd wcom-trunk
 
 # move database schema to setup directory
-cp database/oak.sql oak/setup/oak.sql
+cp database/wcom.sql wcom/setup/wcom.sql
 
 # replace sys.inc.php with sys.inc.php-dist
-mv oak/core/conf/sys.inc.php-dist oak/core/conf/sys.inc.php
+mv wcom/core/conf/sys.inc.php-dist wcom/core/conf/sys.inc.php
 
 # remove database & doc directory
 rm -rf database
 rm -rf documentation
 
 # create source packages
-tar cvfz "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER-src".tar.gz oak
-tar cvfj "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER-src".tar.bz2 oak
-zip -r "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER-src" oak
+tar cvfz "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER-src".tar.gz wcom
+tar cvfj "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER-src".tar.bz2 wcom
+zip -r "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER-src" wcom
 
 # create compressed package
 echo "Creating compressed package"
 php scripts/installer/create_install_package.php \
 	--compress=true \
 	--package-extractor-script=scripts/installer/installer.inc.php \
-	--software-directory=oak \
+	--software-directory=wcom \
 	--output-file=install-zlib.php \
 	--installer-type=web \
 	--web-installer-dir=scripts/installer/web_installer
@@ -52,31 +52,31 @@ echo "Creating uncompressed package"
 php scripts/installer/create_install_package.php \
 	--compress=false \
 	--package-extractor-script=scripts/installer/installer.inc.php \
-	--software-directory=oak \
+	--software-directory=wcom \
 	--output-file=install.php \
 	--installer-type=web \
 	--web-installer-dir=scripts/installer/web_installer
 
-# remove oak directory
-rm -rf oak
+# remove wcom directory
+rm -rf wcom
 
-# create oak directory
-mkdir oak
+# create wcom directory
+mkdir wcom
 
-# move installer files to oak directory
-mv install-zlib.php oak
-mv install.php oak
+# move installer files to wcom directory
+mv install-zlib.php wcom
+mv install.php wcom
 
 # create tarball (gzipped and bzipped) & zip file
-tar cvfz "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER".tar.gz oak
-tar cvfj "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER".tar.bz2 oak
-zip -r "../oak-$BUILD_NUMBER/oak-$BUILD_NUMBER" oak
+tar cvfz "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER".tar.gz wcom
+tar cvfj "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER".tar.bz2 wcom
+zip -r "../wcom-$BUILD_NUMBER/wcom-$BUILD_NUMBER" wcom
 
-# leave oak-trunk directory
+# leave wcom-trunk directory
 cd ../
 
-# remove oak-trunk directory
-rm -rf oak-trunk
+# remove wcom-trunk directory
+rm -rf wcom-trunk
 
 echo "Done!"
 exit 0

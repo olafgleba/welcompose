@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pages_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -99,15 +99,15 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get page
-	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// prepare template sets
 	$template_sets = array();
@@ -159,7 +159,7 @@ try {
 	$FORM->applyFilter('index_page', 'trim');
 	$FORM->applyFilter('index_page', 'strip_tags');
 	$FORM->addRule('index_page', gettext('The field index_page accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for protect
 	$FORM->addElement('checkbox', 'protect', gettext('Protect'), null,
@@ -167,7 +167,7 @@ try {
 	$FORM->applyFilter('protect', 'trim');
 	$FORM->applyFilter('protect', 'strip_tags');
 	$FORM->addRule('protect', gettext('The field protect accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// multi select for rights
 	$FORM->addElement('select', 'groups', gettext('Groups'), $groups,
@@ -207,12 +207,12 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 		
 		// build session
 		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
 		);
 		
 		// assign $_SESSION to smarty
@@ -224,8 +224,8 @@ try {
 		}
 		
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 		
 		// assign template set count
 		$BASE->utility->smarty->assign('template_set_count', count($template_sets));
@@ -235,14 +235,14 @@ try {
 		
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/pages_edit.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('content/pages_edit.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

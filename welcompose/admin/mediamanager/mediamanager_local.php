@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: mediamanager_local.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -86,10 +86,10 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -99,20 +99,20 @@ try {
 	// import request params
 	$request = array(
 		'mm_include_types_doc' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_doc'],
-			OAK_REGEX_ZERO_OR_ONE), 
+			WCOM_REGEX_ZERO_OR_ONE), 
 		'mm_include_types_img' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_img'],
-			OAK_REGEX_ZERO_OR_ONE), 
+			WCOM_REGEX_ZERO_OR_ONE), 
 		'mm_include_types_audio' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_audio'],
-			OAK_REGEX_ZERO_OR_ONE), 
+			WCOM_REGEX_ZERO_OR_ONE), 
 		'mm_include_types_video' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_video'],
-			OAK_REGEX_ZERO_OR_ONE), 
+			WCOM_REGEX_ZERO_OR_ONE), 
 		'mm_include_types_other' => Base_Cnc::filterRequest($_REQUEST['mm_include_types_other'],
-			OAK_REGEX_ZERO_OR_ONE), 
-		'mm_tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], OAK_REGEX_NON_EMPTY),
-		'mm_timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], OAK_REGEX_TIMEFRAME),
-		'mm_start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], OAK_REGEX_NUMERIC),
-		'mm_limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], OAK_REGEX_NUMERIC),
-		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], OAK_REGEX_PAGE_TYPE)
+			WCOM_REGEX_ZERO_OR_ONE), 
+		'mm_tags' => Base_Cnc::filterRequest($_REQUEST['mm_tags'], WCOM_REGEX_NON_EMPTY),
+		'mm_timeframe' => Base_Cnc::filterRequest($_REQUEST['mm_timeframe'], WCOM_REGEX_TIMEFRAME),
+		'mm_start' => Base_Cnc::filterRequest($_REQUEST['mm_start'], WCOM_REGEX_NUMERIC),
+		'mm_limit' => Base_Cnc::filterRequest($_REQUEST['mm_limit'], WCOM_REGEX_NUMERIC),
+		'mm_pagetype' => Base_Cnc::filterRequest($_REQUEST['mm_pagetype'], WCOM_REGEX_PAGE_TYPE)
 	);
 	
 	// prepare types for select

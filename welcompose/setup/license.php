@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: license.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -67,7 +67,7 @@ try {
 	$FORM->applyFilter('confirm_license', 'strip_tags');
 	$FORM->addRule('confirm_license', gettext('Please confirm the license'), 'required');
 	$FORM->addRule('confirm_license', gettext('The field to cofirm the license accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
@@ -90,8 +90,8 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('license.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('license.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

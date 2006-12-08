@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: index.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define current area constant
-define('OAK_CURRENT_AREA', 'PUBLIC');
+define('WCOM_CURRENT_AREA', 'PUBLIC');
 
 // get loader
 $path_parts = array(
@@ -63,14 +63,14 @@ try {
 	$USER->initUserPublicArea();
 	
 	// get project information
-	$project = $PROJECT->selectProject(OAK_CURRENT_PROJECT);
+	$project = $PROJECT->selectProject(WCOM_CURRENT_PROJECT);
 	
 	// get page information
 	$PAGE = load('content:page');
 	$page = $PAGE->selectPage($PAGE->resolvePage());
 	
 	// define constant CURRENT_PAGE
-	define('OAK_CURRENT_PAGE', $page['id']);
+	define('WCOM_CURRENT_PAGE', $page['id']);
 	
 	// import url params
 	$import_globals_path = dirname(__FILE__).'/import_globals.inc.php';
@@ -80,7 +80,7 @@ try {
 	$BASE->utility->smarty->assign('page', $page);
 	
 	// import action
-	$action = Base_Cnc::filterRequest($_REQUEST['action'], OAK_REGEX_ALPHANUMERIC);
+	$action = Base_Cnc::filterRequest($_REQUEST['action'], WCOM_REGEX_ALPHANUMERIC);
 	$action = (!is_null($action) ? $action : 'Index');
 	
 	// authenticate user if required
@@ -104,12 +104,12 @@ try {
 	$BASE->utility->smarty->cache_lifetime = $DISPLAY->getMainTemplateCacheLifeTime();
 	
 	// get the tempalte name from the current display class and
-	// register the OAK_TEMPLATE constant
-	define("OAK_TEMPLATE", $DISPLAY->getMainTemplateName());
+	// register the WCOM_TEMPLATE constant
+	define("WCOM_TEMPLATE", $DISPLAY->getMainTemplateName());
 	
 	// display page
-	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display(OAK_TEMPLATE, OAK_TEMPLATE_KEY);
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	$BASE->utility->smarty->display(WCOM_TEMPLATE, WCOM_TEMPLATE_KEY);
 	
 	@ob_end_flush();
 	exit;

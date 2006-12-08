@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pagetype.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addPageType ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Manage')) {
+	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addPageType ($sqlData)
 	}
 	
 	// make sure that the page type will be assigned to the right project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_PAGE_TYPES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_PAGE_TYPES, $sqlData);
 	
 	// test if page type belongs to current user/project
 	if (!$this->pageTypeBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addPageType ($sqlData)
 public function updatePageType ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Manage')) {
+	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -142,11 +142,11 @@ public function updatePageType ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_PAGE_TYPES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_PAGE_TYPES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -161,7 +161,7 @@ public function updatePageType ($id, $sqlData)
 public function deletePageType ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Manage')) {
+	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -181,11 +181,11 @@ public function deletePageType ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_PAGE_TYPES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_PAGE_TYPES, $where, $bind_params);
 }
 
 /**
@@ -199,7 +199,7 @@ public function deletePageType ($id)
 public function selectPageType ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -217,14 +217,14 @@ public function selectPageType ($id)
 			`content_page_types`.`internal_name` AS `internal_name`,
 			`content_page_types`.`editable` AS `editable`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		WHERE 
 			`content_page_types`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// prepare where clauses
@@ -258,7 +258,7 @@ public function selectPageType ($id)
 public function selectPageTypes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -293,14 +293,14 @@ public function selectPageTypes ($params = array())
 			`content_page_types`.`internal_name` AS `internal_name`,
 			`content_page_types`.`editable` AS `editable`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		WHERE 
 			`content_page_types`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -332,7 +332,7 @@ public function selectPageTypes ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -352,7 +352,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		WHERE
 			`project` = :project
 		  AND
@@ -361,7 +361,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -395,7 +395,7 @@ public function testForUniqueName ($name, $id = null)
 public function testForUniqueInternalName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -415,7 +415,7 @@ public function testForUniqueInternalName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		WHERE
 			`project` = :project
 		  AND
@@ -424,7 +424,7 @@ public function testForUniqueInternalName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -453,7 +453,7 @@ public function testForUniqueInternalName ($name, $id = null)
 public function pageTypeBelongsToCurrentProject ($page_type)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -467,7 +467,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		WHERE
 			`content_page_types`.`id` = :page_type
 		  AND
@@ -477,7 +477,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 	// prepare bind params
 	$bind_params = array(
 		'page_type' => (int)$page_type,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -499,7 +499,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 public function pageTypeBelongsToCurrentUser ($page_type)
 {
 	// access check
-	if (!oak_check_access('Content', 'PageType', 'Use')) {
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
 		throw new Content_PagetypeException("You are not allowed to perform this action");
 	}
 	
@@ -514,7 +514,7 @@ public function pageTypeBelongsToCurrentUser ($page_type)
 	if (!$this->pageTypeBelongsToCurrentProject($page_type)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

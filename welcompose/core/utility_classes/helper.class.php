@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: helper.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -109,7 +109,7 @@ public function _sqlForOrderMacro ($definition, $macros)
 	}
 
 	// check definition syntax
-	if (!preg_match(OAK_REGEX_ORDER_MACRO, $definition)) {
+	if (!preg_match(WCOM_REGEX_ORDER_MACRO, $definition)) {
 		throw new Utility_HelperException('Input for parameter definition is not well-formed');
 	}
 	
@@ -319,7 +319,7 @@ public function _sqlForTimeframe ($field, $timeframe)
 	if (empty($timeframe) || !is_scalar($timeframe)) {
 		throw new Utility_HelperException("Input for parameter timeframe is expected to be a non-empty string");
 	}
-	if (!preg_match(OAK_REGEX_TIMEFRAME, $timeframe)) {
+	if (!preg_match(WCOM_REGEX_TIMEFRAME, $timeframe)) {
 		throw new Utility_HelperException("Invalid timeframe supplied");
 	}
 	
@@ -563,7 +563,7 @@ public function datesForTimeframe ($timeframe)
 	if (empty($timeframe) || !is_scalar($timeframe)) {
 		throw new Utility_HelperException("Input for parameter timeframe is expected to be a non-empty string");
 	}
-	if (!preg_match(OAK_REGEX_TIMEFRAME, $timeframe)) {
+	if (!preg_match(WCOM_REGEX_TIMEFRAME, $timeframe)) {
 		throw new Utility_HelperException("Invalid timeframe supplied");
 	}
 	

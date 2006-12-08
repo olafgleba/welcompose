@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globalboxes_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -91,15 +91,15 @@ try {
 	
 	// init user and project
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Content', 'GlobalBox', 'Manage')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get global box
-	$global_box = $GLOBALBOX->selectGlobalBox(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$global_box = $GLOBALBOX->selectGlobalBox(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// prepare text converters array
 	$text_converters = array(
@@ -148,7 +148,7 @@ try {
 	$FORM->applyFilter('apply_macros', 'trim');
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update global box'),
@@ -180,23 +180,23 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 	    
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/globalboxes_edit.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('content/globalboxes_edit.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

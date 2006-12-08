@@ -22,7 +22,7 @@ if (!empty($_REQUEST['file'])) {
 	<meta name="language" content="de" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 	<meta http-equiv="imagetoolbar" content="no" /> 
-	<title>Oak Package Installer</title>
+	<title>Welcompose Package Installer</title>
 	<style>
 	<!--
 		* {
@@ -211,7 +211,7 @@ if (!empty($_REQUEST['file'])) {
 
 <div id="header"> 
 <div id="logo">
-<p>Oak Package Installer</p>
+<p>Welcompose Package Installer</p>
 <!-- logo --></div>
 
 <div id="topnavcon">
@@ -224,19 +224,19 @@ if (!empty($_REQUEST['file'])) {
 
 <h1>Package Installation</h1>
 
-<p>Welcome to the Oak Package Installer. It will install all the files on your webspace that are required
-to launch the setup procedure. The setup procedure will guide you through the configuration of your Oak
+<p>Welcome to the Welcompose Package Installer. It will install all the files on your webspace that are required
+to launch the setup procedure. The setup procedure will guide you through the configuration of your Welcompose
 installation.</p>
 
 <?php
 
 	// make sure the zlib extension is present if this install package is a compressed one
-	if (OAK_ZLIB_PACKAGE && !extension_loaded('zlib'))  {
+	if (WCOM_ZLIB_PACKAGE && !extension_loaded('zlib'))  {
 		echo "<p class=\"warning\"><strong>Warning:</strong> This a compressed install package, but the zlib extension is not installed. ".
 				"Please download a <em>uncompressed</em> install package.</p>";
 	}
 
-	if (!OAK_ZLIB_PACKAGE || extension_loaded('zlib')) {
+	if (!WCOM_ZLIB_PACKAGE || extension_loaded('zlib')) {
 		
 		if (!empty($_REQUEST['install_dir'])) {
 			try {
@@ -312,9 +312,9 @@ installation.</p>
 
 <fieldset>
 <h2>Path setup</h2>
-<p>Please enter the directory where Oak should be installed in. The path will be evaluated relative to the installer package.</p>
+<p>Please enter the directory where Welcompose should be installed in. The path will be evaluated relative to the installer package.</p>
 <label class="cont" for="install_dir"><span class="bez"><strong>Install directory</strong></span> 
-<input class="w300" type="text" name="install_dir" maxlength="355" value="<?php echo (!empty($_REQUEST['install_dir']) ? htmlspecialchars(trim(strip_tags($_REQUEST['install_dir']))) : '/oak'); ?>" /></label>
+<input class="w300" type="text" name="install_dir" maxlength="355" value="<?php echo (!empty($_REQUEST['install_dir']) ? htmlspecialchars(trim(strip_tags($_REQUEST['install_dir']))) : '/wcom'); ?>" /></label>
 </fieldset>
 
 <fieldset class="expert">
@@ -349,7 +349,7 @@ installation.</p>
 <!-- content --></div>
 
 
-<p class="copyright">Oak Package Installer (<?php if (OAK_ZLIB_PACKAGE) { ?>compressed version<?php } else { ?>uncompressed version<?php } ?>) for Oak 1.0. &copy; sopic GmbH </a></p>
+<p class="copyright">Welcompose Package Installer (<?php if (WCOM_ZLIB_PACKAGE) { ?>compressed version<?php } else { ?>uncompressed version<?php } ?>) for Welcompose 1.0. &copy; sopic GmbH </a></p>
 <!-- container --></div>
 </body>
 </html>

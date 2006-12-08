@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogpodcast.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addBlogPodcast ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Manage')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -93,7 +93,7 @@ public function addBlogPodcast ($sqlData)
 	}
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_BLOG_PODCASTS, $sqlData);
 	
 	// test if blog podcast belongs to current user
 	if (!$this->blogPodcastBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addBlogPodcast ($sqlData)
 public function updateBlogPodcast ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Manage')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -145,7 +145,7 @@ public function updateBlogPodcast ($id, $sqlData)
 	);
 	
 	// update row
-	$affected_rows = $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
+	$affected_rows = $this->base->db->update(WCOM_DB_CONTENT_BLOG_PODCASTS, $sqlData,
 		$where, $bind_params);
 	
 	// update metadata
@@ -167,7 +167,7 @@ public function updateBlogPodcast ($id, $sqlData)
 public function deleteBlogPodcast ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Manage')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -190,7 +190,7 @@ public function deleteBlogPodcast ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_BLOG_PODCASTS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_BLOG_PODCASTS, $where, $bind_params);
 }
 
 /**
@@ -204,7 +204,7 @@ public function deleteBlogPodcast ($id)
 public function selectBlogPodcast ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -240,13 +240,13 @@ public function selectBlogPodcast ($id)
 			`content_blog_podcasts`.`date_added` AS `date_added`,
 			`content_blog_podcasts`.`date_modified` AS `date_modified`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -260,7 +260,7 @@ public function selectBlogPodcast ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -294,7 +294,7 @@ public function selectBlogPodcast ($id)
 public function selectBlogPodcasts ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -361,13 +361,13 @@ public function selectBlogPodcasts ($params = array())
 			`content_blog_podcasts`.`date_added` AS `date_added`,
 			`content_blog_podcasts`.`date_modified` AS `date_modified`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -376,7 +376,7 @@ public function selectBlogPodcasts ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -424,7 +424,7 @@ public function selectBlogPodcasts ($params = array())
 public function countBlogPodcasts ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -455,13 +455,13 @@ public function countBlogPodcasts ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -470,7 +470,7 @@ public function countBlogPodcasts ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -497,7 +497,7 @@ public function countBlogPodcasts ($params = array())
 protected function updateMetadataFromSelectedSources ($podcast_id)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Manage')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -577,7 +577,7 @@ protected function updateMetadataFromSelectedSources ($podcast_id)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_BLOG_PODCASTS, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_BLOG_PODCASTS, $sqlData,
 		$where, $bind_params);
 } 
 
@@ -592,7 +592,7 @@ protected function updateMetadataFromSelectedSources ($podcast_id)
 public function blogPodcastExists ($podcast_id)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -606,13 +606,13 @@ public function blogPodcastExists ($podcast_id)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -624,7 +624,7 @@ public function blogPodcastExists ($podcast_id)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'id' => $podcast_id,
 	);
 	
@@ -650,7 +650,7 @@ public function blogPodcastExists ($podcast_id)
 public function blogPodcastBelongsToCurrentProject ($blog_podcast)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -664,13 +664,13 @@ public function blogPodcastBelongsToCurrentProject ($blog_podcast)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
 		JOIN
-			".OAK_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		  ON
 			`content_blog_podcasts`.`blog_posting` = `content_blog_postings`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
@@ -682,7 +682,7 @@ public function blogPodcastBelongsToCurrentProject ($blog_podcast)
 	// prepare bind params
 	$bind_params = array(
 		'blog_podcast' => (int)$blog_podcast,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -704,7 +704,7 @@ public function blogPodcastBelongsToCurrentProject ($blog_podcast)
 public function blogPodcastBelongsToCurrentUser ($blog_podcast)
 {
 	// access check
-	if (!oak_check_access('Content', 'BlogPodcast', 'Use')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Use')) {
 		throw new Content_BlogPodcastException("You are not allowed to perform this action");
 	}
 	
@@ -719,7 +719,7 @@ public function blogPodcastBelongsToCurrentUser ($blog_podcast)
 	if (!$this->blogPodcastBelongsToCurrentProject($blog_podcast)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

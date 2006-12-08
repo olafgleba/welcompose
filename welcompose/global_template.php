@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: index.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define current area constant
-define('OAK_CURRENT_AREA', 'PUBLIC');
+define('WCOM_CURRENT_AREA', 'PUBLIC');
 
 // get loader
 $path_parts = array(
@@ -78,11 +78,11 @@ try {
 	}
 	
 	// preparge the template name
-	define("OAK_TEMPLATE", sprintf("oakgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)));
+	define("WCOM_TEMPLATE", sprintf("oakgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)));
 	
 	// display page
-	define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display(OAK_TEMPLATE, OAK_TEMPLATE_KEY);
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	$BASE->utility->smarty->display(WCOM_TEMPLATE, WCOM_TEMPLATE_KEY);
 	
 	@ob_end_flush();
 	exit;

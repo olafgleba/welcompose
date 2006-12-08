@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: textconverter.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addTextConverter ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Manage')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addTextConverter ($sqlData)
 	}
 	
 	// make sure that the new text converter will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
 	
 	// test if created text converter belongs to current user/project
 	if (!$this->textConverterBelongsToCurrentUser($insert_id)) {
@@ -120,7 +120,7 @@ public function addTextConverter ($sqlData)
 public function updateTextConverter ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Manage')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -143,11 +143,11 @@ public function updateTextConverter ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData,
+	return $this->base->db->update(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -163,7 +163,7 @@ public function updateTextConverter ($id, $sqlData)
 public function deleteTextConverter ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Manage')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -183,11 +183,11 @@ public function deleteTextConverter ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_TEXT_CONVERTERS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $where, $bind_params);
 }
 
 /**
@@ -201,7 +201,7 @@ public function deleteTextConverter ($id)
 public function selectTextConverter ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -221,7 +221,7 @@ public function selectTextConverter ($id)
 			`application_text_converters`.`internal_name` AS `internal_name`,
 			`application_text_converters`.`name` AS `name`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE 
 			`application_text_converters`.`id` = :id
 		  AND
@@ -233,7 +233,7 @@ public function selectTextConverter ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -258,7 +258,7 @@ public function selectTextConverter ($id)
 public function selectTextConverters ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -292,14 +292,14 @@ public function selectTextConverters ($params = array())
 			`application_text_converters`.`internal_name` AS `internal_name`,
 			`application_text_converters`.`name` AS `name`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE 
 			`application_text_converters`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -331,7 +331,7 @@ public function selectTextConverters ($params = array())
 public function countTextConverters ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -356,14 +356,14 @@ public function countTextConverters ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE 
 			`application_text_converters`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -384,7 +384,7 @@ public function countTextConverters ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -404,7 +404,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE
 			`project` = :project
 		  AND
@@ -413,7 +413,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -446,7 +446,7 @@ public function testForUniqueName ($name, $id = null)
 public function testForUniqueInternalName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -466,7 +466,7 @@ public function testForUniqueInternalName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE
 			`project` = :project
 		  AND
@@ -475,7 +475,7 @@ public function testForUniqueInternalName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -506,7 +506,7 @@ public function testForUniqueInternalName ($name, $id = null)
 public function applyTextConverter ($id, $text)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -541,13 +541,13 @@ public function applyTextConverter ($id, $text)
 	if (empty($text_converter['internal_name'])) {
 		throw new Application_TextconverterException("No internal text converter name defined");
 	}
-	if (!preg_match(OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME, $text_converter['internal_name'])) {
+	if (!preg_match(WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME, $text_converter['internal_name'])) {
 		throw new Application_TextconverterException("Internal text converter name is invalid");
 	}
 	
 	// prepare path to text converter
 	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
-		"oak_plugin_textconverter_".$text_converter['internal_name'].".php";
+		"wcom_plugin_textconverter_".$text_converter['internal_name'].".php";
 	if (!file_exists($path)) {
 		throw new Application_TextconverterException("Unable to find text converter plug-in");
 	}
@@ -556,7 +556,7 @@ public function applyTextConverter ($id, $text)
 	require_once($path);
 	
 	// prepare function name
-	$function_name = sprintf("oak_plugin_textconverter_%s", $text_converter['internal_name']);
+	$function_name = sprintf("wcom_plugin_textconverter_%s", $text_converter['internal_name']);
 	
 	// let's see if the text converter function exists
 	if (!function_exists($function_name)) {
@@ -578,7 +578,7 @@ public function applyTextConverter ($id, $text)
 public function textConverterBelongsToCurrentProject ($text_converter)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -592,7 +592,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE
 			`application_text_converters`.`id` = :text_converter
 		AND
@@ -602,7 +602,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 	// prepare bind params
 	$bind_params = array(
 		'text_converter' => (int)$text_converter,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -624,7 +624,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 public function textConverterBelongsToCurrentUser ($text_converter)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextConverter', 'Use')) {
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
 		throw new Application_TextConverterException("You are not allowed to perform this action");
 	}
 	
@@ -639,7 +639,7 @@ public function textConverterBelongsToCurrentUser ($text_converter)
 	if (!$this->textConverterBelongsToCurrentProject($text_converter)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

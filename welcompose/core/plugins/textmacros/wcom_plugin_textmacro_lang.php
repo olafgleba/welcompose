@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Project: Oak_Plugins
- * File: oak_plugin_textmacro_lang.php
+ * Project: Welcompose_Plugins
+ * File: wcom_plugin_textmacro_lang.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak_Plugins
+ * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -33,7 +33,7 @@
  * @param string Text
  * @return string
  */
-function oak_plugin_textmacro_lang ($str)
+function wcom_plugin_textmacro_lang ($str)
 {
 	// input check
 	if (!is_scalar($str)) {
@@ -42,7 +42,7 @@ function oak_plugin_textmacro_lang ($str)
 	
 	// parse gmap tags and replace it with a google map.
 	return preg_replace_callback("={lang\s*value\=(\"(\w+)\"|'(\w+)')}(.*?){\s*/lang\s*}=",
-		'oak_plugin_textmacro_lang_callback', $str);
+		'wcom_plugin_textmacro_lang_callback', $str);
 }
 
 /**
@@ -51,7 +51,7 @@ function oak_plugin_textmacro_lang ($str)
  * @param array
  * @return string
  */
-function oak_plugin_textmacro_lang_callback ($args)
+function wcom_plugin_textmacro_lang_callback ($args)
 {
 	// input check
 	if (!is_array($args)) {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: blogcommentstatus.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addBlogCommentStatus ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addBlogCommentStatus ($sqlData)
 	}
 	
 	// make sure that the new blog comment status will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData);
 	
 	// test if blog comment status belongs to current project/user
 	if (!$this->blogCommentStatusBelongsToCurrentUser($insert_id)) {
@@ -117,7 +117,7 @@ public function addBlogCommentStatus ($sqlData)
 public function updateBlogCommentStatus ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -140,11 +140,11 @@ public function updateBlogCommentStatus ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData,
+	return $this->base->db->update(WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -160,7 +160,7 @@ public function updateBlogCommentStatus ($id, $sqlData)
 public function deleteBlogCommentStatus ($id)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Manage')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Manage')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -180,11 +180,11 @@ public function deleteBlogCommentStatus ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES, $where, $bind_params);
 }
 
 /**
@@ -198,7 +198,7 @@ public function deleteBlogCommentStatus ($id)
 public function selectBlogCommentStatus ($id)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -217,7 +217,7 @@ public function selectBlogCommentStatus ($id)
 			`community_blog_comment_statuses`.`project` AS `project`,
 			`community_blog_comment_statuses`.`name` AS `name`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE 
 			`community_blog_comment_statuses`.`id` = :id
 		  AND
@@ -229,7 +229,7 @@ public function selectBlogCommentStatus ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -254,7 +254,7 @@ public function selectBlogCommentStatus ($id)
 public function selectBlogCommentStatuses ($params = array())
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -287,14 +287,14 @@ public function selectBlogCommentStatuses ($params = array())
 			`community_blog_comment_statuses`.`project` AS `project`,
 			`community_blog_comment_statuses`.`name` AS `name`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE 
 			`community_blog_comment_statuses`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -326,7 +326,7 @@ public function selectBlogCommentStatuses ($params = array())
 public function countBlogCommentStatuses ($params = array())
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -351,14 +351,14 @@ public function countBlogCommentStatuses ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE 
 			`community_blog_comment_statuses`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -379,7 +379,7 @@ public function countBlogCommentStatuses ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -399,7 +399,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE
 			`project` = :project
 		  AND
@@ -408,7 +408,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -437,7 +437,7 @@ public function testForUniqueName ($name, $id = null)
 public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -451,7 +451,7 @@ public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
+			".WCOM_DB_COMMUNITY_BLOG_COMMENT_STATUSES." AS `community_blog_comment_statuses`
 		WHERE
 			`community_blog_comment_statuses`.`id` = :blog_comment_status
 		AND
@@ -461,7 +461,7 @@ public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 	// prepare bind params
 	$bind_params = array(
 		'blog_comment_status' => (int)$blog_comment_status,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -483,7 +483,7 @@ public function blogCommentStatusBelongsToCurrentProject ($blog_comment_status)
 public function blogCommentStatusBelongsToCurrentUser ($blog_comment_status)
 {
 	// access check
-	if (!oak_check_access('Community', 'BlogCommentStatus', 'Use')) {
+	if (!wcom_check_access('Community', 'BlogCommentStatus', 'Use')) {
 		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
 	}
 	
@@ -498,7 +498,7 @@ public function blogCommentStatusBelongsToCurrentUser ($blog_comment_status)
 	if (!$this->blogCommentStatusBelongsToCurrentProject($blog_comment_status)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

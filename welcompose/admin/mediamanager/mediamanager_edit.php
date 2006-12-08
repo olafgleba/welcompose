@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: mediamanager_upload.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -87,10 +87,10 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -104,13 +104,13 @@ try {
 	);
 	
 	// get object
-	$object = $OBJECT->selectObject(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$object = $OBJECT->selectObject(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 
 	// get pager_page value
 	if (!empty($_REQUEST['pager_page'])) {
-		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], OAK_REGEX_NUMERIC);
+		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC);
 	} else {
-		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], OAK_REGEX_NUMERIC);
+		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], WCOM_REGEX_NUMERIC);
 	}
 		
 	// start new HTML_QuickForm
@@ -177,15 +177,15 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 
 		// assign delivered pager location
 		$BASE->utility->smarty->assign('pager_page', $pager_page);
 		
 	 	// build session
 	    $session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], OAK_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
 	    );
 
 	    // assign prepared session array to smarty
@@ -200,17 +200,17 @@ try {
 	    }
 
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/mediamanager_edit.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/mediamanager_edit.html', WCOM_TEMPLATE_KEY);
 
 		// flush the buffer
 		@ob_end_flush();
@@ -264,8 +264,8 @@ try {
 			}
 			
 			// remove old thumbnail and object
-			$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), OAK_REGEX_NUMERIC));
-			$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), OAK_REGEX_NUMERIC));
+			$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
+			$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
 			
 			// move file to file store
 			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: function.global_template.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -69,8 +69,8 @@ function smarty_function_global_template ($params, &$smarty)
 	
 	// prepare replacements
 	$replacements = array(
-		OAK_CURRENT_PROJECT,
-		OAK_CURRENT_PROJECT_NAME,
+		WCOM_CURRENT_PROJECT,
+		WCOM_CURRENT_PROJECT_NAME,
 		$name
 	);
 	ksort($replacements);

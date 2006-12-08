@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: resource.oakgtpl.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -44,7 +44,7 @@ function oakgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	}
 
 	// set mime type constant
-	define("OAK_GLOBAL_TEMPLATE_MIME_TYPE",
+	define("WCOM_GLOBAL_TEMPLATE_MIME_TYPE",
 		(!empty($content['mime_type']) ? $content['mime_type'] : 'text/plain'));
 	
 	// assign template source

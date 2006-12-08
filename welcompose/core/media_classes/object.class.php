@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: object.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addObject ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addObject ($sqlData)
 	}
 	
 	// make sure that the new object will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_MEDIA_OBJECTS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_MEDIA_OBJECTS, $sqlData);
 }
 
 /**
@@ -112,7 +112,7 @@ public function addObject ($sqlData)
 public function updateObject ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -130,11 +130,11 @@ public function updateObject ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_MEDIA_OBJECTS, $sqlData,
+	return $this->base->db->update(WCOM_DB_MEDIA_OBJECTS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -149,7 +149,7 @@ public function updateObject ($id, $sqlData)
 public function deleteObject ($id)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -164,11 +164,11 @@ public function deleteObject ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_MEDIA_OBJECTS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_MEDIA_OBJECTS, $where, $bind_params);
 }
 
 /**
@@ -182,7 +182,7 @@ public function deleteObject ($id)
 public function selectObject ($id)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -215,7 +215,7 @@ public function selectObject ($id)
 			`media_objects`.`date_modified` AS `date_modified`,
 			`media_objects`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
+			".WCOM_DB_MEDIA_OBJECTS." AS `media_objects`
 		WHERE
 			`media_objects`.`id` = :id
 		AND
@@ -227,7 +227,7 @@ public function selectObject ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -264,7 +264,7 @@ public function selectObject ($id)
 public function selectObjects ($params = array())
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -338,13 +338,13 @@ public function selectObjects ($params = array())
 			`media_tags`.`word` AS `tag_word`,
 			`media_tags`.`occurrences` AS `occurrences`
 		FROM
-			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
+			".WCOM_DB_MEDIA_OBJECTS." AS `media_objects`
 		LEFT JOIN
-			".OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_objects2media_tags`
+			".WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_objects2media_tags`
 		  ON
 			`media_objects`.`id` = `media_objects2media_tags`.`object`
 		LEFT JOIN
-			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+			".WCOM_DB_MEDIA_TAGS." AS `media_tags`
 		  ON
 			`media_objects2media_tags`.`tag` = `media_tags`.`id`
 		WHERE
@@ -353,7 +353,7 @@ public function selectObjects ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -408,7 +408,7 @@ public function selectObjects ($params = array())
 public function countObjects ($params = array())
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -450,13 +450,13 @@ public function countObjects ($params = array())
 		SELECT
 			COUNT(DISTINCT `media_objects`.`id`)
 		FROM
-			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
+			".WCOM_DB_MEDIA_OBJECTS." AS `media_objects`
 		LEFT JOIN
-			".OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_objects2media_tags`
+			".WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_objects2media_tags`
 		  ON
 			`media_objects`.`id` = `media_objects2media_tags`.`object`
 		LEFT JOIN
-			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+			".WCOM_DB_MEDIA_TAGS." AS `media_tags`
 		  ON
 			`media_objects2media_tags`.`tag` = `media_tags`.`id`
 		WHERE
@@ -465,7 +465,7 @@ public function countObjects ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -497,7 +497,7 @@ public function countObjects ($params = array())
 public function moveObjectToStore ($name, $path)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -539,7 +539,7 @@ public function moveObjectToStore ($name, $path)
 public function removeObjectFromStore ($object)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -618,7 +618,7 @@ public function removeObjectFromStore ($object)
 public function createImageThumbnail ($orig_name, $object_name, $width, $height, $fill_up = false, $hex = null)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -641,7 +641,7 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
 	if ($fill_up === true && empty($hex)) {
 		throw new Media_ObjectException("to fill up an image a canvas color is required");
 	}
-	if (!is_null($hex) && !Base_Cnc::filterRequest($hex, OAK_REGEX_HEX)) {
+	if (!is_null($hex) && !Base_Cnc::filterRequest($hex, WCOM_REGEX_HEX)) {
 		throw new Media_ObjectException("hex is supposed to be empty or a hexadecimal value");
 	}
 	if (!$this->imageStoreIsReady()) {
@@ -748,7 +748,7 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
 public function removeImageThumbnail ($object)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -807,7 +807,7 @@ public function removeImageThumbnail ($object)
 public function getPathToObject ($object_name)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -830,7 +830,7 @@ public function getPathToObject ($object_name)
 public function getWwwPathToObject ($object_name)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -852,7 +852,7 @@ public function getWwwPathToObject ($object_name)
 public function getWwwPathToObjectUsingId ($object_id)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -883,7 +883,7 @@ public function getWwwPathToObjectUsingId ($object_id)
 public function getPathToThumbnail ($object_name)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -903,7 +903,7 @@ public function getPathToThumbnail ($object_name)
 public function imageStoreIsReady ()
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -943,7 +943,7 @@ public function imageStoreIsReady ()
 protected function _flipTypes ($types)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -970,7 +970,7 @@ protected function _flipTypes ($types)
 public function getGenericTypes ()
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -1002,7 +1002,7 @@ public function getGenericTypes ()
 public function genericTypesToMimeTypes ($generic_type)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -1052,7 +1052,7 @@ public function genericTypesToMimeTypes ($generic_type)
 public function isPodcastFormat ($mime_type)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -1083,7 +1083,7 @@ public function isPodcastFormat ($mime_type)
 protected function sqlForGenericTypes ($field, $types)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
@@ -1143,12 +1143,12 @@ protected function sqlForGenericTypes ($field, $types)
 public function mimeTypeToIcon ($mime_type)
 {
 	// access check
-	if (!oak_check_access('Media', 'Object', 'Use')) {
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
 	// input check
-	if (empty($mime_type) || !preg_match(OAK_REGEX_MIME_TYPE, $mime_type)) {
+	if (empty($mime_type) || !preg_match(WCOM_REGEX_MIME_TYPE, $mime_type)) {
 		throw new Media_ObjectException("Invalid mime type supplied");
 	}
 	

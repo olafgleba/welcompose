@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globalfiles_upload.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -91,15 +91,15 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Templating', 'GlobalFile', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get global file
-	$file = $GLOBALFILE->selectGlobalFile(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$file = $GLOBALFILE->selectGlobalFile(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// let's see if we received a file
 	if ($_FILES['file']['error'] == UPLOAD_ERR_OK && !empty($file)) {
@@ -119,7 +119,7 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['project'] = OAK_CURRENT_PROJECT;
+		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $data['name'];
 		$sqlData['name_on_disk'] = $name_on_disk;
 		$sqlData['mime_type'] = $data['type'];

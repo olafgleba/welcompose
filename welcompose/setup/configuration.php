@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: configuration.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -84,7 +84,7 @@ try {
 	$FORM->applyFilter('locale', 'strip_tags');
 	$FORM->addRule('locale', gettext('Please enter a locale to use'), 'required');
 	$FORM->addRule('locale', gettext('Please enter a valid locale to use'), 'regex',
-		OAK_REGEX_LOCALE_NAME);
+		WCOM_REGEX_LOCALE_NAME);
 	
 	// add locale validation rule
 	$FORM->registerRule('testLocale', 'callback', 'setup_locale_test_callback');
@@ -111,8 +111,8 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('configuration.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('configuration.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

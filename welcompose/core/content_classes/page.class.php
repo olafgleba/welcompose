@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: page.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addPage ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -92,10 +92,10 @@ public function addPage ($sqlData)
 		throw new Content_PageException('Input for parameter sqlData is not an array');	
 	}
 	
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$this->base->db->insert(OAK_DB_CONTENT_PAGES, $sqlData);
+	$this->base->db->insert(WCOM_DB_CONTENT_PAGES, $sqlData);
 	
 	// test if page belongs to current project/user
 	if (!$this->pageBelongsToCurrentUser($sqlData['id'])) {
@@ -118,7 +118,7 @@ public function addPage ($sqlData)
 public function updatePage ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -141,11 +141,11 @@ public function updatePage ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_PAGES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_PAGES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -160,7 +160,7 @@ public function updatePage ($id, $sqlData)
 public function deletePage ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -180,11 +180,11 @@ public function deletePage ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_PAGES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_PAGES, $where, $bind_params);
 }
 
 /**
@@ -198,7 +198,7 @@ public function deletePage ($id)
 public function selectPage ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -233,13 +233,13 @@ public function selectPage ($id)
 			`content_page_types`.`name` AS `page_type_name`,
 			`content_page_types`.`internal_name` AS `page_type_internal_name`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
@@ -253,7 +253,7 @@ public function selectPage ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -284,7 +284,7 @@ public function selectPage ($id)
 public function selectPages ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -344,13 +344,13 @@ public function selectPages ($params = array())
 			`content_page_types`.`name` AS `page_type_name`,
 			`content_page_types`.`internal_name` AS `page_type_internal_name`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
@@ -359,7 +359,7 @@ public function selectPages ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -426,7 +426,7 @@ public function selectPages ($params = array())
 public function countPages ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -469,13 +469,13 @@ public function countPages ($params = array())
 		SELECT 
 			COUNT(DISTINCT `content_pages`.`id`) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN
-			".OAK_DB_CONTENT_NODES." AS `content_nodes`
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
 		  ON
 			`content_pages`.`id` = `content_nodes`.`id`
 		JOIN
-			".OAK_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
 		WHERE 
@@ -484,7 +484,7 @@ public function countPages ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -526,7 +526,7 @@ public function countPages ($params = array())
 public function selectIndexPage ()
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -535,7 +535,7 @@ public function selectIndexPage ()
 		SELECT 
 			`content_pages`.`id` AS `id`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		WHERE
 			`content_pages`.`index_page` = '1'
 		  AND
@@ -546,7 +546,7 @@ public function selectIndexPage ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -581,7 +581,7 @@ public function selectIndexPage ()
 public function mapPageToGroups ($page, $groups = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -604,11 +604,11 @@ public function mapPageToGroups ($page, $groups = array())
 	// prepare query to remove all existing links to the current template
 	$sql = "
 		DELETE FROM
-			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+			".WCOM_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
 		USING
-			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+			".WCOM_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_pages2user_groups`.`page` = `content_pages`.`id`
 		WHERE
@@ -620,7 +620,7 @@ public function mapPageToGroups ($page, $groups = array())
 	// prepare bind params
 	$bind_params = array(
 		'page' => (int)$page,
-		'project' => (int)OAK_CURRENT_PROJECT
+		'project' => (int)WCOM_CURRENT_PROJECT
 	);
 	
 	// remove all existing links to the given page
@@ -629,7 +629,7 @@ public function mapPageToGroups ($page, $groups = array())
 	// add new links
 	foreach ($groups as $_group) {
 		if (!empty($_group) && is_numeric($_group) && $GROUP->groupBelongsToCurrentUser($_group)) {
-			$this->base->db->insert(OAK_DB_CONTENT_PAGES2USER_GROUPS, array('page' => $page, 'group' => $_group));
+			$this->base->db->insert(WCOM_DB_CONTENT_PAGES2USER_GROUPS, array('page' => $page, 'group' => $_group));
 		}
 	}
 	
@@ -647,7 +647,7 @@ public function mapPageToGroups ($page, $groups = array())
 public function selectPageToGroupsMap ($page)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -668,9 +668,9 @@ public function selectPageToGroupsMap ($page)
 			`content_pages2user_groups`.`page`,
 			`content_pages2user_groups`.`group`
 		FROM
-			".OAK_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
+			".WCOM_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
 		JOIN
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 		 	`content_pages2user_groups`.`page` = `content_pages`.`id`
 		WHERE
@@ -682,7 +682,7 @@ public function selectPageToGroupsMap ($page)
 	// prepare bind params
 	$bind_params = array(
 		'page' => (int)$page,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -701,7 +701,7 @@ public function selectPageToGroupsMap ($page)
 public function initPageContents ($page)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -723,11 +723,11 @@ public function initPageContents ($page)
 	
 	// handle the different page types
 	switch((string)$page_info['page_type_name']) {
-		case 'OAK_SIMPLE_FORM':
+		case 'WCOM_SIMPLE_FORM':
 				// prepare sql data
 				$sqlData = array(
 					'id' => $page_info['id'],
-					'user' => OAK_CURRENT_USER,
+					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
 					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
 					'date_added' => date('Y-m-d H:i:s')
@@ -737,11 +737,11 @@ public function initPageContents ($page)
 				$SIMPLEFORM = load('content:simpleform');
 				$SIMPLEFORM->addSimpleForm($page_info['id'], $sqlData);
 			break;
-		case 'OAK_SIMPLE_PAGE':
+		case 'WCOM_SIMPLE_PAGE':
 				// prepare sql data
 				$sqlData = array(
 					'id' => $page_info['id'],
-					'user' => OAK_CURRENT_USER,
+					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
 					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
 					'date_added' => date('Y-m-d H:i:s')
@@ -751,8 +751,8 @@ public function initPageContents ($page)
 				$SIMPLEPAGE = load('content:simplepage');
 				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
-		case 'OAK_BLOG':
-		case 'OAK_URL':
+		case 'WCOM_BLOG':
+		case 'WCOM_URL':
 		default:
 			break;
 	}
@@ -775,7 +775,7 @@ public function initPageContents ($page)
 public function testForUniqueUrlName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -795,7 +795,7 @@ public function testForUniqueUrlName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		WHERE
 			`project` = :project
 		  AND
@@ -804,7 +804,7 @@ public function testForUniqueUrlName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -833,7 +833,7 @@ public function testForUniqueUrlName ($name, $id = null)
 public function pageBelongsToCurrentProject ($page)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 		
@@ -847,7 +847,7 @@ public function pageBelongsToCurrentProject ($page)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		WHERE
 			`content_pages`.`id` = :page
 		  AND
@@ -857,7 +857,7 @@ public function pageBelongsToCurrentProject ($page)
 	// prepare bind params
 	$bind_params = array(
 		'page' => (int)$page,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -879,7 +879,7 @@ public function pageBelongsToCurrentProject ($page)
 public function pageBelongsToCurrentUser ($page)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -894,7 +894,7 @@ public function pageBelongsToCurrentUser ($page)
 	if (!$this->pageBelongsToCurrentProject($page)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -912,7 +912,7 @@ public function pageBelongsToCurrentUser ($page)
 public function setIndexPage ($page)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Manage')) {
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -924,7 +924,7 @@ public function setIndexPage ($page)
 	// unset all existing index pages.
 	$sql = "
 		UPDATE
-			".OAK_DB_CONTENT_PAGES." 
+			".WCOM_DB_CONTENT_PAGES." 
 		SET
 			`index_page` = '0'
 		WHERE
@@ -935,7 +935,7 @@ public function setIndexPage ($page)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute update
@@ -968,8 +968,8 @@ public function checkAccess ($page, $protect_flag)
 	}
 	
 	// get the user group of the current user
-	$group = Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['group'],
-		OAK_REGEX_NUMERIC);
+	$group = Base_Cnc::filterRequest($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['group'],
+		WCOM_REGEX_NUMERIC);
 	
 	// if there's not group, we can't grant access
 	if (is_null($group)) {
@@ -1001,13 +1001,13 @@ public function checkAccess ($page, $protect_flag)
 public function resolvePage ()
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
 	// get page id and url name from url
-	$page_id = Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC);
-	$page_name = Base_Cnc::filterRequest($_REQUEST['page_name'], OAK_REGEX_MEANINGFUL_STRING);
+	$page_id = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC);
+	$page_name = Base_Cnc::filterRequest($_REQUEST['page_name'], WCOM_REGEX_MEANINGFUL_STRING);
 	
 	if (!is_null($page_id)) {
 		if ($this->pageExists($page_id)) {
@@ -1021,7 +1021,7 @@ public function resolvePage ()
 			SELECT
 			 	`id`
 			FROM
-				".OAK_DB_CONTENT_PAGES."
+				".WCOM_DB_CONTENT_PAGES."
 			WHERE
 				`name_url` = :name_url
 			  AND
@@ -1032,7 +1032,7 @@ public function resolvePage ()
 		// prepare bind params
 		$bind_params = array(
 			'name_url' => (string)$page_name,
-			'project' => OAK_CURRENT_PROJECT
+			'project' => WCOM_CURRENT_PROJECT
 		);
 	
 		// execute query and evaluate result
@@ -1048,7 +1048,7 @@ public function resolvePage ()
 		
 		// if there's an index page, return it's id. if not, throw an
 		// exception
-		if (!is_null(Base_Cnc::filterRequest($page['id'], OAK_REGEX_NUMERIC))) {
+		if (!is_null(Base_Cnc::filterRequest($page['id'], WCOM_REGEX_NUMERIC))) {
 			return (int)$page['id'];
 		} else {
 			throw new Content_PageException("Requested page could not be found");
@@ -1067,7 +1067,7 @@ public function resolvePage ()
 public function pageExists ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
 		throw new Content_PageException("You are not allowed to perform this action");
 	}
 	
@@ -1084,7 +1084,7 @@ public function pageExists ($id)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_PAGES." AS `content_pages`
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		WHERE
 			`content_pages`.`id` = :id
 		  AND
@@ -1094,7 +1094,7 @@ public function pageExists ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result

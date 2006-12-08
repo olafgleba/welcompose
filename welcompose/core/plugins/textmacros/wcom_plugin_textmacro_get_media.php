@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Project: Oak_Plugins
- * File: oak_plugin_textmacro_get_media.php
+ * Project: Welcompose_Plugins
+ * File: wcom_plugin_textmacro_get_media.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak_Plugins
+ * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -29,7 +29,7 @@
  * @param string Text
  * @return string
  */
-function oak_plugin_textmacro_get_media ($str)
+function wcom_plugin_textmacro_get_media ($str)
 {
 	// input check
 	if (!is_scalar($str)) {
@@ -41,7 +41,7 @@ function oak_plugin_textmacro_get_media ($str)
 	
 	// parse link generator instructions and replace them with real urls
 	return preg_replace_callback($PLUGINUTILITY->getTextMacroTagPattern('get_media'),
-		'oak_plugin_textmacro_get_media_callback', $str);
+		'wcom_plugin_textmacro_get_media_callback', $str);
 }
 
 /**
@@ -50,7 +50,7 @@ function oak_plugin_textmacro_get_media ($str)
  * @param array
  * @return string
  */
-function oak_plugin_textmacro_get_media_callback ($args)
+function wcom_plugin_textmacro_get_media_callback ($args)
 {
 	// input check
 	if (!is_array($args)) {

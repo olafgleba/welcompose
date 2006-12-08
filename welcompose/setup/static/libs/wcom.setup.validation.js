@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.setup.validation.js
+ * Project: Welcompose
+ * File: wcom.setup.validation.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,11 +12,11 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.validation.js 60 2006-06-15 12:19:02Z olaf $
+ * $Id: wcom.validation.js 60 2006-06-15 12:19:02Z olaf $
  *
  * @copyright 2004-2005 sopic GmbH
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 

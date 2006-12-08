@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: validate.js.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -57,26 +57,26 @@ try {
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
 	// map field id names to regexps and error messages 
-	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
+	if (Base_Cnc::filterRequest($_POST['elemID'], WCOM_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
 			case 'blog_comment_status_name':
-					$reg = OAK_REGEX_BLOG_COMMENT_STATUS_NAME;
+					$reg = WCOM_REGEX_BLOG_COMMENT_STATUS_NAME;
 					$desc = gettext('Only capitalized literal string');
 				break;			
 			case 'group_name':
-					$reg = OAK_REGEX_GROUP_NAME;
+					$reg = WCOM_REGEX_GROUP_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
 			case 'navigation_name':
-					$reg = OAK_REGEX_NON_EMPTY;
+					$reg = WCOM_REGEX_NON_EMPTY;
 					$desc = gettext('Field may not be empty');
 				break;
 			case 'page_type_name':
-					$reg = OAK_REGEX_PAGE_TYPE_NAME;
+					$reg = WCOM_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
 			case 'page_type_internal_name':
-					$reg = OAK_REGEX_PAGE_TYPE_INTERNAL_NAME;
+					$reg = WCOM_REGEX_PAGE_TYPE_INTERNAL_NAME;
 					$desc = gettext('Literal string, CamelCase');
 				break;
 			case 'blog_comment_homepage':
@@ -84,50 +84,50 @@ try {
 			case 'ping_service_configuration_site_url':
 			case 'ping_service_configuration_site_index':
 			case 'ping_service_configuration_site_feed':
-					$reg = OAK_REGEX_URL;
+					$reg = WCOM_REGEX_URL;
 					$desc = gettext('Full URL with protocol (http:// etc.)');
 				break;
 			case 'ping_service_host':
-					$reg = OAK_REGEX_PING_SERVICE_HOST;
+					$reg = WCOM_REGEX_PING_SERVICE_HOST;
 					$desc = gettext('Alphanumeric with dots and hyphens');
 				break;
 			case 'ping_service_path':
-					$reg = OAK_REGEX_PING_SERVICE_PATH;
+					$reg = WCOM_REGEX_PING_SERVICE_PATH;
 					$desc = gettext('Alphanumeric string with slashes');
 				break;
 			case 'ping_service_port':
-					$reg = OAK_REGEX_NUMERIC;
+					$reg = WCOM_REGEX_NUMERIC;
 					$desc = gettext('Numbers only');
 				break;
 			case 'right_name':
-					$reg = OAK_REGEX_RIGHT_NAME;
+					$reg = WCOM_REGEX_RIGHT_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');
 				break;
 			case 'template_set_name':
-					$reg = OAK_REGEX_TEMPLATE_SET_NAME;
+					$reg = WCOM_REGEX_TEMPLATE_SET_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
 			case 'template_type_name':
-					$reg = OAK_REGEX_TEMPLATE_TYPE_NAME;
+					$reg = WCOM_REGEX_TEMPLATE_TYPE_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
 			case 'text_converter_internal_name':
-					$reg = OAK_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
+					$reg = WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
 			case 'blog_comment_email':
 			case 'simple_form_email_from':
 			case 'simple_form_email_to':
 			case 'user_email':
-					$reg = OAK_REGEX_EMAIL;
+					$reg = WCOM_REGEX_EMAIL;
 					$desc = gettext('Invalid e-mail address');
 				break;
 			case 'user_password':
-					$reg = OAK_REGEX_PASSWORD;
+					$reg = WCOM_REGEX_PASSWORD;
 					$desc = gettext('Five characters or more, no whitespace');
 				break;
 			case 'box_name':
-					$reg = OAK_REGEX_NON_EMPTY;
+					$reg = WCOM_REGEX_NON_EMPTY;
 					$desc = gettext('Field may not be empty');
 				break;
 			default :

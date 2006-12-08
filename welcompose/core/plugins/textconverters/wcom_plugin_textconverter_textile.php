@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Project: Oak_Plugins
- * File: oak_plugin_textmacro_strip_tags.php
+ * Project: Welcompose_Plugins
+ * File: wcom_plugin_textconverter_textile.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -18,25 +18,33 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak_Plugins
+ * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 /** 
- * Applies PHP's strip_tags() on given string. Takes the string to 
- * strip as first argument. Returns the stripped string.
+ * Applies Textile on given string. Takes the string to convert as
+ * first argument. Returns the converted string.
  *
- * @param string String to strip
+ * @param string String to convert
  * @return string
  */
-function oak_plugin_textmacro_strip_tags ($str)
+function wcom_plugin_textconverter_textile ($str)
 {
 	// input check
 	if (!is_scalar($str)) {
 		trigger_error("Input for parameter str is expected to be scalar", E_USER_ERROR);
 	}
 	
-	return strip_tags($str);
+	// load textile
+	if (!class_exists('Textile')) {
+		$path = dirname(__FILE__).'/../../third_party/textile.php';
+		require(Base_Compat::fixDirectorySeparator($path));
+	}
+	$TEXTILE = new Textile();
+	
+	// apply textile
+	return $TEXTILE->TextileThis($str);
 }
 
 ?>

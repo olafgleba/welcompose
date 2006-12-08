@@ -15,7 +15,7 @@
 			<filename>index.html</filename> geladen, um die Seite anzuzeigen.
 			Ruft der Besucher die News-Seite <filename>news/index.php</filename>
 			auf, wird die Vorlage <filename>news/index.html</filename> geladen,
-			um die News-Seite anzuzeigen. Dies ist bei Oak grundsätzlich nicht
+			um die News-Seite anzuzeigen. Dies ist bei Welcompose grundsätzlich nicht
 			anders, unterscheidet sich aber in der Anwendung, da die Vorlagen in
 			der Datenbank gespeichert und über die Administrationsoberfläche
 			verwaltet werden.
@@ -82,12 +82,12 @@
 			Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt
 			werden. Also wird eine Vorlage
 			<userinput>Kontaktformular Konferenzrückfragen</userinput> angelegt.
-			Damit Oak weiss, dass das <userinput>Kontaktformular
+			Damit Welcompose weiss, dass das <userinput>Kontaktformular
 			Konferenzrückfragen</userinput> eine Vorlage für ein Kontaktformular
 			ist, muss ihr der passende Vorlagen-Typ
 			<code>simple_form_index</code> zugeordnet werden. Da mehrere
 			Vorlagen mit demselben Vorlagen-Typ <code>simple_form_index</code>
-			existieren, muss Oak noch gesagt werden, welche von den
+			existieren, muss Welcompose noch gesagt werden, welche von den
 			Formular-Vorlagen es für das
 			<userinput>Kontaktformular Konferenzrückfragen</userinput> benutzen
 			soll. Dazu wird das Kontaktformular dem Vorlagen-Set 
@@ -104,11 +104,11 @@
 		
 		<para>
 			Wenn jetzt ein Besucher das Kontaktformular für die
-			Konferenzrückfragen aufruft, weiss Oak, dass es eine Vorlage des
+			Konferenzrückfragen aufruft, weiss Welcompose, dass es eine Vorlage des
 			Typs <code>simple_form_index</code> braucht, denn schliesslich
 			handelt sich um ein Formular. Und da das Vorlagen-Set
 			<userinput>Konferenz</userinput> mit der Seite verknüpft ist,
-			weiss Oak, dass es aus diesem Vorlagen-Set die Vorlage mit dem
+			weiss Welcompose, dass es aus diesem Vorlagen-Set die Vorlage mit dem
 			Typ <code>simple_form_index</code> auslesen muss und gelangt
 			zur Vorlage mit dem Namen <userinput>Kontaktformular
 			Konferenzrückfragen</userinput> &ndash; et voilà, die Seite wird

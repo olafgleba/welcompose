@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: systemlogin.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -218,7 +218,7 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
-	return "oak:system_login.".OAK_CURRENT_PAGE;
+	return "wcom:system_login.".WCOM_CURRENT_PAGE;
 }
 
 /**

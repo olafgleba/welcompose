@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * Template: globaltemplate.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -27,7 +27,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -92,7 +92,7 @@ public function instance()
 public function addGlobalTemplate ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Manage')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -102,10 +102,10 @@ public function addGlobalTemplate ($sqlData)
 	}
 	
 	// make sure that the new global template will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_GLOBAL_TEMPLATES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES, $sqlData);
 	
 	// test if global template belongs to current user/project
 	if (!$this->globalTemplateBelongsToCurrentUser($insert_id)) {
@@ -128,7 +128,7 @@ public function addGlobalTemplate ($sqlData)
 public function updateGlobalTemplate ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Manage')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -151,11 +151,11 @@ public function updateGlobalTemplate ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_TEMPLATING_GLOBAL_TEMPLATES, $sqlData,
+	return $this->base->db->update(WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES, $sqlData,
 		$where, $bind_params);
 }
 
@@ -171,7 +171,7 @@ public function updateGlobalTemplate ($id, $sqlData)
 public function deleteGlobalTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Manage')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -191,11 +191,11 @@ public function deleteGlobalTemplate ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_TEMPLATING_GLOBAL_TEMPLATES,	
+	return $this->base->db->delete(WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES,	
 		$where, $bind_params);
 }
 
@@ -210,7 +210,7 @@ public function deleteGlobalTemplate ($id)
 public function selectGlobalTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -235,7 +235,7 @@ public function selectGlobalTemplate ($id)
 			`templating_global_templates`.`date_modified` AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE 
 			`templating_global_templates`.`id` = :id
 		  AND
@@ -247,7 +247,7 @@ public function selectGlobalTemplate ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -272,7 +272,7 @@ public function selectGlobalTemplate ($id)
 public function selectGlobalTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -311,14 +311,14 @@ public function selectGlobalTemplates ($params = array())
 			`templating_global_templates`.`date_modified` AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE
 			`templating_global_templates`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -346,7 +346,7 @@ public function selectGlobalTemplates ($params = array())
 public function smartyFetchGlobalTemplate ($name)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -371,7 +371,7 @@ public function smartyFetchGlobalTemplate ($name)
 			`templating_global_templates`.`date_modified` AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE 
 			`templating_global_templates`.`name` = :name
 		  AND
@@ -383,7 +383,7 @@ public function smartyFetchGlobalTemplate ($name)
 	// prepare bind params
 	$bind_params = array(
 		'name' => (string)$name,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -402,7 +402,7 @@ public function smartyFetchGlobalTemplate ($name)
 public function smartyFetchGlobalTemplateTimestamp ($name)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -419,7 +419,7 @@ public function smartyFetchGlobalTemplateTimestamp ($name)
 		SELECT
 			UNIX_TIMESTAMP(`templating_global_templates`.`date_modified`) AS `date_modified`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE 
 			`templating_global_templates`.`name` = :name
 		  AND
@@ -431,7 +431,7 @@ public function smartyFetchGlobalTemplateTimestamp ($name)
 	// prepare bind params
 	$bind_params = array(
 		'name' => (string)$name,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -455,7 +455,7 @@ public function smartyFetchGlobalTemplateTimestamp ($name)
 public function countGlobalTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -480,14 +480,14 @@ public function countGlobalTemplates ($params = array())
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE
 			`templating_global_templates`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
@@ -504,7 +504,7 @@ public function countGlobalTemplates ($params = array())
 public function globalTemplateBelongsToCurrentProject ($template)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -518,7 +518,7 @@ public function globalTemplateBelongsToCurrentProject ($template)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE
 			`templating_global_templates`.`id` = :template
 		  AND
@@ -528,7 +528,7 @@ public function globalTemplateBelongsToCurrentProject ($template)
 	// prepare bind params
 	$bind_params = array(
 		'template' => (int)$template,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -550,7 +550,7 @@ public function globalTemplateBelongsToCurrentProject ($template)
 public function globalTemplateBelongsToCurrentUser ($global_template)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -565,7 +565,7 @@ public function globalTemplateBelongsToCurrentUser ($global_template)
 	if (!$this->globalTemplateBelongsToCurrentProject($global_template)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -587,7 +587,7 @@ public function globalTemplateBelongsToCurrentUser ($global_template)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
 		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -607,7 +607,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
+			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
 		WHERE
 			`project` = :project
 		  AND
@@ -616,7 +616,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	

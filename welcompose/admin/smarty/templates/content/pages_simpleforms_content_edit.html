@@ -7,9 +7,9 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Edit Simple Form}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
+<title>{i18n Welcompose Admin &ndash; Edit Simple Form}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
  
 <script type="text/javascript">
 var mediamanager = 1;
@@ -19,11 +19,11 @@ var pagetype = '{$page.page_type_name}';
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
-<script type="text/javascript" src="../static/libs/oak.core.js"></script>
-<script type="text/javascript" src="../static/libs/oak.helper.js"></script>
-<script type="text/javascript" src="../static/libs/oak.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/oak.events.extended.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
 
 </head>
 
@@ -33,7 +33,7 @@ var pagetype = '{$page.page_type_name}';
 <div id="lyLowerOpacity"> </div>
 
 <div id="logo">
-<p>{i18n Oak}</p>
+<p>{i18n Welcompose}</p>
 <!-- logo --></div>
 
 <div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
@@ -53,13 +53,13 @@ var pagetype = '{$page.page_type_name}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-{if oak_check_access('Content', 'Page', 'Manage')}
+{if wcom_check_access('Content', 'Page', 'Manage')}
 	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 {/if}
-{if oak_check_access('Content', 'SimpleForm', 'Manage')}
+{if wcom_check_access('Content', 'SimpleForm', 'Manage')}
 	<li class="on">{i18n Simple Form}</li>
 {/if}
-{if oak_check_access('Content', 'Box', 'Manage')}
+{if wcom_check_access('Content', 'Box', 'Manage')}
 	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 {/if}
 </ul>

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: create_install_package.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -447,8 +447,8 @@ protected function writeFilesToPackage ()
  */
 protected function printHelp ()
 {
-	$rev = '$Date$';
-	$this->printStderr("Oak Setup Generator 0.1 ($rev)\r\n");
+	$rev = '$Date: 2006-11-24 10:15:22 +0100 (Fre, 24 Nov 2006) $';
+	$this->printStderr("Welcompose Setup Generator 0.1 ($rev)\r\n");
 	$this->printStderr("(c) 2006 sopic GmbH\r\n");
 	$this->printStderr("Licensed below the terms of the Open Software License 3.0 2.1.\r\n");
 	$this->printStderr("\r\n");
@@ -523,7 +523,7 @@ protected function printStderr ($message)
 protected function packWebInstaller ()
 {
 	// write zlib constant definition to installer package
-	$constant_definition = sprintf("<?php define('OAK_ZLIB_PACKAGE', %s); ?>\r\n",
+	$constant_definition = sprintf("<?php define('WCOM_ZLIB_PACKAGE', %s); ?>\r\n",
 		($this->_compress ? 'true' : 'false'));
 	file_put_contents($this->_output_file, $constant_definition, FILE_APPEND);
 	

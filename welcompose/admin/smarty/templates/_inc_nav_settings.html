@@ -1,16 +1,16 @@
 <div id="topsubnavcon">
 <ul id="topsubnavdynamic">
-{if oak_check_access('Application', 'Project', 'Manage')}
-<li><a href="{$oak_admin_root_www}/application/projects_select.php">{i18n Projects}</a></li>
+{if wcom_check_access('Application', 'Project', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/application/projects_select.php">{i18n Projects}</a></li>
 {/if}
-{if oak_check_access('Application', 'PingService', 'Manage')}
-<li><a href="{$oak_admin_root_www}/application/pingservices_select.php">{i18n Ping Services}</a></li>
+{if wcom_check_access('Application', 'PingService', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/application/pingservices_select.php">{i18n Ping Services}</a></li>
 {/if}
-{if oak_check_access('Application', 'TextConverter', 'Manage')}
-<li><a href="{$oak_admin_root_www}/application/textconverters_select.php">{i18n Text Converters}</a></li>
+{if wcom_check_access('Application', 'TextConverter', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/application/textconverters_select.php">{i18n Text Converters}</a></li>
 {/if}
-{if oak_check_access('Application', 'TextMacro', 'Manage')}
-<li><a href="{$oak_admin_root_www}/application/textmacros_select.php">{i18n Text macros}</a></li>
+{if wcom_check_access('Application', 'TextMacro', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/application/textmacros_select.php">{i18n Text macros}</a></li>
 {/if}
 <li><a class="highlight" href="">&nbsp;</a></li>
 </ul>

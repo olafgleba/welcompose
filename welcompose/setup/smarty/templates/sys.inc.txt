@@ -1,7 +1,7 @@
 ; <?php /*
 [path]
-oak_admin_root_www = {$configuration.root_www}/admin
-oak_public_root_www = {$configuration.root_www}
+wcom_admin_root_www = {$configuration.root_www}/admin
+wcom_public_root_www = {$configuration.root_www}
 
 [environment]
 debug = false

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: templates_download.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -87,15 +87,15 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Templating', 'Template', 'Manage')) {
+	if (!wcom_check_access('Templating', 'Template', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get template
-	$template = $TEMPLATE->selectTemplate(Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+	$template = $TEMPLATE->selectTemplate(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// let's see if we received a file
 	if ($_FILES['file']['error'] == UPLOAD_ERR_OK && !empty($template)) {
@@ -106,7 +106,7 @@ try {
 		$sqlData = array(
 			'content' => $content
 		);
-		$TEMPLATE->updateTemplate(Base_Cnc::filterRequest($template['id'], OAK_REGEX_NUMERIC), $sqlData);
+		$TEMPLATE->updateTemplate(Base_Cnc::filterRequest($template['id'], WCOM_REGEX_NUMERIC), $sqlData);
 	}
 	
 	// clean the buffer

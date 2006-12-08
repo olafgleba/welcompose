@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: cookie.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -63,7 +63,7 @@ protected function __construct()
 		}
 		
 		// create instance of cookie class for admin cookie
-		$this->admin_cookie = new Base_Cookie($this->base->_conf['environment']['app_key'], 'oak_admin');
+		$this->admin_cookie = new Base_Cookie($this->base->_conf['environment']['app_key'], 'wcom_admin');
 		
 	} catch (Exception $e) {
 		
@@ -133,7 +133,7 @@ public function adminGetCurrentProject ()
 	$data = $this->admin_cookie->getCookieData();
 	
 	// get current project
-	$current_project = Base_Cnc::filterRequest($data['current_project'], OAK_REGEX_NUMERIC);
+	$current_project = Base_Cnc::filterRequest($data['current_project'], WCOM_REGEX_NUMERIC);
 	
 	// return current project
 	return $current_project;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globaltemplates_add.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -91,16 +91,16 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Templating', 'GlobalTemplate', 'Manage')) {
+	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get global template
 	$global_template = $GLOBALTEMPLATE->selectGlobalTemplate(Base_Cnc::filterRequest($_REQUEST['id'],
-		OAK_REGEX_NUMERIC));
+		WCOM_REGEX_NUMERIC));
 	
 	// prepare mime types
 	$mime_types = array(
@@ -156,7 +156,7 @@ try {
 	$FORM->applyFilter('change_delimiter', 'trim');
 	$FORM->applyFilter('change_delimiter', 'strip_tags');
 	$FORM->addRule('change_delimiter', gettext('The field whether to change the delimiver accepts only 0 or 1'),
-		'regex', OAK_REGEX_ZERO_OR_ONE);
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update global template'),
@@ -189,23 +189,23 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 	    
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
 		// display the form
-		define("OAK_GLOBALTEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('templating/globaltemplates_edit.html', OAK_GLOBALTEMPLATE_KEY);
+		define("WCOM_GLOBALTEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('templating/globaltemplates_edit.html', WCOM_GLOBALTEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

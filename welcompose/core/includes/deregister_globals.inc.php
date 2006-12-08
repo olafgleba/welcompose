@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: deregister_globals.inc.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,11 +18,11 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-function oak_deregister_globals ()
+function wcom_deregister_globals ()
 {
 	// if register_globals is disabled, there's
 	// nothing to do
@@ -69,6 +69,6 @@ function oak_deregister_globals ()
 }
 
 // call the function
-oak_deregister_globals();
+wcom_deregister_globals();
 
 ?>

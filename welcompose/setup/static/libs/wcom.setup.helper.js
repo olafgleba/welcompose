@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.setup.helper.js
+ * Project: Welcompose
+ * File: wcom.setup.helper.js
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -12,11 +12,11 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.helper.js 654 2006-11-21 16:24:40Z olaf $
+ * $Id: wcom.helper.js 654 2006-11-21 16:24:40Z olaf $
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
@@ -25,7 +25,7 @@
  * It contains functions that may be used application wide.
  * 
  * @author Olaf Gleba og@creatics.de
- * @version $Id: oak.helper.js 654 2006-11-21 16:24:40Z olaf $ 
+ * @version $Id: wcom.helper.js 654 2006-11-21 16:24:40Z olaf $ 
  */
 
 

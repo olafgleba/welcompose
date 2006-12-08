@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: templateset.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addTemplateSet ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -92,10 +92,10 @@ public function addTemplateSet ($sqlData)
 	}
 	
 	// make sure that the new template set will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
 	
 	// test if template set belongs to current user/project
 	if (!$this->templateSetBelongsToCurrentUser($insert_id)) {
@@ -118,7 +118,7 @@ public function addTemplateSet ($sqlData)
 public function updateTemplateSet ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -141,11 +141,11 @@ public function updateTemplateSet ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_TEMPLATING_TEMPLATE_SETS, $sqlData,
+	return $this->base->db->update(WCOM_DB_TEMPLATING_TEMPLATE_SETS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -161,7 +161,7 @@ public function updateTemplateSet ($id, $sqlData)
 public function deleteTemplateSet ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Manage')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -181,11 +181,11 @@ public function deleteTemplateSet ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATE_SETS,	
+	return $this->base->db->delete(WCOM_DB_TEMPLATING_TEMPLATE_SETS,	
 		$where, $bind_params);
 }
 
@@ -200,7 +200,7 @@ public function deleteTemplateSet ($id)
 public function selectTemplateSet ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -220,7 +220,7 @@ public function selectTemplateSet ($id)
 			`templating_template_sets`.`name` AS `name`,
 			`templating_template_sets`.`description` AS `description`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE 
 			`templating_template_sets`.`id` = :id
 		  AND
@@ -232,7 +232,7 @@ public function selectTemplateSet ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -257,7 +257,7 @@ public function selectTemplateSet ($id)
 public function selectTemplateSets ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -291,14 +291,14 @@ public function selectTemplateSets ($params = array())
 			`templating_template_sets`.`name` AS `name`,
 			`templating_template_sets`.`description` AS `description`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE
 			`templating_template_sets`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -326,7 +326,7 @@ public function selectTemplateSets ($params = array())
 public function templateSetBelongsToCurrentProject ($set)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -340,7 +340,7 @@ public function templateSetBelongsToCurrentProject ($set)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE
 			`templating_template_sets`.`id` = :set
 		  AND
@@ -350,7 +350,7 @@ public function templateSetBelongsToCurrentProject ($set)
 	// prepare bind params
 	$bind_params = array(
 		'set' => (int)$set,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -372,7 +372,7 @@ public function templateSetBelongsToCurrentProject ($set)
 public function templateSetBelongsToCurrentUser ($template_set)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -387,7 +387,7 @@ public function templateSetBelongsToCurrentUser ($template_set)
 	if (!$this->templateSetBelongsToCurrentProject($template_set)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -410,7 +410,7 @@ public function templateSetBelongsToCurrentUser ($template_set)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateSet', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateSet', 'Use')) {
 		throw new Templating_TemplateSetException("You are not allowed to perform this action");
 	}
 	
@@ -430,7 +430,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
+			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
 		WHERE
 			`project` = :project
 		  AND
@@ -439,7 +439,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: tag.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -211,18 +211,18 @@ protected function addTag ($object, $tag)
 	// check if tag already exists
 	if ($this->tag_exists($tag) === false) {
 		// create "first char" 
-		$word = preg_replace(OAK_REGEX_TAG_FIRST_CHAR_CLEANUP, null, strtolower($tag));
+		$word = preg_replace(WCOM_REGEX_TAG_FIRST_CHAR_CLEANUP, null, strtolower($tag));
 		$first_char = substr($word, 0, 1);
 		
 		// create tag
 		$data = array(
-			'project' => OAK_CURRENT_PROJECT,
+			'project' => WCOM_CURRENT_PROJECT,
 			'first_char' => $first_char,
 			'word' => $tag,
 			'word_url' => $HELPER->createMeaningfulString($tag),
 			'occurrences' => 1
 		);
-		$tag_id = $this->base->db->insert(OAK_DB_MEDIA_TAGS, $data);
+		$tag_id = $this->base->db->insert(WCOM_DB_MEDIA_TAGS, $data);
 		
 		// create link between object and tag
 		$this->addLink($object, $tag_id);
@@ -273,7 +273,7 @@ protected function updateTag ($object, $tag, $modify_amount = 'increase')
 				// increment the occurrences
 				$sql = "
 					UPDATE
-						".OAK_DB_MEDIA_TAGS."
+						".WCOM_DB_MEDIA_TAGS."
 					SET
 						`occurrences` = `occurrences` + 1
 					WHERE
@@ -285,7 +285,7 @@ protected function updateTag ($object, $tag, $modify_amount = 'increase')
 				// pepare bind params
 				$bind_params = array(
 					'id' => $tag_id,
-					'project' => OAK_CURRENT_PROJECT
+					'project' => WCOM_CURRENT_PROJECT
 				);
 				
 				// execute query				
@@ -301,7 +301,7 @@ protected function updateTag ($object, $tag, $modify_amount = 'increase')
 				// decrement the occurrences
 				$sql = "
 					UPDATE
-						".OAK_DB_MEDIA_TAGS."
+						".WCOM_DB_MEDIA_TAGS."
 					SET
 						`occurrences` = `occurrences` - 1
 					WHERE
@@ -313,7 +313,7 @@ protected function updateTag ($object, $tag, $modify_amount = 'increase')
 				// pepare bind params
 				$bind_params = array(
 					'id' => $tag_id,
-					'project' => OAK_CURRENT_PROJECT
+					'project' => WCOM_CURRENT_PROJECT
 				);
 				
 				// execute query
@@ -362,7 +362,7 @@ protected function deleteTag ($object, $tag)
 		
 		// run cleanup to remove tags with occurrences = 0
 		$where = " WHERE `occurrences` < 1 AND `project` = :project ";
-		$this->base->db->delete('media_tags', $where, array('project' => OAK_CURRENT_PROJECT));
+		$this->base->db->delete('media_tags', $where, array('project' => WCOM_CURRENT_PROJECT));
 		
 		// remove link between tag and object
 		$this->deleteLink($object, $tag_id);
@@ -396,7 +396,7 @@ public function selectTag ($id)
 			`media_tags`.`word_url` AS `word_url`,
 			`media_tags`.`occurrences` AS `occurrences`
 		FROM
-			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+			".WCOM_DB_MEDIA_TAGS." AS `media_tags`
 		WHERE
 			`media_tags`.`id` = :id
 		  AND
@@ -408,7 +408,7 @@ public function selectTag ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => $id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -491,13 +491,13 @@ public function selectTags ($params = array())
 			`media_tags`.`word_url` AS `word_url`,
 			`media_tags`.`occurrences` AS `occurrences`
 		FROM
-			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+			".WCOM_DB_MEDIA_TAGS." AS `media_tags`
 		JOIN
-			".OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_tags2media_objects`
+			".WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_tags2media_objects`
 		  ON
 			`media_tags`.`id` = `media_tags2media_objects`.`tag`
 		JOIN
-			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
+			".WCOM_DB_MEDIA_OBJECTS." AS `media_objects`
 		  ON
 			`media_tags2media_objects`.`object` = `media_objects`.`id`
 		WHERE
@@ -506,7 +506,7 @@ public function selectTags ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -558,7 +558,7 @@ public function tag_exists ($tag)
 		SELECT
 			`media_tags`.`id`
 		FROM
-			".OAK_DB_MEDIA_TAGS." AS `media_tags`
+			".WCOM_DB_MEDIA_TAGS." AS `media_tags`
 		WHERE
 			`media_tags`.`word` = :word
 		  AND
@@ -569,7 +569,7 @@ public function tag_exists ($tag)
 	// prepare bind params
 	$bind_params = array(
 		'word' => $tag,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query an return tag id
@@ -608,9 +608,9 @@ public function link_exists ($object, $tag)
 		SELECT
 			`media_tags2media_objects`.`id` AS `id`
 		FROM
-			".OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_tags2media_objects`
+			".WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS." AS `media_tags2media_objects`
 		JOIN
-			".OAK_DB_MEDIA_OBJECTS." AS `media_objects`
+			".WCOM_DB_MEDIA_OBJECTS." AS `media_objects`
 		  ON
 			`media_tags2media_objects`.`object` = `media_objects`.`id`
 		WHERE
@@ -626,7 +626,7 @@ public function link_exists ($object, $tag)
 	$bind_params = array(
 		'object' => $object,
 		'tag' => $tag,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// get the entry
@@ -671,7 +671,7 @@ protected function addLink ($object, $tag)
 			'tag' => (int)$tag
 		);
 		// add link
-		$link = $this->base->db->insert(OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS, $data);
+		$link = $this->base->db->insert(WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS, $data);
 	}
 	
 	// return link id
@@ -711,7 +711,7 @@ protected function deleteLink ($object, $tag)
 		);
 			
 		// delete entry
-		$this->base->db->delete(OAK_DB_MEDIA_OBJECTS2MEDIA_TAGS,
+		$this->base->db->delete(WCOM_DB_MEDIA_OBJECTS2MEDIA_TAGS,
 			$where, $bind_params);
 	}
 	

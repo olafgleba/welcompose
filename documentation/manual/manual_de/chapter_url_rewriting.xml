@@ -5,7 +5,7 @@
 	<title>URL Rewriting</title>
 	
 	<para>
-		Standardmässig verwendet Oak parameterisierte URLs, um die
+		Standardmässig verwendet Welcompose parameterisierte URLs, um die
 		Inhalte auszuwählen, die angezeigt werden sollen. Ein typischer
 		URL zum Aufruf einer Seite sieht etwa so aus:
 		<code><![CDATA[index.php?project_name=default&page_name=kontakt&action=Index]]></code>
@@ -15,7 +15,7 @@
 		Diese Form von URLs ist weder besonders benutzer- noch
 		suchmaschinenfreundlich. Um dies zu ändern, muss an zwei Orten
 		die Hand angelegt werden: Einmal am Webserver und einmal in der
-		Konfiguration von Oak. Dabei werden die parameterisierten URLs
+		Konfiguration von Welcompose. Dabei werden die parameterisierten URLs
 		quasi auf Verzeichnisse und Dateinamen abgebildet, auch wenn
 		diese gar nicht existieren. 
 	</para>
@@ -45,7 +45,7 @@
 	</para>
 	
 	<para>
-		Oak selber muss dazu angewiesen werden, URLs mit dem korrekten
+		Welcompose selber muss dazu angewiesen werden, URLs mit dem korrekten
 		Format zu erzeugen. Dies kann über einige wenige Zeilen in der
 		Systemkonfiguration erledigt werden. 
 	</para>
@@ -58,7 +58,7 @@
 			Das heisst, dass man es den eigenen Wünschen anpassen kann,
 			solange alle Parameter irgendwo in der URL untergebracht
 			werden können. Zudem kann der Parameter project_name weggelassen
-			werden, wenn Oak nur ein einzelnes Projekt betreiben soll. 
+			werden, wenn Welcompose nur ein einzelnes Projekt betreiben soll. 
 			Es verwendet dann automatisch das Standard-Projekt.  
 		</para>
 		
@@ -76,7 +76,7 @@
 		 		</footnote>
 		 		bereitgestellt. Konfiguriert werden kann das URL
 		 		Rewriting in der Server-Konfigurationsdatei httpd.conf
-		 		oder im jeweiligen Installationsordner von Oak in einer
+		 		oder im jeweiligen Installationsordner von Welcompose in einer
 		 		Datei namens
 		 		<filename>.htaccess</filename>.
 		 	</para>

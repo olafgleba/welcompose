@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pingserviceconfiguration.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -85,7 +85,7 @@ public function instance()
 public function addPingServiceConfiguration ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -95,7 +95,7 @@ public function addPingServiceConfiguration ($sqlData)
 	}
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
+	$insert_id = $this->base->db->insert(WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 		$sqlData);
 		
 	// test if ping service configuration belongts to current project/user
@@ -122,7 +122,7 @@ public function addPingServiceConfiguration ($sqlData)
 public function updatePingServiceConfiguration ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -149,7 +149,7 @@ public function updatePingServiceConfiguration ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
+	return $this->base->db->update(WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 		$sqlData, $where, $bind_params);	
 }
 
@@ -165,7 +165,7 @@ public function updatePingServiceConfiguration ($id, $sqlData)
 public function deletePingServiceConfiguration ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -189,7 +189,7 @@ public function deletePingServiceConfiguration ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
+	return $this->base->db->delete(WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS,
 			$where, $bind_params);
 }
 
@@ -205,7 +205,7 @@ public function deletePingServiceConfiguration ($id)
 public function selectPingServiceConfiguration ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Use')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -232,9 +232,9 @@ public function selectPingServiceConfiguration ($id)
 			`application_ping_service_configurations`.`site_index` AS `site_index`,
 			`application_ping_service_configurations`.`site_feed` AS `site_feed`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+			".WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
 		JOIN
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+			".WCOM_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
@@ -248,7 +248,7 @@ public function selectPingServiceConfiguration ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -276,7 +276,7 @@ public function selectPingServiceConfiguration ($id)
 public function selectPingServiceConfigurations ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Use')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -322,9 +322,9 @@ public function selectPingServiceConfigurations ($params = array())
 			`application_ping_service_configurations`.`site_index` AS `site_index`,
 			`application_ping_service_configurations`.`site_feed` AS `site_feed`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+			".WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
 		JOIN
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+			".WCOM_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
@@ -333,7 +333,7 @@ public function selectPingServiceConfigurations ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -378,7 +378,7 @@ public function selectPingServiceConfigurations ($params = array())
 public function countPingServiceConfigurations ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Use')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -409,9 +409,9 @@ public function countPingServiceConfigurations ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+			".WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
 		JOIN
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+			".WCOM_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
@@ -420,7 +420,7 @@ public function countPingServiceConfigurations ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -447,7 +447,7 @@ public function countPingServiceConfigurations ($params = array())
 public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_configuration)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Use')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
 		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
 	}
 	
@@ -462,9 +462,9 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
+			".WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS." AS `application_ping_service_configurations`
 		JOIN
-			".OAK_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
+			".WCOM_DB_APPLICATION_PING_SERVICES." AS `application_ping_services`
 		  ON
 			`application_ping_service_configurations`.`ping_service` = `application_ping_services`.`id`
 		WHERE 
@@ -476,7 +476,7 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
 	// prepare bind params
 	$bind_params = array(
 		'ping_service_configuration' => (int)$ping_service_configuration,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -498,7 +498,7 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
 public function pingServiceConfigurationBelongsToCurrentUser ($ping_service_configuration)
 {
 	// access check
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Use')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -514,7 +514,7 @@ public function pingServiceConfigurationBelongsToCurrentUser ($ping_service_conf
 	if (!$this->pingServiceConfigurationBelongsToCurrentProject($ping_service_configuration)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

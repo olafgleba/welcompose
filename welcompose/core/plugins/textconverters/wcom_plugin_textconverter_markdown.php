@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Project: Oak_Plugins
- * File: oak_plugin_textconverter_markdown.php
+ * Project: Welcompose_Plugins
+ * File: wcom_plugin_textconverter_markdown.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak_Plugins
+ * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -29,7 +29,7 @@
  * @param string String to convert
  * @return string
  */
-function oak_plugin_textconverter_markdown ($str)
+function wcom_plugin_textconverter_markdown ($str)
 {
 	// input check
 	if (!is_scalar($str)) {

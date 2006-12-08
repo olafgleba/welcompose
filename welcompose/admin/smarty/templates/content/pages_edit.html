@@ -7,9 +7,9 @@
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Oak Admin &ndash; Edit Page Metadata}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.admin.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/oak.pagemanager.css" media="screen, projection" />
+<title>{i18n Welcompose Admin &ndash; Edit Page Metadata}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
  
 <script type="text/javascript">
 var response = '{$session.response}';
@@ -18,10 +18,10 @@ var response = '{$session.response}';
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=oak.strings.js"></script>
-<script type="text/javascript" src="../static/libs/oak.core.js"></script>
-<script type="text/javascript" src="../static/libs/oak.helper.js"></script>
-<script type="text/javascript" src="../static/libs/oak.events.standard.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
 </head>
 
@@ -29,7 +29,7 @@ var response = '{$session.response}';
 <div id="container">
 
 <div id="logo">
-<p>{i18n Oak}</p>
+<p>{i18n Welcompose}</p>
 <!-- logo --></div>
 
 <div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
@@ -49,44 +49,44 @@ var response = '{$session.response}';
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-{if $page.page_type_name == 'OAK_SIMPLE_PAGE'}
-	{if oak_check_access('Content', 'Page', 'Manage')}
+{if $page.page_type_name == 'WCOM_SIMPLE_PAGE'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li class="on">{i18n Metadata}</li>
 	{/if}
-	{if oak_check_access('Content', 'SimplePage', 'Manage')}
+	{if wcom_check_access('Content', 'SimplePage', 'Manage')}
 		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
 	{/if}
-	{if oak_check_access('Content', 'Box', 'Manage')}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 	{/if}
-{elseif $page.page_type_name == 'OAK_BLOG'}
-	{if oak_check_access('Content', 'Page', 'Manage')}
+{elseif $page.page_type_name == 'WCOM_BLOG'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li class="on">{i18n Metadata}</li>
 	{/if}
-	{if oak_check_access('Content', 'BlogPosting', 'Manage')}
+	{if wcom_check_access('Content', 'BlogPosting', 'Manage')}
 		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 	{/if}
-	{if oak_check_access('Content', 'Box', 'Manage')}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 	{/if}
-	{if oak_check_access('Application', 'PingServiceConfiguration', 'Manage')}
+	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
 		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
 	{/if}
-{elseif $page.page_type_name == 'OAK_URL'}
-	{if oak_check_access('Content', 'Page', 'Manage')}
+{elseif $page.page_type_name == 'WCOM_URL'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li class="on">{i18n Metadata}</li>
 	{/if}
-	{if oak_check_access('Content', 'Page', 'Manage')}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li><a href="pages_urls_content_edit.php?id={$page.id|escape:"url"}">{i18n URL Page}<span></span></a></li>
 	{/if}
-{elseif $page.page_type_name == 'OAK_SIMPLE_FORM'}
-	{if oak_check_access('Content', 'Page', 'Manage')}
+{elseif $page.page_type_name == 'WCOM_SIMPLE_FORM'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li class="on">{i18n Metadata}</li>
 	{/if}
-	{if oak_check_access('Content', 'SimpleForm', 'Manage')}
+	{if wcom_check_access('Content', 'SimpleForm', 'Manage')}
 		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
 	{/if}
-	{if oak_check_access('Content', 'Box', 'Manage')}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 	{/if}
 {/if}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: templatetype.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addTemplateType ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addTemplateType ($sqlData)
 	}
 	
 	// make sure that the new template type will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 	
 	// test if template type belongs to current user/project
 	if (!$this->templateTypeBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addTemplateType ($sqlData)
 public function updateTemplateType ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -142,11 +142,11 @@ public function updateTemplateType ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData,
+	return $this->base->db->update(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -162,7 +162,7 @@ public function updateTemplateType ($id, $sqlData)
 public function deleteTemplateType ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Manage')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Manage')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -182,11 +182,11 @@ public function deleteTemplateType ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATE_TYPES,	
+	return $this->base->db->delete(WCOM_DB_TEMPLATING_TEMPLATE_TYPES,	
 		$where, $bind_params);
 }
 
@@ -201,7 +201,7 @@ public function deleteTemplateType ($id)
 public function selectTemplateType ($id)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -222,7 +222,7 @@ public function selectTemplateType ($id)
 			`templating_template_types`.`description` AS `description`,
 			`templating_template_types`.`editable` AS `editable`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		WHERE 
 			`templating_template_types`.`id` = :id
 		  AND
@@ -234,7 +234,7 @@ public function selectTemplateType ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -259,7 +259,7 @@ public function selectTemplateType ($id)
 public function selectTemplateTypes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -294,14 +294,14 @@ public function selectTemplateTypes ($params = array())
 			`templating_template_types`.`description` AS `description`,
 			`templating_template_types`.`editable` AS `editable`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		WHERE 
 			`templating_template_types`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add sorting
@@ -329,7 +329,7 @@ public function selectTemplateTypes ($params = array())
 public function templateTypeBelongsToCurrentProject ($type)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -343,7 +343,7 @@ public function templateTypeBelongsToCurrentProject ($type)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		WHERE
 			`templating_template_types`.`id` = :type
 		  AND
@@ -353,7 +353,7 @@ public function templateTypeBelongsToCurrentProject ($type)
 	// prepare bind params
 	$bind_params = array(
 		'type' => (int)$type,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -375,7 +375,7 @@ public function templateTypeBelongsToCurrentProject ($type)
 public function templateTypeBelongsToCurrentUser ($template_type)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -390,7 +390,7 @@ public function templateTypeBelongsToCurrentUser ($template_type)
 	if (!$this->templateTypeBelongsToCurrentProject($template_type)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -412,7 +412,7 @@ public function templateTypeBelongsToCurrentUser ($template_type)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Templating', 'TemplateType', 'Use')) {
+	if (!wcom_check_access('Templating', 'TemplateType', 'Use')) {
 		throw new Templating_TemplateTypeException("You are not allowed to perform this action");
 	}
 	
@@ -432,7 +432,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
 		WHERE
 			`project` = :project
 		  AND
@@ -441,7 +441,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	

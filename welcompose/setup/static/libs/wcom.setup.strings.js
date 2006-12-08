@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.setup.strings.js
+ * Project: Welcompose
+ * File: wcom.setup.strings.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,11 +12,11 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.strings.js 623 2006-11-17 07:29:27Z olaf $
+ * $Id: wcom.strings.js 623 2006-11-17 07:29:27Z olaf $
  *
  * @copyright 2004-2005 sopic GmbH
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 

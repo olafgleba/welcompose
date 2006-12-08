@@ -2,41 +2,41 @@
 <skeleton>
 	<users>
 		<user>
-			<email>default@oak.local</email>
+			<email>default@wcom.local</email>
 			<secret>UXanocuwh2u2I</secret>
 			<editable>1</editable>
 			<active>1</active>
 			<author>1</author>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</user>
 		<user>
-			<email>OAK_ANONYMOUS</email>
+			<email>WCOM_ANONYMOUS</email>
 			<secret/>
 			<editable>0</editable>
 			<active>1</active>
 			<author>0</author>
 			<groups>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</user>
 	</users>
 	<groups>
 		<group>
-			<name>OAK_ADMIN</name>
+			<name>WCOM_ADMIN</name>
 			<description>Group for super users that can do everything.</description>
 			<editable>0</editable>
 			<creator_group>1</creator_group>
 		</group>
 		<group>
-			<name>OAK_REGULAR</name>
+			<name>WCOM_REGULAR</name>
 			<description>Group for regular users that are allowed to edit pages and to perform certain administrative tasks like blog comment moderation.</description>
 			<editable>0</editable>
 			<creator_group>0</creator_group>
 		</group>
 		<group>
-			<name>OAK_ANONYMOUS</name>
+			<name>WCOM_ANONYMOUS</name>
 			<description>Group for anonymous users that are only allowed to access the public area of the website.</description> 
 			<editable>0</editable>
 			<creator_group>0</creator_group>
@@ -48,8 +48,8 @@
 			<description>Allows usage of ping services.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -57,7 +57,7 @@
 			<description>Allows management of ping services.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -65,8 +65,8 @@
 			<description>Allows usage of ping service configurations.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -74,7 +74,7 @@
 			<description>Allows management of ping service configurations.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -82,9 +82,9 @@
 			<description>Allows usage of text projects.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -92,7 +92,7 @@
 			<description>Allows management of text projects.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -100,9 +100,9 @@
 			<description>Allows usage of text converters.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -110,7 +110,7 @@
 			<description>Allows management of text converters.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -118,8 +118,8 @@
 			<description>Allows usage of text macros.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -127,7 +127,7 @@
 			<description>Allows management of text macros.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -135,9 +135,9 @@
 			<description>Allows usage of anti spam plug-ins.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -145,7 +145,7 @@
 			<description>Allows management of anti spam plug-ins.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -153,9 +153,9 @@
 			<description>Allows usage of blog comment statuses.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -163,7 +163,7 @@
 			<description>Allows management of blog comment statuses.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -171,9 +171,9 @@
 			<description>Allows usage of blog comments.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -181,8 +181,8 @@
 			<description>Allows management of blog comments.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -190,9 +190,9 @@
 			<description>Allows usage of community settings.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -200,7 +200,7 @@
 			<description>Allows management of community settings.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -208,9 +208,9 @@
 			<description>Allows usage of podcasts.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -218,8 +218,8 @@
 			<description>Allows management of podcasts.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -227,9 +227,9 @@
 			<description>Allows usage of podcast categories.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -237,7 +237,7 @@
 			<description>Allows management of podcast categories.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -245,9 +245,9 @@
 			<description>Allows usage of blog postings.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -255,8 +255,8 @@
 			<description>Allows management of blog postings.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -264,9 +264,9 @@
 			<description>Allows usage of boxes.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -274,8 +274,8 @@
 			<description>Allows management of boxes.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -283,9 +283,9 @@
 			<description>Allows usage of global boxes.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -293,8 +293,8 @@
 			<description>Allows management of global boxes.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -302,9 +302,9 @@
 			<description>Allows usage of navigations.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -312,8 +312,8 @@
 			<description>Allows management of navigations.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -321,9 +321,9 @@
 			<description>Allows usage of pages.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -331,8 +331,8 @@
 			<description>Allows management of pages.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -340,9 +340,9 @@
 			<description>Allows usage of page types.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -350,7 +350,7 @@
 			<description>Allows management of page types.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -358,9 +358,9 @@
 			<description>Allows usage of simple forms.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -368,8 +368,8 @@
 			<description>Allows management of simple forms.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -377,9 +377,9 @@
 			<description>Allows usage of simple pages.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -387,8 +387,8 @@
 			<description>Allows management of simple pages.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -396,7 +396,7 @@
 			<description>Allows management of structural templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -404,8 +404,8 @@
 			<description>Allows usage of structural templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -413,9 +413,9 @@
 			<description>Allows usage of media objects.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -423,8 +423,8 @@
 			<description>Allows management of media objects.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>
@@ -432,9 +432,9 @@
 			<description>Allows usage of global files.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -442,7 +442,7 @@
 			<description>Allows management of global files.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -450,9 +450,9 @@
 			<description>Allows usage of global templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -460,7 +460,7 @@
 			<description>Allows management of global templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -468,9 +468,9 @@
 			<description>Allows usage of templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -478,7 +478,7 @@
 			<description>Allows management of templates.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -486,9 +486,9 @@
 			<description>Allows usage of template sets.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -496,7 +496,7 @@
 			<description>Allows management of template sets.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -504,9 +504,9 @@
 			<description>Allows usage of template types.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -514,7 +514,7 @@
 			<description>Allows management of template types.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -522,9 +522,9 @@
 			<description>Allows usage of user groups.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -532,7 +532,7 @@
 			<description>Allows management of user groups.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -540,9 +540,9 @@
 			<description>Allows usage of user rights.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -550,7 +550,7 @@
 			<description>Allows management of user rights.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 		<right>
@@ -558,9 +558,9 @@
 			<description>Allows usage of users.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
-				<name>OAK_REGULAR</name>
-				<name>OAK_ANONYMOUS</name>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>
@@ -568,28 +568,28 @@
 			<description>Allows management of users.</description>
 			<editable>0</editable>
 			<groups>
-				<name>OAK_ADMIN</name>
+				<name>WCOM_ADMIN</name>
 			</groups>
 		</right>
 	</rights>
 	<page-types>
 		<page-type>
-			<name>OAK_BLOG</name>
+			<name>WCOM_BLOG</name>
 			<internal_name>Blog</internal_name>
 			<editable>0</editable>
 		</page-type>
 		<page-type>
-			<name>OAK_SIMPLE_PAGE</name>
+			<name>WCOM_SIMPLE_PAGE</name>
 			<internal_name>SimplePage</internal_name>
 			<editable>0</editable>
 		</page-type>
 		<page-type>
-			<name>OAK_SIMPLE_FORM</name>
+			<name>WCOM_SIMPLE_FORM</name>
 			<internal_name>SimpleForm</internal_name>
 			<editable>0</editable>
 		</page-type>
 		<page-type>
-			<name>OAK_URL</name>
+			<name>WCOM_URL</name>
 			<internal_name>Url</internal_name>
 			<editable>0</editable>
 		</page-type>

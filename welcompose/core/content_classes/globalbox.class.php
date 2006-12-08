@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: globalbox.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addGlobalBox ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Manage')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Manage')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addGlobalBox ($sqlData)
 	}
 	
 	// make sure that the new global box will be linked to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_GLOBAL_BOXES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_GLOBAL_BOXES, $sqlData);
 	
 	// test if global box belongs tu current user/project
 	if (!$this->globalBoxBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addGlobalBox ($sqlData)
 public function updateGlobalBox ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Manage')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Manage')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -142,11 +142,11 @@ public function updateGlobalBox ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_GLOBAL_BOXES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_GLOBAL_BOXES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -161,7 +161,7 @@ public function updateGlobalBox ($id, $sqlData)
 public function deleteGlobalBox ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Manage')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Manage')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -181,11 +181,11 @@ public function deleteGlobalBox ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_GLOBAL_BOXES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_GLOBAL_BOXES, $where, $bind_params);
 }
 
 /**
@@ -199,7 +199,7 @@ public function deleteGlobalBox ($id)
 public function selectGlobalBox ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -225,7 +225,7 @@ public function selectGlobalBox ($id)
 			`content_global_boxes`.`date_modified` AS `date_modified`,
 			`content_global_boxes`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
+			".WCOM_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
 		WHERE
 			`content_global_boxes`.`id` = :id
 		  AND
@@ -237,7 +237,7 @@ public function selectGlobalBox ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => $id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -271,7 +271,7 @@ public function selectGlobalBox ($id)
 public function selectGlobalBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -326,14 +326,14 @@ public function selectGlobalBoxes ($params = array())
 			`content_global_boxes`.`date_modified` AS `date_modified`,
 			`content_global_boxes`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
+			".WCOM_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
 		WHERE
 			`content_global_boxes`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT 
+		'project' => WCOM_CURRENT_PROJECT 
 	);
 	
 	// add sorting
@@ -370,7 +370,7 @@ public function selectGlobalBoxes ($params = array())
 public function countGlobalBoxes ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -395,14 +395,14 @@ public function countGlobalBoxes ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
+			".WCOM_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
 		WHERE
 			`content_global_boxes`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
@@ -423,7 +423,7 @@ public function countGlobalBoxes ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -443,7 +443,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
+			".WCOM_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
 		WHERE
 			`project` = :project
 		  AND
@@ -452,7 +452,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -481,7 +481,7 @@ public function testForUniqueName ($name, $id = null)
 public function globalBoxBelongsToCurrentProject ($global_box)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -495,7 +495,7 @@ public function globalBoxBelongsToCurrentProject ($global_box)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
+			".WCOM_DB_CONTENT_GLOBAL_BOXES." AS `content_global_boxes`
 		WHERE
 			`content_global_boxes`.`id` = :box
 		  AND
@@ -505,7 +505,7 @@ public function globalBoxBelongsToCurrentProject ($global_box)
 	// prepare bind params
 	$bind_params = array(
 		'box' => (int)$global_box,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -527,7 +527,7 @@ public function globalBoxBelongsToCurrentProject ($global_box)
 public function globalBoxBelongsToCurrentUser ($global_box)
 {
 	// access check
-	if (!oak_check_access('Content', 'GlobalBox', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Use')) {
 		throw new Content_GlobalBoxException("You are not allowed to perform this action");
 	}
 	
@@ -542,7 +542,7 @@ public function globalBoxBelongsToCurrentUser ($global_box)
 	if (!$this->globalBoxBelongsToCurrentProject($global_box)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

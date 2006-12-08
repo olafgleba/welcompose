@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: smarty_public.inc.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -35,7 +35,7 @@
  * @param string Method name
  * @param bool 
  */
-function oak_smarty_select_whitelist ($ns, $class, $method)
+function wcom_smarty_select_whitelist ($ns, $class, $method)
 {
 	// configure white list
 	$whitelist = array(
@@ -64,15 +64,15 @@ if (!defined('SMARTY_TPL_DIR')) {
 	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../../smarty/'));
 }
 
-// load the oak resource plugins
-require_once(SMARTY_DIR.'software_extensions/resource.oak.php');
+// load the wcom resource plugins
+require_once(SMARTY_DIR.'software_extensions/resource.wcom.php');
 $resource_functions = array(
 	"oakresource_FetchTemplate",
 	"oakresource_FetchTimestamp",
 	"oakresource_isSecure",
 	"oakresource_isTrusted"
 );
-$smarty->register_resource("oak", $resource_functions);
+$smarty->register_resource("wcom", $resource_functions);
 unset($resource_functions);
 
 require_once(SMARTY_DIR.'software_extensions/resource.oakgtpl.php');

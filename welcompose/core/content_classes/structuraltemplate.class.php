@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: structuraltemplate.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -84,7 +84,7 @@ public function instance()
 public function addStructuralTemplate ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Manage')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Manage')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -94,10 +94,10 @@ public function addStructuralTemplate ($sqlData)
 	}
 	
 	// make sure that the new structural template will be linked to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_STRUCTURAL_TEMPLATES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES, $sqlData);
 	
 	// test if structural template belongs tu current user/project
 	if (!$this->structuralTemplateBelongsToCurrentUser($insert_id)) {
@@ -120,7 +120,7 @@ public function addStructuralTemplate ($sqlData)
 public function updateStructuralTemplate ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Manage')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Manage')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -143,11 +143,11 @@ public function updateStructuralTemplate ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_CONTENT_STRUCTURAL_TEMPLATES, $sqlData,
+	return $this->base->db->update(WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -163,7 +163,7 @@ public function updateStructuralTemplate ($id, $sqlData)
 public function deleteStructuralTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Manage')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Manage')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -183,11 +183,11 @@ public function deleteStructuralTemplate ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_CONTENT_STRUCTURAL_TEMPLATES, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES, $where, $bind_params);
 }
 
 /**
@@ -202,7 +202,7 @@ public function deleteStructuralTemplate ($id)
 public function selectStructuralTemplate ($id)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -225,7 +225,7 @@ public function selectStructuralTemplate ($id)
 			`content_structural_templates`.`date_modified` AS `date_modified`,
 			`content_structural_templates`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
+			".WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
 		WHERE
 			`content_structural_templates`.`id` = :id
 		  AND
@@ -237,7 +237,7 @@ public function selectStructuralTemplate ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => $id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -270,7 +270,7 @@ public function selectStructuralTemplate ($id)
 public function selectStructuralTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -321,14 +321,14 @@ public function selectStructuralTemplates ($params = array())
 			`content_structural_templates`.`date_modified` AS `date_modified`,
 			`content_structural_templates`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
+			".WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
 		WHERE
 			`content_structural_templates`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT 
+		'project' => WCOM_CURRENT_PROJECT 
 	);
 	
 	// add sorting
@@ -365,7 +365,7 @@ public function selectStructuralTemplates ($params = array())
 public function countStructuralTemplates ($params = array())
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -390,14 +390,14 @@ public function countStructuralTemplates ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
+			".WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
 		WHERE
 			`content_structural_templates`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
@@ -418,7 +418,7 @@ public function countStructuralTemplates ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -438,7 +438,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
+			".WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
 		WHERE
 			`project` = :project
 		  AND
@@ -447,7 +447,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -476,7 +476,7 @@ public function testForUniqueName ($name, $id = null)
 public function structuralTemplateBelongsToCurrentProject ($structural_template)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -490,7 +490,7 @@ public function structuralTemplateBelongsToCurrentProject ($structural_template)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
+			".WCOM_DB_CONTENT_STRUCTURAL_TEMPLATES." AS `content_structural_templates`
 		WHERE
 			`content_structural_templates`.`id` = :template
 		  AND
@@ -500,7 +500,7 @@ public function structuralTemplateBelongsToCurrentProject ($structural_template)
 	// prepare bind params
 	$bind_params = array(
 		'template' => (int)$structural_template,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -522,7 +522,7 @@ public function structuralTemplateBelongsToCurrentProject ($structural_template)
 public function structuralTemplateBelongsToCurrentUser ($structural_template)
 {
 	// access check
-	if (!oak_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Content_StructuralTemplateException("You are not allowed to perform this action");
 	}
 	
@@ -537,7 +537,7 @@ public function structuralTemplateBelongsToCurrentUser ($structural_template)
 	if (!$this->structuralTemplateBelongsToCurrentProject($structural_template)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

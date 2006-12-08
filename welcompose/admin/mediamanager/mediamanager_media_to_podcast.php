@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: mediamanager_media_to_podcast.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -91,23 +91,23 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Media', 'Object', 'Manage')) {
+	if (!wcom_check_access('Media', 'Object', 'Manage')) {
 		throw new Exception("Access denied");
 	}
-	if (!oak_check_access('Content', 'BlogPodcast', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPodcast', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// assign paths
-	$BASE->utility->smarty->assign('oak_admin_root_www',
-		$BASE->_conf['path']['oak_admin_root_www']);
+	$BASE->utility->smarty->assign('wcom_admin_root_www',
+		$BASE->_conf['path']['wcom_admin_root_www']);
 	
 	// assign current user and project id
-	$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-	$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 	try {
 		// start transaction

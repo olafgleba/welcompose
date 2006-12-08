@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: textmacro.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addTextMacro ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addTextMacro ($sqlData)
 	}
 	
 	// make sure that the new text macro will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData);
 	
 	// test if macro belongs to current project/user
 	if (!$this->textMacroBelongsToCurrentUser($insert_id)) {
@@ -120,7 +120,7 @@ public function addTextMacro ($sqlData)
 public function updateTextMacro ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -143,11 +143,11 @@ public function updateTextMacro ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData,
+	return $this->base->db->update(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -163,7 +163,7 @@ public function updateTextMacro ($id, $sqlData)
 public function deleteTextMacro ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Manage')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -183,11 +183,11 @@ public function deleteTextMacro ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_TEXT_MACROS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_APPLICATION_TEXT_MACROS, $where, $bind_params);
 }
 
 /**
@@ -201,7 +201,7 @@ public function deleteTextMacro ($id)
 public function selectTextMacro ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -222,7 +222,7 @@ public function selectTextMacro ($id)
 			`application_text_macros`.`internal_name` AS `internal_name`,
 			`application_text_macros`.`type` AS `type`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE 
 			`application_text_macros`.`id` = :id
 		  AND
@@ -234,7 +234,7 @@ public function selectTextMacro ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -261,7 +261,7 @@ public function selectTextMacro ($id)
 public function selectTextMacros ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -312,14 +312,14 @@ public function selectTextMacros ($params = array())
 			`application_text_macros`.`internal_name` AS `internal_name`,
 			`application_text_macros`.`type` AS `type`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE 
 			`application_text_macros`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -357,7 +357,7 @@ public function selectTextMacros ($params = array())
 public function countTextMacros ($params = array())
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -382,14 +382,14 @@ public function countTextMacros ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE 
 			`application_text_macros`.`project` = :project
 	";
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -411,7 +411,7 @@ public function countTextMacros ($params = array())
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -431,7 +431,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE
 			`project` = :project
 		  AND
@@ -440,7 +440,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	
@@ -471,7 +471,7 @@ public function testForUniqueName ($name, $id = null)
 public function applyTextMacros ($text, $stage = "pre")
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -555,13 +555,13 @@ public function applyTextMacros ($text, $stage = "pre")
 			if (empty($_macro['internal_name'])) {
 				throw new Application_TextmacroException("No internal text macro name defined");
 			}
-			if (!preg_match(OAK_REGEX_TEXT_MACRO_INTERNAL_NAME, $_macro['internal_name'])) {
+			if (!preg_match(WCOM_REGEX_TEXT_MACRO_INTERNAL_NAME, $_macro['internal_name'])) {
 				throw new Application_TextmacroException("Internal text macro name is invalid");
 			}
 			
 			// prepare path to text macro
 			$path = $this->base->_conf['plugins']['textmacro_dir'].DIRECTORY_SEPARATOR.
-				"oak_plugin_textmacro_".$_macro['internal_name'].".php";
+				"wcom_plugin_textmacro_".$_macro['internal_name'].".php";
 			
 			if (!file_exists($path)) {
 				throw new Application_TextmacroException("Unable to find text macro plug-in");
@@ -571,7 +571,7 @@ public function applyTextMacros ($text, $stage = "pre")
 			require($path);
 
 			// prepare function name
-			$function_name = sprintf("oak_plugin_textmacro_%s", $_macro['internal_name']);
+			$function_name = sprintf("wcom_plugin_textmacro_%s", $_macro['internal_name']);
 
 			// let's see if the text macro function exists
 			if (!function_exists($function_name)) {
@@ -597,7 +597,7 @@ public function applyTextMacros ($text, $stage = "pre")
 public function textMacroBelongsToCurrentProject ($text_macro)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -611,7 +611,7 @@ public function textMacroBelongsToCurrentProject ($text_macro)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE
 			`application_text_macros`.`id` = :text_macro
 		AND
@@ -621,7 +621,7 @@ public function textMacroBelongsToCurrentProject ($text_macro)
 	// prepare bind params
 	$bind_params = array(
 		'text_macro' => (int)$text_macro,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -643,7 +643,7 @@ public function textMacroBelongsToCurrentProject ($text_macro)
 public function textMacroBelongsToCurrentUser ($text_macro)
 {
 	// access check
-	if (!oak_check_access('Application', 'TextMacro', 'Use')) {
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
 		throw new Application_TextmacroException("You are not allowed to perform this action");
 	}
 	
@@ -658,7 +658,7 @@ public function textMacroBelongsToCurrentUser ($text_macro)
 	if (!$this->textMacroBelongsToCurrentProject($text_macro)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

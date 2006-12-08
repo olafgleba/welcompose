@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: user.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,14 +18,14 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 /**
  * Wrapper for User_User::userCheckAccess();
  */
-function oak_check_access ($area = null, $component = null, $action = null)
+function wcom_check_access ($area = null, $component = null, $action = null)
 {
 	// get instance of user class
 	$USER = User_User::instance();
@@ -95,7 +95,7 @@ public function instance()
 public function addUser ($sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -105,7 +105,7 @@ public function addUser ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_USER_USERS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_USER_USERS, $sqlData);
 }
 
 /**
@@ -121,7 +121,7 @@ public function addUser ($sqlData)
 public function updateUser ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -142,7 +142,7 @@ public function updateUser ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_USER_USERS, $sqlData,
+	return $this->base->db->update(WCOM_DB_USER_USERS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -157,7 +157,7 @@ public function updateUser ($id, $sqlData)
 public function deleteUser ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -175,7 +175,7 @@ public function deleteUser ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_USER_USERS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_USER_USERS, $where, $bind_params);
 }
 
 /**
@@ -189,7 +189,7 @@ public function deleteUser ($id)
 public function selectUser ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -228,21 +228,21 @@ public function selectUser ($id)
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_users`.`id` = `user_users2user_groups`.`user`
 		LEFT JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		  ON
 			`user_users2user_groups`.`group` = `user_groups`.`id`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_users2application_projects`.`project` = `application_projects`.`id`
 		WHERE 
@@ -258,8 +258,8 @@ public function selectUser ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT,
-		'group_project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT,
+		'group_project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -294,7 +294,7 @@ public function selectUser ($id)
 public function selectUsers ($params = array())
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -363,21 +363,21 @@ public function selectUsers ($params = array())
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_users`.`id` = `user_users2user_groups`.`user`
 		LEFT JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		  ON
 			`user_users2user_groups`.`group` = `user_groups`.`id`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_users2application_projects`.`project` = `application_projects`.`id`
 		WHERE 
@@ -388,8 +388,8 @@ public function selectUsers ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
-		'group_project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT,
+		'group_project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// prepare where clauses
@@ -433,7 +433,7 @@ public function selectUsers ($params = array())
 public function selectAnonymousUser ()
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -441,17 +441,17 @@ public function selectAnonymousUser ()
 		SELECT
 			`user_users`.`id` AS `id`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_users2application_projects`.`project` = `application_projects`.`id`
 		WHERE
-			`user_users`.`email` = 'OAK_ANONYMOUS'
+			`user_users`.`email` = 'WCOM_ANONYMOUS'
 		  AND
 			`application_projects`.`id` = :project
 		LIMIT
@@ -460,7 +460,7 @@ public function selectAnonymousUser ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -490,7 +490,7 @@ public function selectAnonymousUser ()
 public function mapUserToGroup ($user, $group = null)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -505,11 +505,11 @@ public function mapUserToGroup ($user, $group = null)
 	// delete user<->group mappings if necessary
 	$sql = "
 		DELETE FROM
-			 ".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			 ".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		USING
 			`user_users2user_groups`
 		JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		ON
 			`user_users2user_groups`.`group` = `user_groups`.`id`
 		WHERE
@@ -521,7 +521,7 @@ public function mapUserToGroup ($user, $group = null)
 	// prepare bind params
 	$bind_params = array(
 		'user' => (int)$user,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -544,7 +544,7 @@ public function mapUserToGroup ($user, $group = null)
 		);
 	
 		// create new mapping
-		return $this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS, $sqlData);
+		return $this->base->db->insert(WCOM_DB_USER_USERS2USER_GROUPS, $sqlData);
 	}
 	
 	return true;
@@ -563,7 +563,7 @@ public function mapUserToGroup ($user, $group = null)
 public function mapUserToProject ($user, $active = 1, $author = 0)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -578,13 +578,13 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 	// prepare sql data
 	$sqlData = array(
 		'user' => (int)$user,
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'active' => (((int)$active === 1) ? "1" : "0"),
 		'author' => (((int)$author === 1) ? "1" : "0")
 	);
 	
 	// create new mapping
-	return $this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 }
 
 /**
@@ -598,7 +598,7 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 public function detachUserFromProject ($user)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Manage')) {
+	if (!wcom_check_access('User', 'User', 'Manage')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -613,11 +613,11 @@ public function detachUserFromProject ($user)
 	// prepare bind params
 	$bind_params = array(
 		'user' => (int)$user,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// delete user<->project mapping
-	return $this->base->db->delete(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $where, $bind_params);
 }
 
 /**
@@ -635,7 +635,7 @@ public function detachUserFromProject ($user)
 public function testForUniqueEmail ($email, $id = null)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -655,7 +655,7 @@ public function testForUniqueEmail ($email, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_USERS." AS `users_users`
+			".WCOM_DB_USER_USERS." AS `users_users`
 		WHERE
 			`email` = :email
 	";
@@ -690,7 +690,7 @@ public function testForUniqueEmail ($email, $id = null)
 public function isDeletable ($user)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -704,9 +704,9 @@ public function isDeletable ($user)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -729,7 +729,7 @@ public function isDeletable ($user)
 }
 
 /** 
- * Sets OAK_CURRENT_USER constant using the user id saved in the
+ * Sets WCOM_CURRENT_USER constant using the user id saved in the
  * open session. Returns user id.
  *
  * @throws User_UserException
@@ -738,12 +738,12 @@ public function isDeletable ($user)
 public function initUserAdmin ()
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// import user id from session
-	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], OAK_REGEX_NUMERIC);
+	$user_id = Base_Cnc::filterRequest($_SESSION['admin']['user'], WCOM_REGEX_NUMERIC);
 	
 	// make sure that the user exists
 	if (!$this->userExists($user_id)) {
@@ -751,7 +751,7 @@ public function initUserAdmin ()
 	}
 	
 	// define constant for current user
-	define('OAK_CURRENT_USER', $user_id);
+	define('WCOM_CURRENT_USER', $user_id);
 	
 	// return id of current user
 	return $user_id;
@@ -759,7 +759,7 @@ public function initUserAdmin ()
 
 /**
  * Initialises "user environment" for the public area. Sets the
- * OAK_CURRENT_USER and the OAK_CURRENT_USER_ANONYMOUS constants
+ * WCOM_CURRENT_USER and the WCOM_CURRENT_USER_ANONYMOUS constants
  * using the saved user id in the open session or the anonymous
  * user configured for the current project. Returns user id.
  *
@@ -768,15 +768,15 @@ public function initUserAdmin ()
 public function initUserPublicArea ()
 {
 	// access check
-	if (!oak_check_access(null, null, null)) {
+	if (!wcom_check_access(null, null, null)) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
 	// import user id from session
-	$user_id = Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'], OAK_REGEX_NUMERIC);
+	$user_id = Base_Cnc::filterRequest($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['user'], WCOM_REGEX_NUMERIC);
 	
 	// import anon user bit form session
-	$anon = Base_Cnc::ifsetor($_SESSION['public_area'][OAK_CURRENT_PROJECT]['anon'], null);
+	$anon = Base_Cnc::ifsetor($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['anon'], null);
 	$anon = (bool)$anon;
 	
 	// if there's no user id or the user does not exist, register the
@@ -788,21 +788,21 @@ public function initUserPublicArea ()
 		$LOGIN->logIntoPublicAreaAsAnonymous();
 		
 		// define constant for current user
-		define('OAK_CURRENT_USER', Base_Cnc::filterRequest($_SESSION['public_area'][OAK_CURRENT_PROJECT]['user'],
-			OAK_REGEX_NUMERIC));
+		define('WCOM_CURRENT_USER', Base_Cnc::filterRequest($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['user'],
+			WCOM_REGEX_NUMERIC));
 		
 		// define anon user constant
-		define('OAK_CURRENT_USER_ANONYMOUS', true);
+		define('WCOM_CURRENT_USER_ANONYMOUS', true);
 		
-		return OAK_CURRENT_USER;
+		return WCOM_CURRENT_USER;
 	} else {
 		// define constant for current user
-		define('OAK_CURRENT_USER', (int)$user_id);
+		define('WCOM_CURRENT_USER', (int)$user_id);
 		
 		// define anon user constant
-		define('OAK_CURRENT_USER_ANONYMOUS', false);
+		define('WCOM_CURRENT_USER_ANONYMOUS', false);
 		
-		return OAK_CURRENT_USER;
+		return WCOM_CURRENT_USER;
 	}
 }
 
@@ -819,7 +819,7 @@ public function initUserPublicArea ()
 public function userExists ($user, $project = null)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -836,9 +836,9 @@ public function userExists ($user, $project = null)
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -877,7 +877,7 @@ public function userExists ($user, $project = null)
 public function userIsAuthor ($user, $project)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -894,9 +894,9 @@ public function userIsAuthor ($user, $project)
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -934,7 +934,7 @@ public function userIsAuthor ($user, $project)
 public function userIsActive ($user, $project)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -951,9 +951,9 @@ public function userIsActive ($user, $project)
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -998,20 +998,20 @@ public function userCheckAccess($area = null, $component = null, $action = null)
 	
 	// build right components array
 	$action_components = array();
-	if (!empty($area) && !is_null(Base_Cnc::filterRequest($area, OAK_REGEX_ALPHANUMERIC))) {
+	if (!empty($area) && !is_null(Base_Cnc::filterRequest($area, WCOM_REGEX_ALPHANUMERIC))) {
 		$action_components[] = strtoupper($area);
 	}
-	if (!empty($component) && !is_null(Base_Cnc::filterRequest($component, OAK_REGEX_ALPHANUMERIC))) {
+	if (!empty($component) && !is_null(Base_Cnc::filterRequest($component, WCOM_REGEX_ALPHANUMERIC))) {
 		$action_components[] = strtoupper($component);
 	}
-	if (!empty($action) && !is_null(Base_Cnc::filterRequest($action, OAK_REGEX_ALPHANUMERIC))) {
+	if (!empty($action) && !is_null(Base_Cnc::filterRequest($action, WCOM_REGEX_ALPHANUMERIC))) {
 		$action_components[] = strtoupper($action);
 	}
 		
 	// turn components array into string
 	$action_string = implode('_', $action_components);
 	
-	if (OAK_CURRENT_AREA == "ADMIN") {
+	if (WCOM_CURRENT_AREA == "ADMIN") {
 		// make sure that there's a rights array
 		if (empty($_SESSION['admin']['rights']) || !is_array($_SESSION['admin']['rights'])) {
 			throw new User_UserException("No rights array found");
@@ -1023,17 +1023,17 @@ public function userCheckAccess($area = null, $component = null, $action = null)
 				return true;
 			}
 		}
-	} elseif (OAK_CURRENT_AREA == "PUBLIC") {
+	} elseif (WCOM_CURRENT_AREA == "PUBLIC") {
 		// make sure that there's a rights array
-		if (empty($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'])) {
+		if (empty($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'])) {
 			throw new User_UserException("No rights array found");
 		}
-		if (!is_array($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'])) {
+		if (!is_array($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'])) {
 			throw new User_UserException("No rights array found");
 		}
 		
 		// look for the right string in the list of user rights
-		foreach ($_SESSION['public_area'][OAK_CURRENT_PROJECT]['rights'] as $_right_id => $_right) {
+		foreach ($_SESSION['public_area'][WCOM_CURRENT_PROJECT]['rights'] as $_right_id => $_right) {
 			if ($_right === $action_string) {
 				return true;
 			}
@@ -1054,7 +1054,7 @@ public function userCheckAccess($area = null, $component = null, $action = null)
 public function userBelongsToCurrentProject ($user)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -1068,9 +1068,9 @@ public function userBelongsToCurrentProject ($user)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -1084,7 +1084,7 @@ public function userBelongsToCurrentProject ($user)
 	// prepare bind params
 	$bind_params = array(
 		'user' => (int)$user,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -1106,7 +1106,7 @@ public function userBelongsToCurrentProject ($user)
 public function userBelongsToCurrentUser ($user)
 {
 	// access check
-	if (!oak_check_access('User', 'User', 'Use')) {
+	if (!wcom_check_access('User', 'User', 'Use')) {
 		throw new User_UserException("You are not allowed to perform this action");
 	}
 	
@@ -1121,7 +1121,7 @@ public function userBelongsToCurrentUser ($user)
 	if (!$this->userBelongsToCurrentProject($user)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: simpleformlogin.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -103,7 +103,7 @@ public function __construct($project, $page)
 	
 	// get simple form
 	$SIMPLEFORM = load('Content:SimpleForm');
-	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(OAK_CURRENT_PAGE);
+	$this->_simple_form = $SIMPLEFORM->selectSimpleForm(WCOM_CURRENT_PAGE);
 	
 	// assign simple form to smarty
 	$this->base->utility->smarty->assign('simple_form', $this->_simple_form);

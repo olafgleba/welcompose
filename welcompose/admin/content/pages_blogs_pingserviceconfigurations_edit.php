@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pages_blogs_pingserviceconfigurations_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -99,19 +99,19 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
+	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// get page
-	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], OAK_REGEX_NUMERIC));
+	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
 	
 	// get ping service configuration
 	$ping_service_configuration = $PINGSERVICECONFIGURATION->selectPingServiceConfiguration(
-		Base_Cnc::filterRequest($_REQUEST['id'], OAK_REGEX_NUMERIC));
+		Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// prepare ping services
 	$ping_services = array();
@@ -158,7 +158,7 @@ try {
 	$FORM->applyFilter('site_url', 'trim');
 	$FORM->applyFilter('site_url', 'strip_tags');
 	$FORM->addRule('site_url', gettext('Please enter a site URL'), 'required');
-	$FORM->addRule('site_url', gettext('Please enter a valid site URL'), 'regex', OAK_REGEX_URL);
+	$FORM->addRule('site_url', gettext('Please enter a valid site URL'), 'regex', WCOM_REGEX_URL);
 	
 	// textfield for site_index
 	$FORM->addElement('text', 'site_index', gettext('Changes URL'),
@@ -166,7 +166,7 @@ try {
 	$FORM->applyFilter('site_index', 'trim');
 	$FORM->applyFilter('site_index', 'strip_tags');
 	$FORM->addRule('site_index', gettext('Please enter a home page URL'), 'required');
-	$FORM->addRule('site_index', gettext('Please enter a valid home page URL'), 'regex', OAK_REGEX_URL);
+	$FORM->addRule('site_index', gettext('Please enter a valid home page URL'), 'regex', WCOM_REGEX_URL);
 	
 	// textfield for site_feed
 	$FORM->addElement('text', 'site_feed', gettext('Feed URL'),
@@ -174,7 +174,7 @@ try {
 	$FORM->applyFilter('site_feed', 'trim');
 	$FORM->applyFilter('site_feed', 'strip_tags');
 	$FORM->addRule('site_feed', gettext('Please enter a feed URL'), 'required');
-	$FORM->addRule('site_feed', gettext('Please enter a valid feed URL'), 'regex', OAK_REGEX_URL);
+	$FORM->addRule('site_feed', gettext('Please enter a valid feed URL'), 'regex', WCOM_REGEX_URL);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Update ping service'),
@@ -208,19 +208,19 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 	    
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 		
 		// calculate and assign ping service count
 		$BASE->utility->smarty->assign('ping_service_count', count($ping_services));
 		
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
@@ -229,8 +229,8 @@ try {
 		$BASE->utility->smarty->assign('page', $page);
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/pages_blogs_pingserviceconfigurations_edit.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('content/pages_blogs_pingserviceconfigurations_edit.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

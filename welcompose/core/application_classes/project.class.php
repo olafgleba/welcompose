@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: project.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -80,7 +80,7 @@ public function instance()
 public function addProject ($sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'Project', 'Manage')) {
+	if (!wcom_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
 	
@@ -90,7 +90,7 @@ public function addProject ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(OAK_DB_APPLICATION_PROJECTS, $sqlData);
+	return $this->base->db->insert(WCOM_DB_APPLICATION_PROJECTS, $sqlData);
 }
 
 /**
@@ -106,7 +106,7 @@ public function addProject ($sqlData)
 public function updateProject ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('Application', 'Project', 'Manage')) {
+	if (!wcom_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
 	
@@ -127,7 +127,7 @@ public function updateProject ($id, $sqlData)
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_APPLICATION_PROJECTS, $sqlData,
+	return $this->base->db->update(WCOM_DB_APPLICATION_PROJECTS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -142,7 +142,7 @@ public function updateProject ($id, $sqlData)
 public function deleteProject ($id)
 {
 	// access check
-	if (!oak_check_access('Application', 'Project', 'Manage')) {
+	if (!wcom_check_access('Application', 'Project', 'Manage')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
 	
@@ -160,7 +160,7 @@ public function deleteProject ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_APPLICATION_PROJECTS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_APPLICATION_PROJECTS, $where, $bind_params);
 }
 
 /**
@@ -193,7 +193,7 @@ public function selectProject ($id)
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE 
 			1
 	";
@@ -289,9 +289,9 @@ public function selectProjects ($params = array())
 			`application_projects`.`date_modified` AS `date_modified`,
 			`application_projects`.`date_added` AS `date_added`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`application_projects`.`id` = `user_users2application_projects`.`project`
 		WHERE 
@@ -300,7 +300,7 @@ public function selectProjects ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'user' => OAK_CURRENT_USER
+		'user' => WCOM_CURRENT_USER
 	);
 	
 	// prepare where clauses
@@ -378,7 +378,7 @@ public function countProjects ($params = array())
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE 
 			1
 	";
@@ -411,7 +411,7 @@ public function selectDefaultProject ()
 		SELECT 
 			`application_projects`.`id` AS `id`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
 			`application_projects`.`default` = '1'
 		LIMIT
@@ -442,7 +442,7 @@ public function selectDefaultProject ()
 public function selectProjectUsingUrlName ($name_url)
 {
 	// input check
-	if (empty($name_url) || !preg_match(OAK_REGEX_PROJECT_NAME_URL, $name_url)) {
+	if (empty($name_url) || !preg_match(WCOM_REGEX_PROJECT_NAME_URL, $name_url)) {
 		throw new Application_ProjectException("Input for project's url name may not be empty");
 	}
 	
@@ -451,7 +451,7 @@ public function selectProjectUsingUrlName ($name_url)
 		SELECT 
 			`application_projects`.`id` AS `id`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
 			`application_projects`.`name_url` = :name_url
 		LIMIT
@@ -498,7 +498,7 @@ public function projectExists ($id)
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE 
 			`application_projects`.`id` = :id
 	";
@@ -532,7 +532,7 @@ public function testForUniqueName ($name, $id = null)
 {
 	/*
 	// access check
-	if (!oak_check_access('Application', 'Project', 'Use')) {
+	if (!wcom_check_access('Application', 'Project', 'Use')) {
 		throw new Application_ProjectException("You are not allowed to perform this action");
 	}
 	*/
@@ -555,7 +555,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		WHERE
 			(
 				`name` = :name
@@ -600,7 +600,7 @@ public function initProjectAdmin ($user)
 	}
 	
 	// get current project id from session
-	$current_project = Base_Cnc::filterRequest($_SESSION['admin']['project'], OAK_REGEX_NUMERIC); 
+	$current_project = Base_Cnc::filterRequest($_SESSION['admin']['project'], WCOM_REGEX_NUMERIC); 
 	
 	// if the project id is valid and if there's a project with the given id, set
 	// the current project constant and exit.
@@ -617,17 +617,17 @@ public function initProjectAdmin ($user)
 		}
 		
 		// define constant
-		define('OAK_CURRENT_PROJECT', (int)$current_project);
+		define('WCOM_CURRENT_PROJECT', (int)$current_project);
 		
 		// return id of the current project
-		return OAK_CURRENT_PROJECT;
+		return WCOM_CURRENT_PROJECT;
 	} else {
 		throw new Application_ProjectException("No usable project found");
 	}
 }
 
 /** 
- * Sets OAK_CURRENT_PROJECT constant. Returns id of the current
+ * Sets WCOM_CURRENT_PROJECT constant. Returns id of the current
  * project.
  * 
  * @return int Project id
@@ -636,7 +636,7 @@ public function initProjectPublicArea ()
 {
 	// get user supplied project name
 	$user_supplied_name = Base_Cnc::filterRequest($_REQUEST['project'],
-		OAK_REGEX_PROJECT_NAME_URL);
+		WCOM_REGEX_PROJECT_NAME_URL);
 		
 	// if the user supplied name is null, we need to look for the default
 	// project
@@ -645,8 +645,8 @@ public function initProjectPublicArea ()
 		$default_project = $this->selectDefaultProject();
 		
 		// define current project constant
-		define("OAK_CURRENT_PROJECT", (int)$default_project['id']);
-		define("OAK_CURRENT_PROJECT_NAME", $default_project['name_url']);
+		define("WCOM_CURRENT_PROJECT", (int)$default_project['id']);
+		define("WCOM_CURRENT_PROJECT_NAME", $default_project['name_url']);
 		
 		// return project id
 		return (int)$default_project['id'];
@@ -655,8 +655,8 @@ public function initProjectPublicArea ()
 		$project = $this->selectProjectUsingUrlName($user_supplied_name);
 		
 		// define current project constant
-		define("OAK_CURRENT_PROJECT", (int)$project['id']);
-		define("OAK_CURRENT_PROJECT_NAME", $project['name_url']);
+		define("WCOM_CURRENT_PROJECT", (int)$project['id']);
+		define("WCOM_CURRENT_PROJECT_NAME", $project['name_url']);
 		
 		// return project id
 		return (int)$project['id'];
@@ -674,7 +674,7 @@ public function initProjectPublicArea ()
 public function switchProject ($new_project)
 {
 	// access check
-	if (!oak_check_access(null, null, null)) {
+	if (!wcom_check_access(null, null, null)) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -1003,7 +1003,7 @@ protected function syncRightsWithSkeleton ($project)
 			`description`,
 			`editable`
 		FROM
-			".OAK_DB_USER_RIGHTS."
+			".WCOM_DB_USER_RIGHTS."
 		WHERE
 			`project` = :project
 	";
@@ -1038,7 +1038,7 @@ protected function syncRightsWithSkeleton ($project)
 			);
 			
 			// drop right
-			$this->base->db->delete(OAK_DB_USER_RIGHTS, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_USER_RIGHTS, $where, $bind_params);
 		}
 	}
 	
@@ -1079,7 +1079,7 @@ protected function syncRightsWithSkeleton ($project)
 					);
 					
 					// update right
-					$this->base->db->update(OAK_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -1098,7 +1098,7 @@ protected function syncRightsWithSkeleton ($project)
 			);
 			
 			// insert right
-			$this->base->db->insert(OAK_DB_USER_RIGHTS, $sqlData);
+			$this->base->db->insert(WCOM_DB_USER_RIGHTS, $sqlData);
 		}
 	}
 	
@@ -1135,7 +1135,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 			`date_modified`,
 			`date_added`
 		FROM
-			".OAK_DB_USER_GROUPS."
+			".WCOM_DB_USER_GROUPS."
 		WHERE
 			`project` = :project
 	";
@@ -1157,7 +1157,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 			`description`,
 			`editable`
 		FROM
-			".OAK_DB_USER_RIGHTS."
+			".WCOM_DB_USER_RIGHTS."
 		WHERE
 			`project` = :project
 	";
@@ -1193,7 +1193,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 		// groups
 		$sql = "
 			DELETE FROM
-				".OAK_DB_USER_GROUPS2USER_RIGHTS."
+				".WCOM_DB_USER_GROUPS2USER_RIGHTS."
 			WHERE
 				`right` = :right
 		";
@@ -1218,7 +1218,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
 					);
 					
 					// create new link
-					$this->base->db->insert(OAK_DB_USER_GROUPS2USER_RIGHTS,
+					$this->base->db->insert(WCOM_DB_USER_GROUPS2USER_RIGHTS,
 						$sqlData);
 				}
 			}
@@ -1271,7 +1271,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 			`description`,
 			`editable`
 		FROM
-			".OAK_DB_USER_GROUPS."
+			".WCOM_DB_USER_GROUPS."
 		WHERE
 			`project` = :project
 	";
@@ -1308,7 +1308,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 				);
 			
 				// drop group
-				$this->base->db->delete(OAK_DB_USER_GROUPS, $where, $bind_params);
+				$this->base->db->delete(WCOM_DB_USER_GROUPS, $where, $bind_params);
 			}
 		}
 	}
@@ -1350,7 +1350,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 					);
 					
 					// update group
-					$this->base->db->update(OAK_DB_USER_GROUPS, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_USER_GROUPS, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -1370,7 +1370,7 @@ protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 			);
 			
 			// insert group
-			$this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+			$this->base->db->insert(WCOM_DB_USER_GROUPS, $sqlData);
 		}
 	}
 	
@@ -1418,7 +1418,7 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 			`secret`,
 			`editable`
 		FROM
-			".OAK_DB_USER_USERS."
+			".WCOM_DB_USER_USERS."
 		WHERE
 			1
 	";
@@ -1465,7 +1465,7 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 					);
 					
 					// update user
-					$this->base->db->update(OAK_DB_USER_USERS, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_USER_USERS, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -1484,7 +1484,7 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 			);
 			
 			// insert user
-			$this->base->db->insert(OAK_DB_USER_USERS, $sqlData);
+			$this->base->db->insert(WCOM_DB_USER_USERS, $sqlData);
 		}
 	}
 	
@@ -1493,11 +1493,11 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 		// prepare query to get users from database
 		$sql = "
 			DELETE FROM
-				".OAK_DB_USER_USERS." AS `user_users`
+				".WCOM_DB_USER_USERS." AS `user_users`
 			USING
 				`user_users`
 			LEFT JOIN
-				".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+				".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 			  ON
 				`user_users`.`id` = `user_users2application_projects`.`user`
 			WHERE
@@ -1551,9 +1551,9 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 			`user_users`.`secret`,
 			`user_users`.`editable`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -1575,8 +1575,8 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 				// we have to set a flag that prevents double creation
 				// of links between CURRENT_USER and the project
 				// to be created
-				if ($current_user == OAK_CURRENT_USER) {
-					define("OAK_CURRENT_USER_LINK_CREATED", true);
+				if ($current_user == WCOM_CURRENT_USER) {
+					define("WCOM_CURRENT_USER_LINK_CREATED", true);
 				}
 			}
 		}
@@ -1591,7 +1591,7 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 		// groups
 		$sql = "
 			DELETE FROM
-				".OAK_DB_USER_USERS2APPLICATION_PROJECTS."
+				".WCOM_DB_USER_USERS2APPLICATION_PROJECTS."
 			WHERE
 				`user` = :user
 			  AND
@@ -1615,18 +1615,18 @@ public function syncLinksBetweenUsersAndProjectsWithSkeleton ($project)
 			'author' => (string)intval($_user['author'])
 		);
 		
-		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+		$this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 	}
 	
 	// create link to current user if it wasn't done yet
-	if (!defined("OAK_CURRENT_USER_LINK_CREATED")) {
+	if (!defined("WCOM_CURRENT_USER_LINK_CREATED")) {
 		$sqlData = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'project' => $project,
 			'active' => "1",
 			'author' => "1"
 		);
-		$this->base->db->insert(OAK_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+		$this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 	}
 	
 	return true;
@@ -1658,7 +1658,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 			`description`,
 			`editable`
 		FROM
-			".OAK_DB_USER_GROUPS."
+			".WCOM_DB_USER_GROUPS."
 		WHERE
 			`project` = :project
 	";
@@ -1679,9 +1679,9 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 			`user_users`.`secret`,
 			`user_users`.`editable`
 		FROM
-			".OAK_DB_USER_USERS." AS `user_users`
+			".WCOM_DB_USER_USERS." AS `user_users`
 		JOIN
-			".OAK_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
+			".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 		  ON
 			`user_users`.`id` = `user_users2application_projects`.`user`
 		WHERE
@@ -1713,8 +1713,8 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 				// if the user from the database is the CURRENT_USER,
 				// we have to set a flag that prevents double creation
 				// of links between CURRENT_USER and the groups
-				if ($current_user == OAK_CURRENT_USER) {
-					define("OAK_CURRENT_USER_LINK_CREATED", true);
+				if ($current_user == WCOM_CURRENT_USER) {
+					define("WCOM_CURRENT_USER_LINK_CREATED", true);
 				}
 			}
 		}
@@ -1729,11 +1729,11 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		// groups
 		$sql = "
 			DELETE FROM
-				".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+				".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 			USING
 				`user_users2user_groups`
 			JOIN
-				".OAK_DB_USER_GROUPS." AS `user_groups`
+				".WCOM_DB_USER_GROUPS." AS `user_groups`
 			  ON
 				`user_users2user_groups`.`group` = `user_groups`.`id`
 			WHERE
@@ -1763,7 +1763,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 					);
 					
 					// create new link
-					$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
+					$this->base->db->insert(WCOM_DB_USER_USERS2USER_GROUPS,
 						$sqlData);
 				}
 			}
@@ -1772,7 +1772,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 	
 	// create link between current user and creator group if it wasn't
 	// created yet
-	if (!defined("OAK_CURRENT_USER_LINK_CREATED")) {
+	if (!defined("WCOM_CURRENT_USER_LINK_CREATED")) {
 		foreach ($skeleton_groups as $_skel_group) {
 			if ($_skel_group['creator_group']) {
 				foreach ($database_groups as $_db_group) {
@@ -1780,11 +1780,11 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 						// prepare sql data to create new link
 						$sqlData = array(
 							'group' => (int)$_db_group['id'],
-							'user' => (int)OAK_CURRENT_USER
+							'user' => (int)WCOM_CURRENT_USER
 						);
 					
 						// create new link
-						$this->base->db->insert(OAK_DB_USER_USERS2USER_GROUPS,
+						$this->base->db->insert(WCOM_DB_USER_USERS2USER_GROUPS,
 							$sqlData);
 					}
 				}
@@ -1827,7 +1827,7 @@ protected function syncPageTypesWithSkeleton ($project)
 			`internal_name`,
 			`editable`
 		FROM
-			".OAK_DB_CONTENT_PAGE_TYPES."
+			".WCOM_DB_CONTENT_PAGE_TYPES."
 		WHERE
 			`project` = :project
 	";
@@ -1862,7 +1862,7 @@ protected function syncPageTypesWithSkeleton ($project)
 			);
 			
 			// drop right
-			$this->base->db->delete(OAK_DB_CONTENT_PAGE_TYPES, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_CONTENT_PAGE_TYPES, $where, $bind_params);
 		}
 	}
 	
@@ -1903,7 +1903,7 @@ protected function syncPageTypesWithSkeleton ($project)
 					);
 					
 					// update page_type
-					$this->base->db->update(OAK_DB_CONTENT_PAGE_TYPES, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_CONTENT_PAGE_TYPES, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -1922,7 +1922,7 @@ protected function syncPageTypesWithSkeleton ($project)
 			);
 			
 			// insert page_type
-			$this->base->db->insert(OAK_DB_CONTENT_PAGE_TYPES, $sqlData);
+			$this->base->db->insert(WCOM_DB_CONTENT_PAGE_TYPES, $sqlData);
 		}
 	}
 	
@@ -1961,7 +1961,7 @@ protected function syncTemplateTypesWithSkeleton ($project)
 			`description`,
 			`editable`
 		FROM
-			".OAK_DB_TEMPLATING_TEMPLATE_TYPES."
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES."
 		WHERE
 			`project` = :project
 	";
@@ -1996,7 +1996,7 @@ protected function syncTemplateTypesWithSkeleton ($project)
 			);
 			
 			// drop template_type
-			$this->base->db->delete(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $where, $bind_params);
 		}
 	}
 	
@@ -2037,7 +2037,7 @@ protected function syncTemplateTypesWithSkeleton ($project)
 					);
 					
 					// update template_type
-					$this->base->db->update(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -2056,7 +2056,7 @@ protected function syncTemplateTypesWithSkeleton ($project)
 			);
 			
 			// insert template_type
-			$this->base->db->insert(OAK_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+			$this->base->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 		}
 	}
 	
@@ -2095,7 +2095,7 @@ protected function syncTextMacrosWithSkeleton ($project)
 			`internal_name`,
 			`type`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_MACROS."
+			".WCOM_DB_APPLICATION_TEXT_MACROS."
 		WHERE
 			`project` = :project
 	";
@@ -2130,7 +2130,7 @@ protected function syncTextMacrosWithSkeleton ($project)
 			);
 			
 			// drop text_macro
-			$this->base->db->delete(OAK_DB_APPLICATION_TEXT_MACROS, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_APPLICATION_TEXT_MACROS, $where, $bind_params);
 		}
 	}
 	
@@ -2168,7 +2168,7 @@ protected function syncTextMacrosWithSkeleton ($project)
 					);
 					
 					// update text_macro
-					$this->base->db->update(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -2187,7 +2187,7 @@ protected function syncTextMacrosWithSkeleton ($project)
 			);
 			
 			// insert text_macro
-			$this->base->db->insert(OAK_DB_APPLICATION_TEXT_MACROS, $sqlData);
+			$this->base->db->insert(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData);
 		}
 	}
 	
@@ -2225,7 +2225,7 @@ protected function syncTextConvertersWithSkeleton ($project)
 			`name`,
 			`internal_name`
 		FROM
-			".OAK_DB_APPLICATION_TEXT_CONVERTERS."
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS."
 		WHERE
 			`project` = :project
 	";
@@ -2260,7 +2260,7 @@ protected function syncTextConvertersWithSkeleton ($project)
 			);
 			
 			// drop text_converter
-			$this->base->db->delete(OAK_DB_APPLICATION_TEXT_CONVERTERS, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $where, $bind_params);
 		}
 	}
 	
@@ -2297,7 +2297,7 @@ protected function syncTextConvertersWithSkeleton ($project)
 					);
 					
 					// update text_converter
-					$this->base->db->update(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData, $where, $bind_params);
+					$this->base->db->update(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $sqlData, $where, $bind_params);
 				}
 				
 				// set add bit to false
@@ -2315,7 +2315,7 @@ protected function syncTextConvertersWithSkeleton ($project)
 			);
 			
 			// insert text_converter
-			$this->base->db->insert(OAK_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
+			$this->base->db->insert(WCOM_DB_APPLICATION_TEXT_CONVERTERS, $sqlData);
 		}
 	}
 	
@@ -2351,7 +2351,7 @@ protected function syncPodcastCategoriesWithSkeleton ($project)
 			`project`,
 			`name`
 		FROM
-			".OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES."
+			".WCOM_DB_CONTENT_BLOG_PODCAST_CATEGORIES."
 		WHERE
 			`project` = :project
 	";
@@ -2382,7 +2382,7 @@ protected function syncPodcastCategoriesWithSkeleton ($project)
 				'date_added' => date('Y-m-d H:i:s')
 			);
 			
-			$this->base->db->insert(OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
+			$this->base->db->insert(WCOM_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
 		}
 		
 		// sync podcast subcategories from skeleton with database
@@ -2407,7 +2407,7 @@ protected function syncPodcastCategoriesWithSkeleton ($project)
 					'date_added' => date('Y-m-d H:i:s')
 				);
 			
-				$this->base->db->insert(OAK_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
+				$this->base->db->insert(WCOM_DB_CONTENT_BLOG_PODCAST_CATEGORIES, $sqlData);
 			}
 		}
 	}
@@ -2432,7 +2432,7 @@ protected function syncPodcastCategoriesWithSkeleton ($project)
 			);
 			
 			// drop podcast category
-			$this->base->db->delete(OAK_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
 		}
 		
 		// sync podcast categories from database with skeleton
@@ -2459,7 +2459,7 @@ protected function syncPodcastCategoriesWithSkeleton ($project)
 			);
 			
 			// drop podcast category
-			$this->base->db->delete(OAK_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
+			$this->base->db->delete(WCOM_DB_BLOG_PODCAST_CATEGORIES, $where, $bind_params);
 		}
 	}
 	

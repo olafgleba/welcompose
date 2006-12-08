@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: nestedset.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -225,7 +225,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					// adjust sorting of the reference node and the following nodes
 					$sql = "
 						UPDATE
-							`".OAK_DB_CONTENT_NODES."`
+							`".WCOM_DB_CONTENT_NODES."`
 						SET
 							`sorting` = `sorting` + 1
 						WHERE
@@ -250,7 +250,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					// adjust sorting of the reference node and the following nodes
 					$sql = "
 						UPDATE
-							`".OAK_DB_CONTENT_NODES."`
+							`".WCOM_DB_CONTENT_NODES."`
 						SET
 							`sorting` = `sorting` + 1
 						WHERE
@@ -291,12 +291,12 @@ public function createRootNode ($navigation, $reference = null, $position = null
 	);
 	
 	// insert node
-	$insert_id = $this->base->db->insert(OAK_DB_CONTENT_NODES, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_NODES, $sqlData);
 	
 	// adjust root node
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`root_node` = `id`
 		WHERE 
@@ -352,7 +352,7 @@ public function createNodeAbove ($navigation, $reference)
 	// update lft of future siblings
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` + 2
 		WHERE
@@ -373,7 +373,7 @@ public function createNodeAbove ($navigation, $reference)
 	// update rgt of future siblings
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`rgt` = `rgt` + 2
 		WHERE
@@ -403,7 +403,7 @@ public function createNodeAbove ($navigation, $reference)
 	);
 
 	// insert node
-	return $this->base->db->insert(OAK_DB_CONTENT_NODES, $sqlData);
+	return $this->base->db->insert(WCOM_DB_CONTENT_NODES, $sqlData);
 }
 
 
@@ -438,7 +438,7 @@ public function createNodeBelow ($navigation, $reference)
 	// update lft of future siblings
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` + 2
 		WHERE
@@ -459,7 +459,7 @@ public function createNodeBelow ($navigation, $reference)
 	// update rgt of future siblings
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`rgt` = `rgt` + 2
 		WHERE
@@ -489,7 +489,7 @@ public function createNodeBelow ($navigation, $reference)
 	);
 	
 	// insert node
-	return $this->base->db->insert(OAK_DB_CONTENT_NODES, $sqlData);
+	return $this->base->db->insert(WCOM_DB_CONTENT_NODES, $sqlData);
 }
 
 /**
@@ -579,7 +579,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust sorting
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -612,7 +612,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 	// handles move if the current node is top-most node in the navigation.
 	//
@@ -636,7 +636,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// let's start with the root node ids.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -658,7 +658,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// now the parent ids
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -684,7 +684,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// of our new root node. let's start with the lfts, rgts and the level.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1,
@@ -714,7 +714,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// with lft and rgt adjustments.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 2,
 				`rgt` = `rgt` - 2
@@ -755,7 +755,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
 		
 		// now, the last task is to take the node out of the tree and to
 		// place it at the end of the navigation.
@@ -777,7 +777,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	// Handles move if node is a root node (but not the top-most root node) and the
 	// sibling above has no childs and the sibling below is a root node
@@ -799,7 +799,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// the lfts/rgts. let's start with the lfts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -823,7 +823,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust rgts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -863,12 +863,12 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// the last task is to close the sorting gap
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -912,7 +912,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// let's start with the root node ids.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -934,7 +934,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// now the parent ids
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -957,7 +957,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// of our new root node. let's start with the lfts, rgts and the level.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1,
@@ -987,7 +987,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// with lft and rgt adjustments.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 2,
 				`rgt` = `rgt` - 2
@@ -1028,14 +1028,14 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// now, the last task is to take the node out of the tree and to
 		// place it at the end of the tree above. first, we have to adjust
 		// the lfts/rgts. let's start with the lfts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -1059,7 +1059,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust rgts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -1099,7 +1099,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 	// handles move if the current node is a root node (not the top-most) and the
 	// sibling above has one or more childs.
@@ -1131,7 +1131,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// let's start with the root node ids.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -1153,7 +1153,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// now the parent ids
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -1176,7 +1176,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// of our new root node. let's start with the lfts, rgts and the level.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1,
@@ -1206,7 +1206,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// with lft and rgt adjustments.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 2,
 				`rgt` = `rgt` - 2
@@ -1247,14 +1247,14 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// now, the last task is to take the node out of the tree and to
 		// place it at the end of the tree above. first, we have to adjust
 		// the lfts/rgts. let's start with the lfts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -1278,7 +1278,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust rgts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -1318,7 +1318,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 	// handles move if the current node is a root node (not the top-most) and the
 	// sibling above has one or more childs.
@@ -1344,7 +1344,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// the lfts/rgts. let's start with the lfts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -1368,7 +1368,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust rgts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -1408,12 +1408,12 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 		// fix the sorting of the node below
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -1453,7 +1453,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// adjust sorting of the node above
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` + 1
 			WHERE
@@ -1490,13 +1490,13 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// now we have to care about possible childs of the current node. let's start
 		// with the parent adjustment.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -1518,7 +1518,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// now we have to adjust the lfts, rgts and the level
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1,
@@ -1548,7 +1548,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// let's start with the lfts.
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 2
 			WHERE
@@ -1575,7 +1575,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// and now the rgts
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` - 2
 			WHERE
@@ -1655,7 +1655,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// update rgt
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` - 2
 			WHERE
@@ -1679,7 +1679,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// update lft
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 2
 			WHERE
@@ -1704,7 +1704,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// update lft
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -1727,7 +1727,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// update rgt
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -1765,7 +1765,7 @@ public function moveUpInTree ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// update lft and rgt of possible childs
 		$sql = "
@@ -1796,7 +1796,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// update the parent of possible childs
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -1818,7 +1818,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// make room for the current node in the new sub tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -1843,7 +1843,7 @@ public function moveUpInTree ($navigation, $node_id)
 		// node
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -1881,7 +1881,7 @@ public function moveUpInTree ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// adjust rgt of sibling
 		$sqlData = array(
@@ -1897,7 +1897,7 @@ public function moveUpInTree ($navigation, $node_id)
 		);
 		
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	} else {
 		// if the next sibling is more than one level deeper, we have so search for
 		// the closest sibling that's only one level deeper 
@@ -1909,7 +1909,7 @@ public function moveUpInTree ($navigation, $node_id)
 			// adjust rgts in new node 
 			$sql = "
 				UPDATE
-					`".OAK_DB_CONTENT_NODES."`
+					`".WCOM_DB_CONTENT_NODES."`
 				SET
 					`rgt` = `rgt` + 2
 				WHERE
@@ -1947,13 +1947,13 @@ public function moveUpInTree ($navigation, $node_id)
 			);
 
 			// execute update
-			$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+			$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 			
 			// take care of possible childs
 			// first: update parent
 			$sql = "
 				UPDATE
-					`".OAK_DB_CONTENT_NODES."`
+					`".WCOM_DB_CONTENT_NODES."`
 				SET
 					`parent` = :new_parent
 				WHERE
@@ -1975,7 +1975,7 @@ public function moveUpInTree ($navigation, $node_id)
 			// update levels, rgts and lft
 			$sql = "
 				UPDATE
-					`".OAK_DB_CONTENT_NODES."`
+					`".WCOM_DB_CONTENT_NODES."`
 				SET
 					`level` = `level` - 1,
 					`lft` = `lft` + 1,
@@ -2002,7 +2002,7 @@ public function moveUpInTree ($navigation, $node_id)
 			// update rgt of new parent
 			$sql = "
 				UPDATE
-					`".OAK_DB_CONTENT_NODES."`
+					`".WCOM_DB_CONTENT_NODES."`
 				SET
 					`rgt` = `rgt` + :diff
 				WHERE
@@ -2036,12 +2036,12 @@ public function moveUpInTree ($navigation, $node_id)
 			);
 
 			// execute update
-			$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+			$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 			
 			// take care of possible childs
 			$sql = "
 				UPDATE
-					`".OAK_DB_CONTENT_NODES."`
+					`".WCOM_DB_CONTENT_NODES."`
 				SET
 					`parent` = :new_parent
 				WHERE
@@ -2113,7 +2113,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		// adjust sorting in the rest of the navigation structure
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` + 1
 			WHERE
@@ -2142,14 +2142,14 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 	// take current node out of its tree and create a new tree
 	// the the current node as its root node
 	} elseif ($node['lft'] > 1 && ($sibling_below['lft'] == 1 || !is_array($sibling_below))) {
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` - 2
 			WHERE
@@ -2170,7 +2170,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		// adjust sorting of all the trees
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` + 1
 			WHERE
@@ -2207,7 +2207,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	// node is a root node and the sibling below is a root node too.
 	// so we have to turn the root node into a child of the sibling
 	// below.
@@ -2215,7 +2215,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		// decrease sorting in the whole navigation structure
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -2236,7 +2236,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		// make room in the new tree, adjust lfts
 		$sql = "
 			UPDATE 
-				 `".OAK_DB_CONTENT_NODES."`
+				 `".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 2
 			WHERE
@@ -2257,7 +2257,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		// make room in the new tree, adjust rgts
 		$sql = "
 			UPDATE 
-				 `".OAK_DB_CONTENT_NODES."`
+				 `".WCOM_DB_CONTENT_NODES."`
 			SET
 				`rgt` = `rgt` + 2
 			WHERE
@@ -2294,7 +2294,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	}
 	
 	return true;
@@ -2366,7 +2366,7 @@ public function moveDownInTree ($navigation, $node_id)
 		// update level, lfts and rgts of subnode
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`level` = `level` - 1,
 				`lft` = `lft` + 1,
@@ -2403,7 +2403,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 		// turn current node into "root" of sub tree
 		$sqlData = array(
@@ -2420,7 +2420,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	// nodes with a lft of 1 are root nodes, we have to place them somewhere
 	// in the tree and have to create a new root node. so let's change its
@@ -2440,7 +2440,7 @@ public function moveDownInTree ($navigation, $node_id)
 		// decrease level of all subnodes of the sibling below
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 1,
 				`rgt` = `rgt` + 1,
@@ -2477,7 +2477,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 		// turn root node into replacement of sibling below
 		$sqlData = array(
@@ -2495,12 +2495,12 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 		// update root node in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -2519,7 +2519,7 @@ public function moveDownInTree ($navigation, $node_id)
 		// update parent in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -2572,7 +2572,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 		// update the lft of the new parent of the current node
 		$sqlData = array(
@@ -2588,7 +2588,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 
 	// that handles moves if the sibling below is a child of the current node and
 	// the sibling below the sibling below is a child of the sibling below -- everything's
@@ -2614,7 +2614,7 @@ public function moveDownInTree ($navigation, $node_id)
 		// update the parent:
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -2640,7 +2640,7 @@ public function moveDownInTree ($navigation, $node_id)
 		// to lower the level
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` + 1,
 				`rgt` = `rgt` + 1,
@@ -2683,7 +2683,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);		
 		
 		// swap the sibling below with the current node
 		$sqlData = array(
@@ -2702,7 +2702,7 @@ public function moveDownInTree ($navigation, $node_id)
 		);
 
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 	} else {
 		throw new Utility_NestedsetException("Move not implemented");
@@ -2771,7 +2771,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// update level
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`level` = `level` - 1
 			WHERE
@@ -2795,7 +2795,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// update rgt and lft in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1
@@ -2815,7 +2815,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// within the subtree of the new root node... um, what!?
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1
@@ -2837,7 +2837,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// update root node in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -2856,7 +2856,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// update parents in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -2886,7 +2886,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		);
 	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	// handles move of root nodes if the sibling below is 
 	// a root node too.
@@ -2898,7 +2898,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		// update sorting
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -2938,7 +2938,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 	);
 	
 	// execute update
-	$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+	$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	return true;
 }
@@ -2990,7 +2990,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 	// update lfts and rgts within the subtree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` - 1,
 			`rgt` = `rgt` - 1,
@@ -3016,7 +3016,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 	// update lfts in the rest of the tree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` - 2
 		WHERE
@@ -3037,7 +3037,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 	// update rgts in the rest of the tree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`rgt` = `rgt` - 2
 		WHERE
@@ -3075,7 +3075,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 	);
 	
 	// execute update
-	$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+	$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 	return true;
 }
@@ -3128,7 +3128,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// update level
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`level` = `level` - 1
 			WHERE
@@ -3152,7 +3152,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// update rgt and lft in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1
@@ -3172,7 +3172,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// within the subtree of the new root node... um, what!?
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`lft` = `lft` - 1,
 				`rgt` = `rgt` - 1
@@ -3194,7 +3194,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// update root node in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`root_node` = :new_root_node
 			WHERE
@@ -3213,7 +3213,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// update parents in the whole tree
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`parent` = :new_parent
 			WHERE
@@ -3243,7 +3243,7 @@ public function deleteRootNode ($navigation, $node_id)
 		);
 	
 		// execute update
-		$this->base->db->update(OAK_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
+		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 	
 		// remove the current node
 		// prepare where clause
@@ -3255,7 +3255,7 @@ public function deleteRootNode ($navigation, $node_id)
 		);
 	
 		// execute update
-		return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);
+		return $this->base->db->delete(WCOM_DB_CONTENT_NODES, $where, $bind_params);
 	
 	// handles deletion of root nodes if the sibling below is 
 	// a root node too.
@@ -3267,7 +3267,7 @@ public function deleteRootNode ($navigation, $node_id)
 		// update sorting
 		$sql = "
 			UPDATE
-				`".OAK_DB_CONTENT_NODES."`
+				`".WCOM_DB_CONTENT_NODES."`
 			SET
 				`sorting` = `sorting` - 1
 			WHERE
@@ -3294,7 +3294,7 @@ public function deleteRootNode ($navigation, $node_id)
 		);
 	
 		// execute update
-		return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);
+		return $this->base->db->delete(WCOM_DB_CONTENT_NODES, $where, $bind_params);
 				
 	} else {
 		throw new Utility_NestedsetException("Deletion not implemented");
@@ -3337,7 +3337,7 @@ public function deleteNodeInTree ($navigation, $node_id)
 	// update lfts and rgts within the subtree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` - 1,
 			`rgt` = `rgt` - 1,
@@ -3363,7 +3363,7 @@ public function deleteNodeInTree ($navigation, $node_id)
 	// update lfts in the rest of the tree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`lft` = `lft` - 2
 		WHERE
@@ -3384,7 +3384,7 @@ public function deleteNodeInTree ($navigation, $node_id)
 	// update rgts in the rest of the tree
 	$sql = "
 		UPDATE
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		SET
 			`rgt` = `rgt` - 2
 		WHERE
@@ -3412,7 +3412,7 @@ public function deleteNodeInTree ($navigation, $node_id)
 	);
 	
 	// execute update
-	return $this->base->db->delete(OAK_DB_CONTENT_NODES, $where, $bind_params);	
+	return $this->base->db->delete(WCOM_DB_CONTENT_NODES, $where, $bind_params);	
 }
 
 
@@ -3443,7 +3443,7 @@ public function selectNode ($id)
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`id` = :id
 		LIMIT 
@@ -3518,7 +3518,7 @@ public function selectNodes ($params = array())
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			1
 	";
@@ -3601,7 +3601,7 @@ public function countNodes ($params = array())
 		SELECT
 			COUNT(*) AS `total` 
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			1
 	";
@@ -3671,7 +3671,7 @@ protected function selectSiblingAbove ($navigation, $reference)
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`navigation` = :navigation
 		AND
@@ -3744,7 +3744,7 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`navigation` = :navigation
 		AND
@@ -3817,7 +3817,7 @@ protected function selectSiblingAboveOneLevelHigher ($navigation, $reference)
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			navigation = :navigation
 		AND
@@ -3891,7 +3891,7 @@ protected function selectSiblingBelow ($navigation, $reference)
 			`level`,
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`navigation` = :navigation
 		  AND
@@ -3943,7 +3943,7 @@ protected function selectMaxSorting ($navigation)
 		SELECT
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`navigation` = :navigation
 		ORDER BY
@@ -3981,7 +3981,7 @@ protected function selectMinSorting ($navigation)
 		SELECT
 			`sorting`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			`navigation` = :navigation
 		ORDER BY
@@ -4023,7 +4023,7 @@ public function node_exists ($node, $navigation = null)
 		SELECT
 			COUNT(*) AS `total`
 		FROM
-			`".OAK_DB_CONTENT_NODES."`
+			`".WCOM_DB_CONTENT_NODES."`
 		WHERE
 			1
 	";

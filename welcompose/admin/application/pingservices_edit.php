@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: pingservices_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -87,16 +87,16 @@ try {
 		exit;
 	}
 	$USER->initUserAdmin();
-	$PROJECT->initProjectAdmin(OAK_CURRENT_USER);
+	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!oak_check_access('Application', 'PingService', 'Manage')) {
+	if (!wcom_check_access('Application', 'PingService', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// load ping service
 	$ping_service = $PINGSERVICE->selectPingService(Base_Cnc::filterRequest($_REQUEST['id'],
-		OAK_REGEX_NUMERIC));
+		WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('ping_service', 'post');
@@ -124,7 +124,7 @@ try {
 	$FORM->applyFilter('host', 'trim');
 	$FORM->applyFilter('host', 'strip_tags');
 	$FORM->addRule('host', gettext('Please enter a host name'), 'required');
-	$FORM->addRule('host', gettext('Please enter a valid host name'), 'regex', OAK_REGEX_PING_SERVICE_HOST);
+	$FORM->addRule('host', gettext('Please enter a valid host name'), 'regex', WCOM_REGEX_PING_SERVICE_HOST);
 	
 	// textfield for port
 	$FORM->addElement('text', 'port', gettext('Port'), 
@@ -132,7 +132,7 @@ try {
 	$FORM->applyFilter('port', 'trim');
 	$FORM->applyFilter('port', 'strip_tags');
 	$FORM->addRule('port', gettext('Please enter a port number'), 'required');
-	$FORM->addRule('port', gettext('Please enter a valid port number'), 'regex', OAK_REGEX_NUMERIC);
+	$FORM->addRule('port', gettext('Please enter a valid port number'), 'regex', WCOM_REGEX_NUMERIC);
 	
 	// textfield for path
 	$FORM->addElement('text', 'path', gettext('Path'), 
@@ -171,23 +171,23 @@ try {
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
 		
 		// assign paths
-		$BASE->utility->smarty->assign('oak_admin_root_www',
-			$BASE->_conf['path']['oak_admin_root_www']);
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 	    
 		// assign current user and project id
-		$BASE->utility->smarty->assign('oak_current_user', OAK_CURRENT_USER);
-		$BASE->utility->smarty->assign('oak_current_project', OAK_CURRENT_PROJECT);
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 		// select available projects
 		$select_params = array(
-			'user' => OAK_CURRENT_USER,
+			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
 		// display the form
-		define("OAK_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('application/pingservices_edit.html', OAK_TEMPLATE_KEY);
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('application/pingservices_edit.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();

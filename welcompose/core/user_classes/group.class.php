@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: group.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
@@ -18,7 +18,7 @@
  * 
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
@@ -83,7 +83,7 @@ public function instance()
 public function addGroup ($sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Manage')) {
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -93,10 +93,10 @@ public function addGroup ($sqlData)
 	}
 	
 	// make sure that the new group will be assigned to the current project
-	$sqlData['project'] = OAK_CURRENT_PROJECT;
+	$sqlData['project'] = WCOM_CURRENT_PROJECT;
 	
 	// insert row
-	$insert_id = $this->base->db->insert(OAK_DB_USER_GROUPS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_USER_GROUPS, $sqlData);
 	
 	// test if group belongs to current project/user
 	if (!$this->groupBelongsToCurrentUser($insert_id)) {
@@ -119,7 +119,7 @@ public function addGroup ($sqlData)
 public function updateGroup ($id, $sqlData)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Manage')) {
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -142,11 +142,11 @@ public function updateGroup ($id, $sqlData)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// update row
-	return $this->base->db->update(OAK_DB_USER_GROUPS, $sqlData,
+	return $this->base->db->update(WCOM_DB_USER_GROUPS, $sqlData,
 		$where, $bind_params);	
 }
 
@@ -161,7 +161,7 @@ public function updateGroup ($id, $sqlData)
 public function deleteGroup ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Manage')) {
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -181,11 +181,11 @@ public function deleteGroup ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
-	return $this->base->db->delete(OAK_DB_USER_GROUPS, $where, $bind_params);
+	return $this->base->db->delete(WCOM_DB_USER_GROUPS, $where, $bind_params);
 }
 
 /**
@@ -199,7 +199,7 @@ public function deleteGroup ($id)
 public function selectGroup ($id)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -228,9 +228,9 @@ public function selectGroup ($id)
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		LEFT JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_groups`.`project` = `application_projects`.`id`
 		WHERE
@@ -244,7 +244,7 @@ public function selectGroup ($id)
 	// prepare bind params
 	$bind_params = array(
 		'id' => (int)$id,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -269,7 +269,7 @@ public function selectGroup ($id)
 public function selectGroups ($params = array())
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -314,13 +314,13 @@ public function selectGroups ($params = array())
 			`application_projects`.`date_modified` AS `project_date_modified`,
 			`application_projects`.`date_added` AS `project_date_added`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		JOIN
-			".OAK_DB_APPLICATION_PROJECTS." AS `application_projects`
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
 		  ON
 			`user_groups`.`project` = `application_projects`.`id`
 		LEFT JOIN
-			".OAK_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
 		  ON
 			`user_groups`.`id` = `user_users2user_groups`.`group`
 		WHERE 
@@ -329,7 +329,7 @@ public function selectGroups ($params = array())
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// add where clauses
@@ -367,7 +367,7 @@ public function selectGroups ($params = array())
 public function mapGroupToRights ($group, $rights = array())
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Manage')) {
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -387,11 +387,11 @@ public function mapGroupToRights ($group, $rights = array())
 	// detach group from all rights
 	$sql = "
 		DELETE FROM
-			 ".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			 ".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		USING
 			`user_groups2user_rights`
 		LEFT JOIN
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		ON
 			`user_groups2user_rights`.`group` = `user_groups`.`id`
 		WHERE
@@ -403,7 +403,7 @@ public function mapGroupToRights ($group, $rights = array())
 	// prepare bind params
 	$bind_params = array(
 		'group' => (int)$group,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query
@@ -430,7 +430,7 @@ public function mapGroupToRights ($group, $rights = array())
 			);
 			
 			// insert new link
-			$this->base->db->insert(OAK_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
+			$this->base->db->insert(WCOM_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
 		}
 	}
 	
@@ -448,7 +448,7 @@ public function mapGroupToRights ($group, $rights = array())
 public function selectGroupToRightsMap ($group)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -464,9 +464,9 @@ public function selectGroupToRightsMap ($group)
 			`user_groups2user_rights`.`group`,
 			`user_groups2user_rights`.`right`
 		FROM
-			".OAK_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
 		JOIN
-			".OAK_DB_USER_RIGHTS." AS `user_rights`
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
 		  ON
 			`user_groups2user_rights`.`right` = `user_rights`.`id`
 		WHERE
@@ -478,7 +478,7 @@ public function selectGroupToRightsMap ($group)
 	// prepare bind params
 	$bind_params = array(
 		'group' => $group,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and return result
@@ -496,7 +496,7 @@ public function selectGroupToRightsMap ($group)
 public function groupBelongsToCurrentProject ($group)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -510,7 +510,7 @@ public function groupBelongsToCurrentProject ($group)
 		SELECT
 			COUNT(*)
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		WHERE
 			`user_groups`.`id` = :group
 		AND
@@ -519,7 +519,7 @@ public function groupBelongsToCurrentProject ($group)
 	// prepare bind params
 	$bind_params = array(
 		'group' => (int)$group,
-		'project' => OAK_CURRENT_PROJECT
+		'project' => WCOM_CURRENT_PROJECT
 	);
 	
 	// execute query and evaluate result
@@ -541,7 +541,7 @@ public function groupBelongsToCurrentProject ($group)
 public function groupBelongsToCurrentUser ($group)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -556,7 +556,7 @@ public function groupBelongsToCurrentUser ($group)
 	if (!$this->groupBelongsToCurrentProject($group)) {
 		return false;
 	}
-	if (!$USER->userBelongsToCurrentProject(OAK_CURRENT_USER)) {
+	if (!$USER->userBelongsToCurrentProject(WCOM_CURRENT_USER)) {
 		return false;
 	}
 	
@@ -578,7 +578,7 @@ public function groupBelongsToCurrentUser ($group)
 public function testForUniqueName ($name, $id = null)
 {
 	// access check
-	if (!oak_check_access('User', 'Group', 'Use')) {
+	if (!wcom_check_access('User', 'Group', 'Use')) {
 		throw new User_GroupException("You are not allowed to perform this action");
 	}
 	
@@ -598,7 +598,7 @@ public function testForUniqueName ($name, $id = null)
 		SELECT 
 			COUNT(*) AS `total`
 		FROM
-			".OAK_DB_USER_GROUPS." AS `user_groups`
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		WHERE
 			`project` = :project
 		  AND
@@ -607,7 +607,7 @@ public function testForUniqueName ($name, $id = null)
 	
 	// prepare bind params
 	$bind_params = array(
-		'project' => OAK_CURRENT_PROJECT,
+		'project' => WCOM_CURRENT_PROJECT,
 		'name' => $name
 	);
 	

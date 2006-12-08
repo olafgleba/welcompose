@@ -1,6 +1,6 @@
 /**
- * Project: Oak
- * File: oak.setup.core.js
+ * Project: Welcompose
+ * File: wcom.setup.core.js
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -12,19 +12,19 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: oak.core.js 654 2006-11-21 16:24:40Z olaf $
+ * $Id: wcom.core.js 654 2006-11-21 16:24:40Z olaf $
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  
 /** 
- * @fileoverview This is the core Oak javascript file. 
+ * @fileoverview This is the core Welcompose javascript file. 
  * 
  * @author Olaf Gleba og@creatics.de
- * @version $Id: oak.core.js 654 2006-11-21 16:24:40Z olaf $ 
+ * @version $Id: wcom.core.js 654 2006-11-21 16:24:40Z olaf $ 
  */
  
 
@@ -38,7 +38,7 @@
  * 2 = production
  *
  * @static
- * @link See oak.string.js for the strings content
+ * @link See wcom.string.js for the strings content
  */
 var debug = 1;
 
@@ -137,7 +137,7 @@ Errors.prototype = new Error();
 /**
  * Constructs the Base class
  * 
- * @class This class is the most important class of the oak
+ * @class This class is the most important class of the wcom
  * javascript enviroment, cause all other classes derived from that class.
  * It predefines properties and methods which are supposed to be used application wide.
  *

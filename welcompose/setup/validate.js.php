@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Project: Oak
+ * Project: Welcompose
  * File: validate.js.php
  *
  * Copyright (c) 2006 sopic GmbH
@@ -18,12 +18,12 @@
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
- * @package Oak
+ * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
 // define area constant
-define('OAK_CURRENT_AREA', 'ADMIN');
+define('WCOM_CURRENT_AREA', 'ADMIN');
 
 // get loader
 $path_parts = array(
@@ -57,10 +57,10 @@ try {
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
 	// map field id names to regexps and error messages 
-	if (Base_Cnc::filterRequest($_POST['elemID'], OAK_REGEX_FORM_FIELD_ID)) {
+	if (Base_Cnc::filterRequest($_POST['elemID'], WCOM_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
 			case 'database_database':
-					$reg = OAK_REGEX_ALPHANUMERIC;
+					$reg = WCOM_REGEX_ALPHANUMERIC;
 					$desc = gettext('Literal...');
 				break;
 			default :
