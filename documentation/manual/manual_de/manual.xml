@@ -18,6 +18,8 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_demo.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_crash_course_blog.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_templating.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_url_rewriting.xml" />

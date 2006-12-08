@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="crash_course_blog">
+	<title>Crash-Kurs: Weblog</title>
+	
+	<para>
+		Nachdem es im ersten Crash-Kurs nur um eine Demo-Webseite ging, ist es
+		nun Zeit, ein erstes reales Beispiel umzusetzen: Ein Weblog.
+	</para>
+	
+	<para>
+		Auch in diesem Crash-Kurs gehen wir von einer jungfräulichen
+		Oak-Installation aus. Wenn Sie bereits Seiten angelegt haben und
+		Oak nicht neu installieren wollen, können Sie einfach die alten
+		Inhalte löschen, bevor Sie mit dem Crash-Kurs beginnen.
+	</para>
+	
+	<para>
+		@@@ Screenshot comes here! @@@
+	</para>
+	
+	<sect1 id="crash_course_blog.create_pages">
+		<title>Seiten anlegen</title>
+		
+		<para>
+			Wie auch beim ersten Crash-Kurs muss zuerst ein Vorlagen-Set
+			angelegt werden. Da überall das gleiche Design verwendet wird,
+			reicht das Anlegen eines einzelnen Vorlagen-Sets aus. Passend
+			zur Seite, die erstellt werden soll, können Sie es 
+			<userinput>Blog</userinput> nennen. Wenn Sie nicht mehr genau
+			wissen, wie Sie ein Vorlagen-Set anlegen müssen, hilft Ihnen
+			<xref linkend="crash_course_demo.preparation"/> weiter.
+		</para>
+		
+		<para>
+			Wie man auf dem Screenshot sieht, ist die gesamte Webseite
+			wieder recht einfach aufgebaut: Es ist nur eine Navigation 
+			vorhanden. Die besteht aus drei Seiten: Das Weblog ist gleich die
+			Startseite. Dazu kommt noch ein Formular und ein Link
+			zur Software, mit der das Weblog erstellt wurde.
+		</para>
+		
+		<para>
+			Erstellen Sie zuerst eine Navigation. Gehen Sie dazu zum Bereich
+			<guibutton>Contents</guibutton> und dann zum Unterbereich
+			<guibutton>Navigations</guibutton>. Nennen Sie die Navigation
+			wieder <userinput>Hauptnavigation</userinput>. Kehren Sie dann
+			zur Seitenübersicht zurück.
+		</para>
+		
+		<para>
+			Nun müssen die Seiten angelegt werden. Beginnen Sie mit der
+			Startseite. Klicken Sie dazu auf das Symbol zum Hinzufügen
+			einer Seite.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Name</term>
+				<listitem>
+					<para>
+						Geben Sie hier den Namen des Navigationspunkts ein,
+						also <userinput>Startseite</userinput>. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Type</term>
+				<listitem>
+					<para>
+						Um ein Blog auf der Startseite betreiben zu können,
+						muss der Seiten-Typ <guimenuitem>OAK_BLOG</guimenuitem>
+						ausgewählt werden.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Template set</term>
+				<listitem>
+					<para>
+						Wählen Sie das Vorlagen-Set aus, das Sie für das
+						Weblog angelegt haben, also
+						<guimenuitem>Blog</guimenuitem>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Index page</term>
+				<listitem>
+					<para>
+						Setzen Sie hier einen Haken, um die Startseite als
+						diejenige Seite zu definieren, die als Startseite
+						verwendet werden soll.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<para>
+			Die anderen Felder können Sie in ihrem Originalzustand lassen.
+			Klicken Sie auf <guibutton>Add page</guibutton>, um die Seite
+			zu speichern.
+		</para>
+		
+		<para>
+			Klicken Sie nun neben der soeben angelegten Seite auf das Symbol
+			zum Hinzufügen einer neuen Webseite, um die beiden verbliebenen
+			Seiten zu erstellen.
+		</para>
+		
+		<para>
+			Für das Kontaktformular geben Sie den Seitennamen
+			<userinput>Kontakt</userinput> an. Als Seiten-Typ müssen Sie
+			<guimenuitem>OAK_SIMPLE_FORM</guimenuitem> auswählen und
+			als Vorlagen-Set <guimenuitem>Blog</guimenuitem>. Die restlichen
+			Optionen können Sie auf den Standardeinstellungen belassen.
+			Nachdem Sie die Seite gespeichert haben, kommen Sie wieder zurück
+			zur Seitenübersicht. Klicken Sie neben dem Eintrag der soeben
+			angelegten Seite bei <guilabel>Move</guilabel> auf das Symbol mit
+			dem Pfeil, der nach unten zeigt, um die Seite auf die gleiche
+			Ebene wie die Startseite zu befördern.
+		</para>
+		
+		<warning>
+			<para>
+				Setzen Sie keinen Haken mehr beim Feld
+				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
+				eine <foreignphrase>Index page</foreignphrase> geben und
+				dies ist schon die Seite <userinput>Startseite</userinput>.
+			</para>
+		</warning>
+		
+		<para>
+			Wiederholen Sie diesen Vorgang für den Link zur Webseite,
+			mit der die Software erstellt wurde. Geben Sie als Seitennamen
+			den Namen des Navigationspunkts ein, also <userinput>Made with
+			Oak</userinput>. Als Seiten-Typ müssen Sie 
+			<guimenuitem>OAK_URL</guimenuitem> auswählen. Vergessen Sie nicht,
+			die Seite nach dem Speichern auszurücken! 
+		</para>
+	</sect1>
+	
+	<sect1 id="crash_course_blog.fill_blog">
+		<title>Weblog befüllen</title>
+		
+		<para/>
+	</sect1>
+</chapter>
