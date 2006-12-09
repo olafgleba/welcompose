@@ -30,13 +30,14 @@
 			zur Seite, die erstellt werden soll, können Sie es 
 			<userinput>Blog</userinput> nennen. Wenn Sie nicht mehr genau
 			wissen, wie Sie ein Vorlagen-Set anlegen müssen, hilft Ihnen
-			<xref linkend="crash_course_demo.preparation"/> weiter.
+			<xref linkend="crash_course_demo.preparation"/> aus dem
+			ersten Crash-Kurs weiter.
 		</para>
 		
 		<para>
 			Wie man auf dem Screenshot sieht, ist die gesamte Webseite
 			wieder recht einfach aufgebaut: Es ist nur eine Navigation 
-			vorhanden. Die besteht aus drei Seiten: Das Weblog ist gleich die
+			vorhanden. Diese besteht aus drei Seiten: Das Weblog ist gleich die
 			Startseite. Dazu kommt noch ein Formular und ein Link
 			zur Software, mit der das Weblog erstellt wurde.
 		</para>
