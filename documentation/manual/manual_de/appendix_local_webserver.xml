@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="local_webserver">
+	<title>Lokaler Webserver</title>
+	
+	<para>
+		Ein lokaler Webserver auf dem eigenen Computer ist eine praktische
+		Angelegenheit, wenn es darum geht, eine Webseite mit Welcompose zu
+		entwickeln. In den nächsten Abschnitten wird beschrieben, wie man einen
+		lokalen Webserver für Welcompose installiert und konfiguriert.
+	</para>
+	
+	<sect1 id="local_webserver.windows">
+		<title>Windows</title>
+		
+		<warning>
+			<para>
+				Die Anleitung bezieht sich auf <emphasis>Windows 2000</emphasis>
+				und <emphasis>Windows XP</emphasis>. Ein Betrieb der Komponenten
+				auf früheren Windows-Versionen ist nicht möglich! 
+			</para>
+		</warning>
+		
+		<para>
+			Um Welcompose auf Windows in Betrieb zu nehmen, werden folgende
+			Komponenten benötigt:
+		</para>
+		
+		<itemizedlist>
+			<listitem>
+				<para>Apache Webserver</para>
+			</listitem>
+			<listitem>
+				<para>PHP</para>
+			</listitem>
+			<listitem>
+				<para>MySQL Database Server ("Community Edition")</para>
+			</listitem>
+			<listitem>
+				<para>MySQL GUI Tools</para>
+			</listitem>
+		</itemizedlist>
+		
+		<para>
+			In der Regel, empfiehlt es sich, die neusten Versionen der
+			jeweiligen Komponenten zu verwenden. Allerdings kann es sein,
+			das gerade neu erschienen Versionen (noch) nicht mit den anderen
+			Komponenten zusammenarbeiten oder (noch) nicht kompatibel zu
+			Oak sind. Konsultieren Sie dazu bitte den
+			<xref linkend="install_instructions.requirements"/>.
+		</para>
+		
+		<sect2 id="local_webserver.windows.mysql">
+			<title>MySQL</title>
+			
+			<sect3 id="local_webserver.windows.mysql.download_server_and_gui_tools">
+				<title>Server und GUI Tools herunterladen</title>
+				
+				<para>
+					Von MySQL wird der Datenbank-Server sowie die GUI Tools
+					für administrative Tätigkeiten benötigt. Die jeweils
+					aktuellen Versionen erhalten Sie von
+					<ulink url="http://dev.mysql.com/"/>.
+				</para>
+				
+				<para>
+					Um den richtigen MySQL-Server auszuwählen, suchen Sie nach
+					dem Abschnitt <emphasis>MySQL 5.0 Database Server &ndash;
+					Community Edition</emphasis> (respektive der jeweils
+					aktuellen Version) und dort nach dem Eintrag 
+					<emphasis>Generally Available 5.0.27</emphasis>. Sie
+					werden dann zur Download-Seite weitergeleitet.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.find_ga_server">
+					<title>Download von MySQL Community Server auffinden</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.find_ga_server.png"/>
+				</figure>
+				
+				<para>
+					Wenn Sie auf der Download-Seite angelegt sind, müssen Sie
+					nach dem Abschnitt <emphasis>Windows downloads</emphasis>
+					suchen und dort nach dem Eintrag
+					<emphasis>Windows (x86) Zip/Setup.exe</emphasis> und klicken
+					auf den Link <emphasis>Pick a mirror</emphasis>.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.find_ga_windows_server">
+					<title>Windows-Download von MySQL Community Server auswählen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.find_ga_windows_server.png"/>
+				</figure>
+				
+				<para>
+					Sie werden zu einer Seite mit verschiedenen zur Verfügung
+					stehenden Download Mirrors weitergeleitet. Wählen Sie
+					den geographisch nächstgelegenen Download Mirror aus und
+					der Download beginnt.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.mirror_selection_ga_server">
+					<title>Mirror für Windows-Download von MySQL Community Server auswählen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.mirror_selection_ga_server.png"/>
+				</figure>
+				
+				<para>
+					Nun müssen noch die MySQL GUI Tools heruntergeladen werden.
+					Sie können sie wie den MySQL-Server von
+					<ulink url="http://dev.mysql.com/"/> herunterladen. Suchen
+					Sie nach dem Abschnitt <emphasis>MySQL GUI Tools</emphasis>
+					und wählen Sie dort den Link <emphasis>MySQL
+					5.0-r6</emphasis> (respektive die jeweils aktuelle Version)
+					aus. Sie kommen dann zu Download-Seite.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.find_gui_tools">
+					<title>Download von MySQ GUI Tools auffinden</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.find_gui_tools.png"/>
+				</figure>
+				
+				<para>
+					Suchen Sie dort nach dem Abschnitt <emphasis>Windows
+					downloads</emphasis> und wählen Sie dort den Link
+					<emphasis>Pick a mirror</emphasis> neben dem Eintrag
+					<emphasis>Windows (x86)</emphasis> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.find_windows_gui_tools">
+					<title>MySQL GUI Tools für Windows zum Download auswählen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.find_windows_gui_tools.png"/>
+				</figure>
+				
+				<para>
+					Sie werden zu einer Seite mit verschiedenen zur Verfügung
+					stehenden Download Mirrors weitergeleitet. Wählen Sie
+					den geographisch nächstgelegenen Download Mirror aus und
+					der Download beginnt.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.download_server_and_gui_tools.mirror_selection_gui_tools">
+					<title>Mirror für Windows-Download von MySQL GUI Tools auswählen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.download_server_and_gui_tools.mirror_selection_gui_tools.png"/>
+				</figure>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.mysql.install_server">
+				<title>Server installieren</title>
+				
+				<para>
+					Entpacken Sie das MySQL-Server-Paket, das sie soeben
+					heruntergeladen haben (beispielsweise
+					<filename>mysql-5.0.26-win32.zip</filename>) und starten
+					Sie die Setup.exe. Folgen Sie den Anweisungen, bis Sie zum
+					zweiten Schritt <emphasis>Setup Type</emphasis> gelangen.
+					Wählen Sie dort den Setup-Typ
+					<guimenuitem>Typical</guimenuitem> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.setup_type">
+					<title>MySQL-Server-Setup: Setup-Typ</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.setup_type.png"/>
+				</figure>
+				
+				<para>
+					Folgen Sie dann wieder den Anweisungen, bis Sie zum Schritt
+					<emphasis>MySQL.com Sign-up</emphasis> gelangen. Wählen Sie
+					die Option <guimenuitem>Skip sign-up</guimenuitem> aus, bevor
+					Sie auf <guibutton>Next</guibutton> klicken, womit die
+					Installation abgeschlossen ist.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.mysql_com_sing_up">
+					<title>MySQL-Server-Setup: MySQL.com Sign-up</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.mysql_com_sing_up.png"/>
+				</figure>
+				
+				<para>
+					Weisen Sie nun den Setup-Assistent dazu an, die
+					Konfigurationsprozedur zu starten, indem Sie einen Haken
+					bei <guilabel>Configure the MySQL Server now</guilabel>
+					setzen. Nach dem Klick auf <guibutton>Finish</guibutton>
+					wird der Konfigurations-Assistent gestartet.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.wizard_completed">
+					<title>MySQL-Server-Setup: Wizard completed</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.wizard_completed.png"/>
+				</figure>
+				
+				<para>
+					Folgen Sie den Anweisungen des Konfigurations-Assistenten,
+					bis Sie zur Auswahl der Konfigurationsart kommen. Wählen
+					Sie dort die Option <guimenuitem>Standard
+					Configuration</guimenuitem> aus. Die Standard-Konfiguration
+					reicht zur Inbetriebnahme des MySQL-Servers aus.
+					Detaileinstellungen können später mit dem Werkzeug
+					MySQL Administrator vorgenommen werden, das Bestandteil
+					der MySQL GUI Tools ist (siehe
+					<xref linkend="local_webserver.windows.mysql.initialize_database"/>).
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.configuration_type">
+					<title>MySQL-Server-Konfiguration: Konfigurationsart</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.configuration_type.png"/>
+				</figure>
+				
+				<para>
+					Setzen Sie einen Haken bei <emphasis>Install As Windows
+					Service</emphasis> und bei <emphasis>Launch the MySQL
+					Server</emphasis> automatically, damit MySQL beim Start
+					von Windows automatisch als Daemon gestartet wird.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.windows_options">
+					<title>MySQL-Server-Konfiguration: Windows-Optionen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.windows_options.png"/>
+				</figure>
+				
+				<para>
+					Klicken Sie bei <emphasis>Modify Security Settings</emphasis>
+					auf die Checkbox, damit der Configuration Wizard ein neues
+					Passwort für den MySQL-Administrator akzeptiert. Wählen Sie
+					ein beliebiges Passwort und geben Sie es in die beiden
+					Passwort-Felder ein.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.security_options">
+					<title>MySQL-Server-Konfiguration: Sicherheits-Optionen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.security_options.png"/>
+				</figure>
+				
+				<para>
+					Sobald die Konfiguration erfolgreich ausgeführt wurde,
+					können Sie den Konfigurations-Assistenten verlassen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_server.finish">
+					<title>MySQL-Server-Konfiguration: Abschliessen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_server.finish.png"/>
+				</figure>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.mysql.install_gui_tools">
+				<title>GUI Tools installieren</title>
+				<para/>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.mysql.initialize_database">
+				<title>Datenbank initialisieren</title>
+				<para/>
+			</sect3>
+		</sect2>
+	</sect1>
+</appendix>
