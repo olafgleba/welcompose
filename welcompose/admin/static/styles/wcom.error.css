@@ -1,0 +1,84 @@
+/**
+ * Project: Welcompose
+ * File: wcom.error.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.admin.css 713 2006-12-08 16:12:26Z andreas $
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Welcompose
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/* error_popup_403.html, error_popup_723.html */
+
+body#errormsgpopup723 #container {
+width: 723px;
+background: #fff url(../img/bg_header_popup_723.gif) 0 0 no-repeat;
+}
+body#errormsgpopup723 #container p.copyright {
+width: 693px;
+}
+body#errormsgpopup723 #logo {
+position: absolute;
+top: 19px;
+left: 503px;
+width: 200px;
+background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+body#errormsgpopup723 #logo p {
+font-weight: bold;
+color: #fff;
+background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+padding: 0 0 3px 7px;
+}
+
+
+body#errormsgpopup403 #container {
+width: 403px;
+background: #fff url(../img/bg_header_popup_403.gif) 0 0 no-repeat;
+}
+body#errormsgpopup403 #container p.copyright {
+width: 360px;
+text-align: left;
+margin-left: 25px;
+}
+body#errormsgpopup403 #logo {
+position: absolute;
+top: 19px;
+left: 185px;
+width: 200px;
+background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+body#errormsgpopup403 #logo p {
+font-weight: bold;
+color: #fff;
+background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+padding: 0 0 3px 7px;
+}
+
+
+body#errormsgpopup403 h2, body#errormsgpopup723 h2  {
+position: relative;
+font-size: 1.0em;
+font-weight: normal;
+color: #000;
+margin: 30px 0 15px 10px;
+}
+body#errormsgpopup403 h2 span,
+body#errormsgpopup723 h2 span {
+color: #0c3;
+font-weight: bold;
+}
