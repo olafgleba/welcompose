@@ -242,12 +242,313 @@
 			
 			<sect3 id="local_webserver.windows.mysql.install_gui_tools">
 				<title>GUI Tools installieren</title>
-				<para/>
+				
+				<para>
+					Nun müssen die MySQL GUI Tools installiert werden. Diese
+					werden zur Verwaltung des Datenbankservers benötigt.
+					Führen Sie dazu den heruntergeladenen MSI-Installer
+					aus, beispielsweise
+					<filename>mysql-gui-tools-5.0-r4-win32.msi</filename>.
+				</para>
+				
+				<para>
+					Folgen Sie den Anweisungen des Installations-Assistenten,
+					bis Sie zum Schritt <emphasis>Setup type</emphasis> kommen.
+					Wählen Sie dort die Option <guimenuitem>Custom</guimenuitem>
+					aus, denn Sie benötigen nur zwei der GUI Tools.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_gui_tools.setup_type">
+					<title>MySQL-GUI-Tools-Setup: Setup-Typ</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_gui_tools.setup_type.png"/>
+				</figure>
+				
+				<para>
+					Wählen Sie zur Installation nur die beiden Werkzeuge
+					MySQL Administrator und MySQL Query Browser aus. Die beiden
+					anderen Werkzeuge brauchen Sie nicht.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.install_gui_tools.custom_setup">
+					<title>MySQL-GUI-Tools-Setup: Custom Setup</title>
+					<graphic fileref="images/local_webserver.windows.mysql.install_gui_tools.custom_setup.png"/>
+				</figure>
+				
+				<para>
+					Folgen Sie dann wieder den Anweisungen des
+					Installations-Assistenten, um die Installation
+					abzuschliessen.
+				</para>
 			</sect3>
 			
 			<sect3 id="local_webserver.windows.mysql.initialize_database">
 				<title>Datenbank initialisieren</title>
-				<para/>
+				
+				<para>
+					Um die Datenbank zu initialisieren, wird das Werkzeug
+					MySQL Administrator aus dem MySQL-GUI-Tools-Paket benötigt.
+					Sie können damit einige Optionen aktivieren, die für 
+					Welcompose benötigt werden, die Datenbank erstellen
+					und einen regulären Benutzer für die Datenbank anlegen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.launch_administrator">
+					<title>MySQL Administrator starten</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.launch_administrator.png"/>
+				</figure>
+				
+				<para>
+					Nach dem Start von MySQL Administrator öffnet sich der
+					Connection Manager. Klicken Sie auf die Schaltfläche
+					neben der Verbindungsauswahl, um eine neue Server-Verbindung
+					anzulegen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.start_connection_manager">
+					<title>MySQL Administrator: Connection Manager starten</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.start_connection_manager.png"/>
+				</figure>
+				
+				<para>
+					Sobald der Connection Manager geladen ist, klicken Sie
+					auf die Schaltfläche <guibutton>New Instance
+					Connection</guibutton>, um eine neue Server-Verbindung
+					zu erstellen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.new_instance_connection">
+					<title>MySQL Administrator: Neue Server-Verbindung beginnen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.new_instance_connection.png"/>
+				</figure>
+				
+				<para>
+					Nun müssen Sie die Verbindungsdaten zum eben installierten
+					MySQL-Server eingeben:
+				</para>
+				
+				<variablelist>
+					<varlistentry>
+						<term>Verbindung</term>
+						<listitem>
+							<para>
+								Der Name der Verbindung kann frei gewählt
+								werden, beispielsweise <userinput>Datenbank
+								Welcompose</userinput>.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Benutzername</term>
+						<listitem>
+							<para>
+								Geben Sie als Benutzernamen
+								<userinput>root</userinput> ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Passwort</term>
+						<listitem>
+							<para>
+								Als Passwort müssen Sie das Passwort eingeben,
+								dass Sie im <xref
+								linkend="local_webserver.windows.mysql.install_server"/>
+								bei der Konfiguration des MySQL-Servers
+								verwendet haben.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Hostname</term>
+						<listitem>
+							<para>
+								Verwenden Sie <userinput>localhost</userinput>,
+								um zum MySQL-Server auf dem eigenen Computer
+								zu verbinden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Port</term>
+						<listitem>
+							<para>
+								Beim Feld Port können Sie die Voreinstellung
+								<userinput>3006</userinput> belassen.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Schema</term>
+						<listitem>
+							<para>
+								Geben Sie als Schemanamen
+								<userinput>welcompose</userinput> ein.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Klicken Sie dann auf die Schaltfläche
+					<guibutton>Übernehmen</guibutton>, um die neue Verbindung
+					zu speichern.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.create_new_instance_connection">
+					<title>MySQL Administrator: Neue Server-Verbindung anlegen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.create_new_instance_connection.png"/>
+				</figure>
+				
+				<para>
+					Sie gelangen dann wieder zurück zum Connection Manager.
+					Wählen Sie die soeben ausgelegte Server-Verbindung aus
+					und klicken Sie auf <guibutton>OK</guibutton>, um eine
+					Verbindung zum lokalen MySQL-Server zu starten.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.connect_to_server">
+					<title>MySQL Administrator: Verbindung zum Server herstellen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.connect_to_server.png"/>
+				</figure>
+				
+				<para>
+					Wechseln Sie zuerst zum Menüpunkt
+					<guibutton>Dienstverwaltung</guibutton> und dort zum Reiter
+					<guibutton>Dienst konfigurieren</guibutton>. Stellen Sie
+					sicher, dass bei der Option <guimenuitem>MySQL-Server
+					automatisch starten</guimenuitem> und bei der Option
+					<guimenuitem>Unterstützung für InnoDB</guimenuitem> je
+					ein Haken gesetzt ist. Klicken Sie dann auf die Schaltfläche
+					<guibutton>Übernehmen</guibutton>.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.configure_service">
+					<title>MySQL Administrator: Dienst konfigurieren</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.configure_service.png"/>
+				</figure>
+				
+				<para>
+					Nun muss die Datenbank für Welcompose erstellt werden.
+					Klicken Sie dazu auf den Bereich
+					<guibutton>Kataloge</guibutton>. Darunter erscheint nun
+					der der Bereich <guilabel>Schemata</guilabel>. Klicken Sie
+					mit der rechten Maustaste in den freien Platz, um das
+					Kontext-Menü aufzurufen. Wählen Sie dort den Eintrag
+					<guimenuitem>Neues Schema anlegen</guimenuitem> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.new_schema_context">
+					<title>MySQL Administrator: Neue Datenbank beginnen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.new_schema_context.png"/>
+				</figure>
+				
+				<para>
+					Es erscheint ein Pop-up mit der Beschriftung
+					<guilabel>Neues Schema anlegen</guilabel>. Geben Sie
+					<userinput>Welcompose</userinput> als Schema- respektive
+					Datenbank-Namen an. Klicken Sie dann auf
+					<guibutton>OK</guibutton>, um die Datenbank zu erstellen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.new_schema_name">
+					<title>MySQL Administrator: Neue Datenbank benennen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.new_schema_name.png"/>
+				</figure>
+				
+				<para>
+					Zuletzt muss noch ein neuer Benutzer für die soeben
+					angelegte Datenbank erstellt werden. Klicken Sie dazu
+					auf den Bereich <guibutton>Benutzerverwaltung</guibutton>.
+					Es öffnet sich dann unter der Seitenleiste der Bereich
+					<guilabel>Benutzerkonten</guilabel>. Klicken Sie mit den
+					rechten Maustaste in den freien Bereich und wählen Sie
+					aus dem Kontextmenü den Eintrag <guimenuitem>Neuen Benutzer
+					hinzufügen</guimenuitem> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.new_user_context">
+					<title>MySQL Administrator: Anlegen von neuem Benutzer beginnen</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.new_user_context.png"/>
+				</figure>
+				
+				<para>
+					Gehen Sie nun zuerst zum Bereich
+					<guibutton>Benutzerinformationen</guibutton> und dort zum
+					Abschnitt <guilabel>Login-Information</guilabel>.
+				</para>
+				
+				<variablelist>
+					<varlistentry>
+						<term>MySQL-Benutzer</term>
+						<listitem>
+							<para>
+								Der Name des neuen MySQL-Benutzers. Geben Sie
+								<userinput>welcompose</userinput> ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Passwort</term>
+						<listitem>
+							<para>
+								Wählen Sie ein beliebiges Passwort für den
+								neuen Benutzer und tippen Sie es im Feld
+								<guilabel>Passwort</guilabel> als auch im
+								Feld <guilabel>Passwort bestätigen</guilabel>
+								ein.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Klicken Sie dann auf <guibutton>Apply changes</guibutton>,
+					um den Benutzer zu erzeugen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.new_user">
+					<title>MySQL Administrator: Benutzerdaten eingeben</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.new_user.png"/>
+				</figure>
+				
+				<para>
+					Wechseln sie nun zum Bereich
+					<guibutton>Schema-Berechtigungen</guibutton>, um bestimmte
+					Zugangsrechte an den neuen Benutzer zu vergeben. Klicken
+					Sie dann unter <guilabel>Schemata</guilabel> auf die
+					Datenbank <guimenuitem>welcompose</guimenuitem> und weisen
+					Sie dann dem Benutzer alle Rechte zu ausser
+					<guimenuitem>GRANT</guimenuitem>. Klicken Sie dann auf
+					<guibutton>Apply changes</guibutton>, um das Anlegen
+					des Benutzers abzuschliessen.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.rights">
+					<title>MySQL Administrator: Benutzerrechte vergeben</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.rights.png"/>
+				</figure>
+				
+				<para>
+					Damit sich alle vorgenommenen Änderungen auswirken, muss
+					der MySQL-Server neu gestartet werden. Klicken
+					Sie auf den Bereich <guibutton>Dienstverwaltung</guibutton>
+					und dort auf den Reiter <guibutton>Dienst
+					starten/anhalten</guibutton>. Wenn der Dienst nicht läuft,
+					starten Sie ihn durch einen Klick auf <guibutton>Dienst
+					starten</guibutton>. Wenn der Dienst läuft, stoppen Sie
+					ihn erst bevor Sie ihn dann wieder starten.
+				</para>
+				
+				<figure id="local_webserver.windows.mysql.initialize_database.restart_service">
+					<title>MySQL Administrator: Benutzerrechte vergeben</title>
+					<graphic fileref="images/local_webserver.windows.mysql.initialize_database.restart_service.png"/>
+				</figure>
+				
+				<para>
+					Die Initialisierung des MySQL-Servers wäre damit
+					abgeschlossen. Sie können nun den MySQL Administrator
+					verlassen.
+				</para>
 			</sect3>
 		</sect2>
 	</sect1>
