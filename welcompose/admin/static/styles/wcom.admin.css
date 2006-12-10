@@ -948,6 +948,13 @@ padding: 0;
 form#mediamanager fieldset {
 padding: 4px 5px;
 }
+form#mediamanager input#hiddenFocus {
+height: 0;
+width: 0;
+margin: 0;
+padding: 0;
+border: 0 none;
+}
 .mmnav {
 display: block;
 background: #f9f9f9;

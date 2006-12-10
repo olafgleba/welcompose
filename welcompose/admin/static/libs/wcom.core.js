@@ -34,7 +34,9 @@
  * Switch differs how try/catch will handle exceptions.<br />
  * 0 = No debug output<br />
  * 1 = Development<br />
- * 2 = Production
+ * 2 = Production<br />
+ * <br />
+ * Scope is application wide.
  *
  * @type Bool
  */
@@ -460,10 +462,10 @@ function Base_trim(elem) {
  * 
  * @class The Init class is supposed to be used on load of page.
  * <br />
- * Right now the function <em>Init_load()</em> is used as an argument for the thirdparty lib method
+ * Right now the function {@link #load} is used as an argument for the thirdparty lib method
  * <em>Behaviour.addLoadEvent(Init.load);</em> and is not supposed to called manually. If you
- * you want something to happen on load of page, add another prototype function (e.g. <em>Init_getVars();</em>) to class Init
- * and call it within the <em>load()</em> function instead.
+ * you want something to happen on load of page, add another prototype function (e.g. {@link #getVars}) to class Init
+ * and call it within the {@link #load} function instead.
  *
  * <br /><br />Example (Schema):
  * <pre><code>
@@ -527,7 +529,13 @@ function Init_load ()
 
 /**
  * Getter function for several actions to be executed on load of page.
- * Depends on delivered variable in the html markup.
+ * Depends on delivered variables in the html markup.
+ * <br /><br />
+ * Current conditions in order first to last:<br />
+ * <em>var response</em>  Show response layer after save succeeded.<br />
+ * <em>var podcast</em>  Triggers {@link Mediamanager#mediaToPodcastOnLoad}.<br />
+ * <em>object podcast_media_object</em>  Triggers {@link Mediamanager#mediaToPodcastOnLoad}.<br />
+ * <em>var mediamanager</em>  Triggers XMLHttpRequest for Media Manager Layer integration.
  * 
  * @throws applyError on exception
  */
@@ -571,7 +579,7 @@ function Init_getVars ()
 
 /**
  * Show/hide a group of form elements and color their labels on load of page.
- * Depends on delivered variable in the html markup.
+ * Depends on delivered variables in the html markup.
  * <br />
  * For properly use or/and enhancement of this feature, please have a look on
  * the online project support area.
@@ -610,6 +618,8 @@ function Init_getCbxStatus (elems)
 
 /**
  * Update content with XMLHttpRequest response.
+ * <br />
+ * Beside of that the Media Manager Tag Search Envents are initialized.
  *
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
