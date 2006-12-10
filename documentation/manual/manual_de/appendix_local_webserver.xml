@@ -529,6 +529,48 @@
 				</figure>
 				
 				<para>
+					Zur Erhöhung der Sicherheit sollte dafür gesorgt werden,
+					dass der angelegte Benutzer nur vom jeweiligen Computer
+					aus auf den MySQL-Server zugreifen kann. Öffnen Sie dazu
+					die Konfigurationsdatei
+					<filename>C:\Programme\MySQL\MySQL Server 5.0\my.ini</filename>
+					und suchen Sie nach dem Abschnitt <code>[mysqld]</code>
+					(nicht <code>[mysql]</code>!). Setzen Sie danach die
+					Anweisung <code>bind-address=127.0.0.1</code> ein. Der
+					Anfang des Abschnitts <code>[mysqld]</code> sieht dann
+					so aus:
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+[mysqld]
+
+bind-address=127.0.0.1
+
+# The TCP/IP Port the MySQL Server will listen on
+port=3306
+]]></programlisting>
+				
+				<para>
+					Speichern Sie nun die Konfigurationsdatei wieder ab.
+					Kehren Sie nun wieder zum MySQL Administrator zurück.
+				</para>
+				
+				<note>
+					<para>
+						Passen Sie, sofern nötig, den Pfad zur 
+						Konfigurationsdatei <filename>my.ini</filename> 
+						den aktuellen Gegebenheiten an. Die Datei
+						sollte im Installationsverzeichnis des MySQL-Servers
+						liegen. Wenn Sie nicht wissen, wo sich dieses befindet,
+						können Sie in MySQL Administrator auf den Bereich
+						<guibutton>Startvariablen</guibutton> klicken.
+						Ganz untem am Rand des Fensters befindet sich der
+						Eintrag <guilabel>Einstellungen</guilabel>. Er zeigt
+						den Pfad zur <filename>my.ini</filename> an.
+					</para>
+				</note>
+								
+				<para>
 					Damit sich alle vorgenommenen Änderungen auswirken, muss
 					der MySQL-Server neu gestartet werden. Klicken
 					Sie auf den Bereich <guibutton>Dienstverwaltung</guibutton>
@@ -546,7 +588,7 @@
 				
 				<para>
 					Die Initialisierung des MySQL-Servers wäre damit
-					abgeschlossen. Sie können nun den MySQL Administrator
+					abgeschlossen. Sie können MySQL Administrator nun
 					verlassen.
 				</para>
 			</sect3>
