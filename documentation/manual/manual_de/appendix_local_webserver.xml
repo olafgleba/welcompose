@@ -593,5 +593,203 @@ port=3306
 				</para>
 			</sect3>
 		</sect2>
+		
+		<sect2 id="local_webserver.windows.apache">
+			<title>Apache</title>
+			
+			<sect3 id="local_webserver.windows.apache.download">
+				<title>Apache herunterladen</title>
+				
+				<para>
+					Der Apache-Webserver kann von
+					<ulink url="http://httpd.apache.org/"/> heruntergeladen
+					werden. Bei der Auswahl der Apache-Version müssen
+					Sie aufpassen, dass Sie keine zu neuen Versionen
+					erwischen, da diese inkompatibel mit PHP sein können.
+					Stand Dezember 2006 arbeitet PHP 5.2.0 mit Apache 1.3,
+					2.0 und 2.2 zusammen. Frühere Versionen von PHP 5
+					verstehen sich nur mit Apache 1.3 und Apache 2.0.
+					Im Rahmen dieser Anleitung wird PHP 5.2.0 verwendet,
+					sodass Sie problemlos die neuste Version von Apache 2.2
+					verwenden können.
+				</para>
+				
+				<para>
+					Suchen Sie nach der neusten Apache-Version auf der Webseite
+					des Apache-Projekts und klicken Sie dort auf den
+					Download-Link. Sie werden zur Download-Seite weitergeleitet.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.download.find_download">
+					<title>Download von Apache Webserver auffinden</title>
+					<graphic fileref="images/local_webserver.windows.apache.download.find_download.png"/>
+				</figure>
+				
+				<para>
+					Suchen Sie nach der neusten Apache-Version auf der 
+					Download-Seite und wählen Sie aus der Liste der verfügbaren
+					Varianten das <emphasis>Win32 Binary (MSI
+					Installer)</emphasis> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.download.pick_win32_download">
+					<title>Download von Apache Webserver auswählen</title>
+					<graphic fileref="images/local_webserver.windows.apache.download.pick_win32_download.png"/>
+				</figure>
+				
+				<para>
+					Um den Webserver zu installieren, starten Sie den 
+					MSI-Installer vom Apache Webserver, beispielsweise
+					apache_2.2.3-win32-x86-no_ssl.msi. Folgen Sie den
+					Anweisungen des Installations-Assistenten, bis Sie zum
+					Schritt <emphasis>Server Information</emphasis> kommen.
+				</para>
+				
+				<variablelist>
+					<varlistentry>
+						<term>Network Domain (e.g. somenet.com)</term>
+						<listitem>
+							<para>
+								Geben Sie <userinput>localhost</userinput> als
+								Network Domain ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Server Name (e.g. www.somenet.com)</term>
+						<listitem>
+							<para>
+								Fügen Sie auch hier den Wert
+								<userinput>localhost</userinput> ein. 
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Administrator's Email Address</term>
+						<listitem>
+							<para>
+								Geben Sie hier irgendeine E-Mail-Adresse ein, 
+								beispielsweise
+								<userinput>admin@localhost</userinput>. Sie muss
+								nicht gültig sein. 
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Wählen Sie zudem bei <guilabel>Install Apache HTTP Server
+					2.2 programs and shortcuts for</guilabel> den Eintrag
+					<guimenuitem>for All Users, on Port 80,
+					as a Service</guimenuitem> aus, damit der Webserver
+					als Windows-Service automatisch beim Systemstart
+					geladen wird.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.download.server_information">
+					<title>Apache Setup: Server Information</title>
+					<graphic fileref="images/local_webserver.windows.apache.download.server_information.png"/>
+				</figure>
+				
+				<para>
+					Sie kommen nun zum Schritt Setup Type. Wählen Sie dort die
+					Installationsart <guimenuitem>Typical</guimenuitem> aus.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.download.setup_type">
+					<title>Apache Setup: Setup Type</title>
+					<graphic fileref="images/local_webserver.windows.apache.download.setup_type.png"/>
+				</figure>
+				
+				<para>
+					Folgen Sie dann wieder den Anweisungen des Setup-Assistenten
+					um die Installation abzuschliessen.
+				</para>
+				
+				<note>
+					<para>
+						Sollten Sie eine Warnung der Firewall von Windows XP
+						(oder eines ähnlichen Produkts) erhalten, lassen Sie
+						den Internet-Zugriff von Apache bitte zu.
+					</para>
+				</note>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.apache.configure">
+				<title>Apache konfigurieren</title>
+				
+				<para/>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="local_webserver.windows.php">
+			<title>PHP</title>
+			
+			<sect3 id="local_webserver.windows.php.download">
+				<title>PHP herunterladen</title>
+				
+				<para>
+					PHP kann von <ulink url="http://www.php.net/"/> bezogen
+					werden. Achten Sie darauf, eine Version auszuwählen,
+					die mit Welcompose kompatibel ist (siehe
+					<xref linkend="install_instructions.requirements"/>).
+					Klicken Sie in der Navigation auf
+					<ulink url="http://www.php.net/"/> auf den Menüpunkt
+					Downloads, um zur Software-Auswahl zu kommen. Wählen Sie
+					dort den aktuellen PHP-Installer für Windows aus,
+					beispielsweise <emphasis>PHP 5.2.0 installer</emphasis> im
+					Abschnitt <emphasis>Windows Binaries</emphasis>.
+				</para>
+				
+				<figure id="local_webserver.windows.php.download.pick_distribution">
+					<title>PHP-Distribution zum Download auswählen</title>
+					<graphic fileref="images/local_webserver.windows.php.download.pick_distribution.png"/>
+				</figure>
+				
+				<para>
+					Sie werden dann zur Mirror-Auswahl weitergeleitet.
+					Klicken Sie auf den Link, der Ihnen vorgeschlagen wird.
+				</para>
+				
+				<figure id="local_webserver.windows.php.download.pick_mirror">
+					<title>PHP-Download-Mirror auswählen</title>
+					<graphic fileref="images/local_webserver.windows.php.download.pick_mirror.png"/>
+				</figure>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.php.install">
+				<title>PHP installieren</title>
+				
+				<para>
+					Starten Sie den soeben heruntergeladenen Installer,
+					beispielsweise
+					<filename>php-5.2.0-win32-installer.msi</filename>. Folgen
+					Sie den Anweisungen des Installations-Assistenten, bis 
+					zum Schritt <emphasis>Web Server Setup</emphasis> gelangen.
+					Wählen Sie dort den Eintrag <guimenuitem>Apache 2.2.x
+					Module</guimenuitem> aus der Liste aus.
+				</para>
+				
+				<figure id="local_webserver.windows.php.install.web_server_setup">
+					<title>PHP Setup: Web Server Setup</title>
+					<graphic fileref="images/local_webserver.windows.php.install.web_server_setup.png"/>
+				</figure>
+				
+				<para>
+					Sie kommen dann zum Schritt <emphasis>Apache Configuration
+					Directory</emphasis>. Dort müssen Sie den Pfad zum 
+					Ordner <filename>conf</filename> im Installationsverzeichnis
+					des Apache-Webservers eingeben. Wenn Sie die
+					Vorgaben bei der Installation des Apache-Webservers
+					beibehalten haben, ist der richtige Pfad
+					<filename>C:\Programme\Apache Software Foundation\Apache2.2\conf\</filename>.
+				</para>
+				
+				<figure id="local_webserver.windows.php.install.apache_configuration_directory">
+					<title>PHP Setup: Apache Configuration Directory</title>
+					<graphic fileref="images/local_webserver.windows.php.install.apache_configuration_directory.png"/>
+				</figure>
+			</sect3>
+		</sect2>
 	</sect1>
 </appendix>
