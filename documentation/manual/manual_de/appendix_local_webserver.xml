@@ -541,7 +541,7 @@
 					so aus:
 				</para>
 				
-				<programlisting language="smarty"><![CDATA[
+				<programlisting language="ini"><![CDATA[
 [mysqld]
 
 bind-address=127.0.0.1
@@ -718,7 +718,113 @@ port=3306
 			<sect3 id="local_webserver.windows.apache.configure">
 				<title>Apache konfigurieren</title>
 				
-				<para/>
+				<para>
+					Bevor Sie den Webserver konfigurieren, sollten Sie ein
+					Verzeichnis anlegen, in dem Sie die Webseiten ablegen
+					können und es einfach erreichbar ist. Im Beispiel
+					wird <filename>C:\Webserver</filename> verwendet. Sie können
+					aber auch ein anderes Verzeichnis wählen. Praktisch sind
+					beispielsweise separate Partitionen. 
+				</para>
+				
+				<para>
+					Um den Apache Webserver zu konfigurieren, öffnen Sie
+					die Konfigurationsdatei <filename>httpd.conf</filename>.
+					Sie können dies über das Startmenü erledigen.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.configure.open_httpd_conf">
+					<title>Apache-Konfiguration: httpd.conf öffnen</title>
+					<graphic fileref="images/local_webserver.windows.apache.configure.open_httpd_conf.png"/>
+				</figure>
+				
+				<para>
+					Tauschen Sie nun die kompletten Inhalte der
+					Konfigurationsdatei durch die folgenden Einstellung aus:
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+ThreadsPerChild 250
+MaxRequestsPerChild  0
+ServerRoot "C:/Programme/Apache Software Foundation/Apache2.2"
+Listen 127.0.0.1:80
+ServerAdmin admin@localhost
+ServerName localhost:80
+DocumentRoot "C:/Webserver"
+
+LoadModule auth_basic_module modules/mod_auth_basic.so
+LoadModule authn_default_module modules/mod_authn_default.so
+LoadModule authn_file_module modules/mod_authn_file.so
+LoadModule authz_default_module modules/mod_authz_default.so
+LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+LoadModule authz_host_module modules/mod_authz_host.so
+LoadModule authz_user_module modules/mod_authz_user.so
+LoadModule autoindex_module modules/mod_autoindex.so
+LoadModule log_config_module modules/mod_log_config.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule userdir_module modules/mod_userdir.so
+LoadModule rewrite_module modules/mod_rewrite.so
+
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    Deny from all
+    Satisfy all
+</Directory>
+
+<Directory "C:/Webserver">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+
+<IfModule dir_module>
+    DirectoryIndex index.html index.php
+</IfModule>
+
+<FilesMatch "^\.ht">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+ErrorLog logs/error.log
+LogLevel warn
+
+<IfModule log_config_module>
+    LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+    LogFormat "%h %l %u %t \"%r\" %>s %b" common
+    
+    <IfModule logio_module>
+        LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+    </IfModule>
+    CustomLog logs/access.log combined
+</IfModule>
+
+DefaultType text/plain
+
+# Virtual hosts
+# Include conf/extra/httpd-vhosts.conf
+
+#BEGIN PHP INSTALLER EDITS - REMOVE ONLY ON UNINSTALL
+PHPIniDir "C:\\Programme\\PHP\\"
+LoadModule php5_module "C:\Programme\PHP\php5apache2_2.dll"
+#END PHP INSTALLER EDITS - REMOVE ONLY ON UNINSTALL
+]]></programlisting>
+
+			<para>
+				Verwenden Sie ein anderes Verzeichnis als
+				<filename>C:\Webserver</filename>, verwenden Sie die
+				Suchen-und-Ersetzen-Funktion des jeweiligen Editors,
+				um den Pfad <filename>C:\Webserver</filename> durch den
+				von Ihnen verwendeten zu ersetzen.
+			</para>
+			
+			<para>
+				Speichern Sie nun die Konfigurationsdatei ab.
+			</para>
+			
 			</sect3>
 		</sect2>
 		
@@ -789,6 +895,142 @@ port=3306
 					<title>PHP Setup: Apache Configuration Directory</title>
 					<graphic fileref="images/local_webserver.windows.php.install.apache_configuration_directory.png"/>
 				</figure>
+				
+				<para>
+					Jetzt müssen die Komponenten zum Installieren ausgewählt
+					werden. Klappen Sie den Punkt Extensions aus und wählen
+					Sie folgende Komponenten zur Installation aus:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>curl</para>
+					</listitem>
+					<listitem>
+						<para>domxml</para>
+					</listitem>
+					<listitem>
+						<para>fileinfo</para>
+					</listitem>
+					<listitem>
+						<para>gd2</para>
+					</listitem>
+					<listitem>
+						<para>gettext</para>
+					</listitem>
+					<listitem>
+						<para>pecl_http</para>
+					</listitem>
+					<listitem>
+						<para>mysql</para>
+					</listitem>
+					<listitem>
+						<para>mysqli</para>
+					</listitem>
+					<listitem>
+						<para>
+							pdo
+							<itemizedlist>
+								<listitem>
+									<para>MySQL</para>
+								</listitem>
+								<listitem>
+									<para>SQLite</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+					</listitem>
+					<listitem>
+						<para>soap</para>
+					</listitem>
+				</itemizedlist>
+				
+				<figure id="local_webserver.windows.php.install.components_to_install">
+					<title>PHP Setup: Komponenten-Auswahl</title>
+					<graphic fileref="images/local_webserver.windows.php.install.components_to_install.png"/>
+				</figure>
+				
+				<para>
+					Nachdem Sie die Komponenten ausgewählt haben, wird der
+					Setup-Assistent beginnen, PHP zu installieren. Er wird
+					zudem fragen, ob der Apache-Webserver konfiguriert werden
+					soll. Klicken Sie auf <guibutton>Ja</guibutton>.
+				</para>
+				
+				<figure id="local_webserver.windows.php.install.configure_apache">
+					<title>PHP Setup: Apache konfigurieren?</title>
+					<graphic fileref="images/local_webserver.windows.php.install.configure_apache.png"/>
+				</figure>
+				
+				<para>
+					Folgen Sie dann wieder den Instruktionen, um die
+					PHP-Installation abzuschliessen.
+				</para>
+			</sect3>
+			
+			<sect3 id="local_webserver.windows.php.configure">
+				<title>PHP konfigurieren</title>
+				
+				<para>
+					Auch wenn PHP, so wie es ist, in Betreib genommen werden
+					kann, empfiehlt es sich, ein paar Konfigurationsdirektiven
+					anzupassen. Öffnen Sie dazu die Datei
+					<filename>php.ini</filename> im Installations-Verzeichnis
+					von PHP, normalerweise <filename>C:\Programme\PHP</filename>.
+				</para>
+				
+				<para>
+					Suchen Sie nach der Direktive
+					<code>upload_max_filesize</code> und setzen Sie den Wert
+					auf 10M oder 20M, damit Sie grössere Dateien hochladen
+					können.
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+upload_max_filesize = 20M
+]]></programlisting>
+				
+				<para>
+					Suchen Sie nun noch nach der Direktive
+					<code>arg_separator.output</code> und setzen Sie den Wert
+					auf <code><![CDATA[&amp;]]></code>.
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+arg_separator.output = "&amp;"
+]]></programlisting>
+				
+				<warning>
+					<para>
+						Achten Sie darauf, dass die Konfigurationsdirektiven
+						nicht auskommentiert sind, d.h. die Zeilen nicht mit
+						einem Semikolon (;) beginnen.
+					</para>
+				</warning>
+				
+				<para>
+					Starten Sie nun den Webserver neu und Sie sind fertig.
+				</para>
+				
+				<figure id="local_webserver.windows.apache.configure.restart_webserver">
+					<title>Apache-Webserver neu starten</title>
+					<graphic fileref="images/local_webserver.windows.apache.configure.restart_webserver.png"/>
+				</figure>
+				
+				<para>
+					Legen Sie nun ein PHP-Script im Webserver-Ordner ab, um
+					die PHP-Konfiguration auszulesen (siehe <xref
+					linkend="good_to_know.phpinfo"/>). Sie können die Datei
+					über <filename>http://localhost/info.php</filename> aufrufen.
+				</para>
+				
+				<tip>
+					<para>
+						Starten Sie nach Abschluss der Installation Ihren
+						Rechner neu. Sonst kann es passieren, dass PHP
+						einige Bibliotheken nicht findet.
+					</para>
+				</tip>
 			</sect3>
 		</sect2>
 	</sect1>
