@@ -1,0 +1,1594 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Welcompose Publishing System Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="wcom.mediamanager.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>wcom.mediamanager.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		The Mediamanager javascript enviroment.
+
+ <BR/><BR/><B>Version: </B>$Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Mediamanager.html">Mediamanager</a></b></td>
+    <td>The Mediamanager class embed all media maintenance.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * Project: Welcompose
+ * File: wcom.mediamanager.js
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $
+ *
+ * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@author</span> Olaf Gleba
+ * <span class="attrib">@package</span> Welcompose
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */</span>
+ 
+<span class="comment">/** 
+ * <span class="attrib">@fileoverview</span> The Mediamanager javascript enviroment.
+ *
+ * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
+ * <span class="attrib">@version</span> $Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $ 
+ */</span>
+
+
+
+<span class="comment">/**
+ * Constructs the Mediamanager class
+ * 
+ * <span class="attrib">@class</span> The Mediamanager class embed all media maintenance.
+ * &lt;br /&gt;
+ * The &lt;em&gt;Mediamanager&lt;/em&gt; is a component within content pages
+ * both to maintain all sorts of media (upload, edit, delete) and a repository
+ * to pick up from while building content pages.
+ * &lt;br /&gt;&lt;br /&gt;
+ * At present there are two layers (&lt;em&gt;myLocal&lt;/em&gt; and &lt;em&gt;myFlickr&lt;/em&gt;)
+ * with different treatments implemented.
+ *&lt;br /&gt;
+ * &lt;em&gt;myLocal&lt;/em&gt; handles all the media formerly uploaded into the local structure.
+ * &lt;br /&gt;
+ * &lt;em&gt;myFlickr&lt;/em&gt; is a integration of some API methods of the WebService Flickr.com to 
+ * allow to integrate Flickr.com photos into sides contents.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager ()
+{
+	try {
+		<span class="comment">// instance XMLHttpRequest object</span>
+		<span class="reserved">this</span>.req = _buildXMLHTTPRequest();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Mediamanager.<span class="reserved">prototype</span> = new Base();
+
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Mediamanager
+ */</span>
+
+<span class="comment">/**
+ * Common methods
+ */</span>
+Mediamanager.<span class="reserved">prototype</span>.showElement = Mediamanager_showElement;
+Mediamanager.<span class="reserved">prototype</span>.hideElement = Mediamanager_hideElement;
+Mediamanager.<span class="reserved">prototype</span>.switchLayer = Mediamanager_switchLayer;
+Mediamanager.<span class="reserved">prototype</span>.checkOccurrences = Mediamanager_checkOccurrences;
+
+<span class="comment">/**
+ * MyLocal methods
+ */</span>
+Mediamanager.<span class="reserved">prototype</span>.checkElemsMyLocal = Mediamanager_checkElemsMyLocal;
+Mediamanager.<span class="reserved">prototype</span>.preserveElementStatusMyLocal = Mediamanager_preserveElementStatusMyLocal;
+Mediamanager.<span class="reserved">prototype</span>.setCurrentElementStatusMyLocal = Mediamanager_setCurrentElementStatusMyLocal;
+Mediamanager.<span class="reserved">prototype</span>.toggleExtendedView = Mediamanager_toggleExtendedView;
+Mediamanager.<span class="reserved">prototype</span>.mediaToPodcast = Mediamanager_mediaToPodcast;
+Mediamanager.<span class="reserved">prototype</span>.mediaToPodcastOnLoad = Mediamanager_mediaToPodcastOnLoad;
+Mediamanager.<span class="reserved">prototype</span>.discardPodcast = Mediamanager_discardPodcast;
+Mediamanager.<span class="reserved">prototype</span>.showResponseMediaToPodcast = Mediamanager_showResponseMediaToPodcast;
+Mediamanager.<span class="reserved">prototype</span>.showResponseDiscardPodcast = Mediamanager_showResponseDiscardPodcast;
+Mediamanager.<span class="reserved">prototype</span>.loaderMediaToPodcast = Mediamanager_loaderMediaToPodcast;
+Mediamanager.<span class="reserved">prototype</span>.initializeTagSearch = Mediamanager_initializeTagSearch;
+Mediamanager.<span class="reserved">prototype</span>.invokeInputs = Mediamanager_invokeInputs;
+Mediamanager.<span class="reserved">prototype</span>.invokeTags = Mediamanager_invokeTags;
+Mediamanager.<span class="reserved">prototype</span>.invokePager = Mediamanager_invokePager;
+Mediamanager.<span class="reserved">prototype</span>.showResponseInvokeInputs = Mediamanager_showResponseInvokeInputs;
+Mediamanager.<span class="reserved">prototype</span>.showResponseInvokeTagInputs = Mediamanager_showResponseInvokeTagInputs;
+Mediamanager.<span class="reserved">prototype</span>.loaderMyLocal = Mediamanager_loaderMyLocal;
+Mediamanager.<span class="reserved">prototype</span>.deleteMediaItem = Mediamanager_deleteMediaItem;
+Mediamanager.<span class="reserved">prototype</span>.insertImageItem = Mediamanager_insertImageItem;
+Mediamanager.<span class="reserved">prototype</span>.insertDocumentItem = Mediamanager_insertDocumentItem;
+
+<span class="comment">/**
+ * MyFlickr methods
+ */</span>
+Mediamanager.<span class="reserved">prototype</span>.checkElemsMyFlickr = Mediamanager_checkElemsMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.preserveElementStatusMyFlickr = Mediamanager_preserveElementStatusMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.setCurrentElementStatusMyFlickr = Mediamanager_setCurrentElementStatusMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.invokeTagsMyFlickr = Mediamanager_invokeTagsMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.invokePagerMyFlickr = Mediamanager_invokePagerMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.initializeTagSearchMyFlickr = Mediamanager_initializeTagSearchMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.showResponseInvokeInputsMyFlickr = Mediamanager_showResponseInvokeInputsMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.showResponseInvokeTagsMyFlickr = Mediamanager_showResponseInvokeTagsMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.loaderMyFlickr = Mediamanager_loaderMyFlickr;
+Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Mediamanager_insertImageItemFlickr;
+
+
+<span class="comment">/**
+ * Display Media Manager element.
+ * &lt;br /&gt;
+ * Beside simply showing the element, the display styles of 
+ * all other elements be temporarily saved and populated into
+ * func {<span class="attrib">@link</span> #checkOccurrences} to ensure that the
+ * Media Manager content(s) container always adapt to the show/hide
+ * display status of the elements. 
+ * &lt;br /&gt;
+ * In addition to that we perform conditions to distinguish which 
+ * layer (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;) is active.
+ * 
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showElement (elem)
+{	
+	try {
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.attr = <span class="literal">'class'</span>;
+		<span class="reserved">this</span>.ttarget = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2) + <span class="literal">'_wrap'</span>;
+		
+		Element.show(<span class="reserved">this</span>.ttarget);
+
+		var myLocal = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyLocal, <span class="literal">'display'</span>);
+		var myFlickr = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyFlickr, <span class="literal">'display'</span>);
+
+		<span class="comment">// myLocal</span>
+		<span class="reserved">if</span> (myLocal == <span class="literal">'block'</span>) {
+			<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.mediamanagerClassHideMyLocal;
+			
+			var includeTypesElem = Element.getStyle(<span class="literal">'mm_include_types_wrap'</span>, <span class="literal">'display'</span>);
+			var tagsElem = Element.getStyle(<span class="literal">'mm_tags_wrap'</span>, <span class="literal">'display'</span>);
+			var timeframeElem = Element.getStyle(<span class="literal">'mm_timeframe_wrap'</span>, <span class="literal">'display'</span>);
+			
+			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			
+			<span class="comment">// give option 'Include Types' a little more space since we have two rows here</span>
+			<span class="reserved">if</span> (includeTypesElem == <span class="literal">'block'</span>) {
+				var rows = 1;
+			}
+		}
+		<span class="comment">// myFlickr</span>
+		<span class="reserved">else</span> <span class="reserved">if</span> (myFlickr == <span class="literal">'block'</span>) {
+			<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.mediamanagerClassHideMyFlickr;
+			
+			var userElem = Element.getStyle(<span class="literal">'mm_user_wrap'</span>, <span class="literal">'display'</span>);
+			var flickrtagsElem = Element.getStyle(<span class="literal">'mm_flickrtags_wrap'</span>, <span class="literal">'display'</span>);
+			var photosetElem = Element.getStyle(<span class="literal">'mm_photoset_wrap'</span>, <span class="literal">'display'</span>);
+			
+			var collectElems = String(userElem + flickrtagsElem + photosetElem);
+			
+			<span class="comment">// do nothing, not needed here</span>
+			var rows = <span class="literal">''</span>;
+		}
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.elementHtmlHide);
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+		Mediamanager.checkOccurrences(collectElems, rows);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+<span class="comment">/**
+ * Hide Media Manager element.
+ * &lt;br /&gt;
+ * Beside simply hiding the element, the display styles of 
+ * all other elements be temporarily saved and populated into
+ * func {<span class="attrib">@link</span> #checkOccurrences} to ensure that the
+ * Media Manager content(s) container always adapt to the show/hide
+ * display status of the elements.
+ * &lt;br /&gt;
+ * In addition to that we perform conditions to distinguish which 
+ * layer (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;) is active.
+ *
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_hideElement (elem)
+{
+	try {
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.attr = <span class="literal">'class'</span>;
+		<span class="reserved">this</span>.ttarget = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2) + <span class="literal">'_wrap'</span>;
+
+		Element.hide(<span class="reserved">this</span>.ttarget);
+
+		var myLocal = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyLocal, <span class="literal">'display'</span>);
+		var myFlickr = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyFlickr, <span class="literal">'display'</span>);
+
+		<span class="comment">// myLocal</span>
+		<span class="reserved">if</span> (myLocal == <span class="literal">'block'</span>) {
+			<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.mediamanagerClassShowMyLocal;			
+			var includeTypesElem = Element.getStyle(<span class="literal">'mm_include_types_wrap'</span>, <span class="literal">'display'</span>);
+			var tagsElem = Element.getStyle(<span class="literal">'mm_tags_wrap'</span>, <span class="literal">'display'</span>);
+			var timeframeElem = Element.getStyle(<span class="literal">'mm_timeframe_wrap'</span>, <span class="literal">'display'</span>);			
+			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			
+			<span class="comment">// give option 'Include Types' a little more space since we have two rows here</span>
+			<span class="reserved">if</span> (includeTypesElem == <span class="literal">'block'</span>) {
+				var rows = 1;
+			}
+		}
+		<span class="comment">// myFlickr</span>
+		<span class="reserved">else</span> <span class="reserved">if</span> (myFlickr == <span class="literal">'block'</span>) {
+			<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.mediamanagerClassShowMyFlickr;			
+			var userElem = Element.getStyle(<span class="literal">'mm_user_wrap'</span>, <span class="literal">'display'</span>);
+			var flickrtagsElem = Element.getStyle(<span class="literal">'mm_flickrtags_wrap'</span>, <span class="literal">'display'</span>);
+			var photosetElem = Element.getStyle(<span class="literal">'mm_photoset_wrap'</span>, <span class="literal">'display'</span>);			
+			var collectElems = String(userElem + flickrtagsElem + photosetElem);
+			
+			<span class="comment">// do nothing, not needed here</span>
+			var rows = <span class="literal">''</span>;
+		}
+		
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.elementHtmlShow);
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+		Mediamanager.checkOccurrences(collectElems, rows);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+<span class="comment">/**
+ * Simply switch layer (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;).
+ *
+ * <span class="attrib">@param</span> {string} toShow Layer to display
+ * <span class="attrib">@param</span> {string} toHide Layer to hide
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_switchLayer (toShow, toHide)
+{
+	try {
+		<span class="reserved">this</span>.toShow = $(toShow);
+		<span class="reserved">this</span>.toHide = $(toHide);
+	
+		Element.hide(<span class="reserved">this</span>.toHide);
+		Effect.Appear(<span class="reserved">this</span>.toShow,{duration: 0.4});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Adjust height of Media Manager content(s) div.
+ * &lt;br /&gt;
+ * Evaluates the params (array) and perfoms a switch condition
+ * with array length index as the attribute. Used everytime there
+ * is a need for a asynchron refresh launched within other functions.
+ *
+ * <span class="attrib">@see</span> #showElement
+ * <span class="attrib">@see</span> #hideElement
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyLocal
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyFlickr
+ * <span class="attrib">@param</span> {string} elems actual element
+ * <span class="attrib">@param</span> {string} exception Track if we need to provide extra rows, see {<span class="attrib">@link</span> #hideElement} and {<span class="attrib">@link</span> #showElement}
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_checkOccurrences (elems, exception)
+{
+	try {				
+		var myLocal = Element.getStyle(<span class="literal">'lyMediamanagerMyLocal'</span>, <span class="literal">'display'</span>);
+
+		<span class="reserved">if</span> (myLocal == <span class="literal">'block'</span>) {
+			var prefix = <span class="literal">'myLocal_'</span>;
+		} <span class="reserved">else</span> {
+			var prefix = <span class="literal">'myFlickr_'</span>;
+		}
+		
+		var res = elems.match(/block/gi);	
+	
+		<span class="reserved">if</span> (Mediamanager.isNull(res)) {
+			Element.setStyle(prefix + <span class="literal">'mm_content'</span>, {height: <span class="literal">'413px'</span>});
+			Element.setStyle(prefix + <span class="literal">'mm_contentToPopulate'</span>, {height: <span class="literal">'410px'</span>});
+		} <span class="reserved">else</span> {
+			switch (res.length) {
+				case 1 :
+						<span class="reserved">if</span> (Mediamanager.isNumber(exception) === true) {
+							var cHeight = <span class="literal">'372px'</span>;
+							var pHeight = <span class="literal">'369px'</span>;
+							countItems = 7;
+						} <span class="reserved">else</span> {
+							var cHeight = <span class="literal">'392px'</span>;
+							var pHeight = <span class="literal">'389px'</span>;
+							countItems = 8;
+						}
+						Element.setStyle(prefix + <span class="literal">'mm_content'</span>, {height: cHeight});
+						Element.setStyle(prefix + <span class="literal">'mm_contentToPopulate'</span>, {height: pHeight});
+					break;
+				case 2 :
+						<span class="reserved">if</span> (Mediamanager.isNumber(exception) === true) {
+							var cHeight = <span class="literal">'351px'</span>;
+							var pHeight = <span class="literal">'348px'</span>;
+							countItems = 7;
+						} <span class="reserved">else</span> {
+							var cHeight = <span class="literal">'371px'</span>;
+							var pHeight = <span class="literal">'368px'</span>;
+							countItems = 7;
+						}
+						Element.setStyle(prefix + <span class="literal">'mm_content'</span>, {height: cHeight});
+						Element.setStyle(prefix + <span class="literal">'mm_contentToPopulate'</span>, {height: pHeight});
+					break;
+				case 3 :
+						<span class="reserved">if</span> (Mediamanager.isNumber(exception) === true) {
+							var cHeight = <span class="literal">'330px'</span>;
+							var pHeight = <span class="literal">'327px'</span>;
+							countItems = 6;
+						} <span class="reserved">else</span> {
+							var cHeight = <span class="literal">'350px'</span>;
+							var pHeight = <span class="literal">'347px'</span>;
+							countItems = 6;
+						}
+						Element.setStyle(prefix + <span class="literal">'mm_content'</span>, {height: cHeight});
+						Element.setStyle(prefix + <span class="literal">'mm_contentToPopulate'</span>, {height: pHeight});
+					break;		
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Collects the media manager form elements values as a hash
+ * and returns it as a query string.
+ * &lt;br /&gt;
+ * var &lt;em&gt;mm_limit&lt;/em&gt; is filled within {<span class="attrib">@link</span> #checkOccurrences}.
+ * &lt;br /&gt;
+ * var &lt;em&gt;mm_pagetype&lt;/em&gt; comes from definition in the
+ * html markup. Distinguish to show/hide action icon &lt;em&gt;UseAsPodcast&lt;/em&gt;.
+ * 
+ * <span class="attrib">@see</span> #invokeInputs
+ * <span class="attrib">@see</span> #invokePager
+ * <span class="attrib">@see</span> #invokeTags
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_checkElemsMyLocal ()
+{
+	try {
+		<span class="reserved">if</span> (typeof countItems == <span class="literal">'undefined'</span>) {
+			<span class="comment">// initialize global with 'save' display</span>
+			countItems = 0;
+		};
+		
+		var getElems = {
+			mm_include_types_img : $F(<span class="literal">'mm_include_types_img'</span>),
+			mm_include_types_doc : $F(<span class="literal">'mm_include_types_doc'</span>),
+			mm_include_types_audio : $F(<span class="literal">'mm_include_types_audio'</span>),
+			mm_include_types_video : $F(<span class="literal">'mm_include_types_video'</span>),
+			mm_include_types_other : $F(<span class="literal">'mm_include_types_other'</span>),
+			mm_tags : $F(<span class="literal">'mm_tags'</span>),
+			mm_timeframe : $F(<span class="literal">'mm_timeframe'</span>),
+			mm_limit : countItems,
+			mm_pagetype : pagetype
+		};
+		var o = $H(getElems);
+		<span class="reserved">return</span> o.toQueryString();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Save elements display status.
+ * &lt;br /&gt;
+ * This method is used everytime there is a XMLHttpRequest Call.
+ * Counterpart of {<span class="attrib">@link</span> #setCurrentElementStatusMyLocal}.
+ *
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyLocal
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_preserveElementStatusMyLocal ()
+{	
+	try {	
+		var current_includeTypesElem = Element.getStyle(<span class="literal">'mm_include_types_wrap'</span>, <span class="literal">'display'</span>);
+		var current_tagsElem = Element.getStyle(<span class="literal">'mm_tags_wrap'</span>, <span class="literal">'display'</span>);
+		var current_timeframeElem = Element.getStyle(<span class="literal">'mm_timeframe_wrap'</span>, <span class="literal">'display'</span>);
+	
+		<span class="comment">// make global -&gt; use in func setCurrentElementStatusMyLocal</span>
+		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Sets elements display status.
+ * &lt;br /&gt;
+ * This method is used everytime there is a XMLHttpRequest Response.
+ * It takes the received values from Counterpart method {<span class="attrib">@link</span> #preserveElementStatusMyLocal}
+ * to reconstitute the Media Manager Elements display.
+ *
+ * <span class="attrib">@see</span> #preserveElementStatusMyLocal
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_setCurrentElementStatusMyLocal ()
+{	
+	try {		
+		Element.setStyle(<span class="literal">'mm_include_types_wrap'</span>, {display: previousElemsStatus[0]});
+		Element.setStyle(<span class="literal">'mm_tags_wrap'</span>, {display: previousElemsStatus[1]});
+		Element.setStyle(<span class="literal">'mm_timeframe_wrap'</span>, {display: previousElemsStatus[2]});
+		
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+
+		<span class="comment">// give option 'Include Types' a little more space since we have two rows here</span>
+		<span class="reserved">if</span> (previousElemsStatus[0] == <span class="literal">'block'</span>) {
+			var rows = 1;
+		}
+		<span class="comment">// set appropriate height and width of surrounding divs</span>
+		Mediamanager.checkOccurrences(collectElems, rows);
+				
+		<span class="comment">// get all relevant spans</span>
+		var parentElem = $(<span class="literal">'lyMediamanagerMyLocal'</span>).getElementsByClassName(<span class="literal">'bez'</span>);
+		
+		<span class="comment">// corresponding DOM chang on class Names</span>
+		<span class="reserved">if</span> (previousElemsStatus[0] == <span class="literal">'block'</span>) {
+			parentElem[0].lastChild.className = <span class="reserved">this</span>.mediamanagerClassHideMyLocal;
+			parentElem[0].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlHide;
+		}
+		<span class="reserved">if</span> (previousElemsStatus[1] == <span class="literal">'none'</span>) {
+			parentElem[1].lastChild.className = <span class="reserved">this</span>.mediamanagerClassShowMyLocal;
+			parentElem[1].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlShow;
+		}
+		<span class="reserved">if</span> (previousElemsStatus[2] == <span class="literal">'block'</span>) {
+			parentElem[2].lastChild.className = <span class="reserved">this</span>.mediamanagerClassHideMyLocal;
+			parentElem[2].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlHide;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Toggle podcast show/hide podast details.
+ *
+ * <span class="attrib">@param</span> {var} elem Actual elem to toggle 
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_toggleExtendedView (elem)
+{
+	try {
+		<span class="reserved">if</span> (elem.value == showDetails) {
+			elem.value = hideDetails;
+			$(<span class="literal">'podcast_details_display'</span>).value = <span class="literal">'1'</span>;
+			Effect.Appear(<span class="literal">'extendedView'</span>,{duration: 0.4});
+		} <span class="reserved">else</span> {
+			elem.value = showDetails;
+			$(<span class="literal">'podcast_details_display'</span>).value = <span class="literal">''</span>;
+			Effect.Fade(<span class="literal">'extendedView'</span>,{duration: 0.4});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get element id and populate podcast layer.
+ *
+ * <span class="attrib">@see</span> #loaderMediaToPodcast
+ * <span class="attrib">@see</span> #showResponseMediaToPodcast
+ * <span class="attrib">@param</span> {string} elem element (id) to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_mediaToPodcast (elem)
+{
+	try {
+		<span class="reserved">this</span>.toShow = $(<span class="literal">'podcast_container'</span>);
+		
+		Element.show(<span class="reserved">this</span>.toShow);
+		Element.scrollTo(<span class="reserved">this</span>.toShow);
+		
+		<span class="comment">// set hidden field value</span>
+		$(<span class="literal">'podcast_media_object'</span>).value = elem.id;
+
+		var url = <span class="reserved">this</span>.parseMedCastsUrl;
+		var pars = <span class="literal">'id='</span> + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate podcast layer via given hidden value.
+ * &lt;br /&gt;
+ * Used if the podcast layer is formerly populated and we get
+ * into form errors on submit of page.
+ *
+ * <span class="attrib">@see</span> #loaderMediaToPodcast
+ * <span class="attrib">@see</span> #showResponseMediaToPodcast
+ * <span class="attrib">@param</span> {string} elem element (id) to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_mediaToPodcastOnLoad ()
+{
+	try {
+		<span class="reserved">this</span>.toShow = $(<span class="literal">'podcast_container'</span>);
+		
+		Element.show(<span class="reserved">this</span>.toShow);
+
+		<span class="comment">// get hidden field value</span>
+		var podcast_media_object = $(<span class="literal">'podcast_media_object'</span>).value;
+
+		var url = <span class="reserved">this</span>.parseMedCastsUrl;
+		var pars = <span class="literal">'id='</span> + podcast_media_object;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseMediaToPodcast
+			});	
+			
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Discard podcast media item from page.
+ *
+ * <span class="attrib">@see</span> #loaderMediaToPodcast
+ * <span class="attrib">@see</span> #showResponseDiscardPodcast
+ * <span class="attrib">@param</span> {var} elem Actual elem to delete
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_discardPodcast (elem)
+{
+	try {
+		<span class="comment">// get hidden field value</span>
+		var podcast_id = $(<span class="literal">'podcast_id'</span>).value;
+
+		var url = <span class="reserved">this</span>.parseMedDiscCastsUrl;
+		var pars = <span class="literal">'id='</span> + podcast_id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMediaToPodcast,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseDiscardPodcast
+			});	
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest Response.
+ *
+ * <span class="attrib">@see</span> #mediaToPodcast
+ * <span class="attrib">@see</span> #mediaToPodcastOnLoad
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseMediaToPodcast(req)
+{
+	try {		
+		$(<span class="literal">'mediafile_container'</span>).innerHTML = req.responseText;
+			
+		<span class="comment">// dont be able to use appear here, because</span>
+		<span class="comment">// Effect.Opacity don't use display: block</span>
+		Element.hide(<span class="literal">'indicatorPodcast'</span>);
+		Element.show(<span class="literal">'podcast_container_loader'</span>);
+		
+		<span class="reserved">if</span> ($(<span class="literal">'podcast_details_display'</span>).value == 1) {
+			document.getElementsByName(<span class="literal">'toggleExtendedView'</span>)[0].value = hideDetails;
+			$(<span class="literal">'extendedView'</span>).style.display = <span class="literal">'block'</span>;
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest Response.
+ *
+ * <span class="attrib">@see</span> #discardPodcast
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseDiscardPodcast(req)
+{
+	try {
+		<span class="comment">// set hidden field value</span>
+		$(<span class="literal">'podcast_id'</span>).value = <span class="literal">''</span>;
+		$(<span class="literal">'podcast_media_object'</span>).value = <span class="literal">''</span>;	
+	
+		Effect.Fade(<span class="literal">'podcast_container'</span>,{duration: 0.4});
+					
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display indicator while XMLHttpRequest processing.
+ *
+ * <span class="attrib">@see</span> #mediaToPodcast
+ * <span class="attrib">@see</span> #mediaToPodcastOnLoad
+ * <span class="attrib">@see</span> #discardPodcast
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_loaderMediaToPodcast ()
+{
+	try {
+		var hideContentTable = $(<span class="literal">'podcast_container_loader'</span>);
+		Element.hide(hideContentTable);
+		Element.show(<span class="literal">'indicatorPodcast'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Initialize tag search.
+ * &lt;br /&gt;
+ * Call {<span class="attrib">@link</span> #invokeTags} with a delay of 1 second.
+ * &lt;br /&gt;
+ * To avoid firing {<span class="attrib">@link</span> #invokeTags} on every single keyboard
+ * stroke, we have to deal with the var keyPressDelay.
+ * 
+ * <span class="attrib">@see</span> #invokeTags
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_initializeTagSearch ()
+{
+	try {
+		<span class="comment">// clear the keyPressDelay if it exists from before</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.keyPressDelay) {
+			window.clearTimeout(<span class="reserved">this</span>.keyPressDelay);
+		}
+		<span class="reserved">if</span> ($(<span class="literal">'mm_tags'</span>).value &gt;= <span class="literal">''</span>) {
+			<span class="reserved">this</span>.keyPressDelay = window.setTimeout(<span class="literal">"Mediamanager.invokeTags()"</span>, 1000);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display media items related to selected option(s).
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyLocal}.
+ * 
+ * <span class="attrib">@see</span> #preserveElementStatusMyLocal
+ * <span class="attrib">@see</span> #checkElemsMyLocal
+ * <span class="attrib">@see</span> #loaderMyLocal
+ * <span class="attrib">@see</span> #showResponseInvokeInputs
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokeInputs ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = <span class="reserved">this</span>.parseMedLocalUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display media items related to tag(s) input.
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyLocal}.
+ * 
+ * <span class="attrib">@see</span> #initializeTagSearch
+ * <span class="attrib">@see</span> #preserveElementStatusMyLocal
+ * <span class="attrib">@see</span> #checkElemsMyLocal
+ * <span class="attrib">@see</span> #loaderMyLocal
+ * <span class="attrib">@see</span> #showResponseInvokeTagInputs
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokeTags ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = <span class="reserved">this</span>.parseMedLocalUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeTagInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Initialize pager.
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyLocal}.
+ * The function attribute &lt;em&gt;pager_page&lt;/em&gt; is only needed (and used), when its 
+ * called within a popup to close ({<span class="attrib">@link</span> Helper#closePopup}). That because we
+ * want to get back on exact the pager page on which we started the popup.
+ * 
+ * <span class="attrib">@see</span> #preserveElementStatusMyLocal
+ * <span class="attrib">@see</span> #checkElemsMyLocal
+ * <span class="attrib">@see</span> #loaderMyLocal
+ * <span class="attrib">@see</span> #showResponseInvokeInputs
+ * <span class="attrib">@see</span> Helper#closePopup
+ * <span class="attrib">@param</span> {object} elem Actual element to process
+ * <span class="attrib">@param</span> {string} pager_page Saved pager page count
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokePager (elem, pager_page)
+{
+	try {
+		Mediamanager.preserveElementStatusMyLocal();
+		
+		var elems = Mediamanager.checkElemsMyLocal();
+		var url = <span class="reserved">this</span>.parseMedLocalUrl;
+		<span class="reserved">if</span> (typeof pager_page != <span class="literal">'undefined'</span>) {
+			var pars = <span class="literal">'mm_start='</span> + pager_page + <span class="literal">'&amp;'</span> + elems;
+		} <span class="reserved">else</span> {
+			var pars = <span class="literal">'mm_start='</span> + elem.id + <span class="literal">'&amp;'</span> + elems;
+		}
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputs
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest response.
+ * &lt;br /&gt;
+ * Re-observe the tag search on both layers (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;).
+ *
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyLocal
+ * <span class="attrib">@see</span> #initializeTagSearch
+ * <span class="attrib">@see</span> #initializeTagSearchMyFlickr
+ * <span class="attrib">@see</span> #invokeInputs
+ * <span class="attrib">@see</span> #invokePager
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseInvokeInputs(req)
+{
+	try {
+		$(<span class="literal">'column'</span>).innerHTML = req.responseText;
+		
+		Mediamanager.setCurrentElementStatusMyLocal();
+		
+		Event.observe($(<span class="literal">'mm_tags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearch);
+		Event.observe($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearchMyFlickr);
+
+		$(<span class="literal">'hiddenFocus'</span>).focus();
+		
+		Helper.applyBehaviour();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest response.
+ * &lt;br /&gt;
+ * Re-observe the tag search on both layers (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;).
+ *
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyLocal
+ * <span class="attrib">@see</span> #initializeTagSearch
+ * <span class="attrib">@see</span> #initializeTagSearchMyFlickr
+ * <span class="attrib">@see</span> #invokeTags
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseInvokeTagInputs(req)
+{
+	try {	
+		$(<span class="literal">'column'</span>).innerHTML = req.responseText;
+		
+		<span class="comment">// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791</span>
+		$(<span class="literal">'mm_tags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+		$(<span class="literal">'mm_flickrtags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+		
+		Mediamanager.setCurrentElementStatusMyLocal();
+		
+		Event.observe($(<span class="literal">'mm_tags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearch);
+		Event.observe($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($(<span class="literal">'mm_tags'</span>), <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);	
+		$(<span class="literal">'mm_tags'</span>).focus();
+			
+		Helper.applyBehaviour();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display indicator while XMLHttpRequest processing.
+ *
+ * <span class="attrib">@see</span> #invokeInputs
+ * <span class="attrib">@see</span> #invokePager
+ * <span class="attrib">@see</span> #invokeTags
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_loaderMyLocal ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName(<span class="literal">'mm_content'</span>)[0];
+		Element.hide(hideContentTable);
+		Element.show(<span class="literal">'indicator_local'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Delete media item.
+ * &lt;br /&gt;
+ * When deleting completed {<span class="attrib">@link</span> #invokeInputs} is called.
+ * 
+ * <span class="attrib">@see</span> #loaderMyLocal
+ * <span class="attrib">@see</span> #invokeInputs
+ * <span class="attrib">@param</span> {var} elem Actual elem to delete
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_deleteMediaItem (elem)
+{
+	try {
+		var url = <span class="reserved">this</span>.parseMedDeleteUrl;
+		var pars = <span class="literal">'id='</span> + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyLocal,
+				parameters : pars,
+				onComplete : <span class="reserved">function</span> () {Mediamanager.invokeInputs();}
+			});		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Insert image media item into content form field.
+ * &lt;br /&gt;
+ * First we have a look, if global var &lt;em&gt;storedFocus&lt;/em&gt; ({<span class="attrib">@link</span> Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {<span class="attrib">@link</span> Helper#insertTags}.
+ * 
+ * <span class="attrib">@see</span> Forms#storeFocus
+ * <span class="attrib">@see</span> Helper#insertTags
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_insertImageItem (elem)
+{
+	try {
+		<span class="reserved">if</span> (typeof storedFocus == <span class="literal">'undefined'</span>) {
+			alert(selectTextarea); 
+		} <span class="reserved">else</span> {
+			var target = storedFocus;
+	
+			var build;
+			build = <span class="literal">'{get_media id="'</span>;
+			build += elem.id;
+			build += <span class="literal">'"}'</span>;
+		
+			var strStart = build;
+			
+			Helper.insertTags(target, strStart, <span class="literal">''</span> , <span class="literal">''</span>);
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Insert document media item into content form field.
+ * &lt;br /&gt;
+ * First we have a look, if global var &lt;em&gt;storedFocus&lt;/em&gt; ({<span class="attrib">@link</span> Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {<span class="attrib">@link</span> Helper#insertTags}.
+ * 
+ * <span class="attrib">@see</span> Forms#storeFocus
+ * <span class="attrib">@see</span> Helper#insertTags
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_insertDocumentItem (elem)
+{
+	try {
+		<span class="reserved">if</span> (typeof storedFocus == <span class="literal">'undefined'</span>) {
+			alert(selectTextarea); 
+		} <span class="reserved">else</span> {
+			var target = storedFocus;
+	
+			var build;
+			build = <span class="literal">'&lt;a href="'</span>;
+			build += <span class="literal">'{get_media id="'</span>;
+			build += elem.id;
+			build += <span class="literal">'"}'</span>;
+			build += <span class="literal">'"&gt;'</span>;
+		
+			strStart = build;
+			strEnd = <span class="literal">'&lt;/a&gt;'</span>;
+			
+			Helper.insertTags(target, strStart, strEnd , describeLink);
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Collects the media manager form elements values as a hash
+ * and returns it as a query string.
+ * &lt;br /&gt;
+ * var &lt;em&gt;mm_limit&lt;/em&gt; is filled within {<span class="attrib">@link</span> #checkOccurrences}.
+ * &lt;br /&gt;
+ * var &lt;em&gt;mm_pagetype&lt;/em&gt; comes from definition in the
+ * html markup. Distinguish to show/hide action icon &lt;em&gt;UseAsPodcast&lt;/em&gt;.
+ *
+ * <span class="attrib">@see</span> #invokeInputsMyFlickr
+ * <span class="attrib">@see</span> #invokePagerMyFlickr
+ * <span class="attrib">@see</span> #invokeTagsMyFlickr
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_checkElemsMyFlickr ()
+{
+	try {
+		<span class="reserved">if</span> (typeof countItems == <span class="literal">'undefined'</span>) {
+			<span class="comment">// initialize global with 'save' display</span>
+			countItems = 0;
+		};
+		
+		var getElems = {
+			mm_user : $F(<span class="literal">'mm_user'</span>),
+			mm_flickrtags : $F(<span class="literal">'mm_flickrtags'</span>),
+			mm_photoset : $F(<span class="literal">'mm_photoset'</span>),
+			mm_limit : countItems,
+			mm_pagetype : pagetype
+		};
+		var o = $H(getElems);
+		<span class="reserved">return</span> o.toQueryString();
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Save elements display status.
+ * &lt;br /&gt;
+ * This method is used everytime there is a XMLHttpRequest Call.
+ * Counterpart of {<span class="attrib">@link</span> #setCurrentElementStatusMyFlickr}.
+ * 
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_preserveElementStatusMyFlickr ()
+{	
+	try {	
+		var current_userElem = Element.getStyle(<span class="literal">'mm_user_wrap'</span>, <span class="literal">'display'</span>);
+		var current_photosetElem = Element.getStyle(<span class="literal">'mm_photoset_wrap'</span>, <span class="literal">'display'</span>);
+		var current_flickrtagsElem = Element.getStyle(<span class="literal">'mm_flickrtags_wrap'</span>, <span class="literal">'display'</span>);	
+		
+		<span class="comment">// make global -&gt; use in func setCurrentElementStatusMyFlickr</span>
+		previousElemsStatus = new Array (current_userElem, current_photosetElem, current_flickrtagsElem);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Sets elements display status.
+ * &lt;br /&gt;
+ * This method is used everytime there is a XMLHttpRequest Response.
+ * It takes the received values from Counterpart method {<span class="attrib">@link</span> #preserveElementStatusMyFlickr}
+ * to reconstitute the Media Manager Elements display.
+ *
+ * <span class="attrib">@see</span> #preserveElementStatusMyFlickr
+ * <span class="attrib">@see</span> #checkOccurrences
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_setCurrentElementStatusMyFlickr ()
+{	
+	try {		
+		Element.setStyle(<span class="literal">'mm_user_wrap'</span>, {display: previousElemsStatus[0]});
+		Element.setStyle(<span class="literal">'mm_photoset_wrap'</span>, {display: previousElemsStatus[1]});
+		Element.setStyle(<span class="literal">'mm_flickrtags_wrap'</span>, {display: previousElemsStatus[2]});
+		
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+		
+		<span class="comment">// do nothing on var</span>
+		var rows = <span class="literal">''</span>;
+			
+		<span class="comment">// set appropriate height and width of surrounding divs</span>
+		Mediamanager.checkOccurrences(collectElems, rows);
+				
+		<span class="comment">// get all relevant spans</span>
+		var parentElem = $(<span class="literal">'lyMediamanagerMyFlickr'</span>).getElementsByClassName(<span class="literal">'bez'</span>);
+		
+		<span class="comment">// corresponding DOM chang on class Names</span>
+		<span class="reserved">if</span> (previousElemsStatus[0] == <span class="literal">'none'</span>) {
+			parentElem[0].lastChild.className = <span class="reserved">this</span>.mediamanagerClassShowMyFlickr;
+			parentElem[0].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlShow;
+		}
+		<span class="reserved">if</span> (previousElemsStatus[1] == <span class="literal">'block'</span>) {
+			parentElem[1].lastChild.className = <span class="reserved">this</span>.mediamanagerClassHideMyFlickr;
+			parentElem[1].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlHide;
+		}
+		<span class="reserved">if</span> (previousElemsStatus[2] == <span class="literal">'block'</span>) {
+			parentElem[2].lastChild.className = <span class="reserved">this</span>.mediamanagerClassHideMyFlickr;
+			parentElem[2].lastChild.innerHTML = <span class="reserved">this</span>.elementHtmlHide;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display media items related to tag(s) input.
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyFlickr}.
+ *  
+ * <span class="attrib">@see</span> #preserveElementStatusMyFlickr
+ * <span class="attrib">@see</span> #checkElemsMyFlickr
+ * <span class="attrib">@see</span> #loaderMyFlickr
+ * <span class="attrib">@see</span> #showResponseInvokeTagsMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokeTagsMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = <span class="reserved">this</span>.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeTagsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display media items related to selected option(s).
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyFlickr}.
+ * 
+ * <span class="attrib">@see</span> #preserveElementStatusMyFlickr
+ * <span class="attrib">@see</span> #checkElemsMyFlickr
+ * <span class="attrib">@see</span> #loaderMyFlickr
+ * <span class="attrib">@see</span> #showResponseInvokeInputsMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokeInputsMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = <span class="reserved">this</span>.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Initialize pager.
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyFlickr}.
+ * 
+ * <span class="attrib">@see</span> #preserveElementStatusMyFlickr
+ * <span class="attrib">@see</span> #checkElemsMyFlickr
+ * <span class="attrib">@see</span> #loaderMyFlickr
+ * <span class="attrib">@see</span> #showResponseInvokeInputsMyFlickr
+ * <span class="attrib">@param</span> {object} elem Actual element to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_invokePagerMyFlickr (elem)
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = <span class="reserved">this</span>.parseMedFlickrUrl;
+		var pars = <span class="literal">'mm_start='</span> + elem.id + <span class="literal">'&amp;'</span> + elems;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : Mediamanager.loaderMyFlickr,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Initialize tag search.
+ * &lt;br /&gt;
+ * Call {<span class="attrib">@link</span> #invokeTagsMyFlickr} with a delay of 1 second.
+ * &lt;br /&gt;
+ * To avoid firing {<span class="attrib">@link</span> #invokeTagsMyFlickr} on every single keyboard
+ * stroke, we have to deal with the var keyPressDelay.
+ * 
+ * <span class="attrib">@see</span> #invokeTagsMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_initializeTagSearchMyFlickr ()
+{
+	try {
+		<span class="comment">// clear the keyPressDelay if it exists from before</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.keyPressDelay) {
+			window.clearTimeout(<span class="reserved">this</span>.keyPressDelay);
+		}
+		<span class="reserved">if</span> ($(<span class="literal">'mm_flickrtags'</span>).value &gt;= <span class="literal">''</span>) {
+			<span class="reserved">this</span>.keyPressDelay = window.setTimeout(<span class="literal">"Mediamanager.invokeTagsMyFlickr()"</span>, 1000);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Prepare display with given user.
+ * &lt;br /&gt;
+ * First of all we preserve the current display element status,
+ * then fill var &lt;em&gt;elems&lt;/em&gt; with value hash from {<span class="attrib">@link</span> #checkElemsMyFlickr}.
+ * 
+ * <span class="attrib">@see</span> #preserveElementStatusMyFlickr
+ * <span class="attrib">@see</span> #checkElemsMyFlickr
+ * <span class="attrib">@see</span> #loaderMyFlickr
+ * <span class="attrib">@see</span> #showResponseInvokeInputsMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_initializeUserMyFlickr ()
+{
+	try {
+		Mediamanager.preserveElementStatusMyFlickr();
+		
+		var elems = Mediamanager.checkElemsMyFlickr();
+		var url = <span class="reserved">this</span>.parseMedFlickrUrl;
+		var pars = elems;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				parameters : pars,
+				onComplete : Mediamanager.showResponseInvokeInputsMyFlickr
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest response.
+ * &lt;br /&gt;
+ * Re-observe the tag search on both layers (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;).
+ *
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyFlickr
+ * <span class="attrib">@see</span> #initializeTagSearch
+ * <span class="attrib">@see</span> #initializeTagSearchMyFlickr
+ * <span class="attrib">@see</span> #initializeUserMyFlickr
+ * <span class="attrib">@see</span> #invokePagerMyFlickr
+ * <span class="attrib">@see</span> #invokeInputsMyFlickr
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseInvokeInputsMyFlickr(req)
+{
+	try {
+		$(<span class="literal">'column'</span>).innerHTML = req.responseText;
+		Element.show(<span class="literal">'lyMediamanagerMyFlickr'</span>);
+		Element.hide(<span class="literal">'lyMediamanagerMyLocal'</span>);
+		
+		<span class="comment">// show option inputs</span>
+		var mm_flickrtags = document.getElementsByClassName(<span class="literal">'mm_flickrtags'</span>);
+		var mm_photoset = document.getElementsByClassName(<span class="literal">'mm_photoset'</span>);
+		Element.setStyle(mm_flickrtags[0], {visibility: <span class="literal">'visible'</span>});
+		Element.setStyle(mm_photoset[0], {visibility: <span class="literal">'visible'</span>});	
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+								
+		Event.observe($(<span class="literal">'mm_tags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearch);
+		Event.observe($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearchMyFlickr);
+		
+		$(<span class="literal">'hiddenFocus'</span>).focus();
+		
+		Helper.applyBehaviour();	
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Populate on XMLHttpRequest response.
+ * &lt;br /&gt;
+ * Re-observe the tag search on both layers (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;).
+ *
+ * <span class="attrib">@see</span> #setCurrentElementStatusMyFlickr
+ * <span class="attrib">@see</span> #initializeTagSearch
+ * <span class="attrib">@see</span> #initializeTagSearchMyFlickr
+ * <span class="attrib">@see</span> #invokeInputsMyFlickr
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_showResponseInvokeTagsMyFlickr(req)
+{
+	try {
+		$(<span class="literal">'column'</span>).innerHTML = req.responseText;
+		Element.show(<span class="literal">'lyMediamanagerMyFlickr'</span>);
+		Element.hide(<span class="literal">'lyMediamanagerMyLocal'</span>);
+		
+		<span class="comment">// show option inputs</span>
+		var mm_flickrtags = document.getElementsByClassName(<span class="literal">'mm_flickrtags'</span>);
+		var mm_photoset = document.getElementsByClassName(<span class="literal">'mm_photoset'</span>);
+		Element.setStyle(mm_flickrtags[0], {visibility: <span class="literal">'visible'</span>});
+		Element.setStyle(mm_photoset[0], {visibility: <span class="literal">'visible'</span>});
+		
+		<span class="comment">// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791</span>
+		$(<span class="literal">'mm_tags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+		$(<span class="literal">'mm_flickrtags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+								
+		Event.observe($(<span class="literal">'mm_tags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearch);
+		Event.observe($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);
+		$(<span class="literal">'mm_flickrtags'</span>).focus();
+		
+		Helper.applyBehaviour();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display indicator while XMLHttpRequest processing.
+ *
+ * <span class="attrib">@see</span> #invokeInputsMyFlickr
+ * <span class="attrib">@see</span> #invokePagerMyFlickr
+ * <span class="attrib">@see</span> #invokeTagsMyFlickr
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_loaderMyFlickr ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName(<span class="literal">'mm_content'</span>)[1];
+		Element.hide(hideContentTable);
+		Element.show(<span class="literal">'indicator_flickr'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Insert image media item into content form field.
+ * &lt;br /&gt;
+ * First we have a look, if global var &lt;em&gt;storedFocus&lt;/em&gt; ({<span class="attrib">@link</span> Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {<span class="attrib">@link</span> Helper#insertTags}.
+ * 
+ * <span class="attrib">@see</span> Forms#storeFocus
+ * <span class="attrib">@see</span> Helper#insertTags
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_insertImageItemFlickr (elem)
+{
+	try {
+		<span class="reserved">if</span> (typeof storedFocus == <span class="literal">'undefined'</span>) {
+			alert(selectTextarea); 
+		} <span class="reserved">else</span> {
+			var target = storedFocus;
+			
+			<span class="comment">// collect values</span>
+			var identify = elem.parentNode.parentNode;
+			
+			<span class="comment">// get sizes</span>
+			var sel_select = identify.getElementsByTagName(<span class="literal">'select'</span>)[0];			
+			var sel_select_value = sel_select.options[sel_select.selectedIndex].value;
+			
+			<span class="comment">// URL to flickr photo page</span>
+			var sel_hidden = identify.getElementsByTagName(<span class="literal">'input'</span>)[0].value;
+					
+			<span class="comment">// build strings 			</span>
+			<span class="comment">// preview URL</span>
+			var source = elem.firstChild.src;
+			
+			<span class="comment">// get rid of size suffix</span>
+			var splitSource = source.split(<span class="literal">'_s'</span>);
+			
+			<span class="comment">// ensure selection has used</span>
+			<span class="reserved">if</span> (sel_select_value != 1) {
+				
+				<span class="comment">//initialize vars</span>
+				var buildSrc;
+				var buildHrefStart;
+				var buildHrefEnd;
+				var buildComplete;
+			
+				buildSrc = <span class="literal">'&lt;img src="'</span>;
+				buildSrc += splitSource[0] + sel_select_value + splitSource[1];
+				buildSrc += <span class="literal">'" /&gt;'</span>;
+				buildHrefStart = <span class="literal">'&lt;a href="'</span>;
+				buildHrefStart += sel_hidden;
+				buildHrefStart += <span class="literal">'"&gt;'</span>;
+				buildHrefEnd = <span class="literal">'&lt;/a&gt;'</span>;
+				
+				buildComplete = buildHrefStart + buildSrc + buildHrefEnd;
+				
+				var strStart = buildComplete;
+		
+				Helper.insertTags(target, strStart, <span class="literal">''</span> , <span class="literal">''</span>);
+				
+			 } <span class="reserved">else</span> {
+				alert (alertOnSelectImageSize);
+			}
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Mediamanager
+ */</span>
+Mediamanager = new Mediamanager();
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+</body>
+</html>

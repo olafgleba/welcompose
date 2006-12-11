@@ -1,0 +1,1379 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Welcompose Publishing System Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="wcom.helper.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>wcom.helper.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Comprised javascript helper functions.
+ It contains functions that may be used application wide.
+ 
+ <BR/><BR/><B>Version: </B>$Id: wcom.helper.js 713 2006-12-08 16:12:26Z andreas $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Helper.html">Helper</a></b></td>
+    <td>The Mediamanager class miscellaneous is the appropriate class for
+ the help enviroment.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+	<a name="method_summary"><!-- --></a>
+	<table border="1" cellpadding="3" cellspacing="0" width="100%">
+		<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+			<td colspan=2>
+				<font size="+2">
+					<b>Method Summary</b>
+				</font>
+			</td>
+		</tr>
+	
+		
+		   <tr bgcolor="white" class="TableRowColor">
+		      <td align="right" valign="top" width="1%">
+			 <font size="-1">
+			    <code>static&nbsp;void</code>
+			 </font>
+		      </td>
+		      <td>
+			 <code>
+			    <b>
+			       <a href="Globals.html#!s!_showResponseStructuralTemplates">_showResponseStructuralTemplates</a></b>(req)
+			 </code>
+			 <br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 Implements method of prototype class Helper
+ Insert internal link string
+		      </td>
+		   </tr>
+		
+	
+	</table>
+    <p>
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * Project: Welcompose
+ * File: wcom.helper.js
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.helper.js 713 2006-12-08 16:12:26Z andreas $
+ *
+ * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@author</span> Olaf Gleba
+ * <span class="attrib">@package</span> Welcompose
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */</span>
+
+<span class="comment">/** 
+ * <span class="attrib">@fileoverview</span> Comprised javascript helper functions.
+ * It contains functions that may be used application wide.
+ * 
+ * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
+ * <span class="attrib">@version</span> $Id: wcom.helper.js 713 2006-12-08 16:12:26Z andreas $ 
+ */</span>
+
+
+
+<span class="comment">/**
+ * Constructs the Helper class
+ * 
+ * <span class="attrib">@class</span> The Mediamanager class miscellaneous is the appropriate class for
+ * the help enviroment. The scope is application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper ()
+{
+	try {
+		<span class="comment">// no properties		</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Helper.<span class="reserved">prototype</span> = new Base();
+
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Helper
+ */</span>
+Helper.<span class="reserved">prototype</span>.launchPopup = Helper_launchPopup;
+Helper.<span class="reserved">prototype</span>.closePopup = Helper_closePopup;
+Helper.<span class="reserved">prototype</span>.closeLinksPopup = Helper_closeLinksPopup;
+Helper.<span class="reserved">prototype</span>.closePopupTrack = Helper_closePopupTrack;
+Helper.<span class="reserved">prototype</span>.closePopupTrackNoAlert = Helper_closePopupTrackNoAlert;
+Helper.<span class="reserved">prototype</span>.lowerOpacity = Helper_lowerOpacity;
+Helper.<span class="reserved">prototype</span>.lowerOpacityOnUpload = Helper_lowerOpacityOnUpload;
+Helper.<span class="reserved">prototype</span>.unsupportsEffects = Helper_unsupportsEffects;
+Helper.<span class="reserved">prototype</span>.unsupportsElems = Helper_unsupportsElems;
+Helper.<span class="reserved">prototype</span>.defineWindowX = Helper_defineWindowX;
+Helper.<span class="reserved">prototype</span>.defineWindowY = Helper_defineWindowY;
+Helper.<span class="reserved">prototype</span>.showNextNode = Helper_showNextNode;
+Helper.<span class="reserved">prototype</span>.insertInternalLink = Helper_insertInternalLink;
+Helper.<span class="reserved">prototype</span>.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
+Helper.<span class="reserved">prototype</span>.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
+Helper.<span class="reserved">prototype</span>.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
+Helper.<span class="reserved">prototype</span>.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
+Helper.<span class="reserved">prototype</span>.getDelimiterValue = Helper_getDelimiterValue;
+Helper.<span class="reserved">prototype</span>.getPagerPage = Helper_getPagerPage;
+Helper.<span class="reserved">prototype</span>.confirmDelNavAction = Helper_confirmDelNavAction;
+Helper.<span class="reserved">prototype</span>.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
+Helper.<span class="reserved">prototype</span>.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
+Helper.<span class="reserved">prototype</span>.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
+Helper.<span class="reserved">prototype</span>.showFileUploadMessage = Helper_showFileUploadMessage;
+Helper.<span class="reserved">prototype</span>.getAttrParentNode = Helper_getAttrParentNode;
+Helper.<span class="reserved">prototype</span>.getAttr = Helper_getAttr;
+Helper.<span class="reserved">prototype</span>.getAttrNextSibling = Helper_getAttrNextSibling;
+Helper.<span class="reserved">prototype</span>.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
+Helper.<span class="reserved">prototype</span>.getDataParentNode = Helper_getDataParentNode;
+Helper.<span class="reserved">prototype</span>.applyBehaviour = Helper_applyBehaviour;
+Helper.<span class="reserved">prototype</span>.validate = Helper_validate;
+Helper.<span class="reserved">prototype</span>.insertTagsFromPopup = Helper_insertTagsFromPopup;
+Helper.<span class="reserved">prototype</span>.insertTags = Helper_insertTags;
+
+
+
+<span class="reserved">function</span> Helper_launchPopup (width, height, nname, trigger, elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.trigger = trigger;
+		
+		Helper.lowerOpacity();
+		
+		switch (<span class="reserved">this</span>.trigger) {
+			case <span class="literal">'mm_upload'</span> :
+					Helper.getPagerPage();
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedUploadUrl + <span class="literal">'?pager_page='</span> + pager_page;
+				break;
+			case <span class="literal">'mm_edit'</span> :
+					Helper.getPagerPage();
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedEditUrl + <span class="literal">'?id='</span> + <span class="reserved">this</span>.elem.id + <span class="literal">'&amp;pager_page='</span> + pager_page;
+				break;
+			case <span class="literal">'pages_internal_links'</span> :
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parsePagesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name;
+				break;
+			case <span class="literal">'pages_internal_links_NoHref'</span> :
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parsePagesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;control=NoHref'</span>;
+				break;
+			case <span class="literal">'globaltemplates_internal_links'</span> :
+					Helper.getDelimiterValue();
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseGlobalTemplatesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;delimiter='</span> + val;
+				break;
+			case <span class="literal">'globalfiles_internal_links'</span> :
+					Helper.getDelimiterValue();
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseGlobalFilesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;delimiter='</span> + val;
+				break;
+			case <span class="literal">'structuraltemplates_internal_links'</span> :
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseStructuralTemplatesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name;
+				break;
+		}
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.ttargetUrl = <span class="reserved">this</span>.url;
+		<span class="reserved">this</span>.ttargetName = nname;
+		<span class="reserved">this</span>.ttargetWidth = width;
+		<span class="reserved">this</span>.ttargetHeight = height;
+		<span class="reserved">this</span>.ttarget = window.open(<span class="reserved">this</span>.ttargetUrl, <span class="reserved">this</span>.ttargetName, 
+				<span class="literal">"scrollbars=yes,width="</span>+<span class="reserved">this</span>.ttargetWidth+<span class="literal">",height="</span>+<span class="reserved">this</span>.ttargetHeight+<span class="literal">""</span>);
+		<span class="reserved">this</span>.resWidth = Helper.defineWindowX(<span class="reserved">this</span>.ttargetWidth);
+		<span class="reserved">this</span>.resHeight = Helper.defineWindowY();
+		
+		<span class="reserved">this</span>.ttarget.moveBy(<span class="reserved">this</span>.resWidth, <span class="reserved">this</span>.resHeight);
+		<span class="reserved">this</span>.ttarget.focus();
+		
+		<span class="comment">//popTarget = this.ttarget;</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_closePopup ()
+{       
+	try {
+		<span class="comment">/* disable all elements */</span>
+		var form_id = document.forms[0].getAttribute(<span class="literal">'id'</span>);
+	
+		var e = Form.getElements(form_id);
+			<span class="reserved">for</span>(i = 0; i &lt; e.length; i++) {
+    			e[i].disabled = true;
+			}
+
+		<span class="comment">/* invoke function in parent window */</span>
+		self.opener.$(<span class="literal">'lyLowerOpacity'</span>).style.display = <span class="literal">'none'</span>;
+		self.opener.Mediamanager.invokePager(<span class="literal">''</span>, pager_page);
+		
+		<span class="comment">/* Needed for func closePopupTrack(noAlert) */</span>
+		audit = true;
+		
+		<span class="comment">/* set a timeout since the opened window has
+		 to be present til process function in parent is executed */</span>
+		setTimeout (<span class="literal">"self.close()"</span>, 1200);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="reserved">function</span> Helper_closeLinksPopup ()
+{       
+	try {
+		<span class="comment">/* invoke function in parent window */</span>
+		self.opener.$(<span class="literal">'lyLowerOpacity'</span>).style.display = <span class="literal">'none'</span>;
+
+		<span class="comment">/* Needed for func closePopupTrack(NoAlert) */</span>
+		audit = true;
+					
+		<span class="comment">/* set a timeout since the opened window has
+		 to be present til process function in parent is executed */</span>
+		setTimeout (<span class="literal">"self.close()"</span>, 100);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_closePopupTrack (elem)
+{       
+	try {
+		
+		<span class="reserved">if</span> (typeof audit == <span class="literal">'undefined'</span>) {
+			audit = false;
+		}
+		<span class="reserved">if</span> (typeof submitted == <span class="literal">'undefined'</span>) {
+			submitted = false;
+		}
+
+		<span class="reserved">if</span> (audit !== true &amp;&amp; submitted !== true) {
+			self.opener.$(<span class="literal">'lyLowerOpacity'</span>).style.display = <span class="literal">'none'</span>;
+			self.opener.alert(alertOnClosePopup);
+			<span class="comment">// reset global vars</span>
+			audit = false;
+			submitted = false;
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_closePopupTrackNoAlert (elem)
+{       
+	try {
+		
+		<span class="reserved">if</span> (typeof audit == <span class="literal">'undefined'</span>) {
+			audit = false;
+		}
+
+		<span class="reserved">if</span> (audit !== true) {
+			self.opener.$(<span class="literal">'lyLowerOpacity'</span>).style.display = <span class="literal">'none'</span>;
+			<span class="comment">// reset global vars</span>
+			audit = false;
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="reserved">function</span> Helper_lowerOpacity ()
+{       
+	try {
+ 		<span class="comment">// properties</span>
+        <span class="reserved">this</span>.cLeft = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.cTop = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.cPosition = <span class="literal">'absolute'</span>;
+        <span class="reserved">this</span>.cDisplay = <span class="literal">'block'</span>;
+        <span class="reserved">this</span>.imagePath = <span class="literal">'../static/img/bg_overlay.png'</span>;
+		<span class="reserved">this</span>.lyContainer = $(<span class="literal">'container'</span>);   
+        <span class="reserved">this</span>.buildHeight = <span class="reserved">this</span>.lyContainer.offsetHeight;
+        <span class="reserved">this</span>.buildWidth = <span class="reserved">this</span>.lyContainer.offsetWidth;
+		<span class="reserved">this</span>.imageStr = <span class="literal">'&lt;img src="'</span> + <span class="reserved">this</span>.imagePath + <span class="literal">'" width="'</span> + <span class="reserved">this</span>.buildWidth + <span class="literal">'" height="'</span> + <span class="reserved">this</span>.buildHeight +<span class="literal">'" alt="" /&gt;'</span>;
+		<span class="reserved">this</span>.ttarget_lower = $(<span class="literal">'lyLowerOpacity'</span>);
+
+        <span class="reserved">if</span> (<span class="reserved">this</span>.ttarget_lower) {
+
+		 	<span class="reserved">this</span>.ttarget_lower.style.display = <span class="reserved">this</span>.cDisplay;
+			<span class="reserved">this</span>.ttarget_lower.style.position = <span class="reserved">this</span>.cPosition;
+			<span class="reserved">this</span>.ttarget_lower.style.top = <span class="reserved">this</span>.cTop;
+			<span class="reserved">this</span>.ttarget_lower.style.left = <span class="reserved">this</span>.cLeft;
+			<span class="reserved">this</span>.ttarget_lower.style.height = <span class="reserved">this</span>.buildHeight + <span class="literal">'px'</span>;
+			<span class="reserved">this</span>.ttarget_lower.style.width = <span class="reserved">this</span>.buildWidth + <span class="literal">'px'</span>;
+			
+			Element.update(<span class="reserved">this</span>.ttarget_lower, <span class="reserved">this</span>.imageStr);
+        }
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_lowerOpacityOnUpload ()
+{       
+	try {
+ 		<span class="comment">// properties</span>
+        <span class="reserved">this</span>.cLeft = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.cTop = <span class="literal">'0px'</span>;
+        <span class="reserved">this</span>.cPosition = <span class="literal">'absolute'</span>;
+        <span class="reserved">this</span>.cDisplay = <span class="literal">'block'</span>;
+        <span class="reserved">this</span>.imagePath = <span class="literal">'../static/img/bg_overlay.png'</span>;
+		<span class="reserved">this</span>.lyContainer = $(<span class="literal">'modalWindow'</span>);   
+        <span class="reserved">this</span>.buildHeight = <span class="reserved">this</span>.lyContainer.offsetHeight;
+        <span class="reserved">this</span>.buildWidth = <span class="reserved">this</span>.lyContainer.offsetWidth;
+		<span class="reserved">this</span>.imageStr = <span class="literal">'&lt;img src="'</span> + <span class="reserved">this</span>.imagePath + <span class="literal">'" width="'</span> + <span class="reserved">this</span>.buildWidth + <span class="literal">'" height="'</span> + <span class="reserved">this</span>.buildHeight +<span class="literal">'" alt="" /&gt;'</span>;
+		<span class="reserved">this</span>.ttarget_lower = $(<span class="literal">'lyLowerOpacity'</span>);
+
+        <span class="reserved">if</span> (<span class="reserved">this</span>.ttarget_lower) {
+
+		 	<span class="reserved">this</span>.ttarget_lower.style.display = <span class="reserved">this</span>.cDisplay;
+			<span class="reserved">this</span>.ttarget_lower.style.position = <span class="reserved">this</span>.cPosition;
+			<span class="reserved">this</span>.ttarget_lower.style.top = <span class="reserved">this</span>.cTop;
+			<span class="reserved">this</span>.ttarget_lower.style.left = <span class="reserved">this</span>.cLeft;
+			<span class="reserved">this</span>.ttarget_lower.style.height = <span class="reserved">this</span>.buildHeight + <span class="literal">'px'</span>;
+			<span class="reserved">this</span>.ttarget_lower.style.width = <span class="reserved">this</span>.buildWidth + <span class="literal">'px'</span>;
+			
+			Element.update(<span class="reserved">this</span>.ttarget_lower, <span class="reserved">this</span>.imageStr);
+        }
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_unsupportsEffects(exception)
+{	
+	try {
+		<span class="comment">//properties</span>
+		<span class="reserved">this</span>.browser = _setBrowserString();
+		<span class="reserved">this</span>.version = _setBrowserStringVersion();
+		<span class="reserved">this</span>.exception = exception;
+			
+		<span class="reserved">if</span> ((<span class="reserved">this</span>.browser == <span class="literal">"Internet Explorer"</span>) || (<span class="reserved">this</span>.browser == <span class="literal">"Safari"</span> &amp;&amp; !<span class="reserved">this</span>.exception)) {
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span> { 
+			<span class="reserved">return</span> false;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_unsupportsElems(exception)
+{	
+	try {
+		<span class="comment">//properties</span>
+		<span class="reserved">this</span>.browser = _setBrowserString();
+		<span class="reserved">this</span>.version = _setBrowserStringVersion();
+		<span class="reserved">this</span>.exception = exception;
+		
+		<span class="reserved">if</span> ((<span class="reserved">this</span>.browser == <span class="literal">"Internet Explorer"</span>) || (<span class="reserved">this</span>.browser == <span class="literal">"Safari"</span> &amp;&amp; !<span class="reserved">this</span>.exception)) {
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span> { 
+			<span class="reserved">return</span> false;
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _compare (string)
+{
+	try {
+		res = detect.indexOf(string) + 1;
+		thestring = string;
+		<span class="reserved">return</span> res;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> _setBrowserString ()
+{
+	try {			
+		detect = navigator.userAgent.toLowerCase();
+		var browser;
+
+		<span class="reserved">if</span> (_compare(<span class="literal">'safari'</span>)) {
+			browser = <span class="literal">'Safari'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'msie'</span>)) {
+			browser = <span class="literal">'Internet Explorer'</span>;
+		}
+		<span class="reserved">else</span> {
+			browser = <span class="literal">'Unknown Browser'</span>;
+		}
+		<span class="reserved">return</span> browser;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> _setBrowserStringVersion ()
+{
+	try {			
+		_setBrowserString();
+		var version;
+		
+		version = detect.charAt(res + thestring.length);
+
+		<span class="reserved">return</span> version;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Simply examine id IE is on air
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> _setBrowserStringOS ()
+{
+	try {			
+		detect = navigator.userAgent.toLowerCase();
+		var os;
+		
+		<span class="reserved">if</span> (_compare(<span class="literal">'linux'</span>)) {
+			os = <span class="literal">'Linux'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'x11'</span>)) {
+			os = <span class="literal">'Unix'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'win'</span>)) {
+			os = <span class="literal">'Windows'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'mac'</span>)) {
+			os = <span class="literal">'Mac'</span>;
+		}
+		<span class="reserved">else</span> {
+			os = <span class="literal">'Unknown operating system'</span>;
+		}
+		<span class="reserved">return</span> os;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Center the new window depending on giving Width (elemWith)
+ * <span class="attrib">@param</span> {var} elemWidth Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ * <span class="attrib">@return</span> number calculated width
+ */</span>
+<span class="reserved">function</span> Helper_defineWindowX (elemWidth)
+{
+	try {
+		<span class="comment">//properties</span>
+		<span class="reserved">this</span>.el = elemWidth;
+		var x;
+		
+		<span class="reserved">if</span> (self.innerHeight) {
+			<span class="comment">// all except Explorer {</span>
+			x = Math.round(self.innerWidth) - (Math.round(<span class="reserved">this</span>.el));
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.clientHeight) {
+			<span class="comment">// Explorer 6 Strict Mode</span>
+			x = Math.round(document.documentElement.clientWidth) - (Math.round(<span class="reserved">this</span>.el));
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.body) {
+			<span class="comment">// other Explorers</span>
+			x = Math.round(document.body.clientWidth) - (Math.round(<span class="reserved">this</span>.el));
+		}
+		x = Math.round(x/2);
+		<span class="reserved">return</span> x;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Center the new window depending on browser window Height
+ * <span class="attrib">@throws</span> applyError on exception
+ * <span class="attrib">@return</span> number calculated height
+ */</span>
+<span class="reserved">function</span> Helper_defineWindowY ()
+{
+	try {
+		<span class="comment">//properties</span>
+		var y;
+	
+		<span class="reserved">if</span> (self.innerHeight) { 
+		<span class="comment">// all except Explorer</span>
+			y = Math.round(self.innerHeight/6);
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.clientHeight) {
+			<span class="comment">// Explorer 6 Strict Mode</span>
+			y = Math.round(document.documentElement.clientHeight/6);
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.body) {
+			<span class="comment">// other Explorers</span>
+			y = Math.round(document.body.clientHeight/6);
+		}
+		<span class="reserved">return</span> y;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Display next url level
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_showNextNode(elem)
+{
+	try {
+		<span class="comment">// get source node id from element</span>
+		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
+		
+		<span class="comment">// get next possible node id</span>
+		<span class="reserved">if</span> (sourceNode.id != <span class="literal">'thirdNode'</span>) {
+			var nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 2);
+		}
+
+		var url = <span class="reserved">this</span>.parsePagesLinksUrl;
+		var pars = <span class="literal">'id='</span> + elem.id +<span class="literal">'&amp;nextNode='</span> + nextNode + <span class="literal">'&amp;control='</span> + control;
+		
+		<span class="reserved">if</span> (nextNode == <span class="literal">'secondNode'</span>) {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				parameters : pars,
+				onLoading : _loaderPagesLinks,
+				onComplete : _showResponsePagesSecondLinks
+			});
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (nextNode == <span class="literal">'thirdNode'</span>) {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				parameters : pars,
+				onLoading : _loaderPagesLinks,
+				onComplete : _showResponsePagesThirdLinks
+			});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} req JSON response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _showResponsePagesSecondLinks(req)
+{
+	try {
+		Effect.Fade(<span class="literal">'indicator_pagesLinks'</span>, {duration: 0.4});
+		Effect.Appear(<span class="literal">'secondNode'</span>,{duration: 0.6});
+		$(<span class="literal">'secondNode'</span>).innerHTML = req.responseText;		
+		Behaviour.reapply(<span class="literal">'.act_setInternalLink'</span>);
+		Behaviour.reapply(<span class="literal">'.act_setInternalLinkNoHref'</span>);
+		Behaviour.reapply(<span class="literal">'.showNextNode'</span>);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} req JSON response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _showResponsePagesThirdLinks(req)
+{
+	try {
+		Effect.Fade(<span class="literal">'indicator_pagesLinks'</span>, {duration: 0.4});
+		Effect.Appear(<span class="literal">'thirdNode'</span>,{duration: 0.6});	
+		$(<span class="literal">'thirdNode'</span>).innerHTML = req.responseText;		
+		Behaviour.reapply(<span class="literal">'.act_setInternalLink'</span>);
+		Behaviour.reapply(<span class="literal">'.act_setInternalLinkNoHref'</span>);
+		Behaviour.reapply(<span class="literal">'.showNextNode'</span>);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Mediamanager
+ * fires temporary actions while processing the ajax call
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} req JSON response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _loaderPagesLinks ()
+{
+	try {
+		Element.show(<span class="literal">'indicator_pagesLinks'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_insertInternalLink(elem)
+{
+	try {
+		var build;
+		build = <span class="literal">'&lt;a href="'</span>;
+		build += elem.id;
+		build += <span class="literal">'"&gt;'</span>;
+		
+		strStart = build;
+		strEnd = <span class="literal">'&lt;/a&gt;'</span>;
+		
+		Helper.insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
+	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_insertInternalLinkNoHref(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_insertInternalLinkGlobalTemplates(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);	
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_insertInternalLinkGlobalFiles(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_insertInternalLinkStructuralTemplates(elem)
+{
+	try {
+		
+		var url = <span class="reserved">this</span>.parseStructuralTemplatesLinksUrl;
+		var pars = <span class="literal">'id='</span> + elem.id;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				parameters : pars,
+				onComplete : _showResponseStructuralTemplates
+			});
+	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> _showResponseStructuralTemplates(req)
+{
+	try {
+		
+		<span class="comment">// filter responseText on html element</span>
+		var extract = req.responseText.match(/(&lt;!--\s+&lt;span id=<span class="literal">"template_content"</span>&gt;)((.|\t|\r|\n)*)(&lt;\/span&gt;\s+\/\/--&gt;)/gm);
+		
+		<span class="comment">// strip the html element, get raw content</span>
+		var raw_content = String(extract).replace(/(.*?)(&gt;)((.|\t|\r|\n)*)(&lt;\/span&gt;\s+\/\/--&gt;)/, <span class="literal">"$3"</span>);
+		
+		<span class="comment">// set hidden field value</span>
+		Helper.insertTagsFromPopup(formTarget, raw_content, <span class="literal">''</span>, <span class="literal">''</span>);	
+	
+		Helper.closeLinksPopup();					
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_getDelimiterValue()
+{
+	try {
+		<span class="comment">// make global for further use in func Helper.launchPopup()</span>
+		<span class="reserved">if</span> ($(<span class="literal">'global_template_change_delimiter'</span>)) {
+			val = $F(<span class="literal">'global_template_change_delimiter'</span>);
+		} <span class="reserved">else</span> {
+			val = <span class="literal">''</span>;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Insert internal link string
+ * <span class="attrib">@requires</span> Helper The Helper Class
+ */</span>
+<span class="reserved">function</span> Helper_getPagerPage()
+{
+	try {
+		<span class="reserved">if</span>($(<span class="literal">'pager_page_container'</span>)) {
+			pager_page = $(<span class="literal">'pager_page_container'</span>).firstChild.nodeValue;
+		} <span class="reserved">else</span> {
+			pager_page = <span class="literal">''</span>;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_confirmDelNavAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelNav);
+
+		<span class="reserved">if</span> (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_confirmDelTplTypeAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelTplType);
+
+		<span class="reserved">if</span> (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Confirm action
+ * If true, use the giving href to process
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_confirmDelTplSetsAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelTplSets);
+
+		<span class="reserved">if</span> (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+
+<span class="comment">/**
+* get select values onchange handler
+*
+* return string
+*/</span>
+<span class="reserved">function</span> Helper_changeBlogCommentStatus (elem)
+{	
+	try {
+		var statusId;
+		var commentId;
+		
+		<span class="comment">// get status value</span>
+		statusId = elem.options[elem.selectedIndex].value;
+	
+		<span class="comment">// find blog comment id</span>
+		commentId = elem.parentNode.parentNode.parentNode;
+		commentId = Helper.getNextSiblingFirstChild(commentId, 4);
+		commentId = String(commentId.href);
+		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, <span class="literal">"$3"</span>);		
+
+		<span class="comment">// properties</span>
+		var url = <span class="reserved">this</span>.parseBlogCommmentStatusChangeUrl;
+		var pars = <span class="literal">'status_id='</span> + statusId + <span class="literal">'&amp;comment_id='</span> + commentId;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				onLoading : _loaderChangeBlogCommentStatus,
+				parameters : pars,
+				onComplete : _showResponseChangeBlogCommentStatus
+			});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * Populate on JSON response
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} req JSON response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _showResponseChangeBlogCommentStatus(req)
+{
+	try {
+		setTimeout(<span class="literal">"Effect.Fade('statuschange', {duration: 0.6})"</span>, 2000);
+		setTimeout(<span class="literal">"$('lyLowerOpacity').style.display = 'none';"</span>, 2800);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Implements method of prototype class Helper
+ * fires temporary actions while processing the ajax call
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} req JSON response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> _loaderChangeBlogCommentStatus ()
+{
+	try {
+		Helper.lowerOpacity();
+		Effect.Appear(<span class="literal">'statuschange'</span>, {duration: 0.6, delay: 0.2});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_showFileUploadMessage()
+{
+	try {
+		Helper.lowerOpacityOnUpload();
+		Effect.Appear(<span class="literal">'uploadMessage'</span>, {duration: 0.4});
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="reserved">function</span> Helper_getAttrParentNode (attr, elem, level)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+
+	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
+		a = a.parentNode;
+	}
+		
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+		<span class="reserved">return</span> a.attributes[attr].value;
+	<span class="reserved">else</span>
+		<span class="reserved">return</span> a.getAttribute(attr);
+}
+
+<span class="reserved">function</span> Helper_getAttr (attr, elem)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+		
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+		<span class="reserved">return</span> elem.attributes[attr].value;
+	<span class="reserved">else</span>
+		<span class="reserved">return</span> elem.getAttribute(attr);
+}
+
+<span class="reserved">function</span> Helper_getAttrNextSibling (attr, elem, level)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+		level-- ;
+
+	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
+		a = a.nextSibling;
+	}
+		
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+		<span class="reserved">return</span> a.attributes[attr].value;
+	<span class="reserved">else</span>
+		<span class="reserved">return</span> a.getAttribute(attr);
+}
+
+<span class="reserved">function</span> Helper_getNextSiblingFirstChild (elem, level)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span> || <span class="reserved">this</span>.browser == <span class="literal">'Safari'</span>)
+		level-- ;
+
+	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
+		a = a.nextSibling;
+	}
+	<span class="reserved">return</span> a.firstChild;
+}
+
+<span class="reserved">function</span> Helper_getDataParentNode (elem, level)
+{
+	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
+		a = a.parentNode;
+	}
+	<span class="reserved">return</span> Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+<span class="reserved">function</span> Helper_applyBehaviour ()
+{
+		Behaviour.reapply(<span class="literal">'input'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_edit'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_upload'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_delete'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_cast'</span>);
+		Behaviour.reapply(<span class="literal">'a.pager'</span>);
+		Behaviour.reapply(<span class="literal">'a.pager_myFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertImageItem'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertImageItemFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertDocumentItem'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_myLocal'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_myFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_include_types_wrap'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_timeframe'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_user'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_photoset'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_flickrtags'</span>);
+		Behaviour.reapply(<span class="literal">'#submit55'</span>);
+		Behaviour.reapply(<span class="literal">'.showMediamanagerElementMyLocal'</span>);
+		Behaviour.reapply(<span class="literal">'.hideMediamanagerElementMyLocal'</span>);
+		Behaviour.reapply(<span class="literal">'.showMediamanagerElementMyFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'.hideMediamanagerElementMyFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'.iHelpMediamanager'</span>);
+		Behaviour.reapply(<span class="literal">'.iHelpRemoveMediamanager'</span>);	
+}
+
+
+<span class="reserved">function</span> Helper_validate(elem)
+{	
+	var url		= <span class="reserved">this</span>.validateUrl;
+	elemID		= $(elem).getAttribute(<span class="literal">'id'</span>);
+	var elemVal	= $F(elem);
+	var pars	= <span class="literal">'elemID='</span> + elemID + <span class="literal">'&amp;elemVal='</span> + elemVal;
+	var container = elemID + <span class="literal">'_container'</span>;
+	
+	var myAjax = new Ajax.Updater ( 
+		{
+			failure: container,
+			success: container
+		},
+		url,
+		{
+			method: <span class="literal">'post'</span>,
+			parameters: pars
+		});		
+}
+
+<span class="comment">/**
+ * Insert Content into Textareas from Popup
+ * taken from http://sourceforge.net/projects/wikipedia
+ *
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		<span class="comment">/*
+		We have to separate here, because the IE6 seems to be too dumb to differ between elements
+		which has the same value on different attributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/</span>
+	 	<span class="reserved">if</span> (Helper.unsupportsElems(<span class="literal">'safari_exception'</span>)) {
+			var _form_name = id.replace(/(.+)(_.+$)/, <span class="literal">'$1'</span>);
+			var txtarea = opener.document.forms[_form_name].elements[id];
+		} <span class="reserved">else</span> {
+			var txtarea = opener.$(id);
+		}
+		<span class="comment">// IE</span>
+		<span class="reserved">if</span>(opener.document.selection) {
+			var theSelection = opener.document.selection.createRange().text;
+			<span class="reserved">if</span>(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			<span class="reserved">if</span>(theSelection.charAt(theSelection.length - 1) == <span class="literal">" "</span>){<span class="comment">// exclude ending space char, if any</span>
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + <span class="literal">" "</span>;
+			} <span class="reserved">else</span> {
+				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		<span class="comment">// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable</span>
+		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			<span class="reserved">if</span>(!myText) { myText=sampleText;}
+			<span class="reserved">if</span>(myText.charAt(myText.length - 1) == <span class="literal">" "</span>){ <span class="comment">// exclude ending space char, if any</span>
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + <span class="literal">" "</span>; 
+			} <span class="reserved">else</span> {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		<span class="comment">// All others</span>
+		} <span class="reserved">else</span> {
+			<span class="comment">// Append at the end: Some people find that annoying</span>
+			<span class="comment">//txtarea.value += tagOpen + sampleText + tagClose;</span>
+			<span class="comment">//txtarea.focus();</span>
+			var re=new RegExp(<span class="literal">"\\n"</span>,<span class="literal">"g"</span>);
+			tagOpen=tagOpen.replace(re,<span class="literal">""</span>);
+			tagClose=tagClose.replace(re,<span class="literal">""</span>);
+			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		<span class="comment">// reposition cursor if possible</span>
+		<span class="reserved">if</span> (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Insert Content into Textareas
+ * taken from http://sourceforge.net/projects/wikipedia
+ *
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_insertTags(id, tagOpen, tagClose, sampleText)
+{
+	try {
+		<span class="comment">/*
+		We have to separate here, because the IE6 seems to be too dumb to differ between elements
+		which has the same value on different attributes (name, id)	
+		So we serve IE by object forms[elements], while Mozilla be able to use 
+		the standard (pointing the element by document.getElementById()
+		*/</span>
+	 	<span class="reserved">if</span> (Helper.unsupportsElems(<span class="literal">'safari_exception'</span>)) {
+			var _form_name = id.replace(/(.+)(_.+$)/, <span class="literal">'$1'</span>);
+			var txtarea = document.forms[_form_name].elements[id];
+		} <span class="reserved">else</span> {
+			var txtarea = $(id);
+		}
+		<span class="comment">// IE</span>
+		<span class="reserved">if</span>(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			<span class="reserved">if</span>(!theSelection) { theSelection=sampleText;}
+			txtarea.focus();
+			<span class="reserved">if</span>(theSelection.charAt(theSelection.length - 1) == <span class="literal">" "</span>){<span class="comment">// exclude ending space char, if any</span>
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				document.selection.createRange().text = tagOpen + theSelection + tagClose + <span class="literal">" "</span>;
+			} <span class="reserved">else</span> {
+				document.selection.createRange().text = tagOpen + theSelection + tagClose;
+			}
+		<span class="comment">// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable</span>
+		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			<span class="reserved">if</span>(!myText) { myText=sampleText;}
+			<span class="reserved">if</span>(myText.charAt(myText.length - 1) == <span class="literal">" "</span>){ <span class="comment">// exclude ending space char, if any</span>
+				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + <span class="literal">" "</span>; 
+			} <span class="reserved">else</span> {
+				subst = tagOpen + myText + tagClose; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			txtarea.focus();
+			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		<span class="comment">// All others</span>
+		} <span class="reserved">else</span> {
+			<span class="comment">// Append at the end: Some people find that annoying</span>
+			<span class="comment">//txtarea.value += tagOpen + sampleText + tagClose;</span>
+			<span class="comment">//txtarea.focus();</span>
+			var re=new RegExp(<span class="literal">"\\n"</span>,<span class="literal">"g"</span>);
+			tagOpen=tagOpen.replace(re,<span class="literal">""</span>);
+			tagClose=tagClose.replace(re,<span class="literal">""</span>);
+			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			txtarea.focus();
+		}
+		<span class="comment">// reposition cursor if possible</span>
+		<span class="reserved">if</span> (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Helper
+ */</span>
+Helper = new Helper();
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+</body>
+</html>

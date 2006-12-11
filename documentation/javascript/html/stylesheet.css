@@ -1,0 +1,115 @@
+/* JSDoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body {
+background-color: #fff;
+font: 95% Arial, Helvetica, sans-serif;
+border: 0 none;
+}
+
+pre {
+display: block;
+padding: 10px;
+background-color: #f9f9f9;
+border: 1px solid #666;
+font-family: Arial, Helvetica, sans-serif;
+}
+code {
+font-family: Arial, Helvetica, sans-serif;
+}
+pre code {
+font: 1.2em monospace;
+}
+
+table, frame {
+border: 0 none;
+
+}
+table td {
+padding: 4px;
+}
+
+a {
+text-decoration: none;
+cursor: pointer;
+}
+a:link, a:visited {
+color: #00AE2C;
+background: transparent;
+}
+a:hover {
+color: #00AE2C;
+background: transparent;
+text-decoration: underline;
+}
+a:active, a:focus {
+color: #fff;
+background: #0c3;
+}
+
+/* Table colors */
+.TableHeadingColor td {
+background: #0c3;
+color: #fff;
+border: 0 none;
+}
+.TableSubHeadingColor {
+background: #fff;
+border: 0 none;
+}
+.TableRowColor td {
+background: #fff;
+border: 0 none;
+}
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont,
+.FrameHeadingFont,
+.FrameItemFont {
+border: 0 none;
+font-size: 0.90em;
+}
+
+/* Example of smaller, sans-serif font in frames */
+/* .FrameItemFont  { font-size: 10pt; font-family: Helvetica, Arial, sans-serif } */
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    {
+background-color:#f9f9f9;
+font-size: 100%;
+}
+.NavBarCell1Rev {
+background-color:#0c3;
+font-size: 100%;
+color: #fff;
+}
+.NavBarFont1 {
+color:#000000;
+font-size: 100%;
+}
+.NavBarFont1Rev {
+color:#FFFFFF;
+font-size: 100%;
+}
+
+.NavBarCell2 {
+background-color:#FFFFFF;
+font-size: 0.6em;
+}
+.NavBarCell3 {
+background-color:#FFFFFF;
+font-size: 100%;
+}
+
+.jsdoc_ctime    { font-family: Arial, Helvetica, sans-serif; font-size: 9pt;
+                    text-align: right }
+
+/* Sourcecode view */
+.sourceview { background: #FFFFFF }
+.attrib { color: #DD7777 }
+.comment { color: #55AA55 }
+.reserved { color: #FF5555 }
+.literal { color: #5555FF }
+

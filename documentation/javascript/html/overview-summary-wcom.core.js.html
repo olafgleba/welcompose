@@ -1,0 +1,1614 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Welcompose Publishing System Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="wcom.core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>wcom.core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		The main Welcompose javascript enviroment. 
+ 
+ <BR/><BR/><B>Version: </B>$Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Base.html">Base</a></b></td>
+    <td>The base class is the most important class of the wcom
+ javascript enviroment, cause all other classes (exclude Errors) are inherited from that class.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Errors.html">Errors</a></b></td>
+    <td>The Errors class tracks all manually thrown
+ errors.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Forms.html">Forms</a></b></td>
+    <td>The Forms class handles all actions related to html form elements.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Help.html">Help</a></b></td>
+    <td>The Help class is the appropriate class for
+ the help enviroment.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Init.html">Init</a></b></td>
+    <td>The Init class is supposed to be used on load of page.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Navigation.html">Navigation</a></b></td>
+    <td>The Navigation class do all the navigation XMLHTTPRequest
+ processing stuff.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Status.html">Status</a></b></td>
+    <td>The Status class is supposed to handle
+ all change of status events within the html interface.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Tables.html">Tables</a></b></td>
+    <td>The Tables class faces all action that are related 
+ to html tables, because they mostly need extra treatment.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+	<a name="method_summary"><!-- --></a>
+	<table border="1" cellpadding="3" cellspacing="0" width="100%">
+		<tr bgcolor="#CCCCFF" class="TableHeadingColor">
+			<td colspan=2>
+				<font size="+2">
+					<b>Method Summary</b>
+				</font>
+			</td>
+		</tr>
+	
+		
+		   <tr bgcolor="white" class="TableRowColor">
+		      <td align="right" valign="top" width="1%">
+			 <font size="-1">
+			    <code>static&nbsp;Object</code>
+			 </font>
+		      </td>
+		      <td>
+			 <code>
+			    <b>
+			       <a href="Globals.html#!s!_applyError">_applyError</a></b>(&lt;object&gt; exception)
+			 </code>
+			 <br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 Display exception alert within the try/catch handling
+ relating to given debug variable value.
+		      </td>
+		   </tr>
+		
+		   <tr bgcolor="white" class="TableRowColor">
+		      <td align="right" valign="top" width="1%">
+			 <font size="-1">
+			    <code>static&nbsp;Object</code>
+			 </font>
+		      </td>
+		      <td>
+			 <code>
+			    <b>
+			       <a href="Globals.html#!s!_buildXMLHTTPRequest">_buildXMLHTTPRequest</a></b>()
+			 </code>
+			 <br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 Build new XMLHTTPRequest object instance.
+		      </td>
+		   </tr>
+		
+		   <tr bgcolor="white" class="TableRowColor">
+		      <td align="right" valign="top" width="1%">
+			 <font size="-1">
+			    <code>static&nbsp;Bool</code>
+			 </font>
+		      </td>
+		      <td>
+			 <code>
+			    <b>
+			       <a href="Globals.html#!s!_debug">_debug</a></b>()
+			 </code>
+			 <br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 Define debug output string.
+		      </td>
+		   </tr>
+		
+	
+	</table>
+    <p>
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * Project: Welcompose
+ * File: wcom.core.js
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $
+ *
+ * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@author</span> Olaf Gleba
+ * <span class="attrib">@package</span> Welcompose
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */</span>
+ 
+<span class="comment">/** 
+ * <span class="attrib">@fileoverview</span> The main Welcompose javascript enviroment. 
+ * 
+ * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
+ * <span class="attrib">@version</span> $Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $ 
+ */</span>
+
+
+<span class="comment">/**
+ * Define debug output string. 
+ *
+ * Switch differs how try/catch will handle exceptions.&lt;br /&gt;
+ * 0 = No debug output&lt;br /&gt;
+ * 1 = Development&lt;br /&gt;
+ * 2 = Production&lt;br /&gt;
+ * &lt;br /&gt;
+ * Scope is application wide.
+ *
+ * <span class="attrib">@type</span> Bool
+ */</span>
+<span class="reserved">function</span> _debug ()
+{
+	debug = 1;
+}
+
+<span class="comment">/**
+ * Build new XMLHTTPRequest object instance.
+ * Used in classes constructor wherever an XMLHTTPRequest is needed.
+ *
+ * &lt;br /&gt;&lt;br /&gt;Example:
+ * &lt;pre&gt;&lt;code&gt;
+// instance XMLHttpRequest object
+this.req = _buildXMLHTTPRequest();
+ * &lt;/code&gt;&lt;/pre&gt;
+ *
+ * <span class="attrib">@throws</span> applyError on exception
+ * <span class="attrib">@return</span> Object XMLHTTPRequest object instance
+ * <span class="attrib">@type</span> Object
+ */</span>
+<span class="reserved">function</span> _buildXMLHTTPRequest ()
+{
+	try {
+		<span class="reserved">if</span> (window.XMLHttpRequest) {
+			_req = new XMLHttpRequest();
+		} <span class="reserved">else</span> <span class="reserved">if</span> (window.ActiveXObject) {
+			_req = new ActiveXObject(<span class="literal">"Microsoft.XMLHTTP"</span>);
+		}
+		<span class="reserved">return</span> _req;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Display exception alert within the try/catch handling
+ * relating to given debug variable value.
+ * 
+ * &lt;br /&gt;&lt;br /&gt;Example:
+ * &lt;pre&gt;&lt;code&gt;
+try {
+	&lt;contents&gt;
+} catch (e) {
+	_applyError(e);
+}&lt;/code&gt;&lt;/pre&gt;
+ * 
+ * <span class="attrib">@param</span> {object} exception error obj presented by catch statement
+ */</span>
+<span class="reserved">function</span> _applyError (exception)
+{
+	var errStr;
+	
+	switch (debug) {
+		case 0 :
+			<span class="reserved">return</span> false;
+		break;
+		case 1 :
+			errStr = exception + <span class="literal">'\r\n'</span> 
+					+ exception.fileName + <span class="literal">'\r\n'</span> 
+					+ exception.lineNumber;
+		break;
+		case 2 :
+			errStr = e_msg_str_prefix + <span class="literal">'\r\n\r\n'</span> 
+					+ exception + <span class="literal">'\r\n'</span> 
+					+ exception.fileName + <span class="literal">'\r\n'</span> 
+					+ exception.lineNumber + <span class="literal">'\r\n\r\n'</span> 
+					+ e_msg_str_suffix;
+		break;
+		default :
+			errStr = exception;
+	}
+	alert (errStr);
+}
+
+
+
+
+<span class="comment">/**
+ * Constructs the Errors class
+ *
+ * <span class="attrib">@class</span> The Errors class tracks all manually thrown
+ * errors. It is inherited from the standard javascript error class prototype.
+ * Scope application wide. Mainly used in all
+ * process_xxx functions to track errors on xhr state, which
+ * are not traped by the try/catch structure.
+ *
+ * &lt;br /&gt;&lt;br /&gt;Example:
+ * &lt;pre&gt;&lt;code&gt;throw new Errors(object);&lt;/code&gt;&lt;/pre&gt;
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {string} msg Exception error message
+ */</span>
+<span class="reserved">function</span> Errors(msg) 
+{
+	<span class="reserved">this</span>.message = msg;
+}
+
+<span class="comment">/**
+ * Building new instance for <span class="attrib">@class</span> Errors
+ */</span>
+Errors.<span class="reserved">prototype</span> = new Error();
+
+
+
+<span class="comment">/**
+ * Constructs the Base class
+ * 
+ * <span class="attrib">@class</span> The base class is the most important class of the wcom
+ * javascript enviroment, cause all other classes (exclude Errors) are inherited from that class.
+ * It predefines properties and methods which are supposed to be used application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Base ()
+{
+	try {
+		<span class="comment">/**
+		 * Help class
+		 */</span>
+		<span class="reserved">this</span>.helpClass = <span class="literal">'iHelp'</span>;
+
+		<span class="comment">/**
+		 * Help class
+		 */</span>
+		<span class="reserved">this</span>.helpClassRemove = <span class="literal">'iHelpRemove'</span>;
+
+		<span class="comment">/**
+		 * Help class
+		 */</span>
+		<span class="reserved">this</span>.helpClassMediamanager = <span class="literal">'iHelpMediamanager'</span>;
+
+		<span class="comment">/**
+		 * Help class
+		 */</span>
+		<span class="reserved">this</span>.helpClassRemoveMediamanager = <span class="literal">'iHelpRemoveMediamanager'</span>;
+
+		<span class="comment">/**
+		 * Help div for mediamanager
+		 */</span>
+		<span class="reserved">this</span>.helpLyMediamanager = <span class="literal">'lyMediamanager'</span>;
+
+		<span class="comment">/**
+		 * MyLocal div (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.lyMediamanagerMyLocal = <span class="literal">'lyMediamanagerMyLocal'</span>;		
+
+		<span class="comment">/**
+		 * MyFlickr div (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.lyMediamanagerMyFlickr = <span class="literal">'lyMediamanagerMyFlickr'</span>;
+		
+		<span class="comment">/**
+		 * Element class for myLocal (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.mediamanagerClassShowMyLocal = <span class="literal">'showMediamanagerElementMyLocal'</span>;
+
+		<span class="comment">/**
+		 * Element class for myLocal (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.mediamanagerClassHideMyLocal = <span class="literal">'hideMediamanagerElementMyLocal'</span>;
+
+		<span class="comment">/**
+		 * Element class for myFlickr (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.mediamanagerClassShowMyFlickr = <span class="literal">'showMediamanagerElementMyFlickr'</span>;
+
+		<span class="comment">/**
+		 * Element class for myFlickr (mediamanager)
+		 */</span>
+		<span class="reserved">this</span>.mediamanagerClassHideMyFlickr = <span class="literal">'hideMediamanagerElementMyFlickr'</span>;
+		
+		<span class="comment">/**
+		 * First level div for dynamic xhr navigation
+		 */</span>
+		<span class="reserved">this</span>.navLyOne = <span class="literal">'ly1'</span>;
+
+		<span class="comment">/**
+		 * Second level div for dynamic xhr navigation
+		 */</span>
+		<span class="reserved">this</span>.navLyTwo = <span class="literal">'ly2'</span>;
+		
+		<span class="comment">/**
+		 * Element class for upload button used in tables
+		 */</span>
+		<span class="reserved">this</span>.uploadClassShow = <span class="literal">'upload showTableRow'</span>;
+
+		<span class="comment">/**
+		 * Element class for upload button used in tables
+		 */</span>
+		<span class="reserved">this</span>.uploadClassHide = <span class="literal">'uploadhide hideTableRow'</span>;
+
+		<span class="comment">/**
+		 * Comprehensive color application wide
+		 */</span>
+		<span class="reserved">this</span>.applicationTextColor = <span class="literal">'#009a26'</span>;
+		
+		<span class="comment">/**
+		 * Help string supposed to delivered within the DOM.
+		 */</span>
+		<span class="reserved">this</span>.helpHtmlShow = <span class="literal">'&lt;a href="#" title="'</span> + showHelp + <span class="literal">'"&gt;&lt;img src="../static/img/icons/help.gif" alt="" /&gt;&lt;/a&gt;'</span>;
+
+		<span class="comment">/**
+		 * Help string supposed to delivered within the DOM.
+		 */</span>
+		<span class="reserved">this</span>.helpHtmlHide = <span class="literal">'&lt;a href="#" title="'</span> + hideHelp + <span class="literal">'"&gt;&lt;img src="../static/img/icons/help_off.gif" alt="" /&gt;&lt;/a&gt;'</span>;
+
+		<span class="comment">/**
+		 * Element string supposed to delivered within the DOM (mediamanager).
+		 */</span>
+		<span class="reserved">this</span>.elementHtmlShow = <span class="literal">'&lt;a href="#" title="'</span> + showElement + <span class="literal">'"&gt;&lt;img src="../static/img/icons/open.gif" alt="" /&gt;&lt;/a&gt;'</span>;
+
+		<span class="comment">/**
+		 * Element string supposed to delivered within the DOM (mediamanager).
+		 */</span>
+		<span class="reserved">this</span>.elementHtmlHide = <span class="literal">'&lt;a href="#" title="'</span> + hideElement + <span class="literal">'"&gt;&lt;img src="../static/img/icons/close.gif" alt="" /&gt;&lt;/a&gt;'</span>;
+
+		<span class="comment">/**
+		 * Reset formerly value
+		 * Used in {<span class="attrib">@link</span> Mediamanager#initializeTagSearch}
+		 */</span>
+		<span class="reserved">this</span>.keyPressDelay = null;
+		
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseHelpUrl = <span class="literal">'../parse/parse.help.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseNavUrl = <span class="literal">'../parse/parse.navigation.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedLocalUrl = <span class="literal">'../mediamanager/mediamanager_local.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedFlickrUrl = <span class="literal">'../mediamanager/mediamanager_flickr.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedUploadUrl = <span class="literal">'../mediamanager/mediamanager_upload.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedEditUrl = <span class="literal">'../mediamanager/mediamanager_edit.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedDeleteUrl = <span class="literal">'../mediamanager/mediamanager_delete.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedCastsUrl = <span class="literal">'../mediamanager/mediamanager_media_to_podcast.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseMedDiscCastsUrl = <span class="literal">'../mediamanager/mediamanager_discard_podcast.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parsePagesLinksUrl = <span class="literal">'../content/pages_links_select.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseGlobalTemplatesLinksUrl = <span class="literal">'../templating/globaltemplates_links_select.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseGlobalFilesLinksUrl = <span class="literal">'../templating/globalfiles_links_select.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseBlogCommmentStatusChangeUrl = <span class="literal">'../community/blogcomments_statuschange.php'</span>;
+		
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.parseStructuralTemplatesLinksUrl = <span class="literal">'../content/structuraltemplates_links_select.php'</span>;
+
+		<span class="comment">/**
+		 * Path for dynamically imported file
+		 */</span>
+		<span class="reserved">this</span>.validateUrl = <span class="literal">'../validate.js.php'</span>;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Methods of prototype <span class="attrib">@class</span> Base */</span>
+Base.<span class="reserved">prototype</span>.isArray = Base_isArray;
+Base.<span class="reserved">prototype</span>.isBoolean = Base_isBoolean;
+Base.<span class="reserved">prototype</span>.isString = Base_isString;
+Base.<span class="reserved">prototype</span>.isObject = Base_isObject;
+Base.<span class="reserved">prototype</span>.isFunction = Base_isFunction;
+Base.<span class="reserved">prototype</span>.isUndefined = Base_isUndefined;
+Base.<span class="reserved">prototype</span>.isNumber = Base_isNumber;
+Base.<span class="reserved">prototype</span>.isEmpty = Base_isEmpty;
+Base.<span class="reserved">prototype</span>.isNull = Base_isNull;
+Base.<span class="reserved">prototype</span>.trim = Base_trim;
+
+<span class="comment">/**
+ * Examine the giving var is of type Array
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isArray(elem) {
+    <span class="reserved">return</span> Base.<span class="reserved">prototype</span>.isObject(elem) &amp;&amp; elem.constructor == Array;
+}
+<span class="comment">/**
+ * Examine the giving var is of type Bool
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isBoolean(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'boolean'</span>;
+}
+<span class="comment">/**
+ * Examine the giving var is of type String
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+ <span class="reserved">function</span> Base_isString(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'string'</span>;
+}
+<span class="comment">/**
+ * Examine the giving var is of type Object
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isObject(elem) {
+    <span class="reserved">return</span> (elem &amp;&amp; typeof elem == <span class="literal">'object'</span>) || Base.<span class="reserved">prototype</span>.isFunction(elem);
+}
+<span class="comment">/**
+ * Examine the giving var is a function
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isFunction(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'function'</span>;
+}
+<span class="comment">/**
+ * Examine the giving var is undefined
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isUndefined(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'undefined'</span>;
+}
+<span class="comment">/**
+ * Examine the giving var has no values
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isNumber(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'number'</span> &amp;&amp; isFinite(elem);
+}
+<span class="comment">/**
+ * Examine the giving var is empty
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isEmpty(elem) {
+    var i, v;
+    <span class="reserved">if</span> (Base.<span class="reserved">prototype</span>.isObject(o)) {
+        <span class="reserved">for</span> (i in elem) {
+            v = elem[i];
+            <span class="reserved">if</span> (Base.<span class="reserved">prototype</span>.isUndefined(v) &amp;&amp; Base.<span class="reserved">prototype</span>.isFunction(v)) {
+                <span class="reserved">return</span> false;
+            }
+        }
+    }
+    <span class="reserved">return</span> true;
+}
+<span class="comment">/**
+ * Examine the giving var is Null
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> Boolean true or false
+ */</span>
+<span class="reserved">function</span> Base_isNull(elem) {
+    <span class="reserved">return</span> typeof elem == <span class="literal">'object'</span> &amp;&amp; !elem;
+}
+<span class="comment">/**
+ * Delete whitspaces at begin and end of the delivered string
+ *
+ * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@return</span> elem
+ * <span class="attrib">@type</span> String
+ */</span>
+<span class="reserved">function</span> Base_trim(elem) {
+  <span class="reserved">return</span> elem.replace(/^\s*|\s*$/g, <span class="literal">""</span>);
+}
+
+
+
+<span class="comment">/**
+ * Constructs the Init class
+ * 
+ * <span class="attrib">@class</span> The Init class is supposed to be used on load of page.
+ * &lt;br /&gt;
+ * Right now the function {<span class="attrib">@link</span> #load} is used as an argument for the thirdparty lib method
+ * &lt;em&gt;Behaviour.addLoadEvent(Init.load);&lt;/em&gt; and is not supposed to called manually. If you
+ * you want something to happen on load of page, add another prototype function (e.g. {<span class="attrib">@link</span> #getVars}) to class Init
+ * and call it within the {<span class="attrib">@link</span> #load} function instead.
+ *
+ * &lt;br /&gt;&lt;br /&gt;Example (Schema):
+ * &lt;pre&gt;&lt;code&gt;
+function Init_load ()
+{	
+	try {
+		// Do something while page load
+		Init.getVars();
+		...
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+ * &lt;/code&gt;&lt;/pre&gt;
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init ()
+{
+	try {
+		<span class="comment">// instance XMLHttpRequest object</span>
+		<span class="reserved">this</span>.req = _buildXMLHTTPRequest();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base class */</span>
+Init.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/* Methods of prototype <span class="attrib">@class</span> Init */</span>
+Init.<span class="reserved">prototype</span>.load = Init_load;
+Init.<span class="reserved">prototype</span>.getVars = Init_getVars;
+Init.<span class="reserved">prototype</span>.getCbxStatus = Init_getCbxStatus;
+Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
+
+<span class="comment">/**
+ * All functions supposed to be called on load must take place within this function.
+ * 
+ * 
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_load ()
+{	
+	try {
+		<span class="comment">// DONT EVER CHANGE THIS FUNCTION CALL</span>
+		<span class="comment">// set global debug var first</span>
+		_debug();
+		
+		Init.getVars();
+		
+		<span class="reserved">if</span> (typeof checkbox_status != <span class="literal">'undefined'</span> &amp;&amp; Init.isArray(checkbox_status)) {
+			Init.getCbxStatus(checkbox_status);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Getter function for several actions to be executed on load of page.
+ * Depends on delivered variables in the html markup.
+ * &lt;br /&gt;&lt;br /&gt;
+ * Current conditions in order first to last:&lt;br /&gt;
+ * &lt;em&gt;var response&lt;/em&gt;  Show response layer after save succeeded.&lt;br /&gt;
+ * &lt;em&gt;var podcast&lt;/em&gt;  Triggers {<span class="attrib">@link</span> Mediamanager#mediaToPodcastOnLoad}.&lt;br /&gt;
+ * &lt;em&gt;object podcast_media_object&lt;/em&gt;  Triggers {<span class="attrib">@link</span> Mediamanager#mediaToPodcastOnLoad}.&lt;br /&gt;
+ * &lt;em&gt;var mediamanager&lt;/em&gt;  Triggers XMLHttpRequest for Media Manager Layer integration.
+ * 
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_getVars ()
+{
+	try {
+		<span class="reserved">if</span> (typeof response != <span class="literal">'undefined'</span>) {
+			<span class="reserved">if</span> (response == 1) {
+				Effect.Fade(<span class="literal">'rp'</span>, {duration: 0.6, delay: 1.2});
+			}
+		}
+		<span class="reserved">if</span> (typeof podcast != <span class="literal">'undefined'</span> &amp;&amp; Init.isNumber(podcast)) {
+			<span class="reserved">if</span> (podcast == 1) {
+				Mediamanager.mediaToPodcastOnLoad();
+			}
+		}
+		<span class="reserved">if</span> ($(<span class="literal">'podcast_media_object'</span>)) {
+			<span class="reserved">if</span> ($(<span class="literal">'podcast_media_object'</span>).value != <span class="literal">''</span>) {
+				Mediamanager.mediaToPodcastOnLoad();
+			}
+		}
+		<span class="reserved">if</span> (typeof mediamanager != <span class="literal">'undefined'</span> &amp;&amp; Init.isNumber(mediamanager)) {
+			<span class="reserved">if</span> (mediamanager == 1) {
+						
+				<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedLocalUrl + <span class="literal">'?page=mediamanager'</span> + <span class="literal">'&amp;mm_pagetype='</span> + pagetype;
+				<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
+		
+					var _url		= <span class="reserved">this</span>.url;
+					var _ttarget	= <span class="literal">'column'</span>;
+		
+					_req.open(<span class="literal">'GET'</span>, _url, true);
+					_req.onreadystatechange = <span class="reserved">function</span> () { Init.processInit(_ttarget);};
+					_req.send(<span class="literal">''</span>);
+				}
+			}	
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Show/hide a group of form elements and color their labels on load of page.
+ * Depends on delivered variables in the html markup.
+ * &lt;br /&gt;
+ * For properly use or/and enhancement of this feature, please have a look on
+ * the online project support area.
+ *
+ * <span class="attrib">@param</span> {array} elems Array of element(s)
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_getCbxStatus (elems)
+{
+	try {
+		<span class="reserved">for</span> (var e = 0; e &lt; elems.length; e++) {
+
+			var range = String(elems[e])  + <span class="literal">'_container'</span>;
+			
+			<span class="reserved">if</span> ($(range)) {
+				<span class="reserved">if</span> ($(elems[e]).checked === true) {
+	
+					allNodes = document.getElementsByClassName(<span class="literal">"bez"</span>);
+				
+					<span class="reserved">for</span> (var i = 0; i &lt; allNodes.length; i++) {
+						var _process = allNodes[i].parentNode.parentNode.getAttribute(<span class="literal">'id'</span>);		
+						<span class="reserved">if</span> (_process == range) {
+							allNodes[i].style.color = <span class="reserved">this</span>.applicationTextColor;
+						}
+					}
+					Element.show(range);
+				} <span class="reserved">else</span> {
+					Element.hide(range);
+				}
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Update content with XMLHttpRequest response.
+ * &lt;br /&gt;
+ * Beside of that the Media Manager Tag Search Events are initialized.
+ *
+ * <span class="attrib">@param</span> {string} ttarget Layer to process
+ * <span class="attrib">@throws</span> Errors on req object status code other than 200
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_processInit (ttarget)
+{  
+	try {
+		<span class="reserved">if</span> (_req.readyState == 4) {
+			<span class="reserved">if</span> (_req.status == 200) {
+				Element.update(ttarget, _req.responseText);
+		
+				Helper.applyBehaviour();
+			
+				<span class="comment">// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791</span>
+				$(<span class="literal">'mm_tags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+				$(<span class="literal">'mm_flickrtags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
+			
+				Event.observe($(<span class="literal">'mm_tags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearch);	
+				Event.observe($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">'keyup'</span>, Mediamanager.initializeTagSearchMyFlickr);	
+			} <span class="reserved">else</span> {
+	  			throw new Errors(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Init
+ */</span>
+Init = new Init();
+
+
+
+<span class="comment">/**
+ * Constructs the Help class
+ * 
+ * <span class="attrib">@class</span> The Help class is the appropriate class for
+ * the help enviroment. The scope is application wide.
+ * For consistent reason, it comprises the help handling of the Mediamanger too.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help ()
+{
+	try {
+		<span class="comment">// instance XMLHttpRequest object</span>
+		<span class="reserved">this</span>.req = _buildXMLHTTPRequest();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Help.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Help
+ */</span>
+Help.<span class="reserved">prototype</span>.show = Help_show;
+Help.<span class="reserved">prototype</span>.hide = Help_hide;
+Help.<span class="reserved">prototype</span>.processHelp = Help_processHelp;
+Help.<span class="reserved">prototype</span>.showMediamanager = Help_showMediamanager;
+Help.<span class="reserved">prototype</span>.hideMediamanager = Help_hideMediamanager;
+Help.<span class="reserved">prototype</span>.processMediamanager = Help_processMediamanager;
+Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCorrespondingFocus;
+
+<span class="comment">/**
+ * Show help html element.
+ * Import related help file depending on actual element pointer.
+ *
+ * <span class="attrib">@see</span> #processHelp
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help_show (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClassRemove;
+		<span class="reserved">this</span>.attr = <span class="literal">'for'</span>;
+		<span class="reserved">this</span>.processId = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2);
+		<span class="reserved">this</span>.ttarget = <span class="reserved">this</span>.processId;
+				
+		var i = <span class="reserved">this</span>.processId.match(/_\d+/);
+		
+		<span class="reserved">if</span> (document.getElementsByClassName(<span class="literal">'botbg'</span>)[0] &amp;&amp; !i) {
+			<span class="reserved">this</span>.formId = Helper.getAttr(<span class="literal">'id'</span>, document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]);
+		} 
+		
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.getElementsByClassName(<span class="literal">'botbg'</span>)[0] &amp;&amp; i) {
+			<span class="reserved">this</span>.processId = <span class="reserved">this</span>.processId.replace(/_\d+/, <span class="literal">''</span>);
+			<span class="reserved">this</span>.formId = Helper.getAttr(<span class="literal">'id'</span>, document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]);
+		
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.processId = <span class="reserved">this</span>.processId.replace(/_\d+/, <span class="literal">''</span>);
+			<span class="reserved">this</span>.formId = Helper.getDataParentNode(<span class="reserved">this</span>.elem, 1);
+		}	
+			
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
+			
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
+		
+			var _url		= <span class="reserved">this</span>.url;
+			var _ttarget	= <span class="reserved">this</span>.ttarget;
+		
+			_req.open(<span class="literal">'GET'</span>, _url, true);
+			_req.onreadystatechange = <span class="reserved">function</span> () { Help.processHelp(_ttarget);};
+			_req.send(<span class="literal">''</span>);
+		}
+		
+		Help.setCorrespondingFocus(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.attr);
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlHide);
+
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Hide help html element.
+ *
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help_hide (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.attr = <span class="literal">'for'</span>;
+		<span class="reserved">this</span>.processId = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2);
+		<span class="reserved">this</span>.processIdAfter = $(<span class="reserved">this</span>.processId).parentNode.nextSibling;
+		
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClass;
+		
+		Effect.Fade(<span class="reserved">this</span>.processIdAfter,{delay: 0, duration: 0.4});
+
+		Help.setCorrespondingFocus(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.attr);
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlShow);
+	
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Update content with XMLHttpRequest response.
+ *
+ * <span class="attrib">@see</span> #show
+ * <span class="attrib">@param</span> {string} ttarget Layer to process
+ * <span class="attrib">@throws</span> Errors on req object status code other than 200
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help_processHelp (ttarget)
+{  
+	try {
+		<span class="reserved">if</span> (_req.readyState == 4) {
+			<span class="reserved">if</span> (_req.status == 200) {
+				new Insertion.After($(ttarget).parentNode, _req.responseText);				
+				var ttarget_after = $(ttarget).parentNode.nextSibling;
+				Element.hide(ttarget_after);
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
+			} <span class="reserved">else</span> {
+	  			throw new Errors(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Show Mediamanager help html element.
+ * Import related help file depending on actual element pointer.
+ * We have to return the hide state as a global var to provide
+ * which layer we must show on method {<span class="attrib">@link</span> #hideMediamanger} 
+ *
+ * <span class="attrib">@see</span> #processMediamanager
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ * <span class="attrib">@returns</span> {global} gMediamanagerLayer
+ */</span>
+<span class="reserved">function</span> Help_showMediamanager (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClassRemoveMediamanager;
+		<span class="reserved">this</span>.attr = <span class="literal">'id'</span>;
+		<span class="reserved">this</span>.formId = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 3);
+		<span class="reserved">this</span>.processId = <span class="reserved">this</span>.formId;
+		<span class="reserved">this</span>.ttarget = <span class="reserved">this</span>.helpLyMediamanager;
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
+				
+		<span class="comment">// which layer to process</span>
+		var catchMyLocal = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyLocal, <span class="literal">'display'</span>);		
+		<span class="reserved">if</span>( catchMyLocal == <span class="literal">'block'</span>) {
+			<span class="reserved">this</span>.toHide = <span class="reserved">this</span>.lyMediamanagerMyLocal;
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.toHide = <span class="reserved">this</span>.lyMediamanagerMyFlickr;
+		}
+			
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
+		
+			var _url		= <span class="reserved">this</span>.url;
+			var _ttarget	= <span class="reserved">this</span>.ttarget;
+		
+			_req.open(<span class="literal">'GET'</span>, _url, true);
+			_req.onreadystatechange = <span class="reserved">function</span> () { Help.processMediamanager(_ttarget);};
+			_req.send(<span class="literal">''</span>);
+		}
+	
+		Element.hide(<span class="reserved">this</span>.toHide);
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlHide);
+
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+		<span class="comment">// global var as pointer for method hideMediamanager</span>
+		gMediamanagerLayer = <span class="reserved">this</span>.toHide;
+		<span class="reserved">return</span> gMediamanagerLayer;
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Hide Mediamanager help html element.
+ *
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help_hideMediamanager (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.toHide = <span class="reserved">this</span>.helpLyMediamanager;
+		<span class="reserved">this</span>.toShow = gMediamanagerLayer;
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClassMediamanager;
+	
+		<span class="reserved">if</span> (Helper.unsupportsEffects()) {
+			Element.hide(<span class="reserved">this</span>.toHide);
+			Element.show(<span class="reserved">this</span>.toShow);
+		} <span class="reserved">else</span> {
+			Element.hide(<span class="reserved">this</span>.toHide);
+			Element.hide(<span class="reserved">this</span>.toShow);
+			Effect.Appear(<span class="reserved">this</span>.toShow,{duration: 0.7});
+		}
+		
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlShow);
+
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Update content with XMLHttpRequest response.
+ *
+ * <span class="attrib">@see</span> #showMediamanager
+ * <span class="attrib">@param</span> {string} ttarget Layer to process
+ * <span class="attrib">@throws</span> Errors on req object status code other than 200
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Help_processMediamanager (ttarget)
+{  
+	try {
+		<span class="reserved">if</span> (_req.readyState == 4) {
+			<span class="reserved">if</span> (_req.status == 200) {				
+				Element.update (ttarget, _req.responseText);
+				<span class="reserved">if</span> (Helper.unsupportsEffects()) {
+					Element.show(ttarget);
+				} <span class="reserved">else</span> {
+					Element.hide(<span class="reserved">this</span>.ttarget);
+					Effect.Appear(<span class="reserved">this</span>.ttarget,{duration: 0.7});
+				}
+			} <span class="reserved">else</span> {
+	  			throw new Errors(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Set Focus related to pointed element.
+ *
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} attr Node Attribute
+ */</span>
+<span class="reserved">function</span> Help_setCorrespondingFocus (elem, attr)
+{
+	<span class="reserved">this</span>.inst = Helper.getAttrParentNode(attr, elem, 2);
+	$(<span class="reserved">this</span>.inst).focus();
+}
+
+<span class="comment">/**
+ * Building new object instance of class Help
+ */</span>
+Help = new Help();
+
+
+
+<span class="comment">/**
+ * Constructs the Navigation class
+ * 
+ * <span class="attrib">@class</span> The Navigation class do all the navigation XMLHTTPRequest
+ * processing stuff. The scope is application wide.
+ * 
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Navigation ()
+{
+	try {
+		<span class="comment">// instance XMLHttpRequest object</span>
+		<span class="reserved">this</span>.req = _buildXMLHTTPRequest();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Navigation.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Navigation
+ */</span>
+Navigation.<span class="reserved">prototype</span>.show = Navigation_show;
+Navigation.<span class="reserved">prototype</span>.processNavigation = Navigation_processNavigation;
+
+<span class="comment">/**
+ * Import related navigation file depending on actual element pointer.
+ * Here var &lt;em&gt;level&lt;/em&gt; distinguish which markup layer to use.
+ * 
+ * <span class="attrib">@see</span> #processNavigation
+ * <span class="attrib">@param</span> {string} name The name of page
+ * <span class="attrib">@param</span> {string} level Layer to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Navigation_show (name, level)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.name = name;
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseNavUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.name;
+		
+		switch (<span class="reserved">this</span>.level) {
+			case <span class="literal">'2'</span> :
+					<span class="reserved">this</span>.ttarget = <span class="reserved">this</span>.navLyTwo;
+				break;
+			default :
+					<span class="reserved">this</span>.ttarget = <span class="reserved">this</span>.navLyOne;
+		}
+		
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
+		
+			var _url		= <span class="reserved">this</span>.url;
+			var _ttarget	= <span class="reserved">this</span>.ttarget;
+		
+			_req.open(<span class="literal">'GET'</span>, _url, true);
+			_req.onreadystatechange = <span class="reserved">function</span> () { Navigation.processNavigation(_ttarget);};
+			_req.send(<span class="literal">''</span>);
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Update content with XMLHttpRequest response.
+ *
+ * <span class="attrib">@see</span> #show
+ * <span class="attrib">@param</span> {string} ttarget Layer to process
+ * <span class="attrib">@throws</span> Errors on req object status code other than 200
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+ <span class="reserved">function</span> Navigation_processNavigation (ttarget)
+{  
+	try {
+		<span class="reserved">if</span> (_req.readyState == 4) {
+			<span class="reserved">if</span> (_req.status == 200) {
+				Element.hide($(<span class="literal">'topsubnavconstatic'</span>));
+				Element.update(ttarget, _req.responseText);
+	
+				new Effect.Highlight(document.getElementsByClassName(<span class="literal">'highlight'</span>)[0], 
+					{duration: 1.5, startcolor:<span class="literal">'#ff0000'</span>, endcolor:<span class="literal">'#f9f9f9'</span>, restorecolor: <span class="literal">'#f9f9f9'</span>});
+
+			} <span class="reserved">else</span> {
+	  			throw new Errors(_req.statusText);
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Navigation
+ */</span>
+Navigation = new Navigation();
+
+
+
+<span class="comment">/**
+ * Constructs the Forms class.
+ * 
+ * <span class="attrib">@class</span> The Forms class handles all actions related to html form elements.
+ * The scope is application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Forms ()
+{
+	try {		
+		<span class="comment">// no properties</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Forms.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Forms
+ */</span>
+Forms.<span class="reserved">prototype</span>.setOnEvent = Forms_setOnEvent;
+Forms.<span class="reserved">prototype</span>.storeFocus = Forms_storeFocus;
+
+<span class="comment">/**
+ * Style elements depending on given params
+ *
+ * &lt;br /&gt;&lt;br /&gt;Example:
+ * &lt;pre&gt;&lt;code&gt;
+Forms.setOnEvent(this, '','#0c3','dotted');
+ * &lt;/code&gt;&lt;/pre&gt;
+ * 
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} bgcolor Define background color
+ * <span class="attrib">@param</span> {string} bcolor Define border color
+ * <span class="attrib">@param</span> {string} bstyle Define border style attribute
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
+{
+	try {
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.bgcolor = bgcolor;
+		<span class="reserved">this</span>.bcolor = bcolor;
+		<span class="reserved">this</span>.bstyle = bstyle;
+		
+		<span class="reserved">this</span>.elem.style.backgroundColor = <span class="reserved">this</span>.bgcolor;
+		<span class="reserved">this</span>.elem.style.borderColor = <span class="reserved">this</span>.bcolor;
+		<span class="reserved">this</span>.elem.style.borderStyle = <span class="reserved">this</span>.bstyle;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Track the current content form field focus and makes it available application wide.
+ * This is used to fire alerts within several Media Manager &lt;em&gt;_insertXXX&lt;/em&gt; functions.
+ *
+ * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Forms_storeFocus (elem)
+{
+	try {
+		storedFocus = elem.id;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Forms
+ */</span>
+Forms = new Forms();
+
+
+
+<span class="comment">/**
+ * Constructs the Status class
+ * 
+ * <span class="attrib">@class</span> The Status class is supposed to handle
+ * all change of status events within the html interface.
+ * The scope is application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Status ()
+{
+	try {
+		<span class="comment">// no properties		</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Status.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Status
+ */</span>
+Status.<span class="reserved">prototype</span>.getCbx = Status_getCbx;
+
+<span class="comment">/**
+ * Show/hide a group of form elements and color their labels.
+ * Depends on delivered variable in the html markup.
+ * &lt;br /&gt;
+ * For properly use or/and enhancement of this feature, please have a look on
+ * the online project support area.
+ *
+ * <span class="attrib">@param</span> {array} elems Array of element(s)
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Status_getCbx (elems)
+{
+	try {
+		<span class="comment">// properties		</span>
+		<span class="reserved">this</span>.elems = elems;
+		
+		<span class="reserved">if</span> (Status.isArray(<span class="reserved">this</span>.elems)) {
+			<span class="reserved">for</span> (var e = 0; e &lt; <span class="reserved">this</span>.elems.length; e++) {
+				
+				<span class="comment">// build new div</span>
+				var range = String(<span class="reserved">this</span>.elems[e])  + <span class="literal">'_container'</span>;
+				
+				<span class="reserved">if</span> ($(range)) {
+					<span class="reserved">if</span> ($(<span class="reserved">this</span>.elems[e]).checked === true) {
+		
+						allNodes = document.getElementsByClassName(<span class="literal">"bez"</span>);
+					
+						<span class="reserved">for</span> (var i = 0; i &lt; allNodes.length; i++) {
+							var _process = allNodes[i].parentNode.parentNode.getAttribute(<span class="literal">'id'</span>);		
+							<span class="reserved">if</span> (_process == range) {
+								allNodes[i].style.color = <span class="reserved">this</span>.applicationTextColor;
+							}
+						}
+						Element.hide($(range));
+						Effect.Appear($(range),{duration: 0.6});
+					} <span class="reserved">else</span> {
+						Effect.Fade($(range),{duration: 0.6});
+					}
+				}
+			}
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Status
+ */</span>
+Status = new Status();
+
+
+
+<span class="comment">/**
+ * Constructs the Tables class
+ * 
+ * <span class="attrib">@class</span> The Tables class faces all action that are related 
+ * to html tables, because they mostly need extra treatment.
+ * The scope is application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Tables ()
+{
+	try {
+		<span class="comment">// no properties		</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Tables.<span class="reserved">prototype</span> = new Base();
+
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Tables
+ */</span>
+Tables.<span class="reserved">prototype</span>.showTableRow = Tables_showTableRow;
+Tables.<span class="reserved">prototype</span>.hideTableRow = Tables_hideTableRow;
+Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collapseTableRow;
+
+<span class="comment">/**
+ * Show formely hidden table row depending on actual element pointer.
+ * &lt;br /&gt;
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
+ * 
+ * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Tables_showTableRow (elem)
+{	
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.id = <span class="reserved">this</span>.elem.getAttribute(<span class="literal">'id'</span>);
+		<span class="reserved">this</span>.bid = <span class="reserved">this</span>.id.split(<span class="literal">'e_'</span>);
+		<span class="reserved">this</span>.obid = String(<span class="literal">'o_'</span> + <span class="reserved">this</span>.bid[1]);
+		<span class="reserved">this</span>.ibid = String(<span class="literal">'i_'</span> + <span class="reserved">this</span>.bid[1]);
+		
+		<span class="comment">// process outer table tr</span>
+		$(<span class="reserved">this</span>.obid).style.visibility = <span class="literal">'visible'</span>;
+		
+		<span class="comment">// process inner div</span>
+		Element.hide(<span class="reserved">this</span>.ibid);
+		Effect.Appear(<span class="reserved">this</span>.ibid,{duration: 0.7});
+
+		<span class="comment">// coloring top row</span>
+		<span class="reserved">this</span>.elem.parentNode.parentNode.style.color = <span class="reserved">this</span>.applicationTextColor;
+				
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.uploadClassHide;
+
+		Behaviour.reapply(<span class="literal">'.hideTableRow'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Hide visible table row depending on actual element pointer.
+ * &lt;br /&gt;
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
+ * 
+ * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Tables_hideTableRow (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.id = <span class="reserved">this</span>.elem.getAttribute(<span class="literal">'id'</span>);
+		<span class="reserved">this</span>.bid = <span class="reserved">this</span>.id.split(<span class="literal">'e_'</span>);
+		<span class="reserved">this</span>.obid = String(<span class="literal">'o_'</span> + <span class="reserved">this</span>.bid[1]);
+		<span class="reserved">this</span>.ibid = String(<span class="literal">'i_'</span> + <span class="reserved">this</span>.bid[1]);
+		
+		<span class="comment">// process inner div</span>
+		Effect.Fade(<span class="reserved">this</span>.ibid,{duration: 0.8});
+			
+		<span class="comment">// process outer table tr</span>
+		setTimeout(<span class="literal">"Tables.collapseTableRow('"</span>+ <span class="reserved">this</span>.obid +<span class="literal">"')"</span>, 800);
+		
+		<span class="comment">// coloring top row</span>
+		<span class="reserved">this</span>.elem.parentNode.parentNode.style.color = <span class="literal">''</span>;
+
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.uploadClassShow;
+
+		Behaviour.reapply(<span class="literal">'.showTableRow'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Gives some browsers some extra treatment.
+ * &lt;br /&gt;
+ * For properly use or/and enhancement, please have a look on
+ * the online project support area.
+ *
+ * <span class="attrib">@param</span> {string} elem actual element to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+ <span class="reserved">function</span> Tables_collapseTableRow (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		
+		<span class="comment">// process inner div</span>
+		<span class="reserved">if</span> (Helper.unsupportsEffects(<span class="literal">'safari_exception'</span>)) {
+			<span class="reserved">return</span> false;
+		} <span class="reserved">else</span> {
+			<span class="comment">// process outer table tr</span>
+			$(<span class="reserved">this</span>.elem).style.visibility = <span class="literal">'collapse'</span>;
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Tables
+ */</span>
+Tables = new Tables();</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Welcompose Publishing System</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+</body>
+</html>

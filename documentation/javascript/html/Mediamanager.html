@@ -1,0 +1,2024 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/REC-html40/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Mediamanager
+</TITLE>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
+</HEAD>
+<SCRIPT>
+function asd()
+{
+parent.document.title="Mediamanager";
+}
+</SCRIPT>
+<BODY BGCOLOR="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=3 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">  <A HREF="overview-summary-wcom.mediamanager.js.html"><FONT CLASS="NavBarFont1"><B>File</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev">&nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <!--TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1"-->    <!--A HREF="deprecated-list.html"--><!--FONT CLASS="NavBarFont1">Deprecated</FONT--><!--/A--><!--&nbsp;</TD-->
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"--><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+<B>Welcompose Publishing System</B>
+</EM>
+</TD
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="Init.html"><B>PREV CLASS</B></A><!-- 
+   NEXT CLASS 
+-->
+&nbsp;<A HREF="Navigation.html"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Mediamanager.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<!-- =========== END OF NAVBAR =========== -->
+<HR>
+
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>Class Mediamanager</H2>
+<PRE>Object
+   |
+   +--<a href='Base.html'>Base</a>
+         |
+         +--<b>Mediamanager</b>
+</PRE>
+
+
+<HR>
+<DL>
+   <!-- Class definition -->
+   <DT>class 
+   <B>Mediamanager</B>
+   
+      <DT>extends <a href='Base.html'>Base</a> 
+   
+
+</DL>
+   
+   <P>
+   <BR/>The Mediamanager class embed all media maintenance.
+ <br />
+ The <em>Mediamanager</em> is a component within content pages
+ both to maintain all sorts of media (upload, edit, delete) and a repository
+ to pick up from while building content pages.
+ <br /><br />
+ At present there are two layers (<em>myLocal</em> and <em>myFlickr</em>)
+ with different treatments implemented.
+<br />
+ <em>myLocal</em> handles all the media formerly uploaded into the local structure.
+ <br />
+ <em>myFlickr</em> is a integration of some API methods of the WebService Flickr.com to 
+ allow to integrate Flickr.com photos into sides contents.
+
+ <BR/><I>Defined in <a href='overview-summary-wcom.mediamanager.js.html'>wcom.mediamanager.js</a></I><BR/><BR/>
+   </P>
+   
+   <HR>
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<!-- ======== END NESTED CLASS SUMMARY ======== -->
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+
+   <A NAME="field_summary"><!-- --></A>
+      <TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+         <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+            <TD COLSPAN=2><FONT SIZE="+2">
+               <B>Field Summary</B></FONT></TD>
+         </TR>
+
+   <!-- This is one instance field summary -->
+   
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+   <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+   <CODE>&nbsp;Object</CODE></FONT></TD>
+   <TD><CODE><B><A HREF="#req">req</A></B></CODE>
+   <BR>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+   </TR>
+   
+
+   </TABLE>
+   &nbsp;
+   
+
+   
+   
+   &nbsp;<A NAME=""><!-- --></A>
+   <TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+   <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+   <TD><B>Fields inherited from class <A HREF="Base.html">Base</A></B></TD>
+   </TR>
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+   <TD><CODE>
+   <a href="Base.html#helpClass">helpClass</a>, <a href="Base.html#helpClassRemove">helpClassRemove</a>, <a href="Base.html#helpClassMediamanager">helpClassMediamanager</a>, <a href="Base.html#helpClassRemoveMediamanager">helpClassRemoveMediamanager</a>, <a href="Base.html#helpLyMediamanager">helpLyMediamanager</a>, <a href="Base.html#lyMediamanagerMyLocal">lyMediamanagerMyLocal</a>, <a href="Base.html#lyMediamanagerMyFlickr">lyMediamanagerMyFlickr</a>, <a href="Base.html#mediamanagerClassShowMyLocal">mediamanagerClassShowMyLocal</a>, <a href="Base.html#mediamanagerClassHideMyLocal">mediamanagerClassHideMyLocal</a>, <a href="Base.html#mediamanagerClassShowMyFlickr">mediamanagerClassShowMyFlickr</a>, <a href="Base.html#mediamanagerClassHideMyFlickr">mediamanagerClassHideMyFlickr</a>, <a href="Base.html#navLyOne">navLyOne</a>, <a href="Base.html#navLyTwo">navLyTwo</a>, <a href="Base.html#uploadClassShow">uploadClassShow</a>, <a href="Base.html#uploadClassHide">uploadClassHide</a>, <a href="Base.html#applicationTextColor">applicationTextColor</a>, <a href="Base.html#helpHtmlShow">helpHtmlShow</a>, <a href="Base.html#helpHtmlHide">helpHtmlHide</a>, <a href="Base.html#elementHtmlShow">elementHtmlShow</a>, <a href="Base.html#elementHtmlHide">elementHtmlHide</a>, <a href="Base.html#keyPressDelay">keyPressDelay</a>, <a href="Base.html#parseHelpUrl">parseHelpUrl</a>, <a href="Base.html#parseNavUrl">parseNavUrl</a>, <a href="Base.html#parseMedLocalUrl">parseMedLocalUrl</a>, <a href="Base.html#parseMedFlickrUrl">parseMedFlickrUrl</a>, <a href="Base.html#parseMedUploadUrl">parseMedUploadUrl</a>, <a href="Base.html#parseMedEditUrl">parseMedEditUrl</a>, <a href="Base.html#parseMedDeleteUrl">parseMedDeleteUrl</a>, <a href="Base.html#parseMedCastsUrl">parseMedCastsUrl</a>, <a href="Base.html#parseMedDiscCastsUrl">parseMedDiscCastsUrl</a>, <a href="Base.html#parsePagesLinksUrl">parsePagesLinksUrl</a>, <a href="Base.html#parseGlobalTemplatesLinksUrl">parseGlobalTemplatesLinksUrl</a>, <a href="Base.html#parseGlobalFilesLinksUrl">parseGlobalFilesLinksUrl</a>, <a href="Base.html#parseBlogCommmentStatusChangeUrl">parseBlogCommmentStatusChangeUrl</a>, <a href="Base.html#parseStructuralTemplatesLinksUrl">parseStructuralTemplatesLinksUrl</a>, <a href="Base.html#validateUrl">validateUrl</a>
+   </CODE></TD>
+   </TR>
+</TABLE>
+&nbsp;
+
+
+
+<!-- =========== END FIELD SUMMARY =========== -->
+
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+   <TD>
+      <CODE>
+	 <B>
+	    <A HREF="Mediamanager.html#Mediamanager()">Mediamanager</A> 
+	 </B>
+	 ()
+      </CODE>
+      <BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Constructs the Mediamanager class
+      </TD>
+</TR>
+</TABLE>
+
+<!-- ======== END CONSTRUCTOR SUMMARY ======== -->
+
+&nbsp;
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TD>
+</TR>
+
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;Object</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#checkElemsMyFlickr">checkElemsMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Collects the media manager form elements values as a hash
+ and returns it as a query string.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;Object</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#checkElemsMyLocal">checkElemsMyLocal</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Collects the media manager form elements values as a hash
+ and returns it as a query string.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#checkOccurrences">checkOccurrences</A></B>(&lt;string&gt; elems, &lt;string&gt; exception)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Adjust height of Media Manager content(s) div.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#deleteMediaItem">deleteMediaItem</A></B>(&lt;var&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Delete media item.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#discardPodcast">discardPodcast</A></B>(&lt;var&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Discard podcast media item from page.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#hideElement">hideElement</A></B>(&lt;string&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Hide Media Manager element.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#initializeTagSearch">initializeTagSearch</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Initialize tag search.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#initializeTagSearchMyFlickr">initializeTagSearchMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Initialize tag search.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#initializeUserMyFlickr">initializeUserMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Prepare display with given user.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#insertDocumentItem">insertDocumentItem</A></B>(elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Insert document media item into content form field.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#insertImageItem">insertImageItem</A></B>(elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Insert image media item into content form field.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#insertImageItemFlickr">insertImageItemFlickr</A></B>(elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Insert image media item into content form field.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokeInputs">invokeInputs</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display media items related to selected option(s).
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokeInputsMyFlickr">invokeInputsMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display media items related to selected option(s).
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokePager">invokePager</A></B>(&lt;object&gt; elem, &lt;string&gt; pager_page)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Initialize pager.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokePagerMyFlickr">invokePagerMyFlickr</A></B>(&lt;object&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Initialize pager.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokeTags">invokeTags</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display media items related to tag(s) input.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#invokeTagsMyFlickr">invokeTagsMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display media items related to tag(s) input.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#loaderMediaToPodcast">loaderMediaToPodcast</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display indicator while XMLHttpRequest processing.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#loaderMyFlickr">loaderMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display indicator while XMLHttpRequest processing.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#loaderMyLocal">loaderMyLocal</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display indicator while XMLHttpRequest processing.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#mediaToPodcast">mediaToPodcast</A></B>(&lt;string&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Get element id and populate podcast layer.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#mediaToPodcastOnLoad">mediaToPodcastOnLoad</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate podcast layer via given hidden value.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Save elements display status.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#preserveElementStatusMyLocal">preserveElementStatusMyLocal</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Save elements display status.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Sets elements display status.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Sets elements display status.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showElement">showElement</A></B>(&lt;string&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display Media Manager element.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseDiscardPodcast">showResponseDiscardPodcast</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest Response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseInvokeInputs">showResponseInvokeInputs</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseInvokeInputsMyFlickr">showResponseInvokeInputsMyFlickr</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseInvokeTagInputs">showResponseInvokeTagInputs</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseInvokeTagsMyFlickr">showResponseInvokeTagsMyFlickr</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseMediaToPodcast">showResponseMediaToPodcast</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest Response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#switchLayer">switchLayer</A></B>(&lt;string&gt; toShow, &lt;string&gt; toHide)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>).
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#toggleExtendedView">toggleExtendedView</A></B>(&lt;var&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Toggle podcast show/hide podast details.
+      </TD>
+   </TR>
+
+
+</TABLE>
+
+
+
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TD><B>Methods inherited from class <a href="Base.html">Base</a></B></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>
+<!-- Inherited methods -->
+<a href="Base.html#isArray">isArray</a>, <a href="Base.html#isBoolean">isBoolean</a>, <a href="Base.html#isString">isString</a>, <a href="Base.html#isObject">isObject</a>, <a href="Base.html#isFunction">isFunction</a>, <a href="Base.html#isUndefined">isUndefined</a>, <a href="Base.html#isNumber">isNumber</a>, <a href="Base.html#isEmpty">isEmpty</a>, <a href="Base.html#isNull">isNull</a>, <a href="Base.html#trim">trim</a>
+</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+<!-- ============ FIELD DETAIL START =========== -->
+
+   <A NAME="field_detail"><!-- --></A>
+   <TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+      <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+         <TD COLSPAN=1><FONT SIZE="+2"><B>Field Detail</B></FONT></TD>
+      </TR>
+   </TABLE>
+
+   
+   <A NAME="req"><!-- --></A>
+   <H3>req</H3>
+   <PRE>Object&nbsp;<B>req</B></PRE>
+   <UL>
+   
+   
+   </UL>
+   <HR>
+   
+
+
+<!-- ============ FIELD DETAIL END =========== -->
+
+    <!-- ========= CONSTRUCTOR DETAIL START ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+   <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+      <TD COLSPAN=1>
+      <FONT SIZE="+2"><B>Constructor Detail</B></FONT>
+      </TD>
+   </TR>
+</TABLE>
+
+<A NAME="Mediamanager()"><!-- --></A><H3>
+Mediamanager</H3>
+<PRE><B>Mediamanager</B>()</PRE>
+
+
+<UL>
+   Constructs the Mediamanager class
+</UL>
+
+
+
+   </UL>
+
+
+<!-- Constructor return value(s) -->
+
+<!-- End constructor return value(s) -->
+
+<!-- ADDITIONAL ATTRIBUTES -->
+
+<UL>   
+<B>Throws:</B><UL>- applyError on exception    </UL>
+</UL>
+
+<HR/>
+<!-- END ADDITIONAL ATTRIBUTES  -->
+
+<!-- ========= CONSTRUCTOR DETAIL END ======== -->
+
+
+<!-- ============ METHOD DETAIL START ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+   <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+      <TD COLSPAN=1><FONT SIZE="+2">
+         <B>Method Detail</B></FONT>
+      </TD>
+   </TR>
+</TABLE>
+
+<!-- One single method detail entry -->
+
+   <A NAME="checkElemsMyFlickr"><!-- --></A>
+   <H3>checkElemsMyFlickr</H3>
+   <PRE>Object <B>checkElemsMyFlickr</B>()</PRE>
+   
+      <UL>Collects the media manager form elements values as a hash
+ and returns it as a query string.
+ <br />
+ var <em>mm_limit</em> is filled within <a href="#checkOccurrences">checkOccurrences()</a>.
+ <br />
+ var <em>mm_pagetype</em> comes from definition in the
+ html markup. Distinguish to show/hide action icon <em>UseAsPodcast</em>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL><B>See:</B><UL>- <a href="#invokeInputsMyFlickr">invokeInputsMyFlickr()</a><BR/>- <a href="#invokePagerMyFlickr">invokePagerMyFlickr()</a><BR/>- <a href="#invokeTagsMyFlickr">invokeTagsMyFlickr()</a><BR/>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="checkElemsMyLocal"><!-- --></A>
+   <H3>checkElemsMyLocal</H3>
+   <PRE>Object <B>checkElemsMyLocal</B>()</PRE>
+   
+      <UL>Collects the media manager form elements values as a hash
+ and returns it as a query string.
+ <br />
+ var <em>mm_limit</em> is filled within <a href="#checkOccurrences">checkOccurrences()</a>.
+ <br />
+ var <em>mm_pagetype</em> comes from definition in the
+ html markup. Distinguish to show/hide action icon <em>UseAsPodcast</em>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL><B>See:</B><UL>- <a href="#invokeInputs">invokeInputs()</a><BR/>- <a href="#invokePager">invokePager()</a><BR/>- <a href="#invokeTags">invokeTags()</a><BR/>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="checkOccurrences"><!-- --></A>
+   <H3>checkOccurrences</H3>
+   <PRE>void <B>checkOccurrences</B>(&lt;string&gt; elems, &lt;string&gt; exception)</PRE>
+   
+      <UL>Adjust height of Media Manager content(s) div.
+ <br />
+ Evaluates the params (array) and perfoms a switch condition
+ with array length index as the attribute. Used everytime there
+ is a need for a asynchron refresh launched within other functions.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elems</CODE> -  actual element  
+      </UL> 
+   
+     <UL><CODE>exception</CODE> -  Track if we need to provide extra rows, see <a href="#hideElement">hideElement()</a> and <a href="#showElement">showElement()</a>  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#showElement">showElement()</a><BR/>- <a href="#hideElement">hideElement()</a><BR/>- <a href="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal()</a><BR/>- <a href="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="deleteMediaItem"><!-- --></A>
+   <H3>deleteMediaItem</H3>
+   <PRE>void <B>deleteMediaItem</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Delete media item.
+ <br />
+ When deleting completed <a href="#invokeInputs">invokeInputs()</a> is called.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Actual elem to delete  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderMyLocal">loaderMyLocal()</a><BR/>- <a href="#invokeInputs">invokeInputs()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="discardPodcast"><!-- --></A>
+   <H3>discardPodcast</H3>
+   <PRE>void <B>discardPodcast</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Discard podcast media item from page.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Actual elem to delete  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderMediaToPodcast">loaderMediaToPodcast()</a><BR/>- <a href="#showResponseDiscardPodcast">showResponseDiscardPodcast()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="hideElement"><!-- --></A>
+   <H3>hideElement</H3>
+   <PRE>void <B>hideElement</B>(&lt;string&gt; elem)</PRE>
+   
+      <UL>Hide Media Manager element.
+ <br />
+ Beside simply hiding the element, the display styles of 
+ all other elements be temporarily saved and populated into
+ func <a href="#checkOccurrences">checkOccurrences()</a> to ensure that the
+ Media Manager content(s) container always adapt to the show/hide
+ display status of the elements.
+ <br />
+ In addition to that we perform conditions to distinguish which 
+ layer (<em>myLocal</em>, <em>myFlickr</em>) is active.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  actual element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="initializeTagSearch"><!-- --></A>
+   <H3>initializeTagSearch</H3>
+   <PRE>void <B>initializeTagSearch</B>()</PRE>
+   
+      <UL>Initialize tag search.
+ <br />
+ Call <a href="#invokeTags">invokeTags()</a> with a delay of 1 second.
+ <br />
+ To avoid firing <a href="#invokeTags">invokeTags()</a> on every single keyboard
+ stroke, we have to deal with the var keyPressDelay.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#invokeTags">invokeTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="initializeTagSearchMyFlickr"><!-- --></A>
+   <H3>initializeTagSearchMyFlickr</H3>
+   <PRE>void <B>initializeTagSearchMyFlickr</B>()</PRE>
+   
+      <UL>Initialize tag search.
+ <br />
+ Call <a href="#invokeTagsMyFlickr">invokeTagsMyFlickr()</a> with a delay of 1 second.
+ <br />
+ To avoid firing <a href="#invokeTagsMyFlickr">invokeTagsMyFlickr()</a> on every single keyboard
+ stroke, we have to deal with the var keyPressDelay.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#invokeTagsMyFlickr">invokeTagsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="initializeUserMyFlickr"><!-- --></A>
+   <H3>initializeUserMyFlickr</H3>
+   <PRE>void <B>initializeUserMyFlickr</B>()</PRE>
+   
+      <UL>Prepare display with given user.
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a><BR/>- <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a><BR/>- <a href="#loaderMyFlickr">loaderMyFlickr()</a><BR/>- <a href="#showResponseInvokeInputsMyFlickr">showResponseInvokeInputsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertDocumentItem"><!-- --></A>
+   <H3>insertDocumentItem</H3>
+   <PRE>void <B>insertDocumentItem</B>(elem)</PRE>
+   
+      <UL>Insert document media item into content form field.
+ <br />
+ First we have a look, if global var <em>storedFocus</em> (<a href="Forms.html#storeFocus">Forms.storeFocus()</a>)
+ is defined. Then we build a string with the needed syntax to deliver it to <a href="Helper.html#insertTags">Helper.insertTags()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="Forms.html#storeFocus">Forms.storeFocus()</a><BR/>- <a href="Helper.html#insertTags">Helper.insertTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertImageItem"><!-- --></A>
+   <H3>insertImageItem</H3>
+   <PRE>void <B>insertImageItem</B>(elem)</PRE>
+   
+      <UL>Insert image media item into content form field.
+ <br />
+ First we have a look, if global var <em>storedFocus</em> (<a href="Forms.html#storeFocus">Forms.storeFocus()</a>)
+ is defined. Then we build a string with the needed syntax to deliver it to <a href="Helper.html#insertTags">Helper.insertTags()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="Forms.html#storeFocus">Forms.storeFocus()</a><BR/>- <a href="Helper.html#insertTags">Helper.insertTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertImageItemFlickr"><!-- --></A>
+   <H3>insertImageItemFlickr</H3>
+   <PRE>void <B>insertImageItemFlickr</B>(elem)</PRE>
+   
+      <UL>Insert image media item into content form field.
+ <br />
+ First we have a look, if global var <em>storedFocus</em> (<a href="Forms.html#storeFocus">Forms.storeFocus()</a>)
+ is defined. Then we build a string with the needed syntax to deliver it to <a href="Helper.html#insertTags">Helper.insertTags()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="Forms.html#storeFocus">Forms.storeFocus()</a><BR/>- <a href="Helper.html#insertTags">Helper.insertTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokeInputs"><!-- --></A>
+   <H3>invokeInputs</H3>
+   <PRE>void <B>invokeInputs</B>()</PRE>
+   
+      <UL>Display media items related to selected option(s).
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyLocal">checkElemsMyLocal()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyLocal">preserveElementStatusMyLocal()</a><BR/>- <a href="#checkElemsMyLocal">checkElemsMyLocal()</a><BR/>- <a href="#loaderMyLocal">loaderMyLocal()</a><BR/>- <a href="#showResponseInvokeInputs">showResponseInvokeInputs()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokeInputsMyFlickr"><!-- --></A>
+   <H3>invokeInputsMyFlickr</H3>
+   <PRE>void <B>invokeInputsMyFlickr</B>()</PRE>
+   
+      <UL>Display media items related to selected option(s).
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a><BR/>- <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a><BR/>- <a href="#loaderMyFlickr">loaderMyFlickr()</a><BR/>- <a href="#showResponseInvokeInputsMyFlickr">showResponseInvokeInputsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokePager"><!-- --></A>
+   <H3>invokePager</H3>
+   <PRE>void <B>invokePager</B>(&lt;object&gt; elem, &lt;string&gt; pager_page)</PRE>
+   
+      <UL>Initialize pager.
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyLocal">checkElemsMyLocal()</a>.
+ The function attribute <em>pager_page</em> is only needed (and used), when its 
+ called within a popup to close (<a href="Helper.html#closePopup">Helper.closePopup()</a>). That because we
+ want to get back on exact the pager page on which we started the popup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Actual element to process  
+      </UL> 
+   
+     <UL><CODE>pager_page</CODE> -  Saved pager page count  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyLocal">preserveElementStatusMyLocal()</a><BR/>- <a href="#checkElemsMyLocal">checkElemsMyLocal()</a><BR/>- <a href="#loaderMyLocal">loaderMyLocal()</a><BR/>- <a href="#showResponseInvokeInputs">showResponseInvokeInputs()</a><BR/>- <a href="Helper.html#closePopup">Helper.closePopup()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokePagerMyFlickr"><!-- --></A>
+   <H3>invokePagerMyFlickr</H3>
+   <PRE>void <B>invokePagerMyFlickr</B>(&lt;object&gt; elem)</PRE>
+   
+      <UL>Initialize pager.
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Actual element to process  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a><BR/>- <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a><BR/>- <a href="#loaderMyFlickr">loaderMyFlickr()</a><BR/>- <a href="#showResponseInvokeInputsMyFlickr">showResponseInvokeInputsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokeTags"><!-- --></A>
+   <H3>invokeTags</H3>
+   <PRE>void <B>invokeTags</B>()</PRE>
+   
+      <UL>Display media items related to tag(s) input.
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyLocal">checkElemsMyLocal()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#initializeTagSearch">initializeTagSearch()</a><BR/>- <a href="#preserveElementStatusMyLocal">preserveElementStatusMyLocal()</a><BR/>- <a href="#checkElemsMyLocal">checkElemsMyLocal()</a><BR/>- <a href="#loaderMyLocal">loaderMyLocal()</a><BR/>- <a href="#showResponseInvokeTagInputs">showResponseInvokeTagInputs()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="invokeTagsMyFlickr"><!-- --></A>
+   <H3>invokeTagsMyFlickr</H3>
+   <PRE>void <B>invokeTagsMyFlickr</B>()</PRE>
+   
+      <UL>Display media items related to tag(s) input.
+ <br />
+ First of all we preserve the current display element status,
+ then fill var <em>elems</em> with value hash from <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a><BR/>- <a href="#checkElemsMyFlickr">checkElemsMyFlickr()</a><BR/>- <a href="#loaderMyFlickr">loaderMyFlickr()</a><BR/>- <a href="#showResponseInvokeTagsMyFlickr">showResponseInvokeTagsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="loaderMediaToPodcast"><!-- --></A>
+   <H3>loaderMediaToPodcast</H3>
+   <PRE>void <B>loaderMediaToPodcast</B>()</PRE>
+   
+      <UL>Display indicator while XMLHttpRequest processing.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#mediaToPodcast">mediaToPodcast()</a><BR/>- <a href="#mediaToPodcastOnLoad">mediaToPodcastOnLoad()</a><BR/>- <a href="#discardPodcast">discardPodcast()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="loaderMyFlickr"><!-- --></A>
+   <H3>loaderMyFlickr</H3>
+   <PRE>void <B>loaderMyFlickr</B>()</PRE>
+   
+      <UL>Display indicator while XMLHttpRequest processing.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#invokeInputsMyFlickr">invokeInputsMyFlickr()</a><BR/>- <a href="#invokePagerMyFlickr">invokePagerMyFlickr()</a><BR/>- <a href="#invokeTagsMyFlickr">invokeTagsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="loaderMyLocal"><!-- --></A>
+   <H3>loaderMyLocal</H3>
+   <PRE>void <B>loaderMyLocal</B>()</PRE>
+   
+      <UL>Display indicator while XMLHttpRequest processing.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#invokeInputs">invokeInputs()</a><BR/>- <a href="#invokePager">invokePager()</a><BR/>- <a href="#invokeTags">invokeTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="mediaToPodcast"><!-- --></A>
+   <H3>mediaToPodcast</H3>
+   <PRE>void <B>mediaToPodcast</B>(&lt;string&gt; elem)</PRE>
+   
+      <UL>Get element id and populate podcast layer.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  element (id) to process  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderMediaToPodcast">loaderMediaToPodcast()</a><BR/>- <a href="#showResponseMediaToPodcast">showResponseMediaToPodcast()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="mediaToPodcastOnLoad"><!-- --></A>
+   <H3>mediaToPodcastOnLoad</H3>
+   <PRE>void <B>mediaToPodcastOnLoad</B>()</PRE>
+   
+      <UL>Populate podcast layer via given hidden value.
+ <br />
+ Used if the podcast layer is formerly populated and we get
+ into form errors on submit of page.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  element (id) to process  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderMediaToPodcast">loaderMediaToPodcast()</a><BR/>- <a href="#showResponseMediaToPodcast">showResponseMediaToPodcast()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="preserveElementStatusMyFlickr"><!-- --></A>
+   <H3>preserveElementStatusMyFlickr</H3>
+   <PRE>void <B>preserveElementStatusMyFlickr</B>()</PRE>
+   
+      <UL>Save elements display status.
+ <br />
+ This method is used everytime there is a XMLHttpRequest Call.
+ Counterpart of <a href="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="preserveElementStatusMyLocal"><!-- --></A>
+   <H3>preserveElementStatusMyLocal</H3>
+   <PRE>void <B>preserveElementStatusMyLocal</B>()</PRE>
+   
+      <UL>Save elements display status.
+ <br />
+ This method is used everytime there is a XMLHttpRequest Call.
+ Counterpart of <a href="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="setCurrentElementStatusMyFlickr"><!-- --></A>
+   <H3>setCurrentElementStatusMyFlickr</H3>
+   <PRE>void <B>setCurrentElementStatusMyFlickr</B>()</PRE>
+   
+      <UL>Sets elements display status.
+ <br />
+ This method is used everytime there is a XMLHttpRequest Response.
+ It takes the received values from Counterpart method <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a>
+ to reconstitute the Media Manager Elements display.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyFlickr">preserveElementStatusMyFlickr()</a><BR/>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="setCurrentElementStatusMyLocal"><!-- --></A>
+   <H3>setCurrentElementStatusMyLocal</H3>
+   <PRE>void <B>setCurrentElementStatusMyLocal</B>()</PRE>
+   
+      <UL>Sets elements display status.
+ <br />
+ This method is used everytime there is a XMLHttpRequest Response.
+ It takes the received values from Counterpart method <a href="#preserveElementStatusMyLocal">preserveElementStatusMyLocal()</a>
+ to reconstitute the Media Manager Elements display.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#preserveElementStatusMyLocal">preserveElementStatusMyLocal()</a><BR/>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showElement"><!-- --></A>
+   <H3>showElement</H3>
+   <PRE>void <B>showElement</B>(&lt;string&gt; elem)</PRE>
+   
+      <UL>Display Media Manager element.
+ <br />
+ Beside simply showing the element, the display styles of 
+ all other elements be temporarily saved and populated into
+ func <a href="#checkOccurrences">checkOccurrences()</a> to ensure that the
+ Media Manager content(s) container always adapt to the show/hide
+ display status of the elements. 
+ <br />
+ In addition to that we perform conditions to distinguish which 
+ layer (<em>myLocal</em>, <em>myFlickr</em>) is active.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  actual element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#checkOccurrences">checkOccurrences()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseDiscardPodcast"><!-- --></A>
+   <H3>showResponseDiscardPodcast</H3>
+   <PRE>void <B>showResponseDiscardPodcast</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest Response.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#discardPodcast">discardPodcast()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseInvokeInputs"><!-- --></A>
+   <H3>showResponseInvokeInputs</H3>
+   <PRE>void <B>showResponseInvokeInputs</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest response.
+ <br />
+ Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal()</a><BR/>- <a href="#initializeTagSearch">initializeTagSearch()</a><BR/>- <a href="#initializeTagSearchMyFlickr">initializeTagSearchMyFlickr()</a><BR/>- <a href="#invokeInputs">invokeInputs()</a><BR/>- <a href="#invokePager">invokePager()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseInvokeInputsMyFlickr"><!-- --></A>
+   <H3>showResponseInvokeInputsMyFlickr</H3>
+   <PRE>void <B>showResponseInvokeInputsMyFlickr</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest response.
+ <br />
+ Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr()</a><BR/>- <a href="#initializeTagSearch">initializeTagSearch()</a><BR/>- <a href="#initializeTagSearchMyFlickr">initializeTagSearchMyFlickr()</a><BR/>- <a href="#initializeUserMyFlickr">initializeUserMyFlickr()</a><BR/>- <a href="#invokePagerMyFlickr">invokePagerMyFlickr()</a><BR/>- <a href="#invokeInputsMyFlickr">invokeInputsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseInvokeTagInputs"><!-- --></A>
+   <H3>showResponseInvokeTagInputs</H3>
+   <PRE>void <B>showResponseInvokeTagInputs</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest response.
+ <br />
+ Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyLocal">setCurrentElementStatusMyLocal()</a><BR/>- <a href="#initializeTagSearch">initializeTagSearch()</a><BR/>- <a href="#initializeTagSearchMyFlickr">initializeTagSearchMyFlickr()</a><BR/>- <a href="#invokeTags">invokeTags()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseInvokeTagsMyFlickr"><!-- --></A>
+   <H3>showResponseInvokeTagsMyFlickr</H3>
+   <PRE>void <B>showResponseInvokeTagsMyFlickr</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest response.
+ <br />
+ Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#setCurrentElementStatusMyFlickr">setCurrentElementStatusMyFlickr()</a><BR/>- <a href="#initializeTagSearch">initializeTagSearch()</a><BR/>- <a href="#initializeTagSearchMyFlickr">initializeTagSearchMyFlickr()</a><BR/>- <a href="#invokeInputsMyFlickr">invokeInputsMyFlickr()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseMediaToPodcast"><!-- --></A>
+   <H3>showResponseMediaToPodcast</H3>
+   <PRE>void <B>showResponseMediaToPodcast</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest Response.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#mediaToPodcast">mediaToPodcast()</a><BR/>- <a href="#mediaToPodcastOnLoad">mediaToPodcastOnLoad()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="switchLayer"><!-- --></A>
+   <H3>switchLayer</H3>
+   <PRE>void <B>switchLayer</B>(&lt;string&gt; toShow, &lt;string&gt; toHide)</PRE>
+   
+      <UL>Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>).</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>toShow</CODE> -  Layer to display  
+      </UL> 
+   
+     <UL><CODE>toHide</CODE> -  Layer to hide  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="toggleExtendedView"><!-- --></A>
+   <H3>toggleExtendedView</H3>
+   <PRE>void <B>toggleExtendedView</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Toggle podcast show/hide podast details.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Actual elem to toggle   
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+
+
+<!-- ============ METHOD DETAIL END ========== -->
+
+<!-- ========= END OF CLASS DATA ========= -->
+
+<!-- ========== START OF NAVBAR ========== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0">
+<TR>
+<TD COLSPAN=3 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">  <A HREF="overview-summary-wcom.mediamanager.js.html"><FONT CLASS="NavBarFont1"><B>File</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="overview-tree.html"><FONT CLASS="NavBarFont1"><b>Tree</b></FONT></A>&nbsp;</TD>
+  <!--TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1"-->    <!--A HREF="deprecated-list.html"--><!--FONT CLASS="NavBarFont1">Deprecated</FONT--><!--/A--><!--&nbsp;</TD-->
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+<B>Welcompose Publishing System</B>
+</EM>
+</TD
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="Init.html"><B>PREV CLASS</B></A><!-- 
+   NEXT CLASS 
+-->
+&nbsp;<A HREF="Navigation.html"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Mediamanager.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;
+<SCRIPT>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>
+</NOSCRIPT>
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+
+<!-- =========== END OF NAVBAR =========== -->
+
+<HR>
+<FONT SIZE="-1">
+
+</FONT>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+</BODY>
+</HTML>
