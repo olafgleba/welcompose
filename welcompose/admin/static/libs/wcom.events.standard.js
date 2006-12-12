@@ -115,18 +115,6 @@ var definitions = {
 			return false;
 		}
 	},
-	'.hideTableRow' : function(el){
-		el.onclick = function(){
-			Tables.hideTableRow(this);
-			return false;
-		}
-	},
-	'.showTableRow' : function(el){
-		el.onclick = function(){
-			Tables.showTableRow(this);
-			return false;
-		}
-	},
 	'input' : function(el){
 		el.onfocus = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
@@ -162,6 +150,54 @@ var definitions = {
 			Helper.validate(this);
 		}
 	},
+	'.confirmDelNav' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelNavAction(this);
+			return false;
+		}
+	},
+	'.confirmDelTplType' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplTypeAction(this);
+			return false;
+		}
+	},
+	'.confirmDelTplSets' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplSetsAction(this);
+			return false;
+		}
+	},
+	'.confirmDelTplGlobal' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplGlobalAction(this);
+			return false;
+		}
+	},
+	'.confirmDelTplGlobalfile' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelTplGlobalfileAction(this);
+			return false;
+		}
+	},
+	'.changeBlogCommentStatus' : function(el){
+		el.onchange = function(){
+			Helper.changeBlogCommentStatus(this);
+			return false;
+		}
+	},
+	'.hideTableRow' : function(el){
+		el.onclick = function(){
+			Tables.hideTableRow(this);
+			return false;
+		}
+	},
+	'.showTableRow' : function(el){
+		el.onclick = function(){
+			Tables.showTableRow(this);
+			return false;
+		}
+	},
 	'.act_internalLink' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('740','634','pages_links_select','pages_internal_links', this);
@@ -189,18 +225,6 @@ var definitions = {
 	'.act_internalLinkStructuralTemplates' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
-			return false;
-		}
-	},
-	'.confirmDelNav' : function(el){
-		el.onclick = function(){
-			Helper.confirmDelNavAction(this);
-			return false;
-		}
-	},
-	'.changeBlogCommentStatus' : function(el){
-		el.onchange = function(){
-			Helper.changeBlogCommentStatus(this);
 			return false;
 		}
 	},

@@ -127,18 +127,6 @@ var definitions = {
 			return false;
 		}
 	},
-	'.hideTableRow' : function(el){
-		el.onclick = function(){
-			Tables.hideTableRow(this);
-			return false;
-		}
-	},
-	'.showTableRow' : function(el){
-		el.onclick = function(){
-			Tables.showTableRow(this);
-			return false;
-		}
-	},
 	'.showMediamanagerElementMyLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.showElement(this);
@@ -314,18 +302,6 @@ var definitions = {
 			return false;
 		}
 	},
-	'.close' : function(el){
-		el.onclick = function(){
-			Helper.closeLinksPopup(this);
-			return false;
-		}
-	},
-	'.showNextNode' : function(el){
-		el.onclick = function(){
-			Helper.showNextNode(this);
-			return false;
-		}
-	},
 	'.toggleExtendedView120' : function(el){
 		el.onclick = function(){
 			Mediamanager.toggleExtendedView(this);
@@ -335,18 +311,6 @@ var definitions = {
 	'.discardPodcast120' : function(el){
 		el.onclick = function(){
 			Mediamanager.discardPodcast(this);
-			return false;
-		}
-	},
-	'.confirmDelNav' : function(el){
-		el.onclick = function(){
-			Helper.confirmDelNavAction(this);
-			return false;
-		}
-	},
-	'.changeBlogCommentStatus' : function(el){
-		el.onchange = function(){
-			Helper.changeBlogCommentStatus(this);
 			return false;
 		}
 	},

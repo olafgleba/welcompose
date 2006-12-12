@@ -8,7 +8,7 @@
  * sopic GmbH
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
- *
+ *Mediamanager.applyBehaviour
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
@@ -259,7 +259,7 @@ function Base ()
 
 		/**
 		 * Reset formerly value
-		 * Used in func Mediamanager.initializeTagSearch()
+		 * Used in {@link Mediamanager#initializeTagSearch}
 		 */
 		this.keyPressDelay = null;
 		
@@ -357,7 +357,7 @@ Base.prototype.trim = Base_trim;
 /**
  * Examine the giving var is of type Array
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isArray(elem) {
@@ -366,7 +366,7 @@ function Base_isArray(elem) {
 /**
  * Examine the giving var is of type Bool
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isBoolean(elem) {
@@ -375,7 +375,7 @@ function Base_isBoolean(elem) {
 /**
  * Examine the giving var is of type String
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
  function Base_isString(elem) {
@@ -384,7 +384,7 @@ function Base_isBoolean(elem) {
 /**
  * Examine the giving var is of type Object
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isObject(elem) {
@@ -393,7 +393,7 @@ function Base_isObject(elem) {
 /**
  * Examine the giving var is a function
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isFunction(elem) {
@@ -402,7 +402,7 @@ function Base_isFunction(elem) {
 /**
  * Examine the giving var is undefined
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isUndefined(elem) {
@@ -411,7 +411,7 @@ function Base_isUndefined(elem) {
 /**
  * Examine the giving var has no values
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isNumber(elem) {
@@ -420,7 +420,7 @@ function Base_isNumber(elem) {
 /**
  * Examine the giving var is empty
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isEmpty(elem) {
@@ -438,7 +438,7 @@ function Base_isEmpty(elem) {
 /**
  * Examine the giving var is Null
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return Boolean true or false
  */
 function Base_isNull(elem) {
@@ -447,7 +447,7 @@ function Base_isNull(elem) {
 /**
  * Delete whitspaces at begin and end of the delivered string
  *
- * @param {var} elem Actual element
+ * @param {var} elem Current element
  * @return elem
  * @type String
  */
@@ -581,8 +581,8 @@ function Init_getVars ()
  * Show/hide a group of form elements and color their labels on load of page.
  * Depends on delivered variables in the html markup.
  * <br />
- * For properly use or/and enhancement of this feature, please have a look on
- * the online project support area.
+ * For in depths explanation please have a look on the online
+ * project support area.
  *
  * @param {array} elems Array of element(s)
  * @throws applyError on exception
@@ -619,7 +619,7 @@ function Init_getCbxStatus (elems)
 /**
  * Update content with XMLHttpRequest response.
  * <br />
- * Beside of that the Media Manager Tag Search Envents are initialized.
+ * Beside of that the Media Manager Tag Search Events are initialized.
  *
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
@@ -632,7 +632,7 @@ function Init_processInit (ttarget)
 			if (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 		
-				Helper.applyBehaviour();
+				Mediamanager.applyBehaviour();
 			
 				// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
 				$('mm_tags').setAttribute("autocomplete","off");
@@ -692,10 +692,10 @@ Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
  * Show help html element.
- * Import related help file depending on actual element pointer.
+ * Import related help file depending on current element pointer.
  *
  * @see #processHelp
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Help_show (elem)
@@ -748,7 +748,7 @@ function Help_show (elem)
 /**
  * Hide help html element.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Help_hide (elem)
@@ -802,14 +802,14 @@ function Help_processHelp (ttarget)
 
 /**
  * Show Mediamanager help html element.
- * Import related help file depending on actual element pointer.
+ * Import related help file depending on current element pointer.
  * We have to return the hide state as a global var to provide
- * which layer we must show on method hideMediamanger 
+ * which layer we must show on method {@link #hideMediamanger} 
  *
  * @see #processMediamanager
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
- * @returns {global} gMediamanagerLayer
+ * @returns {global} gMediamanagerLayer Layer needed for {@link #hideMediamanager}
  */
 function Help_showMediamanager (elem)
 {
@@ -858,7 +858,7 @@ function Help_showMediamanager (elem)
 /**
  * Hide Mediamanager help html element.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Help_hideMediamanager (elem)
@@ -920,7 +920,7 @@ function Help_processMediamanager (ttarget)
 /**
  * Set Focus related to pointed element.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @param {string} attr Node Attribute
  */
 function Help_setCorrespondingFocus (elem, attr)
@@ -965,7 +965,7 @@ Navigation.prototype.show = Navigation_show;
 Navigation.prototype.processNavigation = Navigation_processNavigation;
 
 /**
- * Import related navigation file depending on actual element pointer.
+ * Import related navigation file depending on current element pointer.
  * Here var <em>level</em> distinguish which markup layer to use.
  * 
  * @see #processNavigation
@@ -1065,14 +1065,14 @@ Forms.prototype.setOnEvent = Forms_setOnEvent;
 Forms.prototype.storeFocus = Forms_storeFocus;
 
 /**
- * Used to style elements depending on given params
+ * Style elements depending on given params
  *
  * <br /><br />Example:
  * <pre><code>
 Forms.setOnEvent(this, '','#0c3','dotted');
  * </code></pre>
  * 
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @param {string} bgcolor Define background color
  * @param {string} bcolor Define border color
  * @param {string} bstyle Define border style attribute
@@ -1095,10 +1095,10 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 }
 
 /**
- * Tracks the actual focus and makes it available application wide.
- * This actual is used to fire alerts within the Mediamanager.
+ * Track the current content form field focus and makes it available application wide.
+ * This is used to fire alerts within elem Current elementseveral Media Manager <em>_insertXXX</em> functions.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Forms_storeFocus (elem)
@@ -1148,8 +1148,8 @@ Status.prototype.getCbx = Status_getCbx;
  * Show/hide a group of form elements and color their labels.
  * Depends on delivered variable in the html markup.
  * <br />
- * For properly use or/and enhancement of this feature, please have a look on
- * the online project support area.
+ * For in depths explanation please have a look on the online
+ * project support area.
  *
  * @param {array} elems Array of element(s)
  * @throws applyError on exception
@@ -1228,12 +1228,9 @@ Tables.prototype.hideTableRow = Tables_hideTableRow;
 Tables.prototype.collapseTableRow = Tables_collapseTableRow;
 
 /**
- * Show formely hidden table row depending on actual element pointer.
- * <br />
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
+ * Show formely hidden table row depending on current element pointer.
  * 
- * @param {string} elem actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Tables_showTableRow (elem)
@@ -1265,12 +1262,9 @@ function Tables_showTableRow (elem)
 }
 
 /**
- * Hide visible table row depending on actual element pointer.
- * <br />
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
+ * Hide visible table row depending on current element pointer.
  * 
- * @param {string} elem actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Tables_hideTableRow (elem)
@@ -1302,11 +1296,8 @@ function Tables_hideTableRow (elem)
 
 /**
  * Gives some browsers some extra treatment.
- * <br />
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
  *
- * @param {string} elem actual element to process
+ * @param {string} elem Current element to process
  * @throws applyError on exception
  */
  function Tables_collapseTableRow (elem)

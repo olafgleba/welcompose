@@ -6,7 +6,7 @@
  *
  * Project owner:
  * sopic GmbH
- * 8472 Seuzach, Switzerland
+ * 8472 Seuzach, SwitzerlandMediamanager.applyBehaviour
  * http://www.sopic.com/
  *
  * This file is licensed under the terms of the Open Software License
@@ -74,6 +74,7 @@ Mediamanager.prototype.showElement = Mediamanager_showElement;
 Mediamanager.prototype.hideElement = Mediamanager_hideElement;
 Mediamanager.prototype.switchLayer = Mediamanager_switchLayer;
 Mediamanager.prototype.checkOccurrences = Mediamanager_checkOccurrences;
+Mediamanager.prototype.applyBehaviour = Mediamanager_applyBehaviour;
 
 /**
  * MyLocal methods
@@ -109,19 +110,19 @@ Mediamanager.prototype.invokeTagsMyFlickr = Mediamanager_invokeTagsMyFlickr;
 Mediamanager.prototype.invokeInputsMyFlickr = Mediamanager_invokeInputsMyFlickr;
 Mediamanager.prototype.invokePagerMyFlickr = Mediamanager_invokePagerMyFlickr;
 Mediamanager.prototype.initializeTagSearchMyFlickr = Mediamanager_initializeTagSearchMyFlickr;
+Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
 Mediamanager.prototype.showResponseInvokeInputsMyFlickr = Mediamanager_showResponseInvokeInputsMyFlickr;
 Mediamanager.prototype.showResponseInvokeTagsMyFlickr = Mediamanager_showResponseInvokeTagsMyFlickr;
 Mediamanager.prototype.loaderMyFlickr = Mediamanager_loaderMyFlickr;
-Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFlickr;
 Mediamanager.prototype.insertImageItemFlickr = Mediamanager_insertImageItemFlickr;
 
 
 /**
- * Show Mediamanager Element
+ * Display Media Manager element.
  * <br />
  * Beside simply showing the element, the display styles of 
  * all other elements be temporarily saved and populated into
- * func <em>checkOccurrences()</em> to ensure that the
+ * func {@link #checkOccurrences} to ensure that the
  * Media Manager content(s) container always adapt to the show/hide
  * display status of the elements. 
  * <br />
@@ -129,7 +130,7 @@ Mediamanager.prototype.insertImageItemFlickr = Mediamanager_insertImageItemFlick
  * layer (<em>myLocal</em>, <em>myFlickr</em>) is active.
  * 
  * @see #checkOccurrences
- * @param {string} elem actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Mediamanager_showElement (elem)
@@ -181,11 +182,11 @@ function Mediamanager_showElement (elem)
 	}
 }
 /**
- * Hide Mediamanager Element
+ * Hide Media Manager element.
  * <br />
  * Beside simply hiding the element, the display styles of 
  * all other elements be temporarily saved and populated into
- * func <em>checkOccurrences()</em> to ensure that the
+ * func {@link #checkOccurrences} to ensure that the
  * Media Manager content(s) container always adapt to the show/hide
  * display status of the elements.
  * <br />
@@ -193,7 +194,7 @@ function Mediamanager_showElement (elem)
  * layer (<em>myLocal</em>, <em>myFlickr</em>) is active.
  *
  * @see #checkOccurrences
- * @param {string} elem actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Mediamanager_hideElement (elem)
@@ -242,7 +243,7 @@ function Mediamanager_hideElement (elem)
 	}
 }
 /**
- * Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>). 
+ * Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>).
  *
  * @param {string} toShow Layer to display
  * @param {string} toHide Layer to hide
@@ -272,8 +273,8 @@ function Mediamanager_switchLayer (toShow, toHide)
  * @see #hideElement
  * @see #setCurrentElementStatusMyLocal
  * @see #setCurrentElementStatusMyFlickr
- * @param {string} elems actual element
- * @param {string} exception 
+ * @param {string} elem Current element
+ * @param {string} exception Track if we need to provide extra rows, see {@link #hideElement} and {@link #showElement}
  * @throws applyError on exception
  */
 function Mediamanager_checkOccurrences (elems, exception)
@@ -341,13 +342,53 @@ function Mediamanager_checkOccurrences (elems, exception)
 }
 
 /**
+ * Reapply event handler.
+ * <br />
+ * Because we often need to refresh the Media Manager, we reapply
+ * the relevant event handler on class/id basis.
+ *
+ * @throws applyError on exception
+ */
+function Mediamanager_applyBehaviour ()
+{
+	try {
+		Behaviour.reapply('input');
+		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_upload');
+		Behaviour.reapply('a.mm_delete');
+		Behaviour.reapply('a.mm_cast');
+		Behaviour.reapply('a.pager');
+		Behaviour.reapply('a.pager_myFlickr');
+		Behaviour.reapply('a.mm_insertImageItem');
+		Behaviour.reapply('a.mm_insertImageItemFlickr');
+		Behaviour.reapply('a.mm_insertDocumentItem');
+		Behaviour.reapply('a.mm_myLocal');
+		Behaviour.reapply('a.mm_myFlickr');
+		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_timeframe');
+		Behaviour.reapply('#mm_user');
+		Behaviour.reapply('#mm_photoset');
+		Behaviour.reapply('#mm_flickrtags');
+		Behaviour.reapply('#submit55');
+		Behaviour.reapply('.showMediamanagerElementMyLocal');
+		Behaviour.reapply('.hideMediamanagerElementMyLocal');
+		Behaviour.reapply('.showMediamanagerElementMyFlickr');
+		Behaviour.reapply('.hideMediamanagerElementMyFlickr');
+		Behaviour.reapply('.iHelpMediamanager');
+		Behaviour.reapply('.iHelpRemoveMediamanager');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
  * Collects the media manager form elements values as a hash
  * and returns it as a query string.
  * <br />
- * Global var <em>mm_limit</em> is filled in #checkOccurrences.
+ * var <em>mm_limit</em> is filled within {@link #checkOccurrences}.
  * <br />
- * Global var <em>mm_pagetype</em> comes from definition in the
- * html markup. Needed to decide if ioci  
+ * var <em>mm_pagetype</em> comes from definition in the
+ * html markup. Distinguish to show/hide action icon <em>UseAsPodcast</em>.
  * 
  * @see #invokeInputs
  * @see #invokePager
@@ -383,7 +424,10 @@ function Mediamanager_checkElemsMyLocal ()
 }
 
 /**
- * Check elements display status
+ * Save elements display status.
+ * <br />
+ * This method is used everytime there is a XMLHttpRequest Call.
+ * Counterpart of {@link #setCurrentElementStatusMyLocal}.
  *
  * @see #setCurrentElementStatusMyLocal
  * @throws applyError on exception
@@ -404,8 +448,13 @@ function Mediamanager_preserveElementStatusMyLocal ()
 }
 
 /**
- * Sets elements class and html correponding the previous status
+ * Sets elements display status.
+ * <br />
+ * This method is used everytime there is a XMLHttpRequest Response.
+ * It takes the received values from Counterpart method {@link #preserveElementStatusMyLocal}
+ * to reconstitute the Media Manager Elements display.
  *
+ * @see #preserveElementStatusMyLocal
  * @see #checkOccurrences
  * @throws applyError on exception
  */
@@ -447,7 +496,7 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 }
 
 /**
- * Toggle Extended View on Podcasts (show Details)
+ * Toggle podcast show/hide podast details.
  *
  * @param {var} elem Actual elem to toggle 
  * @throws applyError on exception
@@ -470,7 +519,7 @@ function Mediamanager_toggleExtendedView (elem)
 }
 
 /**
- * Show Podcast layer and fill media player
+ * Get element id and populate podcast layer.
  *
  * @see #loaderMediaToPodcast
  * @see #showResponseMediaToPodcast
@@ -506,7 +555,10 @@ function Mediamanager_mediaToPodcast (elem)
 }
 
 /**
- * Show Podcast layer and fill media player
+ * Populate podcast layer via given hidden value.
+ * <br />
+ * Used if the podcast layer is formerly populated and we get
+ * into form errors on submit of page.
  *
  * @see #loaderMediaToPodcast
  * @see #showResponseMediaToPodcast
@@ -541,11 +593,11 @@ function Mediamanager_mediaToPodcastOnLoad ()
 }
 
 /**
- * Get rid off podcast
+ * Discard podcast media item from page.
  *
  * @see #loaderMediaToPodcast
  * @see #showResponseDiscardPodcast
- * @param {var} elem Actual elem to get rid off 
+ * @param {var} elem Actual elem to delete
  * @throws applyError on exception
  */
 function Mediamanager_discardPodcast (elem)
@@ -572,11 +624,11 @@ function Mediamanager_discardPodcast (elem)
 }
 
 /**
- * Populate on JSON response
+ * Populate on XMLHttpRequest response.
  *
  * @see #mediaToPodcast
  * @see #mediaToPodcastOnLoad
- * @param {object} req JSON response
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
 function Mediamanager_showResponseMediaToPodcast(req)
@@ -599,10 +651,10 @@ function Mediamanager_showResponseMediaToPodcast(req)
 }
 
 /**
- * Populate on JSON response
+ * Populate on XMLHttpRequest response.
  *
  * @see #discardPodcast
- * @param {object} req JSON response
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
 function Mediamanager_showResponseDiscardPodcast(req)
@@ -620,12 +672,11 @@ function Mediamanager_showResponseDiscardPodcast(req)
 }
 
 /**
- * fires temporary actions while processing the ajax call
+ * Display indicator while XMLHttpRequest processing.
  *
  * @see #mediaToPodcast
  * @see #mediaToPodcastOnLoad
  * @see #discardPodcast
- * @param {object} req JSON response
  * @throws applyError on exception
  */
 function Mediamanager_loaderMediaToPodcast ()
@@ -640,8 +691,12 @@ function Mediamanager_loaderMediaToPodcast ()
 }
 
 /**
- * Set a delay for firing the ajax search invoke
- * special handling for tag search
+ * Initialize tag search.
+ * <br />
+ * Call {@link #invokeTags} with a delay of 1 second.
+ * <br />
+ * To avoid firing {@link #invokeTags} on every single keyboard
+ * stroke, we have to deal with the var keyPressDelay.
  * 
  * @see #invokeTags
  * @throws applyError on exception
@@ -654,7 +709,7 @@ function Mediamanager_initializeTagSearch ()
 			window.clearTimeout(this.keyPressDelay);
 		}
 		if ($('mm_tags').value >= '') {
-			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 800);
+			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTags()", 1000);
 		}
 	} catch (e) {
 		_applyError(e);
@@ -662,7 +717,10 @@ function Mediamanager_initializeTagSearch ()
 }
 
 /**
- * Fires the ajax request
+ * Display media items related to selected option(s).
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyLocal}.
  * 
  * @see #preserveElementStatusMyLocal
  * @see #checkElemsMyLocal
@@ -693,8 +751,12 @@ function Mediamanager_invokeInputs ()
 }
 
 /**
- * Fires the ajax request
+ * Display media items related to tag(s) input.
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyLocal}.
  * 
+ * @see #initializeTagSearch
  * @see #preserveElementStatusMyLocal
  * @see #checkElemsMyLocal
  * @see #loaderMyLocal
@@ -724,12 +786,21 @@ function Mediamanager_invokeTags ()
 }
 
 /**
- * Fires the ajax request
+ * Initialize pager.
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyLocal}.
+ * The function attribute <em>pager_page</em> is only needed (and used), when its 
+ * called within a popup to close ({@link Helper#closePopup}). That because we
+ * want to get back on exact the pager page on which we started the popup.
  * 
  * @see #preserveElementStatusMyLocal
  * @see #checkElemsMyLocal
  * @see #loaderMyLocal
  * @see #showResponseInvokeInputs
+ * @see Helper#closePopup
+ * @param {object} elem Current element to process
+ * @param {string} pager_page Saved pager page count
  * @throws applyError on exception
  */
 function Mediamanager_invokePager (elem, pager_page)
@@ -759,14 +830,16 @@ function Mediamanager_invokePager (elem, pager_page)
 }
 
 /**
- * Populate on JSON response
+ * Populate on XMLHttpRequest response.
+ * <br />
+ * Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).
  *
  * @see #setCurrentElementStatusMyLocal
  * @see #initializeTagSearch
  * @see #initializeTagSearchMyFlickr
  * @see #invokeInputs
  * @see #invokePager
- * @param {object} req JSON response
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
 function Mediamanager_showResponseInvokeInputs(req)
@@ -781,7 +854,7 @@ function Mediamanager_showResponseInvokeInputs(req)
 
 		$('hiddenFocus').focus();
 		
-		Helper.applyBehaviour();
+		Mediamanager.applyBehaviour();
 
 	} catch (e) {
 		_applyError(e);
@@ -789,13 +862,15 @@ function Mediamanager_showResponseInvokeInputs(req)
 }
 
 /**
- * Populate on JSON response
+ * Populate on XMLHttpRequest response.
+ * <br />
+ * Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).
  *
  * @see #setCurrentElementStatusMyLocal
  * @see #initializeTagSearch
  * @see #initializeTagSearchMyFlickr
  * @see #invokeTags
- * @param {object} req JSON response
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
 function Mediamanager_showResponseInvokeTagInputs(req)
@@ -815,7 +890,7 @@ function Mediamanager_showResponseInvokeTagInputs(req)
 		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
 		$('mm_tags').focus();
 			
-		Helper.applyBehaviour();
+		Mediamanager.applyBehaviour();
 		
 	} catch (e) {
 		_applyError(e);
@@ -823,13 +898,11 @@ function Mediamanager_showResponseInvokeTagInputs(req)
 }
 
 /**
- * fires temporary actions while processing the ajax call
+ * Display indicator while XMLHttpRequest processing.
  *
- * @see #setCurrentElementStatusMyLocal
- * @see #initializeTagSearch
+ * @see #invokeInputs
  * @see #invokePager
  * @see #invokeTags
- * @param {object} req JSON response
  * @throws applyError on exception
  */
 function Mediamanager_loaderMyLocal ()
@@ -844,10 +917,13 @@ function Mediamanager_loaderMyLocal ()
 }
 
 /**
- * Fires the ajax request to delete an item
+ * Delete media item.
+ * <br />
+ * When deleting completed {@link #invokeInputs} is called.
  * 
  * @see #loaderMyLocal
  * @see #invokeInputs
+ * @param {var} elem Actual elem to delete
  * @throws applyError on exception
  */
 function Mediamanager_deleteMediaItem (elem)
@@ -870,8 +946,12 @@ function Mediamanager_deleteMediaItem (elem)
 }
 
 /**
- * Fires the ajax request to delete an item
+ * Insert image media item into content form field.
+ * <br />
+ * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
  * 
+ * @see Forms#storeFocus
  * @see Helper#insertTags
  * @throws applyError on exception
  */
@@ -898,8 +978,12 @@ function Mediamanager_insertImageItem (elem)
 }
 
 /**
- * Fires the ajax request to delete an item
+ * Insert document media item into content form field.
+ * <br />
+ * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
  * 
+ * @see Forms#storeFocus
  * @see Helper#insertTags
  * @throws applyError on exception
  */
@@ -929,11 +1013,18 @@ function Mediamanager_insertDocumentItem (elem)
 }
 
 /**
- * Fires the ajax request
- * 
+ * Collects the media manager form elements values as a hash
+ * and returns it as a query string.
+ * <br />
+ * var <em>mm_limit</em> is filled within {@link #checkOccurrences}.
+ * <br />
+ * var <em>mm_pagetype</em> comes from definition in the
+ * html markup. Distinguish to show/hide action icon <em>UseAsPodcast</em>.
+ *
  * @see #invokeInputsMyFlickr
  * @see #invokePagerMyFlickr
  * @see #invokeTagsMyFlickr
+ * @see #checkOccurrences
  * @throws applyError on exception
  */
 function Mediamanager_checkElemsMyFlickr ()
@@ -960,7 +1051,10 @@ function Mediamanager_checkElemsMyFlickr ()
 }
 
 /**
- * Check elements display status
+ * Save elements display status.
+ * <br />
+ * This method is used everytime there is a XMLHttpRequest Call.
+ * Counterpart of {@link #setCurrentElementStatusMyFlickr}.
  * 
  * @see #setCurrentElementStatusMyFlickr
  * @throws applyError on exception
@@ -981,8 +1075,13 @@ function Mediamanager_preserveElementStatusMyFlickr ()
 }
 
 /**
- * Sets elements class and html correponding the previous status
- * 
+ * Sets elements display status.
+ * <br />
+ * This method is used everytime there is a XMLHttpRequest Response.
+ * It takes the received values from Counterpart method {@link #preserveElementStatusMyFlickr}
+ * to reconstitute the Media Manager Elements display.
+ *
+ * @see #preserveElementStatusMyFlickr
  * @see #checkOccurrences
  * @throws applyError on exception
  */
@@ -1023,8 +1122,11 @@ function Mediamanager_setCurrentElementStatusMyFlickr ()
 }
 
 /**
- * Fires the ajax request
- * 
+ * Display media items related to tag(s) input.
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyFlickr}.
+ *  
  * @see #preserveElementStatusMyFlickr
  * @see #checkElemsMyFlickr
  * @see #loaderMyFlickr
@@ -1054,8 +1156,10 @@ function Mediamanager_invokeTagsMyFlickr ()
 }
 
 /**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
+ * Display media items related to selected option(s).
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyFlickr}.
  * 
  * @see #preserveElementStatusMyFlickr
  * @see #checkElemsMyFlickr
@@ -1086,12 +1190,16 @@ function Mediamanager_invokeInputsMyFlickr ()
 }
 
 /**
- * Fires the ajax request
+ * Initialize pager.
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyFlickr}.
  * 
  * @see #preserveElementStatusMyFlickr
  * @see #checkElemsMyFlickr
  * @see #loaderMyFlickr
  * @see #showResponseInvokeInputsMyFlickr
+ * @param {object} elem Current element to process
  * @throws applyError on exception
  */
 function Mediamanager_invokePagerMyFlickr (elem)
@@ -1117,8 +1225,12 @@ function Mediamanager_invokePagerMyFlickr (elem)
 }
 
 /**
- * Set a delay for firing the ajax search invoke
- * special handling for tag search
+ * Initialize tag search.
+ * <br />
+ * Call {@link #invokeTagsMyFlickr} with a delay of 1 second.
+ * <br />
+ * To avoid firing {@link #invokeTagsMyFlickr} on every single keyboard
+ * stroke, we have to deal with the var keyPressDelay.
  * 
  * @see #invokeTagsMyFlickr
  * @throws applyError on exception
@@ -1131,7 +1243,7 @@ function Mediamanager_initializeTagSearchMyFlickr ()
 			window.clearTimeout(this.keyPressDelay);
 		}
 		if ($('mm_flickrtags').value >= '') {
-			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTagsMyFlickr()", 800);
+			this.keyPressDelay = window.setTimeout("Mediamanager.invokeTagsMyFlickr()", 1000);
 		}
 	} catch (e) {
 		_applyError(e);
@@ -1139,110 +1251,10 @@ function Mediamanager_initializeTagSearchMyFlickr ()
 }
 
 /**
- * Implements method of prototype class Mediamanager
- * Populate on JSON response
- *
- * @see #initializeTagSearch
- * @see #initializeTagSearchMyFlickr
- * @see #initializeUserMyFlickr
- * @see #invokePagerMyFlickr
- * @see #invokeInputsMyFlickr
- * @see Helper#applyBehaviour
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function Mediamanager_showResponseInvokeInputsMyFlickr(req)
-{
-	try {
-		$('column').innerHTML = req.responseText;
-		Element.show('lyMediamanagerMyFlickr');
-		Element.hide('lyMediamanagerMyLocal');
-		
-		// show option inputs
-		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
-		var mm_photoset = document.getElementsByClassName('mm_photoset');
-		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
-		Element.setStyle(mm_photoset[0], {visibility: 'visible'});	
-		
-		Mediamanager.setCurrentElementStatusMyFlickr();
-								
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
-		$('hiddenFocus').focus();
-		
-		Helper.applyBehaviour();	
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Populate on JSON response
- *
- * @see #initializeTagSearch
- * @see #initializeTagSearchMyFlickr
- * @see #invokeTagsMyFlickr
- * @see Helper#applyBehaviour
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function Mediamanager_showResponseInvokeTagsMyFlickr(req)
-{
-	try {
-		$('column').innerHTML = req.responseText;
-		Element.show('lyMediamanagerMyFlickr');
-		Element.hide('lyMediamanagerMyLocal');
-		
-		// show option inputs
-		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
-		var mm_photoset = document.getElementsByClassName('mm_photoset');
-		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
-		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
-		
-		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
-		$('mm_tags').setAttribute("autocomplete","off");
-		$('mm_flickrtags').setAttribute("autocomplete","off");
-		
-		Mediamanager.setCurrentElementStatusMyFlickr();
-								
-		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
-		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
-		
-		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
-		$('mm_flickrtags').focus();
-		
-		Helper.applyBehaviour();
-
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * fires temporary actions while processing the ajax call
- *
- * @see #invokeInputsMyFlickr
- * @see #invokePagerMyFlickr
- * @see #invokeTagsMyFlickr
- * @param {object} req JSON response
- * @throws applyError on exception
- */
-function Mediamanager_loaderMyFlickr ()
-{
-	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[1];
-		Element.hide(hideContentTable);
-		Element.show('indicator_flickr');
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Implements method of prototype class Mediamanager
- * Fires the ajax request
+ * Prepare display with given user.
+ * <br />
+ * First of all we preserve the current display element status,
+ * then fill var <em>elems</em> with value hash from {@link #checkElemsMyFlickr}.
  * 
  * @see #preserveElementStatusMyFlickr
  * @see #checkElemsMyFlickr
@@ -1272,8 +1284,116 @@ function Mediamanager_initializeUserMyFlickr ()
 }
 
 /**
- * Fires the ajax request to delete an item
+ * Populate on XMLHttpRequest response.
+ * <br />
+ * Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).
+ *
+ * @see #setCurrentElementStatusMyFlickr
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #initializeUserMyFlickr
+ * @see #invokePagerMyFlickr
+ * @see #invokeInputsMyFlickr
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseInvokeInputsMyFlickr(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		Element.show('lyMediamanagerMyFlickr');
+		Element.hide('lyMediamanagerMyLocal');
+		
+		// show option inputs
+		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
+		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
+		Element.setStyle(mm_photoset[0], {visibility: 'visible'});	
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+								
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		$('hiddenFocus').focus();
+		
+		Mediamanager.applyBehaviour();	
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on XMLHttpRequest response.
+ * <br />
+ * Re-observe the tag search on both layers (<em>myLocal</em>, <em>myFlickr</em>).
+ *
+ * @see #setCurrentElementStatusMyFlickr
+ * @see #initializeTagSearch
+ * @see #initializeTagSearchMyFlickr
+ * @see #invokeInputsMyFlickr
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseInvokeTagsMyFlickr(req)
+{
+	try {
+		$('column').innerHTML = req.responseText;
+		Element.show('lyMediamanagerMyFlickr');
+		Element.hide('lyMediamanagerMyLocal');
+		
+		// show option inputs
+		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
+		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
+		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
+		
+		// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791
+		$('mm_tags').setAttribute("autocomplete","off");
+		$('mm_flickrtags').setAttribute("autocomplete","off");
+		
+		Mediamanager.setCurrentElementStatusMyFlickr();
+								
+		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
+		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
+		
+		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
+		$('mm_flickrtags').focus();
+		
+		Mediamanager.applyBehaviour();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Display indicator while XMLHttpRequest processing.
+ *
+ * @see #invokeInputsMyFlickr
+ * @see #invokePagerMyFlickr
+ * @see #invokeTagsMyFlickr
+ * @throws applyError on exception
+ */
+function Mediamanager_loaderMyFlickr ()
+{
+	try {
+		var hideContentTable = document.getElementsByClassName('mm_content')[1];
+		Element.hide(hideContentTable);
+		Element.show('indicator_flickr');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert image media item into content form field.
+ * <br />
+ * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
+ * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
  * 
+ * @see Forms#storeFocus
  * @see Helper#insertTags
  * @throws applyError on exception
  */

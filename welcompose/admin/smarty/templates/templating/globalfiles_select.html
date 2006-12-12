@@ -96,7 +96,7 @@ var selection			= '{$session.selection}';
 <td><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n Download}"></a></td>
 <td><a class="edit" href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_file.id}" class="outer">
 <td colspan="7">
