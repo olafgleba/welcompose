@@ -740,11 +740,16 @@ port=3306
 				</figure>
 				
 				<para>
-					Tauschen Sie nun die kompletten Inhalte der
-					Konfigurationsdatei durch die folgenden Einstellung aus:
+					Tauschen Sie nun den kompletten Inhalt der
+					Konfigurationsdatei durch eine der folgenden
+					Konfigurationen aus. Achten Sie darauf, die richtige
+					Version auszuwählen!
 				</para>
 				
-				<programlisting language="ini"><![CDATA[
+				<example>
+					<title>httpd.conf für Apache 2.2 und PHP 5.2</title>
+					
+					<programlisting language="ini"><![CDATA[
 ThreadsPerChild 250
 MaxRequestsPerChild  0
 ServerRoot "C:/Programme/Apache Software Foundation/Apache2.2"
@@ -813,7 +818,8 @@ PHPIniDir "C:\\Programme\\PHP\\"
 LoadModule php5_module "C:\Programme\PHP\php5apache2_2.dll"
 #END PHP INSTALLER EDITS - REMOVE ONLY ON UNINSTALL
 ]]></programlisting>
-
+			</example>
+			
 			<para>
 				Verwenden Sie ein anderes Verzeichnis als
 				<filename>C:\Webserver</filename>, verwenden Sie die
@@ -1023,6 +1029,13 @@ arg_separator.output = "&amp;"
 					die PHP-Konfiguration auszulesen (siehe <xref
 					linkend="good_to_know.phpinfo"/>). Sie können die Datei
 					über <filename>http://localhost/info.php</filename> aufrufen.
+				</para>
+				
+				<para>
+					War die Installation erfolgreich, können Sie jetzt
+					Welcompose nach <filename>C:\Webserver</filename>
+					respektive in das von Ihnen gewählte Verzeichnis
+					installieren.
 				</para>
 				
 				<tip>
