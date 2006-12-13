@@ -293,7 +293,7 @@ public function photosSearch ($search_params)
 	}
 	
 	// append api key to list of flickr params
-	$flickr_params['api_key'] = new XML_RPC_Value($this->_api_key);
+	$flickr_params['api_key'] = $this->_api_key;
 	
 	// send flickr request
 	$response = $this->flickr_client->sendFlickrRequest('flickr.photos.search',
