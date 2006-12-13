@@ -26,33 +26,31 @@ class Media_Flickr {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
 	private static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 *
 	 * @var object
 	 */
 	public $base = null;
 	
 	/**
 	 * Flickr API Key
+	 *
 	 * @var string
 	 */
 	public $_api_key = null;
 	
 	/**
-	 * XML_RPC_Client instance
+	 * Flickr client instance
+	 *
 	 * @var object
 	 */
-	public $rpc_client = null;
-	
-	/**
-	 * Request timeout in seconds for flickr request
-	 * @var int
-	 */
-	protected $_timeout = 10;
+	public $flickr_client = null;
 	
 /**
  * Start instance of base class, load configuration and
@@ -74,15 +72,8 @@ protected function __construct()
 			throw new Media_FlickrException("No Flickr API key found");
 		}
 		
-		// load XML_RPC_Client class
-		require_once('XML/RPC.php');
-		
-		// create new xml rpc client
-		$this->rpc_client = new XML_RPC_Client('/services/xmlrpc', 'api.flickr.com');
-		if (!($this->rpc_client instanceof XML_RPC_Client)) {
-			throw new Media_FlickrException("Unable to start XML-RPC client");
-		}
-		
+		// create new flickrClient instance
+		$this->flickr_client = new flickrClient($this->base->_conf['flickr']['cache_dir']);
 	} catch (Exception $e) {
 		// trigger error
 		printf('%s on Line %u: Unable to start class. Reason: %s.', $e->getFile(),
@@ -125,31 +116,18 @@ public function peopleFindByUsername ($username)
 		throw new Media_FlickrException("Invalid username supplied");
 	}
 	
-	// prepare message struct
-	$struct = new XML_RPC_Value(array(
-		'api_key' => new XML_RPC_Value($this->_api_key),
-		'username' => new XML_RPC_Value($username)
-	), 'struct');
+	// prepare args
+	$args = array(
+		'api_key' => $this->_api_key,
+		'username' => $username
+	);
 	
-	// create message
-	$message = new XML_RPC_Message('flickr.people.findByUsername', array($struct));
-	
-	// send the message
-	$response = $this->rpc_client->send($message, $this->_timeout);
-	
-	// test response
-	if (!($response instanceof XML_RPC_Response)) {
-		throw new Media_FlickrException(strip_tags($this->rpc_client->errstring));
-	}
-	
-	// test if flickr request was successful
-	if ($response->faultCode() != 0) {
-		$fault_string = strip_tags(utf8_decode($response->faultString()));
-		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
-	}
+	// send flickr request
+	$response = $this->flickr_client->sendFlickrRequest('flickr.people.findByUsername',
+		$args);
 	
 	// get xml from response and pipe it to simplexml
-	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
+	$sx = simplexml_load_string($response);
 	
 	// get nsid and username from response
 	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
@@ -185,31 +163,18 @@ public function urlsGetUserPhotos ($user_id)
 		throw new Media_FlickrException("Invalid nsid supplied");
 	}
 	
-	// prepare message struct
-	$struct = new XML_RPC_Value(array(
-		'api_key' => new XML_RPC_Value($this->_api_key),
-		'user_id' => new XML_RPC_Value($user_id)
-	), 'struct');
+	// prepare args 
+	$args = array(
+		'api_key' => $this->_api_key,
+		'user_id' => $user_id
+	);
 	
-	// create message
-	$message = new XML_RPC_Message('flickr.urls.getUserPhotos', array($struct));
-	
-	// send the message
-	$response = $this->rpc_client->send($message, $this->_timeout);
-	
-	// test response
-	if (!($response instanceof XML_RPC_Response)) {
-		throw new Media_FlickrException(strip_tags($this->rpc_client->errstring));
-	}
-	
-	// test if flickr request was successful
-	if ($response->faultCode() != 0) {
-		$fault_string = strip_tags(utf8_decode($response->faultString()));
-		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
-	}
+	// send flickr request
+	$response = $this->flickr_client->sendFlickrRequest('flickr.urls.getUserPhotos',
+		$args);
 	
 	// get xml from response and pipe it to simplexml
-	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
+	$sx = simplexml_load_string($response);
 	
 	// get nsid and url from response
 	$user_id = Base_Cnc::filterRequest($this->flickrValue($sx['nsid']),
@@ -267,29 +232,29 @@ public function photosSearch ($search_params)
 					if (empty($_value) || !preg_match(WCOM_REGEX_FLICKR_NSID, $_value)) {
 						throw new Media_FlickrException("Invalid nsid supplied");
 					}
-					$flickr_params[$_key] = new XML_RPC_Value((string)$_value);
+					$flickr_params[$_key] = (string)$_value;
 				break;
 			case 'tags':
 			case 'text':
 			case 'extra':
-					$flickr_params[$_key] = new XML_RPC_Value(strip_tags((string)$_value));
+					$flickr_params[$_key] = strip_tags((string)$_value);
 				break;
 			case 'per_page':
 			case 'page':
-					$flickr_params[$_key] = new XML_RPC_Value((int)$_value);
+					$flickr_params[$_key] = (int)$_value;
 				break;
 			case 'tag_mode':
-					$flickr_params[$_key] = new XML_RPC_Value((($_value == 'all') ? 'all' : 'any'));
+					$flickr_params[$_key] = (($_value == 'all') ? 'all' : 'any');
 				break;
 			case 'timeframe_upload':
 					$dates = $HELPER->datesForTimeframe($_value);
-					$flickr_params['min_upload_date'] = new XML_RPC_Value($dates['timeframe_start']);
-					$flickr_params['max_upload_date'] = new XML_RPC_Value($dates['timeframe_end']);
+					$flickr_params['min_upload_date'] = $dates['timeframe_start'];
+					$flickr_params['max_upload_date'] = $dates['timeframe_end'];
 				break;
 			case 'timeframe_taken':
 					$dates = $HELPER->datesForTimeframe($_value);
-					$flickr_params['min_taken_date'] = new XML_RPC_Value($dates['timeframe_start']);
-					$flickr_params['max_taken_date'] = new XML_RPC_Value($dates['timeframe_end']);
+					$flickr_params['min_taken_date'] = $dates['timeframe_start'];
+					$flickr_params['max_taken_date'] = $dates['timeframe_end'];
 				break;
 			case 'sort':
 					switch ((string)$_value) {
@@ -301,7 +266,7 @@ public function photosSearch ($search_params)
 						case 'interestingness-desc':
 						case 'interestingness-asc':
 						case 'relevance':
-								$flickr_params[$_key] = new XML_RPC_Value((string)$_value);
+								$flickr_params[$_key] = (string)$_value;
 							break;
 					}
 				break;
@@ -312,36 +277,22 @@ public function photosSearch ($search_params)
 						case 3:
 						case 4:
 						case 5:
-								$flickr_params[$_key] = new XML_RPC_Value((int)$_value);
+								$flickr_params[$_key] = (int)$_value;
 							break;
 					}
 				break;
 		}
 	}
 	
-	// prepare message struct
+	// append api key to list of flickr params
 	$flickr_params['api_key'] = new XML_RPC_Value($this->_api_key);
-	$struct = new XML_RPC_Value($flickr_params, 'struct');
 	
-	// create message
-	$message = new XML_RPC_Message('flickr.photos.search', array($struct));
-	
-	// send the message
-	$response = $this->rpc_client->send($message, $this->_timeout);
-	
-	// test response
-	if (!($response instanceof XML_RPC_Response)) {
-		throw new Media_FlickrException(strip_tags($this->rpc_client->errstring));
-	}
-	
-	// test if flickr request was successful
-	if ($response->faultCode() != 0) {
-		$fault_string = strip_tags(utf8_decode($response->faultString()));
-		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
-	}
+	// send flickr request
+	$response = $this->flickr_client->sendFlickrRequest('flickr.photos.search',
+		$flickr_params);
 	
 	// get xml from response and pipe it to simplexml
-	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
+	$sx = simplexml_load_string($response);
 	
 	// get metadata from response
 	$page = Base_Cnc::filterRequest($this->flickrValue($sx['page']), WCOM_REGEX_FLICKR_NSID);
@@ -390,31 +341,18 @@ public function photosetsGetList ($user_id)
 		throw new Media_FlickrException("Invalid nsid supplied");
 	}
 	
-	// prepare message struct
-	$struct = new XML_RPC_Value(array(
-		'api_key' => new XML_RPC_Value($this->_api_key),
-		'user_id' => new XML_RPC_Value($user_id)
-	), 'struct');
+	// prepare args
+	$args = array(
+		'api_key' => $this->_api_key,
+		'user_id' => $user_id
+	);
 	
-	// create message
-	$message = new XML_RPC_Message('flickr.photosets.getList', array($struct));
-	
-	// send the message
-	$response = $this->rpc_client->send($message, $this->_timeout);
-	
-	// test response
-	if (!($response instanceof XML_RPC_Response)) {
-		throw new Media_FlickrException(strip_tags($this->rpc_client->errstring));
-	}
-	
-	// test if flickr request was successful
-	if ($response->faultCode() != 0) {
-		$fault_string = strip_tags(utf8_decode($response->faultString()));
-		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
-	}
+	// send flickr request
+	$response = $this->flickr_client->sendFlickrRequest('flickr.photosets.getList',
+		$args);
 	
 	// get xml from response and pipe it to simplexml
-	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
+	$sx = simplexml_load_string($response);
 	
 	// get metadata from response
 	$cancreate = Base_Cnc::filterRequest($this->flickrValue($sx['cancreate']), WCOM_REGEX_ZERO_OR_ONE);
@@ -469,45 +407,33 @@ public function photosetsGetPhotos ($photoset_id, $extras = null, $privacy_filte
 		throw new Media_FlickrException("Invalid input for parameter page supplied");
 	}
 	
-	// prepare message struct
-	$options = array();
-	$options['api_key'] = new XML_RPC_Value($this->_api_key);
+	// prepare args
+	$args = array();
+	$args['api_key'] = $this->_api_key;
+	
+	// append option args
 	if (!is_null($photoset_id)) {
-		$options['photoset_id'] = new XML_RPC_Value($photoset_id);
+		$args['photoset_id'] = $photoset_id;
 	}
 	if (!is_null($extras)) {
-		$options['extras'] = new XML_RPC_Value($extras);
+		$args['extras'] = $extras;
 	}
 	if (!is_null($privacy_filter)) {
-		$options['privacy_filter'] = new XML_RPC_Value($privacy_filter);
+		$args['privacy_filter'] = $privacy_filter;
 	}
 	if (!is_null($per_page)) {
-		$options['per_page'] = new XML_RPC_Value($per_page);
+		$args['per_page'] = $per_page;
 	}
 	if (!is_null($page)) {
-		$options['page'] = new XML_RPC_Value($page);
-	}
-	$struct = new XML_RPC_Value($options, 'struct');
-	
-	// create message
-	$message = new XML_RPC_Message('flickr.photosets.getPhotos', array($struct));
-	
-	// send the message
-	$response = $this->rpc_client->send($message, $this->_timeout);
-	
-	// test response
-	if (!($response instanceof XML_RPC_Response)) {
-		throw new Media_FlickrException(strip_tags($this->rpc_client->errstring));
+		$args['page'] = $page;
 	}
 	
-	// test if flickr request was successful
-	if ($response->faultCode() != 0) {
-		$fault_string = strip_tags(utf8_decode($response->faultString()));
-		throw new Media_FlickrException("Flickr request failed, reason: ".$fault_string);
-	}
+	// send flickr request
+	$response = $this->flickr_client->sendFlickrRequest('flickr.photosets.getPhotos',
+		$args);
 	
 	// get xml from response and pipe it to simplexml
-	$sx = simplexml_load_string(XML_RPC_decode($response->value()));
+	$sx = simplexml_load_string($response);
 	
 	// get metadata from response
 	$id = Base_Cnc::filterRequest($this->flickrValue($sx['id']), WCOM_REGEX_NUMERIC);
@@ -624,5 +550,328 @@ protected function flickrValue ($value)
 }
 
 class Media_FlickrException extends Exception { }
+
+class flickrClient {
+	
+	/**
+	 * Container for the PEAR Cache_Lite object
+	 * 
+	 * @var object
+	 */
+	protected $cache = null;
+	
+	/**
+	 * Whether the args and other input is encoded using
+	 * ISO-8859-1 or not. Then it will be automatically
+	 * converted to UTF-8.
+	 * 
+	 * @var bool
+	 */
+	protected $_iso_input = true;
+	
+	/**
+	 * Flickr API endpoint URL
+	 * 
+	 * @var string
+	 */
+	protected $_endpoint = 'http://api.flickr.com/services/rest/';
+	
+	/**
+	 * Options array passed to the constructor of HTTP_Request
+	 *
+	 * @var array 
+	 */
+	protected $_http_request_options = array(
+		'method' => 'GET',
+		'http' => '1.1'
+	);
+	
+	/**
+	 * Whether to cache the flickr responses or not
+	 *
+	 * @var bool
+	 */
+	protected $_cache = true;
+	
+	/**
+	 * Directory where to cache the flickr responses
+	 *
+	 * @var string
+	 */
+	protected $_cache_dir = null;
+	
+	/**
+	 * Lifetime of the flickr cache in seconds
+	 *
+	 * @var int
+	 */
+	protected $_cache_lifetime = 1800;
+
+/**
+ * Creates new flickrClient instance. Takes the cache dir
+ * to use as first argument.
+ *
+ * @throws flickrClientException
+ * @param string Path to cache dir
+ */
+public function __construct ($cache_dir)
+{
+	// input check
+	if (empty($cache_dir) || !is_scalar($cache_dir)) {
+		throw new flickrClientException("cache_dir must be a non-empty scalar value");
+	}
+	
+	// set new cache dir
+	if (!is_dir($cache_dir)) {
+		throw new flickrClientException("Flickr cache dir does not exist");
+	}
+	if (!is_writable($cache_dir)) {
+		throw new flickrClientException("Flickr cache dir is not writable");
+	}
+	$this->_cache_dir = $cache_dir;
+	
+	// load PEAR's HTTP_Request
+	require('HTTP/Request.php');
+}
+
+/** 
+ * Sends flickr request. Takes the API method as first argument, a
+ * key=>value with args as second argument. Returns the message in REST
+ * format.
+ *
+ * @throws flickrClientException
+ * @param string Method name
+ * @param array Method args
+ * @return string
+ */
+public function sendFlickrRequest ($method, $args)
+{
+	// input check
+	if (empty($method) || !is_scalar($method)) {
+		throw new flickrClientException("Method must be a non-empty scalar value");
+	}
+	if (!is_array($args)) {
+		throw new flickrClientException("Args must be an array");
+	}
+	
+	// add method name to the list of args 
+	$args['method'] = $method;
+	
+	// sort the args so that we don't get a cache miss because of different
+	// parameter ordering
+	ksort($args);
+	
+	// create new HTTP_Request object
+	$flickr_request = new HTTP_Request($this->_endpoint, $this->_http_request_options);
+	
+	// add args to query string
+	foreach ($args as $_key => $_value) {
+		// encode key and value if required
+		if ($this->_iso_input) {
+			$_key = utf8_encode($_key);
+			$_value = utf8_encode($_value);
+		}
+		
+		// add arg to query string
+		$flickr_request->addQueryString($_key, $_value);
+	}
+	
+	// if we don't cache or if there's no cached response we have to send
+	// a new request
+	if (!$this->_cache || !$this->flickrRequestIsCached($flickr_request)) {
+		
+		// send request
+		$response = $flickr_request->sendRequest();
+		if ($response instanceof PEAR_Error) {
+			throw new flickrClientException("Unable to send flickr request");
+		}
+		
+		// get the response body
+		$flickr_response = $flickr_request->getResponseBody();
+		
+		// test the response body for errors
+		if ($flickr_request->getResponseCode() != '200' || !$this->flickrRequestWasSuccessfull($flickr_response)) {
+			$error_msg = $this->getFlickrRequestError($flickr_response);
+			throw new flickrClientException("Flickr request failed ".$error_msg);
+		}
+		
+		// cache the response body if required
+		if ($this->_cache) {
+			$this->cacheFlickrResponse($flickr_request, $flickr_response);
+		}
+	} else {
+		// get cached flickr response
+		$flickr_response = $this->getCachedFlickrRequest($flickr_request);
+	}
+	
+	//  extract xml payload
+	$sx = simplexml_load_string($flickr_response);
+	$payload = $sx->xpath('/rsp/*');
+	
+	// turn the payload to xml again and return it
+	return $payload[0]->asXML();
+}
+
+/**
+ * Tests if flickr request was successfull. Takes the
+ * response body as first argument. Returns bool.
+ * 
+ * @throws flickrClientException
+ * @return 
+ */
+protected function flickrRequestWasSuccessfull ($response)
+{
+	if (empty($response) || !is_scalar($response)) {
+		throw new flickrClientException("Response must be a non-empty scalar value");
+	}
+	
+	// create simplexml object from flickr response
+	$sx = simplexml_load_string($response);
+	
+	// evaluate result
+	if ((string)$sx['stat'] == 'ok') {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Extracts error message from flickr response. Returns string.
+ *
+ * @throws flickrClientException
+ * @param string Response body
+ * @return string
+ */
+protected function getFlickrRequestError ($response)
+{
+	if (empty($response) || !is_scalar($response)) {
+		throw new flickrClientException("Response must be a non-empty scalar value");
+	}
+	
+	// create simplexml object from flickr response
+	$sx = simplexml_load_string($response);
+	
+	// extract error message
+	$error_msg = htmlspecialchars((string)$sx->err['msg']);
+	
+	// return error message
+	return $error_msg;
+}
+
+/**
+ * Tests if there's a cached result for the current request.
+ * Takes the HTTP_Request object (where the cache id will be
+ * extracted from) as first argument. Returns bool.
+ *
+ * @throws flickrClientException
+ * @param object HTTP_Request object
+ * @return bool
+ */
+protected function flickrRequestIsCached ($http_request_object)
+{
+	// input check
+	if (!($http_request_object instanceof HTTP_Request)) {
+		throw new flickrClientException("http_request_object is not an HTTP_Client instance");
+	}
+	
+	// init PEAR's Cache_Lite
+	$this->loadCacheLite();
+	
+	// get cached flickr request
+	$result = $this->getCachedFlickrRequest($http_request_object);
+	
+	// evaluate the result
+	if ($result === false) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Returns cached response body from cache. Taktes the HTTP_Request
+ * object (where the cache id will be extracted from) as first
+ * argument. Returns string on success or false on failure.
+ * 
+ * Test the availability of the cache file using
+ * flickrClient::flickrRequestIsCached before using this method.  
+ *
+ * @throws flickrClientException
+ * @param object HTTP_Request object
+ * @return mixed 
+ */
+protected function getCachedFlickrRequest ($http_request_object)
+{
+	// input check
+	if (!($http_request_object instanceof HTTP_Request)) {
+		throw new flickrClientException("http_request_object is not an HTTP_Client instance");
+	}
+	
+	// init PEAR's Cache_Lite
+	$this->loadCacheLite();
+	
+	return $this->cache->get($http_request_object->getUrl(null));
+}
+
+/**
+ * Caches the Flickr response as suppliedy by the http_response body.
+ * Takes the HTTP_Request object as first argument, the response body
+ * as second argument. Returns true on success.
+ * 
+ * @throws flickrClientException
+ * @param object HTTP_Requst object
+ * @param string Response body
+ * @return bool
+ */
+protected function cacheFlickrResponse ($http_request_object, $http_response_body)
+{
+	// input check
+	if (!($http_request_object instanceof HTTP_Request)) {
+		throw new flickrClientException("http_request_object is not an HTTP_Client instance");
+	}
+	if (!is_scalar($http_response_body)) {
+		throw new flickrClientException("http_response_body is not scalar");
+	}
+	
+	// init PEAR's Cache_Lite
+	$this->loadCacheLite();
+	
+	// save response body to cache
+	if ($this->cache->save($http_response_body, $http_request_object->getUrl(null)) === false) {
+		throw new flickrClientException("Failed to cache the response body");
+	}
+	
+	return true;
+}
+
+/**
+ * Creates new Cache_Lite instance if there isn't one yet.
+ */
+private function loadCacheLite ()
+{
+	if (!is_a($this->cache, 'Cache_Lite')) {
+		// load Cache_Lite package
+		require ("Cache/Lite.php");
+		
+		// prepare cache dir
+		if (substr($this->_cache_dir, -1, 1) != '/') {
+			$this->_cache_dir = $this->_cache_dir.'/';
+		}
+		
+		// prepare options array
+		$options = array(
+			'cacheDir' => $this->_cache_dir,
+			'lifeTime' => $this->_cache_lifetime
+		);
+		
+		// create new Cache_Lite instance
+		$this->cache = new Cache_Lite($options);
+	}
+}
+
+}
+
+class flickrClientException extends Exception { }
 
 ?>

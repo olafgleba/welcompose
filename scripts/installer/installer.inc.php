@@ -91,6 +91,7 @@ class Setup_PackageExtractor {
 		'/files/global_files',
 		'/tmp',
 		'/tmp/captchas',
+		'/tmp/flickr_cache',
 		'/tmp/installer',
 		'/tmp/updater'
 	);

@@ -57,6 +57,7 @@ blog_archive_month_start =
 global_template_url = 
 
 [flickr]
+cache_dir = 
 api_key = 
 
 ; */ ?>

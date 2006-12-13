@@ -57,6 +57,7 @@ blog_archive_month_start = "{$configuration.root_www}/index.php?project_name=<pr
 global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&project=<project_name>"
 
 [flickr]
+cache_dir = "{$configuration.root_disk}/tmp/flickr_cache/"
 api_key = ""
 
 ; */ ?>

@@ -58,6 +58,7 @@ blog_archive_month_start = "/welcompose/trunk/welcompose/<posting_year_added>/<p
 global_template_url = "/welcompose/trunk/welcompose/global_template.php?name=<global_file_name>&project=<project_name>"
 
 [flickr]
+cache_dir = "/www/welcompose/trunk/welcompose/tmp/flickr_cache"
 api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"
 
 ; */ ?>
