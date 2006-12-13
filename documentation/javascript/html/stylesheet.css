@@ -9,6 +9,10 @@ font: 95% Arial, Helvetica, sans-serif;
 border: 0 none;
 }
 
+body b a {
+font-size: 108%;
+margin-left: 7px;
+}
 pre {
 display: block;
 padding: 10px;
@@ -23,9 +27,8 @@ pre code {
 font: 1.2em monospace;
 }
 
-table, frame {
+table {
 border: 0 none;
-
 }
 table td {
 padding: 4px;

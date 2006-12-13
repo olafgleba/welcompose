@@ -78,10 +78,7 @@ function asd() {
 <h4>Summary</h4>
 <p>
 	
-		Defines event handling through thirdparty lib Behaviour. Used for all content pages which contains popups exclude the mediamanager.  
- 
- <BR/><BR/><B>Version: </B>$Id: wcom.core.js 673 2006-11-23 21:46:53Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
- <BR/>
+		Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager.<BR/><BR/>
 	
 </p>
 
@@ -96,9 +93,9 @@ function asd() {
 
         <pre class="sourceview"><span class="comment">/**
  * Project: Welcompose
- * File: wcom.events.js
+ * File: wcom.events.standard.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
@@ -110,17 +107,14 @@ function asd() {
  *
  * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
  *
- * <span class="attrib">@copyright</span> 2004-2005 creatics media.systems
+ * <span class="attrib">@copyright</span> 2006 creatics media.systems
  * <span class="attrib">@author</span> Olaf Gleba
  * <span class="attrib">@package</span> Welcompose
  * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */</span>
  
 <span class="comment">/** 
- * <span class="attrib">@fileoverview</span> Defines event handling through thirdparty lib Behaviour. Used for all content pages which contains popups exclude the mediamanager.  
- * 
- * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
- * <span class="attrib">@version</span> $Id: wcom.core.js 673 2006-11-23 21:46:53Z olaf $ 
+ * <span class="attrib">@fileoverview</span> Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager. 
  */</span>
 
 <span class="comment">/**
@@ -211,18 +205,6 @@ var definitions = {
 			<span class="reserved">return</span> false;
 		}
 	},
-	<span class="literal">'.hideTableRow'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Tables.hideTableRow(<span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.showTableRow'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Tables.showTableRow(<span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
 	<span class="literal">'input'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
 			<span class="reserved">if</span> (<span class="reserved">this</span>.type != <span class="literal">'reset'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'submit'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'button'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'checkbox'</span>) {
@@ -258,6 +240,54 @@ var definitions = {
 			Helper.validate(<span class="reserved">this</span>);
 		}
 	},
+	<span class="literal">'.confirmDelNav'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelNavAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelTplType'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelTplTypeAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelTplSets'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelTplSetsAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelTplGlobal'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelTplGlobalAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelTplGlobalfile'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelTplGlobalfileAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.changeBlogCommentStatus'</span> : <span class="reserved">function</span>(el){
+		el.onchange = <span class="reserved">function</span>(){
+			Helper.changeBlogCommentStatus(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.hideTableRow'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Tables.hideTableRow(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.showTableRow'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Tables.showTableRow(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
 	<span class="literal">'.act_internalLink'</span> : <span class="reserved">function</span>(el){
 		el.onclick = <span class="reserved">function</span>(){
 			Helper.launchPopup(<span class="literal">'740'</span>,<span class="literal">'634'</span>,<span class="literal">'pages_links_select'</span>,<span class="literal">'pages_internal_links'</span>, <span class="reserved">this</span>);
@@ -285,18 +315,6 @@ var definitions = {
 	<span class="literal">'.act_internalLinkStructuralTemplates'</span> : <span class="reserved">function</span>(el){
 		el.onclick = <span class="reserved">function</span>(){
 			Helper.launchPopup(<span class="literal">'420'</span>,<span class="literal">'634'</span>,<span class="literal">'structuraltemplates_links_select'</span>,<span class="literal">'structuraltemplates_internal_links'</span>, <span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.confirmDelNav'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Helper.confirmDelNavAction(<span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.changeBlogCommentStatus'</span> : <span class="reserved">function</span>(el){
-		el.onchange = <span class="reserved">function</span>(){
-			Helper.changeBlogCommentStatus(<span class="reserved">this</span>);
 			<span class="reserved">return</span> false;
 		}
 	},
@@ -395,6 +413,6 @@ Behaviour.addLoadEvent(Init.load);</pre>
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
 </body>
 </html>

@@ -201,6 +201,23 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TR BGCOLOR="white" CLASS="TableRowColor">
       <TD ALIGN="right" VALIGN="top" WIDTH="1%">
 	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#applyBehaviour">applyBehaviour</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Reapply event handler.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
 	    <CODE>&nbsp;Object</CODE>
 	 </FONT>
       </TD>
@@ -243,7 +260,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#checkOccurrences">checkOccurrences</A></B>(&lt;string&gt; elems, &lt;string&gt; exception)
+	       <A HREF="#checkOccurrences">checkOccurrences</A></B>(elems, &lt;string&gt; exception)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -689,7 +706,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Populate on XMLHttpRequest Response.
+	 Populate on XMLHttpRequest response.
       </TD>
    </TR>
 
@@ -774,7 +791,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Populate on XMLHttpRequest Response.
+	 Populate on XMLHttpRequest response.
       </TD>
    </TR>
 
@@ -912,6 +929,31 @@ Mediamanager</H3>
 
 <!-- One single method detail entry -->
 
+   <A NAME="applyBehaviour"><!-- --></A>
+   <H3>applyBehaviour</H3>
+   <PRE>void <B>applyBehaviour</B>()</PRE>
+   
+      <UL>Reapply event handler.
+ <br />
+ Because we often need to refresh the Media Manager, we reapply
+ the relevant event handler on class/id basis.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
    <A NAME="checkElemsMyFlickr"><!-- --></A>
    <H3>checkElemsMyFlickr</H3>
    <PRE>Object <B>checkElemsMyFlickr</B>()</PRE>
@@ -970,7 +1012,7 @@ Mediamanager</H3>
 
    <A NAME="checkOccurrences"><!-- --></A>
    <H3>checkOccurrences</H3>
-   <PRE>void <B>checkOccurrences</B>(&lt;string&gt; elems, &lt;string&gt; exception)</PRE>
+   <PRE>void <B>checkOccurrences</B>(elems, &lt;string&gt; exception)</PRE>
    
       <UL>Adjust height of Media Manager content(s) div.
  <br />
@@ -984,10 +1026,10 @@ Mediamanager</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elems</CODE> -  actual element  
+     <UL><CODE>exception</CODE> -  Track if we need to provide extra rows, see <a href="#hideElement">hideElement()</a> and <a href="#showElement">showElement()</a>  
       </UL> 
    
-     <UL><CODE>exception</CODE> -  Track if we need to provide extra rows, see <a href="#hideElement">hideElement()</a> and <a href="#showElement">showElement()</a>  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -1088,7 +1130,7 @@ Mediamanager</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  actual element  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -1328,7 +1370,7 @@ Mediamanager</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element to process  
+     <UL><CODE>elem</CODE> -  Current element to process  
       </UL> 
    
      <UL><CODE>pager_page</CODE> -  Saved pager page count  
@@ -1364,7 +1406,7 @@ Mediamanager</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element to process  
+     <UL><CODE>elem</CODE> -  Current element to process  
       </UL> 
    
    </UL>
@@ -1684,7 +1726,7 @@ Mediamanager</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  actual element  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -1706,7 +1748,7 @@ Mediamanager</H3>
    <H3>showResponseDiscardPodcast</H3>
    <PRE>void <B>showResponseDiscardPodcast</B>(&lt;object&gt; req)</PRE>
    
-      <UL>Populate on XMLHttpRequest Response.</UL>
+      <UL>Populate on XMLHttpRequest response.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1864,7 +1906,7 @@ Mediamanager</H3>
    <H3>showResponseMediaToPodcast</H3>
    <PRE>void <B>showResponseMediaToPodcast</B>(&lt;object&gt; req)</PRE>
    
-      <UL>Populate on XMLHttpRequest Response.</UL>
+      <UL>Populate on XMLHttpRequest response.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -2019,6 +2061,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
 </BODY>
 </HTML>

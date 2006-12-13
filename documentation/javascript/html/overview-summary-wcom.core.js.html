@@ -78,10 +78,7 @@ function asd() {
 <h4>Summary</h4>
 <p>
 	
-		The main Welcompose javascript enviroment. 
- 
- <BR/><BR/><B>Version: </B>$Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
- <BR/>
+		The main Welcompose javascript enviroment.<BR/><BR/>
 	
 </p>
 
@@ -233,7 +230,7 @@ function asd() {
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $
+ * $Id: wcom.core.js 734 2006-12-12 16:43:13Z olaf $
  *
  * <span class="attrib">@copyright</span> 2006 creatics media.systems
  * <span class="attrib">@author</span> Olaf Gleba
@@ -242,10 +239,7 @@ function asd() {
  */</span>
  
 <span class="comment">/** 
- * <span class="attrib">@fileoverview</span> The main Welcompose javascript enviroment. 
- * 
- * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
- * <span class="attrib">@version</span> $Id: wcom.core.js 725 2006-12-10 10:42:16Z olaf $ 
+ * <span class="attrib">@fileoverview</span> The main Welcompose javascript enviroment.
  */</span>
 
 
@@ -578,7 +572,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is of type Array
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isArray(elem) {
@@ -587,7 +581,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is of type Bool
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isBoolean(elem) {
@@ -596,7 +590,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is of type String
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
  <span class="reserved">function</span> Base_isString(elem) {
@@ -605,7 +599,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is of type Object
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isObject(elem) {
@@ -614,7 +608,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is a function
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isFunction(elem) {
@@ -623,7 +617,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is undefined
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isUndefined(elem) {
@@ -632,7 +626,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var has no values
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isNumber(elem) {
@@ -641,7 +635,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is empty
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isEmpty(elem) {
@@ -659,7 +653,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Examine the giving var is Null
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isNull(elem) {
@@ -668,7 +662,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
 <span class="comment">/**
  * Delete whitspaces at begin and end of the delivered string
  *
- * <span class="attrib">@param</span> {var} elem Actual element
+ * <span class="attrib">@param</span> {var} elem Current element
  * <span class="attrib">@return</span> elem
  * <span class="attrib">@type</span> String
  */</span>
@@ -802,8 +796,8 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
  * Show/hide a group of form elements and color their labels on load of page.
  * Depends on delivered variables in the html markup.
  * &lt;br /&gt;
- * For properly use or/and enhancement of this feature, please have a look on
- * the online project support area.
+ * For in depths explanation please have a look on the online
+ * project support area.
  *
  * <span class="attrib">@param</span> {array} elems Array of element(s)
  * <span class="attrib">@throws</span> applyError on exception
@@ -853,7 +847,7 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 			<span class="reserved">if</span> (_req.status == 200) {
 				Element.update(ttarget, _req.responseText);
 		
-				Helper.applyBehaviour();
+				Mediamanager.applyBehaviour();
 			
 				<span class="comment">// refering to https://bugzilla.mozilla.org/show_bug.cgi?id=236791</span>
 				$(<span class="literal">'mm_tags'</span>).setAttribute(<span class="literal">"autocomplete"</span>,<span class="literal">"off"</span>);
@@ -913,10 +907,10 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 
 <span class="comment">/**
  * Show help html element.
- * Import related help file depending on actual element pointer.
+ * Import related help file depending on current element pointer.
  *
  * <span class="attrib">@see</span> #processHelp
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Help_show (elem)
@@ -969,7 +963,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 <span class="comment">/**
  * Hide help html element.
  *
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Help_hide (elem)
@@ -1023,14 +1017,14 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 
 <span class="comment">/**
  * Show Mediamanager help html element.
- * Import related help file depending on actual element pointer.
+ * Import related help file depending on current element pointer.
  * We have to return the hide state as a global var to provide
  * which layer we must show on method {<span class="attrib">@link</span> #hideMediamanger} 
  *
  * <span class="attrib">@see</span> #processMediamanager
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
- * <span class="attrib">@returns</span> {global} gMediamanagerLayer
+ * <span class="attrib">@returns</span> {global} gMediamanagerLayer Layer needed for {<span class="attrib">@link</span> #hideMediamanager}
  */</span>
 <span class="reserved">function</span> Help_showMediamanager (elem)
 {
@@ -1079,7 +1073,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 <span class="comment">/**
  * Hide Mediamanager help html element.
  *
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Help_hideMediamanager (elem)
@@ -1141,7 +1135,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 <span class="comment">/**
  * Set Focus related to pointed element.
  *
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@param</span> {string} attr Node Attribute
  */</span>
 <span class="reserved">function</span> Help_setCorrespondingFocus (elem, attr)
@@ -1186,7 +1180,7 @@ Navigation.<span class="reserved">prototype</span>.show = Navigation_show;
 Navigation.<span class="reserved">prototype</span>.processNavigation = Navigation_processNavigation;
 
 <span class="comment">/**
- * Import related navigation file depending on actual element pointer.
+ * Import related navigation file depending on current element pointer.
  * Here var &lt;em&gt;level&lt;/em&gt; distinguish which markup layer to use.
  * 
  * <span class="attrib">@see</span> #processNavigation
@@ -1293,7 +1287,7 @@ Forms.<span class="reserved">prototype</span>.storeFocus = Forms_storeFocus;
 Forms.setOnEvent(this, '','#0c3','dotted');
  * &lt;/code&gt;&lt;/pre&gt;
  * 
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@param</span> {string} bgcolor Define background color
  * <span class="attrib">@param</span> {string} bcolor Define border color
  * <span class="attrib">@param</span> {string} bstyle Define border style attribute
@@ -1317,9 +1311,9 @@ Forms.setOnEvent(this, '','#0c3','dotted');
 
 <span class="comment">/**
  * Track the current content form field focus and makes it available application wide.
- * This is used to fire alerts within several Media Manager &lt;em&gt;_insertXXX&lt;/em&gt; functions.
+ * This is used to fire alerts within elem Current elementseveral Media Manager &lt;em&gt;_insertXXX&lt;/em&gt; functions.
  *
- * <span class="attrib">@param</span> {string} elem Actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Forms_storeFocus (elem)
@@ -1369,8 +1363,8 @@ Status.<span class="reserved">prototype</span>.getCbx = Status_getCbx;
  * Show/hide a group of form elements and color their labels.
  * Depends on delivered variable in the html markup.
  * &lt;br /&gt;
- * For properly use or/and enhancement of this feature, please have a look on
- * the online project support area.
+ * For in depths explanation please have a look on the online
+ * project support area.
  *
  * <span class="attrib">@param</span> {array} elems Array of element(s)
  * <span class="attrib">@throws</span> applyError on exception
@@ -1449,12 +1443,9 @@ Tables.<span class="reserved">prototype</span>.hideTableRow = Tables_hideTableRo
 Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collapseTableRow;
 
 <span class="comment">/**
- * Show formely hidden table row depending on actual element pointer.
- * &lt;br /&gt;
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
+ * Show formely hidden table row depending on current element pointer.
  * 
- * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Tables_showTableRow (elem)
@@ -1486,12 +1477,9 @@ Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collaps
 }
 
 <span class="comment">/**
- * Hide visible table row depending on actual element pointer.
- * &lt;br /&gt;
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
+ * Hide visible table row depending on current element pointer.
  * 
- * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Tables_hideTableRow (elem)
@@ -1523,11 +1511,8 @@ Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collaps
 
 <span class="comment">/**
  * Gives some browsers some extra treatment.
- * &lt;br /&gt;
- * For properly use or/and enhancement, please have a look on
- * the online project support area.
  *
- * <span class="attrib">@param</span> {string} elem actual element to process
+ * <span class="attrib">@param</span> {string} elem Current element to process
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
  <span class="reserved">function</span> Tables_collapseTableRow (elem)
@@ -1609,6 +1594,6 @@ Tables = new Tables();</pre>
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
 </body>
 </html>

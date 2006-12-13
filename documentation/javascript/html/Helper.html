@@ -93,8 +93,9 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 </DL>
    
    <P>
-   <BR/>The Mediamanager class miscellaneous is the appropriate class for
- the help enviroment. The scope is application wide.
+   <BR/>The Helper class defines a bunch of functions which doesn't 
+ belongs as regards content to just one class. Several functions be in use
+ within every Welcompose class. The scope is application wide.
 
  <BR/><I>Defined in <a href='overview-summary-wcom.helper.js.html'>wcom.helper.js</a></I><BR/><BR/>
    </P>
@@ -175,30 +176,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#applyBehaviour">applyBehaviour</A></B>()
+	       <A HREF="#changeBlogCommentStatus">changeBlogCommentStatus</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&nbsp;void</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#changeBlogCommentStatus">changeBlogCommentStatus</A></B>(elem)
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 get select values onchange handler
-
-
+	 Change blog comment status.
       </TD>
    </TR>
 
@@ -215,7 +197,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Close popup.
       </TD>
    </TR>
 
@@ -232,7 +214,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Close popup and refresh Media Manager contents.
       </TD>
    </TR>
 
@@ -249,7 +231,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Track the close of popups with expected refresh of Media Manager.
       </TD>
    </TR>
 
@@ -266,7 +248,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Track the close of popups which contains href links as close action.
       </TD>
    </TR>
 
@@ -283,9 +265,41 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process
+	 Confirm navigation delete.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#confirmDelTplGlobalAction">confirmDelTplGlobalAction</A></B>(&lt;var&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Confirm global template delete.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#confirmDelTplGlobalfileAction">confirmDelTplGlobalfileAction</A></B>(&lt;var&gt; elem)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Confirm global file delete.
       </TD>
    </TR>
 
@@ -302,9 +316,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process
+	 Confirm template sets delete.
       </TD>
    </TR>
 
@@ -321,16 +333,14 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process
+	 Confirm template type delete.
       </TD>
    </TR>
 
    <TR BGCOLOR="white" CLASS="TableRowColor">
       <TD ALIGN="right" VALIGN="top" WIDTH="1%">
 	 <FONT SIZE="-1">
-	    <CODE>&nbsp;Object</CODE>
+	    <CODE>&nbsp;number</CODE>
 	 </FONT>
       </TD>
       <TD>
@@ -340,15 +350,14 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Center the new window depending on giving Width (elemWith)
+	 Define and resize window width.
       </TD>
    </TR>
 
    <TR BGCOLOR="white" CLASS="TableRowColor">
       <TD ALIGN="right" VALIGN="top" WIDTH="1%">
 	 <FONT SIZE="-1">
-	    <CODE>&nbsp;Object</CODE>
+	    <CODE>&nbsp;number</CODE>
 	 </FONT>
       </TD>
       <TD>
@@ -358,8 +367,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Center the new window depending on browser window Height
+	 Define and resize window height.
       </TD>
    </TR>
 
@@ -372,11 +380,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getAttr">getAttr</A></B>(attr, elem)
+	       <A HREF="#getAttr">getAttr</A></B>(&lt;string&gt; attr, &lt;object&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Getter for node attribute.
       </TD>
    </TR>
 
@@ -389,11 +397,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getAttrNextSibling">getAttrNextSibling</A></B>(attr, elem, level)
+	       <A HREF="#getAttrNextSibling">getAttrNextSibling</A></B>(&lt;string&gt; attr, &lt;object&gt; elem, &lt;string&gt; level)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Getter for next sibling node attribute.
       </TD>
    </TR>
 
@@ -406,11 +414,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getAttrParentNode">getAttrParentNode</A></B>(attr, elem, level)
+	       <A HREF="#getAttrParentNode">getAttrParentNode</A></B>(&lt;string&gt; attr, &lt;object&gt; elem, &lt;string&gt; level)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Getter for  parent node attribute.
       </TD>
    </TR>
 
@@ -423,11 +431,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getDataParentNode">getDataParentNode</A></B>(elem, level)
+	       <A HREF="#getDataParentNode">getDataParentNode</A></B>(&lt;object&gt; elem, &lt;string&gt; level)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Getter for parent node data.
       </TD>
    </TR>
 
@@ -444,8 +452,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Change delimiter on given form value.
       </TD>
    </TR>
 
@@ -458,11 +465,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#getNextSiblingFirstChild">getNextSiblingFirstChild</A></B>(elem, level)
+	       <A HREF="#getNextSiblingFirstChild">getNextSiblingFirstChild</A></B>(&lt;object&gt; elem, &lt;string&gt; level)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Getter for next sibling first child node attribute.
       </TD>
    </TR>
 
@@ -479,8 +486,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Get the current pager_page value.
       </TD>
    </TR>
 
@@ -493,12 +499,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertInternalLink">insertInternalLink</A></B>(elem)
+	       <A HREF="#insertInternalLink">insertInternalLink</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Insert internal page links reference into content.
       </TD>
    </TR>
 
@@ -511,12 +516,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertInternalLinkGlobalFiles">insertInternalLinkGlobalFiles</A></B>(elem)
+	       <A HREF="#insertInternalLinkGlobalFiles">insertInternalLinkGlobalFiles</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Insert internal globalfiles links reference into content.
       </TD>
    </TR>
 
@@ -529,12 +533,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertInternalLinkGlobalTemplates">insertInternalLinkGlobalTemplates</A></B>(elem)
+	       <A HREF="#insertInternalLinkGlobalTemplates">insertInternalLinkGlobalTemplates</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Insert internal globaltemplates links reference into content.
       </TD>
    </TR>
 
@@ -547,12 +550,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertInternalLinkNoHref">insertInternalLinkNoHref</A></B>(elem)
+	       <A HREF="#insertInternalLinkNoHref">insertInternalLinkNoHref</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Insert internal page links reference into content.
       </TD>
    </TR>
 
@@ -565,12 +567,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertInternalLinkStructuralTemplates">insertInternalLinkStructuralTemplates</A></B>(elem)
+	       <A HREF="#insertInternalLinkStructuralTemplates">insertInternalLinkStructuralTemplates</A></B>(&lt;var&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Insert internal link string
+	 Get internal structure templates reference.
       </TD>
    </TR>
 
@@ -583,12 +584,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertTags">insertTags</A></B>(id, tagOpen, tagClose, sampleText)
+	       <A HREF="#insertTags">insertTags</A></B>(&lt;string&gt; id, &lt;string&gt; tagOpen, &lt;string&gt; tagClose, &lt;string&gt; sampleText)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Insert Content into Textareas
- taken from http://sourceforge.net/projects/wikipedia
+	 Process inserting content.
       </TD>
    </TR>
 
@@ -601,12 +601,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#insertTagsFromPopup">insertTagsFromPopup</A></B>(id, tagOpen, tagClose, sampleText)
+	       <A HREF="#insertTagsFromPopup">insertTagsFromPopup</A></B>(&lt;string&gt; id, &lt;string&gt; tagOpen, &lt;string&gt; tagClose, &lt;string&gt; sampleText)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Insert Content into Textareas from Popup
- taken from http://sourceforge.net/projects/wikipedia
+	 Process inserting content from a popup.
       </TD>
    </TR>
 
@@ -619,11 +618,45 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#launchPopup">launchPopup</A></B>(width, height, nname, trigger, elem)
+	       <A HREF="#launchPopup">launchPopup</A></B>(&lt;string&gt; width, &lt;string&gt; height, &lt;string&gt; wname, &lt;string&gt; trigger, &lt;object&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Launch popup.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#loaderChangeBlogCommentStatus">loaderChangeBlogCommentStatus</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display indicator layer while XMLHttpRequest processing.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#loaderPagesLinks">loaderPagesLinks</A></B>()
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Display indicator while XMLHttpRequest processing.
       </TD>
    </TR>
 
@@ -640,7 +673,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Lower opacity via DOM build Layer.
       </TD>
    </TR>
 
@@ -657,7 +690,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Lower opacity via DOM build Layer on load of page.
       </TD>
    </TR>
 
@@ -674,7 +707,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Display upload indicator.
       </TD>
    </TR>
 
@@ -691,8 +724,75 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Display next url level
+	 Show next appropriate DOM node.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseChangeBlogCommentStatus">showResponseChangeBlogCommentStatus</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Layer fadeout on XMLHttpRequest response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponsePagesSecondLinks">showResponsePagesSecondLinks</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest Response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponsePagesThirdLinks">showResponsePagesThirdLinks</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Populate on XMLHttpRequest Response.
+      </TD>
+   </TR>
+
+   <TR BGCOLOR="white" CLASS="TableRowColor">
+      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
+	 <FONT SIZE="-1">
+	    <CODE>&nbsp;void</CODE>
+	 </FONT>
+      </TD>
+      <TD>
+	 <CODE>
+	    <B>
+	       <A HREF="#showResponseStructuralTemplates">showResponseStructuralTemplates</A></B>(&lt;object&gt; req)
+	 </CODE>
+	 <BR>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 Process and insert XMLHttpRequest response into content.
       </TD>
    </TR>
 
@@ -709,8 +809,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Simply examine id IE is on air
+	 UNDER DEVELOPMENT
       </TD>
    </TR>
 
@@ -727,8 +826,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Implements method of prototype class Helper
- Simply examine id IE is on air
+	 UNDER DEVELOPMENT
       </TD>
    </TR>
 
@@ -741,11 +839,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#validate">validate</A></B>(elem)
+	       <A HREF="#validate">validate</A></B>(&lt;object&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
+	 Validate form elements on the fly.
       </TD>
    </TR>
 
@@ -831,38 +929,35 @@ Helper</H3>
 
 <!-- One single method detail entry -->
 
-   <A NAME="applyBehaviour"><!-- --></A>
-   <H3>applyBehaviour</H3>
-   <PRE>void <B>applyBehaviour</B>()</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
    <A NAME="changeBlogCommentStatus"><!-- --></A>
    <H3>changeBlogCommentStatus</H3>
-   <PRE>void <B>changeBlogCommentStatus</B>(elem)</PRE>
+   <PRE>void <B>changeBlogCommentStatus</B>(&lt;var&gt; elem)</PRE>
    
-      <UL>get select values onchange handler
-
- return string</UL>
+      <UL>Change blog comment status.
+ <br/>
+ Get the form select values with corresponding comment id
+ and edit on page.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
    
    <!-- METHOD PARAMETERS END -->
 
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderChangeBlogCommentStatus">loaderChangeBlogCommentStatus()</a><BR/>- <a href="#showResponseChangeBlogCommentStatus">showResponseChangeBlogCommentStatus()</a></UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -871,6 +966,11 @@ Helper</H3>
    <H3>closeLinksPopup</H3>
    <PRE>void <B>closeLinksPopup</B>()</PRE>
    
+      <UL>Close popup.
+ <br />
+ In addition to close the popup, we revoke the lowering of opacity.
+ Used in popups where it is expected to close the window with a href link.</UL>
+   
 
    <!-- METHOD PARAMETERS START -->
    
@@ -879,6 +979,10 @@ Helper</H3>
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -887,6 +991,14 @@ Helper</H3>
    <H3>closePopup</H3>
    <PRE>void <B>closePopup</B>()</PRE>
    
+      <UL>Close popup and refresh Media Manager contents.
+ <br />
+ In addition to close the popup, we invoke functions in the parent window,
+ like revoke the lowering of opacity and refresh the Media Manager to reflect
+ the modified contents.
+ <br />
+ Used in popups where it is expected to close the window with a button.</UL>
+   
 
    <!-- METHOD PARAMETERS START -->
    
@@ -895,6 +1007,10 @@ Helper</H3>
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="Mediamanager.html#invokePager">Mediamanager.invokePager()</a></UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -903,14 +1019,44 @@ Helper</H3>
    <H3>closePopupTrack</H3>
    <PRE>void <B>closePopupTrack</B>(elem)</PRE>
    
+      <UL>Track the close of popups with expected refresh of Media Manager.
+ <br />
+ We need a handling if the user do not close the popups with the
+ appropriate buttons. For example, the user could use
+ keyboard shortcuts or close the popup by mouse click on the
+ window interface close button (depends on operating system).
+ <br />
+ So this function is added to the popups html body event <em>onunload</em>,
+ where its expected to close <em>and</em> refresh the Media Manager (with <a href="#closePopup">closePopup()</a>).
+ There is a condition, that compares wether several control vars
+ (<em>audit</em>, <em>submitted</em>) are set (respectively are <em>bool</em> true)
+ or not. On the basis of the result, we invoke functions in the parent window,
+ like revoke the lowering of opacity and fire a alert demanding to close the
+ popup with the appropriate button or link.</UL>
+   
 
    <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>audit</CODE> -  Defined in <a href="#closePopup">closePopup()</a>.  
+      </UL> 
+   
+     <UL><CODE>submitted</CODE> -  Avoid the execute of the onunload event.  
+      </UL> 
+   
+   </UL>
    
    <!-- METHOD PARAMETERS END -->
 
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -919,14 +1065,38 @@ Helper</H3>
    <H3>closePopupTrackNoAlert</H3>
    <PRE>void <B>closePopupTrackNoAlert</B>(elem)</PRE>
    
+      <UL>Track the close of popups which contains href links as close action.
+ <br />
+ We need a handling if the user do not close the popups with the
+ appropriate link. For example, the user could use
+ keyboard shortcuts or close the popup by mouse click on the
+ window interface close button (depends on operating system).
+ <br />
+ So this function is added to the popups html body event <em>onunload</em>.
+ There is a condition, that compares wether the control var
+ (<em>audit</em>) are set (respectively are <em>bool</em> true)
+ or not. On the basis of the result, we revoke the lowering of opacity in the parent window.</UL>
+   
 
    <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>audit</CODE> -  Defined in <a href="#closeLinksPopup">closeLinksPopup()</a>.  
+      </UL> 
+   
+   </UL>
    
    <!-- METHOD PARAMETERS END -->
 
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -935,9 +1105,7 @@ Helper</H3>
    <H3>confirmDelNavAction</H3>
    <PRE>void <B>confirmDelNavAction</B>(&lt;var&gt; elem)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process</UL>
+      <UL>Confirm navigation delete.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -945,7 +1113,67 @@ Helper</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element  
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="confirmDelTplGlobalAction"><!-- --></A>
+   <H3>confirmDelTplGlobalAction</H3>
+   <PRE>void <B>confirmDelTplGlobalAction</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Confirm global template delete.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="confirmDelTplGlobalfileAction"><!-- --></A>
+   <H3>confirmDelTplGlobalfileAction</H3>
+   <PRE>void <B>confirmDelTplGlobalfileAction</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Confirm global file delete.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -967,9 +1195,7 @@ Helper</H3>
    <H3>confirmDelTplSetsAction</H3>
    <PRE>void <B>confirmDelTplSetsAction</B>(&lt;var&gt; elem)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process</UL>
+      <UL>Confirm template sets delete.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -977,7 +1203,7 @@ Helper</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -999,9 +1225,7 @@ Helper</H3>
    <H3>confirmDelTplTypeAction</H3>
    <PRE>void <B>confirmDelTplTypeAction</B>(&lt;var&gt; elem)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Confirm action
- If true, use the giving href to process</UL>
+      <UL>Confirm template type delete.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1009,7 +1233,7 @@ Helper</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -1029,10 +1253,11 @@ Helper</H3>
 
    <A NAME="defineWindowX"><!-- --></A>
    <H3>defineWindowX</H3>
-   <PRE>Object <B>defineWindowX</B>(&lt;var&gt; elemWidth)</PRE>
+   <PRE>number <B>defineWindowX</B>(&lt;var&gt; elemWidth)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Center the new window depending on giving Width (elemWith)</UL>
+      <UL>Define and resize window width.
+ <br />
+ Center the new window depending on giving Width.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1040,7 +1265,7 @@ Helper</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elemWidth</CODE> -  Actual element  
+     <UL><CODE>elemWidth</CODE> -  Given width  
       </UL> 
    
    </UL>
@@ -1051,7 +1276,7 @@ Helper</H3>
    <UL>
    <B>Returns:</B>
         <UL>
-        number calculated width 
+         x   
         </UL>
    </UL>
    
@@ -1059,7 +1284,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Throws:</B><UL>- applyError on exception  </UL>
+   <B>Throws:</B><UL>- applyError on exception</UL><B>See:</B><UL>- <a href="#launchPopup">launchPopup()</a></UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1067,10 +1292,11 @@ Helper</H3>
 
    <A NAME="defineWindowY"><!-- --></A>
    <H3>defineWindowY</H3>
-   <PRE>Object <B>defineWindowY</B>()</PRE>
+   <PRE>number <B>defineWindowY</B>()</PRE>
    
-      <UL>Implements method of prototype class Helper
- Center the new window depending on browser window Height</UL>
+      <UL>Define and resize window height.
+ <br />
+ Center the new window depending on calculated height</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1081,7 +1307,7 @@ Helper</H3>
    <UL>
    <B>Returns:</B>
         <UL>
-        number calculated height 
+         y 
         </UL>
    </UL>
    
@@ -1089,7 +1315,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Throws:</B><UL>- applyError on exception  </UL>
+   <B>Throws:</B><UL>- applyError on exception  </UL><B>See:</B><UL>- <a href="#launchPopup">launchPopup()</a></UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1097,64 +1323,166 @@ Helper</H3>
 
    <A NAME="getAttr"><!-- --></A>
    <H3>getAttr</H3>
-   <PRE>Object <B>getAttr</B>(attr, elem)</PRE>
+   <PRE>Object <B>getAttr</B>(&lt;string&gt; attr, &lt;object&gt; elem)</PRE>
+   
+      <UL>Getter for node attribute.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
    
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>attr</CODE> -  Given attribute to use  
+      </UL> 
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
    <!-- METHOD PARAMETERS END -->
 
    
+   <UL>
+   <B>Returns:</B>
+        <UL>
+        object Attribute of element   
+        </UL>
+   </UL>
+   
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
    <A NAME="getAttrNextSibling"><!-- --></A>
    <H3>getAttrNextSibling</H3>
-   <PRE>Object <B>getAttrNextSibling</B>(attr, elem, level)</PRE>
+   <PRE>Object <B>getAttrNextSibling</B>(&lt;string&gt; attr, &lt;object&gt; elem, &lt;string&gt; level)</PRE>
+   
+      <UL>Getter for next sibling node attribute.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
    
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>attr</CODE> -  Given attribute to use  
+      </UL> 
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+     <UL><CODE>level</CODE> -  Depth of parent node search  
+      </UL> 
+   
+   </UL>
+   
    <!-- METHOD PARAMETERS END -->
 
    
+   <UL>
+   <B>Returns:</B>
+        <UL>
+        object Next sibling attribute   
+        </UL>
+   </UL>
+   
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
    <A NAME="getAttrParentNode"><!-- --></A>
    <H3>getAttrParentNode</H3>
-   <PRE>Object <B>getAttrParentNode</B>(attr, elem, level)</PRE>
+   <PRE>Object <B>getAttrParentNode</B>(&lt;string&gt; attr, &lt;object&gt; elem, &lt;string&gt; level)</PRE>
+   
+      <UL>Getter for  parent node attribute.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
    
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>attr</CODE> -  Given attribute to use  
+      </UL> 
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+     <UL><CODE>level</CODE> -  Depth of parent node search  
+      </UL> 
+   
+   </UL>
+   
    <!-- METHOD PARAMETERS END -->
 
    
+   <UL>
+   <B>Returns:</B>
+        <UL>
+        object Parent node attribute of element   
+        </UL>
+   </UL>
+   
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
    <A NAME="getDataParentNode"><!-- --></A>
    <H3>getDataParentNode</H3>
-   <PRE>Object <B>getDataParentNode</B>(elem, level)</PRE>
+   <PRE>Object <B>getDataParentNode</B>(&lt;object&gt; elem, &lt;string&gt; level)</PRE>
+   
+      <UL>Getter for parent node data.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
    
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+     <UL><CODE>level</CODE> -  Depth of parent node search  
+      </UL> 
+   
+   </UL>
+   
    <!-- METHOD PARAMETERS END -->
 
    
+   <UL>
+   <B>Returns:</B>
+        <UL>
+        object Parent node data   
+        </UL>
+   </UL>
+   
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -1163,8 +1491,11 @@ Helper</H3>
    <H3>getDelimiterValue</H3>
    <PRE>void <B>getDelimiterValue</B>()</PRE>
    
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
+      <UL>Change delimiter on given form value.
+ <br />
+ In some cases it is required to change the delimiter to avoid syntax
+ conflicts while inserting references (e.g. working with cascading
+ style sheets or javascript, which uses brackets also).</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1176,7 +1507,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#launchPopup">launchPopup()</a></UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1184,16 +1515,40 @@ Helper</H3>
 
    <A NAME="getNextSiblingFirstChild"><!-- --></A>
    <H3>getNextSiblingFirstChild</H3>
-   <PRE>Object <B>getNextSiblingFirstChild</B>(elem, level)</PRE>
+   <PRE>Object <B>getNextSiblingFirstChild</B>(&lt;object&gt; elem, &lt;string&gt; level)</PRE>
+   
+      <UL>Getter for next sibling first child node attribute.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
    
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+     <UL><CODE>level</CODE> -  Depth of parent node search  
+      </UL> 
+   
+   </UL>
+   
    <!-- METHOD PARAMETERS END -->
 
    
+   <UL>
+   <B>Returns:</B>
+        <UL>
+        object Next sibling first child value   
+        </UL>
+   </UL>
+   
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception</UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -1202,8 +1557,10 @@ Helper</H3>
    <H3>getPagerPage</H3>
    <PRE>void <B>getPagerPage</B>()</PRE>
    
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
+      <UL>Get the current pager_page value.
+ <br />
+ This is needed for Media Manager action popups (<em>upload</em>, <em>edit</em>)
+ which supposed to refresh the content display on close of popup.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1215,7 +1572,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#launchPopup">launchPopup()</a></UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1223,235 +1580,12 @@ Helper</H3>
 
    <A NAME="insertInternalLink"><!-- --></A>
    <H3>insertInternalLink</H3>
-   <PRE>void <B>insertInternalLink</B>(elem)</PRE>
+   <PRE>void <B>insertInternalLink</B>(&lt;var&gt; elem)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertInternalLinkGlobalFiles"><!-- --></A>
-   <H3>insertInternalLinkGlobalFiles</H3>
-   <PRE>void <B>insertInternalLinkGlobalFiles</B>(elem)</PRE>
-   
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertInternalLinkGlobalTemplates"><!-- --></A>
-   <H3>insertInternalLinkGlobalTemplates</H3>
-   <PRE>void <B>insertInternalLinkGlobalTemplates</B>(elem)</PRE>
-   
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertInternalLinkNoHref"><!-- --></A>
-   <H3>insertInternalLinkNoHref</H3>
-   <PRE>void <B>insertInternalLinkNoHref</B>(elem)</PRE>
-   
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertInternalLinkStructuralTemplates"><!-- --></A>
-   <H3>insertInternalLinkStructuralTemplates</H3>
-   <PRE>void <B>insertInternalLinkStructuralTemplates</B>(elem)</PRE>
-   
-      <UL>Implements method of prototype class Helper
- Insert internal link string</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertTags"><!-- --></A>
-   <H3>insertTags</H3>
-   <PRE>void <B>insertTags</B>(id, tagOpen, tagClose, sampleText)</PRE>
-   
-      <UL>Insert Content into Textareas
- taken from http://sourceforge.net/projects/wikipedia</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception    </UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="insertTagsFromPopup"><!-- --></A>
-   <H3>insertTagsFromPopup</H3>
-   <PRE>void <B>insertTagsFromPopup</B>(id, tagOpen, tagClose, sampleText)</PRE>
-   
-      <UL>Insert Content into Textareas from Popup
- taken from http://sourceforge.net/projects/wikipedia</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception    </UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="launchPopup"><!-- --></A>
-   <H3>launchPopup</H3>
-   <PRE>void <B>launchPopup</B>(width, height, nname, trigger, elem)</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="lowerOpacity"><!-- --></A>
-   <H3>lowerOpacity</H3>
-   <PRE>void <B>lowerOpacity</B>()</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="lowerOpacityOnUpload"><!-- --></A>
-   <H3>lowerOpacityOnUpload</H3>
-   <PRE>void <B>lowerOpacityOnUpload</B>()</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="showFileUploadMessage"><!-- --></A>
-   <H3>showFileUploadMessage</H3>
-   <PRE>void <B>showFileUploadMessage</B>()</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="showNextNode"><!-- --></A>
-   <H3>showNextNode</H3>
-   <PRE>void <B>showNextNode</B>(&lt;var&gt; elem)</PRE>
-   
-      <UL>Implements method of prototype class Helper
- Display next url level</UL>
+      <UL>Insert internal page links reference into content.
+ <br />
+ We build a string with required syntax to deliver it to <a href="#insertTagsFromPopup">insertTagsFromPopup()</a>
+ and close the popup window afterwards.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1459,7 +1593,7 @@ Helper</H3>
    <UL>
    <B>Parameters:</B>
    
-     <UL><CODE>elem</CODE> -  Actual element  
+     <UL><CODE>elem</CODE> -  Current element  
       </UL> 
    
    </UL>
@@ -1471,7 +1605,553 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertTagsFromPopup">insertTagsFromPopup()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertInternalLinkGlobalFiles"><!-- --></A>
+   <H3>insertInternalLinkGlobalFiles</H3>
+   <PRE>void <B>insertInternalLinkGlobalFiles</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Insert internal globalfiles links reference into content.
+ <br />
+ Get the element id content, deliver it to <a href="#insertTagsFromPopup">insertTagsFromPopup()</a>
+ and close the popup window afterwards.
+ var <em>formTarget</em> comes from the html markup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertTagsFromPopup">insertTagsFromPopup()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertInternalLinkGlobalTemplates"><!-- --></A>
+   <H3>insertInternalLinkGlobalTemplates</H3>
+   <PRE>void <B>insertInternalLinkGlobalTemplates</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Insert internal globaltemplates links reference into content.
+ <br />
+ Get the element id content, deliver it to <a href="#insertTagsFromPopup">insertTagsFromPopup()</a>
+ and close the popup window afterwards.
+ var <em>formTarget</em> comes from the html markup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertTagsFromPopup">insertTagsFromPopup()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertInternalLinkNoHref"><!-- --></A>
+   <H3>insertInternalLinkNoHref</H3>
+   <PRE>void <B>insertInternalLinkNoHref</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Insert internal page links reference into content.
+ <br />
+ Get the element id content, deliver it to <a href="#insertTagsFromPopup">insertTagsFromPopup()</a>
+ and close the popup window afterwards.
+ var <em>formTarget</em> comes from the html markup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertTagsFromPopup">insertTagsFromPopup()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertInternalLinkStructuralTemplates"><!-- --></A>
+   <H3>insertInternalLinkStructuralTemplates</H3>
+   <PRE>void <B>insertInternalLinkStructuralTemplates</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Get internal structure templates reference.
+ <br />
+ Get the appropriate content and populate it unseen into a special,
+ original tag (see <a href="#showResponseStructuralTemplates">showResponseStructuralTemplates()</a>) within
+ the html markup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#showResponseStructuralTemplates">showResponseStructuralTemplates()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertTags"><!-- --></A>
+   <H3>insertTags</H3>
+   <PRE>void <B>insertTags</B>(&lt;string&gt; id, &lt;string&gt; tagOpen, &lt;string&gt; tagClose, &lt;string&gt; sampleText)</PRE>
+   
+      <UL>Process inserting content.
+ <br />
+ Adapted from from http://sourceforge.net/projects/wikipedia</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>id</CODE> -  Form element to populate  
+      </UL> 
+   
+     <UL><CODE>tagOpen</CODE> -  Opening part of build string  
+      </UL> 
+   
+     <UL><CODE>tagClose</CODE> -  Closing part of build string  
+      </UL> 
+   
+     <UL><CODE>sampleText</CODE> -  Text to set, when we use tagOpen and tagClose  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertInternalLink">insertInternalLink()</a><BR/>- <a href="#insertInternalLinkNoHref">insertInternalLinkNoHref()</a><BR/>- <a href="#insertInternalLinkGlobalTemplates">insertInternalLinkGlobalTemplates()</a><BR/>- <a href="#insertInternalLinkGlobalFiles">insertInternalLinkGlobalFiles()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="insertTagsFromPopup"><!-- --></A>
+   <H3>insertTagsFromPopup</H3>
+   <PRE>void <B>insertTagsFromPopup</B>(&lt;string&gt; id, &lt;string&gt; tagOpen, &lt;string&gt; tagClose, &lt;string&gt; sampleText)</PRE>
+   
+      <UL>Process inserting content from a popup.
+ <br />
+ Adapted from from http://sourceforge.net/projects/wikipedia</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>id</CODE> -  Form element to populate  
+      </UL> 
+   
+     <UL><CODE>tagOpen</CODE> -  Opening part of build string  
+      </UL> 
+   
+     <UL><CODE>tagClose</CODE> -  Closing part of build string  
+      </UL> 
+   
+     <UL><CODE>sampleText</CODE> -  Text to set, when we use tagOpen and tagClose  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertInternalLink">insertInternalLink()</a><BR/>- <a href="#insertInternalLinkNoHref">insertInternalLinkNoHref()</a><BR/>- <a href="#insertInternalLinkGlobalTemplates">insertInternalLinkGlobalTemplates()</a><BR/>- <a href="#insertInternalLinkGlobalFiles">insertInternalLinkGlobalFiles()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="launchPopup"><!-- --></A>
+   <H3>launchPopup</H3>
+   <PRE>void <B>launchPopup</B>(&lt;string&gt; width, &lt;string&gt; height, &lt;string&gt; wname, &lt;string&gt; trigger, &lt;object&gt; elem)</PRE>
+   
+      <UL>Launch popup.
+ <br />
+ On the basis of parameter <em>trigger</em> we builds the url string
+ for later use in func <em>window.open</em>.
+ According to the popup launch, the parent window opacity will be lowered
+ to eye focus onto the launched window. 
+ 
+ <br /><br />Example:
+ <pre><code>
+Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
+</code></pre></UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>width</CODE> -  Width for the window to launch   
+      </UL> 
+   
+     <UL><CODE>height</CODE> -  Height for the window to launch  
+      </UL> 
+   
+     <UL><CODE>wname</CODE> -  The Name for the window to launch  
+      </UL> 
+   
+     <UL><CODE>trigger</CODE> -  Switch case condition which url to use  
+      </UL> 
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#lowerOpacity">lowerOpacity()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="loaderChangeBlogCommentStatus"><!-- --></A>
+   <H3>loaderChangeBlogCommentStatus</H3>
+   <PRE>void <B>loaderChangeBlogCommentStatus</B>()</PRE>
+   
+      <UL>Display indicator layer while XMLHttpRequest processing.
+ Trigger <a href="#lowerOpacity">lowerOpacity()</a>.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#lowerOpacity">lowerOpacity()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="loaderPagesLinks"><!-- --></A>
+   <H3>loaderPagesLinks</H3>
+   <PRE>void <B>loaderPagesLinks</B>()</PRE>
+   
+      <UL>Display indicator while XMLHttpRequest processing.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#showNextNode">showNextNode()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="lowerOpacity"><!-- --></A>
+   <H3>lowerOpacity</H3>
+   <PRE>void <B>lowerOpacity</B>()</PRE>
+   
+      <UL>Lower opacity via DOM build Layer.
+ <br />
+ Here we build a layer per DOM, which use a transparent PNG image.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
    <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="lowerOpacityOnUpload"><!-- --></A>
+   <H3>lowerOpacityOnUpload</H3>
+   <PRE>void <B>lowerOpacityOnUpload</B>()</PRE>
+   
+      <UL>Lower opacity via DOM build Layer on load of page.
+ <br />
+ Here we build a layer per DOM, which use a transparent PNG image.
+ Used within popups.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showFileUploadMessage"><!-- --></A>
+   <H3>showFileUploadMessage</H3>
+   <PRE>void <B>showFileUploadMessage</B>()</PRE>
+   
+      <UL>Display upload indicator.
+ Trigger <a href="#lowerOpacityOnUpload">lowerOpacityOnUpload()</a>. This is used on submit
+ within the media upload popup to indicate the upload still remains.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#lowerOpacityOnUpload">lowerOpacityOnUpload()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showNextNode"><!-- --></A>
+   <H3>showNextNode</H3>
+   <PRE>void <B>showNextNode</B>(&lt;var&gt; elem)</PRE>
+   
+      <UL>Show next appropriate DOM node.
+ <br />
+ Used in internal links popups to reflect sitemap structure.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#loaderPagesLinks">loaderPagesLinks()</a><BR/>- <a href="#showResponsePagesSecondLinks">showResponsePagesSecondLinks()</a><BR/>- <a href="#showResponsePagesThirdLinks">showResponsePagesThirdLinks()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseChangeBlogCommentStatus"><!-- --></A>
+   <H3>showResponseChangeBlogCommentStatus</H3>
+   <PRE>void <B>showResponseChangeBlogCommentStatus</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Layer fadeout on XMLHttpRequest response.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#changeBlogCommentStatus">changeBlogCommentStatus()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponsePagesSecondLinks"><!-- --></A>
+   <H3>showResponsePagesSecondLinks</H3>
+   <PRE>void <B>showResponsePagesSecondLinks</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest Response.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#showNextNode">showNextNode()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponsePagesThirdLinks"><!-- --></A>
+   <H3>showResponsePagesThirdLinks</H3>
+   <PRE>void <B>showResponsePagesThirdLinks</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Populate on XMLHttpRequest Response.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#showNextNode">showNextNode()</a></UL>
+   </UL>
+   
+   <!-- ADDITIONAL ATTRIBUTES  END -->
+<HR>
+
+   <A NAME="showResponseStructuralTemplates"><!-- --></A>
+   <H3>showResponseStructuralTemplates</H3>
+   <PRE>void <B>showResponseStructuralTemplates</B>(&lt;object&gt; req)</PRE>
+   
+      <UL>Process and insert XMLHttpRequest response into content.
+ <br />
+ First we fetch the response with the surrounding html comment tag.
+ This is because we are working with markup, so this has to be distinctive.
+ Then we extract the proper content, deliver it to <a href="#insertTagsFromPopup">insertTagsFromPopup()</a>
+ and close the popup window afterwards.
+ var <em>formTarget</em> comes from the html markup.</UL>
+   
+
+   <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>req</CODE> -  XMLHttpRequest response  
+      </UL> 
+   
+   </UL>
+   
+   <!-- METHOD PARAMETERS END -->
+
+   
+
+   <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL><B>See:</B><UL>- <a href="#insertInternalLinkStructuralTemplates">insertInternalLinkStructuralTemplates()</a></UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1481,8 +2161,7 @@ Helper</H3>
    <H3>unsupportsEffects</H3>
    <PRE>Object <B>unsupportsEffects</B>(exception)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Simply examine id IE is on air</UL>
+      <UL>UNDER DEVELOPMENT</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1494,7 +2173,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL><B>Throws:</B><UL>- applyError on exception</UL>
+   <B>Throws:</B><UL>- applyError on exception</UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1504,8 +2183,7 @@ Helper</H3>
    <H3>unsupportsElems</H3>
    <PRE>Object <B>unsupportsElems</B>(exception)</PRE>
    
-      <UL>Implements method of prototype class Helper
- Simply examine id IE is on air</UL>
+      <UL>UNDER DEVELOPMENT</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -1517,7 +2195,7 @@ Helper</H3>
    <!-- ADDITIONAL ATTRIBUTES START -->
    
    <UL>   
-   <B>Requires:</B><UL>- <a href="Helper.html#">The Helper Class</a></UL><B>Throws:</B><UL>- applyError on exception</UL>
+   <B>Throws:</B><UL>- applyError on exception</UL>
    </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
@@ -1525,16 +2203,37 @@ Helper</H3>
 
    <A NAME="validate"><!-- --></A>
    <H3>validate</H3>
-   <PRE>void <B>validate</B>(elem)</PRE>
+   <PRE>void <B>validate</B>(&lt;object&gt; elem)</PRE>
+   
+      <UL>Validate form elements on the fly.
+ <br />
+ Get the form element id attribute value and populate the
+ regex processed response into the layer <em>container</em>.
+ This assumes that we have corresponding html markup/css.
+ <br />
+ For in depths explanation please have a look on the online
+ project support area.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
+   
+   <UL>
+   <B>Parameters:</B>
+   
+     <UL><CODE>elem</CODE> -  Current element  
+      </UL> 
+   
+   </UL>
    
    <!-- METHOD PARAMETERS END -->
 
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
+   
+   <UL>   
+   <B>Throws:</B><UL>- applyError on exception    </UL>
+   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -1605,6 +2304,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
 </BODY>
 </HTML>

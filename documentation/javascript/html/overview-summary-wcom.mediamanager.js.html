@@ -78,10 +78,7 @@ function asd() {
 <h4>Summary</h4>
 <p>
 	
-		The Mediamanager javascript enviroment.
-
- <BR/><BR/><B>Version: </B>$Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $<BR/><BR/><B>Author:</B> Olaf Gleba og@creatics.de
- <BR/>
+		The Mediamanager javascript enviroment.<BR/><BR/>
 	
 </p>
 
@@ -125,7 +122,7 @@ function asd() {
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $
+ * $Id: wcom.mediamanager.js 734 2006-12-12 16:43:13Z olaf $
  *
  * <span class="attrib">@copyright</span> 2006 creatics media.systems
  * <span class="attrib">@author</span> Olaf Gleba
@@ -135,12 +132,7 @@ function asd() {
  
 <span class="comment">/** 
  * <span class="attrib">@fileoverview</span> The Mediamanager javascript enviroment.
- *
- * <span class="attrib">@author</span> Olaf Gleba og<span class="attrib">@creatics</span>.de
- * <span class="attrib">@version</span> $Id: wcom.mediamanager.js 725 2006-12-10 10:42:16Z olaf $ 
  */</span>
-
-
 
 <span class="comment">/**
  * Constructs the Mediamanager class
@@ -187,6 +179,7 @@ Mediamanager.<span class="reserved">prototype</span>.showElement = Mediamanager_
 Mediamanager.<span class="reserved">prototype</span>.hideElement = Mediamanager_hideElement;
 Mediamanager.<span class="reserved">prototype</span>.switchLayer = Mediamanager_switchLayer;
 Mediamanager.<span class="reserved">prototype</span>.checkOccurrences = Mediamanager_checkOccurrences;
+Mediamanager.<span class="reserved">prototype</span>.applyBehaviour = Mediamanager_applyBehaviour;
 
 <span class="comment">/**
  * MyLocal methods
@@ -242,7 +235,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
  * layer (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;) is active.
  * 
  * <span class="attrib">@see</span> #checkOccurrences
- * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Mediamanager_showElement (elem)
@@ -306,7 +299,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
  * layer (&lt;em&gt;myLocal&lt;/em&gt;, &lt;em&gt;myFlickr&lt;/em&gt;) is active.
  *
  * <span class="attrib">@see</span> #checkOccurrences
- * <span class="attrib">@param</span> {string} elem actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Mediamanager_hideElement (elem)
@@ -385,7 +378,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
  * <span class="attrib">@see</span> #hideElement
  * <span class="attrib">@see</span> #setCurrentElementStatusMyLocal
  * <span class="attrib">@see</span> #setCurrentElementStatusMyFlickr
- * <span class="attrib">@param</span> {string} elems actual element
+ * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@param</span> {string} exception Track if we need to provide extra rows, see {<span class="attrib">@link</span> #hideElement} and {<span class="attrib">@link</span> #showElement}
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
@@ -448,6 +441,46 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 					break;		
 			}
 		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Reapply event handler.
+ * &lt;br /&gt;
+ * Because we often need to refresh the Media Manager, we reapply
+ * the relevant event handler on class/id basis.
+ *
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Mediamanager_applyBehaviour ()
+{
+	try {
+		Behaviour.reapply(<span class="literal">'input'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_edit'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_upload'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_delete'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_cast'</span>);
+		Behaviour.reapply(<span class="literal">'a.pager'</span>);
+		Behaviour.reapply(<span class="literal">'a.pager_myFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertImageItem'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertImageItemFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_insertDocumentItem'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_myLocal'</span>);
+		Behaviour.reapply(<span class="literal">'a.mm_myFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_include_types_wrap'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_timeframe'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_user'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_photoset'</span>);
+		Behaviour.reapply(<span class="literal">'#mm_flickrtags'</span>);
+		Behaviour.reapply(<span class="literal">'#submit55'</span>);
+		Behaviour.reapply(<span class="literal">'.showMediamanagerElementMyLocal'</span>);
+		Behaviour.reapply(<span class="literal">'.hideMediamanagerElementMyLocal'</span>);
+		Behaviour.reapply(<span class="literal">'.showMediamanagerElementMyFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'.hideMediamanagerElementMyFlickr'</span>);
+		Behaviour.reapply(<span class="literal">'.iHelpMediamanager'</span>);
+		Behaviour.reapply(<span class="literal">'.iHelpRemoveMediamanager'</span>);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -696,7 +729,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 }
 
 <span class="comment">/**
- * Populate on XMLHttpRequest Response.
+ * Populate on XMLHttpRequest response.
  *
  * <span class="attrib">@see</span> #mediaToPodcast
  * <span class="attrib">@see</span> #mediaToPodcastOnLoad
@@ -723,7 +756,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 }
 
 <span class="comment">/**
- * Populate on XMLHttpRequest Response.
+ * Populate on XMLHttpRequest response.
  *
  * <span class="attrib">@see</span> #discardPodcast
  * <span class="attrib">@param</span> {object} req XMLHttpRequest response
@@ -871,7 +904,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
  * <span class="attrib">@see</span> #loaderMyLocal
  * <span class="attrib">@see</span> #showResponseInvokeInputs
  * <span class="attrib">@see</span> Helper#closePopup
- * <span class="attrib">@param</span> {object} elem Actual element to process
+ * <span class="attrib">@param</span> {object} elem Current element to process
  * <span class="attrib">@param</span> {string} pager_page Saved pager page count
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
@@ -926,7 +959,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 
 		$(<span class="literal">'hiddenFocus'</span>).focus();
 		
-		Helper.applyBehaviour();
+		Mediamanager.applyBehaviour();
 
 	} catch (e) {
 		_applyError(e);
@@ -962,7 +995,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 		Forms.setOnEvent($(<span class="literal">'mm_tags'</span>), <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);	
 		$(<span class="literal">'mm_tags'</span>).focus();
 			
-		Helper.applyBehaviour();
+		Mediamanager.applyBehaviour();
 		
 	} catch (e) {
 		_applyError(e);
@@ -1271,7 +1304,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
  * <span class="attrib">@see</span> #checkElemsMyFlickr
  * <span class="attrib">@see</span> #loaderMyFlickr
  * <span class="attrib">@see</span> #showResponseInvokeInputsMyFlickr
- * <span class="attrib">@param</span> {object} elem Actual element to process
+ * <span class="attrib">@param</span> {object} elem Current element to process
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Mediamanager_invokePagerMyFlickr (elem)
@@ -1389,7 +1422,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 		
 		$(<span class="literal">'hiddenFocus'</span>).focus();
 		
-		Helper.applyBehaviour();	
+		Mediamanager.applyBehaviour();	
 
 	} catch (e) {
 		_applyError(e);
@@ -1433,7 +1466,7 @@ Mediamanager.<span class="reserved">prototype</span>.insertImageItemFlickr = Med
 		Forms.setOnEvent($(<span class="literal">'mm_flickrtags'</span>), <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);
 		$(<span class="literal">'mm_flickrtags'</span>).focus();
 		
-		Helper.applyBehaviour();
+		Mediamanager.applyBehaviour();
 
 	} catch (e) {
 		_applyError(e);
@@ -1589,6 +1622,6 @@ Mediamanager = new Mediamanager();
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Mon Dec 11 12:48:56 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
 </body>
 </html>
