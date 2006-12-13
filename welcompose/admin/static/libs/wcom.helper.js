@@ -360,7 +360,7 @@ function Helper_lowerOpacityOnUpload ()
         this.buildHeight = this.lyContainer.offsetHeight;
         this.buildWidth = this.lyContainer.offsetWidth;
 		this.imageStr = '<img src="' + this.imagePath + '" width="' + this.buildWidth + '" height="' + this.buildHeight +'" alt="" />';
-		this.target_toLower = $('lyLowerOpacity');
+		this.targetToLower = $('lyLowerOpacity');
 
         if (this.targetToLower) {
 		 	this.targetToLower.style.display = this.cDisplay;
