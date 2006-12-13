@@ -1,8 +1,8 @@
 /**
  * Project: Welcompose
- * File: wcom.events.js
+ * File: wcom.events.standard.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
@@ -14,17 +14,14 @@
  *
  * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
  *
- * @copyright 2004-2005 creatics media.systems
+ * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
  
 /** 
- * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages which contains popups exclude the mediamanager.  
- * 
- * @author Olaf Gleba og@creatics.de
- * @version $Id: wcom.core.js 673 2006-11-23 21:46:53Z olaf $ 
+ * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager. 
  */
 
 /**

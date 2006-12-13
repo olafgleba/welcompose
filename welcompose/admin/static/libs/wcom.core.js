@@ -8,7 +8,7 @@
  * sopic GmbH
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
- *Mediamanager.applyBehaviour
+ *
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
@@ -21,10 +21,7 @@
  */
  
 /** 
- * @fileoverview The main Welcompose javascript enviroment. 
- * 
- * @author Olaf Gleba og@creatics.de
- * @version $Id$ 
+ * @fileoverview The main Welcompose javascript enviroment.
  */
 
 

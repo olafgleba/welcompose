@@ -123,11 +123,6 @@ try {
 		if (!is_null($request['mm_photoset'])) {
 			$photos = $FLICKR->photosetsGetPhotos($request['mm_photoset'], null, 1, 5,
 				$request['mm_start']);
-			
-			// since the Flickr Pager doesn't work right now, we want to hide the related html layer
-			// control var used in condition below
-			$exclude = 1;
-			
 		} elseif (is_null($request['mm_photoset']) && !empty($request['mm_flickrtags'])) {
 			// prepare search params
 			$params = array(
@@ -142,16 +137,9 @@ try {
 		}
 		$BASE->utility->smarty->assign('photos', $photos);
 		
-		// condition related to pager hide if photosets are in use
-		 if (empty($exclude)) {
-			// create page index
-			$page_count = intval(Base_Cnc::ifsetor($photos['pages'], null));
-			$BASE->utility->smarty->assign('page_index', $FLICKR->_flickrPageIndex($page_count));
-		}
-		
-		// empty var for next round
-		$exclude = '';
-		
+		// create page index
+		$page_count = intval(Base_Cnc::ifsetor($photos['pages'], null));
+		$BASE->utility->smarty->assign('page_index', $FLICKR->_flickrPageIndex($page_count));		
 	} catch (Exception $e) {
 		$BASE->utility->smarty->assign('error', $e->getMessage());
 	}

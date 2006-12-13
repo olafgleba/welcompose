@@ -2,7 +2,7 @@
  * Project: Welcompose
  * File: wcom.strings.js
  *
- * Copyright (c) 2004-2005 sopic GmbH
+ * Copyright (c) 2006 sopic GmbH
  *
  * Project owner:
  * sopic GmbH
@@ -21,10 +21,7 @@
  */
 
 /** 
- * @fileoverview The string repository for all classes.  
- * 
- * @author Olaf Gleba og@creatics.de
- * @version $Id$ 
+ * @fileoverview The string repository for all classes.
  */
 
 /**

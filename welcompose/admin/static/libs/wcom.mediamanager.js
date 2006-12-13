@@ -6,7 +6,7 @@
  *
  * Project owner:
  * sopic GmbH
- * 8472 Seuzach, SwitzerlandMediamanager.applyBehaviour
+ * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
  *
  * This file is licensed under the terms of the Open Software License
@@ -22,12 +22,7 @@
  
 /** 
  * @fileoverview The Mediamanager javascript enviroment.
- *
- * @author Olaf Gleba og@creatics.de
- * @version $Id$ 
  */
-
-
 
 /**
  * Constructs the Mediamanager class
