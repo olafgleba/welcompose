@@ -77,9 +77,8 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load blogcommentstatus class
-	/* @var $BLOGCOMMENTSTATUS Community_Blogcommentstatus */
-	$BLOGCOMMENTSTATUS = load('community:blogcommentstatus');
+	// load Community_BlogComment
+	$BLOGCOMMENT = load('Community:BlogComment');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
@@ -107,7 +106,7 @@ try {
 		$BASE->db->begin();
 		
 		// delete row
-		$BLOGCOMMENTSTATUS->deleteBlogCommentStatus(Base_Cnc::filterRequest($_REQUEST['id'],
+		$BLOGCOMMENT->deleteBlogComment(Base_Cnc::filterRequest($_REQUEST['id'],
 			WCOM_REGEX_NUMERIC));
 		
 		// commit transaction
@@ -126,7 +125,7 @@ try {
 	}
 
 	// go back to overview page
-	header("Location: blogcommentstatuses_select.php");
+	header("Location: blogcomments_select.php");
 	exit;
 
 } catch (Exception $e) {
