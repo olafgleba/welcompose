@@ -675,7 +675,7 @@ public function __construct ($cache_dir, $options = array())
 	
 	// import options
 	if (array_key_exists('cache_encrypt', $options) && is_bool($options['cache_encrypt'])) {
-		$this->_cache_encrypt = true;
+		$this->_cache_encrypt = $options['cache_encrypt'];
 	}
 	if (array_key_exists('cache_encrypt_passphrase', $options) && is_scalar($options['cache_encrypt_passphrase'])) {
 		$this->_cache_encrypt_passphrase = $options['cache_encrypt_passphrase'];
@@ -860,7 +860,7 @@ protected function getCachedFlickrRequest ($http_request_object)
 	$this->loadCacheLite();
 	
 	// get the cached response body
-	$cached_response_body = $this->cache->get($http_request_object->getUrl(null));
+	$cached_response_body = $this->cache->get($this->flickrResponseCacheId($http_request_object));
 	
 	// if the response body is empty, return false
 	if (empty($cached_response_body)) {
@@ -877,7 +877,7 @@ protected function getCachedFlickrRequest ($http_request_object)
 }
 
 /**
- * Caches the Flickr response as suppliedy by the http_response body.
+ * Caches the Flickr response as supplied by the http_response body.
  * Takes the HTTP_Request object as first argument, the response body
  * as second argument. Returns true on success.
  * 
@@ -906,11 +906,33 @@ protected function cacheFlickrResponse ($http_request_object, $http_response_bod
 	}
 	
 	// save response body to cache
-	if ($this->cache->save($http_response_body, $http_request_object->getUrl(null)) === false) {
+	if ($this->cache->save($http_response_body, $this->flickrResponseCacheId($http_request_object)) === false) {
 		throw new flickrClientException("Failed to cache the response body");
 	}
 	
 	return true;
+}
+
+/**
+ * Extracts the cache id from the HTTP_Request object.
+ *
+ * @return string
+ */
+protected function flickrResponseCacheId ($http_request_object)
+{
+	// input check
+	if (!($http_request_object instanceof HTTP_Request)) {
+		throw new flickrClientException("http_request_object is not an HTTP_Client instance");
+	}
+	
+	// prepend the prefix "encrypted" so that the whole flickr thing doesn't crash
+	// if somebody changes the flickrClient::_cache_encrypt setting during operation
+	// without purging the cache 
+	if ($this->_cache_encrypt) {
+		return "encrypted_".$http_request_object->getUrl(null);
+	} else {
+		return $http_request_object->getUrl(null);
+	}
 }
 
 /**
@@ -930,7 +952,8 @@ private function loadCacheLite ()
 		// prepare options array
 		$options = array(
 			'cacheDir' => $this->_cache_dir,
-			'lifeTime' => $this->_cache_lifetime
+			'lifeTime' => $this->_cache_lifetime,
+			'automaticCleaningFactor' => 200
 		);
 		
 		// create new Cache_Lite instance
