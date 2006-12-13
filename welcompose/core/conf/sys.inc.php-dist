@@ -58,6 +58,7 @@ global_template_url =
 
 [flickr]
 cache_dir = 
+cache_encrypt = 
 api_key = 
 
 ; */ ?>

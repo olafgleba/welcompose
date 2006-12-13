@@ -58,6 +58,7 @@ global_template_url = "{$configuration.root_www}/global_template.php?name=<globa
 
 [flickr]
 cache_dir = "{$configuration.root_disk}/tmp/flickr_cache/"
+cache_encrypt = true
 api_key = ""
 
 ; */ ?>

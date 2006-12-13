@@ -72,8 +72,16 @@ protected function __construct()
 			throw new Media_FlickrException("No Flickr API key found");
 		}
 		
+		
+		// prepare flickrClient options
+		$options = array(
+			'cache_encrypt' => (($this->base->_conf['flickr']['cache_encrypt']) ? true : false),
+			'cache_encrypt_passphrase' => $this->base->_conf['environment']['app_key']
+		);
+		
 		// create new flickrClient instance
-		$this->flickr_client = new flickrClient($this->base->_conf['flickr']['cache_dir']);
+		$this->flickr_client = new flickrClient($this->base->_conf['flickr']['cache_dir'],
+			$options);
 	} catch (Exception $e) {
 		// trigger error
 		printf('%s on Line %u: Unable to start class. Reason: %s.', $e->getFile(),
@@ -561,6 +569,13 @@ class flickrClient {
 	protected $cache = null;
 	
 	/**
+	 * Container for the PEAR Crypt_RC4 object
+	 * 
+	 * @var object
+	 */
+	protected $rc4 = null;
+	
+	/**
 	 * Whether the args and other input is encoded using
 	 * ISO-8859-1 or not. Then it will be automatically
 	 * converted to UTF-8.
@@ -606,19 +621,44 @@ class flickrClient {
 	 * @var int
 	 */
 	protected $_cache_lifetime = 1800;
+	
+	/**
+	 * Whether to encrypt the cache files or not
+	 *
+	 * @var bool
+	 */
+	protected $_cache_encrypt = false;
+	
+	/**
+	 * Passphrase to use for cache encryption
+	 *
+	 * @var string
+	 */
+	protected $_cache_encrypt_passphrase = null;
 
 /**
  * Creates new flickrClient instance. Takes the cache dir
- * to use as first argument.
+ * to use as first argument and an options array as second
+ * argument. Available options:
+ *
+ * <ul>
+ * <li>cache_encrypt, bool: Whether to encrypt the cache files or not</li>
+ * <li>cache_encrypt_passphrase, string: Passphrase to use for encryption.
+ * Required when using encryption.</li>
+ * </ul>
  *
  * @throws flickrClientException
  * @param string Path to cache dir
+ * @param array Options array
  */
-public function __construct ($cache_dir)
+public function __construct ($cache_dir, $options = array())
 {
 	// input check
 	if (empty($cache_dir) || !is_scalar($cache_dir)) {
 		throw new flickrClientException("cache_dir must be a non-empty scalar value");
+	}
+	if (!is_array($options)) {
+		throw new flickrClientException("Parameter options must be an array");
 	}
 	
 	// set new cache dir
@@ -632,6 +672,14 @@ public function __construct ($cache_dir)
 	
 	// load PEAR's HTTP_Request
 	require('HTTP/Request.php');
+	
+	// import options
+	if (array_key_exists('cache_encrypt', $options) && is_bool($options['cache_encrypt'])) {
+		$this->_cache_encrypt = true;
+	}
+	if (array_key_exists('cache_encrypt_passphrase', $options) && is_scalar($options['cache_encrypt_passphrase'])) {
+		$this->_cache_encrypt_passphrase = $options['cache_encrypt_passphrase'];
+	}
 }
 
 /** 
@@ -811,7 +859,21 @@ protected function getCachedFlickrRequest ($http_request_object)
 	// init PEAR's Cache_Lite
 	$this->loadCacheLite();
 	
-	return $this->cache->get($http_request_object->getUrl(null));
+	// get the cached response body
+	$cached_response_body = $this->cache->get($http_request_object->getUrl(null));
+	
+	// if the response body is empty, return false
+	if (empty($cached_response_body)) {
+		return false;
+	}
+	
+	// decrypt the cached response body if required
+	if ($this->_cache_encrypt) {
+		$cached_response_body = base64_decode($cached_response_body);
+		$this->rc4->decrypt($cached_response_body);
+	}
+	
+	return $cached_response_body;
 }
 
 /**
@@ -836,6 +898,12 @@ protected function cacheFlickrResponse ($http_request_object, $http_response_bod
 	
 	// init PEAR's Cache_Lite
 	$this->loadCacheLite();
+	
+	// encrypt the response body if required
+	if ($this->_cache_encrypt) {
+		$this->rc4->crypt($http_response_body);
+		$http_response_body = base64_encode($http_response_body);
+	}
 	
 	// save response body to cache
 	if ($this->cache->save($http_response_body, $http_request_object->getUrl(null)) === false) {
@@ -867,6 +935,20 @@ private function loadCacheLite ()
 		
 		// create new Cache_Lite instance
 		$this->cache = new Cache_Lite($options);
+		
+		// load PEAR::Crypt_RC4 if encryption is enabled
+		if ($this->_cache_encrypt) {
+			// load PEAR::Crypt_RC4
+			require('Crypt/Rc4.php');
+			
+			// input check
+			if (empty($this->_cache_encrypt_passphrase) || !is_scalar($this->_cache_encrypt_passphrase)) {
+				throw new flickrClientException("No useable passphrase for cache encryption found");
+			}
+			
+			// create instance of PEAR::Crypt_RC4
+			$this->rc4 = new Crypt_RC4($this->_cache_encrypt_passphrase);
+		}
 	}
 }
 

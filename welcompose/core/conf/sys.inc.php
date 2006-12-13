@@ -59,6 +59,7 @@ global_template_url = "/welcompose/trunk/welcompose/global_template.php?name=<gl
 
 [flickr]
 cache_dir = "/www/welcompose/trunk/welcompose/tmp/flickr_cache"
+cache_encrypt = true
 api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"
 
 ; */ ?>
