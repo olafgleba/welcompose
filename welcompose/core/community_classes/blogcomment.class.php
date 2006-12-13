@@ -321,7 +321,7 @@ public function selectBlogComments ($params = array())
 	
 	// define order macros
 	$macros = array(
-		'DATE_ADDED' => '`content_blog_postings`.`date_added`'
+		'DATE_ADDED' => '`community_blog_comments`.`date_added`'
 	);
 	
 	// load helper class
@@ -443,7 +443,7 @@ public function selectBlogComments ($params = array())
 	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
 		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
 	}
-
+	
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
