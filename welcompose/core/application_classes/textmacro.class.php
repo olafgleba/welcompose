@@ -568,7 +568,7 @@ public function applyTextMacros ($text, $stage = "pre")
 			}
 
 			// include text macro file
-			require($path);
+			require_once($path);
 
 			// prepare function name
 			$function_name = sprintf("wcom_plugin_textmacro_%s", $_macro['internal_name']);
