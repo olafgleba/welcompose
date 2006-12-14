@@ -1434,8 +1434,13 @@ padding: 10px 0 0 0;
 margin: 0;
 font-size: 100%;
 }
-.inner p.content {
-padding: 0;
+.inner {
+display: none;
+background: #d9d9d9 url(../img/bg_slides.gif);
+padding: 0 0 1em 15px;
+}
+#content .inner p {
+padding: 2px 15px 2px 0;
 margin: 0;
 line-height: 140%;
 }

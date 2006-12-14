@@ -1275,10 +1275,10 @@ function Tables_hideTableRow (elem)
 		this.ibid = String('i_' + this.bid[1]);
 		
 		// process inner div
-		Effect.Fade(this.ibid,{duration: 0.8});
+		Effect.Fade(this.ibid,{duration: 0.6});
 			
 		// process outer table tr
-		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 800);
+		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 550);
 		
 		// coloring top row
 		this.elem.parentNode.parentNode.style.color = '';

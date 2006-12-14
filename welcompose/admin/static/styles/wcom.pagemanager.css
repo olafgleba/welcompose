@@ -44,6 +44,7 @@ margin: 10px 10px 20px 10px;
 }
 table th {
 padding: 0 0 5px 0;
+vertical-align: top;
 }
 table td {
 padding: 4px 0 4px 0;
@@ -215,4 +216,9 @@ margin: 20px 0 5px 0;
 font-size: 1px;
 line-height: 1px;
 border: 0 none;
+}
+
+/* Blogcomments */
+table.blogcomments td {
+padding: 4px 10px 4px 0;
 }

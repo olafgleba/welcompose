@@ -104,34 +104,36 @@
 {/foreach}
 </ul>
 {/if}
-<table summary="{i18n Blog Comments List}">
+<table summary="{i18n Blog Comments List}" class="blogcomments">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="220" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="280" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">{i18n Blog-Name} <span class="az"></span> <span class="za"></span></th>
-<th class="email">{i18n Posting Title}</th>
-<th class="proj">{i18n Author} <span class="az"></span> <span class="za"></span></th>
-<th class="proj">{i18n Status} <span class="az"></span> <span class="za"></span></th>
-<th>{i18n View Comment}</th>
+<th>{i18n Blog-Name}<br />{i18n Posting Title}</th>
+<th>{i18n Author}<br />{i18n Mail/Homepage}</th>
+<th>{i18n First 80 chars of comment}</th>
+<th>{i18n Status}</th>
+<th>{i18n View}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$blog_comments item=_comment}
 <tr>
-<td>{$_comment.page_name|escape:"htmlall"}</td>
-<td>{$_comment.blog_posting_title|escape:"htmlall"|nl2br}</td>
-<td>
-{i18n User}: {if !empty($_comment.user)}{i18n yes}{else}{i18n no}{/if}<br />
-{i18n Name}: {$_comment.name|escape:"htmlall"}<br />
-{$_comment.email|escape:"htmlall"}<br />
+<td>{$_comment.page_name|escape:"htmlall"}<br/>{$_comment.blog_posting_title|escape:"htmlall"|nl2br}</td>
+<td>{$_comment.name|escape:"htmlall"}<br />
+{if !empty($_comment.email)}
+{$_comment.email|escape:"htmlall"}
+{else}
 {$_comment.homepage|escape:"htmlall"|nl2br}</td>
+{/if}
+<td>
+{$_comment.content_raw|truncate:80}</td>
 <td>
 <form action="" method="post">
 <fieldset>
@@ -153,11 +155,13 @@
 <div id="i_{$_comment.id}" class="inner">
 <fieldset>
 <h3>{i18n Comment}</h3>
-<p class="content">{$_comment.content_raw}</p>
+<p>{$_comment.content_raw}</p>
+{if !empty($_comment.spam_report)}
 <h3>{i18n Spam report}</h3>
-<p class="content">{$_comment.spam_report}</p>
+<p>{$_comment.spam_report}</p>
+{/if}
 <h3>{i18n Edited}</h3>
-<p class="content">{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
+<p>{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
 </fieldset>
 </div>
 </td>
