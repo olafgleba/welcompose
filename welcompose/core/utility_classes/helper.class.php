@@ -832,6 +832,10 @@ public function createMeaningfulString ($str)
 	// remove unnecessary dashes
 	$str = preg_replace('=(-+)=', '-', $str);
 	
+	// remove dashes at the beginning and at the end of the string
+	$str = preg_replace('=^(-+)=', null, $str);
+	$str = preg_replace('=(-+)$=', null, $str);
+	
 	// return meaningful url
 	return $str;
 }
