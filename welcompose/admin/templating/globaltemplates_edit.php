@@ -255,7 +255,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: globaltemplates_select.php");
+		header("Location: globaltemplates_edit.php?id=".(int)$FORM->exportValue('id'));
 		exit;
 	}
 } catch (Exception $e) {
