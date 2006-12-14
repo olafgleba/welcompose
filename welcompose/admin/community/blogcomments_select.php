@@ -134,6 +134,7 @@ try {
 	// get available comments
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
 		'status' => Base_Cnc::filterRequest($_REQUEST['status'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
@@ -150,6 +151,7 @@ try {
 	// count available blog comments
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
 		'status' => Base_Cnc::filterRequest($_REQUEST['status'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME)
 	);
@@ -162,6 +164,7 @@ try {
 	// import and assign request params
 	$request = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
 		'status' => Base_Cnc::filterRequest($_REQUEST['status'], WCOM_REGEX_TIMEFRAME),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
