@@ -344,6 +344,12 @@ try {
 	$FORM->applyFilter('tags', 'trim');
 	$FORM->applyFilter('tags', 'strip_tags');
 	
+	// textarea for feed_summary
+	$FORM->addElement('textarea', 'feed_summary', gettext('Feed Summary'),
+		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+	$FORM->applyFilter('feed_summary', 'trim');
+	$FORM->applyFilter('feed_summary', 'strip_tags');
+	
 	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
 		array('id' => 'blog_posting_draft', 'class' => 'chbx'));
@@ -457,6 +463,8 @@ try {
 		$sqlData['summary'] = $FORM->exportValue('summary');
 		$sqlData['content_raw'] = $FORM->exportValue('content');
 		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['feed_summary_raw'] = $FORM->exportValue('feed_summary');
+		$sqlData['feed_summary'] = $FORM->exportValue('feed_summary');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
@@ -477,11 +485,13 @@ try {
 			// extract summary/content
 			$summary = $FORM->exportValue('summary');
 			$content = $FORM->exportValue('content');
+			$feed_summary = $FORM->exportValue('feed_summary');
 
 			// apply startup and pre text converter text macros 
 			if ($FORM->exportValue('apply_macros') > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'pre');
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'pre');
 			}
 
 			// apply text converter
@@ -500,11 +510,13 @@ try {
 			if ($FORM->exportValue('apply_macros') > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'post');
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
+				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'post');
 			}
 
 			// assign summary/content to sql data array
 			$sqlData['summary'] = $summary;
 			$sqlData['content'] = $content;
+			$sqlData['feed_summary'] = $feed_summary;
 		}
 
 		// test sql data for pear errors
