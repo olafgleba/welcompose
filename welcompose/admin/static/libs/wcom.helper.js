@@ -64,6 +64,7 @@ Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
 Helper.prototype.unsupportsElems = Helper_unsupportsElems;
 Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
+Helper.prototype.definePageY = Helper_definePageY;
 Helper.prototype.showNextNode = Helper_showNextNode;
 Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
@@ -93,7 +94,6 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
-
 
 
 /**
@@ -534,16 +534,16 @@ function Helper_defineWindowX (elemWidth)
 		this.el = elemWidth;
 		var x;
 		
+		// all except Explorer
 		if (self.innerHeight) {
-			// all except Explorer {
 			x = Math.round(self.innerWidth) - (Math.round(this.el));
 		}
+		// Explorer 6 Strict Mode
 		else if (document.documentElement && document.documentElement.clientHeight) {
-			// Explorer 6 Strict Mode
 			x = Math.round(document.documentElement.clientWidth) - (Math.round(this.el));
 		}
+		// other Explorers
 		else if (document.body) {
-			// other Explorers
 			x = Math.round(document.body.clientWidth) - (Math.round(this.el));
 		}
 		x = Math.round(x/2);
@@ -568,17 +568,50 @@ function Helper_defineWindowY ()
 		//properties
 		var y;
 	
-		if (self.innerHeight) { 
 		// all except Explorer
+		if (self.innerHeight) { 
 			y = Math.round(self.innerHeight/6);
 		}
+		// Explorer 6 Strict Mode
 		else if (document.documentElement && document.documentElement.clientHeight) {
-			// Explorer 6 Strict Mode
 			y = Math.round(document.documentElement.clientHeight/6);
 		}
+		// other Explorers
 		else if (document.body) {
-			// other Explorers
 			y = Math.round(document.body.clientHeight/6);
+		}
+		return y;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Define window scroll offset.
+ * <br />
+ * Returns the scroll offset of page.
+ * Adapted from http://www.quirksmode.org/
+ * 
+ * @see #loaderChangeBlogCommentStatus
+ * @throws applyError on exception
+ * @return {number} y
+ */
+function Helper_definePageY ()
+{
+	try {
+		var y;
+		
+		// all except Explorer
+		if (self.pageYOffset) {
+			y = self.pageYOffset;
+		}
+		// Explorer 6 Strict
+		else if (document.documentElement && document.documentElement.scrollTop) {
+			y = document.documentElement.scrollTop;
+		}
+		// all other Explorers
+		else if (document.body) {
+			y = document.body.scrollTop;
 		}
 		return y;
 	} catch (e) {
@@ -1044,7 +1077,7 @@ function Helper_changeBlogCommentStatus (elem)
 
 /**
  * Display indicator layer while XMLHttpRequest processing.
- * Trigger {@link #lowerOpacity}.
+ * Triggers {@link #lowerOpacity}.
  *
  * @see #lowerOpacity
  * @throws applyError on exception
@@ -1053,7 +1086,13 @@ function Helper_loaderChangeBlogCommentStatus ()
 {
 	try {
 		Helper.lowerOpacity();
-		Effect.Appear('statuschange', {duration: 0.6, delay: 0.2});
+
+		this.statuschange = $('statuschange');
+		var winHeight = Helper.defineWindowY();
+		var scrollPos = Helper.definePageY();		
+		this.statuschange.style.top = winHeight + scrollPos + 140 + 'px';
+		
+		Effect.Appear(this.statuschange, {duration: 0.6, delay: 0.2});
 	} catch (e) {
 		_applyError(e);
 	}

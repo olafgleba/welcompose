@@ -69,7 +69,7 @@ height: 56px;
 width: 60px;
 background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
-h2, h3, h4, p, a, li, th, td, select, label, input {
+h2, h3, h4, p, a, li, th, td, select, label, input, textarea {
 font-size: 0.80em;
 }
 p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p,
@@ -558,7 +558,12 @@ margin: 5px 0;
 padding: 3px 0 0 0;
 height: 1.5em;
 }
-input.w130, input.w150, input.w200, input.w300, input.w540, input.w580 {
+input.w130,
+input.w150,
+input.w200,
+input.w300,
+input.w540,
+input.w580 {
 width: 130px;
 border: 1px solid #666;
 padding: 2px 2px;
@@ -593,7 +598,7 @@ width: 580px;
 font-weight: bold;
 }
 textarea {
-font: 100% verdana, ariel, sans-serif;
+font: 100% ariel, sans-serif;
 border: 1px solid #666;
 }
 textarea.w540h550 {
@@ -644,7 +649,6 @@ input.submit240,
 input.submit240bez260 {
 text-align: left;
 height: 20px;
-font-size: 80%;
 font-weight: bold;
 color: #fff;
 border: 0 none;
@@ -1145,8 +1149,8 @@ padding: 3px 8px;
 min-height: 590px;
 background: #fff;
 }
-/* IE 6, IE 7 */
-* html #modalBody, *+html #modalBody {
+/* IE 6 */
+* html #modalBody {
 height: 590px;
 }
 #modalBody table td {
@@ -1210,7 +1214,7 @@ width: auto;
 #secondNode table,
 #thirdNode table {
 float: left;
-width: 225px;
+width: 235px;
 padding: 0;
 margin: 0 2px 0 0;
 border: 0 none;
@@ -1225,12 +1229,12 @@ vertical-align: top;
 #firstNode table td.initialNode,
 #secondNode table td.initialNode,
 #thirdNode table td.initialNode {
-width: 215px;
+width: 205px;
 }
 #firstNode table td.nextNode,
 #secondNode table td.nextNode,
 #thirdNode table td.nextNode {
-width: 25px;
+width: 45px;
 }
 #firstNode a,
 #secondNode a,
@@ -1451,7 +1455,6 @@ display: none;
 }
 #statuschange {
 position: absolute;
-top: 40%;
 left: 15%;
 width: 710px;
 background: transparent url(../img/bg_statuschange_top.gif) 0 0 no-repeat;
