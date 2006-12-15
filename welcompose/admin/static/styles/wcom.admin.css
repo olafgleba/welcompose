@@ -598,7 +598,7 @@ width: 580px;
 font-weight: bold;
 }
 textarea {
-font: 100% ariel, sans-serif;
+font: 100% arial, sans-serif;
 border: 1px solid #666;
 }
 textarea.w540h550 {
@@ -830,7 +830,7 @@ background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 6, IE 7 */
 * html #container #error, *+html #container #error {
-margin-top: 50px;
+margin-top: 45px;
 }
 #error ul.req {
 line-height: 1.2em;
@@ -849,8 +849,8 @@ margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 6, IE 7 */
-* html #container #rp, #container *+html #rp {
-margin-top: 50px;
+* html #container #rp, *+html #container #rp {
+margin-top: 45px;
 }
 #rp h1 {
 margin: 0;
