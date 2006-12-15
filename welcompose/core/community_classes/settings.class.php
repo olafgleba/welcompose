@@ -221,7 +221,7 @@ protected function settingsInit ()
 {
 	// access check
 	if (!wcom_check_access('Community', 'Settings', 'Manage')) {
-		throw new Community_BlogCommentStatusException("You are not allowed to perform this action");
+		throw new Community_SettingsException("You are not allowed to perform this action");
 	}
 	
 	// make sure that there are no orphaned rows with settings
