@@ -199,7 +199,7 @@ public function render ()
 		$FORM->addRule('comment', gettext('Please enter a comment'), 'required');
 		
 		// textfield for captcha if the captcha is enabled
-		if ($this->_simple_form['use_captcha'] != 'no') {
+		if ($this->_settings['blog_comment_use_captcha'] != 'no') {
 			$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
 				array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
 			$FORM->applyFilter('_qf_captcha', 'trim');
@@ -310,15 +310,16 @@ public function render ()
 		$this->base->utility->smarty->assign('form', $renderer->toArray());
 		
 		// generate captcha if required
-		if ($this->_simple_form['use_captcha'] != 'no') {
+		if ($this->_settings['blog_comment_use_captcha'] != 'no') {
 			// captcha generation
-			if ($this->_simple_form['use_captcha'] == 'image') {
+			$captcha = null;
+			if ($this->_settings['blog_comment_use_captcha'] == 'image') {
 				// generate image captcha
 				$captcha = $this->captcha->createCaptcha('image');
 
 				// let's tell the template that the captcha is an image
 				$this->base->utility->smarty->assign('captcha_type', 'image');
-			} elseif ($this->_simple_form['use_captcha'] == 'numeral') { 
+			} elseif ($this->_settings['blog_comment_use_captcha'] == 'numeral') { 
 				// generate numeral captcha
 				// $captcha = $this->captcha->createCaptcha('numeral');
 
