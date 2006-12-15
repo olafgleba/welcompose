@@ -271,7 +271,16 @@ public function selectBlogPosting ($id)
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
-			`content_pages`.`image_big` AS `page_image_big`
+			`content_pages`.`image_big` AS `page_image_big`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		JOIN
@@ -458,7 +467,16 @@ public function selectBlogPostings ($params = array())
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
-			`content_pages`.`image_big` AS `page_image_big`
+			`content_pages`.`image_big` AS `page_image_big`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
 		JOIN
