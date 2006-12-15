@@ -109,7 +109,7 @@ try {
 	// prepare array with configuration information
 	$configuration = array(
 		'root_www' => preg_replace("=^(.*?)/setup(.*)=", '$1', $_SERVER['SCRIPT_NAME']),
-		'root_disk' => preg_replace("=^(.*?)/setup(.*)=", '$1', dirname(__FILE__)),
+		'root_disk' => preg_replace("=^(.*?)/setup(.*)=", '$1', str_replace('\\', '/', dirname(__FILE__))),
 		'locale' => $_SESSION['setup']['configuration_locale'],
 		'app_key' => Base_Cnc::uniqueId(),
 		'dsn' => $dsn,
