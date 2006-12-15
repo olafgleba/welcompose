@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 18.11.2006 12:15:01
--- Diagram Version: 169
+-- Created on: 15.12.2006 11:49:09
+-- Diagram Version: 170
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -457,7 +457,7 @@ DROP TABLE IF EXISTS `content_nodes`;
 CREATE TABLE `content_nodes` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `navigation` int(11) UNSIGNED NOT NULL,
-  `root_node` int(11) UNSIGNED NOT NULL,
+  `root_node` int(11) UNSIGNED,
   `parent` int(11) UNSIGNED,
   `lft` int(11) UNSIGNED NOT NULL,
   `rgt` int(11) UNSIGNED NOT NULL,
