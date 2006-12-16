@@ -52,7 +52,8 @@ class Utility_UrlGenerator {
 		'posting_title' => '<posting_title>',
 		'posting_year_added' => '<posting_year_added>',
 		'posting_month_added' => '<posting_month_added>',
-		'posting_day_added' => '<posting_day_added>'
+		'posting_day_added' => '<posting_day_added>',
+		'start' => '<start>'
 	);
 	
 	/**
@@ -217,6 +218,9 @@ public function generateInternalLink ($args = array())
 	// ommits the page name
 	if ($current_page['index_page']) {
 		$url_pattern_name = $url_pattern_name."_start";
+	}
+	if (array_key_exists('start', $this->_args_and_patterns)) {
+		$url_pattern_name = $url_pattern_name."_pager";
 	}
 	
 	// if the url pattern does not exist, we can return false

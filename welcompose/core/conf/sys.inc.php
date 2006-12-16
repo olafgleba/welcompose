@@ -15,7 +15,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/tmp/mysql-4.1.sock;dbname=welcompose"
+dsn = "mysql:unix_socket=/tmp/mysql-5.0.sock;dbname=welcompose"
 username = "root"
 password = 
 table_alias_constants = true
@@ -28,7 +28,7 @@ store_disk = "/www/welcompose/trunk/welcompose/files/media"
 
 [global_file]
 store_www = "/welcompose/trunk/welcompose/files/global_files"
-store_disk = "/welcompose/trunk/welcompose/files/global_files"
+store_disk = "/www/welcompose/trunk/welcompose/files/global_files"
 
 [caching]
 index.php_mode = 0
@@ -39,22 +39,28 @@ textconverter_dir = "/www/welcompose/trunk/welcompose/core/plugins/textconverter
 textmacro_dir = "/www/welcompose/trunk/welcompose/core/plugins/textmacros"
 
 [urls]
-simple_page_index = "/welcompose/trunk/welcompose/<page_name>/"
+simple_page_index = "/welcompose/trunk/welcompose/page/<page_name>/"
 simple_page_index_start = "/welcompose/trunk/welcompose/"
-simple_form_index = "/welcompose/trunk/welcompose/<page_name>/"
+simple_form_index = "/welcompose/trunk/welcompose/page/<page_name>/"
 simple_form_index_start = "/welcompose/trunk/welcompose/"
-blog_index = "/<page_name>/<start>/"
+blog_index = "/welcompose/trunk/welcompose/page/<page_name>/"
+blog_index_pager = "/welcompose/trunk/welcompose/page/<page_name>/offset/<start>/"
 blog_index_start = "/welcompose/trunk/welcompose/"
-blog_atom_10 = "/welcompose/trunk/welcompose/<page_name>/Atom10/"
+blog_index_start_pager = "/welcompose/trunk/welcompose/offset/<start>/"
+blog_atom_10 = "/welcompose/trunk/welcompose/page/<page_name>/Atom10/"
 blog_atom_10_start = "/welcompose/trunk/welcompose/Atom10/"
-blog_rss_20 = "/welcompose/trunk/welcompose/<page_name>/Rss20/"
+blog_rss_20 = "/welcompose/trunk/welcompose/page/<page_name>/Rss20/"
 blog_rss_20_start = "/welcompose/trunk/welcompose/Rss20/"
-blog_item = "/welcompose/trunk/welcompose/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_item = "/welcompose/trunk/welcompose/page/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
 blog_item_start = "/welcompose/trunk/welcompose/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
-blog_archive_year = "/welcompose/trunk/welcompose/<page_name>/<posting_year_added>/"
+blog_archive_year = "/welcompose/trunk/welcompose/page/<page_name>/<posting_year_added>/"
+blog_archive_year_pager = "/welcompose/trunk/welcompose/page/<page_name>/<posting_year_added>/offset/<start>/"
 blog_archive_year_start = "/welcompose/trunk/welcompose/<posting_year_added>/"
-blog_archive_month = "/welcompose/trunk/welcompose/<page_name>/<posting_year_added>/<posting_month_added>/"
+blog_archive_year_start_pager = "/welcompose/trunk/welcompose/<posting_year_added>/offset/<start>"
+blog_archive_month = "/welcompose/trunk/welcompose/page/<page_name>/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_pager = "/welcompose/trunk/welcompose/page/<page_name>/<posting_year_added>/<posting_month_added>/offset/<start>/"
 blog_archive_month_start = "/welcompose/trunk/welcompose/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_start_pager = "/welcompose/trunk/welcompose/<posting_year_added>/<posting_month_added>/offset/<start>/"
 global_template_url = "/welcompose/trunk/welcompose/global_template.php?name=<global_file_name>&project=<project_name>"
 
 [flickr]
