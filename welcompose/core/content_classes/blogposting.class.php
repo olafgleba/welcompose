@@ -561,6 +561,9 @@ public function selectBlogPostings ($params = array())
  * <li>user, int, optional: User/author id</li>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
+ * <li>year_added, string, optional: four digit year number</li>
+ * <li>month_added, string, optional: two digit month number</li>
+ * <li>day_added, string, optional: two digit day number</li>
  * </ul>
  * 
  * @throws Content_BlogpostingException
@@ -578,6 +581,9 @@ public function countBlogPostings ($params = array())
 	$user = null;
 	$page = null;
 	$draft = null;
+	$year_added = null;
+	$month_added = null;
+	$day_added = null;
 	$timeframe = null;
 	$bind_params = array();
 	
@@ -586,18 +592,18 @@ public function countBlogPostings ($params = array())
 		throw new Content_BlogpostingException('Input for parameter params is not an array');	
 	}
 	
-	// load helper class
-	$HELPER = load('utility:helper');
-	
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'year_added':
+			case 'month_added':
+			case 'day_added':
+			case 'timeframe':
+					$$_key = (string)$_value;
+				break;
 			case 'user':
 			case 'page':
 					$$_key = (int)$_value;
-				break;
-			case 'timeframe':
-					$$_key = (string)$_value;
 				break;
 			case 'draft':
 					$$_key = (is_null($_value) ? null : (string)$_value);
@@ -606,6 +612,9 @@ public function countBlogPostings ($params = array())
 				throw new Content_BlogpostingException("Unknown parameter $_key");
 		}
 	}
+	
+	// load helper class
+	$HELPER = load('utility:helper');
 	
 	// prepare query
 	$sql = "
@@ -621,6 +630,14 @@ public function countBlogPostings ($params = array())
 			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		  ON
 			`content_blog_postings`.`page` = `content_pages`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
+		LEFT JOIN
+			".WCOM_DB_CONTENT_BLOG_PODCASTS." AS `content_blog_podcasts`
+		  ON
+			`content_blog_postings`.`id` = `content_blog_podcasts`.`blog_posting`
 		WHERE
 			`content_pages`.`project` = :project
 	";
@@ -632,16 +649,28 @@ public function countBlogPostings ($params = array())
 	
 	// add where clauses
 	if (!empty($user) && is_numeric($user)) {
-		$sql .= " AND `application_users`.`id` = :user ";
+		$sql .= " AND `user_users`.`id` = :user ";
 		$bind_params['user'] = $user;
 	}
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
 	}
-	if (is_numeric($draft)) {
+	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
-		$bind_params['draft'] = $draft;
+		$bind_params['draft'] = (string)$draft;
+	}
+	if (!is_null($year_added) && is_numeric($year_added)) {
+		$sql .= " AND `content_blog_postings`.`year_added` = :year_added ";
+		$bind_params['year_added'] = (string)$year_added;
+	}
+	if (!is_null($month_added) && is_numeric($month_added)) {
+		$sql .= " AND `content_blog_postings`.`month_added` = :month_added ";
+		$bind_params['month_added'] = (string)$month_added;
+	}
+	if (!is_null($day_added) && is_numeric($day_added)) {
+		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
+		$bind_params['day_added'] = (string)$day_added;
 	}
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
@@ -783,7 +812,7 @@ public function selectDifferentMonths ($params)
 	
 	// input check
 	if (!is_array($params)) {
-		throw new blogpostingException('Input for parameter params is not an array');	
+		throw new Content_BlogPostingException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -799,7 +828,7 @@ public function selectDifferentMonths ($params)
 					$$_key = (string)$_value;
 				break;
 			default:
-				throw new blogpostingException("Unknown parameter $_key");
+				throw new Content_BlogPostingException("Unknown parameter $_key");
 		}
 	}
 	
@@ -890,7 +919,7 @@ public function selectDifferentDays ($params)
 	
 	// input check
 	if (!is_array($params)) {
-		throw new blogpostingException('Input for parameter params is not an array');	
+		throw new Content_BlogPostingException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -907,7 +936,7 @@ public function selectDifferentDays ($params)
 					$$_key = (string)$_value;
 				break;
 			default:
-				throw new blogpostingException("Unknown parameter $_key");
+				throw new Content_BlogPostingException("Unknown parameter $_key");
 		}
 	}
 	
@@ -993,7 +1022,7 @@ public function resolveBlogPosting ()
 	}
 	
 	// let's see if there's a posting id in the request url
-	$posting_id = Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC);
+	$posting_id = Base_Cnc::filterRequest($_REQUEST['posting_id'], WCOM_REGEX_NUMERIC);
 	
 	if (!is_null($posting_id)) {
 		if ($this->blogPostingExists($posting_id)) {
@@ -1008,9 +1037,9 @@ public function resolveBlogPosting ()
 	
 	// prepare date added
 	$date_added = sprintf("%s-%s-%s%%",
-		Base_Cnc::filterRequest($_REQUEST['year'], WCOM_REGEX_NUMERIC),
-		Base_Cnc::filterRequest($_REQUEST['month'], WCOM_REGEX_NUMERIC),
-		Base_Cnc::filterRequest($_REQUEST['day'], WCOM_REGEX_NUMERIC)
+		Base_Cnc::filterRequest($_REQUEST['posting_year_added'], WCOM_REGEX_NUMERIC),
+		Base_Cnc::filterRequest($_REQUEST['posting_month_added'], WCOM_REGEX_NUMERIC),
+		Base_Cnc::filterRequest($_REQUEST['posting_day_added'], WCOM_REGEX_NUMERIC)
 	);
 	
 	// prepare query
@@ -1030,7 +1059,8 @@ public function resolveBlogPosting ()
 	
 	// prepare bind params
 	$bind_params = array(
-		'title_url' => Base_Cnc::filterRequest($_REQUEST['title'], WCOM_REGEX_MEANINGFUL_STRING),
+		'title_url' => Base_Cnc::filterRequest($_REQUEST['posting_title'],
+			WCOM_REGEX_MEANINGFUL_STRING),
 		'date_added' => $date_added,
 		'page' => WCOM_CURRENT_PAGE
 	);
