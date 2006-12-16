@@ -42,6 +42,7 @@ example: '=errors'
 * {
 margin: 0;
 padding: 0;
+font-family: Arial, Helvetica, sans-serif;
 }
 html, body, fieldset, a img {
 border: 0 none;
@@ -69,12 +70,22 @@ height: 56px;
 width: 60px;
 background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
-h2, h3, h4, p, a, li, th, td, select, label, input, textarea {
+h2, h3, h4, p, a, li, th, td, label, select, input, textarea, 
+span .bez, fieldset.void {
 font-size: 0.80em;
 }
-p a, li a, th a, td a, label select, label input, label p, label span span a, td label, td p,
-#column a, fieldset.topbg .act a {
+
+h2 a, h3 a, h4 a, p a, li a, th a, td a, label a, select a, input a,
+li h2, li h3, li h4, li p, li a,
+th p, th a, th li, th label, th select, th input, th textarea,
+td p, td a, td li, td label, td select, td input, td textarea,
+label select, label input, label p, label a, 
+textarea {
 font-size: 100%;
+}
+
+.filter label {
+font-size: 75%;
 }
 
 /* %G =links */
@@ -455,7 +466,7 @@ font-weight: bold;
 h3.pagenav {
 margin-left: 10px;
 float: left;
-font-weight: normal;;
+font-weight: normal;
 }
 ul.pagenav {
 list-style: none;
@@ -501,11 +512,9 @@ width: 690px;
 padding: 40px 10px 0 10px;
 overflow: hidden;
 }
-fieldset.void {
-font-size: 100%;
-}
+
 fieldset.topbg h2, fieldset.within h2 {
-font-size: 1.0em;
+/* font-size: 1em; */
 font-weight: normal;
 padding: 0 10px 0 0;
 color: #0c3;
@@ -598,7 +607,6 @@ width: 580px;
 font-weight: bold;
 }
 textarea {
-font: 100% arial, sans-serif;
 border: 1px solid #666;
 }
 textarea.w540h550 {
@@ -632,10 +640,7 @@ border: 1px solid #666;
 input.chbx {
 border-color: #666;
 }
-/* Reset for inner table definition */
-td input.submit140, td input.submit200, td select {
-font-size: 100%;
-}
+
 /* eof Reset for inner table definition */
 
 input#submit55,
@@ -711,7 +716,6 @@ text-align: right;
 #projects .fselect {
 margin: 1px 5px 0 0;
 padding: 0;
-font-size: 80%;
 border: 1px solid #666666;
 }
 
@@ -805,7 +809,6 @@ padding: 0;
 margin-right: 10px;
 }
 .filter label {
-font-size: 75%;
 display: block;
 float: left;
 line-height: 1.5em;
@@ -922,7 +925,6 @@ margin: 2px 0 2px 0;
 display: block;
 width: 217px;
 margin: 2px 0 2px 0;
-font-size: 80%;
 }
 #column span.cbxspread {
 margin: 5px 8px 0 2px;
@@ -933,7 +935,6 @@ margin: 2px 5px 2px 2px;
 }
 #column .mmwrap label {
 display: inline;
-font-size: 80%;
 width: auto;
 }
 form#mediamanager {
@@ -974,7 +975,6 @@ display: inline;
 position: relative;
 display: block;
 float: left;
-font-size: 80%;
 padding: 2px 4px 3px 17px;
 text-decoration: none;
 }
@@ -990,7 +990,6 @@ background: transparent url(../img/icons/link.gif) 1px -44px no-repeat;
 position: relative;
 display: block;
 float: left;
-font-size: 80%;
 padding: 2px 4px 3px 17px;
 text-decoration: none;
 color: #00AE2C;
@@ -1006,7 +1005,6 @@ margin-bottom: 3px;
 #myLocal_mm_content, #myFlickr_mm_content {
 display: block;
 height: 392px;
-font-size: 80%;
 background: #f9f9f9;
 padding: 2px 2px;
 margin-bottom: 3px;
@@ -1032,7 +1030,6 @@ text-align:  center;
 .mm_pager {
 display: block;
 background: #f9f9f9;
-font-size: 80%;
 padding: 4px 5px 4px 5px;
 }
 .mm_pager a:link, .mm_pager a:visited {
@@ -1092,7 +1089,6 @@ padding: 0;
 #mm_user_wrap table td {
 margin: 0;
 padding: 0 2px 0 0;
-font-size: 100%;
 }
 
 #myLocal_mm_contentToPopulate table, #myFlickr_mm_contentToPopulate table {
@@ -1142,7 +1138,6 @@ color: #00AE2C;
 }
 #modalContainer h2 span.close a {
 font-weight: bold;
-font-size: 100%;
 }
 #modalBody {
 padding: 3px 8px;
@@ -1241,7 +1236,6 @@ width: 45px;
 #thirdNode a {
 position: relative;
 display: block;
-font-size: 100%;
 padding: 3px 17px 3px 17px;
 margin: 0 2px 0 2px;
 text-decoration: none;
@@ -1301,7 +1295,7 @@ border: 1px solid #efefef;
 }
 #podcast_container h2 {
 margin-top: 0.6em;
-font-size: 1.3em;
+/* font-size: 1.3em; */
 }
 #podcast_container #extendedView {
 display: none; 
@@ -1369,7 +1363,6 @@ background: #0c3 url(../img/submit120.gif) no-repeat;
 color: #fff;
 width: 120px;
 height: 20px;
-font-size: 80%;
 font-weight: bold;
 border: 0 none;
 padding: 0 0 0 5px;
@@ -1436,7 +1429,6 @@ padding: 0 0 1em 20px;
 .inner h3 {
 padding: 10px 0 0 0;
 margin: 0;
-font-size: 100%;
 }
 .inner {
 display: none;
@@ -1542,7 +1534,6 @@ display: inline;
 position: relative;
 display: block;
 float: left;
-font-size: 80%;
 padding: 1px 20px 2px 19px;
 text-decoration: none;
 }
@@ -1558,7 +1549,6 @@ background: transparent url(../img/icons/link.gif) 1px -45px no-repeat;
 position: relative;
 display: block;
 float: left;
-font-size: 80%;
 padding: 2px 10px 3px 19px;
 text-decoration: none;
 color: #00AE2C;
@@ -1569,7 +1559,7 @@ background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
 /* error.html */
 body#errormsg h2 {
 position: relative;
-font-size: 1.0em;
+/* font-size: 1.0em; */
 font-weight: normal;
 color: #000;
 margin: 30px 0 15px 10px;
