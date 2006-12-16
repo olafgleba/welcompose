@@ -281,7 +281,10 @@ public function render ()
 				// re-throw exception
 				throw $e;
 			}
-
+			
+			// add response to session
+			$_SESSION['form_submitted'] = 1;
+			
 			// redirect
 			$SESSION = load('Base:Session');
 			$SESSION->save();
@@ -327,6 +330,11 @@ public function render ()
 				$this->base->utility->smarty->assign('captcha_type', 'numeral');
 			}
 			$this->base->utility->smarty->assign('captcha', $captcha);
+		}
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['form_submitted'])) {
+			$_SESSION['form_submitted'] = '';
 		}
 	}
 	

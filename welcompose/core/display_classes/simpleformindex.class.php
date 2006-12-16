@@ -243,6 +243,9 @@ protected function renderPersonalForm ()
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
+			// add response to session
+			$_SESSION['form_submitted'] = 1;
+			
 			header($this->getRedirectLocationSelf());
 			exit;
 		} else {
@@ -280,6 +283,11 @@ protected function renderPersonalForm ()
 			$this->base->utility->smarty->assign('captcha_type', 'numeral');
 		}
 		$this->base->utility->smarty->assign('captcha', $captcha);
+	}
+	
+	// empty $_SESSION
+	if (!empty($_SESSION['form_submitted'])) {
+		$_SESSION['form_submitted'] = '';
 	}
 	
 	return true;
@@ -427,6 +435,9 @@ protected function renderBusinessForm ()
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
+			// add response to session
+			$_SESSION['form_submitted'] = 1;
+			
 			header($this->getRedirectLocationSelf());
 			exit;
 		} else {
@@ -464,6 +475,11 @@ protected function renderBusinessForm ()
 			$this->base->utility->smarty->assign('captcha_type', 'numeral');
 		}
 		$this->base->utility->smarty->assign('captcha', $captcha);
+	}
+	
+	// empty $_SESSION
+	if (!empty($_SESSION['form_submitted'])) {
+		$_SESSION['form_submitted'] = '';
 	}
 	
 	return true;
