@@ -67,10 +67,10 @@ if (!defined('SMARTY_TPL_DIR')) {
 // load the wcom resource plugins
 require_once(SMARTY_DIR.'software_extensions/resource.wcom.php');
 $resource_functions = array(
-	"oakresource_FetchTemplate",
-	"oakresource_FetchTimestamp",
-	"oakresource_isSecure",
-	"oakresource_isTrusted"
+	"wcomresource_FetchTemplate",
+	"wcomresource_FetchTimestamp",
+	"wcomresource_isSecure",
+	"wcomresource_isTrusted"
 );
 $smarty->register_resource("wcom", $resource_functions);
 unset($resource_functions);

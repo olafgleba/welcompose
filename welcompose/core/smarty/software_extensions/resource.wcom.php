@@ -22,7 +22,7 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
+function wcomresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 {
 	// load template class
 	$TEMPLATE = load('templating:template');
@@ -53,7 +53,7 @@ function oakresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	return true;
 }
 
-function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
+function wcomresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 {
 	// load template class
 	$TEMPLATE = load('templating:template');
@@ -81,12 +81,12 @@ function oakresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	}
 }
 
-function oakresource_isSecure ($tpl_name, &$smarty)
+function wcomresource_isSecure ($tpl_name, &$smarty)
 {
     return true;
 }
 
-function oakresource_isTrusted($tpl_name, &$smarty)
+function wcomresource_isTrusted($tpl_name, &$smarty)
 {
     // not used for templates
 }
