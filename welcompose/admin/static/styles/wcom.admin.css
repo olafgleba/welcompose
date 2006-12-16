@@ -1036,6 +1036,12 @@ display: block;
 background: #f9f9f9;
 padding: 4px 5px 4px 5px;
 }
+.mm_pager {
+font-size: 80%;
+}
+.mm_pager a {
+font-size: 100%;
+}
 .mm_pager a:link, .mm_pager a:visited {
 padding: 1px 5px 1px 5px;
 font-weight: bold;
@@ -1109,6 +1115,7 @@ width: 70px;
 }
 .td_mm_meta {
 width: 90px;
+font-size: 70%;
 }
 .td_mm_casts {
 width: 30px;
