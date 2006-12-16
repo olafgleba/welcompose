@@ -31,7 +31,7 @@ function wcomresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	// consists of two parts, the template type name and the page id, separated
 	// by a dot. sample: test.12
 	if (!preg_match(WCOM_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
-		$smarty->trigger_error("Template resource name $tpl_name is invalid", E_USER_ERROR);
+		$smarty->trigger_error("Template resource name is invalid", E_USER_ERROR);
 		return false;
 	}
 
@@ -62,7 +62,7 @@ function wcomresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	// consists of two parts, the template type name and the page id, separated
 	// by a dot. sample: test.12
 	if (!preg_match(WCOM_REGEX_TEMPLATE_RESOURCE, $tpl_name)) {
-		$smarty->trigger_error("Template resource name $tpl_name is invalid", E_USER_ERROR);
+		$smarty->trigger_error("Template resource name is invalid", E_USER_ERROR);
 		return false;
 	}
 
