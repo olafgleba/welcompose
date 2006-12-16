@@ -121,6 +121,9 @@ public static function instance($project, $page)
  */ 
 public function render ()
 {
+	// assign current timestamp
+	$this->base->utility->smarty->assign('current_timestamp', time());
+	
 	// nothing to do
 	return true;
 }
