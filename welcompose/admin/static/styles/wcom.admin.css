@@ -1017,6 +1017,10 @@ border: 1px solid #ebebeb;
 padding: 0;
 overflow: auto;
 }
+#myFlickr_mm_contentToPopulate select {
+margin: 5px 0 5px 0;
+}
+
 #indicator_local, #indicator_flickr {
 display: none;
 }
@@ -1024,7 +1028,7 @@ display: none;
 position:  relative;
 width:  210px;
 left: 0;
-top:  40%;
+top: 40%;
 text-align:  center;
 }
 .mm_pager {
@@ -1209,7 +1213,7 @@ width: auto;
 #secondNode table,
 #thirdNode table {
 float: left;
-width: 235px;
+width: 233px;
 padding: 0;
 margin: 0 2px 0 0;
 border: 0 none;
