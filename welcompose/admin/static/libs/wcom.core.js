@@ -510,6 +510,8 @@ Init.prototype.processInit = Init_processInit;
 function Init_load ()
 {	
 	try {
+		_objectHackit();
+		
 		// DONT EVER CHANGE THIS FUNCTION CALL
 		// set global debug var first
 		_debug();
@@ -522,6 +524,36 @@ function Init_load ()
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+/**
+ * Temporary Fix for misbehaviour FF2.0 -> prototype object.extend calling.
+ * See http://dev.rubyonrails.org/ticket/6481
+ * 
+ * @private
+ * @throws applyError on exception
+ */
+function _objectHackit ()
+{	
+    if (Object.extend) {
+     		return;
+   	}
+    Object.extend = function(destination, source) {
+      for (property in source) {
+        destination[property] = source[property];
+      }
+      return destination;
+    }
+    Object.inspect = function(object) {
+      try {
+        if (object == undefined) return 'undefined';
+        if (object == null) return 'null';
+        return object.inspect ? object.inspect() : object.toString();
+      } catch (e) {
+        if (e instanceof RangeError) return '...';
+        throw e;
+      }
+    }
 }
 
 /**
