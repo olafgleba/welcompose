@@ -124,10 +124,12 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'global_template_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'global_template_name', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	$FORM->addRule('name', gettext('Please enter a valid global template name'), 'regex',
+		WCOM_REGEX_GLOBAL_TEMPLATE_NAME);
 	$FORM->addRule('name', gettext('A global template with the given name already exists'),
 		'testForNameUniqueness', $FORM->exportValue('id'));
 	

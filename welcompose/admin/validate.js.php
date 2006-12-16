@@ -62,7 +62,11 @@ try {
 			case 'blog_comment_status_name':
 					$reg = WCOM_REGEX_BLOG_COMMENT_STATUS_NAME;
 					$desc = gettext('Only capitalized literal string');
-				break;			
+				break;
+			case 'global_template_name':
+					$reg = WCOM_REGEX_GLOBAL_TEMPLATE_NAME;
+					$desc = gettext('Alphanumeric string with spaces');
+				break;
 			case 'group_name':
 					$reg = WCOM_REGEX_GROUP_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');

@@ -29,9 +29,12 @@ function wcomgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 		$smarty->trigger_error("Template resource name is expected to be an non-empty scalar value");
 	}
 	
-	// sanitize tpl_name
-	$tpl_name = trim(strip_tags($tpl_name));
-	
+	// check the provided template resource name.
+	if (!preg_match(WCOM_REGEX_GLOBAL_TEMPLATE_NAME, $tpl_name)) {
+		$smarty->trigger_error("Template resource name is invalid", E_USER_ERROR);
+		return false;
+	}
+		
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
@@ -60,8 +63,11 @@ function wcomgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 		$smarty->trigger_error("Template resource name is expected to be an non-empty scalar value");
 	}
 	
-	// sanitize tpl_name
-	$tpl_name = trim(strip_tags($tpl_name));
+	// check the provided template resource name.
+	if (!preg_match(WCOM_REGEX_GLOBAL_TEMPLATE_NAME, $tpl_name)) {
+		$smarty->trigger_error("Template resource name is invalid", E_USER_ERROR);
+		return false;
+	}
 	
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
