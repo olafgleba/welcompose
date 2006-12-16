@@ -219,7 +219,9 @@ public function generateInternalLink ($args = array())
 	if ($current_page['index_page']) {
 		$url_pattern_name = $url_pattern_name."_start";
 	}
-	if (array_key_exists('start', $this->_args_and_patterns)) {
+	
+	// the same applies on link requests for a pager
+	if (array_key_exists('start', $args) && is_numeric($args['start'])) {
 		$url_pattern_name = $url_pattern_name."_pager";
 	}
 	
