@@ -211,7 +211,7 @@ public function render ()
 		
 		// submit button
 		$FORM->addElement('submit', 'submit', gettext('Send'),
-			array('class' => 'submitbut100'));
+			array('class' => 'submitbutton'));
 		
 		// set defaults
 		$FORM->setDefaults(array(

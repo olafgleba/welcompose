@@ -205,7 +205,7 @@ protected function renderPersonalForm ()
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'submitbut100'));
+		array('class' => 'submitbutton'));
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page
@@ -392,7 +392,7 @@ protected function renderBusinessForm ()
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'submitbut100'));
+		array('class' => 'submitbutton'));
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page
