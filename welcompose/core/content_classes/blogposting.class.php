@@ -747,9 +747,18 @@ public function selectDifferentYears ($params)
 			`year_added` AS `year`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
 	
 	if (!empty($page)) {
 		$sql .= sprintf(" AND `page` = :page ");
@@ -848,9 +857,18 @@ public function selectDifferentMonths ($params)
 			`month_added` AS `month`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($page)) {
@@ -956,10 +974,19 @@ public function selectDifferentDays ($params)
 			date_added_month AS month,
 			date_added_day AS day
 		FROM
-			blog_postings
+			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_blog_postings`.`page` = `content_pages`.`id`
 		WHERE
-			1
+			`content_pages`.`project` = :project
 	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
 	
 	// add where clauses
 	if (!empty($page)) {
