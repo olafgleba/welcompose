@@ -93,21 +93,15 @@ function load ($token, $args = array())
 		default:
 			// check token
 			if (!preg_match("=^([a-z0-9-_.]+):([a-z0-9-_.]+)$=i", $token)) {
-				trigger_error("Unable to recognize token format $token", E_USER_ERROR);
+				trigger_error("Unable to recognize token format", E_USER_ERROR);
 			}
 			
 			// split token into "namespace" and class
 			list($namespace, $class) = explode(':', $token);
 			
-			// check if namespace exists and class within namespace exists too
+			// prepare namespace & class_path;
 			$namespace_path = dirname(__FILE__).DIRECTORY_SEPARATOR.$namespace.'_classes';
-			if (!is_dir($namespace_path)) {
-				trigger_error("Unknown namespace $namespace", E_USER_ERROR);
-			}
 			$class_path = $namespace_path.DIRECTORY_SEPARATOR.$class.'.class.php';
-			if (!file_exists($class_path)) {
-				trigger_error("Unknown class path $class_path", E_USER_ERROR);
-			}
 			
 			// prepare class name
 			$class_name = $namespace.'_'.$class;
@@ -115,11 +109,6 @@ function load ($token, $args = array())
 			// try to load class and create new instance from it
 			if (!class_exists($class_name)) {
 				require($class_path);
-
-				// make sure the class exists
-				if (!class_exists($class_name)) {
-					trigger_error("Unknown class $namespace:$class", E_USER_ERROR);
-				}
 			}
 			
 			return call_user_func_array(array($class_name, 'instance'), $args);
