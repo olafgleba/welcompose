@@ -117,10 +117,15 @@ margin: 0 auto;
 text-align: left;
 }
 #container p.copyright {
-width: 971px;
+width: 941px;
 background: transparent url(../img/bg_container_bottom.gif) 0 20px no-repeat;
-padding: 20px 15px 5px 0;
-margin: 0;
+padding: 5px 5px 15px 5px;
+margin: 50px 20px 0 20px;
+border-top: 1px solid #ebebeb;
+}
+.fright {
+float: right;
+width: 520px;
 text-align: right;
 }
 
