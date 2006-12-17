@@ -1,0 +1,11 @@
+<table>
+<tr>
+<td colspan="2"><strong>{i18n Boxes}</strong></td>
+</tr>
+{foreach from=$boxes item=_box}
+<tr>
+<td class="initialNode"><a class="act_setInternalLinkBoxes" id="{literal}{{/literal}select_named ns=&quot;Content&quot; class=&quot;Box&quot; method=&quot;selectBox&quot; var=&quot;&quot; id=&quot;{$_box.id|escape:"htmlall"}&quot;{literal}}{/literal}" href="#" title="{i18n Insert box reference}">{$_box.name|escape:"htmlall"}</a></td>
+<td>&nbsp;</td>
+</tr>
+{/foreach}
+</table>

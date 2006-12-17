@@ -77,6 +77,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.act_setInternalLinkBoxes' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkBoxes(this);
+			return false;
+		}
+	},
 	'.act_setInternalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
 			Helper.insertInternalLinkGlobalTemplates(this);
@@ -86,6 +92,12 @@ var definitions = {
 	'.act_setInternalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
 			Helper.insertInternalLinkGlobalFiles(this);
+			return false;
+		}
+	},
+	'.act_setInternalLinkGlobalBoxes' : function(el){
+		el.onclick = function(){
+			Helper.insertInternalLinkGlobalBoxes(this);
 			return false;
 		}
 	},
@@ -104,6 +116,12 @@ var definitions = {
 	'.showNextNode' : function(el){
 		el.onclick = function(){
 			Helper.showNextNode(this);
+			return false;
+		}
+	},
+	'.showNextNodeBoxes' : function(el){
+		el.onclick = function(){
+			Helper.showNextNodeBoxes(this);
 			return false;
 		}
 	},

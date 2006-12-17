@@ -207,6 +207,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.act_internalLinkBoxes' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('740','634','pages_boxes_links_select','pages_boxes_internal_links', this);
+			return false;
+		}
+	},
 	'.act_internalLinkGlobalTemplates' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('420','634','globaltemplates_links_select','globaltemplates_internal_links', this);
@@ -216,6 +222,12 @@ var definitions = {
 	'.act_internalLinkGlobalFiles' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
+			return false;
+		}
+	},
+	'.act_internalLinkGlobalBoxes' : function(el){
+		el.onclick = function(){
+			Helper.launchPopup('420','634','globalboxes_links_select','globalboxes_internal_links', this);
 			return false;
 		}
 	},

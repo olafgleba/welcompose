@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Welcompose Admin &ndash; Boxes &ndash; Create Reference to Page related Boxes}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+ 
+<script type="text/javascript">
+var formTarget = '{$target}';
+var control = '{$control}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.popup.js"></script>
+
+</head>
+
+<body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
+
+<div id="modalContainer">
+<div id="pages">
+<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
+
+<div id="modalBody">
+<div id="firstNode">
+<table>
+<tr>
+<td colspan="2"><strong>{i18n Pages}</strong></td>
+</tr>
+{foreach from=$pages item=_page}
+<tr>
+<td>{$_page.name|escape:"htmlall"}</td>
+<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" href="#" title="{i18n Display related boxes}">&nbsp;</a></td>
+</tr>
+{/foreach}
+</table>
+</div>
+<div id="secondNode"></div>
+<div id="thirdNode"></div>
+<br class="clearb" />
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Welcompose Admin &ndash; Global Boxes &ndash; Create Reference to Global Box}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+ 
+<script type="text/javascript">
+var formTarget = '{$target}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.popup.js"></script>
+
+</head>
+
+<body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
+<div id="modalContainer">
+<div id="globalboxes">
+<h2>{i18n GLOBAL BOXES} <span>{i18n CREATE REFERENCE}</span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
+
+<div id="modalBody">
+<div id="firstNode">
+<table>
+{foreach from=$global_boxes item=_box}
+<tr>
+<td class="initialNode"><a class="act_setInternalLinkGlobalBoxes" id="{literal}{{/literal}select_named ns=&quot;Content&quot; class=&quot;GlobalBox&quot; method=&quot;selectGlobalBox&quot; var=&quot;&quot; id=&quot;{$_box.id|escape:"htmlall"}&quot;{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_box.name|escape:"htmlall"}</a></td>
+</tr> 
+{/foreach}
+</table>
+</div>
+<br class="clearb" />
+</div>
+</div>
+</div>
+</body>
+</html>

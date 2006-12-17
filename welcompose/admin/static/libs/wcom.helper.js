@@ -66,6 +66,7 @@ Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
 Helper.prototype.definePageY = Helper_definePageY;
 Helper.prototype.showNextNode = Helper_showNextNode;
+Helper.prototype.showNextNodeBoxes = Helper_showNextNodeBoxes;
 Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.prototype.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
@@ -75,6 +76,8 @@ Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
 Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
+Helper.prototype.insertInternalLinkGlobalBoxes = Helper_insertInternalLinkGlobalBoxes;
+Helper.prototype.insertInternalLinkBoxes = Helper_insertInternalLinkBoxes;
 Helper.prototype.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
 Helper.prototype.showResponseStructuralTemplates = Helper_showResponseStructuralTemplates;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
@@ -141,6 +144,9 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 			case 'pages_internal_links_NoHref' :
 					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name + '&control=NoHref';
 				break;
+			case 'pages_boxes_internal_links' :
+					this.url = this.parsePagesBoxesLinksUrl + '?target=' + this.elem.name;
+				break;
 			case 'globaltemplates_internal_links' :
 					Helper.getDelimiterValue();
 					this.url = this.parseGlobalTemplatesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + delimiter;
@@ -148,6 +154,9 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 			case 'globalfiles_internal_links' :
 					Helper.getDelimiterValue();
 					this.url = this.parseGlobalFilesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + delimiter;
+				break;
+			case 'globalboxes_internal_links' :
+					this.url = this.parseGlobalBoxesLinksUrl + '?target=' + this.elem.name;
 				break;
 			case 'structuraltemplates_internal_links' :
 					this.url = this.parseStructuralTemplatesLinksUrl + '?target=' + this.elem.name;
@@ -640,7 +649,6 @@ function Helper_showNextNode(elem)
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 		}
-
 		var url = this.parsePagesLinksUrl;
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode + '&control=' + control;
 		
@@ -662,6 +670,45 @@ function Helper_showNextNode(elem)
 				parameters : pars,
 				onLoading : Helper.loaderPagesLinks,
 				onComplete : Helper.showResponsePagesThirdLinks
+			});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Show next appropriate DOM node.
+ * <br />
+ * Used in insert boxes popups to reflect sitemap structure.
+ * 
+ * @see #loaderPagesLinks
+ * @see #showResponsePagesSecondLinks
+ * @see #showResponsePagesThirdLinks
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_showNextNodeBoxes(elem)
+{
+	try {
+		// get source node id from element
+		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
+		
+		// get next possible node id
+		if (sourceNode.id != 'thirdNode') {
+			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
+		}	
+		var url = this.parsePagesBoxesLinksUrl;
+		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
+		
+		if (nextNode == 'secondNode') {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onLoading : Helper.loaderPagesLinks,
+				onComplete : Helper.showResponsePagesSecondLinks
 			});
 		}
 	} catch (e) {
@@ -699,7 +746,9 @@ function Helper_showResponsePagesSecondLinks(req)
 		$('secondNode').innerHTML = req.responseText;		
 		Behaviour.reapply('.act_setInternalLink');
 		Behaviour.reapply('.act_setInternalLinkNoHref');
+		Behaviour.reapply('.act_setInternalLinkBoxes');
 		Behaviour.reapply('.showNextNode');
+		Behaviour.reapply('.showNextNodeBoxes');
 		
 	} catch (e) {
 		_applyError(e);
@@ -883,7 +932,7 @@ function Helper_insertTags(id, tagOpen, tagClose, sampleText)
 }
 
 /**
- * Insert internal page links reference into content.
+ * Insert internal page reference into content.
  * <br />
  * We build a string with required syntax to deliver it to {@link #insertTagsFromPopup}
  * and close the popup window afterwards.
@@ -912,7 +961,7 @@ function Helper_insertInternalLink(elem)
 }
 
 /**
- * Insert internal page links reference into content.
+ * Insert internal page reference into content.
  * <br />
  * Get the element id content, deliver it to {@link #insertTagsFromPopup}
  * and close the popup window afterwards.
@@ -933,7 +982,7 @@ function Helper_insertInternalLinkNoHref(elem)
 }
 
 /**
- * Insert internal globaltemplates links reference into content.
+ * Insert internal globaltemplates reference into content.
  * <br />
  * Get the element id content, deliver it to {@link #insertTagsFromPopup}
  * and close the popup window afterwards.
@@ -954,7 +1003,7 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 }
 
 /**
- * Insert internal globalfiles links reference into content.
+ * Insert internal globalfiles reference into content.
  * <br />
  * Get the element id content, deliver it to {@link #insertTagsFromPopup}
  * and close the popup window afterwards.
@@ -965,6 +1014,48 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
  * @throws applyError on exception
  */
 function Helper_insertInternalLinkGlobalFiles(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert internal global box reference into content.
+ * <br />
+ * Get the element id content, deliver it to {@link #insertTagsFromPopup}
+ * and close the popup window afterwards.
+ * var <em>formTarget</em> comes from the html markup.
+ * 
+ * @see #insertTagsFromPopup
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_insertInternalLinkGlobalBoxes(elem)
+{
+	try {
+		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert internal page box reference into content.
+ * <br />
+ * Get the element id content, deliver it to {@link #insertTagsFromPopup}
+ * and close the popup window afterwards.
+ * var <em>formTarget</em> comes from the html markup.
+ * 
+ * @see #insertTagsFromPopup
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_insertInternalLinkBoxes(elem)
 {
 	try {
 		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');

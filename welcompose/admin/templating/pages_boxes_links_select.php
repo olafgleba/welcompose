@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_links_select.php
+ * File: pages_boxes_links_select.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id$
+ * $Id: pages_links_select.php 720 2006-12-09 09:52:38Z olaf $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -81,9 +81,9 @@ try {
 	/* @var $PAGE Content_Page */
 	$PAGE = load('Content:Page');
 	
-	// load navigation class
-	/* @var $NAVIGATION Content_Navigation */
-	$NAVIGATION = load('Content:Navigation');
+	// load box class
+	/* @var $BOX Content_Box */
+	$BOX = load('Content:Box');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -98,7 +98,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'Page', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -113,84 +113,42 @@ try {
 	// assign target field identifier
 	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
 	
-	// assign control var the distinguish js parsing
-	$BASE->utility->smarty->assign('control', Base_Cnc::filterRequest($_REQUEST['control'], WCOM_REGEX_ALPHANUMERIC));
-	
 	// prepare template key
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 	
 	// display template depending on the selection level
 	if (empty($_REQUEST['nextNode'])) {
-		
-		// select available navigations
-		$navigations = $NAVIGATION->selectNavigations();
-		$BASE->utility->smarty->assign('navigations', $navigations);
 
-		// get pages
-		$page_arrays = array();
-		foreach ($navigations as $_navigation) {
-			$select_params = array(
-				'navigation' => (int)$_navigation['id']
-			);
-			$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
-		}
-		$BASE->utility->smarty->assign('page_arrays', $page_arrays);
+		// get boxes
+		$boxes = $BOX->selectBoxes();
 		
+		// get related pages
+		$pages = array();
+		foreach ($boxes as $_box) {
+			$pages[$_box['id']] = $PAGE->selectPage((int)$_box['page']);
+		}
+		$BASE->utility->smarty->assign('pages', $pages);
+			
 		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('templating/pages_boxes_links_select.html', WCOM_TEMPLATE_KEY);
 		
 	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
-		// at the moment, we know, that the only page type reaching level 2 or 3 is
-		// of type WCOM_BLOG. so we can assume working with a page of type WCOM_BLOG.
+
 		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
 		
-		// load blog posting class
-		$BLOGPOSTING = load('Content:BlogPosting');
-		
-		// get max. 100 blog postings
+		// get all related boxes
 		$select_params = array(
-			'page' => $page_id,
-			'order_macro' => 'DATE_ADDED:DESC',
-			'limit' => 100
+			'page' => $page_id
 		);
-		$blog_postings = $BLOGPOSTING->selectBlogPostings($select_params);
-		$BASE->utility->smarty->assign('blog_postings', $blog_postings);
+		$boxes = $BOX->selectBoxes($select_params);
+		$BASE->utility->smarty->assign('boxes', $boxes);
 		
 		// assign page id
 		$BASE->utility->smarty->assign('page_id', $page_id);
 		
 		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select_second.ajax.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('templating/pages_boxes_links_select_second.ajax.html', WCOM_TEMPLATE_KEY);
 		
-	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'thirdNode') {
-		// at the moment, we know, that the only page type reaching level 2 or 3 is
-		// of type WCOM_BLOG. so we can assume working with a page of type WCOM_BLOG.
-		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
-		
-		// load blog posting class
-		$BLOGPOSTING = load('Content:BlogPosting');
-		
-		// get the yearly archives
-		$select_params = array(
-			'page' => $page_id,
-			'order_macro' => 'DATE_ADDED:DESC'
-		);
-		$yearly_archives = $BLOGPOSTING->selectDifferentYears($select_params);
-		$BASE->utility->smarty->assign('yearly_archives', $yearly_archives);
-		
-		// get monthly archives
-		$select_params = array(
-			'page' => $page_id,
-			'order_macro' => 'DATE_ADDED:DESC'
-		);
-		$monthly_archives = $BLOGPOSTING->selectDifferentMonths($select_params);
-		$BASE->utility->smarty->assign('monthly_archives', $monthly_archives);
-		
-		// assign page id
-		$BASE->utility->smarty->assign('page_id', $page_id);
-		
-		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select_third.ajax.html', WCOM_TEMPLATE_KEY);
 	}
 	
 	// flush the buffer

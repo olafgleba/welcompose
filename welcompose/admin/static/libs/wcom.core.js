@@ -309,7 +309,12 @@ function Base ()
 		 * Path for dynamically imported file
 		 */
 		this.parsePagesLinksUrl = '../content/pages_links_select.php';
-
+		
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parsePagesBoxesLinksUrl = '../templating/pages_boxes_links_select.php';
+		
 		/**
 		 * Path for dynamically imported file
 		 */
@@ -320,6 +325,11 @@ function Base ()
 		 */
 		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
 
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseGlobalBoxesLinksUrl = '../templating/globalboxes_links_select.php';
+		
 		/**
 		 * Path for dynamically imported file
 		 */
@@ -510,6 +520,7 @@ Init.prototype.processInit = Init_processInit;
 function Init_load ()
 {	
 	try {
+		// See http://dev.rubyonrails.org/ticket/6481
 		_objectHackit();
 		
 		// DONT EVER CHANGE THIS FUNCTION CALL
