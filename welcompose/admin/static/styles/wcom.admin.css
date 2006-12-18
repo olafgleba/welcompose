@@ -77,7 +77,7 @@ font-size: 0.80em;
 
 h2 a, h3 a, h4 a, p a, li a, th a, td a, label a, select a, input a,
 li h2, li h3, li h4, li p, li a,
-th p, th a, th li, th label, th select, th input, th textarea,
+td h2, td h3, td h4, th p, th a, th li, th label, th select, th input, th textarea,
 td p, td a, td li, td label, td select, td input, td textarea,
 label select, label input, label p, label a, 
 textarea {
@@ -1456,11 +1456,6 @@ padding: 0 0 1em 20px;
 .inner h3 {
 padding: 10px 0 0 0;
 margin: 0;
-}
-.inner {
-display: none;
-background: #d9d9d9 url(../img/bg_slides.gif);
-padding: 0 0 1em 15px;
 }
 #content .inner p {
 padding: 2px 15px 2px 0;
