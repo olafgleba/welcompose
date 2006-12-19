@@ -1057,9 +1057,13 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
-	
+				
+				/*
 				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
 					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
+				*/
+				new Effect.Fade(document.getElementsByClassName('highlight')[0],
+					{duration: 0.5, delay: 0.4});
 
 			} else {
 	  			throw new Errors(_req.statusText);

@@ -25,7 +25,7 @@ var pagetype = '{$page.page_type_name}';
 <script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
 
-{if !empty($form.errors)}
+{if !empty($form.errors) && $form.podcast_id.value != '' }
 <script type="text/javascript">
 var podcast = 1;
 </script>

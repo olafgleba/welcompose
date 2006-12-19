@@ -394,9 +394,14 @@ color: #00AE2C;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
 }
-#topsubnav a.highlight:link, #topsubnav a.highlight:visited, #topsubnavdynamic a.highlight:link, #topsubnavdynamic a.highlight:visited {
+#topsubnav a.highlight:link,
+#topsubnav a.highlight:visited,
+#topsubnavdynamic a.highlight:link,
+#topsubnavdynamic a.highlight:visited {
 color: #000;
 background: transparent;
+margin: 0;
+padding: 0;
 }
 #topsubnav li.on, 
 #subnav li.on {
