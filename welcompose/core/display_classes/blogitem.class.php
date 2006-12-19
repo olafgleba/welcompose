@@ -42,6 +42,13 @@ class Display_BlogItem implements Display {
 	public $base = null;
 	
 	/**
+	 * Reference to session class
+	 *
+	 * @var object
+	 */
+	public $session = null;
+	
+	/**
 	 * Reference to captcha class
 	 * 
 	 * @var object
@@ -110,6 +117,9 @@ public function __construct($project, $page)
 	if (!is_array($page)) {
 		throw new Display_BlogItemException("Input for parameter page is expected to be an array");
 	}
+	
+	// start session class
+	$this->session = load('Base:Session');
 	
 	// assign project, page info to class properties
 	$this->_project = $project;
@@ -286,8 +296,7 @@ public function render ()
 			$_SESSION['form_submitted'] = 1;
 			
 			// redirect
-			$SESSION = load('Base:Session');
-			$SESSION->save();
+			$this->session->save();
 
 			// clean the buffer
 			if (!$this->base->debug_enabled()) {

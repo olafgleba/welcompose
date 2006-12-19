@@ -42,6 +42,13 @@ class Display_SimpleFormIndex implements Display {
 	public $base = null;
 	
 	/**
+	 * Reference to session class
+	 *
+	 * @var object
+	 */
+	public $session = null;
+	
+	/**
 	 * Reference to captcha class
 	 * 
 	 * @var object
@@ -102,6 +109,9 @@ public function __construct($project, $page)
 	if (!is_array($page)) {
 		throw new Display_SimpleFormIndexException("Input for parameter page is expected to be an array");
 	}
+	
+	// load session class
+	$this->session = load('Base:Session');
 	
 	// assign project, page info to class properties
 	$this->_project = $project;
@@ -246,6 +256,10 @@ protected function renderPersonalForm ()
 			// add response to session
 			$_SESSION['form_submitted'] = 1;
 			
+			// save session
+			$this->session->save();
+			
+			// redirect
 			header($this->getRedirectLocationSelf());
 			exit;
 		} else {
@@ -438,6 +452,10 @@ protected function renderBusinessForm ()
 			// add response to session
 			$_SESSION['form_submitted'] = 1;
 			
+			// save session
+			$this->session->save();
+			
+			// redirect
 			header($this->getRedirectLocationSelf());
 			exit;
 		} else {

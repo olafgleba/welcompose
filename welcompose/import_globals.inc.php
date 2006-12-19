@@ -44,7 +44,7 @@ $request = array(
 );
 
 $session = array(
-	'form_submitted' => Base_Cnc::filterRequest($_REQUEST['form_submitted'], WCOM_REGEX_ZERO_OR_ONE)
+	'form_submitted' => Base_Cnc::filterRequest($_SESSION['form_submitted'], WCOM_REGEX_ZERO_OR_ONE)
 );
 
 // assign get, session etc.
