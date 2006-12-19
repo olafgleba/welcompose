@@ -826,11 +826,11 @@ function Help_processHelp (ttarget)
 {  
 	try {
 		if (_req.readyState == 4) {
-			if (_req.status == 200) {
-				new Insertion.After($(ttarget).parentNode, _req.responseText);				
-				var ttarget_after = $(ttarget).parentNode.nextSibling;
+			if (_req.status == 200) {			
+				new Insertion.After($(ttarget).parentNode, _req.responseText);
+				var ttarget_after = $(ttarget).parentNode.nextSibling;			
 				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -910,7 +910,7 @@ function Help_hideMediamanager (elem)
 		this.toShow = gMediamanagerLayer;
 		this.elem.className = this.helpClassMediamanager;
 	
-		if (Helper.unsupportsEffects()) {
+		if (Helper.isBrowser('sa')) {
 			Element.hide(this.toHide);
 			Element.show(this.toShow);
 		} else {
@@ -942,7 +942,7 @@ function Help_processMediamanager (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
 				Element.update (ttarget, _req.responseText);
-				if (Helper.unsupportsEffects()) {
+				if (Helper.isBrowser('sa')) {
 					Element.show(ttarget);
 				} else {
 					Element.hide(this.ttarget);
@@ -1347,7 +1347,7 @@ function Tables_hideTableRow (elem)
 		this.elem = elem;
 		
 		// process inner div
-		if (Helper.unsupportsEffects('safari_exception')) {
+		if (Helper.isBrowser('ie')) {
 			return false;
 		} else {
 			// process outer table tr

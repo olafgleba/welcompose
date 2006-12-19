@@ -60,8 +60,7 @@ Helper.prototype.closePopupTrack = Helper_closePopupTrack;
 Helper.prototype.closePopupTrackNoAlert = Helper_closePopupTrackNoAlert;
 Helper.prototype.lowerOpacity = Helper_lowerOpacity;
 Helper.prototype.lowerOpacityOnUpload = Helper_lowerOpacityOnUpload;
-Helper.prototype.unsupportsEffects = Helper_unsupportsEffects;
-Helper.prototype.unsupportsElems = Helper_unsupportsElems;
+Helper.prototype.isBrowser = Helper_isBrowser;
 Helper.prototype.defineWindowX = Helper_defineWindowX;
 Helper.prototype.defineWindowY = Helper_defineWindowY;
 Helper.prototype.definePageY = Helper_definePageY;
@@ -97,7 +96,6 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
-
 
 /**
  * Launch popup.
@@ -387,20 +385,30 @@ function Helper_lowerOpacityOnUpload ()
 }
 
 /**
- * UNDER DEVELOPMENT
- * 
+ * Check browser and his version.
+ * <br />
+ * Sometimes we need this to distinguish between browser
+ * and versions to intercept their different abilities.
+ *
+ * @returns Boolean
  * @throws applyError on exception
  */
-function Helper_unsupportsEffects(exception)
+function Helper_isBrowser(_browser, _version)
 {	
 	try {
-		//properties
 		this.browser = _setBrowserString();
 		this.version = _setBrowserStringVersion();
-		this.exception = exception;
 			
-		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
-			return true;
+		if (this.browser == _browser) {
+			if (_version) {
+				if(this.version == _version) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return true;
+			}
 		} else { 
 			return false;
 		}
@@ -410,32 +418,11 @@ function Helper_unsupportsEffects(exception)
 }
 
 /**
- * UNDER DEVELOPMENT
- * 
- * @throws applyError on exception
- */
-function Helper_unsupportsElems(exception)
-{	
-	try {
-		//properties
-		this.browser = _setBrowserString();
-		this.version = _setBrowserStringVersion();
-		this.exception = exception;
-		
-		if ((this.browser == "Internet Explorer") || (this.browser == "Safari" && !this.exception)) {
-			return true;
-		} else { 
-			return false;
-		}
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * UNDER DEVELOPMENT
- * 
+ * Process given navigator.agent string to find out browser name.
+ * Helper for {@link #isBrowser}.
+ *
+ * @private
+ * @returns var
  * @throws applyError on exception
  */
 function _compare (string)
@@ -450,8 +437,11 @@ function _compare (string)
 }
 
 /**
- * UNDER DEVELOPMENT
- * 
+ * Get navigator.agent, compare it, fill global var and return it.
+ * Helper for {@link #isBrowser}.
+ *
+ * @private
+ * @returns var browser
  * @throws applyError on exception
  */
 function _setBrowserString ()
@@ -461,13 +451,16 @@ function _setBrowserString ()
 		var browser;
 
 		if (_compare('safari')) {
-			browser = 'Safari';
+			browser = 'sa';
 		}
 		else if (_compare('msie')) {
-			browser = 'Internet Explorer';
+			browser = 'ie';
+		}
+		else if (_compare('firefox')) {
+			browser = 'ff';
 		}
 		else {
-			browser = 'Unknown Browser';
+			browser = '';
 		}
 		return browser;
 	} catch (e) {
@@ -476,51 +469,20 @@ function _setBrowserString ()
 }
 
 /**
- * UNDER DEVELOPMENT
- * 
+ * Process given navigator.agent string to find out agent version.
+ * Helper for {@link #isBrowser}.
+ *
+ * @private
+ * @returns var browser
  * @throws applyError on exception
  */
 function _setBrowserStringVersion ()
 {
 	try {			
 		_setBrowserString();
-		var version;
-		
+		var version;		
 		version = detect.charAt(res + thestring.length);
-
 		return version;
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * UNDER DEVELOPMENT
- * 
- * @throws applyError on exception
- */
-function _setBrowserStringOS ()
-{
-	try {			
-		detect = navigator.userAgent.toLowerCase();
-		var os;
-		
-		if (_compare('linux')) {
-			os = 'Linux';
-		}
-		else if (_compare('x11')) {
-			os = 'Unix';
-		}
-		else if (_compare('win')) {
-			os = 'Windows';
-		}
-		else if (_compare('mac')) {
-			os = 'Mac';
-		}
-		else {
-			os = 'Unknown operating system';
-		}
-		return os;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -565,7 +527,7 @@ function Helper_defineWindowX (elemWidth)
 /**
  * Define and resize window height.
  * <br />
- * Center the new window depending on calculated height
+ * Center the new window depending on calculated height.
  * 
  * @see #launchPopup
  * @throws applyError on exception
@@ -796,12 +758,12 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 {
 	try {
 		/*
-		We have to distinguish here, because the IE6 seems to be too dumb to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
 		*/
-	 	if (Helper.unsupportsElems('safari_exception')) {
+	 	if (Helper.isBrowser('ie')) {
 			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
 			var txtarea = opener.document.forms[_form_name].elements[id];
 		} else {
@@ -873,12 +835,12 @@ function Helper_insertTags(id, tagOpen, tagClose, sampleText)
 {
 	try {
 		/*
-		We have to distinguish here, because the IE6 seems to be too dumb to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
 		*/
-	 	if (Helper.unsupportsElems('safari_exception')) {
+	 	if (Helper.isBrowser('ie')) {
 			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
 			var txtarea = document.forms[_form_name].elements[id];
 		} else {
@@ -952,7 +914,10 @@ function Helper_insertInternalLink(elem)
 		strStart = build;
 		strEnd = '</a>';
 		
-		Helper.insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, strStart, strEnd, describeLink);
 	
 		Helper.closeLinksPopup();
 	} catch (e) {
@@ -974,7 +939,10 @@ function Helper_insertInternalLink(elem)
 function Helper_insertInternalLinkNoHref(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -995,7 +963,10 @@ function Helper_insertInternalLinkNoHref(elem)
 function Helper_insertInternalLinkGlobalTemplates(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');	
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');	
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1016,7 +987,10 @@ function Helper_insertInternalLinkGlobalTemplates(elem)
 function Helper_insertInternalLinkGlobalFiles(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1037,7 +1011,10 @@ function Helper_insertInternalLinkGlobalFiles(elem)
 function Helper_insertInternalLinkGlobalBoxes(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1058,7 +1035,10 @@ function Helper_insertInternalLinkGlobalBoxes(elem)
 function Helper_insertInternalLinkBoxes(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, '', '');
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1116,7 +1096,10 @@ function Helper_showResponseStructuralTemplates(req)
 		// strip the html element, get raw content
 		var raw_content = String(extract).replace(/(.*?)(>)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/, "$3");
 		
-		Helper.insertTagsFromPopup(formTarget, raw_content, '', '');
+		// purge global form var
+		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		
+		Helper.insertTagsFromPopup(_formTarget, raw_content, '', '');
 		Helper.closeLinksPopup();					
 	} catch (e) {
 		_applyError(e);
@@ -1414,7 +1397,7 @@ function Helper_getAttrParentNode (attr, elem, level)
 		a = a.parentNode;
 	}
 		
-	if (this.browser == 'Internet Explorer')
+	if (this.browser == 'ie')
 		return a.attributes[attr].value;
 	else
 		return a.getAttribute(attr);
@@ -1432,7 +1415,7 @@ function Helper_getAttr (attr, elem)
 {
 	this.browser = _setBrowserString();
 		
-	if (this.browser == 'Internet Explorer')
+	if (this.browser == 'ie')
 		return elem.attributes[attr].value;
 	else
 		return elem.getAttribute(attr);
@@ -1452,14 +1435,14 @@ function Helper_getAttrNextSibling (attr, elem, level)
 {
 	this.browser = _setBrowserString();
 	
-	if (this.browser == 'Internet Explorer')
+	if (this.browser == 'ie')
 		level-- ;
 
 	for (var a = elem; level > 0; level--) {
 		a = a.nextSibling;
 	}
 		
-	if (this.browser == 'Internet Explorer')
+	if (this.browser == 'ie')
 		return a.attributes[attr].value;
 	else
 		return a.getAttribute(attr);
@@ -1477,7 +1460,7 @@ function Helper_getNextSiblingFirstChild (elem, level)
 {
 	this.browser = _setBrowserString();
 	
-	if (this.browser == 'Internet Explorer' || this.browser == 'Safari')
+	if (this.browser == 'ie' || this.browser == 'sa')
 		level-- ;
 
 	for (var a = elem; level > 0; level--) {

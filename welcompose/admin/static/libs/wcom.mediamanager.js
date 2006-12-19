@@ -250,8 +250,13 @@ function Mediamanager_switchLayer (toShow, toHide)
 		this.toShow = $(toShow);
 		this.toHide = $(toHide);
 	
-		Element.hide(this.toHide);
-		Effect.Appear(this.toShow,{duration: 0.4});
+		if (Helper.isBrowser('sa')) {
+			Element.hide(this.toHide);
+			Element.show(this.toShow);
+		} else {
+			Element.hide(this.toHide);
+			Effect.Appear(this.toShow,{duration: 0.4});
+		}		
 	} catch (e) {
 		_applyError(e);
 	}
