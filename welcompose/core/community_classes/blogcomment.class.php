@@ -87,7 +87,12 @@ public function addBlogComment ($sqlData)
 	}
 	
 	// insert row
-	return $this->base->db->insert(WCOM_DB_COMMUNITY_BLOG_COMMENTS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_COMMUNITY_BLOG_COMMENTS, $sqlData);
+	
+	// update the comment count of the posting
+	$this->updateBlogCommentCount($sqlData['posting']);
+	
+	return $insert_id;
 }
 
 /**
@@ -120,7 +125,7 @@ public function updateBlogComment ($id, $sqlData)
 	
 	// update row
 	return $this->base->db->update(WCOM_DB_COMMUNITY_BLOG_COMMENTS, $sqlData,
-		$where, $bind_params);	
+		$where, $bind_params);
 }
 
 /**
@@ -139,6 +144,9 @@ public function deleteBlogComment ($id)
 		throw new Community_BlogcommentException('Input for parameter id is not numeric');
 	}
 	
+	// get blog comment (we need it to update the comment count)
+	$blog_comment = $this->selectBlogComment($id);
+	
 	// prepare where clause
 	$where = " WHERE `id` = :id ";
 	
@@ -148,8 +156,13 @@ public function deleteBlogComment ($id)
 	);
 	
 	// execute query
-	return $this->base->db->delete(WCOM_DB_COMMUNITY_BLOG_COMMENTS,	
+	$affected_rows = $this->base->db->delete(WCOM_DB_COMMUNITY_BLOG_COMMENTS,	
 		$where, $bind_params);
+		
+	// update comment count
+	$this->updateBlogCommentCount($blog_comment['posting']);
+	
+	return $affected_rows;
 }
 
 /**
@@ -526,6 +539,43 @@ public function countBlogComments ($params = array())
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);
+}
+
+
+/**
+ * Updates blog comment comment. Takes the posting id as first
+ * argument. Returns amount of affected rows.
+ * 
+ * @throws Community_BlogcommentException
+ * @param int Blog posting id
+ * @return int Affected rows
+ */
+public function updateBlogCommentCount ($posting_id)
+{
+	// input check
+	if (empty($posting_id) || !is_numeric($posting_id)) {
+		throw new Community_BlogcommentException('Input for parameter posting_id is not numeric');
+	}
+	
+	// count comments
+	$comment_count = $this->countBlogComments(array('posting' => $posting_id));
+	
+	// prepare sql data
+	$sqlData = array(
+		'comment_count' => (int)$comment_count
+	);
+	
+	// prepare where clause
+	$where = " WHERE `id` = :id ";
+	
+	// prepare bind params
+	$bind_params = array(
+		'id' => (int)$posting_id
+	);
+	
+	// execute query
+	return $this->base->db->update(WCOM_DB_CONTENT_BLOG_POSTINGS,
+		$sqlData, $where, $bind_params);
 }
 
 // end of class
