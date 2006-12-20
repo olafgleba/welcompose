@@ -521,7 +521,7 @@ function Init_load ()
 {	
 	try {
 		// See http://dev.rubyonrails.org/ticket/6481
-		_objectHackit();
+		//_objectHackit();
 		
 		// DONT EVER CHANGE THIS FUNCTION CALL
 		// set global debug var first
