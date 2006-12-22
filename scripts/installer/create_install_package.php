@@ -505,7 +505,7 @@ protected function triggerError ($error_string)
 protected function printStdout ($message)
 {
 	// write message to stdout
-	file_put_contents('php://stdout', $message);
+	fwrite(STDOUT, $message);
 }
 
 /**
@@ -514,7 +514,7 @@ protected function printStdout ($message)
 protected function printStderr ($message)
 {
 	// write error message to stderr
-	file_put_contents('php://stderr', $message);
+	fwrite(STDERR, $message);
 }
 
 /**
