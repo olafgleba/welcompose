@@ -123,12 +123,10 @@ try {
 	
 	// textfield for unix socket
 	$FORM->addElement('text', 'unix_socket', gettext('Unix socket'), 
-		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('unix_socket', 'trim');
 	$FORM->applyFilter('unix_socket', 'strip_tags');
-	if ($FORM->exportValue('connection_method') == 'socket') {
-		$FORM->addRule('unix_socket', gettext('Please enter a Unix socket to use for the connection'), 'required');
-	}
+	$FORM->addRule('unix_socket', gettext('Please enter a valid Unix socket'), 'regex', WCOM_REGEX_DATABASE_SOCKET);
 	
 	// add connection validation rule
 	$FORM->registerRule('testConnection', 'callback', 'setup_database_connection_test_callback');

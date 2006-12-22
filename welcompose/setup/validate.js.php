@@ -60,9 +60,21 @@ try {
 	if (Base_Cnc::filterRequest($_POST['elemID'], WCOM_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
 			case 'database_database':
-					$reg = WCOM_REGEX_ALPHANUMERIC;
-					$desc = gettext('Literal...');
+					$reg = WCOM_REGEX_DATABASE_NAME;
+					$desc = gettext('Literal string with dashes');
 				break;
+			case 'database_port':
+					$reg = WCOM_REGEX_NUMERIC;
+					$desc = gettext('Numbers only');
+				break;
+			case 'database_unix_socket':
+					$reg = WCOM_REGEX_DATABASE_SOCKET;
+					$desc = gettext('Unix path');
+				break;
+			case 'configuration_locale':
+				$reg = WCOM_REGEX_LOCALE_NAME;
+				$desc = gettext('Invalid locale');
+			break;
 			default :
 				$reg = null;
 				$desc = null;

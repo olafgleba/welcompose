@@ -208,4 +208,8 @@ define("WCOM_REGEX_LOCALE_NAME", "=(^POSIX$|^C$|^[a-z]{2}_[A-Z]{2})=");
 // template name
 define("WCOM_REGEX_GLOBAL_TEMPLATE_NAME", "=^([a-z0-9-,_\.\s]+)$=");
 
+// Defines regular expression for strings containing the path
+// to MySQL's unix socket
+define("WCOM_REGEX_DATABASE_SOCKET", "=^/[a-z0-9-_\.\/]+$=");
+
 ?>
