@@ -1,6 +1,6 @@
 /**
  * Project: Welcompose
- * File: wcom.admin.css
+ * File: wcom.mediamanager.css
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -420,21 +420,7 @@ display: none;
 }
 
 
-/* opacity */
-#lyLowerOpacity {
-display: none;
-position: absolute;
-top: 0;
-left: 0;
-z-index: 1;
-}
-#lyLowerOpacity img {
-opacity: 0.4;
--moz-opacity: 0.4;
-filter:alpha(opacity=40);
-}
-
-
+/* Podcast */
 #podcast_container {
 display: none;
 margin: 15px 0 0 140px;
@@ -546,5 +532,3 @@ padding-left: 140px;
 input.showIDThree120  {
 display: none;
 }
-
-

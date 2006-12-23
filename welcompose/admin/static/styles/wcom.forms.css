@@ -1,6 +1,6 @@
 /**
  * Project: Welcompose
- * File: wcom.admin.css
+ * File: wcom.forms.css
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -170,8 +170,6 @@ input.chbx {
 border-color: #666;
 }
 
-/* eof Reset for inner table definition */
-
 input#submit55,
 input.submit90,
 input.submit140,
@@ -293,35 +291,6 @@ text-decoration: none;
 vertical-align: middle;
 }
 
-/* filter */
-.filter {
-margin: 0 0 0 10px;
-padding: 10px 0 20px 0;
-}
-.filter h2 {
-display: block;
-float: left;
-width: auto;
-line-height: 1.5em;
-padding: 0;
-margin-right: 10px;
-}
-.filter label {
-display: block;
-float: left;
-line-height: 1.5em;
-width: auto;
-margin: 0 5px 0 15px;
-}
-.filter select {
-display: block;
-float: left;
-margin: 1px 0;
-padding: 0;
-border: 1px solid #666;
-line-height: 1.5em;
-}
-
 /* errors */
 #error {
 display: block;
@@ -340,51 +309,4 @@ font-weight: bold;
 color: red;
 list-style-position: inside;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
-}
-
-/* %M =response */
-#rp {
-display: block;
-width: 710px;
-margin-top: 20px;
-background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
-}
-/* IE 6, IE 7 */
-* html #container #rp, *+html #container #rp {
-margin-top: 45px;
-}
-#rp h1 {
-margin: 0;
-padding: 10px 10px 0 10px;
-color: red;
-}
-#rp p {
-margin: 0;
-padding: 0 10px 10px 10px;
-background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
-}
-
-#content .rp_note {
-display: block;
-width: 710px;
-margin-top: 20px;
-background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
-}
-/* IE 6, IE 7 */
-* html .rp_note, *+html .rp_note {
-margin-top: 50px;
-}
-#content .rp_note h1 {
-margin: 0;
-padding: 10px 10px 0 10px;
-color: red;
-}
-#content .rp_note p {
-margin: 0;
-padding: 0 10px 10px 10px;
-background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
-}
-#content .rp_note img { 
-float: right;
-margin: 6px 6px 6px 20px;
 }

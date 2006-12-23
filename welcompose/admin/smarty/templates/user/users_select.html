@@ -8,7 +8,8 @@
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
 <title>{i18n Welcompose Admin &ndash; Users}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.admin.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -63,7 +64,7 @@
 <option value="{$_group.id|escape:"htmlall"}">{$_group.name|escape:"htmlall"}</option>
 {/foreach}
 </select>
-<input type="submit" value="{i18n Filter}" />
+&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
 {/if}

@@ -20,7 +20,9 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
-/* error_popup_403.html, error_popup_723.html */
+/* error_popup_403.html, error_popup_723.html
+ * Simple error.html is defined in wcom.basic.css
+ */
 
 body#errormsgpopup723 #container {
 width: 723px;
