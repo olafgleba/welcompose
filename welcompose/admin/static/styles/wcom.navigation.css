@@ -1,0 +1,325 @@
+/**
+ * Project: Welcompose
+ * File: wcom.admin.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.admin.css 785 2006-12-19 18:10:12Z olaf $
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Welcompose
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/* 
+projects, breadcrumb, top navigation, page navigation
+*/
+
+/* projects */
+#projects {
+position: absolute;
+top: 103px;
+right: 20px;
+width: 17em;
+text-align: right;
+}
+#projects .fselect {
+margin: 1px 5px 0 0;
+padding: 0;
+border: 1px solid #666666;
+}
+
+/* breadcrumb */
+#brc {
+width: 852px;
+margin: 10px 0 20px 0;
+color: #000;
+background: transparent;
+}
+#brc p {
+margin: 5px 0;
+padding: 0 0 8px 27px;
+background: transparent url(../img/bc_left.gif) 12px 0 no-repeat;
+}
+#brc img {
+vertical-align: middle;
+padding-left: 8px;
+}
+
+/* top navigation */
+#topnavcon {
+position: absolute;
+top: 99px;
+left: 14px;
+width: 956px;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topnav_bot.gif) left bottom no-repeat;
+}
+#topnav {
+list-style: none;
+width: 956px;
+padding-top: 3px;
+background: #efefef url(../img/bg_topnav_top.gif) 0 0 no-repeat;
+height: 1.5em;
+}
+#topnav li {
+display: inline;
+}
+#topnav li a {
+position: relative;
+display: block;
+float: left;
+text-transform: uppercase;
+font-weight: bold;
+padding: 4px 45px 3px 10px;
+}
+#topnav a:link, #topnav a:visited {
+color: #000;
+background: transparent;
+}
+#topnav a:hover, #topnav a:active, #topnav a:focus {
+color: #00AE2C;
+background: transparent;
+text-decoration: none;
+}
+#topnav .con span, #topnav .conon span {
+position: absolute;
+top: -67px;
+left: 14px;
+display: block;
+width: 66px;
+height: 72px;
+background: transparent url(../img/icons/contents.gif) 0 0 no-repeat;
+}
+#topnav .con:hover span, #topnav .con:active span, #topnav .con:focus span, #topnav .conon span {
+background: transparent url(../img/icons/contents.gif) 0 -110px no-repeat;
+}
+#topnav .med span, #topnav .medon span {
+position: absolute;
+top: -69px;
+left: 28px;
+display: block;
+width: 94px;
+height: 65px;
+background: transparent url(../img/icons/media.gif) 0 0 no-repeat;
+}
+#topnav .med:hover span, #topnav .med:active span, #topnav .med:focus span, #topnav .medon span {
+background: transparent url(../img/icons/media.gif) 0 -108px no-repeat;
+}
+#topnav .com span, #topnav .comon span {
+position: absolute;
+top: -71px;
+left: 15px;
+display: block;
+width: 60px;
+height: 72px;
+background: transparent url(../img/icons/community.gif) 0 0 no-repeat;
+}
+#topnav .com:hover span, #topnav .com:active span, #topnav .com:focus span, #topnav .comon span {
+background: transparent url(../img/icons/community.gif) 0 -107px no-repeat;
+}
+#topnav .usr span, #topnav .usron span {
+position: absolute;
+top: -70px;
+left: 2px;
+display: block;
+width: 60px;
+height: 72px;
+background: transparent url(../img/icons/users.gif) 0 0 no-repeat;
+}
+#topnav .usr:hover span, #topnav .usr:active span, #topnav .usr:focus span, #topnav .usron span {
+background: transparent url(../img/icons/users.gif) 0 -108px no-repeat;
+}
+#topnav .tem span, #topnav .temon span {
+position: absolute;
+top: -70px;
+left: 12px;
+display: block;
+width: 94px;
+height: 65px;
+background: transparent url(../img/icons/templating.gif) 0 0 no-repeat;
+}
+#topnav .tem:hover span, #topnav .tem:active span, #topnav .tem:focus span, #topnav .temon span {
+background: transparent url(../img/icons/templating.gif) 0 -108px no-repeat;
+}
+#topnav .set span, #topnav .seton span {
+position: absolute;
+top: -69px;
+left: 7px;
+display: block;
+width: 60px;
+height: 60px;
+background: transparent url(../img/icons/settings.gif) 0 0 no-repeat;
+}
+#topnav .set:hover span, #topnav .set:active span, #topnav .set:focus span, #topnav .seton span {
+background: transparent url(../img/icons/settings.gif) 0 -108px no-repeat;
+}
+/* sub */
+#topsubnavcon {
+width: 956px;
+padding-top: 2em;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topsubnav_active_bot.gif) left bottom no-repeat;
+}
+#topsubnavconstatic, 
+#subnavconstatic {
+width: 956px;
+padding-top: 2em;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topsubnav_bot.gif) left bottom no-repeat;
+}
+#topsubnav {
+list-style: none;
+width: 956px;
+padding-top: 3px;
+background: #f9f9f9 url(../img/bg_topsubnav_top.gif) 0 0 no-repeat;
+height: 1.25em;
+}
+#topsubnavdynamic {
+list-style: none;
+width: 956px;
+padding-top: 3px;
+background: #f9f9f9 url(../img/bg_topsubnav_active_top.gif) 0 0 no-repeat;;
+height: 1.25em;
+}
+#topsubnav li, #topsubnavdynamic li {
+display: inline;
+}
+#topsubnav li a, #topsubnavdynamic li a {
+position: relative;
+display: block;
+float: left;
+font-weight: normal;
+padding: 2px 25px 2px 27px;
+}
+#topsubnav a:link, #topsubnav a:visited, #topsubnavdynamic a:link, #topsubnavdynamic a:visited {
+color: #000;
+background: transparent url(../img/icons/link.gif) 10px -2px no-repeat;
+}
+#topsubnav a:hover, #topsubnav a:active, #topsubnav a:focus, 
+#topsubnav a:link.on, #topsubnav a:visited.on,
+#topsubnavdynamic a:hover, #topsubnavdynamic a:active, #topsubnavdynamic a:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
+text-decoration: none;
+}
+#topsubnav a.highlight:link,
+#topsubnav a.highlight:visited,
+#topsubnavdynamic a.highlight:link,
+#topsubnavdynamic a.highlight:visited {
+color: #000;
+background: transparent;
+margin: 0;
+padding: 0;
+}
+#topsubnav li.on, 
+#subnav li.on {
+position: relative;
+display: block;
+float: left;
+font-weight: normal;
+padding: 2px 25px 2px 27px;
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
+text-decoration: none;
+}
+
+/* subsub */
+#topsubsubnavconstatic {
+width: 956px;
+padding-top: 0.2em;
+padding-bottom: 3px;
+background: transparent url(../img/bg_topsubsubnav_bot.gif) left bottom no-repeat;
+}
+#topsubsubnav {
+list-style: none;
+width: 956px;
+padding-top: 3px;
+background: #f9f9f9 url(../img/bg_topsubsubnav_top.gif) 0 0 no-repeat;
+height: 1.25em;
+}
+#topsubsubnav li {
+display: inline;
+}
+#topsubsubnav li a {
+position: relative;
+display: block;
+float: left;
+font-weight: normal;
+padding: 2px 25px 2px 27px;
+}
+#topsubsubnav a:link, #topsubsubnav a:visited{
+color: #000;
+background: transparent url(../img/icons/link.gif) 10px -2px no-repeat;
+}
+#topsubsubnav a:hover, #topsubsubnav a:active, #topsubsubnav a:focus, 
+#topsubsubnav a:link.on, #topsubsubnav a:visited.on {
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
+text-decoration: none;
+}
+#topsubsubnav li.on {
+position: relative;
+display: block;
+float: left;
+font-weight: normal;
+padding: 2px 25px 2px 27px;
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
+text-decoration: none;
+}
+#topsubsubnav li.current {
+position: relative;
+display: block;
+float: right;
+font-weight: normal;
+padding: 2px 110px 2px 15px;
+color: #000;
+text-decoration: none;
+}
+#topsubsubnav li.current span.choosed {
+font-weight: bold;
+}
+
+/* pagenav =side */
+h3.pagenav {
+margin-left: 10px;
+float: left;
+font-weight: normal;
+}
+ul.pagenav {
+list-style: none;
+width: 870px;
+height: 1.5em;
+}
+.pagenav li {
+display: inline;
+}
+.pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
+display: block;
+float: left;
+margin: 0 5px;
+padding: 0 5px;
+background: #fff;
+color: #000;
+border: 1px solid #d9d9d9;
+}
+.pagenav li.on {
+border-color: #00cc33;
+background: #fff;
+}
+.pagenav a:hover, .pagenav a:active, .pagenav a:focus {
+text-decoration: none;
+color: #fff;
+background: #00cc33
+}
+

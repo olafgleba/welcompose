@@ -1,0 +1,371 @@
+/**
+ * Project: Welcompose
+ * File: wcom.admin.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.admin.css 785 2006-12-19 18:10:12Z olaf $
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Welcompose
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/* 
+generic styles, basic structure and common classes
+*/
+
+/* generic styles */
+* {
+margin: 0;
+padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+}
+html, body, fieldset, a img {
+border: 0 none;
+}
+body {
+font: 95% Arial, Helvetica, sans-serif;
+color: #333;
+background: #d9d9d9 url(../img/bg_body.gif); 
+padding: 16px 0 16px 0;
+text-align: center;
+}
+h1 {
+position: relative;
+font-size: 1.5em;
+font-weight: normal;
+color: #0c3;
+margin: 10px 0 15px 10px;
+}
+h1 .users {
+position: absolute;
+left: 870px;
+top: 0.3em;
+display: block;
+height: 56px;
+width: 60px;
+background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
+}
+h2, h3, h4, p, a, li, th, td, label, select, input, textarea, 
+span .bez, fieldset.void {
+font-size: 0.80em;
+}
+h2 a, h3 a, h4 a, p a, li a, th a, td a, label a, select a, input a,
+li h2, li h3, li h4, li p, li a,
+td h2, td h3, td h4, th p, th a, th li, th label, th select, th input, th textarea,
+td p, td a, td li, td label, td select, td input, td textarea,
+label select, label input, label p, label a, 
+textarea {
+font-size: 100%;
+}
+.filter label {
+font-size: 75%;
+}
+a {
+text-decoration: none;
+cursor: pointer;
+}
+a:link, a:visited {
+color: #00AE2C;
+background: transparent;
+}
+a:hover {
+color: #00AE2C;
+background: transparent;
+text-decoration: underline;
+}
+a:active, a:focus {
+color: #fff;
+background: #0c3;
+}
+
+/* basic structure */
+#container {
+position: relative;
+width: 986px;
+background: #fff url(../img/bg_header.gif) 0 0 no-repeat;
+margin: 0 auto;
+text-align: left;
+}
+#container p.copyright {
+width: 941px;
+background: transparent url(../img/bg_container_bottom.gif) 0 20px no-repeat;
+padding: 5px 5px 15px 5px;
+margin: 50px 20px 0 20px;
+border-top: 1px solid #ebebeb;
+}
+.fright {
+float: right;
+width: 520px;
+text-align: right;
+}
+#logo {
+position: absolute;
+top: 19px;
+left: 765px;
+width: 200px;
+background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+#logo p {
+font-weight: bold;
+color: #fff;
+background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+padding: 0 0 3px 7px;
+}
+#logout {
+position: absolute;
+top: 44px;
+left: 915px;
+width: auto;
+}
+#logout a:link, #logout a:visited {
+display: block;
+width: 60px;
+height: 40px;
+background: transparent url(../img/icons/logout.gif) 0 0 no-repeat;
+}
+#logout a:hover, #logout a:active, #logout a:focus {
+background: transparent url(../img/icons/logout.gif) 0 -123px no-repeat;
+}
+#main {
+margin: 0 15px 0 15px;
+padding-top: 100px;
+}
+#content {
+margin: 20px 0;
+}
+#content p {
+margin: 10px 0 10px 10px;
+}
+/* headline */
+.hli {
+display: block;
+width: 474px;
+padding: 3px 0 0 0;
+background: transparent url(../img/bg_hli474_top.gif) 0 0 no-repeat;
+}
+.hli h2 {
+background: transparent url(../img/bg_hli474_bot.gif) left bottom no-repeat;
+width: 474px;
+wid\th: 464px;
+padding: 0 0 4px 10px;
+}
+/* headline on right besides content */
+.secnav474_nonav_c {
+float: right;
+width: 474px;
+height: 22px;
+background: transparent url(../img/bg_secnav474_nonav_c.gif) 0 0 no-repeat;
+}
+/* headline long no content but nav on right side */
+.secnav710_nav_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav710_nav_x.gif) 0 0 no-repeat;
+}
+/* headline long no content but long nav on right side */
+.secnav710_navplus_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav710_navplus_x.gif) 0 0 no-repeat;
+}
+/* headline short no content bu nav on right side */
+.secnav474_nav_x {
+float: right;
+width: 956px;
+height: 22px;
+background: transparent url(../img/bg_secnav474_nav_x.gif) 0 0 no-repeat;
+}
+.secnav710_nav_x a:link, .secnav710_nav_x a:visited,
+.secnav710_navplus_x a:link, .secnav710_navplus_x a:visited,
+.secnav474_nav_x a:link, .secnav474_nav_x a:visited {
+margin: 0 0 0 110px;
+line-height: 22px;
+font-weight: bold;
+margin-left: 725px;
+padding-left: 25px;
+background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
+}
+.secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus,
+.secnav710_navplus_x a:hover, .secnav710_navplus_x a:active, .secnav710_navplus_x a:focus,
+.secnav474_nav_x a:hover, .secnav474_nav_x a:active, .secnav474_nav_x a:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
+}
+
+/* %M =misc */
+.clearb {
+clear: both;
+}
+.clearfix:after {
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+/* Hides from IE-mac \*/
+* html .clearfix { 
+height: 1%; 
+}
+/* End hide from IE-mac */
+
+/* For table slides */
+.outer {
+visibility: collapse;
+background-color: transparent;
+}
+.inner {
+display: none;
+background: #d9d9d9 url(../img/bg_slides.gif);
+padding: 0 0 1em 20px;
+}
+.inner h3 {
+padding: 10px 0 0 0;
+margin: 0;
+}
+#content .inner p {
+padding: 2px 15px 2px 0;
+margin: 0;
+line-height: 140%;
+}
+
+/* Messages */
+#statuschange {
+display: none;
+}
+#statuschange {
+position: absolute;
+left: 15%;
+width: 710px;
+background: transparent url(../img/bg_statuschange_top.gif) 0 0 no-repeat;
+z-index: 2;
+}
+#statuschange h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#statuschange p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_statuschange_bot.gif) left bottom no-repeat;
+}
+#uploadMessage {
+display: none;
+}
+#uploadMessage {
+position: absolute;
+top: 40%;
+left: 15%;
+width: 500px;
+background: transparent url(../img/bg_uploadmessage_top.gif) 0 0 no-repeat;
+z-index: 2;
+}
+#uploadMessage h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#uploadMessage p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_uploadmessage_bot.gif) left bottom no-repeat;
+}
+/* Messages eof */
+
+/* LOGIN - BODY-ID #LOGIN */
+body#login  {
+padding-top: 50px;
+}
+#login #container {
+position: relative;
+width: 740px;
+background: #fff url(../img/bg_header_login.gif) 0 0 no-repeat;
+margin: 0 auto;
+text-align: left;
+}
+#login #logo {
+position: absolute;
+top: 19px;
+left: 519px;
+width: 200px;
+background: transparent url(../img/bg_logo.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+#login #main {
+margin: 0 15px 0 15px;
+padding-top: 70px;
+padding-bottom: 15px;
+}
+#login form.botbg {
+width: 710px;
+}
+
+.act {
+display: block; 
+width: auto;
+}
+.actnav {
+display: block;
+background: #f9f9f9;
+border: 1px solid #efefef;
+padding: 2px 5px;
+margin: 23px 2px 0 140px;
+height: 16px;
+list-style: none;
+}
+.actnav li {
+display: inline;
+}
+.actnav li a {
+position: relative;
+display: block;
+float: left;
+padding: 1px 20px 2px 19px;
+text-decoration: none;
+}
+.actnav a:link, .actnav a:visited {
+color: #000;
+background: transparent url(../img/icons/link.gif) 1px -3px no-repeat;
+}
+.actnav a:hover, .actnav a:active, .actnav a:focus {
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 1px -45px no-repeat;
+}
+.actnav li.on {
+position: relative;
+display: block;
+float: left;
+padding: 2px 10px 3px 19px;
+text-decoration: none;
+color: #00AE2C;
+background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
+}
+
+
+/* error.html */
+body#errormsg h2 {
+position: relative;
+/* font-size: 1.0em; */
+font-weight: normal;
+color: #000;
+margin: 30px 0 15px 10px;
+}
+body#errormsg h2 span {
+color: #0c3;
+font-weight: bold;
+}

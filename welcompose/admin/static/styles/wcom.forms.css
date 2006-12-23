@@ -1,0 +1,390 @@
+/**
+ * Project: Welcompose
+ * File: wcom.admin.css
+ *
+ * Copyright (c) 2006 sopic GmbH
+ *
+ * Project owner:
+ * sopic GmbH
+ * 8472 Seuzach, Switzerland
+ * http://www.sopic.com/
+ *
+ * This file is licensed under the terms of the Open Software License
+ * http://www.opensource.org/licenses/osl-2.1.php
+ *
+ * $Id: wcom.admin.css 785 2006-12-19 18:10:12Z olaf $
+ *
+ * @copyright 2006 clkm
+ * @author Cornelia Lange
+ * @package Welcompose
+ * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ */
+
+/* 
+forms (content), form validation, help, filter, error, response
+*/
+
+
+/* forms */
+form.botbg {
+width: 710px;
+padding: 20px 0;
+background: transparent url(../img/bg_form.gif) left bottom no-repeat;
+}
+fieldset.topbg {
+width: 690px;
+padding: 20px 10px 0 10px;
+background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
+overflow: hidden;
+}
+fieldset.within {
+width: 690px;
+padding: 40px 10px 0 10px;
+overflow: hidden;
+}
+fieldset.topbg h2, fieldset.within h2 {
+/* font-size: 1em; */
+font-weight: normal;
+padding: 0 10px 0 0;
+color: #0c3;
+}
+label {
+display: block;
+height: 1.5em;
+line-height: 1.5em;
+width: 690px;
+margin: 5px 0 0 0;
+}
+label.cont {
+margin: 5px 0;
+padding: 18px 0 0 0;
+height: 1.5em;
+}
+label.cont.h04 {
+height: 4.7em;
+}
+label.cont.h13 {
+height: 13em;
+}
+label.cont.h13act {
+padding: 0;
+height: 13em;
+}
+label.cont.h46 {
+height: 46em;
+}
+label.cont.h46act {
+padding: 0;
+height: 46em;
+}
+label span.bez {
+display: block; 
+float: left;
+width: 140px;
+}
+label span.bez260 {
+display: block; 
+float: left;
+width: 260px;
+}
+label span.req {
+color: #f00;
+}
+label.sizes {
+width: auto;
+margin: 5px 0;
+padding: 3px 0 0 0;
+height: 1.5em;
+}
+input.w130,
+input.w150,
+input.w200,
+input.w300,
+input.w540,
+input.w580 {
+width: 130px;
+border: 1px solid #666;
+padding: 2px 2px;
+color: #000;
+background: #fff;
+}
+input.w130 {
+width: 130px;
+}
+input.w150 {
+width: 150px;
+}
+input.w200 {
+width: 200px;
+}
+input.w220 {
+width: 220px;
+}
+input.w20 {
+width: 20px;
+}
+input.w300 {
+float: left;
+width: 300px;
+}
+input.w540 {
+width: 540px;
+font-weight: bold;
+}
+input.w580 {
+width: 580px;
+font-weight: bold;
+}
+textarea {
+border: 1px solid #666;
+}
+textarea.w540h550 {
+float: left;
+width: 540px;
+height: 550px;
+padding: 3px;
+}
+textarea.w540h150 {
+float: left;
+width: 540px;
+height: 150px;
+padding: 3px;
+}
+textarea.w298h50 {
+float: left;
+width: 298px;
+height: 50px;
+padding: 3px;
+margin: 0;
+}
+select.multisel {
+width: 300px;
+border: 1px solid #666;
+}
+.flselect {
+margin: 1px 5px 0 0;
+padding: 0;
+border: 1px solid #666;
+}
+input.chbx {
+border-color: #666;
+}
+
+/* eof Reset for inner table definition */
+
+input#submit55,
+input.submit90,
+input.submit140,
+input.submit200,
+input.submit200upload,
+input.submit200bez260,
+input.cancel200,
+input.submit240,
+input.submit240bez260 {
+text-align: left;
+height: 20px;
+font-weight: bold;
+color: #fff;
+border: 0 none;
+padding: 0 0 2px 3px;
+cursor: pointer;
+}
+
+input#submit55 {
+background: #666 url(../img/submit55.gif) 100% 0 no-repeat;
+width: 55px;
+}
+input.submit90 {
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+width: 90px;
+}
+input.submit140 {
+background: #0c3 url(../img/submit140.gif) no-repeat;
+width: 140px;
+margin: 20px  0 0 140px;
+}
+input.submit200 {
+background: #0c3 url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 140px;
+}
+input.submit200upload {
+background: #0c3 url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 140px;
+}
+input.submit200bez260 {
+background: #0c3 url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 260px;
+}
+input.cancel200 {
+background: #0c3 url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 140px;
+}
+input.submit240 {
+background: #0c3 url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 140px;
+}
+input.submit240bez260 {
+background: #0c3 url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 260px;
+}
+
+/* validate */
+#content span.validate {
+float: left;
+display: block; 
+width: 220px;
+height: 1.5em;
+line-height: 1.5em;
+padding-left: 5px;
+}
+#content span.validate img {
+vertical-align: middle;
+}
+
+/* help */
+#content p.help, #modalBody p.help {
+display: block;
+line-height: 1.5em;
+width: 305px;
+margin: 0 0 10px 0;
+padding-left: 140px;
+}
+#content p.helpTextarea540, #modalBody p.helpTextarea540 {
+display: block;
+line-height: 1.5em;
+width: 540px;
+margin: 0 0 10px 0;
+padding-left: 140px;
+}
+/* for community/settings.php/html -> span class bez260 */
+#content p.helpbez260 {
+display: block;
+line-height: 1.5em;
+width: 305px;
+margin: 0 0 10px 0;
+padding-left: 260px;
+}
+
+.iHelp a,
+.iHelpRemove a,
+.iHelpMediamanager a,
+.iHelpRemoveMediamanager a,
+.showMediamanagerElementMyLocal a,
+.hideMediamanagerElementMyLocal a,
+.showMediamanagerElementMyFlickr a,
+.hideMediamanagerElementMyFlickr a {
+background-color: transparent;
+text-decoration: none;
+}
+.iHelp a img,
+.iHelpRemove a img,
+.iHelpMediamanager a img,
+.iHelpRemoveMediamanager a img,
+.showMediamanagerElementMyLocal a img,
+.hideMediamanagerElementMyLocal a img,
+.showMediamanagerElementMyFlickr a img,
+.hideMediamanagerElementMyFlickr a img {
+vertical-align: middle;
+}
+
+/* filter */
+.filter {
+margin: 0 0 0 10px;
+padding: 10px 0 20px 0;
+}
+.filter h2 {
+display: block;
+float: left;
+width: auto;
+line-height: 1.5em;
+padding: 0;
+margin-right: 10px;
+}
+.filter label {
+display: block;
+float: left;
+line-height: 1.5em;
+width: auto;
+margin: 0 5px 0 15px;
+}
+.filter select {
+display: block;
+float: left;
+margin: 1px 0;
+padding: 0;
+border: 1px solid #666;
+line-height: 1.5em;
+}
+
+/* errors */
+#error {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+/* IE 6, IE 7 */
+* html #container #error, *+html #container #error {
+margin-top: 45px;
+}
+#error ul.req {
+line-height: 1.2em;
+padding: 4px 15px;
+font-weight: bold;
+color: red;
+list-style-position: inside;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+/* %M =response */
+#rp {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+/* IE 6, IE 7 */
+* html #container #rp, *+html #container #rp {
+margin-top: 45px;
+}
+#rp h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#rp p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+#content .rp_note {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+/* IE 6, IE 7 */
+* html .rp_note, *+html .rp_note {
+margin-top: 50px;
+}
+#content .rp_note h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: red;
+}
+#content .rp_note p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+#content .rp_note img { 
+float: right;
+margin: 6px 6px 6px 20px;
+}
