@@ -14,7 +14,7 @@
  *
  * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
  *
- * @copyright 2004-2005 creatics media.systems
+ * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
@@ -78,3 +78,4 @@ var definitions = {
 	}
 };
 Behaviour.register(definitions);
+Behaviour.addLoadEvent(Init.load);

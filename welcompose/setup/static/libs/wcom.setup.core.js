@@ -30,25 +30,35 @@
 
 
 /**
- * Define debug output string
+ * Define debug output string. 
  *
- * Switch differs how try/catch will handle exceptions
- * 0 = no debug output
- * 1 = development
- * 2 = production
+ * Switch differs how try/catch will handle exceptions.<br />
+ * 0 = No debug output<br />
+ * 1 = Development<br />
+ * 2 = Production<br />
+ * <br />
+ * Scope is application wide.
  *
- * @static
- * @link See wcom.string.js for the strings content
+ * @type Number
  */
-var debug = 1;
+function _debug ()
+{
+	debug = 1;
+}
 
 /**
- * Build new XMLHTTPRequest object instance
+ * Build new XMLHTTPRequest object instance.
+ * Used in classes constructor wherever an XMLHTTPRequest is needed.
  *
- * @private
+ * <br /><br />Example:
+ * <pre><code>
+// instance XMLHttpRequest object
+this.req = _buildXMLHTTPRequest();
+ * </code></pre>
+ *
  * @throws applyError on exception
- * @return XMLHTTPRequest object instance
- * @type object
+ * @return Object XMLHTTPRequest object instance
+ * @type Object
  */
 function _buildXMLHTTPRequest ()
 {
@@ -65,10 +75,17 @@ function _buildXMLHTTPRequest ()
 }
 
 /**
- * Alerted String (errStr) contains exception params with different
- * provided debug information.
- *
- * @private
+ * Display exception alert within the try/catch handling
+ * relating to given debug variable value.
+ * 
+ * <br /><br />Example:
+ * <pre><code>
+try {
+	<contents>
+} catch (e) {
+	_applyError(e);
+}</code></pre>
+ * 
  * @param {object} exception error obj presented by catch statement
  */
 function _applyError (exception)
@@ -104,20 +121,16 @@ function _applyError (exception)
  * Constructs the Errors class
  *
  * @class The Errors class tracks all manually thrown
- * errors. Scope application wide. Mainly used in all
+ * errors. It is inherited from the standard javascript error class prototype.
+ * Scope application wide. Mainly used in all
  * process_xxx functions to track errors on xhr state, which
- * are not processed by the try/catch structure.
+ * are not traped by the try/catch structure.
  *
- * example:
- * < throw new Errors(object); > 
- *
- * Prototype Methods:
- * 
- * **Right now there are not methods defined**
- *
+ * <br /><br />Example:
+ * <pre><code>throw new Errors(object);</code></pre>
  *
  * @constructor
- * @param {string} msg Exception error message presented by catch statement
+ * @param {string} msg Exception error message
  */
 function Errors(msg) 
 {
@@ -132,47 +145,12 @@ Errors.prototype = new Error();
 
 
 
-
-
 /**
  * Constructs the Base class
  * 
- * @class This class is the most important class of the wcom
- * javascript enviroment, cause all other classes derived from that class.
+ * @class The base class is the most important class of the wcom
+ * javascript enviroment, cause all other classes (exclude Errors) are inherited from that class.
  * It predefines properties and methods which are supposed to be used application wide.
- *
- * Prototype Methods:
- * 
- * isArray()
- * Examine the giving var is of type Array
- *
- * isBoolean()
- * Examine the giving var is of type Bool
- *
- * isString()
- * Examine the giving var is of type String
- *
- * isObject()
- * Examine the giving var is of type Object
- *
- * isFunction()
- * Examine the giving var is a function
- *
- * isUndefined()
- * Examine the giving var is undefined
- *
- * isNumber()
- * Examine the giving var is of type Number
- *
- * isEmpty()
- * Examine the giving var has no values
- *
- * isNull()
- * Examine the giving var is Null
- *
- * trim()
- * Delete whitspaces before and after the giving string
- *
  *
  * @constructor
  * @throws applyError on exception
@@ -328,29 +306,100 @@ function Base_trim(elem) {
 }
 
 
+/**
+ * Constructs the Init class
+ * 
+ * @class The Init class is supposed to be used on load of page.
+ * <br />
+ * Right now the function {@link #load} is used as an argument for the thirdparty lib method
+ * <em>Behaviour.addLoadEvent(Init.load);</em> and is not supposed to called manually. If you
+ * you want something to happen on load of page, add another prototype function (e.g. {@link #getVars}) to class Init
+ * and call it within the {@link #load} function instead.
+ *
+ * <br /><br />Example (Schema):
+ * <pre><code>
+function Init_load ()
+{	
+	try {
+		// Do something while page load
+		Init.getVars();
+		...
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+ * </code></pre>
+ *
+ * @constructor
+ * @throws applyError on exception
+ */
+function Init ()
+{
+	try {
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/* Inherit from Base class */
+Init.prototype = new Base();
+
+/* Methods of prototype @class Init */
+Init.prototype.load = Init_load;
+Init.prototype.getVars = Init_getVars;
+
+/**
+ * All functions supposed to be called on load must take place within this function.
+ * 
+ * @throws applyError on exception
+ */
+function Init_load ()
+{	
+	try {
+		// DONT EVER CHANGE THIS FUNCTION CALL
+		// set global debug var first
+		_debug();
+		
+		Init.getVars();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Getter function for several actions to be executed on load of page.
+ * Depends on delivered variables in the html markup.
+ * 
+ * @throws applyError on exception
+ */
+function Init_getVars ()
+{
+	try {
+		if (typeof r != 'undefined' && Init.isNumber(r)) {
+			if (r == 1) {
+				Helper.setFormfieldGroup();
+			}
+		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Building new object instance of class Init
+ */
+Init = new Init();
+
 
 /**
  * Constructs the Help class
  * 
  * @class The Help class is the appropriate class for
  * the help enviroment. The scope is application wide.
+ * For consistent reason, it comprises the help handling of the Mediamanger too.
  *
- * Prototype methods:
- * 
- * show()
- * Import related help file depending on actual element pointer.
- * Show help html element.
- *
- * hide()
- * Hide help html element.
- *
- * processHelp()
- * Update content with XMLHttpRequest response.
- *
- * setCorrespondingFocus()
- * Set Focus related to pointed element.
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -376,10 +425,11 @@ Help.prototype.processHelp = Help_processHelp;
 Help.prototype.setCorrespondingFocus = Help_setCorrespondingFocus;
 
 /**
- * Import related help file depending on actual element pointer.
  * Show help html element.
+ * Import related help file depending on current element pointer.
  *
- * @param {string} elem Actual element
+ * @see #processHelp
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Help_show (elem)
@@ -432,7 +482,7 @@ function Help_show (elem)
 /**
  * Hide help html element.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Help_hide (elem)
@@ -461,6 +511,7 @@ function Help_hide (elem)
 /**
  * Update content with XMLHttpRequest response.
  *
+ * @see #show
  * @param {string} ttarget Layer to process
  * @throws Errors on req object status code other than 200
  * @throws applyError on exception
@@ -486,7 +537,7 @@ function Help_processHelp (ttarget)
 /**
  * Set Focus related to pointed element.
  *
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @param {string} attr Node Attribute
  */
 function Help_setCorrespondingFocus (elem, attr)
@@ -502,25 +553,12 @@ Help = new Help();
 
 
 
-
-
-
 /**
- * Constructs the Forms class
+ * Constructs the Forms class.
  * 
- * @class The Forms class is the appropriate class for forms processing.
+ * @class The Forms class handles all actions related to html form elements.
  * The scope is application wide.
  *
- * Prototype methods:
- * 
- * setOnEvent()
- * Used to style elements depending on given params
- *
- * storeFocus()
- * Tracks the actual Focus and makes it available application wide.
- * This is actual used to fire alerts within mediamanager.
- *
- * @see Base
  * @constructor
  * @throws applyError on exception
  */
@@ -542,9 +580,14 @@ Forms.prototype = new Base();
 Forms.prototype.setOnEvent = Forms_setOnEvent;
 
 /**
- * Used to style elements depending on given params
+ * Style elements depending on given params
+ *
+ * <br /><br />Example:
+ * <pre><code>
+Forms.setOnEvent(this, '','#0c3','dotted');
+ * </code></pre>
  * 
- * @param {string} elem Actual element
+ * @param {string} elem Current element
  * @param {string} bgcolor Define background color
  * @param {string} bcolor Define border color
  * @param {string} bstyle Define border style attribute

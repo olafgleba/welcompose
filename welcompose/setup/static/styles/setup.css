@@ -456,7 +456,7 @@ padding-left: 192px;
 background-color: transparent;
 text-decoration: none;
 }
-.iHelp img, .iHelpRemove img {
+.iHelp a img, .iHelpRemove a img {
 vertical-align: middle;
 }
 

@@ -19,6 +19,12 @@
 <script type="text/javascript" src="static/libs/wcom.setup.events.js"></script>
 <script type="text/javascript" src="static/libs/wcom.setup.validation.js"></script>
 
+{if !empty($form.errors) }
+<script type="text/javascript">
+var r = 1;
+</script>
+{/if}
+
 </head>
 
 <body>
@@ -32,7 +38,7 @@
 
 <div id="topnavcon">
 <ul id="topnav">
-<li class="one">Licence<span></span></li>
+<li class="one">License<span></span></li>
 <li class="two">Requirements<span></span></li>
 <li class="three on">Database<span></span></li>
 <li class="four">Configuration<span></span></li>
