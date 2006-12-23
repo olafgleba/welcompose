@@ -35,7 +35,7 @@
  * <br />
  * Scope is application wide.
  *
- * @type Bool
+ * @type Number
  */
 function _debug ()
 {

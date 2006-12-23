@@ -274,10 +274,10 @@ function Mediamanager_switchLayer (toShow, toHide)
  * @see #setCurrentElementStatusMyLocal
  * @see #setCurrentElementStatusMyFlickr
  * @param {string} elem Current element
- * @param {string} exception Track if we need to provide extra rows, see {@link #hideElement} and {@link #showElement}
+ * @param {string} row Track if we need to provide extra rows, see {@link #hideElement} and {@link #showElement}
  * @throws applyError on exception
  */
-function Mediamanager_checkOccurrences (elems, exception)
+function Mediamanager_checkOccurrences (elems, row)
 {
 	try {				
 		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
@@ -296,7 +296,7 @@ function Mediamanager_checkOccurrences (elems, exception)
 		} else {
 			switch (res.length) {
 				case 1 :
-						if (Mediamanager.isNumber(exception) === true) {
+						if (Mediamanager.isNumber(row) === true) {
 							var cHeight = '372px';
 							var pHeight = '369px';
 							countItems = 7;
@@ -309,7 +309,7 @@ function Mediamanager_checkOccurrences (elems, exception)
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 2 :
-						if (Mediamanager.isNumber(exception) === true) {
+						if (Mediamanager.isNumber(row) === true) {
 							var cHeight = '351px';
 							var pHeight = '348px';
 							countItems = 7;
@@ -322,7 +322,7 @@ function Mediamanager_checkOccurrences (elems, exception)
 						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 3 :
-						if (Mediamanager.isNumber(exception) === true) {
+						if (Mediamanager.isNumber(row) === true) {
 							var cHeight = '330px';
 							var pHeight = '327px';
 							countItems = 6;
