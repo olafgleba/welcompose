@@ -1,21 +1,110 @@
-{include file="header.html"}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>Ein Fehler ist aufgetreten</title>
+
+<style type="text/css" media="screen, projection">
+* {
+margin: 0;
+padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+}
+html, body, fieldset, a img {
+border: 0 none;
+}
+body {
+font: 95% Arial, Helvetica, sans-serif;
+color: #333;
+background: #fff; 
+padding: 16px 0 16px 0;
+text-align: center;
+}
+h1 {
+position: relative;
+font-size: 1.7em;
+font-weight: normal;
+color: #0c3;
+margin: 10px 0 25px 30px;
+}
+h2 {
+position: relative;
+font-size: 1.2em;
+font-weight: normal;
+color: #333;
+margin: 10px 0 15px 30px;
+}
+#container {
+position: relative;
+width: 686px;
+background: #fff;
+margin: 0 auto;
+text-align: left;
+}
+#container p.copyright {
+width: 591px;
+padding: 5px 5px 15px 5px;
+margin: 120px 20px 0 40px;
+}
+#main {
+margin: 0 15px 0 15px;
+padding-top: 80px;
+}
+#content {
+margin: 20px 0;
+}
+#content p {
+margin: 10px 0 10px 10px;
+}
+a {
+text-decoration: none;
+cursor: pointer;
+}
+a:link, a:visited {
+color: #00AE2C;
+background: transparent;
+}
+a:hover {
+color: #00AE2C;
+background: transparent;
+text-decoration: underline;
+}
+a:active, a:focus {
+color: #fff;
+background: #0c3;
+}
+p, a {
+font-size: 0.80em;
+}
+p a {
+font-size: 100%;
+}
+</style>
+
+</head>
+
+<body>
+<div id="container">
 
 <div id="main">
-<h1>Error</h1>
-</div>
-<div id="main">
+<div id="content">
 
-<div class="lFloat">
+<h1>Es ist ein Fehler aufgetreten!</h1>
 
-<p>An error occured on file {$file} at line {$line}</p>
+<h2>{$message}</h2>
 
-<p>with the following message: {$message}</p>
-<p>Errorcode is: {$code}<br />
-Trace:<br />
-{$trace_string|nl2br}
+<!-- content --></div>
+<!-- main --></div>
+
+<p class="copyright">
+&copy; 2006 <a href="http://www.welcompose.com/"><strong>Welcompose<sup>&reg;</sup></strong></a> Version 0.6 &ndash; powered by <a href="http://www.sopic.com/"><strong>Sopic<sup>&reg;</sup></strong></a>
 </p>
 
-</div>
-
-<!-- main --></div>
-{include file="footer.html"}
+<!-- container --></div>
+</body>
+</html>
