@@ -298,8 +298,12 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-/* IE 6, IE 7 */
-* html #container #error, *+html #container #error {
+/* IE 7 */
+*+html #container #error {
+margin-top: 45px;
+}
+/* IE 6 */
+* html #container #error {
 margin-top: 45px;
 }
 #error ul.req {

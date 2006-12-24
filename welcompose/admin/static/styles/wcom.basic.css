@@ -309,8 +309,12 @@ width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-/* IE 6, IE 7 */
-* html #container #rp, *+html #container #rp {
+/* IE 7 */
+*+html #container #rp {
+margin-top: 45px;
+}
+/* IE 6 */
+* html #container #rp {
 margin-top: 45px;
 }
 #rp h1 {
@@ -327,11 +331,15 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 #content .rp_note {
 display: block;
 width: 710px;
-margin-top: 20px;
+margin-top: 0;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-/* IE 6, IE 7 */
-* html .rp_note, *+html .rp_note {
+/* IE 7 */
+*+html .rp_note {
+margin-top: 50px;
+}
+/* IE 6 */
+* html .rp_note {
 margin-top: 50px;
 }
 #content .rp_note h1 {

@@ -430,7 +430,6 @@ border: 1px solid #efefef;
 }
 #podcast_container h2 {
 margin-top: 0.6em;
-/* font-size: 1.3em; */
 }
 #podcast_container #extendedView {
 display: none; 
@@ -507,19 +506,25 @@ cursor: pointer;
 input.toggleExtendedView120  {
 margin: 20px 0 0 140px;
 }
-/* IE 6, IE 7 */
-* html input.toggleExtendedView120,
-* html input.showIDThree120,
-* html input.discardPodcast120,
+/* IE 7 */
 *+html input.toggleExtendedView120,
 *+html input.showIDThree120,
 *+html input.discardPodcast120 {
-margin: 10px 0 10px 10px;
+margin: 20px 0 20px 10px;
 }
-/* IE 6, IE 7 */
+/* IE 6 */
 * html input.toggleExtendedView120,
+* html input.showIDThree120,
+* html input.discardPodcast120 {
+margin: 20px 0 20px 10px;
+}
+/* IE 7 */
 *+html input.toggleExtendedView120 {
-margin: 10px 0 10px 140px;
+margin: 20px 0 20px 140px;
+}
+/* IE 6 */
+* html input.toggleExtendedView120 {
+margin: 20px 0 20px 140px;
 }
 #podcast_container p.help {
 display: block;
