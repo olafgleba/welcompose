@@ -84,18 +84,6 @@
 						</para>
 					</listitem>
 				</varlistentry>
-				<varlistentry>
-					<term><emphasis role="strong">PEAR::Console_Getargs</emphasis></term>
-					<listitem>
-						<para>
-							Das PEAR-Paket Console_Getargs wird benötigt, um die
-							Kommandozeilen-Parameter für die PHP-Scripts
-							auszuwerten. Es kann normalerweise über den
-							PEAR-Installer mit <command>pear install
-							Console_Getargs</command> installiert werden.
-						</para>
-					</listitem>
-				</varlistentry>
 			</variablelist>
 			
 			<warning>
@@ -132,22 +120,32 @@
 			
 			<programlisting><![CDATA[
 $ php xgettext.php \
-	-d welcompose/welcompose/trunk/welcompose \
-	-s .html .php .xml .txt \
-	-c iso-8859-1 \
-	-w
+	--charset=iso-8859-1 \
+	--directory=welcompose/welcompose/trunk/welcompose \
+	--scan-hidden=false \
+	--delimiter="{ }" \
+	--suffix=.html \
+	--suffix=.php 
 ]]></programlisting>
 			
 			<para>
-				Mit dem Argument <command>-d</command> wird das Verzeichnis angegeben,
-				von dem aus <filename>xgettext.php</filename> aus alle Dateien nach
-				Zeichenketten zum übersetzen suchen soll. Der Pfad sollte auf das
-				Verzeichnis zeigen, indem sich die Software mit den Unterordnern
+				Mit dem Argument <command>--directory</command> wird das Verzeichnis,
+				angegeben, von dem aus <filename>xgettext.php</filename> alle Dateien
+				nach Zeichenketten zum Übersetzen durchsuchen soll. Der Pfad sollte auf
+				das Verzeichnis zeigen, indem sich die Software mit den Unterordnern
 				<filename>admin</filename>, <filename>core</filename> usw. befindet.
-				Das Argument <command>-s</command> definiert, welche Dateitypen
+				Das Argument <command>--suffix</command> definiert, welche Dateitypen
 				(nach Endung) nach Zeichenketten zum Übersetzen durchsucht werden
 				sollen.
 			</para>
+			
+			<tip>
+				<para>
+					Um eine Liste aller Optionen von <command>xgettext.php</command>
+					zu erhalten, geben Sie <command>xgettext.php --help</command>
+					ein. Dort wird auch ihre Anwendung erklärt. 
+				</para>
+			</tip>
 			
 			<para>
 				Wenn Sie <filename>xgettext.php</filename> aufrufen, durchsucht
@@ -289,10 +287,12 @@ msgstr "Permalink"
 			<programlisting><![CDATA[
 $ mv messages.po old.po
 $ php xgettext.php \
-	-d welcompose/welcompose/trunk/welcompose \
-	-s .html .php .xml .txt \
-	-c iso-8859-1 \
-	-w
+	--charset=iso-8859-1 \
+	--directory=welcompose/welcompose/trunk/welcompose \
+	--scan-hidden=false \
+	--delimiter="{ }" \
+	--suffix=.html \
+	--suffix=.php
 $ mv messages.po new.po
 $ msgmerge old.po new.po --output-file=messages.po
 ]]></programlisting>
