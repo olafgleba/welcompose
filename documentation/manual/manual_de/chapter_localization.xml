@@ -4,5 +4,322 @@
 <chapter id="localization">
 	<title>Lokalisierung</title>
 	
-	<para/>
+	<sect1 id="localization.for_translators">
+		<title>Für Übersetzer</title>
+		
+		<para>
+			Welcompose nutzt in Bereichen, die nicht vom Anwender ohne weiteres editiert
+			werden können, Englisch für Beschriftungen und Systemmeldungen. Diese können
+			allerdings ohne Weiteres lokalisiert werden. Lokalisierbar ist der
+			Administrationsbereich sowie Teile des öffentlichen Bereichs (z.B.
+			Formular-Beschriftungen und -Fehlermeldungen beim Seitentyp Simple Form),
+			nicht aber Fehlermeldungen vom System, die beispielsweise von
+			Validierungsfunktionen stammen.
+		</para>
+		
+		<para>
+			Die Lokalisierung erfolgt mit GNU gettext, das beispielsweise auch von
+			anderen Projekten wie KDE verwendet wird. GNU gettext steht in Welcompose
+			einerseits nativ über die gettext-Erweiterung von PHP bereit und
+			andererseits in Form von Smarty-Plugins, die die gettext-Funktionen
+			innerhalb der Vorlagen zur Verfügung stellen.
+		</para>
+		
+		<para>
+			Eine gute Einführung zum Thema GNU gettext mit PHP bietet der Artikel
+			<ulink url="http://www.onlamp.com/pub/a/php/2002/06/13/php.html">Gettext</ulink>
+			von Joao Prado Maia.
+		</para>
+		
+		<sect2 id="localization.for_translators.requirements">
+			<title>Voraussetzungen</title>
+			
+			<para>
+				Um Welcompose zu lokalisieren, benötigen Sie folgende Werkzeuge:
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term><emphasis role="strong">SmartyGettext</emphasis></term>
+					<listitem>
+						<para>
+							Sie brauchen SmartyGettext, respektive die Datei
+							<filename>xgettext.php</filename> aus dem Paket, um die 
+							zu übersetzenden Zeichenketten aus den Vorlagen und den
+							PHP-Scripts zu extrahieren. Sie erhalten SmartyGettext von
+							<ulink url="http://www.dotthink.net/svn/SmartyGettext/trunk"/>.
+							Kopieren Sie <filename>xgettext.php</filename> nach
+							<filename>/usr/local/bin</filename> oder fügen Sie
+							den Pfad zur Datei in $PATH ein, damit Sie sie als
+							<filename>xgettext.php</filename> auf der Kommando-Zeile
+							ansprechen können.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis role="strong">GNU gettext</emphasis></term>
+					<listitem>
+						<para>
+							GNU gettext ist Bestandteil der meisten
+							Linux-Distributionen und MacOS X. Ist es nicht
+							vorhanden, kann es über den jeweiligen Paket-Manager
+							nachinstalliert werden. In Windows ist eine
+							Installation und Nutzung von GNU gettext über Cygwin
+							möglich. Nach der Installation von GNU gettext sollten
+							die Werkzeuge <filename>msginit</filename>,
+							<filename>msgfmt</filename> und
+							<filename>msgmerge</filename> vorhanden sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis role="strong">PHP 5.0.3</emphasis></term>
+					<listitem>
+						<para>
+							Eine CLI-Version von PHP 5.0.3 (oder neuer). Ob eine
+							CLI-Version von PHP vorhanden ist, können Sie mit
+							<command>php -v</command> herausfinden.
+							Beispielausgabe: <computeroutput>PHP 5.2.0 (cli)
+							(built: Dec 17 2006 11:27:03)</computeroutput>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis role="strong">PEAR::Console_Getargs</emphasis></term>
+					<listitem>
+						<para>
+							Das PEAR-Paket Console_Getargs wird benötigt, um die
+							Kommandozeilen-Parameter für die PHP-Scripts
+							auszuwerten. Es kann normalerweise über den
+							PEAR-Installer mit <command>pear install
+							Console_Getargs</command> installiert werden.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<warning>
+				<para>
+					Die Code-Beispiele gehen davon aus, dass alle Programme in
+					$PATH installiert sind und daher direkt angesprochen werden
+					können. Ist dem nicht der Fall, passen Sie die Pfade zu den
+					Programmen den aktuellen Gegebenheiten an.
+				</para>
+			</warning>
+		</sect2>
+		
+		<sect2 id="localization.for_translators.extract_strings">
+			<title>Zeichenketten extrahieren</title>
+			
+			<para>
+				Bevor die Zeichenketten übersetzt werden können, müssen Sie aus
+				den Vorlagen und PHP-Scripts extrahiert werden. Verwenden Sie dazu
+				das Programm <filename>xgettext.php</filename>.
+			</para>
+			
+			<warning>
+				<para>
+					Es existiert auch ein Programm namens
+					<filename>xgettext</filename> (ohne Endung
+					<filename>.php</filename>), das Teil von GNU gettext ist.
+					Verwenden Sie dieses Programm nicht, da es nicht die
+					Zeichenketten in den Vorlagen erkennt. Benutzen Sie statt
+					dessen nur die modifizierte Version
+					<filename>xgettext.php</filename>, die auch die Zeichenketten
+					in den Vorlagen erkennt.
+				</para>
+			</warning>
+			
+			<programlisting><![CDATA[
+$ php xgettext.php \
+	-d welcompose/welcompose/trunk/welcompose \
+	-s .html .php .xml .txt \
+	-c iso-8859-1 \
+	-w
+]]></programlisting>
+			
+			<para>
+				Mit dem Argument <command>-d</command> wird das Verzeichnis angegeben,
+				von dem aus <filename>xgettext.php</filename> aus alle Dateien nach
+				Zeichenketten zum übersetzen suchen soll. Der Pfad sollte auf das
+				Verzeichnis zeigen, indem sich die Software mit den Unterordnern
+				<filename>admin</filename>, <filename>core</filename> usw. befindet.
+				Das Argument <command>-s</command> definiert, welche Dateitypen
+				(nach Endung) nach Zeichenketten zum Übersetzen durchsucht werden
+				sollen.
+			</para>
+			
+			<para>
+				Wenn Sie <filename>xgettext.php</filename> aufrufen, durchsucht
+				es gemäss der Konfiguration den jeweiligen Zielordner und alle
+				Unterordner nach Zeichenketten zum Übersetzen. Die gefundenen
+				Zeichenketten werden in eine Datei mit dem Namen
+				<filename>messages.pot</filename> geschrieben.
+			</para>
+		</sect2>
+		
+		<sect2 id="localization.for_translators.translate_strings">
+			<title>Zeichenketten übersetzen</title>
+			
+			<para>
+				Um die Übersetzung in eine bestimmte Sprache zu beginnen
+				(beispielsweise Deutsch), benötigen Sie das Programm
+				<filename>msginit</filename> und die Datei
+				<filename>messages.po</filename>, die Sie in
+				<xref linkend="localization.for_translators.extract_strings"/>
+				erstellt haben.
+			</para>
+			
+			<programlisting><![CDATA[
+$ msginit --locale=de --input=messages.pot
+]]></programlisting>
+			
+			<para>
+				<filename>msginit</filename> ist ein interaktives Programm, dass
+				Ihnen einige Fragen zur Lokalisierung stellt und die Datei
+				<filename>messages.pot</filename> auf die Übersetzung vorbereitet.
+				Die Sprache, in die Sie Welcompose übersetzen wollen, wird mit dem
+				Kommandozeilen-Argument <command>--locale</command> bestimmt:
+				<userinput>de</userinput> steht beispielsweise für Deutsch,
+				<userinput>es</userinput> für Spanisch. Sie erhalten eine Datei
+				mit dem Namen <filename>messages.po</filename>.
+			</para>
+			
+			<para>
+				Die PO-Dateien können mit jedem Texteditor übersetzt werden, sofern
+				er die richtigen Zeichensätze unterstützt. Jede zu übersetzende
+				Zeichenkette umfasst drei Zeilen:
+			</para>
+			
+			<programlisting><![CDATA[
+#: blog_tag.html:120 blog_tag.html:26 blog_tag.html:110
+msgid "Postings tagged with &raquo;%tmp_current_tag_word&laquo;"
+msgstr ""
+]]></programlisting>
+			
+			<para>
+				Die erste Zeile listet die Referenzen, also die Dateien und
+				Zeilennummern, wo die Zeichenkette überall gefunden wurde. Dies
+				ist hilfreich bei kontextsensitiver Übersetzung. Die
+				<markup>msgid</markup> bezeichnet die Zeichenkette im Quellcode,
+				<markup>msgstr</markup> nimmt den übersetzten Text auf. Beispiel:
+			</para>
+			
+			<programlisting><![CDATA[
+#: blog_tag.html:120 blog_tag.html:26 blog_tag.html:110
+msgid "Postings tagged with &raquo;%tmp_current_tag_word&laquo;"
+msgstr "Beiträge zum Stichwort &raquo;%tmp_current_tag_word&laquo;"
+]]></programlisting>
+			
+			<warning>
+				<para>
+					Editieren Sie auf keinen Fall die <markup>msgid</markup>. Sonst
+					ist GNU gettext nicht der Lage, der ursprünglichen
+					Zeichenkette die Übersetzung zuzuordnen. 
+				</para>
+			</warning>
+			
+			<para>
+				Platzhalter können an einem vorgestellten Prozentzeichen (%)
+				identifiziert werden. Sie sind 1:1 vom Original zu übernehmen
+				und an der passenden Stelle in der Übersetzung zu platzieren
+				(s. Beispiel über diesem Abschnitt).
+			</para>
+			
+			<para>
+				Zeichenketten, die sowohl im Original als auch in der Übersetzung
+				gleich lauten (z.B. bei Eigennamen wie IBM), ist das Original in
+				die Übersetzung zu übernehmen:
+			</para>
+			
+			<programlisting><![CDATA[
+#: blog_tag.html:140 blog_index.html:138 blog_tag.html:130 blog_index.html:128
+msgid "Permalink"
+msgstr "Permalink"
+]]></programlisting>
+			
+			<para>
+				Nachdem Sie alle Zeichenketten übersetzt haben, reichen Sie die
+				Übersetzung bitte ein oder fügen Sie sie selber der
+				Versionskontrolle, wenn Sie das können.
+			</para>
+			
+			<note>
+				<para>
+					GNU gettext ist nicht in der Lage, die PO-Dateien für die
+					Übersetzung der Zeichenketten zu verwenden. Diese müssen
+					dazu vorher in das binäre MO-Format überführt werden.
+					Die erfolgt mit dem Programm <filename>msgfmt</filename>,
+					indem Sie die Anweisung <command>$ msgfmt
+					messages.po</command> verwenden.
+				</para>
+				
+				<para>
+					Sie brauchen dies als Übersetzer aber nur zu tun, wenn Sie
+					die <filename>messages.mo</filename> selber benutzen wollen,
+					beispielsweise für einen Test. Ansonsten übernehmen die
+					Scripts, die die Installationsarchive von Welcompose
+					erstellen, die Umwandlung der PO-Dateien.
+				</para>
+			</note>
+			
+			<warning>
+				<para>
+					Löschen Sie die PO-Dateien auf keinen Fall! Sie benötigen
+					sie bei Aktualisierungen, um nicht mehr alle Zeichenketten
+					von neuem ändern zu müssen.
+				</para>
+			</warning>
+		</sect2>
+		
+		<sect2 id="localization.for_translators.update_translated_strings">
+			<title>Übersetzungen aktualisieren</title>
+			
+			<para>
+				Wurde die Software aktualisiert, d.h. Zeichenketten geändert
+				und hinzugefügt, ist es nötig, ein weiteres Mal sämtliche
+				Zeichenketten zu extrahieren und eine POT-Datei zu erstellen
+				(siehe <xref linkend="localization.for_translators.extract_strings"/>).
+				Damit aber nicht wieder sämtliche Zeichenketten übersetzt
+				werden müssen, kann man mit Hilfe eines weiteren Werkzeugs
+				einen Abgleich der alten <filename>messages.po</filename>
+				und der neuen <filename>messages.po</filename> ausführen.
+			</para>
+			
+			<programlisting><![CDATA[
+$ mv messages.po old.po
+$ php xgettext.php \
+	-d welcompose/welcompose/trunk/welcompose \
+	-s .html .php .xml .txt \
+	-c iso-8859-1 \
+	-w
+$ mv messages.po new.po
+$ msgmerge old.po new.po --output-file=messages.po
+]]></programlisting>
+			
+			<para>
+				Die resultierende <filename>messages.po</filename> enthält
+				bereits die &ndash; sofern noch gültigen &ndash; alten
+				Übersetzungen und am Ende der Datei die gegebenenfalls neu
+				hinzugekommenen oder modifizierten Zeichenketten. Gelöschte
+				Zeichenketten sind auskommentiert am Ende der Datei zu
+				finden:
+			</para>
+			
+			<programlisting><![CDATA[
+#~ msgid "VORSCHAU - KOMMENTARE NICHT VERFÜGBAR!"
+#~ msgstr "PREVIEW - COMMENTS NOT AVAILABLE"
+]]></programlisting>
+			
+			<para>
+				Die auskommentierten Zeichenketten können bei Bedarf
+				automatisch mit Hilfe von <filename>awk</filename> entfernt
+				werden: 
+			</para>
+			
+			<programlisting><![CDATA[
+awk'{if (/^#~/) exit; elseprint}' messages.po > messages_sauber.po
+]]></programlisting>
+		</sect2>
+	</sect1>
 </chapter>

@@ -8,8 +8,7 @@
 		<title>Voraussetzungen</title>
 		
 		<para>
-			Um Welcompose erfolgreich in Betrieb nehmen zu können, werden folgende
-			Komponenten benötigt:
+			Um <application>Welcompose</application> erfolgreich in Betrieb nehmen zu können, werden folgende Komponenten benötigt:
 		</para>
 		
 		<itemizedlist>
@@ -86,8 +85,8 @@
 			installiert sein müssen, um die optimale Funktionsfähigkeit
 			von Welcompose zu garantieren. Sollte eine oder mehrere
 			Erweiterungen nicht vorhanden oder zu alt sein, können diese
-			mit Hilfe des PECL Installers (Linux, BSD, MacOS X)
-			nachgeladen oder im Fall von Windows von der PHP-Webseite
+			mit Hilfe des <link linkend="install_instructions.installation.ressourcen">PECL</link> Installers (Linux, BSD, MacOS X)
+			nachgeladen oder im Fall von Windows von der <link linkend="install_instructions.installation.ressourcen">PHP-Webseite</link>
 			als vorkompilierte DLLs bezogen werden.
 		</para>
 		
@@ -101,6 +100,7 @@
 		</para>
 		</tip>
 		
+		<anchor id="install_instructions.installation.ressourcen"/>
 		<para>Externe Ressourcen:</para>
 		
 		<itemizedlist>
@@ -145,8 +145,8 @@
 				Welcompose kann auf verschiedene Arten installiert werden, die
 				sich jeweils im Schwierigkeitsgrad unterscheiden. Im
 				Moment stehen zwei Möglichkeiten zur Verfügung: Die
-				Nutzung des Package Installers oder die manuelle
-				Installation.
+				Nutzung des <link linkend="install_instructions.installation.package_installer">Package Installers</link> oder die <link linkend="install_instructions.installation.manual_installation">manuelle
+				Installation</link>.
 			</para>
 			<para>
 				Für alle Anwender wird die Verwendung des Package
@@ -188,13 +188,13 @@
 			<para>
 				Der Package Installer ist in zwei verschiedenen
 				Varianten erhältlich. Bei der einen Version sind die im
-				Paket enthaltenen Dateien komprimiert und benötigen PHPs
+				Paket enthaltenen Dateien <emphasis>komprimiert</emphasis> und benötigen PHPs
 				zlib-Erweiterung, um entpackt werden zu können. Dadurch
 				ist die Dateigrösse des Installer Package kleiner. Die
 				zlib-Erweiterung ist auf den meisten Servern vorhanden,
-				sodass die Verwendung des komprimierten Package
+				so dass die Verwendung des komprimierten Package
 				Installer in der Regel die richtige Wahl ist. Die andere Version
-				ist unkomprimiert und kann auf allen Servern verwendet werden,
+				ist <emphasis>unkomprimiert</emphasis> und kann auf allen Servern verwendet werden,
 				die die nötigen Voraussetzungen für Welcompose erfüllen.
 			</para>
 			
@@ -236,18 +236,9 @@
 					</para>
 				</warning>
 				
-				<tip>
-					<para>
-						Verfügen Sie als Windows-Anwender über kein
-						passendes Kompressionsprogramm, ist das freie
-						Programm <ulink url="http://www.7-zip.org/">7-Zip</ulink>
-						eine gute Wahl.
-					</para>
-				</tip>
-				
 				<para>
 					Nach dem Entpacken finden Sie einen Ordner mit dem Namen
-					<filename>wcom</filename> auf der Festplatte.
+					<filename>welcompose</filename> auf der Festplatte.
 					Dort drin sind die beiden verschiedenen Installer Packages
 					enthalten. Die Datei <filename>installer-zlib.php</filename>
 					ist der komprimierte Package Installer, die Datei
@@ -256,16 +247,6 @@
 					(oder eine ähnliche Software), um den gewünschten Installer
 					auf Ihren Webserver zu verschieben.
 				</para>	
-				
-				<tip>
-					<para>
-						Für alle Anwender, die kein Programm zur Hand
-						haben, um das Installer Package auf den Webserver zu
-						übertragen, hält der Anhang eine <link
-						linkend="good_to_know.ftp_clients">Liste mit passenden 
-						Programmen für Windows und Mac bereit</link>.
-					</para>
-				</tip>
 				
 				<para>
 					Nun muss noch das Verzeichnis vorbereitet werden, in das Welcompose
@@ -295,10 +276,9 @@
 					reicht bei den meisten Dateitransferprogrammen ein
 					Rechtsklick auf den jeweiligen Ordner. Der Dialog um
 					die Schreibrechte zu verändern, verbirgt sich meist
-					hinter einem Kontekt-Menüeintrag wie
-					<guimenuitem>Information</guimenuitem>,
-					<guimenuitem>Eigenschaften</guimenuitem> oder 
-					<guimenuitem>chmod</guimenuitem>.					
+					hinter einem Kontekt-Menüeintrag wie <emphasis>Information</emphasis>,
+					<emphasis>Eigenschaften</emphasis> oder 
+					<emphasis>chmod</emphasis>.					
 				</para>
 				
 				<para>
@@ -316,8 +296,8 @@
 				</para>
 				
 				<figure id="install_instructions.installation.package_installer.chmod.chmod_sample">
-					<title>Schreibrechte verändern</title>
-					<graphic fileref="images/install_instructions.installation.package_installer.chmod.chmod_sample.png"/>
+					<title>Schreibrechte ändern</title>
+					<graphic fileref="images/install_instructions/installation/package_installer/chmod.chmod_sample.png"/>
 				</figure>
 				
 				<para>
@@ -359,7 +339,7 @@
 				
 				<figure id="install_instructions.installation.package_installer.execute.sample">
 					<title>Welcompose Package Installer</title>
-					<graphic fileref="images/install_instructions.installation.package_installer.execute.sample.png"/>
+					<graphic fileref="images/install_instructions/installation/package_installer/execute.sample.png"/>
 				</figure>
 				
 				<para>
@@ -374,7 +354,7 @@
 					sollen, im Feld <guilabel>Install directory</guilabel>
 					anzugeben. Die Eingabe wird dabei vom Installer
 					Package aus interpretiert. Wollen Sie Welcompose in den Ordner
-					<medialabel>cms</medialabel> installieren, der sich
+					<filename>cms</filename> installieren, der sich
 					unterhalb des Installer Package befindet, müssen Sie
 					<userinput>/cms</userinput> als Pfad eingeben. Möchten Sie
 					dagegen Welcompose in demselben Ordner wie das Installer Package
@@ -483,16 +463,7 @@
 						<filename>*.tar.bz2</filename>).
 					</para>
 				</warning>
-				
-				<tip>
-					<para>
-						Verfügen Sie als Windows-Anwender über kein
-						passendes Kompressionsprogramm, ist das freie
-						Programm <ulink url="http://www.7-zip.org/">7-Zip</ulink>
-						eine gute Wahl.
-					</para>
-				</tip>
-				
+
 				<para>
 					Verwenden Sie nun ein Dateitransfer-Programm, um die
 					Dateien von Welcompose auf den Webserver zu transferieren.
@@ -500,21 +471,6 @@
 					Installationsverzeichnis. Sofern dieses noch nicht
 					existiert, legen Sie es vorher an.
 				</para>
-				
-				<tip>
-					<para>
-						Für alle Anwender, die kein Programm zur Hand
-						haben, um das Installer Package auf den Webserver zu
-						übertragen, hält der Anhang eine <link
-						linkend="good_to_know.ftp_clients">Liste mit passenden 
-						Programmen für Windows und Mac bereit</link>.
-					</para>
-				</tip>
-				
-				<figure id="install_instructions.installation.manual_installation.copy_to_server.transfer">
-					<title>Welcompose-Dateien auf Server transferieren</title>
-					<graphic fileref="images/install_instructions.installation.manual_installation.copy_to_server.transfer.png"/>
-				</figure>
 			</sect3>
 			
 			<sect3 id="install_instructions.installation.manual_installation.chmod">
@@ -528,9 +484,9 @@
 					Rechtsklick auf den jeweiligen Ordner respektive Datei.
 					Der Dialog um die Schreibrechte zu verändern, verbirgt sich
 					meist hinter einem Kontekt-Menüeintrag wie
-					<guimenuitem>Information</guimenuitem>,
-					<guimenuitem>Eigenschaften</guimenuitem> oder 
-					<guimenuitem>chmod</guimenuitem>.					
+					<emphasis>Information</emphasis>,
+					<emphasis>Eigenschaften</emphasis> oder 
+					<emphasis>chmod</emphasis>.					
 				</para>
 				
 				<para>
@@ -550,13 +506,13 @@
 				</para>
 				
 				<figure id="install_instructions.installation.manual_installation.chmod.chmod_file_sample">
-					<title>Schreibrechte von Dateien verändern</title>
-					<graphic fileref="images/install_instructions.installation.manual_installation.chmod.chmod_file_sample.png"/>
+					<title>Schreibrechte von Dateien ändern</title>
+					<graphic fileref="images/install_instructions/installation/manual_installation/chmod.chmod_file_sample.png"/>
 				</figure>
 				
 				<figure id="install_instructions.installation.manual_installation.chmod.chmod_directory_sample">
-					<title>Schreibrechte von Verzeichnissen verändern</title>
-					<graphic fileref="images/install_instructions.installation.manual_installation.chmod.chmod_directory_sample.png"/>
+					<title>Schreibrechte von Verzeichnissen ändern</title>
+					<graphic fileref="images/install_instructions/installation/manual_installation/chmod.chmod_directory_sample.png"/>
 				</figure>
 				
 				<para>
@@ -644,6 +600,11 @@
 				step</guibutton>, um zum nächsten Schritt zu gelangen.
 			</para>
 			
+			<figure id="install_instructions.configure_wcom.license.sample">
+				<title>Setup: Lizenz anerkennen</title>
+				<graphic fileref="images/install_instructions/configure_wcom/license.sample.png"/>
+			</figure>
+			
 			<para>
 				Die Lizenzierung der Software wird zusammen mit den verschieden
 				Lizenzmodellen im Kapitel <xref linkend="licensing"/> im Detail
@@ -666,11 +627,16 @@
 				Meldung).
 			</para>
 			
+			<figure id="install_instructions.configure_wcom.requirements.sample">
+				<title>Setup: Anzeige der Testergebnisse</title>
+				<graphic fileref="images/install_instructions/configure_wcom/requirements.sample.png"/>
+			</figure>
+			
 			<variablelist>
 				<title>Interpretation der Test-Resultate</title>
 				<varlistentry>
 					<term>
-						Fehlgeschlagener Test (rot)
+						<emphasis role="strong">Fehlgeschlagener Test (rot)</emphasis>
 					</term>
 					<listitem>
 						<para>
@@ -685,7 +651,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						Warnung (orange)
+						<emphasis role="strong">Warnung (orange)</emphasis>
 					</term>
 					<listitem>
 						<para>
@@ -713,11 +679,11 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						Passierter Test (grün)
+						<emphasis role="strong">Passierter Test (grün)</emphasis>
 					</term>
 					<listitem>
 						<para>
-							Die komponente konnte gefunden werden und entspricht
+							Die Komponente konnte gefunden werden und entspricht
 							den Anforderungen von Welcompose.
 						</para>
 					</listitem>
@@ -760,9 +726,14 @@
 			<title>Datenbank</title>
 			
 			<para>
-				Damit Welcompose eine Verbindung zur Datenbank aufnehmen kann, müssen
+				Damit Welcompose eine Verbindung zur Datenbank herstellen kann, müssen
 				die Verbindungsparameter konfiguriert werden.
 			</para>
+			
+			<figure id="install_instructions.configure_wcom.database.sample">
+				<title>Setup: Datenbank Verbindungsparameter konfigurieren</title>
+				<graphic fileref="images/install_instructions/configure_wcom/database.sample.png"/>
+			</figure>
 			
 			<variablelist>
 				<varlistentry>
@@ -842,7 +813,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>Host (nur bei TCP/IP)</guilabel>
+						<guilabel>Host</guilabel> (nur bei TCP/IP)
 					</term>
 					<listitem>
 						<para>
@@ -854,7 +825,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>Port (nur bei TCP/IP)</guilabel>
+						<guilabel>Port</guilabel> (nur bei TCP/IP)
 					</term>
 					<listitem>
 						<para>
@@ -868,9 +839,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>
-							Unix socket (nur bei Unix Socket)
-						</guilabel>
+							<guilabel>Unix socket</guilabel> (nur bei Unix Socket)
 					</term>
 					<listitem>
 						<para>
@@ -902,6 +871,11 @@
 				Bei diesem Schritt geht es darum, die wichtigsten
 				Grundeinstellungen vorzunehmen.
 			</para>
+			
+			<figure id="install_instructions.configure_wcom.configuration.sample">
+				<title>Setup: Grundeinstellungen vornehmen</title>
+				<graphic fileref="images/install_instructions/configure_wcom/configuration.sample.png"/>
+			</figure>
 			
 			<variablelist>
 				<varlistentry>
@@ -954,10 +928,15 @@
 			
 			<para>
 				Herzlichen Glückwunsch! Das Setup wurde erfolgreich ausgeführt
-				und Welcompose ist nun Betriebsbereit. Verwenden Sie den angezeigten
+				und Welcompose ist nun betriebsbereit. Verwenden Sie den angezeigten
 				Benutzernamen und Passwort, um sich in die Admin-Oberfläche 
 				einzuloggen.
 			</para>
+			
+			<figure id="install_instructions.configure_wcom.finish.sample">
+				<title>Setup: Setup abschliessen</title>
+				<graphic fileref="images/install_instructions/configure_wcom/finish.sample.png"/>
+			</figure>
 			
 			<para>
 				Wenn Sie auf die Schaltfläche <guibutton>Go to admin

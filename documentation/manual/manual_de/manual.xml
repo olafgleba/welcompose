@@ -5,7 +5,7 @@
 	<bookinfo>
 		<title>Welcompose Benutzerhandbuch</title>
 		<subtitle>Welcompose Publishing System</subtitle>
-		<pubdate><?dbtimestamp format="Y-m-d"?></pubdate>
+		<pubdate><?dbtimestamp format="d.m.Y"?></pubdate>
 				
 		<!-- copyright -->
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -13,6 +13,8 @@
 	</bookinfo>
 	
 	<!-- chapters -->
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_preface.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_install_instructions.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"

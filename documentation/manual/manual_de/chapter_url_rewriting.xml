@@ -32,7 +32,7 @@
 	</para>
 	
 	<para>
-		Die meisten Webserver &ndash; ob Apache, Lighttpd oder Cherokee &ndash;
+		Die meisten Webserver - ob Apache, Lighttpd oder Cherokee -
 		stellen entsprechende Funktionalität bereit. Dabei wird in einer
 		Konfigurationsdatei definiert, welcher Teil des URL auf welchen
 		Parameter abgebildet. Verwendet werden dabei Reguläre Ausdrücke
