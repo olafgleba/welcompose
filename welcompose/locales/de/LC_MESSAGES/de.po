@@ -1,0 +1,4217 @@
+# German translations for PACKAGE package.
+# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Olaf Gleba <>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-01-04 11:50+0100\n"
+"PO-Revision-Date: 2007-01-04 11:50+0100\n"
+"Last-Translator: Olaf Gleba <>\n"
+"Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pingservices_add.php:102 pingservices_edit.php:113 projects_add.php:101
+#: projects_edit.php:111 textconverters_add.php:103
+#: textconverters_edit.php:114 textmacros_add.php:110 textmacros_edit.php:120
+#: antispamplugins_add.php:116 antispamplugins_edit.php:127
+#: blogcomments_edit.php:116 blogcommentstatuses_add.php:102
+#: blogcommentstatuses_edit.php:113 globalboxes_add.php:114
+#: globalboxes_edit.php:124 navigations_add.php:94 navigations_edit.php:104
+#: pages_add.php:173 pages_boxes_add.php:136 pages_boxes_edit.php:146
+#: pages_edit.php:141 pagetypes_add.php:95 pagetypes_edit.php:104
+#: structuraltemplates_add.php:98 structuraltemplates_edit.php:109
+#: pingservices_select.html:75 projects_select.html:75
+#: textconverters_select.html:75 textmacros_select.html:75
+#: antispamplugins_select.html:77 blogcommentstatuses_select.html:75
+#: globalboxes_select.html:75 navigations_select.html:63
+#: pagetypes_select.html:63 podcastcategories_select.html:75
+#: structuraltemplates_select.html:75 globalfiles_select.html:85
+#: globaltemplates_select.html:79 templatesets_select.html:63
+#: templatetypes_select.html:63 groups_select.html:64 rights_select.html:78
+#: globaltemplates_add.php:115 globaltemplates_edit.php:126
+#: templates_add.php:140 templates_copy.php:157 templates_edit.php:157
+#: templatesets_add.php:102 templatesets_edit.php:112
+#: templatetypes_add.php:102 templatetypes_edit.php:113 groups_add.php:112
+#: groups_edit.php:128 rights_add.php:102 rights_edit.php:112
+#: users_add.php:117 users_edit.php:118 blogitem.class.php:183
+#: simpleformindex.class.php:176
+msgid "Name"
+msgstr "Name"
+
+#: pingservices_add.php:106 pingservices_edit.php:117 projects_add.php:105
+#: projects_edit.php:115 textconverters_add.php:107
+#: textconverters_edit.php:118 textmacros_add.php:114 textmacros_edit.php:124
+#: antispamplugins_add.php:120 antispamplugins_edit.php:131
+#: blogcomments_edit.php:120 blogcommentstatuses_add.php:106
+#: blogcommentstatuses_edit.php:117 globalboxes_add.php:118
+#: globalboxes_edit.php:128 navigations_add.php:98 navigations_edit.php:108
+#: pages_add.php:177 pages_boxes_add.php:140 pages_boxes_edit.php:150
+#: pages_edit.php:145 pagetypes_add.php:99 pagetypes_edit.php:108
+#: structuraltemplates_add.php:102 structuraltemplates_edit.php:113
+#: globaltemplates_add.php:119 globaltemplates_edit.php:130
+#: templates_add.php:144 templates_copy.php:161 templates_edit.php:161
+#: templatesets_add.php:106 templatesets_edit.php:116
+#: templatetypes_add.php:106 templatetypes_edit.php:117 groups_add.php:116
+#: groups_edit.php:132 rights_add.php:106 rights_edit.php:116
+#: users_add.php:121 users_edit.php:122 blogitem.class.php:187
+#: simpleformindex.class.php:180
+msgid "Please enter a name"
+msgstr "Bitte geben Sie einen Namen an"
+
+#: pingservices_add.php:107 pingservices_edit.php:118
+msgid "A ping service with the given name already exists"
+msgstr "Es existiert schon ein gleichnamiger Ping Service"
+
+#: pingservices_add.php:110 pingservices_edit.php:122
+msgid "Host"
+msgstr "Host"
+
+#: pingservices_add.php:114 pingservices_edit.php:126
+msgid "Please enter a host name"
+msgstr "Bitte geben Sie einen Host Namen an"
+
+#: pingservices_add.php:115 pingservices_edit.php:127
+msgid "Please enter a valid host name"
+msgstr "Bitte nutzen Sie einen g&uuml;ltigen Host Namen"
+
+#: pingservices_add.php:119 pingservices_edit.php:130
+msgid "Port"
+msgstr "Port"
+
+#: pingservices_add.php:123 pingservices_edit.php:134
+msgid "Please enter a port number"
+msgstr "Bitte geben Sie eine Port Nummer an"
+
+#: pingservices_add.php:124 pingservices_edit.php:135
+msgid "Please enter a valid port number"
+msgstr "Bitte geben Sie eine g&uuml;ltige Port Nummer an"
+
+#: pingservices_add.php:128 pingservices_edit.php:138
+msgid "Path"
+msgstr "Pfad"
+
+#: pingservices_add.php:132 pingservices_edit.php:142
+msgid "Please enter a request path"
+msgstr "Bitte geben Sie einen Pfad an"
+
+#: pingservices_add.php:133
+msgid "Please enter a valid request path"
+msgstr "Bitte geben Sie einen g&uuml;ltigen Pfad an"
+
+#: pingservices_add.php:137 pages_blogs_pingserviceconfigurations_add.php:169
+msgid "Add ping service"
+msgstr "Neuen Ping Service hinzuf&uuml;gen"
+
+#: pingservices_edit.php:109 projects_edit.php:107 textconverters_edit.php:110
+#: textmacros_edit.php:116 antispamplugins_edit.php:115
+#: blogcomments_edit.php:112 blogcommentstatuses_edit.php:109
+#: globalboxes_edit.php:120 navigations_edit.php:100
+#: pages_blogs_pingserviceconfigurations_edit.php:136
+#: pages_blogs_postings_edit.php:180 pages_boxes_edit.php:142
+#: pages_edit.php:137 pages_move_away.php:127
+#: pages_simpleforms_content_edit.php:147
+#: pages_simplepages_content_edit.php:134 pages_urls_content_edit.php:111
+#: pagetypes_edit.php:100 podcastcategories_edit.php:105
+#: structuraltemplates_edit.php:105 mediamanager_edit.php:123
+#: globalfiles_edit.php:111 globaltemplates_edit.php:122
+#: templates_copy.php:134 templates_edit.php:134 templatesets_edit.php:108
+#: templatetypes_edit.php:109 groups_edit.php:124 rights_edit.php:108
+#: users_edit.php:114
+msgid "Id is not expected to be empty"
+msgstr "Id darf nicht leer sein"
+
+#: pingservices_edit.php:110 projects_edit.php:108 textconverters_edit.php:111
+#: textmacros_edit.php:117 antispamplugins_edit.php:116
+#: blogcomments_edit.php:113 blogcommentstatuses_edit.php:110
+#: globalboxes_edit.php:121 navigations_edit.php:101
+#: pages_blogs_pingserviceconfigurations_edit.php:137
+#: pages_blogs_postings_edit.php:181 pages_boxes_edit.php:143
+#: pages_edit.php:138 pages_move_away.php:128
+#: pages_simpleforms_content_edit.php:148
+#: pages_simplepages_content_edit.php:135 pages_urls_content_edit.php:112
+#: pagetypes_edit.php:101 podcastcategories_edit.php:106
+#: structuraltemplates_edit.php:106 mediamanager_edit.php:124
+#: globalfiles_edit.php:112 globaltemplates_edit.php:123
+#: templates_copy.php:135 templates_edit.php:135 templatesets_edit.php:109
+#: templatetypes_edit.php:110 groups_edit.php:125 rights_edit.php:109
+#: users_edit.php:115
+msgid "Id is expected to be numeric"
+msgstr "Id muss nummerisch sein"
+
+#: pingservices_edit.php:145
+#: pages_blogs_pingserviceconfigurations_edit.php:180
+msgid "Update ping service"
+msgstr "Ping Service aktualisieren"
+
+#: projects_add.php:106 projects_edit.php:116
+msgid "A project with the given name already exists"
+msgstr "Ein gleichnamiges Projekt existiert bereits"
+
+#: projects_add.php:109
+msgid "Add project"
+msgstr "Neues Projekt"
+
+#: projects_edit.php:120
+msgid "Update project"
+msgstr "Projekt aktualisieren"
+
+#: textconverters_add.php:108 textconverters_edit.php:119
+msgid "A text converter with the given name already exists"
+msgstr "Ein gleichnamiger Text Konverter existiert bereits"
+
+#: textconverters_add.php:111 textconverters_edit.php:123
+#: textmacros_add.php:118 textmacros_edit.php:129 antispamplugins_add.php:125
+#: antispamplugins_edit.php:136 pagetypes_add.php:104 pagetypes_edit.php:114
+msgid "Internal name"
+msgstr "Interner Name"
+
+#: textconverters_add.php:115 textconverters_edit.php:127
+#: textmacros_add.php:122 textmacros_edit.php:133 antispamplugins_add.php:129
+#: antispamplugins_edit.php:140 pagetypes_add.php:108 pagetypes_edit.php:118
+msgid "Please enter an internal name"
+msgstr "Bitte geben Sie einen internen Namen an"
+
+#: textconverters_add.php:116 textconverters_edit.php:128
+#: textmacros_add.php:123 textmacros_edit.php:134 antispamplugins_add.php:130
+#: antispamplugins_edit.php:141 pagetypes_add.php:109 pagetypes_edit.php:119
+msgid "Please enter a valid internal name"
+msgstr "Bitte geben Sie einen g&uuml;ltigen internen Namen an"
+
+#: textconverters_add.php:118 textconverters_edit.php:130
+msgid "A text converter with the given internal name already exists"
+msgstr "Ein Text Konverter mit gleichnamigen internen Namen existiert bereits"
+
+#: textconverters_add.php:122
+msgid "Add text converter"
+msgstr "Neuer Text Konverter"
+
+#: textconverters_edit.php:134
+msgid "Update text converter"
+msgstr "Text Konverter aktualisieren"
+
+#: textmacros_add.php:99 textmacros_edit.php:102
+msgid "Startup macro"
+msgstr ""
+
+#: textmacros_add.php:100 textmacros_edit.php:103
+msgid "Pre text filter macro"
+msgstr ""
+
+#: textmacros_add.php:101 textmacros_edit.php:104
+msgid "Post text filter macro"
+msgstr ""
+
+#: textmacros_add.php:102 textmacros_edit.php:105
+msgid "Shutdown macro"
+msgstr ""
+
+#: textmacros_add.php:115 textmacros_edit.php:125
+msgid "A text macro with the given name already exists"
+msgstr ""
+
+#: textmacros_add.php:127 textmacros_edit.php:138 pages_add.php:180
+#: antispamplugins_select.html:78 templates_add.php:122 templates_copy.php:138
+#: templates_edit.php:138
+msgid "Type"
+msgstr ""
+
+#: textmacros_add.php:131 textmacros_edit.php:142
+msgid "Chosen type is out of range"
+msgstr ""
+
+#: textmacros_add.php:135
+msgid "Add text macro"
+msgstr ""
+
+#: textmacros_edit.php:146
+msgid "Update text macro"
+msgstr ""
+
+#: antispamplugins_add.php:99 antispamplugins_edit.php:103
+#: antispamplugins_select.html:86
+msgid "Comment plugin"
+msgstr ""
+
+#: antispamplugins_add.php:100 antispamplugins_edit.php:104
+#: antispamplugins_select.html:86
+msgid "Trackback plugin"
+msgstr ""
+
+#: antispamplugins_add.php:108 antispamplugins_edit.php:119
+msgid "Plugin type"
+msgstr ""
+
+#: antispamplugins_add.php:112 antispamplugins_edit.php:123
+msgid "Chosen plugin type is out of range"
+msgstr ""
+
+#: antispamplugins_add.php:121 antispamplugins_edit.php:132
+msgid "An anti spam plugin with the desired name is already registered"
+msgstr ""
+
+#: antispamplugins_add.php:134 antispamplugins_edit.php:145
+msgid "Priority"
+msgstr ""
+
+#: antispamplugins_add.php:138 antispamplugins_edit.php:149
+msgid "Please enter a priority"
+msgstr ""
+
+#: antispamplugins_add.php:139 antispamplugins_edit.php:150
+msgid "Please enter a numeric priority"
+msgstr ""
+
+#: antispamplugins_add.php:142 antispamplugins_edit.php:153
+#: antispamplugins_select.html:79 users_select.html:88 users_add.php:159
+#: users_edit.php:168
+msgid "Active"
+msgstr ""
+
+#: antispamplugins_add.php:146 antispamplugins_edit.php:157
+msgid "The field whether the plugin is active accepts only 0 or 1"
+msgstr ""
+
+#: antispamplugins_add.php:150
+msgid "Add anti spam plugin"
+msgstr ""
+
+#: antispamplugins_edit.php:161
+msgid "Update anti spam plugin"
+msgstr ""
+
+#: blogcomments_edit.php:123 users_select.html:84 users_add.php:124
+#: users_edit.php:134 blogitem.class.php:190
+msgid "E-mail"
+msgstr ""
+
+#: blogcomments_edit.php:127
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: blogcomments_edit.php:130 users_add.php:143 users_edit.php:152
+#: blogitem.class.php:197 simpleformindex.class.php:191
+msgid "Homepage"
+msgstr ""
+
+#: blogcomments_edit.php:134 users_add.php:147 users_edit.php:156
+msgid "Please enter a valid homepage URL"
+msgstr ""
+
+#: blogcomments_edit.php:138 globalboxes_add.php:122 globalboxes_edit.php:133
+#: pages_blogs_postings_add.php:192 pages_blogs_postings_edit.php:203
+#: pages_boxes_add.php:145 pages_boxes_edit.php:156
+#: pages_simpleforms_content_edit.php:158
+#: pages_simplepages_content_edit.php:145 structuraltemplates_add.php:112
+#: structuraltemplates_edit.php:123 globaltemplates_add.php:132
+#: globaltemplates_edit.php:143 templates_add.php:154 templates_copy.php:172
+#: templates_edit.php:172
+msgid "Content"
+msgstr ""
+
+#: blogcomments_edit.php:143
+msgid "Update blog comment"
+msgstr ""
+
+#: blogcommentstatuses_add.php:107 blogcommentstatuses_edit.php:118
+#: pagetypes_add.php:100 pagetypes_edit.php:109 templatesets_add.php:107
+#: templatesets_edit.php:117 templatetypes_add.php:107
+#: templatetypes_edit.php:118 groups_add.php:117 groups_edit.php:133
+#: rights_add.php:107 rights_edit.php:117
+msgid "Please enter a valid name"
+msgstr ""
+
+#: blogcommentstatuses_add.php:108 blogcommentstatuses_edit.php:119
+msgid "A blog comment status with the given name already exists"
+msgstr ""
+
+#: blogcommentstatuses_add.php:111
+msgid "Add blog comment status"
+msgstr ""
+
+#: blogcommentstatuses_edit.php:123
+msgid "Update blog comment status"
+msgstr ""
+
+#: settings.php:108 pages_simpleforms_content_edit.php:127
+msgid "Disable captcha"
+msgstr ""
+
+#: settings.php:109 pages_simpleforms_content_edit.php:128
+msgid "Use image captcha"
+msgstr ""
+
+#: settings.php:110 pages_simpleforms_content_edit.php:129
+msgid "Use numeral captcha"
+msgstr ""
+
+#: settings.php:115 settings.php:123 settings.php:128 globalboxes_add.php:103
+#: globalboxes_edit.php:106 pages_blogs_postings_add.php:128
+#: pages_blogs_postings_edit.php:132 pages_boxes_add.php:118
+#: pages_boxes_edit.php:121 pages_simpleforms_content_edit.php:134
+#: pages_simplepages_content_edit.php:121
+msgid "None"
+msgstr ""
+
+#: settings.php:138 settings.php:224
+msgid "Display status"
+msgstr ""
+
+#: settings.php:142
+msgid "Chosen comment display status is out of range"
+msgstr ""
+
+#: settings.php:146 settings.php:232
+msgid "Default status"
+msgstr ""
+
+#: settings.php:150
+msgid "Chosen comment default status is out of range"
+msgstr ""
+
+#: settings.php:154 settings.php:240
+msgid "Spam status"
+msgstr ""
+
+#: settings.php:158
+msgid "Chosen comment spam status is out of range"
+msgstr ""
+
+#: settings.php:162 settings.php:248
+msgid "Ham status"
+msgstr ""
+
+#: settings.php:166
+msgid "Chosen comment ham status is out of range"
+msgstr ""
+
+#: settings.php:170 pages_simpleforms_content_edit.php:210
+msgid "Use captcha"
+msgstr ""
+
+#: settings.php:174 pages_simpleforms_content_edit.php:214
+msgid "Chosen captcha type is out of range"
+msgstr ""
+
+#: settings.php:178 settings.php:256
+msgid "Timeframe threshold"
+msgstr ""
+
+#: settings.php:183
+msgid "Please enter a comment timeframe threshold"
+msgstr ""
+
+#: settings.php:185
+msgid "Please enter a numeric comment timeframe threshold"
+msgstr ""
+
+#: settings.php:188 settings.php:266
+msgid "Enable Bayes autolearning"
+msgstr ""
+
+#: settings.php:192 settings.php:270
+msgid "The field whether autolearning is enabled accepts only 0 or 1"
+msgstr ""
+
+#: settings.php:196 settings.php:274
+msgid "Bayes autolearn threshold"
+msgstr ""
+
+#: settings.php:201
+msgid "Please enter a comment bayes autolearn threshold"
+msgstr ""
+
+#: settings.php:203
+msgid "Please enter a numeric comment bayes autolearn threshold"
+msgstr ""
+
+#: settings.php:206 settings.php:284
+msgid "Bayes spam threshold"
+msgstr ""
+
+#: settings.php:211
+msgid "Please enter a comment bayes spam threshold"
+msgstr ""
+
+#: settings.php:213
+msgid "Please enter a numeric comment bayes spam threshold"
+msgstr ""
+
+#: settings.php:216
+msgid "Text converter to apply"
+msgstr ""
+
+#: settings.php:220
+msgid "Chosen blog comment text converter is out of range"
+msgstr ""
+
+#: settings.php:228
+msgid "Chosen trackback display status is out of range"
+msgstr ""
+
+#: settings.php:236
+msgid "Chosen trackback default status is out of range"
+msgstr ""
+
+#: settings.php:244
+msgid "Chosen trackback spam status is out of range"
+msgstr ""
+
+#: settings.php:252
+msgid "Chosen trackback ham status is out of range"
+msgstr ""
+
+#: settings.php:261
+msgid "Please enter a trackback timeframe threshold"
+msgstr ""
+
+#: settings.php:263
+msgid "Please enter a numeric trackback timeframe threshold"
+msgstr ""
+
+#: settings.php:279
+msgid "Please enter a trackback bayes autolearn threshold"
+msgstr ""
+
+#: settings.php:281
+msgid "Please enter a numeric trackback bayes autolearn threshold"
+msgstr ""
+
+#: settings.php:289
+msgid "Please enter a trackback bayes spam threshold"
+msgstr ""
+
+#: settings.php:291
+msgid "Please enter a numeric trackback bayes spam threshold"
+msgstr ""
+
+#: settings.php:294
+msgid "Update community settings"
+msgstr ""
+
+#: globalboxes_add.php:119 globalboxes_edit.php:129
+msgid "A global box with the given name already exists"
+msgstr ""
+
+#: globalboxes_add.php:127 globalboxes_edit.php:138
+#: pages_blogs_postings_add.php:326 pages_blogs_postings_edit.php:337
+#: pages_boxes_add.php:150 pages_boxes_edit.php:161
+#: pages_simpleforms_content_edit.php:163
+#: pages_simplepages_content_edit.php:150
+msgid "Text converter"
+msgstr ""
+
+#: globalboxes_add.php:131 globalboxes_edit.php:142
+#: pages_blogs_postings_add.php:330 pages_blogs_postings_edit.php:341
+#: pages_boxes_add.php:154 pages_boxes_edit.php:165
+#: pages_simpleforms_content_edit.php:167
+#: pages_simplepages_content_edit.php:154
+msgid "Chosen text converter is out of range"
+msgstr ""
+
+#: globalboxes_add.php:135 globalboxes_edit.php:146
+#: pages_blogs_postings_add.php:334 pages_blogs_postings_edit.php:345
+#: pages_boxes_add.php:158 pages_boxes_edit.php:169
+#: pages_simpleforms_content_edit.php:171
+#: pages_simplepages_content_edit.php:158
+msgid "Apply text macros"
+msgstr ""
+
+#: globalboxes_add.php:139 globalboxes_edit.php:150
+#: pages_blogs_postings_add.php:338 pages_blogs_postings_edit.php:349
+#: pages_boxes_add.php:162 pages_boxes_edit.php:173
+#: pages_simpleforms_content_edit.php:175
+#: pages_simplepages_content_edit.php:162
+msgid "The field whether to apply text macros accepts only 0 or 1"
+msgstr ""
+
+#: globalboxes_add.php:143
+msgid "Add global box"
+msgstr ""
+
+#: globalboxes_edit.php:154
+msgid "Update global box"
+msgstr ""
+
+#: navigations_add.php:99 navigations_edit.php:109
+msgid "A navigation with this name already exists"
+msgstr ""
+
+#: navigations_add.php:102
+msgid "Add navigation"
+msgstr ""
+
+#: navigations_edit.php:113
+msgid "Edit navigation"
+msgstr ""
+
+#: pages_add.php:126
+msgid "Create node above"
+msgstr ""
+
+#: pages_add.php:127
+msgid "Create node below"
+msgstr ""
+
+#: pages_add.php:155
+msgid "Navigation is not expected to be empty"
+msgstr ""
+
+#: pages_add.php:156
+msgid "Navigation is expected to be numeric"
+msgstr ""
+
+#: pages_add.php:162
+msgid "Reference is expected to be numeric"
+msgstr ""
+
+#: pages_add.php:165
+msgid "Position"
+msgstr ""
+
+#: pages_add.php:169
+msgid "Please choose position"
+msgstr ""
+
+#: pages_add.php:170
+msgid "Chosen position is out of range"
+msgstr ""
+
+#: pages_add.php:184
+msgid "Please choose a page type"
+msgstr ""
+
+#: pages_add.php:185
+msgid "Chosen page type is out of range"
+msgstr ""
+
+#: pages_add.php:188 pages_edit.php:148
+msgid "Template set"
+msgstr ""
+
+#: pages_add.php:192 pages_edit.php:152
+msgid "Please choose a template set"
+msgstr ""
+
+#: pages_add.php:193 pages_edit.php:153 templates_add.php:136
+msgid "Chosen template set is out of range"
+msgstr ""
+
+#: pages_add.php:197 pages_edit.php:157
+msgid "Index page"
+msgstr ""
+
+#: pages_add.php:201 pages_edit.php:161
+msgid "The field index_page accepts only 0 or 1"
+msgstr ""
+
+#: pages_add.php:205 pages_edit.php:165
+msgid "Protect"
+msgstr ""
+
+#: pages_add.php:209 pages_edit.php:169
+msgid "The field protect accepts only 0 or 1"
+msgstr ""
+
+#: pages_add.php:213 pages_edit.php:173 _inc_nav_users.html:7
+#: _inc_navigation.html:14 _inc_navigation.html:16 groups_add.html:50
+#: groups_add.html:56 groups_edit.html:46 groups_edit.html:52
+#: groups_select.html:46 groups_select.html:50
+msgid "Groups"
+msgstr ""
+
+#: pages_add.php:217 pages_edit.php:177
+msgid "One of the chosen groups is out of range"
+msgstr ""
+
+#: pages_add.php:220
+msgid "Add page"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:125
+#: pages_blogs_pingserviceconfigurations_edit.php:129
+#: pages_blogs_postings_add.php:176 pages_blogs_postings_edit.php:187
+#: pages_boxes_add.php:132 pages_boxes_edit.php:135
+msgid "Page is not expected to be empty"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:126
+#: pages_blogs_pingserviceconfigurations_edit.php:130
+#: pages_blogs_postings_add.php:177 pages_blogs_postings_edit.php:188
+#: pages_boxes_add.php:133 pages_boxes_edit.php:136
+msgid "Page is expected to be numeric"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:129
+#: pages_blogs_pingserviceconfigurations_edit.php:140
+msgid "Ping service"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:133
+#: pages_blogs_pingserviceconfigurations_edit.php:144
+msgid "Select a ping service"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:134
+#: pages_blogs_pingserviceconfigurations_edit.php:145
+msgid "Chosen ping service is out of range"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:138
+#: pages_blogs_pingserviceconfigurations_edit.php:149
+msgid "Site name"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:142
+#: pages_blogs_pingserviceconfigurations_edit.php:153
+msgid "Please enter a site name"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:145
+#: pages_blogs_pingserviceconfigurations_edit.php:156
+msgid "Weblog URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:149
+#: pages_blogs_pingserviceconfigurations_edit.php:160
+msgid "Please enter a site URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:150
+#: pages_blogs_pingserviceconfigurations_edit.php:161
+msgid "Please enter a valid site URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:153
+#: pages_blogs_pingserviceconfigurations_edit.php:164
+msgid "Changes URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:157
+#: pages_blogs_pingserviceconfigurations_edit.php:168
+msgid "Please enter a home page URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:158
+#: pages_blogs_pingserviceconfigurations_edit.php:169
+msgid "Please enter a valid home page URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:161
+#: pages_blogs_pingserviceconfigurations_edit.php:172
+msgid "Feed URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:165
+#: pages_blogs_pingserviceconfigurations_edit.php:176
+msgid "Please enter a feed URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.php:166
+#: pages_blogs_pingserviceconfigurations_edit.php:177
+msgid "Please enter a valid feed URL"
+msgstr ""
+
+#: pages_blogs_postings_add.php:144 pages_blogs_postings_add.php:151
+#: pages_blogs_postings_edit.php:148 pages_blogs_postings_edit.php:155
+msgid "Use summary"
+msgstr ""
+
+#: pages_blogs_postings_add.php:145 pages_blogs_postings_add.php:152
+#: pages_blogs_postings_edit.php:149 pages_blogs_postings_edit.php:156
+msgid "Use content"
+msgstr ""
+
+#: pages_blogs_postings_add.php:146 pages_blogs_postings_add.php:153
+#: pages_blogs_postings_edit.php:150 pages_blogs_postings_edit.php:157
+msgid "Use feed summary"
+msgstr ""
+
+#: pages_blogs_postings_add.php:147 pages_blogs_postings_add.php:154
+#: pages_blogs_postings_add.php:159 pages_blogs_postings_edit.php:151
+#: pages_blogs_postings_edit.php:158 pages_blogs_postings_edit.php:163
+msgid "Leave it empty"
+msgstr ""
+
+#: pages_blogs_postings_add.php:158 pages_blogs_postings_edit.php:162
+msgid "Use tags"
+msgstr ""
+
+#: pages_blogs_postings_add.php:164 pages_blogs_postings_edit.php:168
+#: antispamplugins_select.html:87 blogcomments_select.html:165
+#: users_select.html:97 users_select.html:98
+msgid "yes"
+msgstr ""
+
+#: pages_blogs_postings_add.php:165 pages_blogs_postings_edit.php:169
+msgid "clean"
+msgstr ""
+
+#: pages_blogs_postings_add.php:166 pages_blogs_postings_edit.php:170
+#: antispamplugins_select.html:87 blogcomments_select.html:165
+#: users_select.html:97 users_select.html:98
+msgid "no"
+msgstr ""
+
+#: pages_blogs_postings_add.php:180 pages_blogs_postings_add.php:218
+#: pages_blogs_postings_edit.php:191 pages_blogs_postings_edit.php:229
+#: pages_simpleforms_content_edit.php:151
+#: pages_simplepages_content_edit.php:138
+#: pages_simplepages_content_edit.php:174 pages_blogs_postings_select.html:122
+msgid "Title"
+msgstr ""
+
+#: pages_blogs_postings_add.php:184 pages_blogs_postings_edit.php:195
+#: pages_simpleforms_content_edit.php:155
+#: pages_simplepages_content_edit.php:142
+msgid "Please enter a title"
+msgstr ""
+
+#: pages_blogs_postings_add.php:187 pages_blogs_postings_add.php:238
+#: pages_blogs_postings_edit.php:198 pages_blogs_postings_edit.php:249
+msgid "Summary"
+msgstr ""
+
+#: pages_blogs_postings_add.php:204 pages_blogs_postings_edit.php:215
+msgid "The podcast id is expected to be numeric"
+msgstr ""
+
+#: pages_blogs_postings_add.php:210 pages_blogs_postings_edit.php:221
+msgid "The media file id is expected to be numeric"
+msgstr ""
+
+#: pages_blogs_postings_add.php:215 pages_blogs_postings_edit.php:226
+msgid "Podcast details display is expected to be numeric"
+msgstr ""
+
+#: pages_blogs_postings_add.php:223 pages_blogs_postings_edit.php:234
+msgid "Please enter a podcast title"
+msgstr ""
+
+#: pages_blogs_postings_add.php:227 pages_blogs_postings_edit.php:238
+#: pages_simplepages_content_edit.php:186 structuraltemplates_add.php:107
+#: structuraltemplates_edit.php:118 mediamanager_edit.php:134
+#: mediamanager_upload.php:125 globalfiles_select.html:86
+#: globaltemplates_select.html:80 groups_select.html:65 rights_select.html:80
+#: globalfiles_add.php:110 globalfiles_edit.php:123
+#: globaltemplates_add.php:126 globaltemplates_edit.php:137
+#: templates_add.php:148 templates_copy.php:166 templates_edit.php:166
+#: templatesets_add.php:111 templatesets_edit.php:122
+#: templatetypes_add.php:111 templatetypes_edit.php:123 groups_add.php:121
+#: groups_edit.php:138 rights_add.php:111 rights_edit.php:122
+msgid "Description"
+msgstr ""
+
+#: pages_blogs_postings_add.php:232 pages_blogs_postings_edit.php:243
+msgid "Please select a podcast description source"
+msgstr ""
+
+#: pages_blogs_postings_add.php:234 pages_blogs_postings_edit.php:245
+msgid "Podcast description source is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:243 pages_blogs_postings_edit.php:254
+msgid "Please select a podcast summary source"
+msgstr ""
+
+#: pages_blogs_postings_add.php:245 pages_blogs_postings_edit.php:256
+msgid "Podcast summary source is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:249 pages_blogs_postings_edit.php:260
+#: pages_simplepages_content_edit.php:180
+msgid "Keywords"
+msgstr ""
+
+#: pages_blogs_postings_add.php:254 pages_blogs_postings_edit.php:265
+msgid "Please select a podcast keyword source"
+msgstr ""
+
+#: pages_blogs_postings_add.php:256 pages_blogs_postings_edit.php:267
+msgid "Podcast keywords source is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:260 pages_blogs_postings_edit.php:271
+msgid "Category 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:264 pages_blogs_postings_edit.php:275
+msgid "Podcast category 1 is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:267 pages_blogs_postings_edit.php:278
+msgid "Please select a podcast category"
+msgstr ""
+
+#: pages_blogs_postings_add.php:271 pages_blogs_postings_edit.php:282
+msgid "Category 2"
+msgstr ""
+
+#: pages_blogs_postings_add.php:275 pages_blogs_postings_edit.php:286
+msgid "Podcast category 2 is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:279 pages_blogs_postings_edit.php:290
+msgid "Category 3"
+msgstr ""
+
+#: pages_blogs_postings_add.php:283 pages_blogs_postings_edit.php:294
+msgid "Podcast category 3 is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:287 pages_blogs_postings_edit.php:298
+#: blogcomments_select.html:120 users_select.html:87 users_add.php:151
+#: users_edit.php:160
+msgid "Author"
+msgstr ""
+
+#: pages_blogs_postings_add.php:292 pages_blogs_postings_edit.php:303
+msgid "Please enter a podcast author"
+msgstr ""
+
+#: pages_blogs_postings_add.php:296 pages_blogs_postings_edit.php:307
+msgid "Explicit"
+msgstr ""
+
+#: pages_blogs_postings_add.php:300 pages_blogs_postings_edit.php:311
+msgid "Podcast explicit is out of range"
+msgstr ""
+
+#: pages_blogs_postings_add.php:304 pages_blogs_postings_edit.php:315
+msgid "Block"
+msgstr ""
+
+#: pages_blogs_postings_add.php:308 pages_blogs_postings_edit.php:319
+msgid "The field whether an episode should be blocked accepts only 0 or 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:312 pages_blogs_postings_edit.php:323
+msgid "Show details"
+msgstr ""
+
+#: pages_blogs_postings_add.php:315 pages_blogs_postings_edit.php:326
+msgid "Show ID3"
+msgstr ""
+
+#: pages_blogs_postings_add.php:318 pages_blogs_postings_edit.php:329
+msgid "Discard cast"
+msgstr ""
+
+#: pages_blogs_postings_add.php:342 pages_blogs_postings_edit.php:353
+#: mediamanager_edit.php:140 mediamanager_upload.php:131
+msgid "Tags"
+msgstr ""
+
+#: pages_blogs_postings_add.php:348 pages_blogs_postings_edit.php:359
+msgid "Feed Summary"
+msgstr ""
+
+#: pages_blogs_postings_add.php:354 pages_blogs_postings_edit.php:365
+#: pages_blogs_postings_select.html:87
+msgid "Draft"
+msgstr ""
+
+#: pages_blogs_postings_add.php:358 pages_blogs_postings_edit.php:369
+msgid "The field whether the posting is a draft accepts only 0 or 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:362 pages_blogs_postings_edit.php:373
+msgid "Ping"
+msgstr ""
+
+#: pages_blogs_postings_add.php:366 pages_blogs_postings_edit.php:377
+msgid "The field whether a ping should be issued accepts only 0 or 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:370 pages_blogs_postings_edit.php:381
+msgid "Enable comments"
+msgstr ""
+
+#: pages_blogs_postings_add.php:374 pages_blogs_postings_edit.php:385
+msgid "The field whether comments are enabled accepts only 0 or 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:378 pages_blogs_postings_edit.php:389
+msgid "Enable trackbacks"
+msgstr ""
+
+#: pages_blogs_postings_add.php:382 pages_blogs_postings_edit.php:393
+msgid "The field whether trackbacks are enabled accepts only 0 or 1"
+msgstr ""
+
+#: pages_blogs_postings_add.php:386
+msgid "Add blog posting"
+msgstr ""
+
+#: pages_blogs_postings_edit.php:397
+msgid "Update blog posting"
+msgstr ""
+
+#: pages_boxes_add.php:141 pages_boxes_edit.php:151
+msgid "A box with the given name already exists"
+msgstr ""
+
+#: pages_boxes_add.php:166
+msgid "Add box"
+msgstr ""
+
+#: pages_boxes_edit.php:177
+msgid "Update box"
+msgstr ""
+
+#: pages_edit.php:180
+msgid "Edit page"
+msgstr ""
+
+#: pages_move_away.php:131
+msgid "New navigation"
+msgstr ""
+
+#: pages_move_away.php:135
+msgid "Please choose a new navigation"
+msgstr ""
+
+#: pages_move_away.php:136
+msgid "Chosen navigation is out of range"
+msgstr ""
+
+#: pages_move_away.php:140
+msgid "Move page away"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:121
+msgid "Business form"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:122
+msgid "Personal form"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:179
+msgid "Form type"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:183
+msgid "Chosen form type is out of range"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:187
+msgid "From: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:191
+msgid "Please enter a From: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:192
+msgid "Please enter a valid From: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:195
+msgid "To: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:199
+msgid "Please enter a To: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:200
+msgid "Please enter a valid To: address"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:203
+msgid "Subject"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:207
+msgid "Please enter a subject"
+msgstr ""
+
+#: pages_simpleforms_content_edit.php:218
+msgid "Update form"
+msgstr ""
+
+#: pages_simplepages_content_edit.php:166
+msgid "Custom meta tags"
+msgstr ""
+
+#: pages_simplepages_content_edit.php:170
+msgid "The field whether to use customized meta tags accepts only 0 or 1"
+msgstr ""
+
+#: pages_simplepages_content_edit.php:192 pages_urls_content_edit.php:124
+msgid "Update page"
+msgstr ""
+
+#: pages_urls_content_edit.php:115
+msgid "Target URL"
+msgstr ""
+
+#: pages_urls_content_edit.php:119
+msgid "Please enter a target URL"
+msgstr ""
+
+#: pages_urls_content_edit.php:120
+msgid "Please enter a valid target URL"
+msgstr ""
+
+#: pagetypes_add.php:101 pagetypes_edit.php:110
+msgid "A page type with the given name already exists"
+msgstr ""
+
+#: pagetypes_add.php:111 pagetypes_edit.php:121
+msgid "A page type with the given internal name already exists"
+msgstr ""
+
+#: pagetypes_add.php:115
+msgid "Add page type"
+msgstr ""
+
+#: pagetypes_edit.php:125
+msgid "Update page type"
+msgstr ""
+
+#: podcastcategories_add.php:99 podcastcategories_edit.php:109
+msgid "Category name"
+msgstr ""
+
+#: podcastcategories_add.php:103 podcastcategories_edit.php:113
+msgid "Please enter a category name"
+msgstr ""
+
+#: podcastcategories_add.php:106 podcastcategories_edit.php:116
+msgid "Subcategory name"
+msgstr ""
+
+#: podcastcategories_add.php:112 podcastcategories_edit.php:122
+msgid "The given podcast category combination already exists"
+msgstr ""
+
+#: podcastcategories_add.php:116
+msgid "Add podcast category"
+msgstr ""
+
+#: podcastcategories_edit.php:127
+msgid "Update podcast category"
+msgstr ""
+
+#: structuraltemplates_add.php:103 structuraltemplates_edit.php:114
+msgid "A structural template with the given name already exists"
+msgstr ""
+
+#: structuraltemplates_add.php:117
+msgid "Add structural template"
+msgstr ""
+
+#: structuraltemplates_edit.php:128
+msgid "Update structural template"
+msgstr ""
+
+#: login.php:76 simpleformindex.class.php:183 simpleformindex.class.php:382
+#: systemlogin.class.php:135
+msgid "E-mail address"
+msgstr ""
+
+#: login.php:80 systemlogin.class.php:139
+msgid "Please enter your e-mail address"
+msgstr ""
+
+#: login.php:83 users_add.php:134 users_edit.php:144 systemlogin.class.php:142
+msgid "Password"
+msgstr ""
+
+#: login.php:87 systemlogin.class.php:146
+msgid "Please enter your password"
+msgstr ""
+
+#: login.php:88 systemlogin.class.php:147
+msgid "Invalid password"
+msgstr ""
+
+#: login.php:91 login.html:27 systemlogin.class.php:150
+msgid "Login"
+msgstr ""
+
+#: mediamanager_edit.php:99 mediamanager_upload.php:99
+msgid "Image"
+msgstr ""
+
+#: mediamanager_edit.php:100 mediamanager_upload.php:100
+msgid "Document"
+msgstr ""
+
+#: mediamanager_edit.php:101 mediamanager_upload.php:101 mediamanager.html:26
+msgid "Audio"
+msgstr ""
+
+#: mediamanager_edit.php:102 mediamanager_upload.php:102 mediamanager.html:27
+msgid "Video"
+msgstr ""
+
+#: mediamanager_edit.php:103 mediamanager_upload.php:103 mediamanager.html:28
+msgid "Other"
+msgstr ""
+
+#: mediamanager_edit.php:130 mediamanager_upload.php:120
+#: globalfiles_add.php:105 globalfiles_edit.php:115
+msgid "File"
+msgstr ""
+
+#: mediamanager_edit.php:144 mediamanager_upload.php:135
+msgid "Please add at least one tag"
+msgstr ""
+
+#: mediamanager_edit.php:147
+msgid "Update Media"
+msgstr ""
+
+#: mediamanager_edit.php:151 mediamanager_upload.php:142
+msgid "Close"
+msgstr ""
+
+#: mediamanager_upload.php:122 globalfiles_add.php:107
+msgid "Please select a file"
+msgstr ""
+
+#: mediamanager_upload.php:138
+msgid "Upload Media"
+msgstr ""
+
+#: _inc_nav_community.html:4 _inc_navigation.html:7 _inc_navigation.html:9
+#: blogcomments_edit.html:46 blogcomments_edit.html:52
+#: blogcomments_select.html:53 blogcomments_select.html:56
+msgid "Blog Comments"
+msgstr ""
+
+#: _inc_nav_community.html:7 blogcommentstatuses_add.html:50
+#: blogcommentstatuses_add.html:56 blogcommentstatuses_edit.html:46
+#: blogcommentstatuses_edit.html:52 blogcommentstatuses_select.html:46
+#: blogcommentstatuses_select.html:50
+msgid "Blog Comment Status"
+msgstr ""
+
+#: _inc_nav_community.html:10 _inc_navigation.html:21 _inc_navigation.html:23
+#: antispamplugins_add.html:50 antispamplugins_add.html:56
+#: antispamplugins_edit.html:46 antispamplugins_edit.html:52
+#: antispamplugins_select.html:46 antispamplugins_select.html:50
+msgid "Anti Spam Plugins"
+msgstr ""
+
+#: _inc_nav_community.html:13 _inc_navigation.html:28 _inc_navigation.html:30
+msgid "Community Settings"
+msgstr ""
+
+#: _inc_nav_contents.html:9 _inc_navigation.html:7 _inc_navigation.html:9
+#: pages_add.html:53 pages_add.html:59
+#: pages_blogs_pingserviceconfigurations_add.html:69
+#: pages_blogs_pingserviceconfigurations_edit.html:65
+#: pages_blogs_pingserviceconfigurations_select.html:65
+#: pages_blogs_postings_add.html:76 pages_blogs_postings_edit.html:81
+#: pages_blogs_postings_select.html:65 pages_boxes_add.html:78
+#: pages_boxes_edit.html:77 pages_boxes_select.html:67 pages_edit.html:98
+#: pages_edit.html:104 pages_move_away.html:46 pages_move_away.html:52
+#: pages_select.html:46 pages_select.html:49
+#: pages_simpleforms_content_edit.html:72
+#: pages_simpleforms_content_edit.html:78
+#: pages_simplepages_content_edit.html:74
+#: pages_simplepages_content_edit.html:80 pages_urls_content_edit.html:59
+#: pages_urls_content_edit.html:65 pages_boxes_links_select.html:40
+msgid "Pages"
+msgstr ""
+
+#: _inc_nav_contents.html:12 _inc_navigation.html:14 _inc_navigation.html:16
+#: globalboxes_add.html:57 globalboxes_add.html:63 globalboxes_edit.html:56
+#: globalboxes_edit.html:62 globalboxes_select.html:46
+#: globalboxes_select.html:50 templates_add.html:107 templates_edit.html:107
+msgid "Global Boxes"
+msgstr ""
+
+#: _inc_nav_contents.html:15 _inc_navigation.html:21 _inc_navigation.html:23
+#: navigations_add.html:50 navigations_add.html:56 navigations_edit.html:46
+#: navigations_edit.html:52 navigations_select.html:46
+#: navigations_select.html:50
+msgid "Navigations"
+msgstr ""
+
+#: _inc_nav_contents.html:18 _inc_navigation.html:28 _inc_navigation.html:30
+#: pagetypes_add.html:50 pagetypes_add.html:56 pagetypes_edit.html:47
+#: pagetypes_edit.html:53 pagetypes_select.html:46 pagetypes_select.html:50
+msgid "Page Types"
+msgstr ""
+
+#: _inc_nav_contents.html:21 _inc_navigation.html:35 _inc_navigation.html:37
+#: structuraltemplates_add.html:53 structuraltemplates_add.html:59
+#: structuraltemplates_edit.html:53 structuraltemplates_edit.html:59
+#: structuraltemplates_select.html:46
+msgid "Structural Templates"
+msgstr ""
+
+#: _inc_nav_contents.html:24 _inc_navigation.html:42 _inc_navigation.html:44
+#: podcastcategories_add.html:53 podcastcategories_add.html:59
+#: podcastcategories_edit.html:51 podcastcategories_edit.html:57
+#: podcastcategories_select.html:46 podcastcategories_select.html:50
+msgid "Podcast Categories"
+msgstr ""
+
+#: _inc_nav_library.html:3 mediamanager.html:25
+msgid "Documents"
+msgstr "Dokumente"
+
+#: _inc_nav_library.html:4 mediamanager.html:24
+msgid "Images"
+msgstr "Bilder"
+
+#: _inc_nav_library.html:5
+msgid "Podcasts"
+msgstr "Podcasts"
+
+#: _inc_nav_library.html:6
+msgid "Document Categories"
+msgstr "Dokumenten Kategorien"
+
+#: _inc_nav_library.html:7
+msgid "Image Categories"
+msgstr "Bilder Kategorien"
+
+#: _inc_nav_settings.html:4 _inc_navigation.html:7 _inc_navigation.html:9
+#: projects_add.html:50 projects_add.html:56 projects_edit.html:46
+#: projects_edit.html:52 projects_select.html:46 projects_select.html:50
+msgid "Projects"
+msgstr ""
+
+#: _inc_nav_settings.html:7 _inc_navigation.html:14 _inc_navigation.html:16
+#: pingservices_add.html:50 pingservices_add.html:56 pingservices_edit.html:46
+#: pingservices_edit.html:52 pingservices_select.html:46
+#: pingservices_select.html:50
+#: pages_blogs_pingserviceconfigurations_add.html:63
+#: pages_blogs_pingserviceconfigurations_add.html:70
+#: pages_blogs_pingserviceconfigurations_add.html:77
+#: pages_blogs_pingserviceconfigurations_edit.html:59
+#: pages_blogs_pingserviceconfigurations_edit.html:66
+#: pages_blogs_pingserviceconfigurations_edit.html:73
+#: pages_blogs_pingserviceconfigurations_select.html:59
+#: pages_blogs_pingserviceconfigurations_select.html:65
+#: pages_blogs_pingserviceconfigurations_select.html:69
+#: pages_blogs_postings_add.html:70 pages_blogs_postings_edit.html:75
+#: pages_blogs_postings_select.html:59 pages_boxes_add.html:68
+#: pages_boxes_edit.html:67 pages_boxes_select.html:57 pages_edit.html:74
+msgid "Ping Services"
+msgstr ""
+
+#: _inc_nav_settings.html:10 _inc_navigation.html:21 _inc_navigation.html:23
+#: textconverters_add.html:50 textconverters_add.html:56
+#: textconverters_edit.html:46 textconverters_edit.html:52
+#: textconverters_select.html:46 textconverters_select.html:50
+msgid "Text Converters"
+msgstr ""
+
+#: _inc_nav_settings.html:13
+msgid "Text macros"
+msgstr ""
+
+#: _inc_nav_templates.html:4 _inc_navigation.html:7 _inc_navigation.html:9
+#: templates_add.html:52 templates_add.html:58 templates_copy.html:46
+#: templates_copy.html:52 templates_edit.html:52 templates_edit.html:58
+#: templates_select.html:47 templates_select.html:51
+msgid "Templates"
+msgstr ""
+
+#: _inc_nav_templates.html:7 _inc_navigation.html:14 _inc_navigation.html:16
+#: templates_select.html:61 templatesets_add.html:50 templatesets_add.html:56
+#: templatesets_edit.html:46 templatesets_edit.html:52
+#: templatesets_select.html:46 templatesets_select.html:50
+msgid "Template Sets"
+msgstr ""
+
+#: _inc_nav_templates.html:10 _inc_navigation.html:21 _inc_navigation.html:23
+#: templates_select.html:68 templatetypes_add.html:50
+#: templatetypes_add.html:56 templatetypes_edit.html:46
+#: templatetypes_edit.html:52 templatetypes_select.html:46
+#: templatetypes_select.html:50
+msgid "Template Types"
+msgstr ""
+
+#: _inc_nav_templates.html:13 _inc_navigation.html:28 _inc_navigation.html:30
+#: globaltemplates_add.html:52 globaltemplates_add.html:58
+#: globaltemplates_add.html:93 globaltemplates_edit.html:48
+#: globaltemplates_edit.html:54 globaltemplates_edit.html:82
+#: globaltemplates_select.html:47 globaltemplates_select.html:51
+#: templates_add.html:105 templates_edit.html:105
+msgid "Global Templates"
+msgstr ""
+
+#: _inc_nav_templates.html:16 _inc_navigation.html:35 _inc_navigation.html:37
+#: globalfiles_add.html:50 globalfiles_add.html:56 globalfiles_edit.html:46
+#: globalfiles_edit.html:52 globalfiles_select.html:52
+#: globalfiles_select.html:56 globaltemplates_add.html:94
+#: globaltemplates_edit.html:83 templates_add.html:106 templates_edit.html:106
+msgid "Global Files"
+msgstr ""
+
+#: _inc_nav_users.html:4 _inc_topnav.html:34 blogcomments_select.html:53
+#: _inc_navigation.html:7 _inc_navigation.html:9 groups_add.html:50
+#: groups_edit.html:46 groups_select.html:46 rights_add.html:50
+#: rights_edit.html:46 rights_select.html:46 users_add.html:50
+#: users_add.html:56 users_edit.html:46 users_edit.html:52
+#: users_select.html:46 users_select.html:50
+msgid "Users"
+msgstr ""
+
+#: _inc_nav_users.html:10 _inc_navigation.html:21 _inc_navigation.html:23
+#: rights_add.html:50 rights_add.html:56 rights_edit.html:46
+#: rights_edit.html:52 rights_select.html:46 rights_select.html:50
+#: groups_add.php:127 groups_edit.php:144
+msgid "Rights"
+msgstr ""
+
+#: _inc_projects_load.html:13
+msgid "load"
+msgstr ""
+
+#: _inc_projects_load.html:13
+msgid "Load project"
+msgstr ""
+
+#: _inc_topnav.html:15 globalboxes_add.html:57 globalboxes_edit.html:56
+#: globalboxes_select.html:46 navigations_add.html:50 navigations_edit.html:46
+#: navigations_select.html:46 pages_add.html:53
+#: pages_blogs_pingserviceconfigurations_add.html:69
+#: pages_blogs_pingserviceconfigurations_edit.html:65
+#: pages_blogs_pingserviceconfigurations_select.html:65
+#: pages_blogs_postings_add.html:76 pages_blogs_postings_edit.html:81
+#: pages_blogs_postings_select.html:65 pages_boxes_add.html:78
+#: pages_boxes_edit.html:77 pages_boxes_select.html:67 pages_edit.html:98
+#: pages_move_away.html:46 pages_select.html:46
+#: pages_simpleforms_content_edit.html:72
+#: pages_simplepages_content_edit.html:74 pages_urls_content_edit.html:59
+#: pagetypes_add.html:50 pagetypes_edit.html:47 pagetypes_select.html:46
+#: podcastcategories_add.html:53 podcastcategories_edit.html:51
+#: podcastcategories_select.html:46 structuraltemplates_add.html:53
+#: structuraltemplates_edit.html:53 structuraltemplates_select.html:46
+msgid "Contents"
+msgstr ""
+
+#: _inc_topnav.html:18
+msgid "Media Library"
+msgstr ""
+
+#: _inc_topnav.html:26 antispamplugins_add.html:50
+#: antispamplugins_edit.html:46 antispamplugins_select.html:46
+#: blogcomments_edit.html:46 blogcommentstatuses_add.html:50
+#: blogcommentstatuses_edit.html:46 blogcommentstatuses_select.html:46
+#: settings.html:50
+msgid "Community"
+msgstr ""
+
+#: _inc_topnav.html:44 globalfiles_add.html:50 globalfiles_edit.html:46
+#: globalfiles_select.html:52 globaltemplates_add.html:52
+#: globaltemplates_edit.html:48 globaltemplates_select.html:47
+#: templates_add.html:52 templates_copy.html:46 templates_edit.html:52
+#: templates_select.html:47 templatesets_add.html:50 templatesets_edit.html:46
+#: templatesets_select.html:46 templatetypes_add.html:50
+#: templatetypes_edit.html:46 templatetypes_select.html:46
+msgid "Templating"
+msgstr ""
+
+#: _inc_topnav.html:53 pingservices_add.html:50 pingservices_edit.html:46
+#: pingservices_select.html:46 projects_add.html:50 projects_edit.html:46
+#: projects_select.html:46 textconverters_add.html:50
+#: textconverters_edit.html:46 textconverters_select.html:46
+#: textmacros_add.html:50 textmacros_edit.html:46 textmacros_select.html:46
+#: settings.html:50 settings.html:54
+msgid "Settings"
+msgstr ""
+
+#: _inc_navigation.html:28 _inc_navigation.html:30 textmacros_add.html:50
+#: textmacros_add.html:56 textmacros_edit.html:46 textmacros_edit.html:52
+#: textmacros_select.html:46 textmacros_select.html:50
+msgid "Text Macros"
+msgstr ""
+
+#: pingservices_add.html:10
+msgid "Welcompose Admin &ndash; Add Ping Service"
+msgstr ""
+
+#: pingservices_add.html:33 pingservices_edit.html:29
+#: pingservices_select.html:29 projects_add.html:33 projects_edit.html:29
+#: projects_select.html:29 textconverters_add.html:33
+#: textconverters_edit.html:29 textconverters_select.html:29
+#: textmacros_add.html:33 textmacros_edit.html:29 textmacros_select.html:29
+#: antispamplugins_add.html:33 antispamplugins_edit.html:29
+#: antispamplugins_select.html:29 blogcomments_edit.html:29
+#: blogcomments_select.html:36 blogcommentstatuses_add.html:33
+#: blogcommentstatuses_edit.html:29 blogcommentstatuses_select.html:29
+#: settings.html:33 globalboxes_add.html:40 globalboxes_edit.html:39
+#: globalboxes_select.html:29 navigations_add.html:33 navigations_edit.html:29
+#: navigations_select.html:29 pages_add.html:33
+#: pages_blogs_pingserviceconfigurations_add.html:33
+#: pages_blogs_pingserviceconfigurations_edit.html:29
+#: pages_blogs_pingserviceconfigurations_select.html:29
+#: pages_blogs_postings_add.html:40 pages_blogs_postings_edit.html:45
+#: pages_blogs_postings_select.html:29 pages_boxes_add.html:40
+#: pages_boxes_edit.html:39 pages_boxes_select.html:29 pages_edit.html:33
+#: pages_move_away.html:29 pages_select.html:29
+#: pages_simpleforms_content_edit.html:39
+#: pages_simplepages_content_edit.html:40 pages_urls_content_edit.html:29
+#: pagetypes_add.html:33 pagetypes_edit.html:30 pagetypes_select.html:29
+#: podcastcategories_add.html:36 podcastcategories_edit.html:34
+#: podcastcategories_select.html:29 structuraltemplates_add.html:36
+#: structuraltemplates_edit.html:36 structuraltemplates_select.html:29
+#: error.html:18 error_popup_403.html:27 error_popup_723.html:27 login.html:20
+#: globalfiles_add.html:33 globalfiles_edit.html:29 globalfiles_select.html:35
+#: globaltemplates_add.html:35 globaltemplates_edit.html:31
+#: globaltemplates_select.html:30 templates_add.html:35 templates_copy.html:29
+#: templates_edit.html:35 templates_select.html:30 templatesets_add.html:33
+#: templatesets_edit.html:29 templatesets_select.html:29
+#: templatetypes_add.html:33 templatetypes_edit.html:29
+#: templatetypes_select.html:29 groups_add.html:33 groups_edit.html:29
+#: groups_select.html:29 rights_add.html:33 rights_edit.html:29
+#: rights_select.html:29 users_add.html:33 users_edit.html:29
+#: users_select.html:29
+msgid "Welcompose"
+msgstr ""
+
+#: pingservices_add.html:36 pingservices_edit.html:32
+#: pingservices_select.html:32 projects_add.html:36 projects_edit.html:32
+#: projects_select.html:32 textconverters_add.html:36
+#: textconverters_edit.html:32 textconverters_select.html:32
+#: textmacros_add.html:36 textmacros_edit.html:32 textmacros_select.html:32
+#: antispamplugins_add.html:36 antispamplugins_edit.html:32
+#: antispamplugins_select.html:32 blogcomments_edit.html:32
+#: blogcomments_select.html:39 blogcommentstatuses_add.html:36
+#: blogcommentstatuses_edit.html:32 blogcommentstatuses_select.html:32
+#: settings.html:36 globalboxes_add.html:43 globalboxes_edit.html:42
+#: globalboxes_select.html:32 navigations_add.html:36 navigations_edit.html:32
+#: navigations_select.html:32 pages_add.html:36
+#: pages_blogs_pingserviceconfigurations_add.html:36
+#: pages_blogs_pingserviceconfigurations_edit.html:32
+#: pages_blogs_pingserviceconfigurations_select.html:32
+#: pages_blogs_postings_add.html:43 pages_blogs_postings_edit.html:48
+#: pages_blogs_postings_select.html:32 pages_boxes_add.html:43
+#: pages_boxes_edit.html:42 pages_boxes_select.html:32 pages_edit.html:36
+#: pages_move_away.html:32 pages_select.html:32
+#: pages_simpleforms_content_edit.html:42
+#: pages_simplepages_content_edit.html:43 pages_urls_content_edit.html:32
+#: pagetypes_add.html:36 pagetypes_edit.html:33 pagetypes_select.html:32
+#: podcastcategories_add.html:39 podcastcategories_edit.html:37
+#: podcastcategories_select.html:32 structuraltemplates_add.html:39
+#: structuraltemplates_edit.html:39 structuraltemplates_select.html:32
+#: error.html:21 globalfiles_add.html:36 globalfiles_edit.html:32
+#: globalfiles_select.html:38 globaltemplates_add.html:38
+#: globaltemplates_edit.html:34 globaltemplates_select.html:33
+#: templates_add.html:38 templates_copy.html:32 templates_edit.html:38
+#: templates_select.html:33 templatesets_add.html:36 templatesets_edit.html:32
+#: templatesets_select.html:32 templatetypes_add.html:36
+#: templatetypes_edit.html:32 templatetypes_select.html:32 groups_add.html:36
+#: groups_edit.html:32 groups_select.html:32 rights_add.html:36
+#: rights_edit.html:32 rights_select.html:32 users_add.html:36
+#: users_edit.html:32 users_select.html:32
+msgid "Logout"
+msgstr ""
+
+#: pingservices_add.html:50 pingservices_add.html:54
+#: pages_blogs_pingserviceconfigurations_add.html:71
+#: pages_blogs_pingserviceconfigurations_add.html:75
+msgid "Add Ping Service"
+msgstr ""
+
+#: pingservices_add.html:71 projects_add.html:71 textconverters_add.html:71
+#: textmacros_add.html:71 antispamplugins_add.html:71
+#: blogcommentstatuses_add.html:71 settings.html:71 globalboxes_add.html:78
+#: navigations_add.html:71 pages_add.html:90
+#: pages_blogs_pingserviceconfigurations_add.html:100
+#: pages_blogs_postings_add.html:98 pages_boxes_add.html:100
+#: pages_edit.html:127 pagetypes_add.html:71 podcastcategories_add.html:74
+#: podcastcategories_edit.html:72 structuraltemplates_add.html:74
+#: structuraltemplates_edit.html:74 mediamanager_upload.html:58
+#: globalfiles_add.html:71 globaltemplates_add.html:73 templates_add.html:81
+#: templates_edit.html:81 templatesets_add.html:71 templatetypes_add.html:71
+#: groups_add.html:71 rights_add.html:71 users_add.html:79
+msgid "Your input was successfully saved!"
+msgstr "Ihre Eingabe wurde erfolgreich gespeichert!"
+
+#: pingservices_add.html:72 projects_add.html:72 textconverters_add.html:72
+#: textmacros_add.html:72 antispamplugins_add.html:72
+#: blogcommentstatuses_add.html:72 globalboxes_add.html:79
+#: navigations_add.html:72 pages_add.html:91
+#: pages_blogs_pingserviceconfigurations_add.html:101
+#: pages_blogs_postings_add.html:99 pages_boxes_add.html:101
+#: pagetypes_add.html:72 podcastcategories_add.html:75
+#: podcastcategories_edit.html:73 structuraltemplates_add.html:75
+#: structuraltemplates_edit.html:75 mediamanager_edit.html:52
+#: mediamanager_upload.html:59 globalfiles_add.html:72
+#: globaltemplates_add.html:74 templates_add.html:82 templatesets_add.html:72
+#: templatetypes_add.html:72 groups_add.html:72 rights_add.html:72
+#: users_add.html:80
+msgid "To apply further input, please repeat fill in the form"
+msgstr "Um weitere Eingaben zu machen, f&uuml;llen Sie bitte erneut das Formular aus"
+
+#: pingservices_add.html:83 pingservices_add.html:86 pingservices_add.html:89
+#: pingservices_add.html:92 pingservices_edit.html:72
+#: pingservices_edit.html:75 pingservices_edit.html:78
+#: pingservices_edit.html:81 projects_add.html:83 projects_edit.html:72
+#: textconverters_add.html:83 textconverters_add.html:86
+#: textconverters_edit.html:72 textconverters_edit.html:75
+#: textmacros_add.html:83 textmacros_add.html:86 textmacros_add.html:89
+#: textmacros_edit.html:72 textmacros_edit.html:75 textmacros_edit.html:78
+#: blogcomments_edit.html:72 blogcomments_edit.html:75
+#: blogcomments_edit.html:78 blogcomments_edit.html:81
+#: blogcommentstatuses_add.html:83 blogcommentstatuses_edit.html:72
+#: settings.html:85 settings.html:88 settings.html:91 settings.html:94
+#: settings.html:97 settings.html:100 settings.html:103 settings.html:106
+#: settings.html:109 settings.html:112 settings.html:120 settings.html:123
+#: settings.html:126 settings.html:129 settings.html:132 settings.html:135
+#: settings.html:138 settings.html:141 globalboxes_add.html:94
+#: globalboxes_add.html:104 globalboxes_add.html:107 globalboxes_add.html:110
+#: globalboxes_edit.html:86 globalboxes_edit.html:96 globalboxes_edit.html:99
+#: globalboxes_edit.html:102 navigations_add.html:83 navigations_edit.html:72
+#: pages_add.html:101 pages_add.html:104 pages_add.html:107 pages_add.html:110
+#: pages_add.html:113 pages_add.html:116 pages_add.html:119
+#: pages_blogs_pingserviceconfigurations_add.html:112
+#: pages_blogs_pingserviceconfigurations_add.html:115
+#: pages_blogs_pingserviceconfigurations_add.html:118
+#: pages_blogs_pingserviceconfigurations_add.html:121
+#: pages_blogs_pingserviceconfigurations_add.html:124
+#: pages_blogs_pingserviceconfigurations_edit.html:102
+#: pages_blogs_pingserviceconfigurations_edit.html:105
+#: pages_blogs_pingserviceconfigurations_edit.html:108
+#: pages_blogs_pingserviceconfigurations_edit.html:111
+#: pages_blogs_pingserviceconfigurations_edit.html:114
+#: pages_blogs_postings_add.html:114 pages_blogs_postings_add.html:123
+#: pages_blogs_postings_add.html:133 pages_blogs_postings_add.html:150
+#: pages_blogs_postings_add.html:153 pages_blogs_postings_add.html:156
+#: pages_blogs_postings_add.html:159 pages_blogs_postings_add.html:162
+#: pages_blogs_postings_add.html:165 pages_blogs_postings_add.html:168
+#: pages_blogs_postings_add.html:171 pages_blogs_postings_add.html:174
+#: pages_blogs_postings_add.html:177 pages_blogs_postings_add.html:192
+#: pages_blogs_postings_add.html:195 pages_blogs_postings_add.html:198
+#: pages_blogs_postings_add.html:201 pages_blogs_postings_add.html:204
+#: pages_blogs_postings_add.html:207 pages_blogs_postings_add.html:210
+#: pages_blogs_postings_add.html:213 pages_blogs_postings_edit.html:112
+#: pages_blogs_postings_edit.html:121 pages_blogs_postings_edit.html:131
+#: pages_blogs_postings_edit.html:147 pages_blogs_postings_edit.html:150
+#: pages_blogs_postings_edit.html:153 pages_blogs_postings_edit.html:156
+#: pages_blogs_postings_edit.html:159 pages_blogs_postings_edit.html:162
+#: pages_blogs_postings_edit.html:165 pages_blogs_postings_edit.html:168
+#: pages_blogs_postings_edit.html:171 pages_blogs_postings_edit.html:174
+#: pages_blogs_postings_edit.html:189 pages_blogs_postings_edit.html:192
+#: pages_blogs_postings_edit.html:195 pages_blogs_postings_edit.html:198
+#: pages_blogs_postings_edit.html:201 pages_blogs_postings_edit.html:204
+#: pages_blogs_postings_edit.html:207 pages_blogs_postings_edit.html:210
+#: pages_boxes_add.html:116 pages_boxes_add.html:126 pages_boxes_add.html:129
+#: pages_boxes_add.html:132 pages_boxes_edit.html:108
+#: pages_boxes_edit.html:118 pages_boxes_edit.html:121
+#: pages_boxes_edit.html:124 pages_edit.html:139 pages_edit.html:142
+#: pages_edit.html:145 pages_edit.html:148 pages_edit.html:151
+#: pages_move_away.html:81 pages_simpleforms_content_edit.html:102
+#: pages_simpleforms_content_edit.html:112
+#: pages_simpleforms_content_edit.html:115
+#: pages_simpleforms_content_edit.html:118
+#: pages_simpleforms_content_edit.html:121
+#: pages_simpleforms_content_edit.html:124
+#: pages_simpleforms_content_edit.html:127
+#: pages_simpleforms_content_edit.html:130
+#: pages_simpleforms_content_edit.html:133
+#: pages_simplepages_content_edit.html:104
+#: pages_simplepages_content_edit.html:114
+#: pages_simplepages_content_edit.html:117
+#: pages_simplepages_content_edit.html:120
+#: pages_simplepages_content_edit.html:123
+#: pages_simplepages_content_edit.html:127
+#: pages_simplepages_content_edit.html:130
+#: pages_simplepages_content_edit.html:133 pages_urls_content_edit.html:85
+#: pagetypes_add.html:83 pagetypes_add.html:86 pagetypes_edit.html:73
+#: pagetypes_edit.html:76 podcastcategories_add.html:86
+#: podcastcategories_add.html:89 podcastcategories_edit.html:84
+#: podcastcategories_edit.html:87 structuraltemplates_add.html:90
+#: structuraltemplates_add.html:93 structuraltemplates_add.html:96
+#: structuraltemplates_edit.html:90 structuraltemplates_edit.html:93
+#: structuraltemplates_edit.html:96 mediamanager.html:3
+#: mediamanager_edit.html:62 mediamanager_edit.html:65
+#: mediamanager_edit.html:68 mediamanager_upload.html:69
+#: mediamanager_upload.html:72 mediamanager_upload.html:75
+#: globalfiles_add.html:83 globalfiles_add.html:86 globalfiles_edit.html:72
+#: globalfiles_edit.html:75 globaltemplates_add.html:85
+#: globaltemplates_add.html:88 globaltemplates_add.html:98
+#: globaltemplates_add.html:101 globaltemplates_add.html:104
+#: globaltemplates_edit.html:74 globaltemplates_edit.html:77
+#: globaltemplates_edit.html:87 globaltemplates_edit.html:90
+#: globaltemplates_edit.html:93 templates_add.html:93 templates_add.html:96
+#: templates_add.html:99 templates_add.html:112 templates_add.html:115
+#: templates_copy.html:81 templates_copy.html:84 templates_copy.html:87
+#: templates_copy.html:90 templates_copy.html:93 templates_edit.html:93
+#: templates_edit.html:96 templates_edit.html:99 templates_edit.html:112
+#: templates_edit.html:115 templatesets_add.html:83 templatesets_add.html:86
+#: templatesets_edit.html:72 templatesets_edit.html:75
+#: templatetypes_add.html:83 templatetypes_add.html:86
+#: templatetypes_edit.html:72 templatetypes_edit.html:75 groups_add.html:83
+#: groups_add.html:86 groups_add.html:89 groups_edit.html:72
+#: groups_edit.html:75 groups_edit.html:78 rights_add.html:83
+#: rights_add.html:86 rights_edit.html:72 rights_edit.html:75
+#: users_add.html:91 users_add.html:94 users_add.html:97 users_add.html:100
+#: users_add.html:103 users_add.html:106 users_add.html:109 users_edit.html:81
+#: users_edit.html:84 users_edit.html:87 users_edit.html:90 users_edit.html:93
+#: users_edit.html:96 users_edit.html:99
+msgid "Show help on this topic"
+msgstr "Kontexthilfe anzeigen"
+
+#: pingservices_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Ping Service"
+msgstr ""
+
+#: pingservices_edit.html:46 pingservices_edit.html:50
+#: pages_blogs_pingserviceconfigurations_edit.html:67
+#: pages_blogs_pingserviceconfigurations_edit.html:71
+msgid "Edit Ping Service"
+msgstr ""
+
+#: pingservices_select.html:10
+msgid "Welcompose Admin &ndash; Ping Services"
+msgstr ""
+
+#: pingservices_select.html:52 projects_select.html:52
+#: textconverters_select.html:52 textmacros_select.html:52
+#: antispamplugins_select.html:52 blogcommentstatuses_select.html:52
+#: globalboxes_select.html:52 navigations_select.html:52
+#: pages_blogs_pingserviceconfigurations_select.html:71
+#: pages_blogs_postings_select.html:71 pages_boxes_select.html:73
+#: pagetypes_select.html:52 podcastcategories_select.html:52
+#: structuraltemplates_select.html:52 globalfiles_select.html:58
+#: globaltemplates_select.html:53 templates_select.html:53
+#: templatesets_select.html:52 templatetypes_select.html:52
+#: groups_select.html:52 rights_select.html:52 users_select.html:52
+msgid "Add new"
+msgstr ""
+
+#: pingservices_select.html:57 pingservices_select.html:88
+#: projects_select.html:57 projects_select.html:94
+#: textconverters_select.html:57 textconverters_select.html:88
+#: textmacros_select.html:57 textmacros_select.html:88
+#: antispamplugins_select.html:57 antispamplugins_select.html:94
+#: blogcomments_select.html:97 blogcomments_select.html:173
+#: blogcommentstatuses_select.html:57 blogcommentstatuses_select.html:88
+#: globalboxes_select.html:56 globalboxes_select.html:88
+#: pages_blogs_pingserviceconfigurations_select.html:75
+#: pages_blogs_pingserviceconfigurations_select.html:113
+#: pages_blogs_postings_select.html:100 pages_blogs_postings_select.html:141
+#: pages_boxes_select.html:77 pages_boxes_select.html:109
+#: podcastcategories_select.html:56 podcastcategories_select.html:88
+#: structuraltemplates_select.html:56 structuraltemplates_select.html:88
+#: globalfiles_select.html:62 globalfiles_select.html:119
+#: globaltemplates_select.html:57 globaltemplates_select.html:111
+#: templates_select.html:82 templates_select.html:142 rights_select.html:56
+#: rights_select.html:102
+msgid "Pages:"
+msgstr "Seiten"
+
+#: pingservices_select.html:68
+msgid "Available Ping Services"
+msgstr ""
+
+#: pingservices_select.html:76 pingservices_select.html:82
+#: projects_select.html:76 projects_select.html:83
+#: textconverters_select.html:76 textconverters_select.html:82
+#: textmacros_select.html:76 textmacros_select.html:82
+#: antispamplugins_select.html:80 antispamplugins_select.html:88
+#: blogcomments_select.html:124 blogcomments_select.html:151
+#: blogcommentstatuses_select.html:76 blogcommentstatuses_select.html:82
+#: globalboxes_select.html:76 globalboxes_select.html:82
+#: navigations_select.html:64 navigations_select.html:70
+#: pages_blogs_pingserviceconfigurations_select.html:99
+#: pages_blogs_pingserviceconfigurations_select.html:107
+#: pages_blogs_postings_select.html:126 pages_blogs_postings_select.html:135
+#: pages_boxes_select.html:103 pages_select.html:108 pagetypes_select.html:64
+#: pagetypes_select.html:71 podcastcategories_select.html:76
+#: podcastcategories_select.html:82 structuraltemplates_select.html:76
+#: structuraltemplates_select.html:82 mediamanager.html:73
+#: globalfiles_select.html:90 globalfiles_select.html:100
+#: globaltemplates_select.html:83 globaltemplates_select.html:92
+#: templates_select.html:123 templatesets_select.html:64
+#: templatesets_select.html:70 templatetypes_select.html:64
+#: templatetypes_select.html:71 groups_select.html:67 groups_select.html:76
+#: rights_select.html:82 rights_select.html:92 users_select.html:89
+#: users_select.html:100
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: pingservices_select.html:77 pingservices_select.html:83
+#: projects_select.html:77 projects_select.html:84
+#: textconverters_select.html:77 textconverters_select.html:83
+#: textmacros_select.html:77 textmacros_select.html:83
+#: antispamplugins_select.html:81 antispamplugins_select.html:89
+#: blogcomments_select.html:125 blogcomments_select.html:152
+#: blogcommentstatuses_select.html:77 blogcommentstatuses_select.html:83
+#: globalboxes_select.html:77 globalboxes_select.html:83
+#: navigations_select.html:65 navigations_select.html:71
+#: pages_blogs_pingserviceconfigurations_select.html:100
+#: pages_blogs_pingserviceconfigurations_select.html:108
+#: pages_blogs_postings_select.html:127 pages_blogs_postings_select.html:136
+#: pages_boxes_select.html:104 pages_select.html:110 pagetypes_select.html:65
+#: pagetypes_select.html:72 podcastcategories_select.html:77
+#: podcastcategories_select.html:83 structuraltemplates_select.html:77
+#: structuraltemplates_select.html:83 mediamanager.html:74
+#: globalfiles_select.html:91 globalfiles_select.html:101
+#: globaltemplates_select.html:84 globaltemplates_select.html:93
+#: templates_select.html:124 templatesets_select.html:65
+#: templatesets_select.html:71 templatetypes_select.html:65
+#: templatetypes_select.html:72 groups_select.html:68 groups_select.html:77
+#: rights_select.html:83 rights_select.html:93 users_select.html:90
+#: users_select.html:101
+msgid "Delete"
+msgstr "L&ouml;schen"
+
+#: pingservices_select.html:100
+msgid "No ping service has been created yet."
+msgstr ""
+
+#: projects_add.html:10
+msgid "Welcompose Admin &ndash; Add Project"
+msgstr ""
+
+#: projects_add.html:50 projects_add.html:54
+msgid "Add Projects"
+msgstr ""
+
+#: projects_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Project"
+msgstr ""
+
+#: projects_edit.html:46
+msgid "Edit Project"
+msgstr ""
+
+#: projects_edit.html:50
+msgid "Edit Projects"
+msgstr ""
+
+#: projects_select.html:10
+msgid "Welcompose Admin &ndash; Projects"
+msgstr ""
+
+#: projects_select.html:68
+msgid "Available Projects"
+msgstr ""
+
+#: projects_select.html:86 pagetypes_select.html:74
+#: templatetypes_select.html:74
+msgid "Not editable"
+msgstr ""
+
+#: projects_select.html:106
+msgid "No project has been created yet."
+msgstr ""
+
+#: textconverters_add.html:10
+msgid "Welcompose Admin &ndash; Add Text Converter"
+msgstr ""
+
+#: textconverters_add.html:50 textconverters_add.html:54
+msgid "Add Text Converter"
+msgstr ""
+
+#: textconverters_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Text Converter"
+msgstr ""
+
+#: textconverters_edit.html:46 textconverters_edit.html:50
+msgid "Edit Text Converter"
+msgstr ""
+
+#: textconverters_select.html:10
+msgid "Welcompose Admin &ndash; Text Converters"
+msgstr ""
+
+#: textconverters_select.html:68
+msgid "Available Text Converters"
+msgstr ""
+
+#: textconverters_select.html:100
+msgid "No text converter has been created yet."
+msgstr ""
+
+#: textmacros_add.html:10
+msgid "Welcompose Admin &ndash; Add Text Macro"
+msgstr ""
+
+#: textmacros_add.html:50 textmacros_add.html:54
+msgid "Add Text Macro"
+msgstr ""
+
+#: textmacros_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Text Macro"
+msgstr ""
+
+#: textmacros_edit.html:46 textmacros_edit.html:50
+msgid "Edit Text Macro"
+msgstr ""
+
+#: textmacros_select.html:10
+msgid "Welcompose Admin &ndash; Text Macros"
+msgstr ""
+
+#: textmacros_select.html:68
+msgid "Available Text Macros"
+msgstr ""
+
+#: textmacros_select.html:100
+msgid "No text macro has been created yet."
+msgstr ""
+
+#: _inc_navigation.html:14 _inc_navigation.html:16
+msgid "Blog Comment Statuses"
+msgstr ""
+
+#: antispamplugins_add.html:10
+msgid "Welcompose Admin &ndash; Add Anti Spam Plugin"
+msgstr ""
+
+#: antispamplugins_add.html:50 antispamplugins_add.html:54
+msgid "Add Anti Spam Plugin"
+msgstr ""
+
+#: antispamplugins_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Anti Spam Plugin"
+msgstr ""
+
+#: antispamplugins_edit.html:46 antispamplugins_edit.html:50
+msgid "Edit Anti Spam Plugin"
+msgstr ""
+
+#: antispamplugins_select.html:10
+msgid "Welcompose Admin &ndash; Anti Spam Plugins"
+msgstr ""
+
+#: antispamplugins_select.html:68
+msgid "Available Anti Spam Plugins"
+msgstr ""
+
+#: antispamplugins_select.html:106
+msgid "No anti spam plugin has been created yet."
+msgstr ""
+
+#: blogcomments_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Blog Comment"
+msgstr ""
+
+#: blogcomments_edit.html:46 blogcomments_edit.html:50
+msgid "Edit Blog Comment"
+msgstr ""
+
+#: blogcomments_select.html:10
+msgid "Welcompose Admin &ndash; Blog Comments"
+msgstr ""
+
+#: blogcomments_select.html:29
+msgid "Change of comment status successfully saved!"
+msgstr ""
+
+#: blogcomments_select.html:63 pages_blogs_postings_select.html:76
+#: templates_select.html:58 users_select.html:57
+msgid "Filter:"
+msgstr ""
+
+#: blogcomments_select.html:66
+msgid "Blog"
+msgstr ""
+
+#: blogcomments_select.html:68 blogcomments_select.html:77
+#: blogcomments_select.html:84 pages_blogs_postings_select.html:82
+#: pages_blogs_postings_select.html:89 mediamanager.html:49
+#: mediamanager.html:138 templates_select.html:63 templates_select.html:70
+#: users_select.html:62
+msgid "Please choose..."
+msgstr "Bitte ausw&auml;hlen..."
+
+#: blogcomments_select.html:75 blogcomments_select.html:122
+msgid "Status"
+msgstr ""
+
+#: blogcomments_select.html:82 pages_blogs_postings_select.html:80
+msgid "Timeframe"
+msgstr ""
+
+#: blogcomments_select.html:89 pages_blogs_postings_select.html:93
+#: templates_select.html:75 users_select.html:67
+msgid "Filter"
+msgstr ""
+
+#: blogcomments_select.html:108
+msgid "Blog Comments List"
+msgstr ""
+
+#: blogcomments_select.html:119
+msgid "Blog-Name"
+msgstr ""
+
+#: blogcomments_select.html:119
+msgid "Posting Title"
+msgstr ""
+
+#: blogcomments_select.html:120
+msgid "Mail/Homepage"
+msgstr ""
+
+#: blogcomments_select.html:121
+msgid "First 80 chars of comment"
+msgstr ""
+
+#: blogcomments_select.html:123
+msgid "View"
+msgstr ""
+
+#: blogcomments_select.html:150
+msgid "View Comment"
+msgstr ""
+
+#: blogcomments_select.html:158 blogitem.class.php:205
+msgid "Comment"
+msgstr ""
+
+#: blogcomments_select.html:161
+msgid "Spam report"
+msgstr ""
+
+#: blogcomments_select.html:164
+msgid "Edited"
+msgstr ""
+
+#: blogcomments_select.html:185
+msgid "No blog comment has been created yet."
+msgstr ""
+
+#: blogcommentstatuses_add.html:10
+msgid "Welcompose Admin &ndash; Add Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_add.html:50 blogcommentstatuses_add.html:54
+msgid "Add Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_edit.html:46 blogcommentstatuses_edit.html:50
+msgid "Edit Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_select.html:10
+msgid "Welcompose Admin &ndash; Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_select.html:68
+msgid "Available Blog Comment Status"
+msgstr ""
+
+#: blogcommentstatuses_select.html:100
+msgid "No blog comment status has been created yet."
+msgstr ""
+
+#: settings.html:10
+msgid "Welcompose Admin &ndash; Community Settings"
+msgstr ""
+
+#: settings.html:72 pages_edit.html:128
+msgid "To apply further changes, please repeat fill in the form"
+msgstr ""
+
+#: globalboxes_add.html:10
+msgid "Welcompose Admin &ndash; Add Global Box"
+msgstr ""
+
+#: globalboxes_add.html:57 globalboxes_add.html:61
+msgid "Add Global Box"
+msgstr ""
+
+#: globalboxes_add.html:99 globalboxes_edit.html:91
+#: pages_blogs_postings_add.html:119 pages_blogs_postings_add.html:128
+#: pages_blogs_postings_edit.html:117 pages_blogs_postings_edit.html:126
+#: pages_boxes_add.html:121 pages_boxes_edit.html:113
+#: pages_simpleforms_content_edit.html:107
+#: pages_simplepages_content_edit.html:109
+msgid "Internal links"
+msgstr "Interne Verweise"
+
+#: globalboxes_add.html:100 globalboxes_edit.html:92
+#: pages_blogs_postings_add.html:129 pages_blogs_postings_edit.html:127
+#: pages_boxes_add.html:122 pages_boxes_edit.html:114
+#: pages_simpleforms_content_edit.html:108
+#: pages_simplepages_content_edit.html:110 structuraltemplates_select.html:50
+msgid "Structural templates"
+msgstr "Strukturvorlagen"
+
+#: globalboxes_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Global Box"
+msgstr ""
+
+#: globalboxes_edit.html:56 globalboxes_edit.html:60
+msgid "Edit Global Box"
+msgstr ""
+
+#: globalboxes_select.html:10
+msgid "Welcompose Admin &ndash; Global Boxes"
+msgstr ""
+
+#: globalboxes_select.html:68
+msgid "Available global boxes"
+msgstr ""
+
+#: globalboxes_select.html:100
+msgid "No global box has been created yet"
+msgstr ""
+
+#: navigations_add.html:10
+msgid "Welcompose Admin &ndash; Add Navigation"
+msgstr ""
+
+#: navigations_add.html:50 navigations_add.html:54
+msgid "Add Navigation"
+msgstr ""
+
+#: navigations_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Navigation"
+msgstr ""
+
+#: navigations_edit.html:46 navigations_edit.html:50
+msgid "Edit Navigation"
+msgstr ""
+
+#: navigations_select.html:10
+msgid "Welcompose Admin &ndash; Navigations"
+msgstr ""
+
+#: navigations_select.html:56
+msgid "Available navigations"
+msgstr ""
+
+#: navigations_select.html:76
+msgid "No navigation has been created yet"
+msgstr ""
+
+#: pages_add.html:10
+msgid "Welcompose Admin &ndash; Add Page"
+msgstr ""
+
+#: pages_add.html:53 pages_add.html:57
+msgid "Add Page"
+msgstr ""
+
+#: pages_add.html:75
+msgid "You have not yet created a page type!"
+msgstr ""
+
+#: pages_add.html:76
+msgid ""
+"To create one, go to the <a href=\"pagetypes_select.php\">page type overview "
+"page</a>."
+msgstr ""
+
+#: pages_add.html:83 pages_edit.html:120
+msgid "You have not yet created a template set!"
+msgstr ""
+
+#: pages_add.html:84 pages_edit.html:121
+msgid ""
+"To create one, go to the <a href=\"../templating/templatesets_select.php"
+"\">template set overview page</a>."
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Add Ping Service"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.html:54
+#: pages_blogs_pingserviceconfigurations_edit.html:50
+#: pages_blogs_pingserviceconfigurations_select.html:50
+#: pages_blogs_postings_add.html:61 pages_blogs_postings_edit.html:66
+#: pages_blogs_postings_select.html:50 pages_boxes_add.html:61
+#: pages_boxes_add.html:65 pages_boxes_add.html:70 pages_boxes_edit.html:60
+#: pages_boxes_edit.html:64 pages_boxes_edit.html:69
+#: pages_boxes_select.html:50 pages_boxes_select.html:54
+#: pages_boxes_select.html:59 pages_edit.html:55 pages_edit.html:65
+#: pages_edit.html:78 pages_edit.html:85
+#: pages_simpleforms_content_edit.html:60
+#: pages_simplepages_content_edit.html:61 pages_urls_content_edit.html:50
+msgid "Metadata"
+msgstr "Metadaten"
+
+#: pages_blogs_pingserviceconfigurations_add.html:57
+#: pages_blogs_pingserviceconfigurations_edit.html:53
+#: pages_blogs_pingserviceconfigurations_select.html:53
+#: pages_blogs_postings_add.html:64 pages_blogs_postings_add.html:77
+#: pages_blogs_postings_add.html:83 pages_blogs_postings_edit.html:69
+#: pages_blogs_postings_edit.html:82 pages_blogs_postings_edit.html:88
+#: pages_blogs_postings_select.html:53 pages_blogs_postings_select.html:65
+#: pages_blogs_postings_select.html:69 pages_boxes_add.html:66
+#: pages_boxes_edit.html:65 pages_boxes_select.html:55 pages_edit.html:68
+#: pages_links_select_second.ajax.html:7
+msgid "Blog Postings"
+msgstr "Blog Eintr&auml;ge"
+
+#: pages_blogs_pingserviceconfigurations_add.html:60
+#: pages_blogs_pingserviceconfigurations_edit.html:56
+#: pages_blogs_pingserviceconfigurations_select.html:56
+#: pages_blogs_postings_add.html:67 pages_blogs_postings_edit.html:72
+#: pages_blogs_postings_select.html:56 pages_boxes_add.html:63
+#: pages_boxes_add.html:67 pages_boxes_add.html:72 pages_boxes_add.html:79
+#: pages_boxes_add.html:85 pages_boxes_edit.html:62 pages_boxes_edit.html:66
+#: pages_boxes_edit.html:71 pages_boxes_edit.html:78 pages_boxes_edit.html:84
+#: pages_boxes_select.html:52 pages_boxes_select.html:56
+#: pages_boxes_select.html:61 pages_boxes_select.html:67
+#: pages_boxes_select.html:71 pages_edit.html:61 pages_edit.html:71
+#: pages_edit.html:91 pages_simpleforms_content_edit.html:66
+#: pages_simplepages_content_edit.html:67
+#: pages_boxes_links_select_second.ajax.html:3 templates_add.html:108
+#: templates_edit.html:108
+msgid "Boxes"
+msgstr "Boxen"
+
+#: pages_blogs_pingserviceconfigurations_add.html:93
+#: pages_blogs_pingserviceconfigurations_edit.html:89
+msgid "You have not yet created a ping service!"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_add.html:94
+#: pages_blogs_pingserviceconfigurations_edit.html:90
+msgid ""
+"To create one, go to the <a href=\"../application/pingservices_select.php"
+"\">ping service overview page</a>."
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_edit.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Edit Ping Service"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Ping Service Configurations"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:87
+#: pages_blogs_postings_select.html:112
+msgid "Available Blog Postings"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:96
+msgid "Ping Service Name"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:97
+msgid "Site Name"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:98
+msgid "Site URL"
+msgstr ""
+
+#: pages_blogs_pingserviceconfigurations_select.html:125
+msgid "No ping service has been configured yet."
+msgstr ""
+
+#: pages_blogs_postings_add.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Add Blog Posting"
+msgstr ""
+
+#: pages_blogs_postings_add.html:77 pages_blogs_postings_add.html:81
+msgid "Add Blog Posting"
+msgstr ""
+
+#: pages_blogs_postings_edit.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Edit Blog Posting"
+msgstr ""
+
+#: pages_blogs_postings_edit.html:82 pages_blogs_postings_edit.html:86
+msgid "Edit Blog Posting"
+msgstr ""
+
+#: pages_blogs_postings_select.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Blog Postings"
+msgstr ""
+
+#: pages_blogs_postings_select.html:90
+msgid "Yes"
+msgstr ""
+
+#: pages_blogs_postings_select.html:91
+msgid "No"
+msgstr ""
+
+#: pages_blogs_postings_select.html:123
+msgid "Date"
+msgstr ""
+
+#: pages_blogs_postings_select.html:124
+msgid "Comments"
+msgstr ""
+
+#: pages_blogs_postings_select.html:125
+msgid "Trackbacks"
+msgstr ""
+
+#: pages_blogs_postings_select.html:153
+msgid "No blog posting has been created yet."
+msgstr ""
+
+#: pages_boxes_add.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Add Box"
+msgstr ""
+
+#: pages_boxes_add.html:62 pages_boxes_edit.html:61 pages_boxes_select.html:51
+#: pages_edit.html:58 pages_simplepages_content_edit.html:64
+msgid "Simple Page"
+msgstr ""
+
+#: pages_boxes_add.html:71 pages_boxes_edit.html:70 pages_boxes_select.html:60
+#: pages_edit.html:88 pages_simpleforms_content_edit.html:63
+msgid "Simple Form"
+msgstr ""
+
+#: pages_boxes_add.html:79 pages_boxes_add.html:83
+msgid "Add Box"
+msgstr ""
+
+#: pages_boxes_edit.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Edit Box"
+msgstr ""
+
+#: pages_boxes_edit.html:78 pages_boxes_edit.html:82
+msgid "Edit Box"
+msgstr ""
+
+#: pages_boxes_select.html:10
+msgid "Welcompose Admin &ndash; Pages &#62; Boxes"
+msgstr ""
+
+#: pages_boxes_select.html:89
+msgid "Available Boxes"
+msgstr ""
+
+#: pages_boxes_select.html:121
+msgid "No box has been created yet."
+msgstr ""
+
+#: pages_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Page Metadata"
+msgstr ""
+
+#: pages_edit.html:81 pages_urls_content_edit.html:53
+msgid "URL Page"
+msgstr ""
+
+#: pages_edit.html:98 pages_edit.html:102
+msgid "Edit Page Metadata"
+msgstr ""
+
+#: pages_links_select.html:10
+msgid "Welcompose Admin &ndash; Pages &ndash; Internal Links"
+msgstr ""
+
+#: pages_links_select.html:34
+msgid "PAGES"
+msgstr ""
+
+#: pages_links_select.html:34
+msgid "INSERT INTERNAL LINKS"
+msgstr ""
+
+#: pages_links_select.html:34 structuraltemplates_links_select.html:35
+#: globalboxes_links_select.html:32 globalfiles_links_select.html:32
+#: globaltemplates_links_select.html:32 pages_boxes_links_select.html:34
+msgid "Close Window"
+msgstr ""
+
+#: pages_links_select.html:47 structuraltemplates_links_select.html:42
+#: globalboxes_links_select.html:39 globalfiles_links_select.html:39
+#: globaltemplates_links_select.html:39
+msgid "Insert link"
+msgstr ""
+
+#: pages_links_select.html:49 pages_links_select_second.ajax.html:4
+msgid "Display sub links"
+msgstr ""
+
+#: pages_links_select_second.ajax.html:3
+msgid "Yearly Archives"
+msgstr ""
+
+#: pages_links_select_second.ajax.html:11 pages_links_select_third.ajax.html:4
+#: pages_links_select_third.ajax.html:10
+msgid "Insert this link"
+msgstr ""
+
+#: pages_move_away.html:10
+msgid "Welcompose Admin &ndash; Move page to another navigation"
+msgstr ""
+
+#: pages_move_away.html:46 pages_move_away.html:50
+msgid "Move page to another navigation"
+msgstr ""
+
+#: pages_move_away.html:68
+msgid "There is no navigation where you can move this node to!"
+msgstr ""
+
+#: pages_move_away.html:69
+msgid ""
+"To create one, go to the <a href=\"navigations_select.php\">navigation "
+"overview page</a>."
+msgstr ""
+
+#: pages_select.html:10
+msgid "Welcompose Admin &ndash; Pages"
+msgstr ""
+
+#: pages_select.html:58
+msgid "Please define an index page!"
+msgstr ""
+
+#: pages_select.html:59
+msgid "If you don't do that, your webpage won't be usable."
+msgstr ""
+
+#: pages_select.html:65
+msgid "You defined more than one index page."
+msgstr ""
+
+#: pages_select.html:66
+msgid "Please reduce the amount of index pages to one."
+msgstr ""
+
+#: pages_select.html:73
+msgid "Install package still present!"
+msgstr ""
+
+#: pages_select.html:74
+msgid "This is a severe security risk. Please remove the install package."
+msgstr ""
+
+#: pages_select.html:81
+msgid "Setup directory still present!"
+msgstr ""
+
+#: pages_select.html:82
+msgid "This is a severe security risk. Please remove the setup directory."
+msgstr ""
+
+#: pages_select.html:94 pages_select.html:105
+msgid "Page structure"
+msgstr ""
+
+#: pages_select.html:106
+msgid "Move"
+msgstr ""
+
+#: pages_select.html:107
+msgid "Add"
+msgstr ""
+
+#: pages_select.html:109
+msgid "Move away"
+msgstr ""
+
+#: pages_select.html:119 pages_select.html:130
+msgid "Add new page"
+msgstr ""
+
+#: pages_select.html:127
+msgid "No page has been created yet"
+msgstr ""
+
+#: pages_simpleforms_content_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Simple Form"
+msgstr ""
+
+#: pages_simpleforms_content_edit.html:72
+#: pages_simpleforms_content_edit.html:76
+msgid "Edit Simple Form"
+msgstr ""
+
+#: pages_simplepages_content_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Simple Page"
+msgstr ""
+
+#: pages_simplepages_content_edit.html:74
+#: pages_simplepages_content_edit.html:78
+msgid "Edit Simple Page"
+msgstr ""
+
+#: pages_urls_content_edit.html:10
+msgid "Welcompose Admin &ndash; Edit URL Page"
+msgstr ""
+
+#: pages_urls_content_edit.html:59 pages_urls_content_edit.html:63
+msgid "Edit URL Page"
+msgstr ""
+
+#: pagetypes_add.html:10
+msgid "Welcompose Admin &ndash; Add Page Type"
+msgstr ""
+
+#: pagetypes_add.html:50 pagetypes_add.html:54
+msgid "Add Page Type"
+msgstr ""
+
+#: pagetypes_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Page Type"
+msgstr ""
+
+#: pagetypes_edit.html:47 pagetypes_edit.html:51
+msgid "Edit Page Type"
+msgstr ""
+
+#: pagetypes_select.html:10
+msgid "Welcompose Admin &ndash; Page Types"
+msgstr ""
+
+#: pagetypes_select.html:56
+msgid "Available Page Types"
+msgstr ""
+
+#: pagetypes_select.html:82
+msgid "No page type has been created yet"
+msgstr ""
+
+#: podcastcategories_add.html:10
+msgid "Welcompose Admin &ndash; Add Podcast Category"
+msgstr ""
+
+#: podcastcategories_add.html:53 podcastcategories_add.html:57
+msgid "Add Podcast Category"
+msgstr ""
+
+#: podcastcategories_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Podcast Category"
+msgstr ""
+
+#: podcastcategories_edit.html:51 podcastcategories_edit.html:55
+msgid "Edit Podcast Category"
+msgstr ""
+
+#: podcastcategories_select.html:10
+msgid "Welcompose Admin &ndash; Podcast Categories"
+msgstr ""
+
+#: podcastcategories_select.html:68
+msgid "Available podcast categories"
+msgstr ""
+
+#: podcastcategories_select.html:100
+msgid "No podcast category has been created yet"
+msgstr ""
+
+#: structuraltemplates_add.html:10
+msgid "Welcompose Admin &ndash; Add Structural Template"
+msgstr ""
+
+#: structuraltemplates_add.html:53 structuraltemplates_add.html:57
+msgid "Add Structural Template"
+msgstr ""
+
+#: structuraltemplates_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Structural Template"
+msgstr ""
+
+#: structuraltemplates_edit.html:53 structuraltemplates_edit.html:57
+msgid "Edit Structural Template"
+msgstr ""
+
+#: structuraltemplates_links_select.html:10
+msgid "Welcompose Admin &ndash; Structural Templates &ndash; Insert"
+msgstr ""
+
+#: structuraltemplates_links_select.html:35
+msgid "STRUCTURAL TEMPLATES"
+msgstr ""
+
+#: structuraltemplates_links_select.html:35
+msgid "INSERT"
+msgstr ""
+
+#: structuraltemplates_select.html:10
+msgid "Welcompose Admin &ndash; Structural Templates"
+msgstr ""
+
+#: structuraltemplates_select.html:68
+msgid "Available structural templates"
+msgstr ""
+
+#: structuraltemplates_select.html:100
+msgid "No structural template has been created yet"
+msgstr ""
+
+#: error.html:10 error_popup_403.html:10 error_popup_723.html:10
+msgid "Welcompose Admin &ndash; Error"
+msgstr ""
+
+#: error.html:26 error_popup_403.html:33 error_popup_723.html:33
+msgid "An error occured"
+msgstr ""
+
+#: error.html:28 error_popup_403.html:35 error_popup_723.html:35
+msgid "Welcompose says"
+msgstr ""
+
+#: anti_spam_plugin_anti_spam_plugin_active.html:1
+msgid "Uncheck this box if you like to disable the plugin."
+msgstr ""
+
+#: anti_spam_plugin_anti_spam_plugin_internal_name.html:1
+msgid ""
+"The internal name corresponds to the function name of the anti spam plugin. "
+"See the docs of your anti spam plugin when you're unsure what to insert here."
+msgstr ""
+
+#: anti_spam_plugin_anti_spam_plugin_name.html:1
+msgid "This name will be used as plugin identifier."
+msgstr ""
+
+#: anti_spam_plugin_anti_spam_plugin_priority.html:1
+msgid ""
+"The spam checks will be execute according to the defined priorities, whereas "
+"spam checks with a low priority like 0 will be executed first and spam "
+"checks with a high priority like 100 will be executed later. The priority "
+"has to be a numeric value >= 0."
+msgstr ""
+
+#: anti_spam_plugin_anti_spam_plugin_type.html:1
+msgid ""
+"Select the appropriate plugin type. See the docs of your anti spam plugin if "
+"you're unsure what to choose."
+msgstr ""
+
+#: blog_comment_status_blog_comment_status_name.html:1
+msgid ""
+"Will be used to categorize the incomming comments. So you can mark comments "
+"as moderated, spam and so on. Please use a prefixed capitalized literal "
+"string like MY_SPAM_STATUS."
+msgstr ""
+
+#: blog_posting_blog_posting_apply_macros.html:1
+msgid ""
+"Defines whether the text macros will be applied on the content and the "
+"summary or not."
+msgstr ""
+
+#: blog_posting_blog_posting_comments_enable.html:1
+msgid "If you like to allow comments for this posting, check this box."
+msgstr ""
+
+#: blog_posting_blog_posting_content.html:1
+msgid ""
+"Enter here the contents for your blog posting. HTML and all the other stuff "
+"allowed."
+msgstr ""
+
+#: blog_posting_blog_posting_draft.html:1
+msgid ""
+"If you mark your blog posting as draft, it will be saved but not published."
+msgstr ""
+
+#: blog_posting_blog_posting_ping.html:1
+msgid ""
+"Check this box if you like to notify the configured ping services about your "
+"update."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_author.html:1
+msgid ""
+"Artist/author of this podcast. Will be used for the artist column in iTunes."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_block.html:1
+msgid "Check this box to block the appearance of this podcast."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_category.html:1
+msgid "Select the categories that your podcast should appear in iTunes."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_description.html:1
+msgid "Choose the blog posting field that will be used as podcast description."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_explicit.html:1
+msgid ""
+"Indicates whether your podcast contains explicit material or not. It's used "
+"for parental advisory in iTunes."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_keywords.html:1
+msgid "Choose the blog posting field that will be used as summary description."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_summary.html:1
+msgid "Choose the blog posting field that will be used as podcast summary."
+msgstr ""
+
+#: blog_posting_blog_posting_podcast_title.html:1
+msgid "Enter the title of your podcast here."
+msgstr ""
+
+#: blog_posting_blog_posting_summary.html:1
+msgid "Use this field to introduce your story or to give a short summary."
+msgstr ""
+
+#: blog_posting_blog_posting_tags.html:1
+msgid ""
+"Enter one or more tags (read: keywords) to categorize your story. Separate "
+"them with a comma."
+msgstr ""
+
+#: blog_posting_blog_posting_text_converter.html:1
+msgid "Select the text converter that should be applied on all your contents."
+msgstr ""
+
+#: blog_posting_blog_posting_title.html:1
+msgid "Enter the title of your blog posting."
+msgstr ""
+
+#: blog_posting_blog_posting_trackbacks_enable.html:1
+msgid "Check this box if you like to allow trackbacks for this article."
+msgstr ""
+
+#: box_box_apply_macros.html:1 global_box_global_box_apply_macros.html:1
+#: simple_form_simple_form_apply_macros.html:1
+#: simple_page_simple_page_apply_macros.html:1
+msgid "Defines whether the text macros will be applied on the content or not."
+msgstr ""
+
+#: box_box_content.html:1 global_box_global_box_content.html:1
+msgid ""
+"Enter here the contents for your box. HTML and all the other stuff allowed."
+msgstr ""
+
+#: box_box_name.html:1 global_box_global_box_name.html:1
+msgid ""
+"Enter the name of your box as it has to be referenced in your templates."
+msgstr ""
+
+#: box_box_text_converter.html:1 global_box_global_box_text_converter.html:1
+#: simple_form_simple_form_text_converter.html:1
+#: simple_page_simple_page_text_converter.html:1
+msgid "Choose the text converter you like to apply on your content."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_bayes_autolearn.html:1
+msgid ""
+"If autolearning is enabled, comments with a spamminess higher than the  "
+"Bayes autolearn threshold will be automatically trained as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_bayes_autolearn_threshold.html:1
+msgid ""
+"If a comment gets a higher spamminess than the as threshold defined value, "
+"it will be automatically trained as spam. Applies only if autolearning is "
+"enabled. Value can be between 0.00001 (very low spamminess) and 1.0000 (very "
+"high spamminess)."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_bayes_spam_threshold.html:1
+msgid ""
+"Defines the threshold after it's reached a comment will be marked as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_default_status.html:1
+msgid ""
+"Defines the status a comment will automatically get after it's received by "
+"the system."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_display_status.html:1
+msgid ""
+"Defines the display status that marks a comment as approved so that it will "
+"be displayed."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_ham_status.html:1
+msgid ""
+"Defines the status a comment will automatically get after it has been "
+"classified as ham."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_spam_status.html:1
+msgid ""
+"Defines the status a comment will automatically get after it has been "
+"classified as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_text_converter.html:1
+msgid "The text converter that will be applied to the incomming comments."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_timeframe_threshold.html:1
+msgid ""
+"Time since artilce publishing in seconds after that a comment won't be "
+"accepted anymore."
+msgstr ""
+
+#: community_settings_community_settings_blog_comment_use_captcha.html:1
+#: simple_form_simple_form_use_captcha.html:1
+msgid ""
+"A captcha is some kind of spam protection. When enabled, the visitor will be "
+"asked to enter some text displayed by an image or to solve a simple "
+"mathematical question (like 3 + 4 = ?). When you select the image captcha, "
+"the former will be displayed. When you choose the numeral captcha, the "
+"latter."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_bayes_autolearn.html:1
+msgid ""
+"If autolearning is enabled, trackbacks with a spamminess higher than the "
+"Bayes autolearn threshold will be automatically trained as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_bayes_autolearn_threshold.html:1
+msgid ""
+"If a trackback gets a higher spamminess than the as threshold defined value, "
+"it will be automatically trained as spam. Applies only if autolearning is "
+"enabled. Value can be between 0.00001 (very low spamminess) and 1.0000 (very "
+"high spamminess)."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_bayes_spam_threshold.html:1
+msgid ""
+"Defines the threshold after it's reached a trackback will be marked as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_default_status.html:1
+msgid ""
+"Defines the status a trackback will automatically get after it's received by "
+"the system."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_display_status.html:1
+msgid ""
+"Defines the display status that marks a trackback as approved so that it "
+"will be displayed."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_ham_status.html:1
+msgid ""
+"Defines the status a trackback will automatically get after it has been "
+"classified as ham."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_spam_status.html:1
+msgid ""
+"Defines the status a trackback will automatically get after it has been "
+"classified as spam."
+msgstr ""
+
+#: community_settings_community_settings_blog_trackback_timeframe_threshold.html:1
+msgid ""
+"Time since artilce publishing in seconds after that a trackback won't be "
+"accepted anymore."
+msgstr ""
+
+#: document_category_document_category_name.html:1
+msgid ""
+"Will be used to organise your documents. Choose a meaningful name like My "
+"Word Documents."
+msgstr ""
+
+#: global_file_global_file_description.html:1
+msgid ""
+"Use this field to enter an optional description of the purpose of this "
+"global file."
+msgstr ""
+
+#: global_file_global_file_file.html:1
+msgid "Select the file to use as global file on your hard disk."
+msgstr ""
+
+#: global_template_global_template_change_delimiter.html:1
+msgid ""
+"If you check this box, the chars used as Smarty tag delimiter will be "
+"changed from braces to a <%% and %%>. You'll need this when dealing with "
+"files containing a lot of braces like Cascading Style Sheets or JavaScript."
+msgstr ""
+
+#: global_template_global_template_content.html:1
+msgid ""
+"Insert the content of your global template (styles, JavaScript code etc.) "
+"here."
+msgstr ""
+
+#: global_template_global_template_description.html:1
+msgid "Here you may optionally describe the purpose of the global template."
+msgstr ""
+
+#: global_template_global_template_mime_type.html:1
+msgid "Select the MIME type to use when the page will be displayed."
+msgstr ""
+
+#: global_template_global_template_name.html:1
+msgid ""
+"Enter the name of the global template. It's recommended to use a real file "
+"name like style.css oder script.js"
+msgstr ""
+
+#: group_group_description.html:1
+msgid ""
+"You can optionally describe the purpose of this group. May be useful when "
+"dealing with lots of different groups."
+msgstr ""
+
+#: group_group_name.html:1
+msgid ""
+"The name will be used to distinguish between the different groups later on. "
+"A capitalized literal string with a custom prefix is expected, eg. "
+"MY_GROUP_NAME or PUBLIC_ADMINS. WCOM as prefix is prohibited."
+msgstr ""
+
+#: group_group_rights.html:1
+msgid ""
+"Choose the access rights for this group. Press CTRL (on Windows) or Command "
+"(on Mac) to select multiple rights."
+msgstr ""
+
+#: image_category_image_category_name.html:1
+msgid ""
+"Will be used to organise your documents. Choose a meaningful name like My "
+"Holiday Pictures."
+msgstr ""
+
+#: media_edit_description.html:1 media_upload_description.html:1
+msgid ""
+"You can optionally describe the purpose of your media to upload. May be "
+"useful in addition to the given tags, s. below."
+msgstr ""
+
+#: media_edit_file.html:1 media_upload_file.html:1
+msgid "Select the file you want to add to your media pool."
+msgstr ""
+
+#: media_edit_tags.html:1 media_upload_tags.html:1
+msgid ""
+"Enter one or more tags to organize your media. Separate them with a comma. "
+"This one is important. The given tags are suppost to be used with the Media "
+"Manager Option <em>Find by tags</em> to narrow down the number of media to "
+"display."
+msgstr ""
+
+#: media_upload_types.html:1
+msgid "help media_upload_types."
+msgstr ""
+
+#: mediamanager_mediamanager.html:1
+msgid ""
+"<strong>myLocal</strong>: Find and manage your local stored media (default)."
+"<br /><strong>myFlickr</strong>: Find Flickr documents to embed in your "
+"project. This assumes you have a existing Flickr account.<br /"
+"><strong>Upload</strong>: Upload media of all types<br /><br /"
+"><strong>Include following types</strong>: What media types your search "
+"results should contain?<br /><strong>Find by tags</strong>: Live search "
+"relating to media tags. Depending on key event, the results will be "
+"continuously updated with a delay of 1.5 seconds.<br /><strong>Find by "
+"timeframe</strong>: Live search within the choosen time range.<br /><br /"
+"><strong>Flickr User</strong>: To use <em>myFlickr</em> you must declare a "
+"flickr user first .<br /><strong>Find by Flickr photoset</strong><br /"
+">xxx<br /><strong>Find by Flickr tags</strong><br />xxx<br /><br /"
+"><strong>Combining searches</strong>: All options and methods (<em>Include "
+"following types</em>, <em>Find by tags</em> and <em>Find by timeframe</em>) "
+"could be used as stand-alone search options/methods or combined related to "
+"each other. In this case the order of use is dispensable."
+msgstr ""
+
+#: navigation_navigation_name.html:1
+msgid ""
+"The name will be used to distinguish between the different navigations later "
+"on. So please chose a meaningful one, especially because it will be used for "
+"navigation referencing in the templates."
+msgstr ""
+
+#: page_page_groups.html:1
+msgid ""
+"Select the groups which you like to give access to this page. Press CTRL on "
+"PC or Command on Mac to select or deselect multiple groups."
+msgstr ""
+
+#: page_page_index_page.html:1
+msgid "If checked, this page will be your index page of your website."
+msgstr ""
+
+#: page_page_name.html:1
+msgid "The page will appear with the entered name in your navigation."
+msgstr ""
+
+#: page_page_navigation.html:1
+msgid ""
+"The page will be moved to the choosen navigation. It assumes you applied two "
+"navigations at least."
+msgstr ""
+
+#: page_page_position.html:1
+msgid ""
+"Defines if the new node will be created above or below the current node."
+msgstr ""
+
+#: page_page_protect.html:1
+msgid ""
+"Check this box if you like to make this page only accessible to a certain "
+"group of users."
+msgstr ""
+
+#: page_page_template_set.html:1
+msgid "Choose a template set to determine the look of your new page."
+msgstr ""
+
+#: page_page_type.html:1
+msgid "Defines the purpose of your new page."
+msgstr ""
+
+#: page_type_page_type_internal_name.html:1
+msgid ""
+"The internal name of the page type is the name of the corresponding display "
+"class without the pseudo-namespace prefix. If you have a display class "
+"called Display_SimplePage enter SimplePage as internal name."
+msgstr ""
+
+#: page_type_page_type_name.html:1
+msgid ""
+"Choose a descriptive name. A capitalized literal string with a custom prefix "
+"is expected, eg. EXTENSION_FOO or MY_PAGE_TYPE. WCOM as prefix is prohibited."
+msgstr ""
+
+#: ping_service_configuration_ping_service_configuration_ping_service.html:1
+msgid "Select the ping service you wish to configure."
+msgstr ""
+
+#: ping_service_configuration_ping_service_configuration_site_feed.html:1
+msgid ""
+"The URL to your news feed including protocol (http://) and your full domain "
+"name."
+msgstr ""
+
+#: ping_service_configuration_ping_service_configuration_site_index.html:1
+msgid ""
+"The URL to the page that should be checked for changes by your ping service "
+"provider. It matches your site URL in most cases."
+msgstr ""
+
+#: ping_service_configuration_ping_service_configuration_site_name.html:1
+msgid ""
+"Enter the name of your weblog as it should appear on the list of recently "
+"updated weblogs of your ping service provider."
+msgstr ""
+
+#: ping_service_configuration_ping_service_configuration_site_url.html:1
+msgid ""
+"The URL to the main page of your weblog including protocol (http://) and "
+"your full domain name."
+msgstr ""
+
+#: ping_service_ping_service_host.html:1
+msgid ""
+"The host to ping. Can either be a full qualified domain name like weblogs."
+"com or an quad dotted IP address."
+msgstr ""
+
+#: ping_service_ping_service_name.html:1
+msgid ""
+"The name will be used to distinguish between the different ping services "
+"later on."
+msgstr ""
+
+#: ping_service_ping_service_path.html:1
+msgid ""
+"The path of the remote host to ping, eg. /RPC2. You have to specify at least "
+"a slash (/)."
+msgstr ""
+
+#: ping_service_ping_service_port.html:1
+msgid ""
+"The port of the remote host to ping. If your ping provider doesn't specifiy "
+"a value, 80 is a safe choice."
+msgstr ""
+
+#: podcast_category_podcast_category_category.html:1
+msgid ""
+"Enter the primary name of the category. See the podcast specs from Apple for "
+"details."
+msgstr ""
+
+#: podcast_category_podcast_category_subcategory.html:1
+msgid ""
+"Enter a optional subcategory name. See the podcast specs from Apple for "
+"details."
+msgstr ""
+
+#: right_right_description.html:1
+msgid ""
+"You can optionally describe the purpose of this right. May be useful when "
+"dealing with lots of different rights."
+msgstr ""
+
+#: right_right_name.html:1
+msgid ""
+"The name will be used to distinguish between the different rights later on. "
+"A capitalized literal string with a custom prefix is expected, eg. MY_RIGHT "
+"or PUBLIC_ADMINS. WCOM as prefix is prohibited."
+msgstr ""
+
+#: simple_form_simple_form_content.html:1
+msgid ""
+"Enter here the contents for your simple form that will be shown above or "
+"below your form. HTML and all the other stuff allowed."
+msgstr ""
+
+#: simple_form_simple_form_email_from.html:1
+msgid ""
+"The From: address that will be used sending the form. To get the email "
+"address supplied by the prospect, enter sender@simpleform.wcom."
+msgstr ""
+
+#: simple_form_simple_form_email_subject.html:1
+msgid "The subject used by emails comming from your simple form."
+msgstr ""
+
+#: simple_form_simple_form_email_to.html:1
+msgid ""
+"The email address where you like to receive message from your simple form."
+msgstr ""
+
+#: simple_form_simple_form_title.html:1
+msgid "Enter here the title of your simple form."
+msgstr ""
+
+#: simple_form_simple_form_type.html:1
+msgid ""
+"Choose the type of your form. The personal form consists of the following "
+"fields: Name, email address, homepage and message. The business form "
+"consists of these fields: First name, last name, address, location, phone, "
+"email, message and a check box that indicates whether the prospect likes to "
+"be called back or not."
+msgstr ""
+
+#: simple_page_simple_page_content.html:1
+msgid ""
+"Enter here the contents for your simple page. HTML and all the other stuff "
+"allowed."
+msgstr ""
+
+#: simple_page_simple_page_meta_description.html:1
+msgid "Allows to define a custom meta description for this document."
+msgstr ""
+
+#: simple_page_simple_page_meta_keywords.html:1
+msgid ""
+"Allows to define custom meta keywords for this document. Add as many "
+"keywords as you like, separated by a comma."
+msgstr ""
+
+#: simple_page_simple_page_meta_title.html:1
+msgid ""
+"Allows to define a custom string for the title tag. The title of this simple "
+"page can be embedded using the place holder %%title."
+msgstr ""
+
+#: simple_page_simple_page_meta_use.html:1
+msgid ""
+"If you check this box, you can define custom meta tags like keywords or "
+"description."
+msgstr ""
+
+#: simple_page_simple_page_title.html:1
+msgid "Enter here the title of your simple page."
+msgstr ""
+
+#: structural_template_structural_template_content.html:1
+msgid ""
+"Enter here the contents of your structural template to use. HTML and all the "
+"other stuff allowed."
+msgstr ""
+
+#: structural_template_structural_template_description.html:1
+msgid ""
+"Use this field to enter an optional description of the purpose of this "
+"structural template."
+msgstr ""
+
+#: structural_template_structural_template_name.html:1
+msgid "Enter a descriptive name for your structural template."
+msgstr ""
+
+#: template_set_template_set_description.html:1
+msgid ""
+"You can optionally describe the purpose of this template set. May be useful "
+"when dealing with lots of different groups."
+msgstr ""
+
+#: template_set_template_set_name.html:1
+msgid ""
+"The name will be used to distinguish between the different template sets "
+"later on. A alphanumeric literal string with optional dashes is expected."
+msgstr ""
+
+#: template_template_content.html:1
+msgid "Copy and paste your HTML code in here."
+msgstr ""
+
+#: template_template_description.html:1
+msgid ""
+"You can optionally describe the purpose of this template. Writing down the "
+"names of the associated template sets and template types is a good choice "
+"not to get messed up when dealing with lots of templates."
+msgstr ""
+
+#: template_template_name.html:1
+msgid ""
+"The name will be used to distinguish between the different templates later "
+"on."
+msgstr ""
+
+#: template_template_sets.html:1
+msgid ""
+"Select the template sets where you'll like to use your template. Press CTRL "
+"(on PC) or Command (on Mac) to select or deselect multiple template sets."
+msgstr ""
+
+#: template_template_type.html:1
+msgid "The template type defines which pages the template will be used on."
+msgstr ""
+
+#: template_type_template_type_description.html:1
+msgid ""
+"You can optionally describe the purpose of this template type. May be useful "
+"when dealing with lots of different groups."
+msgstr ""
+
+#: template_type_template_type_name.html:1
+msgid ""
+"The name will be used to distinguish between the different template types "
+"later on. A alphanumeric literal string with optional dashes is expected."
+msgstr ""
+
+#: text_converter_text_converter_internal_name.html:1
+msgid ""
+"The internal name corresponds to the function name in the text converter "
+"plugin. See the docs of your text converter plugin when you're unsure what "
+"to insert here."
+msgstr ""
+
+#: text_converter_text_converter_name.html:1
+msgid ""
+"Everywhere where you can use a text converter, this name will be displayed "
+"as identifier."
+msgstr ""
+
+#: text_macro_text_macro_internal_name.html:1
+msgid ""
+"The internal name is part of the text macro's function name. See the docs of "
+"the text macro what to insert here."
+msgstr ""
+
+#: text_macro_text_macro_name.html:1
+msgid ""
+"Insert some desciptive name that allows you to identify this text macro "
+"later on."
+msgstr ""
+
+#: text_macro_text_macro_type.html:1
+msgid ""
+"Select the text macro type. It defines when the text macro will be executed. "
+"See the docs of the text macro what to insert here."
+msgstr ""
+
+#: upload_global_file_upload.html:1
+msgid "Select the file to use as global file."
+msgstr ""
+
+#: upload_global_template_upload.html:1
+msgid "Select the file to use as global template."
+msgstr ""
+
+#: upload_template_upload.html:1
+msgid "Put in here the prefixed template."
+msgstr ""
+
+#: url_url_page_url.html:1
+msgid ""
+"Enter the URL of the website where you like to redirect your visitors to. "
+"Please don't forget to enter the protocol (http:// etc.) and the full domain "
+"name."
+msgstr ""
+
+#: user_user_active.html:1
+msgid ""
+"If you remove the active bit, the user cannot log into the system anymore."
+msgstr ""
+
+#: user_user_author.html:1
+msgid ""
+"If you set the author bit, the user will be able to log into the admin "
+"interface."
+msgstr ""
+
+#: user_user_email.html:1
+msgid ""
+"Please specify the e-mail address of the user. It will be used as login "
+"credential."
+msgstr ""
+
+#: user_user_group.html:1
+msgid ""
+"Select a user group to assign certain rights like write or editing abilities "
+"to the user."
+msgstr ""
+
+#: user_user_homepage.html:1
+msgid "You may name your homepage address. Full Path with protocol prefix."
+msgstr ""
+
+#: user_user_name.html:1
+msgid "Your real or nick name."
+msgstr ""
+
+#: user_user_password.html:1
+msgid "The password has to be at least five characters long."
+msgstr ""
+
+#: login.html:10
+msgid "Welcompose Admin &ndash; Login"
+msgstr ""
+
+#: mediamanager.html:3 mediamanager_edit.html:35 mediamanager_upload.html:42
+msgid "MEDIA MANAGER"
+msgstr ""
+
+#: mediamanager.html:14 mediamanager.html:112
+msgid "myLocal"
+msgstr ""
+
+#: mediamanager.html:15 mediamanager.html:113
+msgid "myFlickr"
+msgstr ""
+
+#: mediamanager.html:16 globalfiles_select.html:88 globalfiles_select.html:98
+#: globalfiles_select.html:108 globaltemplates_select.html:81
+#: globaltemplates_select.html:90 globaltemplates_select.html:100
+#: templates_select.html:120 templates_select.html:131
+msgid "Upload"
+msgstr ""
+
+#: mediamanager.html:22
+msgid "Include following types"
+msgstr ""
+
+#: mediamanager.html:36
+msgid "Find by tags"
+msgstr ""
+
+#: mediamanager.html:46
+msgid "Find by timeframe"
+msgstr ""
+
+#: mediamanager.html:67
+msgid "Insert this image to your content"
+msgstr ""
+
+#: mediamanager.html:67
+msgid "Insert this document to your content"
+msgstr ""
+
+#: mediamanager.html:71
+msgid "Use for podcast"
+msgstr ""
+
+#: mediamanager.html:89 mediamanager.html:198
+msgid "Start"
+msgstr ""
+
+#: mediamanager.html:91 mediamanager.html:200
+msgid "Previous"
+msgstr ""
+
+#: mediamanager.html:91 mediamanager.html:200
+msgid "Next"
+msgstr ""
+
+#: mediamanager.html:94 mediamanager.html:203
+msgid "End"
+msgstr ""
+
+#: mediamanager.html:119
+msgid "Flickr user"
+msgstr ""
+
+#: mediamanager.html:124
+msgid "Load"
+msgstr ""
+
+#: mediamanager.html:135
+msgid "Find by Flickr photoset"
+msgstr ""
+
+#: mediamanager.html:150
+msgid "Find by Flickr tags"
+msgstr ""
+
+#: mediamanager.html:170
+msgid "Image sizes..."
+msgstr ""
+
+#: mediamanager.html:171
+msgid "Small (75px, square)"
+msgstr ""
+
+#: mediamanager.html:172
+msgid "Thumbnail (100px)"
+msgstr ""
+
+#: mediamanager.html:173
+msgid "Small (240px)"
+msgstr ""
+
+#: mediamanager.html:174
+msgid "Medium (500px)"
+msgstr ""
+
+#: mediamanager.html:175
+msgid "Large (1024px)"
+msgstr ""
+
+#: mediamanager_edit.html:10
+msgid "Welcompose Admin &ndash; Mediamanager &ndash; Edit Media"
+msgstr ""
+
+#: mediamanager_edit.html:35
+msgid "EDIT MEDIA"
+msgstr ""
+
+#: mediamanager_edit.html:51
+msgid "Your input was successfully updated!"
+msgstr ""
+
+#: mediamanager_media_to_podcast.html:2
+msgid "Filename"
+msgstr ""
+
+#: mediamanager_media_to_podcast.html:3
+msgid "Media type"
+msgstr ""
+
+#: mediamanager_media_to_podcast.html:3
+msgid "Media size"
+msgstr ""
+
+#: mediamanager_upload.html:10
+msgid "Welcompose Admin &ndash; Mediamanager &ndash; Upload"
+msgstr ""
+
+#: mediamanager_upload.html:37
+msgid "Please wait. Upload processing..."
+msgstr ""
+
+#: mediamanager_upload.html:42
+msgid "UPLOAD MEDIA"
+msgstr ""
+
+#: globalboxes_links_select.html:10
+msgid ""
+"Welcompose Admin &ndash; Global Boxes &ndash; Create Reference to Global Box"
+msgstr ""
+
+#: globalboxes_links_select.html:32
+msgid "GLOBAL BOXES"
+msgstr ""
+
+#: globalboxes_links_select.html:32 globalfiles_links_select.html:32
+#: globaltemplates_links_select.html:32 pages_boxes_links_select.html:34
+msgid "CREATE REFERENCE"
+msgstr ""
+
+#: globalfiles_add.html:10
+msgid "Welcompose Admin &ndash; Add Global File"
+msgstr ""
+
+#: globalfiles_add.html:50 globalfiles_add.html:54
+msgid "Add Global File"
+msgstr ""
+
+#: globalfiles_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Global File"
+msgstr ""
+
+#: globalfiles_edit.html:46 globalfiles_edit.html:50
+msgid "Edit Global File"
+msgstr ""
+
+#: globalfiles_links_select.html:10
+msgid ""
+"Welcompose Admin &ndash; Global Files &ndash; Create Reference to Global File"
+msgstr ""
+
+#: globalfiles_links_select.html:32
+msgid "GLOBAL FILES"
+msgstr ""
+
+#: globalfiles_select.html:10
+msgid "Welcompose Admin &ndash; Global Files"
+msgstr ""
+
+#: globalfiles_select.html:74 globaltemplates_select.html:69
+#: templates_select.html:94
+msgid "Available Templates"
+msgstr ""
+
+#: globalfiles_select.html:87
+msgid "File is..."
+msgstr ""
+
+#: globalfiles_select.html:89 globalfiles_select.html:99
+#: globaltemplates_select.html:82 globaltemplates_select.html:91
+#: templates_select.html:121
+msgid "Download"
+msgstr ""
+
+#: globalfiles_select.html:97
+msgid "available"
+msgstr ""
+
+#: globalfiles_select.html:97
+msgid "not available"
+msgstr ""
+
+#: globalfiles_select.html:110
+msgid "Upload Global File"
+msgstr ""
+
+#: globalfiles_select.html:131
+msgid "No global file has been created yet."
+msgstr ""
+
+#: globaltemplates_add.html:10
+msgid "Welcompose Admin &ndash; Add Global Template"
+msgstr ""
+
+#: globaltemplates_add.html:52 globaltemplates_add.html:56
+msgid "Add Global Template"
+msgstr ""
+
+#: globaltemplates_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Global Template"
+msgstr ""
+
+#: globaltemplates_edit.html:48 globaltemplates_edit.html:52
+msgid "Edit Global Template"
+msgstr ""
+
+#: globaltemplates_links_select.html:10
+msgid ""
+"Welcompose Admin &ndash; Global Templates &ndash; Create Reference to Global "
+"Template"
+msgstr ""
+
+#: globaltemplates_links_select.html:32
+msgid "GLOBAL TEMPLATES"
+msgstr ""
+
+#: globaltemplates_select.html:10
+msgid "Welcompose Admin &ndash; Global Templates"
+msgstr ""
+
+#: globaltemplates_select.html:102
+msgid "Upload Global Template"
+msgstr ""
+
+#: globaltemplates_select.html:123
+msgid "No global template has been created yet."
+msgstr ""
+
+#: pages_boxes_links_select.html:10
+msgid ""
+"Welcompose Admin &ndash; Boxes &ndash; Create Reference to Page related Boxes"
+msgstr ""
+
+#: pages_boxes_links_select.html:34
+msgid "BOXES"
+msgstr ""
+
+#: pages_boxes_links_select.html:45
+msgid "Display related boxes"
+msgstr ""
+
+#: pages_boxes_links_select_second.ajax.html:7
+msgid "Insert box reference"
+msgstr ""
+
+#: templates_add.html:10
+msgid "Welcompose Admin &ndash; Add Template"
+msgstr ""
+
+#: templates_add.html:52 templates_add.html:56
+msgid "Add Template"
+msgstr ""
+
+#: templates_add.html:74 templates_copy.html:68 templates_edit.html:74
+msgid "You have not yet created a template type!"
+msgstr ""
+
+#: templates_add.html:75 templates_edit.html:75
+msgid ""
+"To create one, go to the <a href=\"templatetypes_select.php\">template type "
+"overview page</a>."
+msgstr ""
+
+#: templates_add.html:104 templates_edit.html:104
+msgid "Internal Links"
+msgstr ""
+
+#: templates_copy.html:10
+msgid "Welcompose Admin &ndash; Duplicate Template"
+msgstr ""
+
+#: templates_copy.html:46 templates_copy.html:50
+msgid "Duplicate Template"
+msgstr ""
+
+#: templates_copy.html:69
+msgid ""
+"To create one, go to the <a href=\"templatetypes_select.php\">template type "
+"type overview page</a>."
+msgstr ""
+
+#: templates_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Template"
+msgstr ""
+
+#: templates_edit.html:52 templates_edit.html:56
+msgid "Edit Template"
+msgstr ""
+
+#: templates_edit.html:82
+msgid "You can continue editing your template."
+msgstr ""
+
+#: templates_select.html:10
+msgid "Welcompose Admin &ndash; Templates"
+msgstr ""
+
+#: templates_select.html:122
+msgid "Duplicate"
+msgstr ""
+
+#: templates_select.html:133
+msgid "Upload Template"
+msgstr ""
+
+#: templates_select.html:154
+msgid "No template has been created yet."
+msgstr ""
+
+#: templatesets_add.html:10
+msgid "Welcompose Admin &ndash; Add Template Set"
+msgstr ""
+
+#: templatesets_add.html:50
+msgid "Add Template Sets"
+msgstr ""
+
+#: templatesets_add.html:54
+msgid "Add Template Set"
+msgstr ""
+
+#: templatesets_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Template Set"
+msgstr ""
+
+#: templatesets_edit.html:46
+msgid "Edit Template Sets"
+msgstr ""
+
+#: templatesets_edit.html:50
+msgid "Edit Template Set"
+msgstr ""
+
+#: templatesets_select.html:10
+msgid "Welcompose Admin &ndash; Template Sets"
+msgstr ""
+
+#: templatesets_select.html:56
+msgid "Available Template Sets"
+msgstr ""
+
+#: templatesets_select.html:76
+msgid "No template set has been created yet."
+msgstr ""
+
+#: templatetypes_add.html:10
+msgid "Welcompose Admin &ndash; Add Template Type"
+msgstr ""
+
+#: templatetypes_add.html:50 templatetypes_add.html:54
+msgid "Add Template Type"
+msgstr ""
+
+#: templatetypes_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Template Type"
+msgstr ""
+
+#: templatetypes_edit.html:46 templatetypes_edit.html:50
+msgid "Edit Template Type"
+msgstr ""
+
+#: templatetypes_select.html:10
+msgid "Welcompose Admin &ndash; Template Types"
+msgstr ""
+
+#: templatetypes_select.html:56
+msgid "Available Template Types"
+msgstr ""
+
+#: templatetypes_select.html:82
+msgid "No template type has been created yet."
+msgstr ""
+
+#: groups_add.html:10
+msgid "Welcompose Admin &ndash; Add Group"
+msgstr ""
+
+#: groups_add.html:50 groups_add.html:54
+msgid "Add Group"
+msgstr ""
+
+#: groups_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Group"
+msgstr ""
+
+#: groups_edit.html:46 groups_edit.html:50
+msgid "Edit Group"
+msgstr ""
+
+#: groups_select.html:10
+msgid "Welcompose Admin &ndash; User Groups"
+msgstr ""
+
+#: groups_select.html:55
+msgid "Group List"
+msgstr ""
+
+#: groups_select.html:66 users_select.html:86
+msgid "Project"
+msgstr ""
+
+#: rights_add.html:10
+msgid "Welcompose Admin &ndash; Add Right"
+msgstr ""
+
+#: rights_add.html:50 rights_add.html:54
+msgid "Add Right"
+msgstr ""
+
+#: rights_edit.html:10
+msgid "Welcompose Admin &ndash; Edit Right"
+msgstr ""
+
+#: rights_edit.html:46 rights_edit.html:50
+msgid "Edit Right"
+msgstr ""
+
+#: rights_select.html:10
+msgid "Welcompose Admin &ndash; Rights"
+msgstr ""
+
+#: rights_select.html:68
+msgid "Right List"
+msgstr ""
+
+#: rights_select.html:114
+msgid "No right has been created yet."
+msgstr ""
+
+#: users_add.html:10
+msgid "Welcompose Admin &ndash; Add User"
+msgstr ""
+
+#: users_add.html:50 users_add.html:54
+msgid "Add User"
+msgstr ""
+
+#: users_add.html:72 users_edit.html:68
+msgid "You have not yet created a user group!"
+msgstr ""
+
+#: users_add.html:73 users_edit.html:69
+msgid ""
+"To create one, go to the <a href=\"groups_select.php\">user group overview "
+"page</a>."
+msgstr ""
+
+#: users_edit.html:10
+msgid "Welcompose Admin &ndash; Edit User"
+msgstr ""
+
+#: users_edit.html:46 users_edit.html:50
+msgid "Edit User"
+msgstr ""
+
+#: users_select.html:10
+msgid "Welcompose Admin &ndash; Users"
+msgstr ""
+
+#: users_select.html:60
+msgid "User Group"
+msgstr ""
+
+#: users_select.html:73
+msgid "User List"
+msgstr ""
+
+#: users_select.html:85 users_add.php:108 users_edit.php:125
+msgid "Group"
+msgstr ""
+
+#: globalfiles_add.php:116
+msgid "Add global file"
+msgstr ""
+
+#: globalfiles_edit.php:119
+msgid "Update global file"
+msgstr ""
+
+#: globaltemplates_add.php:120 globaltemplates_edit.php:131
+msgid "Please enter a valid global template name"
+msgstr ""
+
+#: globaltemplates_add.php:122 globaltemplates_edit.php:133
+msgid "A global template with the given name already exists"
+msgstr ""
+
+#: globaltemplates_add.php:136 globaltemplates_edit.php:147
+msgid "MIME Type"
+msgstr ""
+
+#: globaltemplates_add.php:140 globaltemplates_edit.php:151
+msgid "Please select a mime type"
+msgstr ""
+
+#: globaltemplates_add.php:141 globaltemplates_edit.php:152
+msgid "Selected mime type is out of range"
+msgstr ""
+
+#: globaltemplates_add.php:145 globaltemplates_edit.php:156
+msgid "Change delimiter"
+msgstr ""
+
+#: globaltemplates_add.php:149 globaltemplates_edit.php:160
+msgid "The field whether to change the delimiver accepts only 0 or 1"
+msgstr ""
+
+#: globaltemplates_add.php:153
+msgid "Add global template"
+msgstr ""
+
+#: globaltemplates_edit.php:164
+msgid "Update global template"
+msgstr ""
+
+#: templates_add.php:126 templates_copy.php:142 templates_edit.php:142
+msgid "Please select a template type"
+msgstr ""
+
+#: templates_add.php:127
+msgid "Chosen template type is out of range"
+msgstr ""
+
+#: templates_add.php:131 templates_copy.php:147 templates_edit.php:147
+msgid "Sets"
+msgstr ""
+
+#: templates_add.php:135 templates_copy.php:152 templates_edit.php:152
+msgid "Please select a template set"
+msgstr ""
+
+#: templates_add.php:145 templates_copy.php:162 templates_edit.php:162
+msgid "A template with the given name already exists"
+msgstr ""
+
+#: templates_add.php:158
+msgid "Add template"
+msgstr ""
+
+#: templates_copy.php:143
+msgid "Selected template type is out of range"
+msgstr ""
+
+#: templates_copy.php:153
+msgid "Selected template set is out of range"
+msgstr ""
+
+#: templates_copy.php:176
+msgid "Duplicate template"
+msgstr ""
+
+#: templates_edit.php:143
+msgid "Selected type is out of range"
+msgstr ""
+
+#: templates_edit.php:153
+msgid "Selected set is out of range"
+msgstr ""
+
+#: templates_edit.php:176
+msgid "Update template"
+msgstr ""
+
+#: templatesets_add.php:108 templatesets_edit.php:118
+msgid "A template set with the given name already exists"
+msgstr ""
+
+#: templatesets_add.php:117
+msgid "Add template set"
+msgstr ""
+
+#: templatesets_edit.php:128
+msgid "Edit template set"
+msgstr ""
+
+#: templatetypes_add.php:108 templatetypes_edit.php:119
+msgid "A template type with the given name already exists"
+msgstr ""
+
+#: templatetypes_add.php:117
+msgid "Add template type"
+msgstr ""
+
+#: templatetypes_edit.php:129
+msgid "Edit template type"
+msgstr ""
+
+#: groups_add.php:118 groups_edit.php:134
+msgid "A group with this name already exists"
+msgstr ""
+
+#: groups_add.php:131 groups_edit.php:147
+msgid "Selected right is out of range"
+msgstr ""
+
+#: groups_add.php:135
+msgid "Add group"
+msgstr ""
+
+#: groups_edit.php:151
+msgid "Edit group"
+msgstr ""
+
+#: rights_add.php:108 rights_edit.php:118
+msgid "A right with this name already exists"
+msgstr ""
+
+#: rights_add.php:117
+msgid "Add right"
+msgstr ""
+
+#: rights_edit.php:128
+msgid "Edit right"
+msgstr ""
+
+#: users_add.php:112 users_edit.php:129
+msgid "Please select a group"
+msgstr ""
+
+#: users_add.php:113 users_edit.php:130
+msgid "Selected group is out of range"
+msgstr ""
+
+#: users_add.php:128 users_edit.php:138 simpleformindex.class.php:187
+#: simpleformindex.class.php:386
+msgid "Please enter an e-mail address"
+msgstr ""
+
+#: users_add.php:129 users_edit.php:139 blogitem.class.php:194
+#: simpleformindex.class.php:188 simpleformindex.class.php:387
+msgid "Please enter a valid e-mail address"
+msgstr ""
+
+#: users_add.php:130 users_edit.php:140
+msgid "A user with this e-mail address already exists"
+msgstr ""
+
+#: users_add.php:138
+msgid "Please enter a password"
+msgstr ""
+
+#: users_add.php:139 users_edit.php:148
+msgid "Please enter a password with at least five characters"
+msgstr ""
+
+#: users_add.php:155 users_edit.php:164
+msgid "The field author accepts only 0 or 1"
+msgstr ""
+
+#: users_add.php:163 users_edit.php:172
+msgid "The field active accepts only 0 or 1"
+msgstr ""
+
+#: users_add.php:167
+msgid "Add user"
+msgstr ""
+
+#: users_edit.php:176
+msgid "Edit user"
+msgstr ""
+
+#: validate.js.php:64
+msgid "Only capitalized literal string"
+msgstr ""
+
+#: validate.js.php:68
+msgid "Alphanumeric string with spaces"
+msgstr ""
+
+#: validate.js.php:72 validate.js.php:80 validate.js.php:108
+msgid "Only capitalized prefixed literal string"
+msgstr ""
+
+#: validate.js.php:76 validate.js.php:135
+msgid "Field may not be empty"
+msgstr ""
+
+#: validate.js.php:84
+msgid "Literal string, CamelCase"
+msgstr ""
+
+#: validate.js.php:92
+msgid "Full URL with protocol (http:// etc.)"
+msgstr ""
+
+#: validate.js.php:96
+msgid "Alphanumeric with dots and hyphens"
+msgstr ""
+
+#: validate.js.php:100
+msgid "Alphanumeric string with slashes"
+msgstr ""
+
+#: validate.js.php:104
+msgid "Numbers only"
+msgstr ""
+
+#: validate.js.php:112 validate.js.php:116 validate.js.php:120
+msgid "Alphanumeric literal string with dashes"
+msgstr ""
+
+#: validate.js.php:127
+msgid "Invalid e-mail address"
+msgstr ""
+
+#: validate.js.php:131
+msgid "Five characters or more, no whitespace"
+msgstr ""
+
+#: blogitem.class.php:179
+msgid "Posting is not expected to be empty"
+msgstr ""
+
+#: blogitem.class.php:180
+msgid "Posting is expected to be numeric"
+msgstr ""
+
+#: blogitem.class.php:201 simpleformindex.class.php:195
+msgid "Please enter a valid website URL"
+msgstr ""
+
+#: blogitem.class.php:209
+msgid "Please enter a comment"
+msgstr ""
+
+#: blogitem.class.php:213 simpleformindex.class.php:207
+#: simpleformindex.class.php:398
+msgid "Captcha text"
+msgstr ""
+
+#: blogitem.class.php:217 simpleformindex.class.php:211
+#: simpleformindex.class.php:402
+msgid "Please enter the captcha text"
+msgstr ""
+
+#: blogitem.class.php:218 simpleformindex.class.php:212
+#: simpleformindex.class.php:403
+msgid "Invalid captcha text entered"
+msgstr ""
+
+#: blogitem.class.php:223 simpleformindex.class.php:217
+#: simpleformindex.class.php:408
+msgid "Send"
+msgstr ""
+
+#: simpleformindex.class.php:199 simpleformindex.class.php:390
+msgid "Message"
+msgstr ""
+
+#: simpleformindex.class.php:203 simpleformindex.class.php:394
+msgid "Please enter a message"
+msgstr ""
+
+#: simpleformindex.class.php:320
+msgid "Mr."
+msgstr ""
+
+#: simpleformindex.class.php:321
+msgid "Mrs."
+msgstr ""
+
+#: simpleformindex.class.php:329
+msgid "Salutation"
+msgstr ""
+
+#: simpleformindex.class.php:333
+msgid "Please select a salutation"
+msgstr ""
+
+#: simpleformindex.class.php:334
+msgid "Salutation is out of range"
+msgstr ""
+
+#: simpleformindex.class.php:337
+msgid "First name"
+msgstr ""
+
+#: simpleformindex.class.php:341
+msgid "Please enter your first name"
+msgstr ""
+
+#: simpleformindex.class.php:344
+msgid "Last name"
+msgstr ""
+
+#: simpleformindex.class.php:348
+msgid "Please enter your last name"
+msgstr ""
+
+#: simpleformindex.class.php:351
+msgid "Address"
+msgstr ""
+
+#: simpleformindex.class.php:357
+msgid "ZIP/City"
+msgstr ""
+
+#: simpleformindex.class.php:363
+msgid "Please call me"
+msgstr ""
+
+#: simpleformindex.class.php:367
+msgid "The field call_back accepts only 0 or 1"
+msgstr ""
+
+#: simpleformindex.class.php:371
+msgid "Phone"
+msgstr ""
+
+#: simpleformindex.class.php:376
+msgid "Please enter your phone number"
+msgstr ""
+
+#: simpleformindex.class.php:378
+msgid "Please enter a valid phone number"
+msgstr ""
+
+#: helper.class.php:271
+msgid "Today"
+msgstr ""
+
+#: helper.class.php:272
+msgid "Yesterday"
+msgstr ""
+
+#: helper.class.php:273
+msgid "Two days ago"
+msgstr ""
+
+#: helper.class.php:274
+msgid "Three days ago"
+msgstr ""
+
+#: helper.class.php:275
+msgid "Four days ago"
+msgstr ""
+
+#: helper.class.php:276
+msgid "Five days ago"
+msgstr ""
+
+#: helper.class.php:277
+msgid "Six days ago"
+msgstr ""
+
+#: helper.class.php:278
+msgid "Seven days ago"
+msgstr ""
+
+#: helper.class.php:279
+msgid "This week"
+msgstr ""
+
+#: helper.class.php:280
+msgid "Last week"
+msgstr ""
+
+#: helper.class.php:281
+msgid "Two weeks ago"
+msgstr ""
+
+#: helper.class.php:282
+msgid "Three weeks ago"
+msgstr ""
+
+#: helper.class.php:283
+msgid "Four weeks ago"
+msgstr ""
+
+#: helper.class.php:284
+msgid "This month"
+msgstr ""
+
+#: helper.class.php:285
+msgid "Last month"
+msgstr ""
+
+#: helper.class.php:286
+msgid "Two months ago"
+msgstr ""
+
+#: helper.class.php:287
+msgid "Three months ago"
+msgstr ""
+
+#: helper.class.php:288
+msgid "Four months ago"
+msgstr ""
+
+#: helper.class.php:289
+msgid "Five months ago"
+msgstr ""
+
+#: helper.class.php:290
+msgid "Six months ago"
+msgstr ""
+
+#: helper.class.php:291
+msgid "Half year ago"
+msgstr ""
+
+#: helper.class.php:292
+msgid "One year ago"
+msgstr ""
+
+#: helper.class.php:293
+msgid "Two years ago"
+msgstr ""
+
+#: helper.class.php:294
+msgid "Three years ago"
+msgstr ""
+
+#: helper.class.php:295
+msgid "Four years ago"
+msgstr ""
+
+#: helper.class.php:296
+msgid "Five years ago"
+msgstr ""
