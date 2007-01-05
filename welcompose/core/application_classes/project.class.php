@@ -481,7 +481,7 @@ public function selectProjectUsingUrlName ($name_url)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool
+ *Â @return bool
  */
 public function projectExists ($id) 
 {
@@ -524,7 +524,7 @@ public function projectExists ($id)
  * name is unique.
  *
  * @throws Application_ProjectException
- * @param string Project name
+ *Â @param string Project name
  * @param int Project id
  * @return bool
  */
@@ -635,7 +635,7 @@ public function initProjectAdmin ($user)
 public function initProjectPublicArea ()
 {
 	// get user supplied project name
-	$user_supplied_name = Base_Cnc::filterRequest($_REQUEST['project'],
+	$user_supplied_name = Base_Cnc::filterRequest($_REQUEST['project_name'],
 		WCOM_REGEX_PROJECT_NAME_URL);
 		
 	// if the user supplied name is null, we need to look for the default
@@ -982,7 +982,7 @@ protected function getPodcastCategoriesFromSkeleton ()
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncRightsWithSkeleton ($project)
 {
@@ -1114,7 +1114,7 @@ protected function syncRightsWithSkeleton ($project)
  * Takes the project id as fisrt argument. Returns bool.
  *
  * @throws Application_ProjectException
- * @param int Project id
+ *Â @param int Project id
  * @return bool
  */
 protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
@@ -1247,7 +1247,7 @@ protected function syncLinksBetweenGroupsAndRightsWithSkeleton ($project)
  * @throws Application_ProjectException
  * @param int Project id
  * @param bool Drop obsolete groups
- * @return bool 
+ *Â @return bool 
  */
 protected function syncGroupsWithSkeleton ($project, $drop_obsolete = false)
 {
@@ -1806,7 +1806,7 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncPageTypesWithSkeleton ($project)
 {
@@ -1940,7 +1940,7 @@ protected function syncPageTypesWithSkeleton ($project)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncTemplateTypesWithSkeleton ($project)
 {
@@ -2074,7 +2074,7 @@ protected function syncTemplateTypesWithSkeleton ($project)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncTextMacrosWithSkeleton ($project)
 {
@@ -2205,7 +2205,7 @@ protected function syncTextMacrosWithSkeleton ($project)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncTextConvertersWithSkeleton ($project)
 {
@@ -2332,7 +2332,7 @@ protected function syncTextConvertersWithSkeleton ($project)
  *
  * @throws Application_ProjectException
  * @param int Project id
- * @return bool 
+ *Â @return bool 
  */
 protected function syncPodcastCategoriesWithSkeleton ($project)
 {
