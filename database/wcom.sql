@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 15.12.2006 11:49:09
--- Diagram Version: 170
+-- Created on: 26.12.2006 15:15:41
+-- Diagram Version: 172
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -603,7 +603,7 @@ CREATE TABLE `content_pages` (
   INDEX `image_small`(`image_small`),
   INDEX `image_medium`(`image_medium`),
   INDEX `image_big`(`image_big`),
-  UNIQUE INDEX `name_url`(`name_url`),
+  UNIQUE INDEX `name_url`(`project`, `name_url`),
   CONSTRAINT `content_pages.type2content_page_types.id` FOREIGN KEY (`type`)
     REFERENCES `content_page_types`(`id`)
     ON DELETE CASCADE
