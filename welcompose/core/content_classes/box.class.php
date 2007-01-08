@@ -243,6 +243,68 @@ public function selectBox ($id)
 }
 
 /**
+ * Selects box unsing its page and name. Takes the page id as
+ * first argument, the box name as second argument. Returns
+ * array.
+ *
+ * @throws Content_BoxException
+ * @param int Page id
+ * @param string Page name
+ * @return array
+ */
+public function selectBoxUsingName ($page, $name)
+{
+	// access check
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
+	// arg check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_BoxException('Input for parameter page has to be a non-empty numeric value');
+	}
+	if (empty($name) || !is_scalar($name)) {
+		throw new Content_BoxException('Input for parameter name has to be a non-empty scalar value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`id`
+		FROM
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
+		WHERE
+			`content_boxes`.`name` = :name
+		  AND
+			`content_boxes`.`page` = :page
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'name' => $name,
+		'page' => (int)$page
+	);
+	
+	// get box id
+	$box_id = $this->base->db->select($sql, 'field', $bind_params);
+	
+	// if no box could be found, fail silent
+	if (empty($box_id)) {
+		return array();
+	}
+	
+	// test if box belongs tu current user/project
+	if (!$this->boxBelongsToCurrentUser($box_id)) {
+		throw new Content_BoxException('Requested box does not belong to current user or project');
+	}
+	
+	// return box using self::selectBox()
+	return $this->selectBox($box_id);
+}
+
+/**
  * Method to select one or more boxes. Takes key=>value array
  * with select params as first argument. Returns array.
  * 
@@ -422,7 +484,7 @@ public function countBoxes ($params = array())
  * </code>
  *
  * @throws Content_BoxException
- * @param string Box name
+ *Â @param string Box name
  * @param array Page id and box id
  * @return bool
  */
