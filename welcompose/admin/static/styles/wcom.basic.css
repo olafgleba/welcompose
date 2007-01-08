@@ -389,7 +389,7 @@ width: 710px;
 
 .act {
 display: block; 
-width: auto;
+width: 690px;
 }
 .actnav {
 display: block;
@@ -407,7 +407,7 @@ display: inline;
 position: relative;
 display: block;
 float: left;
-padding: 1px 20px 2px 19px;
+padding: 1px 12px 2px 19px;
 text-decoration: none;
 }
 .actnav a:link, .actnav a:visited {
