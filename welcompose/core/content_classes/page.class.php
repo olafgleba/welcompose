@@ -768,7 +768,7 @@ public function initPageContents ($page)
  * is unique.
  *
  * @throws Content_PagetypeException
- * @param string Page name
+ * @param string Page name
  * @param int Page id
  * @return bool
  */
@@ -953,7 +953,7 @@ public function setIndexPage ($page)
  * @throws Content_PageException
  * @param int Page id
  * @param bool Protect flag
- * @return bool
+ * @return bool
  */
 public function checkAccess ($page, $protect_flag)
 {
@@ -1103,6 +1103,82 @@ public function pageExists ($id)
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Returns path from root to target node. Takes the id of the target
+ * node as first argument. Returns id.
+ *
+ * @throws Content_PageException
+ * @param int Page id
+ * @return array
+ */
+public function selectPath ($target)
+{
+	// access check
+	if (!wcom_check_access('Content', 'Page', 'Use')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($target) || !is_numeric($target)) {
+		throw new Content_PageException('Input for parameter target is not numeric');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			`content_pages`.`id` AS `id`,
+			`content_pages`.`project` AS `project`,
+			`content_nodes`.`navigation` AS `navigation`,
+			`content_nodes`.`root_node` AS `root_node`,
+			`content_nodes`.`parent` AS `parent`,
+			`content_nodes`.`lft` AS `lft`,
+			`content_nodes`.`rgt` AS `rgt`,
+			`content_nodes`.`level` AS `level`,
+			`content_nodes`.`sorting` AS `sorting`,
+			`content_pages`.`type` AS `type`,
+			`content_pages`.`template_set` AS `template_set`,
+			`content_pages`.`name` AS `name`,
+			`content_pages`.`name_url` AS `name_url`,
+			`content_pages`.`url` AS `url`,
+			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`index_page` AS `index_page`,
+			`content_page_types`.`name` AS `page_type_name`,
+			`content_page_types`.`internal_name` AS `page_type_internal_name`
+		FROM
+			".WCOM_DB_CONTENT_NODES." `content_nodes`,
+			".WCOM_DB_CONTENT_NODES." `content_nodes_alias`
+		JOIN
+			`content_pages`
+		  ON
+			`content_nodes_alias`.`id` = `content_pages`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		  ON
+			`content_pages`.`type` = `content_page_types`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+		  AND
+			`content_nodes`.`lft` BETWEEN `content_nodes_alias`.`lft` AND `content_nodes_alias`.`rgt`
+		  AND
+			`content_nodes`.`id` = :id
+		  AND
+			`content_nodes_alias`.`navigation` = `content_nodes`.`navigation`
+		  AND
+			`content_nodes_alias`.`root_node` = `content_nodes`.`root_node`
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT,
+		'id' => (int)$target
+	);
+	
+	// add sorting
+	$sql .= " ORDER BY `content_nodes`.`sorting`, `content_nodes`.`lft` ";
+	
+	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
 // end of class
