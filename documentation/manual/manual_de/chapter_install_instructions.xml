@@ -240,9 +240,9 @@
 					Nach dem Entpacken finden Sie einen Ordner mit dem Namen
 					<filename>welcompose</filename> auf der Festplatte.
 					Dort drin sind die beiden verschiedenen Installer Packages
-					enthalten. Die Datei <filename>installer-zlib.php</filename>
+					enthalten. Die Datei <filename>install-zlib.php</filename>
 					ist der komprimierte Package Installer, die Datei
-					<filename>installer.php</filename> ist der unkomprimierte
+					<filename>install.php</filename> ist der unkomprimierte
 					Package Installer. Verwenden Sie nun ein FTP-Programm
 					(oder eine ähnliche Software), um den gewünschten Installer
 					auf Ihren Webserver zu verschieben.
@@ -316,9 +316,9 @@
 				<para>
 					Rufen Sie nun den Package Installer mit dem Webbrowser auf,
 					indem Sie die Adresse zur 
-					<filename>installer-zlib.php</filename> (für den
+					<filename>install-zlib.php</filename> (für den
 					komprimierten Installer) oder zur
-					<filename>installer.php</filename> (für den unkomprimierten
+					<filename>install.php</filename> (für den unkomprimierten
 					Installer) in die Adresszeile Ihres Browsers eingeben. Es
 					sollte nun ein Formular mit der Überschrift
 					<emphasis>Package Installation</emphasis> erscheinen.
@@ -331,8 +331,8 @@
 					uncompressed install package.</computeroutput>, dann verfügt
 					Ihr Webserver nicht über die zlib-Erweiterung und kann das
 					Installer Package nicht lesen. Entfernen Sie die
-					<filename>installer-zlib.php</filename> und ersetzen Sie sie
-					durch die Datei <filename>installer.php</filename>, bevor
+					<filename>install-zlib.php</filename> und ersetzen Sie sie
+					durch die Datei <filename>install.php</filename>, bevor
 					Sie den Package Installer wieder aufrufen. Sie verwenden
 					dann den unkomprimierten Package Installer.
 				</para>

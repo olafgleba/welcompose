@@ -41,7 +41,7 @@
 			Der grosse Unterschied besteht in der Verknüpfung der einzelnen
 			Seiten mit den Vorlagen. Diese ist sehr flexibel gestaltet,
 			damit man für jede Seite andere Vorlagen definieren kann, wenn
-			man dies benötigt. Man kann es sogar soweit treiben, mehrere
+			man dies benötigt. Man kann sogar soweit gehen, mehrere
 			Vorlagen für ein und dieselbe Seite anzulegen, die dann per
 			Knopfdruck gewechselt werden. Gesteuert wird dieses Verhalten
 			über zwei Eigenschaften:
@@ -49,7 +49,7 @@
 		
 		<variablelist>
 			<varlistentry>
-				<term>Template Types (Vorlagen-Typen)</term>
+				<term><emphasis role="strong">Vorlagen-Typen</emphasis></term>
 				<listitem>
 					<para>
 						Mit den Vorlagen-Typen wird gesteuert, welche Vorlage
@@ -58,12 +58,12 @@
 						Kontakt-Formular dazu benutzt wird, ein Kontakt-Formular
 						anzuzeigen und nicht etwa der Anzeige einer normalen
 						Inhaltsseite dient, die nicht ein Kontaktformular
-						sondern ein Impressum darstellen soll.
+						sondern bspw. ein Impressum darstellen soll.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>Template Sets (Vorlagen-Sets)</term>
+				<term><emphasis role="strong">Vorlagen-Sets</emphasis></term>
 				<listitem>
 					<para>
 						Vorlagen-Sets dienen dazu, eine Reihe von Vorlagen
@@ -79,20 +79,25 @@
 		
 		<para>
 			Ein Beispiel dürfte Licht ins abstrakte Dunkel bringen: Ein
-			Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt
-			werden. Also wird eine Vorlage
-			<userinput>Kontaktformular Konferenzrückfragen</userinput> angelegt.
-			Damit Welcompose weiss, dass das <userinput>Kontaktformular
-			Konferenzrückfragen</userinput> eine Vorlage für ein Kontaktformular
+			Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt werden.
+			Angenommen wird, das bereits ein Vorlagen-Set mit Namen <emphasis>Konferenz</emphasis>
+			und eine inhaltliche Seite mit Seiten-Typ <emphasis>WCOM_SIMPLE_FORM</emphasis>
+			und Namen <emphasis>Konferenzrückfragen</emphasis> existiert die dem o.g.
+			Vorlagen-Set zugeordnet ist.
+		</para>
+			
+		<para>
+			Nun wollen wir diese inhaltliche Seite mit einer Vorlage verknüpfen.
+			Hierzu legen wir eine Vorlage mit Namen <userinput>Kontaktformular Konferenzrückfragen</userinput> an.
+			Damit Welcompose weiss, dass diese eine Vorlage für ein Kontaktformular
 			ist, muss ihr der passende Vorlagen-Typ
-			<code>simple_form_index</code> zugeordnet werden. Da mehrere
-			Vorlagen mit demselben Vorlagen-Typ <code>simple_form_index</code>
-			existieren, muss Welcompose noch gesagt werden, welche von den
-			Formular-Vorlagen es für das
-			<userinput>Kontaktformular Konferenzrückfragen</userinput> benutzen
-			soll. Dazu wird das Kontaktformular dem Vorlagen-Set 
-			<userinput>Konferenz</userinput> zugeordnet und dieses wiederum
-			der Seite <userinput>Konferenzrückfragen</userinput>.
+			<guimenuitem>simple_form_index</guimenuitem> zugeordnet werden. Und da es u.U. mehrere
+			Vorlagen mit dem gleichen Vorlagen-Typ <emphasis>simple_form_index</emphasis>
+			geben kann, muss Welcompose noch gesagt werden, welche von diesen
+			Vorlagen es für unsere Vorlage <emphasis>Kontaktformular Konferenzrückfragen</emphasis> benutzen
+			soll. Dazu wird dieser Vorlage das gleiche Vorlagen-Set 
+			<emphasis>Konferenz</emphasis> zugeordnet, das wir unserer inhaltlichen Seite
+			zugewiesen haben.
 		</para>
 		
 		<note>
@@ -103,15 +108,14 @@
 		</note>
 		
 		<para>
-			Wenn jetzt ein Besucher das Kontaktformular für die
-			Konferenzrückfragen aufruft, weiss Welcompose, dass es eine Vorlage des
-			Typs <code>simple_form_index</code> braucht, denn schliesslich
-			handelt sich um ein Formular. Und da das Vorlagen-Set
-			<userinput>Konferenz</userinput> mit der Seite verknüpft ist,
+			Wenn jetzt ein Besucher das Formular <emphasis>Konferenzrückfragen</emphasis> aufruft,
+			weiss Welcompose, dass es eine Vorlage des Typs <emphasis>simple_form_index</emphasis>
+			braucht, denn schliesslich handelt sich um ein Formular. Und da das Vorlagen-Set
+			<emphasis>Konferenz</emphasis> mit der Seite verknüpft ist,
 			weiss Welcompose, dass es aus diesem Vorlagen-Set die Vorlage mit dem
-			Typ <code>simple_form_index</code> auslesen muss und gelangt
-			zur Vorlage mit dem Namen <userinput>Kontaktformular
-			Konferenzrückfragen</userinput> &ndash; et voilà, die Seite wird
+			Typ <emphasis>simple_form_index</emphasis> auslesen muss und gelangt
+			zur Vorlage mit dem Namen <emphasis>Kontaktformular
+			Konferenzrückfragen</emphasis> &ndash; et voilà, die Seite wird
 			angezeigt.
 		</para>
 		

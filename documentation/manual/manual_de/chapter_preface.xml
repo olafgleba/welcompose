@@ -3,40 +3,36 @@
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <chapter id="preface">
 	<title>Einführung</title>
-	
-	<sect1 id="preface.welcompose">
-		<title>Welcompose</title>
 		
-			<sect2 id="preface.whatis">
-				<title>Was ist Welcompose?</title>
-		
-				<para>
-					Welcompose ist ein modernes Web 2.0 Content Management System, das durch seine Fokussierung auf Webstandards
-					hervorragend zur Umsetzung kleinerer und mittlerer barrierefreier Webpräsenzen (Webseiten, Blogs) geeignet ist.
-					Flexibilität und Modalität in der Erstellung und Pflege von Inhalten, ein versiertes Sicherheitskonzept sowie
-					eine einfache Bedienung gewährleisten die optimale Umsetzung Ihrer Anforderungen.  		
-				</para>
+	<sect1 id="preface.whatis">
+		<title>Was ist Welcompose?</title>
 
-			</sect2>
+		<para>
+			Welcompose ist ein modernes Web 2.0 Content Management System, das durch seine Fokussierung auf Webstandards
+			hervorragend zur Umsetzung kleinerer und mittlerer barrierefreier Webpräsenzen (Webseiten, Blogs) geeignet ist.
+			Flexibilität und Modalität in der Erstellung und Pflege von Inhalten, ein versiertes Sicherheitskonzept sowie
+			eine einfache Bedienung gewährleisten die optimale Umsetzung Ihrer Anforderungen.  		
+		</para>
+
+	</sect1>
 		
-			<sect2 id="preface.abililities">
-				<title>Was kann Welcompose?</title>
-			
-				<para> 
-					Welcompose unterstützt sich bei dem, was von einem Content Management System erwartet wird: Der Erstellung, Pflege
-					und Verwaltung Ihrer Inhalte. Durch die stringente Trennung von Ausgabe und Inhalten durch Vorlagen (link) greift
-					das System zu keinen Zeitpunkt in die Ausgabe Ihrer Inhalte ein. Wie Ihre Webpräsenz aussieht, entscheiden
-					Sie ganz allein. 
-				</para>
-				
-				<para> 
-					Welcompose ist unter anderen Multiprojekt- und Multiuser-fähig (<emphasis>multitenant</emphasis> Architektur),
-					hat eine dezidierte Rechteverwaltung, basiert auf aktuellen Technologien und ermöglicht vielfältige Arten
-					der Inhaltspräsentation (Webseite, Blogs, Podcast-Blogs). Dank dieser Flexibilität eignet sich Welcompose
-					zur Umsetzung Ihrer Firmen-Webseite, Ihres persönlichen Webblogs oder als Service-Plattform für Ihre Angestellten 
-					und/oder Ihren Kunden.        
-				</para>
-			</sect2>
+	<sect1 id="preface.abililities">
+		<title>Was kann Welcompose?</title>
+	
+		<para> 
+			Welcompose unterstützt Sie bei dem, was von einem Content Management System erwartet wird: Der Erstellung, Pflege
+			und Verwaltung Ihrer Inhalte. Durch die strikte Trennung von Ausgabe und Inhalten durch Vorlagen (<xref linkend="templating"/>) greift
+			das System zu keinen Zeitpunkt in die Ausgabe Ihrer Inhalte ein. Wie Ihre Webpräsenz aussieht, entscheiden
+			Sie ganz allein. 
+		</para>
+		
+		<para> 
+			Welcompose ist unter anderen Multiprojekt- und Multiuser-fähig (<emphasis>multitenant</emphasis> Architektur),
+			hat eine dezidierte Rechteverwaltung, basiert auf aktuellen Technologien und ermöglicht vielfältige Arten
+			der Inhaltspräsentation (Webseite, Blogs, Podcast-Blogs). Dank dieser Flexibilität eignet sich Welcompose
+			zur Umsetzung Ihrer Firmen-Webseite, Ihres persönlichen Webblogs oder als Service-Plattform für Ihre Angestellten 
+			und/oder Ihren Kunden.        
+		</para>
 	</sect1>
 	
 	<sect1 id="preface.organisation">
@@ -191,7 +187,7 @@
 					<term><userinput>Eingabe des Benutzers</userinput></term>
 					<listitem>
 						<para>
-							Eingaben des Benutzers.  
+							Eingaben, die vom Benutzer vorgenommen werden müssen.  
 						</para>
 					</listitem>
 				</varlistentry>
@@ -222,7 +218,7 @@
 					<term><function>Funktion</function></term>
 					<listitem>
 						<para>
-							funktionen.
+							Befehle, Funktionen aus diversen Programmsprachen.
 						</para>
 					</listitem>
 				</varlistentry>

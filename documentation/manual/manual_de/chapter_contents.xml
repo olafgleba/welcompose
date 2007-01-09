@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="contents">
+	<title>Inhalte</title>
+	
+	<sect1 id="contents.data.structure">
+		<title>Wo werden die Inhalte gespeichert?</title>
+	
+		<para/>
+	</sect1>
+
+	<sect1 id="contents.data.backup">
+		<title>Wie sichere ich meine Daten?</title>
+	
+		<para/>
+	</sect1>
+	
+	<sect1 id="contents.content">
+		<title>Text-Konverter</title>
+	
+		<para/>
+		
+		<sect2 id="contents.content.textconverter.whatis">
+			<title>Was ist ein Text-Konverter?</title>
+	
+			<para/>
+		</sect2>
+		
+		<sect2 id="contents.content.textconverter.abilitities">
+			<title>Einsatz der Text-Konverter</title>
+	
+			<para/>
+		</sect2>
+	</sect1>
+	
+	<sect1 id="contents.field_validation">
+		<title>Echzeit Validierung</title>
+	
+		<para/>
+	</sect1>
+	
+</chapter>

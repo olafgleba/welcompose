@@ -4,54 +4,315 @@ margin: 0;
 padding: 0;
 }
 body {
-font: 95%/140% Verdana, Arial, Helvetica, sans-serif;
+font: 84%/140% Arial, Verdana, Helvetica, sans-serif;
+color: #333;
+background: #d9d9d9 url(../images/bg_body.png);
 }
 .navheader {
+width: 690px;
+height: 85px;
+margin: 0 auto;
+padding: 40px;
 color: #666;
 font-family: Arial, Helvetica, sans-serif;
-background: #fafafa;
+background: #fff url(../images/bg_header_manual.png) 0 0 no-repeat;
 padding-bottom: 5px;
 border-bottom: 1px solid #ccc;
 }
 .navfooter {
+width: 690px;
+margin: 0 auto;
+padding: 40px;
 color: #666;
 font-family: Arial, Helvetica, sans-serif;
-background: #fafafa;
+background: #fff url(../images/bg_header_manual.png) 0 0 no-repeat;
 padding-top: 5px;
 border-top: 1px solid #ccc;
 }
 
-.book, .chapter, .sect1, .sect2, .sect3, .appendix {
+.book, .chapter, .sect1, .appendix {
 margin: 0 auto;
-max-width: 700px;
+padding: 1px 40px 60px 40px;
+max-width: 690px;
+background-color: #fff;
 }
+
+.navheader {
+padding-top: 17px;
+margin-top: 10px;
+}
+
+td.navnext {
+text-align: right;
+}
+th {
+text-align: left;
+}
+th.navobjecttitle {
+text-align: center;
+color: #fff;
+}
+td.navprevious, td.navnext,
+td.navfooterprevious, td.navfooternext {
+width: 7%;
+padding: 0;
+}
+td.navfooterprevious, td.navfooternext {
+width: 40%;
+padding: 0;
+}
+td.navfootercenter, td.navfooterseccenter {
+width: 20%;
+padding: 0;
+text-align: center;
+}
+td.navfootersecnext {
+text-align: right;
+}
+hr {
+border: 0;
+}
+
+td.navnext a:link, td.navnext a:visited,
+td.navfooternext a:link, td.navfooternext a:visited {
+display: block;
+background: transparent url(../images/next.png) right center no-repeat;
+height: 55px;
+}
+td.navprevious a:link, td.navprevious a:visited,
+td.navfooterprevious a:link, td.navfooterprevious a:visited {
+display: block;
+background: transparent url(../images/previous.png) left center no-repeat;
+height: 55px;
+}
+
+
+
+span.sect1, span.sect2, span.sect3, span.chapter, span.appendix {
+padding: 0;
+margin: 0;
+}
+
+.chapter .sect1, .appendix .sect1 {
+padding: 0;
+}
+
+p {
+padding: 0;	
+}
+.toc p,
+.list-of-figures p,
+.list-of-examples p {
+margin-top: 30px;	
+}
+
+
 h1, h2, h3 {
-font-family: Arial,Arial, Helvetica, sans-serif;
+font-family: Arial, Verdana, Helvetica, sans-serif;
 }
 .title {
-color: #00AE2C;
+color: #333;
 height: auto;
 margin: 40px 0 15px 0;
 }
 .subtitle {
 color: #666;
 }
+ul {
+padding: 0;
+margin: 0;
+}
 li p {
 margin: 2px 0;
+padding-left: 0;
 }
 
-.tip table {
-border: 1px solid #090;
-background: #EDF9F0;
-margin: 10px 0;
+
+a {
+text-decoration: none;
+cursor: pointer;
 }
-.note table {
-border: 1px solid #009;
-background: #EDEDF8;
-margin: 10px 0;
+a:link, a:visited {
+color: #00AE2C;
+background: transparent;
 }
+a:hover {
+color: #fff;
+background: #0c3;
+}
+a:active, a:focus {
+color: #fff;
+background: #0c3;
+}
+
+span.chapter a:link, span.chapter a:visited {
+color: #00AE2C;
+font-weight: bold;
+background: transparent;
+}
+span.chapter a:hover {
+color: #fff;
+background: #0c3;
+}
+span.chapter a:active, span.chapter a:focus {
+color: #fff;
+background: #0c3;
+}
+
+/* olaf, 12.12 */
+
+pre {
+font: 100%/140% Arial;
+border: 1px solid #ccc;
+background: #f8f8f8;
+padding: 10px;
+color: #000;
+}
+code.function {
+font: 105% "Courier New", mono;
+color: #000;
+padding: 0 4px 0 4px;
+background: #fff;
+border: 1px solid #ebebeb;
+}
+code.code {
+font: 100% Arial;
+font-weight: bold;
+color: #090;
+}
+code.filename {
+font: 100% Arial;
+color: #333;
+font-weight: bold;
+}
+code.computeroutput {
+font: 100% Arial;
+color: #333;
+font-style: italic;
+}
+code.computeroutput:before {
+content: '"';
+}
+code.computeroutput:after {
+content: '"';
+}
+
+dd p {
+margin: 0 0 15px 0;
+}
+dd {
+margin-left: 25px;
+padding-bottom: 6px;
+}
+
+p.title, h4.title {
+font-size: 110%;
+}
+
+
+div.figure p.title b {
+font-size: 90%;
+color: #333;
+font-weight: normal;
+}
+
+
+ul {
+padding-left: 20px;
+list-style-image: url(../images/list.png);
+}
+
+span.term {
+font-weight: normal;
+color: #333;
+}
+span.term span.emphasis {
+font-weight: normal;
+}
+span.term code.code {
+font: 100% Arial;
+font-weight: bold;
+color: #666;
+padding: 0 4px 0 4px;
+background: #fff;
+border: 1px solid #ebebeb;
+}
+span.term a {
+font-weight: normal;
+}
+
+
+span.guibutton,
+span.guilabel,
+span.guimenu,
+span.guisubmenu,
+span.guimenuitem,
+span.application,
+.userinput code {
+color: #333;
+font-weight: bold;
+}
+.userinput code {
+font-family: Arial, sans-serif;
+}
+span.guibutton {
+/*content: url(../images/guibutton.png);*//
+background: red url(../images/guibutton.png) left center no-repeat;
+padding-left: 22px;
+border: 1px solid;
+}
+span.guilabel:before {
+content: url(../images/guilabel.png);
+}
+span.guimenuitem:before {
+content: url(../images/guimenuitem.png);
+}
+span.guimenu:before {
+content: url(../images/guimenu.png);
+}
+span.guisubmenu:before {
+content: url(../images/guisubmenu.png);
+}
+span.application:after {
+content: '®';
+}
+.userinput code:before {
+content: url(../images/userinput.png);
+}
+
+
+span.markup {
+color: #000;
+padding: 0 4px 2px 4px;
+background: #f8f8f8;
+border: 1px solid #ebebeb;
+}
+.command {
+font: 102% "Courier New", mono;
+font-weight: normal;
+color: #000;
+padding: 0 4px 0 4px;
+background: #f8f8f8;
+border: 1px solid #ebebeb;
+}
+
+.tip table,
+.note table,
 .warning table {
-border: 1px solid #c00;
-background: #FBEDED;
 margin: 10px 0;
+width: 100%;
+padding: 2px 2px 0 2px;
+border: 1px solid #ebebeb;
+background: #f7f7f7;
 }
+.tip table td,
+.note table td,
+.warning table td {
+padding: 2px 3px 0 3px;
+}
+.tip table td p,
+.note table td p,
+.warning table td p {
+margin-top: 0;
+}
+/* eof olaf */

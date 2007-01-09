@@ -12,7 +12,7 @@
 				
 			<variablelist>
 				<varlistentry>
-					<term>blog_archive_month</term>
+					<term><emphasis>blog_archive_month</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für monatliches Blog-Archiv.
@@ -20,7 +20,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_archive_year</term>
+					<term><emphasis>blog_archive_year</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für jährliches Blog-Archiv.
@@ -28,7 +28,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_atom10</term>
+					<term><emphasis>blog_atom10</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für ATOM-1.0-Feed vom Blog.
@@ -36,7 +36,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_index</term>
+					<term><emphasis>blog_index</emphasis></term>
 					<listitem>
 						<para>
 							Hauptvorlage für Blogs. Zeigt Übersicht über die
@@ -45,7 +45,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_item</term>
+					<term><emphasis>blog_item</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage zur Anzeige eines einzelnen Blog Postings
@@ -54,7 +54,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_podcast_itms</term>
+					<term><emphasis>blog_podcast_itms</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für Podcast-Feed nach iTMS-Spezifikation
@@ -69,7 +69,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>blog_rss20</term>
+					<term><emphasis>blog_rss20</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für RSS-2.0-Feed vom Blog.
@@ -84,7 +84,7 @@
 				
 			<variablelist>
 				<varlistentry>
-					<term>simple_form_business_form_mail</term>
+					<term><emphasis>simple_form_business_form_mail</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für E-Mails, die beim Ausfüllen eines
@@ -93,7 +93,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>simple_form_index</term>
+					<term><emphasis>simple_form_index</emphasis></term>
 					<listitem>
 						<para>
 							Hauptvorlage für Formulare. Zeigt das eigentliche
@@ -102,7 +102,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>simple_form_personal_form_mail</term>
+					<term><emphasis>simple_form_personal_form_mail</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für E-Mails, die beim Ausfüllen eines
@@ -118,7 +118,7 @@
 				
 			<variablelist>
 				<varlistentry>
-					<term>simple_page_index</term>
+					<term><emphasis>simple_page_index</emphasis></term>
 					<listitem>
 						<para>
 							Hauptvorlage für Simple Page. Zeigt die eigentliche
