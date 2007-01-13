@@ -158,7 +158,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($global_box['id'], null),
 		'name' => Base_Cnc::ifsetor($global_box['name'], null),
-		'content' => Base_Cnc::ifsetor($global_box['content'], null),
+		'content' => Base_Cnc::ifsetor($global_box['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($global_box['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($global_box['apply_macros'], null)
 	));
