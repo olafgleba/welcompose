@@ -1,5 +1,12 @@
 BUILD_NUMBER=`date "+%Y%m%d%H%M"` 
 
+# import repository url
+if [ -z "$1" ] ; then
+	echo "No URL to Welcompose repository specified."
+	exit 1
+fi
+WELCOMPOSE_REPOS="$1"
+
 # test if php is available
 if [ -z "`which php`" ] ; then
 	echo "PHP executable not found"
@@ -17,7 +24,7 @@ rm -rf wcom-trunk
 mkdir "welcompose-$BUILD_NUMBER"
 
 # export trunk
-svn export https://www.dotthink.net/svn/Welcompose/trunk wcom-trunk
+svn export "$WELCOMPOSE_REPOS" wcom-trunk
 
 # cd to wcom trunk
 cd wcom-trunk
