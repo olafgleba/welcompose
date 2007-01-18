@@ -61,7 +61,7 @@ class Display_BlogPodcastItms implements Display {
  * with the information about the current page as second
  * argument.
  * 
- * @throws Display_BlogPodcastItmsException
+ * @throws Display_BlogPodcastItmsException
  * @param array Project information
  * @param array Page information
  */

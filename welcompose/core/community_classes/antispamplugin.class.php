@@ -398,7 +398,7 @@ public function countAntiSpamPlugins ($params = array())
  * anti spam plugin name is unique.
  *
  * @throws Community_AntiSpamPluginException
- * @param string Anti spam plugin name
+ * @param string Anti spam plugin name
  * @param int Anti spam plugin id
  * @return bool
  */

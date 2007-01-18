@@ -411,7 +411,7 @@ public function countStructuralTemplates ($params = array())
  * Returns boolean true if structural template name is unique.
  *
  * @throws Content_StructuralTemplateException
- * @param string Structural template name
+ * @param string Structural template name
  * @param int Structural template id
  * @return bool
  */

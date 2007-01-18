@@ -657,7 +657,7 @@ public function templateBelongsToCurrentUser ($template)
  * name is unique.
  *
  * @throws Templating_TemplateException
- * @param string Template name
+ * @param string Template name
  * @param int Template id
  * @return bool
  */

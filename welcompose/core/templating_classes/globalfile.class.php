@@ -391,7 +391,7 @@ public function countGlobalFiles ($params = array())
  * as first argument, the path to the uploaded file as second argument. Returns
  * the new name on disk (uniqid + real name).
  *
- * @throws Templating_GlobalFileException
+ * @throws Templating_GlobalFileException
  * @param string File name
  * @param string Path to uploaded file
  * @return string File name on disk
@@ -617,7 +617,7 @@ public function globalFileBelongsToCurrentUser ($global_file)
  * global file name is unique.
  *
  * @throws Templating_GlobalFileException
- * @param string Global file name
+ * @param string Global file name
  * @param int Global file id
  * @return bool
  */

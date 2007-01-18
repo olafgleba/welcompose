@@ -89,7 +89,7 @@ class Display_BlogItem implements Display {
  * with the information about the current page as second
  * argument.
  * 
- * @throws Display_BlogItemException
+ * @throws Display_BlogItemException
  * @param array Project information
  * @param array Page information
  */

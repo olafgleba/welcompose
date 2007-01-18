@@ -502,7 +502,7 @@ public function createNodeBelow ($navigation, $reference)
  * @throws Utility_NestedsetException
  * @param int Navigation Id
  * @param int Node id
- * @return bool
+ * @return bool
  */
 public function moveUpAcrossTrees ($navigation, $node_id)
 {
@@ -2305,7 +2305,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
  * the id of the node to move as second argument. Returns boolean true.
  *
  * @throws Utility_NestedsetException
- * @param int Navigation id
+ * @param int Navigation id
  * @param int Node id
  * @return bool
  */
@@ -2722,7 +2722,7 @@ public function moveDownInTree ($navigation, $node_id)
  * @param int Navigation id
  * @param int Node id
  * @param int New navigation id
- * @return bool
+ * @return bool
  */
 public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigation)
 {
@@ -2954,7 +2954,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
  * @param int Navigation id
  * @param int Node id
  * @param int New navigation id
- * @return bool
+ * @return bool
  */
 public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_navigation)
 {
@@ -3086,9 +3086,9 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
  * amount of affected rows.
  * 
  * @throws Utility_NestedsetException
- * @param int Navigation id
- * @param int Node id
- * @return int Amount of affected rows
+ * @param int Navigation id
+ * @param int Node id
+ * @return int Amount of affected rows
  */
 public function deleteRootNode ($navigation, $node_id)
 {
@@ -3308,7 +3308,7 @@ public function deleteRootNode ($navigation, $node_id)
  * 
  * @throws Utility_NestedsetException
  * @param int Navigation id
- * @param int Node id
+ * @param int Node id
  * @return int Amount of affected rows
  */
 public function deleteNodeInTree ($navigation, $node_id)
@@ -3805,7 +3805,7 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
  * argument. Returns array with full node information.
  * 
  * @throws Utility_NestedsetException
- * @param int Navigation id
+ * @param int Navigation id
  * @param int Reference node id
  * @return array
  */
@@ -3881,7 +3881,7 @@ protected function selectSiblingAboveOneLevelHigher ($navigation, $reference)
  * @throws Utility_NestedsetException
  * @param int Navigation id
  * @param int Reference node id
- * @return array
+ * @return array
  */
 protected function selectSiblingBelow ($navigation, $reference)
 {
@@ -4109,7 +4109,7 @@ public function root_node ($node, $navigation = null)
  * id as first argument. Returns bool.
  *
  * @throws Utility_NestedsetException
- * @param int Navigation id
+ * @param int Navigation id
  * @return bool
  */
 public function testConsistency ($navigation)
@@ -4145,7 +4145,7 @@ public function testConsistency ($navigation)
  * first argument. Returns bool.
  *
  * @throws Utility_NestedsetException
- * @param array Navigation tree
+ * @param array Navigation tree
  * @return bool
  */
 protected function testSanity ($whole_tree)
@@ -4191,7 +4191,7 @@ protected function testSanity ($whole_tree)
  * Returns bool.
  *
  * @throws Utility_NestedsetException
- * @param array Navigation tree
+ * @param array Navigation tree
  * @return bool
  */
 protected function testForRootNodes ($whole_tree)
@@ -4221,7 +4221,7 @@ protected function testForRootNodes ($whole_tree)
  * bool.
  * 
  * @throws Utility_NestedsetException
- * @param array Navigation tree
+ * @param array Navigation tree
  * @return bool
  */
 protected function testNestedSets ($whole_tree)

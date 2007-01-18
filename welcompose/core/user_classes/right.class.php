@@ -408,7 +408,7 @@ public function countRights ($params = array())
  * name is unique.
  *
  * @throws User_RightException
- * @param string Right name
+ * @param string Right name
  * @param int Right id
  * @return bool
  */

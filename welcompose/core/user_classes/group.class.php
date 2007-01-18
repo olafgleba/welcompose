@@ -571,7 +571,7 @@ public function groupBelongsToCurrentUser ($group)
  * name is unique.
  *
  * @throws User_GroupException
- * @param string Group name
+ * @param string Group name
  * @param int Group id
  * @return bool
  */

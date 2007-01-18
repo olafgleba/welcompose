@@ -61,7 +61,7 @@ class Display_BlogAtom10 implements Display {
  * with the information about the current page as second
  * argument.
  * 
- * @throws Display_BlogAtom10Exception
+ * @throws Display_BlogAtom10Exception
  * @param array Project information
  * @param array Page information
  */

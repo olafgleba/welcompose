@@ -405,7 +405,7 @@ public function templateTypeBelongsToCurrentUser ($template_type)
  * template type name is unique.
  *
  * @throws Templating_TemplatetypeException
- * @param string Template type name
+ * @param string Template type name
  * @param int Template type id
  * @return bool
  */

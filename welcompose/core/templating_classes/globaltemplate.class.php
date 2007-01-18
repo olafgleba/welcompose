@@ -580,7 +580,7 @@ public function globalTemplateBelongsToCurrentUser ($global_template)
  * global template name is unique.
  *
  * @throws Templating_GlobalTemplateException
- * @param string Global template name
+ * @param string Global template name
  * @param int Global template id
  * @return bool
  */

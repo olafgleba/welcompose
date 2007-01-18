@@ -61,7 +61,7 @@ class Display_SystemLogin implements Display {
  * with the information about the current page as second
  * argument.
  * 
- * @throws Display_SystemLoginException
+ * @throws Display_SystemLoginException
  * @param array Project information
  * @param array Page information
  */

@@ -320,7 +320,7 @@ public function selectNavigations ($params = array())
  * Returns boolean true if navigation name is unique.
  *
  * @throws Content_NavigationException
- * @param string Navigation name
+ * @param string Navigation name
  * @param int Navigation id
  * @return bool
  */

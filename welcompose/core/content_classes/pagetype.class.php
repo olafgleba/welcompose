@@ -325,7 +325,7 @@ public function selectPageTypes ($params = array())
  * Returns boolean true if page type name is unique.
  *
  * @throws Content_PagetypeException
- * @param string Page type name
+ * @param string Page type name
  * @param int Page type id
  * @return bool
  */
@@ -388,7 +388,7 @@ public function testForUniqueName ($name, $id = null)
  * type name is unique.
  *
  * @throws Content_PagetypeException
- * @param string Internal page type name
+ * @param string Internal page type name
  * @param int Page type id
  * @return bool
  */

@@ -115,7 +115,7 @@ public function instance()
  * 
  * @throws Media_FlickrException
  * @param string Username
- * @return array
+ * @return array
  */
 public function peopleFindByUsername ($username)
 {
@@ -162,7 +162,7 @@ public function peopleFindByUsername ($username)
  * 
  * @throws Media_FlickrException
  * @param string User's nsid
- * @return array
+ * @return array
  */
 public function urlsGetUserPhotos ($user_id)
 {
@@ -812,7 +812,7 @@ protected function getFlickrRequestError ($response)
  * Takes the HTTP_Request object (where the cache id will be
  * extracted from) as first argument. Returns bool.
  *
- * @throws flickrClientException
+ * @throws flickrClientException
  * @param object HTTP_Request object
  * @return bool
  */

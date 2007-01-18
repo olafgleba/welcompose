@@ -377,7 +377,7 @@ public function countTextConverters ($params = array())
  * text converter name is unique.
  *
  * @throws Application_TextconverterException
- * @param string Text converter name
+ * @param string Text converter name
  * @param int Text converter id
  * @return bool
  */
@@ -439,7 +439,7 @@ public function testForUniqueName ($name, $id = null)
  * Returns boolean true if text converter name is unique.
  *
  * @throws Application_TextconverterException
- * @param string Text converter internal name
+ * @param string Text converter internal name
  * @param int Text converter id
  * @return bool
  */
@@ -501,7 +501,7 @@ public function testForUniqueInternalName ($name, $id = null)
  * @throws Application_TextconverterException
  * @param int Text converter id
  * @param string Text to convert
- * @return string Converted text
+ * @return string Converted text
  */
 public function applyTextConverter ($id, $text)
 {

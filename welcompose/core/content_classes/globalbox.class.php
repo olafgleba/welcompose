@@ -416,7 +416,7 @@ public function countGlobalBoxes ($params = array())
  * Returns boolean true if global box name is unique.
  *
  * @throws Content_GlobalBoxException
- * @param string Global box name
+ * @param string Global box name
  * @param int Global box id
  * @return bool
  */

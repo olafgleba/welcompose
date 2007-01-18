@@ -593,7 +593,7 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
  *
  * @throws User_UserException
  * @param int User id
- * @return int Amount of affected rows
+ * @return int Amount of affected rows
  */
 public function detachUserFromProject ($user)
 {
@@ -628,7 +628,7 @@ public function detachUserFromProject ($user)
  * address is unique.
  *
  * @throws User_UserException
- * @param string User's email address
+ * @param string User's email address
  * @param int User id
  * @return bool
  */
@@ -986,7 +986,7 @@ public function userIsActive ($user, $project)
  * @throws User_UserException
  * @param string Area name
  * @param string Component name
- * @param string Action name
+ * @param string Action name
  * @return bool
  */
 public function userCheckAccess($area = null, $component = null, $action = null) 

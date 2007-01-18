@@ -403,7 +403,7 @@ public function templateSetBelongsToCurrentUser ($template_set)
  * template set name is unique.
  *
  * @throws Templating_TemplatesetException
- * @param string Template set name
+ * @param string Template set name
  * @param int Template set id
  * @return bool
  */

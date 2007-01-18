@@ -372,7 +372,7 @@ public function countBlogCommentStatuses ($params = array())
  * blog comment status name is unique.
  *
  * @throws Community_BlogCommentStatusException
- * @param string Blog comment status name
+ * @param string Blog comment status name
  * @param int Blog comment status id
  * @return bool
  */

@@ -489,7 +489,7 @@ public function countObjects ($params = array())
  * as first argument, the path to the uploaded file as second argument. Returns
  * the new name on disk (uniqid + real name).
  *
- * @throws Media_ObjectException
+ * @throws Media_ObjectException
  * @param string File name
  * @param string Path to uploaded file
  * @return string File name on disk

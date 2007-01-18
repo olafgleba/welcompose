@@ -484,7 +484,7 @@ public function countBoxes ($params = array())
  * </code>
  *
  * @throws Content_BoxException
- * @param string Box name
+ * @param string Box name
  * @param array Page id and box id
  * @return bool
  */

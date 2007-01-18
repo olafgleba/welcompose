@@ -386,7 +386,7 @@ public function countBlogPodcastCategories ($params = array())
  * unique.
  *
  * @throws Content_BlogPodcastException
- * @param string Podcast category name
+ * @param string Podcast category name
  * @param array Podcast subcategory name and podcast category id
  * @return bool
  */

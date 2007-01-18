@@ -404,7 +404,7 @@ public function countTextMacros ($params = array())
  * text macro name is unique.
  *
  * @throws Application_TextmacroException
- * @param string Text macro name
+ * @param string Text macro name
  * @param int Text macro id
  * @return bool
  */
@@ -466,7 +466,7 @@ public function testForUniqueName ($name, $id = null)
  * @throws Application_TextmacroException
  * @param int Text macro id
  * @param string Text to convert
- * @return string Converted text
+ * @return string Converted text
  */
 public function applyTextMacros ($text, $stage = "pre")
 {

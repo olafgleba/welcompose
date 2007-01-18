@@ -379,7 +379,7 @@ public function countPingServices ($params = array())
  * ping service name is unique.
  *
  * @throws Application_PingserviceException
- * @param string Ping service name
+ * @param string Ping service name
  * @param int Ping service id
  * @return bool
  */
