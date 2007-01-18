@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="configuration">
+	<title>Welcompose konfigurieren</title>
+		<para>
+			xxx
+		</para>
+		
+	<sect1 id="configuration.sys_inc">
+		<title>Die Datei sys.inc.php</title>
+
+		<para>
+			Das Pfadlayout einer Rewrite Map muss nicht immer gleich sein.
+			Das heisst, dass man es den eigenen Wünschen anpassen kann,
+			solange alle Parameter irgendwo in der URL untergebracht
+			werden können. Zudem kann der Parameter project_name weggelassen
+			werden, wenn Welcompose nur ein einzelnes Projekt betreiben soll. 
+			Es verwendet dann automatisch das Standard-Projekt.  
+		</para>
+	</sect1>
+	
+	<sect1 id="configuration.defaults_inc">
+		<title>Die Datei defaults.inc.php</title>
+
+		<para>
+			Das Pfadlayout einer Rewrite Map muss nicht immer gleich sein.
+			Das heisst, dass man es den eigenen Wünschen anpassen kann,
+			solange alle Parameter irgendwo in der URL untergebracht
+			werden können. Zudem kann der Parameter project_name weggelassen
+			werden, wenn Welcompose nur ein einzelnes Projekt betreiben soll. 
+			Es verwendet dann automatisch das Standard-Projekt.  
+		</para>
+	</sect1>
+</chapter>

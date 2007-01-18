@@ -47,6 +47,7 @@
 			über zwei Eigenschaften:
 		</para>
 		
+		<anchor id="templating.page_template_types"/>
 		<variablelist>
 			<varlistentry>
 				<term><emphasis role="strong">Vorlagen-Typen</emphasis></term>

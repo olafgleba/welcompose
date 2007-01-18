@@ -6,7 +6,7 @@
 	
 	<para>
 		Nachdem es im ersten Crash-Kurs nur um eine Demo-Webseite ging, ist es
-		nun Zeit, ein erstes reales Beispiel umzusetzen: Ein Weblog.
+		nun Zeit, ein weiteres, praxisbezogenes Beispiel umzusetzen: Ein Weblog.
 	</para>
 	
 	<para>
@@ -16,12 +16,13 @@
 		Inhalte löschen, bevor Sie mit dem Crash-Kurs beginnen.
 	</para>
 	
-	<para>
-		@@@ Screenshot comes here! @@@
-	</para>
+		<figure id="crash_course_blog.view_demo_blog">
+			<title>Ausgabe: Screenshot des Demo-Blogs</title>
+			<graphic fileref="images/crash_course_blog/frontend/view_demo_blog.png"/>
+		</figure>
 	
-	<sect1 id="crash_course_blog.create_pages">
-		<title>Seiten anlegen</title>
+	<sect1 id="crash_course_blog.preparation">
+		<title>Vorbereitungen</title>
 		
 		<para>
 			Wie auch beim ersten Crash-Kurs muss zuerst ein Vorlagen-Set
@@ -33,32 +34,45 @@
 			<xref linkend="crash_course_demo.preparation"/> aus dem
 			ersten Crash-Kurs weiter.
 		</para>
+	</sect1>
+			
+			
+	<sect1 id="crash_course_blog.create_pages">
+		<title>Seiten anlegen</title>
 		
 		<para>
 			Wie man auf dem Screenshot sieht, ist die gesamte Webseite
 			wieder recht einfach aufgebaut: Es ist nur eine Navigation 
-			vorhanden. Diese besteht aus drei Seiten: Das Weblog ist gleich die
-			Startseite. Dazu kommt noch ein Formular und ein Link
+			vorhanden. Diese besteht aus drei Seiten: Der Startseite, die unser
+			eigentliches Blog repräsentiert, eine Formularseite und ein Link
 			zur Software, mit der das Weblog erstellt wurde.
 		</para>
 		
 		<para>
 			Erstellen Sie zuerst eine Navigation. Gehen Sie dazu zum Bereich
-			<guibutton>Contents</guibutton> und dann zum Unterbereich
-			<guibutton>Navigations</guibutton>. Nennen Sie die Navigation
-			wieder <userinput>Hauptnavigation</userinput>. Kehren Sie dann
-			zur Seitenübersicht zurück.
+			<guimenu>Contents</guimenu> und dann zum Unterbereich
+			<guisubmenu>Navigations</guisubmenu> (s. auch <xref linkend="crash_course_demo.create_navigation"/>).
+			 Klicken Sie auf <guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen.
+			Nennen Sie die Navigation wie im vorherigen Crash-Kurs <userinput>Hauptnavigation</userinput>.
+			Kehren Sie dann zur Seitenübersicht (<guisubmenu>Pages</guisubmenu>) zurück.
 		</para>
 		
 		<para>
 			Nun müssen die Seiten angelegt werden. Beginnen Sie mit der
 			Startseite. Klicken Sie dazu auf das Symbol zum Hinzufügen
-			einer Seite.
+			einer Seite (<guibutton>Add</guibutton>). Sie gelangen zur Eingabemaske.
 		</para>
+		
+		<figure id="crash_course_blog.create_pages.create_page_metadata">
+			<title>Neue Seite anlegen</title>
+			<graphic fileref="images/crash_course_blog/create_page_metadata.png"/>
+		</figure>
 		
 		<variablelist>
 			<varlistentry>
-				<term>Name</term>
+				<term>
+					<guilabel>Name</guilabel>
+				</term>
 				<listitem>
 					<para>
 						Geben Sie hier den Namen des Navigationspunkts ein,
@@ -67,7 +81,9 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>Type</term>
+				<term>
+					<guilabel>Type</guilabel>
+				</term>
 				<listitem>
 					<para>
 						Um ein Blog auf der Startseite betreiben zu können,
@@ -77,7 +93,9 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>Template set</term>
+				<term>
+					<guilabel>Template set</guilabel>
+				</term>
 				<listitem>
 					<para>
 						Wählen Sie das Vorlagen-Set aus, das Sie für das
@@ -87,7 +105,9 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>Index page</term>
+				<term>
+					<guilabel>Index page</guilabel>
+				</term>
 				<listitem>
 					<para>
 						Setzen Sie hier einen Haken, um die Startseite als
@@ -107,7 +127,8 @@
 		<para>
 			Klicken Sie nun neben der soeben angelegten Seite auf das Symbol
 			zum Hinzufügen einer neuen Webseite, um die beiden verbliebenen
-			Seiten zu erstellen.
+			Seiten (<emphasis>Kontakt</emphasis> und <emphasis>"Made with Welcompose"</emphasis>)
+			zu erstellen.
 		</para>
 		
 		<para>
@@ -116,21 +137,15 @@
 			<guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> auswählen und
 			als Vorlagen-Set <guimenuitem>Blog</guimenuitem>. Die restlichen
 			Optionen können Sie auf den Standardeinstellungen belassen.
+		</para>
+		
+		<para>
 			Nachdem Sie die Seite gespeichert haben, kommen Sie wieder zurück
 			zur Seitenübersicht. Klicken Sie neben dem Eintrag der soeben
 			angelegten Seite bei <guilabel>Move</guilabel> auf das Symbol mit
 			dem Pfeil, der nach unten zeigt, um die Seite auf die gleiche
-			Ebene wie die Startseite zu befördern.
+			Ebene wie die Startseite zu bringen.
 		</para>
-		
-		<warning>
-			<para>
-				Setzen Sie keinen Haken mehr beim Feld
-				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
-				eine <foreignphrase>Index page</foreignphrase> geben und
-				dies ist schon die Seite <userinput>Startseite</userinput>.
-			</para>
-		</warning>
 		
 		<para>
 			Wiederholen Sie diesen Vorgang für den Link zur Webseite,
@@ -140,10 +155,411 @@
 			<guimenuitem>WCOM_URL</guimenuitem> auswählen. Vergessen Sie nicht,
 			die Seite nach dem Speichern auszurücken! 
 		</para>
+		
+		<warning>
+			<para>
+				Setzen Sie keinen Haken mehr beim Feld
+				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
+				eine <emphasis>Index page</emphasis> geben und
+				dies ist schon die Seite <userinput>Startseite</userinput>.
+			</para>
+		</warning>
+		
+		<para>
+			Nach Anlegen aller Seiten sollte die Seitenübersicht wie folgt aussehen: 
+		</para>
+		
+		<figure id="crash_course_blog.create_pages.created_pages_all">
+			<title>Angelegte Seiten</title>
+			<graphic fileref="images/crash_course_blog/created_pages_all.png"/>
+		</figure>
 	</sect1>
 	
 	<sect1 id="crash_course_blog.fill_blog">
-		<title>Weblog befüllen</title>
+		<title>Weblog mit Inhalten füllen</title>
+		
+		<para>
+			Jetzt tragen wir in unser bisher noch leeres Blog das erste Posting ein. 
+			Klicken Sie hierzu in der Zeile unserer angelegten Blogseite (<emphasis>Startseite</emphasis>) auf das <guibutton>Edit</guibutton> Symbol. Sie
+			gelangen zur Übersichtsseite der Blog-Postings, die diesen Blog zugeordnet sind.  
+		</para>
+		
+		<figure id="crash_course_blog.fill_blog.pages_blogs_postings_select">
+			<title>Übersicht Blog-Postings</title>
+			<graphic fileref="images/crash_course_blog/pages_blogs_postings_select.png"/>
+		</figure>
+		
+		<para>
+			Legen Sie nun ein neues, erstes Blog-Posting an. Über den <guibutton>Add new</guibutton> 
+			gelangen Sie zur Eingabemaske.
+		</para>		
+		
+		<figure id="crash_course_blog.fill_blog.pages_blogs_postings_add">
+			<title>Neues Blog-Posting anlegen</title>
+			<graphic fileref="images/crash_course_blog/pages_blogs_postings_add.png"/>
+		</figure>		
+		
+		<variablelist>
+			<varlistentry>
+				<term>
+					<guilabel>Titel</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Tragen Sie hier
+						<userinput>Mein erstes Posting</userinput> ein.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Summary</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Hier tragen Sie bei Bedarf eine Zusammenfassung Ihres Postings ein.
+						Bitte lassen Sie dieses Feld für unseren Crash-Kurs leer.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Content</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Hier fügen wir die Inhalte für unser Posting ein. 
+						In diesen Fall etwas Fliesstext. Fügen
+						Sie hierzu ein paar Zeilen Beispieltext wie 
+						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
+						&ndash; ein Abschnitt ist ausreichend für diesen Crash-Kurs.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Text converter</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Wählen Sie aus der Liste den Eintrag
+						<guimenuitem>Markdown</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Apply text macros</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Setzen Sie hier einen Haken in die Checkbox.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Tags</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Verschlagworten Sie Ihr Posting. Einträge werden durch ein Kommata getrennt.
+						Bitte lassen Sie dieses Feld für unseren Crash-Kurs leer.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Feed summary</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Alternativer Inhalt für die Feed Veröffentlichung.
+						Bitte lassen Sie dieses Feld für unseren Crash-Kurs leer.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Draft</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Speichern Sie Ihr Posting als <emphasis>Entwurf</emphasis>, 
+						wird ihr Posting gespeichert, aber nicht veröffentlicht.
+						Bitte belassen Sie für unseren Crash-Kurs die Checkbox inaktiv. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Ping</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Ist die Checkbox mit einem Haken versehen, werden die angelegten Ping Services
+						über die Aktualisierung Ihres Postings informiert.
+						Bitte entfernen Sie für unseren Crash-Kurs den Haken. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Enable comments</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Entscheiden Sie, ob Kommentare zum Posting erlaubt sind.
+						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Enable trackbacks</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Entscheiden Sie, ob Trackbacks zum Posting erlaubt sind.
+						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.						
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>		
+		
+		<para>
+			Sichern Sie nun Ihren Eintrag mit Klick auf <guibutton>Add Blog Posting</guibutton>.
+			Ein Hinweis informiert Sie über die erfolgreiche Speicherung ihres neuen Postings.
+			Gehen Sie wieder zur Übersichtsseite der Blog-Postings, in dem Sie auf den Seitenlink
+			<guibutton>Blog Postings</guibutton> oder die Standortlink <emphasis>Blog Postings</emphasis> klicken. 
+		</para>		
+	</sect1>
+	
+	<sect1 id="crash_course_blog.fill_blog.box">
+		<title>Seitenbezogene Box anlegen</title>
+
+		<para>
+			Wie auf dem <xref linkend="crash_course_blog.view_demo_blog"/> zu sehen ist, gibt es,
+			rechts neben den Blog-Einträgen, eine Seitenspalte, die, neben der Verlinkung des Archivs
+			und den Syndication-Links einen kurzen Fliesstext beinhaltet, der in unseren Beispiel zur kurzen
+			Vorstellung des Blogbetreibers dienen würde (<emphasis>Über mich</emphasis>). Dieser inhaltliche Bereich
+			wurde mit einer sogenannten <emphasis>Box</emphasis> realisiert. Jeder Seite, also auch unserer Blog-Seite
+			<emphasis>Startseite</emphasis>, können beliebig viele seitenbezogene <emphasis>Boxen</emphasis> hinzugefügt 
+			werden. In unseren Crash-Kurs beschränken wir uns auf eine Box. Diese wollen wir nun anlegen.
+		</para>
+		
+		<note>
+			<para>
+				Ausführliche Informationen zum Konzept der <emphasis>Boxen</emphasis> finden Sie im Kapitel 
+				<xref linkend="contents"/>
+			</para>
+		</note>
+
+		<para>
+			Gehen Sie nun im Seitenmenu zum Navigationspunkt <guisubmenu>Boxes</guisubmenu> und klicken dann auf 
+			<guibutton>Add new</guibutton> um eine neue Box anzulegen.
+		</para>
+		
+		<figure id="crash_course_blog.fill_blog.box.pages_boxes_add">
+			<title>Seitenbezogene Box anlegen</title>
+			<graphic fileref="images/crash_course_blog/pages_boxes_add.png"/>
+		</figure>
+		
+		<variablelist>
+			<varlistentry>
+				<term>
+					<guilabel>Titel</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Tragen Sie hier <userinput>Über mich</userinput> ein.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Content</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Hier fügen wir die Inhalte der Box ein. Fügen
+						Sie hierzu ein paar Zeilen Beispieltext wie 
+						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
+						&ndash; ein Absatz ist ausreichend für diesen Crash-Kurs.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Text converter</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Wählen Sie aus der Liste den Eintrag
+						<guimenuitem>Markdown</guimenuitem> aus.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Apply text macros</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>	
+		
+		<para>
+			Damit ist die Erstellung der Inhalte abgeschlossen.
+		</para>		
+		
+	</sect1>
+	
+	<sect1 id="crash_course_blog.connect_blog_with_templates">
+		<title>Weblog mit Vorlagen verbinden</title>
+		
+		<para>
+			Nachdem wir nun die für den Crash-Kurs benötigten Inhalte angelegt haben, kommen wir
+			zur Erstellung der <xref linkend="templating"/> für unser Blog.
+		</para>	
+		
+		<para>
+			Schauen wir uns nochmals den <xref linkend="crash_course_blog.view_demo_blog"/> an. Wir 
+			sehen unsere Navigation, die auf allen Seiten am oberen Seitenrand angezeigt wird, die 
+			Übersichtsliste der vorhandenen Blog-Postings und zu guter Letzt rechts die Seitenspalte, die
+			ebenfalls auf allen (Ausnahme: <emphasis>Kontakt</emphasis>) Seiten angezeigt wird.
+		</para>	
+		
+		<para>
+			Da einzelne Seitenteile unseres Demo-Blogs (<emphasis>Navigation</emphasis>, <emphasis>Seitenspalte</emphasis>)
+			auf allen inhaltlichen Seiten angezeigt werden, liegt die Idee nahe, diese Bereiche in
+			jeweils einer eigenen Vorlage abzubilden und sie dann in wenige Hauptvorlagen zu inkludieren.
+			Gleiches gilt in diesen Beispiel auch für den Quelltext-Kopfbereich unseres Blogs,
+			der auf jeder Seite unverändert ist. 
+			
+			Um die Vorlagen eindeutig ansprechen zu können, müssen wir als ersten Schritt
+			korrespondierende <link linkend="templating.page_template_types">Vorlagen-Typen</link> anlegen.
+		</para>	
+
+		<sect2 id="crash_course_blog.connect_blog_with_templates.templatetypes">
+			<title>Vorlagen-Typen erstellen</title>
+		
+			<para>
+				Gehen Sie bitte im Hauptmenu <guimenu>Templating</guimenu> zum Untermenu <guisubmenu>Template Types</guisubmenu>.
+			</para>
+		
+			<para>
+				Neben den <link linkend="reference.list_of_template_types">vordefinierten Vorlagen-Typen</link> legen
+				wir nun drei neue Vorlagen-Typen an, die wir später den entsprechenden Vorlagen zuordnen werden.
+				Für unser Demo-Blog brauchen wir drei neue Vorlagen-Typen:
+			</para>	
+		
+			<variablelist>
+				<varlistentry>
+					<term>
+						<guilabel>custom_blog_head</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Wird für die Vorlage verwandt, die den Kopfbereich unseres Blogs repräsentiert. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>custom_blog_navigation</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Wird für die Vorlage verwandt, die die Navigation unseres Blogs abbildet. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>custom_blog_sidebar</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Wird für die Vorlage verwandt, die die Seitenspalte unseres Blogs beinhaltet.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Klicken Sie bitte auf <guibutton>Add new</guibutton> um zur Eingabemaske zu gelangen.		
+			</para>
+			
+			<figure id="crash_course_blog.connect_blog_with_templates.templatetypes_add">
+				<title>Neuen Vorlagen-Typ anlegen</title>
+				<graphic fileref="images/crash_course_blog/templatetypes_add.png"/>
+			</figure>
+		
+			<variablelist>
+				<varlistentry>
+					<term>
+						<guilabel>Name</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Benennen Sie die jeweiligen Vorlagen-Typen wie oben aufgeführt. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>
+						<guilabel>Description</guilabel>
+					</term>
+					<listitem>
+						<para>
+							Beschreiben Sie bei Bedarf den Einsatzzweck des Vorlagen-Typs stichwortartig.
+							Ohne Relevanz für unseren Crash-Kurs. 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		
+			<para>
+				Speichern Sie die Vorlagen-Typen jeweils mit einem Klick auf die <guibutton>Add template type</guibutton>
+				Schaltfläche. Haben Sie alle drei Vorlagen-Typen angelegt, wechseln Sie über den
+				<guibutton>Template Types</guibutton> Seitenlink oder den Standortlink <emphasis>Template Types</emphasis>
+				zurück auf die Übersichtsseite der Vorlagen-Typen. Die Übersichtsseite sollte nun wie folgt aussehen:	
+			</para>	
+				
+			<figure id="crash_course_blog.connect_blog_with_templates.templatetypes_select">
+				<title>Angelegte Vorlagen-Typen</title>
+				<graphic fileref="images/crash_course_blog/templatetypes_select.png"/>
+			</figure>
+		</sect2>
+		
+		<sect2 id="crash_course_blog.connect_blog_with_templates.templates">
+			<title>Vorlagen erstellen</title>
+
+			<para>
+				Jetzt werden die eigentlichen Vorlagen angelegt. Wechseln Sie zum Untermenupunkt
+				<guisubmenu>Templates</guisubmenu>.
+			</para>	
+
+			<figure id="crash_course_blog.connect_blog_with_templates.templates_select">
+				<title>Übersichtsseite Vorlagen</title>
+				<graphic fileref="images/crash_course_blog/templates_select.png"/>
+			</figure>
+			
+			<para>
+				Legen wir zuerst die Vorlagen an, für die wir gerade eigene Vorlagen-Typen angelegt
+				haben und die wir nachher in die Haupt-Vorlagen inkludieren wollen wollen. Beginnen
+				wir mit der Navigations-Vorlage. Klicken Sie auf <guibutton>Add new</guibutton>
+				um zur Eingabemaske zu gelangen.
+			</para>	
+		</sect2>
+	</sect1>
+	
+	<sect1 id="crash_course_blog.style_blog">
+		<title>Logos, Bilder und Style Sheets einbinden</title>
 		
 		<para/>
 	</sect1>

@@ -6,9 +6,7 @@
 	
 		<abstract>
 			<para>
-				Die Erstellung von Webseiten mit Welcompose ist auf den ersten Blick nicht
-				ganz einfach. Dies liegt vor allem daran, dass mehrere Komponenten
-				an der Anzeige einer Seite mitwirken und konfiguriert werden müssen. In diesem Crash-Kurs geht es darum,
+				In diesem Crash-Kurs geht es darum,
 				Sie ohne grosse Umschweife an die Erstellung einer einfachen 
 				Webseite heranzuführen, ohne sich zu intensiv mit dem Wieso und Warum
 				zu beschäftigen. Allerdings sind an vielen Stellen die ausführlichen
@@ -572,11 +570,11 @@
 		<title>Logos und Style Sheets einbinden</title>
 		
 		<para>
-			Wie die Vorlagen müssen auch Style Sheets über die Admin-Oberfläche
-			verwaltet werden. Um das Style Sheet für die Demo-Seite zu
+			Wie die Vorlagen werden auch die Style Sheets über die Admin-Oberfläche
+			verwaltet. Um das Style Sheet für die Demo-Seite zu
 			integrieren, müssen Sie zum Untermenu <guisubmenu>Global
 			Templates</guisubmenu> des Menus <guimenu>Templates</guimenu> wechseln. Klicken Sie dort auf
-			<guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen
+			<guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen.
 		</para>
 		
 		<figure id="crash_course_demo.globaltemplate_add">
@@ -592,7 +590,9 @@
 						Geben Sie hier den Namen des Style Sheets an. Da das 
 						Style Sheet in den Vorlagen über den Namen referenziert
 						wird, empfiehlt es sich, "Dateinamen" wie
-						<filename>style.css</filename> zu verwenden.
+						<filename>style.css</filename> zu verwenden. Zusätzlicher Vorteil: 
+						die Art des Global Templates ist auf der Übersichtsseite
+						anhand des Suffix auf einen Blick identifizierbar.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -771,7 +771,7 @@
 		<note>
 			<para>
 				Alle folgenden Beispiele setzen den, beim Anlegen der <emphasis>Startseite</emphasis> ausgewählten Text-Konverter
-				<emphasis>Textile</emphasis> voraus. Weitere Information erhalten Sie im Kapitel xxx.
+				<emphasis>Textile</emphasis> voraus. Weitere Information zu Text-Konvertern erhalten Sie im Kapitel xxx.
 			</para>
 		</note>
 				
@@ -834,7 +834,7 @@ magna...
 		
 		<para>
 			Gehen Sie nun zum <emphasis role="strong">Media Manager</emphasis> rechts neben dem Textfeld. Klicken
-			Sie dort auf <guibutton>Upload</guibutton>. Es öffnet sich ein Pop-up.
+			Sie dort auf <guibutton>Upload</guibutton>. Es öffnet sich ein Pop-up Fenster.
 		</para>
 		
 		<figure id="crash_course_demo.mediamanager.upload_popup">
@@ -923,20 +923,20 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		
 		<para>
 			Neben der Startseite haben wir mit der Seite <emphasis>Inhalt</emphasis> und 
-			<emphasis>Impressum</emphasis>noch zwei weitere Seiten (um die Seite <emphasis>Kontakt</emphasis>
-			kümmern wir uns im nachfolgenden Kapitel <xref linkend="crash_course_demo.implement_contact_form"/>, 
+			<emphasis>Impressum</emphasis> noch zwei weitere Seiten (um die Seite <emphasis>Kontakt</emphasis>
+			kümmern wir uns im nachfolgenden Kapitel <xref linkend="crash_course_demo.implement_contact_form"/>), 
 			die wir mit Inhalten füllen wollen.
 		</para>
 		
 		<para>
-			Um die beiden Seiten mit Inhalten zu befüllen, klicken Sie auf das Symbol <guibutton>Edit</guibutton> in der
-			Zeile des jeweiligen Seitentitels.
+			Um die beiden Seiten zu befüllen, klicken Sie jeweils wiederum auf das Symbol <guibutton>Edit</guibutton> in der
+			Zeile des Seitentitels.
 		</para>
 		
 		<note>
 			<para>
 				Auch ohne Inhalte können diese beiden Seiten jetzt schon in der Ausgabe schon aufgerufen werden, da sie,
-				wie die Startseite, dasselbe <emphasis>Template Set</emphasis> nutzen (<emphasis>Standardaussehen</emphasis>).
+				wie die Startseite, dasselbe <emphasis>Template Set</emphasis> nutzen.
 			</para>
 		</note>
 	</sect1>
@@ -1221,9 +1221,9 @@ Homepage: {$form_data.homepage}
 			E-Mail mit Ihren Formulareingaben in der Inbox haben.
 		</para>
 		
-		<figure id="crash_course_demo.implement_contact_form.generated_form_mail">
+		<figure id="crash_course_demo.frontend.view_generated_form_mail">
 			<title>Vom Kontaktformular erzeugte E-Mail</title>
-			<graphic fileref="images/crash_course_demo.implement_contact_form.generated_form_mail.png"/>
+			<graphic fileref="images/crash_course_demo/frontend/view_generated_form_mail.png"/>
 		</figure>
 	</sect1>
 </chapter>

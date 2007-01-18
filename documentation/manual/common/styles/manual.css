@@ -26,7 +26,7 @@ padding: 40px;
 color: #666;
 font-family: Arial, Helvetica, sans-serif;
 background: #fff url(../images/bg_header_manual.png) 0 0 no-repeat;
-padding-top: 5px;
+padding-top: 18px;
 border-top: 1px solid #ccc;
 }
 
@@ -58,19 +58,21 @@ width: 7%;
 padding: 0;
 }
 td.navfooterprevious, td.navfooternext {
-width: 40%;
+width: 20%;
 padding: 0;
+margin: 0;
 }
 td.navfootercenter, td.navfooterseccenter {
 width: 20%;
 padding: 0;
 text-align: center;
+vertical-align: middle;
+}
+td.navfootersecprevious, td.navfootersecnext, td.navfooterseccenter {
+vertical-align: top;
 }
 td.navfootersecnext {
 text-align: right;
-}
-hr {
-border: 0;
 }
 
 td.navnext a:link, td.navnext a:visited,
@@ -79,13 +81,33 @@ display: block;
 background: transparent url(../images/next.png) right center no-repeat;
 height: 55px;
 }
+td.navfooternext a:link, td.navfooternext a:visited {
+display: block;
+background: transparent url(../images/next.png) right center no-repeat;
+height: 35px;
+}
 td.navprevious a:link, td.navprevious a:visited,
 td.navfooterprevious a:link, td.navfooterprevious a:visited {
 display: block;
 background: transparent url(../images/previous.png) left center no-repeat;
 height: 55px;
 }
+td.navfooterprevious a:link, td.navfooterprevious a:visited {
+display: block;
+background: transparent url(../images/previous.png) left center no-repeat;
+height: 35px;
+}
 
+td.navfootercenter a:link, td.navfootercenter a:visited,
+td.navfooterseccenter a:link, td.navfooterseccenter a:visited {
+color: #fff;
+font-weight: bold;
+}
+td.navfootercenter a:hover, td.navfootercenter a:active,
+td.navfooterseccenter a:hover, td.navfooterseccenter a:active {
+text-decoration: underline;
+background: none;
+}
 
 
 span.sect1, span.sect2, span.sect3, span.chapter, span.appendix {
@@ -106,6 +128,9 @@ padding: 0;
 margin-top: 30px;	
 }
 
+hr {
+border: 0;
+}
 
 h1, h2, h3 {
 font-family: Arial, Verdana, Helvetica, sans-serif;
@@ -250,34 +275,34 @@ span.guimenuitem,
 span.application,
 .userinput code {
 color: #333;
+padding-left: 26px;
 font-weight: bold;
 }
 .userinput code {
 font-family: Arial, sans-serif;
 }
 span.guibutton {
-/*content: url(../images/guibutton.png);*//
-background: red url(../images/guibutton.png) left center no-repeat;
-padding-left: 22px;
-border: 1px solid;
+background: transparent url(../images/guibutton.png) 0 0 no-repeat;
 }
-span.guilabel:before {
-content: url(../images/guilabel.png);
+span.guilabel {
+background: transparent url(../images/guilabel.png) 0 0 no-repeat;
 }
-span.guimenuitem:before {
-content: url(../images/guimenuitem.png);
+span.guimenuitem{
+background: transparent url(../images/guimenuitem.png) 0 0 no-repeat;
 }
-span.guimenu:before {
-content: url(../images/guimenu.png);
+span.guimenu {
+background: transparent url(../images/guimenu.png) 0 0 no-repeat;
 }
-span.guisubmenu:before {
-content: url(../images/guisubmenu.png);
+span.guisubmenu {
+background: transparent url(../images/guisubmenu.png) 0 0 no-repeat;
+}
+.userinput code {
+background: transparent url(../images/userinput.png) 0 0 no-repeat;
+padding-left: 16px;
 }
 span.application:after {
 content: '®';
-}
-.userinput code:before {
-content: url(../images/userinput.png);
+padding-left: 0;
 }
 
 
