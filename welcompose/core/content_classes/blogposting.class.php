@@ -1094,7 +1094,7 @@ public function resolveBlogPosting ()
 	
 	// execute query and evaluate result
 	$result = intval($this->base->db->select($sql, 'field', $bind_params));
-	if ($result > 1) {
+	if ($result >= 1) {
 		return $result;
 	} else {
 		throw new Content_BlogPostingException("Blog posting could not be found");
