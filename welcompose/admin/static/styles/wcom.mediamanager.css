@@ -360,6 +360,11 @@ margin: 0 2px 0 0;
 border: 0 none;
 background: #f9f9f9;
 }
+#firstNode table tr:hover,
+#secondNode table tr:hover,
+#thirdNode table tr:hover {
+background: #f2f2f2;
+}
 #firstNode table td,
 #secondNode table td,
 #thirdNode table td {
@@ -395,7 +400,7 @@ background: transparent url(../img/icons/link.gif) 0 -1px no-repeat;
 #secondNode a:hover, #secondNode a:active, #secondNode a:focus,
 #thirdNode a:hover, #thirdNode a:active, #thirdNode a:focus {
 color: #00AE2C;
-background: #f2f2f2 url(../img/icons/link.gif) 0 -43px no-repeat;
+background: transparent url(../img/icons/link.gif) 0 -43px no-repeat;
 }
 #firstNode a.showNextNode:link, #firstNode a.showNextNode:visited,
 #firstNode a.showNextNodeBoxes:link, #firstNode a.showNextNodeBoxes:visited,
