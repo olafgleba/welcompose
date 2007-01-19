@@ -158,11 +158,21 @@ public function __construct($project, $page)
  */ 
 public function render ()
 {
-	if ($this->_simple_form['type'] == 'personal') {
-		return $this->renderPersonalForm();
-	} elseif ($this->_simple_form['type'] == 'business') {
-		return $this->renderBusinessForm();
+	// make sure that configured form type is valid
+	if (!preg_match(WCOM_REGEX_CUSTOM_FORM_TYPE, $this->_simple_form['type'])) {
+		throw new Display_SimpleFormIndexException('Invalid form type configured');
 	}
+	
+	// prepare name of the form render method
+	$render_method = 'render'.$this->_simple_form['type'];
+	
+	// test if renderer method is callable
+	if (!method_exists($this, $render_method)) {
+		throw new Display_SimpleFormIndexException('Configured render method does not exist');
+	}
+	
+	// call form render method
+	return $this->$render_method();
 }
 
 /**
@@ -633,6 +643,6 @@ public function skipAuthentication ()
 // end of class
 }
 
-class Display_SimplePageIndexException extends Exception { }
+class Display_SimpleFormIndexException extends Exception { }
 
 ?>

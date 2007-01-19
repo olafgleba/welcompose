@@ -118,8 +118,9 @@ try {
 	
 	// prepare form types array
 	$types = array(
-		'business' => gettext('Business form'),
-		'personal' => gettext('Personal form')
+		'BusinessForm' => gettext('Business form'),
+		'PersonalForm' => gettext('Personal form'),
+		'' => gettext('Use text field')
 	);
 	
 	// prepare captcha types array
@@ -183,6 +184,14 @@ try {
 	$FORM->addRule('type', gettext('Chosen form type is out of range'),
 		'in_array_keys', $types);
 	
+	// select for custom_form_type
+	$FORM->addElement('text', 'custom_type', gettext('Custom type'),
+		array('id' => 'simple_form_custom_type'));
+	$FORM->applyFilter('custom_type', 'trim');
+	$FORM->applyFilter('custom_type', 'strip_tags');
+	$FORM->addRule('custom_type', gettext('Enter a valid custom form type'), 'regex',
+		WCOM_REGEX_CUSTOM_FORM_TYPE);
+	
 	// textfield for email_from
 	$FORM->addElement('text', 'email_from', gettext('From: address'),
 		array('id' => 'simple_form_email_from', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -225,7 +234,10 @@ try {
 		'content' => Base_Cnc::ifsetor($simple_form['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($simple_form['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($simple_form['apply_macros'], null),
-		'type' => Base_Cnc::ifsetor($simple_form['type'], null),
+		'type' => ($SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
+			'' : Base_Cnc::ifsetor($simple_form['type'], null)),
+		'custom_type' => (!$SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
+			'' : Base_Cnc::ifsetor($simple_form['type'], null)),
 		'email_from' => Base_Cnc::ifsetor($simple_form['email_from'], null),
 		'email_to' => Base_Cnc::ifsetor($simple_form['email_to'], null),
 		'email_subject' => Base_Cnc::ifsetor($simple_form['email_subject'], null),
@@ -287,11 +299,17 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['type'] = $FORM->exportValue('type');
 		$sqlData['email_from'] = $FORM->exportValue('email_from');
 		$sqlData['email_to'] = $FORM->exportValue('email_to');
 		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
 		$sqlData['use_captcha'] = $FORM->exportValue('use_captcha');
+		
+		// handle form types
+		if ($FORM->exportValue('type') == "") {
+			$sqlData['type'] = $FORM->exportValue('custom_type');
+		} else {
+			$sqlData['type'] = $FORM->exportValue('type');
+		}
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {

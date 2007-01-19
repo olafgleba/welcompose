@@ -212,4 +212,8 @@ define("WCOM_REGEX_GLOBAL_TEMPLATE_NAME", "=^([a-z0-9-,_\.\s]+)$=i");
 // to MySQL's unix socket
 define("WCOM_REGEX_DATABASE_SOCKET", "=^/[a-z0-9-_\.\/]+$=");
 
+// Defines regular expression for strings containing a custom
+// form type
+define("WCOM_REGEX_CUSTOM_FORM_TYPE", "=^([A-Z]{1}[a-z]+)+$=");
+
 ?>

@@ -50,6 +50,16 @@ class Content_SimpleForm {
 	 * @var object
 	 */
 	public $base = null;
+	
+	/**
+	 * List of available form types
+	 *
+	 * @var array
+	 */
+	protected $_form_types = array(
+		'PersonalForm',
+		'BusinessForm',
+	);
 
 /**
  * Start instance of base class, load configuration and
@@ -434,6 +444,23 @@ public function selectSimpleForms ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Tests if given form type is a custom form type
+ * or not. Takes the actual form type string as
+ * first argument. Returns bool.
+ * 
+ * @param string Type
+ * @return bool
+ */
+public function isCustomFormType ($type)
+{
+	if (in_array($type, $this->_form_types)) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 /**
