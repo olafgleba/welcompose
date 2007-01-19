@@ -39,6 +39,9 @@ text-align: left;
 table img {
 vertical-align: bottom;
 }
+table tr:hover {
+background-color: #e9f5fe;
+}
 
 /* links */
 a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.comment, a.commenthide, a.mm_cast, a.mm_edit, a.mm_delete {
@@ -47,94 +50,94 @@ width: 20px;
 height: 20px;
 }
 a.down:link, a.down:visited {
-background: #fff url(../img/icons/down.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/down.gif) 0 0 no-repeat;
 }
 a.down:hover, a.down:active, a.down:focus {
-background: #fff url(../img/icons/down.gif) 0 -51px no-repeat;
+background: transparent url(../img/icons/down.gif) 0 -51px no-repeat;
 }
 a.up:link, a.up:visited {
-background: #fff url(../img/icons/up.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/up.gif) 0 0 no-repeat;
 } 
 a.up:hover, a.up:active, a.up:focus {
-background: #fff url(../img/icons/up.gif) 0 -51px no-repeat;
+background: transparent url(../img/icons/up.gif) 0 -51px no-repeat;
 }
 a.new:link, a.new:visited {
-background: #fff url(../img/icons/page_add.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/page_add.gif) 0 0 no-repeat;
 }
 a.new:hover, a.new:active, a.new:focus {
-background: #fff url(../img/icons/page_add.gif) 0 -46px no-repeat;
+background: transparent url(../img/icons/page_add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
-background: #fff url(../img/icons/page_edit.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/page_edit.gif) 0 0 no-repeat;
 }
 a.edit:hover, a.edit:active, a.edit:focus {
-background: #fff url(../img/icons/page_edit.gif) 0 -45px no-repeat;
+background: transparent url(../img/icons/page_edit.gif) 0 -45px no-repeat;
 }
 a.delete:link, a.delete:visited {
-background: #fff url(../img/icons/page_delete.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/page_delete.gif) 0 0 no-repeat;
 }
 a.delete:hover, a.delete:active, a.delete:focus {
-background: #fff url(../img/icons/page_delete.gif) 0 -46px no-repeat;
+background: transparent url(../img/icons/page_delete.gif) 0 -46px no-repeat;
 }
 a.duplicate:link, a.duplicate:visited {
-background: #fff url(../img/icons/duplicate.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/duplicate.gif) 0 0 no-repeat;
 } 
 a.duplicate:hover, a.duplicate:active, a.duplicate:focus {
-background: #fff url(../img/icons/duplicate.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/duplicate.gif) 0 -44px no-repeat;
 }
 a.upload:link, a.upload:visited {
-background: #fff url(../img/icons/upload.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/upload.gif) 0 0 no-repeat;
 } 
 a.upload:hover, a.upload:active, a.upload:focus {
-background: #fff url(../img/icons/upload.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/upload.gif) 0 -44px no-repeat;
 }
 a.uploadhide:link, a.uploadhide:visited {
-background: #fff url(../img/icons/uploadhide.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/uploadhide.gif) 0 0 no-repeat;
 } 
 a.uploadhide:hover, a.uploadhide:active, a.uploadhide:focus {
-background: #fff url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
 }
 a.download:link, a.download:visited {
-background: #fff url(../img/icons/download.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/download.gif) 0 0 no-repeat;
 } 
 a.download:hover, a.download:active, a.download:focus {
-background: #fff url(../img/icons/download.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/download.gif) 0 -44px no-repeat;
 }
 a.move:link, a.move:visited {
-background: #fff url(../img/icons/move.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/move.gif) 0 0 no-repeat;
 } 
 a.move:hover, a.move:active, a.move:focus {
-background: #fff url(../img/icons/move.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/move.gif) 0 -44px no-repeat;
 }
 a.comment:link, a.comment:visited {
-background: #fff url(../img/icons/upload.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/upload.gif) 0 0 no-repeat;
 } 
 a.comment:hover, a.upload:active, a.comment:focus {
-background: #fff url(../img/icons/upload.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/upload.gif) 0 -44px no-repeat;
 }
 a.commenthide:link, a.commenthide:visited {
-background: #fff url(../img/icons/uploadhide.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/uploadhide.gif) 0 0 no-repeat;
 } 
 a.commenthide:hover, a.commenthide:active, a.commenthide:focus {
-background: #fff url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/uploadhide.gif) 0 -44px no-repeat;
 }
 a.mm_cast:link, a.mm_cast:visited {
-background: #fff url(../img/icons/makepodcast.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/makepodcast.gif) 0 0 no-repeat;
 }
 a.mm_cast:hover, a.mm_cast:active, a.mm_cast:focus {
-background: #fff url(../img/icons/makepodcast.gif) 0 -44px no-repeat;
+background: transparent url(../img/icons/makepodcast.gif) 0 -44px no-repeat;
 }
 a.mm_edit:link, a.mm_edit:visited {
-background: #fff url(../img/icons/page_edit.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/page_edit.gif) 0 0 no-repeat;
 }
 a.mm_edit:hover, a.mm_edit:active, a.mm_edit:focus {
-background: #fff url(../img/icons/page_edit.gif) 0 -45px no-repeat;
+background: transparent url(../img/icons/page_edit.gif) 0 -45px no-repeat;
 }
 a.mm_delete:link, a.mm_delete:visited {
-background: #fff url(../img/icons/page_delete.gif) 0 0 no-repeat;
+background: transparent url(../img/icons/page_delete.gif) 0 0 no-repeat;
 }
 a.mm_delete:hover, a.mm_delete:active, a.mm_delete:focus {
-background: #fff url(../img/icons/page_delete.gif) 0 -46px no-repeat;
+background: transparent url(../img/icons/page_delete.gif) 0 -46px no-repeat;
 }
 
 /* buttons */
