@@ -1,0 +1,8 @@
+Welcompose 0.8.0
+================
+
+ * Database: content_simple_forms.type from ENUM to VARCHAR changed; see 
+   ticket:13. (andreas)
+ * Core: Speed up of class loading in Base_Base; see ticket:3. (andreas)
+ * Core: Speed up of class loading using dynamic function calls in the loader;
+   see ticket:1. (andreas)

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 26.12.2006 15:15:41
--- Diagram Version: 172
+-- Created on: 19.01.2007 21:48:09
+-- Diagram Version: 174
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -819,7 +819,7 @@ CREATE TABLE `content_simple_forms` (
   `content` text,
   `text_converter` int(11) UNSIGNED,
   `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
-  `type` enum('personal','business') NOT NULL DEFAULT 'personal',
+  `type` varchar(255) NOT NULL DEFAULT 'personal',
   `email_from` varchar(255),
   `email_to` varchar(255),
   `email_subject` varchar(255),
