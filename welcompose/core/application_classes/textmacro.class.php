@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Application_Textmacro {
+/**
+ * Singleton for Application_TextMacro.
+ * 
+ * @return object
+ */
+function Application_TextMacro ()
+{
+	if (Application_TextMacro::$instance == null) {
+		Application_TextMacro::$instance = new Application_TextMacro(); 
+	}
+	return Application_TextMacro::$instance;
+}
+
+class Application_TextMacro {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 *
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Application_Textmacro {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_Textmacro object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Application_Textmacro::$instance == null) {
-		Application_Textmacro::$instance = new Application_Textmacro(); 
-	}
-	return Application_Textmacro::$instance;
-}
-
-/**
  * Adds text macro to the text macro table. Takes a field=>value
  * array with text macro data as first argument. Returns insert id. 
  * 
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param array Row data
  * @return int Insert id
  */
@@ -84,12 +86,12 @@ public function addTextMacro ($sqlData)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Application_TextmacroException('Input for parameter sqlData is not an array');	
+		throw new Application_TextMacroException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new text macro will be assigned to the current project
@@ -100,7 +102,7 @@ public function addTextMacro ($sqlData)
 	
 	// test if macro belongs to current project/user
 	if (!$this->textMacroBelongsToCurrentUser($insert_id)) {
-		throw new Application_TextmacroException("Created text macro does not belong to current user or project");
+		throw new Application_TextMacroException("Created text macro does not belong to current user or project");
 	}
 	
 	// return insert id
@@ -112,7 +114,7 @@ public function addTextMacro ($sqlData)
  * field=>value array with the new text macro data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @param array Row data
  * @return int Affected rows
@@ -121,20 +123,20 @@ public function updateTextMacro ($id, $sqlData)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextmacroException('Input for parameter id is not an array');
+		throw new Application_TextMacroException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_TextmacroException('Input for parameter sqlData is not an array');	
+		throw new Application_TextMacroException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if macro belongs to current project/user
 	if (!$this->textMacroBelongsToCurrentUser($id)) {
-		throw new Application_TextmacroException("Text macro does not belong to current user or project");
+		throw new Application_TextMacroException("Text macro does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -156,7 +158,7 @@ public function updateTextMacro ($id, $sqlData)
  * text macro id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @return int Amount of affected rows
  */
@@ -164,17 +166,17 @@ public function deleteTextMacro ($id)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Manage')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextmacroException('Input for parameter id is not numeric');
+		throw new Application_TextMacroException('Input for parameter id is not numeric');
 	}
 	
 	// test if macro belongs to current project/user
 	if (!$this->textMacroBelongsToCurrentUser($id)) {
-		throw new Application_TextmacroException("Text macro does not belong to current user or project");
+		throw new Application_TextMacroException("Text macro does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -194,7 +196,7 @@ public function deleteTextMacro ($id)
  * Selects one text macro. Takes the text macro id as first
  * argument. Returns array with text macro information.
  * 
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @return array
  */
@@ -202,12 +204,12 @@ public function selectTextMacro ($id)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextmacroException('Input for parameter id is not numeric');
+		throw new Application_TextMacroException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -254,7 +256,7 @@ public function selectTextMacro ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param array Select params
  * @return array
  */
@@ -262,7 +264,7 @@ public function selectTextMacros ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -273,7 +275,7 @@ public function selectTextMacros ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_TextmacroException('Input for parameter params is not an array');	
+		throw new Application_TextMacroException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -287,7 +289,7 @@ public function selectTextMacros ($params = array())
 					$$_key = (string)$_value;
 				break;
 			default:
-				throw new Application_TextmacroException("Unknown parameter $_key");
+				throw new Application_TextMacroException("Unknown parameter $_key");
 		}
 	}
 	
@@ -300,7 +302,7 @@ public function selectTextMacros ($params = array())
 		case "shutdown":
 			break;
 		default:
-			throw new Application_TextmacroException("Input for parameter type is out of range");
+			throw new Application_TextMacroException("Input for parameter type is out of range");
 	}
 	
 	// prepare query
@@ -350,7 +352,7 @@ public function selectTextMacros ($params = array())
  * 
  * No params supported.
  * 
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param array Count params
  * @return array
  */
@@ -358,7 +360,7 @@ public function countTextMacros ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -366,14 +368,14 @@ public function countTextMacros ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_TextmacroException('Input for parameter params is not an array');	
+		throw new Application_TextMacroException('Input for parameter params is not an array');	
 	}
 	
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			default:
-				throw new Application_TextmacroException("Unknown parameter $_key");
+				throw new Application_TextMacroException("Unknown parameter $_key");
 		}
 	}
 	
@@ -403,7 +405,7 @@ public function countTextMacros ($params = array())
  * when checking for uniqueness (useful for updates). Returns boolean true if
  * text macro name is unique.
  *
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param string Text macro name
  * @param int Text macro id
  * @return bool
@@ -412,18 +414,18 @@ public function testForUniqueName ($name, $id = null)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($name)) {
-		throw new Application_TextmacroException("Input for parameter name is not expected to be empty");
+		throw new Application_TextMacroException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Application_TextmacroException("Input for parameter name is expected to be scalar");
+		throw new Application_TextMacroException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Application_TextmacroException("Input for parameter id is expected to be numeric");
+		throw new Application_TextMacroException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -463,7 +465,7 @@ public function testForUniqueName ($name, $id = null)
  * as first argument, the string with the text to convert as second
  * argument. Returns converted string.
  *
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @param string Text to convert
  * @return string Converted text
@@ -472,15 +474,15 @@ public function applyTextMacros ($text, $stage = "pre")
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (!is_scalar($text)) {
-		throw new Application_TextmacroException("Input for parameter text is expected to be scalar");
+		throw new Application_TextMacroException("Input for parameter text is expected to be scalar");
 	}
 	if ($stage != "pre" && $stage != "post") {
-		throw new Application_TextmacroException("Input for parameter stage is out of range");
+		throw new Application_TextMacroException("Input for parameter stage is out of range");
 	}
 	
 	// get text macros
@@ -537,10 +539,10 @@ public function applyTextMacros ($text, $stage = "pre")
 	
 	// let's see if a plug-in path is registred
 	if (empty($this->base->_conf['plugins']['textmacro_dir'])) {
-		throw new Application_TextmacroException("No text macro plug-in directory configured");
+		throw new Application_TextMacroException("No text macro plug-in directory configured");
 	}
 	if (!is_dir($this->base->_conf['plugins']['textmacro_dir'])) {
-		throw new Application_TextmacroException("Configured text macro plug-in path is not a directory");
+		throw new Application_TextMacroException("Configured text macro plug-in path is not a directory");
 	}
 	
 	// apply text macros
@@ -548,15 +550,15 @@ public function applyTextMacros ($text, $stage = "pre")
 		foreach ($_macros as $_macro) {
 			// test if macro belongs to current project/user
 			if (!$this->textMacroBelongsToCurrentUser($_macro['id'])) {
-				throw new Application_TextmacroException("Text macro does not belong to current user or project");
+				throw new Application_TextMacroException("Text macro does not belong to current user or project");
 			}
 			
 			// check internal name
 			if (empty($_macro['internal_name'])) {
-				throw new Application_TextmacroException("No internal text macro name defined");
+				throw new Application_TextMacroException("No internal text macro name defined");
 			}
 			if (!preg_match(WCOM_REGEX_TEXT_MACRO_INTERNAL_NAME, $_macro['internal_name'])) {
-				throw new Application_TextmacroException("Internal text macro name is invalid");
+				throw new Application_TextMacroException("Internal text macro name is invalid");
 			}
 			
 			// prepare path to text macro
@@ -564,7 +566,7 @@ public function applyTextMacros ($text, $stage = "pre")
 				"wcom_plugin_textmacro_".$_macro['internal_name'].".php";
 			
 			if (!file_exists($path)) {
-				throw new Application_TextmacroException("Unable to find text macro plug-in");
+				throw new Application_TextMacroException("Unable to find text macro plug-in");
 			}
 
 			// include text macro file
@@ -575,7 +577,7 @@ public function applyTextMacros ($text, $stage = "pre")
 
 			// let's see if the text macro function exists
 			if (!function_exists($function_name)) {
-				throw new Application_TextmacroException("Text macro plug-in function does not exist");
+				throw new Application_TextMacroException("Text macro plug-in function does not exist");
 			}
 			
 			// apply text macro
@@ -590,7 +592,7 @@ public function applyTextMacros ($text, $stage = "pre")
  * Tests whether given text macro belongs to current project. Takes the
  * text macro id as first argument. Returns bool.
  *
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @return int bool
  */
@@ -598,12 +600,12 @@ public function textMacroBelongsToCurrentProject ($text_macro)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($text_macro) || !is_numeric($text_macro)) {
-		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
+		throw new Application_TextMacroException('Input for parameter text_macro is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -636,7 +638,7 @@ public function textMacroBelongsToCurrentProject ($text_macro)
  * Test whether text macro belongs to current user or not. Takes
  * the text macro id as first argument. Returns bool.
  *
- * @throws Application_TextmacroException
+ * @throws Application_TextMacroException
  * @param int Text macro id
  * @return bool
  */
@@ -644,12 +646,12 @@ public function textMacroBelongsToCurrentUser ($text_macro)
 {
 	// access check
 	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_TextMacroException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($text_macro) || !is_numeric($text_macro)) {
-		throw new Application_TextmacroException('Input for parameter text_macro is expected to be a numeric value');
+		throw new Application_TextMacroException('Input for parameter text_macro is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -668,6 +670,6 @@ public function textMacroBelongsToCurrentUser ($text_macro)
 // end of class
 }
 
-class Application_TextmacroException extends Exception { }
+class Application_TextMacroException extends Exception { }
 
 ?>

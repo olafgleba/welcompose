@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Content_Blogtag {
+/**
+ * Singleton for Content_BlogTag.
+ * 
+ * @return object
+ */
+function Content_BlogTag ()
+{
+	if (Content_BlogTag::$instance == null) {
+		Content_BlogTag::$instance = new Content_BlogTag(); 
+	}
+	return Content_BlogTag::$instance;
+}
+
+class Content_BlogTag {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -39,8 +54,9 @@ class Content_Blogtag {
 	/**
 	 * Tag separator used when converting tag strings to
 	 * arrays and vice versa.
+	 * 
 	 * @param string 
-     */
+	 */
 	public $_tag_separator = ',';
 
 /**
@@ -48,7 +64,7 @@ class Content_Blogtag {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -67,23 +83,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Content_Blogtag object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Content_Blogtag::$instance == null) {
-		Content_Blogtag::$instance = new Content_Blogtag(); 
-	}
-	return Content_Blogtag::$instance;
-}
-
-/**
  * Adds tags of a posting. Takes the page id as first argument, the posting
  * id second argument and the tag word list as third argument.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param int Posting id
  * @param array Tag array
@@ -93,13 +96,13 @@ public function addPostingTags ($page, $posting, $tags)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw Content_BlogtagException('Input for parameter page is not numeric');
+		throw Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (!is_array($tags)) {
-		throw new Content_BlogtagException('Input for parameter tags is not an array');
+		throw new Content_BlogTagException('Input for parameter tags is not an array');
 	}
 	
 	// loop through the tags and add them
@@ -119,7 +122,7 @@ public function addPostingTags ($page, $posting, $tags)
  * the differences. Tags that are no longer required will be removed,
  * new ones will be added.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param int Posting id
  * @param array Tag array
@@ -129,13 +132,13 @@ public function updatePostingTags ($page, $posting, $tags)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_BlogtagException('Input for parameter page is not numeric');
+		throw new Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (!is_array($tags)) {
-		throw new Content_BlogtagException('Input for parameter tags is not an array');
+		throw new Content_BlogTagException('Input for parameter tags is not an array');
 	}	
 	
 	// prepare old tags
@@ -181,10 +184,10 @@ public function deletePostingTags ($page, $posting)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw Content_BlogtagException('Input for parameter page is not numeric');
+		throw Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	
 	// get the tags and delete them
@@ -206,7 +209,7 @@ public function deletePostingTags ($page, $posting)
  * The amount of occurrences will be set to 1. If the tag already
  * exists in the database, updateBlogTag() will be called.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param int Posting id
  * @param string Tag word
@@ -216,13 +219,13 @@ protected function addBlogTag ($page, $posting, $tag)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_BlogtagException('Input for parameter page is not numeric');
+		throw new Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) && is_scalar($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not scalar');	
+		throw new Content_BlogTagException('Input for parameter tag is not scalar');	
 	}
 	
 	// load helper class
@@ -263,7 +266,7 @@ protected function addBlogTag ($page, $posting, $tag)
  * occurrences as fourth argument. modify_amount can be either
  * <samp>increase</samp> or <samp>decrease</samp>.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param int Posting id
  * @param string Tag word
@@ -273,13 +276,13 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_BlogtagException('Input for parameter page is not numeric');
+		throw new Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) && is_scalar($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not scalar');	
+		throw new Content_BlogTagException('Input for parameter tag is not scalar');	
 	}	
 
 	// get the tag id
@@ -287,7 +290,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
 	
 	// throw exception if the tag wasn't found
 	if ($tag_id === false) {
-		throw new Content_BlogtagException('Unable to find tag that I have to update');	
+		throw new Content_BlogTagException('Unable to find tag that I have to update');	
 	}
 	
 	// update
@@ -351,7 +354,7 @@ protected function updateBlogTag ($page, $posting, $tag, $modify_amount = 'incre
  * is 0 (null). Then it will remove the link between the tag
  * an the posting.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param int Posting id
  * @param string Tag word
@@ -361,13 +364,13 @@ protected function deleteBlogTag ($page, $posting, $tag)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_BlogtagException('Input for parameter page is not numeric');
+		throw new Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) && is_scalar($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not scalar');	
+		throw new Content_BlogTagException('Input for parameter tag is not scalar');	
 	}
 	
 	// get the tag id
@@ -394,7 +397,7 @@ protected function deleteBlogTag ($page, $posting, $tag)
  * Takes tag word id as first argument. Returns tag
  * information.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Tag word id
  * @return array
  */
@@ -402,7 +405,7 @@ public function selectBlogTag ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_BlogtagException('Input for parameter id is not numeric');	
+		throw new Content_BlogTagException('Input for parameter id is not numeric');	
 	}
 	
 	// compose query
@@ -460,7 +463,7 @@ public function selectBlogTag ($id)
  * </ul>
  * </ul>
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param array Select params
  * @return array
  */
@@ -476,7 +479,7 @@ public function selectBlogTags ($params = array())
 
 	// input check
 	if (!is_array($params)) {
-		throw new Content_BlogtagException('Input for parameter params is not an array');	
+		throw new Content_BlogTagException('Input for parameter params is not an array');	
 	}
 
 	// import params
@@ -492,7 +495,7 @@ public function selectBlogTags ($params = array())
 					$$_key = (string)$_value;
 				break;
 			default:
-				throw new Content_BlogtagException("Unknow parameter $_key");
+				throw new Content_BlogTagException("Unknow parameter $_key");
 		}
 	}
 
@@ -575,7 +578,7 @@ public function selectBlogTags ($params = array())
  * second argument. Returns the tag id in the database (int) or, if
  * the tag wasn't found, boolean false.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Page id
  * @param string Tag word
  * @return mixed
@@ -584,10 +587,10 @@ public function tag_exists ($page, $tag)
 {
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_BlogtagException('Input for parameter page is not numeric');
+		throw new Content_BlogTagException('Input for parameter page is not numeric');
 	}
 	if (!is_scalar($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not scalar');	
+		throw new Content_BlogTagException('Input for parameter tag is not scalar');	
 	}
 	
 	// pepare query
@@ -632,7 +635,7 @@ public function tag_exists ($page, $tag)
  * id as first argument, tag word id as second argument. Return
  * bool on false and int (Link id) on true.
  *
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Posting id
  * @param int Tag id
  * @return mixed
@@ -641,10 +644,10 @@ public function link_exists ($posting, $tag)
 {
 	// input check
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) && is_scalar($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not scalar');	
+		throw new Content_BlogTagException('Input for parameter tag is not scalar');	
 	}
 	
 	// prepare query
@@ -684,7 +687,7 @@ public function link_exists ($posting, $tag)
  * will add one. If it already exist, nothing happens. The function
  * always returns boolean true.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Posting id
  * @param int Tag id
  * @return int Link id
@@ -693,10 +696,10 @@ protected function addLink ($posting, $tag)
 {
 	// input check
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) || !is_numeric($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not numeric');
+		throw new Content_BlogTagException('Input for parameter tag is not numeric');
 	}
 	
 	// check if link exists. if it doesn't exist, add id
@@ -721,7 +724,7 @@ protected function addLink ($posting, $tag)
  * look up, if the link exists. If it exists, it will be deleted. If it
  * doesn't exist, nothing happens. The function always returns boolean true.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param int Posting id
  * @param int Tag id
  * @return bool
@@ -730,10 +733,10 @@ protected function deleteLink ($posting, $tag)
 {
 	// input check
 	if (empty($posting) || !is_numeric($posting)) {
-		throw new Content_BlogtagException('Input for parameter posting is not numeric');	
+		throw new Content_BlogTagException('Input for parameter posting is not numeric');	
 	}
 	if (empty($tag) || !is_numeric($tag)) {
-		throw new Content_BlogtagException('Input for parameter tag is not numeric');
+		throw new Content_BlogTagException('Input for parameter tag is not numeric');
 	}
 	
 	// check if link exists
@@ -759,7 +762,7 @@ protected function deleteLink ($posting, $tag)
  * Helper function to convert a string of tags, each separated by a comma,
  * into an array. Useful when receiving data from a an user input field.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param string Tag string
  * @return array Tag array
  */
@@ -767,7 +770,7 @@ public function _tagStringToArray ($string)
 {
 	// input check
 	if (!is_scalar($string)) {
-		throw new Content_BlogtagException('Input for parameter string is not scalar');	
+		throw new Content_BlogTagException('Input for parameter string is not scalar');	
 	}
 
 	// explode string and clean the parts
@@ -786,7 +789,7 @@ public function _tagStringToArray ($string)
  * of tags, each separated by a comma. Useful when it's
  * required to prepare data for a user input field.
  * 
- * @throws Content_BlogtagException
+ * @throws Content_BlogTagException
  * @param string Tag string
  * @return array Tag array
 */
@@ -816,6 +819,6 @@ public function _tagStringToSerializedArray ($string)
 // End of class
 }
 
-class Content_BlogtagException extends Exception { }
+class Content_BlogTagException extends Exception { }
 
 ?>

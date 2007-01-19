@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Content_Blogposting {
+/**
+ * Singleton for Content_BlogPosting.
+ * 
+ * @return object
+ */
+function Content_BlogPosting ()
+{
+	if (Content_BlogPosting::$instance == null) {
+		Content_BlogPosting::$instance = new Content_BlogPosting(); 
+	}
+	return Content_BlogPosting::$instance;
+}
+
+class Content_BlogPosting {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Content_Blogposting {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Content_Blogposting object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Content_Blogposting::$instance == null) {
-		Content_Blogposting::$instance = new Content_Blogposting(); 
-	}
-	return Content_Blogposting::$instance;
-}
-
-/**
  * Adds blog posting to the blog posting table. Takes a field=>value
  * array with blog posting data as first argument. Returns insert id. 
  * 
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param array Row data
  * @return int Insert id
  */
@@ -84,12 +86,12 @@ public function addBlogPosting ($sqlData)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Content_BlogpostingException('Input for parameter sqlData is not an array');	
+		throw new Content_BlogPostingException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
@@ -97,7 +99,7 @@ public function addBlogPosting ($sqlData)
 	
 	// test if blog posting belongs to current user
 	if (!$this->blogPostingBelongsToCurrentUser($insert_id)) {
-		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
+		throw new Content_BlogPostingException('Blog posting does not belong to current project or user');
 	}
 	
 	return $insert_id;
@@ -108,7 +110,7 @@ public function addBlogPosting ($sqlData)
  * field=>value array with the new blog posting data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param int Blog posting id
  * @param array Row data
  * @return int Affected rows
@@ -117,20 +119,20 @@ public function updateBlogPosting ($id, $sqlData)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_BlogpostingException('Input for parameter id is not an array');
+		throw new Content_BlogPostingException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Content_BlogpostingException('Input for parameter sqlData is not an array');	
+		throw new Content_BlogPostingException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if blog posting belongs to current user
 	if (!$this->blogPostingBelongsToCurrentUser($id)) {
-		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
+		throw new Content_BlogPostingException('Blog posting does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -151,7 +153,7 @@ public function updateBlogPosting ($id, $sqlData)
  * blog posting id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param int Blog posting id
  * @return int Amount of affected rows
  */
@@ -159,17 +161,17 @@ public function deleteBlogPosting ($id)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Manage')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_BlogpostingException('Input for parameter id is not numeric');
+		throw new Content_BlogPostingException('Input for parameter id is not numeric');
 	}
 	
 	// test if blog posting belongs to current user
 	if (!$this->blogPostingBelongsToCurrentUser($id)) {
-		throw new Content_BlogpostingException('Blog posting does not belong to current project or user');
+		throw new Content_BlogPostingException('Blog posting does not belong to current project or user');
 	}
 	
 	// prepare where clause
@@ -188,7 +190,7 @@ public function deleteBlogPosting ($id)
  * Selects one blog posting. Takes the blog posting id as first
  * argument. Returns array with blog posting information.
  * 
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param int Blog posting id
  * @return array
  */
@@ -196,12 +198,12 @@ public function selectBlogPosting ($id)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_BlogpostingException('Input for parameter id is not numeric');
+		throw new Content_BlogPostingException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -341,7 +343,7 @@ public function selectBlogPosting ($id)
  * </li>
  * </ul>
  * 
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param array Select params
  * @return array
  */
@@ -349,7 +351,7 @@ public function selectBlogPostings ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -367,7 +369,7 @@ public function selectBlogPostings ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Content_BlogpostingException('Input for parameter params is not an array');	
+		throw new Content_BlogPostingException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -390,7 +392,7 @@ public function selectBlogPostings ($params = array())
 					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			default:
-				throw new Content_BlogpostingException("Unknown parameter $_key");
+				throw new Content_BlogPostingException("Unknown parameter $_key");
 		}
 	}
 	
@@ -566,7 +568,7 @@ public function selectBlogPostings ($params = array())
  * <li>day_added, string, optional: two digit day number</li>
  * </ul>
  * 
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param array Select params
  * @return int
  */
@@ -574,7 +576,7 @@ public function countBlogPostings ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -589,7 +591,7 @@ public function countBlogPostings ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Content_BlogpostingException('Input for parameter params is not an array');	
+		throw new Content_BlogPostingException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -609,7 +611,7 @@ public function countBlogPostings ($params = array())
 					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			default:
-				throw new Content_BlogpostingException("Unknown parameter $_key");
+				throw new Content_BlogPostingException("Unknown parameter $_key");
 		}
 	}
 	
@@ -701,7 +703,7 @@ public function selectDifferentYears ($params)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -808,7 +810,7 @@ public function selectDifferentMonths ($params)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -923,7 +925,7 @@ public function selectDifferentDays ($params)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -1045,7 +1047,7 @@ public function resolveBlogPosting ()
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// let's see if there's a posting id in the request url
@@ -1159,7 +1161,7 @@ public function blogPostingExists ($id)
  * Tests whether given blog posting belongs to current project. Takes the
  * blog posting id as first argument. Returns bool.
  *
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param int Blog posting id
  * @return int bool
  */
@@ -1167,12 +1169,12 @@ public function blogPostingBelongsToCurrentProject ($blog_posting)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($blog_posting) || !is_numeric($blog_posting)) {
-		throw new Content_BlogpostingException('Input for parameter blog_posting is expected to be a numeric value');
+		throw new Content_BlogPostingException('Input for parameter blog_posting is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -1209,7 +1211,7 @@ public function blogPostingBelongsToCurrentProject ($blog_posting)
  * Test whether blog posting belongs to current user or not. Takes
  * the blog posting id as first argument. Returns bool.
  *
- * @throws Content_BlogpostingException
+ * @throws Content_BlogPostingException
  * @param int Blog posting id
  * @return bool
  */
@@ -1217,12 +1219,12 @@ public function blogPostingBelongsToCurrentUser ($blog_posting)
 {
 	// access check
 	if (!wcom_check_access('Content', 'BlogPosting', 'Use')) {
-		throw new Content_BlogpostingException("You are not allowed to perform this action");
+		throw new Content_BlogPostingException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($blog_posting) || !is_numeric($blog_posting)) {
-		throw new Content_BlogpostingException('Input for parameter blog_posting is expected to be a numeric value');
+		throw new Content_BlogPostingException('Input for parameter blog_posting is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -1241,6 +1243,6 @@ public function blogPostingBelongsToCurrentUser ($blog_posting)
 // end of class
 }
 
-class Content_BlogpostingException extends Exception { }
+class Content_BlogPostingException extends Exception { }
 
 ?>

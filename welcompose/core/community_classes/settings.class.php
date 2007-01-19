@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton for Community_Settings.
+ * 
+ * @return object
+ */
+function Community_Settings ()
+{
+	if (Community_Settings::$instance == null) {
+		Community_Settings::$instance = new Community_Settings(); 
+	}
+	return Community_Settings::$instance;
+}
+
 class Community_Settings {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 *
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Community_Settings {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -57,19 +72,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Community_Settings object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Community_Settings::$instance == null) {
-		Community_Settings::$instance = new Community_Settings(); 
-	}
-	return Community_Settings::$instance;
 }
 
 /**

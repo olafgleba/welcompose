@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Templating_Templateset {
+/**
+ * Singleton. Returns instance of the Templating_TemplateSet object.
+ * 
+ * @return object
+ */
+function Templating_TemplateSet ()
+{ 
+	if (Templating_TemplateSet::$instance == null) {
+		Templating_TemplateSet::$instance = new Templating_TemplateSet(); 
+	}
+	return Templating_TemplateSet::$instance;
+}
+
+class Templating_TemplateSet {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Templating_Templateset {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Templating_Templateset object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Templating_Templateset::$instance == null) {
-		Templating_Templateset::$instance = new Templating_Templateset(); 
-	}
-	return Templating_Templateset::$instance;
-}
-
-/**
  * Creates new template set. Takes field=>value array with template
  * set data as first argument. Returns insert id.
  * 
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param array Row data
  * @return int Template set id
  */
@@ -88,7 +90,7 @@ public function addTemplateSet ($sqlData)
 	}
 	
 	if (!is_array($sqlData)) {
-		throw new Templating_TemplatesetException('Input for parameter sqlData is not an array');	
+		throw new Templating_TemplateSetException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new template set will be assigned to the current project
@@ -99,7 +101,7 @@ public function addTemplateSet ($sqlData)
 	
 	// test if template set belongs to current user/project
 	if (!$this->templateSetBelongsToCurrentUser($insert_id)) {
-		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
+		throw new Templating_TemplateSetException('Template set does not belong to current user or project');
 	}
 	
 	return $insert_id;
@@ -110,7 +112,7 @@ public function addTemplateSet ($sqlData)
  * a field=>value array with the new template set data as second
  * argument. Returns amount of affected rows.
  *
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param int Template set id
  * @param array Row data
  * @return int Affected rows
@@ -124,15 +126,15 @@ public function updateTemplateSet ($id, $sqlData)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatesetException('Input for parameter id is not an array');
+		throw new Templating_TemplateSetException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Templating_TemplatesetException('Input for parameter sqlData is not an array');	
+		throw new Templating_TemplateSetException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if template set belongs to current user/project
 	if (!$this->templateSetBelongsToCurrentUser($id)) {
-		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
+		throw new Templating_TemplateSetException('Template set does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -154,7 +156,7 @@ public function updateTemplateSet ($id, $sqlData)
  * template set id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param int Template set id
  * @return int Amount of affected rows
  */
@@ -167,12 +169,12 @@ public function deleteTemplateSet ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatesetException('Input for parameter id is not numeric');
+		throw new Templating_TemplateSetException('Input for parameter id is not numeric');
 	}
 	
 	// test if template set belongs to current user/project
 	if (!$this->templateSetBelongsToCurrentUser($id)) {
-		throw new Templating_TemplatesetException('Template set does not belong to current user or project');
+		throw new Templating_TemplateSetException('Template set does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -193,7 +195,7 @@ public function deleteTemplateSet ($id)
  * Selects one template set. Takes the template set id as first
  * argument. Returns array with template set information.
  * 
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param int Template set id
  * @return array
  */
@@ -206,7 +208,7 @@ public function selectTemplateSet ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatesetException('Input for parameter id is not numeric');
+		throw new Templating_TemplateSetException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -250,7 +252,7 @@ public function selectTemplateSet ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param array Select params
  * @return array
  */
@@ -268,7 +270,7 @@ public function selectTemplateSets ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Templating_TemplatesetException('Input for parameter params is not an array');	
+		throw new Templating_TemplateSetException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -279,7 +281,7 @@ public function selectTemplateSets ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Templating_TemplatesetException("Unknown parameter $_key");
+				throw new Templating_TemplateSetException("Unknown parameter $_key");
 		}
 	}
 	
@@ -319,7 +321,7 @@ public function selectTemplateSets ($params = array())
  * Checks whether the given template set belongs to the current project or not. Takes
  * the id of the template set as first argument. Returns bool.
  *
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param int Template set id
  * @return bool
  */
@@ -332,7 +334,7 @@ public function templateSetBelongsToCurrentProject ($set)
 	
 	// input check
 	if (empty($set) || !is_numeric($set)) {
-		throw new Templating_TemplatesetException('Input for parameter set is expected to be a numeric value');
+		throw new Templating_TemplateSetException('Input for parameter set is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -402,7 +404,7 @@ public function templateSetBelongsToCurrentUser ($template_set)
  * when checking for uniqueness (useful for updates). Returns boolean true if
  * template set name is unique.
  *
- * @throws Templating_TemplatesetException
+ * @throws Templating_TemplateSetException
  * @param string Template set name
  * @param int Template set id
  * @return bool
@@ -416,13 +418,13 @@ public function testForUniqueName ($name, $id = null)
 	
 	// input check
 	if (empty($name)) {
-		throw new Templating_TemplatesetException("Input for parameter name is not expected to be empty");
+		throw new Templating_TemplateSetException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Templating_TemplatesetException("Input for parameter name is expected to be scalar");
+		throw new Templating_TemplateSetException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Templating_TemplatesetException("Input for parameter id is expected to be numeric");
+		throw new Templating_TemplateSetException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -460,6 +462,6 @@ public function testForUniqueName ($name, $id = null)
 // end of class
 }
 
-class Templating_TemplatesetException extends Exception { }
+class Templating_TemplateSetException extends Exception { }
 
 ?>

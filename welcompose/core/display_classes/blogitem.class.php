@@ -22,8 +22,36 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-// load the display class
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'display.interface.php');
+// load the display interface
+if (!interface_exists('Display')) {
+	$path_parts = array(
+		dirname(__FILE__),
+		'display.interface.php'
+	);
+	require(implode(DIRECTORY_SEPARATOR, $path_parts));
+}
+
+/**
+ * Class loader compatible to loader.php. Wrapps around constructor.
+ * 
+ * @param array
+ * @return object
+ */
+function Display_BlogItem ($args)
+{
+	// check input
+	if (!is_array($args)) {
+		trigger_error('Constructor args are not an array', E_USER_ERROR);
+	}
+	if (!array_key_exists(0, $args)) {
+		trigger_error('Constructor arg project does not exist', E_USER_ERROR);
+	}
+	if (!array_key_exists(1, $args)) {
+		trigger_error('Constructor arg page does not exist', E_USER_ERROR);
+	}
+
+	return new Display_BlogItem($args[0], $args[1]);
+}
 
 class Display_BlogItem implements Display {
 	
@@ -32,7 +60,7 @@ class Display_BlogItem implements Display {
 	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class

@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Content_Pagetype {
+/**
+ * Singleton for Content_PageType.
+ * 
+ * @return object
+ */
+function Content_PageType ()
+{
+	if (Content_PageType::$instance == null) {
+		Content_PageType::$instance = new Content_PageType(); 
+	}
+	return Content_PageType::$instance;
+}
+
+class Content_PageType {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Content_Pagetype {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Content_Pagetype object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Content_Pagetype::$instance == null) {
-		Content_Pagetype::$instance = new Content_Pagetype(); 
-	}
-	return Content_Pagetype::$instance;
-}
-
-/**
  * Adds page type to the page type table. Takes a field=>value array with
  * page type data as first argument. Returns insert id. 
  * 
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param array Row data
  * @return int PageType id
  */
@@ -84,12 +86,12 @@ public function addPageType ($sqlData)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Content_PagetypeException('Input for parameter sqlData is not an array');	
+		throw new Content_PageTypeException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the page type will be assigned to the right project
@@ -100,7 +102,7 @@ public function addPageType ($sqlData)
 	
 	// test if page type belongs to current user/project
 	if (!$this->pageTypeBelongsToCurrentUser($insert_id)) {
-		throw new Content_PagetypeException('Page type does not belong to current user or project');
+		throw new Content_PageTypeException('Page type does not belong to current user or project');
 	}
 	
 	return $insert_id;
@@ -111,7 +113,7 @@ public function addPageType ($sqlData)
  * field=>value array with the new page type data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param int Page type id
  * @param array Row data
  * @return int Affected rows
@@ -120,20 +122,20 @@ public function updatePageType ($id, $sqlData)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_PagetypeException('Input for parameter id is not an array');
+		throw new Content_PageTypeException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Content_PagetypeException('Input for parameter sqlData is not an array');	
+		throw new Content_PageTypeException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if page type belongs to current user/project
 	if (!$this->pageTypeBelongsToCurrentUser($id)) {
-		throw new Content_PagetypeException('Page type does not belong to current user or project');
+		throw new Content_PageTypeException('Page type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -154,7 +156,7 @@ public function updatePageType ($id, $sqlData)
  * Removes page type from the page type table. Takes the page type id
  * as first argument. Returns amount of affected rows
  * 
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param int Page type id
  * @return int Amount of affected rows
  */
@@ -162,17 +164,17 @@ public function deletePageType ($id)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Manage')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_PagetypeException('Input for parameter id is not numeric');
+		throw new Content_PageTypeException('Input for parameter id is not numeric');
 	}
 	
 	// test if page type belongs to current user/project
 	if (!$this->pageTypeBelongsToCurrentUser($id)) {
-		throw new Content_PagetypeException('Page type does not belong to current user or project');
+		throw new Content_PageTypeException('Page type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -192,7 +194,7 @@ public function deletePageType ($id)
  * Selects one page type. Takes the page type id as first argument.
  * Returns array with page type information.
  * 
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param int Page type id
  * @return array
  */
@@ -200,12 +202,12 @@ public function selectPageType ($id)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Content_PagetypeException('Input for parameter id is not numeric');
+		throw new Content_PageTypeException('Input for parameter id is not numeric');
 	}
 	
 	// prepare query
@@ -251,7 +253,7 @@ public function selectPageType ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param array Select params
  * @return array
  */
@@ -259,7 +261,7 @@ public function selectPageTypes ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -269,7 +271,7 @@ public function selectPageTypes ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Content_PagetypeException('Input for parameter params is not an array');	
+		throw new Content_PageTypeException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -280,7 +282,7 @@ public function selectPageTypes ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Content_PagetypeException("Unknown parameter $_key");
+				throw new Content_PageTypeException("Unknown parameter $_key");
 		}
 	}
 	
@@ -324,7 +326,7 @@ public function selectPageTypes ($params = array())
  * considered when checking for uniqueness (useful for updates).
  * Returns boolean true if page type name is unique.
  *
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param string Page type name
  * @param int Page type id
  * @return bool
@@ -333,18 +335,18 @@ public function testForUniqueName ($name, $id = null)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($name)) {
-		throw new Content_PagetypeException("Input for parameter name is not expected to be empty");
+		throw new Content_PageTypeException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Content_PagetypeException("Input for parameter name is expected to be scalar");
+		throw new Content_PageTypeException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Content_PagetypeException("Input for parameter id is expected to be numeric");
+		throw new Content_PageTypeException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -387,7 +389,7 @@ public function testForUniqueName ($name, $id = null)
  * (useful for updates). Returns boolean true if the internal page
  * type name is unique.
  *
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param string Internal page type name
  * @param int Page type id
  * @return bool
@@ -396,18 +398,18 @@ public function testForUniqueInternalName ($name, $id = null)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($name)) {
-		throw new Content_PagetypeException("Input for parameter name is not expected to be empty");
+		throw new Content_PageTypeException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Content_PagetypeException("Input for parameter name is expected to be scalar");
+		throw new Content_PageTypeException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Content_PagetypeException("Input for parameter id is expected to be numeric");
+		throw new Content_PageTypeException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -446,7 +448,7 @@ public function testForUniqueInternalName ($name, $id = null)
  * Tests whether given page type belongs to current project. Takes the
  * page type id as first argument. Returns bool.
  *
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param int Page type id
  * @return int bool
  */
@@ -454,12 +456,12 @@ public function pageTypeBelongsToCurrentProject ($page_type)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($page_type) || !is_numeric($page_type)) {
-		throw new Content_PagetypeException('Input for parameter page_type is expected to be a numeric value');
+		throw new Content_PageTypeException('Input for parameter page_type is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -492,7 +494,7 @@ public function pageTypeBelongsToCurrentProject ($page_type)
  * Test whether page type belongs to current user or not. Takes
  * the page type id as first argument. Returns bool.
  *
- * @throws Content_PagetypeException
+ * @throws Content_PageTypeException
  * @param int Page type id
  * @return bool
  */
@@ -500,12 +502,12 @@ public function pageTypeBelongsToCurrentUser ($page_type)
 {
 	// access check
 	if (!wcom_check_access('Content', 'PageType', 'Use')) {
-		throw new Content_PagetypeException("You are not allowed to perform this action");
+		throw new Content_PageTypeException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($page_type) || !is_numeric($page_type)) {
-		throw new Content_PagetypeException('Input for parameter page_type is expected to be a numeric value');
+		throw new Content_PageTypeException('Input for parameter page_type is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -524,6 +526,6 @@ public function pageTypeBelongsToCurrentUser ($page_type)
 // end of class
 }
 
-class Content_PagetypeException extends Exception { }
+class Content_PageTypeException extends Exception { }
 
 ?>

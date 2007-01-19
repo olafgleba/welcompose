@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Media_Tag object.
+ * 
+ * @return object
+ */
+function Media_Tag ()
+{ 
+	if (Media_Tag::$instance == null) {
+		Media_Tag::$instance = new Media_Tag(); 
+	}
+	return Media_Tag::$instance;
+}
+
 class Media_Tag {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -39,8 +54,9 @@ class Media_Tag {
 	/**
 	 * Tag separator used when converting tag strings to
 	 * arrays and vice versa.
+	 * 
 	 * @param string 
-     */
+	 */
 	public $_tag_separator = ',';
 
 /**
@@ -48,7 +64,7 @@ class Media_Tag {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -64,19 +80,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Media_Tag object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Media_Tag::$instance == null) {
-		Media_Tag::$instance = new Media_Tag(); 
-	}
-	return Media_Tag::$instance;
 }
 
 /**

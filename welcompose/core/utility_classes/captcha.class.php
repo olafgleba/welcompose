@@ -22,22 +22,39 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+
+/**
+ * Singleton. Returns instance of the Utility_Captcha object.
+ * 
+ * @return object
+ */
+function Utility_Captcha ()
+{ 
+	if (Utility_Captcha::$instance == null) {
+		Utility_Captcha::$instance = new Utility_Captcha(); 
+	}
+	return Utility_Captcha::$instance;
+}
+
 class Utility_Captcha {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
 	
 	/**
 	 * Session key name where to save the captcha value to
+	 * 
 	 * @var string
 	 */
 	protected $_session_key = "_wcom_captcha";
@@ -47,7 +64,7 @@ class Utility_Captcha {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -66,19 +83,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Utility_Captcha object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Utility_Captcha::$instance == null) {
-		Utility_Captcha::$instance = new Utility_Captcha(); 
-	}
-	return Utility_Captcha::$instance;
 }
 
 /**

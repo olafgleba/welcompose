@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Application_Pingserviceconfiguration {
+/**
+ * Singleton for Application_PingServiceConfiguration.
+ * 
+ * @return object
+ */
+function Application_PingServiceConfiguration ()
+{
+	if (Application_PingServiceConfiguration::$instance == null) {
+		Application_PingServiceConfiguration::$instance = new Application_PingServiceConfiguration(); 
+	}
+	return Application_PingServiceConfiguration::$instance;
+}
+
+class Application_PingServiceConfiguration {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 *
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Application_Pingserviceconfiguration {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,25 +75,11 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the
- * Application_Pingserviceconfiguration object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Application_Pingserviceconfiguration::$instance == null) {
-		Application_Pingserviceconfiguration::$instance = new Application_Pingserviceconfiguration(); 
-	}
-	return Application_Pingserviceconfiguration::$instance;
-}
-
-/**
  * Adds ping service configuration to the ping service configuration
  * table. Takes a field=>value array with ping service configuration
  * data as first argument. Returns insert id. 
  * 
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param array Row data
  * @return int Ping service configuration id
  */
@@ -86,12 +87,12 @@ public function addPingServiceConfiguration ($sqlData)
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter sqlData is not an array');	
+		throw new Application_PingServiceConfigurationException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
@@ -100,7 +101,7 @@ public function addPingServiceConfiguration ($sqlData)
 		
 	// test if ping service configuration belongts to current project/user
 	if (!$this->pingServiceConfigurationBelongsToCurrentUser($insert_id)) {
-		throw new Application_PingserviceconfigurationException("Ping service configuration does not '.
+		throw new Application_PingServiceConfigurationException("Ping service configuration does not '.
 		 	'belong to current user or project");
 	}
 	
@@ -114,7 +115,7 @@ public function addPingServiceConfiguration ($sqlData)
  * new ping service configuration data as second argument. Returns
  * amount of affected rows.
  *
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param int Ping service configuration id
  * @param array Row data
  * @return int Affected rows
@@ -123,20 +124,20 @@ public function updatePingServiceConfiguration ($id, $sqlData)
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter id is not an array');
+		throw new Application_PingServiceConfigurationException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter sqlData is not an array');	
+		throw new Application_PingServiceConfigurationException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if ping service configuration belongts to current project/user
 	if (!$this->pingServiceConfigurationBelongsToCurrentUser($id)) {
-		throw new Application_PingserviceconfigurationException("Ping service configuration does not '.
+		throw new Application_PingServiceConfigurationException("Ping service configuration does not '.
 		 	'belong to current user or project");
 	}
 	
@@ -158,7 +159,7 @@ public function updatePingServiceConfiguration ($id, $sqlData)
  * table. Takes the ping service configuration id as first argument. Returns
  * amount of affected rows.
  * 
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param int Ping service configuration id
  * @return int Amount of affected rows
  */
@@ -166,17 +167,17 @@ public function deletePingServiceConfiguration ($id)
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter id is not numeric');
+		throw new Application_PingServiceConfigurationException('Input for parameter id is not numeric');
 	}
 	
 	// test if ping service configuration belongts to current project/user
 	if (!$this->pingServiceConfigurationBelongsToCurrentUser($id)) {
-		throw new Application_PingserviceconfigurationException("Ping service configuration does not '.
+		throw new Application_PingServiceConfigurationException("Ping service configuration does not '.
 		 	'belong to current user or project");
 	}
 	
@@ -198,7 +199,7 @@ public function deletePingServiceConfiguration ($id)
  * configuration id as first argument. Returns array with ping service
  * configuration information.
  * 
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param int Ping service configuration id
  * @return array
  */
@@ -206,12 +207,12 @@ public function selectPingServiceConfiguration ($id)
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter id is not numeric');
+		throw new Application_PingServiceConfigurationException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -269,7 +270,7 @@ public function selectPingServiceConfiguration ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param array Select params
  * @return array
  */
@@ -277,7 +278,7 @@ public function selectPingServiceConfigurations ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -289,7 +290,7 @@ public function selectPingServiceConfigurations ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter params is not an array');	
+		throw new Application_PingServiceConfigurationException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -302,7 +303,7 @@ public function selectPingServiceConfigurations ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_PingserviceconfigurationException("Unknown parameter $_key");
+				throw new Application_PingServiceConfigurationException("Unknown parameter $_key");
 		}
 	}
 	
@@ -371,7 +372,7 @@ public function selectPingServiceConfigurations ($params = array())
  * <li>ping_service, int, optional: Ping service id</li> 
  * </ul>
  * 
- * @throws Application_PingserviceconfigurationException
+ * @throws Application_PingServiceConfigurationException
  * @param array Count params
  * @return array
  */
@@ -379,7 +380,7 @@ public function countPingServiceConfigurations ($params = array())
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// define some vars
@@ -389,7 +390,7 @@ public function countPingServiceConfigurations ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter params is not an array');	
+		throw new Application_PingServiceConfigurationException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -400,7 +401,7 @@ public function countPingServiceConfigurations ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_PingserviceconfigurationException("Unknown parameter $_key");
+				throw new Application_PingServiceConfigurationException("Unknown parameter $_key");
 		}
 	}
 	
@@ -440,7 +441,7 @@ public function countPingServiceConfigurations ($params = array())
  * Tests whether given ping service configuration belongs to current project.
  * Takes the ping service configuration id as first argument. Returns bool.
  *
- * @throws Application_Pingserviceconfiguration
+ * @throws Application_PingServiceConfiguration
  * @param int Text macro id
  * @return int bool
  */
@@ -448,12 +449,12 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
-		throw new Application_PingserviceconfigurationException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($ping_service_configuration) || !is_numeric($ping_service_configuration)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter ping_service_configuration '.
+		throw new Application_PingServiceConfigurationException('Input for parameter ping_service_configuration '.
 		    ' is expected to be a numeric value');
 	}
 	
@@ -491,7 +492,7 @@ public function pingServiceConfigurationBelongsToCurrentProject ($ping_service_c
  * Test whether ping service configuration belongs to current user or not.
  * Takes the ping service configuration id as first argument. Returns bool.
  *
- * @throws Application_Pingserviceconfiguration
+ * @throws Application_PingServiceConfiguration
  * @param int Ping service configuration id
  * @return bool
  */
@@ -499,12 +500,12 @@ public function pingServiceConfigurationBelongsToCurrentUser ($ping_service_conf
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingServiceConfiguration', 'Use')) {
-		throw new Application_TextmacroException("You are not allowed to perform this action");
+		throw new Application_PingServiceConfigurationException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($ping_service_configuration) || !is_numeric($ping_service_configuration)) {
-		throw new Application_PingserviceconfigurationException('Input for parameter ping_service_configuration '.
+		throw new Application_PingServiceConfigurationException('Input for parameter ping_service_configuration '.
 		    ' is expected to be a numeric value');
 	}
 	
@@ -524,6 +525,6 @@ public function pingServiceConfigurationBelongsToCurrentUser ($ping_service_conf
 // end of class
 }
 
-class Application_PingserviceconfigurationException extends Exception { }
+class Application_PingServiceConfigurationException extends Exception { }
 
 ?>

@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Templating_Template object.
+ * 
+ * @return object
+ */
+function Templating_Template ()
+{ 
+	if (Templating_Template::$instance == null) {
+		Templating_Template::$instance = new Templating_Template(); 
+	}
+	return Templating_Template::$instance;
+}
+
 class Templating_Template {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Templating_Template {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance

@@ -41,8 +41,6 @@
  * 
  * class my_balance extends balance {
  * 
- * // singleton etc. goes here
- * 
  * public function add()
  * {
  * 	// your code goes here
@@ -92,8 +90,8 @@ function load ($token, $args = array())
 		// unified class loader
 		default:
 			// check token
-			if (!preg_match("=^([a-z0-9-_.]+):([a-z0-9-_.]+)$=i", $token)) {
-				trigger_error("Unable to recognize token format", E_USER_ERROR);
+			if (!preg_match('=^([a-z0-9-_.]+):([a-z0-9-_.]+)$=i', $token)) {
+				trigger_error('Unable to recognize token format', E_USER_ERROR);
 			}
 			
 			// split token into "namespace" and class
@@ -111,7 +109,11 @@ function load ($token, $args = array())
 				require($class_path);
 			}
 			
-			return call_user_func_array(array($class_name, 'instance'), $args);
+			if (!function_exists($class_name)) {
+				trigger_error('Singleton for class to load does not exist', E_USER_ERROR);
+			}
+			
+			return $class_name($args);
 	}
 }
 

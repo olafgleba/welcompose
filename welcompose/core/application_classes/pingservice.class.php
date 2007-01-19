@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Application_Pingservice {
+/**
+ * Singleton for Application_PingService.
+ * 
+ * @return object
+ */
+function Application_PingService ()
+{
+	if (Application_PingService::$instance == null) {
+		Application_PingService::$instance = new Application_PingService(); 
+	}
+	return Application_PingService::$instance;
+}
+
+class Application_PingService {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Application_Pingservice {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_Pingservice object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Application_Pingservice::$instance == null) {
-		Application_Pingservice::$instance = new Application_Pingservice(); 
-	}
-	return Application_Pingservice::$instance;
-}
-
-/**
  * Adds ping service to the ping service table. Takes a field=>value
  * array with ping service data as first argument. Returns insert id. 
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param array Row data
  * @return int Insert id
  */
@@ -88,7 +90,7 @@ public function addPingService ($sqlData)
 	}
 	
 	if (!is_array($sqlData)) {
-		throw new Application_PingserviceException('Input for parameter sqlData is not an array');	
+		throw new Application_PingServiceException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new ping service will be assigned to the current project
@@ -99,7 +101,7 @@ public function addPingService ($sqlData)
 
 	// test if ping service belongs to current user/project
 	if (!$this->pingServiceBelongsToCurrentUser($insert_id)) {
-		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+		throw new Application_PingServiceException("Ping service does not belong to current user or project");
 	}
 	
 	return $insert_id;
@@ -110,7 +112,7 @@ public function addPingService ($sqlData)
  * field=>value array with the new ping service data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service id
  * @param array Row data
  * @return int Affected rows
@@ -124,15 +126,15 @@ public function updatePingService ($id, $sqlData)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceException('Input for parameter id is not an array');
+		throw new Application_PingServiceException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_PingserviceException('Input for parameter sqlData is not an array');	
+		throw new Application_PingServiceException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if ping service belongs to current user/project
 	if (!$this->pingServiceBelongsToCurrentUser($id)) {
-		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+		throw new Application_PingServiceException("Ping service does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -154,7 +156,7 @@ public function updatePingService ($id, $sqlData)
  * ping service id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service id
  * @return int Amount of affected rows
  */
@@ -167,12 +169,12 @@ public function deletePingService ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceException('Input for parameter id is not numeric');
+		throw new Application_PingServiceException('Input for parameter id is not numeric');
 	}
 	
 	// test if ping service belongs to current user/project
 	if (!$this->pingServiceBelongsToCurrentUser($id)) {
-		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+		throw new Application_PingServiceException("Ping service does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -192,7 +194,7 @@ public function deletePingService ($id)
  * Selects one ping service. Takes the ping service id as first
  * argument. Returns array with ping service information.
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service id
  * @return array
  */
@@ -205,7 +207,7 @@ public function selectPingService ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_PingserviceException('Input for parameter id is not numeric');
+		throw new Application_PingServiceException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -251,7 +253,7 @@ public function selectPingService ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param array Select params
  * @return array
  */
@@ -269,7 +271,7 @@ public function selectPingServices ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_PingserviceException('Input for parameter params is not an array');	
+		throw new Application_PingServiceException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -280,7 +282,7 @@ public function selectPingServices ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_PingserviceException("Unknown parameter $_key");
+				throw new Application_PingServiceException("Unknown parameter $_key");
 		}
 	}
 	
@@ -325,7 +327,7 @@ public function selectPingServices ($params = array())
  * 
  * No params supported.
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param array Count params
  * @return array
  */
@@ -341,14 +343,14 @@ public function countPingServices ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_PingserviceException('Input for parameter params is not an array');	
+		throw new Application_PingServiceException('Input for parameter params is not an array');	
 	}
 	
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			default:
-				throw new Application_PingserviceException("Unknown parameter $_key");
+				throw new Application_PingServiceException("Unknown parameter $_key");
 		}
 	}
 	
@@ -378,7 +380,7 @@ public function countPingServices ($params = array())
  * when checking for uniqueness (useful for updates). Returns boolean true if
  * ping service name is unique.
  *
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param string Ping service name
  * @param int Ping service id
  * @return bool
@@ -392,13 +394,13 @@ public function testForUniqueName ($name, $id = null)
 	
 	// input check
 	if (empty($name)) {
-		throw new Application_PingserviceException("Input for parameter name is not expected to be empty");
+		throw new Application_PingServiceException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Application_PingserviceException("Input for parameter name is expected to be scalar");
+		throw new Application_PingServiceException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Application_PingserviceException("Input for parameter id is expected to be numeric");
+		throw new Application_PingServiceException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -437,7 +439,7 @@ public function testForUniqueName ($name, $id = null)
  * Notifies ping service. Takes the id of the ping service configuration
  * to use as first argument. Returns true.
  * 
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service configuration id
  * @return bool
  */
@@ -450,7 +452,7 @@ public function pingService ($configuration_id)
 		
 	// input check
 	if (empty($configuration_id) || !is_numeric($configuration_id)) {
-		throw new Application_PingserviceException("Input for parameter configuration_id is not numeric");
+		throw new Application_PingServiceException("Input for parameter configuration_id is not numeric");
 	}
 	
 	// load ping service configuration class
@@ -458,7 +460,7 @@ public function pingService ($configuration_id)
 	
 	// test if ping service belongs to current user/project 
 	if (!$PINGSERVICECONFIGURATION->pingServiceConfigurationBelongsToCurrentUser($configuration_id)) {
-		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+		throw new Application_PingServiceException("Ping service does not belong to current user or project");
 	}
 	
 	// get service configuration
@@ -466,7 +468,7 @@ public function pingService ($configuration_id)
 	
 	// make sure that we got the configuration
 	if (empty($configuration) || !is_array($configuration)) {
-		throw new Application_PingserviceException("Requested ping service configuration does not exist");
+		throw new Application_PingServiceException("Requested ping service configuration does not exist");
 	}
 	
 	// get service
@@ -474,12 +476,12 @@ public function pingService ($configuration_id)
 	
 	// test if ping service belongs to current user/project
 	if (!$this->pingServiceBelongsToCurrentUser($service['id'])) {
-		throw new Application_PingserviceException("Ping service does not belong to current user or project");
+		throw new Application_PingServiceException("Ping service does not belong to current user or project");
 	}
 	
 	// make sure that we got the service
 	if (empty($service) || !is_array($service)) {
-		throw new Application_PingserviceException("Requested ping service does not exist");
+		throw new Application_PingServiceException("Requested ping service does not exist");
 	}
 		
 	// load PEAR::XML_RPC
@@ -509,7 +511,7 @@ public function pingService ($configuration_id)
 	
 	// evaluate error code
 	if ($error > 0)  {
-		throw new Application_PingserviceException("Ping failed, reason: ".strip_tags($message));
+		throw new Application_PingServiceException("Ping failed, reason: ".strip_tags($message));
 	} else {
 		return true;
 	}
@@ -519,7 +521,7 @@ public function pingService ($configuration_id)
  * Tests whether given ping service belongs to current project. Takes the
  * ping service id as first argument. Returns bool.
  *
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service id
  * @return int bool
  */
@@ -565,7 +567,7 @@ public function pingServiceBelongsToCurrentProject ($ping_service)
  * Test whether ping service belongs to current user or not. Takes
  * the ping service id as first argument. Returns bool.
  *
- * @throws Application_PingserviceException
+ * @throws Application_PingServiceException
  * @param int Ping service id
  * @return bool
  */
@@ -573,12 +575,12 @@ public function pingServiceBelongsToCurrentUser ($ping_service)
 {
 	// access check
 	if (!wcom_check_access('Application', 'PingService', 'Use')) {
-		throw new Application_PingserviceException("You are not allowed to perform this action");
+		throw new Application_PingServiceException("You are not allowed to perform this action");
 	}
 	
 	// input check
 	if (empty($ping_service) || !is_numeric($ping_service)) {
-		throw new Application_PingserviceException('Input for parameter ping_service is expected to be a numeric value');
+		throw new Application_PingServiceException('Input for parameter ping_service is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -597,6 +599,6 @@ public function pingServiceBelongsToCurrentUser ($ping_service)
 // end of class
 }
 
-class Application_PingserviceException extends Exception { }
+class Application_PingServiceException extends Exception { }
 
 ?>

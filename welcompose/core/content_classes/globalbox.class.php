@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton for Content_GlobalBox.
+ * 
+ * @return object
+ */
+function Content_GlobalBox ()
+{
+	if (Content_GlobalBox::$instance == null) {
+		Content_GlobalBox::$instance = new Content_GlobalBox(); 
+	}
+	return Content_GlobalBox::$instance;
+}
+
 class Content_GlobalBox {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Content_GlobalBox {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -57,19 +72,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Content_GlobalBox object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Content_GlobalBox::$instance == null) {
-		Content_GlobalBox::$instance = new Content_GlobalBox(); 
-	}
-	return Content_GlobalBox::$instance;
 }
 
 /**

@@ -36,19 +36,6 @@ interface Display {
 public function __construct($project, $page);
 
 /**
- * Loads new instance of display driver. See the constructor
- * for an argument description.
- *
- * In comparison to the constructor, it can be called using
- * call_user_func_array(). Please note that's not a singleton.
- * 
- * @param array Project information
- * @param array Page information
- * @return object New display driver instance
- */
-public static function instance($project, $page);
-
-/**
  * Default method that will be called from the display script
  * and has to care about the page preparation. Returns boolean
  * true on success.

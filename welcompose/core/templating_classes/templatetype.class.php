@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Templating_Templatetype {
+/**
+ * Singleton. Returns instance of the Templating_TemplateType object.
+ * 
+ * @return object
+ */
+function Templating_TemplateType ()
+{ 
+	if (Templating_TemplateType::$instance == null) {
+		Templating_TemplateType::$instance = new Templating_TemplateType(); 
+	}
+	return Templating_TemplateType::$instance;
+}
+
+class Templating_TemplateType {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Templating_Templatetype {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Templating_Templatetype object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Templating_Templatetype::$instance == null) {
-		Templating_Templatetype::$instance = new Templating_Templatetype(); 
-	}
-	return Templating_Templatetype::$instance;
-}
-
-/**
  * Creates new template type. Takes field=>value array with template
  * type data as first argument. Returns insert id.
  * 
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param array Row data
  * @return int Template type id
  */
@@ -89,7 +91,7 @@ public function addTemplateType ($sqlData)
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Templating_TemplatetypeException('Input for parameter sqlData is not an array');	
+		throw new Templating_TemplateTypeException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new template type will be assigned to the current project
@@ -100,7 +102,7 @@ public function addTemplateType ($sqlData)
 	
 	// test if template type belongs to current user/project
 	if (!$this->templateTypeBelongsToCurrentUser($insert_id)) {
-		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
+		throw new Templating_TemplateTypeException('Template type does not belong to current user or project');
 	}
 	
 	return $insert_id;
@@ -111,7 +113,7 @@ public function addTemplateType ($sqlData)
  * a field=>value array with the new template type data as second
  * argument. Returns amount of affected rows.
  *
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param int Template type id
  * @param array Row data
  * @return int Affected rows
@@ -125,15 +127,15 @@ public function updateTemplateType ($id, $sqlData)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatetypeException('Input for parameter id is not an array');
+		throw new Templating_TemplateTypeException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Templating_TemplatetypeException('Input for parameter sqlData is not an array');	
+		throw new Templating_TemplateTypeException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if template type belongs to current user/project
 	if (!$this->templateTypeBelongsToCurrentUser($id)) {
-		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
+		throw new Templating_TemplateTypeException('Template type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -155,7 +157,7 @@ public function updateTemplateType ($id, $sqlData)
  * template type id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param int Template type id
  * @return int Amount of affected rows
  */
@@ -168,12 +170,12 @@ public function deleteTemplateType ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatetypeException('Input for parameter id is not numeric');
+		throw new Templating_TemplateTypeException('Input for parameter id is not numeric');
 	}
 	
 	// test if template type belongs to current user/project
 	if (!$this->templateTypeBelongsToCurrentUser($id)) {
-		throw new Templating_TemplatetypeException('Template type does not belong to current user or project');
+		throw new Templating_TemplateTypeException('Template type does not belong to current user or project');
 	}
 	
 	// prepare where clause
@@ -194,7 +196,7 @@ public function deleteTemplateType ($id)
  * Selects one template type. Takes the template type id as first
  * argument. Returns array with template type information.
  * 
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param int Template type id
  * @return array
  */
@@ -207,7 +209,7 @@ public function selectTemplateType ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Templating_TemplatetypeException('Input for parameter id is not numeric');
+		throw new Templating_TemplateTypeException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -252,7 +254,7 @@ public function selectTemplateType ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param array Select params
  * @return array
  */
@@ -270,7 +272,7 @@ public function selectTemplateTypes ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Templating_TemplatetypeException('Input for parameter params is not an array');	
+		throw new Templating_TemplateTypeException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -281,7 +283,7 @@ public function selectTemplateTypes ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Templating_TemplatetypeException("Unknown parameter $_key");
+				throw new Templating_TemplateTypeException("Unknown parameter $_key");
 		}
 	}
 	
@@ -322,7 +324,7 @@ public function selectTemplateTypes ($params = array())
  * Checks whether the given template type belongs to the current project or not. Takes
  * the id of the template type as first argument. Returns bool.
  *
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param int Template type id
  * @return bool
  */
@@ -335,7 +337,7 @@ public function templateTypeBelongsToCurrentProject ($type)
 	
 	// input check
 	if (empty($type) || !is_numeric($type)) {
-		throw new Templating_TemplatetypeException('Input for parameter type is expected to be a numeric value');
+		throw new Templating_TemplateTypeException('Input for parameter type is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -404,7 +406,7 @@ public function templateTypeBelongsToCurrentUser ($template_type)
  * when checking for uniqueness (useful for updates). Returns boolean true if
  * template type name is unique.
  *
- * @throws Templating_TemplatetypeException
+ * @throws Templating_TemplateTypeException
  * @param string Template type name
  * @param int Template type id
  * @return bool
@@ -418,13 +420,13 @@ public function testForUniqueName ($name, $id = null)
 	
 	// input check
 	if (empty($name)) {
-		throw new Templating_TemplatetypeException("Input for parameter name is not expected to be empty");
+		throw new Templating_TemplateTypeException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Templating_TemplatetypeException("Input for parameter name is expected to be scalar");
+		throw new Templating_TemplateTypeException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Templating_TemplatetypeException("Input for parameter id is expected to be numeric");
+		throw new Templating_TemplateTypeException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -462,6 +464,6 @@ public function testForUniqueName ($name, $id = null)
 // end of class
 }
 
-class Templating_TemplatetypeException extends Exception { }
+class Templating_TemplateTypeException extends Exception { }
 
 ?>

@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the User_Login object.
+ * 
+ * @return object
+ */
+function User_Login ()
+{ 
+	if (User_Login::$instance == null) {
+		User_Login::$instance = new User_Login(); 
+	}
+	return User_Login::$instance;
+}
+
 class User_Login {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class User_Login {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -57,19 +72,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the User_Login object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (User_Login::$instance == null) {
-		User_Login::$instance = new User_Login(); 
-	}
-	return User_Login::$instance;
 }
 
 /**

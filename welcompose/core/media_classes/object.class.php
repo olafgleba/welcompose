@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Media_Object object.
+ * 
+ * @return object
+ */
+function Media_Object ()
+{ 
+	if (Media_Object::$instance == null) {
+		Media_Object::$instance = new Media_Object(); 
+	}
+	return Media_Object::$instance;
+}
+
 class Media_Object {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Media_Object {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -57,19 +72,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Media_Object object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Media_Object::$instance == null) {
-		Media_Object::$instance = new Media_Object(); 
-	}
-	return Media_Object::$instance;
 }
 
 /**

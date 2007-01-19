@@ -23,16 +23,37 @@
  */
 
 // load the display interface
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'display.interface.php');
+if (!interface_exists('Display')) {
+	$path_parts = array(
+		dirname(__FILE__),
+		'display.interface.php'
+	);
+	require(implode(DIRECTORY_SEPARATOR, $path_parts));
+}
+
+/**
+ * Class loader compatible to loader.php. Wrapps around constructor.
+ * 
+ * @param array
+ * @return object
+ */
+function Display_SimplePageIndex ($args)
+{
+	// check input
+	if (!is_array($args)) {
+		trigger_error('Constructor args are not an array', E_USER_ERROR);
+	}
+	if (!array_key_exists(0, $args)) {
+		trigger_error('Constructor arg project does not exist', E_USER_ERROR);
+	}
+	if (!array_key_exists(1, $args)) {
+		trigger_error('Constructor arg page does not exist', E_USER_ERROR);
+	}
+
+	return new Display_SimplePageIndex($args[0], $args[1]);
+}
 
 class Display_SimplePageIndex implements Display {
-	
-	/**
-	 * Singleton
-	 *
-	 * @var object
-	 */
-	private static $instance = null;
 	
 	/**
 	 * Reference to base class
@@ -108,22 +129,6 @@ public function __construct($project, $page)
 	
 	// assign simple page to smarty
 	$this->base->utility->smarty->assign('simple_page', $this->_simple_page);
-}
-
-/**
- * Loads new instance of display driver. See the constructor
- * for an argument description.
- *
- * In comparison to the constructor, it can be called using
- * call_user_func_array(). Please note that's not a singleton.
- * 
- * @param array Project information
- * @param array Page information
- * @return object New display driver instance
- */
-public static function instance($project, $page)
-{
-	return new Display_SimplePageIndex($project, $page);
 }
 
 /**

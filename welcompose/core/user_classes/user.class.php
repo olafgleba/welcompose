@@ -28,22 +28,37 @@
 function wcom_check_access ($area = null, $component = null, $action = null)
 {
 	// get instance of user class
-	$USER = User_User::instance();
+	$USER = User_User();
 	
 	// run access check
 	return $USER->userCheckAccess($area, $component, $action);
+}
+
+/**
+ * Singleton. Returns instance of the User_User object.
+ * 
+ * @return object
+ */
+function User_User ()
+{ 
+	if (User_User::$instance == null) {
+		User_User::$instance = new User_User(); 
+	}
+	return User_User::$instance;
 }
 
 class User_User {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -53,7 +68,7 @@ class User_User {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -69,19 +84,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the User_User object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (User_User::$instance == null) {
-		User_User::$instance = new User_User(); 
-	}
-	return User_User::$instance;
 }
 
 /**

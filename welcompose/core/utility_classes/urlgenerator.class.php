@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Utility_UrlGenerator object.
+ * 
+ * @return object
+ */
+function Utility_UrlGenerator ()
+{ 
+	if (Utility_UrlGenerator::$instance == null) {
+		Utility_UrlGenerator::$instance = new Utility_UrlGenerator(); 
+	}
+	return Utility_UrlGenerator::$instance;
+}
+
 class Utility_UrlGenerator {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -75,7 +90,7 @@ class Utility_UrlGenerator {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -91,19 +106,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Utility_UrlGenerator object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Utility_UrlGenerator::$instance == null) {
-		Utility_UrlGenerator::$instance = new Utility_UrlGenerator(); 
-	}
-	return Utility_UrlGenerator::$instance;
 }
 
 /**

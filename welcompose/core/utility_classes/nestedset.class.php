@@ -25,16 +25,32 @@
 define("UTILITY_NESTEDSET_CREATE_BEFORE", 2001);
 define("UTILITY_NESTEDSET_CREATE_AFTER", 2002);
 
-class Utility_Nestedset {
+
+/**
+ * Singleton. Returns instance of the Utility_NestedSet object.
+ * 
+ * @return object
+ */
+function Utility_NestedSet ()
+{ 
+	if (Utility_NestedSet::$instance == null) {
+		Utility_NestedSet::$instance = new Utility_NestedSet(); 
+	}
+	return Utility_NestedSet::$instance;
+}
+
+class Utility_NestedSet {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -44,7 +60,7 @@ class Utility_Nestedset {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -63,23 +79,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Utility_Nestedset object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Utility_Nestedset::$instance == null) {
-		Utility_Nestedset::$instance = new Utility_Nestedset(); 
-	}
-	return Utility_Nestedset::$instance;
-}
-
-/**
  * Wrapper around all the other create* functions. Decides which of all the
  * different create* functions to use.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @param int Position information
@@ -89,13 +92,13 @@ public function createNode ($navigation, $reference = null, $position = null)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (!empty($reference) && !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for parameter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter reference is expected to be numeric");
 	}
 	if (!empty($position) && !is_numeric($position)) {
-		throw new Utility_NestedsetException("Input for parameter position is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter position is expected to be numeric");
 	}
 	
 	// if there's no reference node, we have to create a root node
@@ -113,7 +116,7 @@ public function createNode ($navigation, $reference = null, $position = null)
 				return $this->createNodeBelow($navigation, $reference, $position);
 			break;
 		default:
-			throw new Utility_NestedsetException("Unknown position supplied");
+			throw new Utility_NestedSetException("Unknown position supplied");
 	}
 }
 
@@ -121,7 +124,7 @@ public function createNode ($navigation, $reference = null, $position = null)
  * Wrapper around the different delete* functions. Decides which of all the
  * different delete functions to use.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return int Amount of affected rows
@@ -130,10 +133,10 @@ public function deleteNode ($navigation, $node)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node) || !is_numeric($node)) {
-		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node is expected to be numeric");
 	}
 	
 	// let's see if it's a root node
@@ -148,7 +151,7 @@ public function deleteNode ($navigation, $node)
  * Wrapper around the different move* functions. Deciedes which of all the
  * different move functions to use.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @param string Move direction
@@ -158,13 +161,13 @@ public function moveNode ($navigation, $node, $direction = "down")
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is not numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is not numeric");
 	}
 	if (empty($node) || !is_numeric($node)) {
-		throw new Utility_NestedsetException("Input for parameter node is not numeric");
+		throw new Utility_NestedSetException("Input for parameter node is not numeric");
 	}
 	if ($direction !== 'down' && $direction !== 'up') {
-		throw new Utility_NestedsetException("Move direction can either be up or down");
+		throw new Utility_NestedSetException("Move direction can either be up or down");
 	}
 	
 	switch ((string)$direction) {
@@ -192,7 +195,7 @@ public function moveNode ($navigation, $node, $direction = "down")
  * reference node</li>
  * </ul>
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @param int Position information
@@ -202,13 +205,13 @@ public function createRootNode ($navigation, $reference = null, $position = null
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (!empty($reference) && !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for parameter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter reference is expected to be numeric");
 	}
 	if (!empty($position) && !is_numeric($position)) {
-		throw new Utility_NestedsetException("Input for parameter position is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter position is expected to be numeric");
 	}
 	
 	// define sorting
@@ -272,7 +275,7 @@ public function createRootNode ($navigation, $reference = null, $position = null
 					$sorting = Base_Cnc::ifsetor($result['sorting'], 0) + 1;
 				break;
 			default:
-				throw new Utility_NestedsetException("Unknown position constant supplied");
+				throw new Utility_NestedSetException("Unknown position constant supplied");
 		}
 	} else {
 		// if we can't find the reference node, simply append the
@@ -329,15 +332,15 @@ public function createNodeAbove ($navigation, $reference)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for parameter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter reference is expected to be numeric");
 	}
 	
 	// make sure that the reference node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Reference node does not exist");
+		throw new Utility_NestedSetException("Reference node does not exist");
 	}
 	
 	// get reference node
@@ -412,7 +415,7 @@ public function createNodeAbove ($navigation, $reference)
  * navigation id as first argument, the id of the reference node where
  * the sub node will be attached to as second argument. Returns insert id.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @return int Insert id
@@ -421,15 +424,15 @@ public function createNodeBelow ($navigation, $reference)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for parameter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter reference is expected to be numeric");
 	}
 	
 	// make sure that the reference node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Reference node does not exist");
+		throw new Utility_NestedSetException("Reference node does not exist");
 	}
 	
 	// get reference node
@@ -499,7 +502,7 @@ public function createNodeBelow ($navigation, $reference)
  * 
  * Attention: Is only able to move nodes with a lft between 1 and 2.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation Id
  * @param int Node id
  * @return bool
@@ -508,15 +511,15 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -1596,7 +1599,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
 		// execute query
 		$this->base->db->execute($sql, $bind_params);			
 	} else {
-		throw new Utility_NestedsetException("Move not implemented");
+		throw new Utility_NestedSetException("Move not implemented");
 	}
 	
 	return true;
@@ -1609,7 +1612,7 @@ public function moveUpAcrossTrees ($navigation, $node_id)
  *
  * Attention: Cannot move nodes with lft < 2. 
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return bool
@@ -1618,15 +1621,15 @@ public function moveUpInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -2070,7 +2073,7 @@ public function moveUpInTree ($navigation, $node_id)
  * argument, the id of the node to move as second argument. Returns
  * boolean true.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return bool
@@ -2079,15 +2082,15 @@ public function moveDownAcrossTrees ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -2304,7 +2307,7 @@ public function moveDownAcrossTrees ($navigation, $node_id)
  * Moves node down in tree. Takes the navigation id as first argument,
  * the id of the node to move as second argument. Returns boolean true.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return bool
@@ -2313,15 +2316,15 @@ public function moveDownInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -2705,7 +2708,7 @@ public function moveDownInTree ($navigation, $node_id)
 		$this->base->db->update(WCOM_DB_CONTENT_NODES, $sqlData, $where, $bind_params);
 		
 	} else {
-		throw new Utility_NestedsetException("Move not implemented");
+		throw new Utility_NestedSetException("Move not implemented");
 	}
 	
 	return true;
@@ -2718,7 +2721,7 @@ public function moveDownInTree ($navigation, $node_id)
  * argument and the id of the new navigation as third and last
  * argument.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @param int New navigation id
@@ -2728,14 +2731,14 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	// input check
 	if (empty($new_navigation) || !is_numeric($new_navigation)) {
-		throw new Utility_NestedsetException("Input for parameter new_navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter new_navigation is expected to be numeric");
 	}
 	
 	// if new and old navigation are the same, skip the whole procedure
@@ -2745,7 +2748,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 		
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -2915,7 +2918,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
 	
 		$this->base->db->execute($sql, $bind_params);		
 	} else {
-		throw new Utility_NestedsetException("Move not implemented");
+		throw new Utility_NestedSetException("Move not implemented");
 	}
 	
 	// put current node at the end of the new navigation
@@ -2950,7 +2953,7 @@ public function changeNavigationOfRootNode ($navigation, $node_id, $new_navigati
  * argument and the id of the new navigation as third and last
  * argument.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @param int New navigation id
@@ -2960,13 +2963,13 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node is expected to be numeric");
 	}
 	if (empty($new_navigation) || !is_numeric($new_navigation)) {
-		throw new Utility_NestedsetException("Input for parameter new_navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter new_navigation is expected to be numeric");
 	}
 		
 	// if new and old navigation are the same, skip the whole procedure
@@ -2976,7 +2979,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -3085,7 +3088,7 @@ public function changeNavigationOfNodeInTree ($navigation, $node_id, $new_naviga
  * the id of the root node to delete as second argument. Returns
  * amount of affected rows.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return int Amount of affected rows
@@ -3094,15 +3097,15 @@ public function deleteRootNode ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -3297,7 +3300,7 @@ public function deleteRootNode ($navigation, $node_id)
 		return $this->base->db->delete(WCOM_DB_CONTENT_NODES, $where, $bind_params);
 				
 	} else {
-		throw new Utility_NestedsetException("Deletion not implemented");
+		throw new Utility_NestedSetException("Deletion not implemented");
 	}
 }
 
@@ -3306,7 +3309,7 @@ public function deleteRootNode ($navigation, $node_id)
  * the id of the node to delete as second argument. Returns amount
  * of affected rows.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Node id
  * @return int Amount of affected rows
@@ -3315,15 +3318,15 @@ public function deleteNodeInTree ($navigation, $node_id)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (empty($node_id) || !is_numeric($node_id)) {
-		throw new Utility_NestedsetException("Input for parameter node_id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node_id is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($node_id, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -3442,7 +3445,7 @@ public function deleteNodeInTree ($navigation, $node_id)
  * Selects node. Takes the node id as first argument. Returns
  * array.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Node id
  * @return array
  */
@@ -3450,7 +3453,7 @@ public function selectNode ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Utility_NestedsetException("Input for parameter id is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -3495,7 +3498,7 @@ public function selectNode ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param array Select params
  * @return array
  */
@@ -3511,7 +3514,7 @@ public function selectNodes ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Utility_NestedsetException('Input for parameter params is not an array');	
+		throw new Utility_NestedSetException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -3525,7 +3528,7 @@ public function selectNodes ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Utility_NestedsetException("Unknown parameter $_key");
+				throw new Utility_NestedSetException("Unknown parameter $_key");
 		}
 	}
 	
@@ -3585,7 +3588,7 @@ public function selectNodes ($params = array())
  * <li>parent, int, optional: Parent node id</li>
  * </ul>
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param array Count params
  * @return int
  */
@@ -3601,7 +3604,7 @@ public function countNodes ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Utility_NestedsetException('Input for parameter params is not an array');	
+		throw new Utility_NestedSetException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -3615,7 +3618,7 @@ public function countNodes ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Utility_NestedsetException("Unknown parameter $_key");
+				throw new Utility_NestedSetException("Unknown parameter $_key");
 		}
 	}
 	
@@ -3658,7 +3661,7 @@ public function countNodes ($params = array())
  * first argument, the id of the reference node as second argument.
  * Returns array with complete information about sibling.
  * 
- * @throws Utility_NestedsetExceptio
+ * @throws Utility_NestedSetExceptio
  * @param int Navigation id
  * @param int Reference node id
  * @return array
@@ -3667,15 +3670,15 @@ protected function selectSiblingAbove ($navigation, $reference)
 {
 	// input check
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for paramter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter reference is expected to be numeric");
 	}
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for paramter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter navigation is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get current node
@@ -3731,7 +3734,7 @@ protected function selectSiblingAbove ($navigation, $reference)
  * argument, the reference node id as second argument. Returns
  * array with full node information.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @return array
@@ -3740,15 +3743,15 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
 {
 	// input check
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for paramter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter reference is expected to be numeric");
 	}
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for paramter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter navigation is expected to be numeric");
 	}
 		
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get current node
@@ -3804,7 +3807,7 @@ protected function selectSiblingAboveOneLevelDeeper ($navigation, $reference)
  * first argument, the id of the reference node as second
  * argument. Returns array with full node information.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @return array
@@ -3813,15 +3816,15 @@ protected function selectSiblingAboveOneLevelHigher ($navigation, $reference)
 {
 	// input check
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for paramter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter reference is expected to be numeric");
 	}
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for paramter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter navigation is expected to be numeric");
 	}
 	
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get current node
@@ -3878,7 +3881,7 @@ protected function selectSiblingAboveOneLevelHigher ($navigation, $reference)
  * as first argument and the id of the reference node as second
  * argument. Returns array with full node information.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @param int Reference node id
  * @return array
@@ -3887,15 +3890,15 @@ protected function selectSiblingBelow ($navigation, $reference)
 {
 	// input check
 	if (empty($reference) || !is_numeric($reference)) {
-		throw new Utility_NestedsetException("Input for paramter reference is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter reference is expected to be numeric");
 	}
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for paramter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for paramter navigation is expected to be numeric");
 	}
 		
 	// make sure that the node exists, otherwise we're lost
 	if (!$this->node_exists($reference, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get current node
@@ -3949,7 +3952,7 @@ protected function selectSiblingBelow ($navigation, $reference)
  * given navigation. Takes the navigation id as first
  * argument. Returns int.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @return int Sorting value
  */
@@ -3957,7 +3960,7 @@ protected function selectMaxSorting ($navigation)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	
 	// prepare query
@@ -3987,7 +3990,7 @@ protected function selectMaxSorting ($navigation)
  * given navigation. Takes the navigation id as first
  * argument. Returns int.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @return int Sorting value
  */
@@ -3995,7 +3998,7 @@ protected function selectMinSorting ($navigation)
 {
 	// input check
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	
 	// prepare query
@@ -4025,7 +4028,7 @@ protected function selectMinSorting ($navigation)
  * first argument and the navigation id as optional second argument.
  * Returns bool.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Node id
  * @param int Navigation id
  * @return bool
@@ -4034,10 +4037,10 @@ public function node_exists ($node, $navigation = null)
 {
 	// input check
 	if (empty($node) && !is_numeric($node)) {
-		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node is expected to be numeric");
 	}
 	if (!empty($navigation) && !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	
 	// prepare query
@@ -4075,7 +4078,7 @@ public function node_exists ($node, $navigation = null)
  * first argument and the navigation id as optional second argument.
  * Returns bool.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Node id
  * @param int Navigation id
  * @return bool
@@ -4084,13 +4087,13 @@ public function root_node ($node, $navigation = null)
 {
 	// input check
 	if (empty($node) && !is_numeric($node)) {
-		throw new Utility_NestedsetException("Input for parameter node is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter node is expected to be numeric");
 	}
 	if (!empty($node) && !is_numeric($node)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	if (!$this->node_exists($node, $navigation)) {
-		throw new Utility_NestedsetException("Node does not exist");
+		throw new Utility_NestedSetException("Node does not exist");
 	}
 	
 	// get node
@@ -4108,14 +4111,14 @@ public function root_node ($node, $navigation = null)
  * Executes consistency check on a a navigationt tree. Takes the navigation
  * id as first argument. Returns bool.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param int Navigation id
  * @return bool
  */
 public function testConsistency ($navigation)
 {
 	if (empty($navigation) || !is_numeric($navigation)) {
-		throw new Utility_NestedsetException("Input for parameter navigation is expected to be numeric");
+		throw new Utility_NestedSetException("Input for parameter navigation is expected to be numeric");
 	}
 	
 	// get the whole tree
@@ -4123,17 +4126,17 @@ public function testConsistency ($navigation)
 	
 	// execute sanity test
 	if (!$this->testSanity($whole_tree)) {
-		throw new Utility_NestedsetException("Consistency test failed at sanity test");
+		throw new Utility_NestedSetException("Consistency test failed at sanity test");
 	}
 	
 	// execute root node test
 	if (!$this->testForRootNodes($whole_tree)) {
-		throw new Utility_NestedsetException("Consistency test failed at root node test");
+		throw new Utility_NestedSetException("Consistency test failed at root node test");
 	}
 	
 	// execute nested set test
 	if (!$this->testNestedSets($whole_tree)) {
-		throw new Utility_NestedsetException("Consistency test failed at nested set test");
+		throw new Utility_NestedSetException("Consistency test failed at nested set test");
 	}
 	
 	return true;
@@ -4144,7 +4147,7 @@ public function testConsistency ($navigation)
  * Takes an array with all nodes of a navigation (as returned by selectNodes()) as
  * first argument. Returns bool.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param array Navigation tree
  * @return bool
  */
@@ -4152,7 +4155,7 @@ protected function testSanity ($whole_tree)
 {
 	// input check
 	if (!is_array($whole_tree)) {
-		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+		throw new Utility_NestedSetException("Input for parameter whole_tree is expected to be an array");
 	}
 	
 	foreach ($whole_tree as $_node) {
@@ -4190,7 +4193,7 @@ protected function testSanity ($whole_tree)
  * with all nodes of a navigation (as returned by selectNodes()) as first argument.
  * Returns bool.
  *
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param array Navigation tree
  * @return bool
  */
@@ -4198,7 +4201,7 @@ protected function testForRootNodes ($whole_tree)
 {
 	// input check
 	if (!is_array($whole_tree)) {
-		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+		throw new Utility_NestedSetException("Input for parameter whole_tree is expected to be an array");
 	}
 	
 	// if there's no node at all, we can skip this test
@@ -4220,7 +4223,7 @@ protected function testForRootNodes ($whole_tree)
  * of a navigation (as returned by selectNodes()) as first argument. Returns
  * bool.
  * 
- * @throws Utility_NestedsetException
+ * @throws Utility_NestedSetException
  * @param array Navigation tree
  * @return bool
  */
@@ -4228,7 +4231,7 @@ protected function testNestedSets ($whole_tree)
 {
 	// input check
 	if (!is_array($whole_tree)) {
-		throw new Utility_NestedsetException("Input for parameter whole_tree is expected to be an array");
+		throw new Utility_NestedSetException("Input for parameter whole_tree is expected to be an array");
 	}
 	
 	// if there's no node at all, we can skip this test
@@ -4380,6 +4383,6 @@ protected function testNestedSets ($whole_tree)
 // end of class
 }
 
-class Utility_NestedsetException extends Exception { }
+class Utility_NestedSetException extends Exception { }
 
 ?>

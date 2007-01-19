@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Community_Blogcomment {
+/**
+ * Singleton for Community_BlogComment.
+ * 
+ * @return object
+ */
+function Community_BlogComment ()
+{
+	if (Community_BlogComment::$instance == null) {
+		Community_BlogComment::$instance = new Community_BlogComment(); 
+	}
+	return Community_BlogComment::$instance;
+}
+
+class Community_BlogComment {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Community_Blogcomment {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,30 +75,17 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Community_Blogcomment object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Community_Blogcomment::$instance == null) {
-		Community_Blogcomment::$instance = new Community_Blogcomment(); 
-	}
-	return Community_Blogcomment::$instance;
-}
-
-/**
  * Adds blog comment. Takes a field=>value array with blog comment data as
  * first argument. Returns insert id. 
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param array Row data
  * @return int User id
  */
 public function addBlogComment ($sqlData)
 {
 	if (!is_array($sqlData)) {
-		throw new Community_BlogcommentException('Input for parameter sqlData is not an array');	
+		throw new Community_BlogCommentException('Input for parameter sqlData is not an array');	
 	}
 	
 	// insert row
@@ -100,7 +102,7 @@ public function addBlogComment ($sqlData)
  * field=>value array with the new blog comment data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param int Blog comment id
  * @param array Row data
  * @return int Affected rows
@@ -109,10 +111,10 @@ public function updateBlogComment ($id, $sqlData)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Community_BlogcommentException('Input for parameter id is not an array');
+		throw new Community_BlogCommentException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Community_BlogcommentException('Input for parameter sqlData is not an array');	
+		throw new Community_BlogCommentException('Input for parameter sqlData is not an array');	
 	}
 	
 	// prepare where clause
@@ -133,7 +135,7 @@ public function updateBlogComment ($id, $sqlData)
  * blog comment id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param int Blog comment id
  * @return int Amount of affected rows
  */
@@ -141,7 +143,7 @@ public function deleteBlogComment ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Community_BlogcommentException('Input for parameter id is not numeric');
+		throw new Community_BlogCommentException('Input for parameter id is not numeric');
 	}
 	
 	// get blog comment (we need it to update the comment count)
@@ -169,7 +171,7 @@ public function deleteBlogComment ($id)
  * Selects one blog comment. Takes the blog comment id as first
  * argument. Returns array with blog comment information.
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param int Blog comment id
  * @return array
  */
@@ -177,7 +179,7 @@ public function selectBlogComment ($id)
 {
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Community_BlogcommentException('Input for parameter id is not numeric');
+		throw new Community_BlogCommentException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -292,7 +294,7 @@ public function selectBlogComment ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param array Select params
  * @return array
  */
@@ -310,7 +312,7 @@ public function selectBlogComments ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Community_BlogcommentException('Input for parameter params is not an array');	
+		throw new Community_BlogCommentException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -328,7 +330,7 @@ public function selectBlogComments ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Community_BlogcommentException("Unknown parameter $_key");
+				throw new Community_BlogCommentException("Unknown parameter $_key");
 		}
 	}
 	
@@ -472,7 +474,7 @@ public function selectBlogComments ($params = array())
  * <li>posting, int, optional: Posting id</li>
  * </ul>
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param array Select params
  * @return int
  */
@@ -486,7 +488,7 @@ public function countBlogComments ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Community_BlogcommentException('Input for parameter params is not an array');	
+		throw new Community_BlogCommentException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -501,7 +503,7 @@ public function countBlogComments ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Community_BlogcommentException("Unknown parameter $_key");
+				throw new Community_BlogCommentException("Unknown parameter $_key");
 		}
 	}
 	
@@ -546,7 +548,7 @@ public function countBlogComments ($params = array())
  * Updates blog comment comment. Takes the posting id as first
  * argument. Returns amount of affected rows.
  * 
- * @throws Community_BlogcommentException
+ * @throws Community_BlogCommentException
  * @param int Blog posting id
  * @return int Affected rows
  */
@@ -554,7 +556,7 @@ public function updateBlogCommentCount ($posting_id)
 {
 	// input check
 	if (empty($posting_id) || !is_numeric($posting_id)) {
-		throw new Community_BlogcommentException('Input for parameter posting_id is not numeric');
+		throw new Community_BlogCommentException('Input for parameter posting_id is not numeric');
 	}
 	
 	// count comments
@@ -581,6 +583,6 @@ public function updateBlogCommentCount ($posting_id)
 // end of class
 }
 
-class Community_BlogcommentException extends Exception { }
+class Community_BlogCommentException extends Exception { }
 
 ?>

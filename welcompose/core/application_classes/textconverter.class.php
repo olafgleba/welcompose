@@ -22,16 +22,31 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-class Application_Textconverter {
+/**
+ * Singleton for Application_TextConverter.
+ * 
+ * @return object
+ */
+function Application_TextConverter ()
+{
+	if (Application_TextConverter::$instance == null) {
+		Application_TextConverter::$instance = new Application_TextConverter(); 
+	}
+	return Application_TextConverter::$instance;
+}
+
+class Application_TextConverter {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +56,7 @@ class Application_Textconverter {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -60,23 +75,10 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_Textconverter object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Application_Textconverter::$instance == null) {
-		Application_Textconverter::$instance = new Application_Textconverter(); 
-	}
-	return Application_Textconverter::$instance;
-}
-
-/**
  * Adds text converter to the text converter table. Takes a field=>value
  * array with text converter data as first argument. Returns insert id. 
  * 
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param array Row data
  * @return int Insert id
  */
@@ -89,7 +91,7 @@ public function addTextConverter ($sqlData)
 	
 	// input check
 	if (!is_array($sqlData)) {
-		throw new Application_TextconverterException('Input for parameter sqlData is not an array');	
+		throw new Application_TextConverterException('Input for parameter sqlData is not an array');	
 	}
 	
 	// make sure that the new text converter will be assigned to the current project
@@ -100,7 +102,7 @@ public function addTextConverter ($sqlData)
 	
 	// test if created text converter belongs to current user/project
 	if (!$this->textConverterBelongsToCurrentUser($insert_id)) {
-		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+		throw new Application_TextConverterException("Text converter does not belong to current user or project");
 	}
 	
 	// return insert id
@@ -112,7 +114,7 @@ public function addTextConverter ($sqlData)
  * field=>value array with the new text converter data as second argument.
  * Returns amount of affected rows.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @param array Row data
  * @return int Affected rows
@@ -126,15 +128,15 @@ public function updateTextConverter ($id, $sqlData)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextconverterException('Input for parameter id is not an array');
+		throw new Application_TextConverterException('Input for parameter id is not an array');
 	}
 	if (!is_array($sqlData)) {
-		throw new Application_TextconverterException('Input for parameter sqlData is not an array');	
+		throw new Application_TextConverterException('Input for parameter sqlData is not an array');	
 	}
 	
 	// test if text converter belongs to current user/project
 	if (!$this->textConverterBelongsToCurrentUser($id)) {
-		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+		throw new Application_TextConverterException("Text converter does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -156,7 +158,7 @@ public function updateTextConverter ($id, $sqlData)
  * text converter id as first argument. Returns amount of affected
  * rows.
  * 
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @return int Amount of affected rows
  */
@@ -169,12 +171,12 @@ public function deleteTextConverter ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextconverterException('Input for parameter id is not numeric');
+		throw new Application_TextConverterException('Input for parameter id is not numeric');
 	}
 	
 	// test if text converter belongs to current user/project
 	if (!$this->textConverterBelongsToCurrentUser($id)) {
-		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+		throw new Application_TextConverterException("Text converter does not belong to current user or project");
 	}
 	
 	// prepare where clause
@@ -194,7 +196,7 @@ public function deleteTextConverter ($id)
  * Selects one text converter. Takes the text converter id as first
  * argument. Returns array with text converter information.
  * 
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @return array
  */
@@ -207,7 +209,7 @@ public function selectTextConverter ($id)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextconverterException('Input for parameter id is not numeric');
+		throw new Application_TextConverterException('Input for parameter id is not numeric');
 	}
 	
 	// initialize bind params
@@ -251,7 +253,7 @@ public function selectTextConverter ($id)
  * <li>limit, int, optional: amount of rows to return</li>
  * </ul>
  * 
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param array Select params
  * @return array
  */
@@ -269,7 +271,7 @@ public function selectTextConverters ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_TextconverterException('Input for parameter params is not an array');	
+		throw new Application_TextConverterException('Input for parameter params is not an array');	
 	}
 	
 	// import params
@@ -280,7 +282,7 @@ public function selectTextConverters ($params = array())
 					$$_key = (int)$_value;
 				break;
 			default:
-				throw new Application_TextconverterException("Unknown parameter $_key");
+				throw new Application_TextConverterException("Unknown parameter $_key");
 		}
 	}
 	
@@ -324,7 +326,7 @@ public function selectTextConverters ($params = array())
  * 
  * No params supported.
  * 
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param array Count params
  * @return array
  */
@@ -340,14 +342,14 @@ public function countTextConverters ($params = array())
 	
 	// input check
 	if (!is_array($params)) {
-		throw new Application_TextconverterException('Input for parameter params is not an array');	
+		throw new Application_TextConverterException('Input for parameter params is not an array');	
 	}
 	
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			default:
-				throw new Application_TextconverterException("Unknown parameter $_key");
+				throw new Application_TextConverterException("Unknown parameter $_key");
 		}
 	}
 	
@@ -376,7 +378,7 @@ public function countTextConverters ($params = array())
  * when checking for uniqueness (useful for updates). Returns boolean true if
  * text converter name is unique.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param string Text converter name
  * @param int Text converter id
  * @return bool
@@ -390,13 +392,13 @@ public function testForUniqueName ($name, $id = null)
 	
 	// input check
 	if (empty($name)) {
-		throw new Application_TextconverterException("Input for parameter name is not expected to be empty");
+		throw new Application_TextConverterException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Application_TextconverterException("Input for parameter name is expected to be scalar");
+		throw new Application_TextConverterException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Application_TextconverterException("Input for parameter id is expected to be numeric");
+		throw new Application_TextConverterException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -438,7 +440,7 @@ public function testForUniqueName ($name, $id = null)
  * won't be considered when checking for uniqueness (useful for updates).
  * Returns boolean true if text converter name is unique.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param string Text converter internal name
  * @param int Text converter id
  * @return bool
@@ -452,13 +454,13 @@ public function testForUniqueInternalName ($name, $id = null)
 	
 	// input check
 	if (empty($name)) {
-		throw new Application_TextconverterException("Input for parameter name is not expected to be empty");
+		throw new Application_TextConverterException("Input for parameter name is not expected to be empty");
 	}
 	if (!is_scalar($name)) {
-		throw new Application_TextconverterException("Input for parameter name is expected to be scalar");
+		throw new Application_TextConverterException("Input for parameter name is expected to be scalar");
 	}
 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Application_TextconverterException("Input for parameter id is expected to be numeric");
+		throw new Application_TextConverterException("Input for parameter id is expected to be numeric");
 	}
 	
 	// prepare query
@@ -498,7 +500,7 @@ public function testForUniqueInternalName ($name, $id = null)
  * as first argument, the string with the text to convert as second
  * argument. Returns converted string.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @param string Text to convert
  * @return string Converted text
@@ -512,15 +514,15 @@ public function applyTextConverter ($id, $text)
 	
 	// input check
 	if (empty($id) || !is_numeric($id)) {
-		throw new Application_TextconverterException('Input for parameter id is not numeric');
+		throw new Application_TextConverterException('Input for parameter id is not numeric');
 	}
 	if (!is_scalar($text)) {
-		throw new Application_TextconverterException("Input for parameter text is expected to be scalar");
+		throw new Application_TextConverterException("Input for parameter text is expected to be scalar");
 	}
 	
 	// test if text converter belongs to current user/project
 	if (!$this->textConverterBelongsToCurrentUser($id)) {
-		throw new Application_TextconverterException("Text converter does not belong to current user or project");
+		throw new Application_TextConverterException("Text converter does not belong to current user or project");
 	}
 	
 	// get text converter
@@ -528,10 +530,10 @@ public function applyTextConverter ($id, $text)
 	
 	// let's see if a plug-in path is registred
 	if (empty($this->base->_conf['plugins']['textconverter_dir'])) {
-		throw new Application_TextconverterException("No text converter plug-in directory configured");
+		throw new Application_TextConverterException("No text converter plug-in directory configured");
 	}
 	if (!is_dir($this->base->_conf['plugins']['textconverter_dir'])) {
-		throw new Application_TextconverterException("Configured text converter plug-in path is not a directory");
+		throw new Application_TextConverterException("Configured text converter plug-in path is not a directory");
 	}
 		
 	// check text converter
@@ -539,17 +541,17 @@ public function applyTextConverter ($id, $text)
 		throw new Applicatin_TextconverterException("Requested text converter is not registred");
 	}
 	if (empty($text_converter['internal_name'])) {
-		throw new Application_TextconverterException("No internal text converter name defined");
+		throw new Application_TextConverterException("No internal text converter name defined");
 	}
 	if (!preg_match(WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME, $text_converter['internal_name'])) {
-		throw new Application_TextconverterException("Internal text converter name is invalid");
+		throw new Application_TextConverterException("Internal text converter name is invalid");
 	}
 	
 	// prepare path to text converter
 	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
 		"wcom_plugin_textconverter_".$text_converter['internal_name'].".php";
 	if (!file_exists($path)) {
-		throw new Application_TextconverterException("Unable to find text converter plug-in");
+		throw new Application_TextConverterException("Unable to find text converter plug-in");
 	}
 	
 	// include text converter file
@@ -560,7 +562,7 @@ public function applyTextConverter ($id, $text)
 	
 	// let's see if the text converter function exists
 	if (!function_exists($function_name)) {
-		throw new Application_TextconverterException("Text converter plug-in function does not exist");
+		throw new Application_TextConverterException("Text converter plug-in function does not exist");
 	}
 
 	// apply text converter
@@ -571,7 +573,7 @@ public function applyTextConverter ($id, $text)
  * Tests whether given text converter belongs to current project. Takes the
  * text converter id as first argument. Returns bool.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @return int bool
  */
@@ -584,7 +586,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
 	
 	// input check
 	if (empty($text_converter) || !is_numeric($text_converter)) {
-		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
+		throw new Application_TextConverterException('Input for parameter text_converter is expected to be a numeric value');
 	}
 	
 	// prepare query
@@ -617,7 +619,7 @@ public function textConverterBelongsToCurrentProject ($text_converter)
  * Test whether text converter belongs to current user or not. Takes
  * the text converter id as first argument. Returns bool.
  *
- * @throws Application_TextconverterException
+ * @throws Application_TextConverterException
  * @param int Text converter id
  * @return bool
  */
@@ -630,7 +632,7 @@ public function textConverterBelongsToCurrentUser ($text_converter)
 	
 	// input check
 	if (empty($text_converter) || !is_numeric($text_converter)) {
-		throw new Application_TextconverterException('Input for parameter text_converter is expected to be a numeric value');
+		throw new Application_TextConverterException('Input for parameter text_converter is expected to be a numeric value');
 	}
 	
 	// load user class
@@ -649,6 +651,6 @@ public function textConverterBelongsToCurrentUser ($text_converter)
 // end of class
 }
 
-class Application_TextconverterException extends Exception { }
+class Application_TextConverterException extends Exception { }
 
 ?>

@@ -22,16 +22,32 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Utility_PluginUtility object.
+ * 
+ * @return object
+ */
+function Utility_PluginUtility ()
+{ 
+	if (Utility_PluginUtility::$instance == null) {
+		Utility_PluginUtility::$instance = new Utility_PluginUtility(); 
+	}
+	return Utility_PluginUtility::$instance;
+}
+
+
 class Utility_PluginUtility {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
@@ -41,7 +57,7 @@ class Utility_PluginUtility {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -57,19 +73,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Utility_PluginUtility object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Utility_PluginUtility::$instance == null) {
-		Utility_PluginUtility::$instance = new Utility_PluginUtility(); 
-	}
-	return Utility_PluginUtility::$instance;
 }
 
 /**

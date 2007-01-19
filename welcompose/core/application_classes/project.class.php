@@ -22,20 +22,40 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton for Application_Project.
+ * 
+ * @return object
+ */
+function Application_Project ()
+{
+	if (Application_Project::$instance == null) {
+		Application_Project::$instance = new Application_Project(); 
+	}
+	return Application_Project::$instance;
+}
+
 class Application_Project {
 	
 	/**
 	 * Singleton
+	 *
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 *
 	 * @var object
 	 */
 	public $base = null;
 	
+	/**
+	 * Container for XML skeleton
+	 * 
+	 * @var array
+	 */
 	protected $_skeleton = null;
 
 /**
@@ -43,7 +63,7 @@ class Application_Project {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -62,20 +82,12 @@ protected function __construct()
 }
 
 /**
- * Singleton. Returns instance of the Application_Project object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Application_Project::$instance == null) {
-		Application_Project::$instance = new Application_Project(); 
-	}
-	return Application_Project::$instance;
-}
-
-/**
- * Not implemented in the free version of this software.
+ * Creates new project. Takes field=>value array with project
+ * data as first argument. Returns insert id.
+ *
+ * @throws Application_ProjectException
+ * @param array Row data
+ * @return int
  */
 public function addProject ($sqlData)
 {

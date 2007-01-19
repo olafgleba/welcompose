@@ -22,22 +22,38 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Utility_Helper object.
+ * 
+ * @return object
+ */
+function Utility_Helper ()
+{ 
+	if (Utility_Helper::$instance == null) {
+		Utility_Helper::$instance = new Utility_Helper(); 
+	}
+	return Utility_Helper::$instance;
+}
+
 class Utility_Helper {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
+	 * 
 	 * @var object
 	 */
 	public $base = null;
 	
 	/**
 	 * Textile object
+	 * 
 	 * @var object
 	 */
 	protected $textile = null;
@@ -47,7 +63,7 @@ class Utility_Helper {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -63,19 +79,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Utility_Helper object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Utility_Helper::$instance == null) {
-		Utility_Helper::$instance = new Utility_Helper(); 
-	}
-	return Utility_Helper::$instance;
 }
 
 /**
@@ -852,21 +855,21 @@ protected function _urlTranslationTable ()
 {
 	return array (
 				// german
-				'ä' => 'ae',
-				'ü' => 'ue',
-				'ö' => 'oe',
-				'ß' => 'ss',
+				'Ã¤' => 'ae',
+				'Ã¼' => 'ue',
+				'Ã¶' => 'oe',
+				'ÃŸ' => 'ss',
 				// french
-				'è' => 'e',
-				'é' => 'e',
-				'à' => 'a',
+				'Ã¨' => 'e',
+				'Ã©' => 'e',
+				'Ã ' => 'a',
 				// spanish
-				'ñ' => 'n',
-				'á' => 'a',
-				'é' => 'e',		
-				'í' => 'i',		
-				'ó' => 'o',		
-				'ú' => 'u',
+				'Ã±' => 'n',
+				'Ã¡' => 'a',
+				'Ã©' => 'e',		
+				'Ã­' => 'i',		
+				'Ã³' => 'o',		
+				'Ãº' => 'u',
 			);
 }
 

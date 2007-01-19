@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * Template: globaltemplate.class.php
+ * File: globaltemplate.class.php
  * 
  * Copyright (c) 2006 sopic GmbH
  * 
@@ -11,17 +11,8 @@
  * 8472 Seuzach, Switzerland
  * http://www.sopic.com/
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this template except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This file is licensed under the terms of the Open Software License 3.0
+ * http://www.opensource.org/licenses/osl-3.0.php
  * 
  * $Id$
  * 
@@ -31,13 +22,27 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
+/**
+ * Singleton. Returns instance of the Templating_GlobalTemplate object.
+ * 
+ * @return object
+ */
+function Templating_GlobalTemplate ()
+{ 
+	if (Templating_GlobalTemplate::$instance == null) {
+		Templating_GlobalTemplate::$instance = new Templating_GlobalTemplate(); 
+	}
+	return Templating_GlobalTemplate::$instance;
+}
+
 class Templating_GlobalTemplate {
 	
 	/**
 	 * Singleton
+	 * 
 	 * @var object
 	 */
-	private static $instance = null;
+	public static $instance = null;
 	
 	/**
 	 * Reference to base class
@@ -50,7 +55,7 @@ class Templating_GlobalTemplate {
  * establish database connection. Please don't call the
  * constructor direcly, use the singleton pattern instead.
  */
-protected function __construct()
+public function __construct()
 {
 	try {
 		// get base instance
@@ -66,19 +71,6 @@ protected function __construct()
 			$e->getLine(), $e->getMessage());
 		exit;
 	}
-}
-
-/**
- * Singleton. Returns instance of the Templating_GlobalTemplate object.
- * 
- * @return object
- */
-public function instance()
-{ 
-	if (Templating_GlobalTemplate::$instance == null) {
-		Templating_GlobalTemplate::$instance = new Templating_GlobalTemplate(); 
-	}
-	return Templating_GlobalTemplate::$instance;
 }
 
 /**
