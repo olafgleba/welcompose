@@ -247,14 +247,12 @@ public function generateInternalLink ($args = array())
 		$this->base->_conf['urls'][$url_pattern_name]);
 	
 	// append user supplied arguments to the system url
-	require_once('Net/URL.php');
-	$output_url = new Net_URL($system_url);
-	foreach ($user_supplied_args as $_arg => $_value) {
-		$output_url->addQueryString($_arg, $_value);
+	if (count($user_supplied_args) > 1) {
+		$system_url = $system_url.'?'.http_build_query($user_supplied_args, null, '&amp;');
 	}
 	
 	// get url form Net_URL object
-	return $output_url->getURL();
+	return $system_url;
 }
 
 // end of class
