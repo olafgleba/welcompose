@@ -1,6 +1,9 @@
 Welcompose 0.8.0
 ================
 
+ * Admin: Shockwave flash and windows media video to list of video types
+   added; windows media audio to list of audio types added; see ticket:16.
+   (andreas)
  * Database: content_simple_forms.type from ENUM to VARCHAR changed; see 
    ticket:13. (andreas)
  * Core: Speed up of class loading in Base_Base; see ticket:3. (andreas)
