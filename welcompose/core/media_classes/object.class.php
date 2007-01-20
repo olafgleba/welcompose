@@ -1183,6 +1183,74 @@ public function mimeTypeToIcon ($mime_type)
 	return 'generic.jpg';
 }
 
+public function mimeTypeToInsertCallBack ($mime_type)
+{
+	$mime_type_configurations = $this->getMimeTypeConfigurations();
+	
+	foreach ($mime_type_configurations as $_mime_type => $_configuration) {
+		if ($mime_type == $_mime_type) {
+			return $_configuration['insert_callback'];
+		}
+	}
+	
+	return $mime_type_configurations['__DEFAULT__']['insert_callback'];
+}
+
+public function getMimeTypeConfigurations ()
+{
+	return array(
+		'__DEFAULT__' => array(
+			'suffix' => null,
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'other',
+			'icon' => 'generic.jpg'
+		),
+		'application/pdf' => array(
+			'suffix' => 'pdf',
+			'podcastable' => true,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'pdf.jpg'
+		),
+		'audio/x-m4a' => array(
+			'suffix' => 'm4a',
+			'podcastable' => true,
+			'insert_callback' => 'audio_x_m4a',
+			'generic_type' => 'audio',
+			'icon' => 'audio.jpg'
+		),
+		'image/gif' => array(
+			'suffix' => 'gif',
+			'podcastable' => false,
+			'insert_callback' => 'image',
+			'generic_type' => 'image',
+			'icon' => null
+		),
+		'image/jpg' => array(
+			'suffix' => 'jpg',
+			'podcastable' => false,
+			'insert_callback' => 'image',
+			'generic_type' => 'image',
+			'icon' => null
+		),
+		'image/png' => array(
+			'suffix' => 'png',
+			'podcastable' => false,
+			'insert_callback' => 'image',
+			'generic_type' => 'image',
+			'icon' => null
+		),
+		'image/tif' => array(
+			'suffix' => 'tif',
+			'podcastable' => false,
+			'insert_callback' => 'image',
+			'generic_type' => 'image',
+			'icon' => null
+		),
+	);
+}
+
 // end of class
 }
 

@@ -569,6 +569,19 @@ public function applyTextConverter ($id, $text)
 	return call_user_func($function_name, $text);
 }
 
+public function insertCallback ($id, $callback, $args)
+{
+	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
+		"wcom_plugin_textconverter_xhtml.php";
+	require($path);
+	
+	$t = new TextConverter_XHTML();
+	
+	$callback = sprintf('mmInsert%s', $callback);
+	
+	return call_user_func_array(array($t, $callback), $args);
+}
+
 /**
  * Tests whether given text converter belongs to current project. Takes the
  * text converter id as first argument. Returns bool.
