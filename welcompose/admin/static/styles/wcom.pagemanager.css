@@ -53,13 +53,13 @@ a.down:link, a.down:visited {
 background: transparent url(../img/icons/down.gif) 0 0 no-repeat;
 }
 a.down:hover, a.down:active, a.down:focus {
-background: transparent url(../img/icons/down.gif) 0 -51px no-repeat;
+background: transparent url(../img/icons/down.gif) 0 -45px no-repeat;
 }
 a.up:link, a.up:visited {
 background: transparent url(../img/icons/up.gif) 0 0 no-repeat;
 } 
 a.up:hover, a.up:active, a.up:focus {
-background: transparent url(../img/icons/up.gif) 0 -51px no-repeat;
+background: transparent url(../img/icons/up.gif) 0 -45px no-repeat;
 }
 a.new:link, a.new:visited {
 background: transparent url(../img/icons/page_add.gif) 0 0 no-repeat;
