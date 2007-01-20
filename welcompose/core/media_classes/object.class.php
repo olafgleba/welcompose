@@ -1028,13 +1028,16 @@ public function genericTypesToMimeTypes ($generic_type)
 		case 'audio':
 			return array(
 				'mp3' => 'audio/mpeg',
-				'm4a' => 'audio/x-m4a'
+				'm4a' => 'audio/x-m4a',
+				'wma' => 'audio/x-ms-wma'
 			);
 		case 'video':
 			return array(
 				'mp4' => 'video/mp4',
 				'm4v' => 'video/x-m4v',
-				'mov' => 'video/quicktime'
+				'mov' => 'video/quicktime',
+				'swf' => 'application/x-shockwave-flash',
+				'wmv' => 'video/x-ms-wmv'
 			);
 		case 'other':
 			return array();
