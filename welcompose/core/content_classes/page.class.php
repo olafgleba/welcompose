@@ -231,6 +231,8 @@ public function selectPage ($id)
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
+			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `sitemap_priority`,
 			`content_page_types`.`id` AS `page_type_id`,
 			`content_page_types`.`name` AS `page_type_name`,
 			`content_page_types`.`internal_name` AS `page_type_internal_name`
@@ -343,6 +345,8 @@ public function selectPages ($params = array())
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
+			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `sitemap_priority`,
 			`content_page_types`.`name` AS `page_type_name`,
 			`content_page_types`.`internal_name` AS `page_type_internal_name`
 		FROM

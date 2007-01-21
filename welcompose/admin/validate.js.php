@@ -75,6 +75,10 @@ try {
 					$reg = WCOM_REGEX_NON_EMPTY;
 					$desc = gettext('Field may not be empty');
 				break;
+			case 'page_sitemap_priority':
+					$reg = WCOM_REGEX_SITEMAP_PRIORITY;
+					$desc = gettext('Value between 0.1 and 1.0');
+				break;
 			case 'page_type_name':
 					$reg = WCOM_REGEX_PAGE_TYPE_NAME;
 					$desc = gettext('Only capitalized prefixed literal string');

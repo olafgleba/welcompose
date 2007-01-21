@@ -119,9 +119,6 @@ try {
 	}
 	
 	// prepare positions
-	$positions = array();
-	
-	// prepare positions
 	$positions = array(
 		UTILITY_NESTEDSET_CREATE_BEFORE => gettext('Create node above'),
 		UTILITY_NESTEDSET_CREATE_AFTER => gettext('Create node below')
@@ -144,6 +141,17 @@ try {
 	foreach ($GROUP->selectGroups() as $_group) {
 		$groups[(int)$_group['id']] = htmlspecialchars($_group['name']);
 	}
+	
+	// prepare sitemap change frequencies
+	$sitemap_change_frequencies = array(
+		'always' => gettext('always'),
+		'hourly' => gettext('hourly'),
+		'daily' => gettext('daily'),
+		'weekly' => gettext('weekly'),
+		'monthly' => gettext('monthly'),
+		'yearly' => gettext('yearly'),
+		'never' => gettext('never')
+	);
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page', 'post');
@@ -216,6 +224,22 @@ try {
 	$FORM->applyFilter('groups', 'strip_tags');
 	$FORM->addRule('groups', gettext('One of the chosen groups is out of range'), 'in_array_keys', $groups);
 	
+	// multi select for rights
+	$FORM->addElement('select', 'sitemap_changefreq', gettext('Sitemap change frequency'),
+		$sitemap_change_frequencies, array('id' => 'page_sitemap_changefreq'));
+	$FORM->applyFilter('sitemap_changefreq', 'trim');
+	$FORM->applyFilter('sitemap_changefreq', 'strip_tags');
+	$FORM->addRule('sitemap_changefreq', gettext('Chosen sitemap change frequency is out of range'),
+		'in_array_keys', $sitemap_change_frequencies);
+	
+	// textfield for name
+	$FORM->addElement('text', 'sitemap_priority', gettext('Sitemap Priority'), 
+		array('id' => 'page_sitemap_priority', 'maxlength' => 3, 'class' => 'w300 validate'));
+	$FORM->applyFilter('sitemap_priority', 'trim');
+	$FORM->applyFilter('sitemap_priority', 'strip_tags');
+	$FORM->addRule('sitemap_priority', gettext('Please enter a sitemap priority between 0.1 and 1.0'),
+		'regex', WCOM_REGEX_SITEMAP_PRIORITY);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add page'),
 		array('class' => 'submit140'));
@@ -224,7 +248,8 @@ try {
 	$FORM->setDefaults(array(
 		'navigation' => Base_Cnc::filterRequest($_REQUEST['navigation'], WCOM_REGEX_NUMERIC),
 		'reference' => Base_Cnc::filterRequest($_REQUEST['reference'], WCOM_REGEX_NUMERIC),
-		'position' => UTILITY_NESTEDSET_CREATE_AFTER
+		'position' => UTILITY_NESTEDSET_CREATE_AFTER,
+		'sitemap_changefreq' => 'monthly'
 	));
 	
 	// validate it
@@ -317,6 +342,8 @@ try {
 			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['index_page'] = $FORM->exportValue('index_page');
 			$sqlData['protect'] = $FORM->exportValue('protect');
+			$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
+			$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 			
 			$HELPER->testSqlDataForPearErrors($sqlData);
 			

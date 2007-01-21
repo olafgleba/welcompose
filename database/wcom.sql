@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 19.01.2007 23:24:51
--- Diagram Version: 176
+-- Created on: 21.01.2007 22:33:49
+-- Diagram Version: 178
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -595,6 +595,8 @@ CREATE TABLE `content_pages` (
   `image_small` int(11) UNSIGNED,
   `image_medium` int(11) UNSIGNED,
   `image_big` int(11) UNSIGNED,
+  `sitemap_priority` decimal(2,1) UNSIGNED DEFAULT '0.5',
+  `sitemap_changefreq` enum('always','hourly','daily','weekly','monthly','yearly','never') DEFAULT 'monthly',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   INDEX `type`(`type`),

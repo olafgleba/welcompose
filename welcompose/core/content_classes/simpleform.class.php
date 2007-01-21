@@ -264,7 +264,9 @@ public function selectSimpleForm ($id)
 			`content_pages`.`index_page` AS `form_index_page`,
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
-			`content_pages`.`image_big` AS `form_image_big`
+			`content_pages`.`image_big` AS `form_image_big`,
+			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN
@@ -399,7 +401,9 @@ public function selectSimpleForms ($params = array())
 			`content_pages`.`index_page` AS `form_index_page`,
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
-			`content_pages`.`image_big` AS `form_image_big`
+			`content_pages`.`image_big` AS `form_image_big`,
+			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN

@@ -127,6 +127,17 @@ try {
 		$selected_groups[] = (int)$_link['group'];
 	}
 	
+	// prepare sitemap change frequencies
+	$sitemap_change_frequencies = array(
+		'always' => gettext('always'),
+		'hourly' => gettext('hourly'),
+		'daily' => gettext('daily'),
+		'weekly' => gettext('weekly'),
+		'monthly' => gettext('monthly'),
+		'yearly' => gettext('yearly'),
+		'never' => gettext('never')
+	);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('page', 'post');
 	
@@ -176,6 +187,22 @@ try {
 	$FORM->applyFilter('groups', 'strip_tags');
 	$FORM->addRule('groups', gettext('One of the chosen groups is out of range'), 'in_array_keys', $groups);
 	
+	// multi select for rights
+	$FORM->addElement('select', 'sitemap_changefreq', gettext('Sitemap change frequency'),
+		$sitemap_change_frequencies, array('id' => 'page_sitemap_changefreq'));
+	$FORM->applyFilter('sitemap_changefreq', 'trim');
+	$FORM->applyFilter('sitemap_changefreq', 'strip_tags');
+	$FORM->addRule('sitemap_changefreq', gettext('Chosen sitemap change frequency is out of range'),
+		'in_array_keys', $sitemap_change_frequencies);
+	
+	// textfield for name
+	$FORM->addElement('text', 'sitemap_priority', gettext('Sitemap Priority'), 
+		array('id' => 'page_sitemap_priority', 'maxlength' => 3, 'class' => 'w300 validate'));
+	$FORM->applyFilter('sitemap_priority', 'trim');
+	$FORM->applyFilter('sitemap_priority', 'strip_tags');
+	$FORM->addRule('sitemap_priority', gettext('Please enter a sitemap priority between 0.1 and 1.0'),
+		'regex', WCOM_REGEX_SITEMAP_PRIORITY);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Edit page'),
 		array('class' => 'submit200'));
@@ -187,7 +214,9 @@ try {
 		'template_set' => Base_Cnc::ifsetor($page['template_set'], null),
 		'index_page' => Base_Cnc::ifsetor($page['index_page'], null),
 		'protect' => Base_Cnc::ifsetor($page['protect'], null),
-		'groups' => $selected_groups
+		'groups' => $selected_groups,
+		'sitemap_changefreq' => Base_Cnc::ifsetor($page['sitemap_changefreq'], null),
+		'sitemap_priority' => Base_Cnc::ifsetor($page['sitemap_priority'], null)
 	));
 	
 	// validate it
@@ -265,6 +294,8 @@ try {
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
+		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
+		$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);

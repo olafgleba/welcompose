@@ -216,4 +216,8 @@ define("WCOM_REGEX_DATABASE_SOCKET", "=^/[a-z0-9-_\.\/]+$=");
 // form type
 define("WCOM_REGEX_CUSTOM_FORM_TYPE", "=^([A-Z]{1}[a-z]+)+$=");
 
+// Defines regular expression for strings containing a
+// sitemap priority
+define('WCOM_REGEX_SITEMAP_PRIORITY', '=^(0\.[1-9]{1}|1\.0)$=')
+
 ?>
