@@ -1,6 +1,8 @@
 Welcompose 0.8.0
 ================
 
+ * Database: sitemap_priority and sitemap_changefreq to content_pages added;
+   see ticket:15. (andreas)
  * Core: PEAR::Net_URL from URL generator removed; see ticket:2. (andreas) 
  * Admin: Shockwave flash and windows media video to list of video types
    added; windows media audio to list of audio types added; see ticket:16.
