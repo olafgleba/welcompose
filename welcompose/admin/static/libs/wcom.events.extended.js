@@ -162,6 +162,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_insert' : function(el){
+		el.onclick = function(){
+			Helper.launchPopupCallback('745','634','media_insert', this);
+			return false;
+		}
+	},
 	'a.mm_delete' : function(el){
 		el.onclick = function(){
 			Mediamanager.deleteMediaItem(this);

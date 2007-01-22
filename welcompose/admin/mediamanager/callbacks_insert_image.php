@@ -91,7 +91,21 @@ try {
 	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Exception("Access denied");
 	}
+
+	// get pager_page value
+	if (!empty($_REQUEST['pager_page'])) {
+		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC);
+	} else {
+		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], WCOM_REGEX_NUMERIC);
+	}
 	
+	// get form_target value
+	if (!empty($_REQUEST['form_target'])) {
+		$form_target = Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
+	} else {
+		$form_target = Base_Cnc::filterRequest($_SESSION['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
+	}
+		
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('insert_image', 'post');
 	
@@ -112,6 +126,12 @@ try {
 	// hidden for text
 	$FORM->addElement('hidden', 'text');
 	$FORM->applyFilter('text', 'htmlentities');
+	
+	// hidden field for pager_page
+	$FORM->addElement('hidden', 'pager_page');
+	
+	// hidden field for pager_page
+	$FORM->addElement('hidden', 'form_target');
 	
 	// textfield for name
 	$FORM->addElement('text', 'alt', gettext('Alternative text'), 
@@ -134,7 +154,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Insert object'),
-		array('class' => 'submit200upload'));
+		array('class' => 'submit200'));
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Cancel'),
@@ -144,7 +164,9 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::ifsetor($_REQUEST['text'], WCOM_REGEX_NUMERIC)
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::ifsetor($pager_page, WCOM_REGEX_NUMERIC),
+		'form_target' => Base_Cnc::ifsetor($form_target, WCOM_REGEX_CSS_IDENTIFIER)
 	));
 	
 	// validate it
@@ -166,19 +188,22 @@ try {
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
-		
-		// build session
-		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
-		);
+			
+		// assign target field identifier
+		$BASE->utility->smarty->assign('form_target', $form_target);
+			
+		// assign delivered pager location
+		$BASE->utility->smarty->assign('pager_page', $pager_page);
 		
 		// assign prepared session array to smarty
 		$BASE->utility->smarty->assign('session', $session);
 		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}
+	    if (!empty($_SESSION['pager_page'])) {
+	        $_SESSION['pager_page'] = '';
+	    }
+	    if (!empty($_SESSION['form_target'])) {
+	        $_SESSION['form_target'] = '';
+	    }
 		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
@@ -212,6 +237,15 @@ try {
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
 		print $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		
+		// add pager_page to session
+		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
+		
+		// add pager_page to session
+		$_SESSION['form_target'] = $FORM->exportValue('form_target');
+		
+		// redirect
+		$SESSION->save();
 	}
 } catch (Exception $e) {
 	// clean the buffer

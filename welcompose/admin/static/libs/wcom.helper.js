@@ -54,6 +54,9 @@ Helper.prototype = new Base();
  * Instance Methods from prototype @class Helper
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
+Helper.prototype.launchPopupCallback = Helper_launchPopupCallback;
+Helper.prototype.getTextConverterValue = Helper_getTextConverterValue;
+Helper.prototype.getSelectionText = Helper_getSelectionText;
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
 Helper.prototype.closePopupTrack = Helper_closePopupTrack;
@@ -172,6 +175,113 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 		
 		this.target.moveBy(this.resWidth, this.resHeight);
 		this.target.focus();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Launch popup.
+ * <br />
+ * On the basis of parameter <em>trigger</em> we builds the url string
+ * for later use in func <em>window.open</em>.
+ * According to the popup launch, the parent window opacity will be lowered
+ * to eye focus onto the launched window. 
+ * 
+ * <br /><br />Example:
+ * <pre><code>
+Helper.launchPopup('745','634','pages_links_select', this);
+</code></pre>
+ * 
+ * @see #lowerOpacity
+ * @param {string} width Width for the window to launch 
+ * @param {string} height Height for the window to launch
+ * @param {string} wname The Name for the window to launch
+ * @param {object} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_launchPopupCallback (width, height, wname, elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		
+		if (typeof storedFocus == 'undefined') {
+			alert(selectTextarea); 
+		} else {
+			form_target = storedFocus;
+			//Helper.lowerOpacity();
+		
+			switch (this.elem.name) {
+				case 'image' :
+						Helper.getPagerPage();
+						Helper.getTextConverterValue();
+						Helper.getSelectionText();		
+						this.url = this.parseMedCallbackInsertImageUrl + '?id=' + this.elem.id +
+						 	'&text=' + text + 
+							'&text_converter=' + text_converter + 
+							'&pager_page=' + pager_page + 
+							'&form_target=' + form_target;
+					break;
+				case 'document' :
+						Helper.getPagerPage();
+						this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
+							'&pager_page=' + pager_page;
+					break;
+			}
+			
+			// properties
+			this.targetUrl = this.url;
+			this.targetName = wname;
+			this.targetWidth = width;
+			this.targetHeight = height;
+			this.target = window.open(this.targetUrl, this.targetName, 
+					"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
+			this.resWidth = Helper.defineWindowX(this.targetWidth);
+			this.resHeight = Helper.defineWindowY();
+		
+			this.target.moveBy(this.resWidth, this.resHeight);
+			this.target.focus();
+			
+			
+		}
+		
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_getTextConverterValue ()
+{
+	try {		
+		var form_name = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		var el_name = 'text_converter';
+		var el_id = form_name + '_text_converter';
+			
+		if ($(el_id)) {
+			text_converter = document.forms[form_name].elements[el_name].options.selectedIndex;
+		} else {
+			text_converter = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_getSelectionText()
+{
+	try {
+		var txtarea = $(form_target);
+
+		if(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			//txtarea.focus();
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			text = (txtarea.value).substring(startPos, endPos);
+		}
 	} catch (e) {
 		_applyError(e);
 	}
@@ -742,7 +852,7 @@ function Helper_showResponsePagesThirdLinks(req)
 /**
  * Process inserting content from a popup.
  * <br />
- * Adapted from from http://sourceforge.net/projects/wikipedia
+ * Adapted from http://sourceforge.net/projects/wikipedia
  * 
  * @see #insertInternalLink
  * @see #insertInternalLinkNoHref
@@ -797,7 +907,7 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
+			//txtarea.scrollTop=scrollTop;
 		// All others
 		} else {
 			// Append at the end: Some people find that annoying
@@ -819,7 +929,7 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 /**
  * Process inserting content.
  * <br />
- * Adapted from from http://sourceforge.net/projects/wikipedia
+ * Adapted from http://sourceforge.net/projects/wikipedia
  * 
  * @see #insertInternalLink
  * @see #insertInternalLinkNoHref

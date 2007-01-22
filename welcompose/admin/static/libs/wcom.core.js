@@ -304,6 +304,16 @@ function Base ()
 		 * Path for dynamically imported file
 		 */
 		this.parseMedDiscCastsUrl = '../mediamanager/mediamanager_discard_podcast.php';
+		
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedCallbackInsertImageUrl = '../mediamanager/callbacks_insert_image.php';
+		
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedCallbackInsertDocumentUrl = '../mediamanager/callbacks_insert_document.php';
 
 		/**
 		 * Path for dynamically imported file
@@ -761,8 +771,8 @@ function Help_show (elem)
 		} else {
 			this.processId = this.processId.replace(/_\d+/, '');
 			this.formId = Helper.getDataParentNode(this.elem, 1);
-		}	
-			
+		}
+		
 		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
 			
 		if (typeof this.req != 'undefined') {
@@ -1057,11 +1067,7 @@ function Navigation_show (name, level)
 			if (_req.status == 200) {
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
-				
-				/*
-				new Effect.Highlight(document.getElementsByClassName('highlight')[0], 
-					{duration: 1.5, startcolor:'#ff0000', endcolor:'#f9f9f9', restorecolor: '#f9f9f9'});
-				*/
+	
 				new Effect.Fade(document.getElementsByClassName('highlight')[0],
 					{duration: 0.5, delay: 0.4});
 
@@ -1140,7 +1146,7 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 
 /**
  * Track the current content form field focus and makes it available application wide.
- * This is used to fire alerts within elem Current elementseveral Media Manager <em>_insertXXX</em> functions.
+ * This is used to fire alerts within several Media Manager <em>_insertXXX</em> functions.
  *
  * @param {string} elem Current element
  * @throws applyError on exception

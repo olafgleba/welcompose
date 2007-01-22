@@ -331,7 +331,7 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 #content .rp_note {
 display: block;
 width: 710px;
-margin-top: 0;
+margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 7 */

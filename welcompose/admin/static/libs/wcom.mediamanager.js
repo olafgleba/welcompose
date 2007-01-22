@@ -354,6 +354,7 @@ function Mediamanager_applyBehaviour ()
 	try {
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
+		Behaviour.reapply('a.mm_insert');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
