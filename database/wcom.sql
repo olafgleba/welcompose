@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 23.01.2007 09:34:46
--- Diagram Version: 181
+-- Created on: 23.01.2007 16:59:20
+-- Diagram Version: 182
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -776,6 +776,7 @@ CREATE TABLE `content_boxes` (
   PRIMARY KEY(`id`),
   INDEX `page`(`page`),
   INDEX `text_converter`(`text_converter`),
+  UNIQUE INDEX `unique_name_per_page`(`page`, `name`),
   CONSTRAINT `content_boxes.page2content_pages.id` FOREIGN KEY (`page`)
     REFERENCES `content_pages`(`id`)
     ON DELETE CASCADE

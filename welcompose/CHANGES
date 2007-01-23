@@ -1,6 +1,8 @@
 Welcompose 0.8.0
 ================
 
+ * Database: Unique key around fields page and name of table content_boxes
+   added; see ticket:6. (andreas) 
  * Database: Fields alternate_title, description and optional_text to 
    content_pages added; see ticket:9. (andreas)
  * Database: sitemap_priority and sitemap_changefreq to content_pages added;
