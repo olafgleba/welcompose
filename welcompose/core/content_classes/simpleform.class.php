@@ -268,8 +268,8 @@ public function selectSimpleForm ($id)
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
 			`content_pages`.`image_big` AS `form_image_big`,
-			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN
@@ -408,8 +408,8 @@ public function selectSimpleForms ($params = array())
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
 			`content_pages`.`image_big` AS `form_image_big`,
-			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN

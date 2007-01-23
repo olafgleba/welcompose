@@ -249,8 +249,8 @@ public function selectBlogComment ($id)
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
-			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
@@ -411,8 +411,8 @@ public function selectBlogComments ($params = array())
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
-			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
