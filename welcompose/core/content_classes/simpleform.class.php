@@ -259,14 +259,17 @@ public function selectSimpleForm ($id)
 			`content_pages`.`template_set` AS `form_template_set`,
 			`content_pages`.`name` AS `form_name`,
 			`content_pages`.`name_url` AS `form_name_url`,
+			`content_pages`.`alternate_name` AS `page_alternate_name`,
+			`content_pages`.`description` AS `page_description`,
+			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `form_url`,
 			`content_pages`.`protect` AS `form_protect`,
 			`content_pages`.`index_page` AS `form_index_page`,
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
 			`content_pages`.`image_big` AS `form_image_big`,
-			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `sitemap_priority`
+			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN
@@ -396,14 +399,17 @@ public function selectSimpleForms ($params = array())
 			`content_pages`.`template_set` AS `form_template_set`,
 			`content_pages`.`name` AS `form_name`,
 			`content_pages`.`name_url` AS `form_name_url`,
+			`content_pages`.`alternate_name` AS `page_alternate_name`,
+			`content_pages`.`description` AS `page_description`,
+			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `form_url`,
 			`content_pages`.`protect` AS `form_protect`,
 			`content_pages`.`index_page` AS `form_index_page`,
 			`content_pages`.`image_small` AS `form_image_small`,
 			`content_pages`.`image_medium` AS `form_image_medium`,
 			`content_pages`.`image_big` AS `form_image_big`,
-			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `sitemap_priority`
+			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_FORMS." AS `content_simple_forms`
 		JOIN

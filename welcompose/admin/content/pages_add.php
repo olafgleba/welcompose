@@ -184,6 +184,24 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
+	// textfield for alternate name
+	$FORM->addElement('text', 'alternate_name', gettext('Alternate name'), 
+		array('id' => 'page_alternate_name', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('alternate_name', 'trim');
+	$FORM->applyFilter('alternate_name', 'strip_tags');
+	
+	// textarea for description
+	$FORM->addElement('textarea', 'description', gettext('Description'),
+		array('id' => 'page_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('description', 'trim');
+	$FORM->applyFilter('description', 'strip_tags');
+	
+	// textarea for optional_text
+	$FORM->addElement('textarea', 'optional_text', gettext('Optional text'),
+		array('id' => 'page_optional_text', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
+	$FORM->applyFilter('optional_text', 'trim');
+	$FORM->applyFilter('optional_text', 'strip_tags');
+	
 	// select for type
 	$FORM->addElement('select', 'type', gettext('Type'), $types,
 		array('id' => 'page_type'));
@@ -339,6 +357,9 @@ try {
 			$sqlData['template_set'] = $FORM->exportValue('template_set');
 			$sqlData['name'] = $FORM->exportValue('name');
 			$sqlData['name_url'] = $url_name;
+			$sqlData['alternate_name'] = $FORM->exportValue('alternate_name');
+			$sqlData['description'] = $FORM->exportValue('description');
+			$sqlData['optional_text'] = $FORM->exportValue('optional_text');
 			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['index_page'] = $FORM->exportValue('index_page');
 			$sqlData['protect'] = $FORM->exportValue('protect');

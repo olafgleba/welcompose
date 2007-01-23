@@ -1,6 +1,8 @@
 Welcompose 0.8.0
 ================
 
+ * Database: Fields alternate_title, description and optional_text to 
+   content_pages added; see ticket:9. (andreas)
  * Database: sitemap_priority and sitemap_changefreq to content_pages added;
    see ticket:15. (andreas)
  * Core: PEAR::Net_URL from URL generator removed; see ticket:2. (andreas) 

@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 21.01.2007 22:33:49
--- Diagram Version: 178
+-- Created on: 23.01.2007 09:34:46
+-- Diagram Version: 181
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -589,6 +589,9 @@ CREATE TABLE `content_pages` (
   `template_set` int(11) UNSIGNED,
   `name` varchar(255),
   `name_url` varchar(255),
+  `alternate_name` varchar(255),
+  `description` text,
+  `optional_text` text,
   `url` varchar(255),
   `protect` enum('0','1') DEFAULT '0',
   `index_page` enum('0','1') DEFAULT '0',

@@ -241,13 +241,16 @@ public function selectBlogComment ($id)
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
+			`content_pages`.`alternate_name` AS `page_alternate_name`,
+			`content_pages`.`description` AS `page_description`,
+			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `page_url`,
 			`content_pages`.`protect` AS `page_protect`,
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
-			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `sitemap_priority`
+			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
@@ -399,14 +402,17 @@ public function selectBlogComments ($params = array())
 			`content_pages`.`template_set` AS `page_template_set`,
 			`content_pages`.`name` AS `page_name`,
 			`content_pages`.`name_url` AS `page_name_url`,
+			`content_pages`.`alternate_name` AS `page_alternate_name`,
+			`content_pages`.`description` AS `page_description`,
+			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `page_url`,
 			`content_pages`.`protect` AS `page_protect`,
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
-			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `sitemap_priority`
+			`content_pages`.`page_sitemap_changefreq` AS `page_sitemap_changefreq`,
+			`content_pages`.`page_sitemap_priority` AS `page_sitemap_priority`
 		FROM
 			".WCOM_DB_COMMUNITY_BLOG_COMMENTS." AS `community_blog_comments`
 		JOIN
