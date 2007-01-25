@@ -186,7 +186,7 @@ try {
 	
 	// textfield for url_name
 	$FORM->addElement('text', 'name_url', gettext('Assumed Url'), 
-		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('name_url', 'trim');
 	$FORM->applyFilter('name_url', 'strip_tags');
 	
