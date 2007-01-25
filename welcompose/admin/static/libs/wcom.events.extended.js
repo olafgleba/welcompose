@@ -277,7 +277,7 @@ var definitions = {
 	},
 	'input.urlify' : function(el){
 		el.onkeyup = function(){
-			Helper.convertPageNameToUrl(this);
+			Helper.convertFieldValuesToValidUrl(this);
 			return false;
 		}
 	},

@@ -100,7 +100,7 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
-Helper.prototype.convertPageNameToUrl = Helper_convertPageNameToUrl;
+Helper.prototype.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
 Helper.prototype.URLify = Helper_URLify;
 
 
@@ -1667,7 +1667,7 @@ function Helper_getDataParentNode (elem, level)
  * @param {string} elem Current Element
  * @throws applyError on exception
  */
-function Helper_convertPageNameToUrl (elem)
+function Helper_convertFieldValuesToValidUrl (elem)
 {
 	try {	
 		//properties
@@ -1687,7 +1687,7 @@ function Helper_convertPageNameToUrl (elem)
 /**
  * Transforms page names to valid urls.
  * 
- * @see #convertPageNameToUrl
+ * @see #convertFieldValuesToValidUrl
  * @param {string} string given string
  * @return string processed string
  * @throws applyError on exception
