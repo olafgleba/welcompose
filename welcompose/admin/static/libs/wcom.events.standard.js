@@ -147,6 +147,12 @@ var definitions = {
 			Helper.validate(this);
 		}
 	},
+	'input.urlify' : function(el){
+		el.onkeyup = function(){
+			Helper.convertPageNameToUrl(this);
+			return false;
+		}
+	},
 	'.confirmDelNav' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelNavAction(this);
@@ -270,12 +276,6 @@ var definitions = {
 	'#simple_page_meta_use' : function(el){
 		el.onclick = function(){
 			Status.getCbx(new Array('simple_page_meta_use'));
-		}
-	},
-	'#page_name' : function(el){
-		el.onkeyup = function(){
-			Helper.convertPageNameToUrl(this);
-			return false;
 		}
 	}
 };

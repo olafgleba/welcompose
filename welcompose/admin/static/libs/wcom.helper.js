@@ -95,6 +95,7 @@ Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileA
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
+Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
@@ -1528,7 +1529,7 @@ function Helper_getPagerPage()
 }
 
 /**
- * Getter for  parent node attribute.
+ * Getter for parent node attribute.
  *
  * @param {string} attr Given attribute to use
  * @param {object} elem Current element
@@ -1544,6 +1545,30 @@ function Helper_getAttrParentNode (attr, elem, level)
 		a = a.parentNode;
 	}
 		
+	if (this.browser == 'ie')
+		return a.attributes[attr].value;
+	else
+		return a.getAttribute(attr);
+}
+
+/**
+ * Getter for next Node attribute of current element parent node.
+ *
+ * @param {string} attr Given attribute to use
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Next node attribute of parent node of the current element
+ * @throws applyError on exception
+ */
+function Helper_getAttrParentNodeNextNode (attr, elem, level)
+{
+	this.browser = _setBrowserString();
+
+	for (var a = elem; level > 0; level--) {
+		a = a.parentNode;
+	}	
+	a = a.nextSibling.nextSibling;
+	
 	if (this.browser == 'ie')
 		return a.attributes[attr].value;
 	else
@@ -1648,8 +1673,11 @@ function Helper_convertPageNameToUrl (elem)
 		//properties
 		this.elem = elem;
 		
+		// get next node (e.g. label) attribute
+		var el = Helper.getAttrParentNodeNextNode ('for', this.elem, 1);
+		
 		// fill related form field with tranformed results
-		$('page_name_url').value = Helper.URLify(this.elem.value);
+		$(el).value = Helper.URLify(this.elem.value);
 
 	} catch (e) {
 		_applyError(e);
@@ -1679,7 +1707,7 @@ function Helper_URLify (string)
 			'ä': 'ae',
 			'ö': 'oe',
 			'ü': 'ue',
-			'ß': 'ss',
+			'ß': 'ss'
 			// french
 		
 			// spanish

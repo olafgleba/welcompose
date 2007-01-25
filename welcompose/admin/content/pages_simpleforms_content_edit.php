@@ -150,10 +150,16 @@ try {
 	
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'simple_form_title', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	
+	// textfield for title
+	$FORM->addElement('text', 'title_url', gettext('Assumend Url'),
+		array('id' => 'simple_form_title_url', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('title_url', 'trim');
+	$FORM->applyFilter('title_url', 'strip_tags');
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
@@ -231,6 +237,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($simple_form['id'], null),
 		'title' => Base_Cnc::ifsetor($simple_form['title'], null),
+		'title_url' => Base_Cnc::ifsetor($simple_form['title_url'], null),
 		'content' => Base_Cnc::ifsetor($simple_form['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($simple_form['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($simple_form['apply_macros'], null),
@@ -293,7 +300,7 @@ try {
 		// prepare sql data
 		$sqlData = array();
 		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $HELPER->createMeaningfulString($FORM->exportValue('title'));
+		$sqlData['title_url'] = $FORM->exportValue('title_url');
 		$sqlData['content_raw'] = $FORM->exportValue('content');
 		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 

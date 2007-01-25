@@ -275,6 +275,12 @@ var definitions = {
 			Helper.validate(this);
 		}
 	},
+	'input.urlify' : function(el){
+		el.onkeyup = function(){
+			Helper.convertPageNameToUrl(this);
+			return false;
+		}
+	},
 	'.act_internalLink' : function(el){
 		el.onclick = function(){
 			Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
