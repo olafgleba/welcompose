@@ -469,7 +469,7 @@ function Base_isNull(elem) {
  * @type String
  */
 function Base_trim(elem) {
-  return elem.replace(/^\s*|\s*$/g, "");
+  return elem.replace(/^\s*|\s*$/g, '');
 }
 
 

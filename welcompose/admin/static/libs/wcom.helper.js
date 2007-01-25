@@ -99,6 +99,9 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.convertPageNameToUrl = Helper_convertPageNameToUrl;
+Helper.prototype.URLify = Helper_URLify;
+
 
 /**
  * Launch popup.
@@ -180,6 +183,41 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 	}
 }
 
+
+function Helper_insertCallback (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.popup = true;
+		
+		var callback_types_without_popups = new Array (
+			'document'
+		);
+		
+		switch (this.elem.name) {
+			case 'image' :
+					Helper.getPagerPage();
+					Helper.getTextConverterValue();
+					Helper.getSelectionText();		
+					this.url = this.parseMedCallbackInsertImageUrl + '?id=' + this.elem.id +
+					 	'&text=' + text + 
+						'&text_converter=' + text_converter + 
+						'&pager_page=' + pager_page + 
+						'&form_target=' + form_target;
+				break;
+			case 'document' :
+					Helper.getPagerPage();
+					this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
+						'&pager_page=' + pager_page;
+				break;
+		}
+		
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
 /**
  * Launch popup.
  * <br />
@@ -210,7 +248,7 @@ function Helper_launchPopupCallback (width, height, wname, elem)
 			alert(selectTextarea); 
 		} else {
 			form_target = storedFocus;
-			//Helper.lowerOpacity();
+			Helper.lowerOpacity();
 		
 			switch (this.elem.name) {
 				case 'image' :
@@ -276,7 +314,6 @@ function Helper_getSelectionText()
 
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;
-			//txtarea.focus();
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
 	 		var startPos = txtarea.selectionStart;
 			var endPos = txtarea.selectionEnd;
@@ -1593,6 +1630,85 @@ function Helper_getDataParentNode (elem, level)
 		a = a.parentNode;
 	}
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+/**
+ * Wrapper to transform page names to valid urls.
+ * <br />
+ * Fills the related url form field with transformed values
+ * ({link #URLify}) of the current form field element.
+ *
+ * @see #URLify
+ * @param {string} elem Current Element
+ * @throws applyError on exception
+ */
+function Helper_convertPageNameToUrl (elem)
+{
+	try {	
+		//properties
+		this.elem = elem;
+		
+		// fill related form field with tranformed results
+		$('page_name_url').value = Helper.URLify(this.elem.value);
+
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Transforms page names to valid urls.
+ * 
+ * @see #convertPageNameToUrl
+ * @param {string} string given string
+ * @return string processed string
+ * @throws applyError on exception
+ */
+function Helper_URLify (string)
+{
+	try {	
+		// convert string to lowercase so that we always operate on lowercases
+		string = string.toLowerCase();
+
+		// trim whitespaces
+		Helper.trim(string);
+	
+		// definitions for char normalization
+		normalizations = {
+			// german
+			'ä': 'ae',
+			'ö': 'oe',
+			'ü': 'ue',
+			'ß': 'ss',
+			// french
+		
+			// spanish
+		
+			// swedish
+		
+			// other
+		}
+	
+		// execute char normalization
+		for (char in normalizations) {
+			r = new RegExp(char, 'gi');
+			string = string.replace(r, normalizations[char]);
+		}
+	
+		// remove everything except a-z, 0-9 and hyphens and replace it with a hyphen 
+		string = string.replace(/[^a-z0-9\-]/g, '-');
+	
+		// remove unnecessary hyphens
+		string = string.replace(/-{2,}/g, '-');
+	
+		// remove hyphens at the beginning and at the end of the string
+		string = string.replace(/^(-+)/, '');
+		string = string.replace(/(-+)$/, '');
+	
+	    return string;
+	} catch (e) {
+		_applyError(e);
+	}	
 }
 
 /**

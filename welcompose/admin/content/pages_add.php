@@ -184,6 +184,12 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
+	// textfield for url_name
+	$FORM->addElement('text', 'name_url', gettext('Assumed Url'), 
+		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('name_url', 'trim');
+	$FORM->applyFilter('name_url', 'strip_tags');
+	
 	// textfield for alternate name
 	$FORM->addElement('text', 'alternate_name', gettext('Alternate name'), 
 		array('id' => 'page_alternate_name', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -345,9 +351,10 @@ try {
 				$FORM->exportValue('position'));
 			
 			// test url name for uniqueness
-			$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
-			if (!$PAGE->testForUniqueUrlName($url_name)) {
-				$url_name = $url_name.'-'.$page_id;
+			//$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+			$name_url = $FORM->exportValue('name_url');
+			if (!$PAGE->testForUniqueUrlName($name_url)) {
+				$name_url = $name_url.'-'.$page_id;
 			}
 			
 			// prepare sql data for page create
@@ -356,7 +363,7 @@ try {
 			$sqlData['project'] = WCOM_CURRENT_PROJECT;
 			$sqlData['template_set'] = $FORM->exportValue('template_set');
 			$sqlData['name'] = $FORM->exportValue('name');
-			$sqlData['name_url'] = $url_name;
+			$sqlData['name_url'] = $name_url;
 			$sqlData['alternate_name'] = $FORM->exportValue('alternate_name');
 			$sqlData['description'] = $FORM->exportValue('description');
 			$sqlData['optional_text'] = $FORM->exportValue('optional_text');

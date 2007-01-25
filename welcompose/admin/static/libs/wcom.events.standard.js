@@ -271,6 +271,12 @@ var definitions = {
 		el.onclick = function(){
 			Status.getCbx(new Array('simple_page_meta_use'));
 		}
+	},
+	'#page_name' : function(el){
+		el.onkeyup = function(){
+			Helper.convertPageNameToUrl(this);
+			return false;
+		}
 	}
 };
 Behaviour.register(definitions);

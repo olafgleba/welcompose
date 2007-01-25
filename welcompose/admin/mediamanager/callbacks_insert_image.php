@@ -236,12 +236,15 @@ try {
 		
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		print $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		//print $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		
+		// add pager_page to session
+		$_SESSION['toInsert'] = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
 		
 		// add pager_page to session
 		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
-		// add pager_page to session
+		// add form_taget to session
 		$_SESSION['form_target'] = $FORM->exportValue('form_target');
 		
 		// redirect

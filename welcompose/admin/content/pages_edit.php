@@ -155,6 +155,12 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
+	// textfield for url_name
+	$FORM->addElement('text', 'name_url', gettext('Assumed Url'), 
+		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('name_url', 'trim');
+	$FORM->applyFilter('name_url', 'strip_tags');
+	
 	// textfield for alternate name
 	$FORM->addElement('text', 'alternate_name', gettext('Alternate name'), 
 		array('id' => 'page_alternate_name', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -229,6 +235,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($page['id'], null),
 		'name' => Base_Cnc::ifsetor($page['name'], null),
+		'name_url' => Base_Cnc::ifsetor($page['name_url'], null),
 		'alternate_name' => Base_Cnc::ifsetor($page['alternate_name'], null),
 		'description' => Base_Cnc::ifsetor($page['description'], null),
 		'optional_text' => Base_Cnc::ifsetor($page['optional_text'], null),
@@ -303,15 +310,16 @@ try {
 		$FORM->freeze();
 		
 		// test url name for uniqueness
-		$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
-		if (!$PAGE->testForUniqueUrlName($url_name, $FORM->exportValue('id'))) {
-			$url_name = $url_name.'-'.$FORM->exportValue('id');
+		//$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
+		$name_url = $FORM->exportValue('name_url');
+		if (!$PAGE->testForUniqueUrlName($name_url, $FORM->exportValue('id'))) {
+			$name_url = $name_url.'-'.$FORM->exportValue('id');
 		}
 		
 		// create the article group
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['name_url'] = $url_name;
+		$sqlData['name_url'] = $name_url;
 		$sqlData['alternate_name'] = $FORM->exportValue('alternate_name');
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['optional_text'] = $FORM->exportValue('optional_text');
