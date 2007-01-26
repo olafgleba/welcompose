@@ -1,6 +1,8 @@
 Welcompose 0.8.0
 ================
 
+ * Admin: Made URL names editable with the help of a JS function; see
+   ticket:5. (olaf, andreas)
  * Database: Unique key around fields page and name of table content_boxes
    added; see ticket:6. (andreas) 
  * Database: Fields alternate_title, description and optional_text to 
