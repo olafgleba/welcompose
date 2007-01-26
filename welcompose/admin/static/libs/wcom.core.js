@@ -597,6 +597,10 @@ function Init_getVars ()
 				Effect.Fade('rp', {duration: 0.6, delay: 1.2});
 			}
 		}
+		if (typeof callback_result != 'undefined' && callback_result != '') {
+				//alert ('jo');
+				Mediamanager.insertImageItem(callback_result);
+		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {
 				Mediamanager.mediaToPodcastOnLoad();

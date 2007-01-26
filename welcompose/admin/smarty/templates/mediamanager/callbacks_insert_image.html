@@ -16,7 +16,7 @@
 <script type="text/javascript">
 var formTarget = '{$form_target}';
 var pager_page = '{$pager_page}';
-var toInsert = '{$session.toInsert}';
+var callback_result = '{$callback_result}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -30,14 +30,15 @@ var toInsert = '{$session.toInsert}';
 
 </head>
 
-<body id="modalWindow" onunload="Helper.closePopupTrack()">
-	
+<body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
+
 <div id="lyLowerOpacity"> </div>
 
 <div id="modalContainer">
 <h2>{i18n MEDIA MANAGER} <span>{i18n INSERT IMAGE}</span></h2>
 
 <div id="modalBody">
+
 {if !empty($form.errors)}
 <div id="error">
 <ul class="req">
@@ -46,13 +47,6 @@ var toInsert = '{$session.toInsert}';
 {/foreach}
 </ul>
 <!-- error --></div>
-{/if}
-
-{if $session.response == 1}
-<div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
-<!-- rp --></div>
 {/if}
 
 <form class="botbg"{$form.attributes}>

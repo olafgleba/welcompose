@@ -168,7 +168,7 @@ try {
 		'pager_page' => Base_Cnc::ifsetor($pager_page, WCOM_REGEX_NUMERIC),
 		'form_target' => Base_Cnc::ifsetor($form_target, WCOM_REGEX_CSS_IDENTIFIER)
 	));
-	
+		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
@@ -188,33 +188,39 @@ try {
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
-			
+		
 		// assign target field identifier
 		$BASE->utility->smarty->assign('form_target', $form_target);
-			
+		
 		// assign delivered pager location
 		$BASE->utility->smarty->assign('pager_page', $pager_page);
-		
+	
+		// assign delivered pager location
+		$BASE->utility->smarty->assign('callback_result', $_SESSION['callback_result']);
+
 		// assign prepared session array to smarty
 		$BASE->utility->smarty->assign('session', $session);
-		
+	
 	    if (!empty($_SESSION['pager_page'])) {
 	        $_SESSION['pager_page'] = '';
 	    }
 	    if (!empty($_SESSION['form_target'])) {
 	        $_SESSION['form_target'] = '';
 	    }
-		
+	    if (!empty($_SESSION['callback_result'])) {
+	        $_SESSION['callback_result'] = '';
+	    }
+	
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
-		
+	
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
-		
+	
 		// flush the buffer
 		@ob_end_flush();
-		
+	
 		exit;
 	} else {
 		// freeze the form
@@ -236,10 +242,10 @@ try {
 		
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		//print $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
 		
-		// add pager_page to session
-		$_SESSION['toInsert'] = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		// add form_taget to session
+		$_SESSION['callback_result'] = $callback_result;
 		
 		// add pager_page to session
 		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
@@ -249,6 +255,16 @@ try {
 		
 		// redirect
 		$SESSION->save();
+		
+		// clean the buffer
+		if (!$BASE->debug_enabled()) {
+			@ob_end_clean();
+		}
+		
+		// redirect
+		header("Location: callbacks_insert_image.php");
+		exit;
+
 	}
 } catch (Exception $e) {
 	// clean the buffer

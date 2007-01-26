@@ -956,7 +956,7 @@ function Mediamanager_deleteMediaItem (elem)
  * @see Helper#insertTags
  * @throws applyError on exception
  */
-function Mediamanager_insertImageItem (elem)
+/*function Mediamanager_insertImageItem (elem)
 {
 	try {
 		if (typeof storedFocus == 'undefined') {
@@ -973,6 +973,21 @@ function Mediamanager_insertImageItem (elem)
 			
 			Helper.insertTags(target, strStart, '' , '');
 		}	
+	} catch (e) {
+		_applyError(e);
+	}
+}*/
+
+function Mediamanager_insertImageItem (elem)
+{
+	try {
+
+			var target = formTarget;
+			
+			
+			Helper.insertTagsFromPopup(target, elem, '' , '');
+			Helper.closeLinksPopup();
+			
 	} catch (e) {
 		_applyError(e);
 	}
