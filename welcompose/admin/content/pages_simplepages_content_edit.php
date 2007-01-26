@@ -136,10 +136,19 @@ try {
 	
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	
+	// textfield for URL title
+	$FORM->addElement('text', 'title_url', gettext('URL title'),
+		array('id' => 'simple_page_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('title_url', 'trim');
+	$FORM->applyFilter('title_url', 'strip_tags');
+	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
+	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
+		WCOM_REGEX_URL_NAME);
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
@@ -196,6 +205,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($simple_page['id'], null),
 		'title' => Base_Cnc::ifsetor($simple_page['title'], null),
+		'title_url' => Base_Cnc::ifsetor($simple_page['title_url'], null),
 		'content' => Base_Cnc::ifsetor($simple_page['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($simple_page['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($simple_page['apply_macros'], null),
@@ -257,7 +267,7 @@ try {
 		// prepare sql data
 		$sqlData = array();
 		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $HELPER->createMeaningfulString($FORM->exportValue('title'));
+		$sqlData['title_url'] = $FORM->exportValue('title_url');
 		$sqlData['content_raw'] = $FORM->exportValue('content');
 		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 

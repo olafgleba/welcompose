@@ -218,6 +218,10 @@ define("WCOM_REGEX_CUSTOM_FORM_TYPE", "=^([A-Z]{1}[a-z]+)+$=");
 
 // Defines regular expression for strings containing a
 // sitemap priority
-define('WCOM_REGEX_SITEMAP_PRIORITY', '=^(0\.[1-9]{1}|1\.0)$=')
+define('WCOM_REGEX_SITEMAP_PRIORITY', '=^(0\.[1-9]{1}|1\.0)$=');
+
+// Defines generic regular expression for strings containing an
+// URL name
+define('WCOM_REGEX_URL_NAME', '=^[a-z0-9\-]+$=');
 
 ?>

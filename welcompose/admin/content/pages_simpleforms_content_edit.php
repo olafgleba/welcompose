@@ -155,11 +155,14 @@ try {
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
 	
-	// textfield for title
-	$FORM->addElement('text', 'title_url', gettext('Assumend Url'),
-		array('id' => 'simple_form_title_url', 'maxlength' => 255, 'class' => 'w300'));
+	// textfield for URL title
+	$FORM->addElement('text', 'title_url', gettext('URL title'),
+		array('id' => 'simple_form_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('title_url', 'trim');
 	$FORM->applyFilter('title_url', 'strip_tags');
+	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
+	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
+		WCOM_REGEX_URL_NAME);
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),

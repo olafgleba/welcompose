@@ -130,6 +130,12 @@ try {
 					$reg = WCOM_REGEX_EMAIL;
 					$desc = gettext('Invalid e-mail address');
 				break;
+			case 'simple_form_title_url':
+			case 'blog_posting_title_url':
+			case 'page_name_url':
+					$reg = WCOM_REGEX_URL_NAME;
+					$desc = gettext('Invalid URL name');
+				break;
 			case 'user_password':
 					$reg = WCOM_REGEX_PASSWORD;
 					$desc = gettext('Five characters or more, no whitespace');

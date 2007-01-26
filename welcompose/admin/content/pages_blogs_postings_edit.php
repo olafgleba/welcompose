@@ -189,11 +189,20 @@ try {
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
-
+	
+	// textfield for URL title
+	$FORM->addElement('text', 'title_url', gettext('URL title'),
+		array('id' => 'blog_posting_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('title_url', 'trim');
+	$FORM->applyFilter('title_url', 'strip_tags');
+	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
+	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
+		WCOM_REGEX_URL_NAME);
+	
 	// textarea for summary
 	$FORM->addElement('textarea', 'summary', gettext('Summary'),
 		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
@@ -402,6 +411,7 @@ try {
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($blog_posting['id'], null),
 		'title' => Base_Cnc::ifsetor($blog_posting['title'], null),
+		'title_url' => Base_Cnc::ifsetor($blog_posting['title_url'], null),
 		'summary' => Base_Cnc::ifsetor($blog_posting['summary_raw'], null),
 		'content' => Base_Cnc::ifsetor($blog_posting['content_raw'], null),
 		'feed_summary' => Base_Cnc::ifsetor($blog_posting['feed_summary_raw'], null),
@@ -475,7 +485,7 @@ try {
 		// prepare sql data
 		$sqlData = array();
 		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $HELPER->createMeaningfulString($FORM->exportValue('title'));
+		$sqlData['title_url'] = $FORM->exportValue('title_url');
 		$sqlData['summary_raw'] = $FORM->exportValue('summary');
 		$sqlData['summary'] = $FORM->exportValue('summary');
 		$sqlData['content_raw'] = $FORM->exportValue('content');

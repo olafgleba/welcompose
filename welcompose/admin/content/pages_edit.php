@@ -156,10 +156,13 @@ try {
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
 	// textfield for url_name
-	$FORM->addElement('text', 'name_url', gettext('Assumed Url'), 
+	$FORM->addElement('text', 'name_url', gettext('URL name'), 
 		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('name_url', 'trim');
 	$FORM->applyFilter('name_url', 'strip_tags');
+	$FORM->addRule('name_url', gettext('Enter an URL name'), 'required');
+	$FORM->addRule('name_url', gettext('The URL name may only contain chars, numbers and hyphens'),
+		WCOM_REGEX_URL_NAME);
 	
 	// textfield for alternate name
 	$FORM->addElement('text', 'alternate_name', gettext('Alternate name'), 
