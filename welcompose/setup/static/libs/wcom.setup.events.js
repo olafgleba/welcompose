@@ -45,7 +45,7 @@ var definitions = {
 	'input' : function(el){
 		el.onfocus = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
-				Forms.setOnEvent(this, '','#0c3','dotted');
+				Forms.setOnEvent(this, '','#ff620d','dotted');
 			}
 			return false;
 		}
@@ -68,12 +68,12 @@ var definitions = {
 	},
 	'.submit200' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
 		}
 	},
 	'.submit200nomargin' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
 		}
 	}
 };

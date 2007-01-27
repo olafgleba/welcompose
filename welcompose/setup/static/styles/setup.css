@@ -29,17 +29,17 @@ a {
 text-decoration: none;
 }
 a:link, a:visited {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 }
 a:hover {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 text-decoration: underline;
 }
 a:active, a:focus {
 color: #fff;
-background: #0c3;
+background: #ff620d;
 }
 #container {
 position: relative;
@@ -75,7 +75,7 @@ background: #0c3;
 padding-left: 7px;
 padding-bottom: 3px;
 font-size: 25px;
-background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+background: #ff620d url(../img/bg_logo_bot.gif) left bottom no-repeat;
 }
 /* LOGO STOP */
 
@@ -188,7 +188,7 @@ fieldset.topbg h2, fieldset.within h2 {
 font-size: 1.0em;
 font-weight: normal;
 padding: 0 10px 0 15px;
-color: #0c3;
+color: #ff620d;
 }
 label {
 display: block;
@@ -253,12 +253,12 @@ background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
 width: 90px;
 }
 input.submit200 {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 192px;
 }
 input.submit200nomargin {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 14px;
 }
@@ -276,7 +276,7 @@ a.submit200:link, a.submit200:visited,
 a.submit200finish:link, a.submit200finish:visited  {
 position: relative;
 text-align: left;
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 color: #fff;
 width: 200px;
 height: 20px;
@@ -404,7 +404,7 @@ margin-top: 50px;
 line-height: 1.2em;
 padding: 4px 15px;
 font-weight: bold;
-color: red;
+color: #036;
 list-style-position: inside;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
@@ -423,7 +423,7 @@ margin-top: 50px;
 #rp h1 {
 margin: 0;
 padding: 10px 10px 0 10px;
-color: red;
+color: #036;
 }
 #rp p {
 margin: 0;
@@ -440,7 +440,7 @@ color: #000;
 margin: 30px 0 15px 22px;
 }
 body#errormsg h2 span {
-color: #0c3;
+color: #ff620d;
 font-weight: bold;
 }
 

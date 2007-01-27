@@ -171,7 +171,7 @@ function Base ()
 		/**
 		 * Comprehensive color application wide
 		 */
-		this.applicationTextColor = '#009a26';
+		this.applicationTextColor = '#ff620d';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.
