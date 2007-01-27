@@ -16,7 +16,7 @@ text-align: center;
 h1 {
 font-size: 2em;
 font-weight: normal;
-color: #0c3;
+color: #ff620d;
 margin: 40px 0 15px 22px;
 }
 h2, p, a, li, th, td, select, label, input, legend {
@@ -155,7 +155,7 @@ height: 49px;
 background: transparent url(../img/six.gif) 0 0 no-repeat;
 }
 #topnav li.on {
-color: #0c3;
+color: #ff620d;
 }
 #topnav .on span {
 background-position: 0 -49px;
