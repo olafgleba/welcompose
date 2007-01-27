@@ -93,12 +93,8 @@ try {
 	}
 	
 	// get form_target value
-	if (!empty($_REQUEST['form_target'])) {
-		$form_target = Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
-	} else {
-		$form_target = Base_Cnc::filterRequest($_SESSION['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
-	}
-		
+	$form_target = Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('insert_image', 'post');
 	
@@ -154,8 +150,8 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::ifsetor($_REQUEST['text'], WCOM_REGEX_NUMERIC),
-		'form_target' => Base_Cnc::ifsetor($form_target, WCOM_REGEX_CSS_IDENTIFIER)
+		'text' => Base_Cnc::filterRequest($_REQUEST['text'], WCOM_REGEX_NUMERIC),
+		'form_target' => Base_Cnc::filterRequest($form_target, WCOM_REGEX_CSS_IDENTIFIER)
 	));
 		
 	// validate it

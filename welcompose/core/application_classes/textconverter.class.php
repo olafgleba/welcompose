@@ -569,16 +569,58 @@ public function applyTextConverter ($id, $text)
 	return call_user_func($function_name, $text);
 }
 
+/**
+ * Provides interface between media manager and insert callbacks provided
+ * by the text converter plugins. Is required to insert media objects into
+ * the pages using the text converter specific syntax. 
+ *
+ * Takes the text converter id as first argument, the name of the callback
+ * function (without the prefix mmInsert) as second argument and the arguments
+ * for the callback function in an array as third argument. Returns string.
+ * 
+ * @throws Application_TextConverterException
+ * @param int Text converter id
+ * @param string Callback name
+ * @param array Callback args
+ * @return string 
+ */
 public function insertCallback ($id, $callback, $args)
 {
-	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
-		"wcom_plugin_textconverter_xhtml.php";
-	require($path);
+	// input check
+	if (empty($id) || !is_numeric($id)) {
+		throw new Application_TextConverterException('Input for parameter id is expected to be numeric');
+	}
+	if (empty($callback) || !preg_match(WCOM_REGEX_TEXT_CONVERTER_CALLBACK, $callback)) {
+		throw new Application_TextConverterException('No or invalid text converter callback supplied');
+	}
+	if (!is_array($args)) {
+		throw new Application_TextConverterException('Input for parameter args is expected to be an array');
+	}
 	
-	$t = new TextConverter_XHTML();
+	// get text converter
+	$text_converter = $this->selectTextConverter($id);
+	if (empty($text_converter)) {
+		throw new Application_TextConverterException('Selected text converter does not exist');
+	}
 	
+	// load text converter file
+	$path_parts = array(
+		$this->base->_conf['plugins']['textconverter_dir'],
+		sprintf('wcom_plugin_textconverter_%s.php', strtolower($text_converter['internal_name']))
+	);
+	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
+	
+	// prepare text converter name
+	$text_converter_name = sprintf('TextConverter_%s', $text_converter['internal_name']);
+	if (!class_exists($text_converter_name)) {
+		throw new ApplicationTextConverterException('Text converter class does not exist');
+	}
+	
+	// load text converter and prepare callback
+	$t = new $text_converter_name();
 	$callback = sprintf('mmInsert%s', $callback);
 	
+	// execute callback
 	return call_user_func_array(array($t, $callback), $args);
 }
 

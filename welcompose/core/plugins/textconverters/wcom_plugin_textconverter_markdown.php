@@ -46,4 +46,40 @@ function wcom_plugin_textconverter_markdown ($str)
 	return Markdown($str);
 }
 
+require_once('wcom_plugin_textconverter_xhtml.php');
+
+class TextConverter_Markdown extends TextConverter_Xhtml
+{
+
+public function mmInsertImage ($text, $src, $width, $height, $alt, $title, $longdesc)
+{
+	$tag = '![%4$s](%1$s "%5$s")';
+	$html = sprintf($tag, $src, $width, $height, $alt, $title, $longdesc, $text);
+	
+	return $html;
+}
+
+public function apply ($str)
+{
+	// input check
+	if (!is_scalar($str)) {
+		throw new TextConverter_MarkdownException('Input for parameter str is expected to be scalar');
+	}
+	
+	// load markdown
+	if (!function_exists('Markdown')) {
+		$path = dirname(__FILE__).'/../../third_party/markdown.php';
+		require(Base_Compat::fixDirectorySeparator($path));
+	}
+	
+	// apply markdown
+	return Markdown($str);
+}
+
+// End of class
+
+}
+
+class TextConverter_MarkdownException extends Exception { }
+
 ?>

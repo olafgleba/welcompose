@@ -224,4 +224,7 @@ define('WCOM_REGEX_SITEMAP_PRIORITY', '=^(0\.[1-9]{1}|1\.0)$=');
 // URL name
 define('WCOM_REGEX_URL_NAME', '=^[a-z0-9\-]+$=');
 
+// Defines regular expression for text converter callback names
+define('WCOM_REGEX_TEXT_CONVERTER_CALLBACK', '=^[a-z0-9\-]+$=i');
+
 ?>
