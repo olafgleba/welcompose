@@ -232,7 +232,7 @@ function Base ()
 		/**
 		 * Comprehensive color application wide
 		 */
-		this.applicationTextColor = '#009a26';
+		this.applicationTextColor = '#ff620d';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.
@@ -597,9 +597,9 @@ function Init_getVars ()
 				Effect.Fade('rp', {duration: 0.6, delay: 1.2});
 			}
 		}
-		if (typeof callback_result != 'undefined' && callback_result != '') {
+		/*if (typeof callback_result != 'undefined' && callback_result != '') {
 				Mediamanager.insertCallback(callback_result);
-		}
+		}*/
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {
 				Mediamanager.mediaToPodcastOnLoad();

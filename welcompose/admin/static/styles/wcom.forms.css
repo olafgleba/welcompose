@@ -46,7 +46,7 @@ fieldset.topbg h2, fieldset.within h2 {
 /* font-size: 1em; */
 font-weight: normal;
 padding: 0 10px 0 0;
-color: #0c3;
+color: #ff620d;
 }
 label {
 display: block;
@@ -198,42 +198,42 @@ background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
 width: 90px;
 }
 input.submit140 {
-background: #0c3 url(../img/submit140.gif) no-repeat;
+background: #ff620d url(../img/submit140.gif) no-repeat;
 width: 140px;
 margin: 20px  0 0 140px;
 }
 input.submit200 {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;
 }
 input.submit200upload {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;
 }
 input.submit200bez260 {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 260px;
 }
 input.cancel200 {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;
 }
 input.close200 {
-background: #0c3 url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;
 }
 input.submit240 {
-background: #0c3 url(../img/submit240.gif) no-repeat;
+background: #ff620d url(../img/submit240.gif) no-repeat;
 width: 240px;
 margin: 20px 0 0 140px;
 }
 input.submit240bez260 {
-background: #0c3 url(../img/submit240.gif) no-repeat;
+background: #ff620d url(../img/submit240.gif) no-repeat;
 width: 240px;
 margin: 20px 0 0 260px;
 }
@@ -316,7 +316,7 @@ margin-top: 45px;
 line-height: 1.2em;
 padding: 4px 15px;
 font-weight: bold;
-color: red;
+color: #036;
 list-style-position: inside;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }

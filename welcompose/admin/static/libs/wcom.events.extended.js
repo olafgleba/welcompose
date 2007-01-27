@@ -243,7 +243,7 @@ var definitions = {
 	'input' : function(el){
 		el.onfocus = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
-				Forms.setOnEvent(this, '','#0c3','dotted');
+				Forms.setOnEvent(this, '','#ff620d','dotted');
 			}
 			return false;
 		}
@@ -256,7 +256,7 @@ var definitions = {
 	},
 	'textarea' : function(el){
 		el.onfocus = function(){
-			Forms.setOnEvent(this, '','#0c3','dotted');
+			Forms.setOnEvent(this, '','#ff620d','dotted');
 			Forms.storeFocus(this);
 			return false;
 		}

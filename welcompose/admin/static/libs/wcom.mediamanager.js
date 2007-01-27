@@ -371,6 +371,9 @@ function Mediamanager_applyBehaviour ()
 		Behaviour.reapply('#mm_photoset');
 		Behaviour.reapply('#mm_flickrtags');
 		Behaviour.reapply('#submit55');
+		Behaviour.reapply('.submit140');
+		Behaviour.reapply('.submit200');
+		Behaviour.reapply('.submit240');
 		Behaviour.reapply('.showMediamanagerElementMyLocal');
 		Behaviour.reapply('.hideMediamanagerElementMyLocal');
 		Behaviour.reapply('.showMediamanagerElementMyFlickr');

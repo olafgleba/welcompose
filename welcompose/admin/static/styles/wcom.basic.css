@@ -44,7 +44,7 @@ h1 {
 position: relative;
 font-size: 1.5em;
 font-weight: normal;
-color: #0c3;
+color: #ff620d;
 margin: 10px 0 15px 10px;
 }
 h1 .users {
@@ -76,17 +76,17 @@ text-decoration: none;
 cursor: pointer;
 }
 a:link, a:visited {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 }
 a:hover {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 text-decoration: underline;
 }
 a:active, a:focus {
 color: #fff;
-background: #0c3;
+background: #ff620d;
 }
 
 /* basic structure */
@@ -120,7 +120,7 @@ padding-top: 3px;
 #logo p {
 font-weight: bold;
 color: #fff;
-background: #0c3 url(../img/bg_logo_bot.gif) left bottom no-repeat;
+background: #ff620d url(../img/bg_logo_bot.gif) left bottom no-repeat;
 padding: 0 0 3px 7px;
 }
 #logout {
@@ -202,7 +202,7 @@ background: transparent url(../img/icons/overview.gif) 0 0 no-repeat;
 .secnav710_nav_x a:hover, .secnav710_nav_x a:active, .secnav710_nav_x a:focus,
 .secnav710_navplus_x a:hover, .secnav710_navplus_x a:active, .secnav710_navplus_x a:focus,
 .secnav474_nav_x a:hover, .secnav474_nav_x a:active, .secnav474_nav_x a:focus {
-color: #00AE2C;
+color: #ff620d;
 background: transparent url(../img/icons/overview.gif) 0 -42px no-repeat;
 }
 
@@ -273,7 +273,7 @@ z-index: 2;
 #statuschange h1 {
 margin: 0;
 padding: 10px 10px 0 10px;
-color: red;
+color: #036;
 }
 #statuschange p {
 margin: 0;
@@ -294,7 +294,7 @@ z-index: 2;
 #uploadMessage h1 {
 margin: 0;
 padding: 10px 10px 0 10px;
-color: red;
+color: #036;
 }
 #uploadMessage p {
 margin: 0;
@@ -320,7 +320,7 @@ margin-top: 45px;
 #rp h1 {
 margin: 0;
 padding: 10px 10px 0 10px;
-color: red;
+color: #036;
 }
 #rp p {
 margin: 0;
@@ -345,7 +345,7 @@ margin-top: 50px;
 #content .rp_note h1 {
 margin: 0;
 padding: 10px 10px 0 10px;
-color: red;
+color: #036;
 }
 #content .rp_note p {
 margin: 0;
@@ -415,7 +415,7 @@ color: #000;
 background: transparent url(../img/icons/link.gif) 1px -3px no-repeat;
 }
 .actnav a:hover, .actnav a:active, .actnav a:focus {
-color: #00AE2C;
+color: #ff620d;
 background: transparent url(../img/icons/link.gif) 1px -45px no-repeat;
 }
 .actnav li.on {
@@ -424,7 +424,7 @@ display: block;
 float: left;
 padding: 2px 10px 3px 19px;
 text-decoration: none;
-color: #00AE2C;
+color: #ff620d;
 background: transparent url(../img/icons/link.gif) 2px -44px no-repeat;
 }
 
@@ -438,6 +438,6 @@ color: #000;
 margin: 30px 0 15px 10px;
 }
 body#errormsg h2 span {
-color: #0c3;
+color: #ff620d;
 font-weight: bold;
 }
