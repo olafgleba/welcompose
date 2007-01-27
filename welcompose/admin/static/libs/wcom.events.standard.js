@@ -149,7 +149,7 @@ var definitions = {
 	},
 	'input.urlify' : function(el){
 		el.onkeyup = function(){
-			Helper.convertFieldValuesToValidUrl(this);
+			Helper.convertFieldValuesToValidUrl(this, 'for');
 			return false;
 		}
 	},

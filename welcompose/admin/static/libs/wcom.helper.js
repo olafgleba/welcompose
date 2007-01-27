@@ -253,13 +253,11 @@ function Helper_launchPopupCallback (width, height, wname, elem)
 		
 			switch (this.elem.name) {
 				case 'image' :
-						Helper.getPagerPage();
 						Helper.getTextConverterValue();
 						Helper.getSelectionText();		
 						this.url = this.parseMedCallbackInsertImageUrl + '?id=' + this.elem.id +
 						 	'&text=' + text + 
 							'&text_converter=' + text_converter + 
-							'&pager_page=' + pager_page + 
 							'&form_target=' + form_target;
 					break;
 				case 'document' :
@@ -280,12 +278,8 @@ function Helper_launchPopupCallback (width, height, wname, elem)
 			this.resHeight = Helper.defineWindowY();
 		
 			this.target.moveBy(this.resWidth, this.resHeight);
-			this.target.focus();
-			
-			
+			this.target.focus();	
 		}
-		
-		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -447,10 +441,14 @@ function Helper_closePopupTrackNoAlert (elem)
 		if (typeof audit == 'undefined') {
 			audit = false;
 		}
-		if (audit !== true) {
+		if (typeof submitted == 'undefined') {
+			submitted = false;
+		}
+		if (audit !== true && submitted !== true) {
 			self.opener.$('lyLowerOpacity').style.display = 'none';
 			// reset global vars
 			audit = false;
+			submitted = false;
 		}	
 	} catch (e) {
 		_applyError(e);
@@ -1552,7 +1550,7 @@ function Helper_getAttrParentNode (attr, elem, level)
 }
 
 /**
- * Getter for next Node attribute of current element parent node.
+ * Getter for current element parent node next node attribute.
  *
  * @param {string} attr Given attribute to use
  * @param {object} elem Current element
@@ -1658,7 +1656,7 @@ function Helper_getDataParentNode (elem, level)
 }
 
 /**
- * Wrapper to transform page names to valid urls.
+ * Wrapper to transform form field values to valid urls.
  * <br />
  * Fills the related url form field with transformed values
  * ({link #URLify}) of the current form field element.
@@ -1667,14 +1665,15 @@ function Helper_getDataParentNode (elem, level)
  * @param {string} elem Current Element
  * @throws applyError on exception
  */
-function Helper_convertFieldValuesToValidUrl (elem)
+function Helper_convertFieldValuesToValidUrl (elem, attr)
 {
 	try {	
 		//properties
 		this.elem = elem;
+		this.attr = attr;
 		
 		// get next node (e.g. label) attribute
-		var el = Helper.getAttrParentNodeNextNode ('for', this.elem, 1);
+		var el = Helper.getAttrParentNodeNextNode (this.attr, this.elem, 1);
 		
 		// fill related form field with tranformed results
 		$(el).value = Helper.URLify(this.elem.value);
@@ -1685,7 +1684,7 @@ function Helper_convertFieldValuesToValidUrl (elem)
 }
 
 /**
- * Transforms page names to valid urls.
+ * Transforms form field values to valid urls.
  * 
  * @see #convertFieldValuesToValidUrl
  * @param {string} string given string

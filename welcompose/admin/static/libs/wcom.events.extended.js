@@ -179,7 +179,7 @@ var definitions = {
 			Mediamanager.mediaToPodcast(this);
 			return false;
 		}
-	},
+	}/*,
 	'a.mm_insertImageItem' : function(el){
 		el.onclick = function(){
 			Mediamanager.insertImageItem(this);
@@ -197,7 +197,7 @@ var definitions = {
 			Mediamanager.insertDocumentItem(this);
 			return false;
 		}
-	},
+	}*/,
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');
@@ -277,7 +277,7 @@ var definitions = {
 	},
 	'input.urlify' : function(el){
 		el.onkeyup = function(){
-			Helper.convertFieldValuesToValidUrl(this);
+			Helper.convertFieldValuesToValidUrl(this, 'for');
 			return false;
 		}
 	},

@@ -177,6 +177,7 @@ input.submit200,
 input.submit200upload,
 input.submit200bez260,
 input.cancel200,
+input.close200,
 input.submit240,
 input.submit240bez260 {
 text-align: left;
@@ -217,6 +218,11 @@ width: 200px;
 margin: 20px 0 0 260px;
 }
 input.cancel200 {
+background: #0c3 url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 140px;
+}
+input.close200 {
 background: #0c3 url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;

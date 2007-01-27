@@ -598,8 +598,7 @@ function Init_getVars ()
 			}
 		}
 		if (typeof callback_result != 'undefined' && callback_result != '') {
-				//alert ('jo');
-				Mediamanager.insertImageItem(callback_result);
+				Mediamanager.insertCallback(callback_result);
 		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {
@@ -613,6 +612,11 @@ function Init_getVars ()
 		}
 		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
+				
+				// switch if page contains urlify form field
+				if (pagetype != '') {
+					$('column').style.paddingTop = '142px';
+				}
 						
 				this.url = this.parseMedLocalUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
 				if (typeof this.req != 'undefined') {

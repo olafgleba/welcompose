@@ -31,7 +31,7 @@ public function mmInsertImage ($text, $src, $width, $height, $alt, $title, $long
 	
 	$html = sprintf($tag, $src, $width, $height, $alt, $title, $longdesc, $text);
 	
-	return htmlentities($html);
+	return $html;
 }
 
 public function apply ($str)

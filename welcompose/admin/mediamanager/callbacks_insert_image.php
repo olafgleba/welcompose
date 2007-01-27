@@ -91,13 +91,6 @@ try {
 	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Exception("Access denied");
 	}
-
-	// get pager_page value
-	if (!empty($_REQUEST['pager_page'])) {
-		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC);
-	} else {
-		$pager_page = Base_Cnc::filterRequest($_SESSION['pager_page'], WCOM_REGEX_NUMERIC);
-	}
 	
 	// get form_target value
 	if (!empty($_REQUEST['form_target'])) {
@@ -128,9 +121,6 @@ try {
 	$FORM->applyFilter('text', 'htmlentities');
 	
 	// hidden field for pager_page
-	$FORM->addElement('hidden', 'pager_page');
-	
-	// hidden field for pager_page
 	$FORM->addElement('hidden', 'form_target');
 	
 	// textfield for name
@@ -158,14 +148,13 @@ try {
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'cancel200'));
+		array('class' => 'close200'));
 		
 	// set defaults
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], WCOM_REGEX_NUMERIC),
-		'pager_page' => Base_Cnc::ifsetor($pager_page, WCOM_REGEX_NUMERIC),
 		'form_target' => Base_Cnc::ifsetor($form_target, WCOM_REGEX_CSS_IDENTIFIER)
 	));
 		
@@ -191,19 +180,10 @@ try {
 		
 		// assign target field identifier
 		$BASE->utility->smarty->assign('form_target', $form_target);
-		
-		// assign delivered pager location
-		$BASE->utility->smarty->assign('pager_page', $pager_page);
 	
-		// assign delivered pager location
+		// assign callback result
 		$BASE->utility->smarty->assign('callback_result', $_SESSION['callback_result']);
-
-		// assign prepared session array to smarty
-		$BASE->utility->smarty->assign('session', $session);
 	
-	    if (!empty($_SESSION['pager_page'])) {
-	        $_SESSION['pager_page'] = '';
-	    }
 	    if (!empty($_SESSION['form_target'])) {
 	        $_SESSION['form_target'] = '';
 	    }
@@ -244,11 +224,8 @@ try {
 		$text_converter = (int)$FORM->exportValue('text_converter');
 		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
 		
-		// add form_taget to session
+		// add callback result to session
 		$_SESSION['callback_result'] = $callback_result;
-		
-		// add pager_page to session
-		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
 		// add form_taget to session
 		$_SESSION['form_target'] = $FORM->exportValue('form_target');

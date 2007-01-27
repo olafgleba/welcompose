@@ -152,6 +152,17 @@ var definitions = {
 			Helper.closePopup(this);
 			return false;
 		}
+	},
+	'.close200' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+		el.onclick = function(){
+			Helper.closeLinksPopup(this);
+			/* needed for func closePopupTrackNoAlert */
+			submitted = true;
+			return false;
+		}
 	}
 };
 Behaviour.register(definitions);
