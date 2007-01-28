@@ -376,6 +376,21 @@ vertical-align: top;
 #thirdNode table td.initialNode {
 width: 205px;
 }
+#firstNode table td.initialNode.level_2,
+#secondNode table td.initialNode.level_2,
+#thirdNode table td.initialNode.level_2 {
+padding-left: 16px;
+}
+#firstNode table td.initialNode.level_3,
+#secondNode table td.initialNode.level_3,
+#thirdNode table td.initialNode.level_3 {
+padding-left: 21px;
+}
+#firstNode table td.initialNode.level_4,
+#secondNode table td.initialNode.level_4,
+#thirdNode table td.initialNode.level_4 {
+padding-left: 28px;
+}
 #firstNode table td.nextNode,
 #secondNode table td.nextNode,
 #thirdNode table td.nextNode {
