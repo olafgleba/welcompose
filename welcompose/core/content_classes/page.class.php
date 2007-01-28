@@ -735,6 +735,20 @@ public function initPageContents ($page)
 	
 	// handle the different page types
 	switch((string)$page_info['page_type_name']) {
+		case 'WCOM_GENERATOR_FORM':
+				// prepare sql data
+				$sqlData = array(
+					'id' => $page_info['id'],
+					'user' => WCOM_CURRENT_USER,
+					'title' => $page_info['name'],
+					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'date_added' => date('Y-m-d H:i:s')
+				);
+				
+				// create generator form
+				$GENERATORFORM = load('Content:GeneratorForm');
+				$GENERATORFORM->addGeneratorForm($page_info['id'], $sqlData);
+			break;
 		case 'WCOM_SIMPLE_FORM':
 				// prepare sql data
 				$sqlData = array(

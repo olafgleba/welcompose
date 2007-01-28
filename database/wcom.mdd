@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <DBMODEL Version="1.0" TYPE="MySQL">
-<MODELSETTINGS MDDVERSION="1.9.2 (build 312)" ModelProject="wcom" ModelName="wcom" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="183" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" MaintainModelUpdated="1" ModelUpdated="2007-01-23 16:59:37" Description="" Annotation="" ZoomFac="100.00" XPos="224" YPos="1465" PrintLink="" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
+<MODELSETTINGS MDDVERSION="1.9.2 (build 312)" ModelProject="wcom" ModelName="wcom" ModelCompany="sopic GmbH" ModelAuthor="Andreas Ahlenstorf" ModelVersion="197" ModelVersionAI="1" ModelCreated="2006-03-09 20:32:38" MaintainModelUpdated="1" ModelUpdated="2007-01-28 10:54:44" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="2011" PrintLink="" WorkspaceColor="16777215" SnapGrid="1" DisplaySnap="1" SnapSize="10" ShowPages="1" ShowTableColumns="1" ShowTableIndeces="1" ShowColumnTypes="1" ShowDomains="0" ShowIndexInd="0" ShowNullInd="0" ShowForeignKeys="1" EntityFillColor="16777215" EntityLineColor="8388608" EntityFontColor="0" ShowRefName="1" ShowCardinality="0" ShowJoin="0" Notation="0" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" DefaultDelete="3" DefaultUpdate="3" DefaultTableType="4" DefaultDataType="3" CreateFKRef="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="`" EncloseNames="1" HPageCount="5" VPageCount="5" SPFillColor="13499135" SPLineColor="8388608" SPFontColor="0" ViewFillColor="3329434" ViewLineColor="8388608" ViewFontColor="0" TrimSPBody="0" />
 <GENERATIONSETTINGS TextCharCase="2" NameInComment="0" ModelCheck="1" ISQL="0" UseDelimiter="0" Delimiter="|">
   <DBGENSETTINGS DBCreate="1" BeginScript="0" Comment="0" Drop="1" EndScript="0" />
   <FKGENSETTINGS CreateFK="1" GenerateInsideTables="1" /> + EOL  <SPGENSETTINGS BeginScript="0" Comment="0" Drop="1" EndScript="1" SPCreate="1" OrderStr="" />
-  <TABLEGENSETTINGS Annotation="0" BeginScript="0" Comment="1" CreateIndex="1" CreateOption="1" CreatePK="1" Drop="1" EndScript="0" TableCreate="1" TriggersCreate="1" TriggersDrop="0" OrderStr="content_pages,content_page_types,content_navigations,content_simple_pages,content_blog_postings,content_blog_tags,content_blog_tags2content_blog_postings,application_ping_services,user_users,community_blog_comments,user_groups,templating_template_sets,templating_templates,templating_template_types,templating_template_sets2templating_templates,media_objects,content_boxes,application_ping_service_configurations,content_pages2user_groups,content_nodes,application_text_converters,application_projects,application_info,content_simple_forms,user_rights,user_groups2user_rights,user_users2application_projects,user_users2user_groups,community_blog_comment_statuses,application_text_macros,community_anti_spam_plugins,content_global_boxes,community_settings,community_blog_trackback_statuses,templating_global_files,templating_global_templates,content_blog_podcasts,media_tags,media_objects2media_tags,content_blog_podcast_categories,content_structural_templates" />
+  <TABLEGENSETTINGS Annotation="0" BeginScript="0" Comment="1" CreateIndex="1" CreateOption="1" CreatePK="1" Drop="1" EndScript="0" TableCreate="1" TriggersCreate="1" TriggersDrop="0" OrderStr="content_generator_form_fields,content_generator_forms,content_pages,content_page_types,content_navigations,content_simple_pages,content_blog_postings,content_blog_tags,content_blog_tags2content_blog_postings,application_ping_services,user_users,community_blog_comments,user_groups,templating_template_sets,templating_templates,templating_template_types,templating_template_sets2templating_templates,media_objects,content_boxes,application_ping_service_configurations,content_pages2user_groups,content_nodes,application_text_converters,application_projects,application_info,content_simple_forms,user_rights,user_groups2user_rights,user_users2application_projects,user_users2user_groups,community_blog_comment_statuses,application_text_macros,community_anti_spam_plugins,content_global_boxes,community_settings,community_blog_trackback_statuses,templating_global_files,templating_global_templates,content_blog_podcasts,media_tags,media_objects2media_tags,content_blog_podcast_categories,content_structural_templates" />
   <VIEWGENSETTINGS BeginScript="0" Comment="0" Drop="1" EndScript="0" ViewCreate="1" OrderStr="" />
   <EVENTGENSETTINGS BeginScript="0" Comment="0" Drop="1" EndScript="0" EventCreate="1" OrderStr="" />
 </GENERATIONSETTINGS>
@@ -62,6 +62,7 @@
 <REFERENCE_BEGIN ID="1217" />
 <REFERENCE_BEGIN ID="1229" />
 <REFERENCE_BEGIN ID="8563" />
+<REFERENCE_BEGIN ID="9904" />
 </REFERENCES_BEGIN>
 <REFERENCES_END>
 <REFERENCE_END ID="1022" />
@@ -181,7 +182,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="1030" Name="content_simple_pages" XPos="490" YPos="2350" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="1030" Name="content_simple_pages" XPos="650" YPos="2460" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="1031" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="1" IsFKey="1" Values="" DefaultValue="" Comments="">
 </COLUMN>
@@ -960,6 +961,7 @@
 <REFERENCE_BEGIN ID="8830" />
 <REFERENCE_BEGIN ID="9332" />
 <REFERENCE_BEGIN ID="9334" />
+<REFERENCE_BEGIN ID="9918" />
 </REFERENCES_BEGIN>
 <REFERENCES_END>
 <REFERENCE_END ID="8484" />
@@ -1317,7 +1319,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="8809" Name="content_global_boxes" XPos="290" YPos="2060" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="8809" Name="content_global_boxes" XPos="460" YPos="2180" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="8810" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
@@ -1776,7 +1778,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="9389" Name="content_structural_templates" XPos="180" YPos="1790" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<ENTITY ID="9389" Name="content_structural_templates" XPos="270" YPos="1760" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
 <COLUMNS>
 <COLUMN ID="9390" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
@@ -1805,6 +1807,103 @@
 <INDEX ID="9401" Name="project" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
 <INDEXCOLUMN ID="9397" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
+<ENTITY ID="9885" Name="content_generator_forms" XPos="140" YPos="2000" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="9886" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="1" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9887" Name="user" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9888" Name="title" DomainID="-1" Pos="2" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9889" Name="title_url" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9908" Name="content_raw" DomainID="-1" Pos="4" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9909" Name="content" DomainID="-1" Pos="5" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9910" Name="text_converter" DomainID="-1" Pos="6" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9911" Name="apply_macros" DomainID="-1" Pos="7" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+</COLUMN>
+<COLUMN ID="9925" Name="required_message" DomainID="-1" Pos="8" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9912" Name="email_from" DomainID="-1" Pos="9" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9913" Name="email_to" DomainID="-1" Pos="10" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9914" Name="email_subject" DomainID="-1" Pos="11" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9915" Name="use_captcha" DomainID="-1" Pos="12" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\ano\a,\aimage\a,\anumeral\a" DefaultValue="\ano\a" Comments="">
+</COLUMN>
+<COLUMN ID="9916" Name="date_modified" DomainID="-1" Pos="13" Datatype="10" Type="TIMESTAMP" Width="14" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9917" Name="date_added" DomainID="-1" Pos="14" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_BEGIN>
+<REFERENCE_BEGIN ID="9906" />
+</REFERENCES_BEGIN>
+<REFERENCES_END>
+<REFERENCE_END ID="9904" />
+<REFERENCE_END ID="9918" />
+</REFERENCES_END>
+<INDEXES>
+<INDEX ID="9890" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9886" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9920" Name="user" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9887" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9921" Name="text_converter" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9910" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
+<ENTITY ID="9891" Name="content_generator_form_fields" XPos="110" YPos="2470" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" >
+<COLUMNS>
+<COLUMN ID="9892" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9893" Name="form" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="1" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="1" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9923" Name="type" DomainID="-1" Pos="2" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="1" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\ahidden\a,\atext\a,\atextarea\a,\asubmit\a,\areset\a,\aradio\a,\acheckbox\a,\aselect\a" DefaultValue="\atext\a" Comments="">
+</COLUMN>
+<COLUMN ID="9924" Name="label" DomainID="-1" Pos="3" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9894" Name="name" DomainID="-1" Pos="4" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9895" Name="value" DomainID="-1" Pos="5" Datatype="20" Type="TEXT" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9900" Name="required" DomainID="-1" Pos="6" Datatype="23" Type="ENUM" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="\a0\a,\a1\a" DefaultValue="\a0\a" Comments="">
+</COLUMN>
+<COLUMN ID="9901" Name="regular_expression" DomainID="-1" Pos="7" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9902" Name="message" DomainID="-1" Pos="8" Datatype="14" Type="VARCHAR" Width="50" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+<COLUMN ID="9903" Name="sorting" DomainID="-1" Pos="9" Datatype="13" Type="CHAR" Width="2" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
+</COLUMN>
+</COLUMNS>
+<REFERENCES_END>
+<REFERENCE_END ID="9906" />
+</REFERENCES_END>
+<INDEXES>
+<INDEX ID="9896" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9892" />
+</INDEXCOLUMNS>
+</INDEX>
+<INDEX ID="9922" Name="form" Primary="0" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="9893" />
 </INDEXCOLUMNS>
 </INDEX>
 </INDEXES>
@@ -1887,6 +1986,9 @@
 <REFERENCE ID="9379" Name="content_blog_podcasts.category_22blog_podcast_categories.id" SOURCE="9351" DESTINATION="9296" FKIDS="9352=9373\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="9356" AutoColumnIDs="" />
 <REFERENCE ID="9380" Name="content_blog_podcasts.category_32blog_podcast_categories.id" SOURCE="9351" DESTINATION="9296" FKIDS="9352=9374\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="9356" AutoColumnIDs="" />
 <REFERENCE ID="9402" Name="content_structural_templates.id2application_projects.id" SOURCE="8458" DESTINATION="9389" FKIDS="8459=9397\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="8463" AutoColumnIDs="" />
+<REFERENCE ID="9904" Name="content_generator_forms.id2content_pages.id" SOURCE="1000" DESTINATION="9885" FKIDS="1001=9886\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1013" AutoColumnIDs="" />
+<REFERENCE ID="9906" Name="content_generator_form_fields.form2content_generator_forms.id" SOURCE="9885" DESTINATION="9891" FKIDS="9886=9893\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="1" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="9890" AutoColumnIDs="" />
+<REFERENCE ID="9918" Name="content_generator_forms2application_text_converter" SOURCE="1267" DESTINATION="9885" FKIDS="1268=9910\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="2" OnUpdate="1" Comments="" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1271" AutoColumnIDs="" />
 </REFERENCES>
 <NOTES>
 </NOTES>

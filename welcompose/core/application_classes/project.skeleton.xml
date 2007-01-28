@@ -279,6 +279,44 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_GENERATORFORM_USE</name>
+			<description>Allows usage of generator forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_GENERATORFORM_MANAGE</name>
+			<description>Allows management of generator forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_GENERATORFORMFIELD_USE</name>
+			<description>Allows usage of generator forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_GENERATORFORMFIELD_MANAGE</name>
+			<description>Allows management of generator forms.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_GLOBALBOX_USE</name>
 			<description>Allows usage of global boxes.</description>
 			<editable>0</editable>
@@ -579,6 +617,11 @@
 			<editable>0</editable>
 		</page-type>
 		<page-type>
+			<name>WCOM_GENERATOR_FORM</name>
+			<internal_name>GeneratorForm</internal_name>
+			<editable>0</editable>
+		</page-type>
+		<page-type>
 			<name>WCOM_SIMPLE_PAGE</name>
 			<internal_name>SimplePage</internal_name>
 			<editable>0</editable>
@@ -597,6 +640,16 @@
 	<template-types>
 		<template-type>
 			<name>simple_page_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>generator_form_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>generator_form_mail</name>
 			<description/>
 			<editable>0</editable>
 		</template-type>

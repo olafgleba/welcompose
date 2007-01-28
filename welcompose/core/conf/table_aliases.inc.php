@@ -42,6 +42,8 @@ define("WCOM_DB_CONTENT_BLOG_POSTINGS", "content_blog_postings");
 define("WCOM_DB_CONTENT_BLOG_TAGS", "content_blog_tags");
 define("WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS", "content_blog_tags2content_blog_postings");
 define("WCOM_DB_CONTENT_BOXES", "content_boxes");
+define("WCOM_DB_CONTENT_GENERATOR_FORMS", "content_generator_forms");
+define("WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS", "content_generator_form_fields");
 define("WCOM_DB_CONTENT_GLOBAL_BOXES", "content_global_boxes");
 define("WCOM_DB_CONTENT_NAVIGATIONS", "content_navigations");
 define("WCOM_DB_CONTENT_NODES", "content_nodes");
