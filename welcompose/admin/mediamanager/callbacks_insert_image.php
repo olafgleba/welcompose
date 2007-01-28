@@ -92,9 +92,6 @@ try {
 		throw new Exception("Access denied");
 	}
 	
-	// get form_target value
-	$form_target = Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER);
-	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('insert_image', 'post');
 	
@@ -102,15 +99,11 @@ try {
 	$FORM->addElement('hidden', 'id');
 	$FORM->applyFilter('id', 'trim');
 	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('No object id given'), 'required');
-	$FORM->addRule('id', gettext('No numeric object id given'), 'numeric');
 	
 	// hidden for text converter id
 	$FORM->addElement('hidden', 'text_converter');
 	$FORM->applyFilter('text_converter', 'trim');
 	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('No text converter given'), 'required');
-	$FORM->addRule('text_converter', gettext('No text converter given'), 'numeric');
 	
 	// hidden for text
 	$FORM->addElement('hidden', 'text');
@@ -124,7 +117,6 @@ try {
 		array('id' => 'alt', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('alt', 'trim');
 	$FORM->applyFilter('alt', 'strip_tags');
-	$FORM->addRule('alt', gettext('Please enter an alternative text'), 'required');
 	
 	// textfield for name
 	$FORM->addElement('text', 'title', gettext('Title'), 
@@ -160,33 +152,23 @@ try {
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
 		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
+		
 		// remove attribute on form tag for XHTML compliance
 		$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
-
+		
 		$FORM->accept($renderer);
-
+		
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $renderer->toArray());
-
+		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
 		
 		// assign target field identifier
 		$BASE->utility->smarty->assign('form_target', $form_target);
-	
-		// assign callback result
-		$BASE->utility->smarty->assign('callback_result', $_SESSION['callback_result']);
-	
-	    if (!empty($_SESSION['form_target'])) {
-	        $_SESSION['form_target'] = '';
-	    }
-	    if (!empty($_SESSION['callback_result'])) {
-	        $_SESSION['callback_result'] = '';
-	    }
-	
+		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	
@@ -218,26 +200,9 @@ try {
 		
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
+		print $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
 		
-		// add callback result to session
-		$_SESSION['callback_result'] = $callback_result;
-		
-		// add form_taget to session
-		$_SESSION['form_target'] = $FORM->exportValue('form_target');
-		
-		// redirect
-		$SESSION->save();
-		
-		// clean the buffer
-		if (!$BASE->debug_enabled()) {
-			@ob_end_clean();
-		}
-		
-		// redirect
-		header("Location: callbacks_insert_image.php");
 		exit;
-
 	}
 } catch (Exception $e) {
 	// clean the buffer
