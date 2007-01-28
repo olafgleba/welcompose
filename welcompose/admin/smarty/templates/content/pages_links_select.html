@@ -44,7 +44,7 @@ var control = '{$control}';
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="initialNode"><a class="{if !empty($control)}act_setInternalLink{$control}{else}act_setInternalLink{/if}" id="{literal}{{/literal}get_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
+<td class="initialNode{if $_page.level == 2} level_2{/if}{if $_page.level == 3} level_3{/if}{if $_page.level == 4} level_4{/if}"><a class="{if !empty($control)}act_setInternalLink{$control}{else}act_setInternalLink{/if}" id="{literal}{{/literal}get_url page_id={$_page.id}{literal}}{/literal}" href="#" title="{i18n Insert link}">{$_page.name|escape:"htmlall"}</a></td>
 {if $_page.page_type_name == 'WCOM_BLOG'}
 <td class="nextNode"><a class="showNextNode" id="{$_page.id}" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
 {else}
