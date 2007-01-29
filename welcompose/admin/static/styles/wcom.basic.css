@@ -114,7 +114,7 @@ position: absolute;
 top: 19px;
 left: 765px;
 width: 200px;
-background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
+background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat; 
 padding-top: 3px;
 }
 #logo p {
@@ -375,7 +375,7 @@ position: absolute;
 top: 19px;
 left: 519px;
 width: 200px;
-background: transparent url(../img/bg_logo.gif) 0 0 repeat-y; 
+background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat;  
 padding-top: 3px;
 }
 #login #main {
