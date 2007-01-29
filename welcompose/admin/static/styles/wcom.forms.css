@@ -42,11 +42,23 @@ width: 690px;
 padding: 40px 10px 0 10px;
 overflow: hidden;
 }
-fieldset.topbg h2, fieldset.within h2 {
-/* font-size: 1em; */
-font-weight: normal;
+fieldset.withinaction {
+width: 690px;
 padding: 0 10px 0 0;
+overflow: hidden;
+}
+fieldset.topbg h2, fieldset.within h2, fieldset.withinaction h2 {
+font-weight: bold;
+padding: 10px 10px 0 0;
 color: #ff620d;
+font-size: 100%;
+}
+fieldset.withinaction h2 {
+font-size: 80%;
+color: #333;
+}
+fieldset.withinaction h2 span img {
+vertical-align: middle;
 }
 label {
 display: block;
@@ -175,6 +187,7 @@ input.submit90,
 input.submit140,
 input.submit200,
 input.submit200upload,
+input.submit200insertcallback,
 input.submit200bez260,
 input.cancel200,
 input.close200,
@@ -208,6 +221,11 @@ width: 200px;
 margin: 20px 0 0 140px;
 }
 input.submit200upload {
+background: #ff620d url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 140px;
+}
+input.submit200insertcallback {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;

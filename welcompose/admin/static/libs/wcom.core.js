@@ -210,6 +210,16 @@ function Base ()
 		this.mediamanagerClassHideMyFlickr = 'hideMediamanagerElementMyFlickr';
 		
 		/**
+		 * Element class to show grouped form elements
+		 */
+		this.elementShowFormElements = 'showFormElements';
+
+		/**
+		 * Element class to hide grouped form elements
+		 */
+		this.elementHideFormElements = 'hideFormElements';
+		
+		/**
 		 * First level div for dynamic xhr navigation
 		 */
 		this.navLyOne = 'ly1';
@@ -639,7 +649,7 @@ function Init_getVars ()
  * Show/hide a group of form elements and color their labels on load of page.
  * Depends on delivered variables in the html markup.
  * <br />
- * For in depths explanation please have a look on the online
+ * For in depths explanation please have a look at the online
  * project support area.
  *
  * @param {array} elems Array of element(s)
@@ -1121,6 +1131,8 @@ Forms.prototype = new Base();
  */
 Forms.prototype.setOnEvent = Forms_setOnEvent;
 Forms.prototype.storeFocus = Forms_storeFocus;
+Forms.prototype.showFormElements = Forms_showFormElements;
+Forms.prototype.hideFormElements = Forms_hideFormElements;
 
 /**
  * Style elements depending on given params
@@ -1169,6 +1181,56 @@ function Forms_storeFocus (elem)
 }
 
 /**
+ * Display customized groups of form elements
+ * Depends on HTML Markup.
+ *<br />
+ * For in depths explanation please have a look at the online
+ * project support area.
+ *
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Forms_showFormElements (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.elem.className = this.elementHideFormElements;
+		
+		Effect.Appear(this.elem.id + '_container',{delay: 0, duration: 0.5});
+		Element.update(this.elem, this.elementHtmlHide);
+		Behaviour.reapply('.' + this.elem.className);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Hide customized groups of form elements
+ * Depends on HTML Markup.
+ *<br />
+ * For in depths explanation please have a look at the online
+ * project support area.
+ *
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Forms_hideFormElements (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.elem.className = this.elementShowFormElements;
+		
+		Effect.Fade(this.elem.id + '_container',{delay: 0, duration: 0.4});
+		Element.update(this.elem, this.elementHtmlShow);
+		Behaviour.reapply('.' + this.elem.className);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
  * Building new object instance of class Forms
  */
 Forms = new Forms();
@@ -1206,7 +1268,7 @@ Status.prototype.getCbx = Status_getCbx;
  * Show/hide a group of form elements and color their labels.
  * Depends on delivered variable in the html markup.
  * <br />
- * For in depths explanation please have a look on the online
+ * For in depths explanation please have a look at the online
  * project support area.
  *
  * @param {array} elems Array of element(s)

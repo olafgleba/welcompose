@@ -441,3 +441,8 @@ body#errormsg h2 span {
 color: #ff620d;
 font-weight: bold;
 }
+
+/* default display set on grouped form elements */
+#additional_metadata_container {
+display: none;
+}
