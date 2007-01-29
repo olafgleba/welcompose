@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_edit.php
+ * File: pages_content_edit.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -113,16 +113,19 @@ try {
 	// redirect
 	switch((string)$page['page_type_name']) {
 		case 'WCOM_BLOG':
-				header("Location: pages_blogs_postings_select.php?page=".$page['id']);
+				header("Location: pages_blogs_postings_select.php?page=".(int)$page['id']);
+			exit;
+		case 'WCOM_GENERATOR_FORM':
+				header("Location: pages_generatorforms_content_edit.php?id=".(int)$page['id']);
 			exit;
 		case 'WCOM_SIMPLE_FORM':
-				header("Location: pages_simpleforms_content_edit.php?id=".$page['id']);
+				header("Location: pages_simpleforms_content_edit.php?id=".(int)$page['id']);
 			exit;
 		case 'WCOM_SIMPLE_PAGE':
-				header("Location: pages_simplepages_content_edit.php?id=".$page['id']);
+				header("Location: pages_simplepages_content_edit.php?id=".(int)$page['id']);
 			exit;
 		case 'WCOM_URL':
-				header("Location: pages_urls_content_edit.php?id=".$page['id']);
+				header("Location: pages_urls_content_edit.php?id=".(int)$page['id']);
 			exit;
 		default:
 				header("Location: pages_select.php");

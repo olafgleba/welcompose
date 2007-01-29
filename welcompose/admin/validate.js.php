@@ -124,6 +124,8 @@ try {
 					$desc = gettext('Alphanumeric literal string with dashes');
 				break;
 			case 'blog_comment_email':
+			case 'generator_form_email_from':
+			case 'generator_form_email_to':
 			case 'simple_form_email_from':
 			case 'simple_form_email_to':
 			case 'user_email':

@@ -90,6 +90,19 @@ var response = '{$session.response}';
 	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 	{/if}
+{elseif $page.page_type_name == 'WCOM_GENERATOR_FORM'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li class="on">{i18n Metadata}</li>
+	{/if}
+	{if wcom_check_access('Content', 'GeneratorForm', 'Manage')}
+		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'GeneratorFormField', 'Manage')}
+		<li><a href="pages_generatorforms_fields_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	{/if}
 {/if}
 </ul>
 </div>
