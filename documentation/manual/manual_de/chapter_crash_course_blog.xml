@@ -51,8 +51,8 @@
 		<para>
 			Erstellen Sie zuerst eine Navigation. Gehen Sie dazu zum Bereich
 			<guimenu>Contents</guimenu> und dann zum Unterbereich
-			<guisubmenu>Navigations</guisubmenu> (s. auch <xref linkend="crash_course_demo.create_navigation"/>).
-			 Klicken Sie auf <guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen.
+			<guisubmenu>Navigations</guisubmenu>.
+			 Klicken Sie auf <guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen (s. auch <xref linkend="crash_course_demo.create_navigation"/>).
 			Nennen Sie die Navigation wie im vorherigen Crash-Kurs <userinput>Hauptnavigation</userinput>.
 			Kehren Sie dann zur Seitenübersicht (<guisubmenu>Pages</guisubmenu>) zurück.
 		</para>
@@ -126,7 +126,7 @@
 		
 		<para>
 			Klicken Sie nun neben der soeben angelegten Seite auf das Symbol
-			zum Hinzufügen einer neuen Webseite, um die beiden verbliebenen
+			zum Hinzufügen einer neuen Seite (<guibutton>Add</guibutton>), um die beiden verbliebenen
 			Seiten (<emphasis>Kontakt</emphasis> und <emphasis>"Made with Welcompose"</emphasis>)
 			zu erstellen.
 		</para>
@@ -190,7 +190,7 @@
 		</figure>
 		
 		<para>
-			Legen Sie nun ein neues, erstes Blog-Posting an. Über den <guibutton>Add new</guibutton> 
+			Legen Sie nun ein neues, erstes Blog-Posting an. Über <guibutton>Add new</guibutton> 
 			gelangen Sie zur Eingabemaske.
 		</para>		
 		
@@ -343,7 +343,8 @@
 			rechts neben den Blog-Einträgen, eine Seitenspalte, die, neben der Verlinkung des Archivs
 			und den Syndication-Links einen kurzen Fliesstext beinhaltet, der in unseren Beispiel zur kurzen
 			Vorstellung des Blogbetreibers dienen würde (<emphasis>Über mich</emphasis>). Dieser inhaltliche Bereich
-			wurde mit einer sogenannten <emphasis>Box</emphasis> realisiert. Jeder Seite, also auch unserer Blog-Seite
+			wurde mit einer sogenannten <emphasis>Box</emphasis> realisiert. Eine <emphasis>Box</emphasis> repräsentiert
+			einen HTML-Code Schnipsel, der frei auf der Seite positioniert werden kann. Jeder Seite, also auch unserer Blog-Seite
 			<emphasis>Startseite</emphasis>, können beliebig viele seitenbezogene <emphasis>Boxen</emphasis> hinzugefügt 
 			werden. In unseren Crash-Kurs beschränken wir uns auf eine Box. Diese wollen wir nun anlegen.
 		</para>
@@ -440,7 +441,7 @@
 			Gleiches gilt in diesen Beispiel auch für den Quelltext-Kopfbereich unseres Blogs,
 			der auf jeder Seite unverändert ist. 
 			
-			Um die Vorlagen eindeutig ansprechen zu können, müssen wir als ersten Schritt
+			Um diese Vorlagen später eindeutig ansprechen zu können, müssen wir als ersten Schritt hierzu
 			korrespondierende <link linkend="templating.page_template_types">Vorlagen-Typen</link> anlegen.
 		</para>	
 
@@ -540,7 +541,7 @@
 			<title>Vorlagen erstellen</title>
 
 			<para>
-				Jetzt werden die eigentlichen Vorlagen angelegt. Wechseln Sie zum Untermenupunkt
+				Jetzt werden die eigentlichen Vorlagen angelegt. Wechseln Sie zum Untermenu
 				<guisubmenu>Templates</guisubmenu>.
 			</para>	
 
@@ -551,10 +552,193 @@
 			
 			<para>
 				Legen wir zuerst die Vorlagen an, für die wir gerade eigene Vorlagen-Typen angelegt
-				haben und die wir nachher in die Haupt-Vorlagen inkludieren wollen wollen. Beginnen
-				wir mit der Navigations-Vorlage. Klicken Sie auf <guibutton>Add new</guibutton>
-				um zur Eingabemaske zu gelangen.
+				haben und nachher in die Haupt-Vorlagen inkludieren wollen. Vorerst
+				befüllen wir die Vorlagen mit dem HTML des Demo-Blog-Paket, das Sie von unserem
+				Download-Server heruntergeladen haben. Beginnen
+				wir mit der Vorlage für den HTML-Kopfbereich (<emphasis>custom_blog_head</emphasis>).
+				Klicken Sie auf <guibutton>Add new</guibutton> um zur Eingabemaske zu gelangen.
 			</para>	
+			
+			<figure id="crash_course_blog.connect_blog_with_templates.templates_add">
+				<title>Vorlage anlegen</title>
+				<graphic fileref="images/crash_course_blog/templates_add.png"/>
+			</figure>
+		
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Type</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den vorhin angelegten Eintrag <guimenuitem>custom_blog_head</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Name der Vorlage. Dient zur späteren Identifizierung
+							derselben. Geben Sie einen beschreibenden Namen wie
+							<userinput>Blog Head</userinput> ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Description</guilabel></term>
+					<listitem>
+						<para>
+							Hier können sie optional den Zweck der Vorlage
+							beschreiben.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Content</guilabel></term>
+					<listitem>
+						<para>
+							In dieses Feld gehört der HTML-Quelltext für die Vorlage.
+							Öffnen Sie die Datei <filename>index.html</filename>
+							aus dem Demo-Blog-Paket, das Sie von unserem
+							Download-Server heruntergeladen haben, und kopieren
+							Sie den gesamten Kopfbereich (<markup role="smarty"><![CDATA[<head>...</head>]]></markup>)
+							incl. der DTD in das Textfeld.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sets</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einem Vorlagen-Set
+							zugeordnet. Klicken Sie auf die Option 
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Speichern sie die Vorlage mit Klick auf <guibutton>Add template</guibutton>. Die
+				erfolgreiche Speicherung wird Ihnen mit einem Hinweis bestätigt. Wiederholen Sie die
+				Eingabe für die zwei weiteren neu angelegten Vorlagen-Typen (<emphasis>custom_blog_navigation</emphasis>,
+				<emphasis>custom_blog_sidebar</emphasis>.
+			</para>	
+			
+			<para>
+				Vorlage: <emphasis role="strong">custom_blog_navigation</emphasis>
+			</para>	
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Type</guilabel></term>
+					<listitem>
+						<para>
+							Wählen Sie den Vorlagen-Typ <guimenuitem>custom_blog_navigation</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Tragen Sie <userinput>Blog Navigation</userinput> ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Description</guilabel></term>
+					<listitem>
+						<para>
+							Nicht relevant für den Crash-Kurs.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Content</guilabel></term>
+					<listitem>
+						<para>
+							Kopieren Sie den Bereich
+							<markup role="smarty"><![CDATA[<div id="menu">]]></markup> bis zum Kommentar <markup role="smarty"><![CDATA[<!-- menu -->]]></markup> 
+							in das Textfeld.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sets</guilabel></term>
+					<listitem>
+						<para>
+							Selektieren Sie <guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>	
+			
+			<para>
+				Vorlagen: <emphasis role="strong">custom_blog_sidebar</emphasis>
+			</para>	
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Type</guilabel></term>
+					<listitem>
+						<para>
+							Wählen Sie den Vorlagen-Typ <guimenuitem>custom_blog_sidebar</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Tragen Sie <userinput>Blog Sidebar</userinput> ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Description</guilabel></term>
+					<listitem>
+						<para>
+							Nicht relevant für den Crash-Kurs.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Content</guilabel></term>
+					<listitem>
+						<para>
+							Kopieren Sie den Bereich
+							<markup role="smarty"><![CDATA[<div id="sidebar">]]></markup> bis zum Kommentar <markup role="smarty"><![CDATA[<!-- sidebar -->]]></markup>
+							in das Textfeld.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sets</guilabel></term>
+					<listitem>
+						<para>
+							Selektieren Sie <guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>			
+			
+			<para>
+				Sind alle diese Vorlagen angelegt, kehren Sie auf die Übersichtsseite der Templates zurück, in dem Sie
+				auf den Seitenlink <guibutton>Templates</guibutton> oder den Standortlink <emphasis>Templates</emphasis> klicken.
+				Nun sieht unsere Übersichtsseite so aus:
+			</para>
+						
+			<figure id="crash_course_blog.connect_blog_with_templates.templates_select_with_customtemplates">
+				<title>Übersichtsseite Vorlagen mit neu erstellten Vorlagen-Typen</title>
+				<graphic fileref="images/crash_course_blog/templates_select_custom_tpl.png"/>
+			</figure>			
+
+			<para>
+				So. wir jetzt
+			</para>			
+	
 		</sect2>
 	</sect1>
 	
