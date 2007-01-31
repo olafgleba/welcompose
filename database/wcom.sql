@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 28.01.2007 10:54:07
--- Diagram Version: 196
+-- Created on: 31.01.2007 21:27:46
+-- Diagram Version: 203
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -537,27 +537,6 @@ CREATE TABLE `content_global_boxes` (
 )
 ENGINE=INNODB;
 
--- Drop table user_groups2user_rights
-DROP TABLE IF EXISTS `user_groups2user_rights`;
-
-CREATE TABLE `user_groups2user_rights` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group` int(11) UNSIGNED NOT NULL,
-  `right` int(11) UNSIGNED NOT NULL,
-  PRIMARY KEY(`id`),
-  INDEX `group`(`group`),
-  INDEX `right`(`right`),
-  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
-    REFERENCES `user_rights`(`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
-    REFERENCES `user_groups`(`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-)
-ENGINE=INNODB;
-
 -- Drop table templating_template_sets2templating_templates
 DROP TABLE IF EXISTS `templating_template_sets2templating_templates`;
 
@@ -574,6 +553,27 @@ CREATE TABLE `templating_template_sets2templating_templates` (
     ON UPDATE CASCADE,
   CONSTRAINT `templating_template_sets.id2templating_templates.id` FOREIGN KEY (`template`)
     REFERENCES `templating_templates`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB;
+
+-- Drop table user_groups2user_rights
+DROP TABLE IF EXISTS `user_groups2user_rights`;
+
+CREATE TABLE `user_groups2user_rights` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `group` int(11) UNSIGNED NOT NULL,
+  `right` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `group`(`group`),
+  INDEX `right`(`right`),
+  CONSTRAINT `user_groups.id2user_rights.id` FOREIGN KEY (`right`)
+    REFERENCES `user_rights`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `user_rights.id2user_groups.id` FOREIGN KEY (`group`)
+    REFERENCES `user_groups`(`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -738,39 +738,6 @@ CREATE TABLE `content_blog_tags` (
 )
 ENGINE=INNODB;
 
--- Drop table content_generator_forms
-DROP TABLE IF EXISTS `content_generator_forms`;
-
-CREATE TABLE `content_generator_forms` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255),
-  `title_url` varchar(255),
-  `content_raw` text,
-  `content` text,
-  `text_converter` int(11) UNSIGNED,
-  `apply_macros` enum('0','1') DEFAULT '0',
-  `required_message` varchar(255),
-  `email_from` varchar(255),
-  `email_to` varchar(255),
-  `email_subject` varchar(255),
-  `use_captcha` enum('no','image','numeral') DEFAULT 'no',
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `user`(`user`),
-  INDEX `text_converter`(`text_converter`),
-  CONSTRAINT `content_generator_forms.id2content_pages.id` FOREIGN KEY (`id`)
-    REFERENCES `content_pages`(`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `content_generator_forms2application_text_converter` FOREIGN KEY (`text_converter`)
-    REFERENCES `application_text_converters`(`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
-)
-ENGINE=INNODB;
-
 -- Drop table content_boxes
 DROP TABLE IF EXISTS `content_boxes`;
 
@@ -883,6 +850,78 @@ CREATE TABLE `content_simple_pages` (
 )
 ENGINE=INNODB;
 
+-- Drop table content_simple_forms
+DROP TABLE IF EXISTS `content_simple_forms`;
+
+CREATE TABLE `content_simple_forms` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `type` varchar(255) NOT NULL DEFAULT 'PersonalForm',
+  `email_from` varchar(255),
+  `email_to` varchar(255),
+  `email_subject` varchar(255),
+  `use_captcha` enum('no','image','numeral') DEFAULT 'no',
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `user`(`user`),
+  CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_forms.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_forms.text_converter2text_converters.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB;
+
+-- Drop table content_generator_forms
+DROP TABLE IF EXISTS `content_generator_forms`;
+
+CREATE TABLE `content_generator_forms` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') DEFAULT '0',
+  `email_from` varchar(255),
+  `email_to` varchar(255),
+  `email_subject` varchar(255),
+  `use_captcha` enum('no','image','numeral') DEFAULT 'no',
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `user`(`user`),
+  INDEX `text_converter`(`text_converter`),
+  CONSTRAINT `content_generator_forms.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_generator_forms2application_text_converter` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_generator_forms.user2user_user.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB;
+
 -- Drop table content_blog_postings
 DROP TABLE IF EXISTS `content_blog_postings`;
 
@@ -933,42 +972,6 @@ CREATE TABLE `content_blog_postings` (
   CONSTRAINT `content_blog_postings.text_conv2application_text_conv.id` FOREIGN KEY (`text_converter`)
     REFERENCES `application_text_converters`(`id`)
     ON DELETE SET NULL
-    ON UPDATE CASCADE
-)
-ENGINE=INNODB;
-
--- Drop table content_simple_forms
-DROP TABLE IF EXISTS `content_simple_forms`;
-
-CREATE TABLE `content_simple_forms` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255),
-  `title_url` varchar(255),
-  `content_raw` text,
-  `content` text,
-  `text_converter` int(11) UNSIGNED,
-  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
-  `type` varchar(255) NOT NULL DEFAULT 'PersonalForm',
-  `email_from` varchar(255),
-  `email_to` varchar(255),
-  `email_subject` varchar(255),
-  `use_captcha` enum('no','image','numeral') DEFAULT 'no',
-  `date_modified` timestamp(14),
-  `date_added` datetime,
-  PRIMARY KEY(`id`),
-  INDEX `user`(`user`),
-  CONSTRAINT `content_simple_forms.user2user_users.id` FOREIGN KEY (`user`)
-    REFERENCES `user_users`(`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_forms.id2content_pages.id` FOREIGN KEY (`id`)
-    REFERENCES `content_pages`(`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `content_simple_forms.text_converter2text_converters.id` FOREIGN KEY (`text_converter`)
-    REFERENCES `application_text_converters`(`id`)
-    ON DELETE CASCADE
     ON UPDATE CASCADE
 )
 ENGINE=INNODB;
@@ -1081,8 +1084,9 @@ CREATE TABLE `content_generator_form_fields` (
   `name` varchar(255),
   `value` text,
   `required` enum('0','1') DEFAULT '0',
-  `regular_expression` varchar(255),
-  `message` varchar(50),
+  `required_message` varchar(255),
+  `validator_regex` varchar(255),
+  `validator_message` varchar(255),
   `sorting` char(2),
   PRIMARY KEY(`id`),
   INDEX `form`(`form`),

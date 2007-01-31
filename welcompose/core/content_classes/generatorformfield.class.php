@@ -95,14 +95,14 @@ public function addGeneratorFormField ($sqlData)
 	}
 	
 	// insert row
-	$this->base->db->insert(WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS, $sqlData);
+	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS, $sqlData);
 	
 	// test if generator form field belongs to current user/project
-	if (!$this->generatorFormFieldBelongsToCurrentUser($id)) {
+	if (!$this->generatorFormFieldBelongsToCurrentUser($insert_id)) {
 		throw new Content_GeneratorFormFieldException('Generator form field does not belong to current user or project');
 	}
 	
-	return (int)$page;
+	return (int)$insert_id;
 }
 
 /**
@@ -219,8 +219,9 @@ public function selectGeneratorFormField ($id)
 			`content_generator_form_fields`.`label` AS `label`,
 			`content_generator_form_fields`.`value` AS `value`,
 			`content_generator_form_fields`.`required` AS `required`,
-			`content_generator_form_fields`.`regular_expression` AS `regular_expression`,
-			`content_generator_form_fields`.`message` AS `message`,
+			`content_generator_form_fields`.`required_message` AS `required_message`,
+			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
+			`content_generator_form_fields`.`validator_message` AS `validator_message`,
 			`content_generator_form_fields`.`sorting` AS `sorting`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
@@ -312,8 +313,9 @@ public function selectGeneratorFormFields ($params = array())
 			`content_generator_form_fields`.`label` AS `label`,
 			`content_generator_form_fields`.`value` AS `value`,
 			`content_generator_form_fields`.`required` AS `required`,
-			`content_generator_form_fields`.`regular_expression` AS `regular_expression`,
-			`content_generator_form_fields`.`message` AS `message`,
+			`content_generator_form_fields`.`required_message` AS `required_message`,
+			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
+			`content_generator_form_fields`.`validator_message` AS `validator_message`,
 			`content_generator_form_fields`.`sorting` AS `sorting`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
@@ -355,6 +357,109 @@ public function selectGeneratorFormFields ($params = array())
 	}
 
 	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
+ * Method to count generator form fields. Takes key=>value array
+ * with select count as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>form, int, optional: Form id</li>
+ * </ul>
+ * 
+ * @throws Content_GeneratorFormFieldException
+ * @param array Count params
+ * @return array
+ */
+public function countGeneratorFormFields ($params = array())
+{
+	// access check
+	if (!wcom_check_access('Content', 'GeneratorFormField', 'Use')) {
+		throw new Content_GeneratorFormFieldException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$form = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_GeneratorFormFieldException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'form':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Content_GeneratorFormFieldException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
+		JOIN
+			".WCOM_DB_CONTENT_GENERATOR_FORMS." AS `content_generator_forms`
+		  ON
+			`content_generator_form_fields`.`form` = `content_generator_forms`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_generator_forms`.`id` = `content_pages`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_NODES." AS `content_nodes`
+		  ON
+			`content_pages`.`id` = `content_nodes`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
+	
+	// add where clauses
+	if (!empty($form) && is_numeric($form)) {
+		$sql .= " AND `content_generator_form_fields`.`form` = :form ";
+		$bind_params['form'] = $form;
+	}
+	
+	return $this->base->db->select($sql, 'field', $bind_params);
+}
+
+/**
+ * Returns list of available from field types for form definition.
+ *
+ * @return array
+ */
+public function getTypeListForForm ()
+{
+	// type list definition
+	$types = array(
+		'hidden' => 'hidden',
+		'text' => 'text',
+		'textarea' => 'textarea',
+		'submit' => 'submit',
+		'reset' => 'reset',
+		'radio' => 'radio',
+		'checkbox' => 'checkbox',
+		'select' => 'select'
+	);
+	
+	// sort types
+	asort($types);
+	
+	// return type list
+	return $types;
 }
 
 /**

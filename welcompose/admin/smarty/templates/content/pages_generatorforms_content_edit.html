@@ -63,7 +63,7 @@ var pagetype = '{$page.page_type_name}';
 	<li class="on">{i18n Generator Form}</li>
 {/if}
 {if wcom_check_access('Content', 'GeneratorFormField', 'Manage')}
-	<li><a href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
+	<li><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
 {/if}
 {if wcom_check_access('Content', 'Box', 'Manage')}
 	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
@@ -123,9 +123,6 @@ var pagetype = '{$page.page_type_name}';
 
 <label class="cont" for="generator_form_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
-
-<label class="cont" for="generator_form_required_message"><span class="bez">{$form.required_message.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.required_message.html}</label>
 
 <label class="cont" for="generator_form_email_from"><span class="bez">{$form.email_from.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.email_from.html}<span class="validate" id="generator_form_email_from_container"></span></label>

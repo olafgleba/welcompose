@@ -178,14 +178,6 @@ try {
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
-
-	// select for custom_form_type
-	$FORM->addElement('text', 'required_message', gettext('Required message'),
-		array('id' => 'generator_form_required_message', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('required_message', 'trim');
-	$FORM->applyFilter('required_message', 'strip_tags');
-	$FORM->addRule('required_message', gettext('Enter an error message for required form fields'), 'required');
-	
 	// textfield for email_from
 	$FORM->addElement('text', 'email_from', gettext('From: address'),
 		array('id' => 'generator_form_email_from', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -229,7 +221,6 @@ try {
 		'content' => Base_Cnc::ifsetor($generator_form['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($generator_form['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($generator_form['apply_macros'], null),
-		'required_message' => Base_Cnc::ifsetor($generator_form['required_message'], null),
 		'email_from' => Base_Cnc::ifsetor($generator_form['email_from'], null),
 		'email_to' => Base_Cnc::ifsetor($generator_form['email_to'], null),
 		'email_subject' => Base_Cnc::ifsetor($generator_form['email_subject'], null),
@@ -291,7 +282,6 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['required_message'] = $FORM->exportValue('required_message');
 		$sqlData['email_from'] = $FORM->exportValue('email_from');
 		$sqlData['email_to'] = $FORM->exportValue('email_to');
 		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
