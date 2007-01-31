@@ -1,6 +1,9 @@
 Welcompose 0.8.0
 ================
 
+ * Core, Admin: Generator forms implemented; see ticket:11. (andreas)
+ * Database: Tables content_generator_forms and content_generator_form_fields
+   added (andreas)
  * Admin: Made URL names editable with the help of a JS function; see
    ticket:5. (olaf, andreas)
  * Database: Unique key around fields page and name of table content_boxes

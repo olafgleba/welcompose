@@ -181,7 +181,7 @@ public function render ()
 		$field_id = sprintf('generator_form_%s', strtolower($_field['name']));
 		
 		// prepare regex
-		$field_regex = sprintf('=%s=', $_field['regular_expression']);
+		$field_regex = sprintf('=%s=', $_field['validator_regex']);
 		
 		// create element depending on the field type
 		switch ((string)$_field['type']) {
@@ -276,12 +276,12 @@ public function render ()
 		
 		// add required rule?
 		if ((int)$_field['required']) {
-			$FORM->addRule($_field['name'], $_field['message'], 'required');
+			$FORM->addRule($_field['name'], $_field['required_message'], 'required');
 		}
 		
 		// add regex rule?
 		if (!empty($_field['regular_expression'])) {
-			$FORM->addRule($_field['name'], $_field['message'], 'regex', $field_regex);
+			$FORM->addRule($_field['name'], $_field['validator_message'], 'regex', $field_regex);
 		}
 	}
 	
