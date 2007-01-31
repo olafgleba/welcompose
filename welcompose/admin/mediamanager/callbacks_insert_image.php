@@ -146,72 +146,34 @@ try {
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
 		
-	//if (!$FORM->validate()) {
-		// render it
-		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
-		
-		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
-		
-		// assign paths
-		$BASE->utility->smarty->assign('wcom_admin_root_www',
-			$BASE->_conf['path']['wcom_admin_root_www']);
-		
-		// assign target field identifier
-		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
-		
-		if (!empty($_POST)) {
-			// freeze the form
-			$FORM->freeze();
-
-			// get object
-			$object = $OBJECT->selectObject($FORM->exportValue('id'));
-		
-			// prepare callback args
-			$args = array(
-				'text' => $FORM->exportValue('text'),
-				'src' => sprintf('{get_media id="%u"}', $object['id']),
-				'width' => $object['file_width'],
-				'height' => $object['file_height'],
-				'alt' => $FORM->exportValue('alt'),
-				'title' => $FORM->exportValue('title'),
-				'longdesc' => $FORM->exportValue('longdesc')
-			);
-		
-			// execute text converter callback
-			$text_converter = (int)$FORM->exportValue('text_converter');
-			$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
-			
-			// assign target field identifier
-			$BASE->utility->smarty->assign('callback_result', $callback_result);
-		}		
-				
-		// assign current user and project id
-		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+	// render it
+	$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+	$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+	include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 	
-		// display the form
-		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+	// remove attribute on form tag for XHTML compliance
+	$FORM->removeAttribute('name');
+	$FORM->removeAttribute('target');
 	
-		// flush the buffer
-		@ob_end_flush();
+	$FORM->accept($renderer);
 	
-		exit;
-/*	} else {
-		// freeze the form
-		$FORM->freeze();
-
+	// assign the form to smarty
+	$BASE->utility->smarty->assign('form', $renderer->toArray());
+	
+	// assign paths
+	$BASE->utility->smarty->assign('wcom_admin_root_www',
+		$BASE->_conf['path']['wcom_admin_root_www']);
+	
+	// assign target field identifier
+	$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+	
+	/*
+	 * execute text converter callback if request method ist post
+	 */
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		// get object
-		$object = $OBJECT->selectObject($FORM->exportValue('id'));
-		
+		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
+	
 		// prepare callback args
 		$args = array(
 			'text' => $FORM->exportValue('text'),
@@ -222,44 +184,26 @@ try {
 			'title' => $FORM->exportValue('title'),
 			'longdesc' => $FORM->exportValue('longdesc')
 		);
-		
+	
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);
-			
-		// render it
-		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
-		
-		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
-		
-		// assign paths
-		$BASE->utility->smarty->assign('wcom_admin_root_www',
-			$BASE->_conf['path']['wcom_admin_root_www']);
-		
-		// assign target field identifier
-		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
 		
 		// assign target field identifier
 		$BASE->utility->smarty->assign('callback_result', $callback_result);
-		
-		// assign current user and project id
-		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+	}
 	
-		// display the form
-		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+	// assign current user and project id
+	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 
-		exit;
-	}*/
+	// display the form
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+
+	// flush the buffer
+	@ob_end_flush();
+	
+	exit;
 } catch (Exception $e) {
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {
