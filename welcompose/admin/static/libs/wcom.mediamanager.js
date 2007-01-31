@@ -92,7 +92,7 @@ Mediamanager.prototype.showResponseInvokeInputs = Mediamanager_showResponseInvok
 Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseInvokeTagInputs;
 Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
-Mediamanager.prototype.insertCallback = Mediamanager_insertCallback;
+Mediamanager.prototype.insertPopupCallback = Mediamanager_insertPopupCallback;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
 
 /**
@@ -981,11 +981,12 @@ function Mediamanager_deleteMediaItem (elem)
 	}
 }*/
 
-function Mediamanager_insertCallback (elem)
+function Mediamanager_insertPopupCallback (elem)
 {
 	try {
-		var target = formTarget;			
-		Helper.insertTagsFromPopup(target, elem, '' , '');
+		this.form_target = form_target;
+		this.callback_result = callback_result;
+		Helper.insertTagsFromPopup(this.form_target, this.callback_result, '' , '');
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);

@@ -55,6 +55,7 @@ Helper.prototype = new Base();
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
 Helper.prototype.launchPopupCallback = Helper_launchPopupCallback;
+Helper.prototype.insertCallback = Helper_insertCallback;
 Helper.prototype.getTextConverterValue = Helper_getTextConverterValue;
 Helper.prototype.getSelectionText = Helper_getSelectionText;
 Helper.prototype.closePopup = Helper_closePopup;
@@ -188,6 +189,7 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 function Helper_insertCallback (elem)
 {
 	try {
+	/*
 		// properties
 		this.elem = elem;
 		this.popup = true;
@@ -213,12 +215,13 @@ function Helper_insertCallback (elem)
 						'&pager_page=' + pager_page;
 				break;
 		}
-		
+		*/
 		
 	} catch (e) {
 		_applyError(e);
 	}
 }
+
 /**
  * Launch popup.
  * <br />
@@ -915,6 +918,7 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 		} else {
 			var txtarea = opener.$(id);
 		}
+		
 		// IE
 		if(opener.document.selection) {
 			var theSelection = opener.document.selection.createRange().text;

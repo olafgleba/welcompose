@@ -144,6 +144,15 @@ var definitions = {
 			submitted = true;
 		}
 	},
+	'.submit200insertcallback' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+		}
+		el.onclick = function(){
+			 /* needed for func closePopupTrack */
+			 submitted = true;
+		}
+	},
 	'.cancel200' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
