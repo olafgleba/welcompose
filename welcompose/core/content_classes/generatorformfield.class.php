@@ -463,6 +463,100 @@ public function getTypeListForForm ()
 }
 
 /**
+ * Tests given generator field name for uniqueness. Takes the field name
+ * as first argument and an array consisting of form id and an optional
+ * field id as second argument. If the field id is given, this field won't be
+ * considered when checking for uniqueness (useful for updates).
+ * Returns boolean true if field name is unique.
+ * 
+ * Sample for $form_id_array():
+ * 
+ * <code>
+ * $form_id_array = array(
+ *     'form' => $form,
+ *     'id' => $id
+ * );
+ * </code>
+ *
+ * @throws Content_GeneratorFormFieldException
+ * @param string Field name
+ * @param array Form id and field id
+ * @return bool
+ */
+public function testForUniqueName ($name, $form_id_array)
+{
+	// access check
+	if (!wcom_check_access('Content', 'GeneratorFormField', 'Use')) {
+		throw new Content_GeneratorFormFieldException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($name)) {
+		throw new Content_GeneratorFormFieldException("Input for parameter name is not expected to be empty");
+	}
+	if (empty($form_id_array) || !is_array($form_id_array)) {
+		throw new Content_GeneratorFormFieldException("Input for parameter form_id_array is expected to be an array");
+	}
+	if (!is_scalar($name)) {
+		throw new Content_GeneratorFormFieldException("Input for parameter name is expected to be scalar");
+	}
+	
+	// extract form_id_array
+	$form = Base_Cnc::ifsetor($form_id_array['form'], null);
+	$id = Base_Cnc::ifsetor($form_id_array['id'], null);
+	
+	// finish input check
+	if (empty($form) || !is_numeric($form)) {
+		throw new Content_GeneratorFormFieldException("Input for parameter form is expected to be numeric");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Content_GeneratorFormFieldException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
+		JOIN
+			".WCOM_DB_CONTENT_GENERATOR_FORMS." AS `content_generator_forms`
+		  ON
+			`content_generator_form_fields`.`form` = `content_generator_forms`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_generator_forms`.`id` = `content_pages`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+		  AND
+			`content_generator_forms`.`id` = :form
+		  AND
+			`content_generator_form_fields`.`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT,
+		'form' => (int)$form,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `content_generator_form_fields`.`id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
  * Tests whether given generator form field belongs to current
  * project. Takes the generator form id as first argument.
  * Returns bool.

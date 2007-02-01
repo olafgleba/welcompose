@@ -63,6 +63,10 @@ try {
 					$reg = WCOM_REGEX_BLOG_COMMENT_STATUS_NAME;
 					$desc = gettext('Only capitalized literal string');
 				break;
+			case 'generator_form_field_name':
+					$reg = WCOM_REGEX_OPERATOR_NAME;
+					$desc = gettext('Alphanumeric with underscores');
+				break;
 			case 'global_template_name':
 					$reg = WCOM_REGEX_GLOBAL_TEMPLATE_NAME;
 					$desc = gettext('Alphanumeric string with spaces');

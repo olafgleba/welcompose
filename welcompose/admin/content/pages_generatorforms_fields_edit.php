@@ -110,6 +110,7 @@ try {
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('generator_form_field', 'post');
+	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GENERATORFORMFIELD);
 	
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
@@ -147,7 +148,10 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a field name'), 'required');
 	$FORM->addRule('name', gettext('Only alphanumeric field names are allowed'), 'regex',
-		WCOM_REGEX_ALPHANUMERIC);
+		WCOM_REGEX_OPERATOR_NAME);
+	$FORM->addRule('name', gettext('A form field with the given name already exists'),
+		'testForNameUniqueness', array('form' => $FORM->exportValue('page'),
+		'id' => $FORM->exportValue('id')));
 	
 	// textarea for value
 	$FORM->addElement('textarea', 'value', gettext('Value'),
