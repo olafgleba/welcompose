@@ -192,6 +192,12 @@ try {
 	// init the project from skeleton
 	$PROJECT->initFromSkeleton($project_id);
 	
+	// create row for community settings
+	$sqlData = array(
+		'project' => $project_id
+	);
+	$BASE->db->insert(WCOM_DB_COMMUNITY_SETTINGS, $sqlData);
+	
 	// clean the buffer
 	@ob_end_clean();
 	
