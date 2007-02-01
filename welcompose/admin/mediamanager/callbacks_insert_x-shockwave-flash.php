@@ -94,7 +94,7 @@ try {
 
 	// prepare quality array
 	$quality = array(
-		'0' => gettext('Default'),
+		'' => gettext('Default'),
 		'low' => gettext('Low'),
 		'high' => gettext('High'),
 		'autolow' => gettext('Auto low'),
@@ -160,6 +160,7 @@ try {
 		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('bgcolor', 'trim');
 	$FORM->applyFilter('bgcolor', 'strip_tags');
+	//$FORM->addRule('bgcolor', gettext('Please use Hexidimal Notiation'), 'regex', WCOM_REGEX_NUMERIC, 'client');
 	
 	// checkbox for param play
 	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 
@@ -186,7 +187,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::filterRequest($_REQUEST['text'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
 		
@@ -217,30 +218,31 @@ try {
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
 	// debug
-	print_r($_POST);
+	//print_r($_POST);
 	
-	/*	// get object
+		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 	
 		// prepare callback args
 		$args = array(
 			'text' => $FORM->exportValue('text'),
-			'src' => sprintf('{get_media id="%u"}', $object['id']),
+			'data' => sprintf('{get_media id="%u"}', $object['id']),
 			'width' => $object['file_width'],
 			'height' => $object['file_height'],
-			'alt' => $FORM->exportValue('alt'),
-			'title' => $FORM->exportValue('title'),
-			'longdesc' => $FORM->exportValue('longdesc')
+			'quality' => $FORM->exportValue('quality'),
+			'scale' => $FORM->exportValue('scale'),
+			'wmode' => $FORM->exportValue('wmode'),
+			'bgcolor' => $FORM->exportValue('bgcolor'),
+			'play' => $FORM->exportValue('play'),
+			'loop' => $FORM->exportValue('loop')
 		);
 	
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
-		
+		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);	
+
 		// assign target field identifier
 		$BASE->utility->smarty->assign('callback_result', $callback_result);
-		
-	*/
 	}
 	
 	// assign current user and project id

@@ -142,7 +142,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::filterRequest($_REQUEST['text'], WCOM_REGEX_ALPHANUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
 	
