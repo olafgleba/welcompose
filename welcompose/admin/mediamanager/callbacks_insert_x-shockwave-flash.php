@@ -91,9 +91,34 @@ try {
 	if (!wcom_check_access('Media', 'Object', 'Use')) {
 		throw new Exception("Access denied");
 	}
+
+	// prepare quality array
+	$quality = array(
+		'0' => gettext('Default'),
+		'low' => gettext('Low'),
+		'high' => gettext('High'),
+		'autolow' => gettext('Auto low'),
+		'autohigh' => gettext('Auto high')
+	);
 	
+	// prepare scale array
+	$scale = array(
+		'0' => gettext('Default'),
+		'showall' => gettext('Show all'),
+		'noborder' => gettext('No border'),
+		'exactfit' => gettext('Exact fit')
+	);
+	
+	// prepare wmode array
+	$wmode = array(
+		'0' => gettext('Default'),
+		'window' => gettext('Window'),
+		'opaque' => gettext('Opaque'),
+		'transparent' => gettext('Transparent')
+	);
+			
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('insert_image', 'post');
+	$FORM = $BASE->utility->loadQuickForm('insert_x-shockwave-flash', 'post');
 	
 	// hidden for object id
 	$FORM->addElement('hidden', 'id');
@@ -111,24 +136,43 @@ try {
 	
 	// hidden field for pager_page
 	$FORM->addElement('hidden', 'form_target');
+
+	// select for param quality
+	$FORM->addElement('select', 'quality', gettext('Quality'), $quality,
+		array('id' => 'quality'));
+	$FORM->applyFilter('quality', 'trim');
+	$FORM->applyFilter('quality', 'strip_tags');
 	
-	// textfield for name
-	$FORM->addElement('text', 'alt', gettext('Alternative text'), 
-		array('id' => 'alt', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('alt', 'trim');
-	$FORM->applyFilter('alt', 'strip_tags');
+	// select for param scale
+	$FORM->addElement('select', 'scale', gettext('Scale'), $scale,
+		array('id' => 'scale'));
+	$FORM->applyFilter('scale', 'trim');
+	$FORM->applyFilter('scale', 'strip_tags');
 	
-	// textfield for name
-	$FORM->addElement('text', 'title', gettext('Title'), 
-		array('id' => 'title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
+	// select for param wmode
+	$FORM->addElement('select', 'wmode', gettext('WMode'), $wmode,
+		array('id' => 'wmode'));
+	$FORM->applyFilter('wmode', 'trim');
+	$FORM->applyFilter('wmode', 'strip_tags');
 	
-	// textfield for name
-	$FORM->addElement('text', 'longdesc', gettext('Long description'), 
-		array('id' => 'longdesc', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('longdesc', 'trim');
-	$FORM->applyFilter('longdesc', 'strip_tags');
+	// textfield for param bgcolor
+	$FORM->addElement('text', 'bgcolor', gettext('Background color'), 
+		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('bgcolor', 'trim');
+	$FORM->applyFilter('bgcolor', 'strip_tags');
+	
+	// checkbox for param play
+	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 
+	playing'), null,
+		array('id' => 'play', 'class' => 'chbx'));
+	$FORM->applyFilter('play', 'trim');
+	$FORM->applyFilter('play', 'strip_tags');
+	
+	// checkbox for param loop
+	$FORM->addElement('checkbox', 'loop', gettext('Avoid looping'), null,
+		array('id' => 'loop', 'class' => 'chbx'));
+	$FORM->applyFilter('loop', 'trim');
+	$FORM->applyFilter('loop', 'strip_tags');
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Insert object'),
@@ -171,7 +215,11 @@ try {
 	 * execute text converter callback if request method ist post
 	 */
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		// get object
+	
+	// debug
+	print_r($_POST);
+	
+	/*	// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 	
 		// prepare callback args
@@ -191,6 +239,8 @@ try {
 		
 		// assign target field identifier
 		$BASE->utility->smarty->assign('callback_result', $callback_result);
+		
+	*/
 	}
 	
 	// assign current user and project id
@@ -198,7 +248,7 @@ try {
 
 	// display the form
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('mediamanager/callbacks_insert_x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
 
 	// flush the buffer
 	@ob_end_flush();

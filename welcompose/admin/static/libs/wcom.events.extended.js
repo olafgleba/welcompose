@@ -164,7 +164,8 @@ var definitions = {
 	},
 	'a.mm_insert' : function(el){
 		el.onclick = function(){
-			Helper.launchPopupCallback('745','634','media_insert', this);
+			//Helper.launchPopupCallback('745','634','media_insert', this);
+			Mediamanager.insertMediaCallbacks(this);
 			return false;
 		}
 	},
@@ -179,25 +180,7 @@ var definitions = {
 			Mediamanager.mediaToPodcast(this);
 			return false;
 		}
-	}/*,
-	'a.mm_insertImageItem' : function(el){
-		el.onclick = function(){
-			Mediamanager.insertImageItem(this);
-			return false;
-		}
 	},
-	'a.mm_insertImageItemFlickr' : function(el){
-		el.onclick = function(){
-			Mediamanager.insertImageItemFlickr(this);
-			return false;
-		}
-	},
-	'a.mm_insertDocumentItem' : function(el){
-		el.onclick = function(){
-			Mediamanager.insertDocumentItem(this);
-			return false;
-		}
-	}*/,
 	'a.mm_myLocal' : function(el){
 		el.onclick = function(){
 			Mediamanager.switchLayer('lyMediamanagerMyLocal', 'lyMediamanagerMyFlickr');

@@ -92,8 +92,11 @@ Mediamanager.prototype.showResponseInvokeInputs = Mediamanager_showResponseInvok
 Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseInvokeTagInputs;
 Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
+
 Mediamanager.prototype.insertPopupCallback = Mediamanager_insertPopupCallback;
 Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
+
+Mediamanager.prototype.insertMediaCallbacks = Mediamanager_insertMediaCallbacks;
 
 /**
  * MyFlickr methods
@@ -948,6 +951,87 @@ function Mediamanager_deleteMediaItem (elem)
 		_applyError(e);
 	}
 }
+
+
+
+function Mediamanager_insertMediaCallbacks (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.elName = this.elem.name;
+		this.popup = false;
+		this.targetWidth = this.callbacksPopupWindowWidth;
+		this.targetHeight = this.callbacksPopupWindowHeight;
+		this.targetName = 'mm_' + this.elName;
+		
+		// preparations
+		// definitions for popup bool
+		var mime_types = new Array (
+			'image',
+			'application-x-shockwave-flash'
+		);
+	
+		// execute popup bool
+		for (var i = 0; i < mime_types.length; i++) {
+			if(mime_types[i] == this.elName) {
+				this.popup = true;
+			}
+		}
+					
+		// process	
+		if (typeof storedFocus == 'undefined') {
+			alert(selectTextarea); 
+		} else {
+			Helper.lowerOpacity();
+			form_target = storedFocus;
+			
+			// grab enviroment variables 
+			Helper.getTextConverterValue();
+			Helper.getSelectionText();
+
+			var getElems = {
+				id : this.elem.id,
+				text : text,
+				text_converter : text_converter,
+				form_target : form_target
+			};
+			var o = $H(getElems);
+			var buildRequestString = o.toQueryString();
+		
+			switch (this.elem.name) {
+				case 'image' :	
+						this.url = this.parseMedCallbackInsertImageUrl + '?' + buildRequestString;
+					break;
+				case 'application-x-shockwave-flash' :	
+						this.url = this.parseMedCallbackInsertShockwaveUrl + '?' + buildRequestString;
+					break;
+				case 'document' :
+						alert(this.popup);
+						/*
+						Helper.getPagerPage();
+						this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
+							'&pager_page=' + pager_page;*/
+					break;
+			}
+			
+			if (this.popup) {
+			this.targetUrl = this.url;
+			this.target = window.open(this.targetUrl, this.targetName, 
+					"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
+			this.resWidth = Helper.defineWindowX(this.targetWidth);
+			this.resHeight = Helper.defineWindowY();
+		
+			this.target.moveBy(this.resWidth, this.resHeight);
+			this.target.focus();
+			}
+			
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Insert image media item into content form field.

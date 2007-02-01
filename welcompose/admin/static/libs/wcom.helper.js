@@ -1718,13 +1718,13 @@ function Helper_URLify (string)
 			// swedish
 		
 			// other
-		}
+		};
 	
 		// execute char normalization
 		for (char in normalizations) {
 			r = new RegExp(char, 'gi');
 			string = string.replace(r, normalizations[char]);
-		}
+		};
 	
 		// remove everything except a-z, 0-9 and hyphens and replace it with a hyphen 
 		string = string.replace(/[^a-z0-9\-]/g, '-');

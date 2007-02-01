@@ -245,6 +245,16 @@ function Base ()
 		this.applicationTextColor = '#ff620d';
 		
 		/**
+		 * Comprehensive color application wide
+		 */
+		this.callbacksPopupWindowWidth = '745';
+		
+		/**
+		 * Comprehensive color application wide
+		 */
+		this.callbacksPopupWindowHeight = '634';
+		
+		/**
 		 * Help string supposed to delivered within the DOM.
 		 */
 		this.helpHtmlShow = '<a href="#" title="' + showHelp + '"><img src="../static/img/icons/help.gif" alt="" /></a>';
@@ -319,6 +329,11 @@ function Base ()
 		 * Path for dynamically imported file
 		 */
 		this.parseMedCallbackInsertImageUrl = '../mediamanager/callbacks_insert_image.php';
+		
+		/**
+		 * Path for dynamically imported file
+		 */
+		this.parseMedCallbackInsertShockwaveUrl = '../mediamanager/callbacks_insert_x-shockwave-flash.php';
 		
 		/**
 		 * Path for dynamically imported file

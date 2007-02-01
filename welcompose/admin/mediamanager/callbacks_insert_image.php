@@ -142,10 +142,10 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::filterRequest($_REQUEST['text'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::filterRequest($_REQUEST['text'], WCOM_REGEX_ALPHANUMERIC),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
-		
+	
 	// render it
 	$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
 	$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
@@ -171,6 +171,7 @@ try {
 	 * execute text converter callback if request method ist post
 	 */
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 	
