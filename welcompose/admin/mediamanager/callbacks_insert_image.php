@@ -164,7 +164,7 @@ try {
 	$BASE->utility->smarty->assign('wcom_admin_root_www',
 		$BASE->_conf['path']['wcom_admin_root_www']);
 	
-	// assign target field identifier
+	// assign form target
 	$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
 	
 	/*
@@ -189,7 +189,7 @@ try {
 		$text_converter = (int)$FORM->exportValue('text_converter');
 		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
 		
-		// assign target field identifier
+		// assign callback build
 		$BASE->utility->smarty->assign('callback_result', $callback_result);
 	}
 	
