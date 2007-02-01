@@ -1213,6 +1213,34 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'document',
 			'icon' => 'pdf.jpg'
 		),
+		'application/x-shockwave-flash' => array(
+			'suffix' => 'swf',
+			'podcastable' => false,
+			'insert_callback' => 'application-x-shockwave-flash',
+			'generic_type' => 'video',
+			'icon' => 'swf.jpg'
+		),
+		'application/vnd.oasis.opendocument.text' => array(
+			'suffix' => 'odt',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'odt.jpg'
+		),
+		'application/vnd.oasis.opendocument.spreadsheet' => array(
+			'suffix' => 'ods',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'ods.jpg'
+		),
+		'application/vnd.oasis.opendocument.presentation' => array(
+			'suffix' => 'odp',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'odp.jpg'
+		),
 		'audio/x-m4a' => array(
 			'suffix' => 'm4a',
 			'podcastable' => true,
