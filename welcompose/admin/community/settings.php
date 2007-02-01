@@ -123,14 +123,6 @@ try {
 		'' => gettext('None')	
 	);
 	
-	// prepare text converters array
-	$text_converters = array(
-		'' => gettext('None')
-	);
-	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
-		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
-	}
-	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('community_settings', 'post');
 		
@@ -214,11 +206,11 @@ try {
 	
 	// select for comment text converter
 	$FORM->addElement('select', 'blog_comment_text_converter', gettext('Text converter to apply'),
-		$text_converters, array('id' => 'community_settings_blog_comment_text_converter'));
+		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'community_settings_blog_comment_text_converter'));
 	$FORM->applyFilter('blog_comment_text_converter', 'trim');
 	$FORM->applyFilter('blog_comment_text_converter', 'strip_tags');
 	$FORM->addRule('blog_comment_text_converter', gettext('Chosen blog comment text converter is out of range'),
-		'in_array_keys', $text_converters);
+		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
 	
 	// select for trackback display status
 	$FORM->addElement('select', 'blog_trackback_display_status', gettext('Display status'),

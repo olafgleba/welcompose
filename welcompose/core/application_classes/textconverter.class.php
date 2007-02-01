@@ -50,6 +50,13 @@ class Application_TextConverter {
 	 * @var object
 	 */
 	public $base = null;
+	
+	/**
+	 * Text converter list for forms
+	 * 
+	 * @var array
+	 */
+	protected $_text_converter_list = null;
 
 /**
  * Start instance of base class, load configuration and
@@ -622,6 +629,29 @@ public function insertCallback ($id, $callback, $args)
 	
 	// execute callback
 	return call_user_func_array(array($t, $callback), $args);
+}
+
+/**
+ * Returns list of text converters for usage in quickform selects.
+ *
+ * @return array
+ */
+public function getTextConverterListForForm ()
+{
+	if (is_array($this->_text_converter_list)) {
+		return $this->_text_converter_list;
+	}
+	
+	// initialize text converter array
+	$this->_text_converter_list = array();
+	
+	// build text converter list
+	foreach ($this->selectTextConverters() as $_converter) {
+		$this->_text_converter_list[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
+	}
+	
+	// return converter list
+	return $this->_text_converter_list;
 }
 
 /**

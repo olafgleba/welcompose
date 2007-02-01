@@ -706,6 +706,10 @@
 	</template-types>
 	<text-converters>
 		<text-converter>
+			<name>XHTML</name>
+			<internal_name>xhtml</internal_name>
+		</text-converter>
+		<text-converter>
 			<name>Markdown</name>
 			<internal_name>markdown</internal_name>
 		</text-converter>

@@ -127,14 +127,6 @@ try {
 	$blog_posting = $BLOGPOSTING->selectBlogPosting(Base_Cnc::filterRequest($_REQUEST['id'],
 		WCOM_REGEX_NUMERIC));
 	
-	// prepare text converters array
-	$text_converters = array(
-		'' => gettext('None')
-	);
-	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
-		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
-	}
-	
 	// prepare podcast category array
 	$podcast_categories = array();
 	$podcast_categories_with_empty = array("" => "");
@@ -343,12 +335,12 @@ try {
 	 */
 	
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
-		array('id' => 'blog_posting_text_converter'));
+	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
+		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'blog_posting_text_converter'));
 	$FORM->applyFilter('text_converter', 'trim');
 	$FORM->applyFilter('text_converter', 'strip_tags');
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $text_converters);
+		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
 	
 	// checkbox for apply_macros
 	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,

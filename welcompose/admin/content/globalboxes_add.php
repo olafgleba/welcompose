@@ -98,14 +98,6 @@ try {
 		throw new Exception("Access denied");
 	}
 	
-	// prepare text converters array
-	$text_converters = array(
-		'' => gettext('None')
-	);
-	foreach ($TEXTCONVERTER->selectTextConverters() as $_converter) {
-		$text_converters[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
-	}
-	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('global_box', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GLOBALBOX);
@@ -124,12 +116,12 @@ try {
 	$FORM->applyFilter('content', 'trim');
 	
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'), $text_converters,
-		array('id' => 'global_box_text_converter'));
+	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
+		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'global_box_text_converter'));
 	$FORM->applyFilter('text_converter', 'trim');
 	$FORM->applyFilter('text_converter', 'strip_tags');
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $text_converters);
+		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
 	
 	// checkbox for apply_macros
 	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
