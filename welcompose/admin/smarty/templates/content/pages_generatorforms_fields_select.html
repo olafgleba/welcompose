@@ -50,7 +50,7 @@
 		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Content', 'GeneratorForm', 'Manage')}
-		<li><a href="pages_generatorforms_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
+		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Content', 'GeneratorFormField', 'Manage')}
 		<li class="on">{i18n Generator Form Fields}</li>
@@ -62,7 +62,7 @@
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Blog Postings}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Generator Form Fields}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
@@ -86,14 +86,16 @@
 {if !empty($form_fields)}
 <table summary="{i18n Available Generator Form Fields}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="300" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="300" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="280" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="280" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="template_name">{i18n Name} <span class="az"></span> <span class="za"></span></th>
 <th class="template_name">{i18n Label} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Type} <span class="az"></span> <span class="za"></span></th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
@@ -101,6 +103,7 @@
 <tr>
 <td>{$_field.name|escape:"htmlall"}</td>
 <td>{$_field.label|escape:"htmlall"}</td>
+<td>{$_field.type|escape:"htmlall"}</td>
 <td><a class="edit" href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

@@ -16,7 +16,6 @@
  
 <script type="text/javascript">
 var response = '{$session.response}';
-var mediamanager = 0;
 var pagetype = '{$page.page_type_name}';
 </script>
 
@@ -61,7 +60,7 @@ var pagetype = '{$page.page_type_name}';
 	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 {/if}
 {if wcom_check_access('Content', 'GeneratorForm', 'Manage')}
-	<li><a href="pages_contents_edit.php?page={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
+	<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
 {/if}
 {if wcom_check_access('Content', 'GeneratorFormField', 'Manage')}
 	<li><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}" class="on">{i18n Generator Form Fields}<span></span></a></li>
@@ -74,13 +73,13 @@ var pagetype = '{$page.page_type_name}';
 <!-- topsubsubnavcon static eof -->
 
 <div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62;
-	<a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}</a> &#62; {i18n Add Generator Form Field}</p></div>
+	<a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}</a> &#62; {i18n Edit Generator Form Field}</p></div>
 
 <div id="content">
 
 <h1>{i18n Edit Generator Form Field}</h1>
 
-<div class="secnav710_nav_x"><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}</a></div>
+<div class="secnav710_navplus_x"><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -100,10 +99,6 @@ var pagetype = '{$page.page_type_name}';
 <!-- rp --></div>
 {/if}
 
-<!-- column -->
-<div id="column"></div>
-<!-- column -->
-
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 
@@ -111,31 +106,31 @@ var pagetype = '{$page.page_type_name}';
 
 {$form.hidden}
 
-<label class="cont" for="generator_form_field_type"><span class="bez">{$form.type.label}<span class="iHelp"><a href="#" type="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_type"><span class="bez">{$form.type.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.type.html}</label>
 
-<label class="cont" for="generator_form_field_label"><span class="bez">{$form.label.label}<span class="iHelp"><a href="#" label="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_label"><span class="bez">{$form.label.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.label.html}</label>
 
-<label class="cont" for="generator_form_field_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" name="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}<span class="validate" id="generator_form_field_title_url_container"></span></label>
 
-<label class="cont h04" for="generator_form_field_value"><span class="bez">{$form.value.label}<span class="iHelp"><a href="#" value="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h13" for="generator_form_field_value"><span class="bez">{$form.value.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.value.html}</label>
 
-<label class="cont" for="generator_form_field_required"><span class="bez">{$form.required.label}<span class="iHelp"><a href="#" required="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_required"><span class="bez">{$form.required.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.required.html}</label>
 
-<label class="cont" for="generator_form_field_required_message"><span class="bez">{$form.required_message.label}<span class="iHelp"><a href="#" required_message="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_required_message"><span class="bez">{$form.required_message.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.required_message.html}</label>
 
-<label class="cont" for="generator_form_field_validator_regex"><span class="bez">{$form.validator_regex.label}<span class="iHelp"><a href="#" validator_regex="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_validator_regex"><span class="bez">{$form.validator_regex.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.validator_regex.html}</label>
 
-<label class="cont" for="generator_form_field_validator_message"><span class="bez">{$form.validator_message.label}<span class="iHelp"><a href="#" validator_message="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_validator_message"><span class="bez">{$form.validator_message.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.validator_message.html}</label>
 
-<label class="cont" for="generator_form_field_sorting"><span class="bez">{$form.sorting.label}<span class="iHelp"><a href="#" sorting="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="generator_form_field_sorting"><span class="bez">{$form.sorting.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.sorting.html}</label>
 
 {$form.submit.html}

@@ -73,7 +73,7 @@ var pagetype = '';
 {elseif $page.page_type_name == 'WCOM_GENERATOR_FORM'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
-<li><a href="pages_generatorforms_fields_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
+<li><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
 <li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}" class="on">{i18n Boxes}<span></span></a></li>
 {/if}
 </ul>
