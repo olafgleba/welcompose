@@ -22,18 +22,24 @@
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
 
-/** 
- * Applies Textile on given string. Takes the string to convert as
- * first argument. Returns the converted string.
- *
- * @param string String to convert
- * @return string
- */
-function wcom_plugin_textconverter_textile ($str)
+require_once('wcom_plugin_textconverter_xhtml.php');
+
+class TextConverter_Textile extends TextConverter_Xhtml
+{
+
+public function mmInsertImage ($text, $src, $width, $height, $alt, $title, $longdesc)
+{
+	$tag = '![%4$s](%1$s "%5$s")';
+	$html = sprintf($tag, $src, $width, $height, $alt, $title, $longdesc, $text);
+	
+	return $html;
+}
+
+public function apply ($str)
 {
 	// input check
 	if (!is_scalar($str)) {
-		trigger_error("Input for parameter str is expected to be scalar", E_USER_ERROR);
+		throw new TextConverter_MarkdownException('Input for parameter str is expected to be scalar');
 	}
 	
 	// load textile
@@ -45,6 +51,8 @@ function wcom_plugin_textconverter_textile ($str)
 	
 	// apply textile
 	return $TEXTILE->TextileThis($str);
+}
+
 }
 
 ?>

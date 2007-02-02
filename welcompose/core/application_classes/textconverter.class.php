@@ -554,26 +554,26 @@ public function applyTextConverter ($id, $text)
 		throw new Application_TextConverterException("Internal text converter name is invalid");
 	}
 	
-	// prepare path to text converter
-	$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
-		"wcom_plugin_textconverter_".$text_converter['internal_name'].".php";
-	if (!file_exists($path)) {
-		throw new Application_TextConverterException("Unable to find text converter plug-in");
+	// prepare class name
+	$class_name = "TextConverter_".$text_converter['internal_name'];
+	
+	// load text converter plugin
+	if (!class_exists($class_name)) {
+		$path = $this->base->_conf['plugins']['textconverter_dir'].DIRECTORY_SEPARATOR.
+			"wcom_plugin_textconverter_".strtolower($text_converter['internal_name']).".php";
+		require($path);
 	}
 	
-	// include text converter file
-	require_once($path);
-	
-	// prepare function name
-	$function_name = sprintf("wcom_plugin_textconverter_%s", $text_converter['internal_name']);
-	
-	// let's see if the text converter function exists
-	if (!function_exists($function_name)) {
-		throw new Application_TextConverterException("Text converter plug-in function does not exist");
+	// let's see if the text converter class exists
+	if (!class_exists($class_name)) {
+		throw new Application_TextConverterException("Text converter plug-in class does not exist");
 	}
-
+	
+	// load class
+	$t = new $class_name();
+	
 	// apply text converter
-	return call_user_func($function_name, $text);
+	return $t->apply($text);
 }
 
 /**
