@@ -93,10 +93,10 @@ Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseIn
 Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 
-Mediamanager.prototype.insertPopupCallback = Mediamanager_insertPopupCallback;
-Mediamanager.prototype.insertDocumentItem = Mediamanager_insertDocumentItem;
+Mediamanager.prototype.processMediaCallbacks = Mediamanager_processMediaCallbacks;
+Mediamanager.prototype.processFromPopupMediaCallbacks = Mediamanager_processFromPopupMediaCallbacks;
+Mediamanager.prototype.showResponseProcessMediaCallbacks = Mediamanager_showResponseProcessMediaCallbacks;
 
-Mediamanager.prototype.insertMediaCallbacks = Mediamanager_insertMediaCallbacks;
 
 /**
  * MyFlickr methods
@@ -505,7 +505,7 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 /**
  * Toggle podcast show/hide podast details.
  *
- * @param {var} elem Actual elem to toggle 
+ * @param {var} elem Current elem to toggle 
  * @throws applyError on exception
  */
 function Mediamanager_toggleExtendedView (elem)
@@ -544,7 +544,7 @@ function Mediamanager_mediaToPodcast (elem)
 		// set hidden field value
 		$('podcast_media_object').value = elem.id;
 
-		var url = this.parseMedCastsUrl;
+		var url = this.parseMedCastsPath;
 		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
@@ -582,7 +582,7 @@ function Mediamanager_mediaToPodcastOnLoad ()
 		// get hidden field value
 		var podcast_media_object = $('podcast_media_object').value;
 
-		var url = this.parseMedCastsUrl;
+		var url = this.parseMedCastsPath;
 		var pars = 'id=' + podcast_media_object;
 
 		var myAjax = new Ajax.Request(
@@ -604,7 +604,7 @@ function Mediamanager_mediaToPodcastOnLoad ()
  *
  * @see #loaderMediaToPodcast
  * @see #showResponseDiscardPodcast
- * @param {var} elem Actual elem to delete
+ * @param {var} elem Current elem to delete
  * @throws applyError on exception
  */
 function Mediamanager_discardPodcast (elem)
@@ -613,7 +613,7 @@ function Mediamanager_discardPodcast (elem)
 		// get hidden field value
 		var podcast_id = $('podcast_id').value;
 
-		var url = this.parseMedDiscCastsUrl;
+		var url = this.parseMedDiscCastsPath;
 		var pars = 'id=' + podcast_id;
 
 		var myAjax = new Ajax.Request(
@@ -741,7 +741,7 @@ function Mediamanager_invokeInputs ()
 		Mediamanager.preserveElementStatusMyLocal();
 		
 		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
+		var url = this.parseMedLocalPath;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -776,7 +776,7 @@ function Mediamanager_invokeTags ()
 		Mediamanager.preserveElementStatusMyLocal();
 		
 		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
+		var url = this.parseMedLocalPath;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -816,7 +816,7 @@ function Mediamanager_invokePager (elem, pager_page)
 		Mediamanager.preserveElementStatusMyLocal();
 		
 		var elems = Mediamanager.checkElemsMyLocal();
-		var url = this.parseMedLocalUrl;
+		var url = this.parseMedLocalPath;
 		if (typeof pager_page != 'undefined') {
 			var pars = 'mm_start=' + pager_page + '&' + elems;
 		} else {
@@ -930,13 +930,13 @@ function Mediamanager_loaderMyLocal ()
  * 
  * @see #loaderMyLocal
  * @see #invokeInputs
- * @param {var} elem Actual elem to delete
+ * @param {var} elem Current elem to delete
  * @throws applyError on exception
  */
 function Mediamanager_deleteMediaItem (elem)
 {
 	try {
-		var url = this.parseMedDeleteUrl;
+		var url = this.parseMedDeletePath;
 		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
@@ -952,9 +952,17 @@ function Mediamanager_deleteMediaItem (elem)
 	}
 }
 
-
-
-function Mediamanager_insertMediaCallbacks (elem)
+/**
+ * Process and handle media callbacks.
+ * <br />
+ * Depending on the delivered mime_type we need to launch a popup or 
+ * simple fire a ajax.request to return the wcom_plugin callbacks.
+ * 
+ * @see #showResponseProcessMediaCallbacks
+ * @param {string} elem Current elem to process
+ * @throws applyError on exception
+ */
+function Mediamanager_processMediaCallbacks (elem)
 {
 	try {
 		// properties
@@ -965,8 +973,10 @@ function Mediamanager_insertMediaCallbacks (elem)
 		this.targetHeight = this.callbacksPopupWindowHeight;
 		this.targetName = 'mm_' + this.elName;
 		
-		// preparations
-		// definitions for popup bool
+		/*
+		* This array is the only var to populate
+		* if the mime_type requires a popup window
+		*/ 
 		var mime_types = new Array (
 			'image',
 			'application-x-shockwave-flash'
@@ -979,134 +989,92 @@ function Mediamanager_insertMediaCallbacks (elem)
 			}
 		}
 					
-		// process	
-		if (typeof storedFocus == 'undefined') {
+		// process the callbacks	
+		if (typeof stored_focus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
-			Helper.lowerOpacity();
-			form_target = storedFocus;
+			form_target = stored_focus;
 			
 			// grab enviroment variables 
 			Helper.getTextConverterValue();
 			Helper.getSelectionText();
-
+			Helper.getPagerPage();
+			
+			// hash the returned variables
 			var getElems = {
 				id : this.elem.id,
 				text : text,
 				text_converter : text_converter,
-				form_target : form_target
+				form_target : form_target,
+				pager_page : pager_page
 			};
 			var o = $H(getElems);
-			var buildRequestString = o.toQueryString();
-		
-			switch (this.elem.name) {
-				case 'image' :	
-						this.url = this.parseMedCallbackInsertImageUrl + '?' + buildRequestString;
-					break;
-				case 'application-x-shockwave-flash' :	
-						this.url = this.parseMedCallbackInsertShockwaveUrl + '?' + buildRequestString;
-					break;
-				case 'document' :
-						alert(this.popup);
-						/*
-						Helper.getPagerPage();
-						this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
-							'&pager_page=' + pager_page;*/
-					break;
-			}
+			var reqString = o.toQueryString();
 			
 			if (this.popup) {
-			this.targetUrl = this.url;
-			this.target = window.open(this.targetUrl, this.targetName, 
-					"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
-			this.resWidth = Helper.defineWindowX(this.targetWidth);
-			this.resHeight = Helper.defineWindowY();
+				Helper.lowerOpacity();				
+				this.url = this.parseMedCallbackInsertPath + this.elem.name + '.php' + '?' + reqString;
+				this.targetUrl = this.url;
+				this.target = window.open(this.targetUrl, this.targetName, 
+						"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
+				this.resWidth = Helper.defineWindowX(this.targetWidth);
+				this.resHeight = Helper.defineWindowY();
 		
-			this.target.moveBy(this.resWidth, this.resHeight);
-			this.target.focus();
-			}
-			
+				this.target.moveBy(this.resWidth, this.resHeight);
+				this.target.focus();
+			} else {		
+				this.url = this.parseMedCallbackInsertPath + this.elem.name + '.php';
+				var url = this.url;
+				var pars = reqString;
+	
+				var myAjax = new Ajax.Request(
+					url,
+					{
+						method : 'post',
+						parameters : pars,
+						onComplete : Mediamanager.showResponseProcessMediaCallbacks
+					});
+			}	
 		}
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-
 /**
- * Insert image media item into content form field.
+ * Populate on XMLHttpRequest response.
  * <br />
- * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
- * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
- * 
- * @see Forms#storeFocus
- * @see Helper#insertTags
+ * Insert the callback result string.
+ *
+ * @see #processMediaCallbacks
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
-/*function Mediamanager_insertImageItem (elem)
+function Mediamanager_showResponseProcessMediaCallbacks(req)
 {
 	try {
-		if (typeof storedFocus == 'undefined') {
-			alert(selectTextarea); 
-		} else {
-			var target = storedFocus;
-	
-			var build;
-			build = '{get_media id="';
-			build += elem.id;
-			build += '"}';
-		
-			var strStart = build;
-			
-			Helper.insertTags(target, strStart, '' , '');
-		}	
-	} catch (e) {
-		_applyError(e);
-	}
-}*/
-
-function Mediamanager_insertPopupCallback (elem)
-{
-	try {
-		this.form_target = form_target;
-		this.callback_result = callback_result;
-		Helper.insertTagsFromPopup(this.form_target, this.callback_result, '' , '');
-		Helper.closeLinksPopup();
+		Helper.insertTagsMediaCallbacks(form_target, req.responseText);
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
 /**
- * Insert document media item into content form field.
+ * Process and handle media callbacks from a popup.
  * <br />
- * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
- * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
+ * Return and insert the wcom_plugin callbacks.
  * 
- * @see Forms#storeFocus
- * @see Helper#insertTags
+ * @see Helper#insertTagsFromPopupMediaCallbacks
+ * @param {string} elem Current elem to process
+ * @param {global} form_target Current saved form target
+ * @param {global} callback_result Current result set
  * @throws applyError on exception
  */
-function Mediamanager_insertDocumentItem (elem)
+function Mediamanager_processFromPopupMediaCallbacks (elem)
 {
 	try {
-		if (typeof storedFocus == 'undefined') {
-			alert(selectTextarea); 
-		} else {
-			var target = storedFocus;
-	
-			var build;
-			build = '<a href="';
-			build += '{get_media id="';
-			build += elem.id;
-			build += '"}';
-			build += '">';
-		
-			strStart = build;
-			strEnd = '</a>';
-			
-			Helper.insertTags(target, strStart, strEnd , describeLink);
-		}	
+		Helper.insertTagsFromPopupMediaCallbacks(form_target, callback_result);
+		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1239,7 +1207,7 @@ function Mediamanager_invokeTagsMyFlickr ()
 		Mediamanager.preserveElementStatusMyFlickr();
 		
 		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
+		var url = this.parseMedFlickrPath;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -1273,7 +1241,7 @@ function Mediamanager_invokeInputsMyFlickr ()
 		Mediamanager.preserveElementStatusMyFlickr();
 		
 		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
+		var url = this.parseMedFlickrPath;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -1308,7 +1276,7 @@ function Mediamanager_invokePagerMyFlickr (elem)
 		Mediamanager.preserveElementStatusMyFlickr();
 		
 		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
+		var url = this.parseMedFlickrPath;
 		var pars = 'mm_start=' + elem.id + '&' + elems;
 
 		var myAjax = new Ajax.Request(
@@ -1368,7 +1336,7 @@ function Mediamanager_initializeUserMyFlickr ()
 		Mediamanager.preserveElementStatusMyFlickr();
 		
 		var elems = Mediamanager.checkElemsMyFlickr();
-		var url = this.parseMedFlickrUrl;
+		var url = this.parseMedFlickrPath;
 		var pars = elems;
 	
 		var myAjax = new Ajax.Request(
@@ -1490,7 +1458,7 @@ function Mediamanager_loaderMyFlickr ()
 /**
  * Insert image media item into content form field.
  * <br />
- * First we have a look, if global var <em>storedFocus</em> ({@link Forms#storeFocus})
+ * First we have a look, if global var <em>stored_focus</em> ({@link Forms#storeFocus})
  * is defined. Then we build a string with the needed syntax to deliver it to {@link Helper#insertTags}.
  * 
  * @see Forms#storeFocus
@@ -1500,10 +1468,10 @@ function Mediamanager_loaderMyFlickr ()
 function Mediamanager_insertImageItemFlickr (elem)
 {
 	try {
-		if (typeof storedFocus == 'undefined') {
+		if (typeof stored_focus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
-			var target = storedFocus;
+			var target = stored_focus;
 			
 			// collect values
 			var identify = elem.parentNode.parentNode;

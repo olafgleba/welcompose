@@ -245,12 +245,12 @@ function Base ()
 		this.applicationTextColor = '#ff620d';
 		
 		/**
-		 * Comprehensive color application wide
+		 * Comprehensive popup width application wide
 		 */
 		this.callbacksPopupWindowWidth = '745';
 		
 		/**
-		 * Comprehensive color application wide
+		 * Comprehensive popup height wide
 		 */
 		this.callbacksPopupWindowHeight = '634';
 		
@@ -281,104 +281,26 @@ function Base ()
 		this.keyPressDelay = null;
 		
 		/**
-		 * Path for dynamically imported file
+		 * Paths for files to import
 		 */
-		this.parseHelpUrl = '../parse/parse.help.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseNavUrl = '../parse/parse.navigation.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedLocalUrl = '../mediamanager/mediamanager_local.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedFlickrUrl = '../mediamanager/mediamanager_flickr.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedUploadUrl = '../mediamanager/mediamanager_upload.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedEditUrl = '../mediamanager/mediamanager_edit.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedDeleteUrl = '../mediamanager/mediamanager_delete.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedCastsUrl = '../mediamanager/mediamanager_media_to_podcast.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedDiscCastsUrl = '../mediamanager/mediamanager_discard_podcast.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedCallbackInsertImageUrl = '../mediamanager/callbacks_insert_image.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedCallbackInsertShockwaveUrl = '../mediamanager/callbacks_insert_x-shockwave-flash.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseMedCallbackInsertDocumentUrl = '../mediamanager/callbacks_insert_document.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parsePagesLinksUrl = '../content/pages_links_select.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parsePagesBoxesLinksUrl = '../templating/pages_boxes_links_select.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseGlobalTemplatesLinksUrl = '../templating/globaltemplates_links_select.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseGlobalFilesLinksUrl = '../templating/globalfiles_links_select.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseGlobalBoxesLinksUrl = '../templating/globalboxes_links_select.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseBlogCommmentStatusChangeUrl = '../community/blogcomments_statuschange.php';
-		
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.parseStructuralTemplatesLinksUrl = '../content/structuraltemplates_links_select.php';
-
-		/**
-		 * Path for dynamically imported file
-		 */
-		this.validateUrl = '../validate.js.php';
+		this.parseHelpPath = '../parse/parse.help.php';
+		this.parseNavPath = '../parse/parse.navigation.php';
+		this.parseMedLocalPath = '../mediamanager/mediamanager_local.php';
+		this.parseMedFlickrPath = '../mediamanager/mediamanager_flickr.php';
+		this.parseMedUploadPath = '../mediamanager/mediamanager_upload.php';
+		this.parseMedEditPath = '../mediamanager/mediamanager_edit.php';
+		this.parseMedDeletePath = '../mediamanager/mediamanager_delete.php';
+		this.parseMedCastsPath = '../mediamanager/mediamanager_media_to_podcast.php';
+		this.parseMedDiscCastsPath = '../mediamanager/mediamanager_discard_podcast.php';
+		this.parseMedCallbackInsertPath = '../mediamanager/callbacks_insert_';
+		this.parsePagesLinksPath = '../content/pages_links_select.php';
+		this.parsePagesBoxesLinksPath = '../templating/pages_boxes_links_select.php';
+		this.parseGlobalTemplatesLinksPath = '../templating/globaltemplates_links_select.php';
+		this.parseGlobalFilesLinksPath = '../templating/globalfiles_links_select.php';
+		this.parseGlobalBoxesLinksPath = '../templating/globalboxes_links_select.php';
+		this.parseBlogCommmentStatusChangePath = '../community/blogcomments_statuschange.php';
+		this.parseStructuralTemplatesLinksPath = '../content/structuraltemplates_links_select.php';
+		this.validatePath = '../validate.js.php';
 	} catch (e) {
 		_applyError(e);
 	}
@@ -623,7 +545,7 @@ function Init_getVars ()
 			}
 		}
 		if (typeof callback_result != 'undefined' && callback_result != '') {
-				Mediamanager.insertPopupCallback(callback_result);
+				Mediamanager.processFromPopupMediaCallbacks(callback_result);
 		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {
@@ -643,7 +565,7 @@ function Init_getVars ()
 					$('column').style.paddingTop = '142px';
 				}
 						
-				this.url = this.parseMedLocalUrl + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
+				this.url = this.parseMedLocalPath + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
 				if (typeof this.req != 'undefined') {
 		
 					var _url		= this.url;
@@ -806,7 +728,7 @@ function Help_show (elem)
 			this.formId = Helper.getDataParentNode(this.elem, 1);
 		}
 		
-		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+		this.url = this.parseHelpPath + '?page=' + this.formId + '_' + this.processId;
 			
 		if (typeof this.req != 'undefined') {
 		
@@ -904,7 +826,7 @@ function Help_showMediamanager (elem)
 		this.formId = Helper.getAttrParentNode(this.attr, this.elem, 3);
 		this.processId = this.formId;
 		this.ttarget = this.helpLyMediamanager;
-		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+		this.url = this.parseHelpPath + '?page=' + this.formId + '_' + this.processId;
 				
 		// which layer to process
 		var catchMyLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');		
@@ -1061,7 +983,7 @@ function Navigation_show (name, level)
 	try {
 		// properties
 		this.name = name;
-		this.url = this.parseNavUrl + '?page=' + this.name;
+		this.url = this.parseNavPath + '?page=' + this.name;
 		
 		switch (this.level) {
 			case '2' :
@@ -1189,7 +1111,7 @@ function Forms_setOnEvent (elem, bgcolor, bcolor, bstyle)
 function Forms_storeFocus (elem)
 {
 	try {
-		storedFocus = elem.id;
+		stored_focus = elem.id;
 	} catch (e) {
 		_applyError(e);
 	}

@@ -164,8 +164,7 @@ var definitions = {
 	},
 	'a.mm_insert' : function(el){
 		el.onclick = function(){
-			//Helper.launchPopupCallback('745','634','media_insert', this);
-			Mediamanager.insertMediaCallbacks(this);
+			Mediamanager.processMediaCallbacks(this);
 			return false;
 		}
 	},

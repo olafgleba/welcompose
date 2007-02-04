@@ -54,8 +54,6 @@ Helper.prototype = new Base();
  * Instance Methods from prototype @class Helper
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
-Helper.prototype.launchPopupCallback = Helper_launchPopupCallback;
-Helper.prototype.insertCallback = Helper_insertCallback;
 Helper.prototype.getTextConverterValue = Helper_getTextConverterValue;
 Helper.prototype.getSelectionText = Helper_getSelectionText;
 Helper.prototype.closePopup = Helper_closePopup;
@@ -73,8 +71,13 @@ Helper.prototype.showNextNodeBoxes = Helper_showNextNodeBoxes;
 Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.prototype.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
+
 Helper.prototype.insertTagsFromPopup = Helper_insertTagsFromPopup;
 Helper.prototype.insertTags = Helper_insertTags;
+
+Helper.prototype.insertTagsMediaCallbacks = Helper_insertTagsMediaCallbacks;
+Helper.prototype.insertTagsFromPopupMediaCallbacks = Helper_insertTagsFromPopupMediaCallbacks;
+
 Helper.prototype.insertInternalLink = Helper_insertInternalLink;
 Helper.prototype.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
 Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
@@ -138,34 +141,34 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 		switch (this.trigger) {
 			case 'mm_upload' :
 					Helper.getPagerPage();
-					this.url = this.parseMedUploadUrl + '?pager_page=' + pager_page;
+					this.url = this.parseMedUploadPath + '?pager_page=' + pager_page;
 				break;
 			case 'mm_edit' :
 					Helper.getPagerPage();
-					this.url = this.parseMedEditUrl + '?id=' + this.elem.id + '&pager_page=' + pager_page;
+					this.url = this.parseMedEditPath + '?id=' + this.elem.id + '&pager_page=' + pager_page;
 				break;
 			case 'pages_internal_links' :
-					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name;
+					this.url = this.parsePagesLinksPath + '?target=' + this.elem.name;
 				break;
 			case 'pages_internal_links_NoHref' :
-					this.url = this.parsePagesLinksUrl + '?target=' + this.elem.name + '&control=NoHref';
+					this.url = this.parsePagesLinksPath + '?target=' + this.elem.name + '&control=NoHref';
 				break;
 			case 'pages_boxes_internal_links' :
-					this.url = this.parsePagesBoxesLinksUrl + '?target=' + this.elem.name;
+					this.url = this.parsePagesBoxesLinksPath + '?target=' + this.elem.name;
 				break;
 			case 'globaltemplates_internal_links' :
 					Helper.getDelimiterValue();
-					this.url = this.parseGlobalTemplatesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + delimiter;
+					this.url = this.parseGlobalTemplatesLinksPath + '?target=' + this.elem.name + '&delimiter=' + delimiter;
 				break;
 			case 'globalfiles_internal_links' :
 					Helper.getDelimiterValue();
-					this.url = this.parseGlobalFilesLinksUrl + '?target=' + this.elem.name + '&delimiter=' + delimiter;
+					this.url = this.parseGlobalFilesLinksPath + '?target=' + this.elem.name + '&delimiter=' + delimiter;
 				break;
 			case 'globalboxes_internal_links' :
-					this.url = this.parseGlobalBoxesLinksUrl + '?target=' + this.elem.name;
+					this.url = this.parseGlobalBoxesLinksPath + '?target=' + this.elem.name;
 				break;
 			case 'structuraltemplates_internal_links' :
-					this.url = this.parseStructuralTemplatesLinksUrl + '?target=' + this.elem.name;
+					this.url = this.parseStructuralTemplatesLinksPath + '?target=' + this.elem.name;
 				break;
 		}
 		// properties
@@ -185,109 +188,6 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 	}
 }
 
-
-function Helper_insertCallback (elem)
-{
-	try {
-	/*
-		// properties
-		this.elem = elem;
-		this.popup = true;
-		
-		var callback_types_without_popups = new Array (
-			'document'
-		);
-		
-		switch (this.elem.name) {
-			case 'image' :
-					Helper.getPagerPage();
-					Helper.getTextConverterValue();
-					Helper.getSelectionText();		
-					this.url = this.parseMedCallbackInsertImageUrl + '?id=' + this.elem.id +
-					 	'&text=' + text + 
-						'&text_converter=' + text_converter + 
-						'&pager_page=' + pager_page + 
-						'&form_target=' + form_target;
-				break;
-			case 'document' :
-					Helper.getPagerPage();
-					this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
-						'&pager_page=' + pager_page;
-				break;
-		}
-		*/
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Launch popup.
- * <br />
- * On the basis of parameter <em>trigger</em> we builds the url string
- * for later use in func <em>window.open</em>.
- * According to the popup launch, the parent window opacity will be lowered
- * to eye focus onto the launched window. 
- * 
- * <br /><br />Example:
- * <pre><code>
-Helper.launchPopup('745','634','pages_links_select', this);
-</code></pre>
- * 
- * @see #lowerOpacity
- * @param {string} width Width for the window to launch 
- * @param {string} height Height for the window to launch
- * @param {string} wname The Name for the window to launch
- * @param {object} elem Current element
- * @throws applyError on exception
- */
-function Helper_launchPopupCallback (width, height, wname, elem)
-{
-	try {
-		// properties
-		this.elem = elem;
-		
-		if (typeof storedFocus == 'undefined') {
-			alert(selectTextarea); 
-		} else {
-			form_target = storedFocus;
-			Helper.lowerOpacity();
-		
-			switch (this.elem.name) {
-				case 'image' :
-						Helper.getTextConverterValue();
-						Helper.getSelectionText();		
-						this.url = this.parseMedCallbackInsertImageUrl + '?id=' + this.elem.id +
-						 	'&text=' + text + 
-							'&text_converter=' + text_converter + 
-							'&form_target=' + form_target;
-					break;
-				case 'document' :
-						Helper.getPagerPage();
-						this.url = this.parseMedCallbackInsertDocumentUrl + '?id=' + this.elem.id + 
-							'&pager_page=' + pager_page;
-					break;
-			}
-			
-			// properties
-			this.targetUrl = this.url;
-			this.targetName = wname;
-			this.targetWidth = width;
-			this.targetHeight = height;
-			this.target = window.open(this.targetUrl, this.targetName, 
-					"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
-			this.resWidth = Helper.defineWindowX(this.targetWidth);
-			this.resHeight = Helper.defineWindowY();
-		
-			this.target.moveBy(this.resWidth, this.resHeight);
-			this.target.focus();	
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
 function Helper_getTextConverterValue ()
 {
 	try {		
@@ -296,7 +196,12 @@ function Helper_getTextConverterValue ()
 		var el_id = form_name + '_text_converter';
 			
 		if ($(el_id)) {
-			text_converter = document.forms[form_name].elements[el_name].options.selectedIndex;
+			var e = document.forms[form_name].elements[el_name];		
+			for (var i = 0; i < e.length; i++) {
+				if (e.options[i].selected == true)
+					var _text_converter = e.options[i].value;
+			}
+			text_converter = _text_converter;
 		} else {
 			text_converter = '';
 		}
@@ -760,7 +665,7 @@ function Helper_showNextNode(elem)
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 		}
-		var url = this.parsePagesLinksUrl;
+		var url = this.parsePagesLinksPath;
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode + '&control=' + control;
 		
 		if (nextNode == 'secondNode') {
@@ -809,7 +714,7 @@ function Helper_showNextNodeBoxes(elem)
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 		}	
-		var url = this.parsePagesBoxesLinksUrl;
+		var url = this.parsePagesBoxesLinksPath;
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
 		
 		if (nextNode == 'secondNode') {
@@ -898,12 +803,12 @@ function Helper_showResponsePagesThirdLinks(req)
  * @see #insertInternalLinkGlobalTemplates
  * @see #insertInternalLinkGlobalFiles
  * @param {string} id Form element to populate
- * @param {string} tagOpen Opening part of build string
+ * @param {string} str Opening part of build string
  * @param {string} tagClose Closing part of build string
- * @param {string} sampleText Text to set, when we use tagOpen and tagClose
+ * @param {string} sampleText Text to set, when we use str and tagClose
  * @throws applyError on exception
  */
-function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
+function Helper_insertTagsFromPopup(id, str, tagClose, sampleText)
 {
 	try {
 		/*
@@ -926,9 +831,9 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 			txtarea.focus();
 			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
 				theSelection = theSelection.substring(0, theSelection.length - 1);
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+				opener.document.selection.createRange().text = str + theSelection + tagClose + " ";
 			} else {
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
+				opener.document.selection.createRange().text = str + theSelection + tagClose;
 			}
 		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
@@ -938,25 +843,25 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
 			var myText = (txtarea.value).substring(startPos, endPos);
 			if(!myText) { myText=sampleText;}
 			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+				subst = str + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
 			} else {
-				subst = tagOpen + myText + tagClose; 
+				subst = str + myText + tagClose; 
 			}
 			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
 			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			var cPos=startPos+(str.length+myText.length+tagClose.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
 			//txtarea.scrollTop=scrollTop;
 		// All others
 		} else {
 			// Append at the end: Some people find that annoying
-			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.value += str + sampleText + tagClose;
 			//txtarea.focus();
 			var re=new RegExp("\\n","g");
-			tagOpen=tagOpen.replace(re,"");
+			str=str.replace(re,"");
 			tagClose=tagClose.replace(re,"");
-			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			opener.document.infoform.infobox.value=str+sampleText+tagClose;
 			txtarea.focus();
 		}
 		// reposition cursor if possible
@@ -976,12 +881,12 @@ function Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
  * @see #insertInternalLinkGlobalTemplates
  * @see #insertInternalLinkGlobalFiles
  * @param {string} id Form element to populate
- * @param {string} tagOpen Opening part of build string
+ * @param {string} str Opening part of build string
  * @param {string} tagClose Closing part of build string
- * @param {string} sampleText Text to set, when we use tagOpen and tagClose
+ * @param {string} sampleText Text to set, when we use str and tagClose
  * @throws applyError on exception
  */
-function Helper_insertTags(id, tagOpen, tagClose, sampleText)
+function Helper_insertTags(id, str, tagClose, sampleText)
 {
 	try {
 		/*
@@ -1003,9 +908,9 @@ function Helper_insertTags(id, tagOpen, tagClose, sampleText)
 			txtarea.focus();
 			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
 				theSelection = theSelection.substring(0, theSelection.length - 1);
-				document.selection.createRange().text = tagOpen + theSelection + tagClose + " ";
+				document.selection.createRange().text = str + theSelection + tagClose + " ";
 			} else {
-				document.selection.createRange().text = tagOpen + theSelection + tagClose;
+				document.selection.createRange().text = str + theSelection + tagClose;
 			}
 		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
@@ -1015,29 +920,180 @@ function Helper_insertTags(id, tagOpen, tagClose, sampleText)
 			var myText = (txtarea.value).substring(startPos, endPos);
 			if(!myText) { myText=sampleText;}
 			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
+				subst = str + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
 			} else {
-				subst = tagOpen + myText + tagClose; 
+				subst = str + myText + tagClose; 
 			}
 			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
 			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			var cPos=startPos+(str.length+myText.length+tagClose.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
 			txtarea.scrollTop=scrollTop;
 		// All others
 		} else {
 			// Append at the end: Some people find that annoying
-			//txtarea.value += tagOpen + sampleText + tagClose;
+			//txtarea.value += str + sampleText + tagClose;
 			//txtarea.focus();
 			var re=new RegExp("\\n","g");
-			tagOpen=tagOpen.replace(re,"");
+			str=str.replace(re,"");
 			tagClose=tagClose.replace(re,"");
-			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
+			document.infoform.infobox.value=str+sampleText+tagClose;
 			txtarea.focus();
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Process inserting content.
+ * <br />
+ * Adapted from http://sourceforge.net/projects/wikipedia
+ * 
+ * @see #insertInternalLink
+ * @see #insertInternalLinkNoHref
+ * @see #insertInternalLinkGlobalTemplates
+ * @see #insertInternalLinkGlobalFiles
+ * @param {string} id Form element to populate
+ * @param {string} str Opening part of build string
+ * @param {string} tagClose Closing part of build string
+ * @param {string} sampleText Text to set, when we use str and tagClose
+ * @throws applyError on exception
+ */
+function Helper_insertTagsMediaCallbacks(id, str)
+{
+	try {
+		/*
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
+		*/
+	 	if (Helper.isBrowser('ie')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = $(id);
+		}
+		// IE
+		if(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				document.selection.createRange().text = str + theSelection + " ";
+			} else {
+				document.selection.createRange().text = str + theSelection;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			subst = str;
+			/*if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = str + myText.substring(0, (myText.length - 1)) + " "; 
+			} else {
+				subst = str; 
+			}*/
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
+			txtarea.focus();
+			var cPos=startPos+(str.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += str + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			str=str.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			document.infoform.infobox.value=str;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Process inserting content.
+ * <br />
+ * Adapted from http://sourceforge.net/projects/wikipedia
+ * 
+ * @see #insertInternalLink
+ * @see #insertInternalLinkNoHref
+ * @see #insertInternalLinkGlobalTemplates
+ * @see #insertInternalLinkGlobalFiles
+ * @param {string} id Form element to populate
+ * @param {string} str Opening part of build string
+ * @param {string} tagClose Closing part of build string
+ * @param {string} sampleText Text to set, when we use str and tagClose
+ * @throws applyError on exception
+ */
+function Helper_insertTagsFromPopupMediaCallbacks(id, str)
+{
+	try {
+		/*
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
+		*/
+	 	if (Helper.isBrowser('ie')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = opener.document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = opener.$(id);
+		}
+		// IE
+		if(opener.document.selection) {
+			var theSelection = document.selection.createRange().text;
+			txtarea.focus();
+			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				opener.document.selection.createRange().text = str + theSelection + " ";
+			} else {
+				opener.document.selection.createRange().text = str + theSelection;
+			}
+		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
+				subst = str + myText.substring(0, (myText.length - 1)) + " "; 
+			} else {
+				subst = str + myText; 
+			}
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
+			txtarea.focus();
+			var cPos=startPos+(str.length+myText.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			//txtarea.scrollTop=scrollTop;
+		// All others
+		} else {
+			// Append at the end: Some people find that annoying
+			//txtarea.value += str + sampleText + tagClose;
+			//txtarea.focus();
+			var re=new RegExp("\\n","g");
+			str=str.replace(re,"");
+			tagClose=tagClose.replace(re,"");
+			document.infoform.infobox.value=str;
+			txtarea.focus();
+		}
+		// reposition cursor if possible
+		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1209,7 +1265,7 @@ function Helper_insertInternalLinkBoxes(elem)
 function Helper_insertInternalLinkStructuralTemplates(elem)
 {
 	try {		
-		var url = this.parseStructuralTemplatesLinksUrl;
+		var url = this.parseStructuralTemplatesLinksPath;
 		var pars = 'id=' + elem.id;
 
 		var myAjax = new Ajax.Request(
@@ -1283,7 +1339,7 @@ function Helper_changeBlogCommentStatus (elem)
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");		
 
 		// properties
-		var url = this.parseBlogCommmentStatusChangeUrl;
+		var url = this.parseBlogCommmentStatusChangePath;
 		var pars = 'status_id=' + statusId + '&comment_id=' + commentId;
 
 		var myAjax = new Ajax.Request(
@@ -1372,7 +1428,7 @@ function Helper_showFileUploadMessage()
  */
 function Helper_validate(elem)
 {	
-	var url		= this.validateUrl;
+	var url		= this.validatePath;
 	elemID		= $(elem).getAttribute('id');
 	var elemVal	= $F(elem);
 	var pars	= 'elemID=' + elemID + '&elemVal=' + elemVal;

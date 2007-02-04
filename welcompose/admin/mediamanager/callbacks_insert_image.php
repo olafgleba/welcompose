@@ -124,12 +124,6 @@ try {
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	
-	// textfield for name
-	$FORM->addElement('text', 'longdesc', gettext('Long description'), 
-		array('id' => 'longdesc', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('longdesc', 'trim');
-	$FORM->applyFilter('longdesc', 'strip_tags');
-	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Insert object'),
 		array('class' => 'submit200insertcallback'));
@@ -182,8 +176,7 @@ try {
 			'width' => $object['file_width'],
 			'height' => $object['file_height'],
 			'alt' => $FORM->exportValue('alt'),
-			'title' => $FORM->exportValue('title'),
-			'longdesc' => $FORM->exportValue('longdesc')
+			'title' => $FORM->exportValue('title')
 		);
 	
 		// execute text converter callback

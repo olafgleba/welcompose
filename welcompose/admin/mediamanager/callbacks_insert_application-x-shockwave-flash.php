@@ -103,7 +103,7 @@ try {
 	
 	// prepare scale array
 	$scale = array(
-		'0' => gettext('Default'),
+		'' => gettext('Default'),
 		'showall' => gettext('Show all'),
 		'noborder' => gettext('No border'),
 		'exactfit' => gettext('Exact fit')
@@ -111,7 +111,7 @@ try {
 	
 	// prepare wmode array
 	$wmode = array(
-		'0' => gettext('Default'),
+		'' => gettext('Default'),
 		'window' => gettext('Window'),
 		'opaque' => gettext('Opaque'),
 		'transparent' => gettext('Transparent')
@@ -217,12 +217,9 @@ try {
 	 */
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
-	// debug
-	//print_r($_POST);
-	
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
-	
+
 		// prepare callback args
 		$args = array(
 			'text' => $FORM->exportValue('text'),
@@ -233,15 +230,15 @@ try {
 			'scale' => $FORM->exportValue('scale'),
 			'wmode' => $FORM->exportValue('wmode'),
 			'bgcolor' => $FORM->exportValue('bgcolor'),
-			'play' => $FORM->exportValue('play'),
-			'loop' => $FORM->exportValue('loop')
+			'play' => ($FORM->exportValue('play') == 1) ? 'true' : '',
+			'loop' => ($FORM->exportValue('loop') == 1) ? 'true' : ''
 		);
 	
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
 		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);	
 
-		// assign target field identifier
+		// assign callback build
 		$BASE->utility->smarty->assign('callback_result', $callback_result);
 	}
 	
@@ -250,7 +247,7 @@ try {
 
 	// display the form
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('mediamanager/callbacks_insert_x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('mediamanager/callbacks_insert_application-x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
 
 	// flush the buffer
 	@ob_end_flush();

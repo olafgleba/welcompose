@@ -25,18 +25,27 @@
 class TextConverter_XHTML
 {
 
-public function mmInsertImage ($text, $src, $width, $height, $alt, $title, $longdesc)
+public function mmInsertImage ($text, $src, $width, $height, $alt, $title)
 {
-	$tag = '<img src="%1$s" width="%2$u" height="%3$u" alt="%4$s" title="%5$s" longdesc="%6$s"/>%7$s';
+	$tag = '<img src="%1$s" width="%2$u" height="%3$u" alt="%4$s" title="%5$s" />';
 	
-	$html = sprintf($tag, $src, $width, $height, $alt, $title, $longdesc, $text);
+	$html = sprintf($tag, $src, $width, $height, $alt, $title, $text);
+	
+	return $html;
+}
+
+public function mmInsertDocument ($text, $href)
+{
+	$tag = '<a href="%1$s">%2$s</a>';
+	
+	$html = sprintf($tag, $href, $text);
 	
 	return $html;
 }
 
 public function mmInsertShockwave ($text, $data, $width, $height, $quality, $scale, $wmode, $bgcolor, $play, $loop)
 {	
-	$tag = '<object data="%1$s" type="application/x-shockwave-flash" width="%2$u" height="%3$u"><param name="movie" value="%1$s" /><param name="quality" value="%4$s" /><param name="scale" value="%5$s" /><param name="wmode" value="%6$s" /><param name="bgcolor" value="%7$s" /><param name="play" value="%8$u" /><param name="loop" value="%9$u" /></object>%10$s';
+	$tag = '<object data="%1$s" type="application/x-shockwave-flash" width="%2$u" height="%3$u"><param name="movie" value="%1$s" /><param name="quality" value="%4$s" /><param name="scale" value="%5$s" /><param name="wmode" value="%6$s" /><param name="bgcolor" value="%7$s" /><param name="play" value="%8$s" /><param name="loop" value="%9$s" /></object>';
 	
 	$html = sprintf($tag, $data, $width, $height, $quality, $scale, $wmode, $bgcolor, $play, $loop, $text);
 	

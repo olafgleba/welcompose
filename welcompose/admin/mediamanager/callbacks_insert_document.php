@@ -94,29 +94,35 @@ try {
 
 	// get object
 	$object = $OBJECT->selectObject(Base_Cnc::FilterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
-	
+
 	// prepare callback args
 	$args = array(
-		'text' => htmlentities(Base_Cnc::ifsetor($_REQUEST['text'], null)),
+		'text' => (!empty($_REQUEST['text'])) ? $_REQUEST['text'] : gettext('Your link description'),
 		'href' => sprintf('{get_media id="%u"}', $object['id'])
 	);
-	
+
 	// execute text converter callback
-	$text_converter = Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC);
-	print $TEXTCONVERTER->insertCallback($text_converter, 'Document', $args);
+	$text_converter = Base_Cnc::filterRequest($_POST['text_converter'], WCOM_REGEX_NUMERIC);
+	$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Document', $args);
 	
+	// return response
+	if (!empty($callback_result)) {
+		print $callback_result;
+	}
+
+	// flush the buffer
+	@ob_end_flush();
+	
+	exit;
 } catch (Exception $e) {
-	// clean the buffer
+	// clean buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
-
-	// define new error_tpl
-	Base_Error::$_error_tpl = 'error_popup_723.html';
 	
 	// raise error
 	Base_Error::triggerException($BASE->utility->smarty, $e);	
-
+	
 	// exit
 	exit;
 }
