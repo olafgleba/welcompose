@@ -277,7 +277,8 @@ try {
 		'navigation' => Base_Cnc::filterRequest($_REQUEST['navigation'], WCOM_REGEX_NUMERIC),
 		'reference' => Base_Cnc::filterRequest($_REQUEST['reference'], WCOM_REGEX_NUMERIC),
 		'position' => UTILITY_NESTEDSET_CREATE_AFTER,
-		'sitemap_changefreq' => 'monthly'
+		'sitemap_changefreq' => 'monthly',
+		'sitemap_priority' => '0.5'
 	));
 	
 	// validate it
