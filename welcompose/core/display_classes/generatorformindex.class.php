@@ -370,7 +370,7 @@ public function render ()
 			$this->base->utility->smarty->assign('captcha_type', 'image');
 		} elseif ($this->_generator_form['use_captcha'] == 'numeral') { 
 			// generate numeral captcha
-			// $captcha = $this->captcha->createCaptcha('numeral');
+			$captcha = $this->captcha->createCaptcha('numeral');
 			
 			// let's tell the template that the captcha is an numeral captcha 
 			$this->base->utility->smarty->assign('captcha_type', 'numeral');

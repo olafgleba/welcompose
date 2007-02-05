@@ -356,13 +356,13 @@ public function render ()
 			if ($this->_settings['blog_comment_use_captcha'] == 'image') {
 				// generate image captcha
 				$captcha = $this->captcha->createCaptcha('image');
-
+				
 				// let's tell the template that the captcha is an image
 				$this->base->utility->smarty->assign('captcha_type', 'image');
 			} elseif ($this->_settings['blog_comment_use_captcha'] == 'numeral') { 
 				// generate numeral captcha
-				// $captcha = $this->captcha->createCaptcha('numeral');
-
+				$captcha = $this->captcha->createCaptcha('numeral');
+				
 				// let's tell the template that the captcha is an numeral captcha 
 				$this->base->utility->smarty->assign('captcha_type', 'numeral');
 			}

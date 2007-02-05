@@ -103,10 +103,37 @@ public function createCaptcha ($type)
 	switch ((string)$type) {
 		case 'image':
 			return $this->createImageCaptcha();
+		case 'numeral':
+			return $this->createNumeralCaptcha();
 		default:
 			throw new Utility_CaptchaException("Unknown captcha type requested");
 	}
 	
+}
+
+/** 
+ * Creates numeral captcha using PEAR's Text_CAPTCHA. Returns the
+ * captcha string.
+ *
+ * @throws Utility_CaptchaException
+ * @return string
+ */
+protected function createNumeralCaptcha  ()
+{
+	// create new CAPTCHA object using the equation driver
+	$captcha = Text_CAPTCHA::factory('Equation');
+	
+	// generate captcha
+	$response = $captcha->init();
+	if (PEAR::isError($response)) {
+		throw new Utility_CaptchaException("Captcha creation failed");
+	}
+	
+	// save secret passphrase to session
+	$_SESSION[$this->_session_key] = $captcha->getPhrase();
+	
+	// return the captcha string
+	return $captcha->getCAPTCHA();
 }
 
 /** 
@@ -123,16 +150,21 @@ protected function createImageCaptcha  ()
 	
 	// preppare CAPTCHA options
 	$options = array(
-		'font_size' => 23,
-		'font_path' => Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/../other/bitstream_vera/'),
-		'font_file' => 'Vera.ttf'
+		'width' => 200,
+		'height' => 60,
+		'output' => 'png',
+		'imageOptions' => array(
+			'font_size' => 23,
+			'font_path' => Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/../other/bitstream_vera/'),
+			'font_file' => 'Vera.ttf'
+		)
 	);
 	
 	// create new CAPTCHA object using the image driver
 	$captcha = Text_CAPTCHA::factory('Image');
 	
 	// generate captcha
-	$response = $captcha->init(200, 60, null, $options);
+	$response = $captcha->init($options);
 	if (PEAR::isError($response)) {
 		throw new Utility_CaptchaException("Captcha creation failed");
 	}

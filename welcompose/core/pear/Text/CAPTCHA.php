@@ -6,10 +6,6 @@
  * creating an image, ASCII art or something else 
  * with some (obfuscated) characters 
  *
- * TODOs:
- * + refine the obfuscation algorithm :-)
- * + learn how to use Image_Text better (or remove dependency)
- * 
  * 
  * @package Text_CAPTCHA
  * @license PHP License, version 3.0
@@ -86,18 +82,26 @@ require_once 'Text/Password.php';
     
         require_once 'Text/CAPTCHA.php';
                    
-        // Set CAPTCHA options (font must exist!)
-        $options = array(
+        // Set CAPTCHA image options (font must exist!)
+        $imageOptions = array(
             'font_size' => 24,
             'font_path' => './',
             'font_file' => 'COUR.TTF'
         );
 
+        // Set CAPTCHA options
+        $options = array(
+            'width' => 200,
+            'height' => 80,
+            'output' => 'png',
+            'imageOptions' => $imageOptions
+        );
+
         // Generate a new Text_CAPTCHA object, Image driver
         $c = Text_CAPTCHA::factory('Image');
-        $retval = $c->init(200, 80, null, $options);
+        $retval = $c->init($options);
         if (PEAR::isError($retval)) {
-            echo 'Error generating CAPTCHA!';
+            echo 'Error initializing CAPTCHA!';
             exit;
         }
     
@@ -105,7 +109,7 @@ require_once 'Text/Password.php';
         $_SESSION['phrase'] = $c->getPhrase();
     
         // Get CAPTCHA image (as PNG)
-        $png = $c->getCAPTCHAAsPNG();
+        $png = $c->getCAPTCHA();
         if (PEAR::isError($png)) {
             echo 'Error generating CAPTCHA!';
             exit;
@@ -177,6 +181,25 @@ class Text_CAPTCHA {
     function getPhrase()
     {
         return $this->_phrase;
+    }
+
+    /**
+     * Sets secret CAPTCHA phrase
+     *
+     * This method sets the CAPTCHA phrase 
+     * (use null for a random phrase)
+     *
+     * @access  public
+     * @param   string   $phrase    the (new) phrase
+     * @void 
+     */
+    function setPhrase($phrase = null)
+    {
+        if (!empty($phrase)) {
+            $this->_phrase = $phrase;
+        } else {
+            $this->_createPhrase();
+        }
     }
 
     /**
