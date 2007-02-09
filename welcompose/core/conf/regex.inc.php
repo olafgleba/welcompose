@@ -229,6 +229,9 @@ define('WCOM_REGEX_TEXT_CONVERTER_CALLBACK', '=^[a-z0-9\-]+$=i');
 
 // Defines regular expression for strings containing a function
 // or variable name
-define('WCOM_REGEX_OPERATOR_NAME', '=^[a-z]{1}[a-z0-9_]*$=i')
+define('WCOM_REGEX_OPERATOR_NAME', '=^[a-z]{1}[a-z0-9_]*$=i');
+
+// Defines regular expression for callback strings
+define("WCOM_REGEX_CALLBACK_STRING", "=^([a-z_]+)$=i");
 
 ?>

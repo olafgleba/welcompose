@@ -65,45 +65,9 @@ var definitions = {
 			return false;
 		}
 	},
-	'.act_setInternalLink' : function(el){
+	'a.process_insert' : function(el){
 		el.onclick = function(){
-			Helper.insertInternalLink(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkNoHref' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkNoHref(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkBoxes' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkBoxes(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkGlobalTemplates' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkGlobalTemplates(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkGlobalFiles' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkGlobalFiles(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkGlobalBoxes' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkGlobalBoxes(this);
-			return false;
-		}
-	},
-	'.act_setInternalLinkStructuralTemplates' : function(el){
-		el.onclick = function(){
-			Helper.insertInternalLinkStructuralTemplates(this);
+			Helper.callbacksInsert(this);
 			return false;
 		}
 	},
@@ -113,13 +77,13 @@ var definitions = {
 			return false;
 		}
 	},
-	'.showNextNode' : function(el){
+	'a.showNextNode' : function(el){
 		el.onclick = function(){
 			Helper.showNextNode(this);
 			return false;
 		}
 	},
-	'.showNextNodeBoxes' : function(el){
+	'a.showNextNodeBoxes' : function(el){
 		el.onclick = function(){
 			Helper.showNextNodeBoxes(this);
 			return false;

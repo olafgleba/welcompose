@@ -165,6 +165,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.insert' : function(el){
+		el.onclick = function(){
+			Helper.processCallbacks(this);
+			return false;
+		}
+	},
 	'.confirmDelNav' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelNavAction(this);
@@ -210,48 +216,6 @@ var definitions = {
 	'.showTableRow' : function(el){
 		el.onclick = function(){
 			Tables.showTableRow(this);
-			return false;
-		}
-	},
-	'.act_internalLink' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('740','634','pages_links_select','pages_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkNoHref' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('740','634','pages_links_select','pages_internal_links_NoHref', this);
-			return false;
-		}
-	},
-	'.act_internalLinkBoxes' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('740','634','pages_boxes_links_select','pages_boxes_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkGlobalTemplates' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','globaltemplates_links_select','globaltemplates_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkGlobalFiles' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkGlobalBoxes' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','globalboxes_links_select','globalboxes_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkStructuralTemplates' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
 			return false;
 		}
 	},

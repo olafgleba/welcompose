@@ -54,8 +54,13 @@ Helper.prototype = new Base();
  * Instance Methods from prototype @class Helper
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
+
 Helper.prototype.getTextConverterValue = Helper_getTextConverterValue;
 Helper.prototype.getSelectionText = Helper_getSelectionText;
+Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
+Helper.prototype.getPagerPage = Helper_getPagerPage;
+Helper.prototype.getInsertType = Helper_getInsertType;
+
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
 Helper.prototype.closePopupTrack = Helper_closePopupTrack;
@@ -72,20 +77,13 @@ Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.prototype.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
 
-Helper.prototype.insertTagsFromPopup = Helper_insertTagsFromPopup;
-Helper.prototype.insertTags = Helper_insertTags;
-
 Helper.prototype.insertTagsMediaCallbacks = Helper_insertTagsMediaCallbacks;
 Helper.prototype.insertTagsFromPopupMediaCallbacks = Helper_insertTagsFromPopupMediaCallbacks;
 
-Helper.prototype.insertInternalLink = Helper_insertInternalLink;
-Helper.prototype.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
-Helper.prototype.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
-Helper.prototype.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
-Helper.prototype.insertInternalLinkGlobalBoxes = Helper_insertInternalLinkGlobalBoxes;
-Helper.prototype.insertInternalLinkBoxes = Helper_insertInternalLinkBoxes;
-Helper.prototype.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
-Helper.prototype.showResponseStructuralTemplates = Helper_showResponseStructuralTemplates;
+Helper.prototype.processCallbacks = Helper_processCallbacks;
+Helper.prototype.showResponseProcessCallbacks = Helper_showResponseProcessCallbacks;
+Helper.prototype.callbacksInsert = Helper_callbacksInsert;
+
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.loaderChangeBlogCommentStatus = Helper_loaderChangeBlogCommentStatus;
 Helper.prototype.showResponseChangeBlogCommentStatus = Helper_showResponseChangeBlogCommentStatus;
@@ -96,8 +94,6 @@ Helper.prototype.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
 Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
-Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
-Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
@@ -147,29 +143,6 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 					Helper.getPagerPage();
 					this.url = this.parseMedEditPath + '?id=' + this.elem.id + '&pager_page=' + pager_page;
 				break;
-			case 'pages_internal_links' :
-					this.url = this.parsePagesLinksPath + '?target=' + this.elem.name;
-				break;
-			case 'pages_internal_links_NoHref' :
-					this.url = this.parsePagesLinksPath + '?target=' + this.elem.name + '&control=NoHref';
-				break;
-			case 'pages_boxes_internal_links' :
-					this.url = this.parsePagesBoxesLinksPath + '?target=' + this.elem.name;
-				break;
-			case 'globaltemplates_internal_links' :
-					Helper.getDelimiterValue();
-					this.url = this.parseGlobalTemplatesLinksPath + '?target=' + this.elem.name + '&delimiter=' + delimiter;
-				break;
-			case 'globalfiles_internal_links' :
-					Helper.getDelimiterValue();
-					this.url = this.parseGlobalFilesLinksPath + '?target=' + this.elem.name + '&delimiter=' + delimiter;
-				break;
-			case 'globalboxes_internal_links' :
-					this.url = this.parseGlobalBoxesLinksPath + '?target=' + this.elem.name;
-				break;
-			case 'structuraltemplates_internal_links' :
-					this.url = this.parseStructuralTemplatesLinksPath + '?target=' + this.elem.name;
-				break;
 		}
 		// properties
 		this.targetUrl = this.url;
@@ -188,6 +161,9 @@ function Helper_launchPopup (width, height, wname, trigger, elem)
 	}
 }
 
+
+
+
 function Helper_getTextConverterValue ()
 {
 	try {		
@@ -203,24 +179,95 @@ function Helper_getTextConverterValue ()
 			}
 			text_converter = _text_converter;
 		} else {
-			text_converter = '';
+			text_converter = 0;
 		}
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
-function Helper_getSelectionText()
+function Helper_getSelectionText(el)
 {
 	try {
-		var txtarea = $(form_target);
+		if (el) {
+			// used within callacks
+			var txtarea = el.replace(/^(_)(.+$)/, '$2');
+		} else {
+			// used within mediamanager callacks
+			var txtarea = form_target;
+		}
 
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;
+			text = theSelection;
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
 	 		var startPos = txtarea.selectionStart;
 			var endPos = txtarea.selectionEnd;
 			text = (txtarea.value).substring(startPos, endPos);
+		} else {
+			text = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Change delimiter on given form value.
+ * <br />
+ * In some cases it is required to change the delimiter to avoid syntax
+ * conflicts while inserting references (e.g. working with cascading
+ * style sheets or javascript, which uses brackets also).
+ * 
+ * @see #launchPopup
+ * @throws applyError on exception
+ */
+function Helper_getDelimiterValue()
+{
+	try {
+		if ($('global_template_change_delimiter')) {
+			delimiter = $F('global_template_change_delimiter');
+		} else {
+			delimiter = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Get the current pager_page value.
+ * <br />
+ * This is needed for Media Manager action popups (<em>upload</em>, <em>edit</em>)
+ * which supposed to refresh the content display on close of popup.
+ * 
+ * @see #launchPopup
+ * @throws applyError on exception
+ */
+function Helper_getPagerPage()
+{
+	try {
+		if($('pager_page_container')) {
+			pager_page = $('pager_page_container').firstChild.nodeValue;
+		} else {
+			pager_page = '';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+function Helper_getInsertType ()
+{
+	try {		
+		var insert_type_path = Helper.getAttr('action', document.getElementsByClassName('botbg')[0]);
+		insert_type = insert_type_path.replace(/^\/(.+)\/(.+)\/(.+$)/, '$2');
+		
+		if (insert_type == 'templating') {
+			insert_type = 'InternalReference';
+		}
+		else if (insert_type == 'content') {
+			insert_type = 'InternalLink';
 		}
 	} catch (e) {
 		_applyError(e);
@@ -657,16 +704,21 @@ function Helper_definePageY ()
  */
 function Helper_showNextNode(elem)
 {
-	try {
+	try {		
 		// get source node id from element
 		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
+			if (Helper.isBrowser('ie')) {
+				var nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
+			}
 		}
-		var url = this.parsePagesLinksPath;
-		var pars = 'id=' + elem.id +'&nextNode=' + nextNode + '&control=' + control;
+		var url = this.parseCallbacksFilePath + elem.name + '.php';
+		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
+		
+		
 		
 		if (nextNode == 'secondNode') {
 		var myAjax = new Ajax.Request(
@@ -713,8 +765,12 @@ function Helper_showNextNodeBoxes(elem)
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
 			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
+			if (Helper.isBrowser('ie')) {
+				var nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
+			}
 		}	
-		var url = this.parsePagesBoxesLinksPath;
+		//var url = this.parsePagesBoxesLinksPath;
+		var url = this.parseCallbacksFilePath + elem.name + '.php';
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
 		
 		if (nextNode == 'secondNode') {
@@ -760,11 +816,9 @@ function Helper_showResponsePagesSecondLinks(req)
 		Effect.Fade('indicator_pagesLinks', {duration: 0.4});
 		Effect.Appear('secondNode',{duration: 0.6});
 		$('secondNode').innerHTML = req.responseText;		
-		Behaviour.reapply('.act_setInternalLink');
-		Behaviour.reapply('.act_setInternalLinkNoHref');
-		Behaviour.reapply('.act_setInternalLinkBoxes');
-		Behaviour.reapply('.showNextNode');
-		Behaviour.reapply('.showNextNodeBoxes');
+		Behaviour.reapply('a.process_insert');
+		Behaviour.reapply('a.showNextNode');
+		Behaviour.reapply('a.showNextNodeBoxes');
 		
 	} catch (e) {
 		_applyError(e);
@@ -784,165 +838,9 @@ function Helper_showResponsePagesThirdLinks(req)
 		Effect.Fade('indicator_pagesLinks', {duration: 0.4});
 		Effect.Appear('thirdNode',{duration: 0.6});	
 		$('thirdNode').innerHTML = req.responseText;		
-		Behaviour.reapply('.act_setInternalLink');
-		Behaviour.reapply('.act_setInternalLinkNoHref');
-		Behaviour.reapply('.showNextNode');
+		Behaviour.reapply('a.process_insert');
+		Behaviour.reapply('a.showNextNode');
 		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Process inserting content from a popup.
- * <br />
- * Adapted from http://sourceforge.net/projects/wikipedia
- * 
- * @see #insertInternalLink
- * @see #insertInternalLinkNoHref
- * @see #insertInternalLinkGlobalTemplates
- * @see #insertInternalLinkGlobalFiles
- * @param {string} id Form element to populate
- * @param {string} str Opening part of build string
- * @param {string} tagClose Closing part of build string
- * @param {string} sampleText Text to set, when we use str and tagClose
- * @throws applyError on exception
- */
-function Helper_insertTagsFromPopup(id, str, tagClose, sampleText)
-{
-	try {
-		/*
-		We have to distinguish here, because the IE is obviously too dumb to differ between elements
-		which has the same value on different attributes (name, id). Here we have a conflict with
-		the form hidden field attribute. So we serve IE by object forms[elements], while all others
-		are able to use the standards (pointing the element by document.getElementById().
-		*/
-	 	if (Helper.isBrowser('ie')) {
-			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
-			var txtarea = opener.document.forms[_form_name].elements[id];
-		} else {
-			var txtarea = opener.$(id);
-		}
-		
-		// IE
-		if(opener.document.selection) {
-			var theSelection = opener.document.selection.createRange().text;
-			if(!theSelection) { theSelection=sampleText;}
-			txtarea.focus();
-			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
-				theSelection = theSelection.substring(0, theSelection.length - 1);
-				opener.document.selection.createRange().text = str + theSelection + tagClose + " ";
-			} else {
-				opener.document.selection.createRange().text = str + theSelection + tagClose;
-			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
-		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
-	 		var startPos = txtarea.selectionStart;
-			var endPos = txtarea.selectionEnd;
-			var scrollTop=txtarea.scrollTop;
-			var myText = (txtarea.value).substring(startPos, endPos);
-			if(!myText) { myText=sampleText;}
-			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = str + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
-			} else {
-				subst = str + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
-			txtarea.focus();
-			var cPos=startPos+(str.length+myText.length+tagClose.length);
-			txtarea.selectionStart=cPos;
-			txtarea.selectionEnd=cPos;
-			//txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += str + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			str=str.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			opener.document.infoform.infobox.value=str+sampleText+tagClose;
-			txtarea.focus();
-		}
-		// reposition cursor if possible
-		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Process inserting content.
- * <br />
- * Adapted from http://sourceforge.net/projects/wikipedia
- * 
- * @see #insertInternalLink
- * @see #insertInternalLinkNoHref
- * @see #insertInternalLinkGlobalTemplates
- * @see #insertInternalLinkGlobalFiles
- * @param {string} id Form element to populate
- * @param {string} str Opening part of build string
- * @param {string} tagClose Closing part of build string
- * @param {string} sampleText Text to set, when we use str and tagClose
- * @throws applyError on exception
- */
-function Helper_insertTags(id, str, tagClose, sampleText)
-{
-	try {
-		/*
-		We have to distinguish here, because the IE is obviously too dumb to differ between elements
-		which has the same value on different attributes (name, id). Here we have a conflict with
-		the form hidden field attribute. So we serve IE by object forms[elements], while all others
-		are able to use the standards (pointing the element by document.getElementById().
-		*/
-	 	if (Helper.isBrowser('ie')) {
-			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
-			var txtarea = document.forms[_form_name].elements[id];
-		} else {
-			var txtarea = $(id);
-		}
-		// IE
-		if(document.selection) {
-			var theSelection = document.selection.createRange().text;
-			if(!theSelection) { theSelection=sampleText;}
-			txtarea.focus();
-			if(theSelection.charAt(theSelection.length - 1) == " "){// exclude ending space char, if any
-				theSelection = theSelection.substring(0, theSelection.length - 1);
-				document.selection.createRange().text = str + theSelection + tagClose + " ";
-			} else {
-				document.selection.createRange().text = str + theSelection + tagClose;
-			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
-		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
-	 		var startPos = txtarea.selectionStart;
-			var endPos = txtarea.selectionEnd;
-			var scrollTop=txtarea.scrollTop;
-			var myText = (txtarea.value).substring(startPos, endPos);
-			if(!myText) { myText=sampleText;}
-			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = str + myText.substring(0, (myText.length - 1)) + tagClose + " "; 
-			} else {
-				subst = str + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
-			txtarea.focus();
-			var cPos=startPos+(str.length+myText.length+tagClose.length);
-			txtarea.selectionStart=cPos;
-			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += str + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			str=str.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			document.infoform.infobox.value=str+sampleText+tagClose;
-			txtarea.focus();
-		}
-		// reposition cursor if possible
-		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -988,34 +886,19 @@ function Helper_insertTagsMediaCallbacks(id, str)
 			} else {
 				document.selection.createRange().text = str + theSelection;
 			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		// Mozilla
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
 	 		var startPos = txtarea.selectionStart;
 			var endPos = txtarea.selectionEnd;
 			var scrollTop=txtarea.scrollTop;
 			var myText = (txtarea.value).substring(startPos, endPos);
 			subst = str;
-			/*if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = str + myText.substring(0, (myText.length - 1)) + " "; 
-			} else {
-				subst = str; 
-			}*/
 			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
 			txtarea.focus();
 			var cPos=startPos+(str.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += str + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			str=str.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			document.infoform.infobox.value=str;
-			txtarea.focus();
+			//txtarea.scrollTop=scrollTop;
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
@@ -1064,33 +947,19 @@ function Helper_insertTagsFromPopupMediaCallbacks(id, str)
 			} else {
 				opener.document.selection.createRange().text = str + theSelection;
 			}
-		// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable
+		// Mozilla
 		} else if(txtarea.selectionStart || txtarea.selectionStart == '0') {
 	 		var startPos = txtarea.selectionStart;
 			var endPos = txtarea.selectionEnd;
 			var scrollTop=txtarea.scrollTop;
 			var myText = (txtarea.value).substring(startPos, endPos);
-			if(myText.charAt(myText.length - 1) == " "){ // exclude ending space char, if any
-				subst = str + myText.substring(0, (myText.length - 1)) + " "; 
-			} else {
-				subst = str + myText; 
-			}
+			subst = str;
 			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
 			txtarea.focus();
 			var cPos=startPos+(str.length+myText.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
 			//txtarea.scrollTop=scrollTop;
-		// All others
-		} else {
-			// Append at the end: Some people find that annoying
-			//txtarea.value += str + sampleText + tagClose;
-			//txtarea.focus();
-			var re=new RegExp("\\n","g");
-			str=str.replace(re,"");
-			tagClose=tagClose.replace(re,"");
-			document.infoform.infobox.value=str;
-			txtarea.focus();
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
@@ -1100,180 +969,145 @@ function Helper_insertTagsFromPopupMediaCallbacks(id, str)
 }
 
 /**
- * Insert internal page reference into content.
+ * Process and handle internal callbacks.
  * <br />
- * We build a string with required syntax to deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
+ * Depending on the delivered mime_type we need to launch a popup or 
+ * simple fire a ajax.request to return the wcom_plugin callbacks.
  * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
+ * @see #showResponseProcessMediaCallbacks
+ * @param {string} elem Current elem to process
  * @throws applyError on exception
  */
-function Helper_insertInternalLink(elem)
+function Helper_processCallbacks (elem)
 {
 	try {
-		var build;
-		build = '<a href="';
-		build += elem.id;
-		build += '">';
+		// properties
+		this.elem = elem;
+		this.elName = this.elem.name;
+		this.elTarget = Helper.getAttrNextSibling('id', this.elem, 1);
 		
-		strStart = build;
-		strEnd = '</a>';
+		this.targetHeight = this.callbacksPopupWindowHeight634;
+		this.targetName = this.elTarget;
 		
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		Helper.lowerOpacity();
 		
-		Helper.insertTagsFromPopup(_formTarget, strStart, strEnd, describeLink);
-	
-		Helper.closeLinksPopup();
+		// used to differ between the popup window width
+		var win_names = {
+			'pages_links': this.callbacksPopupWindowWidth745,
+			'structuraltemplates_links': this.callbacksPopupWindowWidth420,
+			'globalboxes_links': this.callbacksPopupWindowWidth420,
+			'globalfiles_links': this.callbacksPopupWindowWidth420,
+			'globaltemplates_links': this.callbacksPopupWindowWidth420,
+			'boxes_links': this.callbacksPopupWindowWidth745
+		};
+
+		// temp var to further process
+		var _width = this.elTarget;
+		
+		// execute url target width definition
+		for (placeholder in win_names) {
+			var n = new RegExp(placeholder, 'gi');
+			_width = _width.replace(n, win_names[placeholder]);
+			this.targetWidth = _width;
+		};
+		
+		// path definitions for url
+		var url_paths = {
+			'pages_links': 'content',
+			'structuraltemplates_links': 'content',
+			'globalboxes_links': 'templating',
+			'globalfiles_links': 'templating',
+			'globaltemplates_links': 'templating',
+			'boxes_links': 'templating'
+		};
+		
+		// temp var to further process
+		var _path = this.elTarget;
+		
+		// execute url paths definition
+		for (placeholder in url_paths) {
+			var n = new RegExp(placeholder, 'gi');
+			_path = _path.replace(n, url_paths[placeholder]);
+			this.url = '../' + _path + '/' + this.parseCallbacksFilePath + this.elTarget;
+		};
+			
+		// process the callbacks	
+		// grab enviroment variables 
+		Helper.getDelimiterValue();
+		Helper.getSelectionText(this.elName);
+		Helper.getTextConverterValue();
+		Helper.getPagerPage();
+		Helper.getInsertType();
+
+		// hash the returned variables
+		var getElems = {
+			id : this.elem.id,
+			form_target : this.elName,
+			delimiter : delimiter,
+			text : text,
+			text_converter : text_converter,
+			pager_page : pager_page,
+			insert_type : insert_type
+		};
+		var o = $H(getElems);
+		var reqString = o.toQueryString();
+						
+		this.url = this.url + '.php' + '?' + reqString;	
+		this.targetUrl = this.url;
+		this.target = window.open(this.targetUrl, this.targetName, 
+				"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
+		this.resWidth = Helper.defineWindowX(this.targetWidth);
+		this.resHeight = Helper.defineWindowY();
+
+		this.target.moveBy(this.resWidth, this.resHeight);
+		this.target.focus();		
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
 /**
- * Insert internal page reference into content.
+ * Populate on XMLHttpRequest response.
  * <br />
- * Get the element id content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
- * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
+ * Insert the callback result string.
+ *
+ * @see #processMediaCallbacks
+ * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
-function Helper_insertInternalLinkNoHref(elem)
+function Helper_callbacksInsert(elem)
 {
 	try {
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		// properties
+		this.elem = elem;
 		
-		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert internal globaltemplates reference into content.
- * <br />
- * Get the element id content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
- * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
- * @throws applyError on exception
- */
-function Helper_insertInternalLinkGlobalTemplates(elem)
-{
-	try {
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
+		// hash collected variables
+		var getElems = {
+			id : this.elem.id,
+			form_target : form_target,
+			delimiter : delimiter,
+			text : text,
+			text_converter : text_converter,
+			pager_page : pager_page,
+			insert_type : insert_type,
+			type : this.elem.name,
+			posting_id : (this.elem.name == 'blog_posting') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
+			year : (this.elem.name == 'archive_year' || this.elem.name == 'archive_month')
+			 			? Helper.getAttrNextSibling('id', this.elem, 1) : '',
+			month : (this.elem.name == 'archive_month') ? Helper.getAttrNextSibling('id', this.elem, 2) : ''
+		};
+		var o = $H(getElems);
+		var reqString = o.toQueryString();
 		
-		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');	
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert internal globalfiles reference into content.
- * <br />
- * Get the element id content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
- * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
- * @throws applyError on exception
- */
-function Helper_insertInternalLinkGlobalFiles(elem)
-{
-	try {
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
-		
-		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert internal global box reference into content.
- * <br />
- * Get the element id content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
- * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
- * @throws applyError on exception
- */
-function Helper_insertInternalLinkGlobalBoxes(elem)
-{
-	try {
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
-		
-		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Insert internal page box reference into content.
- * <br />
- * Get the element id content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
- * 
- * @see #insertTagsFromPopup
- * @param {var} elem Current element
- * @throws applyError on exception
- */
-function Helper_insertInternalLinkBoxes(elem)
-{
-	try {
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
-		
-		Helper.insertTagsFromPopup(_formTarget, elem.id, '', '');
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Get internal structure templates reference.
- * <br />
- * Get the appropriate content and populate it unseen into a special,
- * original tag (see {@link #showResponseStructuralTemplates}) within
- * the html markup.
- * 
- * @see #showResponseStructuralTemplates
- * @param {var} elem Current element
- * @throws applyError on exception
- */
-function Helper_insertInternalLinkStructuralTemplates(elem)
-{
-	try {		
-		var url = this.parseStructuralTemplatesLinksPath;
-		var pars = 'id=' + elem.id;
+		var url = this.parseCallbacksPath;
+		var pars = reqString;
 
 		var myAjax = new Ajax.Request(
 			url,
 			{
-				method : 'get',
+				method : 'post',
 				parameters : pars,
-				onComplete : Helper.showResponseStructuralTemplates
+				onComplete : Helper.showResponseProcessCallbacks
 			});
 	} catch (e) {
 		_applyError(e);
@@ -1281,32 +1115,20 @@ function Helper_insertInternalLinkStructuralTemplates(elem)
 }
 
 /**
- * Process and insert XMLHttpRequest response into content.
+ * Populate on XMLHttpRequest response.
  * <br />
- * First we fetch the response with the surrounding html comment tag.
- * This is because we are working with markup, so this has to be distinctive.
- * Then we extract the proper content, deliver it to {@link #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var <em>formTarget</em> comes from the html markup.
+ * Insert the callback result string.
  *
- * @see #insertInternalLinkStructuralTemplates
+ * @see #processMediaCallbacks
  * @param {object} req XMLHttpRequest response
  * @throws applyError on exception
  */
-function Helper_showResponseStructuralTemplates(req)
+function Helper_showResponseProcessCallbacks(req)
 {
-	try {		
-		// filter responseText on html element
-		var extract = req.responseText.match(/(<!--\s+<span id="template_content">)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/gm);
-		
-		// strip the html element, get raw content
-		var raw_content = String(extract).replace(/(.*?)(>)((.|\t|\r|\n)*)(<\/span>\s+\/\/-->)/, "$3");
-		
-		// purge global form var
-		var _formTarget = formTarget.replace(/^(_)(.+$)/, '$2');
-		
-		Helper.insertTagsFromPopup(_formTarget, raw_content, '', '');
-		Helper.closeLinksPopup();					
+	try {
+		var _form_target = form_target.replace(/^(_)(.+$)/, '$2');
+		Helper.insertTagsFromPopupMediaCallbacks(_form_target, req.responseText);
+		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1542,51 +1364,6 @@ function Helper_confirmDelTplGlobalfileAction(elem)
 }
 
 /**
- * Change delimiter on given form value.
- * <br />
- * In some cases it is required to change the delimiter to avoid syntax
- * conflicts while inserting references (e.g. working with cascading
- * style sheets or javascript, which uses brackets also).
- * 
- * @see #launchPopup
- * @throws applyError on exception
- */
-function Helper_getDelimiterValue()
-{
-	try {
-		if ($('global_template_change_delimiter')) {
-			delimiter = $F('global_template_change_delimiter');
-		} else {
-			delimiter = '';
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
- * Get the current pager_page value.
- * <br />
- * This is needed for Media Manager action popups (<em>upload</em>, <em>edit</em>)
- * which supposed to refresh the content display on close of popup.
- * 
- * @see #launchPopup
- * @throws applyError on exception
- */
-function Helper_getPagerPage()
-{
-	try {
-		if($('pager_page_container')) {
-			pager_page = $('pager_page_container').firstChild.nodeValue;
-		} else {
-			pager_page = '';
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-/**
  * Getter for parent node attribute.
  *
  * @param {string} attr Given attribute to use
@@ -1665,8 +1442,8 @@ function Helper_getAttrNextSibling (attr, elem, level)
 {
 	this.browser = _setBrowserString();
 	
-	if (this.browser == 'ie')
-		level-- ;
+	/*if (this.browser == 'ie')
+		level-- ;*/
 
 	for (var a = elem; level > 0; level--) {
 		a = a.nextSibling;
@@ -1761,7 +1538,7 @@ function Helper_URLify (string)
 		Helper.trim(string);
 	
 		// definitions for char normalization
-		normalizations = {
+		var normalizations = {
 			// german
 			'ä': 'ae',
 			'ö': 'oe',
@@ -1777,9 +1554,9 @@ function Helper_URLify (string)
 		};
 	
 		// execute char normalization
-		for (char in normalizations) {
-			r = new RegExp(char, 'gi');
-			string = string.replace(r, normalizations[char]);
+		for (placeholder in normalizations) {
+			var r = new RegExp(placeholder, 'gi');
+			string = string.replace(r, normalizations[placeholder]);
 		};
 	
 		// remove everything except a-z, 0-9 and hyphens and replace it with a hyphen 

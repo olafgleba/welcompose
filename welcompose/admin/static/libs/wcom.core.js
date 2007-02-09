@@ -247,12 +247,17 @@ function Base ()
 		/**
 		 * Comprehensive popup width application wide
 		 */
-		this.callbacksPopupWindowWidth = '745';
+		this.callbacksPopupWindowWidth745 = '745';
 		
 		/**
-		 * Comprehensive popup height wide
+		 * Comprehensive width application wide
 		 */
-		this.callbacksPopupWindowHeight = '634';
+		this.callbacksPopupWindowWidth420 = '420';
+		
+		/**
+		 * Comprehensive popup height application wide
+		 */
+		this.callbacksPopupWindowHeight634 = '634';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.
@@ -292,14 +297,10 @@ function Base ()
 		this.parseMedDeletePath = '../mediamanager/mediamanager_delete.php';
 		this.parseMedCastsPath = '../mediamanager/mediamanager_media_to_podcast.php';
 		this.parseMedDiscCastsPath = '../mediamanager/mediamanager_discard_podcast.php';
-		this.parseMedCallbackInsertPath = '../mediamanager/callbacks_insert_';
-		this.parsePagesLinksPath = '../content/pages_links_select.php';
-		this.parsePagesBoxesLinksPath = '../templating/pages_boxes_links_select.php';
-		this.parseGlobalTemplatesLinksPath = '../templating/globaltemplates_links_select.php';
-		this.parseGlobalFilesLinksPath = '../templating/globalfiles_links_select.php';
-		this.parseGlobalBoxesLinksPath = '../templating/globalboxes_links_select.php';
+		this.parseMedCallbacksFilePath = '../mediamanager/callbacks_insert_';		
+		this.parseCallbacksFilePath = 'callbacks_insert_';
+		this.parseCallbacksPath = '../callbacks.php';
 		this.parseBlogCommmentStatusChangePath = '../community/blogcomments_statuschange.php';
-		this.parseStructuralTemplatesLinksPath = '../content/structuraltemplates_links_select.php';
 		this.validatePath = '../validate.js.php';
 	} catch (e) {
 		_applyError(e);
@@ -544,8 +545,8 @@ function Init_getVars ()
 				Effect.Fade('rp', {duration: 0.6, delay: 1.2});
 			}
 		}
-		if (typeof callback_result != 'undefined' && callback_result != '') {
-				Mediamanager.processFromPopupMediaCallbacks(callback_result);
+		if (typeof callback_media_result != 'undefined' && callback_media_result != '') {
+				Mediamanager.processFromPopupMediaCallbacks(callback_media_result);
 		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {

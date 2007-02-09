@@ -1023,6 +1023,9 @@ public function genericTypesToMimeTypes ($generic_type)
 				'rtf' => 'application/rtf',
 				'xls' => 'application/vnd.ms-excel',
 				'ppt' => 'application/vnd.ms-powerpoint',
+				'odt' => 'application/vnd.oasis.opendocument.text',
+				'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+				'odp' => 'application/vnd.oasis.opendocument.presentation',
 				'zip' => 'application/zip'
 			);
 		case 'audio':

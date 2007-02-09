@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_boxes_links_select.php
+ * File: callbacks_insert_globalfiles_links.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: pages_links_select.php 720 2006-12-09 09:52:38Z olaf $
+ * $Id$
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -77,13 +77,8 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load page class
-	/* @var $PAGE Content_Page */
-	$PAGE = load('Content:Page');
-	
-	// load box class
-	/* @var $BOX Content_Box */
-	$BOX = load('Content:Box');
+	// load global file class
+	$GLOBALFILE = load('Templating:GlobalFile');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -98,7 +93,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'Box', 'Use')) {
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -109,47 +104,28 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+
 	
-	// assign target field identifier
-	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
+	// collect callback parameters
+	$callback_params = array(
+		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
+		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
+		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
+		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
+	);
+		
+	// assign callbacks params
+	$BASE->utility->smarty->assign('callback_params', $callback_params);
+	
+	// get global files
+	$global_files = $GLOBALFILE->selectGlobalFiles();
+	$BASE->utility->smarty->assign('global_files', $global_files);
 	
 	// prepare template key
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	
-	// display template depending on the selection level
-	if (empty($_REQUEST['nextNode'])) {
-
-		// get boxes
-		$boxes = $BOX->selectBoxes();
-		
-		// get related pages
-		$pages = array();
-		foreach ($boxes as $_box) {
-			$pages[$_box['id']] = $PAGE->selectPage((int)$_box['page']);
-		}
-		$BASE->utility->smarty->assign('pages', $pages);
-			
-		// display the page
-		$BASE->utility->smarty->display('templating/pages_boxes_links_select.html', WCOM_TEMPLATE_KEY);
-		
-	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
-
-		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
-		
-		// get all related boxes
-		$select_params = array(
-			'page' => $page_id
-		);
-		$boxes = $BOX->selectBoxes($select_params);
-		$BASE->utility->smarty->assign('boxes', $boxes);
-		
-		// assign page id
-		$BASE->utility->smarty->assign('page_id', $page_id);
-		
-		// display the page
-		$BASE->utility->smarty->display('templating/pages_boxes_links_select_second.ajax.html', WCOM_TEMPLATE_KEY);
-		
-	}
+	$BASE->utility->smarty->display('templating/callbacks_insert_globalfiles_links.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();
@@ -162,7 +138,7 @@ try {
 	}
 	
 	// define new error_tpl
-	Base_Error::$_error_tpl = 'error_popup_723.html';
+	Base_Error::$_error_tpl = 'error_popup_403.html';
 	
 	// raise error
 	Base_Error::triggerException($BASE->utility->smarty, $e);	

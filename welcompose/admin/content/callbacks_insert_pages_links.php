@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_links_select.php
+ * File: callbacks_insert_pages_links.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -109,12 +109,19 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-	
-	// assign target field identifier
-	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
-	
-	// assign control var the distinguish js parsing
-	$BASE->utility->smarty->assign('control', Base_Cnc::filterRequest($_REQUEST['control'], WCOM_REGEX_ALPHANUMERIC));
+			
+	// collect callback parameters
+	$callback_params = array(
+		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
+		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
+		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
+		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
+	);
+		
+	// assign callbacks params
+	$BASE->utility->smarty->assign('callback_params', $callback_params);
 	
 	// prepare template key
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -137,7 +144,7 @@ try {
 		$BASE->utility->smarty->assign('page_arrays', $page_arrays);
 		
 		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/callbacks_insert_pages_links.html', WCOM_TEMPLATE_KEY);
 		
 	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
 		// at the moment, we know, that the only page type reaching level 2 or 3 is
@@ -160,7 +167,7 @@ try {
 		$BASE->utility->smarty->assign('page_id', $page_id);
 		
 		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select_second.ajax.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/callbacks_insert_pages_links_second.html', WCOM_TEMPLATE_KEY);
 		
 	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'thirdNode') {
 		// at the moment, we know, that the only page type reaching level 2 or 3 is
@@ -190,7 +197,7 @@ try {
 		$BASE->utility->smarty->assign('page_id', $page_id);
 		
 		// display the page
-		$BASE->utility->smarty->display('content/pages_links_select_third.ajax.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/callbacks_insert_pages_links_third.html', WCOM_TEMPLATE_KEY);
 	}
 	
 	// flush the buffer

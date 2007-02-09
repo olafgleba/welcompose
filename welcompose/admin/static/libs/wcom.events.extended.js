@@ -263,33 +263,9 @@ var definitions = {
 			return false;
 		}
 	},
-	'.act_internalLink' : function(el){
+	'a.insert' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkNoHref' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('740','634','pages_links_select','pages_internal_links_NoHref', this);
-			return false;
-		}
-	},
-	'.act_internalLinkGlobalTemplates' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','globaltemplates_links_select','globaltemplates_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkGlobalFiles' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','globalfiles_links_select','globalfiles_internal_links', this);
-			return false;
-		}
-	},
-	'.act_internalLinkStructuralTemplates' : function(el){
-		el.onclick = function(){
-			Helper.launchPopup('420','634','structuraltemplates_links_select','structuraltemplates_internal_links', this);
+			Helper.processCallbacks(this);
 			return false;
 		}
 	},

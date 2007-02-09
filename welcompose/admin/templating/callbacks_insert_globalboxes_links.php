@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_links_select.php
+ * File: callbacks_insert_globalboxes_links.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id$
+ * $Id: globaltemplates_links_select.php 720 2006-12-09 09:52:38Z olaf $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -77,9 +77,9 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load global template class
-	/* @var $GLOBALTEMPLATE Templating_GlobalTemplate */
-	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
+	// load Content_GlobalBox class
+	/* @var $GLOBALBOX Content_GlobalBox */
+	$GLOBALBOX = load('Content:GlobalBox');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -94,7 +94,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'GlobalBox', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -107,19 +107,26 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
 	
-	// assign target field identifier
-	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
-	
-	// assign delimiter field value
-	$BASE->utility->smarty->assign('delimiter', Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC));
+	// collect callback parameters
+	$callback_params = array(
+		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
+		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
+		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
+		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
+	);
+		
+	// assign callbacks params
+	$BASE->utility->smarty->assign('callback_params', $callback_params);
 	
 	// get global templates
-	$global_templates = $GLOBALTEMPLATE->selectGlobalTemplates();
-	$BASE->utility->smarty->assign('global_templates', $global_templates);
+	$global_boxes = $GLOBALBOX->selectGlobalBoxes();
+	$BASE->utility->smarty->assign('global_boxes', $global_boxes);
 	
 	// prepare template key
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('templating/globaltemplates_links_select.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('templating/callbacks_insert_globalboxes_links.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();

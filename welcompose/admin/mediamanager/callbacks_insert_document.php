@@ -103,11 +103,11 @@ try {
 
 	// execute text converter callback
 	$text_converter = Base_Cnc::filterRequest($_POST['text_converter'], WCOM_REGEX_NUMERIC);
-	$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Document', $args);
+	$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Document', $args);
 	
 	// return response
-	if (!empty($callback_result)) {
-		print $callback_result;
+	if (!empty($callback_media_result)) {
+		print $callback_media_result;
 	}
 
 	// flush the buffer

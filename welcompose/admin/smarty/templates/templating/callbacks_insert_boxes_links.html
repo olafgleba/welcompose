@@ -13,8 +13,12 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
-var formTarget = '{$target}';
-var control = '{$control}';
+var form_target = '{$callback_params.form_target}';
+var delimiter = '{$callback_params.delimiter}';
+var text = '{$callback_params.text}';
+var text_converter = '{$callback_params.text_converter}';
+var pager_page = '{$callback_params.pager_page}';
+var insert_type = '{$callback_params.insert_type}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -31,7 +35,7 @@ var control = '{$control}';
 
 <div id="modalContainer">
 <div id="pages">
-<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href"#">{i18n Close Window}</a></span></h2>
+<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href="#">{i18n Close Window}</a></span></h2>
 
 <div id="modalBody">
 <div id="firstNode">
@@ -39,10 +43,10 @@ var control = '{$control}';
 <tr>
 <td colspan="2"><strong>{i18n Pages}</strong></td>
 </tr>
-{foreach from=$pages item=_page}
+{foreach from=$pages_arrays item=_page}
 <tr>
 <td>{$_page.name|escape:"htmlall"}</td>
-<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" href="#" title="{i18n Display related boxes}">&nbsp;</a></td>
+<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#" title="{i18n Display related boxes}">&nbsp;</a></td>
 </tr>
 {/foreach}
 </table>

@@ -179,6 +179,7 @@ function Mediamanager_showElement (elem)
 		_applyError(e);
 	}
 }
+
 /**
  * Hide Media Manager element.
  * <br />
@@ -240,6 +241,7 @@ function Mediamanager_hideElement (elem)
 		_applyError(e);
 	}
 }
+
 /**
  * Simply switch layer (<em>myLocal</em>, <em>myFlickr</em>).
  *
@@ -291,25 +293,26 @@ function Mediamanager_checkOccurrences (elems, row)
 			var prefix = 'myFlickr_';
 		}
 		
-		var res = elems.match(/block/gi);	
-	
-		if (Mediamanager.isNull(res)) {
-			Element.setStyle(prefix + 'mm_content', {height: '413px'});
-			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '410px'});
+		var res = elems.match(/block/gi);
+		
+		//alert (res.length);
+				
+		if (!res) {
+			Element.setStyle(prefix + 'mm_content', {height: '412px'});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: '409px'});
+			countItems = 8;
 		} else {
 			switch (res.length) {
 				case 1 :
 						if (Mediamanager.isNumber(row) === true) {
-							var cHeight = '372px';
-							var pHeight = '369px';
+							var cHeight = '371px';
+							var pHeight = '368px';
 							countItems = 7;
 						} else {
 							var cHeight = '392px';
 							var pHeight = '389px';
 							countItems = 8;
 						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 2 :
 						if (Mediamanager.isNumber(row) === true) {
@@ -317,27 +320,19 @@ function Mediamanager_checkOccurrences (elems, row)
 							var pHeight = '348px';
 							countItems = 7;
 						} else {
-							var cHeight = '371px';
-							var pHeight = '368px';
+							var cHeight = '372px';
+							var pHeight = '369px';
 							countItems = 7;
 						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 					break;
 				case 3 :
-						if (Mediamanager.isNumber(row) === true) {
-							var cHeight = '330px';
-							var pHeight = '327px';
-							countItems = 6;
-						} else {
-							var cHeight = '350px';
-							var pHeight = '347px';
-							countItems = 6;
-						}
-						Element.setStyle(prefix + 'mm_content', {height: cHeight});
-						Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
+						var cHeight = '331px';
+						var pHeight = '328px';
+						countItems = 6;
 					break;		
 			}
+			Element.setStyle(prefix + 'mm_content', {height: cHeight});
+			Element.setStyle(prefix + 'mm_contentToPopulate', {height: pHeight});
 		}
 	} catch (e) {
 		_applyError(e);
@@ -894,7 +889,7 @@ function Mediamanager_showResponseInvokeTagInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		Forms.setOnEvent($('mm_tags'), '','#0c3','dotted');	
+		Forms.setOnEvent($('mm_tags'), '','#ff620d','dotted');	
 		$('mm_tags').focus();
 			
 		Mediamanager.applyBehaviour();
@@ -969,8 +964,8 @@ function Mediamanager_processMediaCallbacks (elem)
 		this.elem = elem;
 		this.elName = this.elem.name;
 		this.popup = false;
-		this.targetWidth = this.callbacksPopupWindowWidth;
-		this.targetHeight = this.callbacksPopupWindowHeight;
+		this.targetWidth = this.callbacksPopupWindowWidth745;
+		this.targetHeight = this.callbacksPopupWindowHeight634;
 		this.targetName = 'mm_' + this.elName;
 		
 		/*
@@ -1013,7 +1008,7 @@ function Mediamanager_processMediaCallbacks (elem)
 			
 			if (this.popup) {
 				Helper.lowerOpacity();				
-				this.url = this.parseMedCallbackInsertPath + this.elem.name + '.php' + '?' + reqString;
+				this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php' + '?' + reqString;
 				this.targetUrl = this.url;
 				this.target = window.open(this.targetUrl, this.targetName, 
 						"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
@@ -1023,7 +1018,7 @@ function Mediamanager_processMediaCallbacks (elem)
 				this.target.moveBy(this.resWidth, this.resHeight);
 				this.target.focus();
 			} else {		
-				this.url = this.parseMedCallbackInsertPath + this.elem.name + '.php';
+				this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php';
 				var url = this.url;
 				var pars = reqString;
 	
@@ -1067,13 +1062,13 @@ function Mediamanager_showResponseProcessMediaCallbacks(req)
  * @see Helper#insertTagsFromPopupMediaCallbacks
  * @param {string} elem Current elem to process
  * @param {global} form_target Current saved form target
- * @param {global} callback_result Current result set
+ * @param {global} callback_media_result Current result set
  * @throws applyError on exception
  */
 function Mediamanager_processFromPopupMediaCallbacks (elem)
 {
 	try {
-		Helper.insertTagsFromPopupMediaCallbacks(form_target, callback_result);
+		Helper.insertTagsFromPopupMediaCallbacks(form_target, callback_media_result);
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1426,7 +1421,7 @@ function Mediamanager_showResponseInvokeTagsMyFlickr(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 		
-		Forms.setOnEvent($('mm_flickrtags'), '','#0c3','dotted');
+		Forms.setOnEvent($('mm_flickrtags'), '','#ff620d','dotted');	
 		$('mm_flickrtags').focus();
 		
 		Mediamanager.applyBehaviour();

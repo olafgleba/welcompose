@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: globalfiles_links_select.php
+ * File: callbacks_insert_structuraltemplates_links.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -77,8 +77,12 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load global file class
-	$GLOBALFILE = load('Templating:GlobalFile');
+	// load structural template class
+	$STRUCTURALTEMPLATE = load('Content:StructuralTemplate');
+	
+	// load navigation class
+	/* @var $NAVIGATION Content_Navigation */
+	$NAVIGATION = load('Content:Navigation');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -93,7 +97,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
+	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -105,20 +109,30 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
+	// collect callback parameters
+	$callback_params = array(
+		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
+		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
+		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
+		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
+	);
+		
+	// assign callbacks params
+	$BASE->utility->smarty->assign('callback_params', $callback_params);
 	
-	// assign target field identifier
-	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
+	// assign template content 
+/*	if (!empty($_REQUEST['id'])) {
+		$template = $STRUCTURALTEMPLATE->selectStructuralTemplate(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+		$BASE->utility->smarty->assign('template', $template);
+	}*/
 	
-	// assign delimiter field value
-	$BASE->utility->smarty->assign('delimiter', Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC));
+	// get structural templates
+	$structural_templates = $STRUCTURALTEMPLATE->selectStructuralTemplates();
+	$BASE->utility->smarty->assign('structural_templates', $structural_templates);
 	
-	// get global files
-	$global_files = $GLOBALFILE->selectGlobalFiles();
-	$BASE->utility->smarty->assign('global_files', $global_files);
-	
-	// prepare template key
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('templating/globalfiles_links_select.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('content/callbacks_insert_structuraltemplates_links.html');
 	
 	// flush the buffer
 	@ob_end_flush();

@@ -181,10 +181,10 @@ try {
 	
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
+		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
 		
 		// assign callback build
-		$BASE->utility->smarty->assign('callback_result', $callback_result);
+		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);
 	}
 	
 	// assign current user and project id

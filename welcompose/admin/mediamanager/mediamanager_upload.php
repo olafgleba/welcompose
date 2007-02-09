@@ -94,15 +94,6 @@ try {
 		throw new Exception("Access denied");
 	}
 	
-	// default media types
-	$types = array (
-		'image' => gettext('Image'),
-		'document' => gettext('Document'),
-		'audio' => gettext('Audio'),
-		'video' => gettext('Video'),
-		'other' => gettext('Other')
-	);
-	
 	// get pager_page value
 	if (!empty($_REQUEST['pager_page'])) {
 		$pager_page = Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC);

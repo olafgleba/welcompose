@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: structuraltemplates_links_select.php
+ * File: callbacks_insert_boxes_links.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id$
+ * $Id: pages_links_select.php 720 2006-12-09 09:52:38Z olaf $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -77,12 +77,13 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load structural template class
-	$STRUCTURALTEMPLATE = load('Content:StructuralTemplate');
+	// load page class
+	/* @var $PAGE Content_Page */
+	$PAGE = load('Content:Page');
 	
-	// load navigation class
-	/* @var $NAVIGATION Content_Navigation */
-	$NAVIGATION = load('Content:Navigation');
+	// load box class
+	/* @var $BOX Content_Box */
+	$BOX = load('Content:Box');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -97,7 +98,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -108,21 +109,56 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+	
+	// collect callback parameters
+	$callback_params = array(
+		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
+		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
+		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
+		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
+		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
+		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
+	);
+		
+	// assign callbacks params
+	$BASE->utility->smarty->assign('callback_params', $callback_params);
+	
+	// prepare template key
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	
+	// display template depending on the selection level
+	if (empty($_REQUEST['nextNode'])) {
 
-	// assign target field identifier
-	$BASE->utility->smarty->assign('target', Base_Cnc::filterRequest($_REQUEST['target'], WCOM_REGEX_CSS_IDENTIFIER));
-	
-	// assign template content 
-	if (!empty($_REQUEST['id'])) {
-		$template = $STRUCTURALTEMPLATE->selectStructuralTemplate(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
-		$BASE->utility->smarty->assign('template', $template);
+		// get boxes
+		$boxes = $BOX->selectBoxes();
+		
+		// get related pages
+		$pages_arrays = array();
+		foreach ($boxes as $_box) {
+			$pages_arrays[$_box['page']] = $PAGE->selectPage((int)$_box['page']);
+		}
+		$BASE->utility->smarty->assign('pages_arrays', $pages_arrays);
+				
+		// display the page
+		$BASE->utility->smarty->display('templating/callbacks_insert_boxes_links.html', WCOM_TEMPLATE_KEY);
+		
+	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
+
+		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
+		
+		// get all related boxes
+		$select_params = array(
+			'page' => $page_id
+		);
+		$boxes = $BOX->selectBoxes($select_params);
+		$BASE->utility->smarty->assign('boxes', $boxes);
+		
+		// assign page id
+		$BASE->utility->smarty->assign('page_id', $page_id);
+		
+		// display the page
+		$BASE->utility->smarty->display('templating/callbacks_insert_boxes_links_second.html', WCOM_TEMPLATE_KEY);	
 	}
-	
-	// get structural templates
-	$structural_templates = $STRUCTURALTEMPLATE->selectStructuralTemplates();
-	$BASE->utility->smarty->assign('structural_templates', $structural_templates);
-	
-	$BASE->utility->smarty->display('content/structuraltemplates_links_select.html');
 	
 	// flush the buffer
 	@ob_end_flush();
@@ -135,7 +171,7 @@ try {
 	}
 	
 	// define new error_tpl
-	Base_Error::$_error_tpl = 'error_popup_403.html';
+	Base_Error::$_error_tpl = 'error_popup_723.html';
 	
 	// raise error
 	Base_Error::triggerException($BASE->utility->smarty, $e);	

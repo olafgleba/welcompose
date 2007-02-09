@@ -29,13 +29,21 @@ class TextConverter_Markdown extends TextConverter_Xhtml
 
 public function mmInsertImage ($text, $src, $width, $height, $alt, $title)
 {
-	$tag = '![%4$s](%1$s "%5$s")';
+	$tag = '![%4$s](%1$s "%5$s")%6$s';
 	$html = sprintf($tag, $src, $width, $height, $alt, $title, $text);
 	
 	return $html;
 }
 
 public function mmInsertDocument ($text, $href)
+{
+	$tag = '[%2$s](%1$s)';
+	$html = sprintf($tag, $href, $text);
+	
+	return $html;
+}
+
+public function mmInsertInternalLink ($text, $href)
 {
 	$tag = '[%2$s](%1$s)';
 	$html = sprintf($tag, $href, $text);
