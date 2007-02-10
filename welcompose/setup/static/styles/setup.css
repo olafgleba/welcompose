@@ -44,14 +44,20 @@ background: #ff620d;
 #container {
 position: relative;
 width: 768px;
-min-height: 800px;
+min-height: 600px;
 background: #fff url(../img/bg_container.gif) 0 0 repeat-y;
 margin: 0 auto;
 text-align: left;
 }
 #container p.copyright {
-margin: 80px 20px 0 20px;
-padding-bottom: 20px;
+width: 723px;
+padding: 5px 5px 15px 5px;
+margin: 50px 20px 0 20px;
+border-top: 1px solid #ebebeb;
+}
+.fright {
+float: right;
+width: 200px;
 text-align: right;
 }
 #header {
