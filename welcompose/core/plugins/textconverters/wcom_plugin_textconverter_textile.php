@@ -51,6 +51,15 @@ public function mmInsertInternalLink ($text, $href)
 	return $html;
 }
 
+public function mmInsertFlickr ($text, $src, $href)
+{
+	$tag = '!%1$s!:"%2$s"%3$s';
+	
+	$html = sprintf($tag, $src, $href, $text);
+	
+	return $html;
+}
+
 public function apply ($str)
 {
 	// input check
