@@ -92,11 +92,9 @@ Mediamanager.prototype.showResponseInvokeInputs = Mediamanager_showResponseInvok
 Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseInvokeTagInputs;
 Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
-
 Mediamanager.prototype.processMediaCallbacks = Mediamanager_processMediaCallbacks;
 Mediamanager.prototype.processFromPopupMediaCallbacks = Mediamanager_processFromPopupMediaCallbacks;
 Mediamanager.prototype.showResponseProcessMediaCallbacks = Mediamanager_showResponseProcessMediaCallbacks;
-
 
 /**
  * MyFlickr methods
@@ -112,7 +110,8 @@ Mediamanager.prototype.initializeUserMyFlickr = Mediamanager_initializeUserMyFli
 Mediamanager.prototype.showResponseInvokeInputsMyFlickr = Mediamanager_showResponseInvokeInputsMyFlickr;
 Mediamanager.prototype.showResponseInvokeTagsMyFlickr = Mediamanager_showResponseInvokeTagsMyFlickr;
 Mediamanager.prototype.loaderMyFlickr = Mediamanager_loaderMyFlickr;
-Mediamanager.prototype.insertImageItemFlickr = Mediamanager_insertImageItemFlickr;
+Mediamanager.prototype.processMediaCallbacksFlickr = Mediamanager_processMediaCallbacksFlickr;
+Mediamanager.prototype.showResponseProcessMediaCallbacksFlickr = Mediamanager_showResponseProcessMediaCallbacksFlickr;
 
 
 /**
@@ -353,14 +352,12 @@ function Mediamanager_applyBehaviour ()
 		Behaviour.reapply('input');
 		Behaviour.reapply('a.mm_edit');
 		Behaviour.reapply('a.mm_insert');
+		Behaviour.reapply('a.mm_insertFlickr');
 		Behaviour.reapply('a.mm_upload');
 		Behaviour.reapply('a.mm_delete');
 		Behaviour.reapply('a.mm_cast');
 		Behaviour.reapply('a.pager');
 		Behaviour.reapply('a.pager_myFlickr');
-		Behaviour.reapply('a.mm_insertImageItem');
-		Behaviour.reapply('a.mm_insertImageItemFlickr');
-		Behaviour.reapply('a.mm_insertDocumentItem');
 		Behaviour.reapply('a.mm_myLocal');
 		Behaviour.reapply('a.mm_myFlickr');
 		Behaviour.reapply('#mm_include_types_wrap');
@@ -1048,7 +1045,7 @@ function Mediamanager_processMediaCallbacks (elem)
 function Mediamanager_showResponseProcessMediaCallbacks(req)
 {
 	try {
-		Helper.insertTagsMediaCallbacks(form_target, req.responseText);
+		Helper.insertTagsCallbacks(form_target, req.responseText);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1059,7 +1056,7 @@ function Mediamanager_showResponseProcessMediaCallbacks(req)
  * <br />
  * Return and insert the wcom_plugin callbacks.
  * 
- * @see Helper#insertTagsFromPopupMediaCallbacks
+ * @see Helper#insertTagsFromPopupCallbacks
  * @param {string} elem Current elem to process
  * @param {global} form_target Current saved form target
  * @param {global} callback_media_result Current result set
@@ -1068,7 +1065,7 @@ function Mediamanager_showResponseProcessMediaCallbacks(req)
 function Mediamanager_processFromPopupMediaCallbacks (elem)
 {
 	try {
-		Helper.insertTagsFromPopupMediaCallbacks(form_target, callback_media_result);
+		Helper.insertTagsFromPopupCallbacks(form_target, callback_media_result);
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1460,59 +1457,89 @@ function Mediamanager_loaderMyFlickr ()
  * @see Helper#insertTags
  * @throws applyError on exception
  */
-function Mediamanager_insertImageItemFlickr (elem)
+function Mediamanager_processMediaCallbacksFlickr (elem)
 {
 	try {
+		// properties
+		this.elem = elem;
+		this.elName = this.elem.name;
+		
+		// process the callbacks
 		if (typeof stored_focus == 'undefined') {
 			alert(selectTextarea); 
 		} else {
-			var target = stored_focus;
+			form_target = stored_focus;
 			
 			// collect values
-			var identify = elem.parentNode.parentNode;
+			var identify = this.elem.parentNode.parentNode;
 			
 			// get sizes
 			var sel_select = identify.getElementsByTagName('select')[0];			
 			var sel_select_value = sel_select.options[sel_select.selectedIndex].value;
 			
 			// URL to flickr photo page
-			var sel_hidden = identify.getElementsByTagName('input')[0].value;
+			var sel_url_photo_page = identify.getElementsByTagName('input')[0].value;
 					
 			// build strings 			
 			// preview URL
-			var source = elem.firstChild.src;
+			var source = this.elem.firstChild.src;
 			
-			// get rid of size suffix
+			// get rid off size suffix
 			var splitSource = source.split('_s');
+			
+			// grab enviroment variables
+			Helper.getTextConverterValue(); 
+			Helper.getSelectionText();
+			
+			// hash the returned variables
+			var getElems = {
+				text : text,
+				text_converter : text_converter,
+				src : splitSource[0] + sel_select_value + splitSource[1],
+				href : sel_url_photo_page
+				
+			};
+			var o = $H(getElems);
+			var reqString = o.toQueryString();
 			
 			// ensure selection has used
 			if (sel_select_value != 1) {
-				
-				//initialize vars
-				var buildSrc;
-				var buildHrefStart;
-				var buildHrefEnd;
-				var buildComplete;
-			
-				buildSrc = '<img src="';
-				buildSrc += splitSource[0] + sel_select_value + splitSource[1];
-				buildSrc += '" />';
-				buildHrefStart = '<a href="';
-				buildHrefStart += sel_hidden;
-				buildHrefStart += '">';
-				buildHrefEnd = '</a>';
-				
-				buildComplete = buildHrefStart + buildSrc + buildHrefEnd;
-				
-				var strStart = buildComplete;
 		
-				Helper.insertTags(target, strStart, '' , '');
+				this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php';
+				var url = this.url;
+				var pars = reqString;
+	
+				var myAjax = new Ajax.Request(
+					url,
+					{
+						method : 'post',
+						parameters : pars,
+						onComplete : Mediamanager.showResponseProcessMediaCallbacksFlickr
+					});
 				
 			 } else {
 				alert (alertOnSelectImageSize);
 			}
 		}
 		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on XMLHttpRequest response.
+ * <br />
+ * Insert the callback result string.
+ *
+ * @see #processMediaCallbacks
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Mediamanager_showResponseProcessMediaCallbacksFlickr (req)
+{
+	try {
+		Helper.insertTagsCallbacks(form_target, req.responseText);
 	} catch (e) {
 		_applyError(e);
 	}

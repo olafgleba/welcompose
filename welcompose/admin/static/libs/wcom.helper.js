@@ -77,8 +77,8 @@ Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.prototype.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
 
-Helper.prototype.insertTagsMediaCallbacks = Helper_insertTagsMediaCallbacks;
-Helper.prototype.insertTagsFromPopupMediaCallbacks = Helper_insertTagsFromPopupMediaCallbacks;
+Helper.prototype.insertTagsCallbacks = Helper_insertTagsCallbacks;
+Helper.prototype.insertTagsFromPopupCallbacks = Helper_insertTagsFromPopupCallbacks;
 
 Helper.prototype.processCallbacks = Helper_processCallbacks;
 Helper.prototype.showResponseProcessCallbacks = Helper_showResponseProcessCallbacks;
@@ -192,11 +192,12 @@ function Helper_getSelectionText(el)
 		if (el) {
 			// used within callacks
 			var txtarea = el.replace(/^(_)(.+$)/, '$2');
+			txtarea = $(txtarea);
 		} else {
 			// used within mediamanager callacks
-			var txtarea = form_target;
+			var txtarea = $(form_target);
 		}
-
+		
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;
 			text = theSelection;
@@ -861,7 +862,7 @@ function Helper_showResponsePagesThirdLinks(req)
  * @param {string} sampleText Text to set, when we use str and tagClose
  * @throws applyError on exception
  */
-function Helper_insertTagsMediaCallbacks(id, str)
+function Helper_insertTagsCallbacks(id, str)
 {
 	try {
 		/*
@@ -922,7 +923,7 @@ function Helper_insertTagsMediaCallbacks(id, str)
  * @param {string} sampleText Text to set, when we use str and tagClose
  * @throws applyError on exception
  */
-function Helper_insertTagsFromPopupMediaCallbacks(id, str)
+function Helper_insertTagsFromPopupCallbacks(id, str)
 {
 	try {
 		/*
@@ -1127,7 +1128,7 @@ function Helper_showResponseProcessCallbacks(req)
 {
 	try {
 		var _form_target = form_target.replace(/^(_)(.+$)/, '$2');
-		Helper.insertTagsFromPopupMediaCallbacks(_form_target, req.responseText);
+		Helper.insertTagsFromPopupCallbacks(_form_target, req.responseText);
 		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
@@ -1441,9 +1442,6 @@ function Helper_getAttr (attr, elem)
 function Helper_getAttrNextSibling (attr, elem, level)
 {
 	this.browser = _setBrowserString();
-	
-	/*if (this.browser == 'ie')
-		level-- ;*/
 
 	for (var a = elem; level > 0; level--) {
 		a = a.nextSibling;

@@ -240,8 +240,8 @@ try {
 	// execute text converter callback
 	$text_converter = Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC);
 	
-	// if no text_converter is set, fetch default
-	// make sure we have can fall back on default 
+	// if no text_converter is set fetch default
+	// make sure we can fall back on default 
 	if ($text_converter == '0') {
 		$text_converters = $TEXTCONVERTER->selectTextConverters();
 		

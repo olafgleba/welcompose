@@ -168,6 +168,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.mm_insertFlickr' : function(el){
+		el.onclick = function(){
+			Mediamanager.processMediaCallbacksFlickr(this);
+			return false;
+		}
+	},
 	'a.mm_delete' : function(el){
 		el.onclick = function(){
 			Mediamanager.deleteMediaItem(this);

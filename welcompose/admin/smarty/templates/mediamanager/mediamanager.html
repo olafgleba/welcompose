@@ -164,7 +164,7 @@
 <table class="mm_content">
 {foreach from=$photos.photos item=_photo}
 <tr>
-<td class="td_mm_media_flickr"><a class="mm_insertImageItemFlickr" href="#"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
+<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content}"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
 <td colspan="4">{$_photo.title|escape:"htmlall"}
 <select id="size" name="size">
 <option value="1">{i18n Image sizes...}</option>
