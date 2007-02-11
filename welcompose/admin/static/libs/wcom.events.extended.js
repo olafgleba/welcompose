@@ -301,27 +301,27 @@ var definitions = {
 	},
 	'.submit140' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator140.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator140.gif) no-repeat';
 		}
 	},
 	'.submit200' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
 	'.submit200bez260' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
 	'.submit240' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator240.gif) no-repeat';
 		}
 	},
 	'.submit240bez260' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator240.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator240.gif) no-repeat';
 		}
 	},
 	'#simple_page_meta_use' : function(el){

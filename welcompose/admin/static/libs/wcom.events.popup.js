@@ -91,7 +91,7 @@ var definitions = {
 	},
 	'.submit200upload' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 		el.onclick = function(){
 			/* needed for func closePopupTrack */
@@ -101,7 +101,7 @@ var definitions = {
 	},
 	'.submit200' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 		el.onclick = function(){
 			/* needed for func closePopupTrack */
@@ -110,7 +110,7 @@ var definitions = {
 	},
 	'.submit200insertcallback' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 		el.onclick = function(){
 			 /* needed for func closePopupTrack */
@@ -119,7 +119,7 @@ var definitions = {
 	},
 	'.cancel200' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 		el.onclick = function(){
 			Helper.closePopup(this);
@@ -128,7 +128,7 @@ var definitions = {
 	},
 	'.close200' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#0c3 url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 		el.onclick = function(){
 			Helper.closeLinksPopup(this);
