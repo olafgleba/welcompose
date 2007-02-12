@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <meta name="language" content="de" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta http-equiv="imagetoolbar" content="no" /> 
+  <title>Welcompose Update</title>
+  <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+
+<script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="parse/parse.js.php?file=wcom.setup.strings.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.core.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.helper.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.events.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.validation.js"></script>
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="header"> 
+
+<div id="logo">
+<p>Welcompose Update</p>
+<!-- logo --></div>
+
+{include file="_inc_navigation.html" on="database"}
+
+<!-- header --></div>
+
+<div id="content">
+
+<h1>Database</h1>
+
+<p>Now, it's time to update your database structure. The update script has
+determined which modifications have to be done. As soon as you press on
+<em>Start</em>, the database update process will begin. Please note that the
+update scripts may ask you some questions. Answer them to complete the update
+process.</p>
+
+<h2>Update tasks</h2>
+<table>
+<tr>
+<td class="extension">Task</td>
+<td class="status">Status</td>
+</tr>
+{foreach from=$tasks key=task item=file}
+<tr>
+<td>{$task}</td>
+<td>pending</td>
+</tr>
+{/foreach}
+</table>
+
+<!-- content --></div>
+
+{include file="_inc_footer.html"}
+<!-- container --></div>
+</body>
+</html>

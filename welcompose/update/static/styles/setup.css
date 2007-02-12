@@ -1,0 +1,486 @@
+* {
+margin: 0;
+padding: 0;
+}
+html, body, fieldset, a img {
+border: 0 none;
+}
+body {
+font: 95% Arial, Helvetica, sans-serif;
+color: #333;
+background: #d9d9d9 url(../img/bg_body.gif); 
+padding: 12px 0 0 0;
+text-align: center;
+}
+
+h1 {
+font-size: 2em;
+font-weight: normal;
+color: #ff620d;
+margin: 40px 0 15px 22px;
+}
+h2, p, a, li, th, td, select, label, input, legend {
+font-size: 0.80em;
+}
+p a, li a, th a, td a, label select, label input, label p, label span span a {
+font-size: 100%;
+} 
+a {
+text-decoration: none;
+}
+a:link, a:visited {
+color: #ff620d;
+background: transparent;
+}
+a:hover {
+color: #ff620d;
+background: transparent;
+text-decoration: underline;
+}
+a:active, a:focus {
+color: #fff;
+background: #ff620d;
+}
+#container {
+position: relative;
+width: 768px;
+min-height: 600px;
+background: #fff url(../img/bg_container.gif) 0 0 repeat-y;
+margin: 0 auto;
+text-align: left;
+}
+#container p.copyright {
+width: 723px;
+padding: 5px 5px 15px 5px;
+margin: 50px 20px 0 20px;
+border-top: 1px solid #ebebeb;
+}
+.fright {
+float: right;
+width: 200px;
+text-align: right;
+}
+#header {
+width: 768px;
+height: 170px;
+background: transparent url(../img/bg_header.gif) 0 0 no-repeat;
+}
+
+/* LOGO START */
+#logo {
+position: absolute;
+top: 25px;
+left: 508px;
+width: 235px;
+background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
+padding-top: 3px;
+}
+#logo p {
+color: #fff;
+background: #0c3;
+padding-left: 7px;
+padding-bottom: 3px;
+font-size: 25px;
+background: #ff620d url(../img/bg_logo_bot.gif) left bottom no-repeat;
+}
+/* LOGO STOP */
+
+/* TOPNAVIGATION START */
+#topnavcon {
+position: absolute;
+top: 170px;
+left: 153px;
+width: 600px;
+}
+#topnav {
+list-style: none;
+width: 600px;
+height: 1.5em;
+}
+#topnav li {
+position: relative;
+display: block;
+float: left;
+font-weight: bold;
+padding: 4px 0;
+width: 100px;
+text-align: center;
+}
+#topnav .one span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/one.gif) 0 0 no-repeat;
+}
+#topnav .two span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/two.gif) 0 0 no-repeat;
+}
+#topnav .three span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/three.gif) 0 0 no-repeat;
+}
+#topnav .four span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/four.gif) 0 0 no-repeat;
+}
+#topnav .five span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/five.gif) 0 0 no-repeat;
+}
+#topnav .six span {
+position: absolute;
+top: -60px;
+left: 25px;
+display: block;
+width: 49px;
+height: 49px;
+background: transparent url(../img/six.gif) 0 0 no-repeat;
+}
+#topnav li.on {
+color: #ff620d;
+}
+#topnav .on span {
+background-position: 0 -49px;
+}
+/* TOPNAVIGATION STOP */
+
+#content {
+margin: 19px;
+width: 730px;
+}
+#content p {
+margin: 0 120px 15px 22px;
+line-height: 130%;
+}
+
+
+/* %F =forms */
+form.botbg {
+width: 729px;
+padding: 40px 0;
+background: transparent url(../img/bg_fieldset_bot.gif) left bottom no-repeat;
+}
+fieldset.topbg {
+width: 729px;
+padding: 20px 10px 0 10px;
+background: transparent url(../img/bg_fieldset_top.gif) left top no-repeat;
+overflow: hidden;
+}
+fieldset.topbg h2, fieldset.within h2 {
+font-size: 1.0em;
+font-weight: normal;
+padding: 0 10px 0 15px;
+color: #ff620d;
+}
+label {
+display: block;
+height: 1.5em;
+line-height: 1.5em;
+width: 690px;
+margin: 5px 0 0 0;
+}
+label.cont {
+margin: 5px 0;
+padding: 18px 0 0 15px;
+height: 1.5em;
+}
+label span.bez {
+display: block; 
+float: left;
+width: 180px;
+}
+label span.req {
+color: #f00;
+}
+input.w300 {
+width: 130px;
+border: 1px solid #666;
+padding: 2px 2px;
+color: #000;
+background: #fff;
+}
+input.w300 {
+float: left;
+width: 300px;
+}
+
+select.multisel {
+width: 300px;
+border: 1px solid #666;
+}
+.flselect {
+margin: 1px 5px 0 0;
+padding: 0;
+border: 1px solid #666;
+}
+input.chbx {
+border-color: #666;
+}
+
+input.submit90,
+input.submit200,
+input.submit200nomargin {
+text-align: left;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+color: #fff;
+border: 0 none;
+padding: 0 0 2px 3px;
+cursor: pointer;
+}
+
+input.submit90 {
+background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
+width: 90px;
+}
+input.submit200 {
+background: #ff620d url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 192px;
+}
+input.submit200nomargin {
+background: #ff620d url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 14px;
+}
+
+
+.linkcon {
+display: block;
+margin: 20px 0 0 0;
+}
+.linkconfinish {
+display: block;
+margin: 30px 0 0 10px;
+}
+a.submit200:link, a.submit200:visited,
+a.submit200finish:link, a.submit200finish:visited  {
+position: relative;
+text-align: left;
+background: #ff620d url(../img/submit200.gif) no-repeat;
+color: #fff;
+width: 200px;
+height: 20px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 3px 106px 3px 8px;
+margin: 0 0 0 15px;
+cursor: pointer;
+}
+a.submit200finish:link, a.submit200finish:visited {
+padding-right: 95px;
+}
+a.submit200:hover, a.submit200:active,
+a.submit200finish:hover,a.submit200finish:active {
+text-decoration: none;
+}
+
+/* LICENCE */
+#licence {
+width: 680px;
+height: 350px;
+margin: 10px 10px 10px 14px;
+overflow: auto;
+}
+#licence p {
+padding: 0 0 8px 0;
+margin: 0;
+font-size: 0.80em;
+}
+#licence ol li ol li {
+font-size: 100%;
+list-style-type: lower-latin;
+padding: 8px 0 0 0;
+}
+#licence ol {
+list-style-position: inside;
+list-style-type: decimal;
+padding: 0 0 5px 0;
+}
+#licence ol li {
+padding: 0 0 8px 0;
+}
+#licence h2 {
+padding: 0 0 8px 0;
+margin: 0;
+}
+#licence span {
+text-decoration: underline;
+}
+/* LICENCE EOF */
+
+
+.marker_error {
+color: #f00;
+}
+.marker_warning {
+color: #f90;
+}
+.marker_fine {
+color: #0c3;
+}
+
+
+table {
+border-collapse: collapse;
+margin: 10px 10px 25px 15px;
+}
+table th {
+padding: 0 0 5px 0;
+}
+table td {
+padding: 4px 0 4px 0;
+border-bottom: 1px solid #efefef;
+}
+th, td {
+text-align: left;
+}
+table img {
+vertical-align: bottom;
+}
+table td.extension,
+table td.software {
+width: 535px;
+font-weight: bold;
+}
+table td.status {
+width: 20px;
+font-weight: bold;
+}
+table td.status_indicator {
+width: 80px;
+}
+table td.status_indicator_text {
+width: 300px;
+}
+
+
+/* %M =validate */
+#content span.validate {
+float: left;
+display: block; 
+width: 190px;
+height: 1.5em;
+line-height: 1.5em;
+padding-left: 5px;
+}
+#content span.validate img {
+vertical-align: middle;
+}
+
+
+/* %M =errors */
+#error {
+display: block;
+width: 650px;
+margin: 20px 50px 0 24px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+/* IE 6, IE 7 */
+* html #container #error, *+html #container #error {
+margin-top: 50px;
+}
+#error ul.req {
+line-height: 1.2em;
+padding: 4px 15px;
+font-weight: bold;
+color: #036;
+list-style-position: inside;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+/* %M =response */
+#rp {
+display: block;
+width: 710px;
+margin-top: 20px;
+background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
+}
+/* IE 6, IE 7 */
+* html #container #rp, #container *+html #rp {
+margin-top: 50px;
+}
+#rp h1 {
+margin: 0;
+padding: 10px 10px 0 10px;
+color: #036;
+}
+#rp p {
+margin: 0;
+padding: 0 10px 10px 10px;
+background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
+}
+
+/* error.html */
+body#errormsg h2 {
+position: relative;
+font-size: 1.0em;
+font-weight: normal;
+color: #000;
+margin: 30px 0 15px 22px;
+}
+body#errormsg h2 span {
+color: #ff620d;
+font-weight: bold;
+}
+
+/* HELP */
+#content p.help {
+display: block;
+line-height: 1.5em;
+width: 305px;
+margin: 0 0 10px 0;
+padding-left: 192px;
+}
+.iHelp a, .iHelpRemove a {
+background-color: transparent;
+text-decoration: none;
+}
+.iHelp a img, .iHelpRemove a img {
+vertical-align: middle;
+}
+
+#_socket {
+display: none;
+}
+
+
+/* CLEARFIX */
+.clearfix:after {
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+/* Hides from IE-mac \*/
+* html .clearfix { 
+height: 1%; 
+}
+/* End hide from IE-mac */

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+  <meta name="language" content="de" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <meta http-equiv="imagetoolbar" content="no" /> 
+  <title>Welcompose Update</title>
+  <link rel="stylesheet" type="text/css" href="static/styles/setup.css" media="screen, projection" />
+
+<script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="parse/parse.js.php?file=wcom.setup.strings.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.core.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.helper.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.events.js"></script>
+<script type="text/javascript" src="static/libs/wcom.setup.validation.js"></script>
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="header"> 
+
+<div id="logo">
+<p>Welcompose Update</p>
+<!-- logo --></div>
+
+{include file="_inc_navigation.html" on="requirements"}
+
+<!-- header --></div>
+
+<div id="content">
+
+<h1>Requirements</h1>
+<p>Please make sure that your webspace meets all the requirements. If any errors or warnings occur,
+please consult the install manual how to fix it. There are instructions how to tell you webspace
+provider about it too.</p>
+
+<p><strong>Attention</strong>: Please note that we're only checking the capabilities of PHP here. This test does not
+check if your database is new enough.</p> 
+
+{if !empty($form.errors)}
+<div id="error">
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<!-- error --></div>
+{/if}
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
+
+<fieldset class="topbg">
+
+{$form.hidden}
+
+<h2>Checking for available extensions</h2>
+<table>
+<tr>
+<td class="extension">Extension</td>
+<td class="status">Status</td>
+</tr>
+{foreach from=$extension_statuses key=_extension item=_status}
+<tr>
+<td>
+{$_extension|escape:"htmlall"}
+</td>
+<td class="marker_{$_status.marker|escape:"htmlall"}">
+{$_status.text|escape:"htmlall"}
+</td>
+</tr>
+{/foreach}
+</table>
+
+<h2>Checking for up-to-date versions</h2>
+<table>
+<tr>
+<td class="software">Software</td>
+<td class="status">Status</td>
+</tr>
+{foreach from=$software_statuses key=_software item=_status}
+<tr>
+<td>
+{$_software|escape:"htmlall"}
+</td>
+<td class="marker_{$_status.marker|escape:"htmlall"}">
+{$_status.text|escape:"htmlall"}
+</td>
+</tr>
+{/foreach}
+</table>
+
+<table>
+<tr>
+<td class="status_indicator marker_error">Red</td>
+<td class="status_indicator_text">Welcompose won't work</td>
+</tr>
+<tr>
+<td class="status_indicator marker_warning">Orange</td>
+<td class="status_indicator_text">Welcompose may work -- don't blame us for errors</td>
+</tr>
+<tr>
+<td class="status_indicator marker_fine">Green</td>
+<td class="status_indicator_text">Everything's fine</td>
+</tr>
+</table>
+
+{if $error_counter == 0}
+<div class="linkcon">
+<a href="backup.php" class="submit200">Go to next step</a>
+</div>
+{/if}
+
+</fieldset>
+</form>
+
+<!-- content --></div>
+
+{include file="_inc_footer.html"}
+<!-- container --></div>
+</body>
+</html>
