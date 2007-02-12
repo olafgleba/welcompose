@@ -58,6 +58,25 @@ try {
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
 	
+	// connect to database
+	$BASE->loadClass('database');
+	
+	// define major/minor task number
+	define('TASK_MAJOR', '0001');
+	define('TASK_MINOR', '002');
+	
+	// get schema version from database
+	$sql = "
+		SELECT
+			`schema_version`
+		FROM
+			".WCOM_DB_APPLICATION_INFO."
+		LIMIT
+			1
+	";
+	$version = $BASE->db->select($sql, 'field');
+	list($major, $minor) = explode('-', $version);
+	
 	/*
 	 * References
 	 * ----------
@@ -72,42 +91,48 @@ try {
 	 *   `sitemap_priority` decimal(2,1) UNSIGNED DEFAULT '0.5'
 	 *   `sitemap_changefreq` enum('always','hourly','daily','weekly','monthly','yearly','never') DEFAULT 'monthly'  
 	 */
-	try {
-		// connect to database
-		$BASE->loadClass('database');
+	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
+		try {
+			// begin transaction
+			$BASE->db->begin();
 		
-		// begin transaction
-		$BASE->db->begin();
+			// add new fields
+			$sql = "
+				ALTER TABLE
+					".WCOM_DB_CONTENT_PAGES."
+				ADD
+					`sitemap_priority` decimal(2,1) UNSIGNED DEFAULT '0.5'
+				AFTER
+					`image_big`
+			";
+			$BASE->db->execute($sql);
 		
-		// add new fields
-		$sql = "
-			ALTER TABLE
-				".WCOM_DB_CONTENT_PAGES."
-			ADD
-				`sitemap_priority` decimal(2,1) UNSIGNED DEFAULT '0.5'
-			AFTER
-				`image_big`
-		";
-		$BASE->db->execute($sql);
+			$sql = "
+				ALTER TABLE
+					".WCOM_DB_CONTENT_PAGES."
+				ADD
+					`sitemap_changefreq` enum('always','hourly','daily','weekly','monthly','yearly','never') DEFAULT 'monthly'
+				AFTER
+					`sitemap_priority`
+			";
+			$BASE->db->execute($sql);
+			
+			// update schema version
+			$sqlData = array(
+				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
+			);
+			
+			$BASE->db->update(WCOM_DB_APPLICATION_INFO, $sqlData);
+			
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
 		
-		$sql = "
-			ALTER TABLE
-				".WCOM_DB_CONTENT_PAGES."
-			ADD
-				`sitemap_changefreq` enum('always','hourly','daily','weekly','monthly','yearly','never') DEFAULT 'monthly'
-			AFTER
-				`sitemap_priority`
-		";
-		$BASE->db->execute($sql);
-		
-		// commit
-		$BASE->db->commit();
-	} catch (Exception $e) {
-		// do rollback
-		$BASE->db->rollback();
-		
-		// re-throw exception
-		throw $e;
+			// re-throw exception
+			throw $e;
+		}
 	}
 	
 	// display the form

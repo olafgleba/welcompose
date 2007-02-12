@@ -23,6 +23,7 @@
  */
 
 // application table aliases
+define("WCOM_DB_APPLICATION_INFO", "application_info");
 define("WCOM_DB_APPLICATION_PING_SERVICES", "application_ping_services");
 define("WCOM_DB_APPLICATION_PING_SERVICE_CONFIGURATIONS", "application_ping_service_configurations");
 define("WCOM_DB_APPLICATION_PROJECTS", "application_projects");

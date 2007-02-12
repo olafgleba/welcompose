@@ -58,6 +58,25 @@ try {
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
 	
+	// connect to database
+	$BASE->loadClass('database');
+	
+	// define major/minor task number
+	define('TASK_MAJOR', '0001');
+	define('TASK_MINOR', '001');
+	
+	// get schema version from database
+	$sql = "
+		SELECT
+			`schema_version`
+		FROM
+			".WCOM_DB_APPLICATION_INFO."
+		LIMIT
+			1
+	";
+	$version = $BASE->db->select($sql, 'field');
+	list($major, $minor) = explode('-', $version);
+	
 	/*
 	 * References
 	 * ----------
@@ -75,51 +94,57 @@ try {
 	 *    business becomes BusinessForm
 	 * 
 	 */
-	try {
-		// connect to database
-		$BASE->loadClass('database');
+	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
+		try {
+			// begin transaction
+			$BASE->db->begin();
 		
-		// begin transaction
-		$BASE->db->begin();
+			// convert content_simple_forms.type to new type
+			$sql = "
+				ALTER TABLE
+					".WCOM_DB_CONTENT_SIMPLE_FORMS."
+				CHANGE
+					`type` `type` VARCHAR(255) NOT NULL DEFAULT 'PersonalForm'
+			";
+			$BASE->db->execute($sql);
 		
-		// convert content_simple_forms.type to new type
-		$sql = "
-			ALTER TABLE
-				".WCOM_DB_CONTENT_SIMPLE_FORMS."
-			CHANGE
-				`type` `type` VARCHAR(255) NOT NULL DEFAULT 'PersonalForm'
-		";
-		$BASE->db->execute($sql);
+			// convert old enum default values to the new ones
+			$sql = "
+				UPDATE
+					".WCOM_DB_CONTENT_SIMPLE_FORMS."
+				SET
+					`type` = 'PersonalForm'
+				WHERE
+					`type` = 'personal'
+			";
+			$BASE->db->execute($sql);
 		
-		// convert old enum default values to the new ones
-		$sql = "
-			UPDATE
-				".WCOM_DB_CONTENT_SIMPLE_FORMS."
-			SET
-				`type` = 'PersonalForm'
-			WHERE
-				`type` = 'personal'
-		";
-		$BASE->db->execute($sql);
+			$sql = "
+				UPDATE
+					".WCOM_DB_CONTENT_SIMPLE_FORMS."
+				SET
+					`type` = 'BusinessForm'
+				WHERE
+					`type` = 'business'
+			";
+			$BASE->db->execute($sql);
+			
+			// update schema version
+			$sqlData = array(
+				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
+			);
+			
+			$BASE->db->update(WCOM_DB_APPLICATION_INFO, $sqlData);
+			
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
 		
-		$sql = "
-			UPDATE
-				".WCOM_DB_CONTENT_SIMPLE_FORMS."
-			SET
-				`type` = 'BusinessForm'
-			WHERE
-				`type` = 'business'
-		";
-		$BASE->db->execute($sql);
-		
-		// commit
-		$BASE->db->commit();
-	} catch (Exception $e) {
-		// do rollback
-		$BASE->db->rollback();
-		
-		// re-throw exception
-		throw $e;
+			// re-throw exception
+			throw $e;
+		}
 	}
 	
 	// display the form
