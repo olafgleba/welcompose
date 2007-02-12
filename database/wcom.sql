@@ -1,7 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
--- Created on: 31.01.2007 21:27:46
--- Diagram Version: 203
+-- Created on: 12.02.2007 12:06:08
+-- Diagram Version: 206
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
 
@@ -48,10 +48,13 @@ ENGINE=INNODB;
 DROP TABLE IF EXISTS `application_info`;
 
 CREATE TABLE `application_info` (
-  `application_version` int(11) UNSIGNED,
-  `schema_version` int(11) UNSIGNED
+  `application_version` varchar(255),
+  `schema_version` varchar(255)
 )
 ENGINE=INNODB;
+
+INSERT INTO `application_schema_info` (`version`) VALUES ('@@schema_version@@');
+
 
 -- Drop table application_projects
 DROP TABLE IF EXISTS `application_projects`;
