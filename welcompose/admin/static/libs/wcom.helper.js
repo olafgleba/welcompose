@@ -26,7 +26,6 @@
  */
 
 
-
 /**
  * Constructs the Helper class
  * 
@@ -114,46 +113,42 @@ Helper.prototype.URLify = Helper_URLify;
  * 
  * <br /><br />Example:
  * <pre><code>
-Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
+Helper.launchPopup('mm_upload', this);
 </code></pre>
  * 
  * @see #lowerOpacity
- * @param {string} width Width for the window to launch 
- * @param {string} height Height for the window to launch
- * @param {string} wname The Name for the window to launch
+ * @see #getPagerPage
  * @param {string} trigger Switch case condition which url to use
  * @param {object} elem Current element
  * @throws applyError on exception
  */
-function Helper_launchPopup (width, height, wname, trigger, elem)
+function Helper_launchPopup (trigger, elem)
 {
 	try {
 		// properties
 		this.elem = elem;
 		this.trigger = trigger;
 		
-		Helper.lowerOpacity();
+		Helper.lowerOpacity();		
+		Helper.getPagerPage();
 		
 		switch (this.trigger) {
 			case 'mm_upload' :
-					Helper.getPagerPage();
 					this.url = this.parseMedUploadPath + '?pager_page=' + pager_page;
 				break;
 			case 'mm_edit' :
-					Helper.getPagerPage();
 					this.url = this.parseMedEditPath + '?id=' + this.elem.id + '&pager_page=' + pager_page;
 				break;
 		}
 		// properties
 		this.targetUrl = this.url;
-		this.targetName = wname;
-		this.targetWidth = width;
-		this.targetHeight = height;
+		this.targetName = this.trigger;
+		this.targetWidth = this.callbacksPopupWindowWidth745;
+		this.targetHeight = this.callbacksPopupWindowHeight634;
 		this.target = window.open(this.targetUrl, this.targetName, 
 				"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
 		this.resWidth = Helper.defineWindowX(this.targetWidth);
-		this.resHeight = Helper.defineWindowY();
-		
+		this.resHeight = Helper.defineWindowY();	
 		this.target.moveBy(this.resWidth, this.resHeight);
 		this.target.focus();
 	} catch (e) {

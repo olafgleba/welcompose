@@ -21,7 +21,8 @@
  */
 
 /** 
- * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages which includes the mediamanager.
+ * @fileoverview Defines event handling through thirdparty lib Behaviour.
+ * Used for all content pages which includes the mediamanager.
  */
 
 /**
@@ -152,13 +153,13 @@ var definitions = {
 	},
 	'a.mm_upload' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('745','634','media_upload','mm_upload', this);
+			Helper.launchPopup('mm_upload', this);
 			return false;
 		}
 	},
 	'a.mm_edit' : function(el){
 		el.onclick = function(){
-			Helper.launchPopup('745','634','media_edit','mm_edit', this);
+			Helper.launchPopup('mm_edit', this);
 			return false;
 		}
 	},

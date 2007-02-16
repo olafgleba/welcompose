@@ -21,7 +21,8 @@
  */
  
 /** 
- * @fileoverview Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager. 
+ * @fileoverview Defines event handling through thirdparty lib Behaviour.
+ * Used for all content pages exclude the mediamanager. 
  */
 
 /**
