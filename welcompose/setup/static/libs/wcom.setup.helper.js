@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.helper.js 654 2006-11-21 16:24:40Z olaf $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
@@ -23,18 +23,14 @@
 /** 
  * @fileoverview This file comprised javascript helper functions.
  * It contains functions that may be used application wide.
- * 
- * @author Olaf Gleba og@creatics.de
- * @version $Id: wcom.helper.js 654 2006-11-21 16:24:40Z olaf $ 
  */
-
-
 
 /**
  * Constructs the Helper class
  * 
- * @class The Mediamanager class miscellaneous is the appropriate class for
- * the help enviroment. The scope is application wide.
+ * @class The Helper class defines a bunch of functions which doesn't 
+ * belongs as regards content to just one class. Several functions be in use
+ * within every Welcompose class. The scope is application wide.
  *
  * @see Base
  * @constructor

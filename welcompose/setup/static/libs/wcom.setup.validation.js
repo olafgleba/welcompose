@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.validation.js 60 2006-06-15 12:19:02Z olaf $
+ * $Id$
  *
  * @copyright 2004-2005 sopic GmbH
  * @author Olaf Gleba
