@@ -1,6 +1,6 @@
 /**
  * Project: Welcompose
- * File: wcom.setup.strings.js
+ * File: wcom.update.strings.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.strings.js 623 2006-11-17 07:29:27Z olaf $
+ * $Id$
  *
  * @copyright 2004-2005 sopic GmbH
  * @author Olaf Gleba

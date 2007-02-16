@@ -1,6 +1,6 @@
 /**
  * Project: Welcompose
- * File: wcom.setup.events.js
+ * File: wcom.update.events.js
  *
  * Copyright (c) 2004-2005 sopic GmbH
  *
@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
@@ -67,6 +67,16 @@ var definitions = {
 		}
 	},
 	'.submit200' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
+		}
+	},
+	'.submit200backup' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
+		}
+	},
+	'.submit200database' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
 		}

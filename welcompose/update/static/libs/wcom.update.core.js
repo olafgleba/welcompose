@@ -1,6 +1,6 @@
 /**
  * Project: Welcompose
- * File: wcom.setup.core.js
+ * File: wcom.update.core.js
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -12,7 +12,7 @@
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
- * $Id: wcom.core.js 654 2006-11-21 16:24:40Z olaf $
+ * $Id$
  *
  * @copyright 2006 creatics media.systems
  * @author Olaf Gleba
@@ -21,12 +21,8 @@
  */
  
 /** 
- * @fileoverview This is the core Welcompose javascript file. 
- * 
- * @author Olaf Gleba og@creatics.de
- * @version $Id: wcom.core.js 654 2006-11-21 16:24:40Z olaf $ 
+ * @fileoverview The main Welcompose javascript enviroment.
  */
- 
 
 
 /**

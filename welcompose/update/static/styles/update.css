@@ -44,7 +44,7 @@ background: #ff620d;
 #container {
 position: relative;
 width: 768px;
-min-height: 600px;
+min-height: 400px;
 background: #fff url(../img/bg_container.gif) 0 0 repeat-y;
 margin: 0 auto;
 text-align: left;
@@ -70,8 +70,8 @@ background: transparent url(../img/bg_header.gif) 0 0 no-repeat;
 #logo {
 position: absolute;
 top: 25px;
-left: 508px;
-width: 235px;
+left: 495px;
+width: 250px;
 background: transparent url(../img/bg_logo_top.gif) 0 0 repeat-y; 
 padding-top: 3px;
 }
@@ -243,6 +243,7 @@ border-color: #666;
 
 input.submit90,
 input.submit200,
+input.submit200database,
 input.submit200nomargin {
 text-align: left;
 height: 20px;
@@ -263,10 +264,15 @@ background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 192px;
 }
+input.submit200database {
+background: #ff620d url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 15px;
+}
 input.submit200nomargin {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
-margin: 20px 0 0 14px;
+margin: 20px 0 0 15px;
 }
 
 
@@ -278,8 +284,13 @@ margin: 20px 0 0 0;
 display: block;
 margin: 30px 0 0 10px;
 }
+.linkconbackup {
+display: block;
+margin: 30px 0 0 10px;
+}
 a.submit200:link, a.submit200:visited,
-a.submit200finish:link, a.submit200finish:visited  {
+a.submit200finish:link, a.submit200finish:visited,
+a.submit200backup:link, a.submit200backup:visited {
 position: relative;
 text-align: left;
 background: #ff620d url(../img/submit200.gif) no-repeat;
@@ -296,8 +307,12 @@ cursor: pointer;
 a.submit200finish:link, a.submit200finish:visited {
 padding-right: 95px;
 }
+a.submit200backup:link, a.submit200backup:visited {
+padding-right: 84px;
+}
 a.submit200:hover, a.submit200:active,
-a.submit200finish:hover,a.submit200finish:active {
+a.submit200finish:hover,a.submit200finish:active,
+a.submit200backup:hover,a.submit200backup:active {
 text-decoration: none;
 }
 
