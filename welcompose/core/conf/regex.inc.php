@@ -102,6 +102,10 @@ define("WCOM_REGEX_JS", '=^(wcom+)\.([a-z_]+)\.js$=i');
 // names (exclude thirdparty javascript files)
 define("WCOM_REGEX_SETUP_JS", '=^(wcom.setup+)\.([a-z_]+)\.js$=i');
 
+// Defines regular expression for setup javascript file
+// names (exclude thirdparty javascript files)
+define("WCOM_REGEX_UPDATE_JS", '=^(wcom.update+)\.([a-z_]+)\.js$=i');
+
 // Defines regular expression for strings containing
 // a file name of a php script
 define("WCOM_REGEX_FILE_NAME_PHP", '=^([a-z0-9-_]+)\.php$=i');
