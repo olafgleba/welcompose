@@ -68,8 +68,8 @@ try {
 	header("Content-Type: text/javascript");
 	
 	// fetch javascript
-	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], WCOM_REGEX_SETUP_JS))) {
-		preg_match("=^((wcom.setup+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
+	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], WCOM_REGEX_UPDATE_JS))) {
+		preg_match("=^((wcom.update+)\.([a-z_]+)\.js)$=i", $_REQUEST['file'], $matches);
 		$BASE->utility->smarty->display($matches[1], $_SERVER['REQUEST_URI']);
 	}
 	
