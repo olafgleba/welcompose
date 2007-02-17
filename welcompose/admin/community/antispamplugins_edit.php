@@ -265,7 +265,8 @@ try {
 	}
 	
 	// raise error
-	Base_Error::triggerException($BASE->utility->smarty, $e);	
+	$BASE->error->displayException($e, $BASE->utility->smarty);
+	$BASE->error->triggerException($e);
 	
 	// exit
 	exit;

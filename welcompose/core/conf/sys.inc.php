@@ -3,10 +3,13 @@
 wcom_admin_root_www = /welcompose/trunk/welcompose/admin
 wcom_public_root_www = /welcompose/trunk/welcompose
 
+[log]
+handler = firebug
+name = 
+level = PEAR_LOG_DEBUG
+
 [environment]
 debug = true
-dev = false
-error_length = 0
 app_key = "!@R;&x.{Su}d&VcU#j5I\:)mU.2?!_."
 
 [locales]
@@ -19,8 +22,8 @@ dsn = "mysql:unix_socket=/tmp/mysql-5.0.sock;dbname=welcompose"
 username = "root"
 password = 
 table_alias_constants = true
-debug = false;
-backticks = true;
+debug = false
+backticks = true
 
 [media]
 store_www = "/welcompose/trunk/welcompose/files/media"

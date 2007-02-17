@@ -4245,7 +4245,7 @@ protected function testNestedSets ($whole_tree)
 		// if there's no last node, the current node must be a root node
 		if (empty($last_node)) {
 			if ($_node['id'] != $_node['root_node'] || $_node['lft'] != 1 || !is_null($_node['parent'])) {
-				Base_Error::setMessage("First node is not root node");
+				trigger_user_error(BASE_ERROR_INFO, "First node is not root node", __FILE__, __LINE__);
 				return false;
 			}
 
@@ -4254,7 +4254,7 @@ protected function testNestedSets ($whole_tree)
 		}
 		
 		if ($_node['lft'] == $last_node['rgt']) {
-			Base_Error::setMessage("Lft current node may not match rgt of last node");
+			trigger_user_error(BASE_ERROR_INFO, "Lft current node may not match rgt of last node", __FILE__, __LINE__);
 			return false;
 		}
 				
@@ -4265,14 +4265,14 @@ protected function testNestedSets ($whole_tree)
 			// if the rgt minus the lft of the last node is bigger than one, it cannot be the last
 			// node in its tree. therefore something must be wrong...
 			if (($last_node['rgt'] - $last_node['lft']) > 1) {
-				Base_Error::setMessage("Rgt of last node is not lft of current node minus 1");
+				trigger_user_error(BASE_ERROR_INFO, "Rgt of last node is not lft of current node minus 1", __FILE__, __LINE__);
 				return false;
 			}
 			
 			// if the sorting of the current node minus the sorting of the last node is not
 			// one, something must be wrong.
 			if (($_node['sorting'] - $last_node['sorting']) != 1) {
-				Base_Error::setMessage("Sorting of last node is not sorting of current node plus 1");
+				trigger_user_error(BASE_ERROR_INFO, "Sorting of last node is not sorting of current node plus 1", __FILE__, __LINE__);
 				return false;
 			}
 			
@@ -4287,19 +4287,19 @@ protected function testNestedSets ($whole_tree)
 		// level of the last node has to be one too.
 		if (($_node['lft'] - $last_node['lft']) == 1) {
 			if ($last_node['id'] != $_node['parent'] || is_null($_node['parent'])) {
-				Base_Error::setMessage("Parent does not match parent of last node ");
+				trigger_user_error(BASE_ERROR_INFO, "Parent does not match parent of last node ", __FILE__, __LINE__);
 				return false;
 			}
 			if ($last_node['root_node'] != $_node['root_node']) {
-				Base_Error::setMessage("Root node does not match root node of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Root node does not match root node of last node", __FILE__, __LINE__);
 				return false;
 			}
 			if (($_node['level'] - $last_node['level']) != 1) {
-				Base_Error::setMessage("Level of last node is not level of current node plus 1");
+				trigger_user_error(BASE_ERROR_INFO, "Level of last node is not level of current node plus 1", __FILE__, __LINE__);
 				return false;
 			}
 			if ($last_node['sorting'] != $_node['sorting']) {
-				Base_Error::setMessage("Sorting does not match sorting of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Sorting does not match sorting of last node", __FILE__, __LINE__);
 				return false;
 			}
 		}
@@ -4310,19 +4310,19 @@ protected function testNestedSets ($whole_tree)
 		// the same parent and the same sorting.
 		if (($_node['lft'] - $last_node['rgt']) == 1) {
 			if ($last_node['level'] != $_node['level']) {
-				Base_Error::setMessage("Level does not match level of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Level does not match level of last node", __FILE__, __LINE__);
 				return false;
 			}
 			if ($last_node['root_node'] != $_node['root_node']) {
-				Base_Error::setMessage("Root node does not match root node of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Root node does not match root node of last node", __FILE__, __LINE__);
 				return false;
 			}
 			if ($last_node['parent'] != $_node['parent'] || is_null($_node['parent'])) {
-				Base_Error::setMessage("Parent does not match parent of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Parent does not match parent of last node", __FILE__, __LINE__);
 				return false;
 			}
 			if ($last_node['sorting'] != $_node['sorting']) {
-				Base_Error::setMessage("Sorting does not match sorting of last node");
+				trigger_user_error(BASE_ERROR_INFO, "Sorting does not match sorting of last node", __FILE__, __LINE__);
 				return false;
 			}
 		}
@@ -4333,7 +4333,7 @@ protected function testNestedSets ($whole_tree)
 		// the level of the last node.
 		if (($_node['lft'] - $last_node['lft']) > 1 && ($_node['lft'] - $last_node['rgt']) > 1) {
 			if ($_node['level'] >= $last_node['level']) {
-				Base_Error::setMessage("Level is not smaller than the level of the last node");
+				trigger_user_error(BASE_ERROR_INFO, "Level is not smaller than the level of the last node", __FILE__, __LINE__);
 				return false;
 			}
 			
@@ -4351,15 +4351,15 @@ protected function testNestedSets ($whole_tree)
 					
 					// let's compare the current node with the possible sibling.
 					if ($_node['parent'] != $_possible_sibling['parent']) {
-						Base_Error::setMessage("Parent does not match parent of possible sibling");
+						trigger_user_error(BASE_ERROR_INFO, "Parent does not match parent of possible sibling", __FILE__, __LINE__);
 						return false;
 					}
 					if ($_node['level'] != $_possible_sibling['level']) {
-						Base_Error::setMessage("Level does not match level of possible sibling");
+						trigger_user_error(BASE_ERROR_INFO, "Level does not match level of possible sibling", __FILE__, __LINE__);
 						return false;
 					}
 					if ($_node['sorting'] != $_possible_sibling['sorting']) {
-						Base_Error::setMessage("Sorting does not match sorting of possible sibling");
+						trigger_user_error(BASE_ERROR_INFO, "Sorting does not match sorting of possible sibling", __FILE__, __LINE__);
 						return false;
 					}
 					
@@ -4369,7 +4369,7 @@ protected function testNestedSets ($whole_tree)
 			
 			// if there was no sibling found, there's something wrong.
 			if (!$sibling_found) {
-				Base_Error::setMessage("Sibling was not found");
+				trigger_user_error(BASE_ERROR_INFO, "Sibling was not found", __FILE__, __LINE__);
 				return false;
 			}
 		} 

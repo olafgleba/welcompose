@@ -336,11 +336,9 @@ try {
 		@ob_end_clean();
 	}
 	
-	// define new error_tpl
-	Base_Error::$_error_tpl = 'error_popup_723.html';
-	
 	// raise error
-	Base_Error::triggerException($BASE->utility->smarty, $e);	
+	$BASE->error->displayException($e, $BASE->utility->smarty, 'error_popup_723.html');
+	$BASE->error->triggerException($e);
 
 	// exit
 	exit;

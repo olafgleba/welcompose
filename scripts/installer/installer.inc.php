@@ -93,7 +93,8 @@ class Setup_PackageExtractor {
 		'/tmp/captchas',
 		'/tmp/flickr_cache',
 		'/tmp/installer',
-		'/tmp/updater'
+		'/tmp/updater',
+		'/tmp/log'
 	);
 	
 	/**

@@ -3,10 +3,13 @@
 wcom_admin_root_www = 
 wcom_public_root_www = 
 
+[log]
+handler = null
+name = 
+level = PEAR_LOG_NOTICE
+
 [environment]
 debug = false
-dev = false
-error_length = 0
 app_key = 
 
 [locales]
