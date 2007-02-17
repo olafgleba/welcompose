@@ -226,12 +226,12 @@ try {
 			'data' => sprintf('{get_media id="%u"}', $object['id']),
 			'width' => $object['file_width'],
 			'height' => $object['file_height'],
-			'quality' => $FORM->exportValue('quality'),
-			'scale' => $FORM->exportValue('scale'),
-			'wmode' => $FORM->exportValue('wmode'),
-			'bgcolor' => $FORM->exportValue('bgcolor'),
-			'play' => ($FORM->exportValue('play') == 1) ? 'true' : '',
-			'loop' => ($FORM->exportValue('loop') == 1) ? 'true' : ''
+			'quality' => ($FORM->exportValue('quality') != '') ? sprintf('<param="quality" value="%s" />', $FORM->exportValue('quality')) : '',
+			'scale' => ($FORM->exportValue('scale') != '') ? sprintf('<param="scale" value="%s" />', $FORM->exportValue('scale')) : '',
+			'wmode' => ($FORM->exportValue('wmode') != '') ? sprintf('<param="wmode" value="%s" />', $FORM->exportValue('wmode')) : '',
+			'bgcolor' => ($FORM->exportValue('bgcolor') != '') ? sprintf('<param="bgcolor" value="%s" />', $FORM->exportValue('bgcolor')) : '',
+			'play' => ($FORM->exportValue('play') == 1) ? '<param="play" value="false" />' : '',
+			'loop' => ($FORM->exportValue('loop') == 1) ? '<param="loop" value="false" />' : ''
 		);
 	
 		// execute text converter callback

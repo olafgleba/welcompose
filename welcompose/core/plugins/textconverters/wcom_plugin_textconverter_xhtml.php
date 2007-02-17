@@ -44,8 +44,8 @@ public function mmInsertDocument ($text, $href)
 }
 
 public function mmInsertShockwave ($text, $data, $width, $height, $quality, $scale, $wmode, $bgcolor, $play, $loop)
-{	
-	$tag = '<object data="%1$s" type="application/x-shockwave-flash" width="%2$u" height="%3$u"><param name="movie" value="%1$s" /><param name="quality" value="%4$s" /><param name="scale" value="%5$s" /><param name="wmode" value="%6$s" /><param name="bgcolor" value="%7$s" /><param name="play" value="%8$s" /><param name="loop" value="%9$s" /></object>%10$s';
+{
+	$tag = '<object data="%1$s" type="application/x-shockwave-flash" width="%2$u" height="%3$u"><param name="movie" value="%1$s" />%4$s%5$s%6$s%7$s%8$s%9$s</object>%10$s';
 	
 	$html = sprintf($tag, $data, $width, $height, $quality, $scale, $wmode, $bgcolor, $play, $loop, $text);
 	

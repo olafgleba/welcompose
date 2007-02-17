@@ -23,6 +23,7 @@
 /** 
  * @fileoverview Comprised javascript helper functions.
  * It contains functions that may be used application wide.
+ *
  */
 
 

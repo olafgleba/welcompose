@@ -29,7 +29,7 @@ class TextConverter_Textile extends TextConverter_Xhtml
 
 public function mmInsertImage ($text, $src, $width, $height, $alt, $title)
 {
-	$tag = '!%1$s %2$sw %3$sh (%4$s)!%6$s';
+	$tag = '!%1$s (%4$s)!%6$s';
 	$html = sprintf($tag, $src, $width, $height, $alt, $title, $text);
 	
 	return $html;
@@ -53,7 +53,7 @@ public function mmInsertInternalLink ($text, $href)
 
 public function mmInsertFlickr ($text, $src, $href)
 {
-	$tag = '!%1$s!:"%2$s"%3$s';
+	$tag = '!%1$s!:%2$s %3$s';
 	
 	$html = sprintf($tag, $src, $href, $text);
 	

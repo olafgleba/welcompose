@@ -16,8 +16,8 @@
  *
  * $Id: callbacks_insert_document.php 873 2007-02-04 14:25:02Z olaf $
  *
- * @copyright 2006 sopic GmbH
- * @author Andreas Ahlenstorf
+ * @copyright 2007 creatics media.systems
+ * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
@@ -222,8 +222,8 @@ try {
 		// get object(s)
 		$object = $STRUCTURALTEMPLATE->selectStructuralTemplate(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 		
-		// define insert type as reference altough it is in the content path
-		// this is because we want to put the raw content
+		// define insert type static as reference
+		// this is because we want to insert the raw content nonetheless the path references
 		$insert_type = 'InternalReference';
 
 		// prepare callback args
@@ -241,7 +241,7 @@ try {
 	$text_converter = Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC);
 	
 	// if no text_converter is set fetch default
-	// make sure we can fall back on default 
+	// to asure we can fall back on default 
 	if ($text_converter == '0') {
 		$text_converters = $TEXTCONVERTER->selectTextConverters();
 		
