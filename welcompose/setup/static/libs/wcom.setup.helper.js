@@ -316,6 +316,7 @@ function Helper_setFormfieldGroup ()
 		$('_port').style.display = 'block';
 		$('_socket').style.display = 'none';
 	}
+	self.focus();
 }
 
 
