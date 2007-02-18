@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript">
-var response			= '{$session.response}';
-var selection			= '{$session.selection}';
+var response			= '{if isset($session.response)}{$session.response}{/if}';
+var selection			= '{if isset($session.selection)}{$session.selection}{/if}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
