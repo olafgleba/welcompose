@@ -1008,45 +1008,23 @@ public function genericTypesToMimeTypes ($generic_type)
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
-	switch ((string)$generic_type) {
-		case 'image':
-			return array(
-				'gif' => 'image/gif',
-				'jpg' => 'image/jpeg',
-				'png' => 'image/png',
-				'tiff' => 'image/tif'
-			);
-		case 'document':
-			return array(
-				'pdf' => 'application/pdf',
-				'doc' => 'application/msword',
-				'rtf' => 'application/rtf',
-				'xls' => 'application/vnd.ms-excel',
-				'ppt' => 'application/vnd.ms-powerpoint',
-				'odt' => 'application/vnd.oasis.opendocument.text',
-				'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-				'odp' => 'application/vnd.oasis.opendocument.presentation',
-				'zip' => 'application/zip'
-			);
-		case 'audio':
-			return array(
-				'mp3' => 'audio/mpeg',
-				'm4a' => 'audio/x-m4a',
-				'wma' => 'audio/x-ms-wma'
-			);
-		case 'video':
-			return array(
-				'mp4' => 'video/mp4',
-				'm4v' => 'video/x-m4v',
-				'mov' => 'video/quicktime',
-				'swf' => 'application/x-shockwave-flash',
-				'wmv' => 'video/x-ms-wmv'
-			);
-		case 'other':
-			return array();
-		default:
-			throw new Media_ObjectException("Unknown generic type supplied");
+	// if generic type is other, return an empty array
+	if ($generic_type == $other) {
+		return array();
 	}
+	
+	// get mime type configurations
+	$mime_type_configurations = $this->getMimeTypeConfigurations();
+	
+	// resolve icon for mime type
+	$types = array();
+	foreach ($mime_type_configurations as $_mime_type => $_configuration) {
+		if ($generic_type == $_configuration['generic_type']) {
+			$types[] = $_mime_type;
+		}
+	}
+	
+	return $types;
 }
 
 /**
@@ -1064,17 +1042,22 @@ public function isPodcastFormat ($mime_type)
 		throw new Media_ObjectException("You are not allowed to perform this action");
 	}
 	
-	switch ((string)$mime_type) {
-		case 'application/pdf':
-		case 'audio/mpeg':
-		case 'audio/x-m4a':
-		case 'video/mp4':
-		case 'video/quicktime':
-		case 'video/x-m4v':
-			return true;
-		default:
-			return false;
+	// input check
+	if (empty($mime_type) || !preg_match(WCOM_REGEX_MIME_TYPE, $mime_type)) {
+		throw new Media_ObjectException("Invalid mime type supplied");
 	}
+	
+	// get mime type configurations
+	$mime_type_configurations = $this->getMimeTypeConfigurations();
+	
+	// resolve podcastable bit for mime type
+	foreach ($mime_type_configurations as $_mime_type => $_configuration) {
+		if ($mime_type == $_mime_type) {
+			return $_configuration['podcastable'];
+		}
+	}
+	
+	return false;
 }
 
 /**
@@ -1160,51 +1143,64 @@ public function mimeTypeToIcon ($mime_type)
 		throw new Media_ObjectException("Invalid mime type supplied");
 	}
 	
-	// icon list
-	$icons = array(
-		'application/pdf' => 'pdf.jpg',
-		'application/msword' => 'doc.jpg',
-		'application/rtf' => 'rtf.jpg',
-		'application/vnd.ms-excel' => 'xls.jpg',
-		'application/vnd.ms-powerpoint' => 'ppt.jpg',
-		'application/zip' => 'zip.jpg',
-		'application/x-shockwave-flash' => 'swf.jpg',
-		'application/vnd.oasis.opendocument.text' => 'odt.jpg',
-		'application/vnd.oasis.opendocument.spreadsheet' => 'ods.jpg',
-		'application/vnd.oasis.opendocument.presentation' => 'odp.jpg',
-		'audio/x-m4a' => 'audio.jpg',
-		'audio/mpeg' => 'audio.jpg',
-		'video/mp4' => 'video.jpg',
-		'video/x-m4v' => 'video.jpg',
-		'video/quicktime' => 'video.jpg'
-	);
+	// get mime type configurations
+	$mime_type_configurations = $this->getMimeTypeConfigurations();
 	
-	// search icon array and return the right icon
-	foreach ($icons as $_mime_type => $_icon) {
+	// resolve icon for mime type
+	foreach ($mime_type_configurations as $_mime_type => $_configuration) {
 		if ($mime_type == $_mime_type) {
-			return $_icon;
+			return $_configuration['icon'];
 		}
 	}
 	
-	// return default icon
-	return 'generic.jpg';
+	// if no special icon was found, return the name of the default icon
+	return $mime_type_configurations['__DEFAULT__']['icon'];
 }
 
+/**
+ * Returns name of text converter callback for given mime type.
+ *
+ * @param string Mime type name
+ * @return string
+ */
 public function mimeTypeToInsertCallBack ($mime_type)
 {
+	// access check
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($mime_type) || !preg_match(WCOM_REGEX_MIME_TYPE, $mime_type)) {
+		throw new Media_ObjectException("Invalid mime type supplied");
+	}
+	
+	// get mime type configurations
 	$mime_type_configurations = $this->getMimeTypeConfigurations();
 	
+	// resolve callback name for mime type
 	foreach ($mime_type_configurations as $_mime_type => $_configuration) {
 		if ($mime_type == $_mime_type) {
 			return $_configuration['insert_callback'];
 		}
 	}
 	
+	// if no special callback was found, return the name of the default callback
 	return $mime_type_configurations['__DEFAULT__']['insert_callback'];
 }
 
+/**
+ * Returns list with mime type configurations.
+ * 
+ * @return array
+ */
 public function getMimeTypeConfigurations ()
 {
+	// access check
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
 	return array(
 		'__DEFAULT__' => array(
 			'suffix' => null,
@@ -1213,6 +1209,13 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'other',
 			'icon' => 'generic.jpg'
 		),
+		'application/msword' => array(
+			'suffix' => 'doc',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'doc.jpg'
+		),
 		'application/pdf' => array(
 			'suffix' => 'pdf',
 			'podcastable' => true,
@@ -1220,12 +1223,26 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'document',
 			'icon' => 'pdf.jpg'
 		),
-		'application/x-shockwave-flash' => array(
-			'suffix' => 'swf',
+		'application/rtf' => array(
+			'suffix' => 'rtf',
 			'podcastable' => false,
-			'insert_callback' => 'application-x-shockwave-flash',
-			'generic_type' => 'video',
-			'icon' => 'swf.jpg'
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'rtf.jpg'
+		),
+		'application/vnd.ms-excel' => array(
+			'suffix' => 'xls',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'xls.jpg'
+		),
+		'application/vnd.ms-powerpoint' => array(
+			'suffix' => 'ppt',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'ppt.jpg'
 		),
 		'application/vnd.oasis.opendocument.text' => array(
 			'suffix' => 'odt',
@@ -1248,10 +1265,31 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'document',
 			'icon' => 'odp.jpg'
 		),
+		'application/x-shockwave-flash' => array(
+			'suffix' => 'swf',
+			'podcastable' => false,
+			'insert_callback' => 'application-x-shockwave-flash',
+			'generic_type' => 'video',
+			'icon' => 'swf.jpg'
+		),
+		'application/zip' => array(
+			'suffix' => 'zip',
+			'podcastable' => false,
+			'insert_callback' => 'document',
+			'generic_type' => 'document',
+			'icon' => 'zip.jpg'
+		),
+		'audio/mpeg' => array(
+			'suffix' => 'mp3',
+			'podcastable' => true,
+			'insert_callback' => 'audio-mpeg',
+			'generic_type' => 'audio',
+			'icon' => 'audio.jpg'
+		),
 		'audio/x-m4a' => array(
 			'suffix' => 'm4a',
 			'podcastable' => true,
-			'insert_callback' => 'audio_x_m4a',
+			'insert_callback' => 'audio-x-m4a',
 			'generic_type' => 'audio',
 			'icon' => 'audio.jpg'
 		),
@@ -1283,6 +1321,27 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'image',
 			'icon' => null
 		),
+		'video/mp4' => array(
+			'suffix' => 'mp4',
+			'podcastable' => true,
+			'insert_callback' => 'video-mp4',
+			'generic_type' => 'video',
+			'icon' => 'video.jpg'
+		),
+		'video/x-m4v' => array(
+			'suffix' => 'm4v',
+			'podcastable' => true,
+			'insert_callback' => 'video-x-m4v',
+			'generic_type' => 'video',
+			'icon' => 'video.jpg'
+		),
+		'video/quicktime' => array(
+			'suffix' => 'mov',
+			'podcastable' => true,
+			'insert_callback' => 'video-quicktime',
+			'generic_type' => 'video',
+			'icon' => 'video.jpg'
+		)
 	);
 }
 
