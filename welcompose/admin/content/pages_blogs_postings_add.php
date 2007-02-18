@@ -390,6 +390,7 @@ try {
 	// set defaults
 	$FORM->setDefaults(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
+		'apply_macros' => 1,
 		'ping' => 1,
 		'comments_enable' => 1,
 		'trackbacks_enable' => 1

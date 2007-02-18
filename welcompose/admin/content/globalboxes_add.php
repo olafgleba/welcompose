@@ -134,7 +134,12 @@ try {
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Add global box'),
 		array('class' => 'submit200'));
-		
+	
+	// set defaults
+	$FORM->setDefaults(array(
+		'apply_macros' => 1
+	));
+	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
