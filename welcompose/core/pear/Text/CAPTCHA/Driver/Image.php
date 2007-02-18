@@ -107,7 +107,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
                 $o['width'] = $args[0];
             }    
             if (isset($args[1])) {
-                $o['width'] = $args[1];
+                $o['height'] = $args[1];
             }    
             if (isset($args[2]) && $args[2] != null) {
                 $o['phrase'] = $args[2];
@@ -220,7 +220,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         $this->_im =& $this->_imt->getImg(); 
         $white = imagecolorallocate($this->_im, 0xFF, 0xFF, 0xFF);
         //some obfuscation
-        for ($i=0; $i<3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $x1 = rand(0, $this->_width - 1);
             $y1 = rand(0, round($this->_height / 10, 0));
             $x2 = rand(0, round($this->_width / 10, 0));

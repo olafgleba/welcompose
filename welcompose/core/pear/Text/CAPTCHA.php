@@ -127,6 +127,14 @@ require_once 'Text/Password.php';
 class Text_CAPTCHA {
 
     /**
+     * Version number
+     *
+     * @access private
+     * @var string
+     */
+    var $_version = '0.2.1';
+
+    /**
      * Phrase
      *
      * @access private
