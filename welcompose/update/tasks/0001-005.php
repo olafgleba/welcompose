@@ -131,7 +131,7 @@ try {
 				    ON DELETE SET NULL
 				    ON UPDATE CASCADE,
 				  CONSTRAINT `content_generator_forms.user2user_user.id` FOREIGN KEY (`user`)
-				    REFERENCES ".WCOM_DB_USER_USER."(`id`)
+				    REFERENCES ".WCOM_DB_USER_USERS."(`id`)
 				    ON DELETE CASCADE
 				    ON UPDATE CASCADE
 				)
