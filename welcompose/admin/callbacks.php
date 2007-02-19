@@ -167,7 +167,7 @@ try {
 		// prepare callback args
 		$args = array(
 			'text' => $_text,
-			'href' => (!empty($object['change_delimiter']) || !empty($_REQUEST['delimiter'])) ? 
+			'href' => (!empty($_REQUEST['delimiter'])) ? 
 				sprintf('<%%global_template name="%s"%%>', $object['name']) : 
 				sprintf('{global_template name="%s"}', $object['name'])	
 		);
