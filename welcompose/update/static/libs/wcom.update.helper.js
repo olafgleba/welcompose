@@ -58,6 +58,7 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.showDependingFormfield = Helper_showDependingFormfield;
 Helper.prototype.setFormfieldGroup = Helper_setFormfieldGroup;
 
@@ -207,7 +208,6 @@ function Helper_getAttr (attr, elem)
 		return elem.getAttribute(attr);
 }
 
-
 /**
  * Getter for next sibling node attribute.
  *
@@ -232,6 +232,28 @@ function Helper_getAttrNextSibling (attr, elem, level)
 		return a.attributes[attr].value;
 	else
 		return a.getAttribute(attr);
+}
+
+/**
+ * Getter for parent node next sibling.
+ *
+ * @param {string} attr Given attribute to use
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Parent node next sibling
+ * @throws applyError on exception
+ */
+function Helper_getParentNodeNextSibling (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'ie' || this.browser == 'sa')
+		level-- ;
+
+	for (var a = elem.parentNode; level > 0; level--) {
+		a = a.nextSibling;
+	}
+	return a;
 }
 
 /**

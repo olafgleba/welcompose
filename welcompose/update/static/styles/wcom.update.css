@@ -243,7 +243,7 @@ border-color: #666;
 
 input.submit90,
 input.submit200,
-input.submit200database,
+input.submit200update,
 input.submit200nomargin {
 text-align: left;
 height: 20px;
@@ -264,7 +264,7 @@ background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 192px;
 }
-input.submit200database {
+input.submit200update {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 15px;
@@ -308,7 +308,7 @@ a.submit200finish:link, a.submit200finish:visited {
 padding-right: 95px;
 }
 a.submit200backup:link, a.submit200backup:visited {
-padding-right: 84px;
+padding-right: 87px;
 }
 a.submit200:hover, a.submit200:active,
 a.submit200finish:hover,a.submit200finish:active,
@@ -393,6 +393,26 @@ width: 80px;
 }
 table td.status_indicator_text {
 width: 300px;
+}
+
+/* taks */
+table#tasks td, table#tasks th {
+padding: 6px 0 6px 0;
+border-bottom: 1px solid #efefef;
+}
+table#tasks th.status {
+width: 335px;
+text-align: right;
+font-weight: bold;
+}
+table th.task {
+width: 250px;
+font-weight: bold;
+}
+table#tasks td.status {
+width: 335px;
+text-align: right;
+font-weight: normal;
 }
 
 
@@ -480,6 +500,7 @@ text-decoration: none;
 .iHelp a img, .iHelpRemove a img {
 vertical-align: middle;
 }
+
 
 #_socket {
 display: none;

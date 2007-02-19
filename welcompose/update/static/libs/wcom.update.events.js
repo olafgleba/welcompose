@@ -61,6 +61,11 @@ var definitions = {
 			validate(this);
 		}
 	},
+	'input.submit200update' : function(el){
+		el.onclick = function(){
+			Updater.processTasksInit();
+		}
+	},
 	'.submit90' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#666 url(static/img/submitindicator90.gif) no-repeat';
@@ -72,11 +77,6 @@ var definitions = {
 		}
 	},
 	'.submit200backup' : function(el){
-		el.onfocus = function(){
-			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
-		}
-	},
-	'.submit200database' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
 		}
