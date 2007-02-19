@@ -111,29 +111,32 @@ function Updater_processTasks (lastTarget)
 	try {
 		this.lastTarget = $(lastTarget);
 		this.browser = _setBrowserString();
-		
 		this.currentTarget = Helper.getParentNodeNextSibling(this.lastTarget, 2);
 	
-		if (this.browser == 'ie' || this.browser == 'sa') {
-			this.currentTarget = this.currentTarget.childNodes[1].id;
-		} else {
-			this.currentTarget = this.currentTarget.childNodes[3].id;
-		}		
+		if (Updater.isNull(this.currentTarget) === false) {
+			if (this.browser == 'ie' || this.browser == 'sa') {
+				this.currentTarget = this.currentTarget.childNodes[1].id;
+			} else {
+				this.currentTarget = this.currentTarget.childNodes[3].id;
+			}		
 		
-		// redefine global target var
-		target = this.currentTarget;
+			// redefine global target var
+			target = this.currentTarget;
 		
-		// fire ajax request
-		var file = target.split('status_');
-		var url = 'tasks/' + file[1] + '.php';
+			// fire ajax request
+			var file = target.split('status_');
+			var url = 'tasks/' + file[1] + '.php';
 
-		var myAjax = new Ajax.Request(
-			url,
-			{
-				method : 'get',
-				onLoading : Updater.loaderProcessTasks,
-				onSuccess : Updater.showResponseProcessTasks
-			});	
+			var myAjax = new Ajax.Request(
+				url,
+				{
+					method : 'get',
+					onLoading : Updater.loaderProcessTasks,
+					onSuccess : Updater.showResponseProcessTasks
+				});	
+		} else {
+			$('startupdate').style.display = 'none';
+		}
 	} catch (e) {
 		_applyError(e);
 	}

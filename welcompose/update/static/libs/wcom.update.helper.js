@@ -249,11 +249,12 @@ function Helper_getParentNodeNextSibling (elem, level)
 	
 	if (this.browser == 'ie' || this.browser == 'sa')
 		level-- ;
-
+		
 	for (var a = elem.parentNode; level > 0; level--) {
 		a = a.nextSibling;
 	}
-	return a;
+	if (typeof a != 'undefined')
+		return a;
 }
 
 /**
