@@ -18,6 +18,7 @@
 <script type="text/javascript" src="static/libs/wcom.update.helper.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.events.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.validation.js"></script>
+<script type="text/javascript" src="static/libs/wcom.update.updater.js"></script>
 
 </head>
 
@@ -51,20 +52,22 @@ process.</p>
 	
 <h2>Update tasks</h2>
 {if !empty($tasks)}
-<table>
+<table id="tasks">
+<tbody>
 <tr>
-<td class="extension">Task</td>
-<td class="status">Status</td>
+<th class="task">Task</td>
+<th class="status">Status</td>
 </tr>
 {foreach from=$tasks key=task item=file}
 <tr>
-<td>{$task}</td>
-<td>pending</td>
+<td class="task" id="task_{$task}">{$task}</td>
+<td class="status" id="status_{$task}"> </td>
 </tr>
 {/foreach}
+</tbody>
 </table>
 
-<input type="button" class="submit200database" value="Start update" />
+<input type="button" class="submit200update" value="Start update" />
 
 
 {else}

@@ -113,6 +113,9 @@ try {
 			
 			// commit
 			$BASE->db->commit();
+			
+			// assign task number
+			$BASE->utility->smarty->assign('task', '0001-004');
 		} catch (Exception $e) {
 			// do rollback
 			$BASE->db->rollback();
