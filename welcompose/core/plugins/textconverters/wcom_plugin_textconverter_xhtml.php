@@ -63,7 +63,7 @@ public function mmInsertInternalLink ($text, $href)
 
 public function mmInsertInternalReference ($text, $href)
 {
-	$tag = '%1$s %2$s';
+	$tag = '%1$s%2$s';
 	
 	$html = sprintf($tag, $href, $text);
 	

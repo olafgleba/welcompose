@@ -58,6 +58,7 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.showDependingFormfield = Helper_showDependingFormfield;
 Helper.prototype.setFormfieldGroup = Helper_setFormfieldGroup;
 
@@ -269,6 +270,28 @@ function Helper_getDataParentNode (elem, level)
 		a = a.parentNode;
 	}
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+/**
+ * Getter for parent node next sibling.
+ *
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Parent node next sibling
+ * @throws applyError on exception
+ */
+function Helper_getParentNodeNextSibling (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'ie' || this.browser == 'sa')
+		level-- ;
+		
+	for (var a = elem.parentNode; level > 0; level--) {
+		a = a.nextSibling;
+	}
+	if (typeof a != 'undefined')
+		return a;
 }
 
 /**

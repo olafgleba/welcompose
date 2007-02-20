@@ -235,29 +235,6 @@ function Helper_getAttrNextSibling (attr, elem, level)
 }
 
 /**
- * Getter for parent node next sibling.
- *
- * @param {string} attr Given attribute to use
- * @param {object} elem Current element
- * @param {string} level Depth of parent node search
- * @return object Parent node next sibling
- * @throws applyError on exception
- */
-function Helper_getParentNodeNextSibling (elem, level)
-{
-	this.browser = _setBrowserString();
-	
-	if (this.browser == 'ie' || this.browser == 'sa')
-		level-- ;
-		
-	for (var a = elem.parentNode; level > 0; level--) {
-		a = a.nextSibling;
-	}
-	if (typeof a != 'undefined')
-		return a;
-}
-
-/**
  * Getter for next sibling first child node attribute.
  *
  * @param {object} elem Current element
@@ -292,6 +269,28 @@ function Helper_getDataParentNode (elem, level)
 		a = a.parentNode;
 	}
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+/**
+ * Getter for parent node next sibling.
+ *
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Parent node next sibling
+ * @throws applyError on exception
+ */
+function Helper_getParentNodeNextSibling (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'ie' || this.browser == 'sa')
+		level-- ;
+		
+	for (var a = elem.parentNode; level > 0; level--) {
+		a = a.nextSibling;
+	}
+	if (typeof a != 'undefined')
+		return a;
 }
 
 /**

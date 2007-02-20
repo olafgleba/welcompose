@@ -27,9 +27,8 @@
 /**
  * Constructs the Updater class
  * 
- * @class The Helper class defines a bunch of functions which doesn't 
- * belongs as regards content to just one class. Several functions be in use
- * within every Welcompose class. The scope is application wide.
+ * @class The Updater class balance the database and shift it to the last state
+ * depending on the tasks files in folder tasks.
  *
  * @see Base
  * @constructor

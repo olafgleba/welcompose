@@ -60,7 +60,6 @@ Helper.prototype.getSelectionText = Helper_getSelectionText;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
 Helper.prototype.getPagerPage = Helper_getPagerPage;
 Helper.prototype.getInsertType = Helper_getInsertType;
-
 Helper.prototype.closePopup = Helper_closePopup;
 Helper.prototype.closeLinksPopup = Helper_closeLinksPopup;
 Helper.prototype.closePopupTrack = Helper_closePopupTrack;
@@ -76,14 +75,11 @@ Helper.prototype.showNextNodeBoxes = Helper_showNextNodeBoxes;
 Helper.prototype.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.prototype.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.prototype.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
-
 Helper.prototype.insertTagsCallbacks = Helper_insertTagsCallbacks;
 Helper.prototype.insertTagsFromPopupCallbacks = Helper_insertTagsFromPopupCallbacks;
-
 Helper.prototype.processCallbacks = Helper_processCallbacks;
 Helper.prototype.showResponseProcessCallbacks = Helper_showResponseProcessCallbacks;
 Helper.prototype.callbacksInsert = Helper_callbacksInsert;
-
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.loaderChangeBlogCommentStatus = Helper_loaderChangeBlogCommentStatus;
 Helper.prototype.showResponseChangeBlogCommentStatus = Helper_showResponseChangeBlogCommentStatus;
@@ -100,6 +96,7 @@ Helper.prototype.getAttr = Helper_getAttr;
 Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
+Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
 Helper.prototype.URLify = Helper_URLify;
 
@@ -895,7 +892,7 @@ function Helper_insertTagsCallbacks(id, str)
 			var cPos=startPos+(str.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
-			//txtarea.scrollTop=scrollTop;
+			txtarea.scrollTop=scrollTop;
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
@@ -956,7 +953,7 @@ function Helper_insertTagsFromPopupCallbacks(id, str)
 			var cPos=startPos+(str.length+myText.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
-			//txtarea.scrollTop=scrollTop;
+			txtarea.scrollTop=scrollTop;
 		}
 		// reposition cursor if possible
 		if (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
@@ -1484,6 +1481,28 @@ function Helper_getDataParentNode (elem, level)
 		a = a.parentNode;
 	}
 	return Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+/**
+ * Getter for parent node next sibling.
+ *
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Parent node next sibling
+ * @throws applyError on exception
+ */
+function Helper_getParentNodeNextSibling (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'ie' || this.browser == 'sa')
+		level-- ;
+		
+	for (var a = elem.parentNode; level > 0; level--) {
+		a = a.nextSibling;
+	}
+	if (typeof a != 'undefined')
+		return a;
 }
 
 /**
