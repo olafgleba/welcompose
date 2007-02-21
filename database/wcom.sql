@@ -53,7 +53,7 @@ CREATE TABLE `application_info` (
 )
 ENGINE=INNODB;
 
-INSERT INTO `application_schema_info` (`version`) VALUES ('@@schema_version@@');
+INSERT INTO `application_info` (`version`) VALUES ('@@schema_version@@');
 
 
 -- Drop table application_projects
