@@ -316,6 +316,7 @@ function Helper_showDependingFormfield (elem)
 		$('_port').style.display = 'block';
 		$('_socket').style.display = 'none';
 	}
+	$('database_connection_method').focus();
 }
 
 /**
@@ -339,7 +340,6 @@ function Helper_setFormfieldGroup ()
 		$('_port').style.display = 'block';
 		$('_socket').style.display = 'none';
 	}
-	self.focus();
 }
 
 
