@@ -1048,7 +1048,7 @@
 </INDEX>
 </INDEXES>
 </ENTITY>
-<ENTITY ID="8505" Name="application_info" XPos="1460" YPos="2430" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="\n" EndScript="INSERT INTO `application_info` (`version`) VALUES (\a@@schema_version@@\a);\n" Generate="1" >
+<ENTITY ID="8505" Name="application_info" XPos="1460" YPos="2430" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" FillColor="16777215" LineColor="8388608" FontColor="0" CharacterSet="" Collate="" Comments="" Description="" Annotation="" BeginScript="\n" EndScript="INSERT INTO `application_info` (`schema_version`) VALUES (\a@@schema_version@@\a);\n" Generate="1" >
 <COLUMNS>
 <COLUMN ID="8506" Name="application_version" DomainID="-1" Pos="0" Datatype="14" Type="VARCHAR" Width="255" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="">
 </COLUMN>
