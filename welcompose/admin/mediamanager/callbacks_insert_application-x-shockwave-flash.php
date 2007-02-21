@@ -160,7 +160,8 @@ try {
 		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('bgcolor', 'trim');
 	$FORM->applyFilter('bgcolor', 'strip_tags');
-	//$FORM->addRule('bgcolor', gettext('Please use Hexidimal Notiation'), 'regex', WCOM_REGEX_NUMERIC, 'client');
+	$FORM->addRule('bgcolor', gettext('Please enter a hex value'), 'required');
+	$FORM->addRule('bgcolor', gettext('Please use Hexidimal Notiation'), 'regex', WCOM_REGEX_NUMERIC);
 	
 	// checkbox for param play
 	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 
@@ -190,33 +191,62 @@ try {
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
+			
+			
+	if (!$FORM->validate()) {
+		// render it
+		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+	
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
+	
+		$FORM->accept($renderer);
+	
+		// assign the form to smarty
+		$BASE->utility->smarty->assign('form', $renderer->toArray());
+	
+		// assign paths
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
+			
+		// assign target field identifier
+		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
 		
-	// render it
-	$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-	$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-	include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+		// assign current user and project id
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+
+		// display the form
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/callbacks_insert_application-x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
+
+	} else {
+		// render it either
+		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
 	
-	$FORM->accept($renderer);
+		$FORM->accept($renderer);
 	
-	// assign the form to smarty
-	$BASE->utility->smarty->assign('form', $renderer->toArray());
+		// assign the form to smarty
+		$BASE->utility->smarty->assign('form', $renderer->toArray());
 	
-	// assign paths
-	$BASE->utility->smarty->assign('wcom_admin_root_www',
-		$BASE->_conf['path']['wcom_admin_root_www']);
-	
-	// assign target field identifier
-	$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
-	
-	/*
-	 * execute text converter callback if request method ist post
-	 */
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	
+		// assign paths
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
+					
+		// assign target field identifier
+		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+			
+		/*
+		 * execute text converter callback if request method ist post
+		 */
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 
@@ -233,22 +263,22 @@ try {
 			'play' => ($FORM->exportValue('play') == 1) ? '<param="play" value="false" />' : '',
 			'loop' => ($FORM->exportValue('loop') == 1) ? '<param="loop" value="false" />' : ''
 		);
-	
+
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
 		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);	
 
 		// assign callback build
 		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);
+		
+		// assign current user and project id
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+
+		// display the form
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/callbacks_insert_application-x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
 	}
-	
-	// assign current user and project id
-	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
-
-	// display the form
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('mediamanager/callbacks_insert_application-x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
-
+		
 	// flush the buffer
 	@ob_end_flush();
 	
