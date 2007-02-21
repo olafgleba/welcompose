@@ -35,7 +35,7 @@
 <div class="mmwrap">
 <label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElementMyLocal"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
-<input class="w200" type="text" id="mm_tags" value="{$request.mm_tags|escape:"htmlall"}" />
+<input class="w200" type="text" id="mm_tags" value="{if !empty($request.mm_tags)}{$request.mm_tags|escape:"htmlall"}{/if}" />
 </span>
 </label>
 </div>
@@ -120,7 +120,7 @@
 <span id="mm_user_wrap">
 <table>
 <tr>
-<td><input class="w150" type="text" id="mm_user" value="{$request.mm_user|escape:"htmlall"}" /></td>
+<td><input class="w150" type="text" id="mm_user" value="{if !empty($request.mm_user)}{$request.mm_user|escape:"htmlall"}{/if}" /></td>
 <td><input type="button" id="submit55" value="{i18n Load}" /></td>
 </tr>
 </table>
@@ -136,9 +136,11 @@
 <span id="mm_photoset_wrap">
 <select id="mm_photoset">
 <option value="">{i18n Please choose...}</option>
+{if !empty($photosets)}
 {foreach from=$photosets item=_photoset}
 <option value="{$_photoset.id|escape:"htmlall"}"{if $request.mm_photoset == $_photoset.id} selected="selected"{/if}>{$_photoset.title|truncate:25:"..."|escape:"htmlall"}</option>
 {/foreach}
+{/if}
 </select>
 </span>
 </label>
@@ -149,7 +151,7 @@
 <div class="mmwrap">
 <label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_flickrtags_wrap">
-<input class="w200" type="text" id="mm_flickrtags" value="{$request.mm_flickrtags|escape:"htmlall"}" />
+<input class="w200" type="text" id="mm_flickrtags" value="{if !empty($request.mm_flickrtags)}{$request.mm_flickrtags|escape:"htmlall"}{/if}" />
 </span>
 </label>
 </div>
@@ -162,6 +164,7 @@
 <div id="myFlickr_mm_contentToPopulate">
 {if empty($error)}
 <table class="mm_content">
+{if !empty($photos)}
 {foreach from=$photos.photos item=_photo}
 <tr>
 <td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content}"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
@@ -179,6 +182,7 @@
 </td>
 </tr>
 {/foreach}
+{/if}
 </table>
 {else}
 {$error}

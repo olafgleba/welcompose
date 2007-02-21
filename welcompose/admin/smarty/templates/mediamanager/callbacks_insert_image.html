@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
-var form_target = '{$form_target}';
-var callback_media_result = '{$callback_media_result}';
+var form_target = '{if !empty($form_target)}{$form_target}{/if}';
+var callback_media_result = '{if !empty($callback_media_result)}{$callback_media_result}{/if}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
