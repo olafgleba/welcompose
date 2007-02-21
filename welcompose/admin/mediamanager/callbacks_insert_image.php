@@ -140,32 +140,64 @@ try {
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
 	
-	// render it
-	$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-	$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-	include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
+	if (!$FORM->validate()) {
+		// render it
+		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
 	
-	$FORM->accept($renderer);
+		$FORM->accept($renderer);
 	
-	// assign the form to smarty
-	$BASE->utility->smarty->assign('form', $renderer->toArray());
+		// assign the form to smarty
+		$BASE->utility->smarty->assign('form', $renderer->toArray());
 	
-	// assign paths
-	$BASE->utility->smarty->assign('wcom_admin_root_www',
-		$BASE->_conf['path']['wcom_admin_root_www']);
+		// assign paths
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
 	
-	// assign form target
-	$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+		// assign form target
+		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+		
+		// assign current user and project id
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+
+		// display the form
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+		
+	} else {
+		// render it
+		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
+		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 	
-	/*
-	 * execute text converter callback if request method ist post
-	 */
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
 	
+		$FORM->accept($renderer);
+	
+		// assign the form to smarty
+		$BASE->utility->smarty->assign('form', $renderer->toArray());
+	
+		// assign paths
+		$BASE->utility->smarty->assign('wcom_admin_root_www',
+			$BASE->_conf['path']['wcom_admin_root_www']);
+	
+		// assign form target
+		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
+		
+		// assign current user and project id
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+
+		// display the form
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+			
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 	
@@ -185,14 +217,14 @@ try {
 		
 		// assign callback build
 		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);
-	}
 	
-	// assign current user and project id
-	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
+		// assign current user and project id
+		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 
-	// display the form
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+		// display the form
+		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
+	}
 
 	// flush the buffer
 	@ob_end_flush();

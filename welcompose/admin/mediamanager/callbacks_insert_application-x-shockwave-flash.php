@@ -160,8 +160,6 @@ try {
 		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('bgcolor', 'trim');
 	$FORM->applyFilter('bgcolor', 'strip_tags');
-	$FORM->addRule('bgcolor', gettext('Please enter a hex value'), 'required');
-	$FORM->addRule('bgcolor', gettext('Please use Hexidimal Notiation'), 'regex', WCOM_REGEX_NUMERIC);
 	
 	// checkbox for param play
 	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 
@@ -191,7 +189,6 @@ try {
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
 	));
-			
 			
 	if (!$FORM->validate()) {
 		// render it
@@ -243,10 +240,7 @@ try {
 					
 		// assign target field identifier
 		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
-			
-		/*
-		 * execute text converter callback if request method ist post
-		 */
+
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 
