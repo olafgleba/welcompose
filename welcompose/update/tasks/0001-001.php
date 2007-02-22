@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: 0001-005.php
+ * File: 0001-001.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id$
+ * $Id: 0001-002.php 924 2007-02-22 12:47:36Z andreas $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -63,7 +63,7 @@ try {
 	
 	// define major/minor task number
 	define('TASK_MAJOR', '0001');
-	define('TASK_MINOR', '005');
+	define('TASK_MINOR', '001');
 	
 	// get schema version from database
 	$sql = "
@@ -81,29 +81,34 @@ try {
 	 * References
 	 * ----------
 	 *
-	 * Changeset: 833
-	 * Ticket: 6
+	 * Changeset: 886
+	 * Ticket: 25
 	 * 
 	 * Changes to be applied
 	 * ---------------------
 	 *
-	 * - Add unique key around content_boxes.page and content_boxes.name
-	 *   UNIQUE INDEX `unique_name_per_page`(`page`, `name`)
+	 *  - New definition for application_info.application_version and
+	 *    application_info.schema_version:
+	 *    `application_version` varchar(255) NULL
+	 *    `schema_version` varchar(255) NULL
+	 * 
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
 			// begin transaction
 			$BASE->db->begin();
 		
-			// add new index
+			// convert fields in application_info to new types
 			$sql = "
 				ALTER TABLE
-					".WCOM_DB_CONTENT_BOXES."
-				ADD
-					UNIQUE INDEX `unique_name_per_page`(`page`, `name`)
+					".WCOM_DB_APPLICATION_INFO."
+				CHANGE
+					`application_version` `application_version` varchar(255) NULL,
+				CHANGE
+					`schema_version` `schema_version` varchar(255) NULL
 			";
 			$BASE->db->execute($sql);
-		
+			
 			// update schema version
 			$sqlData = array(
 				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
@@ -125,9 +130,9 @@ try {
 	// assign task number
 	$BASE->utility->smarty->assign('task', TASK_MAJOR.'-'.TASK_MINOR);
 	
-	// display the form
+	// display the page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('tasks/0001-005.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('tasks/0001-001.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();

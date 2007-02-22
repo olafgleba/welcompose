@@ -137,9 +137,6 @@ try {
 			
 			// commit
 			$BASE->db->commit();
-			
-			// assign task number
-			$BASE->utility->smarty->assign('task', '0001-004');
 		} catch (Exception $e) {
 			// do rollback
 			$BASE->db->rollback();
@@ -148,6 +145,9 @@ try {
 			throw $e;
 		}
 	}
+	
+	// assign task number
+	$BASE->utility->smarty->assign('task', TASK_MAJOR.'-'.TASK_MINOR);
 	
 	// display the form
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
