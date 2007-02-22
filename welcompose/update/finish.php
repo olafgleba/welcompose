@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: database.php
+ * File: finish.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id$
+ * $Id: backup.php 901 2007-02-17 21:50:34Z andreas $
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
@@ -63,48 +63,9 @@ try {
 		exit;
 	}
 	
-	// connect to database
-	$BASE->loadClass('database');
-	
-	// get schema version from database
-	$sql = "
-		SELECT
-			`schema_version`
-		FROM
-			".WCOM_DB_APPLICATION_INFO."
-		LIMIT
-			1
-	";
-	$version = $BASE->db->select($sql, 'field');
-	
-	// make sure that we got a schema_version
-	if ($version == "") {
-		// define major/minor initial task number
-		$major = '0000';
-		$minor = '000';
-	} else {
-		list($major, $minor) = explode('-', $version);
-	}
-	
-	// determine tasks to be executed
-	$tasks = array();
-	$task_dir_contents = scandir(dirname(__FILE__).DIRECTORY_SEPARATOR.'tasks');
-	foreach ($task_dir_contents as $_file) {
-		if ($_file == '.' || $_file == '..') {
-			continue;
-		}
-		
-		if (preg_match('=([0-9]{4})-([0-9]{3})\.php=', $_file, $matches)) {
-			if ($matches[1] > $major || ($matches[1] == $major && $matches[2] > $minor)) {
-				$tasks[$matches[1].'-'.$matches[2]] = $matches[0];
-			}
-		}
-	}
-	$BASE->utility->smarty->assign('tasks', $tasks);
-	
 	// display the form
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('database.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('finish.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();

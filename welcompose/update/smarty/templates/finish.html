@@ -18,7 +18,6 @@
 <script type="text/javascript" src="static/libs/wcom.update.helper.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.events.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.validation.js"></script>
-<script type="text/javascript" src="static/libs/wcom.update.updater.js"></script>
 
 </head>
 
@@ -31,55 +30,23 @@
 <p>Welcompose Update</p>
 <!-- logo --></div>
 
-{include file="_inc_navigation.html" on="database"}
+{include file="_inc_navigation.html" on="finish"}
 
 <!-- header --></div>
 
 <div id="content">
 
-<h1>Database</h1>
+<h1>Update finished</h1>
 
-<p>Now, it's time to update your database structure. The update script has
-determined which modifications have to be done. As soon as you press on
-<em>Start</em>, the database update process will begin. Please note that the
-update scripts may ask you some questions. Answer them to complete the update
-process.</p>
+<p>You have successfully performed the Welcompose update. Now you can go back to
+the admin area and start using our improved software.</p>
 
-
-<form action="" method="post" id="update">
-	
-<fieldset class="topbg">
-	
-<h2>Update tasks</h2>
-{if !empty($tasks)}
-<table id="tasks">
-<tbody>
-<tr>
-<th class="task">Task</td>
-<th class="status">Status</td>
-</tr>
-{foreach from=$tasks key=task item=file}
-<tr>
-<td class="task" id="task_{$task}">{$task}</td>
-<td class="status" id="status_{$task}"> </td>
-</tr>
-{/foreach}
-</tbody>
-</table>
-
-<input type="button" class="submit200update" id="startupdate" value="Start update" />
-
-
-{else}
-<p>Nothing to be done &ndash; go ahead!</p>
-{/if}
+<p>As the update procedure isn't fully automated yet, <strong>you are strongly
+advised to delete the entire update directory from your webspace</strong>.</p>
 
 <div class="linkconbackup">
-<a href="finish.php" class="submit200backup">Finish update</a>
+<a href="../admin/" class="submit200backup">Take me to the admin area</a>
 </div>
-
-</fieldset>
-</form>
 
 <!-- content --></div>
 
