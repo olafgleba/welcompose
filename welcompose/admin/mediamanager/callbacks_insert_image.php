@@ -190,13 +190,6 @@ try {
 	
 		// assign form target
 		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
-		
-		// assign current user and project id
-		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
-
-		// display the form
-		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('mediamanager/callbacks_insert_image.html', WCOM_TEMPLATE_KEY);
 			
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
