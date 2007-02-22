@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: 0001-002.php
+ * File: 0001-003.php
  *
  * Copyright (c) 2006 sopic GmbH
  *
@@ -63,7 +63,7 @@ try {
 	
 	// define major/minor task number
 	define('TASK_MAJOR', '0001');
-	define('TASK_MINOR', '002');
+	define('TASK_MINOR', '003');
 	
 	// get schema version from database
 	$sql = "
@@ -128,7 +128,7 @@ try {
 			$BASE->db->commit();
 			
 			// assign task number
-			$BASE->utility->smarty->assign('task', '0001-002');
+			$BASE->utility->smarty->assign('task', '0001-003');
 		} catch (Exception $e) {
 			// do rollback
 			$BASE->db->rollback();
@@ -140,7 +140,7 @@ try {
 	
 	// display the form
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('tasks/0001-002.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('tasks/0001-003.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();
