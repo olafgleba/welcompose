@@ -44,23 +44,6 @@ provider about it too.</p>
 <p><strong>Attention</strong>: Please note that we're only checking the capabilities of PHP here. This test does not
 check if your database is new enough.</p> 
 
-{if !empty($form.errors)}
-<div id="error">
-<ul class="req">
-{foreach from=$form.errors item="error"}
-	<li>{$error}</li>
-{/foreach}
-</ul>
-<!-- error --></div>
-{/if}
-
-<form class="botbg"{$form.attributes}>
-{$form.javascript}
-
-<fieldset class="topbg">
-
-{$form.hidden}
-
 <h2>Checking for available extensions</h2>
 <table>
 <tr>
@@ -117,9 +100,6 @@ check if your database is new enough.</p>
 <a href="backup.php" class="submit200">Go to next step</a>
 </div>
 {/if}
-
-</fieldset>
-</form>
 
 <!-- content --></div>
 
