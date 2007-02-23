@@ -684,6 +684,16 @@
 			<editable>0</editable>
 		</template-type>
 		<template-type>
+			<name>blog_comments_rss20</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>blog_comments_atom10</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
 			<name>blog_podcast_itms</name>
 			<description/>
 			<editable>0</editable>

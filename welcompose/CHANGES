@@ -1,6 +1,9 @@
 Welcompose 0.8.0
 ================
 
+ * Output: Support for comment feeds (RSS 2.0 and Atom 1.0) added; see
+   ticket:27. (andreas)
+ * Other: Updater added, field types in application_info changed (andreas)
  * Output: Support for numeral captchas added; see ticket:14 (andreas)
  * Core, Admin: Generator forms implemented; see ticket:11. (andreas)
  * Database: Tables content_generator_forms and content_generator_form_fields
