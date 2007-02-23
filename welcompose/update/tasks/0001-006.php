@@ -91,6 +91,7 @@ try {
 	 * - Add page type WCOM_GENERATOR_FORM to every project
 	 * - Add template types generator_form_index and generator_form_mail to
 	 *   every project
+	 * - Add new rights: CONTENT_GENERATORFORM{,FIELD}_{USE,MANAGE}
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
@@ -281,6 +282,159 @@ try {
 					// create new template_type
 					if ($insert) {
 						$BASE->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
+					}
+				}
+			}
+			
+			// add new rights
+			foreach ($projects as $_project) {
+				// get existing rights
+				$sql = "
+					SELECT
+						`id`,
+						`project`,
+						`name`
+					FROM
+						".WCOM_DB_USER_RIGHTS."
+					WHERE
+						`project` = :project
+				";
+				$rights = $BASE->db->select($sql, 'multi', array('project' => (int)$_project['id']));
+				
+				// define rights
+				$rights_to_create = array(
+					'CONTENT_GENERATORFORM_USE' => 'Allows usage of generator forms.',
+					'CONTENT_GENERATORFORM_MANAGE' => 'Allows management of generator forms.',
+					'CONTENT_GENERATORFORMFIELD_USE' => 'Allows usage of generator form fields.',
+					'CONTENT_GENERATORFORMFIELD_MANAGE' => 'Allows management of generator form fields.'
+				);
+				
+				foreach ($rights_to_create as $_name => $_description) {
+					// prepare sql data
+					$sqlData = array(
+						'project' => (int)$_project['id'],
+						'name' => $_name,
+						'description' => $_description,
+						'editable' => '0'
+					);
+				
+					// if the right already exists, force update
+					$insert = true;
+					foreach ($rights as $_right) {
+						if ($_right['name'] == $_name) {
+							// prepare where clause
+							$where = " WHERE `id` = :id ";
+						
+							// prepare bind params
+							$bind_params = array(
+								'id' => (int)$_right['id']
+							);
+							
+							// update right
+							$BASE->db->update(WCOM_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
+							
+							$insert = false;
+							break;
+						}
+					}
+					
+					// create new right
+					if ($insert) {
+						$BASE->db->insert(WCOM_DB_USER_RIGHTS, $sqlData);
+					}
+				}
+			}
+			
+			// create links between new rights and user groups
+			foreach ($projects as $_project) {
+				// define list with group/right mappings
+				$rights = array(
+					'CONTENT_GENERATORFORM_USE' => array(
+						'WCOM_ADMIN',
+						'WCOM_REGULAR',
+						'WCOM_ANONYMOUS'
+					),
+					'CONTENT_GENERATORFORM_MANAGE' => array(
+						'WCOM_ADMIN',
+						'WCOM_REGULAR'
+					),
+					'CONTENT_GENERATORFORMFIELD_USE' => array(
+						'WCOM_ADMIN',
+						'WCOM_REGULAR',
+						'WCOM_ANONYMOUS'
+					),
+					'CONTENT_GENERATORFORMFIELD_MANAGE' => array(
+						'WCOM_ADMIN',
+						'WCOM_REGULAR'
+					)
+				);
+				
+				// sync database with list of group/right mappings
+				foreach ($rights as $_right => $_groups) {
+					// get right id
+					$sql = "
+						SELECT
+							`id`
+						FROM
+							".WCOM_DB_USER_RIGHTS."
+						WHERE
+							`project` = :project
+						  AND
+							`name` = :name
+						LIMIT
+							1
+					";
+					$right_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_right));
+					
+					// if the right id is empty, we have to stop here
+					if (empty($right_id) || !is_numeric($right_id)) {
+						throw new Exception('Required user right could not be found');
+					}
+					
+					foreach ($_groups as $_group) {
+						// get right id
+						$sql = "
+							SELECT
+								`id`
+							FROM
+								".WCOM_DB_USER_GROUPS."
+							WHERE
+								`project` = :project
+							  AND
+								`name` = :name
+							LIMIT
+								1
+						";
+						$group_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_group));
+						
+						// if the group id is empty, we have to stop here
+						if (empty($group_id) || !is_numeric($group_id)) {
+							throw new Exception('Required user group could not be found');
+						}
+						
+						// let's see if there already is a link between group and right
+						$sql = "
+							SELECT
+								COUNT(*)
+							FROM
+								".WCOM_DB_USER_GROUPS2USER_RIGHTS."
+							WHERE
+								`right` = :right
+							  AND
+								`group` = :group
+						";
+						$count = $BASE->db->select($sql, 'field', array('right' => $right_id, 'group' => $group_id));
+						
+						if ((int)$count > 0) {
+							continue;
+						} else {
+							// create new link
+							$sqlData = array(
+								'group' => $group_id,
+								'right' => $right_id
+							);
+							$BASE->db->insert(WCOM_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
+						}
 					}
 				}
 			}
