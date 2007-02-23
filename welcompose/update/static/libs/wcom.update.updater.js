@@ -135,6 +135,7 @@ function Updater_processTasks (lastTarget)
 				});	
 		} else {
 			$('startupdate').style.display = 'none';
+			$('finishupdate').style.display = 'block';
 		}
 	} catch (e) {
 		_applyError(e);
@@ -159,17 +160,22 @@ function Updater_loaderProcessTasks ()
 function Updater_showResponseProcessTasks (req)
 {
 	try {
-		$(target).innerHTML = req.responseText;
-		var rimg = document.createElement("img");
-		rimg.setAttribute('src', 'static/img/icons/success.gif');
-		rimg.setAttribute('width', '17');
-		rimg.setAttribute('height', '17');
-		rimg.setAttribute('alt', '');
-		$(target).appendChild(rimg);
+		var r = req.responseText.match(/\berror\b/gi);
+
+		if (r) {
+			$(target).innerHTML = req.responseText;
+		} else {
+			$(target).innerHTML = req.responseText;
+			var rimg = document.createElement("img");
+			rimg.setAttribute('src', 'static/img/icons/success.gif');
+			rimg.setAttribute('width', '17');
+			rimg.setAttribute('height', '17');
+			rimg.setAttribute('alt', '');
+			$(target).appendChild(rimg);
 		
-		// process following tasks
-		setTimeout ("Updater.processTasks(target)", 500);
-		
+			// process following tasks
+			setTimeout ("Updater.processTasks(target)", 500);
+		}
 	} catch (e) {
 		_applyError(e);
 	}

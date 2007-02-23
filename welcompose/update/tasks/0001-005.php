@@ -94,7 +94,7 @@ try {
 		try {
 			// begin transaction
 			$BASE->db->begin();
-		
+			
 			// add new index
 			$sql = "
 				ALTER TABLE
@@ -121,13 +121,6 @@ try {
 			throw $e;
 		}
 	}
-	
-	// assign task number
-	$BASE->utility->smarty->assign('task', TASK_MAJOR.'-'.TASK_MINOR);
-	
-	// display the form
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('tasks/0001-005.html', WCOM_TEMPLATE_KEY);
 	
 	// flush the buffer
 	@ob_end_flush();

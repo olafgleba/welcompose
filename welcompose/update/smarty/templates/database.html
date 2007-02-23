@@ -46,8 +46,7 @@ update scripts may ask you some questions. Answer them to complete the update
 process.</p>
 
 
-<form action="" method="post" id="update">
-	
+<form class="botbg">
 <fieldset class="topbg">
 	
 <h2>Update tasks</h2>
@@ -69,13 +68,12 @@ process.</p>
 
 <input type="button" class="submit200update" id="startupdate" value="Start update" />
 
-
 {else}
-<p>Nothing to be done &ndash; go ahead!</p>
+<p class="notasks">Nothing to be done &ndash; go ahead!</p>
 {/if}
 
-<div class="linkconbackup">
-<a href="finish.php" class="submit200backup">Finish update</a>
+<div class="linkconfinish" id="finishupdate">
+<a href="finish.php" class="submit200finish">Finish update</a>
 </div>
 
 </fieldset>

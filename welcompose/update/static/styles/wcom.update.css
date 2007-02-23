@@ -181,7 +181,7 @@ line-height: 130%;
 /* %F =forms */
 form.botbg {
 width: 729px;
-padding: 40px 0;
+padding: 10px 0 40px 0;
 background: transparent url(../img/bg_fieldset_bot.gif) left bottom no-repeat;
 }
 fieldset.topbg {
@@ -267,12 +267,12 @@ margin: 20px 0 0 192px;
 input.submit200update {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
-margin: 20px 0 0 15px;
+margin: 0 0 25px 15px;
 }
 input.submit200nomargin {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
-margin: 20px 0 0 15px;
+margin: 20px 0 25px 15px;
 }
 
 
@@ -282,7 +282,7 @@ margin: 20px 0 0 0;
 }
 .linkconfinish {
 display: block;
-margin: 30px 0 0 10px;
+margin: 0 0 25px 0;
 }
 .linkconbackup {
 display: block;
@@ -290,6 +290,7 @@ margin: 30px 0 0 10px;
 }
 a.submit200:link, a.submit200:visited,
 a.submit200finish:link, a.submit200finish:visited,
+a.submit200finished:link, a.submit200finished:visited,
 a.submit200backup:link, a.submit200backup:visited {
 position: relative;
 text-align: left;
@@ -305,13 +306,17 @@ margin: 0 0 0 15px;
 cursor: pointer;
 }
 a.submit200finish:link, a.submit200finish:visited {
-padding-right: 95px;
+padding-right: 116px;
+}
+a.submit200finished:link, a.submit200finished:visited {
+padding-right: 41px;
 }
 a.submit200backup:link, a.submit200backup:visited {
 padding-right: 87px;
 }
 a.submit200:hover, a.submit200:active,
 a.submit200finish:hover,a.submit200finish:active,
+a.submit200finished:hover,a.submit200finished:active,
 a.submit200backup:hover,a.submit200backup:active {
 text-decoration: none;
 }
@@ -501,9 +506,16 @@ text-decoration: none;
 vertical-align: middle;
 }
 
-
+/* process ids */
 #_socket {
 display: none;
+}
+#finishupdate {
+display: none;
+}
+#content p.notasks {
+padding: 10px 0 15px 0;
+margin: 0 0 0 15px;
 }
 
 
