@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  *
- * $Id: 0001-006.php 930 2007-02-23 15:19:10Z andreas $
+ * $Id$
  *
  * @copyright 2006 sopic GmbH
  * @author Andreas Ahlenstorf
