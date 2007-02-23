@@ -50,6 +50,9 @@ tar cvfz "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.gz welco
 tar cvfj "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.bz2 welcompose
 zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src" welcompose
 
+# remove update directory
+rm -rf welcompose/update
+
 # create compressed package
 echo "Creating compressed package"
 php scripts/installer/create_install_package.php \
