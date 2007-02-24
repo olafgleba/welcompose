@@ -1066,7 +1066,7 @@ public function resolvePage ()
 	
 		// execute query and evaluate result
 		$result = intval($this->base->db->select($sql, 'field', $bind_params));
-		if ($result > 1) {
+		if ($result >= 1) {
 			return (int)$result;
 		} else {
 			throw new Content_PageException("Requested page could not be found");
