@@ -93,7 +93,7 @@ Mediamanager.prototype.showResponseInvokeTagInputs = Mediamanager_showResponseIn
 Mediamanager.prototype.loaderMyLocal = Mediamanager_loaderMyLocal;
 Mediamanager.prototype.deleteMediaItem = Mediamanager_deleteMediaItem;
 Mediamanager.prototype.processMediaCallbacks = Mediamanager_processMediaCallbacks;
-Mediamanager.prototype.processFromPopupMediaCallbacks = Mediamanager_processFromPopupMediaCallbacks;
+Mediamanager.prototype.insertMediaCallbacks = Mediamanager_insertMediaCallbacks;
 Mediamanager.prototype.showResponseProcessMediaCallbacks = Mediamanager_showResponseProcessMediaCallbacks;
 
 /**
@@ -1062,7 +1062,17 @@ function Mediamanager_showResponseProcessMediaCallbacks(req)
  * @param {global} callback_media_result Current result set
  * @throws applyError on exception
  */
-function Mediamanager_processFromPopupMediaCallbacks (elem)
+/*function Mediamanager_processFromPopupMediaCallbacks (elem)
+{
+	try {
+		Helper.insertTagsFromPopupCallbacks(form_target, callback_media_result);
+		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}*/
+
+function Mediamanager_insertMediaCallbacks (elem)
 {
 	try {
 		Helper.insertTagsFromPopupCallbacks(form_target, callback_media_result);

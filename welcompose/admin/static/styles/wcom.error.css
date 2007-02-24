@@ -20,7 +20,7 @@
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License
  */
 
-/* error_popup_403.html, error_popup_723.html
+/* error_popup_403.html, error_popup_723.html, error_mm_236.html
  * Simple error.html is defined in wcom.basic.css
  */
 
@@ -72,15 +72,17 @@ padding: 0 0 3px 7px;
 }
 
 
-body#errormsgpopup403 h2, body#errormsgpopup723 h2  {
+body#errormsgpopup723 h2,
+body#errormsgpopup403 h2  {
 position: relative;
 font-size: 1.0em;
 font-weight: normal;
 color: #000;
 margin: 30px 0 15px 10px;
 }
-body#errormsgpopup403 h2 span,
-body#errormsgpopup723 h2 span {
+
+body#errormsgpopup723 h2 span,
+body#errormsgpopup403 h2 span {
 color: #ff620d;
 font-weight: bold;
 }

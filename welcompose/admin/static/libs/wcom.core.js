@@ -546,7 +546,7 @@ function Init_getVars ()
 			}
 		}
 		if (typeof callback_media_result != 'undefined' && callback_media_result != '') {
-				Mediamanager.processFromPopupMediaCallbacks(callback_media_result);
+				Mediamanager.insertMediaCallbacks(callback_media_result);
 		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
 			if (podcast == 1) {

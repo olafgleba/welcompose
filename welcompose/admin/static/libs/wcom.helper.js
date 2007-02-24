@@ -154,9 +154,13 @@ function Helper_launchPopup (trigger, elem)
 	}
 }
 
-
-
-
+/**
+ * Get current text converter form value.
+ * 
+ * @see #processCallbacks
+ * @see Mediamanager#processMediaCallbacks
+ * @throws applyError on exception
+ */
 function Helper_getTextConverterValue ()
 {
 	try {		
@@ -179,6 +183,13 @@ function Helper_getTextConverterValue ()
 	}
 }
 
+/**
+ * Get current textarea selection.
+ * 
+ * @see #processCallbacks
+ * @see Mediamanager#processMediaCallbacks
+ * @throws applyError on exception
+ */
 function Helper_getSelectionText(el)
 {
 	try {
@@ -207,13 +218,13 @@ function Helper_getSelectionText(el)
 }
 
 /**
- * Change delimiter on given form value.
+ * Get current delimiter value.
  * <br />
  * In some cases it is required to change the delimiter to avoid syntax
  * conflicts while inserting references (e.g. working with cascading
  * style sheets or javascript, which uses brackets also).
  * 
- * @see #launchPopup
+ * @see #processCallbacks
  * @throws applyError on exception
  */
 function Helper_getDelimiterValue()
@@ -230,12 +241,14 @@ function Helper_getDelimiterValue()
 }
 
 /**
- * Get the current pager_page value.
+ * Get the current pager page value.
  * <br />
- * This is needed for Media Manager action popups (<em>upload</em>, <em>edit</em>)
+ * This is needed for Mediamanager action popups (<em>upload</em>, <em>edit</em>)
  * which supposed to refresh the content display on close of popup.
  * 
  * @see #launchPopup
+ * @see #processCallbacks
+ * @see Mediamanager#processMediaCallbacks
  * @throws applyError on exception
  */
 function Helper_getPagerPage()
@@ -251,6 +264,16 @@ function Helper_getPagerPage()
 	}
 }
 
+/**
+ * Get current insert type url string.
+ * <br />
+ * We fetch the form tag action string and perform a regex.
+ * This is used within {@link #processCallbacks} to differ how to treat
+ * the callbacks strings we build in callbacks.php.
+ * 
+ * @see #processCallbacks
+ * @throws applyError on exception
+ */
 function Helper_getInsertType ()
 {
 	try {		
@@ -845,10 +868,7 @@ function Helper_showResponsePagesThirdLinks(req)
  * <br />
  * Adapted from http://sourceforge.net/projects/wikipedia
  * 
- * @see #insertInternalLink
- * @see #insertInternalLinkNoHref
- * @see #insertInternalLinkGlobalTemplates
- * @see #insertInternalLinkGlobalFiles
+ * @see Mediamanager#showResponseProcessMediaCallbacks
  * @param {string} id Form element to populate
  * @param {string} str Opening part of build string
  * @param {string} tagClose Closing part of build string
@@ -906,10 +926,7 @@ function Helper_insertTagsCallbacks(id, str)
  * <br />
  * Adapted from http://sourceforge.net/projects/wikipedia
  * 
- * @see #insertInternalLink
- * @see #insertInternalLinkNoHref
- * @see #insertInternalLinkGlobalTemplates
- * @see #insertInternalLinkGlobalFiles
+ * @see #showResponseProcessCallbacks
  * @param {string} id Form element to populate
  * @param {string} str Opening part of build string
  * @param {string} tagClose Closing part of build string
@@ -965,10 +982,9 @@ function Helper_insertTagsFromPopupCallbacks(id, str)
 /**
  * Process and handle internal callbacks.
  * <br />
- * Depending on the delivered mime_type we need to launch a popup or 
- * simple fire a ajax.request to return the wcom_plugin callbacks.
+ * This function handles all the reference popups within the welcompose admin interface.
  * 
- * @see #showResponseProcessMediaCallbacks
+ * @see #showResponseProcessCallbacks
  * @param {string} elem Current elem to process
  * @throws applyError on exception
  */
@@ -995,7 +1011,7 @@ function Helper_processCallbacks (elem)
 			'boxes_links': this.callbacksPopupWindowWidth745
 		};
 
-		// temp var to further process
+		// temp var used in for loop
 		var _width = this.elTarget;
 		
 		// execute url target width definition
@@ -1015,7 +1031,7 @@ function Helper_processCallbacks (elem)
 			'boxes_links': 'templating'
 		};
 		
-		// temp var to further process
+		// temp var used in for loop
 		var _path = this.elTarget;
 		
 		// execute url paths definition
