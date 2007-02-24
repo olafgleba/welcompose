@@ -85,6 +85,16 @@ var definitions = {
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
 		}
+	},
+	'.submit200finish' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
+		}
+	},
+	'.submit200finished' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
+		}
 	}
 };
 Behaviour.register(definitions);
