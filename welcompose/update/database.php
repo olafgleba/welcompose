@@ -79,6 +79,19 @@ try {
 	
 	// make sure that we got a schema_version
 	if ($version == "") {
+		// make sure that there's a row in application_info
+		$sql = "
+			SELECT
+				COUNT(*)
+			FROM
+				".WCOM_DB_APPLICATION_INFO."
+		";
+		$count = $BASE->db->select($sql, 'field');
+		
+		if ($count == 0) {
+			$BASE->db->insert(WCOM_DB_APPLICATION_INFO, array('schema_version' => null));
+		}
+		
 		// define major/minor initial task number
 		$major = '0000';
 		$minor = '000';
