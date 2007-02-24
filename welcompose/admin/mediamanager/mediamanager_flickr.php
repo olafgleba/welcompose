@@ -161,7 +161,7 @@ try {
 	}
 	
 	// raise error
-	$BASE->error->displayException($e, $BASE->utility->smarty);
+	$BASE->error->displayException($e, $BASE->utility->smarty, 'error_mediamanager.html');
 	$BASE->error->triggerException($e);
 	
 	// exit

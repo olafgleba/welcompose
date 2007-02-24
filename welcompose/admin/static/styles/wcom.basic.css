@@ -60,11 +60,11 @@ h2, h3, h4, p, a, li, th, td, label, select, input, textarea,
 span .bez, fieldset.void {
 font-size: 0.80em;
 }
-h2 a, h3 a, h4 a, p a, li a, th a, td a, label a, select a, input a,
+h2 a, h3 a, h4 a, h2 p, p a, li a, th a, td a, label a, select a, input a,
 li h2, li h3, li h4, li p, li a,
 td h2, td h3, td h4, th p, th a, th li, th label, th select, th input, th textarea,
 td p, td a, td li, td label, td select, td input, td textarea,
-label select, label input, label p, label a, 
+label select, label input, label p, label a,  
 textarea {
 font-size: 100%;
 }

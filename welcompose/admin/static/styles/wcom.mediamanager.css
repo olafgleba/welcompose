@@ -562,3 +562,24 @@ padding-left: 140px;
 input.showIDThree120  {
 display: none;
 }
+
+/* errors */
+#column #errormsgmmediamanager {
+border: 1px solid #efefef;
+min-height: 580px;
+margin-top: 5px;
+color: #000;
+}
+#column #errormsgmmediamanager h2  {
+font-weight: normal;
+color: #000;
+margin: 15px 0 15px 6px;
+background: none;
+}
+#errormsgmmediamanager h2 p {
+color: #ff620d;
+margin-left: 0;
+margin-top: 3px;
+line-height: 140%;
+font-weight: bold;
+}
