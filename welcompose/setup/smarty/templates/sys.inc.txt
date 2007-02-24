@@ -64,6 +64,7 @@ blog_archive_year_start_pager = "{$configuration.root_www}/index.php?project_nam
 blog_archive_month = "{$configuration.root_www}/index.php?project_name=<project_name>&page_name=<page_name>&action=ArchiveMonth&posting_year_added=<posting_year_added>&posting_month_added=<posting_month_added>"
 blog_archive_month_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&page_name=<page_name>&action=ArchiveMonth&posting_year_added=<posting_year_added>&posting_month_added=<posting_month_added>&start=<start>"
 blog_archive_month_start = "{$configuration.root_www}/index.php?project_name=<project_name>&action=ArchiveMonth&posting_year_added=<posting_year_added>&posting_month_added=<posting_month_added>"
+blog_archive_month_start_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&action=ArchiveMonth&posting_year_added=<posting_year_added>&posting_month_added=<posting_month_added>&start=<start>"
 global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&project=<project_name>"
 global_template_url_start = "{$configuration.root_www}/global_template.php?name=<global_file_name>&project=<project_name>&start=<start>"
 
