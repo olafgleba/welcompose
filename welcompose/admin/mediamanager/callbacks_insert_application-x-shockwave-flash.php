@@ -250,17 +250,17 @@ try {
 			'data' => sprintf('{get_media id="%u"}', $object['id']),
 			'width' => $object['file_width'],
 			'height' => $object['file_height'],
-			'quality' => ($FORM->exportValue('quality') != '') ? sprintf('<param="quality" value="%s" />', $FORM->exportValue('quality')) : '',
-			'scale' => ($FORM->exportValue('scale') != '') ? sprintf('<param="scale" value="%s" />', $FORM->exportValue('scale')) : '',
-			'wmode' => ($FORM->exportValue('wmode') != '') ? sprintf('<param="wmode" value="%s" />', $FORM->exportValue('wmode')) : '',
-			'bgcolor' => ($FORM->exportValue('bgcolor') != '') ? sprintf('<param="bgcolor" value="%s" />', $FORM->exportValue('bgcolor')) : '',
-			'play' => ($FORM->exportValue('play') == 1) ? '<param="play" value="false" />' : '',
-			'loop' => ($FORM->exportValue('loop') == 1) ? '<param="loop" value="false" />' : ''
+			'quality' => $FORM->exportValue('quality'),
+			'scale' => $FORM->exportValue('scale'),
+			'wmode' => $FORM->exportValue('wmode'),
+			'bgcolor' => $FORM->exportValue('bgcolor'),
+			'play' => $FORM->exportValue('play'),
+			'loop' => $FORM->exportValue('loop')
 		);
 
 		// execute text converter callback
 		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);	
+		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);
 
 		// assign callback build
 		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);
