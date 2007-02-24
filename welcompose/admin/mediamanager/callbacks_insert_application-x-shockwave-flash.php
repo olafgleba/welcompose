@@ -160,6 +160,7 @@ try {
 		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('bgcolor', 'trim');
 	$FORM->applyFilter('bgcolor', 'strip_tags');
+	$FORM->addRule('bgcolor', gettext('Please use a valid hexadezimal syntax'), 'regex', WCOM_REGEX_HEXADEZIMAL);
 	
 	// checkbox for param play
 	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 

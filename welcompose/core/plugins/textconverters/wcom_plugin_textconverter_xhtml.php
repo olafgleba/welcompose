@@ -93,14 +93,14 @@ public function mmInsertShockwave ($text, $data, $width, $height, $quality, $sca
 	if (!empty($play)) {
 		$param_play = new HtmlTag('param', 'empty');
 		$param_play->appendAttr(new HtmlTagAttr('name', 'play'));
-		$param_play->appendAttr(new HtmlTagAttr('value', ($play == 1 ? 'true' : 'false')));
+		$param_play->appendAttr(new HtmlTagAttr('value', ($play == 1 ? 'false' : 'true')));
 		$object->appendTag($param_play);
 	}
 	
 	if (!empty($loop)) {
 		$param_loop = new HtmlTag('param', 'empty');
 		$param_loop->appendAttr(new HtmlTagAttr('name', 'loop'));
-		$param_loop->appendAttr(new HtmlTagAttr('value', ($loop == 1 ? 'true' : 'false')));
+		$param_loop->appendAttr(new HtmlTagAttr('value', ($loop == 1 ? 'false' : 'true')));
 		$object->appendTag($param_loop);
 	}
 	

@@ -170,6 +170,10 @@ define("WCOM_REGEX_ANTI_SPAM_PLUGIN_INTERNAL_NAME", "=^([a-z]|_){1}([0-9a-z_]+)$
 // hex number
 define("WCOM_REGEX_HEX", "=^([a-f0-9]+)$=i");
 
+// Defines regular expression for strings containing
+// hex syntax 
+define("WCOM_REGEX_HEXADEZIMAL", "=^(^[\#]{1}[a-f0-9]{3,6}+)$=i");
+
 // Defines regular expression for strings containing a
 // url-friendly representation of a string
 define("WCOM_REGEX_MEANINGFUL_STRING", "=^([0-9a-z-]+)$=i");
