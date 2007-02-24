@@ -4,7 +4,7 @@ wcom_admin_root_www = {$configuration.root_www}/admin
 wcom_public_root_www = {$configuration.root_www}
 
 [log]
-handler = null
+handler = "null"
 name = 
 level = PEAR_LOG_NOTICE
 
