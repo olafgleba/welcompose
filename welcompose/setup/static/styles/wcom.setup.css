@@ -181,7 +181,7 @@ line-height: 130%;
 /* %F =forms */
 form.botbg {
 width: 729px;
-padding: 40px 0;
+padding: 10px 0 40px 0;
 background: transparent url(../img/bg_fieldset_bot.gif) left bottom no-repeat;
 }
 fieldset.topbg {
@@ -276,7 +276,7 @@ margin: 20px 0 0 0;
 }
 .linkconfinish {
 display: block;
-margin: 30px 0 0 10px;
+margin: 20px 0 0 0;
 }
 a.submit200:link, a.submit200:visited,
 a.submit200finish:link, a.submit200finish:visited  {
