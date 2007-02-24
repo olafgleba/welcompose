@@ -1282,14 +1282,14 @@ public function getMimeTypeConfigurations ()
 		'audio/mpeg' => array(
 			'suffix' => 'mp3',
 			'podcastable' => true,
-			'insert_callback' => 'audio-mpeg',
+			'insert_callback' => 'document',
 			'generic_type' => 'audio',
 			'icon' => 'audio.jpg'
 		),
 		'audio/x-m4a' => array(
 			'suffix' => 'm4a',
 			'podcastable' => true,
-			'insert_callback' => 'audio-x-m4a',
+			'insert_callback' => 'document',
 			'generic_type' => 'audio',
 			'icon' => 'audio.jpg'
 		),
@@ -1324,21 +1324,21 @@ public function getMimeTypeConfigurations ()
 		'video/mp4' => array(
 			'suffix' => 'mp4',
 			'podcastable' => true,
-			'insert_callback' => 'video-mp4',
+			'insert_callback' => 'document',
 			'generic_type' => 'video',
 			'icon' => 'video.jpg'
 		),
 		'video/x-m4v' => array(
 			'suffix' => 'm4v',
 			'podcastable' => true,
-			'insert_callback' => 'video-x-m4v',
+			'insert_callback' => 'document',
 			'generic_type' => 'video',
 			'icon' => 'video.jpg'
 		),
 		'video/quicktime' => array(
 			'suffix' => 'mov',
 			'podcastable' => true,
-			'insert_callback' => 'video-quicktime',
+			'insert_callback' => 'document',
 			'generic_type' => 'video',
 			'icon' => 'video.jpg'
 		)
