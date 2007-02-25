@@ -8,7 +8,7 @@
 		<title>Voraussetzungen</title>
 		
 		<para>
-			Um <application>Welcompose</application> erfolgreich in Betrieb nehmen zu können, werden folgende Komponenten benötigt:
+			Um Welcompose erfolgreich in Betrieb nehmen zu können, werden folgende Komponenten benötigt:
 		</para>
 		
 		<itemizedlist>
@@ -85,19 +85,32 @@
 			installiert sein müssen, um die optimale Funktionsfähigkeit
 			von Welcompose zu garantieren. Sollte eine oder mehrere
 			Erweiterungen nicht vorhanden oder zu alt sein, können diese
-			mit Hilfe des <link linkend="install_instructions.installation.ressourcen">PECL</link> Installers (Linux, BSD, MacOS X)
-			nachgeladen oder im Fall von Windows von der <link linkend="install_instructions.installation.ressourcen">PHP-Webseite</link>
+			mit Hilfe des
+			<link linkend="install_instructions.installation.ressourcen">PECL</link>
+			Installers (Linux, BSD, MacOS X) nachgeladen oder im Fall von
+			Windows von der
+			<link linkend="install_instructions.installation.ressourcen">PHP-Webseite</link>
 			als vorkompilierte DLLs bezogen werden.
 		</para>
 		
 		<tip>
-		<para>
-			Wenn Sie wissen wollen, welche PHP-Version und welche
-			Erweiterungen installiert sind, können Sie auch mit dem
-			PHP-Befehl <function>phpinfo();</function> die <link
-			linkend="good_to_know.phpinfo">Server-Konfiguration
-			auslesen</link>.
-		</para>
+			<para>
+				Wenn Sie wissen wollen, welche PHP-Version und welche
+				Erweiterungen installiert sind, können Sie auch mit dem
+				PHP-Befehl <function>phpinfo();</function> die <link
+				linkend="good_to_know.phpinfo">Server-Konfiguration
+				auslesen</link>.
+			</para>
+		</tip>
+		
+		<tip>
+			<para>
+				Sollte Ihnen noch kein Welcompose-Installer zur Verfügung
+				stehen, erhalten Sie im Support-Bereich ein kleines
+				Script, das unabhängig von Welcompose prüft, ob Ihr
+				Webspace die Voraussetzung zum Betrieb von Welcompose
+				erfüllt.
+			</para>
 		</tip>
 		
 		<anchor id="install_instructions.installation.ressourcen"/>
@@ -145,7 +158,10 @@
 				Welcompose kann auf verschiedene Arten installiert werden, die
 				sich jeweils im Schwierigkeitsgrad unterscheiden. Im
 				Moment stehen zwei Möglichkeiten zur Verfügung: Die
-				Nutzung des <link linkend="install_instructions.installation.package_installer">Package Installers</link> oder die <link linkend="install_instructions.installation.manual_installation">manuelle
+				Nutzung des
+				<link linkend="install_instructions.installation.package_installer">Package
+				Installers</link> oder die
+				<link linkend="install_instructions.installation.manual_installation">manuelle
 				Installation</link>.
 			</para>
 			<para>
@@ -379,10 +395,10 @@
 					genau wissen, was Sie tun, sollten Sie die Voreinstellungen
 					belassen und zum nächsten Schritt übergehen, indem Sie
 					auf <guibutton>Go to next step</guibutton> klicken! Der
-					Package Installer entpackt dann alle Dateien und leitet
+					Package Installer entpackt alle Dateien und leitet
 					Sie dann zum <link
-					linkend="install_instructions.configure_wcom">Setup
-					weiter</link>.
+					linkend="install_instructions.configure_wcom">Setup</link>
+					weiter.
 				</para>
 				
 				<para>
@@ -404,7 +420,7 @@
 					nicht selber den Zugriff auf die Dateien respektive
 					Verzeichnisse verwehren. Dies kann passieren, wenn
 					Sie die Rechte beispielsweise so definieren, dass
-					nur der Webserver, aber keine anderen Benutzer die
+					nur der Webserver, aber kein anderer Benutzer die
 					Dateien oder Verzeichnisse lesen darf, und der
 					Webserver die Dateien nicht mit dem Benutzer
 					respektive der Gruppe Ihres Benutzer-Accounts
@@ -448,7 +464,7 @@
 					übertragen und auch die Schreibrechte von Hand vergeben werden.
 					Für die manuelle Installation benötigen Sie eine
 					Welcompose-Distribution mit dem Kürzel <filename>-src</filename> im
-					Namen, beispielsweise <filename>wcom-1.2.3-src.tar.gz</filename>.
+					Namen, beispielsweise <filename>welcompose-1.2.3-src.tar.gz</filename>.
 					Nachdem Sie die Datei heruntergeladen haben, muss sie entpackt
 					werden.
 				</para>
@@ -543,7 +559,13 @@
 						<para>tmp/captchas/</para>
 					</listitem>
 					<listitem>
+						<para>tmp/flickr_cache/</para>
+					</listitem>
+					<listitem>
 						<para>tmp/installer/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/log/</para>
 					</listitem>
 					<listitem>
 						<para>tmp/updater/</para>
@@ -575,9 +597,9 @@
 		
 		<para>
 			Die Setup-Prozedur unterstützt Sie bei der Erst-Konfiguration von
-			Welcompose. Ein Assistent wird Ihnen bei der Einrichtung der Datenbank-
-			Verbindung sowie der Initialisierung der Datenbank-Struktur
-			zur Seite zu stehen.
+			Welcompose. Ein Assistent wird Ihnen bei der Einrichtung der
+			Datenbank-Verbindung sowie der Initialisierung der
+			Datenbank-Struktur zur Seite zu stehen.
 		</para>
 		
 		<para>
@@ -592,8 +614,8 @@
 				Im ersten Schritt geht es um die Lizenzierung der Software.
 				Es wird Ihnen die jeweils aktuelle Version des Welcompose-Lizenztexts
 				zum Studium vorgelegt und gefragt, ob Sie mit den
-				Lizenzbedingungen einverstanden sind. Nur dann &ndash; und nur
-				dann &ndash; kann die Setup-Prozedur ausgeführt und Welcompose benutzt
+				Lizenzbedingungen einverstanden sind. Dann &ndash; und nur dann
+				&ndash; kann die Setup-Prozedur ausgeführt und Welcompose benutzt
 				werden. Die Lizenz akzeptieren Sie mit einem Klick auf die
 				Checkbox <guilabel>Confirm license</guilabel>. Klicken
 				Sie dann auf die Schaltfläche <guibutton>Go to next
@@ -607,7 +629,7 @@
 			
 			<para>
 				Die Lizenzierung der Software wird zusammen mit den verschieden
-				Lizenzmodellen im Kapitel <xref linkend="licensing"/> im Detail
+				Lizenzmodellen im <xref linkend="licensing"/> im Detail
 				besprochen.
 			</para>
 		</sect2>
@@ -643,7 +665,7 @@
 							Die benötigte Komponente konnte entweder gar nicht
 							oder nur in einer veralteten Version vorgefunden
 							werden, mit der das Setup nicht durchgeführt werden
-							kann. Konsultieren Sie den Abschnitt
+							kann. Konsultieren Sie den 
 							<xref linkend="install_instructions.requirements"/>,
 							um das Problem zu beheben.
 						</para>
@@ -663,8 +685,8 @@
 							allerdings kann das reibungslose Funktionieren von
 							Welcompose nicht garantiert werden. Wir empfehlen deshalb
 							die Behebung des Problems. Konsultieren Sie
-							den Abschnitt
-							<xref linkend="install_instructions.requirements"/>,
+							den 
+							<xref linkend="install_instructions.requirements"/>
 							für weitere Informationen.
 						</para>
 						
@@ -858,7 +880,7 @@
 				mit einem Klick auf <guibutton>Go to next step</guibutton>
 				absenden. Daraufhin werden die Eingaben überprüft und versucht,
 				eine Verbindung mit dem Datenbank-Server herzustellen. Schlägt
-				dies Fehl, wird eine Fehlermeldung angezeigt. Korrigieren Sie
+				dies fehl, wird eine Fehlermeldung angezeigt. Korrigieren Sie
 				daraufhin die Eingaben und versuchen Sie es nochmals. Sind
 				alle Eingaben richtig, werden Sie zum nächsten Schritt geführt.
 			</para>
@@ -941,9 +963,9 @@
 			<para>
 				Wenn Sie auf die Schaltfläche <guibutton>Go to admin
 				area</guibutton> klicken, werden Sie automatisch zum
-				Login für den Admin-Bereich weitergeleitet. Vorher wird
-				aber automatisch versucht, das Setup-Verzeichnis zu
-				löschen. Kontrollieren Sie unbedingt, ob das Setup-Verzeichnis
+				Login für den Admin-Bereich weitergeleitet. Dabei wird
+				automatisch versucht, das Setup-Verzeichnis zu löschen.
+				Kontrollieren Sie unbedingt, ob das Setup-Verzeichnis
 				erfolgreich gelöscht werden konnte.
 			</para>
 			
