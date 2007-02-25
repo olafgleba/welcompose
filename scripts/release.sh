@@ -17,6 +17,12 @@ if [ ! -x "`which php`" ] ; then
 	exit 1
 fi
 
+# test if java is available
+if [ -z "`which java`" ] ; then
+	echo "Java executable not found"
+	exit 1
+fi
+
 # remove directories from previous exports
 rm -rf wcom-trunk
 
@@ -45,13 +51,32 @@ mv welcompose/core/conf/sys.inc.php-dist welcompose/core/conf/sys.inc.php
 rm -rf database
 rm -rf documentation
 
-# create source packages
-tar cvfz "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.gz welcompose
-tar cvfj "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.bz2 welcompose
-zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src" welcompose
+# create full source packages
+tar cvfz "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-full-src".tar.gz welcompose
+tar cvfj "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-full-src".tar.bz2 welcompose
+zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-full-src" welcompose
 
 # remove update directory
 rm -rf welcompose/update
+
+# compress js
+wget http://dojotoolkit.org/svn/dojo/trunk/buildscripts/lib/custom_rhino.jar
+if [ ! -f "custom_rhino.jar" ] ; then
+	echo "Dojo's compressor custom_rhino.jar not found. Download failed, eh?"
+	exit 1
+fi
+for file in `find welcompose -type f -name "*.js"` ; do
+	tmpfile="$file"-rhino
+	cp "$file" "$tmpfile"
+	java -jar custom_rhino.jar -c "$tmpfile"  > "$file"
+	rm -f "$tmpfile"
+done
+rm -rf custom_rhino.jar
+
+# create source packages without updater and with compressed js
+tar cvfz "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.gz welcompose
+tar cvfj "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.bz2 welcompose
+zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src" welcompose
 
 # create compressed package
 echo "Creating compressed package"
