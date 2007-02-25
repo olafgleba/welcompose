@@ -3,15 +3,24 @@
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <chapter id="preface">
 	<title>Einführung</title>
-		
+	
+	<abstract>
+		<para>
+			Überblick über das System Welcompose, Konventionen des Handbuchs.
+		</para>
+	</abstract>
+	
 	<sect1 id="preface.whatis">
 		<title>Was ist Welcompose?</title>
 
 		<para>
-			Welcompose ist ein modernes Content Management System, das durch seine Fokussierung auf Webstandards
-			hervorragend zur Umsetzung kleinerer und mittlerer barrierefreier Webpräsenzen (Webseiten, Blogs) geeignet ist.
-			Flexibilität und Modalität in der Erstellung und Pflege von Inhalten, ein versiertes Sicherheitskonzept sowie
-			eine einfache Bedienung gewährleisten die optimale Umsetzung Ihrer Anforderungen.  		
+			Welcompose ist ein modernes Content Management System, das durch
+			seine Fokussierung auf Webstandards zur Umsetzung kleinerer und
+			mittlerer barrierefreier Webpräsenzen (Webseiten, Blogs) geeignet
+			ist. Flexibilität und Modalität in der Erstellung und Pflege von
+			Inhalten, ein versiertes Sicherheitskonzept sowie eine einfache
+			Bedienung gewährleisten die optimale Umsetzung Ihrer
+			Anforderungen.
 		</para>
 
 	</sect1>
@@ -19,124 +28,34 @@
 	<sect1 id="preface.abililities">
 		<title>Was kann Welcompose?</title>
 	
-		<para> 
-			Welcompose unterstützt Sie bei dem, was von einem Content Management System erwartet wird: Der Erstellung, Pflege
-			und Verwaltung Ihrer Inhalte. Durch die strikte Trennung von Ausgabe und Inhalten durch Vorlagen (<xref linkend="templating"/>) greift
-			das System zu keinen Zeitpunkt in die Ausgabe Ihrer Inhalte ein. Wie Ihre Webpräsenz aussieht, entscheiden
-			Sie ganz allein. 
+		<para>
+			Welcompose unterstützt Sie bei dem, was von einem Content
+			Management System erwartet wird: Der Erstellung, Pflege und
+			Verwaltung Ihrer Inhalte. Durch die strikte Trennung von Ausgabe
+			und Inhalten durch Vorlagen (<xref linkend="templating"/>) greift
+			das System zu keinen Zeitpunkt in die Ausgabe Ihrer Inhalte ein.
+			Wie Ihre Webpräsenz aussieht, entscheiden Sie ganz allein.
 		</para>
 		
 		<para> 
-			Welcompose ist unter anderen Multiprojekt- und Multiuser-fähig (<ulink type="external" url="http://en.wikipedia.org/wiki/Multitenant">multitenant</ulink> Architektur),
-			hat eine äußerst flexible Rechteverwaltung, basiert auf aktuellen Technologien und ermöglicht vielfältige Arten
-			der Inhaltspräsentation (Webseiten, Blogs, Podcast-Blogs). Dank dieser Flexibilität eignet sich Welcompose
-			zur Umsetzung Ihrer Unternehmens-Webseite, Ihres persönlichen Webblogs oder als Service-Plattform für Ihre Angestellten 
-			und/oder Kunden im Intra- oder/und Internet.        
+			Welcompose ist unter anderen Multiprojekt- und Multiuser-fähig
+			(<ulink type="external"
+			url="http://en.wikipedia.org/wiki/Multitenant">Multitenant</ulink>-Architektur),
+			hat eine äusserst flexible Rechteverwaltung, basiert auf aktuellen
+			Technologien und ermöglicht vielfältige Arten der
+			Inhaltspräsentation (Inhaltsseiten, Formulare, Blogs, Podcasts).
+			Dank dieser Flexibilität eignet sich Welcompose zur Umsetzung
+			Ihrer Unternehmens-Webseite, Ihres persönlichen Webblogs oder als
+			Service-Plattform für Ihre Angestellten und/oder Kunden im Intra-
+			und/oder Internet.
 		</para>
-	</sect1>
-	
-	<sect1 id="preface.organisation">
-		<title>Inhaltliche Kapitel-Übersicht</title>
-				
-			<variablelist>
-				<varlistentry>
-					<term><xref linkend="preface"/></term>
-					<listitem>
-						<para>
-							Überblick über das System Welcompose. Konventionen des Handbuches.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="install_instructions"/></term>
-					<listitem>
-						<para>
-							Installation und Konfiguration von Welcompose. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="crash_course_demo"/></term>
-					<listitem>
-						<para>
-							Eine Schritt-für-Schritt Anleitung zur Erstellung einer ersten, 
-							einfachen Webseite.  
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="crash_course_blog"/></term>
-					<listitem>
-						<para>
-							Eine Schritt-für-Schritt Anleitung zur Erstellung einer Blog-Webseite. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="templating"/></term>
-					<listitem>
-						<para>
-							Erläuterungen zur Erstellung und Verwendung von <emphasis>Vorlagen</emphasis> 
-							innerhalb von Welcompose. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="url_rewriting"/></term>
-					<listitem>
-						<para>
-							Erläuterungen zu Pfaden und Url-Anpassungen innerhalb von Welcompose. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="localization"/></term>
-					<listitem>
-						<para>
-							Sprachausgabe- und Auszeichnung. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="licensing"/></term>
-					<listitem>
-						<para>
-							Lizenzen, Ausnahmen. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="reference"/></term>
-					<listitem>
-						<para>
-							Referenz zu allen Programmteilen von Welcompose. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="good_to_know"/></term>
-					<listitem>
-						<para>
-							Kontextabhängige Hilfestellungen, die innerhalb des Handbuches verlinkt sind.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><xref linkend="local_webserver"/></term>
-					<listitem>
-						<para>
-							Installationshilfe zur Windows Installation von Mysql, Apache und PHP.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
 	</sect1>
 	
 	<sect1 id="preface.conventions">
 		<title>Konventionen</title>
 		
 		<para>
-			Semantische Auszeichnungen und Symbol/Iconnutzung innerhalb des Handbuches.
+			Semantische Auszeichnungen und Symbol/Icon-Nutzung innerhalb des Handbuches.
 		</para>
 
 		<sect2 id="preface.conventions.icons">
@@ -195,14 +114,14 @@
 		</sect2>
 				
 		<sect2 id="preface.conventions.typo">
-			<title>Typografie</title>
+			<title>Typographie</title>
 		
 			<variablelist>
 				<varlistentry>
 					<term><emphasis role="strong">Fett</emphasis></term>
 					<listitem>
 						<para>
-							Darstellung von Datei- und Ordernamen, Dateiendungen und Pfadangaben. 
+							Darstellung von Datei- und Ordnernamen, Dateiendungen und Pfadangaben. 
 						</para>
 					</listitem>
 				</varlistentry>
@@ -229,21 +148,21 @@
 			<title>Symbole</title>
 	
 			<tip>
-			<para>
-				Kontextbezogene, systemunabhängige Tipps.
-			</para>
+				<para>
+					Kontextbezogene, systemunabhängige Tipps.
+				</para>
 			</tip>
 
 			<note>
-			<para>
-				Kontextbezogene Informationen und Hinweise.
-			</para>
+				<para>
+					Kontextbezogene Informationen und Hinweise.
+				</para>
 			</note>
 
 			<warning>
-			<para>
-				Kontextbezogene Hinweise zu möglichen Fehlerquellen.
-			</para>
+				<para>
+					Kontextbezogene Hinweise zu möglichen Fehlerquellen.
+				</para>
 			</warning>
 
 		</sect2>
