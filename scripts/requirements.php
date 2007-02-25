@@ -25,8 +25,10 @@ padding: 12px 0 0 0;
 text-align: center;
 }
 h1, h2 {
-color: #ff620d;
 font-weight: normal;
+}
+h2 {
+color: #666;
 }
 h1 {
 font-size: 2em;
@@ -38,15 +40,12 @@ font-size: 0.80em;
 p a, li a, th a, td a {
 font-size: 100%;
 }
-a {
-text-decoration: none;
-}
 a:link, a:visited {
-color: #ff620d;
+color: #333;
+text-decoration: none;
 background: transparent;
 }
 a:hover {
-color: #ff620d;
 background: transparent;
 text-decoration: underline;
 }
@@ -64,7 +63,7 @@ text-align: left;
 }
 #container p.copyright {
 width: 723px;
-padding: 5px 5px 15px 5px;
+padding: 5px 5px 25px 5px;
 margin: 50px 20px 0 20px;
 border-top: 1px solid #ebebeb;
 }
@@ -145,6 +144,22 @@ text-decoration: underline;
 }
 /* LICENCE EOF */
 
+.marker_warning,
+.marker_error,
+.marker_fine {
+text-align: right;
+}
+.marker_warning,
+.marker_error,
+.marker_fine {
+text-align: right;
+}
+.marker_warning {
+color: #f90;
+}
+.marker_fine {
+color: #0c3;
+}
 .marker_error {
 color: #f00;
 }
@@ -173,15 +188,17 @@ vertical-align: bottom;
 }
 table td.extension,
 table td.software {
-width: 535px;
+width: 335px;
 font-weight: bold;
 }
 table td.status {
-width: 20px;
+width: 250px;
+text-align: right;
 font-weight: bold;
 }
 table td.status_indicator {
 width: 80px;
+text-align: left;
 }
 table td.status_indicator_text {
 width: 300px;

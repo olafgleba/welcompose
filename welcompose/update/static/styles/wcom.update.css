@@ -355,7 +355,11 @@ text-decoration: underline;
 }
 /* LICENCE EOF */
 
-
+.marker_warning,
+.marker_error,
+.marker_fine {
+text-align: right;
+}
 .marker_error {
 color: #f00;
 }
@@ -365,7 +369,6 @@ color: #f90;
 .marker_fine {
 color: #0c3;
 }
-
 
 table {
 border-collapse: collapse;
@@ -386,15 +389,17 @@ vertical-align: bottom;
 }
 table td.extension,
 table td.software {
-width: 535px;
+width: 335px;
 font-weight: bold;
 }
 table td.status {
-width: 20px;
+width: 250px;
+text-align: right;
 font-weight: bold;
 }
 table td.status_indicator {
 width: 80px;
+text-align: left;
 }
 table td.status_indicator_text {
 width: 300px;
