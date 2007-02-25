@@ -740,7 +740,6 @@ function Help_show (elem)
 			_req.onreadystatechange = function () { Help.processHelp(_ttarget);};
 			_req.send('');
 		}
-		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
 
@@ -776,7 +775,7 @@ function Help_hide (elem)
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
-		_applyError(e);
+		// die silent
 	}
 }
 
@@ -802,7 +801,7 @@ function Help_processHelp (ttarget)
 			}
 		}
 	} catch (e) {
-		_applyError(e);
+		alert (alertOnMissingHelpFiles);
 	}
 }
 
