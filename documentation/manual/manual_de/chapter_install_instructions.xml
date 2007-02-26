@@ -4,6 +4,10 @@
 <chapter id="install_instructions">
 	<title>Installation</title>
 	
+	<abstract>
+		<para>Installation und initiale Konfiguration von Welcompose.</para>
+	</abstract>
+	
 	<sect1 id="install_instructions.requirements">
 		<title>Voraussetzungen</title>
 		
