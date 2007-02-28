@@ -34,6 +34,12 @@
 		</warning>
 	</sect1>
 	
+	<sect1 id="good_to_know.database_backup_with_phpmyadmin">
+		<title>Datenbank-Backup mit phpMyAdmin</title>
+		
+		<para/>
+	</sect1>
+	
 	<sect1 id="good_to_know.ftp_clients">
 		<title>FTP-Programme für Windows und Mac</title>
 		

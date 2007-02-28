@@ -2,7 +2,521 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <chapter id="update">
-	<title>Aktualisierung von Welcompose</title>
+	<title>Aktualisierung (Update)</title>
 	
-	<para/>
+	<sect1 id="update.general_information">
+		<title>Allgemeine Informationen</title>
+		
+		<para>
+			Viele Anwender anderer Content Management Systeme verzichten
+			darauf, ihre Software regelmässig zu aktualisieren. Dies liegt
+			oftmals daran, dass ein Update der Software zu aufwendig oder
+			wegen eigenen Modifikationen am Source Code nur schwer zu
+			realisieren ist. Dies kann im schlimmsten Fall dazu führen,
+			dass durch ungestopfte Sicherheitslücken Ihre Webpräsenz ein
+			leichtes Opfer für Angreifer wird. 
+		</para>
+		
+		<para>
+			Wir möchten Sie deshalb darum bitten, Welcompose regelmässig
+			zu aktualisieren. Gleichzeitig bemühen wir uns, Ihnen die
+			Aktualisierung von Welcompose so einfach wie möglich zu machen.
+		</para>
+		
+		<para>
+			Sollten Sie die Updates für eine oder mehrere Versionen ausgelassen
+			haben und möchten direkt auf die aktuellste Version wechseln, 
+			ist es in der Regel möglich. Die Update-Routinen erkennen
+			selbstständig, welche Aktionen ausgeführt werden müssen und welche
+			nicht. Sie müssen von den Zwischenschritten, die Sie ausgelassen
+			haben, nur jeweils die im Abschnitt <emphasis>Manuelle
+			Änderungen</emphasis> beschriebenen Modifikationen nachvollziehen.
+		</para>
+		
+		<warning>
+			<para>
+				Für Versionen vor 1.0 ist es nötig, sämtliche Update-Schritte
+				von Hand nachzuvollziehen, da die Update-Prozedur nur zum
+				Teil automatisiert ist.
+			</para>
+		</warning>
+	</sect1>
+	
+	<sect1 id="update.versioning">
+		<title>Informationen zur Versionierung</title>
+		
+		<para>
+			Der Aufwand zur Aktualisierung von Welcompose richtet sind
+			in der Regel nach der Grösse der Modifikationen, die an
+			der Software zwischen zwei Versionen vorgenommen werden.
+			Wie umfangreich die Modifikationen waren, lässt sich jeweils
+			an den Versionsnummern der Software ablesen.
+		</para>
+		
+		<para>
+			Eine Versionsnummer von Welcompose besteht aus drei Zahlen,
+			jeweils getrennt durch einen Punkt: X.y.z. X bezeichnet dabei
+			das sogenannte <emphasis>Major Release</emphasis>, y das
+			<emphasis>Minor Release</emphasis> und z das
+			<emphasis>Bugfix Release</emphasis>. 
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>Major Release</term>
+				<listitem>
+					<para>
+						Zwischen zwei Major Releases werden umfangreiche
+						Änderungen an der Software vorgenommen. Zu diesen
+						gehören beispielsweise neue Funktionen, das Entfernen
+						nicht mehr benötigter Funktionen oder das Beheben
+						von Konstruktionsfehlern. Für Sie als Anwender kann dies
+						umfangreiche Änderungen an der Webseite bedeuten,
+						damit sie weiter wie gewohnt funktioniert. Soweit
+						wie möglich werden Sie dabei von einer Update-Routine
+						unterstützt.
+					</para>
+					<para>
+						Ein Update auf ein neues Major Release
+						ist beispielsweise der Wechsel von der Version 1.6.3
+						auf 2.0.0.
+					</para>
+					<para>
+						Bugfixes und Minor Releases werden für das aktuelle
+						Major Release zur Verfügung gestellt. Das letzte
+						Minor Release des letzten Major Release wird für
+						ein Jahr ab Erscheinungsdatum des Nachfolgers mit
+						Bugfixes versorgt und für anderthalb Jahre mit
+						Security Fixes. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Minor Release</term>
+				<listitem>
+					<para>
+						Zwischen zwei Minor Releases werden Fehler
+						korrigiert, die Änderungen an den internen
+						Schnittstellen, der Ausgabe oder Datenbank
+						erfrodern. Zudem werden neue Funktionen
+						kleineren Ausmasses hinzugefügt, die leichte
+						Anpassungen an den internen Schnittstellen, der
+						Ausgabe oder der Datenbank nötig machen. Für Sie
+						als Anwender bedeutet dies in den allermeisten
+						Fällen, dass sie nur Dateien von Welcompose
+						ersetzen und die Update-Routine ausführen müssen
+						und Welcompose problemlos weiterbenutzen können,
+						ohne manuell eingreifen zu müssen. Letzteres ist
+						nur bei neuen Funktionen nötig, die sie
+						verwenden müssen.
+					</para>
+					<para>
+						Ein Update auf ein neues Minor Release ist
+						beispielsweise der Wechsel von der Version 1.0.5
+						auf 1.1.0.
+					</para>
+					<para>
+						Bugfixes und Security Fixes werden für das aktuelle
+						sowie das vorhergehende Minor Release zur Verfügung
+						gestellt. Für das vorhergehende Minor Release jedoch
+						nicht länger als für den Zeitraum von 3 Monaten
+						(Security Fixes: 6 Monate). 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Bugfix Release</term>
+				<listitem>
+					<para>
+						Es werden Fehler korrigiert, die nur minimale
+						Änderungen an unkritischen Stellen der Software
+						erfordern, beispielsweise im Admin-Bereich.
+						Interne Schnittstellen bleiben unangetastet und
+						werden selbst im schlimmsten Fall nur soweit
+						verändert, dass sie sich gegen aussen wie bisher
+						verhalten. Für Sie als Anwender bedeuted dies,
+						dass Sie nur Dateien von Welcompose austauschen
+						und nach einem Update die Software ohne jede
+						Probleme weiterbenutzen können, ohne Änderungen
+						an Ihrer Webseite oder Ihren Inhalten vornehmen
+						zu müssen.
+					</para>
+					<para>
+						Ein Update auf ein neues Bugfix Release ist
+						beispielsweise der Wechsel von der Version 1.0.4 auf
+						1.0.5.
+					</para>
+					<para>
+						Bugfixes werden nur für das aktuelle Bugfix Release
+						zur Verfügung gestellt. Dies gilt auch für Security
+						Fixes, die ohne weitere Änderungen am Source Code
+						publiziert werden.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		
+		<note>
+			<title>Ungerade Versionsnummern</title>
+			<para>
+				Bei Minor Releases mit ungeraden Versionsnummern
+				(beispielsweise 0.7.0 oder 2.3.2) handelt es sich um
+				Entwicklungsversionen, die in der Regel nicht oder nur
+				zu Testzwecken öffentlich erhältlich sind. Für
+				Entwicklungsversionen werden keine Bugfixes, Security
+				Fixes oder Updates angeboten.
+			</para>
+		</note>
+	</sect1>
+	
+	<sect1 id="update.preparations">
+		<title>Vorbereitungen</title>
+		
+		<para>
+			Bevor Sie mit der Aktualisierungsprozedur starten können,
+			gilt es, Sicherungskopien der Datenbank und der gesamten
+			Welcompose-Installation anzulegen. Diese können Sie im Falle
+			eines Falles verwenden, um beim Problemen Ihre aktuelle
+			Installation wiederherzustellen.
+		</para>
+		
+		<orderedlist>
+			<listitem>
+				<para>
+					Kopieren Sie die gesamte Welcompose-Installation
+					mit einem Dateitransfer-Programm auf die lokale
+					Festplatte oder, wenn Sie Shell-Zugang haben,
+					in einen anderen Ordner auf der Server-Festplatte.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Erstellen Sie ein Backup der Datenbank und Ihrer
+					Inhalte. Dies können Sie beispielsweise mit dem
+					<ulink type="external"
+					url="http://dev.mysql.com/downloads/gui-tools/">MySQL
+					Administrator</ulink> oder <ulink type="external"
+					url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
+					erledigen. Eine Anleitung zur Erstellung der 
+					Datenbank-Sicherung finden Sie im
+					<xref linkend="good_to_know.database_backup_with_phpmyadmin"/>.
+				</para>
+			</listitem>
+		</orderedlist>
+	</sect1>
+	
+	<sect1 id="update.0">
+		<title>Aktualisierungen für 0.x.y</title>
+		
+		<sect2 id="update.0.60_to_80">
+			<title>0.6.0 nach 0.8.0</title>
+			
+			<note>
+				<para>
+					Da der Updater für Welcompose zu diesem Zeitpunkt
+					noch nicht voll automatisiert ist, müssen noch
+					etliche Schritte des Update-Prozesses von Hand
+					erledigt werden. Im Rahmen der nächsten
+					Versionsschritte wird die Automatisierung allerdings
+					deutlich ausgebaut.
+				</para>
+			</note>
+			
+			<sect3 id="update.0.60_to_80.update_files">
+				<title>Dateien aktualisieren</title>
+				
+				<para>
+					Um die Scripte und HTML-Vorlagen von Welcompose zu
+					aktualisieren, empfiehlt es sich, die komplette
+					Installation vom Server zu löschen. So stellen Sie
+					sicher, dass keine Dateileichen zurückbleiben. Ausgenommen
+					sind folgende Dateien respektive Ordner:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>
+							core/conf/sys.inc.php
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							files/
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							files/global_files/
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							files/media/
+						</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Haben Sie dies erledigt, gilt es, die aktuelle
+					Welcompose-Version zu beschaffen. Laden Sie dazu die
+					aktuelle Welcompose-Version in Quellform aus dem
+					Download-Bereich herunter. Sie erkennen die richtige
+					Datei an dem Bestandteil
+					<filename>-src</filename> im Namen (nicht
+					<filename>-full-src</filename>). 
+				</para>
+				
+				<para>
+					Entpacken Sie die Welcompose-Distribution und laden Sie
+					alle Daten aus dem entpacken Welcompose-Archiv
+					auf den Server (ohne den Ordner <filename>setup/</filename>).
+					Stellen Sie sicher, dass alle Ordner und Dateien über
+					Schreibrechte verfügen, die vom PHP (respektive
+					Welcompose) beschrieben werden können müssen.
+				</para>
+
+				<para>
+					Folgende Verzeichnisse müssen für PHP beschreibbar sein:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>admin/smarty/compiled/</para>
+					</listitem>
+					<listitem>
+						<para>smarty/compiled/</para>
+					</listitem>
+					<listitem>
+						<para>smarty/cache/</para>
+					</listitem>
+					<listitem>
+						<para>files/media/</para>
+					</listitem>
+					<listitem>
+						<para>files/global_templates/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/captchas/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/flickr_cache/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/installer/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/log/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/updater/</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Ebenfalls beschreibbar sein müssen folgende Dateien:
+				</para>
+
+				<itemizedlist>
+					<listitem>
+						<para>core/conf/sys.inc.php</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			
+			<sect3 id="update.0.60_to_80.update_config">
+				<title>Konfiguration aktualisieren</title>
+				
+				<para>
+					Im Rahmen der Umstellung von Welcompose 0.6.0 auf 0.8.0
+					müssen auch einige Änderungen an der zentralen
+					Konfigurationsdatei sys.inc.php vorgenommen werden.
+				</para>
+				
+				<para>
+					Durch die Umstellung der Logging-Infrastruktur sind im Abschnitt
+					<code>[environment]</code> die Direktiven <code>dev</code>
+					sowie <code>error_length</code> weggefallen, die Sie bitte
+					entfernen. Statt dessen ist der Abschnitt <code>[log]</code>
+					hinzugekommen:
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+[log]
+handler = "null"
+name = ""
+level = PEAR_LOG_INFO
+]]></programlisting>
+				
+				<tip>
+					<para>
+						Bei der Standard-Konfiguration des Log Handlers ist das
+						Logging deaktiviert. Es wird aber empfohlen, das Logging
+						zu aktivieren. Wie dies geht, erfahren Sie im @@@.
+					</para>
+				</tip>
+				
+				<para>
+					Weiter sind im Abschnitt <code>[urls]</code> mehrere
+					Muster zur Generierung von URLs hinzugekommen. Fügen Sie bitte
+					die fehlenden Einträge zu Ihrer Konfigurationsdatei hinzu.
+					Die komplette Liste der URL-Muster für Welcompose 0.8.0:
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+[urls]
+simple_page_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_page_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+simple_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+generator_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+generator_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+blog_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+blog_index_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+blog_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+blog_index_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+blog_atom_10 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+blog_atom_10_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Atom10"
+blog_rss_20 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+blog_rss_20_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Rss20"
+blog_comments_atom_10 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsAtom10"
+blog_comments_atom_10_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=CommentsAtom10"
+blog_comments_rss_20 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsRss20"
+blog_comments_rss_20_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=CommentsRss20"
+blog_item = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
+blog_item_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
+blog_archive_year = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
+blog_archive_year_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
+blog_archive_year_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
+blog_archive_year_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
+blog_archive_month = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
+blog_archive_month_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+blog_archive_month_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
+blog_archive_month_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+global_template_url = "{$root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>"
+global_template_url_start = "{$root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+]]></programlisting>
+				
+				<note>
+					<para>
+						Achten Sie bitte darauf, bei der Übernahme von URL-Mustern
+						die Variable <code>{$root_www}</code> durch den WWW-Pfad
+						zu Ihrer Welcompose-installation zu ersetzen.
+					</para>
+				</note>
+			</sect3>
+			
+			<sect3 id="update.0.60_to_80.run_updater">
+				<title>Update-Prozedur ausführen</title>
+				
+				<para>
+					Nun muss die Datenbank aktualisiert werden, was mit Hilfe
+					der automatischen Update-Prozedur geschieht. Rufen Sie dazu
+					mit dem Browser die <filename>index.php</filename> im Ordner
+					<filename>update/</filename> Ihrer Welcompose-Installation
+					auf.
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.license">
+					<title>Update: Lizenz anerkennen</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.license.png"/>
+				</figure>
+				
+				<para>
+					Zuerst müssen Sie wieder die Bedingungen der Lizenz
+					anerkennen. Dieser Schritt wird nach dem Setup wiederholt,
+					da sich die Lizenz seit der ersten Installation geändert
+					haben kann.
+				</para>
+				
+				<para>
+					Nun kommen Sie wieder zur Überprüfung der Voraussetzungen.
+					In diesem Schritt wird vom Update-Assistenten überprüft,
+					ob der Webserver, auf dem Welcompose betrieben wird, die
+					nötigen Voraussetzungen für das Update und einen späteren
+					reibungslosen Betrieb erfüllt. Die Ermittlung der Daten
+					erfolgt anhand hinterlegter Tests auf Versionsnummern und
+					das Vorhandensein bestimmter Funktionen. Tests können
+					entweder Fehlschlagen (rote Warnmeldung neben der
+					getesteten Komponente), eine Warnung verursachen (orange
+					Warnmeldung) oder passieren (grüne Meldung). Sollten
+					Probleme auftauchen, konsulierten Sie bitte <xref
+					linkend="install_instructions.configure_wcom.requirements"/>.
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.requirements">
+					<title>Update: Voraussetzungen</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.requirements.png"/>
+				</figure>
+				
+				<para>
+					Nachdem Sie Überprüfung der Voraussetzungen überstanden
+					haben, werden Sie noch einmal daran erinnert, Backups
+					zu erstellen.
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.backup">
+					<title>Update: Backups</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.backup.png"/>
+				</figure>
+				
+				<para>
+					Nun kommen Sie zum eigentlichen Update-Prozess, der die
+					Datenbank aktualisiert. Der Update-Prozess besteht aus
+					etlichen einzelnen Aufgaben, sogenannten Tasks, die
+					nacheinander ausgeführt werden. Der Updater ermittelt
+					selber, welche Tasks ausgeführt werden müssen. Sobald
+					Sie auf <guibutton>Start update</guibutton> klicken,
+					werden die einzelnen Tasks ausgeführt.
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.update_database">
+					<title>Update: Datenbank aktualisieren</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.update_database.png"/>
+				</figure>
+				
+				<para>
+					Ein Symbol indiziert jeweils, ob ein ein Task
+					erfolgreich ausgeführt werden konnte oder nicht.
+					Konnte ein Task nicht erfolgreich ausgeführt werden,
+					erscheint eine Fehlermeldung und der Update-Prozess
+					wird abgebrochen. Beheben Sie den Fehler und führen
+					daraufhin den Updater erneut aus. Es werden dann nur
+					diejenigen Tasks ausgeführt, die bisher nicht
+					erfolgreich ausgeführt werden konnten.
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.database_update_finished">
+					<title>Update: Datenbank erfolgreich aktualisiert</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.database_update_finished.png"/>
+				</figure>
+				
+				<para>
+					Nachdem die Datenbank erfolgreich aktualisiert wurde, können
+					Sie auf die Schaltfläche <guibutton>Finish update</guibutton>
+					klicken, um den Aktualisierungs-Prozess zu beenden. Auf
+					der letzten Seite werden Sie noch daran erinnert, das
+					Verzeichnis mit dem Updater vom Server zu löschen. Danach
+					können Sie sich in die Admin-Oberfläche einloggen und mit
+					Ihrer neuen Welcompose-Version arbeiten!
+				</para>
+				
+				<figure id="update.0.60_to_80.run_updater.finish">
+					<title>Update: Aktualisierung erfolgreich beendet</title>
+					<graphic fileref="images/update/0/60_to_80/run_updater.finish.png"/>
+				</figure>
+				
+				<warning>
+					<para>
+						Vergessen Sie nicht, das Verzeichnis
+						<filename>update/</filename> vom Server zu löschen.
+						Sonst kann es unter Umständen zur Manipulation Ihrer
+						Webpräsenz missbraucht werden.
+					</para>
+				</warning>
+			</sect3>
+		</sect2>
+	</sect1>
 </chapter>
