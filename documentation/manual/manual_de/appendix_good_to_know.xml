@@ -37,7 +37,71 @@
 	<sect1 id="good_to_know.database_backup_with_phpmyadmin">
 		<title>Datenbank-Backup mit phpMyAdmin</title>
 		
-		<para/>
+		<para>
+			phpMyAdmin ist ein webbasierendes Administrationswerkzeug für
+			MySQL-Datenbanken, das ebenso wie Welcompose auf PHP basiert.
+			Sie können damit direkt die Datenbank bearbeiten (was ab und zu
+			ganz praktisch ist), Datensicherungen erstellen und wieder
+			zurückspielen.
+		</para>
+		
+		<para>
+			Zugriff auf phpMyAdmin bieten die meisten Webspace-Anbieter über
+			ihre Administrationsoberflächen. Sollte kein phpMyAdmin vorhanden
+			sein, können Sie es selber installieren. Für Download-Links und
+			Installationsinstruktionen besuchen Sie bitte <ulink type="external"
+			url="http://www.phpmyadmin.net/"/>.
+		</para>
+		
+		<para>
+			Haben Sie phpMyAdmin aufgerufen, wählen Sie bitte die Datenbank
+			aus, in der Sie Welcompose installiert haben. Um ein Backup
+			zu erstellen, wechseln Sie zum Menüpunkt
+			<guibutton>Exportieren</guibutton>. Sie kriegen dann ein Formular
+			zu sehen, mit dem Sie die Exporteinstellungen festlegen können.
+		</para>
+		
+		<figure id="good_to_know.database_backup_with_phpmyadmin.export">
+			<title>Exporteinstellungen für phpMyAdmin</title>
+			<graphic fileref="images/good_to_know/good_to_know.database_backup_with_phpmyadmin.export.png"/>
+		</figure>
+		
+		<para>
+			Die wichtigsten Einstellungen, die getätigt werden müssen, um ein
+			sachgemässes Backup anzulegen, sind gelb hinterlegt. Achten Sie
+			insbesonders darauf, dass als Export-Format
+			<guimenuitem>SQL</guimenuitem> ausgewählt ist und sowohl
+			<guimenuitem>Struktur</guimenuitem> als auch
+			<guimenuitem>Daten</guimenuitem> in den Export eingeschlossen werden.
+		</para>
+		
+		<para>
+			Sobald Sie alle nötigen Einstellungen getätigt haben, müssen Sie nur
+			noch auf <guibutton>OK</guibutton> klicken und Sie erhalten eine
+			SQL-Datei, die Ihre gesamten Datenbank-Inhalte enthält. 
+		</para>
+		
+		<para>
+			Um die Daten wieder zu importieren, müssen Sie zum Bereich
+			<guibutton>Importieren</guibutton> wechseln. Wählen Sie dort beim
+			Dateiupload-Feld die SQL-Datei aus, die phpMyAdmin beim Backup
+			für Sie erzeugt hat und klicken Sie dann auf
+			<guibutton>OK</guibutton>, um den Import zu starten.
+		</para>
+		
+		<figure id="good_to_know.database_backup_with_phpmyadmin.import">
+			<title>Datenbank-Backup mit phpMyAdmin importieren</title>
+			<graphic fileref="images/good_to_know/good_to_know.database_backup_with_phpmyadmin.import.png"/>
+		</figure>
+		
+		<tip>
+			<para>
+				Sollte einmal ein Update oder die Installation von
+				Welcompose fehlschlagen, empfiehlt es sich, vor dem
+				(Re-)Import die alte Datenbank komplett zu leeren, d.h.
+				alle Tabellen vorher zu löschen.
+			</para>
+		</tip>
 	</sect1>
 	
 	<sect1 id="good_to_know.ftp_clients">
