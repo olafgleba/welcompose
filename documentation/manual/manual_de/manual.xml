@@ -20,11 +20,13 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_update.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_introduction.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_contents.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_demo.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_blog.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_contents.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_usage.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
