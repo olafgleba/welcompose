@@ -4,61 +4,27 @@
 <chapter id="introduction">
 	<title>Einführung</title>
 	
-	<sect1 id="introduction.how_it_works">
-		<title>Arbeitsweise von Welcompose</title>
+	<para>
+		Bevor Sie Ihre erste Webseite mit Welcompose umsetzen, sollten
+		Sie sich mit den wichtigsten Strukturelementen befassen, welche
+		zur Speicherung der Inhalte dienen. Dies wären Navigationen
+		sowie die Grundgerüste für die verschiedenen Inhaltstypen wie
+		Formulare oder Blogs (siehe <xref linkend="contents"/>. Nachher
+		sollten Sie sich mit den wichtigsten Grundlagen der von Welcompose
+		verwendeten Template Engine Smarty vertraut machen (siehe
+		<xref linkend="templating"/>). Damit besitzen Sie dann das
+		nötige Rüstzeug, um mit Hilfe unserer Crash-Kurse die
+		Möglichkeiten von Welcompose zu entdecken.
+	</para>
 		
-		<para>
-			Im Gegensatz zu anderen Programmen wie Dreamweaver
-			bearbeitet man mit Welcompose keine kompletten Seiten,
-			sondern Strukturelemente. Welcompose unterstützt etliche
-			Strukturelemente. Zu diesen gehören beispielsweise
-			Navigationen, Boxen oder auch Grundgerüste für verschiendene
-			Inhaltstypen wie Formulare oder Blogs. Erst diese
-			Strukturelemente ergeben zusammengesetzt und kombiniert mit
-			einer Vorlage die fertige Seite. Einen schematische
-			Visualisierung dieses Ablaufs zeigt die Grafik <xref
-			linkend="introduction.how_it_works.site_building"/>.
-		</para>
+	<para>
+		Haben Sie bereits einmal mit Smarty und einem anderen webbasierenden
+		CMS gearbeitet, können Sie auch direkt mit den Crash-Kursen
+		einsteigen.
+	</para>
 		
-		<figure id="introduction.how_it_works.site_building">
-			<title>Zusammensetzung einer Seite</title>
-			<graphic fileref="images/introduction/how_it_works.site_building.png"/>
-		</figure>
-		
-		<para>
-			Strukturelemente sind fast beliebig kombinierbar. Dies heisst, dass
-			bei der Gestaltung (abgesehen von der Funktionalität der einzelnen
-			Strukturelemente) einer Seite kaum Grenzen gesetzt sind. Ausnahmen
-			sind beispielsweise die Grundgerüste für verschiedene Inhaltstypen,
-			von denen pro Ausgabeseite nur eines vorkommen kann. Welche
-			Strukturelemente es gibt und was man mit ihnen alles anfangen kann,
-			erfahren Sie im <xref linkend="contents"/>.
-		</para>
-	</sect1>
-	
-	<sect1 id="introduction.approach">
-		<title>Herangehensweise</title>
-		
-		<para>
-			Bevor Sie Ihre erste Webseite mit Welcompose umsetzen, sollten
-			Sie sich mit den wichtigsten Strukturelementen befassen. Dies
-			wären Navigationen sowie die Grundgerüste für die verschiedenen
-			Inhaltstypen wie Formulare oder Blogs. Nachher sollten Sie sich
-			mit den wichtigsten Grundlagen der von Welcompose verwendeten
-			Template Engine Smarty vertraut machen. Damit besitzen Sie dann
-			das nötige Rüstzeug, um mit Hilfe unserer Crash-Kurse die
-			Möglichkeiten von Welcompose zu entdecken.
-		</para>
-		
-		<para>
-			Haben Sie bereits einmal mit Smarty und einem anderen webbasierenden
-			CMS gearbeitet, können Sie auch direkt mit den Crash-Kursen
-			einsteigen.
-		</para>
-		
-		<para>
-			Nachher sollten Sie bereit sein, mit Hilfe der restlichen
-			Dokumentation Ihre eigenen Seiten umzusetzen.
-		</para>
-	</sect1>
+	<para>
+		Nachher sollten Sie bereit sein, mit Hilfe der restlichen
+		Dokumentation Ihre eigenen Seiten umzusetzen.
+	</para>
 </chapter>

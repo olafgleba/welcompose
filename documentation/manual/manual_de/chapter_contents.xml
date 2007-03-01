@@ -4,40 +4,55 @@
 <chapter id="contents">
 	<title>Inhalte</title>
 	
-	<sect1 id="contents.data.structure">
-		<title>Wo werden die Inhalte gespeichert?</title>
-	
-		<para/>
-	</sect1>
-
-	<sect1 id="contents.data.backup">
-		<title>Wie sichere ich meine Daten?</title>
-	
-		<para/>
-	</sect1>
-	
-	<sect1 id="contents.content">
-		<title>Text-Konverter</title>
-	
-		<para/>
+	<sect1 id="contents.how_it_works">
+		<title>Arbeitsweise von Welcompose</title>
 		
-		<sect2 id="contents.content.textconverter.whatis">
-			<title>Was ist ein Text-Konverter?</title>
-	
-			<para/>
-		</sect2>
+		<para>
+			Im Gegensatz zu Programmen wie Dreamweaver
+			bearbeitet man mit Welcompose keine kompletten Seiten,
+			sondern Strukturelemente. Welcompose unterstützt etliche
+			Strukturelemente. Zu diesen gehören beispielsweise
+			Navigationen, Boxen oder auch Grundgerüste für verschiendene
+			Inhaltstypen wie Formulare oder Blogs. Erst diese
+			Strukturelemente ergeben zusammengesetzt und kombiniert mit
+			einer Vorlage die fertige Seite. Einen schematische
+			Visualisierung dieses Ablaufs zeigt die Grafik <xref
+			linkend="contents.how_it_works.site_building"/>.
+		</para>
 		
-		<sect2 id="contents.content.textconverter.abilitities">
-			<title>Einsatz der Text-Konverter</title>
+		<figure id="contents.how_it_works.site_building">
+			<title>Zusammensetzung einer Seite</title>
+			<graphic fileref="images/contents/how_it_works.site_building.png"/>
+		</figure>
+		
+		<para>
+			Strukturelemente sind fast beliebig kombinierbar. Dies heisst, dass
+			bei der Gestaltung (abgesehen von der Funktionalität der einzelnen
+			Strukturelemente) einer Seite kaum Grenzen gesetzt sind. Ausnahmen
+			sind beispielsweise die Grundgerüste für verschiedene Inhaltstypen,
+			von denen pro Ausgabeseite nur eines vorkommen kann. Eine weitere
+			Einschränkung ist, dass Strukturelemente voneinander abhängen
+			können. So ist es beispielsweise nicht möglich, ein Blog Posting
+			ohne Blog zu haben. Eine schematische Darstellung der Abhängigkeiten
+			zwischen den einzelnen Strukturelementen zeigt Grafik <xref
+			linkend="contents.how_it_works.dependencies_structural_elements"/>.
+		</para>
+		
+		<figure id="contents.how_it_works.dependencies_structural_elements.png">
+			<title>Abhänigkeiten zwischen Strukturelementen</title>
+			<graphic fileref="images/contents/how_it_works.dependencies_structural_elements.png"/>
+		</figure>
+	</sect1>
 	
-			<para/>
+	<sect1 id="contents.navigations">
+		<title>Navigationen</title>
+		
+		<sect2 id="contents.navigations.about">
+			<title>Einführung</title>
+			
+			<para>
+				 
+			</para>
 		</sect2>
 	</sect1>
-	
-	<sect1 id="contents.field_validation">
-		<title>Echzeit Validierung</title>
-	
-		<para/>
-	</sect1>
-	
 </chapter>
