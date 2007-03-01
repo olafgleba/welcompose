@@ -1,0 +1,231 @@
+@media print {
+	body,html {
+	margin: 0;
+	padding: 0;
+	}
+	body {
+	font: 100%/110% Arial, Verdana, Helvetica, sans-serif;
+	color: #000;
+	background: transparent;
+	}
+	
+	/* Head */
+	.navheader, .navfooter {
+	display: none;
+	}
+	/* Head EOF */
+
+	/* enviroment -> usually this would be #container */
+	div.book {
+	margin: auto;
+	padding: auto;
+	width: auto;
+	background: transparent;
+	}
+	div.book div.titlepage {
+	border-bottom: 0 none;
+	margin-bottom: 20px;
+	}
+	div.chapter, div.appendix {
+	border-top: 0 none;
+	margin-top: 0;
+	padding-top: 20px;
+	}
+	div.book div.chapter div.titlepage, div.book div.appendix div.titlepage {
+	border-bottom: 0 none;
+	}
+	/* enviroment EOF*/
+
+	/* Head */
+	.subtitle {
+	color: #000;
+	}
+	/* Head EOF */
+
+	/* common */
+	p {
+	margin: 0 0 20px 0;
+	}
+	p.title {
+	margin: 0 0 5px 0;
+	}
+	.sect1 {
+	padding-top: 10px;
+	}
+	hr {
+	border: 0;
+	}
+	/* common EOF */
+
+	/* links */
+	a, a:link , a:visited {
+	text-decoration: underline;
+	color: #000;
+	}
+	div.toc a:link, div.toc a:visited,
+	div.list-of-figures a:link, div.list-of-figures a:visited,
+	div.list-of-examples a:link, div.list-of-examples a:visited {
+	text-decoration: none;
+	color: #000;
+	}
+	span.chapter a:link, span.chapter a:visited {
+	color: #000;
+	text-decoration: none;
+	}
+	/* links EOF */
+
+	/* lists */
+	ul {
+	padding-left: 20px;
+	list-style-image: none;
+	}
+	li p {
+	margin: 2px 0;
+	padding-left: 0;
+	}
+	dd p {
+	margin: 0 0 5px 0;
+	}
+	dd {
+	margin-left: 25px;
+	padding-bottom: 6px;
+	}
+	/* lists EOF */
+
+	/* hx definitions */
+	h1.title {
+	font-size: 2.5em;
+	}
+	h2.title {
+	font-size: 1.6em;
+	margin: 15px 0 15px 0;
+	}
+	/* Full path to differ from chapter hx */
+	.sect1 .titlepage h2.title {
+	font-size: 1.4em;
+	margin: 25px 0 10px 0;
+	}
+	h3.title {
+	font-size: 1.2em;
+	margin: 35px 0 5px 0;
+	}
+	h4.title {
+	font-size: 1.1em;
+	margin: 30px 0 5px 0;
+	}
+	/* hx definitions EOF */
+
+	/* icons */
+	span.guibutton,
+	span.guilabel,
+	span.guimenu,
+	span.guisubmenu,
+	span.guimenuitem,
+	span.application,
+	.userinput code {
+	color: #000;
+	padding-left: 0;
+	font-weight: normal;
+	background: 0 none;
+	}
+	span.guibutton:before,
+	span.guilabel:before,
+	span.guimenu:before,
+	span.guisubmenu:before,
+	span.guimenuitem:before,
+	span.application:before,
+	.userinput code:before {
+	content: '"';
+	}
+	span.guibutton:after,
+	span.guilabel:after,
+	span.guimenu:after,
+	span.guisubmenu:after,
+	span.guimenuitem:after,
+	span.application:after,
+	.userinput code:after {
+	content: '"';
+	}
+	.userinput code {
+	font-family: Arial, sans-serif;
+	}
+	span.application:after {
+	content: '®';
+	padding-left: 0;
+	}
+	/* icons EOF */
+
+	/* warning, note, tip boxes */
+	.tip table,
+	.note table,
+	.warning table {
+	margin: 5px 0 15px 0;
+	padding: 0;
+	width: 100%;
+	border: 1px solid #ccc;
+	background: transparent;
+	}
+	.tip table td,
+	.note table td,
+	.warning table td {
+	padding: 2px 3px 0 3px;
+	margin-top: 0;
+	}
+	.tip table td p,
+	.note table td p,
+	.warning table td p {
+	margin-top: 0;
+	}
+	/* warning, note, tip boxes EOF */
+
+	/* image headings */
+	div.figure p.title b {
+	font-size: 0.96em;
+	color: #000;
+	font-weight: normal;
+	}
+	div.figure p {
+	margin-bottom: 3px;
+	}
+	/* image headings EOF */
+
+	/* code, pre, markup */
+	code, pre {
+	font-size: 1em;
+	font-family: "Courier New", monospace;
+	color: #000;
+	}
+	code.computeroutput {
+	font-style: italic;
+	font-family: Arial, sans-serif;
+	}
+	code.computeroutput:before {
+	content: '"';
+	}
+	code.computeroutput:after {
+	content: '"';
+	}
+	code.function, span.term code.function, .markup {
+	color: #000;
+	padding: 0 4px 0 4px;
+	background: transparent;
+	border: 1px solid #ccc;
+	}
+	code.filename {
+	color: #000;
+	font-weight: bold;
+	}
+	pre {
+	font-family: "Courier New", monospace;
+	border: 1px solid #ccc;
+	background: transparent;
+	padding: 12px;
+	color: #000;
+	}
+	.markup {
+	font-family: "Courier New", monospace;
+	padding: 0 4px 2px 4px;
+	background: transparent;
+	}
+	/* code, pre, markup EOF */
+}

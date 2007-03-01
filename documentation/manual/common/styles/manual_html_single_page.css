@@ -1,0 +1,238 @@
+body,html {
+margin: 0;
+padding: 0;
+}
+body {
+font: 94%/140% Arial, Verdana, Helvetica, sans-serif;
+color: #333;
+background: #d9d9d9 url(../images/bg_body.png);
+}
+
+/* enviroment -> usually this would be #container */
+div.book {
+margin: 0 auto;
+padding: 20px 40px 60px 40px;
+width: 700px;
+background-color: #fff;
+}
+div.book div.titlepage {
+border-bottom: 3px dotted #ccc;
+margin-bottom: 20px;
+}
+div.chapter, div.appendix {
+border-top: 2px dotted #ccc;
+margin-top: 50px;
+padding-top: 20px;
+}
+div.book div.chapter div.titlepage, div.book div.appendix div.titlepage {
+border-bottom: 0 none;
+}
+/* enviroment EOF*/
+
+/* Head */
+.subtitle {
+color: #666;
+}
+/* Head EOF */
+
+/* common */
+p {
+margin: 0 0 20px 0;
+}
+p.title {
+margin: 0 0 5px 0;
+}
+.sect1 {
+padding-top: 10px;
+}
+hr {
+border: 0;
+}
+/* common EOF */
+
+/* links */
+a {
+text-decoration: none;
+cursor: pointer;
+}
+a:link, a:visited {
+color: #ff620d;
+background: transparent;
+}
+a:hover {
+color: #fff;
+background: #ff620d;
+}
+a:active, a:focus {
+color: #fff;
+background: #ff620d;
+}
+/* for TOC */
+span.chapter a:link, span.chapter a:visited {
+color: #ff620d;
+font-weight: bold;
+background: transparent;
+}
+span.chapter a:hover {
+color: #fff;
+background: #ff620d;
+}
+span.chapter a:active, span.chapter a:focus {
+color: #fff;
+background: #ff620d;
+}
+/* links EOF */
+
+/* lists */
+ul {
+padding-left: 20px;
+list-style-image: url(../images/list.png);
+}
+li p {
+margin: 2px 0;
+padding-left: 0;
+}
+dd p {
+margin: 0 0 5px 0;
+}
+dd {
+margin-left: 25px;
+padding-bottom: 6px;
+}
+/* lists EOF */
+
+/* hx definitions */
+h1.title {
+font-size: 2.5em;
+}
+h2.title {
+font-size: 1.6em;
+margin: 15px 0 15px 0;
+}
+/* Full path to differ from chapter hx */
+.sect1 .titlepage h2.title {
+font-size: 1.4em;
+margin: 25px 0 10px 0;
+}
+h3.title {
+font-size: 1.2em;
+margin: 35px 0 5px 0;
+}
+h4.title {
+font-size: 1.1em;
+margin: 30px 0 5px 0;
+}
+/* hx definitions EOF */
+
+/* icons */
+span.guibutton,
+span.guilabel,
+span.guimenu,
+span.guisubmenu,
+span.guimenuitem,
+span.application,
+.userinput code {
+color: #333;
+padding-left: 26px;
+font-weight: bold;
+}
+.userinput code {
+font-family: Arial, sans-serif;
+}
+span.guibutton {
+background: transparent url(../images/guibutton.png) 0 0 no-repeat;
+}
+span.guilabel {
+background: transparent url(../images/guilabel.png) 0 0 no-repeat;
+}
+span.guimenuitem{
+background: transparent url(../images/guimenuitem.png) 0 0 no-repeat;
+}
+span.guimenu {
+background: transparent url(../images/guimenu.png) 0 0 no-repeat;
+}
+span.guisubmenu {
+background: transparent url(../images/guisubmenu.png) 0 0 no-repeat;
+}
+.userinput code {
+background: transparent url(../images/userinput.png) 0 0 no-repeat;
+padding-left: 16px;
+}
+span.application:after {
+content: '®';
+padding-left: 0;
+}
+/* icons EOF */
+
+/* warning, note, tip boxes */
+.tip table,
+.note table,
+.warning table {
+margin: 5px 0 15px 0;
+padding: 0;
+width: 100%;
+border: 1px dotted #ccc;
+background: #f7f7f7;
+}
+.tip table td,
+.note table td,
+.warning table td {
+padding: 2px 3px 0 3px;
+margin-top: 0;
+}
+.tip table td p,
+.note table td p,
+.warning table td p {
+margin-top: 0;
+}
+/* warning, note, tip boxes EOF */
+
+/* image headings */
+div.figure p.title b {
+font-size: 0.96em;
+color: #333;
+font-weight: normal;
+}
+div.figure p {
+margin-bottom: 3px;
+}
+/* image headings EOF */
+
+
+/* code, pre, markup */
+code, pre {
+font-size: 1em;
+font-family: "Courier New", monospace;
+overflow: auto;
+}
+code.computeroutput {
+font-style: italic;
+font-family: Arial, sans-serif;
+}
+code.computeroutput:before {
+content: '"';
+}
+code.computeroutput:after {
+content: '"';
+}
+code.function, span.term code.function, .markup {
+padding: 0 4px 0 4px;
+background: #fff;
+border: 1px dotted #ccc;
+}
+code.filename {
+font-family: Arial, sans-serif;
+font-weight: bold;
+}
+pre {
+font-family: "Courier New", monospace;
+border: 1px dotted #ccc;
+background: #f8f8f8;
+padding: 12px;
+}
+.markup {
+font-family: "Courier New", monospace;
+padding: 0 4px 2px 4px;
+background: #fff;
+}
+/* code, pre, markup EOF */

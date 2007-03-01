@@ -163,7 +163,7 @@ $ php xgettext.php \
 				Um die Übersetzung in eine bestimmte Sprache zu beginnen
 				(beispielsweise Deutsch), benötigen Sie das Programm
 				<filename>msginit</filename> und die Datei
-				<filename>messages.po</filename>, die Sie in
+				<filename>messages.pot</filename>, die Sie in
 				<xref linkend="localization.for_translators.extract_strings"/>
 				erstellt haben.
 			</para>
