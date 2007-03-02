@@ -1,10 +1,10 @@
 ; <?php /*
 [path]
-wcom_admin_root_www = /admin
-wcom_public_root_www = 
+wcom_admin_root_www = /welcompose/trunk/welcompose/admin
+wcom_public_root_www = /welcompose/trunk/welcompose
 
 [log]
-handler = "null"
+handler = firebug
 name = 
 level = PEAR_LOG_DEBUG
 
@@ -18,7 +18,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcom"
+dsn = "mysql:unix_socket=/tmp/mysql-5.0.sock;dbname=welcompose"
 username = "root"
 password = 
 table_alias_constants = true
@@ -26,11 +26,11 @@ debug = false
 backticks = true
 
 [media]
-store_www = "/files/media"
+store_www = "/welcompose/trunk/welcompose/files/media"
 store_disk = "/www/welcompose/trunk/welcompose/files/media"
 
 [global_file]
-store_www = "/files/global_files"
+store_www = "/welcompose/trunk/welcompose/files/global_files"
 store_disk = "/www/welcompose/trunk/welcompose/files/global_files"
 
 [caching]

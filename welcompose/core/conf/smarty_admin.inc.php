@@ -48,7 +48,7 @@ require(SMARTY_ADMIN_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATO
 $smarty->register_compiler_function('i18n', 'smarty_compiler_i18n');
 
 // configure smarty
-$smarty->debug = true;
+$smarty->debug = false;
 $smarty->template_dir = SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'templates';
 $smarty->compile_dir = SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'compiled';
 $smarty->cache_dir = SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'cache';
