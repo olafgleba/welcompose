@@ -226,6 +226,12 @@ try {
 		// this is because we want to insert the raw content nonetheless the path references
 		$insert_type = 'InternalReference';
 
+		// redefine var _text
+		// this is because we defined the insert type manually and therefore
+		// the href preparation in line 92 - 97 could not take place here.
+		// so we have to make a condition again
+		$_text = (!empty($_REQUEST['text'])) ? $_REQUEST['text'] : '';
+		
 		// prepare callback args
 		$args = array(
 			'text' => $_text,

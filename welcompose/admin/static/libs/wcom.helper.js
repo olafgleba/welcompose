@@ -132,10 +132,10 @@ function Helper_launchPopup (trigger, elem)
 		
 		switch (this.trigger) {
 			case 'mm_upload' :
-					this.url = this.parseMedUploadPath + '?pager_page=' + pager_page;
+					this.url = this.parseMedUploadPath + '?pager_page=' + Helper.getPagerPage();
 				break;
 			case 'mm_edit' :
-					this.url = this.parseMedEditPath + '?id=' + this.elem.id + '&pager_page=' + pager_page;
+					this.url = this.parseMedEditPath + '?id=' + this.elem.id + '&pager_page=' + Helper.getPagerPage();
 				break;
 		}
 		// properties
@@ -159,11 +159,15 @@ function Helper_launchPopup (trigger, elem)
  * 
  * @see #processCallbacks
  * @see Mediamanager#processMediaCallbacks
+ * @returns text_converter
  * @throws applyError on exception
  */
 function Helper_getTextConverterValue ()
 {
 	try {		
+		// init
+		var text_converter;
+		
 		var form_name = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
 		var el_name = 'text_converter';
 		var el_id = form_name + '_text_converter';
@@ -178,6 +182,7 @@ function Helper_getTextConverterValue ()
 		} else {
 			text_converter = 0;
 		}
+		return text_converter;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -188,6 +193,7 @@ function Helper_getTextConverterValue ()
  * 
  * @see #processCallbacks
  * @see Mediamanager#processMediaCallbacks
+ * @returns text
  * @throws applyError on exception
  */
 function Helper_getSelectionText(el)
@@ -199,8 +205,11 @@ function Helper_getSelectionText(el)
 			txtarea = $(txtarea);
 		} else {
 			// used within mediamanager callacks
-			var txtarea = $(form_target);
+			txtarea = $(form_target);
 		}
+		
+		// init
+		var text;
 		
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;
@@ -212,6 +221,7 @@ function Helper_getSelectionText(el)
 		} else {
 			text = '';
 		}
+		return text;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -225,16 +235,21 @@ function Helper_getSelectionText(el)
  * style sheets or javascript, which uses brackets also).
  * 
  * @see #processCallbacks
+ * @returns delimiter
  * @throws applyError on exception
  */
 function Helper_getDelimiterValue()
 {
 	try {
+		// init
+		var delimiter;
+		
 		if ($('global_template_change_delimiter')) {
 			delimiter = $F('global_template_change_delimiter');
 		} else {
 			delimiter = '';
 		}
+		return delimiter;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -249,16 +264,21 @@ function Helper_getDelimiterValue()
  * @see #launchPopup
  * @see #processCallbacks
  * @see Mediamanager#processMediaCallbacks
+ * @returns pager_page
  * @throws applyError on exception
  */
 function Helper_getPagerPage()
 {
 	try {
+		// init
+		var pager_page;
+		
 		if($('pager_page_container')) {
 			pager_page = $('pager_page_container').firstChild.nodeValue;
 		} else {
 			pager_page = '';
 		}
+		return pager_page;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -272,13 +292,14 @@ function Helper_getPagerPage()
  * the callbacks strings we build in callbacks.php.
  * 
  * @see #processCallbacks
+ * @returns insert_type
  * @throws applyError on exception
  */
 function Helper_getInsertType ()
 {
 	try {		
 		var insert_type_path = Helper.getAttr('action', document.getElementsByClassName('botbg')[0]);
-		insert_type = insert_type_path.replace(/^\/(.+)\/(.+)\/(.+$)/, '$2');
+		var insert_type = insert_type_path.replace(/^\/(.+)\/(.+)\/(.+$)/, '$2');
 		
 		if (insert_type == 'templating') {
 			insert_type = 'InternalReference';
@@ -286,6 +307,7 @@ function Helper_getInsertType ()
 		else if (insert_type == 'content') {
 			insert_type = 'InternalLink';
 		}
+		return insert_type;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -722,20 +744,21 @@ function Helper_definePageY ()
 function Helper_showNextNode(elem)
 {
 	try {		
+		// init
+		var nextNode;
+		
 		// get source node id from element
 		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
-			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
+			nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 			if (Helper.isBrowser('ie')) {
-				var nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
+				nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
 			}
 		}
 		var url = this.parseCallbacksFilePath + elem.name + '.php';
-		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;
-		
-		
+		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;	
 		
 		if (nextNode == 'secondNode') {
 		var myAjax = new Ajax.Request(
@@ -776,14 +799,17 @@ function Helper_showNextNode(elem)
 function Helper_showNextNodeBoxes(elem)
 {
 	try {
+		//init
+		var nextNode;
+		
 		// get source node id from element
 		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
 		
 		// get next possible node id
 		if (sourceNode.id != 'thirdNode') {
-			var nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
+			nextNode = Helper.getAttrNextSibling('id', sourceNode, 2);
 			if (Helper.isBrowser('ie')) {
-				var nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
+				nextNode = Helper.getAttrNextSibling('id', sourceNode, 1);
 			}
 		}	
 		//var url = this.parsePagesBoxesLinksPath;
@@ -1040,24 +1066,17 @@ function Helper_processCallbacks (elem)
 			_path = _path.replace(n, url_paths[placeholder]);
 			this.url = '../' + _path + '/' + this.parseCallbacksFilePath + this.elTarget;
 		};
-			
-		// process the callbacks	
-		// grab enviroment variables 
-		Helper.getDelimiterValue();
-		Helper.getSelectionText(this.elName);
-		Helper.getTextConverterValue();
-		Helper.getPagerPage();
-		Helper.getInsertType();
-
+	
+		// grab enviroment variables
 		// hash the returned variables
 		var getElems = {
 			id : this.elem.id,
 			form_target : this.elName,
-			delimiter : delimiter,
-			text : text,
-			text_converter : text_converter,
-			pager_page : pager_page,
-			insert_type : insert_type
+			delimiter : Helper.getDelimiterValue(),
+			text : Helper.getSelectionText(this.elName),
+			text_converter : Helper.getTextConverterValue(),
+			pager_page : Helper.getPagerPage(),
+			insert_type : Helper.getInsertType()
 		};
 		var o = $H(getElems);
 		var reqString = o.toQueryString();
@@ -1158,6 +1177,7 @@ function Helper_showResponseProcessCallbacks(req)
 function Helper_changeBlogCommentStatus (elem)
 {	
 	try {
+		// init
 		var statusId;
 		var commentId;
 		

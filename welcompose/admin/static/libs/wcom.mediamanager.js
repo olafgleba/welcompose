@@ -987,18 +987,14 @@ function Mediamanager_processMediaCallbacks (elem)
 		} else {
 			form_target = stored_focus;
 			
-			// grab enviroment variables 
-			Helper.getTextConverterValue();
-			Helper.getSelectionText();
-			Helper.getPagerPage();
-			
+			// grab enviroment variables 	
 			// hash the returned variables
 			var getElems = {
 				id : this.elem.id,
-				text : text,
-				text_converter : text_converter,
+				text : Helper.getSelectionText(),
+				text_converter : Helper.getTextConverterValue(),
 				form_target : form_target,
-				pager_page : pager_page
+				pager_page : Helper.getPagerPage()
 			};
 			var o = $H(getElems);
 			var reqString = o.toQueryString();

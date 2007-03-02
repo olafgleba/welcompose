@@ -149,14 +149,6 @@ text-decoration: underline;
 .marker_fine {
 text-align: right;
 }
-.marker_warning,
-.marker_error,
-.marker_fine {
-text-align: right;
-}
-.marker_warning {
-color: #f90;
-}
 .marker_fine {
 color: #0c3;
 }
