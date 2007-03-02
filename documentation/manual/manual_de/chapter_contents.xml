@@ -38,7 +38,7 @@
 			linkend="contents.how_it_works.dependencies_structural_elements"/>.
 		</para>
 		
-		<figure id="contents.how_it_works.dependencies_structural_elements.png">
+		<figure id="contents.how_it_works.dependencies_structural_elements">
 			<title>Abhänigkeiten zwischen Strukturelementen</title>
 			<graphic fileref="images/contents/how_it_works.dependencies_structural_elements.png"/>
 		</figure>
