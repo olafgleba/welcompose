@@ -3,6 +3,6 @@
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 
 <copyright>
-	<year>2006</year>
+	<year>2006-<?dbtimestamp format="Y"?></year>
 	<holder>sopic GmbH (<ulink url="http://www.sopic.com" />)</holder>
 </copyright>
