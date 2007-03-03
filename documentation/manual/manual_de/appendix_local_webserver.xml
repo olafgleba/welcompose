@@ -746,7 +746,7 @@ port=3306
 					Version auszuwählen!
 				</para>
 				
-				<example>
+				<example id="local_webserver.windows.apache.configure.sample_httpd_conf">
 					<title>httpd.conf für Apache 2.2 und PHP 5.2</title>
 					
 					<programlisting language="ini"><![CDATA[
