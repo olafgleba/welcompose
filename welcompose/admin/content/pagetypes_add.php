@@ -78,6 +78,10 @@ try {
 	$PAGETYPE = load('content:pagetype');
 		
 	// init user and project
+	if (!$LOGIN->loggedIntoAdmin()) {
+		header("Location: ../login.php");
+		exit;
+	}
 	$USER->initUserAdmin();
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
