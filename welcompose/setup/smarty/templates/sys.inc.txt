@@ -5,7 +5,7 @@ wcom_public_root_www = {$configuration.root_www}
 
 [log]
 handler = "null"
-name = 
+name = "{$configuration.root_disk}/tmp/log/welcompose.log"
 level = PEAR_LOG_NOTICE
 
 [environment]
