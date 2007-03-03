@@ -60,18 +60,18 @@ zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-full-src" welcompos
 rm -rf welcompose/update
 
 # compress js
-wget http://dojotoolkit.org/svn/dojo/trunk/buildscripts/lib/custom_rhino.jar
-if [ ! -f "custom_rhino.jar" ] ; then
-	echo "Dojo's compressor custom_rhino.jar not found. Download failed, eh?"
+svn export https://www.dotthink.net/svn/Welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
+if [ ! -f "jsmin.py" ] ; then
+	echo "JavaScript minifier not found. Download failed, eh?"
 	exit 1
 fi
 for file in `find welcompose -type f -name "*.js"` ; do
-	tmpfile="$file"-rhino
+	tmpfile="$file"-jsmin
 	cp "$file" "$tmpfile"
-	java -jar custom_rhino.jar -c "$tmpfile"  > "$file"
+	python jsmin.py < "$tmpfile"  > "$file"
 	rm -f "$tmpfile"
 done
-rm -rf custom_rhino.jar
+rm -rf jsmin.py
 
 # create source packages without updater and with compressed js
 tar cvfz "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-src".tar.gz welcompose
