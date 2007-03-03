@@ -27,4 +27,67 @@
 		Nachher sollten Sie bereit sein, mit Hilfe der restlichen
 		Dokumentation Ihre eigenen Seiten umzusetzen.
 	</para>
+	
+	<sect1 id="introduction.context_help">
+		<title>Kontext-Hilfe</title>
+		
+		<para>
+			Um die Arbeit mit Welcompose leichter zu machen und zu
+			verhindern, dass für jedes Formularfeld mit kryptischer Beschriftung
+			die Dokumentation konsultiert werden muss, unterstützt Sie
+			Welcompose mit einer Inline-Hilfe.
+		</para>
+		
+		<para>
+			Die Inline-Hilfe wird durch ein kleines Fragezeichen neben der
+			Feldbezeichnung angezeigt. Klickt man auf das Fragezeichen,
+			erscheint unter dem Feld ein kurzer Hilfetext und das Fragezeichen
+			wird durch ein oranges X ersetzt. Um den Hilfetext wieder
+			verschwinden zu lassen, muss man nur wieder auf das X klicken
+			und es wird wieder alles so wie vorher.
+		</para>
+		
+		<figure id="introduction.context_help.usage">
+			<title>Verwendung der Kontext-Hilfe</title>
+			<graphic fileref="images/introduction/context_help.usage.png"/>
+		</figure>
+	</sect1>
+	
+	<sect1 id="introduction.realtime_validation">
+		<title>Echtzeit-Validierung</title>
+		
+		<para>
+			Eine weitere Hilfe neben der Kontext-Hilfe (siehe <xref
+			linkend="introduction.context_help"/>) ist die Echtzeit-Validierung.
+			Sie dient dazu, optisch zu signalisieren, ob gültige oder ungültige
+			Eingaben in einem Feld getätigt wurden. So lässt sich bereits vor
+			dem Abschicken sicherstellen, ob die Eingaben in einem Feld den
+			Anforderungen von Welcompose entsprechen. 
+		</para>
+		
+		<para>
+			Die Echtzeit-Validierung befindet sich nur neben wenigen Feldern
+			und zwar denjenigen, die bei denen die Eingaben nicht frei sind.
+			So existieren Felder, die beispielsweise nur numerische, 
+			alphanumerische oder klein geschriebene Zeichenketten akzeptieren.
+			Sie erscheint in Form eines grünen oder roten Symbols, sobald 
+			einige Zeichen getippt und für einen kurzen Moment das Schreiben
+			abgesetzt wurde. Welche Zeichen akzeptiert werden und welche nicht,
+			darüber gibt in der Regel die Kontext-Hilfe Aufschluss.
+		</para>
+		
+		<figure id="introduction.realtime_validation.sample">
+			<title>Beispiel der Echtzeit-Validierung</title>
+			<graphic fileref="images/introduction/realtime_validation.sample.png"/>
+		</figure>
+		
+		<note>
+			<para>
+				Felder, die einzigartige Eingaben (beispielsweise
+				Navigationsnamen) verlangen, werden von der Echtzeit-Validierung
+				nicht abgedeckt. Die Eingaben werden einzig auf formale
+				Korrektheit überprüft.
+			</para>
+		</note>
+	</sect1>
 </chapter>
