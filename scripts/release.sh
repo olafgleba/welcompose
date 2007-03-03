@@ -17,9 +17,9 @@ if [ ! -x "`which php`" ] ; then
 	exit 1
 fi
 
-# test if java is available
-if [ -z "`which java`" ] ; then
-	echo "Java executable not found"
+# test if python is available
+if [ -z "`which python`" ] ; then
+	echo "Python executable not found"
 	exit 1
 fi
 
