@@ -22,7 +22,7 @@
 		
 		<figure id="contents.how_it_works.site_building">
 			<title>Zusammensetzung einer Seite</title>
-			<graphic fileref="images/contents/how_it_works.site_building.png"/>
+			<graphic fileref="images/contents/how_it_works/site_building.png"/>
 		</figure>
 		
 		<para>
@@ -40,19 +40,159 @@
 		
 		<figure id="contents.how_it_works.dependencies_structural_elements">
 			<title>Abhänigkeiten zwischen Strukturelementen</title>
-			<graphic fileref="images/contents/how_it_works.dependencies_structural_elements.png"/>
+			<graphic fileref="images/contents/how_it_works/dependencies_structural_elements.png"/>
 		</figure>
 	</sect1>
 	
 	<sect1 id="contents.navigations">
 		<title>Navigationen</title>
 		
-		<sect2 id="contents.navigations.about">
+		<sect2 id="contents.navigations.introduction">
 			<title>Einführung</title>
 			
 			<para>
-				 
+				Navigationen dienen dazu, Seiten zu Gruppen von Menüpunkten
+				für den Aufbau von Navigationen zusammenzufassen. Damit lassen
+				sich auf einfache Weise in den Ausgabevorlagen
+				Navigationsstrukturen (beispielsweise HTML-Listen) automatisch
+				erzeugen, ohne dass man wissen muss, welcher Menüpunkt genau
+				wohin kommt. Die Steuerung von Zugehörigkeit einer Seite
+				(und damit eines Menüpunkts) zu einer bestimmten Navigation
+				sowie die genaue Platzierung des Menüpunkts innerhalb einer
+				Navigation lässt sich komplett über die
+				Administrationsoberfläche steuern.
 			</para>
+			
+			<para>
+				Für maximale Flexibilität beim Aufbau einer Webseite unterstützt
+				Welcompose mehrere Navigationen sowie eine unbegrenzte Anzahl
+				von Navigationspunkten pro Navigation.
+			</para>
+			
+			<para>
+				Ein Beispiel für die Benutzung mehrfacher Navigationen
+				zeigt <xref
+				linkend="contents.navigations.introduction.two_navigations_sample"/>.
+			</para>
+			
+			<figure id="contents.navigations.introduction.two_navigations_sample">
+				<title>Abhänigkeiten zwischen Strukturelementen</title>
+				<graphic fileref="images/contents/navigations/introduction.two_navigations_sample.png"/>
+			</figure>
 		</sect2>
+		
+		<sect2 id="contents.navigations.manage">
+			<title>Verwaltung</title>
+			
+			<para>
+				Die Verwaltung der Navigationen erfolgt über die
+				Administrationsoberfläche unter dem Menüpunkt
+				<guimenuitem>Navigations</guimenuitem> im Bereich
+				<guimenuitem>Contents</guimenuitem>. Dort können
+				Navigationen hinzugefügt, bearbeitet und gelöscht werden.
+			</para>
+			
+			<figure id="contents.navigations.manage.manage_navigations">
+				<title>Navigationen verwalten</title>
+				<graphic fileref="images/contents/navigations/manage.manage_navigations.png"/>
+			</figure>
+			
+			<para>
+				Eine Navigation besteht einzig und allein aus einem
+				Navigationsnamen. Dieser hilft dabei, die Navigation
+				zu identifizieren und Menüpunkte respektive Seiten der
+				Navigation zuzuweisen. Wählen Sie deshalb einen möglichst
+				beschreibenden und eindeutigen Namen für eine Navigation aus,
+				beispielsweise <userinput>Hauptnavigation</userinput>
+				oder <userinput>Fusszeile</userinput>. Da Navigationen über
+				ihren Namen identifiziert werden, kann pro Projekt jeder
+				Navigationsname nur einmal vorkommen.
+			</para>
+			
+			<para>
+				Die Navigationen werden auch bei der Verwaltung der Seiten
+				angetroffen. Auf der Übersichtsseite sind die verschiedenen
+				Navigationen mitsamt den ihnen zugeordneten Seiten
+				alphabetisch gelistet (siehe <xref
+				linkend="contents.pages.manage"/>).
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="contents.navigations.output">
+			<title>Ausgabe</title>
+						
+			<note>
+				<para>
+					Wenn Sie die Menüpunkte einer Navigation ausgeben wollen,
+					konsultieren Sie bitte den entsprechenden <xref
+					linkend="contents.pages.output"/> im
+					<xref linkend="contents.pages"/>.
+				</para>
+			</note>
+			
+			<example id="contents.navigations.output.get_navigation">
+				<title>Navigation auslesen</title>
+				
+				<para>
+					Um eine einzelne Navigation auszulesen, wird die ID
+					(im Beispiel <userinput>1</userinput>) der jeweiligen
+					Navigation benötigt. 
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Navigation mit der ID 1 auslesen*}
+{select_simple ns="Content" class="Navigation" method="selectNavigation"
+	var="navigation" id="1"}
+	
+{* Navigation mit ID und Namen ausgeben *}
+ID der Navigation: {$navigation.id}
+Name der Navigation: {$navigation.name}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.navigations.output.get_navigations">
+				<title>Mehrere Navigationen auslesen</title>
+				
+				<para>
+					Es werden alle dem aktuellen Projekt zugeordneten
+					Navigationen ausgelesen und alphabetisch sortiert
+					ausgegeben.
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Navigationen auslesen *}
+{select_named ns="Content" class="Navigation" method="selectNavigations"
+	var="navigations"}
+	
+{* Navigationen mit Namen und ID ausgeben *}
+{foreach from=$navigations item="_navigation"}
+	ID der Navigation: {$_navigation.id}
+	Name des Navigation: {$_navigation.name}
+{/foreach}
+]]></programlisting>
+			</example>
+			
+		</sect2>
+	</sect1>
+	
+	<sect1 id="contents.pages">
+		<title>Seiten</title>
+		
+		<sect2 id="contents.pages.introduction">
+			<title>Einführung</title>
+			<para/>
+		</sect2>
+		
+		<sect2 id="contents.pages.manage">
+			<title>Verwaltung</title>
+			<para/>
+		</sect2>
+		
+		<sect2 id="contents.pages.output">
+			<title>Ausgabe</title>
+			<para/>
+		</sect2>
+
 	</sect1>
 </chapter>
