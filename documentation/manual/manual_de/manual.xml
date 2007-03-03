@@ -30,9 +30,9 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_blog.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_usage.xml" />
+		href="chapter_extended_configuration.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_url_rewriting.xml" />
+		href="chapter_usage.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_localization.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"

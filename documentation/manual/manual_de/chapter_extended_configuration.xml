@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="extended_configuration">
+	<title>Erweiterte Konfiguration</title>
+	
+	<sect1 id="extended_configuration.logging">
+		<title>Logging</title>
+		
+		<para>
+			Welcompose bringt ein Logging Framework mit, das das Logging von
+			Fehlern auf viele verschiedene Arten ermöglicht. Verwendet wird
+			dabei das PEAR-Paket Log<footnote><para><ulink type="external"
+			url="http://pear.php.net/package/Log/"/></para></footnote>. 
+			Allerdings ist das Logging von Haus aus deaktiviert, um
+			Sicherheitsprobleme durch offen zugängliche Logdateien zu vermeiden.
+		</para>
+		
+		<sect2 id="extended_configuration.logging.file">
+			<title>Logging in Datei</title>
+			
+			<para>
+				Standardmässig empfiehlt sich das Logging in eine Datei. So
+				können auch Fehler entdeckt werden, die beim regulären Betrieb
+				der Webseite auftauchen, die normalerweise unbemerkt bleiben. 
+			</para>
+			
+			<para>
+				Um das Logging in eine Datei zu aktivieren, gilt es zuerst, 
+				einen geeigneten Speicherplatz für die Logdatei zu finden.
+			</para>
+			
+			<warning>
+				<para>
+					STELLEN SIE UNTER ALLEN UMSTÄNDEN SICHER, DASS DIE
+					LOGDATEIEN NICHT ÜBER DAS WEB EINSEHBAR SIND! Ist das
+					nicht möglich, verzichten Sie auf das Logging.
+				</para>
+			</warning>
+			
+			<para>
+				Erlaubt der Webhoster das Schreiben in Verzeichnisse,
+				die nicht vom Web aus zugänglich sind, sollte dort ein Ordner
+				angelegt werden (beispielsweise mit dem Namen
+				<filename>log/</filename>) und dessen Rechte so verändert werden,
+				dass PHP dort hineinschreiben kann. Öffnen Sie nun die zentrale
+				Welcompose-Konfigurationsdatei
+				<filename>core/conf/sys.inc.php</filename> und suchen Sie nach
+				dem Abschnitt <code>[log]</code>. Setzen Sie für den Schlüssel
+				<code>handler</code> den Wert <userinput>file</userinput>
+				und für den Schlüssel <code>name</code> den Pfad vom
+				Dateisystem-Root zur Logdatei im soeben angelegten Ordner.
+				Beispiel:
+			</para>
+			
+			<programlisting language="ini"><![CDATA[
+[log]
+handler = "file"
+name = "/var/log/welcompose/welcompose.log"
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+			<para>	
+				Kann nur auf Verzeichnisse zugegriffen werden, die über das
+				Web einsehbar sind, kann das bei der Welcompose-Installation
+				vorbereitete Verzeichnis <filename>tmp/log/</filename>
+				verwendet werden. Öffnen Sie dazu die zentrale
+				Welcompose-Konfigurationsdatei
+				<filename>core/conf/sys.inc.php</filename> und setzen Sie für
+				den Schlüssel <code>handler</code> den Wert
+				<userinput>file</userinput>. Den Pfad beim Schlüssel
+				<code>name</code> können Sie stehen lassen, da er beim Setup
+				korrekt erzeugt worden sein sollte. Beispiel:
+			</para>
+			
+			<programlisting language="ini"><![CDATA[
+[log]
+handler = "file"
+name = "/www/meinewebsite.tld/tmp/log/welcompose.log"
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+			<para>
+				Nun müssen Sie den Zugriff auf das Verzeichnis
+				<filename>tmp/log/</filename> vom Web aus unterbinden. Es gibt
+				dazu verschiedene Möglichkeiten:
+				
+				<variablelist>
+					<varlistentry>
+						<term>Server-Konfiguration anpassen</term>
+						<listitem>
+							<para>
+								Bei den meisten Webhostern ist eine passende
+								Änderung der Server-Konfiguration relativ
+								einfach zu bewerkstelligen, sofern auf Apache
+								gesetzt wird. So kann einfach eine Datei mit
+								dem Namen <filename>.htaccess</filename> 
+								und dem Inhalt <code>Deny from all</code> in
+								<filename>tmp/log/</filename> abgelegt und damit
+								der Zugriff auf das Verzeichnis verwehrt werden.
+								<code>Deny from all</code> kann ebenfalls direkt
+								in der Server-Konfigurationsdatei
+								<filename>httpd.conf</filename> verwendet
+								werden. Um zu erfahren, wie dies genau geht
+								und was bei anderer Webserver-Software wie
+								lighttpd oder Cherokee getan werden muss,
+								konsultieren Sie bitte die Dokumentation der
+								jeweiligen Produkte.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Schreibrechte ändern</term>
+						<listitem>
+							<para>
+								Das Ändern der Schreibrechte des Ordners
+								<filename>tmp/log/</filename> ist eine
+								Vorgehensweise, die unabhängig der verwendeten
+								Server-Software, aber nicht auf Windows
+								funktioniert. Sie basiert darauf,
+								dass dem Anwender und der Gruppe des Webservers
+								die Leserechte für das Verzeichnis entzogen 
+								werden. Wenn Sie nicht selber wissen, wie das
+								geht, wenden Sie sich bitte an den
+								Provider-Support, weil eine korrekte
+								Konfiguration ohne genaue Kenntnis des
+								Server-Setups unmöglich ist.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</para>
+		</sect2>
+		
+		<sect2 id="extended_configuration.logging.direct_output">
+			<title>Direkte Ausgabe</title>
+			
+			<warning>
+				<para>
+					VERWENDEN SIE DIE DIREKTE AUSGABE KEINESFALLS IM
+					PRODUKTIVEINSATZ!
+				</para>
+			</warning>
+			
+			<para>
+				Beim Aufsetzen oder bei der Entwicklung mit Welcompose
+				kann es angenehm sein, Fehler direkt beim Seitenaufruf
+				zu Gesicht zu bekommen. PEAR::Log stellt dazu zwei
+				verschiedene Log-Handler bereit.
+			</para>
+			
+			<para>
+				Für jeden Anwender und jeden Browser funktioniert der sogenannte
+				Display Handler. Er gibt die Debug- und Fehlermeldungen direkt
+				aus, wie dies PHP auch tut. Um den Display Handler zu
+				aktivieren, öffnen Sie die zentrale Konfigurationsdatei
+				<filename>core/conf/sys.inc.php</filename> und suchen nach dem
+				Abschnitt <code>[log]</code>. Setzen Sie dort für den Schlüssel
+				<code>handler</code> den Wert <userinput>display</userinput>
+				und für den Schlüssel <code>name</code> einen leeren Wert.
+			</para>
+			
+			<programlisting language="ini"><![CDATA[
+[log]
+handler = "display"
+name = 
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+			<para>
+				Für Anwender des Webbrowsers Firefox gibt es mit der
+				Firebug-Extension <footnote><para><ulink type="external"
+				url="http://www.getfirebug.com/"/></para></footnote>
+				eine optisch attraktive Alternative zum Display Handler, bei
+				der die Fehler im Rahmen der Firebug-Konsole und nicht
+				direkt in der Seite ausgegeben werden. 
+			</para>
+			
+			<para>
+				Um den Firebug Handler zu aktivieren, öffnen Sie die zentrale
+				Konfigurationsdatei <filename>core/conf/sys.inc.php</filename>
+				und suchen Sie nach Abschnitt <code>[log]</code>. Setzen Sie
+				dort für den Schlüssel <code>handler</code> den Wert
+				<userinput>firebug</userinput> und für den Schlüssel
+				<code>name</code> einen leeren Wert.
+			</para>
+			
+			<programlisting language="ini"><![CDATA[
+[log]
+handler = "firebug"
+name = 
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+		</sect2>
+		
+		<sect2 id="extended_configuration.logging.log_level">
+			<title>Log Level</title>
+			
+			<para>
+				PEAR::Log unterstützt eine Vielzahl von Log Levels, mit denen
+				die zu loggenden Debug- oder Fehlermeldungen gefiltert werden
+				können. So ergibt es beispielsweise keinen Sinn, im
+				Produktivbetrieb Debug-Meldungen zu loggen. 
+			</para>
+			
+			<para>
+				Für den Produktivbetrieb empfiehlt sich die Verwendung des
+				Log Levels <userinput>PEAR_LOG_INFO</userinput> respektive
+				<userinput>PEAR_LOG_WARNING</userinput>.
+				<userinput>PEAR_LOG_INFO</userinput> entspricht etwa PHPs
+				Log Level E_NOTICE und höher während
+				<userinput>PEAR_LOG_WARNING</userinput> E_WARNING und höher
+				entspricht.
+			</para>
+			
+			<para>
+				Für die Entwicklung von Welcompose kann auf die Log Levels
+				für den Produktivbetrieb oder <userinput>PEAR_LOG_DEBUG</userinput>
+				gesetzt werden. 
+			</para>
+		</sect2>
+	</sect1>
+	
+	<sect1 id="extended_configuration.flickr">
+		<title>Flickr</title>
+		
+		<para>
+			Welcompose bietet im Rahmen des Media Manager Unterstützung für die
+			Photo Sharing Community Flickr<footnote><para><ulink type="external"
+			url="http://www.flickr.com/"/></para></footnote>. Die Integration von
+			Flickr wird über das öffentliche Web-Service-API realisiert, für
+			deren Nutzung ein spezieller Key von Nöten ist. Der API Key ist
+			für den persönlichen Gebrauch in der Regel kostenlos und kann
+			auf der Flickr-Webseite beantragt<footnote><para><ulink
+			type="external" url="http://www.flickr.com/services/api/keys/"/></para></footnote>
+			werden. Im Rahmen von Welcompose wird kein Flickr API Key
+			mitgeliefert!
+		</para>
+		
+		<para>
+			Verfügen Sie über einen API Key, muss er in der Konfigurationsdatei
+			von Welcompose hinterlegt werden. Öffnen Sie zu diesem Zweck
+			die zentrale Konfigurationsdatei
+			<filename>core/conf/sys.inc.php</filename> und suchen dort nach
+			dem Abschnitt <code>[flickr]</code>.
+		</para>
+		
+		<para>
+			Tragen Sie dort für den Schlüssel <code>api_key</code> Ihren
+			Flickr API Key als Wert ein.
+		</para>
+		
+		<programlisting language="ini"><![CDATA[
+api_key = "123456789123456789123456789"
+]]></programlisting>
+			
+		<para>
+			Achten Sie zudem darauf, dass für den Schlüssel
+			<code>cache_encrypt</code> der Wert <userinput>true</userinput>
+			gesetzt ist, sodass die gecachten Antworten von Flickr verschlüsselt
+			werden. Der komplette Flickr-Konfigurationsblock sollte nachher
+			etwa so aussehen (abgesehen vom Abweichungen beim
+			<code>cache_dir</code>):
+		</para>
+		
+		<programlisting language="ini"><![CDATA[
+[flickr]
+cache_dir = "/www/welcompose/trunk/welcompose/tmp/flickr_cache"
+cache_encrypt = true
+api_key = "123456789123456789123456789"
+]]></programlisting>
+	</sect1>
+	
+	<sect1 id="extended_configuration.url_rewriting">
+		<title>URL Rewriting</title>
+		
+		<sect2 id="extended_configuration.url_rewriting.introduction">
+			<title>Einführung</title>
+		
+			<para>
+				Standardmässig verwendet Welcompose parameterisierte URLs, um die
+				Inhalte auszuwählen, die angezeigt werden sollen. Ein typischer
+				URL zum Aufruf einer Seite sieht beispielsweise so aus:
+			</para>
+
+			<programlisting language="php"><![CDATA[
+index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+	
+			<para>
+				Diese Form von URLs ist weder besonders benutzer- noch
+				suchmaschinenfreundlich. Um dies zu ändern, muss an zwei Orten
+				Hand angelegt werden: Einmal am Webserver (<xref
+				linkend="extended_configuration.url_rewriting.configure.configure_webserver"/>)
+				und einmal in der Konfiguration von Welcompose (<xref
+				linkend="extended_configuration.url_rewriting.configure.configure_welcompose"/>).
+				Dabei werden die parameterisierten URLs quasi auf Verzeichnisse
+				und Dateinamen abgebildet, auch wenn diese gar nicht existieren. 
+			</para>
+	
+			<para>
+				Den URL
+			</para>
+	
+			<programlisting language="php"><![CDATA[
+index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+	
+			<para>
+				könnte man zum Beispiel so schreiben:
+			</para>
+
+			<programlisting language="php"><![CDATA[
+/default/produkte/index.php
+]]></programlisting>
+		
+			<para>
+				Das erste Verzeichnis steht für den URL-Parameter
+				<emphasis>project_name</emphasis>, das zweite Verzeichnis für
+				den URL-Parameter <emphasis>page_name</emphasis> und der
+				Dateiname index.php für den URL-Parameter
+				<emphasis>action</emphasis>. Jetzt weist man den
+				Webserver an, die Informationen aus dem URL zu extrahieren und
+				den entsprechenden URL-Parametern zuzuweisen.
+			</para>
+	
+			<para>
+				Die meisten Webserver - ob Apache, Lighttpd oder Cherokee -
+				stellen entsprechende Funktionalität bereit. Dabei wird in einer
+				Konfigurationsdatei definiert, welcher Teil des URL auf welchen
+				Parameter abgebildet. Verwendet werden dabei Reguläre Ausdrücke
+				<footnote>
+					<para>
+						<ulink
+							url="http://de.wikipedia.org/wiki/Reguläre_Ausdrücke" />
+					</para>
+				</footnote>. So ein Konfigurationssatz wird
+				<emphasis>Rewrite Map</emphasis> genannt.
+			</para>
+	
+			<para>
+				Welcompose selber muss zudem dazu angewiesen werden, URLs mit
+				dem korrekten Format zu erzeugen. Dies kann über einige
+				wenige Zeilen in der Systemkonfiguration (<xref
+				linkend="extended_configuration.url_rewriting.configure.configure_welcompose"/>)
+				erledigt werden. 
+			</para>
+		</sect2>
+	
+		<sect2 id="extended_configuration.url_rewriting.configure">
+			<title>URL Rewriting konfigurieren</title>
+	
+			<para>
+				Das Pfadlayout einer Rewrite Map muss nicht immer gleich
+				sein. Das heisst, dass man es den eigenen Wünschen
+				anpassen kann, solange in der URL alle Parameter
+				definiert sind. Zudem kann der Parameter project_name
+				weggelassen werden, wenn Welcompose nur ein einzelnes
+				Projekt betreiben soll. Es verwendet dann automatisch
+				das Standard-Projekt.
+			</para>
+			
+			<para>
+				Anhand des oben aufgeführten Beispiels führen wir nun
+				sämtliche Schritte durch, die notwendig sind um das URL
+				Rewriting zu konfigurieren.
+			</para>
+			
+			<para>
+				Wir beginnen damit, Welcompose anzuweisen, die
+				gewünschten URL Formate zu erzeugen. Es wird angenommen,
+				dass ein angelegtes Projekt mit Namen
+				<filename>default</filename> und eine inhaltliche Seite mit
+				Namen <filename>Produkte</filename> (Seitentyp
+				<emphasis>simple_page_index</emphasis>) im System existieren.
+			</para>
+
+			<sect3 id="extended_configuration.url_rewriting.configure.configure_welcompose">
+			 	<title>Welcompose für URL Rewriting konfigurieren</title>
+		 	
+			 	<para>
+			 		Im Pfad <filename>/core/conf/</filename> finden Sie die
+			 		Konfigurationsdatei <filename>sys.inc.php</filename>. Öffnen
+			 		Sie diese in einem Texteditor und gehen zum Abschnitt
+			 		<code>[urls]</code>. Dort sehen Sie in der ersten Zeile
+			 		folgendes:
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+simple_page_index = "/index.php?project_name=<project_name>&page_name=<page_name>&action=Index"
+]]></programlisting>
+	
+				<para>
+					Wird in Welcompose eine Seite mit Seitentyp
+					<emphasis>simple_page_index</emphasis> aufgerufen, wird der
+					hier definierte URL benutzt und die Parameterwerte
+					entsprechend dem Aufruf eingefügt. Der aufgerufene URL für
+					unser Beispiel würde somit wie folgt aussehen:
+				</para>
+	
+				<programlisting language="php"><![CDATA[
+http://ihre-domain.tld/index.php?project_name=default&page_name=produkte&action=index
+]]></programlisting>
+				
+				<para>
+					Dieses wollen wir jetzt ändern. Wir wählen das Pfadlayout
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+/default/produkte/index.php
+]]>	</programlisting>			
+	
+				<para>
+					um den URL in einer Ordnerstruktur abzubilden. Ersetzen
+					Sie nun in der Konfigurationsdatei die bisherige Zuweisung
+					in der <emphasis>sys.inc.php</emphasis> Datei durch:
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+simple_page_index = "/<project_name>/<page_name>/"
+]]></programlisting>
+	
+				<para>
+					Wie man sehen kann, haben wir nichts anderes gemacht, als
+					unser gewünschte Pfadlayout anzugeben und die
+					korrespondierenden Parametervariablen anstelle der
+					statischen Namen einzusetzen. Den Parameter
+					<emphasis>Index</emphasis> brauchen wir an dieser Stelle
+					nicht zu berücksichtigen.
+				</para>	
+				
+				<para>
+					Damit ist die Konfiguration des URL Rewriting seitens
+					Welcompose auch schon abgeschlossen. 
+				</para>						
+			</sect3>
+		
+		
+			<sect3 id="extended_configuration.url_rewriting.configure.configure_webserver">
+				<title>Webserver für URL Rewriting konfigurieren</title>
+			 	
+			 	<para>
+			 		In Apache 1.3.x und 2.x wird das URL Rewriting vom
+			 		Apache-Modul mod_rewrite
+			 		<footnote>
+			 			<para>
+			 				<ulink
+			 					url="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html" />
+			 			</para>
+			 		</footnote>
+			 		bereitgestellt. Konfiguriert werden kann das URL Rewriting 
+			 		in der Server-Konfigurationsdatei
+			 		<filename>httpd.conf</filename> oder im jeweiligen
+			 		Installationsordner von Welcompose in einer Datei namens
+			 		<filename>.htaccess</filename>. Wir gehen im Beispiel von
+			 		einer schon existierenden <filename>.htaccess</filename>
+			 		Datei aus.
+			 	</para>
+	
+			 	<note>
+			 		<para>
+			 			Das Apache-Modul mod_rewrite ist nicht auf jedem
+			 			Webserver aktiviert. Wenn Sie nicht sicher sind, ob
+			 			es aktiviert ist, wenden Sie sich bitte an den
+			 			Provider-Support.
+			 		</para>
+			 	</note>
+			
+				<para>
+					Öffnen Sie die <emphasis>.htaccess</emphasis> Datei in
+					einem Texteditor. Als erste Anweisung teilen wir den
+					Webserver mit, unsere RewriteMap zu berücksichtigen.
+				</para>
+		 	
+			 	<programlisting><![CDATA[
+RewriteEngine on
+]]></programlisting>
+	
+				<para>
+					Nun schreiben wir die eigentliche Anweisung zur Umformung
+					der URL, so dass sie der, in der
+					<emphasis>sys.inc.php</emphasis> Konfigurationsdatei
+					definierten Struktur entspricht.
+				</para>
+		 	
+			 	<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)
+RewriteRule     ^ index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+	
+				<para>
+					Ihr kompletter Eintrag sollte jetzt so aussehen:
+				</para>
+				
+			 	<programlisting><![CDATA[
+RewriteEngine on
+	
+RewriteCond     %{REQUEST_URI}  ^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)
+RewriteRule     ^ index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+				
+				<para>
+					Zur Erläuterung: Tritt die Rewrite Condition 
+					<footnote>
+			 			<para>
+			 				<ulink
+			 					url="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewritecond"/>
+			 			</para>
+			 		</footnote>
+					ein, wird die darauf folgende <emphasis>RewriteRule</emphasis>
+					ausgeführt. In diesen einfachen Fall bedeutet dies, dass die
+					Parameter (<emphasis>project_name</emphasis>,
+					<emphasis>page_name</emphasis>) mit den variablen Werten aus
+					der Zeichenketten der Rewrite Condition gefüllt werden. Zur
+					ausführlicheren Erlärung der Regulären Ausdrücke lesen Sie
+					bitte den <ulink
+					url="http://de.wikipedia.org/wiki/Reguläre_Ausdrücke">Wikipedia-Eintrag</ulink>.  
+				</para>
+				
+			 	<note>
+			 		<para>
+			 			Achten Sie bitte bei allen Beispielen auf die
+			 			abgebildeten Leerschritte zwischen Anweisung
+			 			und Status, da es sonst zu Serverfehlern kommen
+			 			kann.
+			 		</para>
+			 	</note>
+		
+				<para>
+					Hiermit ist die Konfiguration des Webservers für die Nutzung
+					von URL Rewriting abgeschlossen. Konfigurieren Sie nun die
+					URLs der korrespondierenden <link
+					linkend="reference.list_of_template_types">Seitentypen</link>,
+					in dem Sie die oben beschriebenen Schritte wiederholen.
+				</para>
+			</sect3>
+		</sect2>
+	</sect1>
+</chapter>
