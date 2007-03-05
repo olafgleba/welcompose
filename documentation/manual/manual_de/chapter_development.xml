@@ -4,11 +4,60 @@
 <chapter id="development">
 	<title>Entwicklung</title>
 	
-		<sect1 id="development.macros">
-			<title>Macros</title>
-			
+	<sect1 id="development.api_docs">
+		<title>API-Dokumentation erzeugen</title>
 		
-	
-			<para/>
+		<para>
+			Welcompose verfügt über eine einigermassen vollständige
+			API-Dokumentation, die kurz und knapp über Argumente für die
+			jeweiligen Funktionen und deren Bedeutung informiert. Damit
+			macht sie die Vorlagen-Entwicklung leichter, da man nicht permanent
+			im Source Code nachschauen muss. Sie bietet damit auch deutlich
+			mehr Informationen als die Code-Beispiele im Handbuch, die auf das
+			Minimum beschränkt sind und vor allem weniger häufig benutzte
+			Parameter nicht abdecken. 
+		</para>
+		
+		<para>
+			Eine aktuelle Version der API-Dokumentation ist über den
+			Download-Bereich erhältlich. Man kann aber mit Hilfe des Werkzeugs
+			phpDocumentor<footnote><para><ulink type="external"
+			url="http://www.phpdoc.org/"/></para></footnote> auch selber eine
+			API-Dokumentation erstellen, was dann sinnvoll ist, wenn man sie in
+			einem Ausgabevormat haben möchte, das nicht zum Download angeboten
+			wird.
+		</para>
+		
+		<para>
+			phpDocumentor kann am einfachsten als PEAR-Paket installiert werden
+			(das <command>pear</command>-Kommando ist Bestandteil von PHP):
+		</para>
+		
+		<programlisting language="shell"><![CDATA[
+$ pear install phpDocumentor
+]]></programlisting>
+
+		<para>
+			Wurde phpDocumentor installiert, können Sie dessen
+			Funktionstüchtigkeit mit dem Kommando 
+			<command>phpdoc</command> überprüfen. 
+		</para>
+		
+		<para>
+			Nun kann die API-Dokumentation erstellt werden, beispielsweise
+			so:
+		</para>
+		
+		<programlisting language="shell"><![CDATA[
+$ phpdoc --directory /pfad/zu/welcompose/core \
+	--output "HTML:smarty:PHP" \
+	--target "api-docs"
+]]></programlisting>
+
+		<para>
+			Sie erhalten damit im aktuellen Verzeichnis einen Ordner
+			<filename>api_docs/</filename>, in dem Sie die API-Dokumentation
+			im HTML-Format vorfinden.
+		</para>
 	</sect1>
 </chapter>
