@@ -526,6 +526,11 @@ public function moveObjectToStore ($name, $path)
 	// move file
 	move_uploaded_file($path, $target_path);
 	
+	// apply new chmod if we're supposed to do so
+	if (!empty($this->base->_conf['media']['chmod']) && is_numeric($this->base->_conf['media']['chmod'])) {
+		@chmod($target_path, $this->base->_conf['media']['chmod']);
+	}
+	
 	// return file name
 	return $file_name;
 }

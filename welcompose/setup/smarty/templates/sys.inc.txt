@@ -27,10 +27,12 @@ backticks = true
 [media]
 store_www = "{$configuration.root_www}/files/media"
 store_disk = "{$configuration.root_disk}/files/media"
+chmod = 
 
 [global_file]
 store_www = "{$configuration.root_www}/files/global_files"
 store_disk = "{$configuration.root_disk}/files/global_files"
+chmod = 
 
 [caching]
 index.php_mode = 0

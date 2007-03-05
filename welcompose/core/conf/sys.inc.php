@@ -28,10 +28,12 @@ backticks = true
 [media]
 store_www = "/welcompose/trunk/welcompose/files/media"
 store_disk = "/www/welcompose/trunk/welcompose/files/media"
+chmod = 
 
 [global_file]
 store_www = "/welcompose/trunk/welcompose/files/global_files"
 store_disk = "/www/welcompose/trunk/welcompose/files/global_files"
+chmod = 
 
 [caching]
 index.php_mode = 0

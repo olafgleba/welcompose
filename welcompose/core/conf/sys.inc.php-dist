@@ -27,10 +27,12 @@ backticks = true;
 [media]
 store_www = 
 store_disk = 
+chmod = 
 
 [global_file]
 store_www = 
 store_disk = 
+chmod = 
 
 [caching]
 index.php_mode = 0
