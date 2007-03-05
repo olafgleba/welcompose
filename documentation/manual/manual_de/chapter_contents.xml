@@ -44,6 +44,165 @@
 		</figure>
 	</sect1>
 	
+	<sect1 id="contents.global_boxes">
+		<title>Globale Boxen</title>
+		
+		<sect2 id="contents.global_boxes.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Mit Hilfe von Globalen Boxen kann auf jeder Seite an beliebiger
+				Stelle beliebiger Inhalt eingefügt werden, der über das
+				Admininterface administrierbar ist. Im Gegensatz zu den
+				herkömmlichen Boxen, die auf jeder Seite, auf der sie angezeigt
+				werden, unterschiedliche Inhalte darstellen können, ist der
+				Inhalt einer Globalen Box überall identisch.
+			</para>
+			
+			<para>
+				Die Globalen Boxen eignen sich beispielsweise zur Anzeige
+				von speziellen Hinweisen oder von Kontaktinformationen. 
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.global_boxes.manage">
+			<title>Verwaltung</title>
+			
+			<para>
+				Die Verwaltung der Globalen Boxen erfolgt über eine Reihe von
+				Formularen im Bereich <guibutton>Contents</guibutton> unter
+				dem Menüpunkt <guibutton>Global Boxes</guibutton>.
+			</para>
+			
+			<figure id="contents.global_boxes.manage.global_boxes_overview">
+				<title>Übersicht über vorhandene Globale Boxen</title>
+				<graphic fileref="images/contents/global_boxes/manage.global_boxes_overview.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht zeigt die vorhandenen Globalen Boxen in
+				alphabetischer Reihenfolge und bietet Links zum Hinzufügen,
+				Bearbeiten und Löschen von Globalen Boxen.
+			</para>
+			
+			<figure id="contents.global_boxes.manage.add_global_box">
+				<title>Global Box hinzufügen</title>
+				<graphic fileref="images/contents/global_boxes/manage.add_global_box.png"/>
+			</figure>
+			
+			<para>
+				Das Formular zum Hinzufügen respektive Editieren der Globalen
+				Boxen besteht nur aus einigen wenigen Feldern:
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term>Name</term>
+					<listitem>
+						<para>
+							Der Name der Globalen Box. Kommt ausser im 
+							Administrationsbereich nicht zum Einsatz. Muss
+							innerhalb eines Projekts einzigartig sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Content</term>
+					<listitem>
+						<para>
+							Inhalt der Global Box. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Text converter</term>
+					<listitem>
+						<para>
+							Text-Konverter, der auf den Inhalt der Globalen
+							Box appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Apply text macros</term>
+					<listitem>
+						<para>
+							Ob die vorhandenen Text Macros auf den Inhalt der
+							Globalen Box appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Parallel bieten die Globalen Boxen wie die meisten anderen
+				Inhaltsseiten Unterstützung durch den Media Manager.
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.global_boxes.output">
+			<title>Ausgabe</title>
+			
+			<para>
+				Globale Boxen können über ein Pop-up ausgewählt und automatisch
+				in eine Vorlage eingesetzt werden. Klicken Sie dazu auf den
+				entsprechenden Link über dem Textbereich zum Editieren der
+				Vorlage (siehe <xref
+				linkend="contents.global_boxes.output.reference_global_box"/>).
+			</para>
+			
+			<figure id="contents.global_boxes.output.reference_global_box">
+				<title>Globale Box referenzieren</title>
+				<graphic fileref="images/contents/global_boxes/output.reference_global_box.png"/>
+			</figure>
+			
+			<example id="contents.global_boxes.output.get_global_box">
+				<title>Globale Box ausgeben</title>
+				
+				<para>
+					Um eine einzelne Globale Box auszulesen, wird die ID
+					(im Beispiel <userinput>1</userinput>) der jeweiligen
+					Globalen Box benötigt. Der Code zum Auslesen der Box
+					kann auch über ein Pop-up generiert und eingesetzt werden. 
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Global Box mit der ID 1 auslesen*}
+{select_simple ns="Content" class="GlobalBox" method="selectGlobalBox"
+	var="global_box" id="1"}
+
+ID der Global Box: {$global_box.id}
+Name der Global Box: {$global_box.name}
+Inhalt der Global Box: {$global_box.content}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.global_boxes.output.get_global_boxes">
+				<title>Globale Boxen ausgeben</title>
+				
+				<para>
+					Sollen mehrere Globale Boxen ausgegeben werden, empfiehlt
+					es sich in der Regel, mehrmals einfach nur eine Box in der
+					gewünschten Reihenfolge auszugeben. Es ist aber auch
+					möglich, alle aufs Mal auszulesen.
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{select_named ns="Content" class="GlobalBox" method="selectGlobalBoxes"
+	var="global_boxes"}
+
+{foreach from=$global_boxes item="_global_box"}
+	ID der Global Box: {$_global_box.id}
+	Name der Global Box: {$_global_box.name}
+	Inhalt der Global Box: {$_global_box.content}
+{/foreach}
+]]></programlisting>
+			</example>
+		</sect2>
+	</sect1>
+	
 	<sect1 id="contents.navigations">
 		<title>Navigationen</title>
 		
