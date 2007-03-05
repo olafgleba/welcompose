@@ -88,6 +88,10 @@ ul {
 padding-left: 20px;
 list-style-image: url(../images/list.png);
 }
+ol {
+padding-left: 20px;
+list-style-image: none;
+}
 li p {
 margin: 2px 0;
 padding-left: 0;
@@ -205,6 +209,9 @@ font-size: 1em;
 font-family: "Courier New", monospace;
 overflow: auto;
 }
+code.code { 
+font-weight: bold;
+}
 code.computeroutput {
 font-style: italic;
 font-family: Arial, sans-serif;
@@ -229,10 +236,37 @@ font-family: "Courier New", monospace;
 border: 1px dotted #ccc;
 background: #f8f8f8;
 padding: 12px;
+color: #003399;
 }
 .markup {
 font-family: "Courier New", monospace;
 padding: 0 4px 2px 4px;
+background: #f8f8f8;
+color: #003399;
+}
+div.note .markup,
+div.tip .markup,
+div.warning .markup {
+font-family: "Courier New", monospace;
+padding: 0 4px 2px 4px;
 background: #fff;
+color: #003399;
+}
+span.term {
+font-weight: bold;
+}
+span.term code.code {
+font-family: "Courier New", monospace;
+padding: 0 4px 2px 4px;
+font-weight: bold;
+background: #fff;
+border: 1px solid #ebebeb;
+}
+span.term span.emphasis,
+span.term code.function {
+font-weight: normal;
+}
+span.term a {
+font-weight: normal;
 }
 /* code, pre, markup EOF */

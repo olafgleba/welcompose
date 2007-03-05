@@ -75,7 +75,7 @@
 	/* links EOF */
 
 	/* lists */
-	ul {
+	ul, ol {
 	padding-left: 20px;
 	list-style-image: none;
 	}
@@ -195,6 +195,9 @@
 	font-family: "Courier New", monospace;
 	color: #000;
 	}
+	code.code { 
+	font-weight: bold;
+	}
 	code.computeroutput {
 	font-style: italic;
 	font-family: Arial, sans-serif;
@@ -226,6 +229,31 @@
 	font-family: "Courier New", monospace;
 	padding: 0 4px 2px 4px;
 	background: transparent;
+	}
+	div.note .markup,
+	div.tip .markup,
+	div.warning .markup {
+	font-family: "Courier New", monospace;
+	padding: 0 4px 2px 4px;
+	background: #fff;
+	color: #000;
+	}
+	span.term {
+	font-weight: bold;
+	}
+	span.term code.code {
+	font-family: "Courier New", monospace;
+	padding: 0 4px 2px 4px;
+	font-weight: bold;
+	background: #fff;
+	border: 1px solid #ebebeb;
+	}
+	span.term span.emphasis,
+	span.term code.function {
+	font-weight: normal;
+	}
+	span.term a {
+	font-weight: normal;
 	}
 	/* code, pre, markup EOF */
 }

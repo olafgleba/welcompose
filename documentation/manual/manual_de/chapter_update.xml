@@ -63,7 +63,7 @@
 		
 		<variablelist>
 			<varlistentry>
-				<term><emphasis role="strong">Major Release</emphasis></term>
+				<term>Major Release</term>
 				<listitem>
 					<para>
 						Zwischen zwei Major Releases werden umfangreiche
@@ -92,7 +92,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><emphasis role="strong">Minor Release</emphasis></term>
+				<term>Minor Release</term>
 				<listitem>
 					<para>
 						Zwischen zwei Minor Releases werden Fehler
@@ -125,7 +125,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><emphasis role="strong">Bugfix Release</emphasis></term>
+				<term>Bugfix Release</term>
 				<listitem>
 					<para>
 						Es werden Fehler korrigiert, die nur minimale
