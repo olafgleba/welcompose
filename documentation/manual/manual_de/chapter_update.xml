@@ -406,6 +406,25 @@ global_template_url_start = "{$root_www}/global_template.php?name=<global_file_n
 						zu Ihrer Welcompose-installation zu ersetzen.
 					</para>
 				</note>
+				
+				<para>
+					Schlussendlich müssen zu den beiden Abschnitten
+					<code>[media]</code> und <code>[global_file]</code>
+					je ein leerer Schlüssel mit dem Namen <code>chmod</code>
+					hinzugefügt werden:
+				</para>
+				
+				<programlisting language="ini"><![CDATA[
+[media]
+store_www = "/www-pfad/zu/welcompose/files/media"
+store_disk = "/pfad/zu/welcompose/files/media"
+chmod = 
+
+[global_file]
+store_www = "/www-pfad/zu/welcompose/files/global_files"
+store_disk = "/pfad/zu/welcompose/files/global_files"
+chmod = 
+]]></programlisting>
 			</sect3>
 			
 			<sect3 id="update.0.60_to_80.run_updater">

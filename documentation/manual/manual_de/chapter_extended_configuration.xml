@@ -537,4 +537,54 @@ RewriteRule     ^ index.php?project_name=%1&page_name=%2&action=Index
 			</sect3>
 		</sect2>
 	</sect1>
+	
+	<sect1 id="extended_configuration.chmods_file_uploads">
+		<title>Schreibrechte Datei-Uploads</title>
+		
+		<para>
+			Einige Webspace-Provider<footnote><para>Bislang ist uns nur die
+			deutsche Domainfactory bekannt. Sollten Sie weitere Provider kennen,
+			schicken Sie uns bitte eine E-Mail, damit wir die Liste erweitern
+			können.</para></footnote> haben ihre Server derart konfiguriert,
+			dass sie hochgeladene Dateien so ablegen, dass sie vom Webserver
+			nicht gelesen werden können. 
+		</para>
+		
+		<para>
+			Um dieses Problem zu beheben, muss Welcompose angewiesen werden,
+			die Rechte der Dateien nach dem Upload zu modifizieren. Dies kann
+			in der zentralen Konfigurationsdatei
+			<filename>core/conf/sys.inc.php</filename> geregelt werden. Suchen
+			Sie dort nach den Abschnitten <code>[media]</code> und
+			<code>[global_file]</code>. Setzen Sie dort als Wert den oktalen
+			Wert für die gewünschten Schreibrechte, die Welcompose setzen soll.
+			Im Beispiel wurde <userinput>0644</userinput> gewählt. Wenn Sie
+			nicht wissen, welchen Wert Sie wählen sollen, wenden Sie sich bitte
+			an den Provider-Support:
+		</para>
+		
+		<programlisting language="ini"><![CDATA[
+[media]
+store_www = "/www-pfad/zu/welcompose/files/media"
+store_disk = "/pfad/zu/welcompose/files/media"
+chmod = 0644
+
+[global_file]
+store_www = "/www-pfad/zu/welcompose/files/global_files"
+store_disk = "/pfad/zu/welcompose/files/global_files"
+chmod = 0644
+]]></programlisting>
+		
+		<warning>
+			<para>
+				Achten Sie darauf, nicht die führende Null zu vergessen,
+				da der Wert sonst dezimal interpretiert wird und schliessen
+				Sie den Wert keinesfalls in Anführungszeichen ein!
+			</para>
+		</warning>
+		
+		<para>
+			Wenn Sie nun Dateien hochladen, sollten diese angezeigt werden.
+		</para>
+	</sect1>
 </chapter>
