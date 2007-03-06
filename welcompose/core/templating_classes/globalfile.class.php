@@ -426,7 +426,7 @@ public function moveGlobalFileToStore ($name, $path)
 	move_uploaded_file($path, $target_path);
 	
 	if (!empty($this->base->_conf['global_file']['chmod']) && is_numeric($this->base->_conf['global_file']['chmod'])) {
-		@chmod($target_path, $this->base->_conf['global_file']['chmod']);
+		@chmod($target_path, octdec($this->base->_conf['global_file']['chmod']));
 	}
 	
 	// return file name
