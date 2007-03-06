@@ -97,7 +97,7 @@
 			
 			<variablelist>
 				<varlistentry>
-					<term>Name</term>
+					<term><guilabel>Name</guilabel></term>
 					<listitem>
 						<para>
 							Der Name der Globalen Box. Kommt ausser im 
@@ -107,7 +107,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Content</term>
+					<term><guilabel>Content</guilabel></term>
 					<listitem>
 						<para>
 							Inhalt der Global Box. 
@@ -115,7 +115,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Text converter</term>
+					<term><guilabel>Text converter</guilabel></term>
 					<listitem>
 						<para>
 							Text-Konverter, der auf den Inhalt der Globalen
@@ -125,7 +125,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Apply text macros</term>
+					<term><guilabel>Apply text macros</guilabel></term>
 					<listitem>
 						<para>
 							Ob die vorhandenen Text Macros auf den Inhalt der
@@ -397,7 +397,7 @@ Name der Navigation: {$navigation.name}
 				<variablelist>
 					<title>Funktionselemente Seitenübersicht</title>
 					<varlistentry>
-						<term>Page structure</term>
+						<term><guilabel>Page structure</guilabel></term>
 						<listitem>
 							<para>
 								Enthält den Namen der einzelnen Seite,
@@ -416,7 +416,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Move</term>
+						<term><guilabel>Move</guilabel></term>
 						<listitem>
 							<para>
 								Die Spalte <guilabel>Move</guilabel>
@@ -431,7 +431,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Add</term>
+						<term><guilabel>Add</guilabel></term>
 						<listitem>
 							<para>
 								Fügt neue Seite zur aktuellen Navigation
@@ -442,7 +442,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Edit</term>
+						<term><guilabel>Edit</guilabel></term>
 						<listitem>
 							<para>
 								Über die Schaltfläche
@@ -454,7 +454,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Move away</term>
+						<term><guilabel>Move away</guilabel></term>
 						<listitem>
 							<para>
 								Die Schaltfläche <guibutton>Move away</guibutton>,
@@ -466,7 +466,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Löschen</term>
+						<term><guilabel>Löschen</guilabel></term>
 						<listitem>
 							<para>
 								Löscht die Seite und alle ihre Inhalte.
@@ -496,7 +496,7 @@ Name der Navigation: {$navigation.name}
 				<variablelist>
 					<title>Formular-Felder Seiten hinzufügen</title>
 					<varlistentry>
-						<term>Position</term>
+						<term><guilabel>Position</guilabel></term>
 						<listitem>
 							<para>
 								Bestimmt, wie die neue Seite in die Navigation
@@ -510,7 +510,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Name</term>
+						<term><guilabel>Name</guilabel></term>
 						<listitem>
 							<para>
 								Name der Seite respektive des Menüpunkts.
@@ -518,7 +518,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>URL Name</term>
+						<term><guilabel>URL Name</guilabel></term>
 						<listitem>
 							<para>
 								Name der Seite in einer vereinfachten Form
@@ -531,7 +531,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Type</term>
+						<term><guilabel>Type</guilabel></term>
 						<listitem>
 							<para>
 								Bestimmt den Seitentyp der Seite, respektive
@@ -542,7 +542,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Template Set</term>
+						<term><guilabel>Template Set</guilabel></term>
 						<listitem>
 							<para>
 								Vorlagen-Pool, aus dem die Vorlagen für die
@@ -551,7 +551,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Index page</term>
+						<term><guilabel>Index page</guilabel></term>
 						<listitem>
 							<para>
 								Markiert die Seite als Index Page, also als
@@ -562,7 +562,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Protect</term>
+						<term><guilabel>Protect</guilabel></term>
 						<listitem>
 							<para>
 								Erlaubt den Zugriff auf die entsprechende
@@ -574,7 +574,7 @@ Name der Navigation: {$navigation.name}
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Groups</term>
+						<term><guilabel>Groups</guilabel></term>
 						<listitem>
 							<para>
 								Benutzergruppen, denen der Zugriff auf die
