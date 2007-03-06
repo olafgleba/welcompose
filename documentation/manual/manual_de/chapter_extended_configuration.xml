@@ -578,8 +578,8 @@ chmod = 0644
 		<warning>
 			<para>
 				Achten Sie darauf, nicht die führende Null zu vergessen,
-				da der Wert sonst dezimal interpretiert wird und schliessen
-				Sie den Wert keinesfalls in Anführungszeichen ein!
+				da der Wert sonst dezimal interpretiert wird, was zu falschen
+				Rechten führt!
 			</para>
 		</warning>
 		
