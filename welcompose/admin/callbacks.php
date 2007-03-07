@@ -90,10 +90,10 @@ try {
 	
 	// differ href handling
 	if ($insert_type == 'InternalLink') {
-		$_text = (!empty($_REQUEST['text'])) ? $_REQUEST['text'] : gettext('Your link description');
+		$_text = (!empty($_REQUEST['text'])) ? stripslashes($_REQUEST['text']) : gettext('Your link description');
 	}
 	elseif ($insert_type == 'InternalReference') {
-		$_text = (!empty($_REQUEST['text'])) ? $_REQUEST['text'] : '';
+		$_text = (!empty($_REQUEST['text'])) ? stripslashes($_REQUEST['text']) : '';
 	}
 	
 	// process callbacks	
@@ -107,7 +107,7 @@ try {
 		// prepare callback args
 		$args = array(
 			'text' => $_text,
-			'href' => sprintf('{get_url id="%u"}', $object['id'])
+			'href' => sprintf('{get_url page_id="%u"}', $object['id'])
 		);
 	
 	} elseif ($_REQUEST['type'] == 'blog_posting') {	
@@ -230,7 +230,7 @@ try {
 		// this is because we defined the insert type manually and therefore
 		// the href preparation in line 92 - 97 could not take place here.
 		// so we have to make a condition again
-		$_text = (!empty($_REQUEST['text'])) ? $_REQUEST['text'] : '';
+		$_text = (!empty($_REQUEST['text'])) ? stripslashes($_REQUEST['text']) : '';
 		
 		// prepare callback args
 		$args = array(
