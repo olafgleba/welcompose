@@ -275,6 +275,7 @@ public function selectPage ($id)
  * 
  * <ul>
  * <li>navigation, int, optional: Navigation id</li>
+ * <li>navigation_name, string, optional: Navigation name</li>
  * <li>root_node, int, optional: Root node id</li>
  * <li>parent, int, optional: Parent node id</li>
  * <li>level, int, optional: Level count</li>
@@ -297,6 +298,7 @@ public function selectPages ($params = array())
 	
 	// define some vars
 	$navigation = null;
+	$navigation_name = null;
 	$root_node = null;
 	$parent = null;
 	$level = null;
@@ -323,6 +325,9 @@ public function selectPages ($params = array())
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
+				break;
+			case 'navigation_name':
+					$$_key = (string)$_value;
 				break;
 			default:
 				throw new Content_PageException("Unknown parameter $_key");
@@ -365,6 +370,10 @@ public function selectPages ($params = array())
 			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+		  ON
+			`content_nodes`.`navigation` = `content_navigations`.`id`
 		WHERE 
 			`content_pages`.`project` = :project
 	";
@@ -378,6 +387,10 @@ public function selectPages ($params = array())
 	if (!empty($navigation) && is_numeric($navigation)) {
 		$sql .= " AND `content_nodes`.`navigation` = :navigation ";
 		$bind_params['navigation'] = $navigation;
+	}
+	if (!empty($navigation_name) && is_numeric($navigation_name)) {
+		$sql .= " AND `content_navigations`.`name` = :navigation_name ";
+		$bind_params['navigation_name'] = $navigation_name;
 	}
 	if (!empty($root_node) && is_numeric($root_node)) {
 		$sql .= " AND `content_nodes`.`root_node` = :root_node ";
@@ -423,6 +436,7 @@ public function selectPages ($params = array())
  * <ul>
  * <li>index_page, int, optional: whether to select index pages (0/1)</li>
  * <li>navigation, int, optional: Navigation id</li>
+ * <li>navigation_name, string, optional: Navigation name</li>
  * <li>root_node, int, optional: Root node id</li>
  * <li>parent, int, optional: Parent node id</li>
  * <li>level, int, optional: Level count</li>
@@ -445,6 +459,7 @@ public function countPages ($params = array())
 	// define some vars
 	$index_page = null;
 	$navigation = null;
+	$navigation_name = null;
 	$root_node = null;
 	$parent = null;
 	$level = null;
@@ -471,6 +486,9 @@ public function countPages ($params = array())
 			case 'limit':
 					$$_key = (int)$_value;
 				break;
+			case 'navigation_name':
+					$$_key = (string)$_value;
+				break;
 			default:
 				throw new Content_PageException("Unknown parameter $_key");
 		}
@@ -490,6 +508,10 @@ public function countPages ($params = array())
 			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
 		  ON
 			`content_pages`.`type` = `content_page_types`.`id`
+		JOIN
+			".WCOM_DB_CONTENT_NAVIGATIONS." AS `content_navigations`
+		  ON
+			`content_nodes`.`navigation` = `content_navigations`.`id`
 		WHERE 
 			`content_pages`.`project` = :project
 	";
@@ -507,6 +529,10 @@ public function countPages ($params = array())
 	if (!empty($navigation) && is_numeric($navigation)) {
 		$sql .= " AND `content_nodes`.`navigation` = :navigation ";
 		$bind_params['navigation'] = $navigation;
+	}
+	if (!empty($navigation_name) && is_numeric($navigation_name)) {
+		$sql .= " AND `content_navigations`.`name` = :navigation_name ";
+		$bind_params['navigation_name'] = $navigation_name;
 	}
 	if (!empty($root_node) && is_numeric($root_node)) {
 		$sql .= " AND `content_nodes`.`root_node` = :root_node ";
