@@ -225,6 +225,7 @@
 	pre {
 	font-family: "Courier New", monospace;
 	border: 1px solid #ccc;
+	line-height: 120%;
 	background: transparent;
 	padding: 12px;
 	color: #000;

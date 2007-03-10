@@ -325,6 +325,7 @@ font-weight: bold;
 pre {
 font-family: "Courier New", monospace;
 border: 1px dotted #ccc;
+line-height: 120%;
 background: #f8f8f8;
 padding: 12px;
 color: #003399;
