@@ -388,7 +388,7 @@ public function selectPages ($params = array())
 		$sql .= " AND `content_nodes`.`navigation` = :navigation ";
 		$bind_params['navigation'] = $navigation;
 	}
-	if (!empty($navigation_name) && is_numeric($navigation_name)) {
+	if (!empty($navigation_name) && is_scalar($navigation_name)) {
 		$sql .= " AND `content_navigations`.`name` = :navigation_name ";
 		$bind_params['navigation_name'] = $navigation_name;
 	}
@@ -530,7 +530,7 @@ public function countPages ($params = array())
 		$sql .= " AND `content_nodes`.`navigation` = :navigation ";
 		$bind_params['navigation'] = $navigation;
 	}
-	if (!empty($navigation_name) && is_numeric($navigation_name)) {
+	if (!empty($navigation_name) && is_scalar($navigation_name)) {
 		$sql .= " AND `content_navigations`.`name` = :navigation_name ";
 		$bind_params['navigation_name'] = $navigation_name;
 	}
