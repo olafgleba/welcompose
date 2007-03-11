@@ -360,7 +360,6 @@ try {
 	$FORM->addElement('textarea', 'feed_summary', gettext('Feed Summary'),
 		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
 	$FORM->applyFilter('feed_summary', 'trim');
-	$FORM->applyFilter('feed_summary', 'strip_tags');
 	
 	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
@@ -518,6 +517,10 @@ try {
 				$content = $TEXTCONVERTER->applyTextConverter(
 					$FORM->exportValue('text_converter'),
 					$content
+				);
+				$feed_summary = $TEXTCONVERTER->applyTextConverter(
+					$FORM->exportValue('text_converter'),
+					$feed_summary
 				);
 			}
 
