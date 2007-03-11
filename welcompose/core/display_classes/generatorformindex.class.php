@@ -282,7 +282,7 @@ public function render ()
 		}
 		
 		// add regex rule?
-		if (!empty($_field['regular_expression'])) {
+		if (!empty($_field['validator_regex'])) {
 			$FORM->addRule($_field['name'], $_field['validator_message'], 'regex', $field_regex);
 		}
 	}
