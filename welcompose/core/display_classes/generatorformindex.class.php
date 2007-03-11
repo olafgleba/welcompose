@@ -290,7 +290,7 @@ public function render ()
 	// textfield for captcha if the captcha is enabled
 	if ($this->_generator_form['use_captcha'] != 'no') {
 		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'generator_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
 		$FORM->applyFilter('_qf_captcha', 'trim');
 		$FORM->applyFilter('_qf_captcha', 'strip_tags');
 		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
