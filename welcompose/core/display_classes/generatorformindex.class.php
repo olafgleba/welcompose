@@ -268,7 +268,9 @@ public function render ()
 		}
 		
 		// set value
-		$element->setValue($_field['value']);
+		if (!$FORM->isSubmitted()) {
+			$element->setValue($_field['value']);
+		}
 		
 		// apply default filters
 		$FORM->applyFilter($_field['name'], 'trim');
