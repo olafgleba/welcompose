@@ -806,14 +806,25 @@ public function _tagArrayToString ($array)
 	}
 }
 
-public function _serializedTagArrayToString ($string)
+public function getSerializedTagArrayFromTagArray ($array)
 {
-	return $this->_tagArrayToString(unserialize((string)$string));
+	// unset occurrences key
+	foreach ($array as $_key => $_tag) {
+		unset($array[$_key]['occurrences']);
+	}
+	
+	return serialize($array);
 }
 
-public function _tagStringToSerializedArray ($string)
+public function getTagStringFromSerializedArray ($str)
 {
-	return serialize($this->_tagStringToArray((string)$string));
+	$array = unserialize($str);
+	$tags = array();
+	foreach ($array as $_tag) {
+		$tags[] = $_tag['word'];
+	}
+	
+	return $this->_tagArrayToString($tags);
 }
 
 // End of class

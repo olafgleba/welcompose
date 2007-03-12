@@ -408,7 +408,7 @@ try {
 		'feed_summary' => Base_Cnc::ifsetor($blog_posting['feed_summary_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($blog_posting['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($blog_posting['apply_macros'], null),
-		'tags' => $BLOGTAG->_serializedTagArrayToString(Base_Cnc::ifsetor($blog_posting['tag_array'], null)),
+		'tags' => $BLOGTAG->getTagStringFromSerializedArray(Base_Cnc::ifsetor($blog_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($blog_posting['draft'], null),
 		'ping' => 0,
 		'comments_enable' => Base_Cnc::ifsetor($blog_posting['comments_enable'], null),
@@ -491,9 +491,6 @@ try {
 		$sqlData['comments_enable'] = (string)intval($FORM->exportValue('comments_enable'));
 		$sqlData['trackbacks_enable'] = (string)intval($FORM->exportValue('trackbacks_enable'));
 		
-		// prepare tags
-		$sqlData['tag_array'] = $BLOGTAG->_tagStringToSerializedArray($FORM->exportValue('tags'));
-		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
 			// extract summary/content
@@ -551,6 +548,16 @@ try {
 			// update tags
 			$BLOGTAG->updatePostingTags($FORM->exportValue('page'), $FORM->exportValue('id'),
 				$BLOGTAG->_tagStringToArray($FORM->exportValue('tags')));
+			
+			// get tags
+			$tags = $BLOGTAG->selectBlogTags(array('posting' => $FORM->exportValue('id')));
+			
+			// update blog posting
+			$sqlData = array(
+				'tag_count' => count($tags),
+				'tag_array' => $BLOGTAG->getSerializedTagArrayFromTagArray($tags)
+			);
+			$BLOGPOSTING->updateBlogPosting($FORM->exportValue('id'), $sqlData);
 			
 			// commit
 			$BASE->db->commit();

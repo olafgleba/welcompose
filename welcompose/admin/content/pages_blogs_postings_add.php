@@ -478,9 +478,6 @@ try {
 		$sqlData['month_added'] = date("m");
 		$sqlData['day_added'] = date("d");
 		
-		// prepare tags
-		$sqlData['tag_array'] = $BLOGTAG->_tagStringToSerializedArray($FORM->exportValue('tags'));
-		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
 			// extract summary/content
@@ -523,7 +520,7 @@ try {
 			$sqlData['content'] = $content;
 			$sqlData['feed_summary'] = $feed_summary;
 		}
-
+		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
 		
@@ -538,6 +535,17 @@ try {
 			// add tags
 			$BLOGTAG->addPostingTags($FORM->exportValue('page'), $posting_id,
 				$BLOGTAG->_tagStringToArray($FORM->exportValue('tags')));
+			
+			// get tags
+			$tags = $BLOGTAG->selectBlogTags(array('posting' => $posting_id));
+			
+			// update blog posting
+			$sqlData = array(
+				'tag_count' => count($tags),
+				'tag_array' => $BLOGTAG->getSerializedTagArrayFromTagArray($tags)
+			);
+			
+			$BLOGPOSTING->updateBlogPosting($posting_id, $sqlData);
 			
 			// commit
 			$BASE->db->commit();
