@@ -182,6 +182,12 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 		return false;
 	}
 	
+	// if the current page is a WCOM_URL page, we can simply return the url saved in
+	// the database.
+	if ($_page['page_type_name'] == 'WCOM_URL') {
+		return $_page['url'];
+	}
+	
 	// set page_name_url
 	$project_id = $this->_project['id'];
 	$project_name = $this->_project['name_url'];
