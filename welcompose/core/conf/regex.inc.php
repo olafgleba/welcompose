@@ -206,7 +206,7 @@ define("WCOM_REGEX_MIME_TYPE", "=^([a-z0-9-_]+)\/([a-z0-9-_\.]+)$=i");
 
 // Defines regular expression for strings containing a
 // database name
-define("WCOM_REGEX_DATABASE_NAME", "=^[^_]([a-z0-9_])+$=i");
+define("WCOM_REGEX_DATABASE_NAME", "=^[^_]([a-z0-9_\-])+$=i");
 
 // Defines regular expression for strings containing a
 // locale name
