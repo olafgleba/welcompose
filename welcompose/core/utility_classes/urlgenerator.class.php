@@ -112,13 +112,16 @@ public function __construct()
  * Generates internal link using the provieded arguments. The
  * required arguments depend on the page someone likes to link to.
  * Unknown arguments will be treated as user supplied arguments
- * and appended to the generated url.
+ * and appended to the generated url. If the parameter remove_amps
+ * is set to true, encoded ampersands will be converted to "clear
+ * text" ampersands.
  * 
  * @throws Utility_UrlGeneratorException
  * @param array Args
+ * @param bool Remove encoded ampersands
  * @return string
  */
-public function generateInternalLink ($args = array())
+public function generateInternalLink ($args = array(), $remove_amps = false)
 {
 	// input check
 	if (!is_array($args)) {
@@ -249,6 +252,13 @@ public function generateInternalLink ($args = array())
 	// append user supplied arguments to the system url
 	if (count($user_supplied_args) > 1) {
 		$system_url = $system_url.'?'.http_build_query($user_supplied_args, null, '&amp;');
+	}
+	
+	// remove encoded ampersands from url if we're supposed to.
+	// it's required if we're passing URLs to HTML_QuickForm because
+	// there they will be encoded once again.
+	if ($remove_amps) {
+		$system_url = str_replace('&amp;', '&', $system_url);
 	}
 	
 	// get url form Net_URL object
