@@ -185,7 +185,7 @@ protected function renderPersonalForm ()
 {
 	// start new HTML_QuickForm
 	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
-		$this->getLocationSelf());
+		$this->getLocationSelf(true));
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'),
@@ -338,7 +338,7 @@ protected function renderBusinessForm ()
 	
 	// start new HTML_QuickForm
 	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
-		$this->getLocationSelf());
+		$this->getLocationSelf(true));
 	
 	// select for salutation
 	$FORM->addElement('select', 'salutation', gettext('Salutation'), $salutations,
@@ -582,11 +582,14 @@ public function getRedirectLocationSelf ()
 
 /**
  * Returns the redirect location of the the current
- * document (~ $PHP_SELF without it's problems).
+ * document (~ $PHP_SELF without it's problems). Already
+ * encoded ampersands will be removed if the optional
+ * parameter remove_amps is set to true.
  * 
+ * @param bool Remove encoded ampersands
  * @return string
  */
-public function getLocationSelf ()
+public function getLocationSelf ($remove_amps = false)
 {
 	// prepare params
 	$params = array(
@@ -597,7 +600,7 @@ public function getLocationSelf ()
 	
 	// send params to url generator. we hope to get back something useful.
 	$URLGENERATOR = load('Utility:UrlGenerator');
-	$url = $URLGENERATOR->generateInternalLink($params);
+	$url = $URLGENERATOR->generateInternalLink($params, $remove_amps);
 	
 	// return the url or a hash mark if the url is empty 
 	if (empty($url)) {

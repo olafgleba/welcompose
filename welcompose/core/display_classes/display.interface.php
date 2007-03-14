@@ -76,11 +76,14 @@ public function getRedirectLocationSelf ();
 
 /**
  * Returns the redirect location of the the current
- * document (~ $PHP_SELF without it's problems).
+ * document (~ $PHP_SELF without it's problems). Already
+ * encoded ampersands will be removed if the optional
+ * parameter remove_amps is set to true.
  * 
+ * @param bool Remove encoded ampersands
  * @return string
  */
-public function getLocationSelf ();
+public function getLocationSelf ($remove_amps = false);
 
 /**
  * Returns information whether to skip authentication
