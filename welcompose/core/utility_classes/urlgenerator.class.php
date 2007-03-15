@@ -68,6 +68,7 @@ class Utility_UrlGenerator {
 		'posting_year_added' => '<posting_year_added>',
 		'posting_month_added' => '<posting_month_added>',
 		'posting_day_added' => '<posting_day_added>',
+		'tag_word' => '<tag_word>',
 		'start' => '<start>'
 	);
 	
@@ -229,6 +230,11 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 	// ommits the page name
 	if ($current_page['index_page']) {
 		$url_pattern_name = $url_pattern_name."_start";
+	}
+	
+	// the same applies on link requests for a tag page
+	if (array_key_exists('tag_word', $args) && is_numeric($args['tag_word'])) {
+		$url_pattern_name = $url_pattern_name."_tag";
 	}
 	
 	// the same applies on link requests for a pager
