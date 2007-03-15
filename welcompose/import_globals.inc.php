@@ -30,7 +30,8 @@ $get = array(
 	'posting_month_added' => Base_Cnc::filterRequest($_GET['posting_month_added'], WCOM_REGEX_NUMERIC),
 	'posting_day_added' => Base_Cnc::filterRequest($_GET['posting_day_added'], WCOM_REGEX_NUMERIC),
 	'posting_year_added' => Base_Cnc::filterRequest($_GET['posting_year_added'], WCOM_REGEX_NUMERIC),
-	'start' => Base_Cnc::filterRequest($_GET['start'], WCOM_REGEX_NUMERIC)
+	'start' => Base_Cnc::filterRequest($_GET['start'], WCOM_REGEX_NUMERIC),
+	'tag' => Base_Cnc::filterRequest($_GET['tag'], WCOM_REGEX_URL_NAME)
 );
 
 $request = array(
@@ -40,7 +41,8 @@ $request = array(
 	'posting_day_added' => Base_Cnc::filterRequest($_REQUEST['posting_day_added'], WCOM_REGEX_NUMERIC),
 	'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 	'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
-	'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
+	'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+	'tag' => Base_Cnc::filterRequest($_GET['tag'], WCOM_REGEX_URL_NAME)
 );
 
 $session = array(

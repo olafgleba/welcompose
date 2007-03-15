@@ -337,6 +337,7 @@ public function selectBlogPosting ($id)
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
+ * <li>tag_word_url, string, optional: Tag word</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * <li>order_marco, string, otpional: How to sort the result set.
@@ -366,6 +367,7 @@ public function selectBlogPostings ($params = array())
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
+	$tag_word_url = null;
 	$timeframe = null;
 	$order_macro = null;
 	$start = null;
@@ -383,6 +385,7 @@ public function selectBlogPostings ($params = array())
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
+			case 'tag_word_url':
 			case 'timeframe':
 			case 'order_macro':
 					$$_key = (string)$_value;
@@ -455,6 +458,12 @@ public function selectBlogPostings ($params = array())
 			`content_blog_podcasts`.`block` AS `podcast_block`,
 			`content_blog_podcasts`.`duration` AS `podcast_duration`,
 			`content_blog_podcasts`.`explicit` AS `podcast_explicit`,
+			`content_blog_tags`.`id` AS `tag_id`,
+			`content_blog_tags`.`page` AS `tag_page`,
+			`content_blog_tags`.`first_char` AS `tag_first_char`,
+			`content_blog_tags`.`word` AS `tag_word`,
+			`content_blog_tags`.`word_url` AS `tag_word_url`,
+			`content_blog_tags`.`occurrences` AS `tag_occurrences`,
 			`content_nodes`.`id` AS `node_id`,
 			`content_nodes`.`navigation` AS `node_navigation`,
 			`content_nodes`.`root_node` AS `node_root_node`,
@@ -491,6 +500,14 @@ public function selectBlogPostings ($params = array())
 			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		LEFT JOIN
+			".WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2_content_blog_postings`
+		  ON
+			`content_blog_postings`.`id` = `content_blog_tags2_content_blog_postings`.`posting`
+		LEFT JOIN
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		  ON
+			`content_blog_tags2_content_blog_postings`.`tag` = `content_blog_tags`.`id`
 		JOIN
 			".WCOM_DB_USER_USERS." AS `user_users`
 		  ON
@@ -525,6 +542,10 @@ public function selectBlogPostings ($params = array())
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
 	}
+	if (!empty($tag_word_url) && preg_match(WCOM_REGEX_URL_NAME, $tag_word_url)) {
+		$sql .= " AND `content_blog_tags`.`word_url` = :tag_word_url ";
+		$bind_params['tag_word_url'] = (string)$tag_word_url;
+	}
 	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
 		$bind_params['draft'] = (string)$draft;
@@ -545,6 +566,9 @@ public function selectBlogPostings ($params = array())
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
 			$timeframe);
 	}
+	
+	// aggregate result set
+	$sql .= " GROUP BY `content_blog_postings`.`id` ";
 	
 	// add sorting
 	if (!empty($order_macro)) {
@@ -573,6 +597,7 @@ public function selectBlogPostings ($params = array())
  * <li>user, int, optional: User/author id</li>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
+ * <li>tag_word_url, string, optional: Tag word</li>
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
@@ -596,6 +621,7 @@ public function countBlogPostings ($params = array())
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
+	$tag_word_url = null;
 	$timeframe = null;
 	$bind_params = array();
 	
@@ -610,6 +636,7 @@ public function countBlogPostings ($params = array())
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
+			case 'tag_word_url':
 			case 'timeframe':
 					$$_key = (string)$_value;
 				break;
@@ -631,9 +658,17 @@ public function countBlogPostings ($params = array())
 	// prepare query
 	$sql = "
 		SELECT 
-			COUNT(*) AS `total`
+			COUNT(DISTINCT `content_blog_postings`.`id`) AS `total`
 		FROM
 			".WCOM_DB_CONTENT_BLOG_POSTINGS." AS `content_blog_postings`
+		LEFT JOIN
+			".WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS." AS `content_blog_tags2_content_blog_postings`
+		  ON
+			`content_blog_postings`.`id` = `content_blog_tags2_content_blog_postings`.`posting`
+		LEFT JOIN
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		  ON
+			`content_blog_tags2_content_blog_postings`.`tag` = `content_blog_tags`.`id`
 		JOIN
 			".WCOM_DB_USER_USERS." AS `user_users`
 		  ON
@@ -667,6 +702,10 @@ public function countBlogPostings ($params = array())
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
+	}
+	if (!empty($tag_word_url) && preg_match(WCOM_REGEX_URL_NAME, $tag_word_url)) {
+		$sql .= " AND `content_blog_tags`.`word_url` = :tag_word_url ";
+		$bind_params['tag_word_url'] = (string)$tag_word_url;
 	}
 	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_blog_postings`.`draft` = :draft ";
