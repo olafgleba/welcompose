@@ -233,7 +233,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 	}
 	
 	// the same applies on link requests for a tag page
-	if (array_key_exists('tag_word', $args) && is_numeric($args['tag_word'])) {
+	if (array_key_exists('tag_word', $args) && !empty($args['tag_word'])) {
 		$url_pattern_name = $url_pattern_name."_tag";
 	}
 	
