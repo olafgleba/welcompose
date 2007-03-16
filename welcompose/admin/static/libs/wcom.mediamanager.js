@@ -1493,14 +1493,10 @@ function Mediamanager_processMediaCallbacksFlickr (elem)
 			// get rid off size suffix
 			var splitSource = source.split('_s');
 			
-			// grab enviroment variables
-			Helper.getTextConverterValue(); 
-			Helper.getSelectionText();
-			
 			// hash the returned variables
 			var getElems = {
-				text : text,
-				text_converter : text_converter,
+				text : Helper.getSelectionText(),
+				text_converter : Helper.getTextConverterValue(),
 				src : splitSource[0] + sel_select_value + splitSource[1],
 				href : sel_url_photo_page
 				

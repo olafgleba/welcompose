@@ -64,7 +64,7 @@
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
-<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content}">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
+<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
 </td>
 <td class="td_mm_meta">{$_object.file_name|truncate:30:"":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}
@@ -167,7 +167,7 @@
 {if !empty($photos)}
 {foreach from=$photos.photos item=_photo}
 <tr>
-<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content}"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
+<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content} (id: {$_photo.id})"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
 <td colspan="4">{$_photo.title|escape:"htmlall"}
 <select id="size" name="size">
 <option value="1">{i18n Image sizes...}</option>
