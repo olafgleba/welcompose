@@ -759,6 +759,54 @@ protected function deleteLink ($posting, $tag)
 }
 
 /**
+ * Prepares tags for tag cloud generation. Calculates relevance for every tag.
+ * Relevance is a number between 0 and the given higher range delimiter.
+ * 
+ * It's recommend to pass an array of tags that contains the n most relevant
+ * tags (so these one with the highest occurrences) in descending order
+ * (highest number of occurrences comes first). Alphabetical sorting will be
+ * done automatically.
+ * 
+ * @param array Tag array
+ * @param int Higher range delimiter
+ */
+public function prepareTagsForCloud ($tags, $range)
+{
+	// input check
+	if (!is_array($tags)) {
+		throw new Content_BlogTagException('Input for parameter tags is expected to be an array');
+	}
+	if (empty($range) || !is_numeric($range)) {
+		throw new Content_BlogTagException('Input for parameter tags is expected to be numeric');
+	}
+	
+	// find highest/lowest amount of occurrences
+	$numbers = array();
+	foreach ($tags as $_tag) {
+		$numbers[] = (int)Base_Cnc::ifsetor($_tag['occurrences'], 0);
+	}
+	$max = max($numbers);
+	$min = min($numbers);
+	
+	// calculate divisor to bring occurrences into range
+	$divisor = ($max - $min) / $range; 
+	
+	// append relevance to every tag
+	$new_tag_array = array();
+	foreach ($tags as $_tag) {
+		$new_tag_array[$_tag['word']] = $_tag;
+		
+		$occurrences = (float)Base_Cnc::ifsetor($_tag['occurrences'], 0);
+		$new_tag_array[$_tag['word']]['relevance'] = round(($occurrences - $min)/  $divisor);
+	}
+	
+	// shuffle tags
+	ksort($new_tag_array);
+	
+	return $new_tag_array;
+}
+
+/**
  * Helper function to convert a string of tags, each separated by a comma,
  * into an array. Useful when receiving data from a an user input field.
  * 
@@ -770,7 +818,7 @@ public function _tagStringToArray ($string)
 {
 	// input check
 	if (!is_scalar($string)) {
-		throw new Content_BlogTagException('Input for parameter string is not scalar');	
+		throw new Content_BlogTagException('Input for parameter string is not scalar');
 	}
 
 	// explode string and clean the parts
