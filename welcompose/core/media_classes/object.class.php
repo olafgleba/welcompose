@@ -1305,7 +1305,7 @@ public function getMimeTypeConfigurations ()
 			'generic_type' => 'image',
 			'icon' => null
 		),
-		'image/jpeg' => array(
+		'image/pjpeg' => array(
 			'suffix' => 'jpg',
 			'podcastable' => false,
 			'insert_callback' => 'image',
