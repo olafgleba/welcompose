@@ -1433,7 +1433,7 @@ function Helper_getAttrParentNodeNextNode (attr, elem, level)
 		a = a.parentNode;
 	}	
 	a = a.nextSibling.nextSibling;
-	
+
 	if (this.browser == 'ie')
 		return a.attributes[attr].value;
 	else

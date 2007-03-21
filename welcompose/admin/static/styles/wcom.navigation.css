@@ -293,6 +293,7 @@ font-weight: bold;
 /* pagenav =side */
 h3.pagenav {
 margin-left: 10px;
+margin-top: 10px;
 float: left;
 font-weight: normal;
 }
@@ -307,7 +308,7 @@ display: inline;
 .pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
 display: block;
 float: left;
-margin: 0 5px;
+margin: 10px 5px 0 5px;
 padding: 0 5px;
 background: #fff;
 color: #000;
