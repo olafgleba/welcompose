@@ -157,7 +157,7 @@ public function __construct($project, $page)
 	$select_params = array(
 		'form' => WCOM_CURRENT_PAGE
 	);
-	$this->_generator_form_fields = $GENERATORFORMFIELDS->selectGeneratorFormFields();
+	$this->_generator_form_fields = $GENERATORFORMFIELDS->selectGeneratorFormFields($select_params);
 	
 	// load captcha class
 	$this->captcha = load('Utility:Captcha');
