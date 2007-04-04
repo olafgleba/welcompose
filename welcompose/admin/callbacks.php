@@ -211,8 +211,8 @@ try {
 		// prepare callback args
 		$args = array(
 			'text' => $_text,
-			'href' => sprintf('{select_simple ns="Content" class="Box" method="selectBoxUsingName" var="box" page="%u" name="%s"}',
-			 	$object['id'], $object['page'], $object['name'])
+			'href' => sprintf('{select_simple ns="Content" class="Box" method="selectBoxUsingName" var="box" page=$page.id name="%s"}',
+			 	$object['name'])
 		);
 	
 	} elseif ($_REQUEST['type'] == 'structuraltemplate') {	
