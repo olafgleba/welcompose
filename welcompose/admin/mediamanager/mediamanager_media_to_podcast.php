@@ -109,33 +109,16 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
-	try {
-		// start transaction
-		$BASE->db->begin();
-		
-		// get media object
-		$object = $OBJECT->selectObject($_REQUEST['id']);
-		$BASE->utility->smarty->assign('object', $object);
-		
-		// display the correlated mediamanager template
-		$BASE->utility->smarty->display('mediamanager/mediamanager_media_to_podcast.html');
-		
-		// commit transaction
-		$BASE->db->commit();
-	} catch (Exception $e) {
-		// do rollback
-		$BASE->db->rollback();
-		
-		// re-throw exception
-		throw $e;
-	}
-
-	// clean buffer
-	if (!$BASE->debug_enabled()) {
-		@ob_end_clean();
-	}
+	// get media object
+	$object = $OBJECT->selectObject($_REQUEST['id']);
+	$BASE->utility->smarty->assign('object', $object);
 	
-	exit;
+	// display the form
+	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
+	$BASE->utility->smarty->display('mediamanager/mediamanager_media_to_podcast.html', WCOM_TEMPLATE_KEY);
+
+	// flush the buffer
+	@ob_end_flush();
 
 } catch (Exception $e) {
 	// clean buffer
