@@ -89,28 +89,29 @@
 {/if}
 {/foreach}
 </ul>
+<br class="clearb" />
 {/if}
 {if !empty($templates)}
 <table summary="{i18n Available Templates}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="245" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="265" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="48" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">Name <span class="az"></span> <span class="za"></span></th>
-<th class="">Template Type  <span class="az"></span> <span class="za"></span></th>
-<th class="">Description  <span class="az"></span> <span class="za"></span></th>
-<th class="">Upload</th>
-<th class="">Download</th>
-<th class="">Duplicate</th>
-<th>Edit</th>
-<th>Delete</th>
+<th class="template_name">{i18n Name}</th>
+<th class="">{i18n Template Type}</th>
+<th class="">{i18n Description}</th>
+<th class="">{i18n Upload}</th>
+<th class="">{i18n Download}</th>
+<th class="">{i18n Duplicate}</th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
 </tr>
 {foreach from=$templates item=_template}
 <tr>

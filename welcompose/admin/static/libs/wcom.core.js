@@ -801,7 +801,7 @@ function Help_processHelp (ttarget)
 			}
 		}
 	} catch (e) {
-		alert (alertOnMissingHelpFiles);
+		_applyError(e);
 	}
 }
 

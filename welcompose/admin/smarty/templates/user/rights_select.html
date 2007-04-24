@@ -68,27 +68,21 @@
 {if !empty($rights)}
 <table summary="{i18n Right List}" class="user">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="340" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="15" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="75" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="135" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="360" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="325" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name} <span class="az"></span> <span class="za"></span></th>
-<th class="void"></th>
 <th class="email">{i18n Description}</th>
-<th class="void"></th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$rights item=_right}
 <tr>
 <td>{$_right.name|escape:"htmlall"}</td>
-<td>&nbsp;</td>
 <td>{$_right.description|escape:"htmlall"|nl2br}</td>
-<td>&nbsp;</td>
 {if $_right.editable}
 <td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"url"}" title="{i18n Delete}"></a></td>
