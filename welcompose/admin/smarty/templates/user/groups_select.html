@@ -55,8 +55,9 @@
 <table summary="{i18n Group List}" class="user">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="350" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="220" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="330" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="190" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 </tr>
@@ -64,6 +65,7 @@
 <th class="page">{i18n Name} <span class="az"></span> <span class="za"></span></th>
 <th class="email">{i18n Description}</th>
 <th class="proj">{i18n Project} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Duplicate}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
@@ -72,6 +74,7 @@
 <td>{$_group.name|escape:"htmlall"}</td>
 <td>{$_group.description|escape:"htmlall"|nl2br}</td>
 <td>{$_group.project_name|escape:"htmlall"}</td>
+<td><a class="edit" href="groups_copy.php?id={$_group.id|escape:"url"}" title="{i18n Duplicate}"></a></td>
 {if $_group.editable}
 <td><a class="edit" href="groups_edit.php?id={$_group.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="groups_delete.php?id={$_group.id|escape:"url"}" title="{i18n Delete}"></a></td>

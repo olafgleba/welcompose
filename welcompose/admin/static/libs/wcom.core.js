@@ -788,20 +788,16 @@ function Help_hide (elem)
  * @throws applyError on exception
  */
 function Help_processHelp (ttarget)
-{  
-	try {
-		if (_req.readyState == 4) {
-			if (_req.status == 200) {			
-				new Insertion.After($(ttarget).parentNode, _req.responseText);
-				var ttarget_after = $(ttarget).parentNode.nextSibling;			
-				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
-			} else {
-	  			throw new Errors(_req.statusText);
-			}
+{
+	if (_req.readyState == 4) {
+		if (_req.status == 200) {			
+			new Insertion.After($(ttarget).parentNode, _req.responseText);
+			var ttarget_after = $(ttarget).parentNode.nextSibling;			
+			Element.hide(ttarget_after);
+			Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
+		} else {
+  			throw new Errors(_req.statusText);
 		}
-	} catch (e) {
-		_applyError(e);
 	}
 }
 
