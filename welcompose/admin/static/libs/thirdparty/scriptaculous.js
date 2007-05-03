@@ -1,3 +1,5 @@
+// script.aculo.us scriptaculous.js v1.7.1_beta2, Sat Apr 28 15:20:12 CEST 2007
+
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 // 
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -22,7 +24,7 @@
 // For details, see the script.aculo.us web site: http://script.aculo.us/
 
 var Scriptaculous = {
-  Version: '1.7.1_beta1',
+  Version: '1.7.1_beta2',
   require: function(libraryName) {
     // inserting via DOM fails in Safari 2.0, so brute force approach
     document.write('<script type="text/javascript" src="'+libraryName+'"></script>');
@@ -47,7 +49,7 @@ var Scriptaculous = {
     }).each( function(s) {
       var path = s.src.replace(/scriptaculous\.js(\?.*)?$/,'');
       var includes = s.src.match(/\?.*load=([a-z,]*)/);
-      (includes ? includes[1] : 'builder,effects,dragdrop,controls,slider,sound').split(',').each(
+      (includes ? includes[1] : 'effects').split(',').each(
        function(include) { Scriptaculous.require(path+include+'.js') });
     });
   }

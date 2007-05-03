@@ -1,3 +1,5 @@
+// script.aculo.us effects.js v1.7.1_beta2, Sat Apr 28 15:20:12 CEST 2007
+
 // Copyright (c) 2005-2007 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 // Contributors:
 //  Justin Palmer (http://encytemedia.com/)
