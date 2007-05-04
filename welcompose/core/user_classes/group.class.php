@@ -342,7 +342,7 @@ public function selectGroups ($params = array())
 	}
 	
 	// add sorting
-	$sql .= " ORDER BY `user_groups`.`name` ";
+	$sql .= " GROUP BY `user_groups`.`id` ORDER BY `user_groups`.`name` ";
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
