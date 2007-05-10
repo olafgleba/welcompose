@@ -120,8 +120,8 @@ try {
 		'testForNameUniqueness', $FORM->exportValue('id'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update blog comment status'),
-		array('class' => 'submit240'));
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+		array('class' => 'submit200'));
 	
 	// set defaults
 	$FORM->setDefaults(array(

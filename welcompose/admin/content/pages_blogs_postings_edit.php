@@ -394,7 +394,7 @@ try {
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update blog posting'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

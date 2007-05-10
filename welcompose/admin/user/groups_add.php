@@ -132,7 +132,7 @@ try {
 		$rights);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add group'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it
@@ -191,7 +191,7 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// create the article group
+		// create the user group
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');

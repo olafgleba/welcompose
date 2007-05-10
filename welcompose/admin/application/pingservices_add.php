@@ -134,7 +134,7 @@ try {
 		WCOM_REGEX_PING_SERVICE_PATH);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add ping service'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

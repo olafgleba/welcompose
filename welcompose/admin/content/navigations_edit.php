@@ -118,7 +118,7 @@ try {
 		$FORM->exportValue('id'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Edit navigation'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

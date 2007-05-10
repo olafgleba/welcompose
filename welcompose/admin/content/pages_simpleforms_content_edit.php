@@ -187,7 +187,7 @@ try {
 	
 	// select for custom_form_type
 	$FORM->addElement('text', 'custom_type', gettext('Custom type'),
-		array('id' => 'simple_form_custom_type'));
+		array('id' => 'simple_form_custom_type', 'class' => 'w300 validate'));
 	$FORM->applyFilter('custom_type', 'trim');
 	$FORM->applyFilter('custom_type', 'strip_tags');
 	$FORM->addRule('custom_type', gettext('Enter a valid custom form type'), 'regex',
@@ -225,7 +225,7 @@ try {
 		'in_array_keys', $captcha_types);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update form'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

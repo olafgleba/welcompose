@@ -140,7 +140,7 @@ try {
 	$FORM->applyFilter('content', 'trim');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update blog comment'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit240'));
 	
 	// set defaults

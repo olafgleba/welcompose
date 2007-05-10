@@ -231,7 +231,7 @@ try {
 		'regex', WCOM_REGEX_SITEMAP_PRIORITY);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Edit page'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

@@ -117,7 +117,7 @@ try {
 		'testForCategoryNameUniqueness', array($FORM->exportValue('subcategory')));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add podcast category'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

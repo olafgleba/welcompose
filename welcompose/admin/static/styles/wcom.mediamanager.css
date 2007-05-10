@@ -293,7 +293,7 @@ padding-left: 10px;
 
 /* internal links - pages */
 #modalContainer #pages h2 span.close {
-margin-left: 435px;
+margin-left: 400px;
 }
 #modalContainer #pages h2 span#indicator_pagesLinks {
 position: absolute;
@@ -309,24 +309,24 @@ display: none;
 
 /* internal links - global templates */
 #modalContainer #globaltemplates h2 span.close {
-margin-left: 65px;
+margin-left: 35px;
 }
 /* eof */
 
 /* internal links - global boxes */
 #modalContainer #globalboxes h2 span.close {
-margin-left: 65px;
+margin-left: 60px;
 }
 /* eof */
 
 /* internal links - global files */
 #modalContainer #globalfiles h2 span.close {
-margin-left: 95px;
+margin-left: 70px;
 }
 
 /* internal links - structural templates */
 #modalContainer #structuraltemplates h2 span.close {
-margin-left: 95px;
+margin-left: 80px;
 }
 /* eof */
 

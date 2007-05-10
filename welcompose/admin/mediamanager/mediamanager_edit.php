@@ -144,7 +144,7 @@ try {
 	$FORM->addRule('tags', gettext('Please add at least one tag'), 'required');	
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update Media'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 
 	// reset button

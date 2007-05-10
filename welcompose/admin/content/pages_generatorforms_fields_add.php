@@ -188,7 +188,7 @@ try {
 	$FORM->addRule('sorting', gettext('The sorting number may be only numeric'), 'numeric');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add generator form field'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 	
 	// set defaults

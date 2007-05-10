@@ -113,7 +113,7 @@ try {
 	$FORM->applyFilter('description', 'strip_tags');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add global file'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

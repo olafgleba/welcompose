@@ -116,7 +116,7 @@ try {
 		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update global file'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// textarea for description

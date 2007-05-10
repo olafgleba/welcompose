@@ -121,7 +121,7 @@ try {
 		WCOM_REGEX_URL);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update page'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

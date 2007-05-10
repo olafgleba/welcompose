@@ -173,7 +173,7 @@ try {
 		array('id' => 'template_content', 'class' => 'w540h550', 'cols' => 3, 'rows' => 2));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update template'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 		
 	// set defaults

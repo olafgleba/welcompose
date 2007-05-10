@@ -283,7 +283,7 @@ try {
 		gettext('Please enter a numeric trackback bayes spam threshold'), 'numeric');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update community settings'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit240bez260'));
 	
 	// set defaults

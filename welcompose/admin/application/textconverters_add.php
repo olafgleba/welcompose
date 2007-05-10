@@ -119,7 +119,7 @@ try {
 		'testForInternalNameUniqueness');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add text converter'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

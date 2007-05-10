@@ -383,7 +383,7 @@ try {
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add blog posting'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 	
 	// set defaults

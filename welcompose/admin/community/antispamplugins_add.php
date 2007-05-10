@@ -147,7 +147,7 @@ try {
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add anti spam plugin'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 	
 	// set defaults

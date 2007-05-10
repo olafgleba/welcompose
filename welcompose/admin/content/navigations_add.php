@@ -107,7 +107,7 @@ try {
 	$FORM->addRule('name', gettext('A navigation with this name already exists'), 'testForNameUniqueness');
 
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add navigation'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

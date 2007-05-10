@@ -120,7 +120,7 @@ try {
 		'testForInternalNameUniqueness');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add page type'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

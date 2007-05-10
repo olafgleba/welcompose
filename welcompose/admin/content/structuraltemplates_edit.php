@@ -129,7 +129,7 @@ try {
 	$FORM->applyFilter('content', 'trim');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update structural template'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults
@@ -159,19 +159,6 @@ try {
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
-		
-		// build session
-		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
-		);
-		
-		// assign prepared session array to smarty
-		$BASE->utility->smarty->assign('session', $session);
-		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}
 		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
@@ -224,9 +211,6 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-		
-		// redirect
-		$SESSION->save();
 		
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {

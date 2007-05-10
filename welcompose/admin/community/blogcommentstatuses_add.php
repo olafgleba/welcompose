@@ -108,8 +108,8 @@ try {
 	$FORM->addRule('name', gettext('A blog comment status with the given name already exists'), 'testForNameUniqueness');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add blog comment status'),
-		array('class' => 'submit240'));
+	$FORM->addElement('submit', 'submit', gettext('Save'),
+		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {

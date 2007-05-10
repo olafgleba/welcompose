@@ -130,7 +130,7 @@ try {
 		'testForInternalNameUniqueness', $FORM->exportValue('id'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update page type'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

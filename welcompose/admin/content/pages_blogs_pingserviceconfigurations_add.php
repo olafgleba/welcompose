@@ -166,7 +166,7 @@ try {
 	$FORM->addRule('site_feed', gettext('Please enter a valid feed URL'), 'regex', WCOM_REGEX_URL);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add ping service'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 	
 	// set defaults

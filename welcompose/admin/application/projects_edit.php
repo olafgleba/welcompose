@@ -117,7 +117,7 @@ try {
 		'testForNameUniqueness', $FORM->exportValue('id'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update project'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

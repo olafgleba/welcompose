@@ -106,7 +106,7 @@ try {
 	$FORM->addRule('name', gettext('A project with the given name already exists'), 'testForNameUniqueness');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Add project'),
+	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it

@@ -143,7 +143,7 @@ try {
 		'in_array_keys', $types);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update text macro'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

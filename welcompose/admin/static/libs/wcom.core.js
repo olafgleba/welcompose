@@ -764,18 +764,18 @@ function Help_hide (elem)
 		this.attr = 'for';
 		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
 		this.processIdAfter = $(this.processId).parentNode.nextSibling;
-		
+	
 		this.elem.className = this.helpClass;
-		
+	
 		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.4});
 
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlShow);
-	
+
 		Behaviour.reapply('.' + this.elem.className);
-		
+	
 	} catch (e) {
-		// die silent
+		_applyError(e);
 	}
 }
 
@@ -789,15 +789,19 @@ function Help_hide (elem)
  */
 function Help_processHelp (ttarget)
 {
-	if (_req.readyState == 4) {
-		if (_req.status == 200) {			
-			new Insertion.After($(ttarget).parentNode, _req.responseText);
-			var ttarget_after = $(ttarget).parentNode.nextSibling;			
-			Element.hide(ttarget_after);
-			Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
-		} else {
-  			throw new Errors(_req.statusText);
+	try {
+		if (_req.readyState == 4) {
+			if (_req.status == 200) {			
+				new Insertion.After($(ttarget).parentNode, _req.responseText);
+				var ttarget_after = $(ttarget).parentNode.nextSibling;			
+				Element.hide(ttarget_after);
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
+			} else {
+	  			throw new Errors(_req.statusText);
+			}
 		}
+	} catch (e) {
+		_applyError(e);
 	}
 }
 

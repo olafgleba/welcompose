@@ -202,7 +202,7 @@ try {
 		'in_array_keys', $captcha_types);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update form'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

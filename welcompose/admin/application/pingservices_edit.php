@@ -142,7 +142,7 @@ try {
 	$FORM->addRule('path', gettext('Please enter a request path'), 'required');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Update ping service'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults

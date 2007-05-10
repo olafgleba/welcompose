@@ -125,7 +125,7 @@ try {
 	$FORM->applyFilter('description', 'strip_tags');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Edit template set'),
+	$FORM->addElement('submit', 'submit', gettext('Save edit'),
 		array('class' => 'submit200'));
 	
 	// set defaults
