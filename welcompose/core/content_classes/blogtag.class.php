@@ -780,6 +780,11 @@ public function prepareTagsForCloud ($tags, $range)
 		throw new Content_BlogTagException('Input for parameter tags is expected to be numeric');
 	}
 	
+	// if tag array is empty, skip here.
+	if (empty($tags)) {
+		return array();
+	}
+	
 	// find highest/lowest amount of occurrences
 	$numbers = array();
 	foreach ($tags as $_tag) {
