@@ -186,7 +186,6 @@ try {
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['name'] = $FORM->exportValue('name');
 		
