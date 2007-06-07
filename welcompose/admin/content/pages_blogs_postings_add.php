@@ -382,6 +382,11 @@ try {
 	$FORM->addRule('trackbacks_enable', gettext('The field whether trackbacks are enabled accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
+	// date element for date_added
+	$FORM->addElement('date', 'date_added', gettext('Creation date'),
+		array('language' => 'en', 'format' => 'd.m.Y \o\n H:i', 'addEmptyOption' => true),
+		array('id' => 'blog_posting_date_added'));
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
@@ -473,10 +478,10 @@ try {
 		$sqlData['ping'] = (string)intval($FORM->exportValue('ping'));
 		$sqlData['comments_enable'] = (string)intval($FORM->exportValue('comments_enable'));
 		$sqlData['trackbacks_enable'] = (string)intval($FORM->exportValue('trackbacks_enable'));
-		$sqlData['date_added'] = date("Y-m-d H:i:s");
-		$sqlData['year_added'] = date("Y");
-		$sqlData['month_added'] = date("m");
-		$sqlData['day_added'] = date("d");
+		$sqlData['date_added'] = $date_added = $HELPER->datetimeFromQuickFormDate($FORM->exportValue('date_added'));
+		$sqlData['year_added'] = date('Y', strtotime($date_added));
+		$sqlData['month_added'] = date('m', strtotime($date_added));
+		$sqlData['day_added'] = date('d', strtotime($date_added));
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {

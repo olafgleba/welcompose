@@ -951,6 +951,37 @@ public function calculatePageIndex ($total_items, $interval)
 	return $index;
 }
 
+/**
+ * Creates date string as expected by MySQL's datetime fields from
+ * QuickForm's date element.
+ *
+ * @var array
+ * @return string
+ */
+public function datetimeFromQuickFormDate ($values)
+{
+	// import date elements from value array
+	$day = (int)Base_Cnc::ifsetor($values['d'], null);
+	$month = (int)Base_Cnc::ifsetor($values['m'], null);
+	$year = (int)Base_Cnc::ifsetor($values['Y'], null);
+	$hour = (int)Base_Cnc::ifsetor($values['H'], null);
+	$minute = (int)Base_Cnc::ifsetor($values['i'], null);
+	
+	// if any of the date elements is null, return "now"
+	if (empty($day) || empty($month) || empty($year) || empty($hour) || empty($minute)) {
+		return date('Y-m-d H:i:s');
+	}
+	
+	// prepare date string
+	$day = str_pad($day, 2, '0', STR_PAD_LEFT);
+	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+	$year = str_pad($year, 4, '0', STR_PAD_LEFT);
+	$hour = str_pad($hour, 2, '0', STR_PAD_LEFT);
+	$minute = str_pad($hour, 2, '0', STR_PAD_LEFT);
+	
+	return sprintf('%s-%s-%s %s:%s:00', $year, $month, $day, $hour, $minute);
+}
+
 // end of class
 }
 
