@@ -114,7 +114,7 @@ try {
 		
 		// drop podcast
 		$podcast_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
-		if ($BLOGPODCAST->blogPodcastExists($podcast_id)) {
+		if (!is_null($podcast_id) && $BLOGPODCAST->blogPodcastExists($podcast_id)) {
 			$BLOGPODCAST->deleteBlogPodcast($podcast_id);
 		}
 		
