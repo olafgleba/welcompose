@@ -779,6 +779,9 @@ public function prepareTagsForCloud ($tags, $range)
 	if (empty($range) || !is_numeric($range)) {
 		throw new Content_BlogTagException('Input for parameter tags is expected to be numeric');
 	}
+	if ((int)$range === 0) {
+		throw new Content_BlogTagException('Range must not be equal zero.');
+	}
 	
 	// if tag array is empty, skip here.
 	if (empty($tags)) {
@@ -794,7 +797,8 @@ public function prepareTagsForCloud ($tags, $range)
 	$min = min($numbers);
 	
 	// calculate divisor to bring occurrences into range
-	$divisor = ($max - $min) / $range; 
+	$divisor = ($max - $min) / (int)$range; 
+	$divisor = ($divisor == 0) ? 1 : $divisor;
 	
 	// append relevance to every tag
 	$new_tag_array = array();
@@ -802,7 +806,7 @@ public function prepareTagsForCloud ($tags, $range)
 		$new_tag_array[$_tag['word']] = $_tag;
 		
 		$occurrences = (float)Base_Cnc::ifsetor($_tag['occurrences'], 0);
-		$new_tag_array[$_tag['word']]['relevance'] = round(($occurrences - $min)/  $divisor);
+		$new_tag_array[$_tag['word']]['relevance'] = round(($occurrences - $min) / $divisor);
 	}
 	
 	// shuffle tags
