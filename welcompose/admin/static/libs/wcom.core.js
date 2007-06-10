@@ -603,7 +603,7 @@ function Init_getCbxStatus (elems)
 			if ($(range)) {
 				if ($(elems[e]).checked === true) {
 	
-					allNodes = document.getElementsByClassName("bez");
+					allNodes = document.getElementsByClassName("bez");	
 				
 					for (var i = 0; i < allNodes.length; i++) {
 						var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
