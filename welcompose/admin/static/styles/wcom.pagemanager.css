@@ -39,6 +39,12 @@ text-align: left;
 table img {
 vertical-align: bottom;
 }
+table tr:first-child:hover {
+background-color: #fff;
+}
+table tr:hover th {
+background-color: #fff;
+}
 table tr:hover {
 background-color: #e9f5fe;
 }
