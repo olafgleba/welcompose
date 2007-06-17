@@ -119,7 +119,6 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $data['name'];
 		$sqlData['name_on_disk'] = $name_on_disk;
 		$sqlData['mime_type'] = $data['type'];
