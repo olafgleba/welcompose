@@ -2,12 +2,12 @@
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Olaf Gleba <>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-10 13:23+0200\n"
+"POT-Creation-Date: 2007-06-23 10:27+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -68,7 +68,7 @@ msgstr "Bitte tragen Sie einen Namen ein"
 
 #: pingservices_add.php:107 pingservices_edit.php:118
 msgid "A ping service with the given name already exists"
-msgstr "Ein gleichnamiger Ping-Service existiert bereit"
+msgstr "Ein gleichnamiger Ping-Service existiert bereits"
 
 #: pingservices_add.php:110 pingservices_edit.php:122 database.php:106
 msgid "Host"
@@ -111,7 +111,7 @@ msgstr "Bitte geben Sie einen gültigen Anfragepfad an"
 #: blogcommentstatuses_add.php:111 globalboxes_add.php:139
 #: navigations_add.php:110 pages_add.php:272
 #: pages_blogs_pingserviceconfigurations_add.php:169
-#: pages_blogs_postings_add.php:386 pages_boxes_add.php:158
+#: pages_blogs_postings_add.php:391 pages_boxes_add.php:158
 #: pages_generatorforms_fields_add.php:191 pagetypes_add.php:123
 #: podcastcategories_add.php:120 structuraltemplates_add.php:121
 #: globalfiles_add.php:116 globaltemplates_add.php:153 templates_add.php:158
@@ -156,14 +156,14 @@ msgstr "ID sollte nicht leer sein"
 #: templatetypes_edit.php:110 groups_copy.php:125 groups_edit.php:125
 #: rights_edit.php:109 users_edit.php:115
 msgid "Id is expected to be numeric"
-msgstr "ID sollte einen nummerischen Wert haben"
+msgstr "ID sollte einen numerischen Wert haben"
 
 #: pingservices_edit.php:145 projects_edit.php:120 textconverters_edit.php:134
 #: textmacros_edit.php:146 antispamplugins_edit.php:161
 #: blogcomments_edit.php:143 blogcommentstatuses_edit.php:123 settings.php:286
 #: globalboxes_edit.php:150 navigations_edit.php:121
 #: pages_blogs_pingserviceconfigurations_edit.php:180
-#: pages_blogs_postings_edit.php:397 pages_boxes_edit.php:169
+#: pages_blogs_postings_edit.php:402 pages_boxes_edit.php:169
 #: pages_edit.php:234 pages_generatorforms_content_edit.php:205
 #: pages_generatorforms_fields_edit.php:203
 #: pages_simpleforms_content_edit.php:228
@@ -178,11 +178,11 @@ msgstr "Änderung speichern"
 
 #: projects_add.php:106 projects_edit.php:116
 msgid "A project with the given name already exists"
-msgstr "Ein gleichnamiges Projekt existiert bereit"
+msgstr "Ein gleichnamiges Projekt existiert bereits"
 
 #: textconverters_add.php:108 textconverters_edit.php:119
 msgid "A text converter with the given name already exists"
-msgstr "Ein gleichnamiger Textkonverter existiert bereit"
+msgstr "Ein gleichnamiger Textkonverter existiert bereits"
 
 #: textconverters_add.php:111 textconverters_edit.php:123
 #: textmacros_add.php:118 textmacros_edit.php:129 antispamplugins_add.php:125
@@ -204,7 +204,7 @@ msgstr "Bitte geben Sie einen gültigen internen Namen an"
 
 #: textconverters_add.php:118 textconverters_edit.php:130
 msgid "A text converter with the given internal name already exists"
-msgstr "Ein Textkonverter mit gleichnamigen internen Namen existiert bereit"
+msgstr "Ein Textkonverter mit gleichnamigen internen Namen existiert bereits"
 
 #: textmacros_add.php:99 textmacros_edit.php:102
 msgid "Startup macro"
@@ -224,7 +224,7 @@ msgstr "Shutdown-Makro"
 
 #: textmacros_add.php:115 textmacros_edit.php:125
 msgid "A text macro with the given name already exists"
-msgstr "Ein gleichnamiges Textmakro existiert bereit"
+msgstr "Ein gleichnamiges Textmakro existiert bereits"
 
 #: textmacros_add.php:127 textmacros_edit.php:138 pages_add.php:216
 #: pages_generatorforms_fields_add.php:119
@@ -236,7 +236,7 @@ msgstr "Typ"
 
 #: textmacros_add.php:131 textmacros_edit.php:142
 msgid "Chosen type is out of range"
-msgstr "Die Angabe desTyps ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Angabe des Typs liegt außerhalb des gültigen Wertebereiches"
 
 #: callbacks.php:93 callbacks_insert_document.php:100 wcom.strings.js:49
 msgid "Your link description"
@@ -258,11 +258,12 @@ msgstr "Plug-In Typ"
 
 #: antispamplugins_add.php:112 antispamplugins_edit.php:123
 msgid "Chosen plugin type is out of range"
-msgstr "Die Angabe desPlug-In Typs ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die Angabe des Plug-In Typs liegt außerhalb des gültigen Wertebereiches"
 
 #: antispamplugins_add.php:121 antispamplugins_edit.php:132
 msgid "An anti spam plugin with the desired name is already registered"
-msgstr "Ein gleichnamiges Anti-Spam Plug-In existiert bereit"
+msgstr "Ein gleichnamiges Anti-Spam Plug-In existiert bereits"
 
 #: antispamplugins_add.php:134 antispamplugins_edit.php:145
 msgid "Priority"
@@ -322,11 +323,11 @@ msgstr "Inhalt"
 #: templatetypes_edit.php:118 groups_add.php:117 groups_copy.php:133
 #: groups_edit.php:133 rights_add.php:107 rights_edit.php:117
 msgid "Please enter a valid name"
-msgstr "Bitte geben Sie einen gültige Namen an"
+msgstr "Bitte geben Sie einen gültigen Namen an"
 
 #: blogcommentstatuses_add.php:108 blogcommentstatuses_edit.php:119
 msgid "A blog comment status with the given name already exists"
-msgstr "Ein gleichnamiger Kommentarstatus existiert bereit"
+msgstr "Ein gleichnamiger Kommentarstatus existiert bereits"
 
 #: settings.php:108 pages_generatorforms_content_edit.php:121
 #: pages_simpleforms_content_edit.php:128
@@ -341,7 +342,7 @@ msgstr "Bild Captcha nutzen"
 #: settings.php:110 pages_generatorforms_content_edit.php:123
 #: pages_simpleforms_content_edit.php:130
 msgid "Use numeral captcha"
-msgstr "Nummerisches Captcha nutzen"
+msgstr "Numerisches Captcha nutzen"
 
 #: settings.php:115 settings.php:123
 msgid "None"
@@ -353,7 +354,7 @@ msgstr "Anzeigestatus"
 
 #: settings.php:134
 msgid "Chosen comment display status is out of range"
-msgstr "Gewählter Anzeigestatus ist außerhalb des gültigen Wertebereiches"
+msgstr "Gewählter Anzeigestatus liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:138 settings.php:224
 msgid "Default status"
@@ -361,7 +362,8 @@ msgstr "Standardstatus"
 
 #: settings.php:142
 msgid "Chosen comment default status is out of range"
-msgstr "Die Angabe desStandardstatus ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die Angabe des Standardstatus liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:146 settings.php:232
 msgid "Spam status"
@@ -369,7 +371,7 @@ msgstr "Spam-Status"
 
 #: settings.php:150
 msgid "Chosen comment spam status is out of range"
-msgstr "Die Angabe desSpam-Status ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Angabe des Spam-Status liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:154 settings.php:240
 msgid "Ham status"
@@ -377,7 +379,7 @@ msgstr "Ham-Status"
 
 #: settings.php:158
 msgid "Chosen comment ham status is out of range"
-msgstr "Die Angabe desHam-Status ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Angabe des Ham-Status liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:162 pages_generatorforms_content_edit.php:197
 #: pages_simpleforms_content_edit.php:220
@@ -387,7 +389,8 @@ msgstr "Captcha nutzen"
 #: settings.php:166 pages_generatorforms_content_edit.php:201
 #: pages_simpleforms_content_edit.php:224
 msgid "Chosen captcha type is out of range"
-msgstr "Die Angabe desCaptcha-Typs ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die Angabe des Captcha-Typs liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:170 settings.php:248
 msgid "Timeframe threshold"
@@ -440,30 +443,31 @@ msgstr "Textkonverter anwenden"
 #: settings.php:212
 msgid "Chosen blog comment text converter is out of range"
 msgstr ""
-"Die Angabe des Textkonverters ist außerhalb des gültigen Wertebereiches"
+"Die Angabe des Textkonverters liegt außerhalb des gültigen Wertebereiches"
 
 #: settings.php:220
 msgid "Chosen trackback display status is out of range"
 msgstr ""
-"Die Angabe des Trackback Anzeigestatus ist außerhalb des gültigen "
+"Die Angabe des Trackback Anzeigestatus liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: settings.php:228
 msgid "Chosen trackback default status is out of range"
 msgstr ""
-"Die Angabe des Trackback Standardstatus ist außerhalb des gültigen "
+"Die Angabe des Trackback Standardstatus liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: settings.php:236
 msgid "Chosen trackback spam status is out of range"
 msgstr ""
-"Die Angabe des Trackback Spam-Status ist außerhalb des gültigen "
+"Die Angabe des Trackback Spam-Status liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: settings.php:244
 msgid "Chosen trackback ham status is out of range"
 msgstr ""
-"Die Angabe des Trackback Ham-Status ist außerhalb des gültigen Wertebereiches"
+"Die Angabe des Trackback Ham-Status liegt außerhalb des gültigen "
+"Wertebereiches"
 
 #: settings.php:253
 msgid "Please enter a trackback timeframe threshold"
@@ -494,7 +498,7 @@ msgstr ""
 
 #: globalboxes_add.php:115 globalboxes_edit.php:125
 msgid "A global box with the given name already exists"
-msgstr "Ein gleichnamige Globale Box existiert bereit"
+msgstr "Eine gleichnamige globale Box existiert bereits"
 
 #: globalboxes_add.php:123 globalboxes_edit.php:134
 #: pages_blogs_postings_add.php:327 pages_blogs_postings_edit.php:338
@@ -513,7 +517,7 @@ msgstr "Textkonverter"
 #: pages_simplepages_content_edit.php:155
 msgid "Chosen text converter is out of range"
 msgstr ""
-"Die Angabe des Textkonverters ist außerhalb des gültigen Wertebereiches"
+"Die Angabe des Textkonverters liegt außerhalb des gültigen Wertebereiches"
 
 #: globalboxes_add.php:131 globalboxes_edit.php:142
 #: pages_blogs_postings_add.php:335 pages_blogs_postings_edit.php:346
@@ -535,7 +539,7 @@ msgstr "Das Feld \"Textmakros\" kann nur den Wert 0 oder 1 haben"
 
 #: navigations_add.php:107 navigations_edit.php:117
 msgid "A navigation with this name already exists"
-msgstr "Eine gleichnamige Navigation existiert bereit"
+msgstr "Eine gleichnamige Navigation existiert bereits"
 
 #: pages_add.php:123
 msgid "Create node above"
@@ -543,7 +547,7 @@ msgstr "Oberhalb des aktuellen Navigationseintrages"
 
 #: pages_add.php:124
 msgid "Create node below"
-msgstr "Unterhalb des aktuellen Navigationeintrages"
+msgstr "Unterhalb des aktuellen Navigationseintrages"
 
 #: pages_add.php:147 pages_edit.php:132
 msgid "always"
@@ -595,7 +599,7 @@ msgstr "Bitte wählen Sie eine Position"
 
 #: pages_add.php:178
 msgid "Chosen position is out of range"
-msgstr "Die Angabe der Postion ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Angabe der Position liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_add.php:188 pages_edit.php:159
 msgid "URL name"
@@ -639,7 +643,7 @@ msgstr "Bitte wählen Sie einen Seitentyp"
 
 #: pages_add.php:221
 msgid "Chosen page type is out of range"
-msgstr "Die Angabe des Seitentyps ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Angabe des Seitentyps liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_add.php:224 pages_edit.php:186
 msgid "Template set"
@@ -652,7 +656,7 @@ msgstr "Bitte wählen Sie eine Vorlagengruppe"
 #: pages_add.php:229 pages_edit.php:191 templates_add.php:136
 msgid "Chosen template set is out of range"
 msgstr ""
-"Die Angabe der Vorlagengruppe ist außerhalb des gültigen Wertebereiches"
+"Die Angabe der Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_add.php:233 pages_edit.php:195 pages_select.html:116
 msgid "Index page"
@@ -680,17 +684,17 @@ msgstr "Benutzergruppen"
 #: pages_add.php:253 pages_edit.php:215
 msgid "One of the chosen groups is out of range"
 msgstr ""
-"Die Auswahl mindestens einer Benutzergruppe ist außerhalb des gültigen "
+"Die Auswahl mindestens einer Benutzergruppe liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: pages_add.php:256 pages_edit.php:218
 msgid "Sitemap change frequency"
-msgstr "Sitemap Änderung"
+msgstr "Sitemap Änderungshäufigkeit"
 
 #: pages_add.php:260 pages_edit.php:222
 msgid "Chosen sitemap change frequency is out of range"
 msgstr ""
-"Die Auswahl der Sitemap aktulisieren ist außerhalb des gültigen "
+"Die Auswahl der Sitemap Änderungshäufigkeit liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: pages_add.php:264 pages_edit.php:226
@@ -700,7 +704,7 @@ msgstr "Sitemap Priorität"
 #: pages_add.php:268 pages_edit.php:230
 msgid "Please enter a sitemap priority between 0.1 and 1.0"
 msgstr ""
-"Bitte geben Sie für die Sitemap Priorität eine Wert zwischen 0.1 und 1.0 an"
+"Bitte geben Sie für die Sitemap Priorität einen Wert zwischen 0.1 und 1.0 an"
 
 #: pages_blogs_pingserviceconfigurations_add.php:125
 #: pages_blogs_pingserviceconfigurations_edit.php:129
@@ -734,7 +738,7 @@ msgstr "Wählen Sie einen Ping-Service"
 #: pages_blogs_pingserviceconfigurations_edit.php:145
 msgid "Chosen ping service is out of range"
 msgstr ""
-"Die Auswahl des Ping-Services ist außerhalb des gültigen Wertebereiches"
+"Die Auswahl des Ping-Services liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_pingserviceconfigurations_add.php:138
 #: pages_blogs_pingserviceconfigurations_edit.php:149
@@ -893,40 +897,37 @@ msgstr "Bitte geben Sie einen Podcast-Titel ein"
 
 #: pages_blogs_postings_add.php:233 pages_blogs_postings_edit.php:244
 msgid "Please select a podcast description source"
-msgstr ""
-"Bitte wählen Sie eine Quelle für die Nutzung als Podcast-Bschreibung aus"
+msgstr "Bitte wählen Sie eine Quelle für die Podcast-Beschreibung aus"
 
 #: pages_blogs_postings_add.php:235 pages_blogs_postings_edit.php:246
 msgid "Podcast description source is out of range"
 msgstr ""
-"Die Auswahl der Quelle als Podcast-Beschreibung ist außerhalb des gültigen "
+"Die Quelle für die Podcast-Beschreibung liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: pages_blogs_postings_add.php:244 pages_blogs_postings_edit.php:255
 msgid "Please select a podcast summary source"
-msgstr ""
-"Bitte wählen Sie eine Quelle für die Nutzung als Podcast-Kurzfassung aus"
+msgstr "Bitte wählen Sie eine Quelle für die Podcast-Kurzfassung aus"
 
 #: pages_blogs_postings_add.php:246 pages_blogs_postings_edit.php:257
 msgid "Podcast summary source is out of range"
 msgstr ""
-"Die Auswahl der Quelle als Podcast-Kurzfassung ist außerhalb des gültigen "
-"Wertebereiches"
+"Die Auswahl der Quelle für die Podcast-Kurzfassung liegt außerhalb des "
+"gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:250 pages_blogs_postings_edit.php:261
 #: pages_simplepages_content_edit.php:181
 msgid "Keywords"
-msgstr "Schlagwörter"
+msgstr "Schlagworte"
 
 #: pages_blogs_postings_add.php:255 pages_blogs_postings_edit.php:266
 msgid "Please select a podcast keyword source"
-msgstr ""
-"Bitte wählen Sie eine Quelle für die Nutzung als Podcast-Schlagworte aus"
+msgstr "Bitte wählen Sie eine Quelle für die Podcast-Schlagworte aus"
 
 #: pages_blogs_postings_add.php:257 pages_blogs_postings_edit.php:268
 msgid "Podcast keywords source is out of range"
 msgstr ""
-"Die Auswahl der Quelle als Podcast-Schlagworte ist außerhalb des gültigen "
+"Die Quelle für die Podcast-Schlagworte liegt außerhalb des gültigen "
 "Wertebereiches"
 
 #: pages_blogs_postings_add.php:261 pages_blogs_postings_edit.php:272
@@ -935,7 +936,7 @@ msgstr "Kategorie 1"
 
 #: pages_blogs_postings_add.php:265 pages_blogs_postings_edit.php:276
 msgid "Podcast category 1 is out of range"
-msgstr "Die Auswahl von Kategorie 1 ist außerhalb des gültigen Wertebereiches"
+msgstr "Kategorie 1 liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:268 pages_blogs_postings_edit.php:279
 msgid "Please select a podcast category"
@@ -947,7 +948,7 @@ msgstr "Kategorie 2"
 
 #: pages_blogs_postings_add.php:276 pages_blogs_postings_edit.php:287
 msgid "Podcast category 2 is out of range"
-msgstr "Die Auswahl von Kategorie 2 ist außerhalb des gültigen Wertebereiches"
+msgstr "Kategorie 2 liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:280 pages_blogs_postings_edit.php:291
 msgid "Category 3"
@@ -955,7 +956,7 @@ msgstr "Kategorie 3"
 
 #: pages_blogs_postings_add.php:284 pages_blogs_postings_edit.php:295
 msgid "Podcast category 3 is out of range"
-msgstr "Die Auswahl von Kategorie 3 ist außerhalb des gültigen Wertebereiches"
+msgstr "Kategorie 3 liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:288 pages_blogs_postings_edit.php:299
 #: blogcomments_select.html:121 users_select.html:87 users_add.php:151
@@ -974,7 +975,7 @@ msgstr "Explizit"
 #: pages_blogs_postings_add.php:301 pages_blogs_postings_edit.php:312
 msgid "Podcast explicit is out of range"
 msgstr ""
-"Der Wert von Feld \"Explizit\" ist außerhalb des gültigen Wertebereiches"
+"Der Wert von Feld \"Explizit\" liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:305 pages_blogs_postings_edit.php:316
 msgid "Block"
@@ -1000,7 +1001,7 @@ msgstr "Podcast löschen"
 #: pages_blogs_postings_add.php:343 pages_blogs_postings_edit.php:354
 #: mediamanager_edit.php:140 mediamanager_upload.php:122
 msgid "Tags"
-msgstr "Schlagworte"
+msgstr "Schlagworte/Tags"
 
 #: pages_blogs_postings_add.php:349 pages_blogs_postings_edit.php:360
 msgid "Feed Summary"
@@ -1038,6 +1039,11 @@ msgstr "Trackbacks?"
 #: pages_blogs_postings_add.php:382 pages_blogs_postings_edit.php:393
 msgid "The field whether trackbacks are enabled accepts only 0 or 1"
 msgstr "Das Feld \"Trackbacks?\" kann nur den Wert 0 oder 1 haben"
+
+#: pages_blogs_postings_add.php:386 pages_blogs_postings_edit.php:397
+#, fuzzy
+msgid "Creation date"
+msgstr "Oberhalb des aktuellen Navigationseintrages"
 
 #: pages_boxes_add.php:133 pages_boxes_edit.php:143
 msgid "A box with the given name already exists"
@@ -1091,7 +1097,7 @@ msgstr "Bitte wählen Sie einen Feldtyp"
 #: pages_generatorforms_fields_add.php:124
 #: pages_generatorforms_fields_edit.php:135
 msgid "Selected field type is out of range"
-msgstr "Die Auswahl des Feldtyps ist außerhalb des gültigen Wertebereiches"
+msgstr "Der Feldtyp liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_generatorforms_fields_add.php:128
 #: pages_generatorforms_fields_edit.php:139
@@ -1107,7 +1113,7 @@ msgstr "Bitte tragen Sie einen Feldnamen ein"
 #: pages_generatorforms_fields_add.php:139
 #: pages_generatorforms_fields_edit.php:150
 msgid "Only alphanumeric field names are allowed"
-msgstr "Es sind nur Buchstaben und Nummer erlaubt"
+msgstr "Es sind nur Buchstaben und Nummern erlaubt"
 
 #: pages_generatorforms_fields_add.php:141
 msgid "A field with the given name already exists"
@@ -1136,7 +1142,7 @@ msgstr "\"Erforderlich\" Text"
 #: pages_generatorforms_fields_add.php:164
 #: pages_generatorforms_fields_edit.php:176
 msgid "Please enter a required message"
-msgstr "Bitte tragen Sie einen \"Erforderlich\" Text"
+msgstr "Bitte tragen Sie einen \"Erforderlich\" Text ein"
 
 #: pages_generatorforms_fields_add.php:168
 #: pages_generatorforms_fields_edit.php:180
@@ -1166,7 +1172,7 @@ msgstr "Bitte tragen Sie einen numerischen Wert zum Sortieren ein"
 #: pages_generatorforms_fields_add.php:188
 #: pages_generatorforms_fields_edit.php:200
 msgid "The sorting number may be only numeric"
-msgstr "Das Feld \"Sortierung\" kann nur den Wert 0 oder 1 haben"
+msgstr "Der Wert zum Sortieren muss numerisch sein"
 
 #: pages_generatorforms_fields_edit.php:152
 msgid "A form field with the given name already exists"
@@ -1182,8 +1188,7 @@ msgstr "Bitte wählen Sie eine Zielnavigation "
 
 #: pages_move_away.php:136
 msgid "Chosen navigation is out of range"
-msgstr ""
-"Die Auswahl der Zielnavigation ist außerhalb des gültigen Wertebereiches"
+msgstr "Die Zielnavigation liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_move_away.php:140
 msgid "Move page away"
@@ -1207,7 +1212,7 @@ msgstr "Formulartyp"
 
 #: pages_simpleforms_content_edit.php:185
 msgid "Chosen form type is out of range"
-msgstr "Die Auswahl des Formulartyps ist außerhalb des gültigen Wertebereiches"
+msgstr "Der Formulartyp liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_simpleforms_content_edit.php:189
 msgid "Custom type"
@@ -1247,7 +1252,7 @@ msgstr "Ein Seitentyp mit gleichnamigen internen Namen existiert bereits"
 
 #: podcastcategories_add.php:103 podcastcategories_edit.php:113
 msgid "Category name"
-msgstr "Name"
+msgstr "Name Kategorie"
 
 #: podcastcategories_add.php:107 podcastcategories_edit.php:117
 msgid "Please enter a category name"
@@ -1273,7 +1278,7 @@ msgstr "E-Mail Adresse"
 
 #: login.php:80 systemlogin.class.php:145
 msgid "Please enter your e-mail address"
-msgstr "Bitte tragen Sie eine E-Mail Adresse ein"
+msgstr "Bitte tragen Sie Ihre E-Mail Adresse ein"
 
 #: login.php:83 users_add.php:134 users_edit.php:144 systemlogin.class.php:148
 #: database.php:91
@@ -1316,19 +1321,19 @@ msgstr ""
 
 #: callbacks_insert_application-x-shockwave-flash.php:107
 msgid "Show all"
-msgstr ""
+msgstr "Alle zeigen"
 
 #: callbacks_insert_application-x-shockwave-flash.php:108
 msgid "No border"
-msgstr ""
+msgstr "Ohne Rahmen"
 
 #: callbacks_insert_application-x-shockwave-flash.php:109
 msgid "Exact fit"
-msgstr ""
+msgstr "Passgenau"
 
 #: callbacks_insert_application-x-shockwave-flash.php:115
 msgid "Window"
-msgstr ""
+msgstr "Fenster"
 
 #: callbacks_insert_application-x-shockwave-flash.php:116
 msgid "Opaque"
@@ -1336,11 +1341,11 @@ msgstr ""
 
 #: callbacks_insert_application-x-shockwave-flash.php:117
 msgid "Transparent"
-msgstr ""
+msgstr "Transparent"
 
 #: callbacks_insert_application-x-shockwave-flash.php:141
 msgid "Quality"
-msgstr ""
+msgstr "Qualität"
 
 #: callbacks_insert_application-x-shockwave-flash.php:147
 msgid "Scale"
@@ -1352,11 +1357,11 @@ msgstr ""
 
 #: callbacks_insert_application-x-shockwave-flash.php:159
 msgid "Background color"
-msgstr ""
+msgstr "Hintergrundfarbe"
 
 #: callbacks_insert_application-x-shockwave-flash.php:163
 msgid "Please use a valid hexadezimal syntax"
-msgstr "Bitte nutzen Sie ausschließlich hexadecimale Angaben"
+msgstr "Bitte verwenden Sie ausschließlich hexadezimale Werte"
 
 #: callbacks_insert_application-x-shockwave-flash.php:173
 msgid "Avoid looping"
@@ -1403,7 +1408,7 @@ msgstr "Datei"
 
 #: mediamanager_edit.php:144 mediamanager_upload.php:126
 msgid "Please add at least one tag"
-msgstr "Bitte tragen Sie mindestens einen Tag ein"
+msgstr "Bitte tragen Sie mindestens ein Schlagwort ein"
 
 #: mediamanager_edit.php:151 mediamanager_upload.php:133
 msgid "Close"
@@ -1512,7 +1517,7 @@ msgstr "Podcasts"
 
 #: _inc_nav_library.html:6
 msgid "Document Categories"
-msgstr "Dokumentenkategorie"
+msgstr "Dokumentenkategorien"
 
 #: _inc_nav_library.html:7
 msgid "Image Categories"
@@ -1847,17 +1852,18 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_blogs_postings_add.html:201 pages_blogs_postings_add.html:204
 #: pages_blogs_postings_add.html:207 pages_blogs_postings_add.html:210
 #: pages_blogs_postings_add.html:213 pages_blogs_postings_add.html:216
-#: pages_blogs_postings_edit.html:112 pages_blogs_postings_edit.html:115
-#: pages_blogs_postings_edit.html:124 pages_blogs_postings_edit.html:134
-#: pages_blogs_postings_edit.html:150 pages_blogs_postings_edit.html:153
-#: pages_blogs_postings_edit.html:156 pages_blogs_postings_edit.html:159
-#: pages_blogs_postings_edit.html:162 pages_blogs_postings_edit.html:165
-#: pages_blogs_postings_edit.html:168 pages_blogs_postings_edit.html:171
-#: pages_blogs_postings_edit.html:174 pages_blogs_postings_edit.html:177
-#: pages_blogs_postings_edit.html:192 pages_blogs_postings_edit.html:195
-#: pages_blogs_postings_edit.html:198 pages_blogs_postings_edit.html:201
-#: pages_blogs_postings_edit.html:204 pages_blogs_postings_edit.html:207
-#: pages_blogs_postings_edit.html:210 pages_blogs_postings_edit.html:213
+#: pages_blogs_postings_add.html:219 pages_blogs_postings_edit.html:112
+#: pages_blogs_postings_edit.html:115 pages_blogs_postings_edit.html:124
+#: pages_blogs_postings_edit.html:134 pages_blogs_postings_edit.html:150
+#: pages_blogs_postings_edit.html:153 pages_blogs_postings_edit.html:156
+#: pages_blogs_postings_edit.html:159 pages_blogs_postings_edit.html:162
+#: pages_blogs_postings_edit.html:165 pages_blogs_postings_edit.html:168
+#: pages_blogs_postings_edit.html:171 pages_blogs_postings_edit.html:174
+#: pages_blogs_postings_edit.html:177 pages_blogs_postings_edit.html:192
+#: pages_blogs_postings_edit.html:195 pages_blogs_postings_edit.html:198
+#: pages_blogs_postings_edit.html:201 pages_blogs_postings_edit.html:204
+#: pages_blogs_postings_edit.html:207 pages_blogs_postings_edit.html:210
+#: pages_blogs_postings_edit.html:213 pages_blogs_postings_edit.html:216
 #: pages_boxes_add.html:121 pages_boxes_add.html:131 pages_boxes_add.html:134
 #: pages_boxes_add.html:137 pages_boxes_edit.html:113
 #: pages_boxes_edit.html:123 pages_boxes_edit.html:126
@@ -2026,7 +2032,8 @@ msgstr "Verfügbare Ping-Services"
 #: pages_blogs_pingserviceconfigurations_select.html:100
 #: pages_blogs_pingserviceconfigurations_select.html:108
 #: pages_blogs_postings_select.html:126 pages_blogs_postings_select.html:135
-#: pages_boxes_select.html:109 pages_generatorforms_fields_select.html:100
+#: pages_boxes_select.html:103 pages_boxes_select.html:109
+#: pages_generatorforms_fields_select.html:100
 #: pages_generatorforms_fields_select.html:108 pages_select.html:108
 #: pagetypes_select.html:64 pagetypes_select.html:71
 #: podcastcategories_select.html:77 podcastcategories_select.html:83
@@ -2053,7 +2060,8 @@ msgstr "Bearbeiten"
 #: pages_blogs_pingserviceconfigurations_select.html:101
 #: pages_blogs_pingserviceconfigurations_select.html:109
 #: pages_blogs_postings_select.html:127 pages_blogs_postings_select.html:136
-#: pages_boxes_select.html:110 pages_generatorforms_fields_select.html:101
+#: pages_boxes_select.html:104 pages_boxes_select.html:110
+#: pages_generatorforms_fields_select.html:101
 #: pages_generatorforms_fields_select.html:109 pages_select.html:110
 #: pagetypes_select.html:65 pagetypes_select.html:72
 #: podcastcategories_select.html:78 podcastcategories_select.html:84
@@ -2159,7 +2167,7 @@ msgstr "Welcompose Admin &ndash; Textmakros"
 
 #: textmacros_select.html:68
 msgid "Available Text Macros"
-msgstr "Vefübare Textmakros"
+msgstr "Vefügbare Textmakros"
 
 #: textmacros_select.html:100
 msgid "No text macro has been created yet."
@@ -2195,7 +2203,7 @@ msgstr "Verfügbare Anti Spam Plugins"
 
 #: antispamplugins_select.html:107
 msgid "No anti spam plugin has been created yet."
-msgstr "Sie haben noch Anti Spam Plug-In angelegt."
+msgstr "Sie haben noch kein Anti Spam Plug-In angelegt."
 
 #: blogcomments_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Blog Comment"
@@ -2216,7 +2224,7 @@ msgstr "Die Änderung des Kommentarstatus wurde gespeichert!"
 #: blogcomments_select.html:63 pages_blogs_postings_select.html:76
 #: templates_select.html:58 users_select.html:57
 msgid "Filter:"
-msgstr "Filter"
+msgstr "Filter:"
 
 #: blogcomments_select.html:66
 msgid "Blog"
@@ -2285,7 +2293,7 @@ msgstr "Bearbeitet"
 
 #: blogcomments_select.html:186
 msgid "No blog comment has been created yet."
-msgstr "Es wurden noch kein Blog Kommentare angelegt"
+msgstr "Es wurden noch kein Blog Kommentar angelegt"
 
 #: blogcommentstatuses_add.html:10
 msgid "Welcompose Admin &ndash; Add Blog Comment Status"
@@ -2322,8 +2330,7 @@ msgstr "Welcompose Admin &ndash; Community-Einstellungen"
 #: settings.html:72 pages_edit.html:141
 msgid "To apply further changes, please repeat fill in the form"
 msgstr ""
-"Um weitere Änderungen vorzunehmen, fahren Sie bitte fort das Formular "
-"auszufüllen"
+"Um weitere Änderungen vorzunehmen, können Sie das nächste Formular ausfüllen"
 
 #: settings.html:83 pages_blogs_postings_select.html:124
 msgid "Comments"
@@ -2404,11 +2411,11 @@ msgstr "EINFÜGEN"
 
 #: globalboxes_add.html:10
 msgid "Welcompose Admin &ndash; Add Global Box"
-msgstr "Welcompose Admin &ndash; Neue Globale Box anlegen"
+msgstr "Welcompose Admin &ndash; Neue globale Box anlegen"
 
 #: globalboxes_add.html:57 globalboxes_add.html:61
 msgid "Add Global Box"
-msgstr "Neue Globale Box anlegen"
+msgstr "Neue globale Box anlegen"
 
 #: globalboxes_add.html:99 globalboxes_edit.html:91
 #: pages_blogs_postings_add.html:122 pages_blogs_postings_add.html:131
@@ -2443,11 +2450,11 @@ msgstr "Welcompose Admin &ndash; Globale Boxen"
 
 #: globalboxes_select.html:69
 msgid "Available global boxes"
-msgstr "Vefügbare Globale Boxen"
+msgstr "Vefügbare globale Boxen"
 
 #: globalboxes_select.html:101
 msgid "No global box has been created yet"
-msgstr "Sie haben noch keine Globale Box angelegt."
+msgstr "Sie haben noch keine globale Box angelegt."
 
 #: navigations_add.html:10
 msgid "Welcompose Admin &ndash; Add Navigation"
@@ -2487,7 +2494,7 @@ msgstr "Neue Seite anlegen"
 
 #: pages_add.html:75
 msgid "You have not yet created a page type!"
-msgstr "Sie haben noch keinen Seitentyp angelegt."
+msgstr "Sie haben noch keinen Seitentyp angelegt!"
 
 #: pages_add.html:76
 #, fuzzy
@@ -2500,7 +2507,7 @@ msgstr ""
 
 #: pages_add.html:83 pages_edit.html:133
 msgid "You have not yet created a template set!"
-msgstr "Sie haben noch keine Vorlagengruppe angelegt"
+msgstr "Sie haben noch keine Vorlagengruppe angelegt!"
 
 #: pages_add.html:84 pages_edit.html:134
 #, fuzzy
@@ -2583,11 +2590,11 @@ msgstr ""
 
 #: pages_blogs_pingserviceconfigurations_edit.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Ping Service"
-msgstr "Welcompose Admin &ndash; Pages &#62; Ping-Service bearbeiten"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service bearbeiten"
 
 #: pages_blogs_pingserviceconfigurations_select.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Ping Service Configurations"
-msgstr "Welcompose Admin &ndash; Pages &#62; Ping-Service Konfiguration"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service Konfiguration"
 
 #: pages_blogs_pingserviceconfigurations_select.html:88
 #: pages_blogs_postings_select.html:112
@@ -2612,7 +2619,7 @@ msgstr "Sie haben noch keinen Ping-Service angelegt"
 
 #: pages_blogs_postings_add.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Add Blog Posting"
-msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Blog-Eintrag anlegen"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Neuen Blog-Eintrag anlegen"
 
 #: pages_blogs_postings_add.html:77 pages_blogs_postings_add.html:81
 msgid "Add Blog Posting"
@@ -2620,7 +2627,7 @@ msgstr "Neuen Blog-Eintrag anlegen"
 
 #: pages_blogs_postings_edit.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Blog Posting"
-msgstr "Welcompose Admin &ndash; Pages &#62; Blog-Eintrag bearbeiten"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Eintrag bearbeiten"
 
 #: pages_blogs_postings_edit.html:82 pages_blogs_postings_edit.html:86
 msgid "Edit Blog Posting"
@@ -2628,7 +2635,7 @@ msgstr "Blog-Eintrag bearbeiten"
 
 #: pages_blogs_postings_select.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Blog Postings"
-msgstr "Welcompose Admin &ndash; Pages &#62; Blog-Einträge"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Einträge"
 
 #: pages_blogs_postings_select.html:90
 msgid "Yes"
@@ -2648,7 +2655,7 @@ msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 
 #: pages_boxes_add.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Add Box"
-msgstr "Welcompose Admin &ndash; Pages &#62; Neue Box anlegen"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Box anlegen"
 
 #: pages_boxes_add.html:62 pages_boxes_edit.html:61 pages_boxes_select.html:51
 #: pages_edit.html:58 pages_simplepages_content_edit.html:65
@@ -2688,7 +2695,7 @@ msgstr "Neue Box anlegen"
 
 #: pages_boxes_edit.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Box"
-msgstr "Welcompose Admin &ndash; Pages &#62; Box bearbeiten"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Box bearbeiten"
 
 #: pages_boxes_edit.html:83 pages_boxes_edit.html:87
 msgid "Edit Box"
@@ -2696,7 +2703,7 @@ msgstr "Box bearbeiten"
 
 #: pages_boxes_select.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Boxes"
-msgstr "Welcompose Admin &ndash; Pages &#62; Boxen"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Boxen"
 
 #: pages_boxes_select.html:95
 msgid "Available Boxes"
@@ -2708,15 +2715,15 @@ msgstr "Sie haben noch keine Box angelegt"
 
 #: pages_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Page Metadata"
-msgstr "Welcompose Admin &ndash; Pages &#62; Seiten-Metadata bearbeiten"
+msgstr "Welcompose Admin &ndash; Seiten &#62; Seiten-Metadata bearbeiten"
 
 #: pages_edit.html:81 pages_urls_content_edit.html:53
 msgid "URL Page"
-msgstr "URL Page"
+msgstr "URL Seite"
 
 #: pages_edit.html:111 pages_edit.html:115
 msgid "Edit Page Metadata"
-msgstr "Metadata bearbeiten"
+msgstr "Metadaten bearbeiten"
 
 #: pages_generatorforms_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Generator Form"
@@ -2767,7 +2774,7 @@ msgstr "Verschiebe Seite in eine andere Navigation"
 
 #: pages_move_away.html:68
 msgid "There is no navigation where you can move this node to!"
-msgstr "Es ist keine zus. Navigation vorhanden um die Seite zu verschieben!"
+msgstr "Es ist keine weitere Navigation vorhanden um die Seite zu verschieben!"
 
 #: pages_move_away.html:69
 #, fuzzy
@@ -2776,7 +2783,7 @@ msgid ""
 "overview page</a>."
 msgstr ""
 "Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
-"Benutzergruppen</a>."
+"Navigationen</a>."
 
 #: pages_select.html:10
 msgid "Welcompose Admin &ndash; Pages"
@@ -2788,11 +2795,11 @@ msgstr "Bitte definieren Sie eine Index-Seite!"
 
 #: pages_select.html:59
 msgid "If you don't do that, your webpage won't be usable."
-msgstr "Ansonsten kann Ihre Webseite nicht angezeigt werden."
+msgstr "Ohne Index-Seite kann Ihre Website nicht angezeigt werden."
 
 #: pages_select.html:65
 msgid "You defined more than one index page."
-msgstr "Sie mehrere Seiten als Index-Seite definiert."
+msgstr "Sie haben mehrere Seiten als Index-Seite definiert."
 
 #: pages_select.html:66
 msgid "Please reduce the amount of index pages to one."
@@ -2837,11 +2844,11 @@ msgstr "Verschieben"
 #: pages_select.html:117
 #, fuzzy
 msgid "Down"
-msgstr "Download"
+msgstr "Nach unten"
 
 #: pages_select.html:118
 msgid "Up"
-msgstr ""
+msgstr "Nach oben"
 
 #: pages_select.html:119 pages_select.html:130
 msgid "Add new page"
@@ -2876,11 +2883,11 @@ msgstr "Seite bearbeiten"
 
 #: pages_urls_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit URL Page"
-msgstr "Welcompose Admin &ndash; Seite bearbeiten"
+msgstr "Welcompose Admin &ndash; Seiten-URL bearbeiten"
 
 #: pages_urls_content_edit.html:59 pages_urls_content_edit.html:63
 msgid "Edit URL Page"
-msgstr "Seite bearbeiten"
+msgstr "Seiten-URL bearbeiten"
 
 #: pagetypes_add.html:10
 msgid "Welcompose Admin &ndash; Add Page Type"
@@ -2982,7 +2989,7 @@ msgstr "Welcompose meldet"
 
 #: anti_spam_plugin_anti_spam_plugin_active.html:1
 msgid "Uncheck this box if you like to disable the plugin."
-msgstr "Gibt an, ob das Plug-In benutzt werden kann oder nicht."
+msgstr "Gibt an, ob das Plug-In benutzt werden soll oder nicht."
 
 #: anti_spam_plugin_anti_spam_plugin_internal_name.html:1
 msgid ""
@@ -3015,8 +3022,9 @@ msgid ""
 "Select the appropriate plugin type. See the docs of your anti spam plugin if "
 "you're unsure what to choose."
 msgstr ""
-"Wählen Sie den Typ des Anti-Spam Plug-Ins. Bitte schauen Sie in der "
-"Dokumentation Ihres Anti-Spam Plug-Ins nach, was genau hier auszuwählen ist."
+"Wählen Sie den passenden Typ des Anti-Spam Plug-Ins. Bitte schauen Sie in "
+"der Dokumentation Ihres Anti-Spam Plug-Ins nach, was genau hier auszuwählen "
+"ist."
 
 #: blog_comment_status_blog_comment_status_name.html:1
 msgid ""
@@ -3033,7 +3041,7 @@ msgid ""
 "Defines whether the text macros will be applied on the content and the "
 "summary or not."
 msgstr ""
-"Definiert, ob bestehende Textmakros auf den Inhalt und die Kurzfassung  der "
+"Definiert, ob bestehende Textmakros auf den Inhalt und die Kurzfassung der "
 "Seite angewendet werden."
 
 #: blog_posting_blog_posting_comments_enable.html:1
@@ -3045,8 +3053,8 @@ msgid ""
 "Enter here the contents for your blog posting. HTML and all the other stuff "
 "allowed."
 msgstr ""
-"Bitte tragen Sie hier den Inhalt Ihres Blog-Eintrages ein. HTML-Eingaben sind "
-"erlaubt."
+"Bitte tragen Sie hier den Inhalt Ihres Blog-Eintrages ein. HTML-Eingaben "
+"sind erlaubt."
 
 #: blog_posting_blog_posting_draft.html:1
 msgid ""
@@ -3062,15 +3070,15 @@ msgid ""
 "newsfeeds."
 msgstr ""
 "Optionale Kurzfassung Ihres Blog-Eintrages zur Verwendung in Newsfeeds. "
-"Falls Sie nicht den gesamten Inhalt verwenden möchten, können Sie hier eine "
-"Kurzfassung speziell für Newsfeeds definieren."
+"Falls Sie nicht den gesamten Eintrag veröffentlichen möchten, können Sie "
+"hier eine Kurzfassung speziell für Newsfeeds definieren."
 
 #: blog_posting_blog_posting_ping.html:1
 msgid ""
 "Check this box if you like to notify the configured ping services about your "
 "update."
 msgstr ""
-"Definiert, ob konfigurierte Ping-Services beim aktualisieren des Eintrages "
+"Definiert, ob konfigurierte Ping-Services beim Aktualisieren des Eintrages "
 "benachrichtigt werden sollen."
 
 #: blog_posting_blog_posting_podcast_author.html:1
@@ -3085,7 +3093,7 @@ msgstr "Definiert, ob die Anzeige des Podcasts verhindert werden soll."
 #: blog_posting_blog_posting_podcast_category.html:1
 msgid "Select the categories that your podcast should appear in iTunes."
 msgstr ""
-"Wählen Sie eine Kategorie aus, in der Ihr Podcast innerhalb iTunes angezeigt "
+"Wählen Sie die Kategorien aus, in der Ihr Podcast innerhalb iTunes angezeigt "
 "werden soll."
 
 #: blog_posting_blog_posting_podcast_description.html:1
@@ -3105,8 +3113,8 @@ msgstr ""
 #: blog_posting_blog_posting_podcast_keywords.html:1
 msgid "Choose the blog posting field that will be used as summary description."
 msgstr ""
-"Wählen Sie, ob Sie evtl. vorhandene Schlagworte Ihres Blog-Eintrages in der "
-"Anzeige des Podcasts innerhalb iTunes genutzt werden sollen."
+"Wählen Sie ein Blog-Eintrag Feld, das für die Verschlagwortung Ihres Podcast "
+"innerhalb iTunes genutzt werden soll."
 
 #: blog_posting_blog_posting_podcast_summary.html:1
 msgid "Choose the blog posting field that will be used as podcast summary."
@@ -3127,8 +3135,9 @@ msgid ""
 "Enter one or more tags (read: keywords) to categorize your story. Separate "
 "them with a comma."
 msgstr ""
-"Tragen Sie hier ein oder mehrere Schlagworte ein, um Ihren Blog-Eintrag zu "
-"kategorisieren. Trennen Sie die einzelnen Schlagworte durch Kommatas."
+"Tragen Sie hier ein oder mehrere Schlagworte (\"Tags\") ein, um Ihren Blog-"
+"Eintrag zu kategorisieren. Trennen Sie die einzelnen Schlagworte durch "
+"Kommatas."
 
 #: blog_posting_blog_posting_text_converter.html:1
 msgid "Select the text converter that should be applied on all your contents."
@@ -3147,11 +3156,12 @@ msgid ""
 "contain chars (a-z), numbers (0-9) and hyphens (-)."
 msgstr ""
 "Browserkonformer Titel, der als URL dient. Der Titel darf Buchstaben in "
-"Kleinschreibung, numerische Angaben und Trennstriche enthalten."
+"Kleinschreibung (a-z), numerische Angaben (0-9) und Trennstriche (-) "
+"enthalten."
 
 #: blog_posting_blog_posting_trackbacks_enable.html:1
 msgid "Check this box if you like to allow trackbacks for this article."
-msgstr "Definiert, ob Trackbacks zu diesen Blog-Eintrag erlaubt sind."
+msgstr "Definiert, ob Trackbacks zu diesem Blog-Eintrag erlaubt sind."
 
 #: box_box_apply_macros.html:1
 #: generator_form_generator_form_apply_macros.html:1
@@ -3189,8 +3199,8 @@ msgid ""
 "Bayes autolearn threshold will be automatically trained as spam."
 msgstr ""
 "Wenn das Feld Bayes Auto-Lernen aktiv ist, werden Kommentare, die einen "
-"höheren Wert als der im Feld <em>Bayes Auto-Lernen Grenzwert</em> angegebene "
-"haben, als Spam deklariert."
+"höheren Wert als der im Feld <em>Bayes Auto-Lernen Grenzwert</em> "
+"angegebenen haben, als Spam deklariert."
 
 #: community_settings_community_settings_blog_comment_bayes_autolearn_threshold.html:1
 msgid ""
@@ -3202,7 +3212,7 @@ msgstr ""
 "Wenn ein Kommentar einen höheren Wert als der im Feld <em>Bayes Auto-Lernen "
 "Grenzwert</em> angegebene hat, wird er automatisch als Spam deklariert. "
 "Diese Einstellung wir nur dann berücksichtigt, wenn das Feld <em>Bayes Auto-"
-"Lernen aktivieren</em> aktiv ist. Werteangabe n sind im Rahmen 0.00001 (sehr "
+"Lernen aktivieren</em> aktiv ist. Werteangaben sind im Rahmen 0.00001 (sehr "
 "geringe Spam-Wahrscheinlichkeit) und 1.0000 (hohe Spam-Wahrscheinlichkeit) "
 "möglich."
 
@@ -3231,7 +3241,7 @@ msgstr ""
 "Definiert den Anzeigestatus der Kommentare. Beispiel: Sie haben einen Blog "
 "Kommentarstatus mit Namen <em>IST_GEPRUEFT</em> definiert. Weisen Sie dem "
 "Anzeigestatus nun diesen Kommentarstatus zu, so werden alle Kommentare mit "
-"diesen Kommentarstatus angezeigt."
+"diesem Kommentarstatus angezeigt."
 
 #: community_settings_community_settings_blog_comment_ham_status.html:1
 msgid ""
@@ -3260,7 +3270,7 @@ msgid ""
 "Time since artilce publishing in seconds after that a comment won't be "
 "accepted anymore."
 msgstr ""
-"Definiert den Zeitraum (in Sekunden), innerhalb deren Kommentare zugelassen "
+"Definiert den Zeitraum (in Sekunden), innerhalb derer Kommentare zugelassen "
 "sind. Nach Ablauf der definierten Zeit können keine Kommentare mehr "
 "eingetragen werden."
 
@@ -3274,10 +3284,10 @@ msgid ""
 "the former will be displayed. When you choose the numeral captcha, the "
 "latter."
 msgstr ""
-"Ein Captcha ist ein Methode des Spam-Schutzes. Ist eine Auswahl getroffen, "
-"werden die Besucher aufgefordert einen durch ein generiertes Bild "
-"angezeigten Text einzugeben (Bild Captcha) oder eine einfache mathematische "
-"Frage zu beantworten (bspw. 3 + 4 = ?) (Nummerisches Captcha)."
+"Ein Captcha ist ein Methode des Spam-Schutzes. Ist ein Captcha aktiv, werden "
+"die Besucher aufgefordert einen durch ein generiertes Bild angezeigten Text "
+"einzugeben (Bild Captcha) oder eine einfache mathematische Frage zu "
+"beantworten (bspw. 3 + 4 = ?) (Numerisches Captcha)."
 
 #: community_settings_community_settings_blog_trackback_bayes_autolearn.html:1
 msgid ""
@@ -3285,8 +3295,8 @@ msgid ""
 "Bayes autolearn threshold will be automatically trained as spam."
 msgstr ""
 "Wenn das Feld Bayes Auto-Lernen aktiv ist, werden Trackbacks, die einen "
-"höheren Wert als der im Feld <em>Bayes Auto-Lernen Grenzwert</em> angegebene "
-"haben, als Spam deklariert."
+"höheren Wert haben als der im Feld <em>Bayes Auto-Lernen Grenzwert</em> "
+"angegebenen, als Spam deklariert."
 
 #: community_settings_community_settings_blog_trackback_bayes_autolearn_threshold.html:1
 msgid ""
@@ -3326,7 +3336,7 @@ msgstr ""
 "Definiert den Anzeigestatus der Trackbacks. Beispiel: Sie haben einen Blog "
 "Kommentarstatus mit Namen <em>IST_GEPRUEFT</em> definiert. Weisen Sie dem "
 "Anzeigestatus nun diesen Kommentarstatus zu, so werden alle Trackbacks mit "
-"diesen Kommentarstatus angezeigt."
+"diesem Kommentarstatus angezeigt."
 
 #: community_settings_community_settings_blog_trackback_ham_status.html:1
 msgid ""
@@ -3349,7 +3359,7 @@ msgid ""
 "Time since artilce publishing in seconds after that a trackback won't be "
 "accepted anymore."
 msgstr ""
-"Definiert den Zeitraum (in Sekunden), innerhalb deren Trackbacks zugelassen "
+"Definiert den Zeitraum (in Sekunden), innerhalb derer Trackbacks zugelassen "
 "sind. Nach Ablauf der definierten Zeit können keine Trackbacks mehr "
 "eingetragen werden."
 
@@ -3358,7 +3368,7 @@ msgid ""
 "Will be used to organise your documents. Choose a meaningful name like My "
 "Word Documents."
 msgstr ""
-"Mit Hilfe eines möglichst aussagekräftigen Namen können Sie Ihre Dokumente "
+"Mit Hilfe eines möglichst aussagekräftigen Namens können Sie Ihre Dokumente "
 "organisieren."
 
 #: generator_form_field_generator_form_field_label.html:1
@@ -3400,7 +3410,7 @@ msgid ""
 "form field input. You can only specify the part between the regular "
 "expression delimiters."
 msgstr ""
-"Sie können einen Regulären Ausdruck nutzen, anhand dessen das Formularfeld "
+"Sie können einen regulären Ausdruck nutzen, anhand dessen das Formularfeld "
 "überprüft wird, bspw. \"[a-z0-9]+\"."
 
 #: generator_form_field_generator_form_field_value.html:1
@@ -3412,7 +3422,7 @@ msgid ""
 msgstr ""
 "Hier können Sie Anfangsinhalte der Formularfelder definieren. Tragen Sie "
 "bitte nur einzeilige Inhalte ein. Ausnahme sind hier Textareas und "
-"Auswahlmenues. Um Optionen in einem Auswahlmenu anzugeben, geben Sie die "
+"Auswahlmenüs. Um Optionen in einem Auswahlmenü anzugeben, geben Sie die "
 "Werte hintereinander und trennen jeweils mit einem Kommata."
 
 #: generator_form_generator_form_content.html:1
@@ -3450,7 +3460,7 @@ msgid ""
 "Use this field to enter an optional description of the purpose of this "
 "global file."
 msgstr ""
-"Nutzen Sie dieses Feld, um optional die Verwendung der Globalen Datei zu "
+"Nutzen Sie dieses Feld, um optional die Verwendung der globalen Datei zu "
 "beschreiben."
 
 #: global_file_global_file_file.html:1
@@ -3465,7 +3475,7 @@ msgid ""
 msgstr ""
 "Definiert, ob die Standard Smarty-Trennsymbol \"{\" und \"}\" durch \"<%%%%"
 "\" und \"%%%%>\" ersetzt werden sollen. Dieses ist notwendig, wenn Sie in "
-"der Globalen Vorlage mit Quelltext arbeiten, deren Syntax geschweifte "
+"der globalen Vorlage mit Quelltext arbeiten, deren Syntax geschweifte "
 "Klammern beinhaltet. Dies ist bspw. der Fall bei Cascading Style Sheets und "
 "Javascript."
 
@@ -3474,13 +3484,13 @@ msgid ""
 "Insert the content of your global template (styles, JavaScript code etc.) "
 "here."
 msgstr ""
-"Bitte fügen Sie hier die Inhalte für Ihre Globale Vorlage ein (Style-"
+"Bitte fügen Sie hier die Inhalte für Ihre globale Vorlage ein (Style-"
 "Angaben, Javascript Quelltext etc.)."
 
 #: global_template_global_template_description.html:1
 msgid "Here you may optionally describe the purpose of the global template."
 msgstr ""
-"Nutzen Sie dieses Feld, um optional die Verwendung der Globalen Vorlage zu "
+"Nutzen Sie dieses Feld, um optional die Verwendung der globalen Vorlage zu "
 "beschreiben."
 
 #: global_template_global_template_mime_type.html:1
@@ -3493,7 +3503,7 @@ msgid ""
 "Enter the name of the global template. It's recommended to use a real file "
 "name like style.css or script.js"
 msgstr ""
-"Tragen Sie bitte den Namen der Globalen Vorlage ein. Bitte nutzen Sie "
+"Tragen Sie bitte den Dateinamen der globalen Vorlage ein. Bitte nutzen Sie "
 "vollständige Dateinamen, damit die spätere Referenzierung in den "
 "Seitenvorlagen erfolgen kann. Zudem hat dies den Vorteil, das die Art der "
 "Datei in der Übersicht der Globale Vorlagen auf einen Blick deutlich wird. "
@@ -3503,7 +3513,7 @@ msgstr ""
 msgid ""
 "You can optionally describe the purpose of this group. May be useful when "
 "dealing with lots of different groups."
-msgstr "Beschreiben Sie in diesen Feld den Verwendungszweck der Gruppe."
+msgstr "Sie können in diesem Feld den Verwendungszweck der Gruppe beschreiben."
 
 #: group_group_name.html:1
 msgid ""
@@ -3511,9 +3521,10 @@ msgid ""
 "A capitalized literal string with a custom prefix is expected, eg. "
 "MY_GROUP_NAME or PUBLIC_ADMINS. WCOM as prefix is prohibited."
 msgstr ""
-"Bitte tragen Sie den Namen der Gruppe ein. Bitte nutzen nur Großbuchstaben, "
-"die mit einem Prefix versehen sind. Beispiele: <em>MEIN_NEUE_GRUPPE</em> "
-"oder <em>BLOG_ADMINS</em>. WCOM als Prefix kann nicht genutzt werden."
+"Bitte tragen Sie den Namen der Gruppe ein. Bitte nutzen Sie nur "
+"Großbuchstaben, die mit einem Prefix versehen sind. Beispiele: "
+"<em>MEINE_NEUE_GRUPPE</em> oder <em>BLOG_ADMINS</em>. WCOM als Prefix kann "
+"nicht genutzt werden."
 
 #: group_group_rights.html:1
 msgid ""
@@ -3530,7 +3541,7 @@ msgid ""
 "Holiday Pictures."
 msgstr ""
 "Mit Hilfe eines möglichst aussagekräftigen Namen können Sie Ihre Bilddateien "
-"organisieren."
+"organisieren, zum Beispiel <em>Meine Urlaubsbilder</em>."
 
 #: insert_x-shockwave-flash_bgcolor.html:1
 msgid ""
@@ -3617,13 +3628,13 @@ msgid ""
 msgstr ""
 "Durch die Angabe von Schlagworten gruppieren und organisieren Sie Ihre Media "
 "Dateien. Die Schlagworte werden in der Media Manager Funktion "
-"<em>Schlagworte</em> genutzt um die Quantität der Anzeige zu begrenzen. "
+"<em>Schlagworte</em> genutzt, um die Quantität der Anzeige zu begrenzen. "
 "Tragen Sie bitte mehrere, mindestens aber ein Schlagwort ein. "
 "Mehrfachangaben werden durch Kommata getrennt."
 
 #: media_upload_types.html:1
 msgid "help media_upload_types."
-msgstr ""
+msgstr "Hilfe für media_upload_types."
 
 #: mediamanager_mediamanager.html:1
 msgid ""
@@ -3649,14 +3660,14 @@ msgstr ""
 "Flickr Dateien. Setzt einen vorhandenen Flickr Account voraus.<br /"
 "><strong>Upload</strong>: Laden Sie neue Dateien hoch.<br /><br /"
 "><strong>Dateitypen</strong>: Welche Dateitypen sollen bei der Anzeige "
-"berücksichtig werden?<br /><strong>Schlagworte</strong>: Anzeige anhand von "
+"berücksichtigt werden?<br /><strong>Schlagworte</strong>: Anzeige anhand von "
 "Schlagworten. Abhängig von den Tastatureingaben, wird das Ergebnis alle 1.5 "
 "sek. aktualisiert.<br /><strong>Zeitrahmen</strong>: Anzeige innerhalb eines "
 "zeitlichen Rahmens.<br /><br /><strong>Flickr Benutzername</strong>: Um "
-"<em>myFlickr</em> nutzen zu können, müssen Sie als Erstes den Benutzername "
-"des Flickr Accounts eingeben.<br /><strong>Flickr Photoalben</strong>: "
-"Wählen Sie ein Flickr Photoalbum aus.<br /><strong>Flickr Schlagworte</"
-"strong>: Anzeige anhand von Flickr Schlagworten. Ist nur relevant, wenn die "
+"<em>myFlickr</em> nutzen zu können, müssen Sie zuerst den Benutzernamen des "
+"Flickr Accounts eingeben.<br /><strong>Flickr Photoalben</strong>: Wählen "
+"Sie ein Flickr Photoalbum aus.<br /><strong>Flickr Schlagworte</strong>: "
+"Anzeige anhand von Flickr Schlagworten. Ist nur relevant, wenn die "
 "Anzeigeoption <em>Flickr Photoalben</em> nicht aktiv ist.<br /><br /"
 "><strong>Kombinierte Suche</strong>: Alle Anzeigeoptionen (<em>Dateitypen</"
 "em>, <em>Schlagworte</em> und <em>Zeitrahmen</em>) können alleinstehend aber "
@@ -3670,9 +3681,23 @@ msgid ""
 "on. So please chose a meaningful one, especially because it will be used for "
 "navigation referencing in the templates."
 msgstr ""
-"Bitte tragen Sie den Namen der Navigation ein. Bitte nutzen einen "
-"beschreibenen Namen, da der Navigationsname unter anderen auch zur "
+"Bitte tragen Sie den Namen der Navigation ein. Bitte nutzen Sie einen "
+"beschreibenden Namen, da der Navigationsname unter anderem auch zur "
 "Referenzierung in den <em>Seitenvorlagen</em> genutzt wird."
+
+#: page_page_alternate_name.html:1
+msgid ""
+"A extra or additional page name to display. See Documentation for examples."
+msgstr ""
+"Zusätzlicher Seitenname. Beispielanwendungen finden Sie in der Dokumentation."
+
+#: page_page_description.html:1
+msgid ""
+"A extra or additional page description to display. See Documentation for "
+"examples."
+msgstr ""
+"Zusätzliche Seitenbeschreibung. Beispielanwendungen finden Sie in der "
+"Dokumentation."
 
 #: page_page_groups.html:1
 msgid ""
@@ -3698,13 +3723,20 @@ msgid ""
 "chars (a-z), numbers (0-9) and hyphens (-)."
 msgstr ""
 "Browserkonformer Name, der als URL dient. Der Name darf Buchstaben in "
-"Kleinschreibung, numerische Angaben und Trennstriche enthalten."
+"Kleinschreibung (a-z), numerische Angaben (0-9) und Trennstriche (-) "
+"enthalten."
 
 #: page_page_navigation.html:1
 msgid ""
 "The page will be moved to the choosen navigation. It assumes you applied two "
 "navigations at least."
 msgstr "Die Seite wird in die ausgewählte Navigation verschoben."
+
+#: page_page_optional_text.html:1
+msgid ""
+"Extra or additional vari input to display. See Documentation for examples."
+msgstr ""
+"Zusätzliche Eingaben. Beispielanwendungen finden Sie in der Dokumentation."
 
 #: page_page_position.html:1
 msgid ""
@@ -3756,10 +3788,10 @@ msgid ""
 "class without the pseudo-namespace prefix. If you have a display class "
 "called Display_SimplePage enter SimplePage as internal name."
 msgstr ""
-"Der Interne Name des Seitentyps entspricht dem Namen der korrespondierenden "
+"Der interne Name des Seitentyps entspricht dem Namen der korrespondierenden "
 "Klasse zur Anzeige ohne das Prefix des Namenraumes. Beispiel: Sie haben eine "
 "Anzeigeklasse, die <em>Display_SimplePage</em> heißt, so tragen Sie bitte "
-"<em>SimplePage</em> als Internen Namen ein."
+"<em>SimplePage</em> als internen Namen ein."
 
 #: page_type_page_type_name.html:1
 msgid ""
@@ -3873,7 +3905,7 @@ msgid ""
 "A capitalized literal string with a custom prefix is expected, eg. MY_RIGHT "
 "or PUBLIC_ADMINS. WCOM as prefix is prohibited."
 msgstr ""
-"Bitte tragen Sie den Namen des Benutzerrechts ein. Bitte nutzen nur "
+"Bitte tragen Sie den Namen des Benutzerrechts ein. Bitte nutzen Sie nur "
 "Großbuchstaben, die mit einem Prefix versehen sind. Beispiele: "
 "<em>MEIN_NEUES_RECHT</em> oder <em>BLOG_BENUTZER</em>. WCOM als Prefix kann "
 "nicht genutzt werden."
@@ -3907,7 +3939,7 @@ msgid ""
 "the name of the render method into the field <em>Custom type</em>."
 msgstr ""
 "Wählen Sie bitte den Formulartyp aus. Der Typ <em>Privates Formular</em> "
-"enthält die Felder Name, E-Mail, Adresse, Webseite und Nachricht. Der Typ "
+"enthält die Felder Name, E-Mail, Adresse, Website und Nachricht. Der Typ "
 "<em>Geschäftliches Formular</em> enthält die Felder Vorname, Nachname, "
 "Adresse, Ort, Telefon, E-Mail, Nachricht und eine Auswahlbox, die dem "
 "Empfänger anzeigt, ob der Sender telefonisch zurückgerufen werden möchte."
@@ -3916,7 +3948,8 @@ msgstr ""
 msgid ""
 "Enter here the contents for your simple page. HTML and all the other stuff "
 "allowed."
-msgstr "Tragen Sie hier den Inhalt Ihrer Seite ein HTML-Eingaben sind erlaubt."
+msgstr ""
+"Tragen Sie hier den Inhalt Ihrer Seite ein. HTML-Eingaben sind erlaubt."
 
 #: simple_page_simple_page_meta_description.html:1
 msgid "Allows to define a custom meta description for this document."
@@ -3966,7 +3999,8 @@ msgid ""
 "Use this field to enter an optional description of the purpose of this "
 "structural template."
 msgstr ""
-"Beschreiben Sie in diesen Feld den Verwendungszweck der Strukturvorlage."
+"In diesem Feld können Sie den Verwendungszweck der Strukturvorlage "
+"beschreiben."
 
 #: structural_template_structural_template_name.html:1
 msgid "Enter a descriptive name for your structural template."
@@ -3978,7 +4012,8 @@ msgid ""
 "You can optionally describe the purpose of this template set. May be useful "
 "when dealing with lots of different groups."
 msgstr ""
-"Beschreiben Sie in diesen Feld den Verwendungszweck der Vorlagengruppe."
+"In diesem Feld können Sie den Verwendungszweck der Vorlagengruppe "
+"beschreiben."
 
 #: template_set_template_set_name.html:1
 msgid ""
@@ -3986,7 +4021,7 @@ msgid ""
 "later on. A alphanumeric literal string with optional dashes is expected."
 msgstr ""
 "Bitte tragen Sie den Namen der Vorlagengruppe ein. Erlaubt sind "
-"Zeichenketten, die Buchstaben, Zahlen oder/und Unterstrichen enthalten. "
+"Zeichenketten, die Buchstaben, Zahlen oder/und Unterstriche enthalten. "
 "Leerzeichen sind nicht erlaubt."
 
 #: template_template_content.html:1
@@ -3999,10 +4034,10 @@ msgid ""
 "names of the associated template sets and template types is a good choice "
 "not to get messed up when dealing with lots of templates."
 msgstr ""
-"Beschreiben Sie in diesen Feld den Verwendungszweck der Seitenvorlage. Um "
-"einen Überblick bei Nutzung vieler Vorlagen zu behalten, ist es sinnvoll, "
-"hier bspw. die für diese Seitenvorlage ausgewählte <em>Vorlagengruppe</em> "
-"und den <em>Vorlagentyp</em> zu notieren."
+"In diesem Feld können Sie den Verwendungszweck der Seitenvorlage "
+"beschreiben. Um einen Überblick bei Nutzung vieler Vorlagen zu behalten, ist "
+"es sinnvoll, hier bspw. die für diese Seitenvorlage ausgewählte "
+"<em>Vorlagengruppe</em> und den <em>Vorlagentyp</em> zu notieren."
 
 #: template_template_name.html:1
 msgid ""
@@ -4029,7 +4064,8 @@ msgstr ""
 msgid ""
 "You can optionally describe the purpose of this template type. May be useful "
 "when dealing with lots of different groups."
-msgstr "Beschreiben Sie in diesen Feld den Verwendungszweck des Vorlagentyps. "
+msgstr ""
+"In diesem Feld können Sie den Verwendungszweck des Vorlagentyps beschreiben. "
 
 #: template_type_template_type_name.html:1
 msgid ""
@@ -4037,7 +4073,7 @@ msgid ""
 "later on. A alphanumeric literal string with optional dashes is expected."
 msgstr ""
 "Bitte tragen Sie den Namen des Vorlagentyps ein. Erlaubt sind Zeichenketten, "
-"die Buchstaben, Zahlen oder/und Unterstrichen enthalten. Leerzeichen sind "
+"die Buchstaben, Zahlen oder/und Unterstriche enthalten. Leerzeichen sind "
 "nicht erlaubt."
 
 #: text_converter_text_converter_internal_name.html:1
@@ -4046,7 +4082,7 @@ msgid ""
 "plugin. See the docs of your text converter plugin when you're unsure what "
 "to insert here."
 msgstr ""
-"Der Interne Name entspricht dem Funktionsnamen des Textkonverter Plug-Ins. "
+"Der interne Name entspricht dem Funktionsnamen des Textkonverter Plug-Ins. "
 "Bitte schauen Sie in die Dokumentation Ihres Plug-Ins, wenn Sie sich nicht "
 "sicher sind, was hier einzutragen ist."
 
@@ -4063,7 +4099,7 @@ msgid ""
 "The internal name is part of the text macro's function name. See the docs of "
 "the text macro what to insert here."
 msgstr ""
-"Der Interne Name ist Teil des Funktionsnamen des Textmakros Plug-Ins. Bitte "
+"Der interne Name ist Teil des Funktionsnamens des Textmakros Plug-Ins. Bitte "
 "schauen Sie in die Dokumentation Ihres Plug-Ins, wenn Sie sich nicht sicher "
 "sind, was hier einzutragen ist."
 
@@ -4072,7 +4108,7 @@ msgid ""
 "Insert some desciptive name that allows you to identify this text macro "
 "later on."
 msgstr ""
-"Tragen Sie bitte einen Namen für Ihr Textmakros ein. Der Name dient zur "
+"Tragen Sie bitte einen Namen für Ihr Textmakro ein. Der Name dient zur "
 "Anzeige und Identifizierung überall dort, wo Textmakros verwandt werden."
 
 #: text_macro_text_macro_type.html:1
@@ -4087,13 +4123,13 @@ msgstr ""
 #: upload_global_file_upload.html:1
 msgid "Select the file to use as global file."
 msgstr ""
-"Bitte wählen Sie die Datei, die Sie als Globale Datei nutzen möchten, von "
+"Bitte wählen Sie die Datei, die Sie als globale Datei nutzen möchten, von "
 "Ihrer Festplatte aus."
 
 #: upload_global_template_upload.html:1
 msgid "Select the file to use as global template."
 msgstr ""
-"Bitte wählen Sie die Datei, die Sie als Globale Vorlage nutzen möchten, von "
+"Bitte wählen Sie die Datei, die Sie als globale Vorlage nutzen möchten, von "
 "Ihrer Festplatte aus."
 
 #: upload_template_upload.html:1
@@ -4124,7 +4160,7 @@ msgid ""
 "If you set the author bit, the user will be able to log into the admin "
 "interface."
 msgstr ""
-"Wenn Sie diese Auswahlbox deaktivieren, kann sich der Benutzer nicht mehr im "
+"Wenn Sie diese Auswahlbox aktivieren, kann sich der Benutzer im "
 "Administrationsbereich des Systems anmelden."
 
 #: user_user_email.html:1
@@ -4145,8 +4181,8 @@ msgstr ""
 #: user_user_homepage.html:1
 msgid "You may name your homepage address. Full Path with protocol prefix."
 msgstr ""
-"Tragen Sie hier bitte bei Bedarf eine Webseiten Adresse des Benutzers ein. "
-"Die Angabe des Protokolls (http://) und eine vollständige Domainadresse wird "
+"Tragen Sie hier bitte bei Bedarf eine Website des Benutzers ein. Die Angabe "
+"des Protokolls (http://) und eine vollständige Domainadresse wird "
 "vorausgesetzt. Beispiel: http://meinehomepage.de"
 
 #: user_user_name.html:1
@@ -4262,23 +4298,23 @@ msgstr "Bildgrößen..."
 
 #: mediamanager.html:174
 msgid "Small (75px, square)"
-msgstr ""
+msgstr "Mini (75x75px)"
 
 #: mediamanager.html:175
 msgid "Thumbnail (100px)"
-msgstr ""
+msgstr "Vorschau (100px)"
 
 #: mediamanager.html:176
 msgid "Small (240px)"
-msgstr ""
+msgstr "Klein (240px)"
 
 #: mediamanager.html:177
 msgid "Medium (500px)"
-msgstr ""
+msgstr "Mittel (500px)"
 
 #: mediamanager.html:178
 msgid "Large (1024px)"
-msgstr ""
+msgstr "Groß (1024px)"
 
 #: mediamanager_edit.html:10
 msgid "Welcompose Admin &ndash; Mediamanager &ndash; Edit Media"
@@ -4347,7 +4383,7 @@ msgstr "Verweis auf diese Box einfügen"
 msgid ""
 "Welcompose Admin &ndash; Global Boxes &ndash; Create Reference to Global Box"
 msgstr ""
-"Welcompose Administration &ndash; Boxen &ndash; Verweis zu Globalen Boxen "
+"Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Boxen "
 "erstellen"
 
 #: callbacks_insert_globalboxes_links.html:37
@@ -4358,7 +4394,7 @@ msgstr "GLOBALE BOXEN"
 msgid ""
 "Welcompose Admin &ndash; Global Files &ndash; Create Reference to Global File"
 msgstr ""
-"Welcompose Administration &ndash; Boxen &ndash; Verweis zu Globalen Datein "
+"Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Dateien "
 "erstellen"
 
 #: callbacks_insert_globalfiles_links.html:37
@@ -4370,7 +4406,7 @@ msgid ""
 "Welcompose Admin &ndash; Global Templates &ndash; Create Reference to Global "
 "Template"
 msgstr ""
-"Welcompose Administration &ndash; Boxen &ndash; Verweis zu Globalen Vorlagen "
+"Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Vorlagen "
 "erstellen"
 
 #: callbacks_insert_globaltemplates_links.html:37
@@ -4379,11 +4415,11 @@ msgstr "GLOBALE VORLAGEN"
 
 #: globalfiles_add.html:10
 msgid "Welcompose Admin &ndash; Add Global File"
-msgstr "Welcompose Administration &ndash; Neue Globale Datei anlegen"
+msgstr "Welcompose Administration &ndash; Neue globale Datei anlegen"
 
 #: globalfiles_add.html:50 globalfiles_add.html:54
 msgid "Add Global File"
-msgstr "Neue Globale Datei anlegen"
+msgstr "Neue globale Datei anlegen"
 
 #: globalfiles_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Global File"
@@ -4400,7 +4436,7 @@ msgstr "Welcompose Administration &ndash; Globale Dateien"
 #: globalfiles_select.html:75 globaltemplates_select.html:70
 #: templates_select.html:95
 msgid "Available Templates"
-msgstr "Vefügbare Vorlagen"
+msgstr "Verfügbare Vorlagen"
 
 #: globalfiles_select.html:88
 msgid "File is..."
@@ -4430,11 +4466,11 @@ msgstr "Sie haben noch keine Datei angelegt"
 
 #: globaltemplates_add.html:10
 msgid "Welcompose Admin &ndash; Add Global Template"
-msgstr "Welcompose Administration &ndash; Neue Globale Vorlage anlegen"
+msgstr "Welcompose Administration &ndash; Neue globale Vorlage anlegen"
 
 #: globaltemplates_add.html:52 globaltemplates_add.html:56
 msgid "Add Global Template"
-msgstr "Neue Globale Vorlage anlegen"
+msgstr "Neue globale Vorlage anlegen"
 
 #: globaltemplates_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Global Template"
@@ -4454,7 +4490,7 @@ msgstr "Upload"
 
 #: globaltemplates_select.html:124
 msgid "No global template has been created yet."
-msgstr "Sie haben noch keine Globale Vorlage angelegt"
+msgstr "Sie haben noch keine globale Vorlage angelegt"
 
 #: templates_add.html:10
 msgid "Welcompose Admin &ndash; Add Template"
@@ -4506,7 +4542,7 @@ msgstr "Seitenvorlage bearbeiten"
 
 #: templates_edit.html:82
 msgid "You can continue editing your template."
-msgstr "Sie mit der Bearbeitung der Seitenvorlage fortfahren"
+msgstr "Sie können mit der Bearbeitung der Seitenvorlage fortfahren"
 
 #: templates_select.html:10
 msgid "Welcompose Admin &ndash; Templates"
@@ -4587,7 +4623,7 @@ msgstr "Welcompose Administration &ndash; Vorlagentypen"
 
 #: templatetypes_select.html:56
 msgid "Available Template Types"
-msgstr "Vefügbare Vorlagentypen"
+msgstr "Verfügbare Vorlagentypen"
 
 #: templatetypes_select.html:82
 msgid "No template type has been created yet."
@@ -4700,8 +4736,8 @@ msgstr "Es ist ein Fehler aufgetreten"
 #: wcom.strings.js:39 wcom.setup.strings.js:28 wcom.update.strings.js:28
 msgid "If the error remains, please get in touch with our support."
 msgstr ""
-"Sollte der Fehler weiterhin wiederholt auftreten, wenden Sie sich bitte "
-"an den Software Support."
+"Sollte der Fehler wiederholt auftreten, wenden Sie sich bitte an den "
+"Software Support."
 
 #: wcom.strings.js:44 wcom.setup.strings.js:33 wcom.update.strings.js:33
 msgid "Hide help on this topic"
@@ -4714,18 +4750,20 @@ msgstr "Element ausblenden"
 #: wcom.strings.js:50
 msgid ""
 "Please set focus on the text area into which you wish the media to be placed."
-msgstr "Bitte setzen Sie den Fokus auf die Textarea, in der die Datei eingefügt werden soll."
+msgstr ""
+"Bitte setzen Sie den Fokus auf die Textarea, in der die Datei eingefügt "
+"werden soll."
 
 #: wcom.strings.js:53
 msgid "Hide details"
-msgstr "Details anzeigen"
+msgstr "Details ausblenden"
 
 #: wcom.strings.js:55
 msgid ""
 "Are you sure you want to delete the chosen navigation? Every page related to "
 "this navigation will be deleted too."
 msgstr ""
-"Sind Sie sich sicher, das Sie die gewählte Navigation löschen möchten? Alle "
+"Sind Sie sicher, dass Sie die gewählte Navigation löschen möchten? Alle "
 "dieser Navigation zugeordneten Seiten werden ebenfalls gelöscht!"
 
 #: wcom.strings.js:56
@@ -4733,7 +4771,7 @@ msgid ""
 "Are you sure you want to delete the chosen template type? Every template "
 "that uses this type will be deleted too."
 msgstr ""
-"Sind Sie sich sicher, das Sie den gewählten Vorlagentyp löschen möchten? Alle "
+"Sind Sie sicher, dass Sie den gewählten Vorlagentyp löschen möchten? Alle "
 "Seitenvorlagen, die diesen Vorlagentyp nutzen, werden ebenfalls gelöscht!"
 
 #: wcom.strings.js:57
@@ -4741,8 +4779,9 @@ msgid ""
 "Are you sure you want to delete the chosen template set? You will loose the "
 "references in the templates this set is attached with."
 msgstr ""
-"Sind Sie sich sicher, das Sie die gewählte Vorlagengruppe löschen möchten? Die "
-"Referenzen in den Seitenvorlagen, die dieser Vorlagengruppe zugeordnet sind, gehen verloren!"
+"Sind Sie sicher, dass Sie die gewählte Vorlagengruppe löschen möchten? Die "
+"Referenzen in den Seitenvorlagen, die dieser Vorlagengruppe zugeordnet sind, "
+"gehen verloren!"
 
 #: wcom.strings.js:58
 msgid ""
@@ -4750,22 +4789,24 @@ msgid ""
 "other templates are not accordingly deleted and will remain as unattached "
 "markup."
 msgstr ""
-"Sind Sie sich sicher, das Sie die gewählte Globale Vorlage löschen möchten? Die "
-"Referenzen innerhalb der Seitenvorlagen, in denen die Globale Vorlage genutzt wird, werden "
-"nicht gelöscht. Sie verbleiben unreferenziert als einfacher Text in den Seitenvorlagen."
+"Sind Sie sicher, dass Sie die gewählte globale Vorlage löschen möchten? Die "
+"Referenzen innerhalb der Seitenvorlagen, in denen die globale Vorlage "
+"genutzt wird, werden nicht gelöscht. Sie verbleiben unreferenziert als "
+"einfacher Text in den Seitenvorlagen."
 
 #: wcom.strings.js:59
 msgid ""
 "Are you sure you want to delete the chosen global file? References in other "
 "templates are not accordingly deleted and will remain as unattached markup."
 msgstr ""
-"Sind Sie sich sicher, das Sie die gewählte Globale Datei löschen möchten? Die "
-"Referenzen innerhalb der Seitenvorlagen, in denen die Globale Datei genutzt wird, werden "
-"nicht gelöscht. Sie verbleiben unreferenziert als einfacher Text in den Seitenvorlagen."
+"Sind Sie sicher, dass Sie die gewählte globale Datei löschen möchten? Die "
+"Referenzen innerhalb der Seitenvorlagen, in denen die globale Datei genutzt "
+"wird, werden nicht gelöscht. Sie verbleiben unreferenziert als einfacher "
+"Text in den Seitenvorlagen."
 
 #: wcom.strings.js:60
 msgid "Please select a Flickr.com supplied image size."
-msgstr "Bitte wählen Sie eine Vorlagengruppe"
+msgstr "Bitte wählen Sie eine von Flickr angebotene Bildgröße aus."
 
 #: wcom.strings.js:61
 msgid ""
@@ -4774,11 +4815,12 @@ msgid ""
 "Otherwise the Media Manager does not reflect the current state after editing "
 "or adding media.\\n\\nThis advice does not affect other page functionality."
 msgstr ""
-"Die Ansicht des Media Managers wurde nicht aktualisiert!\\n\\nBitte achten Sie "
-"darauf, die relevanten Pop-up Fenster immer über den entsprechend benannten Button "
-"zu schließen. Andernfalls zeigt der Media Manager nicht den aktuellen Stand an, "
-"nachdem Sie eine Media Datei hinzugefügt oder bearbeitet haben.\\n\\nDie Funktionalität "
-"sonstiger Seitenbereiche bleibt hiervon unberührt." 
+"Die Ansicht des Media Managers wurde nicht aktualisiert!\\n\\nBitte achten "
+"Sie darauf, die relevanten Pop-up Fenster immer über den entsprechend "
+"benannten Button zu schließen. Andernfalls zeigt der Media Manager nicht den "
+"aktuellen Stand an, nachdem Sie eine Media Datei hinzugefügt oder bearbeitet "
+"haben.\\n\\nDie Funktionalität sonstiger Seitenbereiche bleibt hiervon "
+"unberührt."
 
 #: wcom.strings.js:62
 msgid "There is currently no help available."
@@ -4790,7 +4832,7 @@ msgstr "Bitte nutzen Sie einen gültigen Vorlagennamen"
 
 #: globaltemplates_add.php:122 globaltemplates_edit.php:133
 msgid "A global template with the given name already exists"
-msgstr "Eine gleichnamige Globale Vorlage existiert bereit"
+msgstr "Eine gleichnamige globale Vorlage existiert bereits"
 
 #: globaltemplates_add.php:136 globaltemplates_edit.php:147
 msgid "MIME Type"
@@ -4802,7 +4844,7 @@ msgstr "Bitte wählen Sie einen MIME-Typ"
 
 #: globaltemplates_add.php:141 globaltemplates_edit.php:152
 msgid "Selected mime type is out of range"
-msgstr "Der gewählte MIME-Typ ist außerhalb des gültigen Wertebereiches"
+msgstr "Der gewählte MIME-Typ liegt außerhalb des gültigen Wertebereiches"
 
 #: globaltemplates_add.php:145 globaltemplates_edit.php:156
 msgid "Change delimiter"
@@ -4818,7 +4860,7 @@ msgstr "Bitte wählen Sie einen Vorlagentyp"
 
 #: templates_add.php:127
 msgid "Chosen template type is out of range"
-msgstr "Der gewählte Vorlagentyp ist außerhalb des gültigen Wertebereiches"
+msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
 #: templates_add.php:131 templates_copy.php:147 templates_edit.php:147
 msgid "Sets"
@@ -4830,16 +4872,16 @@ msgstr "Bitte wählen Sie eine Vorlagengruppe"
 
 #: templates_add.php:145 templates_copy.php:162 templates_edit.php:162
 msgid "A template with the given name already exists"
-msgstr "Eine gleichnamige Seitenvorlage existiert bereit"
+msgstr "Eine gleichnamige Seitenvorlage existiert bereits"
 
 #: templates_copy.php:143
 msgid "Selected template type is out of range"
-msgstr "Der gewählte Vorlagentyp ist außerhalb des gültigen Wertebereiches"
+msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
 #: templates_copy.php:153
 msgid "Selected template set is out of range"
 msgstr ""
-"Die ausgewählte Vorlagengruppe ist außerhalb des gültigen Wertebereiches"
+"Die ausgewählte Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
 
 #: templates_copy.php:176
 msgid "Duplicate template"
@@ -4847,27 +4889,28 @@ msgstr "Seitenvorlage duplizieren"
 
 #: templates_edit.php:143
 msgid "Selected type is out of range"
-msgstr "Der gewählte Seitentyp ist außerhalb des gültigen Wertebereiches"
+msgstr "Der gewählte Seitentyp liegt außerhalb des gültigen Wertebereiches"
 
 #: templates_edit.php:153
 msgid "Selected set is out of range"
-msgstr "Die gewählte Vorlagengruppe ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die gewählte Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
 
 #: templatesets_add.php:108 templatesets_edit.php:118
 msgid "A template set with the given name already exists"
-msgstr "Eine gleichnamige Vorlagengruppe existiert bereit"
+msgstr "Eine gleichnamige Vorlagengruppe existiert bereits"
 
 #: templatetypes_add.php:108 templatetypes_edit.php:119
 msgid "A template type with the given name already exists"
-msgstr "Ein gleichnamiger Vorlagentyp existiert bereit"
+msgstr "Ein gleichnamiger Vorlagentyp existiert bereits"
 
 #: groups_add.php:118 groups_copy.php:134 groups_edit.php:134
 msgid "A group with this name already exists"
-msgstr "Eine gleichnamige Benuztergruppe existiert bereit"
+msgstr "Eine gleichnamige Benutzergruppe existiert bereits"
 
 #: groups_add.php:131 groups_copy.php:147 groups_edit.php:147
 msgid "Selected right is out of range"
-msgstr "Das gewählte BenutzerRrecht ist außerhalb des gültigen Wertebereiches"
+msgstr "Das gewählte Benutzerrecht liegt außerhalb des gültigen Wertebereiches"
 
 #: groups_copy.php:151
 msgid "Duplicate group"
@@ -4875,7 +4918,7 @@ msgstr "Benutzergruppe duplizieren"
 
 #: rights_add.php:108 rights_edit.php:118
 msgid "A right with this name already exists"
-msgstr "Ein gleichnamiges Benutzerrecht existiert bereit"
+msgstr "Ein gleichnamiges Benutzerrecht existiert bereits"
 
 #: users_add.php:112 users_edit.php:129
 msgid "Please select a group"
@@ -4883,7 +4926,8 @@ msgstr "Bitte wählen Sie eine Benutzergruppe"
 
 #: users_add.php:113 users_edit.php:130
 msgid "Selected group is out of range"
-msgstr "Die gewählte Benutzergruppe ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die gewählte Benutzergruppe liegt außerhalb des gültigen Wertebereiches"
 
 #: users_add.php:128 users_edit.php:138 simpleformindex.class.php:202
 #: simpleformindex.class.php:401
@@ -4897,7 +4941,7 @@ msgstr "Bitte tragen Sie eine gültige E-Mail Adresse ein"
 
 #: users_add.php:130 users_edit.php:140
 msgid "A user with this e-mail address already exists"
-msgstr "Ein Benutzer mit gleichnamiger E-Mail Adresse existiert bereit"
+msgstr "Ein Benutzer mit gleichnamiger E-Mail Adresse existiert bereits"
 
 #: users_add.php:138
 msgid "Please enter a password"
@@ -4921,15 +4965,15 @@ msgstr "Nutzen Sie auschließlich Buchstaben in Großschreibung"
 
 #: validate.js.php:68
 msgid "Alphanumeric with underscores"
-msgstr "Nutzen Sie Buchstaben, Nummer und Untertriche"
+msgstr "Nutzen Sie Buchstaben, Nummern und Untertriche"
 
 #: validate.js.php:72
 msgid "Alphanumeric string with spaces"
-msgstr "Nutzen Sie Buchstaben, Nummbern und Leerzeichen"
+msgstr "Nutzen Sie Buchstaben, Nummern und Leerzeichen"
 
 #: validate.js.php:76 validate.js.php:88 validate.js.php:116
 msgid "Only capitalized prefixed literal string"
-msgstr "Nutzen Sie schließlich Buchstaben in Großschreibung mit Prefix"
+msgstr "Nutzen Sie ausschließlich Buchstaben in Großschreibung mit Prefix"
 
 #: validate.js.php:80 validate.js.php:151
 msgid "Field may not be empty"
@@ -4945,11 +4989,11 @@ msgstr "Buchstaben, CamelCase"
 
 #: validate.js.php:100
 msgid "Full URL with protocol (http:// etc.)"
-msgstr "Vollständige Pfadangabe incl. Protokoll (http:// etc.)"
+msgstr "Vollständige Pfadangabe (URL) incl. Protokoll (http:// etc.)"
 
 #: validate.js.php:104
 msgid "Alphanumeric with dots and hyphens"
-msgstr "Nutzen Sie Buchstaben, Punktion und Bindestriche"
+msgstr "Nutzen Sie Buchstaben, Punkte und Bindestriche"
 
 #: validate.js.php:108
 msgid "Alphanumeric string with slashes"
@@ -4961,7 +5005,7 @@ msgstr "Nutzen Sie ausschließlich numerische Eingaben"
 
 #: validate.js.php:120 validate.js.php:124 validate.js.php:128
 msgid "Alphanumeric literal string with dashes"
-msgstr "Nutzen Sie Buchstaben, Nummern und Unterstriche"
+msgstr "Nutzen Sie Buchstaben, Nummern und Bindestriche"
 
 #: validate.js.php:137
 msgid "Invalid e-mail address"
@@ -4969,7 +5013,7 @@ msgstr "Ungültige E-Mail Adresse"
 
 #: validate.js.php:143
 msgid "Invalid URL name"
-msgstr "Ungültiger URL-Name"
+msgstr "Ungültiger Pfad (URL-Name)"
 
 #: validate.js.php:147
 msgid "Five characters or more, no whitespace"
@@ -4991,7 +5035,7 @@ msgstr "Bitte tragen Sie eine gültige Webseiten URL ein"
 
 #: blogitem.class.php:237
 msgid "Please enter a comment"
-msgstr "Bitte tragen Sie eine Kommentar ein"
+msgstr "Bitte tragen Sie einen Kommentar ein"
 
 #: blogitem.class.php:241 generatorformindex.class.php:292
 #: simpleformindex.class.php:222 simpleformindex.class.php:413
@@ -5001,7 +5045,7 @@ msgstr "Captcha Text"
 #: blogitem.class.php:245 generatorformindex.class.php:296
 #: simpleformindex.class.php:226 simpleformindex.class.php:417
 msgid "Please enter the captcha text"
-msgstr "Bitte tragen Sie eine Captcha-Text ein"
+msgstr "Bitte tragen Sie den Captcha-Text ein"
 
 #: blogitem.class.php:246 generatorformindex.class.php:297
 #: simpleformindex.class.php:227 simpleformindex.class.php:418
@@ -5039,7 +5083,7 @@ msgstr "Bitte wählen Sie ein Anrede aus"
 
 #: simpleformindex.class.php:349
 msgid "Salutation is out of range"
-msgstr "Die gewählte Anrede ist außerhalb des gültigen Wertebereiches"
+msgstr "Die gewählte Anrede liegt außerhalb des gültigen Wertebereiches"
 
 #: simpleformindex.class.php:352
 msgid "First name"
@@ -5055,7 +5099,7 @@ msgstr "Nachname"
 
 #: simpleformindex.class.php:363
 msgid "Please enter your last name"
-msgstr "Bitte tragen Sie Ihren Nachname ein"
+msgstr "Bitte tragen Sie Ihren Nachnamen ein"
 
 #: simpleformindex.class.php:366
 msgid "Address"
@@ -5067,7 +5111,7 @@ msgstr "PLZ/Stadt"
 
 #: simpleformindex.class.php:378
 msgid "Please call me"
-msgstr "Rückruf"
+msgstr "Rückruf erbeten"
 
 #: simpleformindex.class.php:382
 msgid "The field call_back accepts only 0 or 1"
@@ -5191,7 +5235,7 @@ msgstr "Vor fünf Jahren"
 
 #: configuration.php:78
 msgid "Please enter a project name"
-msgstr "Bitte geben Sie eine Projektnamen an"
+msgstr "Bitte geben Sie einen Projektnamen an"
 
 #: configuration.php:81
 msgid "Locale"
@@ -5207,8 +5251,7 @@ msgstr "Bitte tragen Sie eine gültige Spracheinstellung ein"
 
 #: configuration.php:91
 msgid "Entered locale is not supported by this system"
-msgstr ""
-"Ihre eingetragene Spracheinstellungen wird vom System nicht unterstützt"
+msgstr "Ihre eingetragene Spracheinstellung wird vom System nicht unterstützt"
 
 #: configuration.php:94 database.php:138 license.php:73
 msgid "Go to next step"
@@ -5252,11 +5295,12 @@ msgstr "Bitte wählen Sie eine Verbindungsart"
 
 #: database.php:102
 msgid "Selected connection method is out of range"
-msgstr "Die gewählte Verbindungsart ist außerhalb des gültigen Wertebereiches"
+msgstr ""
+"Die gewählte Verbindungsart liegt außerhalb des gültigen Wertebereiches"
 
 #: database.php:111
 msgid "Please enter a host to use for the connection"
-msgstr "Bitte tragen Sie eine Host ein"
+msgstr "Bitte tragen Sie einen Host ein"
 
 #: database.php:120
 msgid "Please enter a port to use for the connection"
@@ -5309,7 +5353,7 @@ msgstr "Fehler sind möglich"
 
 #: requirements.php:138
 msgid "May cause troubles, use the bundled one"
-msgstr "Fehler sind möglich, bentutzen Sie die Bereitgestellten"
+msgstr "Fehler sind möglich, benutzen Sie die Bereitgestellten"
 
 #: requirements.php:151
 msgid "Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher"
@@ -5336,9 +5380,9 @@ msgid ""
 "good choice."
 msgstr ""
 "Mit dieser Einstellung definieren Sie die Sprache, in der Inhalte, die "
-"Sprachabhängig sind, angezeigt werden. Nutzen Seie \"locale -a\" auf Ihrer "
+"sprachabhängig sind, angezeigt werden. Nutzen Sie \"locale -a\" auf Ihrer "
 "Shell um eine Listung der auf Ihrem System verfügbaren Einstellungen "
-"angzeigt zu bekommen. Wenn Sie keinen Shell-Zugang haben, fragen Sie bitte "
+"angezeigt zu bekommen. Wenn Sie keinen Shell-Zugang haben, fragen Sie bitte "
 "Ihren Provider welche Einstellung Sie hier vornehmen müssen. Wenn Sie "
 "Windows nutzen oder auch mit der oben stehenden Erklärung eher wenig "
 "anfangen können, ist \"C\" ein gute Wahl."
@@ -5348,7 +5392,7 @@ msgid ""
 "Enter the name of your default project. The actual domain name like "
 "mywebsite.com is a good choice."
 msgstr ""
-"Tragen Sie bitte einen Namen für ihr Standardprojekt ein. Beispielweise Ihr "
+"Tragen Sie bitte einen Namen für ihr Standardprojekt ein. Beispielsweise Ihr "
 "Domain-Name (meinewebseite.de)."
 
 #: database_database_connection_method.html:1
@@ -5369,8 +5413,8 @@ msgid ""
 "either a name like localhost or an IP adress like 127.0.0.1."
 msgstr ""
 "Wenn Ihre Verbindungsart zum Datenbankserver TCP/IP ist, tragen Sie hier "
-"bitte Ihren Host ein. Dies ist in der Regel ein Name (localhost) oder die "
-"eine IP Adresse (127.0.0.1)."
+"bitte Ihren Host ein. Dies ist in der Regel ein Name (localhost) oder eine "
+"IP Adresse (127.0.0.1)."
 
 #: database_database_password.html:1
 msgid "The password of your database."
@@ -5401,12 +5445,12 @@ msgstr ""
 #: license_license_confirm_license.html:1
 msgid "With checking the box you acknowledge the above printed OSL."
 msgstr ""
-"Mit dem Anklicken des Feldes bestätigen Sie die abgebildete OSL zur Kenntnis "
-"genommen zu haben."
+"Mit dem Anklicken des Feldes bestätigen Sie, die abgebildete OSL zur "
+"Kenntnis genommen zu haben."
 
 #: validate.js.php:64
 msgid "Literal string with dashes"
-msgstr "Wörter und Querstriche erlaubt"
+msgstr "Wörter und Bindestriche erlaubt"
 
 #: validate.js.php:72
 msgid "Unix path"
