@@ -80,12 +80,12 @@ function _buildXMLHTTPRequest ()
 try {
 	<contents>
 } catch (e) {
-	_applyError(e);
+	_applyError(e, additionalStr);
 }</code></pre>
  * 
  * @param {object} exception error obj presented by catch statement
  */
-function _applyError (exception)
+function _applyError (exception, additionalStr)
 {
 	var errStr;
 	
@@ -94,16 +94,24 @@ function _applyError (exception)
 			return false;
 		break;
 		case 1 :
-			errStr = exception + '\r\n' 
+			if (additionalStr) {
+				errStr = additionalStr;
+			} else {
+				errStr = exception + '\r\n' 
 					+ exception.fileName + '\r\n' 
 					+ exception.lineNumber;
+			}
 		break;
 		case 2 :
-			errStr = e_msg_str_prefix + '\r\n\r\n' 
+			if (additionalStr) {
+				errStr = additionalStr;
+			} else {
+				errStr = e_msg_str_prefix + '\r\n\r\n' 
 					+ exception + '\r\n' 
 					+ exception.fileName + '\r\n' 
 					+ exception.lineNumber + '\r\n\r\n' 
 					+ e_msg_str_suffix;
+			}
 		break;
 		default :
 			errStr = exception;
@@ -801,7 +809,7 @@ function Help_processHelp (ttarget)
 			}
 		}
 	} catch (e) {
-		_applyError(e);
+		_applyError(e, alertOnMissingHelpFiles);
 	}
 }
 

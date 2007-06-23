@@ -1433,6 +1433,8 @@ function Helper_getAttrParentNodeNextNode (attr, elem, level)
 		a = a.parentNode;
 	}	
 	a = a.nextSibling.nextSibling;
+	
+	//alert (a.innerHTML);
 
 	if (this.browser == 'ie')
 		return a.attributes[attr].value;
@@ -1558,12 +1560,21 @@ function Helper_convertFieldValuesToValidUrl (elem, attr)
 		this.elem = elem;
 		this.attr = attr;
 		
+		/**
+		* Helper func fails when the appropriate field help file has been activated.
+		* Seems the DOM is actually not fully cleaned up after hide the help again.
+		*/		
 		// get next node (e.g. label) attribute
-		var el = Helper.getAttrParentNodeNextNode (this.attr, this.elem, 1);
+		//var el = Helper.getAttrParentNodeNextNode (this.attr, this.elem, 1);		
 		
-		// fill related form field with tranformed results
+		/**
+		* Since we plan to refactor the whole thing we do not pay much attention 
+		* on this dumb error case. So we somewhat hardwire the event destination.
+		*/
+		var el = $(this.elem.id + '_url');
+		
+		// fill related form field with transformed results
 		$(el).value = Helper.URLify(this.elem.value);
-
 	} catch (e) {
 		_applyError(e);
 	}	
