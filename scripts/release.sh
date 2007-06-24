@@ -38,7 +38,7 @@ cd wcom-trunk
 # move database schema to setup directory
 cp database/wcom.sql welcompose/setup/wcom.sql
 if [ -d welcompose/update/tasks ] ; then
-	LAST_TASK=`find welcompose/update/tasks -name "*.php" | sort --reverse | head -n 1 | perl -p -e 's/(.*)([0-9]{4})-([0-9]{3})\.php$/\2-\3/g'`
+	LAST_TASK=`find welcompose/update/tasks -name "*.php" | sort -r | head -n 1 | perl -p -e 's/(.*)([0-9]{4})-([0-9]{3})\.php$/\2-\3/g'`
 else
 	LAST_TASK=""
 fi
