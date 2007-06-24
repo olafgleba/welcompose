@@ -577,7 +577,7 @@ public function getBusinessMailTemplateName ()
  */
 public function getRedirectLocationSelf ()
 {
-	return "Location: ".$this->getLocationSelf();
+	return "Location: ".$this->getLocationSelf(true);
 }
 
 /**

@@ -437,7 +437,7 @@ public function getMailTemplateName ()
  */
 public function getRedirectLocationSelf ()
 {
-	return "Location: ".$this->getLocationSelf();
+	return "Location: ".$this->getLocationSelf(true);
 }
 
 /**

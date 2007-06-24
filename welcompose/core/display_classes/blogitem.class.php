@@ -417,7 +417,7 @@ public function getMainTemplateName ()
  */
 public function getRedirectLocationSelf ()
 {
-	return "Location: ".$this->getLocationSelf();
+	return "Location: ".$this->getLocationSelf(true);
 }
 
 /**
