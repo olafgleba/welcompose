@@ -62,6 +62,7 @@ blog_atom_10_start = "{$configuration.root_www}/index.php?project_name=<project_
 blog_atom_10_start_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Atom10&tag=<tag_word>"
 blog_rss_20 = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
 blog_rss_20_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&tag=<tag_word>"
+blog_rss_20_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Rss20"
 blog_rss_20_start_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Rss20&tag=<tag_word>"
 blog_comments_atom_10 = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsAtom10"
 blog_comments_atom_10_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=CommentsAtom10"
