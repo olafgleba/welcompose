@@ -161,7 +161,7 @@ try {
 	
 	foreach (explode(";", $contents) as $_statement) {
 		$_statement = trim($_statement);
-		if (preg_match("=(^CREATE TABLE|^DROP TABLE|^SET FOREIGN_KEY_CHECKS)=", $_statement)) {
+		if (preg_match("=(^CREATE TABLE|^DROP TABLE|^SET FOREIGN_KEY_CHECKS|^INSERT)=", $_statement)) {
 			$BASE->db->execute($_statement);
 		}
 	}
