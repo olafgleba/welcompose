@@ -713,6 +713,11 @@
 			<description/>
 			<editable>0</editable>
 		</template-type>
+		<template-type>
+			<name>system_login</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
 	</template-types>
 	<text-converters>
 		<text-converter>
