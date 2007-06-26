@@ -139,14 +139,14 @@ public function render ()
 	
 	// textfield for name
 	$FORM->addElement('text', 'email', gettext('E-mail address'), 
-		array('id' => 'user_login', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'user_login', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('email', 'trim');
 	$FORM->applyFilter('email', 'strip_tags');
 	$FORM->addRule('email', gettext('Please enter your e-mail address'), 'required');
 	
 	// password for secret
 	$FORM->addElement('password', 'secret', gettext('Password'), 
-		array('id' => 'user_secret', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'user_secret', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('secret', 'trim');
 	$FORM->applyFilter('secret', 'strip_tags');
 	$FORM->addRule('secret', gettext('Please enter your password'), 'required');
@@ -154,7 +154,7 @@ public function render ()
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Login'),
-		array('class' => 'submitbut100'));
+		array('class' => 'fsubmit'));
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page

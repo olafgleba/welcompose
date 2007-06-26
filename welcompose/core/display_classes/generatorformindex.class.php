@@ -189,7 +189,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'checkbox'
+						'class' => 'fcheckbox'
 					);
 					
 					$element = $FORM->addElement('checkbox', $_field['name'], $_field['label'], null, $attributes);
@@ -202,7 +202,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'select'
+						'class' => 'fselect'
 					);
 					
 					// prepare values
@@ -222,7 +222,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'submit'
+						'class' => 'fsubmit'
 					);
 					
 					// create element
@@ -233,7 +233,7 @@ public function render ()
 					$attributes = array(
 						'id' => $field_id,
 						'maxlength' => 255,
-						'class' => 'textfield'
+						'class' => 'ftextfield'
 					);
 					
 					// create element
@@ -243,7 +243,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'textarea',
+						'class' => 'ftextarea',
 						'cols' => 30,
 						'rows' => 6
 					);
@@ -259,7 +259,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'reset'
+						'class' => 'freset'
 					);
 					
 					// create element
@@ -290,7 +290,7 @@ public function render ()
 	// textfield for captcha if the captcha is enabled
 	if ($this->_generator_form['use_captcha'] != 'no') {
 		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'generator_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'generator_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('_qf_captcha', 'trim');
 		$FORM->applyFilter('_qf_captcha', 'strip_tags');
 		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');

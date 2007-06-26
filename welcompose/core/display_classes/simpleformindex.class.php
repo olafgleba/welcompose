@@ -189,14 +189,14 @@ protected function renderPersonalForm ()
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'),
-		array('id' => 'simple_form_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_name', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
 	// textfield for email
 	$FORM->addElement('text', 'email', gettext('E-mail address'),
-		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('email', 'trim');
 	$FORM->applyFilter('email', 'strip_tags');
 	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
@@ -204,7 +204,7 @@ protected function renderPersonalForm ()
 	
 	// textfield for homepage
 	$FORM->addElement('text', 'homepage', gettext('Homepage'),
-		array('id' => 'simple_form_homepage', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_homepage', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('homepage', 'trim');
 	$FORM->applyFilter('homepage', 'strip_tags');
 	$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
@@ -212,7 +212,7 @@ protected function renderPersonalForm ()
 	
 	// textarea for message
 	$FORM->addElement('textarea', 'message', gettext('Message'),
-		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'w300h200'));
+		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
 	$FORM->applyFilter('message', 'trim');
 	$FORM->applyFilter('message', 'strip_tags');
 	$FORM->addRule('message', gettext('Please enter a message'), 'required');
@@ -220,7 +220,7 @@ protected function renderPersonalForm ()
 	// textfield for captcha if the captcha is enabled
 	if ($this->_simple_form['use_captcha'] != 'no') {
 		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('_qf_captcha', 'trim');
 		$FORM->applyFilter('_qf_captcha', 'strip_tags');
 		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
@@ -230,7 +230,7 @@ protected function renderPersonalForm ()
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'submitbutton'));
+		array('class' => 'fsubmit'));
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page
@@ -342,7 +342,7 @@ protected function renderBusinessForm ()
 	
 	// select for salutation
 	$FORM->addElement('select', 'salutation', gettext('Salutation'), $salutations,
-		array('id' => 'simple_form_salutation'));
+		array('id' => 'simple_form_salutation', 'class' => 'fselect'));
 	$FORM->applyFilter('salutation', 'trim');
 	$FORM->applyFilter('salutation', 'strip_tags');
 	$FORM->addRule('salutation', gettext('Please select a salutation'), 'required');
@@ -350,33 +350,33 @@ protected function renderBusinessForm ()
 	
 	// textfield for first_name
 	$FORM->addElement('text', 'first_name', gettext('First name'),
-		array('id' => 'simple_form_first_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_first_name', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('first_name', 'trim');
 	$FORM->applyFilter('first_name', 'strip_tags');
 	$FORM->addRule('first_name', gettext('Please enter your first name'), 'required');
 	
 	// textfield for last_name
 	$FORM->addElement('text', 'last_name', gettext('Last name'),
-		array('id' => 'simple_form_last_name', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_last_name', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('last_name', 'trim');
 	$FORM->applyFilter('last_name', 'strip_tags');
 	$FORM->addRule('last_name', gettext('Please enter your last name'), 'required');
 	
 	// textfield for address
 	$FORM->addElement('text', 'address', gettext('Address'),
-		array('id' => 'simple_form_address', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_address', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('address', 'trim');
 	$FORM->applyFilter('address', 'strip_tags');
 	
 	// textfield for location
 	$FORM->addElement('text', 'location', gettext('ZIP/City'),
-		array('id' => 'simple_form_location', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_location', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('location', 'trim');
 	$FORM->applyFilter('location', 'strip_tags');
 	
 	// checkbox for call_back
 	$FORM->addElement('checkbox', 'call_back', gettext('Please call me'), null,
-		array('id' => 'simple_form_call_back', 'class' => 'checkb'));
+		array('id' => 'simple_form_call_back', 'class' => 'fcheckbox'));
 	$FORM->applyFilter('call_back', 'trim');
 	$FORM->applyFilter('call_back', 'strip_tags');
 	$FORM->addRule('call_back', gettext('The field call_back accepts only 0 or 1'),
@@ -384,7 +384,7 @@ protected function renderBusinessForm ()
 	
 	// textfield for phone
 	$FORM->addElement('text', 'phone', gettext('Phone'),
-		array('id' => 'simple_form_phone', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_phone', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('phone', 'trim');
 	$FORM->applyFilter('phone', 'strip_tags');
 	if ($FORM->exportValue('call_back') == 1) {
@@ -395,7 +395,7 @@ protected function renderBusinessForm ()
 	
 	// textfield for email
 	$FORM->addElement('text', 'email', gettext('E-mail address'),
-		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'));
 	$FORM->applyFilter('email', 'trim');
 	$FORM->applyFilter('email', 'strip_tags');
 	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
@@ -403,7 +403,7 @@ protected function renderBusinessForm ()
 	
 	// terxtarea for message
 	$FORM->addElement('textarea', 'message', gettext('Message'),
-		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'w300h200'));
+		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
 	$FORM->applyFilter('message', 'trim');
 	$FORM->applyFilter('message', 'strip_tags');
 	$FORM->addRule('message', gettext('Please enter a message'), 'required');
@@ -411,7 +411,7 @@ protected function renderBusinessForm ()
 	// textfield for captcha if the captcha is enabled
 	if ($this->_simple_form['use_captcha'] != 'no') {
 		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('_qf_captcha', 'trim');
 		$FORM->applyFilter('_qf_captcha', 'strip_tags');
 		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
@@ -421,7 +421,7 @@ protected function renderBusinessForm ()
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'submitbutton'));
+		array('class' => 'fsubmit'));
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page

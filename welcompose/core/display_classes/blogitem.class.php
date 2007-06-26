@@ -209,21 +209,21 @@ public function render ()
 		
 		// textfield for name
 		$FORM->addElement('text', 'name', gettext('Name'),
-			array('id' => 'comment_name', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'comment_name', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('name', 'trim');
 		$FORM->applyFilter('name', 'strip_tags');
 		$FORM->addRule('name', gettext('Please enter a name'), 'required');
 		
 		// textfield for email
 		$FORM->addElement('text', 'email', gettext('E-mail'),
-			array('id' => 'comment_email', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'comment_email', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('email', 'trim');
 		$FORM->applyFilter('email', 'strip_tags');
 		$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
 		
 		// textfield for homepage
 		$FORM->addElement('text', 'homepage', gettext('Homepage'),
-			array('id' => 'comment_homepage', 'maxlength' => 255, 'class' => 'w300'));
+			array('id' => 'comment_homepage', 'maxlength' => 255, 'class' => 'ftextfield'));
 		$FORM->applyFilter('homepage', 'trim');
 		$FORM->applyFilter('homepage', 'strip_tags');
 		$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
@@ -231,7 +231,7 @@ public function render ()
 		
 		// terxtarea for message
 		$FORM->addElement('textarea', 'comment', gettext('Comment'),
-			array('id' => 'comment_comment', 'cols' => 30, 'rows' => 6, 'class' => 'w300h200'));
+			array('id' => 'comment_comment', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
 		$FORM->applyFilter('comment', 'trim');
 		$FORM->applyFilter('comment', 'strip_tags');
 		$FORM->addRule('comment', gettext('Please enter a comment'), 'required');
@@ -239,7 +239,7 @@ public function render ()
 		// textfield for captcha if the captcha is enabled
 		if ($this->_settings['blog_comment_use_captcha'] != 'no') {
 			$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-				array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'w300'));
+				array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
 			$FORM->applyFilter('_qf_captcha', 'trim');
 			$FORM->applyFilter('_qf_captcha', 'strip_tags');
 			$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
@@ -249,7 +249,7 @@ public function render ()
 		
 		// submit button
 		$FORM->addElement('submit', 'submit', gettext('Send'),
-			array('class' => 'submitbutton'));
+			array('class' => 'fsubmit'));
 		
 		// set defaults
 		$FORM->setDefaults(array(
