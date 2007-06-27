@@ -287,11 +287,28 @@ api_key = "123456789123456789123456789"
 			<programlisting language="php"><![CDATA[
 index.php?project_name=default&page_name=produkte&action=Index
 ]]></programlisting>
-	
+			
+			<para>
+				Dieser URL sagt Welcompose mit dem Parameter
+				<varname>page_name</varname>, dass es die Seite
+				<userinput>produkte</userinput> aus dem Projekt
+				<userinput>default</userinput> anzeigen soll, was über den
+				Parameter <varname>project_name</varname> gesteuert wird.
+				Der Parameter <varname>action</varname> sagt schlussendlich,
+				welcher Teil der Seite <userinput>produkte</userinput> gezeigt
+				werden, in diesem Fall den <userinput>Index</userinput> 
+				respektive die eigentliche Seite. Bei einem Blog liesse sich mit
+				dem Wert <userinput>Rss20</userinput> für den Parameter
+				<varname>action</varname> beispielsweise der RSS-2.0-Feed
+				des Blogs anzeigen, während die anderen Teile des URLs
+				gleich bleiben.
+			</para>
+			
 			<para>
 				Diese Form von URLs ist weder besonders benutzer- noch
-				suchmaschinenfreundlich. Um dies zu ändern, muss an zwei Orten
-				Hand angelegt werden: Einmal am Webserver (<xref
+				suchmaschinenfreundlich. Doch dies lässt sich ändern. Um dies zu
+				ändern, muss an zwei Orten Hand angelegt werden: Einmal am
+				Webserver (<xref
 				linkend="extended_configuration.url_rewriting.configure.configure_webserver"/>)
 				und einmal in der Konfiguration von Welcompose (<xref
 				linkend="extended_configuration.url_rewriting.configure.configure_welcompose"/>).
@@ -312,21 +329,22 @@ index.php?project_name=default&page_name=produkte&action=Index
 			</para>
 
 			<programlisting language="php"><![CDATA[
-/default/produkte/index.php
+/default/produkte/index/
 ]]></programlisting>
 		
 			<para>
-				Das erste Verzeichnis steht für den URL-Parameter
-				<emphasis>project_name</emphasis>, das zweite Verzeichnis für
-				den URL-Parameter <emphasis>page_name</emphasis> und der
-				Dateiname index.php für den URL-Parameter
-				<emphasis>action</emphasis>. Jetzt weist man den
-				Webserver an, die Informationen aus dem URL zu extrahieren und
+				Das erste Verzeichnis (<userinput>default</userinput>) steht für
+				den URL-Parameter <varname>project_name</varname>, das zweite
+				Verzeichnis (<userinput>produkte</userinput>) für den
+				URL-Parameter <varname>page_name</varname> und das dritte
+				Verzeichnis (<userinput>index</userinput>) für den URL-Parameter
+				<varname>action</varname>. Doch dazu muss man den Webserver 
+				anweisen, die Informationen aus dem URL zu extrahieren und
 				den entsprechenden URL-Parametern zuzuweisen.
 			</para>
 	
 			<para>
-				Die meisten Webserver - ob Apache, Lighttpd oder Cherokee -
+				Die meisten Webserver &ndash; ob Apache, Lighttpd oder Cherokee &ndash;
 				stellen entsprechende Funktionalität bereit. Dabei wird in einer
 				Konfigurationsdatei definiert, welcher Teil des URL auf welchen
 				Parameter abgebildet. Verwendet werden dabei Reguläre Ausdrücke
@@ -409,7 +427,7 @@ http://ihre-domain.tld/index.php?project_name=default&page_name=produkte&action=
 				
 				<programlisting language="php"><![CDATA[
 /default/produkte/index.php
-]]>	</programlisting>			
+]]></programlisting>			
 	
 				<para>
 					um den URL in einer Ordnerstruktur abzubilden. Ersetzen
