@@ -354,7 +354,8 @@ level = PEAR_LOG_INFO
 					<para>
 						Bei der Standard-Konfiguration des Log Handlers ist das
 						Logging deaktiviert. Es wird aber empfohlen, das Logging
-						zu aktivieren. Wie dies geht, erfahren Sie im @@@.
+						zu aktivieren. Wie dies geht, erfahren Sie im
+						<xref linkend="extended_configuration.logging"/>.
 					</para>
 				</tip>
 				
