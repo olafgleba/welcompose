@@ -8,6 +8,60 @@
 		<para>Installation und initiale Konfiguration von Welcompose.</para>
 	</abstract>
 	
+	<sect1 id="install_instructions.download">
+		<title>Welcompose herunterladen</title>
+		
+		<para>
+			Welcompose steht momentan in drei verschiedenen Varianten zum 
+			Download bereit. Sie können anhand des Dateinamens unterschieden
+			werden.
+		</para>
+		
+		<variablelist>
+			<varlistentry>
+				<term>welcompose-*.* (bspw. welcompose-1.2.3.tar.gz)</term>
+				<listitem>
+					<para>
+						Enthält den Welcompose-Installer inklusive Setup, aber
+						ohne Updater. Dient zur automatischen Installation (siehe
+						<xref linkend="install_instructions.installation.package_installer"/>).
+						Ist sowohl als ZIP-Archiv (*.zip; MacOS X, Windows) als
+						auch als bzip2- respektive gzip-komprimierter Tarball
+						(*.tar.bz2, *.tar.gz; BSD, Linux, MacOS X) erhältlich. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>welcompose-*-src.* (bspw. welcompose-1.2.3-src.tar.gz)</term>
+				<listitem>
+					<para>
+						Enthält die Welcompose-Quellen inklusive Setup, aber
+						ohne Updater. Dient zur manuellen Installation (siehe
+						<xref linkend="install_instructions.installation.manual_installation"/>).
+						Ist sowohl als ZIP-Archiv (*.zip; MacOS X, Windows) als
+						auch als bzip2- respektive gzip-komprimierter Tarball
+						(*.tar.bz2, *.tar.gz; BSD, Linux, MacOS X) erhältlich. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>welcompose-*-full-src.* (bspw. welcompose-1.2.3-full-src.tar.gz)</term>
+				<listitem>
+					<para>
+						Enthält die Welcompose-Quellen inklusive Setup und
+						Updater. Dient zur manuellen Installation (siehe
+						<xref linkend="install_instructions.installation.manual_installation"/>)
+						und zur Aktualisierung (siehe
+						<xref linkend="update"/>).
+						Ist sowohl als ZIP-Archiv (*.zip; MacOS X, Windows) als
+						auch als bzip2- respektive gzip-komprimierter Tarball
+						(*.tar.bz2, *.tar.gz; BSD, Linux, MacOS X) erhältlich. 
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	 </sect1>
+	
 	<sect1 id="install_instructions.requirements">
 		<title>Voraussetzungen</title>
 		
