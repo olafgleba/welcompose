@@ -368,14 +368,14 @@ level = PEAR_LOG_INFO
 				
 				<programlisting language="ini"><![CDATA[
 [urls]
-simple_page_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_page_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Index"
-simple_form_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_form_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Index"
-generator_form_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-generator_form_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Index"
-blog_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-blog_index_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+simple_page_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_page_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+simple_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+generator_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+generator_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
+blog_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+blog_index_tag = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
 blog_index_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 blog_index_tag_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
 blog_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
