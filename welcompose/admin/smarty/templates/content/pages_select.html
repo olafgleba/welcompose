@@ -119,7 +119,7 @@
 <td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}&amp;reference={$_page.id|escape:"url"}" title="{i18n Add new page}"></a></td>
 <td><a class="edit" href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="Edit page contents"></a></td>
 {if count($navigations) > 1}<td><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="{i18n Move page to another navigation}"></a></td>{/if}
-<td><a class="delete" href="pages_delete.php?id={$_page.id|escape:"url"}" title="{i18n Delete page}"></a></td>
+<td><a class="delete confirmDelPage" href="pages_delete.php?id={$_page.id|escape:"url"}" title="{i18n Delete page}"></a></td>
 </tr>
 {/foreach}
 {else}

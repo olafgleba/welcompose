@@ -178,6 +178,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelPage' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelPageAction(this);
+			return false;
+		}
+	},
 	'.confirmDelTplType' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelTplTypeAction(this);

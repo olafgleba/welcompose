@@ -86,6 +86,7 @@ Helper.prototype.showResponseChangeBlogCommentStatus = Helper_showResponseChange
 Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
 Helper.prototype.validate = Helper_validate;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
+Helper.prototype.confirmDelPageAction = Helper_confirmDelPageAction;
 Helper.prototype.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
 Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
@@ -1308,6 +1309,25 @@ function Helper_confirmDelNavAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelNav);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Confirm page delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelPageAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelPage);
 
 		if (v == true) {
 			window.location.href = elem.href;
