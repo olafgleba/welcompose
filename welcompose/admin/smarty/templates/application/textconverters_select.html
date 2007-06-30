@@ -67,9 +67,9 @@
 {/if}
 <table summary="{i18n Available Text Converters}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
@@ -78,7 +78,7 @@
 </tr>
 {foreach from=$text_converters item=_text_converter}
 <tr>
-<td class="template"><span>{$_text_converter.name|escape:"htmlall"}</span></td>
+<td><span>{$_text_converter.name|escape:"htmlall"}</span></td>
 <td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

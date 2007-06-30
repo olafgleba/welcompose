@@ -55,9 +55,9 @@
 {if !empty($page_types)}
 <table summary="{i18n Available Page Types}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="465" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
@@ -67,7 +67,7 @@
 {foreach from=$page_types item=_page_type}
 <tr>
 {if $_page_type.editable}
-<td class="page"><span>{$_page_type.name|escape:"htmlall"}</span></td>
+<td class="page">{$_page_type.name|escape:"htmlall"}</td>
 <td><a class="edit" href="pagetypes_edit.php?id={$_page_type.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pagetypes_delete.php?id={$_page_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}

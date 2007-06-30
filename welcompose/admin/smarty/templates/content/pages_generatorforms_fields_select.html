@@ -87,16 +87,18 @@
 {if !empty($form_fields)}
 <table summary="{i18n Available Generator Form Fields}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="280" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="280" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="150" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="240" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Name} <span class="az"></span> <span class="za"></span></th>
-<th class="template_name">{i18n Label} <span class="az"></span> <span class="za"></span></th>
-<th class="template_name">{i18n Type} <span class="az"></span> <span class="za"></span></th>
+<th class="page">{i18n Name}</th>
+<th>{i18n Label}</th>
+<th>{i18n Type}</th>
+<th>{i18n Required}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
@@ -105,6 +107,7 @@
 <td>{$_field.name|escape:"htmlall"}</td>
 <td>{$_field.label|escape:"htmlall"}</td>
 <td>{$_field.type|escape:"htmlall"}</td>
+<td>{if $_field.required == 0}{i18n No}{else}Yes{/if}</td>
 <td><a class="edit" href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

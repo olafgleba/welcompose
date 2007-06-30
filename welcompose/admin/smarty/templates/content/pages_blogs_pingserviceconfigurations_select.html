@@ -87,24 +87,18 @@
 {if !empty($ping_service_configurations)}
 <table summary="{i18n Available Blog Postings}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="238" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="238" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="238" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Ping Service Name} <span class="az"></span> <span class="za"></span></th>
-<th class="template_name">{i18n Site Name} <span class="az"></span> <span class="za"></span></th>
-<th class="template_name">{i18n Site URL} <span class="az"></span> <span class="za"></span></th>
+<th class="page">{i18n Ping Service Name}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$ping_service_configurations item=_configuration}
 <tr>
 <td>{$_configuration.ping_service_name|escape:"htmlall"}</td>
-<td>{$_configuration.site_name|escape:"htmlall"}</td>
-<td>{$_configuration.site_url|escape:"htmlall"}</td>
 <td><a class="edit" href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

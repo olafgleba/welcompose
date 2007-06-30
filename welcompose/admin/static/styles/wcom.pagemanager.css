@@ -30,7 +30,7 @@ padding: 0 0 5px 0;
 vertical-align: top;
 }
 table td {
-padding: 4px 15px 4px 0;
+padding: 4px 20px 4px 0;
 border-bottom: 1px solid #efefef;
 }
 th, td {
@@ -47,6 +47,13 @@ background-color: #fff;
 }
 table tr:hover {
 background-color: #e9f5fe;
+}
+
+td.name {
+width: 180px;
+}
+td.description {
+width: 490px;
 }
 
 /* links */
