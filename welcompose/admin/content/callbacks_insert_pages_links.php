@@ -166,6 +166,9 @@ try {
 		// assign page id
 		$BASE->utility->smarty->assign('page_id', $page_id);
 		
+		// set header
+		header("Content-Type: text/html; charset=iso-8859-1");
+		
 		// display the page
 		$BASE->utility->smarty->display('content/callbacks_insert_pages_links_second.html', WCOM_TEMPLATE_KEY);
 		
@@ -195,6 +198,9 @@ try {
 		
 		// assign page id
 		$BASE->utility->smarty->assign('page_id', $page_id);
+		
+		// set header
+		header("Content-Type: text/html; charset=iso-8859-1");
 		
 		// display the page
 		$BASE->utility->smarty->display('content/callbacks_insert_pages_links_third.html', WCOM_TEMPLATE_KEY);
