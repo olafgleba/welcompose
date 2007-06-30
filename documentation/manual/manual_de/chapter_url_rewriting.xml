@@ -1,0 +1,952 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="url_rewriting">
+	<title>URL Rewriting</title>
+	
+	<sect1 id="url_rewriting.introduction">
+		<title>Einführung</title>
+	
+		<para>
+			Standardmässig verwendet Welcompose parameterisierte URLs, um die
+			Inhalte auszuwählen, die angezeigt werden sollen. Ein typischer
+			URL zum Aufruf einer Seite sieht beispielsweise so aus:
+		</para>
+
+		<programlisting><![CDATA[
+index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+		
+		<para>
+			Dieser URL sagt Welcompose mit dem Parameter
+			<varname>page_name</varname>, dass es die Seite
+			<userinput>produkte</userinput> aus dem Projekt
+			<userinput>default</userinput> anzeigen soll, was über den
+			Parameter <varname>project_name</varname> gesteuert wird.
+			Der Parameter <varname>action</varname> sagt schlussendlich,
+			welcher Teil der Seite <userinput>produkte</userinput> gezeigt
+			werden soll, in diesem Fall der <userinput>Index</userinput> 
+			respektive die eigentliche Seite. Bei einem Blog liesse sich mit
+			dem Wert <userinput>Rss20</userinput> für den Parameter
+			<varname>action</varname> beispielsweise der RSS-2.0-Feed
+			des Blogs anzeigen, während die anderen Teile des URLs
+			gleich bleiben.
+		</para>
+		
+		<para>
+			Diese Form von URLs ist weder besonders benutzer- noch
+			suchmaschinenfreundlich. Doch dies lässt sich ändern. Um dies zu
+			ändern, muss an zwei Orten Hand angelegt werden: Einmal am
+			Webserver (<xref
+			linkend="url_rewriting.configure.configure_webserver"/>)
+			und einmal in der Konfiguration von Welcompose (<xref
+			linkend="url_rewriting.configure.configure_welcompose"/>).
+			Dabei werden die parameterisierten URLs quasi auf virtuelle
+			Verzeichnisse (und Dateinamen) abgebildet, die gar nicht
+			existieren. 
+		</para>
+
+		<para>
+			Den URL
+		</para>
+
+		<programlisting><![CDATA[
+index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+
+		<para>
+			könnte man zum Beispiel so schreiben:
+		</para>
+
+		<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+	
+		<para>
+			Das erste Verzeichnis (<userinput>default</userinput>) steht für
+			den URL-Parameter <varname>project_name</varname>, das zweite
+			Verzeichnis (<userinput>produkte</userinput>) für den
+			URL-Parameter <varname>page_name</varname> und das dritte
+			Verzeichnis (<userinput>index</userinput>) für den URL-Parameter
+			<varname>action</varname>. Doch damit kann Welcompose nichts
+			mehr anfangen, da es diese URLs nicht zuordnen kann. Darum
+			muss man den Webserver anweisen, die Informationen aus den
+			URLs wieder zu extrahieren und den entsprechenden
+			URL-Parametern zuzuweisen, damit Welcompose die gewünschte
+			Seite anzeigen kann. Diesen Prozess nennt man URL Rewriting. 
+		</para>
+		
+		<para>
+			Da solche URLs im Gegensatz zu den parameterisierten auch für
+			Laien eine gewisse Aussagekraft haben, nennt man sie auch
+			<emphasis>sprechende URLs</emphasis>.
+		</para>
+	</sect1>
+
+	<sect1 id="url_rewriting.configure">
+		<title>URL Rewriting konfigurieren</title>
+		
+		<para>
+			Das URL Rewriting besteht grob gesagt aus zwei Schritten:
+		</para>
+		
+		<orderedlist>
+			<listitem>
+				<para>
+					Die Erzeugung von sprechenden anstatt
+					parameterisierter URLs seitens Welcompose.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Die Abbildung sprechender auf parameterisierte URLs
+					im Webserver.
+				</para>
+			</listitem>
+		</orderedlist>
+		
+		<para>
+			Um Welcompose zur Erzeugung von sprechenden anstatt
+			parameterisierter URLs zu bewegen, muss die zentrale
+			Konfigurationsdatei angepasst werden.
+		</para>
+		
+		<para>
+			Für die Abbildung sprechender auf parameterisierte URLs
+			stellen die meisten Webserver passende Funktionalität
+			bereit. Dabei wird in einer Konfigurationsdatei definiert,
+			welcher Teil der URL auf welchen Parameter abgebildet werden
+			soll. So ein Konfigurationssatz wird <emphasis>Rewrite
+			Map</emphasis> genannt.
+		</para>
+		
+		<para>
+			Wir führen nun sämtliche Schritte durch, die notwendig sind,
+			um das URL Rewriting für eine Simple Page zu konfigurieren.
+			Wir verwenden dabei das Beispiel von oben, bei dem der URL
+		</para>
+
+		<programlisting><![CDATA[
+index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+
+		<para>
+			in den URL
+		</para>
+
+		<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+
+		<para>
+			umgeschrieben (und wieder zurückverwandelt) wird.
+		</para>
+		
+		<para>
+			Um die Beispiele nachzuvollziehen, legen Sie in Welcompose eine
+			Seite mit dem Namen <userinput>Produkte</userinput> vom Typ
+			<userinput>WCOM_SIMPLE_PAGE</userinput> an. Achten Sie
+			bitte darauf, dass sie nicht als Index-Seite definiert wird,
+			da sonst die Beispiele nicht funktionieren. Als Projektname
+			wird <userinput>default</userinput> verwendet. Wollen Sie
+			einen anderen Projektnamen verwenden, müssen Sie die
+			Beispiele jeweils anpassen.
+		</para>
+		
+		<sect2 id="url_rewriting.configure.configure_welcompose">
+			<title>Welcompose für URL Rewriting konfigurieren</title>
+		
+			<para>
+				Damit Welcompose die richtigen URLs erzeugt, muss die
+				onfigurationsdatei <filename>sys.inc.php</filename> im
+				Ordner <filename>core/conf/</filename> bearbeitet werden.
+				Die Muster für die URL-Erzeugung sind im Abschnitt
+				<code>[urls]</code> abgelegt.
+			</para>
+			
+			<programlisting><![CDATA[
+simple_page_index = "/index.php?project_name=<project_name>&page_name=<page_name>&action=Index"
+]]></programlisting>
+			
+			<para>
+				So ein Muster besteht einerseits aus einem "Namen", der
+				links vom Gleichheitszeichen steht (in diesem Fall
+				<varname>simple_page_index</varname>) und von Welcompose
+				zur Identifizierung respektive Auswahl des URL-Musters
+				verwendet wird, und einem Wert, dem eigentlichen Muster.
+			</para>
+			
+			<para>
+				Das Muster besteht standardmässig aus dem parameterisierten
+				URL (den man mit oder ohne Domain angegeben kann), wobei
+				anstatt des Projekt- oder Seitennamens Platzhalter in 
+				eckigen Klammern (<code><![CDATA[<]]></code> und
+				<code><![CDATA[>]]></code>) stehen. Sie werden von
+				Welcompose jeweils durch den Projekt- respektive Seitennamen
+				ersetzt, was zum bekannten Resultat führt:
+			</para>
+			
+			<programlisting><![CDATA[
+/index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+			
+			<para>
+				Um nun das gewählte Pfadlayout
+			</para>
+			
+			<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+
+			<para>
+				zu erreichen, muss das Muster wie folgt angepasst werden:
+			</para>
+			
+			<programlisting><![CDATA[
+simple_page_index = "/<project_name>/<page_name>/index/"
+]]></programlisting>
+
+			<para>
+				Wie man sieht, wurde der gesamte alte URL entfernt und
+				nur die Platzhalter beibehalten, an deren Stelle
+				Welcompose den jeweiligen Projekt- respektive Seitennamen
+				setzt. Ebenfalls behalten haben wir den Parameter
+				<varname>action</varname>, der aber bereits vorher
+				mit dem Wert <userinput>index</userinput> hart codiert
+				war. Das Resultat sieht dann wie gewünscht aus:
+			</para>	
+
+			<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+			
+			<para>
+				Nun muss noch der Webserver auf die neuen URLs
+				vorbereitet werden (<xref
+				linkend="url_rewriting.configure.configure_webserver"/>).
+			</para>
+		</sect2>
+		
+		<sect2 id="url_rewriting.configure.configure_webserver">
+			<title>Webserver für URL Rewriting konfigurieren</title>
+		 	
+		 	<para>
+		 		Da Welcompose nach wie vor die parameterisierten URLs
+		 		erwartet (in <xref
+		 		linkend="url_rewriting.configure.configure_welcompose"/>
+		 		wurde nur die Ausgabe geändert), muss der Webserver
+		 		angewiesen werden, den URL 
+		 	</para>
+		 	
+			<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+		 	
+		 	<para>
+		 		wieder in die parameterisierte Version
+		 	</para>
+		 	
+		<programlisting><![CDATA[
+/index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+
+			<para>
+				umzubiegen. Dies geschieht, wie bereits in der Einführung
+				erwähnt, mittels Regulären Ausdrücken, mit denen
+				Informationen aus den URLs extrahiert und wieder
+				neu zusammengesetzt werden.
+			</para>
+		 	
+		 	<note>
+			 	<para>
+			 		Die Beispiele wurden speziell auf Apache 2
+			 		zugeschnitten und orientieren sich an der
+			 		PCRE-Syntax, müssen gegebenenfalls also für
+			 		Apache 1.3 (ERE-Syntax) angepasst werden. Die
+			 		Regulären Ausdrücke können für die meisten
+			 		anderen Webserver übernommen werden, wobei
+			 		gegebenenfalls die Notation der Backreferences
+			 		geändert werden muss. Konsultieren Sie zu
+			 		diesem Zweck die Dokumentation des jeweiligen
+			 		Webservers. Haben Sie Probleme bei der
+			 		Umsetzung der Beispiele, kontaktieren Sie bitte
+			 		den Support.
+			 	</para>
+		 	</note>
+		 	
+		 	<para>
+		 		In Apache wird das URL Rewriting vom Apache-Modul
+		 		mod_rewrite
+		 		<footnote>
+		 			<para>
+		 				<ulink
+		 					url="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html" />
+		 			</para>
+		 		</footnote>
+		 		bereitgestellt. Konfiguriert werden kann das URL Rewriting 
+		 		in der Server-Konfigurationsdatei
+		 		<filename>httpd.conf</filename> oder im jeweiligen
+		 		Installationsordner von Welcompose in einer Datei namens
+		 		<filename>.htaccess</filename>. Für die weiteren Beispiele
+		 		gehen wir von der Nutzung einer
+		 		<filename>.htaccess</filename>-Datei aus, da dies meist
+		 		die einzige Möglichkeit bei Shared Hosting darstellt.
+		 	</para>
+			
+		 	<note>
+		 		<para>
+		 			Das Apache-Modul mod_rewrite ist nicht auf jedem
+		 			Webserver vorhanden. Wenn Sie nicht sicher sind, ob
+		 			es aktiviert ist, wenden Sie sich bitte an den
+		 			Provider-Support.
+		 		</para>
+		 	</note>
+			
+			<para>
+				Um das URL Rewriting zu aktivieren, legen Sie eine
+				<filename>.htaccess</filename>-Datei an, sofern Sie das
+				noch nicht getan haben, und öffnen Sie in einem
+				Texteditor. Weisen Sie Apache nun mit folgendem Befehl an,
+				mod_rewrite zu aktivieren:
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteEngine on
+]]></programlisting>
+			
+			<para>
+				Nun schreiben wir die eigentliche Anweisung zur Umformung
+				der URL, so dass sie der in der Konfigurationsdatei
+				<filename>sys.inc.php</filename> definierten Struktur
+				entspricht.
+			</para>
+	 	
+		 	<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)
+RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+
+			<para>
+				Ihr kompletter Eintrag sollte jetzt so aussehen:
+			</para>
+			
+		 	<programlisting><![CDATA[
+RewriteEngine on
+
+RewriteCond     %{REQUEST_URI}  ^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)
+RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+			
+			<para>
+				Speichern Sie die Datei <filename>.htaccess</filename>
+				und legen Sie im Verzeichnis von Welcompose ab,
+				sofern Sie dies noch nicht getan haben. Wenn Sie nun
+				die Adresse
+			</para>
+			
+			<programlisting><![CDATA[
+/default/produkte/index/
+]]></programlisting>
+			
+			<para>
+				in den Browser eingeben, sollte dieselbe Seite erscheinen,
+				wie wenn Sie den parameterisierten URL
+			</para>
+			
+			<programlisting><![CDATA[
+/index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+			
+			<para>
+				aufgerufen hätten. Dies funktioniert, da der Webserver
+				intern (und damit unsichtbar für Sie und alle anderen
+				Besucher), die URLs umschreibt und damit die Änderungen
+				aus <xref
+				linkend="url_rewriting.configure.configure_welcompose"/>
+				quasi wieder rückgängig macht.
+			</para>
+			
+			<tip>
+				<para>
+					Was es mit den Direktiven <code>RewriteCond</code>
+					und <code>RewriteRule</code> auf sich hat,
+					erklärt <xref linkend="url_rewriting.in_depth"/>.
+				</para>
+			</tip>
+			
+			<para>
+				Bis jetzt wurde erst ein URL konfiguriert. Um die weiteren
+				URLs zu konfigurieren, wiederholen Sie einfach alle
+				Schritte für jedes weitere URL-Muster. Komplette Beispiele
+				hält <xref linkend="url_rewriting.samples"/> bereit.
+			</para>
+			
+		</sect2>
+	</sect1>
+	
+	<sect1 id="url_rewriting.in_depth">
+		<title>URL-Rewriting im Detail</title>
+		
+		<sect2 id="url_rewriting.in_depth.url_patterns">
+			<title>URL-Muster</title>
+			
+			<para>
+				Die URL-Muster, die Welcompose verwendet, um interne URLs
+				zu erzeugen, werden in der zentralen Konfigurationsdatei
+				<filename>sys.inc.php</filename> im Ordner
+				<filename>core/conf</filename> hinterlegt, genauer gesagt
+				im Abschnitt <code>[urls]</code>. Sie bestehen aus zwei
+				Teilen: Einem Namen, der sich links vom Gleichheitszeichen
+				befindet, und einem Wert, der sich rechts vom
+				Gleichheitszeichen befindet &ndash; dem eigentlichen Muster.
+			</para>
+			
+			<sect3 id="url_rewriting.in_depth.url_patterns.naming">
+				<title>Benennung der URL-Muster</title>
+				
+				<para>
+					Welcompose umfasst zur Zeit mehrere Dutzend URL-Muster,
+					die alle für andere Seiten respektive Ansichten
+					verwendet werden. Wofür sie eingesetzt werden, lässt sich
+					anhand ihres Namens ablesen: 
+				</para>
+				
+				<programlisting><![CDATA[
+simple_page_index
+]]></programlisting>
+				
+				<para>
+					Der Name dieses Musters setzt sich aus zwei
+					Bestandteilen zusammen: Dem Namen des Seitentyps
+					(Simple Page) und der Action (Index), die bestimmt,
+					welche Ansicht der Seite gezeigt werden soll. Hängt man
+					beide Bestandteile zusammen, verwendet nur Kleinbuchstaben
+					und ersetzt jeden Leerschlag mit einem Unterstrich (_), so
+					erhält man den Namen des Musters.
+				</para>
+				
+				<para>
+					Nach diesem Vorbild sind auch die meisten anderen Namen
+					aufgebaut:
+				</para>
+				
+				<programlisting><![CDATA[
+blog_item
+]]></programlisting>
+				
+				<para>
+					Dieser Muster-Name setzt sich beispielsweise aus dem Namen
+					des Seitentyps <emphasis>Blog</emphasis> und der Action
+					<emphasis>Item</emphasis> (für den einzelnen Blog-Beitrag)
+					zusammen.
+				</para>
+				
+				<para>
+					Nun gibt es Muster-Namen, die von dieser Regel abweichen
+					respektive sie erweitern und um Anhängsel wie
+					<code>start</code>, <code>pager</code> oder
+					<code>tag</code> ergänzt werden, obwohl sie keine
+					explizit definierten Actions respektive Ansichten sind. 
+				</para>
+				
+				<para>
+					Dies liegt daran, dass einige Ansichten doppelt
+					verwendet werden. Ein Beispiel: Es macht in der Regel
+					für die Ansicht keinen Unterschied, ob alle Blog Postings
+					oder diejenigen mit einem bestimmten Tag angezeigt werden.
+					Für beide lässt sich die Ansicht für Blog Postings
+					verwenden. Allerdings benötigen sie verschiedene URLs
+					&ndash; einmal mit Tag und einmal ohne. Deshalb
+					existieren teilweise verschiedene URL-Muster für
+					ein und dieselbe Action respektive Ansicht einer Seite.
+					Welches URL-Muster gewählt werden muss, entscheidet
+					Welcompose im Beispiel der Tags daran, ob bei der
+					URL-Erzeugung ein Tag übergeben wird oder nicht.
+				</para>
+				
+				<variablelist>
+					<title>Liste der impliziten Actions (Ansichten)</title>
+					<varlistentry>
+						<term>pager</term>
+						<listitem>
+							<para>
+								Definiert URLs für mehrseitige Ansichten,
+								ausgenommen Seite 1. Beispielsweise
+								die Seiten 2 bis 70 (von total 70) mit
+								Blog Postings.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>start</term>
+						<listitem>
+							<para>
+								Bestimmt den URL, der für einen Seitentyp
+								verwendet werden soll, wenn die Seite als
+								Index-Seite definiert wurde. Da die
+								Index-Seite von Welcompose automatisch
+								ausgewählt wird, braucht man keinen
+								Seitennamen dem URL mitzugeben, wodurch
+								er kürzer wird.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>tag</term>
+						<listitem>
+							<para>
+								Wenn Blog Postings mit einem bestimmten
+								Tag angezeigt werden sollen, werden
+								diese URLs verwendet.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Die impliziten Actions wie pager, start oder tag
+					werden an einigen Stellen auch kombiniert, was
+					beispielsweise nötig ist, wenn ein Blog als Startseite
+					verwendet wird. Die Bedeutung der impliziten Actions
+					bleibt dabei gleich.
+				</para>
+			</sect3>
+			
+			<sect3 id="url_rewriting.in_depth.url_patterns.url_patterns_layout">
+				<title>Aufbau der URL-Muster</title>
+				
+				<para>
+					Die Werte der URL-Muster stellen die eigentlichen URLs
+					dar. Die parameterisierten URLs sind alle identisch
+					aufgebaut: 
+				</para>
+				
+				<programlisting><![CDATA[
+/index.php?project_name=default&page_name=produkte&action=Index
+]]></programlisting>
+				
+				<itemizedlist>
+					<listitem>
+						<para>
+							Sie zeigen alle auf die Datei
+							<filename>index.php</filename> im
+							Installationsverzeichnis von Welcompose.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Sie beinhalten alle mindestens die
+							Parameter <varname>project_name</varname> für
+							den Projektnamen, den Parameter
+							<varname>page_name</varname> für den Seitennamen
+							und den Parameter <varname>action</varname> für
+							die Ansicht, die gezeigt werden soll. Dazu
+							kommen je nach Seitentyp (beispielsweise Blogs)
+							eine beliebige Anzahl weiterer Parameter.
+						</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Es gibt aber ein paar Ausnahmen:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>
+							Der Parameter <varname>project_name</varname>
+							kann beim Betrieb mit nur einem Projekt
+							weggelassen werden. Es wird aber empfohlen, ihn
+							zu verwenden (spart einige Datenbank-Abfragen).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Wird der Parameter <varname>action</varname> nicht
+							explizit gesetzt, wird er implizit auf
+							<userinput>Index</userinput> gesetzt. 
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Wird der Parameter <varname>page_name</varname>
+							nicht explizit gesetzt, geht Welcompose davon aus,
+							dass die Startseite respektive Index-Seite
+							angefordert wird.
+						</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Diese Ausnahmen ermöglichen es, dass die Startseite komplett
+					ohne Parameter aufgerufen werden kann.
+				</para>
+				
+				<para>
+					Die jeweils aktuellen Projekt- und Seitennamen werden
+					wie alle anderen Variablen über Platzhalter in die URLs
+					eingesetzt. Die Platzhalter bestehen aus Variablennamen, 
+					die von eckigen Klammern eingerahmt werden
+					(<code><![CDATA[<]]></code> und 
+					<code><![CDATA[>]]></code>). Beispiel:
+				</para>
+				
+				<programlisting><![CDATA[
+<project_name>
+]]></programlisting>
+				
+				<para>
+					Die Variablennamen für die Platzhalter entsprechen
+					jeweils den Namen der URL-Parameter, für die sie stehen.
+				</para>
+				
+				<para>
+					Die Platzhalter können frei in den URLs platziert werden,
+					sofern sie sich später mit Rewrite Rules wieder
+					"zurückbiegen" lassen. Bei den parameterisierten URLs
+					spielt ihre Reihenfolge ohnehin keine Rolle. 
+				</para>
+				
+				<para>
+					Es können aber nicht alle Platzhalter in allen URLs
+					verwendet werden. Ein URL für eine Simple Page kann
+					beispielsweise nichts mit einer ID für ein Blog Posting
+					anfangen. Platzhalter, die Welcompose nicht zuordnen
+					kann, werden ignoriert.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="url_rewriting.in_depth.url_patterns.list_of_url_patterns">
+				<title>Liste der URL-Muster</title>
+				
+				<para>
+					Die komplette Liste der URL-Muster und der jeweils
+					zugehörigen Platzhalter finden Sie im @@@.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="url_rewriting.in_depth.rewrite_rules">
+			<title>Rewrite Rules</title>
+			
+			<note>
+				<para>
+					Die Rewrite Rules basieren auf Regulären Ausdrücken.
+					Was diese tun und wie diese funktionieren, erklärt
+					Wikipedia<footnote>
+					<para>
+						<ulink type="external" url="http://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck"/>
+					</para>
+					</footnote>. Wer selber den Umgang mit Regulären Ausdrücken
+					erlernen will, kann sich am Tutorial von Gerd Ewald<footnote>
+					<para>
+						<ulink type="external" url="http://www.regenechsen.de/phpwcms/index.php?regex_allg"/>
+					</para>
+					</footnote> versuchen oder beispielsweise das Buch
+					"Reguläre Ausdrücke" von Wolfgang Wiedl kaufen (Galileo
+					Computing, ISBN 978-3-89842-626-8).
+				</para>
+				
+				<para>
+					Wer die Erläuterungen in diesem Kapitel nachvollziehen
+					möchte, sollte sich vorab in das Thema einlesen.
+				</para>
+			</note>
+			
+			<para>
+				Rewrite Rules kann man alleine bei Apache auf mehrere
+				Arten schreiben. Wir verwenden jeweils die Regeln
+				zusammen mit einer oder mehreren Bedingungen, mit
+				denen wir den Wirkungsbereich der Regeln eingrenzen
+				können. Zudem glauben wir, dass die Rewrite Rules
+				auf diese Weise besser lesbar sind.
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)
+RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+			
+			<para>
+				Eine Regel für einen URL besteht daher immer aus zwei Zeilen:
+				Der Bedingung (<code>RewriteCond</code>) und der eigentlichen
+				Regel (<code>RewriteRule</code>).
+			</para>
+			
+			<para>
+				Die <code>RewriteCond</code> erfüllt einen doppelten Zweck:
+				Sie stellt nicht nur sicher, dass die Regel nur angewendet
+				wird, wenn der aufgerufen URL
+				(<code><![CDATA[%{REQUEST_URI}]]></code>)
+				der jeweiligen Bedingung (in diesem Beispiel
+				<code><![CDATA[^/([0-9a-z-]+)/([a-z0-9-_\.]+)(/?)]]></code>)
+				entspricht, sondern "sammelt" auch gleich die Daten ein, die
+				in der Regel an die Stelle der Platzhalter gesetzt werden. 
+			</para>
+			
+			<para>
+				Die Daten, die für die Platzhalter vorgesehen sind, werden
+				in der Bedingung mittels einer öffnenden und schliessenden
+				Klammer markiert und von links nach rechts fortlaufend
+				nummeriert (beginnend mit 1). Auf diese lässt sich dann
+				mit Hilfe der Nummer zugreifen. Nimmt man Beispielsweise
+				den URL <code>/eins/zwei/</code>, der auf obige
+				Bedingung passt, wird der Text <code>eins</code> dem
+				Platzhalter 1 und der Text <code>zwei</code> dem Platzhalter
+				2 zugeordnet. <code>eins</code> und <code>zwei</code> können
+				somit mittels <code>%1</code> und <code>%2</code> in die
+				Rewrite Rule eingesetzt werden: 
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=Index
+]]></programlisting>
+			
+			<para>
+				Der resultierende URL würde dann so aussehen:
+			</para>
+			
+			<programlisting><![CDATA[
+index.php?project_name=eins&page_name=zwei&action=Index
+]]></programlisting>
+			
+			<para>
+				Wer mehr über die Möglichkeiten zum URL Rewriting erfahren
+				möchte, dem sei der URL Rewriting Guide<footnote>
+				<para>
+					<ulink type="external" url="http://httpd.apache.org/docs/2.2/en/misc/rewriteguide.html"/>
+				</para>
+				</footnote>
+				in der Apache-Dokumentation ans Herz gelegt. 
+			</para>
+			
+		</sect2>
+		
+	</sect1>
+	
+	<sect1 id="url_rewriting.samples">
+		<title>Konfigurationsbeispiele</title>
+		
+		<sect2 id="url_rewriting.samples.single_project">
+			<title>Betrieb mit einem Projekt</title>
+			
+			<para>
+				Für den Betrieb mit nur einem einzelnen Projekt ist es nicht
+				nötig, den Projektnamen in den URLs mitzuliefern. Darum kann
+				man ihn weglassen, was entsprechend kürzere URLs erlaubt. Das
+				erste Listing zeigt die dazu passende URL-Konfiguration für
+				Welcompose. Das zweite Listing hält die passenden Rewrite Rules
+				für Apache bereit.
+			</para>
+			
+			<para>
+				Um die URL-Konfiguration für Welcompose in Betrieb zu nehmen,
+				brauchen Sie diese nur in die Datei
+				<filename>core/conf/sys.inc.php</filename> anstelle der alten
+				Konfiguration zu kopieren und die Domain
+				<userinput>example.com</userinput> durch Ihren eigenen zu
+				ersetzen. Sollten Sie Welcompose in einem Unterverzeichnis
+				installiert haben, müssen Sie dieses auch noch einfügen.
+			</para>
+			
+			<programlisting><![CDATA[
+[urls]
+simple_page_index = "http://example.com/page/<page_name>/"
+simple_page_index_start = "http://example.com/"
+simple_form_index = "http://example.com/page/<page_name>/"
+simple_form_index_start = "http://example.com/"
+generator_form_index = "http://example.com/page/<page_name>/"
+generator_form_index_start = "http://example.com/"
+blog_index = "http://example.com/page/<page_name>/"
+blog_index_tag = "http://example.com/page/<page_name>/tag/<tag_word>/"
+blog_index_pager = "http://example.com/page/<page_name>/offset/<start>/"
+blog_index_tag_pager = "http://example.com/page/<page_name>/tag/<tag_word>/offset/<start>/"
+blog_index_start = "http://example.com/"
+blog_index_start_tag = "http://example.com/tag/<tag_word>/"
+blog_index_start_pager = "http://example.com/offset/<start>/"
+blog_index_start_tag_pager = "http://example.com/tag/<tag_word>/offset/<start>/"
+blog_atom_10 = "http://example.com/page/<page_name>/Atom10/"
+blog_atom_10_tag = "http://example.com/page/<page_name>/Atom10/tag/<tag_word>/"
+blog_atom_10_start = "http://example.com/Atom10/"
+blog_atom_10_start_tag = "http://example.com/Atom10/tag/<tag_word>/"
+blog_rss_20 = "http://example.com/page/<page_name>/Rss20/"
+blog_rss_20_tag = "http://example.com/page/<page_name>/Rss20/tag/<tag_word>/"
+blog_rss_20_start = "http://example.com/Rss20/"
+blog_rss_20_start_tag = "http://example.com/Rss20/tag/<tag_word>/"
+blog_comments_atom_10 = "http://example.com/page/<page_name>/CommentsAtom10/"
+blog_comments_atom_10_start = "http://example.com/CommentsAtom10/"
+blog_comments_rss_20 = "http://example.com/page/<page_name>/CommentsRss20/"
+blog_comments_rss_20_start = "http://example.com/CommentsRss20/"
+blog_item = "http://example.com/page/<page_name>/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_item_start = "http://example.com/<posting_year_added>/<posting_month_added>/<posting_day_added>/<posting_title>/"
+blog_archive_year = "http://example.com/page/<page_name>/<posting_year_added>/"
+blog_archive_year_pager = "http://example.com/page/<page_name>/<posting_year_added>/offset/<start>"
+blog_archive_year_start = "http://example.com/<posting_year_added>/"
+blog_archive_year_start_pager = "http://example.com/<posting_year_added>/offset/<start>/"
+blog_archive_month = "http://example.com/page/<page_name>/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_pager = "http://example.com/page/<page_name>/<posting_year_added>/<posting_month_added>/offset/<start>/"
+blog_archive_month_start = "http://example.com/<posting_year_added>/<posting_month_added>/"
+blog_archive_month_start_pager = "http://example.com/<posting_year_added>/<posting_month_added>/offset/<start>/"
+global_template_url = "http://example.com/gtpls/<global_file_name>"
+global_template_url_start = "http://example.com/gtpls/<global_file_name>"
+]]></programlisting>
+			
+			<para>
+				Die nachfolgenden Rewrite Rules müssen in eine
+				<filename>.htaccess</filename>-Datei im
+				Welcompose-Installationsverzeichnis kopiert werden. Löschen
+				Sie vorab alle anderen vorhandenen Rewrite Rules, um
+				Wechselwirkungen zu vermeiden.
+			</para>
+			
+			<programlisting><![CDATA[
+## Usage Howto
+##
+## - Create .htaccess file in root of welcompose installation.
+## - Use Search & Replace of your editor to replace the-url-name-of-the-project
+##   with the url name of your project.
+## - If you installed welcompose to a subdirectory of your domain, prefix all paths
+##   with the directory name.
+## - If you don't like the path layout /page/<page_name>/, use Search & Replace of
+##   your editor and replace it with something different. Rules: Avoid numbers
+##   (will cause naming clash with blogs as root node), avoid names of existing
+##   directories in the install dir (like admin, files and so on) and avoid the
+##   reserved words offset, gtpls and all action names of welcompose like Rss20
+##   Atom10, Index, ArchiveYear (all case insensitive).
+
+RewriteEngine On
+
+RewriteCond     %{REQUEST_URI}  ^/gtpls/([a-z0-9\,\_\.\s\-]+)$
+RewriteRule     ^               /global_template.php?project_name=the-url-name-of-the-project&name=%1
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Index&page_name=%1
+
+# blog in root
+RewriteCond     %{REQUEST_URI}  ^/offset/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Index&start=%1
+
+RewriteCond     %{REQUEST_URI}  ^/tag/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Index&tag=%1
+
+RewriteCond     %{REQUEST_URI}  ^/tag/([a-z0-9\-]+)/offset/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Index&tag=%1&start=%2
+
+RewriteCond     %{REQUEST_URI}  ^/([0-9]+)/([0-9]+)/([0-9]+)/([a-z0-9\_\.\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Item&posting_year_added=%1&posting_month_added=%2&posting_day_added=%3&posting_title=%4
+
+RewriteCond     %{REQUEST_URI}  ^/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=ArchiveYear&posting_year_added=%1&
+
+RewriteCond     %{REQUEST_URI}  ^/([0-9]+)/([0-9]+)(/offset/([0-9]+))?(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=ArchiveMonth&posting_year_added=%1&posting_month_added=%2&start=%4
+
+RewriteCond     %{REQUEST_URI}  ^/(Rss20|Atom10|CommentsRss20|CommentsAtom10)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=%1
+
+RewriteCond     %{REQUEST_URI}  ^/(Rss20|Atom10|CommentsRss20|CommentsAtom10)/tag/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=%1&tag=%2
+
+# blog in tree
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/offset/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=Index&start=%2
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/tag/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=Index&tag=%2
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/tag/([a-z0-9\-]+)/offset/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=Index&tag=%2&start=%3
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/([0-9]+)/([0-9]+)/([0-9]+)/([a-z0-9\_\.\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=Item&posting_year_added=%2&posting_month_added=%3&posting_day_added=%4&posting_title=%5
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/([0-9]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=ArchiveYear&posting_year_added=%2
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/([0-9]+)/([0-9]+)(/offset/([0-9]+))?(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=ArchiveMonth&posting_year_added=%2&posting_month_added=%3&start=%5
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/(Rss20|Atom10|CommentsRss20|CommentsAtom10)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=%2
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/(Rss20|Atom10|CommentsRss20|CommentsAtom10)/tag/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=%2&tag=%3
+]]></programlisting>
+			
+			<para>
+				Alle Vorkommen des Projektnamen
+				(<code><![CDATA[project_name=the-url-name-of-the-project&]]></code>)
+				können entweder komplett entfernt oder mit dem jeweiligen
+				Projektnamen ersetzt werden. Achten Sie darauf, dass Sie
+				den URL-Namen des Projekts verwenden.
+			</para>
+			
+			<para>
+				Sollten Sie Welcompose in einem Unterverzeichnis installiert
+				haben, müssen die Rewrite Rules jeweils um den Namen des
+				Unterverzeichnisses erweitert werden. Wenn Ihr Unterverzeichnis
+				beispielsweise <filename>cms/</filename> heisst, müssen die
+				Pfade in
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&action=Index&page_name=%1
+]]></programlisting>
+			
+			<para>
+				mit <filename>cms/</filename> erweitert werden, was zu folgendem
+				Resultat führt:
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/cms/page/([a-z0-9\-]+)(/?)$
+RewriteRule     ^               /cms/index.php?project_name=the-url-name-of-the-project&action=Index&page_name=%1
+]]></programlisting>
+			
+			<para>
+				Wiederholen Sie dies für alle anderen Rewrite Rules.
+			</para>
+			
+			<para>
+				Möchten Sie weitere Änderungen am Pfadlayout vornehmen, weil
+				Ihnen beispielsweise englische Wörter wie
+				<emphasis>page</emphasis> in den URLs nicht gefallen, 
+				ist das selbstverständlich möglich. Allerdings muss dabei
+				darauf geachtet werden, dass die URLs nicht mit real
+				existierenden Verzeichnissen respektive Dateien kollidieren.
+			</para>
+			
+			<para>
+				Sollen Änderungen an den Namen der Actions vorgenommen werden,
+				müssen die Rewrite URLs umgeschrieben werden, bei denen die
+				Action direkt aus den URLs übernommen wird. Wenn man
+				beispielsweise bei
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/(Rss20|Atom10|CommentsRss20|CommentsAtom10)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=%2
+]]></programlisting>
+			
+			<para>
+				statt <userinput>CommentsRss20</userinput> und
+				<userinput>CommentsAtom10</userinput> lieber
+				<userinput>KommentareRss20</userinput> respektive
+				<userinput>KommentareAtom10</userinput> schreiben möchte,
+				muss man aus dieser Rewrite Rule mindestens zwei verschiedene
+				machen:
+			</para>
+			
+			<programlisting><![CDATA[
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/(Rss20|Atom10)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=%2
+
+RewriteCond     %{REQUEST_URI}  ^/page/([a-z0-9\-]+)/Kommentare(Rss20|Atom10)(/?)$
+RewriteRule     ^               /index.php?project_name=the-url-name-of-the-project&page_name=%1&action=Comments%2
+]]></programlisting>
+			
+		</sect2>
+	</sect1>
+</chapter>
