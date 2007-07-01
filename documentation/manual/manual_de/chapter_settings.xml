@@ -5,9 +5,532 @@
 	<title>Einstellungen</title>
 	
 	<sect1 id="settings.text_converters">
-		<title>Text-Konverter</title>
+		<title>Textkonverter</title>
 		
-		<para/>
+		<sect2 id="settings.text_converters.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Welcompose bietet zur Texteingabe bei Inhaltsseiten oder
+				Blog Postings die Möglichkeit, entweder nacktes HTML oder
+				einen sogenannten Textkonverter zu verwenden. Dieser
+				Textkonverter stellt in der Regel eine Markup-Sprache zur
+				Verfügung, mit deren Hilfe gewisse einfache
+				Formatierungsanweisungen gegeben werden können, die
+				später in HTML verwandelt werden &ndash; ohne, dass man
+				selber HTML tippen muss.
+			</para>
+			
+			<para>
+				Ein bekanntes Beispiel ist die Markup-Sprache BBCode,
+				die in vielen Diskussionsforen verwendet wird. Umschliesst
+				man einen URL beispielsweise mit dem BBCode-Befehl 
+				<code>[url]</code>, wird der URL in einen klickbaren Link
+				verwandelt:
+			</para>
+			
+			<programlisting><![CDATA[
+[url]http://www.example.com/[/url]
+]]></programlisting>
+			
+			<para>
+				Sobald der Anwender dies in das Eingabefeld eingegeben
+				und abgesendet hat, macht die Software im Hintergrund daraus
+				je nach Implementierung beispielsweise:
+			</para>
+			
+			<programlisting><![CDATA[
+<a href="http://www.example.com/">www.example.com</a>
+]]></programlisting>
+			
+			<para>
+				Nach dem gleichen Prinzip funktionieren die Textkonverter
+				in Welcompose. Welcompose bringt mit Markdown und Textile zwei
+				populäre Textkonverter mit und ermöglicht mit Hilfe eines
+				Plug-ins auch die Einbindung eigener Textkonverter.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="settings.text_converters.usage">
+			<title>Verwendung der Textkonverter</title>
+			
+			<para>
+				Die Textkonverter werden überall im Webinterface angeboten,
+				wo sich Inhalte für die jeweiligen Seiten eingeben lassen.
+				Sie können pro Seite, Blog Posting oder Box über eine
+				Auswahlliste ausgewählt werden. 
+			</para>
+			
+			<figure id="settings.text_converters.usage.choose_text_converter">
+				<title>Auswahl des Textkonverters</title>
+				<graphic fileref="images/settings/text_converters/usage.choose_text_converter.png"/>
+			</figure>
+			
+			<para>
+				Es ist nur die Nutzung eines Textkonverters auf einmal
+				möglich. Sollte der Wunsch danach bestehen, zwei Textkonverter
+				zu kombinieren, muss dies über ein Plug-in und einen separaten
+				Textkonverter realisiert werden (siehe <xref
+				linkend="settings.text_converters.use_other_text_converters"/>).
+			</para>
+			
+			<para>
+				Für die Community, also die Blog-Kommentare, kann der
+				Textkonverter nur global für alle Blog-Kommentare
+				gesetzt werden.
+			</para>
+			
+			<para>
+				Hilftsfunktionen von Welcompose, beispielsweise zum Setzen
+				interner Links oder zum Einfügen eines Bildes berücksichtigen
+				automatisch den jeweils gewählten Textkonverter. Das heisst,
+				dass je nach Textkonverter automatisch die richtige Syntax
+				zum Integrieren von Bildern oder Links gewählt wird.
+				Sollte ein Textkonverter ein bestimmtes Element nicht
+				unterstützen, wird automatisch der passende HTML-Code
+				eingefügt.
+			</para>
+			
+			<para>
+				Wird der Textkonverter während oder nach dem Editieren
+				gewechselt, muss beachtet werden, dass die Syntax nicht
+				automatisch gewechselt wird, sondern die alte beibehalten
+				wird. Wer den Textkonverter wechselt, muss die Syntax
+				also von Hand anpassen oder den Textkonverter vor dem
+				Erstellen des Texts ändern.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="settings.text_converters.xhtml_markdown_and_textile">
+			<title>XHTML, Markdown und Textile</title>
+			
+			<para>
+				Welcompose bringt von Haus aus drei verschiedene
+				Textkonverter mit:
+			</para>
+			
+			<itemizedlist>
+				<listitem>
+					<para>
+						XHTML
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Markdown
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Textile
+					</para>
+				</listitem>
+			</itemizedlist>
+			
+			<sect3 id="settings.text_converters.xhtml_markdown_an_textile.xhtml">
+				<title>XHTML</title>
+				
+				<para>
+					Der Textkonverter XHTML ist kein eigentlicher Textkonverter,
+					da er eigentlich nichts tut. Er speichert den eingegebenen
+					Text unverändert ab. Sein Einsatz empfiehlt sich dann,
+					wenn man HTML-Code eingeben möchte.
+				</para>
+				
+				<para>
+					Er ist der Standard-Textkonverter und darf nicht aus dem
+					System entfernt werden, da es sonst passieren kann,
+					dass beispielsweise der Mediamanager oder die
+					Hilfsfunktionen zum Integrieren von Links oder Boxen
+					nicht funktionieren. Dies, da er die 
+					Standardfunktionalität dazu bereitstellt, auf die
+					andere Textkonverter zurückgreifen können, wenn sie selber
+					über keine Methoden zum Einfügen eines Elements verfügen.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="settings.text_converters.xhtml_markdown_an_textile.markdown">
+				<title>Markdown</title>
+				
+				<para>
+					Der Textkonverter Markdown<footnote>
+					<para>
+						<ulink type="external" url="http://daringfireball.net/projects/markdown/"/>
+					</para>
+					</footnote>
+					ist eine Entwicklung von John Gruber und in Form von
+					PHP Markdown Extra<footnote>
+					<para>
+						<ulink type="external" url="http://www.michelf.com/projects/php-markdown/extra/"/>
+					</para>
+					</footnote>
+					von Michel Fortin integriert.
+				</para>
+				
+				<para>
+					Markdown bietet eine einfache und klare Syntax, die
+					sich zur einfachen Strukturierung von Texten eignet.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="settings.text_converters.xhtml_markdown_an_textile.textile">
+				<title>Textile</title>
+				
+				<para>
+					Textile<footnote>
+					<para>
+						<ulink type="external" url="http://textile.thresholdstate.com/"/>
+					</para>
+					</footnote>
+					ist eine Entwicklung von Dean Allen und
+					ursprünglich für die Weblog-Software Textpattern
+					entwickelt worden.
+				</para>
+				
+				<para>
+					Textile eignet sich vor allem für kompliziertere 
+					Formatierungen, bei denen Elementen beispielsweise
+					IDs oder CSS-Klassen zugewiesen werden sollen. 
+				</para>
+				
+			</sect3>
+			
+		</sect2>
+		
+		<sect2 id="settings.text_converters.use_other_text_converters">
+			<title>Eigene Textkonverter integrieren</title>
+			
+			<warning>
+				<para>
+					Die API für Textkonverter befindet sich noch unter
+					starker Entwicklung und kann sich von Version zu
+					Version drastisch ändern.
+				</para>
+			</warning>
+			
+			<note>
+				<para>
+					Wer einen Textkonverter integrieren möchte, sollte mit den
+					Grundlagen objektorientierter Programmierung in PHP 5
+					vertraut sein. 
+				</para>
+			</note>
+			
+			<para>
+				Die Integration eines eigenen Textkonverters besteht aus zwei
+				Schritten:
+			</para>
+			
+			<orderedlist>
+				<listitem>
+					<para>
+						Die Erstellung eines Textkonverter-Plug-ins.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Der Registrierung des Textkonverter-Plug-ins.
+					</para>
+				</listitem>
+			</orderedlist>
+			
+			<sect3 id="settings.text_converters.use_other_text_converters.create_plugin">
+				<title>Plug-in erstellen</title>
+				
+				<para>
+					Um ein Textkonverter-Plug-in zu erstellen, werden zwei
+					Dinge benötigt:
+				</para>
+				
+				<orderedlist>
+					<listitem>
+						<para>
+							Ein Textkonverter.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Das eigentliche Plug-in, das für Welcompose
+							eine einheitliche API zum Zugriff auf den
+							Textkonverter bietet.
+						</para>
+					</listitem>
+				</orderedlist>
+				
+				<para>
+					Wie der Textkonverter aussieht oder was er für Aufgaben
+					erledigt, spielt bei der Integration keine Rolle. 
+					Er muss einzig eine Zeichenkette übernehmen, die der
+					Eingabe des Anwenders entspricht, und diese
+					(transformiert) wieder retournieren. Ein funktionsloser
+					Prototyp könnte beispielsweise so aussehen:
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+class Mein_TextKonverter
+{
+
+	public function process ($input)
+	{
+		return $input;
+	}
+
+}
+]]></programlisting>
+				
+				<para>
+					Selbstverständlich ist auch eine prozedurale Variante
+					möglich:
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+function mein_textkonverter ($input)
+{
+	return $input;
+}
+]]></programlisting>
+				
+				<para>
+					Wo der Textkonverter abgespeichert wird, spielt ebenfalls
+					keine Rolle. Praktisch ist vielleicht ein separates
+					Verzeichnis unterhalb von <filename>core/</filename>,
+					damit man nicht unabsichtlich &ndash; beispielsweise
+					bei einem Update &ndash; den eigenen Textkonverter
+					überschreibt.
+				</para>
+				
+				<note>
+					<para>
+						Die Textkonverter Markdown und Textile, die Welcompose
+						mitbringt, sind im Verzeichnis
+						<filename>core/third_party/</filename> zu finden.
+					</para>
+				</note>
+				
+				<para>
+					Mehr Konventionen gilt es dagegen bei den Plug-ins
+					einzuhalten:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>
+							Die Plug-ins müssen im Verzeichnis
+							<filename>core/plugins/textconverters/</filename>
+							abgelegt werden.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Sie müssen der Benennung
+							<userinput>wcom_plugin_textconverter_name.php</userinput>
+							folgen, wobei <userinput>name</userinput> eine
+							Zeichenkette sein muss, die nur aus kleinen
+							Buchstaben, Zahlen und Unterstrichen
+							(<code>_</code>) bestehen darf.
+							<userinput>name</userinput> wird auch für die
+							Benennung der Plug-in-Klasse benötigt. Heisst die
+							Plug-in-Klasse
+							<code>TextConverter_MeinTextKonverter</code>,
+							muss man <userinput>MeinTextKonverter</userinput>
+							für den Plug-in-Dateinamen wählen, was zum Resultat
+							<filename>wcom_plugin_textconverter_meintextkonverter.php</filename>
+							führt.
+						</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Die Plug-ins selber werden als abgeleitete Klassen
+					des XHTML-Textkonverters <code>TextConverter_XHTML</code>
+					realisiert. Dabei gilt es, die Methoden neu zu
+					implementieren, deren Funktionalität man mit dem neuen
+					Textkonverter nutzen möchte.
+				</para>
+				
+				<para>
+					Bietet der neue Textkonverter keine passende
+					Funktionalität für eine Methode, lässt man diese einfach
+					weg. Dann wird automatisch die Implementierung des 
+					XHTML-Textkonverters genutzt.
+				</para>
+				
+				<para>
+					Die Methode, die man wohl bei jedem Textkonverter neu
+					implementiert, dürfte <code>apply()</code> sein. Sie
+					dient dazu, einen Textkonverter auf die vom Benutzer
+					eingegeben Text anzuwenden. Wenn man den leeren
+					Textkonverter-Prototypen von oben benutzen möchte,
+					könnte das Plug-in beispielsweise so aussehen:
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+require_once('wcom_plugin_textconverter_xhtml.php');
+require_once('/pfad/zu/meinem/textkonverter.php');
+
+class TextConverter_MeinTextKonverter extends TextConverter_XHTML
+{
+
+	public function apply ($input)
+	{
+		$tk = new Mein_TextKonverter();
+		return $tk->process($input);
+	}
+
+}
+]]></programlisting>
+				
+				<para>
+					Nun wird der Textkonverter <code>Mein_TextKonverter</code>
+					zur Transformation des Texts verwendet.
+				</para>
+				
+				<para>
+					Die weiteren Methoden dienen unter anderem dazu,
+					die richtige Sytnax für Hilfsfunktionen wie das Einfügen
+					eines Links oder eines Bildes aus dem Mediamanager
+					bereitzustellen, damit Bilder oder eben Links
+					vorformatiert für die Anwender in die Inhalte eingefügt
+					werden können.
+				</para>
+				
+				<variablelist>
+					<varlistentry>
+						<term>mmInsertImage</term>
+						<listitem>
+							<para>
+								Fügt Bilder aus dem Mediamanager ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>mmInsertDocument</term>
+						<listitem>
+							<para>
+								Fügt Dokumente aus dem Mediamanger ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>mmInsertShockwave</term>
+						<listitem>
+							<para>
+								Fügt Flashfilme aus dem Mediamanager ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>mmInsertInternalLink</term>
+						<listitem>
+							<para>
+								Fügt Links zu anderen Welcompose-Seiten ein.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>mmInsertFlickr</term>
+						<listitem>
+							<para>
+								Fügt Bilder aus dem Mediamanager ein, die
+								vom Photo-Sharing-Service Flickr stammen.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Als <code>protected</code> oder <code>private</code>
+					deklarierte Methoden können ignoriert werden.
+				</para>
+				
+				<para>
+					Während die Funktionssignaturen in den abgeleiteten
+					Klassen beibehalten werden müssen, ist es nicht nötig,
+					auch wirklich alle übergebenen Variablen zu benutzen.
+					Sie können verworfen werden, wenn die Syntax des
+					Textkonverters ihre Anwendung nicht vorsieht.
+				</para>
+				
+				<para>
+					Wie ein fertiges Textkonverter-Plug-in aussieht, zeigen
+					die mitgelieferten Plug-ins für Markdown und Textile.
+				</para>
+				
+				<para>
+					Bevor man das Textkonverter-Plug-in nutzen kann, muss es
+					noch in Welcompose registriert werden (siehe <xref
+					linkend="settings.text_converters.use_other_text_converters.register_plugin"/>).
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="settings.text_converters.use_other_text_converters.register_plugin">
+				<title>Plug-in registrieren</title>
+				
+				<para>
+					Um einen neu hinzugefügten Textkonverter im
+					Administrationsbereich nutzen zu können, muss er vorab
+					registriert werden. Dies geschieht im Bereich
+					<guimenu>Settings</guimenu> beim Unterpunkt
+					<guisubmenu>Text Converters</guisubmenu>. Wenn Sie dort
+					auf den Link <guibutton>Add new</guibutton> klicken, 
+					gelangen Sie zum Formular zum Anlegen eines neuen
+					Textkonverters.
+				</para>
+					
+				<figure id="settings.text_converters.use_other_text_converters.register_plugin.add_text_converter">
+					<title>Textkonverter hinzufügen</title>
+					<graphic fileref="images/settings/text_converters/use_other_text_converters.register_plugin.add_text_converter.png"/>
+				</figure>
+				
+				<variablelist>
+					<varlistentry>
+						<term>Name</term>
+						<listitem>
+							<para>
+								Der Name des Textkonverters, der jeweils
+								in den Auswahllisten unterhalb der
+								Inhaltsbereiche gezeigt wird. Kann frei
+								gewählt werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Internal name</term>
+						<listitem>
+							<para>
+								Interner Name des Textkonverters. Bei einer
+								Plug-in-Klasse mit dem Namen 
+								<code>TextConverter_MeinTextKonverter</code>
+								muss <userinput>MeinTextKonverter</userinput>
+								eingegeben werden.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Sobald das Formular ausgefüllt und abgesendet wurde,
+					kann der Textkonverter innerhalb des
+					Administrationsbereichs genutzt werden.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="settings.text_converters.wysiwyg">
+			<title>WYSIWYG</title>
+			
+			<para>
+				WYSIWYG- respektive sogenannte Rich-Text-Editoren wie
+				TinyMCE oder FCKEditor können mit Welcompose nicht genutzt
+				werden.
+			</para>
+		</sect2>
+		
 	</sect1>
 	
 	<sect1 id="settings.text_macros">
