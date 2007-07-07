@@ -252,19 +252,28 @@ protected function renderPersonalForm ()
 		$body = $this->base->utility->smarty->fetch($this->getPersonalMailTemplateName(),
 			md5($_SERVER['REQUEST_URI']));
 		
-		// load PEAR::Mail
-		require_once('Mail.php');
-		$MAIL = Mail::factory('mail');
-		
-		// prepare the rest of the email
+		// prepare sending information
 		$recipients = $this->_simple_form['email_to'];
+		
+		// prepare From: address
+		$from = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
+			$FORM->exportValue('email') : $this->_simple_form['email_from']);
+		$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
+			null, $from);
 		
 		// headers
 		$headers = array();
-		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
-			$FORM->exportValue('email') : $this->_simple_form['email_from']);
+		$headers['From'] = $from;
 		$headers['Subject'] = $this->_simple_form['email_subject'];
 		$headers['Reply-To'] = $FORM->exportValue('email');
+		
+		// prepare params
+		$params = array();
+		$params = sprintf('-f %s', $from);
+		
+		// load PEAR::Mail
+		require_once('Mail.php');
+		$MAIL = Mail::factory('mail', $params);
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
