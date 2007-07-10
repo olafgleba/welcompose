@@ -536,6 +536,431 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 	<sect1 id="settings.text_macros">
 		<title>Text-Macros</title>
 		
-		<para/>
+		<sect2 id="settings.text_macros.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Text-Macros sind sozusagen die kleinen Geschwister der
+				Textkonverter (<xref linkend="settings.text_converters"/>).
+				Denn wie die Textkonverter sind sie für die Transformation
+				von Text zuständig. Der Unterschied besteht aber darin, 
+				dass sie nicht eine komplett eigene Markup-Sprache zur 
+				Transformation ganzer Texte definieren, sondern mit einzelnen
+				Befehlen eine einzige (kleine) Aufgabe erledigen sollen.
+			</para>
+			
+			<para>
+				Wer beispielsweise einen Begriff mit einem Link zur
+				Online-Enzyklopädie Wikipedia erklären will, kann
+				normalerweise den Link nur in HTML oder mit der Markup-Sprache
+				des jeweiligen Textkonverters (Markdown im Beispiel)
+				auszeichnen:
+			</para>
+			
+			<programlisting><![CDATA[
+[Toxoplasmose](http://de.wikipedia.org/wiki/Toxoplasmose)
+]]></programlisting>
+			
+			<para>
+				Dies ist aber umständlicher als nötig, da die Links zur
+				Wikipedia immer identisch aufgebaut sind und sich deshalb
+				automatisch erstellen liessen. Hier kommen nun die
+				Text-Macros ins Spiel: Sie können diese Aufgabe übernehmen,
+				ohne dass ein bestehender Textkonverter modifiziert respektive
+				ergänzt werden muss. So lässt sich ein Text-Macro erstellen,
+				das beispielsweise aus 
+			</para>
+			
+			<programlisting><![CDATA[
+w:de{Toxoplasmose}
+]]></programlisting>
+			
+			<para>
+				automatisch den richtigen Link erstellt, wodurch man nicht nur
+				weniger tippen, sondern sich auch nicht den Link heraussuchen
+				muss.
+			</para>
+			
+			<para>
+				Dies funktioniert selbstverständlich nicht nur mit
+				Wikipedia-Artikeln, sondern auch mit Telefonnummern oder ISBN
+				für Bücher, die man beispielsweise mit seinem
+				Amazon-Partnerprogramm verknüpfen kann. Auch lassen sich
+				Badges von irgendwelchen Webdiensten integrieren, sofern sie
+				sich vernünftig in in ein Text-Macro verpacken lassen.
+			</para>
+			
+			<para>
+				Weitere Anwendungsmöglichkeiten sind automatische
+				Transformationen. Beispielsweise die Codierung von Entitäten
+				oder die Entfernung von unerwünschten HTML-Tags.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="settings.text_macros.usage">
+			<title>Anwendung der Text-Macros</title>
+			
+			<para>
+				Text-Macros werden wie der Textkonverter von Welcompose
+				überall im Webinterface angeboten, wo sich Inhalte für die
+				jeweiligen Seiten eingeben lassen. Sie können pro Seite, Blog
+				Posting oder Box über eine Checkbox aktiviert werden.
+			</para>
+			
+			<figure id="settings.text_macros.usage.apply_text_macros">
+				<title>Text-Macros anwenden</title>
+				<graphic fileref="images/settings/text_macros/usage.apply_text_macros.png"/>
+			</figure>
+			
+			<para>
+				Dies bedeutet, dass entweder alle Text-Macros ausgeführt
+				werden können oder gar keine.
+			</para>
+			
+			<para>
+				Gesteuert werden kann einzig der Anwendungszeitpunkt der
+				Text-Macros, wobei das global bei der Aktivierung eines
+				Text-Macros geschieht (siehe <xref
+				linkend="settings.text_macros.integrate_other_text_macros"/>). 
+			</para>
+			
+			<para>
+				Die Nutzung der Text-Macros bei Blog-Kommentaren o.ä. ist
+				nicht möglich.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="settings.text_macros.builtin_text_macros">
+			<title>Mitgelieferte Text-Macros</title>
+			
+			<para>
+				Welcompose bringt zwei Text-Macros von Haus aus mit, die für
+				die Bereitstellung von Welcompose-Funktionalität benötigt
+				werden. Sie dienen zur Erzeugung der Links zwischen einzelnen
+				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
+				Bildern.
+			</para>
+			
+			<sect3 id="settings.text_macros.builtin_text_macros.bundled_media_url_generator">
+				<title>Bundled Media URL Generator</title>
+				
+				<para>
+					Der Bundled Media URL Generator kümmert sich um das Setzen
+					von Pfaden respektive URLs zu Media-Elementen wie Bildern.
+					Er wird vom in Welcompose integrierten Media Manager
+					verwendet und soll daher auch nicht gelöscht oder
+					deaktiviert werden.
+				</para>
+				
+				<para>
+					Er orientiert sich an der Syntax von Smarty-Funktionen,
+					wie sie in Vorlagen verwendet werden:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_media arg1=value1}
+]]></programlisting>
+				
+				<para>
+					Er kennt nur ein einzelnes Argument: <code>id</code>.
+					Diesem wird jeweils die ID des Bildes oder Films
+					übergebeben, das respektive der eingebunden werden soll:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_media id="3"}
+]]></programlisting>
+				
+				<para>
+					Anstelle von <code>{get_media ...}</code> setzt das
+					Text-Macro den Pfad respektive URL zum Media-Element,
+					beispielsweise:
+				</para>
+				
+				<programlisting><![CDATA[
+/files/global_files/4975b766cb7323f2724213d8b41fe685ca107d71_grafik.gif
+]]></programlisting>
+				
+				<para>
+					Allerdings ist es in der Regel nicht nötig, selber die
+					Tags für die Integration der Bilder zu schreiben, da dies
+					in Welcompose integrierte Funktionen für den Anwender tun.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="settings.text_macros.builtin_text_macros.bundled_url_generator">
+				<title>Bundled URL Generator</title>
+				
+				<para>
+					Das Text-Macro Bundled URL Generator dient zur
+					einfachen Erzeugung von Links zwischen den einzelnen
+					Welcompose-Seiten und wird beispielsweise von den
+					Hilfsfunktionen zum Einfügen interner Hinweise verwendet.
+					Es sollte daher auch nicht gelöscht oder deaktiviert
+					werden.
+				</para>
+				
+				<para>
+					Es bietet ein Interface zum URL-Generator, der auch
+					schon innerhalb der Vorlagen zum Einsatz kommt und folgt
+					daher dessen Syntax:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_url arg1=value1 arg2=value2}
+]]></programlisting>
+				
+				<para>
+					Während <code>get_url</code> quasi der Name des
+					Text-Macros ist, sind <code>arg1</code> respektive
+					<code>arg2</code> Platzhalter für Argumente, die an den
+					URL-Generator zur Erzeugung der richtigen URLs übergeben
+					werden. Eine gültige Anweisung kann beispielsweise so
+					aussehen:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_url page_id="15" action=ArchiveMonth posting_year_added="2007" posting_month_added="6"}
+]]></programlisting>
+				
+				<para>
+					Anstelle von <code>{get_url ...}</code> wird vom
+					Text-Macro der URL zu dem Archiv für den Monat Juni 2007
+					der Blog-Seite mit der ID 15 gesetzt, beispielsweise: 
+				</para>
+				
+				<programlisting><![CDATA[
+http://www.example.com/mein-blog/archiv/2007/06/
+]]></programlisting>
+				
+				<para>
+					In der Regel ist es nicht nötig, selber die Tags für den
+					Bundled Media URL Generator zu schreiben, da dies in 
+					Welcompose integrierte Funktionen für den Anwender tun.
+				</para>
+				
+				<para>
+					Eine Referenz der vorhandenen Befehle für den
+					URL-Generator hält @@@ bereit.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="settings.text_macros.integrate_other_text_macros">
+			<title>Eigene Text-Macros integrieren</title>
+			
+			<para>
+				Um eigene Text-Macros in Welcompose zu integrieren, müssen
+				zwei Aufgaben erledigt werden:
+			</para>
+			
+			<orderedlist>
+				<listitem>
+					<para>
+						Die Erstellung des Text-Macros.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Die Aktivierung des Text-Macros in Welcompose.
+					</para>
+				</listitem>
+			</orderedlist>
+			
+			<sect3 id="settings.text_macros.integrate_other_text_macros.create">
+				<title>Erstellung eines Text-Macros</title>
+				
+				<para>
+					Text-Macros werden in Form von einfachen PHP-Funktionen
+					realisiert, in deren Rahmen man prinzipiell machen kann,
+					was man will. Als Beispiel soll die bereits erwähnte
+					automatische Umwandlung von Links zur Wikipedia realisiert
+					werden.
+				</para>
+				
+				<para>
+					Die Text-Macros werden im Verzeichnis
+					<filename>core/plugins/textmacros/</filename> hinterlegt,
+					wobei pro Text-Macro eine separate Datei benötigt wird.
+					Die Benennung der Dateien muss einem bestimmten Schema
+					erfolgen, damit die Text-Macros von Welcompose gefunden
+					werden. Und zwar müssen die Dateinamen mit
+					<filename>wcom_plugin_textmacro_</filename> beginnen,
+					gefolgt vom eigentlichen Text-Macro-Namen und der
+					Dateiendung <filename>.php</filename>. Der Text-Macro-Name
+					darf nur kleine Buchstaben, Ziffern und Unterstriche
+					beinhalten. Der Dateiname des Wikipedia-Macros könnte
+					beispielsweise so aussehen:
+					<filename>wcom_plugin_textmacro_wikipedia.php</filename>.
+				</para>
+				
+				<para>
+					Der Dateiname dient gleichzeitig (abzüglich des Suffix
+					<filename>.php</filename>) als Funktionsname, der
+					für den Aufruf des Text-Macros verwendet wird.
+				</para>
+				
+				<para>
+					Die Text-Macros erhalten als einziges Argument die
+					Zeichenkette mit den Benutzereingaben, die sie nach
+					der Ausführung retournieren müssen. Der funktionslose
+					Prototyp einer Text-Macro-Funktion sieht damit
+					folgendermassen aus: 
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+function wcom_plugin_textmacro_name ($input)
+{
+	return $input;
+}
+]]></programlisting>
+				
+				<para>
+					Welche Aktionen innerhalb des Text-Macros ausgeführt
+					werden, bleibt einem selbst überlassen. Meistens wird
+					man wohl mit Hilfe von Regulären Ausdrücken die Eingaben
+					manipulieren. In jedem Fall gilt es, darauf zu achten,
+					dass die Text-Macros nicht mit den Textkonvertern in
+					Konflikt geraten, insbesondere wenn sie
+					<emphasis>nach</emphasis> den Textkonvertern ausgeführt
+					werden (mehr dazu in
+					<xref linkend="settings.text_macros.integrate_other_text_macros.register"/>). 
+				</para>
+				
+				<para>
+					In dem Wikipedia-Beispiel-Text-Macro wird eine ebensolche
+					Text-Transformation mit Hilfe eines Regulären Ausdrucks
+					realisiert. Und zwar sucht die Text-Macro-Funtkion
+					<code>wcom_plugin_textmacro_wikipedia()</code> nach allen
+					nach dem Muster <code>w:de{Begriff}</code> (für die
+					deutsche Wikipedia) respektive <code>w:en{Begriff}</code>
+					(für die englische Wikipedia) ausgezeichneten Begriffen.
+					Diese werden dann mit Hilfe der Callback-Funktion 
+					<code>wcom_plugin_textmacro_wikipedia_callback()</code>
+					in die Links verwandelt und durch diese ersetzt.
+				</para>
+				
+				<programlisting language="php"><![CDATA[
+function wcom_plugin_textmacro_wikipedia ($input)
+{
+	// input check
+	if (!is_scalar($input)) {
+		trigger_error("Input for parameter input is expected to be scalar", E_USER_ERROR);
+	}
+
+	// parse wikipedia tags and replace them with links to the online encyclopedia.
+	return preg_replace_callback("=w:(en|de)\{(.*?)\}=",
+		'wcom_plugin_textmacro_wikipedia_callback', $input);
+}
+
+function wcom_plugin_textmacro_wikipedia_callback ($args)
+{
+	// input check
+	if (!is_array($args)) {
+		trigger_error("Input for parameter args is expected to be an array", E_USER_ERROR);
+	}
+
+	// encode the article title into wikipedia's special format used in urls
+	$article_url_title = urlencode(str_replace(' ', '_', $args[2]));
+
+	// create wikipedia link
+	// argument 1 holds the name of the localized wikipedia to use (either en or de)
+	// argument 2 is the urlencoded version of the article title
+	// argument 3 is the article title as supplied by the user
+	return sprintf('<a href="http://%1$s.wikipedia.org/wiki/%2$s">%3$s</a>', $args[1],
+		$article_url_title, $args[2]);
+}
+]]></programlisting>
+				
+				<para>
+					Sobald das Text-Macro unter dem Namen
+					<filename>wcom_plugin_textmacro_wikipedia.php</filename>
+					im Verzeichnis
+					<filename>core/plugins/textmacros/</filename> abgelegt
+					wurde, ist es einsatzbereit und muss nur noch in
+					Welcompose aktiviert werden.
+				</para>
+				
+			</sect3>
+			
+			<sect3 id="settings.text_macros.integrate_other_text_macros.register">
+				<title>Text-Macros registrieren</title>
+				
+				<para>
+					Um ein neu hinzugefügtes Text-Macro nutzen zu können, muss
+					es vorab registriert werden. Dies geschieht im
+					Administrationsbereich unter <guimenu>Settings</guimenu>
+					beim Unterpunkt <guisubmenu>Text Macros</guisubmenu>. Wenn
+					Sie dort auf den Link <guibutton>Add new</guibutton>
+					klicken, gelangen Sie zum Formular zum Anlegen eines neuen
+					Text-Macros.
+				</para>
+					
+				<figure id="settings.text_macros.integrate_other_text_macros.register.add_text_macro">
+					<title>Text-Macro anlegen</title>
+					<graphic fileref="images/settings/text_macros/integrate_other_text_macros.register.add_text_macro.png"/>
+				</figure>
+				
+				<variablelist>
+					<varlistentry>
+						<term>Name</term>
+						<listitem>
+							<para>
+								Der Name des Text-Macros, der zur
+								Identifizierung des Text-Macros dient.
+								Kann frei gewählt werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Internal name</term>
+						<listitem>
+							<para>
+								Interner Name des Macros. Bei einer
+								Text-Macro-Funktion mit dem Namen 
+								<code>wcom_plugin_textmacro_name()</code>
+								muss <userinput>name</userinput>
+								eingegeben werden, bei
+								<code>wcom_plugin_textmacro_wikipedia()</code>
+								also <userinput>wikipedia</userinput>.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Type</term>
+						<listitem>
+							<para>
+								Der Typ bestimmt den Zeitpunkt, wann das
+								Text-Macro im Verhältnis zu den
+								Textkonvertern ausgeführt werden soll. Und
+								zwar kann man wählen, ob das Text-Macro
+								<emphasis>vor</emphasis> (<guimenuitem>Startup
+								macro</guimenuitem>, <guimenuitem>Pre text
+								filter macro</guimenuitem>) oder
+								<emphasis>nach</emphasis> (<guimenuitem>Post
+								text filter macro</guimenuitem>,
+								<guimenuitem>Shutdown Macro</guimenuitem>) dem
+								Textkonveter ausgeführt werden soll. Ein
+								<guimenuitem>Startup macro</guimenuitem>
+								wird dabei vor einem <guimenuitem>Pre text
+								filter macro</guimenuitem> ausgeführt, ein
+								<guimenuitem>Shutdown macro</guimenuitem> nach
+								einem <guimenuitem>Post text filter
+								macro</guimenuitem>.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Sobald das Formular ausgefüllt und abgesendet wurde,
+					ist das Text-Macro aktiv und wird angewendet.
+				</para>
+			</sect3>
+		</sect2>
+		
 	</sect1>
 </chapter>
