@@ -676,4 +676,147 @@ Seiten-Name: {$some_page.name}
 			</tip>
 		</sect2>
 	</sect1>
+	
+	<sect1 id="contents.structural_templates">
+		<title>Strukturvorlagen</title>
+		
+		<sect2 id="contents.structural_templates.introduction">
+			<title>Einführung</title>
+				
+			<para>
+				Strukturvorlagen sind ein Hilfsmittel, das den Autoren
+				die Einhaltung eines einheitlichen Aussehens respektive einer
+				einheitlichen Seitenstruktur über die gesamte Webseite hinweg
+				erleichtern soll. Sie eignen sich damit vor allem für
+				umfangreiche Webprojekte mit einer grossen Anzahl Einzelseiten.
+			</para>
+			
+			<para>
+				Die Strukturvorlagen ermöglichen es, Gerüste für die
+				Strukturierung von Inhaltsseiten oder Seitenfragmenten zu
+				hinterlegen. Sollen beispielsweise Seiten zur Präsentation
+				von einzelnen Produkten immer mit einem Titel der Klasse
+				H1 beginnen, gefolgt von einer Einleitung, einer Liste
+				von Kurzinformationen zum Produkt und einigen Bildern, können
+				Platzhalter-Texte mit der richtigen Formatierung hinterlegt
+				und bei der Bearbeitung einer Seite über ein Pop-up jederzeit
+				eingefügt werden, sodass nur die Inhalte angepasst werden
+				müssen.
+			</para>
+			
+			<para>
+				Eine weitere Möglichkeit ist die Einbindung von
+				Standard-Inhalten oder die Vorbereitung komplexer Strukturen
+				wie Tabellen.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="contents.structural_templates.manage">
+			<title>Verwaltung</title>
+			
+			<para>
+				Die Verwaltung der Strukturvorlagen erfolgt im
+				Administrationsbereich unter <guimenu>Contents</guimenu>
+				beim Unterpunkt <guisubmenu>Structural Templates</guisubmenu>.
+				Wenn Sie dort auf den Link <guibutton>Add new</guibutton>
+				klicken, gelangen Sie zum Formular zum Anlegen einer neuen
+				Strukturvorlage.
+			</para>
+			
+			<figure id="contents.structural_templates.manage.add_structural_template">
+				<title>Strukturvorlage anlegen</title>
+				<graphic fileref="images/contents/structural_templates/manage.add_structural_template.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term>Name</term>
+					<listitem>
+						<para>
+							Name der Strukturvorlage. Kann frei gewählt
+							werden, sollte zur einfachen Identifizierung
+							möglichst beschreibend sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Description</term>
+					<listitem>
+						<para>
+							Beschreibung der Strukturvorlage. Kann frei
+							gewählt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Content</term>
+					<listitem>
+						<para>
+							Die eigentliche Strukturvorlage, die 1:1 in
+							den Inhaltsbereich der jeweiligen Seite kopiert
+							wird. Bei der Gestaltung der Strukturvorlage ist
+							man als Anwender total frei.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Beispiel für eine Strukturvorlage mit dem Textkonverter
+				Textile:
+			</para>
+			
+			<programlisting><![CDATA[
+h1. Produkttitel
+
+p(lead). Einleitung
+
+h2. Produkteigenschaften
+
+* Listenpunkt 1
+* Listenpunkt 2
+
+h2. Bilder
+
+*(image) !imageurl(Bild1)!
+* !imageurl(Bild2)!
+]]></programlisting>
+			
+			<para>
+				Sobald die Strukturvorlage erstellt wurde, kann sie bei der
+				Verwaltung der Inhalte benutzt werden (siehe <xref
+				linkend="contents.structural_templates.usage"/>).
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.structural_templates.usage">
+			<title>Anwendung</title>
+			
+			<para>
+				Die Verwendung der Strukturvorlagen ist bei allen
+				Inhaltsbereichen der Inhaltsseiten sowie bei den verschieden
+				Boxen möglich. Das Menü zur Auswahl der Strukturvorlage, die
+				benutzt werden soll, kann über den Menüpunkt
+				<guimenuitem>Strukturvorlagen</guimenuitem> über dem
+				jeweiligen Inhaltsbereich aufgerufen werden. Die vorhandenen
+				Strukturvorlagen werden alphabetisch sortiert aufgelistet und
+				lassen sich mit einem Klick auf den Namen der gewünschten
+				Strukturvorlage auswählen. Die Strukturvorlage wird daraufhin
+				an der Stelle des Cursors in den Inhaltsbereich eingesetzt.
+			</para>
+			
+			<figure id="contents.structural_templates.usage.insert_structural_template">
+				<title>Strukturvorlage einsetzen
+					</title>
+				<graphic fileref="images/contents/structural_templates/usage.insert_structural_template.png"/>
+			</figure>
+			
+			<para>
+				Bei Bedarf können Strukturvorlagen mehrmals eingesetzt und
+				beliebig miteinander kombiniert werden.
+			</para>
+		</sect2>
+		
+	</sect1>
 </chapter>
