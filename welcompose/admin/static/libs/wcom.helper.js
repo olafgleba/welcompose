@@ -905,18 +905,22 @@ function Helper_showResponsePagesThirdLinks(req)
 function Helper_insertTagsCallbacks(id, str)
 {
 	try {
-		/*
+		/* oberserve this!
+		
 		We have to distinguish here, because the IE is obviously too dumb to differ between elements
 		which has the same value on different attributes (name, id). Here we have a conflict with
 		the form hidden field attribute. So we serve IE by object forms[elements], while all others
 		are able to use the standards (pointing the element by document.getElementById().
-		*/
+		
 	 	if (Helper.isBrowser('ie')) {
 			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
 			var txtarea = document.forms[_form_name].elements[id];
 		} else {
 			var txtarea = $(id);
 		}
+		*/		
+		var txtarea = $(id);
+		
 		// IE
 		if(document.selection) {
 			var theSelection = document.selection.createRange().text;
@@ -963,18 +967,22 @@ function Helper_insertTagsCallbacks(id, str)
 function Helper_insertTagsFromPopupCallbacks(id, str)
 {
 	try {
-		/*
+		/* oberserve this!
+		
 		We have to distinguish here, because the IE is obviously too dumb to differ between elements
 		which has the same value on different attributes (name, id). Here we have a conflict with
 		the form hidden field attribute. So we serve IE by object forms[elements], while all others
 		are able to use the standards (pointing the element by document.getElementById().
-		*/
-	 	if (Helper.isBrowser('ie')) {
+		
+		if (Helper.isBrowser('ie')) {
 			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
 			var txtarea = opener.document.forms[_form_name].elements[id];
 		} else {
 			var txtarea = opener.$(id);
 		}
+		*/
+		var txtarea = opener.$(id);
+		
 		// IE
 		if(opener.document.selection) {
 			var theSelection = document.selection.createRange().text;
