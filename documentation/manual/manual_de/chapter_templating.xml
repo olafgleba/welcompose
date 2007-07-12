@@ -4,6 +4,18 @@
 <chapter id="templating">
 	<title>Vorlagen</title>
 	
+	<sect1 id="templating.introduction">
+		<title>Einführung</title>
+		
+		<para/>
+	</sect1>
+	
+	<sect1 id="templating.manage_templates">
+		<title>Vorlagen verwalten</title>
+		
+		<para/>
+	</sect1>
+	
 	<sect1 id="templating.page_template_relations">
 		<title>Vorlagen mit Seiten verbinden</title>
 		
@@ -132,5 +144,484 @@
 			<title>Prozess zur Vorlagen-Auswahl</title>
 			<graphic fileref="images/templating.page_template_relations.decision_process.png"/>
 		</figure>
+	</sect1>
+	
+	<sect1 id="templating.connect_templates_with_data">
+		<title>Vorlagen mit Daten zu verbinden</title>
+		
+		<sect2 id="templating.connect_templates_with_data.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Bei der meisten Software steht für jede Vorlage eine bestimmte
+				Menge von Daten respektive Platzhaltern zur Verfügung, die man 
+				verwenden kann oder nicht. Braucht man mehr Daten, als
+				Software-seitig vorgesehen sind, geht dies meist nicht oder ist
+				nur schwer zu bewerkstelligen. Umgekehrt werden, wenn weniger
+				Daten benötigt werden, unnötig Daten geladen, was die Software
+				langsamer macht. 
+			</para>
+		
+			<para>
+				Um mehr Flexibilität zu gewährleisten, geht Welcompose einen
+				anderen Weg:
+			</para>
+		
+			<itemizedlist>
+				<listitem>
+					<para>
+						Es wird standardmässig nur ein Minimum an Daten
+						geladen.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Werden weitere Daten benötigt, können diese nach
+						Bedarf nachgeladen werden.
+					</para>
+				</listitem>
+			</itemizedlist>
+			
+			<para>
+				Der Nachteil dieser Methode ist, dass das Nachladen der 
+				Daten ein wenig komplizierter als das simple Einsetzen der
+				Platzhalter ist. Mit den Erklärungen in den nächsten
+				Abschnitten sollte es aber machbar sein.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="templating.connect_templates_with_data.what_is_there">
+			<title>Was ist da?</title>
+			
+			<para>
+				Wie bereits gesagt, bringt Welcompose immer ein Minimum an
+				Daten pro Seite mit. Beispielsweise die gesamten Metadaten
+				der aktuellen Seite, da sie ohnehin beim Verarbeiten der
+				Anfrage, wenn Welcompose ermittelt, welche Seite überhaupt
+				angefordert wird, bereits geladen wurden.
+			</para>
+			
+			<para>
+				Um herauszufinden, wie die Platzhalter für den Zugriff auf
+				die Metadaten heissen, könnte man entweder den PHP-Code lesen,
+				der die Daten zusammenstellt, oder im Handbuch hier nach
+				einer Liste der Platzhalter suchen &ndash; tun Sie's nicht,
+				selbst wenn mittlerweile so eine existiert. Denn die Daten
+				dort werden entweder nicht aktuell oder aus anderen Gründen
+				unvollständig sein.
+			</para>
+			
+			<para>
+				Die aktuellen Informationen für die jeweilige Seite bringt
+				nämlich Welcompose direkt selber mit, respektive die
+				Bibliothek zur Verarbeitung der Vorlagen. Diese verfügt
+				nämlich über eine Debug-Konsole, welche die vorhandenen
+				Platzhalter und die ihnen aktuell zugewiesenen Daten
+				auflistet.
+			</para>
+			
+			<para>
+				Auf diese Weise kann man dort die benötigten Daten finden
+				und direkt die richtigen Platzhalter in die Vorlage einsetzen.
+			</para>
+			
+			<para>
+				Die Funktionsweise der Debug-Konsole soll an einem einfachen
+				Beispiel illustriert werden. Dazu muss ein Template Set
+				angelegt werden, beispielsweise <userinput>test</userinput>
+				(siehe @@@) und mit einer Seite des Typs
+				<userinput>WCOM_SIMPLE_PAGE</userinput> (siehe
+				<xref linkend="contents.pages.manage"/>) verbunden werden,
+				die mit ein wenig Inhalt befüllt sein sollte.
+			</para>
+			
+			<para>
+				Nun muss man eine Vorlage des Typs 
+				<guimenuitem>simple_page_index</guimenuitem> mit einem
+				beliebigen Namen erstellen, beispielsweise <userinput>Vorlage
+				für Inhaltsseiten</userinput>. In den Inhaltsbereich der
+				Vorlage kann man einen Dummy-Text wie 
+				<userinput>Hello world</userinput> eingeben. Als Template Set
+				muss das soeben erstellte Template Set ausgewählt werden,
+				dem Beispiel gemäss also <guimenuitem>test</guimenuitem>.
+			</para>
+			
+			<figure id="templating.connect_templates_with_data.what_is_there.hello_world_template">
+				<title>"Hello-World"-Vorlage</title>
+				<graphic fileref="images/templating/connect_templates_with_data/what_is_there.hello_world_template.png"/>
+			</figure>
+			
+			<para>
+				Hat man dies erledigt, kann man die Seite aufrufen und sollte
+				<computeroutput>Hello world</computeroutput> zu Gesicht
+				bekommen.
+			</para>
+			
+			<para>
+				Nun kann man den Dummy-Text aus der Vorlage entfernen und
+				statt dessen den Befehl zur Ausgabe der Debug-Konsole
+				einfügen:
+			</para>
+			
+			<programlisting><![CDATA[
+{debug}
+]]></programlisting>
+			
+			<para>
+				Sobald man die Vorlage gespeichert hat und die Ausgabeseite
+				aktualisiert, sollte ein Pop-up mit der Smarty Debug Console
+				erscheinen (gegebenenfalls muss vorab der Pop-up-Blocker
+				deaktiviert werden).
+			</para>
+			
+			<figure id="templating.connect_templates_with_data.what_is_there.debug_pop_up">
+				<title>Debug-Konsole</title>
+				<graphic fileref="images/templating/connect_templates_with_data/what_is_there.debug_pop_up.png"/>
+			</figure>
+			
+			<para>
+				Im Abschnitt <computeroutput>Assignes Template
+				Variables</computeroutput> listet die Smarty Debug Console
+				die bis zum Aufruf von <code>{debug}</code> der Vorlage
+				zugewiesenen Variablen (links, <varname>{$page}</varname> usw.)
+				inklusive ihrer aktuellen Inhalte (rechts, grüne Schrift).
+			</para>
+			
+			<para>
+				Die Variablennamen sind dabei direkt in der Form notiert, wie
+				sie als Platzhalter in die Vorlagen eingesetzt werden müssen.
+				Würde man beispielsweise in die aktuelle Vorlage, wo jetzt
+				<code>{debug}</code> drin steht,
+				<varname>{$SCRIPT_NAME}</varname> oder
+				<varname>{$ACTION}</varname> schreiben und die Seite dann
+				neu laden, würden <varname>{$SCRIPT_NAME}</varname> und 
+				<varname>{$ACTION}</varname> durch ihre aktuellen Werte
+				<computeroutput>/welcompose/trunk/welcompose</computeroutput>
+				und <computeroutput>Index</computeroutput> ersetzt werden.
+			</para>
+			
+			<para>
+				Wer nun das Gleiche mit <varname>{$get}</varname> oder
+				<varname>{$page}</varname> machen würde, erhält als Ergebnis
+				<computeroutput>Array</computeroutput>. Dies ist korrekt, da
+				es sich bei den beiden Variablen nicht um simple Zeichenketten
+				wie <varname>{$SCRIPT_NAME}</varname> oder
+				<varname>{$ACTION}</varname> handelt, sondern um Arrays,
+				also Variablen, in denen mehrere weitere Variablen gespeichert
+				werden. 
+			</para>
+			
+			<para>
+				Dies erkennt man daran, dass die Smarty Debug Console bei
+				<varname>{$get}</varname> rechts in der ersten Zeile mit
+				<computeroutput>Array (8)</computeroutput> signalisiert, 
+				dass es sich eben um einen Array mit 8 sogenannten Elementen,
+				also in ihm gespeicherte Variablen handelt. Die Elemente
+				bestehen einerseits aus ihrem Namen (auch Schlüssel genannt),
+				der links vom Pfeil <code><![CDATA[=>]]></code> steht, und
+				einem Wert rechts vom Pfeil (der wiederum ein Array sein kann). 
+			</para>
+			
+			<para>
+				Um auf ein Array-Element zuzugreifen, muss man den
+				Variablennamen um den Elementnamen erweitern, die beide
+				durch einen Punkt (<code>.</code>) separiert werden. Um 
+				beispielsweise auf das Element <varname>id</varname> von
+				<varname>{$page}</varname> zuzugreifen, müsste man
+				<userinput>{$page.id}</userinput> schreiben, worauf dann
+				<computeroutput>16</computeroutput> erschienen würde. 
+			</para>
+			
+			<para>
+				Man kann auch jeweils alle Elemente eines Arrays ausgeben:
+			</para>
+			
+			<programlisting><![CDATA[
+{foreach from=$page key=_element item=_value}
+	Element: {$_element}
+	Wert: {$_value}
+{/foreach}
+]]></programlisting>
+			
+			<para>
+				Dieses Konstruktur iteriert durch den gesamten Array
+				<varname>$page</varname> und gibt jedes einzelne Element
+				samt Name (<code>{$_element}</code>) und Wert
+				(<code>{$_value}</code>) aus (gekürzt):
+			</para>
+			
+			<programlisting><![CDATA[
+Element: id
+Wert: 16
+Element: project
+Wert: 1
+Element: navigation
+Wert: 3
+Element: root_node
+Wert: 15
+Element: parent
+Wert: 15
+Element: lft
+Wert: 2
+Element: rgt
+Wert: 3
+...
+]]></programlisting>
+			
+			<para>
+				Auf diese Weise lässt sich leicht herausfinden, auf welche
+				Daten in eine Vorlage zugegriffen werden kann oder welche
+				Informationen nachgeladene Daten mitbringen, ohne dass man
+				die Dokumentation wälzen muss.
+			</para>
+		</sect2>
+		
+		<sect2 id="templating.connect_templates_with_data.load_more_data">
+			<title>Daten nachladen</title>
+			
+			<para>
+				Die Daten, die standardmässig in den Vorlagen zur Benutzung
+				bereitstehen, entsprechen nur einem kleinen Teil der Daten,
+				die Welcompose bereithält. Man denke nur an Navigationen oder
+				Boxen. Diese Daten müssen jeweils von Hand nachgeladen werden.
+			</para>
+			
+			<para>
+				Zu diesem Zweck verfügt Welcompose über zwei Funktionen, mit
+				denen direkt aus den Vorlagen heraus auf die internen APIs
+				von Welcompose zugegriffen werden kann &ndash; genauer gesagt
+				auf alle lesenden Methoden<footnote>
+				<para>
+					Schreibende Methoden sind aus Sicherheitsgründen mittels
+					einer Whitelist für den Zugriff aus den Vorlagen gesperrt.
+				</para>
+				</footnote>. So bietet Welcompose innerhalb der Vorlagen
+				sozusagen dieselbe Funktionalität und Flexibilität, wie wenn
+				man bei anderen Systemen den Original-Quellcode modifiziert.
+			</para>
+			
+			<para>
+				Die beiden Funktionen respektive Smarty Plug-ins, welche den
+				Zugriff auf die internen APIs bereitstellen, heissen
+				<code>select_simple</code> und <code>select_named</code>. Sie
+				tun beide dasselbe: Sie rufen die gewünschte Funktion mit den
+				angegebenen Parametern auf und stellen die retournierten Daten
+				innerhalb der Vorlage bereit. So kann auf sie zugegriffen
+				werden, als seien die Daten bereits von Anfang an geladen
+				gewesen. 
+			</para>
+			
+			<para>
+				<code>select_simple</code> und <code>select_named</code>
+				funktionieren fast gleich. Es gibt nur einen kleinen
+				Unterschied in der Art, wie sie die Funktionen aufrufen. Aber
+				dazu erst später mehr. Für den Moment tun wir so, als wären
+				sie identisch.
+			</para>
+			
+			<para>
+				Ein Aufruf von <code>select_simple</code> respektive
+				<code>select_named</code> besteht nebst dem Namen der Funktion
+				(<code>select_simple</code> respektive
+				<code>select_named</code>) immer aus mindestens vier
+				Parametern: Dies sind <varname>ns</varname>,
+				<varname>class</varname>, <varname>method</varname> und
+				<varname>var</varname>. 
+			</para>
+			
+			<programlisting><![CDATA[
+{select_named ns="Content" class="BlogPosting"
+	method="selectBlogPostings" var="blog_postings"}
+]]></programlisting>
+			
+			<para>
+				Die Bedeutung von <varname>var</varname> ist schnell erklärt:
+				<varname>var</varname> bezeichnet den Variablennamen, dem
+				die von der Funktion zurückgegebenen Daten innerhalb der
+				Vorlage zugeordnet werden sollen. Auf die Daten von obigem
+				Aufruf liesse sich also über die Variable
+				<varname>$blog_postings</varname> zugreifen. Der Variablenname
+				ist frei wählbar, so könne man statt
+				<varname>$blog_postings</varname> auch
+				<varname>$blps</varname> schreiben.  
+			</para>
+			
+			<para>
+				Die anderen drei Parameter <varname>ns</varname>,
+				<varname>class</varname> und <varname>method</varname> gehören
+				zusammen und dienen dazu, <code>select_simple</code> 
+				respektive <code>select_named</code> zu sagen, welche
+				Welcompose-Funktion sie ausführen sollen.
+			</para>
+			
+			<para>
+				Damit man weiss, was man überhaupt für Werte den Parametern
+				übergeben muss, muss entweder einen Blick in die
+				API-Dokumentation (siehe <xref
+				linkend="development.api_docs"/>) oder direkt in den Code
+				werfen.
+			</para>
+			
+			<para>
+				Welcompose verfügt über eine Menge von Klassen, die mit
+				Begriffen wie Application, Community, Content oder Media
+				beginnen. Auf sie folgt ein Unterstrich, bevor ein weiterer
+				Begriff wie BlogPosting, GeneratorForm oder PageType folgt.
+			</para>
+			
+			<para>
+				Die Begriffe vor dem Unterstrich (<code>_</code>) dienen
+				zur Gruppierung der Klassen. Alle Klassen, die Content
+				anfangen, haben irgendwas mit den Inhalten zu tun, die
+				Welcompose verwaltet. Die Klassen mit Media kümmern sich
+				dagegen um Multimediaobjekte wie Bilder oder Filme. Diese
+				Organisation nach Bereichen nennen wir bei Welcompose 
+				Namespacing<footnote>
+				<para>
+					Namespacing ist eigentlich der falsche Begriff, da PHP
+					keine Namespaces unterstützt und es somit nur eine grosse
+					Lüge ist. Aber uns ist kein besserer Name eingefallen... 
+				</para>
+				</footnote>, oder kurz <varname>ns</varname>. Dies bedeutet,
+				wer auf eine Klasse aus Application, Community, Content oder
+				Media zugreifen will, muss bei <varname>ns</varname> entweder
+				<userinput>Application</userinput>,
+				<userinput>Community</userinput>, 
+				<userinput>Content</userinput> oder
+				<userinput>Media</userinput> eintragen.
+			</para>
+			
+			<para>
+				Nachdem der Teil links des Unterstrichs bereits vergeben ist,
+				bleibt rechts neben dem Unterstrich noch ein Teil des
+				Klassennamens übrig. Dieser wird jeweils für den Parameter
+				<varname>class</varname> verwendet. Wer also etwas aus der
+				Klasse Content_PageType will, wird als <varname>ns</varname>
+				<userinput>Content</userinput> verwendenden und als 
+				<varname>class</varname> <userinput>PageType</userinput>.
+			</para>
+			
+			<para>
+				Mit Hilfe von <varname>ns</varname> und
+				<varname>class</varname> weiss Welcompose nun, mit welcher
+				Klasse es arbeiten soll. Nun geht es aber noch darum,
+				Welcompose zu sagen, welche Funktion respektive Methode es
+				daraus verwenden soll, indem man für <varname>method</varname>
+				kurzerhand den Methoden-Namen eingibt. Möchte man
+				beispielsweise alle Page Types auslesen, gibt man
+				<userinput>selectPageTypes</userinput> ein. Der ganze
+				Aufruf sieht dann etwa so aus:
+			</para>
+			
+			<programlisting><![CDATA[
+{select_named ns="Content" class="PageType" method="selectPageTypes"
+	var="page_types"}
+]]></programlisting>
+			
+			<warning>
+				<para>
+					Wenn die Smarty Debug Console mittels <code>{debug}</code>
+					vor der Benutzung von <code>{select_named}</code>
+					respektive <code>{select_simple}</code> aufgerufen wird,
+					tauchen die angeforderten Daten, im obigen Fall
+					<varname>{$page_types}</varname>, in der Smarty Debug
+					Console nicht auf. Wer die angeforderten Daten einbeziehen
+					möchte, muss <code>{debug}</code> nach dem Aufruf von
+					<code>{select_simple}</code> respektive
+					<code>{select_named}</code> anwenden.
+				</para>
+			</warning>
+			
+			<para>
+				Nun wird man in den seltensten Fällen alle Page Types,
+				Blog Postings oder alle Bilder auslesen wollen. In der Regel
+				möchte man beispielsweise nur die neusten Blog Postings. 
+				Dies kann man Welcompose sagen, indem man
+				<code>select_simple</code> und <code>select_named</code>
+				weitere Parameter übergibt. Und davon gibt es je nach Funktion
+				eine ganze Menge. Wer beispielsweise in der API-Dokumentation
+				den Eintrag zu <code>selectBlogPostings()</code> nachliest,
+				findet eine Liste unterstützter Parameter wie
+				<varname>page</varname> oder <varname>draft</varname>, mit
+				denen sich beispielsweise festlegen lässt, von welcher
+				Seite Blog Postings geladen werden sollen
+				(<varname>page</varname>) oder wie der Entwurfsstatus der
+				Blog Postings (<varname>draft</varname>) sein muss. Diese
+				Parameter kann man <code>select_simple</code> respektive
+				<code>select_named</code> einfach mitgeben:
+			</para>
+			
+			<programlisting><![CDATA[
+{select_named ns="Content" class="BlogPosting" method="selectBlogPostings"
+	var="blog_postings" page="12" draft="0"}
+]]></programlisting>
+			
+			<para>
+				Kommen wir nun zum Unterschied zwischen
+				<code>select_simple</code> und <code>select_named</code>.
+			</para>
+			
+			<para>
+				Als Faustregel für alle, für die die bisherigen Erläuterungen
+				bereits an Fachchinesisch grenzen, kann man sich merken,
+				dass für alle Funktionen respektive Methoden, die mehrere
+				Datensätze auslesen und darum
+				<code>selectBlogPostings()</code> oder
+				<code>selectPageTypes()</code> heissen (man beachte das
+				Plural-S!), <code>select_named</code> verwendet werden muss.
+				Alle Funktionen, die dagegen nur einen Datensatz auslesen
+				und darum <code>selectNavigation()</code> oder
+				<code>selectGlobalBox()</code> heissen, benötigen
+				<code>select_simple</code>.
+			</para>
+			
+			<para>
+				Doch warum? Zu diesem Zweck ziehen wir wieder die
+				API-Dokumentation zur Funktion respektive Methode
+				<code>selectBlogPostings()</code> und ihrem Geschwister
+				<code>selectBlogPosting()</code> zu Rate. In beiden Einträgen
+				ist eine Zeile nach der Form 
+				<code><![CDATA[array   selectBlogPostings  ([array $params = array()])]]></code>
+				respektive <code><![CDATA[array   selectBlogPosting  (int $id)]]></code>
+				enthalten. Dabei handelt es sich um die jeweiligen
+				Funktionssignaturen.
+			</para>
+			
+			<para>
+				Überall, wo <code><![CDATA[([array $params = array()])]]></code>
+				nach dem Funktionsnamen wie <code>selectBlogPostings</code>
+				steht, muss <code>select_named</code> stehen. Denn
+				<code>select_named</code> nimmt alle Parameter, die abgesehen
+				von <varname>ns</varname>, <varname>class</varname>,
+				<varname>method</varname> und <varname>var</varname> angegeben
+				werden, und formt diese in den Array
+				<varname>$params</varname> um, den die Funktionen erwarten.
+				Dies ist nötig, damit man von der Vielzahl der Parameter,
+				die diese Funktionen zur Filterung der Datensätze
+				anbieten, jeweils nur die benutzt werden, die man verwenden
+				möchte.
+			</para>
+			
+			<para>
+				Überall, wo <code><![CDATA[(int $id)]]></code> steht, muss
+				dagegen <code>select_simple</code> verwendet werden. Denn
+				die Funktionen erwarten einen oder mehrere Parameter in
+				einer festen Reihenfolge, die von <code>select_simple</code>
+				eingesetzt werden &ndash; in diesem Fall <varname>id</varname>.
+				Wenn eine Funktionssignatur wie
+				<code><![CDATA[(int $page, int $id)]]></code> vorliegt,
+				müssen die Parameter <varname>page</varname> und
+				<varname>id</varname> in den select_simple-Aufruf eingesetzt
+				werden und zwar in genau dieser Reihenfolge, damit die 
+				Daten korrekt angefordert werden:
+			</para>
+			
+			<programlisting><![CDATA[
+{select_simple ns="Beispiel" class="TestMethode" method="selectOhneFunktion"
+	page="2" id="15"}
+]]></programlisting>
+			
+		</sect2>
 	</sect1>
 </chapter>
