@@ -61,3 +61,4 @@ var confirmMsgDelTplGlobalfile = '<%i18n Are you sure you want to delete the cho
 var alertOnSelectImageSize = '<%i18n Please select a Flickr.com supplied image size.%>';
 var alertOnClosePopup = '<%i18n The display of the Media Manager was not updated!\\n\\nPlease solely close the window with the corresponding CLOSE button within the launched window. Otherwise the Media Manager does not reflect the current state after editing or adding media.\\n\\nThis advice does not affect other page functionality.%>';
 var alertOnMissingHelpFiles = '<%i18n There is currently no help available.%>';
+var alertOnExcludedTxtareas = '<%i18n You cannot insert media or documents here.%>';

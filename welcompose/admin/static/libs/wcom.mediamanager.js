@@ -987,41 +987,47 @@ function Mediamanager_processMediaCallbacks (elem)
 		} else {
 			form_target = stored_focus;
 			
-			// grab enviroment variables 	
-			// hash the returned variables
-			var getElems = {
-				id : this.elem.id,
-				text : Helper.getSelectionText(),
-				text_converter : Helper.getTextConverterValue(),
-				form_target : form_target,
-				pager_page : Helper.getPagerPage()
-			};
-			var o = $H(getElems);
-			var reqString = o.toQueryString();
+			// exclude form textarea targets which does not include text_converter processing
+			if (form_target == 'blog_posting_feed_summary' || form_target == 'blog_posting_tags') {
+				alert(alertOnExcludedTxtareas);
+			} else {
 			
-			if (this.popup) {
-				Helper.lowerOpacity();				
-				this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php' + '?' + reqString;
-				this.targetUrl = this.url;
-				this.target = window.open(this.targetUrl, this.targetName, 
-						"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
-				this.resWidth = Helper.defineWindowX(this.targetWidth);
-				this.resHeight = Helper.defineWindowY();
+				// grab enviroment variables 	
+				// hash the returned variables
+				var getElems = {
+					id : this.elem.id,
+					text : Helper.getSelectionText(),
+					text_converter : Helper.getTextConverterValue(),
+					form_target : form_target,
+					pager_page : Helper.getPagerPage()
+				};
+				var o = $H(getElems);
+				var reqString = o.toQueryString();
+			
+				if (this.popup) {
+					Helper.lowerOpacity();				
+					this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php' + '?' + reqString;
+					this.targetUrl = this.url;
+					this.target = window.open(this.targetUrl, this.targetName, 
+							"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
+					this.resWidth = Helper.defineWindowX(this.targetWidth);
+					this.resHeight = Helper.defineWindowY();
 		
-				this.target.moveBy(this.resWidth, this.resHeight);
-				this.target.focus();
-			} else {		
-				this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php';
-				var url = this.url;
-				var pars = reqString;
+					this.target.moveBy(this.resWidth, this.resHeight);
+					this.target.focus();
+				} else {		
+					this.url = this.parseMedCallbacksFilePath + this.elem.name + '.php';
+					var url = this.url;
+					var pars = reqString;
 	
-				var myAjax = new Ajax.Request(
-					url,
-					{
-						method : 'post',
-						parameters : pars,
-						onComplete : Mediamanager.showResponseProcessMediaCallbacks
-					});
+					var myAjax = new Ajax.Request(
+						url,
+						{
+							method : 'post',
+							parameters : pars,
+							onComplete : Mediamanager.showResponseProcessMediaCallbacks
+						});
+				}
 			}	
 		}
 	} catch (e) {
