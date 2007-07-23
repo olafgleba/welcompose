@@ -7,351 +7,559 @@
 	<sect1 id="templating.introduction">
 		<title>Einführung</title>
 		
-		<para/>
-	</sect1>
-	
-	<sect1 id="templating.manage_templates">
-		<title>Vorlagen verwalten</title>
-		
-		<para/>
-	</sect1>
-	
-	<sect1 id="templating.page_template_relations">
-		<title>Vorlagen mit Seiten verbinden</title>
-		
 		<para>
-			Bei den meisten Publishing Systemen werden die Vorlagen auf
-			der Festplatte des Webservers abgelegt und zwar je eine pro
-			Script. Ruft der Besucher die Startseite
-			<filename>index.php</filename> auf, wird die Vorlage
-			<filename>index.html</filename> geladen, um die Seite anzuzeigen.
-			Ruft der Besucher die News-Seite <filename>news/index.php</filename>
-			auf, wird die Vorlage <filename>news/index.html</filename> geladen,
-			um die News-Seite anzuzeigen. Dies ist bei Welcompose grundsätzlich nicht
-			anders, unterscheidet sich aber in der Anwendung, da die Vorlagen in
-			der Datenbank gespeichert und über die Administrationsoberfläche
-			verwaltet werden.
+			Die Vorlagen dienen in Welcompose dazu, das Aussehen der
+			Ausgabeseiten zu gestalten. Der Anwender behält dabei volle
+			Kontrolle über die Ausgabe, sodass der ausgegebene Code komplett
+			von ihm bestimmt werden kann. Auf diese Weise wird die
+			Realisierung von tabellenfreien Layouts und barrierefreien Seiten
+			von Welcompose nicht behindert. 
 		</para>
 		
 		<para>
-			Die Vorlagen, die sonst auf der Festplatte abgelegt werden,
-			unterscheiden sich nicht von denjenigen, die über das
-			Administrationsinterface angelegt werden &ndash; ausser vielleicht
-			diesbezüglich, dass man zusätzliche Meta-Informationen
-			<footnote>
-				<para>
-					Die Meta-Informationen sollten nicht mit den Meta-Tags
-					im Kopf-Bereich von HTML-Dokumenten verwechselt werden.
-				</para>
-			</footnote>
-			wie einen frei definierbaren Vorlagen-Namen (wie
-			<userinput>Vorlage Weihnachtsaktion auf Startseite</userinput>) und
-			eine Beschreibung speichern kann.
+			Alle Vorlagen, CSS-Dateien und Bilder werden übers Web verwaltet,
+			also über die Administrationsoberfläche. Auf diese Weise wird
+			unter anderem die Verwendung von einer Vorlage pro Einzelseite
+			ermöglicht. 
 		</para>
 		
 		<para>
-			Der grosse Unterschied besteht in der Verknüpfung der einzelnen
-			Seiten mit den Vorlagen. Diese ist sehr flexibel gestaltet,
-			damit man für jede Seite andere Vorlagen definieren kann, wenn
-			man dies benötigt. Man kann sogar soweit gehen, mehrere
-			Vorlagen für ein und dieselbe Seite anzulegen, die dann per
-			Knopfdruck gewechselt werden. Gesteuert wird dieses Verhalten
-			über zwei Eigenschaften:
-		</para>
-		
-		<anchor id="templating.page_template_types"/>
-		<variablelist>
-			<varlistentry>
-				<term><emphasis role="strong">Vorlagen-Typen</emphasis></term>
-				<listitem>
-					<para>
-						Mit den Vorlagen-Typen wird gesteuert, welche Vorlage
-						bei welchem Seiten-Typ zum Einsatz kommt. So kann dafür
-						gesorgt werden, dass die Vorlage für ein
-						Kontakt-Formular dazu benutzt wird, ein Kontakt-Formular
-						anzuzeigen und nicht etwa der Anzeige einer normalen
-						Inhaltsseite dient, die nicht ein Kontaktformular
-						sondern bspw. ein Impressum darstellen soll.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><emphasis role="strong">Vorlagen-Sets</emphasis></term>
-				<listitem>
-					<para>
-						Vorlagen-Sets dienen dazu, eine Reihe von Vorlagen
-						zusammenzufassen, und zwar je eine Vorlage von
-						jedem Vorlagen-Typ. Diese "Vorlagen-Bündel"
-						werden dann jeweils einer Seite zugeordnet, die
-						dann die jeweils benötigten Vorlagen aus dem
-						Set "herauszieht". 
-					</para>
-				</listitem>
-			</varlistentry>
-		</variablelist>
-		
-		<para>
-			Ein Beispiel dürfte Licht ins abstrakte Dunkel bringen: Ein
-			Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt werden.
-			Angenommen wird, das bereits ein Vorlagen-Set mit Namen <emphasis>Konferenz</emphasis>
-			und eine inhaltliche Seite mit Seiten-Typ <emphasis>WCOM_SIMPLE_FORM</emphasis>
-			und Namen <emphasis>Konferenzrückfragen</emphasis> existiert die dem o.g.
-			Vorlagen-Set zugeordnet ist.
-		</para>
-			
-		<para>
-			Nun wollen wir diese inhaltliche Seite mit einer Vorlage verknüpfen.
-			Hierzu legen wir eine Vorlage mit Namen <userinput>Kontaktformular Konferenzrückfragen</userinput> an.
-			Damit Welcompose weiss, dass diese eine Vorlage für ein Kontaktformular
-			ist, muss ihr der passende Vorlagen-Typ
-			<guimenuitem>simple_form_index</guimenuitem> zugeordnet werden. Und da es u.U. mehrere
-			Vorlagen mit dem gleichen Vorlagen-Typ <emphasis>simple_form_index</emphasis>
-			geben kann, muss Welcompose noch gesagt werden, welche von diesen
-			Vorlagen es für unsere Vorlage <emphasis>Kontaktformular Konferenzrückfragen</emphasis> benutzen
-			soll. Dazu wird dieser Vorlage das gleiche Vorlagen-Set 
-			<emphasis>Konferenz</emphasis> zugeordnet, das wir unserer inhaltlichen Seite
-			zugewiesen haben.
-		</para>
-		
-		<note>
+			Zur Verarbeitung der Vorlagen dient die populäre Bibliothek
+			Smarty<footnote>
 			<para>
-				Eine vollständige Liste der Vorlagen-Typen finden Sie in
-				<xref linkend="reference.list_of_template_types"/>
+				<ulink type="external" url="http://smarty.php.net"/>
 			</para>
-		</note>
-		
-		<para>
-			Wenn jetzt ein Besucher das Formular <emphasis>Konferenzrückfragen</emphasis> aufruft,
-			weiss Welcompose, dass es eine Vorlage des Typs <emphasis>simple_form_index</emphasis>
-			braucht, denn schliesslich handelt sich um ein Formular. Und da das Vorlagen-Set
-			<emphasis>Konferenz</emphasis> mit der Seite verknüpft ist,
-			weiss Welcompose, dass es aus diesem Vorlagen-Set die Vorlage mit dem
-			Typ <emphasis>simple_form_index</emphasis> auslesen muss und gelangt
-			zur Vorlage mit dem Namen <emphasis>Kontaktformular
-			Konferenzrückfragen</emphasis> &ndash; et voilà, die Seite wird
-			angezeigt.
+			</footnote>. Sie bietet eine Vielzahl von Funktionen, mit deren
+			Hilfe die Integration von Vorlagen in Welcompose nicht allzu 
+			schwer fallen sollte. Zudem ist es möglich, von den Vorlagen aus
+			auf die internen APIs von Welcompose zuzugreifen und auf diese
+			Weise die Daten, die man benötigt, nachzuladen. So bietet
+			Welcompose eine grössere Flexibilität, ohne dass der Ursprungscode
+			modifiziert werden muss.
 		</para>
 		
-		<para>
-			Den Prozess zur Vorlagen-Auswahl illustriert die Grafik
-			<xref linkend="templating.page_template_relations.decision_process"/>
-			näherungsweise. Aufgerufen wird eine Produktseite, der das
-			Vorlagen-Set Produkte zugeordnet ist und eine Vorlage vom Typ
-			1 benötigt.
-		</para>
+		<tip>
+			<para>
+				Wer mit Smarty noch nicht vertraut ist, dem bietet der
+				Abschnitt Smarty for Template Designers<footnote>
+				<para>
+					<ulink type="external" url="http://smarty.php.net/manual/en/smarty.for.designers.php"/>
+				</para>
+				</footnote> aus der der Smarty-Dokumentation einen guten
+				Einstieg. 
+			</para>
+		</tip>
 		
-		<figure id="templating.page_template_relations.decision_process">
-			<title>Prozess zur Vorlagen-Auswahl</title>
-			<graphic fileref="images/templating.page_template_relations.decision_process.png"/>
-		</figure>
 	</sect1>
 	
-	<sect1 id="templating.connect_templates_with_data">
-		<title>Vorlagen mit Daten zu verbinden</title>
+	<sect1 id="templating.templates">
+		<title>Vorlagen</title>
 		
-		<sect2 id="templating.connect_templates_with_data.introduction">
+		<sect2 id="templating.templates.introduction">
 			<title>Einführung</title>
 			
 			<para>
-				Bei der meisten Software steht für jede Vorlage eine bestimmte
-				Menge von Daten respektive Platzhaltern zur Verfügung, die man 
-				verwenden kann oder nicht. Braucht man mehr Daten, als
-				Software-seitig vorgesehen sind, geht dies meist nicht oder ist
-				nur schwer zu bewerkstelligen. Umgekehrt werden, wenn weniger
-				Daten benötigt werden, unnötig Daten geladen, was die Software
-				langsamer macht. 
-			</para>
-		
-			<para>
-				Um mehr Flexibilität zu gewährleisten, geht Welcompose einen
-				anderen Weg:
-			</para>
-		
-			<itemizedlist>
-				<listitem>
-					<para>
-						Es wird standardmässig nur ein Minimum an Daten
-						geladen.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Werden weitere Daten benötigt, können diese nach
-						Bedarf nachgeladen werden.
-					</para>
-				</listitem>
-			</itemizedlist>
-			
-			<para>
-				Der Nachteil dieser Methode ist, dass das Nachladen der 
-				Daten ein wenig komplizierter als das simple Einsetzen der
-				Platzhalter ist. Mit den Erklärungen in den nächsten
-				Abschnitten sollte es aber machbar sein.
+				Die Vorlagen dienen in Welcompose zur Gestaltung respektive
+				Aufbereitung der einzelnen Seiten. Sie werden in Form von
+				normalen HTML-Dateien hinterlegt, bei denen die Inhalte, die
+				mit Welcompose verwaltet werden sollen, durch Platzhalter
+				ersetzt werden. Diese werden wiederum von Welcompose beim
+				Seitenaufruf mit den jeweiligen Inhalten vertauscht.
+				Selbstverständlich ist man nicht nur auf HTML begrenzt und
+				kann jede Markup-Sprache verwenden, die man benötigt &ndash;
+				oder sogar nur nackten Text.
 			</para>
 			
+			<para>
+				Vorlagen werden pro Seitentyp angelegt. Dies bedeutet, dass
+				standardmässig alle Seiten desselben Typs (siehe <xref
+				linkend="templating.template_types"/>) dieselbe Vorlage
+				verwenden. Wer für eine Seite eine andere Vorlage verwenden
+				möchte, muss ein weiteres Vorlagen-Set anlegen (siehe <xref
+				linkend="templating.template_sets"/>).
+			</para>
+			
+			<para>
+				Zur Speicherung von CSS- oder JavaScript-Dateien kommen nicht
+				die normalen Vorlagen, sondern die globalen Vorlagen (siehe
+				<xref linkend="templating.global_templates"/>) zum Einsatz.
+				Um Bilder und andere binäre Objekte kümmern sich die globalen
+				Dateien (siehe <xref linkend="templating.global_files"/>).
+			</para>
 		</sect2>
 		
-		<sect2 id="templating.connect_templates_with_data.what_is_there">
-			<title>Was ist da?</title>
+		<sect2 id="templating.templates.manage_templates">
+			<title>Vorlagen verwalten</title>
 			
 			<para>
-				Wie bereits gesagt, bringt Welcompose immer ein Minimum an
-				Daten pro Seite mit. Beispielsweise die gesamten Metadaten
-				der aktuellen Seite, da sie ohnehin beim Verarbeiten der
-				Anfrage, wenn Welcompose ermittelt, welche Seite überhaupt
-				angefordert wird, bereits geladen wurden.
+				Die Verwaltung der Vorlagen erfolgt im Bereich
+				<guimenu>Templating</guimenu> beim Unterpunkt
+				<guisubmenu>Templates</guisubmenu>. Die Übersicht listet die
+				vorhandenen Vorlagen zusammen mit dem Namen, dem jeweiligen
+				Typ und einer allenfalls vorhandenen Beschreibung. Eine
+				Filterung der angezeigten Vorlagen ist anhand des
+				Vorlagen-Typs und -Sets möglich. Dazu werden eine Reihe von
+				Funktionen zur Bearbeitung von Vorlagen geboten:
 			</para>
 			
-			<para>
-				Um herauszufinden, wie die Platzhalter für den Zugriff auf
-				die Metadaten heissen, könnte man entweder den PHP-Code lesen,
-				der die Daten zusammenstellt, oder im Handbuch hier nach
-				einer Liste der Platzhalter suchen &ndash; tun Sie's nicht,
-				selbst wenn mittlerweile so eine existiert. Denn die Daten
-				dort werden entweder nicht aktuell oder aus anderen Gründen
-				unvollständig sein.
-			</para>
-			
-			<para>
-				Die aktuellen Informationen für die jeweilige Seite bringt
-				nämlich Welcompose direkt selber mit, respektive die
-				Bibliothek zur Verarbeitung der Vorlagen. Diese verfügt
-				nämlich über eine Debug-Konsole, welche die vorhandenen
-				Platzhalter und die ihnen aktuell zugewiesenen Daten
-				auflistet.
-			</para>
-			
-			<para>
-				Auf diese Weise kann man dort die benötigten Daten finden
-				und direkt die richtigen Platzhalter in die Vorlage einsetzen.
-			</para>
-			
-			<para>
-				Die Funktionsweise der Debug-Konsole soll an einem einfachen
-				Beispiel illustriert werden. Dazu muss ein Template Set
-				angelegt werden, beispielsweise <userinput>test</userinput>
-				(siehe @@@) und mit einer Seite des Typs
-				<userinput>WCOM_SIMPLE_PAGE</userinput> (siehe
-				<xref linkend="contents.pages.manage"/>) verbunden werden,
-				die mit ein wenig Inhalt befüllt sein sollte.
-			</para>
-			
-			<para>
-				Nun muss man eine Vorlage des Typs 
-				<guimenuitem>simple_page_index</guimenuitem> mit einem
-				beliebigen Namen erstellen, beispielsweise <userinput>Vorlage
-				für Inhaltsseiten</userinput>. In den Inhaltsbereich der
-				Vorlage kann man einen Dummy-Text wie 
-				<userinput>Hello world</userinput> eingeben. Als Template Set
-				muss das soeben erstellte Template Set ausgewählt werden,
-				dem Beispiel gemäss also <guimenuitem>test</guimenuitem>.
-			</para>
-			
-			<figure id="templating.connect_templates_with_data.what_is_there.hello_world_template">
-				<title>"Hello-World"-Vorlage</title>
-				<graphic fileref="images/templating/connect_templates_with_data/what_is_there.hello_world_template.png"/>
+			<figure id="templating.templates.manage_templates.overview">
+				<title>Übersicht über vorhandene Vorlagen</title>
+				<graphic fileref="images/templating/templates/manage_templates.overview.png"/>
 			</figure>
 			
-			<para>
-				Hat man dies erledigt, kann man die Seite aufrufen und sollte
-				<computeroutput>Hello world</computeroutput> zu Gesicht
-				bekommen.
-			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Upload</term>
+					<listitem>
+						<para>
+							Ermöglicht das Hochladen einer Vorlage, wobei mit 
+							dem Dateiinhalt der hochgeladenen Datei die auf
+							dem Server hinterlegte Vorlage ersetzt wird. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Download</term>
+					<listitem>
+						<para>
+							Erlaubt den Download der Vorlage als Datei. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Duplicate</term>
+					<listitem>
+						<para>
+							Mit dieser Funktion ist es möglich, die jeweilige
+							Vorlage zu duplizieren und unter einem anderen
+							Namen, Typ oder auch Inhalt zu speichern. So kann
+							man Zeit beim Erstellen der Vorlagen sparen, wenn
+							sich zwei Vorlagen nur wenig unterscheiden. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Edit</term>
+					<listitem>
+						<para>
+							Über die Schaltfläche <guibutton>Edit</guibutton>
+							gelangt man zu einem Formular zum Bearbeiten der
+							jeweiligen Vorlage.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Delete</term>
+					<listitem>
+						<para>
+							Löscht die Vorlage.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 			
 			<para>
-				Nun kann man den Dummy-Text aus der Vorlage entfernen und
-				statt dessen den Befehl zur Ausgabe der Debug-Konsole
-				einfügen:
+				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				kommt man zum Formular zum Hinzufügen einer neuen Vorlage.
 			</para>
 			
-			<programlisting><![CDATA[
+			<figure id="templating.templates.manage_templates.add_new">
+				<title>Vorlage hinzufügen</title>
+				<graphic fileref="images/templating/templates/manage_templates.add_new.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term>Type</term>
+					<listitem>
+						<para>
+							Der Vorlagen-Typ, den die neue Vorlage erhalten
+							soll. Bestimmt, für welche Arten von Seiten
+							die Vorlage eingesetzt werden soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Name</term>
+					<listitem>
+						<para>
+							Der Name der Vorlage. Kann frei gewählt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Description</term>
+					<listitem>
+						<para>
+							Beschreibung der Vorlage. Kann frei gewählt
+							werden und soll beim Wiederfinden der Vorlage
+							helfen.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Content</term>
+					<listitem>
+						<para>
+							Der eigentliche Inhalt der Vorlage. Hier kann
+							der (X)HTML-Code eingefügt werden. Links zu
+							anderen Seiten, Globalen Vorlagen und einigen
+							anderen Strukturelementen können über die
+							Hilftsfunktionen oberhalb des Inhaltsbereichs
+							eingefügt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Sets</term>
+					<listitem>
+						<para>
+							Vorlagen-Sets, denen die Vorlage zugeordnet werden
+							soll. Es kann entweder keine, eine oder mehrere
+							Vorlagen-Sets ausgewählt werden. Die Vorlage ist
+							aber nur aktiv, wenn sie mindestens einem
+							Vorlagen-Set zugewiesen wird. 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="templating.templates.connect_templates_with_pages">
+			<title>Vorlagen mit Seiten verbinden</title>
+
+			<para>
+				Bei den meisten Publishing Systemen werden die Vorlagen auf
+				der Festplatte des Webservers abgelegt und zwar je eine pro
+				Script. Ruft der Besucher die Startseite
+				<filename>index.php</filename> auf, wird die Vorlage
+				<filename>index.html</filename> geladen, um die Seite anzuzeigen.
+				Ruft der Besucher die News-Seite <filename>news/index.php</filename>
+				auf, wird die Vorlage <filename>news/index.html</filename> geladen,
+				um die News-Seite anzuzeigen. Dies ist bei Welcompose grundsätzlich nicht
+				anders, unterscheidet sich aber in der Anwendung, da die Vorlagen in
+				der Datenbank gespeichert und über die Administrationsoberfläche
+				verwaltet werden.
+			</para>
+
+			<para>
+				Die Vorlagen, die sonst auf der Festplatte abgelegt werden,
+				unterscheiden sich nicht von denjenigen, die über das
+				Administrationsinterface angelegt werden &ndash; ausser vielleicht
+				diesbezüglich, dass man zusätzliche Meta-Informationen
+				<footnote>
+					<para>
+						Die Meta-Informationen sollten nicht mit den Meta-Tags
+						im Kopf-Bereich von HTML-Dokumenten verwechselt werden.
+					</para>
+				</footnote>
+				wie einen frei definierbaren Vorlagen-Namen (wie
+				<userinput>Vorlage Weihnachtsaktion auf Startseite</userinput>) und
+				eine Beschreibung speichern kann.
+			</para>
+
+			<para>
+				Der grosse Unterschied besteht in der Verknüpfung der einzelnen
+				Seiten mit den Vorlagen. Diese ist sehr flexibel gestaltet,
+				damit man für jede Seite andere Vorlagen definieren kann, wenn
+				man dies benötigt. Man kann sogar soweit gehen, mehrere
+				Vorlagen für ein und dieselbe Seite anzulegen, die dann per
+				Knopfdruck gewechselt werden. Gesteuert wird dieses Verhalten
+				über zwei Eigenschaften:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><emphasis role="strong">Vorlagen-Typen</emphasis></term>
+					<listitem>
+						<para>
+							Mit den Vorlagen-Typen wird gesteuert, welche Vorlage
+							bei welchem Seiten-Typ zum Einsatz kommt. So kann dafür
+							gesorgt werden, dass die Vorlage für ein
+							Kontakt-Formular dazu benutzt wird, ein Kontakt-Formular
+							anzuzeigen und nicht etwa der Anzeige einer normalen
+							Inhaltsseite dient, die nicht ein Kontaktformular
+							sondern bspw. ein Impressum darstellen soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis role="strong">Vorlagen-Sets</emphasis></term>
+					<listitem>
+						<para>
+							Vorlagen-Sets dienen dazu, eine Reihe von Vorlagen
+							zusammenzufassen, und zwar je eine Vorlage von
+							jedem Vorlagen-Typ. Diese "Vorlagen-Bündel"
+							werden dann jeweils einer Seite zugeordnet, die
+							dann die jeweils benötigten Vorlagen aus dem
+							Set "herauszieht". 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Ein Beispiel dürfte Licht ins abstrakte Dunkel bringen: Ein
+				Kontaktformular für Rückfragen zu einer Konferenz soll angezeigt werden.
+				Angenommen wird, das bereits ein Vorlagen-Set mit Namen <emphasis>Konferenz</emphasis>
+				und eine inhaltliche Seite mit Seiten-Typ <emphasis>WCOM_SIMPLE_FORM</emphasis>
+				und Namen <emphasis>Konferenzrückfragen</emphasis> existiert die dem o.g.
+				Vorlagen-Set zugeordnet ist.
+			</para>
+
+			<para>
+				Nun wollen wir diese inhaltliche Seite mit einer Vorlage verknüpfen.
+				Hierzu legen wir eine Vorlage mit Namen <userinput>Kontaktformular Konferenzrückfragen</userinput> an.
+				Damit Welcompose weiss, dass diese eine Vorlage für ein Kontaktformular
+				ist, muss ihr der passende Vorlagen-Typ
+				<guimenuitem>simple_form_index</guimenuitem> zugeordnet werden. Und da es u.U. mehrere
+				Vorlagen mit dem gleichen Vorlagen-Typ <emphasis>simple_form_index</emphasis>
+				geben kann, muss Welcompose noch gesagt werden, welche von diesen
+				Vorlagen es für unsere Vorlage <emphasis>Kontaktformular Konferenzrückfragen</emphasis> benutzen
+				soll. Dazu wird dieser Vorlage das gleiche Vorlagen-Set 
+				<emphasis>Konferenz</emphasis> zugeordnet, das wir unserer inhaltlichen Seite
+				zugewiesen haben.
+			</para>
+
+			<note>
+				<para>
+					Eine vollständige Liste der Vorlagen-Typen finden Sie in
+					<xref linkend="reference.list_of_template_types"/>
+				</para>
+			</note>
+
+			<para>
+				Wenn jetzt ein Besucher das Formular <emphasis>Konferenzrückfragen</emphasis> aufruft,
+				weiss Welcompose, dass es eine Vorlage des Typs <emphasis>simple_form_index</emphasis>
+				braucht, denn schliesslich handelt sich um ein Formular. Und da das Vorlagen-Set
+				<emphasis>Konferenz</emphasis> mit der Seite verknüpft ist,
+				weiss Welcompose, dass es aus diesem Vorlagen-Set die Vorlage mit dem
+				Typ <emphasis>simple_form_index</emphasis> auslesen muss und gelangt
+				zur Vorlage mit dem Namen <emphasis>Kontaktformular
+				Konferenzrückfragen</emphasis> &ndash; et voilà, die Seite wird
+				angezeigt.
+			</para>
+
+			<para>
+				Den Prozess zur Vorlagen-Auswahl illustriert die Grafik
+				<xref linkend="templating.templates.connect_templates_with_pages.decision_process"/>
+				näherungsweise. Aufgerufen wird eine Produktseite, der das
+				Vorlagen-Set Produkte zugeordnet ist und eine Vorlage vom Typ
+				1 benötigt.
+			</para>
+
+			<figure id="templating.templates.connect_templates_with_pages.decision_process">
+				<title>Prozess zur Vorlagen-Auswahl</title>
+				<graphic fileref="images/templating/templates/connect_templates_with_pages.decision_process.png"/>
+			</figure>
+		</sect2>
+
+		<sect2 id="templating.templates.connect_templates_with_data">
+			<title>Vorlagen mit Daten verbinden</title>
+
+			<sect3 id="templating.templates.connect_templates_with_data.introduction">
+				<title>Einführung</title>
+
+				<para>
+					Bei der meisten Software steht für jede Vorlage eine bestimmte
+					Menge von Daten respektive Platzhaltern zur Verfügung, die man 
+					verwenden kann oder nicht. Braucht man mehr Daten, als
+					Software-seitig vorgesehen sind, geht dies meist nicht oder ist
+					nur schwer zu bewerkstelligen. Umgekehrt werden, wenn weniger
+					Daten benötigt werden, unnötig Daten geladen, was die Software
+					langsamer macht. 
+				</para>
+
+				<para>
+					Um mehr Flexibilität zu gewährleisten, geht Welcompose einen
+					anderen Weg:
+				</para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Es wird standardmässig nur ein Minimum an Daten
+							geladen.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Werden weitere Daten benötigt, können diese nach
+							Bedarf nachgeladen werden.
+						</para>
+					</listitem>
+				</itemizedlist>
+
+				<para>
+					Der Nachteil dieser Methode ist, dass das Nachladen der 
+					Daten ein wenig komplizierter als das simple Einsetzen der
+					Platzhalter ist. Mit den Erklärungen in den nächsten
+					Abschnitten sollte es aber machbar sein.
+				</para>
+
+			</sect3>
+
+			<sect3 id="templating.templates.connect_templates_with_data.what_is_there">
+				<title>Was ist da?</title>
+
+				<para>
+					Wie bereits gesagt, bringt Welcompose immer ein Minimum an
+					Daten pro Seite mit. Beispielsweise die gesamten Metadaten
+					der aktuellen Seite, da sie ohnehin beim Verarbeiten der
+					Anfrage, wenn Welcompose ermittelt, welche Seite überhaupt
+					angefordert wird, bereits geladen wurden.
+				</para>
+
+				<para>
+					Um herauszufinden, wie die Platzhalter für den Zugriff auf
+					die Metadaten heissen, könnte man entweder den PHP-Code lesen,
+					der die Daten zusammenstellt, oder im Handbuch hier nach
+					einer Liste der Platzhalter suchen &ndash; tun Sie's nicht,
+					selbst wenn mittlerweile so eine existiert. Denn die Daten
+					dort werden entweder nicht aktuell oder aus anderen Gründen
+					unvollständig sein.
+				</para>
+
+				<para>
+					Die aktuellen Informationen für die jeweilige Seite bringt
+					nämlich Welcompose direkt selber mit, respektive die
+					Bibliothek zur Verarbeitung der Vorlagen. Diese verfügt
+					nämlich über eine Debug-Konsole, welche die vorhandenen
+					Platzhalter und die ihnen aktuell zugewiesenen Daten
+					auflistet.
+				</para>
+
+				<para>
+					Auf diese Weise kann man dort die benötigten Daten finden
+					und direkt die richtigen Platzhalter in die Vorlage einsetzen.
+				</para>
+
+				<para>
+					Die Funktionsweise der Debug-Konsole soll an einem einfachen
+					Beispiel illustriert werden. Dazu muss ein Template Set
+					angelegt werden, beispielsweise <userinput>test</userinput>
+					(siehe @@@) und mit einer Seite des Typs
+					<userinput>WCOM_SIMPLE_PAGE</userinput> (siehe
+					<xref linkend="contents.pages.manage"/>) verbunden werden,
+					die mit ein wenig Inhalt befüllt sein sollte.
+				</para>
+
+				<para>
+					Nun muss man eine Vorlage des Typs 
+					<guimenuitem>simple_page_index</guimenuitem> mit einem
+					beliebigen Namen erstellen, beispielsweise <userinput>Vorlage
+					für Inhaltsseiten</userinput>. In den Inhaltsbereich der
+					Vorlage kann man einen Dummy-Text wie 
+					<userinput>Hello world</userinput> eingeben. Als Template Set
+					muss das soeben erstellte Template Set ausgewählt werden,
+					dem Beispiel gemäss also <guimenuitem>test</guimenuitem>.
+				</para>
+
+				<figure id="templating.templates.connect_templates_with_data.what_is_there.hello_world_template">
+					<title>"Hello-World"-Vorlage</title>
+					<graphic fileref="images/templating/templates/connect_templates_with_data.what_is_there.hello_world_template.png"/>
+				</figure>
+
+				<para>
+					Hat man dies erledigt, kann man die Seite aufrufen und sollte
+					<computeroutput>Hello world</computeroutput> zu Gesicht
+					bekommen.
+				</para>
+
+				<para>
+					Nun kann man den Dummy-Text aus der Vorlage entfernen und
+					statt dessen den Befehl zur Ausgabe der Debug-Konsole
+					einfügen:
+				</para>
+
+				<programlisting><![CDATA[
 {debug}
 ]]></programlisting>
-			
-			<para>
-				Sobald man die Vorlage gespeichert hat und die Ausgabeseite
-				aktualisiert, sollte ein Pop-up mit der Smarty Debug Console
-				erscheinen (gegebenenfalls muss vorab der Pop-up-Blocker
-				deaktiviert werden).
-			</para>
-			
-			<figure id="templating.connect_templates_with_data.what_is_there.debug_pop_up">
-				<title>Debug-Konsole</title>
-				<graphic fileref="images/templating/connect_templates_with_data/what_is_there.debug_pop_up.png"/>
-			</figure>
-			
-			<para>
-				Im Abschnitt <computeroutput>Assignes Template
-				Variables</computeroutput> listet die Smarty Debug Console
-				die bis zum Aufruf von <code>{debug}</code> der Vorlage
-				zugewiesenen Variablen (links, <varname>{$page}</varname> usw.)
-				inklusive ihrer aktuellen Inhalte (rechts, grüne Schrift).
-			</para>
-			
-			<para>
-				Die Variablennamen sind dabei direkt in der Form notiert, wie
-				sie als Platzhalter in die Vorlagen eingesetzt werden müssen.
-				Würde man beispielsweise in die aktuelle Vorlage, wo jetzt
-				<code>{debug}</code> drin steht,
-				<varname>{$SCRIPT_NAME}</varname> oder
-				<varname>{$ACTION}</varname> schreiben und die Seite dann
-				neu laden, würden <varname>{$SCRIPT_NAME}</varname> und 
-				<varname>{$ACTION}</varname> durch ihre aktuellen Werte
-				<computeroutput>/welcompose/trunk/welcompose</computeroutput>
-				und <computeroutput>Index</computeroutput> ersetzt werden.
-			</para>
-			
-			<para>
-				Wer nun das Gleiche mit <varname>{$get}</varname> oder
-				<varname>{$page}</varname> machen würde, erhält als Ergebnis
-				<computeroutput>Array</computeroutput>. Dies ist korrekt, da
-				es sich bei den beiden Variablen nicht um simple Zeichenketten
-				wie <varname>{$SCRIPT_NAME}</varname> oder
-				<varname>{$ACTION}</varname> handelt, sondern um Arrays,
-				also Variablen, in denen mehrere weitere Variablen gespeichert
-				werden. 
-			</para>
-			
-			<para>
-				Dies erkennt man daran, dass die Smarty Debug Console bei
-				<varname>{$get}</varname> rechts in der ersten Zeile mit
-				<computeroutput>Array (8)</computeroutput> signalisiert, 
-				dass es sich eben um einen Array mit 8 sogenannten Elementen,
-				also in ihm gespeicherte Variablen handelt. Die Elemente
-				bestehen einerseits aus ihrem Namen (auch Schlüssel genannt),
-				der links vom Pfeil <code><![CDATA[=>]]></code> steht, und
-				einem Wert rechts vom Pfeil (der wiederum ein Array sein kann). 
-			</para>
-			
-			<para>
-				Um auf ein Array-Element zuzugreifen, muss man den
-				Variablennamen um den Elementnamen erweitern, die beide
-				durch einen Punkt (<code>.</code>) separiert werden. Um 
-				beispielsweise auf das Element <varname>id</varname> von
-				<varname>{$page}</varname> zuzugreifen, müsste man
-				<userinput>{$page.id}</userinput> schreiben, worauf dann
-				<computeroutput>16</computeroutput> erschienen würde. 
-			</para>
-			
-			<para>
-				Man kann auch jeweils alle Elemente eines Arrays ausgeben:
-			</para>
-			
-			<programlisting><![CDATA[
+
+				<para>
+					Sobald man die Vorlage gespeichert hat und die Ausgabeseite
+					aktualisiert, sollte ein Pop-up mit der Smarty Debug Console
+					erscheinen (gegebenenfalls muss vorab der Pop-up-Blocker
+					deaktiviert werden).
+				</para>
+
+				<figure id="templating.templates.connect_templates_with_data.what_is_there.debug_pop_up">
+					<title>Debug-Konsole</title>
+					<graphic fileref="images/templating/templates/connect_templates_with_data.what_is_there.debug_pop_up.png"/>
+				</figure>
+
+				<para>
+					Im Abschnitt <computeroutput>Assignes Template
+					Variables</computeroutput> listet die Smarty Debug Console
+					die bis zum Aufruf von <code>{debug}</code> der Vorlage
+					zugewiesenen Variablen (links, <varname>{$page}</varname> usw.)
+					inklusive ihrer aktuellen Inhalte (rechts, grüne Schrift).
+				</para>
+
+				<para>
+					Die Variablennamen sind dabei direkt in der Form notiert, wie
+					sie als Platzhalter in die Vorlagen eingesetzt werden müssen.
+					Würde man beispielsweise in die aktuelle Vorlage, wo jetzt
+					<code>{debug}</code> drin steht,
+					<varname>{$SCRIPT_NAME}</varname> oder
+					<varname>{$ACTION}</varname> schreiben und die Seite dann
+					neu laden, würden <varname>{$SCRIPT_NAME}</varname> und 
+					<varname>{$ACTION}</varname> durch ihre aktuellen Werte
+					<computeroutput>/welcompose/trunk/welcompose</computeroutput>
+					und <computeroutput>Index</computeroutput> ersetzt werden.
+				</para>
+
+				<para>
+					Wer nun das Gleiche mit <varname>{$get}</varname> oder
+					<varname>{$page}</varname> machen würde, erhält als Ergebnis
+					<computeroutput>Array</computeroutput>. Dies ist korrekt, da
+					es sich bei den beiden Variablen nicht um simple Zeichenketten
+					wie <varname>{$SCRIPT_NAME}</varname> oder
+					<varname>{$ACTION}</varname> handelt, sondern um Arrays,
+					also Variablen, in denen mehrere weitere Variablen gespeichert
+					werden. 
+				</para>
+
+				<para>
+					Dies erkennt man daran, dass die Smarty Debug Console bei
+					<varname>{$get}</varname> rechts in der ersten Zeile mit
+					<computeroutput>Array (8)</computeroutput> signalisiert, 
+					dass es sich eben um einen Array mit 8 sogenannten Elementen,
+					also in ihm gespeicherte Variablen handelt. Die Elemente
+					bestehen einerseits aus ihrem Namen (auch Schlüssel genannt),
+					der links vom Pfeil <code><![CDATA[=>]]></code> steht, und
+					einem Wert rechts vom Pfeil (der wiederum ein Array sein kann). 
+				</para>
+
+				<para>
+					Um auf ein Array-Element zuzugreifen, muss man den
+					Variablennamen um den Elementnamen erweitern, die beide
+					durch einen Punkt (<code>.</code>) separiert werden. Um 
+					beispielsweise auf das Element <varname>id</varname> von
+					<varname>{$page}</varname> zuzugreifen, müsste man
+					<userinput>{$page.id}</userinput> schreiben, worauf dann
+					<computeroutput>16</computeroutput> erschienen würde. 
+				</para>
+
+				<para>
+					Man kann auch jeweils alle Elemente eines Arrays ausgeben:
+				</para>
+
+				<programlisting><![CDATA[
 {foreach from=$page key=_element item=_value}
 	Element: {$_element}
 	Wert: {$_value}
 {/foreach}
 ]]></programlisting>
-			
-			<para>
-				Dieses Konstruktur iteriert durch den gesamten Array
-				<varname>$page</varname> und gibt jedes einzelne Element
-				samt Name (<code>{$_element}</code>) und Wert
-				(<code>{$_value}</code>) aus (gekürzt):
-			</para>
-			
-			<programlisting><![CDATA[
+
+				<para>
+					Dieses Konstruktur iteriert durch den gesamten Array
+					<varname>$page</varname> und gibt jedes einzelne Element
+					samt Name (<code>{$_element}</code>) und Wert
+					(<code>{$_value}</code>) aus (gekürzt):
+				</para>
+
+				<programlisting><![CDATA[
 Element: id
 Wert: 16
 Element: project
@@ -368,260 +576,425 @@ Element: rgt
 Wert: 3
 ...
 ]]></programlisting>
-			
-			<para>
-				Auf diese Weise lässt sich leicht herausfinden, auf welche
-				Daten in eine Vorlage zugegriffen werden kann oder welche
-				Informationen nachgeladene Daten mitbringen, ohne dass man
-				die Dokumentation wälzen muss.
-			</para>
-		</sect2>
-		
-		<sect2 id="templating.connect_templates_with_data.load_more_data">
-			<title>Daten nachladen</title>
-			
-			<para>
-				Die Daten, die standardmässig in den Vorlagen zur Benutzung
-				bereitstehen, entsprechen nur einem kleinen Teil der Daten,
-				die Welcompose bereithält. Man denke nur an Navigationen oder
-				Boxen. Diese Daten müssen jeweils von Hand nachgeladen werden.
-			</para>
-			
-			<para>
-				Zu diesem Zweck verfügt Welcompose über zwei Funktionen, mit
-				denen direkt aus den Vorlagen heraus auf die internen APIs
-				von Welcompose zugegriffen werden kann &ndash; genauer gesagt
-				auf alle lesenden Methoden<footnote>
+
 				<para>
-					Schreibende Methoden sind aus Sicherheitsgründen mittels
-					einer Whitelist für den Zugriff aus den Vorlagen gesperrt.
+					Auf diese Weise lässt sich leicht herausfinden, auf welche
+					Daten in eine Vorlage zugegriffen werden kann oder welche
+					Informationen nachgeladene Daten mitbringen, ohne dass man
+					die Dokumentation wälzen muss.
 				</para>
-				</footnote>. So bietet Welcompose innerhalb der Vorlagen
-				sozusagen dieselbe Funktionalität und Flexibilität, wie wenn
-				man bei anderen Systemen den Original-Quellcode modifiziert.
-			</para>
-			
-			<para>
-				Die beiden Funktionen respektive Smarty Plug-ins, welche den
-				Zugriff auf die internen APIs bereitstellen, heissen
-				<code>select_simple</code> und <code>select_named</code>. Sie
-				tun beide dasselbe: Sie rufen die gewünschte Funktion mit den
-				angegebenen Parametern auf und stellen die retournierten Daten
-				innerhalb der Vorlage bereit. So kann auf sie zugegriffen
-				werden, als seien die Daten bereits von Anfang an geladen
-				gewesen. 
-			</para>
-			
-			<para>
-				<code>select_simple</code> und <code>select_named</code>
-				funktionieren fast gleich. Es gibt nur einen kleinen
-				Unterschied in der Art, wie sie die Funktionen aufrufen. Aber
-				dazu erst später mehr. Für den Moment tun wir so, als wären
-				sie identisch.
-			</para>
-			
-			<para>
-				Ein Aufruf von <code>select_simple</code> respektive
-				<code>select_named</code> besteht nebst dem Namen der Funktion
-				(<code>select_simple</code> respektive
-				<code>select_named</code>) immer aus mindestens vier
-				Parametern: Dies sind <varname>ns</varname>,
-				<varname>class</varname>, <varname>method</varname> und
-				<varname>var</varname>. 
-			</para>
-			
-			<programlisting><![CDATA[
+			</sect3>
+
+			<sect3 id="templating.templates.connect_templates_with_data.load_more_data">
+				<title>Daten nachladen</title>
+
+				<para>
+					Die Daten, die standardmässig in den Vorlagen zur Benutzung
+					bereitstehen, entsprechen nur einem kleinen Teil der Daten,
+					die Welcompose bereithält. Man denke nur an Navigationen oder
+					Boxen. Diese Daten müssen jeweils von Hand nachgeladen werden.
+				</para>
+
+				<para>
+					Zu diesem Zweck verfügt Welcompose über zwei Funktionen, mit
+					denen direkt aus den Vorlagen heraus auf die internen APIs
+					von Welcompose zugegriffen werden kann &ndash; genauer gesagt
+					auf alle lesenden Methoden<footnote>
+					<para>
+						Schreibende Methoden sind aus Sicherheitsgründen mittels
+						einer Whitelist für den Zugriff aus den Vorlagen gesperrt.
+					</para>
+					</footnote>. So bietet Welcompose innerhalb der Vorlagen
+					sozusagen dieselbe Funktionalität und Flexibilität, wie wenn
+					man bei anderen Systemen den Original-Quellcode modifiziert.
+				</para>
+
+				<para>
+					Die beiden Funktionen respektive Smarty Plug-ins, welche den
+					Zugriff auf die internen APIs bereitstellen, heissen
+					<code>select_simple</code> und <code>select_named</code>. Sie
+					tun beide dasselbe: Sie rufen die gewünschte Funktion mit den
+					angegebenen Parametern auf und stellen die retournierten Daten
+					innerhalb der Vorlage bereit. So kann auf sie zugegriffen
+					werden, als seien die Daten bereits von Anfang an geladen
+					gewesen. 
+				</para>
+
+				<para>
+					<code>select_simple</code> und <code>select_named</code>
+					funktionieren fast gleich. Es gibt nur einen kleinen
+					Unterschied in der Art, wie sie die Funktionen aufrufen. Aber
+					dazu erst später mehr. Für den Moment tun wir so, als wären
+					sie identisch.
+				</para>
+
+				<para>
+					Ein Aufruf von <code>select_simple</code> respektive
+					<code>select_named</code> besteht nebst dem Namen der Funktion
+					(<code>select_simple</code> respektive
+					<code>select_named</code>) immer aus mindestens vier
+					Parametern: Dies sind <varname>ns</varname>,
+					<varname>class</varname>, <varname>method</varname> und
+					<varname>var</varname>. 
+				</para>
+
+				<programlisting><![CDATA[
 {select_named ns="Content" class="BlogPosting"
 	method="selectBlogPostings" var="blog_postings"}
 ]]></programlisting>
-			
-			<para>
-				Die Bedeutung von <varname>var</varname> ist schnell erklärt:
-				<varname>var</varname> bezeichnet den Variablennamen, dem
-				die von der Funktion zurückgegebenen Daten innerhalb der
-				Vorlage zugeordnet werden sollen. Auf die Daten von obigem
-				Aufruf liesse sich also über die Variable
-				<varname>$blog_postings</varname> zugreifen. Der Variablenname
-				ist frei wählbar, so könne man statt
-				<varname>$blog_postings</varname> auch
-				<varname>$blps</varname> schreiben.  
-			</para>
-			
-			<para>
-				Die anderen drei Parameter <varname>ns</varname>,
-				<varname>class</varname> und <varname>method</varname> gehören
-				zusammen und dienen dazu, <code>select_simple</code> 
-				respektive <code>select_named</code> zu sagen, welche
-				Welcompose-Funktion sie ausführen sollen.
-			</para>
-			
-			<para>
-				Damit man weiss, was man überhaupt für Werte den Parametern
-				übergeben muss, muss entweder einen Blick in die
-				API-Dokumentation (siehe <xref
-				linkend="development.api_docs"/>) oder direkt in den Code
-				werfen.
-			</para>
-			
-			<para>
-				Welcompose verfügt über eine Menge von Klassen, die mit
-				Begriffen wie Application, Community, Content oder Media
-				beginnen. Auf sie folgt ein Unterstrich, bevor ein weiterer
-				Begriff wie BlogPosting, GeneratorForm oder PageType folgt.
-			</para>
-			
-			<para>
-				Die Begriffe vor dem Unterstrich (<code>_</code>) dienen
-				zur Gruppierung der Klassen. Alle Klassen, die Content
-				anfangen, haben irgendwas mit den Inhalten zu tun, die
-				Welcompose verwaltet. Die Klassen mit Media kümmern sich
-				dagegen um Multimediaobjekte wie Bilder oder Filme. Diese
-				Organisation nach Bereichen nennen wir bei Welcompose 
-				Namespacing<footnote>
+
 				<para>
-					Namespacing ist eigentlich der falsche Begriff, da PHP
-					keine Namespaces unterstützt und es somit nur eine grosse
-					Lüge ist. Aber uns ist kein besserer Name eingefallen... 
+					Die Bedeutung von <varname>var</varname> ist schnell erklärt:
+					<varname>var</varname> bezeichnet den Variablennamen, dem
+					die von der Funktion zurückgegebenen Daten innerhalb der
+					Vorlage zugeordnet werden sollen. Auf die Daten von obigem
+					Aufruf liesse sich also über die Variable
+					<varname>$blog_postings</varname> zugreifen. Der Variablenname
+					ist frei wählbar, so könne man statt
+					<varname>$blog_postings</varname> auch
+					<varname>$blps</varname> schreiben.  
 				</para>
-				</footnote>, oder kurz <varname>ns</varname>. Dies bedeutet,
-				wer auf eine Klasse aus Application, Community, Content oder
-				Media zugreifen will, muss bei <varname>ns</varname> entweder
-				<userinput>Application</userinput>,
-				<userinput>Community</userinput>, 
-				<userinput>Content</userinput> oder
-				<userinput>Media</userinput> eintragen.
-			</para>
-			
-			<para>
-				Nachdem der Teil links des Unterstrichs bereits vergeben ist,
-				bleibt rechts neben dem Unterstrich noch ein Teil des
-				Klassennamens übrig. Dieser wird jeweils für den Parameter
-				<varname>class</varname> verwendet. Wer also etwas aus der
-				Klasse Content_PageType will, wird als <varname>ns</varname>
-				<userinput>Content</userinput> verwendenden und als 
-				<varname>class</varname> <userinput>PageType</userinput>.
-			</para>
-			
-			<para>
-				Mit Hilfe von <varname>ns</varname> und
-				<varname>class</varname> weiss Welcompose nun, mit welcher
-				Klasse es arbeiten soll. Nun geht es aber noch darum,
-				Welcompose zu sagen, welche Funktion respektive Methode es
-				daraus verwenden soll, indem man für <varname>method</varname>
-				kurzerhand den Methoden-Namen eingibt. Möchte man
-				beispielsweise alle Page Types auslesen, gibt man
-				<userinput>selectPageTypes</userinput> ein. Der ganze
-				Aufruf sieht dann etwa so aus:
-			</para>
-			
-			<programlisting><![CDATA[
+
+				<para>
+					Die anderen drei Parameter <varname>ns</varname>,
+					<varname>class</varname> und <varname>method</varname> gehören
+					zusammen und dienen dazu, <code>select_simple</code> 
+					respektive <code>select_named</code> zu sagen, welche
+					Welcompose-Funktion sie ausführen sollen.
+				</para>
+
+				<para>
+					Damit man weiss, was man überhaupt für Werte den Parametern
+					übergeben muss, muss entweder einen Blick in die
+					API-Dokumentation (siehe <xref
+					linkend="development.api_docs"/>) oder direkt in den Code
+					werfen.
+				</para>
+
+				<para>
+					Welcompose verfügt über eine Menge von Klassen, die mit
+					Begriffen wie Application, Community, Content oder Media
+					beginnen. Auf sie folgt ein Unterstrich, bevor ein weiterer
+					Begriff wie BlogPosting, GeneratorForm oder PageType folgt.
+				</para>
+
+				<para>
+					Die Begriffe vor dem Unterstrich (<code>_</code>) dienen
+					zur Gruppierung der Klassen. Alle Klassen, die Content
+					anfangen, haben irgendwas mit den Inhalten zu tun, die
+					Welcompose verwaltet. Die Klassen mit Media kümmern sich
+					dagegen um Multimediaobjekte wie Bilder oder Filme. Diese
+					Organisation nach Bereichen nennen wir bei Welcompose 
+					Namespacing<footnote>
+					<para>
+						Namespacing ist eigentlich der falsche Begriff, da PHP
+						keine Namespaces unterstützt und es somit nur eine grosse
+						Lüge ist. Aber uns ist kein besserer Name eingefallen... 
+					</para>
+					</footnote>, oder kurz <varname>ns</varname>. Dies bedeutet,
+					wer auf eine Klasse aus Application, Community, Content oder
+					Media zugreifen will, muss bei <varname>ns</varname> entweder
+					<userinput>Application</userinput>,
+					<userinput>Community</userinput>, 
+					<userinput>Content</userinput> oder
+					<userinput>Media</userinput> eintragen.
+				</para>
+
+				<para>
+					Nachdem der Teil links des Unterstrichs bereits vergeben ist,
+					bleibt rechts neben dem Unterstrich noch ein Teil des
+					Klassennamens übrig. Dieser wird jeweils für den Parameter
+					<varname>class</varname> verwendet. Wer also etwas aus der
+					Klasse Content_PageType will, wird als <varname>ns</varname>
+					<userinput>Content</userinput> verwendenden und als 
+					<varname>class</varname> <userinput>PageType</userinput>.
+				</para>
+
+				<para>
+					Mit Hilfe von <varname>ns</varname> und
+					<varname>class</varname> weiss Welcompose nun, mit welcher
+					Klasse es arbeiten soll. Nun geht es aber noch darum,
+					Welcompose zu sagen, welche Funktion respektive Methode es
+					daraus verwenden soll, indem man für <varname>method</varname>
+					kurzerhand den Methoden-Namen eingibt. Möchte man
+					beispielsweise alle Page Types auslesen, gibt man
+					<userinput>selectPageTypes</userinput> ein. Der ganze
+					Aufruf sieht dann etwa so aus:
+				</para>
+
+				<programlisting><![CDATA[
 {select_named ns="Content" class="PageType" method="selectPageTypes"
 	var="page_types"}
 ]]></programlisting>
-			
-			<warning>
+
+				<warning>
+					<para>
+						Wenn die Smarty Debug Console mittels <code>{debug}</code>
+						vor der Benutzung von <code>{select_named}</code>
+						respektive <code>{select_simple}</code> aufgerufen wird,
+						tauchen die angeforderten Daten, im obigen Fall
+						<varname>{$page_types}</varname>, in der Smarty Debug
+						Console nicht auf. Wer die angeforderten Daten einbeziehen
+						möchte, muss <code>{debug}</code> nach dem Aufruf von
+						<code>{select_simple}</code> respektive
+						<code>{select_named}</code> anwenden.
+					</para>
+				</warning>
+
 				<para>
-					Wenn die Smarty Debug Console mittels <code>{debug}</code>
-					vor der Benutzung von <code>{select_named}</code>
-					respektive <code>{select_simple}</code> aufgerufen wird,
-					tauchen die angeforderten Daten, im obigen Fall
-					<varname>{$page_types}</varname>, in der Smarty Debug
-					Console nicht auf. Wer die angeforderten Daten einbeziehen
-					möchte, muss <code>{debug}</code> nach dem Aufruf von
-					<code>{select_simple}</code> respektive
-					<code>{select_named}</code> anwenden.
+					Nun wird man in den seltensten Fällen alle Page Types,
+					Blog Postings oder alle Bilder auslesen wollen. In der Regel
+					möchte man beispielsweise nur die neusten Blog Postings. 
+					Dies kann man Welcompose sagen, indem man
+					<code>select_simple</code> und <code>select_named</code>
+					weitere Parameter übergibt. Und davon gibt es je nach Funktion
+					eine ganze Menge. Wer beispielsweise in der API-Dokumentation
+					den Eintrag zu <code>selectBlogPostings()</code> nachliest,
+					findet eine Liste unterstützter Parameter wie
+					<varname>page</varname> oder <varname>draft</varname>, mit
+					denen sich beispielsweise festlegen lässt, von welcher
+					Seite Blog Postings geladen werden sollen
+					(<varname>page</varname>) oder wie der Entwurfsstatus der
+					Blog Postings (<varname>draft</varname>) sein muss. Diese
+					Parameter kann man <code>select_simple</code> respektive
+					<code>select_named</code> einfach mitgeben:
 				</para>
-			</warning>
-			
-			<para>
-				Nun wird man in den seltensten Fällen alle Page Types,
-				Blog Postings oder alle Bilder auslesen wollen. In der Regel
-				möchte man beispielsweise nur die neusten Blog Postings. 
-				Dies kann man Welcompose sagen, indem man
-				<code>select_simple</code> und <code>select_named</code>
-				weitere Parameter übergibt. Und davon gibt es je nach Funktion
-				eine ganze Menge. Wer beispielsweise in der API-Dokumentation
-				den Eintrag zu <code>selectBlogPostings()</code> nachliest,
-				findet eine Liste unterstützter Parameter wie
-				<varname>page</varname> oder <varname>draft</varname>, mit
-				denen sich beispielsweise festlegen lässt, von welcher
-				Seite Blog Postings geladen werden sollen
-				(<varname>page</varname>) oder wie der Entwurfsstatus der
-				Blog Postings (<varname>draft</varname>) sein muss. Diese
-				Parameter kann man <code>select_simple</code> respektive
-				<code>select_named</code> einfach mitgeben:
-			</para>
-			
-			<programlisting><![CDATA[
+
+				<programlisting><![CDATA[
 {select_named ns="Content" class="BlogPosting" method="selectBlogPostings"
 	var="blog_postings" page="12" draft="0"}
 ]]></programlisting>
-			
-			<para>
-				Kommen wir nun zum Unterschied zwischen
-				<code>select_simple</code> und <code>select_named</code>.
-			</para>
-			
-			<para>
-				Als Faustregel für alle, für die die bisherigen Erläuterungen
-				bereits an Fachchinesisch grenzen, kann man sich merken,
-				dass für alle Funktionen respektive Methoden, die mehrere
-				Datensätze auslesen und darum
-				<code>selectBlogPostings()</code> oder
-				<code>selectPageTypes()</code> heissen (man beachte das
-				Plural-S!), <code>select_named</code> verwendet werden muss.
-				Alle Funktionen, die dagegen nur einen Datensatz auslesen
-				und darum <code>selectNavigation()</code> oder
-				<code>selectGlobalBox()</code> heissen, benötigen
-				<code>select_simple</code>.
-			</para>
-			
-			<para>
-				Doch warum? Zu diesem Zweck ziehen wir wieder die
-				API-Dokumentation zur Funktion respektive Methode
-				<code>selectBlogPostings()</code> und ihrem Geschwister
-				<code>selectBlogPosting()</code> zu Rate. In beiden Einträgen
-				ist eine Zeile nach der Form 
-				<code><![CDATA[array   selectBlogPostings  ([array $params = array()])]]></code>
-				respektive <code><![CDATA[array   selectBlogPosting  (int $id)]]></code>
-				enthalten. Dabei handelt es sich um die jeweiligen
-				Funktionssignaturen.
-			</para>
-			
-			<para>
-				Überall, wo <code><![CDATA[([array $params = array()])]]></code>
-				nach dem Funktionsnamen wie <code>selectBlogPostings</code>
-				steht, muss <code>select_named</code> stehen. Denn
-				<code>select_named</code> nimmt alle Parameter, die abgesehen
-				von <varname>ns</varname>, <varname>class</varname>,
-				<varname>method</varname> und <varname>var</varname> angegeben
-				werden, und formt diese in den Array
-				<varname>$params</varname> um, den die Funktionen erwarten.
-				Dies ist nötig, damit man von der Vielzahl der Parameter,
-				die diese Funktionen zur Filterung der Datensätze
-				anbieten, jeweils nur die benutzt werden, die man verwenden
-				möchte.
-			</para>
-			
-			<para>
-				Überall, wo <code><![CDATA[(int $id)]]></code> steht, muss
-				dagegen <code>select_simple</code> verwendet werden. Denn
-				die Funktionen erwarten einen oder mehrere Parameter in
-				einer festen Reihenfolge, die von <code>select_simple</code>
-				eingesetzt werden &ndash; in diesem Fall <varname>id</varname>.
-				Wenn eine Funktionssignatur wie
-				<code><![CDATA[(int $page, int $id)]]></code> vorliegt,
-				müssen die Parameter <varname>page</varname> und
-				<varname>id</varname> in den select_simple-Aufruf eingesetzt
-				werden und zwar in genau dieser Reihenfolge, damit die 
-				Daten korrekt angefordert werden:
-			</para>
-			
-			<programlisting><![CDATA[
-{select_simple ns="Beispiel" class="TestMethode" method="selectOhneFunktion"
+
+				<para>
+					Kommen wir nun zum Unterschied zwischen
+					<code>select_simple</code> und <code>select_named</code>.
+				</para>
+
+				<para>
+					Als Faustregel für alle, für die die bisherigen Erläuterungen
+					bereits an Fachchinesisch grenzen, kann man sich merken,
+					dass für alle Funktionen respektive Methoden, die mehrere
+					Datensätze auslesen und darum
+					<code>selectBlogPostings()</code> oder
+					<code>selectPageTypes()</code> heissen (man beachte das
+					Plural-S!), <code>select_named</code> verwendet werden muss.
+					Alle Funktionen, die dagegen nur einen Datensatz auslesen
+					und darum <code>selectNavigation()</code> oder
+					<code>selectGlobalBox()</code> heissen, benötigen
+					<code>select_simple</code>.
+				</para>
+
+				<para>
+					Doch warum? Zu diesem Zweck ziehen wir wieder die
+					API-Dokumentation zur Funktion respektive Methode
+					<code>selectBlogPostings()</code> und ihrem Geschwister
+					<code>selectBlogPosting()</code> zu Rate. In beiden Einträgen
+					ist eine Zeile nach der Form 
+					<code><![CDATA[array   selectBlogPostings  ([array $params = array()])]]></code>
+					respektive <code><![CDATA[array   selectBlogPosting  (int $id)]]></code>
+					enthalten. Dabei handelt es sich um die jeweiligen
+					Funktionssignaturen.
+				</para>
+
+				<para>
+					Überall, wo <code><![CDATA[([array $params = array()])]]></code>
+					nach dem Funktionsnamen wie <code>selectBlogPostings</code>
+					steht, muss <code>select_named</code> stehen. Denn
+					<code>select_named</code> nimmt alle Parameter, die abgesehen
+					von <varname>ns</varname>, <varname>class</varname>,
+					<varname>method</varname> und <varname>var</varname> angegeben
+					werden, und formt diese in den Array
+					<varname>$params</varname> um, den die Funktionen erwarten.
+					Dies ist nötig, damit man von der Vielzahl der Parameter,
+					die diese Funktionen zur Filterung der Datensätze
+					anbieten, jeweils nur die benutzt werden, die man verwenden
+					möchte.
+				</para>
+
+				<para>
+					Überall, wo <code><![CDATA[(int $id)]]></code> steht, muss
+					dagegen <code>select_simple</code> verwendet werden. Denn
+					die Funktionen erwarten einen oder mehrere Parameter in
+					einer festen Reihenfolge, die von <code>select_simple</code>
+					eingesetzt werden &ndash; in diesem Fall <varname>id</varname>.
+					Wenn eine Funktionssignatur wie
+					<code><![CDATA[(int $page, int $id)]]></code> vorliegt,
+					müssen die Parameter <varname>page</varname> und
+					<varname>id</varname> in den select_simple-Aufruf eingesetzt
+					werden und zwar in genau dieser Reihenfolge, damit die 
+					Daten korrekt angefordert werden:
+				</para>
+
+				<programlisting><![CDATA[
+{select_simple ns="Beispiel" class="TestKlasse" method="selectOhneFunktion"
 	page="2" id="15"}
 ]]></programlisting>
-			
+				
+			</sect3>
 		</sect2>
 	</sect1>
+	
+	<sect1 id="templating.template_sets">
+		<title>Vorlagen-Sets</title>
+		
+		<sect2 id="templating.template_sets.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Vorlagen-Sets dienen zur Organisation von Vorlagen und sorgen
+				zusammen mit den Vorlagen-Typen (siehe <xref
+				linkend="templating.template_types"/>) dafür, dass für
+				eine Seite die jeweils richtige Vorlage verwendet wird.
+			</para>
+			
+			<para>
+				Innerhalb eines Vorlagen-Sets kann es nur jeweils eine Vorlage
+				für einen bestimmten Vorlagen-Typ geben. Denn sonst wüsste
+				die Software nicht, welche Vorlage sie für eine Seite
+				auszuwählen hat. Es ist auch nicht nötig, jedes Vorlagen-Set
+				mit einer Vorlage für jeden Vorlagen-Typ auszustatten.
+			</para>
+			
+			<para>
+				Da zu jeder Seite ein separates Vorlagen-Set zugeordnet werden
+				kann, ist es beispielsweise mit sieben Simple Pages so, dass 
+				man sieben separate Vorlagen haben kann, indem man jeder Simple
+				Page ein anderes Vorlagen-Set zuordnet.
+			</para>
+			
+			<para>
+				Weil die Vorlagen-Sets nur im Hintergrund ihre Arbeit
+				verrichten, kommt man nur innerhalb des Administrationsbereichs
+				mit ihnen in Kontakt.
+			</para>
+		</sect2>
+		
+		<sect2 id="templating.template_sets.manage_sets">
+			<title>Verwaltung</title>
+			
+			<para>
+				Die Verwaltung der Vorlagen erfolgt im Bereich
+				<guimenu>Templating</guimenu> beim Unterpunkt
+				<guisubmenu>Template Sets</guisubmenu>. Die Übersicht listet
+				die vorhandenen Vorlagen-Sets zusammen mit dem Namen und einer
+				allenfalls vorhandenen Beschreibung. Dazu werden ein Link
+				zum Erstellen, Bearbeiten und Löschen eines vorhandenen
+				Vorlagen-Seits geboten. 
+			</para>
+			
+			<figure id="templating.template_sets.manage_sets.overview">
+				<title>Übersicht über vorhandene Vorlagen-Sets</title>
+				<graphic fileref="images/templating/template_sets/manage_sets.overview.png"/>
+			</figure>
+			
+			<para>
+				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				kommt man zum Formular zum Hinzufügen eines neuen
+				Vorlagen-Sets.
+			</para>
+			
+			<figure id="templating.template_sets.manage_sets.add_new">
+				<title>Neues Vorlagen-Set hinzufügen</title>
+				<graphic fileref="images/templating/template_sets/manage_sets.add_new.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term>Name</term>
+					<listitem>
+						<para>
+							Name des Vorlagen-Sets, der zur Auswahl des
+							Vorlagen-Sets und zu dessen Zuordnung zu einer
+							Seite dient. Kann frei gewählt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Description</term>
+					<listitem>
+						<para>
+							Optionaler Beschreibungstext zum Vorlagen-Set. 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+	</sect1>
+	
+	<sect1 id="templating.template_types">
+		<title>Vorlagen-Typen</title>
+		
+		<sect2 id="templating.template_types.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Bei der Verwendung von Vorlagen hat man meist für jedes Script
+				eine passende Vorlage, die beide abgesehen vom Suffix gleich
+				benannt sind. Für ein Script index.php hat man also eine
+				Vorlage index.html oder index.tpl, die definiert, wie die
+				Ausgabe des Scripts index.php aussehen soll. Genauso hat man
+				beispielsweise für eine Suchseite search.php eine Vorlage
+				search.html oder search.tpl.
+			</para>
+			
+			<para>
+				Da bei Welcompose das Vorlagen-System in die Datenbank
+				verlagert wurde, gibt es statt Dateinamen sogenannte
+				Vorlagen-Typen. Sie machen auch nichts anderes, als eine
+				Vorlage einem Script zuzuordnen &ndash; auch wenn es ein paar
+				kleine Unterschiede gibt.
+			</para>
+			
+		</sect2>
+		
+		<sect2 id="templating.template_types.relations">
+			<title>dudu</title>
+			
+			<para>
+				mit dem Unterschied,
+				dass Welcompose keine verschiedenen Scripts wie search.php
+				oder article.php kennt, sondern genau eines: index.php.
+				Dieses vereinigt quasi die Funktionalität der verschiedenen
+				Scripte in sich und weiss anhand des Parameters
+				<varname>action</varname>, der jeweils im URL beim Aufruf
+				der Datei index.php mitgegeben wird, welche Ansicht angezeigt
+				und welche Vorlage gewählt werden soll. Und wie normalerweise
+				Script- und Vorlagenname übereinstimmen, sind hier auch 
+				der Name der Ansicht wie der Vorlagen-Typ identisch.
+			</para>
+		
+			<para>
+				Wird beispielsweise die <filename>index.php</filename> 
+				im Installationsverzeichnis von Welcompose mit dem Parameter
+				<varname>action</varname> und dem Wert
+				<userinput>blog_archive_month</userinput> (für ein Blog-Archiv
+				eines Monats) aufgerufen, wird eine Vorlage des Typs
+				<userinput>blog_archive_month</userinput> verwendet. Wird
+				das Script <filename>index.php</filename> mit dem Wert
+				<userinput>simple_form_index</userinput> für den Parameter
+				<varname>action</varname> (für die Anzeige eines Formulars
+				des Typs Simple Form) angefordert, wird eine Vorlage des Typs
+				<userinput>simple_form_index</userinput> verwendet.
+			</para>
+		
+			<para>
+				Welche Vorlage des jeweiligen Typs angezeigt wird, wird über
+				das Vorlagen-Set entschieden, das mit der jeweiligen Seite
+				und einer Vorlage des jeweiligen Typs verbunden ist.
+			</para>
+		</sect2>
+	</sect1>
+		
+	<sect1 id="templating.global_templates">
+		<title>Globale Vorlagen</title>
+		
+		<para/>
+	</sect1>
+		
+	<sect1 id="templating.global_files">
+		<title>Globale Dateien</title>
+		
+		<para/>
+	</sect1>
+	
 </chapter>

@@ -442,7 +442,7 @@
 			der auf jeder Seite unverändert ist. 
 			
 			Um diese Vorlagen später eindeutig ansprechen zu können, müssen wir als ersten Schritt hierzu
-			korrespondierende <link linkend="templating.page_template_types">Vorlagen-Typen</link> anlegen.
+			korrespondierende Vorlagen-Typen anlegen.
 		</para>	
 
 		<sect2 id="crash_course_blog.connect_blog_with_templates.templatetypes">
