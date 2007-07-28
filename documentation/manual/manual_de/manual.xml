@@ -24,6 +24,8 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_contents.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_media.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_templating.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_settings.xml" />
