@@ -131,8 +131,10 @@ try {
 	// add connection validation rule
 	$FORM->registerRule('testConnection', 'callback', 'setup_database_connection_test_callback');
 	$FORM->registerRule('testVersion', 'callback', 'setup_database_version_test_callback');
+	$FORM->registerRule('testInnoDb', 'callback', 'setup_database_innodb_test_callback');
 	$FORM->addRule('database', gettext('Unable to connect to database server'), 'testConnection', $FORM);
 	$FORM->addRule('database', gettext('Selected database server is too old'), 'testVersion', $FORM);
+	$FORM->addRule('database', gettext('Selected database does not support InnoDB'), 'testInnoDb', $FORM);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
@@ -277,6 +279,59 @@ function setup_database_version_test_callback ($database, &$FORM) {
 	
 	$version_number = preg_replace("=(.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)=", '$2', $version['Value']);
 	if (version_compare($version_number, '4.1.7', '<')) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function setup_database_innodb_test_callback ($database, &$FORM) {
+	// prepare params to create connections
+	$params = array();
+	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
+		if ($FORM->exportValue('host') != "") {
+			$params['host'] = $FORM->exportValue('host');
+		}
+		if ($FORM->exportValue('port') != "") {
+			$params['port'] = $FORM->exportValue('port');
+		}
+		if ($FORM->exportValue('database') != "") {
+			$params['dbname'] = $FORM->exportValue('database');
+		}
+	} elseif ($FORM->exportValue('connection_method') == 'socket') {
+		if ($FORM->exportValue('unix_socket') != "") {
+			$params['unix_socket'] = $FORM->exportValue('unix_socket');
+		}
+		if ($FORM->exportValue('database') != "") {
+			$params['dbname'] = $FORM->exportValue('database');
+		}
+	}
+	$dsn = 'mysql:';
+	foreach ($params as $_key => $_value) {
+		$dsn .= $_key.'='.$_value.';';
+	}
+	if (substr($dsn, -1, 1) == ';') {
+		$dsn = substr($dsn, 0, -1);
+	}
+	
+	// prepare params array
+	$params = array(
+		'dsn' => $dsn,
+		'username' => $FORM->exportValue('user'),
+		'password' => $FORM->exportValue('password')
+	);
+	
+	$path = dirname(__FILE__).'/../core/base_classes/pdo.class.php';
+	require_once(Base_Compat::fixDirectorySeparator($path));
+	
+	try {
+		$db = new Base_Database($params);
+		$innodb = $db->select("SHOW VARIABLES LIKE 'have_innodb'", 'row');
+	} catch (Exception $e) {
+		return false;
+	}
+	
+	if (strtolower($innodb['Value']) != 'yes') {
 		return false;
 	} else {
 		return true;
