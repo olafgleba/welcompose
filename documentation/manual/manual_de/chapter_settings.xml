@@ -529,6 +529,66 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 				TinyMCE oder FCKEditor können mit Welcompose nicht genutzt
 				werden.
 			</para>
+			
+			<para>
+				Wer trotzdem nicht auf einen WYSIWYG-Editor verzichten will,
+				sollte über den Browser Firefox mit Hilfe von Erweiterungen
+				mindenstens beschränkte WYSIWYG-Funktionalität erhalten, ohne
+				den Quellcode von Welcompose modifizieren zu müssen:
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term>Xinha Here!</term>
+					<listitem>
+						<para>
+							Xinha Here!<footnote>
+							<para>
+								<ulink url="https://addons.mozilla.org/de/firefox/addon/1449"/>
+							</para>
+							</footnote> bindet den WYSIWYG-Editor Xinha<footnote>
+							<para>
+								<ulink url="http://xinha.webfactional.com/"/>
+							</para>
+							</footnote> ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Mimulus</term>
+					<listitem>
+						<para>
+							Mimulus<footnote>
+							<para>
+								<ulink url="http://inamidst.com/mimulus/"/>
+							</para>
+							</footnote> bietet einen schlanken WYSIWYG-Editor.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Achten Sie bei der Nutzung einer derartigen Extension einfach
+				darauf, dass Sie den Textkonverter XHTML verwenden.
+			</para>
+			
+			<warning>
+				<para>
+					Die Nutzung dieser oder anderer WYSIWYG-Editoren wird
+					nicht empfohlen und nicht unterstützt. Der Mediamanager
+					wie andere Hilfsfunktionen können durch die
+					WYSIWYG-Editoren in ihrer Funktionalität eingeschränkt
+					werden oder mit den Editoren nicht kompatibel sein.
+				</para>
+			</warning>
+			
+			<para>
+				Eine weitere Erleichterung zum Verfassen von Texten können
+				externe Editoren sein, die beispielsweise Syntax-Highlighting
+				bieten. Konsultieren Sie dazu <xref
+				linkend="templating.templates.usage.edit_templates_with_editor"/>.
+			</para>
 		</sect2>
 		
 	</sect1>
