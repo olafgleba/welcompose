@@ -420,7 +420,7 @@ public function moveGlobalFileToStore ($name, $path)
 	$file_name = $uniqid.'_'.$name;
 	
 	// prepare target path
-	$target_path = $this->base->_conf['global_file']['store_disk'].DIR_SEP.$file_name;
+	$target_path = $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$file_name;
 	
 	// move file
 	move_uploaded_file($path, $target_path);
@@ -462,7 +462,7 @@ public function removeGlobalFileFromStore ($global_file)
 	}
 	
 	// prepare path to file on disk
-	$path = $this->base->_conf['global_file']['store_disk'].DIR_SEP.$file['name_on_disk'];
+	$path = $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$file['name_on_disk'];
 	
 	// unlink global file
 	if (file_exists($path)) {

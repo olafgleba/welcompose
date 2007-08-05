@@ -823,7 +823,7 @@ public function getPathToObject ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['media']['store_disk'].DIR_SEP.$object_name;
+	return $this->base->_conf['media']['store_disk'].DIRECTORY_SEPARATOR.$object_name;
 }
 
 /**
@@ -846,7 +846,7 @@ public function getWwwPathToObject ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['media']['store_www'].DIR_SEP.$object_name;
+	return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.$object_name;
 }
 
 /**
@@ -875,7 +875,7 @@ public function getWwwPathToObjectUsingId ($object_id)
 	if (empty($object['file_name_on_disk'])) {
 		return "";
 	} else {
-		return $this->base->_conf['media']['store_www'].DIR_SEP.$object['file_name_on_disk'];
+		return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.$object['file_name_on_disk'];
 	}
 }
 
@@ -899,7 +899,7 @@ public function getPathToThumbnail ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['media']['store_disk'].DIR_SEP.$object_name;
+	return $this->base->_conf['media']['store_disk'].DIRECTORY_SEPARATOR.$object_name;
 }
 
 /**
@@ -933,7 +933,7 @@ public function imageStoreIsReady ()
 	if (!is_writeable($path)) {
 		return false;
 	}
-	if (!file_exists($path.DIR_SEP.'.')) {
+	if (!file_exists($path.DIRECTORY_SEPARATOR.'.')) {
 		return false;
 	}
 	
