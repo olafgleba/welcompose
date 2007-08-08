@@ -48,11 +48,6 @@ try {
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
-	// load gettext
-	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
-	include(Base_Compat::fixDirectorySeparator($gettext_path));
-	gettextInitSoftware($BASE->_conf['locales']['all']);
-	
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
@@ -61,16 +56,16 @@ try {
 	$FORM = $BASE->utility->loadQuickForm('license', 'post');
 	
 	// checkbox for confirm_license
-	$FORM->addElement('checkbox', 'confirm_license', gettext('Confirm license'), null,
+	$FORM->addElement('checkbox', 'confirm_license', 'Confirm license', null,
 		array('id' => 'license_confirm_license', 'class' => 'chbx'));
 	$FORM->applyFilter('confirm_license', 'trim');
 	$FORM->applyFilter('confirm_license', 'strip_tags');
-	$FORM->addRule('confirm_license', gettext('Please confirm the license'), 'required');
-	$FORM->addRule('confirm_license', gettext('The field to cofirm the license accepts only 0 or 1'),
+	$FORM->addRule('confirm_license', 'Please confirm the license', 'required');
+	$FORM->addRule('confirm_license', 'The field to cofirm the license accepts only 0 or 1',
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
+	$FORM->addElement('submit', 'submit', 'Go to next step',
 		array('class' => 'submit200nomargin'));
 		
 	// validate it

@@ -48,11 +48,6 @@ try {
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
-	// load gettext
-	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
-	include(Base_Compat::fixDirectorySeparator($gettext_path));
-	gettextInitSoftware($BASE->_conf['locales']['all']);
-	
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
@@ -85,12 +80,12 @@ try {
 	foreach ($extensions as $_extension) {
 		if (extension_loaded($_extension)) {
 			$extension_statuses[$_extension] = array(
-				'text' => gettext('OK'),
+				'text' => 'OK',
 				'marker' => 'fine'
 			);
 		} else {
 			$extension_statuses[$_extension] = array(
-				'text' => gettext('Not installed'),
+				'text' => 'Not installed',
 				'marker' => 'error'
 			);
 			
@@ -105,7 +100,7 @@ try {
 	// php versions
 	if (version_compare(phpversion(), '5.0.3', '<')) {
 		$software_statuses['PHP '.phpversion()] = array(
-			'text' => gettext('Too old'),
+			'text' => 'Too old',
 			'marker' => 'error'
 		);
 		
@@ -113,12 +108,12 @@ try {
 		$error_counter++;
 	} elseif (version_compare(phpversion(), '5.0.3', '>=') && version_compare(phpversion(), '5.1.3', '<')) {
 		$software_statuses['PHP '.phpversion()] = array(
-			'text' => gettext('May cause troubles'),
+			'text' => 'May cause troubles',
 			'marker' => 'warning'
 		);
 	} elseif (version_compare(phpversion(), '5.1.3', '>=')) {
 		$software_statuses['PHP '.phpversion()] = array(
-			'text' => gettext('OK'),
+			'text' => 'OK',
 			'marker' => 'fine'
 		);
 	}
@@ -127,7 +122,7 @@ try {
 	$gd_info = gd_info();
 	if (!preg_match("=2\.[0-9]+=", $gd_info['GD Version'])) {
 		$software_statuses['GD Version '.$gd_info['GD Version']] = array(
-			'text' => gettext('Too old'),
+			'text' => 'Too old',
 			'marker' => 'error'
 		);
 		
@@ -135,12 +130,12 @@ try {
 		$error_counter++;
 	} elseif (!preg_match("=bundled=i", $gd_info['GD Version'])) {
 		$software_statuses['GD Version '.$gd_info['GD Version']] = array(
-			'text' => gettext('May cause troubles, use the bundled one'),
+			'text' => 'May cause troubles, use the bundled one',
 			'marker' => 'warning'
 		);
 	} else {
 		$software_statuses['GD Version '.$gd_info['GD Version']] = array(
-			'text' => gettext('OK'),
+			'text' => 'OK',
 			'marker' => 'fine'
 		);
 	}
@@ -148,7 +143,7 @@ try {
 	// pdo versions
 	if (!defined("PDO::ATTR_EMULATE_PREPARES")) {
 		$software_statuses['pdo'] = array(
-			'text' => gettext('Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher'),
+			'text' => 'Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher',
 			'marker' => 'error'
 		);
 		
@@ -156,7 +151,7 @@ try {
 		$error_counter++;
 	} else {
 		$software_statuses['pdo'] = array(
-			'text' => gettext('OK'),
+			'text' => 'OK',
 			'marker' => 'fine'
 		);
 	}

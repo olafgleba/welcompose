@@ -48,11 +48,6 @@ try {
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
-	// load gettext
-	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
-	include(Base_Compat::fixDirectorySeparator($gettext_path));
-	gettextInitSoftware($BASE->_conf['locales']['all']);
-	
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
