@@ -846,7 +846,7 @@ public function getWwwPathToObject ($object_name)
 		throw new Media_ObjectException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.$object_name;
+	return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.rawurlencode($object_name);
 }
 
 /**
@@ -875,7 +875,7 @@ public function getWwwPathToObjectUsingId ($object_id)
 	if (empty($object['file_name_on_disk'])) {
 		return "";
 	} else {
-		return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.$object['file_name_on_disk'];
+		return $this->base->_conf['media']['store_www'].DIRECTORY_SEPARATOR.rawurlencode($object['file_name_on_disk']);
 	}
 }
 
