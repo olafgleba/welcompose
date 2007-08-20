@@ -21,5 +21,241 @@
 		
 		<para/>
 	</sect1>
+	
+	<sect1 id="usage.protected_pages">
+		<title>Geschützte Seiten (Passwortschutz)</title>
 
+		<sect2 id="usage.protected_pages.introduction">
+			<title>Einführung</title>
+		
+			<para>
+				Welcompose unterstützt den Passwortschutz von einzelnen Seiten.
+				So kann den Mitgliedern einer oder mehreren Benutzergruppen der
+				exklusive Zugriff auf die Inhalte einer oder mehrerer Seiten
+				gewährt werden, sobald sich die Mitglieder der Benutzergruppen
+				gegenüber dem System authentifiziert haben.
+			</para>
+		</sect2>
+		
+		<sect2 id="usage.protected_pages.setup">
+			<title>Einrichtung</title>
+		
+			<para>
+				Die Zugangskontrolle zu geschützten Seiten erfolgt mit Hilfe
+				der Welcompose-Benutzergruppen. Um eine oder mehrere Seiten zu
+				schützen, müssen Sie also zuerst einmal eine oder mehrere
+				Benutzergruppen anlegen. Diesen werden später die Benutzer
+				zugeordnet, die Zugriff auf die Seiten erhalten sollen.
+			</para>
+		
+			<para>
+				Um eine neue Benutzergruppe zu erstellen, wechseln Sie zum
+				Bereich <guimenu>Users</guimenu> und dort zum Unterpunkt 
+				<guisubmenu>Groups</guisubmenu>. Suchen Sie dort nach der
+				Benutzergruppe WCOM_ANONYMOUS und klicken dort auf die 
+				Schaltfläche <guibutton>Duplicate</guibutton>. Ändern Sie nun
+				den Namen der Benutzergruppe. Achten Sie dabei darauf, ein
+				Prefix wie <userinput>CUSTOM_</userinput> zu verwenden, damit
+				keine Kollisionen mit Welcompose-Benutzergruppen auftreten
+				können. Als Beispiel soll der Name
+				<userinput>CUSTOM_LOGIN_INTERN</userinput> verwendet werden.
+				Geben Sie als Beschreibung einen Text ein, der erklärt, wozu
+				diese Gruppe dient, beispielsweise <userinput>Passwortschutz
+				für Seite Intern</userinput>. Lassen Sie die ausgewählten
+				Benutzerrechte unberührt und klicken Sie dann auf
+				<guibutton>Duplicate group</guibutton>.
+			</para>
+		
+			<figure id="usage.protected_pages.setup.add_user_group">
+				<title>Benutzergruppe für Passwortschutz anlegen</title>
+				<graphic fileref="images/usage/protected_pages/setup.add_user_group.png"/>
+			</figure>
+		
+			<para>
+				Ordnen Sie nun einen oder mehrere Benutzer der soeben
+				angelegten Gruppe zu. Achten Sie dabei darauf, dem Benutzer
+				keine Autoren-Rechte einzuräumen, da er sich sonst am
+				Administrationsbereich anmelden kann.
+			</para>
+		
+			<figure id="usage.protected_pages.setup.add_user">
+				<title>Benutzer für geschützte Seite hinzufügen</title>
+				<graphic fileref="images/usage/protected_pages/setup.add_user.png"/>
+			</figure>
+		
+			<para>
+				Legen Sie nun die neue Seite an respektive bearbeiten eine
+				bestehende Seite, indem Sie zu den Metadaten der jeweiligen
+				Seite gehen.
+			</para>
+		
+			<para>
+				Klicken Sie dort bei <emphasis>Geschützt</emphasis> die
+				Checkbox an und wählen darunter die Benutzergruppen aus, die
+				Zugang zu dieser Seite erhalten sollen. Wählen Sie auf jeden
+				Fall die soeben angelegte Gruppe, also
+				<guimenuitem>CUSTOM_LOGIN_INTERN</guimenuitem>, aus. Dazu
+				können Sie die Standard-Gruppen für Autoren
+				<guimenuitem>WCOM_ADMIN</guimenuitem> und
+				<guimenuitem>WCOM_REGULAR</guimenuitem> auswählen. So erhalten
+				alle Anwender, die Zugang zum Administrationsbereich haben,
+				Zugang zur geschützten Seite.
+			</para>
+		
+			<warning>
+				<para>
+					Wählen Sie keinesfalls 
+					<guimenuitem>WCOM_ANONOYMOUS</guimenuitem> als
+					Benutzergruppe aus. Sonst erhalten alle Besucher Zugang
+					zur geschützten Seite &ndash; ohne Passwort.
+				</para>
+			</warning>
+		
+			<figure id="usage.protected_pages.setup.protect_page">
+				<title>Seite schützen</title>
+				<graphic fileref="images/usage/protected_pages/setup.protect_page.png"/>
+			</figure>
+		
+			<para>
+				Rufen Sie nun über den öffentlichen Bereich die Seite auf, die
+				geschützt werden soll, wird anstatt der regulären Seite eine
+				Fehlermeldung angezeigt, wonach eine Vorlage vom Typ
+				system_login benötigt wird. Diese zeigt das Login-Formular an,
+				das die Benutzer verwenden müssen, um sich anzumelden.
+			</para>
+		
+			<para>
+				Um diese Vorlage anzulegen, gehen Sie zum Bereich
+				<guimenu>Templating</guimenu> und dort zum Unterpunkt 
+				<guisubmenu>Templates</guisubmenu>. Legen Sie dort eine
+				Vorlage vom Typ system_login an und weisen Sie sie dem
+				Vorlagen-Satz zu, der von der geschützten Seite verwendet
+				wird. Fügen Sie an einem beliebigen Platz das Login-Formular
+				ein (das optisch an die eigenen Bedürfnisse angepasst werden
+				kann):
+			</para>
+		
+			<programlisting><![CDATA[
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors  key="field_name" item="error"}
+    <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset>
+{$form.hidden}
+<label for="email">{$form.email.label}</label>{$form.email.html}<br />
+<label for="secret">{$form.secret.label}</label>{$form.secret.html}
+</fieldset>
+
+{$form.submit.html}
+</form>
+<p>{$form.requirednote}</p>
+]]></programlisting>
+			
+			<figure id="usage.protected_pages.setup.create_login_template">
+				<title>Login-Vorlage erstellen</title>
+				<graphic fileref="images/usage/protected_pages/setup.create_login_template.png"/>
+			</figure>
+			
+			<para>
+				Sobald die Vorlage gespeichert wurde und Sie die geschützte
+				Seite im öffentlichen Bereich aufrufen, sollte das
+				Login-Formular erscheinen. Füllen Sie dieses mit Ihren
+				Zugangsdaten aus (sofern Sie Mitglied einer Gruppe sind, die
+				auf diese Seite zugreifen darf) und senden es ab. Sie sollten
+				nun auf die eigentliche Seite weitergeleitet werden.
+			</para>
+			
+			<figure id="usage.protected_pages.setup.login_form">
+				<title>Login-Formular zu geschützter Seite</title>
+				<graphic fileref="images/usage/protected_pages/setup.login_form.png"/>
+			</figure>
+			
+		</sect2>
+		
+		<sect2 id="usage.protected_pages.limitations">
+			<title>Einschränkungen</title>
+			
+			<para>
+				Der Passwortschutz von Welcompose unterliegt einer Reihe von
+				Einschränkungen:
+			</para>
+			
+			<itemizedlist>
+				<listitem>
+					<para>
+						Wenn eine Seite mit einem Passwortschutz versehen
+						wird, wird nur diese eine Seite geschützt. Der
+						Passwortschutz hat auf darunterliegende Seiten keine
+						Auswirkung.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Bein einer geschützten Seite verwehrt Welcompose nur
+						den Zugang zu der Seite, nicht direkt zu den auf ihr
+						dargestellten Informationen. Dies bedeutet, dass
+						insbesondere Objekte aus dem Media Manager allen
+						Besuchern frei zugänglich sind, sofern sie die URLs
+						zu den Objekten kennen (was bedeutet, dass die
+						Objekte beispielsweise von Google indiziert werden
+						können). 
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Wenn Sie die Informationen einer geschützten Seite auf
+						einer anderen Seite zugänglich machen, beispielsweise
+						durch eigene Programmierung, werden die Informationen
+						dort jedem Besucher angezeigt, ohne dass eine
+						Authentifizierung verlangt wird.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="usage.protected_pages.protect_more_pages">
+			<title>Weitere Seiten schützen</title>
+					
+			<para>
+				Haben Sie bereits eine Seite geschützt und möchten nun weitere
+				Seiten schützen, brauchen Sie nur einige Schritte der 
+				Einrichtung (siehe <xref linkend="usage.protected_pages.setup"/>)
+				zu wiederholen.
+			</para>
+			
+			<itemizedlist>
+				<listitem>
+					<para>
+						Soll eine weitere Seite denselben (oder weniger)
+						Benutzergruppen zugänglich gemacht werden, reicht es,
+						die jeweilige Seite zu schützen und der Seite
+						dieselben (oder weniger) Benutzergruppen zuzuweisen.
+						Sie brauchen eine neue Benutzergruppe nur anzulegen,
+						wenn die Seite anderen Benutzern zugänglich gemacht
+						werden soll.  
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Die Vorlage für das Login-Formular wird für alle
+						geschützten Seiten verwendet. Das heisst, man muss
+						nicht für jede geschützte Seite eine neue Vorlage
+						für das Login-Formular anlegen. Dies ist nur nötig,
+						wenn das Login-Formular einer bestimmten Seite
+						anders gestaltet werden soll. Erstellen Sie zu diesem
+						Zweck einen neuen Vorlagen-Satz, dem Sie die Seite
+						und die neue Vorlage für das Login-Formular zuweisen.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+	</sect1>
+	
 </chapter>
