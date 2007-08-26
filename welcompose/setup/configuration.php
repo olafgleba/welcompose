@@ -73,11 +73,11 @@ try {
 	$FORM->addRule('project', 'Please enter a project name', 'required');
 	
 	// textfield for locale
-	$FORM->addElement('text', 'locale', 'Locale'
+	$FORM->addElement('text', 'locale', 'Locale',
 		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('locale', 'trim');
 	$FORM->applyFilter('locale', 'strip_tags');
-	$FORM->addRule('locale', 'Please enter a locale to use' 'required');
+	$FORM->addRule('locale', 'Please enter a locale to use', 'required');
 	$FORM->addRule('locale', 'Please enter a valid locale to use', 'regex',
 		WCOM_REGEX_LOCALE_NAME);
 	
