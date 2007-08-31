@@ -111,6 +111,10 @@
 	font-size: 1.1em;
 	margin: 30px 0 5px 0;
 	}
+	h5.title {
+	font-size: 1em;
+	margin: 30px 0 5px 0;
+	}
 	/* hx definitions EOF */
 
 	/* icons */
@@ -253,6 +257,13 @@
 	}
 	span.term a {
 	font-weight: normal;
+	}
+	.footnotes {
+	border-top: 1px solid #ebebeb;
+	margin-top: 85px;
+	}
+	.footnote p {
+	margin: 3px 0 3px 0;
 	}
 	/* code, pre, markup EOF */
 }

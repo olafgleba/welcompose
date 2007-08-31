@@ -24,64 +24,75 @@
 			</listitem>
 		</itemizedlist>
 		
-		<para>
-			Wie im <xref linkend="templating.global_files"/> beschrieben, werden die dort verwalteten
-			medialen Inhalte innerhalb der Vorlagenerstellung (siehe <xref linkend="templating.templates"/>)
-			genutzt. Eine <emphasis>Globale Datei</emphasis> wäre beispielsweise ihr Firmenlogo, das auf allen
-			Seiten ihrer Webseite im Kopfbereich  angezeigt werden soll. Ein weiteres Beispiel wären Grafiken,
-			die sie in den Cascading Stylesheets (CSS) als Link-Icon referenzieren wollen
-			(siehe auch <xref linkend="templating.global_templates"/>) und somit unabhängig von 
-			individuellen Seiteninhalten sind.    
-		</para>
-				
-		<para>
-			Zum gegenwärtigen Zeitpunkt werden sämtliche, für die eigentliche Seitengestaltung relevanten,
-			medialen Inhalte über den <filename>Media Manager</filename>
-			(siehe <xref linkend="media.mediamanager"/>) verwaltet. Sie haben auf allen Eingabeseiten, in denen
-			Bilder, Dokumente oder sonstige Media-Dateien eingefügt werden können, direkten und unkomplizierten
-			Zugriff auf Ihre Mediadaten. Der Media Manager wird im nachfolgenden
-			Kapitel ausführlich vorgestellt. 
-		</para>
+		<sect2 id="media.mediamanager.introduction.global_files">
+			<title>Media als Globale Dateien</title>
+			
+			<para>
+				Wie im <xref linkend="templating.global_files"/> beschrieben, werden die dort verwalteten
+				medialen Inhalte innerhalb der Vorlagenerstellung (siehe <xref linkend="templating.templates"/>)
+				genutzt. Ein Beispiel macht dieses deutlich: Sie möchten ihr Firmenlogo auf allen Seiten im 
+				Kopfbereich anzeigen lassen. Um nicht jeder inhaltlichen Seite dieses Logo einzeln hinzufügen zu
+				müssen, laden wir das Logo als eine <emphasis>Globale Datei</emphasis> in das System und nutzen
+				diese Referenz in der Vorlagenerstellung. Ein weiteres Beispiel sind Grafiken, die sie in den
+				Cascading Stylesheets (CSS) als Link-Icon referenzieren wollen
+				(siehe auch <xref linkend="templating.global_templates"/>) und somit ebenfalls unabhängig
+				von individuellen Seiteninhalten sind.    
+			</para>
+		</sect2>
+
+		<sect2 id="media.mediamanager.introduction.media_manager">
+			<title>Media als individuelle Seiteninhalte</title>
+						
+			<para>
+				Die entgegengesetzte Aufgabenstellung - die seitenabhängige Nutzung von Media-Dateien - 
+				wird durch den <filename>Mediamanager</filename> (siehe <xref linkend="media.mediamanager"/>)
+				abgedeckt. Über diesen verwalten Sie ihre lokalen Media-Dateien und fügen sie ihren Seiteninhalte
+				hinzu. Der Mediamanager wird im nachfolgenden Kapitel ausführlich vorgestellt. 
+			</para>
+		</sect2>
 	</sect1>
 	
 	<sect1 id="media.mediamanager">
-		<title>Der Media Manager</title>
+		<title>Der Mediamanager</title>
 		
 		<sect2 id="media.mediamanager.introduction">
 			<title>Einführung</title>
 
 			<para>
-				Über den Media Manager verwalten Sie ihre Bild, Audio- und Filmdateien, Dokumente und
-				sonstigen Media-Dateien, die sie in ihre inhaltlichen Seiten nutzen wollen. Hier laden Sie die
-				Dateien hoch, editieren die Metadaten, löschen Dateien und fügen Bilder, Filme etc. den Seiteninhalten hinzu. 
+				Mit dem Mediamanager verwalten Sie Bild, Audio- und Filmdateien, Dokumente und
+				sonstige Media-Dateien, die sie in den inhaltlichen Seiten nutzen wollen. Mit ihm laden Sie die
+				Dateien hoch, editieren Meta-Daten, löschen Dateien und fügen Media-Dateien den Seiteninhalten hinzu. 
 			</para>
 		
 			<para>
-				Der Media Manager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den textlichen Inhalten
-				hinzugefügt werden können. Dies umfasst, neben den normalen, inhaltlichen Seiten, die seitenabhängigen 
-				(siehe @@@) und <emphasis>Globalen Boxen</emphasis> (siehe <xref linkend="contents.global_boxes"/>). Er ist
-				jeweils rechts neben dem Inhalte-Eingabefeld plaziert. So haben sie ihre Media-Dateien in
-				unmittelbaren Zugriff.
+				Der Mediamanager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den textlichen Inhalten
+				hinzugefügt werden können. Dies umfasst, neben den relevanten Seiten-Typen, die seitenabhängigen
+				<emphasis>Boxen</emphasis> (siehe @@@) und
+				<emphasis>Globalen Boxen</emphasis> (siehe <xref linkend="contents.global_boxes"/>).
+			</para>
+			
+			<para>	
+				Der Mediamanager ist ein AHAH
+				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AHAH"/></para></footnote>/AJAX
+				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AJAX"/></para></footnote> Element,
+				das die Media-Dateien im Hintergrund lädt ohne das die inhaltliche Seite, auf der sie sich gerade
+				befinden, neu geladen werden muss. Dieses ermöglicht ein unterbrechungsfreies Arbeiten an
+				den Seiteninhalten.
 			</para>
 			
 			<figure id="media.mediamanager.mediamanager_position">
-				<title>Plazierung des Media Manager</title>
+				<title>Plazierung des Mediamanager</title>
 				<graphic fileref="images/media/mediamanager/mediamanager_position.png"/>
 			</figure>
 		</sect2>
 				
 		
 		<sect2 id="media.mediamanager.scopes">
-			<title>Bereiche</title>
-			
-			<figure id="media.mediamanager.scopes.overview">
-				<title>Bereiche des Media Manager</title>
-				<graphic fileref="images/media/mediamanager/scopes/mediamanager_overview.png"/>
-			</figure>
+			<title>Funktionale Bereiche</title>
 			
 			<para>
 				Neben dem Haupteinsatzzweck - der Verwaltung der lokalen Media-Dateien (<guimenuitem>myLocal</guimenuitem>)
-				- stellt der Media Manager Unterstützung für die Photo Sharing Community Flickr
+				- stellt der Mediamanager Unterstützung für die Photo Sharing Community Flickr
 				<footnote><para><ulink type="external" url="http://www.flickr.com/"/></para></footnote> bereit
 				(<guimenuitem>myFlickr</guimenuitem>). Voraussetzung ist ein existierender Flickr API-Key.
 			</para>
@@ -99,7 +110,7 @@
 					<term><guimenuitem>myLocal</guimenuitem></term>
 					<listitem>
 						<para>
-							In dieser Ansicht verwalten sie ihre hochgeladenen Dateien. Dies ist die Standardansicht.							
+							In dieser Ansicht verwalten sie ihre lokalen Media-Dateien. Dies ist die Standardansicht.							
 						</para>
 					</listitem>
 				</varlistentry>
@@ -116,54 +127,313 @@
 					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
-							Über diesen Link laden Sie neue Media-Dateien in das System
+							Über diesen Link laden Sie neue Media-Dateien in das System. Er ist nur in der Ansicht
+							<guimenuitem>myLocal</guimenuitem> verfügbar.
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
-		
-			<sect3 id="media.mediamanager.scopes.mylocal">
-				<title>myLocal</title>
-				
-				<figure id="media.mediamanager.scopes.mylocal.overview">
-					<title>Ansicht myLocal</title>
-					<graphic fileref="images/media/mediamanager/scopes/mylocal/mediamanager_overview.png"/>
-				</figure>
-			
-				<para/>
-			</sect3>
-			
-			<sect3 id="media.mediamanager.scopes.myFlickr">
-				<title>myFlickr</title>
-				
-				<figure id="media.mediamanager.scopes.myflickr.overview">
-					<title>Ansicht myFlickr</title>
-					<graphic fileref="images/media/mediamanager/scopes/myflickr/mediamanager_overview.png"/>
-				</figure>
-			
-				<para/>
-			</sect3>
-			
-			<sect3 id="media.mediamanager.scopes.upload">
-				<title>Upload</title>
-				
-				<para/>
-			</sect3>
 		</sect2>
-			
-			
-		<sect2 id="media.mediamanager.options">
-			<title>Anzeigeoptionen</title>
-			
-			<para/>
-			
-		</sect2>
-		
+
 		<sect2 id="media.mediamanager.usage">
 			<title>Anwendung</title>
 			
-			<para/>
+			<para>	
+				Beide funktionalen Bereiche (<guimenuitem>myLocal</guimenuitem>, 
+				<guimenuitem>myFlickr</guimenuitem>) sind, bis auf prinzipbedingte
+				Unterschiede, identisch in Ihrer Anwendung: Während im Bereich myLocal lesender und schreibender
+				Zugriff auf die Meta-Daten der lokalen Media-Dateien möglich ist, beinhaltet der Bereich
+				myFlickr nur lesenden Zugriff auf die API der Flickr Community - was heißt, das Flickr-Dateien
+				innerhalb Welcompose angezeigt und den lokalen Inhalten hinzugefügt werden können, aber keine
+				Schnittstelle bereitgestellt wird, lokale Dateien über die API in den Dienst Flickr hochzuladen.
+			</para>
 			
+			<sect3 id="media.mediamanager.usage.options">
+				<title>Anzeigeoptionen</title>
+				
+				<para>
+					Sie können die Anzeige der Media-Dateien im Mediamanager durch die vielfältigen Anzeigeoptionen 
+					einschränken, bzw. gezielt bestimmen. Anzahl und Funktion der Anzeigeoptionen unterscheiden sich
+					in den beiden Bereichen <xref linkend="media.mediamanager.usage.mylocal.options"/>
+					und <xref linkend="media.mediamanager.usage.myflickr.options"/> geringfügig voneinander.
+				</para>
+
+				<para>
+					Über die Kontext-Hilfe (siehe <xref linkend="introduction.context_help"/>) erhalten Sie Informationen
+					zu den zur Vergügung stehenden Elementen und deren Einsatz.
+				</para>
+								
+				<para>
+					Das Ein- und Ausblenden der einzelnen Anzeigeelementen erfolgt, bereichübergreifend, über die
+					<emphasis role="strong">+</emphasis> und <emphasis role="strong">-</emphasis> Symbole
+					neben den einzelnen Optionen.
+				</para>
+				
+				<sect4 id="media.mediamanager.usage.mylocal.options">
+					<title>Anzeigeoptionen myLocal</title>
+					
+					<figure id="media.mediamanager.scopes.mylocal.options.all">
+						<title>myLocal: Anzeigeoptionen</title>
+						<graphic fileref="images/media/mediamanager/scopes/mylocal/options_all.png"/>
+					</figure>
+				
+					<variablelist>
+						<varlistentry>
+							<term><guimenuitem>Dateitypen</guimenuitem></term>
+							<listitem>
+								<para>
+									Welche Dateitypen soll die Anzeige beinhalten?							
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><guimenuitem>Schlagworte</guimenuitem></term>
+							<listitem>
+								<para>
+									Anzeige anhand von Schlagworten. Abhängig von den Tastatureingaben, wird das
+									Ergebnis alle 1.0 Sekunden aktualisiert. Mehrfachangaben sind möglich und werden
+									durch ein Kommata getrennt.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><guimenuitem>Zeitrahmen</guimenuitem></term>
+							<listitem>
+								<para>
+									Anzeige von Media-Dateien anhand dem Zeitpunkt des Uploads.
+								</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					
+					<note>
+						<para>
+						Alle Anzeigeoptionen im Bereich <guimenuitem>myLocal</guimenuitem> können alleinstehend
+						aber auch kombiniert genutzt werden.
+						Beispiel: Dateitypen: "Bilder", Schlagworte: "Fisch" zeigt ausschließlich Bilder
+						an, deren Verschlagwortung den Begriff "Fisch" enthält.
+						</para>
+					</note>
+				</sect4>
+				
+				
+				<sect4 id="media.mediamanager.usage.myflickr.options">
+					<title>Anzeigeoptionen myFlickr</title>
+				
+					<figure id="media.mediamanager.scopes.myflickr.options.default">
+						<title>myFlickr: Standardansicht Anzeigeoptionen</title>
+						<graphic fileref="images/media/mediamanager/scopes/myflickr/options_default.png"/>
+					</figure>
+
+					<para>
+						Erst nach erfolgreicher Anmeldung mit einer gültigen Benutzer-ID werden die 
+						Anzeigeoptionen sichtbar.
+					</para>
+									
+					<figure id="media.mediamanager.scopes.myflickr.options.all">
+						<title>myFlickr: Anzeigeoptionen nach Flickr-Anmeldung</title>
+						<graphic fileref="images/media/mediamanager/scopes/myflickr/options_all.png"/>
+					</figure>
+				
+					<variablelist>
+						<varlistentry>
+							<term><guimenuitem>Flickr Benutzer</guimenuitem></term>
+							<listitem>
+								<para>
+									Um myFlickr nutzen zu können, müssen Sie zuerst die Benutzer-ID des Flickr
+									Accounts eingeben.							
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><guimenuitem>Flickr Photoalbum</guimenuitem></term>
+							<listitem>
+								<para>
+									Wählen Sie ein Flickr Photoalbum aus.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><guimenuitem>Flickr Schlagworte</guimenuitem></term>
+							<listitem>
+								<para>
+									Anzeige anhand von Flickr Schlagworten.
+								</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					
+					<note>
+						<para>
+						Die im Bereich <guimenuitem>myFlickr</guimenuitem> zur Verfügung stehenden Anzeigeoptionen
+						können nicht kombiniert genutzt werden.
+						Das heißt, sie können <emphasis>entweder</emphasis> die Option 
+						<guimenuitem>Flickr Photoalben</guimenuitem>
+						nutzen <emphasis>oder</emphasis> die Option <guimenuitem>Flickr Schlagworte</guimenuitem>.
+						Dies entspricht der Funktionalität, die der Dienst Flickr bereitstellt.
+						</para>
+					</note>
+				</sect4>
+			</sect3>
+			
+			<sect3 id="media.mediamanager.usage.upload_media">
+				<title>Media-Daten hochladen</title>
+							
+				<para>
+					Über den Link <guimenuitem>Upload</guimenuitem> laden sie neue Media-Dateien in das System. Es öffnet
+					sich ein Popup-Fenster.
+				</para>
+				
+				<figure id="media.mediamanager.mediamanager.upload.popup">
+					<title>Media-Datei hochladen - Datei auswählen und Meta-Daten eintragen</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_upload_popup.png"/>
+				</figure>
+				
+				<variablelist>
+					<varlistentry>
+						<term><guimenuitem>Datei</guimenuitem></term>
+						<listitem>
+							<para>
+								Wählen Sie eine Datei von ihrer lokalen Festplatte aus.							
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Beschreibung</guimenuitem></term>
+						<listitem>
+							<para>
+								Optionale Beschreibung der Datei und deren Einsatzzweck. Kann zur Organisation ihrer Dateien
+								genutzt werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Schlagworte/Tags</guimenuitem></term>
+						<listitem>
+							<para>
+								Durch die Angabe von Schlagworten gruppieren und organisieren Sie Ihre Media Dateien.
+								Die Schlagworte werden in der Mediamanager Anzeigeoption <emphasis>Schlagworte</emphasis> genutzt,
+								um die Quantität der Anzeige zu begrenzen. Tragen Sie bitte mehrere, mindestens aber
+								ein Schlagwort/Tag ein. Mehrfachangaben sind möglich und werden durch Kommata getrennt.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Nach Auswahl der Datei und Angabe der Meta-Daten laden sie mit einem Klick auf 
+					<guibutton>Media hochladen</guibutton> die Datei ins System. Der erfolgreiche Upload wird Ihnen
+					visuell bestätigt. Nach erfolgten Upload schließen sie das Popup-Fenster bitte über den Button
+					 <guibutton>Schließen</guibutton>.
+				</para>
+				
+				<warning>
+					<para>
+					Schließen sie das Popup-Fenster nicht über den oben genannten Button, wird die Anzeige des Mediamanagers
+					nicht aktualisiert. Das bedeutet, das die aktuell hochgeladene Datei nicht umgehend im Mediamanager
+					angezeigt wird.
+					</para>
+				</warning>
+				
+				<tip>
+					<para>
+					Haben Sie nach einem Upload das Popup-Fenster nicht über den Button <guibutton>Schließen</guibutton>
+					geschlossen, müssen sie nicht die inhaltliche Seite erneut laden, um eine aktuelle Ansicht des Mediamanagers
+					zu erhalten. Klicken sie stattdessen einfach erneut auf <guimenuitem>Upload</guimenuitem> und schließen
+					das Popup-Fenster nun über den oben genannten Button.
+					</para>
+				</tip>
+			</sect3>
+			
+			<sect3 id="media.mediamanager.usage.delete_media">
+				<title>Media-Daten löschen</title>
+							
+				<para>
+					Sie löschen eine Media-Datei, in dem sie auf das entsprechende Icon rechts neben der
+					Symbolansicht der Datei klicken. Nach erfolgreicher Entfernung
+					der Datei, wird die Ansicht des Mediamanagers aktualisiert.
+				</para>
+				
+				<figure id="media.mediamanager.mediamanager.delete.file">
+					<title>Media-Datei löschen</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_delete_file.png"/>
+				</figure>
+			</sect3>
+			
+			
+			<sect3 id="media.mediamanager.usage.edit_metadata">
+				<title>Meta-Daten editieren</title>
+			
+				<para>
+					Um die Meta-Daten der Dateien zu editieren, klicken sie auf das entsprechende Icon rechts neben der
+					Symbolansicht der Datei. Es öffnet sich ein Popup-Fenster.
+				</para>
+				
+				<figure id="media.mediamanager.mediamanager.edit.file">
+					<title>Media-Datei editieren</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_edit_file.png"/>
+				</figure>
+				
+				<para>
+					Editieren Sie die Meta-Daten und speichern sie diese anschließend durch einem Klick auf 
+					<guibutton>Änderungen speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
+					visuell bestätigt. Schließen sie das Popup-Fenster bitte über den Button
+					 <guibutton>Schließen</guibutton>. Beachten Sie oben genannte Hinweise zum Schließen von
+					Popup-Fenster.
+				</para>
+				
+				<figure id="media.mediamanager.mediamanager.edit.popup">
+					<title>Meta-Daten editieren</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_edit_popup.png"/>
+				</figure>
+			</sect3>
+				
+			<sect3 id="media.mediamanager.usage.insert_media">
+				<title>Media-Daten den Inhalten hinzufügen</title>
+							
+				<para>
+					Das Hinzufügen von Media-Dateien zu den Seiteninhalten folgt, bereichsübergreifend, 
+					dem selben Bedienprinzip.
+				</para>
+				
+				<para>
+					Sie positionieren den Maus-Cursor im inhaltlichen Textfeld an die Stelle, an der die Media-Datei
+					eingefügt werden soll und wählen durch einen Mausklick auf das Datei-Icon die Media-Datei aus. 
+					Abhängig vom Mime-Typ der Datei wird eine Referenz an gewählter Stelle eingefügt oder es wird ein Pop-up
+					Fenster angezeigt (siehe <xref linkend="media.mediamanager.mediamanager.insert.image"/>),
+					in dem optionale Attribute zur einzufügenden Datei angegeben werden können.
+				</para>
+				
+				<figure id="media.mediamanager.mediamanager.insert.cursor">
+					<title>Media-Datei einfügen - Cursor positionieren</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_insert_cursor.png"/>
+				</figure>
+				
+				<figure id="media.mediamanager.mediamanager.insert.click">
+					<title>Media-Datei einfügen - Datei auswählen</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_insert_click.png"/>
+				</figure>
+				
+				<figure id="media.mediamanager.mediamanager.insert.link">
+					<title>Media-Datei einfügen - Eingefügte Referenz</title>
+					<graphic fileref="images/media/mediamanager/mediamanager_insert_link.png"/>
+				</figure>
+				
+				<figure id="media.mediamanager.mediamanager.insert.image">
+					<title>Media-Datei einfügen - Optionale Attribute (Beispiel: Bild einfügen in myLocal) </title>
+					<graphic fileref="images/media/mediamanager/mediamanager_insert_image.png"/>
+				</figure>
+				
+				<warning>
+					<para>
+					Die Syntax der eingefügten Referenz ist abhängig von der gewählten Text-Konverter Einstellung 
+					(siehe <xref linkend="settings.text_converters"/>). Die Syntax der schon eingefügten Referenzen werden
+					<emphasis role="strong">nicht</emphasis> konvertiert, wechseln sie während des Editierens der Inhalte
+					die Text-Konverter Auswahl.
+					</para>
+				</warning>
+			
+			</sect3>
 		</sect2>
 	</sect1>
 </chapter>
