@@ -33,7 +33,7 @@
 				genutzt. Ein Beispiel macht dieses deutlich: Sie möchten ihr Firmenlogo auf allen Seiten im 
 				Kopfbereich anzeigen lassen. Um nicht jeder inhaltlichen Seite dieses Logo einzeln hinzufügen zu
 				müssen, laden wir das Logo als eine <emphasis>Globale Datei</emphasis> in das System und nutzen
-				diese Referenz in der Vorlagenerstellung. Ein weiteres Beispiel sind Grafiken, die sie in den
+				diese Referenz in der Vorlagenerstellung. Ein weiteres Beispiel sind Grafiken, die Sie in den
 				Cascading Stylesheets (CSS) als Link-Icon referenzieren wollen
 				(siehe auch <xref linkend="templating.global_templates"/>) und somit ebenfalls unabhängig
 				von individuellen Seiteninhalten sind.    
@@ -46,7 +46,7 @@
 			<para>
 				Die entgegengesetzte Aufgabenstellung - die seitenabhängige Nutzung von Media-Dateien - 
 				wird durch den <filename>Mediamanager</filename> (siehe <xref linkend="media.mediamanager"/>)
-				abgedeckt. Über diesen verwalten Sie ihre lokalen Media-Dateien und fügen sie ihren Seiteninhalte
+				abgedeckt. Über diesen Mediamanager verwalten Sie ihre lokalen Media-Dateien und fügen diese Ihren Seiteninhalten
 				hinzu. Der Mediamanager wird im nachfolgenden Kapitel ausführlich vorgestellt. 
 			</para>
 		</sect2>
@@ -60,13 +60,13 @@
 
 			<para>
 				Mit dem Mediamanager verwalten Sie Bild, Audio- und Filmdateien, Dokumente und
-				sonstige Media-Dateien, die sie in den inhaltlichen Seiten nutzen wollen. Mit ihm laden Sie die
+				sonstige Media-Dateien, die sie in den inhaltlichen Seiten nutzen wollen. Mit dem Mediamanager laden Sie die
 				Dateien hoch, editieren Meta-Daten, löschen Dateien und fügen Media-Dateien den Seiteninhalten hinzu. 
 			</para>
 		
 			<para>
 				Der Mediamanager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den textlichen Inhalten
-				hinzugefügt werden können. Dies umfasst, neben den relevanten Seiten-Typen, die seitenabhängigen
+				hinzugefügt werden können. Dies umfasst neben den relevanten Seiten-Typen die seitenabhängigen
 				<emphasis>Boxen</emphasis> (siehe @@@) und
 				<emphasis>Globalen Boxen</emphasis> (siehe <xref linkend="contents.global_boxes"/>).
 			</para>
@@ -75,7 +75,7 @@
 				Der Mediamanager ist ein AHAH
 				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AHAH"/></para></footnote>/AJAX
 				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AJAX"/></para></footnote> Element,
-				das die Media-Dateien im Hintergrund lädt ohne das die inhaltliche Seite, auf der sie sich gerade
+				das die Media-Dateien im Hintergrund lädt ohne dass die inhaltliche Seite, auf der Sie sich gerade
 				befinden, neu geladen werden muss. Dieses ermöglicht ein unterbrechungsfreies Arbeiten an
 				den Seiteninhalten.
 			</para>
@@ -110,7 +110,7 @@
 					<term><guimenuitem>myLocal</guimenuitem></term>
 					<listitem>
 						<para>
-							In dieser Ansicht verwalten sie ihre lokalen Media-Dateien. Dies ist die Standardansicht.							
+							In dieser Ansicht verwalten Sie ihre lokalen Media-Dateien. Dies ist die Standardansicht.							
 						</para>
 					</listitem>
 				</varlistentry>
@@ -118,7 +118,7 @@
 					<term><guimenuitem>myFlickr</guimenuitem></term>
 					<listitem>
 						<para>
-							In dieser Ansicht können sie eine Auswahl von Flickr Inhalten treffen, die sie ihren 
+							In dieser Ansicht können sie eine Auswahl von Flickr Inhalten treffen, die Sie Ihren 
 							Seiteninhalten hinzufügen möchten
 						</para>
 					</listitem>
@@ -127,7 +127,7 @@
 					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
-							Über diesen Link laden Sie neue Media-Dateien in das System. Er ist nur in der Ansicht
+							Über diesen Link laden Sie neue Media-Dateien in das System. Upload ist nur in der Ansicht
 							<guimenuitem>myLocal</guimenuitem> verfügbar.
 						</para>
 					</listitem>
@@ -140,8 +140,8 @@
 			
 			<para>	
 				Beide funktionalen Bereiche (<guimenuitem>myLocal</guimenuitem>, 
-				<guimenuitem>myFlickr</guimenuitem>) sind, bis auf prinzipbedingte
-				Unterschiede, identisch in Ihrer Anwendung: Während im Bereich myLocal lesender und schreibender
+				<guimenuitem>myFlickr</guimenuitem>) sind bis auf prinzipbedingte
+				Unterschiede identisch in Ihrer Anwendung: Während im Bereich myLocal lesender und schreibender
 				Zugriff auf die Meta-Daten der lokalen Media-Dateien möglich ist, beinhaltet der Bereich
 				myFlickr nur lesenden Zugriff auf die API der Flickr Community - was heißt, das Flickr-Dateien
 				innerhalb Welcompose angezeigt und den lokalen Inhalten hinzugefügt werden können, aber keine
@@ -160,11 +160,11 @@
 
 				<para>
 					Über die Kontext-Hilfe (siehe <xref linkend="introduction.context_help"/>) erhalten Sie Informationen
-					zu den zur Vergügung stehenden Elementen und deren Einsatz.
+					zu den zur Verfügung stehenden Elementen und deren Einsatz.
 				</para>
 								
 				<para>
-					Das Ein- und Ausblenden der einzelnen Anzeigeelementen erfolgt, bereichübergreifend, über die
+					Das Ein- und Ausblenden der einzelnen Anzeigeelemente erfolgt bereichübergreifend über die
 					<emphasis role="strong">+</emphasis> und <emphasis role="strong">-</emphasis> Symbole
 					neben den einzelnen Optionen.
 				</para>
@@ -190,7 +190,7 @@
 							<term><guimenuitem>Schlagworte</guimenuitem></term>
 							<listitem>
 								<para>
-									Anzeige anhand von Schlagworten. Abhängig von den Tastatureingaben, wird das
+									Anzeige anhand von Schlagworten. Abhängig von den Tastatureingaben wird das
 									Ergebnis alle 1.0 Sekunden aktualisiert. Mehrfachangaben sind möglich und werden
 									durch ein Kommata getrennt.
 								</para>
@@ -209,7 +209,7 @@
 					<note>
 						<para>
 						Alle Anzeigeoptionen im Bereich <guimenuitem>myLocal</guimenuitem> können alleinstehend
-						aber auch kombiniert genutzt werden.
+						oder auch kombiniert genutzt werden.
 						Beispiel: Dateitypen: "Bilder", Schlagworte: "Fisch" zeigt ausschließlich Bilder
 						an, deren Verschlagwortung den Begriff "Fisch" enthält.
 						</para>
@@ -349,7 +349,7 @@
 				<title>Media-Daten löschen</title>
 							
 				<para>
-					Sie löschen eine Media-Datei, in dem sie auf das entsprechende Icon rechts neben der
+					Sie löschen eine Media-Datei, in dem Sie auf das entsprechende Icon rechts neben der
 					Symbolansicht der Datei klicken. Nach erfolgreicher Entfernung
 					der Datei wird die Ansicht des Mediamanagers aktualisiert.
 				</para>
@@ -375,11 +375,11 @@
 				</figure>
 				
 				<para>
-					Editieren Sie die Meta-Daten und speichern sie diese anschließend durch einem Klick auf 
+					Editieren Sie die Meta-Daten und speichern Sie diese anschließend durch einem Klick auf 
 					<guibutton>Änderungen speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
 					visuell bestätigt. Schließen sie das Popup-Fenster bitte über den Button
 					 <guibutton>Schließen</guibutton>. Beachten Sie oben genannte Hinweise zum Schließen von
-					Popup-Fenster.
+					Popup-Fenstern.
 				</para>
 				
 				<figure id="media.mediamanager.mediamanager.edit.popup">
