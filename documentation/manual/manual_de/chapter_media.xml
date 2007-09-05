@@ -14,7 +14,7 @@
 		<itemizedlist>
 			<listitem>
 				<para>
-					Einsatz von Bildern, Filmen und sonstigen binären Dateien als <xref linkend="templating.global_files"/>
+					Einsatz von Bildern, Filmen und sonstigen binären Dateien als Globale Dateien.
 				</para>
 			</listitem>
 			<listitem>
@@ -200,7 +200,7 @@
 							<term><guimenuitem>Zeitrahmen</guimenuitem></term>
 							<listitem>
 								<para>
-									Anzeige von Media-Dateien anhand dem Zeitpunkt des Uploads.
+									Anzeige von Media-Dateien anhand des Zeitstempels.
 								</para>
 							</listitem>
 						</varlistentry>
@@ -268,7 +268,7 @@
 						Die im Bereich <guimenuitem>myFlickr</guimenuitem> zur Verfügung stehenden Anzeigeoptionen
 						können nicht kombiniert genutzt werden.
 						Das heißt, sie können <emphasis>entweder</emphasis> die Option 
-						<guimenuitem>Flickr Photoalben</guimenuitem>
+						<guimenuitem>Flickr Photoalbum</guimenuitem>
 						nutzen <emphasis>oder</emphasis> die Option <guimenuitem>Flickr Schlagworte</guimenuitem>.
 						Dies entspricht der Funktionalität, die der Dienst Flickr bereitstellt.
 						</para>
@@ -351,7 +351,7 @@
 				<para>
 					Sie löschen eine Media-Datei, in dem sie auf das entsprechende Icon rechts neben der
 					Symbolansicht der Datei klicken. Nach erfolgreicher Entfernung
-					der Datei, wird die Ansicht des Mediamanagers aktualisiert.
+					der Datei wird die Ansicht des Mediamanagers aktualisiert.
 				</para>
 				
 				<figure id="media.mediamanager.mediamanager.delete.file">
@@ -390,16 +390,13 @@
 				
 			<sect3 id="media.mediamanager.usage.insert_media">
 				<title>Media-Daten den Inhalten hinzufügen</title>
-							
-				<para>
-					Das Hinzufügen von Media-Dateien zu den Seiteninhalten folgt, bereichsübergreifend, 
-					dem selben Bedienprinzip.
-				</para>
 				
 				<para>
 					Sie positionieren den Maus-Cursor im inhaltlichen Textfeld an die Stelle, an der die Media-Datei
 					eingefügt werden soll und wählen durch einen Mausklick auf das Datei-Icon die Media-Datei aus. 
-					Abhängig vom Mime-Typ der Datei wird eine Referenz an gewählter Stelle eingefügt oder es wird ein Pop-up
+					Abhängig vom Mime-Typ<footnote><para><ulink type="external"
+					url="http://de.wikipedia.org/wiki/Internet_Media_Type"/></para></footnote>
+					der Datei wird eine Referenz an gewählter Stelle eingefügt oder es wird ein Pop-up
 					Fenster angezeigt (siehe <xref linkend="media.mediamanager.mediamanager.insert.image"/>),
 					in dem optionale Attribute zur einzufügenden Datei angegeben werden können.
 				</para>
@@ -426,10 +423,9 @@
 				
 				<warning>
 					<para>
-					Die Syntax der eingefügten Referenz ist abhängig von der gewählten Text-Konverter Einstellung 
-					(siehe <xref linkend="settings.text_converters"/>). Die Syntax der schon eingefügten Referenzen werden
-					<emphasis role="strong">nicht</emphasis> konvertiert, wechseln sie während des Editierens der Inhalte
-					die Text-Konverter Auswahl.
+						Wenn Sie während des Editierens der Inhalte oder zu einem späteren Zeitpunkt die Text-Konverter 
+						(siehe <xref linkend="settings.text_converters"/>) Auswahl wechseln, wird die Syntax der bereits
+						eingefügten Referenzen <emphasis role="strong">nicht automatisch</emphasis> konvertiert.
 					</para>
 				</warning>
 			
