@@ -220,9 +220,9 @@ var definitions = {
 			return false;
 		}
 	},
-	'.showTableRow' : function(el){
+	'.toggleNavigation' : function(el){
 		el.onclick = function(){
-			Tables.showTableRow(this);
+			Tables.toggleNavigation(this);
 			return false;
 		}
 	},

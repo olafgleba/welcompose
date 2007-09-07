@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
+<script type="text/javascript">
+var toggleNavigation = 1;
+</script>
+
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
@@ -88,10 +92,10 @@
 <div class="secnav474_nonav_c"></div>
 
 <div class="hli">
-<h2>{$_navigation.name|escape:"htmlall"}</h2>
+<h2>{$_navigation.name|escape:"htmlall"} <a class="toggleNavigation" href="#"><img src="../static/img/icons/close.gif" alt="" /></a></h2>
 <!-- hli --></div>
 
-<table summary="{i18n Page structure}">
+<table id="nav_{$_navigation.name}" summary="{i18n Page structure}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="465" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
@@ -140,6 +144,7 @@
 </tr>
 {/if}
 </table>
+&nbsp;
 {/foreach}
 {/if}
 <!-- content --></div>

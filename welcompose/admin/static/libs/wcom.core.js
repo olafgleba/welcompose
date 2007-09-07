@@ -476,6 +476,10 @@ Init.prototype.load = Init_load;
 Init.prototype.getVars = Init_getVars;
 Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
+Init.prototype.setCookie = Init_setCookie;
+Init.prototype.getCookie = Init_getCookie;
+Init.prototype.getToogleNavigation = Init_getToogleNavigation;
+Init.prototype.getStyle = Init_getStyle;
 
 /**
  * All functions supposed to be called on load must take place within this function.
@@ -494,10 +498,7 @@ function Init_load ()
 		_debug();
 		
 		Init.getVars();
-		
-		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
-			Init.getCbxStatus(checkbox_status);
-		}
+
 	} catch (e) {
 		_applyError(e);
 	}
@@ -565,6 +566,14 @@ function Init_getVars ()
 			if ($('podcast_media_object').value != '') {
 				Mediamanager.mediaToPodcastOnLoad();
 			}
+		}
+		if (typeof toggleNavigation != 'undefined') {
+			if (toggleNavigation == 1) {
+				Init.getToogleNavigation();
+			}
+		}
+		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
+			Init.getCbxStatus(checkbox_status);
 		}
 		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
@@ -661,6 +670,111 @@ function Init_processInit (ttarget)
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+
+/**
+ * Sets a cookie
+ * <br />
+ *
+ * @param {string} name 
+ * @param {string} value 
+ * @param {string} path 
+ * @param {string} domain 
+ * @param {boolean} secure 
+ * return cookie
+ * @throws applyError on exception
+ */
+function Init_setCookie (name, value, path, domain, secure)
+{
+	try {
+	    // one year
+	    var expireDate = new Date ();
+	    expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
+    
+	    var currentCookie = name + "=" + escape(value) +
+	        ((expireDate) ? "; expires=" + expireDate.toGMTString() : "") +
+	        ((path) ? "; path =" + path : "") +
+	        ((domain) ? "; domain=" + domain : "") +
+	        ((secure) ? "; secure" : "");
+	            document.cookie = currentCookie;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Gets a cookie
+ * <br />
+ *
+ * @param {string} name
+ * return cookie
+ * @throws applyError on exception
+ */
+function Init_getCookie (name)
+{
+	try {
+	    var dc = document.cookie;
+	    var prefix = name + "=";
+	    var begin = dc.indexOf("; " + prefix);
+	    if (begin == -1) {
+	        begin = dc.indexOf(prefix);
+	        if (begin != 0) return null;
+	    }
+	    else begin += 2;
+	    var end = document.cookie.indexOf(";", begin);
+	    if (end == -1) end = dc.length;
+    
+	    return unescape(dc.substring(begin + prefix.length, end));
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Toogle display of the navigation table depending on current element pointer.
+ * 
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Init_getToogleNavigation ()
+{
+	try {
+		if (navigator.cookieEnabled == true && document.cookie) {
+			
+		    var all = document.all ? document.all : document.getElementsByTagName('table');
+
+			for (var e = 0; e < all.length; e++) {		
+				all[e].style.display = Init.getCookie(all[e].id);
+				
+				if (Init.getCookie(all[e].id) == 'block' || Init.getCookie(all[e].id) == 'table') {
+					all[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = this.elementHtmlHide;
+				} else {
+					all[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = this.elementHtmlShow;
+				}
+			}
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+* get style properties
+*
+* var el string required
+* var styleProp string required
+* return string
+*/
+function Init_getStyle(el,styleProp)
+{
+	var x = document.getElementById(el);
+	if (x.currentStyle)
+		var y = x.currentStyle[styleProp];
+	else if (window.getComputedStyle)
+		var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
+	return y;
 }
 
 /**
@@ -1291,6 +1405,7 @@ Tables.prototype = new Base();
 Tables.prototype.showTableRow = Tables_showTableRow;
 Tables.prototype.hideTableRow = Tables_hideTableRow;
 Tables.prototype.collapseTableRow = Tables_collapseTableRow;
+Tables.prototype.toggleNavigation = Tables_toggleNavigation;
 
 /**
  * Show formely hidden table row depending on current element pointer.
@@ -1377,6 +1492,39 @@ function Tables_hideTableRow (elem)
 		} else {
 			// process outer table tr
 			$(this.elem).style.visibility = 'collapse';
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Toogle display of the navigation table depending on current element pointer.
+ * 
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Tables_toggleNavigation (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.attr = 'id';
+		this.processRow = Helper.getAttrParentNodeNextNode(this.attr, this.elem, 2);
+		this.statusDisplay = Init.getStyle(this.processRow, 'display');
+		
+		if (this.statusDisplay == 'table' || this.statusDisplay == 'block') {
+			if (navigator.cookieEnabled == true) {
+				Init.setCookie(this.processRow, 'none', '/');
+				this.elem.innerHTML = this.elementHtmlShow;
+			}
+			Effect.Fade(this.processRow,{duration: 0.4});
+		} else {
+			if (navigator.cookieEnabled == true) {
+				Init.setCookie(this.processRow, 'table', '/');
+				this.elem.innerHTML = this.elementHtmlHide;
+			}
+			Effect.Appear(this.processRow,{duration: 0.4});
 		}
 	} catch (e) {
 		_applyError(e);

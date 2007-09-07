@@ -205,6 +205,10 @@ padding-left: 59px;
 background: transparent url(../img/icons/page6.gif) left no-repeat;
 }
 
+#content h2 img {
+vertical-align: middle;
+}
+
 /* mini */
 .mini {
 font-size: 1px;
