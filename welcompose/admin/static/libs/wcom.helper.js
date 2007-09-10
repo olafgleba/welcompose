@@ -1460,9 +1460,11 @@ function Helper_getAttrParentNodeNextNode (attr, elem, level)
 	for (var a = elem; level > 0; level--) {
 		a = a.parentNode;
 	}	
-	a = a.nextSibling.nextSibling;
 	
-	//alert (a.innerHTML);
+	if (this.browser == 'ie')
+		a = a.nextSibling;
+	else
+		a = a.nextSibling.nextSibling;
 
 	if (this.browser == 'ie')
 		return a.attributes[attr].value;

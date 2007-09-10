@@ -334,7 +334,7 @@ Base.prototype.trim = Base_trim;
  * @return Boolean true or false
  */
 function Base_isArray(elem) {
-    return Base.prototype.isObject(elem) && elem.constructor == Array;
+    return Base.prototype.isObject(elem);
 }
 /**
  * Examine the giving var is of type Bool
@@ -479,7 +479,6 @@ Init.prototype.processInit = Init_processInit;
 Init.prototype.setCookie = Init_setCookie;
 Init.prototype.getCookie = Init_getCookie;
 Init.prototype.getToogleNavigation = Init_getToogleNavigation;
-Init.prototype.getStyle = Init_getStyle;
 
 /**
  * All functions supposed to be called on load must take place within this function.
@@ -682,7 +681,7 @@ function Init_processInit (ttarget)
  * @param {string} path 
  * @param {string} domain 
  * @param {boolean} secure 
- * return cookie
+ * @return cookie
  * @throws applyError on exception
  */
 function Init_setCookie (name, value, path, domain, secure)
@@ -708,7 +707,7 @@ function Init_setCookie (name, value, path, domain, secure)
  * <br />
  *
  * @param {string} name
- * return cookie
+ * @return cookie
  * @throws applyError on exception
  */
 function Init_getCookie (name)
@@ -731,10 +730,10 @@ function Init_getCookie (name)
 	}
 }
 
+
 /**
  * Toogle display of the navigation table depending on current element pointer.
  * 
- * @param {string} elem Current element
  * @throws applyError on exception
  */
 function Init_getToogleNavigation ()
@@ -742,39 +741,30 @@ function Init_getToogleNavigation ()
 	try {
 		if (navigator.cookieEnabled == true && document.cookie) {
 			
-		    var all = document.all ? document.all : document.getElementsByTagName('table');
+			var tables = document.getElementsByTagName('table');
 
-			for (var e = 0; e < all.length; e++) {		
-				all[e].style.display = Init.getCookie(all[e].id);
+			for (var e = 0; e < tables.length; e++) {
 				
-				if (Init.getCookie(all[e].id) == 'block' || Init.getCookie(all[e].id) == 'table') {
-					all[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = this.elementHtmlHide;
+				tables[e].style.display = Init.getCookie(tables[e].id);
+				
+				if (Init.getCookie(tables[e].id) == 'block' || Init.getCookie(tables[e].id) == null) {					
+					if (Helper.isBrowser('ie')) {
+						tables[e].previousSibling.childNodes[0].lastChild.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
+					} else {
+						tables[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
+					}
 				} else {
-					all[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = this.elementHtmlShow;
+					if (Helper.isBrowser('ie')) {
+						tables[e].previousSibling.childNodes[0].lastChild.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
+					} else {
+						tables[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
+					}
 				}
 			}
 		}		
 	} catch (e) {
 		_applyError(e);
 	}
-}
-
-
-/**
-* get style properties
-*
-* var el string required
-* var styleProp string required
-* return string
-*/
-function Init_getStyle(el,styleProp)
-{
-	var x = document.getElementById(el);
-	if (x.currentStyle)
-		var y = x.currentStyle[styleProp];
-	else if (window.getComputedStyle)
-		var y = document.defaultView.getComputedStyle(x,null).getPropertyValue(styleProp);
-	return y;
 }
 
 /**
@@ -1511,19 +1501,23 @@ function Tables_toggleNavigation (elem)
 		this.elem = elem;
 		this.attr = 'id';
 		this.processRow = Helper.getAttrParentNodeNextNode(this.attr, this.elem, 2);
-		this.statusDisplay = Init.getStyle(this.processRow, 'display');
+		this.statusDisplay = Element.getStyle(this.processRow, 'display');
 		
-		if (this.statusDisplay == 'table' || this.statusDisplay == 'block') {
+		// we need this for IE. He's to dumb to parse display value 'table'.
+		if (this.statusDisplay == 'table' || this.statusDisplay == null)
+			this.statusDisplay = 'block';
+		
+		if (this.statusDisplay == 'block') {
 			if (navigator.cookieEnabled == true) {
 				Init.setCookie(this.processRow, 'none', '/');
-				this.elem.innerHTML = this.elementHtmlShow;
 			}
+			this.elem.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
 			Effect.Fade(this.processRow,{duration: 0.4});
 		} else {
 			if (navigator.cookieEnabled == true) {
-				Init.setCookie(this.processRow, 'table', '/');
-				this.elem.innerHTML = this.elementHtmlHide;
+				Init.setCookie(this.processRow, 'block', '/');
 			}
+			this.elem.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
 			Effect.Appear(this.processRow,{duration: 0.4});
 		}
 	} catch (e) {

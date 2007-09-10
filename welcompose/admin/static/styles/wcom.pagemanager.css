@@ -205,8 +205,12 @@ padding-left: 59px;
 background: transparent url(../img/icons/page6.gif) left no-repeat;
 }
 
+/* Navigation ein/aus */
 #content h2 img {
 vertical-align: middle;
+}
+#content h2 a.toogleNavigation:focus, #content h2 a.toggleNavigation:active {
+background: transparent;
 }
 
 /* mini */
