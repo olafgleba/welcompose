@@ -102,10 +102,6 @@ try {
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
-	// assign current user values
-	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
-	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-	
 	// assign paths
 	$BASE->utility->smarty->assign('wcom_admin_root_www',
 		$BASE->_conf['path']['wcom_admin_root_www']);

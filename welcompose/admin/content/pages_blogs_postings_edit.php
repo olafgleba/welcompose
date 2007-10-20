@@ -116,7 +116,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'Blogposting', 'Manage')) {
+	if (!wcom_check_access('Content', 'BlogPosting', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
