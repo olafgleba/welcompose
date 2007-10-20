@@ -94,6 +94,14 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('ping_service', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $PINGSERVICE);

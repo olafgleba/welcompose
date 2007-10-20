@@ -90,6 +90,10 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);

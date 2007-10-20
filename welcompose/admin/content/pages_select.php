@@ -98,6 +98,14 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// assign paths
 	$BASE->utility->smarty->assign('wcom_admin_root_www',
 		$BASE->_conf['path']['wcom_admin_root_www']);
@@ -105,7 +113,7 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-	
+
 	// select available projects
 	$select_params = array(
 		'user' => WCOM_CURRENT_USER,

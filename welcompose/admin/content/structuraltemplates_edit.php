@@ -94,6 +94,10 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// get structural template
 	$template_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
 	$structural_template = $STRUCTURALTEMPLATE->selectStructuralTemplate($template_id);

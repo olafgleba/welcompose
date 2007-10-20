@@ -102,6 +102,10 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// make sure, that the page parameter is present
 	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC))) {
 		header("Location: pages_select.php");

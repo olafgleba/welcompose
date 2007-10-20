@@ -123,11 +123,23 @@ color: #fff;
 background: #ff620d url(../img/bg_logo_bot.gif) left bottom no-repeat;
 padding: 0 0 3px 7px;
 }
+#loggedin {
+position: absolute;
+top: 50px;
+left: 765px;
+width: 145px;
+height: 40px;
+line-height: 120%;
+font-size: 0.95em;
+}
+#loggedin span {
+font-weight: bold;
+}
 #logout {
 position: absolute;
 top: 44px;
 left: 915px;
-width: auto;
+width: 60px;
 }
 #logout a:link, #logout a:visited {
 display: block;

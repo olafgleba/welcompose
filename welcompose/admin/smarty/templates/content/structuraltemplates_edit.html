@@ -35,6 +35,8 @@ var pagetype = '';
 <p>{i18n Welcompose}</p>
 <!-- logo --></div>
 
+<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></div>
+
 <div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}

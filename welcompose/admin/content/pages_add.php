@@ -118,6 +118,10 @@ try {
 		throw new Exception("Access denied");
 	}
 	
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	
 	// prepare positions
 	$positions = array(
 		UTILITY_NESTEDSET_CREATE_BEFORE => gettext('Create node above'),
