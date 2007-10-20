@@ -742,10 +742,12 @@ function Init_getToogleNavigation ()
 		if (navigator.cookieEnabled == true && document.cookie) {
 			
 			var tables = document.getElementsByTagName('table');
-
+			
 			for (var e = 0; e < tables.length; e++) {
 				
-				tables[e].style.display = Init.getCookie(tables[e].id);
+				if (Init.getCookie(tables[e].id)) {
+					tables[e].style.display = Init.getCookie(tables[e].id);
+				}
 				
 				if (Init.getCookie(tables[e].id) == 'block' || Init.getCookie(tables[e].id) == null) {					
 					if (Helper.isBrowser('ie')) {
