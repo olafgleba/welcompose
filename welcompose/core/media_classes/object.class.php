@@ -489,14 +489,16 @@ public function countObjects ($params = array())
 /**
  * Moves object to store. Takes the real name (~ file name on user's disk)
  * as first argument, the path to the uploaded file as second argument. Returns
- * the new name on disk (uniqid + real name).
+ * the new name on disk which could be former name on edit action or newly build
+ * (uniqid + real name) on intial upload.
  *
  * @throws Media_ObjectException
  * @param string File name
  * @param string Path to uploaded file
+ * @param string Current file name on disk
  * @return string File name on disk
  */
-public function moveObjectToStore ($name, $path)
+public function moveObjectToStore ($name, $path, $current)
 {
 	// access check
 	if (!wcom_check_access('Media', 'Object', 'Manage')) {
@@ -510,16 +512,24 @@ public function moveObjectToStore ($name, $path)
 	if (empty($path) || !is_scalar($path)) {
 		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
 	}
+	if (!is_scalar($current)) {
+		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
+	}
 	if (!$this->imageStoreIsReady()) {
 		throw new Media_ObjectException("Image store is not ready");
 	}
 	
-	// get unique id
-	$uniqid = Base_Cnc::uniqueId();
-	
-	// prepare file name
-	$file_name = $uniqid.'_'.$name;
-	
+	if (empty($current)) {
+		// get unique id
+		$uniqid = Base_Cnc::uniqueId();
+
+		// prepare file name
+		$file_name = $uniqid.'_'.$name;		
+	} else {
+		// prepare file name
+		$file_name = $current;		
+	}
+		
 	// prepare target path
 	$target_path = $this->getPathToObject($file_name);
 	

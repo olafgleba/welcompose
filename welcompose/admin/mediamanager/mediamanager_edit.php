@@ -263,12 +263,15 @@ try {
 				$data[$_key] = trim(strip_tags($_value));
 			}
 			
+			// get current file
+			$current_file = $OBJECT->selectObject($FORM->exportValue('id'));
+						
 			// remove old thumbnail and object
 			$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
 			$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
-			
+						
 			// move file to file store
-			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
+			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name'], $current_file['file_name_on_disk']);
 			
 			// create thumbnail
 			$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 40, 40, true, 'ffffff');
