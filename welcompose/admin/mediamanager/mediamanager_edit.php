@@ -145,7 +145,7 @@ try {
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit200'));
+		array('class' => 'submit200upload'));
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Close'),
