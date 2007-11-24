@@ -650,6 +650,9 @@ public function getTextConverterListForForm ()
 		$this->_text_converter_list[(int)$_converter['id']] = htmlspecialchars($_converter['name']);
 	}
 	
+	// get default (xhtml) on top
+	ksort($this->_text_converter_list);
+	
 	// return converter list
 	return $this->_text_converter_list;
 }
