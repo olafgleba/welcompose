@@ -512,7 +512,7 @@ public function moveObjectToStore ($name, $path, $current)
 	if (empty($path) || !is_scalar($path)) {
 		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
 	}
-	if (!is_scalar($current)) {
+	if (!empty($current) && !is_scalar($current)) {
 		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
 	}
 	if (!$this->imageStoreIsReady()) {
