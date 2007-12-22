@@ -50,7 +50,7 @@ var definitions = {
 		}
 		el.onblur = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
-				Forms.setOnEvent(this, '','#000','solid');
+				Forms.setOnEvent(this, '','#666','solid');
 			}
 			return false;
 		}
@@ -62,7 +62,7 @@ var definitions = {
 			return false;
 		}
 		el.onblur = function(){
-			Forms.setOnEvent(this, '','#000','solid');
+			Forms.setOnEvent(this, '','#666','solid');
 			return false;
 		}
 	},

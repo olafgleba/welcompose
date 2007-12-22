@@ -510,6 +510,7 @@ function Init_load ()
  * @private
  * @throws applyError on exception
  */
+/*
 function _objectHackit ()
 {	
     if (Object.extend) {
@@ -532,6 +533,7 @@ function _objectHackit ()
       }
     }
 }
+*/
 
 /**
  * Getter function for several actions to be executed on load of page.
