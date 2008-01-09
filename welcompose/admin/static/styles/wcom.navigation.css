@@ -29,13 +29,16 @@ projects, breadcrumb, top navigation, page navigation
 position: absolute;
 top: 103px;
 right: 20px;
-width: 17em;
+width: auto;
 text-align: right;
 }
 #projects .fselect {
 margin: 1px 5px 0 0;
 padding: 0;
 border: 1px solid #666666;
+}
+#projects span {
+margin: 0 3px 0 0;
 }
 
 /* breadcrumb */

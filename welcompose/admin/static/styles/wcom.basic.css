@@ -57,7 +57,7 @@ width: 60px;
 background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
 h2, h3, h4, p, a, li, th, td, label, select, input, textarea, 
-span .bez, fieldset.void {
+span .bez, fieldset.void, #projects span {
 font-size: 0.80em;
 }
 h2 a, h3 a, h4 a, h2 p, p a, li a, th a, td a, label a, select a, input a,
