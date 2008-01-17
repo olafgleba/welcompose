@@ -398,7 +398,7 @@ public function createNodeAbove ($navigation, $reference)
 	$sqlData = array(
 		'navigation' => (int)$navigation,
 		'root_node' => (int)$reference_node['root_node'],
-		'parent' => (int)$reference_node['id'],
+		'parent' => (int)$reference_node['parent'],
 		'lft' => (int)$reference_node['lft'],
 		'rgt' => (int)$reference_node['lft'] + 1,
 		'level' => (int)$reference_node['level'],
