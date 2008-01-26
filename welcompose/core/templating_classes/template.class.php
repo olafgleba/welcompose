@@ -499,9 +499,7 @@ public function mapTemplateToSets ($template, $sets = array())
 	
 	// prepare query to remove all existing links to the current template
 	$sql = "
-		DELETE FROM
-			".WCOM_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
-		USING
+		DELETE `tts2tt` FROM
 			".WCOM_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tts2tt`
 		JOIN
 			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
