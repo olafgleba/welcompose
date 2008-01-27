@@ -641,9 +641,7 @@ public function mapPageToGroups ($page, $groups = array())
 	
 	// prepare query to remove all existing links to the current template
 	$sql = "
-		DELETE FROM
-			".WCOM_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
-		USING
+		DELETE `content_pages2user_groups` FROM
 			".WCOM_DB_CONTENT_PAGES2USER_GROUPS." AS `content_pages2user_groups`
 		JOIN
 			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
