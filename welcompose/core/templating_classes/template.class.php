@@ -189,9 +189,7 @@ public function deleteTemplate ($id)
 	
 	// prepare query
 	$sql = "
-		DELETE FROM
-			".WCOM_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
-		USING
+		DELETE `templating_templates` FROM
 			".WCOM_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
 		JOIN
 			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
