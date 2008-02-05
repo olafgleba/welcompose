@@ -389,10 +389,8 @@ public function mapGroupToRights ($group, $rights = array())
 	
 	// detach group from all rights
 	$sql = "
-		DELETE FROM
+		DELETE `user_groups2user_rights` FROM
 			 ".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
-		USING
-			`user_groups2user_rights`
 		LEFT JOIN
 			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		ON

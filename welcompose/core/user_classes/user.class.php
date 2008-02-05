@@ -506,10 +506,8 @@ public function mapUserToGroup ($user, $group = null)
 	
 	// delete user<->group mappings if necessary
 	$sql = "
-		DELETE FROM
+		DELETE `user_users2user_groups` FROM
 			 ".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
-		USING
-			`user_users2user_groups`
 		JOIN
 			".WCOM_DB_USER_GROUPS." AS `user_groups`
 		ON

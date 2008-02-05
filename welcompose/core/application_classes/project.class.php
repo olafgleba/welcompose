@@ -1504,10 +1504,8 @@ protected function syncUsersWithSkeleton ($project, $drop_obsolete = false)
 	if ($drop_obsolete === true) {
 		// prepare query to get users from database
 		$sql = "
-			DELETE FROM
+			DELETE `user_users` FROM
 				".WCOM_DB_USER_USERS." AS `user_users`
-			USING
-				`user_users`
 			LEFT JOIN
 				".WCOM_DB_USER_USERS2APPLICATION_PROJECTS." AS `user_users2application_projects`
 			  ON
@@ -1740,10 +1738,8 @@ protected function syncLinksBetweenUsersAndGroupsWithSkeleton ($project)
 		// delete all links between the current user and it's associated
 		// groups
 		$sql = "
-			DELETE FROM
+			DELETE `user_users2user_groups` FROM
 				".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
-			USING
-				`user_users2user_groups`
 			JOIN
 				".WCOM_DB_USER_GROUPS." AS `user_groups`
 			  ON
