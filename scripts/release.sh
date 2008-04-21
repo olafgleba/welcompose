@@ -60,8 +60,7 @@ zip -r "../welcompose-$BUILD_NUMBER/welcompose-$BUILD_NUMBER-full-src" welcompos
 rm -rf welcompose/update
 
 # compress js
-svn export
-http://svn.devjavu.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
+svn export http://svn.devjavu.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
 if [ ! -f "jsmin.py" ] ; then
 	echo "JavaScript minifier not found. Download failed, eh?"
 	exit 1
