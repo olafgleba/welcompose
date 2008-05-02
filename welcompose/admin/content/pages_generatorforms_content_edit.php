@@ -365,10 +365,6 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_select.php");
-		exit;
-		
-		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_generatorforms_content_edit.php?id=".$FORM->exportValue('id'));
 		} else {
