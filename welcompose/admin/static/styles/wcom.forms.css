@@ -186,6 +186,7 @@ input#submit55,
 input.submit90,
 input.submit140,
 input.submit200,
+input.submit200go,
 input.submit200upload,
 input.submit200insertcallback,
 input.submit200bez260,
@@ -219,6 +220,11 @@ input.submit200 {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 140px;
+}
+input.submit200go {
+background: #ff620d url(../img/submit200.gif) no-repeat;
+width: 200px;
+margin: 20px 0 0 10px;
 }
 input.submit200upload {
 background: #ff620d url(../img/submit200.gif) no-repeat;

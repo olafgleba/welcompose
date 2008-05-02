@@ -193,9 +193,13 @@ try {
 	$FORM->applyFilter('meta_description', 'trim');
 	$FORM->applyFilter('meta_description', 'strip_tags');
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -234,6 +238,19 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
 		
 		// assign page
 		$BASE->utility->smarty->assign("page", $page);
@@ -331,8 +348,16 @@ try {
 			// re-throw exception
 			throw $e;
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
 		
-		// redirect
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
+				
+		// save session
 		$SESSION->save();
 		
 		// clean the buffer
@@ -341,7 +366,11 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_select.php");
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_simplepages_content_edit.php?id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: pages_select.php");
+		}
 		exit;
 	}
 } catch (Exception $e) {

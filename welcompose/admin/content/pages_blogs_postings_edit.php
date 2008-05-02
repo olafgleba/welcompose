@@ -402,9 +402,13 @@ try {
 		array('language' => 'en', 'format' => 'd.m.Y \o\n H:i', 'addEmptyOption' => true),
 		array('id' => 'blog_posting_date_added'));
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -460,6 +464,19 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
 
 		// select available projects
 		$select_params = array(
@@ -648,7 +665,15 @@ try {
 				$PINGSERVICE->pingService($_configuration['id']);
 			}
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
 		
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
+				
 		// redirect
 		$SESSION->save();
 		
@@ -656,9 +681,13 @@ try {
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
-		
+
 		// redirect
-		header("Location: pages_blogs_postings_select.php?page=".$FORM->exportValue('page'));
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_blogs_postings_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: pages_blogs_postings_select.php?page=".$FORM->exportValue('page'));
+		}
 		exit;
 	}
 } catch (Exception $e) {

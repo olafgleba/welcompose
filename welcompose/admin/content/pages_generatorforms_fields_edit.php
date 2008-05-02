@@ -203,9 +203,13 @@ try {
 	$FORM->addRule('sorting', gettext('Enter a number for field sorting'), 'required');
 	$FORM->addRule('sorting', gettext('The sorting number may be only numeric'), 'numeric');
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -313,7 +317,15 @@ try {
 			// re-throw exception
 			throw $e;
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
 		
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
+				
 		// redirect
 		$SESSION->save();
 		
@@ -323,7 +335,11 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_generatorforms_fields_select.php?page=".$FORM->exportValue('page'));
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_generatorforms_fields_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: pages_generatorforms_fields_select.php?page=".$FORM->exportValue('page'));
+		}
 		exit;
 	}
 } catch (Exception $e) {

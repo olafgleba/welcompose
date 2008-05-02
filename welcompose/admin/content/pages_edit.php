@@ -234,9 +234,13 @@ try {
 	$FORM->addRule('sitemap_priority', gettext('Please enter a sitemap priority between 0.1 and 1.0'),
 		'regex', WCOM_REGEX_SITEMAP_PRIORITY);
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -369,8 +373,13 @@ try {
 			throw $e;
 		}
 
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
+		
 		// add response to session
-		$_SESSION['response'] = 1;
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
 				
 		// redirect
 		$SESSION->save();
@@ -381,7 +390,15 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
+		//header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
+		//exit;
+		
+		// redirect
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: pages_select.php");
+		}
 		exit;
 	}
 } catch (Exception $e) {

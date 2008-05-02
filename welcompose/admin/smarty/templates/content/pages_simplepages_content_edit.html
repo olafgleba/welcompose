@@ -18,6 +18,7 @@
 var mediamanager = 1;
 var pagetype = '{$page.page_type_name}';
 var checkbox_status = new Array('simple_page_meta_use');
+var response = '{$session.response}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -93,6 +94,13 @@ var checkbox_status = new Array('simple_page_meta_use');
 <!-- error --></div>
 {/if}
 
+{if $session.response == 1}
+<div id="rp">
+<h1>{i18n Your input was successfully saved!}</h1>
+<p>{i18n You can continue editing your content.}</p>
+<!-- rp --></div>
+{/if}
+
 <!-- column -->
 <div id="column"></div>
 <!-- column -->
@@ -140,7 +148,7 @@ var checkbox_status = new Array('simple_page_meta_use');
 {$form.meta_description.html}</label>
 </div>
 
-{$form.submit.html}
+{$form.save.html}{$form.submit.html}
 
 </fieldset>
 </form>

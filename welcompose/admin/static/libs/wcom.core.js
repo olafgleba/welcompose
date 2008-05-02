@@ -552,7 +552,7 @@ function Init_getVars ()
 	try {
 		if (typeof response != 'undefined') {
 			if (response == 1) {
-				Effect.Fade('rp', {duration: 0.6, delay: 1.2});
+				Effect.Fade('rp', {duration: 0.6, delay: 2.0});
 			}
 		}
 		if (typeof callback_media_result != 'undefined' && callback_media_result != '') {

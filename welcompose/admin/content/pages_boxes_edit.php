@@ -169,9 +169,13 @@ try {
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -206,6 +210,19 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
 
 		// select available projects
 		$select_params = array(
@@ -286,7 +303,15 @@ try {
 			// re-throw exception
 			throw $e;
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
 		
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
+				
 		// redirect
 		$SESSION->save();
 		
@@ -294,9 +319,13 @@ try {
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
-		
+
 		// redirect
-		header("Location: pages_boxes_select.php?page=".$FORM->exportValue('page'));
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_boxes_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('page'));
+		} else {
+			header("Location: pages_boxes_select.php?page=".$FORM->exportValue('page'));
+		}
 		exit;
 	}
 } catch (Exception $e) {

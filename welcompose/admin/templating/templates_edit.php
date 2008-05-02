@@ -176,9 +176,13 @@ try {
 	$FORM->addElement('textarea', 'content', gettext('Content'),
 		array('id' => 'template_content', 'class' => 'w540h550', 'cols' => 3, 'rows' => 2));
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 		
 	// set defaults
 	$FORM->setDefaults(array(
@@ -284,8 +288,13 @@ try {
 			throw $e;
 		}
 		
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
+		
 		// add response to session
-		$_SESSION['response'] = 1;
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
 		
 		// redirect
 		$SESSION->save();
@@ -296,7 +305,11 @@ try {
 		}
 		
 		// redirect
-		header("Location: templates_edit.php?id=".$FORM->exportValue('id'));
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: templates_edit.php?id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: templates_select.php");
+		}
 		exit;
 	}
 } catch (Exception $e) {

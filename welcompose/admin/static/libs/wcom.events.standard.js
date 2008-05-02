@@ -247,6 +247,11 @@ var definitions = {
 			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
 		}
 	},
+	'.submit200go' : function(el){
+		el.onfocus = function(){
+			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
+		}
+	},
 	'.submit200bez260' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';

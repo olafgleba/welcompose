@@ -228,9 +228,13 @@ try {
 	$FORM->addRule('use_captcha', gettext('Chosen captcha type is out of range'),
 		'in_array_keys', $captcha_types);
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
+	// submit button (save and stay)
+	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
+		
+	// submit button (save and go back)
+	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
+		array('class' => 'submit200go'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -273,6 +277,19 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}
 		
 		// assign page
 		$BASE->utility->smarty->assign("page", $page);
@@ -364,7 +381,15 @@ try {
 			// re-throw exception
 			throw $e;
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $FORM->exportValue('save');
 		
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}
+				
 		// redirect
 		$SESSION->save();
 		
@@ -374,7 +399,11 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_select.php");
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_simpleforms_content_edit.php?id=".$FORM->exportValue('id'));
+		} else {
+			header("Location: pages_select.php");
+		}
 		exit;
 	}
 } catch (Exception $e) {

@@ -15,8 +15,8 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
-var response = '{$session.response}';
 var pagetype = '{$page.page_type_name}';
+var response = '{$session.response}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -97,7 +97,7 @@ var pagetype = '{$page.page_type_name}';
 {if $session.response == 1}
 <div id="rp">
 <h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
+<p>{i18n You can continue editing your content.}</p>
 <!-- rp --></div>
 {/if}
 
@@ -135,7 +135,7 @@ var pagetype = '{$page.page_type_name}';
 <label class="cont" for="generator_form_field_sorting"><span class="bez">{$form.sorting.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.sorting.html}</label>
 
-{$form.submit.html}
+{$form.save.html}{$form.submit.html}
 
 </fieldset>
 </form>

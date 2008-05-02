@@ -17,6 +17,7 @@
 <script type="text/javascript">
 var mediamanager = 1;
 var pagetype = '';
+var response = '{$session.response}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -101,6 +102,13 @@ var pagetype = '';
 <!-- error --></div>
 {/if}
 
+{if $session.response == 1}
+<div id="rp">
+<h1>{i18n Your input was successfully saved!}</h1>
+<p>{i18n You can continue editing your content.}</p>
+<!-- rp --></div>
+{/if}
+
 <!-- column -->
 <div id="column"></div>
 <!-- column -->
@@ -131,7 +139,7 @@ var pagetype = '';
 <label class="cont" for="box_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
-{$form.submit.html}
+{$form.save.html}{$form.submit.html}
 
 </fieldset>
 </form>
