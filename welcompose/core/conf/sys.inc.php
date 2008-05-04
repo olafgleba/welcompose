@@ -18,7 +18,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=welcompose"
+dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcom-demo-simple"
 username = "root"
 password = 
 table_alias_constants = true
