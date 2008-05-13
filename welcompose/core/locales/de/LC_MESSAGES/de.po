@@ -1306,7 +1306,7 @@ msgstr "Ungültiges Passwort"
 
 #: login.php:91 login.html:27 systemlogin.class.php:156
 msgid "Login"
-msgstr "Login"
+msgstr "Anmelden"
 
 #: callbacks_insert_application-x-shockwave-flash.php:97
 #: callbacks_insert_application-x-shockwave-flash.php:106
@@ -1782,7 +1782,7 @@ msgstr "Welcompose"
 #: rights_select.html:32 users_add.html:36 users_edit.html:32
 #: users_select.html:32
 msgid "Logged in as user"
-msgstr ""
+msgstr "Angemeldeter Benutzer"
 
 #: pingservices_add.html:38 pingservices_edit.html:34
 #: pingservices_select.html:34 projects_add.html:38 projects_edit.html:34
@@ -4268,7 +4268,7 @@ msgstr ""
 
 #: login.html:10
 msgid "Welcompose Admin &ndash; Login"
-msgstr "Welcompose Administration &ndash; Login"
+msgstr "Welcompose Administration &ndash; Anmelden"
 
 #: callbacks_insert_application-x-shockwave-flash.html:10
 msgid "Welcompose Admin &ndash; Mediamanager &ndash; Insert Shockwave Flash"
