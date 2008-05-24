@@ -4834,7 +4834,7 @@ msgstr ""
 
 #: wcom.strings.js:56
 msgid "Are you sure you want to delete the chosen page?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie die gewählte Seite löschen möchten?"
 
 #: wcom.strings.js:57
 msgid ""
