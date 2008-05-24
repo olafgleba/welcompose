@@ -252,8 +252,27 @@ public function render ()
 					$element = $FORM->addElement('textarea', $_field['name'], $_field['label'], $attributes);
 				break;
 			case 'radio':
-					// smoking: radios (yes|no)
-					$form->addElement('radio', $_field['name'], $_field['label'], $_field['value'], $attributes);
+					$i = 1;
+					foreach (explode(';', $_field['value']) as $_value) {
+						if (empty($_value)) {
+							continue;
+						}
+
+						// prepare attributes
+						$attributes = array(
+							'id' => $field_id . '_' . $i,
+							'class' => 'fradio'
+						);
+
+						// create element
+						$element = $FORM->addElement('radio', $_field['name'], $_field['label'], $_value, $_value, $attributes);
+
+						if (!$FORM->isSubmitted()) {
+							$element->setValue($_value);
+						}
+
+						$i++;
+					}
 				break;
 			case 'reset':
 					// prepare attributes
