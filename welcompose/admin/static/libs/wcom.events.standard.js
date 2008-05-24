@@ -2,19 +2,19 @@
  * Project: Welcompose
  * File: wcom.events.standard.js
  *
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  *
  * Project owner:
- * sopic GmbH
- * 8472 Seuzach, Switzerland
- * http://www.sopic.com/
+ * creatics media.systems, Olaf Gleba
+ * 50939 Köln, Germany
+ * http://www.creatics.de
  *
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
  *
  * $Id$
  *
- * @copyright 2006 creatics media.systems
+ * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-2.1.php Open Software License

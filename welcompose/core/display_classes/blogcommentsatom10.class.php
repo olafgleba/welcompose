@@ -4,19 +4,19 @@
  * Project: Welcompose
  * File: blogcommentsatom10.class.php
  * 
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  * 
  * Project owner:
- * sopic GmbH
- * 8472 Seuzach, Switzerland
- * http://www.sopic.com/
+ * creatics media.systems, Olaf Gleba
+ * 50939 Köln, Germany
+ * http://www.creatics.de
  *
  * This file is licensed under the terms of the Open Software License 3.0
  * http://www.opensource.org/licenses/osl-3.0.php
  * 
  * $Id: blogatom10.class.php 819 2007-01-19 15:48:05Z andreas $
  * 
- * @copyright 2006 sopic GmbH
+ * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0

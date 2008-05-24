@@ -2,12 +2,12 @@
  * Project: Welcompose
  * File: wcom.basic.css
  *
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  *
  * Project owner:
- * sopic GmbH
- * 8472 Seuzach, Switzerland
- * http://www.sopic.com/
+ * creatics media.systems, Olaf Gleba
+ * 50939 Köln, Germany
+ * http://www.creatics.de
  *
  * This file is licensed under the terms of the Open Software License
  * http://www.opensource.org/licenses/osl-2.1.php
@@ -100,13 +100,14 @@ text-align: left;
 #container p.copyright {
 width: 941px;
 background: transparent url(../img/bg_container_bottom.gif) 0 20px no-repeat;
-padding: 5px 5px 15px 5px;
-margin: 50px 20px 0 20px;
+padding: 18px 5px 35px 5px;
+margin: 60px 20px 0 20px;
 border-top: 1px solid #ebebeb;
+line-height: 1.4em;
 }
 .fright {
 float: right;
-width: 520px;
+width: 460px;
 text-align: right;
 }
 #logo {
