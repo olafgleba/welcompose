@@ -884,6 +884,17 @@ public function getTagStringFromSerializedArray ($str)
 	return $this->_tagArrayToString($tags);
 }
 
+public function getTagWordUrlArrayFromSerializedArray ($str)
+{
+	$array = unserialize($str);
+	$tags = array();
+	foreach ($array as $_tag) {
+		$tags[] = $_tag['word_url'];
+	}
+	
+	return $tags;
+}
+
 // End of class
 }
 
