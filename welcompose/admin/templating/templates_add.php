@@ -121,6 +121,7 @@ try {
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('template', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $TEMPLATE);
+	$FORM->registerRule('testForTypeAndSetUniqueness', 'callback', 'testForUniqueTypeAndSet', $TEMPLATE);
 	
 	// select for group
 	$FORM->addElement('select', 'type', gettext('Type'), $template_types,
@@ -128,17 +129,16 @@ try {
 	$FORM->applyFilter('type', 'trim');
 	$FORM->applyFilter('type', 'strip_tags');
 	$FORM->addRule('type', gettext('Please select a template type'), 'required');
-	$FORM->addRule('type', gettext('Chosen template type is out of range'), 'in_array_keys',
-		$template_types);
-	
+	$FORM->addRule('type', gettext('Chosen template type is out of range'), 'in_array_keys', $template_types);
+	$FORM->addRule('type', gettext('A template with the same type for your choosen set(s) already exists'), 'testForTypeAndSetUniqueness');
+		
 	// select for set
 	$FORM->addElement('select', 'sets', gettext('Sets'), $template_sets,
 		array('id' => 'template_sets', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
-	$FORM->applyFilter('set', 'trim');
-	$FORM->applyFilter('set', 'strip_tags');
-	$FORM->addRule('set', gettext('Please select a template set'), 'required');
-	$FORM->addRule('set', gettext('Chosen template set is out of range'), 'in_array_keys',
-		$template_sets);
+	$FORM->applyFilter('sets', 'trim');
+	$FORM->applyFilter('sets', 'strip_tags');
+	$FORM->addRule('sets', gettext('Please select a template set'), 'required');
+	$FORM->addRule('set', gettext('Chosen template set is out of range'), 'in_array_keys', $template_sets);
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
@@ -157,13 +157,14 @@ try {
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
 		array('id' => 'template_content', 'class' => 'w540h550', 'cols' => 3, 'rows' => 2));
-	
+	 
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
 		
 	// validate it
 	if (!$FORM->validate()) {
+		
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
 		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
@@ -208,6 +209,9 @@ try {
 			'order_macro' => 'NAME'
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
+		
+		//print_r ($FORM->exportValue('sets'));
+		//print_r ($_REQUEST['sets']);
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

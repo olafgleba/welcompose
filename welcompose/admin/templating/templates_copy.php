@@ -130,6 +130,7 @@ try {
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('template', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $TEMPLATE);
+	$FORM->registerRule('testForTypeAndSetUniqueness', 'callback', 'testForUniqueTypeAndSet', $TEMPLATE);
 	
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
@@ -144,17 +145,17 @@ try {
 	$FORM->applyFilter('type', 'trim');
 	$FORM->applyFilter('type', 'strip_tags');
 	$FORM->addRule('type', gettext('Please select a template type'), 'required');
-	$FORM->addRule('type', gettext('Selected template type is out of range'), 'in_array_keys',
-		$template_types);
+	$FORM->addRule('type', gettext('Selected template type is out of range'), 'in_array_keys', $template_types);
+	$FORM->addRule('type', gettext('A template with the same type for your choosen set(s) already exists'), 'testForTypeAndSetUniqueness');
 	
 	// select for set
 	$template_set_element = $FORM->addElement('select', 'sets', gettext('Sets'), $template_sets,
 		array('id' => 'template_sets', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
 	$template_set_element->setSelected($selected_template_sets);
-	$FORM->applyFilter('set', 'trim');
-	$FORM->applyFilter('set', 'strip_tags');
-	$FORM->addRule('set', gettext('Please select a template set'), 'required');
-	$FORM->addRule('set', gettext('Selected template set is out of range'), 'in_array_keys',
+	$FORM->applyFilter('sets', 'trim');
+	$FORM->applyFilter('sets', 'strip_tags');
+	$FORM->addRule('sets', gettext('Please select a template set'), 'required');
+	$FORM->addRule('sets', gettext('Selected template set is out of range'), 'in_array_keys',
 		$template_sets);
 	
 	// textfield for name

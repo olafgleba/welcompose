@@ -728,6 +728,100 @@ public function testForUniqueName ($name, $id = null)
 }
 
 /**
+ * Tests given template type and set combination for uniqueness. Takes the template type as
+ * first argument and an optional template id as second argument. To crosscheck the type and
+ * set combination the sets posts are used. If the template id is given, this template won't
+ * be considered when checking for uniqueness (useful for updates). Returns boolean true if
+ * template type and set(s) combination is unique.
+ *
+ * @throws Templating_TemplateException
+ * @param string Template type
+ * @param int Template id
+ * @return bool
+ */
+public function testForUniqueTypeAndSet ($type, $id = null)
+{
+	// access check
+	if (!wcom_check_access('Templating', 'Template', 'Use')) {
+		throw new Templating_TemplateException("You are not allowed to perform this action");
+	}
+	
+	// process only if sets are not emtpy
+	// Otherwise get on and exit callback.
+	if (empty($_POST['sets'])) {
+		return true;
+		exit;
+	} else {
+		$_sets = $_POST['sets'];
+	}
+	
+	// input check
+	if (empty($type)) {
+		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");
+	}
+	if (!is_scalar($type)) {
+		throw new Templating_TemplateException("Input for parameter type is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Templating_TemplateException("Input for parameter id is expected to be numeric");
+	}
+	if (empty($type)) {
+		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");
+	}
+	
+	// implode sets array and populate var for sql query
+	foreach ($_sets as $sets) {
+		$set .= "'$sets'";	
+	}
+	$set = str_replace("''", "', '", $set);
+	
+		
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*) AS `total`
+		FROM
+			".WCOM_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `tt2tt`
+		JOIN
+			".WCOM_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
+		  ON
+			`tt2tt`.`template` = `templating_templates`.`id`
+		JOIN
+			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
+		  ON
+			`templating_templates`.`type` = `templating_template_types`.`id`
+		WHERE
+			`templating_templates`.`type` = :type
+		AND
+			`templating_template_types`.`project` = :project
+		AND
+			`tt2tt`.`set` IN ($set)
+	
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT,
+		'type' => $type
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `templating_templates`.`id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+	
+}
+
+
+/**
  * Fetches template for smarty out of the database. The right template
  * will be chosen using the id of the current page and the name of 
  * the template type.
