@@ -759,7 +759,7 @@ public function testForUniqueTypeAndSet ($type, $id = null)
 	if (empty($type)) {
 		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");
 	}
-	if (!is_array($_POST['sets'])) {
+	if (!empty($_POST['sets']) && !is_array($_POST['sets'])) {
 		throw new Templating_TemplateException("Input for parameter sets is expected to be an array");
 	}
 	
