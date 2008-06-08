@@ -730,7 +730,7 @@ public function testForUniqueName ($name, $id = null)
 /**
  * Tests given template type and set combination for uniqueness. Takes the template type as
  * first argument and an optional template id as second argument. To crosscheck the type and
- * set combination the sets posts are used. If the template id is given, this template won't
+ * set combination the sets POST are used. If the template id is given, this template won't
  * be considered when checking for uniqueness (useful for updates). Returns boolean true if
  * template type and set(s) combination is unique.
  *
@@ -746,15 +746,6 @@ public function testForUniqueTypeAndSet ($type, $id = null)
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
-	// process only if sets are not emtpy
-	// Otherwise get on and exit callback.
-	if (empty($_POST['sets'])) {
-		return true;
-		exit;
-	} else {
-		$_sets = $_POST['sets'];
-	}
-	
 	// input check
 	if (empty($type)) {
 		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");
@@ -767,6 +758,18 @@ public function testForUniqueTypeAndSet ($type, $id = null)
 	}
 	if (empty($type)) {
 		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");
+	}
+	if (!is_array($_POST['sets'])) {
+		throw new Templating_TemplateException("Input for parameter sets is expected to be an array");
+	}
+	
+	// Process only if sets are not empty
+	// Otherwise get on and exit callback without harm the validation.
+	if (empty($_POST['sets'])) {
+		return true;
+		exit;
+	} else {
+		$_sets = $_POST['sets'];
 	}
 	
 	// implode sets array and populate var for sql query
