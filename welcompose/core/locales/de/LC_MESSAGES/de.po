@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-02 17:19+0200\n"
+"POT-Creation-Date: 2008-06-08 08:24+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -37,8 +37,8 @@ msgstr ""
 #: globaltemplates_select.html:82 templates_select.html:109
 #: templatesets_select.html:66 templatetypes_select.html:66
 #: groups_select.html:67 rights_select.html:79 globaltemplates_add.php:119
-#: globaltemplates_edit.php:130 templates_add.php:144 templates_copy.php:161
-#: templates_edit.php:161 templatesets_add.php:106 templatesets_edit.php:116
+#: globaltemplates_edit.php:130 templates_add.php:144 templates_copy.php:162
+#: templates_edit.php:162 templatesets_add.php:106 templatesets_edit.php:116
 #: templatetypes_add.php:106 templatetypes_edit.php:117 groups_add.php:116
 #: groups_copy.php:132 groups_edit.php:132 rights_add.php:106
 #: rights_edit.php:116 users_add.php:121 users_edit.php:122
@@ -57,7 +57,7 @@ msgstr "Name"
 #: pages_edit.php:160 pagetypes_add.php:111 pagetypes_edit.php:120
 #: structuraltemplates_add.php:110 structuraltemplates_edit.php:121
 #: globaltemplates_add.php:123 globaltemplates_edit.php:134
-#: templates_add.php:148 templates_copy.php:165 templates_edit.php:165
+#: templates_add.php:148 templates_copy.php:166 templates_edit.php:166
 #: templatesets_add.php:110 templatesets_edit.php:120
 #: templatetypes_add.php:110 templatetypes_edit.php:121 groups_add.php:120
 #: groups_copy.php:136 groups_edit.php:136 rights_add.php:110
@@ -133,7 +133,7 @@ msgstr "Speichern"
 #: pagetypes_edit.php:112 podcastcategories_edit.php:113
 #: structuraltemplates_edit.php:113 mediamanager_edit.php:123
 #: globalfiles_edit.php:115 globaltemplates_edit.php:126
-#: templates_copy.php:138 templates_edit.php:138 templatesets_edit.php:112
+#: templates_copy.php:139 templates_edit.php:139 templatesets_edit.php:112
 #: templatetypes_edit.php:113 groups_copy.php:128 groups_edit.php:128
 #: rights_edit.php:112 users_edit.php:118
 msgid "Id is not expected to be empty"
@@ -152,7 +152,7 @@ msgstr "ID sollte nicht leer sein"
 #: pagetypes_edit.php:113 podcastcategories_edit.php:114
 #: structuraltemplates_edit.php:114 mediamanager_edit.php:124
 #: globalfiles_edit.php:116 globaltemplates_edit.php:127
-#: templates_copy.php:139 templates_edit.php:139 templatesets_edit.php:113
+#: templates_copy.php:140 templates_edit.php:140 templatesets_edit.php:113
 #: templatetypes_edit.php:114 groups_copy.php:129 groups_edit.php:129
 #: rights_edit.php:113 users_edit.php:119
 msgid "Id is expected to be numeric"
@@ -229,8 +229,8 @@ msgstr "Ein gleichnamiges Textmakro existiert bereits"
 #: textmacros_add.php:131 textmacros_edit.php:142 pages_add.php:220
 #: pages_generatorforms_fields_add.php:123
 #: pages_generatorforms_fields_edit.php:134 antispamplugins_select.html:81
-#: pages_generatorforms_fields_select.html:102 templates_add.php:126
-#: templates_copy.php:142 templates_edit.php:142
+#: pages_generatorforms_fields_select.html:102 templates_add.php:127
+#: templates_copy.php:143 templates_edit.php:143
 msgid "Type"
 msgstr "Typ"
 
@@ -312,7 +312,7 @@ msgstr "Bitte geben Sie eine gültige Webseiten Adresse an"
 #: pages_simpleforms_content_edit.php:164
 #: pages_simplepages_content_edit.php:150 structuraltemplates_add.php:120
 #: structuraltemplates_edit.php:131 globaltemplates_add.php:136
-#: globaltemplates_edit.php:147 templates_add.php:158 templates_copy.php:176
+#: globaltemplates_edit.php:147 templates_add.php:158 templates_copy.php:177
 #: templates_edit.php:176
 msgid "Content"
 msgstr "Inhalt"
@@ -637,7 +637,7 @@ msgstr "Alternativer Name"
 #: templatetypes_select.html:67 groups_select.html:68 rights_select.html:80
 #: globalfiles_add.php:114 globalfiles_edit.php:127
 #: globaltemplates_add.php:130 globaltemplates_edit.php:141
-#: templates_add.php:152 templates_copy.php:170 templates_edit.php:170
+#: templates_add.php:152 templates_copy.php:171 templates_edit.php:170
 #: templatesets_add.php:115 templatesets_edit.php:126
 #: templatetypes_add.php:115 templatetypes_edit.php:127 groups_add.php:125
 #: groups_copy.php:142 groups_edit.php:142 rights_add.php:115
@@ -665,7 +665,7 @@ msgstr "Vorlagengruppe"
 msgid "Please choose a template set"
 msgstr "Bitte wählen Sie eine Vorlagengruppe"
 
-#: pages_add.php:233 pages_edit.php:195 templates_add.php:140
+#: pages_add.php:233 pages_edit.php:195 templates_add.php:141
 msgid "Chosen template set is out of range"
 msgstr ""
 "Die Angabe der Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
@@ -854,7 +854,7 @@ msgstr "Nein"
 #: pages_simpleforms_content_edit.php:148
 #: pages_simplepages_content_edit.php:134
 #: pages_simplepages_content_edit.php:179 callbacks_insert_image.php:122
-#: pages_blogs_postings_select.html:124
+#: pages_blogs_postings_select.html:125
 msgid "Title"
 msgstr "Titel"
 
@@ -2064,7 +2064,7 @@ msgstr "Neu anlegen"
 #: globalboxes_select.html:58 globalboxes_select.html:91
 #: pages_blogs_pingserviceconfigurations_select.html:77
 #: pages_blogs_pingserviceconfigurations_select.html:110
-#: pages_blogs_postings_select.html:102 pages_blogs_postings_select.html:143
+#: pages_blogs_postings_select.html:102 pages_blogs_postings_select.html:144
 #: pages_boxes_select.html:84 pages_boxes_select.html:117
 #: pages_generatorforms_fields_select.html:77
 #: pages_generatorforms_fields_select.html:119
@@ -2092,7 +2092,7 @@ msgstr "Verfügbare Ping-Services"
 #: navigations_select.html:66 navigations_select.html:72
 #: pages_blogs_pingserviceconfigurations_select.html:98
 #: pages_blogs_pingserviceconfigurations_select.html:104
-#: pages_blogs_postings_select.html:128 pages_blogs_postings_select.html:137
+#: pages_blogs_postings_select.html:129 pages_blogs_postings_select.html:138
 #: pages_boxes_select.html:105 pages_boxes_select.html:111
 #: pages_generatorforms_fields_select.html:104
 #: pages_generatorforms_fields_select.html:113 pages_select.html:120
@@ -2120,7 +2120,7 @@ msgstr "Bearbeiten"
 #: navigations_select.html:67 navigations_select.html:73
 #: pages_blogs_pingserviceconfigurations_select.html:99
 #: pages_blogs_pingserviceconfigurations_select.html:105
-#: pages_blogs_postings_select.html:129 pages_blogs_postings_select.html:138
+#: pages_blogs_postings_select.html:130 pages_blogs_postings_select.html:139
 #: pages_boxes_select.html:106 pages_boxes_select.html:112
 #: pages_generatorforms_fields_select.html:105
 #: pages_generatorforms_fields_select.html:114 pages_select.html:122
@@ -2393,11 +2393,11 @@ msgid "To apply further changes, please repeat fill in the form"
 msgstr ""
 "Um weitere Änderungen vorzunehmen, können Sie das nächste Formular ausfüllen"
 
-#: settings.html:85 pages_blogs_postings_select.html:126
+#: settings.html:85 pages_blogs_postings_select.html:127
 msgid "Comments"
 msgstr "Kommentare"
 
-#: settings.html:120 pages_blogs_postings_select.html:127
+#: settings.html:120 pages_blogs_postings_select.html:128
 msgid "Trackbacks"
 msgstr "Trackbacks"
 
@@ -2666,7 +2666,7 @@ msgid "Welcompose Admin &ndash; Pages &#62; Ping Service Configurations"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service Konfiguration"
 
 #: pages_blogs_pingserviceconfigurations_select.html:90
-#: pages_blogs_postings_select.html:114
+#: pages_blogs_postings_select.html:115
 msgid "Available Blog Postings"
 msgstr "Verfügbare Blog-Einträge"
 
@@ -2707,11 +2707,11 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#: pages_blogs_postings_select.html:125
+#: pages_blogs_postings_select.html:126
 msgid "Date"
 msgstr "Datum"
 
-#: pages_blogs_postings_select.html:155
+#: pages_blogs_postings_select.html:156
 msgid "No blog posting has been created yet."
 msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 
@@ -3574,10 +3574,10 @@ msgid ""
 "name like style.css or script.js"
 msgstr ""
 "Tragen Sie bitte den Dateinamen der globalen Vorlage ein. Bitte nutzen Sie "
-"vollständige Dateinamen incl. Suffix, damit die spätere Referenzierung in den "
-"Seitenvorlagen erfolgen kann. Zudem hat dies den Vorteil, das die Art der "
-"Datei in der Übersicht der Globale Vorlagen auf einen Blick deutlich wird. "
-"Beispiele wären <em>style.css</em> oder <em>script.js</em>."
+"vollständige Dateinamen incl. Suffix, damit die spätere Referenzierung in "
+"den Seitenvorlagen erfolgen kann. Zudem hat dies den Vorteil, das die Art "
+"der Datei in der Übersicht der Globale Vorlagen auf einen Blick deutlich "
+"wird. Beispiele wären <em>style.css</em> oder <em>script.js</em>."
 
 #: group_group_description.html:1
 msgid ""
@@ -4898,7 +4898,8 @@ msgstr "Es existiert momentan noch kein Hilfetext zu diesem Feld."
 
 #: wcom.strings.js:64
 msgid "You cannot insert media or documents here."
-msgstr "Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
+msgstr ""
+"Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
 
 #: globaltemplates_add.php:124 globaltemplates_edit.php:135
 msgid "Please enter a valid global template name"
@@ -4928,44 +4929,48 @@ msgstr "Trennsymbol ändern"
 msgid "The field whether to change the delimiver accepts only 0 or 1"
 msgstr "Das Feld Trennzeichen ändern kann nur den Wert 0 oder 1 haben"
 
-#: templates_add.php:130 templates_copy.php:146 templates_edit.php:146
+#: templates_add.php:131 templates_copy.php:147 templates_edit.php:147
 msgid "Please select a template type"
 msgstr "Bitte wählen Sie einen Vorlagentyp"
 
-#: templates_add.php:131
+#: templates_add.php:132
 msgid "Chosen template type is out of range"
 msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_add.php:135 templates_copy.php:151 templates_edit.php:151
+#: templates_add.php:133 templates_copy.php:149 templates_edit.php:149
+msgid "A template with the same type for your choosen set(s) already exists"
+msgstr "Es existiert bereits eine Vorlage, deren Typ der gleichen Vorlagengruppe(n) zugeordnet ist."
+
+#: templates_add.php:136 templates_copy.php:152 templates_edit.php:152
 msgid "Sets"
 msgstr "Vorlagengruppen"
 
-#: templates_add.php:139 templates_copy.php:156 templates_edit.php:156
+#: templates_add.php:140 templates_copy.php:157 templates_edit.php:157
 msgid "Please select a template set"
 msgstr "Bitte wählen Sie eine Vorlagengruppe"
 
-#: templates_add.php:149 templates_copy.php:166 templates_edit.php:166
+#: templates_add.php:149 templates_copy.php:167 templates_edit.php:167
 msgid "A template with the given name already exists"
 msgstr "Eine gleichnamige Seitenvorlage existiert bereits"
 
-#: templates_copy.php:147
+#: templates_copy.php:148
 msgid "Selected template type is out of range"
 msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_copy.php:157
+#: templates_copy.php:158
 msgid "Selected template set is out of range"
 msgstr ""
 "Die ausgewählte Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_copy.php:180
+#: templates_copy.php:181
 msgid "Duplicate template"
 msgstr "Seitenvorlage duplizieren"
 
-#: templates_edit.php:147
+#: templates_edit.php:148
 msgid "Selected type is out of range"
 msgstr "Der gewählte Seitentyp liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_edit.php:157
+#: templates_edit.php:158
 msgid "Selected set is out of range"
 msgstr ""
 "Die gewählte Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
@@ -5111,17 +5116,17 @@ msgstr "Bitte tragen Sie eine gültige Webseiten URL ein"
 msgid "Please enter a comment"
 msgstr "Bitte tragen Sie einen Kommentar ein"
 
-#: blogitem.class.php:241 generatorformindex.class.php:292
+#: blogitem.class.php:241 generatorformindex.class.php:311
 #: simpleformindex.class.php:222 simpleformindex.class.php:422
 msgid "Captcha text"
 msgstr "Captcha Text"
 
-#: blogitem.class.php:245 generatorformindex.class.php:296
+#: blogitem.class.php:245 generatorformindex.class.php:315
 #: simpleformindex.class.php:226 simpleformindex.class.php:426
 msgid "Please enter the captcha text"
 msgstr "Bitte tragen Sie den Captcha-Text ein"
 
-#: blogitem.class.php:246 generatorformindex.class.php:297
+#: blogitem.class.php:246 generatorformindex.class.php:316
 #: simpleformindex.class.php:227 simpleformindex.class.php:427
 msgid "Invalid captcha text entered"
 msgstr "Der Captcha-Text ist ungültig"
