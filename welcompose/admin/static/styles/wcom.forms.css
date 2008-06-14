@@ -89,6 +89,13 @@ label.cont.h46act {
 padding: 0;
 height: 46em;
 }
+label.cont.chbx {
+width: 14em;
+}
+/* Fuer settings */
+label.cont.chbxs {
+width: 24em;
+}
 label span.bez {
 display: block; 
 float: left;
