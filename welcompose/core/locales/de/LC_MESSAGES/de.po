@@ -2516,7 +2516,7 @@ msgstr "Globale Box bearbeiten"
 #: pages_simplepages_content_edit.html:100 structuraltemplates_edit.html:77
 #: globaltemplates_edit.html:76
 msgid "You can continue editing your content."
-msgstr "Sie können mit der Bearbeitung der Seiteninhalte nun fortfahren."
+msgstr "Sie können nun mit der Bearbeitung der Seiteninhalte fortfahren."
 
 #: globalboxes_select.html:10
 msgid "Welcompose Admin &ndash; Global Boxes"
@@ -4620,7 +4620,7 @@ msgstr "Seitenvorlage bearbeiten"
 
 #: templates_edit.html:84
 msgid "You can continue editing your template."
-msgstr "Sie können mit der Bearbeitung der Seitenvorlage fortfahren"
+msgstr "Sie können nun mit der Bearbeitung der Seitenvorlage fortfahren"
 
 #: templates_select.html:10
 msgid "Welcompose Admin &ndash; Templates"
