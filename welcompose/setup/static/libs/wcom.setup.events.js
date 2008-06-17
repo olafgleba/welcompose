@@ -61,19 +61,14 @@ var definitions = {
 			validate(this);
 		}
 	},
-	'.submit90' : function(el){
+	'.submit240' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#666 url(static/img/submitindicator90.gif) no-repeat';
+			this.style.background = '#ff620d url(static/img/submitindicator240.gif) no-repeat';
 		}
 	},
-	'.submit200' : function(el){
+	'.submit240nomargin' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
-		}
-	},
-	'.submit200nomargin' : function(el){
-		el.onfocus = function(){
-			this.style.background = '#ff620d url(static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ff620d url(static/img/submitindicator240.gif) no-repeat';
 		}
 	}
 };

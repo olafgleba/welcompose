@@ -11,15 +11,15 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  *
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
- * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
+ * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
 // define area constant

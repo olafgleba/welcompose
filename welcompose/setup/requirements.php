@@ -11,15 +11,15 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  *
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
- * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
+ * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
 // get loader
@@ -47,6 +47,11 @@ try {
 	// load smarty
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
+	
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
 	// start Base_Session
 	/* @var $SESSION session */
@@ -85,7 +90,7 @@ try {
 			);
 		} else {
 			$extension_statuses[$_extension] = array(
-				'text' => 'Not installed',
+				'text' => gettext('Not installed'),
 				'marker' => 'error'
 			);
 			
@@ -100,7 +105,7 @@ try {
 	// php versions
 	if (version_compare(phpversion(), '5.0.3', '<')) {
 		$software_statuses['PHP '.phpversion()] = array(
-			'text' => 'Too old',
+			'text' => gettext('PHP Version too old'),
 			'marker' => 'error'
 		);
 		
@@ -108,7 +113,7 @@ try {
 		$error_counter++;
 	} elseif (version_compare(phpversion(), '5.0.3', '>=') && version_compare(phpversion(), '5.1.3', '<')) {
 		$software_statuses['PHP '.phpversion()] = array(
-			'text' => 'May cause troubles',
+			'text' => gettext('May causes trouble'),
 			'marker' => 'warning'
 		);
 	} elseif (version_compare(phpversion(), '5.1.3', '>=')) {
@@ -122,7 +127,7 @@ try {
 	$gd_info = gd_info();
 	if (!preg_match("=2\.[0-9]+=", $gd_info['GD Version'])) {
 		$software_statuses['GD Version '.$gd_info['GD Version']] = array(
-			'text' => 'Too old',
+			'text' => gettext('GD Version too old'),
 			'marker' => 'error'
 		);
 		
@@ -130,7 +135,7 @@ try {
 		$error_counter++;
 	} elseif (!preg_match("=bundled=i", $gd_info['GD Version'])) {
 		$software_statuses['GD Version '.$gd_info['GD Version']] = array(
-			'text' => 'May cause troubles, use the bundled one',
+			'text' => gettext('May causes trouble, use higher GD Version'),
 			'marker' => 'warning'
 		);
 	} else {
@@ -143,7 +148,7 @@ try {
 	// pdo versions
 	if (!defined("PDO::ATTR_EMULATE_PREPARES")) {
 		$software_statuses['pdo'] = array(
-			'text' => 'Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher',
+			'text' => gettext('Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher'),
 			'marker' => 'error'
 		);
 		

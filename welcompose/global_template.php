@@ -11,8 +11,8 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  * 
  * $Id$
  * 

@@ -11,15 +11,15 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  *
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
- * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
+ * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
 // get loader
@@ -66,12 +66,12 @@ try {
 	$FORM->applyFilter('confirm_license', 'trim');
 	$FORM->applyFilter('confirm_license', 'strip_tags');
 	$FORM->addRule('confirm_license', gettext('Please confirm the license'), 'required');
-	$FORM->addRule('confirm_license', gettext('The field to cofirm the license accepts only 0 or 1'),
+	$FORM->addRule('confirm_license', gettext('The field to confirm the license accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submit200nomargin'));
+		array('class' => 'submit240nomargin'));
 		
 	// validate it
 	if (!$FORM->validate()) {

@@ -278,26 +278,47 @@ margin: 20px 0 0 0;
 display: block;
 margin: 20px 0 0 10px;
 }
-a.submit200:link, a.submit200:visited,
-a.submit200finish:link, a.submit200finish:visited  {
-position: relative;
+
+input.submit240,
+input.submit240nomargin {
 text-align: left;
-background: #ff620d url(../img/submit200.gif) no-repeat;
-color: #fff;
-width: 200px;
 height: 20px;
 font-size: 80%;
 font-weight: bold;
+color: #fff;
 border: 0 none;
-padding: 3px 106px 3px 8px;
+padding: 0 0 2px 3px;
+cursor: pointer;
+}
+
+input.submit240 {
+background: #ff620d url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 192px;
+}
+input.submit240nomargin {
+background: #ff620d url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 15px;
+}
+
+a.submit240:link, a.submit240:visited {
+position: relative;
+display: block;
+text-align: left;
+background: #ff620d url(../img/submit240.gif) no-repeat;
+color: #fff;
+width: 232px;
+height: 14px;
+font-size: 80%;
+font-weight: bold;
+border: 0 none;
+padding: 3px 0 3px 8px;
 margin: 0 0 0 15px;
 cursor: pointer;
 }
-a.submit200finish:link, a.submit200finish:visited {
-padding-right: 95px;
-}
-a.submit200:hover, a.submit200:active,
-a.submit200finish:hover,a.submit200finish:active {
+
+a.submit240:hover, a.submit240:active {
 text-decoration: none;
 }
 

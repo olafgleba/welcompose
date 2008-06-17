@@ -1,27 +1,4 @@
 Welcompose 0.8.0
 ================
 
- * Output: Support for comment feeds (RSS 2.0 and Atom 1.0) added; see
-   ticket:27. (andreas)
- * Other: Updater added, field types in application_info changed (andreas)
- * Output: Support for numeral captchas added; see ticket:14 (andreas)
- * Core, Admin: Generator forms implemented; see ticket:11. (andreas)
- * Database: Tables content_generator_forms and content_generator_form_fields
-   added (andreas)
- * Admin: Made URL names editable with the help of a JS function; see
-   ticket:5. (olaf, andreas)
- * Database: Unique key around fields page and name of table content_boxes
-   added; see ticket:6. (andreas) 
- * Database: Fields alternate_title, description and optional_text to 
-   content_pages added; see ticket:9. (andreas)
- * Database: sitemap_priority and sitemap_changefreq to content_pages added;
-   see ticket:15. (andreas)
- * Core: PEAR::Net_URL from URL generator removed; see ticket:2. (andreas) 
- * Admin: Shockwave flash and windows media video to list of video types
-   added; windows media audio to list of audio types added; see ticket:16.
-   (andreas)
- * Database: content_simple_forms.type from ENUM to VARCHAR changed; see 
-   ticket:13. (andreas)
- * Core: Speed up of class loading in Base_Base; see ticket:3. (andreas)
- * Core: Speed up of class loading using dynamic function calls in the loader;
-   see ticket:1. (andreas)
+ * 

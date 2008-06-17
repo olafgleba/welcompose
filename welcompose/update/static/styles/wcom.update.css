@@ -57,7 +57,7 @@ border-top: 1px solid #ebebeb;
 }
 .fright {
 float: right;
-width: 200px;
+width: 240px;
 text-align: right;
 }
 #header {
@@ -241,10 +241,8 @@ input.chbx {
 border-color: #666;
 }
 
-input.submit90,
-input.submit200,
-input.submit200update,
-input.submit200nomargin {
+input.submit240,
+input.submit240nomargin {
 text-align: left;
 height: 20px;
 font-size: 80%;
@@ -255,26 +253,16 @@ padding: 0 0 2px 3px;
 cursor: pointer;
 }
 
-input.submit90 {
-background: #666 url(../img/submit90.gif) 100% 0 no-repeat;
-width: 90px;
-}
-input.submit200 {
-background: #ff620d url(../img/submit200.gif) no-repeat;
-width: 200px;
+input.submit240 {
+background: #ff620d url(../img/submit240.gif) no-repeat;
+width: 240px;
 margin: 20px 0 0 192px;
 }
-input.submit200update {
-background: #ff620d url(../img/submit200.gif) no-repeat;
-width: 200px;
-margin: 0 0 25px 15px;
+input.submit240nomargin {
+background: #ff620d url(../img/submit240.gif) no-repeat;
+width: 240px;
+margin: 20px 0 0 15px;
 }
-input.submit200nomargin {
-background: #ff620d url(../img/submit200.gif) no-repeat;
-width: 200px;
-margin: 20px 0 25px 15px;
-}
-
 
 .linkcon {
 display: block;
@@ -288,36 +276,23 @@ margin: 0 0 25px 0;
 display: block;
 margin: 30px 0 0 10px;
 }
-a.submit200:link, a.submit200:visited,
-a.submit200finish:link, a.submit200finish:visited,
-a.submit200finished:link, a.submit200finished:visited,
-a.submit200backup:link, a.submit200backup:visited {
+a.submit240:link, a.submit240:visited {
 position: relative;
+display: block;
 text-align: left;
-background: #ff620d url(../img/submit200.gif) no-repeat;
+background: #ff620d url(../img/submit240.gif) no-repeat;
 color: #fff;
-width: 200px;
-height: 20px;
+width: 232px;
+height: 14px;
 font-size: 80%;
 font-weight: bold;
 border: 0 none;
-padding: 3px 106px 3px 8px;
+padding: 3px 0 3px 8px;
 margin: 0 0 0 15px;
 cursor: pointer;
 }
-a.submit200finish:link, a.submit200finish:visited {
-padding-right: 116px;
-}
-a.submit200finished:link, a.submit200finished:visited {
-padding-right: 41px;
-}
-a.submit200backup:link, a.submit200backup:visited {
-padding-right: 87px;
-}
-a.submit200:hover, a.submit200:active,
-a.submit200finish:hover,a.submit200finish:active,
-a.submit200finished:hover,a.submit200finished:active,
-a.submit200backup:hover,a.submit200backup:active {
+
+a.submit240:hover, a.submit240:active {
 text-decoration: none;
 }
 

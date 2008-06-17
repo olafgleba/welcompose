@@ -11,15 +11,15 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  *
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
- * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
+ * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
 // get loader
@@ -48,6 +48,11 @@ try {
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
+	
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
@@ -66,28 +71,28 @@ try {
 	$FORM = $BASE->utility->loadQuickForm('configuration', 'post');
 	
 	// textfield for project
-	$FORM->addElement('text', 'project', 'Project', 
+	$FORM->addElement('text', 'project', gettext('Project'), 
 		array('id' => 'configuration_project', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('project', 'trim');
 	$FORM->applyFilter('project', 'strip_tags');
-	$FORM->addRule('project', 'Please enter a project name', 'required');
+	$FORM->addRule('project', gettext('Please enter a project name'), 'required');
 	
 	// textfield for locale
-	$FORM->addElement('text', 'locale', 'Locale',
+	$FORM->addElement('text', 'locale', gettext('Locale'),
 		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('locale', 'trim');
 	$FORM->applyFilter('locale', 'strip_tags');
-	$FORM->addRule('locale', 'Please enter a locale to use', 'required');
-	$FORM->addRule('locale', 'Please enter a valid locale to use', 'regex',
+	$FORM->addRule('locale', gettext('Please enter a locale'), 'required');
+	$FORM->addRule('locale', gettext('Please enter a valid locale'), 'regex',
 		WCOM_REGEX_LOCALE_NAME);
 	
 	// add locale validation rule
 	$FORM->registerRule('testLocale', 'callback', 'setup_locale_test_callback');
-	$FORM->addRule('locale', 'Entered locale is not supported by this system', 'testLocale');
+	$FORM->addRule('locale', gettext('Your chosen locale is not available on your system'), 'testLocale');
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', 'Go to next step',
-		array('class' => 'submit200'));
+	$FORM->addElement('submit', 'submit', gettext('Next step'),
+		array('class' => 'submit240'));
 		
 	// validate it
 	if (!$FORM->validate()) {

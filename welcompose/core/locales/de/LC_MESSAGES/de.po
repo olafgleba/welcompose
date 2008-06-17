@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-08 08:24+0200\n"
+"POT-Creation-Date: 2008-06-17 10:17+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -70,11 +70,11 @@ msgstr "Bitte tragen Sie einen Namen ein"
 msgid "A ping service with the given name already exists"
 msgstr "Ein gleichnamiger Ping-Service existiert bereits"
 
-#: pingservices_add.php:114 pingservices_edit.php:126
+#: pingservices_add.php:114 pingservices_edit.php:126 database.php:106
 msgid "Host"
 msgstr "Host"
 
-#: pingservices_add.php:118 pingservices_edit.php:130
+#: pingservices_add.php:118 pingservices_edit.php:130 database.php:111
 msgid "Please enter a host name"
 msgstr "Bitte tragen Sie einen Host-Namen ein"
 
@@ -82,7 +82,7 @@ msgstr "Bitte tragen Sie einen Host-Namen ein"
 msgid "Please enter a valid host name"
 msgstr "Bitte geben Sie einen gültigen Host-Namen an"
 
-#: pingservices_add.php:123 pingservices_edit.php:134
+#: pingservices_add.php:123 pingservices_edit.php:134 database.php:115
 msgid "Port"
 msgstr "Port"
 
@@ -1293,6 +1293,7 @@ msgid "Please enter your e-mail address"
 msgstr "Bitte tragen Sie Ihre E-Mail Adresse ein"
 
 #: login.php:83 users_add.php:138 users_edit.php:148 systemlogin.class.php:148
+#: database.php:91 finish.html:55
 msgid "Password"
 msgstr "Passwort"
 
@@ -1627,6 +1628,7 @@ msgid "Rights"
 msgstr "Benutzerrechte"
 
 #: _inc_projects_load.html:7 groups_select.html:69 users_select.html:88
+#: configuration.php:74
 msgid "Project"
 msgstr "Projekt"
 
@@ -2020,8 +2022,8 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: users_edit.html:98 users_edit.html:101 wcom.strings.js:45
 #: configuration.html:69 configuration.html:72 database.html:75
 #: database.html:78 database.html:81 database.html:84 database.html:87
-#: database.html:90 database.html:93 license.html:253 wcom.setup.strings.js:34
-#: license.html:245 wcom.update.strings.js:34
+#: database.html:90 database.html:93 license.html:698 wcom.setup.strings.js:34
+#: license.html:689 wcom.update.strings.js:34
 msgid "Show help on this topic"
 msgstr "Feldhilfe anzeigen"
 
@@ -2300,6 +2302,8 @@ msgid "Please choose..."
 msgstr "Bitte wählen Sie..."
 
 #: blogcomments_select.html:77 blogcomments_select.html:125
+#: requirements.html:61 requirements.html:79 database.html:54
+#: requirements.html:51 requirements.html:69
 msgid "Status"
 msgstr "Status"
 
@@ -3049,12 +3053,12 @@ msgid "Welcompose Admin &ndash; Error"
 msgstr "Welcompose Admin &ndash; Fehler"
 
 #: error.html:26 error_mediamanager.html:2 error_popup_403.html:33
-#: error_popup_723.html:33 error.html:1
+#: error_popup_723.html:33
 msgid "An error occured"
 msgstr "Es ist ein Fehler aufgetreten"
 
 #: error.html:28 error_mediamanager.html:4 error_popup_403.html:35
-#: error_popup_723.html:35 error.html:2
+#: error_popup_723.html:35
 msgid "Welcompose says"
 msgstr "Welcompose meldet"
 
@@ -4939,7 +4943,9 @@ msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
 #: templates_add.php:133 templates_copy.php:149 templates_edit.php:149
 msgid "A template with the same type for your choosen set(s) already exists"
-msgstr "Es existiert bereits eine Vorlage, deren Typ der gleichen Vorlagengruppe(n) zugeordnet ist."
+msgstr ""
+"Es existiert bereits eine Vorlage, deren Typ der gleichen Vorlagengruppe(n) "
+"zugeordnet ist."
 
 #: templates_add.php:136 templates_copy.php:152 templates_edit.php:152
 msgid "Sets"
@@ -5312,9 +5318,215 @@ msgstr "Vor vier Jahren"
 msgid "Five years ago"
 msgstr "Vor fünf Jahren"
 
+#: configuration.php:78
+msgid "Please enter a project name"
+msgstr "Bitte geben Sie einen Projektnamen an"
+
+#: configuration.php:81
+msgid "Locale"
+msgstr "Spracheinstellung"
+
+#: configuration.php:85
+msgid "Please enter a locale"
+msgstr ""
+"Bitte tragen Sie die gewünschte Spracheinstellung ein (bspw. de_DE für "
+"Deutsch)"
+
+#: configuration.php:86
+msgid "Please enter a valid locale"
+msgstr "Bitte tragen Sie eine gültige Spracheinstellung ein"
+
+#: configuration.php:91
+msgid "Your chosen locale is not available on your system"
+msgstr "Die gewählte Spracheinstellung ist auf ihren System nicht verfügbar"
+
+#: configuration.php:94 database.php:140 license.php:73 requirements.html:110
+#: requirements.html:100
+msgid "Next step"
+msgstr "Nächster Schritt"
+
+#: database.php:68
+msgid "TCP/IP (Network)"
+msgstr "TCP/IP"
+
+#: database.php:69 database.php:125
+msgid "Unix socket"
+msgstr "Unix Socket"
+
+#: database.php:76 configuration.html:37 database.html:43 database.html:53
+#: finish.html:37 license.html:37 requirements.html:37 _inc_navigation.html:6
+#: database.html:40
+msgid "Database"
+msgstr "Datenbank"
+
+#: database.php:80
+msgid "Please enter a database name"
+msgstr "Bitte tragen sie einen Datenbanknamen ein"
+
+#: database.php:81
+msgid "Please enter a valid database name"
+msgstr "Bitte tragen sie einen gültigen Datenbanknamen ein"
+
+#: database.php:84
+msgid "User"
+msgstr "Benutzer"
+
+#: database.php:88
+msgid "Please enter a user name"
+msgstr "Bitte tragen Sie den Benutzer ein"
+
+#: database.php:97
+msgid "Connection Method"
+msgstr "Verbindungsart"
+
+#: database.php:101
+msgid "Please select a connection method"
+msgstr "Bitte wählen Sie eine Verbindungsart"
+
+#: database.php:102
+msgid "Your chosen connection method is out of range"
+msgstr ""
+"Die gewählte Verbindungsart liegt außerhalb des gültigen Wertebereiches"
+
+#: database.php:120
+msgid "Please enter a port for your database connection"
+msgstr "Bitte tragen Sie einen Port für ihre Datenbankverbindung ein"
+
+#: database.php:121
+msgid "The input must be numeric"
+msgstr "Die Angabe des Ports muss numerisch sein"
+
+#: database.php:129
+msgid "Please enter a valid socket address"
+msgstr "Bitte tragen Sie eine gültige Socket-Adresse ein"
+
+#: database.php:135
+msgid "Unable to connect to database server"
+msgstr "Es konnte keine Verbindung zum Datenbankrechner aufgebaut werden"
+
+#: database.php:136
+msgid "Selected database server is too old"
+msgstr "Der ausgewählte Datenbankrechner ist zu alt"
+
+#: database.php:137
+msgid "Selected database does not support InnoDB"
+msgstr "Die ausgewählte Datebank unterstützt kein InnoDB"
+
+#: license.php:64
+msgid "Confirm license"
+msgstr "Lizenz bestätigen"
+
+#: license.php:68
+msgid "Please confirm the license"
+msgstr "Bitte bestätigen Sie die Lizenzbedingungen"
+
+#: license.php:69
+msgid "Field license must be valued by 0 or 1"
+msgstr "Der Wert des Feldes \"Lizenz bestätigen\" darf nur 0 oder 1 betragen"
+
+#: requirements.php:93
+msgid "Not installed"
+msgstr "Nicht installiert"
+
+#: requirements.php:108
+msgid "PHP Version too old"
+msgstr "PHP Version ist zu alt"
+
+#: requirements.php:116
+msgid "May causes trouble"
+msgstr "Kann Fehler verursachen"
+
+#: requirements.php:130
+msgid "GD Version too old"
+msgstr "GD Version ist zu alt"
+
+#: requirements.php:138
+msgid "May causes trouble, use higher GD Version"
+msgstr "Kann Fehler verursachen, benutzen Sie eine höhere GD-Version"
+
+#: requirements.php:151
+msgid "Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher"
+msgstr ""
+"Aktualisieren Sie pdo zu Version 1.0.3 und pdo_mysql zu 1.0.2 oder "
+"installieren Sie PHP 5.1.3 oder höher"
+
+#: _inc_footer.html:2 configuration.html:35 database.html:41 finish.html:35
+#: license.html:35 license.html:47 requirements.html:35 _inc_navigation.html:3
+#: license.html:39
+msgid "License"
+msgstr "Lizenz"
+
+#: configuration.html:10 configuration.html:30 database.html:10
+#: database.html:36 finish.html:10 finish.html:30 license.html:10
+#: license.html:30 requirements.html:10 requirements.html:30
+msgid "Welcompose Setup"
+msgstr "Welcompose Setup"
+
+#: configuration.html:36 database.html:42 finish.html:36 license.html:36
+#: requirements.html:36 requirements.html:47 _inc_navigation.html:4
+#: requirements.html:39
+msgid "Requirements"
+msgstr "Anforderungen"
+
+#: configuration.html:38 configuration.html:47 database.html:44 finish.html:38
+#: license.html:38 requirements.html:38
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: configuration.html:39 database.html:45 finish.html:39 license.html:39
+#: requirements.html:39 _inc_navigation.html:7
+msgid "Finish"
+msgstr "Beenden"
+
+#: configuration.html:48
+msgid ""
+"You'll be asked for the name of your default project and the language to use "
+"in the admin area of Welcompose"
+msgstr ""
+"Geben Sie ihrem neuen Projekt einen Namen und tragen sie die "
+"Spracheinstellung ein, die sie im Admin-Bereich vonWelcompose nutzen wollen"
+
+#: database.html:54
+msgid "Please enter the information required to connect to the database"
+msgstr ""
+"Bitte tragen sie die Angaben ein, um die Verbindung mit der gewünschten "
+"Datenbank herzustellen"
+
+#: finish.html:47
+msgid "Setup completed"
+msgstr "Setup abgeschlossen"
+
+#: finish.html:48
+msgid ""
+"You have successfully completed the setup procedure. Welcompose is now ready "
+"to run"
+msgstr ""
+"Sie haben das Setup erfolgreich abgeschlossen. Welcompose ist nun startklar "
+
+#: finish.html:53
+msgid "Your login credentials"
+msgstr "Ihre Anmeldedaten"
+
+#: finish.html:54
+msgid "Username"
+msgstr "Benutzername"
+
+#: finish.html:57
+msgid "Please change your login credentials as soon as possible"
+msgstr ""
+"Bitte ändern sie ihre Anmeldedaten möglichst umgehend nach der ersten Einwahl"
+
+#: finish.html:62
+msgid "Thank you for choosing Welcompose"
+msgstr "Vielen Dank, das sie Welcompose nutzen"
+
+#: finish.html:65
+msgid "Go to admin area"
+msgstr ""
+
 #: configuration_configuration_admin_language.html:1
 msgid "What language do you want to use as standard in your admin area?"
-msgstr "Welche Sprache möchten Sie als Standard im Adminbereich nutzen?"
+msgstr "Welche Sprache möchten Sie als Standard im Admin-Bereich nutzen?"
 
 #: configuration_configuration_locale.html:1
 msgid ""
@@ -5338,8 +5550,8 @@ msgid ""
 "Enter the name of your default project. The actual domain name like "
 "mywebsite.com is a good choice."
 msgstr ""
-"Tragen Sie bitte einen Namen für ihr Standardprojekt ein. Beispielsweise Ihr "
-"Domain-Name (meinewebseite.de)."
+"Tragen Sie bitte einen Namen für ihr Standardprojekt ein. Die Angabe der "
+"Domain (meindomainname.de) wäre ein guter Start."
 
 #: database_database_connection_method.html:1
 msgid ""
@@ -5389,10 +5601,79 @@ msgstr ""
 "Verwaltung der angegebenen Datenbank sein."
 
 #: license_license_confirm_license.html:1
-msgid "With checking the box you acknowledge the above printed OSL."
+msgid "With checking the box you acknowledge the above printed License"
 msgstr ""
-"Mit dem Anklicken des Feldes bestätigen Sie, die abgebildete OSL zur "
-"Kenntnis genommen zu haben."
+"Mit dem Anklicken des Feldes bestätigen Sie, die abgebildete Lizenz zur "
+"Kenntnis genommen zu haben"
+
+#: license.html:48 license.html:40
+msgid "Please read the license carefully and confirm to go on"
+msgstr ""
+"Bitte lesen Sie die Lizenz gründlich durch und bestätigen Sie diese um "
+"weiter fortzufahren"
+
+#: requirements.html:48 requirements.html:40
+msgid ""
+"Please make sure that your webspace meets all the requirements. If any "
+"errors or warnings occur, please consult the install manual how to fix it. "
+"There are instructions how to tell your webspace provider about it too"
+msgstr ""
+"Bitte achten Sie darauf, das Ihr Webspace möglichst <strong>alle</strong> "
+"Anforderungen erfüllt. Sollten Fehler auftreten, schauen Sie bitte zuerst in "
+"das Benutzerhandbuch, wie fortzufahren ist. An gleicher Stelle finden Sie "
+"auch Hinweise zu den Informationen, die Ihr Provider benötigt um ggf. eine "
+"Aktualisierung vorzunehmen"
+
+#: requirements.html:50 requirements.html:42
+msgid ""
+"<strong>Attention</strong> Please note that we are only checking the "
+"capabilities of PHP here. This test does not check if your databse is new "
+"enough"
+msgstr ""
+"<strong>Achtung</strong>: Bitte beachten Sie, das nur die Leistungsfähigkeit "
+"der PHP Installation auf Ihrem Webspace überprüft wird. Es wird zu diesem "
+"Zeitpunkt NICHT überprüft, ob Ihre Datenbank die notwendigen Voraussetzungen "
+"mitbringt"
+
+#: requirements.html:57 requirements.html:47
+msgid "Checking for available extensions"
+msgstr "Auf verfügbare Erweiterungen prüfen"
+
+#: requirements.html:60 requirements.html:50
+msgid "Extension"
+msgstr "Erweiterungen"
+
+#: requirements.html:75 requirements.html:65
+msgid "Checking for up-to-date versions"
+msgstr "Auf Aktualität der Versionen prüfen"
+
+#: requirements.html:78 requirements.html:68
+msgid "Software"
+msgstr "Software"
+
+#: requirements.html:95 requirements.html:85
+msgid "Red"
+msgstr "Rot"
+
+#: requirements.html:96 requirements.html:86
+msgid "Welcompose won't work"
+msgstr "Welcompose wird nicht funktionieren"
+
+#: requirements.html:99 requirements.html:89
+msgid "Orange"
+msgstr "Orange"
+
+#: requirements.html:100
+msgid "Welcompose may work - don't blame us for errors"
+msgstr "Welcompose mag funktionieren - oder auch nicht."
+
+#: requirements.html:103 requirements.html:93
+msgid "Green"
+msgstr "Grün"
+
+#: requirements.html:104 requirements.html:94
+msgid "Everything's fine"
+msgstr "Alles wunderbar"
 
 #: validate.js.php:64
 msgid "Literal string with dashes"
@@ -5406,30 +5687,18 @@ msgstr "Unix-Pfad"
 msgid "Invalid locale"
 msgstr "Ungültige Spracheinstellung"
 
-#: license.php:64
-msgid "Confirm license"
-msgstr "Lizenz bestätigen"
-
-#: license.php:68
-msgid "Please confirm the license"
-msgstr "Bitte bestätigen Sie die Lizenzbedingungen"
-
 #: license.php:69
-msgid "The field to cofirm the license accepts only 0 or 1"
+msgid "The field to confirm the license accepts only 0 or 1"
 msgstr "Das Feld Lizenz bestätigen kann nur 0 oder 1 als Wert haben"
 
 #: license.php:73
 msgid "Go to next step"
-msgstr "Einen Schritt weiter"
+msgstr "Nächster Schritt"
 
 #: requirements.php:88 requirements.php:121 requirements.php:143
 #: requirements.php:159
 msgid "OK"
 msgstr "OK"
-
-#: requirements.php:93
-msgid "Not installed"
-msgstr "Nicht installiert"
 
 #: requirements.php:108 requirements.php:130
 msgid "Too old"
@@ -5437,92 +5706,110 @@ msgstr "Zu alt"
 
 #: requirements.php:116
 msgid "May cause troubles"
-msgstr "Fehler sind möglich"
+msgstr "Kann Probleme verursachen"
 
 #: requirements.php:138
 msgid "May cause troubles, use the bundled one"
-msgstr "Fehler sind möglich, benutzen Sie die Bereitgestellten"
+msgstr "Kann Probleme verursachen, nutzen sie die \"Bundled\"-Version"
 
-#: requirements.php:151
-msgid "Update to PDO 1.0.3 and pdo_mysql 1.0.2; or install PHP 5.1.3 or higher"
-msgstr ""
-"Aktualisieren Sie pdo zu Version 1.0.3 und pdo_mysql zu 1.0.2 oder "
-"installieren Sie PHP 5.1.3 oder höher"
+#: _inc_navigation.html:5 backup.html:39
+msgid "Backup"
+msgstr "Backup"
 
-#: license.html:30
+#: backup.html:10 backup.html:30 database.html:10 database.html:31
+#: finish.html:10 finish.html:30 license.html:10 license.html:30
+#: requirements.html:10 requirements.html:30
 msgid "Welcompose Update"
-msgstr "Welcompose Aktualisierung"
+msgstr "Welcompose Update"
 
-#~ msgid "Site Name"
-#~ msgstr "Seitenname"
+#: backup.html:41
+msgid ""
+"Before continuing the update process, we <strong>strongly</strong> recommend "
+"to perform a <strong>backup of your database</strong>. This can be easily "
+"done with third-party applications like phpMyAdmin. If you don't know how to "
+"perform a backup, the upgrading guide in the Welcompose manual will help you"
+msgstr ""
+"Bevor Sie mit dem Update fortfahren, empfehlen wir <em>dringend</em> ein "
+"<strong>Backup der Datenbank</strong> zu machen. Dieses können Sie mit Dritt-"
+"Software wie bspw. phpMyAdmin durchführen. Wenn Sie sich unsicher sind, was "
+"genau zu tun ist, gibt Ihnen das Kapitel \"Aktualisierung\" im Welcompose "
+"Benutzerhandbuch Hilfestellung"
 
-#~ msgid "Site URL"
-#~ msgstr "Seiten-URL"
+#: backup.html:43
+msgid ""
+"Second, we recommend to take a <strong>copy of the whole Welcompose "
+"installation</strong>. That may help you doing restores if something goes "
+"wrong during the update process (like a server crash)"
+msgstr ""
+"Des weiteren empfehlen wir eine <strong>Kopie der gesammten Welcompose "
+"Installation</strong> auf ihrem Webspace lokal zu erstellen. Dieses kann "
+"sinnvoll sein um Daten wiederherzustellen kommt es während des Updates zu "
+"Problemen (bspw. einem Server-Ausfall)"
 
-#~ msgid "Please enter a project name"
-#~ msgstr "Bitte geben Sie einen Projektnamen an"
+#: backup.html:46
+msgid "I created a backup"
+msgstr "Ich habe ein Backup gemacht"
 
-#~ msgid "Locale"
-#~ msgstr "Spracheinstellung"
+#: database.html:42
+msgid ""
+"Now, it's time to update your database structure. The update script has "
+"determined which modifications have to be done. As soon as you press on "
+"<em>Start</em>, the database update process will begin. Please note that the "
+"update scripts may ask you some questions. Answer them to complete the "
+"update process"
+msgstr ""
+"Nun ist es Zeit, das die Datenbank-Struktur akualisiert wird. Zum jetzigen "
+"Zeitpunkt hat das Script bereits festgestellt, welche Aufgaben (<em>Tasks</"
+"em>) abzuarbeiten sind. Sobald sie auf <em>Update starten</em> klicken, "
+"beginnt der Aktualisierungsprozess. Bitte beachten Sie, dass das Script u.U. "
+"Fragen an Sie hat. Das Update kann erst abgeschlossen werden, wenn Sie diese "
+"beantwortet haben"
 
-#~ msgid "Please enter a locale to use"
-#~ msgstr "Bitte tragen Sie die gewünschte Spracheinstellung ein (de_DE etc.)"
+#: database.html:48
+msgid "Update tasks"
+msgstr "Update Tasks"
 
-#~ msgid "Please enter a valid locale to use"
-#~ msgstr "Bitte tragen Sie eine gültige Spracheinstellung ein"
+#: database.html:53
+msgid "Task"
+msgstr "Tasks"
 
-#~ msgid "Entered locale is not supported by this system"
-#~ msgstr ""
-#~ "Ihre eingetragene Spracheinstellung wird vom System nicht unterstützt"
+#: database.html:65
+msgid "Start update"
+msgstr "Update starten"
 
-#~ msgid "TCP/IP (Network)"
-#~ msgstr "TCP/IP"
+#: database.html:68
+msgid "Nothing to be done &ndash; go ahead!"
+msgstr "Kein Update notwendig!"
 
-#~ msgid "Unix socket"
-#~ msgstr "Unix Socket"
+#: database.html:70 database.html:75
+msgid "Finish update"
+msgstr "Update beenden"
 
-#~ msgid "Database"
-#~ msgstr "Datenbank"
+#: finish.html:39
+msgid "Update finished"
+msgstr "Update beendet"
 
-#~ msgid "Please enter a database to use"
-#~ msgstr "Bitte tragen Sie die zu nutzende Datenbank ein"
+#: finish.html:41
+msgid ""
+"You have successfully performed the Welcompose update. Now you can go back "
+"to the admin area and start using our improved software"
+msgstr ""
+"Das Welcompose Update wurde erfolgreich beendet. Sie können nun in die Admin-"
+"Bereich der Software wechseln"
 
-#~ msgid "Please enter a valid database name"
-#~ msgstr "Bitte tragen sie einen gültigen Datenbanknamen ein"
+#: finish.html:43
+msgid ""
+"As the update procedure isn't fully automated yet, <strong>you are strongly "
+"advised to delete the entire update directory from your webspace</strong>"
+msgstr ""
+"Da das Update-Procedere in den Versionen < 1.0 noch nicht vollständig "
+"automatisiert ist, <strong>löschen</strong> Sie bitte nun den "
+"<strong>gesammten Update-Ordner</strong> von ihrem Webspace"
 
-#~ msgid "User"
-#~ msgstr "Benutzer"
+#: finish.html:46
+msgid "Take me to the admin area"
+msgstr "Zum Admin-Bereich"
 
-#~ msgid "Please enter a user to use for the connection"
-#~ msgstr "Bitte tragen Sie einen Benutzer ein"
-
-#~ msgid "Connection method"
-#~ msgstr "Verbindungsart"
-
-#~ msgid "Please choose which connection method to use"
-#~ msgstr "Bitte wählen Sie eine Verbindungsart"
-
-#~ msgid "Selected connection method is out of range"
-#~ msgstr ""
-#~ "Die gewählte Verbindungsart liegt außerhalb des gültigen Wertebereiches"
-
-#~ msgid "Please enter a host to use for the connection"
-#~ msgstr "Bitte tragen Sie einen Host ein"
-
-#~ msgid "Please enter a port to use for the connection"
-#~ msgstr "Bitte tragen Sie einen Port ein"
-
-#~ msgid "The port number must be numeric"
-#~ msgstr "Die Port-Nummer muss numerisch sein"
-
-#~ msgid "Please enter a valid Unix socket"
-#~ msgstr "Bitte tragen Sie einen gültigen Unix Socket ein"
-
-#~ msgid "Unable to connect to database server"
-#~ msgstr "Es konnte keine Verbindung zum Datenbankrechner aufgebaut werden"
-
-#~ msgid "Selected database server is too old"
-#~ msgstr "Der ausgewählte Datenbankrechner ist zu alt"
-
-#~ msgid "Welcompose Setup"
-#~ msgstr "Welcompose Einrichtung"
+#: requirements.html:90
+msgid "Welcompose may work -- don't blame us for errors"
+msgstr "Welcompose mag funktionieren - oder auch nicht."

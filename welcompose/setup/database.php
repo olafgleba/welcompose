@@ -11,15 +11,15 @@
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
- * This file is licensed under the terms of the Open Software License 3.0
- * http://www.opensource.org/licenses/osl-3.0.php
+ * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
+ * http://www.opensource.org/licenses/agpl-v3.html
  *
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
- * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
+ * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
 // get loader
@@ -48,6 +48,11 @@ try {
 	$smarty_update_conf = dirname(__FILE__).'/smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
 	
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../core/includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
+	
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
@@ -60,80 +65,80 @@ try {
 	
 	// prepare array with connection methods
 	$connection_methods = array(
-		'tcp_ip' => 'TCP/IP (Network)',
-		'socket' => 'Unix socket'
+		'tcp_ip' => gettext('TCP/IP (Network)'),
+		'socket' => gettext('Unix socket')
 	);
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('database', 'post');
 	
 	// textfield for database
-	$FORM->addElement('text', 'database', 'Database', 
+	$FORM->addElement('text', 'database', gettext('Database'), 
 		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('database', 'trim');
 	$FORM->applyFilter('database', 'strip_tags');
-	$FORM->addRule('database', 'Please enter a database to use', 'required');
-	$FORM->addRule('database', 'Please enter a valid database name', WCOM_REGEX_DATABASE_NAME);
+	$FORM->addRule('database', gettext('Please enter a database name'), 'required');
+	$FORM->addRule('database', gettext('Please enter a valid database name'), WCOM_REGEX_DATABASE_NAME);
 	
 	// textfield for user
-	$FORM->addElement('text', 'user', 'User', 
+	$FORM->addElement('text', 'user', gettext('User'), 
 		array('id' => 'database_user', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('user', 'trim');
 	$FORM->applyFilter('user', 'strip_tags');
-	$FORM->addRule('user', 'Please enter a user to use for the connection', 'required');
+	$FORM->addRule('user', gettext('Please enter a user name'), 'required');
 	
 	// textfield for password
-	$FORM->addElement('password', 'password', 'Password', 
+	$FORM->addElement('password', 'password', gettext('Password'), 
 		array('id' => 'database_password', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('password', 'trim');
 	$FORM->applyFilter('password', 'strip_tags');
 
 	// textfield for connection method
-	$FORM->addElement('select', 'connection_method', 'Connection method',
+	$FORM->addElement('select', 'connection_method', gettext('Connection Method'),
 		$connection_methods, array('id' => 'database_connection_method'));
 	$FORM->applyFilter('connection_method', 'trim');
 	$FORM->applyFilter('connection_method', 'strip_tags');
-	$FORM->addRule('connection_method', 'Please choose which connection method to use', 'required');
-	$FORM->addRule('connection_method', 'Selected connection method is out of range',
+	$FORM->addRule('connection_method', gettext('Please select a connection method'), 'required');
+	$FORM->addRule('connection_method', gettext('Your chosen connection method is out of range'),
 		'in_array_keys', $connection_methods);
 	
 	// textfield for host
-	$FORM->addElement('text', 'host', 'Host', 
+	$FORM->addElement('text', 'host', gettext('Host'), 
 		array('id' => 'database_host', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('host', 'trim');
 	$FORM->applyFilter('host', 'strip_tags');
 	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		$FORM->addRule('host', 'Please enter a host to use for the connection', 'required');
+		$FORM->addRule('host', gettext('Please enter a host name'), 'required');
 	}
 	
 	// textfield for port
-	$FORM->addElement('text', 'port', 'Port', 
+	$FORM->addElement('text', 'port', gettext('Port'), 
 		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('port', 'trim');
 	$FORM->applyFilter('port', 'strip_tags');
 	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		$FORM->addRule('port', 'Please enter a port to use for the connection', 'required');
-		$FORM->addRule('port', 'The port number must be numeric', 'numeric');
+		$FORM->addRule('port', gettext('Please enter a port for your database connection'), 'required');
+		$FORM->addRule('port', gettext('The input must be numeric'), 'numeric');
 	}
 	
 	// textfield for unix socket
-	$FORM->addElement('text', 'unix_socket', 'Unix socket', 
+	$FORM->addElement('text', 'unix_socket', gettext('Unix socket'), 
 		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('unix_socket', 'trim');
 	$FORM->applyFilter('unix_socket', 'strip_tags');
-	$FORM->addRule('unix_socket', 'Please enter a valid Unix socket', 'regex', WCOM_REGEX_DATABASE_SOCKET);
+	$FORM->addRule('unix_socket', gettext('Please enter a valid socket address'), 'regex', WCOM_REGEX_DATABASE_SOCKET);
 	
 	// add connection validation rule
 	$FORM->registerRule('testConnection', 'callback', 'setup_database_connection_test_callback');
 	$FORM->registerRule('testVersion', 'callback', 'setup_database_version_test_callback');
 	$FORM->registerRule('testInnoDb', 'callback', 'setup_database_innodb_test_callback');
-	$FORM->addRule('database', 'Unable to connect to database server', 'testConnection', $FORM);
-	$FORM->addRule('database', 'Selected database server is too old', 'testVersion', $FORM);
-	$FORM->addRule('database', 'Selected database does not support InnoDB', 'testInnoDb', $FORM);
+	$FORM->addRule('database', gettext('Unable to connect to database server'), 'testConnection', $FORM);
+	$FORM->addRule('database', gettext('Selected database server is too old'), 'testVersion', $FORM);
+	$FORM->addRule('database', gettext('Selected database does not support InnoDB'), 'testInnoDb', $FORM);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', 'Go to next step',
-		array('class' => 'submit200'));
+	$FORM->addElement('submit', 'submit', gettext('Next step'),
+		array('class' => 'submit240'));
 		
 	// validate it
 	if (!$FORM->validate()) {
