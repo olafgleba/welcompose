@@ -322,7 +322,7 @@ try {
 
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_boxes_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('page'));
+			header("Location: pages_boxes_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
 		} else {
 			header("Location: pages_boxes_select.php?page=".$FORM->exportValue('page'));
 		}
