@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 10:17+0200\n"
+"POT-Creation-Date: 2008-06-18 23:05+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -1293,7 +1293,7 @@ msgid "Please enter your e-mail address"
 msgstr "Bitte tragen Sie Ihre E-Mail Adresse ein"
 
 #: login.php:83 users_add.php:138 users_edit.php:148 systemlogin.class.php:148
-#: database.php:91 finish.html:55
+#: database.php:91 finish.html:54
 msgid "Password"
 msgstr "Passwort"
 
@@ -5484,7 +5484,7 @@ msgid ""
 "in the admin area of Welcompose"
 msgstr ""
 "Geben Sie ihrem neuen Projekt einen Namen und tragen sie die "
-"Spracheinstellung ein, die sie im Admin-Bereich vonWelcompose nutzen wollen"
+"Spracheinstellung ein, die sie im Admin-Bereich von Welcompose nutzen wollen"
 
 #: database.html:54
 msgid "Please enter the information required to connect to the database"
@@ -5501,28 +5501,47 @@ msgid ""
 "You have successfully completed the setup procedure. Welcompose is now ready "
 "to run"
 msgstr ""
-"Sie haben das Setup erfolgreich abgeschlossen. Welcompose ist nun startklar "
+"Sie haben das Setup erfolgreich abgeschlossen. Welcompose ist nun einsatzbereit"
 
-#: finish.html:53
+#: finish.html:50
+msgid ""
+"When you click on the button at the end of the page, you will be redirected "
+"to the admin interface"
+msgstr ""
+"Wenn Sie auf den unten stehenden Button klicken, werden Sie zum "
+"Admin-Bereich weitergeleitet"
+
+#: finish.html:52
 msgid "Your login credentials"
 msgstr "Ihre Anmeldedaten"
 
-#: finish.html:54
+#: finish.html:53
 msgid "Username"
 msgstr "Benutzername"
 
-#: finish.html:57
+#: finish.html:56
 msgid "Please change your login credentials as soon as possible"
 msgstr ""
 "Bitte ändern sie ihre Anmeldedaten möglichst umgehend nach der ersten Einwahl"
 
-#: finish.html:62
+#: finish.html:58
+msgid ""
+"Now, the setup will try to automatically remove the entire setup directory. "
+"If it does not work, a warning will appear in the admin area that will "
+"advise you to do it by hand"
+msgstr ""
+"Das Setup versucht nach dem Klick auf den unten stehenden Button das gesammte "
+"Setup Verzeichnis automatisch zu löschen. Ist dieses durch bspw. ungenügende "
+"Schreibrechte nicht möglich, wird Ihnen im Admin-Bereih eine Warnung angezeigt, "
+"mit der Bitte, das Verzeichnis per Hand zu löschen"
+
+#: finish.html:60
 msgid "Thank you for choosing Welcompose"
 msgstr "Vielen Dank, das sie Welcompose nutzen"
 
-#: finish.html:65
+#: finish.html:63
 msgid "Go to admin area"
-msgstr ""
+msgstr "Zum Admin-Bereich"
 
 #: configuration_configuration_admin_language.html:1
 msgid "What language do you want to use as standard in your admin area?"
