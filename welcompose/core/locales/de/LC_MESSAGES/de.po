@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-18 23:05+0200\n"
+"POT-Creation-Date: 2008-07-13 23:40+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -3966,6 +3966,11 @@ msgstr ""
 "Tragen Sie hier bitte die Unterkategorie für den Podcast ein. Weitere "
 "Informationen erhalten Sie über die Podcast Specs von Apple."
 
+#: project_project_name.html:1
+msgid "Enter a descriptive name for your project"
+msgstr ""
+"Tragen Sie bitte einen Namen für Ihr Projekt ein"
+
 #: right_right_description.html:1
 msgid ""
 "You can optionally describe the purpose of this right. May be useful when "
@@ -4842,13 +4847,21 @@ msgstr "Sind Sie sicher, dass Sie die gewählte Seite löschen möchten?"
 
 #: wcom.strings.js:57
 msgid ""
+"Are you sure you want to delete the chosen project? Every page and template "
+"within this project will deleted too."
+msgstr ""
+"Sind Sie sicher, dass Sie das gewählte Projekt löschen möchten? Alle "
+"Seiten und Vorlagen innerhalb dieses Projektes werden ebenfalls gelöscht."
+
+#: wcom.strings.js:58
+msgid ""
 "Are you sure you want to delete the chosen template type? Every template "
 "that uses this type will be deleted too."
 msgstr ""
 "Sind Sie sicher, dass Sie den gewählten Vorlagentyp löschen möchten? Alle "
 "Seitenvorlagen, die diesen Vorlagentyp nutzen, werden ebenfalls gelöscht!"
 
-#: wcom.strings.js:58
+#: wcom.strings.js:59
 msgid ""
 "Are you sure you want to delete the chosen template set? You will loose the "
 "references in the templates this set is attached with."
@@ -4857,7 +4870,7 @@ msgstr ""
 "Referenzen in den Seitenvorlagen, die dieser Vorlagengruppe zugeordnet sind, "
 "gehen verloren!"
 
-#: wcom.strings.js:59
+#: wcom.strings.js:60
 msgid ""
 "Are you sure you want to delete the chosen global template? References in "
 "other templates are not accordingly deleted and will remain as unattached "
@@ -4868,7 +4881,7 @@ msgstr ""
 "genutzt wird, werden nicht gelöscht. Sie verbleiben unreferenziert als "
 "einfacher Text in den Seitenvorlagen."
 
-#: wcom.strings.js:60
+#: wcom.strings.js:61
 msgid ""
 "Are you sure you want to delete the chosen global file? References in other "
 "templates are not accordingly deleted and will remain as unattached markup."
@@ -4878,11 +4891,11 @@ msgstr ""
 "wird, werden nicht gelöscht. Sie verbleiben unreferenziert als einfacher "
 "Text in den Seitenvorlagen."
 
-#: wcom.strings.js:61
+#: wcom.strings.js:62
 msgid "Please select a Flickr.com supplied image size."
 msgstr "Bitte wählen Sie eine von Flickr angebotene Bildgröße aus."
 
-#: wcom.strings.js:62
+#: wcom.strings.js:63
 msgid ""
 "The display of the Media Manager was not updated!\\n\\nPlease solely close "
 "the window with the corresponding CLOSE button within the launched window. "
@@ -4896,11 +4909,11 @@ msgstr ""
 "haben.\\n\\nDie Funktionalität sonstiger Seitenbereiche bleibt hiervon "
 "unberührt."
 
-#: wcom.strings.js:63
+#: wcom.strings.js:64
 msgid "There is currently no help available."
 msgstr "Es existiert momentan noch kein Hilfetext zu diesem Feld."
 
-#: wcom.strings.js:64
+#: wcom.strings.js:65
 msgid "You cannot insert media or documents here."
 msgstr ""
 "Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
@@ -5501,15 +5514,16 @@ msgid ""
 "You have successfully completed the setup procedure. Welcompose is now ready "
 "to run"
 msgstr ""
-"Sie haben das Setup erfolgreich abgeschlossen. Welcompose ist nun einsatzbereit"
+"Sie haben das Setup erfolgreich abgeschlossen. Welcompose ist nun "
+"einsatzbereit"
 
 #: finish.html:50
 msgid ""
 "When you click on the button at the end of the page, you will be redirected "
 "to the admin interface"
 msgstr ""
-"Wenn Sie auf den unten stehenden Button klicken, werden Sie zum "
-"Admin-Bereich weitergeleitet"
+"Wenn Sie auf den unten stehenden Button klicken, werden Sie zum Admin-"
+"Bereich weitergeleitet"
 
 #: finish.html:52
 msgid "Your login credentials"
@@ -5530,10 +5544,10 @@ msgid ""
 "If it does not work, a warning will appear in the admin area that will "
 "advise you to do it by hand"
 msgstr ""
-"Das Setup versucht nach dem Klick auf den unten stehenden Button das gesammte "
-"Setup Verzeichnis automatisch zu löschen. Ist dieses durch bspw. ungenügende "
-"Schreibrechte nicht möglich, wird Ihnen im Admin-Bereih eine Warnung angezeigt, "
-"mit der Bitte, das Verzeichnis per Hand zu löschen"
+"Das Setup versucht nach dem Klick auf den unten stehenden Button das "
+"gesammte Setup Verzeichnis automatisch zu löschen. Ist dieses durch bspw. "
+"ungenügende Schreibrechte nicht möglich, wird Ihnen im Admin-Bereih eine "
+"Warnung angezeigt, mit der Bitte, das Verzeichnis per Hand zu löschen"
 
 #: finish.html:60
 msgid "Thank you for choosing Welcompose"
