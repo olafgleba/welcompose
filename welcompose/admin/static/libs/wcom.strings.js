@@ -54,6 +54,7 @@ var hideDetails = '<%i18n Hide details%>';
 
 var confirmMsgDelNav = '<%i18n Are you sure you want to delete the chosen navigation? Every page related to this navigation will be deleted too.%>';
 var confirmMsgDelPage = '<%i18n Are you sure you want to delete the chosen page?%>';
+var confirmMsgDelProject = '<%i18n Are you sure you want to delete the chosen project? Every page and template within this project will deleted too.%>';
 var confirmMsgDelTplType = '<%i18n Are you sure you want to delete the chosen template type? Every template that uses this type will be deleted too.%>';
 var confirmMsgDelTplSets = '<%i18n Are you sure you want to delete the chosen template set? You will loose the references in the templates this set is attached with.%>'
 var confirmMsgDelTplGlobal = '<%i18n Are you sure you want to delete the chosen global template? References in other templates are not accordingly deleted and will remain as unattached markup.%>';

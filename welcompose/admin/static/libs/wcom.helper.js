@@ -87,6 +87,7 @@ Helper.prototype.showFileUploadMessage = Helper_showFileUploadMessage;
 Helper.prototype.validate = Helper_validate;
 Helper.prototype.confirmDelNavAction = Helper_confirmDelNavAction;
 Helper.prototype.confirmDelPageAction = Helper_confirmDelPageAction;
+Helper.prototype.confirmDelProjectAction = Helper_confirmDelProjectAction;
 Helper.prototype.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
 Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
@@ -1336,6 +1337,25 @@ function Helper_confirmDelPageAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelPage);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Confirm project delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelProjectAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelProject);
 
 		if (v == true) {
 			window.location.href = elem.href;

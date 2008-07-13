@@ -83,11 +83,11 @@
 {if $_project.editable}
 <td class="template"><span>{$_project.name|escape:"htmlall"}</span></td>
 <td><a class="edit" href="projects_edit.php?id={$_project.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="projects_delete.php?id={$_project.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirmDelProject" href="projects_delete.php?id={$_project.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td class="template"><span>{$_project.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
 <td class="edit">&nbsp;</td>
-<td class="delete">&nbsp;</td>
+<td class="delete confirmDelProject">&nbsp;</td>
 {/if}
 </tr>
 {/foreach}

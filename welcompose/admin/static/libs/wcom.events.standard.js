@@ -184,6 +184,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelProject' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelProjectAction(this);
+			return false;
+		}
+	},
 	'.confirmDelTplType' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelTplTypeAction(this);
