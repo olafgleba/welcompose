@@ -94,6 +94,11 @@ try {
 	$FORM->addElement('submit', 'submit', gettext('Next step'),
 		array('class' => 'submit240'));
 		
+	// set defaults
+	$FORM->setDefaults(array(
+		'locale' => 'de_DE'
+	));
+		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it

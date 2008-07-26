@@ -66,7 +66,7 @@
 <tr>
 <td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
 </td>
-<td class="td_mm_meta">{$_object.file_name|truncate:60:"...":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
+<td class="td_mm_meta">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}
 <td class="td_mm_casts">{if $request.mm_pagetype == 'WCOM_BLOG' && $podcastable}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}
 </td>

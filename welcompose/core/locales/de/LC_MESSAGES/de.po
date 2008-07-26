@@ -2476,11 +2476,11 @@ msgstr "EINFÜGEN"
 
 #: globalboxes_add.html:10
 msgid "Welcompose Admin &ndash; Add Global Box"
-msgstr "Welcompose Admin &ndash; Neue globale Box anlegen"
+msgstr "Welcompose Admin &ndash; Neue Globale Box anlegen"
 
 #: globalboxes_add.html:59 globalboxes_add.html:63
 msgid "Add Global Box"
-msgstr "Neue globale Box anlegen"
+msgstr "Neue Globale Box anlegen"
 
 #: globalboxes_add.html:101 globalboxes_edit.html:101
 #: pages_blogs_postings_add.html:124 pages_blogs_postings_add.html:133
@@ -3548,7 +3548,7 @@ msgid ""
 "changed from braces to a <%% and %%>. You'll need this when dealing with "
 "files containing a lot of braces like Cascading Style Sheets or JavaScript."
 msgstr ""
-"Definiert, ob die Standard Smarty-Trennsymbol \"{\" und \"}\" durch \"<%%%%"
+"Definiert, ob die Standard Smarty-Delimiter \"{\" und \"}\" durch \"<%%%%"
 "\" und \"%%%%>\" ersetzt werden sollen. Dieses ist notwendig, wenn Sie in "
 "der globalen Vorlage mit Quelltext arbeiten, deren Syntax geschweifte "
 "Klammern beinhaltet. Dies ist bspw. der Fall bei Cascading Style Sheets und "
@@ -4498,11 +4498,11 @@ msgstr "GLOBALE VORLAGEN"
 
 #: globalfiles_add.html:10
 msgid "Welcompose Admin &ndash; Add Global File"
-msgstr "Welcompose Administration &ndash; Neue globale Datei anlegen"
+msgstr "Welcompose Administration &ndash; Neue Globale Datei anlegen"
 
 #: globalfiles_add.html:52 globalfiles_add.html:56
 msgid "Add Global File"
-msgstr "Neue globale Datei anlegen"
+msgstr "Neue Globale Datei anlegen"
 
 #: globalfiles_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Global File"
@@ -4549,11 +4549,11 @@ msgstr "Sie haben noch keine Datei angelegt"
 
 #: globaltemplates_add.html:10
 msgid "Welcompose Admin &ndash; Add Global Template"
-msgstr "Welcompose Administration &ndash; Neue globale Vorlage anlegen"
+msgstr "Welcompose Administration &ndash; Neue Globale Vorlage anlegen"
 
 #: globaltemplates_add.html:54 globaltemplates_add.html:58
 msgid "Add Global Template"
-msgstr "Neue globale Vorlage anlegen"
+msgstr "Neue Globale Vorlage anlegen"
 
 #: globaltemplates_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Global Template"
@@ -4940,7 +4940,7 @@ msgstr "Der gewählte MIME-Typ liegt außerhalb des gültigen Wertebereiches"
 
 #: globaltemplates_add.php:149 globaltemplates_edit.php:160
 msgid "Change delimiter"
-msgstr "Trennsymbol ändern"
+msgstr "Delimiter ändern"
 
 #: globaltemplates_add.php:153 globaltemplates_edit.php:164
 msgid "The field whether to change the delimiver accepts only 0 or 1"
@@ -5423,7 +5423,7 @@ msgstr "Der ausgewählte Datenbankrechner ist zu alt"
 
 #: database.php:137
 msgid "Selected database does not support InnoDB"
-msgstr "Die ausgewählte Datebank unterstützt kein InnoDB"
+msgstr "Die ausgewählte Datenbank unterstützt kein InnoDB"
 
 #: license.php:64
 msgid "Confirm license"
