@@ -407,7 +407,8 @@ public function selectBlogPostings ($params = array())
 	// define order macros
 	$macros = array(
 		'DATE_ADDED' => '`content_blog_postings`.`date_added`',
-		'DATE_MODIFIED' => '`content_blog_postings`.`date_modified`'
+		'DATE_MODIFIED' => '`content_blog_postings`.`date_modified`',
+		'RANDOM' => 'rand()'
 	);
 	
 	// load helper class
