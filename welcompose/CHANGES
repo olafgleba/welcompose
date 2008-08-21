@@ -1,7 +1,0 @@
-Welcompose 0.8.0
-================
-
- * Box hopping fixed, Ticket:51
- * Further Licence adaption
- * Further german language file apdaption
- * Add validation callback to template differ template type <=> sets, Ticket:36
