@@ -113,6 +113,11 @@ public function __construct($project, $page)
 	
 	$this->_project = $project;
 	$this->_page = $page;
+	
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
 }
 
 /**

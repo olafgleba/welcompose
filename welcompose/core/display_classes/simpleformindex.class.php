@@ -147,6 +147,11 @@ public function __construct($project, $page)
 	
 	// load captcha class
 	$this->captcha = load('Utility:Captcha');
+	
+	// load gettext
+	$gettext_path = dirname(__FILE__).'/../includes/gettext.inc.php';
+	include(Base_Compat::fixDirectorySeparator($gettext_path));
+	gettextInitSoftware($BASE->_conf['locales']['all']);
 }
 
 /**
