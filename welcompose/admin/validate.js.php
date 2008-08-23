@@ -56,6 +56,9 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
+	// set header
+	header("Content-Type: text/html; charset=iso-8859-1");
+	
 	// map field id names to regexps and error messages 
 	if (Base_Cnc::filterRequest($_POST['elemID'], WCOM_REGEX_FORM_FIELD_ID)) {
 		switch ((string)$_POST['elemID']) {
