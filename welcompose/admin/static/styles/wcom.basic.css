@@ -87,6 +87,7 @@ text-decoration: underline;
 a:active, a:focus {
 color: #fff;
 background: #ff620d;
+outline: none;
 }
 
 /* basic structure */
