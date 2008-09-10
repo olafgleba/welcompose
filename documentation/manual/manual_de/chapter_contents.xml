@@ -12,7 +12,7 @@
 			bearbeitet man mit Welcompose keine kompletten Seiten,
 			sondern Strukturelemente. Welcompose unterstützt etliche
 			Strukturelemente. Zu diesen gehören beispielsweise
-			Navigationen, Boxen oder auch Grundgerüste für verschiendene
+			Navigationen, Boxen oder auch Grundgerüste für verschiedene
 			Inhaltstypen wie Formulare oder Blogs. Erst diese
 			Strukturelemente ergeben zusammengesetzt und kombiniert mit
 			einer Vorlage die fertige Seite. Einen schematische
@@ -44,6 +44,365 @@
 		</figure>
 	</sect1>
 	
+	<sect1 id="contents.pages">
+		<title>Seiten</title>
+		
+		<sect2 id="contents.pages.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Seiten stellen im Fall der Strukturelemente nur Grundgerüste
+				für die effektive Webseite dar. Sie bestehen genauer gesagt
+				aus einer Reihe von Elementen, die typischerweise auf der
+				jeweiligen Seitenart vorkommen und beliebig auf einer Seite
+				positioniert werden können. So besteht eine Formularseite
+				aus einem Formular und eine Blog-Seite aus etlichen
+				Blog Postings.
+			</para>
+			
+			<para>
+				Gleichzeitig stellen Seiten die Menüpunkte innerhalb einer
+				Navigation dar. Das heisst, dass jede Seite einem Menüpunkt
+				entspricht und man ohne Seite keinen Menüpunkt erhält. 
+			</para>
+			
+			<para>
+				Da Welcompose bereits etliche Seitentypen (siehe
+				<xref linkend="templating.template_types.usage.which_template_type_for_which_view.list_of_template_types"/>
+				unterstützt (und es wohl noch einige mehr werden dürften), werden die
+				Eigenschaften und die Verwendung der verschiedenen
+				Seitentypen zukünftig in separaten Kapiteln erklärt.
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.pages.manage">
+			<title>Verwaltung</title>
+			
+			<sect3 id="contents.pages.manage.overview">
+			<title>Seiten-Übersicht</title>
+			
+				<para>
+					Die Verwaltung der Seiten erfolgt über den Menüpunkt
+					<guimenuitem>Seiten</guimenuitem> im Bereich
+					<guimenuitem>Inhalte</guimenuitem>. Die Seiten sind nach
+					den jeweiligen Navigationen, zu denen sie gehören,
+					zusammengefasst und in der Reihenfolge und Einrückung
+					dargestellt, wie sie später ausgegeben werden. 
+				</para>
+				
+				<para>
+					Nachdem eine Navigation angelegt wurde, erhält man auf der
+					Seiten-Übersichtsseite einen Eintrag für die Navigation
+					samt einer leeren zugehörigen Seitenstruktur. Die 
+					Seitenstruktur teilt sich bei einer vorhandenen Navigation
+					in fünf, bei mehreren vorhandenen Navigationen in sechs
+					Spalten auf.
+				</para>
+				
+				<figure id="contents.pages.manage.page_manager">
+					<title>Seiten-Übersicht</title>
+					<graphic fileref="images/contents/pages/manage.page_manager.png"/>
+				</figure>
+				
+				<variablelist>
+					<title>Funktionselemente Seitenübersicht</title>
+					<varlistentry>
+						<term><guilabel>Seitenstruktur</guilabel></term>
+						<listitem>
+							<para>
+								Enthält den Namen der einzelnen Seite,
+								wie er in der Navigation als Menüpunkt
+								erscheint. Der Namen wird zudem mit der
+								richtigen Einrückung gezeigt, wobei jede
+								Verschachtelungsebene durch einen grauen
+								Punkt vor dem Namen gezeigt wird. Eine Seite
+								über alle Navigationen hinweg kann mit einem
+								kleinen orangen I (i) markiert sein. Dies
+								signalisiert, dass es sich bei der Seite um die
+								sogenannte Index-Seite handelt, die beim Aufruf
+								des Welcompose-Ausgabebereits ohne irgendwelche
+								Parameter angezeigt wird. Geschützte Seiten sind
+								mit einem orangen Schloss-symbol versehen.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Position</guilabel></term>
+						<listitem>
+							<para>
+								Die Spalte <guilabel>Position</guilabel>
+								hält zwei Schaltflächen bereit, mit denen die
+								Menüpunkte im Rahmen der Navigation nach
+								oben respektive nach unten bewegt werden können.
+								Gleichzeitig wird darüber die Einrückung
+								beeinflusst. Das Prinzip hinter der Bewegung
+								beleuchtet grob <xref
+								linkend="contents.pages.manage.page_moving_results"/>.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Neu</guilabel></term>
+						<listitem>
+							<para>
+								Fügt eine neue Seite zur aktuellen Navigation
+								relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
+								wird entweder über oder unter dem aktuellen
+								Menüpunkt eingesetzt.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Bearbeiten</guilabel></term>
+						<listitem>
+							<para>
+								Über die Schaltfläche
+								<guibutton>Bearbeiten</guibutton> gelangen Sie zu
+								den Formularen, um die Metadaten der jeweiligen
+								Seiten (beispielsweise den Namen der Seite)
+								sowie deren Inhalte zu bearbeiten. 
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Verschieben</guilabel></term>
+						<listitem>
+							<para>
+								Die Schaltfläche <guibutton>Verschieben</guibutton>,
+								die nur vorhanden ist, wenn mehr als eine
+								Navigation existiert, erlaubt es, eine Seite
+								respektive einen Menüpunkt an eine andere
+								Navigation anzuhängen.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Löschen</guilabel></term>
+						<listitem>
+							<para>
+								Löscht die Seite und alle ihre Inhalte (nach einer Sicherheitsabfrage).
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<figure id="contents.pages.manage.page_moving_results">
+					<title>Seiten verschieben</title>
+					<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
+				</figure>
+				
+				<para>
+					Beim Hinzufügen einer Seite werden eine Reihe von
+					Informationen abgefragt, mit denen die Anzeige sowie die
+					Inhalte der Seite beeinflusst werden können. Im Rahmen
+					von Welcompose werden diese Informationen als
+					Metadaten bezeichnet.
+				</para>
+				
+				<figure id="contents.pages.manage.add_page">
+					<title>Seite hinzufügen</title>
+					<graphic fileref="images/contents/pages/manage.add_page.png"/>
+				</figure>
+				
+				<variablelist>
+					<varlistentry>
+						<term><guilabel>Position</guilabel></term>
+						<listitem>
+							<para>
+								Bestimmt, wie die neue Seite in die Navigation
+								eingefügt werden soll und zwar relativ
+								gesehen zum Menüpunkt, neben dem auf die
+								Schaltfläche <guibutton>Neu</guibutton>
+								geklickt wurde. Eine Seite kann entweder
+								oberhalb oder unterhalb des Menüpunkts
+								eingefügt werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Name</guilabel></term>
+						<listitem>
+							<para>
+								Name der Seite respektive des Menüpunkts.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>URL-Name</guilabel></term>
+						<listitem>
+							<para>
+								Name der Seite in einer vereinfachten Form
+								für den Einsatz in suchmaschinenfreundlichen
+								URLs (nur a-z, 0-9 und - als erlaubte Zeichen).
+								Wird automatisch mit Hilfe von JavaScript
+								bei der Eingabe des Seitennamen erzeugt
+								und kann bei Bedarf manuell angepasst werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Typ</guilabel></term>
+						<listitem>
+							<para>
+								Bestimmt den Seitentyp der Seite, respektive
+								mit welchen Inhalten die Seite befüllt werden
+								kann. Diese Einstellung kann später nicht mehr
+								geändert werden.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Vorlagengruppe</guilabel></term>
+						<listitem>
+							<para>
+								Die Vorlagegruppe, der der neue Seite zugeorndet
+								werden soll.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Index-Seite</guilabel></term>
+						<listitem>
+							<para>
+								Markiert die Seite als Index-Seite, die beim Aufruf des 
+								Ausgabe-Bereichs von Welcompose ohne weitere Parameter verwendet
+								wird ("Startseite").
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Geschützt</guilabel></term>
+						<listitem>
+							<para>
+								Erlaubt den Zugriff auf die entsprechende
+								Seite nur nach Eingabe von Benutzernamen
+								und Passwort. Welche Anwender sich anmelden
+								dürfen, wird über das Feld
+								<guilabel>Benutzergruppen</guilabel> gesteuert.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Benutzergruppen</guilabel></term>
+						<listitem>
+							<para>
+								Benutzergruppen, denen der Zugriff auf die
+								Seite gestattet wird, sollte sie geschützt
+								sein.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<para>
+					Parallel zu den "normalen" Metadaten-Feldern bietet
+					Welcompose einige ergänzende Felder, die beispielsweise
+					zur Befüllung mit Inhalt genutzt werden können. So erlaubt
+					das Feld <guilabel>Alternativer Name</guilabel> die Speicherung
+					eines alternativen Seitennamen sowie
+					<guilabel>Beschreibung</guilabel> und
+					<guilabel>Optionaler Text</guilabel> das Hinterlegen von
+					beliebigem Fliesstext, der beispielsweise für die Befüllung
+					von Metatags im Seitenkopf verwendet werden kann. Die
+					Verwendung der Felder <guilabel>Sitemap Änderungshäufigkeit</guilabel>
+					und <guilabel>Sitemap Priorität</guilabel> wird zu einem späteren
+					Zeitpunkt in <xref linkend="usage.google_sitemaps"/> erklärt, der augenblicklich
+					noch nicht gefüllt sind.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="contents.pages.output">
+			<title>Ausgabe</title>
+			
+			<example id="contents.pages.output.get_current_page">
+				<title>Aktuelle Seite auslesen</title>
+				
+				<para>
+					Das explizite Auslesen der jeweils aktuellen Seite in einer Seitenvorlage
+					ist in der Regel nicht nötig, da Welcompose dies automatisch
+					übernimmt und die Metadaten der aktuellen Seite über die
+					Smarty-Variable <code>{$page}</code> zur Verfügung stellt:
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+Seiten-ID: {$page.id}
+Seiten-Name: {$page.name}
+Beschreibung: {$page.description}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.pages.output.get_page">
+				<title>Seite auslesen</title>
+				
+				<para>
+					Wollen Sie irgendwann einmal eine bestimmte Seite auslesen,
+					die nicht der aktuellen Seite entspricht, geht dies
+					natürlich auch. Achten Sie dabei darauf, nicht die
+					Variable mit den Metadaten der aktuellen Seite zu
+					überschreiben. Oder einfach gesagt: Wählen Sie nicht den
+					Variablennamen <code>$page</code>.
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Seite mit der ID 1 auslesen *}
+{select_simple ns="Content" class="Page" method="selectPage"
+	var="some_page" id="1"}
+
+Seiten-ID: {$some_page.id}
+Seiten-Name: {$some_page.name}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.pages.output.get_pages">
+				<title>Mehrere Seiten auslesen</title>
+				
+				<para>
+					Eine Aufgabe, die wohl bei ziemlich jeder Webseite
+					anfallen wird, ist das Auslesen mehrerer Seiten.
+					Beispielsweise, wenn es darum geht, die Menüpunkte
+					einer Navigation auszulesen. 
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Seiten zugehörig zu Navigation 1 auslesen *}
+{select_named ns="Content" class="Page" method="selectPages"
+	var="pages" navigation="1"}
+
+{foreach from=$pages item="_page"}
+	Seiten-ID: {$_page.id}
+	Seiten-Name: {$_page.name}
+{/foreach}
+]]></programlisting>
+
+				<para>
+					Alternativ können hier die abhängigen Menüpunkte auch über den
+					Parameter <emphasis>navigation_name</emphasis> ausgelesen werden.
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Seiten zugehörig zu Navigation mit Namen "Hauptnavigation" auslesen *}
+{select_named ns="Content" class="Page" method="selectPages"
+	var="pages" navigation_name="Hauptnavigation"}
+
+{foreach from=$pages item="_page"}
+	Seiten-ID: {$_page.id}
+	Seiten-Name: {$_page.name}
+{/foreach}
+]]></programlisting>
+			</example>
+			
+			<tip>
+				<para>
+					Die Erzeugung einer verschachtelten Navigation mit Hilfe
+					von HTML-Listen wird in Kürze in <xref
+					linkend="usage.nested_navigation"/> erklärt.
+				</para>
+			</tip>
+		</sect2>
+	</sect1>
+
+
 	<sect1 id="contents.global_boxes">
 		<title>Globale Boxen</title>
 		
@@ -54,14 +413,14 @@
 				Mit Hilfe von Globalen Boxen kann auf jeder Seite an beliebiger
 				Stelle beliebiger Inhalt eingefügt werden, der über das
 				Admininterface administrierbar ist. Im Gegensatz zu den
-				herkömmlichen Boxen, die auf jeder Seite, auf der sie angezeigt
+				seitenbezogenen Boxen, die auf jeder Seite, auf der sie angezeigt
 				werden, unterschiedliche Inhalte darstellen können, ist der
 				Inhalt einer Globalen Box überall identisch.
 			</para>
 			
 			<para>
 				Die Globalen Boxen eignen sich beispielsweise zur Anzeige
-				von speziellen Hinweisen oder von Kontaktinformationen. 
+				von speziellen Hinweisen oder von Kontaktinformationen u.v.m. 
 			</para>
 		</sect2>
 		
@@ -70,8 +429,8 @@
 			
 			<para>
 				Die Verwaltung der Globalen Boxen erfolgt über eine Reihe von
-				Formularen im Bereich <guibutton>Contents</guibutton> unter
-				dem Menüpunkt <guibutton>Global Boxes</guibutton>.
+				Formularen im Bereich <guibutton>Inhalte</guibutton> unter
+				dem Menüpunkt <guibutton>Globale Boxen</guibutton>.
 			</para>
 			
 			<figure id="contents.global_boxes.manage.global_boxes_overview">
@@ -107,7 +466,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Content</guilabel></term>
+					<term><guilabel>Inhalt</guilabel></term>
 					<listitem>
 						<para>
 							Inhalt der Global Box. 
@@ -115,20 +474,20 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Text converter</guilabel></term>
+					<term><guilabel>Textkonverter</guilabel></term>
 					<listitem>
 						<para>
-							Text-Konverter, der auf den Inhalt der Globalen
+							Textkonverter, der auf den Inhalt der Globalen
 							Box appliziert werden soll (siehe <xref
 							linkend="settings.text_converters"/>).
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Apply text macros</guilabel></term>
+					<term><guilabel>Makros anwenden</guilabel></term>
 					<listitem>
 						<para>
-							Ob die vorhandenen Text Macros auf den Inhalt der
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
 							Globalen Box appliziert werden sollen (siehe <xref
 							linkend="settings.text_macros"/>).
 						</para>
@@ -137,8 +496,7 @@
 			</variablelist>
 			
 			<para>
-				Parallel bieten die Globalen Boxen wie die meisten anderen
-				Inhaltsseiten Unterstützung durch den Media Manager.
+				Gleichzeitig bieten die Globalen Boxen Unterstützung durch den Mediamanager (siehe <xref linkend="media.mediamanager"/>).
 			</para>
 		</sect2>
 		
@@ -146,11 +504,12 @@
 			<title>Ausgabe</title>
 			
 			<para>
-				Globale Boxen können über ein Pop-up ausgewählt und automatisch
-				in eine Vorlage eingesetzt werden. Klicken Sie dazu auf den
-				entsprechenden Link über dem Textbereich zum Editieren der
+				Globale Boxen können über einen in allen Seitenvorlagen vorhandenen
+				Link ausgewählt und automatisch in eine Seitenvorlage eingesetzt werden.
+				Klicken Sie dazu auf den entsprechenden Link über dem Textbereich zum Editieren der
 				Vorlage (siehe <xref
-				linkend="contents.global_boxes.output.reference_global_box"/>).
+				linkend="contents.global_boxes.output.reference_global_box"/>). Hierbei wird
+				der Code automatisch eingesetzt und es muss nur noch die ID angepasst werden.
 			</para>
 			
 			<figure id="contents.global_boxes.output.reference_global_box">
@@ -165,7 +524,7 @@
 					Um eine einzelne Globale Box auszulesen, wird die ID
 					(im Beispiel <userinput>1</userinput>) der jeweiligen
 					Globalen Box benötigt. Der Code zum Auslesen der Box
-					kann auch über ein Pop-up generiert und eingesetzt werden. 
+					kann auch über ein Pop-up (s.o) generiert und eingesetzt werden. 
 				</para>
 				
 				<programlisting language="smarty"><![CDATA[
@@ -186,7 +545,8 @@ Inhalt der Global Box: {$global_box.content}
 					Sollen mehrere Globale Boxen ausgegeben werden, empfiehlt
 					es sich in der Regel, mehrmals einfach nur eine Box in der
 					gewünschten Reihenfolge auszugeben. Es ist aber auch
-					möglich, alle aufs Mal auszulesen.
+					möglich, alle aufs Mal auszulesen (steht <emphasis>nicht</emphasis>
+					als automatisch einsetzbarer String zur Verfügung).
 				</para>
 				
 				<programlisting language="smarty"><![CDATA[
@@ -202,6 +562,184 @@ Inhalt der Global Box: {$global_box.content}
 			</example>
 		</sect2>
 	</sect1>
+
+
+	<sect1 id="contents.boxes">
+		<title>Boxen</title>
+		
+		<sect2 id="contents.boxes.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Seitenbezogene <emphasis>Boxen</emphasis> können für jede inhaltliche Seite 
+				separat angelegt werden. Sie erlauben es somit, im Gegensatz zu Globalen Boxen
+				(siehe <xref linkend="contents.global_boxes"/>), auf inhaltlichen Seiten 
+				jeweils unterschiedliche Inhalte anzuzeigen. 
+			</para>
+			
+			<para>
+				Seitenbezogene Boxen eignen sich beispielsweise für Seitenspalten, deren
+				Struktur und Aussehen gleich, die Inhalte aber abhängig von der aufgerufenen
+				Seite unterschiedlich sein sollen.  
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.boxes.manage">
+			<title>Verwaltung</title>
+			
+			<para>
+				Da Boxen seitenindividuell sind, erfolgt deren Verwaltung im Submenu der
+				Seitenverwaltung unter dem Menüpunkt <guibutton>Boxen</guibutton>.
+			</para>
+			
+			<figure id="contents.boxes.manage.boxes_overview">
+				<title>Übersicht über vorhandene Boxen</title>
+				<graphic fileref="images/contents/boxes/manage.boxes_overview.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht zeigt die vorhandenen Boxen in
+				alphabetischer Reihenfolge und bietet Links zum Hinzufügen,
+				Bearbeiten und Löschen von Boxen.
+			</para>
+			
+			<figure id="contents.boxes.manage.add_box">
+				<title>Neue Box anlegen</title>
+				<graphic fileref="images/contents/boxes/manage.add_box.png"/>
+			</figure>
+			
+			<para>
+				Das Formular zum Hinzufügen respektive Editieren der 
+				Boxen besteht nur aus einigen wenigen Feldern:
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Der Name der Box. Kommt ausser im 
+							Administrationsbereich nicht zum Einsatz. Muss
+							innerhalb eines Projekts einzigartig sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Inhalt der Box. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Textkonverter</guilabel></term>
+					<listitem>
+						<para>
+							Textkonverter, der auf den Inhalt der 
+							Box appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Makros anwenden</guilabel></term>
+					<listitem>
+						<para>
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
+							Box appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Gleichzeitig bieten die seitenabhängigen Boxen Unterstützung durch den Mediamanager (siehe <xref linkend="media.mediamanager"/>).
+			</para>
+		</sect2>
+		
+		<sect2 id="contents.boxes.output">
+			<title>Ausgabe</title>
+			
+			<para>
+				Auch seitenabhängige Boxen können über einen in allen Seitenvorlagen vorhandenen
+				Link ausgewählt und automatisch in eine Seitenvorlage eingesetzt werden.
+				Klicken Sie dazu auf den entsprechenden Link über dem Textbereich zum Editieren der
+				Vorlage (siehe <xref linkend="contents.boxes.output.reference_box"/>). Hierbei wird
+				der Code automatisch eingesetzt und es muss nur noch die ID angepasst werden.
+			</para>
+			
+			<figure id="contents.boxes.output.reference_box">
+				<title>Box referenzieren</title>
+				<graphic fileref="images/contents/boxes/output.reference_box.png"/>
+			</figure>
+			
+			<example id="contents.boxes.output.get_box_by_name">
+				<title>Box anhand des Namens ausgeben</title>
+				
+				<para>
+					Um eine einzelne Box auszulesen, wird der Name
+					(im Beispiel <userinput>headerbild</userinput>) der jeweiligen
+					Box benötigt. Der Code zum Auslesen der Box
+					kann auch über ein Pop-up (s.o.) generiert und eingesetzt werden. 
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Box mit dem Namen headerbild auslesen*}
+{select_simple ns="Content" class="Box" method="selectBoxUsingName"
+	var="box" page=$page.id name="headerbild"}
+
+ID der Box: {$box.id}
+Name der Box: {$box.name}
+Inhalt der Box: {$box.content}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.boxes.output.get_box_by_id">
+				<title>Box anhand der ID ausgeben</title>
+				
+				<para>
+					Alternativ (steht <emphasis>nicht</emphasis> als automatisch einsetzbarer String
+					zur Verfügung) können Sie eine Box auch anhand der ID (im Beispiel <userinput>1</userinput>)
+					auslesen. 
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Box mit der ID 1 auslesen*}
+{select_simple ns="Content" class="Box" method="selectBox"
+	var="box" id="1"}
+
+ID der Box: {$box.id}
+Name der Box: {$box.name}
+Inhalt der Box: {$box.content}
+]]></programlisting>
+			</example>
+			
+			<example id="contents.boxes.output.get_boxes">
+				<title>Boxen ausgeben</title>
+				
+				<para>
+					Sollen mehrere Boxen ausgegeben werden, empfiehlt
+					es sich in der Regel, mehrmals einfach nur eine Box in der
+					gewünschten Reihenfolge auszugeben. Es ist aber auch
+					möglich, alle aufs Mal auszulesen.
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{select_named ns="Content" class="Box" method="selectBoxes"
+	var="boxes"}
+
+{foreach from=$boxes item="_box"}
+	ID der Box: {$_box.id}
+	Name der Box: {$_box.name}
+	Inhalt der Box: {$_box.content}
+{/foreach}
+]]></programlisting>
+			</example>
+		</sect2>
+	</sect1>
+
 	
 	<sect1 id="contents.navigations">
 		<title>Navigationen</title>
@@ -227,17 +765,6 @@ Inhalt der Global Box: {$global_box.content}
 				Welcompose mehrere Navigationen sowie eine unbegrenzte Anzahl
 				von Navigationspunkten pro Navigation.
 			</para>
-			
-			<para>
-				Ein Beispiel für die Benutzung mehrfacher Navigationen
-				zeigt <xref
-				linkend="contents.navigations.introduction.two_navigations_sample"/>.
-			</para>
-			
-			<figure id="contents.navigations.introduction.two_navigations_sample">
-				<title>Abhänigkeiten zwischen Strukturelementen</title>
-				<graphic fileref="images/contents/navigations/introduction.two_navigations_sample.png"/>
-			</figure>
 		</sect2>
 		
 		<sect2 id="contents.navigations.manage">
@@ -246,8 +773,8 @@ Inhalt der Global Box: {$global_box.content}
 			<para>
 				Die Verwaltung der Navigationen erfolgt über die
 				Administrationsoberfläche unter dem Menüpunkt
-				<guimenuitem>Navigations</guimenuitem> im Bereich
-				<guimenuitem>Contents</guimenuitem>. Dort können
+				<guimenuitem>Navigationen</guimenuitem> im Bereich
+				<guimenuitem>Inhalte</guimenuitem>. Dort können
 				Navigationen hinzugefügt, bearbeitet und gelöscht werden.
 			</para>
 			
@@ -335,347 +862,6 @@ Name der Navigation: {$navigation.name}
 		</sect2>
 	</sect1>
 	
-	<sect1 id="contents.pages">
-		<title>Seiten</title>
-		
-		<sect2 id="contents.pages.introduction">
-			<title>Einführung</title>
-			
-			<para>
-				Seiten stellen im Fall der Strukturelemente nur Grundgerüste
-				für die effektive Webseite dar. Sie bestehen genauer gesagt
-				aus einer Reihe von Elementen, die typischerweise auf der
-				jeweiligen Seitenart vorkommen und beliebig auf einer Seite
-				positioniert werden können. So besteht eine Formularseite
-				aus einem Formular und eine Blog-Seite aus etlichen
-				Blog Postings.
-			</para>
-			
-			<para>
-				Gleichzeitig stellen Seiten die Menüpunkte innerhalb einer
-				Navigation dar. Das heisst, dass jede Seite einem Menüpunkt
-				entspricht und man ohne Seite keinen Menüpunkt erhält. 
-			</para>
-			
-			<para>
-				Da Welcompose bereits etliche Seitentypen unterstützt
-				(und es wohl noch einige mehr werden dürften), sind die
-				Eigenschaften und die Verwendung der verschiedenen
-				Seitentypen in separaten Kapiteln erklärt.
-			</para>
-		</sect2>
-		
-		<sect2 id="contents.pages.manage">
-			<title>Verwaltung</title>
-			
-			<sect3 id="contents.pages.manage.overview">
-			<title>Seiten-Übersicht</title>
-			
-				<para>
-					Die Verwaltung der Seiten erfolgt beim Menüpunkt
-					<guimenuitem>Pages</guimenuitem> im Bereich
-					<guimenuitem>Contents</guimenuitem>. Die Seiten sind nach
-					den jeweiligen Navigationen, zu denen sie gehören,
-					zusammengefasst und in der Reihenfolge und Einrückung
-					dargestellt, wie sie später ausgegeben werden. 
-				</para>
-				
-				<para>
-					Nachdem eine Navigation angelegt wurde, erhält man auf der
-					Seiten-Übersichtsseite einen Eintrag für die Navigation
-					samt einer leeren zugehörigen Seitenstruktur. Die 
-					Seitenstruktur teilt sich bei einer vorhandenen Navigation
-					in fünf, bei mehreren vorhandenen Navigationen in sechs
-					Spalten auf.
-				</para>
-				
-				<figure id="contents.pages.manage.page_manager">
-					<title>Seiten-Übersicht</title>
-					<graphic fileref="images/contents/pages/manage.page_manager.png"/>
-				</figure>
-				
-				<variablelist>
-					<title>Funktionselemente Seitenübersicht</title>
-					<varlistentry>
-						<term><guilabel>Page structure</guilabel></term>
-						<listitem>
-							<para>
-								Enthält den Namen der einzelnen Seite,
-								wie er in der Navigation als Menüpunkt
-								erscheint. Der Namen wird zudem mit der
-								richtigen Einrückung gezeigt, wobei jede
-								Verschachtelungsebene durch einen grauen
-								Punkt vor dem Namen gezeigt wird. Eine Seite
-								über alle Navigationen hinweg kann mit einem
-								kleinen orangen I (i) markiert sein. Dies
-								signalisiert, dass es sich bei der Seite um die
-								sogenannte Index-Seite handelt, die beim Aufruf
-								des Welcompose-Ausgabebereits ohne irgendwelche
-								Parameter angezeigt wird.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Move</guilabel></term>
-						<listitem>
-							<para>
-								Die Spalte <guilabel>Move</guilabel>
-								hält zwei Schaltflächen bereit, mit denen die
-								Menüpunkte im Rahmen der Navigation nach
-								oben respektive nach unten bewegt werden können.
-								Gleichzeitig wird darüber die Einrückung
-								beeinflusst. Das Prinzip hinter der Bewegung
-								beleuchtet grob <xref
-								linkend="contents.pages.manage.page_moving_results"/>.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Add</guilabel></term>
-						<listitem>
-							<para>
-								Fügt neue Seite zur aktuellen Navigation
-								relativ zum aktuellen Menüpunkt ein. Menüpunkt
-								wird entweder über oder unter dem aktuellen
-								Menüpunkt eingesetzt.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Edit</guilabel></term>
-						<listitem>
-							<para>
-								Über die Schaltfläche
-								<guibutton>Edit</guibutton> gelangen Sie zu
-								den Formularen, um die Metadaten der jeweiligen
-								Seiten (beispielsweise den Namen der Seite)
-								sowie deren Inhalte zu bearbeiten. 
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Move away</guilabel></term>
-						<listitem>
-							<para>
-								Die Schaltfläche <guibutton>Move away</guibutton>,
-								die nur vorhanden ist, wenn mehr als eine
-								Navigation existiert, erlaubt es, eine Seite
-								respektive einen Menüpunkt an eine andere
-								Navigation anzuhängen.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Löschen</guilabel></term>
-						<listitem>
-							<para>
-								Löscht die Seite und alle ihre Inhalte.
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-				
-				<figure id="contents.pages.manage.page_moving_results">
-					<title>Seiten verschieben</title>
-					<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
-				</figure>
-				
-				<para>
-					Beim Hinzufügen einer Seite werden eine Reihe von
-					Informationen abgefragt, mit denen die Anzeige sowie die
-					Inhalte der Seite beeinflusst werden können. Im Rahmen
-					von Welcompose werden diese Informationen als
-					Metadaten bezeichnet.
-				</para>
-				
-				<figure id="contents.pages.manage.add_page">
-					<title>Seite hinzufügen</title>
-					<graphic fileref="images/contents/pages/manage.add_page.png"/>
-				</figure>
-				
-				<variablelist>
-					<title>Formular-Felder Seiten hinzufügen</title>
-					<varlistentry>
-						<term><guilabel>Position</guilabel></term>
-						<listitem>
-							<para>
-								Bestimmt, wie die neue Seite in die Navigation
-								eingefügt werden soll und zwar relativ
-								gesehen zum Menüpunkt, neben dem auf die
-								Schaltfläche <guibutton>Add</guibutton>
-								geklickt wurde. Eine Seite kann entweder
-								oberhalb oder unterhalb des Menüpunkts
-								eingefügt werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Name</guilabel></term>
-						<listitem>
-							<para>
-								Name der Seite respektive des Menüpunkts.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>URL Name</guilabel></term>
-						<listitem>
-							<para>
-								Name der Seite in einer vereinfachten Form
-								für den Einsatz in suchmaschinenfreundlichen
-								URLs (nur a-z, 0-9 und - als erlaubte Zeichen).
-								Wird automatisch mit Hilfe von JavaScript
-								bei der Eingabe des Seitennamen erzeugt
-								und kann bei Bedarf manuell angepasst werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Type</guilabel></term>
-						<listitem>
-							<para>
-								Bestimmt den Seitentyp der Seite, respektive
-								mit welchen Inhalten die Seite befüllt werden
-								kann. Diese Einstellung kann später nicht mehr
-								geändert werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Template Set</guilabel></term>
-						<listitem>
-							<para>
-								Vorlagen-Pool, aus dem die Vorlagen für die
-								Anzeige der Seite ausgewählt werden sollen.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Index page</guilabel></term>
-						<listitem>
-							<para>
-								Markiert die Seite als Index Page, also als
-								Seite, die beim Aufruf des Ausgabe-Bereichs von
-								Welcompose ohne weitere Parameter verwendet
-								wird ("Startseite").
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Protect</guilabel></term>
-						<listitem>
-							<para>
-								Erlaubt den Zugriff auf die entsprechende
-								Seite nur nach Eingabe von Benutzernamen
-								und Passwort. Welche Anwender sich anmelden
-								dürfen, wird über das Feld
-								<guilabel>Group</guilabel> gesteuert.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Groups</guilabel></term>
-						<listitem>
-							<para>
-								Benutzergruppen, denen der Zugriff auf die
-								Seite gestattet wird, sollte sie geschützt
-								sein.
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-				
-				<para>
-					Parallel zu den "normalen" Metadaten-Feldern bietet
-					Welcompose einige ergänzende Felder, die beispielsweise
-					zur Befüllung mit Inhalt genutzt werden können. So erlaubt
-					das Feld <guilabel>Alternate name</guilabel> die Speicherung
-					eines alternativen Seitennamen sowie
-					<guilabel>Description</guilabel> und
-					<guilabel>Optional text</guilabel> das Hinterlegen von
-					beliebigem Fliesstext, der beispielsweise für die Befüllung
-					von Metatags im Seitenkopf verwendet werden kann. Die
-					Verwendung der Felder <guilabel>Sitemap change
-					frequency</guilabel> und <guilabel>Sitemap
-					Priority</guilabel> wird im <xref
-					linkend="usage.google_sitemaps"/> erklärt.
-				</para>
-			</sect3>
-		</sect2>
-		
-		<sect2 id="contents.pages.output">
-			<title>Ausgabe</title>
-			
-			<example id="contents.pages.output.get_current_page">
-				<title>Aktuelle Seite auslesen</title>
-				
-				<para>
-					Das explizite Auslesen der jeweils aktuellen Seite ist in
-					der Regel nicht nötig, da Welcompose dies automatisch
-					übernimmt und die Metadaten der aktuellen Seite über die
-					Smarty-Variable <code>{$page}</code> zur Verfügung stellt:
-				</para>
-				
-				<programlisting language="smarty"><![CDATA[
-Seiten-ID: {$page.id}
-Seiten-Name: {$page.name}
-Beschreibung: {$page.description}
-]]></programlisting>
-			</example>
-			
-			<example id="contents.pages.output.get_page">
-				<title>Seite auslesen</title>
-				
-				<para>
-					Wollen Sie irgendwann einmal eine bestimmte Seite auslesen,
-					die nicht der aktuellen Seite entspricht, geht dies
-					natürlich auch. Achten Sie dabei darauf, nicht die
-					Variable mit den Metadaten der aktuellen Seite zu
-					überschreiben. Oder einfach gesagt: Wählen Sie nicht den
-					Variablennamen <code>$page</code>.
-				</para>
-				
-				<programlisting language="smarty"><![CDATA[
-{* Seite mit der ID 1 auslesen *}
-{select_simple ns="Content" class="Page" method="selectPage"
-	var="some_page" id="1"}
-
-Seiten-ID: {$some_page.id}
-Seiten-Name: {$some_page.name}
-]]></programlisting>
-			</example>
-			
-			<example id="contents.pages.output.get_pages">
-				<title>Mehrere Seiten auslesen</title>
-				
-				<para>
-					Eine Aufgabe, die wohl bei ziemlich jeder Webseite
-					anfallen wird, ist das Auslesen mehrerer Seiten.
-					Beispielsweise, wenn es darum geht, die Menüpunkte
-					einer Navigation auszulesen. 
-				</para>
-				
-				<programlisting language="smarty"><![CDATA[
-{* Seiten zugehörig zu Navigation 1 auslesen *}
-{select_named ns="Content" class="Page" method="selectPages"
-	var="pages" navigation="1"}
-
-{foreach from=$pages item="_page"}
-	Seiten-ID: {$_page.id}
-	Seiten-Name: {$_page.name}
-{/foreach}
-]]></programlisting>
-			</example>
-			
-			<tip>
-				<para>
-					Die Erzeugung einer verschachtelten Navigation mit Hilfe
-					von HTML-Listen wird in <xref
-					linkend="usage.nested_navigation"/> erklärt.
-				</para>
-			</tip>
-		</sect2>
-	</sect1>
 	
 	<sect1 id="contents.structural_templates">
 		<title>Strukturvorlagen</title>
@@ -717,9 +903,9 @@ Seiten-Name: {$some_page.name}
 			
 			<para>
 				Die Verwaltung der Strukturvorlagen erfolgt im
-				Administrationsbereich unter <guimenu>Contents</guimenu>
-				beim Unterpunkt <guisubmenu>Structural Templates</guisubmenu>.
-				Wenn Sie dort auf den Link <guibutton>Add new</guibutton>
+				Administrationsbereich unter <guimenu>Inhalte</guimenu>
+				im Unterpunkt <guisubmenu>Strukturvorlagen</guisubmenu>.
+				Wenn Sie dort auf den Link <guibutton>Neu anlegen</guibutton>
 				klicken, gelangen Sie zum Formular zum Anlegen einer neuen
 				Strukturvorlage.
 			</para>
@@ -731,7 +917,7 @@ Seiten-Name: {$some_page.name}
 			
 			<variablelist>
 				<varlistentry>
-					<term>Name</term>
+					<term><guilabel>Name</guilabel></term>
 					<listitem>
 						<para>
 							Name der Strukturvorlage. Kann frei gewählt
@@ -741,7 +927,7 @@ Seiten-Name: {$some_page.name}
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guilabel>Beschreibung</guilabel></term>
 					<listitem>
 						<para>
 							Beschreibung der Strukturvorlage. Kann frei
@@ -750,7 +936,7 @@ Seiten-Name: {$some_page.name}
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Content</term>
+					<term><guilabel>Inhalt</guilabel></term>
 					<listitem>
 						<para>
 							Die eigentliche Strukturvorlage, die 1:1 in
@@ -763,24 +949,24 @@ Seiten-Name: {$some_page.name}
 			</variablelist>
 			
 			<para>
-				Beispiel für eine Strukturvorlage mit dem Textkonverter
-				Textile:
+				Beispiel für eine (XHTML)Strukturvorlage:
 			</para>
 			
 			<programlisting><![CDATA[
-h1. Produkttitel
+<h1>Produkttitel</h1>
 
-p(lead). Einleitung
+<p class="lead">Einleitung</p>
 
-h2. Produkteigenschaften
+<h2>Produkteigenschaften</h2>
 
-* Listenpunkt 1
-* Listenpunkt 2
+<ul>
+<li>Listenpunkt 1</li>
+<li>Listenpunkt 2</li>
+</ul>
 
-h2. Bilder
+<h2>Produktbild</h2>
 
-*(image) !imageurl(Bild1)!
-* !imageurl(Bild2)!
+<img src="xxx" />
 ]]></programlisting>
 			
 			<para>
@@ -795,7 +981,7 @@ h2. Bilder
 			
 			<para>
 				Die Verwendung der Strukturvorlagen ist bei allen
-				Inhaltsbereichen der Inhaltsseiten sowie bei den verschieden
+				Inhaltsbereichen der Inhaltsseiten sowie bei den verschiedenen
 				Boxen möglich. Das Menü zur Auswahl der Strukturvorlage, die
 				benutzt werden soll, kann über den Menüpunkt
 				<guimenuitem>Strukturvorlagen</guimenuitem> über dem

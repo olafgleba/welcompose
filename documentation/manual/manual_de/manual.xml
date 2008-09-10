@@ -4,12 +4,19 @@
 <book id="manual" lang="de">
 	<bookinfo>
 		<title>Welcompose Benutzerhandbuch</title>
-		<subtitle>Welcompose Publishing System</subtitle>
-		<pubdate><?dbtimestamp format="d.m.Y"?></pubdate>
+		<subtitle><trademark>Welcompose</trademark> Publishing System</subtitle>
+		<pubdate>Stand: <?dbtimestamp format="d.m.Y"?></pubdate>
 				
 		<!-- copyright -->
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 			href="../common/copyright.xml" />
+
+		<legalnotice>
+			<para>Die Dokumentation ist unter einer Creative Commons-Lizenz 
+			(<ulink url="http://creativecommons.org/licenses/by-nc-nd/3.0/" />) lizenziert.
+			</para>
+		</legalnotice>
+
 	</bookinfo>
 	
 	<!-- chapters -->
@@ -31,8 +38,8 @@
 		href="chapter_settings.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_demo.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_crash_course_blog.xml" />
+	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_crash_course_blog.xml" /> -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_usage.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -49,8 +56,8 @@
 	<!-- appendix -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="appendix_good_to_know.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="appendix_local_webserver.xml" />
+	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="appendix_local_webserver.xml" /> -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="appendix_reference.xml" />
 </book>

@@ -50,10 +50,10 @@
 		
 			<para>
 				Um eine neue Benutzergruppe zu erstellen, wechseln Sie zum
-				Bereich <guimenu>Users</guimenu> und dort zum Unterpunkt 
-				<guisubmenu>Groups</guisubmenu>. Suchen Sie dort nach der
+				Bereich <guimenu>Benutzer</guimenu> und dort zum Unterpunkt 
+				<guisubmenu>Benutzergruppen</guisubmenu>. Suchen Sie dort nach der
 				Benutzergruppe WCOM_ANONYMOUS und klicken dort auf die 
-				Schaltfläche <guibutton>Duplicate</guibutton>. Ändern Sie nun
+				Schaltfläche <guibutton>Duplizieren</guibutton>. Ändern Sie nun
 				den Namen der Benutzergruppe. Achten Sie dabei darauf, ein
 				Prefix wie <userinput>CUSTOM_</userinput> zu verwenden, damit
 				keine Kollisionen mit Welcompose-Benutzergruppen auftreten
@@ -63,7 +63,7 @@
 				diese Gruppe dient, beispielsweise <userinput>Passwortschutz
 				für Seite Intern</userinput>. Lassen Sie die ausgewählten
 				Benutzerrechte unberührt und klicken Sie dann auf
-				<guibutton>Duplicate group</guibutton>.
+				<guibutton>Benutzergruppe duplizieren</guibutton>.
 			</para>
 		
 			<figure id="usage.protected_pages.setup.add_user_group">
@@ -72,6 +72,9 @@
 			</figure>
 		
 			<para>
+				Wechseln Sie zum
+				Bereich zum Unterpunkt 
+				<guisubmenu>Benutzer</guisubmenu>.
 				Ordnen Sie nun einen oder mehrere Benutzer der soeben
 				angelegten Gruppe zu. Achten Sie dabei darauf, dem Benutzer
 				keine Autoren-Rechte einzuräumen, da er sich sonst am
@@ -84,9 +87,12 @@
 			</figure>
 		
 			<para>
-				Legen Sie nun die neue Seite an respektive bearbeiten eine
-				bestehende Seite, indem Sie zu den Metadaten der jeweiligen
-				Seite gehen.
+				Legen Sie nun die neue Seite an (in unseren Beispiel mit Namen
+				<userinput>Intern</userinput> respektive bearbeiten eine
+				bestehende Seite, in dem Sie aud der Seitenübersicht im Bereich
+				<guimenu>Inhalte</guimenu> in der jeweiligen Zeile auf <guibutton>
+				Bearbeiten</guibutton> klicken und dann in der Subnavigation der
+				Seite auf <guibutton>Metadaten</guibutton> klicken.
 			</para>
 		
 			<para>
@@ -105,7 +111,7 @@
 			<warning>
 				<para>
 					Wählen Sie keinesfalls 
-					<guimenuitem>WCOM_ANONOYMOUS</guimenuitem> als
+					<guimenuitem>WCOM_ANONYMOUS</guimenuitem> als
 					Benutzergruppe aus. Sonst erhalten alle Besucher Zugang
 					zur geschützten Seite &ndash; ohne Passwort.
 				</para>
@@ -126,10 +132,10 @@
 		
 			<para>
 				Um diese Vorlage anzulegen, gehen Sie zum Bereich
-				<guimenu>Templating</guimenu> und dort zum Unterpunkt 
-				<guisubmenu>Templates</guisubmenu>. Legen Sie dort eine
-				Vorlage vom Typ system_login an und weisen Sie sie dem
-				Vorlagen-Satz zu, der von der geschützten Seite verwendet
+				<guimenu>Vorlagen</guimenu> und dort zum Unterpunkt 
+				<guisubmenu>Seitenvorlagen</guisubmenu>. Legen Sie dort eine
+				Vorlage vom Typ <userinput>system_login</userinput> an und weisen Sie
+				 sie der Vorlagengruppe zu, der von der geschützten Seite verwendet
 				wird. Fügen Sie an einem beliebigen Platz das Login-Formular
 				ein (das optisch an die eigenen Bedürfnisse angepasst werden
 				kann):
@@ -144,6 +150,8 @@
 </ul>
 {/if}
 
+<p>{$form.requirednote}</p>
+
 <form {$form.attributes}>
 {$form.javascript}
 
@@ -155,7 +163,6 @@
 
 {$form.submit.html}
 </form>
-<p>{$form.requirednote}</p>
 ]]></programlisting>
 			
 			<figure id="usage.protected_pages.setup.create_login_template">
@@ -171,12 +178,6 @@
 				auf diese Seite zugreifen darf) und senden es ab. Sie sollten
 				nun auf die eigentliche Seite weitergeleitet werden.
 			</para>
-			
-			<figure id="usage.protected_pages.setup.login_form">
-				<title>Login-Formular zu geschützter Seite</title>
-				<graphic fileref="images/usage/protected_pages/setup.login_form.png"/>
-			</figure>
-			
 		</sect2>
 		
 		<sect2 id="usage.protected_pages.limitations">

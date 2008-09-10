@@ -10,7 +10,7 @@
 		<para>
 			Die Vorlagen dienen in Welcompose dazu, das Aussehen der
 			Ausgabeseiten zu gestalten. Der Anwender behält dabei volle
-			Kontrolle über die Ausgabe, sodass der ausgegebene Code komplett
+			Kontrolle über die Ausgabe, so dass der ausgegebene Code komplett
 			von ihm bestimmt werden kann. Auf diese Weise wird die
 			Realisierung von tabellenfreien Layouts und barrierefreien Seiten
 			von Welcompose nicht behindert. 
@@ -30,7 +30,7 @@
 				<ulink type="external" url="http://smarty.php.net"/>
 			</para>
 			</footnote>. Sie bietet eine Vielzahl von Funktionen, mit deren
-			Hilfe die Integration von Vorlagen in Welcompose nicht allzu 
+			Hilfe die Erstellung von Vorlagen in Welcompose nicht allzu 
 			schwer fallen sollte. Zudem ist es möglich, von den Vorlagen aus
 			auf die internen APIs von Welcompose zuzugreifen und auf diese
 			Weise die Daten, die man benötigt, nachzuladen. So bietet
@@ -41,7 +41,7 @@
 		<tip>
 			<para>
 				Wer mit Smarty noch nicht vertraut ist, dem bietet der
-				Abschnitt Smarty for Template Designers<footnote>
+				Abschnitt <emphasis>Smarty for Template Designers</emphasis><footnote>
 				<para>
 					<ulink type="external" url="http://smarty.php.net/manual/en/smarty.for.designers.php"/>
 				</para>
@@ -85,7 +85,7 @@
 			<listitem>
 				<para>
 					Die Dateinamen der Vorlagen wurden durch
-					Vorlagen-Typen ersetzt. Die Vorlagen-Typen
+					Vorlagentypen ersetzt. Die Vorlagentypen
 					definieren nun, welche Vorlage für welche Ansicht
 					verwendet wird.
 				</para>
@@ -93,7 +93,7 @@
 			<listitem>
 				<para>
 					Statt Verzeichnissen mit Vorlagen für verschiedene
-					Seiten gibt es Vorlagen-Sätze, die im Adminbereich
+					Seiten gibt es Vorlagengruppen, die im Adminbereich
 					zusammengeklickt und mehreren Seiten gleichzeitig
 					zugewiesen werden können.
 				</para>
@@ -101,8 +101,8 @@
 		</itemizedlist>
 		
 		<para>
-			Dies macht das Vorlagensystem (leider) an einigen Stellen etwas
-			komplizierter, bringt an anderen Stellen dafür eine einfachere
+			Dies macht das Vorlagensystem leider an einigen Stellen etwas
+			komplexer, bringt an anderen Stellen dafür eine einfachere
 			Bedienung und vor allem mehr Flexibilität. 
 		</para>
 		
@@ -127,19 +127,19 @@
 			Die Vorlagen werden nicht direkt den jeweiligen Seiten zugewiesen.
 			Das bedeutet, man kann Welcompose nicht einfach anweisen, direkt
 			eine bestimmte Vorlage für eine Seite zu verwenden. Statt dessen
-			kommen Vorlagen-Sätze (siehe <xref
-			linkend="templating.template_sets"/>) und Vorlagen-Typen (siehe
+			kommen Vorlagengruppen (siehe <xref
+			linkend="templating.template_sets"/>) und Vorlagentypen (siehe
 			<xref linkend="templating.template_types"/>) zum Einsatz.
 		</para>
 		
 		<para>
-			Die <emphasis role="bold">Vorlagen-Sätze</emphasis> dienen dazu, 
-			die Vorlagen zu gruppieren. Hat man beispielsweise einen
-			Vorlagen-Satz mit dem Namen
-			<userinput>Standardvorlagen</userinput>, kann man diesem eine
-			oder mehrere Vorlagen zuweisen. Dieser Vorlagen-Satz wird wiederum
-			einer Seite zugewiesen wird, was bedeutet, dass die Seite in
-			Zukunft nur Vorlagen aus diesem Vorlagen-Satz verwendet.
+			Die <emphasis role="bold">Vorlagengruppen</emphasis> dienen dazu, 
+			die Vorlagen zu gruppieren. Hat man beispielsweise eine
+			Vorlagengruppe mit dem Namen
+			<userinput>Standardvorlagen</userinput>, kann man dieser eine
+			oder mehrere Vorlagen zuweisen. Dieser Vorlagengruppe wird wiederum
+			eine Seite zugewiesen wird, was bedeutet, dass die Seite in
+			Zukunft nur Vorlagen aus diesem Vorlagengruppe verwendet.
 		</para>
 		
 		<para>
@@ -151,12 +151,12 @@
 		
 		<para>
 			Damit Welcompose weiss, welche Vorlage es für welche Seite
-			respektive Ansicht aus einem Vorlagen-Satz auswählen muss, 
-			kommen die <emphasis role="bold">Vorlagen-Typen</emphasis> zum
+			respektive Ansicht aus einem Vorlagengruppe auswählen muss, 
+			kommen die <emphasis role="bold">Vorlagentypen</emphasis> zum
 			Einsatz. Sie definieren, für welchen Zweck respektive Ansicht eine
 			Vorlage geeignet ist. So wird die Vorlage zur Darstellung eines
 			Formulars auch wirklich zur Darstellung eines Formulars und nicht
-			einer Inhaltsseite verwendet. Und da pro Vorlagen-Satz nur jeweils
+			einer Inhaltsseite verwendet. Und da pro Vorlagengruppe nur jeweils
 			eine Vorlage mit einem bestimmten Typ erlaubt ist, kommt es auch
 			zu keinem Durcheinander, dass Welcompose auf einmal nicht
 			entscheiden kann, welche der verschiedenen Vorlagen mit dem
@@ -167,9 +167,9 @@
 			Der Ablauf, wenn Welcompose zur Aufbereitung einer Seite eine
 			Vorlage auswählt, ist nun immer gleich. Da bekannt ist,
 			welche Seite aufgerufen werden soll, weiss Welcompose, welcher
-			Vorlagen-Satz mit der Seite verbunden ist und welcher Vorlagen-Typ
+			Vorlagengruppe mit der Seite verbunden ist und welcher Vorlagen-Typ
 			zur Darstellung dieser Seite benötigt wird. Also schaut Welcompose
-			im entsprechenden Vorlagen-Satz nach, ob eine Vorlage des
+			in der entsprechenden Vorlagengruppe nach, ob eine Vorlage des
 			gewünschten Typs vorhanden ist. Wenn ja, wird diese zur
 			Aufbereitung der Seite verwendet. Wenn nicht, wird ein Fehler
 			angezeigt. 
@@ -180,12 +180,12 @@
 			Vorlagen schnell und einfach zu wechseln oder für verschiedene
 			Seiten verschiedene Designs zu haben, zeigen die
 			Anwendungsbeispiele, die in den Kapiteln zu Vorlagen,
-			Vorlagen-Sätzen und Vorlagen-Typen enthalten sind.
+			Vorlagengruppenn und Vorlagentypen enthalten sind.
 		</para>
 	</sect1>
 	
 	<sect1 id="templating.templates">
-		<title>Vorlagen</title>
+		<title>Seitenvorlagen</title>
 		
 		<sect2 id="templating.templates.introduction">
 			<title>Einführung</title>
@@ -218,12 +218,12 @@
 			
 			<para>
 				Die Verwaltung der Vorlagen erfolgt im Bereich
-				<guimenu>Templating</guimenu> beim Unterpunkt
-				<guisubmenu>Templates</guisubmenu>. Die Übersicht listet die
+				<guimenu>Vorlagen</guimenu> im Unterpunkt
+				<guisubmenu>Seitenvorlagen</guisubmenu>. Die Übersicht listet die
 				vorhandenen Vorlagen zusammen mit dem Namen, dem jeweiligen
 				Typ und einer allenfalls vorhandenen Beschreibung. Eine
 				Filterung der angezeigten Vorlagen ist anhand des
-				Vorlagen-Typs und -Sets möglich. Dazu werden eine Reihe von
+				Vorlagentypen- und Gruppen möglich. Dazu werden eine Reihe von
 				Funktionen zur Bearbeitung von Vorlagen geboten:
 			</para>
 			
@@ -234,7 +234,7 @@
 			
 			<variablelist>
 				<varlistentry>
-					<term>Upload</term>
+					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
 							Ermöglicht das Hochladen einer Vorlage, wobei mit 
@@ -244,7 +244,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Download</term>
+					<term><guimenuitem>Download</guimenuitem></term>
 					<listitem>
 						<para>
 							Erlaubt den Download der Vorlage als Datei. 
@@ -252,7 +252,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Duplicate</term>
+					<term><guimenuitem>Duplizieren</guimenuitem></term>
 					<listitem>
 						<para>
 							Mit dieser Funktion ist es möglich, die jeweilige
@@ -264,7 +264,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Edit</term>
+					<term><guimenuitem>Bearbeiten</guimenuitem></term>
 					<listitem>
 						<para>
 							Über die Schaltfläche <guibutton>Edit</guibutton>
@@ -274,7 +274,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Delete</term>
+					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
 							Löscht die Vorlage.
@@ -284,7 +284,7 @@
 			</variablelist>
 			
 			<para>
-				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
 				kommt man zum Formular zum Hinzufügen einer neuen Vorlage.
 			</para>
 			
@@ -295,20 +295,20 @@
 			
 			<variablelist>
 				<varlistentry>
-					<term>Type</term>
+					<term><guimenuitem>Typ</guimenuitem></term>
 					<listitem>
 						<para>
 							Der Vorlagen-Typ, den die neue Vorlage erhalten
 							soll. Bestimmt, für welche Arten von Seiten
 							die Vorlage eingesetzt werden soll. Achten Sie
-							dabei darauf, dass innerhalb eines Vorlagen-Satzes
+							dabei darauf, dass innerhalb einer Vorlagengruppe
 							für jeden Vorlagen-Typ nur eine Vorlage existieren
 							kann.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Name</term>
+					<term><guimenuitem>Name</guimenuitem></term>
 					<listitem>
 						<para>
 							Der Name der Vorlage. Kann frei gewählt werden.
@@ -316,7 +316,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guimenuitem>Beschreibung</guimenuitem></term>
 					<listitem>
 						<para>
 							Beschreibung der Vorlage. Kann frei gewählt
@@ -326,7 +326,7 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Content</term>
+					<term><guimenuitem>Inhalt</guimenuitem></term>
 					<listitem>
 						<para>
 							Der eigentliche Inhalt der Vorlage. Hier kann
@@ -339,18 +339,29 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Sets</term>
+					<term><guimenuitem>Vorlagengruppen</guimenuitem></term>
 					<listitem>
 						<para>
-							Vorlagen-Sätze, denen die Vorlage zugeordnet werden
-							soll. Es kann entweder kein, ein oder mehrere
-							Vorlagen-Sätze ausgewählt werden. Die Vorlage ist
-							aber nur aktiv, wenn sie mindestens einem
-							Vorlagen-Satz zugewiesen wird. 
+							Vorlagengruppen, denen die Vorlage zugeordnet werden
+							soll. Es kann entweder keine, eine oder mehrere
+							Vorlagengruppen ausgewählt werden. Die Vorlage ist
+							aber nur aktiv, wenn sie mindestens einer
+							Vorlagengruppe zugewiesen wird. 
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			
+			<note>
+				<para>
+					Über der Textarea stehen Links zur Verfügung, die über ein Pop-up unterschiedliche
+					Dateien des Systems referenzieren die Ihnen die Gestaltung der Seitenvorlagen
+					erleichtern. Details über Funktion und Anwendung der einzelnen Links finden sie
+					in den jeweiligen inhaltlichen Kapiteln.
+				</para>
+			</note>
+			
+			
 		</sect2>
 
 		<sect2 id="templating.templates.usage">
@@ -360,7 +371,7 @@
 				<title>Einführung</title>
 
 				<para>
-					Bei der meisten Software steht für jede Vorlage eine bestimmte
+					Bei den meisten Software steht für jede Vorlage eine bestimmte
 					Menge von Daten respektive Platzhaltern zur Verfügung, die man 
 					verwenden kann oder nicht. Braucht man mehr Daten, als
 					Software-seitig vorgesehen sind, geht dies meist nicht oder ist
@@ -393,7 +404,7 @@
 					Der Nachteil dieser Methode ist, dass das Nachladen der 
 					Daten ein wenig komplizierter als das simple Einsetzen der
 					Platzhalter ist. Mit den Erklärungen in den nächsten
-					Abschnitten sollte es aber machbar sein.
+					Abschnitten sollte dies aber keine unnötig hohe Hürde bedeuten.
 				</para>
 
 			</sect3>
@@ -410,10 +421,10 @@
 				</para>
 
 				<para>
-					Um herauszufinden, wie die Platzhalter für den Zugriff auf
+					Um herauszufinden, wie die Variablen für den Zugriff auf
 					die Metadaten heissen, könnte man entweder den PHP-Code lesen,
 					der die Daten zusammenstellt, oder im Handbuch hier nach
-					einer Liste der Platzhalter suchen &ndash; tun Sie's nicht,
+					einer Liste der Variablen suchen &ndash; tun Sie's nicht,
 					selbst wenn mittlerweile so eine existiert. Denn die Daten
 					dort werden entweder nicht aktuell oder aus anderen Gründen
 					unvollständig sein.
@@ -423,8 +434,8 @@
 					Die aktuellen Informationen für die jeweilige Seite bringt
 					nämlich Welcompose direkt selber mit, respektive die
 					Bibliothek zur Verarbeitung der Vorlagen. Diese verfügt
-					nämlich über eine Debug-Konsole, welche die vorhandenen
-					Platzhalter und die ihnen aktuell zugewiesenen Daten
+					nämlich über eine <emphasis role="bold">Debug-Konsole</emphasis>, welche die vorhandenen
+					Variablen und die ihnen aktuell zugewiesenen Daten
 					auflistet.
 				</para>
 
@@ -432,14 +443,23 @@
 					Auf diese Weise kann man dort die benötigten Daten finden
 					und direkt die richtigen Platzhalter in die Vorlage einsetzen.
 				</para>
+				
+			<tip>
+				<para>
+					Die Smarty Debug Konsole  ist DAS zentrale Mittel, um die tatsächlich
+					der Vorlage zur Verfügung stehenden Variablen und die ihnen
+					aktuell zugewiesenen Werte anzeigen zu lassen.
+				</para>
+			</tip>
 
 				<para>
 					Die Funktionsweise der Debug-Konsole soll an einem einfachen
-					Beispiel illustriert werden. Dazu muss ein Template Set
-					angelegt werden, beispielsweise <userinput>test</userinput>
-					(siehe @@@) und mit einer Seite des Typs
+					Beispiel illustriert werden. Dazu muss eine Vorlagengruppe
+					(siehe <xref linkend="templating.template_sets"/>)angelegt werden,
+					beispielsweise <userinput>test</userinput>
+					und mit einer Seite des Typs
 					<userinput>WCOM_SIMPLE_PAGE</userinput> (siehe
-					<xref linkend="contents.pages.manage"/>) verbunden werden,
+					<xref linkend="contents.pages"/>) verbunden werden,
 					die mit ein wenig Inhalt befüllt sein sollte.
 				</para>
 
@@ -449,19 +469,19 @@
 					beliebigen Namen erstellen, beispielsweise <userinput>Vorlage
 					für Inhaltsseiten</userinput>. In den Inhaltsbereich der
 					Vorlage kann man einen Dummy-Text wie 
-					<userinput>Hello world</userinput> eingeben. Als Template Set
-					muss das soeben erstellte Template Set ausgewählt werden,
+					<userinput>Hallo Welt</userinput> eingeben. Als Vorlagegruppe
+					muss die soeben erstellte Gruppe ausgewählt werden,
 					dem Beispiel gemäss also <guimenuitem>test</guimenuitem>.
 				</para>
 
 				<figure id="templating.templates.usage.display_assigned_data.hello_world_template">
-					<title>"Hello-World"-Vorlage</title>
+					<title>"Hallo-Welt"-Vorlage</title>
 					<graphic fileref="images/templating/templates/usage.display_assigned_data.hello_world_template.png"/>
 				</figure>
 
 				<para>
 					Hat man dies erledigt, kann man die Seite aufrufen und sollte
-					<computeroutput>Hello world</computeroutput> zu Gesicht
+					<computeroutput>Hallo Welt</computeroutput> zu Gesicht
 					bekommen.
 				</para>
 
@@ -483,12 +503,12 @@
 				</para>
 
 				<figure id="templating.templates.usage.display_assigned_data.debug_pop_up">
-					<title>Debug-Konsole</title>
+					<title>Smarty Debug Konsole</title>
 					<graphic fileref="images/templating/templates/usage.display_assigned_data.debug_pop_up.png"/>
 				</figure>
 
 				<para>
-					Im Abschnitt <computeroutput>Assignes Template
+					Im Abschnitt <computeroutput>Assigned Template
 					Variables</computeroutput> listet die Smarty Debug Console
 					die bis zum Aufruf von <code>{debug}</code> der Vorlage
 					zugewiesenen Variablen (links, <varname>{$page}</varname> usw.)
@@ -499,11 +519,11 @@
 					Die Variablennamen sind dabei direkt in der Form notiert, wie
 					sie als Platzhalter in die Vorlagen eingesetzt werden müssen.
 					Würde man beispielsweise in die aktuelle Vorlage, wo jetzt
-					<code>{debug}</code> drin steht,
+					<code>{debug}</code> steht,
 					<varname>{$SCRIPT_NAME}</varname> oder
-					<varname>{$ACTION}</varname> schreiben und die Seite dann
+					<varname>{$action}</varname> schreiben und die Seite dann
 					neu laden, würden <varname>{$SCRIPT_NAME}</varname> und 
-					<varname>{$ACTION}</varname> durch ihre aktuellen Werte
+					<varname>{$action}</varname> durch ihre aktuellen Werte
 					<computeroutput>/welcompose/trunk/welcompose</computeroutput>
 					und <computeroutput>Index</computeroutput> ersetzt werden.
 				</para>
@@ -514,7 +534,7 @@
 					<computeroutput>Array</computeroutput>. Dies ist korrekt, da
 					es sich bei den beiden Variablen nicht um simple Zeichenketten
 					wie <varname>{$SCRIPT_NAME}</varname> oder
-					<varname>{$ACTION}</varname> handelt, sondern um Arrays,
+					<varname>{$action}</varname> handelt, sondern um Arrays,
 					also Variablen, in denen mehrere weitere Variablen gespeichert
 					werden. 
 				</para>
@@ -575,13 +595,15 @@ Element: rgt
 Wert: 3
 ...
 ]]></programlisting>
-
+				
+			<tip>
 				<para>
 					Auf diese Weise lässt sich leicht herausfinden, auf welche
 					Daten in eine Vorlage zugegriffen werden kann oder welche
 					Informationen nachgeladene Daten mitbringen, ohne dass man
 					die Dokumentation wälzen muss.
 				</para>
+			</tip>
 			</sect3>
 
 			<sect3 id="templating.templates.usage.load_more_data">
@@ -604,8 +626,8 @@ Wert: 3
 						einer Whitelist für den Zugriff aus den Vorlagen gesperrt.
 					</para>
 					</footnote>. So bietet Welcompose innerhalb der Vorlagen
-					sozusagen dieselbe Funktionalität und Flexibilität, wie wenn
-					man bei anderen Systemen den Original-Quellcode modifiziert.
+					sozusagen dieselbe Funktionalität und Flexibilität, wie die
+					Modifikation des Original-Quellcode bei anderen Systemen.
 				</para>
 
 				<para>
@@ -825,7 +847,7 @@ Wert: 3
 				</para>
 
 				<programlisting><![CDATA[
-{select_simple ns="Beispiel" class="TestKlasse" method="selectOhneFunktion"
+{select_simple ns="Beispiel" class="TestKlasse" method="selectTestKlasse"
 	page="2" id="15"}
 ]]></programlisting>
 				
@@ -897,14 +919,14 @@ Wert: 3
 	</sect1>
 	
 	<sect1 id="templating.template_sets">
-		<title>Vorlagen-Sätze</title>
+		<title>Vorlagengruppen</title>
 		
 		<sect2 id="templating.template_sets.introduction">
 			<title>Einführung</title>
 			
 			<para>
-				Vorlagen-Sätze dienen zur Organisation von Vorlagen und sorgen
-				zusammen mit den Vorlagen-Typen (siehe <xref
+				Vorlagengruppen dienen zur Organisation von Vorlagen und sorgen
+				zusammen mit den Vorlagentypen (siehe <xref
 				linkend="templating.template_types"/>) dafür, dass für
 				eine Seite die jeweils richtige Vorlage verwendet wird. Wie
 				dies genau funktioniert, erklärt <xref
@@ -912,16 +934,16 @@ Wert: 3
 			</para>
 			
 			<para>
-				Ein Vorlagen-Satz besteht aus einem oder mehreren Vorlagen.
+				Eine Vorlagengruppe besteht aus einem oder mehreren Vorlagen.
 				Diese Vorlagen werden zur Darstellung von allen Seiten
-				verwendet, denen der jeweilige Vorlagen-Satz zugeordnet
-				ist. Durch die Zuordnung unterschiedlicher Vorlagen-Sätze pro
+				verwendet, die der jeweiligen Vorlagengruppe zugeordnet
+				sind. Durch die Zuordnung unterschiedlicher Vorlagengruppen pro
 				Seite ist es möglich, Seiten ein komplett unterschiedliches
 				Aussehen zu geben. 
 			</para>
 			
 			<para>
-				Pro Vorlagen-Typ darf innerhalb eines Vorlagen-Satzes nur
+				Pro Vorlagen-Typ darf innerhalb einer Vorlagengruppe nur
 				eine Vorlage existieren. Es ist aber nicht nötig, für jeden
 				Vorlagen-Typ eine Vorlage anzulegen. Es ist absolut
 				ausreichend, nur diejenigen Vorlagen anzulegen, die man auch
@@ -934,47 +956,47 @@ Wert: 3
 			<title>Verwaltung</title>
 			
 			<para>
-				Die Verwaltung der Vorlagen-Sätze erfolgt im Bereich
-				<guimenu>Templating</guimenu> beim Unterpunkt
-				<guisubmenu>Template Sets</guisubmenu>. Die Übersicht listet
-				die vorhandenen Vorlagen-Sätze zusammen mit dem Namen und einer
+				Die Verwaltung der Vorlagengruppen erfolgt im Bereich
+				<guimenu>Vorlagen</guimenu> im Unterpunkt
+				<guisubmenu>Vorlagengruppen</guisubmenu>. Die Übersicht listet
+				die vorhandenen Vorlagengruppen zusammen mit dem Namen und einer
 				allenfalls vorhandenen Beschreibung. Dazu werden ein Link
-				zum Erstellen, Bearbeiten und Löschen eines vorhandenen
-				Vorlagen-Satzes geboten. 
+				zum Erstellen, Bearbeiten und Löschen einer vorhandenen
+				Vorlagengruppe geboten. 
 			</para>
 			
 			<figure id="templating.template_sets.manage_sets.overview">
-				<title>Übersicht über vorhandene Vorlagen-Sets</title>
+				<title>Übersicht über vorhandene Vorlagengruppen</title>
 				<graphic fileref="images/templating/template_sets/manage_sets.overview.png"/>
 			</figure>
 			
 			<para>
-				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
-				kommt man zum Formular zum Hinzufügen eines neuen
-				Vorlagen-Satzes.
+				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
+				kommt man zum Formular zum Hinzufügen einer neuen
+				Vorlagengruppe.
 			</para>
 			
 			<figure id="templating.template_sets.manage_sets.add_new">
-				<title>Neuen Vorlagen-Satz hinzufügen</title>
+				<title>Neue Vorlagengruppe anlegen</title>
 				<graphic fileref="images/templating/template_sets/manage_sets.add_new.png"/>
 			</figure>
 			
 			<variablelist>
 				<varlistentry>
-					<term>Name</term>
+					<term><guimenuitem>Name</guimenuitem></term>
 					<listitem>
 						<para>
-							Name des Vorlagen-Satzes, der zur Auswahl des
-							Vorlagen-Satzes und zu dessen Zuordnung zu einer
+							Name der Vorlagengruppe, die zur Auswahl des
+							Vorlagengruppe und zu dessen Zuordnung zu einer
 							Seite dient. Kann frei gewählt werden.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guimenuitem>Beschreibung</guimenuitem></term>
 					<listitem>
 						<para>
-							Optionaler Beschreibungstext zum Vorlagen-Satz. 
+							Optionaler Beschreibungstext zur Vorlagengruppe. 
 						</para>
 					</listitem>
 				</varlistentry>
@@ -990,9 +1012,9 @@ Wert: 3
 				<para>
 					Normalerweise legt man Vorlagen so an, dass sie für
 					möglichst viele verschiedene Seiten eingesetzt werden
-					können. Hat man beispielsweise 3 Seiten des Typs Simple
-					Page, legt man in der Regel eine Vorlage des Typs 
-					simple_page_index an und ordnet sie einem Vorlagen-Satz
+					können. Hat man beispielsweise 3 Seiten des Typs <emphasis>Simple
+					Page</emphasis>, legt man in der Regel eine Vorlage des Typs 
+					<emphasis>simple_page_index</emphasis> an und ordnet sie einem Vorlagengruppe
 					zu, der von allen drei Simple Pages verwendet wird.
 				</para>
 				
@@ -1001,7 +1023,7 @@ Wert: 3
 					Pages ein anderes Aussehen zu geben als den anderen. Um
 					dies zu erreichen, legt man eine weitere Vorlage des Typs
 					simple_page_index an, ordnet sie einem zweiten speziell
-					für diesen Zweck angelegtem Vorlagen-Satz zu und verbindet
+					für diesen Zweck angelegtem Vorlagengruppe zu und verbindet
 					diesen dann mit den Seiten, die ein anderes Aussehen
 					erhalten sollen.
 				</para>
@@ -1014,11 +1036,11 @@ Wert: 3
 				</para>
 				
 				<para>
-					Man legt einen zweiten Vorlagen-Satz an und erstellt
+					Man legt einen zweiten Vorlagengruppe an und erstellt
 					für das Monatsarchiv eine neue Vorlage des gewünschten
-					Aussehens, worauf man den Vorlagen-Satz mit der Seite
+					Aussehens, worauf man den Vorlagengruppe mit der Seite
 					verbindet, die das andere Aussehen erhalten soll. Da sich
-					im neu erstellten Vorlagen-Satz bislang aber nur die
+					im neu erstellten Vorlagengruppe bislang aber nur die
 					Vorlage für das Monatsarchiv befindet, können die anderen
 					Seiten, die zu einem Blog gehören, nicht angezeigt
 					werden, weil Welcompose die Vorlage dazu nicht findet.
@@ -1029,7 +1051,7 @@ Wert: 3
 					nötig, die anderen Vorlagen für die Startseite des Blogs
 					und die anderen Ansichten zu duplizieren. Statt dessen
 					kann man die bestehenden Vorlagen öffnen und sie einfach
-					<emphasis>beiden</emphasis> Vorlagen-Sätzen zuordnen.
+					<emphasis>beiden</emphasis> Vorlagengruppenn zuordnen.
 					Auf diese Weise können alle Vorlagen, abgesehen vom
 					unterschiedlich aussehenden Monatsarchiv, für alle
 					Blog-Seiten gleichzeitig verwendet werden. 
@@ -1050,7 +1072,7 @@ Wert: 3
 					Zuerst empfiehlt es sich, lokal mit den aktuellen Daten
 					der Online-Installation die Vorlagen vorzubereiten. Sobald
 					diese bereit sind, kann man je nach Bedarf einen oder
-					mehrere Vorlagen-Sätze anlegen und mit den lokal
+					mehrere Vorlagengruppen anlegen und mit den lokal
 					vorbereiteten Vorlagen ausstatten. Haben Sie alle Bilder,
 					Style Sheets und andere benötigten Elemente hochgeladen,
 					können Sie bei Bedarf eine neue Navigation anlegen
@@ -1064,7 +1086,7 @@ Wert: 3
 				<para>
 					Um die neuen Vorlagen zu aktivieren, braucht man zum
 					gewünschten Zeitpunkt bei allen Seiten nur noch den
-					zugeordneten Vorlagen-Satz austauschen.
+					zugeordneten Vorlagengruppe austauschen.
 				</para>
 				
 				<para>
@@ -1074,24 +1096,24 @@ Wert: 3
 					Besucher auf ein Minimum reduzieren. Und sollte man zu
 					einem späteren Zeitpunkt wieder die alten Vorlagen
 					verwenden wollen, kann man einfach die den einzelnen
-					Seiten zugeordneten Vorlagen-Sätze austauschen.
+					Seiten zugeordneten Vorlagengruppen austauschen.
 				</para>
 			</sect3>
 		</sect2>
 	</sect1>
 	
 	<sect1 id="templating.template_types">
-		<title>Vorlagen-Typen</title>
+		<title>Vorlagentypen</title>
 		
 		<sect2 id="templating.template_types.introduction">
 			<title>Einführung</title>
 			
 			<para>
-				Die Vorlagen-Typen regeln innerhalb von Welcompose, für welche
+				Die Vorlagentypen regeln innerhalb von Welcompose, für welche
 				Art von Seite (beispielsweise Blog-Archiv oder Formular) eine
 				Vorlage dient. Ein Vorlagen-Typ ist somit so etwas wie der 
 				"Dateiname" der Vorlage und dient im Kombination mit den
-				Vorlagen-Sätzen (siehe <xref
+				Vorlagengruppen (siehe <xref
 				linkend="templating.template_sets"/>) dazu, Vorlagen zu
 				organisieren.
 			</para>
@@ -1102,22 +1124,29 @@ Wert: 3
 			<title>Verwaltung</title>
 			
 			<para>
-				Die Verwaltung der Vorlagen-Typen erfolgt im Bereich
-				<guimenu>Templating</guimenu> beim Unterpunkt
-				<guisubmenu>Template Types</guisubmenu>. Die Übersicht listet
-				die vorhandenen Vorlagen-Typen zusammen mit dem Namen und einer
+				Die Verwaltung der Vorlagentypen erfolgt im Bereich
+				<guimenu>Vorlagen</guimenu> beim Unterpunkt
+				<guisubmenu>Vorlagentypen</guisubmenu>. Die Übersicht listet
+				die vorhandenen Vorlagentypen zusammen mit dem Namen und einer
 				allenfalls vorhandenen Beschreibung. Dazu werden ein Link
 				zum Erstellen, Bearbeiten und Löschen eines vorhandenen
 				Vorlagen-Typs geboten. 
 			</para>
 			
+			<note>
+				<para>
+				Die von Welcompose mitgelieferten Vorlagentypen ( (siehe <xref
+				linkend="templating.template_types.usage"/>) sind nicht editierbar.
+				</para>
+			</note>
+			
 			<figure id="templating.template_types.manage_types.overview">
-				<title>Übersicht über vorhandene Vorlagen-Typen</title>
+				<title>Übersicht über vorhandenen Vorlagentypen</title>
 				<graphic fileref="images/templating/template_types/manage_types.overview.png"/>
 			</figure>
 			
 			<para>
-				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
 				kommt man zum Formular zum Hinzufügen eines neuen
 				Vorlagen-Typs.
 			</para>
@@ -1129,14 +1158,14 @@ Wert: 3
 			
 			<variablelist>
 				<varlistentry>
-					<term>Name</term>
+					<term><guimenuitem>Name</guimenuitem></term>
 					<listitem>
 						<para>
 							Name des Vorlagen-Typs, der zur Auswahl des
 							Vorlagen-Typs und zu dessen Zuordnung zu einer
 							Vorlage dient. Darf aus grossen und kleinen
 							Buchstaben, Ziffern und Unterstrichen bestehen.
-							Eigene Vorlagen-Typen werden vorteilhafterweise
+							Eigene Vorlagentypen werden vorteilhafterweise
 							mit einem Prefix wie <userinput>custom_</userinput>
 							versehen, damit keine Probleme entstehen, sollte
 							ein Welcompose-Update einen Vorlagen-Typ mit
@@ -1145,7 +1174,7 @@ Wert: 3
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guimenuitem>Beschreibung</guimenuitem></term>
 					<listitem>
 						<para>
 							Optionaler Beschreibungstext zum Vorlagen-Typ. 
@@ -1163,11 +1192,11 @@ Wert: 3
 				
 				<para>
 					Welcompose verfügt über etliche von vordefinierten
-					Vorlagen-Typen, doch welcher Vorlagen-Typ wird für welche
+					Vorlagentypen, doch welcher Vorlagen-Typ wird für welche
 					Ansicht benötigt?
 				</para>
 				
-				<table frame="all" id="templating.template_types.usage.which_template_type_for_which_view.list_of_template_types">
+				<table frame="none" id="templating.template_types.usage.which_template_type_for_which_view.list_of_template_types">
 					<title>Liste der Vorlagen Typen</title>
 					<tgroup cols="4">
 						<thead>
@@ -1435,7 +1464,7 @@ Wert: 3
 				
 				<para>
 					Die Spalte "Vorlagen-Typ", listet die jeweiligen
-					Vorlagen-Typen, wie sie standardmässig von Welcompose
+					Vorlagentypen, wie sie standardmässig von Welcompose
 					mitgebracht werden. Eine kurze Erklärung des Einsatzzwecks
 					bietet die Spalte mit der Beschreibung. In der Spalte
 					"Seitentyp" steht, zu welchem Seitentyp der Vorlagen-Typ
@@ -1463,7 +1492,7 @@ index.php?project_name=demo&action=ArchiveMonth&posting_year_added=2007&posting_
 				</para>
 				
 				<para>
-					Bei der URL-Action Index, die mehreren Vorlagen-Typen
+					Bei der URL-Action Index, die mehreren Vorlagentypen
 					zugeordnet ist, kann man nicht nur nach der URL-Action
 					gehen, sondern muss gleichzeitig noch den jeweiligen
 					Seitentyp einbeziehen, um den richtigen Vorlagen-Typ
@@ -1499,9 +1528,9 @@ index.php?project_name=demo&action=ArchiveMonth&posting_year_added=2007&posting_
 				
 				<para>
 					Mit Hilfe der Seiten-ID weiss Welcompose, in welchem
-					Vorlagen-Satz nach der Vorlage gesucht werden muss. Und
+					Vorlagengruppe nach der Vorlage gesucht werden muss. Und
 					der Vorlagen-Typ sagt Welcompose schlussendlich, welche
-					Vorlage aus dem Vorlagen-Satz genommen werden muss.
+					Vorlage aus dem Vorlagengruppe genommen werden muss.
 				</para>
 				
 				<para>
@@ -1536,11 +1565,14 @@ wcom:simple_page_index.7
 					Seiten-ID <code><![CDATA[7]]></code> zusammensetzt.
 				</para>
 				
-				<para>
-					Das Format ist immer identisch und ist für alle Vorlagen
-					gültig &ndash; nicht aber für Globale Vorlagen oder
-					Vorlagen, die direkt von der Festplatte gelesen werden.
-				</para>
+				<note>
+					<para>
+						Das Format ist immer identisch und ist für alle Vorlagen
+						gültig &ndash; nicht aber für Vorlagen, die direkt von der
+						Festplatte gelesen werden (wie beispielsweise Globale Dateien
+						und/oder Globale Vorlagen).
+					</para>
+				</note>
 				
 				<para>
 					Am häufigsten werden Vorlagen wohl innerhalb von anderen
@@ -1554,7 +1586,7 @@ wcom:simple_page_index.7
 				
 				<para>
 					Auf diese Weise wird die Vorlage des Typs
-					custom_navigation aus dem Vorlagen-Satz ausgelesen, der
+					custom_navigation aus dem Vorlagengruppe ausgelesen, der
 					mit der Seite mit der ID 7 verbunden ist. Allerdings
 					wird kaum einmal direkt mit den Seiten-IDs gearbeitet,
 					da die Vorlagen ja für möglichst viele Seiten einsetzbar
@@ -1572,6 +1604,11 @@ wcom:simple_page_index.7
 {include file="wcom:custom_navigation.`$page.id`"}
 ]]></programlisting>
 				
+				<para>
+					(siehe auch <xref
+				linkend="templating.template_types.usage.include_templates"/>)
+				</para>
+				
 				<note>
 					<para>
 						Achten Sie darauf, die Backticks (<code>`</code>)
@@ -1581,7 +1618,7 @@ wcom:simple_page_index.7
 					</para>
 				</note>
 				
-				<para>
+				<!-- <para>
 					Im PHP-Quellcode muss jeweils nachgeschaut werden, 
 					ob nicht bereits irgendwo eine Variable mit der aktuellen
 					Seiten-ID herumschwirrt. Sollte Sie vorhanden sein,
@@ -1592,7 +1629,7 @@ wcom:simple_page_index.7
 				<programlisting><![CDATA[
 $template_name = sprintf('wcom:blog_archive_year.%u', $page.id);
 $smarty->fetch($template_name);
-]]></programlisting>
+]]></programlisting> -->
 				
 			</sect3>
 			
@@ -1641,8 +1678,8 @@ $smarty->fetch($template_name);
 							Fall also die Navigation, in eine neue Vorlage
 							ein, der Sie den Vorlagen-Typ
 							<userinput>custom_navigation</userinput> zuweisen.
-							Weisen Sie die neue Vorlage zudem den
-							Vorlagen-Sätzen zu, in denen sie zum Einsatz
+							Weisen Sie die neue Vorlage zudem der
+							Vorlagengruppe zu, in denen sie zum Einsatz
 							kommen soll. 
 						</para>
 					</listitem>
@@ -1706,8 +1743,8 @@ $smarty->fetch($template_name);
 			
 			<para>
 				Die Verwaltung der Globalen Vorlagen erfolgt im Bereich
-				<guimenu>Templating</guimenu> beim Unterpunkt
-				<guisubmenu>Global Templates</guisubmenu>. Die Übersicht listet
+				<guimenu>Vorlagen</guimenu> im Unterpunkt
+				<guisubmenu>Globale Vorlagen</guisubmenu>. Die Übersicht listet
 				die vorhandenen Vorlagen zusammen mit einer allenfalls
 				vorhandenen Beschreibung. Dazu werden eine Reihe von
 				Funktionen zur Bearbeitung von Globalen Vorlagen geboten:
@@ -1720,7 +1757,7 @@ $smarty->fetch($template_name);
 			
 			<variablelist>
 				<varlistentry>
-					<term>Upload</term>
+					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
 							Ermöglicht das Hochladen einer Globalen Vorlage, 
@@ -1731,7 +1768,7 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Download</term>
+					<term><guimenuitem>Download</guimenuitem></term>
 					<listitem>
 						<para>
 							Erlaubt den Download der Globalen Vorlage als
@@ -1740,17 +1777,17 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Edit</term>
+					<term><guimenuitem>Bearbeiten</guimenuitem></term>
 					<listitem>
 						<para>
-							Über die Schaltfläche <guibutton>Edit</guibutton>
+							Über die Schaltfläche <guibutton>Bearbeiten</guibutton>
 							gelangt man zu einem Formular zum Bearbeiten der
 							jeweiligen Globalen Vorlage.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Delete</term>
+					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
 							Löscht die Globale Vorlage.
@@ -1760,19 +1797,19 @@ $smarty->fetch($template_name);
 			</variablelist>
 			
 			<para>
-				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
 				kommt man zum Formular zum Hinzufügen einer neuen Globalen 
 				Vorlage.
 			</para>
 			
 			<figure id="templating.global_templates.manage_global_templates.add_new">
-				<title>Globale Vorlage hinzufügen</title>
+				<title>Globale Vorlage neu anlegen</title>
 				<graphic fileref="images/templating/global_templates/manage_global_templates.add_new.png"/>
 			</figure>
 			
 			<variablelist>
 				<varlistentry>
-					<term>Name</term>
+					<term><guimenuitem>Name</guimenuitem></term>
 					<listitem>
 						<para>
 							Name der Globalen Vorlage, genauer gesagt ein
@@ -1782,7 +1819,7 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guimenuitem>Beschreibung</guimenuitem></term>
 					<listitem>
 						<para>
 							(Optionaler) Beschreibungstext der Globalen 
@@ -1791,7 +1828,7 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Content</term>
+					<term><guimenuitem>Inhalt</guimenuitem></term>
 					<listitem>
 						<para>
 							Inhalt der Globalen Vorlage, also der Code in der
@@ -1800,7 +1837,7 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>MIME Type</term>
+					<term><guimenuitem>MIME Typ</guimenuitem></term>
 					<listitem>
 						<para>
 							Der MIME Type, den der Server senden soll, um die
@@ -1814,7 +1851,7 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Change Delimiter</term>
+					<term><guimenuitem>Delimiter ändern</guimenuitem></term>
 					<listitem>
 						<para>
 							Legt fest, ob Smarty für die Verarbeitung der
@@ -1838,8 +1875,8 @@ $smarty->fetch($template_name);
 				</varlistentry>
 			</variablelist>
 			
-			<table frame="all" id="templating.global_templates.manage_global_templates.mime_types">
-				<title>Liste der MIME Types</title>
+			<table frame="none" id="templating.global_templates.manage_global_templates.mime_types">
+				<title>Liste der MIME-Typen</title>
 				<tgroup cols="3">
 					<thead>
 						<row>
@@ -1923,26 +1960,39 @@ $smarty->fetch($template_name);
 			<title>Anwendung</title>
 			
 			<sect3 id="templating.global_templates.usage.manage_css_files">
-				<title>CSS-Dateien verwalten</title>
+				<title>Beispiel: CSS-Dateien verwalten</title>
 				
 				<para>
 					Die Verwendung der Globalen Vorlagen soll anhand
-					einer CSS-Datei illustriert werden, da dies auch das
-					Beispiel ist, das im am Meisten zu tun gibt.
+					einer CSS-Datei illustriert werden, da dies auch ein gutes
+					Beispiel ist, wo und wie eine Änderung des Delimiters notwendig ist.
 				</para>
 				
 				<para>
 					Um die CSS-Datei als Globale Vorlage anzulegen, muss man
-					zuerst zum Bereich <guimenu>Templating</guimenu> und dort
-					zum Unterpunkt <guisubmenu>Global Templates</guisubmenu>
+					zuerst zum Bereich <guimenu>Vorlagen</guimenu> und dort
+					zum Unterpunkt <guisubmenu>Globale Vorlagen</guisubmenu>
 					wechseln. Sobald man dort auf den Link
-					<guibutton>Add new</guibutton> geklickt hat, kommt man zum
+					<guibutton>Neu anlegen</guibutton> geklickt hat, kommt man zum
 					Formular zum Anlegen einer Globalen Vorlage.
 				</para>
+
+				<note>
+					<para>
+						Für das Beispiel wird vorausgesetzt, das sie eine GIF Datei mit Namen
+						<emphasis>container-bg.gif</emphasis> als Globale Datei (siehe <xref linkend="templating.global_files"/>)
+						hochgeladen haben.
+					</para>
+				</note>
 				
+				<para>
+					Machen Sie nun die folgenden Eingaben, um das Beispiel nachzuvollziehen
+					(nicht aufgeführte Felder können Sie ignorieren):
+				</para>
+								
 				<variablelist>
 					<varlistentry>
-						<term>Name</term>
+						<term><guimenuitem>Name</guimenuitem></term>
 						<listitem>
 							<para>
 								Geben Sie als Namen der Globalen Vorlage
@@ -1955,18 +2005,11 @@ $smarty->fetch($template_name);
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Description</term>
+						<term><guimenuitem>Inhalt</guimenuitem></term>
 						<listitem>
 							<para>
-								Können Sie leer lassen.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Content</term>
-						<listitem>
-							<para>
-								Fügen Sie hier ein Style Sheet ein. Für das
+								Fügen Sie hier eine CSS Deklaration für unsere
+								beispiel.css ein. Für das
 								Beispiel reicht ein kurzer Code-Ausschnitt:
 							</para>
 							
@@ -1975,23 +2018,22 @@ $smarty->fetch($template_name);
 	position: relative;
 	margin: 0 auto;
 	width: 993px;
-	background: transparent url(container-bg.gif) top right repeat-y;
+	background: #fff url(container-bg.gif) top right no-repeat;
 	text-align: left;
 }
 ]]></programlisting>
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>MIME Type</term>
+						<term><guimenuitem>MIME-Typ</guimenuitem></term>
 						<listitem>
 							<para>
-								Wählen Sie hier 
-								<guimenuitem>text/css</guimenuitem> aus.
+								Wählen Sie hier <guimenuitem>text/css</guimenuitem> aus.
 							</para>
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Change Delimiter</term>
+						<term><guimenuitem>Delimiter ändern</guimenuitem></term>
 						<listitem>
 							<para>
 								Setzen Sie hier vorerst
@@ -2001,88 +2043,63 @@ $smarty->fetch($template_name);
 					</varlistentry>
 				</variablelist>
 				
+				<para>
+					Ihre Globale Vorlage sollte nun so aussehen:
+				</para>
+				
 				<figure id="templating.global_templates.usage.manage_css_files.add_new">
 					<title>CSS-Datei als Globale Vorlage anlegen</title>
 					<graphic fileref="images/templating/global_templates/usage.manage_css_files.add_new.png"/>
 				</figure>
 				
 				<para>
-					Speichern Sie nun die Globale Vorlage ab und rufen
-					Sie im Browser auf (passen Sie den Pfad zur
-					<filename>global_template.php</filename> an, die im
-					Installationsverzeichnis von Welcompose liegt):
+					Wenn Sie die Vorlage jetzt speichern und die Datei direkt im Browser aufrufen
+					(passen Sie den Pfad zur
+					<filename>global_template.php</filename> entsprechend ihrem Installationpfad an. 
+					Die <filename>global_template.php</filename> liegt immer im Root Ihrer Installation).
 				</para>
 				
 				<programlisting><![CDATA[
-http://localhost/welcompose-demo/global_template.php?name=beispiel.css
+http://pfad/der/installation/global_template.php?name=beispiel.css
 ]]></programlisting>
-				
+
 				<para>
-					Sie dürften nun je nach Konfiguration des Loggings
-					(siehe <xref linkend="extended_configuration.logging.direct_output"/>,
-					en einen oder anderen Fehler sehen, unter anderem diesen:
+					wird ihnen, abhängig vom der Konfiguration des Loggins (siehe <xref linkend="extended_configuration.logging.direct_output"/>) ein Fehler angezeigt oder sie erhalten
+					eine weiße, leere Seite.
 				</para>
-				
-				<programlisting><![CDATA[
-Error: Smarty error: [in wcomgtpl:beispiel.css line 1]: syntax error: unrecognized tag: position: relative;
-margin: 0 auto;
-width: 993px;
-background: transparent url(container-bg.gif) top right repeat-y;
-text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/core/smarty/Smarty.class.php at line 1095
-]]></programlisting>
 				
 				<para>
 					Dieser Fehler wird dadurch verursacht, dass Smarty die
 					geschweiften Klammern, die zur CSS-Syntax gehören, als
-					Befehle interpretiert und auszuführen versucht. Und
-					da es mit den CSS-Anweisungen nichts anfangen kann, 
-					kommt es zu einem Fehler.
+					Befehle interpretiert und auszuführen versucht.
 				</para>
 				
 				<para>
-					Um diesen Fehler zu beheben, kann man entweder jede
-					öffnende und schliessende geschweifte Klammer mit
-					<code><![CDATA[{literal}]]></code> wie im Beispiel
-				</para>
-				
-				<programlisting><![CDATA[
-{literal}{{/literal} und {literal}}{/literal}
-]]></programlisting>
-				
-				<para>
-					einschliessen, oder bei der Verwaltung der Globalen
-					Vorlage bei Change Delimiter einen Haken setzen. Sobald
+					Um diesen Fehler zu beheben/verhindern, setzt man bei <guimenuitem>Delimiter ändern</guimenuitem>
+					 einen Haken. Sobald
 					man dies tut und die Datei wieder im Browser lädt, sollte
-					der CSS-Code ganz ohne Modifikationen erscheinen, wie er
+					der CSS-Code ganz ohne Modifikationen angezeigt werden, wie er
 					eingegeben wurde.
 				</para>
 				
-				<figure id="templating.global_templates.usage.manage_css_files.original_css_in_browser">
-					<title>Ausgabe des ursprünglichen CSS-Codes</title>
-					<graphic fileref="images/templating/global_templates/usage.manage_css_files.original_css_in_browser.png"/>
-				</figure>
-				
 				<para>
 					Würde man nun die CSS-Datei in eine HTML-Seite einbetten,
-					würde das Hintergrund-Bild nicht angezeigt werden. Laden
-					Sie zu diesem Zweck eine Datei, die Sie als
-					Hintergrundbild verwenden wollen (sie muss nicht
-					<filename>container-bg.gif</filename> heissen) als Globale
-					Datei hoch (siehe <xref linkend="templating.global_files"/>).
+					würde das Hintergrund-Bild allerdings nicht angezeigt werden, da wir zuvor noch den
+					Pfad zur Datei einfügen müssen.
 				</para>
 				
 				<para>
 					Entfernen Sie nun den Verweis zur
 					<filename>container-bg.gif</filename> aus der Globalen
 					Vorlage und lassen Sie den Cursor dort stehen, wo der
-					Bildname war. Klicken Sie nun über der Textarea, wo der
-					CSS-Code drin steht, auf <guibutton>Global
-					Files</guibutton> und wählen dort die soeben hochgeladene
+					Bildname war. Klicken Sie nun über der Textarea, in der der
+					CSS-Code steht, auf <guibutton>Globale Dateien</guibutton> und wählen dort
+					die oben angesprochene <filename>container-bg.gif</filename> Datei aus.
 					Datei aus.
 				</para>
 				
 				<figure id="templating.global_templates.usage.manage_css_files.insert_global_file">
-					<title>Hintergrundbild als Globale Datei ins CSS einfügen</title>
+					<title>Bild als Globale Datei ins CSS einfügen</title>
 					<graphic fileref="images/templating/global_templates/usage.manage_css_files.insert_global_file.png"/>
 				</figure>
 				
@@ -2090,7 +2107,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 					Anstelle des einfachen Dateinamens steht nun in der 
 					Vorlage ein Smarty-Befehl, der beim Aufbereiten der
 					CSS-Datei den Platzhalter durch den effektiven Dateinamen
-					zur Globalen Datei und damit dem Hintergrundbild ersetzt.
+					zur Globalen Datei und damit dem Hintergrundbild ersetzt:
 				</para>
 				
 				<programlisting><![CDATA[
@@ -2098,38 +2115,35 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 	position: relative;
 	margin: 0 auto;
 	width: 993px;
-	background: transparent url(<%global_file name="container-bg.gif"%>) top right repeat-y;
+	background: #fff url(<%global_file name="container-bg.gif"%>) top right no-repeat;
 	text-align: left;
 }
 ]]></programlisting>
 				
 				<para>
-					Speichern Sie nun die Globale Vorlage und rufen Sie wieder
-					wie vorher im Browser direkt auf, sollten Sie statt den
-					Smarty-Befehl den Pfad zur Globalen Datei sehen:
+					Speichern Sie nun die Globale Vorlage und rufen Sie sie wieder
+					wie zuvor im Browser direkt auf, sollten Sie statt den
+					Smarty-Befehl nun den korrekten Pfad zur Globalen Datei sehen.
 				</para>
-				
-				<figure id="templating.global_templates.usage.manage_css_files.prepared_css_in_browser">
-					<title>Ausgabe des vorbereiteten CSS-Codes</title>
-					<graphic fileref="images/templating/global_templates/usage.manage_css_files.prepared_css_in_browser.png"/>
-				</figure>
 				
 				<para>
 					Würden Sie nun die CSS-Datei in eine HTML-Datei einbinden,
-					würde das Hintergrundbild korrekt erscheinen. Wie das
+					würde das Bild korrekt erscheinen. Wie das
 					Referenzieren der Globalen Vorlage in einer Vorlage
 					funktioniert, erklärt <xref
 					linkend="templating.global_templates.usage.reference_global_templates"/>.
 				</para>
 				
-				<para>
-					Diese Ersetzung der Bilder durch Globale Dateien müssen
-					Sie für alle Bilder vornehmen, die Sie in einer CSS-Datei
-					verwenden. Löschen Sie dazu einfach die alten
-					Bildreferenzen und ersetzen Sie mit Hilfe der Auswahl
-					der Globalen Dateien über das Pop-up, wie es im Rahmen
-					des Beispiels vorgeführt wurde.
-				</para>
+				<note>
+					<para>
+						Diese Ersetzung der Bilder durch Globale Dateien müssen
+						Sie für alle Bilder vornehmen, die Sie in einer CSS-Datei
+						verwenden. Löschen Sie dazu einfach die alten
+						Bildreferenzen und ersetzen Sie mit Hilfe der Auswahl
+						der Globalen Dateien über das Pop-up, wie es im Rahmen
+						des Beispiels vorgeführt wurde.
+					</para>
+				</note>
 				
 			</sect3>
 			
@@ -2154,7 +2168,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 				</para>
 				
 				<programlisting><![CDATA[
-/welcompose-demo/global_template.php?name=beispiel.css&amp;project=demo
+/pfad/der/installation/global_template.php?name=beispiel.css
 ]]></programlisting>
 				
 				<para>
@@ -2174,18 +2188,19 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 				</para>
 				
 				<programlisting><![CDATA[
-<link rel="stylesheet" href="/welcompose-demo/global_template.php?name=beispiel.css&amp;project=demo"
+<link rel="stylesheet" href="/pfad/der/installation/global_template.php?name=beispiel.css"
 	type="text/css" media="screen, projection" />
 ]]></programlisting>
 				
 				<para>
 					Die Smarty-Funktion zur Einbindung der Globalen Vorlagen
-					muss man nicht selber schreiben, sondern kann man sich von
+					muss man nicht selber schreiben, sondern kann man sie von
 					einer Hilfsfunktion einsetzen lassen, die jeweils über den
-					Eingabefeldern für die Vorlagen-Inhalte sitzen. Über ein
+					Eingabefeldern für die Vorlagen-Inhalte lokalisiert sind. Über ein
 					Pop-up lässt sich die gewünschte Globale Vorlage auswählen.
-					Die Smarty-Funktion zur Einbindung der Globalen Vorlage
-					wird dann an die Stelle des Cursors gesetzt.
+					Die Smarty-Funktion zur Einbindung der Globalen Vorlage generiert 
+					die adäquate Syntax und setzt diese an der Stelle des zuvor gesetzten
+					Cursors ein.
 				</para>
 				
 				<figure id="templating.global_templates.usage.reference_global_templates.pop_up">
@@ -2224,9 +2239,9 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			
 			<para>
 				Die Verwaltung der Globalen Dateien erfolgt im Bereich
-				<guimenu>Templating</guimenu> beim Unterpunkt
-				<guisubmenu>Global Files</guisubmenu>. Die Übersicht listet
-				die vorhandenen Globalen Dateien zusammen mit einer allenfalls
+				<guimenu>Vorlagen</guimenu> im Unterpunkt
+				<guisubmenu>Globale Dateien</guisubmenu>. Die Übersicht listet
+				die vorhandenen Globalen Dateien zusammen mit einer 
 				vorhandenen Beschreibung und der Information, ob eine Datei
 				verfügbar ist oder nicht. Dazu werden eine Reihe von
 				Funktionen zur Bearbeitung von Globalen Dateien geboten:
@@ -2239,7 +2254,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			
 			<variablelist>
 				<varlistentry>
-					<term>Upload</term>
+					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
 							Ermöglicht das Hochladen einer Globalen Datei, 
@@ -2249,7 +2264,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Download</term>
+					<term><guimenuitem>Download</guimenuitem></term>
 					<listitem>
 						<para>
 							Erlaubt den Download der Globalen Datei.
@@ -2257,17 +2272,17 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Edit</term>
+					<term><guimenuitem>Bearbeiten</guimenuitem></term>
 					<listitem>
 						<para>
-							Über die Schaltfläche <guibutton>Edit</guibutton>
+							Über die Schaltfläche <guibutton>Bearbeiten</guibutton>
 							gelangt man zu einem Formular zum Bearbeiten der
 							jeweiligen Globalen Datei.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Delete</term>
+					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
 							Löscht die Globale Datei.
@@ -2285,7 +2300,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			</variablelist>
 			
 			<para>
-				Sobald man auf den Link <guibutton>Add new</guibutton> klickt,
+				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
 				kommt man zum Formular zum Hinzufügen einer neuen Globalen 
 				Datei.
 			</para>
@@ -2297,7 +2312,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			
 			<variablelist>
 				<varlistentry>
-					<term>File</term>
+					<term><guimenuitem>Datei</guimenuitem></term>
 					<listitem>
 						<para>
 							Datei, die als Globale Datei ins System importiert
@@ -2308,7 +2323,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term>Description</term>
+					<term><guimenuitem>Beschreibung</guimenuitem></term>
 					<listitem>
 						<para>
 							(Optionaler) Beschreibungstext der Globalen 
@@ -2339,7 +2354,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			</para>
 
 			<programlisting><![CDATA[
-/welcompose-demo/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png
+/pfad/der/installation/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png
 ]]></programlisting>
 
 			<para>
@@ -2358,7 +2373,7 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 			</para>
 
 			<programlisting><![CDATA[
-<img id="logo" src="/welcompose-demo/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png"
+<img id="logo" src="/pfad/der/installation/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png"
 	alt="Logo Beispielfirma" />
 ]]></programlisting>
 
@@ -2368,8 +2383,8 @@ text-align: left; (Smarty_Compiler.class.php, line 439) in /www/welcompose-demo/
 				einer Hilfsfunktion einsetzen lassen, die jeweils über den
 				Eingabefeldern für die Vorlagen-Inhalte sitzt. Über ein
 				Pop-up lässt sich die gewünschte Globale Datei auswählen.
-				Die Smarty-Funktion zur Einbindung der Globalen Datei
-				wird dann an die Stelle des Cursors gesetzt.
+				Die Smarty-Funktion zur Einbindung der Globalen Datei generiert
+				die adäquate Syntax und setzt diese an der Stelle des zuvor gesetzten Cursors ein.
 			</para>
 
 			<figure id="templating.global_files.usage.reference_global_files.pop_up">

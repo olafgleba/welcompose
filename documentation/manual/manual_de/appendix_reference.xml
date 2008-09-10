@@ -36,6 +36,22 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
+					<term><emphasis>blog_comments_atom10</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für ATOM-1.0-Feed vom Blog inkl. der Kommentare.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>blog_comments_rss20</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für RSS-2.0-Feed vom Blog inkl. der Kommentare.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
 					<term><emphasis>blog_index</emphasis></term>
 					<listitem>
 						<para>
@@ -84,15 +100,6 @@
 				
 			<variablelist>
 				<varlistentry>
-					<term><emphasis>simple_form_business_form_mail</emphasis></term>
-					<listitem>
-						<para>
-							Vorlage für E-Mails, die beim Ausfüllen eines
-							Business Simple Form verschickt werden.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><emphasis>simple_form_index</emphasis></term>
 					<listitem>
 						<para>
@@ -102,11 +109,46 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
+					<term><emphasis>simple_form_business_form_mail</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für E-Mails, die beim Ausfüllen eines
+							Business Simple Form verschickt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
 					<term><emphasis>simple_form_personal_form_mail</emphasis></term>
 					<listitem>
 						<para>
 							Vorlage für E-Mails, die beim Ausfüllen eines
 							Personal Simple Form verschickt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+
+		<sect2 id="reference.list_of_template_types.generated_form">
+			<title>Generated Forms</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term><emphasis>generator_form_index</emphasis></term>
+					<listitem>
+						<para>
+							Hauptvorlage für für indivduell angelegte Formulare. Zeigt die eigentliche
+							Generated Form an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>generator_form_mail</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für E-Mails, die beim Ausfüllen eines
+							Generated Form verschickt werden.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -123,6 +165,24 @@
 						<para>
 							Hauptvorlage für Simple Page. Zeigt die eigentliche
 							Simple Page an.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="reference.list_of_template_types.system_login">
+			<title>System Login</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term><emphasis>system_login</emphasis></term>
+					<listitem>
+						<para>
+							Generische Vorlage für alle Seitentypen, die für den Login
+							einer geschützten Seite genutzt wird. Ist eine Seite geschützt,
+							wird diese Vorlage anstelle der orig. Vorlage genutzt. Nach 
+							erfolgreichen Login, wird die orig. Vorlage zur Anzeige verwandt.
 						</para>
 					</listitem>
 				</varlistentry>

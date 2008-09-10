@@ -12,9 +12,13 @@
 		<title>Welcompose herunterladen</title>
 		
 		<para>
-			Welcompose steht momentan in drei verschiedenen Varianten zum 
+			Welcompose steht momentan in zwei Variationen zum 
+			Download bereit. In Folge der Weiterentwicklung wird es eine Variante geben, 
+			die Aktualisierung einer bestehenden Installation berücksichtigt.
+			Die Varianten können anhand ihres Dateinamens unterschieden werden.
+			<!-- Welcompose steht momentan in drei verschiedenen Varianten zum 
 			Download bereit. Sie können anhand des Dateinamens unterschieden
-			werden.
+			werden. -->
 		</para>
 		
 		<variablelist>
@@ -44,7 +48,7 @@
 					</para>
 				</listitem>
 			</varlistentry>
-			<varlistentry>
+			<!-- <varlistentry>
 				<term>welcompose-*-full-src.* (bspw. welcompose-1.2.3-full-src.tar.gz)</term>
 				<listitem>
 					<para>
@@ -58,7 +62,7 @@
 						(*.tar.bz2, *.tar.gz; BSD, Linux, MacOS X) erhältlich. 
 					</para>
 				</listitem>
-			</varlistentry>
+			</varlistentry> -->
 		</variablelist>
 	 </sect1>
 	
@@ -223,8 +227,8 @@
 				Installation</link>.
 			</para>
 			<para>
-				Für alle Anwender wird die Verwendung des Package
-				Installers empfohlen. Dabei muss nur eine Datei auf den
+				<emphasis>Für alle Anwender wird die Verwendung des Package
+				Installers empfohlen</emphasis>. Dabei muss nur eine Datei auf den
 				Server kopiert und die Schreibrechte eines einzigen
 				Ordners verändert werden. Um den Rest kümmert sich der
 				Package Installer, der die restlichen Dateien auf den
@@ -312,7 +316,7 @@
 				
 				<para>
 					Nach dem Entpacken finden Sie einen Ordner mit dem Namen
-					<filename>welcompose</filename> auf der Festplatte.
+					<filename>welcompose-x.x.x</filename> auf der Festplatte.
 					Dort drin sind die beiden verschiedenen Installer Packages
 					enthalten. Die Datei <filename>install-zlib.php</filename>
 					ist der komprimierte Package Installer, die Datei
@@ -410,6 +414,12 @@
 					Sie den Package Installer wieder aufrufen. Sie verwenden
 					dann den unkomprimierten Package Installer.
 				</para>
+				
+				<note>
+					<para>
+						Der Welcompose Package Installer ist nur in englischer Sprache verfügbar
+					</para>
+				</note>
 				
 				<figure id="install_instructions.installation.package_installer.execute.sample">
 					<title>Welcompose Package Installer</title>
@@ -522,14 +532,14 @@
 					übertragen und auch die Schreibrechte von Hand vergeben werden.
 					Für die manuelle Installation benötigen Sie eine
 					Welcompose-Distribution mit dem Kürzel <filename>-src</filename> im
-					Namen, beispielsweise <filename>welcompose-1.2.3-src.tar.gz</filename>.
+					Namen, beispielsweise <filename>welcompose-x.x.x-src.tar.gz</filename>.
 					Nachdem Sie die Datei heruntergeladen haben, muss sie entpackt
 					werden.
 				</para>
 				
 				<warning>
 					<para>
-						Verwenden Sie als Windows-Anwender nur die Zip-Archive.
+						Verwenden Sie als Windows-Anwender nur die <emphasis role="strong">Zip-Archive</emphasis>.
 						Entpackungsprogramme wie WinZip verursachen in einigen
 						älteren Versionen Probleme mit den Unix-Tarballs, die
 						ebenfalls zum Download angeboten werden
@@ -675,9 +685,8 @@
 				Lizenzbedingungen einverstanden sind. Dann &ndash; und nur dann
 				&ndash; kann die Setup-Prozedur ausgeführt und Welcompose benutzt
 				werden. Die Lizenz akzeptieren Sie mit einem Klick auf die
-				Checkbox <guilabel>Confirm license</guilabel>. Klicken
-				Sie dann auf die Schaltfläche <guibutton>Go to next
-				step</guibutton>, um zum nächsten Schritt zu gelangen.
+				Checkbox <guilabel>Lizenz bestätigen</guilabel>. Klicken
+				Sie dann auf die Schaltfläche <guibutton>Nächster Schritt</guibutton>, um zum nächsten Schritt zu gelangen.
 			</para>
 			
 			<figure id="install_instructions.configure_wcom.license.sample">
@@ -797,7 +806,7 @@
 			
 			<para>
 				Sollten alle Voraussetzungen erfüllt sein, können Sie mit
-				einem Klick auf <guibutton>Go to next step</guibutton> zum
+				einem Klick auf <guibutton>Nächster Schritt</guibutton> zum
 				nächsten Schritt übergehen.
 			</para>
 		</sect2>
@@ -818,7 +827,7 @@
 			<variablelist>
 				<varlistentry>
 					<term>
-						<guilabel>Database</guilabel>
+						<guilabel>Datenbank</guilabel>
 					</term>
 					<listitem>
 						<para>
@@ -830,7 +839,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>User</guilabel>
+						<guilabel>Benutzer</guilabel>
 					</term>
 					<listitem>
 						<para>
@@ -841,7 +850,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>Password</guilabel>
+						<guilabel>Passwort</guilabel>
 					</term>
 					<listitem>
 						<para>
@@ -853,7 +862,7 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>Connection method</guilabel>
+						<guilabel>Verbindungsart</guilabel>
 					</term>
 					<listitem>
 						<para>
@@ -935,7 +944,7 @@
 			
 			<para>
 				Nachdem Sie alle Daten eingegeben haben, können Sie das Formular
-				mit einem Klick auf <guibutton>Go to next step</guibutton>
+				mit einem Klick auf <guibutton>Nächster Schritt</guibutton>
 				absenden. Daraufhin werden die Eingaben überprüft und versucht,
 				eine Verbindung mit dem Datenbank-Server herzustellen. Schlägt
 				dies fehl, wird eine Fehlermeldung angezeigt. Korrigieren Sie
@@ -960,7 +969,7 @@
 			<variablelist>
 				<varlistentry>
 					<term>
-						<guilabel>Project</guilabel>
+						<guilabel>Projekt</guilabel>
 					</term>
 					<listitem>
 						<para>
@@ -973,23 +982,26 @@
 				</varlistentry>
 				<varlistentry>
 					<term>
-						<guilabel>Locale</guilabel>
+						<guilabel>Spracheinstellung</guilabel>
 					</term>
 					<listitem>
 						<para>
 							Mit dem <foreignphrase>Locale</foreignphrase> wird
 							festgelegt, welches Gebietsschema für die Anzeige
 							von Welcompose verwendet wird. Es wird damit unter anderem
-							die Sprache der Administrationsoberfläche bestimmt.
-							Für mögliche Eingaben und deren Folgen konsultieren
-							Sie bitte <xref linkend="localization"/>
+							die Sprache der Administrationsoberfläche bestimmt. Voreingestellt ist
+							deutsch (<emphasis>de_DE</emphasis>) als Interface-Sprache. Zur Verfügung steht
+							momentan Englisch als Alternative (<emphasis>en_GB</emphasis>). Sollten Sie
+							nicht wissen, was und wie hier einzutragen ist, wird "<emphasis>C</emphasis>" als 
+							Einstellung empfohlen. Für mögliche Eingaben/Formate und deren Folgen konsultieren
+							Sie bitte <xref linkend="localization"/> und nutzen die <xref linkend="introduction.context_help"/>.
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
 			
 			<para>
-				Wenn Sie auf <guibutton>Go to next step</guibutton> klicken,
+				Wenn Sie auf <guibutton>Nächster Schritt</guibutton> klicken,
 				um zum nächsten Schritt zu gelangen, wird zuerst die eigentliche
 				Konfiguration ausgeführt, also die Konfigurationsdateien auf
 				die Festplatte geschrieben und die Datenbank-Struktur erzeugt.
@@ -998,7 +1010,7 @@
 			<tip>
 				<para>
 					Sollten bei der Ausführung des Setups Probleme
-					auftreten, wenden Sie sich bitte an den Support.
+					auftreten, wenden Sie sich bitte an den Support .
 				</para>
 			</tip>
 		</sect2>
@@ -1019,8 +1031,7 @@
 			</figure>
 			
 			<para>
-				Wenn Sie auf die Schaltfläche <guibutton>Go to admin
-				area</guibutton> klicken, werden Sie automatisch zum
+				Wenn Sie auf die Schaltfläche <guibutton>um Admin-Bereich</guibutton> klicken, werden Sie automatisch zum
 				Login für den Admin-Bereich weitergeleitet. Dabei wird
 				automatisch versucht, das Setup-Verzeichnis zu löschen.
 				Kontrollieren Sie unbedingt, ob das Setup-Verzeichnis

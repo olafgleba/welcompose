@@ -66,8 +66,8 @@
 		
 			<para>
 				Der Mediamanager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den textlichen Inhalten
-				hinzugefügt werden können. Dies umfasst neben den relevanten Seiten-Typen die seitenabhängigen
-				<emphasis>Boxen</emphasis> (siehe @@@) und
+				hinzugefügt werden können. Dies umfasst neben den inhaltlichen Seiten die seitenabhängigen
+				<emphasis>Boxen</emphasis> (siehe <xref linkend="contents.boxes"/>) und
 				<emphasis>Globalen Boxen</emphasis> (siehe <xref linkend="contents.global_boxes"/>).
 			</para>
 			
@@ -145,7 +145,7 @@
 				Zugriff auf die Meta-Daten der lokalen Media-Dateien möglich ist, beinhaltet der Bereich
 				myFlickr nur lesenden Zugriff auf die API der Flickr Community - was heißt, das Flickr-Dateien
 				innerhalb Welcompose angezeigt und den lokalen Inhalten hinzugefügt werden können, aber keine
-				Schnittstelle bereitgestellt wird, lokale Dateien über die API in den Dienst Flickr hochzuladen.
+				Schnittstelle bereitgestellt wird, lokale Dateien über die API zum Dienst Flickr hochzuladen.
 			</para>
 			
 			<sect3 id="media.mediamanager.usage.options">
@@ -365,8 +365,8 @@
 				<title>Meta-Daten editieren</title>
 			
 				<para>
-					Um die Meta-Daten der Dateien zu editieren, klicken sie auf das entsprechende Icon rechts neben der
-					Symbolansicht der Datei. Es öffnet sich ein Popup-Fenster.
+					Um die Meta-Daten der Dateien zu editieren, klicken sie auf das Icon rechts neben der
+					Symbol/Vorschauansicht der Datei. Es öffnet sich ein Popup-Fenster.
 				</para>
 				
 				<figure id="media.mediamanager.mediamanager.edit.file">
@@ -376,7 +376,7 @@
 				
 				<para>
 					Editieren Sie die Meta-Daten und speichern Sie diese anschließend durch einem Klick auf 
-					<guibutton>Änderungen speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
+					<guibutton>Änderung speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
 					visuell bestätigt. Schließen sie das Popup-Fenster bitte über den Button
 					 <guibutton>Schließen</guibutton>. Beachten Sie oben genannte Hinweise zum Schließen von
 					Popup-Fenstern.

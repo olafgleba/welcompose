@@ -47,8 +47,9 @@
 							<filename>xgettext.php</filename> aus dem Paket, um die 
 							zu übersetzenden Zeichenketten aus den Vorlagen und den
 							PHP-Scripts zu extrahieren. Sie erhalten SmartyGettext von
-							<ulink url="http://www.dotthink.net/svn/SmartyGettext/trunk"/>.
-							Kopieren Sie <filename>xgettext.php</filename> nach
+							<ulink url="http://downloads.welcompose.de/misc/SmartyGettext/xgettext.phps"/>.
+							Speichern Sie die Datei mit dem Suffix <filename>.php</filename> lokal
+							 und kopieren Sie <filename>xgettext.php</filename> dann nach
 							<filename>/usr/local/bin</filename> oder fügen Sie
 							den Pfad zur Datei in $PATH ein, damit Sie sie als
 							<filename>xgettext.php</filename> auf der Kommando-Zeile

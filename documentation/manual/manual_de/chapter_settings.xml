@@ -72,14 +72,17 @@
 				möglich. Sollte der Wunsch danach bestehen, zwei Textkonverter
 				zu kombinieren, muss dies über ein Plug-in und einen separaten
 				Textkonverter realisiert werden (siehe <xref
-				linkend="settings.text_converters.use_other_text_converters"/>).
+				linkend="settings.text_converters.use_other_text_converters"/>). Dies
+				wird zum jetzigen Zeitpunkt nicht empfohlen.
 			</para>
 			
-			<para>
-				Für die Community, also die Blog-Kommentare, kann der
-				Textkonverter nur global für alle Blog-Kommentare
-				gesetzt werden.
-			</para>
+			<note>
+				<para>
+					Für die Blog-Kommentare, kann der
+					Textkonverter nur global für alle Blog-Kommentare
+					gesetzt werden.
+				</para>
+			</note>
 			
 			<para>
 				Hilftsfunktionen von Welcompose, beispielsweise zum Setzen
@@ -88,19 +91,20 @@
 				dass je nach Textkonverter automatisch die richtige Syntax
 				zum Integrieren von Bildern oder Links gewählt wird.
 				Sollte ein Textkonverter ein bestimmtes Element nicht
-				unterstützen, wird automatisch der passende HTML-Code
+				unterstützen, wird automatisch der passende (X)HTML-Code
 				eingefügt.
 			</para>
 			
-			<para>
-				Wird der Textkonverter während oder nach dem Editieren
-				gewechselt, muss beachtet werden, dass die Syntax nicht
-				automatisch gewechselt wird, sondern die alte beibehalten
-				wird. Wer den Textkonverter wechselt, muss die Syntax
-				also von Hand anpassen oder den Textkonverter vor dem
-				Erstellen des Texts ändern.
-			</para>
-			
+			<note>
+				<para>
+					Wird der Textkonverter während oder nach dem Editieren
+					gewechselt, muss beachtet werden, dass die Syntax nicht
+					automatisch gewechselt wird, sondern die alte beibehalten
+					wird. Wer den Textkonverter wechselt, muss die Syntax
+					also von Hand anpassen oder den Textkonverter vor dem
+					Erstellen des Texts ändern.
+				</para>
+			</note>
 		</sect2>
 		
 		<sect2 id="settings.text_converters.xhtml_markdown_and_textile">
@@ -140,7 +144,7 @@
 				</para>
 				
 				<para>
-					Er ist der Standard-Textkonverter und darf nicht aus dem
+					Er ist der Standard-Textkonverter und darf <emphasis role="bold">nicht</emphasis> aus dem
 					System entfernt werden, da es sonst passieren kann,
 					dass beispielsweise der Mediamanager oder die
 					Hilfsfunktionen zum Integrieren von Links oder Boxen
@@ -475,9 +479,9 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 					Um einen neu hinzugefügten Textkonverter im
 					Administrationsbereich nutzen zu können, muss er vorab
 					registriert werden. Dies geschieht im Bereich
-					<guimenu>Settings</guimenu> beim Unterpunkt
-					<guisubmenu>Text Converters</guisubmenu>. Wenn Sie dort
-					auf den Link <guibutton>Add new</guibutton> klicken, 
+					<guimenu>Einstellungen</guimenu> im Unterpunkt
+					<guisubmenu>Textkonverter</guisubmenu>. Wenn Sie dort
+					auf den Link <guibutton>Neu anlegen</guibutton> klicken, 
 					gelangen Sie zum Formular zum Anlegen eines neuen
 					Textkonverters.
 				</para>
@@ -489,18 +493,18 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 				
 				<variablelist>
 					<varlistentry>
-						<term>Name</term>
+						<term><guimenuitem>Name</guimenuitem></term>
 						<listitem>
 							<para>
 								Der Name des Textkonverters, der jeweils
 								in den Auswahllisten unterhalb der
-								Inhaltsbereiche gezeigt wird. Kann frei
+								Inhaltsbereiche gezeigt wird. Er kann frei
 								gewählt werden.
 							</para>
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Internal name</term>
+						<term><guimenuitem>Interner Name</guimenuitem></term>
 						<listitem>
 							<para>
 								Interner Name des Textkonverters. Bei einer
@@ -594,13 +598,13 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 	</sect1>
 	
 	<sect1 id="settings.text_macros">
-		<title>Text-Macros</title>
+		<title>Textmakros</title>
 		
 		<sect2 id="settings.text_macros.introduction">
 			<title>Einführung</title>
 			
 			<para>
-				Text-Macros sind sozusagen die kleinen Geschwister der
+				Textmakros sind sozusagen die kleinen Geschwister der
 				Textkonverter (<xref linkend="settings.text_converters"/>).
 				Denn wie die Textkonverter sind sie für die Transformation
 				von Text zuständig. Der Unterschied besteht aber darin, 
@@ -625,9 +629,9 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 				Dies ist aber umständlicher als nötig, da die Links zur
 				Wikipedia immer identisch aufgebaut sind und sich deshalb
 				automatisch erstellen liessen. Hier kommen nun die
-				Text-Macros ins Spiel: Sie können diese Aufgabe übernehmen,
+				Textmakros ins Spiel: Sie können diese Aufgabe übernehmen,
 				ohne dass ein bestehender Textkonverter modifiziert respektive
-				ergänzt werden muss. So lässt sich ein Text-Macro erstellen,
+				ergänzt werden muss. So lässt sich ein Textmakro erstellen,
 				das beispielsweise aus 
 			</para>
 			
@@ -647,7 +651,7 @@ w:de{Toxoplasmose}
 				für Bücher, die man beispielsweise mit seinem
 				Amazon-Partnerprogramm verknüpfen kann. Auch lassen sich
 				Badges von irgendwelchen Webdiensten integrieren, sofern sie
-				sich vernünftig in in ein Text-Macro verpacken lassen.
+				sich vernünftig in in ein Textmakro verpacken lassen.
 			</para>
 			
 			<para>
@@ -659,49 +663,64 @@ w:de{Toxoplasmose}
 		</sect2>
 		
 		<sect2 id="settings.text_macros.usage">
-			<title>Anwendung der Text-Macros</title>
+			<title>Anwendung der Textmakros</title>
 			
 			<para>
-				Text-Macros werden wie der Textkonverter von Welcompose
+				Textmakros werden wie der Textkonverter von Welcompose
 				überall im Webinterface angeboten, wo sich Inhalte für die
 				jeweiligen Seiten eingeben lassen. Sie können pro Seite, Blog
 				Posting oder Box über eine Checkbox aktiviert werden.
 			</para>
 			
 			<figure id="settings.text_macros.usage.apply_text_macros">
-				<title>Text-Macros anwenden</title>
+				<title>Textmakros anwenden</title>
 				<graphic fileref="images/settings/text_macros/usage.apply_text_macros.png"/>
 			</figure>
 			
 			<para>
-				Dies bedeutet, dass entweder alle Text-Macros ausgeführt
+				Dies bedeutet, dass entweder alle Textmakros ausgeführt
 				werden können oder gar keine.
 			</para>
 			
 			<para>
 				Gesteuert werden kann einzig der Anwendungszeitpunkt der
-				Text-Macros, wobei das global bei der Aktivierung eines
-				Text-Macros geschieht (siehe <xref
+				Textmakros, wobei das global bei der Aktivierung eines
+				Textmakros geschieht (siehe <xref
 				linkend="settings.text_macros.integrate_other_text_macros"/>). 
 			</para>
 			
 			<para>
-				Die Nutzung der Text-Macros bei Blog-Kommentaren o.ä. ist
+				Die Nutzung der Textmakros bei Blog-Kommentaren o.ä. ist
 				nicht möglich.
 			</para>
 			
 		</sect2>
 		
 		<sect2 id="settings.text_macros.builtin_text_macros">
-			<title>Mitgelieferte Text-Macros</title>
+			<title>Mitgelieferte Textmakros</title>
 			
 			<para>
-				Welcompose bringt zwei Text-Macros von Haus aus mit, die für
+				Welcompose bringt zwei Textmakros von Haus aus mit, die für
 				die Bereitstellung von Welcompose-Funktionalität benötigt
 				werden. Sie dienen zur Erzeugung der Links zwischen einzelnen
 				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
 				Bildern.
 			</para>
+
+			<para>
+				Welcompose bringt zwei Textmakros von Haus aus mit, die für
+				die Bereitstellung von Welcompose-Funktionalität benötigt
+				werden. Sie dienen zur Erzeugung der Links zwischen einzelnen
+				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
+				Bildern.
+			</para>
+							
+			<note>
+				<para>
+				Diese beiden mitgelieferten Textmakros dürfen nicht entfernt werden, da sonst die 
+				die Auflösung der Pfade in Ihren Seiten nicht mehr funktionieren.
+				</para>
+			</note>
 			
 			<sect3 id="settings.text_macros.builtin_text_macros.bundled_media_url_generator">
 				<title>Bundled Media URL Generator</title>
@@ -735,7 +754,7 @@ w:de{Toxoplasmose}
 				
 				<para>
 					Anstelle von <code>{get_media ...}</code> setzt das
-					Text-Macro den Pfad respektive URL zum Media-Element,
+					Textmakro den Pfad respektive URL zum Media-Element,
 					beispielsweise:
 				</para>
 				
@@ -755,7 +774,7 @@ w:de{Toxoplasmose}
 				<title>Bundled URL Generator</title>
 				
 				<para>
-					Das Text-Macro Bundled URL Generator dient zur
+					Das Textmakro Bundled URL Generator dient zur
 					einfachen Erzeugung von Links zwischen den einzelnen
 					Welcompose-Seiten und wird beispielsweise von den
 					Hilfsfunktionen zum Einfügen interner Hinweise verwendet.
@@ -775,7 +794,7 @@ w:de{Toxoplasmose}
 				
 				<para>
 					Während <code>get_url</code> quasi der Name des
-					Text-Macros ist, sind <code>arg1</code> respektive
+					Textmakros ist, sind <code>arg1</code> respektive
 					<code>arg2</code> Platzhalter für Argumente, die an den
 					URL-Generator zur Erzeugung der richtigen URLs übergeben
 					werden. Eine gültige Anweisung kann beispielsweise so
@@ -788,7 +807,7 @@ w:de{Toxoplasmose}
 				
 				<para>
 					Anstelle von <code>{get_url ...}</code> wird vom
-					Text-Macro der URL zu dem Archiv für den Monat Juni 2007
+					Textmakro der URL zu dem Archiv für den Monat Juni 2007
 					der Blog-Seite mit der ID 15 gesetzt, beispielsweise: 
 				</para>
 				
@@ -801,40 +820,35 @@ http://www.example.com/mein-blog/archiv/2007/06/
 					Bundled Media URL Generator zu schreiben, da dies in 
 					Welcompose integrierte Funktionen für den Anwender tun.
 				</para>
-				
-				<para>
-					Eine Referenz der vorhandenen Befehle für den
-					URL-Generator hält @@@ bereit.
-				</para>
 			</sect3>
 		</sect2>
 		
 		<sect2 id="settings.text_macros.integrate_other_text_macros">
-			<title>Eigene Text-Macros integrieren</title>
+			<title>Eigene Textmakros integrieren</title>
 			
 			<para>
-				Um eigene Text-Macros in Welcompose zu integrieren, müssen
+				Um eigene Textmakros in Welcompose zu integrieren, müssen
 				zwei Aufgaben erledigt werden:
 			</para>
 			
 			<orderedlist>
 				<listitem>
 					<para>
-						Die Erstellung des Text-Macros.
+						Die Erstellung des Textmakros.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Die Aktivierung des Text-Macros in Welcompose.
+						Die Aktivierung des Textmakros in Welcompose.
 					</para>
 				</listitem>
 			</orderedlist>
 			
 			<sect3 id="settings.text_macros.integrate_other_text_macros.create">
-				<title>Erstellung eines Text-Macros</title>
+				<title>Erstellung eines Textmakros</title>
 				
 				<para>
-					Text-Macros werden in Form von einfachen PHP-Funktionen
+					Textmakros werden in Form von einfachen PHP-Funktionen
 					realisiert, in deren Rahmen man prinzipiell machen kann,
 					was man will. Als Beispiel soll die bereits erwähnte
 					automatische Umwandlung von Links zur Wikipedia realisiert
@@ -842,15 +856,15 @@ http://www.example.com/mein-blog/archiv/2007/06/
 				</para>
 				
 				<para>
-					Die Text-Macros werden im Verzeichnis
+					Die Textmakros werden im Verzeichnis
 					<filename>core/plugins/textmacros/</filename> hinterlegt,
-					wobei pro Text-Macro eine separate Datei benötigt wird.
+					wobei pro Textmakro eine separate Datei benötigt wird.
 					Die Benennung der Dateien muss einem bestimmten Schema
-					erfolgen, damit die Text-Macros von Welcompose gefunden
+					erfolgen, damit die Textmakros von Welcompose gefunden
 					werden. Und zwar müssen die Dateinamen mit
 					<filename>wcom_plugin_textmacro_</filename> beginnen,
-					gefolgt vom eigentlichen Text-Macro-Namen und der
-					Dateiendung <filename>.php</filename>. Der Text-Macro-Name
+					gefolgt vom eigentlichen Textmakro-Namen und der
+					Dateiendung <filename>.php</filename>. Der Textmakro-Name
 					darf nur kleine Buchstaben, Ziffern und Unterstriche
 					beinhalten. Der Dateiname des Wikipedia-Macros könnte
 					beispielsweise so aussehen:
@@ -860,14 +874,14 @@ http://www.example.com/mein-blog/archiv/2007/06/
 				<para>
 					Der Dateiname dient gleichzeitig (abzüglich des Suffix
 					<filename>.php</filename>) als Funktionsname, der
-					für den Aufruf des Text-Macros verwendet wird.
+					für den Aufruf des Textmakros verwendet wird.
 				</para>
 				
 				<para>
-					Die Text-Macros erhalten als einziges Argument die
+					Die Textmakros erhalten als einziges Argument die
 					Zeichenkette mit den Benutzereingaben, die sie nach
 					der Ausführung retournieren müssen. Der funktionslose
-					Prototyp einer Text-Macro-Funktion sieht damit
+					Prototyp einer Textmakro-Funktion sieht damit
 					folgendermassen aus: 
 				</para>
 				
@@ -879,11 +893,11 @@ function wcom_plugin_textmacro_name ($input)
 ]]></programlisting>
 				
 				<para>
-					Welche Aktionen innerhalb des Text-Macros ausgeführt
+					Welche Aktionen innerhalb des Textmakros ausgeführt
 					werden, bleibt einem selbst überlassen. Meistens wird
 					man wohl mit Hilfe von Regulären Ausdrücken die Eingaben
 					manipulieren. In jedem Fall gilt es, darauf zu achten,
-					dass die Text-Macros nicht mit den Textkonvertern in
+					dass die Textmakros nicht mit den Textkonvertern in
 					Konflikt geraten, insbesondere wenn sie
 					<emphasis>nach</emphasis> den Textkonvertern ausgeführt
 					werden (mehr dazu in
@@ -891,9 +905,9 @@ function wcom_plugin_textmacro_name ($input)
 				</para>
 				
 				<para>
-					In dem Wikipedia-Beispiel-Text-Macro wird eine ebensolche
+					In dem Wikipedia-Beispiel-Textmakro wird eine ebensolche
 					Text-Transformation mit Hilfe eines Regulären Ausdrucks
-					realisiert. Und zwar sucht die Text-Macro-Funtkion
+					realisiert. Und zwar sucht die Textmakro-Funtkion
 					<code>wcom_plugin_textmacro_wikipedia()</code> nach allen
 					nach dem Muster <code>w:de{Begriff}</code> (für die
 					deutsche Wikipedia) respektive <code>w:en{Begriff}</code>
@@ -936,7 +950,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 ]]></programlisting>
 				
 				<para>
-					Sobald das Text-Macro unter dem Namen
+					Sobald das Textmakro unter dem Namen
 					<filename>wcom_plugin_textmacro_wikipedia.php</filename>
 					im Verzeichnis
 					<filename>core/plugins/textmacros/</filename> abgelegt
@@ -947,20 +961,20 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 			</sect3>
 			
 			<sect3 id="settings.text_macros.integrate_other_text_macros.register">
-				<title>Text-Macros registrieren</title>
+				<title>Textmakros registrieren</title>
 				
 				<para>
-					Um ein neu hinzugefügtes Text-Macro nutzen zu können, muss
+					Um ein neu hinzugefügtes Textmakro nutzen zu können, muss
 					es vorab registriert werden. Dies geschieht im
 					Administrationsbereich unter <guimenu>Settings</guimenu>
 					beim Unterpunkt <guisubmenu>Text Macros</guisubmenu>. Wenn
 					Sie dort auf den Link <guibutton>Add new</guibutton>
 					klicken, gelangen Sie zum Formular zum Anlegen eines neuen
-					Text-Macros.
+					Textmakros.
 				</para>
 					
 				<figure id="settings.text_macros.integrate_other_text_macros.register.add_text_macro">
-					<title>Text-Macro anlegen</title>
+					<title>Textmakro anlegen</title>
 					<graphic fileref="images/settings/text_macros/integrate_other_text_macros.register.add_text_macro.png"/>
 				</figure>
 				
@@ -969,8 +983,8 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 						<term>Name</term>
 						<listitem>
 							<para>
-								Der Name des Text-Macros, der zur
-								Identifizierung des Text-Macros dient.
+								Der Name des Textmakros, der zur
+								Identifizierung des Textmakros dient.
 								Kann frei gewählt werden.
 							</para>
 						</listitem>
@@ -980,7 +994,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 						<listitem>
 							<para>
 								Interner Name des Macros. Bei einer
-								Text-Macro-Funktion mit dem Namen 
+								Textmakro-Funktion mit dem Namen 
 								<code>wcom_plugin_textmacro_name()</code>
 								muss <userinput>name</userinput>
 								eingegeben werden, bei
@@ -994,9 +1008,9 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 						<listitem>
 							<para>
 								Der Typ bestimmt den Zeitpunkt, wann das
-								Text-Macro im Verhältnis zu den
+								Textmakro im Verhältnis zu den
 								Textkonvertern ausgeführt werden soll. Und
-								zwar kann man wählen, ob das Text-Macro
+								zwar kann man wählen, ob das Textmakro
 								<emphasis>vor</emphasis> (<guimenuitem>Startup
 								macro</guimenuitem>, <guimenuitem>Pre text
 								filter macro</guimenuitem>) oder
@@ -1017,7 +1031,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 				
 				<para>
 					Sobald das Formular ausgefüllt und abgesendet wurde,
-					ist das Text-Macro aktiv und wird angewendet.
+					ist das Textmakro aktiv und wird angewendet.
 				</para>
 			</sect3>
 		</sect2>

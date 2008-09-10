@@ -22,26 +22,12 @@
 			Bedienung gewährleisten die optimale Umsetzung Ihrer
 			Anforderungen.
 		</para>
-
-	</sect1>
-		
-	<sect1 id="preface.abililities">
-		<title>Was kann Welcompose?</title>
-	
-		<para>
-			Welcompose unterstützt Sie bei dem, was von einem Content
-			Management System erwartet wird: Der Erstellung, Pflege und
-			Verwaltung Ihrer Inhalte. Durch die strikte Trennung von Ausgabe
-			und Inhalten durch Vorlagen (<xref linkend="templating"/>) greift
-			das System zu keinen Zeitpunkt in die Ausgabe Ihrer Inhalte ein.
-			Wie Ihre Webpräsenz aussieht, entscheiden Sie ganz allein.
-		</para>
 		
 		<para> 
 			Welcompose ist unter anderen Multiprojekt- und Multiuser-fähig
 			(<ulink type="external"
-			url="http://en.wikipedia.org/wiki/Multitenant">Multitenant</ulink>-Architektur),
-			hat eine äusserst flexible Rechteverwaltung, basiert auf aktuellen
+			url="http://de.wikipedia.org/wiki/Mandantenf%C3%A4higkeit">Multitenant</ulink>-Architektur),
+			hat eine flexible Rechteverwaltung, basiert auf aktuellen
 			Technologien und ermöglicht vielfältige Arten der
 			Inhaltspräsentation (Inhaltsseiten, Formulare, Blogs, Podcasts).
 			Dank dieser Flexibilität eignet sich Welcompose zur Umsetzung
@@ -49,6 +35,7 @@
 			Service-Plattform für Ihre Angestellten und/oder Kunden im Intra-
 			und/oder Internet.
 		</para>
+
 	</sect1>
 	
 	<sect1 id="preface.conventions">

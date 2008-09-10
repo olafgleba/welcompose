@@ -350,7 +350,7 @@ RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=In
 			
 			<para>
 				in den Browser eingeben, sollte dieselbe Seite erscheinen,
-				wie wenn Sie den parameterisierten URL
+				die beim Aufruf der parameterisierten URL
 			</para>
 			
 			<programlisting><![CDATA[
@@ -358,7 +358,7 @@ RewriteRule     ^               index.php?project_name=%1&page_name=%2&action=In
 ]]></programlisting>
 			
 			<para>
-				aufgerufen hätten. Dies funktioniert, da der Webserver
+				zu sehen ist. Dies funktioniert, da der Webserver
 				intern (und damit unsichtbar für Sie und alle anderen
 				Besucher), die URLs umschreibt und damit die Änderungen
 				aus <xref
@@ -617,14 +617,15 @@ blog_item
 				
 			</sect3>
 			
-			<sect3 id="url_rewriting.in_depth.url_patterns.list_of_url_patterns">
+			<!-- <sect3 id="url_rewriting.in_depth.url_patterns.list_of_url_patterns">
 				<title>Liste der URL-Muster</title>
 				
 				<para>
 					Die komplette Liste der URL-Muster und der jeweils
-					zugehörigen Platzhalter finden Sie im @@@.
+					zugehörigen Platzhalter:
 				</para>
-			</sect3>
+			</sect3> -->
+			
 		</sect2>
 		
 		<sect2 id="url_rewriting.in_depth.rewrite_rules">

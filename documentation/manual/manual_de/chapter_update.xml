@@ -23,7 +23,15 @@
 			Aktualisierung von Welcompose so einfach wie möglich zu machen.
 		</para>
 		
-		<para>
+		<note>
+			<para>
+				Mit Veröffentlichung der ersten Aktualisierung von Welcompose 
+			werden wir Routinen zur Verfügung stellen (und hier dokumentieren), die 
+			einen weitestgehend automatisierten Aktualisierungsprozess ermöglichen
+			</para>
+		</note>
+		
+		<!-- <para>
 			Sollten Sie die Updates für eine oder mehrere Versionen ausgelassen
 			haben und möchten direkt auf die aktuellste Version wechseln, 
 			ist es in der Regel möglich. Die Update-Routinen erkennen
@@ -39,7 +47,7 @@
 				von Hand nachzuvollziehen, da die Update-Prozedur nur zum
 				Teil automatisiert ist.
 			</para>
-		</warning>
+		</warning> -->
 	</sect1>
 	
 	<sect1 id="update.versioning">
@@ -169,7 +177,7 @@
 		</note>
 	</sect1>
 	
-	<sect1 id="update.preparations">
+	<!-- <sect1 id="update.preparations">
 		<title>Vorbereitungen</title>
 		
 		<para>
@@ -546,5 +554,5 @@ chmod =
 				</warning>
 			</sect3>
 		</sect2>
-	</sect1>
+	</sect1> -->
 </chapter>

@@ -17,7 +17,7 @@
 				
 		<para>
 			Zur Umsetzung haben wir eine Test-Webseite erstellt, die weder besonders
-			hübsch noch besonders aussergewöhnlich ist, dafür einfach genug, um
+			gehaltvoll noch besonders aussergewöhnlich ist, dafür aber einfach genug, um
 			nicht den Blick auf das Wesentliche zu trüben &ndash; die Bedienung
 			von Welcompose.
 		</para>
@@ -26,23 +26,19 @@
 			<title>Screenshot der Demo-Webseite</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_demo_website.png"/>
 		</figure>
-				
-		<para>
-			Die wichtigsten Code-Fragmente sind auch hier im Handbuch zu finden. 
-			Sie sollten zum Verständnis des Vorgehens ausreichend sein, sind aber
-			nicht komplett, sodass sich nicht die gesamte Demo-Webseite damit
-			nachvollziehen lässt. Wer alle Schritte komplett nachvollziehen möchte,
-			kann den Quellcode der Demo-Webseite vom Welcompose-Download-Server beziehen.
-		</para>
 	
 		<note>
 			<para>
-				Sollten Sie Probleme beim Verständnis der Beispiele haben,
-				schlagen Sie bitte die Detail-Erklärungen im Handbuch nach. Sollte
-				dies nicht ausreichen, können Sie sich an die User-Community in unseren Foren
-				wenden. Dort sind viele Leute versammelt, die bereits mit
-				Welcompose arbeiten und Ihnen bei Ihren Verständnisproblemen helfen
-				können.
+				Um das nachfolgendene Beispiel nachvollziehen zu können, benötigen Sie
+				die <ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Materialien
+				zum Crash-Kurs</ulink> von der Welcompose Webseite. Diese können Sie aus dem 
+				<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
+				der Welcompose Webseite herunterladen.
+			</para>
+			<para>
+				Sollten Sie Probleme beim Verständnis der Beispiele haben, 
+				können Sie sich gerne auch an die User-Community in unseren Foren
+				wenden.
 			</para>
 		</note>
 	
@@ -51,25 +47,25 @@
 		
 		<para>
 			Wer sich die Demo-Webseite anschaut, sieht, dass sie einfach
-			aufgebaut ist: Eine Navigation oben, drei Inhaltsseiten mit
-			Fliesstext und ein Kontaktformular. Bevor damit begonnen werden
+			aufgebaut ist: Eine Navigation oben, zwei Inhaltsseiten mit
+			Fliesstext (Startseite und Impressum) und ein Kontaktformular. Bevor damit begonnen werden
 			kann, die Navigation und die einzelnen Seiten anzulegen, muss
-			zuerst ein <emphasis>Template Set</emphasis> erzeugt
-			werden &ndash; denn ohne <emphasis>Template Set</emphasis>
+			zuerst eine <emphasis>Vorlagengruppe</emphasis> angelegt
+			werden &ndash; denn ohne <emphasis>Vorlagengruppe</emphasis>
 			kann keine Seite angelegt werden.
 		</para>
 		
 		<para>
-			Um ein <emphasis>Template Set</emphasis> anzulegen,
+			Um eine neue <emphasis>Vorlagengruppe</emphasis> anzulegen,
 			klicken Sie zuerst auf den Navigationspunkt
-			<guimenu>Templating</guimenu> und dann auf den Unterpunkt
-			<guisubmenu>Template Sets</guisubmenu>. Von dort gelangen Sie über
-			den Link <guibutton>Add new</guibutton> zur Eingabemaske, um ein
-			neues <emphasis>Template Set</emphasis> anzulegen. 
+			<guimenu>Vorlagen</guimenu> und dann auf den Unterpunkt
+			<guisubmenu>Vorlagengruppen</guisubmenu>. Von dort gelangen Sie über
+			den Link <guibutton>Neu anlegen</guibutton> zur Eingabemaske, um eine
+			neue <emphasis>Vorlagengruppe</emphasis> anzulegen. 
 		</para>
 		
 	<figure id="crash_course_demo.preparation.templatesets_add">
-		<title>Template Set hinzufügen</title>
+		<title>Vorlagengruppe hinzufügen</title>
 		<graphic fileref="images/crash_course_demo/templatesets_add.png"/>
 	</figure>
 		
@@ -81,7 +77,7 @@
 				<listitem>
 					<para>
 						Geben Sie in das Feld einen
-						Namen für das <emphasis>Template Set</emphasis>
+						Namen für die <emphasis>Vorlagengruppe</emphasis>
 						an. Wählen Sie einen möglichst beschreibenden Namen
 						wie <userinput>Standardaussehen</userinput>. 
 					</para>
@@ -89,18 +85,18 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Description</guilabel>
+					<guilabel>Beschreibung</guilabel>
 				</term>
 				<listitem>
 					<para>
 						In dieses Feld können
-						Sie optional einen Beschreibungstext für das
-						<emphasis>Template Set</emphasis> angeben,
+						Sie optional einen Beschreibungstext für die
+						<emphasis>Vorlagengruppe</emphasis> angeben,
 						der dessen Verwendungszweck näher beschreibt. Dies
-						bietet sich bei der Verwendung von nur einem
-						<emphasis>Template Set</emphasis> wie jetzt
+						bietet sich bei der Verwendung von nur einer
+						<emphasis>Vorlagengruppe</emphasis> wie jetzt
 						weniger an, kann bei grösseren Webseiten mit vielen
-						<emphasis>Template Sets</emphasis> aber
+						<emphasis>Vorlagengruppen</emphasis> aber
 						praktisch sein.
 					</para>
 				</listitem>
@@ -108,8 +104,8 @@
 		</variablelist>
 		
 		<para>
-			Klicken Sie nun auf die Schaltfläche <guibutton>Add template
-			set</guibutton>, um das <foreignphrase>Template Set</foreignphrase>
+			Klicken Sie nun auf die Schaltfläche <guibutton>Speichern</guibutton>,
+			um die <foreignphrase>Vorlagengruppe</foreignphrase>
 			anzulegen.
 		</para>
 	</sect1>
@@ -118,13 +114,13 @@
 		<title>Seiten anlegen</title>
 		
 		<para>
-			Nachdem das erste <emphasis>Template Set</emphasis>
+			Nachdem die erste <emphasis>Vorlagengruppe</emphasis>
 			angelegt wurde, kann mit der eigentlichen Arbeit begonnen werden.
 			Zuerst muss die erste und einzige Navigation angelegt
 			werden. Klicken Sie dazu auf den Navigationspunkt
-			<guimenu>Contents</guimenu> und dann auf den Unterpunkt
-			<guisubmenu>Navigations</guisubmenu>. Von dort aus gelangen Sie über
-			den Link <guibutton>Add new</guibutton> zur Eingabemaske, um 
+			<guimenu>Inhalte</guimenu> und dann auf den Unterpunkt
+			<guisubmenu>Navigationen</guisubmenu>. Von dort aus gelangen Sie über
+			den Link <guibutton>Neu anlegen</guibutton> zur Eingabemaske, um 
 			eine Navigation zu erzeugen.
 		</para>
 		
@@ -150,19 +146,19 @@
 		</variablelist>
 		
 		<para>
-			Klicken Sie dann auf die Schaltfläche <guibutton>Add
-			navigation</guibutton>, um die Navigation anzulegen.
+			Klicken Sie dann auf die Schaltfläche <guibutton>Speichern</guibutton>, um die Navigation anzulegen.
 		</para>
 		
 		<para>
-			Um die vier Seiten <emphasis>Startseite</emphasis>, <emphasis>Inhalt</emphasis>, <emphasis>Kontakt</emphasis> und <emphasis>Impressum</emphasis>
-			anzulegen, müssen Sie zum Menupunkt <guisubmenu>Pages</guisubmenu>
+			Um die drei Seiten <emphasis>Startseite</emphasis>, <emphasis>Kontakt</emphasis> 
+			und <emphasis>Impressum</emphasis>
+			anzulegen, müssen Sie zum Untermenüpunkt <guisubmenu>Seiten</guisubmenu>
 			wechseln. Dort sollten Sie bereits die &ndash; noch leere &ndash;
 			Hauptnavigation sehen. Lassen Sie sich dabei von der Warnung
-			<computeroutput>Please define an index page!</computeroutput> nicht
+			<computeroutput>Bitte definieren Sie eine Index-Seite!</computeroutput> nicht
 			verwirren; sie verschwindet, sobald die erste Seite angelegt wurde.
-			Über das grüne Symbol unter der Überschrift <guibutton>Add</guibutton>
-			gelangen Sie zur Eingabemaske, um die Seiten anzulegen. Wir
+			Über das Symbol unter dem Label <guibutton>Neu</guibutton>
+			gelangen Sie zur Eingabemaske, um die erste Seite anzulegen. Wir
 			beginnen mit der Seite <emphasis>Startseite</emphasis>.
 		</para>
 		
@@ -182,8 +178,8 @@
 						Relation zum Menüpunkt, neben dem der Anwender auf
 						das Symbol zum Hinzufügen einer Seite geklickt hat,
 						in die Navigation eingefügt wird. Belassen Sie die
-						Auswahl bei der Option <guimenuitem>Create node
-						below</guimenuitem>.
+						Auswahl bei der Option <guimenuitem>Unterhalb des
+						aktuellen Navigationseintrages</guimenuitem>.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -200,7 +196,7 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Type</guilabel>
+					<guilabel>Typ</guilabel>
 				</term>
 				<listitem>
 					<para>
@@ -213,14 +209,14 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Template set</guilabel>
+					<guilabel>Vorlagengruppe</guilabel>
 				</term>
 				<listitem>
 					<para>
-						Mit dem <emphasis>Template Set</emphasis> wird
+						Mit dem <emphasis>Vorlagengruppe</emphasis> wird
 						bestimmt, welche Vorlagen zur Anzeige der Seite
 						verwendet werden sollen. Wählen Sie hier das
-						<emphasis>Template Set</emphasis> aus,
+						<emphasis>Vorlagengruppe</emphasis> aus,
 						das wir im <xref linkend="crash_course_demo.preparation"/>
 						angelegt haben, also
 						<userinput>Standardaussehen</userinput>.
@@ -229,7 +225,7 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Index page</guilabel>
+					<guilabel>Index-Seite</guilabel>
 				</term>
 				<listitem>
 					<para>
@@ -243,10 +239,12 @@
 		</variablelist>
 		
 		<para>
-			Die Felder <guilabel>Protect</guilabel> und
-			<guilabel>Groups</guilabel> benötigen wir zur Umsetzung der
+			Die Felder <guilabel>Geschützt</guilabel> und
+			<guilabel>Benutzergruppen</guilabel> sowie die Optionen unter 
+			<guilabel>Zusätzliche Metadaten</guilabel>
+			 benötigen wir zur Umsetzung der
 			Demo-Webseite nicht, darum können sie vorerst beiseite gelassen
-			werden. Klicken Sie jetzt auf <guibutton>Add page</guibutton>, 
+			werden. Klicken Sie jetzt auf <guibutton>Speichern</guibutton>, 
 			um die Seite hinzuzufügen. Sie kommen dann zur Seitenübersicht
 			zurück und sollten die <emphasis>Startseite</emphasis> als
 			erste Seite in der Hauptnavigation sehen.
@@ -258,22 +256,22 @@
 		</figure>
 		
 		<para>
-			Nun muss für die Seite <emphasis>Inhalte</emphasis> die Prozedur wiederholt werden.
-			Klicken Sie wieder auf das grüne Symbol unter der
-			Spaltenüberschrift <guibutton>Add</guibutton> in der Zeile der
-			Seite (hier die <emphasis>Startseite</emphasis>), an deren Position sich die neue Seite orientieren soll.
+			Nun muss für die Seite <emphasis>Impressum</emphasis> die Prozedur wiederholt werden.
+			Klicken Sie wieder auf das <guibutton>Neu</guibutton> Symbol in der Zeile der
+			Seite (hier die bisher einzig vorhandene - <emphasis>Startseite</emphasis>), an deren
+			 Position sich die neue Seite orientieren soll.
 		</para>
 		
 		<para>
 			Sie kommen wieder
 			zur Eingabemaske. Belassen Sie das Feld
 			<guilabel>Position</guilabel> wieder in der Standard-Auswahl
-			<guimenuitem>Create node below</guimenuitem>. Geben Sie beim
-			Feld <guilabel>Name</guilabel> den Namen der Seite, hier <userinput>Inhalte</userinput>, ein.
-			Wählen Sie bei <guilabel>Type</guilabel> wiederum den Seiten-Typ
-			<emphasis>WCOM_SIMPLE_PAGE</emphasis> aus und bei
-			<guilabel>Template set</guilabel> unser 
-			Template Set <emphasis>Standardaussehen</emphasis>. Die restlichen Felder
+			<guimenuitem>Unterhalb des aktuellen Navigationeintrages</guimenuitem>. Geben Sie beim
+			Feld <guilabel>Name</guilabel> den Namen der Seite, hier <userinput>Impressum</userinput>, ein.
+			Wählen Sie bei <guilabel>Typ</guilabel> wiederum den Seiten-Typ
+			<emphasis>WCOM_SIMPLE_PAGE</emphasis> aus und bei der
+			<guilabel>Vorlagengruppe</guilabel> unser 
+			Gruppe <emphasis>Standardaussehen</emphasis>. Die restlichen Felder
 			können Sie so belassen, wie sie sind.
 		</para>
 
@@ -281,36 +279,40 @@
 			<para>
 				Setzen Sie keinen Haken mehr beim Feld
 				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
-				eine Index page geben und
-				dies ist schon die Seite <emphasis>Startseite</emphasis>.
+				eine Index page geben. In unseren Fall ist dies bereits
+				 die Seite <emphasis>Startseite</emphasis>.
 			</para>
 		</warning>
 		
 		<para>
-			Nach dem Klick auf die Schaltfläche <guibutton>Add page</guibutton>
+			Nach dem Klick auf die Schaltfläche <guibutton>Speichern</guibutton>
 			gelangen Sie wieder auf die Seitenübersicht. Sie sehen nun 
-			die Seite <emphasis>Inhalte</emphasis> unter der Seite
+			die Seite <emphasis>Impressum</emphasis> unter der Seite
 			<emphasis>Startseite</emphasis>, allerdings um eine Ebene
 			eingerückt. Um sie auszurücken, klicken Sie auf der Zeile
-			der Seite <emphasis>Inhalte</emphasis> unter
-			<guibutton>Move</guibutton> auf den Pfeil nach unten. 
+			der Seite <emphasis>Impressum</emphasis> unter
+			<guibutton>Position</guibutton> auf den <emphasis>Pfeil nach unten</emphasis>. 
 		</para>
 		
 		<para>
-			Wiederholen Sie nun diese Schritte für die noch anzulegenden Seiten <emphasis>Impressum</emphasis>
-			und <emphasis>Kontakt</emphasis>. 
+			Wiederholen Sie nun diese Schritte für die noch anzulegenden Seite <emphasis>Kontakt</emphasis>. 
 		</para>
 		
 		<note>
 			<para>
-				Achten Sie beim
-				Kontakt-Formular darauf, als Seitentyp
+				Achten Sie beim Kontakt-Formular darauf, als Seitentyp
 				<guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> auszuwählen.
 			</para>
 		</note>
 		
 		<para>
-			Nach Anlegen aller Seiten sollte die Seitenübersicht wie folgt aussehen: 
+			Nach Anlegen aller drei Seiten verschieben wir die Seite <emphasis>Kontakt</emphasis> 
+			noch die Seite <emphasis>Impressum</emphasis> anhand des <emphasis>Pfeil nach oben</emphasis>
+			, so dass sie in der Navigation vor dem Impressum erscheint.
+		</para>
+		
+		<para>
+			Nun sollte die Seitenübersicht wie folgt aussehen: 
 		</para>
 		
 		<figure id="crash_course_demo.created_pages_all">
@@ -326,7 +328,7 @@
 			Jetzt ist es Zeit, die Startseite mit Inhalten zu befüllen.
 			Suchen Sie dazu in der Navigationsstruktur nach der Zeile
 			mit dem Eintrag <emphasis>Startseite</emphasis> und klicken
-			Sie daneben auf das Symbol in der Spalte <guibutton>Edit</guibutton>.
+			Sie daneben auf das Symbol in der Spalte <guibutton>Bearbeiten</guibutton>.
 			Sie gelangen damit zur Eingabemaske.
 		</para>
 		
@@ -337,39 +339,62 @@
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>Title</guilabel></term>
+				<term><guilabel>Titel</guilabel></term>
 				<listitem>
 					<para>
 						Dieses Feld bestimmt den Seitentitel. Standardmässig
 						wird der Name des Navigationspunkts, in diesem Fall
-						also <emphasis>Startseite</emphasis> verwendet.
-						Ersetzen Sie ihn nun durch
-						<userinput>Willkommen zur Demo!</userinput>.
+						also <emphasis>Startseite</emphasis> verwendet. Ändern Sie
+						den Titel nun in <userinput>Welcompose Demo</userinput>.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Content</guilabel></term>
+				<term><guilabel>URL-Titel</guilabel></term>
+				<listitem>
+					<para>
+						Aus dem <guilabel>Titel</guilabel> wird automatisch
+						ein URL-konformer Seitentitel gebildet. Der vorgeschlagene Titel
+						ist editierbar und ermöglicht somit unterschiedliche Handhabung
+						im Einsatz von Seitentitel und tatsächlicher URL. Für den
+						Crash-Kurs ist dieser nicht von Belang.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Inhalt</guilabel></term>
 				<listitem>
 					<para>
 						Hier kommt der Fliesstext für die Seite hinein. Fügen
 						Sie ein paar Zeilen Beispieltext wie 
-						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
-						&ndash; zwei Abschnitte sind eine gute Wahl.
+						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein. In unseren
+						Beispiel nehmen wir an, das zwei Absätze mit Lorem Ipsum generierten
+						Inhalt eingefügt werden.
 					</para>
+		<programlisting language="smarty"><![CDATA[
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat.</p>
+]]></programlisting>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Text converter</guilabel></term>
+				<term><guilabel>Textkonverter</guilabel></term>
 				<listitem>
 					<para>
 						Wählen Sie aus der Liste den Eintrag
-						<guimenuitem>Textile</guimenuitem> aus.
+						<guimenuitem>XHTML</guimenuitem> aus.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Apply text macros</guilabel></term>
+				<term><guilabel>Makros anwenden</guilabel></term>
 				<listitem>
 					<para>
 						Setzen Sie hier einen Haken in die Checkbox.
@@ -379,9 +404,9 @@
 		</variablelist>
 		
 		<para>
-			Das Feld <guilabel>Custom meta tags</guilabel> können Sie für
+			Das Feld <guilabel>Eigene Meta-Tags</guilabel> können Sie für
 			den Moment ignorieren und auf die Schaltfläche 
-			<guibutton>Update page</guibutton> klicken. Die Inhalte werden
+			<guibutton>Speichern und zur Übersicht</guibutton> klicken. Die Inhalte werden
 			nun gespeichert und Sie wieder zur Seitenübersicht weitergeleitet.
 		</para>
 		
@@ -404,9 +429,9 @@
 		
 		<para>
 			Um die Startseite mit einer Vorlage zu verbinden, müssen Sie in den
-			Bereich <guimenu>Templating</guimenu> wechseln und zwar zum
-			Unterabschnitt <guisubmenu>Templates</guisubmenu>. Klicken Sie dann
-			auf <guibutton>Add new</guibutton>, um zur Eingabemaske zum
+			Bereich <guimenu>Vorlagen</guimenu> wechseln und zwar zum
+			Unterabschnitt <guisubmenu>Seitenvorlagen</guisubmenu>. Klicken Sie dann
+			auf <guibutton>Neu hinzufügen</guibutton>, um zur Eingabemaske zum
 			Anlegen einer Vorlage zu gelangen. Diese muss nun befüllt werden.
 		</para>
 		
@@ -417,7 +442,7 @@
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>Type</guilabel></term>
+				<term><guilabel>Typ</guilabel></term>
 				<listitem>
 					<para>
 						Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
@@ -437,7 +462,7 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Description</guilabel></term>
+				<term><guilabel>Beschreibung</guilabel></term>
 				<listitem>
 					<para>
 						Hier können sie optional den Zweck der Vorlage
@@ -446,23 +471,28 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Content</guilabel></term>
+				<term><guilabel>Inhalt</guilabel></term>
 				<listitem>
 					<para>
 						In dieses Feld gehört der HTML-Code für die Vorlage.
-						Öffnen Sie die Datei <filename>index.html</filename>
-						aus dem Demo-Webseiten-Paket, das Sie von unserem
-						Download-Server heruntergeladen haben, und kopieren
-						Sie den gesamten HTML-Code in das Textfeld.
 					</para>
+						<note>
+							<para>
+								Öffnen Sie die Datei <filename>index.html</filename>
+								aus dem Materialien-Ordner, den Sie aus dem Welcompose 
+						<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
+						 heruntergeladen haben, und kopieren
+						Sie den gesamten HTML-Code in das Textfeld.
+					 		</para>
+						</note>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Sets</guilabel></term>
+				<term><guilabel>Vorlagengruppen</guilabel></term>
 				<listitem>
 					<para>
-						Mit diesem Feld wird die Vorlage einem Vorlagen-Set
-						zugeordnet. Klicken Sie auf die Option 
+						Mit diesem Feld wird die Vorlage einer 
+						Vorlagengruppe zugeordnet. Klicken Sie auf die Option 
 						<guimenuitem>Standardaussehen</guimenuitem>.
 					</para>
 				</listitem>
@@ -471,7 +501,7 @@
 		
 		<para>
 			Klicken Sie nun auf die Schaltfläche
-			<guibutton>Add template</guibutton>,um die Vorlage zu speichern.
+			<guibutton>Speichern</guibutton>,um die Vorlage zu speichern.
 			Wenn Sie jetzt den öffentlichen Bereich aufrufen, werden Sie jetzt
 			den gerenderten HTML-Code sehen, den Sie soeben in die Vorlage
 			eingefügt haben &ndash; allerdings ohne Bilder und Style
@@ -484,46 +514,45 @@
 		</figure>
 		
 		<para>
-			Nun geht es darum, dass die Inhalte angezeigt werden, die vorher
-			in der Datenbank abgelegt wurden. Gehen Sie dazu zur
-			Vorlagen-Übersicht zurück und klicken Sie beim soeben angelegten
-			Template auf das Symbol unter der Überschrift 
-			<guibutton>Edit</guibutton>. Sie kommen dann wieder zur Eingabemaske
+			Nun geht es darum, die statischen Inhalte der HTML-Vorlage durch
+			die Inhalte der Startseite, die wir 
+			wir schon angelegt haben, zu ersetzen. Gehen Sie dazu zur
+			Übersicht der Seitenvorlagen zurück und klicken Sie bei der soeben angelegten
+			Vorlage auf das Symbol unter der Überschrift 
+			<guibutton>Bearbeiten</guibutton>. Sie kommen dann wieder zur Eingabemaske
 			zurück.
 		</para>
 		
 		<para>
-			Zuerst wird der Title-Tag geändert. Er soll statt
-			<userinput>Welcompose - Hello World!</userinput> zuerst den
-			Namen des aktuellen Navigationspunkts und dann den Webseiten-Namen
-			enthalten. Ersetzen Sie dazu den Title-Tag durch folgenden Code:
+			Zuerst wollen wir den Title-Tag im Kopfbereich ändern. Der bisherige Inhalt
+			(<markup role="smarty"><![CDATA[<title>Welcompose Demo</title>]]></markup>) soll ergänzt werden durch den
+			Namen des aktuellen Navigationspunkts. Ersetzen Sie dazu den Title-Tag durch folgenden Code:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<title>{$page.name} &ndash; Demo-Webseite</title>
+<title>{$page.name} &ndash; Welcompose Demo</title>
 ]]></programlisting>
 
 		<para>
-			Wenn Sie nun auf die Schaltfläche <guibutton>Update
-			template</guibutton> klicken, wird die Vorlage gespeichert und Sie
-			können die Ausgabeseite neu laden. Wenn Sie alles richtig gemacht
+			Wenn Sie nun auf die Schaltfläche <guibutton>Speichern</guibutton> klicken, wird die
+			Vorlage gespeichert und Sie können die Ausgabeseite neu laden. Wenn Sie alles richtig gemacht
 			haben, wird als Seitentitel <emphasis>Startseite &ndash;
-			Demo-Webseite</emphasis> angezeigt.
+			Welcompose Demo</emphasis> angezeigt.
 		</para>
 		
 		<para>
 			Ändern wir nun Titel und Fliesstext. Ersetzen Sie den H1-Tag durch
-			den Seitentitel und den Fliesstext, indem Sie den Bereich von
-			<markup role="smarty"><![CDATA[<div id="content">]]></markup> bis zum Kommentar
-			<markup role="smarty"><![CDATA[<!-- content -->]]></markup> durch folgenden Code
+			den Seitentitel und den Fliesstext, indem Sie den kommentierten Bereich zwischen
+			<markup role="smarty"><![CDATA[<!-- Inhalte -->]]></markup> bis
+			<markup role="smarty"><![CDATA[<!-- EOF Inhalte -->]]></markup> durch folgenden Code
 			austauschen:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
 <div id="content">
-	<h1>{$simple_page.title}</h1>
-	{$simple_page.content}
-<!-- content --></div>
+<h1>{$simple_page.title}</h1>
+{$simple_page.content}
+</div>
 ]]></programlisting>
 
 		<para>
@@ -535,19 +564,22 @@
 		
 		<para>
 			Jetzt gilt es noch dafür zu sorgen, dass die Navigation von
-			Welcompose erzeugt wird. Ersetzen Sie dazu die Liste in
-			<markup role="smarty"><![CDATA[<div id="navi">]]></markup> durch folgenden Code:
+			Welcompose erzeugt wird. Ersetzen Sie die statische Navigation
+			indem Sie den kommentierten Bereich zwischen
+			<markup role="smarty"><![CDATA[<!-- Liste Navigation -->]]></markup> bis
+			<markup role="smarty"><![CDATA[<!-- EOF Liste Navigation -->]]></markup> durch folgenden Code
+			austauschen:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
 <ul>
 {select_named ns="Content" class="Page" method="selectPages" var="pages"}
 {foreach from=$pages item=_page}
-	{if $_page.id == WCOM_CURRENT_PAGE}
-		<li class="on">{$_page.name}</li>
+{if $_page.id == WCOM_CURRENT_PAGE}
+	<li><span class="on">{$_page.name}</span></li>
 	{else}
-		<li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
-	{/if}
+	<li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
+{/if}
 {/foreach}
 </ul>
 ]]></programlisting>
@@ -555,26 +587,34 @@
 		<para>
 			Nachdem Sie die Vorlage wieder gespeichert haben, können Sie
 			die Ausgabeseite nochmals laden, worauf jetzt auch die Navigation
-			von Welcompose erzeugt wird. Jetzt ist es Zeit, Style Sheets und Logos
-			einzubinden, was im <xref linkend="crash_course_demo.style_homepage"/>
-			geschieht.
+			von Welcompose dynamisch erzeugt wird.
 		</para>
 		
 		<figure id="crash_course_demo.frontend.view_edited_template">
-			<title>Ausgabe: Editierte Vorlage</title>
+			<title>Ausgabe: Seite mit dynamischen Inhalten</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_edited_template.png"/>
 		</figure>
+		
+		<para>
+			Jetzt ist es Zeit, Style Sheets und Logos
+			einzubinden, was im <xref linkend="crash_course_demo.style_homepage"/>
+			geschieht.
+		</para>
 	</sect1>
 	
 	<sect1 id="crash_course_demo.style_homepage">
-		<title>Logos und Style Sheets einbinden</title>
-		
+		<title>Style Sheets, Logo und Hintergrundbilder einbinden</title>
+
 		<para>
-			Wie die Vorlagen werden auch die Style Sheets über die Admin-Oberfläche
-			verwaltet. Um das Style Sheet für die Demo-Seite zu
-			integrieren, müssen Sie zum Untermenu <guisubmenu>Global
-			Templates</guisubmenu> des Menus <guimenu>Templates</guimenu> wechseln. Klicken Sie dort auf
-			<guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen.
+			Wie die Seitenvorlagen werden auch die Style Sheets über die
+			Adminoberfläche verwaltet. 
+		</para>	
+					
+		<para>
+			Um das Style Sheet für die Demo-Seite zu
+			integrieren, müssen Sie zum Untermenu <guisubmenu>Globale Vorlagen</guisubmenu>
+			des Menüs <guimenu>Vorlagen</guimenu> wechseln. Klicken Sie dort auf
+			<guibutton>Neu anlegen</guibutton>, um zur Eingabemaske zu gelangen.
 		</para>
 		
 		<figure id="crash_course_demo.globaltemplate_add">
@@ -587,17 +627,12 @@
 				<term><guilabel>Name</guilabel></term>
 				<listitem>
 					<para>
-						Geben Sie hier den Namen des Style Sheets an. Da das 
-						Style Sheet in den Vorlagen über den Namen referenziert
-						wird, empfiehlt es sich, "Dateinamen" wie
-						<filename>style.css</filename> zu verwenden. Zusätzlicher Vorteil: 
-						die Art des Global Templates ist auf der Übersichtsseite
-						anhand des Suffix auf einen Blick identifizierbar.
+						Tragen Sie hier den Namen <filename>wcom_demo_basic.css</filename> ein.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Description</guilabel></term>
+				<term><guilabel>Beschreibung</guilabel></term>
 				<listitem>
 					<para>
 						Hier können Sie eine optionale Beschreibung für
@@ -606,16 +641,16 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Content</guilabel></term>
+				<term><guilabel>Inhalt</guilabel></term>
 				<listitem>
 					<para>
-						Kopieren Sie in dieses Feld die Inhalte der
-						<filename>wcom1.css</filename> hinein.
+						Öffnen sie die Datei <filename>styles/wcom_demo_basic.css</filename> aus dem Materialien-Ordner
+						und kopieren sie den gesammten Inhalt in das Inhalts-Textfeld.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>MIME Type</guilabel></term>
+				<term><guilabel>MIME-Typ</guilabel></term>
 				<listitem>
 					<para>
 						Wählen Sie den Eintrag
@@ -625,48 +660,54 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Change delimiter</guilabel></term>
+				<term><guilabel>Delimiter ändern</guilabel></term>
 				<listitem>
 					<para>
 						Setzen Sie einen Haken, da sonst die geschweiften
-						Klammern in den Style Sheets vor Fehler sorgen.
+						Klammern in den Style Sheets für Fehler sorgen (siehe auch <xref linkend="templating.global_templates.manage_global_templates"/>)
 					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
 		
 		<para>
-			Klicken Sie nun auf die Schaltfläche <guibutton>Add global
-			template</guibutton>, um die CSS-Datei zu speichern.
+			<guibutton>Speichern</guibutton> sie die CSS-Datei.
 		</para>
 		
 		<para>
-			Nun kann die CSS-Datei mit der Vorlage verknüpft werden.
+			Nun ist die Datei im System und kann mit unserer Seitenvorlage verknüpft
+			werden.
+		</para>
+		
+		<para>
 			Gehen Sie dazu wieder zurück zur Eingabemaske für die
 			Vorlage, die Sie vorher angelegt haben. Suchen Sie nach der
 			Referenzierung der Style-Sheet-Datei:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<link type="text/css" rel="stylesheet" href="styles/wcom1.css" media="screen, projection" />
+<link type="text/css" rel="stylesheet" 
+	href="styles/wcom_demo_basic.css" 
+	media="screen, projection" />
 ]]></programlisting>
 
 		<para>
-			Löschen Sie nun die Referenz auf die Datei
-			<filename>styles/wcom1.css</filename> und platzieren Sie den
+			Löschen Sie nun die Referenz (Attribute <emphasis>href</emphasis>) auf die Datei
+			<filename>styles/wcom_demo_basic.css</filename> und platzieren Sie den
 			Cursor zwischen den Anführungszeichen. Klicken Sie nun auf
-			den Link <guibutton>Reference Global Template</guibutton> über
-			dem Textfeld. Es öffnet sich ein Pop-up, in dem die bisher
-			angelegten Global Files gelistet werden. Klicken Sie auf die
-			soeben angelegte <filename>style.css</filename>, worauf sich das
-			Pop-up schliesst und der Code 
-			<markup>{global_template name="style.css"}</markup> als
+			den Link <guibutton>Globale Dateien</guibutton>, der über
+			dem Textfeld plaziert ist. Es öffnet sich ein Pop-up, in dem die bisher
+			angelegten Globalen Dateien gelistet werden. Klicken Sie auf die
+			soeben angelegte <filename>wcom_demo_basic.css</filename>. Das
+			Pop-up schliesst sich und der Code 
+			<markup>{global_template name="wcom_demo_basic.css"}</markup> wird als
 			Style-Sheet-Referenz eingefügt wird. Die gesamte Anweisung
 			sieht nun so aus:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<link type="text/css" rel="stylesheet" href="{global_template name="style.css"}"
+<link type="text/css" rel="stylesheet" 
+	href="{global_template name="wcom_demo_basic.css"}"
 	media="screen, projection" />
 ]]></programlisting>
 
@@ -683,31 +724,40 @@
 		</figure>
 		
 		<para>
-			Nun muss noch das Logo eingebunden wird. Wechseln dazu im Menu <guimenu>Templating</guimenu> zum
-			Untermenu <guisubmenu>Global Files</guisubmenu> und klicken
-			Sie dort auf <guibutton>Add new</guibutton>, um zur Eingabemaske
+			Gut. Das Stylesheet ist appliziert, allerdings fehlen noch
+			die Grafiken wie Logo und verschiedene Hintergrundbilder. Diese laden wir
+			nun zuerst in das System, um sie danach in den Vorlagen zu referenzieren.
+		</para>
+		
+		<para>
+			Wechseln Sie dazu im Menu <guimenu>Vorlagen</guimenu> zum
+			Untermenu <guisubmenu>Globale Vorlagen</guisubmenu> und klicken
+			Sie dort auf <guibutton>Neu anlegen</guibutton>, um zur Eingabemaske
 			zu gelangen.
 		</para>
 		
+		<para>
+			Beginnen wir mit dem Logo.
+		</para>
+		
 		<figure id="crash_course_demo.globalfile_add">
-			<title>Logo hochladen</title>
+			<title>Bilder als Globale Dateien hochladen</title>
 			<graphic fileref="images/crash_course_demo/globalfile_add.png"/>
 		</figure>
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>File</guilabel></term>
+				<term><guilabel>Datei</guilabel></term>
 				<listitem>
 					<para>
 						Auswahl für die Datei, die von der Anwenderfestplatte
 						auf den Server hochgeladen werden soll. Wählen Sie die
-						Datei <filename>images/logo.jpg</filename> aus dem
-						Paket der Demo-Webseite aus.
+						Datei <filename>files/global_files/logo.gif</filename> aus.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Description</guilabel></term>
+				<term><guilabel>Beschreibung</guilabel></term>
 				<listitem>
 					<para>
 						Optionale Beschreibung der hochzuladenden Datei.
@@ -717,31 +767,30 @@
 		</variablelist>
 		
 		<para>
-			Klicken Sie auf die Schaltfläche <guibutton>Add global
-			file</guibutton>, um das Logo hochzuladen. Kehren Sie dann wieder
-			zur Vorlage zurück und suchen Sie den Code für die Einbindung des
+			Klicken Sie auf die Schaltfläche <guibutton>Speichern</guibutton>, um das Logo hochzuladen. Kehren Sie dann wieder
+			zur Seitenvorlage zurück und suchen Sie den Code für die Einbindung des
 			Logos:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<a href="index.html" title="zur Startseite"><img src="images/logo.jpg"
-	width="193" height="31" alt=">Ihr Logo" /></a>
+<img src="files/global_files/logo.gif" width="345" height="23"
+		 alt="logo-welcompose-demosite" />
 ]]></programlisting>
 
 		<para>
-			Entfernen Sie nun die Referenz <filename>images/logo.jpg</filename>
+			Entfernen Sie nun die Bildreferenz <filename>files/global_files/logo.gif</filename>
 			und setzen Sie den Cursor zwischen die beiden Anführungszeichen,
-			bevor Sie auf <guibutton>Reference Global File</guibutton> klicken.
-			Es öffnet sich ein Pop-up, das die vorhandenen Global Files listet.
+			bevor Sie auf <guibutton>Globale Datei</guibutton> klicken.
+			Es öffnet sich ein Pop-up, das die vorhandenen Globalen Dateien listet.
 			Wählen Sie das soeben hochgeladene Logo aus, indem sie auf dessen
 			Namen klicken. Das Pop-up schliesst sich und es wird der Code
-			<markup>{global_file name="logo.jpg"}</markup> eingesetzt. Der gesamte
+			<markup>{global_file name="logo.gif"}</markup> eingesetzt. Der gesamte
 			Code zur Einbindung des Logos sieht nun so aus:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<a href="index.html" title="zur Startseite"><img src="{global_file name="logo.jpg"}"
-	width="193" height="31" alt=">Ihr Logo" /></a>
+<img src="{global_file name="logo.gif"}" width="345" height="23"
+		 alt="logo-welcompose-demosite" />
 ]]></programlisting>
 
 		<para>
@@ -754,6 +803,69 @@
 			<title>Ausgabe: Startseite mit Logo</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_page_with_logo.png"/>
 		</figure>
+		
+		<para>
+			Laden Sie nun alle sonstigen Dateien ins System, die im Ordner <filename>files/global_files/</filename> liegen (s. <xref linkend="crash_course_demo.globalfile_add"/>). 
+		</para>	
+		
+		<para>
+			Diese Grafiken/Bilder werden als Hintergrundbilder in unserer
+			schon angelegten CSS-Datei verwandt. Um diese nach dem Hochladen
+			zu referenzieren, gehen Sie zum Untermenu <guisubmenu>Globale Vorlagen</guisubmenu>
+			des Menüs <guimenu>Vorlagen</guimenu>. Klicken Sie dort auf
+			<guibutton>Bearbeiten</guibutton> unserer bereits angelegten 
+			CSS-Datei (<filename>wcom_demo_basic.css</filename>). 
+		</para>
+		
+		<para>
+			In einigen der Deklarationen werden als Hintergrund-Grafiken verwandt, die
+			wir nun ersetzen wollen. Suchen Sie nun in der CSS-Datei Deklarationen wie
+			beispielsweise die folgende:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+#headernav {
+height: 2em;
+width: 590px;
+background: transparent url(../files/global_files/bg_content.jpg)
+	bottom left repeat-x;
+}
+]]></programlisting>
+		
+		<para>
+			Entfernen Sie nun die Bildreferenz <filename>../files/global_files/bg_content.jpg</filename> und setzen Sie den Cursor an gleicher Stelle, bevor Sie auf den Link <emphasis>Globale Dateien</emphasis> über der Textarea klicken. Es öffnet sich ein Pop-up, das die vorhandenen Globalen Dateien listet. Wählen Sie die jeweils korrespondierendte Grafik aus, indem sie auf dessen Namen klicken. Das Pop-up schliesst sich und es wird der Code <markup>global_file name="../files/global_files/bg_content.jpg"</markup> eingesetzt. Der gesamte Code zur Einbindung des Logos sieht nun so aus:
+		</para>
+			
+		<programlisting language="smarty"><![CDATA[
+#headernav {
+height: 2em;
+width: 590px;
+background: transparent url(<%global_file name="bg_content.jpg"%>)
+	bottom left repeat-x;
+}
+]]></programlisting>
+			
+			<para>
+				Ersetzen Sie nun die vorhandenen Referenzierungen der einzelnen
+			Grafiken anhand der gleiche Vorgehensweise. Aktivieren Sie 
+			die Checkbox <guimenuitem>Delimiter ändern</guimenuitem>, in dem Sie einen
+			Haken setzen. Eine detailiertere Beschreibung
+			zur Anwendung finden Sie im Kapitel der Globale
+			 Vorlagen (<xref linkend="templating.global_templates.usage.manage_css_files"/>) und speichern
+			ihre Änderung über die Schaltfläche  <guibutton>Speichern</guibutton>.
+		</para>	
+		
+		<para>
+			Rufen Sie nun die Ausgabeseite auf, sehen Sie, das die im CSS 
+			referenzierten Hintergrundgrafiken nun angezeigt werden.
+		</para>
+
+		<figure id="crash_course_demo.frontend.view_page_with_all_images">
+			<title>Ausgabe: Startseite mit Logo und Hintergrundgrafiken</title>
+			<graphic fileref="images/crash_course_demo/frontend/view_page_with_all_images.png"/>
+		</figure>	
+		
+		
 	</sect1>
 	
 	<sect1 id="crash_course_demo.style_homepage_content">
@@ -761,80 +873,79 @@
 		
 		<para>
 			Wie man in <xref linkend="crash_course_demo.demo_website"/> sieht,
-			gehören zum Fliesstext Untertitel und ein Bild. Dies soll nun
-			nachgetragen werden. Wechseln Sie dazu wieder zum Menu
-			<guimenu>Contents</guimenu> und dann zum Untermenu
-			<guisubmenu>Pages</guisubmenu>. Klicken Sie dort auf das Symbol
-			zum Editieren der Startseite.
+			gibt es in der Seite noch ein Bild, das im Kopfbereich angezeigt wird (die Klippen von Helgoland).
+			Da wir uns entschieden haben, dieses Bild für alle der drei Seiten als Kopfbild zu
+			nutzen, bietet es sich an für diesen Zweck eine <guisubmenu>Globale Box</guisubmenu>
+			anzulegen, die wir dann in unserer Seitenvorlage referenzieren.
 		</para>
-
-		<note>
-			<para>
-				Alle folgenden Beispiele setzen den, beim Anlegen der <emphasis>Startseite</emphasis> ausgewählten Text-Konverter
-				<emphasis>Textile</emphasis> voraus. Weitere Information zu Text-Konvertern erhalten Sie im Kapitel xxx.
-			</para>
-		</note>
-				
+		 
 		<para>
-			Zuerst kümmern wir uns um die Textformatierung. Trennen Sie die
-			ersten zwei Sätze des ersten Abschnitts mit zwei Zeilenumbrüchen
-			von dem Rest des Abschnitts ab. Setzen Sie nun das Code-Fragment
-			<markup>p(teaser). </markup>  davor, um dem P-Tag, der den ersten
-			Abschnitt einschliesst, die CSS-Klasse <emphasis>teaser</emphasis>
-			mitzugeben.
+			Gehen Sie zum Untermenu <guisubmenu>Globale Boxen</guisubmenu>
+			des Menüs <guimenu>Inhalte</guimenu>. Klicken Sie dort auf
+			<guibutton>Neu anlegen</guibutton> um unsere Globale Box anzulegen.
+			Sie gelangen zum Eingabeformular.
 		</para>
 		
-		<warning>
-			<para>
-				 Achten Sie dabei darauf, dass Sie nach dem Punkt bei
-				<markup>p(teaser). </markup> das Leerzeichen nicht vergessen,
-				da sonst die Anweisung nicht funktioniert!
-			</para>
-		</warning>
-		
-		<para>
-			Nun müssen wir noch den Untertitel setzen. Setzen Sie den Cursor
-			an das Ende vom ersten Abschnitt, geben Sie zwei Zeilenumbrüche
-			ein und fügen dann den Code <markup>h2. Das ist ein Untertitel</markup>
-			ein. Die ersten zwei Abschnitte des Fliesstextes sollten nun so
-			aussehen:
-		</para>
-		
-		<programlisting language="textile"><![CDATA[
-p(teaser). Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In
-consequat dolor id elit. Pellentesque habitant morbi tristique senectus et
-netus et malesuada fames ac turpis egestas.
-
-h2. Das ist ein Untertitel
-
-Cras urna. Cum sociis natoque penatibus et magnis dis parturient montes,
-nascetur ridiculus mus. Nam egestas porttitor nisl. Aenean dapibus dictum
-magna...
-]]></programlisting>
-		
-		<para>
-			Speichern Sie nun die Seite und laden die Ausgabeseite neu.
-			Der erste Abschnitt sollte nun von
-			<markup><![CDATA[<p class="teaser">]]></markup> eingeschlossen und 
-			orange sein. Auf ihn folgt dann der Untertitel H2, darunter der unbearbeitete Fliesstext.
-		</para>
-		
-		<figure id="crash_course_demo.frontend.view_with_format">
-			<title>Ausgabe: Mit formatierten Text</title>
-			<graphic fileref="images/crash_course_demo/frontend/view_with_format.png"/>
+		<figure id="crash_course_demo.globalbox_add">
+			<title>Globale Box anlegen</title>
+			<graphic fileref="images/crash_course_demo/globalbox_add.png"/>
 		</figure>
-		
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Der Name der Globalen Box. Kommt ausser im 
+							Administrationsbereich nicht zum Einsatz. Muss
+							innerhalb eines Projekts einzigartig sein. Tragen
+							Sie hier bitte <userinput>headerbild</userinput> ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Inhalt der Global Box. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Textkonverter</guilabel></term>
+					<listitem>
+						<para>
+							Textkonverter, der auf den Inhalt der Globalen
+							Box appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>). Belassen
+							Sie die Auswahl auf XHTML (Standard).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Makros anwenden</guilabel></term>
+					<listitem>
+						<para>
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
+							Globalen Box appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>). Achten Sie darauf, das
+							die Checkbox aktiviert ist (Standard).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<note>
+				<para>
+					Nähere Informationen zur Anwendung von Globalen Boxen erhalten
+					erhalten Sie in entsprechenden Kapitel (siehe (siehe <xref
+							linkend="contents.global_boxes.manage"/>).
+				</para>
+			</note>
+			
 		<para>
-			Nachdem dies geschafft ist, kommt nun das Bild hinzu. Öffnen Sie
-			dazu wieder die Startseite und setzen Sie den Cursor nach
-			die Anweisung <markup>p(teaser). </markup> beim ersten Abschnitt. Geben
-			Sie nun zwei Ausrufezeichen ein (<markup>!!</markup>) und platzieren
-			Sie den Cursor zwischen den beiden Ausrufezeichen.
-		</para>
-		
-		<para>
-			Gehen Sie nun zum <emphasis role="strong">Media Manager</emphasis> rechts neben dem Textfeld. Klicken
-			Sie dort auf <guibutton>Upload</guibutton>. Es öffnet sich ein Pop-up Fenster.
+			Gehen Sie nun zum <emphasis role="strong">Mediamanager</emphasis> rechts neben dem
+			Textfeld. Klicken Sie dort auf <guibutton>Upload</guibutton>. Es öffnet sich ein Pop-up Fenster.
 		</para>
 		
 		<figure id="crash_course_demo.mediamanager.upload_popup">
@@ -844,18 +955,18 @@ magna...
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>File</guilabel></term>
+				<term><guilabel>Datei</guilabel></term>
 				<listitem>
 					<para>
 						Dient zur Auswahl des Bildes, das hochgeladen werden
 						soll. Wählen Sie das Bild
-						<filename>images/physalis.jpg</filename> aus, das 
+						<filename>files/media/header-helgoland.jpg</filename> aus, das 
 						Bestandteil der Demo-Webseite ist.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Description</guilabel></term>
+				<term><guilabel>Beschreibung</guilabel></term>
 				<listitem>
 					<para>
 						Hier können Sie eine optionale Beschreibung des
@@ -864,41 +975,54 @@ magna...
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Tags</guilabel></term>
+				<term><guilabel>Schlagworte/Tags</guilabel></term>
 				<listitem>
 					<para>
 						Geben Sie hier Schlüsselwörter ein, die ihnen beim
 						Wiederfinden des Bildes helfen, jeweils getrennt durch
 						ein Komma. Beispiel:
-						<userinput>Physalis, Blume, orange</userinput>.
+						<userinput>Nordsee, Helgoland, Landschaften</userinput>.
 					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
 		
 		<para>
-			Klicken Sie nun auf <guibutton>Upload Media</guibutton>, um 
-			das Bild hochzuladen. Nach erfolgreichen Hochladen des Bildes, schließen
-			Sie bitte über <guibutton>Close</guibutton> das Fenster. Sie sehen nun
+			Klicken Sie nun auf <guibutton>Media hochladen</guibutton>, um 
+			das Bild ins System zu laden. Nach erfolgreichen Hochladen des Bildes, schließen
+			Sie bitte über <guibutton>Schließen</guibutton> das Fenster. Sie sehen nun
 			eine verkleinerte Version des Bildes rechts im Mediamanager.
 		</para>
 		
 		<para>
-			Klicken Sie nun auf die verkleinerte Version des Bildes und es wird
-			der Code <markup>{get_media id="1"}</markup> zwischen die beiden
-			Ausrufezeichen eingefügt. Der ganze erste Abschnitt sieht nun so
-			aus:
-		</para>
+			Klicken Sie nun mit der Maus in die inhaltliche Textarea, um den Fokus
+			dort zu setzen.
+		</para> 
+
+		<para>
+			Um das Bild einzufügen, klicken Sie nun auf die verkleinerte Version des Bildes.
+			Ein weiteres Popup öffnet sich, in dessen Fenster sie Angaben
+			machen können, die Medienspezifisch sind (Bild: Alternativtext und Titel-Tag).
+			
+		<figure id="crash_course_demo.mediamanager_insert_image">
+			<title>Metainformationen zur binären Datei (hier: Bild)</title>
+			<graphic fileref="images/crash_course_demo/mediamanager_insert_image.png"/>
+		</figure>
 		
-		<programlisting language="textile"><![CDATA[
-p(teaser). !{get_media id="1"}! Lorem ipsum dolor sit amet, consectetuer
-adipiscing elit. In consequat dolor id elit. Pellentesque habitant morbi
-tristique senectus et netus et malesuada fames ac turpis egestas.
+		Klicken Sie auf <guibutton>Einfügen</guibutton> um das Popup zu schließen.
+		Der generierte Quelltext
+			
+		<programlisting language="smarty"><![CDATA[
+<img alt="" height="139" src="{get_media id="136"}" width="550"/>
 ]]></programlisting>
+
+			wird an Stelle des Cursors eingefügt. Über den Button <guibutton>Speichern</guibutton>
+			sichern Sie die Inhalte in die Datenbank.
+		</para>
 		
 		<note>
 			<para>
-				Bei der Bildreferenz <markup>{get_media id="1"}</markup> kann
+				Bei der Bildreferenz <markup>{get_media id="136"}</markup> kann
 				der Wert der Bild-ID abweichen, wenn Sie bereits vorher
 				Bilder in den Mediamanager eingefügt haben. Eine Referenz
 				wie <markup>{get_media id="32"}</markup> kann somit auch korrekt
@@ -907,36 +1031,95 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		</note>
 		
 		<para>
+			Nun wollen wir diese Globale Box in unsere Seitenvorlage einfügen.
+			Gehen Sie zum Menü <guimenu>Vorlagen</guimenu> und dann zum
+			Untermenü <guisubmenu>Seitenvorlagen</guisubmenu>. Klicken Sie auf
+			<guibutton>Bearbeiten</guibutton> in der Zeile der angelegten Vorlage um zur
+			Eingabemaske zu gelangen.
+		</para>
+		
+		<para>
+			Suchen Sie nun nach dem kommentierten Bereich
+			<markup role="smarty"><![CDATA[<!-- Global Boxen Bild -->]]></markup> bis
+			<markup role="smarty"><![CDATA[<!-- EOF Global Boxen Bild -->]]></markup>
+			und ersetzen den Bereich durch folgenden Quelltext:
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+<img src="files/media/header-helgoland.jpg" width="550" height="139"
+	 		alt="header-helgoland" />
+]]></programlisting>
+
+		<para>
+			Löschen Sie die gesamte Referenz, setzen den Cursor an die gleiche
+			Stelle und klicken Sie auf den Link oberhalb der Textarea mit Namen
+			<emphasis role="bold">Globale Boxen</emphasis>. Es öffnet sich ein
+			Popup, in dem die angelegten Globalen Boxen gelistet werden. Wählen
+			Sie unsere gerade angelegte Globale Box aus (headerbild), in dem Sie
+			 auf den Namen/Link klicken. Das
+			Popup-Fenster schließt sich und die Referenz wird eingefügt.
+		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+{select_simple ns="Content" class="GlobalBox" method="selectGlobalBox" 
+			var="" id="2"}
+]]></programlisting>
+
+		<para>
+			Setzen Sie den Parameter <filename>var</filename> mit
+			<userinput>headerbild</userinput>, so dass wir die Variable mit
+			Namen auslesen können. Der gesamte Abschnitt sieht nun folgermaßen aus: 
+		</para>	
+		
+		<programlisting language="smarty"><![CDATA[
+{select_simple ns="Content" class="GlobalBox" method="selectGlobalBox" 
+			var="headerbild" id="2"}
+			
+{$headerbild.content}
+]]></programlisting>
+		
+		<para>
 			Speichern Sie nun die Webseite und laden die Ausgabeseite. Sie
 			sollen nun das Resultat Ihrer Anpassungen samt Bild sehen (siehe
 			<xref linkend="crash_course_demo.frontend.view_with_image"/>).
 		</para>
 		
 		<figure id="crash_course_demo.frontend.view_with_image">
-			<title>Startseite mit Bild, Teaser, Untertitel und unbearbeiteten Fliesstext</title>
+			<title>Startseite mit Logo, Style Sheet und Headerbild</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_with_image.png"/>
 		</figure>
+		
+		<para>
+			Damit ist die Gestaltung unserer <userinput>Startseite</userinput>
+			abgeschlossen.
+		</para>
 	</sect1>
 	
 	<sect1 id="crash_course_demo.fill_contents_and_imprint">
-		<title>Inhalte der Seiten Inhalte und Impressum gestalten</title>
+		<title>Inhalte des Impressum gestalten</title>
 		
 		<para>
-			Neben der Startseite haben wir mit der Seite <emphasis>Inhalt</emphasis> und 
-			<emphasis>Impressum</emphasis> noch zwei weitere Seiten (um die Seite <emphasis>Kontakt</emphasis>
+			Neben der Startseite haben wir mit der Seite
+			<emphasis>Impressum</emphasis> noch eine weitere Seite
+			 (um die Seite <emphasis>Kontakt</emphasis>
 			kümmern wir uns im nachfolgenden Kapitel <xref linkend="crash_course_demo.implement_contact_form"/>), 
 			die wir mit Inhalten füllen wollen.
 		</para>
 		
 		<para>
-			Um die beiden Seiten zu befüllen, klicken Sie jeweils wiederum auf das Symbol <guibutton>Edit</guibutton> in der
-			Zeile des Seitentitels.
+			Um die Seite Impressum zu befüllen, klicken Sie in der Seitenübersicht
+			in der Zeile des Seitentitels jeweils wiederum auf das Symbol
+			<guibutton>Bearbeiten</guibutton>.
+			Tragen Sie dort einen beliebigen Text ein. Der rechtlich korrekte
+			und vollständige Eintrag eines Impressums soll hier nicht Gegenstand des
+			 Crash-Kurses sein ;-)
 		</para>
 		
 		<note>
 			<para>
-				Auch ohne Inhalte können diese beiden Seiten jetzt schon in der Ausgabe schon aufgerufen werden, da sie,
-				wie die Startseite, dasselbe <emphasis>Template Set</emphasis> nutzen.
+				Auch ohne Inhalte kann das Impressum jetzt schon in der Ausgabe schon
+				aufgerufen werden, da sie, wie die Startseite, dieselbe
+				<userinput>Vorlagengruppe</userinput> nutzt.
 			</para>
 		</note>
 	</sect1>
@@ -957,7 +1140,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>Title</guilabel></term>
+				<term><guilabel>Titel</guilabel></term>
 				<listitem>
 					<para>
 						Die Überschrift der Seite. Die Vorbelegung mit
@@ -967,7 +1150,19 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Content</guilabel></term>
+				<term><guilabel>URL-Titel</guilabel></term>
+				<listitem>
+					<para>
+						Aus dem <guilabel>Titel</guilabel> wird automatisch
+						ein URL-konformer Seitentitel gebildet. Der vorgeschlagene Titel
+						ist editierbar und ermöglicht somit unterschiedliche Handhabung
+						im Einsatz von Seitentitel und tatsächlicher URL. Für den
+						Crash-Kurs ist dieser nicht von Belang.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Inhalt</guilabel></term>
 				<listitem>
 					<para>
 						Hier können Sie einen Beschreibungstext zum Formular
@@ -978,43 +1173,43 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Text converter</guilabel></term>
+				<term><guilabel>Textkonverter</guilabel></term>
 				<listitem>
 					<para>
 						Wenn Sie wie bei der Startseite Text-Formatierungen
 						verwenden wollen, wählen Sie hier die Option
-						Textile aus dem Menü aus.
+						XHTML aus dem Menü aus.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Apply text macros</guilabel></term>
+				<term><guilabel>Makros anwenden</guilabel></term>
 				<listitem>
 					<para>
 						Setzen Sie hier einen Haken, damit eventuell vorhandene
-						Links im Feld <guilabel>Content</guilabel> erzeugt werden.
+						Links im Feld <guilabel>Inhalt</guilabel> erzeugt werden.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Form type</guilabel></term>
+				<term><guilabel>Formulartyp</guilabel></term>
 				<listitem>
 					<para>
-						Der Form Type bestimmt, aus welchen Feldern das Formular
-						aufgebaut ist. Das <guimenuitem>Personal
-						form</guimenuitem> besteht aus den Feldern Name,
-						E-Mail-Adresse, Homepage und Nachricht. Das 
-						<guimenuitem>Business form</guimenuitem> enthält die
+						Der Formulartyp bestimmt, aus welchen Feldern das Formular
+						aufgebaut ist. Der Typ <guimenuitem>Privates Formular</guimenuitem>
+						besteht aus den Feldern Name,
+						E-Mail-Adresse, Homepage und Nachricht. Der Typ 
+						<guimenuitem>Geschäftliches Formular</guimenuitem> enthält die
 						Felder Vorname, Nachname, Adresse, Ort, Telefonnummer,
 						E-Mail-Adresse, Nachricht und eine Checkbox, bei der
 						der Besucher auswählen kann, ob er zurückgerufen
 						werden will oder nicht. Wählen Sie den Eintrag
-						<guimenuitem>Personal form</guimenuitem> aus.
+						<guimenuitem>Privates Formular</guimenuitem> aus.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>From: address</guilabel></term>
+				<term><guilabel>Absenderadresse</guilabel></term>
 				<listitem>
 					<para>
 						Die Adresse, mit der die vom Formular erzeugte
@@ -1023,7 +1218,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>To: address</guilabel></term>
+				<term><guilabel>Empfängeradresse</guilabel></term>
 				<listitem>
 					<para>
 						Die E-Mail-Adresse, an die die vom Formular erzeugte
@@ -1032,7 +1227,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Subject</guilabel></term>
+				<term><guilabel>Betreff</guilabel></term>
 				<listitem>
 					<para>
 						Betreff, der in die Nachricht eingefügt werden soll,
@@ -1041,35 +1236,35 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Use captcha</guilabel></term>
+				<term><guilabel>Captcha nutzen</guilabel></term>
 				<listitem>
 					<para>
-						Definiert, ob ein Bild in das Formular eingebettet
+						Definiert, ob bspw. ein Bild in das Formular eingebettet
 						werden soll, in dem Text enthalten ist, der vom
 						Besucher abgetippt werden soll. Schützt gegen
 						Formular-Spam. Belassen Sie hier die Voreinstellung
-						<guimenuitem>Disable captcha</guimenuitem>.
+						<guimenuitem>Captcha nicht nutzen</guimenuitem>.
 					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
 		
 		<para>
-			Klicken Sie nun auf <guibutton>Update form</guibutton>, um Ihre
-			Eingaben zu speichern.
+			Klicken Sie nun auf <guibutton>Speichern</guibutton>, um Ihre
+			Eingaben zu sichern.
 		</para>
 		
 		<para>
 			 Wechseln Sie nun zum Menu
-			<guimenu>Templating</guimenu> und dort zum Untermenu
-			<guisubmenu>Templates</guisubmenu> &ndash; Denn es muss noch eine
+			<guimenu>Vorlagen</guimenu> und dort zum Untermenu
+			<guisubmenu>Seitenvorlagen</guisubmenu> &ndash; denn es muss noch eine
 			Vorlage für das Formular angelegt werden.
 		</para>
 		
 		<para>
 			Suchen Sie nach der Vorlage, die Sie für die Inhaltsseiten
 			verwendet haben. Klicken Sie beim Eintrag auf das Symbol
-			<guibutton>Duplicate</guibutton>. Damit kann die bestehende
+			<guibutton>Duplizieren</guibutton>. Damit kann die bestehende
 			Vorlage weiterverwendet und (mit leichten Änderungen) unter
 			einem anderen Namen abgespeichert werden.
 		</para>
@@ -1081,7 +1276,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>Type</guilabel></term>
+				<term><guilabel>Typ</guilabel></term>
 				<listitem>
 					<para>
 						Ändern Sie den Vorlagen-Typ von 
@@ -1103,7 +1298,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		
 		<para>
 			Lassen Sie anderen Felder vorerst unangetastet und klicken
-			Sie auf die Schaltfläche <guibutton>Duplicate template</guibutton>.
+			Sie auf die Schaltfläche <guibutton>Seitenvorlage duplizieren</guibutton>.
 			Wenn Sie jetzt die Ausgabeseite für das Kontaktformular aufrufen,
 			sehen Sie, dass der Inhaltsbereich noch leer ist. Aber das
 			wird sich gleich ändern.
@@ -1112,13 +1307,12 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		<para>
 			Klicken Sie in der Vorlagenübersicht in der Zeile der <emphasis>Vorlage
 			Kontaktformular</emphasis> auf das Symbol zum Bearbeiten der Vorlage und
-			ersetzen Sie den Bereich von <markup><![CDATA[<div id="content">]]></markup> bis
-			<markup><![CDATA[<!-- content --></div>]]></markup>
+			ersetzen Sie den Bereich von <markup><![CDATA[<!-- Inhalte -->]]></markup> bis
+			<markup><![CDATA[<!-- EOF Inhalte --></div>]]></markup>
 			durch folgenden Code:
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<div id="content">
 	<h1>{$simple_form.title}</h1>
 	
 	{$simple_form.content}
@@ -1143,7 +1337,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 	
 	{$form.submit.html}
 	</form>
-<!-- content --></div>
+
 ]]></programlisting>
 		
 		<para>
@@ -1152,17 +1346,17 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		</para>
 
 		<figure id="crash_course_demo.frontend.view_form_raw">
-			<title>Ausgabe: Kontaktformular Elemente</title>
+			<title>Ausgabe: Kontaktformular</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_form_raw.png"/>
 		</figure>
 				
 		<para>
 			Allerdings
-			ist es noch nicht ganz einsatzbereit, denn die Vorlagen für die
+			ist das Formular noch nicht ganz einsatzbereit, denn die Vorlage für die
 			E-Mails, die versendet werden sollen, werden auch noch benötigt.
 			Verlassen Sie die Eingabemaske für die Formularvorlage und gehen
 			Sie zur Vorlagenübersicht zurück. Klicken Sie dort auf den Link
-			<guibutton>Add new</guibutton>, um eine neu Vorlage anzulegen.
+			<guibutton>Neu anlegen</guibutton>, um eine neue Vorlage anzulegen.
 		</para>
 
 		<figure id="crash_course_demo.templates_form_email">
@@ -1172,7 +1366,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				
 		<variablelist>
 			<varlistentry>
-				<term><guilabel>Type</guilabel></term>
+				<term><guilabel>Typ</guilabel></term>
 				<listitem>
 					<para>
 						Wählen Sie
@@ -1189,10 +1383,38 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><guilabel>Sets</guilabel></term>
+				<term><guilabel>Beschreibung</guilabel></term>
 				<listitem>
 					<para>
-						Wählen Sie das aktuelle Vorlagen-Set
+						Optionaler Beschreibungstext.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Inhalt</guilabel></term>
+				<listitem>
+					<para>
+						Hier kommt unser Vorlageninhalt für die generierte E-Mail
+						hinein. Fügen Sie folgenden Quelltext ein:
+					</para>
+
+		<programlisting language="smarty"><![CDATA[
+E-Mail von {$form_data.now|date_format:"%d.%m.%Y. %H:%M:%S"}
+
+Name: {$form_data.name}
+E-Mail Adresse: {$form_data.email}
+Webseite: {$form_data.homepage}
+
+Nachricht: {$form_data.message|wordwrap:65}
+]]></programlisting>
+
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Vorlagengruppen</guilabel></term>
+				<listitem>
+					<para>
+						Wählen Sie die aktuelle Vorlagengruppe 
 						<guimenuitem>Standardaussehen</guimenuitem> aus.
 					</para>
 				</listitem>
@@ -1200,30 +1422,21 @@ tristique senectus et netus et malesuada fames ac turpis egestas.
 		</variablelist>
 		
 		<para>
-			In das Feld <guilabel>Content</guilabel> fügen Sie folgenden Code ein:
-		</para>
-		
-		<programlisting language="smarty"><![CDATA[
-E-Mail von {$form_data.now|date_format:"%d.%m.%Y, %H:%M:%S"}:
-
-Name: {$form_data.name}
-E-Mail: {$form_data.email}
-Homepage: {$form_data.homepage}
-
-{$form_data.message|wordwrap:65}
-]]></programlisting>
-		
-		<para>
-			Klicken Sie auf die Schaltfläche <guibutton>Add template</guibutton>,
-			um die Vorlage zu speichern. Jetzt können Sie das Formular auf
+			Klicken Sie auf die Schaltfläche <guibutton>Speichern</guibutton>,
+			um die Vorlage zu sichern. Jetzt können Sie das Formular auf
 			der Ausgabeseite ausfüllen und absenden. Wenn Sie alles richtig
 			eingegeben haben, sollten Sie in den nächsten Minuten ein
 			E-Mail mit Ihren Formulareingaben in der Inbox haben.
 		</para>
 		
-		<figure id="crash_course_demo.frontend.view_generated_form_mail">
-			<title>Vom Kontaktformular erzeugte E-Mail</title>
-			<graphic fileref="images/crash_course_demo/frontend/view_generated_form_mail.png"/>
-		</figure>
+		<para>
+			Damit haben wir alle Arbeiten abgeschlossen und beenden den Crash-Kurs.
+		</para>
+		
+		<para>
+			Sollten es Fragen hierzu geben, bzw. offen geblieben sein, besuchen Sie,
+			das <ulink url="http://welcompose.de/forum/">Welcompose Forum</ulink>.
+			Hier antworten und helfen Ihnen gerne Benutzer wie auch Entwickler.
+		</para>
 	</sect1>
 </chapter>
