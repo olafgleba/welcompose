@@ -449,8 +449,8 @@ protected function printHelp ()
 {
 	$rev = '$Date: 2006-11-24 10:15:22 +0100 (Fre, 24 Nov 2006) $';
 	$this->printStderr("Welcompose Setup Generator 0.1 ($rev)\r\n");
-	$this->printStderr("(c) 2006 sopic GmbH\r\n");
-	$this->printStderr("Licensed below the terms of the Open Software License 3.0 2.1.\r\n");
+	$this->printStderr("(c) 2008 creatics media.systems\r\n");
+	$this->printStderr("Licensed below the terms of the GNU AGPL v3\r\n");
 	$this->printStderr("\r\n");
 	$this->printStderr("Usage: php create_install_package.php \\\r\n");
 	$this->printStderr("           --compress=<true|false> \\\r\n");
