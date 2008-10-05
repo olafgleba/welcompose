@@ -1082,7 +1082,7 @@ DROP TABLE IF EXISTS `content_generator_form_fields`;
 CREATE TABLE `content_generator_form_fields` (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `form` int(11) UNSIGNED NOT NULL,
-  `type` enum('hidden','text','textarea','submit','reset','radio','checkbox','select') NOT NULL DEFAULT 'text',
+  `type` enum('hidden','text','textarea','submit','reset','radio','checkbox','select', 'file') NOT NULL DEFAULT 'text',
   `label` varchar(255),
   `name` varchar(255),
   `value` text,

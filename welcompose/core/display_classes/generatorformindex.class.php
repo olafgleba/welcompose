@@ -289,6 +289,19 @@ public function render ()
 					// create element
 					$element = $FORM->addElement('reset', $_field['name'], $_field['label'], $attributes);
 				break;
+			case 'file':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'class' => 'ffile'
+					);
+					
+					// create element
+					$element = $FORM->addElement('file', $_field['name'], $_field['label'], $attributes);
+					
+					// save field name for later use within attachments
+					$_field_name = $_field['name'];
+				break;
 		}
 		
 		// set value
@@ -360,12 +373,45 @@ public function render ()
 		$params = array();
 		$params = sprintf('-f %s', $from);
 		
-		// load PEAR::Mail
+		// load PEAR::Mail and PEAR::Mail_mime
 		require_once('Mail.php');
+		require_once('Mail/mime.php');
+		
+		// build PEAR::Mail_Mime Instance 
+		$mime = new Mail_mime();
+		$mime->setTXTBody($body);
+		
+		// Attachments
+		if (isset($_FILES) && $_FILES[$_field_name]['size'] > 0) {
+			
+			// prepare upload path
+			$uploadpath = dirname(__FILE__).'/../../tmp/mail_attachments/';
+		
+			// attached file
+			$uploadfile = $_FILES[$_field_name]['name'];
+		
+			// prepare target file path
+			$file = $uploadpath.$uploadfile;
+					
+			// move file
+			move_uploaded_file($_FILES[$_field_name]['tmp_name'], $file);
+		
+			// attach file
+			$mime->addAttachment($file);
+		}
+
+		$mime_body = $mime->get();
+		$mime_headers = $mime->headers($headers);	
+		
 		$MAIL = Mail::factory('mail', $params);
 		
 		// send mail
-		if ($MAIL->send($recipients, $headers, $body)) {
+		if ($MAIL->send($recipients, $mime_headers, $mime_body)) {
+			// delete attachment file if exists
+			if(file_exists($file)) {
+				unlink($file);
+			}
+			
 			// add response to session
 			$_SESSION['form_submitted'] = 1;
 			
