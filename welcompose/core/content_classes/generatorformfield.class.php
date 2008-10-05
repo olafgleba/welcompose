@@ -452,7 +452,8 @@ public function getTypeListForForm ()
 		'reset' => 'reset',
 		'radio' => 'radio',
 		'checkbox' => 'checkbox',
-		'select' => 'select'
+		'select' => 'select',
+		'file' => 'file'
 	);
 	
 	// sort types
