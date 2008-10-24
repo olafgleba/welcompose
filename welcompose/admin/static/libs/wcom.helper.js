@@ -101,6 +101,9 @@ Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
 Helper.prototype.URLify = Helper_URLify;
+Helper.prototype.adoptBox = Helper_adoptBox;
+Helper.prototype.loaderAdoptBox = Helper_loaderAdoptBox;
+Helper.prototype.showResponseAdoptBox = Helper_showResponseAdoptBox;
 
 
 /**
@@ -1683,6 +1686,69 @@ function Helper_URLify (string)
 	} catch (e) {
 		_applyError(e);
 	}	
+}
+
+/**
+ * Binds available boxes to current page
+ *
+ * @param {string} elem Current Element
+ * @throws applyError on exception
+ */
+function Helper_adoptBox (elem)
+{
+	try {
+		Element.scrollTo('container');
+	
+		var page_name = elem.parentNode.parentNode;
+		page_name = page_name.childNodes[3].innerHTML;
+					
+		var url = '../content/pages_boxes_adopt.php';
+		var pars = 'id=' + elem.id + '&page=' + elem.rel + '&page_name=' + page_name;
+		
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'post',
+				parameters : pars,
+				onLoading : Helper.loaderAdoptBox,
+				onComplete : Helper.showResponseAdoptBox
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Display indicator layer while XMLHttpRequest processing.
+ *
+ * @throws applyError on exception
+ */
+function Helper_loaderAdoptBox ()
+{
+	try {
+		Element.show('indicator_adopt');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Layer fadeout on XMLHttpRequest response.
+ *
+ * @see #adoptBox
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Helper_showResponseAdoptBox(req)
+{
+	try {
+		var e = $('boxes');
+		new Insertion.Bottom(e, req.responseText);
+		setTimeout("Effect.Fade('indicator_adopt', {duration: 0.4})", 300);
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
 /**

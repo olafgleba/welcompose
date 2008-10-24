@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
+<script type="text/javascript">
+var toggleElem = 2;
+</script>
+
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
@@ -94,7 +98,7 @@
 <br class="clearb" />
 {/if}
 {if !empty($boxes)}
-<table summary="{i18n Available Boxes}">
+<table summary="{i18n Available Boxes}" id="boxes">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
@@ -127,6 +131,53 @@
 {/if}
 {else}
 <p>{i18n No box has been created yet.}</p>
+{/if}
+
+<p id="indicator_adopt"><img src="../static/img/indicator.gif" alt="" /></p>
+
+<br class="clearb" />
+<div class="secnav474_nonav_c"></div>
+
+<div class="hli">
+<h2>{i18n Adopt existing Boxes} <a class="toggleElemBoxes" href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></h2>
+<!-- hli --></div>
+
+{if !empty($allboxes)}
+<table summary="{i18n Available Boxes of all pages}" id="allboxes">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="275" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="270" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page">Name</th>
+<th>Page</th>
+<th>Content (Raw)</th>
+<th>{i18n View}</th>
+<th>{i18n Adopt Box}</th>
+</tr>
+{foreach from=$allboxes item=_allbox}
+<tr>
+<td>{$_allbox.name|escape:"htmlall"}</td>
+<td>{$_allbox.page_name|truncate:140}</td>
+<td>{$_allbox.content_raw|truncate:50|escape:htmlall}</td>
+<td><a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a></td>
+<td><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
+</tr>
+<tr id="o_{$_allbox.id}" class="outer">
+<td colspan="7">
+<div id="i_{$_allbox.id}" class="inner">
+<fieldset>
+<h3>{i18n Content} (Source)</h3>
+{$_allbox.content_raw|escape:html}
+</fieldset>
+</div>
+</td>
+</tr>
+{/foreach}
+</table>
 {/if}
 
 <!-- content --></div>

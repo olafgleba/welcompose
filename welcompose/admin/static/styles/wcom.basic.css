@@ -175,6 +175,9 @@ width: 474px;
 wid\th: 464px;
 padding: 0 0 4px 10px;
 }
+.hli h2 a, .hli h2 a:active, .hli h2 a:focus {
+background: transparent;
+}
 /* headline on right besides content */
 .secnav474_nonav_c {
 float: right;
@@ -456,7 +459,24 @@ color: #ff620d;
 font-weight: bold;
 }
 
+/* print errors */
+div#error h1 {
+	margin: 18px 0 4px 0;
+	color: #ff620d;
+}
+div#error h2 {
+	margin: 0 0 6px 0;
+}
+div#error p {
+	margin: 0;
+}
+
 /* default display set on grouped form elements */
 #additional_metadata_container {
+display: none;
+}
+
+/* Box adopt */
+#indicator_adopt {
 display: none;
 }

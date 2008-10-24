@@ -172,6 +172,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.adopt' : function(el){
+		el.onclick = function(){
+			Helper.adoptBox(this);
+			return false;
+		}
+	},
 	'.confirmDelNav' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelNavAction(this);
@@ -232,9 +238,15 @@ var definitions = {
 			return false;
 		}
 	},
-	'.toggleNavigation' : function(el){
+	'.toggleElemNavigation' : function(el){
 		el.onclick = function(){
-			Tables.toggleNavigation(this);
+			Tables.toggleElem(this);
+			return false;
+		}
+	},
+	'.toggleElemBoxes' : function(el){
+		el.onclick = function(){
+			Tables.toggleElem(this);
 			return false;
 		}
 	},

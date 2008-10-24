@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_boxes_select.php
+ * File: pages_boxes_adopt.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -17,7 +17,7 @@
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
@@ -64,7 +64,7 @@ try {
 	// start session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
-
+	
 	// load user class
 	/* @var $USER User_User */
 	$USER = load('user:user');
@@ -80,7 +80,15 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
-
+	
+	// load textconverter class
+	/* @var $TEXTCONVERTER Application_Textconverter */
+	$TEXTCONVERTER = load('application:textconverter');
+	
+	// load textmacro class
+	/* @var $TEXTMACRO Application_Textmacro */
+	$TEXTMACRO = load('application:textmacro');
+	
 	// load box class
 	/* @var $BOX Content_Box */
 	$BOX = load('content:box');
@@ -105,66 +113,104 @@ try {
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-	
-	// make sure, that the page parameter is present
-	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC))) {
-		header("Location: pages_select.php");
-		exit;
-	}
-	
+
 	// assign paths
 	$BASE->utility->smarty->assign('wcom_admin_root_www',
 		$BASE->_conf['path']['wcom_admin_root_www']);
+				
+	// define page
+	$page = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC);
 	
-	// assign current user and project id
-	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
-	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
+	// get box
+	$box = $BOX->selectBox(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
-	// select available projects
-	$select_params = array(
-		'user' => WCOM_CURRENT_USER,
-		'order_macro' => 'NAME'
-	);
-	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
-	
-	// get boxes
+	// get all boxes related to provided page id
 	$boxes = $BOX->selectBoxes(array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => 20
 	));
-	$BASE->utility->smarty->assign('boxes', $boxes);
+
+	// prepare sql data
+	$sqlData = array();
+	$sqlData['page'] = $page;
 	
-	// get all boxes with related Page table fields
-	$allboxes = $BOX->selectBoxesAndPages(array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC)
-	));
-	$BASE->utility->smarty->assign('allboxes', $allboxes);
-	
-	// get page
-	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
-	$BASE->utility->smarty->assign('page', $page);
-	
-	// count available boxes
-	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC)
-	);
-	$box_count = $BOX->countBoxes($select_params);
-	$BASE->utility->smarty->assign('box_count', $box_count);
-	
-	// prepare and assign page index
-	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($box_count, 20));
-	
-	// import and assign request params
-	$request = array(
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
-	);
-	$BASE->utility->smarty->assign('request', $request);
-	
-	// display the page
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_boxes_select.html', WCOM_TEMPLATE_KEY);
+	// differ box names to avoid duplicates
+	$_box = $box['name'];	
+	foreach ($boxes as $_boxes) {
+		if (in_array($box['name'], $_boxes)) {		
+			$_box = $box['name'].'_copy_of_'.strtolower($_REQUEST['page_name']);
+		}
+	}
 		
+	$sqlData['name'] = $_box;
+	$sqlData['content_raw'] = $box['content_raw'];
+	$sqlData['content'] = $box['content'];
+	$sqlData['text_converter'] = ($box['text_converter'] > 0) ? 
+		$box['text_converter'] : null;
+	$sqlData['apply_macros'] = (string)intval($box['apply_macros']);
+	
+	// apply text macros and text converter if required
+	if ($box['text_converter'] > 0 || $box['apply_macros'] > 0) {
+		// extract content
+		$content = $box['content'];
+	
+		// apply startup and pre text converter text macros 
+		if ($box['apply_macros'] > 0) {
+			$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+		}
+	
+		// apply text converter
+		if ($box['text_converter'] > 0) {
+			$content = $TEXTCONVERTER->applyTextConverter(
+				$box['text_converter'],
+				$content
+			);
+		}
+	
+		// apply post text converter and shutdown text macros 
+		if ($box['apply_macros'] > 0) {
+			$content = $TEXTMACRO->applyTextMacros($content, 'post');
+		}
+	
+		// assign content to sql data array
+		$sqlData['content'] = $content;
+	}
+	
+	// test sql data for pear errors
+	$HELPER->testSqlDataForPearErrors($sqlData);
+			
+	//insert it
+	try {
+		// begin transaction
+		$BASE->db->begin();
+		
+		// save returned insert_id and execute operation
+		$_insert_id = $BOX->addBox($sqlData);
+	
+		// commit transaction
+		$BASE->db->commit();
+	} catch (Exception $e) {
+		// do rollback
+		$BASE->db->rollback();
+	
+		// re-throw exception
+		throw $e;
+	}
+	
+	// clean buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
+		
+	// print response 
+	print "<tr>\n";
+	print "<td>$_box</td>\n";
+	print "<td><a class=\"edit\" href=\"pages_boxes_edit.php?page=$page&amp;id=$_insert_id\" title=\"Bearbeiten\"></a></td>\n";
+	print "<td><a class=\"delete\" href=\"pages_boxes_delete.php?page=$page&amp;id=$_insert_id\" title=\"loeschen\"></a></td>\n";
+	print "</tr>\n";
+		
+
 	// flush the buffer
 	@ob_end_flush();
 	exit;
@@ -175,8 +221,15 @@ try {
 		@ob_end_clean();
 	}
 	
-	// raise error
-	$BASE->error->displayException($e, $BASE->utility->smarty);
+	// raise error, print inline
+	print '<div id="error">';
+	print '<h1>'.gettext('An error occured').'</h1>';
+	print '<h2>'.gettext('Welcompose says').':</h2>';
+	print '<p>';
+	$BASE->error->printExceptionMessage($e);
+	print '</p>';
+	print '</div>';
+	
 	$BASE->error->triggerException($e);
 	
 	// exit

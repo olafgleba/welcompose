@@ -401,6 +401,119 @@ public function selectBoxes ($params = array())
 }
 
 /**
+ * Method to select one or more boxes and the related page info fields. If param 'page' is set
+ * the result set will gets all boxes except the ones related to the provided param page.
+ * Takes key=>value array with select params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>page, int, optional: Page id</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws Content_BoxException
+ * @param array Select params
+ * @return array
+ */
+public function selectBoxesAndPages ($params = array())
+{
+	// access check
+	if (!wcom_check_access('Content', 'Box', 'Use')) {
+		throw new Content_BoxException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$page = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_BoxException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'page':
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new Content_BoxException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			`content_boxes`.`id` AS `id`,
+			`content_boxes`.`page` AS `page`,
+			`content_boxes`.`name` AS `name`,
+			`content_boxes`.`content_raw` AS `content_raw`,
+			`content_boxes`.`content` AS `content`,
+			`content_boxes`.`text_converter` AS `text_converter`,
+			`content_boxes`.`apply_macros` AS `apply_macros`,
+			`content_boxes`.`date_modified` AS `date_modified`,
+			`content_boxes`.`date_added` AS `date_added`,
+			`content_pages`.`id` AS `page_id`,
+			`content_pages`.`project` AS `project`,
+			`content_pages`.`type` AS `type`,
+			`content_pages`.`template_set` AS `template_set`,
+			`content_pages`.`name` AS `page_name`,
+			`content_pages`.`name_url` AS `name_url`,
+			`content_pages`.`alternate_name` AS `alternate_name`,
+			`content_pages`.`description` AS `description`,
+			`content_pages`.`optional_text` AS `optional_text`,
+			`content_pages`.`url` AS `url`,
+			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`index_page` AS `index_page`,
+			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
+			`content_pages`.`sitemap_priority` AS `sitemap_priority`
+		FROM
+			".WCOM_DB_CONTENT_BOXES." AS `content_boxes`
+		JOIN
+			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
+		  ON
+			`content_boxes`.`page` = `content_pages`.`id`
+		WHERE
+			`content_pages`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT 
+	);
+	
+	// add where clauses
+	if (!empty($page) && is_numeric($page)) {
+		$sql .= " AND `content_pages`.`id` != :page ";
+		$bind_params['page'] = $page;
+	}
+	
+	// add where clause; do not include existing boxes
+	$sql .= " AND `content_pages`.`name` != `content_boxes`.`name` ";
+	
+	// add sorting
+	$sql .= " ORDER BY `content_pages`.`name` ";
+	
+	// add limits
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
+	}
+
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+
+/**
  * Method to count boxes. Takes key=>value array with count params as first
  * argument. Returns array.
  * 

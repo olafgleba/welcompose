@@ -478,7 +478,9 @@ Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
 Init.prototype.setCookie = Init_setCookie;
 Init.prototype.getCookie = Init_getCookie;
-Init.prototype.getToogleNavigation = Init_getToogleNavigation;
+Init.prototype.getToogleElem = Init_getToogleElem;
+Init.prototype.getToogleElemSingle = Init_getToogleElemSingle;
+
 
 /**
  * All functions supposed to be called on load must take place within this function.
@@ -568,10 +570,12 @@ function Init_getVars ()
 				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
-		if (typeof toggleNavigation != 'undefined') {
-			if (toggleNavigation == 1) {
-				Init.getToogleNavigation();
+		if (typeof toggleElem != 'undefined') {
+			if (toggleElem == 1) {
+				Init.getToogleElem();
 			}
+			else if (toggleElem == 2) 
+				Init.getToogleElemSingle();
 		}
 		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
 			Init.getCbxStatus(checkbox_status);
@@ -738,7 +742,7 @@ function Init_getCookie (name)
  * 
  * @throws applyError on exception
  */
-function Init_getToogleNavigation ()
+function Init_getToogleElem ()
 {
 	try {
 		if (navigator.cookieEnabled == true && document.cookie) {
@@ -763,6 +767,41 @@ function Init_getToogleNavigation ()
 					} else {
 						tables[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
 					}
+				}
+			}
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Toogle display of the one single table depending on current element pointer.
+ * 
+ * @throws applyError on exception
+ */
+function Init_getToogleElemSingle ()
+{
+	try {
+		if (navigator.cookieEnabled == true && document.cookie) {
+			
+			var table = document.getElementById('allboxes');
+				
+			if (Init.getCookie(table.id)) {
+				table.style.display = Init.getCookie(table.id);
+			}
+				
+			if (Init.getCookie(table.id) == 'block') {					
+				if (Helper.isBrowser('ie')) {
+					table.previousSibling.childNodes[0].lastChild.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
+				} else {
+					table.previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
+				}
+			} else {
+				if (Helper.isBrowser('ie')) {
+					table.previousSibling.childNodes[0].lastChild.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
+				} else {
+					table.previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = '<img title="' + showElement + '" src="../static/img/icons/open.gif" alt="" />';
 				}
 			}
 		}		
@@ -1399,7 +1438,7 @@ Tables.prototype = new Base();
 Tables.prototype.showTableRow = Tables_showTableRow;
 Tables.prototype.hideTableRow = Tables_hideTableRow;
 Tables.prototype.collapseTableRow = Tables_collapseTableRow;
-Tables.prototype.toggleNavigation = Tables_toggleNavigation;
+Tables.prototype.toggleElem = Tables_toggleElem;
 
 /**
  * Show formely hidden table row depending on current element pointer.
@@ -1493,12 +1532,12 @@ function Tables_hideTableRow (elem)
 }
 
 /**
- * Toogle display of the navigation table depending on current element pointer.
+ * Toogle display of a table depending on current element pointer.
  * 
  * @param {string} elem Current element
  * @throws applyError on exception
  */
-function Tables_toggleNavigation (elem)
+function Tables_toggleElem (elem)
 {
 	try {
 		// properties

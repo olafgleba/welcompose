@@ -57,7 +57,7 @@ width: 490px;
 }
 
 /* links */
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.comment, a.commenthide, a.mm_cast, a.mm_edit, a.mm_delete {
+a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.adopt, a.comment, a.commenthide, a.mm_cast, a.mm_edit, a.mm_delete {
 display: block;
 width: 20px;
 height: 20px;
@@ -121,6 +121,12 @@ background: transparent url(../img/icons/move.gif) 0 0 no-repeat;
 } 
 a.move:hover, a.move:active, a.move:focus {
 background: transparent url(../img/icons/move.gif) 0 -44px no-repeat;
+}
+a.adopt:link, a.adopt:visited {
+background: transparent url(../img/icons/adopt.gif) 0 0 no-repeat;
+} 
+a.adopt:hover, a.adopt:active, a.adopt:focus {
+background: transparent url(../img/icons/adopt.gif) 0 -44px no-repeat;
 }
 a.comment:link, a.comment:visited {
 background: transparent url(../img/icons/upload.gif) 0 0 no-repeat;
@@ -228,6 +234,11 @@ margin: 20px 0 5px 0;
 /* Blogcomments */
 table.blogcomments td {
 padding: 4px 10px 4px 0;
+}
+
+/* Boxes */
+table#allboxes {
+display: none;
 }
 
 /* filter */
