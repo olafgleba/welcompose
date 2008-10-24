@@ -142,7 +142,6 @@ var toggleElem = 2;
 <h2>{i18n Adopt existing Boxes} <a class="toggleElemBoxes" href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></h2>
 <!-- hli --></div>
 
-{if !empty($allboxes)}
 <table summary="{i18n Available Boxes of all pages}" id="allboxes">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="275" height="5" alt="" /></td>
@@ -151,6 +150,7 @@ var toggleElem = 2;
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 </tr>
+{if !empty($allboxes)}
 <tr>
 <th class="page">Name</th>
 <th>Page</th>
@@ -177,8 +177,12 @@ var toggleElem = 2;
 </td>
 </tr>
 {/foreach}
-</table>
+{else}
+<tr>
+<td>{i18n No other page Box has been created yet}</td>
+</tr>
 {/if}
+</table>
 
 <!-- content --></div>
 
