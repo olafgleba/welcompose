@@ -147,10 +147,10 @@ var toggleElem = 2;
 <table summary="{i18n Available Boxes of all pages}" id="allboxes">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="275" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="270" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="255" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 </tr>
 {if !empty($allboxes)}
 <tr>
@@ -172,7 +172,7 @@ var toggleElem = 2;
 <td colspan="7">
 <div id="i_{$_allbox.id}" class="inner">
 <fieldset>
-<h3>{i18n Content} (Source)</h3>
+<h3>{i18n Content (Raw)}</h3>
 {$_allbox.content_raw|escape:html}
 </fieldset>
 </div>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-13 23:40+0200\n"
+"POT-Creation-Date: 2008-10-26 18:04+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -31,7 +31,8 @@ msgstr ""
 #: projects_select.html:77 textconverters_select.html:77
 #: textmacros_select.html:77 antispamplugins_select.html:80
 #: blogcommentstatuses_select.html:78 globalboxes_select.html:78
-#: navigations_select.html:65 pages_generatorforms_fields_select.html:100
+#: navigations_select.html:65 pages_boxes_select.html:108
+#: pages_boxes_select.html:157 pages_generatorforms_fields_select.html:100
 #: pagetypes_select.html:65 podcastcategories_select.html:78
 #: structuraltemplates_select.html:79 globalfiles_select.html:88
 #: globaltemplates_select.html:82 templates_select.html:109
@@ -42,7 +43,7 @@ msgstr ""
 #: templatetypes_add.php:106 templatetypes_edit.php:117 groups_add.php:116
 #: groups_copy.php:132 groups_edit.php:132 rights_add.php:106
 #: rights_edit.php:116 users_add.php:121 users_edit.php:122
-#: blogitem.class.php:211 simpleformindex.class.php:191
+#: blogitem.class.php:216 simpleformindex.class.php:196
 msgid "Name"
 msgstr "Name"
 
@@ -62,7 +63,7 @@ msgstr "Name"
 #: templatetypes_add.php:110 templatetypes_edit.php:121 groups_add.php:120
 #: groups_copy.php:136 groups_edit.php:136 rights_add.php:110
 #: rights_edit.php:120 users_add.php:125 users_edit.php:126
-#: blogitem.class.php:215 simpleformindex.class.php:195
+#: blogitem.class.php:220 simpleformindex.class.php:200
 msgid "Please enter a name"
 msgstr "Bitte tragen Sie einen Namen ein"
 
@@ -288,7 +289,7 @@ msgid "The field whether the plugin is active accepts only 0 or 1"
 msgstr "Das Feld \"Aktiv\" kann nur den Wert 0 oder 1 haben"
 
 #: blogcomments_edit.php:127 users_select.html:86 users_add.php:128
-#: users_edit.php:138 blogitem.class.php:218
+#: users_edit.php:138 blogitem.class.php:223
 msgid "E-mail"
 msgstr "E-Mail"
 
@@ -297,7 +298,7 @@ msgid "Please enter a valid email address"
 msgstr "Bitte geben Sie eine gültige E-Mail Adresse an"
 
 #: blogcomments_edit.php:134 users_add.php:147 users_edit.php:156
-#: blogitem.class.php:225 simpleformindex.class.php:206
+#: blogitem.class.php:230 simpleformindex.class.php:211
 msgid "Homepage"
 msgstr "Webseite"
 
@@ -311,9 +312,9 @@ msgstr "Bitte geben Sie eine gültige Webseiten Adresse an"
 #: pages_generatorforms_content_edit.php:157
 #: pages_simpleforms_content_edit.php:164
 #: pages_simplepages_content_edit.php:150 structuraltemplates_add.php:120
-#: structuraltemplates_edit.php:131 globaltemplates_add.php:136
-#: globaltemplates_edit.php:147 templates_add.php:158 templates_copy.php:177
-#: templates_edit.php:176
+#: structuraltemplates_edit.php:131 pages_boxes_select.html:175
+#: globaltemplates_add.php:136 globaltemplates_edit.php:147
+#: templates_add.php:158 templates_copy.php:177 templates_edit.php:176
 msgid "Content"
 msgstr "Inhalt"
 
@@ -1060,6 +1061,16 @@ msgstr "Erstellungsdatum"
 msgid "A box with the given name already exists"
 msgstr "Eine gleichnamige Box existiert bereits"
 
+#: pages_boxes_adopt.php:226 error.html:24 error_mediamanager.html:2
+#: error_popup_403.html:33 error_popup_723.html:33
+msgid "An error occured"
+msgstr "Es ist ein Fehler aufgetreten"
+
+#: pages_boxes_adopt.php:227 error.html:26 error_mediamanager.html:4
+#: error_popup_403.html:35 error_popup_723.html:35
+msgid "Welcompose says"
+msgstr "Welcompose meldet"
+
 #: pages_generatorforms_content_edit.php:178
 #: pages_simpleforms_content_edit.php:201
 msgid "From: address"
@@ -1283,29 +1294,29 @@ msgstr ""
 msgid "A structural template with the given name already exists"
 msgstr "Eine gleichnamige Strukturvorlage existiert bereits"
 
-#: login.php:76 simpleformindex.class.php:198 simpleformindex.class.php:406
-#: systemlogin.class.php:141
+#: login.php:76 simpleformindex.class.php:203 simpleformindex.class.php:411
+#: systemlogin.class.php:146
 msgid "E-mail address"
 msgstr "E-Mail Adresse"
 
-#: login.php:80 systemlogin.class.php:145
+#: login.php:80 systemlogin.class.php:150
 msgid "Please enter your e-mail address"
 msgstr "Bitte tragen Sie Ihre E-Mail Adresse ein"
 
-#: login.php:83 users_add.php:138 users_edit.php:148 systemlogin.class.php:148
+#: login.php:83 users_add.php:138 users_edit.php:148 systemlogin.class.php:153
 #: database.php:91 finish.html:54
 msgid "Password"
 msgstr "Passwort"
 
-#: login.php:87 systemlogin.class.php:152
+#: login.php:87 systemlogin.class.php:157
 msgid "Please enter your password"
 msgstr "Bitte tragen Sie Ihr Passwort ein"
 
-#: login.php:88 systemlogin.class.php:153
+#: login.php:88 systemlogin.class.php:158
 msgid "Invalid password"
 msgstr "Ungültiges Passwort"
 
-#: login.php:91 login.html:27 systemlogin.class.php:156
+#: login.php:91 login.html:27 systemlogin.class.php:161
 msgid "Login"
 msgstr "Anmelden"
 
@@ -1465,7 +1476,8 @@ msgstr "Community-Einstellungen"
 #: pages_blogs_pingserviceconfigurations_select.html:67
 #: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:84
 #: pages_blogs_postings_select.html:67 pages_boxes_add.html:85
-#: pages_boxes_edit.html:85 pages_boxes_select.html:74 pages_edit.html:113
+#: pages_boxes_edit.html:85 pages_boxes_select.html:78
+#: pages_boxes_select.html:88 pages_boxes_select.html:126 pages_edit.html:113
 #: pages_edit.html:119 pages_generatorforms_content_edit.html:78
 #: pages_generatorforms_content_edit.html:84
 #: pages_generatorforms_fields_add.html:77
@@ -1556,7 +1568,7 @@ msgstr "Projekte"
 #: pages_blogs_pingserviceconfigurations_select.html:71
 #: pages_blogs_postings_add.html:72 pages_blogs_postings_edit.html:78
 #: pages_blogs_postings_select.html:61 pages_boxes_add.html:70
-#: pages_boxes_edit.html:70 pages_boxes_select.html:59 pages_edit.html:76
+#: pages_boxes_edit.html:70 pages_boxes_select.html:63 pages_edit.html:76
 msgid "Ping Services"
 msgstr "Ping-Services"
 
@@ -1648,7 +1660,7 @@ msgstr "Lade Projekt"
 #: pages_blogs_pingserviceconfigurations_select.html:67
 #: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:84
 #: pages_blogs_postings_select.html:67 pages_boxes_add.html:85
-#: pages_boxes_edit.html:85 pages_boxes_select.html:74 pages_edit.html:113
+#: pages_boxes_edit.html:85 pages_boxes_select.html:78 pages_edit.html:113
 #: pages_generatorforms_content_edit.html:78
 #: pages_generatorforms_fields_add.html:77
 #: pages_generatorforms_fields_edit.html:77
@@ -1720,7 +1732,7 @@ msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 #: pages_blogs_pingserviceconfigurations_select.html:29
 #: pages_blogs_postings_add.html:40 pages_blogs_postings_edit.html:46
 #: pages_blogs_postings_select.html:29 pages_boxes_add.html:40
-#: pages_boxes_edit.html:40 pages_boxes_select.html:29 pages_edit.html:33
+#: pages_boxes_edit.html:40 pages_boxes_select.html:33 pages_edit.html:33
 #: pages_generatorforms_content_edit.html:40
 #: pages_generatorforms_fields_add.html:39
 #: pages_generatorforms_fields_edit.html:39
@@ -1762,7 +1774,7 @@ msgstr "Welcompose"
 #: pages_blogs_pingserviceconfigurations_select.html:32
 #: pages_blogs_postings_add.html:43 pages_blogs_postings_edit.html:49
 #: pages_blogs_postings_select.html:32 pages_boxes_add.html:43
-#: pages_boxes_edit.html:43 pages_boxes_select.html:32 pages_edit.html:36
+#: pages_boxes_edit.html:43 pages_boxes_select.html:36 pages_edit.html:36
 #: pages_generatorforms_content_edit.html:43
 #: pages_generatorforms_fields_add.html:42
 #: pages_generatorforms_fields_edit.html:42
@@ -1803,7 +1815,7 @@ msgstr "Angemeldeter Benutzer"
 #: pages_blogs_pingserviceconfigurations_select.html:34
 #: pages_blogs_postings_add.html:45 pages_blogs_postings_edit.html:51
 #: pages_blogs_postings_select.html:34 pages_boxes_add.html:45
-#: pages_boxes_edit.html:45 pages_boxes_select.html:34 pages_edit.html:38
+#: pages_boxes_edit.html:45 pages_boxes_select.html:38 pages_edit.html:38
 #: pages_generatorforms_content_edit.html:45
 #: pages_generatorforms_fields_add.html:44
 #: pages_generatorforms_fields_edit.html:44
@@ -1814,16 +1826,16 @@ msgstr "Angemeldeter Benutzer"
 #: podcastcategories_add.html:41 podcastcategories_edit.html:36
 #: podcastcategories_select.html:34 structuraltemplates_add.html:41
 #: structuraltemplates_edit.html:41 structuraltemplates_select.html:34
-#: error.html:21 globalfiles_add.html:38 globalfiles_edit.html:34
-#: globalfiles_select.html:40 globaltemplates_add.html:40
-#: globaltemplates_edit.html:40 globaltemplates_select.html:35
-#: templates_add.html:40 templates_copy.html:34 templates_edit.html:40
-#: templates_select.html:35 templatesets_add.html:38 templatesets_edit.html:34
-#: templatesets_select.html:34 templatetypes_add.html:38
-#: templatetypes_edit.html:34 templatetypes_select.html:34 groups_add.html:38
-#: groups_edit.html:34 groups_select.html:34 rights_add.html:38
-#: rights_edit.html:34 rights_select.html:34 users_add.html:38
-#: users_edit.html:34 users_select.html:34
+#: globalfiles_add.html:38 globalfiles_edit.html:34 globalfiles_select.html:40
+#: globaltemplates_add.html:40 globaltemplates_edit.html:40
+#: globaltemplates_select.html:35 templates_add.html:40 templates_copy.html:34
+#: templates_edit.html:40 templates_select.html:35 templatesets_add.html:38
+#: templatesets_edit.html:34 templatesets_select.html:34
+#: templatetypes_add.html:38 templatetypes_edit.html:34
+#: templatetypes_select.html:34 groups_add.html:38 groups_edit.html:34
+#: groups_select.html:34 rights_add.html:38 rights_edit.html:34
+#: rights_select.html:34 users_add.html:38 users_edit.html:34
+#: users_select.html:34
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -2046,7 +2058,7 @@ msgstr "Welcompose Admin &ndash; Ping-Services"
 #: antispamplugins_select.html:54 blogcommentstatuses_select.html:54
 #: globalboxes_select.html:54 navigations_select.html:54
 #: pages_blogs_pingserviceconfigurations_select.html:73
-#: pages_blogs_postings_select.html:73 pages_boxes_select.html:80
+#: pages_blogs_postings_select.html:73 pages_boxes_select.html:84
 #: pages_generatorforms_fields_select.html:73 pagetypes_select.html:54
 #: podcastcategories_select.html:54 structuraltemplates_select.html:54
 #: globalfiles_select.html:60 globaltemplates_select.html:55
@@ -2067,7 +2079,6 @@ msgstr "Neu anlegen"
 #: pages_blogs_pingserviceconfigurations_select.html:77
 #: pages_blogs_pingserviceconfigurations_select.html:110
 #: pages_blogs_postings_select.html:102 pages_blogs_postings_select.html:144
-#: pages_boxes_select.html:84 pages_boxes_select.html:117
 #: pages_generatorforms_fields_select.html:77
 #: pages_generatorforms_fields_select.html:119
 #: podcastcategories_select.html:58 podcastcategories_select.html:91
@@ -2095,7 +2106,7 @@ msgstr "Verfügbare Ping-Services"
 #: pages_blogs_pingserviceconfigurations_select.html:98
 #: pages_blogs_pingserviceconfigurations_select.html:104
 #: pages_blogs_postings_select.html:129 pages_blogs_postings_select.html:138
-#: pages_boxes_select.html:105 pages_boxes_select.html:111
+#: pages_boxes_select.html:109 pages_boxes_select.html:115
 #: pages_generatorforms_fields_select.html:104
 #: pages_generatorforms_fields_select.html:113 pages_select.html:120
 #: pagetypes_select.html:66 pagetypes_select.html:73
@@ -2123,7 +2134,7 @@ msgstr "Bearbeiten"
 #: pages_blogs_pingserviceconfigurations_select.html:99
 #: pages_blogs_pingserviceconfigurations_select.html:105
 #: pages_blogs_postings_select.html:130 pages_blogs_postings_select.html:139
-#: pages_boxes_select.html:106 pages_boxes_select.html:112
+#: pages_boxes_select.html:110 pages_boxes_select.html:116
 #: pages_generatorforms_fields_select.html:105
 #: pages_generatorforms_fields_select.html:114 pages_select.html:122
 #: pagetypes_select.html:67 pagetypes_select.html:74
@@ -2336,7 +2347,7 @@ msgstr "E-Mail/Homepage"
 msgid "First 80 chars of comment"
 msgstr "80 Zeichen des Kommentars"
 
-#: blogcomments_select.html:126
+#: blogcomments_select.html:126 pages_boxes_select.html:160
 msgid "View"
 msgstr "Anzeigen"
 
@@ -2344,7 +2355,7 @@ msgstr "Anzeigen"
 msgid "View Comment"
 msgstr "Kommentar lesen"
 
-#: blogcomments_select.html:161 blogitem.class.php:233
+#: blogcomments_select.html:161 blogitem.class.php:238
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -2452,7 +2463,7 @@ msgstr "Jahres-Archiv"
 #: pages_blogs_postings_edit.html:85 pages_blogs_postings_edit.html:91
 #: pages_blogs_postings_select.html:55 pages_blogs_postings_select.html:67
 #: pages_blogs_postings_select.html:71 pages_boxes_add.html:68
-#: pages_boxes_edit.html:68 pages_boxes_select.html:57 pages_edit.html:70
+#: pages_boxes_edit.html:68 pages_boxes_select.html:61 pages_edit.html:70
 msgid "Blog Postings"
 msgstr "Blog-Einträge"
 
@@ -2594,8 +2605,8 @@ msgstr ""
 msgid "Additional metadata"
 msgstr "Zusätzliche Metadaten"
 
-#: pages_add.html:128 pages_edit.html:173 mediamanager.html:22
-#: mediamanager.html:46 wcom.strings.js:47
+#: pages_add.html:128 pages_boxes_select.html:144 pages_edit.html:173
+#: mediamanager.html:22 mediamanager.html:46 wcom.strings.js:47
 msgid "Show this element"
 msgstr "Element zeigen"
 
@@ -2610,9 +2621,9 @@ msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Ping-Service anlegen"
 #: pages_blogs_postings_select.html:52 pages_boxes_add.html:63
 #: pages_boxes_add.html:67 pages_boxes_add.html:72 pages_boxes_add.html:76
 #: pages_boxes_edit.html:63 pages_boxes_edit.html:67 pages_boxes_edit.html:72
-#: pages_boxes_edit.html:76 pages_boxes_select.html:52
-#: pages_boxes_select.html:56 pages_boxes_select.html:61
-#: pages_boxes_select.html:65 pages_edit.html:57 pages_edit.html:67
+#: pages_boxes_edit.html:76 pages_boxes_select.html:56
+#: pages_boxes_select.html:60 pages_boxes_select.html:65
+#: pages_boxes_select.html:69 pages_edit.html:57 pages_edit.html:67
 #: pages_edit.html:80 pages_edit.html:87 pages_edit.html:97
 #: pages_generatorforms_content_edit.html:63
 #: pages_generatorforms_fields_add.html:62
@@ -2632,9 +2643,9 @@ msgstr "Metadaten"
 #: pages_boxes_add.html:86 pages_boxes_add.html:92 pages_boxes_edit.html:65
 #: pages_boxes_edit.html:69 pages_boxes_edit.html:74 pages_boxes_edit.html:79
 #: pages_boxes_edit.html:86 pages_boxes_edit.html:92
-#: pages_boxes_select.html:54 pages_boxes_select.html:58
-#: pages_boxes_select.html:63 pages_boxes_select.html:68
-#: pages_boxes_select.html:74 pages_boxes_select.html:78 pages_edit.html:63
+#: pages_boxes_select.html:58 pages_boxes_select.html:62
+#: pages_boxes_select.html:67 pages_boxes_select.html:72
+#: pages_boxes_select.html:78 pages_boxes_select.html:82 pages_edit.html:63
 #: pages_edit.html:73 pages_edit.html:93 pages_edit.html:106
 #: pages_generatorforms_content_edit.html:72
 #: pages_generatorforms_fields_add.html:71
@@ -2723,17 +2734,17 @@ msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Box"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Box anlegen"
 
-#: pages_boxes_add.html:64 pages_boxes_edit.html:64 pages_boxes_select.html:53
+#: pages_boxes_add.html:64 pages_boxes_edit.html:64 pages_boxes_select.html:57
 #: pages_edit.html:60 pages_simplepages_content_edit.html:68
 msgid "Simple Page"
 msgstr "Simple Page"
 
-#: pages_boxes_add.html:73 pages_boxes_edit.html:73 pages_boxes_select.html:62
+#: pages_boxes_add.html:73 pages_boxes_edit.html:73 pages_boxes_select.html:66
 #: pages_edit.html:90 pages_simpleforms_content_edit.html:66
 msgid "Simple Form"
 msgstr "Simple Form"
 
-#: pages_boxes_add.html:77 pages_boxes_edit.html:77 pages_boxes_select.html:66
+#: pages_boxes_add.html:77 pages_boxes_edit.html:77 pages_boxes_select.html:70
 #: pages_edit.html:100 pages_generatorforms_content_edit.html:66
 #: pages_generatorforms_fields_add.html:65
 #: pages_generatorforms_fields_edit.html:65
@@ -2741,7 +2752,7 @@ msgstr "Simple Form"
 msgid "Generator Form"
 msgstr "Generator Form"
 
-#: pages_boxes_add.html:78 pages_boxes_edit.html:78 pages_boxes_select.html:67
+#: pages_boxes_add.html:78 pages_boxes_edit.html:78 pages_boxes_select.html:71
 #: pages_edit.html:103 pages_generatorforms_content_edit.html:69
 #: pages_generatorforms_fields_add.html:68
 #: pages_generatorforms_fields_add.html:78
@@ -2771,13 +2782,45 @@ msgstr "Box bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Boxes"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Boxen"
 
-#: pages_boxes_select.html:97
+#: pages_boxes_select.html:100
 msgid "Available Boxes"
 msgstr "Verfügbare Boxen"
 
-#: pages_boxes_select.html:129
+#: pages_boxes_select.html:121
 msgid "No box has been created yet."
 msgstr "Sie haben noch keine Box angelegt"
+
+#: pages_boxes_select.html:144
+msgid "Adopt existing Boxes"
+msgstr "Bestehende Boxen übernehmen"
+
+#: pages_boxes_select.html:147
+msgid "Available Boxes of all pages"
+msgstr "Verfügbare Boxen"
+
+#: pages_boxes_select.html:158
+msgid "Page"
+msgstr "Seite"
+
+#: pages_boxes_select.html:159
+msgid "Content (Raw)"
+msgstr "Inhalt (Quellansicht)"
+
+#: pages_boxes_select.html:161
+msgid "Adopt Box"
+msgstr "Box übernehmen"
+
+#: pages_boxes_select.html:168
+msgid "View box raw content"
+msgstr "Boxinhalt anzeigen (Quellansicht)"
+
+#: pages_boxes_select.html:169
+msgid "Adopt Box to current page"
+msgstr "Box für die aktuelle Seite übernehmen"
+
+#: pages_boxes_select.html:184
+msgid "No other page Box has been created yet"
+msgstr "Im aktuellen Projekt sind noch keine Boxen angelegt"
 
 #: pages_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Page Metadata"
@@ -2853,6 +2896,14 @@ msgstr ""
 #: pages_select.html:10
 msgid "Welcompose Admin &ndash; Pages"
 msgstr "Welcompose Admin &ndash; Seiten"
+
+#: pages_select.html:58
+msgid ""
+"No navigation and no page has been created yet. Please create a <a href="
+"\"navigations_select.php\">navigation</a> first"
+msgstr ""
+"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
+"Navigationen</a> um eine neue Navigation anzulegen."
 
 #: pages_select.html:64
 msgid "Please define an index page!"
@@ -3051,16 +3102,6 @@ msgstr "Sie haben noch keine Strukturvorlage angelegt"
 #: error.html:10 error_popup_403.html:10 error_popup_723.html:10
 msgid "Welcompose Admin &ndash; Error"
 msgstr "Welcompose Admin &ndash; Fehler"
-
-#: error.html:26 error_mediamanager.html:2 error_popup_403.html:33
-#: error_popup_723.html:33
-msgid "An error occured"
-msgstr "Es ist ein Fehler aufgetreten"
-
-#: error.html:28 error_mediamanager.html:4 error_popup_403.html:35
-#: error_popup_723.html:35
-msgid "Welcompose says"
-msgstr "Welcompose meldet"
 
 #: anti_spam_plugin_anti_spam_plugin_active.html:1
 msgid "Uncheck this box if you like to disable the plugin."
@@ -3548,10 +3589,10 @@ msgid ""
 "changed from braces to a <%% and %%>. You'll need this when dealing with "
 "files containing a lot of braces like Cascading Style Sheets or JavaScript."
 msgstr ""
-"Definiert, ob die Standard Smarty-Delimiter \"{\" und \"}\" durch \"<%%%%"
-"\" und \"%%%%>\" ersetzt werden sollen. Dieses ist notwendig, wenn Sie in "
-"der globalen Vorlage mit Quelltext arbeiten, deren Syntax geschweifte "
-"Klammern beinhaltet. Dies ist bspw. der Fall bei Cascading Style Sheets und "
+"Definiert, ob die Standard Smarty-Delimiter \"{\" und \"}\" durch \"<%%%%\" "
+"und \"%%%%>\" ersetzt werden sollen. Dieses ist notwendig, wenn Sie in der "
+"globalen Vorlage mit Quelltext arbeiten, deren Syntax geschweifte Klammern "
+"beinhaltet. Dies ist bspw. der Fall bei Cascading Style Sheets und "
 "Javascript."
 
 #: global_template_global_template_content.html:1
@@ -3968,8 +4009,7 @@ msgstr ""
 
 #: project_project_name.html:1
 msgid "Enter a descriptive name for your project"
-msgstr ""
-"Tragen Sie bitte einen Namen für Ihr Projekt ein"
+msgstr "Tragen Sie bitte einen Namen für Ihr Projekt ein"
 
 #: right_right_description.html:1
 msgid ""
@@ -4850,8 +4890,8 @@ msgid ""
 "Are you sure you want to delete the chosen project? Every page and template "
 "within this project will deleted too."
 msgstr ""
-"Sind Sie sicher, dass Sie das gewählte Projekt löschen möchten? Alle "
-"Seiten und Vorlagen innerhalb dieses Projektes werden ebenfalls gelöscht."
+"Sind Sie sicher, dass Sie das gewählte Projekt löschen möchten? Alle Seiten "
+"und Vorlagen innerhalb dieses Projektes werden ebenfalls gelöscht."
 
 #: wcom.strings.js:58
 msgid ""
@@ -5027,13 +5067,13 @@ msgid "Selected group is out of range"
 msgstr ""
 "Die gewählte Benutzergruppe liegt außerhalb des gültigen Wertebereiches"
 
-#: users_add.php:132 users_edit.php:142 simpleformindex.class.php:202
-#: simpleformindex.class.php:410
+#: users_add.php:132 users_edit.php:142 simpleformindex.class.php:207
+#: simpleformindex.class.php:415
 msgid "Please enter an e-mail address"
 msgstr "Bitte tragen Sie eine E-Mail Adresse ein"
 
-#: users_add.php:133 users_edit.php:143 blogitem.class.php:222
-#: simpleformindex.class.php:203 simpleformindex.class.php:411
+#: users_add.php:133 users_edit.php:143 blogitem.class.php:227
+#: simpleformindex.class.php:208 simpleformindex.class.php:416
 msgid "Please enter a valid e-mail address"
 msgstr "Bitte tragen Sie eine gültige E-Mail Adresse ein"
 
@@ -5057,173 +5097,173 @@ msgstr "Das Feld Autor kann nur 1 oder 0 als Wert haben"
 msgid "The field active accepts only 0 or 1"
 msgstr "Das Feld Aktiv kann nur 1 oder 0 als Wert haben"
 
-#: validate.js.php:64
+#: validate.js.php:67
 msgid "Only capitalized literal string"
 msgstr "Nutzen Sie auschließlich Buchstaben in Großschreibung"
 
-#: validate.js.php:68
+#: validate.js.php:71
 msgid "Alphanumeric with underscores"
 msgstr "Nutzen Sie Buchstaben, Nummern und Untertriche"
 
-#: validate.js.php:72
+#: validate.js.php:75
 msgid "Alphanumeric string with spaces"
 msgstr "Nutzen Sie Buchstaben, Nummern und Leerzeichen"
 
-#: validate.js.php:76 validate.js.php:88 validate.js.php:116
+#: validate.js.php:79 validate.js.php:91 validate.js.php:119
 msgid "Only capitalized prefixed literal string"
 msgstr "Nutzen Sie ausschließlich Buchstaben in Großschreibung mit Prefix"
 
-#: validate.js.php:80 validate.js.php:151
+#: validate.js.php:83 validate.js.php:154
 msgid "Field may not be empty"
 msgstr "Das Feld darf nicht leer sein"
 
-#: validate.js.php:84
+#: validate.js.php:87
 msgid "Value between 0.1 and 1.0"
 msgstr "Der Wert muss zwischen 0.1 und 1.0 liegen"
 
-#: validate.js.php:92
+#: validate.js.php:95
 msgid "Literal string, CamelCase"
 msgstr "Buchstaben, CamelCase"
 
-#: validate.js.php:100
+#: validate.js.php:103
 msgid "Full URL with protocol (http:// etc.)"
 msgstr "Vollständige Pfadangabe (URL) incl. Protokoll (http:// etc.)"
 
-#: validate.js.php:104
+#: validate.js.php:107
 msgid "Alphanumeric with dots and hyphens"
 msgstr "Nutzen Sie Buchstaben, Punkte und Bindestriche"
 
-#: validate.js.php:108
+#: validate.js.php:111
 msgid "Alphanumeric string with slashes"
 msgstr "Nutzen Sie Buchstaben und Querstriche"
 
-#: validate.js.php:112 validate.js.php:68
+#: validate.js.php:115 validate.js.php:68
 msgid "Numbers only"
 msgstr "Nutzen Sie ausschließlich numerische Eingaben"
 
-#: validate.js.php:120 validate.js.php:124 validate.js.php:128
+#: validate.js.php:123 validate.js.php:127 validate.js.php:131
 msgid "Alphanumeric literal string with dashes"
 msgstr "Nutzen Sie Buchstaben, Nummern und Bindestriche"
 
-#: validate.js.php:137
+#: validate.js.php:140
 msgid "Invalid e-mail address"
 msgstr "Ungültige E-Mail Adresse"
 
-#: validate.js.php:143
+#: validate.js.php:146
 msgid "Invalid URL name"
 msgstr "Ungültiger Pfad (URL-Name)"
 
-#: validate.js.php:147
+#: validate.js.php:150
 msgid "Five characters or more, no whitespace"
 msgstr ""
 "Die Eingabe muss mindestens 5 Zeichen beinhalten. Leerzeichen sind nicht "
 "erlaubt"
 
-#: blogitem.class.php:207
+#: blogitem.class.php:212
 msgid "Posting is not expected to be empty"
 msgstr "Der Blog-Eintrag darf nicht leer sein"
 
-#: blogitem.class.php:208
+#: blogitem.class.php:213
 msgid "Posting is expected to be numeric"
 msgstr "Der Blog-Eintrag darf nur numerisch sein"
 
-#: blogitem.class.php:229 simpleformindex.class.php:210
+#: blogitem.class.php:234 simpleformindex.class.php:215
 msgid "Please enter a valid website URL"
 msgstr "Bitte tragen Sie eine gültige Webseiten URL ein"
 
-#: blogitem.class.php:237
+#: blogitem.class.php:242
 msgid "Please enter a comment"
 msgstr "Bitte tragen Sie einen Kommentar ein"
 
-#: blogitem.class.php:241 generatorformindex.class.php:311
-#: simpleformindex.class.php:222 simpleformindex.class.php:422
+#: blogitem.class.php:246 generatorformindex.class.php:329
+#: simpleformindex.class.php:227 simpleformindex.class.php:427
 msgid "Captcha text"
 msgstr "Captcha Text"
 
-#: blogitem.class.php:245 generatorformindex.class.php:315
-#: simpleformindex.class.php:226 simpleformindex.class.php:426
+#: blogitem.class.php:250 generatorformindex.class.php:333
+#: simpleformindex.class.php:231 simpleformindex.class.php:431
 msgid "Please enter the captcha text"
 msgstr "Bitte tragen Sie den Captcha-Text ein"
 
-#: blogitem.class.php:246 generatorformindex.class.php:316
-#: simpleformindex.class.php:227 simpleformindex.class.php:427
+#: blogitem.class.php:251 generatorformindex.class.php:334
+#: simpleformindex.class.php:232 simpleformindex.class.php:432
 msgid "Invalid captcha text entered"
 msgstr "Der Captcha-Text ist ungültig"
 
-#: blogitem.class.php:251 simpleformindex.class.php:232
-#: simpleformindex.class.php:432
+#: blogitem.class.php:256 simpleformindex.class.php:237
+#: simpleformindex.class.php:437
 msgid "Send"
 msgstr "Senden"
 
-#: simpleformindex.class.php:214 simpleformindex.class.php:414
+#: simpleformindex.class.php:219 simpleformindex.class.php:419
 msgid "Message"
 msgstr "Nachricht"
 
-#: simpleformindex.class.php:218 simpleformindex.class.php:418
+#: simpleformindex.class.php:223 simpleformindex.class.php:423
 msgid "Please enter a message"
 msgstr "Bitte tragen Sie eine Nachricht ein"
 
-#: simpleformindex.class.php:344
+#: simpleformindex.class.php:349
 msgid "Mr."
 msgstr "Herr"
 
-#: simpleformindex.class.php:345
+#: simpleformindex.class.php:350
 msgid "Mrs."
 msgstr "Frau"
 
-#: simpleformindex.class.php:353
+#: simpleformindex.class.php:358
 msgid "Salutation"
 msgstr "Anrede"
 
-#: simpleformindex.class.php:357
+#: simpleformindex.class.php:362
 msgid "Please select a salutation"
 msgstr "Bitte wählen Sie ein Anrede aus"
 
-#: simpleformindex.class.php:358
+#: simpleformindex.class.php:363
 msgid "Salutation is out of range"
 msgstr "Die gewählte Anrede liegt außerhalb des gültigen Wertebereiches"
 
-#: simpleformindex.class.php:361
+#: simpleformindex.class.php:366
 msgid "First name"
 msgstr "Vorname"
 
-#: simpleformindex.class.php:365
+#: simpleformindex.class.php:370
 msgid "Please enter your first name"
 msgstr "Bitte tragen Sie Ihren Vornamen ein"
 
-#: simpleformindex.class.php:368
+#: simpleformindex.class.php:373
 msgid "Last name"
 msgstr "Nachname"
 
-#: simpleformindex.class.php:372
+#: simpleformindex.class.php:377
 msgid "Please enter your last name"
 msgstr "Bitte tragen Sie Ihren Nachnamen ein"
 
-#: simpleformindex.class.php:375
+#: simpleformindex.class.php:380
 msgid "Address"
 msgstr "Adresse"
 
-#: simpleformindex.class.php:381
+#: simpleformindex.class.php:386
 msgid "ZIP/City"
 msgstr "PLZ/Stadt"
 
-#: simpleformindex.class.php:387
+#: simpleformindex.class.php:392
 msgid "Please call me"
 msgstr "Rückruf erbeten"
 
-#: simpleformindex.class.php:391
+#: simpleformindex.class.php:396
 msgid "The field call_back accepts only 0 or 1"
 msgstr "Das Feld Rückruf muss 1 oder 0 als Wert haben"
 
-#: simpleformindex.class.php:395
+#: simpleformindex.class.php:400
 msgid "Phone"
 msgstr "Telefon"
 
-#: simpleformindex.class.php:400
+#: simpleformindex.class.php:405
 msgid "Please enter your phone number"
 msgstr "Bitte tragen Sie Ihre Telefonnummer ein"
 
-#: simpleformindex.class.php:402
+#: simpleformindex.class.php:407
 msgid "Please enter a valid phone number"
 msgstr "Bitte tragen Sie eine gültige Telefonnummer ein"
 
