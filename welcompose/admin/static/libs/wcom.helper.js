@@ -1743,8 +1743,16 @@ function Helper_loaderAdoptBox ()
 function Helper_showResponseAdoptBox(req)
 {
 	try {
-		var e = $('boxes');
-		new Insertion.Bottom(e, req.responseText);
+		var el = $('boxes');
+		var res = $('noresult');
+		
+		// if resultset is empty replace DOM Element
+		//  otherwise insert returned contents
+		if(res){
+			Element.replace(res, req.responseText);
+		} else {		
+			new Insertion.Bottom(el, req.responseText);
+		}
 		setTimeout("Effect.Fade('indicator_adopt', {duration: 0.4})", 300);
 	} catch (e) {
 		_applyError(e);

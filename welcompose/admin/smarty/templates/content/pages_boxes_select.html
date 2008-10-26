@@ -85,7 +85,7 @@ var toggleElem = 2;
 <br class="clearb" />
 
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n Pages}: </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -97,15 +97,15 @@ var toggleElem = 2;
 </ul>
 <br class="clearb" />
 {/if}
-{if !empty($boxes)}
 <table summary="{i18n Available Boxes}" id="boxes">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
 </tr>
+{if !empty($boxes)}
 <tr>
-<th class="page">Name</th>
+<th class="page">{i18n Name}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
@@ -116,9 +116,14 @@ var toggleElem = 2;
 <td><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
+{else}
+<tr id="noresult">
+<td colspan="3">{i18n No box has been created yet.}</td>
+</tr>
+{/if}
 </table>
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n Pages}: </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -128,9 +133,6 @@ var toggleElem = 2;
 {/if}
 {/foreach}
 </ul>
-{/if}
-{else}
-<p>{i18n No box has been created yet.}</p>
 {/if}
 
 <p id="indicator_adopt"><img src="../static/img/indicator.gif" alt="" /></p>
@@ -152,9 +154,9 @@ var toggleElem = 2;
 </tr>
 {if !empty($allboxes)}
 <tr>
-<th class="page">Name</th>
-<th>Page</th>
-<th>Content (Raw)</th>
+<th class="page">{i18n Name}</th>
+<th>{i18n Page}</th>
+<th>{i18n Content (Raw)}</th>
 <th>{i18n View}</th>
 <th>{i18n Adopt Box}</th>
 </tr>
@@ -179,7 +181,7 @@ var toggleElem = 2;
 {/foreach}
 {else}
 <tr>
-<td>{i18n No other page Box has been created yet}</td>
+<td colspan="5">{i18n No other page Box has been created yet}</td>
 </tr>
 {/if}
 </table>
