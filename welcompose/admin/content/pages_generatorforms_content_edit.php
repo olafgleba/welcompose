@@ -120,6 +120,9 @@ try {
 	// get generator form
 	$generator_form = $GENERATORFORM->selectGeneratorForm(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
+	
 	// prepare captcha types array
 	$captcha_types = array(
 		'no' => gettext('Disable captcha'),
@@ -212,6 +215,18 @@ try {
 	// submit button (save and go back)
 	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
 		array('class' => 'submit200go'));
+
+	
+	// set text converter value or get default converter
+	if (isset($generator_form['text_converter'])) {
+		$_text_converter = $generator_form['text_converter'];
+	} else {
+		if ($default_text_converter > 0) {
+			$_text_converter = $default_text_converter['id'];
+		} else {
+			$_text_converter = null;
+		}
+	}
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -219,7 +234,7 @@ try {
 		'title' => Base_Cnc::ifsetor($generator_form['title'], null),
 		'title_url' => Base_Cnc::ifsetor($generator_form['title_url'], null),
 		'content' => Base_Cnc::ifsetor($generator_form['content_raw'], null),
-		'text_converter' => Base_Cnc::ifsetor($generator_form['text_converter'], null),
+		'text_converter' => $_text_converter,
 		'apply_macros' => Base_Cnc::ifsetor($generator_form['apply_macros'], null),
 		'email_from' => Base_Cnc::ifsetor($generator_form['email_from'], null),
 		'email_to' => Base_Cnc::ifsetor($generator_form['email_to'], null),

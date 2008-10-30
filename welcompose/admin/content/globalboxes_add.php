@@ -105,7 +105,10 @@ try {
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-	
+
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
+		
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('global_box', 'post');
 	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GLOBALBOX);
@@ -142,11 +145,13 @@ try {
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
-	
+		
 	// set defaults
 	$FORM->setDefaults(array(
-		'apply_macros' => 1
+		'apply_macros' => 1,
+		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null
 	));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
@@ -228,8 +233,7 @@ try {
 			// apply text converter
 			if ($FORM->exportValue('text_converter') > 0) {
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
-					$content
+					$FORM->exportValue('text_converter'), $content
 				);
 			}
 

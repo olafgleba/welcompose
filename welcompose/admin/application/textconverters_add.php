@@ -121,6 +121,14 @@ try {
 		WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME);
 	$FORM->addRule('internal_name', gettext('A text converter with the given internal name already exists'),
 		'testForInternalNameUniqueness');
+		
+	// checkbox for default setting
+	$FORM->addElement('checkbox', 'default', gettext('Set as default'), null,
+		array('id' => 'text_converter_default', 'class' => 'chbx'));
+	$FORM->applyFilter('default', 'trim');
+	$FORM->applyFilter('default', 'strip_tags');
+	$FORM->addRule('default', gettext('The field whether to set the default textconverter accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
@@ -187,6 +195,7 @@ try {
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['default'] = $FORM->exportValue('default');
 		
 		// check sql data
 		$HELPER = load('utility:helper');
@@ -198,7 +207,12 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$TEXTCONVERTER->addTextConverter($sqlData);
+			$_insert_id = $TEXTCONVERTER->addTextConverter($sqlData);
+			
+			// look at the default field
+			if (intval($FORM->exportValue('default')) === 1) {
+				$TEXTCONVERTER->setDefaultTextConverter($_insert_id);
+			}
 			
 			// commit
 			$BASE->db->commit();

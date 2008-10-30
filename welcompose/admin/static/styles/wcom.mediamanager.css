@@ -293,7 +293,7 @@ padding-left: 10px;
 
 /* internal links - pages */
 #modalContainer #pages h2 span.close {
-margin-left: 400px;
+margin-left: 380px;
 }
 #modalContainer #pages h2 span#indicator_pagesLinks {
 position: absolute;
@@ -309,7 +309,7 @@ display: none;
 
 /* internal links - global templates */
 #modalContainer #globaltemplates h2 span.close {
-margin-left: 35px;
+margin-left: 25px;
 }
 /* eof */
 
@@ -379,7 +379,7 @@ width: 205px;
 #firstNode table td.nextNode,
 #secondNode table td.nextNode,
 #thirdNode table td.nextNode {
-width: 45px;
+width: 35px;
 }
 #firstNode a,
 #secondNode a,

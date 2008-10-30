@@ -113,7 +113,10 @@ try {
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-	
+
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
+		
 	// get page
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
@@ -200,14 +203,25 @@ try {
 	// submit button (save and go back)
 	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
 		array('class' => 'submit200go'));
-	
+
+	// set text converter value or get default converter
+	if (isset($simple_page['text_converter'])) {
+		$_text_converter = $simple_page['text_converter'];
+	} else {
+		if ($default_text_converter > 0) {
+			$_text_converter = $default_text_converter['id'];
+		} else {
+			$_text_converter = null;
+		}
+	}
+		
 	// set defaults
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($simple_page['id'], null),
 		'title' => Base_Cnc::ifsetor($simple_page['title'], null),
 		'title_url' => Base_Cnc::ifsetor($simple_page['title_url'], null),
 		'content' => Base_Cnc::ifsetor($simple_page['content_raw'], null),
-		'text_converter' => Base_Cnc::ifsetor($simple_page['text_converter'], null),
+		'text_converter' => $_text_converter,
 		'apply_macros' => Base_Cnc::ifsetor($simple_page['apply_macros'], null),
 		'meta_use' => Base_Cnc::ifsetor($simple_page['meta_use'], null),
 		'meta_title' => Base_Cnc::ifsetor($simple_page['meta_title_raw'], null),

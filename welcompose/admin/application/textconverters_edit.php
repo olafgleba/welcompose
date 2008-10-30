@@ -133,6 +133,14 @@ try {
 		WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME);
 	$FORM->addRule('internal_name', gettext('A text converter with the given internal name already exists'),
 		'testForInternalNameUniqueness', $FORM->exportValue('id'));
+		
+	// checkbox for default setting
+	$FORM->addElement('checkbox', 'default', gettext('Set as default'), null,
+		array('id' => 'text_converter_default', 'class' => 'chbx'));
+	$FORM->applyFilter('default', 'trim');
+	$FORM->applyFilter('default', 'strip_tags');
+	$FORM->addRule('default', gettext('The field whether to set the default textconverter accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save edit'),
@@ -142,7 +150,8 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($text_converter['id'], null),
 		'internal_name' => Base_Cnc::ifsetor($text_converter['internal_name'], null),
-		'name' => Base_Cnc::ifsetor($text_converter['name'], null)
+		'name' => Base_Cnc::ifsetor($text_converter['name'], null),
+		'default' => Base_Cnc::ifsetor($text_converter['default'], null)
 	));
 	
 	// validate it
@@ -192,6 +201,7 @@ try {
 		$sqlData = array();
 		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['default'] = $FORM->exportValue('default');
 		
 		// check sql data
 		$HELPER = load('utility:helper');
@@ -204,6 +214,11 @@ try {
 			
 			// execute operation
 			$TEXTCONVERTER->updateTextConverter($FORM->exportValue('id'), $sqlData);
+			
+			// look at the default field
+			if (intval($FORM->exportValue('default')) === 1) {
+				$TEXTCONVERTER->setDefaultTextConverter($FORM->exportValue('id'));
+			}
 			
 			// commit
 			$BASE->db->commit();

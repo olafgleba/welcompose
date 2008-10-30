@@ -228,7 +228,8 @@ public function selectTextConverter ($id)
 			`application_text_converters`.`id` AS `id`,
 			`application_text_converters`.`project` AS `project`,
 			`application_text_converters`.`internal_name` AS `internal_name`,
-			`application_text_converters`.`name` AS `name`
+			`application_text_converters`.`name` AS `name`,
+			`application_text_converters`.`default` AS `default`
 		FROM
 			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE 
@@ -299,7 +300,8 @@ public function selectTextConverters ($params = array())
 			`application_text_converters`.`id` AS `id`,
 			`application_text_converters`.`project` AS `project`,
 			`application_text_converters`.`internal_name` AS `internal_name`,
-			`application_text_converters`.`name` AS `name`
+			`application_text_converters`.`name` AS `name`,
+			`application_text_converters`.`default` AS `default`
 		FROM
 			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
 		WHERE 
@@ -378,6 +380,97 @@ public function countTextConverters ($params = array())
 	// execute query and return result
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
 }
+
+/**
+ * Selects default text converter. Returns array with the complete text converter
+ * information.
+ *
+ * @throws Application_TextConverterException
+ * @return array
+ */
+public function selectDefaultTextConverter ()
+{
+	// access check
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
+		throw new Application_TextConverterException("You are not allowed to perform this action");
+	}
+	
+	// get id of the default text converter
+	$sql = "
+		SELECT 
+			`application_text_converters`.`id` AS `id`
+		FROM
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." AS `application_text_converters`
+		WHERE
+			`application_text_converters`.`default` = '1'
+		  AND
+			`application_text_converters`.`project` = :project
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
+	
+	// execute query
+	$result = (int)$this->base->db->select($sql, 'field', $bind_params);
+	
+	// if no result set is found return false otherwise
+	// return complete text converter information
+	if ($result < 1) {
+		return 0;
+	} else {
+		return $this->selectTextConverter($result);
+	}
+}
+
+
+/**
+ * Sets the default text converter to given converter id. Takes the converter id as
+ * first argument. Returns amount of affected rows. 
+ * 
+ * @throws Application_TextConverterException
+ * @param int Text converter id
+ * @return int Affected rows
+ */
+public function setDefaultTextConverter ($textconverter)
+{
+	// access check
+	if (!wcom_check_access('Application', 'TextConverter', 'Use')) {
+		throw new Application_TextConverterException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($textconverter) || !is_numeric($textconverter)) {
+		throw new Application_TextConverterException('Input for parameter textconverter is expected to be a numeric value');
+	}
+	
+	// unset all existing index pages.
+	$sql = "
+		UPDATE
+			".WCOM_DB_APPLICATION_TEXT_CONVERTERS." 
+		SET
+			`default` = '0'
+		WHERE
+			`default` = '1'
+		  AND
+			`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
+	
+	// execute update
+	$this->base->db->execute($sql, $bind_params);
+	
+	// set given textconverter as default
+	return $this->updateTextConverter($textconverter, array('default' => '1'));
+}
+
 /**
  * Tests given text converter name for uniqueness. Takes the text converter
  * name as first argument and an optional text converter id as second argument.

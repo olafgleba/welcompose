@@ -109,11 +109,14 @@ try {
 	if (!wcom_check_access('Content', 'Box', 'Manage')) {
 		throw new Exception("Access denied");
 	}
-	
+		
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-	
+
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
+		
 	// get page
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
 	
@@ -165,6 +168,7 @@ try {
 	// set defaults
 	$FORM->setDefaults(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
+		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null,
 		'apply_macros' => 1
 	));
 	
