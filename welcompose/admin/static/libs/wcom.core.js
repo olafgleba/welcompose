@@ -260,7 +260,7 @@ function Base ()
 		/**
 		 * Comprehensive width application wide
 		 */
-		this.callbacksPopupWindowWidth420 = '420';
+		this.callbacksPopupWindowWidth460 = '460';
 		
 		/**
 		 * Comprehensive popup height application wide

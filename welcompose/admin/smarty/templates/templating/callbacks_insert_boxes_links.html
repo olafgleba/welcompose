@@ -35,7 +35,12 @@ var insert_type = '{$callback_params.insert_type}';
 
 <div id="modalContainer">
 <div id="pages">
-<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span><span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span><span class="close"><a href="#">{i18n Close Window}</a></span></h2>
+<div id ="topic97">
+<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span></h2>
+<span class="close"><a href="#">{i18n Close Window}</a></span>
+<span id="indicator_pagesLinks"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span>
+</div>
+<br class="clearb" />
 
 <div id="modalBody">
 <div id="firstNode">
@@ -45,7 +50,7 @@ var insert_type = '{$callback_params.insert_type}';
 </tr>
 {foreach from=$pages_arrays item=_page}
 <tr>
-<td>{$_page.name|escape:"htmlall"}</td>
+<td class="initialNode">{$_page.name|escape:"htmlall"}</td>
 <td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#" title="{i18n Display related boxes}">&nbsp;</a></td>
 </tr>
 {/foreach}
