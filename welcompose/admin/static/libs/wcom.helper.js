@@ -1043,10 +1043,10 @@ function Helper_processCallbacks (elem)
 		// used to differ between the popup window width
 		var win_names = {
 			'pages_links': this.callbacksPopupWindowWidth745,
-			'structuraltemplates_links': this.callbacksPopupWindowWidth420,
-			'globalboxes_links': this.callbacksPopupWindowWidth420,
-			'globalfiles_links': this.callbacksPopupWindowWidth420,
-			'globaltemplates_links': this.callbacksPopupWindowWidth420,
+			'structuraltemplates_links': this.callbacksPopupWindowWidth460,
+			'globalboxes_links': this.callbacksPopupWindowWidth460,
+			'globalfiles_links': this.callbacksPopupWindowWidth460,
+			'globaltemplates_links': this.callbacksPopupWindowWidth460,
 			'boxes_links': this.callbacksPopupWindowWidth745
 		};
 
@@ -1700,7 +1700,12 @@ function Helper_adoptBox (elem)
 		Element.scrollTo('container');
 	
 		var page_name = elem.parentNode.parentNode;
-		page_name = page_name.childNodes[3].innerHTML;
+		
+		if (Helper.isBrowser('ie')) {
+			page_name = page_name.childNodes[1].innerHTML;
+		} else {
+			page_name = page_name.childNodes[3].innerHTML;
+		}
 					
 		var url = '../content/pages_boxes_adopt.php';
 		var pars = 'id=' + elem.id + '&page=' + elem.rel + '&page_name=' + page_name;
@@ -1750,7 +1755,7 @@ function Helper_showResponseAdoptBox(req)
 		//  otherwise insert returned contents
 		if(res){
 			Element.replace(res, req.responseText);
-		} else {		
+		} else {
 			new Insertion.Bottom(el, req.responseText);
 		}
 		setTimeout("Effect.Fade('indicator_adopt', {duration: 0.4})", 300);
