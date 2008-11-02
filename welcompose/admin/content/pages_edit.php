@@ -212,15 +212,12 @@ try {
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
 	// checkbox for draft
-	// Only set if page_type is WCOM_BLOG
-	if($page['page_type_name'] == 'WCOM_BLOG') {
-		$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-			array('id' => 'page_draft', 'class' => 'chbx'));
-		$FORM->applyFilter('draft', 'trim');
-		$FORM->applyFilter('draft', 'strip_tags');
-		$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
-			'regex', WCOM_REGEX_ZERO_OR_ONE);
-	}
+	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
+		array('id' => 'page_draft', 'class' => 'chbx'));
+	$FORM->applyFilter('draft', 'trim');
+	$FORM->applyFilter('draft', 'strip_tags');
+	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// multi select for rights
 	$FORM->addElement('select', 'groups', gettext('Groups'), $groups,
@@ -347,9 +344,9 @@ try {
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['optional_text'] = $FORM->exportValue('optional_text');
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
+		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 		$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 			

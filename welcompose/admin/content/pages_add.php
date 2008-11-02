@@ -248,6 +248,13 @@ try {
 	$FORM->applyFilter('protect', 'strip_tags');
 	$FORM->addRule('protect', gettext('The field protect accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
+		array('id' => 'page_draft', 'class' => 'chbx'));
+	$FORM->applyFilter('draft', 'trim');
+	$FORM->applyFilter('draft', 'strip_tags');
+	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// multi select for rights
 	$FORM->addElement('select', 'groups', gettext('Groups'), $groups,
@@ -379,6 +386,7 @@ try {
 			$sqlData['type'] = $FORM->exportValue('type');
 			$sqlData['index_page'] = $FORM->exportValue('index_page');
 			$sqlData['protect'] = $FORM->exportValue('protect');
+			$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 			$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 			$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 			

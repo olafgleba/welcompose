@@ -169,14 +169,6 @@ try {
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
-	// checkbox for draft
-	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-		array('id' => 'simple_page_draft', 'class' => 'chbx'));
-	$FORM->applyFilter('draft', 'trim');
-	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for meta_use
 	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
@@ -231,7 +223,6 @@ try {
 		'content' => Base_Cnc::ifsetor($simple_page['content_raw'], null),
 		'text_converter' => $_text_converter,
 		'apply_macros' => Base_Cnc::ifsetor($simple_page['apply_macros'], null),
-		'draft' => Base_Cnc::ifsetor($simple_page['draft'], null),
 		'meta_use' => Base_Cnc::ifsetor($simple_page['meta_use'], null),
 		'meta_title' => Base_Cnc::ifsetor($simple_page['meta_title_raw'], null),
 		'meta_keywords' => Base_Cnc::ifsetor($simple_page['meta_keywords'], null),
@@ -309,7 +300,6 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
 		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
@@ -360,11 +350,8 @@ try {
 			// begin transaction
 			$BASE->db->begin();
 			
-			// execute operation on simple page table
+			// execute operation
 			$SIMPLEPAGE->updateSimplePage($FORM->exportValue('id'), $sqlData);
-			
-			// execute operation on page table
-			$PAGE->updatePage($page['id'], array('draft' => (string)intval($FORM->exportValue('draft'))));
 			
 			// commit
 			$BASE->db->commit();

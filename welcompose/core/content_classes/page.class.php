@@ -420,7 +420,7 @@ public function selectPages ($params = array())
 		$bind_params['type'] = $type;
 	}
 	
-	// Include only result rows fields with no draft status
+	// Include only result rows without drafts
 	if (is_null($draft) ) {
 		$sql .= " AND `content_pages`.`draft` = '0' ";
 	}
@@ -498,8 +498,10 @@ public function countPages ($params = array())
 			case 'sorting':
 			case 'start':
 			case 'limit':
-			case 'ctrl_draft':
 					$$_key = (int)$_value;
+				break;
+			case 'draft':
+					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			case 'navigation_name':
 					$$_key = (string)$_value;
@@ -566,7 +568,7 @@ public function countPages ($params = array())
 		$bind_params['sorting'] = $sorting;
 	}
 	
-	// Include only result rows fields with no draft status
+	// Include only result rows without drafts
 	if (is_null($draft) ) {
 		$sql .= " AND `content_pages`.`draft` = '0' ";
 	}

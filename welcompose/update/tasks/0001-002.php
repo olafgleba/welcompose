@@ -87,7 +87,7 @@ try {
 	 * Changes to be applied
 	 * ---------------------
 	 *
-	 *  - Add new field 'draft' to content_pages
+	 *  - Add new field 'draft' to table 'content_pages'
 	 *    `draft` enum (0,1) 
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
@@ -106,57 +106,12 @@ try {
 				AFTER `url`
 			";
 			$BASE->db->execute($sql);
-			
-			
-			// add new fields
-			$sql = "
-				ALTER TABLE
-					".WCOM_DB_CONTENT_SIMPLE_FORMS."
-				ADD
-					`draft`
-				ENUM
-					('0', '1') NULL DEFAULT '0'
-				AFTER `apply_macros`
-			";
-			$BASE->db->execute($sql);
-			
-			
-			// add new fields
-			$sql = "
-				ALTER TABLE
-					".WCOM_DB_CONTENT_SIMPLE_PAGES."
-				ADD
-					`draft`
-				ENUM
-					('0', '1') NULL DEFAULT '0'
-				AFTER `apply_macros`
-			";
-			$BASE->db->execute($sql);
 		
 			// update schema version
 			$sqlData = array(
 				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
 			);
-			
-			
-			// add new fields
-			$sql = "
-				ALTER TABLE
-					".WCOM_DB_CONTENT_GENERATOR_FORMS."
-				ADD
-					`draft`
-				ENUM
-					('0', '1') NULL DEFAULT '0'
-				AFTER `apply_macros`
-			";
-			$BASE->db->execute($sql);
-		
-			// update schema version
-			$sqlData = array(
-				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
-			);
-						
-			
+	
 			$BASE->db->update(WCOM_DB_APPLICATION_INFO, $sqlData);
 			
 			// commit
