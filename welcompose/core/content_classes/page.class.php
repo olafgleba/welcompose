@@ -232,6 +232,7 @@ public function selectPage ($id)
 			`content_pages`.`description` AS `description`,
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
+			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
@@ -283,6 +284,7 @@ public function selectPage ($id)
  * <li>type, int, optional: Page type id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
+ * <li>draft, int, optional: include/exclude pages with param draft</li>
  * </ul>
  * 
  * @throws Content_PageException
@@ -306,6 +308,7 @@ public function selectPages ($params = array())
 	$type = null;
 	$start = null;
 	$limit = null;
+	$draft = null;
 	$bind_params = array();
 	
 	// input check
@@ -325,6 +328,9 @@ public function selectPages ($params = array())
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
+				break;
+			case 'draft':
+					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			case 'navigation_name':
 					$$_key = (string)$_value;
@@ -354,6 +360,7 @@ public function selectPages ($params = array())
 			`content_pages`.`description` AS `description`,
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
+			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
@@ -413,6 +420,11 @@ public function selectPages ($params = array())
 		$bind_params['type'] = $type;
 	}
 	
+	// Include only result rows fields with no draft status
+	if (is_null($draft) ) {
+		$sql .= " AND `content_pages`.`draft` = '0' ";
+	}
+	
 	// add sorting
 	$sql .= " ORDER BY `content_nodes`.`sorting`, `content_nodes`.`lft` ";
 	
@@ -443,6 +455,7 @@ public function selectPages ($params = array())
  * <li>sorting, int, optional: Sorting count</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
+ * <li>draft, int, optional: include/exclude pages with param draft</li>
  * </ul>
  * 
  * @throws Content_PageException
@@ -466,6 +479,7 @@ public function countPages ($params = array())
 	$sorting = null;
 	$start = null;
 	$limit = null;
+	$draft = null;
 	$bind_params = array();
 	
 	// input check
@@ -484,6 +498,7 @@ public function countPages ($params = array())
 			case 'sorting':
 			case 'start':
 			case 'limit':
+			case 'ctrl_draft':
 					$$_key = (int)$_value;
 				break;
 			case 'navigation_name':
@@ -549,6 +564,11 @@ public function countPages ($params = array())
 	if (!empty($sorting) && is_numeric($sorting)) {
 		$sql .= " AND `content_nodes`.`sorting` = :sorting ";
 		$bind_params['sorting'] = $sorting;
+	}
+	
+	// Include only result rows fields with no draft status
+	if (is_null($draft) ) {
+		$sql .= " AND `content_pages`.`draft` = '0' ";
 	}
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
@@ -1198,6 +1218,7 @@ public function selectPath ($target)
 			`content_pages`.`description` AS `description`,
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
+			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,

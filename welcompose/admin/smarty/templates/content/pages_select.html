@@ -125,7 +125,7 @@ var toggleNavigation = 1;
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level|escape:htmlall}{elseif $_page.level >= 6}6{/if}" id="{$_page.id|escape:"url"}">{$_page.name|escape:"htmlall"} {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n Index page}" title="{i18n Index page}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n Protected page}" title="{i18n Protected page}" />{/if}</td>
+<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level|escape:htmlall}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="{$_page.id|escape:"url"}">{$_page.name|escape:"htmlall"} {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n Index page}" title="{i18n Index page}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n Protected page}" title="{i18n Protected page}" />{/if}</td>
 <td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n Down}"></a></td>
 <td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n Up}"></td>
 <td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}&amp;reference={$_page.id|escape:"url"}" title="{i18n Add new page}"></a></td>

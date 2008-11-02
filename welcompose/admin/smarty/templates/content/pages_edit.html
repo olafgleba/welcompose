@@ -166,6 +166,11 @@ var response = '{$session.response}';
 <label class="cont chbx" for="page_protect"><span class="bez">{$form.protect.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.protect.html}</label>
 
+{if $page.page_type_name == 'WCOM_BLOG'}
+<label class="cont chbx" for="page_draft"><span class="bez">{$form.draft.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.draft.html}</label>
+{/if}
+
 <label class="cont h13" for="page_groups"><span class="bez">{$form.groups.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.groups.html}</label>
 

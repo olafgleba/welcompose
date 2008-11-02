@@ -183,6 +183,14 @@ try {
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for draft
+	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
+		array('id' => 'simple_form_draft', 'class' => 'chbx'));
+	$FORM->applyFilter('draft', 'trim');
+	$FORM->applyFilter('draft', 'strip_tags');
+	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// select for type
 	$FORM->addElement('select', 'type', gettext('Form type'), $types,
@@ -258,6 +266,7 @@ try {
 		'content' => Base_Cnc::ifsetor($simple_form['content_raw'], null),
 		'text_converter' => $_text_converter,
 		'apply_macros' => Base_Cnc::ifsetor($simple_form['apply_macros'], null),
+		'draft' => Base_Cnc::ifsetor($simple_form['draft'], null),
 		'type' => ($SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
 			'' : Base_Cnc::ifsetor($simple_form['type'], null)),
 		'custom_type' => (!$SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
@@ -336,6 +345,7 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
+		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		$sqlData['email_from'] = $FORM->exportValue('email_from');
 		$sqlData['email_to'] = $FORM->exportValue('email_to');
 		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
@@ -383,8 +393,11 @@ try {
 			// begin transaction
 			$BASE->db->begin();
 			
-			// execute operation
+			// execute operation on simple form table
 			$SIMPLEFORM->updateSimpleForm($FORM->exportValue('id'), $sqlData);
+			
+			// execute operation on page table
+			$PAGE->updatePage($page['id'], array('draft' => (string)intval($FORM->exportValue('draft'))));
 			
 			// commit
 			$BASE->db->commit();

@@ -226,6 +226,11 @@ line-height: 1px;
 border: 0 none;
 }
 
+/* Draft page rows */
+.draft {
+color: #999;
+}
+
 /* forms */
 fieldset h2 {
 margin: 20px 0 5px 0;

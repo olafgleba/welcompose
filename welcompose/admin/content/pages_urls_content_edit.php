@@ -123,6 +123,14 @@ try {
 	$FORM->addRule('url', gettext('Please enter a target URL'), 'required');
 	$FORM->addRule('url', gettext('Please enter a valid target URL'), 'regex',
 		WCOM_REGEX_URL);
+		
+	// checkbox for draft
+	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
+		array('id' => 'url_form_draft', 'class' => 'chbx'));
+	$FORM->applyFilter('draft', 'trim');
+	$FORM->applyFilter('draft', 'strip_tags');
+	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save edit'),
@@ -132,6 +140,7 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($page['id'], null),
 		'url' => Base_Cnc::ifsetor($page['url'], null),
+		'draft' => Base_Cnc::ifsetor($page['draft'], null)
 	));
 	
 	// validate it
@@ -183,6 +192,7 @@ try {
 		// prepare sql data
 		$sqlData = array();
 		$sqlData['url'] = $FORM->exportValue('url');
+		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
