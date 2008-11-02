@@ -102,7 +102,7 @@ try {
 				ADD
 					`draft`
 				ENUM
-					('0', '1') NOT NULL DEFAULT '0'
+					('0', '1') NULL DEFAULT '0'
 				AFTER `url`
 			";
 			$BASE->db->execute($sql);
@@ -115,7 +115,7 @@ try {
 				ADD
 					`draft`
 				ENUM
-					('0', '1') NOT NULL DEFAULT '0'
+					('0', '1') NULL DEFAULT '0'
 				AFTER `apply_macros`
 			";
 			$BASE->db->execute($sql);
@@ -128,7 +128,7 @@ try {
 				ADD
 					`draft`
 				ENUM
-					('0', '1') NOT NULL DEFAULT '0'
+					('0', '1') NULL DEFAULT '0'
 				AFTER `apply_macros`
 			";
 			$BASE->db->execute($sql);
@@ -146,7 +146,7 @@ try {
 				ADD
 					`draft`
 				ENUM
-					('0', '1') NOT NULL DEFAULT '0'
+					('0', '1') NULL DEFAULT '0'
 				AFTER `apply_macros`
 			";
 			$BASE->db->execute($sql);
