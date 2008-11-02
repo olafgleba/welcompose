@@ -103,7 +103,7 @@ try {
 					`draft`
 				ENUM
 					('0', '1') NULL DEFAULT '0'
-				AFTER `url`
+				AFTER `index_page`
 			";
 			$BASE->db->execute($sql);
 		
