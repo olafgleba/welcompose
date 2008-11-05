@@ -124,13 +124,6 @@ try {
 		}
 	}
 	
-	// assign task number
-	$BASE->utility->smarty->assign('task', TASK_MAJOR.'-'.TASK_MINOR);
-	
-	// display the page
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('tasks/0001-001.html', WCOM_TEMPLATE_KEY);
-	
 	// flush the buffer
 	@ob_end_flush();
 	
@@ -142,7 +135,7 @@ try {
 	}
 	
 	// raise error
-	$BASE->error->displayException($e, $BASE->utility->smarty);
+	$BASE->error->printExceptionMessage($e);
 	$BASE->error->triggerException($e);
 	
 	// exit

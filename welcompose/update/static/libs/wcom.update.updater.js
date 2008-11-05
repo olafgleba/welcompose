@@ -66,14 +66,10 @@ function Updater_processTasksInit ()
 		// get table attributes
 		var el = $("tasks");
 
-		// id and safari need extra treatment
-		// they stupidly handles #text nodes differently
+		// IE need extra treatment cause 
+		// it stupidly handles #text nodes differently
 		if (this.browser == 'ie') {
 			el = el.childNodes[0];
-			el = el.childNodes[1];
-		}
-		else if (this.browser == 'sa') {
-			el = el.childNodes[1];
 			el = el.childNodes[1];
 		}
 		else {
@@ -83,7 +79,7 @@ function Updater_processTasksInit ()
 		el = el.childNodes;
 		
 		// make target row (status) global for further use in the ajax.loader
-		if (this.browser == 'ie' || this.browser == 'sa') {
+		if (this.browser == 'ie') {
 			target = el[1].id;
 		} else {
 			target = el[3].id;
@@ -110,10 +106,14 @@ function Updater_processTasks (lastTarget)
 	try {
 		this.lastTarget = $(lastTarget);
 		this.browser = _setBrowserString();
-		this.currentTarget = Helper.getParentNodeNextSibling(this.lastTarget, 2);
+		if (this.browser == 'sa') {
+			this.currentTarget = Helper.getParentNodeNextSibling(this.lastTarget, 3);
+		} else {
+			this.currentTarget = Helper.getParentNodeNextSibling(this.lastTarget, 2);
+		}
 	
 		if (Updater.isNull(this.currentTarget) === false) {
-			if (this.browser == 'ie' || this.browser == 'sa') {
+			if (this.browser == 'ie') {
 				this.currentTarget = this.currentTarget.childNodes[1].id;
 			} else {
 				this.currentTarget = this.currentTarget.childNodes[3].id;
@@ -174,7 +174,7 @@ function Updater_showResponseProcessTasks (req)
 			$(target).appendChild(rimg);
 		
 			// process following tasks
-			setTimeout ("Updater.processTasks(target)", 500);
+			setTimeout ("Updater.processTasks(target)", 800);
 		}
 	} catch (e) {
 		_applyError(e);
