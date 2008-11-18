@@ -66,6 +66,7 @@ height: 1.5em;
 line-height: 1.5em;
 width: 690px;
 margin: 5px 0 0 0;
+cursor: pointer;
 }
 label.cont {
 margin: 5px 0;

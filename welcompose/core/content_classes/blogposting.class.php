@@ -343,8 +343,9 @@ public function selectBlogPosting ($id)
  * <li>order_marco, string, otpional: How to sort the result set.
  * Supported macros:
  *    <ul>
- *        <li>DATE_MODIFIED: sorty by date modified</li>
- *        <li>DATE_ADDED: sort by date added</li>
+ *		<li>DATE_MODIFIED: sorty by date modified</li>
+ *		<li>DATE_ADDED: sort by date added</li>
+ *	 	<li>RANDOM: sort by random</li>
  *    </ul>
  * </li>
  * </ul>
