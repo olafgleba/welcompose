@@ -51,20 +51,6 @@ mv welcompose/core/conf/sys.inc.php-dist welcompose/core/conf/sys.inc.php
 rm -rf database
 rm -rf documentation
 
-# rename welcompose to match version 
-mv welcompose welcompose-0.8.2
-
-# create full source packages
-tar cvfz "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".tar.gz welcompose-0.8.2
-tar cvfj "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".tar.bz2 welcompose-0.8.2
-zip -r "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".zip welcompose-0.8.2
-
-# rename welcompose to match reverse 
-mv welcompose-0.8.2 welcompose
-
-# remove update directory
-rm -rf welcompose/update
-
 # compress js
 svn export http://svn.devjavu.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
 if [ ! -f "jsmin.py" ] ; then
@@ -78,6 +64,20 @@ for file in `find welcompose -type f -name "*.js"` ; do
 	rm -f "$tmpfile"
 done
 rm -rf jsmin.py
+
+# rename welcompose to match version 
+mv welcompose welcompose-0.8.2
+
+# create full source packages
+tar cvfz "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".tar.gz welcompose-0.8.2
+tar cvfj "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".tar.bz2 welcompose-0.8.2
+zip -r "../welcompose-0.8.2-$BUILD_NUMBER/welcompose-0.8.2-full-src".zip welcompose-0.8.2
+
+# rename welcompose to match reverse 
+mv welcompose-0.8.2 welcompose
+
+# remove update directory
+rm -rf welcompose/update
 
 # rename welcompose to match version 
 mv welcompose welcompose-0.8.2
