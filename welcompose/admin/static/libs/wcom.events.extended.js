@@ -276,6 +276,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.preview' : function(el){
+		el.onclick = function(){
+			Preview.getFrontendView(this);
+			return false;
+		}
+	},
 	'.toggleExtendedView120' : function(el){
 		el.onclick = function(){
 			Mediamanager.toggleExtendedView(this);
@@ -308,6 +314,9 @@ var definitions = {
 	'.submit200' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
+		}
+		el.onclick = function() {
+			
 		}
 	},
 	'.submit200go' : function(el){

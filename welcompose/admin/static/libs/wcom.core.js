@@ -310,6 +310,7 @@ function Base ()
 		this.parseCallbacksPath = '../callbacks.php';
 		this.parseBlogCommmentStatusChangePath = '../community/blogcomments_statuschange.php';
 		this.validatePath = '../validate.js.php';
+		this.previewPath = '../../index.php';
 	} catch (e) {
 		_applyError(e);
 	}
@@ -552,9 +553,18 @@ function _objectHackit ()
 function Init_getVars ()
 {
 	try {
+		if (document.getElementsByClassName('botbg')[0]) {
+			Form.focusFirstElement(document.getElementsByClassName('botbg')[0]);
+		}
+		
 		if (typeof response != 'undefined') {
 			if (response == 1) {
 				Effect.Fade('rp', {duration: 0.6, delay: 2.0});
+			}
+		}
+		if (typeof preview_ctrl != 'undefined') {
+			if (preview_ctrl == 1) {
+				Preview.reloadFrontendView();
 			}
 		}
 		if (typeof callback_media_result != 'undefined' && callback_media_result != '') {
@@ -1572,3 +1582,114 @@ function Tables_toggleElem (elem)
  * Building new object instance of class Tables
  */
 Tables = new Tables();
+
+
+
+/**
+ * Constructs the Preview class
+ * 
+ * @class The Preview Class provides a call to the rendered frontend page
+ * The scope is application wide.
+ *
+ * @constructor
+ * @throws applyError on exception
+ */
+function Preview ()
+{
+	try {
+		// no properties		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/* Inherit from Base */
+Preview.prototype = new Base();
+
+/**
+ * Instance Methods from prototype @class Preview
+ */
+Preview.prototype.getFrontendView = Preview_getFrontendView;
+Preview.prototype.reloadFrontendView = Preview_reloadFrontendView;
+Preview.prototype.closeFrontendView = Preview_closeFrontendView;
+
+/**
+ * Get rendered page frontend View.
+ * 
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Preview_getFrontendView (elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.elemPageId = this.elem.id;
+		this.elemPostingId = this.elem.name;
+		this.elemAction = this.elem.rel;
+		
+		// Save state in hidden field previewCtrl
+		document.getElementsByName('preview')[0].value = 1;
+		
+		previewWin = window.open(this.previewPath + '?page='+this.elemPageId+'&posting_id='+this.elemPostingId+'&action='+this.elemAction+'','preview','width=1024,height=640,scrollbars=yes,resizable=yes');
+		
+		previewWin.focus();
+		
+		var insertPanel = function () {
+			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView(); self.close();"><strong>'+closePreviewPopup+'</strong></a></div');
+		}
+		setTimeout(insertPanel, 2000);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Get rendered page frontend View when popup is still open.
+ * 
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Preview_reloadFrontendView ()
+{
+	try {
+		// properties
+		this.elem = document.getElementsByClassName('preview')[0];
+		this.elemPageId = Helper.getAttr('id', this.elem);
+		this.elemPostingId = Helper.getAttr('name', this.elem);
+		this.elemAction = Helper.getAttr('rel', this.elem);
+		
+		previewWin = window.open(this.previewPath + '?page='+this.elemPageId+'&posting_id='+this.elemPostingId+'&action='+this.elemAction+'','preview','scrollbars=yes,resizable=yes');
+		
+		var insertPanel = function () {
+			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView(); self.close();"><strong>'+closePreviewPopup+'</strong></a></div');
+		}
+		setTimeout(insertPanel, 2000);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Close frontend View and set ctrl session var to null.
+ * 
+ * @param {string} elem Current element
+ * @throws applyError on exception
+ */
+function Preview_closeFrontendView ()
+{
+	try {
+		// Empty hidden field previewCtrl
+		document.getElementsByName('preview')[0].value = '';
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Building new object instance of class Navigation
+ */
+Preview = new Preview();

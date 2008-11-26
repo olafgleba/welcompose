@@ -147,6 +147,12 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
+	// hidden for frontend view control
+	$FORM->addElement('hidden', 'preview');
+	$FORM->applyFilter('preview', 'trim');
+	$FORM->applyFilter('preview', 'strip_tags');
+	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
+	
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
 		array('id' => 'simple_form_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
@@ -265,7 +271,9 @@ try {
 		'email_from' => Base_Cnc::ifsetor($simple_form['email_from'], null),
 		'email_to' => Base_Cnc::ifsetor($simple_form['email_to'], null),
 		'email_subject' => Base_Cnc::ifsetor($simple_form['email_subject'], null),
-		'use_captcha' => Base_Cnc::ifsetor($simple_form['use_captcha'], null)
+		'use_captcha' => Base_Cnc::ifsetor($simple_form['use_captcha'], null),
+		// ctrl var for frontend view
+		'preview' => $_SESSION['preview_ctrl']
 	));
 	
 	// validate it
@@ -294,7 +302,8 @@ try {
 		
 		// build session
 		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC),
+			'preview_ctrl' => Base_Cnc::filterRequest($_SESSION['preview_ctrl'], WCOM_REGEX_NUMERIC)
 		);
 		
 		// assign $_SESSION to smarty
@@ -303,6 +312,9 @@ try {
 		// empty $_SESSION
 		if (!empty($_SESSION['response'])) {
 			$_SESSION['response'] = '';
+		}	
+		if (!empty($_SESSION['preview_ctrl'])) {
+		  	$_SESSION['preview_ctrl'] = '';
 		}
 		
 		// assign page
@@ -402,6 +414,14 @@ try {
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
 			$_SESSION['response'] = 1;
+		}
+		
+		// preview control value
+		$activePreview = $FORM->exportValue('preview');
+				
+		// add preview_ctrl to session
+		if (!empty($activePreview)) {
+			$_SESSION['preview_ctrl'] = 1;
 		}
 				
 		// redirect

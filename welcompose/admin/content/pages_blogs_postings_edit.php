@@ -182,6 +182,12 @@ try {
 	$FORM->applyFilter('page', 'strip_tags');
 	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	
+	// hidden for frontend view control
+	$FORM->addElement('hidden', 'preview');
+	$FORM->applyFilter('preview', 'trim');
+	$FORM->applyFilter('preview', 'strip_tags');
+	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
@@ -438,7 +444,9 @@ try {
 		'podcast_category_3' => Base_Cnc::ifsetor($blog_posting['podcast_category_3'], null),
 		'podcast_author' => Base_Cnc::ifsetor($blog_posting['podcast_author'], null),
 		'podcast_explicit' => Base_Cnc::ifsetor($blog_posting['podcast_explicit'], null),
-		'podcast_block' => Base_Cnc::ifsetor($blog_posting['podcast_block'], null)
+		'podcast_block' => Base_Cnc::ifsetor($blog_posting['podcast_block'], null),
+		// ctrl var for frontend view
+		'preview' => $_SESSION['preview_ctrl']
 	));
 	
 	// validate it
@@ -467,7 +475,8 @@ try {
 		
 		// build session
 		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC),
+			'preview_ctrl' => Base_Cnc::filterRequest($_SESSION['preview_ctrl'], WCOM_REGEX_NUMERIC)
 		);
 		
 		// assign $_SESSION to smarty
@@ -476,6 +485,9 @@ try {
 		// empty $_SESSION
 		if (!empty($_SESSION['response'])) {
 			$_SESSION['response'] = '';
+		}	
+		if (!empty($_SESSION['preview_ctrl'])) {
+		  	$_SESSION['preview_ctrl'] = '';
 		}
 
 		// select available projects
@@ -487,6 +499,9 @@ try {
 		
 		// assign page
 		$BASE->utility->smarty->assign('page', $page);
+		
+		// assign posting id
+		$BASE->utility->smarty->assign('blog_posting', $blog_posting);
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -673,6 +688,14 @@ try {
 		if (!empty($saveAndRemainOnPage)) {
 			$_SESSION['response'] = 1;
 		}
+		
+		// preview control value
+		$activePreview = $FORM->exportValue('preview');
+				
+		// add preview_ctrl to session
+		if (!empty($activePreview)) {
+			$_SESSION['preview_ctrl'] = 1;
+		}
 				
 		// redirect
 		$SESSION->save();
@@ -684,9 +707,11 @@ try {
 
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_blogs_postings_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
+			header("Location: pages_blogs_postings_edit.php?page=".
+						$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
 		} else {
-			header("Location: pages_blogs_postings_select.php?page=".$FORM->exportValue('page'));
+			header("Location: pages_blogs_postings_select.php?page=".
+						$FORM->exportValue('page'));
 		}
 		exit;
 	}

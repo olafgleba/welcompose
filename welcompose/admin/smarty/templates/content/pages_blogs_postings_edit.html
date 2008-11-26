@@ -18,6 +18,7 @@
 var mediamanager = 1;
 var pagetype = '{$page.page_type_name}';
 var response = '{$session.response}';
+var preview_ctrl = '{$session.preview_ctrl}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -137,7 +138,8 @@ var podcast = 1;
 <div class="act">
 <ul class="actnav">
 <li><a class="insert" name="_blog_posting_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_blog_posting_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_blog_posting_content" href="#">{i18n Structural templates}&nbsp;&nbsp;&nbsp;&nbsp;|</a><span id="structuraltemplates_links"></span></li>
+<li><a class="preview" id="{$page.id}" name="{$blog_posting.id}" rel="Item" href="#">{i18n Frontend View}</a></li>
 </ul>
 </div>
 

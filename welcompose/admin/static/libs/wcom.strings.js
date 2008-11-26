@@ -46,6 +46,8 @@ var showHelp = '<%i18n Show help on this topic%>';
 var hideElement = '<%i18n Hide this element%>';
 var showElement = '<%i18n Show this element%>';
 
+var closePreviewPopup = '<%i18n CLOSE FRONTEND VIEW%>';
+
 var describeLink = '<%i18n Your link description%>';
 var selectTextarea = '<%i18n Please set focus on the text area into which you wish the media to be placed.%>';
 
