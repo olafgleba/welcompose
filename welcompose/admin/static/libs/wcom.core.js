@@ -1636,7 +1636,7 @@ function Preview_getFrontendView (elem)
 		previewWin.focus();
 		
 		var insertPanel = function () {
-			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView(); self.close();"><strong>'+closePreviewPopup+'</strong></a></div');
+			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
 		}
 		setTimeout(insertPanel, 2000);
 	} catch (e) {
@@ -1663,7 +1663,7 @@ function Preview_reloadFrontendView ()
 		previewWin = window.open(this.previewPath + '?page='+this.elemPageId+'&posting_id='+this.elemPostingId+'&action='+this.elemAction+'','preview','scrollbars=yes,resizable=yes');
 		
 		var insertPanel = function () {
-			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView(); self.close();"><strong>'+closePreviewPopup+'</strong></a></div');
+			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
 		}
 		setTimeout(insertPanel, 2000);
 	} catch (e) {
@@ -1683,6 +1683,9 @@ function Preview_closeFrontendView ()
 	try {
 		// Empty hidden field previewCtrl
 		document.getElementsByName('preview')[0].value = '';
+		
+		// close window
+		previewWin.close();
 
 	} catch (e) {
 		_applyError(e);
