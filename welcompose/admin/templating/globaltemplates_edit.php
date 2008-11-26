@@ -126,6 +126,12 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
 		array('id' => 'global_template_name', 'maxlength' => 255, 'class' => 'w300 validate'));
@@ -174,6 +180,7 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'id' => Base_Cnc::ifsetor($global_template['id'], null),
 		'name' => Base_Cnc::ifsetor($global_template['name'], null),
 		'description' => Base_Cnc::ifsetor($global_template['description'], null),
@@ -285,11 +292,15 @@ try {
 			@ob_end_clean();
 		}
 		
+		// save reques start range
+		$start = $FORM->exportValue('start');
+		$start = (!empty($start)) ? $start : 0;
+		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: globaltemplates_edit.php?id=".(int)$FORM->exportValue('id'));
+			header("Location: globaltemplates_edit.php?id=".$FORM->exportValue('id')."&start=".$start);
 		} else {
-			header("Location: globaltemplates_select.php");
+			header("Location: globaltemplates_select.php?start=".$start);
 		}
 		exit;
 	}

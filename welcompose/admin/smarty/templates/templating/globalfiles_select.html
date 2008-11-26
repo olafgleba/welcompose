@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript">
-var response			= '{if isset($session.response)}{$session.response}{/if}';
-var selection			= '{if isset($session.selection)}{$session.selection}{/if}';
+var response = '{if isset($session.response)}{$session.response}{/if}';
+var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -100,7 +100,7 @@ var selection			= '{if isset($session.selection)}{$session.selection}{/if}';
 <td>{if !empty($_global_file.name_on_disk)}{i18n available}{else}{i18n not available}{/if}</td>
 <td><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n Download}"></a></td>
-<td><a class="edit" href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td><a class="edit" href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_file.id}" class="outer">

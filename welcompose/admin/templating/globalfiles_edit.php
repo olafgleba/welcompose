@@ -115,6 +115,12 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	
 	// file upload field
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
@@ -131,6 +137,7 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'id' => Base_Cnc::ifsetor($file['id'], null),
 		'description' => Base_Cnc::ifsetor($file['description'], null)
 	));
@@ -245,8 +252,7 @@ try {
 
 			// re-throw exception
 			throw $e;
-		}
-		
+		}	
 		
 		// redirect
 		$SESSION->save();
@@ -256,8 +262,12 @@ try {
 			@ob_end_clean();
 		}
 		
+		// save reques start range
+		$start = $FORM->exportValue('start');
+		$start = (!empty($start)) ? $start : 0;
+		
 		// redirect
-		header("Location: globalfiles_select.php");
+		header("Location: globalfiles_select.php?start=".$start);
 		exit;
 	}
 } catch (Exception $e) {

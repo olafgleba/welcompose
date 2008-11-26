@@ -400,10 +400,6 @@ try {
 		}
 		
 		// redirect
-		//header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
-		//exit;
-		
-		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
 		} else {

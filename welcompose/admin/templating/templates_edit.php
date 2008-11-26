@@ -138,6 +138,24 @@ try {
 	$FORM->applyFilter('id', 'strip_tags');
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+
+	// hidden for set
+	$FORM->addElement('hidden', 'set_request');
+	$FORM->applyFilter('set_request', 'trim');
+	$FORM->applyFilter('set_request', 'strip_tags');
+	$FORM->addRule('set_request', gettext('set_request is expected to be numeric'), 'numeric');
+
+	// hidden for type
+	$FORM->addElement('hidden', 'type_request');
+	$FORM->applyFilter('type_request', 'trim');
+	$FORM->applyFilter('type_request', 'strip_tags');
+	$FORM->addRule('type_request', gettext('type_request is expected to be numeric'), 'numeric');
+		
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 	
 	// select for group
 	$FORM->addElement('select', 'type', gettext('Type'), $template_types,
@@ -186,6 +204,9 @@ try {
 		
 	// set defaults
 	$FORM->setDefaults(array(
+		'set_request' => Base_Cnc::filterRequest($_REQUEST['set'], WCOM_REGEX_NUMERIC),
+		'type_request' => Base_Cnc::filterRequest($_REQUEST['type'], WCOM_REGEX_NUMERIC),
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'id' => Base_Cnc::ifsetor($template['id'], null),
 		'type' => Base_Cnc::ifsetor($template['type'], null),
 		'name' => Base_Cnc::ifsetor($template['name'], null),
@@ -303,14 +324,34 @@ try {
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
+
+		// save reques set value
+		$set_request = $FORM->exportValue('set_request');
+		$set_request = (!empty($set_request)) ? $set_request : 0;
+		
+		// save reques type value
+		$type_request = $FORM->exportValue('type_request');
+		$type_request = (!empty($type_request)) ? $type_request : 0;
+		
+		// save reques start range
+		$start = $FORM->exportValue('start');
+		$start = (!empty($start)) ? $start : 0;
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: templates_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: templates_edit.php?id=".$FORM->exportValue('id').
+			"&set=".$set_request.
+			"&type=".$type_request.
+			"&start=".$start
+			);
 		} else {
-			header("Location: templates_select.php");
+			header("Location: templates_select.php?set=".$set_request.
+			"&type=".$type_request.
+			"&start=".$start
+			);
 		}
 		exit;
+		
 	}
 } catch (Exception $e) {
 	// clean the buffer
