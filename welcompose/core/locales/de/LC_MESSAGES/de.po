@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-09 12:07+0100\n"
+"POT-Creation-Date: 2008-11-26 16:58+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -145,11 +145,15 @@ msgstr "ID sollte nicht leer sein"
 #: blogcomments_edit.php:117 blogcommentstatuses_edit.php:114
 #: globalboxes_edit.php:124 navigations_edit.php:113
 #: pages_blogs_pingserviceconfigurations_edit.php:141
-#: pages_blogs_postings_edit.php:177 pages_boxes_edit.php:139
-#: pages_edit.php:153 pages_generatorforms_content_edit.php:141
+#: pages_blogs_postings_edit.php:177 pages_blogs_postings_edit.php:190
+#: pages_boxes_edit.php:139 pages_edit.php:153
+#: pages_generatorforms_content_edit.php:141
+#: pages_generatorforms_content_edit.php:147
 #: pages_generatorforms_fields_edit.php:124 pages_move_away.php:132
 #: pages_simpleforms_content_edit.php:148
-#: pages_simplepages_content_edit.php:134 pages_urls_content_edit.php:116
+#: pages_simpleforms_content_edit.php:154
+#: pages_simplepages_content_edit.php:134
+#: pages_simplepages_content_edit.php:140 pages_urls_content_edit.php:116
 #: pagetypes_edit.php:113 podcastcategories_edit.php:114
 #: structuraltemplates_edit.php:114 mediamanager_edit.php:124
 #: globalfiles_edit.php:116 globaltemplates_edit.php:127
@@ -164,11 +168,11 @@ msgstr "ID sollte einen numerischen Wert haben"
 #: blogcomments_edit.php:147 blogcommentstatuses_edit.php:127 settings.php:290
 #: globalboxes_edit.php:157 navigations_edit.php:125
 #: pages_blogs_pingserviceconfigurations_edit.php:184
-#: pages_blogs_postings_edit.php:406 pages_boxes_edit.php:173
-#: pages_edit.php:246 pages_generatorforms_content_edit.php:212
+#: pages_blogs_postings_edit.php:412 pages_boxes_edit.php:173
+#: pages_edit.php:246 pages_generatorforms_content_edit.php:218
 #: pages_generatorforms_fields_edit.php:207
-#: pages_simpleforms_content_edit.php:235
-#: pages_simplepages_content_edit.php:200 pages_urls_content_edit.php:128
+#: pages_simpleforms_content_edit.php:241
+#: pages_simplepages_content_edit.php:206 pages_urls_content_edit.php:128
 #: pagetypes_edit.php:137 podcastcategories_edit.php:135
 #: structuraltemplates_edit.php:136 mediamanager_edit.php:147
 #: globalfiles_edit.php:123 globaltemplates_edit.php:168
@@ -247,7 +251,7 @@ msgstr "Typ"
 msgid "Chosen type is out of range"
 msgstr "Die Angabe des Typs liegt außerhalb des gültigen Wertebereiches"
 
-#: callbacks.php:93 callbacks_insert_document.php:100 wcom.strings.js:49
+#: callbacks.php:93 callbacks_insert_document.php:100 wcom.strings.js:51
 msgid "Your link description"
 msgstr "Ihre Link-Beschreibung"
 
@@ -315,11 +319,11 @@ msgid "Please enter a valid homepage URL"
 msgstr "Bitte geben Sie eine gültige Webseiten Adresse an"
 
 #: blogcomments_edit.php:142 globalboxes_add.php:125 globalboxes_edit.php:136
-#: pages_blogs_postings_add.php:200 pages_blogs_postings_edit.php:208
+#: pages_blogs_postings_add.php:200 pages_blogs_postings_edit.php:214
 #: pages_boxes_add.php:144 pages_boxes_edit.php:152
-#: pages_generatorforms_content_edit.php:160
-#: pages_simpleforms_content_edit.php:167
-#: pages_simplepages_content_edit.php:153 structuraltemplates_add.php:120
+#: pages_generatorforms_content_edit.php:166
+#: pages_simpleforms_content_edit.php:173
+#: pages_simplepages_content_edit.php:159 structuraltemplates_add.php:120
 #: structuraltemplates_edit.php:131 globaltemplates_add.php:136
 #: globaltemplates_edit.php:147 templates_add.php:158 templates_copy.php:177
 #: templates_edit.php:176
@@ -390,13 +394,13 @@ msgstr "Ham-Status"
 msgid "Chosen comment ham status is out of range"
 msgstr "Die Angabe des Ham-Status liegt außerhalb des gültigen Wertebereiches"
 
-#: settings.php:166 pages_generatorforms_content_edit.php:204
-#: pages_simpleforms_content_edit.php:227
+#: settings.php:166 pages_generatorforms_content_edit.php:210
+#: pages_simpleforms_content_edit.php:233
 msgid "Use captcha"
 msgstr "Captcha nutzen"
 
-#: settings.php:170 pages_generatorforms_content_edit.php:208
-#: pages_simpleforms_content_edit.php:231
+#: settings.php:170 pages_generatorforms_content_edit.php:214
+#: pages_simpleforms_content_edit.php:237
 msgid "Chosen captcha type is out of range"
 msgstr ""
 "Die Angabe des Captcha-Typs liegt außerhalb des gültigen Wertebereiches"
@@ -510,48 +514,48 @@ msgid "A global box with the given name already exists"
 msgstr "Eine gleichnamige globale Box existiert bereits"
 
 #: globalboxes_add.php:130 globalboxes_edit.php:141
-#: pages_blogs_postings_add.php:334 pages_blogs_postings_edit.php:342
+#: pages_blogs_postings_add.php:334 pages_blogs_postings_edit.php:348
 #: pages_boxes_add.php:149 pages_boxes_edit.php:157
-#: pages_generatorforms_content_edit.php:165
-#: pages_simpleforms_content_edit.php:172
-#: pages_simplepages_content_edit.php:158
+#: pages_generatorforms_content_edit.php:171
+#: pages_simpleforms_content_edit.php:178
+#: pages_simplepages_content_edit.php:164
 msgid "Text converter"
 msgstr "Textkonverter"
 
 #: globalboxes_add.php:134 globalboxes_edit.php:145
-#: pages_blogs_postings_add.php:338 pages_blogs_postings_edit.php:346
+#: pages_blogs_postings_add.php:338 pages_blogs_postings_edit.php:352
 #: pages_boxes_add.php:153 pages_boxes_edit.php:161
-#: pages_generatorforms_content_edit.php:169
-#: pages_simpleforms_content_edit.php:176
-#: pages_simplepages_content_edit.php:162
+#: pages_generatorforms_content_edit.php:175
+#: pages_simpleforms_content_edit.php:182
+#: pages_simplepages_content_edit.php:168
 msgid "Chosen text converter is out of range"
 msgstr ""
 "Die Angabe des Textkonverters liegt außerhalb des gültigen Wertebereiches"
 
 #: globalboxes_add.php:138 globalboxes_edit.php:149
-#: pages_blogs_postings_add.php:342 pages_blogs_postings_edit.php:350
+#: pages_blogs_postings_add.php:342 pages_blogs_postings_edit.php:356
 #: pages_boxes_add.php:157 pages_boxes_edit.php:165
-#: pages_generatorforms_content_edit.php:173
-#: pages_simpleforms_content_edit.php:180
-#: pages_simplepages_content_edit.php:166
+#: pages_generatorforms_content_edit.php:179
+#: pages_simpleforms_content_edit.php:186
+#: pages_simplepages_content_edit.php:172
 msgid "Apply text macros"
 msgstr "Makros anwenden"
 
 #: globalboxes_add.php:142 globalboxes_edit.php:153 pages_add.php:256
-#: pages_blogs_postings_add.php:346 pages_blogs_postings_edit.php:354
+#: pages_blogs_postings_add.php:346 pages_blogs_postings_edit.php:360
 #: pages_boxes_add.php:161 pages_boxes_edit.php:169 pages_edit.php:219
-#: pages_generatorforms_content_edit.php:177
-#: pages_simpleforms_content_edit.php:184
-#: pages_simplepages_content_edit.php:170
+#: pages_generatorforms_content_edit.php:183
+#: pages_simpleforms_content_edit.php:190
+#: pages_simplepages_content_edit.php:176
 msgid "The field whether to apply text macros accepts only 0 or 1"
 msgstr "Das Feld \"Textmakros\" kann nur den Wert 0 oder 1 haben"
 
-#: globalboxes_edit.php:161 pages_blogs_postings_edit.php:410
+#: globalboxes_edit.php:161 pages_blogs_postings_edit.php:416
 #: pages_boxes_edit.php:177 pages_edit.php:250
-#: pages_generatorforms_content_edit.php:216
+#: pages_generatorforms_content_edit.php:222
 #: pages_generatorforms_fields_edit.php:211
-#: pages_simpleforms_content_edit.php:239
-#: pages_simplepages_content_edit.php:204 structuraltemplates_edit.php:140
+#: pages_simpleforms_content_edit.php:245
+#: pages_simplepages_content_edit.php:210 structuraltemplates_edit.php:140
 #: globaltemplates_edit.php:172 templates_edit.php:184
 msgid "Save edit and go back"
 msgstr "Speichern und zur Übersicht"
@@ -637,8 +641,8 @@ msgid "Alternate name"
 msgstr "Alternativer Name"
 
 #: pages_add.php:208 pages_blogs_postings_add.php:235
-#: pages_blogs_postings_edit.php:243 pages_edit.php:178
-#: pages_simplepages_content_edit.php:194 structuraltemplates_add.php:115
+#: pages_blogs_postings_edit.php:249 pages_edit.php:178
+#: pages_simplepages_content_edit.php:200 structuraltemplates_add.php:115
 #: structuraltemplates_edit.php:126 mediamanager_edit.php:134
 #: mediamanager_upload.php:116 structuraltemplates_select.html:80
 #: globalfiles_select.html:89 globaltemplates_select.html:83
@@ -696,7 +700,7 @@ msgid "The field protect accepts only 0 or 1"
 msgstr "Das Feld \"Geschützt\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_add.php:252 pages_blogs_postings_add.php:361
-#: pages_blogs_postings_edit.php:369 pages_edit.php:215
+#: pages_blogs_postings_edit.php:375 pages_edit.php:215
 #: pages_blogs_postings_select.html:89
 msgid "Draft"
 msgstr "Entwurf"
@@ -864,205 +868,205 @@ msgid "no"
 msgstr "Nein"
 
 #: pages_blogs_postings_add.php:179 pages_blogs_postings_add.php:226
-#: pages_blogs_postings_edit.php:187 pages_blogs_postings_edit.php:234
-#: pages_generatorforms_content_edit.php:144
-#: pages_simpleforms_content_edit.php:151
-#: pages_simplepages_content_edit.php:137
-#: pages_simplepages_content_edit.php:182 callbacks_insert_image.php:122
+#: pages_blogs_postings_edit.php:193 pages_blogs_postings_edit.php:240
+#: pages_generatorforms_content_edit.php:150
+#: pages_simpleforms_content_edit.php:157
+#: pages_simplepages_content_edit.php:143
+#: pages_simplepages_content_edit.php:188 callbacks_insert_image.php:122
 #: pages_blogs_postings_select.html:125
 msgid "Title"
 msgstr "Titel"
 
-#: pages_blogs_postings_add.php:183 pages_blogs_postings_edit.php:191
-#: pages_generatorforms_content_edit.php:148
-#: pages_simpleforms_content_edit.php:155
-#: pages_simplepages_content_edit.php:141
+#: pages_blogs_postings_add.php:183 pages_blogs_postings_edit.php:197
+#: pages_generatorforms_content_edit.php:154
+#: pages_simpleforms_content_edit.php:161
+#: pages_simplepages_content_edit.php:147
 msgid "Please enter a title"
 msgstr "Bitte geben Sie einen Titel an"
 
-#: pages_blogs_postings_add.php:186 pages_blogs_postings_edit.php:194
-#: pages_generatorforms_content_edit.php:151
-#: pages_simpleforms_content_edit.php:158
-#: pages_simplepages_content_edit.php:144
+#: pages_blogs_postings_add.php:186 pages_blogs_postings_edit.php:200
+#: pages_generatorforms_content_edit.php:157
+#: pages_simpleforms_content_edit.php:164
+#: pages_simplepages_content_edit.php:150
 msgid "URL title"
 msgstr "URL-Titel"
 
-#: pages_blogs_postings_add.php:190 pages_blogs_postings_edit.php:198
-#: pages_generatorforms_content_edit.php:155
-#: pages_simpleforms_content_edit.php:162
-#: pages_simplepages_content_edit.php:148
+#: pages_blogs_postings_add.php:190 pages_blogs_postings_edit.php:204
+#: pages_generatorforms_content_edit.php:161
+#: pages_simpleforms_content_edit.php:168
+#: pages_simplepages_content_edit.php:154
 msgid "Enter an URL title"
 msgstr "Bitte geben Sie einen URL-Titel an"
 
-#: pages_blogs_postings_add.php:191 pages_blogs_postings_edit.php:199
-#: pages_generatorforms_content_edit.php:156
-#: pages_simpleforms_content_edit.php:163
-#: pages_simplepages_content_edit.php:149
+#: pages_blogs_postings_add.php:191 pages_blogs_postings_edit.php:205
+#: pages_generatorforms_content_edit.php:162
+#: pages_simpleforms_content_edit.php:169
+#: pages_simplepages_content_edit.php:155
 msgid "The URL title may only contain chars, numbers and hyphens"
 msgstr "Bitte nutzen Sie nur Buchstaben, Nummern und Bindestriche"
 
 #: pages_blogs_postings_add.php:195 pages_blogs_postings_add.php:246
-#: pages_blogs_postings_edit.php:203 pages_blogs_postings_edit.php:254
+#: pages_blogs_postings_edit.php:209 pages_blogs_postings_edit.php:260
 msgid "Summary"
 msgstr "Kurzfassung"
 
-#: pages_blogs_postings_add.php:212 pages_blogs_postings_edit.php:220
+#: pages_blogs_postings_add.php:212 pages_blogs_postings_edit.php:226
 msgid "The podcast id is expected to be numeric"
 msgstr "Die Podcast ID muss numerisch sein"
 
-#: pages_blogs_postings_add.php:218 pages_blogs_postings_edit.php:226
+#: pages_blogs_postings_add.php:218 pages_blogs_postings_edit.php:232
 msgid "The media file id is expected to be numeric"
 msgstr "Die Media ID muss numerisch sein"
 
-#: pages_blogs_postings_add.php:223 pages_blogs_postings_edit.php:231
+#: pages_blogs_postings_add.php:223 pages_blogs_postings_edit.php:237
 msgid "Podcast details display is expected to be numeric"
 msgstr "Podcast Detailanzeige muss numerisch sein"
 
-#: pages_blogs_postings_add.php:231 pages_blogs_postings_edit.php:239
+#: pages_blogs_postings_add.php:231 pages_blogs_postings_edit.php:245
 msgid "Please enter a podcast title"
 msgstr "Bitte geben Sie einen Podcast-Titel ein"
 
-#: pages_blogs_postings_add.php:240 pages_blogs_postings_edit.php:248
+#: pages_blogs_postings_add.php:240 pages_blogs_postings_edit.php:254
 msgid "Please select a podcast description source"
 msgstr "Bitte wählen Sie eine Quelle für die Podcast-Beschreibung aus"
 
-#: pages_blogs_postings_add.php:242 pages_blogs_postings_edit.php:250
+#: pages_blogs_postings_add.php:242 pages_blogs_postings_edit.php:256
 msgid "Podcast description source is out of range"
 msgstr ""
 "Die Quelle für die Podcast-Beschreibung liegt außerhalb des gültigen "
 "Wertebereiches"
 
-#: pages_blogs_postings_add.php:251 pages_blogs_postings_edit.php:259
+#: pages_blogs_postings_add.php:251 pages_blogs_postings_edit.php:265
 msgid "Please select a podcast summary source"
 msgstr "Bitte wählen Sie eine Quelle für die Podcast-Kurzfassung aus"
 
-#: pages_blogs_postings_add.php:253 pages_blogs_postings_edit.php:261
+#: pages_blogs_postings_add.php:253 pages_blogs_postings_edit.php:267
 msgid "Podcast summary source is out of range"
 msgstr ""
 "Die Auswahl der Quelle für die Podcast-Kurzfassung liegt außerhalb des "
 "gültigen Wertebereiches"
 
-#: pages_blogs_postings_add.php:257 pages_blogs_postings_edit.php:265
-#: pages_simplepages_content_edit.php:188
+#: pages_blogs_postings_add.php:257 pages_blogs_postings_edit.php:271
+#: pages_simplepages_content_edit.php:194
 msgid "Keywords"
 msgstr "Schlagworte"
 
-#: pages_blogs_postings_add.php:262 pages_blogs_postings_edit.php:270
+#: pages_blogs_postings_add.php:262 pages_blogs_postings_edit.php:276
 msgid "Please select a podcast keyword source"
 msgstr "Bitte wählen Sie eine Quelle für die Podcast-Schlagworte aus"
 
-#: pages_blogs_postings_add.php:264 pages_blogs_postings_edit.php:272
+#: pages_blogs_postings_add.php:264 pages_blogs_postings_edit.php:278
 msgid "Podcast keywords source is out of range"
 msgstr ""
 "Die Quelle für die Podcast-Schlagworte liegt außerhalb des gültigen "
 "Wertebereiches"
 
-#: pages_blogs_postings_add.php:268 pages_blogs_postings_edit.php:276
+#: pages_blogs_postings_add.php:268 pages_blogs_postings_edit.php:282
 msgid "Category 1"
 msgstr "Kategorie 1"
 
-#: pages_blogs_postings_add.php:272 pages_blogs_postings_edit.php:280
+#: pages_blogs_postings_add.php:272 pages_blogs_postings_edit.php:286
 msgid "Podcast category 1 is out of range"
 msgstr "Kategorie 1 liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_blogs_postings_add.php:275 pages_blogs_postings_edit.php:283
+#: pages_blogs_postings_add.php:275 pages_blogs_postings_edit.php:289
 msgid "Please select a podcast category"
 msgstr "Bitte wählen Sie eine Podcast-Kategorie aus"
 
-#: pages_blogs_postings_add.php:279 pages_blogs_postings_edit.php:287
+#: pages_blogs_postings_add.php:279 pages_blogs_postings_edit.php:293
 msgid "Category 2"
 msgstr "Kategorie 2"
 
-#: pages_blogs_postings_add.php:283 pages_blogs_postings_edit.php:291
+#: pages_blogs_postings_add.php:283 pages_blogs_postings_edit.php:297
 msgid "Podcast category 2 is out of range"
 msgstr "Kategorie 2 liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_blogs_postings_add.php:287 pages_blogs_postings_edit.php:295
+#: pages_blogs_postings_add.php:287 pages_blogs_postings_edit.php:301
 msgid "Category 3"
 msgstr "Kategorie 3"
 
-#: pages_blogs_postings_add.php:291 pages_blogs_postings_edit.php:299
+#: pages_blogs_postings_add.php:291 pages_blogs_postings_edit.php:305
 msgid "Podcast category 3 is out of range"
 msgstr "Kategorie 3 liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_blogs_postings_add.php:295 pages_blogs_postings_edit.php:303
+#: pages_blogs_postings_add.php:295 pages_blogs_postings_edit.php:309
 #: blogcomments_select.html:123 users_select.html:89 users_add.php:155
 #: users_edit.php:164
 msgid "Author"
 msgstr "Autor"
 
-#: pages_blogs_postings_add.php:300 pages_blogs_postings_edit.php:308
+#: pages_blogs_postings_add.php:300 pages_blogs_postings_edit.php:314
 msgid "Please enter a podcast author"
 msgstr "Bitte tragen Sie einen Podcast-Autor ein"
 
-#: pages_blogs_postings_add.php:304 pages_blogs_postings_edit.php:312
+#: pages_blogs_postings_add.php:304 pages_blogs_postings_edit.php:318
 msgid "Explicit"
 msgstr "Explizit"
 
-#: pages_blogs_postings_add.php:308 pages_blogs_postings_edit.php:316
+#: pages_blogs_postings_add.php:308 pages_blogs_postings_edit.php:322
 msgid "Podcast explicit is out of range"
 msgstr ""
 "Der Wert von Feld \"Explizit\" liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_blogs_postings_add.php:312 pages_blogs_postings_edit.php:320
+#: pages_blogs_postings_add.php:312 pages_blogs_postings_edit.php:326
 msgid "Block"
 msgstr "Anzeige blockieren"
 
-#: pages_blogs_postings_add.php:316 pages_blogs_postings_edit.php:324
+#: pages_blogs_postings_add.php:316 pages_blogs_postings_edit.php:330
 msgid "The field whether an episode should be blocked accepts only 0 or 1"
 msgstr "Das Feld \"Anzeige blockieren\" kann nur den Wert 0 oder 1 haben"
 
-#: pages_blogs_postings_add.php:320 pages_blogs_postings_edit.php:328
-#: wcom.strings.js:52
+#: pages_blogs_postings_add.php:320 pages_blogs_postings_edit.php:334
+#: wcom.strings.js:54
 msgid "Show details"
 msgstr "Zeige Details"
 
-#: pages_blogs_postings_add.php:323 pages_blogs_postings_edit.php:331
+#: pages_blogs_postings_add.php:323 pages_blogs_postings_edit.php:337
 msgid "Show ID3"
 msgstr "Zeige ID3"
 
-#: pages_blogs_postings_add.php:326 pages_blogs_postings_edit.php:334
+#: pages_blogs_postings_add.php:326 pages_blogs_postings_edit.php:340
 msgid "Discard cast"
 msgstr "Podcast löschen"
 
-#: pages_blogs_postings_add.php:350 pages_blogs_postings_edit.php:358
+#: pages_blogs_postings_add.php:350 pages_blogs_postings_edit.php:364
 #: mediamanager_edit.php:140 mediamanager_upload.php:122
 msgid "Tags"
 msgstr "Schlagworte/Tags"
 
-#: pages_blogs_postings_add.php:356 pages_blogs_postings_edit.php:364
+#: pages_blogs_postings_add.php:356 pages_blogs_postings_edit.php:370
 msgid "Feed Summary"
 msgstr "Feed Kurzfassung"
 
-#: pages_blogs_postings_add.php:365 pages_blogs_postings_edit.php:373
+#: pages_blogs_postings_add.php:365 pages_blogs_postings_edit.php:379
 msgid "The field whether the posting is a draft accepts only 0 or 1"
 msgstr "Das Feld \"Entwurf\" kann nur den Wert 0 oder 1 haben"
 
-#: pages_blogs_postings_add.php:369 pages_blogs_postings_edit.php:377
+#: pages_blogs_postings_add.php:369 pages_blogs_postings_edit.php:383
 msgid "Ping"
 msgstr "Ping"
 
-#: pages_blogs_postings_add.php:373 pages_blogs_postings_edit.php:381
+#: pages_blogs_postings_add.php:373 pages_blogs_postings_edit.php:387
 msgid "The field whether a ping should be issued accepts only 0 or 1"
 msgstr "Das Feld \"Ping\" kann nur den Wert 0 oder 1 haben"
 
-#: pages_blogs_postings_add.php:377 pages_blogs_postings_edit.php:385
+#: pages_blogs_postings_add.php:377 pages_blogs_postings_edit.php:391
 msgid "Enable comments"
 msgstr "Kommentare?"
 
-#: pages_blogs_postings_add.php:381 pages_blogs_postings_edit.php:389
+#: pages_blogs_postings_add.php:381 pages_blogs_postings_edit.php:395
 msgid "The field whether comments are enabled accepts only 0 or 1"
 msgstr "Das Feld \"Kommentare?\" kann nur den Wert 0 oder 1 haben"
 
-#: pages_blogs_postings_add.php:385 pages_blogs_postings_edit.php:393
+#: pages_blogs_postings_add.php:385 pages_blogs_postings_edit.php:399
 msgid "Enable trackbacks"
 msgstr "Trackbacks?"
 
-#: pages_blogs_postings_add.php:389 pages_blogs_postings_edit.php:397
+#: pages_blogs_postings_add.php:389 pages_blogs_postings_edit.php:403
 msgid "The field whether trackbacks are enabled accepts only 0 or 1"
 msgstr "Das Feld \"Trackbacks?\" kann nur den Wert 0 oder 1 haben"
 
-#: pages_blogs_postings_add.php:393 pages_blogs_postings_edit.php:401
+#: pages_blogs_postings_add.php:393 pages_blogs_postings_edit.php:407
 msgid "Creation date"
 msgstr "Erstellungsdatum"
 
@@ -1080,43 +1084,43 @@ msgstr "Es ist ein Fehler aufgetreten"
 msgid "Welcompose says"
 msgstr "Welcompose meldet"
 
-#: pages_generatorforms_content_edit.php:181
-#: pages_simpleforms_content_edit.php:204
+#: pages_generatorforms_content_edit.php:187
+#: pages_simpleforms_content_edit.php:210
 msgid "From: address"
 msgstr "Absenderadresse"
 
-#: pages_generatorforms_content_edit.php:185
-#: pages_simpleforms_content_edit.php:208
+#: pages_generatorforms_content_edit.php:191
+#: pages_simpleforms_content_edit.php:214
 msgid "Please enter a From: address"
 msgstr "Bitte tragen Sie eine Absenderadresse ein"
 
-#: pages_generatorforms_content_edit.php:186
-#: pages_simpleforms_content_edit.php:209
+#: pages_generatorforms_content_edit.php:192
+#: pages_simpleforms_content_edit.php:215
 msgid "Please enter a valid From: address"
 msgstr "Bitte tragen Sie eine gültige Absenderadresse ein"
 
-#: pages_generatorforms_content_edit.php:189
-#: pages_simpleforms_content_edit.php:212
+#: pages_generatorforms_content_edit.php:195
+#: pages_simpleforms_content_edit.php:218
 msgid "To: address"
 msgstr "Empfängeradresse"
 
-#: pages_generatorforms_content_edit.php:193
-#: pages_simpleforms_content_edit.php:216
+#: pages_generatorforms_content_edit.php:199
+#: pages_simpleforms_content_edit.php:222
 msgid "Please enter a To: address"
 msgstr "Bitte tragen Sie eine gültige Empfängeradresse ein"
 
-#: pages_generatorforms_content_edit.php:194
-#: pages_simpleforms_content_edit.php:217
+#: pages_generatorforms_content_edit.php:200
+#: pages_simpleforms_content_edit.php:223
 msgid "Please enter a valid To: address"
 msgstr "Bitte tragen Sie eine gültige Empfängeradresse ein"
 
-#: pages_generatorforms_content_edit.php:197
-#: pages_simpleforms_content_edit.php:220
+#: pages_generatorforms_content_edit.php:203
+#: pages_simpleforms_content_edit.php:226
 msgid "Subject"
 msgstr "Betreff"
 
-#: pages_generatorforms_content_edit.php:201
-#: pages_simpleforms_content_edit.php:224
+#: pages_generatorforms_content_edit.php:207
+#: pages_simpleforms_content_edit.php:230
 msgid "Please enter a subject"
 msgstr "Bitte tragen Sie einen Betreff ein"
 
@@ -1238,27 +1242,27 @@ msgstr "Privates Formular"
 msgid "Use text field"
 msgstr "Eigener Formulartyp"
 
-#: pages_simpleforms_content_edit.php:188
+#: pages_simpleforms_content_edit.php:194
 msgid "Form type"
 msgstr "Formulartyp"
 
-#: pages_simpleforms_content_edit.php:192
+#: pages_simpleforms_content_edit.php:198
 msgid "Chosen form type is out of range"
 msgstr "Der Formulartyp liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_simpleforms_content_edit.php:196
+#: pages_simpleforms_content_edit.php:202
 msgid "Custom type"
 msgstr "Eigener Formulartyp"
 
-#: pages_simpleforms_content_edit.php:200
+#: pages_simpleforms_content_edit.php:206
 msgid "Enter a valid custom form type"
 msgstr "Bitte tragen Sie einen gültigen eigenen Formulartyp ein"
 
-#: pages_simplepages_content_edit.php:174
+#: pages_simplepages_content_edit.php:180
 msgid "Custom meta tags"
 msgstr "Eigene Meta-Tags"
 
-#: pages_simplepages_content_edit.php:178
+#: pages_simplepages_content_edit.php:184
 msgid "The field whether to use customized meta tags accepts only 0 or 1"
 msgstr "Das Feld \"Eigene Metatags\" kann nur den Wert 0 oder 1 haben"
 
@@ -1483,20 +1487,20 @@ msgstr "Community-Einstellungen"
 #: pages_blogs_pingserviceconfigurations_add.html:71
 #: pages_blogs_pingserviceconfigurations_edit.html:67
 #: pages_blogs_pingserviceconfigurations_select.html:67
-#: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:84
+#: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:85
 #: pages_blogs_postings_select.html:67 pages_boxes_add.html:85
 #: pages_boxes_edit.html:85 pages_boxes_select.html:78
 #: pages_boxes_select.html:88 pages_boxes_select.html:128 pages_edit.html:113
-#: pages_edit.html:119 pages_generatorforms_content_edit.html:78
-#: pages_generatorforms_content_edit.html:84
+#: pages_edit.html:119 pages_generatorforms_content_edit.html:79
+#: pages_generatorforms_content_edit.html:85
 #: pages_generatorforms_fields_add.html:77
 #: pages_generatorforms_fields_edit.html:77
 #: pages_generatorforms_fields_select.html:67 pages_move_away.html:48
 #: pages_move_away.html:54 pages_select.html:52 pages_select.html:55
-#: pages_simpleforms_content_edit.html:75
-#: pages_simpleforms_content_edit.html:81
-#: pages_simplepages_content_edit.html:78
-#: pages_simplepages_content_edit.html:84 pages_urls_content_edit.html:61
+#: pages_simpleforms_content_edit.html:76
+#: pages_simpleforms_content_edit.html:82
+#: pages_simplepages_content_edit.html:79
+#: pages_simplepages_content_edit.html:85 pages_urls_content_edit.html:61
 #: pages_urls_content_edit.html:67 callbacks_insert_boxes_links.html:49
 msgid "Pages"
 msgstr "Seiten"
@@ -1575,7 +1579,7 @@ msgstr "Projekte"
 #: pages_blogs_pingserviceconfigurations_select.html:61
 #: pages_blogs_pingserviceconfigurations_select.html:67
 #: pages_blogs_pingserviceconfigurations_select.html:71
-#: pages_blogs_postings_add.html:72 pages_blogs_postings_edit.html:78
+#: pages_blogs_postings_add.html:72 pages_blogs_postings_edit.html:79
 #: pages_blogs_postings_select.html:61 pages_boxes_add.html:70
 #: pages_boxes_edit.html:70 pages_boxes_select.html:63 pages_edit.html:76
 msgid "Ping Services"
@@ -1667,15 +1671,15 @@ msgstr "Lade Projekt"
 #: pages_blogs_pingserviceconfigurations_add.html:71
 #: pages_blogs_pingserviceconfigurations_edit.html:67
 #: pages_blogs_pingserviceconfigurations_select.html:67
-#: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:84
+#: pages_blogs_postings_add.html:78 pages_blogs_postings_edit.html:85
 #: pages_blogs_postings_select.html:67 pages_boxes_add.html:85
 #: pages_boxes_edit.html:85 pages_boxes_select.html:78 pages_edit.html:113
-#: pages_generatorforms_content_edit.html:78
+#: pages_generatorforms_content_edit.html:79
 #: pages_generatorforms_fields_add.html:77
 #: pages_generatorforms_fields_edit.html:77
 #: pages_generatorforms_fields_select.html:67 pages_move_away.html:48
-#: pages_select.html:52 pages_simpleforms_content_edit.html:75
-#: pages_simplepages_content_edit.html:78 pages_urls_content_edit.html:61
+#: pages_select.html:52 pages_simpleforms_content_edit.html:76
+#: pages_simplepages_content_edit.html:79 pages_urls_content_edit.html:61
 #: pagetypes_add.html:52 pagetypes_edit.html:49 pagetypes_select.html:48
 #: podcastcategories_add.html:55 podcastcategories_edit.html:50
 #: podcastcategories_select.html:48 structuraltemplates_add.html:55
@@ -1739,15 +1743,15 @@ msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 #: pages_blogs_pingserviceconfigurations_add.html:33
 #: pages_blogs_pingserviceconfigurations_edit.html:29
 #: pages_blogs_pingserviceconfigurations_select.html:29
-#: pages_blogs_postings_add.html:40 pages_blogs_postings_edit.html:46
+#: pages_blogs_postings_add.html:40 pages_blogs_postings_edit.html:47
 #: pages_blogs_postings_select.html:29 pages_boxes_add.html:40
 #: pages_boxes_edit.html:40 pages_boxes_select.html:33 pages_edit.html:33
-#: pages_generatorforms_content_edit.html:40
+#: pages_generatorforms_content_edit.html:41
 #: pages_generatorforms_fields_add.html:39
 #: pages_generatorforms_fields_edit.html:39
 #: pages_generatorforms_fields_select.html:29 pages_move_away.html:29
-#: pages_select.html:33 pages_simpleforms_content_edit.html:40
-#: pages_simplepages_content_edit.html:42 pages_urls_content_edit.html:29
+#: pages_select.html:33 pages_simpleforms_content_edit.html:41
+#: pages_simplepages_content_edit.html:43 pages_urls_content_edit.html:29
 #: pagetypes_add.html:33 pagetypes_edit.html:30 pagetypes_select.html:29
 #: podcastcategories_add.html:36 podcastcategories_edit.html:31
 #: podcastcategories_select.html:29 structuraltemplates_add.html:36
@@ -1781,15 +1785,15 @@ msgstr "Welcompose"
 #: pages_blogs_pingserviceconfigurations_add.html:36
 #: pages_blogs_pingserviceconfigurations_edit.html:32
 #: pages_blogs_pingserviceconfigurations_select.html:32
-#: pages_blogs_postings_add.html:43 pages_blogs_postings_edit.html:49
+#: pages_blogs_postings_add.html:43 pages_blogs_postings_edit.html:50
 #: pages_blogs_postings_select.html:32 pages_boxes_add.html:43
 #: pages_boxes_edit.html:43 pages_boxes_select.html:36 pages_edit.html:36
-#: pages_generatorforms_content_edit.html:43
+#: pages_generatorforms_content_edit.html:44
 #: pages_generatorforms_fields_add.html:42
 #: pages_generatorforms_fields_edit.html:42
 #: pages_generatorforms_fields_select.html:32 pages_move_away.html:32
-#: pages_select.html:36 pages_simpleforms_content_edit.html:43
-#: pages_simplepages_content_edit.html:45 pages_urls_content_edit.html:32
+#: pages_select.html:36 pages_simpleforms_content_edit.html:44
+#: pages_simplepages_content_edit.html:46 pages_urls_content_edit.html:32
 #: pagetypes_add.html:36 pagetypes_edit.html:33 pagetypes_select.html:32
 #: podcastcategories_add.html:39 podcastcategories_edit.html:34
 #: podcastcategories_select.html:32 structuraltemplates_add.html:39
@@ -1822,15 +1826,15 @@ msgstr "Angemeldeter Benutzer"
 #: pages_blogs_pingserviceconfigurations_add.html:38
 #: pages_blogs_pingserviceconfigurations_edit.html:34
 #: pages_blogs_pingserviceconfigurations_select.html:34
-#: pages_blogs_postings_add.html:45 pages_blogs_postings_edit.html:51
+#: pages_blogs_postings_add.html:45 pages_blogs_postings_edit.html:52
 #: pages_blogs_postings_select.html:34 pages_boxes_add.html:45
 #: pages_boxes_edit.html:45 pages_boxes_select.html:38 pages_edit.html:38
-#: pages_generatorforms_content_edit.html:45
+#: pages_generatorforms_content_edit.html:46
 #: pages_generatorforms_fields_add.html:44
 #: pages_generatorforms_fields_edit.html:44
 #: pages_generatorforms_fields_select.html:34 pages_move_away.html:34
-#: pages_select.html:38 pages_simpleforms_content_edit.html:45
-#: pages_simplepages_content_edit.html:47 pages_urls_content_edit.html:34
+#: pages_select.html:38 pages_simpleforms_content_edit.html:46
+#: pages_simplepages_content_edit.html:48 pages_urls_content_edit.html:34
 #: pagetypes_add.html:38 pagetypes_edit.html:35 pagetypes_select.html:34
 #: podcastcategories_add.html:41 podcastcategories_edit.html:36
 #: podcastcategories_select.html:34 structuraltemplates_add.html:41
@@ -1859,16 +1863,16 @@ msgstr "Neuen Ping-Service anlegen"
 #: blogcommentstatuses_add.html:73 settings.html:73 globalboxes_add.html:80
 #: globalboxes_edit.html:80 navigations_add.html:73 pages_add.html:92
 #: pages_blogs_pingserviceconfigurations_add.html:102
-#: pages_blogs_postings_add.html:100 pages_blogs_postings_edit.html:106
+#: pages_blogs_postings_add.html:100 pages_blogs_postings_edit.html:107
 #: pages_boxes_add.html:107 pages_boxes_edit.html:107 pages_edit.html:142
-#: pages_generatorforms_content_edit.html:99
+#: pages_generatorforms_content_edit.html:100
 #: pages_generatorforms_fields_add.html:99
 #: pages_generatorforms_fields_edit.html:99
-#: pages_simpleforms_content_edit.html:96
-#: pages_simplepages_content_edit.html:99 pagetypes_add.html:73
+#: pages_simpleforms_content_edit.html:97
+#: pages_simplepages_content_edit.html:100 pagetypes_add.html:73
 #: podcastcategories_add.html:76 podcastcategories_edit.html:71
 #: structuraltemplates_add.html:76 structuraltemplates_edit.html:76
-#: mediamanager_upload.html:58 globalfiles_add.html:73
+#: mediamanager_upload.html:61 globalfiles_add.html:73
 #: globaltemplates_add.html:75 globaltemplates_edit.html:75
 #: templates_add.html:83 templates_edit.html:83 templatesets_add.html:73
 #: templatetypes_add.html:73 groups_add.html:73 rights_add.html:73
@@ -1884,8 +1888,8 @@ msgstr "Ihre Eingaben wurden gespeichert"
 #: pages_blogs_postings_add.html:101 pages_boxes_add.html:108
 #: pages_generatorforms_fields_add.html:100 pagetypes_add.html:74
 #: podcastcategories_add.html:77 podcastcategories_edit.html:72
-#: structuraltemplates_add.html:77 mediamanager_edit.html:59
-#: mediamanager_upload.html:59 globalfiles_add.html:74
+#: structuraltemplates_add.html:77 mediamanager_edit.html:62
+#: mediamanager_upload.html:62 globalfiles_add.html:74
 #: globaltemplates_add.html:76 templates_add.html:84 templatesets_add.html:74
 #: templatetypes_add.html:74 groups_add.html:74 rights_add.html:74
 #: users_add.html:82
@@ -1937,18 +1941,18 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_blogs_postings_add.html:203 pages_blogs_postings_add.html:206
 #: pages_blogs_postings_add.html:209 pages_blogs_postings_add.html:212
 #: pages_blogs_postings_add.html:215 pages_blogs_postings_add.html:218
-#: pages_blogs_postings_add.html:221 pages_blogs_postings_edit.html:122
-#: pages_blogs_postings_edit.html:125 pages_blogs_postings_edit.html:134
-#: pages_blogs_postings_edit.html:144 pages_blogs_postings_edit.html:160
-#: pages_blogs_postings_edit.html:163 pages_blogs_postings_edit.html:166
-#: pages_blogs_postings_edit.html:169 pages_blogs_postings_edit.html:172
-#: pages_blogs_postings_edit.html:175 pages_blogs_postings_edit.html:178
-#: pages_blogs_postings_edit.html:181 pages_blogs_postings_edit.html:184
-#: pages_blogs_postings_edit.html:187 pages_blogs_postings_edit.html:202
-#: pages_blogs_postings_edit.html:205 pages_blogs_postings_edit.html:208
-#: pages_blogs_postings_edit.html:211 pages_blogs_postings_edit.html:214
-#: pages_blogs_postings_edit.html:217 pages_blogs_postings_edit.html:220
-#: pages_blogs_postings_edit.html:223 pages_blogs_postings_edit.html:226
+#: pages_blogs_postings_add.html:221 pages_blogs_postings_edit.html:123
+#: pages_blogs_postings_edit.html:126 pages_blogs_postings_edit.html:135
+#: pages_blogs_postings_edit.html:146 pages_blogs_postings_edit.html:162
+#: pages_blogs_postings_edit.html:165 pages_blogs_postings_edit.html:168
+#: pages_blogs_postings_edit.html:171 pages_blogs_postings_edit.html:174
+#: pages_blogs_postings_edit.html:177 pages_blogs_postings_edit.html:180
+#: pages_blogs_postings_edit.html:183 pages_blogs_postings_edit.html:186
+#: pages_blogs_postings_edit.html:189 pages_blogs_postings_edit.html:204
+#: pages_blogs_postings_edit.html:207 pages_blogs_postings_edit.html:210
+#: pages_blogs_postings_edit.html:213 pages_blogs_postings_edit.html:216
+#: pages_blogs_postings_edit.html:219 pages_blogs_postings_edit.html:222
+#: pages_blogs_postings_edit.html:225 pages_blogs_postings_edit.html:228
 #: pages_boxes_add.html:123 pages_boxes_add.html:133 pages_boxes_add.html:136
 #: pages_boxes_add.html:139 pages_boxes_edit.html:123
 #: pages_boxes_edit.html:133 pages_boxes_edit.html:136
@@ -1956,15 +1960,15 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_edit.html:160 pages_edit.html:163 pages_edit.html:166
 #: pages_edit.html:169 pages_edit.html:172 pages_edit.html:178
 #: pages_edit.html:181 pages_edit.html:184 pages_edit.html:187
-#: pages_edit.html:190 pages_generatorforms_content_edit.html:115
-#: pages_generatorforms_content_edit.html:118
-#: pages_generatorforms_content_edit.html:128
-#: pages_generatorforms_content_edit.html:131
-#: pages_generatorforms_content_edit.html:134
-#: pages_generatorforms_content_edit.html:137
-#: pages_generatorforms_content_edit.html:140
-#: pages_generatorforms_content_edit.html:143
-#: pages_generatorforms_content_edit.html:146
+#: pages_edit.html:190 pages_generatorforms_content_edit.html:116
+#: pages_generatorforms_content_edit.html:119
+#: pages_generatorforms_content_edit.html:130
+#: pages_generatorforms_content_edit.html:133
+#: pages_generatorforms_content_edit.html:136
+#: pages_generatorforms_content_edit.html:139
+#: pages_generatorforms_content_edit.html:142
+#: pages_generatorforms_content_edit.html:145
+#: pages_generatorforms_content_edit.html:148
 #: pages_generatorforms_fields_add.html:111
 #: pages_generatorforms_fields_add.html:114
 #: pages_generatorforms_fields_add.html:117
@@ -1983,26 +1987,26 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_generatorforms_fields_edit.html:129
 #: pages_generatorforms_fields_edit.html:132
 #: pages_generatorforms_fields_edit.html:135 pages_move_away.html:83
-#: pages_simpleforms_content_edit.html:112
-#: pages_simpleforms_content_edit.html:115
-#: pages_simpleforms_content_edit.html:125
-#: pages_simpleforms_content_edit.html:128
-#: pages_simpleforms_content_edit.html:131
-#: pages_simpleforms_content_edit.html:134
-#: pages_simpleforms_content_edit.html:137
-#: pages_simpleforms_content_edit.html:140
-#: pages_simpleforms_content_edit.html:143
-#: pages_simpleforms_content_edit.html:146
-#: pages_simpleforms_content_edit.html:149
-#: pages_simplepages_content_edit.html:115
-#: pages_simplepages_content_edit.html:118
-#: pages_simplepages_content_edit.html:129
-#: pages_simplepages_content_edit.html:132
-#: pages_simplepages_content_edit.html:135
-#: pages_simplepages_content_edit.html:138
-#: pages_simplepages_content_edit.html:142
-#: pages_simplepages_content_edit.html:145
-#: pages_simplepages_content_edit.html:148 pages_urls_content_edit.html:87
+#: pages_simpleforms_content_edit.html:113
+#: pages_simpleforms_content_edit.html:116
+#: pages_simpleforms_content_edit.html:127
+#: pages_simpleforms_content_edit.html:130
+#: pages_simpleforms_content_edit.html:133
+#: pages_simpleforms_content_edit.html:136
+#: pages_simpleforms_content_edit.html:139
+#: pages_simpleforms_content_edit.html:142
+#: pages_simpleforms_content_edit.html:145
+#: pages_simpleforms_content_edit.html:148
+#: pages_simpleforms_content_edit.html:151
+#: pages_simplepages_content_edit.html:116
+#: pages_simplepages_content_edit.html:119
+#: pages_simplepages_content_edit.html:130
+#: pages_simplepages_content_edit.html:133
+#: pages_simplepages_content_edit.html:136
+#: pages_simplepages_content_edit.html:139
+#: pages_simplepages_content_edit.html:143
+#: pages_simplepages_content_edit.html:146
+#: pages_simplepages_content_edit.html:149 pages_urls_content_edit.html:87
 #: pagetypes_add.html:85 pagetypes_add.html:88 pagetypes_edit.html:75
 #: pagetypes_edit.html:78 podcastcategories_add.html:88
 #: podcastcategories_add.html:91 podcastcategories_edit.html:83
@@ -2017,9 +2021,9 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: callbacks_insert_application-x-shockwave-flash.html:71
 #: callbacks_insert_application-x-shockwave-flash.html:74
 #: callbacks_insert_image.html:59 callbacks_insert_image.html:62
-#: mediamanager.html:3 mediamanager_edit.html:69 mediamanager_edit.html:72
-#: mediamanager_edit.html:75 mediamanager_upload.html:69
-#: mediamanager_upload.html:72 mediamanager_upload.html:75
+#: mediamanager.html:3 mediamanager_edit.html:72 mediamanager_edit.html:75
+#: mediamanager_edit.html:78 mediamanager_upload.html:72
+#: mediamanager_upload.html:75 mediamanager_upload.html:78
 #: globalfiles_add.html:85 globalfiles_add.html:88 globalfiles_edit.html:74
 #: globalfiles_edit.html:77 globaltemplates_add.html:87
 #: globaltemplates_add.html:90 globaltemplates_add.html:100
@@ -2469,8 +2473,8 @@ msgstr "Jahres-Archiv"
 #: pages_blogs_pingserviceconfigurations_edit.html:55
 #: pages_blogs_pingserviceconfigurations_select.html:55
 #: pages_blogs_postings_add.html:66 pages_blogs_postings_add.html:79
-#: pages_blogs_postings_add.html:85 pages_blogs_postings_edit.html:72
-#: pages_blogs_postings_edit.html:85 pages_blogs_postings_edit.html:91
+#: pages_blogs_postings_add.html:85 pages_blogs_postings_edit.html:73
+#: pages_blogs_postings_edit.html:86 pages_blogs_postings_edit.html:92
 #: pages_blogs_postings_select.html:55 pages_blogs_postings_select.html:67
 #: pages_blogs_postings_select.html:71 pages_boxes_add.html:68
 #: pages_boxes_edit.html:68 pages_boxes_select.html:61 pages_edit.html:70
@@ -2505,20 +2509,20 @@ msgstr "Neue Globale Box anlegen"
 
 #: globalboxes_add.html:101 globalboxes_edit.html:101
 #: pages_blogs_postings_add.html:124 pages_blogs_postings_add.html:133
-#: pages_blogs_postings_edit.html:130 pages_blogs_postings_edit.html:139
+#: pages_blogs_postings_edit.html:131 pages_blogs_postings_edit.html:140
 #: pages_boxes_add.html:128 pages_boxes_edit.html:128
-#: pages_generatorforms_content_edit.html:123
-#: pages_simpleforms_content_edit.html:120
-#: pages_simplepages_content_edit.html:123
+#: pages_generatorforms_content_edit.html:124
+#: pages_simpleforms_content_edit.html:121
+#: pages_simplepages_content_edit.html:124
 msgid "Internal links"
 msgstr "Interne Links"
 
 #: globalboxes_add.html:102 globalboxes_edit.html:102
-#: pages_blogs_postings_add.html:134 pages_blogs_postings_edit.html:140
+#: pages_blogs_postings_add.html:134 pages_blogs_postings_edit.html:141
 #: pages_boxes_add.html:129 pages_boxes_edit.html:129
-#: pages_generatorforms_content_edit.html:124
-#: pages_simpleforms_content_edit.html:121
-#: pages_simplepages_content_edit.html:124 structuraltemplates_select.html:52
+#: pages_generatorforms_content_edit.html:125
+#: pages_simpleforms_content_edit.html:122
+#: pages_simplepages_content_edit.html:125 structuraltemplates_select.html:52
 msgid "Structural templates"
 msgstr "Strukturvorlagen"
 
@@ -2530,11 +2534,11 @@ msgstr "Welcompose Admin &ndash; Globale Box bearbeiten"
 msgid "Edit Global Box"
 msgstr "Globale Box bearbeiten"
 
-#: globalboxes_edit.html:81 pages_blogs_postings_edit.html:107
-#: pages_boxes_edit.html:108 pages_generatorforms_content_edit.html:100
+#: globalboxes_edit.html:81 pages_blogs_postings_edit.html:108
+#: pages_boxes_edit.html:108 pages_generatorforms_content_edit.html:101
 #: pages_generatorforms_fields_edit.html:100
-#: pages_simpleforms_content_edit.html:97
-#: pages_simplepages_content_edit.html:100 structuraltemplates_edit.html:77
+#: pages_simpleforms_content_edit.html:98
+#: pages_simplepages_content_edit.html:101 structuraltemplates_edit.html:77
 #: globaltemplates_edit.html:76
 msgid "You can continue editing your content."
 msgstr "Sie können nun mit der Bearbeitung der Seiteninhalte fortfahren."
@@ -2627,7 +2631,7 @@ msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Ping-Service anlegen"
 #: pages_blogs_pingserviceconfigurations_add.html:56
 #: pages_blogs_pingserviceconfigurations_edit.html:52
 #: pages_blogs_pingserviceconfigurations_select.html:52
-#: pages_blogs_postings_add.html:63 pages_blogs_postings_edit.html:69
+#: pages_blogs_postings_add.html:63 pages_blogs_postings_edit.html:70
 #: pages_blogs_postings_select.html:52 pages_boxes_add.html:63
 #: pages_boxes_add.html:67 pages_boxes_add.html:72 pages_boxes_add.html:76
 #: pages_boxes_edit.html:63 pages_boxes_edit.html:67 pages_boxes_edit.html:72
@@ -2635,19 +2639,19 @@ msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Ping-Service anlegen"
 #: pages_boxes_select.html:60 pages_boxes_select.html:65
 #: pages_boxes_select.html:69 pages_edit.html:57 pages_edit.html:67
 #: pages_edit.html:80 pages_edit.html:87 pages_edit.html:97
-#: pages_generatorforms_content_edit.html:63
+#: pages_generatorforms_content_edit.html:64
 #: pages_generatorforms_fields_add.html:62
 #: pages_generatorforms_fields_edit.html:62
 #: pages_generatorforms_fields_select.html:52
-#: pages_simpleforms_content_edit.html:63
-#: pages_simplepages_content_edit.html:65 pages_urls_content_edit.html:52
+#: pages_simpleforms_content_edit.html:64
+#: pages_simplepages_content_edit.html:66 pages_urls_content_edit.html:52
 msgid "Metadata"
 msgstr "Metadaten"
 
 #: pages_blogs_pingserviceconfigurations_add.html:62
 #: pages_blogs_pingserviceconfigurations_edit.html:58
 #: pages_blogs_pingserviceconfigurations_select.html:58
-#: pages_blogs_postings_add.html:69 pages_blogs_postings_edit.html:75
+#: pages_blogs_postings_add.html:69 pages_blogs_postings_edit.html:76
 #: pages_blogs_postings_select.html:58 pages_boxes_add.html:65
 #: pages_boxes_add.html:69 pages_boxes_add.html:74 pages_boxes_add.html:79
 #: pages_boxes_add.html:86 pages_boxes_add.html:92 pages_boxes_edit.html:65
@@ -2657,12 +2661,12 @@ msgstr "Metadaten"
 #: pages_boxes_select.html:67 pages_boxes_select.html:72
 #: pages_boxes_select.html:78 pages_boxes_select.html:82 pages_edit.html:63
 #: pages_edit.html:73 pages_edit.html:93 pages_edit.html:106
-#: pages_generatorforms_content_edit.html:72
+#: pages_generatorforms_content_edit.html:73
 #: pages_generatorforms_fields_add.html:71
 #: pages_generatorforms_fields_edit.html:71
 #: pages_generatorforms_fields_select.html:61
-#: pages_simpleforms_content_edit.html:69
-#: pages_simplepages_content_edit.html:71
+#: pages_simpleforms_content_edit.html:70
+#: pages_simplepages_content_edit.html:72
 #: callbacks_insert_boxes_links_second.html:3 templates_add.html:110
 #: templates_copy.html:98 templates_edit.html:110
 msgid "Boxes"
@@ -2715,9 +2719,15 @@ msgstr "Neuen Blog-Eintrag anlegen"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Blog Posting"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Eintrag bearbeiten"
 
-#: pages_blogs_postings_edit.html:85 pages_blogs_postings_edit.html:89
+#: pages_blogs_postings_edit.html:86 pages_blogs_postings_edit.html:90
 msgid "Edit Blog Posting"
 msgstr "Blog-Eintrag bearbeiten"
+
+#: pages_blogs_postings_edit.html:142
+#: pages_generatorforms_content_edit.html:126
+#: pages_simplepages_content_edit.html:126
+msgid "Frontend View"
+msgstr "Frontend Ansicht"
 
 #: pages_blogs_postings_select.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Blog Postings"
@@ -2745,17 +2755,17 @@ msgid "Welcompose Admin &ndash; Pages &#62; Add Box"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Box anlegen"
 
 #: pages_boxes_add.html:64 pages_boxes_edit.html:64 pages_boxes_select.html:57
-#: pages_edit.html:60 pages_simplepages_content_edit.html:68
+#: pages_edit.html:60 pages_simplepages_content_edit.html:69
 msgid "Simple Page"
 msgstr "Simple Page"
 
 #: pages_boxes_add.html:73 pages_boxes_edit.html:73 pages_boxes_select.html:66
-#: pages_edit.html:90 pages_simpleforms_content_edit.html:66
+#: pages_edit.html:90 pages_simpleforms_content_edit.html:67
 msgid "Simple Form"
 msgstr "Simple Form"
 
 #: pages_boxes_add.html:77 pages_boxes_edit.html:77 pages_boxes_select.html:70
-#: pages_edit.html:100 pages_generatorforms_content_edit.html:66
+#: pages_edit.html:100 pages_generatorforms_content_edit.html:67
 #: pages_generatorforms_fields_add.html:65
 #: pages_generatorforms_fields_edit.html:65
 #: pages_generatorforms_fields_select.html:55
@@ -2763,7 +2773,7 @@ msgid "Generator Form"
 msgstr "Generator Form"
 
 #: pages_boxes_add.html:78 pages_boxes_edit.html:78 pages_boxes_select.html:71
-#: pages_edit.html:103 pages_generatorforms_content_edit.html:69
+#: pages_edit.html:103 pages_generatorforms_content_edit.html:70
 #: pages_generatorforms_fields_add.html:68
 #: pages_generatorforms_fields_add.html:78
 #: pages_generatorforms_fields_add.html:84
@@ -2848,8 +2858,8 @@ msgstr "Metadaten bearbeiten"
 msgid "Welcompose Admin &ndash; Edit Generator Form"
 msgstr "Welcompose Admin &ndash; Formular bearbeiten"
 
-#: pages_generatorforms_content_edit.html:78
-#: pages_generatorforms_content_edit.html:82
+#: pages_generatorforms_content_edit.html:79
+#: pages_generatorforms_content_edit.html:83
 msgid "Edit Generator Form"
 msgstr "Formular bearbeiten"
 
@@ -3003,23 +3013,23 @@ msgstr "Sie haben noch keine Seite angelegt"
 msgid "Welcompose Admin &ndash; Edit Simple Form"
 msgstr "Welcompose Admin &ndash; Formular bearbeiten"
 
-#: pages_simpleforms_content_edit.html:75
-#: pages_simpleforms_content_edit.html:79
+#: pages_simpleforms_content_edit.html:76
+#: pages_simpleforms_content_edit.html:80
 msgid "Edit Simple Form"
 msgstr "Seite bearbeiten"
+
+#: pages_simpleforms_content_edit.html:123
+msgid "Frontend Preview"
+msgstr "Frontend Ansicht"
 
 #: pages_simplepages_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Simple Page"
 msgstr "Welcompose Admin &ndash; Seite bearbeiten"
 
-#: pages_simplepages_content_edit.html:78
-#: pages_simplepages_content_edit.html:82
+#: pages_simplepages_content_edit.html:79
+#: pages_simplepages_content_edit.html:83
 msgid "Edit Simple Page"
 msgstr "Seite bearbeiten"
-
-#: pages_simplepages_content_edit.html:125
-msgid "Preview"
-msgstr "Vorschau"
 
 #: pages_urls_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit URL Page"
@@ -3186,11 +3196,12 @@ msgstr ""
 "Bitte tragen Sie hier den Inhalt Ihres Blog-Eintrages ein. HTML-Eingaben "
 "sind erlaubt."
 
-#: blog_posting_blog_posting_draft.html:1 page_page_draft.html:1
-msgid "If you mark this page as draft, it will be saved but not published."
+#: blog_posting_blog_posting_draft.html:1
+msgid ""
+"If you mark your blog posting as draft, it will be saved but not published."
 msgstr ""
-"Definiert, ob die Seite als Entwurf gespeichert wird. Wenn die "
-"Auswahl aktiv ist, wird die Seite nicht veröffentlicht."
+"Definiert, ob die Seite als Entwurf gespeichert wird. Wenn die Auswahl aktiv "
+"ist, wird die Seite nicht veröffentlicht."
 
 #: blog_posting_blog_posting_feed_summary.html:1
 msgid ""
@@ -3827,6 +3838,12 @@ msgstr ""
 "Zusätzliche Seitenbeschreibung. Beispielanwendungen finden Sie in der "
 "Dokumentation."
 
+#: page_page_draft.html:1
+msgid "If you mark this page as draft, it will be saved but not published."
+msgstr ""
+"Definiert, ob die Seite als Entwurf gespeichert wird. Wenn die Auswahl aktiv "
+"ist, wird die Seite nicht veröffentlicht."
+
 #: page_page_groups.html:1
 msgid ""
 "Select the groups which you like to give access to this page. Press CTRL on "
@@ -4347,7 +4364,7 @@ msgstr ""
 
 #: callbacks_insert_application-x-shockwave-flash.html:37
 #: callbacks_insert_image.html:37 mediamanager.html:3
-#: mediamanager_edit.html:42 mediamanager_upload.html:42
+#: mediamanager_edit.html:43 mediamanager_upload.html:43
 msgid "MEDIA MANAGER"
 msgstr "MEDIA MANAGER"
 
@@ -4464,11 +4481,11 @@ msgstr ""
 msgid "Please wait. Edits processing..."
 msgstr "Bitte warten. Vorgang ist in Bearbeitung.."
 
-#: mediamanager_edit.html:42
+#: mediamanager_edit.html:43
 msgid "EDIT MEDIA"
 msgstr "MEDIA BEARBEITEN"
 
-#: mediamanager_edit.html:58
+#: mediamanager_edit.html:61
 msgid "Your input was successfully updated!"
 msgstr "Ihre Änderungen wurden erfolgreich gespeichert!"
 
@@ -4492,7 +4509,7 @@ msgstr "Welcompose Administration &ndash; Mediamanager &ndash; Media hochladen"
 msgid "Please wait. Upload processing..."
 msgstr "Bitte warten. Datei wird hochgeladen.."
 
-#: mediamanager_upload.html:42
+#: mediamanager_upload.html:43
 msgid "UPLOAD MEDIA"
 msgstr "MEDIA HOCHLADEN"
 
@@ -4882,18 +4899,22 @@ msgstr ""
 msgid "Hide help on this topic"
 msgstr "Feldhilfe ausblenden"
 
-#: wcom.strings.js:50
+#: wcom.strings.js:49
+msgid "CLOSE FRONTEND VIEW"
+msgstr "FRONTEND ANSICHT SCHLIESSEN"
+
+#: wcom.strings.js:52
 msgid ""
 "Please set focus on the text area into which you wish the media to be placed."
 msgstr ""
 "Bitte setzen Sie den Fokus auf die Textarea, in der die Datei eingefügt "
 "werden soll."
 
-#: wcom.strings.js:53
+#: wcom.strings.js:55
 msgid "Hide details"
 msgstr "Details ausblenden"
 
-#: wcom.strings.js:55
+#: wcom.strings.js:57
 msgid ""
 "Are you sure you want to delete the chosen navigation? Every page related to "
 "this navigation will be deleted too."
@@ -4901,11 +4922,11 @@ msgstr ""
 "Sind Sie sicher, dass Sie die gewählte Navigation löschen möchten? Alle "
 "dieser Navigation zugeordneten Seiten werden ebenfalls gelöscht!"
 
-#: wcom.strings.js:56
+#: wcom.strings.js:58
 msgid "Are you sure you want to delete the chosen page?"
 msgstr "Sind Sie sicher, dass Sie die gewählte Seite löschen möchten?"
 
-#: wcom.strings.js:57
+#: wcom.strings.js:59
 msgid ""
 "Are you sure you want to delete the chosen project? Every page and template "
 "within this project will deleted too."
@@ -4913,7 +4934,7 @@ msgstr ""
 "Sind Sie sicher, dass Sie das gewählte Projekt löschen möchten? Alle Seiten "
 "und Vorlagen innerhalb dieses Projektes werden ebenfalls gelöscht."
 
-#: wcom.strings.js:58
+#: wcom.strings.js:60
 msgid ""
 "Are you sure you want to delete the chosen template type? Every template "
 "that uses this type will be deleted too."
@@ -4921,7 +4942,7 @@ msgstr ""
 "Sind Sie sicher, dass Sie den gewählten Vorlagentyp löschen möchten? Alle "
 "Seitenvorlagen, die diesen Vorlagentyp nutzen, werden ebenfalls gelöscht!"
 
-#: wcom.strings.js:59
+#: wcom.strings.js:61
 msgid ""
 "Are you sure you want to delete the chosen template set? You will loose the "
 "references in the templates this set is attached with."
@@ -4930,7 +4951,7 @@ msgstr ""
 "Referenzen in den Seitenvorlagen, die dieser Vorlagengruppe zugeordnet sind, "
 "gehen verloren!"
 
-#: wcom.strings.js:60
+#: wcom.strings.js:62
 msgid ""
 "Are you sure you want to delete the chosen global template? References in "
 "other templates are not accordingly deleted and will remain as unattached "
@@ -4941,7 +4962,7 @@ msgstr ""
 "genutzt wird, werden nicht gelöscht. Sie verbleiben unreferenziert als "
 "einfacher Text in den Seitenvorlagen."
 
-#: wcom.strings.js:61
+#: wcom.strings.js:63
 msgid ""
 "Are you sure you want to delete the chosen global file? References in other "
 "templates are not accordingly deleted and will remain as unattached markup."
@@ -4951,11 +4972,11 @@ msgstr ""
 "wird, werden nicht gelöscht. Sie verbleiben unreferenziert als einfacher "
 "Text in den Seitenvorlagen."
 
-#: wcom.strings.js:62
+#: wcom.strings.js:64
 msgid "Please select a Flickr.com supplied image size."
 msgstr "Bitte wählen Sie eine von Flickr angebotene Bildgröße aus."
 
-#: wcom.strings.js:63
+#: wcom.strings.js:65
 msgid ""
 "The display of the Media Manager was not updated!\\n\\nPlease solely close "
 "the window with the corresponding CLOSE button within the launched window. "
@@ -4969,11 +4990,11 @@ msgstr ""
 "haben.\\n\\nDie Funktionalität sonstiger Seitenbereiche bleibt hiervon "
 "unberührt."
 
-#: wcom.strings.js:64
+#: wcom.strings.js:66
 msgid "There is currently no help available."
 msgstr "Es existiert momentan noch kein Hilfetext zu diesem Feld."
 
-#: wcom.strings.js:65
+#: wcom.strings.js:67
 msgid "You cannot insert media or documents here."
 msgstr ""
 "Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
