@@ -325,15 +325,15 @@ try {
 			@ob_end_clean();
 		}
 
-		// save reques set value
+		// save request set value
 		$set_request = $FORM->exportValue('set_request');
 		$set_request = (!empty($set_request)) ? $set_request : 0;
 		
-		// save reques type value
+		// save request type value
 		$type_request = $FORM->exportValue('type_request');
 		$type_request = (!empty($type_request)) ? $type_request : 0;
 		
-		// save reques start range
+		// save request start range
 		$start = $FORM->exportValue('start');
 		$start = (!empty($start)) ? $start : 0;
 		

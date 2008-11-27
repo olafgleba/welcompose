@@ -93,7 +93,7 @@
 <td><a class="upload showTableRow" href="#" id="e_{$_global_template.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"url"}" title="{i18n Download}"></a></td>
 <td><a class="edit" href="globaltemplates_edit.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
-<td><a class="delete confirmDelTplGlobal" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirmDelTplGlobal" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_template.id}" class="outer">
 <td colspan="6">

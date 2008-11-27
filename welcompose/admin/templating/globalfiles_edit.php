@@ -262,7 +262,7 @@ try {
 			@ob_end_clean();
 		}
 		
-		// save reques start range
+		// save request start range
 		$start = $FORM->exportValue('start');
 		$start = (!empty($start)) ? $start : 0;
 		

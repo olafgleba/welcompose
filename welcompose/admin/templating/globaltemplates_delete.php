@@ -133,8 +133,12 @@ try {
 		@ob_end_clean();
 	}
 
+	// save request start range
+	$start = Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC);
+	$start = (!empty($start)) ? $start : 0;
+	
 	// go back to overview page
-	header("Location: globaltemplates_select.php");
+	header("Location: globaltemplates_select.php?start=".$start);
 	exit;
 
 } catch (Exception $e) {
