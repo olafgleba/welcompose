@@ -111,6 +111,12 @@ try {
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
 		array('id' => 'project_name', 'maxlength' => 255, 'class' => 'w300'));
@@ -126,6 +132,7 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'id' => Base_Cnc::ifsetor($project['id'], null),
 		'name' => Base_Cnc::ifsetor($project['name'], null)
 	));
@@ -207,10 +214,15 @@ try {
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
+
+		// save request start range
+		$start = $FORM->exportValue('start');
+		$start = (!empty($start)) ? $start : 0;
 		
 		// redirect
-		header("Location: projects_select.php");
+		header("Location: projects_select.php?start=".$start);
 		exit;
+		
 	}
 } catch (Exception $e) {
 	// clean the buffer

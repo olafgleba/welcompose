@@ -443,8 +443,7 @@ margin-top: 0.6em;
 }
 #podcast_container #extendedView {
 display: none; 
-margin-top: 15px;
-border-top: 1px solid #ff620d;	
+margin-top: 15px;	
 width: auto;
 }
 #podcast_container #mediafile_metadata {

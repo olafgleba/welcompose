@@ -1638,7 +1638,9 @@ function Preview_getFrontendView (elem)
 		var insertPanel = function () {
 			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
 		}
-		setTimeout(insertPanel, 2000);
+		// we have to set a big timeout cause the page (e.g. DOM) has
+		// to finish loading before we are able to use this function
+		setTimeout(insertPanel, 6000);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1665,7 +1667,9 @@ function Preview_reloadFrontendView ()
 		var insertPanel = function () {
 			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
 		}
-		setTimeout(insertPanel, 2000);
+		// we have to set a big timeout cause the page (e.g. DOM) has
+		// to finish loading before we are able to use this function
+		setTimeout(insertPanel, 6000);
 	} catch (e) {
 		_applyError(e);
 	}

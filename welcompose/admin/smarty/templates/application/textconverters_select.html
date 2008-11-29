@@ -66,6 +66,7 @@
 {/if}
 {/foreach}
 </ul>
+<br class="clearb" />
 {/if}
 <table summary="{i18n Available Text Converters}">
 <tr>
@@ -81,8 +82,8 @@
 {foreach from=$text_converters item=_text_converter}
 <tr>
 <td><span>{$_text_converter.name|escape:"htmlall"}</span></td>
-<td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
+<td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
