@@ -208,10 +208,10 @@ public function generateSitemap ($compress)
  * @throws Application_TextConverterException
  * @param string Builded sitemap data
  */
-protected function writeGzip ($content)
+protected function writeGzip ($data)
 {	
 	// encode the target content
-	$gzdata = gzencode($content, 9);
+	$gzdata = gzencode($data, 9);
 	
 	// open a pointer to the target file
 	$fp = fopen($this->_default_gzip_output_file, 'w+');

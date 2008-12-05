@@ -81,9 +81,9 @@ try {
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
 
-	// load Application_Project
-	/* @var $PROJECT Application_Sitemap */
-	$SITEMAP = load('Application:sitemap');
+	// load sitemap class
+	/* @var $SITEMAP Application_Sitemap */
+	$SITEMAP = load('Application:Sitemap');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {

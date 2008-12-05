@@ -242,4 +242,7 @@ define('WCOM_REGEX_OPERATOR_NAME', '=^[a-z]{1}[a-z0-9_]*$=Di');
 // Defines regular expression for callback strings
 define("WCOM_REGEX_CALLBACK_STRING", "=^([a-z_]+)$=Di");
 
+// Defines regular expression for server http host string
+define("WCOM_REGEX_SERVER_HTTP_HOST", "=^([0-9a-z]*)\.([a-z]{2,4}+)$=Di");
+
 ?>
