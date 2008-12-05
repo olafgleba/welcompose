@@ -320,28 +320,29 @@ background: transparent url(../img/bg_uploadmessage_bot.gif) left bottom no-repe
 }
 
 /* response */
-#rp {
+#rp, #rpstatic {
 display: block;
 width: 710px;
 margin-top: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
 /* IE 7 */
-*+html #container #rp {
+*+html #container #rp, *+html #container #rpstatic {
 margin-top: 45px;
 }
 /* IE 6 */
-* html #container #rp {
+* html #container #rp, * html #container #rpstatic {
 margin-top: 45px;
 }
-#rp h1 {
+#rp h1, #rpstatic h1 {
 margin: 0;
-padding: 10px 10px 0 10px;
+padding: 10px 12px 2px 12px;
 color: #036;
 }
-#rp p {
+#rp p, #rpstatic p {
 margin: 0;
-padding: 0 10px 10px 10px;
+padding: 0 12px 10px 12px;
+line-height: 1.5em;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 
@@ -361,12 +362,13 @@ margin-top: 50px;
 }
 #content .rp_note h1 {
 margin: 0;
-padding: 10px 10px 0 10px;
+padding: 10px 12px 2px 12px;
 color: #036;
 }
 #content .rp_note p {
 margin: 0;
-padding: 0 10px 10px 10px;
+padding: 0 12px 10px 12px;
+line-height: 1.5em;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
 #content .rp_note img { 

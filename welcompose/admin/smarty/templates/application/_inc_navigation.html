@@ -30,6 +30,13 @@
 		<li><a href="textmacros_select.php"{if wcom_admin_navigation_in_area('textmacros_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Text Macros}<span></span></a></li>
 	{/if}
 {/if}
+{if wcom_check_access('Application', 'TextMacro', 'Manage')}
+	{if wcom_admin_navigation_is_self('settings.php', $SCRIPT_NAME)}
+		<li class="on">{i18n Community Settings}</li>
+	{else}
+		<li><a href="sitemaps.php"{if wcom_admin_navigation_in_area('sitemaps.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Sitemaps}<span></span></a></li>
+	{/if}
+{/if}
 </ul>
 </div>
 <!-- topsubnavcon static eof -->

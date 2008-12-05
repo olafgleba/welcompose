@@ -115,14 +115,19 @@ public function __construct()
  * Unknown arguments will be treated as user supplied arguments
  * and appended to the generated url. If the parameter remove_amps
  * is set to true, encoded ampersands will be converted to "clear
- * text" ampersands.
+ * text" ampersands. If the parameter prepend_host ist set to true,
+ * the server http host will be prepend the build url. If the parameter
+ * encode_system_url is set to true the url will urlencoded. This takes
+ * account of the possibly former converted ampersand.
  * 
  * @throws Utility_UrlGeneratorException
  * @param array Args
  * @param bool Remove encoded ampersands
+ * @param bool Prepend http host
+ * @param bool Encode output url string
  * @return string
  */
-public function generateInternalLink ($args = array(), $remove_amps = false)
+public function generateInternalLink ($args = array(), $remove_amps = false, $prepend_host = false, $encode_system_url = false)
 {
 	// input check
 	if (!is_array($args)) {
@@ -218,6 +223,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 			$posting_day_added = $blog_posting['day_added'];
 		}
 	}
+	
 	// the next step to get an url is to look at the page type and the action so that we
 	// can fetch the right url pattern from the sys.inc.php.
 	$action = (empty($action) ? 'Index' : $action);
@@ -265,13 +271,31 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 	if (count($user_supplied_args) > 1) {
 		$system_url = $system_url.'?'.http_build_query($user_supplied_args, null, '&amp;');
 	}
-	
+
+	// occasionally we need protocol uris so we get the delivered 
+	// host from the server globals and prepend it to the system_url
+	if ($prepend_host) {
+		// validate server response
+		$http_host = Base_Cnc::filterRequest($_SERVER['HTTP_HOST'], WCOM_REGEX_SERVER_HTTP_HOST);	
+		// prepend host if urls are internal
+		$system_url = preg_replace('=(^\/)=', 'http://'.$http_host.'${1}', $system_url);
+	}
+		
 	// remove encoded ampersands from url if we're supposed to.
 	// it's required if we're passing URLs to HTML_QuickForm because
 	// there they will be encoded once again.
 	if ($remove_amps) {
 		$system_url = str_replace('&amp;', '&', $system_url);
 	}
+	
+	if ($encode_system_url) {
+		// wir brauchen eine variable (true|false), die sagt ob der request string urlencoded werden soll
+		// undzwar ohne &amp;. dies wird schon durch remove_amps erledigt. also brauchen wir hier
+		// ein weiteres preg_replace. kann erst mit einer installation ohne url rewrite erstellt und 
+		// geprüft werden.
+	}
+	
+
 	
 	// get url form Net_URL object
 	return $system_url;

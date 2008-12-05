@@ -284,7 +284,8 @@ public function selectPage ($id)
  * <li>type, int, optional: Page type id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
- * <li>draft, int, optional: include/exclude pages with param draft</li>
+ * <li>draft, int, optional: if set include pages with param draft</li>
+ * <li>protect, int, optional: if set exclude protected pages</li>
  * </ul>
  * 
  * @throws Content_PageException
@@ -309,6 +310,7 @@ public function selectPages ($params = array())
 	$start = null;
 	$limit = null;
 	$draft = null;
+	$protect = null;
 	$bind_params = array();
 	
 	// input check
@@ -327,6 +329,7 @@ public function selectPages ($params = array())
 			case 'type':
 			case 'start':
 			case 'limit':
+			case 'protect':
 					$$_key = (int)$_value;
 				break;
 			case 'draft':
@@ -418,13 +421,16 @@ public function selectPages ($params = array())
 	if (!empty($type) && is_numeric($type)) {
 		$sql .= " AND `content_pages`.`type` = :type ";
 		$bind_params['type'] = $type;
-	}
-	
+	}		
+	// Include only result rows without protected pages
+	if (!empty($protect) && is_numeric($protect)) {
+		$sql .= " AND `content_pages`.`protect` IS NULL ";
+	}	
 	// Include only result rows without drafts
 	if (is_null($draft) ) {
 		$sql .= " AND `content_pages`.`draft` = '0' ";
 	}
-	
+			
 	// add sorting
 	$sql .= " ORDER BY `content_nodes`.`sorting`, `content_nodes`.`lft` ";
 	

@@ -95,7 +95,8 @@ class Setup_PackageExtractor {
 		'/tmp/installer',
 		'/tmp/mail_attachments',
 		'/tmp/updater',
-		'/tmp/log'
+		'/tmp/log',
+		'/tmp/sitemaps'
 	);
 	
 	/**

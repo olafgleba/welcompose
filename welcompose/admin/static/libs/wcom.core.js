@@ -555,11 +555,10 @@ function Init_getVars ()
 	try {
 		if (document.getElementsByClassName('botbg')[0]) {
 			Form.focusFirstElement(document.getElementsByClassName('botbg')[0]);
-		}
-		
+		}		
 		if (typeof response != 'undefined') {
 			if (response == 1) {
-				Effect.Fade('rp', {duration: 0.6, delay: 2.0});
+				if($('rp')) Effect.Fade('rp', {duration: 0.6, delay: 2.0});
 			}
 		}
 		if (typeof preview_ctrl != 'undefined') {
