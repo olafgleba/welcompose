@@ -94,7 +94,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Application', 'Sitemaps', 'Manage')) {
+	if (!wcom_check_access('Application', 'Sitemap', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
