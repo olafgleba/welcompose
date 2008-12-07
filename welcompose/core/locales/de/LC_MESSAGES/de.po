@@ -2656,7 +2656,7 @@ msgid ""
 "To create one, go to the <a href=\"pagetypes_select.php\">page type overview "
 "page</a>."
 msgstr ""
-"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
+"Bitte gehen Sie zur <a href=\"pagetypes_select.php\">Übersichtsseite der "
 "Seitentypen</a> um einen neuen Seitentyp zu erstellen."
 
 #: pages_add.html:85 pages_edit.html:135
@@ -2668,8 +2668,8 @@ msgid ""
 "To create one, go to the <a href=\"../templating/templatesets_select.php"
 "\">template set overview page</a>."
 msgstr ""
-"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
-"Vorlagentypen</a> um ."
+"Bitte gehen Sie zur <a href=\"../templating/templatesets_select.php\">Übersichtsseite der "
+"Vorlagengruppen</a> um eine neue Vorlagengruppe anzulegen."
 
 #: pages_add.html:131 pages_edit.html:176
 msgid "Additional metadata"
@@ -2966,7 +2966,7 @@ msgid ""
 "To create one, go to the <a href=\"navigations_select.php\">navigation "
 "overview page</a>."
 msgstr ""
-"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
+"Bitte gehen Sie zur <a href=\"navigations_select.php\">Übersichtsseite der "
 "Navigationen</a> um eine neue Navigation anzulegen."
 
 #: pages_select.html:10
@@ -2978,8 +2978,9 @@ msgid ""
 "No navigation and no page has been created yet. Please create a <a href="
 "\"navigations_select.php\">navigation</a> first"
 msgstr ""
-"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
-"Navigationen</a> um eine neue Navigation anzulegen."
+"<strong>Es wurde noch keine Navigation angelegt</strong>.<br /><br />"
+"Bitte gehen Sie zur <a href=\"navigations_select.php\">Übersichtsseite der "
+"Navigationen</a> um eine neue Navigation anzulegen"
 
 #: pages_select.html:64
 msgid "Please define an index page!"
@@ -4922,8 +4923,8 @@ msgid ""
 "To create one, go to the <a href=\"groups_select.php\">user group overview "
 "page</a>."
 msgstr ""
-"Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
-"Benutzergruppen</a>."
+"Bitte gehen Sie zur <a href=\"groups_select.php\">Übersichtsseite der "
+"Benutzergruppen</a> um eine neue Benutzergruppe anzulegen."
 
 #: users_edit.html:10
 msgid "Welcompose Admin &ndash; Edit User"
