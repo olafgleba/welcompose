@@ -299,7 +299,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
  * @param bool Encode output url string
  * @return string
  */
-public function generateSitemapLinks ($args = array(), $remove_amps = false, $encode_system_url = false)
+public function generateSitemapLinks ($args = array())
 {
 	// input check
 	if (!is_array($args)) {
@@ -450,20 +450,6 @@ public function generateSitemapLinks ($args = array(), $remove_amps = false, $en
 	// get the delivered host from the server globals and
 	// prepend it to the system_url validate server response
 	$system_url = preg_replace('=(^\/)=', 'http://'.$http_host.'${1}', $system_url);
-		
-	// remove encoded ampersands from url if we're supposed to.
-	// it's required if we're passing URLs to HTML_QuickForm because
-	// there they will be encoded once again.
-	if ($remove_amps) {
-		$system_url = str_replace('&amp;', '&', $system_url);
-	}
-	
-	if ($encode_system_url) {
-		// wir brauchen eine variable (true|false), die sagt ob der request string urlencoded werden soll
-		// und zwar ohne &amp;. dies wird schon durch remove_amps erledigt. also brauchen wir hier
-		// ein weiteres preg_replace. kann erst mit einer installation ohne url rewrite erstellt und 
-		// geprüft werden.
-	}
 	
 	// get url form Net_URL object
 	return $system_url;
