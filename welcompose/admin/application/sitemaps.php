@@ -106,7 +106,7 @@ try {
 	$FORM = $BASE->utility->loadQuickForm('sitemaps', 'post');
 		
 	// checkbox for gunzip compress
-	$FORM->addElement('checkbox', 'compress_gzip', gettext('Compress (gzip)'), null,
+	$FORM->addElement('checkbox', 'compress_gzip', gettext('Deflate (.gz)'), null,
 		array('id' => 'sitemaps_compress', 'class' => 'chbx'));
 	$FORM->applyFilter('sitemaps_compress', 'trim');
 	$FORM->applyFilter('sitemaps_compress', 'strip_tags');
@@ -155,12 +155,6 @@ try {
 		if (!empty($_SESSION['response'])) {
 			$_SESSION['response'] = '';
 		}
-		
-		//define HTTP HOST
-		$http_host = Base_Cnc::filterRequest($_SERVER['HTTP_HOST'], WCOM_REGEX_SERVER_HTTP_HOST);
-		
-		// assign HTTP HOST to smarty
-		$BASE->utility->smarty->assign('http_host', $http_host);
 		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);

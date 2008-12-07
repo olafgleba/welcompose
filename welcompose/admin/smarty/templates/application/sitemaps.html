@@ -70,8 +70,8 @@ var response = '{$session.response}';
 
 {if $session.response == 1}
 <div id="rpstatic">
-<h1>{i18n Your sitemap was successfully saved!}</h1>
-<p>{i18n  Find in path: <strong>http://`%http_host`/tmp/sitemaps/</strong><br />Please relocate the sitemap file on top of your install directory:<br />New path: <strong>http://`%http_host`/sitemap.xml</strong> or <strong>http://`%http_host`/sitemap.gz</strong>.<br />After this is done please log on to your Google account and add your sitemap manually}.</p>
+<h1>{i18n Your sitemap(s) was saved successfully}!</h1>
+<p>{i18n The file(s) are located in <strong>/tmp/sitemaps/</strong> of your installation.<br /><br />Please relocate the sitemap file to the top of your install directory<br />(e.g. http://www.domain.tld/sitempap.xml or/and http://www.domain.tld/sitempap.xml.gz).<br /><br />After this is done please log on to your Google account and add your sitemap(s) manually}.</p>
 <!-- rp --></div>
 {/if}
 
@@ -82,7 +82,7 @@ var response = '{$session.response}';
 
 {$form.hidden}
 
-<h2>{i18n Sitemap erstellen}</h2>
+<h2>{i18n Create Sitemap}</h2>
 
 <label class="cont chbx" for="sitemaps_compress"><span class="bez">{$form.compress_gzip.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.compress_gzip.html}</label>

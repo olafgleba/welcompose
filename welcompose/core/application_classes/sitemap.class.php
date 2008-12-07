@@ -144,43 +144,44 @@ public function generateSitemap ($compress)
 	
 	// build url node for common pages
 	foreach ($this->_pages as $_page) {
-		$xml .= '  <url>'."\r\n";
-		$xml .= '    <loc>'.
-						$URLGENERATOR->generateInternalLink(array('page_id' => $_page['id']),
-							true,
-							true
-						)
-					.'</loc>'."\r\n";
-		$xml .= '    <changefreq>'.$_page['sitemap_changefreq'].'</changefreq>'."\r\n";
-		$xml .= '    <priority>'.$_page['sitemap_priority'].'</priority>'."\r\n";
-		$xml .= '  </url>'."\r\n";				
+		// spare external pages out completely
+		if ($_page['page_type_name'] != 'WCOM_URL') {
+			$xml .= '  <url>'."\r\n";
+			$xml .= '    <loc>'.
+							$URLGENERATOR->generateSitemapLinks(array('page_id' => $_page['id']),
+								true
+							)
+						.'</loc>'."\r\n";
+			$xml .= '    <changefreq>'.$_page['sitemap_changefreq'].'</changefreq>'."\r\n";
+			$xml .= '    <priority>'.$_page['sitemap_priority'].'</priority>'."\r\n";
+			$xml .= '  </url>'."\r\n";				
 
-		// we have to differ here because we need 
-		// additional params (posting_id, action)
-		// to be able building blog posting urls
-		if ($_page['page_type_name'] == 'WCOM_BLOG') {
+			// we have to differ here because we need 
+			// additional params (posting_id, action)
+			// to be able building blog posting urls
+			if ($_page['page_type_name'] == 'WCOM_BLOG') {
 					
-			// get single blog posting
-			 $posting = $BLOGPOSTING->selectBlogPostings(array('page' => $_page['id']));
+				// get single blog posting
+				 $posting = $BLOGPOSTING->selectBlogPostings(array('page' => $_page['id']));
 				
-			// build url node for blog postings
-			foreach ($posting as $_posting) {
-				$xml .= '  <url>'."\r\n";
-				$xml .= '    <loc>'.
-								$URLGENERATOR->generateInternalLink(array('page_id' => $_page['id'],
-									'posting_id' => $_posting['id'],
-									'action' => 'Item'),
-									true,
-									true
-								)
-							.'</loc>'."\r\n";
-				$xml .= '    <changefreq>'.$_page['sitemap_changefreq'].'</changefreq>'."\r\n";
-				$xml .= '    <priority>'.$_page['sitemap_priority'].'</priority>'."\r\n";
-				$xml .= '  </url>'."\r\n";
+				// build url node for blog postings
+				foreach ($posting as $_posting) {
+					$xml .= '  <url>'."\r\n";
+					$xml .= '    <loc>'.
+									$URLGENERATOR->generateSitemapLinks(array('page_id' => $_page['id'],
+										'posting_id' => $_posting['id'],
+										'action' => 'Item'),
+										true
+									)
+								.'</loc>'."\r\n";
+					$xml .= '    <changefreq>'.$_page['sitemap_changefreq'].'</changefreq>'."\r\n";
+					$xml .= '    <priority>'.$_page['sitemap_priority'].'</priority>'."\r\n";
+					$xml .= '  </url>'."\r\n";
+				}
 			}
 		}
 	}
-	$xml .= '</urlset';
+	$xml .= '</urlset>';
 	
 	// set appropriate header
 	header('content-type: text/xml; charset= utf-8');

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-26 16:58+0100\n"
+"POT-Creation-Date: 2008-12-07 11:41+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: pingservices_add.php:106 pingservices_edit.php:117 projects_add.php:105
-#: projects_edit.php:115 textconverters_add.php:107
-#: textconverters_edit.php:118 textmacros_add.php:114 textmacros_edit.php:124
+#: pingservices_add.php:106 pingservices_edit.php:123 projects_add.php:105
+#: projects_edit.php:121 textconverters_add.php:107
+#: textconverters_edit.php:124 textmacros_add.php:114 textmacros_edit.php:130
 #: antispamplugins_add.php:120 antispamplugins_edit.php:131
 #: blogcomments_edit.php:120 blogcommentstatuses_add.php:106
 #: blogcommentstatuses_edit.php:117 globalboxes_add.php:117
@@ -27,9 +27,9 @@ msgstr ""
 #: pages_edit.php:156 pages_generatorforms_fields_add.php:138
 #: pages_generatorforms_fields_edit.php:149 pagetypes_add.php:107
 #: pagetypes_edit.php:116 structuraltemplates_add.php:106
-#: structuraltemplates_edit.php:117 pingservices_select.html:77
-#: projects_select.html:77 textconverters_select.html:77
-#: textmacros_select.html:77 antispamplugins_select.html:80
+#: structuraltemplates_edit.php:117 pingservices_select.html:78
+#: projects_select.html:78 textconverters_select.html:78
+#: textmacros_select.html:78 antispamplugins_select.html:80
 #: blogcommentstatuses_select.html:78 globalboxes_select.html:78
 #: navigations_select.html:65 pages_boxes_select.html:109
 #: pages_boxes_select.html:159 pages_generatorforms_fields_select.html:100
@@ -38,8 +38,8 @@ msgstr ""
 #: globaltemplates_select.html:82 templates_select.html:107
 #: templatesets_select.html:66 templatetypes_select.html:66
 #: groups_select.html:67 rights_select.html:79 globaltemplates_add.php:119
-#: globaltemplates_edit.php:130 templates_add.php:144 templates_copy.php:162
-#: templates_edit.php:162 templatesets_add.php:106 templatesets_edit.php:116
+#: globaltemplates_edit.php:136 templates_add.php:144 templates_copy.php:162
+#: templates_edit.php:180 templatesets_add.php:106 templatesets_edit.php:116
 #: templatetypes_add.php:106 templatetypes_edit.php:117 groups_add.php:116
 #: groups_copy.php:132 groups_edit.php:132 rights_add.php:106
 #: rights_edit.php:116 users_add.php:121 users_edit.php:122
@@ -47,9 +47,9 @@ msgstr ""
 msgid "Name"
 msgstr "Name"
 
-#: pingservices_add.php:110 pingservices_edit.php:121 projects_add.php:109
-#: projects_edit.php:119 textconverters_add.php:111
-#: textconverters_edit.php:122 textmacros_add.php:118 textmacros_edit.php:128
+#: pingservices_add.php:110 pingservices_edit.php:127 projects_add.php:109
+#: projects_edit.php:125 textconverters_add.php:111
+#: textconverters_edit.php:128 textmacros_add.php:118 textmacros_edit.php:134
 #: antispamplugins_add.php:124 antispamplugins_edit.php:135
 #: blogcomments_edit.php:124 blogcommentstatuses_add.php:110
 #: blogcommentstatuses_edit.php:121 globalboxes_add.php:121
@@ -57,8 +57,8 @@ msgstr "Name"
 #: pages_add.php:189 pages_boxes_add.php:139 pages_boxes_edit.php:146
 #: pages_edit.php:160 pagetypes_add.php:111 pagetypes_edit.php:120
 #: structuraltemplates_add.php:110 structuraltemplates_edit.php:121
-#: globaltemplates_add.php:123 globaltemplates_edit.php:134
-#: templates_add.php:148 templates_copy.php:166 templates_edit.php:166
+#: globaltemplates_add.php:123 globaltemplates_edit.php:140
+#: templates_add.php:148 templates_copy.php:166 templates_edit.php:184
 #: templatesets_add.php:110 templatesets_edit.php:120
 #: templatetypes_add.php:110 templatetypes_edit.php:121 groups_add.php:120
 #: groups_copy.php:136 groups_edit.php:136 rights_add.php:110
@@ -67,39 +67,39 @@ msgstr "Name"
 msgid "Please enter a name"
 msgstr "Bitte tragen Sie einen Namen ein"
 
-#: pingservices_add.php:111 pingservices_edit.php:122
+#: pingservices_add.php:111 pingservices_edit.php:128
 msgid "A ping service with the given name already exists"
 msgstr "Ein gleichnamiger Ping-Service existiert bereits"
 
-#: pingservices_add.php:114 pingservices_edit.php:126 database.php:106
+#: pingservices_add.php:114 pingservices_edit.php:132 database.php:106
 msgid "Host"
 msgstr "Host"
 
-#: pingservices_add.php:118 pingservices_edit.php:130 database.php:111
+#: pingservices_add.php:118 pingservices_edit.php:136 database.php:111
 msgid "Please enter a host name"
 msgstr "Bitte tragen Sie einen Host-Namen ein"
 
-#: pingservices_add.php:119 pingservices_edit.php:131
+#: pingservices_add.php:119 pingservices_edit.php:137
 msgid "Please enter a valid host name"
 msgstr "Bitte geben Sie einen gültigen Host-Namen an"
 
-#: pingservices_add.php:123 pingservices_edit.php:134 database.php:115
+#: pingservices_add.php:123 pingservices_edit.php:140 database.php:115
 msgid "Port"
 msgstr "Port"
 
-#: pingservices_add.php:127 pingservices_edit.php:138
+#: pingservices_add.php:127 pingservices_edit.php:144
 msgid "Please enter a port number"
 msgstr "Bitte tragen Sie eine Port-Nummer ein"
 
-#: pingservices_add.php:128 pingservices_edit.php:139
+#: pingservices_add.php:128 pingservices_edit.php:145
 msgid "Please enter a valid port number"
 msgstr "Bitte geben Sie eine gültige Port-Nummer an"
 
-#: pingservices_add.php:132 pingservices_edit.php:142
+#: pingservices_add.php:132 pingservices_edit.php:148
 msgid "Path"
 msgstr "Pfad"
 
-#: pingservices_add.php:136 pingservices_edit.php:146
+#: pingservices_add.php:136 pingservices_edit.php:152
 msgid "Please enter a request path"
 msgstr "Bitte tragen Sie einen Anfragepfad ein"
 
@@ -163,11 +163,17 @@ msgstr "ID sollte nicht leer sein"
 msgid "Id is expected to be numeric"
 msgstr "ID sollte einen numerischen Wert haben"
 
-#: pingservices_edit.php:149 projects_edit.php:124 textconverters_edit.php:146
-#: textmacros_edit.php:150 antispamplugins_edit.php:165
-#: blogcomments_edit.php:147 blogcommentstatuses_edit.php:127 settings.php:290
-#: globalboxes_edit.php:157 navigations_edit.php:125
-#: pages_blogs_pingserviceconfigurations_edit.php:184
+#: pingservices_edit.php:120 projects_edit.php:118 textconverters_edit.php:121
+#: textmacros_edit.php:127 globalfiles_edit.php:122
+#: globaltemplates_edit.php:133 templates_edit.php:158
+msgid "start is expected to be numeric"
+msgstr "Parameter start muss numerisch sein"
+
+#: pingservices_edit.php:155 projects_edit.php:130 sitemaps.php:117
+#: textconverters_edit.php:152 textmacros_edit.php:156
+#: antispamplugins_edit.php:165 blogcomments_edit.php:147
+#: blogcommentstatuses_edit.php:127 settings.php:290 globalboxes_edit.php:157
+#: navigations_edit.php:125 pages_blogs_pingserviceconfigurations_edit.php:184
 #: pages_blogs_postings_edit.php:412 pages_boxes_edit.php:173
 #: pages_edit.php:246 pages_generatorforms_content_edit.php:218
 #: pages_generatorforms_fields_edit.php:207
@@ -175,47 +181,55 @@ msgstr "ID sollte einen numerischen Wert haben"
 #: pages_simplepages_content_edit.php:206 pages_urls_content_edit.php:128
 #: pagetypes_edit.php:137 podcastcategories_edit.php:135
 #: structuraltemplates_edit.php:136 mediamanager_edit.php:147
-#: globalfiles_edit.php:123 globaltemplates_edit.php:168
-#: templates_edit.php:180 templatesets_edit.php:132 templatetypes_edit.php:133
+#: globalfiles_edit.php:129 globaltemplates_edit.php:174
+#: templates_edit.php:198 templatesets_edit.php:132 templatetypes_edit.php:133
 #: groups_edit.php:155 rights_edit.php:132 users_edit.php:180
 msgid "Save edit"
 msgstr "Speichern"
 
-#: projects_add.php:110 projects_edit.php:120
+#: projects_add.php:110 projects_edit.php:126
 msgid "A project with the given name already exists"
 msgstr "Ein gleichnamiges Projekt existiert bereits"
 
-#: textconverters_add.php:112 textconverters_edit.php:123
+#: sitemaps.php:109
+msgid "Deflate (.gz)"
+msgstr "Komprimieren"
+
+#: sitemaps.php:113
+msgid "The field whether compress is enabled accepts only 0 or 1"
+msgstr "Das Feld \"Gzip Kompression\" kann nur den Wert 0 oder 1 haben"
+
+#: textconverters_add.php:112 textconverters_edit.php:129
 msgid "A text converter with the given name already exists"
 msgstr "Ein gleichnamiger Textkonverter existiert bereits"
 
-#: textconverters_add.php:115 textconverters_edit.php:127
-#: textmacros_add.php:122 textmacros_edit.php:133 antispamplugins_add.php:129
+#: textconverters_add.php:115 textconverters_edit.php:133
+#: textmacros_add.php:122 textmacros_edit.php:139 antispamplugins_add.php:129
 #: antispamplugins_edit.php:140 pagetypes_add.php:116 pagetypes_edit.php:126
 msgid "Internal name"
 msgstr "Interner Name"
 
-#: textconverters_add.php:119 textconverters_edit.php:131
-#: textmacros_add.php:126 textmacros_edit.php:137 antispamplugins_add.php:133
+#: textconverters_add.php:119 textconverters_edit.php:137
+#: textmacros_add.php:126 textmacros_edit.php:143 antispamplugins_add.php:133
 #: antispamplugins_edit.php:144 pagetypes_add.php:120 pagetypes_edit.php:130
 msgid "Please enter an internal name"
 msgstr "Bitte tragen Sie einen internen Namen ein"
 
-#: textconverters_add.php:120 textconverters_edit.php:132
-#: textmacros_add.php:127 textmacros_edit.php:138 antispamplugins_add.php:134
+#: textconverters_add.php:120 textconverters_edit.php:138
+#: textmacros_add.php:127 textmacros_edit.php:144 antispamplugins_add.php:134
 #: antispamplugins_edit.php:145 pagetypes_add.php:121 pagetypes_edit.php:131
 msgid "Please enter a valid internal name"
 msgstr "Bitte geben Sie einen gültigen internen Namen an"
 
-#: textconverters_add.php:122 textconverters_edit.php:134
+#: textconverters_add.php:122 textconverters_edit.php:140
 msgid "A text converter with the given internal name already exists"
 msgstr "Ein Textkonverter mit gleichnamigen internen Namen existiert bereits"
 
-#: textconverters_add.php:126 textconverters_edit.php:138
+#: textconverters_add.php:126 textconverters_edit.php:144
 msgid "Set as default"
 msgstr "Standard"
 
-#: textconverters_add.php:130 textconverters_edit.php:142
+#: textconverters_add.php:130 textconverters_edit.php:148
 msgid "The field whether to set the default textconverter accepts only 0 or 1"
 msgstr "Das Feld Standard kann nur den Wert 0 oder 1 haben"
 
@@ -235,19 +249,19 @@ msgstr "Posttext-Makro"
 msgid "Shutdown macro"
 msgstr "Shutdown-Makro"
 
-#: textmacros_add.php:119 textmacros_edit.php:129
+#: textmacros_add.php:119 textmacros_edit.php:135
 msgid "A text macro with the given name already exists"
 msgstr "Ein gleichnamiges Textmakro existiert bereits"
 
-#: textmacros_add.php:131 textmacros_edit.php:142 pages_add.php:220
+#: textmacros_add.php:131 textmacros_edit.php:148 pages_add.php:220
 #: pages_generatorforms_fields_add.php:123
 #: pages_generatorforms_fields_edit.php:134 antispamplugins_select.html:81
 #: pages_generatorforms_fields_select.html:102 templates_add.php:127
-#: templates_copy.php:143 templates_edit.php:143
+#: templates_copy.php:143 templates_edit.php:161
 msgid "Type"
 msgstr "Typ"
 
-#: textmacros_add.php:135 textmacros_edit.php:146
+#: textmacros_add.php:135 textmacros_edit.php:152
 msgid "Chosen type is out of range"
 msgstr "Die Angabe des Typs liegt außerhalb des gültigen Wertebereiches"
 
@@ -325,8 +339,8 @@ msgstr "Bitte geben Sie eine gültige Webseiten Adresse an"
 #: pages_simpleforms_content_edit.php:173
 #: pages_simplepages_content_edit.php:159 structuraltemplates_add.php:120
 #: structuraltemplates_edit.php:131 globaltemplates_add.php:136
-#: globaltemplates_edit.php:147 templates_add.php:158 templates_copy.php:177
-#: templates_edit.php:176
+#: globaltemplates_edit.php:153 templates_add.php:158 templates_copy.php:177
+#: templates_edit.php:194
 msgid "Content"
 msgstr "Inhalt"
 
@@ -556,7 +570,7 @@ msgstr "Das Feld \"Textmakros\" kann nur den Wert 0 oder 1 haben"
 #: pages_generatorforms_fields_edit.php:211
 #: pages_simpleforms_content_edit.php:245
 #: pages_simplepages_content_edit.php:210 structuraltemplates_edit.php:140
-#: globaltemplates_edit.php:172 templates_edit.php:184
+#: globaltemplates_edit.php:178 templates_edit.php:202
 msgid "Save edit and go back"
 msgstr "Speichern und zur Übersicht"
 
@@ -648,9 +662,9 @@ msgstr "Alternativer Name"
 #: globalfiles_select.html:89 globaltemplates_select.html:83
 #: templates_select.html:109 templatesets_select.html:67
 #: templatetypes_select.html:67 groups_select.html:68 rights_select.html:80
-#: globalfiles_add.php:114 globalfiles_edit.php:127
-#: globaltemplates_add.php:130 globaltemplates_edit.php:141
-#: templates_add.php:152 templates_copy.php:171 templates_edit.php:170
+#: globalfiles_add.php:114 globalfiles_edit.php:133
+#: globaltemplates_add.php:130 globaltemplates_edit.php:147
+#: templates_add.php:152 templates_copy.php:171 templates_edit.php:188
 #: templatesets_add.php:115 templatesets_edit.php:126
 #: templatetypes_add.php:115 templatetypes_edit.php:127 groups_add.php:125
 #: groups_copy.php:142 groups_edit.php:142 rights_add.php:115
@@ -1438,7 +1452,7 @@ msgid "Other"
 msgstr "Andere"
 
 #: mediamanager_edit.php:130 mediamanager_upload.php:111
-#: globalfiles_add.php:109 globalfiles_edit.php:119
+#: globalfiles_add.php:109 globalfiles_edit.php:125
 msgid "File"
 msgstr "Datei"
 
@@ -1457,6 +1471,16 @@ msgstr "Bitte wählen Sie eine Datei aus"
 #: mediamanager_upload.php:129
 msgid "Upload Media"
 msgstr "Media hochladen"
+
+#: _inc_footer.html:2
+msgid ""
+"Licensed under the conditions of <a href=\"http://www.opensource.org/"
+"licenses/agpl-v3.html\">GNU AGPLv3</a> <br />Alternative licensing is "
+"available <a href=\"http://www.welcompose.de/cms/kontakt/\">on request</a>"
+msgstr ""
+"Lizenziert unter den Bedingungen der <a href=\"http://www.opensource.org/"
+"licenses/agpl-v3.html\">GNU AGPLv3</a><br />Alternative Lizenzierung "
+"auf <a href=\"http://www.welcompose.de/cms/kontakt/\">Anfrage</a> möglich"
 
 #: _inc_nav_community.html:4 _inc_navigation.html:7 _inc_navigation.html:9
 #: blogcomments_edit.html:48 blogcomments_edit.html:54
@@ -1596,6 +1620,11 @@ msgstr "Textkonverter"
 msgid "Text macros"
 msgstr "Textmakros"
 
+#: _inc_nav_settings.html:16 _inc_navigation.html:35 _inc_navigation.html:37
+#: sitemaps.html:52 sitemaps.html:56
+msgid "Sitemaps"
+msgstr "Sitemaps"
+
 #: _inc_nav_templates.html:4 _inc_navigation.html:7 _inc_navigation.html:9
 #: templates_add.html:54 templates_add.html:60 templates_copy.html:48
 #: templates_copy.html:54 templates_edit.html:54 templates_edit.html:60
@@ -1709,9 +1738,9 @@ msgstr "Community"
 msgid "Templating"
 msgstr "Vorlagen"
 
-#: _inc_topnav.html:53 pingservices_add.html:52 pingservices_edit.html:48
+#: _inc_topnav.html:54 pingservices_add.html:52 pingservices_edit.html:48
 #: pingservices_select.html:48 projects_add.html:52 projects_edit.html:48
-#: projects_select.html:48 textconverters_add.html:52
+#: projects_select.html:48 sitemaps.html:52 textconverters_add.html:52
 #: textconverters_edit.html:48 textconverters_select.html:48
 #: textmacros_add.html:52 textmacros_edit.html:48 textmacros_select.html:48
 #: settings.html:52 settings.html:56
@@ -1730,7 +1759,7 @@ msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 
 #: pingservices_add.html:33 pingservices_edit.html:29
 #: pingservices_select.html:29 projects_add.html:33 projects_edit.html:29
-#: projects_select.html:29 textconverters_add.html:33
+#: projects_select.html:29 sitemaps.html:33 textconverters_add.html:33
 #: textconverters_edit.html:29 textconverters_select.html:29
 #: textmacros_add.html:33 textmacros_edit.html:29 textmacros_select.html:29
 #: antispamplugins_add.html:33 antispamplugins_edit.html:29
@@ -1772,7 +1801,7 @@ msgstr "Welcompose"
 
 #: pingservices_add.html:36 pingservices_edit.html:32
 #: pingservices_select.html:32 projects_add.html:36 projects_edit.html:32
-#: projects_select.html:32 textconverters_add.html:36
+#: projects_select.html:32 sitemaps.html:36 textconverters_add.html:36
 #: textconverters_edit.html:32 textconverters_select.html:32
 #: textmacros_add.html:36 textmacros_edit.html:32 textmacros_select.html:32
 #: antispamplugins_add.html:36 antispamplugins_edit.html:32
@@ -1813,7 +1842,7 @@ msgstr "Angemeldeter Benutzer"
 
 #: pingservices_add.html:38 pingservices_edit.html:34
 #: pingservices_select.html:34 projects_add.html:38 projects_edit.html:34
-#: projects_select.html:34 textconverters_add.html:38
+#: projects_select.html:34 sitemaps.html:38 textconverters_add.html:38
 #: textconverters_edit.html:34 textconverters_select.html:34
 #: textmacros_add.html:38 textmacros_edit.html:34 textmacros_select.html:34
 #: antispamplugins_add.html:38 antispamplugins_edit.html:34
@@ -1900,7 +1929,7 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pingservices_add.html:94 pingservices_edit.html:74
 #: pingservices_edit.html:77 pingservices_edit.html:80
 #: pingservices_edit.html:83 projects_add.html:85 projects_edit.html:74
-#: textconverters_add.html:85 textconverters_add.html:88
+#: sitemaps.html:87 textconverters_add.html:85 textconverters_add.html:88
 #: textconverters_add.html:91 textconverters_edit.html:74
 #: textconverters_edit.html:77 textconverters_edit.html:80
 #: textmacros_add.html:85 textmacros_add.html:88 textmacros_add.html:91
@@ -2082,10 +2111,10 @@ msgstr "Welcompose Admin &ndash; Ping-Services"
 msgid "Add new"
 msgstr "Neu anlegen"
 
-#: pingservices_select.html:59 pingservices_select.html:90
-#: projects_select.html:59 projects_select.html:96
-#: textconverters_select.html:59 textconverters_select.html:90
-#: textmacros_select.html:59 textmacros_select.html:90
+#: pingservices_select.html:59 pingservices_select.html:91
+#: projects_select.html:59 projects_select.html:97
+#: textconverters_select.html:59 textconverters_select.html:91
+#: textmacros_select.html:59 textmacros_select.html:91
 #: antispamplugins_select.html:59 antispamplugins_select.html:97
 #: blogcomments_select.html:99 blogcomments_select.html:176
 #: blogcommentstatuses_select.html:59 blogcommentstatuses_select.html:91
@@ -2104,14 +2133,14 @@ msgstr "Neu anlegen"
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: pingservices_select.html:70
+#: pingservices_select.html:71
 msgid "Available Ping Services"
 msgstr "Verfügbare Ping-Services"
 
-#: pingservices_select.html:78 pingservices_select.html:84
-#: projects_select.html:78 projects_select.html:85
-#: textconverters_select.html:78 textconverters_select.html:84
-#: textmacros_select.html:78 textmacros_select.html:84
+#: pingservices_select.html:79 pingservices_select.html:85
+#: projects_select.html:79 projects_select.html:86
+#: textconverters_select.html:79 textconverters_select.html:85
+#: textmacros_select.html:79 textmacros_select.html:85
 #: antispamplugins_select.html:83 antispamplugins_select.html:91
 #: blogcomments_select.html:127 blogcomments_select.html:154
 #: blogcommentstatuses_select.html:79 blogcommentstatuses_select.html:85
@@ -2136,10 +2165,10 @@ msgstr "Verfügbare Ping-Services"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: pingservices_select.html:79 pingservices_select.html:85
-#: projects_select.html:79 projects_select.html:86
-#: textconverters_select.html:79 textconverters_select.html:85
-#: textmacros_select.html:79 textmacros_select.html:85
+#: pingservices_select.html:80 pingservices_select.html:86
+#: projects_select.html:80 projects_select.html:87
+#: textconverters_select.html:80 textconverters_select.html:86
+#: textmacros_select.html:80 textmacros_select.html:86
 #: antispamplugins_select.html:84 antispamplugins_select.html:92
 #: blogcomments_select.html:128 blogcomments_select.html:155
 #: blogcommentstatuses_select.html:80 blogcommentstatuses_select.html:86
@@ -2164,7 +2193,7 @@ msgstr "Bearbeiten"
 msgid "Delete"
 msgstr "Löschen"
 
-#: pingservices_select.html:102
+#: pingservices_select.html:103
 msgid "No ping service has been created yet."
 msgstr "Sie haben noch keinen Ping-Service angelegt."
 
@@ -2192,18 +2221,45 @@ msgstr "Projekte bearbeiten"
 msgid "Welcompose Admin &ndash; Projects"
 msgstr "Welcompose Admin &ndash; Projekte"
 
-#: projects_select.html:70
+#: projects_select.html:71
 msgid "Available Projects"
 msgstr "Vefügbare Projekte"
 
-#: projects_select.html:88 pagetypes_select.html:76
+#: projects_select.html:89 pagetypes_select.html:76
 #: templatetypes_select.html:79
 msgid "Not editable"
 msgstr "Nicht bearbeitbar"
 
-#: projects_select.html:108
+#: projects_select.html:109
 msgid "No project has been created yet."
 msgstr "Sie haben noch kein Projekt angelegt"
+
+#: sitemaps.html:10
+msgid "Welcompose Admin &ndash; Sitemaps"
+msgstr "Welcompose Administration &ndash; Sitemaps"
+
+#: sitemaps.html:73
+msgid "Your sitemap(s) was saved successfully"
+msgstr "Die Sitemap(s) wurden erfolgreich gespeichert"
+
+#: sitemaps.html:74
+msgid ""
+"The file(s) are located in <strong>/tmp/sitemaps/</strong> of your "
+"installation.<br /><br />Please relocate the sitemap file to the top of your "
+"install directory<br />(e.g. http://www.domain.tld/sitempap.xml or/and "
+"http://www.domain.tld/sitempap.xml.gz).<br /><br />After this is done please "
+"log on to your Google account and add your sitemap(s) manually"
+msgstr ""
+"Die Datei(en) wurden im Verzeichnis <strong>/tmp/sitemaps/</strong> ihrer "
+"Installation abgelegt.<br /><br />Bitte verschieben sie die Sitemap Datei "
+"(en) auf die oberste Ebene ihrer Installation.<br />(Bspw. http://www.domain."
+"tld/sitemap.xml oder/und http://www.domain.tld/sitempap.xml.gz)<br /"
+">Anschließend können sie die Sitemap(s) ihrem Google-Konto manuell "
+"hinzufügen."
+
+#: sitemaps.html:85
+msgid "Create Sitemap"
+msgstr "Sitemap erstellen"
 
 #: textconverters_add.html:10
 msgid "Welcompose Admin &ndash; Add Text Converter"
@@ -2225,11 +2281,11 @@ msgstr "Textkonverter bearbeiten"
 msgid "Welcompose Admin &ndash; Text Converters"
 msgstr "Welcompose Admin &ndash; Textkonverter"
 
-#: textconverters_select.html:70
+#: textconverters_select.html:71
 msgid "Available Text Converters"
 msgstr "Verfügbare Textkonverter"
 
-#: textconverters_select.html:102
+#: textconverters_select.html:103
 msgid "No text converter has been created yet."
 msgstr "Sie haben noch keinen Textkonverter angelegt"
 
@@ -2253,11 +2309,11 @@ msgstr "Textmakro bearbeiten"
 msgid "Welcompose Admin &ndash; Text Macros"
 msgstr "Welcompose Admin &ndash; Textmakros"
 
-#: textmacros_select.html:70
+#: textmacros_select.html:71
 msgid "Available Text Macros"
 msgstr "Vefügbare Textmakros"
 
-#: textmacros_select.html:102
+#: textmacros_select.html:103
 msgid "No text macro has been created yet."
 msgstr "Es wurde noch kein Textmakro angelegt"
 
@@ -4135,6 +4191,14 @@ msgstr ""
 msgid "Enter here the title of your simple page."
 msgstr "Tragen Sie bitte den Titel Ihrer Seite ein."
 
+#: sitemaps_sitemaps_compress.html:1
+msgid ""
+"If this option is checked a gunzip compressed sitemap file will created "
+"additionally"
+msgstr ""
+"Wenn sie die Checkbox aktivieren, wird zusätzlich zur unkomprimierten "
+"Sitemap eine Sitemap Datei generiert, die gzip (.gz) komprimiert ist"
+
 #: structural_template_structural_template_content.html:1
 msgid ""
 "Enter here the contents of your structural template to use. HTML and all the "
@@ -4999,35 +5063,35 @@ msgid "You cannot insert media or documents here."
 msgstr ""
 "Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
 
-#: globaltemplates_add.php:124 globaltemplates_edit.php:135
+#: globaltemplates_add.php:124 globaltemplates_edit.php:141
 msgid "Please enter a valid global template name"
 msgstr "Bitte nutzen Sie einen gültigen Vorlagennamen"
 
-#: globaltemplates_add.php:126 globaltemplates_edit.php:137
+#: globaltemplates_add.php:126 globaltemplates_edit.php:143
 msgid "A global template with the given name already exists"
 msgstr "Eine gleichnamige globale Vorlage existiert bereits"
 
-#: globaltemplates_add.php:140 globaltemplates_edit.php:151
+#: globaltemplates_add.php:140 globaltemplates_edit.php:157
 msgid "MIME Type"
 msgstr "MIME-Typ"
 
-#: globaltemplates_add.php:144 globaltemplates_edit.php:155
+#: globaltemplates_add.php:144 globaltemplates_edit.php:161
 msgid "Please select a mime type"
 msgstr "Bitte wählen Sie einen MIME-Typ"
 
-#: globaltemplates_add.php:145 globaltemplates_edit.php:156
+#: globaltemplates_add.php:145 globaltemplates_edit.php:162
 msgid "Selected mime type is out of range"
 msgstr "Der gewählte MIME-Typ liegt außerhalb des gültigen Wertebereiches"
 
-#: globaltemplates_add.php:149 globaltemplates_edit.php:160
+#: globaltemplates_add.php:149 globaltemplates_edit.php:166
 msgid "Change delimiter"
 msgstr "Delimiter ändern"
 
-#: globaltemplates_add.php:153 globaltemplates_edit.php:164
+#: globaltemplates_add.php:153 globaltemplates_edit.php:170
 msgid "The field whether to change the delimiver accepts only 0 or 1"
 msgstr "Das Feld Trennzeichen ändern kann nur den Wert 0 oder 1 haben"
 
-#: templates_add.php:131 templates_copy.php:147 templates_edit.php:147
+#: templates_add.php:131 templates_copy.php:147 templates_edit.php:165
 msgid "Please select a template type"
 msgstr "Bitte wählen Sie einen Vorlagentyp"
 
@@ -5035,21 +5099,21 @@ msgstr "Bitte wählen Sie einen Vorlagentyp"
 msgid "Chosen template type is out of range"
 msgstr "Der gewählte Vorlagentyp liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_add.php:133 templates_copy.php:149 templates_edit.php:149
+#: templates_add.php:133 templates_copy.php:149 templates_edit.php:167
 msgid "A template with the same type for your choosen set(s) already exists"
 msgstr ""
 "Es existiert bereits eine Vorlage, deren Typ der gleichen Vorlagengruppe(n) "
 "zugeordnet ist."
 
-#: templates_add.php:136 templates_copy.php:152 templates_edit.php:152
+#: templates_add.php:136 templates_copy.php:152 templates_edit.php:170
 msgid "Sets"
 msgstr "Vorlagengruppen"
 
-#: templates_add.php:140 templates_copy.php:157 templates_edit.php:157
+#: templates_add.php:140 templates_copy.php:157 templates_edit.php:175
 msgid "Please select a template set"
 msgstr "Bitte wählen Sie eine Vorlagengruppe"
 
-#: templates_add.php:149 templates_copy.php:167 templates_edit.php:167
+#: templates_add.php:149 templates_copy.php:167 templates_edit.php:185
 msgid "A template with the given name already exists"
 msgstr "Eine gleichnamige Seitenvorlage existiert bereits"
 
@@ -5066,11 +5130,19 @@ msgstr ""
 msgid "Duplicate template"
 msgstr "Seitenvorlage duplizieren"
 
-#: templates_edit.php:148
+#: templates_edit.php:146
+msgid "set_request is expected to be numeric"
+msgstr "Die Referenz muss einen numerischen Wert haben"
+
+#: templates_edit.php:152
+msgid "type_request is expected to be numeric"
+msgstr "Die Referenz muss einen numerischen Wert haben"
+
+#: templates_edit.php:166
 msgid "Selected type is out of range"
 msgstr "Der gewählte Seitentyp liegt außerhalb des gültigen Wertebereiches"
 
-#: templates_edit.php:158
+#: templates_edit.php:176
 msgid "Selected set is out of range"
 msgstr ""
 "Die gewählte Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
