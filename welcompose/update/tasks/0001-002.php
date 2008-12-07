@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id: 0001-001.php 1195 2008-10-09 15:32:18Z og@creatics.de $
+ * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Olaf Gleba
