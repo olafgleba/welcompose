@@ -32,6 +32,7 @@ border: 0 none;
 }
 table td {
 padding: 4px;
+background-color:#f9f9f9;
 }
 
 a {
@@ -39,22 +40,22 @@ text-decoration: none;
 cursor: pointer;
 }
 a:link, a:visited {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 }
 a:hover {
-color: #00AE2C;
+color: #ff620d;
 background: transparent;
 text-decoration: underline;
 }
 a:active, a:focus {
 color: #fff;
-background: #0c3;
+background: #ff620d;
 }
 
 /* Table colors */
 .TableHeadingColor td {
-background: #0c3;
+background: #ff620d;
 color: #fff;
 border: 0 none;
 }
@@ -84,7 +85,7 @@ background-color:#f9f9f9;
 font-size: 100%;
 }
 .NavBarCell1Rev {
-background-color:#0c3;
+background-color:#ff620d;
 font-size: 100%;
 color: #fff;
 }

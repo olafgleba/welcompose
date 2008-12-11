@@ -33,9 +33,8 @@ parent.document.title="Globals";
   </TR>
 </TABLE>
 </TD>
-<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
-<B>Welcompose Publishing System</B>
-</EM>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3>
+<B>Welcompose<sup><small>TM</small></sup> Javascript API</B>
 </TD
 </TR>
 
@@ -128,7 +127,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#!s!_applyError">_applyError</A></B>(&lt;object&gt; exception)
+	       <A HREF="#!s!_applyError">_applyError</A></B>(&lt;object&gt; exception, additionalStr)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -157,24 +156,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TR BGCOLOR="white" CLASS="TableRowColor">
       <TD ALIGN="right" VALIGN="top" WIDTH="1%">
 	 <FONT SIZE="-1">
-	    <CODE>&lt;static&gt;&nbsp;Object</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#!s!_compare">_compare</A></B>(string)
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 UNDER DEVELOPMENT
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&lt;static&gt;&nbsp;Bool</CODE>
+	    <CODE>&lt;static&gt;&nbsp;Number</CODE>
 	 </FONT>
       </TD>
       <TD>
@@ -185,57 +167,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	 Define debug output string.
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&lt;static&gt;&nbsp;Object</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#!s!_setBrowserString">_setBrowserString</A></B>()
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 UNDER DEVELOPMENT
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&lt;static&gt;&nbsp;Object</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#!s!_setBrowserStringOS">_setBrowserStringOS</A></B>()
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 UNDER DEVELOPMENT
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&lt;static&gt;&nbsp;Object</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#!s!_setBrowserStringVersion">_setBrowserStringVersion</A></B>()
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 UNDER DEVELOPMENT
       </TD>
    </TR>
 
@@ -283,7 +214,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 
    <A NAME="!s!_applyError"><!-- --></A>
    <H3>_applyError</H3>
-   <PRE>&lt;static&gt; Object <B>_applyError</B>(&lt;object&gt; exception)</PRE>
+   <PRE>&lt;static&gt; Object <B>_applyError</B>(&lt;object&gt; exception, additionalStr)</PRE>
    
       <UL>Display exception alert within the try/catch handling
  relating to given debug variable value.
@@ -293,7 +224,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 try {
 	<contents>
 } catch (e) {
-	_applyError(e);
+	_applyError(e, additionalStr);
 }</code></pre></UL>
    
 
@@ -352,31 +283,9 @@ this.req = _buildXMLHTTPRequest();
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
-   <A NAME="!s!_compare"><!-- --></A>
-   <H3>_compare</H3>
-   <PRE>&lt;static&gt; Object <B>_compare</B>(string)</PRE>
-   
-      <UL>UNDER DEVELOPMENT</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception</UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
    <A NAME="!s!_debug"><!-- --></A>
    <H3>_debug</H3>
-   <PRE>&lt;static&gt; Bool <B>_debug</B>()</PRE>
+   <PRE>&lt;static&gt; Number <B>_debug</B>()</PRE>
    
       <UL>Define debug output string. 
 
@@ -395,72 +304,6 @@ this.req = _buildXMLHTTPRequest();
    
 
    <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="!s!_setBrowserString"><!-- --></A>
-   <H3>_setBrowserString</H3>
-   <PRE>&lt;static&gt; Object <B>_setBrowserString</B>()</PRE>
-   
-      <UL>UNDER DEVELOPMENT</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception</UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="!s!_setBrowserStringOS"><!-- --></A>
-   <H3>_setBrowserStringOS</H3>
-   <PRE>&lt;static&gt; Object <B>_setBrowserStringOS</B>()</PRE>
-   
-      <UL>UNDER DEVELOPMENT</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception</UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="!s!_setBrowserStringVersion"><!-- --></A>
-   <H3>_setBrowserStringVersion</H3>
-   <PRE>&lt;static&gt; Object <B>_setBrowserStringVersion</B>()</PRE>
-   
-      <UL>UNDER DEVELOPMENT</UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception</UL>
-   </UL>
    
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
@@ -489,10 +332,9 @@ this.req = _buildXMLHTTPRequest();
   </TR>
 </TABLE>
 </TD>
-<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
-<B>Welcompose Publishing System</B>
-</EM>
-</TD
+<TD ALIGN="right" BGCOLOR="#EEEEFF" VALIGN="middle" ROWSPAN=3>
+<B>Welcompose<sup><small>TM</small></sup> Javascript API</B>
+</TD>
 </TR>
 
 <TR>
@@ -531,6 +373,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 10 08:00:14 2008</div>
 </BODY>
 </HTML>

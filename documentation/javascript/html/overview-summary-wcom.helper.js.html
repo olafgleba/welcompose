@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>
-Welcompose Publishing System Overview
+Welcompose<sup><small>TM</small></sup> Javascript API Overview
 </title>
 <link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 <script>
@@ -36,9 +36,8 @@ function asd() {
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top">
-<em>
-<b>Welcompose Publishing System</b></em>
+<td bgcolor="#EEEEFF" align="right" valign="middle">
+<b>Welcompose<sup><small>TM</small></sup> Javascript API</b>
 </td>
 </tr>
 
@@ -107,89 +106,6 @@ function asd() {
 
 <!-- ========== METHOD SUMMARY =========== -->
 
-	<a name="method_summary"><!-- --></a>
-	<table border="1" cellpadding="3" cellspacing="0" width="100%">
-		<tr bgcolor="#CCCCFF" class="TableHeadingColor">
-			<td colspan=2>
-				<font size="+2">
-					<b>Method Summary</b>
-				</font>
-			</td>
-		</tr>
-	
-		
-		   <tr bgcolor="white" class="TableRowColor">
-		      <td align="right" valign="top" width="1%">
-			 <font size="-1">
-			    <code>static&nbsp;Object</code>
-			 </font>
-		      </td>
-		      <td>
-			 <code>
-			    <b>
-			       <a href="Globals.html#!s!_compare">_compare</a></b>(string)
-			 </code>
-			 <br>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 UNDER DEVELOPMENT
-		      </td>
-		   </tr>
-		
-		   <tr bgcolor="white" class="TableRowColor">
-		      <td align="right" valign="top" width="1%">
-			 <font size="-1">
-			    <code>static&nbsp;Object</code>
-			 </font>
-		      </td>
-		      <td>
-			 <code>
-			    <b>
-			       <a href="Globals.html#!s!_setBrowserString">_setBrowserString</a></b>()
-			 </code>
-			 <br>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 UNDER DEVELOPMENT
-		      </td>
-		   </tr>
-		
-		   <tr bgcolor="white" class="TableRowColor">
-		      <td align="right" valign="top" width="1%">
-			 <font size="-1">
-			    <code>static&nbsp;Object</code>
-			 </font>
-		      </td>
-		      <td>
-			 <code>
-			    <b>
-			       <a href="Globals.html#!s!_setBrowserStringOS">_setBrowserStringOS</a></b>()
-			 </code>
-			 <br>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 UNDER DEVELOPMENT
-		      </td>
-		   </tr>
-		
-		   <tr bgcolor="white" class="TableRowColor">
-		      <td align="right" valign="top" width="1%">
-			 <font size="-1">
-			    <code>static&nbsp;Object</code>
-			 </font>
-		      </td>
-		      <td>
-			 <code>
-			    <b>
-			       <a href="Globals.html#!s!_setBrowserStringVersion">_setBrowserStringVersion</a></b>()
-			 </code>
-			 <br>
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 UNDER DEVELOPMENT
-		      </td>
-		   </tr>
-		
-	
-	</table>
-    <p>
-
 <!-- ========== END METHOD SUMMARY =========== -->
 
 
@@ -197,7 +113,7 @@ function asd() {
  * Project: Welcompose
  * File: wcom.helper.js
  *
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  *
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -207,19 +123,19 @@ function asd() {
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id: wcom.helper.js 734 2006-12-12 16:43:13Z olaf $
+ * $Id: wcom.helper.js 1211 2008-11-01 09:28:01Z og<span class="attrib">@creatics</span>.de $
  *
- * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@copyright</span> 2008 creatics media.systems, Olaf Gleba
  * <span class="attrib">@author</span> Olaf Gleba
  * <span class="attrib">@package</span> Welcompose
- * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */</span>
 
 <span class="comment">/** 
  * <span class="attrib">@fileoverview</span> Comprised javascript helper functions.
  * It contains functions that may be used application wide.
+ *
  */</span>
-
 
 
 <span class="comment">/**
@@ -249,46 +165,56 @@ Helper.<span class="reserved">prototype</span> = new Base();
  * Instance Methods from prototype <span class="attrib">@class</span> Helper
  */</span>
 Helper.<span class="reserved">prototype</span>.launchPopup = Helper_launchPopup;
+
+Helper.<span class="reserved">prototype</span>.getTextConverterValue = Helper_getTextConverterValue;
+Helper.<span class="reserved">prototype</span>.getSelectionText = Helper_getSelectionText;
+Helper.<span class="reserved">prototype</span>.getDelimiterValue = Helper_getDelimiterValue;
+Helper.<span class="reserved">prototype</span>.getPagerPage = Helper_getPagerPage;
+Helper.<span class="reserved">prototype</span>.getInsertType = Helper_getInsertType;
 Helper.<span class="reserved">prototype</span>.closePopup = Helper_closePopup;
 Helper.<span class="reserved">prototype</span>.closeLinksPopup = Helper_closeLinksPopup;
 Helper.<span class="reserved">prototype</span>.closePopupTrack = Helper_closePopupTrack;
 Helper.<span class="reserved">prototype</span>.closePopupTrackNoAlert = Helper_closePopupTrackNoAlert;
 Helper.<span class="reserved">prototype</span>.lowerOpacity = Helper_lowerOpacity;
 Helper.<span class="reserved">prototype</span>.lowerOpacityOnUpload = Helper_lowerOpacityOnUpload;
-Helper.<span class="reserved">prototype</span>.unsupportsEffects = Helper_unsupportsEffects;
-Helper.<span class="reserved">prototype</span>.unsupportsElems = Helper_unsupportsElems;
+Helper.<span class="reserved">prototype</span>.isBrowser = Helper_isBrowser;
 Helper.<span class="reserved">prototype</span>.defineWindowX = Helper_defineWindowX;
 Helper.<span class="reserved">prototype</span>.defineWindowY = Helper_defineWindowY;
+Helper.<span class="reserved">prototype</span>.definePageY = Helper_definePageY;
 Helper.<span class="reserved">prototype</span>.showNextNode = Helper_showNextNode;
+Helper.<span class="reserved">prototype</span>.showNextNodeBoxes = Helper_showNextNodeBoxes;
 Helper.<span class="reserved">prototype</span>.loaderPagesLinks = Helper_loaderPagesLinks;
 Helper.<span class="reserved">prototype</span>.showResponsePagesSecondLinks = Helper_showResponsePagesSecondLinks;
 Helper.<span class="reserved">prototype</span>.showResponsePagesThirdLinks = Helper_showResponsePagesThirdLinks;
-Helper.<span class="reserved">prototype</span>.insertTagsFromPopup = Helper_insertTagsFromPopup;
-Helper.<span class="reserved">prototype</span>.insertTags = Helper_insertTags;
-Helper.<span class="reserved">prototype</span>.insertInternalLink = Helper_insertInternalLink;
-Helper.<span class="reserved">prototype</span>.insertInternalLinkNoHref = Helper_insertInternalLinkNoHref;
-Helper.<span class="reserved">prototype</span>.insertInternalLinkGlobalTemplates = Helper_insertInternalLinkGlobalTemplates;
-Helper.<span class="reserved">prototype</span>.insertInternalLinkGlobalFiles = Helper_insertInternalLinkGlobalFiles;
-Helper.<span class="reserved">prototype</span>.insertInternalLinkStructuralTemplates = Helper_insertInternalLinkStructuralTemplates;
-Helper.<span class="reserved">prototype</span>.showResponseStructuralTemplates = Helper_showResponseStructuralTemplates;
+Helper.<span class="reserved">prototype</span>.insertTagsCallbacks = Helper_insertTagsCallbacks;
+Helper.<span class="reserved">prototype</span>.insertTagsFromPopupCallbacks = Helper_insertTagsFromPopupCallbacks;
+Helper.<span class="reserved">prototype</span>.processCallbacks = Helper_processCallbacks;
+Helper.<span class="reserved">prototype</span>.showResponseProcessCallbacks = Helper_showResponseProcessCallbacks;
+Helper.<span class="reserved">prototype</span>.callbacksInsert = Helper_callbacksInsert;
 Helper.<span class="reserved">prototype</span>.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.<span class="reserved">prototype</span>.loaderChangeBlogCommentStatus = Helper_loaderChangeBlogCommentStatus;
 Helper.<span class="reserved">prototype</span>.showResponseChangeBlogCommentStatus = Helper_showResponseChangeBlogCommentStatus;
 Helper.<span class="reserved">prototype</span>.showFileUploadMessage = Helper_showFileUploadMessage;
 Helper.<span class="reserved">prototype</span>.validate = Helper_validate;
 Helper.<span class="reserved">prototype</span>.confirmDelNavAction = Helper_confirmDelNavAction;
+Helper.<span class="reserved">prototype</span>.confirmDelPageAction = Helper_confirmDelPageAction;
+Helper.<span class="reserved">prototype</span>.confirmDelProjectAction = Helper_confirmDelProjectAction;
 Helper.<span class="reserved">prototype</span>.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
 Helper.<span class="reserved">prototype</span>.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.<span class="reserved">prototype</span>.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.<span class="reserved">prototype</span>.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
-Helper.<span class="reserved">prototype</span>.getDelimiterValue = Helper_getDelimiterValue;
-Helper.<span class="reserved">prototype</span>.getPagerPage = Helper_getPagerPage;
 Helper.<span class="reserved">prototype</span>.getAttrParentNode = Helper_getAttrParentNode;
+Helper.<span class="reserved">prototype</span>.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.<span class="reserved">prototype</span>.getAttr = Helper_getAttr;
 Helper.<span class="reserved">prototype</span>.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.<span class="reserved">prototype</span>.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.<span class="reserved">prototype</span>.getDataParentNode = Helper_getDataParentNode;
-
+Helper.<span class="reserved">prototype</span>.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
+Helper.<span class="reserved">prototype</span>.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
+Helper.<span class="reserved">prototype</span>.URLify = Helper_URLify;
+Helper.<span class="reserved">prototype</span>.adoptBox = Helper_adoptBox;
+Helper.<span class="reserved">prototype</span>.loaderAdoptBox = Helper_loaderAdoptBox;
+Helper.<span class="reserved">prototype</span>.showResponseAdoptBox = Helper_showResponseAdoptBox;
 
 
 <span class="comment">/**
@@ -301,65 +227,203 @@ Helper.<span class="reserved">prototype</span>.getDataParentNode = Helper_getDat
  * 
  * &lt;br /&gt;&lt;br /&gt;Example:
  * &lt;pre&gt;&lt;code&gt;
-Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this);
+Helper.launchPopup('mm_upload', this);
 &lt;/code&gt;&lt;/pre&gt;
  * 
  * <span class="attrib">@see</span> #lowerOpacity
- * <span class="attrib">@param</span> {string} width Width for the window to launch 
- * <span class="attrib">@param</span> {string} height Height for the window to launch
- * <span class="attrib">@param</span> {string} wname The Name for the window to launch
+ * <span class="attrib">@see</span> #getPagerPage
  * <span class="attrib">@param</span> {string} trigger Switch case condition which url to use
  * <span class="attrib">@param</span> {object} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_launchPopup (width, height, wname, trigger, elem)
+<span class="reserved">function</span> Helper_launchPopup (trigger, elem)
 {
 	try {
 		<span class="comment">// properties</span>
 		<span class="reserved">this</span>.elem = elem;
 		<span class="reserved">this</span>.trigger = trigger;
 		
-		Helper.lowerOpacity();
+		Helper.lowerOpacity();		
+		Helper.getPagerPage();
 		
 		switch (<span class="reserved">this</span>.trigger) {
 			case <span class="literal">'mm_upload'</span> :
-					Helper.getPagerPage();
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedUploadUrl + <span class="literal">'?pager_page='</span> + pager_page;
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedUploadPath + <span class="literal">'?pager_page='</span> + Helper.getPagerPage();
 				break;
 			case <span class="literal">'mm_edit'</span> :
-					Helper.getPagerPage();
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedEditUrl + <span class="literal">'?id='</span> + <span class="reserved">this</span>.elem.id + <span class="literal">'&amp;pager_page='</span> + pager_page;
-				break;
-			case <span class="literal">'pages_internal_links'</span> :
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parsePagesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name;
-				break;
-			case <span class="literal">'pages_internal_links_NoHref'</span> :
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parsePagesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;control=NoHref'</span>;
-				break;
-			case <span class="literal">'globaltemplates_internal_links'</span> :
-					Helper.getDelimiterValue();
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseGlobalTemplatesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;delimiter='</span> + delimiter;
-				break;
-			case <span class="literal">'globalfiles_internal_links'</span> :
-					Helper.getDelimiterValue();
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseGlobalFilesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name + <span class="literal">'&amp;delimiter='</span> + delimiter;
-				break;
-			case <span class="literal">'structuraltemplates_internal_links'</span> :
-					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseStructuralTemplatesLinksUrl + <span class="literal">'?target='</span> + <span class="reserved">this</span>.elem.name;
+					<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedEditPath + <span class="literal">'?id='</span> + <span class="reserved">this</span>.elem.id + <span class="literal">'&amp;pager_page='</span> + Helper.getPagerPage();
 				break;
 		}
 		<span class="comment">// properties</span>
 		<span class="reserved">this</span>.targetUrl = <span class="reserved">this</span>.url;
-		<span class="reserved">this</span>.targetName = wname;
-		<span class="reserved">this</span>.targetWidth = width;
-		<span class="reserved">this</span>.targetHeight = height;
+		<span class="reserved">this</span>.targetName = <span class="reserved">this</span>.trigger;
+		<span class="reserved">this</span>.targetWidth = <span class="reserved">this</span>.callbacksPopupWindowWidth745;
+		<span class="reserved">this</span>.targetHeight = <span class="reserved">this</span>.callbacksPopupWindowHeight634;
 		<span class="reserved">this</span>.target = window.open(<span class="reserved">this</span>.targetUrl, <span class="reserved">this</span>.targetName, 
 				<span class="literal">"scrollbars=yes,width="</span>+<span class="reserved">this</span>.targetWidth+<span class="literal">",height="</span>+<span class="reserved">this</span>.targetHeight+<span class="literal">""</span>);
 		<span class="reserved">this</span>.resWidth = Helper.defineWindowX(<span class="reserved">this</span>.targetWidth);
-		<span class="reserved">this</span>.resHeight = Helper.defineWindowY();
-		
+		<span class="reserved">this</span>.resHeight = Helper.defineWindowY();	
 		<span class="reserved">this</span>.target.moveBy(<span class="reserved">this</span>.resWidth, <span class="reserved">this</span>.resHeight);
 		<span class="reserved">this</span>.target.focus();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get current text converter form value.
+ * 
+ * <span class="attrib">@see</span> #processCallbacks
+ * <span class="attrib">@see</span> Mediamanager#processMediaCallbacks
+ * <span class="attrib">@returns</span> text_converter
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getTextConverterValue ()
+{
+	try {		
+		<span class="comment">// init</span>
+		var text_converter;
+		
+		var form_name = Helper.getAttr(<span class="literal">'id'</span>, document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]);
+		var el_name = <span class="literal">'text_converter'</span>;
+		var el_id = form_name + <span class="literal">'_text_converter'</span>;
+			
+		<span class="reserved">if</span> ($(el_id)) {
+			var e = document.forms[form_name].elements[el_name];		
+			<span class="reserved">for</span> (var i = 0; i &lt; e.length; i++) {
+				<span class="reserved">if</span> (e.options[i].selected == true)
+					var _text_converter = e.options[i].value;
+			}
+			text_converter = _text_converter;
+		} <span class="reserved">else</span> {
+			text_converter = 0;
+		}
+		<span class="reserved">return</span> text_converter;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get current textarea selection.
+ * 
+ * <span class="attrib">@see</span> #processCallbacks
+ * <span class="attrib">@see</span> Mediamanager#processMediaCallbacks
+ * <span class="attrib">@returns</span> text
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getSelectionText(el)
+{
+	try {
+		<span class="reserved">if</span> (el) {
+			<span class="comment">// used within callacks</span>
+			var txtarea = el.replace(/^(_)(.+$)/, <span class="literal">'$2'</span>);
+			txtarea = $(txtarea);
+		} <span class="reserved">else</span> {
+			<span class="comment">// used within mediamanager callacks</span>
+			txtarea = $(form_target);
+		}
+		
+		<span class="comment">// init</span>
+		var text;
+		
+		<span class="reserved">if</span>(document.selection) {
+			var theSelection = document.selection.createRange().text;
+			text = theSelection;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			text = (txtarea.value).substring(startPos, endPos);
+		} <span class="reserved">else</span> {
+			text = <span class="literal">''</span>;
+		}
+		<span class="reserved">return</span> text;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get current delimiter value.
+ * &lt;br /&gt;
+ * In some cases it is required to change the delimiter to avoid syntax
+ * conflicts while inserting references (e.g. working with cascading
+ * style sheets or javascript, which uses brackets also).
+ * 
+ * <span class="attrib">@see</span> #processCallbacks
+ * <span class="attrib">@returns</span> delimiter
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getDelimiterValue()
+{
+	try {
+		<span class="comment">// init</span>
+		var delimiter;
+		
+		<span class="reserved">if</span> ($(<span class="literal">'global_template_change_delimiter'</span>)) {
+			delimiter = $F(<span class="literal">'global_template_change_delimiter'</span>);
+		} <span class="reserved">else</span> {
+			delimiter = <span class="literal">''</span>;
+		}
+		<span class="reserved">return</span> delimiter;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get the current pager page value.
+ * &lt;br /&gt;
+ * This is needed for Mediamanager action popups (&lt;em&gt;upload&lt;/em&gt;, &lt;em&gt;edit&lt;/em&gt;)
+ * which supposed to refresh the content display on close of popup.
+ * 
+ * <span class="attrib">@see</span> #launchPopup
+ * <span class="attrib">@see</span> #processCallbacks
+ * <span class="attrib">@see</span> Mediamanager#processMediaCallbacks
+ * <span class="attrib">@returns</span> pager_page
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getPagerPage()
+{
+	try {
+		<span class="comment">// init</span>
+		var pager_page;
+		
+		<span class="reserved">if</span>($(<span class="literal">'pager_page_container'</span>)) {
+			pager_page = $(<span class="literal">'pager_page_container'</span>).firstChild.nodeValue;
+		} <span class="reserved">else</span> {
+			pager_page = <span class="literal">''</span>;
+		}
+		<span class="reserved">return</span> pager_page;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Get current insert type url string.
+ * &lt;br /&gt;
+ * We fetch the form tag action string and perform a regex.
+ * This is used within {<span class="attrib">@link</span> #processCallbacks} to differ how to treat
+ * the callbacks strings we build in callbacks.php.
+ * 
+ * <span class="attrib">@see</span> #processCallbacks
+ * <span class="attrib">@returns</span> insert_type
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getInsertType ()
+{
+	try {		
+		var insert_type_path = Helper.getAttr(<span class="literal">'action'</span>, document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]);
+		var insert_type = insert_type_path.replace(/^\/(.+)\/(.+)\/(.+$)/, <span class="literal">'$2'</span>);
+		
+		<span class="reserved">if</span> (insert_type == <span class="literal">'templating'</span>) {
+			insert_type = <span class="literal">'InternalReference'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (insert_type == <span class="literal">'content'</span>) {
+			insert_type = <span class="literal">'InternalLink'</span>;
+		}
+		<span class="reserved">return</span> insert_type;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -487,10 +551,14 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		<span class="reserved">if</span> (typeof audit == <span class="literal">'undefined'</span>) {
 			audit = false;
 		}
-		<span class="reserved">if</span> (audit !== true) {
+		<span class="reserved">if</span> (typeof submitted == <span class="literal">'undefined'</span>) {
+			submitted = false;
+		}
+		<span class="reserved">if</span> (audit !== true &amp;&amp; submitted !== true) {
 			self.opener.$(<span class="literal">'lyLowerOpacity'</span>).style.display = <span class="literal">'none'</span>;
 			<span class="comment">// reset global vars</span>
 			audit = false;
+			submitted = false;
 		}	
 	} catch (e) {
 		_applyError(e);
@@ -555,7 +623,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
         <span class="reserved">this</span>.buildHeight = <span class="reserved">this</span>.lyContainer.offsetHeight;
         <span class="reserved">this</span>.buildWidth = <span class="reserved">this</span>.lyContainer.offsetWidth;
 		<span class="reserved">this</span>.imageStr = <span class="literal">'&lt;img src="'</span> + <span class="reserved">this</span>.imagePath + <span class="literal">'" width="'</span> + <span class="reserved">this</span>.buildWidth + <span class="literal">'" height="'</span> + <span class="reserved">this</span>.buildHeight +<span class="literal">'" alt="" /&gt;'</span>;
-		<span class="reserved">this</span>.target_toLower = $(<span class="literal">'lyLowerOpacity'</span>);
+		<span class="reserved">this</span>.targetToLower = $(<span class="literal">'lyLowerOpacity'</span>);
 
         <span class="reserved">if</span> (<span class="reserved">this</span>.targetToLower) {
 		 	<span class="reserved">this</span>.targetToLower.style.display = <span class="reserved">this</span>.cDisplay;
@@ -573,20 +641,30 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * UNDER DEVELOPMENT
- * 
+ * Check browser and his version.
+ * &lt;br /&gt;
+ * Sometimes we need this to distinguish between browser
+ * and versions to intercept their different abilities.
+ *
+ * <span class="attrib">@returns</span> Boolean
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_unsupportsEffects(exception)
+<span class="reserved">function</span> Helper_isBrowser(_browser, _version)
 {	
 	try {
-		<span class="comment">//properties</span>
 		<span class="reserved">this</span>.browser = _setBrowserString();
 		<span class="reserved">this</span>.version = _setBrowserStringVersion();
-		<span class="reserved">this</span>.exception = exception;
 			
-		<span class="reserved">if</span> ((<span class="reserved">this</span>.browser == <span class="literal">"Internet Explorer"</span>) || (<span class="reserved">this</span>.browser == <span class="literal">"Safari"</span> &amp;&amp; !<span class="reserved">this</span>.exception)) {
-			<span class="reserved">return</span> true;
+		<span class="reserved">if</span> (<span class="reserved">this</span>.browser == _browser) {
+			<span class="reserved">if</span> (_version) {
+				<span class="reserved">if</span>(<span class="reserved">this</span>.version == _version) {
+					<span class="reserved">return</span> true;
+				} <span class="reserved">else</span> {
+					<span class="reserved">return</span> false;
+				}
+			} <span class="reserved">else</span> {
+				<span class="reserved">return</span> true;
+			}
 		} <span class="reserved">else</span> { 
 			<span class="reserved">return</span> false;
 		}
@@ -596,32 +674,11 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * UNDER DEVELOPMENT
- * 
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_unsupportsElems(exception)
-{	
-	try {
-		<span class="comment">//properties</span>
-		<span class="reserved">this</span>.browser = _setBrowserString();
-		<span class="reserved">this</span>.version = _setBrowserStringVersion();
-		<span class="reserved">this</span>.exception = exception;
-		
-		<span class="reserved">if</span> ((<span class="reserved">this</span>.browser == <span class="literal">"Internet Explorer"</span>) || (<span class="reserved">this</span>.browser == <span class="literal">"Safari"</span> &amp;&amp; !<span class="reserved">this</span>.exception)) {
-			<span class="reserved">return</span> true;
-		} <span class="reserved">else</span> { 
-			<span class="reserved">return</span> false;
-		}
-		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * UNDER DEVELOPMENT
- * 
+ * Process given navigator.agent string to find out browser name.
+ * Helper for {<span class="attrib">@link</span> #isBrowser}.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@returns</span> var
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> _compare (string)
@@ -636,8 +693,11 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * UNDER DEVELOPMENT
- * 
+ * Get navigator.agent, compare it, fill global var and return it.
+ * Helper for {<span class="attrib">@link</span> #isBrowser}.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@returns</span> var browser
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> _setBrowserString ()
@@ -647,13 +707,16 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		var browser;
 
 		<span class="reserved">if</span> (_compare(<span class="literal">'safari'</span>)) {
-			browser = <span class="literal">'Safari'</span>;
+			browser = <span class="literal">'sa'</span>;
 		}
 		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'msie'</span>)) {
-			browser = <span class="literal">'Internet Explorer'</span>;
+			browser = <span class="literal">'ie'</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'firefox'</span>)) {
+			browser = <span class="literal">'ff'</span>;
 		}
 		<span class="reserved">else</span> {
-			browser = <span class="literal">'Unknown Browser'</span>;
+			browser = <span class="literal">''</span>;
 		}
 		<span class="reserved">return</span> browser;
 	} catch (e) {
@@ -662,51 +725,20 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * UNDER DEVELOPMENT
- * 
+ * Process given navigator.agent string to find out agent version.
+ * Helper for {<span class="attrib">@link</span> #isBrowser}.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@returns</span> var browser
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> _setBrowserStringVersion ()
 {
 	try {			
 		_setBrowserString();
-		var version;
-		
+		var version;		
 		version = detect.charAt(res + thestring.length);
-
 		<span class="reserved">return</span> version;
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * UNDER DEVELOPMENT
- * 
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> _setBrowserStringOS ()
-{
-	try {			
-		detect = navigator.userAgent.toLowerCase();
-		var os;
-		
-		<span class="reserved">if</span> (_compare(<span class="literal">'linux'</span>)) {
-			os = <span class="literal">'Linux'</span>;
-		}
-		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'x11'</span>)) {
-			os = <span class="literal">'Unix'</span>;
-		}
-		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'win'</span>)) {
-			os = <span class="literal">'Windows'</span>;
-		}
-		<span class="reserved">else</span> <span class="reserved">if</span> (_compare(<span class="literal">'mac'</span>)) {
-			os = <span class="literal">'Mac'</span>;
-		}
-		<span class="reserved">else</span> {
-			os = <span class="literal">'Unknown operating system'</span>;
-		}
-		<span class="reserved">return</span> os;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -729,16 +761,16 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		<span class="reserved">this</span>.el = elemWidth;
 		var x;
 		
+		<span class="comment">// all except Explorer</span>
 		<span class="reserved">if</span> (self.innerHeight) {
-			<span class="comment">// all except Explorer {</span>
 			x = Math.round(self.innerWidth) - (Math.round(<span class="reserved">this</span>.el));
 		}
+		<span class="comment">// Explorer 6 Strict Mode</span>
 		<span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.clientHeight) {
-			<span class="comment">// Explorer 6 Strict Mode</span>
 			x = Math.round(document.documentElement.clientWidth) - (Math.round(<span class="reserved">this</span>.el));
 		}
+		<span class="comment">// other Explorers</span>
 		<span class="reserved">else</span> <span class="reserved">if</span> (document.body) {
-			<span class="comment">// other Explorers</span>
 			x = Math.round(document.body.clientWidth) - (Math.round(<span class="reserved">this</span>.el));
 		}
 		x = Math.round(x/2);
@@ -751,7 +783,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 <span class="comment">/**
  * Define and resize window height.
  * &lt;br /&gt;
- * Center the new window depending on calculated height
+ * Center the new window depending on calculated height.
  * 
  * <span class="attrib">@see</span> #launchPopup
  * <span class="attrib">@throws</span> applyError on exception
@@ -763,17 +795,50 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		<span class="comment">//properties</span>
 		var y;
 	
-		<span class="reserved">if</span> (self.innerHeight) { 
 		<span class="comment">// all except Explorer</span>
+		<span class="reserved">if</span> (self.innerHeight) { 
 			y = Math.round(self.innerHeight/6);
 		}
+		<span class="comment">// Explorer 6 Strict Mode</span>
 		<span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.clientHeight) {
-			<span class="comment">// Explorer 6 Strict Mode</span>
 			y = Math.round(document.documentElement.clientHeight/6);
 		}
+		<span class="comment">// other Explorers</span>
 		<span class="reserved">else</span> <span class="reserved">if</span> (document.body) {
-			<span class="comment">// other Explorers</span>
 			y = Math.round(document.body.clientHeight/6);
+		}
+		<span class="reserved">return</span> y;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Define window scroll offset.
+ * &lt;br /&gt;
+ * Returns the scroll offset of page.
+ * Adapted from http://www.quirksmode.org/
+ * 
+ * <span class="attrib">@see</span> #loaderChangeBlogCommentStatus
+ * <span class="attrib">@throws</span> applyError on exception
+ * <span class="attrib">@return</span> {number} y
+ */</span>
+<span class="reserved">function</span> Helper_definePageY ()
+{
+	try {
+		var y;
+		
+		<span class="comment">// all except Explorer</span>
+		<span class="reserved">if</span> (self.pageYOffset) {
+			y = self.pageYOffset;
+		}
+		<span class="comment">// Explorer 6 Strict</span>
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.scrollTop) {
+			y = document.documentElement.scrollTop;
+		}
+		<span class="comment">// all other Explorers</span>
+		<span class="reserved">else</span> <span class="reserved">if</span> (document.body) {
+			y = document.body.scrollTop;
 		}
 		<span class="reserved">return</span> y;
 	} catch (e) {
@@ -794,17 +859,22 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
  */</span>
 <span class="reserved">function</span> Helper_showNextNode(elem)
 {
-	try {
+	try {		
+		<span class="comment">// init</span>
+		var nextNode;
+		
 		<span class="comment">// get source node id from element</span>
 		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
 		
 		<span class="comment">// get next possible node id</span>
 		<span class="reserved">if</span> (sourceNode.id != <span class="literal">'thirdNode'</span>) {
-			var nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 2);
+			nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 2);
+			<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+				nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 1);
+			}
 		}
-
-		var url = <span class="reserved">this</span>.parsePagesLinksUrl;
-		var pars = <span class="literal">'id='</span> + elem.id +<span class="literal">'&amp;nextNode='</span> + nextNode + <span class="literal">'&amp;control='</span> + control;
+		var url = <span class="reserved">this</span>.parseCallbacksFilePath + elem.name + <span class="literal">'.php'</span>;
+		var pars = <span class="literal">'id='</span> + elem.id +<span class="literal">'&amp;nextNode='</span> + nextNode;	
 		
 		<span class="reserved">if</span> (nextNode == <span class="literal">'secondNode'</span>) {
 		var myAjax = new Ajax.Request(
@@ -824,6 +894,52 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 				parameters : pars,
 				onLoading : Helper.loaderPagesLinks,
 				onComplete : Helper.showResponsePagesThirdLinks
+			});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Show next appropriate DOM node.
+ * &lt;br /&gt;
+ * Used in insert boxes popups to reflect sitemap structure.
+ * 
+ * <span class="attrib">@see</span> #loaderPagesLinks
+ * <span class="attrib">@see</span> #showResponsePagesSecondLinks
+ * <span class="attrib">@see</span> #showResponsePagesThirdLinks
+ * <span class="attrib">@param</span> {var} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_showNextNodeBoxes(elem)
+{
+	try {
+		<span class="comment">//init</span>
+		var nextNode;
+		
+		<span class="comment">// get source node id from element</span>
+		var sourceNode = elem.parentNode.parentNode.parentNode.parentNode.parentNode;
+		
+		<span class="comment">// get next possible node id</span>
+		<span class="reserved">if</span> (sourceNode.id != <span class="literal">'thirdNode'</span>) {
+			nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 2);
+			<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+				nextNode = Helper.getAttrNextSibling(<span class="literal">'id'</span>, sourceNode, 1);
+			}
+		}	
+		<span class="comment">//var url = this.parsePagesBoxesLinksPath;</span>
+		var url = <span class="reserved">this</span>.parseCallbacksFilePath + elem.name + <span class="literal">'.php'</span>;
+		var pars = <span class="literal">'id='</span> + elem.id +<span class="literal">'&amp;nextNode='</span> + nextNode;
+		
+		<span class="reserved">if</span> (nextNode == <span class="literal">'secondNode'</span>) {
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'get'</span>,
+				parameters : pars,
+				onLoading : Helper.loaderPagesLinks,
+				onComplete : Helper.showResponsePagesSecondLinks
 			});
 		}
 	} catch (e) {
@@ -859,9 +975,9 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		Effect.Fade(<span class="literal">'indicator_pagesLinks'</span>, {duration: 0.4});
 		Effect.Appear(<span class="literal">'secondNode'</span>,{duration: 0.6});
 		$(<span class="literal">'secondNode'</span>).innerHTML = req.responseText;		
-		Behaviour.reapply(<span class="literal">'.act_setInternalLink'</span>);
-		Behaviour.reapply(<span class="literal">'.act_setInternalLinkNoHref'</span>);
-		Behaviour.reapply(<span class="literal">'.showNextNode'</span>);
+		Behaviour.reapply(<span class="literal">'a.process_insert'</span>);
+		Behaviour.reapply(<span class="literal">'a.showNextNode'</span>);
+		Behaviour.reapply(<span class="literal">'a.showNextNodeBoxes'</span>);
 		
 	} catch (e) {
 		_applyError(e);
@@ -881,87 +997,9 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		Effect.Fade(<span class="literal">'indicator_pagesLinks'</span>, {duration: 0.4});
 		Effect.Appear(<span class="literal">'thirdNode'</span>,{duration: 0.6});	
 		$(<span class="literal">'thirdNode'</span>).innerHTML = req.responseText;		
-		Behaviour.reapply(<span class="literal">'.act_setInternalLink'</span>);
-		Behaviour.reapply(<span class="literal">'.act_setInternalLinkNoHref'</span>);
-		Behaviour.reapply(<span class="literal">'.showNextNode'</span>);
+		Behaviour.reapply(<span class="literal">'a.process_insert'</span>);
+		Behaviour.reapply(<span class="literal">'a.showNextNode'</span>);
 		
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Process inserting content from a popup.
- * &lt;br /&gt;
- * Adapted from from http://sourceforge.net/projects/wikipedia
- * 
- * <span class="attrib">@see</span> #insertInternalLink
- * <span class="attrib">@see</span> #insertInternalLinkNoHref
- * <span class="attrib">@see</span> #insertInternalLinkGlobalTemplates
- * <span class="attrib">@see</span> #insertInternalLinkGlobalFiles
- * <span class="attrib">@param</span> {string} id Form element to populate
- * <span class="attrib">@param</span> {string} tagOpen Opening part of build string
- * <span class="attrib">@param</span> {string} tagClose Closing part of build string
- * <span class="attrib">@param</span> {string} sampleText Text to set, when we use tagOpen and tagClose
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_insertTagsFromPopup(id, tagOpen, tagClose, sampleText)
-{
-	try {
-		<span class="comment">/*
-		We have to distinguish here, because the IE6 seems to be too dumb to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
-		*/</span>
-	 	<span class="reserved">if</span> (Helper.unsupportsElems(<span class="literal">'safari_exception'</span>)) {
-			var _form_name = id.replace(/(.+)(_.+$)/, <span class="literal">'$1'</span>);
-			var txtarea = opener.document.forms[_form_name].elements[id];
-		} <span class="reserved">else</span> {
-			var txtarea = opener.$(id);
-		}
-		<span class="comment">// IE</span>
-		<span class="reserved">if</span>(opener.document.selection) {
-			var theSelection = opener.document.selection.createRange().text;
-			<span class="reserved">if</span>(!theSelection) { theSelection=sampleText;}
-			txtarea.focus();
-			<span class="reserved">if</span>(theSelection.charAt(theSelection.length - 1) == <span class="literal">" "</span>){<span class="comment">// exclude ending space char, if any</span>
-				theSelection = theSelection.substring(0, theSelection.length - 1);
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose + <span class="literal">" "</span>;
-			} <span class="reserved">else</span> {
-				opener.document.selection.createRange().text = tagOpen + theSelection + tagClose;
-			}
-		<span class="comment">// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable</span>
-		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
-	 		var startPos = txtarea.selectionStart;
-			var endPos = txtarea.selectionEnd;
-			var scrollTop=txtarea.scrollTop;
-			var myText = (txtarea.value).substring(startPos, endPos);
-			<span class="reserved">if</span>(!myText) { myText=sampleText;}
-			<span class="reserved">if</span>(myText.charAt(myText.length - 1) == <span class="literal">" "</span>){ <span class="comment">// exclude ending space char, if any</span>
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + <span class="literal">" "</span>; 
-			} <span class="reserved">else</span> {
-				subst = tagOpen + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
-			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
-			txtarea.selectionStart=cPos;
-			txtarea.selectionEnd=cPos;
-			txtarea.scrollTop=scrollTop;
-		<span class="comment">// All others</span>
-		} <span class="reserved">else</span> {
-			<span class="comment">// Append at the end: Some people find that annoying</span>
-			<span class="comment">//txtarea.value += tagOpen + sampleText + tagClose;</span>
-			<span class="comment">//txtarea.focus();</span>
-			var re=new RegExp(<span class="literal">"\\n"</span>,<span class="literal">"g"</span>);
-			tagOpen=tagOpen.replace(re,<span class="literal">""</span>);
-			tagClose=tagClose.replace(re,<span class="literal">""</span>);
-			opener.document.infoform.infobox.value=tagOpen+sampleText+tagClose;
-			txtarea.focus();
-		}
-		<span class="comment">// reposition cursor if possible</span>
-		<span class="reserved">if</span> (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -970,72 +1008,57 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 <span class="comment">/**
  * Process inserting content.
  * &lt;br /&gt;
- * Adapted from from http://sourceforge.net/projects/wikipedia
+ * Adapted from http://sourceforge.net/projects/wikipedia
  * 
- * <span class="attrib">@see</span> #insertInternalLink
- * <span class="attrib">@see</span> #insertInternalLinkNoHref
- * <span class="attrib">@see</span> #insertInternalLinkGlobalTemplates
- * <span class="attrib">@see</span> #insertInternalLinkGlobalFiles
+ * <span class="attrib">@see</span> Mediamanager#showResponseProcessMediaCallbacks
  * <span class="attrib">@param</span> {string} id Form element to populate
- * <span class="attrib">@param</span> {string} tagOpen Opening part of build string
+ * <span class="attrib">@param</span> {string} str Opening part of build string
  * <span class="attrib">@param</span> {string} tagClose Closing part of build string
- * <span class="attrib">@param</span> {string} sampleText Text to set, when we use tagOpen and tagClose
+ * <span class="attrib">@param</span> {string} sampleText Text to set, when we use str and tagClose
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_insertTags(id, tagOpen, tagClose, sampleText)
+<span class="reserved">function</span> Helper_insertTagsCallbacks(id, str)
 {
 	try {
-		<span class="comment">/*
-		We have to distinguish here, because the IE6 seems to be too dumb to differ between elements
-		which has the same value on different attributes (name, id)	
-		So we serve IE by object forms[elements], while Mozilla be able to use 
-		the standard (pointing the element by document.getElementById()
-		*/</span>
-	 	<span class="reserved">if</span> (Helper.unsupportsElems(<span class="literal">'safari_exception'</span>)) {
-			var _form_name = id.replace(/(.+)(_.+$)/, <span class="literal">'$1'</span>);
+		<span class="comment">/* oberserve this!
+		
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
+		
+	 	if (Helper.isBrowser('ie')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
 			var txtarea = document.forms[_form_name].elements[id];
-		} <span class="reserved">else</span> {
+		} else {
 			var txtarea = $(id);
 		}
+		*/</span>		
+		var txtarea = $(id);
+		
 		<span class="comment">// IE</span>
 		<span class="reserved">if</span>(document.selection) {
 			var theSelection = document.selection.createRange().text;
-			<span class="reserved">if</span>(!theSelection) { theSelection=sampleText;}
 			txtarea.focus();
 			<span class="reserved">if</span>(theSelection.charAt(theSelection.length - 1) == <span class="literal">" "</span>){<span class="comment">// exclude ending space char, if any</span>
 				theSelection = theSelection.substring(0, theSelection.length - 1);
-				document.selection.createRange().text = tagOpen + theSelection + tagClose + <span class="literal">" "</span>;
+				document.selection.createRange().text = str + theSelection + <span class="literal">" "</span>;
 			} <span class="reserved">else</span> {
-				document.selection.createRange().text = tagOpen + theSelection + tagClose;
+				document.selection.createRange().text = str + theSelection;
 			}
-		<span class="comment">// Mozilla -- disabled because it induces a scrolling bug which makes it virtually unusable</span>
+		<span class="comment">// Mozilla</span>
 		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
 	 		var startPos = txtarea.selectionStart;
 			var endPos = txtarea.selectionEnd;
 			var scrollTop=txtarea.scrollTop;
 			var myText = (txtarea.value).substring(startPos, endPos);
-			<span class="reserved">if</span>(!myText) { myText=sampleText;}
-			<span class="reserved">if</span>(myText.charAt(myText.length - 1) == <span class="literal">" "</span>){ <span class="comment">// exclude ending space char, if any</span>
-				subst = tagOpen + myText.substring(0, (myText.length - 1)) + tagClose + <span class="literal">" "</span>; 
-			} <span class="reserved">else</span> {
-				subst = tagOpen + myText + tagClose; 
-			}
-			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);
+			subst = str;
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
 			txtarea.focus();
-			var cPos=startPos+(tagOpen.length+myText.length+tagClose.length);
+			var cPos=startPos+(str.length);
 			txtarea.selectionStart=cPos;
 			txtarea.selectionEnd=cPos;
 			txtarea.scrollTop=scrollTop;
-		<span class="comment">// All others</span>
-		} <span class="reserved">else</span> {
-			<span class="comment">// Append at the end: Some people find that annoying</span>
-			<span class="comment">//txtarea.value += tagOpen + sampleText + tagClose;</span>
-			<span class="comment">//txtarea.focus();</span>
-			var re=new RegExp(<span class="literal">"\\n"</span>,<span class="literal">"g"</span>);
-			tagOpen=tagOpen.replace(re,<span class="literal">""</span>);
-			tagClose=tagClose.replace(re,<span class="literal">""</span>);
-			document.infoform.infobox.value=tagOpen+sampleText+tagClose;
-			txtarea.focus();
 		}
 		<span class="comment">// reposition cursor if possible</span>
 		<span class="reserved">if</span> (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
@@ -1045,120 +1068,199 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * Insert internal page links reference into content.
+ * Process inserting content.
  * &lt;br /&gt;
- * We build a string with required syntax to deliver it to {<span class="attrib">@link</span> #insertTagsFromPopup}
- * and close the popup window afterwards.
+ * Adapted from http://sourceforge.net/projects/wikipedia
  * 
- * <span class="attrib">@see</span> #insertTagsFromPopup
- * <span class="attrib">@param</span> {var} elem Current element
+ * <span class="attrib">@see</span> #showResponseProcessCallbacks
+ * <span class="attrib">@param</span> {string} id Form element to populate
+ * <span class="attrib">@param</span> {string} str Opening part of build string
+ * <span class="attrib">@param</span> {string} tagClose Closing part of build string
+ * <span class="attrib">@param</span> {string} sampleText Text to set, when we use str and tagClose
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_insertInternalLink(elem)
+<span class="reserved">function</span> Helper_insertTagsFromPopupCallbacks(id, str)
 {
 	try {
-		var build;
-		build = <span class="literal">'&lt;a href="'</span>;
-		build += elem.id;
-		build += <span class="literal">'"&gt;'</span>;
+		<span class="comment">/* oberserve this!
 		
-		strStart = build;
-		strEnd = <span class="literal">'&lt;/a&gt;'</span>;
+		We have to distinguish here, because the IE is obviously too dumb to differ between elements
+		which has the same value on different attributes (name, id). Here we have a conflict with
+		the form hidden field attribute. So we serve IE by object forms[elements], while all others
+		are able to use the standards (pointing the element by document.getElementById().
 		
-		Helper.insertTagsFromPopup(formTarget, strStart, strEnd, describeLink);
+		if (Helper.isBrowser('ie')) {
+			var _form_name = id.replace(/(.+)(_.+$)/, '$1');
+			var txtarea = opener.document.forms[_form_name].elements[id];
+		} else {
+			var txtarea = opener.$(id);
+		}
+		*/</span>
+		var txtarea = opener.$(id);
+		
+		<span class="comment">// IE</span>
+		<span class="reserved">if</span>(opener.document.selection) {
+			var theSelection = document.selection.createRange().text;
+			txtarea.focus();
+			<span class="reserved">if</span>(theSelection.charAt(theSelection.length - 1) == <span class="literal">" "</span>){<span class="comment">// exclude ending space char, if any</span>
+				theSelection = theSelection.substring(0, theSelection.length - 1);
+				opener.document.selection.createRange().text = str + theSelection + <span class="literal">" "</span>;
+			} <span class="reserved">else</span> {
+				opener.document.selection.createRange().text = str + theSelection;
+			}
+		<span class="comment">// Mozilla</span>
+		} <span class="reserved">else</span> <span class="reserved">if</span>(txtarea.selectionStart || txtarea.selectionStart == <span class="literal">'0'</span>) {
+	 		var startPos = txtarea.selectionStart;
+			var endPos = txtarea.selectionEnd;
+			var scrollTop=txtarea.scrollTop;
+			var myText = (txtarea.value).substring(startPos, endPos);
+			subst = str;
+			txtarea.value = txtarea.value.substring(0, startPos) + subst + txtarea.value.substring(endPos, txtarea.value.length);		
+			txtarea.focus();
+			var cPos=startPos+(str.length+myText.length);
+			txtarea.selectionStart=cPos;
+			txtarea.selectionEnd=cPos;
+			txtarea.scrollTop=scrollTop;
+		}
+		<span class="comment">// reposition cursor if possible</span>
+		<span class="reserved">if</span> (txtarea.createTextRange) txtarea.caretPos = opener.document.selection.createRange().duplicate();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Process and handle internal callbacks.
+ * &lt;br /&gt;
+ * This function handles all the reference popups within the welcompose admin interface.
+ * 
+ * <span class="attrib">@see</span> #showResponseProcessCallbacks
+ * <span class="attrib">@param</span> {string} elem Current elem to process
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_processCallbacks (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elName = <span class="reserved">this</span>.elem.name;
+		<span class="reserved">this</span>.elTarget = Helper.getAttrNextSibling(<span class="literal">'id'</span>, <span class="reserved">this</span>.elem, 1);
+		
+		<span class="reserved">this</span>.targetHeight = <span class="reserved">this</span>.callbacksPopupWindowHeight634;
+		<span class="reserved">this</span>.targetName = <span class="reserved">this</span>.elTarget;
+		
+		Helper.lowerOpacity();
+		
+		<span class="comment">// used to differ between the popup window width</span>
+		var win_names = {
+			<span class="literal">'pages_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth745,
+			<span class="literal">'structuraltemplates_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth460,
+			<span class="literal">'globalboxes_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth460,
+			<span class="literal">'globalfiles_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth460,
+			<span class="literal">'globaltemplates_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth460,
+			<span class="literal">'boxes_links'</span>: <span class="reserved">this</span>.callbacksPopupWindowWidth745
+		};
+
+		<span class="comment">// temp var used in for loop</span>
+		var _width = <span class="reserved">this</span>.elTarget;
+		
+		<span class="comment">// execute url target width definition</span>
+		<span class="reserved">for</span> (placeholder in win_names) {
+			var n = new RegExp(placeholder, <span class="literal">'gi'</span>);
+			_width = _width.replace(n, win_names[placeholder]);
+			<span class="reserved">this</span>.targetWidth = _width;
+		};
+		
+		<span class="comment">// path definitions for url</span>
+		var url_paths = {
+			<span class="literal">'pages_links'</span>: <span class="literal">'content'</span>,
+			<span class="literal">'structuraltemplates_links'</span>: <span class="literal">'content'</span>,
+			<span class="literal">'globalboxes_links'</span>: <span class="literal">'templating'</span>,
+			<span class="literal">'globalfiles_links'</span>: <span class="literal">'templating'</span>,
+			<span class="literal">'globaltemplates_links'</span>: <span class="literal">'templating'</span>,
+			<span class="literal">'boxes_links'</span>: <span class="literal">'templating'</span>
+		};
+		
+		<span class="comment">// temp var used in for loop</span>
+		var _path = <span class="reserved">this</span>.elTarget;
+		
+		<span class="comment">// execute url paths definition</span>
+		<span class="reserved">for</span> (placeholder in url_paths) {
+			var n = new RegExp(placeholder, <span class="literal">'gi'</span>);
+			_path = _path.replace(n, url_paths[placeholder]);
+			<span class="reserved">this</span>.url = <span class="literal">'../'</span> + _path + <span class="literal">'/'</span> + <span class="reserved">this</span>.parseCallbacksFilePath + <span class="reserved">this</span>.elTarget;
+		};
 	
-		Helper.closeLinksPopup();
+		<span class="comment">// grab enviroment variables</span>
+		<span class="comment">// hash the returned variables</span>
+		var getElems = {
+			id : <span class="reserved">this</span>.elem.id,
+			form_target : <span class="reserved">this</span>.elName,
+			delimiter : Helper.getDelimiterValue(),
+			text : Helper.getSelectionText(<span class="reserved">this</span>.elName),
+			text_converter : Helper.getTextConverterValue(),
+			pager_page : Helper.getPagerPage(),
+			insert_type : Helper.getInsertType()
+		};
+		var o = $H(getElems);
+		var reqString = o.toQueryString();
+						
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.url + <span class="literal">'.php'</span> + <span class="literal">'?'</span> + reqString;	
+		<span class="reserved">this</span>.targetUrl = <span class="reserved">this</span>.url;
+		<span class="reserved">this</span>.target = window.open(<span class="reserved">this</span>.targetUrl, <span class="reserved">this</span>.targetName, 
+				<span class="literal">"scrollbars=yes,width="</span>+<span class="reserved">this</span>.targetWidth+<span class="literal">",height="</span>+<span class="reserved">this</span>.targetHeight+<span class="literal">""</span>);
+		<span class="reserved">this</span>.resWidth = Helper.defineWindowX(<span class="reserved">this</span>.targetWidth);
+		<span class="reserved">this</span>.resHeight = Helper.defineWindowY();
+
+		<span class="reserved">this</span>.target.moveBy(<span class="reserved">this</span>.resWidth, <span class="reserved">this</span>.resHeight);
+		<span class="reserved">this</span>.target.focus();		
 	} catch (e) {
 		_applyError(e);
 	}
 }
 
 <span class="comment">/**
- * Insert internal page links reference into content.
+ * Populate on XMLHttpRequest response.
  * &lt;br /&gt;
- * Get the element id content, deliver it to {<span class="attrib">@link</span> #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var &lt;em&gt;formTarget&lt;/em&gt; comes from the html markup.
- * 
- * <span class="attrib">@see</span> #insertTagsFromPopup
- * <span class="attrib">@param</span> {var} elem Current element
+ * Insert the callback result string.
+ *
+ * <span class="attrib">@see</span> #processMediaCallbacks
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_insertInternalLinkNoHref(elem)
+<span class="reserved">function</span> Helper_callbacksInsert(elem)
 {
 	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Insert internal globaltemplates links reference into content.
- * &lt;br /&gt;
- * Get the element id content, deliver it to {<span class="attrib">@link</span> #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var &lt;em&gt;formTarget&lt;/em&gt; comes from the html markup.
- * 
- * <span class="attrib">@see</span> #insertTagsFromPopup
- * <span class="attrib">@param</span> {var} elem Current element
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_insertInternalLinkGlobalTemplates(elem)
-{
-	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);	
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Insert internal globalfiles links reference into content.
- * &lt;br /&gt;
- * Get the element id content, deliver it to {<span class="attrib">@link</span> #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var &lt;em&gt;formTarget&lt;/em&gt; comes from the html markup.
- * 
- * <span class="attrib">@see</span> #insertTagsFromPopup
- * <span class="attrib">@param</span> {var} elem Current element
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_insertInternalLinkGlobalFiles(elem)
-{
-	try {
-		Helper.insertTagsFromPopup(formTarget, elem.id, <span class="literal">''</span>, <span class="literal">''</span>);
-		Helper.closeLinksPopup();
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Get internal structure templates reference.
- * &lt;br /&gt;
- * Get the appropriate content and populate it unseen into a special,
- * original tag (see {<span class="attrib">@link</span> #showResponseStructuralTemplates}) within
- * the html markup.
- * 
- * <span class="attrib">@see</span> #showResponseStructuralTemplates
- * <span class="attrib">@param</span> {var} elem Current element
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_insertInternalLinkStructuralTemplates(elem)
-{
-	try {		
-		var url = <span class="reserved">this</span>.parseStructuralTemplatesLinksUrl;
-		var pars = <span class="literal">'id='</span> + elem.id;
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		
+		<span class="comment">// hash collected variables</span>
+		var getElems = {
+			id : <span class="reserved">this</span>.elem.id,
+			form_target : form_target,
+			delimiter : delimiter,
+			text : text,
+			text_converter : text_converter,
+			pager_page : pager_page,
+			insert_type : insert_type,
+			type : <span class="reserved">this</span>.elem.name,
+			posting_id : (<span class="reserved">this</span>.elem.name == <span class="literal">'blog_posting'</span>) ? Helper.getAttrNextSibling(<span class="literal">'id'</span>, <span class="reserved">this</span>.elem, 1) : <span class="literal">''</span>,
+			year : (<span class="reserved">this</span>.elem.name == <span class="literal">'archive_year'</span> || <span class="reserved">this</span>.elem.name == <span class="literal">'archive_month'</span>)
+			 			? Helper.getAttrNextSibling(<span class="literal">'id'</span>, <span class="reserved">this</span>.elem, 1) : <span class="literal">''</span>,
+			month : (<span class="reserved">this</span>.elem.name == <span class="literal">'archive_month'</span>) ? Helper.getAttrNextSibling(<span class="literal">'id'</span>, <span class="reserved">this</span>.elem, 2) : <span class="literal">''</span>
+		};
+		var o = $H(getElems);
+		var reqString = o.toQueryString();
+		
+		var url = <span class="reserved">this</span>.parseCallbacksPath;
+		var pars = reqString;
 
 		var myAjax = new Ajax.Request(
 			url,
 			{
-				method : <span class="literal">'get'</span>,
+				method : <span class="literal">'post'</span>,
 				parameters : pars,
-				onComplete : Helper.showResponseStructuralTemplates
+				onComplete : Helper.showResponseProcessCallbacks
 			});
 	} catch (e) {
 		_applyError(e);
@@ -1166,29 +1268,20 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * Process and insert XMLHttpRequest response into content.
+ * Populate on XMLHttpRequest response.
  * &lt;br /&gt;
- * First we fetch the response with the surrounding html comment tag.
- * This is because we are working with markup, so this has to be distinctive.
- * Then we extract the proper content, deliver it to {<span class="attrib">@link</span> #insertTagsFromPopup}
- * and close the popup window afterwards.
- * var &lt;em&gt;formTarget&lt;/em&gt; comes from the html markup.
+ * Insert the callback result string.
  *
- * <span class="attrib">@see</span> #insertInternalLinkStructuralTemplates
+ * <span class="attrib">@see</span> #processMediaCallbacks
  * <span class="attrib">@param</span> {object} req XMLHttpRequest response
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
-<span class="reserved">function</span> Helper_showResponseStructuralTemplates(req)
+<span class="reserved">function</span> Helper_showResponseProcessCallbacks(req)
 {
-	try {		
-		<span class="comment">// filter responseText on html element</span>
-		var extract = req.responseText.match(/(&lt;!--\s+&lt;span id=<span class="literal">"template_content"</span>&gt;)((.|\t|\r|\n)*)(&lt;\/span&gt;\s+\/\/--&gt;)/gm);
-		
-		<span class="comment">// strip the html element, get raw content</span>
-		var raw_content = String(extract).replace(/(.*?)(&gt;)((.|\t|\r|\n)*)(&lt;\/span&gt;\s+\/\/--&gt;)/, <span class="literal">"$3"</span>);
-		
-		Helper.insertTagsFromPopup(formTarget, raw_content, <span class="literal">''</span>, <span class="literal">''</span>);
-		Helper.closeLinksPopup();					
+	try {
+		var _form_target = form_target.replace(/^(_)(.+$)/, <span class="literal">'$2'</span>);
+		Helper.insertTagsFromPopupCallbacks(_form_target, req.responseText);
+		Helper.closeLinksPopup();
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1208,6 +1301,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 <span class="reserved">function</span> Helper_changeBlogCommentStatus (elem)
 {	
 	try {
+		<span class="comment">// init</span>
 		var statusId;
 		var commentId;
 		
@@ -1221,7 +1315,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, <span class="literal">"$3"</span>);		
 
 		<span class="comment">// properties</span>
-		var url = <span class="reserved">this</span>.parseBlogCommmentStatusChangeUrl;
+		var url = <span class="reserved">this</span>.parseBlogCommmentStatusChangePath;
 		var pars = <span class="literal">'status_id='</span> + statusId + <span class="literal">'&amp;comment_id='</span> + commentId;
 
 		var myAjax = new Ajax.Request(
@@ -1239,7 +1333,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 
 <span class="comment">/**
  * Display indicator layer while XMLHttpRequest processing.
- * Trigger {<span class="attrib">@link</span> #lowerOpacity}.
+ * Triggers {<span class="attrib">@link</span> #lowerOpacity}.
  *
  * <span class="attrib">@see</span> #lowerOpacity
  * <span class="attrib">@throws</span> applyError on exception
@@ -1248,7 +1342,13 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 {
 	try {
 		Helper.lowerOpacity();
-		Effect.Appear(<span class="literal">'statuschange'</span>, {duration: 0.6, delay: 0.2});
+
+		<span class="reserved">this</span>.statuschange = $(<span class="literal">'statuschange'</span>);
+		var winHeight = Helper.defineWindowY();
+		var scrollPos = Helper.definePageY();		
+		<span class="reserved">this</span>.statuschange.style.top = winHeight + scrollPos + 140 + <span class="literal">'px'</span>;
+		
+		Effect.Appear(<span class="reserved">this</span>.statuschange, {duration: 0.6, delay: 0.2});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1304,7 +1404,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
  */</span>
 <span class="reserved">function</span> Helper_validate(elem)
 {	
-	var url		= <span class="reserved">this</span>.validateUrl;
+	var url		= <span class="reserved">this</span>.validatePath;
 	elemID		= $(elem).getAttribute(<span class="literal">'id'</span>);
 	var elemVal	= $F(elem);
 	var pars	= <span class="literal">'elemID='</span> + elemID + <span class="literal">'&amp;elemVal='</span> + elemVal;
@@ -1332,6 +1432,44 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 {
 	try {	
 		var v = confirm(confirmMsgDelNav);
+
+		<span class="reserved">if</span> (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Confirm page delete.
+ * 
+ * <span class="attrib">@param</span> {var} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_confirmDelPageAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelPage);
+
+		<span class="reserved">if</span> (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Confirm project delete.
+ * 
+ * <span class="attrib">@param</span> {var} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_confirmDelProjectAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelProject);
 
 		<span class="reserved">if</span> (v == true) {
 			window.location.href = elem.href;
@@ -1418,52 +1556,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 }
 
 <span class="comment">/**
- * Change delimiter on given form value.
- * &lt;br /&gt;
- * In some cases it is required to change the delimiter to avoid syntax
- * conflicts while inserting references (e.g. working with cascading
- * style sheets or javascript, which uses brackets also).
- * 
- * <span class="attrib">@see</span> #launchPopup
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_getDelimiterValue()
-{
-	try {
-		<span class="reserved">if</span> ($(<span class="literal">'global_template_change_delimiter'</span>)) {
-			delimiter = $F(<span class="literal">'global_template_change_delimiter'</span>);
-		} <span class="reserved">else</span> {
-			delimiter = <span class="literal">''</span>;
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Get the current pager_page value.
- * &lt;br /&gt;
- * This is needed for Media Manager action popups (&lt;em&gt;upload&lt;/em&gt;, &lt;em&gt;edit&lt;/em&gt;)
- * which supposed to refresh the content display on close of popup.
- * 
- * <span class="attrib">@see</span> #launchPopup
- * <span class="attrib">@throws</span> applyError on exception
- */</span>
-<span class="reserved">function</span> Helper_getPagerPage()
-{
-	try {
-		<span class="reserved">if</span>($(<span class="literal">'pager_page_container'</span>)) {
-			pager_page = $(<span class="literal">'pager_page_container'</span>).firstChild.nodeValue;
-		} <span class="reserved">else</span> {
-			pager_page = <span class="literal">''</span>;
-		}
-	} catch (e) {
-		_applyError(e);
-	}
-}
-
-<span class="comment">/**
- * Getter for  parent node attribute.
+ * Getter for parent node attribute.
  *
  * <span class="attrib">@param</span> {string} attr Given attribute to use
  * <span class="attrib">@param</span> {object} elem Current element
@@ -1479,7 +1572,35 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		a = a.parentNode;
 	}
 		
-	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span>)
+		<span class="reserved">return</span> a.attributes[attr].value;
+	<span class="reserved">else</span>
+		<span class="reserved">return</span> a.getAttribute(attr);
+}
+
+<span class="comment">/**
+ * Getter for current element parent node next node attribute.
+ *
+ * <span class="attrib">@param</span> {string} attr Given attribute to use
+ * <span class="attrib">@param</span> {object} elem Current element
+ * <span class="attrib">@param</span> {string} level Depth of parent node search
+ * <span class="attrib">@return</span> object Next node attribute of parent node of the current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getAttrParentNodeNextNode (attr, elem, level)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+
+	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
+		a = a.parentNode;
+	}	
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span>)
+		a = a.nextSibling;
+	<span class="reserved">else</span>
+		a = a.nextSibling.nextSibling;
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span>)
 		<span class="reserved">return</span> a.attributes[attr].value;
 	<span class="reserved">else</span>
 		<span class="reserved">return</span> a.getAttribute(attr);
@@ -1497,7 +1618,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 {
 	<span class="reserved">this</span>.browser = _setBrowserString();
 		
-	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span>)
 		<span class="reserved">return</span> elem.attributes[attr].value;
 	<span class="reserved">else</span>
 		<span class="reserved">return</span> elem.getAttribute(attr);
@@ -1516,15 +1637,12 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 <span class="reserved">function</span> Helper_getAttrNextSibling (attr, elem, level)
 {
 	<span class="reserved">this</span>.browser = _setBrowserString();
-	
-	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
-		level-- ;
 
 	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
 		a = a.nextSibling;
 	}
 		
-	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span>)
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span>)
 		<span class="reserved">return</span> a.attributes[attr].value;
 	<span class="reserved">else</span>
 		<span class="reserved">return</span> a.getAttribute(attr);
@@ -1542,7 +1660,7 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 {
 	<span class="reserved">this</span>.browser = _setBrowserString();
 	
-	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'Internet Explorer'</span> || <span class="reserved">this</span>.browser == <span class="literal">'Safari'</span>)
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span> || <span class="reserved">this</span>.browser == <span class="literal">'sa'</span>)
 		level-- ;
 
 	<span class="reserved">for</span> (var a = elem; level &gt; 0; level--) {
@@ -1565,6 +1683,196 @@ Helper.launchPopup('745','634','pages_links_select','pages_internal_links', this
 		a = a.parentNode;
 	}
 	<span class="reserved">return</span> Helper.trim(a.firstChild.nodeValue.toLowerCase());	
+}
+
+<span class="comment">/**
+ * Getter for parent node next sibling.
+ *
+ * <span class="attrib">@param</span> {object} elem Current element
+ * <span class="attrib">@param</span> {string} level Depth of parent node search
+ * <span class="attrib">@return</span> object Parent node next sibling
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_getParentNodeNextSibling (elem, level)
+{
+	<span class="reserved">this</span>.browser = _setBrowserString();
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>.browser == <span class="literal">'ie'</span> || <span class="reserved">this</span>.browser == <span class="literal">'sa'</span>)
+		level-- ;
+		
+	<span class="reserved">for</span> (var a = elem.parentNode; level &gt; 0; level--) {
+		a = a.nextSibling;
+	}
+	<span class="reserved">if</span> (typeof a != <span class="literal">'undefined'</span>)
+		<span class="reserved">return</span> a;
+}
+
+<span class="comment">/**
+ * Wrapper to transform form field values to valid urls.
+ * &lt;br /&gt;
+ * Fills the related url form field with transformed values
+ * ({link #URLify}) of the current form field element.
+ *
+ * <span class="attrib">@see</span> #URLify
+ * <span class="attrib">@param</span> {string} elem Current Element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_convertFieldValuesToValidUrl (elem, attr)
+{
+	try {	
+		<span class="comment">//properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.attr = attr;
+		
+		<span class="comment">/**
+		* Helper func fails when the appropriate field help file has been activated.
+		* Seems the DOM is actually not fully cleaned up after hide the help again.
+		*/</span>		
+		<span class="comment">// get next node (e.g. label) attribute</span>
+		<span class="comment">//var el = Helper.getAttrParentNodeNextNode (this.attr, this.elem, 1);		</span>
+		
+		<span class="comment">/**
+		* Since we plan to refactor the whole thing we do not pay much attention 
+		* on this dumb error case. So we somewhat hardwire the event destination.
+		*/</span>
+		var el = $(<span class="reserved">this</span>.elem.id + <span class="literal">'_url'</span>);
+		
+		<span class="comment">// fill related form field with transformed results</span>
+		$(el).value = Helper.URLify(<span class="reserved">this</span>.elem.value);
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Transforms form field values to valid urls.
+ * 
+ * <span class="attrib">@see</span> #convertFieldValuesToValidUrl
+ * <span class="attrib">@param</span> {string} string given string
+ * <span class="attrib">@return</span> string processed string
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_URLify (string)
+{
+	try {	
+		<span class="comment">// convert string to lowercase so that we always operate on lowercases</span>
+		string = string.toLowerCase();
+
+		<span class="comment">// trim whitespaces</span>
+		Helper.trim(string);
+	
+		<span class="comment">// definitions for char normalization</span>
+		var normalizations = {
+			<span class="comment">// german</span>
+			<span class="literal">'ä'</span>: <span class="literal">'ae'</span>,
+			<span class="literal">'ö'</span>: <span class="literal">'oe'</span>,
+			<span class="literal">'ü'</span>: <span class="literal">'ue'</span>,
+			<span class="literal">'ß'</span>: <span class="literal">'ss'</span>
+			<span class="comment">// french</span>
+		
+			<span class="comment">// spanish</span>
+		
+			<span class="comment">// swedish</span>
+		
+			<span class="comment">// other</span>
+		};
+	
+		<span class="comment">// execute char normalization</span>
+		<span class="reserved">for</span> (placeholder in normalizations) {
+			var r = new RegExp(placeholder, <span class="literal">'gi'</span>);
+			string = string.replace(r, normalizations[placeholder]);
+		};
+	
+		<span class="comment">// remove everything except a-z, 0-9 and hyphens and replace it with a hyphen </span>
+		string = string.replace(/[^a-z0-9\-]/g, <span class="literal">'-'</span>);
+	
+		<span class="comment">// remove unnecessary hyphens</span>
+		string = string.replace(/-{2,}/g, <span class="literal">'-'</span>);
+	
+		<span class="comment">// remove hyphens at the beginning and at the end of the string</span>
+		string = string.replace(/^(-+)/, <span class="literal">''</span>);
+		string = string.replace(/(-+)$/, <span class="literal">''</span>);
+	
+	    <span class="reserved">return</span> string;
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Binds available boxes to current page
+ *
+ * <span class="attrib">@param</span> {string} elem Current Element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_adoptBox (elem)
+{
+	try {
+		Element.scrollTo(<span class="literal">'container'</span>);
+	
+		var page_name = elem.parentNode.parentNode;
+		
+		<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+			page_name = page_name.childNodes[1].innerHTML;
+		} <span class="reserved">else</span> {
+			page_name = page_name.childNodes[3].innerHTML;
+		}
+					
+		var url = <span class="literal">'../content/pages_boxes_adopt.php'</span>;
+		var pars = <span class="literal">'id='</span> + elem.id + <span class="literal">'&amp;page='</span> + elem.rel + <span class="literal">'&amp;page_name='</span> + page_name;
+		
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : <span class="literal">'post'</span>,
+				parameters : pars,
+				onLoading : Helper.loaderAdoptBox,
+				onComplete : Helper.showResponseAdoptBox
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+<span class="comment">/**
+ * Display indicator layer while XMLHttpRequest processing.
+ *
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_loaderAdoptBox ()
+{
+	try {
+		Element.show(<span class="literal">'indicator_adopt'</span>);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Layer fadeout on XMLHttpRequest response.
+ *
+ * <span class="attrib">@see</span> #adoptBox
+ * <span class="attrib">@param</span> {object} req XMLHttpRequest response
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Helper_showResponseAdoptBox(req)
+{
+	try {
+		var el = $(<span class="literal">'boxes'</span>);
+		var res = $(<span class="literal">'noresult'</span>);
+		
+		<span class="comment">// if resultset is empty replace DOM Element</span>
+		<span class="comment">//  otherwise insert returned contents</span>
+		<span class="reserved">if</span>(res){
+			Element.replace(res, req.responseText);
+		} <span class="reserved">else</span> {
+			new Insertion.Bottom(el, req.responseText);
+		}
+		setTimeout(<span class="literal">"Effect.Fade('indicator_adopt', {duration: 0.4})"</span>, 300);
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
 <span class="comment">/**
@@ -1597,8 +1905,8 @@ Helper = new Helper();
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top"><em>
-<b>Welcompose Publishing System</b></em>
+<TD ALIGN="right" VALIGN="middle">
+<B>Welcompose<sup><small>TM</small></sup> Javascript API</B>
 </td>
 </tr>
 
@@ -1629,6 +1937,6 @@ Helper = new Helper();
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 10 08:00:14 2008</div>
 </body>
 </html>

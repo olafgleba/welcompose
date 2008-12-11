@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>
-Welcompose Publishing System Overview
+Welcompose<sup><small>TM</small></sup> Javascript API Overview
 </title>
 <link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 <script>
@@ -36,9 +36,8 @@ function asd() {
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top">
-<em>
-<b>Welcompose Publishing System</b></em>
+<td bgcolor="#EEEEFF" align="right" valign="middle">
+<b>Welcompose<sup><small>TM</small></sup> Javascript API</b>
 </td>
 </tr>
 
@@ -78,7 +77,8 @@ function asd() {
 <h4>Summary</h4>
 <p>
 	
-		Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager.<BR/><BR/>
+		Defines event handling through thirdparty lib Behaviour.
+ Used for all content pages exclude the mediamanager.<BR/><BR/>
 	
 </p>
 
@@ -95,7 +95,7 @@ function asd() {
  * Project: Welcompose
  * File: wcom.events.standard.js
  *
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  *
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -105,16 +105,17 @@ function asd() {
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id: wcom.events.js 517 2006-10-18 17:48:05Z olaf $
+ * $Id: wcom.events.standard.js 1205 2008-10-24 13:31:36Z og<span class="attrib">@creatics</span>.de $
  *
- * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@copyright</span> 2008 creatics media.systems, Olaf Gleba
  * <span class="attrib">@author</span> Olaf Gleba
  * <span class="attrib">@package</span> Welcompose
- * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */</span>
  
 <span class="comment">/** 
- * <span class="attrib">@fileoverview</span> Defines event handling through thirdparty lib Behaviour. Used for all content pages exclude the mediamanager. 
+ * <span class="attrib">@fileoverview</span> Defines event handling through thirdparty lib Behaviour.
+ * Used for all content pages exclude the mediamanager. 
  */</span>
 
 <span class="comment">/**
@@ -205,28 +206,40 @@ var definitions = {
 			<span class="reserved">return</span> false;
 		}
 	},
+	<span class="literal">'.showFormElements'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Forms.showFormElements(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.hideFormElements'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Forms.hideFormElements(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
 	<span class="literal">'input'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
 			<span class="reserved">if</span> (<span class="reserved">this</span>.type != <span class="literal">'reset'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'submit'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'button'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'checkbox'</span>) {
-				Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);
+				Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#ff620d'</span>,<span class="literal">'dotted'</span>);
 			}
 			<span class="reserved">return</span> false;
 		}
 		el.onblur = <span class="reserved">function</span>(){
 			<span class="reserved">if</span> (<span class="reserved">this</span>.type != <span class="literal">'reset'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'submit'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'button'</span> &amp;&amp; <span class="reserved">this</span>.type != <span class="literal">'checkbox'</span>) {
-				Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#000'</span>,<span class="literal">'solid'</span>);
+				Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#666'</span>,<span class="literal">'solid'</span>);
 			}
 			<span class="reserved">return</span> false;
 		}
 	},
 	<span class="literal">'textarea'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#0c3'</span>,<span class="literal">'dotted'</span>);
+			Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#ff620d'</span>,<span class="literal">'dotted'</span>);
 			Forms.storeFocus(<span class="reserved">this</span>);
 			<span class="reserved">return</span> false;
 		}
 		el.onblur = <span class="reserved">function</span>(){
-			Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#000'</span>,<span class="literal">'solid'</span>);
+			Forms.setOnEvent(<span class="reserved">this</span>, <span class="literal">''</span>,<span class="literal">'#666'</span>,<span class="literal">'solid'</span>);
 			<span class="reserved">return</span> false;
 		}
 	},
@@ -240,9 +253,39 @@ var definitions = {
 			Helper.validate(<span class="reserved">this</span>);
 		}
 	},
+	<span class="literal">'input.urlify'</span> : <span class="reserved">function</span>(el){
+		el.onkeyup = <span class="reserved">function</span>(){
+			Helper.convertFieldValuesToValidUrl(<span class="reserved">this</span>, <span class="literal">'for'</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'a.insert'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.processCallbacks(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'a.adopt'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.adoptBox(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
 	<span class="literal">'.confirmDelNav'</span> : <span class="reserved">function</span>(el){
 		el.onclick = <span class="reserved">function</span>(){
 			Helper.confirmDelNavAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelPage'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelPageAction(<span class="reserved">this</span>);
+			<span class="reserved">return</span> false;
+		}
+	},
+	<span class="literal">'.confirmDelProject'</span> : <span class="reserved">function</span>(el){
+		el.onclick = <span class="reserved">function</span>(){
+			Helper.confirmDelProjectAction(<span class="reserved">this</span>);
 			<span class="reserved">return</span> false;
 		}
 	},
@@ -288,33 +331,15 @@ var definitions = {
 			<span class="reserved">return</span> false;
 		}
 	},
-	<span class="literal">'.act_internalLink'</span> : <span class="reserved">function</span>(el){
+	<span class="literal">'.toggleElemNavigation'</span> : <span class="reserved">function</span>(el){
 		el.onclick = <span class="reserved">function</span>(){
-			Helper.launchPopup(<span class="literal">'740'</span>,<span class="literal">'634'</span>,<span class="literal">'pages_links_select'</span>,<span class="literal">'pages_internal_links'</span>, <span class="reserved">this</span>);
+			Tables.toggleElem(<span class="reserved">this</span>);
 			<span class="reserved">return</span> false;
 		}
 	},
-	<span class="literal">'.act_internalLinkNoHref'</span> : <span class="reserved">function</span>(el){
+	<span class="literal">'.toggleElemBoxes'</span> : <span class="reserved">function</span>(el){
 		el.onclick = <span class="reserved">function</span>(){
-			Helper.launchPopup(<span class="literal">'740'</span>,<span class="literal">'634'</span>,<span class="literal">'pages_links_select'</span>,<span class="literal">'pages_internal_links_NoHref'</span>, <span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.act_internalLinkGlobalTemplates'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Helper.launchPopup(<span class="literal">'420'</span>,<span class="literal">'634'</span>,<span class="literal">'globaltemplates_links_select'</span>,<span class="literal">'globaltemplates_internal_links'</span>, <span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.act_internalLinkGlobalFiles'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Helper.launchPopup(<span class="literal">'420'</span>,<span class="literal">'634'</span>,<span class="literal">'globalfiles_links_select'</span>,<span class="literal">'globalfiles_internal_links'</span>, <span class="reserved">this</span>);
-			<span class="reserved">return</span> false;
-		}
-	},
-	<span class="literal">'.act_internalLinkStructuralTemplates'</span> : <span class="reserved">function</span>(el){
-		el.onclick = <span class="reserved">function</span>(){
-			Helper.launchPopup(<span class="literal">'420'</span>,<span class="literal">'634'</span>,<span class="literal">'structuraltemplates_links_select'</span>,<span class="literal">'structuraltemplates_internal_links'</span>, <span class="reserved">this</span>);
+			Tables.toggleElem(<span class="reserved">this</span>);
 			<span class="reserved">return</span> false;
 		}
 	},
@@ -325,27 +350,32 @@ var definitions = {
 	},
 	<span class="literal">'.submit140'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			<span class="reserved">this</span>.style.background = <span class="literal">'#0c3 url(../static/img/submitindicator140.gif) no-repeat'</span>;
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator140.gif) no-repeat'</span>;
 		}
 	},
 	<span class="literal">'.submit200'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			<span class="reserved">this</span>.style.background = <span class="literal">'#0c3 url(../static/img/submitindicator200.gif) no-repeat'</span>;
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator200.gif) no-repeat'</span>;
+		}
+	},
+	<span class="literal">'.submit200go'</span> : <span class="reserved">function</span>(el){
+		el.onfocus = <span class="reserved">function</span>(){
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator200.gif) no-repeat'</span>;
 		}
 	},
 	<span class="literal">'.submit200bez260'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			<span class="reserved">this</span>.style.background = <span class="literal">'#0c3 url(../static/img/submitindicator200.gif) no-repeat'</span>;
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator200.gif) no-repeat'</span>;
 		}
 	},
 	<span class="literal">'.submit240'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			<span class="reserved">this</span>.style.background = <span class="literal">'#0c3 url(../static/img/submitindicator240.gif) no-repeat'</span>;
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator240.gif) no-repeat'</span>;
 		}
 	},
 	<span class="literal">'.submit240bez260'</span> : <span class="reserved">function</span>(el){
 		el.onfocus = <span class="reserved">function</span>(){
-			<span class="reserved">this</span>.style.background = <span class="literal">'#0c3 url(../static/img/submitindicator240.gif) no-repeat'</span>;
+			<span class="reserved">this</span>.style.background = <span class="literal">'#ff620d url(../static/img/submitindicator240.gif) no-repeat'</span>;
 		}
 	},
 	<span class="literal">'#simple_page_meta_use'</span> : <span class="reserved">function</span>(el){
@@ -381,8 +411,8 @@ Behaviour.addLoadEvent(Init.load);</pre>
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top"><em>
-<b>Welcompose Publishing System</b></em>
+<TD ALIGN="right" VALIGN="middle">
+<B>Welcompose<sup><small>TM</small></sup> Javascript API</B>
 </td>
 </tr>
 
@@ -413,6 +443,6 @@ Behaviour.addLoadEvent(Init.load);</pre>
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 10 08:00:14 2008</div>
 </body>
 </html>

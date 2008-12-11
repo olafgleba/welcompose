@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>
-Welcompose Publishing System Overview
+Welcompose<sup><small>TM</small></sup> Javascript API Overview
 </title>
 <link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 <script>
@@ -36,9 +36,8 @@ function asd() {
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top">
-<em>
-<b>Welcompose Publishing System</b></em>
+<td bgcolor="#EEEEFF" align="right" valign="middle">
+<b>Welcompose<sup><small>TM</small></sup> Javascript API</b>
 </td>
 </tr>
 
@@ -129,6 +128,12 @@ function asd() {
     </tr>
     
     <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Preview.html">Preview</a></b></td>
+    <td>The Preview Class provides a call to the rendered frontend page
+ The scope is application wide.</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
     <td width="15%"><b><a href="Status.html">Status</a></b></td>
     <td>The Status class is supposed to handle
  all change of status events within the html interface.</td>
@@ -166,7 +171,7 @@ function asd() {
 		      <td>
 			 <code>
 			    <b>
-			       <a href="Globals.html#!s!_applyError">_applyError</a></b>(&lt;object&gt; exception)
+			       <a href="Globals.html#!s!_applyError">_applyError</a></b>(&lt;object&gt; exception, additionalStr)
 			 </code>
 			 <br>
 			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -195,7 +200,7 @@ function asd() {
 		   <tr bgcolor="white" class="TableRowColor">
 		      <td align="right" valign="top" width="1%">
 			 <font size="-1">
-			    <code>static&nbsp;Bool</code>
+			    <code>static&nbsp;Number</code>
 			 </font>
 		      </td>
 		      <td>
@@ -220,7 +225,7 @@ function asd() {
  * Project: Welcompose
  * File: wcom.core.js
  *
- * Copyright (c) 2006 sopic GmbH
+ * Copyright (c) 2008 creatics media.systems
  *
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -230,12 +235,12 @@ function asd() {
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id: wcom.core.js 734 2006-12-12 16:43:13Z olaf $
+ * $Id: wcom.core.js 1234 2008-12-05 09:34:31Z og<span class="attrib">@creatics</span>.de $
  *
- * <span class="attrib">@copyright</span> 2006 creatics media.systems
+ * <span class="attrib">@copyright</span> 2008 creatics media.systems, Olaf Gleba
  * <span class="attrib">@author</span> Olaf Gleba
  * <span class="attrib">@package</span> Welcompose
- * <span class="attrib">@license</span> http://www.opensource.org/licenses/osl-2.1.php Open Software License
+ * <span class="attrib">@license</span> http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */</span>
  
 <span class="comment">/** 
@@ -253,11 +258,11 @@ function asd() {
  * &lt;br /&gt;
  * Scope is application wide.
  *
- * <span class="attrib">@type</span> Bool
+ * <span class="attrib">@type</span> Number
  */</span>
 <span class="reserved">function</span> _debug ()
 {
-	debug = 1;
+	debug = 2;
 }
 
 <span class="comment">/**
@@ -298,12 +303,12 @@ this.req = _buildXMLHTTPRequest();
 try {
 	&lt;contents&gt;
 } catch (e) {
-	_applyError(e);
+	_applyError(e, additionalStr);
 }&lt;/code&gt;&lt;/pre&gt;
  * 
  * <span class="attrib">@param</span> {object} exception error obj presented by catch statement
  */</span>
-<span class="reserved">function</span> _applyError (exception)
+<span class="reserved">function</span> _applyError (exception, additionalStr)
 {
 	var errStr;
 	
@@ -312,16 +317,24 @@ try {
 			<span class="reserved">return</span> false;
 		break;
 		case 1 :
-			errStr = exception + <span class="literal">'\r\n'</span> 
+			<span class="reserved">if</span> (additionalStr) {
+				errStr = additionalStr;
+			} <span class="reserved">else</span> {
+				errStr = exception + <span class="literal">'\r\n'</span> 
 					+ exception.fileName + <span class="literal">'\r\n'</span> 
 					+ exception.lineNumber;
+			}
 		break;
 		case 2 :
-			errStr = e_msg_str_prefix + <span class="literal">'\r\n\r\n'</span> 
+			<span class="reserved">if</span> (additionalStr) {
+				errStr = additionalStr;
+			} <span class="reserved">else</span> {
+				errStr = e_msg_str_prefix + <span class="literal">'\r\n\r\n'</span> 
 					+ exception + <span class="literal">'\r\n'</span> 
 					+ exception.fileName + <span class="literal">'\r\n'</span> 
 					+ exception.lineNumber + <span class="literal">'\r\n\r\n'</span> 
 					+ e_msg_str_suffix;
+			}
 		break;
 		default :
 			errStr = exception;
@@ -428,6 +441,16 @@ Errors.<span class="reserved">prototype</span> = new Error();
 		<span class="reserved">this</span>.mediamanagerClassHideMyFlickr = <span class="literal">'hideMediamanagerElementMyFlickr'</span>;
 		
 		<span class="comment">/**
+		 * Element class to show grouped form elements
+		 */</span>
+		<span class="reserved">this</span>.elementShowFormElements = <span class="literal">'showFormElements'</span>;
+
+		<span class="comment">/**
+		 * Element class to hide grouped form elements
+		 */</span>
+		<span class="reserved">this</span>.elementHideFormElements = <span class="literal">'hideFormElements'</span>;
+		
+		<span class="comment">/**
 		 * First level div for dynamic xhr navigation
 		 */</span>
 		<span class="reserved">this</span>.navLyOne = <span class="literal">'ly1'</span>;
@@ -450,7 +473,22 @@ Errors.<span class="reserved">prototype</span> = new Error();
 		<span class="comment">/**
 		 * Comprehensive color application wide
 		 */</span>
-		<span class="reserved">this</span>.applicationTextColor = <span class="literal">'#009a26'</span>;
+		<span class="reserved">this</span>.applicationTextColor = <span class="literal">'#ff620d'</span>;
+		
+		<span class="comment">/**
+		 * Comprehensive popup width application wide
+		 */</span>
+		<span class="reserved">this</span>.callbacksPopupWindowWidth745 = <span class="literal">'745'</span>;
+		
+		<span class="comment">/**
+		 * Comprehensive width application wide
+		 */</span>
+		<span class="reserved">this</span>.callbacksPopupWindowWidth460 = <span class="literal">'460'</span>;
+		
+		<span class="comment">/**
+		 * Comprehensive popup height application wide
+		 */</span>
+		<span class="reserved">this</span>.callbacksPopupWindowHeight634 = <span class="literal">'634'</span>;
 		
 		<span class="comment">/**
 		 * Help string supposed to delivered within the DOM.
@@ -479,79 +517,23 @@ Errors.<span class="reserved">prototype</span> = new Error();
 		<span class="reserved">this</span>.keyPressDelay = null;
 		
 		<span class="comment">/**
-		 * Path for dynamically imported file
+		 * Paths for files to import
 		 */</span>
-		<span class="reserved">this</span>.parseHelpUrl = <span class="literal">'../parse/parse.help.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseNavUrl = <span class="literal">'../parse/parse.navigation.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedLocalUrl = <span class="literal">'../mediamanager/mediamanager_local.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedFlickrUrl = <span class="literal">'../mediamanager/mediamanager_flickr.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedUploadUrl = <span class="literal">'../mediamanager/mediamanager_upload.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedEditUrl = <span class="literal">'../mediamanager/mediamanager_edit.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedDeleteUrl = <span class="literal">'../mediamanager/mediamanager_delete.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedCastsUrl = <span class="literal">'../mediamanager/mediamanager_media_to_podcast.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseMedDiscCastsUrl = <span class="literal">'../mediamanager/mediamanager_discard_podcast.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parsePagesLinksUrl = <span class="literal">'../content/pages_links_select.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseGlobalTemplatesLinksUrl = <span class="literal">'../templating/globaltemplates_links_select.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseGlobalFilesLinksUrl = <span class="literal">'../templating/globalfiles_links_select.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseBlogCommmentStatusChangeUrl = <span class="literal">'../community/blogcomments_statuschange.php'</span>;
-		
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.parseStructuralTemplatesLinksUrl = <span class="literal">'../content/structuraltemplates_links_select.php'</span>;
-
-		<span class="comment">/**
-		 * Path for dynamically imported file
-		 */</span>
-		<span class="reserved">this</span>.validateUrl = <span class="literal">'../validate.js.php'</span>;
+		<span class="reserved">this</span>.parseHelpPath = <span class="literal">'../parse/parse.help.php'</span>;
+		<span class="reserved">this</span>.parseNavPath = <span class="literal">'../parse/parse.navigation.php'</span>;
+		<span class="reserved">this</span>.parseMedLocalPath = <span class="literal">'../mediamanager/mediamanager_local.php'</span>;
+		<span class="reserved">this</span>.parseMedFlickrPath = <span class="literal">'../mediamanager/mediamanager_flickr.php'</span>;
+		<span class="reserved">this</span>.parseMedUploadPath = <span class="literal">'../mediamanager/mediamanager_upload.php'</span>;
+		<span class="reserved">this</span>.parseMedEditPath = <span class="literal">'../mediamanager/mediamanager_edit.php'</span>;
+		<span class="reserved">this</span>.parseMedDeletePath = <span class="literal">'../mediamanager/mediamanager_delete.php'</span>;
+		<span class="reserved">this</span>.parseMedCastsPath = <span class="literal">'../mediamanager/mediamanager_media_to_podcast.php'</span>;
+		<span class="reserved">this</span>.parseMedDiscCastsPath = <span class="literal">'../mediamanager/mediamanager_discard_podcast.php'</span>;
+		<span class="reserved">this</span>.parseMedCallbacksFilePath = <span class="literal">'../mediamanager/callbacks_insert_'</span>;		
+		<span class="reserved">this</span>.parseCallbacksFilePath = <span class="literal">'callbacks_insert_'</span>;
+		<span class="reserved">this</span>.parseCallbacksPath = <span class="literal">'../callbacks.php'</span>;
+		<span class="reserved">this</span>.parseBlogCommmentStatusChangePath = <span class="literal">'../community/blogcomments_statuschange.php'</span>;
+		<span class="reserved">this</span>.validatePath = <span class="literal">'../validate.js.php'</span>;
+		<span class="reserved">this</span>.previewPath = <span class="literal">'../../index.php'</span>;
 	} catch (e) {
 		_applyError(e);
 	}
@@ -576,7 +558,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
  * <span class="attrib">@return</span> Boolean true or false
  */</span>
 <span class="reserved">function</span> Base_isArray(elem) {
-    <span class="reserved">return</span> Base.<span class="reserved">prototype</span>.isObject(elem) &amp;&amp; elem.constructor == Array;
+    <span class="reserved">return</span> Base.<span class="reserved">prototype</span>.isObject(elem);
 }
 <span class="comment">/**
  * Examine the giving var is of type Bool
@@ -667,7 +649,7 @@ Base.<span class="reserved">prototype</span>.trim = Base_trim;
  * <span class="attrib">@type</span> String
  */</span>
 <span class="reserved">function</span> Base_trim(elem) {
-  <span class="reserved">return</span> elem.replace(/^\s*|\s*$/g, <span class="literal">""</span>);
+  <span class="reserved">return</span> elem.replace(/^\s*|\s*$/g, <span class="literal">''</span>);
 }
 
 
@@ -718,6 +700,11 @@ Init.<span class="reserved">prototype</span>.load = Init_load;
 Init.<span class="reserved">prototype</span>.getVars = Init_getVars;
 Init.<span class="reserved">prototype</span>.getCbxStatus = Init_getCbxStatus;
 Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
+Init.<span class="reserved">prototype</span>.setCookie = Init_setCookie;
+Init.<span class="reserved">prototype</span>.getCookie = Init_getCookie;
+Init.<span class="reserved">prototype</span>.getToogleElem = Init_getToogleElem;
+Init.<span class="reserved">prototype</span>.getToogleElemSingle = Init_getToogleElemSingle;
+
 
 <span class="comment">/**
  * All functions supposed to be called on load must take place within this function.
@@ -728,19 +715,51 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 <span class="reserved">function</span> Init_load ()
 {	
 	try {
+		<span class="comment">// See http://dev.rubyonrails.org/ticket/6481</span>
+		<span class="comment">//_objectHackit();</span>
+		
 		<span class="comment">// DONT EVER CHANGE THIS FUNCTION CALL</span>
 		<span class="comment">// set global debug var first</span>
 		_debug();
 		
 		Init.getVars();
-		
-		<span class="reserved">if</span> (typeof checkbox_status != <span class="literal">'undefined'</span> &amp;&amp; Init.isArray(checkbox_status)) {
-			Init.getCbxStatus(checkbox_status);
-		}
+
 	} catch (e) {
 		_applyError(e);
 	}
 }
+
+<span class="comment">/**
+ * Temporary Fix for misbehaviour FF2.0 -&gt; prototype object.extend calling.
+ * See http://dev.rubyonrails.org/ticket/6481
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="comment">/*
+function _objectHackit ()
+{	
+    if (Object.extend) {
+     		return;
+   	}
+    Object.extend = function(destination, source) {
+      for (property in source) {
+        destination[property] = source[property];
+      }
+      return destination;
+    }
+    Object.inspect = function(object) {
+      try {
+        if (object == undefined) return 'undefined';
+        if (object == null) return 'null';
+        return object.inspect ? object.inspect() : object.toString();
+      } catch (e) {
+        if (e instanceof RangeError) return '...';
+        throw e;
+      }
+    }
+}
+*/</span>
 
 <span class="comment">/**
  * Getter function for several actions to be executed on load of page.
@@ -757,10 +776,21 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 <span class="reserved">function</span> Init_getVars ()
 {
 	try {
+		<span class="reserved">if</span> (document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]) {
+			Form.focusFirstElement(document.getElementsByClassName(<span class="literal">'botbg'</span>)[0]);
+		}		
 		<span class="reserved">if</span> (typeof response != <span class="literal">'undefined'</span>) {
 			<span class="reserved">if</span> (response == 1) {
-				Effect.Fade(<span class="literal">'rp'</span>, {duration: 0.6, delay: 1.2});
+				<span class="reserved">if</span>($(<span class="literal">'rp'</span>)) Effect.Fade(<span class="literal">'rp'</span>, {duration: 0.6, delay: 2.0});
 			}
+		}
+		<span class="reserved">if</span> (typeof preview_ctrl != <span class="literal">'undefined'</span>) {
+			<span class="reserved">if</span> (preview_ctrl == 1) {
+				Preview.reloadFrontendView();
+			}
+		}
+		<span class="reserved">if</span> (typeof callback_media_result != <span class="literal">'undefined'</span> &amp;&amp; callback_media_result != <span class="literal">''</span>) {
+				Mediamanager.insertMediaCallbacks(callback_media_result);
 		}
 		<span class="reserved">if</span> (typeof podcast != <span class="literal">'undefined'</span> &amp;&amp; Init.isNumber(podcast)) {
 			<span class="reserved">if</span> (podcast == 1) {
@@ -772,10 +802,25 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
+		<span class="reserved">if</span> (typeof toggleElem != <span class="literal">'undefined'</span>) {
+			<span class="reserved">if</span> (toggleElem == 1) {
+				Init.getToogleElem();
+			}
+			<span class="reserved">else</span> <span class="reserved">if</span> (toggleElem == 2) 
+				Init.getToogleElemSingle();
+		}
+		<span class="reserved">if</span> (typeof checkbox_status != <span class="literal">'undefined'</span> &amp;&amp; Init.isArray(checkbox_status)) {
+			Init.getCbxStatus(checkbox_status);
+		}
 		<span class="reserved">if</span> (typeof mediamanager != <span class="literal">'undefined'</span> &amp;&amp; Init.isNumber(mediamanager)) {
 			<span class="reserved">if</span> (mediamanager == 1) {
+				
+				<span class="comment">// switch if page contains urlify form field</span>
+				<span class="reserved">if</span> (pagetype != <span class="literal">''</span>) {
+					$(<span class="literal">'column'</span>).style.paddingTop = <span class="literal">'142px'</span>;
+				}
 						
-				<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedLocalUrl + <span class="literal">'?page=mediamanager'</span> + <span class="literal">'&amp;mm_pagetype='</span> + pagetype;
+				<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseMedLocalPath + <span class="literal">'?page=mediamanager'</span> + <span class="literal">'&amp;mm_pagetype='</span> + pagetype;
 				<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
 		
 					var _url		= <span class="reserved">this</span>.url;
@@ -796,7 +841,7 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
  * Show/hide a group of form elements and color their labels on load of page.
  * Depends on delivered variables in the html markup.
  * &lt;br /&gt;
- * For in depths explanation please have a look on the online
+ * For in depths explanation please have a look at the online
  * project support area.
  *
  * <span class="attrib">@param</span> {array} elems Array of element(s)
@@ -812,7 +857,7 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 			<span class="reserved">if</span> ($(range)) {
 				<span class="reserved">if</span> ($(elems[e]).checked === true) {
 	
-					allNodes = document.getElementsByClassName(<span class="literal">"bez"</span>);
+					allNodes = document.getElementsByClassName(<span class="literal">"bez"</span>);	
 				
 					<span class="reserved">for</span> (var i = 0; i &lt; allNodes.length; i++) {
 						var _process = allNodes[i].parentNode.parentNode.getAttribute(<span class="literal">'id'</span>);		
@@ -859,6 +904,139 @@ Init.<span class="reserved">prototype</span>.processInit = Init_processInit;
 	  			throw new Errors(_req.statusText);
 			}
 		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Sets a cookie
+ * &lt;br /&gt;
+ *
+ * <span class="attrib">@param</span> {string} name 
+ * <span class="attrib">@param</span> {string} value 
+ * <span class="attrib">@param</span> {string} path 
+ * <span class="attrib">@param</span> {string} domain 
+ * <span class="attrib">@param</span> {boolean} secure 
+ * <span class="attrib">@return</span> cookie
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_setCookie (name, value, path, domain, secure)
+{
+	try {
+	    <span class="comment">// one year</span>
+	    var expireDate = new Date ();
+	    expireDate.setTime(expireDate.getTime() + (365 * 24 * 60 * 60 * 1000));
+    
+	    var currentCookie = name + <span class="literal">"="</span> + escape(value) +
+	        ((expireDate) ? <span class="literal">"; expires="</span> + expireDate.toGMTString() : <span class="literal">""</span>) +
+	        ((path) ? <span class="literal">"; path ="</span> + path : <span class="literal">""</span>) +
+	        ((domain) ? <span class="literal">"; domain="</span> + domain : <span class="literal">""</span>) +
+	        ((secure) ? <span class="literal">"; secure"</span> : <span class="literal">""</span>);
+	            document.cookie = currentCookie;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Gets a cookie
+ * &lt;br /&gt;
+ *
+ * <span class="attrib">@param</span> {string} name
+ * <span class="attrib">@return</span> cookie
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_getCookie (name)
+{
+	try {
+	    var dc = document.cookie;
+	    var prefix = name + <span class="literal">"="</span>;
+	    var begin = dc.indexOf(<span class="literal">"; "</span> + prefix);
+	    <span class="reserved">if</span> (begin == -1) {
+	        begin = dc.indexOf(prefix);
+	        <span class="reserved">if</span> (begin != 0) <span class="reserved">return</span> null;
+	    }
+	    <span class="reserved">else</span> begin += 2;
+	    var end = document.cookie.indexOf(<span class="literal">";"</span>, begin);
+	    <span class="reserved">if</span> (end == -1) end = dc.length;
+    
+	    <span class="reserved">return</span> unescape(dc.substring(begin + prefix.length, end));
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Toogle display of the navigation table depending on current element pointer.
+ * 
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_getToogleElem ()
+{
+	try {
+		<span class="reserved">if</span> (navigator.cookieEnabled == true &amp;&amp; document.cookie) {
+			
+			var tables = document.getElementsByTagName(<span class="literal">'table'</span>);
+			
+			<span class="reserved">for</span> (var e = 0; e &lt; tables.length; e++) {
+				
+				<span class="reserved">if</span> (Init.getCookie(tables[e].id)) {
+					tables[e].style.display = Init.getCookie(tables[e].id);
+				}
+				
+				<span class="reserved">if</span> (Init.getCookie(tables[e].id) == <span class="literal">'block'</span> || Init.getCookie(tables[e].id) == null) {					
+					<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+						tables[e].previousSibling.childNodes[0].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + hideElement + <span class="literal">'" src="../static/img/icons/close.gif" alt="" /&gt;'</span>;
+					} <span class="reserved">else</span> {
+						tables[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + hideElement + <span class="literal">'" src="../static/img/icons/close.gif" alt="" /&gt;'</span>;
+					}
+				} <span class="reserved">else</span> {
+					<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+						tables[e].previousSibling.childNodes[0].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + showElement + <span class="literal">'" src="../static/img/icons/open.gif" alt="" /&gt;'</span>;
+					} <span class="reserved">else</span> {
+						tables[e].previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + showElement + <span class="literal">'" src="../static/img/icons/open.gif" alt="" /&gt;'</span>;
+					}
+				}
+			}
+		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Toogle display of the one single table depending on current element pointer.
+ * 
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Init_getToogleElemSingle ()
+{
+	try {
+		<span class="reserved">if</span> (navigator.cookieEnabled == true &amp;&amp; document.cookie) {
+			
+			var table = document.getElementById(<span class="literal">'allboxes'</span>);
+				
+			<span class="reserved">if</span> (Init.getCookie(table.id)) {
+				table.style.display = Init.getCookie(table.id);
+			}
+				
+			<span class="reserved">if</span> (Init.getCookie(table.id) == <span class="literal">'block'</span>) {					
+				<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+					table.previousSibling.childNodes[0].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + hideElement + <span class="literal">'" src="../static/img/icons/close.gif" alt="" /&gt;'</span>;
+				} <span class="reserved">else</span> {
+					table.previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + hideElement + <span class="literal">'" src="../static/img/icons/close.gif" alt="" /&gt;'</span>;
+				}
+			} <span class="reserved">else</span> {
+				<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
+					table.previousSibling.childNodes[0].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + showElement + <span class="literal">'" src="../static/img/icons/open.gif" alt="" /&gt;'</span>;
+				} <span class="reserved">else</span> {
+					table.previousSibling.previousSibling.childNodes[1].lastChild.innerHTML = <span class="literal">'&lt;img title="'</span> + showElement + <span class="literal">'" src="../static/img/icons/open.gif" alt="" /&gt;'</span>;
+				}
+			}
+		}		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -936,9 +1114,9 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 		} <span class="reserved">else</span> {
 			<span class="reserved">this</span>.processId = <span class="reserved">this</span>.processId.replace(/_\d+/, <span class="literal">''</span>);
 			<span class="reserved">this</span>.formId = Helper.getDataParentNode(<span class="reserved">this</span>.elem, 1);
-		}	
-			
-		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
+		}
+		
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpPath + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
 			
 		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.req != <span class="literal">'undefined'</span>) {
 		
@@ -949,7 +1127,6 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 			_req.onreadystatechange = <span class="reserved">function</span> () { Help.processHelp(_ttarget);};
 			_req.send(<span class="literal">''</span>);
 		}
-		
 		Help.setCorrespondingFocus(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.attr);
 		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlHide);
 
@@ -974,16 +1151,16 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 		<span class="reserved">this</span>.attr = <span class="literal">'for'</span>;
 		<span class="reserved">this</span>.processId = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2);
 		<span class="reserved">this</span>.processIdAfter = $(<span class="reserved">this</span>.processId).parentNode.nextSibling;
-		
+	
 		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClass;
-		
+	
 		Effect.Fade(<span class="reserved">this</span>.processIdAfter,{delay: 0, duration: 0.4});
 
 		Help.setCorrespondingFocus(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.attr);
 		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.helpHtmlShow);
-	
+
 		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
-		
+	
 	} catch (e) {
 		_applyError(e);
 	}
@@ -998,20 +1175,20 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
  * <span class="attrib">@throws</span> applyError on exception
  */</span>
 <span class="reserved">function</span> Help_processHelp (ttarget)
-{  
+{
 	try {
 		<span class="reserved">if</span> (_req.readyState == 4) {
-			<span class="reserved">if</span> (_req.status == 200) {
-				new Insertion.After($(ttarget).parentNode, _req.responseText);				
-				var ttarget_after = $(ttarget).parentNode.nextSibling;
+			<span class="reserved">if</span> (_req.status == 200) {			
+				new Insertion.After($(ttarget).parentNode, _req.responseText);
+				var ttarget_after = $(ttarget).parentNode.nextSibling;			
 				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
 			} <span class="reserved">else</span> {
 	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
-		_applyError(e);
+		_applyError(e, alertOnMissingHelpFiles);
 	}
 }
 
@@ -1036,7 +1213,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 		<span class="reserved">this</span>.formId = Helper.getAttrParentNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 3);
 		<span class="reserved">this</span>.processId = <span class="reserved">this</span>.formId;
 		<span class="reserved">this</span>.ttarget = <span class="reserved">this</span>.helpLyMediamanager;
-		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseHelpPath + <span class="literal">'?page='</span> + <span class="reserved">this</span>.formId + <span class="literal">'_'</span> + <span class="reserved">this</span>.processId;
 				
 		<span class="comment">// which layer to process</span>
 		var catchMyLocal = Element.getStyle(<span class="reserved">this</span>.lyMediamanagerMyLocal, <span class="literal">'display'</span>);		
@@ -1085,7 +1262,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 		<span class="reserved">this</span>.toShow = gMediamanagerLayer;
 		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.helpClassMediamanager;
 	
-		<span class="reserved">if</span> (Helper.unsupportsEffects()) {
+		<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'sa'</span>)) {
 			Element.hide(<span class="reserved">this</span>.toHide);
 			Element.show(<span class="reserved">this</span>.toShow);
 		} <span class="reserved">else</span> {
@@ -1117,7 +1294,7 @@ Help.<span class="reserved">prototype</span>.setCorrespondingFocus = Help_setCor
 		<span class="reserved">if</span> (_req.readyState == 4) {
 			<span class="reserved">if</span> (_req.status == 200) {				
 				Element.update (ttarget, _req.responseText);
-				<span class="reserved">if</span> (Helper.unsupportsEffects()) {
+				<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'sa'</span>)) {
 					Element.show(ttarget);
 				} <span class="reserved">else</span> {
 					Element.hide(<span class="reserved">this</span>.ttarget);
@@ -1193,7 +1370,7 @@ Navigation.<span class="reserved">prototype</span>.processNavigation = Navigatio
 	try {
 		<span class="comment">// properties</span>
 		<span class="reserved">this</span>.name = name;
-		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseNavUrl + <span class="literal">'?page='</span> + <span class="reserved">this</span>.name;
+		<span class="reserved">this</span>.url = <span class="reserved">this</span>.parseNavPath + <span class="literal">'?page='</span> + <span class="reserved">this</span>.name;
 		
 		switch (<span class="reserved">this</span>.level) {
 			case <span class="literal">'2'</span> :
@@ -1233,8 +1410,8 @@ Navigation.<span class="reserved">prototype</span>.processNavigation = Navigatio
 				Element.hide($(<span class="literal">'topsubnavconstatic'</span>));
 				Element.update(ttarget, _req.responseText);
 	
-				new Effect.Highlight(document.getElementsByClassName(<span class="literal">'highlight'</span>)[0], 
-					{duration: 1.5, startcolor:<span class="literal">'#ff0000'</span>, endcolor:<span class="literal">'#f9f9f9'</span>, restorecolor: <span class="literal">'#f9f9f9'</span>});
+				new Effect.Fade(document.getElementsByClassName(<span class="literal">'highlight'</span>)[0],
+					{duration: 0.5, delay: 0.4});
 
 			} <span class="reserved">else</span> {
 	  			throw new Errors(_req.statusText);
@@ -1278,6 +1455,8 @@ Forms.<span class="reserved">prototype</span> = new Base();
  */</span>
 Forms.<span class="reserved">prototype</span>.setOnEvent = Forms_setOnEvent;
 Forms.<span class="reserved">prototype</span>.storeFocus = Forms_storeFocus;
+Forms.<span class="reserved">prototype</span>.showFormElements = Forms_showFormElements;
+Forms.<span class="reserved">prototype</span>.hideFormElements = Forms_hideFormElements;
 
 <span class="comment">/**
  * Style elements depending on given params
@@ -1311,7 +1490,7 @@ Forms.setOnEvent(this, '','#0c3','dotted');
 
 <span class="comment">/**
  * Track the current content form field focus and makes it available application wide.
- * This is used to fire alerts within elem Current elementseveral Media Manager &lt;em&gt;_insertXXX&lt;/em&gt; functions.
+ * This is used to fire alerts within several Media Manager &lt;em&gt;_insertXXX&lt;/em&gt; functions.
  *
  * <span class="attrib">@param</span> {string} elem Current element
  * <span class="attrib">@throws</span> applyError on exception
@@ -1319,7 +1498,57 @@ Forms.setOnEvent(this, '','#0c3','dotted');
 <span class="reserved">function</span> Forms_storeFocus (elem)
 {
 	try {
-		storedFocus = elem.id;
+		stored_focus = elem.id;
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Display customized groups of form elements
+ * Depends on HTML Markup.
+ *&lt;br /&gt;
+ * For in depths explanation please have a look at the online
+ * project support area.
+ *
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Forms_showFormElements (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.elementHideFormElements;
+		
+		Effect.Appear(<span class="reserved">this</span>.elem.id + <span class="literal">'_container'</span>,{delay: 0, duration: 0.5});
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.elementHtmlHide);
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Hide customized groups of form elements
+ * Depends on HTML Markup.
+ *&lt;br /&gt;
+ * For in depths explanation please have a look at the online
+ * project support area.
+ *
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Forms_hideFormElements (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elem.className = <span class="reserved">this</span>.elementShowFormElements;
+		
+		Effect.Fade(<span class="reserved">this</span>.elem.id + <span class="literal">'_container'</span>,{delay: 0, duration: 0.4});
+		Element.update(<span class="reserved">this</span>.elem, <span class="reserved">this</span>.elementHtmlShow);
+		Behaviour.reapply(<span class="literal">'.'</span> + <span class="reserved">this</span>.elem.className);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1363,7 +1592,7 @@ Status.<span class="reserved">prototype</span>.getCbx = Status_getCbx;
  * Show/hide a group of form elements and color their labels.
  * Depends on delivered variable in the html markup.
  * &lt;br /&gt;
- * For in depths explanation please have a look on the online
+ * For in depths explanation please have a look at the online
  * project support area.
  *
  * <span class="attrib">@param</span> {array} elems Array of element(s)
@@ -1441,6 +1670,7 @@ Tables.<span class="reserved">prototype</span> = new Base();
 Tables.<span class="reserved">prototype</span>.showTableRow = Tables_showTableRow;
 Tables.<span class="reserved">prototype</span>.hideTableRow = Tables_hideTableRow;
 Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collapseTableRow;
+Tables.<span class="reserved">prototype</span>.toggleElem = Tables_toggleElem;
 
 <span class="comment">/**
  * Show formely hidden table row depending on current element pointer.
@@ -1493,10 +1723,10 @@ Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collaps
 		<span class="reserved">this</span>.ibid = String(<span class="literal">'i_'</span> + <span class="reserved">this</span>.bid[1]);
 		
 		<span class="comment">// process inner div</span>
-		Effect.Fade(<span class="reserved">this</span>.ibid,{duration: 0.8});
+		Effect.Fade(<span class="reserved">this</span>.ibid,{duration: 0.6});
 			
 		<span class="comment">// process outer table tr</span>
-		setTimeout(<span class="literal">"Tables.collapseTableRow('"</span>+ <span class="reserved">this</span>.obid +<span class="literal">"')"</span>, 800);
+		setTimeout(<span class="literal">"Tables.collapseTableRow('"</span>+ <span class="reserved">this</span>.obid +<span class="literal">"')"</span>, 550);
 		
 		<span class="comment">// coloring top row</span>
 		<span class="reserved">this</span>.elem.parentNode.parentNode.style.color = <span class="literal">''</span>;
@@ -1522,7 +1752,7 @@ Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collaps
 		<span class="reserved">this</span>.elem = elem;
 		
 		<span class="comment">// process inner div</span>
-		<span class="reserved">if</span> (Helper.unsupportsEffects(<span class="literal">'safari_exception'</span>)) {
+		<span class="reserved">if</span> (Helper.isBrowser(<span class="literal">'ie'</span>)) {
 			<span class="reserved">return</span> false;
 		} <span class="reserved">else</span> {
 			<span class="comment">// process outer table tr</span>
@@ -1534,9 +1764,164 @@ Tables.<span class="reserved">prototype</span>.collapseTableRow = Tables_collaps
 }
 
 <span class="comment">/**
+ * Toogle display of a table depending on current element pointer.
+ * 
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Tables_toggleElem (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.attr = <span class="literal">'id'</span>;
+		<span class="reserved">this</span>.processRow = Helper.getAttrParentNodeNextNode(<span class="reserved">this</span>.attr, <span class="reserved">this</span>.elem, 2);
+		<span class="reserved">this</span>.statusDisplay = Element.getStyle(<span class="reserved">this</span>.processRow, <span class="literal">'display'</span>);
+		
+		<span class="comment">// we need this for IE. He's to dumb to parse display value 'table'.</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.statusDisplay == <span class="literal">'table'</span> || <span class="reserved">this</span>.statusDisplay == null)
+			<span class="reserved">this</span>.statusDisplay = <span class="literal">'block'</span>;
+		
+		<span class="reserved">if</span> (<span class="reserved">this</span>.statusDisplay == <span class="literal">'block'</span>) {
+			<span class="reserved">if</span> (navigator.cookieEnabled == true) {
+				Init.setCookie(<span class="reserved">this</span>.processRow, <span class="literal">'none'</span>, <span class="literal">'/'</span>);
+			}
+			<span class="reserved">this</span>.elem.innerHTML = <span class="literal">'&lt;img title="'</span> + showElement + <span class="literal">'" src="../static/img/icons/open.gif" alt="" /&gt;'</span>;
+			Effect.Fade(<span class="reserved">this</span>.processRow,{duration: 0.4});
+		} <span class="reserved">else</span> {
+			<span class="reserved">if</span> (navigator.cookieEnabled == true) {
+				Init.setCookie(<span class="reserved">this</span>.processRow, <span class="literal">'block'</span>, <span class="literal">'/'</span>);
+			}
+			<span class="reserved">this</span>.elem.innerHTML = <span class="literal">'&lt;img title="'</span> + hideElement + <span class="literal">'" src="../static/img/icons/close.gif" alt="" /&gt;'</span>;
+			Effect.Appear(<span class="reserved">this</span>.processRow,{duration: 0.4});
+		}
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
  * Building new object instance of class Tables
  */</span>
-Tables = new Tables();</pre>
+Tables = new Tables();
+
+
+
+<span class="comment">/**
+ * Constructs the Preview class
+ * 
+ * <span class="attrib">@class</span> The Preview Class provides a call to the rendered frontend page
+ * The scope is application wide.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Preview ()
+{
+	try {
+		<span class="comment">// no properties		</span>
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/* Inherit from Base */</span>
+Preview.<span class="reserved">prototype</span> = new Base();
+
+<span class="comment">/**
+ * Instance Methods from prototype <span class="attrib">@class</span> Preview
+ */</span>
+Preview.<span class="reserved">prototype</span>.getFrontendView = Preview_getFrontendView;
+Preview.<span class="reserved">prototype</span>.reloadFrontendView = Preview_reloadFrontendView;
+Preview.<span class="reserved">prototype</span>.closeFrontendView = Preview_closeFrontendView;
+
+<span class="comment">/**
+ * Get rendered page frontend View.
+ * 
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Preview_getFrontendView (elem)
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = elem;
+		<span class="reserved">this</span>.elemPageId = <span class="reserved">this</span>.elem.id;
+		<span class="reserved">this</span>.elemPostingId = <span class="reserved">this</span>.elem.name;
+		<span class="reserved">this</span>.elemAction = <span class="reserved">this</span>.elem.rel;
+		
+		<span class="comment">// Save state in hidden field previewCtrl</span>
+		document.getElementsByName(<span class="literal">'preview'</span>)[0].value = 1;
+		
+		previewWin = window.open(<span class="reserved">this</span>.previewPath + <span class="literal">'?page='</span>+<span class="reserved">this</span>.elemPageId+<span class="literal">'&amp;posting_id='</span>+<span class="reserved">this</span>.elemPostingId+<span class="literal">'&amp;action='</span>+<span class="reserved">this</span>.elemAction+<span class="literal">''</span>,<span class="literal">'preview'</span>,<span class="literal">'width=1024,height=640,scrollbars=yes,resizable=yes'</span>);
+		
+		previewWin.focus();
+		
+		var insertPanel = <span class="reserved">function</span> () {
+			new Insertion.Top(previewWin.document.body, <span class="literal">'&lt;div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"&gt;&lt;p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"&gt;&lt;a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"&gt;&lt;strong&gt;'</span>+closePreviewPopup+<span class="literal">'&lt;/strong&gt;&lt;/a&gt;&lt;/div'</span>);
+		}
+		<span class="comment">// we have to set a big timeout cause the page (e.g. DOM) has</span>
+		<span class="comment">// to finish loading before we are able to use this function</span>
+		setTimeout(insertPanel, 6000);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Get rendered page frontend View when popup is still open.
+ * 
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Preview_reloadFrontendView ()
+{
+	try {
+		<span class="comment">// properties</span>
+		<span class="reserved">this</span>.elem = document.getElementsByClassName(<span class="literal">'preview'</span>)[0];
+		<span class="reserved">this</span>.elemPageId = Helper.getAttr(<span class="literal">'id'</span>, <span class="reserved">this</span>.elem);
+		<span class="reserved">this</span>.elemPostingId = Helper.getAttr(<span class="literal">'name'</span>, <span class="reserved">this</span>.elem);
+		<span class="reserved">this</span>.elemAction = Helper.getAttr(<span class="literal">'rel'</span>, <span class="reserved">this</span>.elem);
+		
+		previewWin = window.open(<span class="reserved">this</span>.previewPath + <span class="literal">'?page='</span>+<span class="reserved">this</span>.elemPageId+<span class="literal">'&amp;posting_id='</span>+<span class="reserved">this</span>.elemPostingId+<span class="literal">'&amp;action='</span>+<span class="reserved">this</span>.elemAction+<span class="literal">''</span>,<span class="literal">'preview'</span>,<span class="literal">'scrollbars=yes,resizable=yes'</span>);
+		
+		var insertPanel = <span class="reserved">function</span> () {
+			new Insertion.Top(previewWin.document.body, <span class="literal">'&lt;div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"&gt;&lt;p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"&gt;&lt;a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"&gt;&lt;strong&gt;'</span>+closePreviewPopup+<span class="literal">'&lt;/strong&gt;&lt;/a&gt;&lt;/div'</span>);
+		}
+		<span class="comment">// we have to set a big timeout cause the page (e.g. DOM) has</span>
+		<span class="comment">// to finish loading before we are able to use this function</span>
+		setTimeout(insertPanel, 6000);
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+<span class="comment">/**
+ * Close frontend View and set ctrl session var to null.
+ * 
+ * <span class="attrib">@param</span> {string} elem Current element
+ * <span class="attrib">@throws</span> applyError on exception
+ */</span>
+<span class="reserved">function</span> Preview_closeFrontendView ()
+{
+	try {
+		<span class="comment">// Empty hidden field previewCtrl</span>
+		document.getElementsByName(<span class="literal">'preview'</span>)[0].value = <span class="literal">''</span>;
+		
+		<span class="comment">// close window</span>
+		previewWin.close();
+
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+<span class="comment">/**
+ * Building new object instance of class Navigation
+ */</span>
+Preview = new Preview();</pre>
 	<hr>
 
 
@@ -1562,8 +1947,8 @@ Tables = new Tables();</pre>
   </tr>
 </table>
 </td>
-<td bgcolor="#EEEEFF" align="right" valign="top"><em>
-<b>Welcompose Publishing System</b></em>
+<TD ALIGN="right" VALIGN="middle">
+<B>Welcompose<sup><small>TM</small></sup> Javascript API</B>
 </td>
 </tr>
 
@@ -1594,6 +1979,6 @@ Tables = new Tables();</pre>
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 13 12:06:32 2006</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Wed Dec 10 08:00:14 2008</div>
 </body>
 </html>

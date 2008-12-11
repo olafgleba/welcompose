@@ -3,14 +3,14 @@
 <HTML>
 <HEAD>
 <TITLE>
-Forms
+Preview
 </TITLE>
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 </HEAD>
 <SCRIPT>
 function asd()
 {
-parent.document.title="Forms";
+parent.document.title="Preview";
 }
 </SCRIPT>
 <BODY BGCOLOR="white" onload="asd();">
@@ -40,13 +40,13 @@ parent.document.title="Forms";
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="Errors.html"><B>PREV CLASS</B></A><!-- 
+&nbsp;<A HREF="Navigation.html"><B>PREV CLASS</B></A><!-- 
    NEXT CLASS 
 -->
-&nbsp;<A HREF="Globals.html"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="Status.html"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="Forms.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Preview.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;
 <SCRIPT>
   <!--
@@ -71,12 +71,12 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <HR>
 
 <!-- ======== START OF CLASS DATA ======== -->
-<H2>Class Forms</H2>
+<H2>Class Preview</H2>
 <PRE>Object
    |
    +--<a href='Base.html'>Base</a>
          |
-         +--<b>Forms</b>
+         +--<b>Preview</b>
 </PRE>
 
 
@@ -84,7 +84,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <DL>
    <!-- Class definition -->
    <DT>class 
-   <B>Forms</B>
+   <B>Preview</B>
    
       <DT>extends <a href='Base.html'>Base</a> 
    
@@ -92,7 +92,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 </DL>
    
    <P>
-   <BR/>The Forms class handles all actions related to html form elements.
+   <BR/>The Preview Class provides a call to the rendered frontend page
  The scope is application wide.
 
  <BR/><I>Defined in <a href='overview-summary-wcom.core.js.html'>wcom.core.js</a></I><BR/><BR/>
@@ -140,13 +140,13 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TD>
       <CODE>
 	 <B>
-	    <A HREF="Forms.html#Forms()">Forms</A> 
+	    <A HREF="Preview.html#Preview()">Preview</A> 
 	 </B>
 	 ()
       </CODE>
       <BR>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      Constructs the Forms class.
+      Constructs the Preview class
       </TD>
 </TR>
 </TABLE>
@@ -174,12 +174,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#hideFormElements">hideFormElements</A></B>(&lt;string&gt; elem)
+	       <A HREF="#closeFrontendView">closeFrontendView</A></B>()
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Hide customized groups of form elements
- Depends on HTML Markup.
+	 Close frontend View and set ctrl session var to null.
       </TD>
    </TR>
 
@@ -192,13 +191,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#setOnEvent">setOnEvent</A></B>(&lt;string&gt; elem, &lt;string&gt; bgcolor, &lt;string&gt; bcolor, &lt;string&gt; bstyle)
+	       <A HREF="#getFrontendView">getFrontendView</A></B>(&lt;string&gt; elem)
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Style elements depending on given params
-
-
+	 Get rendered page frontend View.
       </TD>
    </TR>
 
@@ -211,29 +208,11 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
       <TD>
 	 <CODE>
 	    <B>
-	       <A HREF="#showFormElements">showFormElements</A></B>(&lt;string&gt; elem)
+	       <A HREF="#reloadFrontendView">reloadFrontendView</A></B>()
 	 </CODE>
 	 <BR>
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Display customized groups of form elements
- Depends on HTML Markup.
-      </TD>
-   </TR>
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&nbsp;void</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#storeFocus">storeFocus</A></B>(&lt;string&gt; elem)
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 Track the current content form field focus and makes it available application wide.
+	 Get rendered page frontend View when popup is still open.
       </TD>
    </TR>
 
@@ -276,13 +255,13 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    </TR>
 </TABLE>
 
-<A NAME="Forms()"><!-- --></A><H3>
-Forms</H3>
-<PRE><B>Forms</B>()</PRE>
+<A NAME="Preview()"><!-- --></A><H3>
+Preview</H3>
+<PRE><B>Preview</B>()</PRE>
 
 
 <UL>
-   Constructs the Forms class.
+   Constructs the Preview class
 </UL>
 
 
@@ -319,15 +298,11 @@ Forms</H3>
 
 <!-- One single method detail entry -->
 
-   <A NAME="hideFormElements"><!-- --></A>
-   <H3>hideFormElements</H3>
-   <PRE>void <B>hideFormElements</B>(&lt;string&gt; elem)</PRE>
+   <A NAME="closeFrontendView"><!-- --></A>
+   <H3>closeFrontendView</H3>
+   <PRE>void <B>closeFrontendView</B>()</PRE>
    
-      <UL>Hide customized groups of form elements
- Depends on HTML Markup.
-<br />
- For in depths explanation please have a look at the online
- project support area.</UL>
+      <UL>Close frontend View and set ctrl session var to null.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -353,59 +328,11 @@ Forms</H3>
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
-   <A NAME="setOnEvent"><!-- --></A>
-   <H3>setOnEvent</H3>
-   <PRE>void <B>setOnEvent</B>(&lt;string&gt; elem, &lt;string&gt; bgcolor, &lt;string&gt; bcolor, &lt;string&gt; bstyle)</PRE>
+   <A NAME="getFrontendView"><!-- --></A>
+   <H3>getFrontendView</H3>
+   <PRE>void <B>getFrontendView</B>(&lt;string&gt; elem)</PRE>
    
-      <UL>Style elements depending on given params
-
- <br /><br />Example:
- <pre><code>
-Forms.setOnEvent(this, '','#0c3','dotted');
- </code></pre></UL>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <UL>
-   <B>Parameters:</B>
-   
-     <UL><CODE>elem</CODE> -  Current element  
-      </UL> 
-   
-     <UL><CODE>bgcolor</CODE> -  Define background color  
-      </UL> 
-   
-     <UL><CODE>bcolor</CODE> -  Define border color  
-      </UL> 
-   
-     <UL><CODE>bstyle</CODE> -  Define border style attribute  
-      </UL> 
-   
-   </UL>
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <UL>   
-   <B>Throws:</B><UL>- applyError on exception    </UL>
-   </UL>
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
-   <A NAME="showFormElements"><!-- --></A>
-   <H3>showFormElements</H3>
-   <PRE>void <B>showFormElements</B>(&lt;string&gt; elem)</PRE>
-   
-      <UL>Display customized groups of form elements
- Depends on HTML Markup.
-<br />
- For in depths explanation please have a look at the online
- project support area.</UL>
+      <UL>Get rendered page frontend View.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -431,12 +358,11 @@ Forms.setOnEvent(this, '','#0c3','dotted');
    <!-- ADDITIONAL ATTRIBUTES  END -->
 <HR>
 
-   <A NAME="storeFocus"><!-- --></A>
-   <H3>storeFocus</H3>
-   <PRE>void <B>storeFocus</B>(&lt;string&gt; elem)</PRE>
+   <A NAME="reloadFrontendView"><!-- --></A>
+   <H3>reloadFrontendView</H3>
+   <PRE>void <B>reloadFrontendView</B>()</PRE>
    
-      <UL>Track the current content form field focus and makes it available application wide.
- This is used to fire alerts within several Media Manager <em>_insertXXX</em> functions.</UL>
+      <UL>Get rendered page frontend View when popup is still open.</UL>
    
 
    <!-- METHOD PARAMETERS START -->
@@ -493,13 +419,13 @@ Forms.setOnEvent(this, '','#0c3','dotted');
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="Errors.html"><B>PREV CLASS</B></A><!-- 
+&nbsp;<A HREF="Navigation.html"><B>PREV CLASS</B></A><!-- 
    NEXT CLASS 
 -->
-&nbsp;<A HREF="Globals.html"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="Status.html"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="index.html" TARGET="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="Forms.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Preview.html" TARGET="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;
 <SCRIPT>
   <!--
