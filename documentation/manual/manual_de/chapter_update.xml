@@ -23,31 +23,17 @@
 			Aktualisierung von Welcompose so einfach wie möglich zu machen.
 		</para>
 		
-		<note>
-			<para>
-				Mit Veröffentlichung der ersten Aktualisierung von Welcompose 
-			werden wir Routinen zur Verfügung stellen (und hier dokumentieren), die 
-			einen weitestgehend automatisierten Aktualisierungsprozess ermöglichen
-			</para>
-		</note>
-		
-		<!-- <para>
+		<para>
 			Sollten Sie die Updates für eine oder mehrere Versionen ausgelassen
 			haben und möchten direkt auf die aktuellste Version wechseln, 
 			ist es in der Regel möglich. Die Update-Routinen erkennen
 			selbstständig, welche Aktionen ausgeführt werden müssen und welche
 			nicht. Sie müssen von den Zwischenschritten, die Sie ausgelassen
-			haben, nur jeweils die im Abschnitt <emphasis>Manuelle
-			Änderungen</emphasis> beschriebenen Modifikationen nachvollziehen.
+			haben, ggf. nur jeweils die im Abschnitt <emphasis>Manuelle
+			Änderungen</emphasis> (s. (siehe
+			<xref linkend="install_instructions.installation.manual_installation"/>)
+			beschriebenen Modifikationen nachvollziehen.
 		</para>
-		
-		<warning>
-			<para>
-				Für Versionen vor 1.0 ist es nötig, sämtliche Update-Schritte
-				von Hand nachzuvollziehen, da die Update-Prozedur nur zum
-				Teil automatisiert ist.
-			</para>
-		</warning> -->
 	</sect1>
 	
 	<sect1 id="update.versioning">
@@ -106,7 +92,7 @@
 						Zwischen zwei Minor Releases werden Fehler
 						korrigiert, die Änderungen an den internen
 						Schnittstellen, der Ausgabe oder Datenbank
-						erfrodern. Zudem werden neue Funktionen
+						erfordern. Zudem werden neue Funktionen
 						kleineren Ausmasses hinzugefügt, die leichte
 						Anpassungen an den internen Schnittstellen, der
 						Ausgabe oder der Datenbank nötig machen. Für Sie
@@ -177,11 +163,11 @@
 		</note>
 	</sect1>
 	
-	<!-- <sect1 id="update.preparations">
+	<sect1 id="update.preparations">
 		<title>Vorbereitungen</title>
 		
 		<para>
-			Bevor Sie mit der Aktualisierungsprozedur starten können,
+			Bevor Sie mit der Aktualisierungsprozedur starten können/sollten,
 			gilt es, Sicherungskopien der Datenbank und der gesamten
 			Welcompose-Installation anzulegen. Diese können Sie im Falle
 			eines Falles verwenden, um beim Problemen Ihre aktuelle
@@ -214,31 +200,21 @@
 	</sect1>
 	
 	<sect1 id="update.0">
-		<title>Aktualisierungen für 0.x.y</title>
-		
-		<sect2 id="update.0.60_to_80">
-			<title>0.6.0 nach 0.8.0</title>
+		<title>Aktualisierungen für Version kleiner 1.0.0</title>
 			
-			<note>
-				<para>
-					Da der Updater für Welcompose zu diesem Zeitpunkt
-					noch nicht voll automatisiert ist, müssen noch
-					etliche Schritte des Update-Prozesses von Hand
-					erledigt werden. Im Rahmen der nächsten
-					Versionsschritte wird die Automatisierung allerdings
-					deutlich ausgebaut.
-				</para>
-			</note>
-			
-			<sect3 id="update.0.60_to_80.update_files">
+			<sect2 id="update.0.update_files">
 				<title>Dateien aktualisieren</title>
 				
 				<para>
 					Um die Scripte und HTML-Vorlagen von Welcompose zu
 					aktualisieren, empfiehlt es sich, die komplette
 					Installation vom Server zu löschen. So stellen Sie
-					sicher, dass keine Dateileichen zurückbleiben. Ausgenommen
-					sind folgende Dateien respektive Ordner:
+					sicher, dass keine Dateileichen zurückbleiben.
+				</para>
+				
+				<para>
+					Ausgenommen sind folgende <emphasis role="strong">wichtige</emphasis>
+					Dateien respektive Ordner:
 				</para>
 				
 				<itemizedlist>
@@ -264,25 +240,55 @@
 					</listitem>
 				</itemizedlist>
 				
+				<warning>
+					<para>
+						Achten achten Sie darauf, die o.g. Dateien oder/und Ordner keinesfalls zu löschen
+						respektive zu überschreiben. Die Datei <filename>sys.inc.php</filename> ist die zentrale Konfigurations
+						datei. In den Unterordner der Verzeichnisses <filename>files/</filename> befinden
+						sich ihre binären Dateien.
+					</para>
+				</warning>
+				
+				<note>
+					<para>
+						Sollten Sie weitere Dateien der Installation manuell 
+						angepasst haben - beispielsweise ein der Standardinstallation
+						hinzugefügtes Textmakro oder Smarty-Plugin - sollten diese selbstredend
+						ebenfalls gespeichert werden, <emphasis role="strong">bevor</emphasis>
+						Sie den Aktualisierungsprozeß starten. Dieses ermöglicht einen
+						späteren Abgleich mit den aktualisierten Dateien.
+					</para>
+				</note>
+				
 				<para>
 					Haben Sie dies erledigt, gilt es, die aktuelle
 					Welcompose-Version zu beschaffen. Laden Sie dazu die
-					aktuelle Welcompose-Version in Quellform aus dem
-					Download-Bereich herunter. Sie erkennen die richtige
-					Datei an dem Bestandteil
-					<filename>-src</filename> im Namen (nicht
-					<filename>-full-src</filename>). 
+					aktuelle Welcompose-Version in Quellform aus dem 
+					<ulink type="external" url="http://welcompose.de/cms/downloads/">Download-Bereich
+					 der Software-Webseite</ulink> herunter. Sie erkennen die richtige Datei
+					an der Endung des Dateinamens (welcompose-x.x.x<filename>-full-src</filename>.suffix).
 				</para>
 				
 				<para>
 					Entpacken Sie die Welcompose-Distribution und laden Sie
-					alle Daten aus dem entpacken Welcompose-Archiv
-					auf den Server (ohne den Ordner <filename>setup/</filename>).
+					alle Daten aus dem entpackten Welcompose-Archiv
+					auf den Server.
+				</para>
+				
+				<note>
+					<para>
+						Den Ordner <filename>setup/</filename> aus der entpackten Distribution
+						brauchen Sie <emphasis role="strong">nicht</emphasis> mit auf den
+						Server laden.
+					</para>
+				</note>
+
+				<para>
 					Stellen Sie sicher, dass alle Ordner und Dateien über
 					Schreibrechte verfügen, die vom PHP (respektive
 					Welcompose) beschrieben werden können müssen.
 				</para>
-
+				
 				<para>
 					Folgende Verzeichnisse müssen für PHP beschreibbar sein:
 				</para>
@@ -319,132 +325,19 @@
 						<para>tmp/log/</para>
 					</listitem>
 					<listitem>
+						<para>tmp/mail_attachments/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/sitemaps/</para>
+					</listitem>
+					<listitem>
 						<para>tmp/updater/</para>
 					</listitem>
 				</itemizedlist>
-				
-				<para>
-					Ebenfalls beschreibbar sein müssen folgende Dateien:
-				</para>
 
-				<itemizedlist>
-					<listitem>
-						<para>core/conf/sys.inc.php</para>
-					</listitem>
-				</itemizedlist>
-			</sect3>
+			</sect2>
 			
-			<sect3 id="update.0.60_to_80.update_config">
-				<title>Konfiguration aktualisieren</title>
-				
-				<para>
-					Im Rahmen der Umstellung von Welcompose 0.6.0 auf 0.8.0
-					müssen auch einige Änderungen an der zentralen
-					Konfigurationsdatei sys.inc.php vorgenommen werden.
-				</para>
-				
-				<para>
-					Durch die Umstellung der Logging-Infrastruktur sind im Abschnitt
-					<code>[environment]</code> die Direktiven <code>dev</code>
-					sowie <code>error_length</code> weggefallen, die Sie bitte
-					entfernen. Statt dessen ist der Abschnitt <code>[log]</code>
-					hinzugekommen:
-				</para>
-				
-				<programlisting language="ini"><![CDATA[
-[log]
-handler = "null"
-name = ""
-level = PEAR_LOG_INFO
-]]></programlisting>
-				
-				<tip>
-					<para>
-						Bei der Standard-Konfiguration des Log Handlers ist das
-						Logging deaktiviert. Es wird aber empfohlen, das Logging
-						zu aktivieren. Wie dies geht, erfahren Sie im
-						<xref linkend="extended_configuration.logging"/>.
-					</para>
-				</tip>
-				
-				<para>
-					Weiter sind im Abschnitt <code>[urls]</code> mehrere
-					Muster zur Generierung von URLs hinzugekommen. Fügen Sie bitte
-					die fehlenden Einträge zu Ihrer Konfigurationsdatei hinzu.
-					Die komplette Liste der URL-Muster für Welcompose 0.8.0:
-				</para>
-				
-				<programlisting language="ini"><![CDATA[
-[urls]
-simple_page_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_page_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
-simple_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
-generator_form_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-generator_form_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Index"
-blog_index = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-blog_index_tag = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
-blog_index_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
-blog_index_tag_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
-blog_index_start = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-blog_index_start_tag = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
-blog_index_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
-blog_index_start_tag_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
-blog_atom_10 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
-blog_atom_10_tag = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10&amp;tag=<tag_word>"
-blog_atom_10_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Atom10"
-blog_atom_10_start_tag = "{$root_www}/index.php?project_name=<project_name>&amp;action=Atom10&amp;tag=<tag_word>"
-blog_rss_20 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
-blog_rss_20_tag = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&amp;tag=<tag_word>"
-blog_rss_20_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Rss20"
-blog_rss_20_start_tag = "{$root_www}/index.php?project_name=<project_name>&amp;action=Rss20&amp;tag=<tag_word>"
-blog_comments_atom_10 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsAtom10"
-blog_comments_atom_10_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=CommentsAtom10"
-blog_comments_rss_20 = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsRss20"
-blog_comments_rss_20_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=CommentsRss20"
-blog_item = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
-blog_item_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
-blog_archive_year = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
-blog_archive_year_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
-blog_archive_year_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
-blog_archive_year_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
-blog_archive_month = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
-blog_archive_month_pager = "{$root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
-blog_archive_month_start = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
-blog_archive_month_start_pager = "{$root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
-global_template_url = "{$root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>"
-global_template_url_start = "{$root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
-]]></programlisting>
-				
-				<note>
-					<para>
-						Achten Sie bitte darauf, bei der Übernahme von URL-Mustern
-						die Variable <code>{$root_www}</code> durch den WWW-Pfad
-						zu Ihrer Welcompose-installation zu ersetzen.
-					</para>
-				</note>
-				
-				<para>
-					Schlussendlich müssen zu den beiden Abschnitten
-					<code>[media]</code> und <code>[global_file]</code>
-					je ein leerer Schlüssel mit dem Namen <code>chmod</code>
-					hinzugefügt werden:
-				</para>
-				
-				<programlisting language="ini"><![CDATA[
-[media]
-store_www = "/www-pfad/zu/welcompose/files/media"
-store_disk = "/pfad/zu/welcompose/files/media"
-chmod = 
-
-[global_file]
-store_www = "/www-pfad/zu/welcompose/files/global_files"
-store_disk = "/pfad/zu/welcompose/files/global_files"
-chmod = 
-]]></programlisting>
-			</sect3>
-			
-			<sect3 id="update.0.60_to_80.run_updater">
+			<sect2 id="update.0.run_updater">
 				<title>Update-Prozedur ausführen</title>
 				
 				<para>
@@ -455,9 +348,9 @@ chmod =
 					auf.
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.license">
+				<figure id="update.0.run_updater.license">
 					<title>Update: Lizenz anerkennen</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.license.png"/>
+					<graphic fileref="images/update/0/run_updater.license.png"/>
 				</figure>
 				
 				<para>
@@ -482,9 +375,9 @@ chmod =
 					linkend="install_instructions.configure_wcom.requirements"/>.
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.requirements">
+				<figure id="update.0.run_updater.requirements">
 					<title>Update: Voraussetzungen</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.requirements.png"/>
+					<graphic fileref="images/update/0/run_updater.requirements.png"/>
 				</figure>
 				
 				<para>
@@ -493,9 +386,9 @@ chmod =
 					zu erstellen.
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.backup">
+				<figure id="update.0.run_updater.backup">
 					<title>Update: Backups</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.backup.png"/>
+					<graphic fileref="images/update/0/run_updater.backup.png"/>
 				</figure>
 				
 				<para>
@@ -504,13 +397,13 @@ chmod =
 					etlichen einzelnen Aufgaben, sogenannten Tasks, die
 					nacheinander ausgeführt werden. Der Updater ermittelt
 					selber, welche Tasks ausgeführt werden müssen. Sobald
-					Sie auf <guibutton>Start update</guibutton> klicken,
+					Sie auf <guibutton>Update starten</guibutton> klicken,
 					werden die einzelnen Tasks ausgeführt.
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.update_database">
+				<figure id="update.0.run_updater.database">
 					<title>Update: Datenbank aktualisieren</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.update_database.png"/>
+					<graphic fileref="images/update/0/run_updater.database.png"/>
 				</figure>
 				
 				<para>
@@ -524,14 +417,14 @@ chmod =
 					erfolgreich ausgeführt werden konnten.
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.database_update_finished">
+				<figure id="update.0.run_updater.database_finish">
 					<title>Update: Datenbank erfolgreich aktualisiert</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.database_update_finished.png"/>
+					<graphic fileref="images/update/0/run_updater.database_finish.png"/>
 				</figure>
 				
 				<para>
 					Nachdem die Datenbank erfolgreich aktualisiert wurde, können
-					Sie auf die Schaltfläche <guibutton>Finish update</guibutton>
+					Sie auf die Schaltfläche <guibutton>Update beenden</guibutton>
 					klicken, um den Aktualisierungs-Prozess zu beenden. Auf
 					der letzten Seite werden Sie noch daran erinnert, das
 					Verzeichnis mit dem Updater vom Server zu löschen. Danach
@@ -539,9 +432,9 @@ chmod =
 					Ihrer neuen Welcompose-Version arbeiten!
 				</para>
 				
-				<figure id="update.0.60_to_80.run_updater.finish">
+				<figure id="update.0.run_updater.finish">
 					<title>Update: Aktualisierung erfolgreich beendet</title>
-					<graphic fileref="images/update/0/60_to_80/run_updater.finish.png"/>
+					<graphic fileref="images/update/0/run_updater.finish.png"/>
 				</figure>
 				
 				<warning>
@@ -552,7 +445,17 @@ chmod =
 						Webpräsenz missbraucht werden.
 					</para>
 				</warning>
-			</sect3>
-		</sect2>
-	</sect1> -->
+				
+				<note>
+					<para>
+						Gegebenenfalls ist es nach dem Aktualisierungsprozeß notwendig,
+						die zuvor kompilierten Smarty-Vorlagen
+						unter <filename>/admin/smarty/compiled</filename> zu löschen
+						um evtl. neue Ansichten oder/und Menüpunkte anzuzeigen. Bitte denken
+						sie auch daran, den Cache ihres Browsers zu löschen!
+					</para>
+				</note>
+			</sect2>
+
+	</sect1>
 </chapter>

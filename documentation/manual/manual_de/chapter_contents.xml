@@ -83,8 +83,8 @@
 			
 				<para>
 					Die Verwaltung der Seiten erfolgt über den Menüpunkt
-					<guimenuitem>Seiten</guimenuitem> im Bereich
-					<guimenuitem>Inhalte</guimenuitem>. Die Seiten sind nach
+					<guisubmenu>Seiten</guisubmenu> im Bereich
+					<guimenu>Inhalte</guimenu>. Die Seiten sind nach
 					den jeweiligen Navigationen, zu denen sie gehören,
 					zusammengefasst und in der Reihenfolge und Einrückung
 					dargestellt, wie sie später ausgegeben werden. 
@@ -283,6 +283,18 @@
 						</listitem>
 					</varlistentry>
 					<varlistentry>
+						<term><guilabel>Entwurf</guilabel></term>
+						<listitem>
+							<para>
+								Speichert die Seite im Entwurf-Modus. So lange
+								diese Einstellung aktiv ist, wird die Seite 
+								nicht veröffentlicht. Gleichzeitig wird die
+								Seite nicht in der Ausgabe der Navigation
+								berücksichtigt.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
 						<term><guilabel>Benutzergruppen</guilabel></term>
 						<listitem>
 							<para>
@@ -305,9 +317,8 @@
 					beliebigem Fliesstext, der beispielsweise für die Befüllung
 					von Metatags im Seitenkopf verwendet werden kann. Die
 					Verwendung der Felder <guilabel>Sitemap Änderungshäufigkeit</guilabel>
-					und <guilabel>Sitemap Priorität</guilabel> wird zu einem späteren
-					Zeitpunkt in <xref linkend="usage.google_sitemaps"/> erklärt, der augenblicklich
-					noch nicht gefüllt sind.
+					und <guilabel>Sitemap Priorität</guilabel> wird in
+					<xref linkend="usage.google_sitemaps"/> erklärt.
 				</para>
 			</sect3>
 		</sect2>
@@ -332,6 +343,15 @@ Beschreibung: {$page.description}
 ]]></programlisting>
 			</example>
 			
+			<note>
+				<para>
+					Auch hier gilt: mit der Smarty-Debug Konsole 
+					(Seitenvorlagen: <xref linkend="templating.templates.usage.display_assigned_data"/>)
+					finden sie heraus, welche Variablen ihnen in der aktuellen Seitenvorlage zur 
+					Verfügung stehen.
+				</para>
+			</note>
+			
 			<example id="contents.pages.output.get_page">
 				<title>Seite auslesen</title>
 				
@@ -353,6 +373,13 @@ Seiten-ID: {$some_page.id}
 Seiten-Name: {$some_page.name}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>some_page</userinput>) ist frei wählbar.
+				</para>
+			</note>
 			
 			<example id="contents.pages.output.get_pages">
 				<title>Mehrere Seiten auslesen</title>
@@ -377,7 +404,8 @@ Seiten-Name: {$some_page.name}
 
 				<para>
 					Alternativ können hier die abhängigen Menüpunkte auch über den
-					Parameter <emphasis>navigation_name</emphasis> ausgelesen werden.
+					Namen der Navigation (Parameter <emphasis>navigation_name</emphasis>)
+					ausgelesen werden.
 				</para>
 				
 				<programlisting language="smarty"><![CDATA[
@@ -391,6 +419,13 @@ Seiten-Name: {$some_page.name}
 {/foreach}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die in den beiden vorherigen Beispielen genutzte Wertangabe des Parameters
+					<filename>var</filename> (hier: <userinput>pages</userinput>) ist frei wählbar.
+				</para>
+			</note>
 			
 			<tip>
 				<para>
@@ -429,8 +464,8 @@ Seiten-Name: {$some_page.name}
 			
 			<para>
 				Die Verwaltung der Globalen Boxen erfolgt über eine Reihe von
-				Formularen im Bereich <guibutton>Inhalte</guibutton> unter
-				dem Menüpunkt <guibutton>Globale Boxen</guibutton>.
+				Formularen im Bereich <guimenu>Inhalte</guimenu> unter
+				dem Menüpunkt <guisubmenu>Globale Boxen</guisubmenu>.
 			</para>
 			
 			<figure id="contents.global_boxes.manage.global_boxes_overview">
@@ -496,7 +531,8 @@ Seiten-Name: {$some_page.name}
 			</variablelist>
 			
 			<para>
-				Gleichzeitig bieten die Globalen Boxen Unterstützung durch den Mediamanager (siehe <xref linkend="media.mediamanager"/>).
+				Gleichzeitig bieten die Globalen Boxen Unterstützung durch den Mediamanager
+				(siehe <xref linkend="media.mediamanager"/>).
 			</para>
 		</sect2>
 		
@@ -538,6 +574,13 @@ Inhalt der Global Box: {$global_box.content}
 ]]></programlisting>
 			</example>
 			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>global_box</userinput>) ist frei wählbar.
+				</para>
+			</note>
+			
 			<example id="contents.global_boxes.output.get_global_boxes">
 				<title>Globale Boxen ausgeben</title>
 				
@@ -560,6 +603,13 @@ Inhalt der Global Box: {$global_box.content}
 {/foreach}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters
+					<filename>var</filename> (hier: <userinput>global_boxes</userinput>) ist frei wählbar.
+				</para>
+			</note>
 		</sect2>
 	</sect1>
 
@@ -588,7 +638,7 @@ Inhalt der Global Box: {$global_box.content}
 			<title>Verwaltung</title>
 			
 			<para>
-				Da Boxen seitenindividuell sind, erfolgt deren Verwaltung im Submenu der
+				Da Boxen seitenindividuell sind, erfolgt deren Verwaltung im Submenü der
 				Seitenverwaltung unter dem Menüpunkt <guibutton>Boxen</guibutton>.
 			</para>
 			
@@ -602,6 +652,66 @@ Inhalt der Global Box: {$global_box.content}
 				alphabetischer Reihenfolge und bietet Links zum Hinzufügen,
 				Bearbeiten und Löschen von Boxen.
 			</para>
+			
+			<para>
+				Über <emphasis role="strong">Bestehende Boxen übernehmen</emphasis> haben sie
+				die komfortable Möglichkeit Boxen, die anderen Seiten zugeordnet sind,
+				der aktuellen Seite hinzuzufügen (asynchron, ohne Neu-Laden der Seite).
+				Dieses erspart viele Klicks und ausufernde
+				Copy &amp; Paste Orgien.
+			</para>
+			
+			<figure id="contents.boxes.manage.boxes_foreign_boxes_overview">
+				<title>Offene Ansicht der Option: Bestehende Boxen übernehmen</title>
+				<graphic fileref="images/contents/boxes/manage.boxes_foreign_boxes_overview.png"/>
+			</figure>
+			
+			<variablelist>
+				<title>Funktionsspalten: Bestehende Boxen übernehmen</title>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Name/Titel der Box.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Seite</guilabel></term>
+					<listitem>
+						<para>
+							Name der Seite, der die Box zugeordnet ist, respektive
+							für die sie angelegt wurde.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt(Quellansicht)</guilabel></term>
+					<listitem>
+						<para>
+							Begrenzte Anzeige des Inhaltes der Box.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Anzeigen</guilabel></term>
+					<listitem>
+						<para>
+							Durch einen Klick auf die Schaltfläche <guibutton>Anzeige</guibutton>
+							wird ihnen innerhalb der Seite der vollständige Inhalt der Box angezeigt. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Box übernehmen</guilabel></term>
+					<listitem>
+						<para>
+							Die Schaltfläche <guibutton>Box übernehmen</guibutton> veranlasst,
+							das die ausgewählte Box der aktuellen Seite hinzugefügt wird.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 			
 			<figure id="contents.boxes.manage.add_box">
 				<title>Neue Box anlegen</title>
@@ -655,7 +765,8 @@ Inhalt der Global Box: {$global_box.content}
 			</variablelist>
 			
 			<para>
-				Gleichzeitig bieten die seitenabhängigen Boxen Unterstützung durch den Mediamanager (siehe <xref linkend="media.mediamanager"/>).
+				Gleichzeitig bieten die seitenabhängigen Boxen Unterstützung durch den Mediamanager
+				(siehe <xref linkend="media.mediamanager"/>).
 			</para>
 		</sect2>
 		
@@ -696,6 +807,13 @@ Inhalt der Box: {$box.content}
 ]]></programlisting>
 			</example>
 			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>box</userinput>) ist frei wählbar.
+				</para>
+			</note>
+			
 			<example id="contents.boxes.output.get_box_by_id">
 				<title>Box anhand der ID ausgeben</title>
 				
@@ -715,6 +833,13 @@ Name der Box: {$box.name}
 Inhalt der Box: {$box.content}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>box</userinput>) ist frei wählbar.
+				</para>
+			</note>
 			
 			<example id="contents.boxes.output.get_boxes">
 				<title>Boxen ausgeben</title>
@@ -737,6 +862,14 @@ Inhalt der Box: {$box.content}
 {/foreach}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>boxes</userinput>) ist frei wählbar.
+				</para>
+			</note>
+			
 		</sect2>
 	</sect1>
 
@@ -773,8 +906,8 @@ Inhalt der Box: {$box.content}
 			<para>
 				Die Verwaltung der Navigationen erfolgt über die
 				Administrationsoberfläche unter dem Menüpunkt
-				<guimenuitem>Navigationen</guimenuitem> im Bereich
-				<guimenuitem>Inhalte</guimenuitem>. Dort können
+				<guisubmenu>Navigationen</guisubmenu> im Bereich
+				<guimenu>Inhalte</guimenu>. Dort können
 				Navigationen hinzugefügt, bearbeitet und gelöscht werden.
 			</para>
 			
@@ -837,6 +970,13 @@ Name der Navigation: {$navigation.name}
 ]]></programlisting>
 			</example>
 			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>navigation</userinput>) ist frei wählbar.
+				</para>
+			</note>
+			
 			<example id="contents.navigations.output.get_navigations">
 				<title>Mehrere Navigationen auslesen</title>
 				
@@ -858,6 +998,20 @@ Name der Navigation: {$navigation.name}
 {/foreach}
 ]]></programlisting>
 			</example>
+			
+			<note>
+				<para>
+					Die im vorherigen Beispiel genutzte Wertangabe des Parameters 
+					<filename>var</filename> (hier: <userinput>navigations</userinput>) ist frei wählbar.
+				</para>
+			</note>
+			
+			<tip>
+				<para>
+					Wie sie mehrstufige Navigationen erstellen, erläutern wir im Anwendungsbereich
+					<xref linkend="usage.nested_navigation"/>.
+				</para>
+			</tip>
 			
 		</sect2>
 	</sect1>
@@ -984,7 +1138,7 @@ Name der Navigation: {$navigation.name}
 				Inhaltsbereichen der Inhaltsseiten sowie bei den verschiedenen
 				Boxen möglich. Das Menü zur Auswahl der Strukturvorlage, die
 				benutzt werden soll, kann über den Menüpunkt
-				<guimenuitem>Strukturvorlagen</guimenuitem> über dem
+				<guisubmenu>Strukturvorlagen</guisubmenu> über dem
 				jeweiligen Inhaltsbereich aufgerufen werden. Die vorhandenen
 				Strukturvorlagen werden alphabetisch sortiert aufgelistet und
 				lassen sich mit einem Klick auf den Namen der gewünschten

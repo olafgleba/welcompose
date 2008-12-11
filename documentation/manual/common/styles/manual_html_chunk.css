@@ -93,6 +93,17 @@ div.book div.titlepage {
 border-bottom: 3px dotted #ccc;
 margin-bottom: 20px;
 }
+div.table-contents th {
+width: auto;
+text-align: left;
+color: #666;
+padding-top: 15px;
+border-bottom: 1px dotted #666;
+}
+div.table-contents td {
+border-bottom: 1px dotted #666;
+padding: 5px 5px 5px 0;
+}
 div.chapter, div.appendix {
 margin-top: 0;
 padding-top: 20px;

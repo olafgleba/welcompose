@@ -46,8 +46,9 @@
 			<para>
 				Die entgegengesetzte Aufgabenstellung - die seitenabhängige Nutzung von Media-Dateien - 
 				wird durch den <filename>Mediamanager</filename> (siehe <xref linkend="media.mediamanager"/>)
-				abgedeckt. Über diesen Mediamanager verwalten Sie ihre lokalen Media-Dateien und fügen diese Ihren Seiteninhalten
-				hinzu. Der Mediamanager wird im nachfolgenden Kapitel ausführlich vorgestellt. 
+				abgedeckt. Über diesen Mediamanager verwalten Sie ihre lokalen Media-Dateien und fügen
+				diese Ihren Seiteninhalten hinzu. Der Mediamanager wird im nachfolgenden Kapitel
+				ausführlich vorgestellt. 
 			</para>
 		</sect2>
 	</sect1>
@@ -60,21 +61,23 @@
 
 			<para>
 				Mit dem Mediamanager verwalten Sie Bild, Audio- und Filmdateien, Dokumente und
-				sonstige Media-Dateien, die sie in den inhaltlichen Seiten nutzen wollen. Mit dem Mediamanager laden Sie die
-				Dateien hoch, editieren Meta-Daten, löschen Dateien und fügen Media-Dateien den Seiteninhalten hinzu. 
+				sonstige Media-Dateien, die sie in den inhaltlichen Seiten nutzen wollen. Mit dem Mediamanager
+				laden Sie die Dateien hoch, editieren Meta-Daten, löschen Dateien und fügen Media-Dateien
+				den Seiteninhalten hinzu. 
 			</para>
 		
 			<para>
-				Der Mediamanager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den textlichen Inhalten
-				hinzugefügt werden können. Dies umfasst neben den inhaltlichen Seiten die seitenabhängigen
+				Der Mediamanager ist auf allen Eingabeseiten verfügbar, in denen mediale Inhalte den
+				textlichen Inhalten hinzugefügt werden können. Dies umfasst neben den inhaltlichen Seiten
+				die seitenabhängigen
 				<emphasis>Boxen</emphasis> (siehe <xref linkend="contents.boxes"/>) und
 				<emphasis>Globalen Boxen</emphasis> (siehe <xref linkend="contents.global_boxes"/>).
 			</para>
 			
 			<para>	
 				Der Mediamanager ist ein AHAH
-				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AHAH"/></para></footnote>/AJAX
-				<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AJAX"/></para></footnote> Element,
+		<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AHAH"/></para></footnote>/AJAX
+		<footnote><para><ulink type="external" url="http://en.wikipedia.org/wiki/AJAX"/></para></footnote> Element,
 				das die Media-Dateien im Hintergrund lädt ohne dass die inhaltliche Seite, auf der Sie sich gerade
 				befinden, neu geladen werden muss. Dieses ermöglicht ein unterbrechungsfreies Arbeiten an
 				den Seiteninhalten.
@@ -91,7 +94,8 @@
 			<title>Funktionale Bereiche</title>
 			
 			<para>
-				Neben dem Haupteinsatzzweck - der Verwaltung der lokalen Media-Dateien (<guimenuitem>myLocal</guimenuitem>)
+				Neben dem Haupteinsatzzweck - der Verwaltung der lokalen Media-Dateien
+				(<guimenuitem>myLocal</guimenuitem>)
 				- stellt der Mediamanager Unterstützung für die Photo Sharing Community Flickr
 				<footnote><para><ulink type="external" url="http://www.flickr.com/"/></para></footnote> bereit
 				(<guimenuitem>myFlickr</guimenuitem>). Voraussetzung ist ein existierender Flickr API-Key.
@@ -110,7 +114,8 @@
 					<term><guimenuitem>myLocal</guimenuitem></term>
 					<listitem>
 						<para>
-							In dieser Ansicht verwalten Sie ihre lokalen Media-Dateien. Dies ist die Standardansicht.							
+							In dieser Ansicht verwalten Sie ihre lokalen Media-Dateien. Dies ist die
+							Standardansicht.							
 						</para>
 					</listitem>
 				</varlistentry>
@@ -127,8 +132,8 @@
 					<term><guimenuitem>Upload</guimenuitem></term>
 					<listitem>
 						<para>
-							Über diesen Link laden Sie neue Media-Dateien in das System. Upload ist nur in der Ansicht
-							<guimenuitem>myLocal</guimenuitem> verfügbar.
+							Über diesen Link laden Sie neue Media-Dateien in das System. Upload ist
+							nur in der Ansicht <guimenuitem>myLocal</guimenuitem> verfügbar.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -152,15 +157,16 @@
 				<title>Anzeigeoptionen</title>
 				
 				<para>
-					Sie können die Anzeige der Media-Dateien im Mediamanager durch die vielfältigen Anzeigeoptionen 
-					einschränken, bzw. gezielt bestimmen. Anzahl und Funktion der Anzeigeoptionen unterscheiden sich
-					in den beiden Bereichen <xref linkend="media.mediamanager.usage.mylocal.options"/>
+					Sie können die Anzeige der Media-Dateien im Mediamanager durch die vielfältigen
+					Anzeigeoptionen einschränken, bzw. gezielt bestimmen. Anzahl und Funktion der
+					Anzeigeoptionen unterscheiden sich in den beiden Bereichen 
+					<xref linkend="media.mediamanager.usage.mylocal.options"/>
 					und <xref linkend="media.mediamanager.usage.myflickr.options"/> geringfügig voneinander.
 				</para>
 
 				<para>
-					Über die Kontext-Hilfe (siehe <xref linkend="introduction.context_help"/>) erhalten Sie Informationen
-					zu den zur Verfügung stehenden Elementen und deren Einsatz.
+					Über die Kontext-Hilfe (siehe <xref linkend="introduction.context_help"/>) 
+					erhalten Sie Informationen zu den zur Verfügung stehenden Elementen und deren Einsatz.
 				</para>
 								
 				<para>
@@ -179,7 +185,7 @@
 				
 					<variablelist>
 						<varlistentry>
-							<term><guimenuitem>Dateitypen</guimenuitem></term>
+							<term><guilabel>Dateitypen</guilabel></term>
 							<listitem>
 								<para>
 									Welche Dateitypen soll die Anzeige beinhalten?							
@@ -187,17 +193,17 @@
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term><guimenuitem>Schlagworte</guimenuitem></term>
+							<term><guilabel>Schlagworte</guilabel></term>
 							<listitem>
 								<para>
-									Anzeige anhand von Schlagworten. Abhängig von den Tastatureingaben wird das
-									Ergebnis alle 1.0 Sekunden aktualisiert. Mehrfachangaben sind möglich und werden
-									durch ein Kommata getrennt.
+									Anzeige anhand von Schlagworten. Abhängig von den Tastatureingaben
+									wird das Ergebnis alle 1.0 Sekunden aktualisiert. Mehrfachangaben
+									sind möglich und werden durch ein Kommata getrennt.
 								</para>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term><guimenuitem>Zeitrahmen</guimenuitem></term>
+							<term><guilabel>Zeitrahmen</guilabel></term>
 							<listitem>
 								<para>
 									Anzeige von Media-Dateien anhand des Zeitstempels.
@@ -237,7 +243,7 @@
 				
 					<variablelist>
 						<varlistentry>
-							<term><guimenuitem>Flickr Benutzer</guimenuitem></term>
+							<term><guilabel>Flickr Benutzer</guilabel></term>
 							<listitem>
 								<para>
 									Um myFlickr nutzen zu können, müssen Sie zuerst die Benutzer-ID des Flickr
@@ -246,7 +252,7 @@
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term><guimenuitem>Flickr Photoalbum</guimenuitem></term>
+							<term><guilabel>Flickr Photoalbum</guilabel></term>
 							<listitem>
 								<para>
 									Wählen Sie ein Flickr Photoalbum aus.
@@ -254,7 +260,7 @@
 							</listitem>
 						</varlistentry>
 						<varlistentry>
-							<term><guimenuitem>Flickr Schlagworte</guimenuitem></term>
+							<term><guilabel>Flickr Schlagworte</guilabel></term>
 							<listitem>
 								<para>
 									Anzeige anhand von Flickr Schlagworten.
@@ -265,11 +271,13 @@
 					
 					<note>
 						<para>
-						Die im Bereich <guimenuitem>myFlickr</guimenuitem> zur Verfügung stehenden Anzeigeoptionen
+						Die im Bereich <guimenuitem>myFlickr</guimenuitem> zur Verfügung
+						stehenden Anzeigeoptionen
 						können nicht kombiniert genutzt werden.
 						Das heißt, sie können <emphasis>entweder</emphasis> die Option 
 						<guimenuitem>Flickr Photoalbum</guimenuitem>
-						nutzen <emphasis>oder</emphasis> die Option <guimenuitem>Flickr Schlagworte</guimenuitem>.
+						nutzen <emphasis>oder</emphasis> die Option
+						<guimenuitem>Flickr Schlagworte</guimenuitem>.
 						Dies entspricht der Funktionalität, die der Dienst Flickr bereitstellt.
 						</para>
 					</note>
@@ -280,7 +288,8 @@
 				<title>Media-Daten hochladen</title>
 							
 				<para>
-					Über den Link <guimenuitem>Upload</guimenuitem> laden sie neue Media-Dateien in das System. Es öffnet
+					Über den Link <guimenuitem>Upload</guimenuitem> laden sie neue Media-Dateien
+					in das System. Es öffnet
 					sich ein Popup-Fenster.
 				</para>
 				
@@ -291,7 +300,7 @@
 				
 				<variablelist>
 					<varlistentry>
-						<term><guimenuitem>Datei</guimenuitem></term>
+						<term><guilabel>Datei</guilabel></term>
 						<listitem>
 							<para>
 								Wählen Sie eine Datei von ihrer lokalen Festplatte aus.							
@@ -299,22 +308,24 @@
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term><guimenuitem>Beschreibung</guimenuitem></term>
+						<term><guilabel>Beschreibung</guilabel></term>
 						<listitem>
 							<para>
-								Optionale Beschreibung der Datei und deren Einsatzzweck. Kann zur Organisation ihrer Dateien
-								genutzt werden.
+								Optionale Beschreibung der Datei und deren Einsatzzweck. Kann zur Organisation
+								ihrer Dateien genutzt werden.
 							</para>
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term><guimenuitem>Schlagworte/Tags</guimenuitem></term>
+						<term><guilabel>Schlagworte/Tags</guilabel></term>
 						<listitem>
 							<para>
-								Durch die Angabe von Schlagworten gruppieren und organisieren Sie Ihre Media Dateien.
-								Die Schlagworte werden in der Mediamanager Anzeigeoption <emphasis>Schlagworte</emphasis> genutzt,
-								um die Quantität der Anzeige zu begrenzen. Tragen Sie bitte mehrere, mindestens aber
-								ein Schlagwort/Tag ein. Mehrfachangaben sind möglich und werden durch Kommata getrennt.
+								Durch die Angabe von Schlagworten gruppieren und organisieren Sie Ihre
+								Media Dateien. Die Schlagworte werden in der Mediamanager Anzeigeoption
+								<emphasis>Schlagworte</emphasis> genutzt,
+								um die Quantität der Anzeige zu begrenzen. Tragen Sie bitte mehrere,
+								mindestens aber ein Schlagwort/Tag ein. Mehrfachangaben sind möglich
+								und werden durch Kommata getrennt.
 							</para>
 						</listitem>
 					</varlistentry>
@@ -322,24 +333,26 @@
 				
 				<para>
 					Nach Auswahl der Datei und Angabe der Meta-Daten laden sie mit einem Klick auf 
-					<guibutton>Media hochladen</guibutton> die Datei ins System. Der erfolgreiche Upload wird Ihnen
-					visuell bestätigt. Nach erfolgten Upload schließen sie das Popup-Fenster bitte über den Button
-					 <guibutton>Schließen</guibutton>.
+					<guibutton>Media hochladen</guibutton> die Datei ins System. Der erfolgreiche
+					 Upload wird Ihnen visuell bestätigt. Nach erfolgten Upload schließen sie das
+					 Popup-Fenster bitte über den Button <guibutton>Schließen</guibutton>.
 				</para>
 				
 				<warning>
 					<para>
-					Schließen sie das Popup-Fenster nicht über den oben genannten Button, wird die Anzeige des Mediamanagers
-					nicht aktualisiert. Das bedeutet, das die aktuell hochgeladene Datei nicht umgehend im Mediamanager
+					Schließen sie das Popup-Fenster nicht über den oben genannten Button, wird
+					die Anzeige des Mediamanagers nicht aktualisiert. Das bedeutet, das die
+					aktuell hochgeladene Datei nicht umgehend im Mediamanager
 					angezeigt wird.
 					</para>
 				</warning>
 				
 				<tip>
 					<para>
-					Haben Sie nach einem Upload das Popup-Fenster nicht über den Button <guibutton>Schließen</guibutton>
-					geschlossen, müssen sie nicht die inhaltliche Seite erneut laden, um eine aktuelle Ansicht des Mediamanagers
-					zu erhalten. Klicken sie stattdessen einfach erneut auf <guimenuitem>Upload</guimenuitem> und schließen
+					Haben Sie nach einem Upload das Popup-Fenster nicht über den Button
+					<guibutton>Schließen</guibutton> geschlossen, müssen sie nicht die inhaltliche
+					Seite erneut laden, um eine aktuelle Ansicht des Mediamanagers zu erhalten.
+					Klicken sie stattdessen einfach erneut auf <guimenuitem>Upload</guimenuitem> und schließen
 					das Popup-Fenster nun über den oben genannten Button.
 					</para>
 				</tip>
@@ -376,7 +389,7 @@
 				
 				<para>
 					Editieren Sie die Meta-Daten und speichern Sie diese anschließend durch einem Klick auf 
-					<guibutton>Änderung speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
+					<guibutton>Speichern</guibutton>. Die erfolgreiche Speicherung wird Ihnen
 					visuell bestätigt. Schließen sie das Popup-Fenster bitte über den Button
 					 <guibutton>Schließen</guibutton>. Beachten Sie oben genannte Hinweise zum Schließen von
 					Popup-Fenstern.
@@ -392,8 +405,9 @@
 				<title>Media-Daten den Inhalten hinzufügen</title>
 				
 				<para>
-					Sie positionieren den Maus-Cursor im inhaltlichen Textfeld an die Stelle, an der die Media-Datei
-					eingefügt werden soll und wählen durch einen Mausklick auf das Datei-Icon die Media-Datei aus. 
+					Positionieren den Maus-Cursor im inhaltlichen Textfeld an die Stelle,
+					an der die Media-Datei eingefügt werden soll und wählen durch einen Mausklick
+					auf das Datei-Icon die Media-Datei aus. 
 					Abhängig vom Mime-Typ<footnote><para><ulink type="external"
 					url="http://de.wikipedia.org/wiki/Internet_Media_Type"/></para></footnote>
 					der Datei wird eine Referenz an gewählter Stelle eingefügt oder es wird ein Pop-up
@@ -417,15 +431,17 @@
 				</figure>
 				
 				<figure id="media.mediamanager.mediamanager.insert.image">
-					<title>Media-Datei einfügen - Optionale Attribute (Beispiel: Bild einfügen in myLocal) </title>
+					<title>Media-Datei einfügen - Optionale Attribute (Beispiel: Bild einfügen in myLocal)</title>
 					<graphic fileref="images/media/mediamanager/mediamanager_insert_image.png"/>
 				</figure>
 				
 				<warning>
 					<para>
-						Wenn Sie während des Editierens der Inhalte oder zu einem späteren Zeitpunkt die Text-Konverter 
-						(siehe <xref linkend="settings.text_converters"/>) Auswahl wechseln, wird die Syntax der bereits
-						eingefügten Referenzen <emphasis role="strong">nicht automatisch</emphasis> konvertiert.
+						Wenn Sie während des Editierens der Inhalte oder zu einem späteren Zeitpunkt
+						die Text-Konverter 
+						(siehe <xref linkend="settings.text_converters"/>) Auswahl wechseln, wird die
+						Syntax der bereits eingefügten Referenzen 
+						<emphasis role="strong">nicht automatisch</emphasis> konvertiert.
 					</para>
 				</warning>
 			

@@ -4,7 +4,7 @@
 <book id="manual" lang="de">
 	<bookinfo>
 		<title>Welcompose Benutzerhandbuch</title>
-		<subtitle><trademark>Welcompose</trademark> Publishing System</subtitle>
+		<subtitle><trademark>Welcompose</trademark> Content Management System</subtitle>
 		<pubdate>Stand: <?dbtimestamp format="d.m.Y"?></pubdate>
 				
 		<!-- copyright -->
@@ -50,8 +50,6 @@
 		href="chapter_localization.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_development.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_licensing.xml" />
 	
 	<!-- appendix -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"

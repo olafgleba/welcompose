@@ -515,6 +515,15 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 							</para>
 						</listitem>
 					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Standard</guimenuitem></term>
+						<listitem>
+							<para>
+								Wenn aktiv, wird dieser Textkonverter beim Anlegen 
+								neuer Seiten als Standard gesetzt.
+							</para>
+						</listitem>
+					</varlistentry>
 				</variablelist>
 				
 				<para>
@@ -699,14 +708,6 @@ w:de{Toxoplasmose}
 		<sect2 id="settings.text_macros.builtin_text_macros">
 			<title>Mitgelieferte Textmakros</title>
 			
-			<para>
-				Welcompose bringt zwei Textmakros von Haus aus mit, die für
-				die Bereitstellung von Welcompose-Funktionalität benötigt
-				werden. Sie dienen zur Erzeugung der Links zwischen einzelnen
-				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
-				Bildern.
-			</para>
-
 			<para>
 				Welcompose bringt zwei Textmakros von Haus aus mit, die für
 				die Bereitstellung von Welcompose-Funktionalität benötigt

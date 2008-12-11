@@ -5,22 +5,297 @@
 	<title>Anwendung</title>
 	
 	<sect1 id="usage.nested_navigation">
-		<title>Verschachtelte Navigation</title>
+		<title>Verschachtelte Navigationen</title>
+
+		<sect2 id="usage.nested_navigation.introduction">
+			<title>Einführung</title>
 		
-		<para/>
+			<para>
+				Ein übliches Szenario in der Erstellung von Vorlagen ist
+				die Erstellung und Anzeige von verschachtelten Navigationen.
+				Hier wird erklärt, wie eine mehrstufige, verschachtelte
+				Navigation erstellt wird, deren Menüpunkte auch korrespondierend
+				zu den Unterpunkten ein- und aufklappen und die komfortabel
+				in die Seitenvorlage inkludiert werden.
+			</para>
+		
+		<note>
+			<para>Um eine verschachtelte Navigation zu erstellen/anzeigen zu lassen,
+				werden ineinander verschachtelte Smarty-Schleifen benötigt ({foreach}{/foreach}).
+				Damit unsere Vorlagen nicht unnötig kompliziert und groß werden, lagern
+				wir den Code zur Navigationserstellung in zwei eigenen Vorlagentypen aus,
+				die wir dann in jeder beliebigen Seitenvorlage inkludieren können, in der
+			 	die Navigation angezeigt werden soll.</para>
+		</note>
+		</sect2>
+				
+		
+		<sect2 id="usage.nested_navigation.setup">
+			<title>Einrichtung</title>
+			
+			<para>Gehen Sie zur Rubrik <guimenu>Vorlagen</guimenu> in die
+			 Unterrubrik <guisubmenu>Vorlagentypen</guisubmenu> und klicken
+			 Sie auf <guibutton>Neu anlegen</guibutton> um einen neuen Eintrag
+			 anzulegen.</para>
+
+			<para>Legen Sie <emphasis>jeweils</emphasis> einen Vorlagentyp
+			 mit Namen <userinput>custom_navigation_embed</userinput> und
+			 <userinput>custom_navigation_generator</userinput>.</para>
+
+			<para>Wechseln Sie nun zur Unterrubrik <guisubmenu>Seitenvorlagen</guisubmenu>
+			. Hier legen wir für unsere zwei neuen gerade angelegten Vorlagentypen
+			 <emphasis>jeweils</emphasis> 1 Seitenvorlage an. Wir beginnen mit der
+			 Seitenvorlage für den Vorlagentyp <userinput>custom_navigation_embed</userinput>.</para>
+
+			<para>Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
+			 neue Seitenvorlage anzulegen. Wählen Sie im Feld <guilabel>Typ</guilabel>
+			 unseren neuen Vorlagentyp aus (hier: <userinput>custom_navigation_embed</userinput>).
+			Vergeben Sie einen beliebigen Namen für die Seitenvorlage.</para>
+
+<para>Kopieren Sie folgenden Quelltext und fügen diesen im Feld <guilabel>Inhalt</guilabel> ein.</para>
+
+		<programlisting language="smarty"><![CDATA[
+{select_named ns="Content" class="Page" method="selectPages" var="pages" navigation="1"}
+{select_simple ns="Content" class="Page" method="selectPath" var="path" target=$page.id}
+
+{include file="wcom:custom_navigation_generator.`$page.id`" pages=$pages level=1 parent=0}
+
+]]></programlisting>
+
+		<note>
+			<para>Hinweis: Wir gehen davon aus, das eine Navigation mit der
+			 ID <userinput>1</userinput> existiert. Passen Sie den Parameter
+			 <filename>navigation</filename> ggf. an.
+			</para>
+		</note>
+
+		<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>, die den
+		 inhaltlichen Seiten zugeordnet sind, in denen die Navigation später
+		 angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
+
+		<para>Legen Sie nun in analoger Art und Weise die Seitenvorlage für
+			 den Vorlagentyp <userinput>custom_navigation_generator</userinput>
+			 an. Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
+			 neue Seitenvorlage anzulegen Wählen Sie im Feld <guilabel>Typ</guilabel>
+			 unseren zweiten, neuen Vorlagentyp <emphasis>custom_navigation_generator</emphasis> aus.
+			 Vergeben Sie wiederum einen beliebigen Namen für die Seitenvorlage.</para>
+
+		<para>Kopieren Sie folgenden Quelltext und fügen diesen
+			im Feld <guilabel>Inhalt</guilabel> ein.</para>
+
+		<programlisting language="smarty"><![CDATA[
+<ul class="nav_{$level}">
+{foreach from=$pages item=_page}
+    {if $_page.level == $level && $_page.parent == $parent}
+        {* find out if navigation item is in path *}
+        {assign var="__in_path" value="false"}
+        {foreach from=$path item=_path}
+            {if $_page.id == $_path.id}
+                {assign var="__in_path" value="true"}
+            {/if}
+        {/foreach}
+            
+        <li{if $page.id == $_page.id} class="on"{/if}>
+            {if $page.id == $_page.id}
+                <span>{$_page.name}</span>
+                        {else}
+                <a href="{get_url page_id=$_page.id action="Index"}">{$_page.name}</a>
+            {/if}    
+            {if ($_page.rgt - $_page.lft) > 1 && $__in_path == 'true'}
+                {include file="wcom:custom_navigation_generator.`$page.id`" pages=$pages
+                    level=$_page.level|increment parent=$_page.id}
+            {/if}
+        </li>
+    {/if}
+{/foreach}
+</ul>
+]]></programlisting>
+
+			<para>Der Ausgabe-Quelltext wird bei einer zweistufigen Navigation
+	 			beispielhaft wie folgt aussehen:</para>
+
+		<programlisting language="smarty"><![CDATA[
+<ul class="nav_1">
+    <li><a href="datei.suffix">Seite</a></li>
+    <li><a href="datei.suffix">Seite</a></li>
+    <li class="on"><span>Aktive Seite</span>
+        <ul class="nav_2">
+            <li><a href="datei.suffix">Seite</a></li>
+            <li><a href="datei.suffix">Seite</a></li>
+        </ul>            
+    </li>
+    <li><a href="datei.suffix">Seite</a></li>
+</ul>
+]]></programlisting>
+
+			<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>,
+			die den inhaltlichen Seiten zugeordnet sind, in denen die Navigation
+			später angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
+
+			<para>Nun sind wir fast fertig. Was fehlt ist die Einbindung der Navigation
+			 in die Seitenvorlagen, in denen wir die Navigation einbinden wollen.</para>
+
+			<para>Wählen Sie die gewünschte Seitenvorlage aus, in der die Navigation
+			 eingefügt werden soll und gehen über das <guibutton>Bearbeiten-Symbol</guibutton>
+			 zur inhaltlichen Ansicht. Fügen Sie an der Stelle, an der die Navigation plaziert
+			 werden soll, folgenden Quelltext ein:</para>
+
+		<programlisting language="smarty"><![CDATA[
+{include file="wcom:custom_navigation_embed.`$page.id`"}
+]]></programlisting>
+
+			<para>Speichern Sie die Seitenvorlage.</para>
+			
+			<note>
+				<para>Um die Navigation zu stylen, können die in dem Beispiel deklarierten
+					Klassen verwendet werden. Wenn Sie andere Klassen preferieren, editieren
+					sie bitte die Vorlage <userinput>custom_navigation_generator</userinput>.
+				</para>
+			</note>
+		</sect2>
 	</sect1>
 	
 	<sect1 id="usage.google_sitemaps">
 		<title>Google Sitemaps</title>
 		
-		<para/>
+		<sect2 id="usage.google_sitemaps.introduction">
+			<title>Einführung</title>
+		
+			<para>
+				Google Sitemaps sind XML Dateien, in denen die Seitenpfade und die 
+				dazugehörigen Metadaten ihrer Webseite  statisch hinterlegt werden. 
+				Diese Datei(en) (<filename>sitemap.xml</filename>, 
+				<filename>sitemap.xml.gz</filename>(gunzip komprimiert)), deren Schema dem
+				Standardprotokoll entspricht (<ulink type="external" url="http://sitemaps.org/protocol.php"/>),
+				erleichtern den Webcrawlern von Google den Informationszugang zu ihren Seiten und sind
+				 ein wertvolles Werkzeug um die 
+				<ulink type="external" url="http://de.wikipedia.org/wiki/Suchmaschinenoptimierung">SEO</ulink>
+				auszubauen. Die Datei(en) müssen sie manuell ihrem Google-Konto hinzugefügen.
+			</para>
+
+			<note>
+				<para>Die Nutzung dieses Features setzt das Vorhanden sein eines
+					<ulink type="external" url="http://www.google.com/support/accounts/">Google-Konto</ulink>
+					voraus.
+				</para>
+			</note>
+		</sect2>
+			
+		<sect2 id="usage.google_sitemaps.setup">
+			<title>Einrichtung</title>
+						
+			<figure id="usage.google_sitemaps.edit_sitemaps">
+				<title>Seiten editieren: Sitemap Metadaten</title>
+				<graphic fileref="images/usage/sitemaps/edit_sitemaps.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Sitemap Änderungshäufigkeit</guilabel></term>
+					<listitem>
+						<para>
+							Wählen sie ein Zeitinterval aus, der Google sagt, wie
+							häufig aktualisierte Inhalte erwartet werden können.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sitemap Priorität</guilabel></term>
+					<listitem>
+						<para>
+							Wert, der Google die interne Gewichtung mitteilt. 0.5
+							ist hier der Mittelwert.
+							<note>
+								<para>
+									Bitte beachten sie, das dieser Wert keinen Einfluß auf das Ranking
+									der betreffenden Seite hat, sondern Google nur mitteilt, welche
+									Seiten der Crawler vorrangig berücksichtigen soll.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+		</sect2>
+		
+		<sect2 id="usage.google_sitemaps.generate">
+			<title>Sitemaps erstellen</title>
+		
+			<para>
+				Sitemaps werden im Menüpunkt <guimenu>Einstellungen</guimenu> unter
+				<guisubmenu>Sitemaps</guisubmenu> angelegt.
+			</para>
+			
+			<figure id="usage.google_sitemaps.generate_sitemaps">
+				<title>Sitemaps erstellen</title>
+				<graphic fileref="images/usage/sitemaps/generate_sitemaps.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Komprimieren</guilabel></term>
+					<listitem>
+						<para>
+							Ist diese Checkbox angeklickt, wird zusätzlich zur XML Sitemap
+							(<filename>sitemap.xml</filename>) eine gunzip komprimierte XML Sitemap-Datei
+							erstellt (<filename>sitemap.xml.gz</filename>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Klicken auf <guibutton>Speichern</guibutton>, wird die Sitemap-Datei
+				automatisch aus der Pfadstruktur Ihrer Installation erstellt.
+				Diese beinhaltet alle Seiten, die ihrer Domain zugeordnet und nicht
+				im <emphasis>Entwurf-Modus</emphasis> gespeichert oder
+				als <emphasis>Geschützt</emphasis> ausgezeichnet sind 
+				(s. <xref linkend="contents.pages.manage.add_page"/>).
+			</para>
+			
+			<para>
+				Ablageort der generierten Sitemap(s) ist der Ordner <filename>/tmp/sitemaps</filename>. 
+			</para>
+			
+			<para>
+				Da die Google-Richtlinien dies dringend empfehlen, verschieben sie die Datei(en)
+				anschließend bitte auf ihrem Server auf die <emphasis role="strong">oberste Ebene</emphasis>
+				ihrer Installation (Webroot).
+			</para>
+			
+			<example id="usage.google_sitemaps.example.path">
+				<title>Pfad(e) Sitemap Datei(en)</title>
+<programlisting><![CDATA[
+http://ihre-domain.tld/sitemap.xml
+http://ihre-domain.tld/sitemap.xml.gz
+]]></programlisting>			
+			</example>
+			
+			<para>
+				Anschließend melden sie sich (ggf. in einem neuen Browserfenster)
+				an ihren Google-Konto an und fügen die Datei(en) ihrem Konto hinzu.
+			</para>
+			
+			<tip>
+				<para>
+					Wenn sie seit der Erstellung einer Sitemap Ihrer Installation neue Seiten
+					hinzugefügt haben, sollten sie jeweils daran denken eine neue Sitemap zu generieren,
+					damit die neuen URLs berücksichtigt werden. Ersetzten sie die veraltete Sitemap
+					im obersten Verzeichnis durch die neu generierte. Ein erneutes Anmeldung der 
+					Sitemap in ihrem Google-Konto ist nicht ausdrücklich notwendig, schadet aber
+					auch nicht ;-) Weitere Information zu Sitemaps finden sie unter
+				</para>
+			</tip>
+			
+		</sect2>
 	</sect1>
 	
-	<sect1 id="usage.multi_language_websites">
+	<!-- <sect1 id="usage.multi_language_websites">
 		<title>Mehrsprachige Websites</title>
 		
 		<para/>
-	</sect1>
+	</sect1> -->
 	
 	<sect1 id="usage.protected_pages">
 		<title>Geschützte Seiten (Passwortschutz)</title>

@@ -12,13 +12,9 @@
 		<title>Welcompose herunterladen</title>
 		
 		<para>
-			Welcompose steht momentan in zwei Variationen zum 
-			Download bereit. In Folge der Weiterentwicklung wird es eine Variante geben, 
-			die Aktualisierung einer bestehenden Installation berücksichtigt.
-			Die Varianten können anhand ihres Dateinamens unterschieden werden.
-			<!-- Welcompose steht momentan in drei verschiedenen Varianten zum 
-			Download bereit. Sie können anhand des Dateinamens unterschieden
-			werden. -->
+			Welcompose steht in drei Variationen zum 
+			Download bereit. Die Varianten können anhand ihres Dateinamens
+			unterschieden werden.
 		</para>
 		
 		<variablelist>
@@ -48,7 +44,7 @@
 					</para>
 				</listitem>
 			</varlistentry>
-			<!-- <varlistentry>
+			<varlistentry>
 				<term>welcompose-*-full-src.* (bspw. welcompose-1.2.3-full-src.tar.gz)</term>
 				<listitem>
 					<para>
@@ -62,7 +58,7 @@
 						(*.tar.bz2, *.tar.gz; BSD, Linux, MacOS X) erhältlich. 
 					</para>
 				</listitem>
-			</varlistentry> -->
+			</varlistentry>
 		</variablelist>
 	 </sect1>
 	
@@ -417,7 +413,8 @@
 				
 				<note>
 					<para>
-						Der Welcompose Package Installer ist nur in englischer Sprache verfügbar
+						Der Welcompose Package Installer ist nur in englischer Sprache verfügbar, da zu
+						diesen Zeitpunkt noch keine Übersetzung erfolgen kann.
 					</para>
 				</note>
 				
@@ -636,6 +633,12 @@
 						<para>tmp/log/</para>
 					</listitem>
 					<listitem>
+						<para>tmp/mail_attachments/</para>
+					</listitem>
+					<listitem>
+						<para>tmp/sitemaps/</para>
+					</listitem>
+					<listitem>
 						<para>tmp/updater/</para>
 					</listitem>
 				</itemizedlist>
@@ -693,12 +696,7 @@
 				<title>Setup: Lizenz anerkennen</title>
 				<graphic fileref="images/install_instructions/configure_wcom/license.sample.png"/>
 			</figure>
-			
-			<para>
-				Die Lizenzierung der Software wird zusammen mit den verschieden
-				Lizenzmodellen im <xref linkend="licensing"/> im Detail
-				besprochen.
-			</para>
+
 		</sect2>
 		
 		<sect2 id="install_instructions.configure_wcom.requirements">

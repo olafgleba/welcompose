@@ -18,12 +18,12 @@
   <!-- stuff put here appears before the top navigation area -->
 </xsl:template>
 
-<xsl:template name="user.footer.navigation">
-  <!-- stuff put here appears after the bottom navigation area -->
+<!-- <xsl:template name="user.footer.navigation">
+   stuff put here appears after the bottom navigation area
   <xsl:element name="div">
     <xsl:attribute name="class">revinfo</xsl:attribute>
-    <xsl:value-of select="//pubdate[1]"/>
+	<xsl:value-of select="//pubdate[1]"/>
   </xsl:element>
-</xsl:template>
+</xsl:template> -->
 
 </xsl:stylesheet>

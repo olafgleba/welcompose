@@ -1435,7 +1435,7 @@ Nachricht: {$form_data.message|wordwrap:65}
 		
 		<para>
 			Sollten es Fragen hierzu geben, bzw. offen geblieben sein, besuchen Sie,
-			das <ulink url="http://welcompose.de/forum/">Welcompose Forum</ulink>.
+			das <ulink url="http://forum.welcompose.de/">Welcompose Forum</ulink>.
 			Hier antworten und helfen Ihnen gerne Benutzer wie auch Entwickler.
 		</para>
 	</sect1>
