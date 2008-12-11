@@ -197,7 +197,7 @@ try {
 		// prepare callback args
 		$args = array(
 			'text' => $_text,
-			'href' => sprintf('{select_simple ns="Content" class="GlobalBox" method="selectGlobalBox" var="" id="%u"}',
+			'href' => sprintf('{select_simple ns="Content" class="GlobalBox" method="selectGlobalBox" var="global_box" id="%u"}',
 			 	$object['id'])
 		);
 		
