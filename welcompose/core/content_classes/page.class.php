@@ -485,7 +485,6 @@ public function countPages ($params = array())
 	$sorting = null;
 	$start = null;
 	$limit = null;
-	$draft = null;
 	$bind_params = array();
 	
 	// input check
@@ -505,9 +504,6 @@ public function countPages ($params = array())
 			case 'start':
 			case 'limit':
 					$$_key = (int)$_value;
-				break;
-			case 'draft':
-					$$_key = (is_null($_value) ? null : (string)$_value);
 				break;
 			case 'navigation_name':
 					$$_key = (string)$_value;
@@ -572,11 +568,6 @@ public function countPages ($params = array())
 	if (!empty($sorting) && is_numeric($sorting)) {
 		$sql .= " AND `content_nodes`.`sorting` = :sorting ";
 		$bind_params['sorting'] = $sorting;
-	}
-	
-	// Include only result rows without drafts
-	if (is_null($draft) ) {
-		$sql .= " AND `content_pages`.`draft` = '0' ";
 	}
 	
 	return (int)$this->base->db->select($sql, 'field', $bind_params);
