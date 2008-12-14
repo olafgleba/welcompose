@@ -109,7 +109,7 @@ public function generateSitemap ($compress)
 	
 	// input check
 	if (!is_int($compress)) {
-		throw new Application_SitemapException("Input for paramter args is expected to be 0 or 1");
+		throw new Application_SitemapException("Input for paramter compress is expected to be 0 or 1");
 	}
 	
 	// check if file is writable when exits
@@ -205,7 +205,7 @@ public function generateSitemap ($compress)
  * Writes the gunzip encoded sitemap to the file system
  * 
  * @throws Application_TextConverterException
- * @param string Builded sitemap data
+ * @param string Build sitemap data
  */
 protected function writeGzip ($data)
 {	
