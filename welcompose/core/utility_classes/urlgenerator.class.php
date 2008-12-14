@@ -296,7 +296,6 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
  * @throws Utility_UrlGeneratorException
  * @param array Args
  * @param bool Remove encoded ampersands
- * @param bool Encode output url string
  * @return string
  */
 public function generateSitemapLinks ($args = array())
@@ -359,12 +358,6 @@ public function generateSitemapLinks ($args = array())
 	if (empty($current_page)) {
 		return false;
 	}
-	
-	// if the current page is a WCOM_URL page, we can simply return the url saved in
-	// the database.
-	// if ($_page['page_type_name'] == 'WCOM_URL') {
-	// 	return false;
-	// }
 	
 	// set page_name_url
 	$project_id = $this->_project['id'];
