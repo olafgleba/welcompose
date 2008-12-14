@@ -140,7 +140,7 @@ public function updateTextMacro ($id, $sqlData)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id AND `project` = :project ";
+	$where = " WHERE `id` = :id AND `editable` = '1' AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
@@ -180,7 +180,7 @@ public function deleteTextMacro ($id)
 	}
 	
 	// prepare where clause
-	$where = " WHERE `id` = :id AND `project` = :project ";
+	$where = " WHERE `id` = :id AND `editable` = '1' AND `project` = :project ";
 	
 	// prepare bind params
 	$bind_params = array(
@@ -222,7 +222,8 @@ public function selectTextMacro ($id)
 			`application_text_macros`.`project` AS `project`,
 			`application_text_macros`.`name` AS `name`,
 			`application_text_macros`.`internal_name` AS `internal_name`,
-			`application_text_macros`.`type` AS `type`
+			`application_text_macros`.`type` AS `type`,
+			`application_text_macros`.`editable` AS `editable`
 		FROM
 			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE 
@@ -312,7 +313,8 @@ public function selectTextMacros ($params = array())
 			`application_text_macros`.`project` AS `project`,
 			`application_text_macros`.`name` AS `name`,
 			`application_text_macros`.`internal_name` AS `internal_name`,
-			`application_text_macros`.`type` AS `type`
+			`application_text_macros`.`type` AS `type`,
+			`application_text_macros`.`editable` AS `editable`
 		FROM
 			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
 		WHERE 

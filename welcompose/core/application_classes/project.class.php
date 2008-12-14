@@ -920,7 +920,8 @@ protected function getTextMacrosFromSkeleton ()
 		$text_macros[] = array(
 			'name' => utf8_decode($text_macro->name),
 			'internal_name' => utf8_decode($text_macro->internal_name),
-			'type' => utf8_decode($text_macro->type)
+			'type' => utf8_decode($text_macro->type),
+			'editable' => utf8_decode($text_macro->editable)
 		);
 	}
 	

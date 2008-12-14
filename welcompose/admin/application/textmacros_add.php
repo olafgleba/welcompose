@@ -200,6 +200,7 @@ try {
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['internal_name'] = $FORM->exportValue('internal_name');
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['editable'] = "1";
 		
 		// check sql data
 		$HELPER = load('utility:helper');

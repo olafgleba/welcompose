@@ -755,11 +755,13 @@
 			<name>Bundled Media URL Generator</name>
 			<internal_name>get_media</internal_name>
 			<type>pre</type>
+			<editable>0</editable>
 		</text-macro>
 		<text-macro>
 			<name>Bundled URL Generator</name>
 			<internal_name>get_url</internal_name>
 			<type>pre</type>
+			<editable>0</editable>
 		</text-macro>
 	</text-macros>
 	<podcast_categories>
