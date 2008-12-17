@@ -65,6 +65,21 @@ for file in `find welcompose -type f -name "*.js"` ; do
 done
 rm -rf jsmin.py
 
+# compress css
+svn export http://svn.devjavu.com/welcompose/trunk/scripts/third_party/csstidy csstidy
+if [ ! -d "csstidy" ] ; then
+	echo "CSSTidy binary folder not found. Download failed, eh?"
+	exit 1
+fi
+echo "Doing csstidy"
+for file in `find welcompose -type f -name "*.css"` ; do
+	tmpfile="$file"-csstidy
+	cp "$file" "$tmpfile"
+	csstidy/csstidy "$tmpfile" --template=highest "$file"
+	rm -f "$tmpfile"
+done
+rm -rf csstidy
+
 # rename welcompose to match version 
 mv welcompose welcompose-0.8.2
 
@@ -136,7 +151,6 @@ echo "Making md5 checksums"
 for i in `find welcompose-0.8.2-$BUILD_NUMBER -type f -name "*"` ; do
 	md5 $i >> "welcompose-0.8.2-$BUILD_NUMBER/checksum.txt"
 done
-
 
 echo "Done!"
 exit 0
