@@ -220,7 +220,6 @@ try {
 	print '</p>';
 	print '</div>';
 	
-	//$BASE->error->printExceptionMessage($e);
 	$BASE->error->triggerException($e);
 
 	// exit

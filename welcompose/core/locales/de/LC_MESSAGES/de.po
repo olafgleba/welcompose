@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-07 11:41+0100\n"
+"POT-Creation-Date: 2008-12-22 00:50+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -15,6 +15,16 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: actions_apply_url_patterns.php:216 pages_boxes_adopt.php:226 error.html:24
+#: error_mediamanager.html:2 error_popup_403.html:33 error_popup_723.html:33
+msgid "An error occured"
+msgstr "Es ist ein Fehler aufgetreten"
+
+#: actions_apply_url_patterns.php:217 pages_boxes_adopt.php:227 error.html:26
+#: error_mediamanager.html:4 error_popup_403.html:35 error_popup_723.html:35
+msgid "Welcompose says"
+msgstr "Welcompose meldet"
 
 #: pingservices_add.php:106 pingservices_edit.php:123 projects_add.php:105
 #: projects_edit.php:121 textconverters_add.php:107
@@ -27,19 +37,20 @@ msgstr ""
 #: pages_edit.php:156 pages_generatorforms_fields_add.php:138
 #: pages_generatorforms_fields_edit.php:149 pagetypes_add.php:107
 #: pagetypes_edit.php:116 structuraltemplates_add.php:106
-#: structuraltemplates_edit.php:117 pingservices_select.html:78
-#: projects_select.html:78 textconverters_select.html:78
-#: textmacros_select.html:78 antispamplugins_select.html:80
-#: blogcommentstatuses_select.html:78 globalboxes_select.html:78
-#: navigations_select.html:65 pages_boxes_select.html:109
-#: pages_boxes_select.html:159 pages_generatorforms_fields_select.html:100
-#: pagetypes_select.html:65 podcastcategories_select.html:78
-#: structuraltemplates_select.html:79 globalfiles_select.html:88
-#: globaltemplates_select.html:82 templates_select.html:107
-#: templatesets_select.html:66 templatetypes_select.html:66
-#: groups_select.html:67 rights_select.html:79 globaltemplates_add.php:119
-#: globaltemplates_edit.php:136 templates_add.php:144 templates_copy.php:162
-#: templates_edit.php:180 templatesets_add.php:106 templatesets_edit.php:116
+#: structuraltemplates_edit.php:117 actions_select.html:64
+#: pingservices_select.html:78 projects_select.html:78
+#: textconverters_select.html:78 textmacros_select.html:78
+#: antispamplugins_select.html:80 blogcommentstatuses_select.html:78
+#: globalboxes_select.html:78 navigations_select.html:65
+#: pages_boxes_select.html:109 pages_boxes_select.html:159
+#: pages_generatorforms_fields_select.html:100 pagetypes_select.html:65
+#: podcastcategories_select.html:78 structuraltemplates_select.html:79
+#: globalfiles_select.html:88 globaltemplates_select.html:82
+#: templates_select.html:107 templatesets_select.html:66
+#: templatetypes_select.html:66 groups_select.html:67 rights_select.html:79
+#: globaltemplates_add.php:119 globaltemplates_edit.php:136
+#: templates_add.php:144 templates_copy.php:162 templates_edit.php:180
+#: templatesets_add.php:106 templatesets_edit.php:116
 #: templatetypes_add.php:106 templatetypes_edit.php:117 groups_add.php:116
 #: groups_copy.php:132 groups_edit.php:132 rights_add.php:106
 #: rights_edit.php:116 users_add.php:121 users_edit.php:122
@@ -1088,16 +1099,6 @@ msgstr "Erstellungsdatum"
 msgid "A box with the given name already exists"
 msgstr "Eine gleichnamige Box existiert bereits"
 
-#: pages_boxes_adopt.php:226 error.html:24 error_mediamanager.html:2
-#: error_popup_403.html:33 error_popup_723.html:33
-msgid "An error occured"
-msgstr "Es ist ein Fehler aufgetreten"
-
-#: pages_boxes_adopt.php:227 error.html:26 error_mediamanager.html:4
-#: error_popup_403.html:35 error_popup_723.html:35
-msgid "Welcompose says"
-msgstr "Welcompose meldet"
-
 #: pages_generatorforms_content_edit.php:187
 #: pages_simpleforms_content_edit.php:210
 msgid "From: address"
@@ -1479,8 +1480,8 @@ msgid ""
 "available <a href=\"http://www.welcompose.de/cms/kontakt/\">on request</a>"
 msgstr ""
 "Lizenziert unter den Bedingungen der <a href=\"http://www.opensource.org/"
-"licenses/agpl-v3.html\">GNU AGPLv3</a><br />Alternative Lizenzierung "
-"auf <a href=\"http://www.welcompose.de/cms/kontakt/\">Anfrage</a> möglich"
+"licenses/agpl-v3.html\">GNU AGPLv3</a><br />Alternative Lizenzierung auf <a "
+"href=\"http://www.welcompose.de/cms/kontakt/\">Anfrage</a> möglich"
 
 #: _inc_nav_community.html:4 _inc_navigation.html:7 _inc_navigation.html:9
 #: blogcomments_edit.html:48 blogcomments_edit.html:54
@@ -1625,6 +1626,11 @@ msgstr "Textmakros"
 msgid "Sitemaps"
 msgstr "Sitemaps"
 
+#: _inc_nav_settings.html:19 _inc_navigation.html:42 _inc_navigation.html:44
+#: actions_select.html:48 actions_select.html:52
+msgid "Actions"
+msgstr "Aktionen"
+
 #: _inc_nav_templates.html:4 _inc_navigation.html:7 _inc_navigation.html:9
 #: templates_add.html:54 templates_add.html:60 templates_copy.html:48
 #: templates_copy.html:54 templates_edit.html:54 templates_edit.html:60
@@ -1738,12 +1744,13 @@ msgstr "Community"
 msgid "Templating"
 msgstr "Vorlagen"
 
-#: _inc_topnav.html:54 pingservices_add.html:52 pingservices_edit.html:48
-#: pingservices_select.html:48 projects_add.html:52 projects_edit.html:48
-#: projects_select.html:48 sitemaps.html:52 textconverters_add.html:52
-#: textconverters_edit.html:48 textconverters_select.html:48
-#: textmacros_add.html:52 textmacros_edit.html:48 textmacros_select.html:48
-#: settings.html:52 settings.html:56
+#: _inc_topnav.html:55 actions_select.html:48 pingservices_add.html:52
+#: pingservices_edit.html:48 pingservices_select.html:48 projects_add.html:52
+#: projects_edit.html:48 projects_select.html:48 sitemaps.html:52
+#: textconverters_add.html:52 textconverters_edit.html:48
+#: textconverters_select.html:48 textmacros_add.html:52
+#: textmacros_edit.html:48 textmacros_select.html:48 settings.html:52
+#: settings.html:56
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -1753,11 +1760,11 @@ msgstr "Einstellungen"
 msgid "Text Macros"
 msgstr "Textmakros"
 
-#: pingservices_add.html:10
-msgid "Welcompose Admin &ndash; Add Ping Service"
-msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
+#: actions_select.html:10 projects_select.html:10
+msgid "Welcompose Admin &ndash; Projects"
+msgstr "Welcompose Admin &ndash; Projekte"
 
-#: pingservices_add.html:33 pingservices_edit.html:29
+#: actions_select.html:29 pingservices_add.html:33 pingservices_edit.html:29
 #: pingservices_select.html:29 projects_add.html:33 projects_edit.html:29
 #: projects_select.html:29 sitemaps.html:33 textconverters_add.html:33
 #: textconverters_edit.html:29 textconverters_select.html:29
@@ -1799,7 +1806,7 @@ msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 msgid "Welcompose"
 msgstr "Welcompose"
 
-#: pingservices_add.html:36 pingservices_edit.html:32
+#: actions_select.html:32 pingservices_add.html:36 pingservices_edit.html:32
 #: pingservices_select.html:32 projects_add.html:36 projects_edit.html:32
 #: projects_select.html:32 sitemaps.html:36 textconverters_add.html:36
 #: textconverters_edit.html:32 textconverters_select.html:32
@@ -1840,7 +1847,7 @@ msgstr "Welcompose"
 msgid "Logged in as user"
 msgstr "Angemeldeter Benutzer"
 
-#: pingservices_add.html:38 pingservices_edit.html:34
+#: actions_select.html:34 pingservices_add.html:38 pingservices_edit.html:34
 #: pingservices_select.html:34 projects_add.html:38 projects_edit.html:34
 #: projects_select.html:34 sitemaps.html:38 textconverters_add.html:38
 #: textconverters_edit.html:34 textconverters_select.html:34
@@ -1880,6 +1887,32 @@ msgstr "Angemeldeter Benutzer"
 #: users_select.html:34
 msgid "Logout"
 msgstr "Abmelden"
+
+#: actions_select.html:57
+msgid "Available Actions"
+msgstr "Verfügbare Aktionen"
+
+#: actions_select.html:65 actions_select.html:71
+msgid "Run action"
+msgstr "Ausführen"
+
+#: actions_select.html:69
+msgid "Apply URL Patterns"
+msgstr "Aktuelles URL Pattern Layout anwenden"
+
+#: actions_select.html:70
+msgid ""
+"Everytime you change the URL Patterns Layout within the Welcompose "
+"configuration file (sys.inc.php) you should perfom this action so your "
+"installation reflects the current path layout"
+msgstr ""
+"Immer wenn sie das URL Pattern Layout in der Konfigurationsdatei von Welcompose "
+"(sys.inc.php) ändern, sollten sie diese Funktion ausführen. Dieses gewährleistet "
+"das die Links ihrer Installation jeweils dem aktuellen URL Pattern Layout entsprechen."
+
+#: pingservices_add.html:10
+msgid "Welcompose Admin &ndash; Add Ping Service"
+msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 
 #: pingservices_add.html:52 pingservices_add.html:56
 #: pages_blogs_pingserviceconfigurations_add.html:73
@@ -2114,7 +2147,7 @@ msgstr "Neu anlegen"
 #: pingservices_select.html:59 pingservices_select.html:91
 #: projects_select.html:59 projects_select.html:97
 #: textconverters_select.html:59 textconverters_select.html:91
-#: textmacros_select.html:59 textmacros_select.html:91
+#: textmacros_select.html:59 textmacros_select.html:96
 #: antispamplugins_select.html:59 antispamplugins_select.html:97
 #: blogcomments_select.html:99 blogcomments_select.html:176
 #: blogcommentstatuses_select.html:59 blogcommentstatuses_select.html:91
@@ -2140,7 +2173,7 @@ msgstr "Verfügbare Ping-Services"
 #: pingservices_select.html:79 pingservices_select.html:85
 #: projects_select.html:79 projects_select.html:86
 #: textconverters_select.html:79 textconverters_select.html:85
-#: textmacros_select.html:79 textmacros_select.html:85
+#: textmacros_select.html:79 textmacros_select.html:86
 #: antispamplugins_select.html:83 antispamplugins_select.html:91
 #: blogcomments_select.html:127 blogcomments_select.html:154
 #: blogcommentstatuses_select.html:79 blogcommentstatuses_select.html:85
@@ -2168,7 +2201,7 @@ msgstr "Bearbeiten"
 #: pingservices_select.html:80 pingservices_select.html:86
 #: projects_select.html:80 projects_select.html:87
 #: textconverters_select.html:80 textconverters_select.html:86
-#: textmacros_select.html:80 textmacros_select.html:86
+#: textmacros_select.html:80 textmacros_select.html:87
 #: antispamplugins_select.html:84 antispamplugins_select.html:92
 #: blogcomments_select.html:128 blogcomments_select.html:155
 #: blogcommentstatuses_select.html:80 blogcommentstatuses_select.html:86
@@ -2216,10 +2249,6 @@ msgstr "Projekt bearbeiten"
 #: projects_edit.html:52
 msgid "Edit Projects"
 msgstr "Projekte bearbeiten"
-
-#: projects_select.html:10
-msgid "Welcompose Admin &ndash; Projects"
-msgstr "Welcompose Admin &ndash; Projekte"
 
 #: projects_select.html:71
 msgid "Available Projects"
@@ -2313,7 +2342,7 @@ msgstr "Welcompose Admin &ndash; Textmakros"
 msgid "Available Text Macros"
 msgstr "Vefügbare Textmakros"
 
-#: textmacros_select.html:103
+#: textmacros_select.html:108
 msgid "No text macro has been created yet."
 msgstr "Es wurde noch kein Textmakro angelegt"
 
@@ -2668,8 +2697,9 @@ msgid ""
 "To create one, go to the <a href=\"../templating/templatesets_select.php"
 "\">template set overview page</a>."
 msgstr ""
-"Bitte gehen Sie zur <a href=\"../templating/templatesets_select.php\">Übersichtsseite der "
-"Vorlagengruppen</a> um eine neue Vorlagengruppe anzulegen."
+"Bitte gehen Sie zur <a href=\"../templating/templatesets_select.php"
+"\">Übersichtsseite der Vorlagengruppen</a> um eine neue Vorlagengruppe "
+"anzulegen."
 
 #: pages_add.html:131 pages_edit.html:176
 msgid "Additional metadata"
@@ -2978,8 +3008,8 @@ msgid ""
 "No navigation and no page has been created yet. Please create a <a href="
 "\"navigations_select.php\">navigation</a> first"
 msgstr ""
-"<strong>Es wurde noch keine Navigation angelegt</strong>.<br /><br />"
-"Bitte gehen Sie zur <a href=\"navigations_select.php\">Übersichtsseite der "
+"<strong>Es wurde noch keine Navigation angelegt</strong>.<br /><br />Bitte "
+"gehen Sie zur <a href=\"navigations_select.php\">Übersichtsseite der "
 "Navigationen</a> um eine neue Navigation anzulegen"
 
 #: pages_select.html:64
