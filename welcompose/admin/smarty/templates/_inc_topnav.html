@@ -50,6 +50,7 @@
 	|| wcom_check_access('Application', 'TextConverter', 'Manage')
 	|| wcom_check_access('Application', 'TextMacro', 'Manage')
 	|| wcom_check_access('Application', 'Sitemap', 'Manage')
+	|| wcom_check_access('Application', 'Action', 'Manage')
 }
 <li><a {if $area == 'application'}class="seton"{else}class="set"{/if} href="{$wcom_admin_root_www}/settings/settings.php">{i18n Settings}<span></span></a></li>
 {/if}

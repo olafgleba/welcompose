@@ -104,6 +104,9 @@ Helper.prototype.URLify = Helper_URLify;
 Helper.prototype.adoptBox = Helper_adoptBox;
 Helper.prototype.loaderAdoptBox = Helper_loaderAdoptBox;
 Helper.prototype.showResponseAdoptBox = Helper_showResponseAdoptBox;
+Helper.prototype.runAction = Helper_runAction;
+Helper.prototype.loaderRunAction = Helper_loaderRunAction;
+Helper.prototype.showResponseRunAction = Helper_showResponseRunAction;
 
 
 /**
@@ -1763,6 +1766,91 @@ function Helper_showResponseAdoptBox(req)
 		_applyError(e);
 	}
 }
+
+
+/**
+ * Execute action functions asynchronously
+ *
+ * @param {string} elem Current Element
+ * @throws applyError on exception
+ */
+function Helper_runAction (elem)
+{
+	try {
+		// reference id
+		e = elem.id;
+		
+		// define object to fill within the process
+		target = Helper.getParentNodeNextSibling(elem, 2);
+		
+		// current table row
+		targetRow = elem.parentNode.parentNode;
+		
+		// if sucess img is available in the DOM destroy it
+		if($(e + '_succeed')) {
+			$(e + '_succeed').remove();
+		}
+		
+		// The id represents the url path name
+		var url = '../application/actions_' + e + '.php';
+		var pars = 'id=' + elem.id;
+		
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'post',
+				parameters : pars,
+				onLoading : Helper.loaderRunAction,
+				onFailure: function(res) { alert (res.responseText);},
+				onSuccess : Helper.showResponseRunAction
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Display indicator layer while XMLHttpRequest processing.
+ *
+ * @throws applyError on exception
+ */
+function Helper_loaderRunAction ()
+{
+	try {
+		new Insertion.Top(target, '<img id="' + e + '_indicator" src="../static/img/indicator.gif" alt="" />');
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Layer fadeout on XMLHttpRequest response.
+ *
+ * @see #runAction 
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Helper_showResponseRunAction(req)
+{
+	try {
+		var r = req.responseText.match(/\berror\b/gi);
+		
+		if (r) {
+			Element.hide('indicator');
+			new Insertion.Top(target, req.responseText);
+		} else {
+			setTimeout("Effect.Fade('" + e + "_indicator', {duration: 0.2})", 200);
+			setTimeout("new Insertion.Top(target, '<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />')", 700);
+			new Effect.Highlight(targetRow, {startcolor: '#DCEBF7',
+			endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
+		}
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
 
 /**
  * Building new object instance of class Helper

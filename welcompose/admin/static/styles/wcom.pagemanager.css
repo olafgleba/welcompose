@@ -48,12 +48,22 @@ background-color: #fff;
 table tr:hover {
 background-color: #DCEBF7;
 }
+table#actions tr:hover {
+background-color: transparent;
+}
+#content table td p {
+margin-left: 0;
+line-height: 1.6em;
+}
 
 td.name {
 width: 180px;
 }
 td.description {
 width: 490px;
+}
+td.actions {
+padding: 20px 100px 20px 0;
 }
 
 /* links */
@@ -185,6 +195,22 @@ margin: 0 20px;
 padding: 0px 15px;
 font-family: Arial, Helvetica, sans-serif;
 }
+
+/* simulate buttons */
+a.runaction:link, a.runaction:visited {
+display: block;text-align: left;
+height: 16px;
+font-weight: bold;
+color: #fff;
+border: 0 none;
+text-decoration: none;
+padding: 2px 0 2px 6px;
+cursor: pointer;
+background: #ff620d url(../img/submit140.gif) no-repeat;
+width: 134px;
+margin: 0;
+}
+
 
 /* pages */
 .page, .page1, .page2, .page3, .page4, .page5 {

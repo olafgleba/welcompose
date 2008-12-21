@@ -148,6 +148,23 @@
 			</groups>
 		</right>
 		<right>
+			<name>APPLICATION_ACTION_USE</name>
+			<description>Allows usage of actions.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>APPLICATION_ACTION_MANAGE</name>
+			<description>Allows management of actions.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+			</groups>
+		</right>
+		<right>
 			<name>COMMUNITY_ANTISPAMPLUGIN_USE</name>
 			<description>Allows usage of anti spam plug-ins.</description>
 			<editable>0</editable>

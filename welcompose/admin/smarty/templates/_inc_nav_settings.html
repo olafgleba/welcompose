@@ -15,6 +15,9 @@
 {if wcom_check_access('Application', 'Sitemap', 'Manage')}
 <li><a href="{$wcom_admin_root_www}/application/sitemaps.php">{i18n Sitemaps}</a></li>
 {/if}
+{if wcom_check_access('Application', 'Action', 'Manage')}
+<li><a href="{$wcom_admin_root_www}/application/actions_select.php">{i18n Actions}</a></li>
+{/if}
 <li><a class="highlight" href=""><img src="../static/img/indicator.gif" height="19" alt="" /></a></li>
 </ul>
 <!-- topnavcon --></div>

@@ -77,13 +77,13 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('Application:Project');
 
+	// load sitemap class
+	/* @var $SITEMAP Application_Sitemap */
+	$SITEMAP = load('Application:Sitemap');	
+
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
-
-	// load sitemap class
-	/* @var $SITEMAP Application_Sitemap */
-	$SITEMAP = load('Application:Sitemap');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {

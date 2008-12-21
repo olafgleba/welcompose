@@ -351,6 +351,43 @@ Object.extend(Object.extend(Effect.Opacity.prototype, Effect.Base.prototype), {
   }
 });
 
+
+Effect.Highlight = Class.create();
+Object.extend(Object.extend(Effect.Highlight.prototype, Effect.Base.prototype), {
+  initialize: function(element) {
+    this.element = $(element);
+    if(!this.element) throw(Effect._elementDoesNotExistError);
+    var options = Object.extend({ startcolor: '#ffff99' }, arguments[1] || {});
+    this.start(options);
+  },
+  setup: function() {
+    // Prevent executing on elements not in the layout flow
+    if(this.element.getStyle('display')=='none') { this.cancel(); return; }
+    // Disable background image during the effect
+    this.oldStyle = {};
+    if (!this.options.keepBackgroundImage) {
+      this.oldStyle.backgroundImage = this.element.getStyle('background-image');
+      this.element.setStyle({backgroundImage: 'none'});
+    }
+    if(!this.options.endcolor)
+      this.options.endcolor = this.element.getStyle('background-color').parseColor('#ffffff');
+    if(!this.options.restorecolor)
+      this.options.restorecolor = this.element.getStyle('background-color');
+    // init color calculations
+    this._base  = $R(0,2).map(function(i){ return parseInt(this.options.startcolor.slice(i*2+1,i*2+3),16) }.bind(this));
+    this._delta = $R(0,2).map(function(i){ return parseInt(this.options.endcolor.slice(i*2+1,i*2+3),16)-this._base[i] }.bind(this));
+  },
+  update: function(position) {
+    this.element.setStyle({backgroundColor: $R(0,2).inject('#',function(m,v,i){
+      return m+(Math.round(this._base[i]+(this._delta[i]*position)).toColorPart()); }.bind(this)) });
+  },
+  finish: function() {
+    this.element.setStyle(Object.extend(this.oldStyle, {
+      backgroundColor: this.options.restorecolor
+    }));
+  }
+});
+
 /* ------------- combination effects ------------- */
 
 Effect.Fade = function(element) {

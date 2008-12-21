@@ -178,6 +178,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.runaction' : function(el){
+		el.onclick = function(){
+			Helper.runAction(this);
+			return false;
+		}
+	},
 	'.confirmDelNav' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelNavAction(this);
