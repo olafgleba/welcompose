@@ -81,176 +81,51 @@ try {
 	 * References
 	 * ----------
 	 *
-	 * Changeset: 1255
-	 * Ticket: 69
+	 * Changeset: 1250
+	 * Ticket: 70
 	 * 
 	 * Changes to be applied
 	 * ---------------------
 	 *
-	 *  - Add new rights: APPLICATION_ACTION{,FIELD}_{USE,MANAGE}
+	 *  - Add new field 'editable' to table 'application_text_macros'
+	 *    `editable` enum (0,1) 
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
 			// begin transaction
 			$BASE->db->begin();
-
-			// get projects
+		
+			// add new fields
 			$sql = "
-				SELECT
-					`id`
-				FROM
-					".WCOM_DB_APPLICATION_PROJECTS."
+				ALTER TABLE
+					".WCOM_DB_APPLICATION_TEXT_MACROS."
+				ADD
+					`editable`
+				ENUM
+					('0', '1') NOT NULL DEFAULT '1'
+				AFTER `type`
 			";
+			$BASE->db->execute($sql);
 			
-			$projects = $BASE->db->select($sql, 'multi');
-					
-			// add new rights
-			foreach ($projects as $_project) {
-				// get existing rights
-				$sql = "
-					SELECT
-						`id`,
-						`project`,
-						`name`
-					FROM
-						".WCOM_DB_USER_RIGHTS."
-					WHERE
-						`project` = :project
-				";
-				$rights = $BASE->db->select($sql, 'multi', array('project' => (int)$_project['id']));
-				
-				// define rights
-				$rights_to_create = array(
-					'APPLICATION_ACTION_USE' => 'Allows usage of actions.',
-					'APPLICATION_ACTION_MANAGE' => 'Allows management of actions.'
-				);
-				
-				foreach ($rights_to_create as $_name => $_description) {
-					// prepare sql data
-					$sqlData = array(
-						'project' => (int)$_project['id'],
-						'name' => $_name,
-						'description' => $_description,
-						'editable' => '0'
-					);
-				
-					// if the right already exists, force update
-					$insert = true;
-					foreach ($rights as $_right) {
-						if ($_right['name'] == $_name) {
-							// prepare where clause
-							$where = " WHERE `id` = :id ";
-						
-							// prepare bind params
-							$bind_params = array(
-								'id' => (int)$_right['id']
-							);
-							
-							// update right
-							$BASE->db->update(WCOM_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
-							
-							$insert = false;
-							break;
-						}
-					}
-					
-					// create new right
-					if ($insert) {
-						$BASE->db->insert(WCOM_DB_USER_RIGHTS, $sqlData);
-					}
-				}
-			}
 			
-			// create links between new rights and user groups
-			foreach ($projects as $_project) {
-				// define list with group/right mappings
-				$rights = array(
-					'APPLICATION_ACTION_USE' => array(
-						'WCOM_ADMIN',
-						'WCOM_REGULAR'
-					),
-					'APPLICATION_ACTION_MANAGE' => array(
-						'WCOM_ADMIN'
-					)
-				);
-				
-				// sync database with list of group/right mappings
-				foreach ($rights as $_right => $_groups) {
-					// get right id
-					$sql = "
-						SELECT
-							`id`
-						FROM
-							".WCOM_DB_USER_RIGHTS."
-						WHERE
-							`project` = :project
-						  AND
-							`name` = :name
-						LIMIT
-							1
-					";
-					$right_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_right));
-					
-					// if the right id is empty, we have to stop here
-					if (empty($right_id) || !is_numeric($right_id)) {
-						throw new Exception('Required user right could not be found');
-					}
-					
-					foreach ($_groups as $_group) {
-						// get right id
-						$sql = "
-							SELECT
-								`id`
-							FROM
-								".WCOM_DB_USER_GROUPS."
-							WHERE
-								`project` = :project
-							  AND
-								`name` = :name
-							LIMIT
-								1
-						";
-						$group_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_group));
-						
-						// if the group id is empty, we have to stop here
-						if (empty($group_id) || !is_numeric($group_id)) {
-							throw new Exception('Required user group could not be found');
-						}
-						
-						// let's see if there already is a link between group and right
-						$sql = "
-							SELECT
-								COUNT(*)
-							FROM
-								".WCOM_DB_USER_GROUPS2USER_RIGHTS."
-							WHERE
-								`right` = :right
-							  AND
-								`group` = :group
-						";
-						$count = $BASE->db->select($sql, 'field', array('right' => $right_id, 'group' => $group_id));
-						
-						if ((int)$count > 0) {
-							continue;
-						} else {
-							// create new link
-							$sqlData = array(
-								'group' => $group_id,
-								'right' => $right_id
-							);
-							$BASE->db->insert(WCOM_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
-						}
-					}
-				}
-			}
+			// make bundled macros non editable
+			$sql = "
+				UPDATE
+					".WCOM_DB_APPLICATION_TEXT_MACROS."
+				SET
+					`editable` = '0'
+				WHERE 
+					`internal_name` = 'get_url' OR `internal_name` = 'get_media'
+			";
+			$BASE->db->execute($sql);
+			
 			
 			// update schema version
 			$sqlData = array(
 				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
 			);
-			
+	
 			$BASE->db->update(WCOM_DB_APPLICATION_INFO, $sqlData);
-
 			
 			// commit
 			$BASE->db->commit();
