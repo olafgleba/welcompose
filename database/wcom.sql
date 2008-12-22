@@ -445,6 +445,7 @@ CREATE TABLE `application_text_macros` (
   `name` varchar(255),
   `internal_name` varchar(255),
   `type` enum('pre','post','startup','shutdown') DEFAULT 'pre',
+  `editable` enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
   CONSTRAINT `application_textmacros.project2application_projects.id` FOREIGN KEY (`project`)
