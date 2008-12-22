@@ -144,7 +144,7 @@ try {
 		// Iterate through the results
 		foreach ($_class as $_key => $_value) {	
 
-			// make sure field content is not empty or NULL
+			// make sure field content is not NULL
 			// this may occur when a page is added but still not edited
 			if (!is_null($_value['content_raw'])) {	
 							
