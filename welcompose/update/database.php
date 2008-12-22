@@ -78,16 +78,7 @@ try {
 	$version = $BASE->db->select($sql, 'field');
 	
 	// make sure that we got a schema_version
-	
-	// Temporary change to erase obsolete tasks in intallations == 0.8.0
-	// We have to zero all
-	// DELETE this mod with release 0.8.4 !!!
-	
-	//orig.
-	//if ($version == "") {
-
-	// make sure that we got a schema_version
-	if ($version == "" || $version > '0001') {
+	if ($version == "") {
 		// make sure that there's a row in application_info
 		$sql = "
 			SELECT
@@ -99,13 +90,7 @@ try {
 		
 		if ($count == 0) {
 			$BASE->db->insert(WCOM_DB_APPLICATION_INFO, array('schema_version' => null));
-		}
-		
-		//mod, s. above
-		if ($count > 0) {
-			$BASE->db->update(WCOM_DB_APPLICATION_INFO, array('schema_version' => null));
-		}
-		// eof mod		
+		}	
 		
 		// define major/minor initial task number
 		$major = '0000';
