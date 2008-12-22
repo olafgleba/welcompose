@@ -143,32 +143,38 @@ try {
 		
 		// Iterate through the results
 		foreach ($_class as $_key => $_value) {	
+
+			// make sure field content is not empty or NULL
+			// this may occur when a page is added but still not edited
+			if (!is_null($_value['content_raw'])) {	
+							
+				// apply text macros and text converter if required
+				if ($_value['text_converter'] > 0 || $_value['apply_macros'] > 0) {
+
+					// extract content
+					$content = $_value['content_raw'];
 				
-			// apply text macros and text converter if required
-			if ($_value['text_converter'] > 0 || $_value['apply_macros'] > 0) {
-				// extract content
-				$content = $_value['content_raw'];
+					// apply startup and pre text converter text macros 
+					if ($_value['apply_macros'] > 0) {
+						$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+					}
 				
-				// apply startup and pre text converter text macros 
-				if ($_value['apply_macros'] > 0) {
-					$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+					// apply text converter
+					if ($_value['text_converter'] > 0) {
+						$content = $TEXTCONVERTER->applyTextConverter(
+							$_value['text_converter'],
+							$content
+						);
+					}
+				
+					// apply post text converter and shutdown text macros 
+					if ($_value['apply_macros'] > 0) {
+						$content = $TEXTMACRO->applyTextMacros($content, 'post');
+					}
+				
+					// assign content to sql data array
+					$sqlData['content'] = $content;
 				}
-				
-				// apply text converter
-				if ($_value['text_converter'] > 0) {
-					$content = $TEXTCONVERTER->applyTextConverter(
-						$_value['text_converter'],
-						$content
-					);
-				}
-				
-				// apply post text converter and shutdown text macros 
-				if ($_value['apply_macros'] > 0) {
-					$content = $TEXTMACRO->applyTextMacros($content, 'post');
-				}
-				
-				// assign content to sql data array
-				$sqlData['content'] = $content;
 			}		
 				
 			// test sql data for pear errors
