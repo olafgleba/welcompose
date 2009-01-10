@@ -76,6 +76,20 @@ class Display_BlogRss20 implements Display {
 	 */
 	protected $_page = array();
 	
+	/**
+	 * Set appropriate content_type
+	 * 
+	 * @var string
+	 */
+	protected $_content_type = 'text/xml';
+	
+	/**
+	 * Set appropriate charset
+	 * 
+	 * @var string
+	 */
+	protected $_charset = 'iso-8859-1';
+	
 /**
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array
@@ -156,6 +170,9 @@ public function getMainTemplateCacheLifetime ()
  */ 
 public function getMainTemplateName ()
 {
+	// set headers for the feed
+	$this->setTemplateHeader();
+	
 	return "wcom:blog_rss20.".WCOM_CURRENT_PAGE;
 }
 
@@ -198,6 +215,17 @@ public function getLocationSelf ($remove_amps = false)
 	} else {
 		return $url;
 	}
+}
+
+/**
+ * Returns appropriate header
+ * For example this should be used to asure valid feed output
+ * 
+ * @return string
+ */
+public function setTemplateHeader ()
+{
+	return header('Content-Type: '.$this->_content_type.'; charset='.$this->_charset.'');
 }
 
 /**
