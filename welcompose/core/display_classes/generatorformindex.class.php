@@ -385,13 +385,13 @@ public function render ()
 		if (isset($_FILES) && $_FILES[$_field_name]['size'] > 0) {
 			
 			// prepare upload path
-			$uploadpath = dirname(__FILE__).'/../../tmp/mail_attachments/';
+			$uploadpath = dirname(__FILE__).'/../../tmp/mail_attachments';
 		
 			// attached file
 			$uploadfile = $_FILES[$_field_name]['name'];
 		
 			// prepare target file path
-			$file = $uploadpath.$uploadfile;
+			$file = $uploadpath.DIRECTORY_SEPARATOR.$uploadfile;
 					
 			// move file
 			move_uploaded_file($_FILES[$_field_name]['tmp_name'], $file);
@@ -547,6 +547,17 @@ public function getLocationSelf ($remove_amps = false)
 	} else {
 		return $url;
 	}
+}
+
+/**
+ * Returns appropriate header
+ * For example this should be used to asure valid feed output
+ * 
+ * @return string
+ */
+public function setTemplateHeader ()
+{
+	return false;
 }
 
 /**

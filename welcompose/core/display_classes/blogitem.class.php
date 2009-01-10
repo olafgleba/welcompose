@@ -457,6 +457,17 @@ public function getLocationSelf ($remove_amps = false)
 }
 
 /**
+ * Returns appropriate header
+ * For example this should be used to asure valid feed output
+ * 
+ * @return string
+ */
+public function setTemplateHeader ()
+{
+	return false;
+}
+
+/**
  * Returns QuickForm template to indicate required field.
  * 
  * @return string

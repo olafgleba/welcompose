@@ -216,6 +216,17 @@ public function getLocationSelf ($remove_amps = false)
 }
 
 /**
+ * Returns appropriate header
+ * For example this should be used to asure valid feed output
+ * 
+ * @return string
+ */
+public function setTemplateHeader ()
+{
+	return false;
+}
+
+/**
  * Returns information whether to skip authentication
  * or not.
  * 
