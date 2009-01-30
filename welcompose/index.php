@@ -23,18 +23,19 @@
  */
 
 
-
 /**
  * $URL$
  *
- * @copyright       (c) creatics.de:Enter Copyright Value}
+ * @package         welcompose
+ * @copyright       (c) creatics.de
  * @author          $Author$
- * @package         Enter Package Name
  * @license         URL To Supplied License, Plain Text Description 
  *
  * @revision        $Revision$
  * @lastmodified    $LastChangedDate$
  */
+
+
 
 
 
