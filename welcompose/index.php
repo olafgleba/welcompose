@@ -22,17 +22,20 @@
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
+
+
 /**
- * 
+ * $URL$
  *
  * @copyright       (c) creatics.de:Enter Copyright Value}
- * @author          
+ * @author          $Author$
  * @package         Enter Package Name
  * @license         URL To Supplied License, Plain Text Description 
  *
- * @revision        
- * @lastmodified    
+ * @revision        $Revision$
+ * @lastmodified    $LastChangedDate$
  */
+
 
 
 
