@@ -22,24 +22,6 @@
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
-
-/**
- * $URL$
- *
- * @package         welcompose
- * @copyright       (c) creatics.de
- * @author          $Author$
- * @license         URL To Supplied License, Plain Text Description 
- *
- * @revision        $Revision$
- * @lastmodified    $LastChangedDate$
- */
-
-
-
-
-
-
 // define current area constant
 define('WCOM_CURRENT_AREA', 'PUBLIC');
 
