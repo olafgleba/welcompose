@@ -161,7 +161,7 @@ public function generateSitemap ($compress)
 			if ($_page['page_type_name'] == 'WCOM_BLOG') {
 					
 				// get single blog posting
-				 $posting = $BLOGPOSTING->selectBlogPostings(array('page' => $_page['id']));
+				 $posting = $BLOGPOSTING->selectBlogPostings(array('page' => $_page['id'], 'draft' => '0'));
 				
 				// build url node for blog postings
 				foreach ($posting as $_posting) {
