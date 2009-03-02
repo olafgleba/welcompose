@@ -382,22 +382,30 @@ public function render ()
 		$mime->setTXTBody($body);
 		
 		// Attachments
-		if (isset($_FILES) && $_FILES[$_field_name]['size'] > 0) {
-			
+		if (isset($_FILES)) {
+
 			// prepare upload path
-			$uploadpath = dirname(__FILE__).'/../../tmp/mail_attachments';
-		
-			// attached file
-			$uploadfile = $_FILES[$_field_name]['name'];
-		
-			// prepare target file path
-			$file = $uploadpath.DIRECTORY_SEPARATOR.$uploadfile;
+			$uploadpath = dirname(__FILE__).'/../../tmp/mail_attachments/';
+				
+			foreach ($_FILES as $_files) {
+				if ($_files['size'] > 0) {
+				
+					// attached file
+					$uploadfile = $_files['name'];
+				
+					// prepare target file path
+					$file = $uploadpath.DIRECTORY_SEPARATOR.$uploadfile;
 					
-			// move file
-			move_uploaded_file($_FILES[$_field_name]['tmp_name'], $file);
-		
-			// attach file
-			$mime->addAttachment($file);
+					// var to unlink after sending the mail
+					$_file[] = $uploadpath.DIRECTORY_SEPARATOR.$uploadfile;
+				
+					// move file
+					move_uploaded_file($_files['tmp_name'], $file);
+				
+					// attach file
+					$mime->addAttachment($file);
+				}
+			}
 		}
 
 		$mime_body = $mime->get();
@@ -407,9 +415,11 @@ public function render ()
 		
 		// send mail
 		if ($MAIL->send($recipients, $mime_headers, $mime_body)) {
-			// delete attachment file if exists
-			if(file_exists($file)) {
-				unlink($file);
+			// delete attachment file(s) if exists
+			foreach ($_file as $f) {
+				if(file_exists($f)) {
+					unlink($f);
+				}
 			}
 			
 			// add response to session
