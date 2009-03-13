@@ -75,7 +75,7 @@ var toggleElem = 2;
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Boxes}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} : {i18n Boxes}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
@@ -167,11 +167,11 @@ var toggleElem = 2;
 <td>{$_allbox.name|escape:"htmlall"}</td>
 <td>{$_allbox.page_name|truncate:140}</td>
 <td>{$_allbox.content_raw|truncate:50|escape:htmlall}</td>
-<td><a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a></td>
+<td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a>{/if}</td>
 <td><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
 </tr>
 <tr id="o_{$_allbox.id}" class="outer">
-<td colspan="7">
+<td colspan="5">
 <div id="i_{$_allbox.id}" class="inner">
 <fieldset>
 <h3>{i18n Content (Raw)}</h3>

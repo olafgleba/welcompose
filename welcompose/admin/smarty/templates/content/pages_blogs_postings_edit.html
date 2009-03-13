@@ -82,7 +82,7 @@ var podcast = 1;
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62;
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} :
 	<a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}</a> &#62; {i18n Edit Blog Posting}</p></div>
 
 <div id="content">
@@ -129,6 +129,7 @@ var podcast = 1;
 <div class="act">
 <ul class="actnav">
 <li><a class="insert" name="_blog_posting_summary" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
+<li><a class="insert" name="_blog_posting_summary" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
 </ul>
 </div>
 
@@ -138,7 +139,8 @@ var podcast = 1;
 <div class="act">
 <ul class="actnav">
 <li><a class="insert" name="_blog_posting_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_blog_posting_content" href="#">{i18n Structural templates}&nbsp;&nbsp;&nbsp;&nbsp;|</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_blog_posting_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_blog_posting_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
 <li><a class="preview" id="{$page.id}" name="{$blog_posting.id}" rel="Item" href="#">{i18n Frontend View}</a></li>
 </ul>
 </div>

@@ -73,7 +73,7 @@ var preview_ctrl = '{$session.preview_ctrl}';
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} &#62; {i18n Edit Simple Form}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} : {i18n Edit Simple Form}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
@@ -119,7 +119,8 @@ var preview_ctrl = '{$session.preview_ctrl}';
 <div class="act">
 <ul class="actnav">
 <li><a class="insert" name="_simple_form_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_simple_form_content" href="#">{i18n Structural templates}&nbsp;&nbsp;&nbsp;&nbsp;|</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_simple_form_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_simple_page_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
 <li><a class="preview" id="{$page.id}" rel="Index" href="#">{i18n Frontend Preview}</a></li>
 </ul>
 </div>

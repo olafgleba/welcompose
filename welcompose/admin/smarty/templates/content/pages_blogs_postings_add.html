@@ -75,7 +75,7 @@ var pagetype = '{$page.page_type_name}';
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62;
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} :
 	<a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}">{i18n Blog Postings}</a> &#62; {i18n Add Blog Posting}</p></div>
 
 <div id="content">
@@ -122,6 +122,7 @@ var pagetype = '{$page.page_type_name}';
 <div class="act">
 <ul class="actnav">
 <li><a class="insert" name="_blog_posting_summary" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
+<li><a class="insert" name="_blog_posting_summary" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
 </ul>
 </div>
 
@@ -132,6 +133,7 @@ var pagetype = '{$page.page_type_name}';
 <ul class="actnav">
 <li><a class="insert" name="_blog_posting_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
 <li><a class="insert" name="_blog_posting_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_blog_posting_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
 </ul>
 </div>
 
