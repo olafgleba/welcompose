@@ -99,8 +99,8 @@ public function addGlobalBox ($sqlData)
 	
 	// insert row
 	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_GLOBAL_BOXES, $sqlData);
-	
-	// test if global box belongs tu current user/project
+		
+	// test if global box belongs to current user/project
 	if (!$this->globalBoxBelongsToCurrentUser($insert_id)) {
 		throw new Content_GlobalBoxException('GlobalBox does not belong to current user/project');
 	}
