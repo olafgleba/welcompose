@@ -226,7 +226,7 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// create the article group
+		// create the global box
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['content_raw'] = $FORM->exportValue('content');

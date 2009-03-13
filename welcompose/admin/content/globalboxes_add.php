@@ -209,7 +209,7 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// create the article group
+		// create the global box
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');
