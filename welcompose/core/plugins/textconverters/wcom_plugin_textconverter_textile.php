@@ -45,7 +45,12 @@ public function mmInsertDocument ($text, $href)
 
 public function mmInsertInternalLink ($text, $href)
 {
-	$tag = '"%2$s":%1$s';
+	// Omit the Doublequotes if $text is a image reference
+	if (preg_match("=^\!(.*)\!$=", $text)) {
+		$tag = '%2$s:%1$s';
+	} else {
+		$tag = '"%2$s":%1$s';
+	}
 	$html = sprintf($tag, $href, $text);
 	
 	return $html;
