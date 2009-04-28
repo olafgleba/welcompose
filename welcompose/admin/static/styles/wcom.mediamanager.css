@@ -321,17 +321,39 @@ display: none;
 /* eof */
 
 
-/* internal links - global templates, global files, global boxes, structural templates */
+/* internal links - global templates, global files, global boxes, structural templates, abbreviations */
 #modalContainer #globalfiles #firstNode table,
 #modalContainer #globaltemplates #firstNode table,
 #modalContainer #globalboxes #firstNode table,
-#modalContainer #structuraltemplates #firstNode table {
+#modalContainer #structuraltemplates #firstNode table,
+#modalContainer #abbreviations #firstNode table {
 float: left;
 width: 425px;
 padding: 0;
 margin: 0 2px 0 0;
 border: 0 none;
 background: #f9f9f9;
+}
+/* eof */
+
+/* internal links - abbreviations */
+#modalContainer #abbreviations #firstNode table {
+width: 720px;
+}
+#modalContainer #abbreviations #firstNode table td {
+color: #000;
+}
+td.abbreviation {
+width: 250px;
+}
+td.long_form {
+width: 200px;
+}
+td.glossary_form {
+width: 270px;
+}
+#modalBody table th {
+padding: 8px 0 6px 10px;
 }
 /* eof */
 
@@ -354,7 +376,7 @@ background: #f9f9f9;
 #firstNode table tr:hover,
 #secondNode table tr:hover,
 #thirdNode table tr:hover {
-background: #f2f2f2;
+background: #DCEBF7;
 }
 #firstNode table td,
 #secondNode table td,

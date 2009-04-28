@@ -218,7 +218,7 @@ try {
 	}
 
 	// raise error, print inline
-	print '<div id="error">';
+	print '<div id="error" class="inline">';
 	print '<h1>'.gettext('An error occured').'</h1>';
 	print '<h2>'.gettext('Welcompose says').':</h2>';
 	print '<p>';

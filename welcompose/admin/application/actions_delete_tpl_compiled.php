@@ -2,9 +2,9 @@
 
 /**
  * Project: Welcompose
- * File: actions_select.php
+ * File: actions_delete_tpl_compiled.php
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2009 creatics media.systems
  *
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -16,7 +16,7 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2009 creatics media.systems, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -69,10 +69,6 @@ try {
 	/* @var $USER User_User */
 	$USER = load('user:user');
 	
-	// load page class
-	/* @var $PAGE Content_Page */
-	$PAGE = load('content:page');
-	
 	// load login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
@@ -106,24 +102,21 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 	
-	// select available projects
-	$select_params = array(
-		'order_macro' => 'NAME'
-	);
-	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
-	// get pages
-	$params = array(
-			'draft' => NULL
-	);
-	$BASE->utility->smarty->assign('pages', $PAGE->selectPages($params));
+	// delete smarty compiled frontend templates
 	
-	// display the template
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('application/actions_select.html', WCOM_TEMPLATE_KEY);
+	// point to frontend smarty compiled dir temporarily
+	$BASE->utility->smarty->compile_dir = dirname(__FILE__).'/../../smarty/compiled';
+	$BASE->utility->smarty->clear_compiled_tpl();
+
+
+	// clean buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
 	
-	// flush the buffer
-	@ob_end_flush();
+	// redirect
+	header("Location: actions_select.php");
 	exit;
 
 } catch (Exception $e) {
@@ -131,13 +124,19 @@ try {
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
+
+	// raise error, print inline
+	print '<div id="error">';
+	print '<h1>'.gettext('An error occured').'</h1>';
+	print '<h2>'.gettext('Welcompose says').':</h2>';
+	print '<p>';
+	$BASE->error->printExceptionMessage($e);
+	print '</p>';
+	print '</div>';
 	
-	// raise error
-	$BASE->error->displayException($e, $BASE->utility->smarty);
 	$BASE->error->triggerException($e);
-	
+
 	// exit
 	exit;
 }
-
 ?>

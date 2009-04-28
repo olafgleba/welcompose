@@ -352,3 +352,11 @@ color: #036;
 list-style-position: inside;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
+
+/* Inline Errors */
+.inline {
+display: block;
+width: auto!important;
+margin-top: 20px;
+background-image: none!important;
+}

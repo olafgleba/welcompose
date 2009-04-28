@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: actions_select.php
+ * File: abbreviations_select.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -61,25 +61,29 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
-	// start session
+	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
 
-	// load user class
+	// load User_User class
 	/* @var $USER User_User */
-	$USER = load('user:user');
+	$USER = load('User:User');
 	
-	// load page class
-	/* @var $PAGE Content_Page */
-	$PAGE = load('content:page');
-	
-	// load login class
+	// load User_Login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
 	
-	// load project class
+	// load Application_Project class
 	/* @var $PROJECT Application_Project */
-	$PROJECT = load('application:project');
+	$PROJECT = load('Application:Project');
+	
+	// load Content_Abbreviation class
+	/* @var $ABBREVIATION Content_Abbreviation */
+	$ABBREVIATION = load('Content:Abbreviation');
+	
+	// load Utility_Helper class
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('Utility:Helper');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
@@ -90,7 +94,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Application', 'Action', 'Manage')) {
+	if (!wcom_check_access('Content', 'Abbreviation', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -108,20 +112,36 @@ try {
 	
 	// select available projects
 	$select_params = array(
+		'user' => WCOM_CURRENT_USER,
 		'order_macro' => 'NAME'
 	);
 	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 	
-	// get pages
-	$params = array(
-			'draft' => NULL
+	// get available global boxes
+	$select_params = array(
+		'order_macro' => 'NAME',
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => 20
 	);
-	$BASE->utility->smarty->assign('pages', $PAGE->selectPages($params));
+	$BASE->utility->smarty->assign('abbreviations', $ABBREVIATION->selectAbbreviations($select_params));
 	
-	// display the template
+	// count available boxes
+	$abbreviation_count = $ABBREVIATION->countAbbreviations();
+	$BASE->utility->smarty->assign('abbreviation_count', $abbreviation_count);
+	
+	// prepare and assign page index
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($abbreviation_count, 20));
+	
+	// import and assign request params
+	$request = array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
+	);
+	$BASE->utility->smarty->assign('request', $request);
+	
+	// display the page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('application/actions_select.html', WCOM_TEMPLATE_KEY);
-	
+	$BASE->utility->smarty->display('content/abbreviations_select.html', WCOM_TEMPLATE_KEY);
+		
 	// flush the buffer
 	@ob_end_flush();
 	exit;
@@ -139,5 +159,4 @@ try {
 	// exit
 	exit;
 }
-
 ?>

@@ -10,6 +10,7 @@
 <title>{i18n Welcompose Admin &ndash; Projects}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
@@ -56,19 +57,54 @@
 
 <table summary="{i18n Available Actions}" id="actions">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="465" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="175" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="245" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="435" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="240" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="170" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
+<th>&nbsp;</th>
 <th>{i18n Run action}</th>
 <th>&nbsp;</th>
 </tr>
 <tr>
 <td class="actions"><strong>{i18n Apply URL Patterns}</strong>
-<p>{i18n Everytime you change the URL Patterns Layout within the Welcompose configuration file (sys.inc.php) you should perfom this action so your installation reflects the current path layout}.</p></td>	
+<p>{i18n Everytime you change the URL Patterns Layout within the Welcompose configuration file (sys.inc.php) you should perfom this action so your installation reflects the current path layout}.</p></td>
+<td>&nbsp;</td>	
 <td><a class="runaction" id="apply_url_patterns" href="../application/actions_apply_url_patterns.php" title="{i18n Run action}">{i18n Run action}</a></td>
+<td></td>
+</tr>
+<tr>
+<td class="actions"><strong>{i18n Apply Abbreviations and Glossary Page}</strong>
+<p>{i18n You should apply this action whenever you edited the attributes of a abbreviation.<br />Please note: If you have choosen a glossary page before, make sure you check the box below and choose your glossary target page again. Otherwise the related abbreviations will have no link to your glossary page}.</p>
+<form action="templates_select.php" method="get">
+<fieldset>
+<label class="cont chbx" for="text_converter_default"><span class="bez">{i18n Apply Glossar Page?}</span>
+<input id="apply_page" class="chbx toggleViewByChbx" name="apply_page" type="checkbox" value="1" /></label>
+<div class="target_toggleView">
+<p>{i18n Please choose your glossary target page}.</p>
+<select id="get_pages" name="get_pages">
+<option value="">{i18n Please choose...}</option>
+{foreach from=$pages item=_page}
+<option value="{$_page.id|escape:"htmlall"}">{$_page.name|escape:"htmlall"}</option>
+{/foreach}
+</select>
+</div>
+</fieldset>
+</form>
+</td>	
+<td>&nbsp;</td>	
+<td>
+<a class="runaction" id="apply_glossary_page" href="../application/actions_apply_glossary_page.php" title="{i18n Run action}">{i18n Run action}</a>
+</td>
+<td></td>
+</tr>
+<tr>
+<td class="actions"><strong>{i18n Delete Frontend Smarty Compiled Templates}</strong>
+<p>{i18n If you edit templates and rebind references within the backend, it might be necessary to delete the Smarty compiled templates of your frontend output to make sure your frontend view is always up to date. You can run this action whenever you like without disturbing anything}.</p></td>
+<td>&nbsp;</td>	
+<td><a class="runaction" id="delete_tpl_compiled" href="../application/actions_delete_tpl_compiled.php" title="{i18n Run action}">{i18n Run action}</a></td>
 <td></td>
 </tr>
 </table>

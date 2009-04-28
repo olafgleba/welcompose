@@ -92,6 +92,7 @@ Helper.prototype.confirmDelTplTypeAction = Helper_confirmDelTplTypeAction;
 Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
+Helper.prototype.confirmDelAbbreviationAction = Helper_confirmDelAbbreviationAction;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
@@ -99,6 +100,7 @@ Helper.prototype.getAttrNextSibling = Helper_getAttrNextSibling;
 Helper.prototype.getNextSiblingFirstChild = Helper_getNextSiblingFirstChild;
 Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
+Helper.prototype.getParentNodePreviousSibling = Helper_getParentNodePreviousSibling;
 Helper.prototype.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
 Helper.prototype.URLify = Helper_URLify;
 Helper.prototype.adoptBox = Helper_adoptBox;
@@ -1047,6 +1049,7 @@ function Helper_processCallbacks (elem)
 		var win_names = {
 			'pages_links': this.callbacksPopupWindowWidth745,
 			'structuraltemplates_links': this.callbacksPopupWindowWidth460,
+			'abbreviations_links': this.callbacksPopupWindowWidth745,
 			'globalboxes_links': this.callbacksPopupWindowWidth460,
 			'globalfiles_links': this.callbacksPopupWindowWidth460,
 			'globaltemplates_links': this.callbacksPopupWindowWidth460,
@@ -1067,6 +1070,7 @@ function Helper_processCallbacks (elem)
 		var url_paths = {
 			'pages_links': 'content',
 			'structuraltemplates_links': 'content',
+			'abbreviations_links': 'content',
 			'globalboxes_links': 'templating',
 			'globalfiles_links': 'templating',
 			'globaltemplates_links': 'templating',
@@ -1110,6 +1114,7 @@ function Helper_processCallbacks (elem)
 		_applyError(e);
 	}
 }
+
 
 /**
  * Populate on XMLHttpRequest response.
@@ -1448,6 +1453,25 @@ function Helper_confirmDelTplGlobalfileAction(elem)
 }
 
 /**
+ * Confirm abbreviation delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelAbbreviationAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelAbbreviation);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
  * Getter for parent node attribute.
  *
  * @param {string} attr Given attribute to use
@@ -1594,6 +1618,28 @@ function Helper_getParentNodeNextSibling (elem, level)
 		
 	for (var a = elem.parentNode; level > 0; level--) {
 		a = a.nextSibling;
+	}
+	if (typeof a != 'undefined')
+		return a;
+}
+
+/**
+ * Getter for parent node previous sibling.
+ *
+ * @param {object} elem Current element
+ * @param {string} level Depth of parent node search
+ * @return object Parent node previous sibling
+ * @throws applyError on exception
+ */
+function Helper_getParentNodePreviousSibling (elem, level)
+{
+	this.browser = _setBrowserString();
+	
+	if (this.browser == 'ie' || this.browser == 'sa')
+		level-- ;
+		
+	for (var a = elem.parentNode; level > 0; level--) {
+		a = a.previousSibling;
 	}
 	if (typeof a != 'undefined')
 		return a;
@@ -1777,7 +1823,7 @@ function Helper_showResponseAdoptBox(req)
 function Helper_runAction (elem)
 {
 	try {
-		// reference id
+		// reference id as global var
 		e = elem.id;
 		
 		// define object to fill within the process
@@ -1786,19 +1832,26 @@ function Helper_runAction (elem)
 		// current table row
 		targetRow = elem.parentNode.parentNode;
 		
-		// if sucess img is available in the DOM destroy it
+		// error table row
+		targetError = Helper.getParentNodePreviousSibling(elem, 2);
+		
+		// if div error is available in the DOM, destroy it
+		if($('error')) {
+			$('error').remove();
+		}
+						
+		// if sucess img is available in the DOM, destroy it
 		if($(e + '_succeed')) {
 			$(e + '_succeed').remove();
 		}
 		
-		// The id represents the url path name
-		var url = '../application/actions_' + e + '.php';
-		var pars = 'id=' + elem.id;
+		var url = elem.href;
+		var pars = 'id=' + elem.id + '&page_id=' + $F('get_pages') + '&apply_page=' + $F('apply_page');
 		
 		var myAjax = new Ajax.Request(
 			url,
 			{
-				method : 'post',
+				method : 'get',
 				parameters : pars,
 				onLoading : Helper.loaderRunAction,
 				onFailure: function(res) { alert (res.responseText);},
@@ -1832,13 +1885,12 @@ function Helper_loaderRunAction ()
  * @throws applyError on exception
  */
 function Helper_showResponseRunAction(req)
-{
-	try {
-		var r = req.responseText.match(/\berror\b/gi);
+{	
+		var r = req.responseText.match(/\berror\b/gi);		
 		
 		if (r) {
-			Element.hide('indicator');
-			new Insertion.Top(target, req.responseText);
+			Element.hide(e + '_indicator');
+			new Insertion.Top(targetError, req.responseText);
 		} else {
 			setTimeout("Effect.Fade('" + e + "_indicator', {duration: 0.2})", 200);
 			setTimeout("new Insertion.Top(target, '<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />')", 700);
@@ -1846,9 +1898,7 @@ function Helper_showResponseRunAction(req)
 			endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
 		}
 		
-	} catch (e) {
-		_applyError(e);
-	}
+
 }
 
 

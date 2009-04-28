@@ -202,7 +202,7 @@ position: relative;
 display: block;
 float: left;
 font-weight: normal;
-padding: 2px 25px 2px 27px;
+padding: 2px 14px 2px 27px;
 }
 #topsubnav a:link, #topsubnav a:visited, #topsubnavdynamic a:link, #topsubnavdynamic a:visited {
 color: #000;
@@ -230,7 +230,7 @@ position: relative;
 display: block;
 float: left;
 font-weight: normal;
-padding: 2px 25px 2px 27px;
+padding: 2px 14px 2px 27px;
 color: #ff620d;
 background: transparent url(../img/icons/link.gif) 10px -44px no-repeat;
 text-decoration: none;
@@ -296,7 +296,7 @@ font-weight: bold;
 /* pagenav =side */
 h3.pagenav {
 margin-left: 10px;
-margin-top: 10px;
+margin-top: 15px;
 float: left;
 font-weight: normal;
 }
@@ -311,8 +311,8 @@ display: inline;
 .pagenav a, .pagenav a:link, .pagenav a:visited, .pagenav li.on {
 display: block;
 float: left;
-margin: 10px 5px 0 5px;
-padding: 0 5px;
+margin: 12px 2px 0 5px;
+padding: 3px 8px;
 background: #fff;
 color: #000;
 border: 1px solid #d9d9d9;

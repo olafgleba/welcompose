@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: actions_select.php
+ * File: abbreviations_delete.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -61,25 +61,29 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
-	// start session
+	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
 
-	// load user class
+	// load User_User class
 	/* @var $USER User_User */
-	$USER = load('user:user');
+	$USER = load('User:User');
 	
-	// load page class
-	/* @var $PAGE Content_Page */
-	$PAGE = load('content:page');
-	
-	// load login class
+	// load User_Login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
 	
-	// load project class
+	// load Application_Project class
 	/* @var $PROJECT Application_Project */
-	$PROJECT = load('application:project');
+	$PROJECT = load('Application:Project');
+	
+	// load helper class
+	/* @var $HELPER Utility_Helper */
+	$HELPER = load('utility:helper');
+	
+	// load Content_Abbreviation class
+	/* @var $GLOBALBOX Content_Abbreviation */
+	$ABBREVIATION = load('Content:Abbreviation');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
@@ -90,7 +94,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Application', 'Action', 'Manage')) {
+	if (!wcom_check_access('Content', 'Abbreviation', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -105,25 +109,32 @@ try {
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-	
-	// select available projects
-	$select_params = array(
-		'order_macro' => 'NAME'
-	);
-	$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
-	
-	// get pages
-	$params = array(
-			'draft' => NULL
-	);
-	$BASE->utility->smarty->assign('pages', $PAGE->selectPages($params));
-	
-	// display the template
-	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('application/actions_select.html', WCOM_TEMPLATE_KEY);
-	
-	// flush the buffer
-	@ob_end_flush();
+ 
+	// delete abbreviation
+	try {
+		// start transaction
+		$BASE->db->begin();
+		
+		// delete row
+		$ABBREVIATION->deleteAbbreviation(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+		
+		// commit transaction
+		$BASE->db->commit();
+	} catch (Exception $e) {
+		// do rollback
+		$BASE->db->rollback();
+		
+		// re-throw exception
+		throw $e;
+	}
+
+	// clean buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
+
+	// go back to overview page
+	header("Location: abbreviations_select.php");
 	exit;
 
 } catch (Exception $e) {
@@ -139,5 +150,4 @@ try {
 	// exit
 	exit;
 }
-
 ?>

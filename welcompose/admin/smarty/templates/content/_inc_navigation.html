@@ -44,6 +44,13 @@
 		<li><a href="podcastcategories_select.php"{if wcom_admin_navigation_in_area('podcastcategories_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Podcast Categories}<span></span></a></li>
 	{/if}
 {/if}
+{if wcom_check_access('Content', 'Abbreviation', 'Manage')}
+	{if wcom_admin_navigation_is_self('abbreviations_select.php', $SCRIPT_NAME)}
+		<li class="on">{i18n Abbreviations}</li>
+	{else}
+		<li><a href="abbreviations_select.php"{if wcom_admin_navigation_in_area('abbreviations_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Abbreviations}<span></span></a></li>
+	{/if}
+{/if}
 </ul>
 </div>
 <!-- topsubnavcon static eof -->

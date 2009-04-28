@@ -481,6 +481,8 @@ Init.prototype.setCookie = Init_setCookie;
 Init.prototype.getCookie = Init_getCookie;
 Init.prototype.getToogleElem = Init_getToogleElem;
 Init.prototype.getToogleElemSingle = Init_getToogleElemSingle;
+Init.prototype.toggleViewByChbx = Init_toggleViewByChbx;
+
 
 
 /**
@@ -553,7 +555,7 @@ function _objectHackit ()
 function Init_getVars ()
 {
 	try {
-		if (document.getElementsByClassName('botbg')[0]) {
+		if (document.getElementsByClassName('botbg')[0] && !document.getElementById('abbreviations')) {
 			Form.focusFirstElement(document.getElementsByClassName('botbg')[0]);
 		}		
 		if (typeof response != 'undefined') {
@@ -814,6 +816,34 @@ function Init_getToogleElemSingle ()
 				}
 			}
 		}		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/**
+ * Simply show/hide elements by provided id
+ * <br />
+ *
+ * @param {string} elem
+ * @param {string} target id
+ *
+ * @throws applyError on exception
+ */
+function Init_toggleViewByChbx (elem, target)
+{
+	try {
+	    // properties
+		this.elem = elem;
+		this.target = document.getElementsByClassName(target)[0];
+		
+		if ($(this.elem).checked === true) {
+			Effect.Appear(this.target,{delay: 0, duration: 0.5});
+		} else {
+			Effect.Fade(this.target,{delay: 0, duration: 0.4});
+		}	
+		
 	} catch (e) {
 		_applyError(e);
 	}

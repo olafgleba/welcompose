@@ -122,12 +122,6 @@ try {
 	// assign callbacks params
 	$BASE->utility->smarty->assign('callback_params', $callback_params);
 	
-	// assign template content 
-/*	if (!empty($_REQUEST['id'])) {
-		$template = $STRUCTURALTEMPLATE->selectStructuralTemplate(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
-		$BASE->utility->smarty->assign('template', $template);
-	}*/
-	
 	// get structural templates
 	$structural_templates = $STRUCTURALTEMPLATE->selectStructuralTemplates();
 	$BASE->utility->smarty->assign('structural_templates', $structural_templates);

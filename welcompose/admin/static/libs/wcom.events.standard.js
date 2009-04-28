@@ -226,6 +226,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelAbbreviation' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelAbbreviationAction(this);
+			return false;
+		}
+	},
 	'.changeBlogCommentStatus' : function(el){
 		el.onchange = function(){
 			Helper.changeBlogCommentStatus(this);
@@ -254,6 +260,12 @@ var definitions = {
 		el.onclick = function(){
 			Tables.toggleElem(this);
 			return false;
+		}
+	},
+	'.toggleViewByChbx' : function(el){
+		el.onclick = function(){
+			Init.toggleViewByChbx(this, 'target_toggleView');
+			//return false;
 		}
 	},
 	'.submit90' : function(el){

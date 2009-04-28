@@ -237,7 +237,24 @@ try {
 			'text' => $_text,
 			'href' => utf8_encode($object['content'])
 		);
+
+	} elseif ($_REQUEST['type'] == 'abbreviation') {	
+		// load abbreviation class
+		$ABBREVIATION = load('Content:Abbreviation');
 	
+		// get object(s)
+		$object = $ABBREVIATION->selectAbbreviation(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+		
+		// define insert type static as reference
+		$insert_type = 'Abbreviation';
+		
+		// prepare callback args
+		$args = array(
+			'long_form' => sprintf('{get_abbreviation id="%u" value="long_form"}', $object['id']),
+			'name' => sprintf('{get_abbreviation id="%u" value="name"}', $object['id']),
+			'lang' => (!empty($object['lang'])) ? sprintf('{get_abbreviation id="%u" value="lang"}', $object['id']) : NULL
+		);
+		
 	// follow ups
 	} elseif ($_REQUEST['type'] == '') {	
 		// other types

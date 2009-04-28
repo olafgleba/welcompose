@@ -218,6 +218,14 @@ try {
 	$FORM->applyFilter('draft', 'strip_tags');
 	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for nofollow
+	$FORM->addElement('checkbox', 'no_follow', gettext('No Follow'), null,
+		array('id' => 'page_no_follow', 'class' => 'chbx'));
+	$FORM->applyFilter('no_follow', 'trim');
+	$FORM->applyFilter('no_follow', 'strip_tags');
+	$FORM->addRule('no_follow', gettext('The field protect accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// multi select for rights
 	$FORM->addElement('select', 'groups', gettext('Groups'), $groups,
@@ -259,9 +267,10 @@ try {
 		'description' => Base_Cnc::ifsetor($page['description'], null),
 		'optional_text' => Base_Cnc::ifsetor($page['optional_text'], null),
 		'template_set' => Base_Cnc::ifsetor($page['template_set'], null),
-		'draft' => Base_Cnc::ifsetor($page['draft'], null),
 		'index_page' => Base_Cnc::ifsetor($page['index_page'], null),
 		'protect' => Base_Cnc::ifsetor($page['protect'], null),
+		'draft' => Base_Cnc::ifsetor($page['draft'], null),
+		'no_follow' => Base_Cnc::ifsetor($page['no_follow'], null),
 		'groups' => $selected_groups,
 		'sitemap_changefreq' => Base_Cnc::ifsetor($page['sitemap_changefreq'], null),
 		'sitemap_priority' => Base_Cnc::ifsetor($page['sitemap_priority'], null)
@@ -347,6 +356,7 @@ try {
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
 		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
+		$sqlData['no_follow'] = $FORM->exportValue('no_follow');
 		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 		$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 			
