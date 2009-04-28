@@ -786,6 +786,12 @@
 	</text-converters>
 	<text-macros>
 		<text-macro>
+			<name>Bundled Abbreviation Generator</name>
+			<internal_name>get_abbreviation</internal_name>
+			<type>pre</type>
+			<editable>0</editable>
+		</text-macro>
+		<text-macro>
 			<name>Bundled Media URL Generator</name>
 			<internal_name>get_media</internal_name>
 			<type>pre</type>
