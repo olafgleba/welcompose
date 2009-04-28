@@ -523,7 +523,7 @@ CREATE TABLE `content_abbreviations` (
   `first_char` char(1),
   `long_form` text,
   `glossary_form` text,
-  `name` varchar(2),
+  `lang` varchar(2),
   `date_added` datetime,
   `date_modified` timestamp(14),
   PRIMARY KEY(`id`),
