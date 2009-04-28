@@ -2102,7 +2102,8 @@ protected function syncTextMacrosWithSkeleton ($project)
 			`project`,
 			`name`,
 			`internal_name`,
-			`type`
+			`type`,
+			`editable`
 		FROM
 			".WCOM_DB_APPLICATION_TEXT_MACROS."
 		WHERE
@@ -2157,6 +2158,8 @@ protected function syncTextMacrosWithSkeleton ($project)
 				
 				if ($_text_macro['name'] != $_db_text_macro['name']) {
 					$update = true;
+				} elseif ((int)$_text_macro['editable'] != (int)$_db_text_macro['editable']) {
+					$update = true;
 				}
 				
 				// update text macros if necessary
@@ -2164,7 +2167,8 @@ protected function syncTextMacrosWithSkeleton ($project)
 					// prepare sql data
 					$sqlData = array(
 						'name' => $_text_macro['name'],
-						'type' => (int)$_text_macro['type']
+						'type' => (int)$_text_macro['type'],
+						'editable' => (string)intval($_text_macro['editable'])
 					);
 					
 					// prepare where clause
@@ -2192,7 +2196,8 @@ protected function syncTextMacrosWithSkeleton ($project)
 				'project' => (int)$project,
 				'name' => $_text_macro['name'],
 				'internal_name' => $_text_macro['internal_name'],
-				'type' => $_text_macro['type']
+				'type' => $_text_macro['type'],
+				'editable' => (string)intval($_text_macro['editable'])
 			);
 			
 			// insert text_macro
