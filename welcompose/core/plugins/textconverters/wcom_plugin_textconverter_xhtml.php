@@ -117,6 +117,19 @@ public function mmInsertInternalLink ($text, $href)
 	return $this->escapeMultiline($html);
 }
 
+public function mmInsertAbbreviation ($long_form, $name, $lang)
+{
+	$a = new HtmlTag('abbr', 'inline', $name);
+	$a->appendAttr(new HtmlTagAttr('title', $long_form));
+	if (!is_null($lang)) {
+		$a->appendAttr(new HtmlTagAttr('lang', $lang));
+		$a->appendAttr(new HtmlTagAttr('xml:lang', $lang));
+	}
+	
+	$html = $a->getHtml();
+	return $this->escapeMultiline($html);
+}
+
 public function mmInsertInternalReference ($text, $href)
 {
 	$tag = '%1$s%2$s';
@@ -217,16 +230,16 @@ public function getHtml ($indent = null)
 		}
 		
 		if (!empty($this->content)) {
-			$lines[] = $indent . "\t" . $this->content;
+			$lines[] = $indent . $this->content;
 		}
 	
 		foreach ($this->childs as $_child) {
-			$lines[] = $_child->getHtml($indent . "\t");
+			$lines[] = $_child->getHtml($indent);
 		}
 	
 		$lines[] = sprintf('%s</%s>', $indent, $this->name);
 	
-		return implode("\n", $lines);
+		return implode("", $lines);
 	} elseif ($this->type == 'inline') {
 		if ($this->hasAttrs()) {
 			return sprintf('%s<%s%s>%s</%s>', $indent, $this->name, " ".$this->inflateAttrs(), $this->content, $this->name);

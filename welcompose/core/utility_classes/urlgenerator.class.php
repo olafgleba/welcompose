@@ -115,15 +115,11 @@ public function __construct()
  * Unknown arguments will be treated as user supplied arguments
  * and appended to the generated url. If the parameter remove_amps
  * is set to true, encoded ampersands will be converted to "clear
- * text" ampersands. If the parameter prepend_host ist set to true,
- * the server http host will be prepend the build url. If the parameter
- * encode_system_url is set to true the url will urlencoded. This takes
- * account of the possibly former converted ampersand.
+ * text" ampersands.
  * 
  * @throws Utility_UrlGeneratorException
  * @param array Args
  * @param bool Remove encoded ampersands
- * @param bool Prepend http host
  * @param bool Encode output url string
  * @return string
  */
@@ -171,7 +167,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 	}
 	
 	// if we haven't found a current page yet, the user may have selected a page that
-	// doesn't exist or has not defined any page at all to link to. if the page doesnt
+	// doesn't exist or has not defined any page at all to link to. if the page doesn't
 	// exist (!empty($page)), we should skip here. if he has not defined any page at
 	// all, we use the index page.
 	if (empty($current_page) && !empty($page_id)) {
@@ -287,15 +283,10 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
  * Generates internal sitemap links using the provided arguments.
  * The required arguments depend on the page someone likes to link to.
  * Unknown arguments will be treated as user supplied arguments
- * and appended to the generated url. If the parameter remove_amps
- * is set to true, encoded ampersands will be converted to "clear
- * text" ampersands. If the parameter encode_system_url is set to
- * true the url will urlencoded. This takes account of the possibly
- * former converted ampersand.
+ * and prepend to the generated url.
  * 
  * @throws Utility_UrlGeneratorException
  * @param array Args
- * @param bool Remove encoded ampersands
  * @return string
  */
 public function generateSitemapLinks ($args = array())

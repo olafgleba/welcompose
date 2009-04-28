@@ -37,6 +37,7 @@ define("WCOM_DB_COMMUNITY_BLOG_COMMENTS", "community_blog_comments");
 define("WCOM_DB_COMMUNITY_SETTINGS", "community_settings");
 
 // content table aliases
+define("WCOM_DB_CONTENT_ABBREVIATIONS", "content_abbreviations");
 define("WCOM_DB_CONTENT_BLOG_PODCASTS", "content_blog_podcasts");
 define("WCOM_DB_CONTENT_BLOG_PODCAST_CATEGORIES", "content_blog_podcast_categories");
 define("WCOM_DB_CONTENT_BLOG_POSTINGS", "content_blog_postings");
