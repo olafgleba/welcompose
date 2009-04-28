@@ -238,7 +238,7 @@
 			</groups>
 		</right>
 		<right>
-			<name>CONTENT_ABBREVIATION_ACTION_USE</name>
+			<name>CONTENT_ABBREVIATION_USE</name>
 			<description>Allows usage of abbreviations.</description>
 			<editable>0</editable>
 			<groups>
@@ -247,7 +247,7 @@
 			</groups>
 		</right>
 		<right>
-			<name>CONTENT_ABBREVIATION_ACTION_MANAGE</name>
+			<name>CONTENT_ABBREVIATION_MANAGE</name>
 			<description>Allows management of abbreviations.</description>
 			<editable>0</editable>
 			<groups>
