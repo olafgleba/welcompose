@@ -238,6 +238,23 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_ABBREVIATION_ACTION_USE</name>
+			<description>Allows usage of abbreviations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_ABBREVIATION_ACTION_MANAGE</name>
+			<description>Allows management of abbreviations.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_BLOGPODCAST_USE</name>
 			<description>Allows usage of podcasts.</description>
 			<editable>0</editable>
