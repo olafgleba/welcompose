@@ -513,6 +513,28 @@ CREATE TABLE `templating_templates` (
 )
 ENGINE=INNODB;
 
+-- Drop table content_abbriviations
+DROP TABLE IF EXISTS `content_abbreviations`;
+
+CREATE TABLE `content_abbreviations` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255),
+  `first_char` char(1),
+  `long_form` text,
+  `glossary_form` text,
+  `name` varchar(2),
+  `date_added` datetime,
+  `date_modified` timestamp(14),
+  PRIMARY KEY(`id`),
+  INDEX `project`(`project`),
+  CONSTRAINT `content_abbreviations.id2application_projects.id` FOREIGN KEY (`project`)
+    REFERENCES `application_projects`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB;
+
 -- Drop table content_global_boxes
 DROP TABLE IF EXISTS `content_global_boxes`;
 
@@ -600,6 +622,7 @@ CREATE TABLE `content_pages` (
   `protect` enum('0','1') DEFAULT '0',
   `index_page` enum('0','1') DEFAULT '0',
   `draft` enum('0','1') DEFAULT '0',
+  `no_follow` enum('0','1') DEFAULT '0',
   `image_small` int(11) UNSIGNED,
   `image_medium` int(11) UNSIGNED,
   `image_big` int(11) UNSIGNED,
