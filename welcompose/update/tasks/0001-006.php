@@ -87,23 +87,56 @@ try {
 	 * Changes to be applied
 	 * ---------------------
 	 *
-	 *  - Add new rights: CONTENT_ABBREVIATION{,FIELD}_{USE,MANAGE}
+	 * - Create tables content_abbreviations
+	 * - Add new rights: CONTENT_ABBREVIATION{,FIELD}_{USE,MANAGE}
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
 			// begin transaction
 			$BASE->db->begin();
 
-			// get projects
+			// disable foreign key checks
+			$BASE->db->execute('SET FOREIGN_KEY_CHECKS = 0');
+
+			// create content_generator_form_fields
+			$BASE->db->execute('DROP TABLE IF EXISTS '.WCOM_DB_CONTENT_ABBREVIATIONS);
+
+			$sql = "
+				CREATE TABLE ".WCOM_DB_CONTENT_ABBREVIATIONS." (
+				  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+				  `project` int(11) UNSIGNED NOT NULL,
+				  `name` varchar(255),
+				  `first_char` char(1),
+				  `long_form` text,
+				  `glossary_form` text,
+				  `lang` varchar(2),
+				  `date_added` datetime,
+				  `date_modified` timestamp(14),
+				  PRIMARY KEY(`id`),
+				  INDEX `project`(`project`),
+				  CONSTRAINT `content_abbreviations.id2application_projects.id` FOREIGN KEY (`project`)
+				    REFERENCES ".WCOM_DB_APPLICATION_PROJECTS."(`id`)
+				    ON DELETE CASCADE
+				    ON UPDATE CASCADE
+				)
+				ENGINE=INNODB;
+			";
+
+			$BASE->db->execute($sql);
+
+			// enable foreign key checks
+			$BASE->db->execute('SET FOREIGN_KEY_CHECKS = 1');
+
+			// add new template/page types to every project
 			$sql = "
 				SELECT
 					`id`
 				FROM
 					".WCOM_DB_APPLICATION_PROJECTS."
 			";
-			
+
 			$projects = $BASE->db->select($sql, 'multi');
-					
+
 			// add new rights
 			foreach ($projects as $_project) {
 				// get existing rights
@@ -118,13 +151,13 @@ try {
 						`project` = :project
 				";
 				$rights = $BASE->db->select($sql, 'multi', array('project' => (int)$_project['id']));
-				
+
 				// define rights
 				$rights_to_create = array(
 					'CONTENT_ABBREVIATION_USE' => 'Allows usage of abbreviations.',
 					'CONTENT_ABBREVIATION_MANAGE' => 'Allows management of abbreviations.'
 				);
-				
+
 				foreach ($rights_to_create as $_name => $_description) {
 					// prepare sql data
 					$sqlData = array(
@@ -133,34 +166,34 @@ try {
 						'description' => $_description,
 						'editable' => '0'
 					);
-				
+
 					// if the right already exists, force update
 					$insert = true;
 					foreach ($rights as $_right) {
 						if ($_right['name'] == $_name) {
 							// prepare where clause
 							$where = " WHERE `id` = :id ";
-						
+
 							// prepare bind params
 							$bind_params = array(
 								'id' => (int)$_right['id']
 							);
-							
+
 							// update right
 							$BASE->db->update(WCOM_DB_USER_RIGHTS, $sqlData, $where, $bind_params);
-							
+
 							$insert = false;
 							break;
 						}
 					}
-					
+
 					// create new right
 					if ($insert) {
 						$BASE->db->insert(WCOM_DB_USER_RIGHTS, $sqlData);
 					}
 				}
 			}
-			
+
 			// create links between new rights and user groups
 			foreach ($projects as $_project) {
 				// define list with group/right mappings
@@ -173,7 +206,7 @@ try {
 						'WCOM_ADMIN'
 					)
 				);
-				
+
 				// sync database with list of group/right mappings
 				foreach ($rights as $_right => $_groups) {
 					// get right id
@@ -190,12 +223,12 @@ try {
 							1
 					";
 					$right_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_right));
-					
+
 					// if the right id is empty, we have to stop here
 					if (empty($right_id) || !is_numeric($right_id)) {
 						throw new Exception('Required user right could not be found');
 					}
-					
+
 					foreach ($_groups as $_group) {
 						// get right id
 						$sql = "
@@ -211,12 +244,12 @@ try {
 								1
 						";
 						$group_id = $BASE->db->select($sql, 'field', array('project' => (int)$_project['id'], 'name' => $_group));
-						
+
 						// if the group id is empty, we have to stop here
 						if (empty($group_id) || !is_numeric($group_id)) {
 							throw new Exception('Required user group could not be found');
 						}
-						
+
 						// let's see if there already is a link between group and right
 						$sql = "
 							SELECT
@@ -229,7 +262,7 @@ try {
 								`group` = :group
 						";
 						$count = $BASE->db->select($sql, 'field', array('right' => $right_id, 'group' => $group_id));
-						
+
 						if ((int)$count > 0) {
 							continue;
 						} else {
@@ -243,40 +276,39 @@ try {
 					}
 				}
 			}
-			
+
 			// update schema version
 			$sqlData = array(
 				'schema_version' => TASK_MAJOR.'-'.TASK_MINOR
 			);
-			
+
 			$BASE->db->update(WCOM_DB_APPLICATION_INFO, $sqlData);
 
-			
 			// commit
 			$BASE->db->commit();
 		} catch (Exception $e) {
 			// do rollback
 			$BASE->db->rollback();
-		
+
 			// re-throw exception
 			throw $e;
 		}
 	}
-	
+
 	// flush the buffer
 	@ob_end_flush();
-	
+
 	exit;
 } catch (Exception $e) {
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
-	
+
 	// raise error
-	$BASE->error->printExceptionMessage($e);
+	$BASE->error->displayException($e, $BASE->utility->smarty);
 	$BASE->error->triggerException($e);
-	
+
 	// exit
 	exit;
 }
