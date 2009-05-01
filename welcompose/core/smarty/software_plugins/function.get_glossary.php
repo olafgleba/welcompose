@@ -60,7 +60,7 @@ function smarty_function_get_glossary ($params, &$smarty)
 	
 		// get first char rows
 		foreach ($abbreviations as $_key => $char) {
-			if (!empty($char['glossary_form'])) {
+			if (!empty($char['content_raw'])) {
 				$first_chars[] = $char['first_char'];
 			}
 		}
@@ -97,11 +97,11 @@ function smarty_function_get_glossary ($params, &$smarty)
 	
 		// get all sets with glossary_form content
 		foreach ($abbreviations as $key => $val) {
-			if (!empty($val['glossary_form'])) {				
+			if (!empty($val['content_raw'])) {				
 				$content[] = array(
 					'name' => $val['name'],
 					'long_form' => $val['long_form'],
-					'glossary_form' => $val['glossary_form'],
+					'content' => $val['content'],
 					'anchor' => $val['first_char']
 				);
 			}

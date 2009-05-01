@@ -221,7 +221,10 @@ public function selectAbbreviation ($id)
 			`content_abbreviations`.`name` AS `name`,
 			`content_abbreviations`.`first_char` AS `first_char`,
 			`content_abbreviations`.`long_form` AS `long_form`,
-			`content_abbreviations`.`glossary_form` AS `glossary_form`,
+			`content_abbreviations`.`content` AS `content`,
+			`content_abbreviations`.`content_raw` AS `content_raw`,
+			`content_abbreviations`.`text_converter` AS `text_converter`,
+			`content_abbreviations`.`apply_macros` AS `apply_macros`,
 			`content_abbreviations`.`lang` AS `lang`,
 			`content_abbreviations`.`date_modified` AS `date_modified`,
 			`content_abbreviations`.`date_added` AS `date_added`
@@ -326,7 +329,10 @@ public function selectAbbreviations ($params = array())
 			`content_abbreviations`.`name` AS `name`,
 			`content_abbreviations`.`first_char` AS `first_char`,
 			`content_abbreviations`.`long_form` AS `long_form`,
-			`content_abbreviations`.`glossary_form` AS `glossary_form`,
+			`content_abbreviations`.`content` AS `content`,
+			`content_abbreviations`.`content_raw` AS `content_raw`,
+			`content_abbreviations`.`text_converter` AS `text_converter`,
+			`content_abbreviations`.`apply_macros` AS `apply_macros`,
 			`content_abbreviations`.`lang` AS `lang`,
 			`content_abbreviations`.`date_modified` AS `date_modified`,
 			`content_abbreviations`.`date_added` AS `date_added`
