@@ -521,16 +521,24 @@ CREATE TABLE `content_abbreviations` (
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   `first_char` char(1),
-  `long_form` text,
-  `glossary_form` text,
+  `long_form` varchar(255),
+  `content` text,
+  `content_raw` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
   `lang` varchar(2),
   `date_added` datetime,
   `date_modified` timestamp(14),
   PRIMARY KEY(`id`),
   INDEX `project`(`project`),
+  INDEX `text_converter`(`text_converter`),
   CONSTRAINT `content_abbreviations.id2application_projects.id` FOREIGN KEY (`project`)
     REFERENCES `application_projects`(`id`)
     ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_abbreviations.text_converter2text_converters.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+    ON DELETE SET NULL
     ON UPDATE CASCADE
 )
 ENGINE=INNODB;
