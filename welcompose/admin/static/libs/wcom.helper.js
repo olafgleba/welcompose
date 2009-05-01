@@ -1896,6 +1896,11 @@ function Helper_showResponseRunAction(req)
 			setTimeout("new Insertion.Top(target, '<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />')", 700);
 			new Effect.Highlight(targetRow, {startcolor: '#DCEBF7',
 			endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
+			
+			// apply default
+			$('apply_page').checked = false;
+			var target = document.getElementsByClassName('target_toggleView')[0];
+			Effect.Fade(target,{delay: 0, duration: 0.4});
 		}
 		
 

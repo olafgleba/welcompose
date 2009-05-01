@@ -81,6 +81,14 @@ try {
 	/* @var $ABBREVIATION Content_Abbreviation */
 	$ABBREVIATION = load('Content:Abbreviation');
 	
+	// load Application_TextConverter class
+	/* @var $TEXTCONVERTER Application_Textconverter */
+	$TEXTCONVERTER = load('Application:TextConverter');
+	
+	// load Application_TextMacro class
+	/* @var $TEXTMACRO Application_TextMacro */
+	$TEXTMACRO = load('Application:TextMacro');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -93,6 +101,9 @@ try {
 	if (!wcom_check_access('Content', 'Abbreviation', 'Manage')) {
 		throw new Exception("Access denied");
 	}
+	
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
 	
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
@@ -111,18 +122,33 @@ try {
 		
 	// textarea for long form
 	$FORM->addElement('textarea', 'long_form', gettext('Long form'), 
-		array('id' => 'abbreviation_long_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+		array('id' => 'abbreviation_long_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
 	$FORM->applyFilter('long_form', 'trim');
 	$FORM->applyFilter('long_form', 'strip_tags');
 	$FORM->addRule('long_form', gettext('Please enter a long form for the abbreviation'), 'required');
 	$FORM->addRule('long_form', gettext('A abbreviation with the given long form already exists'),
 		'testForLongFormUniqueness');
 		
-	// textarea for glossar form
-	$FORM->addElement('textarea', 'glossary_form', gettext('Glossary form'), 
-		array('id' => 'abbreviation_glossary_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('glossary_form', 'trim');
-	$FORM->applyFilter('glossary_form', 'strip_tags');
+	// textarea for glossary form
+	$FORM->addElement('textarea', 'content', gettext('Glossary form'), 
+		array('id' => 'abbreviation_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+	$FORM->applyFilter('content', 'trim');
+	
+	// select for text_converter
+	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
+		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'abbreviation_text_converter'));
+	$FORM->applyFilter('text_converter', 'trim');
+	$FORM->applyFilter('text_converter', 'strip_tags');
+	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
+		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
+	
+	// checkbox for apply_macros
+	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
+		array('id' => 'abbreviation_apply_macros', 'class' => 'chbx'));
+	$FORM->applyFilter('apply_macros', 'trim');
+	$FORM->applyFilter('apply_macros', 'strip_tags');
+	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for language
 	$FORM->addElement('text', 'lang', gettext('Language'), 
@@ -133,7 +159,12 @@ try {
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
-	
+		
+	// set defaults
+	$FORM->setDefaults(array(
+		'apply_macros' => 1,
+		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null
+	));
 	
 	// validate it
 	if (!$FORM->validate()) {
@@ -196,9 +227,39 @@ try {
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['first_char'] = strtoupper(substr($FORM->exportValue('name'),0,1));
 		$sqlData['long_form'] = $FORM->exportValue('long_form');
-		$sqlData['glossary_form'] = $FORM->exportValue('glossary_form');
+		$sqlData['content_raw'] = $FORM->exportValue('content');
+		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
+			$FORM->exportValue('text_converter') : null;
+		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
 		$sqlData['lang'] = $FORM->exportValue('lang');
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
+		
+		// apply text macros and text converter if required
+		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+			// extract content
+			$content = $FORM->exportValue('content');
+
+			// apply startup and pre text converter text macros 
+			if ($FORM->exportValue('apply_macros') > 0) {
+				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+			}
+
+			// apply text converter
+			if ($FORM->exportValue('text_converter') > 0) {
+				$content = $TEXTCONVERTER->applyTextConverter(
+					$FORM->exportValue('text_converter'), $content
+				);
+			}
+
+			// apply post text converter and shutdown text macros 
+			if ($FORM->exportValue('apply_macros') > 0) {
+				$content = $TEXTMACRO->applyTextMacros($content, 'post');
+			}
+
+			// assign content to sql data array
+			$sqlData['content'] = $content;
+		}
 
 		// check sql data for pear errors
 		$HELPER = load('utility:helper');

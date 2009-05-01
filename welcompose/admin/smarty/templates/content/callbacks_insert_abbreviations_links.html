@@ -75,7 +75,7 @@ var response = '{$session.response}';
 <tr>
 <td class="abbreviation"><a class="process_insert" id="{$_abbreviation.id}" name="abbreviation" href="#" title="{i18n Insert link}">{$_abbreviation.name|escape:"htmlall"}</a></td>
 <td>{$_abbreviation.long_form|escape:"htmlall"}</td>
-<td>{$_abbreviation.glossary_form|escape:"htmlall"|truncate:150}</td>
+<td>{$_abbreviation.content|escape:"htmlall"|truncate:150}</td>
 </tr>
 {/foreach}
 </table>
@@ -96,11 +96,11 @@ var response = '{$session.response}';
 <label class="cont" for="abbreviation_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}</label>
 
-<label class="cont h13" for="abbreviation_long_form"><span class="bez">{$form.long_form.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04" for="abbreviation_long_form"><span class="bez">{$form.long_form.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.long_form.html}</label>
 
-<label class="cont h13" for="abbreviation_glossary_form"><span class="bez">{$form.glossary_form.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.glossary_form.html}</label>
+<label class="cont h13" for="abbreviation_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.content.html}</label>
 
 <label class="cont" for="abbreviation_lang"><span class="bez">{$form.lang.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.lang.html}</label>

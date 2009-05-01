@@ -91,7 +91,7 @@
 <td class="page"><span>{$_abbreviation.name|escape:"htmlall"}</span></td>
 <td>{$_abbreviation.long_form|escape:"htmlall"|truncate:60}</td>
 <td>{if $_abbreviation.long_form|count_characters > 60}<a class="comment showTableRow" href="#" id="e_{$_abbreviation.id}" title="{i18n View entire long form}"></a>{/if}</td>
-<td>{if !empty($_abbreviation.glossary_form)}{i18n yes}{else}{i18n no}{/if}</td>
+<td>{if !empty($_abbreviation.content)}{i18n yes}{else}{i18n no}{/if}</td>
 <td><a class="edit" href="abbreviations_edit.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelAbbreviation" href="abbreviations_delete.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

@@ -129,7 +129,8 @@ try {
 		'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
 		'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
 		'BOX' => array('selectBoxes', 'updateBox'),
-		'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox')
+		'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox'),
+		'ABBREVIATION' => array('selectAbbreviations', 'updateAbbreviation')
 	);
 	
 	// filter request data
@@ -192,7 +193,7 @@ try {
 					$pattern_nonactive_glossary = sprintf('<abbr title="{get_abbreviation id="%d" value="long_form"}">{get_abbreviation id="%d" value="name"}</abbr>', $abbreviation_id, $abbreviation_id);
 					
 					// process only abbreviations with a glossary entry
-					if (!empty($abbreviation['glossary_form']) && $_apply_page == 1) {						
+					if (!empty($abbreviation['content_raw']) && $_apply_page == 1) {						
 						if (!empty($abbreviation['lang'])) {							
 							$_value['content_raw'] = str_replace($search, $pattern_active_glossary_lang, $_value['content_raw']);
 						} else {
@@ -201,20 +202,25 @@ try {
 					}
 										
 					// process only abbreviations with no glossary entry
-					elseif (empty($abbreviation['glossary_form'])) {		
-						if (!empty($abbreviation['lang'])) {
-							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary_lang, $_value['content_raw']);
-						} else {							
-							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary, $_value['content_raw']);
-						}
-					} else {
+					// but with checked glossar applying
+					elseif (empty($abbreviation['content_raw']) && $_apply_page == 1) {		
 						if (!empty($abbreviation['lang'])) {
 							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary_lang, $_value['content_raw']);
 						} else {							
 							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary, $_value['content_raw']);
 						}
 					}
-					
+
+					// process only abbreviations with no glossary entry
+					// and  unchecked glossar applying
+					elseif (empty($abbreviation['content_raw']) && $_apply_page != 1) {		
+						if (!empty($abbreviation['lang'])) {
+							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary_lang, $_value['content_raw']);
+						} else {							
+							$_value['content_raw'] = str_replace($search, $pattern_nonactive_glossary, $_value['content_raw']);
+						}
+					}
+										
 					// assign content raw to sql data array
 					 $sqlData['content_raw'] = $_value['content_raw'];
 										
@@ -271,13 +277,12 @@ try {
 					
 				} // foreach match eof
 				
-			} 
+			} // !is_null($_value['content_raw']
 	
 		} // foreach eof
 	
 	} // foreach eof
-
-
+	
 	// clean buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();

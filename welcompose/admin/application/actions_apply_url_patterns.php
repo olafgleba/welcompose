@@ -125,7 +125,8 @@ try {
 		'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
 		'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
 		'BOX' => array('selectBoxes', 'updateBox'),
-		'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox')
+		'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox'),
+		'ABBREVIATION' => array('selectAbbreviations', 'updateAbbreviation')
 	);
 	
 	foreach ($classLoad as $classRef => $classFunc) {

@@ -102,9 +102,6 @@ try {
 		throw new Exception("Access denied");
 	}
 	
-	// get default text converter if set
-	$default_textconverter = $TEXTCONVERTER->selectDefaultTextConverter();
-	
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);

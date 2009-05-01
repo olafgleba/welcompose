@@ -77,6 +77,14 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
+	// load Application_TextConverter class
+	/* @var $TEXTCONVERTER Application_Textconverter */
+	$TEXTCONVERTER = load('Application:TextConverter');
+	
+	// load Application_TextMacro class
+	/* @var $TEXTMACRO Application_TextMacro */
+	$TEXTMACRO = load('Application:TextMacro');
+	
 	// load structural template class
 	$ABBREVIATION = load('Content:Abbreviation');
 	
@@ -136,18 +144,17 @@ try {
 		
 	// textarea for long form
 	$FORM->addElement('textarea', 'long_form', gettext('Long form'), 
-		array('id' => 'abbreviation_long_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+		array('id' => 'abbreviation_long_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
 	$FORM->applyFilter('long_form', 'trim');
 	$FORM->applyFilter('long_form', 'strip_tags');
 	$FORM->addRule('long_form', gettext('Please enter a long form for the abbreviation'), 'required');
 	$FORM->addRule('long_form', gettext('A abbreviation with the given long form already exists'),
 		'testForLongFormUniqueness');
 		
-	// textarea for glossar form
-	$FORM->addElement('textarea', 'glossary_form', gettext('Glossary form'), 
-		array('id' => 'abbreviation_glossary_form', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('glossary_form', 'trim');
-	$FORM->applyFilter('glossary_form', 'strip_tags');
+	// textarea for glossary form
+	$FORM->addElement('textarea', 'content', gettext('Glossary form'), 
+		array('id' => 'abbreviation_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+	$FORM->applyFilter('content', 'trim');
 	
 	// textfield for language
 	$FORM->addElement('text', 'lang', gettext('Language'), 
@@ -242,11 +249,15 @@ try {
 		// create the abbreviation
 		$sqlData = array();
 		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['first_char'] = strtoupper(substr($FORM->exportValue('name'),0,1));
 		$sqlData['long_form'] = $FORM->exportValue('long_form');
-		$sqlData['glossary_form'] = $FORM->exportValue('glossary_form');
+		$sqlData['content_raw'] = $FORM->exportValue('content');
+		$sqlData['content'] = $FORM->exportValue('content');
 		$sqlData['lang'] = $FORM->exportValue('lang');
+		$sqlData['text_converter'] = ($text_converter > 0) ? $text_converter : null;
+		$sqlData['apply_macros'] = (string)intval(1);
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
-
+		
 		// check sql data for pear errors
 		$HELPER = load('utility:helper');
 		$HELPER->testSqlDataForPearErrors($sqlData);
