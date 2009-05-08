@@ -137,7 +137,8 @@ try {
 		$page_arrays = array();
 		foreach ($navigations as $_navigation) {
 			$select_params = array(
-				'navigation' => (int)$_navigation['id']
+				'navigation' => (int)$_navigation['id'],
+				'draft' => 1
 			);
 			$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
 		}

@@ -253,7 +253,7 @@ border: 0 none;
 }
 
 /* Draft page rows */
-.draft {
+.draft, .draft a {
 color: #999;
 }
 
