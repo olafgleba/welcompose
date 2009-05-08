@@ -460,9 +460,6 @@ public function getAbbreviation ($args = array())
 		case 'name' :
 			$str = $_abbreviation['name'];
 			break;
-		case 'glossary_form' : 
-			$str = $_abbreviation['glossary_form'];
-			break;
 		case 'lang' : 
 			$str = $_abbreviation['lang'];
 			break;

@@ -42,7 +42,6 @@ function smarty_function_get_glossary ($params, &$smarty)
 	// define some vars
 	$var = $params['var'];
 	$action = $params['action'];
-
 	
 	// load abbreviation class
 	$ABBREVIATION = load('Content:Abbreviation');
@@ -131,12 +130,10 @@ function smarty_function_get_glossary ($params, &$smarty)
 		}
 		
 		// prepare result
-		$result = $content;
-	
+		$result = $content;	
 	}
 	
 	// assign result to smarty
 	$smarty->assign($var, $result);
 }
-
 ?>
