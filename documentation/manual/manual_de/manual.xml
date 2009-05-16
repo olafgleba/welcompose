@@ -12,8 +12,7 @@
 			href="../common/copyright.xml" />
 
 		<legalnotice>
-			<para>Die Dokumentation ist unter einer Creative Commons-Lizenz 
-			(<ulink url="http://creativecommons.org/licenses/by-nc-nd/3.0/" />) lizenziert.
+			<para>Die Dokumentation ist unter einer <ulink type="external" url="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons-Lizenz 3.0</ulink> lizenziert.
 			</para>
 		</legalnotice>
 
@@ -34,12 +33,14 @@
 		href="chapter_media.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_templating.xml" />
+	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_users.xml" /> -->
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_settings.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_demo.xml" />
-	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_crash_course_blog.xml" /> -->
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_crash_course_blog.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_usage.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"

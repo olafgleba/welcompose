@@ -154,4 +154,16 @@
 
 		</sect2>
 	</sect1>
+	
+	<sect1 id="preface.screenshots">
+		<title>Abbildungen der Software im Handbuch</title>
+
+		<para>
+			Die im Handbuch verwendeten Abbildungen einzelner Bereiche von Welcompose
+			können sich von der Ansicht der jeweils aktuellen Version der Software unterscheiden.
+			Neue Screenshots werden dann erstellt und verwandt, wenn sie zwingend zum Verständnis
+			des Handbuches erforderlich sind. 
+		</para>
+
+	</sect1>
 </chapter>

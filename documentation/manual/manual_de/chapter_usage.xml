@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <chapter id="usage">
-	<title>Anwendung</title>
+	<title>Anwendungsbeispiele</title>
 	
 	<sect1 id="usage.nested_navigation">
 		<title>Verschachtelte Navigationen</title>
@@ -98,7 +98,7 @@
         <li{if $page.id == $_page.id} class="on"{/if}>
             {if $page.id == $_page.id}
                 <span>{$_page.name}</span>
-                        {else}
+            {else}
                 <a href="{get_url page_id=$_page.id action="Index"}">{$_page.name}</a>
             {/if}    
             {if ($_page.rgt - $_page.lft) > 1 && $__in_path == 'true'}
@@ -111,8 +111,8 @@
 </ul>
 ]]></programlisting>
 
-			<para>Der Ausgabe-Quelltext wird bei einer zweistufigen Navigation
-	 			beispielhaft wie folgt aussehen:</para>
+		<para>Der Ausgabe-Quelltext wird bei einer zweistufigen Navigation
+ 			beispielhaft in der Ausgabe später wie folgt aussehen:</para>
 
 		<programlisting language="smarty"><![CDATA[
 <ul class="nav_1">
@@ -130,7 +130,7 @@
 
 			<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>,
 			die den inhaltlichen Seiten zugeordnet sind, in denen die Navigation
-			später angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
+			angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
 
 			<para>Nun sind wir fast fertig. Was fehlt ist die Einbindung der Navigation
 			 in die Seitenvorlagen, in denen wir die Navigation einbinden wollen.</para>
@@ -144,7 +144,7 @@
 {include file="wcom:custom_navigation_embed.`$page.id`"}
 ]]></programlisting>
 
-			<para>Speichern Sie die Seitenvorlage.</para>
+			<para>Speichern Sie die Seitenvorlage. Damit ist die Integration abgeschlossen.</para>
 			
 			<note>
 				<para>Um die Navigation zu stylen, können die in dem Beispiel deklarierten
@@ -154,143 +154,7 @@
 			</note>
 		</sect2>
 	</sect1>
-	
-	<sect1 id="usage.google_sitemaps">
-		<title>Google Sitemaps</title>
 		
-		<sect2 id="usage.google_sitemaps.introduction">
-			<title>Einführung</title>
-		
-			<para>
-				Google Sitemaps sind XML Dateien, in denen die Seitenpfade und die 
-				dazugehörigen Metadaten ihrer Webseite  statisch hinterlegt werden. 
-				Diese Datei(en) (<filename>sitemap.xml</filename>, 
-				<filename>sitemap.xml.gz</filename>(gunzip komprimiert)), deren Schema dem
-				Standardprotokoll entspricht (<ulink type="external" url="http://sitemaps.org/protocol.php"/>),
-				erleichtern den Webcrawlern von Google den Informationszugang zu ihren Seiten und sind
-				 ein wertvolles Werkzeug um die 
-				<ulink type="external" url="http://de.wikipedia.org/wiki/Suchmaschinenoptimierung">SEO</ulink>
-				auszubauen. Die Datei(en) müssen sie manuell ihrem Google-Konto hinzugefügen.
-			</para>
-
-			<note>
-				<para>Die Nutzung dieses Features setzt das Vorhanden sein eines
-					<ulink type="external" url="http://www.google.com/support/accounts/">Google-Konto</ulink>
-					voraus.
-				</para>
-			</note>
-		</sect2>
-			
-		<sect2 id="usage.google_sitemaps.setup">
-			<title>Einrichtung</title>
-						
-			<figure id="usage.google_sitemaps.edit_sitemaps">
-				<title>Seiten editieren: Sitemap Metadaten</title>
-				<graphic fileref="images/usage/sitemaps/edit_sitemaps.png"/>
-			</figure>
-			
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Sitemap Änderungshäufigkeit</guilabel></term>
-					<listitem>
-						<para>
-							Wählen sie ein Zeitinterval aus, der Google sagt, wie
-							häufig aktualisierte Inhalte erwartet werden können.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Sitemap Priorität</guilabel></term>
-					<listitem>
-						<para>
-							Wert, der Google die interne Gewichtung mitteilt. 0.5
-							ist hier der Mittelwert.
-							<note>
-								<para>
-									Bitte beachten sie, das dieser Wert keinen Einfluß auf das Ranking
-									der betreffenden Seite hat, sondern Google nur mitteilt, welche
-									Seiten der Crawler vorrangig berücksichtigen soll.
-								</para>
-							</note>
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			
-		</sect2>
-		
-		<sect2 id="usage.google_sitemaps.generate">
-			<title>Sitemaps erstellen</title>
-		
-			<para>
-				Sitemaps werden im Menüpunkt <guimenu>Einstellungen</guimenu> unter
-				<guisubmenu>Sitemaps</guisubmenu> angelegt.
-			</para>
-			
-			<figure id="usage.google_sitemaps.generate_sitemaps">
-				<title>Sitemaps erstellen</title>
-				<graphic fileref="images/usage/sitemaps/generate_sitemaps.png"/>
-			</figure>
-			
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Komprimieren</guilabel></term>
-					<listitem>
-						<para>
-							Ist diese Checkbox angeklickt, wird zusätzlich zur XML Sitemap
-							(<filename>sitemap.xml</filename>) eine gunzip komprimierte XML Sitemap-Datei
-							erstellt (<filename>sitemap.xml.gz</filename>).
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			
-			<para>
-				Klicken auf <guibutton>Speichern</guibutton>, wird die Sitemap-Datei
-				automatisch aus der Pfadstruktur Ihrer Installation erstellt.
-				Diese beinhaltet alle Seiten, die ihrer Domain zugeordnet und nicht
-				im <emphasis>Entwurf-Modus</emphasis> gespeichert oder
-				als <emphasis>Geschützt</emphasis> ausgezeichnet sind 
-				(s. <xref linkend="contents.pages.manage.add_page"/>).
-			</para>
-			
-			<para>
-				Ablageort der generierten Sitemap(s) ist der Ordner <filename>/tmp/sitemaps</filename>. 
-			</para>
-			
-			<para>
-				Da die Google-Richtlinien dies dringend empfehlen, verschieben sie die Datei(en)
-				anschließend bitte auf ihrem Server auf die <emphasis role="strong">oberste Ebene</emphasis>
-				ihrer Installation (Webroot).
-			</para>
-			
-			<example id="usage.google_sitemaps.example.path">
-				<title>Pfad(e) Sitemap Datei(en)</title>
-<programlisting><![CDATA[
-http://ihre-domain.tld/sitemap.xml
-http://ihre-domain.tld/sitemap.xml.gz
-]]></programlisting>			
-			</example>
-			
-			<para>
-				Anschließend melden sie sich (ggf. in einem neuen Browserfenster)
-				an ihren Google-Konto an und fügen die Datei(en) ihrem Konto hinzu.
-			</para>
-			
-			<tip>
-				<para>
-					Wenn sie seit der Erstellung einer Sitemap Ihrer Installation neue Seiten
-					hinzugefügt haben, sollten sie jeweils daran denken eine neue Sitemap zu generieren,
-					damit die neuen URLs berücksichtigt werden. Ersetzten sie die veraltete Sitemap
-					im obersten Verzeichnis durch die neu generierte. Ein erneutes Anmeldung der 
-					Sitemap in ihrem Google-Konto ist nicht ausdrücklich notwendig, schadet aber
-					auch nicht ;-) Weitere Information zu Sitemaps finden sie unter
-				</para>
-			</tip>
-			
-		</sect2>
-	</sect1>
-	
 	<!-- <sect1 id="usage.multi_language_websites">
 		<title>Mehrsprachige Websites</title>
 		

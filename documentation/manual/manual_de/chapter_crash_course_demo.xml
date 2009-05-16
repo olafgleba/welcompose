@@ -4,43 +4,43 @@
 <chapter id="crash_course_demo">
 	<title>Crash-Kurs: Demo-Webseite</title>
 	
-		<abstract>
-			<para>
-				In diesem Crash-Kurs geht es darum,
-				Sie ohne grosse Umschweife an die Erstellung einer einfachen 
-				Webseite heranzuführen, ohne sich zu intensiv mit dem Wieso und Warum
-				zu beschäftigen. Allerdings sind an vielen Stellen die ausführlichen
-				Beschreibungen, die an anderer Stelle in diesem Handbuch vorkommen,
-				referenziert.
-			</para>
-		</abstract>	
-				
+	<abstract>
 		<para>
-			Zur Umsetzung haben wir eine Test-Webseite erstellt, die weder besonders
-			gehaltvoll noch besonders aussergewöhnlich ist, dafür aber einfach genug, um
-			nicht den Blick auf das Wesentliche zu trüben &ndash; die Bedienung
-			von Welcompose.
+			In diesem Crash-Kurs geht es darum,
+			Sie ohne grosse Umschweife an die Erstellung einer einfachen 
+			Webseite heranzuführen, ohne sich zu intensiv mit dem Wieso und Warum
+			zu beschäftigen. Allerdings sind an vielen Stellen die ausführlichen
+			Beschreibungen, die an anderer Stelle in diesem Handbuch vorkommen,
+			referenziert.
 		</para>
+	</abstract>	
 			
-		<figure id="crash_course_demo.demo_website">
-			<title>Screenshot der Demo-Webseite</title>
-			<graphic fileref="images/crash_course_demo/frontend/view_demo_website.png"/>
-		</figure>
-	
-		<note>
-			<para>
-				Um das nachfolgendene Beispiel nachvollziehen zu können, benötigen Sie
-				die <ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Materialien
-				zum Crash-Kurs</ulink> von der Welcompose Webseite. Diese können Sie aus dem 
-				<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
-				der Welcompose Webseite herunterladen.
-			</para>
-			<para>
-				Sollten Sie Probleme beim Verständnis der Beispiele haben, 
-				können Sie sich gerne auch an die User-Community in unseren Foren
-				wenden.
-			</para>
-		</note>
+	<para>
+		Zur Umsetzung haben wir eine Test-Webseite erstellt, die weder besonders
+		gehaltvoll noch besonders aussergewöhnlich ist, dafür aber einfach genug, um
+		nicht den Blick auf das Wesentliche zu trüben &ndash; die Bedienung
+		von Welcompose.
+	</para>
+		
+	<figure id="crash_course_demo.demo_website">
+		<title>Screenshot der Demo-Webseite</title>
+		<graphic fileref="images/crash_course_demo/frontend/view_demo_website.png"/>
+	</figure>
+
+	<note>
+		<para>
+			Um das nachfolgendene Beispiel nachvollziehen zu können, benötigen Sie
+			die <ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Materialien
+			zum Crash-Kurs</ulink>. Diese können Sie aus dem 
+			<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
+			der Welcompose Webseite herunterladen.
+		</para>
+		<para>
+			Sollten Sie Probleme beim Verständnis der Beispiele haben, lesen Sie bitte die 
+			inhaltlichen Kapitel des Handbuchs durch. Sollten dennoch Fragen offen bleiben,  
+			können Sie sich gerne auch an die User-Community in unseren <ulink type="external" url="http://forum.welcompose.de">Foren</ulink> wenden. Hier werden Sie zeitnah unterstützt.
+		</para>
+	</note>
 	
 	<sect1 id="crash_course_demo.preparation">
 		<title>Vorbereitungen</title>
@@ -365,11 +365,8 @@
 				<term><guilabel>Inhalt</guilabel></term>
 				<listitem>
 					<para>
-						Hier kommt der Fliesstext für die Seite hinein. Fügen
-						Sie ein paar Zeilen Beispieltext wie 
-						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein. In unseren
-						Beispiel nehmen wir an, das zwei Absätze mit Lorem Ipsum generierten
-						Inhalt eingefügt werden.
+						Hier kommt der Fliesstext für die Seite hinein.  
+						Kopieren Sie den nachfolgenden Text und setzen ihn ein.
 					</para>
 		<programlisting language="smarty"><![CDATA[
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -549,10 +546,8 @@ aliquip ex ea commodo consequat.</p>
 		</para>
 		
 		<programlisting language="smarty"><![CDATA[
-<div id="content">
 <h1>{$simple_page.title}</h1>
 {$simple_page.content}
-</div>
 ]]></programlisting>
 
 		<para>
@@ -731,7 +726,7 @@ aliquip ex ea commodo consequat.</p>
 		
 		<para>
 			Wechseln Sie dazu im Menu <guimenu>Vorlagen</guimenu> zum
-			Untermenu <guisubmenu>Globale Vorlagen</guisubmenu> und klicken
+			Untermenu <guisubmenu>Globale Dateien</guisubmenu> und klicken
 			Sie dort auf <guibutton>Neu anlegen</guibutton>, um zur Eingabemaske
 			zu gelangen.
 		</para>
@@ -847,8 +842,8 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 			
 			<para>
 				Ersetzen Sie nun die vorhandenen Referenzierungen der einzelnen
-			Grafiken anhand der gleiche Vorgehensweise. Aktivieren Sie 
-			die Checkbox <guimenuitem>Delimiter ändern</guimenuitem>, in dem Sie einen
+			Grafiken anhand der gleichen Vorgehensweise. Vergessen Sie bitte nicht 
+			die Checkbox <guimenuitem>Delimiter ändern</guimenuitem> zu aktivieren, in dem Sie einen
 			Haken setzen. Eine detailiertere Beschreibung
 			zur Anwendung finden Sie im Kapitel der Globale
 			 Vorlagen (<xref linkend="templating.global_templates.usage.manage_css_files"/>) und speichern
@@ -939,7 +934,7 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 				<para>
 					Nähere Informationen zur Anwendung von Globalen Boxen erhalten
 					erhalten Sie in entsprechenden Kapitel (siehe (siehe <xref
-							linkend="contents.global_boxes.manage"/>).
+							linkend="contents.global_boxes"/>).
 				</para>
 			</note>
 			
@@ -1085,7 +1080,7 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 		</para>
 		
 		<figure id="crash_course_demo.frontend.view_with_image">
-			<title>Startseite mit Logo, Style Sheet und Headerbild</title>
+			<title>Crash-Kurs Demo-Webseite: Startseite mit Logo, Style Sheet und Headerbild</title>
 			<graphic fileref="images/crash_course_demo/frontend/view_with_image.png"/>
 		</figure>
 		

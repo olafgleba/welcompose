@@ -5,21 +5,33 @@
 	<title>Crash-Kurs: Weblog</title>
 	
 	<para>
-		Nachdem es im ersten Crash-Kurs nur um eine Demo-Webseite ging, ist es
+		Nachdem es im ersten Crash-Kurs um eine einfache Demo-Webseite ging, ist es
 		nun Zeit, ein weiteres, praxisbezogenes Beispiel umzusetzen: Ein Weblog.
 	</para>
 	
 	<para>
 		Auch in diesem Crash-Kurs gehen wir von einer jungfräulichen
-		Welcompose-Installation aus. Wenn Sie bereits Seiten angelegt haben und
+		Welcompose-Installation aus. Wir nutzen zudem die gleichen Layout-Dateien,
+		die zuvor im <xref linkend="crash_course_demo"/> verwandt wurden.
+		Wenn Sie bereits Seiten angelegt haben und
 		Welcompose nicht neu installieren wollen, können Sie einfach die alten
 		Inhalte löschen, bevor Sie mit dem Crash-Kurs beginnen.
 	</para>
 	
-		<figure id="crash_course_blog.view_demo_blog">
-			<title>Ausgabe: Screenshot des Demo-Blogs</title>
-			<graphic fileref="images/crash_course_blog/frontend/view_demo_blog.png"/>
-		</figure>
+	<figure id="crash_course_blog.blogindex_view_demo">
+		<title>Ausgabe: Screenshot des Demo-Blogs</title>
+		<graphic fileref="images/crash_course_blog/frontend/blogindex_view_demo.png"/>
+	</figure>
+	
+	<note>
+		<para>
+			Um das nachfolgendene Beispiel nachvollziehen zu können, benötigen Sie
+			die <ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Materialien
+			zum Crash-Kurs</ulink>. Diese können Sie aus dem 
+			<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
+			der Welcompose Webseite herunterladen.
+		</para>
+	</note>
 	
 	<sect1 id="crash_course_blog.preparation">
 		<title>Vorbereitungen</title>
@@ -41,30 +53,31 @@
 		<title>Seiten anlegen</title>
 		
 		<para>
-			Wie man auf dem Screenshot sieht, ist die gesamte Webseite
-			wieder recht einfach aufgebaut: Es ist nur eine Navigation 
-			vorhanden. Diese besteht aus drei Seiten: Der Startseite, die unser
-			eigentliches Blog repräsentiert, eine Formularseite und ein Link
-			zur Software, mit der das Weblog erstellt wurde.
+			Wie man auf dem Screenshot sieht, ist das Blog wieder auf das für den
+			Crash-Kurs Notwendige reduziert: Es ist nur eine Navigation 
+			vorhanden. Diese besteht lediglich aus zwei Seiten, bzw. Links: 
+			Der Startseite, die unser eigentliches Blog repräsentiert und ein externer
+			Verweis zur Softwareseite, mit dem das Blog erstellt wurde.
 		</para>
 		
 		<para>
 			Erstellen Sie zuerst eine Navigation. Gehen Sie dazu zum Bereich
-			<guimenu>Contents</guimenu> und dann zum Unterbereich
-			<guisubmenu>Navigations</guisubmenu>.
-			 Klicken Sie auf <guibutton>Add new</guibutton>, um zur Eingabemaske zu gelangen (s. auch <xref linkend="crash_course_demo.create_navigation"/>).
+			<guimenu>Inhalte</guimenu> und dann zum Unterbereich
+			<guisubmenu>Navigationen</guisubmenu>.
+			 Klicken Sie auf <guibutton>Neu anlegen</guibutton>, um zur Eingabemaske zu gelangen (s. auch <xref linkend="crash_course_demo.create_navigation"/>).
 			Nennen Sie die Navigation wie im vorherigen Crash-Kurs <userinput>Hauptnavigation</userinput>.
-			Kehren Sie dann zur Seitenübersicht (<guisubmenu>Pages</guisubmenu>) zurück.
+			Kehren Sie dann zur Seitenübersicht (<guisubmenu>Seiten</guisubmenu>) zurück.
 		</para>
 		
 		<para>
-			Nun müssen die Seiten angelegt werden. Beginnen Sie mit der
-			Startseite. Klicken Sie dazu auf das Symbol zum Hinzufügen
-			einer Seite (<guibutton>Add</guibutton>). Sie gelangen zur Eingabemaske.
+			Kümmern wir uns zuerst um die wichtigste Seite, die
+			Startseite. Sie repräsentiert zugleich die Blog-Übersichtsseite.
+			Klicken Sie dazu auf das Symbol zum Hinzufügen
+			einer Seite (<guibutton>Neu</guibutton>). Sie gelangen zur Eingabemaske.
 		</para>
 		
 		<figure id="crash_course_blog.create_pages.create_page_metadata">
-			<title>Neue Seite anlegen</title>
+			<title>Crash-Kurs Weblog: Neue Seite anlegen</title>
 			<graphic fileref="images/crash_course_blog/create_page_metadata.png"/>
 		</figure>
 		
@@ -82,7 +95,7 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Type</guilabel>
+					<guilabel>Typ</guilabel>
 				</term>
 				<listitem>
 					<para>
@@ -94,11 +107,11 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Template set</guilabel>
+					<guilabel>Vorlagengruppe</guilabel>
 				</term>
 				<listitem>
 					<para>
-						Wählen Sie das Vorlagen-Set aus, das Sie für das
+						Wählen Sie die Vorlagengruppe aus, die Sie für das
 						Weblog angelegt haben, also
 						<guimenuitem>Blog</guimenuitem>.
 					</para>
@@ -106,11 +119,12 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Index page</guilabel>
+					<guilabel>Index-Seite</guilabel>
 				</term>
 				<listitem>
 					<para>
-						Setzen Sie hier einen Haken, um die Startseite als
+						Setzen Sie hier einen Haken, um die die Seite 
+						<userinput>Startseite</userinput> als
 						diejenige Seite zu definieren, die als Startseite
 						verwendet werden soll.
 					</para>
@@ -119,48 +133,28 @@
 		</variablelist>
 		
 		<para>
-			Die anderen Felder können Sie in ihrem Originalzustand lassen.
-			Klicken Sie auf <guibutton>Add page</guibutton>, um die Seite
+			Die anderen Felder belassen Sie bitte in ihrem Originalzustand.
+			Klicken Sie auf <guibutton>Speichern</guibutton>, um die Seite
 			zu speichern.
 		</para>
 		
 		<para>
-			Klicken Sie nun neben der soeben angelegten Seite auf das Symbol
-			zum Hinzufügen einer neuen Seite (<guibutton>Add</guibutton>), um die beiden verbliebenen
-			Seiten (<emphasis>Kontakt</emphasis> und <emphasis>"Made with Welcompose"</emphasis>)
-			zu erstellen.
-		</para>
-		
-		<para>
-			Für das Kontaktformular geben Sie den Seitennamen
-			<userinput>Kontakt</userinput> an. Als Seiten-Typ müssen Sie
-			<guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> auswählen und
-			als Vorlagen-Set <guimenuitem>Blog</guimenuitem>. Die restlichen
-			Optionen können Sie auf den Standardeinstellungen belassen.
-		</para>
-		
-		<para>
-			Nachdem Sie die Seite gespeichert haben, kommen Sie wieder zurück
-			zur Seitenübersicht. Klicken Sie neben dem Eintrag der soeben
-			angelegten Seite bei <guilabel>Move</guilabel> auf das Symbol mit
-			dem Pfeil, der nach unten zeigt, um die Seite auf die gleiche
-			Ebene wie die Startseite zu bringen.
-		</para>
-		
-		<para>
 			Wiederholen Sie diesen Vorgang für den Link zur Webseite,
-			mit der die Software erstellt wurde. Geben Sie als Seitennamen
+			mit der die Software erstellt wurde. Klicken Sie neben der soeben
+			angelegten Seite auf das Symbol zum Hinzufügen einer neuen Seite
+			 (<guibutton>Neu</guibutton>). Geben Sie als Seitennamen
 			den Namen des Navigationspunkts ein, also <userinput>Made with
-			Welcompose</userinput>. Als Seiten-Typ müssen Sie 
-			<guimenuitem>WCOM_URL</guimenuitem> auswählen. Vergessen Sie nicht,
-			die Seite nach dem Speichern auszurücken! 
+			Welcompose</userinput>. Als <guilabel>Typ</guilabel> müssen Sie 
+			<guimenuitem>WCOM_URL</guimenuitem> auswählen. Die restlichen
+			Optionen können Sie auf den Standardeinstellungen belassen. Vergessen Sie
+			nicht, die Seite nach dem Speichern auszurücken! 
 		</para>
 		
 		<warning>
 			<para>
 				Setzen Sie keinen Haken mehr beim Feld
-				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
-				eine <emphasis>Index page</emphasis> geben und
+				<guilabel>Index-Seite</guilabel>. Pro Webseite kann es nur
+				eine <emphasis>Index-Seite</emphasis> geben und
 				dies ist schon die Seite <userinput>Startseite</userinput>.
 			</para>
 		</warning>
@@ -170,7 +164,7 @@
 		</para>
 		
 		<figure id="crash_course_blog.create_pages.created_pages_all">
-			<title>Angelegte Seiten</title>
+			<title>Crash-Kurs Weblog: Angelegte Seiten</title>
 			<graphic fileref="images/crash_course_blog/created_pages_all.png"/>
 		</figure>
 	</sect1>
@@ -179,23 +173,44 @@
 		<title>Weblog mit Inhalten füllen</title>
 		
 		<para>
-			Jetzt tragen wir in unser bisher noch leeres Blog das erste Posting ein. 
-			Klicken Sie hierzu in der Zeile unserer angelegten Blogseite (<emphasis>Startseite</emphasis>) auf das <guibutton>Edit</guibutton> Symbol. Sie
-			gelangen zur Übersichtsseite der Blog-Postings, die diesen Blog zugeordnet sind.  
+			Beginnen Sie mit dem externen Link, der
+			auf die Softwareseite verweist (<userinput>Made with Welcompose</userinput>).
+			Klicken Sie dazu auf das Symbol zum Bearbeiten einer Seite
+			(<guibutton>Bearbeiten</guibutton>). Sie gelangen zur Eingabemaske.
 		</para>
 		
-		<figure id="crash_course_blog.fill_blog.pages_blogs_postings_select">
-			<title>Übersicht Blog-Postings</title>
-			<graphic fileref="images/crash_course_blog/pages_blogs_postings_select.png"/>
-		</figure>
+		<variablelist>
+			<varlistentry>
+				<term>
+					<guilabel>Ziel-URL</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Als einzige Angabe geben Sie hier den vollständigen Link unter Angabe
+						des Protokolls zur Softwareseite ein. Im Beispiel wäre
+						das <userinput>http://welcompose.de</userinput>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
 		
 		<para>
-			Legen Sie nun ein neues, erstes Blog-Posting an. Über <guibutton>Add new</guibutton> 
-			gelangen Sie zur Eingabemaske.
-		</para>		
+			Klicken Sie auf den Button <guibutton>Speichern</guibutton>, um wieder
+			auf die Seitenübersicht zu gelangen.
+		</para>
+		
+		<para>
+			Jetzt tragen wir in unser bisher noch leeres Blog das erste Posting ein. 
+			Klicken Sie hierzu in der Zeile unserer angelegten Blogseite 
+			(<emphasis>Startseite</emphasis>) auf das <guibutton>Edit</guibutton> Symbol. Sie
+			gelangen zur Übersichtsseite der Blog-Postings, die diesen Blog zugeordnet sind. 
+			Diese ist zum Zeitpunkt noch leer, da wir noch kein Posting angelegt haben. Dies
+			machen wir jetzt als Erstes. Klicken Sie auf <guilabel>Neu anlegen</guilabel>
+			und sie kommen zur Eingabeseite eines Blog-Postings.  
+		</para>	
 		
 		<figure id="crash_course_blog.fill_blog.pages_blogs_postings_add">
-			<title>Neues Blog-Posting anlegen</title>
+			<title>Crash-Kurs Weblog: Neues Blog-Posting anlegen</title>
 			<graphic fileref="images/crash_course_blog/pages_blogs_postings_add.png"/>
 		</figure>		
 		
@@ -212,65 +227,90 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>
-					<guilabel>Summary</guilabel>
-				</term>
+				<term><guilabel>URL-Titel</guilabel></term>
 				<listitem>
 					<para>
-						Hier tragen Sie bei Bedarf eine Zusammenfassung Ihres Postings ein.
-						Bitte lassen Sie dieses Feld für unseren Crash-Kurs leer.
+						Aus dem <guilabel>Titel</guilabel> wird automatisch
+						ein URL-konformer Seitentitel gebildet. Der vorgeschlagene Titel
+						ist editierbar und ermöglicht somit unterschiedliche Handhabung
+						im Einsatz von Seitentitel und tatsächlicher URL. Für den
+						Crash-Kurs ist dieser nicht von Belang.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Content</guilabel>
+					<guilabel>Kurzfassung</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Hier tragen Sie bei eine Zusammenfassung Ihres Postings ein.
+						Kopieren Sie den nachfolgenden Text und setzen ihn ein.
+					</para>
+					<programlisting language="smarty"><![CDATA[
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+]]></programlisting>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Inhalt</guilabel>
 				</term>
 				<listitem>
 					<para>
 						Hier fügen wir die Inhalte für unser Posting ein. 
-						In diesen Fall etwas Fliesstext. Fügen
-						Sie hierzu ein paar Zeilen Beispieltext wie 
-						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
-						&ndash; ein Abschnitt ist ausreichend für diesen Crash-Kurs.
+						In diesen Fall etwas Fliesstext. Kopieren Sie die 
+						nachfolgenden zwei Absätze und setzen sie ein.
 					</para>
+					<programlisting language="smarty"><![CDATA[
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat.</p>
+]]></programlisting>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Text converter</guilabel>
+					<guilabel>Textkonverter</guilabel>
 				</term>
 				<listitem>
 					<para>
-						Wählen Sie aus der Liste den Eintrag
-						<guimenuitem>Markdown</guimenuitem> aus.
+						Belassen Sie die Standardeinstellung (<filename>XHTML</filename>).
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Apply text macros</guilabel>
+					<guilabel>Makros anwenden</guilabel>
 				</term>
 				<listitem>
 					<para>
-						Setzen Sie hier einen Haken in die Checkbox.
+						Setzen Sie hier einen Haken in die Checkbox (Standard).
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Tags</guilabel>
+					<guilabel>Schlagworte/Tags</guilabel>
 				</term>
 				<listitem>
 					<para>
 						Verschlagworten Sie Ihr Posting. Einträge werden durch ein Kommata getrennt.
-						Bitte lassen Sie dieses Feld für unseren Crash-Kurs leer.
+						Bitte geben Sie hier folgende, kommaseparierte Wörter ein:
+						<userinput>Software</userinput>, <userinput>Demo</userinput>.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Feed summary</guilabel>
+					<guilabel>Feed Kurzfassung</guilabel>
 				</term>
 				<listitem>
 					<para>
@@ -281,7 +321,7 @@
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Draft</guilabel>
+					<guilabel>Entwurf</guilabel>
 				</term>
 				<listitem>
 					<para>
@@ -299,278 +339,94 @@
 					<para>
 						Ist die Checkbox mit einem Haken versehen, werden die angelegten Ping Services
 						über die Aktualisierung Ihres Postings informiert.
-						Bitte entfernen Sie für unseren Crash-Kurs den Haken. 
+						Bitte <emphasis role="strong">entfernen</emphasis> Sie für unseren Crash-Kurs den Haken. 
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Enable comments</guilabel>
+					<guilabel>Kommentare?</guilabel>
 				</term>
 				<listitem>
 					<para>
 						Entscheiden Sie, ob Kommentare zum Posting erlaubt sind.
-						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
+						Lassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>
-					<guilabel>Enable trackbacks</guilabel>
+					<guilabel>Trackbacks?</guilabel>
 				</term>
 				<listitem>
 					<para>
 						Entscheiden Sie, ob Trackbacks zum Posting erlaubt sind.
-						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.						
+						Lassen Sie für unseren Crash-Kurs die Checkbox angeklickt.						
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<guilabel>Erstellungsdatum</guilabel>
+				</term>
+				<listitem>
+					<para>
+						Wird automatisch gesetzt beim Speichern.						
 					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>		
 		
 		<para>
-			Sichern Sie nun Ihren Eintrag mit Klick auf <guibutton>Add Blog Posting</guibutton>.
-			Ein Hinweis informiert Sie über die erfolgreiche Speicherung ihres neuen Postings.
-			Gehen Sie wieder zur Übersichtsseite der Blog-Postings, in dem Sie auf den Seitenlink
-			<guibutton>Blog Postings</guibutton> oder die Standortlink <emphasis>Blog Postings</emphasis> klicken. 
-		</para>		
-	</sect1>
-	
-	<sect1 id="crash_course_blog.fill_blog.box">
-		<title>Seitenbezogene Box anlegen</title>
-
-		<para>
-			Wie auf dem <xref linkend="crash_course_blog.view_demo_blog"/> zu sehen ist, gibt es,
-			rechts neben den Blog-Einträgen, eine Seitenspalte, die, neben der Verlinkung des Archivs
-			und den Syndication-Links einen kurzen Fliesstext beinhaltet, der in unseren Beispiel zur kurzen
-			Vorstellung des Blogbetreibers dienen würde (<emphasis>Über mich</emphasis>). Dieser inhaltliche Bereich
-			wurde mit einer sogenannten <emphasis>Box</emphasis> realisiert. Eine <emphasis>Box</emphasis> repräsentiert
-			einen HTML-Code Schnipsel, der frei auf der Seite positioniert werden kann. Jeder Seite, also auch unserer Blog-Seite
-			<emphasis>Startseite</emphasis>, können beliebig viele seitenbezogene <emphasis>Boxen</emphasis> hinzugefügt 
-			werden. In unseren Crash-Kurs beschränken wir uns auf eine Box. Diese wollen wir nun anlegen.
-		</para>
+			Sichern Sie nun Ihren Eintrag mit Klick auf <guibutton>Speichern</guibutton>.
+			Ein Hinweis informiert Sie über die erfolgreiche Speicherung ihres neuen Postings. 
+		</para>	
 		
-		<note>
+		<tip>
 			<para>
-				Ausführliche Informationen zum Konzept der <emphasis>Boxen</emphasis> finden Sie im Kapitel 
-				<xref linkend="contents"/>
+				Damit man ein wirkliches Gefühl für die spätere Ausgabe bekommt, legen Sie
+				bitte zwei weitere Blog-Eintrag an, so dass mehrere
+				Blog-Beiträge vorhanden sind. Passen Sie jeweils
+				den <guilabel>Titel</guilabel> an. Die sonstigen Einstellungen übernehmen Sie
+				bitte aus den oben genannten Angaben. 
 			</para>
-		</note>
-
+		</tip>
+		
 		<para>
-			Gehen Sie nun im Seitenmenu zum Navigationspunkt <guisubmenu>Boxes</guisubmenu> und klicken dann auf 
-			<guibutton>Add new</guibutton> um eine neue Box anzulegen.
+			Die Übersichtsseite der Blog Einträge sieht jetzt wie folgt aus: 
 		</para>
 		
-		<figure id="crash_course_blog.fill_blog.box.pages_boxes_add">
-			<title>Seitenbezogene Box anlegen</title>
-			<graphic fileref="images/crash_course_blog/pages_boxes_add.png"/>
+		<figure id="crash_course_blog.pages_blogs_postings.list">
+			<title>Crash-Kurs Weblog: Übersicht der angelegten Blog Beiträge</title>
+			<graphic fileref="images/crash_course_blog/pages_blogs_postings_list.png"/>
 		</figure>
-		
-		<variablelist>
-			<varlistentry>
-				<term>
-					<guilabel>Titel</guilabel>
-				</term>
-				<listitem>
-					<para>
-						Tragen Sie hier <userinput>Über mich</userinput> ein.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>
-					<guilabel>Content</guilabel>
-				</term>
-				<listitem>
-					<para>
-						Hier fügen wir die Inhalte der Box ein. Fügen
-						Sie hierzu ein paar Zeilen Beispieltext wie 
-						<ulink url="http://lipsum.com/">Lorem Ipsum</ulink> ein
-						&ndash; ein Absatz ist ausreichend für diesen Crash-Kurs.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>
-					<guilabel>Text converter</guilabel>
-				</term>
-				<listitem>
-					<para>
-						Wählen Sie aus der Liste den Eintrag
-						<guimenuitem>Markdown</guimenuitem> aus.
-					</para>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>
-					<guilabel>Apply text macros</guilabel>
-				</term>
-				<listitem>
-					<para>
-						Belassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
-					</para>
-				</listitem>
-			</varlistentry>
-		</variablelist>	
-		
-		<para>
-			Damit ist die Erstellung der Inhalte abgeschlossen.
-		</para>		
-		
 	</sect1>
-	
+		
 	<sect1 id="crash_course_blog.connect_blog_with_templates">
 		<title>Weblog mit Vorlagen verbinden</title>
 		
 		<para>
 			Nachdem wir nun die für den Crash-Kurs benötigten Inhalte angelegt haben, kommen wir
-			zur Erstellung der <xref linkend="templating"/> für unser Blog.
-		</para>	
-		
-		<para>
-			Schauen wir uns nochmals den <xref linkend="crash_course_blog.view_demo_blog"/> an. Wir 
-			sehen unsere Navigation, die auf allen Seiten am oberen Seitenrand angezeigt wird, die 
-			Übersichtsliste der vorhandenen Blog-Postings und zu guter Letzt rechts die Seitenspalte, die
-			ebenfalls auf allen (Ausnahme: <emphasis>Kontakt</emphasis>) Seiten angezeigt wird.
-		</para>	
-		
-		<para>
-			Da einzelne Seitenteile unseres Demo-Blogs (<emphasis>Navigation</emphasis>, <emphasis>Seitenspalte</emphasis>)
-			auf allen inhaltlichen Seiten angezeigt werden, liegt die Idee nahe, diese Bereiche in
-			jeweils einer eigenen Vorlage abzubilden und sie dann in wenige Hauptvorlagen zu inkludieren.
-			Gleiches gilt in diesen Beispiel auch für den Quelltext-Kopfbereich unseres Blogs,
-			der auf jeder Seite unverändert ist. 
-			
-			Um diese Vorlagen später eindeutig ansprechen zu können, müssen wir als ersten Schritt hierzu
-			korrespondierende Vorlagen-Typen anlegen.
-		</para>	
+			zur Erstellung der Seitenvorlagen für unser Blog.
+		</para>
 
-		<sect2 id="crash_course_blog.connect_blog_with_templates.templatetypes">
-			<title>Vorlagen-Typen erstellen</title>
-		
+		<sect2 id="crash_course_blog.connect_blog_with_templates.replace_content">
+			<title>Seitenvorlage für die Blog-Übersichtsseite erstellen</title>
+					
 			<para>
-				Gehen Sie bitte im Hauptmenu <guimenu>Templating</guimenu> zum Untermenu <guisubmenu>Template Types</guisubmenu>.
+				Beginnen wir mit der Vorlage der Startseite, die die Übersichtsseite des Blog repräsentiert.
+				Unter <xref linkend="crash_course_demo.connect_homepage_with_template"/> werden die
+				Schritte zum generellen Anlegen einer neuen Seitenvorlage erläutert. Bitte achten Sie
+				auf folgende Unterschiede zum oben referenzierten Link:
 			</para>
 		
-			<para>
-				Neben den <link linkend="reference.list_of_template_types">vordefinierten Vorlagen-Typen</link> legen
-				wir nun drei neue Vorlagen-Typen an, die wir später den entsprechenden Vorlagen zuordnen werden.
-				Für unser Demo-Blog brauchen wir drei neue Vorlagen-Typen:
-			</para>	
-		
 			<variablelist>
 				<varlistentry>
-					<term>
-						<guilabel>custom_blog_head</guilabel>
-					</term>
-					<listitem>
-						<para>
-							Wird für die Vorlage verwandt, die den Kopfbereich unseres Blogs repräsentiert. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>
-						<guilabel>custom_blog_navigation</guilabel>
-					</term>
-					<listitem>
-						<para>
-							Wird für die Vorlage verwandt, die die Navigation unseres Blogs abbildet. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>
-						<guilabel>custom_blog_sidebar</guilabel>
-					</term>
-					<listitem>
-						<para>
-							Wird für die Vorlage verwandt, die die Seitenspalte unseres Blogs beinhaltet.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			
-			<para>
-				Klicken Sie bitte auf <guibutton>Add new</guibutton> um zur Eingabemaske zu gelangen.		
-			</para>
-			
-			<figure id="crash_course_blog.connect_blog_with_templates.templatetypes_add">
-				<title>Neuen Vorlagen-Typ anlegen</title>
-				<graphic fileref="images/crash_course_blog/templatetypes_add.png"/>
-			</figure>
-		
-			<variablelist>
-				<varlistentry>
-					<term>
-						<guilabel>Name</guilabel>
-					</term>
-					<listitem>
-						<para>
-							Benennen Sie die jeweiligen Vorlagen-Typen wie oben aufgeführt. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>
-						<guilabel>Description</guilabel>
-					</term>
-					<listitem>
-						<para>
-							Beschreiben Sie bei Bedarf den Einsatzzweck des Vorlagen-Typs stichwortartig.
-							Ohne Relevanz für unseren Crash-Kurs. 
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-		
-			<para>
-				Speichern Sie die Vorlagen-Typen jeweils mit einem Klick auf die <guibutton>Add template type</guibutton>
-				Schaltfläche. Haben Sie alle drei Vorlagen-Typen angelegt, wechseln Sie über den
-				<guibutton>Template Types</guibutton> Seitenlink oder den Standortlink <emphasis>Template Types</emphasis>
-				zurück auf die Übersichtsseite der Vorlagen-Typen. Die Übersichtsseite sollte nun wie folgt aussehen:	
-			</para>	
-				
-			<figure id="crash_course_blog.connect_blog_with_templates.templatetypes_select">
-				<title>Angelegte Vorlagen-Typen</title>
-				<graphic fileref="images/crash_course_blog/templatetypes_select.png"/>
-			</figure>
-		</sect2>
-		
-		<sect2 id="crash_course_blog.connect_blog_with_templates.templates">
-			<title>Vorlagen erstellen</title>
-
-			<para>
-				Jetzt werden die eigentlichen Vorlagen angelegt. Wechseln Sie zum Untermenu
-				<guisubmenu>Templates</guisubmenu>.
-			</para>	
-
-			<figure id="crash_course_blog.connect_blog_with_templates.templates_select">
-				<title>Übersichtsseite Vorlagen</title>
-				<graphic fileref="images/crash_course_blog/templates_select.png"/>
-			</figure>
-			
-			<para>
-				Legen wir zuerst die Vorlagen an, für die wir gerade eigene Vorlagen-Typen angelegt
-				haben und nachher in die Haupt-Vorlagen inkludieren wollen. Vorerst
-				befüllen wir die Vorlagen mit dem HTML des Demo-Blog-Paket, das Sie von unserem
-				Download-Server heruntergeladen haben. Beginnen
-				wir mit der Vorlage für den HTML-Kopfbereich (<emphasis>custom_blog_head</emphasis>).
-				Klicken Sie auf <guibutton>Add new</guibutton> um zur Eingabemaske zu gelangen.
-			</para>	
-			
-			<figure id="crash_course_blog.connect_blog_with_templates.templates_add">
-				<title>Vorlage anlegen</title>
-				<graphic fileref="images/crash_course_blog/templates_add.png"/>
-			</figure>
-		
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Type</guilabel></term>
+					<term><guilabel>Typ</guilabel></term>
 					<listitem>
 						<para>
 							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
-							den vorhin angelegten Eintrag <guimenuitem>custom_blog_head</guimenuitem>
+							den Eintrag <guimenuitem>blog_index</guimenuitem>
 							aus.
 						</para>
 					</listitem>
@@ -579,40 +435,653 @@
 					<term><guilabel>Name</guilabel></term>
 					<listitem>
 						<para>
-							Name der Vorlage. Dient zur späteren Identifizierung
-							derselben. Geben Sie einen beschreibenden Namen wie
-							<userinput>Blog Head</userinput> ein.
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Übersicht</userinput>
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Description</guilabel></term>
+					<term><guilabel>Inhalt</guilabel></term>
 					<listitem>
 						<para>
-							Hier können sie optional den Zweck der Vorlage
-							beschreiben.
+							In dieses Feld gehört der HTML-Code für die Vorlage.
+						</para>
+							<note>
+								<para>
+									Öffnen Sie die Datei <filename>blog-index.html</filename>
+									aus dem Materialien-Ordner, den Sie aus dem Welcompose 
+							<ulink url="http://www.welcompose.de/cms/downloads/#materialien-zum-handbuch">Downloadbereich</ulink>
+							 heruntergeladen haben, und kopieren
+							Sie den <emphasis role="strong">gesamten</emphasis> HTML-Code in das Textfeld.
+						 		</para>
+							</note>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		
+			<para>
+				Klicken Sie nun auf die Schaltfläche
+				<guibutton>Speichern</guibutton>,um die Vorlage zu speichern.
+				Wenn Sie jetzt den öffentlichen Bereich aufrufen, werden Sie jetzt
+				den gerenderten HTML-Code sehen, den Sie soeben in die Vorlage
+				eingefügt haben &ndash; allerdings ohne Bilder und Style
+				Sheets.
+			</para>
+
+			<figure id="crash_course_blog.frontend.view_raw_template">
+				<title>Ausgabe: Original Weblog Demo HTML</title>
+				<graphic fileref="images/crash_course_blog/frontend/view_raw_template.png"/>
+			</figure>
+			
+			<para>
+				Nun geht es darum, Stück für Stück die statischen Inhalte der HTML-Vorlage durch
+				die dynamischen Inhalte zu ersetzen. Gehen Sie dazu zur
+				Übersicht der Seitenvorlagen zurück und klicken Sie bei der soeben angelegten
+				Vorlage auf das Symbol unter der Überschrift 
+				<guibutton>Bearbeiten</guibutton>. Sie kommen dann wieder zur Eingabemaske.
+			</para>
+
+			<para>
+				Zuerst wollen wir den Title-Tag im Kopfbereich ändern. Der bisherige Inhalt
+				(<markup role="smarty"><![CDATA[<title>Welcompose Blog Demo</title>]]></markup>)
+				soll ergänzt werden durch den Namen des aktuellen Navigationspunktes.
+				Ersetzen Sie dazu den Title-Tag durch folgenden Code:
+			</para>
+
+			<programlisting language="smarty"><![CDATA[
+<title>{$page.name} &ndash; Welcompose Blog Demo</title>
+]]></programlisting>
+
+			<para>
+				Wenn Sie nun auf die Schaltfläche <guibutton>Speichern</guibutton> klicken, wird die
+				Vorlage gespeichert und Sie können die Ausgabeseite neu laden. Wenn Sie alles richtig gemacht
+				haben, wird als Seitentitel <emphasis>Startseite &ndash;
+				Welcompose Blog Demo</emphasis> angezeigt.
+			</para>
+
+			<para>
+				Ändern wir nun die Überschrift im Seiteninhalt. Ersetzen Sie den H1-Tag durch
+				den Seitennamen und den Fliesstext, indem Sie den kommentierten Bereich zwischen
+				<markup role="smarty"><![CDATA[<!-- Überschrift -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- EOF Überschrift -->]]></markup> durch folgenden Code
+				austauschen:
+			</para>
+
+			<programlisting language="smarty"><![CDATA[
+<h1>{$page.name}</h1>
+]]></programlisting>
+
+			<para>
+				Wenn Sie nun die Vorlage wieder speichern und die Ausgabe neu
+				laden, sollten Sie als Überschrift den Seitentitel angezeigt bekommen. 
+			</para>
+
+			<para>
+				Jetzt gilt es dafür zu sorgen, dass die Navigation von
+				Welcompose erzeugt wird. Ersetzen Sie die statische Navigation
+				indem Sie den kommentierten Bereich zwischen
+				<markup role="smarty"><![CDATA[<!-- Liste Navigation -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- EOF Liste Navigation -->]]></markup> durch folgenden Code
+				austauschen:
+			</para>
+
+			<programlisting language="smarty"><![CDATA[
+<ul>
+{select_named ns="Content" class="Page" method="selectPages" var="pages"}
+{foreach from=$pages item=_page}
+{if $_page.id == WCOM_CURRENT_PAGE}
+  <li><span class="on">{$_page.name}</span></li>
+{else}
+  <li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
+{/if}
+{/foreach}
+</ul>
+]]></programlisting>
+
+			<para>
+				Nachdem Sie die Vorlage wieder gespeichert haben, können Sie
+				die Ausgabeseite nochmals laden, worauf jetzt auch die Navigation
+				von Welcompose dynamisch erzeugt wird.
+			</para>
+		
+			<para>
+				Nun ersetzen wir nun die statische Listung der Blog-Beiträge mit den von uns bereits
+				angelegten Blog-Beiträgen. 
+			</para>
+		
+			<para>
+				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
+				<markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
+			</para>
+		
+			<programlisting language="smarty"><![CDATA[
+{assign var="LIMIT" value="2"}
+{select_named ns="Content" class="BlogPosting" method="selectBlogPostings"
+	var="blog_postings" order_macro="DATE_ADDED:DESC" page=$page.id
+	tag_word_url=$request.tag start=$request.start limit=$LIMIT draft=0}
+
+{foreach from=$blog_postings item="_blog_posting"}
+<div class="post">
+<h2><a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">{$_blog_posting.title}</a></h2>
+<p class="blogmeta"><img src="{global_file name="date-icon.gif"}" alt="" /> {$_blog_posting.date_added|date_format:"%d.%m.%Y"} | {$_blog_posting.user_name}</p>
+
+{$_blog_posting.summary}
+<p class="more"><a class="intern" href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">Gesamten Artikel lesen</a></p>
+
+{if $_blog_posting.tag_count > 0}
+  <p class="tagstopic">Abgelegt unter:</p>
+  <ul class="tags">
+  {foreach from=$_blog_posting.tag_array|unserialize item=_tag}
+    {if $_tag.word_url == $request.tag}
+	  <li>{$_tag.word}</li>
+    {else}
+	  <li><a href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+    {/if}
+  {/foreach}
+</ul>
+{/if}
+</div>
+{/foreach}
+]]></programlisting>
+
+			<para>
+				Nun ersetzen wir die bisher statische Blätter-Funktion, mit dem Sie die Übersichts-Anzeige
+				der Blog-Einträge auf mehrere Seiten verteilen können. 
+			</para>
+		
+			<para>
+				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
+				<markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup> durch folgenden Code:
+			</para>
+		
+			<programlisting language="smarty"><![CDATA[
+{select_named ns="Content" class="BlogPosting" method="countBlogPostings"
+	var="blog_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
+
+{page_index var="page_index" item_count=$blog_posting_count interval=$LIMIT}
+
+{if !empty($page_index) && $blog_posting_count > $LIMIT}
+  <ul id="pager">
+  {foreach from=$page_index item=_item}
+    {if $_item.self == $request.start}
+	  <li class="on">{$_item.page}</li>
+    {else}
+      <li><a href="{get_url page_id=$page.id action=Index tag_word=$request.tag start=$_item.self}">{$_item.page}</a></li>
+     {/if}
+  {/foreach}
+  </ul>
+{/if}
+]]></programlisting>
+
+			<para>
+				Wie im Screenshot (<xref linkend="crash_course_blog.blogindex_view_demo"/>)
+				 des Weblog Demo zu sehen, haben wir eine rechte Spalte (im
+				Quelltext kommentiert mit: 
+				<markup role="smarty"><![CDATA[<!-- Blog-Sidebar -->]]></markup>), die Meta-
+				Informationen zum Blog bereitstellt. Das sind zum einen Feed-Links, eine
+				Auswahl der Anzeige anhand der vergebenen Schlagworte und die Archiv Links
+				für unser Blog. 
+			</para>
+		
+			<para>
+				Sorgen wir also dafür, das der Reihe nach auch diese statischen durch die dynamischen Inhalten
+				ersetzt werden. Zuerst kümmern wir uns um die Syndications-Links, über die Besucher die Inhalte
+				als Feed abonnieren können.
+			</para>		
+		
+			<para>
+				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
+				<markup role="smarty"><![CDATA[<!-- Blog Feeds -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- EOF Blog Feeds -->]]></markup> durch folgenden Code:
+			</para>
+		
+			<programlisting language="smarty"><![CDATA[
+<h3>Rss 2.0</h3>
+<ul>
+<li><a href="{get_url page_id=$page.id action="Rss20"}">Artikel</a></li>
+<li><a href="{get_url page_id=$page.id action="CommentsRss20"}">Kommentare</a></li>
+</ul>
+
+<h3>Atom 1.0</h3>
+<ul>
+<li><a href="{get_url page_id=$page.id action="Atom10"}">Artikel</a></li>
+<li><a href="{get_url page_id=$page.id action="CommentsAtom10"}">Kommentare</a></li>
+</ul>
+]]></programlisting>
+
+			<para>
+				Weiter gehts mit den Tags/Schlagworten. Ersetzen Sie bitte sämtlichen HTML-Code
+				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Tags -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Tags -->]]></markup> durch folgenden Code:
+			</para>
+		
+			<programlisting language="smarty"><![CDATA[
+{tag_cloud var="tags" page=$page.id limit=20 range=6}
+<ul id="tagcloud">
+{foreach from=$tags item=_tag}
+  <li><a class="tag_{$_tag.relevance}" href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+{/foreach}
+</ul>
+]]></programlisting>
+
+			<note>
+				<para>
+					Die Gewichtung der Relevanz wird optisch durch unterschiedliche Deklarationen der
+					Link-Klassen erreicht. Die Klassen (bspw. <userinput>tag_0</userinput> etc.) sind nicht
+					in der Demo Stylesheet Datei <userinput>wcom_demo_basic.css</userinput> enthalten.
+				</para>
+			</note>
+		
+			<para>
+				Nun ersetzen wir noch die statischen Archiv-Links des Blogs. Ersetzen Sie bitte sämtlichen
+				HTML-Code zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Archiv -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Archiv -->]]></markup> durch folgenden Code:
+			</para>
+
+			<programlisting language="smarty"><![CDATA[
+{include file="wcom:blog_archive_year.`$page.id`"}
+]]></programlisting>
+
+			<para>
+				Speichern Sie die Seitenvorlage.
+			</para>
+
+			<para>
+				Wenn Sie nun die Ausgabeseite aufrufen, wird Ihnen ein Fehler angezeigt, das die Vorlage
+				<code>blog_archive_year</code> nicht gefunden wurde oder leer ist. Zu recht ;-) 
+				Wir werden diese Vorlage erst etwas später anlegen.
+			</para>
+			<tip>
+				<para>
+					Um die Zwischenschritte des Crash-Kurs immer
+					wieder in der Ausgabe überprüfen zu können, ist es sinnvoll, die Anweisung zur
+					Inkludierung des Archivs temporär auszukommentieren, so das die Ausgabe keine
+					Fehler triggert. Smarty Kommentare beginnen mit 
+					<code>{* </code> und werden mit <code> *}</code> geschlossen.
+				</para>
+				<programlisting language="smarty"><![CDATA[
+{* {include file="wcom:blog_archive_year.`$page.id`"} *}
+]]></programlisting>
+			</tip>
+		</sect2>
+
+
+		<sect2 id="crash_course_blog.connect_blog_with_templates.apply_global_data">
+			<title>Logo, Stylesheet und Grafiken einbinden</title>
+					
+			<para>
+				Fahren wir fort, die Vorlage für die Blog-Übersicht zu komplettieren. Die Code-
+				Abschnitte zur dynamischen Ausgabe der Seiteninhalte haben wir ersetzt &ndash; nun kümmern
+				wir uns um die Referenzierung des Stylesheets und verwandten Grafiken.
+			</para>
+		
+			<para>
+				Hierzu müssen wir das Stylesheet und die im Blog verwandten Grafiken als 
+				<guisubmenu>Globale Vorlagen</guisubmenu>, 
+				bzw. <guisubmenu>Globale Dateien</guisubmenu> einbinden, damit Welcompose
+				diese Referenzen korrekt erkennt und umsetzen kann.
+				Die detailierte Anleitung finden Sie im vorherigen Crash-Kurs unter
+				<xref linkend="crash_course_demo.style_homepage"/>.
+			</para>
+		
+			<para>
+				Haben Sie diese Anleitung umgesetzt, speichern Sie bitte die Vorlage und gehen zurück
+				zur Übersicht der Seitenvorlagen, in dem Sie auf die Schaltfläche <guibutton>Speichern und zur
+				Übersicht</guibutton> klicken. Rufen Sie die Ausgabeseite auf, sollte folgende Ansicht
+				zu sehen sein:
+			</para>
+		
+			<figure id="crash_course_blog.frontend.blogindex_created_view_demo">
+				<title>Ausgabe: Weblog Demo HTML - Blog Übersicht</title>
+				<graphic fileref="images/crash_course_blog/frontend/blogindex_created_view_demo.png"/>
+			</figure>
+			
+			<para>
+				Auf <xref linkend="crash_course_blog.blogindex_view_demo"/> sieht man, das noch die
+				Headergrafik fehlt. Bitte führen Sie die Anleitung in <xref linkend="crash_course_demo.style_homepage_content"/> aus. Wenn Sie alles umgesetzt haben, sieht die
+				Ausgabe jetzt wie folgt aus:
+			</para>
+			
+			<figure id="crash_course_blog.frontend.blogindex_created_with_head_view_demo">
+				<title>Ausgabe: Weblog Demo HTML - Blog Übersicht mit Headergrafik</title>
+				<graphic fileref="images/crash_course_blog/frontend/blogindex_created_with_head_view_demo.png"/>
+			</figure>
+			
+			<para>
+				Damit ist unsere Vorlage für die Blog-Übersicht fertig gestellt.
+			</para>	
+		</sect2>
+
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_blog_item">
+			<title>Seitenvorlage für eine Blog-Eintragsseite erstellen</title>
+			
+			<para>
+				Nachdem wir die Arbeiten an der Vorlage für die Blog-Übersicht
+				abgeschlossen, legen wir nun die Seitenvorlage für die Ansicht eines
+				einzelnen Blog-Eintrages an.
+			</para>
+		
+			<para>
+				Da sich die Rahmen-Ansicht nicht von der eben angelegten Seitenvorlage
+				unterscheidet, können wir es uns einfach machen und die bestehende Seitenvorlage
+				einfach duplizieren und im Anschluß daran die Inhalte anpassen.
+				Klicken Sie hierzu auf <guibutton>Duplizieren</guibutton> in der 
+				Zeile der bisher einzigen Seitenvorlage (<userinput>Blog Übersicht</userinput>).
+				Sie befinden sich anschließend im Bearbeiten-Modus
+				der duplizierten Seitenvorlage.
+			</para>
+		
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+		
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_item</guimenuitem>
+							aus.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Content</guilabel></term>
+					<term><guilabel>Name</guilabel></term>
 					<listitem>
 						<para>
-							In dieses Feld gehört der HTML-Quelltext für die Vorlage.
-							Öffnen Sie die Datei <filename>index.html</filename>
-							aus dem Demo-Blog-Paket, das Sie von unserem
-							Download-Server heruntergeladen haben, und kopieren
-							Sie den gesamten Kopfbereich (<markup role="smarty"><![CDATA[<head>...</head>]]></markup>)
-							incl. der DTD in das Textfeld.
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Eintrag</userinput>
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Sets</guilabel></term>
+					<term><guilabel>Inhalt</guilabel></term>
 					<listitem>
 						<para>
-							Mit diesem Feld wird die Vorlage einem Vorlagen-Set
-							zugeordnet. Klicken Sie auf die Option 
+							In dieses Feld gehört der HTML-Code für die Vorlage. Da wir die 
+							Vorlage durch den Button <guibutton>Duplizieren</guibutton> erstellen,
+							ist der Inhalt mit der Ursprungsvorlage identisch.
+							Ändern Sie hier zum jetzigen Zeitpunkt bitte nichts.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Speichern Sie die Vorlage, in dem Sie auf den Button <guibutton>Seitenvorlage
+				duplizieren</guibutton> klicken. Sie gelangen zurück zur Übersicht der Seitenvorlagen.
+			</para>
+		
+			<para>
+				Nun passen wir die Inhalte der Seitenvorlage an. Klicken Sie auf <guibutton>
+				Bearbeiten</guibutton> in der Zeile der eben neu angelegten Vorlage.
+			</para>	
+		
+			<para>
+				Wir fügen den Quelltext zum Auslesen eines Beitrages ein. Da wir auch Kommentare
+				erlauben wollen, beinhaltet der Quelltext auch die Vorlage für das Formular.
+				Ersetzen Sie bitte sämtlichen HTML-Code und Smarty-Code
+				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
+			</para>
+
+			<programlisting language="smarty"><![CDATA[
+<div class="post">
+<h2>{$blog_posting.title}</h2>
+<p class="who">{$blog_posting.user_name} am {$blog_posting.date_added|date_format:"%d.%m.%Y"} &ndash; {if $blog_posting.comment_count == 0}Keine
+	Kommentare{elseif $blog_posting.comment_count == 1}Ein Kommentar{else}{$blog_posting.comment_count} Kommentare{/if}</p>
+
+<div class="summary">
+{$blog_posting.summary}
+</div>
+{$blog_posting.content}
+</div>
+
+{select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" posting=$blog_posting.id order_macro="DATE_ADDED"}
+{if !empty($blog_comments)}
+<div id="comments">
+  {select_named ns="Community" class="BlogComment" method="countBlogComments" var="blog_comment_count" posting=$blog_posting.id}
+  <h3>{if $blog_comment_count == 1}{$blog_comment_count} Kommentar{else}{$blog_comment_count} Kommentare{/if}</h3>
+  <ol>
+  {foreach from=$blog_comments item=_comment}
+    <li><div class="comment">{$_comment.content}<p class="author">{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"htmlall"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p></div>
+    </li>
+  {/foreach}
+  </ol>
+</div>
+{/if}
+
+<div id="comment_form">
+  <h4>Kommentar hinzuf&uuml;gen</h4>
+
+  <p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+
+{if !empty($form.errors)}
+<div id="error">
+  <ul class="req">
+  {foreach from=$form.errors item="error"}
+    <li>{$error}</li>
+  {/foreach}
+  </ul>
+</div>
+{/if}
+
+{if $session.form_submitted == 1}
+<div id="rp">
+  <h1>Danke f&uuml;r Ihren Kommentar!</h1>
+  <p>Eventuell muss er noch vom Moderator freigegeben werden.</p>
+</div>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+  <fieldset id="formular">
+  {$form.hidden}
+
+    <label for="name">{$form.name.label}</label> {$form.name.html}<br />
+    <label for="email">{$form.email.label}</label> {$form.email.html}<br />
+    <label for="homepage">{$form.homepage.label}</label> {$form.homepage.html}<br />
+    <label for="comment">{$form.comment.label}</label> {$form.comment.html}<br />
+    {$form.submit.html}
+  </fieldset>
+</form>
+</div>
+]]></programlisting>
+
+			<para>
+				Da wir einen Link zurück auf die Übersichtsseite haben wollen, fügen Sie folgenden
+				Quelltext direkt nach dem eben eingesetzten Quelltext ein:
+			</para>
+			
+			<programlisting language="smarty"><![CDATA[
+<p><a href="/index.php">Zurück zur Übersicht</a></p>
+]]></programlisting>
+
+			<para>
+				Zu guter letzt löschen wir noch die Blätter-Funktion, da diese auf einer Einzelseite
+				eines Blog-Eintrages keinen Sinn macht. Löschen Sie bitte sämtlichen HTML-Code
+				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
+			</para>
+			
+			<para>
+				Speichern Sie die Vorlage mit dem <guibutton>Speichern und zur Übersicht</guibutton> Button.
+				Die Anpassung der Seitenvorlage für einen Blog-Eintrag ist nun abgeschlossen.
+			</para>
+			
+			<para>
+				Sie können in der Ausgabe zu diesem Zeitpunkt schon zwischen Blog Übersicht und den
+				Beiträge navigieren und Besucher Ihres Blogs könnten Kommentare zu den Beiträgen
+				einstellen.
+			</para>
+			
+			<figure id="crash_course_blog.frontend.blogitem_created_with_head_view_demo">
+				<title>Ausgabe: Weblog Demo HTML - Blog Beitrag mit Headergrafik</title>
+				<graphic fileref="images/crash_course_blog/frontend/blogitem_created_with_head_view_demo.png"/>
+			</figure>
+			
+			<para>
+				Was jetzt noch fehlt sind die Seitenvorlagen für das Archiv und die Syndikations-Links in der
+				rechten Spalte.
+			</para>
+		</sect2>
+
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_blog_archive_year">
+			<title>Seitenvorlage für das Blog-Jahresarchiv erstellen</title>
+
+			<para>
+				Legen wir die Vorlage für das Blog-Jahresarchiv an. Diese Seitenvorlage
+				kalkuliert automatisch die zur Verfügung stehenden Zeiträume anhand der
+				eingetragenen Blog-Einträge. Klicken Sie hierzu bitte in der
+				Vorlagen-Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
+				den Bearbeiten-Modus der Vorlage.
+			</para>
+			
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+		
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_archive_year</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Jahresarchiv</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Fügen Sie hier folgenden Quellcode ein:
+										<programlisting language="smarty"><![CDATA[
+<h2>Archiv {$request.posting_year_added}</h2>
+
+{select_named ns="Content" class="BlogPosting" method="selectDifferentMonths" var="months_this_year"
+	year=$request.posting_year_added order_macro="DATE_ADDED" limit=12}
+
+<ul>
+{foreach from=$months_this_year item=_month}
+  {if $_month.month == $request.posting_month_added}
+    <li>{$_month.timestamp|date_format:"%B %Y"}</li>
+  {else}
+    <li><a href="{get_url page_id=$page.id action="ArchiveMonth" posting_year_added=$_month.year posting_month_added=$_month.month}">{$_month.timestamp|date_format:"%B %Y"}</a></li>
+  {/if}
+{/foreach}
+</ul>]]></programlisting>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern</guibutton> klicken. Gehen Sie zurück zur Übersicht der Vorlagen.
+			</para>
+			
+			<para>
+				Zur Jahresübersicht des Archiv gehört die korrespondierende Monatsübersicht.
+				Die Vorlage für das Blog Monatsarchiv legen wir jetzt ebenfalls an.
+			</para>
+		</sect2>
+			
+			
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_blog_archive_month">
+			<title>Seitenvorlage für das Blog-Monatsarchiv erstellen</title>
+
+			<para>
+				Diese Seitenvorlage kalkuliert automatisch die zur Verfügung stehenden Zeiträume
+				anhand der eingetragenen Blog-Einträge und bietet die dazugehörige Ansicht.
+				Um es uns wieder so einfach wie möglich zu machen, duplizieren wir wie zuvor
+				an anderer Stelle die Seitenvorlage <userinput>Blog Eintrag</userinput>.
+				Klicken Sie hierzu bitte in der entsprechenden Zeile auf den Button
+				<guibutton>Duplizieren</guibutton>. Sie gelangen in den Bearbeiten-Modus der
+				neuen Vorlage.
+			</para>
+
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_archive_month</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Monatsarchiv</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							In dieses Feld gehört der HTML-Code für die Vorlage. Da wir die 
+							Vorlage durch den Button <guibutton>Duplizieren</guibutton> erstellen,
+							ist der Inhalt mit der Ursprungsvorlage identisch.
+							Ändern Sie hier zum jetzigen Zeitpunkt bitte nichts.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
 							<guimenuitem>Blog</guimenuitem>.
 						</para>
 					</listitem>
@@ -620,131 +1089,519 @@
 			</variablelist>
 			
 			<para>
-				Speichern sie die Vorlage mit Klick auf <guibutton>Add template</guibutton>. Die
-				erfolgreiche Speicherung wird Ihnen mit einem Hinweis bestätigt. Wiederholen Sie die
-				Eingabe für die zwei weiteren neu angelegten Vorlagen-Typen (<emphasis>custom_blog_navigation</emphasis>,
-				<emphasis>custom_blog_sidebar</emphasis>.
-			</para>	
-			
-			<para>
-				Vorlage: <emphasis role="strong">custom_blog_navigation</emphasis>
-			</para>	
-			
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Type</guilabel></term>
-					<listitem>
-						<para>
-							Wählen Sie den Vorlagen-Typ <guimenuitem>custom_blog_navigation</guimenuitem>.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Name</guilabel></term>
-					<listitem>
-						<para>
-							Tragen Sie <userinput>Blog Navigation</userinput> ein.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Description</guilabel></term>
-					<listitem>
-						<para>
-							Nicht relevant für den Crash-Kurs.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Content</guilabel></term>
-					<listitem>
-						<para>
-							Kopieren Sie den Bereich
-							<markup role="smarty"><![CDATA[<div id="menu">]]></markup> bis zum Kommentar <markup role="smarty"><![CDATA[<!-- menu -->]]></markup> 
-							in das Textfeld.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Sets</guilabel></term>
-					<listitem>
-						<para>
-							Selektieren Sie <guimenuitem>Blog</guimenuitem>.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>	
-			
-			<para>
-				Vorlagen: <emphasis role="strong">custom_blog_sidebar</emphasis>
-			</para>	
-			
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Type</guilabel></term>
-					<listitem>
-						<para>
-							Wählen Sie den Vorlagen-Typ <guimenuitem>custom_blog_sidebar</guimenuitem>.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Name</guilabel></term>
-					<listitem>
-						<para>
-							Tragen Sie <userinput>Blog Sidebar</userinput> ein.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Description</guilabel></term>
-					<listitem>
-						<para>
-							Nicht relevant für den Crash-Kurs.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Content</guilabel></term>
-					<listitem>
-						<para>
-							Kopieren Sie den Bereich
-							<markup role="smarty"><![CDATA[<div id="sidebar">]]></markup> bis zum Kommentar <markup role="smarty"><![CDATA[<!-- sidebar -->]]></markup>
-							in das Textfeld.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Sets</guilabel></term>
-					<listitem>
-						<para>
-							Selektieren Sie <guimenuitem>Blog</guimenuitem>.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>			
-			
-			<para>
-				Sind alle diese Vorlagen angelegt, kehren Sie auf die Übersichtsseite der Templates zurück, in dem Sie
-				auf den Seitenlink <guibutton>Templates</guibutton> oder den Standortlink <emphasis>Templates</emphasis> klicken.
-				Nun sieht unsere Übersichtsseite so aus:
+				Speichern Sie die Vorlage, in dem Sie auf den Button <guibutton>Seitenvorlage
+				duplizieren</guibutton> klicken. Sie gelangen zurück zur Übersicht der Seitenvorlagen.
 			</para>
-						
-			<figure id="crash_course_blog.connect_blog_with_templates.templates_select_with_customtemplates">
-				<title>Übersichtsseite Vorlagen mit neu erstellten Vorlagen-Typen</title>
-				<graphic fileref="images/crash_course_blog/templates_select_custom_tpl.png"/>
-			</figure>			
+		
+			<para>
+				Nun passen wir die Inhalte der Seitenvorlage an. Klicken Sie auf <guibutton>
+				Bearbeiten</guibutton> in der Zeile der eben neu angelegten Vorlage.
+			</para>	
+		
+			<para>
+				Ersetzen Sie bitte sämtlichen HTML-Code und Smarty-Code
+				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
+			</para>
+			
+			<programlisting language="smarty"><![CDATA[
+{assign var="LIMIT" value="12"}
+{select_named ns="Content" class="BlogPosting" method="selectDifferentMonths" var="months_this_year"
+year=$request.posting_year_added order_macro="DATE_ADDED" limit=12}
+<h2>Archiv {$request.posting_year_added}</h2>
+
+<ul class="archive">
+{foreach from=$months_this_year item=_month}
+{if $_month.month == $request.posting_month_added}
+<li>{$_month.timestamp|date_format:"%B %Y"}</li>
+{else}
+<li><a href="{get_url page_id=$page.id action="ArchiveMonth"
+posting_year_added=$_month.year posting_month_added=$_month.month}">{$_month.timestamp|date_format:"%B %Y"}</a></li>
+{/if}
+{/foreach}
+</ul>
+
+<h3>Archiv {"`$request.posting_year_added`-`$request.posting_month_added`-15 12:00:00"|date_format:"%B %Y"}</h3>
+
+<!-- posting start -->
+{select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings"
+page=$page.id year_added=$request.posting_year_added month_added=$request.posting_month_added
+order_macro="DATE_ADDED:DESC" draft=0 start=$request.start limit=$LIMIT}
+
+{foreach from=$blog_postings item=_blog_posting}
+<div class="post">
+<h2>{$_blog_posting.title}</h2>
+<p class="who">{$_blog_posting.user_name} am {$_blog_posting.date_added|date_format:"%d.%m.%Y"} &ndash;
+<a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">{if $_blog_posting.comment_count == 0}Keine
+Kommentare{elseif $_blog_posting.comment_count == 1}Ein Kommentar{else}{$_blog_posting.comment_count} Kommentare{/if}</a></p>
+
+{if !empty($_blog_posting.summary_raw)}
+<div class="summary">
+{$_blog_posting.summary}
+
+<p class="more"><a class="more" href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">lesen Sie mehr
+<span class="skip">zum Thema {$_blog_posting.title}</span></a></p>
+</div>
+{else}
+<div class="content">
+{$_blog_posting.content}
+</div>
+{/if}
+
+{if $_blog_posting.tag_count > 0}
+<p>Abgelegt unter:</p>
+<ul class="tags">
+{foreach from=$_blog_posting.tag_array|unserialize item=_tag}
+{if $_tag.word_url == $request.tag}
+<li>{$_tag.word}</li>
+{else}
+<li><a href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
+</div>
+<!-- posting stop -->
+{/foreach}
+
+<!-- pager -->
+{select_named ns="Content" class="BlogPosting" method="countBlogPostings" var="blog_posting_count"
+page=$page.id draft=0 year_added=$request.posting_year_added month_added=$request.posting_month_added}
+{page_index var="page_index" item_count=$blog_posting_count interval=$LIMIT}
+{if !empty($page_index)}
+<ul id="pager">
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</li>
+{else}
+<li><a href="{get_url page_id=$page.id action=ArchiveMonth
+posting_year_added=$request.posting_year_added posting_month_added=$request.posting_month_added
+start=$_item.self}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
+]]></programlisting>
 
 			<para>
-				So. wir jetzt
-			</para>			
-	
+				Auch hier löschen wir noch die alte Blätter-Funktion, da diese im oben angegebenen
+				Quelltext schon enthalten ist. Löschen Sie bitte sämtlichen HTML-Code
+				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup>
+				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
+			</para>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern und zur Übersicht</guibutton> klicken. Sie kommen zurück auf
+				die Übersichtsseite der Seitenvorlagen.
+			</para>
+			
+			<warning>
+				<para>
+					Da nun eine Seitenvorlage für das Blog Jahres- und Monatsarchiv existiert, denken
+					Sie bitte daran, nun die Auskommentierung der Einbindungssyntax in den bisher
+					angelegten Seitenvorlagen <userinput>Blog Übersicht</userinput>, 
+					<userinput>Blog Eintrag</userinput> und <userinput>Blog Monatsarchiv</userinput>
+					wieder zu entfernen:
+					<programlisting language="smarty"><![CDATA[
+{include file="wcom:blog_archive_year.`$page.id`"}
+]]></programlisting> 
+				</para>
+			</warning>
+			
+			<para>
+				Klicken Sie jetzt auf den Archivlink in der Sidebar, sieht die Ausgabe des
+				Monatsarchiv jetzt wie folgt aus:
+			</para>
+			
+			<figure id="crash_course_blog.frontend.blogarchive_created_view_demo">
+				<title>Ausgabe: Weblog Demo HTML - Blog Monatsarchiv</title>
+				<graphic fileref="images/crash_course_blog/frontend/blogarchive_created_view_demo.png"/>
+			</figure>
 		</sect2>
+		
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_rss20">
+			<title>Seitenvorlage für den RSS Feed erstellen</title>
+
+			<para>
+				Kommen wir nun zu den Seitenvorlagen für die Syndikation-Links. Wir beginnen
+				mit der Vorlage für das RSS Protokoll. Klicken Sie hierzu bitte in der
+				Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
+				den Bearbeiten-Modus der Vorlage.
+			</para>
+			
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_rss20</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog RSS</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Fügen Sie hier folgenden Quellcode ein:
+			<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcompose Weblog Demo</title>
+    <link>http://001.welcompose.de</link>
+    <description/>
+    <language>de-DE</language>
+    <generator>Welcompose 0.8 (http://www.welcompose.de/)</generator>
+         <atom:link href="http://001.welcompose.de/Rss20" rel="self" type="application/rss+xml" />
+		
+    {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings"
+        page=$page.id order_macro="DATE_ADDED:DESC" limit=20}
+    {foreach from=$blog_postings item=_blog_posting}
+    <item>
+        <title>{$_blog_posting.title|escape:"html"}</title>
+        <link>{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</link>
+        <description>{$_blog_posting.content|escape:"html"}</description>
+        <pubDate>{$_blog_posting.date_added|date_rss20}</pubDate>
+        <guid>{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</guid>
+      </item>
+    {/foreach}
+  </channel>
+</rss>
+]]></programlisting>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern</guibutton> klicken. Gehen Sie anschließend zurück zur Übersicht
+				der Seitenvorlagen.
+			</para>
+		</sect2>
+		
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_rss20comments">
+			<title>Seitenvorlage für die RSS Feed Kommentare erstellen</title>
+
+			<para>
+				Fahren wir fort mit den RSS Kommentaren. Klicken Sie hierzu bitte wieder in der
+				Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
+				den Bearbeiten-Modus der Vorlage.
+			</para>
+			
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_comments_rss20</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog RSS Kommentare</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Fügen Sie hier folgenden Quellcode ein:
+			<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcompose Weblog Demo Kommentare</title>
+    <link>http://001.welcompose.de</link>
+    <description/>
+    <language>de-DE</language>
+    <generator>Welcompose 0.8 (http://www.welcompose.de/)</generator>
+    <atom:link href="http://001.welcompose.de/CommentsRss20" rel="self" type="application/rss+xml" />
+		
+    {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments"
+        page=$page.id order_macro="DATE_ADDED:DESC" limit=20}
+    {foreach from=$blog_comments item=_blog_comment}
+      <item>
+        <title>{$_blog_comment.blog_posting_title|escape:"html"}</title>
+        <link>{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</link>
+        <description>{$_blog_comment.blog_posting_content|escape:"html"}</description>
+        <pubDate>{$_blog_comment.blog_posting_date_added|date_rss20}</pubDate>
+        <guid>{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</guid>
+      </item>
+    {/foreach}
+  </channel>
+</rss>
+]]></programlisting>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern</guibutton> klicken. Gehen Sie anschließend zurück zur Übersicht
+				der Seitenvorlagen.
+			</para>
+		</sect2>
+
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_atom10">
+			<title>Seitenvorlage für den Atom Feed erstellen</title>
+
+			<para>
+				Nun kommen die beiden Vorlagen für das alternativa Protokoll Atom an 
+				die Reihe. Klicken Sie hierzu bitte wieder in der
+				Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
+				den Bearbeiten-Modus der Vorlage.
+			</para>
+			
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_atom10</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Atom</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Fügen Sie hier folgenden Quellcode ein:
+			<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Welcompose Weblog Demo</title> 
+  <link href="http://001.welcompose.de" rel="self"
+  title="Welcompose Weblog Demo" type="application/atom+xml" />
+  <generator uri="http://www.welcompose.de/" version="0.8">Welcompose</generator>
+  <id>{get_url page_id=$page.id action=Index}</id>
+  <updated>{$current_timestamp|date_atom}</updated>
+	
+  {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings"
+    page=$page.id draft=0 tag_word_url=$request.tag order_macro="DATE_ADDED:DESC" limit=20}
+  {foreach from=$blog_postings item=_blog_posting}
+    <entry>
+      <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+          {$_blog_posting.title|escape:"html"}</div></title>
+      <link href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}"/>
+      <published>{$_blog_posting.date_added|date_atom}</published>
+      <updated>{$_blog_posting.date_modified|date_atom}</updated>
+      <content type="xhtml" xml:lang="de" xml:base="http://www.welcompose.de/">
+      <div xmlns="http://www.w3.org/1999/xhtml">{$_blog_posting.content}</div>
+      </content>
+      <id>{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</id>
+      <author>
+      <name>{$_blog_posting.user_name}</name>
+      </author>
+    </entry>
+  {/foreach}
+</feed>
+]]></programlisting>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern</guibutton> klicken. Gehen Sie anschließend zurück zur Übersicht
+				der Seitenvorlagen.
+			</para>
+		</sect2>
+		
+		<sect2 id="crash_course_blog.connect_blog_with_templates.create_tpl_atom10comments">
+			<title>Seitenvorlage für die Atom Feed Kommentare erstellen</title>
+
+			<para>
+				Und nun noch die Vorlage für die Atom Feed Kommentare. Klicken Sie hierzu
+				bitte wieder in der Übersicht auf den Link <guibutton>Neu erstellen</guibutton>.
+				Sie gelangen in den Bearbeiten-Modus der Vorlage.
+			</para>
+			
+			<para>
+				Passen Sie die Felder der Vorlage an:
+			</para>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Dient zur Zuordnung des Vorlagen-Typs. Wählen Sie
+							den Eintrag <guimenuitem>blog_comments_atom10</guimenuitem>
+							aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Benennen Sie die Vorlage. Vorschlag: <userinput>Blog Atom Kommentare</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Fügen Sie hier folgenden Quellcode ein:
+			<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Welcompose Weblog Demo Kommentare</title> 
+  <link href="http://001.welcompose.de" rel="self"
+  title="Welcompose Weblog Demo" type="application/atom+xml" />
+  <generator uri="http://www.welcompose.de/" version="0.8">Welcompose</generator>
+  <id>{get_url page_id=$page.id action=Index}</id>
+  <updated>{$current_timestamp|date_atom}</updated>
+	
+    {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments"
+        page=$page.id order_macro="DATE_ADDED:DESC" limit=20}
+    {foreach from=$blog_comments item=_blog_comment}
+    <entry>
+      <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">
+          {$_blog_comment.blog_posting_title|escape:"html"}</div></title>
+      <link href="{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}"/>
+      <published>{$_blog_comment.date_added|date_atom}</published>
+      <updated>{$_blog_comment.date_modified|date_atom}</updated>
+      <content type="xhtml" xml:lang="de" xml:base="http://domain.tld">
+      <div xmlns="http://www.w3.org/1999/xhtml">{$_blog_comment.content}</div>
+      </content>
+      <id>{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</id>
+      <author>
+      <name>{$_blog_comment.user_name}</name>
+      </author>
+    </entry>
+  {/foreach}
+</feed>
+]]></programlisting>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppen</guilabel></term>
+					<listitem>
+						<para>
+							Mit diesem Feld wird die Vorlage einer 
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							<guimenuitem>Blog</guimenuitem>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Sichern Sie die Vorlage, in dem Sie auf den Button <guibutton>
+				Speichern</guibutton> klicken. Gehen Sie anschließend zurück zur Übersicht
+				der Seitenvorlagen.
+			</para>
+			
+			<para>
+				Die Übersichtsseite der Seitentemplates sollte jetzt wie folgt aussehen:
+			</para>
+			
+			<figure id="crash_course_blog.templates_finish">
+				<title>Weblog Demo - Angelegte Seitenvorlagen</title>
+				<graphic fileref="images/crash_course_blog/templates_finish.png"/>
+			</figure>
+
+			<para>
+				Damit sind alle Seitenvorlagen für unser Weblog angelegt. Ihr Weblog hat
+				ein Archiv, Besucher können Ihre Beiträge kommentieren und die Beiträge und
+				jeweiligen Kommentare können per Feed abonniert werden.
+			</para>
+
+			<warning>
+				<para>
+					Der Quelltext und die Auswahl der RSS/Atom Tags in den entsprechen Vorlagen
+					sind Vorschläge unserseits. Mehr zu möglichen Angaben/Tags die in der 
+					Vorlagengestaltungnutzbar sind erhalten sie unter
+					<ulink type="external" url="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</ulink>
+					und <ulink type="external" url="http://www.atompub.org/rfc4287.html">http://www.atompub.org/rfc4287.html</ulink>  
+				</para>
+			</warning>
+						
+			<note>
+				<para>
+					Die Verwaltung der Blog-Kommentare erfolgt im Bereich <guimenu>Community</guimenu>
+					unter <guisubmenu>Blog Kommentare</guisubmenu>. Details zum
+					des Administrations-Bereiches Community werden in einer der folgenden Version
+					des Handbuchs beschrieben.
+				</para>
+			</note>			
+		</sect2>
+
 	</sect1>
 	
-	<sect1 id="crash_course_blog.style_blog">
-		<title>Logos, Bilder und Style Sheets einbinden</title>
-		
-		<para/>
-	</sect1>
 </chapter>

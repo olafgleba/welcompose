@@ -8,6 +8,7 @@
 	<xsl:param name="section.autolabel">1</xsl:param>
 	<xsl:param name="generate.index">1</xsl:param>
 	<xsl:param name="section.label.includes.component.label">1</xsl:param>
+	<xsl:param name="toc.section.depth">6</xsl:param>
 	<xsl:param name="admon.graphics">1</xsl:param>
 	<xsl:param name="admon.style"/>
 	<xsl:param name="html.stylesheet">styles/manual_html_single_page.css styles/print_html_single_page.css</xsl:param>

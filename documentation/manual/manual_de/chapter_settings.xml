@@ -709,33 +709,111 @@ w:de{Toxoplasmose}
 			<title>Mitgelieferte Textmakros</title>
 			
 			<para>
-				Welcompose bringt zwei Textmakros von Haus aus mit, die für
+				Welcompose bringt drei Textmakros von Haus aus mit, die für
 				die Bereitstellung von Welcompose-Funktionalität benötigt
-				werden. Sie dienen zur Erzeugung der Links zwischen einzelnen
+				werden. Sie dienen zur Erzeugung von Abkürzungen, der Links zwischen einzelnen
 				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
-				Bildern.
+				Bildern und anderen binären Dateien.
 			</para>
 							
-			<note>
+			<warning>
 				<para>
-				Diese beiden mitgelieferten Textmakros dürfen nicht entfernt werden, da sonst die 
-				die Auflösung der Pfade in Ihren Seiten nicht mehr funktionieren.
+				Diese mitgelieferten Textmakros dürfen nicht entfernt werden, da sonst die 
+				die Auflösung der Syntax sowie der Pfade in Ihren Seiten nicht mehr funktionieren.
 				</para>
-			</note>
+			</warning>
 			
+			<sect3 id="settings.text_macros.builtin_text_macros.bundled_abbreviation_generator">
+				<title>Bundled Abbreviation Generator</title>
+
+				<para>
+					Das Textmakro Bundled Abbreviation Generator kümmert sich um das Setzen
+					der korrespondierenen <code>abbr</code> HTML-Tags und Links zu Glossarseiten.
+					Es ist integrativer Bestandteil von Welcompose und kann daher auch
+					nicht über das Backend gelöscht oder
+					deaktiviert werden.
+				</para>
+
+				<para>
+					Es orientiert sich an der Syntax von Smarty-Funktionen,
+					wie sie in Vorlagen verwendet werden:
+				</para>
+
+				<programlisting><![CDATA[
+{get_abbreviation arg1=value1 arg2=value2}
+]]></programlisting>
+
+				<para>
+					Während <code>get_abbreviation</code> quasi der Name des
+					Textmakros ist, sind <code>arg1</code> respektive
+					<code>arg2</code> Platzhalter für Argumente, die an den
+					Abkürzung-Generator zur Erzeugung der richtigen Syntax übergeben
+					werden. Die zwei einzig gültigen Argumente sind <code>id</code> und
+					<code>value</code>. Die ID beschreibt die eindeutige Kennung 
+					der Abkürzung, mit dem Argument <code>value</code> wird bestimmt,
+					welcher zur Verfügung stehende Feldinhalt der Abkürzung ausgelesen 
+					werden soll.
+				</para>
+				
+				<para>
+					Zur Verfügung stehen: <userinput>name</userinput>, <userinput>lang</userinput>
+					und <userinput>long_form</userinput>. Eine gültige Anweisung kann beispielsweise so
+					aussehen:
+				</para>
+
+				<programlisting><![CDATA[
+{get_abbreviation id="3" value="name"}
+]]></programlisting>
+
+				<para>
+					oder auch:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_abbreviation id="3" value="long_form"}
+]]></programlisting>
+
+				<para>
+					Anstelle von <code>{get_abbreviation ...}</code> setzt das
+					Textmakro die korrespondierenden Inhalt für die Abkürzung,
+					beispielsweise:
+				</para>
+
+				<programlisting><![CDATA[
+<abbr title="MeineLangform">Meine Abkürzung</abbr>
+]]></programlisting>
+
+				<para>
+					oder auch:
+				</para>
+				
+				<programlisting><![CDATA[
+<abbr title="MeineLangform" lang="de" xml:lang="de">
+  <a href="#MeineAbkürzung" title="MeineLangform">Meine Abkürzung</a>
+</abbr>
+]]></programlisting>
+
+				<para>
+					Allerdings ist es in der Regel nicht nötig, selber die
+					Tags für die Integration der Abkürzungen zu schreiben, da dies
+					in Welcompose integrierte Funktionen für den Anwender tun.
+				</para>
+
+			</sect3>
+						
 			<sect3 id="settings.text_macros.builtin_text_macros.bundled_media_url_generator">
 				<title>Bundled Media URL Generator</title>
 				
 				<para>
-					Der Bundled Media URL Generator kümmert sich um das Setzen
+					Das Textmakro Bundled Media URL Generator kümmert sich um das Setzen
 					von Pfaden respektive URLs zu Media-Elementen wie Bildern.
-					Er wird vom in Welcompose integrierten Media Manager
-					verwendet und soll daher auch nicht gelöscht oder
+					Es wird vom in Welcompose integrierten Media Manager
+					verwendet und kann daher auch nicht über das Backend gelöscht oder
 					deaktiviert werden.
 				</para>
 				
 				<para>
-					Er orientiert sich an der Syntax von Smarty-Funktionen,
+					Es orientiert sich an der Syntax von Smarty-Funktionen,
 					wie sie in Vorlagen verwendet werden:
 				</para>
 				
@@ -744,9 +822,9 @@ w:de{Toxoplasmose}
 ]]></programlisting>
 				
 				<para>
-					Er kennt nur ein einzelnes Argument: <code>id</code>.
+					Es kennt nur ein einzelnes Argument: <code>id</code>.
 					Diesem wird jeweils die ID des Bildes oder Films
-					übergebeben, das respektive der eingebunden werden soll:
+					übergeben, das respektive der eingebunden werden soll:
 				</para>
 				
 				<programlisting><![CDATA[
@@ -779,7 +857,7 @@ w:de{Toxoplasmose}
 					einfachen Erzeugung von Links zwischen den einzelnen
 					Welcompose-Seiten und wird beispielsweise von den
 					Hilfsfunktionen zum Einfügen interner Hinweise verwendet.
-					Es sollte daher auch nicht gelöscht oder deaktiviert
+					Es kann daher auch nicht über das Backend gelöscht oder deaktiviert
 					werden.
 				</para>
 				
@@ -1036,6 +1114,320 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 				</para>
 			</sect3>
 		</sect2>
-		
 	</sect1>
+		
+	<sect1 id="settings.google_sitemaps">
+		<title>Sitemaps</title>
+
+		<sect2 id="settings.google_sitemaps.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Google Sitemaps sind XML Dateien, in denen die Seitenpfade und die 
+				dazugehörigen Metadaten ihrer Webseite  statisch hinterlegt werden. 
+				Diese Datei(en) (<filename>sitemap.xml</filename>, 
+				<filename>sitemap.xml.gz</filename>(gunzip komprimiert)), deren Schema dem
+				Standardprotokoll entspricht (<ulink type="external" url="http://sitemaps.org/protocol.php"/>),
+				erleichtern den Webcrawlern von Google den Informationszugang zu ihren Seiten und sind
+				 ein wertvolles Werkzeug um die 
+				<ulink type="external" url="http://de.wikipedia.org/wiki/Suchmaschinenoptimierung">SEO</ulink>
+				auszubauen. Die Datei(en) müssen sie manuell ihrem Google-Konto hinzugefügen.
+			</para>
+
+			<note>
+				<para>Die Nutzung dieses Features setzt das Vorhanden sein eines
+					<ulink type="external" url="http://www.google.com/support/accounts/">Google-Konto</ulink>
+					voraus.
+				</para>
+			</note>
+		</sect2>
+
+		<sect2 id="settings.google_sitemaps.setup">
+			<title>Einrichtung</title>
+
+			<figure id="settings.google_sitemaps.edit_sitemaps">
+				<title>Seiten editieren: Sitemap Metadaten</title>
+				<graphic fileref="images/usage/sitemaps/edit_sitemaps.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Sitemap Änderungshäufigkeit</guilabel></term>
+					<listitem>
+						<para>
+							Wählen sie ein Zeitinterval aus, der Google sagt, wie
+							häufig aktualisierte Inhalte erwartet werden können.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sitemap Priorität</guilabel></term>
+					<listitem>
+						<para>
+							Wert, der Google die interne Gewichtung mitteilt. 0.5
+							ist hier der Mittelwert.
+							<note>
+								<para>
+									Bitte beachten sie, das dieser Wert keinen Einfluß auf das Ranking
+									der betreffenden Seite hat, sondern Google nur mitteilt, welche
+									Seiten der Crawler vorrangig berücksichtigen soll.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+		</sect2>
+
+		<sect2 id="settings.google_sitemaps.generate">
+			<title>Sitemaps erstellen</title>
+
+			<para>
+				Sitemaps werden im Menüpunkt <guimenu>Einstellungen</guimenu> unter
+				<guisubmenu>Sitemaps</guisubmenu> angelegt.
+			</para>
+
+			<figure id="settings.google_sitemaps.generate_sitemaps">
+				<title>Sitemaps erstellen</title>
+				<graphic fileref="images/usage/sitemaps/generate_sitemaps.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Komprimieren</guilabel></term>
+					<listitem>
+						<para>
+							Ist diese Checkbox angeklickt, wird zusätzlich zur XML Sitemap
+							(<filename>sitemap.xml</filename>) eine gunzip komprimierte XML Sitemap-Datei
+							erstellt (<filename>sitemap.xml.gz</filename>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Klicken auf <guibutton>Speichern</guibutton>, wird die Sitemap-Datei
+				automatisch aus der Pfadstruktur Ihrer Installation erstellt.
+				Diese beinhaltet alle Seiten, die ihrer Domain zugeordnet und nicht
+				im <emphasis>Entwurf-Modus</emphasis> gespeichert oder
+				als <emphasis>Geschützt</emphasis> ausgezeichnet sind 
+				(s. <xref linkend="contents.pages.manage.add_page"/>).
+			</para>
+
+			<para>
+				Ablageort der generierten Sitemap(s) ist der Ordner <filename>/tmp/sitemaps</filename>. 
+			</para>
+
+			<para>
+				Da die Google-Richtlinien dies dringend empfehlen, verschieben sie die Datei(en)
+				anschließend bitte auf ihrem Server auf die <emphasis role="strong">oberste Ebene</emphasis>
+				ihrer Installation (Webroot).
+			</para>
+
+			<example id="settings.google_sitemaps.example.path">
+				<title>Pfad(e) Sitemap Datei(en)</title>
+<programlisting><![CDATA[
+http://ihre-domain.tld/sitemap.xml
+http://ihre-domain.tld/sitemap.xml.gz
+]]></programlisting>			
+			</example>
+
+			<para>
+				Anschließend melden sie sich (ggf. in einem neuen Browserfenster)
+				an ihren Google-Konto an und fügen die Datei(en) ihrem Konto hinzu.
+			</para>
+
+			<tip>
+				<para>
+					Wenn sie seit der Erstellung einer Sitemap Ihrer Installation neue Seiten
+					hinzugefügt haben, sollten sie jeweils daran denken eine neue Sitemap zu generieren,
+					damit die neuen URLs berücksichtigt werden. Ersetzten sie die veraltete Sitemap
+					im obersten Verzeichnis durch die neu generierte. Ein erneutes Anmeldung der 
+					Sitemap in ihrem Google-Konto ist nicht ausdrücklich notwendig, schadet aber
+					auch nicht ;-) Weitere Information zu Sitemaps finden sie auf Google<footnote><para><ulink  url="http://www.google.com/support/webmasters/bin/topic.py?topic=8476"/></para></footnote>.
+				</para>
+			</tip>
+
+		</sect2>
+	</sect1>
+
+
+		<sect1 id="settings.actions">
+			<title>Aktionen</title>
+
+			<sect2 id="settings.actions.introduction">
+				<title>Einführung</title>
+
+				<para>
+					<guisubmenu>Aktionen</guisubmenu> sind Scripte, die festgelegte Aufgaben
+					in unterschiedlichen Kontexten systemübergreifend ausführen. Sie dienen
+					zur Manipulation von Datenbankinhalten wie auch Inhalten auf Dateiebene.   
+				</para>
+				
+				<para>
+					Ein wesentliches Ziel in der Programmierung von Welcompose ist es, 
+					die Performance der Software so hoch wie möglich zu halten. Aus diesen
+					Grund findet in der (Frontend)Ausgabe der Inhalte keine Konvertierung der Inhalte zur
+					Laufzeit statt, da dieses eine deutlich erhöhte Kommunikation zwischen Browser,
+					Server und Datenbank notwendig macht und demzufolge das Laden der Seite signifikant
+					verlängert. Stattdessen geschieht die Konvertierung der Inhalte zum Zeitpunkt
+					der Bearbeitung, bzw. Speicherung innerhalb der Administrationsoberfläche.   
+				</para>
+				
+				<para>
+					Um diese doch recht abstrakte Beschreibung mit Leben zu füllen - 
+					Am Beispiel der Aktion <filename>Aktuelles URL Pattern Layout anwenden</filename>
+					lässt es sich anschaulich nachvollziehen:   
+				</para>
+				
+				<para>
+					Welcompose wird mit einem URL Layout ausgeliefert, das parameterisierte URLs
+					nutzt (siehe auch <xref linkend="url_rewriting"/>). Gehen wir nun davon aus, das
+					Sie Seiten anlegen, in denen Sie interne Verweise zu Seiten der 
+					Webpräsenz einfügen. Diese würden beispielhaft wie folgt in der Datenbank gespeichert:     
+				</para>
+				
+				<programlisting><![CDATA[
+<a href="/index.php?page_name=seitenname&action=Index">xxx</a>
+]]></programlisting>
+
+				<para>
+					In Laufe der Inhaltseinpflege entscheiden Sie sich nun die im <xref linkend="url_rewriting"/>
+					beschriebene Methode der URL Abbildung zu nutzen. Sie führen die notwendigen
+					Schritte durch und fahren fort mit der Inhaltseinpflege. Links, die Sie jetzt
+					in inhaltliche Seiten einfügen, werden - analog zum obigen Pfad - beispielhaft
+					wie folgt in der Datenbank gespeichert:   
+				</para>
+
+				<programlisting><![CDATA[
+<a href="/seitenanme/">xxx</a>
+]]></programlisting>
+
+				<para>
+					Somit existieren ab diesem Zeitpunkt zwei verschiedene URL Layouts in Ihren Seiten. 
+					Das führt zu keiner Beeinträchtigung der Verlinkung (s. auch die Anmerkung), dennoch
+					ist die Mischung unterschiedlicher URL Layouts im Seitenkontext zumeist nicht erwünscht.   
+				</para>
+				
+				<note>
+					<para>
+						Auch wenn Sie unterschiedliche Pfad Layouts nutzen,- die Verlinkung Ihrer
+						Seiten ist zu keinem Zeitpunkt hierdurch beeinträchtigt. Der Standard,
+						die Abbildung als parametisierte URLs, ist zu jeder Zeit gültig und anwendbar.
+					</para>
+				</note>
+				
+				<para>
+					Um die URLs, die vor der Umstellung auf das alternative URL Pattern Layout in
+					den Seiten eingefügt (und dem zufolge in der Datenbank gespeichert) wurden, 
+					an das neue URL Layout anzugleichen, führen Sie die Aktion <filename>Aktuelles
+					URL Pattern Layout anwenden</filename> aus.   
+				</para>
+
+								
+				<figure id="settings.actions.manage.actions_overview">
+					<title>Aktionen: Übersicht</title>
+					<graphic fileref="images/settings/actions/manage.actions_overview.png"/>
+				</figure>
+
+			</sect2>
+
+			<sect2 id="settings.actions.actions">
+				<title>Die Aktionen</title>
+				
+
+				<sect3 id="settings.actions.actions.apply_url_pattern">
+					<title>Aktuelles URL Pattern Layout anwenden</title>
+					
+					<para>
+						Wie im Anwendungsbeispiel der Aktionen beschrieben, sollte diese Funktion
+						immer dann ausgeführt werden, wenn sich das URL Pfad Layout geändert hat 
+						(s. <xref linkend="url_rewriting"/>).    
+					</para>
+
+				</sect3>
+				
+				<sect3 id="settings.actions.actions.apply_abbreviations">
+					<title>Abkürzungen und Glossar anwenden</title>
+					
+					<para>
+						Haben Sie eine Abkürzung (siehe <xref linkend="contents.abbreviations"/>) bearbeitet,
+						müssen die Inhalte aller Seiten, in denen die bearbeitete Abkürzung verwandt wird,
+						aktualisiert werden. Führen Sie die Funktion aus um das Backend und Frontend 
+						zu synchronisieren.   
+					</para>
+					
+					<para>
+						Hat eine Abkürzung einen Eintrag im Feld <guilabel>Glossar</guilabel>
+						, wird erst durch die Ausführung dieser Funktion die HTML-Syntax um den Link
+						auf die hier auszuwählende Zielseite für Ihr Glossar erweitert. Aktivieren Sie die
+						Option <guilabel>Glossar Seite anwenden?</guilabel> um nachfolgend die Seite
+						auszuwählen, auf die die in den Seiteninhalten eingefügten Abkürzungen verweisen
+						sollen.  
+					</para>
+
+					<para>
+						Die Auswahl der Zielseite muss bei jeder Ausführung der Funktion erneut
+						getroffen werden.  
+					</para>
+										
+					<note>
+						<para>
+							Obige Option zur Glossarverlinkung ist notwendig, da unter Umständen
+							zum Zeitpunkt der Erstellung einer Abkürzung oder auch beim Einfügen
+							in Seiteninhalte noch keine Seite existiert, die die Anzeige des
+							Glossar beinhaltet 
+							(siehe <xref linkend="contents.abbreviations.glossar.output"/>).
+						</para>
+					</note>
+					
+					<tip>
+						<para>
+							Um es zu vermeiden nach jeder einzelnen Bearbeitung einer Abkürzung
+							in den Bereich Einstellungen und wieder zurück zu wechseln, ist es 
+							eine gute Idee, bei einer Änderungen von unter Umständen mehreren
+							Abkürzungen, diese erst abzuschließen um dann nachfoglgend in einem 
+							Schritt die Änderungen in der Ausgabe zu synchronisieren.
+						</para>
+					</tip>
+
+				</sect3>
+				
+				<sect3 id="settings.actions.actions.delete_tpl_compiled">
+					<title>Kompilierte Frontend Smarty Vorlagen löschen</title>
+					
+					<para>
+						Welcompose, bzw. Smarty als verwendete Template Engine, generiert bei einem 
+						Seitenaufruf in der Ausgabe für jede Ausgabeseite eine statische Datei,
+						auf die im Laufe weiterer Seitenaufrufe zugeriffen wird. Diese nennt man
+						kompilierte Vorlagen. Sie liegen im Pfad <filename>/smarty/compiled</filename>.
+					</para>
+					
+					<para>
+						Bearbeitet man im Adminstrationsbereich Seitenvorlagen, Vorlagengruppen und legt
+						inhaltliche Seiten kann es in selten Fällen notwendig sein, diese Funktion auszuführen,
+						damit die Ansicht der Ausgabe immer den aktuellen Stand der Bearbeitung reflektiert.
+						Sie löscht die kompilierten Vorlagen aus dem Verzeichnis, so dass Smarty gezwungen
+						wird, bei erneuten Seitenaufruf zwingend eine neue Datei zu schreiben.
+					</para>
+					
+					<para>
+						Sie können diese Funktion ohne weitere Beeinträchtigung zu jeder Zeit ausführen.
+					</para>
+					
+					<note>
+						<para>
+							Haben Sie FTP-Zugriff auf den Installspfad von Welcompose, können Sie die 
+							kompilierten Vorlagen auch händisch löschen
+							(Pfad: <filename>/smarty/compiled</filename>), so fern sie die notwendigen
+							Rechte besitzen.
+						</para>
+					</note>
+
+				</sect3>
+
+			</sect2>
+		</sect1>
+
 </chapter>

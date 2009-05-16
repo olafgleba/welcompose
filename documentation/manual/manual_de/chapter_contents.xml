@@ -290,7 +290,21 @@
 								diese Einstellung aktiv ist, wird die Seite 
 								nicht veröffentlicht. Gleichzeitig wird die
 								Seite nicht in der Ausgabe der Navigation
-								berücksichtigt.
+								berücksichtigt. Die Listung der Seiten im Adminstrationsbereich
+								ist gewährleistet. Seiten mit Entwurfsstatus sind farblich
+								abgesetzt.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>No Follow</guilabel></term>
+						<listitem>
+							<para>
+								Das setzen dieser Option gibt an, ob Verweise auf diese Seite
+								mit dem Attribute/Wertepaar <code>rel="nofollow"</code> erweitert
+								werden können und ermöglicht eine Abfrage dieses Wertes bspw.
+								in der Navigationserstellung (s. <xref linkend="contents.navigations"/>).
+								Das Attribut verhindert die Google Page Rank Vererbung.
 							</para>
 						</listitem>
 					</varlistentry>
@@ -318,7 +332,7 @@
 					von Metatags im Seitenkopf verwendet werden kann. Die
 					Verwendung der Felder <guilabel>Sitemap Änderungshäufigkeit</guilabel>
 					und <guilabel>Sitemap Priorität</guilabel> wird in
-					<xref linkend="usage.google_sitemaps"/> erklärt.
+					<xref linkend="settings.google_sitemaps"/> erklärt.
 				</para>
 			</sect3>
 		</sect2>
@@ -426,14 +440,6 @@ Seiten-Name: {$some_page.name}
 					<filename>var</filename> (hier: <userinput>pages</userinput>) ist frei wählbar.
 				</para>
 			</note>
-			
-			<tip>
-				<para>
-					Die Erzeugung einer verschachtelten Navigation mit Hilfe
-					von HTML-Listen wird in Kürze in <xref
-					linkend="usage.nested_navigation"/> erklärt.
-				</para>
-			</tip>
 		</sect2>
 	</sect1>
 
@@ -1140,8 +1146,8 @@ Name der Navigation: {$navigation.name}
 				benutzt werden soll, kann über den Menüpunkt
 				<guisubmenu>Strukturvorlagen</guisubmenu> über dem
 				jeweiligen Inhaltsbereich aufgerufen werden. Die vorhandenen
-				Strukturvorlagen werden alphabetisch sortiert aufgelistet und
-				lassen sich mit einem Klick auf den Namen der gewünschten
+				Strukturvorlagen werden in einem Popup-Fenster alphabetisch sortiert 
+				aufgelistet und lassen sich mit einem Klick auf den Namen der gewünschten
 				Strukturvorlage auswählen. Die Strukturvorlage wird daraufhin
 				an der Stelle des Cursors in den Inhaltsbereich eingesetzt.
 			</para>
@@ -1159,4 +1165,307 @@ Name der Navigation: {$navigation.name}
 		</sect2>
 		
 	</sect1>
+
+
+	<sect1 id="contents.abbreviations">
+		<title>Abkürzungen</title>
+
+		<sect2 id="contents.abbreviations.introduction">
+			<title>Einführung</title>
+
+			<para>
+				Die Auszeichnung von in textlichen Inhalten verwandten
+				Abkürzungen und Akronymen<footnote><para>In kommenden HTML
+				Versionen wird der  HTML Tag <code>acronym</code> nicht
+				mehr enthalten sein. Aus diesen Grund unterscheidet Welcompose
+				nicht zwischen Abkürzungen und Akronymen.</para></footnote>
+				ist ein wesentliches Merkmal von benutzerfreundlichen Seiten.
+				Gleichzeitig ist es eine zu erfüllende Anforderung, möchte man Inhalte BITV-konform
+				<footnote><para><ulink url="http://www.einfach-fuer-alle.de/artikel/bitv/">
+				BITV</ulink></para></footnote> gestalten. 
+			</para>
+
+			<para>
+				Abkürzungen und Akronyme, die sie hier anlegen, stehen Ihnen
+				überall dort zur Verfügung, wo Inhalte ausgezeichnet werden
+				können.
+			</para>
+
+			<para>
+				Zusätzlich zur Auszeichnung der Inhalte mit dem entsprechenden HTML Tag,
+				kann aus den angelegten Abkürzungen/Akronymen ein Abkürzungverzeichnis/Glossar
+				erstellt werden, das mit wenigen Zeilen über ein Smarty-Plugin (s. unten 
+				<xref linkend="contents.abbreviations.glossar.output"/>) in den Seitenvorlagen 
+				eingefügt wird. Da beispielsweise Screenreader den <code>title</code>-Tag 
+				unterschiedlich behandeln oder gar ignorieren, ist ein Glossar/Abkürzungsverzeichnis
+				eine technische Möglichkeit, die Ausschreibung und weitere Erläuterung einer
+				Abkürzung den Benutzern dieses Ausgabemedium zugänglich zu machen.
+			</para>
+
+		</sect2>
+
+		<sect2 id="contents.abbreviations.manage">
+			<title>Verwaltung</title>
+
+			<para>
+				Die Verwaltung der Abkürzungen erfolgt im
+				Administrationsbereich unter <guimenu>Inhalte</guimenu>
+				im Unterpunkt <guisubmenu>Abkürzungen</guisubmenu>.
+				Wenn Sie dort auf den Link <guibutton>Neu anlegen</guibutton>
+				klicken, gelangen Sie zum Formular zum Anlegen einer neuen
+				Abkürzung.
+			</para>
+
+			<figure id="contents.abbreviations.manage.abbreviation_add">
+				<title>Abkürzungen anlegen</title>
+				<graphic fileref="images/contents/abbreviations/manage.abbreviation_add.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Tragen Sie hier die Abkürzung ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Langform</guilabel></term>
+					<listitem>
+						<para>
+							Die ausgeschriebene Form der Abkürzung. Diese wird
+							als <code>title</code> Attribut verwandt.
+						</para>
+						<warning>
+							<para>
+								Bitte beachten Sie, das Browser den title-Tag 
+								in unterschiedlicher Länge anzeigen. Kontrollieren
+								Sie bitte die Anzeige in verschiedenen Browsern.
+							</para>
+						</warning>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Glossar</guilabel></term>
+					<listitem>
+						<para>
+							Wenn die Abkürzung Bestandteil eines Glossar sein soll,
+							 tragen Sie hier bitte die entsprechende
+							Beschreibung der Abkürzung ein. Nutzen Sie kein Glossar,
+							lassen dieses Feld bitte einfach frei.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sprache</guilabel></term>
+					<listitem>
+						<para>
+							Die Angabe dieses Attributes hilft Screenreadern
+							die Abkürzung in der adäquaten Aussprache vorzulesen.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Textkonverter</guilabel></term>
+					<listitem>
+						<para>
+							Textkonverter, der auf den Inhalt des Glossar-Feld
+							 appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Makros anwenden</guilabel></term>
+					<listitem>
+						<para>
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt des
+							Glossar-Feld appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Zum Bearbeiten einer Abkürzung klicken Sie bitte auf den Button 
+				<guibutton>Bearbeiten</guibutton> in der entsprechenden Zeile
+				auf der Übersichtsseite der Abkürzungen um zu den Eingabefelder
+				des gewählten Eintrages zu gelangen.
+			</para>
+						
+			<note>
+				<para>
+					Wenn Sie eine bestehende Abkürzung bearbeitet haben,
+					muss den inhaltlichen Seiten, in denen die Abkürzung verwandt wird, 
+					mitgeteilt werden, das sich der Inhalt und unter Umständen die Syntax
+					der Einbindung geändert hat. Die Aktualisierung der Seiteninhalte
+					findet nicht automatisch statt.
+				</para>
+				<para>
+					Hierzu gibt es im Adminstrationbereich <guimenu>Einstellungen</guimenu> das
+					Untermenü <guisubmenu>Aktionen</guisubmenu>. Dort können Sie mit einem Klick
+					auf den Button <guibutton>Ausführen</guibutton> der entsprechenden Funktion
+					(<xref linkend="settings.actions.actions.apply_abbreviations"/>) 
+					alle Inhalte zeitgleich aktualisieren.
+				</para>
+			</note>
+		</sect2>
+
+		<sect2 id="contents.abbreviations.usage">
+			<title>Anwendung</title>
+
+			<para>
+				Die Verwendung der Abkürzungen ist überall dort möglich,
+				wo Inhalte ausgezeichnet werden können. Das Menü zur Auswahl
+				der Abkürzung, die benutzt werden soll, kann über den Menüpunkt
+				<guisubmenu>Abkürzungen</guisubmenu> oberhalb des
+				jeweiligen Inhaltsbereich aufgerufen werden. Die vorhandenen
+				Abkürzungen werden in einem Popup-Fenster alphabetisch sortiert 
+				aufgelistet und lassen sich mit einem Klick auf den Namen der gewünschten
+				Abkürzung auswählen. Die Abkürzung wird daraufhin
+				an der Stelle des Cursors in den Inhaltsbereich eingesetzt.
+			</para>
+
+			<figure id="contents.abbreviations.usage.insert_abbreviation">
+				<title>Abkürzung einsetzen
+					</title>
+				<graphic fileref="images/contents/abbreviations/usage.insert_abbreviation.png"/>
+			</figure>
+			
+			<para>
+				Um eine inhaltsnahe Bearbeitung zu ermöglichen, können Sie in diesem
+				Fenster ebenfalls neue Abkürzungen anlegen. Diese stehen nach dem Speichern
+				sofort zur Auswahl bereit. Zum Bearbeiten einer in diesem
+				Fenster neu angelegten Abkürzung wechseln Sie bitte in den Administrationsbereich
+				Abkürzungen (siehe <xref linkend="contents.abbreviations.manage"/>).  
+			</para>
+			
+			<figure id="contents.abbreviations.usage.popup_insert_abbreviation">
+				<title>Abkürzung auswählen oder/und anlegen
+					</title>
+				<graphic fileref="images/contents/abbreviations/usage.popup_insert_abbreviation.png"/>
+			</figure>
+
+		</sect2>
+		
+		<sect2 id="contents.abbreviations.glossar.output">
+			<title>Ausgabe Glossar</title>
+
+			<para>
+				Welcompose ermöglicht es ohne viel Aufwand ein Glossar/Abkürzungsverzeichnis
+				aus den Abkürzungen zu erstellen, die einen Eintrag im Feld <guilabel>Glossar</guilabel>
+				haben.
+			</para>
+			
+			<para>
+				Ein Glossar/Abkürzungsverzeichnis ist in der Regel eine normale inhaltliche Seite 
+				(Typ: <filename>Simple Page</filename>), die auch über die Navigation erreichbar
+				ist. Da die Glossarseite einmalig ist und sich in der Inhaltsdarstellung
+				von anderen Seiten gleichen Typs unterscheidet, legen wir somit nachfolgend eine neue
+				Vorlagengruppe, eine neue Seitenvorlage und zuletzt die inhaltliche Seite an.
+			</para>
+			
+			<para>
+				Legen Sie zuerst eine neue Vorlagengruppe an. Gehen Sie hierzu zum Bereich
+				 <guimenu>Vorlagen</guimenu> und dort in das
+				Untermenü <guisubmenu>Vorlagengruppen</guisubmenu>. Klicken Sie 
+				auf <guibutton>Neu hinzufügen</guibutton>, geben dort den Namen (bspw.
+				<userinput>Glossar</userinput>) an und eventuell eine Beschreibung. Speichern Sie 
+				die neue Vorlagengruppe. Wechseln Sie nun in das Untermenü 
+				<guisubmenu>Seitenvorlagen</guisubmenu>. Dort legen Sie eine neue Seitenvorlage vom
+				Typ <code>simple_page_index</code> an oder duplizieren eine schon bestehende Vorlage,
+				die diesem Typ entspricht.
+			</para>
+			
+			<para>
+				Benennen Sie die Vorlage um und wählen im Feld <guilabel>Vorlagengruppe</guilabel> die zuvor
+				neu angelegte Vorlagengruppe aus.
+			</para>
+			
+			<para>
+				Für die Ausgabe eines Glossar/Abkürzungverzeichnis liefert Welcompose ein Smarty Plugin
+				bereits mit. Das Glossar Plugin erzeugt automatisch eine alphabetische Linkleiste, setzt
+				korrespondierende Ankerlinks und gibt die Inhalte der Abkürzung aus. Dem Prinzip von
+				Welcompose folgend, findet keine Vorformartierung der Ausgabe statt, so dass sie
+				vollständig frei sind, die Ausgabe zu gestalten.
+			</para>
+			
+			<para>
+				<emphasis role="strong">Smarty Plugin Get Glossary</emphasis>:
+			</para>
+			
+			<programlisting><![CDATA[
+{* Smarty Get Glossary Plugin mit Parameter Action "pager" *}
+{get_glossary var="glossary" action="pager"}
+
+{* Smarty Get Glossary Plugin mit Parameter Action "content" *}
+{get_glossary var="glossary" action="content"}
+]]></programlisting>
+
+			<para>
+				Das Plugin erwartet zwingend die Angabe zweier Parameter.
+				Die Werteangabe des Parameter <code>var</code> ist frei wählbar. Der Parameter
+				<code>action</code> erwartet entweder die Angabe <userinput>pager</userinput>
+				oder <userinput>content</userinput>. Setzen Sie den Wert auf <userinput>pager</userinput>
+				um die alphabetische Linkleiste zum Navigieren des Glossar auszulesen. Mit dem Wert 
+				<userinput>content</userinput> stellt das Plugin die Inhalte der Abkürzungstabelle
+				zur Verfügung.
+			</para>
+			
+			<example id="contents.abbreviations.glossar.output.get_glossar">
+				<title>Glossar formatiert ausgeben</title>
+				
+			<para>
+				Nachfolgend wird ein Beispiel gelistet, das die notwendigen Bedingungen setzt um
+				eine valide und sematisch korrekte Glossarausgabe zu erhalten. Kopieren Sie den
+				Code und fügen Sie ihn Ihrer Seitenvorlage hinzu. 
+			</para>
+
+			<programlisting><![CDATA[
+{* Smarty Get Glossary Plugin :: Linkleiste *}
+{get_glossary var="glossary" action="pager"}
+
+<ul>
+{foreach item="_glossary" from=$glossary}
+{if !empty($_glossary.has_link)}
+  <li><a href="#{$_glossary.char}">{$_glossary.char}</a></li>
+{else}
+  <li>{$_glossary.char}</li>
+{/if}
+{/foreach}
+</ul>
+
+{* Smarty Get Glossary Plugin :: Ausgabe der Abkürzungstabelle *}
+{get_glossary var="glossary" action="content"}
+
+<dl>
+{foreach item="_glossary" from=$glossary}
+{if !is_null($_glossary.anchor)}
+<h3>{$_glossary.anchor}<a id="{$_glossary.anchor}" name="{$_glossary.anchor}"></a></h3>
+{/if}
+  <dt>{$_glossary.name}<a id="{$_glossary.name}" name="{$_glossary.name}"></a></dt>
+  <dd>{$_glossary.long_form}</dd>
+  <dd>{$_glossary.content}</dd>
+{/foreach}
+</dl>]]></programlisting>
+			</example>
+			
+			<para>
+				Speichern Sie die Seitenvorlage und gehen zum Adminstrationsbereich
+				<guimenu>Inhalte</guimenu> und dort zum Untermenü
+				<guisubmenu>Seiten</guisubmenu> um an gewünschter Stelle eine neue
+				Seite für das Glossar anzulegen. Wählen Sie für die neue Seite als 
+				<guilabel>Vorlagengruppe</guilabel> die zuvor angelegte und zugewiesene
+				Gruppe aus (<userinput>Glossar</userinput>). Speichern Sie die Seite.
+			</para>
+			
+			<para>
+				Damit ist die Erstellung des Glossar abgeschlossen.
+			</para>
+		</sect2>
+
+	</sect1>
+
 </chapter>

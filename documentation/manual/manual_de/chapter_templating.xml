@@ -429,6 +429,11 @@
 					dort werden entweder nicht aktuell oder aus anderen Gründen
 					unvollständig sein.
 				</para>
+				
+			</sect3>
+				
+			<sect3 id="templating.templates.usage.console">
+				<title>Die Smarty Debug Konsole</title>
 
 				<para>
 					Die aktuellen Informationen für die jeweilige Seite bringt
@@ -443,7 +448,7 @@
 					Auf diese Weise kann man dort die benötigten Daten finden
 					und direkt die richtigen Platzhalter in die Vorlage einsetzen.
 				</para>
-				
+			
 			<tip>
 				<para>
 					Die Smarty Debug Konsole  ist DAS zentrale Mittel, um die tatsächlich
@@ -595,7 +600,7 @@ Element: rgt
 Wert: 3
 ...
 ]]></programlisting>
-				
+			
 			<tip>
 				<para>
 					Auf diese Weise lässt sich leicht herausfinden, auf welche
