@@ -220,6 +220,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelBlogPosting' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelBlogPostingAction(this);
+			return false;
+		}
+	},
 	'.confirmDelTplGlobalfile' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelTplGlobalfileAction(this);

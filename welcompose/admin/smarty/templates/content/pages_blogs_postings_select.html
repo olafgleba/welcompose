@@ -132,11 +132,11 @@
 {foreach from=$blog_postings item=_posting}
 <tr>
 <td>{$_posting.title|escape:"htmlall"}</td>
-<td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%I:%S %Z"}</td>
+<td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%M %Z"}</td>
 <td><a href="../community/blogcomments_select.php?page={$page.id|escape:"url"}&amp;posting={$_posting.id|escape:"url"}">{$_posting.comment_count|escape:"htmlall"}</a></td>
 <td>{$_posting.trackback_count|escape:"htmlall"}</td>
 <td><a class="edit" href="pages_blogs_postings_edit.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="pages_blogs_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete confirmDelBlogPosting" href="pages_blogs_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
