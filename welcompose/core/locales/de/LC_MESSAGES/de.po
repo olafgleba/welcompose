@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-01 12:42+0200\n"
+"POT-Creation-Date: 2009-05-16 10:39+0200\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -1615,13 +1615,14 @@ msgstr "Podcast-Kategorien"
 
 #: _inc_nav_contents.html:27 _inc_navigation.html:49 _inc_navigation.html:51
 #: abbreviations_add.html:55 abbreviations_add.html:61
-#: abbreviations_edit.html:55 abbreviations_edit.html:61
-#: abbreviations_edit.html:102 abbreviations_select.html:48
-#: abbreviations_select.html:52 globalboxes_add.html:103
-#: globalboxes_edit.html:103 pages_blogs_postings_add.html:125
-#: pages_blogs_postings_add.html:136 pages_blogs_postings_edit.html:132
-#: pages_blogs_postings_edit.html:143 pages_boxes_add.html:129
-#: pages_boxes_edit.html:129 pages_generatorforms_content_edit.html:126
+#: abbreviations_add.html:102 abbreviations_edit.html:55
+#: abbreviations_edit.html:61 abbreviations_edit.html:102
+#: abbreviations_select.html:48 abbreviations_select.html:52
+#: globalboxes_add.html:103 globalboxes_edit.html:103
+#: pages_blogs_postings_add.html:125 pages_blogs_postings_add.html:136
+#: pages_blogs_postings_edit.html:132 pages_blogs_postings_edit.html:143
+#: pages_boxes_add.html:129 pages_boxes_edit.html:129
+#: pages_generatorforms_content_edit.html:126
 #: pages_simpleforms_content_edit.html:123
 #: pages_simplepages_content_edit.html:126
 msgid "Abbreviations"
@@ -1991,8 +1992,8 @@ msgid ""
 msgstr ""
 "Sie sollten diese Funktionen immer dann ausführen, wenn sie Felder einer "
 "Abkürzung editiert haben.<br />Bitte beachten sie: Um hierbei Abkürzungen "
-"mit einem Glossareintrag zu berücksichtigen, aktivieren Sie die Checkbox "
-"und wählen sie die Zielseite für ihr Glossar aus."
+"mit einem Glossareintrag zu berücksichtigen, aktivieren Sie die Checkbox und "
+"wählen sie die Zielseite für ihr Glossar aus."
 
 #: actions_select.html:83
 msgid "Apply Glossar Page?"
@@ -2093,9 +2094,9 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: settings.html:111 settings.html:114 settings.html:122 settings.html:125
 #: settings.html:128 settings.html:131 settings.html:134 settings.html:137
 #: settings.html:140 settings.html:143 abbreviations_add.html:92
-#: abbreviations_add.html:95 abbreviations_add.html:105
-#: abbreviations_add.html:108 abbreviations_add.html:111
-#: abbreviations_add.html:114 abbreviations_edit.html:92
+#: abbreviations_add.html:95 abbreviations_add.html:106
+#: abbreviations_add.html:109 abbreviations_add.html:112
+#: abbreviations_add.html:115 abbreviations_edit.html:92
 #: abbreviations_edit.html:95 abbreviations_edit.html:106
 #: abbreviations_edit.html:109 abbreviations_edit.html:112
 #: abbreviations_edit.html:115 callbacks_insert_abbreviations_links.html:96
@@ -3435,10 +3436,10 @@ msgid ""
 "this in different browser."
 msgstr ""
 "Bitte tragen sie hier die Ausschreibung der Abkürzung ein. Die Langform "
-"repräsentiert das title-Attribute des HTML <abbr> tags. Sie sollten ein "
-"Auge auf die Länge der Eingabe haben. Obwohl es keine technischen "
-"Limitierungen gibt, ist die Anzeigenlänge in Browsern nicht notwendigerweise "
-"identisch. Testen sie die Ausgabe in verschiedenen Browsern."
+"repräsentiert das title-Attribute des HTML <abbr> tags. Sie sollten ein Auge "
+"auf die Länge der Eingabe haben. Obwohl es keine technischen Limitierungen "
+"gibt, ist die Anzeigenlänge in Browsern nicht notwendigerweise identisch. "
+"Testen sie die Ausgabe in verschiedenen Browsern."
 
 #: abbreviation_abbreviation_name.html:1
 msgid "Please enter the abbreviation"
@@ -5307,10 +5308,14 @@ msgstr ""
 "Text in den Seiten."
 
 #: wcom.strings.js:65
+msgid "Are you sure you want to delete this Blog Posting?"
+msgstr "Sind Sie sicher, dass Sie den gewählte Blog Beitrag löschen möchten?"
+
+#: wcom.strings.js:66
 msgid "Please select a Flickr.com supplied image size."
 msgstr "Bitte wählen Sie eine von Flickr angebotene Bildgröße aus."
 
-#: wcom.strings.js:66
+#: wcom.strings.js:67
 msgid ""
 "The display of the Media Manager was not updated!\\n\\nPlease solely close "
 "the window with the corresponding CLOSE button within the launched window. "
@@ -5324,11 +5329,11 @@ msgstr ""
 "haben.\\n\\nDie Funktionalität sonstiger Seitenbereiche bleibt hiervon "
 "unberührt."
 
-#: wcom.strings.js:67
+#: wcom.strings.js:68
 msgid "There is currently no help available."
 msgstr "Es existiert momentan noch kein Hilfetext zu diesem Feld."
 
-#: wcom.strings.js:68
+#: wcom.strings.js:69
 msgid "You cannot insert media or documents here."
 msgstr ""
 "Es können an dieser Stelle keine Dateien oder Dokumente eingefügt werden."
@@ -6269,8 +6274,3 @@ msgstr "Zum Admin-Bereich"
 #: requirements.html:90
 msgid "Welcompose may work -- don't blame us for errors"
 msgstr "Welcompose mag funktionieren - oder auch nicht."
-
-#~ msgid ""
-#~ "Please enter the abbreviation write out. Consider this as the title "
-#~ "attribute of  the abbreviation tag"
-#~ msgstr "Geben Sie hier die ausgeschriebene Form der Abkürzung an"
