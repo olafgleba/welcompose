@@ -93,6 +93,7 @@ Helper.prototype.confirmDelTplSetsAction = Helper_confirmDelTplSetsAction;
 Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
 Helper.prototype.confirmDelAbbreviationAction = Helper_confirmDelAbbreviationAction;
+Helper.prototype.confirmDelBlogPostingAction = Helper_confirmDelBlogPostingAction;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
@@ -1462,6 +1463,25 @@ function Helper_confirmDelAbbreviationAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelAbbreviation);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Confirm Blog Posting delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelBlogPostingAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelBlogPosting);
 
 		if (v == true) {
 			window.location.href = elem.href;
