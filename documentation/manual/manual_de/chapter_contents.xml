@@ -1174,7 +1174,7 @@ Name der Navigation: {$navigation.name}
 			<title>Einführung</title>
 
 			<para>
-				Die Auszeichnung von in textlichen Inhalten verwandten
+				Die Auszeichnung von in textlichen Inhalten verwendeten
 				Abkürzungen und Akronymen<footnote><para>In kommenden HTML
 				Versionen wird der  HTML Tag <code>acronym</code> nicht
 				mehr enthalten sein. Aus diesen Grund unterscheidet Welcompose
@@ -1192,14 +1192,14 @@ Name der Navigation: {$navigation.name}
 			</para>
 
 			<para>
-				Zusätzlich zur Auszeichnung der Inhalte mit dem entsprechenden HTML Tag,
+				Zusätzlich zur Auszeichnung der Inhalte mit dem entsprechenden HTML Tag
 				kann aus den angelegten Abkürzungen/Akronymen ein Abkürzungverzeichnis/Glossar
 				erstellt werden, das mit wenigen Zeilen über ein Smarty-Plugin (s. unten 
-				<xref linkend="contents.abbreviations.glossar.output"/>) in den Seitenvorlagen 
+				<xref linkend="contents.abbreviations.glossar.output"/>) in die Seitenvorlagen 
 				eingefügt wird. Da beispielsweise Screenreader den <code>title</code>-Tag 
 				unterschiedlich behandeln oder gar ignorieren, ist ein Glossar/Abkürzungsverzeichnis
 				eine technische Möglichkeit, die Ausschreibung und weitere Erläuterung einer
-				Abkürzung den Benutzern dieses Ausgabemedium zugänglich zu machen.
+				Abkürzung den Benutzern dieses Ausgabemediums zugänglich zu machen.
 			</para>
 
 		</sect2>
@@ -1235,11 +1235,11 @@ Name der Navigation: {$navigation.name}
 					<listitem>
 						<para>
 							Die ausgeschriebene Form der Abkürzung. Diese wird
-							als <code>title</code> Attribut verwandt.
+							als <code>title</code> Attribut verwendet.
 						</para>
 						<warning>
 							<para>
-								Bitte beachten Sie, das Browser den title-Tag 
+								Bitte beachten Sie, dass Browser den title-Tag 
 								in unterschiedlicher Länge anzeigen. Kontrollieren
 								Sie bitte die Anzeige in verschiedenen Browsern.
 							</para>
@@ -1270,7 +1270,7 @@ Name der Navigation: {$navigation.name}
 					<term><guilabel>Textkonverter</guilabel></term>
 					<listitem>
 						<para>
-							Textkonverter, der auf den Inhalt des Glossar-Feld
+							Textkonverter, der auf den Inhalt des Glossar-Feldes
 							 appliziert werden soll (siehe <xref
 							linkend="settings.text_converters"/>).
 						</para>
@@ -1281,7 +1281,7 @@ Name der Navigation: {$navigation.name}
 					<listitem>
 						<para>
 							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt des
-							Glossar-Feld appliziert werden sollen (siehe <xref
+							Glossar-Feldes appliziert werden sollen (siehe <xref
 							linkend="settings.text_macros"/>).
 						</para>
 					</listitem>
@@ -1289,17 +1289,17 @@ Name der Navigation: {$navigation.name}
 			</variablelist>
 
 			<para>
-				Zum Bearbeiten einer Abkürzung klicken Sie bitte auf den Button 
-				<guibutton>Bearbeiten</guibutton> in der entsprechenden Zeile
-				auf der Übersichtsseite der Abkürzungen um zu den Eingabefelder
+				Zum Bearbeiten einer Abkürzung klicken Sie bitte in der entsprechenden Zeile
+				auf der Übersichtsseite der Abkürzungen auf den Button 
+				<guibutton>Bearbeiten</guibutton>, um zu den Eingabefeldern
 				des gewählten Eintrages zu gelangen.
 			</para>
 						
 			<note>
 				<para>
 					Wenn Sie eine bestehende Abkürzung bearbeitet haben,
-					muss den inhaltlichen Seiten, in denen die Abkürzung verwandt wird, 
-					mitgeteilt werden, das sich der Inhalt und unter Umständen die Syntax
+					muss den inhaltlichen Seiten, in denen die Abkürzung verwendet wird, 
+					mitgeteilt werden, dass sich der Inhalt und unter Umständen die Syntax
 					der Einbindung geändert hat. Die Aktualisierung der Seiteninhalte
 					findet nicht automatisch statt.
 				</para>
@@ -1321,7 +1321,7 @@ Name der Navigation: {$navigation.name}
 				wo Inhalte ausgezeichnet werden können. Das Menü zur Auswahl
 				der Abkürzung, die benutzt werden soll, kann über den Menüpunkt
 				<guisubmenu>Abkürzungen</guisubmenu> oberhalb des
-				jeweiligen Inhaltsbereich aufgerufen werden. Die vorhandenen
+				jeweiligen Inhaltsbereiches aufgerufen werden. Die vorhandenen
 				Abkürzungen werden in einem Popup-Fenster alphabetisch sortiert 
 				aufgelistet und lassen sich mit einem Klick auf den Namen der gewünschten
 				Abkürzung auswählen. Die Abkürzung wird daraufhin
@@ -1343,7 +1343,7 @@ Name der Navigation: {$navigation.name}
 			</para>
 			
 			<figure id="contents.abbreviations.usage.popup_insert_abbreviation">
-				<title>Abkürzung auswählen oder/und anlegen
+				<title>Abkürzung auswählen und/oder anlegen
 					</title>
 				<graphic fileref="images/contents/abbreviations/usage.popup_insert_abbreviation.png"/>
 			</figure>
@@ -1385,10 +1385,10 @@ Name der Navigation: {$navigation.name}
 			</para>
 			
 			<para>
-				Für die Ausgabe eines Glossar/Abkürzungverzeichnis liefert Welcompose ein Smarty Plugin
+				Für die Ausgabe eines Glossar/Abkürzungverzeichnisses liefert Welcompose ein Smarty Plugin
 				bereits mit. Das Glossar Plugin erzeugt automatisch eine alphabetische Linkleiste, setzt
 				korrespondierende Ankerlinks und gibt die Inhalte der Abkürzung aus. Dem Prinzip von
-				Welcompose folgend, findet keine Vorformartierung der Ausgabe statt, so dass sie
+				Welcompose folgend, findet keine Vorformatierung der Ausgabe statt, so dass Sie
 				vollständig frei sind, die Ausgabe zu gestalten.
 			</para>
 			
@@ -1418,8 +1418,8 @@ Name der Navigation: {$navigation.name}
 				<title>Glossar formatiert ausgeben</title>
 				
 			<para>
-				Nachfolgend wird ein Beispiel gelistet, das die notwendigen Bedingungen setzt um
-				eine valide und sematisch korrekte Glossarausgabe zu erhalten. Kopieren Sie den
+				Nachfolgend wird ein Beispiel gelistet, das die notwendigen Bedingungen setzt, um
+				eine valide und semantisch korrekte Glossarausgabe zu erhalten. Kopieren Sie den
 				Code und fügen Sie ihn Ihrer Seitenvorlage hinzu. 
 			</para>
 

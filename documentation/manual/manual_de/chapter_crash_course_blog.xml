@@ -88,7 +88,7 @@
 				</term>
 				<listitem>
 					<para>
-						Geben Sie hier den Namen des Navigationspunkts ein,
+						Geben Sie hier den Namen des Navigationspunktes ein,
 						also <userinput>Startseite</userinput>. 
 					</para>
 				</listitem>
@@ -123,7 +123,7 @@
 				</term>
 				<listitem>
 					<para>
-						Setzen Sie hier einen Haken, um die die Seite 
+						Setzen Sie hier einen Haken, um die Seite 
 						<userinput>Startseite</userinput> als
 						diejenige Seite zu definieren, die als Startseite
 						verwendet werden soll.
@@ -143,7 +143,7 @@
 			mit der die Software erstellt wurde. Klicken Sie neben der soeben
 			angelegten Seite auf das Symbol zum Hinzufügen einer neuen Seite
 			 (<guibutton>Neu</guibutton>). Geben Sie als Seitennamen
-			den Namen des Navigationspunkts ein, also <userinput>Made with
+			den Namen des Navigationspunktes ein, also <userinput>Made with
 			Welcompose</userinput>. Als <guilabel>Typ</guilabel> müssen Sie 
 			<guimenuitem>WCOM_URL</guimenuitem> auswählen. Die restlichen
 			Optionen können Sie auf den Standardeinstellungen belassen. Vergessen Sie
@@ -203,7 +203,7 @@
 			Jetzt tragen wir in unser bisher noch leeres Blog das erste Posting ein. 
 			Klicken Sie hierzu in der Zeile unserer angelegten Blogseite 
 			(<emphasis>Startseite</emphasis>) auf das <guibutton>Edit</guibutton> Symbol. Sie
-			gelangen zur Übersichtsseite der Blog-Postings, die diesen Blog zugeordnet sind. 
+			gelangen zur Übersichtsseite der Blog-Postings, die diesem Blog zugeordnet sind. 
 			Diese ist zum Zeitpunkt noch leer, da wir noch kein Posting angelegt haben. Dies
 			machen wir jetzt als Erstes. Klicken Sie auf <guilabel>Neu anlegen</guilabel>
 			und sie kommen zur Eingabeseite eines Blog-Postings.  
@@ -244,7 +244,7 @@
 				</term>
 				<listitem>
 					<para>
-						Hier tragen Sie bei eine Zusammenfassung Ihres Postings ein.
+						Hier tragen Sie eine Zusammenfassung Ihres Postings ein.
 						Kopieren Sie den nachfolgenden Text und setzen ihn ein.
 					</para>
 					<programlisting language="smarty"><![CDATA[
@@ -260,8 +260,8 @@ eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 				<listitem>
 					<para>
 						Hier fügen wir die Inhalte für unser Posting ein. 
-						In diesen Fall etwas Fliesstext. Kopieren Sie die 
-						nachfolgenden zwei Absätze und setzen sie ein.
+						In diesen Fall etwas Fließtext. Kopieren Sie die 
+						nachfolgenden zwei Absätze und setzen sie diese ein.
 					</para>
 					<programlisting language="smarty"><![CDATA[
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -302,8 +302,8 @@ aliquip ex ea commodo consequat.</p>
 				</term>
 				<listitem>
 					<para>
-						Verschlagworten Sie Ihr Posting. Einträge werden durch ein Kommata getrennt.
-						Bitte geben Sie hier folgende, kommaseparierte Wörter ein:
+						Verschlagworten Sie Ihr Posting. Einträge werden durch ein Komma getrennt.
+						Bitte geben Sie hier folgende, komma-separierte Wörter ein:
 						<userinput>Software</userinput>, <userinput>Demo</userinput>.
 					</para>
 				</listitem>
@@ -385,7 +385,7 @@ aliquip ex ea commodo consequat.</p>
 		<tip>
 			<para>
 				Damit man ein wirkliches Gefühl für die spätere Ausgabe bekommt, legen Sie
-				bitte zwei weitere Blog-Eintrag an, so dass mehrere
+				bitte zwei weitere Blog-Einträge an, so dass mehrere
 				Blog-Beiträge vorhanden sind. Passen Sie jeweils
 				den <guilabel>Titel</guilabel> an. Die sonstigen Einstellungen übernehmen Sie
 				bitte aus den oben genannten Angaben. 
@@ -461,7 +461,7 @@ aliquip ex ea commodo consequat.</p>
 					<listitem>
 						<para>
 							Mit diesem Feld wird die Vorlage einer 
-							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe  
+							Vorlagengruppe zugeordnet. Selektieren sie die einzig vorhandene Gruppe   
 							<guimenuitem>Blog</guimenuitem>.
 						</para>
 					</listitem>
@@ -471,7 +471,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Klicken Sie nun auf die Schaltfläche
 				<guibutton>Speichern</guibutton>,um die Vorlage zu speichern.
-				Wenn Sie jetzt den öffentlichen Bereich aufrufen, werden Sie jetzt
+				Wenn Sie jetzt den öffentlichen Bereich aufrufen, werden Sie 
 				den gerenderten HTML-Code sehen, den Sie soeben in die Vorlage
 				eingefügt haben &ndash; allerdings ohne Bilder und Style
 				Sheets.
@@ -511,7 +511,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Ändern wir nun die Überschrift im Seiteninhalt. Ersetzen Sie den H1-Tag durch
 				den Seitennamen und den Fliesstext, indem Sie den kommentierten Bereich zwischen
-				<markup role="smarty"><![CDATA[<!-- Überschrift -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- Überschrift -->]]></markup> und
 				<markup role="smarty"><![CDATA[<!-- EOF Überschrift -->]]></markup> durch folgenden Code
 				austauschen:
 			</para>
@@ -529,7 +529,7 @@ aliquip ex ea commodo consequat.</p>
 				Jetzt gilt es dafür zu sorgen, dass die Navigation von
 				Welcompose erzeugt wird. Ersetzen Sie die statische Navigation
 				indem Sie den kommentierten Bereich zwischen
-				<markup role="smarty"><![CDATA[<!-- Liste Navigation -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- Liste Navigation -->]]></markup> und
 				<markup role="smarty"><![CDATA[<!-- EOF Liste Navigation -->]]></markup> durch folgenden Code
 				austauschen:
 			</para>
@@ -554,13 +554,13 @@ aliquip ex ea commodo consequat.</p>
 			</para>
 		
 			<para>
-				Nun ersetzen wir nun die statische Listung der Blog-Beiträge mit den von uns bereits
+				Nun ersetzen wir die statische Listung der Blog-Beiträge mit den von uns bereits
 				angelegten Blog-Beiträgen. 
 			</para>
 		
 			<para>
 				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
-				<markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup> und
 				<markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
 			</para>
 		
@@ -595,13 +595,13 @@ aliquip ex ea commodo consequat.</p>
 ]]></programlisting>
 
 			<para>
-				Nun ersetzen wir die bisher statische Blätter-Funktion, mit dem Sie die Übersichts-Anzeige
+				Nun ersetzen wir die bisher statische Blätter-Funktion, mit der Sie die Übersichts-Anzeige
 				der Blog-Einträge auf mehrere Seiten verteilen können. 
 			</para>
 		
 			<para>
 				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
-				<markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup> und
 				<markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup> durch folgenden Code:
 			</para>
 		
@@ -629,20 +629,20 @@ aliquip ex ea commodo consequat.</p>
 				 des Weblog Demo zu sehen, haben wir eine rechte Spalte (im
 				Quelltext kommentiert mit: 
 				<markup role="smarty"><![CDATA[<!-- Blog-Sidebar -->]]></markup>), die Meta-
-				Informationen zum Blog bereitstellt. Das sind zum einen Feed-Links, eine
+				Informationen zum Blog bereit stellt. Das sind zum einen Feed-Links, eine
 				Auswahl der Anzeige anhand der vergebenen Schlagworte und die Archiv Links
 				für unser Blog. 
 			</para>
 		
 			<para>
-				Sorgen wir also dafür, das der Reihe nach auch diese statischen durch die dynamischen Inhalten
-				ersetzt werden. Zuerst kümmern wir uns um die Syndications-Links, über die Besucher die Inhalte
+				Sorgen wir also dafür, dass der Reihe nach auch diese statischen durch die dynamischen Inhalte
+				ersetzt werden. Zuerst kümmern wir uns um die Syndication-Links, über die Besucher die Inhalte
 				als Feed abonnieren können.
 			</para>		
 		
 			<para>
 				Ersetzen Sie bitte sämtlichen HTML-Code zwischen den Kommentaren
-				<markup role="smarty"><![CDATA[<!-- Blog Feeds -->]]></markup> bis
+				<markup role="smarty"><![CDATA[<!-- Blog Feeds -->]]></markup> und
 				<markup role="smarty"><![CDATA[<!-- EOF Blog Feeds -->]]></markup> durch folgenden Code:
 			</para>
 		
@@ -663,7 +663,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Weiter gehts mit den Tags/Schlagworten. Ersetzen Sie bitte sämtlichen HTML-Code
 				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Tags -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Tags -->]]></markup> durch folgenden Code:
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog Tags -->]]></markup> durch folgenden Code:
 			</para>
 		
 			<programlisting language="smarty"><![CDATA[
@@ -686,7 +686,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Nun ersetzen wir noch die statischen Archiv-Links des Blogs. Ersetzen Sie bitte sämtlichen
 				HTML-Code zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Archiv -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Archiv -->]]></markup> durch folgenden Code:
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog Archiv -->]]></markup> durch folgenden Code:
 			</para>
 
 			<programlisting language="smarty"><![CDATA[
@@ -698,15 +698,15 @@ aliquip ex ea commodo consequat.</p>
 			</para>
 
 			<para>
-				Wenn Sie nun die Ausgabeseite aufrufen, wird Ihnen ein Fehler angezeigt, das die Vorlage
-				<code>blog_archive_year</code> nicht gefunden wurde oder leer ist. Zu recht ;-) 
+				Wenn Sie nun die Ausgabeseite aufrufen, wird Ihnen ein Fehler angezeigt, dass die Vorlage
+				<code>blog_archive_year</code> nicht gefunden wurde oder leer ist. Zu Recht ;-) 
 				Wir werden diese Vorlage erst etwas später anlegen.
 			</para>
 			<tip>
 				<para>
-					Um die Zwischenschritte des Crash-Kurs immer
+					Um die Zwischenschritte des Crash-Kurses immer
 					wieder in der Ausgabe überprüfen zu können, ist es sinnvoll, die Anweisung zur
-					Inkludierung des Archivs temporär auszukommentieren, so das die Ausgabe keine
+					Inkludierung des Archivs temporär auszukommentieren, so dass die Ausgabe keine
 					Fehler triggert. Smarty Kommentare beginnen mit 
 					<code>{* </code> und werden mit <code> *}</code> geschlossen.
 				</para>
@@ -723,15 +723,15 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Fahren wir fort, die Vorlage für die Blog-Übersicht zu komplettieren. Die Code-
 				Abschnitte zur dynamischen Ausgabe der Seiteninhalte haben wir ersetzt &ndash; nun kümmern
-				wir uns um die Referenzierung des Stylesheets und verwandten Grafiken.
+				wir uns um die Referenzierung des Stylesheets und verwendeten Grafiken.
 			</para>
 		
 			<para>
-				Hierzu müssen wir das Stylesheet und die im Blog verwandten Grafiken als 
+				Hierzu müssen wir das Stylesheet und die im Blog verwendeten Grafiken als 
 				<guisubmenu>Globale Vorlagen</guisubmenu>, 
 				bzw. <guisubmenu>Globale Dateien</guisubmenu> einbinden, damit Welcompose
 				diese Referenzen korrekt erkennt und umsetzen kann.
-				Die detailierte Anleitung finden Sie im vorherigen Crash-Kurs unter
+				Die detaillierte Anleitung finden Sie im vorherigen Crash-Kurs unter
 				<xref linkend="crash_course_demo.style_homepage"/>.
 			</para>
 		
@@ -748,9 +748,9 @@ aliquip ex ea commodo consequat.</p>
 			</figure>
 			
 			<para>
-				Auf <xref linkend="crash_course_blog.blogindex_view_demo"/> sieht man, das noch die
-				Headergrafik fehlt. Bitte führen Sie die Anleitung in <xref linkend="crash_course_demo.style_homepage_content"/> aus. Wenn Sie alles umgesetzt haben, sieht die
-				Ausgabe jetzt wie folgt aus:
+				Auf <xref linkend="crash_course_blog.blogindex_view_demo"/> sieht man, dass die
+				Headergrafik noch fehlt. Bitte führen Sie die Anleitung in <xref linkend="crash_course_demo.style_homepage_content"/> aus. Wenn Sie alles umgesetzt haben, sieht die
+				Ausgabe wie folgt aus:
 			</para>
 			
 			<figure id="crash_course_blog.frontend.blogindex_created_with_head_view_demo">
@@ -768,14 +768,14 @@ aliquip ex ea commodo consequat.</p>
 			
 			<para>
 				Nachdem wir die Arbeiten an der Vorlage für die Blog-Übersicht
-				abgeschlossen, legen wir nun die Seitenvorlage für die Ansicht eines
+				abgeschlossen haben, legen wir nun die Seitenvorlage für die Ansicht eines
 				einzelnen Blog-Eintrages an.
 			</para>
 		
 			<para>
 				Da sich die Rahmen-Ansicht nicht von der eben angelegten Seitenvorlage
 				unterscheidet, können wir es uns einfach machen und die bestehende Seitenvorlage
-				einfach duplizieren und im Anschluß daran die Inhalte anpassen.
+				einfach duplizieren und im Anschluss daran die Inhalte anpassen.
 				Klicken Sie hierzu auf <guibutton>Duplizieren</guibutton> in der 
 				Zeile der bisher einzigen Seitenvorlage (<userinput>Blog Übersicht</userinput>).
 				Sie befinden sich anschließend im Bearbeiten-Modus
@@ -843,7 +843,7 @@ aliquip ex ea commodo consequat.</p>
 				erlauben wollen, beinhaltet der Quelltext auch die Vorlage für das Formular.
 				Ersetzen Sie bitte sämtlichen HTML-Code und Smarty-Code
 				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
 			</para>
 
 			<programlisting language="smarty"><![CDATA[
@@ -920,10 +920,10 @@ aliquip ex ea commodo consequat.</p>
 ]]></programlisting>
 
 			<para>
-				Zu guter letzt löschen wir noch die Blätter-Funktion, da diese auf einer Einzelseite
+				Zu guter Letzt löschen wir noch die Blätter-Funktion, da diese auf einer Einzelseite
 				eines Blog-Eintrages keinen Sinn macht. Löschen Sie bitte sämtlichen HTML-Code
 				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
 			</para>
 			
 			<para>
@@ -933,7 +933,7 @@ aliquip ex ea commodo consequat.</p>
 			
 			<para>
 				Sie können in der Ausgabe zu diesem Zeitpunkt schon zwischen Blog Übersicht und den
-				Beiträge navigieren und Besucher Ihres Blogs könnten Kommentare zu den Beiträgen
+				Beiträgen navigieren und Besucher Ihres Blogs könnten Kommentare zu den Beiträgen
 				einstellen.
 			</para>
 			
@@ -943,7 +943,7 @@ aliquip ex ea commodo consequat.</p>
 			</figure>
 			
 			<para>
-				Was jetzt noch fehlt sind die Seitenvorlagen für das Archiv und die Syndikations-Links in der
+				Was jetzt noch fehlt sind die Seitenvorlagen für das Archiv und die Syndikation-Links in der
 				rechten Spalte.
 			</para>
 		</sect2>
@@ -954,7 +954,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Legen wir die Vorlage für das Blog-Jahresarchiv an. Diese Seitenvorlage
 				kalkuliert automatisch die zur Verfügung stehenden Zeiträume anhand der
-				eingetragenen Blog-Einträge. Klicken Sie hierzu bitte in der
+				eingetragenen Erstellungsdaten der Blog-Einträge. Klicken Sie hierzu bitte in der
 				Vorlagen-Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
 				den Bearbeiten-Modus der Vorlage.
 			</para>
@@ -1034,7 +1034,7 @@ aliquip ex ea commodo consequat.</p>
 
 			<para>
 				Diese Seitenvorlage kalkuliert automatisch die zur Verfügung stehenden Zeiträume
-				anhand der eingetragenen Blog-Einträge und bietet die dazugehörige Ansicht.
+				anhand der eingetragenen Erstellungsdaten der Blog-Einträge und bietet die dazugehörige Ansicht.
 				Um es uns wieder so einfach wie möglich zu machen, duplizieren wir wie zuvor
 				an anderer Stelle die Seitenvorlage <userinput>Blog Eintrag</userinput>.
 				Klicken Sie hierzu bitte in der entsprechenden Zeile auf den Button
@@ -1101,7 +1101,7 @@ aliquip ex ea commodo consequat.</p>
 			<para>
 				Ersetzen Sie bitte sämtlichen HTML-Code und Smarty-Code
 				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog-Einträge -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog-Einträge -->]]></markup> durch folgenden Code:
 			</para>
 			
 			<programlisting language="smarty"><![CDATA[
@@ -1187,7 +1187,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				Auch hier löschen wir noch die alte Blätter-Funktion, da diese im oben angegebenen
 				Quelltext schon enthalten ist. Löschen Sie bitte sämtlichen HTML-Code
 				zwischen den Kommentaren <markup role="smarty"><![CDATA[<!-- Blog Pager -->]]></markup>
-				bis <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
+				und <markup role="smarty"><![CDATA[<!-- EOF Blog Pager -->]]></markup>
 			</para>
 
 			<para>
@@ -1211,7 +1211,7 @@ start=$_item.self}">{$_item.page}</a></li>
 			
 			<para>
 				Klicken Sie jetzt auf den Archivlink in der Sidebar, sieht die Ausgabe des
-				Monatsarchiv jetzt wie folgt aus:
+				Monatsarchiv wie folgt aus:
 			</para>
 			
 			<figure id="crash_course_blog.frontend.blogarchive_created_view_demo">
@@ -1393,7 +1393,7 @@ start=$_item.self}">{$_item.page}</a></li>
 			<title>Seitenvorlage für den Atom Feed erstellen</title>
 
 			<para>
-				Nun kommen die beiden Vorlagen für das alternativa Protokoll Atom an 
+				Nun kommen die beiden Vorlagen für das alternative Protokoll Atom an 
 				die Reihe. Klicken Sie hierzu bitte wieder in der
 				Übersicht auf den Link <guibutton>Neu erstellen</guibutton>. Sie gelangen in
 				den Bearbeiten-Modus der Vorlage.
@@ -1585,8 +1585,8 @@ start=$_item.self}">{$_item.page}</a></li>
 			<warning>
 				<para>
 					Der Quelltext und die Auswahl der RSS/Atom Tags in den entsprechen Vorlagen
-					sind Vorschläge unserseits. Mehr zu möglichen Angaben/Tags die in der 
-					Vorlagengestaltungnutzbar sind erhalten sie unter
+					sind Vorschläge unsererseits. Mehr zu möglichen Angaben/Tags, die in der 
+					Vorlagengestaltung nutzbar sind, erhalten sie unter
 					<ulink type="external" url="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</ulink>
 					und <ulink type="external" url="http://www.atompub.org/rfc4287.html">http://www.atompub.org/rfc4287.html</ulink>  
 				</para>
@@ -1596,7 +1596,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				<para>
 					Die Verwaltung der Blog-Kommentare erfolgt im Bereich <guimenu>Community</guimenu>
 					unter <guisubmenu>Blog Kommentare</guisubmenu>. Details zum
-					des Administrations-Bereiches Community werden in einer der folgenden Version
+					Administrations-Bereich Community werden in einer der folgenden Versionen
 					des Handbuchs beschrieben.
 				</para>
 			</note>			
