@@ -977,7 +977,7 @@ public function datetimeFromQuickFormDate ($values)
 	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 	$year = str_pad($year, 4, '0', STR_PAD_LEFT);
 	$hour = str_pad($hour, 2, '0', STR_PAD_LEFT);
-	$minute = str_pad($hour, 2, '0', STR_PAD_LEFT);
+	$minute = str_pad($minute, 2, '0', STR_PAD_LEFT);
 	
 	return sprintf('%s-%s-%s %s:%s:00', $year, $month, $day, $hour, $minute);
 }

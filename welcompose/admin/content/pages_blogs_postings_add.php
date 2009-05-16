@@ -391,7 +391,7 @@ try {
 	
 	// date element for date_added
 	$FORM->addElement('date', 'date_added', gettext('Creation date'),
-		array('language' => 'en', 'format' => 'd.m.Y \o\n H:i', 'addEmptyOption' => true),
+		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true),
 		array('id' => 'blog_posting_date_added'));
 	
 	// submit button
