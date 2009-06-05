@@ -89,6 +89,7 @@ try {
 	 *
 	 * - Create tables content_abbreviations
 	 * - Add new rights: CONTENT_ABBREVIATION{,FIELD}_{USE,MANAGE}
+	 * - Insert get_abbreviation text macro to table WCOM_DB_APPLICATION_TEXT_MACROS
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
@@ -284,6 +285,57 @@ try {
 					}
 				}
 			}
+			
+			// insert text marco entry to every project
+			foreach ($projects as $_project) {
+				// get existing macros
+				$sql = "
+					SELECT
+						`id`,
+						`project`,
+						`name`
+					FROM
+						".WCOM_DB_APPLICATION_TEXT_MACROS."
+					WHERE
+						`project` = :project
+				";
+				$macros = $BASE->db->select($sql, 'multi', array('project' => (int)$_project['id']));
+
+				// prepare sql data
+				$sqlData = array(
+					'project' => (int)$_project['id'],
+					'name' => 'Bundled Abbreviation Plugin',
+					'internal_name' => 'get_abbreviation',
+					'type' => 'pre',
+					'editable' => '0'
+				);
+				
+				// if the macro already exists, force update
+				$insert = true;
+				foreach ($macros as $_macro) {
+					if ($_macro['name'] == $sqlData['name']) {
+						// prepare where clause
+						$where = " WHERE `id` = :id ";
+
+						// prepare bind params
+						$bind_params = array(
+							'id' => (int)$_macro['id']
+						);
+
+						// update right
+						$BASE->db->update(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData, $where, $bind_params);
+
+						$insert = false;
+						break;
+					}
+				}
+
+				// otherwise create new macro
+				if ($insert) {
+					$BASE->db->insert(WCOM_DB_APPLICATION_TEXT_MACROS, $sqlData);
+				}
+			}
+
 
 			// update schema version
 			$sqlData = array(
