@@ -244,6 +244,7 @@
 			<groups>
 				<name>WCOM_ADMIN</name>
 				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
 			</groups>
 		</right>
 		<right>

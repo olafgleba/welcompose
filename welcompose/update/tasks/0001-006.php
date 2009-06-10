@@ -209,7 +209,8 @@ try {
 				$rights = array(
 					'CONTENT_ABBREVIATION_USE' => array(
 						'WCOM_ADMIN',
-						'WCOM_REGULAR'
+						'WCOM_REGULAR',
+						'WCOM_ANONYMOUS'
 					),
 					'CONTENT_ABBREVIATION_MANAGE' => array(
 						'WCOM_ADMIN'
