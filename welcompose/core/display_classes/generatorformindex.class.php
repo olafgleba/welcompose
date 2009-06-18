@@ -275,8 +275,12 @@ public function render ()
 						if (!$FORM->isSubmitted()) {
 							$element->setValue($_value);
 						}
-
 						$i++;
+						
+						// as we set values above yet, we
+						// need to prevent these elements to 
+						// be assign on func setValue() on Line 315
+						$imply_radio_elements = 1;
 					}
 				break;
 			case 'reset':
@@ -306,7 +310,10 @@ public function render ()
 		
 		// set value
 		if (!$FORM->isSubmitted()) {
-			$element->setValue($_field['value']);
+			// prevent radio elements to be set twice
+			if(!isset($imply_radio_elements)) {
+				$element->setValue($_field['value']);
+			}
 		}
 		
 		// apply default filters
