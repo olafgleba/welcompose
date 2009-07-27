@@ -26,7 +26,8 @@ column with media manager, popup, opacity
 
 /* column */
 #column {
-float: right;
+position:absolute;
+left: 738px;
 width: 236px;
 height: 752px;
 padding: 100px 0 0 0;
