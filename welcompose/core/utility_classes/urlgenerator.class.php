@@ -280,7 +280,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 }
 
 /**
- * Generates internal sitemap links using the provided arguments.
+ * Generates external links with protocol using the provided arguments.
  * The required arguments depend on the page someone likes to link to.
  * Unknown arguments will be treated as user supplied arguments
  * and prepend to the generated url.
@@ -289,7 +289,7 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
  * @param array Args
  * @return string
  */
-public function generateSitemapLinks ($args = array())
+public function generateExternalLink ($args = array())
 {
 	// input check
 	if (!is_array($args)) {

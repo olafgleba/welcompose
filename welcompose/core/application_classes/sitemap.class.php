@@ -148,7 +148,7 @@ public function generateSitemap ($compress)
 		if ($_page['page_type_name'] != 'WCOM_URL') {
 			$xml .= '  <url>'."\r\n";
 			$xml .= '    <loc>'.
-							$URLGENERATOR->generateSitemapLinks(array('page_id' => $_page['id'])
+							$URLGENERATOR->generateExternalLink(array('page_id' => $_page['id'])
 							)
 						.'</loc>'."\r\n";
 			$xml .= '    <changefreq>'.$_page['sitemap_changefreq'].'</changefreq>'."\r\n";
@@ -167,7 +167,7 @@ public function generateSitemap ($compress)
 				foreach ($posting as $_posting) {
 					$xml .= '  <url>'."\r\n";
 					$xml .= '    <loc>'.
-									$URLGENERATOR->generateSitemapLinks(array('page_id' => $_page['id'],
+									$URLGENERATOR->generateExternalLink(array('page_id' => $_page['id'],
 										'posting_id' => $_posting['id'],
 										'action' => 'Item')
 									)
