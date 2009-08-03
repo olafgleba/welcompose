@@ -183,6 +183,12 @@ try {
 	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
 	
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	
 	// hidden for frontend view control
 	$FORM->addElement('hidden', 'preview');
 	$FORM->applyFilter('preview', 'trim');
@@ -418,6 +424,7 @@ try {
 	
 	// set defaults
 	$FORM->setDefaults(array(
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($blog_posting['id'], null),
 		'title' => Base_Cnc::ifsetor($blog_posting['title'], null),
@@ -705,13 +712,17 @@ try {
 			@ob_end_clean();
 		}
 
+		// save request start range
+		$start = $FORM->exportValue('start');
+		$start = (!empty($start)) ? $start : 0;
+		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_blogs_postings_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
+						$FORM->exportValue('page')."&id=".$FORM->exportValue('id')."&start=".$start);
 		} else {
 			header("Location: pages_blogs_postings_select.php?page=".
-						$FORM->exportValue('page'));
+						$FORM->exportValue('page')."&start=".$start);
 		}
 		exit;
 	}
