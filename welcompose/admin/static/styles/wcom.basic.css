@@ -365,15 +365,13 @@ background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 display: block;
 width: 710px;
 margin-top: 20px;
+margin-bottom: 20px;
 background: transparent url(../img/bg_response_top.gif) 0 0 no-repeat;
 }
-/* IE 7 */
-*+html .rp_note {
+/* IE 7, IE 6 */
+*+html .rp_note, * html .rp_note {
 margin-top: 50px;
-}
-/* IE 6 */
-* html .rp_note {
-margin-top: 50px;
+margin-bottom: 30px;
 }
 #content .rp_note h1 {
 margin: 0;
