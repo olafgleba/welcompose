@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Welcompose Admin &ndash; Blog Tags &ndash; Insert}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
+ 
+<script type="text/javascript">
+var form_target = '{$callback_params.form_target}';
+var delimiter = '{$callback_params.delimiter}';
+var text = '{$callback_params.text}';
+var text_converter = '{$callback_params.text_converter}';
+var pager_page = '{$callback_params.pager_page}';
+var insert_type = '{$callback_params.insert_type}';
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.popup.js"></script>
+
+</head>
+
+<body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
+
+<div id="modalContainer">
+<div id="blogtags">
+<div id ="topic96">
+<h2>{i18n BLOG TAGS} <span>{i18n INSERT}</span></h2>
+<span class="close"><a href="#">{i18n Close Window}</a></span>
+</div>
+<br class="clearb" />
+	
+<div id="modalBody">
+<div id="firstNode">
+<form method="post" name="blogtags">
+<table>
+<tr>
+<td><a rel="blogtag" href="#" class="selAllCheckboxes">Select all</a><a rel="blogtag" href="#" class="deselAllCheckboxes">Deselect all</a></td>
+</tr>
+<fieldset>
+{foreach from=$blog_tags item=_blog_tag}
+<tr>
+<td class="initialNode"><label class="cont chbx" for="{$_blog_tag.id}"><input id="{$_blog_tag.id}" class="chbx" name="blogtag" type="checkbox" value="{$_blog_tag.word}" />{$_blog_tag.word|escape:"htmlall"}</label></td>
+</tr>
+{/foreach}
+</fieldset>
+<tr>
+<td><a href="#" class="runaction process_insert_array" rel="blogtag">{i18n Insert Tags}</a></td>
+</tr>
+</table>
+</form>
+</div>
+<br class="clearb" />
+</div>
+</div>
+</div>
+</body>
+</html>

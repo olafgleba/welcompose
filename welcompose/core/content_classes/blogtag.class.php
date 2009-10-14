@@ -426,7 +426,7 @@ public function selectBlogTag ($id)
 		WHERE
 			`content_blog_tags`.`id` = :id
 		  AND
-			`content_pages`.`project` = WCOM_CURRENT_PROJECT
+			`content_pages`.`project` = :project
 		LIMIT
 			1
 	";
