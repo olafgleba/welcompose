@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_simplepages_content_edit.php
+ * File: pages_simpleguestbooks_content_edit.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -17,7 +17,7 @@
  * $Id$
  *
  * @copyright 2008 creatics media.systems, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
@@ -81,9 +81,9 @@ try {
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
 	
-	// load simplepage class
-	/* @var $SIMPLEPAGE Content_Simplepage */
-	$SIMPLEPAGE = load('content:simplepage');
+	// load simpleguestbook class
+	/* @var $SIMPLEGUESTBOOK Content_SimpleGuestbook */
+	$SIMPLEGUESTBOOK = load('Content:SimpleGuestbook');
 	
 	// load textconverter class
 	/* @var $TEXTCONVERTER Application_Textconverter */
@@ -106,25 +106,32 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'SimplePage', 'Manage')) {
+	if (!wcom_check_access('Content', 'SimpleForm', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
-
-	// get default text converter if set
-	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
-		
+	
 	// get page
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
-	// get simple page
-	$simple_page = $SIMPLEPAGE->selectSimplePage(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+	// get simple guestbook
+	$simple_guestbook = $SIMPLEGUESTBOOK->selectSimpleGuestbook(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+	
+	// get default text converter if set
+	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
+	
+	// prepare captcha types array
+	$captcha_types = array(
+		'no' => gettext('Disable captcha'),
+		'image' => gettext('Use image captcha'),
+		'numeral' => gettext('Use numeral captcha')
+	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('simple_page', 'post');
+	$FORM = $BASE->utility->loadQuickForm('simple_guestbook', 'post');
 	
 	// hidden for navigation
 	$FORM->addElement('hidden', 'id');
@@ -141,14 +148,14 @@ try {
 	
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
+		array('id' => 'simple_guestbook_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');
 	
 	// textfield for URL title
 	$FORM->addElement('text', 'title_url', gettext('URL title'),
-		array('id' => 'simple_page_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
+		array('id' => 'simple_guestbook_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('title_url', 'trim');
 	$FORM->applyFilter('title_url', 'strip_tags');
 	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
@@ -157,12 +164,12 @@ try {
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'simple_page_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
+		array('id' => 'simple_guestbook_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
 	$FORM->applyFilter('content', 'trim');
-		
+	
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'simple_page_text_converter'));
+		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'simple_guestbook_text_converter'));
 	$FORM->applyFilter('text_converter', 'trim');
 	$FORM->applyFilter('text_converter', 'strip_tags');
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
@@ -170,15 +177,23 @@ try {
 	
 	// checkbox for apply_macros
 	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'simple_page_apply_macros', 'class' => 'chbx'));
+		array('id' => 'simple_guestbook_apply_macros', 'class' => 'chbx'));
 	$FORM->applyFilter('apply_macros', 'trim');
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
+	// select for use_captcha
+	$FORM->addElement('select', 'use_captcha', gettext('Use captcha'), $captcha_types,
+		array('id' => 'simple_guestbook_use_captcha'));
+	$FORM->applyFilter('use_captcha', 'trim');
+	$FORM->applyFilter('use_captcha', 'strip_tags');
+	$FORM->addRule('use_captcha', gettext('Chosen captcha type is out of range'),
+		'in_array_keys', $captcha_types);
+		
 	// checkbox for meta_use
 	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
-		array('id' => 'simple_page_meta_use', 'class' => 'chbx'));
+		array('id' => 'simple_guestbook_meta_use', 'class' => 'chbx'));
 	$FORM->applyFilter('meta_use', 'trim');
 	$FORM->applyFilter('meta_use', 'strip_tags');
 	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
@@ -186,21 +201,66 @@ try {
 	
 	// textfield for meta_title
 	$FORM->addElement('text', 'meta_title', gettext('Title'),
-		array('id' => 'simple_page_meta_title', 'maxlength' => 255, 'class' => 'w300'));
+		array('id' => 'simple_guestbook_meta_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('meta_title', 'trim');
 	$FORM->applyFilter('meta_title', 'strip_tags');
 	
 	// textarea for meta_keywords
 	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
-		array('id' => 'simple_page_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+		array('id' => 'simple_guestbook_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
 	$FORM->applyFilter('meta_keywords', 'trim');
 	$FORM->applyFilter('meta_keywords', 'strip_tags');
 
 	// textarea for meta_description
 	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
-		array('id' => 'simple_page_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+		array('id' => 'simple_guestbook_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
 	$FORM->applyFilter('meta_description', 'trim');
 	$FORM->applyFilter('meta_description', 'strip_tags');
+		
+	// checkbox for allow entry
+	$FORM->addElement('checkbox', 'allow_entry', gettext('Allow new entries'), null,
+		array('id' => 'simple_guestbook_allow_entry', 'class' => 'chbx'));
+	$FORM->applyFilter('allow_entry', 'trim');
+	$FORM->applyFilter('allow_entry', 'strip_tags');
+	$FORM->addRule('allow_entry', gettext('The field whether to allow new entries accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for send notification
+	$FORM->addElement('checkbox', 'send_notification', gettext('Send notification'), null,
+		array('id' => 'simple_guestbook_send_notification', 'class' => 'chbx'));
+	$FORM->applyFilter('send_notification', 'trim');
+	$FORM->applyFilter('send_notification', 'strip_tags');
+	$FORM->addRule('send_notification', gettext('The field whether to apply text macros accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// textfield for email_from
+	$FORM->addElement('text', 'notification_email_from', gettext('From: address'),
+		array('id' => 'simple_guestbook_email_from', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('notification_email_from', 'trim');
+	$FORM->applyFilter('notification_email_from', 'strip_tags');
+	if ($FORM->exportValue('send_notification')) {
+		$FORM->addRule('notification_email_from', gettext('Please enter a From: address'), 'required');
+		$FORM->addRule('notification_email_from', gettext('Please enter a valid From: address'), 'email');
+	}
+	
+	// textfield for email_to
+	$FORM->addElement('text', 'notification_email_to', gettext('To: address'),
+		array('id' => 'simple_guestbook_email_to', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('notification_email_to', 'trim');
+	$FORM->applyFilter('notification_email_to', 'strip_tags');
+	if ($FORM->exportValue('send_notification')) {
+		$FORM->addRule('notification_email_to', gettext('Please enter a To: address'), 'required');
+		$FORM->addRule('notification_email_to', gettext('Please enter a valid To: address'), 'email');
+	}
+	
+	// textfield for email_subject
+	$FORM->addElement('text', 'notification_email_subject', gettext('Subject'),
+		array('id' => 'simple_guestbook_email_subject', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('notification_email_subject', 'trim');
+	if ($FORM->exportValue('send_notification')) {
+		$FORM->applyFilter('notification_email_subject', 'strip_tags');
+		$FORM->addRule('notification_email_subject', gettext('Please enter a subject'), 'required');
+	}
 	
 	// submit button (save and stay)
 	$FORM->addElement('submit', 'save', gettext('Save edit'),
@@ -209,10 +269,10 @@ try {
 	// submit button (save and go back)
 	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
 		array('class' => 'submit200go'));
-
+	
 	// set text converter value or get default converter
-	if (isset($simple_page['text_converter'])) {
-		$_text_converter = $simple_page['text_converter'];
+	if (isset($simple_guestbook['text_converter'])) {
+		$_text_converter = $simple_guestbook['text_converter'];
 	} else {
 		if ($default_text_converter > 0) {
 			$_text_converter = $default_text_converter['id'];
@@ -220,19 +280,25 @@ try {
 			$_text_converter = null;
 		}
 	}
-		
+	
 	// set defaults
 	$FORM->setDefaults(array(
-		'id' => Base_Cnc::ifsetor($simple_page['id'], null),
-		'title' => Base_Cnc::ifsetor($simple_page['title'], null),
-		'title_url' => Base_Cnc::ifsetor($simple_page['title_url'], null),
-		'content' => Base_Cnc::ifsetor($simple_page['content_raw'], null),
+		'id' => Base_Cnc::ifsetor($simple_guestbook['id'], null),
+		'title' => Base_Cnc::ifsetor($simple_guestbook['title'], null),
+		'title_url' => Base_Cnc::ifsetor($simple_guestbook['title_url'], null),
+		'content' => Base_Cnc::ifsetor($simple_guestbook['content_raw'], null),
 		'text_converter' => $_text_converter,
-		'apply_macros' => Base_Cnc::ifsetor($simple_page['apply_macros'], null),
-		'meta_use' => Base_Cnc::ifsetor($simple_page['meta_use'], null),
-		'meta_title' => Base_Cnc::ifsetor($simple_page['meta_title_raw'], null),
-		'meta_keywords' => Base_Cnc::ifsetor($simple_page['meta_keywords'], null),
-		'meta_description' => Base_Cnc::ifsetor($simple_page['meta_description'], null),
+		'apply_macros' => Base_Cnc::ifsetor($simple_guestbook['apply_macros'], null),
+		'meta_use' => Base_Cnc::ifsetor($simple_guestbook['meta_use'], null),
+		'meta_title' => Base_Cnc::ifsetor($simple_guestbook['meta_title_raw'], null),
+		'meta_keywords' => Base_Cnc::ifsetor($simple_guestbook['meta_keywords'], null),
+		'meta_description' => Base_Cnc::ifsetor($simple_guestbook['meta_description'], null),
+		'use_captcha' => Base_Cnc::ifsetor($simple_guestbook['use_captcha'], null),
+		'allow_entry' => Base_Cnc::ifsetor($simple_guestbook['allow_entry'], null),
+		'send_notification' => Base_Cnc::ifsetor($simple_guestbook['send_notification'], null),
+		'notification_email_from' => Base_Cnc::ifsetor($simple_guestbook['notification_email_from'], null),
+		'notification_email_to' => Base_Cnc::ifsetor($simple_guestbook['notification_email_to'], null),
+		'notification_email_subject' => Base_Cnc::ifsetor($simple_guestbook['notification_email_subject'], null),
 		// ctrl var for frontend view
 		'preview' => $_SESSION['preview_ctrl']
 	));
@@ -245,7 +311,7 @@ try {
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 		
 		// remove attribute on form tag for XHTML compliance
-		//$FORM->removeAttribute('name');
+		$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
 		
 		$FORM->accept($renderer);
@@ -273,7 +339,7 @@ try {
 		// empty $_SESSION
 		if (!empty($_SESSION['response'])) {
 			$_SESSION['response'] = '';
-		}	
+		}
 		if (!empty($_SESSION['preview_ctrl'])) {
 		  	$_SESSION['preview_ctrl'] = '';
 		}
@@ -288,12 +354,9 @@ try {
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
-		// get and assign timeframes
-		$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
-		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/pages_simplepages_content_edit.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/pages_simpleguestbooks_content_edit.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
@@ -317,6 +380,12 @@ try {
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
+		$sqlData['use_captcha'] = $FORM->exportValue('use_captcha');
+		$sqlData['allow_entry'] = (string)intval($FORM->exportValue('allow_entry'));
+		$sqlData['send_notification'] = (string)intval($FORM->exportValue('send_notification'));
+		$sqlData['notification_email_from'] = $FORM->exportValue('notification_email_from');
+		$sqlData['notification_email_to'] = $FORM->exportValue('notification_email_to');
+		$sqlData['notification_email_subject'] = $FORM->exportValue('notification_email_subject');
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
@@ -363,7 +432,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$SIMPLEPAGE->updateSimplePage($FORM->exportValue('id'), $sqlData);
+			$SIMPLEGUESTBOOK->updateSimpleGuestbook($FORM->exportValue('id'), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -382,7 +451,7 @@ try {
 		if (!empty($saveAndRemainOnPage)) {
 			$_SESSION['response'] = 1;
 		}
-
+		
 		// preview control value
 		$activePreview = $FORM->exportValue('preview');
 				
@@ -391,7 +460,7 @@ try {
 			$_SESSION['preview_ctrl'] = 1;
 		}
 				
-		// save session
+		// redirect
 		$SESSION->save();
 		
 		// clean the buffer
@@ -401,7 +470,7 @@ try {
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_simplepages_content_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: pages_simpleguestbooks_content_edit.php?id=".$FORM->exportValue('id'));
 		} else {
 			header("Location: pages_select.php");
 		}

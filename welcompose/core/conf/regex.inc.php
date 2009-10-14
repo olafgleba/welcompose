@@ -8,7 +8,7 @@
  * 
  * Project owner:
  * creatics media.systems, Olaf Gleba
- * 50939 KÃ¶ln, Germany
+ * 50939 Köln, Germany
  * http://www.creatics.de
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -244,5 +244,8 @@ define("WCOM_REGEX_CALLBACK_STRING", "=^([a-z_]+)$=Di");
 
 // Defines regular expression for server http host string
 define("WCOM_REGEX_SERVER_HTTP_HOST", "=^([0-9a-z-\.]+?)$=Di");
+
+// Defines regular expression for guestbook search name strings
+define("WCOM_REGEX_SEARCH_NAME", "=^([aüößa-z-\.]+)$=Di");
 
 ?>

@@ -133,6 +133,9 @@ try {
 			case 'blog_comment_email':
 			case 'generator_form_email_from':
 			case 'generator_form_email_to':
+			case 'simple_guestbook_entry_email':
+			case 'simple_guestbook_email_from':
+			case 'simple_guestbook_email_to':
 			case 'simple_form_email_from':
 			case 'simple_form_email_to':
 			case 'user_email':
@@ -140,6 +143,7 @@ try {
 					$desc = gettext('Invalid e-mail address');
 				break;
 			case 'simple_form_title_url':
+			case 'simple_guestbook_title_url':
 			case 'blog_posting_title_url':
 			case 'page_name_url':
 					$reg = WCOM_REGEX_URL_NAME;

@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: callbacks_insert_structuraltemplates_links.php
+ * File: pages_simpleguestbooks_entries_delete.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -16,8 +16,8 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * @copyright 2009 creatics media.systems, Olaf Gleba
+ * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
@@ -64,7 +64,7 @@ try {
 	// start session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
-
+	
 	// load user class
 	/* @var $USER User_User */
 	$USER = load('user:user');
@@ -77,16 +77,12 @@ try {
 	/* @var $PROJECT Application_Project */
 	$PROJECT = load('application:project');
 	
-	// load structural template class
-	$STRUCTURALTEMPLATE = load('Content:StructuralTemplate');
+	// load page class
+	/* @var $PAGE Content_Page */
+	$PAGE = load('content:page');
 	
-	// load navigation class
-	/* @var $NAVIGATION Content_Navigation */
-	$NAVIGATION = load('Content:Navigation');
-	
-	// load helper class
-	/* @var $HELPER Utility_Helper */
-	$HELPER = load('utility:helper');
+	// load Content_SimpleGuestbookEntry class
+	$SIMPLEGUESTBOOKENTRY = load('Content:SimpleGuestbookEntry');
 	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
@@ -97,50 +93,57 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'StructuralTemplate', 'Use')) {
+	if (!wcom_check_access('Content', 'SimpleGuestbookEntry', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
-	// assign paths
-	$BASE->utility->smarty->assign('wcom_admin_root_www',
-		$BASE->_conf['path']['wcom_admin_root_www']);
+	// assign current user values
+	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
-	// assign current user and project id
-	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
-	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-
-	// collect callback parameters
-	$callback_params = array(
-		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CALLBACK_STRING),
-		'delimiter' => Base_Cnc::filterRequest($_REQUEST['delimiter'], WCOM_REGEX_NUMERIC),
-		'text' => Base_Cnc::ifsetor(utf8_decode($_REQUEST['text']), null),
-		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
-		'pager_page' => Base_Cnc::filterRequest($_REQUEST['pager_page'], WCOM_REGEX_NUMERIC),
-		'insert_type' => Base_Cnc::filterRequest($_REQUEST['insert_type'], WCOM_REGEX_CALLBACK_STRING)
-	);
+	try {
+		// start transaction
+		$BASE->db->begin();
 		
-	// assign callbacks params
-	$BASE->utility->smarty->assign('callback_params', $callback_params);
-	
-	// get structural templates
-	$structural_templates = $STRUCTURALTEMPLATE->selectStructuralTemplates();
-	$BASE->utility->smarty->assign('structural_templates', $structural_templates);
-	
-	// display the page
-	$BASE->utility->smarty->display('content/callbacks_insert_structuraltemplates_links.html');
-	
-	// flush the buffer
-	@ob_end_flush();
-	exit;
+		// get page
+		$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
+		
+		// make sure that we got a page and page id
+		if (is_null(Base_Cnc::ifsetor($page['id'], null))) {
+			header("Location: pages_select.php");
+			exit;
+		}
+		
+		// delete row
+		$SIMPLEGUESTBOOKENTRY->deleteSimpleGuestbookEntry(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+		
+		// commit transaction
+		$BASE->db->commit();
+	} catch (Exception $e) {
+		// do rollback
+		$BASE->db->rollback();
+		
+		// re-throw exception
+		throw $e;
+	}
 
-} catch (Exception $e) {
 	// clean buffer
+	if (!$BASE->debug_enabled()) {
+		@ob_end_clean();
+	}
+		
+	// go back to overview page
+	header("Location: pages_simpleguestbooks_entries_select.php?page=".(int)$page['id']);
+	exit;
+	
+} catch (Exception $e) {
+	// clean the buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
 	
 	// raise error
-	$BASE->error->displayException($e, $BASE->utility->smarty, 'error_popup_403.html');
+	$BASE->error->displayException($e, $BASE->utility->smarty);
 	$BASE->error->triggerException($e);
 	
 	// exit

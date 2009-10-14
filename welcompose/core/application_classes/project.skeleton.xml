@@ -463,6 +463,44 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_SIMPLEGUESTBOOKENTRY_USE</name>
+			<description>Allows usage of simple guestbook entries.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEGUESTBOOKENTRY_MANAGE</name>
+			<description>Allows management of simple guestbook entries.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEGUESTBOOK_USE</name>
+			<description>Allows usage of simple guestbooks.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEGUESTBOOK_MANAGE</name>
+			<description>Allows management of simple guestbooks.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_SIMPLEPAGE_USE</name>
 			<description>Allows usage of simple pages.</description>
 			<editable>0</editable>
@@ -716,7 +754,12 @@
 			<editable>0</editable>
 		</template-type>
 		<template-type>
-			<name>simple_form_business_form_mail</name>
+			<name>simple_form_personal_form_mail</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_guestbook_form_mail</name>
 			<description/>
 			<editable>0</editable>
 		</template-type>

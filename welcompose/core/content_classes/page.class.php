@@ -825,6 +825,22 @@ public function initPageContents ($page)
 				$SIMPLEPAGE = load('content:simplepage');
 				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
+		case 'WCOM_SIMPLE_GUESTBOOK':
+				// prepare sql data
+				$sqlData = array(
+					'id' => $page_info['id'],
+					'user' => WCOM_CURRENT_USER,
+					'title' => $page_info['name'],
+					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'apply_macros' => "1",
+					'allow_entry' => "1",
+					'date_added' => date('Y-m-d H:i:s')
+				);
+				
+				// create simple guestbook
+				$SIMPLEGUESTBOOK = load('Content:SimpleGuestbook');
+				$SIMPLEGUESTBOOK->addSimpleGuestbook($page_info['id'], $sqlData);
+			break;
 		case 'WCOM_BLOG':
 		case 'WCOM_URL':
 		default:

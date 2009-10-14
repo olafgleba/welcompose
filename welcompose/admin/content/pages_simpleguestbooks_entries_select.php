@@ -2,9 +2,9 @@
 
 /**
  * Project: Welcompose
- * File: pages_blogs_postings_select.php
+ * File: pages_simplebooks_entries_select.php
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2009 creatics media.systems
  *
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -16,8 +16,8 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * @copyright 2009 creatics media.systems, Olaf Gleba
+ * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
@@ -81,9 +81,8 @@ try {
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
 
-	// load blogposting class
-	/* @var $BLOGPOSTING Content_Blogposting */
-	$BLOGPOSTING = load('content:blogposting');
+	// load Content_SimpleGuestbookEntry class
+	$SIMPLEGUESTBOOKENTRY = load('Content:SimpleGuestbookEntry');
 	
 	// load helper class
 	/* @var $HELPER Utility_Helper */
@@ -98,7 +97,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Content', 'BlogPosting', 'Manage')) {
+	if (!wcom_check_access('Content', 'SimpleGuestbookEntry', 'Manage')) {
 		throw new Exception("Access denied");
 	}
 	
@@ -131,37 +130,40 @@ try {
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
 	$BASE->utility->smarty->assign('page', $page);
 	
-	// get blog postings
-	$blog_postings = $BLOGPOSTING->selectBlogPostings(array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+	// get simple guestbook entries
+	$simpleguestbook_entries = $SIMPLEGUESTBOOKENTRY->selectSimpleGuestbookEntries(array(
+		'book' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => 20,
-		'order_macro' => 'DATE_ADDED:DESC'
+		'order_macro' => 'DATE_ADDED:DESC',
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	));
-	$BASE->utility->smarty->assign('blog_postings', $blog_postings);
 	
-	// count available blog postings
-	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
-		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC)
-	);
-	$posting_count = $BLOGPOSTING->countBlogPostings($select_params);
-	$BASE->utility->smarty->assign('posting_count', $posting_count);
+	$BASE->utility->smarty->assign('simpleguestbook_entries', $simpleguestbook_entries);
+
+//Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	
-	// count total amount of blog postings
+	// count available simple guestbook entries
 	$select_params = array(
-		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'book' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC)
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
-	$total_posting_count = $BLOGPOSTING->countBlogPostings($select_params);
-	$BASE->utility->smarty->assign('total_posting_count', $total_posting_count);
+	$entry_count = $SIMPLEGUESTBOOKENTRY->countSimpleGuestbookEntries($select_params);
+	$BASE->utility->smarty->assign('entry_count', $entry_count);
+	
+	// count total amount of simple guestbook entries
+	$select_params = array(
+		'book' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
+	);
+	$total_entry_count = $SIMPLEGUESTBOOKENTRY->countSimpleGuestbookEntries($select_params);
+	$BASE->utility->smarty->assign('total_entry_count', $total_entry_count);
 	
 	// prepare and assign page index
-	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($posting_count, 20));
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($total_entry_count, 20));
 	
 	// get and assign timeframes
 	$BASE->utility->smarty->assign('timeframes', $HELPER->getTimeframes());
@@ -169,14 +171,13 @@ try {
 	// import and assign request params
 	$request = array(
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// display the page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-	$BASE->utility->smarty->display('content/pages_blogs_postings_select.html', WCOM_TEMPLATE_KEY);
+	$BASE->utility->smarty->display('content/pages_simpleguestbooks_entries_select.html', WCOM_TEMPLATE_KEY);
 		
 	// flush the buffer
 	@ob_end_flush();

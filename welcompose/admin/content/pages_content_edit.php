@@ -128,6 +128,9 @@ try {
 		case 'WCOM_SIMPLE_PAGE':
 				header("Location: pages_simplepages_content_edit.php?id=".(int)$page['id']);
 			exit;
+		case 'WCOM_SIMPLE_GUESTBOOK':
+				header("Location: pages_simpleguestbooks_content_edit.php?id=".(int)$page['id']);
+			exit;
 		case 'WCOM_URL':
 				header("Location: pages_urls_content_edit.php?id=".(int)$page['id']);
 			exit;
