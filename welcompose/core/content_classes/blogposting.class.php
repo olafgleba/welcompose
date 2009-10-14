@@ -225,6 +225,11 @@ public function selectBlogPosting ($id)
 			`content_blog_postings`.`feed_summary` AS `feed_summary`,
 			`content_blog_postings`.`text_converter` AS `text_converter`,
 			`content_blog_postings`.`apply_macros` AS `apply_macros`,
+			`content_blog_postings`.`meta_use` AS `meta_use`,
+			`content_blog_postings`.`meta_title_raw` AS `meta_title_raw`,
+			`content_blog_postings`.`meta_title` AS `meta_title`,
+			`content_blog_postings`.`meta_keywords` AS `meta_keywords`,
+			`content_blog_postings`.`meta_description` AS `meta_description`,
 			`content_blog_postings`.`draft` AS `draft`,
 			`content_blog_postings`.`ping` AS `ping`,
 			`content_blog_postings`.`comments_enable` AS `comments_enable`,
@@ -338,6 +343,7 @@ public function selectBlogPosting ($id)
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
  * <li>tag_word_url, string, optional: Tag word</li>
+ * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * <li>order_marco, string, otpional: How to sort the result set.
@@ -431,6 +437,11 @@ public function selectBlogPostings ($params = array())
 			`content_blog_postings`.`feed_summary` AS `feed_summary`,
 			`content_blog_postings`.`text_converter` AS `text_converter`,
 			`content_blog_postings`.`apply_macros` AS `apply_macros`,
+			`content_blog_postings`.`meta_use` AS `meta_use`,
+			`content_blog_postings`.`meta_title_raw` AS `meta_title_raw`,
+			`content_blog_postings`.`meta_title` AS `meta_title`,
+			`content_blog_postings`.`meta_keywords` AS `meta_keywords`,
+			`content_blog_postings`.`meta_description` AS `meta_description`,
 			`content_blog_postings`.`draft` AS `draft`,
 			`content_blog_postings`.`ping` AS `ping`,
 			`content_blog_postings`.`comments_enable` AS `comments_enable`,
@@ -600,6 +611,7 @@ public function selectBlogPostings ($params = array())
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
  * <li>tag_word_url, string, optional: Tag word</li>
+ * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>

@@ -189,6 +189,32 @@ try {
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for meta_use
+	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
+		array('id' => 'simple_form_meta_use', 'class' => 'chbx'));
+	$FORM->applyFilter('meta_use', 'trim');
+	$FORM->applyFilter('meta_use', 'strip_tags');
+	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	
+	// textfield for meta_title
+	$FORM->addElement('text', 'meta_title', gettext('Title'),
+		array('id' => 'simple_form_meta_title', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('meta_title', 'trim');
+	$FORM->applyFilter('meta_title', 'strip_tags');
+	
+	// textarea for meta_keywords
+	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
+		array('id' => 'simple_form_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+	$FORM->applyFilter('meta_keywords', 'trim');
+	$FORM->applyFilter('meta_keywords', 'strip_tags');
+
+	// textarea for meta_description
+	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
+		array('id' => 'simple_form_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+	$FORM->applyFilter('meta_description', 'trim');
+	$FORM->applyFilter('meta_description', 'strip_tags');
 	
 	// select for type
 	$FORM->addElement('select', 'type', gettext('Form type'), $types,
@@ -264,6 +290,10 @@ try {
 		'content' => Base_Cnc::ifsetor($simple_form['content_raw'], null),
 		'text_converter' => $_text_converter,
 		'apply_macros' => Base_Cnc::ifsetor($simple_form['apply_macros'], null),
+		'meta_use' => Base_Cnc::ifsetor($simple_form['meta_use'], null),
+		'meta_title' => Base_Cnc::ifsetor($simple_form['meta_title_raw'], null),
+		'meta_keywords' => Base_Cnc::ifsetor($simple_form['meta_keywords'], null),
+		'meta_description' => Base_Cnc::ifsetor($simple_form['meta_description'], null),
 		'type' => ($SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
 			'' : Base_Cnc::ifsetor($simple_form['type'], null)),
 		'custom_type' => (!$SIMPLEFORM->isCustomFormType(Base_Cnc::ifsetor($simple_form['type'], null)) ?
@@ -348,6 +378,11 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
+		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['meta_title_raw'] = null;
+		$sqlData['meta_title'] = null;
+		$sqlData['meta_keywords'] = null;
+		$sqlData['meta_description'] = null;
 		$sqlData['email_from'] = $FORM->exportValue('email_from');
 		$sqlData['email_to'] = $FORM->exportValue('email_to');
 		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
@@ -385,6 +420,15 @@ try {
 			
 			// assign content to sql data array
 			$sqlData['content'] = $content;
+		}
+		
+		// prepare custom meta tags
+		if ($FORM->exportValue('meta_use') == 1) { 
+			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
+			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
+				$FORM->exportValue('meta_title'));
+			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
+			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
 		}
 		
 		// test sql data for pear errors

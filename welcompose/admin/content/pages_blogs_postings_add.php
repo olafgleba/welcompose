@@ -345,10 +345,36 @@ try {
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for meta_use
+	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
+		array('id' => 'blog_posting_meta_use', 'class' => 'chbx'));
+	$FORM->applyFilter('meta_use', 'trim');
+	$FORM->applyFilter('meta_use', 'strip_tags');
+	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	
+	// textfield for meta_title
+	$FORM->addElement('text', 'meta_title', gettext('Title'),
+		array('id' => 'blog_posting_meta_title', 'maxlength' => 255, 'class' => 'w300'));
+	$FORM->applyFilter('meta_title', 'trim');
+	$FORM->applyFilter('meta_title', 'strip_tags');
+	
+	// textarea for meta_keywords
+	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
+		array('id' => 'blog_posting_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+	$FORM->applyFilter('meta_keywords', 'trim');
+	$FORM->applyFilter('meta_keywords', 'strip_tags');
+
+	// textarea for meta_description
+	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
+		array('id' => 'blog_posting_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
+	$FORM->applyFilter('meta_description', 'trim');
+	$FORM->applyFilter('meta_description', 'strip_tags');
 	
 	// textarea for tags
 	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
+		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
 	$FORM->applyFilter('tags', 'trim');
 	$FORM->applyFilter('tags', 'strip_tags');
 	
@@ -482,6 +508,11 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
+		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['meta_title_raw'] = null;
+		$sqlData['meta_title'] = null;
+		$sqlData['meta_keywords'] = null;
+		$sqlData['meta_description'] = null;
 		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
 		$sqlData['ping'] = (string)intval($FORM->exportValue('ping'));
 		$sqlData['comments_enable'] = (string)intval($FORM->exportValue('comments_enable'));
@@ -532,6 +563,15 @@ try {
 			$sqlData['summary'] = $summary;
 			$sqlData['content'] = $content;
 			$sqlData['feed_summary'] = $feed_summary;
+		}
+		
+		// prepare custom meta tags
+		if ($FORM->exportValue('meta_use') == 1) { 
+			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
+			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
+				$FORM->exportValue('meta_title'));
+			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
+			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
 		}
 		
 		// test sql data for pear errors
@@ -625,9 +665,11 @@ try {
 			// get configured ping service configurations
 			$configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array('page' => $page['id']));
 			
-			// issue pings
-			foreach ($configurations as $_configuration) {
-				$PINGSERVICE->pingService($_configuration['id']);
+			// issue pings if configurations exits
+			if (!empty($configurations)) {
+				foreach ($configurations as $_configuration) {
+					$PINGSERVICE->pingService($_configuration['id']);
+				}
 			}
 		}
 	
