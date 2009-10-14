@@ -52,7 +52,7 @@ rm -rf database
 rm -rf documentation
 
 # compress js
-svn export http://svn.devjavu.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
+svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
 if [ ! -f "jsmin.py" ] ; then
 	echo "JavaScript minifier not found. Download failed, eh?"
 	exit 1
@@ -66,7 +66,7 @@ done
 rm -rf jsmin.py
 
 # compress css
-svn export http://svn.devjavu.com/welcompose/trunk/scripts/third_party/csstidy csstidy
+svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/csstidy csstidy
 if [ ! -d "csstidy" ] ; then
 	echo "CSSTidy binary folder not found. Download failed, eh?"
 	exit 1
