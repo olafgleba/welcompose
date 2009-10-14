@@ -898,6 +898,11 @@ CREATE TABLE `content_simple_forms` (
   `content` text,
   `text_converter` int(11) UNSIGNED,
   `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
   `type` varchar(255) NOT NULL DEFAULT 'PersonalForm',
   `email_from` varchar(255),
   `email_to` varchar(255),
@@ -934,6 +939,11 @@ CREATE TABLE `content_generator_forms` (
   `content` text,
   `text_converter` int(11) UNSIGNED,
   `apply_macros` enum('0','1') DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
   `email_from` varchar(255),
   `email_to` varchar(255),
   `email_subject` varchar(255),
@@ -975,6 +985,11 @@ CREATE TABLE `content_blog_postings` (
   `feed_summary` text,
   `text_converter` int(11) UNSIGNED,
   `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
   `draft` enum('0','1') DEFAULT '0',
   `ping` enum('0','1') DEFAULT '1',
   `comments_enable` enum('0','1') DEFAULT '1',
@@ -1132,6 +1147,74 @@ CREATE TABLE `content_generator_form_fields` (
     ON UPDATE CASCADE
 )
 ENGINE=INNODB;
+
+-- Drop table content_simple_guestbooks
+DROP TABLE IF EXISTS `content_simple_guestbooks`;
+
+CREATE TABLE `content_simple_guestbooks` (
+  `id` int(11) unsigned NOT NULL,
+  `user` int(11) unsigned NOT NULL,
+  `title` varchar(255) default NULL,
+  `title_url` varchar(255) default NULL,
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) unsigned default NULL,
+  `apply_macros` enum('0','1') default '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
+  `use_captcha` enum('no','image','numeral') default NULL,
+  `allow_entry` enum('0','1') default '0',
+  `send_notification` enum('0','1') default '0',
+  `notification_email_from` varchar(255) default NULL,
+  `notification_email_to` varchar(255) default NULL,
+  `notification_email_subject` varchar(255) default NULL,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY  (`id`),
+  INDEX `user` (`user`),
+  INDEX `text_converter` (`text_converter`),
+  CONSTRAINT `content_simple_guestbooks.id2content_pages.id` FOREIGN KEY (`id`)
+    REFERENCES `content_pages` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_guestbooks.user2user_user.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_guestbooks2application_text_converter` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+) 
+ENGINE=InnoDB;
+
+-- Drop table content_simple_guestbook_entries
+DROP TABLE IF EXISTS `content_simple_guestbook_entries`;
+
+CREATE TABLE `content_simple_guestbook_entries` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `book` int(11) unsigned NOT NULL,
+  `user` int(11) default NULL,
+  `name` varchar(255) default NULL,
+  `email` varchar(255) default NULL,
+  `subject` varchar(255) default NULL,
+  `content` text,
+  `content_raw` text,
+  `text_converter` int(11) default NULL,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY  (`id`),
+  INDEX `book` (`book`),
+  INDEX `text_converter` (`text_converter`),
+  CONSTRAINT `content_simple_gb_entries.book2content_simple_gb.id` FOREIGN KEY (`book`)
+    REFERENCES `content_simple_guestbooks` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) 
+ENGINE=InnoDB;
 
 -- Drop table content_blog_tags2content_blog_postings
 DROP TABLE IF EXISTS `content_blog_tags2content_blog_postings`;
