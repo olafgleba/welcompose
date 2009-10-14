@@ -27,7 +27,7 @@ fi
 rm -rf wcom-trunk
 
 # create package output directory
-mkdir "welcompose-0.8.6-$BUILD_NUMBER"
+mkdir "welcompose-0.8.8-$BUILD_NUMBER"
 
 # export trunk
 svn export "$WELCOMPOSE_REPOS" wcom-trunk
@@ -81,29 +81,29 @@ done
 rm -rf csstidy
 
 # rename welcompose to match version 
-mv welcompose welcompose-0.8.6
+mv welcompose welcompose-0.8.8
 
 # create full source packages
-tar cvfz "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-full-src".tar.gz welcompose-0.8.6
-tar cvfj "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-full-src".tar.bz2 welcompose-0.8.6
-zip -r "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-full-src".zip welcompose-0.8.6
+tar cvfz "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-full-src".tar.gz welcompose-0.8.8
+tar cvfj "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-full-src".tar.bz2 welcompose-0.8.8
+zip -r "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-full-src".zip welcompose-0.8.8
 
 # rename welcompose to match reverse 
-mv welcompose-0.8.6 welcompose
+mv welcompose-0.8.8 welcompose
 
 # remove update directory
 rm -rf welcompose/update
 
 # rename welcompose to match version 
-mv welcompose welcompose-0.8.6
+mv welcompose welcompose-0.8.8
 
 # create source packages without updater and with compressed js
-tar cvfz "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-src".tar.gz welcompose-0.8.6
-tar cvfj "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-src".tar.bz2 welcompose-0.8.6
-zip -r "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6-src".zip welcompose-0.8.6
+tar cvfz "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-src".tar.gz welcompose-0.8.8
+tar cvfj "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-src".tar.bz2 welcompose-0.8.8
+zip -r "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8-src".zip welcompose-0.8.8
 
 # rename welcompose reverse
-mv welcompose-0.8.6 welcompose
+mv welcompose-0.8.8 welcompose
 
 # create compressed package
 echo "Creating compressed package"
@@ -129,16 +129,16 @@ php scripts/installer/create_install_package.php \
 rm -rf welcompose
 
 # create welcompose directory
-mkdir welcompose-0.8.6
+mkdir welcompose-0.8.8
 
 # move installer files to welcompose directory
-mv install-zlib.php welcompose-0.8.6
-mv install.php welcompose-0.8.6
+mv install-zlib.php welcompose-0.8.8
+mv install.php welcompose-0.8.8
 
 # create tarball (gzipped and bzipped) & zip file
-tar cvfz "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6".tar.gz welcompose-0.8.6
-tar cvfj "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6".tar.bz2 welcompose-0.8.6
-zip -r "../welcompose-0.8.6-$BUILD_NUMBER/welcompose-0.8.6".zip welcompose-0.8.6
+tar cvfz "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8".tar.gz welcompose-0.8.8
+tar cvfj "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8".tar.bz2 welcompose-0.8.8
+zip -r "../welcompose-0.8.8-$BUILD_NUMBER/welcompose-0.8.8".zip welcompose-0.8.8
 
 # leave wcom-trunk directory
 cd ../
@@ -148,8 +148,8 @@ rm -rf wcom-trunk
 
 # making checksums
 echo "Making md5 checksums"
-for i in `find welcompose-0.8.6-$BUILD_NUMBER -type f -name "*"` ; do
-	md5 $i >> "welcompose-0.8.6-$BUILD_NUMBER/checksum.txt"
+for i in `find welcompose-0.8.8-$BUILD_NUMBER -type f -name "*"` ; do
+	md5 $i >> "welcompose-0.8.8-$BUILD_NUMBER/checksum.txt"
 done
 
 echo "Done!"
