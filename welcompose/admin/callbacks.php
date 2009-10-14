@@ -255,6 +255,21 @@ try {
 			'lang' => (!empty($object['lang'])) ? sprintf('{get_abbreviation id="%u" value="lang"}', $object['id']) : NULL
 		);
 		
+	} elseif ($_REQUEST['type'] == 'blogtag') {
+		
+		// define insert type static as reference
+		// this is because we want to insert the raw content nonetheless the path references
+		$insert_type = 'InternalReference';
+		
+		// As we directly deliver the content to the textconverter without the
+		// need to query the database, there is nothing else to do here.
+		
+		// prepare callback args
+		$args = array(
+			'text' => $_REQUEST['text'],
+			'href' => ''
+		);
+	
 	// follow ups
 	} elseif ($_REQUEST['type'] == '') {	
 		// other types
@@ -263,8 +278,8 @@ try {
 	// execute text converter callback
 	$text_converter = Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC);
 	
-	// if no text_converter is set fetch default
-	// to asure we can fall back on default 
+	// if no text_converter is set make
+	// sure we can fall back on default 
 	if ($text_converter == '0') {
 		$text_converters = $TEXTCONVERTER->selectTextConverters();
 		
