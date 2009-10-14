@@ -118,7 +118,11 @@ try {
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
-	
+
+	// set header code to spare search engines the 
+	// indexing of the error output
+	header("HTTP/1.1 404 Not Found");
+		
 	// raise error
 	$BASE->error->displayException($e, $BASE->utility->smarty);
 	$BASE->error->triggerException($e);
