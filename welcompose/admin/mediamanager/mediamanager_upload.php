@@ -81,6 +81,10 @@ try {
 	/* @var $OBJECT Media_Object */
 	$OBJECT = load('Media:Object');
 	
+	// load Media_Tag
+	/* @var $TAG Media_Tag */
+	$TAG = load('Media:Tag');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -120,7 +124,7 @@ try {
 	
 	// textarea for tags
 	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'tags', 'class' => 'w540h150', 'cols' => 3, 'rows' => 2));
+		array('id' => 'tags', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('tags', 'trim');
 	$FORM->applyFilter('tags', 'strip_tags');
 	$FORM->addRule('tags', gettext('Please add at least one tag'), 'required');	
@@ -185,6 +189,9 @@ try {
 			'user' => WCOM_CURRENT_USER,
 			'order_macro' => 'NAME'
 		);
+		
+		// assign currently used media tags
+		$BASE->utility->smarty->assign('current_tags', $TAG->selectTags());
 
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -238,9 +245,6 @@ try {
 			// check sql data
 			$HELPER = load('utility:helper');
 			$HELPER->testSqlDataForPearErrors($sqlData);
-			
-			// load tag class
-			$TAG = load('Media:Tag');
 			
 			// insert it
 			try {

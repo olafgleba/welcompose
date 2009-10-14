@@ -265,6 +265,10 @@ var definitions = {
 		}
 	},
 	'input.urlify' : function(el){
+		el.onfocus = function(){
+			Helper.convertFieldValuesToValidUrl(this, 'for');
+			return false;
+		}
 		el.onkeyup = function(){
 			Helper.convertFieldValuesToValidUrl(this, 'for');
 			return false;
@@ -342,6 +346,31 @@ var definitions = {
 	'#simple_page_meta_use' : function(el){
 		el.onclick = function(){
 			Status.getCbx(new Array('simple_page_meta_use'));
+		}
+	},
+	'#simple_form_meta_use' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('simple_form_meta_use'));
+		}
+	},
+	'#generator_form_meta_use' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('generator_form_meta_use'));
+		}
+	},
+	'#blog_posting_meta_use' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('blog_posting_meta_use'));
+		}
+	},
+	'#simple_guestbook_meta_use' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('simple_guestbook_meta_use'));
+		}
+	},
+	'#simple_guestbook_send_notification' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('simple_guestbook_send_notification'));
 		}
 	}
 };

@@ -181,6 +181,16 @@ function Base ()
 		 * Help class
 		 */
 		this.helpClassRemoveMediamanager = 'iHelpRemoveMediamanager';
+		
+		/**
+		 * Core class
+		 */
+		this.coreShowElemClass = 'showElem';
+
+		/**
+		 * Core class
+		 */
+		this.coreHideElemClass = 'hideElem';
 
 		/**
 		 * Help div for mediamanager
@@ -493,52 +503,18 @@ Init.prototype.toggleViewByChbx = Init_toggleViewByChbx;
  */
 function Init_load ()
 {	
-	try {
-		// See http://dev.rubyonrails.org/ticket/6481
-		//_objectHackit();
-		
+	try {		
 		// DONT EVER CHANGE THIS FUNCTION CALL
 		// set global debug var first
 		_debug();
 		
+		// call init enviroment directly afterwards
 		Init.getVars();
 
 	} catch (e) {
 		_applyError(e);
 	}
 }
-
-/**
- * Temporary Fix for misbehaviour FF2.0 -> prototype object.extend calling.
- * See http://dev.rubyonrails.org/ticket/6481
- * 
- * @private
- * @throws applyError on exception
- */
-/*
-function _objectHackit ()
-{	
-    if (Object.extend) {
-     		return;
-   	}
-    Object.extend = function(destination, source) {
-      for (property in source) {
-        destination[property] = source[property];
-      }
-      return destination;
-    }
-    Object.inspect = function(object) {
-      try {
-        if (object == undefined) return 'undefined';
-        if (object == null) return 'null';
-        return object.inspect ? object.inspect() : object.toString();
-      } catch (e) {
-        if (e instanceof RangeError) return '...';
-        throw e;
-      }
-    }
-}
-*/
 
 /**
  * Getter function for several actions to be executed on load of page.
@@ -630,12 +606,12 @@ function Init_getCbxStatus (elems)
 {
 	try {
 		for (var e = 0; e < elems.length; e++) {
-
+			
 			var range = String(elems[e])  + '_container';
 			
 			if ($(range)) {
 				if ($(elems[e]).checked === true) {
-	
+				
 					allNodes = document.getElementsByClassName("bez");	
 				
 					for (var i = 0; i < allNodes.length; i++) {
@@ -1116,6 +1092,7 @@ function Help_processMediamanager (ttarget)
 	}
 }
 
+
 /**
  * Set Focus related to pointed element.
  *
@@ -1132,6 +1109,95 @@ function Help_setCorrespondingFocus (elem, attr)
  * Building new object instance of class Help
  */
 Help = new Help();
+
+
+
+/**
+ * Constructs the Core class
+ * 
+ * @class The Core class is the appropriate class for
+ * doing basic things like show/hide html elements.
+ * The scope is application wide.
+ *
+ * @constructor
+ * @throws applyError on exception
+ */
+function Core ()
+{
+	try {
+		// construct empty
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+
+/* Inherit from Base */
+Core.prototype = new Base();
+
+/**
+ * Instance Methods from prototype @class Core
+ */
+Core.prototype.showElem = Core_showElem;
+Core.prototype.hideElem = Core_hideElem;
+
+/**
+ * Show misc. html elements.
+ *
+ * @param {string} elem Current element
+ * @param {string} depth what parent to identify
+ * @throws applyError on exception
+ */
+function Core_showElem (elem, depth)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.depth = depth;
+		this.elem.className = this.coreHideElemClass;	
+		this.processId = Helper.getAttrParentNodeNextNode('id', this.elem, depth);
+		
+		Effect.Appear($(this.processId),{delay: 0, duration: 0.5});	
+		
+		Element.update(this.elem, this.elementHtmlHide);
+		Behaviour.reapply('.' + this.elem.className);
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Hide misc. html elements.
+ *
+ * @param {string} elem Current element
+ * @param {string} depth what parent to identify
+ * @throws applyError on exception
+ */
+function Core_hideElem (elem, depth)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.depth = depth;
+		this.elem.className = this.coreShowElemClass;
+		this.processId = Helper.getAttrParentNodeNextNode('id', this.elem, depth);
+		
+		Effect.Fade($(this.processId),{delay: 0, duration: 0.4});	
+
+		Element.update(this.elem, this.elementHtmlShow);
+		Behaviour.reapply('.' + this.elem.className);
+	
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Building new object instance of class Core
+ */
+Core = new Core();
+
 
 
 

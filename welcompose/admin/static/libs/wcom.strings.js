@@ -14,7 +14,7 @@
  *
  * $Id$
  *
- * @copyright 2004-2005 sopic GmbH
+ * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3

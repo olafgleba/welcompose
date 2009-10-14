@@ -148,9 +148,10 @@ function Mediamanager_showElement (elem)
 			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+			var currentTagsElem = Element.getStyle('mm_current_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 			
-			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			var collectElems = String(includeTypesElem + tagsElem + + currentTagsElem + timeframeElem);
 			
 			// give option 'Include Types' a little more space since we have two rows here
 			if (includeTypesElem == 'block') {
@@ -212,6 +213,7 @@ function Mediamanager_hideElement (elem)
 			this.elem.className = this.mediamanagerClassShowMyLocal;			
 			var includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+			var currentTagsElem = Element.getStyle('mm_current_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');			
 			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 			
@@ -293,8 +295,6 @@ function Mediamanager_checkOccurrences (elems, row)
 		}
 		
 		var res = elems.match(/block/gi);
-		
-		//alert (res.length);
 				
 		if (!res) {
 			Element.setStyle(prefix + 'mm_content', {height: '412px'});
@@ -361,6 +361,7 @@ function Mediamanager_applyBehaviour ()
 		Behaviour.reapply('a.mm_myLocal');
 		Behaviour.reapply('a.mm_myFlickr');
 		Behaviour.reapply('#mm_include_types_wrap');
+		Behaviour.reapply('#mm_current_tags_wrap');
 		Behaviour.reapply('#mm_timeframe');
 		Behaviour.reapply('#mm_user');
 		Behaviour.reapply('#mm_photoset');
@@ -436,10 +437,11 @@ function Mediamanager_preserveElementStatusMyLocal ()
 	try {	
 		var current_includeTypesElem = Element.getStyle('mm_include_types_wrap', 'display');
 		var current_tagsElem = Element.getStyle('mm_tags_wrap', 'display');
+		var current_currentTagsElem = Element.getStyle('mm_current_tags_wrap', 'display');
 		var current_timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 	
 		// make global -> use in func setCurrentElementStatusMyLocal
-		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_timeframeElem);
+		previousElemsStatus = new Array (current_includeTypesElem, current_tagsElem, current_currentTagsElem, current_timeframeElem);
 		
 	} catch (e) {
 		_applyError(e);
@@ -462,9 +464,10 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 	try {		
 		Element.setStyle('mm_include_types_wrap', {display: previousElemsStatus[0]});
 		Element.setStyle('mm_tags_wrap', {display: previousElemsStatus[1]});
-		Element.setStyle('mm_timeframe_wrap', {display: previousElemsStatus[2]});
+		Element.setStyle('mm_current_tags_wrap', {display: previousElemsStatus[2]});
+		Element.setStyle('mm_timeframe_wrap', {display: previousElemsStatus[3]});
 		
-		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2]);
+		collectElems = String(previousElemsStatus[0] + previousElemsStatus[1] + previousElemsStatus[2] + previousElemsStatus[3]);
 
 		// give option 'Include Types' a little more space since we have two rows here
 		if (previousElemsStatus[0] == 'block') {
@@ -488,6 +491,10 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 		if (previousElemsStatus[2] == 'block') {
 			parentElem[2].lastChild.className = this.mediamanagerClassHideMyLocal;
 			parentElem[2].lastChild.innerHTML = this.elementHtmlHide;
+		}
+		if (previousElemsStatus[3] == 'block') {
+			parentElem[3].lastChild.className = this.mediamanagerClassHideMyLocal;
+			parentElem[3].lastChild.innerHTML = this.elementHtmlHide;
 		}
 	} catch (e) {
 		_applyError(e);

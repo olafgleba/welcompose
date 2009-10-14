@@ -75,7 +75,20 @@ var pager_page = '{$pager_page}';
 <label class="cont h13" for="description"><span class="bez">{$form.description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.description.html}</label>
 
-<label class="cont h13" for="tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<div class="act">
+<ul class="shownav">
+<li>{i18n Current tags}<span class="showElem"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></li>
+</ul>
+</div>
+<div class="current_tags_wrap" id="current_tags_wrap">
+<ul>
+{foreach from=$current_tags item=_current_tags}
+<li><a class="insert_tags" title="{i18n Inser Tag}" href="#" rel="{$_current_tags.word_url}">{$_current_tags.word_url|truncate:60:"...":true|escape:"htmlall"|nl2br}</a></li>
+{/foreach}
+</ul>
+</div>
+
+<label class="cont h04act" for="tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.tags.html}</label>
 
 {$form.submit.html}

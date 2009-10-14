@@ -61,21 +61,29 @@ try {
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 
-	// load Base_Session
+	// start Base_Session
+	/* @var $SESSION Base_Session */
 	$SESSION = load('Base:Session');
-
-	// load User_User
+	
+	// load user class
+	/* @var $USER User_User */
 	$USER = load('User:User');
-
-	// load User_Login
+	
+	// load login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
 
 	// load Application_Project
+	/* @var $PROJECT Application_Project */
 	$PROJECT = load('Application:Project');
 	
 	// load Media_Object
+	/* @var $OBJECT Media_Object */
 	$OBJECT = load('Media:Object');
+	
+	// load Media_Tag
+	/* @var $TAG Media_Tag */
+	$TAG = load('Media:Tag');
 	
 	// load Utility_Helper
 	$HELPER = load('Utility:Helper');
@@ -143,6 +151,9 @@ try {
 		'limit' => (($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])
 	);
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
+	
+	// assign currently used media tags
+	$BASE->utility->smarty->assign('current_tags', $TAG->selectTags());
 	
 	// count objects
 	$count_params = array(

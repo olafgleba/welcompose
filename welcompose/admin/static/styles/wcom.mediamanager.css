@@ -197,6 +197,9 @@ height: 41px;
 #mm_tags_wrap {
 display: block;
 }
+#mm_current_tags_wrap {
+display: none;
+}
 #mm_timeframe_wrap {
 display: none;
 }
@@ -230,6 +233,16 @@ padding: 0;
 #mm_user_wrap table td {
 margin: 0;
 padding: 0 2px 0 0;
+}
+
+#mm_current_tags_wrap ul {
+list-style: none;
+padding: 6px 2px;
+color: #666;
+}
+#mm_current_tags_wrap ul li {
+padding: 3px 4px 3px 0;
+display:inline;
 }
 
 #myLocal_mm_contentToPopulate table, #myFlickr_mm_contentToPopulate table {
@@ -327,7 +340,8 @@ display: none;
 #modalContainer #globaltemplates #firstNode table,
 #modalContainer #globalboxes #firstNode table,
 #modalContainer #structuraltemplates #firstNode table,
-#modalContainer #abbreviations #firstNode table {
+#modalContainer #abbreviations #firstNode table,
+#modalContainer #blogtags #firstNode table {
 float: left;
 width: 425px;
 padding: 0;
@@ -341,7 +355,9 @@ background: #f9f9f9;
 #modalContainer #abbreviations #firstNode table {
 width: 720px;
 }
-#modalContainer #abbreviations #firstNode table td {
+#modalContainer #abbreviations #firstNode table td,
+#modalContainer #structuraltemplates #firstNode table td,
+#modalContainer #blogtags #firstNode table td {
 color: #000;
 }
 td.abbreviation {
@@ -451,6 +467,87 @@ background: transparent url(../img/icons/arrow_right_on.gif) -5px 2px no-repeat;
 #indicator_pagesLinks {
 display: none;
 }
+
+/* blogtags */
+#blogtags table tr:hover {
+background-color: transparent;
+}
+
+#blogtags #firstNode a {
+display: block;
+padding: 3px 0 3px 18px;
+margin: 0 2px 0 2px;
+text-decoration: none;
+}
+#blogtags #firstNode a:link, #blogtags #firstNode a:visited {
+color: #000;
+background: transparent url(../img/icons/link.gif) 0 -1px no-repeat;
+}
+#blogtags #firstNode a:hover, #blogtags #firstNode a:active, #blogtags #firstNode a:focus {
+color: #ff620d;
+}
+#blogtags #firstNode a.runaction:link, #blogtags #firstNode a.runaction:visited {
+display: block;
+text-align: left;
+height: 16px;
+font-weight: bold;
+color: #fff;
+border: 0 none;
+text-decoration: none;
+padding: 1px 0 3px 6px;
+cursor: pointer;
+background: #ff620d url(../img/submit140.gif) no-repeat;
+width: 134px;
+margin: 15px 0 15px 0;
+}
+#blogtags #firstNode a.selAllCheckboxes:link, #blogtags #firstNode a.selAllCheckboxes:visited,
+#blogtags #firstNode a.deselAllCheckboxes:link, #blogtags #firstNode a.deselAllCheckboxes:visited {
+float:left;
+display:inline;
+margin-right:10px;
+padding-top:8px;
+padding-bottom:8px;
+background-position: 0 4px;
+}
+
+label.cont {
+cursor: pointer;
+}	
+input.chbx {
+margin: 3px 2px 3px 0;
+cursor: pointer;
+}
+
+/* Action Popup nav */
+.shownav {
+height: 16px;
+}
+.shownav li img {
+vertical-align:middle;
+}
+
+.shownav a:hover, .shownav a:active, .shownav a:focus {
+color: #ff620d;
+background: transparent;
+}
+
+.current_tags_wrap {
+display:none;
+margin: 2px 2px 5px 140px;
+background: #f9f9f9;
+border: 1px solid #efefef;
+border-top: none;
+padding: 5px;
+}
+.current_tags_wrap ul {
+list-style: none;
+}
+.current_tags_wrap ul li {
+display:inline;
+padding: 3px 8px 3px 0;
+color: #666;
+}
+
 
 
 /* Podcast */

@@ -66,9 +66,45 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.selAllCheckboxes' : function(el){
+		el.onclick = function(){
+			Helper.selAllCheckboxes(this);
+			return false;
+		}
+	},
+	'a.deselAllCheckboxes' : function(el){
+		el.onclick = function(){
+			Helper.deselAllCheckboxes(this);
+			return false;
+		}
+	},
 	'a.process_insert' : function(el){
 		el.onclick = function(){
 			Helper.callbacksInsert(this);
+			return false;
+		}
+	},
+	'.showElem' : function(el){
+		el.onclick = function(){
+			Core.showElem(this, 3);
+			return false;
+		}
+	},
+	'.hideElem' : function(el){
+		el.onclick = function(){
+			Core.hideElem(this, 3);
+			return false;
+		}
+	},
+	'a.insert_tags' : function(el){
+		el.onclick = function(){
+			Helper.insertContentIntoTextarea(this, 'tags');
+			return false;
+		}
+	},
+	'a.process_insert_array' : function(el){
+		el.onclick = function(){
+			Helper.callbacksInsertArray(this);
 			return false;
 		}
 	},

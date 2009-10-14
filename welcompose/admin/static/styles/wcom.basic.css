@@ -423,7 +423,8 @@ width: 710px;
 display: block; 
 width: 690px;
 }
-.actnav {
+/* .shownav is for show/hide nav within popups */
+.actnav, .shownav {
 display: block;
 background: #f9f9f9;
 border: 1px solid #efefef;
@@ -499,4 +500,9 @@ display: none;
 /* Frontend preview link */
 a.preview, a.preview:link, a.preview:visited {
 float: right;
+}
+
+/* Helper classes */
+.pb35 {
+padding-bottom: 35px;
 }

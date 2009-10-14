@@ -80,6 +80,8 @@ Helper.prototype.insertTagsFromPopupCallbacks = Helper_insertTagsFromPopupCallba
 Helper.prototype.processCallbacks = Helper_processCallbacks;
 Helper.prototype.showResponseProcessCallbacks = Helper_showResponseProcessCallbacks;
 Helper.prototype.callbacksInsert = Helper_callbacksInsert;
+Helper.prototype.callbacksInsertArray = Helper_callbacksInsertArray;
+Helper.prototype.insertContentIntoTextarea = Helper_insertContentIntoTextarea;
 Helper.prototype.changeBlogCommentStatus = Helper_changeBlogCommentStatus;
 Helper.prototype.loaderChangeBlogCommentStatus = Helper_loaderChangeBlogCommentStatus;
 Helper.prototype.showResponseChangeBlogCommentStatus = Helper_showResponseChangeBlogCommentStatus;
@@ -110,6 +112,8 @@ Helper.prototype.showResponseAdoptBox = Helper_showResponseAdoptBox;
 Helper.prototype.runAction = Helper_runAction;
 Helper.prototype.loaderRunAction = Helper_loaderRunAction;
 Helper.prototype.showResponseRunAction = Helper_showResponseRunAction;
+Helper.prototype.selAllCheckboxes = Helper_selAllCheckboxes;
+Helper.prototype.deselAllCheckboxes = Helper_deselAllCheckboxes;
 
 
 /**
@@ -1049,6 +1053,7 @@ function Helper_processCallbacks (elem)
 		// used to differ between the popup window width
 		var win_names = {
 			'pages_links': this.callbacksPopupWindowWidth745,
+			'blog_tags': this.callbacksPopupWindowWidth460,
 			'structuraltemplates_links': this.callbacksPopupWindowWidth460,
 			'abbreviations_links': this.callbacksPopupWindowWidth745,
 			'globalboxes_links': this.callbacksPopupWindowWidth460,
@@ -1070,6 +1075,7 @@ function Helper_processCallbacks (elem)
 		// path definitions for url
 		var url_paths = {
 			'pages_links': 'content',
+			'blog_tags': 'content',
 			'structuraltemplates_links': 'content',
 			'abbreviations_links': 'content',
 			'globalboxes_links': 'templating',
@@ -1087,7 +1093,15 @@ function Helper_processCallbacks (elem)
 			_path = _path.replace(n, url_paths[placeholder]);
 			this.url = '../' + _path + '/' + this.parseCallbacksFilePath + this.elTarget;
 		};
-	
+
+		// get hidden fields
+		// this params are needed whenever we want
+		// to know a blog posting enviroment values,
+		// e.g. to be able to differ blog tags assigment
+		// if non exist, declare value as empty
+		var dId = (document.getElementsByName('id')[0]) ? document.getElementsByName('id')[0] : '';
+		var dPage = (document.getElementsByName('page')[0]) ? document.getElementsByName('page')[0] : '';
+			
 		// grab enviroment variables
 		// hash the returned variables
 		var getElems = {
@@ -1097,7 +1111,9 @@ function Helper_processCallbacks (elem)
 			text : Helper.getSelectionText(this.elName),
 			text_converter : Helper.getTextConverterValue(),
 			pager_page : Helper.getPagerPage(),
-			insert_type : Helper.getInsertType()
+			insert_type : Helper.getInsertType(),
+			dId : dId.value,
+			dPage : dPage.value
 		};
 		var o = $H(getElems);
 		var reqString = o.toQueryString();
@@ -1168,6 +1184,88 @@ function Helper_callbacksInsert(elem)
 /**
  * Populate on XMLHttpRequest response.
  * <br />
+ * Insert the callback result array (as string -> join).
+ * This function is used to select several checked form field lists and
+ * assign the result array to callbacks.php as a string.
+ * <br />
+ * The value of the name attribute of the corresponding form 
+ * must be the plural of the rel value of the action link element
+ *
+ * <br /><br />Example:
+ * <pre><code>
+<form method="post" name="blogtags">
+... form checkbox Elements
+<a href="#" class="submit240 process_insert_array" rel="blogtag">{i18n Insert Tag(s)}</a>
+</form>
+ * </code></pre>
+ *
+ * @see #processMediaCallbacks
+ * @param {object} req XMLHttpRequest response
+ * @throws applyError on exception
+ */
+function Helper_callbacksInsertArray(elem)
+{
+	try {
+		// properties
+		this.elem = elem;
+		this.elRel = this.elem.rel;
+		// build plural of this.elRel
+		this.elForm = this.elRel + 's';
+		
+		var a = new Array();
+		var count = 0;
+		
+		// get elements of the form assuming it
+		// only contains checkbox input elements
+		var el = eval('document.'+this.elForm+'.elements');
+		
+		for (var i = 0; i < el.length; i++) {
+			if (el[i].checked) {
+				a[count++] = el[i].value;
+			}
+		}
+		
+		// turn array into a string
+		var content = a.join(',');
+	
+		// get rid of the first colon
+		if (content.charAt(0) == ',')
+			content = content.substr(1);
+		
+ 		// hash collected variables
+		var getElems = {
+			id : this.elem.id,
+			form_target : form_target,
+			delimiter : delimiter,
+			text : content,
+			text_converter : text_converter,
+			pager_page : pager_page,
+			insert_type : insert_type,
+			type : this.elRel
+		};
+		var o = $H(getElems);
+		var reqString = o.toQueryString();
+		
+		var url = this.parseCallbacksPath;
+		var pars = reqString;
+
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'post',
+				parameters : pars,
+				onComplete : Helper.showResponseProcessCallbacks
+			});
+		
+		
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Populate on XMLHttpRequest response.
+ * <br />
  * Insert the callback result string.
  *
  * @see #processMediaCallbacks
@@ -1180,6 +1278,25 @@ function Helper_showResponseProcessCallbacks(req)
 		var _form_target = form_target.replace(/^(_)(.+$)/, '$2');
 		Helper.insertTagsFromPopupCallbacks(_form_target, req.responseText);
 		Helper.closeLinksPopup();
+	} catch (e) {
+		_applyError(e);
+	}
+}
+
+/**
+ * Insert content into a specified textarea.
+ * <br />
+ * Insert the given string.
+ *
+ * @param {var} elem Current element
+ * @param {var} target Textarea to populate
+ * @throws applyError on exception
+ */
+function Helper_insertContentIntoTextarea(elem,target)
+{
+	try {
+		var source = Helper.getAttr('rel', elem);		
+		Helper.insertTagsCallbacks(target, source);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1926,6 +2043,56 @@ function Helper_showResponseRunAction(req)
 
 }
 
+
+/**
+ * Check all checkboxes
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_selAllCheckboxes(elem)
+{
+	try {	
+		// properties
+		// build plural of this.elRel
+		this.elForm = elem.rel + 's';
+		
+		// get elements of the form assuming it
+		// only contains checkbox input elements
+		var el = eval('document.'+this.elForm+'.elements');
+		
+		for (var i = 0; i < el.length; i++) {
+			el[i].checked = true;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Uncheck all checkboxes
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_deselAllCheckboxes(elem)
+{
+	try {	
+		// properties
+		// build plural of this.elRel
+		this.elForm = elem.rel + 's';
+		
+		// get elements of the form assuming it
+		// only contains checkbox input elements
+		var el = eval('document.'+this.elForm+'.elements');
+		
+		for (var i = 0; i < el.length; i++) {
+			el[i].checked = false;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
 
 /**
  * Building new object instance of class Helper

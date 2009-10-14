@@ -41,6 +41,20 @@
 </div>
 <!-- element (tags) wrap eof -->
 
+<!-- element (current tags) wrap -->
+<div class="mmwrap">
+<span class="mm_current_tags"><span class="bez">{i18n Current tags}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span id="mm_current_tags_wrap">
+<ul>
+{foreach from=$current_tags item=_current_tags}
+<li>{$_current_tags.word_url|truncate:60:"...":true|escape:"htmlall"|nl2br}</li>
+{/foreach}
+</ul>
+</span>
+</span>
+</div>
+<!-- element (current tags) wrap eof -->
+
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
 <label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
