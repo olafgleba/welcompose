@@ -720,6 +720,30 @@ public function datesForTimeframe ($timeframe)
 	}
 }
 
+
+/**
+ * Creates sql fragment to search for given string
+ * Take the table field name as first argument and
+ * the search string as second. Returns sql fragment string.
+ * 
+ * @throws Utility_HelperException
+ * @param string Table field name
+ * @param string Search fragment
+ * @return string
+ */
+public function _searchLikewise ($field, $str)
+{
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("Input for parameter field is expected to be a non-empty string");
+	}
+	if (empty($str) || !is_scalar($str)) {
+		throw new Utility_HelperException("Input for parameter str is expected to be a non-empty string");
+	}
+	
+	// return sql fragment
+	return sprintf("%s LIKE '%%%s%%'", $field, $str);
+}
+
 /**
  * Applies markdown on given string. Takes the string to convert as
  * first argument, the information if HTML should be stripped before
@@ -905,7 +929,7 @@ public function testSqlDataForPearErrors (&$sqlData)
 
 /**
  * Calculates a page index on basis of the total item count and the number
- * of items per page. Taks the total item count as first argument, the number
+ * of items per page. Tasks the total item count as first argument, the number
  * of items per page as second argument. Returns array.
  * 
  * @throws Utility_HelperException
@@ -967,8 +991,8 @@ public function datetimeFromQuickFormDate ($values)
 	$hour = (int)Base_Cnc::ifsetor($values['H'], null);
 	$minute = (int)Base_Cnc::ifsetor($values['i'], null);
 	
-	// if any of the date elements is null, return "now"
-	if (empty($day) || empty($month) || empty($year) || empty($hour) || empty($minute)) {
+	// if any of the first three date elements is null, return "now"
+	if (empty($day) || empty($month) || empty($year)) {
 		return date('Y-m-d H:i:s');
 	}
 	

@@ -8,7 +8,7 @@
 </tr>
 {foreach from=$blog_postings item=_blog_posting}
 <tr>
-<td class="initialNode"><a class="process_insert" id="{$page_id}" name="blog_posting" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:25:"...":true|escape:"htmlall"}</a><span id="{$_blog_posting.id}"></span></td>
+<td class="initialNode"><a class="process_insert" id="{$page_id}" name="blog_posting" href="#" title="{i18n Insert this link}">{$_blog_posting.title|truncate:45:"...":true|escape:"htmlall"}</a><span id="{$_blog_posting.id}"></span></td>
 <td>&nbsp;</td>
 </tr>
 {/foreach}

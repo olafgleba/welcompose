@@ -47,7 +47,10 @@ public function mmInsertInternalLink ($text, $href)
 {
 	$tag = '[%2$s](%1$s)';
 	$html = sprintf($tag, $href, $text);
-	
+
+	if (ini_get('magic_quotes_gpc')) {
+		$html = stripslashes($html);
+	}	
 	return $html;
 }
 

@@ -76,13 +76,6 @@ class Display_BlogLogin extends Display_SystemLogin {
 	 */
 	protected $_page = array();
 	
-	/**
-	 * Container for simple page information
-	 * 
-	 * @var array
-	 */
-	protected $_simple_page = array();
-	
 /**
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array

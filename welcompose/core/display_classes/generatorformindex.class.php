@@ -279,7 +279,7 @@ public function render ()
 						
 						// as we set values above yet, we
 						// need to prevent these elements to 
-						// be assign on func setValue() on Line 315
+						// get assigned twice on func setValue() on Line 315
 						$imply_radio_elements = 1;
 					}
 				break;

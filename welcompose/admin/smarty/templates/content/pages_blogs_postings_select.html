@@ -74,7 +74,6 @@
 <br class="clearb" />
 
 <div class="filter clearfix">
-{if $total_posting_count > 0}
 <h2>{i18n Filter:}</h2>
 <form action="pages_blogs_postings_select.php" method="get">
 <fieldset>
@@ -95,7 +94,6 @@
 &nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
-{/if}
 <!-- filter --></div>
 
 {if count($page_index) > 1}
@@ -147,7 +145,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;draft={$request.draft|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>

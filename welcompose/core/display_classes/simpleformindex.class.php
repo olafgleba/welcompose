@@ -97,6 +97,20 @@ class Display_SimpleFormIndex implements Display {
 	 */
 	protected $_simple_form = array();
 	
+	/**
+	 * Set appropriate charset
+	 * 
+	 * @var string
+	 */
+	protected $_charset = 'iso-8859-1';
+	
+	/**
+	 * Set appropriate mime type
+	 * 
+	 * @var string
+	 */
+	protected $_mime_type = 'text/plain';
+	
 /**
  * Creates new instance of display driver. Takes an array
  * with the project information as first argument, an array
@@ -271,6 +285,7 @@ protected function renderPersonalForm ()
 		$headers['From'] = $from;
 		$headers['Subject'] = $this->_simple_form['email_subject'];
 		$headers['Reply-To'] = $FORM->exportValue('email');
+		$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
 		
 		// prepare params
 		$params = array();
@@ -475,6 +490,7 @@ protected function renderBusinessForm ()
 			$FORM->exportValue('email') : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
 		$headers['Reply-To'] = $FORM->exportValue('email');
+		$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
 		
 		// send mail
 		if ($MAIL->send($recipients, $headers, $body)) {
