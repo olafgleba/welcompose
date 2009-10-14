@@ -11,7 +11,10 @@
 	|| wcom_check_access('Content', 'Abbreviation', 'Manage')
 	|| wcom_check_access('Content', 'BlogPosting', 'Manage')
 	|| wcom_check_access('Content', 'SimpleForm', 'Manage')
+	|| wcom_check_access('Content', 'GeneratorForm', 'Manage')
 	|| wcom_check_access('Content', 'SimplePage', 'Manage')
+	|| wcom_check_access('Content', 'SimpleGuestbook', 'Manage')
+
 }
 <li><a {if $area == 'contents'}class="conon"{else}class="con"{/if} href="{$wcom_admin_root_www}/content/pages_select.php">{i18n Contents}<span></span></a></li>
 {/if}
@@ -24,7 +27,7 @@
 	|| wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')
 	|| wcom_check_access('Community', 'Settings', 'Manage')
 }
-<li><a {if $area == 'community'}class="comon"{else}class="com"{/if} href="{$wcom_admin_root_www}/community/community_select.php">{i18n Community}<span></span></a></li>
+<li><a {if $area == 'community'}class="comon"{else}class="com"{/if} href="{$wcom_admin_root_www}/community/blogcomments_select.php">{i18n Community}<span></span></a></li>
 {/if}
 
 {if 
@@ -53,7 +56,7 @@
 	|| wcom_check_access('Application', 'Sitemap', 'Manage')
 	|| wcom_check_access('Application', 'Action', 'Manage')
 }
-<li><a {if $area == 'application'}class="seton"{else}class="set"{/if} href="{$wcom_admin_root_www}/settings/settings.php">{i18n Settings}<span></span></a></li>
+<li><a {if $area == 'application'}class="seton"{else}class="set"{/if} href="{$wcom_admin_root_www}/application/projects_select.php">{i18n Settings}<span></span></a></li>
 {/if}
 </ul>
 <!-- topnavcon --></div>
