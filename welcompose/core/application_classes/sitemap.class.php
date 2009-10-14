@@ -122,7 +122,7 @@ public function generateSitemap ($compress)
 	// with protect is set we spare protected pages out
 	$select_params = array(
 		'draft' => null,
-		'protect' => 0
+		'protect' => 1
 	);	
 	
 	// get all pages without status protect and draft and cache them
