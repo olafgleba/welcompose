@@ -144,7 +144,7 @@ function Mediamanager_showElement (elem)
 
 		//init
 		var collectElems;
-		var row;
+		var rows;
 		
 		// myLocal
 		if (myLocal == 'block') {
@@ -214,7 +214,7 @@ function Mediamanager_hideElement (elem)
 
 		// init
 		var collectElems;
-		var row;
+		var rows;
 		
 		// myLocal
 		if (myLocal == 'block') {
