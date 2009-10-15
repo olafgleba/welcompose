@@ -205,235 +205,238 @@ public static function instance($project, $page)
  */ 
 public function render ()
 {
-	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('simpleguestbookentry', 'post',
-		$this->getLocationSelf(true));
+	if (!empty($this->_simple_guestbook['allow_entry'])) {
+		
+		// start new HTML_QuickForm
+		$FORM = $this->base->utility->loadQuickForm('simpleguestbookentry', 'post',
+			$this->getLocationSelf(true));
 	
-	// hidden for book
-	$FORM->addElement('hidden', 'book');
-	$FORM->applyFilter('book', 'trim');
-	$FORM->applyFilter('book', 'strip_tags');
-	$FORM->addRule('book', gettext('Posting is not expected to be empty'), 'required');
-	$FORM->addRule('book', gettext('Posting is expected to be numeric'), 'numeric');
+		// hidden for book
+		$FORM->addElement('hidden', 'book');
+		$FORM->applyFilter('book', 'trim');
+		$FORM->applyFilter('book', 'strip_tags');
+		$FORM->addRule('book', gettext('Posting is not expected to be empty'), 'required');
+		$FORM->addRule('book', gettext('Posting is expected to be numeric'), 'numeric');
 	
-	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'),
-		array('id' => 'guestbook_entry_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+		// textfield for name
+		$FORM->addElement('text', 'name', gettext('Name'),
+			array('id' => 'guestbook_entry_name', 'maxlength' => 255, 'class' => 'ftextfield'));
+		$FORM->applyFilter('name', 'trim');
+		$FORM->applyFilter('name', 'strip_tags');
+		$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	
-	// textfield for email
-	$FORM->addElement('text', 'email', gettext('E-mail'),
-		array('id' => 'guestbook_entry_email', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
+		// textfield for email
+		$FORM->addElement('text', 'email', gettext('E-mail'),
+			array('id' => 'guestbook_entry_email', 'maxlength' => 255, 'class' => 'ftextfield'));
+		$FORM->applyFilter('email', 'trim');
+		$FORM->applyFilter('email', 'strip_tags');
+		$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
 	
-	// textfield for subject
-	$FORM->addElement('text', 'subject', gettext('Subject'),
-		array('id' => 'guestbook_entry_subject', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('subject', 'trim');
-	$FORM->applyFilter('subject', 'strip_tags');
+		// textfield for subject
+		$FORM->addElement('text', 'subject', gettext('Subject'),
+			array('id' => 'guestbook_entry_subject', 'maxlength' => 255, 'class' => 'ftextfield'));
+		$FORM->applyFilter('subject', 'trim');
+		$FORM->applyFilter('subject', 'strip_tags');
 	
-	// textarea for message content
-	$FORM->addElement('textarea', 'content', gettext('Message'),
-		array('id' => 'guestbook_entry_content', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
-	$FORM->applyFilter('content', 'trim');
-	$FORM->applyFilter('content', 'strip_tags');
-	$FORM->addRule('content', gettext('Please enter a message'), 'required');
+		// textarea for message content
+		$FORM->addElement('textarea', 'content', gettext('Message'),
+			array('id' => 'guestbook_entry_content', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
+		$FORM->applyFilter('content', 'trim');
+		$FORM->applyFilter('content', 'strip_tags');
+		$FORM->addRule('content', gettext('Please enter a message'), 'required');
 	
-	// textfield for captcha if the captcha is enabled
-	if ($this->_simple_guestbook['use_captcha'] != 'no') {
-		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_guestbook_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('_qf_captcha', 'trim');
-		$FORM->applyFilter('_qf_captcha', 'strip_tags');
-		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-			$this->captcha->captchaValue());
-	}
+		// textfield for captcha if the captcha is enabled
+		if ($this->_simple_guestbook['use_captcha'] != 'no') {
+			$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
+				array('id' => 'simple_guestbook_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
+			$FORM->applyFilter('_qf_captcha', 'trim');
+			$FORM->applyFilter('_qf_captcha', 'strip_tags');
+			$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
+			$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
+				$this->captcha->captchaValue());
+		}
 	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'fsubmit'));
+		// submit button
+		$FORM->addElement('submit', 'submit', gettext('Send'),
+			array('class' => 'fsubmit'));
 	
-	// set defaults
-	$FORM->setDefaults(array(
-		'book' => (int)$this->_simple_guestbook['id']
-	));
+		// set defaults
+		$FORM->setDefaults(array(
+			'book' => (int)$this->_simple_guestbook['id']
+		));
 	
-	// test if the form validates. if it validates, process it and
-	// skip the rest of the page
-	if ($FORM->validate()) {
-		// freeze the form
-		$FORM->freeze();
+		// test if the form validates. if it validates, process it and
+		// skip the rest of the page
+		if ($FORM->validate()) {
+			// freeze the form
+			$FORM->freeze();
 	 	
-		// prepare sql data
-		$sqlData = array();
-		$sqlData['book'] = $this->_simple_guestbook['id'];
-		$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null);
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['email'] = $FORM->exportValue('email');
-		$sqlData['subject'] = $FORM->exportValue('subject');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['text_converter'] = null;
-		$sqlData['date_added'] = date('Y-m-d H:i:s');
+			// prepare sql data
+			$sqlData = array();
+			$sqlData['book'] = $this->_simple_guestbook['id'];
+			$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null);
+			$sqlData['name'] = $FORM->exportValue('name');
+			$sqlData['email'] = $FORM->exportValue('email');
+			$sqlData['subject'] = $FORM->exportValue('subject');
+			$sqlData['content'] = $FORM->exportValue('content');
+			$sqlData['content_raw'] = $FORM->exportValue('content');
+			$sqlData['text_converter'] = null;
+			$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
-		// load Application_TextConverter class
-		$TEXTCONVERTER = load('Application:TextConverter');
+			// load Application_TextConverter class
+			$TEXTCONVERTER = load('Application:TextConverter');
 		
-		// apply text converter if required
-		if (!empty($this->_simple_guestbook['text_converter'])) {
-			$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($this->_simple_guestbook['text_converter'],
-				$FORM->exportValue('content'));				
-			$sqlData['text_converter'] = $this->_simple_guestbook['text_converter'];
-		}
+			// apply text converter if required
+			if (!empty($this->_simple_guestbook['text_converter'])) {
+				$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($this->_simple_guestbook['text_converter'],
+					$FORM->exportValue('content'));				
+				$sqlData['text_converter'] = $this->_simple_guestbook['text_converter'];
+			}
 		
-		// test sql data for pear errors
-		$HELPER = load('Utility:Helper');
-		$HELPER->testSqlDataForPearErrors($sqlData);
+			// test sql data for pear errors
+			$HELPER = load('Utility:Helper');
+			$HELPER->testSqlDataForPearErrors($sqlData);
 		
-		// insert it
-		try {
-			// begin transaction
-			$this->base->db->begin();
+			// insert it
+			try {
+				// begin transaction
+				$this->base->db->begin();
 			
-			// get simple guestbook entries class
-			$SIMPLEGUESTBOOKENTRIES = load('Content:SimpleGuestbookEntry');
+				// get simple guestbook entries class
+				$SIMPLEGUESTBOOKENTRIES = load('Content:SimpleGuestbookEntry');
 			
-			// execute operation
-			$SIMPLEGUESTBOOKENTRIES->addSimpleGuestbookEntry($sqlData);
+				// execute operation
+				$SIMPLEGUESTBOOKENTRIES->addSimpleGuestbookEntry($sqlData);
 			
-			// commit
-			$this->base->db->commit();
-		} catch (Exception $e) {
-			// do rollback
-			$this->base->db->rollback();
+				// commit
+				$this->base->db->commit();
+			} catch (Exception $e) {
+				// do rollback
+				$this->base->db->rollback();
 	
-			// re-throw exception
-			throw $e;
-		}
+				// re-throw exception
+				throw $e;
+			}
 		
-		// send e-mail notification		
-		if (!empty($this->_simple_guestbook['send_notification'])) {
+			// send e-mail notification		
+			if (!empty($this->_simple_guestbook['send_notification'])) {
 					
-			// prepare & assign form data
-			$form_data = array(
-				'book' => $this->_simple_guestbook['title'],
-				'name' => $FORM->exportValue('name'),
-				'email' => $FORM->exportValue('email'),
-				'subject' => $FORM->exportValue('subject'),
-				'content' => $FORM->exportValue('content'),
-				'now' => mktime()
-			);
-			$this->base->utility->smarty->assign('form_data', $form_data);
+				// prepare & assign form data
+				$form_data = array(
+					'book' => $this->_simple_guestbook['title'],
+					'name' => $FORM->exportValue('name'),
+					'email' => $FORM->exportValue('email'),
+					'subject' => $FORM->exportValue('subject'),
+					'content' => $FORM->exportValue('content'),
+					'now' => mktime()
+				);
+				$this->base->utility->smarty->assign('form_data', $form_data);
 		
-			// fetch mail body
-			$body = $this->base->utility->smarty->fetch($this->getEntryMailTemplateName(),
-				md5($_SERVER['REQUEST_URI']));
+				// fetch mail body
+				$body = $this->base->utility->smarty->fetch($this->getEntryMailTemplateName(),
+					md5($_SERVER['REQUEST_URI']));
 		
-			// prepare sending information
-			$recipients = $this->_simple_guestbook['notification_email_to'];
+				// prepare sending information
+				$recipients = $this->_simple_guestbook['notification_email_to'];
 		
-			// prepare From: address
-			$from = (($this->_simple_guestbook['notification_email_from'] == 'sender@simplebuestbook.wcom') ?
-				$FORM->exportValue('email') : $this->_simple_guestbook['notification_email_from']);
-			$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
-				null, $from);
+				// prepare From: address
+				$from = (($this->_simple_guestbook['notification_email_from'] == 'sender@simpleguestbook.wcom') ?
+					$FORM->exportValue('email') : $this->_simple_guestbook['notification_email_from']);
+				$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
+					null, $from);
 		
-			// headers
-			$headers = array();
-			$headers['From'] = $from;
-			$headers['Subject'] = $this->_simple_guestbook['notification_email_subject'];
-			$headers['Reply-To'] = $from;
-			$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
+				// headers
+				$headers = array();
+				$headers['From'] = $from;
+				$headers['Subject'] = $this->_simple_guestbook['notification_email_subject'];
+				$headers['Reply-To'] = $from;
+				$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
 		
-			// prepare params
-			$params = array();
-			$params = sprintf('-f %s', $from);
+				// prepare params
+				$params = array();
+				$params = sprintf('-f %s', $from);
 		
-			// load PEAR::Mail
-			require_once('Mail.php');
-			$MAIL = Mail::factory('mail', $params);
+				// load PEAR::Mail
+				require_once('Mail.php');
+				$MAIL = Mail::factory('mail', $params);
 		
-			// send mail
-			if ($MAIL->send($recipients, $headers, $body)) {
+				// send mail
+				if ($MAIL->send($recipients, $headers, $body)) {
+					// add response to session
+					$_SESSION['form_submitted'] = 1;
+			
+					// save session
+					$this->session->save();
+				
+					// clean the buffer
+					if (!$this->base->debug_enabled()) {
+						@ob_end_clean();
+					}
+			
+					// redirect
+					header($this->getRedirectLocationSelf());
+					exit;
+				} else {
+					throw new Display_SimpleGuestbookException("Notification E-mail couldn't be sent");
+				}
+			} else {				
 				// add response to session
 				$_SESSION['form_submitted'] = 1;
-			
-				// save session
+		
+				// redirect
 				$this->session->save();
-				
+
 				// clean the buffer
 				if (!$this->base->debug_enabled()) {
 					@ob_end_clean();
 				}
-			
-				// redirect
+		
+				// redirect to itself
 				header($this->getRedirectLocationSelf());
 				exit;
-			} else {
-				throw new Display_SimpleGuestbookException("Notification E-mail couldn't be sent");
 			}
-		} else {				
-			// add response to session
-			$_SESSION['form_submitted'] = 1;
-		
-			// redirect
-			$this->session->save();
-
-			// clean the buffer
-			if (!$this->base->debug_enabled()) {
-				@ob_end_clean();
+		}
+	
+		// render form
+		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
+		$renderer->setRequiredTemplate($this->getRequiredTemplate());
+	
+		// remove attribute on form tag for XHTML compliance
+		$FORM->removeAttribute('name');
+		$FORM->removeAttribute('target');
+	
+		$FORM->accept($renderer);
+	
+		// assign the form to smarty
+		$this->base->utility->smarty->assign('form', $renderer->toArray());
+	
+		// generate captcha if required
+		if ($this->_simple_guestbook['use_captcha'] != 'no') {
+			// captcha generation
+			$captcha = null;
+			if ($this->_simple_guestbook['use_captcha'] == 'image') {
+				// generate image captcha
+				$captcha = $this->captcha->createCaptcha('image');
+			
+				// let's tell the template that the captcha is an image
+				$this->base->utility->smarty->assign('captcha_type', 'image');
+			} elseif ($this->_simple_guestbook['use_captcha'] == 'numeral') { 
+				// generate numeral captcha
+				$captcha = $this->captcha->createCaptcha('numeral');
+			
+				// let's tell the template that the captcha is an numeral captcha 
+				$this->base->utility->smarty->assign('captcha_type', 'numeral');
 			}
-		
-			// redirect to itself
-			header($this->getRedirectLocationSelf());
-			exit;
+			$this->base->utility->smarty->assign('captcha', $captcha);
 		}
-	}
 	
-	// render form
-	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
-	
-	$FORM->accept($renderer);
-	
-	// assign the form to smarty
-	$this->base->utility->smarty->assign('form', $renderer->toArray());
-	
-	// generate captcha if required
-	if ($this->_simple_guestbook['use_captcha'] != 'no') {
-		// captcha generation
-		$captcha = null;
-		if ($this->_simple_guestbook['use_captcha'] == 'image') {
-			// generate image captcha
-			$captcha = $this->captcha->createCaptcha('image');
-			
-			// let's tell the template that the captcha is an image
-			$this->base->utility->smarty->assign('captcha_type', 'image');
-		} elseif ($this->_simple_guestbook['use_captcha'] == 'numeral') { 
-			// generate numeral captcha
-			$captcha = $this->captcha->createCaptcha('numeral');
-			
-			// let's tell the template that the captcha is an numeral captcha 
-			$this->base->utility->smarty->assign('captcha_type', 'numeral');
+		// empty $_SESSION
+		if (!empty($_SESSION['form_submitted'])) {
+			$_SESSION['form_submitted'] = '';
 		}
-		$this->base->utility->smarty->assign('captcha', $captcha);
-	}
 	
-	// empty $_SESSION
-	if (!empty($_SESSION['form_submitted'])) {
-		$_SESSION['form_submitted'] = '';
+		return true;	
 	}
-	
-	return true;
 }
 
 /**
