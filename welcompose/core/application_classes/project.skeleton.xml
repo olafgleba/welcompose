@@ -759,12 +759,17 @@
 			<editable>0</editable>
 		</template-type>
 		<template-type>
-			<name>simple_form_personal_form_mail</name>
+			<name>simple_form_business_form_mail</name>
 			<description/>
 			<editable>0</editable>
 		</template-type>
 		<template-type>
 			<name>simple_guestbook_form_mail</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_guestbook_index</name>
 			<description/>
 			<editable>0</editable>
 		</template-type>

@@ -89,8 +89,8 @@ try {
 	 *
 	 * - Create tables content_simple_guestbooks, content_simple_guestbook_entries
 	 * - Add new rights: CONTENT_SIMPLEGUESTBOOK{,ENTRY}_{USE,MANAGE}
-	 * - Add new page type: WCOM_SIMPLE_GUESTBOOK
 	 * - Add new template types: simple_guestbook_index, simple_guestbook_form_mail
+	 * - Add new page type: WCOM_SIMPLE_GUESTBOOK
 	 */
 	if ($major < TASK_MAJOR || ($major == TASK_MAJOR && $minor < TASK_MINOR)) {
 		try {
