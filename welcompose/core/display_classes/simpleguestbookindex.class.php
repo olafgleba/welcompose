@@ -205,6 +205,7 @@ public static function instance($project, $page)
  */ 
 public function render ()
 {
+	// Define and render form only if option allow_entry is not null
 	if (!empty($this->_simple_guestbook['allow_entry'])) {
 		
 		// start new HTML_QuickForm
