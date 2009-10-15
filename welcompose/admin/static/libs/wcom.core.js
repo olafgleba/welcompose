@@ -97,24 +97,19 @@ function _applyError (exception, additionalStr)
 			if (additionalStr) {
 				errStr = additionalStr;
 			} else {
-				errStr = exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber;
+				errStr = exception + '\r\n' + exception.fileName + '\r\n' + exception.lineNumber;
 			}
 		break;
 		case 2 :
 			if (additionalStr) {
 				errStr = additionalStr;
 			} else {
-				errStr = e_msg_str_prefix + '\r\n\r\n' 
-					+ exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber + '\r\n\r\n' 
-					+ e_msg_str_suffix;
+				errStr = e_msg_str_prefix + '\r\n\r\n' + exception + '\r\n' + exception.fileName + '\r\n' + exception.lineNumber + '\r\n\r\n' + e_msg_str_suffix;
 			}
 		break;
 		default :
 			errStr = exception;
+		break;
 	}
 	alert (errStr);
 }
@@ -544,7 +539,7 @@ function Init_getVars ()
 				Preview.reloadFrontendView();
 			}
 		}
-		if (typeof callback_media_result != 'undefined' && callback_media_result != '') {
+		if (typeof callback_media_result !== 'undefined' && callback_media_result !== '') {
 				Mediamanager.insertMediaCallbacks(callback_media_result);
 		}
 		if (typeof podcast != 'undefined' && Init.isNumber(podcast)) {
@@ -553,7 +548,7 @@ function Init_getVars ()
 			}
 		}
 		if ($('podcast_media_object')) {
-			if ($('podcast_media_object').value != '') {
+			if ($('podcast_media_object').value !== '') {
 				Mediamanager.mediaToPodcastOnLoad();
 			}
 		}
@@ -571,7 +566,7 @@ function Init_getVars ()
 			if (mediamanager == 1) {
 				
 				// switch if page contains urlify form field
-				if (pagetype != '') {
+				if (pagetype !== '') {
 					$('column').style.paddingTop = '142px';
 				}
 						
@@ -711,7 +706,7 @@ function Init_getCookie (name)
 	    var begin = dc.indexOf("; " + prefix);
 	    if (begin == -1) {
 	        begin = dc.indexOf(prefix);
-	        if (begin != 0) return null;
+	        if (begin !== 0) return null;
 	    }
 	    else begin += 2;
 	    var end = document.cookie.indexOf(";", begin);
@@ -742,7 +737,7 @@ function Init_getToogleElem ()
 					tables[e].style.display = Init.getCookie(tables[e].id);
 				}
 				
-				if (Init.getCookie(tables[e].id) == 'block' || Init.getCookie(tables[e].id) == null) {					
+				if (Init.getCookie(tables[e].id) == 'block' || Init.getCookie(tables[e].id) === null) {					
 					if (Helper.isBrowser('ie')) {
 						tables[e].previousSibling.childNodes[0].lastChild.innerHTML = '<img title="' + hideElement + '" src="../static/img/icons/close.gif" alt="" />';
 					} else {
@@ -1251,6 +1246,7 @@ function Navigation_show (name, level)
 				break;
 			default :
 					this.ttarget = this.navLyOne;
+				break;
 		}
 		
 		if (typeof this.req != 'undefined') {
@@ -1652,7 +1648,7 @@ function Tables_toggleElem (elem)
 		this.statusDisplay = Element.getStyle(this.processRow, 'display');
 		
 		// we need this for IE. He's to dumb to parse display value 'table'.
-		if (this.statusDisplay == 'table' || this.statusDisplay == null)
+		if (this.statusDisplay == 'table' || this.statusDisplay === null)
 			this.statusDisplay = 'block';
 		
 		if (this.statusDisplay == 'block') {

@@ -142,6 +142,10 @@ function Mediamanager_showElement (elem)
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
 		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
+		//init
+		var collectElems;
+		var row;
+		
 		// myLocal
 		if (myLocal == 'block') {
 			this.elem.className = this.mediamanagerClassHideMyLocal;
@@ -151,11 +155,11 @@ function Mediamanager_showElement (elem)
 			var currentTagsElem = Element.getStyle('mm_current_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');
 			
-			var collectElems = String(includeTypesElem + tagsElem + + currentTagsElem + timeframeElem);
+			collectElems = String(includeTypesElem + tagsElem + currentTagsElem + timeframeElem);
 			
 			// give option 'Include Types' a little more space since we have two rows here
 			if (includeTypesElem == 'block') {
-				var rows = 1;
+				rows = 1;
 			}
 		}
 		// myFlickr
@@ -166,10 +170,10 @@ function Mediamanager_showElement (elem)
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');
 			
-			var collectElems = String(userElem + flickrtagsElem + photosetElem);
+			collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
 			// do nothing, not needed here
-			var rows = '';
+			rows = '';
 		}
 		Element.update(this.elem, this.elementHtmlHide);
 		Behaviour.reapply('.' + this.elem.className);
@@ -208,6 +212,10 @@ function Mediamanager_hideElement (elem)
 		var myLocal = Element.getStyle(this.lyMediamanagerMyLocal, 'display');
 		var myFlickr = Element.getStyle(this.lyMediamanagerMyFlickr, 'display');
 
+		// init
+		var collectElems;
+		var row;
+		
 		// myLocal
 		if (myLocal == 'block') {
 			this.elem.className = this.mediamanagerClassShowMyLocal;			
@@ -215,11 +223,11 @@ function Mediamanager_hideElement (elem)
 			var tagsElem = Element.getStyle('mm_tags_wrap', 'display');
 			var currentTagsElem = Element.getStyle('mm_current_tags_wrap', 'display');
 			var timeframeElem = Element.getStyle('mm_timeframe_wrap', 'display');			
-			var collectElems = String(includeTypesElem + tagsElem + timeframeElem);
+			collectElems = String(includeTypesElem + tagsElem + timeframeElem);
 			
 			// give option 'Include Types' a little more space since we have two rows here
 			if (includeTypesElem == 'block') {
-				var rows = 1;
+				rows = 1;
 			}
 		}
 		// myFlickr
@@ -228,10 +236,10 @@ function Mediamanager_hideElement (elem)
 			var userElem = Element.getStyle('mm_user_wrap', 'display');
 			var flickrtagsElem = Element.getStyle('mm_flickrtags_wrap', 'display');
 			var photosetElem = Element.getStyle('mm_photoset_wrap', 'display');			
-			var collectElems = String(userElem + flickrtagsElem + photosetElem);
+			collectElems = String(userElem + flickrtagsElem + photosetElem);
 			
 			// do nothing, not needed here
-			var rows = '';
+			rows = '';
 		}
 		
 		Element.update(this.elem, this.elementHtmlShow);
@@ -287,12 +295,16 @@ function Mediamanager_checkOccurrences (elems, row)
 {
 	try {				
 		var myLocal = Element.getStyle('lyMediamanagerMyLocal', 'display');
-
+		var prefix;
 		if (myLocal == 'block') {
-			var prefix = 'myLocal_';
+			prefix = 'myLocal_';
 		} else {
-			var prefix = 'myFlickr_';
+			prefix = 'myFlickr_';
 		}
+		
+		// init
+		var cHeight;
+		var pHeight;
 		
 		var res = elems.match(/block/gi);
 				
@@ -304,29 +316,29 @@ function Mediamanager_checkOccurrences (elems, row)
 			switch (res.length) {
 				case 1 :
 						if (Mediamanager.isNumber(row) === true) {
-							var cHeight = '371px';
-							var pHeight = '368px';
+							cHeight = '371px';
+							pHeight = '368px';
 							countItems = 7;
 						} else {
-							var cHeight = '392px';
-							var pHeight = '389px';
+							cHeight = '392px';
+							pHeight = '389px';
 							countItems = 8;
 						}
 					break;
 				case 2 :
 						if (Mediamanager.isNumber(row) === true) {
-							var cHeight = '351px';
-							var pHeight = '348px';
+							cHeight = '351px';
+							pHeight = '348px';
 							countItems = 7;
 						} else {
-							var cHeight = '372px';
-							var pHeight = '369px';
+							cHeight = '372px';
+							pHeight = '369px';
 							countItems = 7;
 						}
 					break;
 				case 3 :
-						var cHeight = '331px';
-						var pHeight = '328px';
+						cHeight = '331px';
+						pHeight = '328px';
 						countItems = 6;
 					break;		
 			}
@@ -402,7 +414,7 @@ function Mediamanager_checkElemsMyLocal ()
 		if (typeof countItems == 'undefined') {
 			// initialize global with 'save' display
 			countItems = 0;
-		};
+		}
 		
 		var getElems = {
 			mm_include_types_img : $F('mm_include_types_img'),
@@ -814,12 +826,13 @@ function Mediamanager_invokePager (elem, pager_page)
 	try {
 		Mediamanager.preserveElementStatusMyLocal();
 		
+		var pars = '';
 		var elems = Mediamanager.checkElemsMyLocal();
 		var url = this.parseMedLocalPath;
 		if (typeof pager_page != 'undefined') {
-			var pars = 'mm_start=' + pager_page + '&' + elems;
+			pars = 'mm_start=' + pager_page + '&' + elems;
 		} else {
-			var pars = 'mm_start=' + elem.id + '&' + elems;
+			pars = 'mm_start=' + elem.id + '&' + elems;
 		}
 
 		var myAjax = new Ajax.Request(
@@ -976,10 +989,7 @@ function Mediamanager_processMediaCallbacks (elem)
 		* This array is the only var to populate
 		* if the mime_type requires a popup window
 		*/ 
-		var mime_types = new Array (
-			'image',
-			'application-x-shockwave-flash'
-		);
+		var mime_types = new Array ('image','application-x-shockwave-flash');
 	
 		// execute popup bool
 		for (var i = 0; i < mime_types.length; i++) {
@@ -1112,7 +1122,7 @@ function Mediamanager_checkElemsMyFlickr ()
 		if (typeof countItems == 'undefined') {
 			// initialize global with 'save' display
 			countItems = 0;
-		};
+		}
 		
 		var getElems = {
 			mm_user : $F('mm_user'),

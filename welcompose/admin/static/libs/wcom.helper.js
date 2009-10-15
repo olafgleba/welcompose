@@ -775,8 +775,11 @@ function Helper_showNextNode(elem)
 		var url = this.parseCallbacksFilePath + elem.name + '.php';
 		var pars = 'id=' + elem.id +'&nextNode=' + nextNode;	
 		
+		// init
+		var myAjax;
+		
 		if (nextNode == 'secondNode') {
-		var myAjax = new Ajax.Request(
+			myAjax = new Ajax.Request(
 			url,
 			{
 				method : 'get',
@@ -786,7 +789,7 @@ function Helper_showNextNode(elem)
 			});
 		}
 		else if (nextNode == 'thirdNode') {
-		var myAjax = new Ajax.Request(
+			myAjax = new Ajax.Request(
 			url,
 			{
 				method : 'get',
@@ -1064,13 +1067,14 @@ function Helper_processCallbacks (elem)
 
 		// temp var used in for loop
 		var _width = this.elTarget;
+		var n;
 		
 		// execute url target width definition
 		for (placeholder in win_names) {
-			var n = new RegExp(placeholder, 'gi');
+			n = new RegExp(placeholder, 'gi');
 			_width = _width.replace(n, win_names[placeholder]);
 			this.targetWidth = _width;
-		};
+		}
 		
 		// path definitions for url
 		var url_paths = {
@@ -1089,10 +1093,10 @@ function Helper_processCallbacks (elem)
 		
 		// execute url paths definition
 		for (placeholder in url_paths) {
-			var n = new RegExp(placeholder, 'gi');
+			n = new RegExp(placeholder, 'gi');
 			_path = _path.replace(n, url_paths[placeholder]);
 			this.url = '../' + _path + '/' + this.parseCallbacksFilePath + this.elTarget;
-		};
+		}
 
 		// get hidden fields
 		// this params are needed whenever we want
@@ -1159,8 +1163,7 @@ function Helper_callbacksInsert(elem)
 			insert_type : insert_type,
 			type : this.elem.name,
 			posting_id : (this.elem.name == 'blog_posting') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
-			year : (this.elem.name == 'archive_year' || this.elem.name == 'archive_month')
-			 			? Helper.getAttrNextSibling('id', this.elem, 1) : '',
+			year : (this.elem.name == 'archive_year' || this.elem.name == 'archive_month') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
 			month : (this.elem.name == 'archive_month') ? Helper.getAttrNextSibling('id', this.elem, 2) : ''
 		};
 		var o = $H(getElems);
@@ -1856,7 +1859,7 @@ function Helper_URLify (string)
 		for (placeholder in normalizations) {
 			var r = new RegExp(placeholder, 'gi');
 			string = string.replace(r, normalizations[placeholder]);
-		};
+		}
 	
 		// remove everything except a-z, 0-9 and hyphens and replace it with a hyphen 
 		string = string.replace(/[^a-z0-9\-]/g, '-');
