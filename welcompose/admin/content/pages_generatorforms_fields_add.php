@@ -151,6 +151,12 @@ try {
 	$FORM->applyFilter('value', 'trim');
 	$FORM->applyFilter('value', 'strip_tags');
 	
+	// textfield for class
+	$FORM->addElement('text', 'class', gettext('CSS class'),
+		array('id' => 'generator_form_field_class', 'maxlength' => 255, 'class' => 'w300 validate'));
+	$FORM->applyFilter('class', 'trim');
+	$FORM->applyFilter('class', 'strip_tags');
+	
 	// checkbox for required
 	$FORM->addElement('checkbox', 'required', gettext('Required'), null,
 		array('id' => 'generator_form_field_required', 'class' => 'chbx'));
@@ -267,6 +273,7 @@ try {
 		$sqlData['label'] = $FORM->exportValue('label');
 		$sqlData['name'] = $FORM->exportValue('name');
 		$sqlData['value'] = $FORM->exportValue('value');
+		$sqlData['class'] = $FORM->exportValue('class');
 		$sqlData['required'] = (string)intval($FORM->exportValue('required'));
 		$sqlData['required_message'] = $FORM->exportValue('required_message');
 		$sqlData['validator_regex'] = $FORM->exportValue('validator_regex');

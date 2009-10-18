@@ -424,7 +424,7 @@ public function selectPages ($params = array())
 		$sql .= " AND `content_pages`.`type` = :type ";
 		$bind_params['type'] = $type;
 	}		
-	// Include only result rows without protected pages
+	// Include only unprotected pages
 	if (!empty($protect) && is_numeric($protect)) {
 		$sql .= " AND `content_pages`.`protect` IS NULL ";
 	}	

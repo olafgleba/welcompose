@@ -194,7 +194,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'fcheckbox'
+						'class' => (!empty($_field['class'])) ? 'fcheckbox '. $_field['class'] : 'fcheckbox'
 					);
 					
 					$element = $FORM->addElement('checkbox', $_field['name'], $_field['label'], null, $attributes);
@@ -207,7 +207,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'fselect'
+						'class' => (!empty($_field['class'])) ? 'fselect '. $_field['class'] : 'fselect'
 					);
 					
 					// prepare values
@@ -227,7 +227,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'fsubmit'
+						'class' => (!empty($_field['class'])) ? 'fsubmit '. $_field['class'] : 'fsubmit'
 					);
 					
 					// create element
@@ -238,7 +238,7 @@ public function render ()
 					$attributes = array(
 						'id' => $field_id,
 						'maxlength' => 255,
-						'class' => 'ftextfield'
+						'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
 					);
 					
 					// create element
@@ -248,7 +248,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'ftextarea',
+						'class' => (!empty($_field['class'])) ? 'ftextarea '. $_field['class'] : 'ftextarea',
 						'cols' => 30,
 						'rows' => 6
 					);
@@ -266,7 +266,7 @@ public function render ()
 						// prepare attributes
 						$attributes = array(
 							'id' => $field_id . '_' . $i,
-							'class' => 'fradio'
+							'class' => (!empty($_field['class'])) ? 'fradio '. $_field['class'] : 'fradio'
 						);
 
 						// create element
@@ -287,7 +287,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'freset'
+						'class' => (!empty($_field['class'])) ? 'freset '. $_field['class'] : 'freset'
 					);
 					
 					// create element
@@ -297,7 +297,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => 'ffile'
+						'class' => (!empty($_field['class'])) ? 'ffile '. $_field['class'] : 'ffile'
 					);
 					
 					// create element
@@ -365,7 +365,7 @@ public function render ()
 		$recipients = $this->_generator_form['email_to'];
 		
 		// prepare From: address
-		$from = (($this->_generator_form['email_from'] == 'sender@simpleform.wcom') ?
+		$from = (($this->_generator_form['email_from'] == 'sender@generatorform.wcom') ?
 			$FORM->exportValue('email') : $this->_generator_form['email_from']);
 		$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
 			null, $from);

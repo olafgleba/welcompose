@@ -1134,6 +1134,7 @@ CREATE TABLE `content_generator_form_fields` (
   `label` varchar(255),
   `name` varchar(255),
   `value` text,
+  `css` varchar(255),
   `required` enum('0','1') DEFAULT '0',
   `required_message` varchar(255),
   `validator_regex` varchar(255),
