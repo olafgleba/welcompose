@@ -74,7 +74,7 @@ fi
 for file in `find welcompose -type f -name "*.js"` ; do
 	tmpfile="$file"-yui
 	cp "$file" "$tmpfile"
-	java -jar build/yuicompressor.jar -o "$file" "$tmpfile"
+	java -jar yuicompressor/build/yuicompressor.jar --type js -o "$file" "$tmpfile"
 	rm -f "$tmpfile"
 done
 #rm -rf jsmin.py
