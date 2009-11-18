@@ -23,12 +23,6 @@ if [ -z "`which python`" ] ; then
 	exit 1
 fi
 
-# test if java is available
-if [ -z "`which java`" ] ; then
-	echo "Java executable not found"
-	exit 1
-fi
-
 # remove directories from previous exports
 rm -rf wcom-trunk
 
@@ -58,27 +52,18 @@ rm -rf database
 rm -rf documentation
 
 # compress js
-#svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
-#if [ ! -f "jsmin.py" ] ; then
-#	echo "JavaScript minifier not found. Download failed, eh?"
-#	exit 1
-#fi
-
-# compress js
-svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/yuicompressor-2.4.2 yuicompressor
-if [ ! -f "yuicompressor" ] ; then
-	echo "JavaScript YUI minifier not found. Download failed, eh?"
+svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/jsmin.py jsmin.py
+if [ ! -f "jsmin.py" ] ; then
+	echo "JavaScript minifier not found. Download failed, eh?"
 	exit 1
 fi
-
 for file in `find welcompose -type f -name "*.js"` ; do
-	tmpfile="$file"-yui
+	tmpfile="$file"-jsmin
 	cp "$file" "$tmpfile"
-	java -jar yuicompressor/build/yuicompressor.jar --type js -o "$file" "$tmpfile"
+	python jsmin.py < "$tmpfile"  > "$file"
 	rm -f "$tmpfile"
 done
-#rm -rf jsmin.py
-
+rm -rf jsmin.py
 
 # compress css
 svn export https://welcompose.svn.cvsdude.com/welcompose/trunk/scripts/third_party/csstidy csstidy
