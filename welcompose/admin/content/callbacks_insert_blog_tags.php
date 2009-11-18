@@ -132,7 +132,7 @@ try {
 	* 'dPage' => page id
 	**/
 	
-	// assign only tags which are not already used for a particular page
+	// if we are in blog posting edit mode
 	if (!empty($_REQUEST['dId'])) {
 
 		// get all blog tags
@@ -140,26 +140,36 @@ try {
 			
 		// get blog tags of the current posting
 		$blog_tags_page = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC),'posting' => Base_Cnc::filterRequest($_REQUEST['dId'], WCOM_REGEX_NUMERIC)));
-
-		// reduce arrays to get a useable result within array_diff() function
-		foreach ($blog_tags_all as $_key => $_field) {
-			$_blog_tags_all[$_field['id']] = $_field['word'];
-		}	
-		foreach ($blog_tags_page as $_key => $_field) {
-			$_blog_tags_page[$_field['id']] = $_field['word'];
-		}
 		
-		// compare both arrays and save the different pairs  
-		$diff = array_diff($_blog_tags_all, $_blog_tags_page);
+		// if no tags are already set for the particular posting, 
+		// there is no need to differ between the two arrays.
+		if (!empty($blog_tags_page)) {		
+			// reduce arrays to get a useable result
+			// within array_diff() function in the next step
+			foreach ($blog_tags_all as $_key => $_field) {
+				$_blog_tags_all[$_field['id']] = $_field['word'];
+			}	
+			foreach ($blog_tags_page as $_key => $_field) {
+				$_blog_tags_page[$_field['id']] = $_field['word'];
+			}
+			
+			// compare both arrays and save the different pairs  
+			$diff = array_diff($_blog_tags_all, $_blog_tags_page);
 				
-		// build the new tag array
-		foreach ($diff as $_key => $_field) {
-			$blog_tags[] = array(
-				'id' => $_key,
-				'word' => $_field
-			);
+			// build the new tag array
+			foreach ($diff as $_key => $_field) {
+				$blog_tags[] = array(
+					'id' => $_key,
+					'word' => $_field
+				);
+			}
+		} else {
+			// assign the whole bunch of available tags
+			$blog_tags = $BLOGTAG->selectBlogTags();
 		}
 	} else {
+		// if we are in blog posting add mode
+		// assign the whole bunch of available tags
 		$blog_tags = $BLOGTAG->selectBlogTags();
 	}
 	
