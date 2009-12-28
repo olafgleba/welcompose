@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: index.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0

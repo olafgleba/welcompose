@@ -128,7 +128,7 @@
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$blog_postings item=_posting}
-<tr>
+<tr{if $_posting.draft > 0} class="draft"{/if}>
 <td>{$_posting.title|escape:"htmlall"}</td>
 <td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%M %Z"}</td>
 <td><a href="../community/blogcomments_select.php?page={$page.id|escape:"url"}&amp;posting={$_posting.id|escape:"url"}">{$_posting.comment_count|escape:"htmlall"}</a></td>

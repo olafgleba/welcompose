@@ -2,10 +2,10 @@
  * Project: Welcompose
  * File: wcom.helper.js
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -14,7 +14,7 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -96,6 +96,7 @@ Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
 Helper.prototype.confirmDelAbbreviationAction = Helper_confirmDelAbbreviationAction;
 Helper.prototype.confirmDelBlogPostingAction = Helper_confirmDelBlogPostingAction;
+Helper.prototype.confirmMsgDelSimpleDateAction = Helper_confirmMsgDelSimpleDateAction;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
@@ -1602,6 +1603,25 @@ function Helper_confirmDelBlogPostingAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelBlogPosting);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Confirm simple date delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmMsgDelSimpleDateAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelSimpleDate);
 
 		if (v == true) {
 			window.location.href = elem.href;

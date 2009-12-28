@@ -2,10 +2,10 @@
  * Project: Welcompose
  * File: wcom.strings.js
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -14,7 +14,7 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -62,6 +62,7 @@ var confirmMsgDelTplSets = '<%i18n Are you sure you want to delete the chosen te
 var confirmMsgDelTplGlobal = '<%i18n Are you sure you want to delete the chosen global template? References in other templates are not accordingly deleted and will remain as unattached markup.%>';
 var confirmMsgDelTplGlobalfile = '<%i18n Are you sure you want to delete the chosen global file? References in other templates are not accordingly deleted and will remain as unattached markup.%>';
 var confirmMsgDelAbbreviation = '<%i18n Are you sure you want to delete the chosen abbreviation? References in the content pages are not accordingly deleted and will remain as unattached markup.%>';
+var confirmMsgDelSimpleDate = '<%i18n Are you sure you want to delete the chosen date?%>';
 var confirmMsgDelBlogPosting = '<%i18n Are you sure you want to delete this Blog Posting?%>';
 var alertOnSelectImageSize = '<%i18n Please select a Flickr.com supplied image size.%>';
 var alertOnClosePopup = '<%i18n The display of the Media Manager was not updated!\\n\\nPlease solely close the window with the corresponding CLOSE button within the launched window. Otherwise the Media Manager does not reflect the current state after editing or adding media.\\n\\nThis advice does not affect other page functionality.%>';

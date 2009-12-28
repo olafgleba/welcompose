@@ -75,6 +75,19 @@ var response = '{$session.response}';
 	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
 		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
 	{/if}
+{elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li class="on">{i18n Metadata}</li>
+	{/if}
+	{if wcom_check_access('Content', 'SimpleDate', 'Manage')}
+		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
+		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+	{/if}
 {elseif $page.page_type_name == 'WCOM_URL'}
 	{if wcom_check_access('Content', 'Page', 'Manage')}
 		<li class="on">{i18n Metadata}</li>

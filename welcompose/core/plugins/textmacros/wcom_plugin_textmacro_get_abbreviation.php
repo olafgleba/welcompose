@@ -4,10 +4,10 @@
  * Project: Welcompose_Plugins
  * File: wcom_plugin_textmacro_get_abbreviation.php
  * 
- * Copyright (c) 2009 creatics media.systems
+ * Copyright (c) 2009 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2009 creatics media.systems, Olaf Gleba
+ * @copyright 2009 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3

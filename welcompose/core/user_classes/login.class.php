@@ -7,7 +7,7 @@
  * Copylogin (c) 2006 sopic GmbH
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *

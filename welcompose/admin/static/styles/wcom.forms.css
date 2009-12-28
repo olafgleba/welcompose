@@ -2,10 +2,10 @@
  * Project: Welcompose
  * File: wcom.forms.css
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -202,6 +202,9 @@ margin: 0;
 select.multisel {
 width: 300px;
 border: 1px solid #666;
+}
+select.freesel {
+width: auto;
 }
 .flselect {
 margin: 1px 5px 0 0;

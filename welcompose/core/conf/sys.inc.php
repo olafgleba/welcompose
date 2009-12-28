@@ -4,8 +4,8 @@ wcom_admin_root_www = /admin
 wcom_public_root_www = 
 
 [log]
-handler = "file"
-name = /www/welcompose/trunk/welcompose/tmp/log/wcom.log
+handler = "firebug"
+name = 
 level = PEAR_LOG_WARNING
 
 [environment]
@@ -44,15 +44,6 @@ textconverter_dir = "/www/welcompose/trunk/welcompose/core/plugins/textconverter
 textmacro_dir = "/www/welcompose/trunk/welcompose/core/plugins/textmacros"
 
 [urls]
-simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-simple_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-simple_guestbook_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_guestbook_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-simple_guestbook_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
-generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 blog_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 blog_index_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
 blog_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
@@ -83,8 +74,25 @@ blog_archive_month = "/index.php?project_name=<project_name>&amp;page_name=<page
 blog_archive_month_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 blog_archive_month_start = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
 blog_archive_month_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 global_template_url = "/global_template.php?name=<global_file_name>&amp;project=<project_name>"
 global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+simple_date_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_date_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_date_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_date_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_date_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+simple_date_atom_10_start = "/index.php?project_name=<project_name>&amp;action=Atom10"
+simple_date_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+simple_date_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rss20"
+simple_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+simple_guestbook_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_guestbook_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+simple_guestbook_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 
 [flickr]
 cache_dir = "/www/welcompose/trunk/welcompose/tmp/flickr_cache"

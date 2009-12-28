@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: blogcommentsrss20.class.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id: blogrss20.class.php 819 2007-01-19 15:48:05Z andreas $
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3

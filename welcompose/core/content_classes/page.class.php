@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: page.class.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -789,8 +789,7 @@ public function initPageContents ($page)
 					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);
-				
+				);				
 				// create generator form
 				$GENERATORFORM = load('Content:GeneratorForm');
 				$GENERATORFORM->addGeneratorForm($page_info['id'], $sqlData);
@@ -804,26 +803,10 @@ public function initPageContents ($page)
 					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);
-				
+				);				
 				// create simple form
 				$SIMPLEFORM = load('content:simpleform');
 				$SIMPLEFORM->addSimpleForm($page_info['id'], $sqlData);
-			break;
-		case 'WCOM_SIMPLE_PAGE':
-				// prepare sql data
-				$sqlData = array(
-					'id' => $page_info['id'],
-					'user' => WCOM_CURRENT_USER,
-					'title' => $page_info['name'],
-					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
-					'apply_macros' => "1",
-					'date_added' => date('Y-m-d H:i:s')
-				);
-				
-				// create simple page
-				$SIMPLEPAGE = load('content:simplepage');
-				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
 		case 'WCOM_SIMPLE_GUESTBOOK':
 				// prepare sql data
@@ -835,11 +818,24 @@ public function initPageContents ($page)
 					'apply_macros' => "1",
 					'allow_entry' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);
-				
+				);				
 				// create simple guestbook
 				$SIMPLEGUESTBOOK = load('Content:SimpleGuestbook');
 				$SIMPLEGUESTBOOK->addSimpleGuestbook($page_info['id'], $sqlData);
+			break;
+		case 'WCOM_SIMPLE_PAGE':
+				// prepare sql data
+				$sqlData = array(
+					'id' => $page_info['id'],
+					'user' => WCOM_CURRENT_USER,
+					'title' => $page_info['name'],
+					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'apply_macros' => "1",
+					'date_added' => date('Y-m-d H:i:s')
+				);				
+				// create simple page
+				$SIMPLEPAGE = load('content:simplepage');
+				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
 		case 'WCOM_BLOG':
 		case 'WCOM_URL':

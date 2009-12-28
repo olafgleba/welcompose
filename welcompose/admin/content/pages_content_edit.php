@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: pages_content_edit.php
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -122,14 +122,17 @@ try {
 		case 'WCOM_GENERATOR_FORM':
 				header("Location: pages_generatorforms_content_edit.php?id=".(int)$page['id']);
 			exit;
+		case 'WCOM_SIMPLE_DATE':
+				header("Location: pages_simple_dates_select.php?page=".(int)$page['id']);
+			exit;
 		case 'WCOM_SIMPLE_FORM':
 				header("Location: pages_simpleforms_content_edit.php?id=".(int)$page['id']);
 			exit;
-		case 'WCOM_SIMPLE_PAGE':
-				header("Location: pages_simplepages_content_edit.php?id=".(int)$page['id']);
-			exit;
 		case 'WCOM_SIMPLE_GUESTBOOK':
 				header("Location: pages_simpleguestbooks_content_edit.php?id=".(int)$page['id']);
+			exit;
+		case 'WCOM_SIMPLE_PAGE':
+				header("Location: pages_simplepages_content_edit.php?id=".(int)$page['id']);
 			exit;
 		case 'WCOM_URL':
 				header("Location: pages_urls_content_edit.php?id=".(int)$page['id']);

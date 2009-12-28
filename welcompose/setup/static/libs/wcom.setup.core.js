@@ -2,10 +2,10 @@
  * Project: Welcompose
  * File: wcom.setup.core.js
  *
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -14,7 +14,7 @@
  *
  * $Id$
  *
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3

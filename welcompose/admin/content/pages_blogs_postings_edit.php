@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_blogs_postings_add.php
+ * File: pages_blogs_postings_edit.php
  *
  * Copyright (c) 2008 creatics media.systems
  *

@@ -5,7 +5,7 @@
  * Copyright (c) 2004-2005 sopic GmbH
  *
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
