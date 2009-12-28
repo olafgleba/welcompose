@@ -43,12 +43,6 @@ textconverter_dir =
 textmacro_dir = 
 
 [urls]
-simple_page_index = 
-simple_page_index_start = 
-simple_form_index = 
-simple_form_index_start = 
-generator_form_index = 
-generator_form_index_start = 
 blog_index = 
 blog_index_tag = 
 blog_index_pager = 
@@ -79,7 +73,22 @@ blog_archive_month =
 blog_archive_month_pager = 
 blog_archive_month_start = 
 blog_archive_month_start_pager = 
+generator_form_index = 
+generator_form_index_start = 
 global_template_url = 
+simple_date_index_start = 
+simple_date_index_start_pager = 
+simple_date_atom_10 = 
+simple_date_atom_10_start = 
+simple_date_rss_20 = 
+simple_date_rss_20_start = 
+simple_form_index = 
+simple_form_index_start = 
+simple_guestbook_index =  
+simple_guestbook_index_start = 
+simple_guestbook_index_pager = 
+simple_page_index = 
+simple_page_index_start = 
 
 [flickr]
 cache_dir = 
