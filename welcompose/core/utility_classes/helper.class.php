@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: helper.class.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -997,6 +997,37 @@ public function datetimeFromQuickFormDate ($values)
 	}
 	
 	// prepare date string
+	$day = str_pad($day, 2, '0', STR_PAD_LEFT);
+	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+	$year = str_pad($year, 4, '0', STR_PAD_LEFT);
+	$hour = str_pad($hour, 2, '0', STR_PAD_LEFT);
+	$minute = str_pad($minute, 2, '0', STR_PAD_LEFT);
+	
+	return sprintf('%s-%s-%s %s:%s:00', $year, $month, $day, $hour, $minute);
+}
+
+/**
+ * Creates date string as expected by MySQL's datetime fields from
+ * QuickForm's date element. Return null when empty.
+ *
+ * @var array
+ * @return string
+ */
+public function datetimeFromQuickFormDateWithNull ($values)
+{
+	// import date elements from value array
+	$day = (int)Base_Cnc::ifsetor($values['d'], null);
+	$month = (int)Base_Cnc::ifsetor($values['m'], null);
+	$year = (int)Base_Cnc::ifsetor($values['Y'], null);
+	$hour = (int)Base_Cnc::ifsetor($values['H'], null);
+	$minute = (int)Base_Cnc::ifsetor($values['i'], null);
+	
+	// if any of the first three date elements is null, return "null"
+	if (empty($day) || empty($month) || empty($year)) {
+		return null;
+	}
+	
+	// Otherwise prepare date string and return it
 	$day = str_pad($day, 2, '0', STR_PAD_LEFT);
 	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 	$year = str_pad($year, 4, '0', STR_PAD_LEFT);

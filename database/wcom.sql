@@ -1027,6 +1027,50 @@ CREATE TABLE `content_blog_postings` (
 )
 ENGINE=INNODB;
 
+-- Drop table content_simple_dates
+DROP TABLE IF EXISTS `content_simple_dates`;
+
+CREATE TABLE `content_simple_dates` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `date_start` datetime,
+  `date_end` datetime,
+  `location_raw` text,
+  `location` text,
+  `link_1` varchar(255),
+  `link_2` varchar(255),
+  `link_3` varchar(255),
+  `sold_out_1` enum('0','1') DEFAULT '0',
+  `sold_out_2` enum('0','1') DEFAULT '0',
+  `sold_out_3` enum('0','1') DEFAULT '0',
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `draft` enum('0','1') DEFAULT '0',
+  `ping` enum('0','1') DEFAULT '1',
+  `pingbacks_enable` enum('0','1') DEFAULT '1',
+  `pingback_count` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  PRIMARY KEY(`id`),
+  INDEX `page`(`page`),
+  INDEX `user`(`user`),
+  INDEX `text_converter`(`text_converter`),
+  CONSTRAINT `content_simple_dates.page2content_pages.id` FOREIGN KEY (`page`)
+    REFERENCES `content_pages`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_dates.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_simple_dates.text_conv2application_text_conv.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB;
+
 -- Drop table community_blog_comments
 DROP TABLE IF EXISTS `community_blog_comments`;
 

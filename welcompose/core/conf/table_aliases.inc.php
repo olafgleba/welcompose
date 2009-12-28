@@ -4,10 +4,10 @@
  * Project: Welcompose
  * File: table_aliases.inc.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008 creatics
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -52,6 +52,7 @@ define("WCOM_DB_CONTENT_NODES", "content_nodes");
 define("WCOM_DB_CONTENT_PAGES", "content_pages");
 define("WCOM_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2user_groups");
 define("WCOM_DB_CONTENT_PAGE_TYPES", "content_page_types");
+define("WCOM_DB_CONTENT_SIMPLE_DATES", "content_simple_dates");
 define("WCOM_DB_CONTENT_SIMPLE_FORMS", "content_simple_forms");
 define("WCOM_DB_CONTENT_SIMPLE_GUESTBOOKS", "content_simple_guestbooks");
 define("WCOM_DB_CONTENT_SIMPLE_GUESTBOOK_ENTRIES", "content_simple_guestbook_entries");

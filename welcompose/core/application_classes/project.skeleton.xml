@@ -444,6 +444,25 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_SIMPLEDATE_USE</name>
+			<description>Allows usage of simple dates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEDATE_MANAGE</name>
+			<description>Allows management of simple dates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_SIMPLEFORM_USE</name>
 			<description>Allows usage of simple forms.</description>
 			<editable>0</editable>
@@ -707,6 +726,11 @@
 			<editable>0</editable>
 		</page-type>
 		<page-type>
+			<name>WCOM_SIMPLE_DATE</name>
+			<internal_name>SimpleDate</internal_name>
+			<editable>0</editable>
+		</page-type>
+		<page-type>
 			<name>WCOM_GENERATOR_FORM</name>
 			<internal_name>GeneratorForm</internal_name>
 			<editable>0</editable>
@@ -735,6 +759,21 @@
 	<template-types>
 		<template-type>
 			<name>simple_page_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_date_atom10</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_date_index</name>
+			<description/>
+			<editable>0</editable>
+		</template-type>
+		<template-type>
+			<name>simple_date_rss20</name>
 			<description/>
 			<editable>0</editable>
 		</template-type>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Welcompose Admin &ndash; Pages &#62; Simple Dates}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
+
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<p>{i18n Welcompose}</p>
+<!-- logo --></div>
+
+<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+
+<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+
+{include file="_inc_topnav.html" area="contents"}
+
+{include file="_inc_projects_load.html" go_back_area="content" go_back_file="pages_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+{include file="content/_inc_navigation.html"}
+
+<!-- topsubsubnavcon static -->
+<div id="topsubsubnavconstatic">
+<ul id="topsubsubnav">
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'SimpleDate', 'Manage')}
+		<li class="on">{i18n Simple Dates}</li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
+		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+	{/if}
+</ul>
+</div>
+<!-- topsubsubnavcon static eof -->
+
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} : {i18n Blog Postings}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+
+<div id="content">
+
+<h1>{i18n Simple Dates}</h1>
+
+<div class="secnav474_nav_x"><a href="pages_simple_dates_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<br class="clearb" />
+
+<div class="filter clearfix">
+<h2>{i18n Filter:}</h2>
+<form action="pages_simple_dates_select.php" method="get">
+<fieldset>
+<input type="hidden" name="page" value="{$page.id|escape:"htmlall"}" />
+<label for="timeframe">{i18n Timeframe}</label> 
+<select id="timeframe" name="timeframe">
+<option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
+<option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
+{/foreach}
+</select>
+<label for="draft">{i18n Draft}</label> 
+<select id="draft" name="draft">
+<option{if empty($request.draft)} selected="selected"{/if}>{i18n Please choose...}</option>
+<option value="1"{if $request.draft == "1"} selected="selected"{/if}>{i18n Yes}</option>
+<option value="0"{if $request.draft == "0"} selected="selected"{/if}>{i18n No}</option>
+</select>
+&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
+</fieldset>
+</form>
+<!-- filter --></div>
+
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_simple_dates_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;draft={$request.draft|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+<br class="clearb" />
+{/if}
+{* {if !empty($simple_dates)} *}
+<table summary="{i18n Available Simple Dates}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="325" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="300" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="template_name">{i18n Date} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Location} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Link(s)?} <span class="az"></span> <span class="za"></span></th>
+<th>{i18n Edit}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$simple_dates item=_dates}
+<tr{if $_dates.draft > 0} class="draft"{/if}>
+<td>{$_dates.date_start|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{if !empty($_dates.date_end)} - {$_dates.date_end|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{/if}</td>
+<td>{$_dates.location|escape:"htmlall"|truncate:60:"..."}</td>
+<td>{if !empty($_dates.link_1)}{i18n Yes}{else}{i18n No}{/if}</td>
+<td><a class="edit" href="pages_simple_dates_edit.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
+<td><a class="delete confirmDelSimpleDate" href="pages_simple_dates_delete.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+</tr>
+{/foreach}
+</table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_simple_dates_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+{/if}
+{/foreach}
+</ul>
+{/if}
+{* {else}
+<p>{i18n No blog posting has been created yet.}</p>
+{/if} *}
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>
