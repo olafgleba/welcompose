@@ -837,6 +837,7 @@ public function initPageContents ($page)
 				$SIMPLEPAGE = load('content:simplepage');
 				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
 			break;
+		case 'WCOM_SIMPLE_DATE':
 		case 'WCOM_BLOG':
 		case 'WCOM_URL':
 		default:
@@ -1231,9 +1232,10 @@ public function selectPath ($target)
 			`content_pages`.`description` AS `description`,
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
-			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`index_page` AS `index_page`,
+			`content_pages`.`no_follow` AS `no_follow`,
+			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
 			`content_pages`.`sitemap_priority` AS `sitemap_priority`,
 			`content_page_types`.`name` AS `page_type_name`,
