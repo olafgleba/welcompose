@@ -147,7 +147,7 @@ try {
 	
 	// textarea for location
 	$FORM->addElement('textarea', 'location', gettext('Location'),
-		array('id' => 'simple_date_location', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
+		array('id' => 'simple_date_location', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
 	$FORM->applyFilter('location', 'trim');
 	$FORM->addRule('location', gettext('Please enter a location for your date entry'), 'required');
 	
