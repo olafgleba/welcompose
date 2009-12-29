@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 09:59+0100\n"
+"POT-Creation-Date: 2009-12-29 15:09+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -1178,7 +1178,6 @@ msgid "Feed Summary"
 msgstr "Feed Kurzfassung"
 
 #: pages_blogs_postings_add.php:391 pages_blogs_postings_edit.php:411
-#: pages_simple_dates_add.php:216 pages_simple_dates_edit.php:227
 msgid "The field whether the posting is a draft accepts only 0 or 1"
 msgstr "Das Feld \"Entwurf\" kann nur den Wert 0 oder 1 haben"
 
@@ -1438,6 +1437,10 @@ msgstr "Ausverkauft"
 #: pages_simple_dates_edit.php:196 pages_simple_dates_edit.php:203
 msgid "The field whether to apply a sold_out status accepts only 0 or 1"
 msgstr "Das Feld \"Ausverkauft\" kann nur den Wert 0 oder 1 haben"
+
+#: pages_simple_dates_add.php:216 pages_simple_dates_edit.php:227
+msgid "The field whether the date is a draft accepts only 0 or 1"
+msgstr "Das Feld \"Entwurf\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_simpleforms_content_edit.php:128
 msgid "Business form"
@@ -3072,7 +3075,6 @@ msgstr "Jahres-Archiv"
 #: pages_blogs_postings_select.html:55 pages_blogs_postings_select.html:67
 #: pages_blogs_postings_select.html:71 pages_boxes_add.html:68
 #: pages_boxes_edit.html:68 pages_boxes_select.html:61 pages_edit.html:70
-#: pages_simple_dates_select.html:67
 msgid "Blog Postings"
 msgstr "Blog-Einträge"
 
@@ -3278,7 +3280,8 @@ msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service Konfiguration"
 #: pages_simple_dates_add.html:66 pages_simple_dates_add.html:79
 #: pages_simple_dates_add.html:85 pages_simple_dates_edit.html:66
 #: pages_simple_dates_edit.html:79 pages_simple_dates_edit.html:85
-#: pages_simple_dates_select.html:55 pages_simple_dates_select.html:71
+#: pages_simple_dates_select.html:55 pages_simple_dates_select.html:67
+#: pages_simple_dates_select.html:71
 msgid "Simple Dates"
 msgstr "Termine"
 
@@ -3342,7 +3345,7 @@ msgstr "Nein"
 msgid "Date"
 msgstr "Datum"
 
-#: pages_blogs_postings_select.html:154 pages_simple_dates_select.html:151
+#: pages_blogs_postings_select.html:154
 msgid "No blog posting has been created yet."
 msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 
@@ -3652,6 +3655,10 @@ msgstr "Verfügbare Termine"
 #: pages_simple_dates_select.html:124
 msgid "Link(s)?"
 msgstr "Verweise?"
+
+#: pages_simple_dates_select.html:151
+msgid "No simple date has been created yet."
+msgstr "Sie haben noch keinen Termin angelegt."
 
 #: pages_simpleforms_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Simple Form"
@@ -4862,24 +4869,24 @@ msgid ""
 "If your date end differs from your start date, schedule the end date here. "
 "Please note that you have to set Day, Month and Year at least."
 msgstr ""
-"Wenn sich der Termin über einen Tag hinaus erstreckt, geben Sie hier "
-"bitte das Enddatum des Termins an."
+"Wenn sich der Termin über einen Tag hinaus erstreckt, geben Sie hier bitte "
+"das Enddatum des Termins an."
 
 #: simple_date_simple_date_date_start.html:1
 msgid ""
 "Schedule your date. Please note that you have to set Day, Month and Year at "
 "least."
 msgstr ""
-"Geben Sie hier das Startdatum des Termins an. Die Angabe von Tag, Monat und Jahr "
-"ist erforderlich."
+"Geben Sie hier das Startdatum des Termins an. Die Angabe von Tag, Monat und "
+"Jahr ist erforderlich."
 
 #: simple_date_simple_date_link.html:1
 msgid ""
 "Enter a date related link. Please don't forget to enter the protocol "
 "(http:// etc.) and the full domain name."
 msgstr ""
-"Tragen Sie bitte die URL der Webseite ein, die aufgerufen werden soll. Die Angabe "
-"des Protokolls (http://) und eine vollständige Domainadresse wird "
+"Tragen Sie bitte die URL der Webseite ein, die aufgerufen werden soll. Die "
+"Angabe des Protokolls (http://) und eine vollständige Domainadresse wird "
 "vorausgesetzt. Beispiel: http://ihredomain.de"
 
 #: simple_date_simple_date_location.html:1
@@ -4892,9 +4899,10 @@ msgid ""
 "Check this box to disable the former link. This is useful when you want to "
 "substitute the link with a individual notice temporarily."
 msgstr ""
-"Wenn die Checkbox angeklickt ist, wird der darüberstehende Verweis vorübergehend deaktiviert. "
-"Dies kann unter anderen dann nützlich sein, möchte man den Verweis zeitlich begrenzt durch einen "
-"individuellen Text ersetzen."
+"Wenn die Checkbox angeklickt ist, wird der darüberstehende Verweis "
+"vorübergehend deaktiviert. Dies kann unter anderen dann nützlich sein, "
+"möchte man den Verweis zeitlich begrenzt durch einen individuellen Text "
+"ersetzen."
 
 #: simple_form_simple_form_content.html:1
 msgid ""
@@ -5214,8 +5222,8 @@ msgid ""
 "Please don't forget to enter the protocol (http:// etc.) and the full domain "
 "name."
 msgstr ""
-"Tragen Sie bitte die URL der Webseite ein, die aufgerufen werden soll. Die Angabe "
-"des Protokolls (http://) und eine vollständige Domainadresse wird "
+"Tragen Sie bitte die URL der Webseite ein, die aufgerufen werden soll. Die "
+"Angabe des Protokolls (http://) und eine vollständige Domainadresse wird "
 "vorausgesetzt. Beispiel: http://ihredomain.de"
 
 #: user_user_active.html:1
