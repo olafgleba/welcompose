@@ -213,7 +213,7 @@ try {
 		array('id' => 'simple_date_draft', 'class' => 'chbx'));
 	$FORM->applyFilter('draft', 'trim');
 	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether the posting is a draft accepts only 0 or 1'),
+	$FORM->addRule('draft', gettext('The field whether the date is a draft accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for ping

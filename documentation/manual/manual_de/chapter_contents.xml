@@ -300,7 +300,7 @@
 						<term><guilabel>No Follow</guilabel></term>
 						<listitem>
 							<para>
-								Das setzen dieser Option gibt an, ob Verweise auf diese Seite
+								Das Setzen dieser Option gibt an, ob Verweise auf diese Seite
 								mit dem Attribute/Wertepaar <code>rel="nofollow"</code> erweitert
 								werden können und ermöglicht eine Abfrage dieses Wertes bspw.
 								in der Navigationserstellung (s. <xref linkend="contents.navigations"/>).

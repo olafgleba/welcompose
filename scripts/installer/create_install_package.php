@@ -7,7 +7,7 @@
  * Copyright (c) 2006 sopic GmbH
  * 
  * Project owner:
- * creatics media.systems, Olaf Gleba
+ * creatics, Olaf Gleba
  * 50939 Köln, Germany
  * http://www.creatics.de
  *
@@ -16,7 +16,7 @@
  * 
  * $Id$
  * 
- * @copyright 2008 creatics media.systems, Olaf Gleba
+ * @copyright 2008 creatics, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -449,7 +449,7 @@ protected function printHelp ()
 {
 	$rev = '$Date: 2006-11-24 10:15:22 +0100 (Fre, 24 Nov 2006) $';
 	$this->printStderr("Welcompose Setup Generator 0.1 ($rev)\r\n");
-	$this->printStderr("(c) 2008 creatics media.systems\r\n");
+	$this->printStderr("(c) 2008 creatics\r\n");
 	$this->printStderr("Licensed below the terms of the GNU AGPL v3\r\n");
 	$this->printStderr("\r\n");
 	$this->printStderr("Usage: php create_install_package.php \\\r\n");

@@ -15,9 +15,9 @@
 
 		<para>
 			Welcompose ist ein modernes Content Management System, das durch
-			seine Fokussierung auf Webstandards zur Umsetzung kleinerer und
+			seine Fokussierung auf Webstandards und zur Umsetzung kleinerer und
 			mittlerer barrierefreier Webpräsenzen (Webseiten, Blogs) geeignet
-			ist. Flexibilität und Modalität in der Erstellung und Pflege von
+			ist. Flexibilität in der Erstellung und Pflege von
 			Inhalten, ein versiertes Sicherheitskonzept sowie eine einfache
 			Bedienung gewährleisten die optimale Umsetzung Ihrer
 			Anforderungen.
@@ -34,6 +34,10 @@
 			Ihrer Unternehmens-Webseite, Ihres persönlichen Webblogs oder als
 			Service-Plattform für Ihre Angestellten und/oder Kunden im Intra-
 			und/oder Internet.
+		</para>
+		
+		<para> 
+			Welcompose ist <emphasis role="strong">kein</emphasis> 
 		</para>
 
 	</sect1>
@@ -162,7 +166,7 @@
 			Die im Handbuch verwendeten Abbildungen einzelner Bereiche von Welcompose
 			können sich von der Ansicht der jeweils aktuellen Version der Software unterscheiden.
 			Neue Screenshots werden dann erstellt und verwandt, wenn sie zwingend zum Verständnis
-			des Handbuches erforderlich sind. 
+			des Handbuches oder/und der Software erforderlich sind. 
 		</para>
 
 	</sect1>

@@ -1428,6 +1428,36 @@ Wert: 3
 							</row>
 							<row>
 								<entry>
+									simple_guestbook_form_mail
+								</entry>
+								<entry>
+									E-Mail, das von einem Simple Guestbook 
+									versendet wird, wenn die Option "Send Notification"
+									aktiv ist.
+								</entry>
+								<entry>
+									WCOM_SIMPLE_GUESTBOOK
+								</entry>
+								<entry>
+									-
+								</entry>
+							</row>
+							<row>
+								<entry>
+									simple_guestbook_index
+								</entry>
+								<entry>
+									Dient zur Darstellung eines Simple Guestbook.
+								</entry>
+								<entry>
+									WCOM_SIMPLE_GUESTBOOK
+								</entry>
+								<entry>
+									Index
+								</entry>
+							</row>
+							<row>
+								<entry>
 									simple_page_index
 								</entry>
 								<entry>
