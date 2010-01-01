@@ -89,8 +89,9 @@ simple_date_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rs
 simple_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 simple_guestbook_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
-simple_guestbook_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 simple_guestbook_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_guestbook_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+simple_guestbook_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 

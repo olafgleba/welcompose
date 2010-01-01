@@ -109,7 +109,7 @@
 </ul>
 <br class="clearb" />
 {/if}
-{* {if !empty($simple_dates)} *}
+{if !empty($simple_dates)}
 <table summary="{i18n Available Simple Dates}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="325" height="5" alt="" /></td>
@@ -147,9 +147,9 @@
 {/foreach}
 </ul>
 {/if}
-{* {else}
+{else}
 <p>{i18n No simple date has been created yet.}</p>
-{/if} *}
+{/if}
 
 <!-- content --></div>
 
