@@ -386,7 +386,6 @@ public function selectSimpleGuestbooks ($params = array())
 			`content_simple_guestbooks`.`notification_email_to` AS `notification_email_to`,
 			`content_simple_guestbooks`.`notification_email_subject` AS `notification_email_subject`,
 			`content_simple_guestbooks`.`allow_entry` AS `allow_entry`,
-			`content_simple_guestbooks`.`flood_protection` AS `flood_protection`,
 			`content_simple_guestbooks`.`date_modified` AS `date_modified`,
 			`content_simple_guestbooks`.`date_added` AS `date_added`,
 			`content_nodes`.`id` AS `node_id`,

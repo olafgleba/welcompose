@@ -1387,8 +1387,8 @@ http://ihre-domain.tld/sitemap.xml.gz
 							Um es zu vermeiden nach jeder einzelnen Bearbeitung einer Abkürzung
 							in den Bereich Einstellungen und wieder zurück zu wechseln, ist es 
 							eine gute Idee, bei einer Änderungen von unter Umständen mehreren
-							Abkürzungen, diese erst abzuschließen um dann nachfoglgend in einem 
-							Schritt die Änderungen in der Ausgabe zu synchronisieren.
+							Abkürzungen, diese erst abzuschließen um dann nachfolgend in einem 
+							einzigen Schritt die Änderungen in der Ausgabe zu synchronisieren.
 						</para>
 					</tip>
 
@@ -1406,7 +1406,7 @@ http://ihre-domain.tld/sitemap.xml.gz
 					
 					<para>
 						Bearbeitet man im Adminstrationsbereich Seitenvorlagen, Vorlagengruppen und legt
-						inhaltliche Seiten kann es in selten Fällen notwendig sein, diese Funktion auszuführen,
+						inhaltliche Seiten kann es unter Umständen notwendig sein, diese Funktion auszuführen,
 						damit die Ansicht der Ausgabe immer den aktuellen Stand der Bearbeitung reflektiert.
 						Sie löscht die kompilierten Vorlagen aus dem Verzeichnis, so dass Smarty gezwungen
 						wird, bei erneuten Seitenaufruf zwingend eine neue Datei zu schreiben.

@@ -4,57 +4,126 @@
 <chapter id="usage">
 	<title>Anwendungsbeispiele</title>
 	
-	<sect1 id="usage.nested_navigation">
+	<sect1 id="usage.page_types">
+		<title>Seitentypen</title>
+		<sect2 id="usage.simple_forms">
+			<title>Einfache Formulare (<emphasis>WCOM_SIMPLE_FORM</emphasis>)</title>
+			<para>
+				Formulare des Typs <guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> liefern zwei vorkonfiguierte
+				Formulartypen, die für viele Anwendungen ausreichend sind. Zur Verfügung stehen die
+				Formulartypen <guimenuitem>Privates Formular</guimenuitem> und 
+				<guimenuitem>Geschäftliches Formular</guimenuitem>.  
+			</para>	
+		</sect2>
+		
+		<sect2 id="usage.generated_forms">
+			<title>Individuelle Formulare (<emphasis>WCOM_GENERATOR_FORM</emphasis>)</title>
+			<para>
+				Können die Anforderungen nicht durch die vorkonfigurierten Formulare abgebildet werden,
+				kann mit dem Seitentyp <guimenuitem>WCOM_GENERATOR_FORM</guimenuitem> ein eigenes Formular
+				individuell zusammengestellt werden. Hierzu stehen die gängigsten Formularfelder zur Verfügung.
+			</para>	
+		</sect2>
+	
+		<sect2 id="usage.simple_guestbooks">
+			<title>Einfaches Gästebuch (<emphasis>WCOM_SIMPLE_GUESTBOOK</emphasis>)</title>
+			<para>
+				Der Seitentyp <guimenuitem>WCOM_SIMPLE_GUESTBOOK</guimenuitem> bietet dem Anwender
+				die Möglichkeit, ein einfaches Gästebuch nativ in die Webseiten zu integrieren.
+			</para>		
+		</sect2>
+	
+		<sect2 id="usage.simple_dates">
+			<title>Terminliste (<emphasis>WCOM_SIMPLE_DATE</emphasis>)</title>	
+			<para>
+				Der Seitentyp <guimenuitem>WCOM_SIMPLE_DATE</guimenuitem> ist prädestiniert um
+				Veranstaltungstermine, Ticketlinks und ähnliches auf einer Seite abzubilden. Wie bei 
+				Blog Einträgen sind hier RSS20 oder/und Atom10 Feeds verfügbar.
+			</para>
+		</sect2>
+		
+		<sect2 id="usage.simple_page">
+			<title>Einfache Inhaltsseiten (<emphasis>WCOM_SIMPLE_PAGE</emphasis>)</title>	
+			<para>
+				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
+				Sie bitte zwischenzeitlich im 
+				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
+			</para>
+		</sect2>
+		
+		<sect2 id="usage.blog">
+			<title>Blogseiten (<emphasis>WCOM_BLOG</emphasis>)</title>	
+			<para>
+				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
+				Sie bitte zwischenzeitlich im 
+				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
+			</para>
+		</sect2>
+		
+		<sect2 id="usage.url">
+			<title>Externer Verweis (<emphasis>WCOM_URL</emphasis>)</title>	
+			<para>
+				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
+				Sie bitte zwischenzeitlich im 
+				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
+			</para>
+		</sect2>
+	</sect1>
+	
+	<sect1 id="usage.navigations">
+		<title>Navigationen</title>	
+		
+		<sect2 id="usage.nested_navigation">
 		<title>Verschachtelte Navigationen</title>
 
-		<sect2 id="usage.nested_navigation.introduction">
-			<title>Einführung</title>
+			<sect3 id="usage.nested_navigation.introduction">
+				<title>Einführung</title>
 		
-			<para>
-				Ein übliches Szenario in der Erstellung von Vorlagen ist
-				die Erstellung und Anzeige von verschachtelten Navigationen.
-				Hier wird erklärt, wie eine mehrstufige, verschachtelte
-				Navigation erstellt wird, deren Menüpunkte auch korrespondierend
-				zu den Unterpunkten ein- und aufklappen und die komfortabel
-				in die Seitenvorlage inkludiert werden.
-			</para>
+				<para>
+					Ein übliches Szenario in der Erstellung von Vorlagen ist
+					die Erstellung und Anzeige von verschachtelten Navigationen.
+					Hier wird erklärt, wie eine mehrstufige, verschachtelte
+					Navigation erstellt wird, deren Menüpunkte auch korrespondierend
+					zu den Unterpunkten ein- und aufklappen und die komfortabel
+					in die Seitenvorlage inkludiert werden.
+				</para>
 		
-		<note>
-			<para>Um eine verschachtelte Navigation zu erstellen/anzeigen zu lassen,
-				werden ineinander verschachtelte Smarty-Schleifen benötigt ({foreach}{/foreach}).
-				Damit unsere Vorlagen nicht unnötig kompliziert und groß werden, lagern
-				wir den Code zur Navigationserstellung in zwei eigenen Vorlagentypen aus,
-				die wir dann in jeder beliebigen Seitenvorlage inkludieren können, in der
-			 	die Navigation angezeigt werden soll.</para>
-		</note>
-		</sect2>
+			<note>
+				<para>Um eine verschachtelte Navigation zu erstellen/anzeigen zu lassen,
+					werden ineinander verschachtelte Smarty-Schleifen benötigt ({foreach}{/foreach}).
+					Damit unsere Vorlagen nicht unnötig kompliziert und groß werden, lagern
+					wir den Code zur Navigationserstellung in zwei eigenen Vorlagentypen aus,
+					die wir dann in jeder beliebigen Seitenvorlage inkludieren können, in der
+				 	die Navigation angezeigt werden soll.</para>
+			</note>
+			</sect3>
 				
 		
-		<sect2 id="usage.nested_navigation.setup">
-			<title>Einrichtung</title>
+			<sect3 id="usage.nested_navigation.setup">
+				<title>Einrichtung</title>
 			
-			<para>Gehen Sie zur Rubrik <guimenu>Vorlagen</guimenu> in die
-			 Unterrubrik <guisubmenu>Vorlagentypen</guisubmenu> und klicken
-			 Sie auf <guibutton>Neu anlegen</guibutton> um einen neuen Eintrag
-			 anzulegen.</para>
+				<para>Gehen Sie zur Rubrik <guimenu>Vorlagen</guimenu> in die
+				 Unterrubrik <guisubmenu>Vorlagentypen</guisubmenu> und klicken
+				 Sie auf <guibutton>Neu anlegen</guibutton> um einen neuen Eintrag
+				 anzulegen.</para>
 
-			<para>Legen Sie <emphasis>jeweils</emphasis> einen Vorlagentyp
-			 mit Namen <userinput>custom_navigation_embed</userinput> und
-			 <userinput>custom_navigation_generator</userinput>.</para>
+				<para>Legen Sie <emphasis>jeweils</emphasis> einen Vorlagentyp
+				 mit Namen <userinput>custom_navigation_embed</userinput> und
+				 <userinput>custom_navigation_generator</userinput>.</para>
 
-			<para>Wechseln Sie nun zur Unterrubrik <guisubmenu>Seitenvorlagen</guisubmenu>
-			. Hier legen wir für unsere zwei neuen gerade angelegten Vorlagentypen
-			 <emphasis>jeweils</emphasis> 1 Seitenvorlage an. Wir beginnen mit der
-			 Seitenvorlage für den Vorlagentyp <userinput>custom_navigation_embed</userinput>.</para>
+				<para>Wechseln Sie nun zur Unterrubrik <guisubmenu>Seitenvorlagen</guisubmenu>
+				. Hier legen wir für unsere zwei neuen gerade angelegten Vorlagentypen
+				 <emphasis>jeweils</emphasis> 1 Seitenvorlage an. Wir beginnen mit der
+				 Seitenvorlage für den Vorlagentyp <userinput>custom_navigation_embed</userinput>.</para>
 
-			<para>Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
-			 neue Seitenvorlage anzulegen. Wählen Sie im Feld <guilabel>Typ</guilabel>
-			 unseren neuen Vorlagentyp aus (hier: <userinput>custom_navigation_embed</userinput>).
-			Vergeben Sie einen beliebigen Namen für die Seitenvorlage.</para>
+				<para>Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
+				 neue Seitenvorlage anzulegen. Wählen Sie im Feld <guilabel>Typ</guilabel>
+				 unseren neuen Vorlagentyp aus (hier: <userinput>custom_navigation_embed</userinput>).
+				Vergeben Sie einen beliebigen Namen für die Seitenvorlage.</para>
 
-<para>Kopieren Sie folgenden Quelltext und fügen diesen im Feld <guilabel>Inhalt</guilabel> ein.</para>
+	<para>Kopieren Sie folgenden Quelltext und fügen diesen im Feld <guilabel>Inhalt</guilabel> ein.</para>
 
-		<programlisting language="smarty"><![CDATA[
+			<programlisting language="smarty"><![CDATA[
 {select_named ns="Content" class="Page" method="selectPages" var="pages" navigation="1"}
 {select_simple ns="Content" class="Page" method="selectPath" var="path" target=$page.id}
 
@@ -62,28 +131,28 @@
 
 ]]></programlisting>
 
-		<note>
-			<para>Hinweis: Wir gehen davon aus, das eine Navigation mit der
-			 ID <userinput>1</userinput> existiert. Passen Sie den Parameter
-			 <filename>navigation</filename> ggf. an.
-			</para>
-		</note>
+			<note>
+				<para>Hinweis: Wir gehen davon aus, das eine Navigation mit der
+				 ID <userinput>1</userinput> existiert. Passen Sie den Parameter
+				 <filename>navigation</filename> ggf. an.
+				</para>
+			</note>
 
-		<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>, die den
-		 inhaltlichen Seiten zugeordnet sind, in denen die Navigation später
-		 angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
+			<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>, die den
+			 inhaltlichen Seiten zugeordnet sind, in denen die Navigation später
+			 angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
 
-		<para>Legen Sie nun in analoger Art und Weise die Seitenvorlage für
-			 den Vorlagentyp <userinput>custom_navigation_generator</userinput>
-			 an. Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
-			 neue Seitenvorlage anzulegen Wählen Sie im Feld <guilabel>Typ</guilabel>
-			 unseren zweiten, neuen Vorlagentyp <emphasis>custom_navigation_generator</emphasis> aus.
-			 Vergeben Sie wiederum einen beliebigen Namen für die Seitenvorlage.</para>
+			<para>Legen Sie nun in analoger Art und Weise die Seitenvorlage für
+				 den Vorlagentyp <userinput>custom_navigation_generator</userinput>
+				 an. Klicken Sie auf <guibutton>Neu anlegen</guibutton> um einen
+				 neue Seitenvorlage anzulegen Wählen Sie im Feld <guilabel>Typ</guilabel>
+				 unseren zweiten, neuen Vorlagentyp <emphasis>custom_navigation_generator</emphasis> aus.
+				 Vergeben Sie wiederum einen beliebigen Namen für die Seitenvorlage.</para>
 
-		<para>Kopieren Sie folgenden Quelltext und fügen diesen
-			im Feld <guilabel>Inhalt</guilabel> ein.</para>
+			<para>Kopieren Sie folgenden Quelltext und fügen diesen
+				im Feld <guilabel>Inhalt</guilabel> ein.</para>
 
-		<programlisting language="smarty"><![CDATA[
+			<programlisting language="smarty"><![CDATA[
 <ul class="nav_{$level}">
 {foreach from=$pages item=_page}
     {if $_page.level == $level && $_page.parent == $parent}
@@ -94,7 +163,7 @@
                 {assign var="__in_path" value="true"}
             {/if}
         {/foreach}
-            
+           
         <li{if $page.id == $_page.id} class="on"{/if}>
             {if $page.id == $_page.id}
                 <span>{$_page.name}</span>
@@ -111,10 +180,10 @@
 </ul>
 ]]></programlisting>
 
-		<para>Der Ausgabe-Quelltext wird bei einer zweistufigen Navigation
- 			beispielhaft in der Ausgabe später wie folgt aussehen:</para>
+			<para>Der Ausgabe-Quelltext wird bei einer zweistufigen Navigation
+	 			beispielhaft in der Ausgabe später wie folgt aussehen:</para>
 
-		<programlisting language="smarty"><![CDATA[
+			<programlisting language="smarty"><![CDATA[
 <ul class="nav_1">
     <li><a href="datei.suffix">Seite</a></li>
     <li><a href="datei.suffix">Seite</a></li>
@@ -128,273 +197,272 @@
 </ul>
 ]]></programlisting>
 
-			<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>,
-			die den inhaltlichen Seiten zugeordnet sind, in denen die Navigation
-			angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
+				<para>Selektieren Sie die <guilabel>Vorlagengruppen</guilabel>,
+				die den inhaltlichen Seiten zugeordnet sind, in denen die Navigation
+				angezeigt werden soll. Speichern Sie die Seitenvorlage.</para>
 
-			<para>Nun sind wir fast fertig. Was fehlt ist die Einbindung der Navigation
-			 in die Seitenvorlagen, in denen wir die Navigation einbinden wollen.</para>
+				<para>Nun sind wir fast fertig. Was fehlt ist die Einbindung der Navigation
+				 in die Seitenvorlagen, in denen wir die Navigation einbinden wollen.</para>
 
-			<para>Wählen Sie die gewünschte Seitenvorlage aus, in der die Navigation
-			 eingefügt werden soll und gehen über das <guibutton>Bearbeiten-Symbol</guibutton>
-			 zur inhaltlichen Ansicht. Fügen Sie an der Stelle, an der die Navigation plaziert
-			 werden soll, folgenden Quelltext ein:</para>
+				<para>Wählen Sie die gewünschte Seitenvorlage aus, in der die Navigation
+				 eingefügt werden soll und gehen über das <guibutton>Bearbeiten-Symbol</guibutton>
+				 zur inhaltlichen Ansicht. Fügen Sie an der Stelle, an der die Navigation plaziert
+				 werden soll, folgenden Quelltext ein:</para>
 
-		<programlisting language="smarty"><![CDATA[
+			<programlisting language="smarty"><![CDATA[
 {include file="wcom:custom_navigation_embed.`$page.id`"}
 ]]></programlisting>
 
-			<para>Speichern Sie die Seitenvorlage. Damit ist die Integration abgeschlossen.</para>
+				<para>Speichern Sie die Seitenvorlage. Damit ist die Integration abgeschlossen.</para>
 			
-			<note>
-				<para>Um die Navigation zu stylen, können die in dem Beispiel deklarierten
-					Klassen verwendet werden. Wenn Sie andere Klassen preferieren, editieren
-					sie bitte die Vorlage <userinput>custom_navigation_generator</userinput>.
-				</para>
-			</note>
+				<note>
+					<para>Um die Navigation zu stylen, können die in dem Beispiel deklarierten
+						Klassen verwendet werden. Wenn Sie andere Klassen preferieren, editieren
+						sie bitte die Vorlage <userinput>custom_navigation_generator</userinput>.
+					</para>
+				</note>
+			</sect3>
 		</sect2>
 	</sect1>
-		
-	<!-- <sect1 id="usage.multi_language_websites">
-		<title>Mehrsprachige Websites</title>
-		
-		<para/>
-	</sect1> -->
 	
-	<sect1 id="usage.protected_pages">
+	<sect1 id="usage.miscellaneous">
+		<title>Sonstiges</title>
+		
+		<sect2 id="usage.protected_pages">
 		<title>Geschützte Seiten (Passwortschutz)</title>
 
-		<sect2 id="usage.protected_pages.introduction">
-			<title>Einführung</title>
+			<sect3 id="usage.protected_pages.introduction">
+				<title>Einführung</title>
 		
-			<para>
-				Welcompose unterstützt den Passwortschutz von einzelnen Seiten.
-				So kann den Mitgliedern einer oder mehreren Benutzergruppen der
-				exklusive Zugriff auf die Inhalte einer oder mehrerer Seiten
-				gewährt werden, sobald sich die Mitglieder der Benutzergruppen
-				gegenüber dem System authentifiziert haben.
-			</para>
-		</sect2>
-		
-		<sect2 id="usage.protected_pages.setup">
-			<title>Einrichtung</title>
-		
-			<para>
-				Die Zugangskontrolle zu geschützten Seiten erfolgt mit Hilfe
-				der Welcompose-Benutzergruppen. Um eine oder mehrere Seiten zu
-				schützen, müssen Sie also zuerst einmal eine oder mehrere
-				Benutzergruppen anlegen. Diesen werden später die Benutzer
-				zugeordnet, die Zugriff auf die Seiten erhalten sollen.
-			</para>
-		
-			<para>
-				Um eine neue Benutzergruppe zu erstellen, wechseln Sie zum
-				Bereich <guimenu>Benutzer</guimenu> und dort zum Unterpunkt 
-				<guisubmenu>Benutzergruppen</guisubmenu>. Suchen Sie dort nach der
-				Benutzergruppe WCOM_ANONYMOUS und klicken dort auf die 
-				Schaltfläche <guibutton>Duplizieren</guibutton>. Ändern Sie nun
-				den Namen der Benutzergruppe. Achten Sie dabei darauf, ein
-				Prefix wie <userinput>CUSTOM_</userinput> zu verwenden, damit
-				keine Kollisionen mit Welcompose-Benutzergruppen auftreten
-				können. Als Beispiel soll der Name
-				<userinput>CUSTOM_LOGIN_INTERN</userinput> verwendet werden.
-				Geben Sie als Beschreibung einen Text ein, der erklärt, wozu
-				diese Gruppe dient, beispielsweise <userinput>Passwortschutz
-				für Seite Intern</userinput>. Lassen Sie die ausgewählten
-				Benutzerrechte unberührt und klicken Sie dann auf
-				<guibutton>Benutzergruppe duplizieren</guibutton>.
-			</para>
-		
-			<figure id="usage.protected_pages.setup.add_user_group">
-				<title>Benutzergruppe für Passwortschutz anlegen</title>
-				<graphic fileref="images/usage/protected_pages/setup.add_user_group.png"/>
-			</figure>
-		
-			<para>
-				Wechseln Sie zum
-				Bereich zum Unterpunkt 
-				<guisubmenu>Benutzer</guisubmenu>.
-				Ordnen Sie nun einen oder mehrere Benutzer der soeben
-				angelegten Gruppe zu. Achten Sie dabei darauf, dem Benutzer
-				keine Autoren-Rechte einzuräumen, da er sich sonst am
-				Administrationsbereich anmelden kann.
-			</para>
-		
-			<figure id="usage.protected_pages.setup.add_user">
-				<title>Benutzer für geschützte Seite hinzufügen</title>
-				<graphic fileref="images/usage/protected_pages/setup.add_user.png"/>
-			</figure>
-		
-			<para>
-				Legen Sie nun die neue Seite an (in unseren Beispiel mit Namen
-				<userinput>Intern</userinput> respektive bearbeiten eine
-				bestehende Seite, in dem Sie aud der Seitenübersicht im Bereich
-				<guimenu>Inhalte</guimenu> in der jeweiligen Zeile auf <guibutton>
-				Bearbeiten</guibutton> klicken und dann in der Subnavigation der
-				Seite auf <guibutton>Metadaten</guibutton> klicken.
-			</para>
-		
-			<para>
-				Klicken Sie dort bei <emphasis>Geschützt</emphasis> die
-				Checkbox an und wählen darunter die Benutzergruppen aus, die
-				Zugang zu dieser Seite erhalten sollen. Wählen Sie auf jeden
-				Fall die soeben angelegte Gruppe, also
-				<guimenuitem>CUSTOM_LOGIN_INTERN</guimenuitem>, aus. Dazu
-				können Sie die Standard-Gruppen für Autoren
-				<guimenuitem>WCOM_ADMIN</guimenuitem> und
-				<guimenuitem>WCOM_REGULAR</guimenuitem> auswählen. So erhalten
-				alle Anwender, die Zugang zum Administrationsbereich haben,
-				Zugang zur geschützten Seite.
-			</para>
-		
-			<warning>
 				<para>
-					Wählen Sie keinesfalls 
-					<guimenuitem>WCOM_ANONYMOUS</guimenuitem> als
-					Benutzergruppe aus. Sonst erhalten alle Besucher Zugang
-					zur geschützten Seite &ndash; ohne Passwort.
+					Welcompose unterstützt den Passwortschutz von einzelnen Seiten.
+					So kann den Mitgliedern einer oder mehreren Benutzergruppen der
+					exklusive Zugriff auf die Inhalte einer oder mehrerer Seiten
+					gewährt werden, sobald sich die Mitglieder der Benutzergruppen
+					gegenüber dem System authentifiziert haben.
 				</para>
-			</warning>
+			</sect3>
 		
-			<figure id="usage.protected_pages.setup.protect_page">
-				<title>Seite schützen</title>
-				<graphic fileref="images/usage/protected_pages/setup.protect_page.png"/>
-			</figure>
+			<sect3 id="usage.protected_pages.setup">
+				<title>Einrichtung</title>
 		
-			<para>
-				Rufen Sie nun über den öffentlichen Bereich die Seite auf, die
-				geschützt werden soll, wird anstatt der regulären Seite eine
-				Fehlermeldung angezeigt, wonach eine Vorlage vom Typ
-				system_login benötigt wird. Diese zeigt das Login-Formular an,
-				das die Benutzer verwenden müssen, um sich anzumelden.
-			</para>
+				<para>
+					Die Zugangskontrolle zu geschützten Seiten erfolgt mit Hilfe
+					der Welcompose-Benutzergruppen. Um eine oder mehrere Seiten zu
+					schützen, müssen Sie also zuerst einmal eine oder mehrere
+					Benutzergruppen anlegen. Diesen werden später die Benutzer
+					zugeordnet, die Zugriff auf die Seiten erhalten sollen.
+				</para>
 		
-			<para>
-				Um diese Vorlage anzulegen, gehen Sie zum Bereich
-				<guimenu>Vorlagen</guimenu> und dort zum Unterpunkt 
-				<guisubmenu>Seitenvorlagen</guisubmenu>. Legen Sie dort eine
-				Vorlage vom Typ <userinput>system_login</userinput> an und weisen Sie
-				 sie der Vorlagengruppe zu, der von der geschützten Seite verwendet
-				wird. Fügen Sie an einem beliebigen Platz das Login-Formular
-				ein (das optisch an die eigenen Bedürfnisse angepasst werden
-				kann):
-			</para>
+				<para>
+					Um eine neue Benutzergruppe zu erstellen, wechseln Sie zum
+					Bereich <guimenu>Benutzer</guimenu> und dort zum Unterpunkt 
+					<guisubmenu>Benutzergruppen</guisubmenu>. Suchen Sie dort nach der
+					Benutzergruppe WCOM_ANONYMOUS und klicken dort auf die 
+					Schaltfläche <guibutton>Duplizieren</guibutton>. Ändern Sie nun
+					den Namen der Benutzergruppe. Achten Sie dabei darauf, ein
+					Prefix wie <userinput>CUSTOM_</userinput> zu verwenden, damit
+					keine Kollisionen mit Welcompose-Benutzergruppen auftreten
+					können. Als Beispiel soll der Name
+					<userinput>CUSTOM_LOGIN_INTERN</userinput> verwendet werden.
+					Geben Sie als Beschreibung einen Text ein, der erklärt, wozu
+					diese Gruppe dient, beispielsweise <userinput>Passwortschutz
+					für Seite Intern</userinput>. Lassen Sie die ausgewählten
+					Benutzerrechte unberührt und klicken Sie dann auf
+					<guibutton>Benutzergruppe duplizieren</guibutton>.
+				</para>
 		
-			<programlisting><![CDATA[
-{if !empty($form.errors)}
-<ul>
-{foreach from=$form.errors  key="field_name" item="error"}
-    <li>{$error}</li>
-{/foreach}
-</ul>
-{/if}
-
-<p>{$form.requirednote}</p>
-
-<form {$form.attributes}>
-{$form.javascript}
-
-<fieldset>
-{$form.hidden}
-<label for="email">{$form.email.label}</label>{$form.email.html}<br />
-<label for="secret">{$form.secret.label}</label>{$form.secret.html}
-</fieldset>
-
-{$form.submit.html}
-</form>
-]]></programlisting>
-			
-			<figure id="usage.protected_pages.setup.create_login_template">
-				<title>Login-Vorlage erstellen</title>
-				<graphic fileref="images/usage/protected_pages/setup.create_login_template.png"/>
-			</figure>
-			
-			<para>
-				Sobald die Vorlage gespeichert wurde und Sie die geschützte
-				Seite im öffentlichen Bereich aufrufen, sollte das
-				Login-Formular erscheinen. Füllen Sie dieses mit Ihren
-				Zugangsdaten aus (sofern Sie Mitglied einer Gruppe sind, die
-				auf diese Seite zugreifen darf) und senden es ab. Sie sollten
-				nun auf die eigentliche Seite weitergeleitet werden.
-			</para>
-		</sect2>
+				<figure id="usage.protected_pages.setup.add_user_group">
+					<title>Benutzergruppe für Passwortschutz anlegen</title>
+					<graphic fileref="images/usage/protected_pages/setup.add_user_group.png"/>
+				</figure>
 		
-		<sect2 id="usage.protected_pages.limitations">
-			<title>Einschränkungen</title>
-			
-			<para>
-				Der Passwortschutz von Welcompose unterliegt einer Reihe von
-				Einschränkungen:
-			</para>
-			
-			<itemizedlist>
-				<listitem>
+				<para>
+					Wechseln Sie zum
+					Bereich zum Unterpunkt 
+					<guisubmenu>Benutzer</guisubmenu>.
+					Ordnen Sie nun einen oder mehrere Benutzer der soeben
+					angelegten Gruppe zu. Achten Sie dabei darauf, dem Benutzer
+					keine Autoren-Rechte einzuräumen, da er sich sonst am
+					Administrationsbereich anmelden kann.
+				</para>
+		
+				<figure id="usage.protected_pages.setup.add_user">
+					<title>Benutzer für geschützte Seite hinzufügen</title>
+					<graphic fileref="images/usage/protected_pages/setup.add_user.png"/>
+				</figure>
+		
+				<para>
+					Legen Sie nun die neue Seite an (in unseren Beispiel mit Namen
+					<userinput>Intern</userinput> respektive bearbeiten eine
+					bestehende Seite, in dem Sie aud der Seitenübersicht im Bereich
+					<guimenu>Inhalte</guimenu> in der jeweiligen Zeile auf <guibutton>
+					Bearbeiten</guibutton> klicken und dann in der Subnavigation der
+					Seite auf <guibutton>Metadaten</guibutton> klicken.
+				</para>
+		
+				<para>
+					Klicken Sie dort bei <emphasis>Geschützt</emphasis> die
+					Checkbox an und wählen darunter die Benutzergruppen aus, die
+					Zugang zu dieser Seite erhalten sollen. Wählen Sie auf jeden
+					Fall die soeben angelegte Gruppe, also
+					<guimenuitem>CUSTOM_LOGIN_INTERN</guimenuitem>, aus. Dazu
+					können Sie die Standard-Gruppen für Autoren
+					<guimenuitem>WCOM_ADMIN</guimenuitem> und
+					<guimenuitem>WCOM_REGULAR</guimenuitem> auswählen. So erhalten
+					alle Anwender, die Zugang zum Administrationsbereich haben,
+					Zugang zur geschützten Seite.
+				</para>
+		
+				<warning>
 					<para>
-						Wenn eine Seite mit einem Passwortschutz versehen
-						wird, wird nur diese eine Seite geschützt. Der
-						Passwortschutz hat auf darunterliegende Seiten keine
-						Auswirkung.
+						Wählen Sie keinesfalls 
+						<guimenuitem>WCOM_ANONYMOUS</guimenuitem> als
+						Benutzergruppe aus. Sonst erhalten alle Besucher Zugang
+						zur geschützten Seite &ndash; ohne Passwort.
 					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Bein einer geschützten Seite verwehrt Welcompose nur
-						den Zugang zu der Seite, nicht direkt zu den auf ihr
-						dargestellten Informationen. Dies bedeutet, dass
-						insbesondere Objekte aus dem Media Manager allen
-						Besuchern frei zugänglich sind, sofern sie die URLs
-						zu den Objekten kennen (was bedeutet, dass die
-						Objekte beispielsweise von Google indiziert werden
-						können). 
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Wenn Sie die Informationen einer geschützten Seite auf
-						einer anderen Seite zugänglich machen, beispielsweise
-						durch eigene Programmierung, werden die Informationen
-						dort jedem Besucher angezeigt, ohne dass eine
-						Authentifizierung verlangt wird.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</sect2>
+				</warning>
 		
-		<sect2 id="usage.protected_pages.protect_more_pages">
-			<title>Weitere Seiten schützen</title>
+				<figure id="usage.protected_pages.setup.protect_page">
+					<title>Seite schützen</title>
+					<graphic fileref="images/usage/protected_pages/setup.protect_page.png"/>
+				</figure>
+		
+				<para>
+					Rufen Sie nun über den öffentlichen Bereich die Seite auf, die
+					geschützt werden soll, wird anstatt der regulären Seite eine
+					Fehlermeldung angezeigt, wonach eine Vorlage vom Typ
+					system_login benötigt wird. Diese zeigt das Login-Formular an,
+					das die Benutzer verwenden müssen, um sich anzumelden.
+				</para>
+		
+				<para>
+					Um diese Vorlage anzulegen, gehen Sie zum Bereich
+					<guimenu>Vorlagen</guimenu> und dort zum Unterpunkt 
+					<guisubmenu>Seitenvorlagen</guisubmenu>. Legen Sie dort eine
+					Vorlage vom Typ <userinput>system_login</userinput> an und weisen Sie
+					 sie der Vorlagengruppe zu, der von der geschützten Seite verwendet
+					wird. Fügen Sie an einem beliebigen Platz das Login-Formular
+					ein (das optisch an die eigenen Bedürfnisse angepasst werden
+					kann):
+				</para>
+		
+				<programlisting><![CDATA[
+	{if !empty($form.errors)}
+	<ul>
+	{foreach from=$form.errors  key="field_name" item="error"}
+	    <li>{$error}</li>
+	{/foreach}
+	</ul>
+	{/if}
+
+	<p>{$form.requirednote}</p>
+
+	<form {$form.attributes}>
+	{$form.javascript}
+
+	<fieldset>
+	{$form.hidden}
+	<label for="email">{$form.email.label}</label>{$form.email.html}<br />
+	<label for="secret">{$form.secret.label}</label>{$form.secret.html}
+	</fieldset>
+
+	{$form.submit.html}
+	</form>
+	]]></programlisting>
+			
+				<figure id="usage.protected_pages.setup.create_login_template">
+					<title>Login-Vorlage erstellen</title>
+					<graphic fileref="images/usage/protected_pages/setup.create_login_template.png"/>
+				</figure>
+			
+				<para>
+					Sobald die Vorlage gespeichert wurde und Sie die geschützte
+					Seite im öffentlichen Bereich aufrufen, sollte das
+					Login-Formular erscheinen. Füllen Sie dieses mit Ihren
+					Zugangsdaten aus (sofern Sie Mitglied einer Gruppe sind, die
+					auf diese Seite zugreifen darf) und senden es ab. Sie sollten
+					nun auf die eigentliche Seite weitergeleitet werden.
+				</para>
+			</sect3>
+		
+			<sect3 id="usage.protected_pages.limitations">
+				<title>Einschränkungen</title>
+			
+				<para>
+					Der Passwortschutz von Welcompose unterliegt einer Reihe von
+					Einschränkungen:
+				</para>
+			
+				<itemizedlist>
+					<listitem>
+						<para>
+							Wenn eine Seite mit einem Passwortschutz versehen
+							wird, wird nur diese eine Seite geschützt. Der
+							Passwortschutz hat auf darunterliegende Seiten keine
+							Auswirkung.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bein einer geschützten Seite verwehrt Welcompose nur
+							den Zugang zu der Seite, nicht direkt zu den auf ihr
+							dargestellten Informationen. Dies bedeutet, dass
+							insbesondere Objekte aus dem Media Manager allen
+							Besuchern frei zugänglich sind, sofern sie die URLs
+							zu den Objekten kennen (was bedeutet, dass die
+							Objekte beispielsweise von Google indiziert werden
+							können). 
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Wenn Sie die Informationen einer geschützten Seite auf
+							einer anderen Seite zugänglich machen, beispielsweise
+							durch eigene Programmierung, werden die Informationen
+							dort jedem Besucher angezeigt, ohne dass eine
+							Authentifizierung verlangt wird.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+		
+			<sect3 id="usage.protected_pages.protect_more_pages">
+				<title>Weitere Seiten schützen</title>
 					
-			<para>
-				Haben Sie bereits eine Seite geschützt und möchten nun weitere
-				Seiten schützen, brauchen Sie nur einige Schritte der 
-				Einrichtung (siehe <xref linkend="usage.protected_pages.setup"/>)
-				zu wiederholen.
-			</para>
+				<para>
+					Haben Sie bereits eine Seite geschützt und möchten nun weitere
+					Seiten schützen, brauchen Sie nur einige Schritte der 
+					Einrichtung (siehe <xref linkend="usage.protected_pages.setup"/>)
+					zu wiederholen.
+				</para>
 			
-			<itemizedlist>
-				<listitem>
-					<para>
-						Soll eine weitere Seite denselben (oder weniger)
-						Benutzergruppen zugänglich gemacht werden, reicht es,
-						die jeweilige Seite zu schützen und der Seite
-						dieselben (oder weniger) Benutzergruppen zuzuweisen.
-						Sie brauchen eine neue Benutzergruppe nur anzulegen,
-						wenn die Seite anderen Benutzern zugänglich gemacht
-						werden soll.  
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Die Vorlage für das Login-Formular wird für alle
-						geschützten Seiten verwendet. Das heisst, man muss
-						nicht für jede geschützte Seite eine neue Vorlage
-						für das Login-Formular anlegen. Dies ist nur nötig,
-						wenn das Login-Formular einer bestimmten Seite
-						anders gestaltet werden soll. Erstellen Sie zu diesem
-						Zweck einen neuen Vorlagen-Satz, dem Sie die Seite
-						und die neue Vorlage für das Login-Formular zuweisen.
-					</para>
-				</listitem>
-			</itemizedlist>
+				<itemizedlist>
+					<listitem>
+						<para>
+							Soll eine weitere Seite denselben (oder weniger)
+							Benutzergruppen zugänglich gemacht werden, reicht es,
+							die jeweilige Seite zu schützen und der Seite
+							dieselben (oder weniger) Benutzergruppen zuzuweisen.
+							Sie brauchen eine neue Benutzergruppe nur anzulegen,
+							wenn die Seite anderen Benutzern zugänglich gemacht
+							werden soll.  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Die Vorlage für das Login-Formular wird für alle
+							geschützten Seiten verwendet. Das heisst, man muss
+							nicht für jede geschützte Seite eine neue Vorlage
+							für das Login-Formular anlegen. Dies ist nur nötig,
+							wenn das Login-Formular einer bestimmten Seite
+							anders gestaltet werden soll. Erstellen Sie zu diesem
+							Zweck einen neuen Vorlagen-Satz, dem Sie die Seite
+							und die neue Vorlage für das Login-Formular zuweisen.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
 		</sect2>
 	</sect1>
 	

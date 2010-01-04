@@ -33,7 +33,8 @@
 			von denen pro Ausgabeseite nur eines vorkommen kann. Eine weitere
 			Einschränkung ist, dass Strukturelemente voneinander abhängen
 			können. So ist es beispielsweise nicht möglich, ein Blog Posting
-			ohne Blog zu haben. Eine schematische Darstellung der Abhängigkeiten
+			ohne Blog zu haben.
+			 Eine schematische Darstellung der Abhängigkeiten
 			zwischen den einzelnen Strukturelementen zeigt Grafik <xref
 			linkend="contents.how_it_works.dependencies_structural_elements"/>.
 		</para>

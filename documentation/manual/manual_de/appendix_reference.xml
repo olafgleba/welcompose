@@ -94,6 +94,63 @@
 				</varlistentry>
 			</variablelist>
 		</sect2>
+
+		<sect2 id="reference.list_of_template_types.generated_form">
+			<title>Generated Forms</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term><emphasis>generator_form_index</emphasis></term>
+					<listitem>
+						<para>
+							Hauptvorlage für für indivduell angelegte Formulare. Zeigt die eigentliche
+							Generated Form an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>generator_form_mail</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für E-Mails, die beim Ausfüllen eines
+							Generated Form verschickt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="reference.list_of_template_types.simple_date">
+			<title>Simple Dates</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term><emphasis>simple_date_index</emphasis></term>
+					<listitem>
+						<para>
+							Hauptvorlage für Formulare. Zeigt Übersicht über die
+							vorhandenen Termineinträge an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>simple_date_rss20</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für RSS-2.0-Feed von Seiten des Typs <emphasis>SimpleDate</emphasis>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>simple_date_atom10</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für ATOM-1.0-Feed von Seiten des Typs <emphasis>SimpleDate</emphasis>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
 		
 		<sect2 id="reference.list_of_template_types.simple_form">
 			<title>Simple Forms</title>
@@ -129,26 +186,24 @@
 			</variablelist>
 		</sect2>
 		
-
-		<sect2 id="reference.list_of_template_types.generated_form">
-			<title>Generated Forms</title>
+		<sect2 id="reference.list_of_template_types.simple_guestbook">
+			<title>Simple Guestbook</title>
 				
 			<variablelist>
 				<varlistentry>
-					<term><emphasis>generator_form_index</emphasis></term>
+					<term><emphasis>simple_guestbook_index</emphasis></term>
 					<listitem>
 						<para>
-							Hauptvorlage für für indivduell angelegte Formulare. Zeigt die eigentliche
-							Generated Form an.
+							Hauptvorlage für das Gästebuch.
 						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><emphasis>generator_form_mail</emphasis></term>
+					<term><emphasis>simple_guestbook_form_mail</emphasis></term>
 					<listitem>
 						<para>
-							Vorlage für E-Mails, die beim Ausfüllen eines
-							Generated Form verschickt werden.
+							Vorlage für E-Mails, die beim die verschickt werden,
+							wenn die Benachrichtungs-Option des Gästebuchs aktiviert wurde.
 						</para>
 					</listitem>
 				</varlistentry>

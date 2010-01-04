@@ -138,7 +138,7 @@ try {
 		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => 20,
-		'order_macro' => 'DATE_ADDED:DESC'
+		'order_macro' => 'DATE_START'
 	));
 	$BASE->utility->smarty->assign('simple_dates', $simple_dates);
 	

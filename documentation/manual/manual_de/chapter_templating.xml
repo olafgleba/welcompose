@@ -1382,6 +1382,48 @@ Wert: 3
 							</row>
 							<row>
 								<entry>
+									simple_date_atom10
+								</entry>
+								<entry>
+									ATOM-1.0-Feed einer Simple Dates Übersicht.
+								</entry>
+								<entry>
+									WCOM_SIMPLE_DATE
+								</entry>
+								<entry>
+									Atom10
+								</entry>
+							</row>
+							<row>
+								<entry>
+									simple_date_index
+								</entry>
+								<entry>
+									Dient zur Darstellung einer Seite vom Typ Simple Dates.
+								</entry>
+								<entry>
+									WCOM_SIMPLE_DATE
+								</entry>
+								<entry>
+									Index
+								</entry>
+							</row>
+							<row>
+								<entry>
+									simple_date_rss20
+								</entry>
+								<entry>
+									RSS-2.0-Feed einer Simple Dates Übersicht.
+								</entry>
+								<entry>
+									WCOM_SIMPLE_DATE
+								</entry>
+								<entry>
+									Rss20
+								</entry>
+							</row>
+							<row>
+								<entry>
 									simple_form_business_form_mail
 								</entry>
 								<entry>
@@ -1432,7 +1474,7 @@ Wert: 3
 								</entry>
 								<entry>
 									E-Mail, das von einem Simple Guestbook 
-									versendet wird, wenn die Option "Send Notification"
+									verwandt wird, wenn die Option "Send Notification"
 									aktiv ist.
 								</entry>
 								<entry>

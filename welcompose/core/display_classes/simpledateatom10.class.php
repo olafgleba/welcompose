@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: simpledatesatom10.class.php
+ * File: simpledateatom10.class.php
  * 
  * Copyright (c) 2009 creatics
  * 
@@ -37,7 +37,7 @@ if (!interface_exists('Display')) {
  * @param array
  * @return object
  */
-function Display_SimpleDatesAtom10 ($args)
+function Display_SimpleDateAtom10 ($args)
 {
 	// check input
 	if (!is_array($args)) {
@@ -50,10 +50,10 @@ function Display_SimpleDatesAtom10 ($args)
 		trigger_error('Constructor arg page does not exist', E_USER_ERROR);
 	}
 
-	return new Display_SimpleDatesAtom10($args[0], $args[1]);
+	return new Display_SimpleDateAtom10($args[0], $args[1]);
 }
 
-class Display_SimpleDatesAtom10 implements Display {
+class Display_SimpleDateAtom10 implements Display {
 
 	/**
 	 * Reference to base class
@@ -96,7 +96,7 @@ class Display_SimpleDatesAtom10 implements Display {
  * with the information about the current page as second
  * argument.
  * 
- * @throws Display_SimpleDatesAtom10Exception
+ * @throws Display_SimpleDateAtom10Exception
  * @param array Project information
  * @param array Page information
  */
@@ -119,10 +119,10 @@ public function __construct($project, $page)
 	
 	// input check
 	if (!is_array($project)) {
-		throw new Display_SimpleDatesAtom10Exception("Input for parameter project is expected to be an array");
+		throw new Display_SimpleDateAtom10Exception("Input for parameter project is expected to be an array");
 	}
 	if (!is_array($page)) {
-		throw new Display_SimpleDatesAtom10Exception("Input for parameter page is expected to be an array");
+		throw new Display_SimpleDateAtom10Exception("Input for parameter page is expected to be an array");
 	}
 	
 	// assign project, page info to class properties
@@ -245,6 +245,6 @@ public function skipAuthentication ()
 // end of class
 }
 
-class Display_SimpleDatesAtom10Exception extends Exception { }
+class Display_SimpleDateAtom10Exception extends Exception { }
 
 ?>

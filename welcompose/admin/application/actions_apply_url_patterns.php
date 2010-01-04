@@ -122,6 +122,7 @@ try {
 	$classLoad = array(
 		'SIMPLEPAGE' => array('selectSimplePages', 'updateSimplePage'),
 		'SIMPLEFORM' => array('selectSimpleForms', 'updateSimpleForm'),
+		'SIMPLEGUESTBOOK' => array('selectSimpleGuestbooks', 'updateSimpleGuestbook'),
 		'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
 		'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
 		'BOX' => array('selectBoxes', 'updateBox'),
