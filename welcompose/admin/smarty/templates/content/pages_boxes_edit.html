@@ -68,6 +68,11 @@ var response = '{$session.response}';
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}" class="on">{i18n Boxes}<span></span></a></li>
 <li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+{elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
+<li class="on">{i18n Boxes}</li>
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
 {elseif $page.page_type_name == 'WCOM_SIMPLE_FORM'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
