@@ -96,7 +96,7 @@
 		</sect2>
 
 		<sect2 id="reference.list_of_template_types.generated_form">
-			<title>Generated Forms</title>
+			<title>Generated Form</title>
 				
 			<variablelist>
 				<varlistentry>
@@ -121,7 +121,7 @@
 		</sect2>
 		
 		<sect2 id="reference.list_of_template_types.simple_date">
-			<title>Simple Dates</title>
+			<title>Simple Date</title>
 				
 			<variablelist>
 				<varlistentry>
@@ -153,7 +153,7 @@
 		</sect2>
 		
 		<sect2 id="reference.list_of_template_types.simple_form">
-			<title>Simple Forms</title>
+			<title>Simple Form</title>
 				
 			<variablelist>
 				<varlistentry>
@@ -202,8 +202,8 @@
 					<term><emphasis>simple_guestbook_form_mail</emphasis></term>
 					<listitem>
 						<para>
-							Vorlage für E-Mails, die beim die verschickt werden,
-							wenn die Benachrichtungs-Option des Gästebuchs aktiviert wurde.
+							Vorlage für E-Mails, die verschickt werden,
+							wenn die Option zur Benachrichtungs aktiviert wurde.
 						</para>
 					</listitem>
 				</varlistentry>

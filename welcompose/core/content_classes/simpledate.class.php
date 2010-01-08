@@ -257,7 +257,16 @@ public function selectSimpleDate ($id)
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
 			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_DATES." AS `content_simple_dates`
 		JOIN
@@ -326,6 +335,7 @@ public function selectSimpleDates ($params = array())
 	}
 	
 	// define some vars
+	$user = null;
 	$page = null;
 	$draft = null;
 	$timeframe = null;
@@ -346,6 +356,7 @@ public function selectSimpleDates ($params = array())
 			case 'order_macro':
 					$$_key = (string)$_value;
 				break;
+			case 'user':
 			case 'page':
 			case 'user':
 			case 'start':
@@ -420,7 +431,16 @@ public function selectSimpleDates ($params = array())
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
 			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_DATES." AS `content_simple_dates`
 		JOIN
@@ -445,6 +465,10 @@ public function selectSimpleDates ($params = array())
 	);
 	
 	// add where clauses
+	if (!empty($user) && is_numeric($user)) {
+		$sql .= " AND `user_users`.`id` = :user ";
+		$bind_params['user'] = $user;
+	}
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
@@ -503,6 +527,7 @@ public function countSimpleDates ($params = array())
 	}
 	
 	// define some vars
+	$user = null;
 	$page = null;
 	$draft = null;
 	$timeframe = null;
@@ -519,6 +544,7 @@ public function countSimpleDates ($params = array())
 			case 'timeframe':
 					$$_key = (string)$_value;
 				break;
+			case 'user':
 			case 'page':
 					$$_key = (int)$_value;
 				break;
@@ -561,6 +587,10 @@ public function countSimpleDates ($params = array())
 	);
 	
 	// add where clauses
+	if (!empty($user) && is_numeric($user)) {
+		$sql .= " AND `user_users`.`id` = :user ";
+		$bind_params['user'] = $user;
+	}
 	if (!empty($page) && is_numeric($page)) {
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;

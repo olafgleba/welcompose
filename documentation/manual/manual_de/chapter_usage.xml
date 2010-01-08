@@ -5,74 +5,1543 @@
 	<title>Anwendungsbeispiele</title>
 	
 	<sect1 id="usage.page_types">
-		<title>Seitentypen</title>
-		<sect2 id="usage.simple_forms">
-			<title>Einfache Formulare (<emphasis>WCOM_SIMPLE_FORM</emphasis>)</title>
+		<title>Seitenvorlagen für die unterschiedlichen Seitentypen</title>
+		
+		<para>
+			Die hier gelisteten Anwendungsbeispiele dienen als <emphasis>Blaupausen</emphasis> für 
+			Ihre <xref linkend="templating.templates"/>. Nachdem Sie die entsprechenden inhaltlichen
+			Seiten angelegt haben, kopieren Sie die folgenden Anwendungbeispiele und fügen sie in
+			Ihre jeweiligen Seitenvorlagen ein. Nach dem Speichern der Vorlage
+			kann die korrespondierende Ausgabeseite im Browser aufgerufen werden.
+		</para>
+		
+		<para>
+			Wo es erforderlich ist auf Besonderheiten in der Beziehung zwischen Seitenvorlage und
+			den Seiteninhalten einzugehen, finden Sie in den Quelltextdateien detaillierte Kommentare.
+			Die Anwendungsbeispiele für die Seitenvorlagen beinhalten dort HTML-Markup,
+			wo es zum Verständnis der Seitenvorlage sinnvoll ist. Dieses HTML-Markup kann (und sollte)
+			von Ihnen an Ihre Bedürfnisse angepasst werden.
+		</para>
+		
+		<note>
 			<para>
-				Formulare des Typs <guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> liefern zwei vorkonfiguierte
-				Formulartypen, die für viele Anwendungen ausreichend sind. Zur Verfügung stehen die
-				Formulartypen <guimenuitem>Privates Formular</guimenuitem> und 
-				<guimenuitem>Geschäftliches Formular</guimenuitem>.  
-			</para>	
+				Beachten Sie, dass die Beispiele nur die Bereiche umfassen, die für die jeweilige Vorlage
+				spezifischen Variablen und Abfragen enthält. Das für eine Webseite notwendige
+				HTML-Gerüst ist <emphasis role="strong">nicht</emphasis> Teil dieser Beispiele.   
+			</para>
+			<para>
+				Ausgenommen hiervon sind <emphasis role="strong">sämtliche</emphasis> Vorlagenbeispiele,
+				die Feeds (RSS 2.0, Atom 1.0) abbilden. Diese fügen Sie bitte 
+				<emphasis role="strong">ohne</emphasis> weiteren HTML-Kontext in Ihre Vorlagen ein.   
+			</para>
+		</note>
+		
+		<para>
+			Beispiel: Einfügen der Anwendungsbeispiele in einem HTML-Kontext
+		</para>
+				
+		<programlisting language="smarty"><![CDATA[
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title></title>
+</head>
+
+<body>
+
+{* Einfügen der Vorlagenbeispiele *}
+
+</body>
+</html>	
+]]></programlisting>
+		
+		<sect2 id="usage.blog">
+			<title>Blogseiten (WCOM_BLOG)</title>	
+			<para>
+				Seiten vom Typ <guimenuitem>WCOM_BLOG</guimenuitem> stellen die typische Funktionalität
+				eines Weblogs bereit. Neben der Verschlagwortung von Beiträgen und der Kommentarfunktion,
+				 können Feeds im Format RSS 2.0 und Atom 1.0 für die Besucher der Seiten bereitgestellt werden.
+			</para>
+			
+			<para>
+				Neben dem Einsatz als klassisches Blog, ist dieser Seitentyp ebenfalls dazu geeignet,
+				 um bspw. Newsseiten (deren Einträge als Feed abonnierbar sind) abzubilden.
+			</para>
+			
+			<sect3 id="usage.blog.index">
+				<title>Blog Übersichtsseite</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_index</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Wieviel Blog-Beiträge sollen pro Seite angezeigt werden? *}
+{assign var="LIMIT" value="8"}
+
+{* Blogbeiträge nachladen *}
+{select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" order_macro="DATE_ADDED:DESC" page=$page.id tag_word_url=$request.tag start=$request.start limit=$LIMIT draft=0}
+
+{* Foreach Schleife zum Auslesen der Blogeinträge *}
+{foreach from=$blog_postings item="_blog_posting"}
+<h2>{$_blog_posting.title}</h2>
+<p>{$_blog_posting.user_name} am {$_blog_posting.date_added|date_format:"%d.%m.%Y"} &ndash;
+<a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">{if $_blog_posting.comment_count == 0}Keine Kommentare{elseif $_blog_posting.comment_count == 1}Ein Kommentar{else}{$_blog_posting.comment_count} Kommentare{/if}</a></p>
+
+{* Wenn Inhalte vorhanden, zeige die Zusammenfassung, sonst den Inhalt des Beitrags *}
+{if !empty($_blog_posting.summary_raw)}
+{$_blog_posting.summary}
+<p><a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">mehr zum Thema {$_blog_posting.title}</a></p>
+{else}
+{$_blog_posting.content}
+{/if}
+
+{* Wenn der Beitrag verschlagwortet wurde, werden hier die Tags gelistet *}
+{if $_blog_posting.tag_count > 0}
+<p>Abgelegt unter:</p>
+<ul>
+  {foreach from=$_blog_posting.tag_array|unserialize item=_tag}
+  {if $_tag.word_url == $request.tag}
+  <li>{$_tag.word}</li>
+  {else}
+  <li><a href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+  {/if}
+  {/foreach}
+</ul>
+{/if}
+
+{* Ende der Foreach Schleife zum Auslesen der Blogeinträge *}
+{/foreach}
+
+{* Pager *}
+{select_named ns="Content" class="BlogPosting" method="countBlogPostings"
+var="blog_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
+
+{page_index var="page_index" item_count=$blog_posting_count interval=$LIMIT}
+
+{if !empty($page_index) && $blog_posting_count > $LIMIT}
+<ul>
+  {foreach from=$page_index item=_item}
+  {if $_item.self == $request.start}
+  <li>{$_item.page}</li>
+  {else}
+  <li><a href="{get_url page_id=$page.id action=Index tag_word=$request.tag start=$_item.self}">{$_item.page}</a></li>
+  {/if}
+  {/foreach}
+</ul>
+{/if}
+{* EOF Pager *}
+]]></programlisting>
+				
+			</sect3>
+			
+			<sect3 id="usage.blog.item">
+				<title>Blog Eintragsseite</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_item</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Titel des Beitrags *}
+<h2>{$blog_posting.title}</h2>
+
+{* Meta-Daten des Beitrags *}
+<p>{$blog_posting.user_name} am {$blog_posting.date_added|date_format:"%d.%m.%Y"} &ndash; {if $blog_posting.comment_count == 0}Keine Kommentare{elseif $blog_posting.comment_count == 1}Ein Kommentar{else}{$blog_posting.comment_count} Kommentare{/if}</p>
+
+{* Zeige die Zusammenfassung an, wenn das Feld nicht leer ist *}
+{if !empty($blog_posting.summary_raw)}
+{$blog_posting.summary}
+{/if}
+
+{* Inhalt des Beitrags *}
+{$blog_posting.content}
+
+{select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" posting=$blog_posting.id order_macro="DATE_ADDED"}
+
+{if !empty($blog_comments)}
+{select_named ns="Community" class="BlogComment" method="countBlogComments" var="blog_comment_count"
+posting=$blog_posting.id}
+
+<h3>{if $blog_comment_count == 1}{$blog_comment_count} Kommentar{else}{$blog_comment_count} Kommentare{/if}</h3>
+{foreach from=$blog_comments item=_comment}
+{$_comment.content}
+<p>{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"htmlall"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p>
+{/foreach}
+{/if}
+
+{if $blog_posting.comments_enable == 1}
+<h2>Kommentar hinzuf&uuml;gen</h2>
+
+{* Beispiel:  XHTML als Textkonverter für Kommentareinträge *}
+<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+wird nicht ver&ouml;ffentlicht. (X)HTML ist erlaubt.</p>
+
+{* Beispiel: MARKDOWN als Textkonverter für Kommentareinträge *}
+<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
+<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+
+{* Beispiel: TEXTILE als Textkonverter für Kommentareinträge *}
+<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
+<a href="http://textism.com/tools/textile/">Textile</a>.</p>
+
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+<li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+
+{if $session.form_submitted == 1}
+<h2>Danke f&uuml;r Ihren Kommentar!</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset>
+{$form.hidden}
+
+<label for="name">{$form.name.label}</label> {$form.name.html}<br />
+<label for="email">{$form.email.label}</label> {$form.email.html}<br />
+<label for="homepage">{$form.homepage.label}</label> {$form.homepage.html}<br />
+<label for="comment">{$form.comment.label}</label> {$form.comment.html}<br />
+
+{* Beispiel: Wenn ein numerische Captcha genutzt werden soll *}
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="_qf_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Beispiel: Wenn ein Bild-Captcha genutzt werden soll *}
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="_qf_captcha">{$form._qf_captcha.label}</label> {$form._qf_captcha.html}<br />
+
+{$form.submit.html}
+</fieldset>
+</form>
+
+{/if}
+]]></programlisting>
+
+				<note>
+					<para>
+						Für jeden Blog-Eintrag einer Blog-Seite kann festgelegt werden, ob 
+						<emphasis role="strong">Kommentare</emphasis> zu diesem erlaubt sind oder nicht
+						(<guimenuitem>Kommentare?</guimenuitem>).
+					</para>
+					<para>
+						Die Einstellungen für Kommentare von Blog-Beiträgen erreichen Sie über den 
+						Navigationsbereich <guimenu>Community</guimenu> und dort im Unterbereich
+						 <guisubmenu>Community-Einstellungen</guisubmenu>. Dort legen Sie u.a. fest 
+						welcher <guimenuitem>Textkonverter</guimenuitem> in den Kommentaren zum Einsatz
+						kommt und ob mit <guimenuitem>Captcha nutzen</guimenuitem> ein Spam-Schutz
+						eingesetzt werden soll.
+					</para>
+					
+					<para>
+						Alle dort gemachten Angaben gelten übergreifend für die Kommentare aller angelegten
+						Seiten vom Seitentyp <guimenuitem>WCOM_BLOG</guimenuitem>.
+					</para>
+				</note>
+				
+			</sect3>
+			
+			<sect3 id="usage.blog.archive-year">
+				<title>Blog Jahresarchiv</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_archive_year</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Nachladen der Blog Einträge nach Monatsvorkommen auf jeweils ein Jahr bezogen *}
+{select_named ns="Content" class="BlogPosting" method="selectDifferentMonths" var="months_this_year" year=$request.posting_year_added order_macro="DATE_ADDED" limit=12}
+
+{* Überschrift mit dynamischer Jahresnennung *}
+<h2>Archiv {$request.posting_year_added}</h2>
+<ul>
+{foreach from=$months_this_year item=_month}
+{if $_month.month == $request.posting_month_added}
+<li>{$_month.timestamp|date_format:"%B %Y"}</li>
+{else}
+<li><a href="{get_url page_id=$page.id action="ArchiveMonth" posting_year_added=$_month.year posting_month_added=$_month.month}">{$_month.timestamp|date_format:"%B %Y"}</a></li>
+{/if}
+{/foreach}
+</ul>
+]]></programlisting>
+
+				<note>
+					<para>
+						Hier gibt es eine Ausnahme von der Regel: Im Gegensatz zu den anderen
+						Anwendungsbeispielen, sollte hier auf den HTML-Kontext in der Vorlage
+						verzichtet werden. Das heißt, fügen Sie den Beispiel-Quelltext bitte so ein,
+						wie er hier abgebildet ist.
+					</para>
+					<para>
+						<emphasis role="strong">Hintergrund</emphasis>: In der Regel werden Jahresarchive
+						auf der Blog Übersichtsseite angezeigt um direkten Zugriff auf die Beiträge
+						vergangener Jahre und Monate zu haben und werden somit nicht als separate Einzelseite 
+						angelegt. Um unsere Jahresarchiv-Vorlage in die Blog Übersichtseite einzubinden,
+						bedienen wir uns der folgenden Syntax.
+					</para>
+				</note>
+				
+				<para>Quelltext: Blog Jahresarchiv Vorlage in die Blog Übersichtsseite einbinden
+				</para>
+				
+				<programlisting language="smarty"><![CDATA[
+{include file="wcom:blog_archive_year.`$page.id`"}
+]]></programlisting>
+			</sect3>
+			
+			<sect3 id="usage.blog.archive-month">
+				<title>Blog Monatsarchiv (inkl. Jahresarchiv)</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_archive_month</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+{* Jahresarchiv *}
+
+{* Nachladen der Blog Einträge nach Monatsvorkommen auf jeweils ein Jahr bezogen *}
+{select_named ns="Content" class="BlogPosting" method="selectDifferentMonths" var="months_this_year" year=$request.posting_year_added order_macro="DATE_ADDED" limit=12}
+
+{* Überschrift mit dynamischer Jahresnennung *}
+<h2>Archiv {$request.posting_year_added}</h2>
+<ul>
+{foreach from=$months_this_year item=_month}
+{if $_month.month == $request.posting_month_added}
+<li>{$_month.timestamp|date_format:"%B %Y"}</li>
+{else}
+<li><a href="{get_url page_id=$page.id action="ArchiveMonth" posting_year_added=$_month.year posting_month_added=$_month.month}">{$_month.timestamp|date_format:"%B %Y"}</a></li>
+{/if}
+{/foreach}
+</ul>
+{* EOF Jahresarchiv *}
+
+{* Monatsarchiv *}
+
+{* Wieviel Blog-Beiträge sollen pro Seite angezeigt werden? *}
+{assign var="LIMIT" value="8"}
+
+{* Überschrift mit dynamischer Monats- und Jahresnennung *}
+<h3>Archiv {"`$request.posting_year_added`-`$request.posting_month_added`-15 12:00:00"|date_format:"%B %Y"}</h3>
+
+{* Nachladen der Blog Einträge des angeforderten Zeitraums *}
+{select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings"
+page=$page.id year_added=$request.posting_year_added month_added=$request.posting_month_added
+order_macro="DATE_ADDED:DESC" draft=0 start=$request.start limit=$LIMIT}
+
+{* Foreach Schleife zum Auslesen der Blogeinträge *}
+{foreach from=$blog_postings item="_blog_posting"}
+<h2>{$_blog_posting.title}</h2>
+<p>{$_blog_posting.user_name} am {$_blog_posting.date_added|date_format:"%d.%m.%Y"} &ndash;
+<a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">{if $_blog_posting.comment_count == 0}Keine Kommentare{elseif $_blog_posting.comment_count == 1}Ein Kommentar{else}{$_blog_posting.comment_count} Kommentare{/if}</a></p>
+
+{* Wenn Inhalte vorhanden, zeige die Zusammenfassung, sonst den Inhalt des Beitrags *}
+{if !empty($_blog_posting.summary_raw)}
+{$_blog_posting.summary}
+<p><a href="{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}">mehr zum Thema {$_blog_posting.title}</a></p>
+{else}
+{$_blog_posting.content}
+{/if}
+
+{* Wenn der Beitrag verschlagwortet wurde, werden hier die Tags gelistet *}
+{if $_blog_posting.tag_count > 0}
+<p>Abgelegt unter:</p>
+<ul>
+  {foreach from=$_blog_posting.tag_array|unserialize item=_tag}
+  {if $_tag.word_url == $request.tag}
+  <li>{$_tag.word}</li>
+  {else}
+  <li><a href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+  {/if}
+  {/foreach}
+</ul>
+{/if}
+
+{* Ende der Foreach Schleife zum Auslesen der Blogeinträge *}
+{/foreach}
+
+{* Pager *}
+{select_named ns="Content" class="BlogPosting" method="countBlogPostings" var="blog_posting_count"
+page=$page.id draft=0 year_added=$request.posting_year_added month_added=$request.posting_month_added}
+
+{page_index var="page_index" item_count=$blog_posting_count interval=$LIMIT}
+
+{if !empty($page_index) && $blog_posting_count > $LIMIT}
+<ul>
+  {foreach from=$page_index item=_item}
+  {if $_item.self == $request.start}
+  <li>{$_item.page}</li>
+  {else}
+  <li><a href="{get_url page_id=$page.id action=ArchiveMonth
+posting_year_added=$request.posting_year_added posting_month_added=$request.posting_month_added
+start=$_item.self}">{$_item.page}</a></li>
+  {/if}
+  {/foreach}
+</ul>
+{/if}
+{* EOF Pager *}	
+
+{* EOF Monatsarchiv *}
+]]></programlisting>
+				
+			</sect3>
+			
+			<sect3 id="usage.blog.rss20">
+				<title>Blog RSS 2.0 Feeds</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_rss20</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
+    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <description/>
+    <language>de-DE</language>
+    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
+
+    {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" page=$page.id order_macro="DATE_ADDED:DESC" draft=0}
+    {foreach from=$blog_postings item=_blog_posting}
+    <item>
+      <title>{$_blog_posting.title|escape:"html"}</title>
+      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</link>
+      <description>
+        {if !empty($_blog_posting.feed_summary)}
+          {$_blog_posting.feed_summary|escape:"html"}
+        {else}
+          {if !empty($_blog_posting.summary)}
+            {$_blog_posting.summary|escape:"html"}
+          {/if}
+          {$_blog_posting.content|escape:"html"}
+        {/if}
+      </description>
+      <pubDate>{$_blog_posting.date_added|date_rss20}</pubDate>
+      <guid>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</guid>
+    </item>
+    {/foreach}
+  </channel>
+</rss>
+]]></programlisting>
+
+				<note>
+					<para>
+						Alle Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
+					</para>
+				</note>
+			</sect3>
+			
+			<sect3 id="usage.blog.atom10">
+				<title>Blog Atom 1.0 Feeds</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_atom10</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
+  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <updated>{$_date.date_modified|date_atom}</updated>
+
+  {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" page=$page.id draft=0 tag_word_url=$request.tag order_macro="DATE_ADDED:DESC"}
+  {foreach from=$blog_postings item=_blog_posting}
+  <entry>
+    <title type="html">{$_blog_posting.title|escape:"html"}</title>
+    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}"/>
+    <published>{$_blog_posting.date_added|date_atom}</published>
+    <updated>{$_blog_posting.date_modified|date_atom}</updated>
+    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+	<div xmlns="http://www.w3.org/1999/xhtml">
+      {if !empty($_blog_posting.feed_summary)}
+        {$_blog_posting.feed_summary|escape:"html"}
+      {else}
+        {if !empty($_blog_posting.summary)}
+          {$_blog_posting.summary|escape:"html"}
+        {/if}
+        {$_blog_posting.content|escape:"html"}
+      {/if}
+	</div>
+    </content>
+    <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</id>
+    <author>
+	  <name>{$_blog_posting.user_name}</name>
+    </author>
+  </entry>
+  {/foreach}
+</feed>
+]]></programlisting>
+
+				<note>
+					<para>
+						Alle Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
+					</para>
+				</note>
+				
+			</sect3>
+			
+			<sect3 id="usage.blog.comments.rss20">
+				<title>Blog Kommentare RSS 2.0 Feeds</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_comments_rss20</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
+    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <description/>
+    <language>de-DE</language>
+    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsRss20"}" rel="self" type="application/rss+xml" />
+
+    {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" page=$page.id order_macro="DATE_ADDED:DESC"}
+    {foreach from=$blog_comments item=_blog_comment}
+    <item>
+      <title>Kommentar von {$_blog_comment.name|escape:"html"} auf Beitrag &#171;{$_blog_comment.blog_posting_title|escape:"html"}&#187;</title>
+      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</link>
+      <description>
+        {$_blog_comment.content|escape:"html"}
+      </description>
+      <pubDate>{$_blog_comment.date_added|date_rss20}</pubDate>
+      <guid isPermaLink="false">tag:%%%IHRE-DOMAIN.TLD%%%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</guid>
+    </item>
+    {/foreach}
+  </channel>
+</rss>
+]]></programlisting>
+
+				<note>
+					<para>
+						Alle Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
+					</para>
+				</note>
+				
+			</sect3>
+			
+			<sect3 id="usage.blog.comments.atom10">
+				<title>Blog Kommentare Atom 1.0 Feeds</title>
+				
+				<para>Vorlagentyp: <guimenuitem>blog_comments_atom10</guimenuitem></para>
+				
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
+  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsAtom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <updated>{$_date.date_modified|date_atom}</updated>
+	
+  {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" page=$page.id order_macro="DATE_ADDED:DESC"}
+  {foreach from=$blog_comments item=_blog_comment}
+  <entry>
+    <title type="html">Kommentar von {$_blog_comment.name|escape:"html"} auf Beitrag &#171;{$_blog_comment.blog_posting_title|escape:"html"}&#187;</title>
+    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}"/>
+    <published>{$_blog_comment.date_added|date_atom}</published>
+    <updated>{$_blog_comment.date_modified|date_atom}</updated>
+    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        {$_blog_comment.content}
+      </div>
+    </content>
+    <id>tag:%%%IHRE-DOMAIN.TLD%%%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</id>
+    <author>
+      <name>{$_blog_comment.name}</name>
+    </author>
+  </entry>
+  {/foreach}
+</feed>
+]]></programlisting>
+
+				<note>
+					<para>
+						Alle Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
+					</para>
+				</note>
+				
+				<tip>
+					<para>
+						Der Quelltext und die Auswahl der RSS/Atom Tags in den Beispielen
+						sind Vorschläge unsererseits. Mehr zu möglichen Angaben/Tags, die in der 
+						Vorlagengestaltung nutzbar sind, erhalten sie unter
+						<ulink type="external" url="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</ulink>
+						und <ulink type="external" url="http://www.atompub.org/rfc4287.html">http://www.atompub.org/rfc4287.html</ulink>  
+					</para>
+				</tip>
+
+				<tip>
+					<para>
+						Fügen Sie zwischen  
+						<markup role="smarty"><![CDATA[<head>]]></markup> und 
+						<markup role="smarty"><![CDATA[</head>]]></markup> Ihrer Vorlage entsprechende
+						Link-Tags ein, registrieren Browser automatisch das Vorhandensein von Feed-Links und 
+						symbolisieren dies zumeist mit einem Icon in der Status- oder Adressleiste.
+					</para> 
+					
+			<programlisting language="smarty"><![CDATA[
+<link rel="alternate" type="application/rss+xml" 
+    title="Aktuelle Artikel im RSS 2.0 abonnieren" 
+	  href="{get_url page_id="7" action="Rss20"}" />
+<link rel="alternate" type="application/rss+xml" 
+    title="Aktuelle Artikel im Atom 1.0 Format abonnieren" 
+      href="{get_url page_id="7" action="Atom10"}" />
+<link rel="alternate" type="application/rss+xml" 
+    title="Aktuelle Kommentare im RSS 2.0 Format abonnieren" 
+      href="{get_url page_id="7" action="CommentsRss20"}" />
+<link rel="alternate" type="application/rss+xml" 
+    title="Aktuelle Kommentare im Atom 1.0 Format abonnieren" 
+      href="{get_url page_id="7" action="CommentsAtom10"}" />
+]]></programlisting>
+
+					<para><emphasis role="strong">Hinweis:</emphasis> Das Beispiel geht davon aus,
+					 das die Blogseite die ID <userinput>7</userinput> hat. In den wenigsten Fällen
+					wird dies so zutreffen ;-) Passen Sie bitte diesen Wert an.
+					</para>
+				</tip>
+
+			</sect3>
 		</sect2>
 		
 		<sect2 id="usage.generated_forms">
-			<title>Individuelle Formulare (<emphasis>WCOM_GENERATOR_FORM</emphasis>)</title>
+			<title>Individuelle Formulare (WCOM_GENERATOR_FORM)</title>
 			<para>
-				Können die Anforderungen nicht durch die vorkonfigurierten Formulare abgebildet werden,
-				kann mit dem Seitentyp <guimenuitem>WCOM_GENERATOR_FORM</guimenuitem> ein eigenes Formular
-				individuell zusammengestellt werden. Hierzu stehen die gängigsten Formularfelder zur Verfügung.
+				Die Anwendung des Seitentyps <guimenuitem>WCOM_GENERATOR_FORM</guimenuitem> bietet sich
+				immer dann an, wenn die Möglicheiten der <xref linkend="usage.simple_forms"/> nicht
+				komplex genug sind. Mit diesem Seitentyp können Sie individuelle Formulare
+				gestalten. Eine Vielzahl an Feldtypen stehen hierzu zur Verfügung.
+			</para>
+			
+			<para>Vorlagentyp: <guimenuitem>generator_form_index</guimenuitem></para>
+
+			<programlisting language="smarty"><![CDATA[
+{* Inhalte der Generator Form *}
+{$generator_form.content}
+
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke f&uuml;r Ihre Anfrage</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset id="formular">
+{$form.hidden}
+
+{* Beispiele für die Definition von Formularfeldern *}
+
+{* Ein Inputfeld vom Typ 'text' mit der Bezeichnung 'name' *}
+{* Diese Syntax beschreibt gleichzeitig auch die Standardangabe für ein Formularfeld *}
+<label for="generator_form_name">{$form.name.label}</label>{$form.name.html}<br />
+
+... weitere Formularfelder ...
+
+{* EOF Beispiele *}
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $generator_form.use_captcha == 'numeral'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="generator_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $generator_form.use_captcha == 'image'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="generator_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+]]></programlisting>
+
+			<para>
+				Um die E-Mails für diesen Seitentyp zu versenden, wird
+				eine korrespondierende E-Mail Vorlage benötigt.
 			</para>	
-		</sect2>
 	
+			<para>Vorlagentyp: <guimenuitem>generator_form_mail</guimenuitem></para>
+
+			<programlisting language="smarty"><![CDATA[
+{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M %Z"}
+
+{$form_data.<<<name-des-formularfeldes>>>}
+
+{* Ein Beispieleintrag mit dem Feldnamen email *}
+{$form_data.email}
+
+]]></programlisting>
+		
+			<sect3 id="usage.generated_forms.fieldtyp.default">
+				<title>Standardsyntax eines Formularfeldes</title>
+			
+				<para>
+					Bis auf die weiter unten aufgeführten Ausnahmen, folgen alle Angaben der Formularfelder in den
+					Seitenvorlagen den hier aufgelisteten Standard.
+				</para>
+
+			<programlisting language="smarty"><![CDATA[
+<label for="generator_form_<<<name-des-formularfeldes>>>">{$form.<<name-des-formularfeldes>>>.label}</label>{$form.<<name-des-formularfeldes>>>.html}
+
+{* Ein Beispieleintrag mit dem Feldnamen email *}
+<label for="generator_form_email">{$form.email.label}</label>{$form.email.html}
+]]></programlisting>
+			</sect3>
+			
+			<sect3 id="usage.generated_forms.fieldtyp.differences">
+				<title>Abweichende Angaben für einzelne Feldtypen</title>
+
+				<para>
+					Für die Feldtypen <emphasis>select</emphasis>, <emphasis>submit</emphasis> und 
+					<emphasis>radio</emphasis> gelten einige Besonderheiten in der inhaltlichen Angabe der Werte.
+					Bei Formularfeldern vom Typ <emphasis>radio</emphasis> und <emphasis>submit</emphasis> ist
+					zudem eine von Standard abweichende Syntax in der Seitenvorlage erforderlich.
+				</para>
+				
+			<sect4 id="usage.generated_forms.fieldtyp.select">
+				<title>Formulartyp select</title>
+
+				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>select</emphasis></para>
+				<variablelist>
+					<varlistentry>
+						<term><guimenuitem>Beschriftung</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Text an, der für das Auswahlmenu
+								angezeigt werden soll. Bsp. <emphasis>Auswahl</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Name</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Namen für das Formularfeld an. Dieser
+								Name wird als Angabe in den Seitenvorlagen genutzt.
+								Bsp. <emphasis>auswahl</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Wert</guimenuitem></term>
+						<listitem>
+							<para>
+								Um mehrere Werte in einem Auswahlmenu anzugeben, geben Sie
+								die einzelnen Werte bitte hintereinander und trennen diese
+								jeweils mit einem <emphasis role="strong">Kommata</emphasis>.
+								 Bsp. <emphasis>Wert1,Wert2,Wert3</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect4>
+								
+			<sect4 id="usage.generated_forms.fieldtyp.submit">
+				<title>Formulartyp submit</title>
+				
+				<para>Seitenvorlage: Angabe eines Input-Feldes vom Typ <emphasis>submit</emphasis></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Ein Inputfeld vom Typ 'submit' mit dem Namen 'senden' *}
+{$form.senden.html}
+]]></programlisting>
+
+				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>submit</emphasis></para>
+				<variablelist>
+					<varlistentry>
+						<term><guimenuitem>Beschriftung</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Text an, der für den Submit-Button
+								angezeigt werden soll. Bsp. <emphasis>Senden</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Name</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Namen für das Formularfeld an. Dieser
+								Name wird als Angabe in den Seitenvorlagen genutzt.
+								Bsp. <emphasis>senden</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Wert</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den gleichen Text an, den Sie zuvor
+								für das Feld <emphasis role="strong">Beschriftung</emphasis> genutzt haben.
+								Bsp. <emphasis>Senden</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect4>
+			
+			<sect4 id="usage.generated_forms.fieldtyp.radio">
+				<title>Formulartyp radio</title>
+
+				<para>Seitenvorlage: Angabe eines Input-Feldes vom Typ <emphasis>radio</emphasis></para>
+			<programlisting language="smarty"><![CDATA[
+{* Ein Inputfeld vom Typ 'radio' mit dem Namen 'radiogruppe' *}
+{foreach from=$form.radiogruppe item=_radiogruppe}
+{$_radiogruppe.html}
+{/foreach}
+]]></programlisting>
+
+				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>radio</emphasis></para>
+				<variablelist>
+					<varlistentry>
+						<term><guimenuitem>Beschriftung</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Text an, der für die Radio Felder
+								angezeigt werden soll. Bsp. <emphasis>Radiogruppe</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Name</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Namen für das Formularfeld an. Dieser
+								Name wird als Angabe in den Seitenvorlagen genutzt.
+								Bsp. <emphasis>radiogruppe</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Wert</guimenuitem></term>
+						<listitem>
+							<para>
+								Für jeden gewünschten Radio-Buttons geben Sie
+								die einzelnen Werte bitte hintereinander und trennen diese
+								jeweils mit einem <emphasis role="strong">Semikolon</emphasis>. 
+								Bsp. <emphasis>Wert1;Wert2;Wert3</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect4>
+		</sect3>
+
+		</sect2>
+
 		<sect2 id="usage.simple_guestbooks">
-			<title>Einfaches Gästebuch (<emphasis>WCOM_SIMPLE_GUESTBOOK</emphasis>)</title>
+			<title>Einfaches Gästebuch (WCOM_SIMPLE_GUESTBOOK)</title>
 			<para>
 				Der Seitentyp <guimenuitem>WCOM_SIMPLE_GUESTBOOK</guimenuitem> bietet dem Anwender
 				die Möglichkeit, ein einfaches Gästebuch nativ in die Webseiten zu integrieren.
-			</para>		
+			</para>	
+			
+			<para>Vorlagentyp: <guimenuitem>simple_guestbook_index</guimenuitem></para>
+
+			<programlisting language="smarty"><![CDATA[
+{* Inhalte der Gästebuchseite *}
+{$simple_guestbook.content}
+
+{* Wieviel Kommentare sollen auf einer Seite angezeigt werden? *}
+{assign var="LIMIT" value="8"}
+
+{* Termineinträge nachladen *}
+{select_named ns="Content" class="SimpleGuestbookEntry" method="selectSimpleGuestbookEntries" var="guestbook_entries" order_macro="DATE_ADDED:DESC" book=$page.id start=$request.start limit=$LIMIT}
+
+{* Einträge ausgeben *}
+{foreach from=$guestbook_entries item="_entry"}
+{$_entry.name}
+{$_entry.email}
+{$_entry.subject}
+{$_entry.content}
+{/foreach}
+{* EOF Einträge ausgeben *}
+
+{* Pager *}
+{select_named ns="Content" class="SimpleGuestbookEntry" method="countSimpleGuestbookEntries" var="entries_count" book=$page.id}
+{page_index var="page_index" item_count=$entries_count interval=$LIMIT}
+{if !empty($page_index) && $entries_count > $LIMIT}
+  <ul>
+  {foreach from=$page_index item=_item}
+    {if $_item.self == $request.start}
+    <li>{$_item.page}</li>
+    {else}
+    <li><a href="{get_url page_id=$page.id action=Index start=$_item.self}">{$_item.page}</a></li>
+    {/if}
+    {/foreach}
+  </ul>
+{/if}
+{* EOF Pager *}
+
+{* Wenn Einträge erlaubt sind, zeige das Formular an *}
+{if $simple_guestbook.allow_entry == 1}
+
+{* Textkonverter auslesen anhand der Grundeinstellungen des Gästebuchs. Es werden die mitgelieferten
+Textkonverter berücksichtigt. *}
+{select_simple ns="Application" class="Textconverter" method="selectTextConverter" var="_text_converter" id=$simple_guestbook.text_converter}
+
+{if $_text_converter.internal_name == 'textile'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, daf&uuml;r <a href="http://textism.com/tools/textile/">Textile</a>
+{elseif $_text_converter.internal_name == 'markdown'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, daf&uuml;r <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+{elseif $_text_converter.internal_name == 'xhtml'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt.{/if}
+</p>
+	
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke f&uuml;r Ihren Eintrag!</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset>
+{$form.hidden}
+
+<label for="guestbook_entry_name">{$form.name.label}</label> {$form.name.html}<br />
+<label for="guestbook_entry_email">{$form.email.label}</label> {$form.email.html}<br />
+<label for="guestbook_entry_subject">{$form.subject.label}</label> {$form.subject.html}<br />
+<label for="guestbook_entry_content">{$form.content.label}</label> {$form.content.html}<br />
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $simple_guestbook.use_captcha == 'numeral'}
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $simple_guestbook.use_captcha == 'image'}
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+{/if}
+{* EOF Wenn Einträge erlaubt sind, zeige das Formular an *}
+]]></programlisting>
+
+			<para>
+				Ist auf inhaltlichen Seite des Gästebuchs die Option <guimenuitem>Mitteilung senden?</guimenuitem>
+				aktiviert, wird eine Seitenvorlage zum Versenden der E-Mail benötigt.
+			</para>	
+			
+			<para>Vorlagentyp: <guimenuitem>simple_guestbook_form_mail</guimenuitem></para>
+
+			<programlisting language="smarty"><![CDATA[
+{$form_data.book} ({$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M %Z"})
+
+{$form_data.name}
+{$form_data.email}
+{$form_data.subject}
+{$form_data.content}
+]]></programlisting>	
 		</sect2>
 	
 		<sect2 id="usage.simple_dates">
-			<title>Terminliste (<emphasis>WCOM_SIMPLE_DATE</emphasis>)</title>	
+			<title>Termine (WCOM_SIMPLE_DATE)</title>	
 			<para>
 				Der Seitentyp <guimenuitem>WCOM_SIMPLE_DATE</guimenuitem> ist prädestiniert um
 				Veranstaltungstermine, Ticketlinks und ähnliches auf einer Seite abzubilden. Wie bei 
-				Blog Einträgen sind hier RSS20 oder/und Atom10 Feeds verfügbar.
+				Blogseiten sind hier valide RSS 2.0 oder/und Atom 1.0 Feeds verfügbar.
 			</para>
+			
+			<sect3 id="usage.simple_dates.index">
+				<title>Hauptvorlage</title>
+				
+				<para>Vorlagentyp: <guimenuitem>simple_date_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Wieviel Termine sollen auf einer Seite angezeigt werden? *}
+{assign var="LIMIT" value="8"}
+
+{select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" order_macro="DATE_START" page=$page.id start=$request.start limit=$LIMIT draft=0}
+
+{* Termineinträge ausgeben *}
+
+{* In diesem Beispiel wird der Text 'KARTEN NUR NOCH AN DER ABENDKASSE' alternativ dann angzeigt, wenn das jeweilige Feld 'Verweis' einen Eintrag hat UND die korrespondierende Checkbox 'Ausverkauft' aktiv ist *}
+{foreach from=$dates item="_date"}
+<h3>{$_date.date_start|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{if !empty($_date.date_end)} - {$_date.date_end|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{/if} <a id="{$_date.id}"></a></h3>
+<ul>
+<li>{$_date.location}</li>
+{if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}KARTEN NUR NOCH AN DER ABENDKASSE{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
+{if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}KARTEN NUR NOCH AN DER ABENDKASSE{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
+{if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}KARTEN NUR NOCH AN DER ABENDKASSE{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
+</ul>
+{/foreach}
+{* EOF Termineinträge ausgeben *}
+
+{* Pager *}
+{select_named ns="Content" class="SimpleDate" method="countSimpleDates" var="dates_count" page=$page.id}
+{page_index var="page_index" item_count=$dates_count interval=$LIMIT}
+{if !empty($page_index) && $dates_count > $LIMIT}
+  <ul>
+  {foreach from=$page_index item=_item}
+    {if $_item.self == $request.start}
+    <li>{$_item.page}</li>
+    {else}
+    <li><a href="{get_url page_id=$page.id action=Index start=$_item.self}">{$_item.page}</a></li>
+    {/if}
+    {/foreach}
+  </ul>
+{/if}
+{* EOF Pager *}
+]]></programlisting>
+
+			</sect3>
+
+			<sect3 id="usage.simple_dates.rss20">
+				<title>Seitenvorlage für RSS 2.0 Feeds </title>
+				
+				<para>Vorlagentyp: <guimenuitem>simple_date_rss20</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
+    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <description/>
+    <language>de-DE</language>
+    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
+
+    {select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" page=$page.id order_macro="DATE_START" draft=0}
+    {foreach from=$dates item=_date}
+    <item>
+      <title>{$_date.date_start|date_format:"%a, %d.%m.%Y, %H:%M Uhr"}, {$_date.location|escape:"html"}</title>
+      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+      <description>
+      {* Bitte entfernen Sie im realen Einsatz das Leerzeichen zwischen '<' und '![CDATA[' sowie diese Kommentarzeile *}
+      < ![CDATA[
+        <ul>
+       {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
+       {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
+       {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
+        </ul>
+      {* Bitte entfernen Sie im realen Einsatz das Leerzeichen zwischen ']]' und '>' sowie diese Kommentarzeile *}
+      ]] >
+      </description>
+      <pubDate>{$_date.date_added|date_rss20}</pubDate>
+      <guid isPermaLink="false">tag:%%%IHRE-DOMAIN.TLD%%%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</guid>
+    </item>
+    {/foreach}
+  </channel>
+</rss>
+]]></programlisting>
+
+		<note>
+			<para>
+				Alle Angaben, die durch die 
+				Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+				angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
+				ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+				<markup><![CDATA[welcompose.de]]></markup>. 
+			</para>
+		</note>
+
+			</sect3>
+			
+			<sect3 id="usage.simple_dates.atom10">
+				<title>Seitenvorlage für Atom 1.0 Feeds</title>
+				
+				<para>Vorlagentyp: <guimenuitem>simple_date_atom10</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
+  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <updated>{$_date.date_modified|date_atom}</updated>
+
+  {select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" page=$page.id draft=0 order_macro="DATE_START"}
+  {foreach from=$dates item=_date}
+  <entry>
+    <title type="html">{$_date.date_start|date_format:"%a, %d.%m.%Y, %H:%M Uhr"}, {$_date.location|escape:"html"}</title>
+    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}"/>
+    <published>{$_date.date_added|date_atom}</published>
+    <updated>{$_date.date_modified|date_atom}</updated>
+    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <ul>
+        {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
+        {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
+        {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
+        </ul>
+      </div>
+    </content>
+    <id>tag:%%%IHRE-DOMAIN.TLD%%%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</id>
+    <author><name>{$_date.user_name}</name></author>
+  </entry>
+  {/foreach}
+</feed>
+]]></programlisting>
+
+		<note>
+			<para>
+				Auch hier gilt: Alle Angaben, die durch die 
+				Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+				angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
+				ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+				<markup><![CDATA[welcompose.de]]></markup>.
+			</para>
+		</note>
+		
+		<tip>
+			<para>
+				Der Quelltext und die Auswahl der RSS/Atom Tags in den Beispielen
+				sind Vorschläge unsererseits. Mehr zu möglichen Angaben/Tags, die in der 
+				Vorlagengestaltung nutzbar sind, erhalten sie unter
+				<ulink type="external" url="http://www.rssboard.org/rss-specification">http://www.rssboard.org/rss-specification</ulink>
+				und <ulink type="external" url="http://www.atompub.org/rfc4287.html">http://www.atompub.org/rfc4287.html</ulink>  
+			</para>
+		</tip>
+
+			</sect3>
+
+		</sect2>
+		
+		<sect2 id="usage.simple_forms">
+			<title>Einfache Formulare (WCOM_SIMPLE_FORM)</title>
+			<para>
+				Formulare des Seitentyps <guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> bieten zwei vorkonfiguierte
+				Formulare an, die sich nur in den zur Verfügung stehenden Formularfelder unterscheiden.
+				Eine große Anzahl an Anwendungen sind durch diese beiden Formulartypen bereits abgedeckt.
+				Zur Verfügung stehen die Formulartypen <guimenuitem>Privates Formular</guimenuitem> und 
+				<guimenuitem>Geschäftliches Formular</guimenuitem>.  
+			</para>
+
+			<para>
+				Zur Verfügung stehende Formularfelder der beiden Formulartypen:  
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><guimenuitem>Privates Formular</guimenuitem></term>
+					<listitem>
+						<para>
+							Name, E-Mail, Homepage, Nachricht
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Geschäftliches Formular</guimenuitem></term>
+					<listitem>
+						<para>
+							Anrede, Vorname, Nachname, Adresse, Ort, Rückruf, Telefon, E-Mail, Nachricht
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<sect3 id="usage.simple_forms.typ.personalForm">
+				<title>Privates Formular</title>
+				
+				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Inhalte der Simple Form *}
+{$simple_form.content}
+
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke f&uuml;r Ihre Anfrage</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset id="formular">
+{$form.hidden}
+
+{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Privates Formular' ausgewählt wurde *}
+<label for="simple_form_name">{$form.name.label}</label>{$form.name.html}<br />
+<label for="simple_form_email">{$form.email.label}</label>{$form.email.html}<br />
+<label for="simple_form_homepage">{$form.homepage.label}</label> {$form.homepage.html}<br />
+<label for="simple_form_message">{$form.message.label}</label>{$form.message.html}<br />
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $simple_form.use_captcha == 'numeral'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $simple_form.use_captcha == 'image'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+]]></programlisting>
+
+				<para>
+					Um die E-Mail des Typs <emphasis>Privates Formular</emphasis> zu versenden, wird
+					eine korrespondierende E-Mail Vorlage benötigt.
+				</para>	
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_personal_form_mail</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M %Z"}
+
+{$form_data.name}
+{$form_data.email}
+{$form_data.homepage}
+{$form_data.message}
+]]></programlisting>
+
+			</sect3>
+
+			<sect3 id="usage.simple_forms.typ.businessForm">
+				<title>Geschäftliches Formular</title>			
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Inhalte der Simple Form *}
+{$simple_form.content}
+
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke f&uuml;r Ihre Anfrage</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset id="formular">
+{$form.hidden}
+
+{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Geschäftliches Formular' ausgewählt wurde *}
+<label for="simple_form_salutation">{$form.salutation.label}</label>{$form.salutation.html}<br />
+<label for="simple_form_first_name">{$form.first_name.label}</label>{$form.first_name.html}<br />
+<label for="simple_form_last_name">{$form.last_name.label}</label>{$form.last_name.html}<br />
+<label for="simple_form_address">{$form.address.label}</label>{$form.address.html}<br />
+<label for="simple_form_location">{$form.location.label}</label>{$form.location.html}<br />
+<label for="simple_form_call_back">{$form.call_back.label}</label>{$form.call_back.html}<br />
+<label for="simple_form_phone">{$form.phone.label}</label>{$form.phone.html}<br />
+<label for="simple_form_email">{$form.email.label}</label>{$form.email.html}<br />
+<label for="simple_form_message">{$form.message.label}</label>{$form.message.html}<br />
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $simple_form.use_captcha == 'numeral'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $simple_form.use_captcha == 'image'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+]]></programlisting>
+
+				<para>
+					Um die E-Mail des Typs <emphasis>Geschäftliches Formular</emphasis> zu versenden, wird
+					eine korrespondierende E-Mail Vorlage benötigt.
+				</para>	
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_business_form_mail</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M %Z"}
+
+{$form_data.salutation}
+{$form_data.first_name}
+{$form_data.last_name}
+{$form_data.address}
+{$form_data.location}
+{$form_data.call_back}
+{$form_data.phone}
+{$form_data.email}
+{$form_data.message}
+]]></programlisting>
+			</sect3>
+
 		</sect2>
 		
 		<sect2 id="usage.simple_page">
-			<title>Einfache Inhaltsseiten (<emphasis>WCOM_SIMPLE_PAGE</emphasis>)</title>	
+			<title>Einfache Inhaltsseiten (WCOM_SIMPLE_PAGE)</title>	
 			<para>
-				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
-				Sie bitte zwischenzeitlich im 
-				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
+				Der Seitentyp <guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> ist sicherlich der
+				am häufigsten genutzte Typ in der Erstellung von Webseiten. Während die
+				sonstigen Seitentypen dezidierten Einsatzzwecken dienen und darum spezielle
+				Variablen bereitstellen, liegt der Schwerpunkt bei einer
+				inhaltlichen Seite, die dem Seitentyp <guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem>
+				 zugeordnet wird, ganz auf die Gestaltung im Inhaltsbereich.
 			</para>
-		</sect2>
-		
-		<sect2 id="usage.blog">
-			<title>Blogseiten (<emphasis>WCOM_BLOG</emphasis>)</title>	
+			
+				<para>Vorlagentyp: <guimenuitem>simple_page_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Name der Seite (Name, der für die Navigation verwendet wird) *}
+{$simple_page.page_name}
+
+{* Titel der Simple Page (Inhaltsfeld) *}
+{$simple_page.title}
+
+{* Inhalte der Simple Page *}
+{$simple_page.content}
+
+{* Um herauszufinden, welche Variablen für den Seitenyp WCOM_SIMPLE_PAGE
+zur Verfügung stehen, nutzen Sie bitte die Smarty-Debug Konsole. Nach 
+Aufruf der unten stehenden Anweisung, speichern Sie die Vorlage und rufen
+die Ausgabe-Seite in Ihrem Browser auf. Da die Konsole als Popup definiert
+ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
+
+{* Smarty-Debug Konsole aufrufen *}
+{debug}
+]]></programlisting>
+
 			<para>
-				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
-				Sie bitte zwischenzeitlich im 
-				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
+				Weitere, detailierte Informationen zur Nutzung der Smarty Debug Konsole finden
+				Sie unter <xref linkend="templating.templates.usage.display_assigned_data"/>.
 			</para>
 		</sect2>
 		
 		<sect2 id="usage.url">
-			<title>Externer Verweis (<emphasis>WCOM_URL</emphasis>)</title>	
+			<title>Externer Verweis (WCOM_URL)</title>	
 			<para>
-				Die Dokumentation zu diesen Seitentyp ist in Vorbereitung. Fragen hierzu stellen
-				Sie bitte zwischenzeitlich im 
+				Der Seitentyp <guimenuitem>WCOM_URL</guimenuitem> benötigt keine dezidierte Seitenvorlage. 
+				Er dient zu Referenzierung von absoluten oder/und externen HTTP Adressen.
+				Fragen hierzu beantworten wir gerne im 
 				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
 			</para>
 		</sect2>
 	</sect1>
+
+	<sect1 id="usage.smarty_plugins">
+		<title>Smarty Plugins</title>
+
+			<para>
+				Ein Großteil der Funktionalität in Welcompose basiert auf dem
+				Einsatz von Smarty Plugins. So wird das Nachladen von Variablen über die Smarty Plugins
+				 <code>select_named</code> oder/und <code>select_simple</code> realisiert, die  
+				Vorlagen- und Seitenübergreifend eingesetzt werden.
+			</para>	
+			
+			<para>
+				Smarty Plugins, die speziellen Aufgaben übernehmen oder/und an einen Vorlagentyp
+				gebunden sind, werden hier mit Anwendungsbeispielen vorgestellt. Weitere allg. 
+				Informationen zu Smarty Plugins innerhalb von Welcompose gibt es in
+				 <xref linkend="templating.templates.usage.load_more_data"/>.
+			</para>
+			
+			<note>
+				<para>
+					Die einer Standardinstallation mitgelieferten Smarty Plugins finden Sie im
+					Verzeichnis <filename>core/smarty/software_plugins</filename>
+				</para>
+			</note>
+		
+		<sect2 id="usage.smarty_plugins.tag_cloud">
+			<title>Tag Cloud</title>	
+			<para>
+				Das Smarty Plugin <filename>tag_cloud</filename> stellt eine verlinkte Liste
+				der innerhalb eines Blogs verwendeten Schlagworte bereit.
+			</para>
+			<para>
+				Einsatzbar in Vorlagentyp: <guimenuitem>blog_index</guimenuitem>, 
+				<guimenuitem>blog_item</guimenuitem>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Tag Cloud auslesen</emphasis>
+			 (Datei: <filename>function.tag_cloud.php</filename>)</para>			
+			<programlisting><![CDATA[
+{* Smarty Tag Cloud Plugin, Parameter 'limit' und 'range' anpassbar *}
+{tag_cloud var="tags" page=$page.id limit=20 range=6}
+<ul>
+{foreach from=$tags item=_tag}
+<li><a class="tag_{$_tag.relevance}" href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+{/foreach}
+</ul>
+]]></programlisting>
+
+			<note>
+				<para>
+					Um unterschiedliches Styling je nach Relevanz der Schlagworte zu unterstützen,
+					wird in dem Beispiel eine dynamische Klassenangabe eingesetzt. Möchten Sie
+					dieses einsetzen, definieren sie in Ihrem Stylesheet CSS Klassen von 
+					<filename>.tag_0</filename> bis <filename>.tag_6</filename>.
+				</para>
+			</note>
+		</sect2>
+		
+		<sect2 id="usage.smarty_plugins.glossary">
+			<title>Get Glossary</title>	
+			<para>
+				Das Smarty Plugin <filename>get_glossary</filename> stellt die Glossarinhalte eines
+				Abkürzungsverzeichnisses zur Verfügung. Mehr Details finden Sie unter
+				<xref linkend="contents.abbreviations"/>
+			</para>
+			<para>
+				Einsatzbar in Vorlagentyp: <guimenuitem>simple_page_index</guimenuitem>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Glossary auslesen</emphasis>
+			 (Datei: <filename>function.get_glossary.php</filename>)</para>				
+			<programlisting><![CDATA[
+{* Smarty Get Glossary Plugin :: Linkleiste *}
+{get_glossary var="glossary" action="pager"}
+
+<ul>
+{foreach item="_glossary" from=$glossary}
+{if !empty($_glossary.has_link)}
+  <li><a href="#{$_glossary.char}">{$_glossary.char}</a></li>
+{else}
+  <li>{$_glossary.char}</li>
+{/if}
+{/foreach}
+</ul>
+
+{* Smarty Get Glossary Plugin :: Ausgabe der Abkürzungstabelle *}
+{get_glossary var="glossary" action="content"}
+
+<dl>
+{foreach item="_glossary" from=$glossary}
+{if !is_null($_glossary.anchor)}
+<h3>{$_glossary.anchor}<a id="{$_glossary.anchor}" name="{$_glossary.anchor}"></a></h3>
+{/if}
+  <dt>{$_glossary.name}<a id="{$_glossary.name}" name="{$_glossary.name}"></a></dt>
+  <dd>{$_glossary.long_form}</dd>
+  <dd>{$_glossary.content}</dd>
+{/foreach}
+</dl>
+]]></programlisting>
+		</sect2>		
+		
+	</sect1>
 	
+		
 	<sect1 id="usage.navigations">
 		<title>Navigationen</title>	
 		
+		<sect2 id="usage.simple_navigation">
+		<title>Einfache Navigation</title>
+		
+			<para>
+				Das folgende Beispiel zeigt die einfachste Möglichkeit, eine Navigation auszulesen.
+			</para>
+	
+			<para>Seitenvorlage: <emphasis>Einfache Navigation auslesen</emphasis></para>
+
+			<programlisting language="smarty"><![CDATA[
+<ul>
+{* Nachladen aller Seiten, die der Navigation mit ID 1 zugeordnet sind *}
+{select_named ns="Content" class="Page" method="selectPages" var="pages" navigation="1"}
+
+{* Ausgabe *}
+{foreach from=$pages item=_page}
+{if $_page.id == WCOM_CURRENT_PAGE}
+  <li>{$_page.name}</li>
+{else}
+  <li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
+{/if}
+{/foreach}
+{* EOF Ausgabe *}
+
+</ul>
+]]></programlisting>
+
+			<note>
+				<para>Hinweis: Das Beispiel geht davon aus, das eine Navigation mit der
+				 ID <userinput>1</userinput> existiert. Passen Sie den Parameter
+				 <filename>navigation</filename> ggf. an.
+				</para>
+			</note>
+		</sect2>
+			
 		<sect2 id="usage.nested_navigation">
 		<title>Verschachtelte Navigationen</title>
 
@@ -88,14 +1557,15 @@
 					in die Seitenvorlage inkludiert werden.
 				</para>
 		
-			<note>
-				<para>Um eine verschachtelte Navigation zu erstellen/anzeigen zu lassen,
-					werden ineinander verschachtelte Smarty-Schleifen benötigt ({foreach}{/foreach}).
-					Damit unsere Vorlagen nicht unnötig kompliziert und groß werden, lagern
-					wir den Code zur Navigationserstellung in zwei eigenen Vorlagentypen aus,
-					die wir dann in jeder beliebigen Seitenvorlage inkludieren können, in der
-				 	die Navigation angezeigt werden soll.</para>
-			</note>
+				<note>
+					<para>Um eine verschachtelte Navigation zu erstellen/anzeigen zu lassen,
+						werden ineinander verschachtelte Smarty-Schleifen benötigt ({foreach}{/foreach}).
+						Damit unsere Vorlagen nicht unnötig kompliziert und groß werden, lagern
+						wir den Code zur Navigationserstellung in zwei eigenen Vorlagentypen aus,
+						die wir dann in jeder beliebigen Seitenvorlage inkludieren können, in der
+					 	die Navigation angezeigt werden soll.
+					</para>
+				</note>
 			</sect3>
 				
 		
@@ -155,27 +1625,26 @@
 			<programlisting language="smarty"><![CDATA[
 <ul class="nav_{$level}">
 {foreach from=$pages item=_page}
-    {if $_page.level == $level && $_page.parent == $parent}
-        {* find out if navigation item is in path *}
-        {assign var="__in_path" value="false"}
-        {foreach from=$path item=_path}
-            {if $_page.id == $_path.id}
-                {assign var="__in_path" value="true"}
-            {/if}
-        {/foreach}
+  {if $_page.level == $level && $_page.parent == $parent}
+    {* find out if navigation item is in path *}
+    {assign var="__in_path" value="false"}
+    {foreach from=$path item=_path}
+      {if $_page.id == $_path.id}
+        {assign var="__in_path" value="true"}
+      {/if}
+    {/foreach}
            
-        <li{if $page.id == $_page.id} class="on"{/if}>
-            {if $page.id == $_page.id}
-                <span>{$_page.name}</span>
-            {else}
-                <a href="{get_url page_id=$_page.id action="Index"}">{$_page.name}</a>
-            {/if}    
-            {if ($_page.rgt - $_page.lft) > 1 && $__in_path == 'true'}
-                {include file="wcom:custom_navigation_generator.`$page.id`" pages=$pages
-                    level=$_page.level|increment parent=$_page.id}
-            {/if}
-        </li>
+    <li{if $page.id == $_page.id} class="on"{/if}>
+    {if $page.id == $_page.id}
+      <span>{$_page.name}</span>
+    {else}
+      <a href="{get_url page_id=$_page.id action="Index"}">{$_page.name}</a>
+    {/if}    
+    {if ($_page.rgt - $_page.lft) > 1 && $__in_path == 'true'}
+      {include file="wcom:custom_navigation_generator.`$page.id`" pages=$pages level=$_page.level|increment parent=$_page.id}
     {/if}
+   </li>
+ {/if}
 {/foreach}
 </ul>
 ]]></programlisting>

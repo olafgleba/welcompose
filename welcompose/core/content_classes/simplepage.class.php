@@ -260,9 +260,22 @@ public function selectSimplePage ($id)
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
 			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+		JOIN
+			".WCOM_DB_USER_USERS." AS `user_users`
+		  ON
+			`content_simple_pages`.`user` = `user_users`.`id`
 		JOIN
 			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		ON
@@ -401,9 +414,22 @@ public function selectSimplePages ($params = array())
 			`content_pages`.`image_medium` AS `page_image_medium`,
 			`content_pages`.`image_big` AS `page_image_big`,
 			`content_pages`.`sitemap_changefreq` AS `page_sitemap_changefreq`,
-			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`
+			`content_pages`.`sitemap_priority` AS `page_sitemap_priority`,
+			`user_users`.`id` AS `user_id`,
+			`user_users`.`name` AS `user_name`,
+			`user_users`.`email` AS `user_email`,
+			`user_users`.`homepage` AS `user_homepage`,
+			`user_users`.`secret` AS `user_secret`,
+			`user_users`.`editable` AS `user_editable`,
+			`user_users`.`date_modified` AS `user_date_modified`,
+			`user_users`.`date_added` AS `user_date_added`,
+			`user_users`.`_sync` AS `user__sync`
 		FROM
 			".WCOM_DB_CONTENT_SIMPLE_PAGES." AS `content_simple_pages`
+		JOIN
+			".WCOM_DB_USER_USERS." AS `user_users`
+		  ON
+			`content_simple_pages`.`user` = `user_users`.`id`
 		JOIN
 			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		ON
@@ -422,6 +448,10 @@ public function selectSimplePages ($params = array())
 	);
 	
 	// add where clauses
+	if (!empty($user) && is_numeric($user)) {
+		$sql .= " AND `user_users`.`id` = :user ";
+		$bind_params['user'] = $user;
+	}
 	if (!empty($user) && is_numeric($user)) {
 		$sql .= " AND `user_users`.`id` = :user ";
 		$bind_params['user'] = $user;
