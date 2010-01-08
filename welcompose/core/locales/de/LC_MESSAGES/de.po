@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-29 15:09+0100\n"
+"POT-Creation-Date: 2010-01-08 15:31+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -20,13 +20,13 @@ msgstr ""
 msgid "Please select a page to use as your glossary target"
 msgstr "Bitte wählen Sie die Seite, die sie als Glossar nutzen möchten"
 
-#: actions_apply_glossary_page.php:303 actions_apply_url_patterns.php:223
+#: actions_apply_glossary_page.php:303 actions_apply_url_patterns.php:224
 #: actions_delete_tpl_compiled.php:130 pages_boxes_adopt.php:226 error.html:24
 #: error_mediamanager.html:2 error_popup_403.html:33 error_popup_723.html:33
 msgid "An error occured"
 msgstr "Es ist ein Fehler aufgetreten"
 
-#: actions_apply_glossary_page.php:304 actions_apply_url_patterns.php:224
+#: actions_apply_glossary_page.php:304 actions_apply_url_patterns.php:225
 #: actions_delete_tpl_compiled.php:131 pages_boxes_adopt.php:227 error.html:26
 #: error_mediamanager.html:4 error_popup_403.html:35 error_popup_723.html:35
 msgid "Welcompose says"
@@ -4295,6 +4295,9 @@ msgid ""
 "Name of the css class which will appended to the provided default class of "
 "the form field"
 msgstr ""
+"Name der CSS-Klasse, die zusätzlich zu der CSS-Standardklasse "
+"eines Formularfeldes auf das Element angewendet wird. Dieses ermöglicht Ihnen "
+"Felder gleichen Typs mit unterschiedlichen Formatierungen zu belegen"   
 
 #: generator_form_field_generator_form_field_label.html:1
 msgid "Label of the form field."
@@ -4318,16 +4321,23 @@ msgstr ""
 "ausgefüllt sein muss, leer ist."
 
 #: generator_form_field_generator_form_field_sorting.html:1
+msgid ""
+"Please choose a nummeric value to define the position of the form field. "
+"This affects mainly the overview within the admin interface."
+msgstr ""
+"Bitte geben Sie einen nummerischen Wert an um die Position des Eintrags "
+"auf der Übersichtsseite der Formfelder zu bestimmen."
+
+#: generator_form_field_generator_form_field_type.html:1
+msgid "Type of the form field."
+msgstr "Typ des Formularfeldes"
+
 #: generator_form_field_generator_form_field_validator_message.html:1
 msgid ""
 "The message will be displayed if the input validation fails for this field."
 msgstr ""
 "Dieser Hinweistext wird angezeigt, wenn die Überprüfung des Formularfeldes "
 "fehlgeschlagen ist."
-
-#: generator_form_field_generator_form_field_type.html:1
-msgid "Type of the form field."
-msgstr "Typ des Formularfeldes"
 
 #: generator_form_field_generator_form_field_validator_regex.html:1
 msgid ""
@@ -4341,14 +4351,17 @@ msgstr ""
 #: generator_form_field_generator_form_field_value.html:1
 msgid ""
 "Here you can enter a predefined value for the form field. Use only a single "
-"line for every form field except textareas and selects. To specify the "
-"options for a select, write all the options in a single line, each one "
-"separated using a comma."
+"line for every form field except textareas,selects and radio inputs. To "
+"specify the options for a select, write all the options in a single line, "
+"each one separated using a comma. To specify options for a radio value "
+"group, please separate every value with a semicolon."
 msgstr ""
 "Hier können Sie Anfangsinhalte der Formularfelder definieren. Tragen Sie "
-"bitte nur einzeilige Inhalte ein. Ausnahme sind hier Textareas und "
-"Auswahlmenüs. Um Optionen in einem Auswahlmenü anzugeben, geben Sie die "
-"Werte hintereinander und trennen jeweils mit einem Kommata."
+"bitte nur einzeilige Inhalte ein. Ausnahme sind hier Textareas, "
+"Auswahlmenüs und Radio-Buttons. Um Optionen in einem Auswahlmenü anzugeben, geben Sie die "
+"Werte hintereinander an und trennen jeweils mit einem <em>Kommata</em>. Um Werte für eine "
+"Gruppe von Radio-Buttons einzutragen, geben Sie die Werte hintereinander an und "
+"trennen jeweils mit einem <em>Semikolon</em>."  
 
 #: generator_form_generator_form_content.html:1
 msgid ""
