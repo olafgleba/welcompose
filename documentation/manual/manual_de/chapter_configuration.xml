@@ -3,12 +3,658 @@
     "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <chapter id="configuration">
 	<title>Welcompose konfigurieren</title>
-		<para>
-			xxx
-		</para>
 		
 	<sect1 id="configuration.sys_inc">
 		<title>Die Datei sys.inc.php</title>
+
+		<para>
+			Die <filename>sys.inc.php</filename> Datei ist die zentrale Konfigurationsdatei
+			von Welcompose, in der die zum Betrieb der Software notwendigen Einstellungen definiert werden.
+			Es ist sozusagen das Herz der Software. 
+		</para>
+		
+		<note>
+			<para>
+				Die allermeisten Parameter der
+				hier aufgeführten Konfigurationsabschnitte brauchen Sie nicht manuell anpassen.
+				Sie werden während der Installation von Welcompose durch die Angaben im Setup-Prozeß
+				automatisch gesetzt und/oder generiert.  
+			</para>
+		</note>
+		
+		<sect2 id="configuration.sys_inc.path">
+			<title>Pfade [path]</title>
+			
+			<variablelist>
+				<varlistentry>
+					<term>wcom_admin_root_www</term>
+					<listitem>
+						<para>
+							Pfad zum Stammverzeichnis des Welcompose Backend.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>wcom_public_root_www</term>
+					<listitem>
+						<para>
+							Pfad zum Stammverzeichnis der Ausgabeseite.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+				
+		</sect2>
+	
+		<sect2 id="configuration.sys_inc.logging">
+			<title>Logging [log]</title>
+		
+			<para>
+				Welcompose bringt ein Logging Framework mit, das das Logging von
+				Fehlern auf viele verschiedene Arten ermöglicht. Verwendet wird
+				dabei das PEAR-Paket Log<footnote><para><ulink type="external"
+				url="http://pear.php.net/package/Log/"/></para></footnote>. 
+				Allerdings ist das Logging von Haus aus deaktiviert, um
+				Sicherheitsprobleme durch offen zugängliche Logdateien zu vermeiden.
+			</para>
+		
+			<sect3 id="configuration.sys_inc.logging.file">
+				<title>Logging in Datei</title>
+			
+				<para>
+					Standardmässig empfiehlt sich das Logging in eine Datei. So
+					können auch Fehler entdeckt werden, die beim regulären Betrieb
+					der Webseite auftauchen, die normalerweise unbemerkt bleiben. 
+				</para>
+			
+				<para>
+					Um das Logging in eine Datei zu aktivieren, gilt es zuerst, 
+					einen geeigneten Speicherplatz für die Logdatei zu finden.
+				</para>
+			
+				<warning>
+					<para>
+						STELLEN SIE UNTER ALLEN UMSTÄNDEN SICHER, DASS DIE
+						LOGDATEIEN NICHT ÜBER DAS WEB EINSEHBAR SIND! Ist das
+						nicht möglich, verzichten Sie auf das Logging.
+					</para>
+				</warning>
+			
+				<para>
+					Erlaubt der Webhoster das Schreiben in Verzeichnisse,
+					die nicht vom Web aus zugänglich sind, sollte dort ein Ordner
+					angelegt werden (beispielsweise mit dem Namen
+					<filename>log/</filename>) und dessen Rechte so verändert werden,
+					dass PHP dort hineinschreiben kann. Setzen Sie für den Schlüssel
+					<code>handler</code> den Wert <userinput>file</userinput>
+					und für den Schlüssel <code>name</code> den Pfad vom
+					Dateisystem-Root zur Logdatei im soeben angelegten Ordner.
+					Beispiel:
+				</para>
+			
+				<programlisting language="ini"><![CDATA[
+[log]
+handler = "file"
+name = "/var/log/welcompose/welcompose.log"
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+				<para>	
+					Kann nur auf Verzeichnisse zugegriffen werden, die über das
+					Web einsehbar sind, kann das bei der Welcompose-Installation
+					vorbereitete Verzeichnis <filename>tmp/log/</filename>
+					verwendet werden. Setzen Sie für
+					den Schlüssel <code>handler</code> den Wert
+					<userinput>file</userinput>. Den Pfad beim Schlüssel
+					<code>name</code> können Sie stehen lassen, da er beim Setup
+					korrekt erzeugt worden sein sollte. Beispiel:
+				</para>
+			
+				<programlisting language="ini"><![CDATA[
+[log]
+handler = "file"
+name = "/www/meinewebsite.tld/tmp/log/welcompose.log"
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+				<para>
+					Nun müssen Sie den Zugriff auf das Verzeichnis
+					<filename>tmp/log/</filename> vom Web aus unterbinden. Es gibt
+					dazu verschiedene Möglichkeiten:
+				
+					<variablelist>
+						<varlistentry>
+							<term>Server-Konfiguration anpassen</term>
+							<listitem>
+								<para>
+									Bei den meisten Webhostern ist eine passende
+									Änderung der Server-Konfiguration relativ
+									einfach zu bewerkstelligen, sofern auf Apache
+									gesetzt wird. So kann einfach eine Datei mit
+									dem Namen <filename>.htaccess</filename> 
+									und dem Inhalt <code>Deny from all</code> in
+									<filename>tmp/log/</filename> abgelegt und damit
+									der Zugriff auf das Verzeichnis verwehrt werden.
+									<code>Deny from all</code> kann ebenfalls direkt
+									in der Server-Konfigurationsdatei
+									<filename>httpd.conf</filename> verwendet
+									werden. Um zu erfahren, wie dies genau geht
+									und was bei anderer Webserver-Software wie
+									lighttpd oder Cherokee getan werden muss,
+									konsultieren Sie bitte die Dokumentation der
+									jeweiligen Produkte.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Schreibrechte ändern</term>
+							<listitem>
+								<para>
+									Das Ändern der Schreibrechte des Ordners
+									<filename>tmp/log/</filename> ist eine
+									Vorgehensweise, die unabhängig der verwendeten
+									Server-Software, aber nicht auf Windows
+									funktioniert. Sie basiert darauf,
+									dass dem Anwender und der Gruppe des Webservers
+									die Leserechte für das Verzeichnis entzogen 
+									werden. Wenn Sie nicht selber wissen, wie das
+									geht, wenden Sie sich bitte an den
+									Provider-Support, weil eine korrekte
+									Konfiguration ohne genaue Kenntnis des
+									Server-Setups unmöglich ist.
+								</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</para>
+			</sect3>
+		
+			<sect3 id="configuration.sys_inc.logging.direct_output">
+				<title>Direkte Ausgabe</title>
+			
+				<warning>
+					<para>
+						VERWENDEN SIE DIE DIREKTE AUSGABE KEINESFALLS IM
+						PRODUKTIVEINSATZ!
+					</para>
+				</warning>
+			
+				<para>
+					Beim Aufsetzen oder bei der Entwicklung mit Welcompose
+					kann es angenehm sein, Fehler direkt beim Seitenaufruf
+					zu Gesicht zu bekommen. PEAR::Log stellt dazu zwei
+					verschiedene Log-Handler bereit.
+				</para>
+			
+				<para>
+					Für jeden Anwender und jeden Browser funktioniert der sogenannte
+					Display Handler. Er gibt die Debug- und Fehlermeldungen direkt
+					aus, wie dies PHP auch tut. Um den Display Handler zu
+					aktivieren, setzen Sie für den Schlüssel
+					<code>handler</code> den Wert <userinput>display</userinput>
+					und für den Schlüssel <code>name</code> einen leeren Wert.
+				</para>
+			
+				<programlisting language="ini"><![CDATA[
+[log]
+handler = "display"
+name = 
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+				<para>
+					Für Anwender des Webbrowsers Firefox gibt es mit der
+					Firebug-Extension <footnote><para><ulink type="external"
+					url="http://www.getfirebug.com/"/></para></footnote>
+					eine optisch attraktive Alternative zum Display Handler, bei
+					der die Fehler im Rahmen der Firebug-Konsole und nicht
+					direkt in der Seite ausgegeben werden. 
+				</para>
+			
+				<para>
+					Um den Firebug Handler zu aktivieren, setzen Sie
+					für den Schlüssel <code>handler</code> den Wert
+					<userinput>firebug</userinput> und für den Schlüssel
+					<code>name</code> einen leeren Wert.
+				</para>
+			
+				<programlisting language="ini"><![CDATA[
+[log]
+handler = "firebug"
+name = 
+level = PEAR_LOG_NOTICE
+]]></programlisting>
+			
+			</sect3>
+		
+			<sect3 id="configuration.sys_inc.logging.log_level">
+				<title>Log Level</title>
+			
+				<para>
+					PEAR::Log unterstützt eine Vielzahl von Log Levels, mit denen
+					die zu loggenden Debug- oder Fehlermeldungen gefiltert werden
+					können. So ergibt es beispielsweise keinen Sinn, im
+					Produktivbetrieb Debug-Meldungen zu loggen. 
+				</para>
+			
+				<para>
+					Für den Produktivbetrieb empfiehlt sich die Verwendung des
+					Log Levels <userinput>PEAR_LOG_INFO</userinput> respektive
+					<userinput>PEAR_LOG_WARNING</userinput>.
+					<userinput>PEAR_LOG_INFO</userinput> entspricht etwa PHPs
+					Log Level E_NOTICE und höher während
+					<userinput>PEAR_LOG_WARNING</userinput> E_WARNING und höher
+					entspricht.
+				</para>
+			
+				<para>
+					Für die Entwicklung von Welcompose kann auf die Log Levels
+					für den Produktivbetrieb oder <userinput>PEAR_LOG_DEBUG</userinput>
+					gesetzt werden. 
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.enviroment">
+			<title>Umgebungsvariablen [enviroment]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>debug</term>
+					<listitem>
+						<para>
+							Ist momentan nicht dokumentiert (Stand: <?dbtimestamp format="d.m.Y"?>)
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>app_key</term>
+					<listitem>
+						<para>
+							Unikater Kennungsschlüssel, der während Installation von Welcompose
+							generiert wird. Er wird u.a. dafür genutzt, um im
+							Installer-Script eine eindeutige Passwortphrase zu erstellen und
+							die Eindeutigkeit beim Anlegen eines Backend-Benutzer Cookies
+							zu gewährleisten.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.locales">
+			<title>Spracheinstellungen [locales]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>all</term>
+					<listitem>
+						<para>
+							Sprachwahl für das Backend in ISO 3166 Schreibweise. Die Sprachwahl
+							wird im Setup-Prozeß angeben, kann aber hier manuell geändert werden. 
+							Es stehen die Sprachen Deutsch (<userinput>de_DE</userinput>)
+							und Englisch (<userinput>en_GB</userinput>, Standard) zur
+							Verfügung. Die Angaben beziehen sich auf Text und Datumsangaben
+							(<code>LC_ALL</code>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>numeric</term>
+					<listitem>
+						<para>
+							Diese Einstellung ist sozusagen die Rückfalloption, falls der
+							Wert des Parameters <code>all</code> auf
+							dem Server nicht verfügbar ist. <userinput>C</userinput> ist
+							eine Einstellung, die jeder Server beherrscht und die grundsätzlichen
+							Formate abdeckt.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.database">
+			<title>Datenbank [database]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>driver</term>
+					<listitem>
+						<para>
+							Treiber für die Datenbankkommunikation. Mögliche Angaben sind 
+							<userinput>mysqli</userinput> und <userinput>pdo</userinput> (Standard).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>dsn</term>
+					<listitem>
+						<para>
+							Data Source Name für die Verbindung zur Datenbank. Wird durch die Angaben
+							im Setup-Prozeß automatisch generiert.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>username</term>
+					<listitem>
+						<para>
+							Der Datenbank-Benutzername. Wird durch die Angaben im Setup-Prozeß eingefügt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>password</term>
+					<listitem>
+						<para>
+							Der Datenbank-Passwort. Wird durch die Angaben im Setup-Prozeß eingefügt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>table_alias_constants</term>
+					<listitem>
+						<para>
+							Welcompose arbeitet intern mit Konstanten für die Tabellen der
+							Datenbank. Bitte belassen sie den Wert in der Standardeinstellung 
+							(<userinput>true</userinput>).
+							
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>debug</term>
+					<listitem>
+						<para>
+							Ist momentan nicht dokumentiert (Stand: <?dbtimestamp format="d.m.Y"?>)
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>backticks</term>
+					<listitem>
+						<para>
+							In einigen Fällen ist es für die Syntax einer Datenbankabfrage notwendig
+							variable Werte mit sog. Backticks zu umschließen. Bitte lassen die Standardeinstellung
+							auf <userinput>true</userinput>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.media">
+			<title>Media [media]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>store_www</term>
+					<listitem>
+						<para>
+							Relativer Pfad zum Speicherort der Media-Dateien.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>store_disk</term>
+					<listitem>
+						<para>
+							Absoluter Pfad zum Speicherort der Media-Dateien
+							ausgehend vom Root-Verzeichnis des Servers.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>chmod</term>
+					<listitem>
+						<para>
+							Oktale Angabe von Schreibrechten. Bitte beachten Sie nachstehenden Abschnitt. 
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<sect3 id="configuration.sys_inc.chmods_file_uploads">
+				<title>Schreibrechte Datei-Uploads</title>
+		
+				<para>
+					Einige Webspace-Provider<footnote><para>Bislang ist uns nur die
+					deutsche Domainfactory bekannt. Sollten Sie weitere Provider kennen,
+					schicken Sie uns bitte eine E-Mail, damit wir die Liste erweitern
+					können.</para></footnote> haben ihre Server derart konfiguriert,
+					dass sie hochgeladene Dateien so ablegen, dass sie vom Webserver
+					nicht gelesen werden können. 
+				</para>
+		
+				<para>
+					Um dieses Problem zu beheben, muss Welcompose angewiesen werden,
+					die Rechte der Dateien nach dem Upload zu modifizieren. Setzen Sie
+					als Wert den oktalen Wert für die gewünschten Schreibrechte, die Welcompose setzen soll.
+					Im Beispiel wurde <userinput>0644</userinput> gewählt. Wenn Sie
+					nicht wissen, welchen Wert Sie wählen sollen, wenden Sie sich bitte
+					an den Provider-Support:
+				</para>
+		
+				<programlisting language="ini"><![CDATA[
+[media]
+...
+chmod = 0644
+
+[global_file]
+...
+chmod = 0644
+]]></programlisting>
+		
+				<warning>
+					<para>
+						Achten Sie darauf, nicht die führende Null zu vergessen,
+						da der Wert sonst dezimal interpretiert wird, was zu falschen
+						Rechten führt!
+					</para>
+				</warning>
+		
+				<para>
+					Wenn Sie nun Dateien hochladen, sollten diese angezeigt werden.
+				</para>
+			</sect3>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.global_files">
+			<title>Globale Dateien [global_files]</title>
+
+			<variablelist>
+				<varlistentry>
+					<term>store_www</term>
+					<listitem>
+						<para>
+							Relativer Pfad zum Speicherort der Globalen Dateien.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>store_disk</term>
+					<listitem>
+						<para>
+							Absoluter Pfad zum Speicherort der Globalen Dateien
+							ausgehend vom Root-Verzeichnis des Servers.
+							Wird in vielen Dateien als Prefix benötigt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>chmod</term>
+					<listitem>
+						<para>
+							Oktale Angabe von Schreibrechten. 
+						</para>
+						<note>
+							<para>
+								Beachten Sie auch die Hinweise zu Datei-Uploads unter 
+								<xref linkend="configuration.sys_inc.chmods_file_uploads"/>
+							</para>
+						</note>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.caching">
+			<title>Caching [caching]</title>
+		
+			<para>
+				Diese Einstellung ist momentan noch nicht verfügbar (Stand: <?dbtimestamp format="d.m.Y"?>)
+			</para>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.plugins">
+			<title>Plugins [plugins]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>textconverter_dir</term>
+					<listitem>
+						<para>
+							Absoluter Pfad zum Speicherort der Textkonverter
+							ausgehend vom Root-Verzeichnis des Servers.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>textmacro_dir</term>
+					<listitem>
+						<para>
+							Absoluter Pfad zum Speicherort der Textmakros
+							ausgehend vom Root-Verzeichnis des Servers.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.urls">
+			<title>URL-Muster [urls]</title>
+		
+			<para>
+				Welcompose nutzt in seiner Standardeinstellung parametisierte URLs.
+				Jedes URL-Muster wird einem <emphasis>Namen</emphasis> zugeordnet,
+				der sich aus verschiedenen Angaben zusammensetzt. Ausführliche und detailierte
+				Informationen hierzu finden Sie im  <xref linkend="url_rewriting.in_depth.url_patterns"/>
+			</para>
+			
+			<para>
+				Aktuelle URL-Muster (Welcompose Version 0.8.8):
+			</para>
+			
+				<programlisting language="ini"><![CDATA[
+blog_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+blog_index_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+blog_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+blog_index_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+blog_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+blog_index_start_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+blog_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+blog_index_start_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+blog_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+blog_atom_10_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10&amp;tag=<tag_word>"
+blog_atom_10_start = "/index.php?project_name=<project_name>&amp;action=Atom10"
+blog_atom_10_start_tag = "/index.php?project_name=<project_name>&amp;action=Atom10&amp;tag=<tag_word>"
+blog_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+blog_rss_20_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&amp;tag=<tag_word>"
+blog_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rss20"
+blog_rss_20_start_tag = "/index.php?project_name=<project_name>&amp;action=Rss20&amp;tag=<tag_word>"
+blog_comments_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsAtom10"
+blog_comments_atom_10_start = "/index.php?project_name=<project_name>&amp;action=CommentsAtom10"
+blog_comments_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=CommentsRss20"
+blog_comments_rss_20_start = "/index.php?project_name=<project_name>&amp;action=CommentsRss20"
+blog_item = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
+blog_item_start = "/index.php?project_name=<project_name>&amp;action=Item&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;posting_day_added=<posting_day_added>&amp;posting_title=<posting_title>"
+blog_archive_year = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
+blog_archive_year_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
+blog_archive_year_start = "/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>"
+blog_archive_year_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveYear&amp;posting_year_added=<posting_year_added>&amp;start=<start>"
+blog_archive_month = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
+blog_archive_month_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+blog_archive_month_start = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
+blog_archive_month_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+global_template_url = "/global_template.php?name=<global_file_name>&amp;project=<project_name>"
+global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+simple_date_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_date_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_date_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_date_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_date_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+simple_date_atom_10_start = "/index.php?project_name=<project_name>&amp;action=Atom10"
+simple_date_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+simple_date_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rss20"
+simple_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+simple_guestbook_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_guestbook_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_guestbook_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+simple_guestbook_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
+]]></programlisting>
+
+		</sect2>
+	
+		<sect2 id="configuration.sys_inc.flickr">
+			<title>Flickr [flickr]</title>
+		
+			<para>
+				Welcompose bietet im Rahmen des Media Manager Unterstützung für die
+				Photo Sharing Community Flickr<footnote><para><ulink type="external"
+				url="http://www.flickr.com/"/></para></footnote>. Die Integration von
+				Flickr wird über das öffentliche Web-Service-API realisiert, für
+				deren Nutzung ein spezieller Key von Nöten ist. Der API Key ist
+				für den persönlichen Gebrauch in der Regel kostenlos und kann
+				auf der Flickr-Webseite beantragt<footnote><para><ulink
+				type="external" url="http://www.flickr.com/services/api/keys/"/></para></footnote>
+				werden. Im Rahmen von Welcompose wird kein Flickr API Key
+				mitgeliefert!
+			</para>
+		
+			<para>
+				Verfügen Sie über einen API Key, tragen Sie ihn als Wert
+				für den Parameter <code>api_key</code> ein.
+			</para>
+		
+			<programlisting language="ini"><![CDATA[
+api_key = "123456789123456789123456789"
+]]></programlisting>
+			
+			<para>
+				Achten Sie zudem darauf, dass für den Parameter
+				<code>cache_encrypt</code> der Wert <userinput>true</userinput>
+				gesetzt ist, sodass die gecachten Antworten von Flickr verschlüsselt
+				werden. Der komplette Flickr-Konfigurationsblock sollte nachher
+				etwa so aussehen (abgesehen vom Abweichungen beim
+				<code>cache_dir</code>):
+			</para>
+		
+			<programlisting language="ini"><![CDATA[
+[flickr]
+cache_dir = "/pfad/zu/tmp/flickr_cache"
+cache_encrypt = true
+api_key = "123456789123456789123456789"
+]]></programlisting>
+		</sect2>
+	
+	</sect1>	
+	
+	
+	
+	<!-- <sect1 id="configuration.default_inc">
+		<title>Die Datei default.inc.php</title>
 
 		<para>
 			Das Pfadlayout einer Rewrite Map muss nicht immer gleich sein.
@@ -18,9 +664,9 @@
 			werden, wenn Welcompose nur ein einzelnes Projekt betreiben soll. 
 			Es verwendet dann automatisch das Standard-Projekt.  
 		</para>
-	</sect1>
+	</sect1> -->
 	
-	<sect1 id="configuration.defaults_inc">
+	<!-- <sect1 id="configuration.defaults_inc">
 		<title>Die Datei defaults.inc.php</title>
 
 		<para>
@@ -31,5 +677,5 @@
 			werden, wenn Welcompose nur ein einzelnes Projekt betreiben soll. 
 			Es verwendet dann automatisch das Standard-Projekt.  
 		</para>
-	</sect1>
+	</sect1> -->
 </chapter>

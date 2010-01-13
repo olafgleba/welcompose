@@ -158,7 +158,7 @@ index.php?project_name=default&page_name=produkte&action=Index
 		
 			<para>
 				Damit Welcompose die richtigen URLs erzeugt, muss die
-				onfigurationsdatei <filename>sys.inc.php</filename> im
+				Konfigurationsdatei <filename>sys.inc.php</filename> im
 				Ordner <filename>core/conf/</filename> bearbeitet werden.
 				Die Muster für die URL-Erzeugung sind im Abschnitt
 				<code>[urls]</code> abgelegt.

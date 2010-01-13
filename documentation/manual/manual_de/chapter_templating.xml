@@ -1140,7 +1140,7 @@ Wert: 3
 			
 			<note>
 				<para>
-				Die von Welcompose mitgelieferten Vorlagentypen ( (siehe <xref
+				Die von Welcompose mitgelieferten Vorlagentypen (siehe <xref
 				linkend="templating.template_types.usage"/>) sind nicht editierbar.
 				</para>
 			</note>
@@ -2141,7 +2141,7 @@ http://pfad/der/installation/global_template.php?name=beispiel.css
 ]]></programlisting>
 
 				<para>
-					wird ihnen, abhängig vom der Konfiguration des Loggins (siehe <xref linkend="extended_configuration.logging.direct_output"/>) ein Fehler angezeigt oder sie erhalten
+					wird ihnen, abhängig vom der Konfiguration des Loggins (siehe <xref linkend="configuration.sys_inc.logging.direct_output"/>) ein Fehler angezeigt oder sie erhalten
 					eine weiße, leere Seite.
 				</para>
 				

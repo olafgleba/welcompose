@@ -170,7 +170,7 @@
 			Bevor Sie mit der Aktualisierungsprozedur starten können/sollten,
 			gilt es, Sicherungskopien der Datenbank und der gesamten
 			Welcompose-Installation anzulegen. Diese können Sie im Falle
-			eines Falles verwenden, um beim Problemen Ihre aktuelle
+			eines Falles verwenden, um bei Problemen Ihre aktuelle
 			Installation wiederherzustellen.
 		</para>
 		
@@ -206,15 +206,8 @@
 				<title>Dateien aktualisieren</title>
 				
 				<para>
-					Um die Scripte und HTML-Vorlagen von Welcompose zu
-					aktualisieren, empfiehlt es sich, die komplette
-					Installation vom Server zu löschen. So stellen Sie
-					sicher, dass keine Dateileichen zurückbleiben.
-				</para>
-				
-				<para>
-					Ausgenommen sind folgende <emphasis role="strong">wichtige</emphasis>
-					Dateien respektive Ordner:
+					Sichern Sie <emphasis role="strong">in einem ersten Schritt</emphasis> 
+					unbedingt folgende Dateien Ihrer aktuellen Installation:
 				</para>
 				
 				<itemizedlist>
@@ -242,23 +235,30 @@
 				
 				<warning>
 					<para>
-						Achten achten Sie darauf, die o.g. Dateien oder/und Ordner keinesfalls zu löschen
-						respektive zu überschreiben. Die Datei <filename>sys.inc.php</filename> ist die zentrale Konfigurations
-						datei. In den Unterordner der Verzeichnisses <filename>files/</filename> befinden
-						sich ihre binären Dateien.
+						Achten achten Sie darauf, die o.g. Dateien oder/und Ordner auf jeden Fall
+						lokal zu sichern. Die Datei <filename>sys.inc.php</filename> ist die zentrale
+						Konfigurationsdatei von Welcompose. In dem Unterordner der Verzeichnisses
+						<filename>files/</filename> befinden sich ihre binären Dateien.
 					</para>
 				</warning>
 				
 				<note>
 					<para>
 						Sollten Sie weitere Dateien der Installation manuell 
-						angepasst haben - beispielsweise ein der Standardinstallation
-						hinzugefügtes Textmakro oder Smarty-Plugin - sollten diese selbstredend
-						ebenfalls gespeichert werden, <emphasis role="strong">bevor</emphasis>
-						Sie den Aktualisierungsprozeß starten. Dieses ermöglicht einen
-						späteren Abgleich mit den aktualisierten Dateien.
+						angepasst oder hinzugefügt haben - beispielsweise ein der Standardinstallation
+						hinzugefügtes Textmakro, Smarty-Plugin oder eine <filename>.htaccess</filename>
+						Datei für URL-Rewrites - sollten diese selbstredend
+						ebenfalls lokal gesichert werden, <emphasis role="strong">bevor</emphasis>
+						Sie das entpackte Archiv des Updates auf den Server laden, da diese Dateien
+						ggf. sonst überschrieben werden.
 					</para>
 				</note>
+				
+				<para>
+					Nach der Sicherung der oben genannten Dateien und Verzeichnisse, empfiehlt es sich,
+					die komplette Installation vom Server zu löschen. So stellen Sie sicher, dass keine
+					Dateileichen zurückbleiben.
+				</para>
 				
 				<para>
 					Haben Sie dies erledigt, gilt es, die aktuelle
@@ -278,8 +278,7 @@
 				<note>
 					<para>
 						Den Ordner <filename>setup/</filename> aus der entpackten Distribution
-						brauchen Sie <emphasis role="strong">nicht</emphasis> mit auf den
-						Server laden.
+						brauchen Sie für die Aktualisisierung nicht mit auf den Server laden.
 					</para>
 				</note>
 
@@ -334,6 +333,47 @@
 						<para>tmp/updater/</para>
 					</listitem>
 				</itemizedlist>
+				
+				<para>
+					Nachdem alle Dateien auf den Server hochgeladen sind, müssen wir unsere
+					lokal gespeicherte Konfigurationsdatei <filename>sys.inc.php</filename>
+					mit der gleichnamigen Datei auf dem Server (Im Verzeichnis 
+					<filename>core/conf</filename>) abgleichen.
+				</para>
+				
+				<warning>
+					<para>
+						Ersetzen Sie die neu hochgeladene Konfigurationsdatei
+						bitte nicht einfach durch die ältere, lokale Datei. Es ist 
+						möglich, dass neue Konfiguration-Parameter hinzugekommen sind
+						oder Bestehende modifiziert sind.
+					</para>
+				</warning>
+				
+				<para>
+					Um die beiden Konfigurations-Dateien zu vergleichen, öffnen Sie bitte
+					beide in einem Text-Editor Ihrer Wahl, kopieren aus der
+					<emphasis role="strong">lokalen</emphasis> sys.inc.php Datei die Abschnitte,
+					die mit denen der neu hochgeladenen sys.inc.php Datei identisch sind und ersetzen diese.  
+				</para>
+				
+				<note>
+					<para>
+						Bitte überprüfen Sie genau, ob die Angaben der lokal gespeicherten Datei mit denen
+						der Datei aus dem Aktualisierungspaket übereinstimmen. Durch hinzugekommene
+						Seitentypen können sich bspw. die Angaben im Abschnitt <code>[urls]</code> ändern. 
+						Konfigurationsbeispiele für die jeweils aktuelle Version finden Sie
+						im <xref linkend="configuration"/>
+					</para>
+				</note>
+				
+				<para>
+					Nachdem Sie die auf dem Server liegende Konfigurations-Datei <filename>sys.inc.php</filename>
+					angepasst und gespeichert haben, laden Sie die zuvor lokal gesicherten Dateien/Ordner wieder
+					auf den Server. Falls die Sie bisher mit einer Standardinstallation gearbeitet haben, 
+					betrifft dies den Ordern <filename>files/</filename> inklusive seiner Unterordner, in
+					dem Ihre binären Dateien liegen.  
+				</para>
 
 			</sect2>
 			

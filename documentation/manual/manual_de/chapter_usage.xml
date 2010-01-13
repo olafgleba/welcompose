@@ -1395,7 +1395,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 			<para>
 				Der Seitentyp <guimenuitem>WCOM_URL</guimenuitem> benötigt keine dezidierte Seitenvorlage. 
 				Er dient zu Referenzierung von absoluten oder/und externen HTTP Adressen.
-				Fragen hierzu beantworten wir gerne im 
+				Fragen zu diesen Seitentyp beantworten wir gerne im 
 				<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>.
 			</para>
 		</sect2>
@@ -1406,7 +1406,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 
 			<para>
 				Ein Großteil der Funktionalität in Welcompose basiert auf dem
-				Einsatz von Smarty Plugins. So wird das Nachladen von Variablen über die Smarty Plugins
+				Einsatz von Smarty Plugins. So wird das Nachladen von Datenbankinhalten über die Smarty Plugins
 				 <code>select_named</code> oder/und <code>select_simple</code> realisiert, die  
 				Vorlagen- und Seitenübergreifend eingesetzt werden.
 			</para>	

@@ -79,263 +79,260 @@
 		<sect2 id="contents.pages.manage">
 			<title>Verwaltung</title>
 			
-			<sect3 id="contents.pages.manage.overview">
-			<title>Seiten-Übersicht</title>
+			<para>
+				Die Verwaltung der Seiten erfolgt über den Menüpunkt
+				<guisubmenu>Seiten</guisubmenu> im Bereich
+				<guimenu>Inhalte</guimenu>. Die Seiten sind nach
+				den jeweiligen Navigationen, zu denen sie gehören,
+				zusammengefasst und in der Reihenfolge und Einrückung
+				dargestellt, wie sie später ausgegeben werden. 
+			</para>
 			
-				<para>
-					Die Verwaltung der Seiten erfolgt über den Menüpunkt
-					<guisubmenu>Seiten</guisubmenu> im Bereich
-					<guimenu>Inhalte</guimenu>. Die Seiten sind nach
-					den jeweiligen Navigationen, zu denen sie gehören,
-					zusammengefasst und in der Reihenfolge und Einrückung
-					dargestellt, wie sie später ausgegeben werden. 
-				</para>
-				
-				<para>
-					Nachdem eine Navigation angelegt wurde, erhält man auf der
-					Seiten-Übersichtsseite einen Eintrag für die Navigation
-					samt einer leeren zugehörigen Seitenstruktur. Die 
-					Seitenstruktur teilt sich bei einer vorhandenen Navigation
-					in fünf, bei mehreren vorhandenen Navigationen in sechs
-					Spalten auf.
-				</para>
-				
-				<figure id="contents.pages.manage.page_manager">
-					<title>Seiten-Übersicht</title>
-					<graphic fileref="images/contents/pages/manage.page_manager.png"/>
-				</figure>
-				
-				<variablelist>
-					<title>Funktionselemente Seitenübersicht</title>
-					<varlistentry>
-						<term><guilabel>Seitenstruktur</guilabel></term>
-						<listitem>
-							<para>
-								Enthält den Namen der einzelnen Seite,
-								wie er in der Navigation als Menüpunkt
-								erscheint. Der Namen wird zudem mit der
-								richtigen Einrückung gezeigt, wobei jede
-								Verschachtelungsebene durch einen grauen
-								Punkt vor dem Namen gezeigt wird. Eine Seite
-								über alle Navigationen hinweg kann mit einem
-								kleinen orangen I (i) markiert sein. Dies
-								signalisiert, dass es sich bei der Seite um die
-								sogenannte Index-Seite handelt, die beim Aufruf
-								des Welcompose-Ausgabebereits ohne irgendwelche
-								Parameter angezeigt wird. Geschützte Seiten sind
-								mit einem orangen Schloss-symbol versehen.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Position</guilabel></term>
-						<listitem>
-							<para>
-								Die Spalte <guilabel>Position</guilabel>
-								hält zwei Schaltflächen bereit, mit denen die
-								Menüpunkte im Rahmen der Navigation nach
-								oben respektive nach unten bewegt werden können.
-								Gleichzeitig wird darüber die Einrückung
-								beeinflusst. Das Prinzip hinter der Bewegung
-								beleuchtet grob <xref
-								linkend="contents.pages.manage.page_moving_results"/>.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Neu</guilabel></term>
-						<listitem>
-							<para>
-								Fügt eine neue Seite zur aktuellen Navigation
-								relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
-								wird entweder über oder unter dem aktuellen
-								Menüpunkt eingesetzt.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Bearbeiten</guilabel></term>
-						<listitem>
-							<para>
-								Über die Schaltfläche
-								<guibutton>Bearbeiten</guibutton> gelangen Sie zu
-								den Formularen, um die Metadaten der jeweiligen
-								Seiten (beispielsweise den Namen der Seite)
-								sowie deren Inhalte zu bearbeiten. 
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Verschieben</guilabel></term>
-						<listitem>
-							<para>
-								Die Schaltfläche <guibutton>Verschieben</guibutton>,
-								die nur vorhanden ist, wenn mehr als eine
-								Navigation existiert, erlaubt es, eine Seite
-								respektive einen Menüpunkt an eine andere
-								Navigation anzuhängen.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Löschen</guilabel></term>
-						<listitem>
-							<para>
-								Löscht die Seite und alle ihre Inhalte (nach einer Sicherheitsabfrage).
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-				
-				<figure id="contents.pages.manage.page_moving_results">
-					<title>Seiten verschieben</title>
-					<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
-				</figure>
-				
-				<para>
-					Beim Hinzufügen einer Seite werden eine Reihe von
-					Informationen abgefragt, mit denen die Anzeige sowie die
-					Inhalte der Seite beeinflusst werden können. Im Rahmen
-					von Welcompose werden diese Informationen als
-					Metadaten bezeichnet.
-				</para>
-				
-				<figure id="contents.pages.manage.add_page">
-					<title>Seite hinzufügen</title>
-					<graphic fileref="images/contents/pages/manage.add_page.png"/>
-				</figure>
-				
-				<variablelist>
-					<varlistentry>
-						<term><guilabel>Position</guilabel></term>
-						<listitem>
-							<para>
-								Bestimmt, wie die neue Seite in die Navigation
-								eingefügt werden soll und zwar relativ
-								gesehen zum Menüpunkt, neben dem auf die
-								Schaltfläche <guibutton>Neu</guibutton>
-								geklickt wurde. Eine Seite kann entweder
-								oberhalb oder unterhalb des Menüpunkts
-								eingefügt werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Name</guilabel></term>
-						<listitem>
-							<para>
-								Name der Seite respektive des Menüpunkts.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>URL-Name</guilabel></term>
-						<listitem>
-							<para>
-								Name der Seite in einer vereinfachten Form
-								für den Einsatz in suchmaschinenfreundlichen
-								URLs (nur a-z, 0-9 und - als erlaubte Zeichen).
-								Wird automatisch mit Hilfe von JavaScript
-								bei der Eingabe des Seitennamen erzeugt
-								und kann bei Bedarf manuell angepasst werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Typ</guilabel></term>
-						<listitem>
-							<para>
-								Bestimmt den Seitentyp der Seite, respektive
-								mit welchen Inhalten die Seite befüllt werden
-								kann. Diese Einstellung kann später nicht mehr
-								geändert werden.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Vorlagengruppe</guilabel></term>
-						<listitem>
-							<para>
-								Die Vorlagegruppe, der der neue Seite zugeorndet
-								werden soll.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Index-Seite</guilabel></term>
-						<listitem>
-							<para>
-								Markiert die Seite als Index-Seite, die beim Aufruf des 
-								Ausgabe-Bereichs von Welcompose ohne weitere Parameter verwendet
-								wird ("Startseite").
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Geschützt</guilabel></term>
-						<listitem>
-							<para>
-								Erlaubt den Zugriff auf die entsprechende
-								Seite nur nach Eingabe von Benutzernamen
-								und Passwort. Welche Anwender sich anmelden
-								dürfen, wird über das Feld
-								<guilabel>Benutzergruppen</guilabel> gesteuert.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Entwurf</guilabel></term>
-						<listitem>
-							<para>
-								Speichert die Seite im Entwurf-Modus. So lange
-								diese Einstellung aktiv ist, wird die Seite 
-								nicht veröffentlicht. Gleichzeitig wird die
-								Seite nicht in der Ausgabe der Navigation
-								berücksichtigt. Die Listung der Seiten im Adminstrationsbereich
-								ist gewährleistet. Seiten mit Entwurfsstatus sind farblich
-								abgesetzt.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>No Follow</guilabel></term>
-						<listitem>
-							<para>
-								Das Setzen dieser Option gibt an, ob Verweise auf diese Seite
-								mit dem Attribute/Wertepaar <code>rel="nofollow"</code> erweitert
-								werden können und ermöglicht eine Abfrage dieses Wertes bspw.
-								in der Navigationserstellung (s. <xref linkend="contents.navigations"/>).
-								Das Attribut verhindert die Google Page Rank Vererbung.
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guilabel>Benutzergruppen</guilabel></term>
-						<listitem>
-							<para>
-								Benutzergruppen, denen der Zugriff auf die
-								Seite gestattet wird, sollte sie geschützt
-								sein.
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-				
-				<para>
-					Parallel zu den "normalen" Metadaten-Feldern bietet
-					Welcompose einige ergänzende Felder, die beispielsweise
-					zur Befüllung mit Inhalt genutzt werden können. So erlaubt
-					das Feld <guilabel>Alternativer Name</guilabel> die Speicherung
-					eines alternativen Seitennamen sowie
-					<guilabel>Beschreibung</guilabel> und
-					<guilabel>Optionaler Text</guilabel> das Hinterlegen von
-					beliebigem Fliesstext, der beispielsweise für die Befüllung
-					von Metatags im Seitenkopf verwendet werden kann. Die
-					Verwendung der Felder <guilabel>Sitemap Änderungshäufigkeit</guilabel>
-					und <guilabel>Sitemap Priorität</guilabel> wird in
-					<xref linkend="settings.google_sitemaps"/> erklärt.
-				</para>
-			</sect3>
+			<para>
+				Nachdem eine Navigation angelegt wurde, erhält man auf der
+				Seiten-Übersichtsseite einen Eintrag für die Navigation
+				samt einer leeren zugehörigen Seitenstruktur. Die 
+				Seitenstruktur teilt sich bei einer vorhandenen Navigation
+				in fünf, bei mehreren vorhandenen Navigationen in sechs
+				Spalten auf.
+			</para>
+			
+			<figure id="contents.pages.manage.page_manager">
+				<title>Seiten-Übersicht</title>
+				<graphic fileref="images/contents/pages/manage.page_manager.png"/>
+			</figure>
+			
+			<variablelist>
+				<title>Funktionselemente Seitenübersicht</title>
+				<varlistentry>
+					<term><guilabel>Seitenstruktur</guilabel></term>
+					<listitem>
+						<para>
+							Enthält den Namen der einzelnen Seite,
+							wie er in der Navigation als Menüpunkt
+							erscheint. Der Namen wird zudem mit der
+							richtigen Einrückung gezeigt, wobei jede
+							Verschachtelungsebene durch einen grauen
+							Punkt vor dem Namen gezeigt wird. Eine Seite
+							über alle Navigationen hinweg kann mit einem
+							kleinen orangen I (i) markiert sein. Dies
+							signalisiert, dass es sich bei der Seite um die
+							sogenannte Index-Seite handelt, die beim Aufruf
+							des Welcompose-Ausgabebereits ohne irgendwelche
+							Parameter angezeigt wird. Geschützte Seiten sind
+							mit einem orangen Schloss-symbol versehen.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Position</guilabel></term>
+					<listitem>
+						<para>
+							Die Spalte <guilabel>Position</guilabel>
+							hält zwei Schaltflächen bereit, mit denen die
+							Menüpunkte im Rahmen der Navigation nach
+							oben respektive nach unten bewegt werden können.
+							Gleichzeitig wird darüber die Einrückung
+							beeinflusst. Das Prinzip hinter der Bewegung
+							beleuchtet grob <xref
+							linkend="contents.pages.manage.page_moving_results"/>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Neu</guilabel></term>
+					<listitem>
+						<para>
+							Fügt eine neue Seite zur aktuellen Navigation
+							relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
+							wird entweder über oder unter dem aktuellen
+							Menüpunkt eingesetzt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Bearbeiten</guilabel></term>
+					<listitem>
+						<para>
+							Über die Schaltfläche
+							<guibutton>Bearbeiten</guibutton> gelangen Sie zu
+							den Formularen, um die Metadaten der jeweiligen
+							Seiten (beispielsweise den Namen der Seite)
+							sowie deren Inhalte zu bearbeiten. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Verschieben</guilabel></term>
+					<listitem>
+						<para>
+							Die Schaltfläche <guibutton>Verschieben</guibutton>,
+							die nur vorhanden ist, wenn mehr als eine
+							Navigation existiert, erlaubt es, eine Seite
+							respektive einen Menüpunkt an eine andere
+							Navigation anzuhängen.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Löschen</guilabel></term>
+					<listitem>
+						<para>
+							Löscht die Seite und alle ihre Inhalte (nach einer Sicherheitsabfrage).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<figure id="contents.pages.manage.page_moving_results">
+				<title>Seiten verschieben</title>
+				<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
+			</figure>
+			
+			<para>
+				Beim Hinzufügen einer Seite werden eine Reihe von
+				Informationen abgefragt, mit denen die Anzeige sowie die
+				Inhalte der Seite beeinflusst werden können. Im Rahmen
+				von Welcompose werden diese Informationen als
+				Metadaten bezeichnet.
+			</para>
+			
+			<figure id="contents.pages.manage.add_page">
+				<title>Seite hinzufügen</title>
+				<graphic fileref="images/contents/pages/manage.add_page.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Position</guilabel></term>
+					<listitem>
+						<para>
+							Bestimmt, wie die neue Seite in die Navigation
+							eingefügt werden soll und zwar relativ
+							gesehen zum Menüpunkt, neben dem auf die
+							Schaltfläche <guibutton>Neu</guibutton>
+							geklickt wurde. Eine Seite kann entweder
+							oberhalb oder unterhalb des Menüpunkts
+							eingefügt werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Name der Seite respektive des Menüpunkts.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>URL-Name</guilabel></term>
+					<listitem>
+						<para>
+							Name der Seite in einer vereinfachten Form
+							für den Einsatz in suchmaschinenfreundlichen
+							URLs (nur a-z, 0-9 und - als erlaubte Zeichen).
+							Wird automatisch mit Hilfe von JavaScript
+							bei der Eingabe des Seitennamen erzeugt
+							und kann bei Bedarf manuell angepasst werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Typ</guilabel></term>
+					<listitem>
+						<para>
+							Bestimmt den Seitentyp der Seite, respektive
+							mit welchen Inhalten die Seite befüllt werden
+							kann. Diese Einstellung kann später nicht mehr
+							geändert werden.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Vorlagengruppe</guilabel></term>
+					<listitem>
+						<para>
+							Die Vorlagegruppe, der der neue Seite zugeorndet
+							werden soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Index-Seite</guilabel></term>
+					<listitem>
+						<para>
+							Markiert die Seite als Index-Seite, die beim Aufruf des 
+							Ausgabe-Bereichs von Welcompose ohne weitere Parameter verwendet
+							wird ("Startseite").
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Geschützt</guilabel></term>
+					<listitem>
+						<para>
+							Erlaubt den Zugriff auf die entsprechende
+							Seite nur nach Eingabe von Benutzernamen
+							und Passwort. Welche Anwender sich anmelden
+							dürfen, wird über das Feld
+							<guilabel>Benutzergruppen</guilabel> gesteuert.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Entwurf</guilabel></term>
+					<listitem>
+						<para>
+							Speichert die Seite im Entwurf-Modus. So lange
+							diese Einstellung aktiv ist, wird die Seite 
+							nicht veröffentlicht. Gleichzeitig wird die
+							Seite nicht in der Ausgabe der Navigation
+							berücksichtigt. Die Listung der Seiten im Adminstrationsbereich
+							ist gewährleistet. Seiten mit Entwurfsstatus sind farblich
+							abgesetzt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>No Follow</guilabel></term>
+					<listitem>
+						<para>
+							Das Setzen dieser Option gibt an, ob Verweise auf diese Seite
+							mit dem Attribute/Wertepaar <code>rel="nofollow"</code> erweitert
+							werden können und ermöglicht eine Abfrage dieses Wertes bspw.
+							in der Navigationserstellung (s. <xref linkend="contents.navigations"/>).
+							Das Attribut verhindert die Google Page Rank Vererbung.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Benutzergruppen</guilabel></term>
+					<listitem>
+						<para>
+							Benutzergruppen, denen der Zugriff auf die
+							Seite gestattet wird, sollte sie geschützt
+							sein.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<para>
+				Parallel zu den "normalen" Metadaten-Feldern bietet
+				Welcompose einige ergänzende Felder, die beispielsweise
+				zur Befüllung mit Inhalt genutzt werden können. So erlaubt
+				das Feld <guilabel>Alternativer Name</guilabel> die Speicherung
+				eines alternativen Seitennamen sowie
+				<guilabel>Beschreibung</guilabel> und
+				<guilabel>Optionaler Text</guilabel> das Hinterlegen von
+				beliebigem Fliesstext, der beispielsweise für die Befüllung
+				von Metatags im Seitenkopf verwendet werden kann. Die
+				Verwendung der Felder <guilabel>Sitemap Änderungshäufigkeit</guilabel>
+				und <guilabel>Sitemap Priorität</guilabel> wird in
+				<xref linkend="settings.google_sitemaps"/> erklärt.
+			</para>
+
 		</sect2>
 		
 		<sect2 id="contents.pages.output">
@@ -1022,6 +1019,139 @@ Name der Navigation: {$navigation.name}
 			
 		</sect2>
 	</sect1>
+	
+	
+	<!-- <sect1 id="contents.page_types">
+		<title>Seitentypen</title>
+		
+		<sect2 id="contents.page_types.introduction">
+			<title>Einführung</title>
+						
+			<para>
+				...
+			</para>
+			
+			<note>
+				<para>
+					Da viel zu kompliziert eigene Seitentypen anzulegen, hier keine Erklärung...
+				</para>
+			</note>
+
+		</sect2>
+		
+		<sect2 id="contents.page_types.page_types_introduction">
+			<title>WCOM_BLOG</title>
+			
+			<para>
+				...
+			</para>
+			
+			<figure id="contents.page_types.wcom_blog_overview">
+				<title>Blog-Einträge Übersicht</title>
+				<graphic fileref="images/contents/page_types/wcom_blog_overview.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Der Name der Box. Kommt ausser im 
+							Administrationsbereich nicht zum Einsatz. Muss
+							innerhalb eines Projekts einzigartig sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Inhalt der Box. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Textkonverter</guilabel></term>
+					<listitem>
+						<para>
+							Textkonverter, der auf den Inhalt der 
+							Box appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Makros anwenden</guilabel></term>
+					<listitem>
+						<para>
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
+							Box appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>	
+			
+			<para>
+				...
+			</para>
+			
+			<note>
+				<para>
+					Sie können beliebig viele Boxen (siehe <xref linkend="contents.boxes"/>) 
+					für Ihre Blog-Seite anlegen.
+				</para>
+			</note>
+			
+			<figure id="contents.page_types.wcom_blog_item_overview">
+				<title>Blog-Eintrag</title>
+				<graphic fileref="images/contents/page_types/wcom_blog_item_overview.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Name</guilabel></term>
+					<listitem>
+						<para>
+							Der Name der Box. Kommt ausser im 
+							Administrationsbereich nicht zum Einsatz. Muss
+							innerhalb eines Projekts einzigartig sein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Inhalt</guilabel></term>
+					<listitem>
+						<para>
+							Inhalt der Box. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Textkonverter</guilabel></term>
+					<listitem>
+						<para>
+							Textkonverter, der auf den Inhalt der 
+							Box appliziert werden soll (siehe <xref
+							linkend="settings.text_converters"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Makros anwenden</guilabel></term>
+					<listitem>
+						<para>
+							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
+							Box appliziert werden sollen (siehe <xref
+							linkend="settings.text_macros"/>).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>		
+
+			
+		</sect2>
+	</sect1> -->	
 	
 	
 	<sect1 id="contents.structural_templates">

@@ -105,7 +105,7 @@
 				<para>
 					Um dieses Feature in Welcompose nutzen zu können, muss die Konfigurationsdatei
 					<filename>core/conf/sys.inc.php</filename> angepasst werden.
-					(siehe <xref linkend="extended_configuration.flickr"/>).
+					(siehe <xref linkend="configuration.sys_inc.flickr"/>).
 				</para>
 			</note>
 									
