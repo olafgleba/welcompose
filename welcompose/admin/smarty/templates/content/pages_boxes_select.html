@@ -176,7 +176,7 @@ var toggleElem = 2;
 <tr>
 <td>{$_allbox.name|escape:"html"}</td>
 <td>{$_allbox.page_name|truncate:140}</td>
-<td>{$_allbox.content_raw|truncate:50|escape:htmlall}</td>
+<td>{$_allbox.content_raw|truncate:50|escape:html}</td>
 <td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a>{/if}</td>
 <td><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
 </tr>
