@@ -27,12 +27,12 @@ backticks = true
 
 [media]
 store_www = "/files/media"
-store_disk = "/www/welcompose/branches/iso2utf/welcompose/files/media"
+store_disk = "/www/welcompose/trunk/welcompose/files/media"
 chmod = 
 
 [global_file]
 store_www = "/files/global_files"
-store_disk = "/www/welcompose/branches/iso2utf/welcompose/files/global_files"
+store_disk = "/www/welcompose/trunk/welcompose/files/global_files"
 chmod = 
 
 [caching]
@@ -40,8 +40,8 @@ index.php_mode = 0
 index.php_lifetime = 0
 
 [plugins]
-textconverter_dir = "/www/welcompose/branches/iso2utf/welcompose/core/plugins/textconverters"
-textmacro_dir = "/www/welcompose/branches/iso2utf/welcompose/core/plugins/textmacros"
+textconverter_dir = "/www/welcompose/trunk/welcompose/core/plugins/textconverters"
+textmacro_dir = "/www/welcompose/trunk/welcompose/core/plugins/textmacros"
 
 [urls]
 blog_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
@@ -96,7 +96,7 @@ simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_
 simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 
 [flickr]
-cache_dir = "/www/welcompose/branches/iso2utf/welcompose/tmp/flickr_cache"
+cache_dir = "/www/welcompose/trunk/welcompose/tmp/flickr_cache"
 cache_encrypt = true
 api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"
 
