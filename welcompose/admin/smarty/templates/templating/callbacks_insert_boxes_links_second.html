@@ -4,7 +4,7 @@
 </tr>
 {foreach from=$boxes item=_box}
 <tr>
-<td class="initialNode"><a class="process_insert" id="{$_box.id}" name="box" href="#" title="{i18n Insert box reference}">{$_box.name|escape:"htmlall"}</a></td>
+<td class="initialNode"><a class="process_insert" id="{$_box.id}" name="box" href="#" title="{i18n Insert box reference}">{$_box.name|escape:"html"}</a></td>
 <td>&nbsp;</td>
 </tr>
 {/foreach}

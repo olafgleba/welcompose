@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -51,7 +51,7 @@ var insert_type = '{$callback_params.insert_type}';
 <fieldset>
 {foreach from=$blog_tags item=_blog_tag}
 <tr>
-<td class="initialNode"><label class="cont chbx" for="{$_blog_tag.id}"><input id="{$_blog_tag.id}" class="chbx" name="blogtag" type="checkbox" value="{$_blog_tag.word}" />{$_blog_tag.word|escape:"htmlall"}</label></td>
+<td class="initialNode"><label class="cont chbx" for="{$_blog_tag.id}"><input id="{$_blog_tag.id}" class="chbx" name="blogtag" type="checkbox" value="{$_blog_tag.word}" />{$_blog_tag.word|escape:"html"}</label></td>
 </tr>
 {/foreach}
 </fieldset>

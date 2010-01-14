@@ -175,7 +175,7 @@ try {
 	$BASE->utility->smarty->assign('media_store_www', $BASE->_conf['media']['store_www']);
 	
 	// set header
-	header("Content-Type: text/html; charset=iso-8859-1");
+	header("Content-Type: text/html; charset=utf-8");
 	
 	// display the correlated mediamanager template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');

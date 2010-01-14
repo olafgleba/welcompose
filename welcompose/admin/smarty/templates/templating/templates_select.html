@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -63,14 +63,14 @@
 <select id="set" name="set">
 <option{if empty($request.set)} selected="selected"{/if}>{i18n Please choose...}</option>
 {foreach from=$template_sets item=_template_set}
-<option value="{$_template_set.id|escape:"htmlall"}"{if $request.set == $_template_set.id} selected="selected"{/if}>{$_template_set.name|escape:"htmlall"}</option>
+<option value="{$_template_set.id|escape:"html"}"{if $request.set == $_template_set.id} selected="selected"{/if}>{$_template_set.name|escape:"html"}</option>
 {/foreach}
 </select>
 <label for="type">{i18n Template Types}</label> 
 <select id="type" name="type">
 <option{if empty($request.type)} selected="selected"{/if}>{i18n Please choose...}</option>
 {foreach from=$template_types item=_template_type}
-<option value="{$_template_type.id|escape:"htmlall"}"{if $request.type == $_template_type.id} selected="selected"{/if}>{$_template_type.name|escape:"htmlall"}</option>
+<option value="{$_template_type.id|escape:"html"}"{if $request.type == $_template_type.id} selected="selected"{/if}>{$_template_type.name|escape:"html"}</option>
 {/foreach}
 </select>
 &nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
@@ -115,9 +115,9 @@
 </tr>
 {foreach from=$templates item=_template}
 <tr>
-<td>{$_template.name|escape:"htmlall"}</td>
-<td>{$_template.type_name|escape:"htmlall"}</td>
-<td>{$_template.description|escape:"htmlall"}</td>
+<td>{$_template.name|escape:"html"}</td>
+<td>{$_template.type_name|escape:"html"}</td>
+<td>{$_template.description|escape:"html"}</td>
 <td><a class="upload showTableRow" href="#" id="e_{$_template.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="templates_download.php?id={$_template.id|escape:"url"}" title="{i18n Download}"></a></td>
 <td><a class="duplicate" href="templates_copy.php?id={$_template.id|escape:"url"}" title="{i18n Duplicate}"></a></td>

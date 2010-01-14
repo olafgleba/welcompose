@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -88,8 +88,8 @@
 {foreach from=$abbreviations item=_abbreviation}
 
 <tr>
-<td class="page"><span>{$_abbreviation.name|escape:"htmlall"}</span></td>
-<td>{$_abbreviation.long_form|escape:"htmlall"|truncate:60}</td>
+<td class="page"><span>{$_abbreviation.name|escape:"html"}</span></td>
+<td>{$_abbreviation.long_form|escape:"html"|truncate:60}</td>
 <td>{if $_abbreviation.long_form|count_characters > 60}<a class="comment showTableRow" href="#" id="e_{$_abbreviation.id}" title="{i18n View entire long form}"></a>{/if}</td>
 <td>{if !empty($_abbreviation.content)}{i18n yes}{else}{i18n no}{/if}</td>
 <td><a class="edit" href="abbreviations_edit.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Edit}"></a></td>

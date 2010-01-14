@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -83,8 +83,8 @@
 </tr>
 {foreach from=$rights item=_right}
 <tr>
-<td>{$_right.name|escape:"htmlall"}</td>
-<td>{$_right.description|escape:"htmlall"|nl2br}</td>
+<td>{$_right.name|escape:"html"}</td>
+<td>{$_right.description|escape:"html"|nl2br}</td>
 {if $_right.editable}
 <td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"url"}" title="{i18n Delete}"></a></td>

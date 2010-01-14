@@ -24,7 +24,7 @@ CREATE TABLE `application_ping_services` (
   PRIMARY KEY(`id`),
   INDEX `project`(`project`)
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_users
 DROP TABLE IF EXISTS `user_users`;
@@ -42,7 +42,7 @@ CREATE TABLE `user_users` (
   PRIMARY KEY(`id`),
   INDEX `_sync`(`_sync`)
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table application_info
 DROP TABLE IF EXISTS `application_info`;
@@ -51,7 +51,7 @@ CREATE TABLE `application_info` (
   `application_version` varchar(255),
   `schema_version` varchar(255)
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 INSERT INTO `application_info` (`schema_version`) VALUES ('@@schema_version@@');
 
@@ -77,7 +77,7 @@ CREATE TABLE `application_projects` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_global_files
 DROP TABLE IF EXISTS `templating_global_files`;
@@ -100,7 +100,7 @@ CREATE TABLE `templating_global_files` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_global_templates
 DROP TABLE IF EXISTS `templating_global_templates`;
@@ -123,7 +123,7 @@ CREATE TABLE `templating_global_templates` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table media_tags
 DROP TABLE IF EXISTS `media_tags`;
@@ -142,7 +142,7 @@ CREATE TABLE `media_tags` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table community_blog_trackback_statuses
 DROP TABLE IF EXISTS `community_blog_trackback_statuses`;
@@ -158,7 +158,7 @@ CREATE TABLE `community_blog_trackback_statuses` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table community_anti_spam_plugins
 DROP TABLE IF EXISTS `community_anti_spam_plugins`;
@@ -178,7 +178,7 @@ CREATE TABLE `community_anti_spam_plugins` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_structural_templates
 DROP TABLE IF EXISTS `content_structural_templates`;
@@ -198,7 +198,7 @@ CREATE TABLE `content_structural_templates` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_blog_podcast_categories
 DROP TABLE IF EXISTS `content_blog_podcast_categories`;
@@ -218,7 +218,7 @@ CREATE TABLE `content_blog_podcast_categories` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_groups
 DROP TABLE IF EXISTS `user_groups`;
@@ -238,7 +238,7 @@ CREATE TABLE `user_groups` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_template_sets
 DROP TABLE IF EXISTS `templating_template_sets`;
@@ -255,7 +255,7 @@ CREATE TABLE `templating_template_sets` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_page_types
 DROP TABLE IF EXISTS `content_page_types`;
@@ -273,7 +273,7 @@ CREATE TABLE `content_page_types` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_navigations
 DROP TABLE IF EXISTS `content_navigations`;
@@ -289,7 +289,7 @@ CREATE TABLE `content_navigations` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table media_objects
 DROP TABLE IF EXISTS `media_objects`;
@@ -320,7 +320,7 @@ CREATE TABLE `media_objects` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_template_types
 DROP TABLE IF EXISTS `templating_template_types`;
@@ -337,7 +337,7 @@ CREATE TABLE `templating_template_types` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table media_objects2media_tags
 DROP TABLE IF EXISTS `media_objects2media_tags`;
@@ -358,7 +358,7 @@ CREATE TABLE `media_objects2media_tags` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_users2user_groups
 DROP TABLE IF EXISTS `user_users2user_groups`;
@@ -379,7 +379,7 @@ CREATE TABLE `user_users2user_groups` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_users2application_projects
 DROP TABLE IF EXISTS `user_users2application_projects`;
@@ -400,7 +400,7 @@ CREATE TABLE `user_users2application_projects` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_rights
 DROP TABLE IF EXISTS `user_rights`;
@@ -418,7 +418,7 @@ CREATE TABLE `user_rights` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table community_blog_comment_statuses
 DROP TABLE IF EXISTS `community_blog_comment_statuses`;
@@ -434,7 +434,7 @@ CREATE TABLE `community_blog_comment_statuses` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table application_text_macros
 DROP TABLE IF EXISTS `application_text_macros`;
@@ -453,7 +453,7 @@ CREATE TABLE `application_text_macros` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_nodes
 DROP TABLE IF EXISTS `content_nodes`;
@@ -473,7 +473,7 @@ CREATE TABLE `content_nodes` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table application_text_converters
 DROP TABLE IF EXISTS `application_text_converters`;
@@ -491,7 +491,7 @@ CREATE TABLE `application_text_converters` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_templates
 DROP TABLE IF EXISTS `templating_templates`;
@@ -511,7 +511,7 @@ CREATE TABLE `templating_templates` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_abbriviations
 DROP TABLE IF EXISTS `content_abbreviations`;
@@ -541,7 +541,7 @@ CREATE TABLE `content_abbreviations` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_global_boxes
 DROP TABLE IF EXISTS `content_global_boxes`;
@@ -569,7 +569,7 @@ CREATE TABLE `content_global_boxes` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table templating_template_sets2templating_templates
 DROP TABLE IF EXISTS `templating_template_sets2templating_templates`;
@@ -590,7 +590,7 @@ CREATE TABLE `templating_template_sets2templating_templates` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table user_groups2user_rights
 DROP TABLE IF EXISTS `user_groups2user_rights`;
@@ -611,7 +611,7 @@ CREATE TABLE `user_groups2user_rights` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_pages
 DROP TABLE IF EXISTS `content_pages`;
@@ -674,7 +674,7 @@ CREATE TABLE `content_pages` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table community_settings
 DROP TABLE IF EXISTS `community_settings`;
@@ -752,7 +752,7 @@ CREATE TABLE `community_settings` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_blog_tags
 DROP TABLE IF EXISTS `content_blog_tags`;
@@ -772,7 +772,7 @@ CREATE TABLE `content_blog_tags` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_boxes
 DROP TABLE IF EXISTS `content_boxes`;
@@ -801,7 +801,7 @@ CREATE TABLE `content_boxes` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table application_ping_service_configurations
 DROP TABLE IF EXISTS `application_ping_service_configurations`;
@@ -826,7 +826,7 @@ CREATE TABLE `application_ping_service_configurations` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_pages2user_groups
 DROP TABLE IF EXISTS `content_pages2user_groups`;
@@ -847,7 +847,7 @@ CREATE TABLE `content_pages2user_groups` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_simple_pages
 DROP TABLE IF EXISTS `content_simple_pages`;
@@ -884,7 +884,7 @@ CREATE TABLE `content_simple_pages` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_simple_forms
 DROP TABLE IF EXISTS `content_simple_forms`;
@@ -925,7 +925,7 @@ CREATE TABLE `content_simple_forms` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_generator_forms
 DROP TABLE IF EXISTS `content_generator_forms`;
@@ -966,7 +966,7 @@ CREATE TABLE `content_generator_forms` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_blog_postings
 DROP TABLE IF EXISTS `content_blog_postings`;
@@ -1025,7 +1025,7 @@ CREATE TABLE `content_blog_postings` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_simple_dates
 DROP TABLE IF EXISTS `content_simple_dates`;
@@ -1069,7 +1069,7 @@ CREATE TABLE `content_simple_dates` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table community_blog_comments
 DROP TABLE IF EXISTS `community_blog_comments`;
@@ -1113,7 +1113,7 @@ CREATE TABLE `community_blog_comments` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_blog_podcasts
 DROP TABLE IF EXISTS `content_blog_podcasts`;
@@ -1166,7 +1166,7 @@ CREATE TABLE `content_blog_podcasts` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_generator_form_fields
 DROP TABLE IF EXISTS `content_generator_form_fields`;
@@ -1191,7 +1191,7 @@ CREATE TABLE `content_generator_form_fields` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_simple_guestbooks
 DROP TABLE IF EXISTS `content_simple_guestbooks`;
@@ -1234,7 +1234,7 @@ CREATE TABLE `content_simple_guestbooks` (
     ON DELETE SET NULL
     ON UPDATE CASCADE
 ) 
-ENGINE=InnoDB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_simple_guestbook_entries
 DROP TABLE IF EXISTS `content_simple_guestbook_entries`;
@@ -1259,7 +1259,7 @@ CREATE TABLE `content_simple_guestbook_entries` (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) 
-ENGINE=InnoDB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 -- Drop table content_blog_tags2content_blog_postings
 DROP TABLE IF EXISTS `content_blog_tags2content_blog_postings`;
@@ -1280,6 +1280,6 @@ CREATE TABLE `content_blog_tags2content_blog_postings` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
-ENGINE=INNODB;
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS=1;

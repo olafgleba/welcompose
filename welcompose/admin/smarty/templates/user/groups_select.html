@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -73,9 +73,9 @@
 </tr>
 {foreach from=$groups item=_group}
 <tr>
-<td>{$_group.name|escape:"htmlall"}</td>
-<td>{$_group.description|escape:"htmlall"|nl2br}</td>
-<td>{$_group.project_name|escape:"htmlall"}</td>
+<td>{$_group.name|escape:"html"}</td>
+<td>{$_group.description|escape:"html"|nl2br}</td>
+<td>{$_group.project_name|escape:"html"}</td>
 <td><a class="edit" href="groups_copy.php?id={$_group.id|escape:"url"}" title="{i18n Duplicate}"></a></td>
 {if $_group.editable}
 <td><a class="edit" href="groups_edit.php?id={$_group.id|escape:"url"}" title="{i18n Edit}"></a></td>

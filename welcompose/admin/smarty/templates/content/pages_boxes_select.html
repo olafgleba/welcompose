@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -122,7 +122,7 @@ var toggleElem = 2;
 </tr>
 {foreach from=$boxes item=_box}
 <tr>
-<td>{$_box.name|escape:"htmlall"}</td>
+<td>{$_box.name|escape:"html"}</td>
 <td><a class="edit" href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
@@ -174,7 +174,7 @@ var toggleElem = 2;
 </tr>
 {foreach from=$allboxes item=_allbox}
 <tr>
-<td>{$_allbox.name|escape:"htmlall"}</td>
+<td>{$_allbox.name|escape:"html"}</td>
 <td>{$_allbox.page_name|truncate:140}</td>
 <td>{$_allbox.content_raw|truncate:50|escape:htmlall}</td>
 <td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a>{/if}</td>

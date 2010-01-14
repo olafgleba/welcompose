@@ -865,7 +865,7 @@ aliquip ex ea commodo consequat.</p>
   <h3>{if $blog_comment_count == 1}{$blog_comment_count} Kommentar{else}{$blog_comment_count} Kommentare{/if}</h3>
   <ol>
   {foreach from=$blog_comments item=_comment}
-    <li><div class="comment">{$_comment.content}<p class="author">{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"htmlall"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p></div>
+    <li><div class="comment">{$_comment.content}<p class="author">{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"html"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p></div>
     </li>
   {/foreach}
   </ol>
@@ -1259,7 +1259,7 @@ start=$_item.self}">{$_item.page}</a></li>
 						<para>
 							Fügen Sie hier folgenden Quellcode ein:
 			<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Welcompose Weblog Demo</title>
@@ -1343,7 +1343,7 @@ start=$_item.self}">{$_item.page}</a></li>
 						<para>
 							Fügen Sie hier folgenden Quellcode ein:
 			<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Welcompose Weblog Demo Kommentare</title>
@@ -1428,7 +1428,7 @@ start=$_item.self}">{$_item.page}</a></li>
 						<para>
 							Fügen Sie hier folgenden Quellcode ein:
 			<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Welcompose Weblog Demo</title> 
   <link href="http://001.welcompose.de" rel="self"
@@ -1517,7 +1517,7 @@ start=$_item.self}">{$_item.page}</a></li>
 						<para>
 							Fügen Sie hier folgenden Quellcode ein:
 			<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Welcompose Weblog Demo Kommentare</title> 
   <link href="http://001.welcompose.de" rel="self"

@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -87,7 +87,7 @@
 <select id="get_pages" name="get_pages">
 <option value="">{i18n Please choose...}</option>
 {foreach from=$pages item=_page}
-<option value="{$_page.id|escape:"htmlall"}">{$_page.name|escape:"htmlall"}</option>
+<option value="{$_page.id|escape:"html"}">{$_page.name|escape:"html"}</option>
 {/foreach}
 </select>
 </div>

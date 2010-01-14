@@ -537,6 +537,8 @@ public function _flickrPageIndex ($pages)
  * will be casted to string, converted from utf8 to iso and all tags
  * will be stripped.
  *
+ * OBSOLET WITH 0.9.0 (utf-8)
+ *
  * @param mixed
  * @return string
  */
@@ -546,7 +548,7 @@ protected function flickrValue ($value)
 	$value = (string)$value;
 	
 	// decode utf8
-	$value = utf8_decode($value);
+	//$value = utf8_decode($value);
 	
 	// strip tags
 	$value = strip_tags($value);
@@ -582,7 +584,7 @@ class flickrClient {
 	 * 
 	 * @var bool
 	 */
-	protected $_iso_input = true;
+	protected $_iso_input = false;
 	
 	/**
 	 * Flickr API endpoint URL

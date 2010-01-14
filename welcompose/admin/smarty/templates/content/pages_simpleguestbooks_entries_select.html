@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -78,7 +78,7 @@
 <h2>{i18n Filter:}</h2>
 <form action="pages_simpleguestbooks_entries_select.php" method="get">
 <fieldset>
-<input type="hidden" name="page" value="{$page.id|escape:"htmlall"}" />
+<input type="hidden" name="page" value="{$page.id|escape:"html"}" />
 <label for="timeframe">{i18n Timeframe}</label> 
 <select id="timeframe" name="timeframe">
 <option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
@@ -127,8 +127,8 @@
 </tr>
 {foreach from=$simpleguestbook_entries item=_entry}
 <tr>
-<td>{$_entry.name|escape:"htmlall"}</td>
-<td>{$_entry.subject|escape:"htmlall"}</td>
+<td>{$_entry.name|escape:"html"}</td>
+<td>{$_entry.subject|escape:"html"}</td>
 <td>{$_entry.date_added|date_format:"%a, %e %b %Y %H:%M %Z"}</td>
 <td><a class="comment showTableRow" href="#" id="e_{$_entry.id}" title="{i18n View entry message}"></a></td>
 <td><a class="edit" href="pages_simpleguestbooks_entries_edit.php?page={$page.id|escape:"url"}&amp;id={$_entry.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>

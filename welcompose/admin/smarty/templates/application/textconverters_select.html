@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -81,7 +81,7 @@
 </tr>
 {foreach from=$text_converters item=_text_converter}
 <tr>
-<td><span>{$_text_converter.name|escape:"htmlall"}</span></td>
+<td><span>{$_text_converter.name|escape:"html"}</span></td>
 <td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>

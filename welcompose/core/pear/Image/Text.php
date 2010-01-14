@@ -93,7 +93,7 @@ define("IMAGE_TEXT_ALIGN_JUSTIFY", "justify", true);
                 'width'         => 300,     // Set text box size
                 'height'        => 300,
                 'line_spacing'  => 1,       // Normal linespacing
-                'angle'         => 45,      // Text rotated by 45�
+                'angle'         => 45,      // Text rotated by 45ÃÂÃÂÃÂÃÂ°
                 'color'         => $colors, // Predefined colors
                 'max_lines'     => 100,     // Maximum lines to render
                 'min_font_size' => 2,       // Minimal/Maximal font size (for automeasurize)

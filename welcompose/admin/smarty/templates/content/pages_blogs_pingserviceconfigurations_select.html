@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -115,7 +115,7 @@
 </tr>
 {foreach from=$ping_service_configurations item=_configuration}
 <tr>
-<td>{$_configuration.ping_service_name|escape:"htmlall"}</td>
+<td>{$_configuration.ping_service_name|escape:"html"}</td>
 <td><a class="edit" href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

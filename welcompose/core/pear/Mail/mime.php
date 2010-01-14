@@ -184,9 +184,9 @@ class Mail_mime
                                      'text_encoding' => '7bit',
                                      'html_encoding' => 'quoted-printable',
                                      '7bit_wrap'     => 998,
-                                     'html_charset'  => 'ISO-8859-1',
-                                     'text_charset'  => 'ISO-8859-1',
-                                     'head_charset'  => 'ISO-8859-1'
+                                     'html_charset'  => 'UTF-8',
+                                     'text_charset'  => 'UTF-8',
+                                     'head_charset'  => 'UTF-8'
                                     );
     }
 

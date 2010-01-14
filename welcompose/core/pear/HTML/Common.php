@@ -459,7 +459,7 @@ class HTML_Common {
      */
     function charset($newCharset = null)
     {
-        static $charset = 'ISO-8859-1';
+        static $charset = 'UTF-8';
 
         if (!is_null($newCharset)) {
             $charset = $newCharset;

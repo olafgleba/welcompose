@@ -109,7 +109,7 @@ class Display_SimpleGuestbookIndex implements Display {
 	 * 
 	 * @var string
 	 */
-	protected $_charset = 'iso-8859-1';
+	protected $_charset = 'utf-8';
 	
 	/**
 	 * Set appropriate mime type

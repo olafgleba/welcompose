@@ -35,7 +35,7 @@
 <div class="mmwrap">
 <label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElementMyLocal"><a href="#"><img title="{i18n Hide this element}" src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
-<input class="w200" type="text" id="mm_tags" value="{if !empty($request.mm_tags)}{$request.mm_tags|escape:"htmlall"}{/if}" />
+<input class="w200" type="text" id="mm_tags" value="{if !empty($request.mm_tags)}{$request.mm_tags|escape:"html"}{/if}" />
 </span>
 </label>
 </div>
@@ -47,7 +47,7 @@
 <span id="mm_current_tags_wrap">
 <ul>
 {foreach from=$current_tags item=_current_tags}
-<li>{$_current_tags.word_url|truncate:60:"...":true|escape:"htmlall"|nl2br}</li>
+<li>{$_current_tags.word_url|truncate:60:"...":true|escape:"html"|nl2br}</li>
 {/foreach}
 </ul>
 </span>
@@ -78,9 +78,9 @@
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
-<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"htmlall"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
+<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"html"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
 </td>
-<td class="td_mm_meta">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"htmlall"|nl2br}</td>
+<td class="td_mm_meta">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"html"|nl2br}</td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}
 <td class="td_mm_casts">{if $request.mm_pagetype == 'WCOM_BLOG' && $podcastable}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}
 </td>
@@ -102,7 +102,7 @@
 {if $_item.page == 1 && $_item.self != $request.mm_start}
 <a class="pager" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
 <a class="pager" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
@@ -134,7 +134,7 @@
 <span id="mm_user_wrap">
 <table>
 <tr>
-<td><input class="w150" type="text" id="mm_user" value="{if !empty($request.mm_user)}{$request.mm_user|escape:"htmlall"}{/if}" /></td>
+<td><input class="w150" type="text" id="mm_user" value="{if !empty($request.mm_user)}{$request.mm_user|escape:"html"}{/if}" /></td>
 <td><input type="button" id="submit55" value="{i18n Load}" /></td>
 </tr>
 </table>
@@ -152,7 +152,7 @@
 <option value="">{i18n Please choose...}</option>
 {if !empty($photosets)}
 {foreach from=$photosets item=_photoset}
-<option value="{$_photoset.id|escape:"htmlall"}"{if $request.mm_photoset == $_photoset.id} selected="selected"{/if}>{$_photoset.title|truncate:25:"..."|escape:"htmlall"}</option>
+<option value="{$_photoset.id|escape:"html"}"{if $request.mm_photoset == $_photoset.id} selected="selected"{/if}>{$_photoset.title|truncate:25:"..."|escape:"html"}</option>
 {/foreach}
 {/if}
 </select>
@@ -165,7 +165,7 @@
 <div class="mmwrap">
 <label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_flickrtags_wrap">
-<input class="w200" type="text" id="mm_flickrtags" value="{if !empty($request.mm_flickrtags)}{$request.mm_flickrtags|escape:"htmlall"}{/if}" />
+<input class="w200" type="text" id="mm_flickrtags" value="{if !empty($request.mm_flickrtags)}{$request.mm_flickrtags|escape:"html"}{/if}" />
 </span>
 </label>
 </div>
@@ -181,8 +181,8 @@
 {if !empty($photos)}
 {foreach from=$photos.photos item=_photo}
 <tr>
-<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content} (id: {$_photo.id})"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"htmlall"}" /></a></td>
-<td colspan="4">{$_photo.title|escape:"htmlall"}
+<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content} (id: {$_photo.id})"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"html"}" /></a></td>
+<td colspan="4">{$_photo.title|escape:"html"}
 <select id="size" name="size">
 <option value="1">{i18n Image sizes...}</option>
 <option value="_s">{i18n Small (75px, square)}</option>
@@ -215,7 +215,7 @@
 {if $_item.page == 1 && $_item.self != $request.mm_start}
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"htmlall"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>

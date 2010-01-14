@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -71,12 +71,12 @@
 {foreach from=$template_types item=_template_type}
 <tr>
 {if $_template_type.editable}
-<td class="name">{$_template_type.name|escape:"htmlall"}</td>
-<td class="description">{$_template_type.description|escape:"htmlall"}</td>
+<td class="name">{$_template_type.name|escape:"html"}</td>
+<td class="description">{$_template_type.description|escape:"html"}</td>
 <td><a class="edit" href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplType" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
-<td>{$_template_type.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></td>
+<td>{$_template_type.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 {/if}

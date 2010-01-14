@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -68,7 +68,7 @@
 </tr>
 {foreach from=$navigations item=_navigation}
 <tr>
-<td class="page"><span>{$_navigation.name|escape:"htmlall"}</span></td>
+<td class="page"><span>{$_navigation.name|escape:"html"}</span></td>
 <td><a class="edit" href="navigations_edit.php?id={$_navigation.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelNav" href="navigations_delete.php?id={$_navigation.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>

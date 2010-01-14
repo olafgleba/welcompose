@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -106,9 +106,9 @@
 </tr>
 {foreach from=$form_fields item=_field}
 <tr>
-<td>{$_field.name|escape:"htmlall"}</td>
-<td>{$_field.label|escape:"htmlall"}</td>
-<td>{$_field.type|escape:"htmlall"}</td>
+<td>{$_field.name|escape:"html"}</td>
+<td>{$_field.label|escape:"html"}</td>
+<td>{$_field.type|escape:"html"}</td>
 <td>{if $_field.required == 0}{i18n No}{else}Yes{/if}</td>
 <td><a class="edit" href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Delete}"></a></td>

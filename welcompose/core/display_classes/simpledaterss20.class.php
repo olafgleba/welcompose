@@ -88,7 +88,7 @@ class Display_SimpleDateRss20 implements Display {
 	 * 
 	 * @var string
 	 */
-	protected $_charset = 'iso-8859-1';
+	protected $_charset = 'utf-8';
 	
 /**
  * Creates new instance of display driver. Takes an array

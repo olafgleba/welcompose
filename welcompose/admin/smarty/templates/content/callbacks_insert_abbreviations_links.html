@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -73,9 +73,9 @@ var response = '{$session.response}';
 
 {foreach from=$abbreviations item=_abbreviation}
 <tr>
-<td class="abbreviation"><a class="process_insert" id="{$_abbreviation.id}" name="abbreviation" href="#" title="{i18n Insert link}">{$_abbreviation.name|escape:"htmlall"}</a></td>
-<td>{$_abbreviation.long_form|escape:"htmlall"}</td>
-<td>{$_abbreviation.content|escape:"htmlall"|truncate:150}</td>
+<td class="abbreviation"><a class="process_insert" id="{$_abbreviation.id}" name="abbreviation" href="#" title="{i18n Insert link}">{$_abbreviation.name|escape:"html"}</a></td>
+<td>{$_abbreviation.long_form|escape:"html"}</td>
+<td>{$_abbreviation.content|escape:"html"|truncate:150}</td>
 </tr>
 {/foreach}
 </table>

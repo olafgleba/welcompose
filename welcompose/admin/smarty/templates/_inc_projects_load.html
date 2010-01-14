@@ -7,7 +7,7 @@
 <div id="projects"><span>{i18n Project}:</span>
 <select name="id" class="fselect">
 {foreach from=$projects item=_project}
-<option value="{$_project.id|escape:"htmlall"}"{if $_project.id == $wcom_current_project} selected="selected"{/if}>{$_project.name|escape:"htmlall"}</option>
+<option value="{$_project.id|escape:"html"}"{if $_project.id == $wcom_current_project} selected="selected"{/if}>{$_project.name|escape:"html"}</option>
 {/foreach}
 </select>
 <input class="submit90" type="submit" name="send" value="{i18n load}" title="{i18n Load project}" />

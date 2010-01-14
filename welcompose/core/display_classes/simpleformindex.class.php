@@ -102,7 +102,7 @@ class Display_SimpleFormIndex implements Display {
 	 * 
 	 * @var string
 	 */
-	protected $_charset = 'iso-8859-1';
+	protected $_charset = 'utf-8';
 	
 	/**
 	 * Set appropriate mime type
@@ -361,8 +361,8 @@ protected function renderBusinessForm ()
 {
 	// prepare salutations
 	$salutations = array(
-		gettext('Mr.'),
-		gettext('Mrs.')
+		gettext('Mr.') => gettext('Mr.'),
+		gettext('Mrs.') => gettext('Mrs.')
 	);
 	
 	// start new HTML_QuickForm

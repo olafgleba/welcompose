@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -63,7 +63,7 @@
 <select id="group" name="group">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$groups item=_group}
-<option value="{$_group.id|escape:"htmlall"}">{$_group.name|escape:"htmlall"}</option>
+<option value="{$_group.id|escape:"html"}">{$_group.name|escape:"html"}</option>
 {/foreach}
 </select>
 &nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
@@ -93,9 +93,9 @@
 </tr>
 {foreach from=$users item=_user}
 <tr>
-<td>{$_user.email|escape:"htmlall"}</td>
-<td>{$_user.group_name|escape:"htmlall"|nl2br}</td>
-<td>{$_user.project_name|escape:"htmlall"|nl2br}</td>
+<td>{$_user.email|escape:"html"}</td>
+<td>{$_user.group_name|escape:"html"|nl2br}</td>
+<td>{$_user.project_name|escape:"html"|nl2br}</td>
 <td>{if $_user.author}{i18n yes}{else}{i18n no}{/if}</td>
 <td>{if $_user.active}{i18n yes}{else}{i18n no}{/if}</td>
 {if $_user.editable}

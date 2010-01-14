@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -63,10 +63,10 @@
 {foreach from=$extension_statuses key=_extension item=_status}
 <tr>
 <td>
-{$_extension|escape:"htmlall"}
+{$_extension|escape:"html"}
 </td>
-<td class="marker_{$_status.marker|escape:"htmlall"}">
-{$_status.text|escape:"htmlall"}
+<td class="marker_{$_status.marker|escape:"html"}">
+{$_status.text|escape:"html"}
 </td>
 </tr>
 {/foreach}
@@ -81,10 +81,10 @@
 {foreach from=$software_statuses key=_software item=_status}
 <tr>
 <td>
-{$_software|escape:"htmlall"}
+{$_software|escape:"html"}
 </td>
-<td class="marker_{$_status.marker|escape:"htmlall"}">
-{$_status.text|escape:"htmlall"}
+<td class="marker_{$_status.marker|escape:"html"}">
+{$_status.text|escape:"html"}
 </td>
 </tr>
 {/foreach}

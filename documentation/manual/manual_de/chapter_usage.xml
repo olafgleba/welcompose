@@ -163,7 +163,7 @@ posting=$blog_posting.id}
 <h3>{if $blog_comment_count == 1}{$blog_comment_count} Kommentar{else}{$blog_comment_count} Kommentare{/if}</h3>
 {foreach from=$blog_comments item=_comment}
 {$_comment.content}
-<p>{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"htmlall"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p>
+<p>{if !empty($_comment.homepage)}<a href="{$_comment.homepage}">{/if}{$_comment.name|escape:"html"}{if !empty($_comment.homepage)}</a>{/if} am {$_comment.date_added|date_format:"%d.%m.%Y"}</p>
 {/foreach}
 {/if}
 
@@ -395,7 +395,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				<para>Vorlagentyp: <guimenuitem>blog_rss20</guimenuitem></para>
 				
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
@@ -445,7 +445,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				<para>Vorlagentyp: <guimenuitem>blog_atom10</guimenuitem></para>
 				
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
@@ -499,7 +499,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				<para>Vorlagentyp: <guimenuitem>blog_comments_rss20</guimenuitem></para>
 				
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
@@ -543,7 +543,7 @@ start=$_item.self}">{$_item.page}</a></li>
 				<para>Vorlagentyp: <guimenuitem>blog_comments_atom10</guimenuitem></para>
 				
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsAtom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
@@ -1047,7 +1047,7 @@ Textkonverter berücksichtigt. *}
 				<para>Vorlagentyp: <guimenuitem>simple_date_rss20</guimenuitem></para>
 
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
@@ -1099,7 +1099,7 @@ Textkonverter berücksichtigt. *}
 				<para>Vorlagentyp: <guimenuitem>simple_date_atom10</guimenuitem></para>
 
 				<programlisting language="smarty"><![CDATA[
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />

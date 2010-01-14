@@ -69,7 +69,7 @@ try {
 	$BASE->utility->smarty->template_dir = dirname(__FILE__).'/../static/libs';
 	
 	// set header
-	header("Content-Type: text/javascript");
+	header("Content-Type: text/javascript; charset=utf-8");
 	
 	// fetch javascript
 	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], WCOM_REGEX_JS))) {

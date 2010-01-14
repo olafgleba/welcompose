@@ -314,6 +314,8 @@ try {
 		$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
 		
+		//$FORM->addAttribute('accept-charset' => 'utf-8');
+		
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty

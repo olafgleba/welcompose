@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -82,11 +82,11 @@
 {foreach from=$content_projects item=_project}
 <tr>
 {if $_project.editable}
-<td class="template"><span>{$_project.name|escape:"htmlall"}</span></td>
+<td class="template"><span>{$_project.name|escape:"html"}</span></td>
 <td><a class="edit" href="projects_edit.php?id={$_project.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelProject" href="projects_delete.php?id={$_project.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 {else}
-<td class="template"><span>{$_project.name|escape:"htmlall"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
+<td class="template"><span>{$_project.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
 <td class="edit">&nbsp;</td>
 <td class="delete confirmDelProject">&nbsp;</td>
 {/if}

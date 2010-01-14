@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 <meta http-equiv="imagetoolbar" content="no" /> 
@@ -70,7 +70,7 @@
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$pages item=_page}
 {if $_page.page_type_name == "WCOM_BLOG"}
-<option value="{$_page.id|escape:"htmlall"}"{if $request.page == $_page.id} selected="selected"{/if}>{$_page.name|escape:"htmlall"}</option>
+<option value="{$_page.id|escape:"html"}"{if $request.page == $_page.id} selected="selected"{/if}>{$_page.name|escape:"html"}</option>
 {/if}
 {/foreach}
 </select>
@@ -78,14 +78,14 @@
 <select id="status" name="status">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$blog_comment_statuses item=_status}
-<option value="{$_status.id|escape:"htmlall"}"{if $request.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
+<option value="{$_status.id|escape:"html"}"{if $request.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"html"}</option>
 {/foreach}
 </select>
 <label for="timeframe">{i18n Timeframe}</label> 
 <select id="timeframe" name="timeframe">
 <option selected="selected">{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
-<option value="{$_timeframe|escape:"htmlall"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"htmlall"}</option>
+<option value="{$_timeframe|escape:"html"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"html"}</option>
 {/foreach}
 </select>
 &nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
@@ -129,12 +129,12 @@
 </tr>
 {foreach from=$blog_comments item=_comment}
 <tr>
-<td>{$_comment.page_name|escape:"htmlall"}<br/>{$_comment.blog_posting_title|escape:"htmlall"|nl2br}</td>
-<td>{$_comment.name|escape:"htmlall"}<br />
+<td>{$_comment.page_name|escape:"html"}<br/>{$_comment.blog_posting_title|escape:"html"|nl2br}</td>
+<td>{$_comment.name|escape:"html"}<br />
 {if !empty($_comment.email)}
-{$_comment.email|escape:"htmlall"}
+{$_comment.email|escape:"html"}
 {else}
-{$_comment.homepage|escape:"htmlall"|nl2br}</td>
+{$_comment.homepage|escape:"html"|nl2br}</td>
 {/if}
 <td>
 {$_comment.content_raw|truncate:80}</td>
@@ -144,7 +144,7 @@
 <select class="item_status changeBlogCommentStatus" name="item_status">
 <option value="">&nbsp;</option>
 {foreach from=$blog_comment_statuses item=_status}
-<option value="{$_status.id|escape:"htmlall"}"{if $_comment.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"htmlall"}</option>
+<option value="{$_status.id|escape:"html"}"{if $_comment.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"html"}</option>
 {/foreach}
 </select>
 </fieldset>

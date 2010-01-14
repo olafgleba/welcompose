@@ -148,7 +148,7 @@ try {
 	$BASE->utility->smarty->assign('request', $request);
 	
 	// set header
-	header("Content-Type: text/html; charset=iso-8859-1");
+	header("Content-Type: text/html; charset=utf-8");
 	
 	// display the template
 	$BASE->utility->smarty->display('mediamanager/mediamanager.html');

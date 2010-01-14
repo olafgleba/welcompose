@@ -89,7 +89,7 @@ try {
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_ALPHANUMERIC);
 	
 	// set header
-	header("Content-Type: text/html; charset=iso-8859-1");
+	header("Content-Type: text/html; charset=utf-8");
 	
 	// display the correlated navigation template
 	$BASE->utility->smarty->display('_inc_nav_'.$page.'.html');
