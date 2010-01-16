@@ -31,7 +31,8 @@
 					<listitem>
 						<para>
 							Pfad zum Stammverzeichnis des Welcompose Backend.
-							Wird in vielen Dateien als Prefix benötigt.
+							Wird in vielen Dateien als Prefix benötigt und durch die Angaben
+							im Setup-Prozeß eingefügt.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -40,7 +41,8 @@
 					<listitem>
 						<para>
 							Pfad zum Stammverzeichnis der Ausgabeseite.
-							Wird in vielen Dateien als Prefix benötigt.
+							Wird in vielen Dateien als Prefix benötigt und durch die Angaben
+							im Setup-Prozeß eingefügt.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -297,7 +299,8 @@ level = PEAR_LOG_NOTICE
 							Es stehen die Sprachen Deutsch (<userinput>de_DE</userinput>)
 							und Englisch (<userinput>en_GB</userinput>, Standard) zur
 							Verfügung. Die Angaben beziehen sich auf Text und Datumsangaben
-							(<code>LC_ALL</code>).
+							(<code>LC_ALL</code>). Wird durch die Angaben
+							im Setup-Prozeß eingefügt.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -549,7 +552,7 @@ chmod = 0644
 			</para>
 			
 			<para>
-				Aktuelle URL-Muster (Welcompose Version 0.8.8):
+				Aktuelle URL-Muster (Welcompose Version 0.8.8 - 0.9.0):
 			</para>
 			
 				<programlisting language="ini"><![CDATA[

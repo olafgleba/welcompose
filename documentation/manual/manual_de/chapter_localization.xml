@@ -121,7 +121,7 @@
 			
 			<programlisting><![CDATA[
 $ php xgettext.php \
-	--charset=iso-8859-1 \
+	--charset=utf-8 \
 	--directory=welcompose/welcompose/trunk/welcompose \
 	--scan-hidden=false \
 	--delimiter="{ }" \
@@ -288,7 +288,7 @@ msgstr "Permalink"
 			<programlisting><![CDATA[
 $ mv messages.po old.po
 $ php xgettext.php \
-	--charset=iso-8859-1 \
+	--charset=utf-8 \
 	--directory=welcompose/welcompose/trunk/welcompose \
 	--scan-hidden=false \
 	--delimiter="{ }" \

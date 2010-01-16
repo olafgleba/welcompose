@@ -388,7 +388,7 @@ if (!defined("PDO::ATTR_EMULATE_PREPARES")) {
 
 <p class="copyright">
 <span class="fright">Licensed below the terms of the <a href="http://www.opensource.org/licenses/agpl-v3.html">GNU AGPLv3</a></span>
-&copy; 2008 <a href="http://www.welcompose.de/"><strong>Welcompose<sup>&reg;</sup></strong></a> Requirements Tester for 0.8 &ndash; <a href="http://creatics.de/">creatics</a>
+&copy; 2008 <a href="http://welcompose.de/"><strong>Welcompose<sup>&reg;</sup></strong></a> Requirements Tester for 0.8 &ndash; <a href="http://creatics.de/">creatics</a>
 </p><!-- container --></div>
 </body>
 </html>
