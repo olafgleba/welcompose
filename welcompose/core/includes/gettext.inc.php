@@ -36,7 +36,8 @@ function gettextInitSoftware ($locale, $domain = 'messages') {
 	putenv("LANG=$locale"); 
 
 	// set the text domain and the direcotry where to get the translation from
-	bindtextdomain($domain, $locales_dir); 
+	bindtextdomain($domain, $locales_dir);
+	bind_textdomain_codeset($domain, 'UTF-8'); 
 	textdomain($domain);
 }
 
