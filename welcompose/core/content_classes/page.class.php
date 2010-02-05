@@ -786,7 +786,7 @@ public function initPageContents ($page)
 					'id' => $page_info['id'],
 					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
-					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
 				);				
@@ -800,7 +800,7 @@ public function initPageContents ($page)
 					'id' => $page_info['id'],
 					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
-					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
 				);				
@@ -814,7 +814,7 @@ public function initPageContents ($page)
 					'id' => $page_info['id'],
 					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
-					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'allow_entry' => "1",
 					'date_added' => date('Y-m-d H:i:s')
@@ -829,7 +829,7 @@ public function initPageContents ($page)
 					'id' => $page_info['id'],
 					'user' => WCOM_CURRENT_USER,
 					'title' => $page_info['name'],
-					'title_url' => $HELPER->createMeaningfulString($page_info['name']),
+					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
 				);				

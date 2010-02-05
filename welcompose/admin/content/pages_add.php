@@ -183,7 +183,7 @@ try {
 	
 	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'page_name', 'maxlength' => 255, 'class' => 'w300 validate urlify'));
+		array('id' => 'page_name', 'maxlength' => 255, 'class' => 'w300 urlify'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
@@ -379,7 +379,7 @@ try {
 			$name_url = $FORM->exportValue('name_url');
 			if (!$PAGE->testForUniqueUrlName($name_url)) {
 				$name_url = $name_url.'-'.$page_id;
-			}
+			}		
 			
 			// prepare sql data for page create
 			$sqlData = array();

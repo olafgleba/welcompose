@@ -87,6 +87,9 @@
 	margin: 12px 0;
 	padding-left: 0;
 	}
+	dl {
+	margin:0;
+	}
 	dd p {
 	margin: 0 0 5px 0;
 	}

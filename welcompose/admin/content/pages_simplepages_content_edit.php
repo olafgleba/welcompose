@@ -139,9 +139,9 @@ try {
 	$FORM->applyFilter('preview', 'strip_tags');
 	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
 	
-	// textfield for title
+	// textfield for title	
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
+		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');

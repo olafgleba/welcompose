@@ -144,6 +144,7 @@ try {
 				break;
 			case 'simple_form_title_url':
 			case 'simple_guestbook_title_url':
+			case 'simple_page_title_url':
 			case 'blog_posting_title_url':
 			case 'page_name_url':
 					$reg = WCOM_REGEX_URL_NAME;

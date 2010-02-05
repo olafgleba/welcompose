@@ -166,6 +166,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.urlifyLink' : function(el){
+		el.onclick = function(){
+			Helper.convertSomeFieldValuesToValidUrl(this, 'for');
+			return false;
+		}
+	},
 	'a.insert' : function(el){
 		el.onclick = function(){
 			Helper.processCallbacks(this);

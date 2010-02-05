@@ -197,7 +197,7 @@ try {
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
+		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
 	$FORM->addRule('title', gettext('Please enter a title'), 'required');

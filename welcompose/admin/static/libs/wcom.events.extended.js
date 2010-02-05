@@ -265,12 +265,14 @@ var definitions = {
 		}
 	},
 	'input.urlify' : function(el){
-		el.onfocus = function(){
+		el.onkeyup = function(){
 			Helper.convertFieldValuesToValidUrl(this, 'for');
 			return false;
 		}
-		el.onkeyup = function(){
-			Helper.convertFieldValuesToValidUrl(this, 'for');
+	},
+	'a.urlifyLink' : function(el){
+		el.onclick = function(){
+			Helper.convertSomeFieldValuesToValidUrl(this, 'for');
 			return false;
 		}
 	},

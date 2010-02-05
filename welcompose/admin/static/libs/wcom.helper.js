@@ -106,6 +106,7 @@ Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.getParentNodePreviousSibling = Helper_getParentNodePreviousSibling;
 Helper.prototype.convertFieldValuesToValidUrl = Helper_convertFieldValuesToValidUrl;
+Helper.prototype.convertSomeFieldValuesToValidUrl = Helper_convertSomeFieldValuesToValidUrl;
 Helper.prototype.URLify = Helper_URLify;
 Helper.prototype.adoptBox = Helper_adoptBox;
 Helper.prototype.loaderAdoptBox = Helper_loaderAdoptBox;
@@ -1837,6 +1838,34 @@ function Helper_convertFieldValuesToValidUrl (elem, attr)
 		
 		// fill related form field with transformed results
 		$(el).value = Helper.URLify(this.elem.value);
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Wrapper to transform form field values to valid urls on href click.
+ * <br />
+ * Fills the related url form field with transformed values
+ * ({link #URLify}) of the current form field element.
+ *
+ * @see #URLify
+ * @param {string} elem Current Element
+ * @throws applyError on exception
+ */
+function Helper_convertSomeFieldValuesToValidUrl (elem, attr)
+{
+	try {	
+		//properties
+		this.elem = elem;
+		this.attr = attr;		
+		this._src = Helper.getAttrParentNode(this.attr, this.elem, 2)
+
+		var el = $(this._src + '_url');		
+		var el_src = $(this._src);
+		
+		// fill related form field with transformed results
+		$(el).value = Helper.URLify(el_src.value);
 	} catch (e) {
 		_applyError(e);
 	}	

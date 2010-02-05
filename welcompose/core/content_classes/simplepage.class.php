@@ -23,7 +23,7 @@
  */
 
 /**
- * Singleton for Content_SimplePage.
+ * Singleton for Content_SimplePage
  * 
  * @return object
  */
