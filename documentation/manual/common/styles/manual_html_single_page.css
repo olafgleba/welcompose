@@ -3,7 +3,7 @@ margin: 0;
 padding: 0;
 }
 body {
-font: 94%/140% Arial, Verdana, Helvetica, sans-serif;
+font: 96%/140% Arial, Verdana, Helvetica, sans-serif;
 color: #333;
 background: #d9d9d9 url(../images/bg_body.png);
 }
@@ -230,7 +230,7 @@ margin-bottom: 3px;
 
 /* code, pre, markup */
 code, pre {
-font-size: 1em;
+font-size: 15px;
 font-family: "Courier New", monospace;
 overflow: auto;
 }
@@ -269,6 +269,7 @@ color: #003399;
 }
 .markup {
 font-family: "Courier New", monospace;
+font-size: 15px;
 padding: 0 4px 2px 4px;
 background: #f8f8f8;
 color: #003399;

@@ -4,7 +4,7 @@
 	padding: 0;
 	}
 	body {
-	font: 100%/110% Arial, Verdana, Helvetica, sans-serif;
+	font: 100%/115% Arial, Verdana, Helvetica, sans-serif;
 	color: #000;
 	background: transparent;
 	}
@@ -196,7 +196,7 @@
 
 	/* code, pre, markup */
 	code, pre {
-	font-size: 1em;
+	font-size: 15px;
 	font-family: "Courier New", monospace;
 	color: #000;
 	}
@@ -233,6 +233,7 @@
 	}
 	.markup {
 	font-family: "Courier New", monospace;
+	font-size: 15px;
 	padding: 0 4px 2px 4px;
 	background: transparent;
 	}

@@ -403,7 +403,7 @@ start=$_item.self}">{$_item.page}</a></li>
     <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
-    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
     <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" page=$page.id order_macro="DATE_ADDED:DESC" draft=0}
@@ -450,7 +450,7 @@ start=$_item.self}">{$_item.page}</a></li>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
-  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
   <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 
@@ -507,7 +507,7 @@ start=$_item.self}">{$_item.page}</a></li>
     <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
-    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
     <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsRss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" page=$page.id order_macro="DATE_ADDED:DESC"}
@@ -548,7 +548,7 @@ start=$_item.self}">{$_item.page}</a></li>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsAtom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
-  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
   <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 	
@@ -1055,7 +1055,7 @@ Textkonverter berücksichtigt. *}
     <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
-    <generator>Welcompose 0.8.8 (http://welcompose.de/)</generator>
+    <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
     <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" page=$page.id order_macro="DATE_START" draft=0}
@@ -1104,7 +1104,7 @@ Textkonverter berücksichtigt. *}
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
   <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
-  <generator uri="http://www.welcompose.de/" version="0.8.8">Welcompose</generator>
+  <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
   <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 
