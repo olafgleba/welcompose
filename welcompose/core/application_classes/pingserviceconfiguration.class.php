@@ -228,6 +228,7 @@ public function selectPingServiceConfiguration ($id)
 			`application_ping_services`.`path` AS `ping_service_path`,
 			`application_ping_service_configurations`.`id` AS `id`,
 			`application_ping_service_configurations`.`page` AS `page`,
+			`application_ping_service_configurations`.`ping_service` AS `ping_service`,
 			`application_ping_service_configurations`.`site_name` AS `site_name`,
 			`application_ping_service_configurations`.`site_url` AS `site_url`,
 			`application_ping_service_configurations`.`site_index` AS `site_index`,
