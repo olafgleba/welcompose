@@ -294,13 +294,20 @@ level = PEAR_LOG_NOTICE
 					<term>all</term>
 					<listitem>
 						<para>
-							Sprachwahl für das Backend in ISO 3166 Schreibweise. Die Sprachwahl
-							wird im Setup-Prozeß angeben, kann aber hier manuell geändert werden. 
-							Es stehen die Sprachen Deutsch (<userinput>de_DE</userinput>)
-							und Englisch (<userinput>en_GB</userinput>, Standard) zur
+							Sprachwahl für das Backend in DIN ISO 3166 Schreibweise. Die Sprachwahl, 
+							im Setup-Prozeß angeben wird, kann hier manuell angepasst werden. 
+							Es stehen die Sprachen Deutsch (<userinput>de_DE.UTF-8</userinput>)
+							und Englisch (<userinput>en_GB.UTF-8</userinput>, Standard) zur
 							Verfügung. Die Angaben beziehen sich auf Text und Datumsangaben
 							(<code>LC_ALL</code>). Wird durch die Angaben
-							im Setup-Prozeß eingefügt.
+							im Setup-Prozeß eingefügt.							
+							<note>
+								<para>
+									Für alle Welcompose Version &lt; 0.9.0, die noch mit der
+									Zeichenkodierung ISO-8859-1 arbeiten, tragen Sie bitte hier
+									(<userinput>de_DE</userinput>) ein.
+								</para>
+							</note>
 						</para>
 					</listitem>
 				</varlistentry>

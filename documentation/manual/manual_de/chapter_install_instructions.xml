@@ -783,8 +783,11 @@
 					beteiligter Software-Produkte (Webserver, Datenbank usw.)
 					sowie der Komplexität der Produkte kann nicht garantiert
 					werden, dass die Aussagen der Testroutinen immer korrekt
-					sind. Sollten Probleme auftauchen, wenden Sie sich bitte
-					an den Support.
+					sind. Sollten bei der Ausführung Probleme
+					auftreten, wenden Sie sich bitte an das <ulink type="external"
+					url="http://forum.welcompose.de/">Welcompose Forum</ulink> oder direkt
+					an die <ulink type="external"
+					url="http://welcompose.de/cms/kontakt/">Entwickler</ulink>.
 				</para>
 			</tip>
 			
@@ -993,6 +996,15 @@
 							nicht wissen, was und wie hier einzutragen ist, wird "<emphasis>C</emphasis>" als 
 							Einstellung empfohlen. Für mögliche Eingaben/Formate und deren Folgen konsultieren
 							Sie bitte <xref linkend="localization"/> und nutzen die <xref linkend="introduction.context_help"/>.
+							
+						<note>
+							<para>
+								Ab der aktuellen Welcompose Version 0.9.0 ist die Software vollständig
+								Unicode basiert. Tragen Sie bitte für die Spracheinstellung 
+								<userinput>de_DE.UTF-8</userinput> ein. Im nächsten Release
+								der Software wird dieses voreingestellt sein.
+							</para>
+						</note>
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1008,7 +1020,10 @@
 			<tip>
 				<para>
 					Sollten bei der Ausführung des Setups Probleme
-					auftreten, wenden Sie sich bitte an den Support .
+					auftreten, wenden Sie sich bitte an das <ulink type="external"
+					url="http://forum.welcompose.de/">Welcompose Forum</ulink> oder direkt
+					an die <ulink type="external"
+					url="http://welcompose.de/cms/kontakt/">Entwickler</ulink>.
 				</para>
 			</tip>
 		</sect2>
