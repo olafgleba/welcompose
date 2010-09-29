@@ -19,7 +19,8 @@ var pager_page = '{$pager_page}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/prototype_update_helper.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects,dragdrop"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
@@ -33,7 +34,7 @@ var pager_page = '{$pager_page}';
 	
 <div id="lyLowerOpacity"> </div>
 	
-<div id="uploadMessage">
+<div id="uploadMessage" style="display:none;">
 <h1>{i18n Please wait. Upload processing...}</h1>
 <p></p>	
 </div>
@@ -58,8 +59,15 @@ var pager_page = '{$pager_page}';
 
 {if $session.response == 1}
 <div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
+<h1>{i18n Fine, your input was successfully stored!}</h1>
 <p>{i18n To apply further input, please repeat fill in the form}</p>
+<!-- rp --></div>
+{/if}
+
+{if $session.response == 2}
+<div id="rp">
+<h1>{i18n Sorry, your input was not stored!}</h1>
+<p>{i18n A media file with the same name already exists. A media file name has to be unique.}</p>
 <!-- rp --></div>
 {/if}
 
@@ -80,7 +88,7 @@ var pager_page = '{$pager_page}';
 <li>{i18n Current tags}<span class="showElem"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></li>
 </ul>
 </div>
-<div class="current_tags_wrap" id="current_tags_wrap">
+<div class="current_tags_wrap" id="current_tags_wrap" style="display:none;">
 <ul>
 {foreach from=$current_tags item=_current_tags}
 <li><a class="insert_tags" title="{i18n Insert Tag}" href="#" rel="{$_current_tags.word_url}">{$_current_tags.word_url|truncate:60:"...":true|escape:"html"|nl2br}</a></li>

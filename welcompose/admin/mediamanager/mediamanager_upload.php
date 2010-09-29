@@ -107,6 +107,7 @@ try {
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
+	//$FORM->registerRule('testForFilenameUniqueness', 'callback', 'testForUniqueFilename', $OBJECT);
 	
 	// hidden field for pager_page
 	$FORM->addElement('hidden', 'pager_page');
@@ -115,6 +116,8 @@ try {
 	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
 		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
+	//$FORM->addRule('file', gettext('A file with the provided id already exists'),
+	//	'testForFilenameUniqueness');
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
@@ -135,7 +138,7 @@ try {
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Close'),
-		array('class' => 'cancel200'));
+		array('class' => 'cancel140'));
 		
 	// set defaults
 	$FORM->setDefaults(array(
@@ -150,7 +153,7 @@ try {
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 
 		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
+		//$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
 
 		$FORM->accept($renderer);
@@ -215,64 +218,73 @@ try {
 				$data[$_key] = trim(strip_tags($_value));
 			}
 			
-			// move file to file store
-			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
+			// test if a file with prepared file name exits already
+			$check_file = $OBJECT->testForUniqueFilename($data['name']);
 			
-			// create thumbnail
-			$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 40, 40, true, 'ffffff');
+			if ($check_file === true) {
 			
-			// if the file on disk is an image, get the image size
-			list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
+				// move file to file store
+				$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
 			
-			// prepare sql data
-			$sqlData = array();
-			$sqlData['project'] = WCOM_CURRENT_PROJECT;
-			$sqlData['description'] = $FORM->exportValue('description');
-			$sqlData['tags'] = $FORM->exportValue('tags');
-			$sqlData['file_name'] = $data['name'];
-			$sqlData['file_name_on_disk'] = $name_on_disk;
-			$sqlData['file_mime_type'] = $data['type'];
-			$sqlData['file_width'] = $width;
-			$sqlData['file_height'] = $height;
-			$sqlData['file_size'] = (int)$data['size'];
-			$sqlData['preview_name_on_disk'] = Base_Cnc::ifsetor($thumbnail['name'], null);
-			$sqlData['preview_mime_type'] = Base_Cnc::ifsetor($thumbnail['type'], null);
-			$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
-			$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
-			$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
-			$sqlData['date_added'] = date('Y-m-d H:i:s');
+				// create thumbnail
+				$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 200, 200, true, 'ffffff');
 			
-			// check sql data
-			$HELPER = load('utility:helper');
-			$HELPER->testSqlDataForPearErrors($sqlData);
+				// if the file on disk is an image, get the image size
+				list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
 			
-			// insert it
-			try {
-				// begin transaction
-				$BASE->db->begin();
+				// prepare sql data
+				$sqlData = array();
+				$sqlData['project'] = WCOM_CURRENT_PROJECT;
+				$sqlData['description'] = $FORM->exportValue('description');
+				$sqlData['tags'] = $FORM->exportValue('tags');
+				$sqlData['file_name'] = $data['name'];
+				$sqlData['file_name_on_disk'] = $name_on_disk;
+				$sqlData['file_mime_type'] = $data['type'];
+				$sqlData['file_width'] = $width;
+				$sqlData['file_height'] = $height;
+				$sqlData['file_size'] = (int)$data['size'];
+				$sqlData['preview_name_on_disk'] = Base_Cnc::ifsetor($thumbnail['name'], null);
+				$sqlData['preview_mime_type'] = Base_Cnc::ifsetor($thumbnail['type'], null);
+				$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
+				$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
+				$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
+				$sqlData['date_added'] = date('Y-m-d H:i:s');
+			
+				// check sql data
+				$HELPER = load('utility:helper');
+				$HELPER->testSqlDataForPearErrors($sqlData);
+			
+				// insert it
+				try {
+					// begin transaction
+					$BASE->db->begin();
 				
-				// insert row into database
-				$object = $OBJECT->addObject($sqlData);
+					// insert row into database
+					$object = $OBJECT->addObject($sqlData);
 				
-				// insert tags
-				$TAG->addTags($object, $TAG->_tagStringToArray($FORM->exportValue('tags')));
+					// insert tags
+					$TAG->addTags($object, $TAG->_tagStringToArray($FORM->exportValue('tags')));
 				
-				// commit
-				$BASE->db->commit();
-			} catch (Exception $e) {
-				// do rollback
-				$BASE->db->rollback();
+					// commit
+					$BASE->db->commit();
+				} catch (Exception $e) {
+					// do rollback
+					$BASE->db->rollback();
 				
-				// re-throw exception
-				throw $e;
+					// re-throw exception
+					throw $e;
+				}
+				
+				// add response to session
+				$_SESSION['response'] = 1;
+		
+				// add pager_page to session
+				$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
+			} else {
+				// add response to session
+				$_SESSION['response'] = 2;
 			}
 		}
-		
-		// add response to session
-		$_SESSION['response'] = 1;
-		
-		// add pager_page to session
-		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
 		// redirect
 		$SESSION->save();

@@ -85,6 +85,14 @@ try {
 	/* @var $TAG Media_Tag */
 	$TAG = load('Media:Tag');
 	
+	// load textconverter class
+	/* @var $TEXTCONVERTER Application_Textconverter */
+	$TEXTCONVERTER = load('application:textconverter');
+
+	// load textmacro class
+	/* @var $TEXTMACRO Application_Textmacro */
+	$TEXTMACRO = load('application:textmacro');
+	
 	// init user and project
 	if (!$LOGIN->loggedIntoAdmin()) {
 		header("Location: ../login.php");
@@ -153,7 +161,7 @@ try {
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Close'),
-		array('class' => 'cancel200'));
+		array('class' => 'cancel140'));
 	
 	// set defaults
 	$FORM->setDefaults(array(
@@ -187,6 +195,9 @@ try {
 		// assign delivered pager location
 		$BASE->utility->smarty->assign('pager_page', $pager_page);
 		
+		// assign the whole object
+		$BASE->utility->smarty->assign('object', $object);
+		
 	 	// build session
 	    $session = array(
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
@@ -214,6 +225,9 @@ try {
 		
 		// assign currently used media tags
 		$BASE->utility->smarty->assign('current_tags', $TAG->selectTags());
+		
+		// assign image path
+		$BASE->utility->smarty->assign('media_store_www', $BASE->_conf['media']['store_www']);
 
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -229,9 +243,6 @@ try {
 		
 		// load helper class
 		$HELPER = load('utility:helper');
-		
-		// load tag class
-		$TAG = load('Media:Tag');
 		
 		$sqlData['description'] = $FORM->exportValue('description');
 		$sqlData['tags'] = $FORM->exportValue('tags');
@@ -270,63 +281,159 @@ try {
 				$data[$_key] = trim(strip_tags($_value));
 			}
 			
-			// get current file
-			$current_file = $OBJECT->selectObject($FORM->exportValue('id'));
+			// test if a file with prepared file name exits already
+			$check_file = $OBJECT->testForUniqueFilename($data['name'], $FORM->exportValue('id'));
+			
+			if ($check_file === true) {
+									
+				// remove old thumbnail and object
+				$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
+				$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
 						
-			// remove old thumbnail and object
-			$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
-			$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
-						
-			// move file to file store
-			$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name'], $current_file['file_name_on_disk']);
+				// move file to file store
+				$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
 			
-			// create thumbnail
-			$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 40, 40, true, 'ffffff');
+				// create thumbnail
+				$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 200, 200, true, 'ffffff');
 			
-			// if the file on disk is an image, get the image size
-			list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
+				// if the file on disk is an image, get the image size
+				list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
 			
-			// prepare sql data
-			$sqlData = array();
-			$sqlData['file_name'] = $data['name'];
-			$sqlData['file_name_on_disk'] = $name_on_disk;
-			$sqlData['file_mime_type'] = $data['type'];
-			$sqlData['file_width'] = $width;
-			$sqlData['file_height'] = $height;
-			$sqlData['file_size'] = (int)$data['size'];
-			$sqlData['preview_name_on_disk'] = Base_Cnc::ifsetor($thumbnail['name'], null);
-			$sqlData['preview_mime_type'] = Base_Cnc::ifsetor($thumbnail['type'], null);
-			$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
-			$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
-			$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
+				// prepare sql data
+				$sqlData = array();
+				$sqlData['file_name'] = $data['name'];
+				$sqlData['file_name_on_disk'] = $name_on_disk;
+				$sqlData['file_mime_type'] = $data['type'];
+				$sqlData['file_width'] = $width;
+				$sqlData['file_height'] = $height;
+				$sqlData['file_size'] = (int)$data['size'];
+				$sqlData['preview_name_on_disk'] = Base_Cnc::ifsetor($thumbnail['name'], null);
+				$sqlData['preview_mime_type'] = Base_Cnc::ifsetor($thumbnail['type'], null);
+				$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
+				$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
+				$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
 			
-			// check sql data
-			$HELPER->testSqlDataForPearErrors($sqlData);
+				// check sql data
+				$HELPER->testSqlDataForPearErrors($sqlData);
 			
-			// insert it
-			try {
-				// begin transaction
-				$BASE->db->begin();
+				// insert it
+				try {
+					// begin transaction
+					$BASE->db->begin();
 				
-				// update row in database
-				$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
+					// update row in database
+					$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
 				
-				// commit
-				$BASE->db->commit();
-			} catch (Exception $e) {
-				// do rollback
-				$BASE->db->rollback();
+					// commit
+					$BASE->db->commit();
+				} catch (Exception $e) {
+					// do rollback
+					$BASE->db->rollback();
 				
-				// re-throw exception
-				throw $e;
+					// re-throw exception
+					throw $e;
+				}
+			
+				// Load and resave all pages
+				// abstract of file: actions_apply_url_patterns.php
+			
+				// prepare sql data
+				$sqlDataSave = array();
+	
+				// class loader array
+				$classLoad = array(
+					'SIMPLEPAGE' => array('selectSimplePages', 'updateSimplePage'),
+					'SIMPLEFORM' => array('selectSimpleForms', 'updateSimpleForm'),
+					'SIMPLEGUESTBOOK' => array('selectSimpleGuestbooks', 'updateSimpleGuestbook'),
+					'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
+					'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
+					'BOX' => array('selectBoxes', 'updateBox'),
+					'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox')
+				);
+	
+				foreach ($classLoad as $classRef => $classFunc) {
+	
+					// define some vars
+					$_class = strtolower($classRef);
+					$_class_reference = $classRef;
+				
+					// load the appropriate class
+					$_class_reference = load('content:'.$_class);
+				
+					// collect results within var $_class
+					// example: $simplepages = $SIMPLEPAGE->selectSimplePages();
+					$_class = $_class_reference->$classFunc['0']();
+		
+					// Iterate through the results
+					foreach ($_class as $_key => $_value) {	
+
+						// make sure field content is not NULL
+						// this may occur when a page is added but still not edited
+						if (!is_null($_value['content_raw'])) {	
+							
+							// apply text macros and text converter if required
+							if ($_value['text_converter'] > 0 || $_value['apply_macros'] > 0) {
+
+								// extract content
+								$content = $_value['content_raw'];
+				
+								// apply startup and pre text converter text macros 
+								if ($_value['apply_macros'] > 0) {
+									$content = $TEXTMACRO->applyTextMacros($content, 'pre');
+								}
+				
+								// apply text converter
+								if ($_value['text_converter'] > 0) {
+									$content = $TEXTCONVERTER->applyTextConverter(
+										$_value['text_converter'],
+										$content
+									);
+								}
+				
+								// apply post text converter and shutdown text macros 
+								if ($_value['apply_macros'] > 0) {
+									$content = $TEXTMACRO->applyTextMacros($content, 'post');
+								}
+				
+								// assign content to sql data array
+								$sqlDataSave['content'] = $content;
+							}
+						}		
+				
+						// test sql data for pear errors
+						$HELPER->testSqlDataForPearErrors($sqlDataSave);		
+
+						// insert it
+						try {
+							// begin transaction
+							$BASE->db->begin();
+				
+							// execute operation
+							$_class_reference->$classFunc['1']($_value['id'], $sqlDataSave);
+				
+							// commit
+							$BASE->db->commit();
+						} catch (Exception $e) {
+							// do rollback
+							$BASE->db->rollback();
+				
+							// re-throw exception
+							throw $e;
+						}						
+					} // foreach eof	
+				} // foreach eof
+				
+				// add response to session
+				$_SESSION['response'] = 1;
+		
+				// add pager_page to session
+				$_SESSION['pager_page'] = $FORM->exportValue('pager_page');	
+			
+			} else {
+				// add response to session
+				$_SESSION['response'] = 2;
 			}
 		}
-		
-		// add response to session
-		$_SESSION['response'] = 1;
-		
-		// add pager_page to session
-		$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
 		
 		// redirect
 		$SESSION->save();

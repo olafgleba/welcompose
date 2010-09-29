@@ -185,7 +185,7 @@ function Helper_getTextConverterValue ()
 		// init
 		var text_converter;
 		
-		var form_name = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		var form_name = Helper.getAttr('id', $$('.botbg').first());
 		var el_name = 'text_converter';
 		var el_id = form_name + '_text_converter';
 			
@@ -238,7 +238,7 @@ function Helper_getSelectionText(el)
 		} else {
 			text = '';
 		}
-		return text;
+		return unescape(encodeURIComponent(text));
 	} catch (e) {
 		_applyError(e);
 	}
@@ -315,7 +315,7 @@ function Helper_getPagerPage()
 function Helper_getInsertType ()
 {
 	try {		
-		var insert_type_path = Helper.getAttr('action', document.getElementsByClassName('botbg')[0]);
+		var insert_type_path = Helper.getAttr('action', $$('.botbg').first());
 		var insert_type = insert_type_path.replace(/^\/(.+)\/(.+)\/(.+$)/, '$2');
 		
 		if (insert_type == 'templating') {
@@ -2016,7 +2016,11 @@ function Helper_runAction (elem)
 		e = elem.id;
 		
 		// define object to fill within the process
-		target = Helper.getParentNodeNextSibling(elem, 2);
+		if (Helper.isBrowser('sa')) {
+			target = Helper.getParentNodeNextSibling(elem, 3);
+		} else {
+			target = Helper.getParentNodeNextSibling(elem, 2);
+		}
 		
 		// current table row
 		targetRow = elem.parentNode.parentNode;
@@ -2060,7 +2064,7 @@ function Helper_runAction (elem)
 function Helper_loaderRunAction ()
 {
 	try {
-		new Insertion.Top(target, '<img id="' + e + '_indicator" src="../static/img/indicator.gif" alt="" />');
+		Element.insert(target, {'top':'<img id="' + e + '_indicator" src="../static/img/indicator.gif" alt="" />'});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -2079,17 +2083,17 @@ function Helper_showResponseRunAction(req)
 		
 		if (r) {
 			Element.hide(e + '_indicator');
-			new Insertion.Top(targetError, req.responseText);
+			Element.insert(targetError, {'top': req.responseText});
 		} else {
 			setTimeout("Effect.Fade('" + e + "_indicator', {duration: 0.2})", 200);
-			setTimeout("new Insertion.Top(target, '<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />')", 700);
+			setTimeout("Element.insert(target, {'top':'<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />'})", 700);
 			new Effect.Highlight(targetRow, {startcolor: '#DCEBF7',
 			endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
 			
 			// apply default
 			$('apply_page').checked = false;
-			var target = document.getElementsByClassName('target_toggleView')[0];
-			Effect.Fade(target,{delay: 0, duration: 0.4});
+			var target = $$('.target_toggleView').first();
+			new Effect.Fade(target,{delay: 0, duration: 0.4});
 		}
 		
 

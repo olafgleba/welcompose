@@ -96,7 +96,7 @@ try {
 		
 	// set defaults
 	$FORM->setDefaults(array(
-		'locale' => 'de_DE'
+		'locale' => 'de_DE.UTF-8'
 	));
 		
 	// validate it

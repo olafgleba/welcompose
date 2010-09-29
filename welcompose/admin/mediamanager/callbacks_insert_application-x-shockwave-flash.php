@@ -175,13 +175,21 @@ try {
 	$FORM->applyFilter('loop', 'trim');
 	$FORM->applyFilter('loop', 'strip_tags');
 	
+	// checkbox to insert shockwave as reference only
+	$FORM->addElement('checkbox', 'insert_as_reference', gettext('Insert as reference'), null,
+		array('id' => 'insert_as_reference', 'class' => 'chbx'));
+	$FORM->applyFilter('insert_as_reference', 'trim');
+	$FORM->applyFilter('insert_as_reference', 'strip_tags');
+	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Insert object'),
 		array('class' => 'submit200insertcallback'));
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'close200'));
+		array('class' => 'close140'));
 		
 	// set defaults
 	$FORM->setDefaults(array(
@@ -245,23 +253,40 @@ try {
 		// get object
 		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
 
-		// prepare callback args
-		$args = array(
-			'text' => $FORM->exportValue('text'),
-			'data' => sprintf('{get_media id="%u"}', $object['id']),
-			'width' => $object['file_width'],
-			'height' => $object['file_height'],
-			'quality' => $FORM->exportValue('quality'),
-			'scale' => $FORM->exportValue('scale'),
-			'wmode' => $FORM->exportValue('wmode'),
-			'bgcolor' => $FORM->exportValue('bgcolor'),
-			'play' => $FORM->exportValue('play'),
-			'loop' => $FORM->exportValue('loop')
-		);
+		// get text converter	
+		$text_converter = (int)$FORM->exportValue('text_converter');		
+		
+		// insert media as reference or full html
+		if ((int)($FORM->exportValue('insert_as_reference')) > 0) {			
+			// define insert_type
+			$insert_type = 'InternalReference';
+			
+			// prepare callback args
+			$args = array(
+				'text' => '',
+				'href' => sprintf('{get_media id="%u"}', $object['id'])
+			);		
+		} else {
+			// define insert_type
+			$insert_type = 'Shockwave';
+			
+			// prepare callback args
+			$args = array(
+				'text' => $FORM->exportValue('text'),
+				'data' => sprintf('{get_media id="%u"}', $object['id']),
+				'width' => $object['file_width'],
+				'height' => $object['file_height'],
+				'quality' => $FORM->exportValue('quality'),
+				'scale' => $FORM->exportValue('scale'),
+				'wmode' => $FORM->exportValue('wmode'),
+				'bgcolor' => $FORM->exportValue('bgcolor'),
+				'play' => $FORM->exportValue('play'),
+				'loop' => $FORM->exportValue('loop')
+			);
+		}
 
 		// execute text converter callback
-		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Shockwave', $args);
+		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, $insert_type, $args);
 
 		// assign callback build
 		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);

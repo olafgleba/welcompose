@@ -126,6 +126,11 @@ var definitions = {
 			return false;
 		}
 	},
+	'#insert_as_reference' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('insert_as_reference'), 1);
+		}
+	},
 	'.submit200upload' : function(el){
 		el.onfocus = function(){
 			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
@@ -154,18 +159,18 @@ var definitions = {
 			 submitted = true;
 		}
 	},
-	'.cancel200' : function(el){
+	'.cancel140' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ccc url(../static/img/submitindicator140grey.gif) no-repeat';
 		}
 		el.onclick = function(){
 			Helper.closePopup(this);
 			return false;
 		}
 	},
-	'.close200' : function(el){
+	'.close140' : function(el){
 		el.onfocus = function(){
-			this.style.background = '#ff620d url(../static/img/submitindicator200.gif) no-repeat';
+			this.style.background = '#ccc url(../static/img/submitindicator140grey.gif) no-repeat';
 		}
 		el.onclick = function(){
 			Helper.closeLinksPopup(this);

@@ -185,45 +185,54 @@ try {
 			foreach ($data as $_key => $_value) {
 				$data[$_key] = trim(strip_tags($_value));
 			}
+
+			// test if a file with prepared file name exits already
+			$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], null, 'add');
 			
-			// move file to file store
-			$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
+			if ($check_global_file === true) {
+							
+				// move file to file store
+				$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
 			
-			// prepare sql data
-			$sqlData = array();
-			$sqlData['project'] = WCOM_CURRENT_PROJECT;
-			$sqlData['name'] = $data['name'];
-			$sqlData['description'] = $FORM->exportValue('description');
-			$sqlData['name_on_disk'] = $name_on_disk;
-			$sqlData['mime_type'] = $data['type'];
-			$sqlData['size'] = (int)$data['size'];
-			$sqlData['date_added'] = date('Y-m-d H:i:s');
+				// prepare sql data
+				$sqlData = array();
+				$sqlData['project'] = WCOM_CURRENT_PROJECT;
+				$sqlData['name'] = $data['name'];
+				$sqlData['description'] = $FORM->exportValue('description');
+				$sqlData['name_on_disk'] = $name_on_disk;
+				$sqlData['mime_type'] = $data['type'];
+				$sqlData['size'] = (int)$data['size'];
+				$sqlData['date_added'] = date('Y-m-d H:i:s');
 			
-			// check sql data
-			$HELPER = load('utility:helper');
-			$HELPER->testSqlDataForPearErrors($sqlData);
+				// check sql data
+				$HELPER = load('utility:helper');
+				$HELPER->testSqlDataForPearErrors($sqlData);
 			
-			// insert it
-			try {
-				// begin transaction
-				$BASE->db->begin();
+				// insert it
+				try {
+					// begin transaction
+					$BASE->db->begin();
 				
-				// insert row into database
-				$GLOBALFILE->addGlobalFile($sqlData);
+					// insert row into database
+					$GLOBALFILE->addGlobalFile($sqlData);
 				
-				// commit
-				$BASE->db->commit();
-			} catch (Exception $e) {
-				// do rollback
-				$BASE->db->rollback();
+					// commit
+					$BASE->db->commit();
+				} catch (Exception $e) {
+					// do rollback
+					$BASE->db->rollback();
 				
-				// re-throw exception
-				throw $e;
+					// re-throw exception
+					throw $e;
+				}
+				
+				// add response to session
+				$_SESSION['response'] = 1;
+			} else {
+				// add response to session
+				$_SESSION['response'] = 2;
 			}
 		}
-		
-		// add response to session
-		$_SESSION['response'] = 1;
 		
 		// redirect
 		$SESSION->save();

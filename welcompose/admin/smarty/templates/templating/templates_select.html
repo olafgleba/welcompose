@@ -14,12 +14,14 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/prototype_update_helper.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects,dragdrop"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
+
 
 </head>
 
@@ -126,7 +128,7 @@
 </tr>
 <tr id="o_{$_template.id}" class="outer">
 <td colspan="8">
-<div id="i_{$_template.id}" class="inner">
+<div id="i_{$_template.id}" class="inner" style="display:none;">
 <form action="templates_upload.php?id={$_template.id}" id="upload" method="post" enctype="multipart/form-data">
 <fieldset>
 <label class="cont" for="template_upload_{$_template.id}"><span class="bez">{i18n Upload} <span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="Help" /></a></span></span> 

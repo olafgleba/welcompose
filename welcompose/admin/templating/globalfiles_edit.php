@@ -131,7 +131,7 @@ try {
 	
 	// textarea for description
 	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'global_file_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
+		array('id' => 'global_file_description', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
 	$FORM->applyFilter('description', 'trim');
 	$FORM->applyFilter('description', 'strip_tags');
 	
@@ -161,6 +161,22 @@ try {
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
+			
+	 	// build session
+	    $session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+	    );
+
+	    // assign prepared session array to smarty
+	    $BASE->utility->smarty->assign('session', $session);
+	
+	    // assign file array 
+		$BASE->utility->smarty->assign('file', $file);
+
+	    // empty $_SESSION
+	    if (!empty($_SESSION['response'])) {
+	        $_SESSION['response'] = '';
+	    }
 	    
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
@@ -185,6 +201,33 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
+		// handle changes of the description field
+		try {
+			// begin transaction
+			$BASE->db->begin();
+	
+			// prepare sql data
+			$sqlData = array(
+				'description' => $FORM->exportValue('description')
+			);
+
+			// check sql data
+			$HELPER = load('utility:helper');
+			$HELPER->testSqlDataForPearErrors($sqlData);
+	
+			// update row
+			$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
+	
+			// commit
+			$BASE->db->commit();
+		} catch (Exception $e) {
+			// do rollback
+			$BASE->db->rollback();
+
+			// re-throw exception
+			throw $e;
+		}
+		
 		// handle file upload
 		if ($file_upload->isUploadedFile()) {
 			// get file data
@@ -195,80 +238,70 @@ try {
 				$data[$_key] = trim(strip_tags($_value));
 			}
 			
-			// remove old file from file store
-			$GLOBALFILE->removeGlobalFileFromStore($FORM->exportValue('id'));
+			// test if a file with prepared file name exits already
+			$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], $FORM->exportValue('id'), 'edit');
 			
-			// move file to file store
-			$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
+			if ($check_global_file === true) {
 			
-			// prepare sql data
-			$sqlData = array();
-			$sqlData['name'] = $data['name'];
-			$sqlData['name_on_disk'] = $name_on_disk;
-			$sqlData['mime_type'] = $data['type'];
-			$sqlData['size'] = (int)$data['size'];
+				// remove old file from file store
+				$GLOBALFILE->removeGlobalFileFromStore($FORM->exportValue('id'));
 			
-			// insert it
-			try {
-				// begin transaction
-				$BASE->db->begin();
+				// move file to file store
+				$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
+			
+				// prepare sql data
+				$sqlData = array();
+				$sqlData['name'] = $data['name'];
+				$sqlData['name_on_disk'] = $name_on_disk;
+				$sqlData['mime_type'] = $data['type'];
+				$sqlData['size'] = (int)$data['size'];
+			
+				// insert it
+				try {
+					// begin transaction
+					$BASE->db->begin();
 				
-				// update row
-				$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
+					// update row
+					$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
 				
-				// commit
-				$BASE->db->commit();
-			} catch (Exception $e) {
-				// do rollback
-				$BASE->db->rollback();
+					// commit
+					$BASE->db->commit();
+				} catch (Exception $e) {
+					// do rollback
+					$BASE->db->rollback();
 
-				// re-throw exception
-				throw $e;
+					// re-throw exception
+					throw $e;
+				}
+		
+				// save request start range
+				$start = $FORM->exportValue('start');
+				$start = (!empty($start)) ? $start : 0;
+				
+			} else {
+				// add response to session
+				$_SESSION['response'] = 2;
 			}
 		}
-		
-		// handle changes of the description field
-		try {
-			// begin transaction
-			$BASE->db->begin();
-			
-			// prepare sql data
-			$sqlData = array(
-				'description' => $FORM->exportValue('description')
-			);
 
-			// check sql data
-			$HELPER = load('utility:helper');
-			$HELPER->testSqlDataForPearErrors($sqlData);
-			
-			// update row
-			$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
-			
-			// commit
-			$BASE->db->commit();
-		} catch (Exception $e) {
-			// do rollback
-			$BASE->db->rollback();
-
-			// re-throw exception
-			throw $e;
-		}	
-		
 		// redirect
 		$SESSION->save();
-		
+
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
-		
-		// save request start range
-		$start = $FORM->exportValue('start');
-		$start = (!empty($start)) ? $start : 0;
-		
-		// redirect
-		header("Location: globalfiles_select.php?start=".$start);
-		exit;
+						
+		if ($check_global_file === true) {
+			// redirect
+			header("Location: globalfiles_select.php?start=".$start);
+			exit;
+		} else {
+			// redirect
+			header("Location: globalfiles_edit.php?id=".$FORM->exportValue('id'));
+			exit;
+		}
+					
 	}
 } catch (Exception $e) {
 	// clean the buffer

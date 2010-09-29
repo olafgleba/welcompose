@@ -270,7 +270,7 @@ function Base ()
 		/**
 		 * Comprehensive popup height application wide
 		 */
-		this.callbacksPopupWindowHeight634 = '634';
+		this.callbacksPopupWindowHeight634 = '774';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.
@@ -526,8 +526,8 @@ function Init_load ()
 function Init_getVars ()
 {
 	try {
-		if (document.getElementsByClassName('botbg')[0] && !document.getElementById('abbreviations')) {
-			Form.focusFirstElement(document.getElementsByClassName('botbg')[0]);
+		if ($$('.botbg').first() && !document.getElementById('abbreviations')) {
+			Form.focusFirstElement($$('.botbg').first());
 		}		
 		if (typeof response != 'undefined') {
 			if (response == 1) {
@@ -560,7 +560,11 @@ function Init_getVars ()
 				Init.getToogleElemSingle();
 		}
 		if (typeof checkbox_status != 'undefined' && Init.isArray(checkbox_status)) {
-			Init.getCbxStatus(checkbox_status);
+			if (typeof disable != 'undefined' && disable == 1) {
+				Init.getCbxStatus(checkbox_status, disable);
+			} else {
+				Init.getCbxStatus(checkbox_status);
+			}
 		}
 		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
@@ -597,7 +601,7 @@ function Init_getVars ()
  * @param {array} elems Array of element(s)
  * @throws applyError on exception
  */
-function Init_getCbxStatus (elems)
+function Init_getCbxStatus (elems, reverse)
 {
 	try {
 		for (var e = 0; e < elems.length; e++) {
@@ -607,7 +611,7 @@ function Init_getCbxStatus (elems)
 			if ($(range)) {
 				if ($(elems[e]).checked === true) {
 				
-					allNodes = document.getElementsByClassName("bez");	
+					allNodes = $$(".bez");	
 				
 					for (var i = 0; i < allNodes.length; i++) {
 						var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
@@ -615,9 +619,17 @@ function Init_getCbxStatus (elems)
 							allNodes[i].style.color = this.applicationTextColor;
 						}
 					}
-					Element.show(range);
+					if (!reverse) {
+						Element.show(range);
+					} else {
+						Element.hide(range);
+					}
 				} else {
-					Element.hide(range);
+					if (!reverse) {
+						Element.hide(range);
+					} else {
+						Element.show(range);
+					}
 				}
 			}
 		}
@@ -807,7 +819,8 @@ function Init_toggleViewByChbx (elem, target)
 	try {
 	    // properties
 		this.elem = elem;
-		this.target = document.getElementsByClassName(target)[0];
+		//this.target = document.getElementsByClassName(target)[0];
+		this.target = $$('.' + target).first();
 		
 		if ($(this.elem).checked === true) {
 			Effect.Appear(this.target,{delay: 0, duration: 0.5});
@@ -881,13 +894,13 @@ function Help_show (elem)
 				
 		var i = this.processId.match(/_\d+/);
 		
-		if (document.getElementsByClassName('botbg')[0] && !i) {
-			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		if ($$('.botbg').first() && !i) {
+			this.formId = Helper.getAttr('id', $$('.botbg').first());
 		} 
 		
-		else if (document.getElementsByClassName('botbg')[0] && i) {
+		else if ($$('.botbg').first() && i) {
 			this.processId = this.processId.replace(/_\d+/, '');
-			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+			this.formId = Helper.getAttr('id', $$('.botbg').first());
 		} else {
 			this.processId = this.processId.replace(/_\d+/, '');
 			this.formId = Helper.getDataParentNode(this.elem, 1);
@@ -904,9 +917,10 @@ function Help_show (elem)
 			_req.onreadystatechange = function () { Help.processHelp(_ttarget);};
 			_req.send('');
 		}
+		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-
+		
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
@@ -931,7 +945,7 @@ function Help_hide (elem)
 	
 		this.elem.className = this.helpClass;
 	
-		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.4});
+		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.3});
 
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlShow);
@@ -955,11 +969,11 @@ function Help_processHelp (ttarget)
 {
 	try {
 		if (_req.readyState == 4) {
-			if (_req.status == 200) {			
-				new Insertion.After($(ttarget).parentNode, _req.responseText);
+			if (_req.status == 200) {
+				Element.insert($(ttarget).parentNode, {'after': _req.responseText});
 				var ttarget_after = $(ttarget).parentNode.nextSibling;			
 				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});		
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.3});		
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -1039,14 +1053,9 @@ function Help_hideMediamanager (elem)
 		this.toShow = gMediamanagerLayer;
 		this.elem.className = this.helpClassMediamanager;
 	
-		if (Helper.isBrowser('sa')) {
-			Element.hide(this.toHide);
-			Element.show(this.toShow);
-		} else {
-			Element.hide(this.toHide);
-			Element.hide(this.toShow);
-			Effect.Appear(this.toShow,{duration: 0.7});
-		}
+		Element.hide(this.toHide);
+		Element.hide(this.toShow);
+		Effect.Appear(this.toShow,{duration: 0.7});
 		
 		Element.update(this.elem, this.helpHtmlShow);
 
@@ -1071,12 +1080,8 @@ function Help_processMediamanager (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {				
 				Element.update (ttarget, _req.responseText);
-				if (Helper.isBrowser('sa')) {
-					Element.show(ttarget);
-				} else {
-					Element.hide(this.ttarget);
-					Effect.Appear(this.ttarget,{duration: 0.7});
-				}
+				Element.hide(this.ttarget);
+				Effect.Appear(this.ttarget,{duration: 0.7});
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
@@ -1278,7 +1283,7 @@ function Navigation_show (name, level)
 				Element.hide($('topsubnavconstatic'));
 				Element.update(ttarget, _req.responseText);
 	
-				new Effect.Fade(document.getElementsByClassName('highlight')[0],
+				new Effect.Fade($$('.highlight').first(),
 					{duration: 0.5, delay: 0.4});
 
 			} else {
@@ -1464,9 +1469,10 @@ Status.prototype.getCbx = Status_getCbx;
  * project support area.
  *
  * @param {array} elems Array of element(s)
+ * @param {string} disable Switch to disable/enable bound form elements
  * @throws applyError on exception
  */
-function Status_getCbx (elems)
+function Status_getCbx (elems, disable)
 {
 	try {
 		// properties		
@@ -1481,18 +1487,37 @@ function Status_getCbx (elems)
 				if ($(range)) {
 					if ($(this.elems[e]).checked === true) {
 		
-						allNodes = document.getElementsByClassName("bez");
+						allNodes = $$(".bez");
 					
 						for (var i = 0; i < allNodes.length; i++) {
 							var _process = allNodes[i].parentNode.parentNode.getAttribute('id');		
 							if (_process == range) {
-								allNodes[i].style.color = this.applicationTextColor;
+								if(!disable) {
+									allNodes[i].style.color = this.applicationTextColor;
+								}
 							}
 						}
-						Element.hide($(range));
-						Effect.Appear($(range),{duration: 0.6});
+						if (disable) {
+							obj = $$('#'+range+' input, select');
+							$(obj).each(function(element) {
+								element.style.backgroundColor = '#f4f4f4';
+								element.style.borderColor = '#cccccc';
+								element.disabled = true;
+							});
+						} else {
+							$(range).hide();
+							Effect.Appear($(range),{duration: 0.6});
+						}
 					} else {
-						Effect.Fade($(range),{duration: 0.6});
+						if (disable) {
+							$(obj).each(function(element) {
+								element.style.backgroundColor = '';
+								element.style.borderColor = '';
+								element.disabled = false;
+							});							
+						} else {
+							Effect.Fade($(range),{duration: 0.6});
+						}
 					}
 				}
 			}
@@ -1726,11 +1751,12 @@ function Preview_getFrontendView (elem)
 		previewWin.focus();
 		
 		var insertPanel = function () {
-			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
+			Element.insert(previewWin.document.body, {'top': '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div'});
 		}
+		
 		// we have to set a big timeout cause the page (e.g. DOM) has
 		// to finish loading before we are able to use this function
-		setTimeout(insertPanel, 6000);
+		setTimeout(insertPanel, 5000);
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1747,7 +1773,7 @@ function Preview_reloadFrontendView ()
 {
 	try {
 		// properties
-		this.elem = document.getElementsByClassName('preview')[0];
+		this.elem = $$('.preview').first();
 		this.elemPageId = Helper.getAttr('id', this.elem);
 		this.elemPostingId = Helper.getAttr('name', this.elem);
 		this.elemAction = Helper.getAttr('rel', this.elem);
@@ -1755,11 +1781,12 @@ function Preview_reloadFrontendView ()
 		previewWin = window.open(this.previewPath + '?page='+this.elemPageId+'&posting_id='+this.elemPostingId+'&action='+this.elemAction+'','preview','scrollbars=yes,resizable=yes');
 		
 		var insertPanel = function () {
-			new Insertion.Top(previewWin.document.body, '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div');
+			Element.insert(previewWin.document.body, {'top': '<div style="width:100%; height:52px; background-color: #EF5C19; border-bottom:2px solid #ccc;"><p style="float:right; margin:0px; padding:0px 15px 0px 0px; line-height: normal;"><a style="display:block; padding:18px; color:#fff; text-decoration:none;" href="javascript:self.opener.Preview.closeFrontendView();"><strong>'+closePreviewPopup+'</strong></a></div'});
 		}
+		
 		// we have to set a big timeout cause the page (e.g. DOM) has
 		// to finish loading before we are able to use this function
-		setTimeout(insertPanel, 6000);
+		setTimeout(insertPanel, 5000);
 	} catch (e) {
 		_applyError(e);
 	}

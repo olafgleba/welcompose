@@ -498,7 +498,7 @@ public function countObjects ($params = array())
  * @param string Current file name on disk
  * @return string File name on disk
  */
-public function moveObjectToStore ($name, $path, $current)
+public function moveObjectToStore ($name, $path)
 {
 	// access check
 	if (!wcom_check_access('Media', 'Object', 'Manage')) {
@@ -512,23 +512,12 @@ public function moveObjectToStore ($name, $path, $current)
 	if (empty($path) || !is_scalar($path)) {
 		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
 	}
-	if (!empty($current) && !is_scalar($current)) {
-		throw new Media_ObjectException("Input for parameter path is expected to be a non-empty scalar value");
-	}
 	if (!$this->imageStoreIsReady()) {
 		throw new Media_ObjectException("Image store is not ready");
 	}
 	
-	if (empty($current)) {
-		// get unique id
-		$uniqid = Base_Cnc::uniqueId();
-
-		// prepare file name
-		$file_name = $uniqid.'_'.$name;		
-	} else {
-		// prepare file name
-		$file_name = $current;		
-	}
+	// prepare file
+	$file_name = $name;
 		
 	// prepare target path
 	$target_path = $this->getPathToObject($file_name);
@@ -734,12 +723,16 @@ public function createImageThumbnail ($orig_name, $object_name, $width, $height,
 	// prepare save name
 	$parts = explode('.', $orig_name);
 	$suffix = $parts[count($parts) - 1];
-	if ($suffix == 'jpg' || $suffix == 'png' || $suffix == 'gif') {
+	if (strtolower($suffix) == 'jpg' || $suffix == 'png' || $suffix == 'gif') {
 		unset($parts[count($parts) - 1]);
 	}
-	$parts[] = 'png';
-	$save_name = sprintf("%s_%ux%u_%s", Base_Cnc::uniqueId(), imagesx($image_p),
-		imagesy($image_p), implode('.', $parts));
+	//$parts[] = 'png';
+	$parts[] = '.png';
+	
+	// $save_name = sprintf("%s_%ux%u_%s", Base_Cnc::uniqueId(), imagesx($image_p),
+	// 	imagesy($image_p), implode('.', $parts));
+	$save_name = sprintf("%s_%ux%u%s", $parts[0], imagesx($image_p),
+		imagesy($image_p), $parts[2]);
 	
 	// save image as png
 	imagepng($image_p, $this->getPathToThumbnail($save_name));
@@ -815,7 +808,7 @@ public function removeImageThumbnail ($object)
 
 /**
  * Returns full path to media object. Takes media object name on disk
- * as frist argument. Please note that the object doesn't have to exist
+ * as first argument. Please note that the object doesn't have to exist
  * to get the path to a object.
  *
  * @param string Object name
@@ -837,8 +830,33 @@ public function getPathToObject ($object_name)
 }
 
 /**
+ * Takes media object id  as first argument. Returns full disk path to
+ * media object.
+ *
+ * @param string Object id
+ * @return mixed
+ */
+public function getPathToObjectUsingId ($object_id)
+{
+	// access check
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($object_id) || !is_scalar($object_id)) {
+		throw new Media_ObjectException("Object id is supposed to be a non-empty numeric value");
+	}
+	
+	// get object
+	$object = $this->selectObject($object_id);
+	
+	return $this->base->_conf['media']['store_disk'].DIRECTORY_SEPARATOR.$object['file_name_on_disk'];
+}
+
+/**
  * Returns full www path to media object. Takes media object name on disk
- * as frist argument. Please note that the object doesn't have to exist
+ * as first argument. Please note that the object doesn't have to exist
  * to get the path to a object.
  *
  * @param string Object name
@@ -860,7 +878,7 @@ public function getWwwPathToObject ($object_name)
 }
 
 /**
- * Takes media object id  as frist argument. Returns full www path to
+ * Takes media object id  as first argument. Returns full www path to
  * media object.
  *
  * @param string Object id
@@ -874,7 +892,7 @@ public function getWwwPathToObjectUsingId ($object_id)
 	}
 	
 	// input check
-	if (empty($object_id) || !is_scalar($object_id)) {
+	if (empty($object_id) || !is_numeric($object_id)) {
 		throw new Media_ObjectException("Object id is supposed to be a non-empty numeric value");
 	}
 	
@@ -891,7 +909,7 @@ public function getWwwPathToObjectUsingId ($object_id)
 
 /**
  * Returns full path to media thumbnail. Takes the media object name on
- * disk as frist argument. Please note that the thumbnail doesn't have to
+ * disk as first argument. Please note that the thumbnail doesn't have to
  * exist to get the path to the thumbnail.
  *
  * @param string Thumbnail name
@@ -948,6 +966,55 @@ public function imageStoreIsReady ()
 	}
 	
 	return true;
+}
+
+/**
+ * Tests given file for uniqueness. Takes the file name as first argument
+ * and the id as second argument as an option.
+ * 
+ * The second argument is used to compare if the uploaded file name equals the
+ * former file name that is already on disk. When the file name is identical,
+ * we allow to replace this file.
+ *   
+ * Returns boolean true if file name is unique.
+ *
+ * @throws Media_ObjectException
+ * @param string file name
+ * @param integer Id of current file
+ * @return bool
+ */
+public function testForUniqueFilename ($file_name, $id = null)
+{
+	// access check
+	if (!wcom_check_access('Media', 'Object', 'Use')) {
+		throw new Media_ObjectException("You are not allowed to perform this action");
+	}	
+	// input check
+	if (empty($file_name)) {
+		throw new Media_ObjectException("Input for parameter file_name is not expected to be empty");
+	}
+	if (!is_null($id) && !is_numeric($id)) {
+		throw new Media_ObjectException("Input for parameter id is expected to be numeric");
+	}
+	
+	if (!empty($id) && is_numeric($id)) {
+		// get object path
+		$object_path = $this->getPathToObjectUsingId($id);
+	}
+	
+	// get file path on disk
+	$target_path = $this->getPathToObject($file_name);
+	
+	// evaluate result
+	if (file_exists($target_path)) {
+		if (!empty($object_path) && $object_path == $target_path) {
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		return true;
+	}
 }
 
 /**

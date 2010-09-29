@@ -13,12 +13,14 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/prototype_update_helper.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects,dragdrop"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
+
 
 </head>
 
@@ -128,7 +130,7 @@
 {foreach from=$simple_dates item=_dates}
 <tr{if $_dates.draft > 0} class="draft"{/if}>
 <td>{$_dates.date_start|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{if !empty($_dates.date_end)} - {$_dates.date_end|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{/if}</td>
-<td>{$_dates.location|escape:"html"|truncate:60:"..."}</td>
+<td>{$_dates.location_raw|truncate:60:"..."}</td>
 <td>{if !empty($_dates.link_1)}{i18n Yes}{else}{i18n No}{/if}</td>
 <td><a class="edit" href="pages_simple_dates_edit.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelSimpleDate" href="pages_simple_dates_delete.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>

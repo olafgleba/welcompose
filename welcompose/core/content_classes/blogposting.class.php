@@ -342,6 +342,7 @@ public function selectBlogPosting ($id)
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
+ * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>tag_word_url, string, optional: Tag word</li>
  * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>start, int, optional: row offset</li>
@@ -374,6 +375,7 @@ public function selectBlogPostings ($params = array())
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
+	$current_date = null;
 	$tag_word_url = null;
 	$timeframe = null;
 	$order_macro = null;
@@ -392,6 +394,7 @@ public function selectBlogPostings ($params = array())
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
+			case 'current_date':
 			case 'tag_word_url':
 			case 'timeframe':
 			case 'order_macro':
@@ -574,7 +577,11 @@ public function selectBlogPostings ($params = array())
 	if (!is_null($day_added) && is_numeric($day_added)) {
 		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
 		$bind_params['day_added'] = (string)$day_added;
-	}
+	}	
+	if (!empty($current_date)) {
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
+			$current_date);
+	}	
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
 			$timeframe);
@@ -610,6 +617,7 @@ public function selectBlogPostings ($params = array())
  * <li>user, int, optional: User/author id</li>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
+ * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>tag_word_url, string, optional: Tag word</li>
  * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>year_added, string, optional: four digit year number</li>
@@ -635,6 +643,7 @@ public function countBlogPostings ($params = array())
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
+	$current_date = null;
 	$tag_word_url = null;
 	$timeframe = null;
 	$bind_params = array();
@@ -650,6 +659,7 @@ public function countBlogPostings ($params = array())
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
+			case 'current_date':
 			case 'tag_word_url':
 			case 'timeframe':
 					$$_key = (string)$_value;
@@ -737,6 +747,10 @@ public function countBlogPostings ($params = array())
 		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
 		$bind_params['day_added'] = (string)$day_added;
 	}
+	if (!empty($current_date)) {
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
+			$current_date);
+	}		
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
 			$timeframe);

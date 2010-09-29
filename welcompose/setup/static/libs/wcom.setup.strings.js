@@ -32,3 +32,5 @@ var e_msg_str_suffix = '<%i18n If the error remains, please get in touch with ou
  */
 var hideHelp = '<%i18n Hide help on this topic%>';
 var showHelp = '<%i18n Show help on this topic%>';
+
+var alertOnMissingHelpFiles = '<%i18n There is currently no help available.%>';

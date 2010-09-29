@@ -4,9 +4,9 @@ wcom_admin_root_www = /admin
 wcom_public_root_www = 
 
 [log]
-handler = "firebug"
-name = 
-level = PEAR_LOG_WARNING
+handler = "file"
+name = "/www/welcompose/trunk/welcompose/tmp/log/welcompose.log"
+level = PEAR_LOG_NOTICE
 
 [environment]
 debug = true

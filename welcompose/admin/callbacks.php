@@ -235,7 +235,7 @@ try {
 		// prepare callback args
 		$args = array(
 			'text' => $_text,
-			'href' => utf8_encode($object['content'])
+			'href' => $object['content']
 		);
 
 	} elseif ($_REQUEST['type'] == 'abbreviation') {	

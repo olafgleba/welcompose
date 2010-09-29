@@ -107,8 +107,6 @@ try {
 	
 	// let's see if we received a file
 	if ($_FILES['file']['error'] == UPLOAD_ERR_OK && !empty($file)) {
-		// remove old file
-		$GLOBALFILE->removeGlobalFileFromStore($file['id']);
 		
 		// get upload data
 		$data = $_FILES['file'];
@@ -118,35 +116,54 @@ try {
 			$data[$_key] = trim(strip_tags($_value));
 		}
 		
-		// move file to file store
-		$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
-		
-		// prepare sql data
-		$sqlData = array();
-		$sqlData['name'] = $data['name'];
-		$sqlData['name_on_disk'] = $name_on_disk;
-		$sqlData['mime_type'] = $data['type'];
-		$sqlData['size'] = (int)$data['size'];
-		
-		// insert it
-		try {
-			// begin transaction
-			$BASE->db->begin();
-			
-			// insert row into database
-			$GLOBALFILE->updateGlobalFile($file['id'], $sqlData);
-			
-			// commit
-			$BASE->db->commit();
-		} catch (Exception $e) {
-			// do rollback
-			$BASE->db->rollback();
-			
-			// re-throw exception
-			throw $e;
-		} 
-	}
+		// test if a file with prepared file name exits already
+		$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], $file['id'], 'upload');
 	
+		if ($check_global_file === true) {
+			
+			// remove old file
+			$GLOBALFILE->removeGlobalFileFromStore($file['id']);
+		
+			// move file to file store
+			$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
+		
+			// prepare sql data
+			$sqlData = array();
+			$sqlData['name'] = $data['name'];
+			$sqlData['name_on_disk'] = $name_on_disk;
+			$sqlData['mime_type'] = $data['type'];
+			$sqlData['size'] = (int)$data['size'];
+		
+			// insert it
+			try {
+				// begin transaction
+				$BASE->db->begin();
+			
+				// insert row into database
+				$GLOBALFILE->updateGlobalFile($file['id'], $sqlData);
+			
+				// commit
+				$BASE->db->commit();
+			} catch (Exception $e) {
+				// do rollback
+				$BASE->db->rollback();
+			
+				// re-throw exception
+				throw $e;
+			}
+			
+			// add response to session
+			$_SESSION['response'] = 1;
+		} else {
+			// add response to session
+			$_SESSION['response'] = 2;
+		}
+			
+	}
+
+	// redirect
+	$SESSION->save();
+							
 	// clean the buffer
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();

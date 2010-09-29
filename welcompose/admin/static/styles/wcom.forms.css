@@ -34,7 +34,7 @@ background: transparent url(../img/bg_form.gif) left bottom no-repeat;
 }
 fieldset.topbg {
 width: 690px;
-padding: 20px 10px 0 10px;
+padding: 20px 10px 20px 10px;
 background: transparent url(../img/bg_fieldset.gif) left top no-repeat;
 overflow: hidden;
 }
@@ -224,8 +224,8 @@ input.submit200go,
 input.submit200upload,
 input.submit200insertcallback,
 input.submit200bez260,
-input.cancel200,
-input.close200,
+input.cancel140,
+input.close140,
 input.submit240,
 input.submit240bez260 {
 text-align: left;
@@ -249,6 +249,16 @@ input.submit140 {
 background: #ff620d url(../img/submit140.gif) no-repeat;
 width: 140px;
 margin: 20px  0 0 140px;
+}
+input.cancel140 {
+background: #ccc url(../img/submit140grey.gif) no-repeat;
+width: 140px;
+margin: 20px 0 0 200px;
+}
+input.close140 {
+background: #ccc url(../img/submit140grey.gif) no-repeat;
+width: 140px;
+margin: 20px 0 0 200px;
 }
 input.submit200 {
 background: #ff620d url(../img/submit200.gif) no-repeat;
@@ -274,16 +284,6 @@ input.submit200bez260 {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
 margin: 20px 0 0 260px;
-}
-input.cancel200 {
-background: #ff620d url(../img/submit200.gif) no-repeat;
-width: 200px;
-margin: 20px 0 0 140px;
-}
-input.close200 {
-background: #ff620d url(../img/submit200.gif) no-repeat;
-width: 200px;
-margin: 20px 0 0 140px;
 }
 input.submit240 {
 background: #ff620d url(../img/submit240.gif) no-repeat;
@@ -386,4 +386,45 @@ display: block;
 width: auto!important;
 margin-top: 20px;
 background-image: none!important;
+}
+
+
+/* Info Tabellen für Metadaten*/
+.info {
+margin: 0 0 30px 140px;
+width:548px;
+}
+.info td {
+color: #000!important;
+padding-left: 0!important;
+vertical-align: top;
+text-align: left;
+line-height:1.8em;
+border: none;
+}
+.info .filepreview {
+width:200px;
+padding:0;
+border:1px dotted #ccc;
+text-align:center;
+vertical-align:middle;
+}
+.info .filepreviewspace {
+width:30px;
+}
+.info .fileinfo {
+width:110px;
+}
+.info .fileinfosec {
+width:200px;
+}
+.info tr:hover {
+background-color:inherit;
+}
+
+
+/* Globale Dateien Edit */
+#global_file .info {
+margin-bottom: 15px;
+width:auto;
 }

@@ -238,6 +238,7 @@ public function render ()
 					$attributes = array(
 						'id' => $field_id,
 						'maxlength' => 255,
+						'value' => $_field['value'],
 						'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
 					);
 					
@@ -248,6 +249,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
+						'value' => $_field['value'],
 						'class' => (!empty($_field['class'])) ? 'ftextarea '. $_field['class'] : 'ftextarea',
 						'cols' => 30,
 						'rows' => 6

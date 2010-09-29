@@ -245,7 +245,7 @@ try {
 		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 		
 		// remove attribute on form tag for XHTML compliance
-		//$FORM->removeAttribute('name');
+		$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
 		
 		$FORM->accept($renderer);

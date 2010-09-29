@@ -19,7 +19,8 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/prototype_update_helper.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects,dragdrop"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
@@ -73,6 +74,21 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 </ul>
 <br class="clearb" />
 {/if}
+
+{if $session.response == 1}
+<div id="rp">
+<h1>{i18n Fine, your input was successfully stored!}</h1>
+<p>{i18n Go ahead and do some more edits}</p>
+<!-- rp --></div>
+{/if}
+
+{if $session.response == 2}
+<div id="rp">
+<h1>{i18n Sorry, your input was not stored!}</h1>
+<p>{i18n The name of the file you wish to upload must be identical to the file name you like to replace}</p>
+<!-- rp --></div>
+{/if}
+
 {if !empty($global_files)}
 <table summary="{i18n Available Templates}">
 <tr>

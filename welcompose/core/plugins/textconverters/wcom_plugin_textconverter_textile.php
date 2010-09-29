@@ -29,6 +29,9 @@ class TextConverter_Textile extends TextConverter_Xhtml
 
 public function mmInsertImage ($text, $src, $width, $height, $alt, $title)
 {
+	// fix textile rendering bug: set space when alt attribute is empty
+	$alt = (!empty($alt)) ? $alt : ' ';
+	
 	$tag = '!%1$s (%4$s)!%6$s';
 	$html = sprintf($tag, $src, $width, $height, $alt, $title, $text);
 	

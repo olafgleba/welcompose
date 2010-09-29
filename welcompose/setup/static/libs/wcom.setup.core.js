@@ -440,14 +440,13 @@ function Help_show (elem)
 				
 		var i = this.processId.match(/_\d+/);
 		
-		if (document.getElementsByClassName('botbg')[0] && !i) {
-			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
+		if ($$('.botbg').first() && !i) {
+			this.formId = Helper.getAttr('id', $$('.botbg').first());
 		} 
 		
-		else if (document.getElementsByClassName('botbg')[0] && i) {
+		else if ($$('.botbg').first() && i) {
 			this.processId = this.processId.replace(/_\d+/, '');
-			this.formId = Helper.getAttr('id', document.getElementsByClassName('botbg')[0]);
-		
+			this.formId = Helper.getAttr('id', $$('.botbg').first());
 		} else {
 			this.processId = this.processId.replace(/_\d+/, '');
 			this.formId = Helper.getDataParentNode(this.elem, 1);
@@ -517,16 +516,16 @@ function Help_processHelp (ttarget)
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
-				new Insertion.After($(ttarget).parentNode, _req.responseText);				
-				var ttarget_after = $(ttarget).parentNode.nextSibling;
+				Element.insert($(ttarget).parentNode, {'after': _req.responseText});
+				var ttarget_after = $(ttarget).parentNode.nextSibling;			
 				Element.hide(ttarget_after);
-				Effect.Appear(ttarget_after,{delay: 0, duration: 0.5});
+				Effect.Appear(ttarget_after,{delay: 0, duration: 0.3});		
 			} else {
 	  			throw new Errors(_req.statusText);
 			}
 		}
 	} catch (e) {
-		_applyError(e);
+		_applyError(e, alertOnMissingHelpFiles);
 	}
 }
 

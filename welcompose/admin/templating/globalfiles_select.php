@@ -110,6 +110,19 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 	
+ 	// build session
+    $session = array(
+		'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+    );
+
+    // assign prepared session array to smarty
+    $BASE->utility->smarty->assign('session', $session);
+
+    // empty $_SESSION
+    if (!empty($_SESSION['response'])) {
+        $_SESSION['response'] = '';
+    }
+	
 	// select available projects
 	$select_params = array(
 		'user' => WCOM_CURRENT_USER,

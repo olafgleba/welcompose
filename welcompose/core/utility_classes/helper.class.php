@@ -722,6 +722,40 @@ public function datesForTimeframe ($timeframe)
 
 
 /**
+ * Creates sql fragment for given current date (now()). Takes the name of the
+ * date field as first argument, the value of the parameter as second
+ * argument. Returns string.
+ * 
+ * @throws Utility_HelperException
+ * @param string Date field name
+ * @param string Current Date value
+ * @return string Sql fragment
+ */
+public function _sqlForCurrentDate ($field, $current_date)
+{
+	// input check
+	if (empty($field) || !is_scalar($field)) {
+		throw new Utility_HelperException("Input for parameter field is expected to be a non-empty string");
+	}
+	if (empty($current_date) || !is_scalar($current_date)) {
+		throw new Utility_HelperException("Input for parameter current_date is expected to be a non-empty string");
+	}
+		
+	switch ((string)$current_date) {
+		case 'FORWARD':			
+			// compose and return sql fragment
+			return sprintf("%s > NOW() ", $field);
+		case 'BACKWARD':
+			// compose and return sql fragment
+			return sprintf("%s < NOW() ", $field);
+		default:
+			throw new Utility_HelperException("Unknown current_date supplied");
+	}
+	
+}
+
+
+/**
  * Creates sql fragment to search for given string
  * Take the table field name as first argument and
  * the search string as second. Returns sql fragment string.

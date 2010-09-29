@@ -1,6 +1,6 @@
 <form action="" method="post" id="mediamanager">
 <fieldset>
-<h2>{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a><input type="text" id="hiddenFocus" value="" /></span></h2>
+<h2>{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2><input type="text" id="hiddenFocus" value="" />
 
 <!-- help -->
 <div id="lyMediamanager"></div>
@@ -20,7 +20,7 @@
 <!-- element (include_types) wrap -->
 <div class="mmwrap">
 <span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_include_types_wrap">
+<span id="mm_include_types_wrap" style="display:none;">
 <label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_img} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
 <label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_doc} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
 <label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_audio} checked="checked"{/if} /><span class="cbxspread">{i18n Audio}</span></label>
@@ -44,7 +44,7 @@
 <!-- element (current tags) wrap -->
 <div class="mmwrap">
 <span class="mm_current_tags"><span class="bez">{i18n Current tags}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_current_tags_wrap">
+<span id="mm_current_tags_wrap" style="display:none;">
 <ul>
 {foreach from=$current_tags item=_current_tags}
 <li>{$_current_tags.word_url|truncate:60:"...":true|escape:"html"|nl2br}</li>
@@ -58,7 +58,7 @@
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
 <label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_timeframe_wrap">
+<span id="mm_timeframe_wrap"  style="display:none;">
 <select id="mm_timeframe" name="mm_timeframe">
 <option value="">{i18n Please choose...}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
@@ -80,7 +80,7 @@
 <tr>
 <td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"html"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
 </td>
-<td class="td_mm_meta">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"html"|nl2br}</td>
+<td class="td_mm_meta"><span style="cursor:help" title="{i18n Filename}: {$_object.file_name|escape:"html"|nl2br}">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"html"|nl2br}</span></td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}
 <td class="td_mm_casts">{if $request.mm_pagetype == 'WCOM_BLOG' && $podcastable}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}
 </td>
@@ -89,7 +89,7 @@
 </tr>
 {/foreach}
 </table>
-<span id="indicator_local"><img src="../static/img/indicator.gif" alt="" /></span>
+<span id="indicator_local" style="display:none;"><img src="../static/img/indicator.gif" alt="" /></span>
 </div>
 <!-- mediamanager content populate eof -->
 </div>
@@ -119,7 +119,7 @@
 
 
 <!-- mediamanager container (myFlickr) -->
-<div id="lyMediamanagerMyFlickr">
+<div id="lyMediamanagerMyFlickr" style="display:none;">
 	
 <!-- mediamanager navigation (active: mm_myFlickr) -->
 <ul class="mmnav">
@@ -164,7 +164,7 @@
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
 <label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
-<span id="mm_flickrtags_wrap">
+<span id="mm_flickrtags_wrap" style="display:none;">
 <input class="w200" type="text" id="mm_flickrtags" value="{if !empty($request.mm_flickrtags)}{$request.mm_flickrtags|escape:"html"}{/if}" />
 </span>
 </label>
@@ -201,7 +201,7 @@
 {else}
 {$error}
 {/if}
-<span id="indicator_flickr"><img src="../static/img/indicator.gif" alt="" /></span>
+<span id="indicator_flickr" style="display:none;"><img src="../static/img/indicator.gif" alt="" /></span>
 </div>
 <!-- mediamanager content populate eof -->
 
@@ -215,7 +215,7 @@
 {if $_item.page == 1 && $_item.self != $request.mm_start}
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}<span id="pager_page_container">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container" style="display:none;">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
 <a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>

@@ -414,10 +414,11 @@ public function moveGlobalFileToStore ($name, $path)
 	}
 	
 	// get unique id
-	$uniqid = Base_Cnc::uniqueId();
+	//$uniqid = Base_Cnc::uniqueId();
 	
 	// prepare file name
-	$file_name = $uniqid.'_'.$name;
+	//$file_name = $uniqid.'_'.$name;
+	$file_name = $name;
 	
 	// prepare target path
 	$target_path = $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$file_name;
@@ -463,6 +464,8 @@ public function removeGlobalFileFromStore ($global_file)
 	
 	// prepare path to file on disk
 	$path = $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$file['name_on_disk'];
+	
+	//$path = $this->getPathToGlobalFile($file);
 	
 	// unlink global file
 	if (file_exists($path)) {
@@ -627,7 +630,122 @@ public function globalFileBelongsToCurrentUser ($global_file)
  * @param int Global file id
  * @return bool
  */
-public function testForUniqueName ($name, $id = null)
+// public function testForUniqueName ($name, $id = null)
+// {
+// 	// access check
+// 	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
+// 		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+// 	}
+// 	
+// 	// input check
+// 	if (empty($name)) {
+// 		throw new Templating_GlobalFileException("Input for parameter name is not expected to be empty");
+// 	}
+// 	if (!is_scalar($name)) {
+// 		throw new Templating_GlobalFileException("Input for parameter name is expected to be scalar");
+// 	}
+// 	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+// 		throw new Templating_GlobalFileException("Input for parameter id is expected to be numeric");
+// 	}
+// 	
+// 	// prepare query
+// 	$sql = "
+// 		SELECT 
+// 			COUNT(*) AS `total`
+// 		FROM
+// 			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
+// 		WHERE
+// 			`project` = :project
+// 		  AND
+// 			`name` = :name
+// 	";
+// 	
+// 	// prepare bind params
+// 	$bind_params = array(
+// 		'project' => WCOM_CURRENT_PROJECT,
+// 		'name' => $name
+// 	);
+// 	
+// 	// if id isn't empty, add id check
+// 	if (!empty($id) && is_numeric($id)) {
+// 		$sql .= " AND `id` != :id ";
+// 		$bind_params['id'] = (int)$id;
+// 	} 
+// 	
+// 	// execute query and evaluate result
+// 	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+// 		return false;
+// 	} else {
+// 		return true;
+// 	}
+// }
+
+/**
+ * Tests given global file for uniqueness. Takes the global file name as first argument
+ * and the id as second argument as an option.
+ * 
+ * The second argument is used to compare if the uploaded global file name equals the
+ * former global file name that is already on disk. When the global file name is identical,
+ * we allow to replace this file.
+ *   
+ * Returns boolean true if global file name is unique.
+ *
+ * @throws Templating_GlobalFileException
+ * @param string file name
+ * @param integer Id of current file
+ * @param string action What condition may occur
+ * @return bool
+ */
+public function testForUniqueFilename ($file_name, $id = null, $action)
+{
+	// access check
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
+		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+	}	
+	// input check
+	if (empty($file_name)) {
+		throw new Templating_GlobalFileException("Input for parameter file_name is not expected to be empty");
+	}
+	if (!is_null($id) && !is_scalar($id)) {
+		throw new Templating_GlobalFileException("Input for parameter id is expected to be scalar");
+	}
+	if (empty($action) && !is_string($action)) {
+		throw new Templating_GlobalFileException("Input for parameter action is not expected to be empty");
+	}
+	
+	if (!empty($id) && is_numeric($id)) {
+		// get object path
+		$object_path = $this->getPathToGlobalFileUsingId($id);
+	}
+	
+	// get file path on disk
+	$target_path = $this->getPathToGlobalFile($file_name);
+	
+	// evaluate result
+	if (file_exists($target_path)) {
+		if (!empty($object_path) && $object_path == $target_path) {
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		if (!empty($action) && $action == 'edit' || $action == 'upload') {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}
+
+/**
+ * Returns full path to global file object. Takes global file object name on disk
+ * as first argument. Please note that the object doesn't have to exist
+ * to get the path to a object.
+ *
+ * @param string Object name
+ * @return mixed
+ */
+public function getPathToGlobalFile ($object_name)
 {
 	// access check
 	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
@@ -635,47 +753,38 @@ public function testForUniqueName ($name, $id = null)
 	}
 	
 	// input check
-	if (empty($name)) {
-		throw new Templating_GlobalFileException("Input for parameter name is not expected to be empty");
-	}
-	if (!is_scalar($name)) {
-		throw new Templating_GlobalFileException("Input for parameter name is expected to be scalar");
-	}
-	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
-		throw new Templating_GlobalFileException("Input for parameter id is expected to be numeric");
+	if (empty($object_name) || !is_scalar($object_name)) {
+		throw new Templating_GlobalFileException("Object name is supposed to be a non-empty scalar value");
 	}
 	
-	// prepare query
-	$sql = "
-		SELECT 
-			COUNT(*) AS `total`
-		FROM
-			".WCOM_DB_TEMPLATING_GLOBAL_FILES." AS `templating_global_files`
-		WHERE
-			`project` = :project
-		  AND
-			`name` = :name
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'project' => WCOM_CURRENT_PROJECT,
-		'name' => $name
-	);
-	
-	// if id isn't empty, add id check
-	if (!empty($id) && is_numeric($id)) {
-		$sql .= " AND `id` != :id ";
-		$bind_params['id'] = (int)$id;
-	} 
-	
-	// execute query and evaluate result
-	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
-		return false;
-	} else {
-		return true;
-	}
+	return $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$object_name;
 }
+
+/**
+ * Takes global file object id as first argument. Returns full disk path to
+ * global file object.
+ *
+ * @param string Object id
+ * @return mixed
+ */
+public function getPathToGlobalFileUsingId ($object_id)
+{
+	// access check
+	if (!wcom_check_access('Templating', 'GlobalFile', 'Use')) {
+		throw new Templating_GlobalFileException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($object_id) || !is_scalar($object_id)) {
+		throw new Templating_GlobalFileException("Object id is supposed to be a non-empty numeric value");
+	}
+	
+	// get object
+	$object = $this->selectGlobalFile($object_id);
+	
+	return $this->base->_conf['global_file']['store_disk'].DIRECTORY_SEPARATOR.$object['name_on_disk'];
+}
+
 
 // end of class
 }

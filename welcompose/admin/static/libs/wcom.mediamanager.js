@@ -264,13 +264,8 @@ function Mediamanager_switchLayer (toShow, toHide)
 		this.toShow = $(toShow);
 		this.toHide = $(toHide);
 	
-		if (Helper.isBrowser('sa')) {
-			Element.hide(this.toHide);
-			Element.show(this.toShow);
-		} else {
-			Element.hide(this.toHide);
-			Effect.Appear(this.toShow,{duration: 0.4});
-		}		
+		Element.hide(this.toHide);
+		Effect.Appear(this.toShow,{duration: 0.4});
 	} catch (e) {
 		_applyError(e);
 	}
@@ -489,7 +484,7 @@ function Mediamanager_setCurrentElementStatusMyLocal ()
 		Mediamanager.checkOccurrences(collectElems, rows);
 				
 		// get all relevant spans
-		var parentElem = $('lyMediamanagerMyLocal').getElementsByClassName('bez');
+		var parentElem = $$('#lyMediamanagerMyLocal .bez');
 		
 		// corresponding DOM chang on class Names
 		if (previousElemsStatus[0] == 'block') {
@@ -927,7 +922,7 @@ function Mediamanager_showResponseInvokeTagInputs(req)
 function Mediamanager_loaderMyLocal ()
 {
 	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[0];
+		var hideContentTable = $$('.mm_content').first();
 		Element.hide(hideContentTable);
 		Element.show('indicator_local');
 	} catch (e) {
@@ -1100,6 +1095,7 @@ function Mediamanager_insertMediaCallbacks (elem)
 		_applyError(e);
 	}
 }
+
 
 /**
  * Collects the media manager form elements values as a hash
@@ -1394,8 +1390,8 @@ function Mediamanager_showResponseInvokeInputsMyFlickr(req)
 		Element.hide('lyMediamanagerMyLocal');
 		
 		// show option inputs
-		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
-		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		var mm_flickrtags = $$('.mm_flickrtags');
+		var mm_photoset = $$('.mm_photoset');
 		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
 		Element.setStyle(mm_photoset[0], {visibility: 'visible'});	
 		
@@ -1433,8 +1429,8 @@ function Mediamanager_showResponseInvokeTagsMyFlickr(req)
 		Element.hide('lyMediamanagerMyLocal');
 		
 		// show option inputs
-		var mm_flickrtags = document.getElementsByClassName('mm_flickrtags');
-		var mm_photoset = document.getElementsByClassName('mm_photoset');
+		var mm_flickrtags = $$('.mm_flickrtags');
+		var mm_photoset = $$('.mm_photoset');
 		Element.setStyle(mm_flickrtags[0], {visibility: 'visible'});
 		Element.setStyle(mm_photoset[0], {visibility: 'visible'});
 		
@@ -1468,7 +1464,7 @@ function Mediamanager_showResponseInvokeTagsMyFlickr(req)
 function Mediamanager_loaderMyFlickr ()
 {
 	try {
-		var hideContentTable = document.getElementsByClassName('mm_content')[1];
+		var hideContentTable = $$('.mm_content')[1];
 		Element.hide(hideContentTable);
 		Element.show('indicator_flickr');
 	} catch (e) {

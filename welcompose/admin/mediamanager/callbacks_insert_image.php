@@ -112,17 +112,33 @@ try {
 	// hidden field for pager_page
 	$FORM->addElement('hidden', 'form_target');
 	
-	// textfield for name
+	// textfield for image alt text
 	$FORM->addElement('text', 'alt', gettext('Alternative text'), 
 		array('id' => 'alt', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('alt', 'trim');
 	$FORM->applyFilter('alt', 'strip_tags');
 	
-	// textfield for name
+	// textfield for image title
 	$FORM->addElement('text', 'title', gettext('Title'), 
 		array('id' => 'title', 'maxlength' => 255, 'class' => 'w300'));
 	$FORM->applyFilter('title', 'trim');
 	$FORM->applyFilter('title', 'strip_tags');
+	
+	// checkbox to insert image as reference only
+	$FORM->addElement('checkbox', 'set_dimensions', gettext('Set dimensions?'), null,
+		array('id' => 'set_dimensions', 'class' => 'chbx'));
+	$FORM->applyFilter('set_dimensions', 'trim');
+	$FORM->applyFilter('set_dimensions', 'strip_tags');
+	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	
+	// checkbox to insert image as reference only
+	$FORM->addElement('checkbox', 'insert_as_reference', gettext('Insert as reference'), null,
+		array('id' => 'insert_as_reference', 'class' => 'chbx'));
+	$FORM->applyFilter('insert_as_reference', 'trim');
+	$FORM->applyFilter('insert_as_reference', 'strip_tags');
+	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Insert object'),
@@ -130,11 +146,12 @@ try {
 
 	// reset button
 	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'close200'));
+		array('class' => 'close140'));
 		
 	// set defaults
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
+		'set_dimensions' => 1,
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
@@ -190,23 +207,40 @@ try {
 	
 		// assign form target
 		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
-			
+
 		// get object
-		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
-	
-		// prepare callback args
-		$args = array(
-			'text' => $FORM->exportValue('text'),
-			'src' => sprintf('{get_media id="%u"}', $object['id']),
-			'width' => $object['file_width'],
-			'height' => $object['file_height'],
-			'alt' => $FORM->exportValue('alt'),
-			'title' => $FORM->exportValue('title')
-		);
+		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));			
+		
+		// get text converter	
+		$text_converter = (int)$FORM->exportValue('text_converter');
+
+		// insert media as reference or full html
+		if ((int)($FORM->exportValue('insert_as_reference')) > 0) {			
+			// define insert_type
+			$insert_type = 'InternalReference';
+			
+			// prepare callback args
+			$args = array(
+				'text' => '',
+				'href' => sprintf('{get_media id="%u"}', $object['id'])
+			);		
+		} else {			
+			// define insert_type
+			$insert_type = 'Image';
+			
+			// prepare callback args
+			$args = array(
+				'text' => $FORM->exportValue('text'),
+				'src' => sprintf('{get_media id="%u"}', $object['id']),
+				'width' => ($FORM->exportValue('set_dimensions') == 1) ? $object['file_width'] : '',
+				'height' => ($FORM->exportValue('set_dimensions') == 1) ? $object['file_height'] : '',
+				'alt' => $FORM->exportValue('alt'),
+				'title' => $FORM->exportValue('title')
+			);
+		}
 	
 		// execute text converter callback
-		$text_converter = (int)$FORM->exportValue('text_converter');
-		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, 'Image', $args);	
+		$callback_media_result = $TEXTCONVERTER->insertCallback($text_converter, $insert_type, $args);
 		
 		// assign callback build
 		$BASE->utility->smarty->assign('callback_media_result', $callback_media_result);
