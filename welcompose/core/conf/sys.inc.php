@@ -13,12 +13,12 @@ debug = true
 app_key = "!@R;&x.{Su}d&VcU#j5I\:)mU.2?!_."
 
 [locales]
-all = "de_DE"
+all = "de_DE.UTF-8"
 numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcom-iso2utf"
+dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcom-current"
 username = "root"
 password = 
 table_alias_constants = true
@@ -38,6 +38,9 @@ chmod =
 [caching]
 index.php_mode = 0
 index.php_lifetime = 0
+
+[output]
+gunzip = 0
 
 [plugins]
 textconverter_dir = "/www/welcompose/trunk/welcompose/core/plugins/textconverters"
@@ -76,8 +79,8 @@ blog_archive_month_start = "/index.php?project_name=<project_name>&amp;action=Ar
 blog_archive_month_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-global_template_url = "/global_template.php?name=<global_file_name>&amp;project=<project_name>"
-global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+global_template_url = "/global_template.php?name=<global_file_name>&amp;project_name=<project_name>"
+global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project_name=<project_name>&amp;start=<start>"
 simple_date_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_date_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 simple_date_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"

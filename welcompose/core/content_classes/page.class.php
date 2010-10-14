@@ -1130,7 +1130,7 @@ public function resolvePage ()
 			throw new Content_PageException("Requested page could not be found");
 		}
 	} else {
-		// get index get
+		// get index page
 		$page = $this->selectIndexPage();
 		
 		// if there's an index page, return it's id. if not, throw an

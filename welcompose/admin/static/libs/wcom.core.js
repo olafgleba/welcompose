@@ -270,7 +270,7 @@ function Base ()
 		/**
 		 * Comprehensive popup height application wide
 		 */
-		this.callbacksPopupWindowHeight634 = '774';
+		this.callbacksPopupWindowHeight664 = '664';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.
@@ -779,7 +779,7 @@ function Init_getToogleElemSingle ()
 	try {
 		if (navigator.cookieEnabled == true && document.cookie) {
 			
-			var table = document.getElementById('allboxes');
+			var table = $('allboxes');
 				
 			if (Init.getCookie(table.id)) {
 				table.style.display = Init.getCookie(table.id);
@@ -1583,6 +1583,7 @@ function Tables_showTableRow (elem)
 		
 		// process outer table tr
 		$(this.obid).style.visibility = 'visible';
+		$(this.obid).style.display = 'table-row';
 		
 		// process inner div
 		Element.hide(this.ibid);
@@ -1619,7 +1620,7 @@ function Tables_hideTableRow (elem)
 		Effect.Fade(this.ibid,{duration: 0.6});
 			
 		// process outer table tr
-		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 550);
+		setTimeout("Tables.collapseTableRow('"+ this.obid +"')", 500);
 		
 		// coloring top row
 		this.elem.parentNode.parentNode.style.color = '';
@@ -1650,6 +1651,7 @@ function Tables_hideTableRow (elem)
 		} else {
 			// process outer table tr
 			$(this.elem).style.visibility = 'collapse';
+			$(this.elem).style.display = 'none';
 		}
 	} catch (e) {
 		_applyError(e);

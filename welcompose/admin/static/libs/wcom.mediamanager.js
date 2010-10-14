@@ -977,7 +977,7 @@ function Mediamanager_processMediaCallbacks (elem)
 		this.elName = this.elem.name;
 		this.popup = false;
 		this.targetWidth = this.callbacksPopupWindowWidth745;
-		this.targetHeight = this.callbacksPopupWindowHeight634;
+		this.targetHeight = this.callbacksPopupWindowHeight664;
 		this.targetName = 'mm_' + this.elName;
 		
 		/*

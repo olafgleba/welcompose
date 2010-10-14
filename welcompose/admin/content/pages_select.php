@@ -80,6 +80,10 @@ try {
 	// load page class
 	/* @var $PAGE Content_Page */
 	$PAGE = load('content:page');
+	
+	// load box class
+	/* @var $BOX Content_Box */
+	$BOX = load('content:box');
 
 	// load navigation class
 	/* @var $NAVIGATION Content_Navigation */
@@ -135,6 +139,18 @@ try {
 		$page_arrays[$_navigation['id']] = $PAGE->selectPages($select_params);
 	}
 	$BASE->utility->smarty->assign('page_arrays', $page_arrays);
+	
+	// get page boxes
+	$box_arrays = array();
+	foreach ($page_arrays as $_outer_page) {
+		foreach ($_outer_page as $_page) {
+			$select_box_params = array(
+				'page' => (int)$_page['id']
+			);
+			$box_arrays[$_page['id']] = $BOX->selectBoxes($select_box_params);
+		}
+	}
+	$BASE->utility->smarty->assign('box_arrays', $box_arrays);
 	
 	// do we have to display warning because of existing install files?
 	$package_file = Base_Compat::fixDirectorySeparator(dirname(__FILE__).'/../../installer.php');

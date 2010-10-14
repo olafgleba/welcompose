@@ -116,6 +116,8 @@ Helper.prototype.loaderRunAction = Helper_loaderRunAction;
 Helper.prototype.showResponseRunAction = Helper_showResponseRunAction;
 Helper.prototype.selAllCheckboxes = Helper_selAllCheckboxes;
 Helper.prototype.deselAllCheckboxes = Helper_deselAllCheckboxes;
+Helper.prototype.goToPageBox = Helper_goToPageBox;
+
 
 
 /**
@@ -159,7 +161,7 @@ function Helper_launchPopup (trigger, elem)
 		this.targetUrl = this.url;
 		this.targetName = this.trigger;
 		this.targetWidth = this.callbacksPopupWindowWidth745;
-		this.targetHeight = this.callbacksPopupWindowHeight634;
+		this.targetHeight = this.callbacksPopupWindowHeight664;
 		this.target = window.open(this.targetUrl, this.targetName, 
 				"scrollbars=yes,width="+this.targetWidth+",height="+this.targetHeight+"");
 		this.resWidth = Helper.defineWindowX(this.targetWidth);
@@ -1050,7 +1052,7 @@ function Helper_processCallbacks (elem)
 		this.elName = this.elem.name;
 		this.elTarget = Helper.getAttrNextSibling('id', this.elem, 1);
 		
-		this.targetHeight = this.callbacksPopupWindowHeight634;
+		this.targetHeight = this.callbacksPopupWindowHeight664;
 		this.targetName = this.elTarget;
 		
 		Helper.lowerOpacity();
@@ -1994,7 +1996,7 @@ function Helper_showResponseAdoptBox(req)
 		if(res){
 			Element.replace(res, req.responseText);
 		} else {
-			new Insertion.Bottom(el, req.responseText);
+			Element.insert(el, {'bottom': req.responseText});
 		}
 		setTimeout("Effect.Fade('indicator_adopt', {duration: 0.4})", 300);
 	} catch (e) {
@@ -2079,24 +2081,22 @@ function Helper_loaderRunAction ()
  */
 function Helper_showResponseRunAction(req)
 {	
-		var r = req.responseText.match(/\berror\b/gi);		
+	var r = req.responseText.match(/\berror\b/gi);		
+	
+	if (r) {
+		Element.hide(e + '_indicator');
+		Element.insert(targetError, {'top': req.responseText});
+	} else {
+		setTimeout("Effect.Fade('" + e + "_indicator', {duration: 0.2})", 200);
+		setTimeout("Element.insert(target, {'top':'<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />'})", 700);
+		new Effect.Highlight(targetRow, {startcolor: '#DCEBF7',
+		endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
 		
-		if (r) {
-			Element.hide(e + '_indicator');
-			Element.insert(targetError, {'top': req.responseText});
-		} else {
-			setTimeout("Effect.Fade('" + e + "_indicator', {duration: 0.2})", 200);
-			setTimeout("Element.insert(target, {'top':'<img id=\"' + e + '_succeed\" src=\"../static/img/icons/success.gif\" alt=\"\" />'})", 700);
-			new Effect.Highlight(targetRow, {startcolor: '#DCEBF7',
-			endcolor: '#FFFFFF', duration: 1.6, delay: 0.7});
-			
-			// apply default
-			$('apply_page').checked = false;
-			var target = $$('.target_toggleView').first();
-			new Effect.Fade(target,{delay: 0, duration: 0.4});
-		}
-		
-
+		// apply default
+		$('apply_page').checked = false;
+		var target = $$('.target_toggleView').first();
+		new Effect.Fade(target,{delay: 0, duration: 0.4});
+	}
 }
 
 
@@ -2148,6 +2148,32 @@ function Helper_deselAllCheckboxes(elem)
 	} catch (e) {
 		_applyError(e);
 	}	
+}
+
+/**
+ * Goto page related box on select
+ * <br/>
+ * Get the form select id and option values
+ * and go to the choosen page box edit url
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_goToPageBox (elem)
+{	
+	try {
+		// get box and page value
+		var box_id = elem.options[elem.selectedIndex].value;
+		var page_id = elem.id;	
+
+		// properties
+		var url = '../content/pages_boxes_edit.php' + '?';
+		var pars = 'page=' + page_id + '&id=' + box_id;
+
+		window.location.href = url + pars;
+	} catch (e) {
+		_applyError(e);
+	}
 }
 
 /**

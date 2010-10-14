@@ -87,7 +87,7 @@ try {
 	if (!$PAGE->checkAccess($page['id'], $page['protect'])) {
 		$action = 'Login';
 	}
-	
+
 	// call the display class
 	$display_class = "Display:".$page['page_type_internal_name'].$action;
 	$DISPLAY = load($display_class, array($project, $page));
@@ -103,9 +103,14 @@ try {
 	$BASE->utility->smarty->caching = $DISPLAY->getMainTemplateCacheMode();
 	$BASE->utility->smarty->cache_lifetime = $DISPLAY->getMainTemplateCacheLifeTime();
 	
-	// get the tempalte name from the current display class and
+	// get the template name from the current display class and
 	// register the WCOM_TEMPLATE constant
 	define("WCOM_TEMPLATE", $DISPLAY->getMainTemplateName());
+	
+	// start gunzip compression
+	if ($BASE->_conf['output']['gunzip'] == 1) {
+		ob_start("ob_gzhandler");
+	}
 	
 	// display page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));

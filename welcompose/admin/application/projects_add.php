@@ -69,6 +69,10 @@ try {
 	/* @var $USER User_User */
 	$USER = load('user:user');
 	
+	// load user class
+	/* @var $USER User_User */
+	$GROUP = load('user:group');
+	
 	// load login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
@@ -169,7 +173,7 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// create the article group
+		// create the project
 		$sqlData = array();
 		$sqlData['owner'] = WCOM_CURRENT_USER;
 		$sqlData['name'] = $FORM->exportValue('name');
@@ -192,6 +196,34 @@ try {
 			
 			// init project from skeleton
 			$PROJECT->initFromSkeleton($project_id);
+
+		
+		
+		$select_params = array(
+			'email' => 'olaf@wcom.de'
+		);
+		$users = $USER->selectUsers($select_params);
+		
+		//print $users[0]['id'];
+		
+		$select_params = array(
+			'user' => $users[0]['id']
+		);		
+		$user_group = $GROUP->selectGroups($select_params);
+		
+
+		
+		//print $user_group[0]['id'];
+		//exit;
+					
+			// map user to group
+			$USER->mapUserToTargetGroup($users[0]['id'], $project_id, $user_group[0]['id']);			
+						
+			// map user to project
+			$USER->mapUserToTargetProject($users[0]['id'], $project_id);
+			
+			
+			
 			
 			// commit
 			$BASE->db->commit();

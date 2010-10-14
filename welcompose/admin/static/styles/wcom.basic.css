@@ -239,13 +239,14 @@ visibility: hidden;
 /* For table slides */
 .outer {
 visibility: collapse;
+display: none;
 background-color: transparent;
 margin:0px!important;
 padding: 0px!important;
 }
 .inner {
 background: #d9d9d9 url(../img/bg_slides.gif);
-width: 102%;
+width: 102.3%;
 }
 .inner fieldset {
 width: auto;

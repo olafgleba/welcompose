@@ -256,6 +256,12 @@ var definitions = {
 			return false;
 		}
 	},
+	'.goToPageBox' : function(el){
+		el.onchange = function(){
+			Helper.goToPageBox(this);
+			return false;
+		}
+	},
 	'.hideTableRow' : function(el){
 		el.onclick = function(){
 			Tables.hideTableRow(this);
@@ -283,7 +289,6 @@ var definitions = {
 	'.toggleViewByChbx' : function(el){
 		el.onclick = function(){
 			Init.toggleViewByChbx(this, 'target_toggleView');
-			//return false;
 		}
 	},
 	'.submit90' : function(el){

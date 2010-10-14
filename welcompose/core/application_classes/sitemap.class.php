@@ -192,7 +192,6 @@ public function generateSitemap ($compress)
 	
 	// set proper system rights at least 
 	$CHMOD->chmodFileDefault($this->_default_output_file);
-	
 		
 	// we want a gunzip compressed file also
 	if ($compress > 0) {		

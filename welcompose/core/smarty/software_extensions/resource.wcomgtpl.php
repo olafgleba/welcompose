@@ -38,8 +38,13 @@ function wcomgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
+	// split template resource name into type name and page id.
+	$tpl_name_parts = explode('.', $tpl_name);
+	$template_name = trim($tpl_name_parts[0].".".$tpl_name_parts[1]);
+	$project_id = trim($tpl_name_parts[2]);
+	
 	// fetch global template from database
-	$template = (array)$GLOBALTEMPLATE->smartyFetchGlobalTemplate($tpl_name);
+	$template = (array)$GLOBALTEMPLATE->smartyFetchGlobalTemplate($template_name);
 
 	// if there's no template id, we can be sure that the global template wasn't found.
 	if (!array_key_exists('id', $template)) {
@@ -48,7 +53,7 @@ function wcomgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 
 	// set mime type constant
 	define("WCOM_GLOBAL_TEMPLATE_MIME_TYPE",
-		(!empty($content['mime_type']) ? $content['mime_type'] : 'text/plain'));
+		(!empty($template['mime_type']) ? $template['mime_type'] : 'text/plain'));
 	
 	// assign template source
 	$tpl_source = $template['content'];
@@ -72,8 +77,13 @@ function wcomgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
+	// split template resource name into type name and page id.
+	$tpl_name_parts = explode('.', $tpl_name);
+	$template_name = trim($tpl_name_parts[0].".".$tpl_name_parts[1]);
+	$project_id = trim($tpl_name_parts[2]);
+	
 	// fetch last modification date from database
-	$tpl_timestamp = $GLOBALTEMPLATE->smartyFetchGlobalTemplateTimestamp($tpl_name);
+	$tpl_timestamp = $GLOBALTEMPLATE->smartyFetchGlobalTemplateTimestamp($template_name);
 	
 	if (!empty($tpl_timestamp)) {
 		return true;

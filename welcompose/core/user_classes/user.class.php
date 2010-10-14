@@ -401,7 +401,11 @@ public function selectUsers ($params = array())
 	}
 	if (!empty($name) && is_scalar($name)) {
 		$sql .= " AND `user_users`.`name` = :name ";
-		$bind_params['name'] = (int)$name;
+		$bind_params['name'] = $name;
+	}
+	if (!empty($email) && is_scalar($email)) {
+		$sql .= " AND `user_users`.`email` = :email ";
+		$bind_params['email'] = $email;
 	}
 	if (!empty($author) && is_numeric($author)) {
 		$sql .= " AND `user_users`.`author` = :author ";
@@ -550,6 +554,82 @@ public function mapUserToGroup ($user, $group = null)
 	return true;
 }
 
+
+/**
+ * Maps user to one group. Takes user id as first argument, group id
+ * as second argument. Returns the id of the new link.
+ *
+ * If the second parameter is omitted, the user will be detached from
+ * all groups and the function returns boolean true.  
+ * 
+ * @throws User_UserException
+ * @param int User id
+ * @param int Group id
+ * @return int Link id 
+ */
+public function mapUserToTargetGroup ($user, $project, $group = null)
+{
+	// access check
+	if (!wcom_check_access('User', 'User', 'Manage')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException("Input for parameter user is expected to be numeric");
+	}
+	if (!empty($group) && !is_numeric($group)) {
+		throw new User_UserException("Input for parameter group is expected to bei either null or numeric");
+	}
+	
+	// // delete user<->group mappings if necessary
+	// $sql = "
+	// 	DELETE `user_users2user_groups` FROM
+	// 		 ".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+	// 	JOIN
+	// 		".WCOM_DB_USER_GROUPS." AS `user_groups`
+	// 	ON
+	// 		`user_users2user_groups`.`group` = `user_groups`.`id`
+	// 	WHERE
+	// 		`user_users2user_groups`.`user` = :user
+	// 	AND
+	// 		`user_groups`.`project` = :project
+	// ";
+	// 
+	// // prepare bind params
+	// $bind_params = array(
+	// 	'user' => (int)$user,
+	// 	'project' => (int)$project
+	// );
+	// 
+	// // execute query
+	// $this->base->db->execute($sql, $bind_params);
+	
+	// if group is not empty, add new link
+	if (!empty($group) && is_numeric($group)) {	
+		// load group class
+		$GROUP = load('user:group');
+		
+		// test if group belongs to current user
+		// if (!$GROUP->groupBelongsToCurrentUser($group)) {
+		// 	throw new User_UserException('Group does not belong to current project');
+		// }
+		
+		// prepare sql data
+		$sqlData = array(
+			'user' => (int)$user,
+			'group' => (int)$group
+		);
+	
+		// create new mapping
+		return $this->base->db->insert(WCOM_DB_USER_USERS2USER_GROUPS, $sqlData);
+	}
+	
+	return true;
+}
+
+
+
 /**
  * Maps user to the current project. Takes user id as first argument, activity and
  * author switch as second and third argument. Returns link id. To detach a user from
@@ -586,6 +666,47 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 	// create new mapping
 	return $this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 }
+
+
+
+/**
+ * Maps user to the current project. Takes user id as first argument, activity and
+ * author switch as second and third argument. Returns link id. To detach a user from
+ * a project, see User_User::detachUserFromProject().
+ * 
+ * @throws User_UserException
+ * @param int User id
+ * @param int Group id
+ * @return int Link id
+ */
+public function mapUserToTargetProject ($user, $project, $active = 1, $author = 1)
+{
+	// access check
+	if (!wcom_check_access('User', 'User', 'Manage')) {
+		throw new User_UserException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($user) || !is_numeric($user)) {
+		throw new User_UserException("Input for parameter user is expected to be numeric");
+	}
+	
+	// detach user from project
+	//$this->detachUserFromProject($user);
+	
+	// prepare sql data
+	$sqlData = array(
+		'user' => (int)$user,
+		'project' => (int)$project,
+		'active' => (((int)$active === 1) ? "1" : "0"),
+		'author' => (((int)$author === 1) ? "1" : "0")
+	);
+	
+	// create new mapping
+	return $this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
+}
+
+
 
 /**
  * Detaches user from current project. Takes user id as

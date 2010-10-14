@@ -432,7 +432,7 @@ public function generateExternalLink ($args = array())
 	$http_host = Base_Cnc::filterRequest($_SERVER['HTTP_HOST'], WCOM_REGEX_SERVER_HTTP_HOST);	
 
 	// get the delivered host from the server globals and
-	// prepend it to the system_url validate server response
+	// prepend it to the system_url validated server response
 	$system_url = preg_replace('=(^\/)=', 'http://'.$http_host.'${1}', $system_url);
 	
 	// get url form Net_URL object

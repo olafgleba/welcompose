@@ -711,6 +711,50 @@ start=$_item.self}">{$_item.page}</a></li>
 {$form_data.email}
 
 ]]></programlisting>
+
+
+			<sect3 id="usage.generated_forms.fieldtypes">
+				<title>Folgende Feldtypen stehen zur Auswahl</title>
+				
+				<table frame="none" id="usage.generated_forms.fieldtypes.list_of_field_types">
+					<title>Liste der Feldtypen</title>
+					<tgroup cols="4">
+						<thead>
+							<row>
+								<entry>
+									Feld-Typ Name
+								</entry>
+								<entry>
+									Beschreibung
+								</entry>
+								<entry>
+									Seiten-Typ
+								</entry>
+								<entry>
+									URL-Action
+								</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry>
+									blog_archive_month
+								</entry>
+								<entry>
+									Monatsarchiv einer Blog-Seite
+								</entry>
+								<entry>
+									WCOM_BLOG
+								</entry>
+								<entry>
+									ArchiveMonth
+								</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table>
+			</sect3>
+				
 		
 			<sect3 id="usage.generated_forms.fieldtyp.default">
 				<title>Standardsyntax eines Formularfeldes</title>

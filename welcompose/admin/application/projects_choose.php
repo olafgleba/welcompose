@@ -86,7 +86,7 @@ try {
 	$PROJECT->initProjectAdmin(WCOM_CURRENT_USER);
 	
 	// check access
-	if (!wcom_check_access('Application', 'Project', 'Manage')) {
+	if (!wcom_check_access('Application', 'Project', 'Use')) {
 		throw new Exception("Access denied");
 	}
 	

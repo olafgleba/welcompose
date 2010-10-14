@@ -64,8 +64,8 @@ try {
 	// load Templating_GlobalTemplate
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
-	// get global template from database because we need to change the mime type
-	// and maybe the delimiter
+	// get global template from database because we need to 
+	// change the header mime type and maybe the delimiter
 	$template = $GLOBALTEMPLATE->smartyFetchGlobalTemplate(Base_Cnc::ifsetor($_REQUEST['name'], null));
 	
 	// set mime type
@@ -76,9 +76,14 @@ try {
 		$BASE->utility->smarty->left_delimiter = '<%';
 		$BASE->utility->smarty->right_delimiter = '%>';
 	}
-	
+
 	// preparge the template name
-	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)));
+	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)).".".WCOM_CURRENT_PROJECT);
+	
+	// start gunzip compression
+	if ($BASE->_conf['output']['gunzip'] == 1) {
+		ob_start("ob_gzhandler");
+	}
 	
 	// display page
 	define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
