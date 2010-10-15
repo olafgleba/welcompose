@@ -573,6 +573,49 @@ public function selectBlogTags ($params = array())
 }
 
 /**
+ * Select tag by word_url
+ * 
+ * Takes tag word_url as first argument. Returns tag
+ * information.
+ * 
+ * @throws Content_BlogTagException
+ * @param string Tag word url
+ * @return array
+ */
+public function selectBlogTagByWordUrl ($word_url)
+{
+	// input check
+	if (empty($word_url) || !is_string($word_url)) {
+		throw new Content_BlogTagException('Input for parameter word_url is not a string');	
+	}
+	
+	// compose query
+	$sql = "
+		SELECT
+			`content_blog_tags`.`id` AS `id`,
+			`content_blog_tags`.`page` AS `page`,
+			`content_blog_tags`.`first_char` AS `first_char`,
+			`content_blog_tags`.`word` AS `word`,
+			`content_blog_tags`.`word_url` AS `word_url`,
+			`content_blog_tags`.`occurrences` AS `occurrences`
+		FROM
+			".WCOM_DB_CONTENT_BLOG_TAGS." AS `content_blog_tags`
+		WHERE
+			`content_blog_tags`.`word_url` = :word_url
+		LIMIT
+			1
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'word_url' => (string)$word_url
+	);
+	
+	// execute query and return result
+	return $this->base->db->select($sql, 'row', $bind_params);
+}
+
+/**
  * Function to look up if the tag is already in the database. Takes
  * the page id as first argument, the tag word (some scalar value) as
  * second argument. Returns the tag id in the database (int) or, if
