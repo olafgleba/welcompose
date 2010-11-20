@@ -334,6 +334,101 @@ public function selectRights ($params = array())
 }
 
 /**
+ * Method to select one or more user rights. Takes key=>value array
+ * with select params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>group, int, optional: Group id</li>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws User_RightException
+ * @param array Select params
+ * @return array
+ */
+public function selectTargetRights ($params = array())
+{
+	// access check
+	if (!wcom_check_access('User', 'Right', 'Use')) {
+		throw new User_RightException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$project = null;
+	$group = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new User_RightException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'group':
+			case 'project':
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new User_RightException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			`user_rights`.`id` AS `id`,
+			`user_rights`.`project` AS `project`,
+			`user_rights`.`name` AS `name`,
+			`user_rights`.`description` AS `description`,
+			`user_rights`.`editable` AS `editable`
+		FROM
+			".WCOM_DB_USER_RIGHTS." AS `user_rights`
+		LEFT JOIN
+			".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		  ON
+			`user_rights`.`id` = `user_groups2user_rights`.`right`
+		WHERE 
+			`user_rights`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// add where clauses
+	if (!empty($group)) {
+		$sql .= " AND `user_groups2user_rights`.`group` = :group ";
+		$bind_params['group'] = $group;
+	}
+	
+	// add result set aggregation
+	$sql .= " GROUP BY `user_rights`.`id` ";
+	
+	// add sorting
+	$sql .= " ORDER BY `user_rights`.`name` ";
+	
+	// add limits
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
+	}
+	
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
  * Method to count user rights. Takes key=>value array
  * with counting params as first argument. Returns array.
  * 

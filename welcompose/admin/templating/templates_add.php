@@ -210,9 +210,6 @@ try {
 		);
 		$BASE->utility->smarty->assign('projects', $PROJECT->selectProjects($select_params));
 		
-		//print_r ($FORM->exportValue('sets'));
-		//print_r ($_REQUEST['sets']);
-		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
 		$BASE->utility->smarty->display('templating/templates_add.html', WCOM_TEMPLATE_KEY);

@@ -77,7 +77,7 @@ try {
 		$BASE->utility->smarty->right_delimiter = '%>';
 	}
 
-	// preparge the template name
+	// prepare the template name
 	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)).".".WCOM_CURRENT_PROJECT);
 	
 	// start gunzip compression

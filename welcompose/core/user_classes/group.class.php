@@ -110,6 +110,32 @@ public function addGroup ($sqlData)
 }
 
 /**
+ * Adds group to the group table. Takes a field=>value array
+ * with the group data as first argument. Returns insert id.
+ * 
+ * @throws User_GroupException
+ * @param array Row data
+ * @return int Group id
+ */
+public function addTargetGroup ($sqlData)
+{
+	// access check
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (!is_array($sqlData)) {
+		throw new User_GroupException('Input for parameter sqlData is not an array');	
+	}
+	
+	// insert row
+	$insert_id = $this->base->db->insert(WCOM_DB_USER_GROUPS, $sqlData);
+	
+	return $insert_id;
+}
+
+/**
  * Updates group. Takes the group id as first argument, a field=>value
  * array with the new row data as second argument. Returns amount of
  * affected rows.
@@ -176,6 +202,11 @@ public function deleteGroup ($id)
 	// test if group belongs to current project/user
 	if (!$this->groupBelongsToCurrentUser($id)) {
 		throw new User_GroupException('Group does not belong to current user or project');
+	}
+	
+	// test if group is currently assigned to a user
+	if ($this->groupBelongsToSomeUser($id)) {
+		throw new User_GroupException('You cannot delete a group that is currently assigned to a user');
 	}
 	
 	// prepare where clause
@@ -356,6 +387,80 @@ public function selectGroups ($params = array())
 }
 
 /**
+ * Method to select one or more user groups. Takes key=>value array
+ * with select params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>name, string, optional: name of user group</li>
+ * </ul>
+ * 
+ * @throws User_GroupException
+ * @param array Select params
+ * @return array
+ */
+// public function selectProjectGroups ($params = array())
+// {
+// 	// access check
+// 	if (!wcom_check_access('User', 'Group', 'Use')) {
+// 		throw new User_GroupException("You are not allowed to perform this action");
+// 	}
+// 	
+// 	// define some vars
+// 	$name = null;
+// 	$bind_params = array();
+// 	
+// 	// input check
+// 	if (!is_array($params)) {
+// 		throw new User_GroupException('Input for parameter params is not an array');	
+// 	}
+// 	
+// 	// import params
+// 	foreach ($params as $_key => $_value) {
+// 		switch ((string)$_key) {
+// 			case 'name':
+// 					$$_key = (int)$_value;
+// 				break;
+// 			case 'project':
+// 					$$_key = (int)$_value;
+// 				break;
+// 			default:
+// 				throw new User_GroupException("Unknown parameter $_key");
+// 		}
+// 	}
+// 	
+// 	// prepare query
+// 	$sql = "
+// 		SELECT 
+// 			`user_groups`.`id` AS `id`,
+// 			`user_groups`.`project` AS `project`,
+// 			`user_groups`.`name` AS `name`,
+// 			`user_groups`.`description` AS `description`,
+// 			`user_groups`.`editable` AS `editable`,
+// 			`user_groups`.`date_modified` AS `date_modified`,
+// 			`user_groups`.`date_added` AS `date_added`
+// 		FROM
+// 			".WCOM_DB_USER_GROUPS." AS `user_groups`
+// 		WHERE 
+// 			`user_groups`.`project` = :project
+// 	";
+// 	
+// 	// prepare bind params
+// 	$bind_params = array(
+// 		'project' => (int)$project
+// 	);
+// 	
+// 	// add where clauses
+// 	if (!empty($name)) {
+// 		$sql .= " AND `user_groups`.`name` = :name ";
+// 		$bind_params['name'] = (int)$name;
+// 	}
+// 	
+// 	return $this->base->db->select($sql, 'multi', $bind_params);
+// }
+
+/**
  * Maps groups to one or more rights. Takes group id as first argument,
  * a list of right ids as second argument. Returns boolean true.
  *
@@ -378,10 +483,6 @@ public function mapGroupToRights ($group, $rights = array())
 	if (empty($group) || !is_numeric($group)) {
 		throw new User_GroupException("Input for parameter group is expected to be numeric");
 	}
-	if (empty($group) || !is_numeric($group)) {
-		throw new User_GroupException("Input for parameter group is expected to be numeric");
-	}
-	
 	// test if group belongs to current project/user
 	if (!$this->groupBelongsToCurrentUser($group)) {
 		throw new User_GroupException('Group does not belong to current user or project');
@@ -423,6 +524,81 @@ public function mapGroupToRights ($group, $rights = array())
 			if (!$RIGHT->rightBelongsToCurrentUser($_right)) {
 				throw new User_GroupException("Right does not belong to current user or project");
 			}
+			
+			// prepare sql data
+			$sqlData = array(
+				'group' => (int)$group,
+				'right' => (int)$_right
+			);
+			
+			// insert new link
+			$this->base->db->insert(WCOM_DB_USER_GROUPS2USER_RIGHTS, $sqlData);
+		}
+	}
+	
+	return true;
+}
+
+/**
+ * Maps groups to one or more rights. Takes group id as first argument,
+ * a list of right ids as second argument. Returns boolean true.
+ *
+ * If the list of right ids is omitted, the group will be detached from
+ * all groups.
+ *
+ * @throws User_GroupException
+ * @param int group id
+ * @param int project id
+ * @param array Right ids
+ * @return bool
+ */
+public function mapTargetGroupToRights ($group, $project, $rights = array())
+{
+	// access check
+	if (!wcom_check_access('User', 'Group', 'Manage')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException("Input for parameter group is expected to be numeric");
+	}
+	// input check
+	if (empty($project) || !is_numeric($project)) {
+		throw new User_GroupException("Input for parameter project is expected to be numeric");
+	}
+	
+	// detach group from all rights
+	$sql = "
+		DELETE `user_groups2user_rights` FROM
+			 ".WCOM_DB_USER_GROUPS2USER_RIGHTS." AS `user_groups2user_rights`
+		LEFT JOIN
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
+		ON
+			`user_groups2user_rights`.`group` = `user_groups`.`id`
+		WHERE
+			`user_groups2user_rights`.`group` = :group
+		AND
+			`user_groups`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'group' => (int)$group,
+		'project' => (int)$project
+	);
+	
+	// execute query
+	$this->base->db->execute($sql, $bind_params);
+	
+	// load right class
+	$RIGHT = load('user:right');
+	
+	// add new links if necessary
+	foreach ($rights as $_right) {
+		
+		// input check
+		if (!empty($_right) && is_numeric($_right)) {
 			
 			// prepare sql data
 			$sqlData = array(
@@ -562,6 +738,48 @@ public function groupBelongsToCurrentUser ($group)
 	}
 	
 	return true;
+}
+
+/**
+ * Tests whether given group belongs to current project. Takes the group
+ * id as first argument. Returns boolean true or false.
+ *
+ * @throws User_GroupException
+ * @param int Group id
+ * @return bool
+ */
+public function groupBelongsToSomeUser ($group)
+{
+	// access check
+	if (!wcom_check_access('User', 'Group', 'Use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($group) || !is_numeric($group)) {
+		throw new User_GroupException('Input for parameter group is expected to be a numeric value');
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT
+			COUNT(*)
+		FROM
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		WHERE
+			`user_users2user_groups`.`group` = :group
+	";
+	// prepare bind params
+	$bind_params = array(
+		'group' => (int)$group
+	);
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) === 1) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**

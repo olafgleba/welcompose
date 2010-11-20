@@ -73,6 +73,9 @@ try {
 	/* @var $USER User_User */
 	$GROUP = load('user:group');
 	
+	// load right class
+	$RIGHT = load('user:right');
+	
 	// load login class
 	/* @var $LOGIN User_Login */
 	$LOGIN = load('User:Login');
@@ -99,7 +102,13 @@ try {
 	
 	// assign current user values
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
-	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
+	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);	
+	
+	// prepare user list
+	$selected_users = array();
+	foreach ($USER->selectUsers(array('exclude' => 1)) as $_user) {
+		$selected_users[(int)$_user['id']] = htmlspecialchars($_user['email']);
+	}
 	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('project', 'post');
@@ -112,6 +121,13 @@ try {
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	$FORM->addRule('name', gettext('A project with the given name already exists'), 'testForNameUniqueness');
+	
+	// multi select for rights
+	$FORM->addElement('select', 'selected_users', gettext('Users'), $selected_users,
+		array('id' => 'project_selected_users', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
+	$FORM->applyFilter('selected_users', 'trim');
+	$FORM->applyFilter('selected_users', 'strip_tags');
+	//$FORM->addRule('selected_users', gettext('One of the chosen user is out of range'), 'in_array_keys', $users);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
@@ -196,34 +212,53 @@ try {
 			
 			// init project from skeleton
 			$PROJECT->initFromSkeleton($project_id);
+	
 
-		
-		
-		$select_params = array(
-			'email' => 'olaf@wcom.de'
-		);
-		$users = $USER->selectUsers($select_params);
-		
-		//print $users[0]['id'];
-		
-		$select_params = array(
-			'user' => $users[0]['id']
-		);		
-		$user_group = $GROUP->selectGroups($select_params);
-		
 
-		
-		//print $user_group[0]['id'];
-		//exit;
+			// get choosen users array
+			$selected_users = $FORM->exportValue('selected_users');
+			
+			// if some user is selected, copy all neccessary data to the new project
+			if (!empty($selected_users)) {
+
+				foreach ($selected_users as $_selected_user) {
 					
-			// map user to group
-			$USER->mapUserToTargetGroup($users[0]['id'], $project_id, $user_group[0]['id']);			
-						
-			// map user to project
-			$USER->mapUserToTargetProject($users[0]['id'], $project_id);
-			
-			
-			
+					$user = $USER->selectUser($_selected_user['id']);
+					
+					$user_rights = $RIGHT->selectRights(array('group' => $user['group_id']));
+					$project_rights = $RIGHT->selectTargetRights(array('project' => $project_id));
+					
+					foreach ($project_rights as $_project_right) {
+						foreach ($user_rights as $key => $_user_right) {				
+							if (in_array($_project_right['name'], $_user_right)) {					
+								$assigned_rights[] = $_project_right['id'];
+							}
+						}
+					}
+							
+					// create new user group
+					$sqlDataGroup = array();
+					$sqlDataGroup['project'] = (int)$project_id;
+					$sqlDataGroup['name'] = $user['group_name'];
+					$sqlDataGroup['description'] = $user['group_description'];
+					$sqlDataGroup['editable'] = $user['group_editable'];
+					$sqlDataGroup['date_added'] = date('Y-m-d H:i:s');					
+
+					// execute operation
+					$group_id = $GROUP->addTargetGroup($sqlDataGroup);
+					
+					// map group to rights
+					$GROUP->mapTargetGroupToRights($group_id, $project_id, $assigned_rights);
+							
+					// map user to group
+					$USER->mapUserToTargetGroup($user['id'], $project_id, $group_id);			
+							
+					// map user to project
+					$USER->mapUserToTargetProject($user['id'], $project_id);					
+
+				}
+
+			}			
 			
 			// commit
 			$BASE->db->commit();

@@ -276,6 +276,7 @@ public function selectUser ($id)
  * 
  * <ul>
  * <li>group, int, optional: User group id</li>
+ * <li>exclude, int, optional: Bit to exclude skeleton user set and the current user</li>
  * <li>email, string, optional: E-mail address</li>
  * <li>author, int, optional: Author bit (either 0 or 1)</li>
  * <li>start, int, optional: row offset</li>
@@ -302,6 +303,7 @@ public function selectUsers ($params = array())
 	
 	// define some vars
 	$group = null;
+	$exclude = null;
 	$email = null;
 	$author = null;
 	$start = null;
@@ -322,6 +324,7 @@ public function selectUsers ($params = array())
 					$$_key = (string)$_value;
 				break;
 			case 'group':
+			case 'exclude':
 			case 'author':
 			case 'start':
 			case 'limit':
@@ -399,6 +402,11 @@ public function selectUsers ($params = array())
 		$sql .= " AND `user_groups`.`id` = :group ";
 		$bind_params['group'] = (int)$group;
 	}
+	if (!empty($exclude) && is_numeric($exclude)) {
+		$sql .= " AND `user_users`.`id` != ".WCOM_CURRENT_USER." ";
+		$sql .= " AND `user_users`.`email` != 'WCOM_ANONYMOUS' ";
+		$sql .= " AND `user_users`.`email` != 'default@welcompose.local' ";
+	}	
 	if (!empty($name) && is_scalar($name)) {
 		$sql .= " AND `user_users`.`name` = :name ";
 		$bind_params['name'] = $name;
@@ -564,6 +572,7 @@ public function mapUserToGroup ($user, $group = null)
  * 
  * @throws User_UserException
  * @param int User id
+ * @param int Project id
  * @param int Group id
  * @return int Link id 
  */
@@ -578,32 +587,35 @@ public function mapUserToTargetGroup ($user, $project, $group = null)
 	if (empty($user) || !is_numeric($user)) {
 		throw new User_UserException("Input for parameter user is expected to be numeric");
 	}
+	if (!empty($project) && !is_numeric($project)) {
+		throw new User_UserException("Input for parameter project is expected to be numeric");
+	}
 	if (!empty($group) && !is_numeric($group)) {
 		throw new User_UserException("Input for parameter group is expected to bei either null or numeric");
 	}
 	
-	// // delete user<->group mappings if necessary
-	// $sql = "
-	// 	DELETE `user_users2user_groups` FROM
-	// 		 ".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
-	// 	JOIN
-	// 		".WCOM_DB_USER_GROUPS." AS `user_groups`
-	// 	ON
-	// 		`user_users2user_groups`.`group` = `user_groups`.`id`
-	// 	WHERE
-	// 		`user_users2user_groups`.`user` = :user
-	// 	AND
-	// 		`user_groups`.`project` = :project
-	// ";
-	// 
-	// // prepare bind params
-	// $bind_params = array(
-	// 	'user' => (int)$user,
-	// 	'project' => (int)$project
-	// );
-	// 
-	// // execute query
-	// $this->base->db->execute($sql, $bind_params);
+	// delete user<->group mappings if necessary
+	$sql = "
+		DELETE `user_users2user_groups` FROM
+			 ".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		JOIN
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
+		ON
+			`user_users2user_groups`.`group` = `user_groups`.`id`
+		WHERE
+			`user_users2user_groups`.`user` = :user
+		AND
+			`user_groups`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'user' => (int)$user,
+		'project' => (int)$project
+	);
+	
+	// execute query
+	$this->base->db->execute($sql, $bind_params);
 	
 	// if group is not empty, add new link
 	if (!empty($group) && is_numeric($group)) {	
@@ -627,7 +639,6 @@ public function mapUserToTargetGroup ($user, $project, $group = null)
 	
 	return true;
 }
-
 
 
 /**
@@ -668,9 +679,8 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
 }
 
 
-
 /**
- * Maps user to the current project. Takes user id as first argument, activity and
+ * Maps user to the target project. Takes user id as first argument, activity and
  * author switch as second and third argument. Returns link id. To detach a user from
  * a project, see User_User::detachUserFromProject().
  * 
@@ -705,7 +715,6 @@ public function mapUserToTargetProject ($user, $project, $active = 1, $author = 
 	// create new mapping
 	return $this->base->db->insert(WCOM_DB_USER_USERS2APPLICATION_PROJECTS, $sqlData);
 }
-
 
 
 /**
