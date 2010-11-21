@@ -110,7 +110,7 @@ public function addGroup ($sqlData)
 }
 
 /**
- * Adds group to the group table. Takes a field=>value array
+ * Adds group to the target project group table. Takes a field=>value array
  * with the group data as first argument. Returns insert id.
  * 
  * @throws User_GroupException
@@ -387,80 +387,6 @@ public function selectGroups ($params = array())
 }
 
 /**
- * Method to select one or more user groups. Takes key=>value array
- * with select params as first argument. Returns array.
- * 
- * <b>List of supported params:</b>
- * 
- * <ul>
- * <li>name, string, optional: name of user group</li>
- * </ul>
- * 
- * @throws User_GroupException
- * @param array Select params
- * @return array
- */
-// public function selectProjectGroups ($params = array())
-// {
-// 	// access check
-// 	if (!wcom_check_access('User', 'Group', 'Use')) {
-// 		throw new User_GroupException("You are not allowed to perform this action");
-// 	}
-// 	
-// 	// define some vars
-// 	$name = null;
-// 	$bind_params = array();
-// 	
-// 	// input check
-// 	if (!is_array($params)) {
-// 		throw new User_GroupException('Input for parameter params is not an array');	
-// 	}
-// 	
-// 	// import params
-// 	foreach ($params as $_key => $_value) {
-// 		switch ((string)$_key) {
-// 			case 'name':
-// 					$$_key = (int)$_value;
-// 				break;
-// 			case 'project':
-// 					$$_key = (int)$_value;
-// 				break;
-// 			default:
-// 				throw new User_GroupException("Unknown parameter $_key");
-// 		}
-// 	}
-// 	
-// 	// prepare query
-// 	$sql = "
-// 		SELECT 
-// 			`user_groups`.`id` AS `id`,
-// 			`user_groups`.`project` AS `project`,
-// 			`user_groups`.`name` AS `name`,
-// 			`user_groups`.`description` AS `description`,
-// 			`user_groups`.`editable` AS `editable`,
-// 			`user_groups`.`date_modified` AS `date_modified`,
-// 			`user_groups`.`date_added` AS `date_added`
-// 		FROM
-// 			".WCOM_DB_USER_GROUPS." AS `user_groups`
-// 		WHERE 
-// 			`user_groups`.`project` = :project
-// 	";
-// 	
-// 	// prepare bind params
-// 	$bind_params = array(
-// 		'project' => (int)$project
-// 	);
-// 	
-// 	// add where clauses
-// 	if (!empty($name)) {
-// 		$sql .= " AND `user_groups`.`name` = :name ";
-// 		$bind_params['name'] = (int)$name;
-// 	}
-// 	
-// 	return $this->base->db->select($sql, 'multi', $bind_params);
-// }
-
-/**
  * Maps groups to one or more rights. Takes group id as first argument,
  * a list of right ids as second argument. Returns boolean true.
  *
@@ -540,15 +466,16 @@ public function mapGroupToRights ($group, $rights = array())
 }
 
 /**
- * Maps groups to one or more rights. Takes group id as first argument,
- * a list of right ids as second argument. Returns boolean true.
+ * Maps target groups to one or more rights. Takes group id as first argument,
+ * the project id as second argument and a list of right ids as third argument.
+ * Returns bool.
  *
  * If the list of right ids is omitted, the group will be detached from
  * all groups.
  *
  * @throws User_GroupException
- * @param int group id
- * @param int project id
+ * @param int Group id
+ * @param int Project id
  * @param array Right ids
  * @return bool
  */
@@ -741,7 +668,7 @@ public function groupBelongsToCurrentUser ($group)
 }
 
 /**
- * Tests whether given group belongs to current project. Takes the group
+ * Tests whether given group belongs to one user at least. Takes the group
  * id as first argument. Returns boolean true or false.
  *
  * @throws User_GroupException

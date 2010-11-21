@@ -253,7 +253,6 @@
 			<editable>0</editable>
 			<groups>
 				<name>WCOM_ADMIN</name>
-				<name>WCOM_REGULAR</name>
 			</groups>
 		</right>
 		<right>

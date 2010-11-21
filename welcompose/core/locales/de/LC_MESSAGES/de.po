@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-14 22:05+0100\n"
+"POT-Creation-Date: 2010-11-21 19:23+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +33,7 @@ msgstr "Es ist ein Fehler aufgetreten"
 msgid "Welcompose says"
 msgstr "Welcompose meldet"
 
-#: pingservices_add.php:106 pingservices_edit.php:123 projects_add.php:105
+#: pingservices_add.php:106 pingservices_edit.php:123 projects_add.php:119
 #: projects_edit.php:121 textconverters_add.php:107
 #: textconverters_edit.php:124 textmacros_add.php:114 textmacros_edit.php:130
 #: antispamplugins_add.php:120 antispamplugins_edit.php:131
@@ -46,19 +47,19 @@ msgstr "Welcompose meldet"
 #: pages_generatorforms_fields_edit.php:149
 #: pages_simpleguestbooks_entries_edit.php:149 pagetypes_add.php:107
 #: pagetypes_edit.php:116 structuraltemplates_add.php:106
-#: structuraltemplates_edit.php:117 actions_select.html:66
-#: pingservices_select.html:78 projects_select.html:78
-#: textconverters_select.html:78 textmacros_select.html:78
-#: antispamplugins_select.html:80 blogcommentstatuses_select.html:78
-#: globalboxes_select.html:78 navigations_select.html:65
-#: pages_boxes_select.html:119 pages_boxes_select.html:169
-#: pages_generatorforms_fields_select.html:100
-#: pages_simpleguestbooks_entries_select.html:89
-#: pages_simpleguestbooks_entries_select.html:121 pagetypes_select.html:65
-#: podcastcategories_select.html:78 structuraltemplates_select.html:79
-#: globalfiles_select.html:88 globaltemplates_select.html:82
-#: templates_select.html:107 templatesets_select.html:66
-#: templatetypes_select.html:66 groups_select.html:67 rights_select.html:79
+#: structuraltemplates_edit.php:117 actions_select.html:67
+#: pingservices_select.html:79 projects_select.html:79
+#: textconverters_select.html:78 textmacros_select.html:79
+#: antispamplugins_select.html:81 blogcommentstatuses_select.html:79
+#: globalboxes_select.html:79 navigations_select.html:65
+#: pages_boxes_select.html:120 pages_boxes_select.html:171
+#: pages_generatorforms_fields_select.html:101
+#: pages_simpleguestbooks_entries_select.html:90
+#: pages_simpleguestbooks_entries_select.html:122 pagetypes_select.html:66
+#: podcastcategories_select.html:79 structuraltemplates_select.html:80
+#: globalfiles_select.html:103 globaltemplates_select.html:83
+#: templates_select.html:108 templatesets_select.html:65
+#: templatetypes_select.html:67 groups_select.html:68 rights_select.html:80
 #: globaltemplates_add.php:119 globaltemplates_edit.php:136
 #: templates_add.php:144 templates_copy.php:162 templates_edit.php:180
 #: templatesets_add.php:106 templatesets_edit.php:116
@@ -70,7 +71,7 @@ msgstr "Welcompose meldet"
 msgid "Name"
 msgstr "Name"
 
-#: pingservices_add.php:110 pingservices_edit.php:127 projects_add.php:109
+#: pingservices_add.php:110 pingservices_edit.php:127 projects_add.php:123
 #: projects_edit.php:125 textconverters_add.php:111
 #: textconverters_edit.php:128 textmacros_add.php:118 textmacros_edit.php:134
 #: antispamplugins_add.php:124 antispamplugins_edit.php:135
@@ -133,7 +134,7 @@ msgstr "Bitte tragen Sie einen Anfragepfad ein"
 msgid "Please enter a valid request path"
 msgstr "Bitte geben Sie einen gültigen Anfragepfad an"
 
-#: pingservices_add.php:141 projects_add.php:113 textconverters_add.php:134
+#: pingservices_add.php:141 projects_add.php:133 textconverters_add.php:134
 #: textmacros_add.php:139 antispamplugins_add.php:154
 #: blogcommentstatuses_add.php:115 abbreviations_add.php:160
 #: callbacks_insert_abbreviations_links.php:166 globalboxes_add.php:146
@@ -163,7 +164,7 @@ msgstr "Speichern"
 #: pages_simpleguestbooks_entries_edit.php:145
 #: pages_simplepages_content_edit.php:133 pages_urls_content_edit.php:115
 #: pagetypes_edit.php:112 podcastcategories_edit.php:113
-#: structuraltemplates_edit.php:113 mediamanager_edit.php:127
+#: structuraltemplates_edit.php:113 mediamanager_edit.php:135
 #: globalfiles_edit.php:115 globaltemplates_edit.php:126
 #: templates_copy.php:139 templates_edit.php:139 templatesets_edit.php:112
 #: templatetypes_edit.php:113 groups_copy.php:128 groups_edit.php:128
@@ -190,7 +191,7 @@ msgstr "ID sollte nicht leer sein"
 #: pages_simplepages_content_edit.php:134
 #: pages_simplepages_content_edit.php:140 pages_urls_content_edit.php:116
 #: pagetypes_edit.php:113 podcastcategories_edit.php:114
-#: structuraltemplates_edit.php:114 mediamanager_edit.php:128
+#: structuraltemplates_edit.php:114 mediamanager_edit.php:136
 #: globalfiles_edit.php:116 globaltemplates_edit.php:127
 #: templates_copy.php:140 templates_edit.php:140 templatesets_edit.php:113
 #: templatetypes_edit.php:114 groups_copy.php:129 groups_edit.php:129
@@ -220,22 +221,27 @@ msgstr "Parameter start muss numerisch sein"
 #: pages_simpleguestbooks_entries_edit.php:176
 #: pages_simplepages_content_edit.php:206 pages_urls_content_edit.php:128
 #: pagetypes_edit.php:137 podcastcategories_edit.php:135
-#: structuraltemplates_edit.php:136 mediamanager_edit.php:151
+#: structuraltemplates_edit.php:136 mediamanager_edit.php:159
 #: globalfiles_edit.php:129 globaltemplates_edit.php:174
 #: templates_edit.php:198 templatesets_edit.php:132 templatetypes_edit.php:133
 #: groups_edit.php:155 rights_edit.php:132 users_edit.php:180
 msgid "Save edit"
 msgstr "Speichern"
 
-#: projects_add.php:110 projects_edit.php:126
+#: projects_add.php:124 projects_edit.php:126
 msgid "A project with the given name already exists"
 msgstr "Ein gleichnamiges Projekt existiert bereits"
+
+#: projects_add.php:127
+msgid "Assign Users"
+msgstr "Benutzer zuweisen"
 
 #: sitemaps.php:109
 msgid "Deflate (.gz)"
 msgstr "Komprimieren"
 
-#: sitemaps.php:113
+#: sitemaps.php:113 callbacks_insert_application-x-shockwave-flash.php:183
+#: callbacks_insert_image.php:132 callbacks_insert_image.php:140
 msgid "The field whether compress is enabled accepts only 0 or 1"
 msgstr "Das Feld \"Gzip Kompression\" kann nur den Wert 0 oder 1 haben"
 
@@ -295,8 +301,8 @@ msgstr "Ein gleichnamiges Textmakro existiert bereits"
 
 #: textmacros_add.php:131 textmacros_edit.php:148 pages_add.php:220
 #: pages_generatorforms_fields_add.php:123
-#: pages_generatorforms_fields_edit.php:134 antispamplugins_select.html:81
-#: pages_generatorforms_fields_select.html:102 templates_add.php:127
+#: pages_generatorforms_fields_edit.php:134 antispamplugins_select.html:82
+#: pages_generatorforms_fields_select.html:103 templates_add.php:127
 #: templates_copy.php:143 templates_edit.php:161
 msgid "Type"
 msgstr "Typ"
@@ -310,12 +316,12 @@ msgid "Your link description"
 msgstr "Ihre Link-Beschreibung"
 
 #: antispamplugins_add.php:103 antispamplugins_edit.php:107
-#: antispamplugins_select.html:89
+#: antispamplugins_select.html:90
 msgid "Comment plugin"
 msgstr "Kommentar Plug-In"
 
 #: antispamplugins_add.php:104 antispamplugins_edit.php:108
-#: antispamplugins_select.html:89
+#: antispamplugins_select.html:90
 msgid "Trackback plugin"
 msgstr "Trackback Plug-In"
 
@@ -345,7 +351,7 @@ msgid "Please enter a numeric priority"
 msgstr "Bitte verwenden Sie zur Angabe der Priorität eine numerische Eingabe"
 
 #: antispamplugins_add.php:146 antispamplugins_edit.php:157
-#: antispamplugins_select.html:82 users_select.html:90 users_add.php:163
+#: antispamplugins_select.html:83 users_select.html:91 users_add.php:163
 #: users_edit.php:172
 msgid "Active"
 msgstr "Aktiv"
@@ -355,7 +361,7 @@ msgid "The field whether the plugin is active accepts only 0 or 1"
 msgstr "Das Feld \"Aktiv\" kann nur den Wert 0 oder 1 haben"
 
 #: blogcomments_edit.php:127 pages_simpleguestbooks_entries_edit.php:156
-#: users_select.html:86 users_add.php:128 users_edit.php:138
+#: users_select.html:87 users_add.php:128 users_edit.php:138
 #: blogitem.class.php:223 simpleguestbookindex.class.php:230
 msgid "E-mail"
 msgstr "E-Mail"
@@ -571,8 +577,8 @@ msgstr ""
 "Bitte tragen Sie einen numerischen Grenzwert für Trackback Bayes Spam ein"
 
 #: abbreviations_add.php:124 abbreviations_edit.php:131
-#: callbacks_insert_abbreviations_links.php:146 abbreviations_select.html:82
-#: callbacks_insert_abbreviations_links.html:52
+#: callbacks_insert_abbreviations_links.php:146 abbreviations_select.html:83
+#: callbacks_insert_abbreviations_links.html:53
 msgid "Long form"
 msgstr "Langform"
 
@@ -588,7 +594,7 @@ msgstr "Eine Abkürzung mit der gleichen Langform existiert bereits"
 
 #: abbreviations_add.php:133 abbreviations_edit.php:140
 #: callbacks_insert_abbreviations_links.php:155
-#: callbacks_insert_abbreviations_links.html:53
+#: callbacks_insert_abbreviations_links.html:54
 msgid "Glossary form"
 msgstr "Glossar"
 
@@ -746,11 +752,11 @@ msgstr "Alternativer Name"
 #: pages_simpleforms_content_edit.php:214
 #: pages_simpleguestbooks_content_edit.php:215
 #: pages_simplepages_content_edit.php:200 structuraltemplates_add.php:115
-#: structuraltemplates_edit.php:126 mediamanager_edit.php:138
-#: mediamanager_upload.php:120 structuraltemplates_select.html:80
-#: globalfiles_select.html:89 globaltemplates_select.html:83
-#: templates_select.html:109 templatesets_select.html:67
-#: templatetypes_select.html:67 groups_select.html:68 rights_select.html:80
+#: structuraltemplates_edit.php:126 mediamanager_edit.php:146
+#: mediamanager_upload.php:123 structuraltemplates_select.html:81
+#: globalfiles_select.html:104 globaltemplates_select.html:84
+#: templates_select.html:110 templatesets_select.html:66
+#: templatetypes_select.html:68 groups_select.html:69 rights_select.html:81
 #: globalfiles_add.php:114 globalfiles_edit.php:133
 #: globaltemplates_add.php:130 globaltemplates_edit.php:147
 #: templates_add.php:152 templates_copy.php:171 templates_edit.php:188
@@ -786,7 +792,7 @@ msgid "Chosen template set is out of range"
 msgstr ""
 "Die Angabe der Vorlagengruppe liegt außerhalb des gültigen Wertebereiches"
 
-#: pages_add.php:237 pages_edit.php:199 pages_select.html:124
+#: pages_add.php:237 pages_edit.php:199 pages_select.html:130
 msgid "Index page"
 msgstr "Index-Seite"
 
@@ -805,7 +811,7 @@ msgstr "Das Feld \"Geschützt\" kann nur den Wert 0 oder 1 haben"
 #: pages_add.php:252 pages_blogs_postings_add.php:387
 #: pages_blogs_postings_edit.php:407 pages_edit.php:215
 #: pages_simple_dates_add.php:212 pages_simple_dates_edit.php:223
-#: pages_blogs_postings_select.html:88 pages_simple_dates_select.html:88
+#: pages_blogs_postings_select.html:89 pages_simple_dates_select.html:89
 msgid "Draft"
 msgstr "Entwurf"
 
@@ -814,9 +820,9 @@ msgid "No Follow"
 msgstr ""
 
 #: pages_add.php:268 pages_edit.php:231 _inc_nav_users.html:7
-#: _inc_navigation.html:14 _inc_navigation.html:16 groups_add.html:52
-#: groups_add.html:58 groups_edit.html:48 groups_edit.html:54
-#: groups_select.html:48 groups_select.html:52
+#: _inc_navigation.html:14 _inc_navigation.html:16 groups_add.html:54
+#: groups_add.html:60 groups_edit.html:49 groups_edit.html:55
+#: groups_select.html:49 groups_select.html:53
 msgid "Groups"
 msgstr "Benutzergruppen"
 
@@ -962,8 +968,9 @@ msgid "Use tags"
 msgstr "Schlagworte nutzen"
 
 #: pages_blogs_postings_add.php:163 pages_blogs_postings_edit.php:164
-#: antispamplugins_select.html:90 blogcomments_select.html:168
-#: abbreviations_select.html:94 users_select.html:99 users_select.html:100
+#: textconverters_select.html:86 antispamplugins_select.html:91
+#: blogcomments_select.html:169 abbreviations_select.html:95
+#: users_select.html:100 users_select.html:101
 msgid "yes"
 msgstr "Ja"
 
@@ -972,8 +979,8 @@ msgid "clean"
 msgstr "Clean"
 
 #: pages_blogs_postings_add.php:165 pages_blogs_postings_edit.php:166
-#: antispamplugins_select.html:90 blogcomments_select.html:168
-#: abbreviations_select.html:94 users_select.html:99 users_select.html:100
+#: antispamplugins_select.html:91 blogcomments_select.html:169
+#: abbreviations_select.html:95 users_select.html:100 users_select.html:101
 msgid "no"
 msgstr "Nein"
 
@@ -988,7 +995,7 @@ msgstr "Nein"
 #: pages_simpleguestbooks_content_edit.php:203
 #: pages_simplepages_content_edit.php:143
 #: pages_simplepages_content_edit.php:188 callbacks_insert_image.php:122
-#: pages_blogs_postings_select.html:123
+#: pages_blogs_postings_select.html:124
 msgid "Title"
 msgstr "Titel"
 
@@ -1113,7 +1120,7 @@ msgid "Podcast category 3 is out of range"
 msgstr "Kategorie 3 liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_blogs_postings_add.php:295 pages_blogs_postings_edit.php:315
-#: blogcomments_select.html:123 users_select.html:89 users_add.php:155
+#: blogcomments_select.html:124 users_select.html:90 users_add.php:155
 #: users_edit.php:164
 msgid "Author"
 msgstr "Autor"
@@ -1169,7 +1176,7 @@ msgid "The field whether to use customized meta tags accepts only 0 or 1"
 msgstr "Das Feld \"Eigene Metatags\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_blogs_postings_add.php:376 pages_blogs_postings_edit.php:396
-#: mediamanager_edit.php:144 mediamanager_upload.php:126
+#: mediamanager_edit.php:152 mediamanager_upload.php:129
 msgid "Tags"
 msgstr "Schlagworte"
 
@@ -1255,7 +1262,7 @@ msgstr "Bitte tragen Sie eine gültige Empfängeradresse ein"
 #: pages_simpleforms_content_edit.php:252
 #: pages_simpleguestbooks_content_edit.php:257
 #: pages_simpleguestbooks_entries_edit.php:163
-#: pages_simpleguestbooks_entries_select.html:122
+#: pages_simpleguestbooks_entries_select.html:123
 #: simpleguestbookindex.class.php:237
 msgid "Subject"
 msgstr "Betreff"
@@ -1278,7 +1285,7 @@ msgstr "Der Feldtyp liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_generatorforms_fields_add.php:132
 #: pages_generatorforms_fields_edit.php:143
-#: pages_generatorforms_fields_select.html:101
+#: pages_generatorforms_fields_select.html:102
 msgid "Label"
 msgstr "Beschriftung"
 
@@ -1308,7 +1315,7 @@ msgstr "CSS Klasse"
 
 #: pages_generatorforms_fields_add.php:161
 #: pages_generatorforms_fields_edit.php:173
-#: pages_generatorforms_fields_select.html:103
+#: pages_generatorforms_fields_select.html:104
 msgid "Required"
 msgstr "Erforderlich"
 
@@ -1394,7 +1401,7 @@ msgid "End date"
 msgstr "Termin Ende"
 
 #: pages_simple_dates_add.php:149 pages_simple_dates_edit.php:160
-#: pages_simple_dates_select.html:123
+#: pages_simple_dates_select.html:124
 msgid "Location"
 msgstr "Ort"
 
@@ -1569,6 +1576,7 @@ msgstr "Anmelden"
 #: callbacks_insert_application-x-shockwave-flash.php:97
 #: callbacks_insert_application-x-shockwave-flash.php:106
 #: callbacks_insert_application-x-shockwave-flash.php:114
+#: textconverters_select.html:79
 msgid "Default"
 msgstr "Standard"
 
@@ -1637,12 +1645,17 @@ msgid "Avoid looping"
 msgstr ""
 
 #: callbacks_insert_application-x-shockwave-flash.php:179
-#: callbacks_insert_image.php:128
+#: callbacks_insert_image.php:136
+msgid "Insert as reference"
+msgstr "Referenz einfügen"
+
+#: callbacks_insert_application-x-shockwave-flash.php:187
+#: callbacks_insert_image.php:144
 msgid "Insert object"
 msgstr "Einfügen"
 
-#: callbacks_insert_application-x-shockwave-flash.php:183
-#: callbacks_insert_image.php:132
+#: callbacks_insert_application-x-shockwave-flash.php:191
+#: callbacks_insert_image.php:148
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -1650,44 +1663,52 @@ msgstr "Abbrechen"
 msgid "Alternative text"
 msgstr "Alternativtext"
 
-#: mediamanager_edit.php:103
+#: callbacks_insert_image.php:128
+msgid "Set dimensions?"
+msgstr "Höhe/Breite setzen?"
+
+#: mediamanager_edit.php:111
 msgid "Image"
 msgstr "Bild"
 
-#: mediamanager_edit.php:104
+#: mediamanager_edit.php:112
 msgid "Document"
 msgstr "Dokument"
 
-#: mediamanager_edit.php:105 mediamanager.html:26
+#: mediamanager_edit.php:113 mediamanager.html:26
 msgid "Audio"
 msgstr "Audio"
 
-#: mediamanager_edit.php:106 mediamanager.html:27
+#: mediamanager_edit.php:114 mediamanager.html:27
 msgid "Video"
 msgstr "Video"
 
-#: mediamanager_edit.php:107 mediamanager.html:28
+#: mediamanager_edit.php:115 mediamanager.html:28
 msgid "Other"
 msgstr "Andere"
 
-#: mediamanager_edit.php:134 mediamanager_upload.php:115
+#: mediamanager_edit.php:142 mediamanager_upload.php:116
 #: globalfiles_add.php:109 globalfiles_edit.php:125
 msgid "File"
 msgstr "Datei"
 
-#: mediamanager_edit.php:148 mediamanager_upload.php:130
+#: mediamanager_edit.php:156 mediamanager_upload.php:133
 msgid "Please add at least one tag"
 msgstr "Bitte tragen Sie mindestens ein Schlagwort ein"
 
-#: mediamanager_edit.php:155 mediamanager_upload.php:137
+#: mediamanager_edit.php:163 mediamanager_upload.php:140
 msgid "Close"
 msgstr "Schließen"
 
-#: mediamanager_upload.php:117 globalfiles_add.php:111
+#: mediamanager_upload.php:118 globalfiles_add.php:111
 msgid "Please select a file"
 msgstr "Bitte wählen Sie eine Datei aus"
 
-#: mediamanager_upload.php:133
+#: mediamanager_upload.php:119
+msgid "A file with the provided id already exists"
+msgstr "Ein gleichnamiges Feld existiert bereits"
+
+#: mediamanager_upload.php:136
 msgid "Upload Media"
 msgstr "Media hochladen"
 
@@ -1695,29 +1716,29 @@ msgstr "Media hochladen"
 msgid ""
 "Licensed under the conditions of <a href=\"http://www.opensource.org/"
 "licenses/agpl-v3.html\">GNU AGPLv3</a> <br />Alternative licensing is "
-"available <a href=\"http://www.welcompose.de/cms/kontakt/\">on request</a>"
+"available <a href=\"http://welcompose.de/cms/kontakt/\">on request</a>"
 msgstr ""
 "Lizenziert unter den Bedingungen der <a href=\"http://www.opensource.org/"
 "licenses/agpl-v3.html\">GNU AGPLv3</a><br />Alternative Lizenzierung auf <a "
 "href=\"http://www.welcompose.de/cms/kontakt/\">Anfrage</a> möglich"
 
 #: _inc_nav_community.html:4 _inc_navigation.html:7 _inc_navigation.html:9
-#: blogcomments_edit.html:48 blogcomments_edit.html:54
-#: blogcomments_select.html:55 blogcomments_select.html:58
+#: blogcomments_edit.html:49 blogcomments_edit.html:55
+#: blogcomments_select.html:56 blogcomments_select.html:59
 msgid "Blog Comments"
 msgstr "Blog Kommentare"
 
-#: _inc_nav_community.html:7 blogcommentstatuses_add.html:52
-#: blogcommentstatuses_add.html:58 blogcommentstatuses_edit.html:48
-#: blogcommentstatuses_edit.html:54 blogcommentstatuses_select.html:48
-#: blogcommentstatuses_select.html:52
+#: _inc_nav_community.html:7 blogcommentstatuses_add.html:53
+#: blogcommentstatuses_add.html:59 blogcommentstatuses_edit.html:49
+#: blogcommentstatuses_edit.html:55 blogcommentstatuses_select.html:49
+#: blogcommentstatuses_select.html:53
 msgid "Blog Comment Status"
 msgstr "Blog Kommentarstatus"
 
 #: _inc_nav_community.html:10 _inc_navigation.html:21 _inc_navigation.html:23
-#: antispamplugins_add.html:52 antispamplugins_add.html:58
-#: antispamplugins_edit.html:48 antispamplugins_edit.html:54
-#: antispamplugins_select.html:48 antispamplugins_select.html:52
+#: antispamplugins_add.html:53 antispamplugins_add.html:59
+#: antispamplugins_edit.html:49 antispamplugins_edit.html:55
+#: antispamplugins_select.html:49 antispamplugins_select.html:53
 msgid "Anti Spam Plugins"
 msgstr "Anti Spam Plug-Ins"
 
@@ -1726,81 +1747,81 @@ msgid "Community Settings"
 msgstr "Community-Einstellungen"
 
 #: _inc_nav_contents.html:13 _inc_navigation.html:7 _inc_navigation.html:9
-#: pages_add.html:55 pages_add.html:61
-#: pages_blogs_pingserviceconfigurations_add.html:71
-#: pages_blogs_pingserviceconfigurations_edit.html:67
-#: pages_blogs_pingserviceconfigurations_select.html:82
-#: pages_blogs_postings_add.html:79 pages_blogs_postings_edit.html:86
-#: pages_blogs_postings_select.html:67 pages_boxes_add.html:95
-#: pages_boxes_edit.html:95 pages_boxes_select.html:88
-#: pages_boxes_select.html:98 pages_boxes_select.html:138 pages_edit.html:139
-#: pages_edit.html:145 pages_generatorforms_content_edit.html:80
-#: pages_generatorforms_content_edit.html:86
-#: pages_generatorforms_fields_add.html:77
-#: pages_generatorforms_fields_edit.html:77
-#: pages_generatorforms_fields_select.html:67 pages_move_away.html:48
-#: pages_move_away.html:54 pages_select.html:52 pages_select.html:55
-#: pages_simple_dates_add.html:78 pages_simple_dates_edit.html:78
-#: pages_simple_dates_select.html:67 pages_simpleforms_content_edit.html:77
-#: pages_simpleforms_content_edit.html:83
-#: pages_simpleguestbooks_content_edit.html:80
-#: pages_simpleguestbooks_content_edit.html:86
-#: pages_simpleguestbooks_entries_edit.html:77
-#: pages_simpleguestbooks_entries_select.html:68
-#: pages_simplepages_content_edit.html:79
-#: pages_simplepages_content_edit.html:85 pages_urls_content_edit.html:61
-#: pages_urls_content_edit.html:67 callbacks_insert_boxes_links.html:49
+#: pages_add.html:56 pages_add.html:62
+#: pages_blogs_pingserviceconfigurations_add.html:72
+#: pages_blogs_pingserviceconfigurations_edit.html:68
+#: pages_blogs_pingserviceconfigurations_select.html:83
+#: pages_blogs_postings_add.html:80 pages_blogs_postings_edit.html:87
+#: pages_blogs_postings_select.html:68 pages_boxes_add.html:96
+#: pages_boxes_edit.html:96 pages_boxes_select.html:89
+#: pages_boxes_select.html:99 pages_boxes_select.html:139 pages_edit.html:140
+#: pages_edit.html:146 pages_generatorforms_content_edit.html:81
+#: pages_generatorforms_content_edit.html:87
+#: pages_generatorforms_fields_add.html:78
+#: pages_generatorforms_fields_edit.html:78
+#: pages_generatorforms_fields_select.html:68 pages_move_away.html:49
+#: pages_move_away.html:55 pages_select.html:52 pages_select.html:55
+#: pages_simple_dates_add.html:79 pages_simple_dates_edit.html:79
+#: pages_simple_dates_select.html:68 pages_simpleforms_content_edit.html:78
+#: pages_simpleforms_content_edit.html:84
+#: pages_simpleguestbooks_content_edit.html:81
+#: pages_simpleguestbooks_content_edit.html:87
+#: pages_simpleguestbooks_entries_edit.html:78
+#: pages_simpleguestbooks_entries_select.html:69
+#: pages_simplepages_content_edit.html:80
+#: pages_simplepages_content_edit.html:86 pages_urls_content_edit.html:62
+#: pages_urls_content_edit.html:68 callbacks_insert_boxes_links.html:50
 msgid "Pages"
 msgstr "Seiten"
 
 #: _inc_nav_contents.html:16 _inc_navigation.html:14 _inc_navigation.html:16
-#: globalboxes_add.html:59 globalboxes_add.html:65 globalboxes_edit.html:59
-#: globalboxes_edit.html:65 globalboxes_select.html:48
-#: globalboxes_select.html:52 templates_add.html:109 templates_copy.html:97
-#: templates_edit.html:109
+#: globalboxes_add.html:60 globalboxes_add.html:66 globalboxes_edit.html:60
+#: globalboxes_edit.html:66 globalboxes_select.html:49
+#: globalboxes_select.html:53 templates_add.html:110 templates_copy.html:98
+#: templates_edit.html:110
 msgid "Global Boxes"
 msgstr "Globale Boxen"
 
 #: _inc_nav_contents.html:19 _inc_navigation.html:21 _inc_navigation.html:23
-#: navigations_add.html:52 navigations_add.html:58 navigations_edit.html:48
-#: navigations_edit.html:54 navigations_select.html:48
+#: navigations_add.html:53 navigations_add.html:59 navigations_edit.html:49
+#: navigations_edit.html:55 navigations_select.html:48
 #: navigations_select.html:52
 msgid "Navigations"
 msgstr "Navigationen"
 
 #: _inc_nav_contents.html:22 _inc_navigation.html:28 _inc_navigation.html:30
-#: pagetypes_add.html:52 pagetypes_add.html:58 pagetypes_edit.html:49
-#: pagetypes_edit.html:55 pagetypes_select.html:48 pagetypes_select.html:52
+#: pagetypes_add.html:53 pagetypes_add.html:59 pagetypes_edit.html:50
+#: pagetypes_edit.html:56 pagetypes_select.html:49 pagetypes_select.html:53
 msgid "Page Types"
 msgstr "Seitentypen"
 
 #: _inc_nav_contents.html:25 _inc_navigation.html:35 _inc_navigation.html:37
-#: structuraltemplates_add.html:55 structuraltemplates_add.html:61
-#: structuraltemplates_edit.html:55 structuraltemplates_edit.html:61
-#: structuraltemplates_select.html:48
+#: structuraltemplates_add.html:56 structuraltemplates_add.html:62
+#: structuraltemplates_edit.html:56 structuraltemplates_edit.html:62
+#: structuraltemplates_select.html:49
 msgid "Structural Templates"
 msgstr "Strukturvorlagen"
 
 #: _inc_nav_contents.html:28 _inc_navigation.html:42 _inc_navigation.html:44
-#: podcastcategories_add.html:55 podcastcategories_add.html:61
-#: podcastcategories_edit.html:50 podcastcategories_edit.html:56
-#: podcastcategories_select.html:48 podcastcategories_select.html:52
+#: podcastcategories_add.html:56 podcastcategories_add.html:62
+#: podcastcategories_edit.html:51 podcastcategories_edit.html:57
+#: podcastcategories_select.html:49 podcastcategories_select.html:53
 msgid "Podcast Categories"
 msgstr "Podcast-Kategorien"
 
 #: _inc_nav_contents.html:31 _inc_navigation.html:49 _inc_navigation.html:51
-#: abbreviations_add.html:55 abbreviations_add.html:61
-#: abbreviations_add.html:102 abbreviations_edit.html:55
-#: abbreviations_edit.html:61 abbreviations_edit.html:102
-#: abbreviations_select.html:48 abbreviations_select.html:52
-#: globalboxes_add.html:103 globalboxes_edit.html:103
-#: pages_blogs_postings_add.html:127 pages_blogs_postings_add.html:138
-#: pages_blogs_postings_edit.html:134 pages_blogs_postings_edit.html:145
-#: pages_boxes_add.html:139 pages_boxes_edit.html:139
-#: pages_generatorforms_content_edit.html:127 pages_simple_dates_add.html:126
-#: pages_simple_dates_edit.html:126 pages_simpleforms_content_edit.html:124
-#: pages_simpleguestbooks_content_edit.html:127
-#: pages_simplepages_content_edit.html:126
+#: abbreviations_add.html:56 abbreviations_add.html:62
+#: abbreviations_add.html:103 abbreviations_edit.html:56
+#: abbreviations_edit.html:62 abbreviations_edit.html:103
+#: abbreviations_select.html:49 abbreviations_select.html:53
+#: globalboxes_add.html:104 globalboxes_edit.html:104
+#: pages_blogs_postings_add.html:128 pages_blogs_postings_add.html:139
+#: pages_blogs_postings_edit.html:135 pages_blogs_postings_edit.html:146
+#: pages_boxes_add.html:140 pages_boxes_edit.html:140
+#: pages_generatorforms_content_edit.html:128 pages_simple_dates_add.html:127
+#: pages_simple_dates_edit.html:127 pages_simpleforms_content_edit.html:125
+#: pages_simpleguestbooks_content_edit.html:128
+#: pages_simplepages_content_edit.html:128
 msgid "Abbreviations"
 msgstr "Abkürzungen"
 
@@ -1825,38 +1846,38 @@ msgid "Image Categories"
 msgstr "Bilderkategorien"
 
 #: _inc_nav_settings.html:4 _inc_navigation.html:7 _inc_navigation.html:9
-#: projects_add.html:52 projects_add.html:58 projects_edit.html:48
-#: projects_edit.html:54 projects_select.html:48 projects_select.html:52
+#: projects_add.html:53 projects_add.html:59 projects_edit.html:49
+#: projects_edit.html:55 projects_select.html:49 projects_select.html:53
 msgid "Projects"
 msgstr "Projekte"
 
 #: _inc_nav_settings.html:7 _inc_navigation.html:14 _inc_navigation.html:16
-#: pingservices_add.html:52 pingservices_add.html:58 pingservices_edit.html:48
-#: pingservices_edit.html:54 pingservices_select.html:48
-#: pingservices_select.html:52
-#: pages_blogs_pingserviceconfigurations_add.html:65
-#: pages_blogs_pingserviceconfigurations_add.html:72
-#: pages_blogs_pingserviceconfigurations_add.html:79
-#: pages_blogs_pingserviceconfigurations_edit.html:61
-#: pages_blogs_pingserviceconfigurations_edit.html:68
-#: pages_blogs_pingserviceconfigurations_edit.html:75
-#: pages_blogs_pingserviceconfigurations_select.html:62
-#: pages_blogs_pingserviceconfigurations_select.html:75
-#: pages_blogs_pingserviceconfigurations_select.html:82
-#: pages_blogs_pingserviceconfigurations_select.html:86
-#: pages_blogs_postings_add.html:73 pages_blogs_postings_edit.html:80
-#: pages_blogs_postings_select.html:61 pages_boxes_add.html:70
-#: pages_boxes_add.html:75 pages_boxes_edit.html:70 pages_boxes_edit.html:75
-#: pages_boxes_select.html:63 pages_boxes_select.html:68 pages_edit.html:76
-#: pages_edit.html:89 pages_simple_dates_add.html:72
-#: pages_simple_dates_edit.html:72 pages_simple_dates_select.html:61
+#: pingservices_add.html:53 pingservices_add.html:59 pingservices_edit.html:49
+#: pingservices_edit.html:55 pingservices_select.html:49
+#: pingservices_select.html:53
+#: pages_blogs_pingserviceconfigurations_add.html:66
+#: pages_blogs_pingserviceconfigurations_add.html:73
+#: pages_blogs_pingserviceconfigurations_add.html:80
+#: pages_blogs_pingserviceconfigurations_edit.html:62
+#: pages_blogs_pingserviceconfigurations_edit.html:69
+#: pages_blogs_pingserviceconfigurations_edit.html:76
+#: pages_blogs_pingserviceconfigurations_select.html:63
+#: pages_blogs_pingserviceconfigurations_select.html:76
+#: pages_blogs_pingserviceconfigurations_select.html:83
+#: pages_blogs_pingserviceconfigurations_select.html:87
+#: pages_blogs_postings_add.html:74 pages_blogs_postings_edit.html:81
+#: pages_blogs_postings_select.html:62 pages_boxes_add.html:71
+#: pages_boxes_add.html:76 pages_boxes_edit.html:71 pages_boxes_edit.html:76
+#: pages_boxes_select.html:64 pages_boxes_select.html:69 pages_edit.html:77
+#: pages_edit.html:90 pages_simple_dates_add.html:73
+#: pages_simple_dates_edit.html:73 pages_simple_dates_select.html:62
 msgid "Ping Services"
 msgstr "Ping-Services"
 
 #: _inc_nav_settings.html:10 _inc_navigation.html:21 _inc_navigation.html:23
-#: textconverters_add.html:52 textconverters_add.html:58
-#: textconverters_edit.html:48 textconverters_edit.html:54
-#: textconverters_select.html:48 textconverters_select.html:52
+#: textconverters_add.html:53 textconverters_add.html:59
+#: textconverters_edit.html:49 textconverters_edit.html:55
+#: textconverters_select.html:47 textconverters_select.html:51
 msgid "Text Converters"
 msgstr "Textkonverter"
 
@@ -1865,72 +1886,72 @@ msgid "Text macros"
 msgstr "Textmakros"
 
 #: _inc_nav_settings.html:16 _inc_navigation.html:35 _inc_navigation.html:37
-#: sitemaps.html:52 sitemaps.html:56
+#: sitemaps.html:53 sitemaps.html:57
 msgid "Sitemaps"
 msgstr "Sitemaps"
 
 #: _inc_nav_settings.html:19 _inc_navigation.html:42 _inc_navigation.html:44
-#: actions_select.html:49 actions_select.html:53
+#: actions_select.html:50 actions_select.html:54
 msgid "Actions"
 msgstr "Aktionen"
 
 #: _inc_nav_templates.html:4 _inc_navigation.html:7 _inc_navigation.html:9
-#: templates_add.html:54 templates_add.html:60 templates_copy.html:48
-#: templates_copy.html:54 templates_edit.html:54 templates_edit.html:60
-#: templates_select.html:49 templates_select.html:53
+#: templates_add.html:55 templates_add.html:61 templates_copy.html:49
+#: templates_copy.html:55 templates_edit.html:55 templates_edit.html:61
+#: templates_select.html:50 templates_select.html:54
 msgid "Templates"
 msgstr "Seitenvorlagen"
 
 #: _inc_nav_templates.html:7 _inc_navigation.html:14 _inc_navigation.html:16
-#: templates_select.html:62 templatesets_add.html:52 templatesets_add.html:58
-#: templatesets_edit.html:48 templatesets_edit.html:54
-#: templatesets_select.html:48 templatesets_select.html:52
+#: templates_select.html:63 templatesets_add.html:53 templatesets_add.html:59
+#: templatesets_edit.html:49 templatesets_edit.html:55
+#: templatesets_select.html:47 templatesets_select.html:51
 msgid "Template Sets"
 msgstr "Vorlagengruppen"
 
 #: _inc_nav_templates.html:10 _inc_navigation.html:21 _inc_navigation.html:23
-#: templates_select.html:69 templatetypes_add.html:52
-#: templatetypes_add.html:58 templatetypes_edit.html:48
-#: templatetypes_edit.html:54 templatetypes_select.html:48
-#: templatetypes_select.html:52
+#: templates_select.html:70 templatetypes_add.html:53
+#: templatetypes_add.html:59 templatetypes_edit.html:49
+#: templatetypes_edit.html:55 templatetypes_select.html:49
+#: templatetypes_select.html:53
 msgid "Template Types"
 msgstr "Vorlagentypen"
 
 #: _inc_nav_templates.html:13 _inc_navigation.html:28 _inc_navigation.html:30
-#: globaltemplates_add.html:54 globaltemplates_add.html:60
-#: globaltemplates_add.html:95 globaltemplates_edit.html:54
-#: globaltemplates_edit.html:60 globaltemplates_edit.html:95
-#: globaltemplates_select.html:49 globaltemplates_select.html:53
-#: templates_add.html:107 templates_copy.html:95 templates_edit.html:107
+#: globaltemplates_add.html:55 globaltemplates_add.html:61
+#: globaltemplates_add.html:96 globaltemplates_edit.html:55
+#: globaltemplates_edit.html:61 globaltemplates_edit.html:96
+#: globaltemplates_select.html:50 globaltemplates_select.html:54
+#: templates_add.html:108 templates_copy.html:96 templates_edit.html:108
 msgid "Global Templates"
 msgstr "Globale Vorlagen"
 
 #: _inc_nav_templates.html:16 _inc_navigation.html:35 _inc_navigation.html:37
-#: globalfiles_add.html:52 globalfiles_add.html:58 globalfiles_edit.html:48
-#: globalfiles_edit.html:54 globalfiles_select.html:54
-#: globalfiles_select.html:58 globaltemplates_add.html:96
-#: globaltemplates_edit.html:96 templates_add.html:108 templates_copy.html:96
-#: templates_edit.html:108
+#: globalfiles_add.html:53 globalfiles_add.html:59 globalfiles_edit.html:53
+#: globalfiles_edit.html:59 globalfiles_select.html:54
+#: globalfiles_select.html:58 globaltemplates_add.html:97
+#: globaltemplates_edit.html:97 templates_add.html:109 templates_copy.html:97
+#: templates_edit.html:109
 msgid "Global Files"
 msgstr "Globale Dateien"
 
-#: _inc_nav_users.html:4 _inc_topnav.html:39 blogcomments_select.html:55
-#: _inc_navigation.html:7 _inc_navigation.html:9 groups_add.html:52
-#: groups_edit.html:48 groups_select.html:48 rights_add.html:52
-#: rights_edit.html:48 rights_select.html:48 users_add.html:52
-#: users_add.html:58 users_edit.html:48 users_edit.html:54
-#: users_select.html:48 users_select.html:52
+#: _inc_nav_users.html:4 _inc_topnav.html:39 blogcomments_select.html:56
+#: _inc_navigation.html:7 _inc_navigation.html:9 groups_add.html:54
+#: groups_edit.html:49 groups_select.html:49 rights_add.html:53
+#: rights_edit.html:49 rights_select.html:49 users_add.html:53
+#: users_add.html:59 users_edit.html:50 users_edit.html:56
+#: users_select.html:49 users_select.html:53
 msgid "Users"
 msgstr "Benutzer"
 
 #: _inc_nav_users.html:10 _inc_navigation.html:21 _inc_navigation.html:23
-#: rights_add.html:52 rights_add.html:58 rights_edit.html:48
-#: rights_edit.html:54 rights_select.html:48 rights_select.html:52
+#: rights_add.html:53 rights_add.html:59 rights_edit.html:49
+#: rights_edit.html:55 rights_select.html:49 rights_select.html:53
 #: groups_add.php:131 groups_copy.php:148 groups_edit.php:148
 msgid "Rights"
 msgstr "Benutzerrechte"
 
-#: _inc_projects_load.html:7 groups_select.html:69 users_select.html:88
+#: _inc_projects_load.html:7 groups_select.html:70 users_select.html:89
 #: configuration.php:74
 msgid "Project"
 msgstr "Projekt"
@@ -1943,31 +1964,31 @@ msgstr "Laden"
 msgid "Load project"
 msgstr "Lade Projekt"
 
-#: _inc_topnav.html:20 abbreviations_add.html:55 abbreviations_edit.html:55
-#: abbreviations_select.html:48 globalboxes_add.html:59
-#: globalboxes_edit.html:59 globalboxes_select.html:48 navigations_add.html:52
-#: navigations_edit.html:48 navigations_select.html:48 pages_add.html:55
-#: pages_blogs_pingserviceconfigurations_add.html:71
-#: pages_blogs_pingserviceconfigurations_edit.html:67
-#: pages_blogs_pingserviceconfigurations_select.html:82
-#: pages_blogs_postings_add.html:79 pages_blogs_postings_edit.html:86
-#: pages_blogs_postings_select.html:67 pages_boxes_add.html:95
-#: pages_boxes_edit.html:95 pages_boxes_select.html:88 pages_edit.html:139
-#: pages_generatorforms_content_edit.html:80
-#: pages_generatorforms_fields_add.html:77
-#: pages_generatorforms_fields_edit.html:77
-#: pages_generatorforms_fields_select.html:67 pages_move_away.html:48
-#: pages_select.html:52 pages_simple_dates_add.html:78
-#: pages_simple_dates_edit.html:78 pages_simple_dates_select.html:67
-#: pages_simpleforms_content_edit.html:77
-#: pages_simpleguestbooks_content_edit.html:80
-#: pages_simpleguestbooks_entries_edit.html:77
-#: pages_simpleguestbooks_entries_select.html:68
-#: pages_simplepages_content_edit.html:79 pages_urls_content_edit.html:61
-#: pagetypes_add.html:52 pagetypes_edit.html:49 pagetypes_select.html:48
-#: podcastcategories_add.html:55 podcastcategories_edit.html:50
-#: podcastcategories_select.html:48 structuraltemplates_add.html:55
-#: structuraltemplates_edit.html:55 structuraltemplates_select.html:48
+#: _inc_topnav.html:20 abbreviations_add.html:56 abbreviations_edit.html:56
+#: abbreviations_select.html:49 globalboxes_add.html:60
+#: globalboxes_edit.html:60 globalboxes_select.html:49 navigations_add.html:53
+#: navigations_edit.html:49 navigations_select.html:48 pages_add.html:56
+#: pages_blogs_pingserviceconfigurations_add.html:72
+#: pages_blogs_pingserviceconfigurations_edit.html:68
+#: pages_blogs_pingserviceconfigurations_select.html:83
+#: pages_blogs_postings_add.html:80 pages_blogs_postings_edit.html:87
+#: pages_blogs_postings_select.html:68 pages_boxes_add.html:96
+#: pages_boxes_edit.html:96 pages_boxes_select.html:89 pages_edit.html:140
+#: pages_generatorforms_content_edit.html:81
+#: pages_generatorforms_fields_add.html:78
+#: pages_generatorforms_fields_edit.html:78
+#: pages_generatorforms_fields_select.html:68 pages_move_away.html:49
+#: pages_select.html:52 pages_simple_dates_add.html:79
+#: pages_simple_dates_edit.html:79 pages_simple_dates_select.html:68
+#: pages_simpleforms_content_edit.html:78
+#: pages_simpleguestbooks_content_edit.html:81
+#: pages_simpleguestbooks_entries_edit.html:78
+#: pages_simpleguestbooks_entries_select.html:69
+#: pages_simplepages_content_edit.html:80 pages_urls_content_edit.html:62
+#: pagetypes_add.html:53 pagetypes_edit.html:50 pagetypes_select.html:49
+#: podcastcategories_add.html:56 podcastcategories_edit.html:51
+#: podcastcategories_select.html:49 structuraltemplates_add.html:56
+#: structuraltemplates_edit.html:56 structuraltemplates_select.html:49
 msgid "Contents"
 msgstr "Inhalte"
 
@@ -1975,37 +1996,37 @@ msgstr "Inhalte"
 msgid "Media Library"
 msgstr "Media Bibliothek"
 
-#: _inc_topnav.html:31 antispamplugins_add.html:52
-#: antispamplugins_edit.html:48 antispamplugins_select.html:48
-#: blogcomments_edit.html:48 blogcommentstatuses_add.html:52
-#: blogcommentstatuses_edit.html:48 blogcommentstatuses_select.html:48
-#: settings.html:52
+#: _inc_topnav.html:31 antispamplugins_add.html:53
+#: antispamplugins_edit.html:49 antispamplugins_select.html:49
+#: blogcomments_edit.html:49 blogcommentstatuses_add.html:53
+#: blogcommentstatuses_edit.html:49 blogcommentstatuses_select.html:49
+#: settings.html:53
 msgid "Community"
 msgstr "Community"
 
-#: _inc_topnav.html:49 globalfiles_add.html:52 globalfiles_edit.html:48
-#: globalfiles_select.html:54 globaltemplates_add.html:54
-#: globaltemplates_edit.html:54 globaltemplates_select.html:49
-#: templates_add.html:54 templates_copy.html:48 templates_edit.html:54
-#: templates_select.html:49 templatesets_add.html:52 templatesets_edit.html:48
-#: templatesets_select.html:48 templatetypes_add.html:52
-#: templatetypes_edit.html:48 templatetypes_select.html:48
+#: _inc_topnav.html:49 globalfiles_add.html:53 globalfiles_edit.html:53
+#: globalfiles_select.html:54 globaltemplates_add.html:55
+#: globaltemplates_edit.html:55 globaltemplates_select.html:50
+#: templates_add.html:55 templates_copy.html:49 templates_edit.html:55
+#: templates_select.html:50 templatesets_add.html:53 templatesets_edit.html:49
+#: templatesets_select.html:47 templatetypes_add.html:53
+#: templatetypes_edit.html:49 templatetypes_select.html:49
 msgid "Templating"
 msgstr "Vorlagen"
 
-#: _inc_topnav.html:60 actions_select.html:49 pingservices_add.html:52
-#: pingservices_edit.html:48 pingservices_select.html:48 projects_add.html:52
-#: projects_edit.html:48 projects_select.html:48 sitemaps.html:52
-#: textconverters_add.html:52 textconverters_edit.html:48
-#: textconverters_select.html:48 textmacros_add.html:52
-#: textmacros_edit.html:48 textmacros_select.html:48 settings.html:52
-#: settings.html:56
+#: _inc_topnav.html:60 actions_select.html:50 pingservices_add.html:53
+#: pingservices_edit.html:49 pingservices_select.html:49 projects_add.html:53
+#: projects_edit.html:49 projects_select.html:49 sitemaps.html:53
+#: textconverters_add.html:53 textconverters_edit.html:49
+#: textconverters_select.html:47 textmacros_add.html:53
+#: textmacros_edit.html:49 textmacros_select.html:49 settings.html:53
+#: settings.html:57
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: _inc_navigation.html:28 _inc_navigation.html:30 textmacros_add.html:52
-#: textmacros_add.html:58 textmacros_edit.html:48 textmacros_edit.html:54
-#: textmacros_select.html:48 textmacros_select.html:52
+#: _inc_navigation.html:28 _inc_navigation.html:30 textmacros_add.html:53
+#: textmacros_add.html:59 textmacros_edit.html:49 textmacros_edit.html:55
+#: textmacros_select.html:49 textmacros_select.html:53
 msgid "Text Macros"
 msgstr "Textmakros"
 
@@ -2013,162 +2034,162 @@ msgstr "Textmakros"
 msgid "Welcompose Admin &ndash; Projects"
 msgstr "Welcompose Admin &ndash; Projekte"
 
-#: actions_select.html:30 pingservices_add.html:33 pingservices_edit.html:29
-#: pingservices_select.html:29 projects_add.html:33 projects_edit.html:29
-#: projects_select.html:29 sitemaps.html:33 textconverters_add.html:33
-#: textconverters_edit.html:29 textconverters_select.html:29
-#: textmacros_add.html:33 textmacros_edit.html:29 textmacros_select.html:29
-#: antispamplugins_add.html:33 antispamplugins_edit.html:29
-#: antispamplugins_select.html:29 blogcomments_edit.html:29
-#: blogcomments_select.html:36 blogcommentstatuses_add.html:33
-#: blogcommentstatuses_edit.html:29 blogcommentstatuses_select.html:29
-#: settings.html:33 abbreviations_add.html:36 abbreviations_edit.html:36
-#: abbreviations_select.html:29 globalboxes_add.html:40
-#: globalboxes_edit.html:40 globalboxes_select.html:29 navigations_add.html:33
-#: navigations_edit.html:29 navigations_select.html:29 pages_add.html:33
-#: pages_blogs_pingserviceconfigurations_add.html:33
-#: pages_blogs_pingserviceconfigurations_edit.html:29
-#: pages_blogs_pingserviceconfigurations_select.html:29
-#: pages_blogs_postings_add.html:41 pages_blogs_postings_edit.html:48
-#: pages_blogs_postings_select.html:29 pages_boxes_add.html:40
-#: pages_boxes_edit.html:40 pages_boxes_select.html:33 pages_edit.html:33
-#: pages_generatorforms_content_edit.html:42
-#: pages_generatorforms_fields_add.html:39
-#: pages_generatorforms_fields_edit.html:39
-#: pages_generatorforms_fields_select.html:29 pages_move_away.html:29
-#: pages_select.html:33 pages_simple_dates_add.html:40
-#: pages_simple_dates_edit.html:40 pages_simple_dates_select.html:29
-#: pages_simpleforms_content_edit.html:42
-#: pages_simpleguestbooks_content_edit.html:42
-#: pages_simpleguestbooks_entries_edit.html:39
-#: pages_simpleguestbooks_entries_select.html:30
-#: pages_simplepages_content_edit.html:43 pages_urls_content_edit.html:29
-#: pagetypes_add.html:33 pagetypes_edit.html:30 pagetypes_select.html:29
-#: podcastcategories_add.html:36 podcastcategories_edit.html:31
-#: podcastcategories_select.html:29 structuraltemplates_add.html:36
-#: structuraltemplates_edit.html:36 structuraltemplates_select.html:29
+#: actions_select.html:31 pingservices_add.html:34 pingservices_edit.html:30
+#: pingservices_select.html:30 projects_add.html:34 projects_edit.html:30
+#: projects_select.html:30 sitemaps.html:34 textconverters_add.html:34
+#: textconverters_edit.html:30 textconverters_select.html:28
+#: textmacros_add.html:34 textmacros_edit.html:30 textmacros_select.html:30
+#: antispamplugins_add.html:34 antispamplugins_edit.html:30
+#: antispamplugins_select.html:30 blogcomments_edit.html:30
+#: blogcomments_select.html:37 blogcommentstatuses_add.html:34
+#: blogcommentstatuses_edit.html:30 blogcommentstatuses_select.html:30
+#: settings.html:34 abbreviations_add.html:37 abbreviations_edit.html:37
+#: abbreviations_select.html:30 globalboxes_add.html:41
+#: globalboxes_edit.html:41 globalboxes_select.html:30 navigations_add.html:34
+#: navigations_edit.html:30 navigations_select.html:29 pages_add.html:34
+#: pages_blogs_pingserviceconfigurations_add.html:34
+#: pages_blogs_pingserviceconfigurations_edit.html:30
+#: pages_blogs_pingserviceconfigurations_select.html:30
+#: pages_blogs_postings_add.html:42 pages_blogs_postings_edit.html:49
+#: pages_blogs_postings_select.html:30 pages_boxes_add.html:41
+#: pages_boxes_edit.html:41 pages_boxes_select.html:34 pages_edit.html:34
+#: pages_generatorforms_content_edit.html:43
+#: pages_generatorforms_fields_add.html:40
+#: pages_generatorforms_fields_edit.html:40
+#: pages_generatorforms_fields_select.html:30 pages_move_away.html:30
+#: pages_select.html:33 pages_simple_dates_add.html:41
+#: pages_simple_dates_edit.html:41 pages_simple_dates_select.html:30
+#: pages_simpleforms_content_edit.html:43
+#: pages_simpleguestbooks_content_edit.html:43
+#: pages_simpleguestbooks_entries_edit.html:40
+#: pages_simpleguestbooks_entries_select.html:31
+#: pages_simplepages_content_edit.html:44 pages_urls_content_edit.html:30
+#: pagetypes_add.html:34 pagetypes_edit.html:31 pagetypes_select.html:30
+#: podcastcategories_add.html:37 podcastcategories_edit.html:32
+#: podcastcategories_select.html:30 structuraltemplates_add.html:37
+#: structuraltemplates_edit.html:37 structuraltemplates_select.html:30
 #: error.html:18 error_popup_403.html:27 error_popup_723.html:27 login.html:20
-#: globalfiles_add.html:33 globalfiles_edit.html:29 globalfiles_select.html:35
-#: globaltemplates_add.html:35 globaltemplates_edit.html:35
-#: globaltemplates_select.html:30 templates_add.html:35 templates_copy.html:29
-#: templates_edit.html:35 templates_select.html:30 templatesets_add.html:33
-#: templatesets_edit.html:29 templatesets_select.html:29
-#: templatetypes_add.html:33 templatetypes_edit.html:29
-#: templatetypes_select.html:29 groups_add.html:33 groups_edit.html:29
-#: groups_select.html:29 rights_add.html:33 rights_edit.html:29
-#: rights_select.html:29 users_add.html:33 users_edit.html:29
-#: users_select.html:29
+#: globalfiles_add.html:34 globalfiles_edit.html:34 globalfiles_select.html:35
+#: globaltemplates_add.html:36 globaltemplates_edit.html:36
+#: globaltemplates_select.html:31 templates_add.html:36 templates_copy.html:30
+#: templates_edit.html:36 templates_select.html:31 templatesets_add.html:34
+#: templatesets_edit.html:30 templatesets_select.html:28
+#: templatetypes_add.html:34 templatetypes_edit.html:30
+#: templatetypes_select.html:30 groups_add.html:35 groups_edit.html:30
+#: groups_select.html:30 rights_add.html:34 rights_edit.html:30
+#: rights_select.html:30 users_add.html:34 users_edit.html:31
+#: users_select.html:30
 msgid "Welcompose"
 msgstr "Welcompose"
 
-#: actions_select.html:33 pingservices_add.html:36 pingservices_edit.html:32
-#: pingservices_select.html:32 projects_add.html:36 projects_edit.html:32
-#: projects_select.html:32 sitemaps.html:36 textconverters_add.html:36
-#: textconverters_edit.html:32 textconverters_select.html:32
-#: textmacros_add.html:36 textmacros_edit.html:32 textmacros_select.html:32
-#: antispamplugins_add.html:36 antispamplugins_edit.html:32
-#: antispamplugins_select.html:32 blogcomments_edit.html:32
-#: blogcomments_select.html:39 blogcommentstatuses_add.html:36
-#: blogcommentstatuses_edit.html:32 blogcommentstatuses_select.html:32
-#: settings.html:36 abbreviations_add.html:39 abbreviations_edit.html:39
-#: abbreviations_select.html:32 globalboxes_add.html:43
-#: globalboxes_edit.html:43 globalboxes_select.html:32 navigations_add.html:36
-#: navigations_edit.html:32 navigations_select.html:32 pages_add.html:36
-#: pages_blogs_pingserviceconfigurations_add.html:36
-#: pages_blogs_pingserviceconfigurations_edit.html:32
-#: pages_blogs_pingserviceconfigurations_select.html:32
-#: pages_blogs_postings_add.html:44 pages_blogs_postings_edit.html:51
-#: pages_blogs_postings_select.html:32 pages_boxes_add.html:43
-#: pages_boxes_edit.html:43 pages_boxes_select.html:36 pages_edit.html:36
-#: pages_generatorforms_content_edit.html:45
-#: pages_generatorforms_fields_add.html:42
-#: pages_generatorforms_fields_edit.html:42
-#: pages_generatorforms_fields_select.html:32 pages_move_away.html:32
-#: pages_select.html:36 pages_simple_dates_add.html:43
-#: pages_simple_dates_edit.html:43 pages_simple_dates_select.html:32
-#: pages_simpleforms_content_edit.html:45
-#: pages_simpleguestbooks_content_edit.html:45
-#: pages_simpleguestbooks_entries_edit.html:42
-#: pages_simpleguestbooks_entries_select.html:33
-#: pages_simplepages_content_edit.html:46 pages_urls_content_edit.html:32
-#: pagetypes_add.html:36 pagetypes_edit.html:33 pagetypes_select.html:32
-#: podcastcategories_add.html:39 podcastcategories_edit.html:34
-#: podcastcategories_select.html:32 structuraltemplates_add.html:39
-#: structuraltemplates_edit.html:39 structuraltemplates_select.html:32
-#: globalfiles_add.html:36 globalfiles_edit.html:32 globalfiles_select.html:38
-#: globaltemplates_add.html:38 globaltemplates_edit.html:38
-#: globaltemplates_select.html:33 templates_add.html:38 templates_copy.html:32
-#: templates_edit.html:38 templates_select.html:33 templatesets_add.html:36
-#: templatesets_edit.html:32 templatesets_select.html:32
-#: templatetypes_add.html:36 templatetypes_edit.html:32
-#: templatetypes_select.html:32 groups_add.html:36 groups_edit.html:32
-#: groups_select.html:32 rights_add.html:36 rights_edit.html:32
-#: rights_select.html:32 users_add.html:36 users_edit.html:32
-#: users_select.html:32
+#: actions_select.html:34 pingservices_add.html:37 pingservices_edit.html:33
+#: pingservices_select.html:33 projects_add.html:37 projects_edit.html:33
+#: projects_select.html:33 sitemaps.html:37 textconverters_add.html:37
+#: textconverters_edit.html:33 textconverters_select.html:31
+#: textmacros_add.html:37 textmacros_edit.html:33 textmacros_select.html:33
+#: antispamplugins_add.html:37 antispamplugins_edit.html:33
+#: antispamplugins_select.html:33 blogcomments_edit.html:33
+#: blogcomments_select.html:40 blogcommentstatuses_add.html:37
+#: blogcommentstatuses_edit.html:33 blogcommentstatuses_select.html:33
+#: settings.html:37 abbreviations_add.html:40 abbreviations_edit.html:40
+#: abbreviations_select.html:33 globalboxes_add.html:44
+#: globalboxes_edit.html:44 globalboxes_select.html:33 navigations_add.html:37
+#: navigations_edit.html:33 navigations_select.html:32 pages_add.html:37
+#: pages_blogs_pingserviceconfigurations_add.html:37
+#: pages_blogs_pingserviceconfigurations_edit.html:33
+#: pages_blogs_pingserviceconfigurations_select.html:33
+#: pages_blogs_postings_add.html:45 pages_blogs_postings_edit.html:52
+#: pages_blogs_postings_select.html:33 pages_boxes_add.html:44
+#: pages_boxes_edit.html:44 pages_boxes_select.html:37 pages_edit.html:37
+#: pages_generatorforms_content_edit.html:46
+#: pages_generatorforms_fields_add.html:43
+#: pages_generatorforms_fields_edit.html:43
+#: pages_generatorforms_fields_select.html:33 pages_move_away.html:33
+#: pages_select.html:36 pages_simple_dates_add.html:44
+#: pages_simple_dates_edit.html:44 pages_simple_dates_select.html:33
+#: pages_simpleforms_content_edit.html:46
+#: pages_simpleguestbooks_content_edit.html:46
+#: pages_simpleguestbooks_entries_edit.html:43
+#: pages_simpleguestbooks_entries_select.html:34
+#: pages_simplepages_content_edit.html:47 pages_urls_content_edit.html:33
+#: pagetypes_add.html:37 pagetypes_edit.html:34 pagetypes_select.html:33
+#: podcastcategories_add.html:40 podcastcategories_edit.html:35
+#: podcastcategories_select.html:33 structuraltemplates_add.html:40
+#: structuraltemplates_edit.html:40 structuraltemplates_select.html:33
+#: globalfiles_add.html:37 globalfiles_edit.html:37 globalfiles_select.html:38
+#: globaltemplates_add.html:39 globaltemplates_edit.html:39
+#: globaltemplates_select.html:34 templates_add.html:39 templates_copy.html:33
+#: templates_edit.html:39 templates_select.html:34 templatesets_add.html:37
+#: templatesets_edit.html:33 templatesets_select.html:31
+#: templatetypes_add.html:37 templatetypes_edit.html:33
+#: templatetypes_select.html:33 groups_add.html:38 groups_edit.html:33
+#: groups_select.html:33 rights_add.html:37 rights_edit.html:33
+#: rights_select.html:33 users_add.html:37 users_edit.html:34
+#: users_select.html:33
 msgid "Logged in as user"
 msgstr "Angemeldeter Benutzer"
 
-#: actions_select.html:35 pingservices_add.html:38 pingservices_edit.html:34
-#: pingservices_select.html:34 projects_add.html:38 projects_edit.html:34
-#: projects_select.html:34 sitemaps.html:38 textconverters_add.html:38
-#: textconverters_edit.html:34 textconverters_select.html:34
-#: textmacros_add.html:38 textmacros_edit.html:34 textmacros_select.html:34
-#: antispamplugins_add.html:38 antispamplugins_edit.html:34
-#: antispamplugins_select.html:34 blogcomments_edit.html:34
-#: blogcomments_select.html:41 blogcommentstatuses_add.html:38
-#: blogcommentstatuses_edit.html:34 blogcommentstatuses_select.html:34
-#: settings.html:38 abbreviations_add.html:41 abbreviations_edit.html:41
-#: abbreviations_select.html:34 globalboxes_add.html:45
-#: globalboxes_edit.html:45 globalboxes_select.html:34 navigations_add.html:38
-#: navigations_edit.html:34 navigations_select.html:34 pages_add.html:38
-#: pages_blogs_pingserviceconfigurations_add.html:38
-#: pages_blogs_pingserviceconfigurations_edit.html:34
-#: pages_blogs_pingserviceconfigurations_select.html:34
-#: pages_blogs_postings_add.html:46 pages_blogs_postings_edit.html:53
-#: pages_blogs_postings_select.html:34 pages_boxes_add.html:45
-#: pages_boxes_edit.html:45 pages_boxes_select.html:38 pages_edit.html:38
-#: pages_generatorforms_content_edit.html:47
-#: pages_generatorforms_fields_add.html:44
-#: pages_generatorforms_fields_edit.html:44
-#: pages_generatorforms_fields_select.html:34 pages_move_away.html:34
-#: pages_select.html:38 pages_simple_dates_add.html:45
-#: pages_simple_dates_edit.html:45 pages_simple_dates_select.html:34
-#: pages_simpleforms_content_edit.html:47
-#: pages_simpleguestbooks_content_edit.html:47
-#: pages_simpleguestbooks_entries_edit.html:44
-#: pages_simpleguestbooks_entries_select.html:35
-#: pages_simplepages_content_edit.html:48 pages_urls_content_edit.html:34
-#: pagetypes_add.html:38 pagetypes_edit.html:35 pagetypes_select.html:34
-#: podcastcategories_add.html:41 podcastcategories_edit.html:36
-#: podcastcategories_select.html:34 structuraltemplates_add.html:41
-#: structuraltemplates_edit.html:41 structuraltemplates_select.html:34
-#: globalfiles_add.html:38 globalfiles_edit.html:34 globalfiles_select.html:40
-#: globaltemplates_add.html:40 globaltemplates_edit.html:40
-#: globaltemplates_select.html:35 templates_add.html:40 templates_copy.html:34
-#: templates_edit.html:40 templates_select.html:35 templatesets_add.html:38
-#: templatesets_edit.html:34 templatesets_select.html:34
-#: templatetypes_add.html:38 templatetypes_edit.html:34
-#: templatetypes_select.html:34 groups_add.html:38 groups_edit.html:34
-#: groups_select.html:34 rights_add.html:38 rights_edit.html:34
-#: rights_select.html:34 users_add.html:38 users_edit.html:34
-#: users_select.html:34
+#: actions_select.html:36 pingservices_add.html:39 pingservices_edit.html:35
+#: pingservices_select.html:35 projects_add.html:39 projects_edit.html:35
+#: projects_select.html:35 sitemaps.html:39 textconverters_add.html:39
+#: textconverters_edit.html:35 textconverters_select.html:33
+#: textmacros_add.html:39 textmacros_edit.html:35 textmacros_select.html:35
+#: antispamplugins_add.html:39 antispamplugins_edit.html:35
+#: antispamplugins_select.html:35 blogcomments_edit.html:35
+#: blogcomments_select.html:42 blogcommentstatuses_add.html:39
+#: blogcommentstatuses_edit.html:35 blogcommentstatuses_select.html:35
+#: settings.html:39 abbreviations_add.html:42 abbreviations_edit.html:42
+#: abbreviations_select.html:35 globalboxes_add.html:46
+#: globalboxes_edit.html:46 globalboxes_select.html:35 navigations_add.html:39
+#: navigations_edit.html:35 navigations_select.html:34 pages_add.html:39
+#: pages_blogs_pingserviceconfigurations_add.html:39
+#: pages_blogs_pingserviceconfigurations_edit.html:35
+#: pages_blogs_pingserviceconfigurations_select.html:35
+#: pages_blogs_postings_add.html:47 pages_blogs_postings_edit.html:54
+#: pages_blogs_postings_select.html:35 pages_boxes_add.html:46
+#: pages_boxes_edit.html:46 pages_boxes_select.html:39 pages_edit.html:39
+#: pages_generatorforms_content_edit.html:48
+#: pages_generatorforms_fields_add.html:45
+#: pages_generatorforms_fields_edit.html:45
+#: pages_generatorforms_fields_select.html:35 pages_move_away.html:35
+#: pages_select.html:38 pages_simple_dates_add.html:46
+#: pages_simple_dates_edit.html:46 pages_simple_dates_select.html:35
+#: pages_simpleforms_content_edit.html:48
+#: pages_simpleguestbooks_content_edit.html:48
+#: pages_simpleguestbooks_entries_edit.html:45
+#: pages_simpleguestbooks_entries_select.html:36
+#: pages_simplepages_content_edit.html:49 pages_urls_content_edit.html:35
+#: pagetypes_add.html:39 pagetypes_edit.html:36 pagetypes_select.html:35
+#: podcastcategories_add.html:42 podcastcategories_edit.html:37
+#: podcastcategories_select.html:35 structuraltemplates_add.html:42
+#: structuraltemplates_edit.html:42 structuraltemplates_select.html:35
+#: globalfiles_add.html:39 globalfiles_edit.html:39 globalfiles_select.html:40
+#: globaltemplates_add.html:41 globaltemplates_edit.html:41
+#: globaltemplates_select.html:36 templates_add.html:41 templates_copy.html:35
+#: templates_edit.html:41 templates_select.html:36 templatesets_add.html:39
+#: templatesets_edit.html:35 templatesets_select.html:33
+#: templatetypes_add.html:39 templatetypes_edit.html:35
+#: templatetypes_select.html:35 groups_add.html:40 groups_edit.html:35
+#: groups_select.html:35 rights_add.html:39 rights_edit.html:35
+#: rights_select.html:35 users_add.html:39 users_edit.html:36
+#: users_select.html:35
 msgid "Logout"
 msgstr "Abmelden"
 
-#: actions_select.html:58
+#: actions_select.html:59
 msgid "Available Actions"
 msgstr "Verfügbare Aktionen"
 
-#: actions_select.html:68 actions_select.html:75 actions_select.html:99
-#: actions_select.html:107
+#: actions_select.html:69 actions_select.html:76 actions_select.html:100
+#: actions_select.html:108
 msgid "Run action"
 msgstr "Ausführen"
 
-#: actions_select.html:72
+#: actions_select.html:73
 msgid "Apply URL Patterns"
 msgstr "Aktuelles URL Pattern Layout anwenden"
 
-#: actions_select.html:73
+#: actions_select.html:74
 msgid ""
 "Everytime you change the URL Patterns Layout within the Welcompose "
 "configuration file (sys.inc.php) you should perfom this action so your "
@@ -2179,11 +2200,11 @@ msgstr ""
 "Dieses gewährleistet, das die Links ihrer Installation dem aktuellen URL "
 "Pattern Layout entsprechen."
 
-#: actions_select.html:79
+#: actions_select.html:80
 msgid "Apply Abbreviations and Glossary Page"
 msgstr "Abkürzungen und Glossar anwenden"
 
-#: actions_select.html:80
+#: actions_select.html:81
 msgid ""
 "You should apply this action whenever you edited the attributes of a "
 "abbreviation.<br />Please note: To include abbreviations with a glossary "
@@ -2194,29 +2215,30 @@ msgstr ""
 "mit einem Glossareintrag zu berücksichtigen, aktivieren Sie die Checkbox und "
 "wählen sie die Zielseite für ihr Glossar aus."
 
-#: actions_select.html:83
+#: actions_select.html:84
 msgid "Apply Glossar Page?"
 msgstr "Glossar Seite anwenden?"
 
-#: actions_select.html:86
+#: actions_select.html:87
 msgid "Please choose your glossary target page"
 msgstr "Bitte wählen Sie eine Seite, die Sie als Glossar nutzen möchten"
 
-#: actions_select.html:88 blogcomments_select.html:70
-#: blogcomments_select.html:79 blogcomments_select.html:86
-#: pages_blogs_postings_select.html:83 pages_blogs_postings_select.html:90
-#: pages_simple_dates_select.html:83 pages_simple_dates_select.html:90
-#: pages_simpleguestbooks_entries_select.html:84 mediamanager.html:63
-#: mediamanager.html:152 templates_select.html:64 templates_select.html:71
-#: users_select.html:64
+#: actions_select.html:89 blogcomments_select.html:71
+#: blogcomments_select.html:80 blogcomments_select.html:87
+#: pages_blogs_postings_select.html:84 pages_blogs_postings_select.html:91
+#: pages_select.html:140 pages_simple_dates_select.html:84
+#: pages_simple_dates_select.html:91
+#: pages_simpleguestbooks_entries_select.html:85 mediamanager.html:63
+#: mediamanager.html:152 templates_select.html:65 templates_select.html:72
+#: users_select.html:65
 msgid "Please choose..."
 msgstr "Bitte wählen Sie..."
 
-#: actions_select.html:104
+#: actions_select.html:105
 msgid "Delete Frontend Smarty Compiled Templates"
 msgstr "Kompilierte Frontend Smarty Vorlagen löschen"
 
-#: actions_select.html:105
+#: actions_select.html:106
 msgid ""
 "If you edit templates and rebind references within the backend, it might be "
 "necessary to delete the Smarty compiled templates of your frontend output to "
@@ -2232,261 +2254,262 @@ msgstr ""
 msgid "Welcompose Admin &ndash; Add Ping Service"
 msgstr "Welcompose Admin &ndash; Neuen Ping-Service anlegen"
 
-#: pingservices_add.html:52 pingservices_add.html:56
-#: pages_blogs_pingserviceconfigurations_add.html:73
-#: pages_blogs_pingserviceconfigurations_add.html:77
+#: pingservices_add.html:53 pingservices_add.html:57
+#: pages_blogs_pingserviceconfigurations_add.html:74
+#: pages_blogs_pingserviceconfigurations_add.html:78
 msgid "Add Ping Service"
 msgstr "Neuen Ping-Service anlegen"
 
-#: pingservices_add.html:73 projects_add.html:73 textconverters_add.html:73
-#: textmacros_add.html:73 antispamplugins_add.html:73
-#: blogcommentstatuses_add.html:73 settings.html:73 abbreviations_add.html:76
-#: abbreviations_edit.html:76 callbacks_insert_abbreviations_links.html:68
-#: globalboxes_add.html:80 globalboxes_edit.html:80 navigations_add.html:73
-#: pages_add.html:92 pages_blogs_pingserviceconfigurations_add.html:102
-#: pages_blogs_postings_add.html:101 pages_blogs_postings_edit.html:108
-#: pages_boxes_add.html:116 pages_boxes_edit.html:116 pages_edit.html:168
-#: pages_generatorforms_content_edit.html:101
-#: pages_generatorforms_fields_add.html:99
-#: pages_generatorforms_fields_edit.html:99 pages_simple_dates_add.html:100
-#: pages_simple_dates_edit.html:100 pages_simpleforms_content_edit.html:98
-#: pages_simpleguestbooks_content_edit.html:101
-#: pages_simpleguestbooks_entries_edit.html:99
-#: pages_simplepages_content_edit.html:100 pagetypes_add.html:73
-#: podcastcategories_add.html:76 podcastcategories_edit.html:71
-#: structuraltemplates_add.html:76 structuraltemplates_edit.html:76
-#: mediamanager_upload.html:61 globalfiles_add.html:73
-#: globaltemplates_add.html:75 globaltemplates_edit.html:75
-#: templates_add.html:83 templates_edit.html:83 templatesets_add.html:73
-#: templatetypes_add.html:73 groups_add.html:73 rights_add.html:73
-#: users_add.html:81
+#: pingservices_add.html:74 projects_add.html:74 textconverters_add.html:74
+#: textmacros_add.html:74 antispamplugins_add.html:74
+#: blogcommentstatuses_add.html:74 settings.html:74 abbreviations_add.html:77
+#: abbreviations_edit.html:77 callbacks_insert_abbreviations_links.html:69
+#: globalboxes_add.html:81 globalboxes_edit.html:81 navigations_add.html:74
+#: pages_add.html:93 pages_blogs_pingserviceconfigurations_add.html:103
+#: pages_blogs_postings_add.html:102 pages_blogs_postings_edit.html:109
+#: pages_boxes_add.html:117 pages_boxes_edit.html:117 pages_edit.html:169
+#: pages_generatorforms_content_edit.html:102
+#: pages_generatorforms_fields_add.html:100
+#: pages_generatorforms_fields_edit.html:100 pages_simple_dates_add.html:101
+#: pages_simple_dates_edit.html:101 pages_simpleforms_content_edit.html:99
+#: pages_simpleguestbooks_content_edit.html:102
+#: pages_simpleguestbooks_entries_edit.html:100
+#: pages_simplepages_content_edit.html:101 pagetypes_add.html:74
+#: podcastcategories_add.html:77 podcastcategories_edit.html:72
+#: structuraltemplates_add.html:77 structuraltemplates_edit.html:77
+#: globaltemplates_add.html:76 globaltemplates_edit.html:76
+#: templates_add.html:84 templates_edit.html:84 templatesets_add.html:74
+#: templatetypes_add.html:74 groups_add.html:75 rights_add.html:74
+#: users_add.html:82
 msgid "Your input was successfully saved!"
 msgstr "Ihre Eingaben wurden gespeichert"
 
-#: pingservices_add.html:74 projects_add.html:74 textconverters_add.html:74
-#: textmacros_add.html:74 antispamplugins_add.html:74
-#: blogcommentstatuses_add.html:74 abbreviations_add.html:77
-#: callbacks_insert_abbreviations_links.html:69 globalboxes_add.html:81
-#: navigations_add.html:74 pages_add.html:93
-#: pages_blogs_pingserviceconfigurations_add.html:103
-#: pages_blogs_postings_add.html:102 pages_boxes_add.html:117
-#: pages_generatorforms_fields_add.html:100 pages_simple_dates_add.html:101
-#: pages_simpleguestbooks_entries_edit.html:100 pagetypes_add.html:74
-#: podcastcategories_add.html:77 podcastcategories_edit.html:72
-#: structuraltemplates_add.html:77 mediamanager_edit.html:62
-#: mediamanager_upload.html:62 globalfiles_add.html:74
-#: globaltemplates_add.html:76 templates_add.html:84 templatesets_add.html:74
-#: templatetypes_add.html:74 groups_add.html:74 rights_add.html:74
-#: users_add.html:82
+#: pingservices_add.html:75 projects_add.html:75 textconverters_add.html:75
+#: textmacros_add.html:75 antispamplugins_add.html:75
+#: blogcommentstatuses_add.html:75 abbreviations_add.html:78
+#: callbacks_insert_abbreviations_links.html:70 globalboxes_add.html:82
+#: navigations_add.html:75 pages_add.html:94
+#: pages_blogs_pingserviceconfigurations_add.html:104
+#: pages_blogs_postings_add.html:103 pages_boxes_add.html:118
+#: pages_generatorforms_fields_add.html:101 pages_simple_dates_add.html:102
+#: pages_simpleguestbooks_entries_edit.html:101 pagetypes_add.html:75
+#: podcastcategories_add.html:78 podcastcategories_edit.html:73
+#: structuraltemplates_add.html:78 mediamanager_edit.html:61
+#: mediamanager_upload.html:62 globalfiles_add.html:75
+#: globaltemplates_add.html:77 templates_add.html:85 templatesets_add.html:75
+#: templatetypes_add.html:75 groups_add.html:76 rights_add.html:75
+#: users_add.html:83
 msgid "To apply further input, please repeat fill in the form"
 msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 
-#: pingservices_add.html:85 pingservices_add.html:88 pingservices_add.html:91
-#: pingservices_add.html:94 pingservices_edit.html:74
-#: pingservices_edit.html:77 pingservices_edit.html:80
-#: pingservices_edit.html:83 projects_add.html:85 projects_edit.html:74
-#: sitemaps.html:87 textconverters_add.html:85 textconverters_add.html:88
-#: textconverters_add.html:91 textconverters_edit.html:74
-#: textconverters_edit.html:77 textconverters_edit.html:80
-#: textmacros_add.html:85 textmacros_add.html:88 textmacros_add.html:91
-#: textmacros_edit.html:74 textmacros_edit.html:77 textmacros_edit.html:80
-#: blogcomments_edit.html:74 blogcomments_edit.html:77
-#: blogcomments_edit.html:80 blogcomments_edit.html:83
-#: blogcommentstatuses_add.html:85 blogcommentstatuses_edit.html:74
-#: settings.html:87 settings.html:90 settings.html:93 settings.html:96
-#: settings.html:99 settings.html:102 settings.html:105 settings.html:108
-#: settings.html:111 settings.html:114 settings.html:122 settings.html:125
-#: settings.html:128 settings.html:131 settings.html:134 settings.html:137
-#: settings.html:140 settings.html:143 abbreviations_add.html:92
-#: abbreviations_add.html:95 abbreviations_add.html:106
-#: abbreviations_add.html:109 abbreviations_add.html:112
-#: abbreviations_add.html:115 abbreviations_edit.html:92
-#: abbreviations_edit.html:95 abbreviations_edit.html:106
-#: abbreviations_edit.html:109 abbreviations_edit.html:112
-#: abbreviations_edit.html:115 callbacks_insert_abbreviations_links.html:96
-#: callbacks_insert_abbreviations_links.html:99
-#: callbacks_insert_abbreviations_links.html:102
-#: callbacks_insert_abbreviations_links.html:105 globalboxes_add.html:96
-#: globalboxes_add.html:107 globalboxes_add.html:110 globalboxes_add.html:113
-#: globalboxes_edit.html:96 globalboxes_edit.html:107
-#: globalboxes_edit.html:110 globalboxes_edit.html:113 navigations_add.html:85
-#: navigations_edit.html:74 pages_add.html:103 pages_add.html:106
-#: pages_add.html:109 pages_add.html:112 pages_add.html:115 pages_add.html:118
-#: pages_add.html:121 pages_add.html:124 pages_add.html:127 pages_add.html:130
-#: pages_add.html:136 pages_add.html:139 pages_add.html:142 pages_add.html:145
-#: pages_add.html:148 pages_blogs_pingserviceconfigurations_add.html:114
-#: pages_blogs_pingserviceconfigurations_add.html:117
-#: pages_blogs_pingserviceconfigurations_add.html:120
-#: pages_blogs_pingserviceconfigurations_add.html:123
-#: pages_blogs_pingserviceconfigurations_add.html:126
-#: pages_blogs_pingserviceconfigurations_edit.html:104
-#: pages_blogs_pingserviceconfigurations_edit.html:107
-#: pages_blogs_pingserviceconfigurations_edit.html:110
-#: pages_blogs_pingserviceconfigurations_edit.html:113
-#: pages_blogs_pingserviceconfigurations_edit.html:116
-#: pages_blogs_postings_add.html:117 pages_blogs_postings_add.html:120
-#: pages_blogs_postings_add.html:131 pages_blogs_postings_add.html:142
-#: pages_blogs_postings_add.html:159 pages_blogs_postings_add.html:162
-#: pages_blogs_postings_add.html:165 pages_blogs_postings_add.html:168
-#: pages_blogs_postings_add.html:171 pages_blogs_postings_add.html:174
-#: pages_blogs_postings_add.html:177 pages_blogs_postings_add.html:180
-#: pages_blogs_postings_add.html:183 pages_blogs_postings_add.html:186
-#: pages_blogs_postings_add.html:201 pages_blogs_postings_add.html:204
-#: pages_blogs_postings_add.html:207 pages_blogs_postings_add.html:211
-#: pages_blogs_postings_add.html:214 pages_blogs_postings_add.html:217
-#: pages_blogs_postings_add.html:226 pages_blogs_postings_add.html:229
-#: pages_blogs_postings_add.html:232 pages_blogs_postings_add.html:235
-#: pages_blogs_postings_add.html:238 pages_blogs_postings_add.html:241
-#: pages_blogs_postings_add.html:244 pages_blogs_postings_edit.html:124
-#: pages_blogs_postings_edit.html:127 pages_blogs_postings_edit.html:138
-#: pages_blogs_postings_edit.html:150 pages_blogs_postings_edit.html:166
-#: pages_blogs_postings_edit.html:169 pages_blogs_postings_edit.html:172
-#: pages_blogs_postings_edit.html:175 pages_blogs_postings_edit.html:178
-#: pages_blogs_postings_edit.html:181 pages_blogs_postings_edit.html:184
-#: pages_blogs_postings_edit.html:187 pages_blogs_postings_edit.html:190
-#: pages_blogs_postings_edit.html:193 pages_blogs_postings_edit.html:208
-#: pages_blogs_postings_edit.html:211 pages_blogs_postings_edit.html:214
-#: pages_blogs_postings_edit.html:218 pages_blogs_postings_edit.html:221
-#: pages_blogs_postings_edit.html:224 pages_blogs_postings_edit.html:233
-#: pages_blogs_postings_edit.html:236 pages_blogs_postings_edit.html:239
-#: pages_blogs_postings_edit.html:242 pages_blogs_postings_edit.html:245
-#: pages_blogs_postings_edit.html:248 pages_blogs_postings_edit.html:251
-#: pages_boxes_add.html:132 pages_boxes_add.html:143 pages_boxes_add.html:146
-#: pages_boxes_add.html:149 pages_boxes_edit.html:132
-#: pages_boxes_edit.html:143 pages_boxes_edit.html:146
-#: pages_boxes_edit.html:149 pages_edit.html:180 pages_edit.html:183
-#: pages_edit.html:186 pages_edit.html:188 pages_edit.html:191
-#: pages_edit.html:194 pages_edit.html:197 pages_edit.html:200
-#: pages_edit.html:203 pages_edit.html:209 pages_edit.html:212
-#: pages_edit.html:215 pages_edit.html:218 pages_edit.html:221
-#: pages_generatorforms_content_edit.html:117
-#: pages_generatorforms_content_edit.html:120
-#: pages_generatorforms_content_edit.html:132
-#: pages_generatorforms_content_edit.html:135
-#: pages_generatorforms_content_edit.html:138
-#: pages_generatorforms_content_edit.html:141
-#: pages_generatorforms_content_edit.html:145
-#: pages_generatorforms_content_edit.html:148
-#: pages_generatorforms_content_edit.html:151
-#: pages_generatorforms_content_edit.html:155
-#: pages_generatorforms_content_edit.html:158
-#: pages_generatorforms_content_edit.html:161
-#: pages_generatorforms_content_edit.html:164
-#: pages_generatorforms_fields_add.html:111
-#: pages_generatorforms_fields_add.html:114
-#: pages_generatorforms_fields_add.html:117
-#: pages_generatorforms_fields_add.html:120
-#: pages_generatorforms_fields_add.html:123
-#: pages_generatorforms_fields_add.html:126
-#: pages_generatorforms_fields_add.html:129
-#: pages_generatorforms_fields_add.html:132
-#: pages_generatorforms_fields_add.html:135
-#: pages_generatorforms_fields_add.html:138
-#: pages_generatorforms_fields_edit.html:111
-#: pages_generatorforms_fields_edit.html:114
-#: pages_generatorforms_fields_edit.html:117
-#: pages_generatorforms_fields_edit.html:120
-#: pages_generatorforms_fields_edit.html:123
-#: pages_generatorforms_fields_edit.html:126
-#: pages_generatorforms_fields_edit.html:129
-#: pages_generatorforms_fields_edit.html:132
-#: pages_generatorforms_fields_edit.html:135
-#: pages_generatorforms_fields_edit.html:138 pages_move_away.html:83
-#: pages_simple_dates_add.html:116 pages_simple_dates_add.html:119
-#: pages_simple_dates_add.html:130 pages_simple_dates_add.html:134
-#: pages_simple_dates_add.html:137 pages_simple_dates_add.html:140
-#: pages_simple_dates_add.html:143 pages_simple_dates_add.html:146
-#: pages_simple_dates_add.html:149 pages_simple_dates_add.html:153
-#: pages_simple_dates_add.html:156 pages_simple_dates_add.html:159
-#: pages_simple_dates_add.html:162 pages_simple_dates_edit.html:116
-#: pages_simple_dates_edit.html:119 pages_simple_dates_edit.html:130
-#: pages_simple_dates_edit.html:134 pages_simple_dates_edit.html:137
-#: pages_simple_dates_edit.html:140 pages_simple_dates_edit.html:143
-#: pages_simple_dates_edit.html:146 pages_simple_dates_edit.html:149
-#: pages_simple_dates_edit.html:153 pages_simple_dates_edit.html:156
-#: pages_simple_dates_edit.html:159 pages_simple_dates_edit.html:162
-#: pages_simpleforms_content_edit.html:114
-#: pages_simpleforms_content_edit.html:117
-#: pages_simpleforms_content_edit.html:129
-#: pages_simpleforms_content_edit.html:132
-#: pages_simpleforms_content_edit.html:135
-#: pages_simpleforms_content_edit.html:138
-#: pages_simpleforms_content_edit.html:142
-#: pages_simpleforms_content_edit.html:145
-#: pages_simpleforms_content_edit.html:148
-#: pages_simpleforms_content_edit.html:152
-#: pages_simpleforms_content_edit.html:155
-#: pages_simpleforms_content_edit.html:158
-#: pages_simpleforms_content_edit.html:161
-#: pages_simpleforms_content_edit.html:164
-#: pages_simpleforms_content_edit.html:167
-#: pages_simpleguestbooks_content_edit.html:117
-#: pages_simpleguestbooks_content_edit.html:120
-#: pages_simpleguestbooks_content_edit.html:132
-#: pages_simpleguestbooks_content_edit.html:135
-#: pages_simpleguestbooks_content_edit.html:138
-#: pages_simpleguestbooks_content_edit.html:141
-#: pages_simpleguestbooks_content_edit.html:144
-#: pages_simpleguestbooks_content_edit.html:148
-#: pages_simpleguestbooks_content_edit.html:151
-#: pages_simpleguestbooks_content_edit.html:154
-#: pages_simpleguestbooks_content_edit.html:158
-#: pages_simpleguestbooks_content_edit.html:161
-#: pages_simpleguestbooks_content_edit.html:165
-#: pages_simpleguestbooks_content_edit.html:168
-#: pages_simpleguestbooks_content_edit.html:171
-#: pages_simpleguestbooks_entries_edit.html:111
-#: pages_simpleguestbooks_entries_edit.html:114
-#: pages_simpleguestbooks_entries_edit.html:117
-#: pages_simpleguestbooks_entries_edit.html:120
-#: pages_simplepages_content_edit.html:116
-#: pages_simplepages_content_edit.html:119
-#: pages_simplepages_content_edit.html:131
-#: pages_simplepages_content_edit.html:134
-#: pages_simplepages_content_edit.html:137
-#: pages_simplepages_content_edit.html:140
-#: pages_simplepages_content_edit.html:144
-#: pages_simplepages_content_edit.html:147
-#: pages_simplepages_content_edit.html:150 pages_urls_content_edit.html:87
-#: pagetypes_add.html:85 pagetypes_add.html:88 pagetypes_edit.html:75
-#: pagetypes_edit.html:78 podcastcategories_add.html:88
-#: podcastcategories_add.html:91 podcastcategories_edit.html:83
-#: podcastcategories_edit.html:86 structuraltemplates_add.html:92
-#: structuraltemplates_add.html:95 structuraltemplates_add.html:98
-#: structuraltemplates_edit.html:92 structuraltemplates_edit.html:95
-#: structuraltemplates_edit.html:98
-#: callbacks_insert_application-x-shockwave-flash.html:62
-#: callbacks_insert_application-x-shockwave-flash.html:65
+#: pingservices_add.html:86 pingservices_add.html:89 pingservices_add.html:92
+#: pingservices_add.html:95 pingservices_edit.html:75
+#: pingservices_edit.html:78 pingservices_edit.html:81
+#: pingservices_edit.html:84 projects_add.html:86 projects_add.html:89
+#: projects_edit.html:75 sitemaps.html:88 textconverters_add.html:86
+#: textconverters_add.html:89 textconverters_add.html:92
+#: textconverters_edit.html:75 textconverters_edit.html:78
+#: textconverters_edit.html:81 textmacros_add.html:86 textmacros_add.html:89
+#: textmacros_add.html:92 textmacros_edit.html:75 textmacros_edit.html:78
+#: textmacros_edit.html:81 blogcomments_edit.html:75 blogcomments_edit.html:78
+#: blogcomments_edit.html:81 blogcomments_edit.html:84
+#: blogcommentstatuses_add.html:86 blogcommentstatuses_edit.html:75
+#: settings.html:88 settings.html:91 settings.html:94 settings.html:97
+#: settings.html:100 settings.html:103 settings.html:106 settings.html:109
+#: settings.html:112 settings.html:115 settings.html:123 settings.html:126
+#: settings.html:129 settings.html:132 settings.html:135 settings.html:138
+#: settings.html:141 settings.html:144 abbreviations_add.html:93
+#: abbreviations_add.html:96 abbreviations_add.html:107
+#: abbreviations_add.html:110 abbreviations_add.html:113
+#: abbreviations_add.html:116 abbreviations_edit.html:93
+#: abbreviations_edit.html:96 abbreviations_edit.html:107
+#: abbreviations_edit.html:110 abbreviations_edit.html:113
+#: abbreviations_edit.html:116 callbacks_insert_abbreviations_links.html:97
+#: callbacks_insert_abbreviations_links.html:100
+#: callbacks_insert_abbreviations_links.html:103
+#: callbacks_insert_abbreviations_links.html:106 globalboxes_add.html:97
+#: globalboxes_add.html:108 globalboxes_add.html:111 globalboxes_add.html:114
+#: globalboxes_edit.html:97 globalboxes_edit.html:108
+#: globalboxes_edit.html:111 globalboxes_edit.html:114 navigations_add.html:86
+#: navigations_edit.html:75 pages_add.html:104 pages_add.html:107
+#: pages_add.html:110 pages_add.html:113 pages_add.html:116 pages_add.html:119
+#: pages_add.html:122 pages_add.html:125 pages_add.html:128 pages_add.html:131
+#: pages_add.html:137 pages_add.html:140 pages_add.html:143 pages_add.html:146
+#: pages_add.html:149 pages_blogs_pingserviceconfigurations_add.html:115
+#: pages_blogs_pingserviceconfigurations_add.html:118
+#: pages_blogs_pingserviceconfigurations_add.html:121
+#: pages_blogs_pingserviceconfigurations_add.html:124
+#: pages_blogs_pingserviceconfigurations_add.html:127
+#: pages_blogs_pingserviceconfigurations_edit.html:105
+#: pages_blogs_pingserviceconfigurations_edit.html:108
+#: pages_blogs_pingserviceconfigurations_edit.html:111
+#: pages_blogs_pingserviceconfigurations_edit.html:114
+#: pages_blogs_pingserviceconfigurations_edit.html:117
+#: pages_blogs_postings_add.html:118 pages_blogs_postings_add.html:121
+#: pages_blogs_postings_add.html:132 pages_blogs_postings_add.html:143
+#: pages_blogs_postings_add.html:160 pages_blogs_postings_add.html:163
+#: pages_blogs_postings_add.html:166 pages_blogs_postings_add.html:169
+#: pages_blogs_postings_add.html:172 pages_blogs_postings_add.html:175
+#: pages_blogs_postings_add.html:178 pages_blogs_postings_add.html:181
+#: pages_blogs_postings_add.html:184 pages_blogs_postings_add.html:187
+#: pages_blogs_postings_add.html:202 pages_blogs_postings_add.html:205
+#: pages_blogs_postings_add.html:208 pages_blogs_postings_add.html:212
+#: pages_blogs_postings_add.html:215 pages_blogs_postings_add.html:218
+#: pages_blogs_postings_add.html:227 pages_blogs_postings_add.html:230
+#: pages_blogs_postings_add.html:233 pages_blogs_postings_add.html:236
+#: pages_blogs_postings_add.html:239 pages_blogs_postings_add.html:242
+#: pages_blogs_postings_add.html:245 pages_blogs_postings_edit.html:125
+#: pages_blogs_postings_edit.html:128 pages_blogs_postings_edit.html:139
+#: pages_blogs_postings_edit.html:151 pages_blogs_postings_edit.html:167
+#: pages_blogs_postings_edit.html:170 pages_blogs_postings_edit.html:173
+#: pages_blogs_postings_edit.html:176 pages_blogs_postings_edit.html:179
+#: pages_blogs_postings_edit.html:182 pages_blogs_postings_edit.html:185
+#: pages_blogs_postings_edit.html:188 pages_blogs_postings_edit.html:191
+#: pages_blogs_postings_edit.html:194 pages_blogs_postings_edit.html:209
+#: pages_blogs_postings_edit.html:212 pages_blogs_postings_edit.html:215
+#: pages_blogs_postings_edit.html:219 pages_blogs_postings_edit.html:222
+#: pages_blogs_postings_edit.html:225 pages_blogs_postings_edit.html:234
+#: pages_blogs_postings_edit.html:237 pages_blogs_postings_edit.html:240
+#: pages_blogs_postings_edit.html:243 pages_blogs_postings_edit.html:246
+#: pages_blogs_postings_edit.html:249 pages_blogs_postings_edit.html:252
+#: pages_boxes_add.html:133 pages_boxes_add.html:144 pages_boxes_add.html:147
+#: pages_boxes_add.html:150 pages_boxes_edit.html:133
+#: pages_boxes_edit.html:144 pages_boxes_edit.html:147
+#: pages_boxes_edit.html:150 pages_edit.html:181 pages_edit.html:184
+#: pages_edit.html:187 pages_edit.html:189 pages_edit.html:192
+#: pages_edit.html:195 pages_edit.html:198 pages_edit.html:201
+#: pages_edit.html:204 pages_edit.html:210 pages_edit.html:213
+#: pages_edit.html:216 pages_edit.html:219 pages_edit.html:222
+#: pages_generatorforms_content_edit.html:118
+#: pages_generatorforms_content_edit.html:121
+#: pages_generatorforms_content_edit.html:133
+#: pages_generatorforms_content_edit.html:136
+#: pages_generatorforms_content_edit.html:139
+#: pages_generatorforms_content_edit.html:142
+#: pages_generatorforms_content_edit.html:146
+#: pages_generatorforms_content_edit.html:149
+#: pages_generatorforms_content_edit.html:152
+#: pages_generatorforms_content_edit.html:156
+#: pages_generatorforms_content_edit.html:159
+#: pages_generatorforms_content_edit.html:162
+#: pages_generatorforms_content_edit.html:165
+#: pages_generatorforms_fields_add.html:112
+#: pages_generatorforms_fields_add.html:115
+#: pages_generatorforms_fields_add.html:118
+#: pages_generatorforms_fields_add.html:121
+#: pages_generatorforms_fields_add.html:124
+#: pages_generatorforms_fields_add.html:127
+#: pages_generatorforms_fields_add.html:130
+#: pages_generatorforms_fields_add.html:133
+#: pages_generatorforms_fields_add.html:136
+#: pages_generatorforms_fields_add.html:139
+#: pages_generatorforms_fields_edit.html:112
+#: pages_generatorforms_fields_edit.html:115
+#: pages_generatorforms_fields_edit.html:118
+#: pages_generatorforms_fields_edit.html:121
+#: pages_generatorforms_fields_edit.html:124
+#: pages_generatorforms_fields_edit.html:127
+#: pages_generatorforms_fields_edit.html:130
+#: pages_generatorforms_fields_edit.html:133
+#: pages_generatorforms_fields_edit.html:136
+#: pages_generatorforms_fields_edit.html:139 pages_move_away.html:84
+#: pages_simple_dates_add.html:117 pages_simple_dates_add.html:120
+#: pages_simple_dates_add.html:131 pages_simple_dates_add.html:135
+#: pages_simple_dates_add.html:138 pages_simple_dates_add.html:141
+#: pages_simple_dates_add.html:144 pages_simple_dates_add.html:147
+#: pages_simple_dates_add.html:150 pages_simple_dates_add.html:154
+#: pages_simple_dates_add.html:157 pages_simple_dates_add.html:160
+#: pages_simple_dates_add.html:163 pages_simple_dates_edit.html:117
+#: pages_simple_dates_edit.html:120 pages_simple_dates_edit.html:131
+#: pages_simple_dates_edit.html:135 pages_simple_dates_edit.html:138
+#: pages_simple_dates_edit.html:141 pages_simple_dates_edit.html:144
+#: pages_simple_dates_edit.html:147 pages_simple_dates_edit.html:150
+#: pages_simple_dates_edit.html:154 pages_simple_dates_edit.html:157
+#: pages_simple_dates_edit.html:160 pages_simple_dates_edit.html:163
+#: pages_simpleforms_content_edit.html:115
+#: pages_simpleforms_content_edit.html:118
+#: pages_simpleforms_content_edit.html:130
+#: pages_simpleforms_content_edit.html:133
+#: pages_simpleforms_content_edit.html:136
+#: pages_simpleforms_content_edit.html:139
+#: pages_simpleforms_content_edit.html:143
+#: pages_simpleforms_content_edit.html:146
+#: pages_simpleforms_content_edit.html:149
+#: pages_simpleforms_content_edit.html:153
+#: pages_simpleforms_content_edit.html:156
+#: pages_simpleforms_content_edit.html:159
+#: pages_simpleforms_content_edit.html:162
+#: pages_simpleforms_content_edit.html:165
+#: pages_simpleforms_content_edit.html:168
+#: pages_simpleguestbooks_content_edit.html:118
+#: pages_simpleguestbooks_content_edit.html:121
+#: pages_simpleguestbooks_content_edit.html:133
+#: pages_simpleguestbooks_content_edit.html:136
+#: pages_simpleguestbooks_content_edit.html:139
+#: pages_simpleguestbooks_content_edit.html:142
+#: pages_simpleguestbooks_content_edit.html:145
+#: pages_simpleguestbooks_content_edit.html:149
+#: pages_simpleguestbooks_content_edit.html:152
+#: pages_simpleguestbooks_content_edit.html:155
+#: pages_simpleguestbooks_content_edit.html:159
+#: pages_simpleguestbooks_content_edit.html:162
+#: pages_simpleguestbooks_content_edit.html:166
+#: pages_simpleguestbooks_content_edit.html:169
+#: pages_simpleguestbooks_content_edit.html:172
+#: pages_simpleguestbooks_entries_edit.html:112
+#: pages_simpleguestbooks_entries_edit.html:115
+#: pages_simpleguestbooks_entries_edit.html:118
+#: pages_simpleguestbooks_entries_edit.html:121
+#: pages_simplepages_content_edit.html:118
+#: pages_simplepages_content_edit.html:121
+#: pages_simplepages_content_edit.html:133
+#: pages_simplepages_content_edit.html:136
+#: pages_simplepages_content_edit.html:139
+#: pages_simplepages_content_edit.html:142
+#: pages_simplepages_content_edit.html:146
+#: pages_simplepages_content_edit.html:149
+#: pages_simplepages_content_edit.html:152 pages_urls_content_edit.html:88
+#: pagetypes_add.html:86 pagetypes_add.html:89 pagetypes_edit.html:76
+#: pagetypes_edit.html:79 podcastcategories_add.html:89
+#: podcastcategories_add.html:92 podcastcategories_edit.html:84
+#: podcastcategories_edit.html:87 structuraltemplates_add.html:93
+#: structuraltemplates_add.html:96 structuraltemplates_add.html:99
+#: structuraltemplates_edit.html:93 structuraltemplates_edit.html:96
+#: structuraltemplates_edit.html:99
 #: callbacks_insert_application-x-shockwave-flash.html:68
 #: callbacks_insert_application-x-shockwave-flash.html:71
 #: callbacks_insert_application-x-shockwave-flash.html:74
 #: callbacks_insert_application-x-shockwave-flash.html:77
-#: callbacks_insert_image.html:62 callbacks_insert_image.html:65
-#: mediamanager.html:3 mediamanager_edit.html:72 mediamanager_edit.html:75
-#: mediamanager_edit.html:91 mediamanager_upload.html:72
-#: mediamanager_upload.html:75 mediamanager_upload.html:91
-#: globalfiles_add.html:85 globalfiles_add.html:88 globalfiles_edit.html:74
-#: globalfiles_edit.html:77 globaltemplates_add.html:87
-#: globaltemplates_add.html:90 globaltemplates_add.html:100
-#: globaltemplates_add.html:103 globaltemplates_add.html:106
-#: globaltemplates_edit.html:87 globaltemplates_edit.html:90
-#: globaltemplates_edit.html:100 globaltemplates_edit.html:103
-#: globaltemplates_edit.html:106 templates_add.html:95 templates_add.html:98
-#: templates_add.html:101 templates_add.html:114 templates_add.html:117
-#: templates_copy.html:83 templates_copy.html:86 templates_copy.html:89
-#: templates_copy.html:102 templates_copy.html:105 templates_edit.html:95
-#: templates_edit.html:98 templates_edit.html:101 templates_edit.html:114
-#: templates_edit.html:117 templatesets_add.html:85 templatesets_add.html:88
-#: templatesets_edit.html:74 templatesets_edit.html:77
-#: templatetypes_add.html:85 templatetypes_add.html:88
-#: templatetypes_edit.html:74 templatetypes_edit.html:77 groups_add.html:85
-#: groups_add.html:88 groups_add.html:91 groups_edit.html:74
-#: groups_edit.html:77 groups_edit.html:80 rights_add.html:85
-#: rights_add.html:88 rights_edit.html:74 rights_edit.html:77
-#: users_add.html:93 users_add.html:96 users_add.html:99 users_add.html:102
-#: users_add.html:105 users_add.html:108 users_add.html:111 users_edit.html:83
-#: users_edit.html:86 users_edit.html:89 users_edit.html:92 users_edit.html:95
-#: users_edit.html:98 users_edit.html:101 wcom.strings.js:45
+#: callbacks_insert_application-x-shockwave-flash.html:80
+#: callbacks_insert_application-x-shockwave-flash.html:83
+#: callbacks_insert_application-x-shockwave-flash.html:89
+#: callbacks_insert_image.html:68 callbacks_insert_image.html:71
+#: callbacks_insert_image.html:74 callbacks_insert_image.html:80
+#: mediamanager.html:3 mediamanager_edit.html:115 mediamanager_edit.html:118
+#: mediamanager_edit.html:134 mediamanager_upload.html:79
+#: mediamanager_upload.html:82 mediamanager_upload.html:98
+#: globalfiles_add.html:93 globalfiles_add.html:96 globalfiles_edit.html:110
+#: globalfiles_edit.html:113 globaltemplates_add.html:88
+#: globaltemplates_add.html:91 globaltemplates_add.html:101
+#: globaltemplates_add.html:104 globaltemplates_add.html:107
+#: globaltemplates_edit.html:88 globaltemplates_edit.html:91
+#: globaltemplates_edit.html:101 globaltemplates_edit.html:104
+#: globaltemplates_edit.html:107 templates_add.html:96 templates_add.html:99
+#: templates_add.html:102 templates_add.html:115 templates_add.html:118
+#: templates_copy.html:84 templates_copy.html:87 templates_copy.html:90
+#: templates_copy.html:103 templates_copy.html:106 templates_edit.html:96
+#: templates_edit.html:99 templates_edit.html:102 templates_edit.html:115
+#: templates_edit.html:118 templatesets_add.html:86 templatesets_add.html:89
+#: templatesets_edit.html:75 templatesets_edit.html:78
+#: templatetypes_add.html:86 templatetypes_add.html:89
+#: templatetypes_edit.html:75 templatetypes_edit.html:78 groups_add.html:87
+#: groups_add.html:90 groups_add.html:93 groups_edit.html:75
+#: groups_edit.html:78 groups_edit.html:81 rights_add.html:86
+#: rights_add.html:89 rights_edit.html:75 rights_edit.html:78
+#: users_add.html:94 users_add.html:97 users_add.html:100 users_add.html:103
+#: users_add.html:106 users_add.html:109 users_add.html:112 users_edit.html:85
+#: users_edit.html:88 users_edit.html:91 users_edit.html:94 users_edit.html:97
+#: users_edit.html:100 users_edit.html:103 wcom.strings.js:45
 #: configuration.html:69 configuration.html:72 database.html:75
 #: database.html:78 database.html:81 database.html:84 database.html:87
 #: database.html:90 database.html:93 license.html:698 wcom.setup.strings.js:34
@@ -2498,9 +2521,9 @@ msgstr "Feldhilfe anzeigen"
 msgid "Welcompose Admin &ndash; Edit Ping Service"
 msgstr "Welcompose Admin &ndash; Ping-Service bearbeiten"
 
-#: pingservices_edit.html:48 pingservices_edit.html:52
-#: pages_blogs_pingserviceconfigurations_edit.html:69
-#: pages_blogs_pingserviceconfigurations_edit.html:73
+#: pingservices_edit.html:49 pingservices_edit.html:53
+#: pages_blogs_pingserviceconfigurations_edit.html:70
+#: pages_blogs_pingserviceconfigurations_edit.html:74
 msgid "Edit Ping Service"
 msgstr "Ping-Service bearbeiten"
 
@@ -2508,118 +2531,118 @@ msgstr "Ping-Service bearbeiten"
 msgid "Welcompose Admin &ndash; Ping Services"
 msgstr "Welcompose Admin &ndash; Ping-Services"
 
-#: pingservices_select.html:54 projects_select.html:54
-#: textconverters_select.html:54 textmacros_select.html:54
-#: antispamplugins_select.html:54 blogcommentstatuses_select.html:54
-#: abbreviations_select.html:54 globalboxes_select.html:54
+#: pingservices_select.html:55 projects_select.html:55
+#: textconverters_select.html:53 textmacros_select.html:55
+#: antispamplugins_select.html:55 blogcommentstatuses_select.html:55
+#: abbreviations_select.html:55 globalboxes_select.html:55
 #: navigations_select.html:54
-#: pages_blogs_pingserviceconfigurations_select.html:88
-#: pages_blogs_postings_select.html:73 pages_boxes_select.html:94
-#: pages_generatorforms_fields_select.html:73
-#: pages_simple_dates_select.html:73 pagetypes_select.html:54
-#: podcastcategories_select.html:54 structuraltemplates_select.html:54
-#: globalfiles_select.html:60 globaltemplates_select.html:55
-#: templates_select.html:55 templatesets_select.html:54
-#: templatetypes_select.html:54 groups_select.html:54 rights_select.html:54
-#: users_select.html:54
+#: pages_blogs_pingserviceconfigurations_select.html:89
+#: pages_blogs_postings_select.html:74 pages_boxes_select.html:95
+#: pages_generatorforms_fields_select.html:74
+#: pages_simple_dates_select.html:74 pagetypes_select.html:55
+#: podcastcategories_select.html:55 structuraltemplates_select.html:55
+#: globalfiles_select.html:60 globaltemplates_select.html:56
+#: templates_select.html:56 templatesets_select.html:53
+#: templatetypes_select.html:55 groups_select.html:55 rights_select.html:55
+#: users_select.html:55
 msgid "Add new"
 msgstr "Neu anlegen"
 
-#: pingservices_select.html:59 pingservices_select.html:91
-#: projects_select.html:59 projects_select.html:97
-#: textconverters_select.html:59 textconverters_select.html:91
-#: textmacros_select.html:59 textmacros_select.html:96
-#: antispamplugins_select.html:59 antispamplugins_select.html:97
-#: blogcomments_select.html:99 blogcomments_select.html:176
-#: blogcommentstatuses_select.html:59 blogcommentstatuses_select.html:91
-#: abbreviations_select.html:58 abbreviations_select.html:111
-#: globalboxes_select.html:58 globalboxes_select.html:91
-#: pages_blogs_pingserviceconfigurations_select.html:92
-#: pages_blogs_pingserviceconfigurations_select.html:125
-#: pages_blogs_postings_select.html:100 pages_blogs_postings_select.html:142
-#: pages_generatorforms_fields_select.html:77
-#: pages_generatorforms_fields_select.html:119
-#: pages_simple_dates_select.html:100 pages_simple_dates_select.html:139
-#: pages_simpleguestbooks_entries_select.html:98
-#: pages_simpleguestbooks_entries_select.html:150
-#: podcastcategories_select.html:58 podcastcategories_select.html:91
-#: structuraltemplates_select.html:58 structuraltemplates_select.html:94
-#: globalfiles_select.html:64 globalfiles_select.html:122
-#: globaltemplates_select.html:59 globaltemplates_select.html:114
-#: templates_select.html:82 templates_select.html:143 rights_select.html:58
-#: rights_select.html:99
+#: pingservices_select.html:60 pingservices_select.html:92
+#: projects_select.html:60 projects_select.html:98
+#: textconverters_select.html:58 textconverters_select.html:93
+#: textmacros_select.html:60 textmacros_select.html:97
+#: antispamplugins_select.html:60 antispamplugins_select.html:98
+#: blogcomments_select.html:100 blogcomments_select.html:177
+#: blogcommentstatuses_select.html:60 blogcommentstatuses_select.html:92
+#: abbreviations_select.html:59 abbreviations_select.html:112
+#: globalboxes_select.html:59 globalboxes_select.html:92
+#: pages_blogs_pingserviceconfigurations_select.html:93
+#: pages_blogs_pingserviceconfigurations_select.html:126
+#: pages_blogs_postings_select.html:101 pages_blogs_postings_select.html:143
+#: pages_generatorforms_fields_select.html:78
+#: pages_generatorforms_fields_select.html:120
+#: pages_simple_dates_select.html:101 pages_simple_dates_select.html:140
+#: pages_simpleguestbooks_entries_select.html:99
+#: pages_simpleguestbooks_entries_select.html:151
+#: podcastcategories_select.html:59 podcastcategories_select.html:92
+#: structuraltemplates_select.html:59 structuraltemplates_select.html:95
+#: globalfiles_select.html:64 globalfiles_select.html:137
+#: globaltemplates_select.html:60 globaltemplates_select.html:115
+#: templates_select.html:83 templates_select.html:144 rights_select.html:59
+#: rights_select.html:100
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: pingservices_select.html:71
+#: pingservices_select.html:72
 msgid "Available Ping Services"
 msgstr "Verfügbare Ping-Services"
 
-#: pingservices_select.html:79 pingservices_select.html:85
-#: projects_select.html:79 projects_select.html:86
-#: textconverters_select.html:79 textconverters_select.html:85
-#: textmacros_select.html:79 textmacros_select.html:86
-#: antispamplugins_select.html:83 antispamplugins_select.html:91
-#: blogcomments_select.html:127 blogcomments_select.html:154
-#: blogcommentstatuses_select.html:79 blogcommentstatuses_select.html:85
-#: abbreviations_select.html:85 abbreviations_select.html:95
-#: globalboxes_select.html:79 globalboxes_select.html:85
-#: navigations_select.html:66 navigations_select.html:72
-#: pages_blogs_pingserviceconfigurations_select.html:113
-#: pages_blogs_pingserviceconfigurations_select.html:119
-#: pages_blogs_postings_select.html:127 pages_blogs_postings_select.html:136
-#: pages_boxes_select.html:120 pages_boxes_select.html:126
-#: pages_generatorforms_fields_select.html:104
-#: pages_generatorforms_fields_select.html:113 pages_select.html:116
-#: pages_simple_dates_select.html:125 pages_simple_dates_select.html:133
-#: pages_simpleguestbooks_entries_select.html:125
-#: pages_simpleguestbooks_entries_select.html:134 pagetypes_select.html:66
-#: pagetypes_select.html:73 podcastcategories_select.html:79
-#: podcastcategories_select.html:85 structuraltemplates_select.html:81
-#: structuraltemplates_select.html:88 mediamanager.html:87
-#: globalfiles_select.html:93 globalfiles_select.html:103
-#: globaltemplates_select.html:86 globaltemplates_select.html:95
-#: templates_select.html:113 templates_select.html:124
-#: templatesets_select.html:68 templatesets_select.html:75
-#: templatetypes_select.html:68 templatetypes_select.html:76
-#: groups_select.html:71 groups_select.html:81 rights_select.html:81
-#: rights_select.html:89 users_select.html:91 users_select.html:102
-msgid "Edit"
-msgstr "Bearbeiten"
-
 #: pingservices_select.html:80 pingservices_select.html:86
 #: projects_select.html:80 projects_select.html:87
-#: textconverters_select.html:80 textconverters_select.html:86
+#: textconverters_select.html:80 textconverters_select.html:87
 #: textmacros_select.html:80 textmacros_select.html:87
 #: antispamplugins_select.html:84 antispamplugins_select.html:92
 #: blogcomments_select.html:128 blogcomments_select.html:155
 #: blogcommentstatuses_select.html:80 blogcommentstatuses_select.html:86
 #: abbreviations_select.html:86 abbreviations_select.html:96
 #: globalboxes_select.html:80 globalboxes_select.html:86
-#: navigations_select.html:67 navigations_select.html:73
+#: navigations_select.html:66 navigations_select.html:72
 #: pages_blogs_pingserviceconfigurations_select.html:114
 #: pages_blogs_pingserviceconfigurations_select.html:120
 #: pages_blogs_postings_select.html:128 pages_blogs_postings_select.html:137
 #: pages_boxes_select.html:121 pages_boxes_select.html:127
 #: pages_generatorforms_fields_select.html:105
-#: pages_generatorforms_fields_select.html:114 pages_select.html:118
+#: pages_generatorforms_fields_select.html:114 pages_select.html:120
 #: pages_simple_dates_select.html:126 pages_simple_dates_select.html:134
 #: pages_simpleguestbooks_entries_select.html:126
 #: pages_simpleguestbooks_entries_select.html:135 pagetypes_select.html:67
 #: pagetypes_select.html:74 podcastcategories_select.html:80
 #: podcastcategories_select.html:86 structuraltemplates_select.html:82
-#: structuraltemplates_select.html:89 mediamanager.html:88
-#: globalfiles_select.html:94 globalfiles_select.html:104
+#: structuraltemplates_select.html:89 mediamanager.html:87
+#: globalfiles_select.html:108 globalfiles_select.html:118
 #: globaltemplates_select.html:87 globaltemplates_select.html:96
 #: templates_select.html:114 templates_select.html:125
-#: templatesets_select.html:69 templatesets_select.html:76
+#: templatesets_select.html:67 templatesets_select.html:74
 #: templatetypes_select.html:69 templatetypes_select.html:77
 #: groups_select.html:72 groups_select.html:82 rights_select.html:82
 #: rights_select.html:90 users_select.html:92 users_select.html:103
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: pingservices_select.html:81 pingservices_select.html:87
+#: projects_select.html:81 projects_select.html:88
+#: textconverters_select.html:81 textconverters_select.html:88
+#: textmacros_select.html:81 textmacros_select.html:88
+#: antispamplugins_select.html:85 antispamplugins_select.html:93
+#: blogcomments_select.html:129 blogcomments_select.html:156
+#: blogcommentstatuses_select.html:81 blogcommentstatuses_select.html:87
+#: abbreviations_select.html:87 abbreviations_select.html:97
+#: globalboxes_select.html:81 globalboxes_select.html:87
+#: navigations_select.html:67 navigations_select.html:73
+#: pages_blogs_pingserviceconfigurations_select.html:115
+#: pages_blogs_pingserviceconfigurations_select.html:121
+#: pages_blogs_postings_select.html:129 pages_blogs_postings_select.html:138
+#: pages_boxes_select.html:122 pages_boxes_select.html:128
+#: pages_generatorforms_fields_select.html:106
+#: pages_generatorforms_fields_select.html:115 pages_select.html:124
+#: pages_simple_dates_select.html:127 pages_simple_dates_select.html:135
+#: pages_simpleguestbooks_entries_select.html:127
+#: pages_simpleguestbooks_entries_select.html:136 pagetypes_select.html:68
+#: pagetypes_select.html:75 podcastcategories_select.html:81
+#: podcastcategories_select.html:87 structuraltemplates_select.html:83
+#: structuraltemplates_select.html:90 mediamanager.html:88
+#: globalfiles_select.html:109 globalfiles_select.html:119
+#: globaltemplates_select.html:88 globaltemplates_select.html:97
+#: templates_select.html:115 templates_select.html:126
+#: templatesets_select.html:68 templatesets_select.html:75
+#: templatetypes_select.html:70 templatetypes_select.html:78
+#: groups_select.html:73 groups_select.html:83 rights_select.html:83
+#: rights_select.html:91 users_select.html:93 users_select.html:104
 msgid "Delete"
 msgstr "Löschen"
 
-#: pingservices_select.html:103
+#: pingservices_select.html:104
 msgid "No ping service has been created yet."
 msgstr "Sie haben noch keinen Ping-Service angelegt."
 
@@ -2627,7 +2650,7 @@ msgstr "Sie haben noch keinen Ping-Service angelegt."
 msgid "Welcompose Admin &ndash; Add Project"
 msgstr "Welcompose Admin &ndash; Neues Projekt anlegen"
 
-#: projects_add.html:52 projects_add.html:56
+#: projects_add.html:53 projects_add.html:57
 msgid "Add Projects"
 msgstr "Neues Projekt anlegen"
 
@@ -2635,24 +2658,24 @@ msgstr "Neues Projekt anlegen"
 msgid "Welcompose Admin &ndash; Edit Project"
 msgstr "Welcompose Admin &ndash; Projekt bearbeiten"
 
-#: projects_edit.html:48
+#: projects_edit.html:49
 msgid "Edit Project"
 msgstr "Projekt bearbeiten"
 
-#: projects_edit.html:52
+#: projects_edit.html:53
 msgid "Edit Projects"
 msgstr "Projekte bearbeiten"
 
-#: projects_select.html:71
+#: projects_select.html:72
 msgid "Available Projects"
 msgstr "Vefügbare Projekte"
 
-#: projects_select.html:89 pagetypes_select.html:76
-#: templatetypes_select.html:79
+#: projects_select.html:90 pagetypes_select.html:77
+#: templatetypes_select.html:80
 msgid "Not editable"
 msgstr "Nicht bearbeitbar"
 
-#: projects_select.html:109
+#: projects_select.html:110
 msgid "No project has been created yet."
 msgstr "Sie haben noch kein Projekt angelegt"
 
@@ -2660,11 +2683,11 @@ msgstr "Sie haben noch kein Projekt angelegt"
 msgid "Welcompose Admin &ndash; Sitemaps"
 msgstr "Welcompose Administration &ndash; Sitemaps"
 
-#: sitemaps.html:73
+#: sitemaps.html:74
 msgid "Your sitemap(s) was saved successfully"
 msgstr "Die Sitemap(s) wurden erfolgreich gespeichert"
 
-#: sitemaps.html:74
+#: sitemaps.html:75
 msgid ""
 "The file(s) are located in <strong>/tmp/sitemaps/</strong> of your "
 "installation.<br /><br />Please relocate the sitemap file to the top of your "
@@ -2679,7 +2702,7 @@ msgstr ""
 ">Anschließend können sie die Sitemap(s) ihrem Google-Konto manuell "
 "hinzufügen."
 
-#: sitemaps.html:85
+#: sitemaps.html:86
 msgid "Create Sitemap"
 msgstr "Sitemap erstellen"
 
@@ -2687,7 +2710,7 @@ msgstr "Sitemap erstellen"
 msgid "Welcompose Admin &ndash; Add Text Converter"
 msgstr "Welcompose Admin &ndash; Neuen Textkonverter anlegen"
 
-#: textconverters_add.html:52 textconverters_add.html:56
+#: textconverters_add.html:53 textconverters_add.html:57
 msgid "Add Text Converter"
 msgstr "Neuen Textkonverter anlegen"
 
@@ -2695,7 +2718,7 @@ msgstr "Neuen Textkonverter anlegen"
 msgid "Welcompose Admin &ndash; Edit Text Converter"
 msgstr "Welcompose Admin &ndash; Textkonverter bearbeiten"
 
-#: textconverters_edit.html:48 textconverters_edit.html:52
+#: textconverters_edit.html:49 textconverters_edit.html:53
 msgid "Edit Text Converter"
 msgstr "Textkonverter bearbeiten"
 
@@ -2703,11 +2726,11 @@ msgstr "Textkonverter bearbeiten"
 msgid "Welcompose Admin &ndash; Text Converters"
 msgstr "Welcompose Admin &ndash; Textkonverter"
 
-#: textconverters_select.html:71
+#: textconverters_select.html:70
 msgid "Available Text Converters"
 msgstr "Verfügbare Textkonverter"
 
-#: textconverters_select.html:103
+#: textconverters_select.html:105
 msgid "No text converter has been created yet."
 msgstr "Sie haben noch keinen Textkonverter angelegt"
 
@@ -2715,7 +2738,7 @@ msgstr "Sie haben noch keinen Textkonverter angelegt"
 msgid "Welcompose Admin &ndash; Add Text Macro"
 msgstr "Welcompose Admin &ndash; Neues Textmakro anlegen"
 
-#: textmacros_add.html:52 textmacros_add.html:56
+#: textmacros_add.html:53 textmacros_add.html:57
 msgid "Add Text Macro"
 msgstr "Neues Textmakro anlegen"
 
@@ -2723,7 +2746,7 @@ msgstr "Neues Textmakro anlegen"
 msgid "Welcompose Admin &ndash; Edit Text Macro"
 msgstr "Welcompose Admin &ndash; Textmakro bearbeiten"
 
-#: textmacros_edit.html:48 textmacros_edit.html:52
+#: textmacros_edit.html:49 textmacros_edit.html:53
 msgid "Edit Text Macro"
 msgstr "Textmakro bearbeiten"
 
@@ -2731,11 +2754,11 @@ msgstr "Textmakro bearbeiten"
 msgid "Welcompose Admin &ndash; Text Macros"
 msgstr "Welcompose Admin &ndash; Textmakros"
 
-#: textmacros_select.html:71
+#: textmacros_select.html:72
 msgid "Available Text Macros"
 msgstr "Vefügbare Textmakros"
 
-#: textmacros_select.html:108
+#: textmacros_select.html:109
 msgid "No text macro has been created yet."
 msgstr "Es wurde noch kein Textmakro angelegt"
 
@@ -2747,7 +2770,7 @@ msgstr "Blog Kommentarstatus"
 msgid "Welcompose Admin &ndash; Add Anti Spam Plugin"
 msgstr "Welcompose Admin &ndash; Neus Anti Spam Plug-In anlegen"
 
-#: antispamplugins_add.html:52 antispamplugins_add.html:56
+#: antispamplugins_add.html:53 antispamplugins_add.html:57
 msgid "Add Anti Spam Plugin"
 msgstr "Neues Anti Spam Plug-In anlegen"
 
@@ -2755,7 +2778,7 @@ msgstr "Neues Anti Spam Plug-In anlegen"
 msgid "Welcompose Admin &ndash; Edit Anti Spam Plugin"
 msgstr "Welcompose Admin &ndash; Anti Spam Plug-In bearbeiten"
 
-#: antispamplugins_edit.html:48 antispamplugins_edit.html:52
+#: antispamplugins_edit.html:49 antispamplugins_edit.html:53
 msgid "Edit Anti Spam Plugin"
 msgstr "Anti Spam Plug-In bearbeiten"
 
@@ -2763,11 +2786,11 @@ msgstr "Anti Spam Plug-In bearbeiten"
 msgid "Welcompose Admin &ndash; Anti Spam Plugins"
 msgstr "Welcompose Admin &ndash; Anti Spam Plug-Ins"
 
-#: antispamplugins_select.html:71
+#: antispamplugins_select.html:72
 msgid "Available Anti Spam Plugins"
 msgstr "Verfügbare Anti Spam Plugins"
 
-#: antispamplugins_select.html:109
+#: antispamplugins_select.html:110
 msgid "No anti spam plugin has been created yet."
 msgstr "Sie haben noch kein Anti Spam Plug-In angelegt."
 
@@ -2775,7 +2798,7 @@ msgstr "Sie haben noch kein Anti Spam Plug-In angelegt."
 msgid "Welcompose Admin &ndash; Edit Blog Comment"
 msgstr "Welcompose Admin &ndash; Blog Kommentare bearbeiten"
 
-#: blogcomments_edit.html:48 blogcomments_edit.html:52
+#: blogcomments_edit.html:49 blogcomments_edit.html:53
 msgid "Edit Blog Comment"
 msgstr "Blog Kommentare bearbeiten"
 
@@ -2783,82 +2806,82 @@ msgstr "Blog Kommentare bearbeiten"
 msgid "Welcompose Admin &ndash; Blog Comments"
 msgstr "Welcompose Admin &ndash; Blog Kommentare"
 
-#: blogcomments_select.html:29
+#: blogcomments_select.html:30
 msgid "Change of comment status successfully saved!"
 msgstr "Die Änderung des Kommentarstatus wurde gespeichert!"
 
-#: blogcomments_select.html:65 pages_blogs_postings_select.html:77
-#: pages_simple_dates_select.html:77
-#: pages_simpleguestbooks_entries_select.html:78 templates_select.html:59
-#: users_select.html:59
+#: blogcomments_select.html:66 pages_blogs_postings_select.html:78
+#: pages_simple_dates_select.html:78
+#: pages_simpleguestbooks_entries_select.html:79 templates_select.html:60
+#: users_select.html:60
 msgid "Filter:"
 msgstr "Filter:"
 
-#: blogcomments_select.html:68
+#: blogcomments_select.html:69
 msgid "Blog"
 msgstr "Blog"
 
-#: blogcomments_select.html:77 blogcomments_select.html:125
+#: blogcomments_select.html:78 blogcomments_select.html:126
 #: requirements.html:61 requirements.html:79 database.html:54
 #: requirements.html:51 requirements.html:69
 msgid "Status"
 msgstr "Status"
 
-#: blogcomments_select.html:84 pages_blogs_postings_select.html:81
-#: pages_simple_dates_select.html:81
-#: pages_simpleguestbooks_entries_select.html:82
+#: blogcomments_select.html:85 pages_blogs_postings_select.html:82
+#: pages_simple_dates_select.html:82
+#: pages_simpleguestbooks_entries_select.html:83
 msgid "Timeframe"
 msgstr "Zeitrahmen"
 
-#: blogcomments_select.html:91 pages_blogs_postings_select.html:94
-#: pages_simple_dates_select.html:94
-#: pages_simpleguestbooks_entries_select.html:91 templates_select.html:76
-#: users_select.html:69
+#: blogcomments_select.html:92 pages_blogs_postings_select.html:95
+#: pages_simple_dates_select.html:95
+#: pages_simpleguestbooks_entries_select.html:92 templates_select.html:77
+#: users_select.html:70
 msgid "Filter"
 msgstr "Filter"
 
-#: blogcomments_select.html:111
+#: blogcomments_select.html:112
 msgid "Blog Comments List"
 msgstr "Blog Kommentare"
 
-#: blogcomments_select.html:122
+#: blogcomments_select.html:123
 msgid "Blog-Name"
 msgstr "Blog-Name"
 
-#: blogcomments_select.html:122
+#: blogcomments_select.html:123
 msgid "Posting Title"
 msgstr "Eintrag-Titel"
 
-#: blogcomments_select.html:123
+#: blogcomments_select.html:124
 msgid "Mail/Homepage"
 msgstr "E-Mail/Homepage"
 
-#: blogcomments_select.html:124
+#: blogcomments_select.html:125
 msgid "First 80 chars of comment"
 msgstr "80 Zeichen des Kommentars"
 
-#: blogcomments_select.html:126 abbreviations_select.html:83
-#: pages_boxes_select.html:172 pages_simpleguestbooks_entries_select.html:124
+#: blogcomments_select.html:127 abbreviations_select.html:84
+#: pages_boxes_select.html:174 pages_simpleguestbooks_entries_select.html:125
 msgid "View"
 msgstr "Anzeigen"
 
-#: blogcomments_select.html:153
+#: blogcomments_select.html:154
 msgid "View Comment"
 msgstr "Kommentar lesen"
 
-#: blogcomments_select.html:161 blogitem.class.php:238
+#: blogcomments_select.html:162 blogitem.class.php:238
 msgid "Comment"
 msgstr "Kommentar"
 
-#: blogcomments_select.html:164
+#: blogcomments_select.html:165
 msgid "Spam report"
 msgstr "Spam Bericht"
 
-#: blogcomments_select.html:167
+#: blogcomments_select.html:168
 msgid "Edited"
 msgstr "Bearbeitet"
 
-#: blogcomments_select.html:188
+#: blogcomments_select.html:189
 msgid "No blog comment has been created yet."
 msgstr "Es wurden noch kein Blog Kommentar angelegt"
 
@@ -2866,7 +2889,7 @@ msgstr "Es wurden noch kein Blog Kommentar angelegt"
 msgid "Welcompose Admin &ndash; Add Blog Comment Status"
 msgstr "Welcompose Admin &ndash; Neuen Blog Kommentarstatus anlegen"
 
-#: blogcommentstatuses_add.html:52 blogcommentstatuses_add.html:56
+#: blogcommentstatuses_add.html:53 blogcommentstatuses_add.html:57
 msgid "Add Blog Comment Status"
 msgstr "Neuen Blog Kommentarstatus anlegen"
 
@@ -2874,7 +2897,7 @@ msgstr "Neuen Blog Kommentarstatus anlegen"
 msgid "Welcompose Admin &ndash; Edit Blog Comment Status"
 msgstr "Welcompose Admin &ndash; Blog Kommentarstatus bearbeiten"
 
-#: blogcommentstatuses_edit.html:48 blogcommentstatuses_edit.html:52
+#: blogcommentstatuses_edit.html:49 blogcommentstatuses_edit.html:53
 msgid "Edit Blog Comment Status"
 msgstr "Blog Kommentarstatus bearbeiten"
 
@@ -2882,11 +2905,11 @@ msgstr "Blog Kommentarstatus bearbeiten"
 msgid "Welcompose Admin &ndash; Blog Comment Status"
 msgstr "Welcompose Admin &ndash; Blog Kommentarstatus"
 
-#: blogcommentstatuses_select.html:71
+#: blogcommentstatuses_select.html:72
 msgid "Available Blog Comment Status"
 msgstr "Vefügbare Blog Kommentarstatus"
 
-#: blogcommentstatuses_select.html:103
+#: blogcommentstatuses_select.html:104
 msgid "No blog comment status has been created yet."
 msgstr "Sie haben noch keinen Blog Kommentarstatus angelegt."
 
@@ -2894,16 +2917,16 @@ msgstr "Sie haben noch keinen Blog Kommentarstatus angelegt."
 msgid "Welcompose Admin &ndash; Community Settings"
 msgstr "Welcompose Admin &ndash; Community-Einstellungen"
 
-#: settings.html:74 pages_edit.html:169
+#: settings.html:75 pages_edit.html:170
 msgid "To apply further changes, please repeat fill in the form"
 msgstr ""
 "Um weitere Änderungen vorzunehmen, können Sie das nächste Formular ausfüllen"
 
-#: settings.html:85 pages_blogs_postings_select.html:125
+#: settings.html:86 pages_blogs_postings_select.html:126
 msgid "Comments"
 msgstr "Kommentare"
 
-#: settings.html:120 pages_blogs_postings_select.html:126
+#: settings.html:121 pages_blogs_postings_select.html:127
 msgid "Trackbacks"
 msgstr "Trackbacks"
 
@@ -2911,22 +2934,10 @@ msgstr "Trackbacks"
 msgid "Welcompose Admin &ndash; Add Abbreviation"
 msgstr "Welcompose Admin &ndash; Neue Abkürzung anlegen"
 
-#: abbreviations_add.html:55 abbreviations_add.html:59
-#: callbacks_insert_abbreviations_links.html:93
+#: abbreviations_add.html:56 abbreviations_add.html:60
+#: callbacks_insert_abbreviations_links.html:94
 msgid "Add Abbreviation"
 msgstr "Neue Abkürzung anlegen"
-
-#: abbreviations_add.html:100 abbreviations_edit.html:100
-#: globalboxes_add.html:101 globalboxes_edit.html:101
-#: pages_blogs_postings_add.html:125 pages_blogs_postings_add.html:136
-#: pages_blogs_postings_edit.html:132 pages_blogs_postings_edit.html:143
-#: pages_boxes_add.html:137 pages_boxes_edit.html:137
-#: pages_generatorforms_content_edit.html:125 pages_simple_dates_add.html:124
-#: pages_simple_dates_edit.html:124 pages_simpleforms_content_edit.html:122
-#: pages_simpleguestbooks_content_edit.html:125
-#: pages_simplepages_content_edit.html:124
-msgid "Internal links"
-msgstr "Interne Links"
 
 #: abbreviations_add.html:101 abbreviations_edit.html:101
 #: globalboxes_add.html:102 globalboxes_edit.html:102
@@ -2936,7 +2947,19 @@ msgstr "Interne Links"
 #: pages_generatorforms_content_edit.html:126 pages_simple_dates_add.html:125
 #: pages_simple_dates_edit.html:125 pages_simpleforms_content_edit.html:123
 #: pages_simpleguestbooks_content_edit.html:126
-#: pages_simplepages_content_edit.html:125 structuraltemplates_select.html:52
+#: pages_simplepages_content_edit.html:126
+msgid "Internal links"
+msgstr "Interne Links"
+
+#: abbreviations_add.html:102 abbreviations_edit.html:102
+#: globalboxes_add.html:103 globalboxes_edit.html:103
+#: pages_blogs_postings_add.html:127 pages_blogs_postings_add.html:138
+#: pages_blogs_postings_edit.html:134 pages_blogs_postings_edit.html:145
+#: pages_boxes_add.html:139 pages_boxes_edit.html:139
+#: pages_generatorforms_content_edit.html:127 pages_simple_dates_add.html:126
+#: pages_simple_dates_edit.html:126 pages_simpleforms_content_edit.html:124
+#: pages_simpleguestbooks_content_edit.html:127
+#: pages_simplepages_content_edit.html:127 structuraltemplates_select.html:53
 msgid "Structural templates"
 msgstr "Strukturvorlagen"
 
@@ -2944,18 +2967,18 @@ msgstr "Strukturvorlagen"
 msgid "Welcompose Admin &ndash; Edit Abbreviation"
 msgstr "Welcompose Admin &ndash; Abkürzungen bearbeiten"
 
-#: abbreviations_edit.html:55 abbreviations_edit.html:59
+#: abbreviations_edit.html:56 abbreviations_edit.html:60
 msgid "Edit Abbreviation"
 msgstr "Abkürzung bearbeiten"
 
-#: abbreviations_edit.html:77 globalboxes_edit.html:81
-#: pages_blogs_postings_edit.html:109 pages_boxes_edit.html:117
-#: pages_generatorforms_content_edit.html:102
-#: pages_generatorforms_fields_edit.html:100 pages_simple_dates_edit.html:101
-#: pages_simpleforms_content_edit.html:99
-#: pages_simpleguestbooks_content_edit.html:102
-#: pages_simplepages_content_edit.html:101 structuraltemplates_edit.html:77
-#: globaltemplates_edit.html:76
+#: abbreviations_edit.html:78 globalboxes_edit.html:82
+#: pages_blogs_postings_edit.html:110 pages_boxes_edit.html:118
+#: pages_generatorforms_content_edit.html:103
+#: pages_generatorforms_fields_edit.html:101 pages_simple_dates_edit.html:102
+#: pages_simpleforms_content_edit.html:100
+#: pages_simpleguestbooks_content_edit.html:103
+#: pages_simplepages_content_edit.html:102 structuraltemplates_edit.html:78
+#: globaltemplates_edit.html:77
 msgid "You can continue editing your content."
 msgstr "Sie können nun mit der Bearbeitung der Seiteninhalte fortfahren."
 
@@ -2963,27 +2986,27 @@ msgstr "Sie können nun mit der Bearbeitung der Seiteninhalte fortfahren."
 msgid "Welcompose Admin &ndash; Abbreviations"
 msgstr "Welcompose Admin &ndash; Abkürzungen"
 
-#: abbreviations_select.html:71
+#: abbreviations_select.html:72
 msgid "Available Abbreviations"
 msgstr "Verfügbare Abkürzungen"
 
-#: abbreviations_select.html:81 callbacks_insert_abbreviations_links.html:51
+#: abbreviations_select.html:82 callbacks_insert_abbreviations_links.html:52
 msgid "Abbreviation"
 msgstr "Abkürzung"
 
-#: abbreviations_select.html:84
+#: abbreviations_select.html:85
 msgid "Glossar Entry"
 msgstr "Glossar"
 
-#: abbreviations_select.html:93
+#: abbreviations_select.html:94
 msgid "View entire long form"
 msgstr "Vollständigen Eintrag anzeigen"
 
-#: abbreviations_select.html:102
+#: abbreviations_select.html:103
 msgid "Full long form"
 msgstr "Vollständiger Eintrag"
 
-#: abbreviations_select.html:123
+#: abbreviations_select.html:124
 msgid "No Abbreviation has been added yet"
 msgstr "Sie haben noch keine Abkürzung angelegt."
 
@@ -2991,36 +3014,36 @@ msgstr "Sie haben noch keine Abkürzung angelegt."
 msgid "Welcompose Admin &ndash; Abbreviations &ndash; Insert"
 msgstr "Welcompose Admin &ndash; Abkürzungen &ndash; Einfügen"
 
-#: callbacks_insert_abbreviations_links.html:41
+#: callbacks_insert_abbreviations_links.html:42
 msgid "ABBREVIATIONS"
 msgstr "ABKÜRZUNGEN"
 
-#: callbacks_insert_abbreviations_links.html:41
-#: callbacks_insert_blog_tags.html:39
-#: callbacks_insert_structuraltemplates_links.html:39
+#: callbacks_insert_abbreviations_links.html:42
+#: callbacks_insert_blog_tags.html:40
+#: callbacks_insert_structuraltemplates_links.html:40
 msgid "INSERT"
 msgstr "EINFÜGEN"
 
-#: callbacks_insert_abbreviations_links.html:42
-#: callbacks_insert_blog_tags.html:40 callbacks_insert_pages_links.html:40
-#: callbacks_insert_structuraltemplates_links.html:40
-#: callbacks_insert_boxes_links.html:40
-#: callbacks_insert_globalboxes_links.html:39
-#: callbacks_insert_globalfiles_links.html:39
-#: callbacks_insert_globaltemplates_links.html:39
+#: callbacks_insert_abbreviations_links.html:43
+#: callbacks_insert_blog_tags.html:41 callbacks_insert_pages_links.html:41
+#: callbacks_insert_structuraltemplates_links.html:41
+#: callbacks_insert_boxes_links.html:41
+#: callbacks_insert_globalboxes_links.html:40
+#: callbacks_insert_globalfiles_links.html:40
+#: callbacks_insert_globaltemplates_links.html:40
 msgid "Close Window"
 msgstr "Fenster schließen"
 
-#: callbacks_insert_abbreviations_links.html:43
+#: callbacks_insert_abbreviations_links.html:44
 msgid "Add abbreviation"
 msgstr "Neue Abkürzung anlegen"
 
-#: callbacks_insert_abbreviations_links.html:76
-#: callbacks_insert_pages_links.html:56
-#: callbacks_insert_structuraltemplates_links.html:49
-#: callbacks_insert_globalboxes_links.html:48
-#: callbacks_insert_globalfiles_links.html:48
-#: callbacks_insert_globaltemplates_links.html:48
+#: callbacks_insert_abbreviations_links.html:77
+#: callbacks_insert_pages_links.html:57
+#: callbacks_insert_structuraltemplates_links.html:50
+#: callbacks_insert_globalboxes_links.html:49
+#: callbacks_insert_globalfiles_links.html:49
+#: callbacks_insert_globaltemplates_links.html:49
 msgid "Insert link"
 msgstr "Diese Referenz einfügen"
 
@@ -3028,19 +3051,19 @@ msgstr "Diese Referenz einfügen"
 msgid "Welcompose Admin &ndash; Blog Tags &ndash; Insert"
 msgstr "Welcompose Admin &ndash; Blog Schlagworte &ndash; Einfügen"
 
-#: callbacks_insert_blog_tags.html:39
+#: callbacks_insert_blog_tags.html:40
 msgid "BLOG TAGS"
 msgstr "BLOG SCHLAGWORTE"
 
-#: callbacks_insert_blog_tags.html:49
+#: callbacks_insert_blog_tags.html:50
 msgid "Select all"
 msgstr "Alles auswählen"
 
-#: callbacks_insert_blog_tags.html:49
+#: callbacks_insert_blog_tags.html:50
 msgid "Deselect all"
 msgstr "Auswahl aufheben"
 
-#: callbacks_insert_blog_tags.html:59
+#: callbacks_insert_blog_tags.html:60
 msgid "Insert Tags"
 msgstr "Einfügen"
 
@@ -3048,15 +3071,15 @@ msgstr "Einfügen"
 msgid "Welcompose Admin &ndash; Pages &ndash; Internal Links"
 msgstr "Welcompose Admin &ndash; Seiten &ndash; Interne Links"
 
-#: callbacks_insert_pages_links.html:39
+#: callbacks_insert_pages_links.html:40
 msgid "PAGES"
 msgstr "SEITEN"
 
-#: callbacks_insert_pages_links.html:39
+#: callbacks_insert_pages_links.html:40
 msgid "INSERT INTERNAL LINKS"
 msgstr "INTERNE LINKS EINFÜGEN"
 
-#: callbacks_insert_pages_links.html:58
+#: callbacks_insert_pages_links.html:59
 #: callbacks_insert_pages_links_second.html:4
 msgid "Display sub links"
 msgstr "Zeige Blog-Einträge an"
@@ -3066,15 +3089,15 @@ msgid "Yearly Archives"
 msgstr "Jahres-Archiv"
 
 #: callbacks_insert_pages_links_second.html:7
-#: pages_blogs_pingserviceconfigurations_add.html:59
-#: pages_blogs_pingserviceconfigurations_edit.html:55
-#: pages_blogs_pingserviceconfigurations_select.html:56
-#: pages_blogs_postings_add.html:67 pages_blogs_postings_add.html:80
-#: pages_blogs_postings_add.html:86 pages_blogs_postings_edit.html:74
-#: pages_blogs_postings_edit.html:87 pages_blogs_postings_edit.html:93
-#: pages_blogs_postings_select.html:55 pages_blogs_postings_select.html:67
-#: pages_blogs_postings_select.html:71 pages_boxes_add.html:68
-#: pages_boxes_edit.html:68 pages_boxes_select.html:61 pages_edit.html:70
+#: pages_blogs_pingserviceconfigurations_add.html:60
+#: pages_blogs_pingserviceconfigurations_edit.html:56
+#: pages_blogs_pingserviceconfigurations_select.html:57
+#: pages_blogs_postings_add.html:68 pages_blogs_postings_add.html:81
+#: pages_blogs_postings_add.html:87 pages_blogs_postings_edit.html:75
+#: pages_blogs_postings_edit.html:88 pages_blogs_postings_edit.html:94
+#: pages_blogs_postings_select.html:56 pages_blogs_postings_select.html:68
+#: pages_blogs_postings_select.html:72 pages_boxes_add.html:69
+#: pages_boxes_edit.html:69 pages_boxes_select.html:62 pages_edit.html:71
 msgid "Blog Postings"
 msgstr "Blog-Einträge"
 
@@ -3088,7 +3111,7 @@ msgstr "Diese Referenz einfügen"
 msgid "Welcompose Admin &ndash; Structural Templates &ndash; Insert"
 msgstr "Welcompose Admin &ndash; Structural Templates &ndash; Einfügen"
 
-#: callbacks_insert_structuraltemplates_links.html:39
+#: callbacks_insert_structuraltemplates_links.html:40
 msgid "STRUCTURAL TEMPLATES"
 msgstr "STRUKTURVORLAGEN"
 
@@ -3096,7 +3119,7 @@ msgstr "STRUKTURVORLAGEN"
 msgid "Welcompose Admin &ndash; Add Global Box"
 msgstr "Welcompose Admin &ndash; Neue Globale Box anlegen"
 
-#: globalboxes_add.html:59 globalboxes_add.html:63
+#: globalboxes_add.html:60 globalboxes_add.html:64
 msgid "Add Global Box"
 msgstr "Neue Globale Box anlegen"
 
@@ -3104,7 +3127,7 @@ msgstr "Neue Globale Box anlegen"
 msgid "Welcompose Admin &ndash; Edit Global Box"
 msgstr "Welcompose Admin &ndash; Globale Box bearbeiten"
 
-#: globalboxes_edit.html:59 globalboxes_edit.html:63
+#: globalboxes_edit.html:60 globalboxes_edit.html:64
 msgid "Edit Global Box"
 msgstr "Globale Box bearbeiten"
 
@@ -3112,11 +3135,11 @@ msgstr "Globale Box bearbeiten"
 msgid "Welcompose Admin &ndash; Global Boxes"
 msgstr "Welcompose Admin &ndash; Globale Boxen"
 
-#: globalboxes_select.html:71
+#: globalboxes_select.html:72
 msgid "Available global boxes"
 msgstr "Vefügbare globale Boxen"
 
-#: globalboxes_select.html:103
+#: globalboxes_select.html:104
 msgid "No global box has been created yet"
 msgstr "Sie haben noch keine globale Box angelegt."
 
@@ -3124,7 +3147,7 @@ msgstr "Sie haben noch keine globale Box angelegt."
 msgid "Welcompose Admin &ndash; Add Navigation"
 msgstr "Welcompose Admin &ndash; Neue Navigation anlegen"
 
-#: navigations_add.html:52 navigations_add.html:56
+#: navigations_add.html:53 navigations_add.html:57
 msgid "Add Navigation"
 msgstr "Neue Navigation anlegen"
 
@@ -3132,7 +3155,7 @@ msgstr "Neue Navigation anlegen"
 msgid "Welcompose Admin &ndash; Edit Navigation"
 msgstr "Welcompose Admin &ndash; Navigation bearbeiten"
 
-#: navigations_edit.html:48 navigations_edit.html:52
+#: navigations_edit.html:49 navigations_edit.html:53
 msgid "Edit Navigation"
 msgstr "Navigation bearbeiten"
 
@@ -3152,15 +3175,15 @@ msgstr "Sie haben noch keine Navigation angelegt."
 msgid "Welcompose Admin &ndash; Add Page"
 msgstr "Welcompose Admin &ndash; Neue Seite anlegen"
 
-#: pages_add.html:55 pages_add.html:59
+#: pages_add.html:56 pages_add.html:60
 msgid "Add Page"
 msgstr "Neue Seite anlegen"
 
-#: pages_add.html:77
+#: pages_add.html:78
 msgid "You have not yet created a page type!"
 msgstr "Sie haben noch keinen Seitentyp angelegt!"
 
-#: pages_add.html:78
+#: pages_add.html:79
 msgid ""
 "To create one, go to the <a href=\"pagetypes_select.php\">page type overview "
 "page</a>."
@@ -3168,11 +3191,11 @@ msgstr ""
 "Bitte gehen Sie zur <a href=\"pagetypes_select.php\">Übersichtsseite der "
 "Seitentypen</a> um einen neuen Seitentyp zu erstellen."
 
-#: pages_add.html:85 pages_edit.html:161
+#: pages_add.html:86 pages_edit.html:162
 msgid "You have not yet created a template set!"
 msgstr "Sie haben noch keine Vorlagengruppe angelegt!"
 
-#: pages_add.html:86 pages_edit.html:162
+#: pages_add.html:87 pages_edit.html:163
 msgid ""
 "To create one, go to the <a href=\"../templating/templatesets_select.php"
 "\">template set overview page</a>."
@@ -3181,13 +3204,13 @@ msgstr ""
 "\">Übersichtsseite der Vorlagengruppen</a> um eine neue Vorlagengruppe "
 "anzulegen."
 
-#: pages_add.html:134 pages_edit.html:207
+#: pages_add.html:135 pages_edit.html:208
 msgid "Additional metadata"
 msgstr "Zusätzliche Metadaten"
 
-#: pages_add.html:134 pages_boxes_select.html:156 pages_edit.html:207
+#: pages_add.html:135 pages_boxes_select.html:157 pages_edit.html:208
 #: mediamanager.html:22 mediamanager.html:46 mediamanager.html:60
-#: mediamanager_edit.html:80 mediamanager_upload.html:80 wcom.strings.js:47
+#: mediamanager_edit.html:123 mediamanager_upload.html:87 wcom.strings.js:47
 msgid "Show this element"
 msgstr "Element zeigen"
 
@@ -3195,73 +3218,73 @@ msgstr "Element zeigen"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Ping Service"
 msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Ping-Service anlegen"
 
-#: pages_blogs_pingserviceconfigurations_add.html:56
-#: pages_blogs_pingserviceconfigurations_edit.html:52
-#: pages_blogs_pingserviceconfigurations_select.html:53
-#: pages_blogs_pingserviceconfigurations_select.html:66
-#: pages_blogs_postings_add.html:64 pages_blogs_postings_edit.html:71
-#: pages_blogs_postings_select.html:52 pages_boxes_add.html:63
-#: pages_boxes_add.html:67 pages_boxes_add.html:72 pages_boxes_add.html:77
-#: pages_boxes_add.html:81 pages_boxes_add.html:86 pages_boxes_edit.html:63
-#: pages_boxes_edit.html:67 pages_boxes_edit.html:72 pages_boxes_edit.html:77
-#: pages_boxes_edit.html:81 pages_boxes_edit.html:86
-#: pages_boxes_select.html:56 pages_boxes_select.html:60
-#: pages_boxes_select.html:65 pages_boxes_select.html:70
-#: pages_boxes_select.html:74 pages_boxes_select.html:79 pages_edit.html:57
-#: pages_edit.html:67 pages_edit.html:80 pages_edit.html:93
-#: pages_edit.html:100 pages_edit.html:110 pages_edit.html:123
-#: pages_generatorforms_content_edit.html:65
-#: pages_generatorforms_fields_add.html:62
-#: pages_generatorforms_fields_edit.html:62
-#: pages_generatorforms_fields_select.html:52 pages_simple_dates_add.html:63
-#: pages_simple_dates_edit.html:63 pages_simple_dates_select.html:52
-#: pages_simpleforms_content_edit.html:65
-#: pages_simpleguestbooks_content_edit.html:65
-#: pages_simpleguestbooks_entries_edit.html:62
-#: pages_simpleguestbooks_entries_select.html:53
-#: pages_simplepages_content_edit.html:66 pages_urls_content_edit.html:52
+#: pages_blogs_pingserviceconfigurations_add.html:57
+#: pages_blogs_pingserviceconfigurations_edit.html:53
+#: pages_blogs_pingserviceconfigurations_select.html:54
+#: pages_blogs_pingserviceconfigurations_select.html:67
+#: pages_blogs_postings_add.html:65 pages_blogs_postings_edit.html:72
+#: pages_blogs_postings_select.html:53 pages_boxes_add.html:64
+#: pages_boxes_add.html:68 pages_boxes_add.html:73 pages_boxes_add.html:78
+#: pages_boxes_add.html:82 pages_boxes_add.html:87 pages_boxes_edit.html:64
+#: pages_boxes_edit.html:68 pages_boxes_edit.html:73 pages_boxes_edit.html:78
+#: pages_boxes_edit.html:82 pages_boxes_edit.html:87
+#: pages_boxes_select.html:57 pages_boxes_select.html:61
+#: pages_boxes_select.html:66 pages_boxes_select.html:71
+#: pages_boxes_select.html:75 pages_boxes_select.html:80 pages_edit.html:58
+#: pages_edit.html:68 pages_edit.html:81 pages_edit.html:94
+#: pages_edit.html:101 pages_edit.html:111 pages_edit.html:124
+#: pages_generatorforms_content_edit.html:66
+#: pages_generatorforms_fields_add.html:63
+#: pages_generatorforms_fields_edit.html:63
+#: pages_generatorforms_fields_select.html:53 pages_simple_dates_add.html:64
+#: pages_simple_dates_edit.html:64 pages_simple_dates_select.html:53
+#: pages_simpleforms_content_edit.html:66
+#: pages_simpleguestbooks_content_edit.html:66
+#: pages_simpleguestbooks_entries_edit.html:63
+#: pages_simpleguestbooks_entries_select.html:54
+#: pages_simplepages_content_edit.html:67 pages_urls_content_edit.html:53
 msgid "Metadata"
 msgstr "Metadaten"
 
-#: pages_blogs_pingserviceconfigurations_add.html:62
-#: pages_blogs_pingserviceconfigurations_edit.html:58
-#: pages_blogs_pingserviceconfigurations_select.html:59
-#: pages_blogs_pingserviceconfigurations_select.html:72
-#: pages_blogs_postings_add.html:70 pages_blogs_postings_edit.html:77
-#: pages_blogs_postings_select.html:58 pages_boxes_add.html:65
-#: pages_boxes_add.html:69 pages_boxes_add.html:74 pages_boxes_add.html:79
-#: pages_boxes_add.html:84 pages_boxes_add.html:89 pages_boxes_add.html:95
-#: pages_boxes_add.html:101 pages_boxes_edit.html:65 pages_boxes_edit.html:69
-#: pages_boxes_edit.html:74 pages_boxes_edit.html:79 pages_boxes_edit.html:84
-#: pages_boxes_edit.html:89 pages_boxes_edit.html:95 pages_boxes_edit.html:101
-#: pages_boxes_select.html:58 pages_boxes_select.html:62
-#: pages_boxes_select.html:67 pages_boxes_select.html:72
-#: pages_boxes_select.html:77 pages_boxes_select.html:82
-#: pages_boxes_select.html:88 pages_boxes_select.html:92 pages_edit.html:63
-#: pages_edit.html:73 pages_edit.html:86 pages_edit.html:106
-#: pages_edit.html:119 pages_edit.html:132
-#: pages_generatorforms_content_edit.html:74
-#: pages_generatorforms_fields_add.html:71
-#: pages_generatorforms_fields_edit.html:71
-#: pages_generatorforms_fields_select.html:61 pages_simple_dates_add.html:69
-#: pages_simple_dates_edit.html:69 pages_simple_dates_select.html:58
-#: pages_simpleforms_content_edit.html:71
-#: pages_simpleguestbooks_content_edit.html:74
-#: pages_simpleguestbooks_entries_edit.html:71
-#: pages_simpleguestbooks_entries_select.html:62
-#: pages_simplepages_content_edit.html:72
-#: callbacks_insert_boxes_links_second.html:3 templates_add.html:110
-#: templates_copy.html:98 templates_edit.html:110
+#: pages_blogs_pingserviceconfigurations_add.html:63
+#: pages_blogs_pingserviceconfigurations_edit.html:59
+#: pages_blogs_pingserviceconfigurations_select.html:60
+#: pages_blogs_pingserviceconfigurations_select.html:73
+#: pages_blogs_postings_add.html:71 pages_blogs_postings_edit.html:78
+#: pages_blogs_postings_select.html:59 pages_boxes_add.html:66
+#: pages_boxes_add.html:70 pages_boxes_add.html:75 pages_boxes_add.html:80
+#: pages_boxes_add.html:85 pages_boxes_add.html:90 pages_boxes_add.html:96
+#: pages_boxes_add.html:102 pages_boxes_edit.html:66 pages_boxes_edit.html:70
+#: pages_boxes_edit.html:75 pages_boxes_edit.html:80 pages_boxes_edit.html:85
+#: pages_boxes_edit.html:90 pages_boxes_edit.html:96 pages_boxes_edit.html:102
+#: pages_boxes_select.html:59 pages_boxes_select.html:63
+#: pages_boxes_select.html:68 pages_boxes_select.html:73
+#: pages_boxes_select.html:78 pages_boxes_select.html:83
+#: pages_boxes_select.html:89 pages_boxes_select.html:93 pages_edit.html:64
+#: pages_edit.html:74 pages_edit.html:87 pages_edit.html:107
+#: pages_edit.html:120 pages_edit.html:133
+#: pages_generatorforms_content_edit.html:75
+#: pages_generatorforms_fields_add.html:72
+#: pages_generatorforms_fields_edit.html:72
+#: pages_generatorforms_fields_select.html:62 pages_simple_dates_add.html:70
+#: pages_simple_dates_edit.html:70 pages_simple_dates_select.html:59
+#: pages_simpleforms_content_edit.html:72
+#: pages_simpleguestbooks_content_edit.html:75
+#: pages_simpleguestbooks_entries_edit.html:72
+#: pages_simpleguestbooks_entries_select.html:63
+#: pages_simplepages_content_edit.html:73
+#: callbacks_insert_boxes_links_second.html:3 templates_add.html:111
+#: templates_copy.html:99 templates_edit.html:111
 msgid "Boxes"
 msgstr "Boxen"
 
-#: pages_blogs_pingserviceconfigurations_add.html:95
-#: pages_blogs_pingserviceconfigurations_edit.html:91
+#: pages_blogs_pingserviceconfigurations_add.html:96
+#: pages_blogs_pingserviceconfigurations_edit.html:92
 msgid "You have not yet created a ping service!"
 msgstr "Sie haben noch keinen Ping-Service angelegt"
 
-#: pages_blogs_pingserviceconfigurations_add.html:96
-#: pages_blogs_pingserviceconfigurations_edit.html:92
+#: pages_blogs_pingserviceconfigurations_add.html:97
+#: pages_blogs_pingserviceconfigurations_edit.html:93
 msgid ""
 "To create one, go to the <a href=\"../application/pingservices_select.php"
 "\">ping service overview page</a>."
@@ -3277,26 +3300,26 @@ msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Ping Service Configurations"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Ping-Service Konfiguration"
 
-#: pages_blogs_pingserviceconfigurations_select.html:69
-#: pages_boxes_add.html:73 pages_boxes_edit.html:73 pages_boxes_select.html:66
-#: pages_edit.html:83 pages_simple_dates_add.html:66
-#: pages_simple_dates_add.html:79 pages_simple_dates_add.html:85
-#: pages_simple_dates_edit.html:66 pages_simple_dates_edit.html:79
-#: pages_simple_dates_edit.html:85 pages_simple_dates_select.html:55
-#: pages_simple_dates_select.html:67 pages_simple_dates_select.html:71
+#: pages_blogs_pingserviceconfigurations_select.html:70
+#: pages_boxes_add.html:74 pages_boxes_edit.html:74 pages_boxes_select.html:67
+#: pages_edit.html:84 pages_simple_dates_add.html:67
+#: pages_simple_dates_add.html:80 pages_simple_dates_add.html:86
+#: pages_simple_dates_edit.html:67 pages_simple_dates_edit.html:80
+#: pages_simple_dates_edit.html:86 pages_simple_dates_select.html:56
+#: pages_simple_dates_select.html:68 pages_simple_dates_select.html:72
 msgid "Simple Dates"
 msgstr "Termine"
 
-#: pages_blogs_pingserviceconfigurations_select.html:105
-#: pages_blogs_postings_select.html:113
+#: pages_blogs_pingserviceconfigurations_select.html:106
+#: pages_blogs_postings_select.html:114
 msgid "Available Blog Postings"
 msgstr "Verfügbare Blog-Einträge"
 
-#: pages_blogs_pingserviceconfigurations_select.html:112
+#: pages_blogs_pingserviceconfigurations_select.html:113
 msgid "Ping Service Name"
 msgstr "Ping-Service Name"
 
-#: pages_blogs_pingserviceconfigurations_select.html:137
+#: pages_blogs_pingserviceconfigurations_select.html:138
 msgid "No ping service has been configured yet."
 msgstr "Sie haben noch keinen Ping-Service angelegt"
 
@@ -3304,11 +3327,11 @@ msgstr "Sie haben noch keinen Ping-Service angelegt"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Blog Posting"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neuen Blog-Eintrag anlegen"
 
-#: pages_blogs_postings_add.html:80 pages_blogs_postings_add.html:84
+#: pages_blogs_postings_add.html:81 pages_blogs_postings_add.html:85
 msgid "Add Blog Posting"
 msgstr "Neuen Blog-Eintrag anlegen"
 
-#: pages_blogs_postings_add.html:223 pages_blogs_postings_edit.html:230
+#: pages_blogs_postings_add.html:224 pages_blogs_postings_edit.html:231
 msgid "Insert Available Tags"
 msgstr "Verfügbare Schlagworte"
 
@@ -3316,14 +3339,14 @@ msgstr "Verfügbare Schlagworte"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Blog Posting"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Eintrag bearbeiten"
 
-#: pages_blogs_postings_edit.html:87 pages_blogs_postings_edit.html:91
+#: pages_blogs_postings_edit.html:88 pages_blogs_postings_edit.html:92
 msgid "Edit Blog Posting"
 msgstr "Blog-Eintrag bearbeiten"
 
-#: pages_blogs_postings_edit.html:146
-#: pages_generatorforms_content_edit.html:128
-#: pages_simpleguestbooks_content_edit.html:128
-#: pages_simplepages_content_edit.html:127
+#: pages_blogs_postings_edit.html:147
+#: pages_generatorforms_content_edit.html:129
+#: pages_simpleguestbooks_content_edit.html:129
+#: pages_simplepages_content_edit.html:129
 msgid "Frontend View"
 msgstr "Frontend Ansicht"
 
@@ -3331,23 +3354,23 @@ msgstr "Frontend Ansicht"
 msgid "Welcompose Admin &ndash; Pages &#62; Blog Postings"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Einträge"
 
-#: pages_blogs_postings_select.html:91 pages_simple_dates_select.html:91
-#: pages_simple_dates_select.html:132
+#: pages_blogs_postings_select.html:92 pages_simple_dates_select.html:92
+#: pages_simple_dates_select.html:133
 msgid "Yes"
 msgstr "Ja"
 
-#: pages_blogs_postings_select.html:92
-#: pages_generatorforms_fields_select.html:112
-#: pages_simple_dates_select.html:92 pages_simple_dates_select.html:132
+#: pages_blogs_postings_select.html:93
+#: pages_generatorforms_fields_select.html:113
+#: pages_simple_dates_select.html:93 pages_simple_dates_select.html:133
 msgid "No"
 msgstr "Nein"
 
-#: pages_blogs_postings_select.html:124 pages_simple_dates_select.html:122
-#: pages_simpleguestbooks_entries_select.html:123
+#: pages_blogs_postings_select.html:125 pages_simple_dates_select.html:123
+#: pages_simpleguestbooks_entries_select.html:124
 msgid "Date"
 msgstr "Datum"
 
-#: pages_blogs_postings_select.html:154
+#: pages_blogs_postings_select.html:155
 msgid "No blog posting has been created yet."
 msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 
@@ -3355,58 +3378,58 @@ msgstr "Sie haben noch kein Blog-Eintrag angelegt"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Box"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Box anlegen"
 
-#: pages_boxes_add.html:64 pages_boxes_edit.html:64 pages_boxes_select.html:57
-#: pages_edit.html:60 pages_simplepages_content_edit.html:69
+#: pages_boxes_add.html:65 pages_boxes_edit.html:65 pages_boxes_select.html:58
+#: pages_edit.html:61 pages_simplepages_content_edit.html:70
 msgid "Simple Page"
 msgstr "Simple Page"
 
-#: pages_boxes_add.html:78 pages_boxes_edit.html:78 pages_boxes_select.html:71
-#: pages_edit.html:103 pages_simpleforms_content_edit.html:68
+#: pages_boxes_add.html:79 pages_boxes_edit.html:79 pages_boxes_select.html:72
+#: pages_edit.html:104 pages_simpleforms_content_edit.html:69
 msgid "Simple Form"
 msgstr "Simple Form"
 
-#: pages_boxes_add.html:82 pages_boxes_edit.html:82 pages_boxes_select.html:75
-#: pages_edit.html:113 pages_generatorforms_content_edit.html:68
-#: pages_generatorforms_fields_add.html:65
-#: pages_generatorforms_fields_edit.html:65
-#: pages_generatorforms_fields_select.html:55
+#: pages_boxes_add.html:83 pages_boxes_edit.html:83 pages_boxes_select.html:76
+#: pages_edit.html:114 pages_generatorforms_content_edit.html:69
+#: pages_generatorforms_fields_add.html:66
+#: pages_generatorforms_fields_edit.html:66
+#: pages_generatorforms_fields_select.html:56
 msgid "Generator Form"
 msgstr "Generator Form"
 
-#: pages_boxes_add.html:83 pages_boxes_edit.html:83 pages_boxes_select.html:76
-#: pages_edit.html:116 pages_generatorforms_content_edit.html:71
-#: pages_generatorforms_fields_add.html:68
-#: pages_generatorforms_fields_add.html:78
-#: pages_generatorforms_fields_add.html:84
-#: pages_generatorforms_fields_edit.html:68
-#: pages_generatorforms_fields_edit.html:78
-#: pages_generatorforms_fields_edit.html:84
-#: pages_generatorforms_fields_select.html:58
-#: pages_generatorforms_fields_select.html:67
-#: pages_generatorforms_fields_select.html:71
+#: pages_boxes_add.html:84 pages_boxes_edit.html:84 pages_boxes_select.html:77
+#: pages_edit.html:117 pages_generatorforms_content_edit.html:72
+#: pages_generatorforms_fields_add.html:69
+#: pages_generatorforms_fields_add.html:79
+#: pages_generatorforms_fields_add.html:85
+#: pages_generatorforms_fields_edit.html:69
+#: pages_generatorforms_fields_edit.html:79
+#: pages_generatorforms_fields_edit.html:85
+#: pages_generatorforms_fields_select.html:59
+#: pages_generatorforms_fields_select.html:68
+#: pages_generatorforms_fields_select.html:72
 msgid "Generator Form Fields"
 msgstr "Generator Form Felder"
 
-#: pages_boxes_add.html:87 pages_boxes_edit.html:87 pages_boxes_select.html:80
-#: pages_edit.html:126 pages_simpleguestbooks_content_edit.html:68
-#: pages_simpleguestbooks_entries_edit.html:65
-#: pages_simpleguestbooks_entries_select.html:56
-#: pages_simpleguestbooks_entries_select.html:74
+#: pages_boxes_add.html:88 pages_boxes_edit.html:88 pages_boxes_select.html:81
+#: pages_edit.html:127 pages_simpleguestbooks_content_edit.html:69
+#: pages_simpleguestbooks_entries_edit.html:66
+#: pages_simpleguestbooks_entries_select.html:57
+#: pages_simpleguestbooks_entries_select.html:75
 msgid "Simple Guestbook"
 msgstr "Simple Guestbook"
 
-#: pages_boxes_add.html:88 pages_boxes_edit.html:88 pages_boxes_select.html:81
-#: pages_edit.html:129 pages_simpleguestbooks_content_edit.html:71
-#: pages_simpleguestbooks_entries_edit.html:68
-#: pages_simpleguestbooks_entries_edit.html:78
-#: pages_simpleguestbooks_entries_edit.html:84
-#: pages_simpleguestbooks_entries_select.html:59
-#: pages_simpleguestbooks_entries_select.html:68
-#: pages_simpleguestbooks_entries_select.html:72
+#: pages_boxes_add.html:89 pages_boxes_edit.html:89 pages_boxes_select.html:82
+#: pages_edit.html:130 pages_simpleguestbooks_content_edit.html:72
+#: pages_simpleguestbooks_entries_edit.html:69
+#: pages_simpleguestbooks_entries_edit.html:79
+#: pages_simpleguestbooks_entries_edit.html:85
+#: pages_simpleguestbooks_entries_select.html:60
+#: pages_simpleguestbooks_entries_select.html:69
+#: pages_simpleguestbooks_entries_select.html:73
 msgid "Simple Guestbook Entries"
 msgstr "Simple Guestbook Einträge"
 
-#: pages_boxes_add.html:95 pages_boxes_add.html:99
+#: pages_boxes_add.html:96 pages_boxes_add.html:100
 msgid "Add Box"
 msgstr "Neue Box anlegen"
 
@@ -3414,7 +3437,7 @@ msgstr "Neue Box anlegen"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Box"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Box bearbeiten"
 
-#: pages_boxes_edit.html:95 pages_boxes_edit.html:99
+#: pages_boxes_edit.html:96 pages_boxes_edit.html:100 pages_select.html:121
 msgid "Edit Box"
 msgstr "Box bearbeiten"
 
@@ -3422,43 +3445,43 @@ msgstr "Box bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Boxes"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Boxen"
 
-#: pages_boxes_select.html:110
+#: pages_boxes_select.html:111
 msgid "Available Boxes"
 msgstr "Verfügbare Boxen"
 
-#: pages_boxes_select.html:132
+#: pages_boxes_select.html:133
 msgid "No box has been created yet."
 msgstr "Sie haben noch keine Box angelegt"
 
-#: pages_boxes_select.html:156
+#: pages_boxes_select.html:157
 msgid "Adopt existing Boxes"
 msgstr "Bestehende Boxen übernehmen"
 
-#: pages_boxes_select.html:159
+#: pages_boxes_select.html:160
 msgid "Available Boxes of all pages"
 msgstr "Verfügbare Boxen"
 
-#: pages_boxes_select.html:170
+#: pages_boxes_select.html:172
 msgid "Page"
 msgstr "Seite"
 
-#: pages_boxes_select.html:171 pages_boxes_select.html:187
+#: pages_boxes_select.html:173 pages_boxes_select.html:189
 msgid "Content (Raw)"
 msgstr "Inhalt (Quellansicht)"
 
-#: pages_boxes_select.html:173
+#: pages_boxes_select.html:175
 msgid "Adopt Box"
 msgstr "Box übernehmen"
 
-#: pages_boxes_select.html:180
+#: pages_boxes_select.html:182
 msgid "View box raw content"
 msgstr "Boxinhalt anzeigen (Quellansicht)"
 
-#: pages_boxes_select.html:181
+#: pages_boxes_select.html:183
 msgid "Adopt Box to current page"
 msgstr "Box für die aktuelle Seite übernehmen"
 
-#: pages_boxes_select.html:196
+#: pages_boxes_select.html:198
 msgid "No other page Box has been created yet"
 msgstr "Im aktuellen Projekt sind noch keine Boxen angelegt"
 
@@ -3466,11 +3489,11 @@ msgstr "Im aktuellen Projekt sind noch keine Boxen angelegt"
 msgid "Welcompose Admin &ndash; Edit Page Metadata"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Seiten-Metadata bearbeiten"
 
-#: pages_edit.html:96 pages_urls_content_edit.html:55
+#: pages_edit.html:97 pages_urls_content_edit.html:56
 msgid "URL Page"
 msgstr "URL Seite"
 
-#: pages_edit.html:139 pages_edit.html:143
+#: pages_edit.html:140 pages_edit.html:144
 msgid "Edit Page Metadata"
 msgstr "Metadaten bearbeiten"
 
@@ -3478,8 +3501,8 @@ msgstr "Metadaten bearbeiten"
 msgid "Welcompose Admin &ndash; Edit Generator Form"
 msgstr "Welcompose Admin &ndash; Formular bearbeiten"
 
-#: pages_generatorforms_content_edit.html:80
-#: pages_generatorforms_content_edit.html:84
+#: pages_generatorforms_content_edit.html:81
+#: pages_generatorforms_content_edit.html:85
 msgid "Edit Generator Form"
 msgstr "Formular bearbeiten"
 
@@ -3487,8 +3510,8 @@ msgstr "Formular bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Generator Form Field"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Formularfelder anlegen"
 
-#: pages_generatorforms_fields_add.html:78
-#: pages_generatorforms_fields_add.html:82
+#: pages_generatorforms_fields_add.html:79
+#: pages_generatorforms_fields_add.html:83
 msgid "Add Generator Form Field"
 msgstr "Neues Formularfeld anlegen"
 
@@ -3496,8 +3519,8 @@ msgstr "Neues Formularfeld anlegen"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Generator Form Field"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Formularfeld bearbeiten"
 
-#: pages_generatorforms_fields_edit.html:78
-#: pages_generatorforms_fields_edit.html:82
+#: pages_generatorforms_fields_edit.html:79
+#: pages_generatorforms_fields_edit.html:83
 msgid "Edit Generator Form Field"
 msgstr "Formularfeld bearbeiten"
 
@@ -3505,11 +3528,11 @@ msgstr "Formularfeld bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Generator Form Fields"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Formularfelder"
 
-#: pages_generatorforms_fields_select.html:90
+#: pages_generatorforms_fields_select.html:91
 msgid "Available Generator Form Fields"
 msgstr "Verfügbare Formularfelder"
 
-#: pages_generatorforms_fields_select.html:131
+#: pages_generatorforms_fields_select.html:132
 msgid "No form field has been created yet."
 msgstr "Sie haben noch kein Formularfeld angelegt"
 
@@ -3517,15 +3540,15 @@ msgstr "Sie haben noch kein Formularfeld angelegt"
 msgid "Welcompose Admin &ndash; Move page to another navigation"
 msgstr "Welcompose Admin &ndash; Seite verschieben"
 
-#: pages_move_away.html:48 pages_move_away.html:52 pages_select.html:129
+#: pages_move_away.html:49 pages_move_away.html:53 pages_select.html:151
 msgid "Move page to another navigation"
 msgstr "Verschiebe Seite in eine andere Navigation"
 
-#: pages_move_away.html:70
+#: pages_move_away.html:71
 msgid "There is no navigation where you can move this node to!"
 msgstr "Es ist keine weitere Navigation vorhanden um die Seite zu verschieben!"
 
-#: pages_move_away.html:71
+#: pages_move_away.html:72
 msgid ""
 "To create one, go to the <a href=\"navigations_select.php\">navigation "
 "overview page</a>."
@@ -3586,47 +3609,51 @@ msgstr ""
 msgid "Hide this element"
 msgstr "Element ausblenden"
 
-#: pages_select.html:96 pages_select.html:113
+#: pages_select.html:97 pages_select.html:118
 msgid "Page structure"
 msgstr "Seitenstruktur"
 
-#: pages_select.html:114
+#: pages_select.html:119
 msgid "Move"
 msgstr "Position"
 
-#: pages_select.html:115
-msgid "Add"
-msgstr "Neu"
-
-#: pages_select.html:117
+#: pages_select.html:122
 msgid "Move away"
 msgstr "Verschieben"
 
-#: pages_select.html:124
+#: pages_select.html:123
+msgid "Add"
+msgstr "Neu"
+
+#: pages_select.html:130
 msgid "Protected page"
 msgstr "Geschützte Seite"
 
-#: pages_select.html:125
+#: pages_select.html:131
 msgid "Down"
 msgstr "Nach unten"
 
-#: pages_select.html:126
+#: pages_select.html:132
 msgid "Up"
 msgstr "Nach oben"
 
-#: pages_select.html:127 pages_select.html:138
-msgid "Add new page"
-msgstr "Neue Seite anlegen"
-
-#: pages_select.html:128
+#: pages_select.html:133
 msgid "Edit page contents"
 msgstr "Seiteninhalte bearbeiten"
 
-#: pages_select.html:130
+#: pages_select.html:148
+msgid "Yet no boxes"
+msgstr ""
+
+#: pages_select.html:152 pages_select.html:164
+msgid "Add new page"
+msgstr "Neue Seite anlegen"
+
+#: pages_select.html:153
 msgid "Delete page"
 msgstr "Seite löschen"
 
-#: pages_select.html:135
+#: pages_select.html:158
 msgid "No page has been created yet"
 msgstr "Sie haben noch keine Seite angelegt"
 
@@ -3634,7 +3661,7 @@ msgstr "Sie haben noch keine Seite angelegt"
 msgid "Welcompose Admin &ndash; Pages &#62; Add Simple Date"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Neuen Termin anlegen"
 
-#: pages_simple_dates_add.html:79 pages_simple_dates_add.html:83
+#: pages_simple_dates_add.html:80 pages_simple_dates_add.html:84
 msgid "Add Simple Date"
 msgstr "Neuen Termin anlegen"
 
@@ -3642,7 +3669,7 @@ msgstr "Neuen Termin anlegen"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Simple Date"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Termin bearbeiten"
 
-#: pages_simple_dates_edit.html:79 pages_simple_dates_edit.html:83
+#: pages_simple_dates_edit.html:80 pages_simple_dates_edit.html:84
 msgid "Edit Simple Date"
 msgstr "Termin bearbeiten"
 
@@ -3650,15 +3677,15 @@ msgstr "Termin bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Simple Dates"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Termine"
 
-#: pages_simple_dates_select.html:113
+#: pages_simple_dates_select.html:114
 msgid "Available Simple Dates"
 msgstr "Verfügbare Termine"
 
-#: pages_simple_dates_select.html:124
+#: pages_simple_dates_select.html:125
 msgid "Link(s)?"
 msgstr "Verweise?"
 
-#: pages_simple_dates_select.html:151
+#: pages_simple_dates_select.html:152
 msgid "No simple date has been created yet."
 msgstr "Sie haben noch keinen Termin angelegt."
 
@@ -3666,12 +3693,12 @@ msgstr "Sie haben noch keinen Termin angelegt."
 msgid "Welcompose Admin &ndash; Edit Simple Form"
 msgstr "Welcompose Admin &ndash; Formular bearbeiten"
 
-#: pages_simpleforms_content_edit.html:77
-#: pages_simpleforms_content_edit.html:81
+#: pages_simpleforms_content_edit.html:78
+#: pages_simpleforms_content_edit.html:82
 msgid "Edit Simple Form"
 msgstr "Formular bearbeiten"
 
-#: pages_simpleforms_content_edit.html:125
+#: pages_simpleforms_content_edit.html:126
 msgid "Frontend Preview"
 msgstr "Frontend Ansicht"
 
@@ -3679,8 +3706,8 @@ msgstr "Frontend Ansicht"
 msgid "Welcompose Admin &ndash; Edit Simple Guestbook"
 msgstr "Welcompose Admin &ndash; Gästebuch bearbeiten"
 
-#: pages_simpleguestbooks_content_edit.html:80
-#: pages_simpleguestbooks_content_edit.html:84
+#: pages_simpleguestbooks_content_edit.html:81
+#: pages_simpleguestbooks_content_edit.html:85
 msgid "Edit Simple Guestbook"
 msgstr "Gästebuch bearbeiten"
 
@@ -3688,8 +3715,8 @@ msgstr "Gästebuch bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Simple Book Entry"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Gästebucheintrag bearbeiten"
 
-#: pages_simpleguestbooks_entries_edit.html:78
-#: pages_simpleguestbooks_entries_edit.html:82
+#: pages_simpleguestbooks_entries_edit.html:79
+#: pages_simpleguestbooks_entries_edit.html:83
 msgid "Edit Simple Guestbook Entry"
 msgstr "Gästebucheintrag bearbeiten"
 
@@ -3697,19 +3724,19 @@ msgstr "Gästebucheintrag bearbeiten"
 msgid "Welcompose Admin &ndash; Pages &#62; Simple Guestbook Entries"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Gästebucheinträge"
 
-#: pages_simpleguestbooks_entries_select.html:111
+#: pages_simpleguestbooks_entries_select.html:112
 msgid "Available Simple Guestbook Entries"
 msgstr "Verfügbare Gästebucheinträge"
 
-#: pages_simpleguestbooks_entries_select.html:133
+#: pages_simpleguestbooks_entries_select.html:134
 msgid "View entry message"
 msgstr "Gästebucheintrag anzeigen"
 
-#: pages_simpleguestbooks_entries_select.html:141
+#: pages_simpleguestbooks_entries_select.html:142
 msgid "Entry message"
 msgstr "Eintragstext"
 
-#: pages_simpleguestbooks_entries_select.html:162
+#: pages_simpleguestbooks_entries_select.html:163
 msgid "No guestbook entry has been created yet."
 msgstr "Es wurden noch kein Eintrag im Gästebuch angelegt"
 
@@ -3717,8 +3744,8 @@ msgstr "Es wurden noch kein Eintrag im Gästebuch angelegt"
 msgid "Welcompose Admin &ndash; Edit Simple Page"
 msgstr "Welcompose Admin &ndash; Seite bearbeiten"
 
-#: pages_simplepages_content_edit.html:79
-#: pages_simplepages_content_edit.html:83
+#: pages_simplepages_content_edit.html:80
+#: pages_simplepages_content_edit.html:84
 msgid "Edit Simple Page"
 msgstr "Seite bearbeiten"
 
@@ -3726,7 +3753,7 @@ msgstr "Seite bearbeiten"
 msgid "Welcompose Admin &ndash; Edit URL Page"
 msgstr "Welcompose Admin &ndash; Seiten-URL bearbeiten"
 
-#: pages_urls_content_edit.html:61 pages_urls_content_edit.html:65
+#: pages_urls_content_edit.html:62 pages_urls_content_edit.html:66
 msgid "Edit URL Page"
 msgstr "Seiten-URL bearbeiten"
 
@@ -3734,7 +3761,7 @@ msgstr "Seiten-URL bearbeiten"
 msgid "Welcompose Admin &ndash; Add Page Type"
 msgstr "Welcompose Admin &ndash; Neuen Seitentyp anlegen"
 
-#: pagetypes_add.html:52 pagetypes_add.html:56
+#: pagetypes_add.html:53 pagetypes_add.html:57
 msgid "Add Page Type"
 msgstr "Neuen Seitentyp anlegen"
 
@@ -3742,7 +3769,7 @@ msgstr "Neuen Seitentyp anlegen"
 msgid "Welcompose Admin &ndash; Edit Page Type"
 msgstr "Welcompose Admin &ndash; Seitentyp bearbeiten"
 
-#: pagetypes_edit.html:49 pagetypes_edit.html:53
+#: pagetypes_edit.html:50 pagetypes_edit.html:54
 msgid "Edit Page Type"
 msgstr "Seitentyp bearbeiten"
 
@@ -3750,11 +3777,11 @@ msgstr "Seitentyp bearbeiten"
 msgid "Welcompose Admin &ndash; Page Types"
 msgstr "Welcompose Admin &ndash; Seitentypen"
 
-#: pagetypes_select.html:58
+#: pagetypes_select.html:59
 msgid "Available Page Types"
 msgstr "Verfügbare Seitentypen"
 
-#: pagetypes_select.html:84
+#: pagetypes_select.html:85
 msgid "No page type has been created yet"
 msgstr "Sie haben noch keinen Seitentyp angelegt"
 
@@ -3762,7 +3789,7 @@ msgstr "Sie haben noch keinen Seitentyp angelegt"
 msgid "Welcompose Admin &ndash; Add Podcast Category"
 msgstr "Welcompose Admin &ndash; Neue Podcast-Kategorie anlegen"
 
-#: podcastcategories_add.html:55 podcastcategories_add.html:59
+#: podcastcategories_add.html:56 podcastcategories_add.html:60
 msgid "Add Podcast Category"
 msgstr "Neue Podcast-Kategorie anlegen"
 
@@ -3770,7 +3797,7 @@ msgstr "Neue Podcast-Kategorie anlegen"
 msgid "Welcompose Admin &ndash; Edit Podcast Category"
 msgstr "Welcompose Admin &ndash; Podcast-Kategorie bearbeiten"
 
-#: podcastcategories_edit.html:50 podcastcategories_edit.html:54
+#: podcastcategories_edit.html:51 podcastcategories_edit.html:55
 msgid "Edit Podcast Category"
 msgstr "Podcast-Kategorie bearbeiten"
 
@@ -3778,11 +3805,11 @@ msgstr "Podcast-Kategorie bearbeiten"
 msgid "Welcompose Admin &ndash; Podcast Categories"
 msgstr "Welcompose Admin &ndash; Podcast-Kategorien"
 
-#: podcastcategories_select.html:71
+#: podcastcategories_select.html:72
 msgid "Available podcast categories"
 msgstr "Verfügbare Podcast-Kategorien"
 
-#: podcastcategories_select.html:103
+#: podcastcategories_select.html:104
 msgid "No podcast category has been created yet"
 msgstr "Sie haben noch keine Podcast-Kategorie angelegt"
 
@@ -3790,7 +3817,7 @@ msgstr "Sie haben noch keine Podcast-Kategorie angelegt"
 msgid "Welcompose Admin &ndash; Add Structural Template"
 msgstr "Welcompose Admin &ndash; Neue Strukturvorlage anlegen"
 
-#: structuraltemplates_add.html:55 structuraltemplates_add.html:59
+#: structuraltemplates_add.html:56 structuraltemplates_add.html:60
 msgid "Add Structural Template"
 msgstr "Neue Strukturvorlage anlegen"
 
@@ -3798,7 +3825,7 @@ msgstr "Neue Strukturvorlage anlegen"
 msgid "Welcompose Admin &ndash; Edit Structural Template"
 msgstr "Welcompose Admin &ndash; Strukturvorlage bearbeiten"
 
-#: structuraltemplates_edit.html:55 structuraltemplates_edit.html:59
+#: structuraltemplates_edit.html:56 structuraltemplates_edit.html:60
 msgid "Edit Structural Template"
 msgstr "Strukturvorlage bearbeiten"
 
@@ -3806,11 +3833,11 @@ msgstr "Strukturvorlage bearbeiten"
 msgid "Welcompose Admin &ndash; Structural Templates"
 msgstr "Welcompose Admin &ndash; Strukturvorlagen"
 
-#: structuraltemplates_select.html:71
+#: structuraltemplates_select.html:72
 msgid "Available structural templates"
 msgstr "Verfügbare Strukturvorlagen"
 
-#: structuraltemplates_select.html:106
+#: structuraltemplates_select.html:107
 msgid "No structural template has been created yet"
 msgstr "Sie haben noch keine Strukturvorlage angelegt"
 
@@ -3903,7 +3930,7 @@ msgstr ""
 "wird zuerst ausgeführt, Plug-In B nachfolgend. Die Werteangabe muss "
 "numerisch sein."
 
-#: anti_spam_plugin_anti_spam_plugin_type.html:1 insert_image_title.html:1
+#: anti_spam_plugin_anti_spam_plugin_type.html:1
 msgid ""
 "Select the appropriate plugin type. See the docs of your anti spam plugin if "
 "you're unsure what to choose."
@@ -4353,10 +4380,10 @@ msgstr ""
 #: generator_form_field_generator_form_field_value.html:1
 msgid ""
 "Here you can enter a predefined value for the form field. Use only a single "
-"line for every form field except textareas,selects and radio inputs. To "
-"specify the options for a select, write all the options in a single line, "
-"each one separated using a comma. To specify options for a radio value "
-"group, please separate every value with a semicolon."
+"line for every form field except selects and radio inputs. To specify the "
+"options for a select, write all the options in a single line, each one "
+"separated using a comma. To specify options for a radio value group, please "
+"separate every value with a semicolon."
 msgstr ""
 "Hier können Sie Anfangsinhalte der Formularfelder definieren. Tragen Sie "
 "bitte nur einzeilige Inhalte ein. Ausnahme sind hier Textareas, Auswahlmenüs "
@@ -4397,8 +4424,8 @@ msgid ""
 "generator form can be embedded using the place holder %%title."
 msgstr ""
 "Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt werden "
-"soll. Der Titel der <em>Generator Form</em> kann über den Platzhalter <em>%%"
-"title</em> in diesem Feld genutzt werden."
+"soll. Der Titel der <em>Generator Form</em> kann über den Platzhalter <em>%"
+"%title</em> in diesem Feld genutzt werden."
 
 #: generator_form_generator_form_title.html:1
 msgid "Enter here the title of your generator form."
@@ -4491,6 +4518,36 @@ msgstr ""
 "Mit Hilfe eines möglichst aussagekräftigen Namen können Sie Ihre Bilddateien "
 "organisieren, zum Beispiel <em>Meine Urlaubsbilder</em>."
 
+#: insert_image_alt.html:1
+msgid ""
+"Alternative description if the client has no ability to display the image."
+msgstr ""
+"Alternativtext, when das Ausgabemedium keine Bilder anzeigen kann."
+
+#: insert_image_insert_as_reference.html:1
+msgid ""
+"Activate the checkbox to insert only the reference to this image. This could "
+"be handy while insertion to a existing html structure."
+msgstr ""
+"Aktivieren sie die Checkbox um das Bild als Referenz einzufügen. Das ist "
+"bspw. dann hilfreich, wenn das Bild innerhalb einer bestehenden HTML Struktur "
+"eingefügt werden soll."
+
+#: insert_image_set_dimensions.html:1
+msgid ""
+"Detach the checkbox if you do not want to set height/width tag attributes to "
+"your image."
+msgstr ""
+"Deaktivieren Sie die Checkbox, wenn der Image Tag keine Höhen/Breitenattribute "
+"enthalten soll."
+
+#: insert_image_title.html:1
+msgid ""
+"Provide additional image information whenever the cursor is hovered over the "
+"image."
+msgstr ""
+"Der Title Tag ermöglicht die Angabe zusätzlicher Informationen zum Bild."
+
 #: insert_x-shockwave-flash_bgcolor.html:1
 msgid ""
 "Select a <em>background color</em> for your file. Format must be a valid "
@@ -4506,8 +4563,8 @@ msgstr ""
 #: insert_x-shockwave-flash_loop.html:1
 msgid ""
 "Set this checkbox if you don't want the file repeating indefinitely. See <a "
-"href=\"http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=tn_12701"
-"\">adobe documentation</a> for details."
+"href=\"http://www.adobe.com/cfusion/knowledgebase/index.cfm?"
+"id=tn_12701\">adobe documentation</a> for details."
 msgstr ""
 "Verhindern Sie die Wiedergabe in einer Schleife. Weitere Informationen "
 "finden Sie über die <a href=\"http://www.adobe.com/cfusion/knowledgebase/"
@@ -4517,8 +4574,8 @@ msgstr ""
 #: insert_x-shockwave-flash_play.html:1
 msgid ""
 "Set this checkbox if you don't want the file playing while loading. See <a "
-"href=\"http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=tn_12701"
-"\">adobe documentation</a> for details."
+"href=\"http://www.adobe.com/cfusion/knowledgebase/index.cfm?"
+"id=tn_12701\">adobe documentation</a> for details."
 msgstr ""
 "Definiert, ob die Datei während des Ladevorgangs abgespielt werden soll. "
 "Weitere Informationen finden Sie über die <a href=\"http://www.adobe.com/"
@@ -4861,6 +4918,19 @@ msgstr ""
 msgid "Enter a descriptive name for your project"
 msgstr "Tragen Sie bitte einen Namen für Ihr Projekt ein"
 
+#: project_project_selected_users.html:1
+msgid ""
+"You may want to assign one or more users to the new project. Press CTRL (on "
+"PC) or Command (on Mac) to select or deselect multiple users. When no "
+"selection is made, the new project will be initialized with the Welcompose "
+"standard user set"
+msgstr ""
+"Wenn gewünscht, können Sie hier dem neuen Projekt einen oder mehrere Benutzer "
+"zuordnen. Halten Sie die CTRL-Taste (Windows) oder die Apfel-Taste "
+"(Mac) gedrückt um eine Mehrfachauswahl zu treffen. Wählen Sie keinen "
+"Benutzer aus, wird das neue Projekt mit den Welcompose Standard Benutzern "
+"initialisiert"
+
 #: right_right_description.html:1
 msgid ""
 "You can optionally describe the purpose of this right. May be useful when "
@@ -4958,8 +5028,8 @@ msgid ""
 "simple form can be embedded using the place holder %%title."
 msgstr ""
 "Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt werden "
-"soll. Der Titel der <em>Simple Form</em> kann über den Platzhalter <em>%%"
-"title</em> in diesem Feld genutzt werden."
+"soll. Der Titel der <em>Simple Form</em> kann über den Platzhalter <em>%"
+"%title</em> in diesem Feld genutzt werden."
 
 #: simple_form_simple_form_title.html:1
 msgid "Enter here the title of your simple form."
@@ -5036,8 +5106,8 @@ msgid ""
 "guestbook can be embedded using the place holder %%title."
 msgstr ""
 "Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt werden "
-"soll. Der Titel des <em>SimpleGuestbook</em> kann über den Platzhalter <em>%%"
-"title</em> in diesem Feld genutzt werden."
+"soll. Der Titel des <em>SimpleGuestbook</em> kann über den Platzhalter <em>%"
+"%title</em> in diesem Feld genutzt werden."
 
 #: simple_guestbook_simple_guestbook_send_notification.html:1
 msgid ""
@@ -5061,8 +5131,8 @@ msgid ""
 "page can be embedded using the place holder %%title."
 msgstr ""
 "Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt werden "
-"soll. Der Titel der <em>Simple Page</em> kann über den Platzhalter <em>%%"
-"title</em> in diesem Feld genutzt werden."
+"soll. Der Titel der <em>Simple Page</em> kann über den Platzhalter <em>%"
+"%title</em> in diesem Feld genutzt werden."
 
 #: sitemaps_sitemaps_compress.html:1
 msgid ""
@@ -5299,21 +5369,31 @@ msgstr ""
 "Welcompose Admininistration &ndash; Mediamanager &ndash; Shockwave Flash "
 "einfügen"
 
-#: callbacks_insert_application-x-shockwave-flash.html:38
-#: callbacks_insert_image.html:38 mediamanager.html:3
-#: mediamanager_edit.html:43 mediamanager_upload.html:43
+#: callbacks_insert_application-x-shockwave-flash.html:41
+#: callbacks_insert_image.html:41 mediamanager.html:3
+#: mediamanager_edit.html:42 mediamanager_upload.html:43
 msgid "MEDIA MANAGER"
 msgstr "MEDIA MANAGER"
 
-#: callbacks_insert_application-x-shockwave-flash.html:38
+#: callbacks_insert_application-x-shockwave-flash.html:41
 msgid "INSERT SHOCKWAVE FLASH"
 msgstr "SHOCKWAVE FLASH EINFÜGEN"
+
+#: callbacks_insert_application-x-shockwave-flash.html:65
+#: callbacks_insert_image.html:65
+msgid "Paste as HTML"
+msgstr "Bild als HTML einfügen"
+
+#: callbacks_insert_application-x-shockwave-flash.html:87
+#: callbacks_insert_image.html:78
+msgid "Paste as Reference"
+msgstr "Bild als Referenz einfügen"
 
 #: callbacks_insert_image.html:10
 msgid "Welcompose Admin &ndash; Mediamanager &ndash; Insert Image"
 msgstr "Welcompose Admininistration &ndash; Mediamanager &ndash; Bild einfügen"
 
-#: callbacks_insert_image.html:38
+#: callbacks_insert_image.html:41
 msgid "INSERT IMAGE"
 msgstr "BILD EINFÜGEN"
 
@@ -5325,11 +5405,11 @@ msgstr "myLocal"
 msgid "myFlickr"
 msgstr "myFlickr"
 
-#: mediamanager.html:16 globalfiles_select.html:91 globalfiles_select.html:101
-#: globalfiles_select.html:111 globaltemplates_select.html:84
-#: globaltemplates_select.html:93 globaltemplates_select.html:103
-#: templates_select.html:110 templates_select.html:121
-#: templates_select.html:132
+#: mediamanager.html:16 globalfiles_select.html:106
+#: globalfiles_select.html:116 globalfiles_select.html:126
+#: globaltemplates_select.html:85 globaltemplates_select.html:94
+#: globaltemplates_select.html:104 templates_select.html:111
+#: templates_select.html:122 templates_select.html:133
 msgid "Upload"
 msgstr "Upload"
 
@@ -5341,7 +5421,7 @@ msgstr "Dateitypen"
 msgid "Find by tags"
 msgstr "Schlagworte"
 
-#: mediamanager.html:46 mediamanager_edit.html:80 mediamanager_upload.html:80
+#: mediamanager.html:46 mediamanager_edit.html:123 mediamanager_upload.html:87
 msgid "Current tags"
 msgstr "Vorhandene Schlagworte"
 
@@ -5352,6 +5432,11 @@ msgstr "Zeitrahmen"
 #: mediamanager.html:81 mediamanager.html:184
 msgid "Insert this media file into your content"
 msgstr "Fügen Sie diese Mediadatei in Ihre Inhalte ein"
+
+#: mediamanager.html:83 mediamanager_edit.html:84
+#: mediamanager_media_to_podcast.html:2 globalfiles_edit.html:87
+msgid "Filename"
+msgstr "Dateiname"
 
 #: mediamanager.html:85
 msgid "Use for podcast"
@@ -5418,25 +5503,67 @@ msgid "Welcompose Admin &ndash; Mediamanager &ndash; Edit Media"
 msgstr ""
 "Welcompose Administration &ndash; Mediamanager &ndash; Media bearbeiten"
 
-#: mediamanager_edit.html:37
+#: mediamanager_edit.html:36
 msgid "Please wait. Edits processing..."
 msgstr "Bitte warten. Vorgang ist in Bearbeitung.."
 
-#: mediamanager_edit.html:43
+#: mediamanager_edit.html:42
 msgid "EDIT MEDIA"
 msgstr "MEDIA BEARBEITEN"
 
-#: mediamanager_edit.html:61
-msgid "Your input was successfully updated!"
-msgstr "Ihre Änderungen wurden erfolgreich gespeichert!"
+#: mediamanager_edit.html:60 mediamanager_upload.html:61
+#: globalfiles_add.html:74 globalfiles_select.html:79
+msgid "Fine, your input was successfully stored!"
+msgstr "Ihre Eingaben wurden gespeichert"
 
-#: mediamanager_edit.html:86 mediamanager_upload.html:86
+#: mediamanager_edit.html:67 mediamanager_upload.html:68
+#: globalfiles_add.html:81 globalfiles_edit.html:74 globalfiles_select.html:86
+msgid "Sorry, your input was not stored!"
+msgstr "Ihre Eingabe konnte leider nicht gespeichert werden!"
+
+#: mediamanager_edit.html:68 mediamanager_upload.html:69
+msgid ""
+"A media file with the same name already exists. A media file name has to be "
+"unique."
+msgstr ""
+"Eine gleichnamige Datei existiert bereits. "
+"Dateinamen müssen einmalig sein."
+
+#: mediamanager_edit.html:89 globalfiles_edit.html:91
+msgid "File format"
+msgstr "Dateiformat"
+
+#: mediamanager_edit.html:93 globalfiles_edit.html:95
+msgid "File size"
+msgstr "Dateigröße"
+
+#: mediamanager_edit.html:97
+msgid "ID"
+msgstr "ID"
+
+#: mediamanager_edit.html:101
+msgid "Height"
+msgstr "Höhe"
+
+#: mediamanager_edit.html:101
+msgid "Width"
+msgstr "Breite"
+
+#: mediamanager_edit.html:102
+msgid "Not available"
+msgstr "Nicht verfügbar"
+
+#: mediamanager_edit.html:105 globalfiles_edit.html:99
+msgid "Added"
+msgstr "Hinzugefügt"
+
+#: mediamanager_edit.html:109 globalfiles_edit.html:103
+msgid "Modified"
+msgstr "Geändert"
+
+#: mediamanager_edit.html:129 mediamanager_upload.html:93
 msgid "Insert Tag"
 msgstr "Diese Referenz einfügen"
-
-#: mediamanager_media_to_podcast.html:2
-msgid "Filename"
-msgstr "Dateiname"
 
 #: mediamanager_media_to_podcast.html:3
 msgid "Media type"
@@ -5465,18 +5592,18 @@ msgstr ""
 "Welcompose Administration &ndash; Boxen &ndash; Verweis zu Seitenboxen "
 "erstellen"
 
-#: callbacks_insert_boxes_links.html:39
+#: callbacks_insert_boxes_links.html:40
 msgid "BOXES"
 msgstr "BOXEN"
 
-#: callbacks_insert_boxes_links.html:39
-#: callbacks_insert_globalboxes_links.html:38
-#: callbacks_insert_globalfiles_links.html:38
-#: callbacks_insert_globaltemplates_links.html:38
+#: callbacks_insert_boxes_links.html:40
+#: callbacks_insert_globalboxes_links.html:39
+#: callbacks_insert_globalfiles_links.html:39
+#: callbacks_insert_globaltemplates_links.html:39
 msgid "CREATE REFERENCE"
 msgstr "VERWEIS ERSTELLEN"
 
-#: callbacks_insert_boxes_links.html:54
+#: callbacks_insert_boxes_links.html:55
 msgid "Display related boxes"
 msgstr "Anzeige der relevanten Seiten-Boxen"
 
@@ -5491,7 +5618,7 @@ msgstr ""
 "Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Boxen "
 "erstellen"
 
-#: callbacks_insert_globalboxes_links.html:38
+#: callbacks_insert_globalboxes_links.html:39
 msgid "GLOBAL BOXES"
 msgstr "GLOBALE BOXEN"
 
@@ -5502,7 +5629,7 @@ msgstr ""
 "Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Dateien "
 "erstellen"
 
-#: callbacks_insert_globalfiles_links.html:38
+#: callbacks_insert_globalfiles_links.html:39
 msgid "GLOBAL FILES"
 msgstr "GLOBALE DATEIEN"
 
@@ -5514,7 +5641,7 @@ msgstr ""
 "Welcompose Administration &ndash; Boxen &ndash; Verweis zu globalen Vorlagen "
 "erstellen"
 
-#: callbacks_insert_globaltemplates_links.html:38
+#: callbacks_insert_globaltemplates_links.html:39
 msgid "GLOBAL TEMPLATES"
 msgstr "GLOBALE VORLAGEN"
 
@@ -5522,50 +5649,70 @@ msgstr "GLOBALE VORLAGEN"
 msgid "Welcompose Admin &ndash; Add Global File"
 msgstr "Welcompose Administration &ndash; Neue Globale Datei anlegen"
 
-#: globalfiles_add.html:52 globalfiles_add.html:56
+#: globalfiles_add.html:53 globalfiles_add.html:57
 msgid "Add Global File"
 msgstr "Neue Globale Datei anlegen"
+
+#: globalfiles_add.html:82
+msgid ""
+"A global file with the same name already exists. A global file name has to "
+"be unique."
+msgstr ""
+"Eine gleichnamige Globale Datei existiert bereits. "
+"Dateinamen müssen einmalig sein."
 
 #: globalfiles_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Global File"
 msgstr "Welcompose Administration &ndash; Globale Datei bearbeiten"
 
-#: globalfiles_edit.html:48 globalfiles_edit.html:52
+#: globalfiles_edit.html:53 globalfiles_edit.html:57
 msgid "Edit Global File"
 msgstr "Globale Datei bearbeiten"
+
+#: globalfiles_edit.html:75 globalfiles_select.html:87
+msgid ""
+"The name of the file you wish to upload must be identical to the file name "
+"you like to replace"
+msgstr ""
+"Der Name der hochzuladenen Datei muss identisch sein mit dem Namen "
+"der zu ersetzenden Datei"
 
 #: globalfiles_select.html:10
 msgid "Welcompose Admin &ndash; Global Files"
 msgstr "Welcompose Administration &ndash; Globale Dateien"
 
-#: globalfiles_select.html:77 globaltemplates_select.html:72
-#: templates_select.html:95
+#: globalfiles_select.html:80
+msgid "Go ahead and do some more edits"
+msgstr "Sie können nun mit der Bearbeitung weiterer Dateien fortfahren"
+
+#: globalfiles_select.html:92 globaltemplates_select.html:73
+#: templates_select.html:96
 msgid "Available Templates"
 msgstr "Verfügbare Vorlagen"
 
-#: globalfiles_select.html:90
+#: globalfiles_select.html:105
 msgid "File is..."
 msgstr "Datei ist..."
 
-#: globalfiles_select.html:92 globalfiles_select.html:102
-#: globaltemplates_select.html:85 globaltemplates_select.html:94
-#: templates_select.html:111 templates_select.html:122
+#: globalfiles_select.html:107 globalfiles_select.html:117
+#: globaltemplates_select.html:86 globaltemplates_select.html:95
+#: templates_select.html:112 templates_select.html:123
 msgid "Download"
 msgstr "Download"
 
-#: globalfiles_select.html:100
+#: globalfiles_select.html:115
 msgid "available"
 msgstr "verfügbar"
 
-#: globalfiles_select.html:100
+#: globalfiles_select.html:115
 msgid "not available"
 msgstr "nicht verfügbar"
 
-#: globalfiles_select.html:113
+#: globalfiles_select.html:128
 msgid "Upload Global File"
 msgstr "Upload"
 
-#: globalfiles_select.html:134
+#: globalfiles_select.html:149
 msgid "No global file has been created yet."
 msgstr "Sie haben noch keine Datei angelegt"
 
@@ -5573,7 +5720,7 @@ msgstr "Sie haben noch keine Datei angelegt"
 msgid "Welcompose Admin &ndash; Add Global Template"
 msgstr "Welcompose Administration &ndash; Neue Globale Vorlage anlegen"
 
-#: globaltemplates_add.html:54 globaltemplates_add.html:58
+#: globaltemplates_add.html:55 globaltemplates_add.html:59
 msgid "Add Global Template"
 msgstr "Neue Globale Vorlage anlegen"
 
@@ -5581,7 +5728,7 @@ msgstr "Neue Globale Vorlage anlegen"
 msgid "Welcompose Admin &ndash; Edit Global Template"
 msgstr "Welcompose Administration &ndash; Globale Vorlage bearbeiten"
 
-#: globaltemplates_edit.html:54 globaltemplates_edit.html:58
+#: globaltemplates_edit.html:55 globaltemplates_edit.html:59
 msgid "Edit Global Template"
 msgstr "Globale Vorlage bearbeiten"
 
@@ -5589,11 +5736,11 @@ msgstr "Globale Vorlage bearbeiten"
 msgid "Welcompose Admin &ndash; Global Templates"
 msgstr "Welcompose Administration &ndash; Globale Vorlagen"
 
-#: globaltemplates_select.html:105
+#: globaltemplates_select.html:106
 msgid "Upload Global Template"
 msgstr "Upload"
 
-#: globaltemplates_select.html:126
+#: globaltemplates_select.html:127
 msgid "No global template has been created yet."
 msgstr "Sie haben noch keine globale Vorlage angelegt"
 
@@ -5601,15 +5748,15 @@ msgstr "Sie haben noch keine globale Vorlage angelegt"
 msgid "Welcompose Admin &ndash; Add Template"
 msgstr "Welcompose Administration &ndash; Neue Seitenvorlage anlegen"
 
-#: templates_add.html:54 templates_add.html:58
+#: templates_add.html:55 templates_add.html:59
 msgid "Add Template"
 msgstr "Neue Seitenvorlage anlegen"
 
-#: templates_add.html:76 templates_copy.html:70 templates_edit.html:76
+#: templates_add.html:77 templates_copy.html:71 templates_edit.html:77
 msgid "You have not yet created a template type!"
 msgstr "Sie haben noch keinen Vorlagentyp angelegt"
 
-#: templates_add.html:77 templates_edit.html:77
+#: templates_add.html:78 templates_edit.html:78
 msgid ""
 "To create one, go to the <a href=\"templatetypes_select.php\">template type "
 "overview page</a>."
@@ -5617,7 +5764,7 @@ msgstr ""
 "Bitte gehen Sie zur <a href=\"templatetypes_select.php\">Übersichtsseite der "
 "Vorlagentypen</a>."
 
-#: templates_add.html:106 templates_copy.html:94 templates_edit.html:106
+#: templates_add.html:107 templates_copy.html:95 templates_edit.html:107
 msgid "Internal Links"
 msgstr "Interne Links"
 
@@ -5625,11 +5772,11 @@ msgstr "Interne Links"
 msgid "Welcompose Admin &ndash; Duplicate Template"
 msgstr "Welcompose Administration &ndash; Seitenvorlage duplizieren"
 
-#: templates_copy.html:48 templates_copy.html:52
+#: templates_copy.html:49 templates_copy.html:53
 msgid "Duplicate Template"
 msgstr "Seitenvorlage duplizieren"
 
-#: templates_copy.html:71
+#: templates_copy.html:72
 msgid ""
 "To create one, go to the <a href=\"templatetypes_select.php\">template type "
 "type overview page</a>."
@@ -5641,11 +5788,11 @@ msgstr ""
 msgid "Welcompose Admin &ndash; Edit Template"
 msgstr "Welcompose Administration &ndash; Seitenvorlage bearbeiten"
 
-#: templates_edit.html:54 templates_edit.html:58
+#: templates_edit.html:55 templates_edit.html:59
 msgid "Edit Template"
 msgstr "Seitenvorlage bearbeiten"
 
-#: templates_edit.html:84
+#: templates_edit.html:85
 msgid "You can continue editing your template."
 msgstr "Sie können nun mit der Bearbeitung der Seitenvorlage fortfahren"
 
@@ -5653,20 +5800,20 @@ msgstr "Sie können nun mit der Bearbeitung der Seitenvorlage fortfahren"
 msgid "Welcompose Admin &ndash; Templates"
 msgstr "Welcompose Administration &ndash; Seitenvorlagen"
 
-#: templates_select.html:108
+#: templates_select.html:109
 msgid "Template Type"
 msgstr "Vorlagentyp"
 
-#: templates_select.html:112 templates_select.html:123 groups_select.html:70
-#: groups_select.html:79
+#: templates_select.html:113 templates_select.html:124 groups_select.html:71
+#: groups_select.html:80
 msgid "Duplicate"
 msgstr "Duplizieren"
 
-#: templates_select.html:134
+#: templates_select.html:135
 msgid "Upload Template"
 msgstr "Upload"
 
-#: templates_select.html:155
+#: templates_select.html:156
 msgid "No template has been created yet."
 msgstr "Sie haben noch keine Seitenvorlage angelegt"
 
@@ -5674,11 +5821,11 @@ msgstr "Sie haben noch keine Seitenvorlage angelegt"
 msgid "Welcompose Admin &ndash; Add Template Set"
 msgstr "Welcompose Administration &ndash; Neue Vorlagengruppe anlegen"
 
-#: templatesets_add.html:52
+#: templatesets_add.html:53
 msgid "Add Template Sets"
 msgstr "Neue Vorlagengruppen anlegen"
 
-#: templatesets_add.html:56
+#: templatesets_add.html:57
 msgid "Add Template Set"
 msgstr "Neue Vorlagengruppe anlegen"
 
@@ -5686,11 +5833,11 @@ msgstr "Neue Vorlagengruppe anlegen"
 msgid "Welcompose Admin &ndash; Edit Template Set"
 msgstr "Welcompose Administration &ndash; Vorlagengruppe bearbeiten"
 
-#: templatesets_edit.html:48
+#: templatesets_edit.html:49
 msgid "Edit Template Sets"
 msgstr "Vorlagengruppen bearbeiten"
 
-#: templatesets_edit.html:52
+#: templatesets_edit.html:53
 msgid "Edit Template Set"
 msgstr "Vorlagengruppe bearbeiten"
 
@@ -5698,11 +5845,11 @@ msgstr "Vorlagengruppe bearbeiten"
 msgid "Welcompose Admin &ndash; Template Sets"
 msgstr "Welcompose Administration &ndash; Vorlagengruppen"
 
-#: templatesets_select.html:58
+#: templatesets_select.html:57
 msgid "Available Template Sets"
 msgstr "Verfügbare Vorlagengruppen"
 
-#: templatesets_select.html:81
+#: templatesets_select.html:80
 msgid "No template set has been created yet."
 msgstr "Sie haben noch keine Vorlagengruppe angelegt"
 
@@ -5710,7 +5857,7 @@ msgstr "Sie haben noch keine Vorlagengruppe angelegt"
 msgid "Welcompose Admin &ndash; Add Template Type"
 msgstr "Welcompose Administration &ndash; Neuen Vorlagentyp anlegen"
 
-#: templatetypes_add.html:52 templatetypes_add.html:56
+#: templatetypes_add.html:53 templatetypes_add.html:57
 msgid "Add Template Type"
 msgstr "Neuen Vorlagentyp anlegen"
 
@@ -5718,7 +5865,7 @@ msgstr "Neuen Vorlagentyp anlegen"
 msgid "Welcompose Admin &ndash; Edit Template Type"
 msgstr "Welcompose Administration &ndash; Vorlagentyp bearbeiten"
 
-#: templatetypes_edit.html:48 templatetypes_edit.html:52
+#: templatetypes_edit.html:49 templatetypes_edit.html:53
 msgid "Edit Template Type"
 msgstr "Vorlagentyp bearbeiten"
 
@@ -5726,11 +5873,11 @@ msgstr "Vorlagentyp bearbeiten"
 msgid "Welcompose Admin &ndash; Template Types"
 msgstr "Welcompose Administration &ndash; Vorlagentypen"
 
-#: templatetypes_select.html:58
+#: templatetypes_select.html:59
 msgid "Available Template Types"
 msgstr "Verfügbare Vorlagentypen"
 
-#: templatetypes_select.html:87
+#: templatetypes_select.html:88
 msgid "No template type has been created yet."
 msgstr "Sie haben noch keinen Vorlagentyp angelegt"
 
@@ -5738,7 +5885,7 @@ msgstr "Sie haben noch keinen Vorlagentyp angelegt"
 msgid "Welcompose Admin &ndash; Add Group"
 msgstr "Welcompose Administration &ndash; Neue Benutzergruppe anlegen"
 
-#: groups_add.html:52 groups_add.html:56
+#: groups_add.html:54 groups_add.html:58
 msgid "Add Group"
 msgstr "Neue Benutzergruppe anlegen"
 
@@ -5746,7 +5893,7 @@ msgstr "Neue Benutzergruppe anlegen"
 msgid "Welcompose Admin &ndash; Edit Group"
 msgstr "Welcompose Administration &ndash; Benutzergruppe bearbeiten"
 
-#: groups_edit.html:48 groups_edit.html:52
+#: groups_edit.html:49 groups_edit.html:53
 msgid "Edit Group"
 msgstr "Benutzergruppe bearbeiten"
 
@@ -5754,7 +5901,7 @@ msgstr "Benutzergruppe bearbeiten"
 msgid "Welcompose Admin &ndash; User Groups"
 msgstr "Welcompose Administration &ndash; Benutzergruppen"
 
-#: groups_select.html:57
+#: groups_select.html:58
 msgid "Group List"
 msgstr "Benutzergruppen"
 
@@ -5762,7 +5909,7 @@ msgstr "Benutzergruppen"
 msgid "Welcompose Admin &ndash; Add Right"
 msgstr "Welcompose Administration &ndash; Neues Benutzerrecht anlegen"
 
-#: rights_add.html:52 rights_add.html:56
+#: rights_add.html:53 rights_add.html:57
 msgid "Add Right"
 msgstr "Neues Benutzerrecht anlegen"
 
@@ -5770,7 +5917,7 @@ msgstr "Neues Benutzerrecht anlegen"
 msgid "Welcompose Admin &ndash; Edit Right"
 msgstr "Welcompose Administration &ndash; Benutzerrecht bearbeiten"
 
-#: rights_edit.html:48 rights_edit.html:52
+#: rights_edit.html:49 rights_edit.html:53
 msgid "Edit Right"
 msgstr "Benutzerrecht bearbeiten"
 
@@ -5778,11 +5925,11 @@ msgstr "Benutzerrecht bearbeiten"
 msgid "Welcompose Admin &ndash; Rights"
 msgstr "Welcompose Administration &ndash; Benutzerrechte"
 
-#: rights_select.html:71
+#: rights_select.html:72
 msgid "Right List"
 msgstr "Benutzerrechte"
 
-#: rights_select.html:111
+#: rights_select.html:112
 msgid "No right has been created yet."
 msgstr "Sie haben noch keine Benutzerrechte angelegt"
 
@@ -5790,15 +5937,15 @@ msgstr "Sie haben noch keine Benutzerrechte angelegt"
 msgid "Welcompose Admin &ndash; Add User"
 msgstr "Welcompose Administration &ndash; Neuen Benutzer anlegen"
 
-#: users_add.html:52 users_add.html:56
+#: users_add.html:53 users_add.html:57
 msgid "Add User"
 msgstr "Neuen Benutzer anlegen"
 
-#: users_add.html:74 users_edit.html:70
+#: users_add.html:75 users_edit.html:72
 msgid "You have not yet created a user group!"
 msgstr "Sie haben noch keine Benutzergruppe angelegt"
 
-#: users_add.html:75 users_edit.html:71
+#: users_add.html:76 users_edit.html:73
 msgid ""
 "To create one, go to the <a href=\"groups_select.php\">user group overview "
 "page</a>."
@@ -5810,7 +5957,7 @@ msgstr ""
 msgid "Welcompose Admin &ndash; Edit User"
 msgstr "Welcompose Administration &ndash; Benutzer bearbeiten"
 
-#: users_edit.html:48 users_edit.html:52
+#: users_edit.html:50 users_edit.html:54
 msgid "Edit User"
 msgstr "Benutzer bearbeiten"
 
@@ -5818,19 +5965,19 @@ msgstr "Benutzer bearbeiten"
 msgid "Welcompose Admin &ndash; Users"
 msgstr "Welcompose Administration &ndash; Benutzer"
 
-#: users_select.html:62
+#: users_select.html:63
 msgid "User Group"
 msgstr "Benutzergruppe"
 
-#: users_select.html:75
+#: users_select.html:76
 msgid "User List"
 msgstr "Benutzerliste"
 
-#: users_select.html:87 users_add.php:112 users_edit.php:129
+#: users_select.html:88 users_add.php:112 users_edit.php:129
 msgid "Group"
 msgstr "Benutzergruppe"
 
-#: wcom.helper.js:1202
+#: wcom.helper.js:1205
 msgid "Insert Tag(s)"
 msgstr "Schlagworte einfügen"
 
@@ -5958,7 +6105,7 @@ msgstr ""
 "haben.\\n\\nDie Funktionalität sonstiger Seitenbereiche bleibt hiervon "
 "unberührt."
 
-#: wcom.strings.js:69
+#: wcom.strings.js:69 wcom.setup.strings.js:36 wcom.update.strings.js:36
 msgid "There is currently no help available."
 msgstr "Es existiert momentan noch kein Hilfetext zu diesem Feld."
 
@@ -6125,7 +6272,7 @@ msgstr "Nutzen Sie Buchstaben, Nummern und Leerzeichen"
 msgid "Only capitalized prefixed literal string"
 msgstr "Nutzen Sie ausschließlich Buchstaben in Großschreibung mit Prefix"
 
-#: validate.js.php:83 validate.js.php:158
+#: validate.js.php:83 validate.js.php:159
 msgid "Field may not be empty"
 msgstr "Das Feld darf nicht leer sein"
 
@@ -6161,11 +6308,11 @@ msgstr "Nutzen Sie Buchstaben, Nummern und Bindestriche"
 msgid "Invalid e-mail address"
 msgstr "Ungültige E-Mail Adresse"
 
-#: validate.js.php:150
+#: validate.js.php:151
 msgid "Invalid URL name"
 msgstr "Ungültiger Pfad (URL-Name)"
 
-#: validate.js.php:154
+#: validate.js.php:155
 msgid "Five characters or more, no whitespace"
 msgstr ""
 "Die Eingabe muss mindestens 5 Zeichen beinhalten. Leerzeichen sind nicht "
@@ -6187,19 +6334,19 @@ msgstr "Bitte tragen Sie eine gültige Webseiten URL ein"
 msgid "Please enter a comment"
 msgstr "Bitte tragen Sie einen Kommentar ein"
 
-#: blogitem.class.php:246 generatorformindex.class.php:336
+#: blogitem.class.php:246 generatorformindex.class.php:338
 #: simpleformindex.class.php:241 simpleformindex.class.php:442
 #: simpleguestbookindex.class.php:251
 msgid "Captcha text"
 msgstr "Captcha Text"
 
-#: blogitem.class.php:250 generatorformindex.class.php:340
+#: blogitem.class.php:250 generatorformindex.class.php:342
 #: simpleformindex.class.php:245 simpleformindex.class.php:446
 #: simpleguestbookindex.class.php:255
 msgid "Please enter the captcha text"
 msgstr "Bitte tragen Sie den Captcha-Text ein"
 
-#: blogitem.class.php:251 generatorformindex.class.php:341
+#: blogitem.class.php:251 generatorformindex.class.php:343
 #: simpleformindex.class.php:246 simpleformindex.class.php:447
 #: simpleguestbookindex.class.php:256
 msgid "Invalid captcha text entered"
@@ -6898,6 +7045,9 @@ msgstr "Zum Admin-Bereich"
 #: requirements.html:90
 msgid "Welcompose may work -- don't blame us for errors"
 msgstr "Welcompose mag funktionieren - oder auch nicht."
+
+#~ msgid "Your input was successfully updated!"
+#~ msgstr "Ihre Änderungen wurden erfolgreich gespeichert!"
 
 #~ msgid "Inser Tag"
 #~ msgstr "Referenz einfügen"

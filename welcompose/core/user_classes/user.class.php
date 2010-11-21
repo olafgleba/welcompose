@@ -622,11 +622,6 @@ public function mapUserToTargetGroup ($user, $project, $group = null)
 		// load group class
 		$GROUP = load('user:group');
 		
-		// test if group belongs to current user
-		// if (!$GROUP->groupBelongsToCurrentUser($group)) {
-		// 	throw new User_UserException('Group does not belong to current project');
-		// }
-		
 		// prepare sql data
 		$sqlData = array(
 			'user' => (int)$user,
@@ -689,7 +684,7 @@ public function mapUserToProject ($user, $active = 1, $author = 0)
  * @param int Group id
  * @return int Link id
  */
-public function mapUserToTargetProject ($user, $project, $active = 1, $author = 1)
+public function mapUserToTargetProject ($user, $project, $active = 1, $author = 0)
 {
 	// access check
 	if (!wcom_check_access('User', 'User', 'Manage')) {

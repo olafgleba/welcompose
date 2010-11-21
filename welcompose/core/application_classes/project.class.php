@@ -700,6 +700,84 @@ public function switchProject ($new_project)
 }
 
 /**
+ * Assign one or more user to the init project. All neccessary data
+ * like groups and rights will be assigned or copied to the new
+ * project. Takes the users array as first and the project id
+ * as second argument. Returns bool.
+ *
+ * Right now we do not follow user rights, which are not part of
+ * the init project skeleton table.
+ *
+ * @throws Application_ProjectException
+ * @param array Selected Users
+ * @param int Project id
+ * @return bool
+ */
+public function assignUsersToInitProject ($selected_users, $project)
+{
+	// input check
+	if (empty($selected_users) || !is_array($selected_users)) {
+		throw new Application_ProjectException("Input for parameter selected_users is not an array");
+	}
+	if (empty($project) || !is_numeric($project)) {
+		throw new Application_ProjectException("Input for parameter project is not numeric");
+	}
+	
+	// load user class
+	$USER = load('user:user');
+	
+	// load right class
+	$RIGHT = load('user:right');
+	
+	// load user class
+	$GROUP = load('user:group');
+	
+	foreach ($selected_users as $_selected_user) {
+		
+		// get user
+		$user = $USER->selectUser($_selected_user['id']);
+		
+		// get the rights table of current user group the user is assign to
+		$user_rights = $RIGHT->selectRights(array('group' => $user['group_id']));
+		
+		// get the rights table of the init project
+		$project_rights = $RIGHT->selectTargetRights(array('project' => $project));
+		
+		// compare both tables by param 'name' and prepare assigned rights array
+		foreach ($project_rights as $_project_right) {
+			foreach ($user_rights as $k => $_user_right) {				
+				if (in_array($_project_right['name'], $_user_right)) {					
+					$assigned_rights[] = $_project_right['id'];
+				}
+			}
+		}
+				
+		// create/copy user group
+		$sqlData = array();
+		$sqlData['project'] = (int)$project;
+		$sqlData['name'] = $user['group_name'];
+		$sqlData['description'] = $user['group_description'];
+		$sqlData['editable'] = $user['group_editable'];
+		$sqlData['date_added'] = date('Y-m-d H:i:s');					
+			
+		// execute operation
+		$group_id = $GROUP->addTargetGroup($sqlData);
+		
+		// map new group to former prepared rights
+		$GROUP->mapTargetGroupToRights($group_id, $project, $assigned_rights);
+				
+		// map user to the new group
+		$USER->mapUserToTargetGroup($user['id'], $project, $group_id);			
+				
+		// map user to the new project
+		$USER->mapUserToTargetProject($user['id'], $project, $user['active'], $user['author']);					
+
+	}
+	
+	return true;
+}
+
+/**
  * Initializes project using the provided skeleton definition.
  * Takes the project id as first argument. Returns bool.
  *

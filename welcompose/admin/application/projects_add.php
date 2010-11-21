@@ -74,6 +74,7 @@ try {
 	$GROUP = load('user:group');
 	
 	// load right class
+	/* @var $RIGHT User_Right */
 	$RIGHT = load('user:right');
 	
 	// load login class
@@ -122,12 +123,11 @@ try {
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
 	$FORM->addRule('name', gettext('A project with the given name already exists'), 'testForNameUniqueness');
 	
-	// multi select for rights
-	$FORM->addElement('select', 'selected_users', gettext('Users'), $selected_users,
+	// multi select for users
+	$FORM->addElement('select', 'selected_users', gettext('Assign Users'), $selected_users,
 		array('id' => 'project_selected_users', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
 	$FORM->applyFilter('selected_users', 'trim');
 	$FORM->applyFilter('selected_users', 'strip_tags');
-	//$FORM->addRule('selected_users', gettext('One of the chosen user is out of range'), 'in_array_keys', $users);
 	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
@@ -212,53 +212,14 @@ try {
 			
 			// init project from skeleton
 			$PROJECT->initFromSkeleton($project_id);
-	
-
-
-			// get choosen users array
+			
+			$selected_users = array();
 			$selected_users = $FORM->exportValue('selected_users');
 			
-			// if some user is selected, copy all neccessary data to the new project
+			// assign User(s) to the init project
 			if (!empty($selected_users)) {
-
-				foreach ($selected_users as $_selected_user) {
-					
-					$user = $USER->selectUser($_selected_user['id']);
-					
-					$user_rights = $RIGHT->selectRights(array('group' => $user['group_id']));
-					$project_rights = $RIGHT->selectTargetRights(array('project' => $project_id));
-					
-					foreach ($project_rights as $_project_right) {
-						foreach ($user_rights as $key => $_user_right) {				
-							if (in_array($_project_right['name'], $_user_right)) {					
-								$assigned_rights[] = $_project_right['id'];
-							}
-						}
-					}
-							
-					// create new user group
-					$sqlDataGroup = array();
-					$sqlDataGroup['project'] = (int)$project_id;
-					$sqlDataGroup['name'] = $user['group_name'];
-					$sqlDataGroup['description'] = $user['group_description'];
-					$sqlDataGroup['editable'] = $user['group_editable'];
-					$sqlDataGroup['date_added'] = date('Y-m-d H:i:s');					
-
-					// execute operation
-					$group_id = $GROUP->addTargetGroup($sqlDataGroup);
-					
-					// map group to rights
-					$GROUP->mapTargetGroupToRights($group_id, $project_id, $assigned_rights);
-							
-					// map user to group
-					$USER->mapUserToTargetGroup($user['id'], $project_id, $group_id);			
-							
-					// map user to project
-					$USER->mapUserToTargetProject($user['id'], $project_id);					
-
-				}
-
-			}			
+				$PROJECT->assignUsersToInitProject($selected_users, $project_id);
+			}		
 			
 			// commit
 			$BASE->db->commit();
