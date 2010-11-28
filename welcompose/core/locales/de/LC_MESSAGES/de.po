@@ -3643,7 +3643,7 @@ msgstr "Seiteninhalte bearbeiten"
 
 #: pages_select.html:148
 msgid "Yet no boxes"
-msgstr ""
+msgstr "Keine Seitenboxen"
 
 #: pages_select.html:152 pages_select.html:164
 msgid "Add new page"
