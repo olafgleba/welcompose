@@ -38,6 +38,9 @@ chmod =
 index.php_mode = 0
 index.php_lifetime = 0
 
+[output]
+gunzip = 0
+
 [plugins]
 textconverter_dir = "{$configuration.root_disk}/core/plugins/textconverters"
 textmacro_dir = "{$configuration.root_disk}/core/plugins/textmacros"
@@ -75,8 +78,8 @@ blog_archive_month_start = "{$configuration.root_www}/index.php?project_name=<pr
 blog_archive_month_start_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 generator_form_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 generator_form_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Index"
-global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>"
-global_template_url_start = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project_name=<project_name>"
+global_template_url_start = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project_name=<project_name>&amp;start=<start>"
 simple_date_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_date_index_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 simple_date_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"

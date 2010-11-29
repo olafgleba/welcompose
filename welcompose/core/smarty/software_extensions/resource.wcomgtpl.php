@@ -38,10 +38,10 @@ function wcomgtplresource_FetchTemplate ($tpl_name, &$tpl_source, &$smarty)
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
-	// split template resource name into type name and page id.
-	$tpl_name_parts = explode('.', $tpl_name);
-	$template_name = trim($tpl_name_parts[0].".".$tpl_name_parts[1]);
-	$project_id = trim($tpl_name_parts[2]);
+	// split template resource name into real name, extension and page id	
+	preg_match_all('/([a-z0-9-\.]+?)\.(\w{2,4})\.(\d{1,4})/', $tpl_name, $matches);	
+	$template_name = trim($matches[1][0].".".$matches[2][0]);
+	$project_id = trim($matches[3][0]);
 	
 	// fetch global template from database
 	$template = (array)$GLOBALTEMPLATE->smartyFetchGlobalTemplate($template_name);
@@ -77,10 +77,10 @@ function wcomgtplresource_FetchTimestamp ($tpl_name, &$tpl_timestamp, &$smarty)
 	// load global template class
 	$GLOBALTEMPLATE = load('Templating:GlobalTemplate');
 	
-	// split template resource name into type name and page id.
-	$tpl_name_parts = explode('.', $tpl_name);
-	$template_name = trim($tpl_name_parts[0].".".$tpl_name_parts[1]);
-	$project_id = trim($tpl_name_parts[2]);
+	// split template resource name into real name, extension and page id	
+	preg_match_all('/([a-z0-9-\.]+?)\.(\w{2,4})\.(\d{1,4})/', $tpl_name, $matches);	
+	$template_name = trim($matches[1][0].".".$matches[2][0]);
+	$project_id = trim($matches[3][0]);
 	
 	// fetch last modification date from database
 	$tpl_timestamp = $GLOBALTEMPLATE->smartyFetchGlobalTemplateTimestamp($template_name);

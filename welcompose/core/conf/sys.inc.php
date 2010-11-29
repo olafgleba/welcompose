@@ -5,7 +5,7 @@ wcom_public_root_www =
 
 [log]
 handler = "file"
-name = "/www/welcompose/repos/welcompose/trunk/welcompose/tmp/log/welcompose.log"
+name = "/www/welcompose/repos/trunk/welcompose/tmp/log/welcompose.log"
 level = PEAR_LOG_NOTICE
 
 [environment]
@@ -18,7 +18,7 @@ numeric = "C"
 
 [database]
 driver = "pdo"
-dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcom-current"
+dsn = "mysql:unix_socket=/opt/local/var/run/mysql5/mysqld.sock;dbname=wcomtest"
 username = "root"
 password = 
 table_alias_constants = true
@@ -27,12 +27,12 @@ backticks = true
 
 [media]
 store_www = "/files/media"
-store_disk = "/www/welcompose/repos/welcompose/trunk/welcompose/files/media"
+store_disk = "/www/welcompose/repos/trunk/welcompose/files/media"
 chmod = 
 
 [global_file]
 store_www = "/files/global_files"
-store_disk = "/www/welcompose/repos/welcompose/trunk/welcompose/files/global_files"
+store_disk = "/www/welcompose/repos/trunk/welcompose/files/global_files"
 chmod = 
 
 [caching]
@@ -43,8 +43,8 @@ index.php_lifetime = 0
 gunzip = 0
 
 [plugins]
-textconverter_dir = "/www/welcompose/repos/welcompose/trunk/welcompose/core/plugins/textconverters"
-textmacro_dir = "/www/welcompose/repos/welcompose/trunk/welcompose/core/plugins/textmacros"
+textconverter_dir = "/www/welcompose/repos/trunk/welcompose/core/plugins/textconverters"
+textmacro_dir = "/www/welcompose/repos/trunk/welcompose/core/plugins/textmacros"
 
 [urls]
 blog_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
@@ -99,7 +99,7 @@ simple_page_index = "/index.php?project_name=<project_name>&amp;page_name=<page_
 simple_page_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
 
 [flickr]
-cache_dir = "/www/welcompose/repos/welcompose/trunk/welcompose/tmp/flickr_cache"
+cache_dir = "/www/welcompose/repos/trunk/welcompose/tmp/flickr_cache"
 cache_encrypt = true
 api_key = "11bcda9f77519a4f44121ce5ee5b6a8f"
 
