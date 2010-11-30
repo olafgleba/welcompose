@@ -866,7 +866,8 @@ function Mediamanager_showResponseInvokeInputs(req)
 		Event.observe($('mm_tags'), 'keyup', Mediamanager.initializeTagSearch);
 		Event.observe($('mm_flickrtags'), 'keyup', Mediamanager.initializeTagSearchMyFlickr);
 
-		$('hiddenFocus').focus();
+		// 30.11.10 disabled temporarily because i have no clue why this is set
+		//$('hiddenFocus').focus();
 		
 		Mediamanager.applyBehaviour();
 
