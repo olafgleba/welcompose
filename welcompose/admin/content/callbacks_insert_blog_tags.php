@@ -124,8 +124,9 @@ try {
 	$BASE->utility->smarty->assign('callback_params', $callback_params);
 	
 	/**
-	* Two additional request params are available, if this callback
-	* is invoked from a blog posting edit page. Both params has no
+	* Two additional request params are available (dId, dPage), if this callback
+	* is invoked from a blog posting edit page, one (dPage) when invoked
+	* on a blog posting add page. Both params has no
 	* meaning for the callback params array above.
 	* 
 	* 'dId => posting id
@@ -135,14 +136,14 @@ try {
 	// if we are in blog posting edit mode
 	if (!empty($_REQUEST['dId'])) {
 
-		// get all blog tags
-		$blog_tags_all = $BLOGTAG->selectBlogTags();
+		// get all blog tags related to provided page
+		$blog_tags_all = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC)));
 			
 		// get blog tags of the current posting
 		$blog_tags_page = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC),'posting' => Base_Cnc::filterRequest($_REQUEST['dId'], WCOM_REGEX_NUMERIC)));
 		
-		// if no tags are already set for the particular posting, 
-		// there is no need to differ between the two arrays.
+		// if tags are already set for the particular posting, 
+		// differ the two arrays, otherwise assign the all page tags
 		if (!empty($blog_tags_page)) {		
 			// reduce arrays to get a useable result
 			// within array_diff() function in the next step
@@ -165,12 +166,12 @@ try {
 			}
 		} else {
 			// assign the whole bunch of available tags
-			$blog_tags = $BLOGTAG->selectBlogTags();
+			$blog_tags = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC)));
 		}
 	} else {
 		// if we are in blog posting add mode
 		// assign the whole bunch of available tags
-		$blog_tags = $BLOGTAG->selectBlogTags();
+		$blog_tags = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC)));
 	}
 	
 	// assign blog tags to smarty
