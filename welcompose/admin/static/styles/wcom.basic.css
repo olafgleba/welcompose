@@ -475,11 +475,6 @@ div#error p {
 	margin: 0;
 }
 
-/* default display set on grouped form elements */
-#additional_metadata_container {
-display: none;
-}
-
 /* Box adopt */
 #indicator_adopt {
 display: none;

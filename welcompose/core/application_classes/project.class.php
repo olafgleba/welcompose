@@ -700,7 +700,7 @@ public function switchProject ($new_project)
 }
 
 /**
- * Assign one or more user to the init project. All neccessary data
+ * Assign one or more user to the initialized project. All neccessary data
  * like groups and rights will be assigned or copied to the new
  * project. Takes the users array as first and the project id
  * as second argument. Returns bool.
@@ -729,7 +729,7 @@ public function assignUsersToInitProject ($selected_users, $project)
 	// load right class
 	$RIGHT = load('user:right');
 	
-	// load user class
+	// load group class
 	$GROUP = load('user:group');
 	
 	foreach ($selected_users as $_selected_user) {
@@ -737,7 +737,7 @@ public function assignUsersToInitProject ($selected_users, $project)
 		// get user
 		$user = $USER->selectUser($_selected_user['id']);
 		
-		// get the rights table of current user group the user is assign to
+		// get the rights table of current user group the user is assigned to
 		$user_rights = $RIGHT->selectRights(array('group' => $user['group_id']));
 		
 		// get the rights table of the init project
@@ -745,7 +745,7 @@ public function assignUsersToInitProject ($selected_users, $project)
 		
 		// compare both tables by param 'name' and prepare assigned rights array
 		foreach ($project_rights as $_project_right) {
-			foreach ($user_rights as $k => $_user_right) {				
+			foreach ($user_rights as $key => $_user_right) {				
 				if (in_array($_project_right['name'], $_user_right)) {					
 					$assigned_rights[] = $_project_right['id'];
 				}
@@ -760,7 +760,7 @@ public function assignUsersToInitProject ($selected_users, $project)
 		$sqlData['editable'] = $user['group_editable'];
 		$sqlData['date_added'] = date('Y-m-d H:i:s');					
 			
-		// execute operation
+		// add new group
 		$group_id = $GROUP->addTargetGroup($sqlData);
 		
 		// map new group to former prepared rights
