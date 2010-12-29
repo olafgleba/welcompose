@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-28 14:47+0100\n"
+"POT-Creation-Date: 2010-12-29 10:24+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -3343,6 +3343,14 @@ msgstr "Welcompose Admin &ndash; Seiten &#62; Blog-Eintrag bearbeiten"
 msgid "Edit Blog Posting"
 msgstr "Blog-Eintrag bearbeiten"
 
+#: pages_blogs_postings_edit.html:126
+#: pages_generatorforms_content_edit.html:119
+#: pages_simpleforms_content_edit.html:116
+#: pages_simpleguestbooks_content_edit.html:119
+#: pages_simplepages_content_edit.html:119
+msgid "Adopt title"
+msgstr "Titel übernehmen"
+
 #: pages_blogs_postings_edit.html:147
 #: pages_generatorforms_content_edit.html:129
 #: pages_simpleguestbooks_content_edit.html:129
@@ -3496,6 +3504,10 @@ msgstr "URL Seite"
 #: pages_edit.html:140 pages_edit.html:144
 msgid "Edit Page Metadata"
 msgstr "Metadaten bearbeiten"
+
+#: pages_edit.html:182
+msgid "Adopt name"
+msgstr "Name übernehmen"
 
 #: pages_generatorforms_content_edit.html:10
 msgid "Welcompose Admin &ndash; Edit Generator Form"
