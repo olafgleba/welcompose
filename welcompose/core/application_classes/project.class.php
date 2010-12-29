@@ -737,13 +737,13 @@ public function assignUsersToInitProject ($selected_users, $project)
 		// get user
 		$user = $USER->selectUser($_selected_user['id']);
 		
-		// get the rights table of current user group the user is assigned to
+		// get the rights table of user group the user is currently assigned to
 		$user_rights = $RIGHT->selectRights(array('group' => $user['group_id']));
 		
 		// get the rights table of the init project
 		$project_rights = $RIGHT->selectTargetRights(array('project' => $project));
 		
-		// compare both tables by param 'name' and prepare assigned rights array
+		// compare both tables by param 'name' and assign rights array
 		foreach ($project_rights as $_project_right) {
 			foreach ($user_rights as $key => $_user_right) {				
 				if (in_array($_project_right['name'], $_user_right)) {					
@@ -751,22 +751,42 @@ public function assignUsersToInitProject ($selected_users, $project)
 				}
 			}
 		}
-				
-		// create/copy user group
-		$sqlData = array();
-		$sqlData['project'] = (int)$project;
-		$sqlData['name'] = $user['group_name'];
-		$sqlData['description'] = $user['group_description'];
-		$sqlData['editable'] = $user['group_editable'];
-		$sqlData['date_added'] = date('Y-m-d H:i:s');					
-			
-		// add new group
-		$group_id = $GROUP->addTargetGroup($sqlData);
 		
-		// map new group to former prepared rights
+		// get the group table of the init project
+		$project_groups = $GROUP->selectTargetGroups(array('project' => $project));				
+
+		// compare if the current user is member of a group
+		// that yet exists within the newly init project
+		foreach ($project_groups as $_project_group) {				
+			if (in_array($user['group_name'], $_project_group)) {					
+				$project_group_id = (int)$_project_group['id'];
+			}
+		}
+		
+		// if the currently assigned user is a member of a 
+		// existing group within the former init project, 
+		// we simply need to map the user to this group. So
+		// we set the group_id to the correponding user group
+		// within the init project. Otherwise we must add a new group.		
+		if (!empty($project_group_id)) {					
+			$group_id = $project_group_id;
+		} else {				
+			// create/copy user group
+			$sqlData = array();
+			$sqlData['project'] = (int)$project;
+			$sqlData['name'] = $user['group_name'];
+			$sqlData['description'] = $user['group_description'];
+			$sqlData['editable'] = $user['group_editable'];
+			$sqlData['date_added'] = date('Y-m-d H:i:s');					
+			
+			// add new group
+			$group_id = $GROUP->addTargetGroup($sqlData);
+		}
+		
+		// map the group to former prepared rights
 		$GROUP->mapTargetGroupToRights($group_id, $project, $assigned_rights);
 				
-		// map user to the new group
+		// map user to the user group
 		$USER->mapUserToTargetGroup($user['id'], $project, $group_id);			
 				
 		// map user to the new project

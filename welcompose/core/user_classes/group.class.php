@@ -386,6 +386,111 @@ public function selectGroups ($params = array())
 	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
+
+/**
+ * Method to select one or more user groups. Takes key=>value array
+ * with select params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * </ul>
+ * 
+ * @throws User_GroupException
+ * @param array Select params
+ * @return array
+ */
+public function selectTargetGroups ($params = array())
+{
+	// access check
+	if (!wcom_check_access('User', 'Group', 'Use')) {
+		throw new User_GroupException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$project = null;
+	$user = null;
+	$start = null;
+	$limit = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new User_GroupException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'project':
+			case 'user':
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			default:
+				throw new User_GroupException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			`user_groups`.`id` AS `id`,
+			`user_groups`.`project` AS `project`,
+			`user_groups`.`name` AS `name`,
+			`user_groups`.`description` AS `description`,
+			`user_groups`.`editable` AS `editable`,
+			`user_groups`.`date_modified` AS `date_modified`,
+			`user_groups`.`date_added` AS `date_added`,
+			`application_projects`.`id` AS `project_id`,
+			`application_projects`.`owner` AS `project_owner`,
+			`application_projects`.`name` AS `project_name`,
+			`application_projects`.`name_url` AS `project_name_url`,
+			`application_projects`.`date_modified` AS `project_date_modified`,
+			`application_projects`.`date_added` AS `project_date_added`
+		FROM
+			".WCOM_DB_USER_GROUPS." AS `user_groups`
+		JOIN
+			".WCOM_DB_APPLICATION_PROJECTS." AS `application_projects`
+		  ON
+			`user_groups`.`project` = `application_projects`.`id`
+		LEFT JOIN
+			".WCOM_DB_USER_USERS2USER_GROUPS." AS `user_users2user_groups`
+		  ON
+			`user_groups`.`id` = `user_users2user_groups`.`group`
+		WHERE 
+			`user_groups`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => (int)$project
+	);
+	
+	// add where clauses
+	if (!empty($user)) {
+		$sql .= " AND `user_users2user_groups`.`user` = :user ";
+		$bind_params['user'] = (int)$user;
+	}
+	
+	// add sorting
+	$sql .= " GROUP BY `user_groups`.`id` ORDER BY `user_groups`.`name` ";
+	
+	// add limits
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
+	}
+	
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+
 /**
  * Maps groups to one or more rights. Takes group id as first argument,
  * a list of right ids as second argument. Returns boolean true.

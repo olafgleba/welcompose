@@ -219,7 +219,7 @@ try {
 			// assign User(s) to the init project
 			if (!empty($selected_users)) {
 				$PROJECT->assignUsersToInitProject($selected_users, $project_id);
-			}		
+			}	
 			
 			// commit
 			$BASE->db->commit();
