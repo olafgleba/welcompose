@@ -4,6 +4,94 @@
 <chapter id="settings">
 	<title>Einstellungen</title>
 	
+	<sect1 id="settings.projects">
+		<title>Projekte</title>
+		
+		<sect2 id="settings.projects.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Mit Welcompose können beliebig viele Projekte angelegt und unabhängig voneinander verwaltet werden
+			</para>
+			
+			<para>
+				So können mit Welcompose bspw. verschiedene Sprachversionen einer Webseite bereit gestellt werden,
+				eine oder mehrere Micro-Site(s) zu ergänzenden Themen angelegt oder sonstige Schwerpunktbereiche
+				als eigene Projekte in Ihren Webauftritt integriert werden.
+			</para>
+		</sect2>
+		
+		<sect2 id="settings.projects.manage">
+			<title>Verwaltung</title>
+			
+			<figure id="settings.projects.project_manage">
+				<title>Übersicht über die vorhandenen Projekte</title>
+				<graphic fileref="images/settings/projects/project_manage.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht der vorhandenen Projekte in alphabetischer Reihenfolge bietet neben der Anzeige
+				des Projektnamens, Links zum Bearbeitung und Löschen eines Projektes, sowie den Link zum 
+				<guibutton>Neu anlegen</guibutton> eines Projektes.
+			</para>
+			
+			<para>
+				Sobald mehr als ein Projekt existiert, steht im Kopfbereich des Admin-Interfaces ein
+				Auswahlmenü zur Verfügung, mit dem Sie unmittelbar zwischen den jeweiligen Projekten
+				wechseln können.
+			</para>
+			
+			<figure id="settings.projects.project_manage_select">
+				<title>Auswahlmenü bei mehreren Projekten</title>
+				<graphic fileref="images/settings/projects/project_manage_select.png"/>
+			</figure>
+			
+			<figure id="settings.projects.project_add">
+				<title>Auswahlmenü bei mehreren Projekten</title>
+				<graphic fileref="images/settings/projects/project_add.png"/>
+			</figure>
+			
+				<variablelist>
+					<varlistentry>
+						<term>Name</term>
+						<listitem>
+							<para>
+								Freiwählbarer Name des Projektes
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Benutzer zuweisen</term>
+						<listitem>
+							<para>
+								Bestehende Benutzer des aktuellen Projektes können dem neuen Projekt
+								zugeordnet werden. Hierbei wird selbstverständlich die Zugehörigkeit
+								zur Benutzergruppe- und Rechten beibehalten. Angezeigt im Multiselect
+								werden nur die Benutzer, die nicht mit den Standardbenutzern von
+								Welcompose identisch sind.
+								<note>
+									<para>
+										Der aktuelle Benutzer, mit dem sie sich eingeloggt haben, wird
+										automatisch in das neue Projekt übernommen und taucht aus diesem
+										Grund nicht in der Liste der Benutzer auf.
+									</para>
+								</note>
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				
+				<tip>
+					<para>
+						Planen Sie mehrere Projekte anzulegen, denen identische Benutzer zugeordnet
+						werden sollen, sollten Sie dies vor dem Anlegen der Projekte berücksichtigen.
+						Eine Zuweisung von existierenden Benutzern aus einem Projekt in ein anderes
+						ist nur im Moment der Projekt Initialisierung möglich.
+					</para>
+				</tip>
+		</sect2>
+	</sect1>
+			
 	<sect1 id="settings.text_converters">
 		<title>Textkonverter</title>
 		

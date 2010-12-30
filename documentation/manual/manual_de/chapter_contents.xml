@@ -140,17 +140,6 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Neu</guilabel></term>
-					<listitem>
-						<para>
-							Fügt eine neue Seite zur aktuellen Navigation
-							relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
-							wird entweder über oder unter dem aktuellen
-							Menüpunkt eingesetzt.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><guilabel>Bearbeiten</guilabel></term>
 					<listitem>
 						<para>
@@ -163,14 +152,39 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
+					<term><guilabel>Box bearbeiten</guilabel></term>
+					<listitem>
+						<para>
+							Haben Sie Seiten-Boxen angelegt, gelangen sie
+							über das Auswahlmenü <guibutton>Box bearbeiten</guibutton> direkt
+							zur Bearbeitung der gewählten Seiten-Box um deren Inhalte zu bearbeiten.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
 					<term><guilabel>Verschieben</guilabel></term>
 					<listitem>
 						<para>
 							Die Schaltfläche <guibutton>Verschieben</guibutton>,
-							die nur vorhanden ist, wenn mehr als eine
-							Navigation existiert, erlaubt es, eine Seite
-							respektive einen Menüpunkt an eine andere
-							Navigation anzuhängen.
+							erlaubt es, eine Seite respektive einen Menüpunkt in eine
+							andere Navigation zu verschieben.
+						</para>
+						<note>
+							<para>
+								Die Schaltfläche <guibutton>Verschieben</guibutton> wird nur
+								dann angezeigt, wenn mehr als eine Navigation angelegt wurde.
+							</para>
+						</note>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Neu</guilabel></term>
+					<listitem>
+						<para>
+							Fügt eine neue Seite zur aktuellen Navigation
+							relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
+							wird entweder über oder unter dem aktuellen
+							Menüpunkt eingesetzt.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -178,7 +192,7 @@
 					<term><guilabel>Löschen</guilabel></term>
 					<listitem>
 						<para>
-							Löscht die Seite und alle ihre Inhalte (nach einer Sicherheitsabfrage).
+							Löscht die Seite und alle ihre Inhalte.
 						</para>
 					</listitem>
 				</varlistentry>

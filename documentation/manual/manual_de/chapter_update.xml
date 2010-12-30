@@ -345,8 +345,12 @@
 					<para>
 						Ersetzen Sie die neu hochgeladene Konfigurationsdatei
 						bitte nicht einfach durch die ältere, lokale Datei. Es ist 
-						möglich, dass neue Konfiguration-Parameter hinzugekommen sind
-						oder Bestehende modifiziert sind.
+						möglich, dass neue Konfigurations-Parameter hinzugekommen sind
+						oder Bestehende modifiziert sind. Bitte überprüfen Sie genau, ob die Angaben
+						der lokal gespeicherten Datei mit denen der Datei aus dem Aktualisierungspaket
+						übereinstimmen. Durch hinzugekommene Seitentypen können sich bspw. die Angaben
+						im Abschnitt <code>[urls]</code> ändern. Konfigurationsbeispiele für die jeweils
+						aktuelle Version finden Sie im <xref linkend="configuration"/>.
 					</para>
 				</warning>
 				
@@ -356,16 +360,6 @@
 					<emphasis role="strong">lokalen</emphasis> sys.inc.php Datei die Abschnitte,
 					die mit denen der neu hochgeladenen sys.inc.php Datei identisch sind und ersetzen diese.  
 				</para>
-				
-				<note>
-					<para>
-						Bitte überprüfen Sie genau, ob die Angaben der lokal gespeicherten Datei mit denen
-						der Datei aus dem Aktualisierungspaket übereinstimmen. Durch hinzugekommene
-						Seitentypen können sich bspw. die Angaben im Abschnitt <code>[urls]</code> ändern. 
-						Konfigurationsbeispiele für die jeweils aktuelle Version finden Sie
-						im <xref linkend="configuration"/>
-					</para>
-				</note>
 				
 				<para>
 					Nachdem Sie die auf dem Server liegende Konfigurations-Datei <filename>sys.inc.php</filename>

@@ -203,6 +203,16 @@
 							</listitem>
 						</varlistentry>
 						<varlistentry>
+							<term><guilabel>Vorhandene Schlagworte</guilabel></term>
+							<listitem>
+								<para>
+									Anzeige der bereits vergebenen Schlagworte. Bei einem umfangreichen
+									Katalog von Mediadateien und Schlagworten hilft dies, den 
+									Überblick zu bewahren.
+								</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
 							<term><guilabel>Zeitrahmen</guilabel></term>
 							<listitem>
 								<para>
@@ -401,49 +411,99 @@
 				</figure>
 			</sect3>
 				
+				
 			<sect3 id="media.mediamanager.usage.insert_media">
-				<title>Media-Daten den Inhalten hinzufügen</title>
+				<title>Media-Daten einfügen</title>
 				
 				<para>
-					Positionieren den Maus-Cursor im inhaltlichen Textfeld an die Stelle,
+					Positionieren Sie den Maus-Cursor im inhaltlichen Textfeld an die Stelle,
 					an der die Media-Datei eingefügt werden soll und wählen durch einen Mausklick
-					auf das Datei-Icon die Media-Datei aus. 
+					auf das Datei-Icon die Media-Datei aus.
+				</para>
+
+				<para> 
 					Abhängig vom Mime-Typ<footnote><para><ulink type="external"
 					url="http://de.wikipedia.org/wiki/Internet_Media_Type"/></para></footnote>
-					der Datei wird eine Referenz an gewählter Stelle eingefügt oder es wird ein Pop-up
-					Fenster angezeigt (siehe <xref linkend="media.mediamanager.mediamanager.insert.image"/>),
-					in dem optionale Attribute zur einzufügenden Datei angegeben werden können.
+					der Datei wird eine Referenz (Link) an gewählter Stelle eingefügt oder es wird ein Pop-up
+					Fenster angezeigt, in dem optionale Attribute zur einzufügenden Datei angegeben werden können.
 				</para>
 				
-				<figure id="media.mediamanager.mediamanager.insert.cursor">
-					<title>Media-Datei einfügen - Cursor positionieren</title>
-					<graphic fileref="images/media/mediamanager/mediamanager_insert_cursor.png"/>
-				</figure>
+				<para> 
+					So werden bspw. Media-Dateien, die nicht in einem Browser angezeigt werden können, automatisch
+					erkannt und als Link eingefügt (s. <xref linkend="media.mediamanager.usage.insert_media.nooptions"/>). Ein Beispiel hierfür sind <emphasis role="strong">.zip</emphasis> Dateien, die man in der Regel als einfache Links auf der
+					Webseite bereitstellen möchte.  
+				</para>
 				
-				<figure id="media.mediamanager.mediamanager.insert.click">
-					<title>Media-Datei einfügen - Datei auswählen</title>
-					<graphic fileref="images/media/mediamanager/mediamanager_insert_click.png"/>
-				</figure>
+				<para> 
+					Bilder wiederum sind zur Anzeige auf der Webseite bestimmt und können in verschiedenen Kontexten
+					auf der Seite eingefügt werden (s. <xref linkend="media.mediamanager.usage.insert_media.withoptions"/>).
+					Hierzu bietet das beim einfügen angezeigte Pop-up die Möglichkeit, das Bild als HTML oder nur
+					die Referenz auf das Bild den Inhalten hinzuzufügen.  
+				</para>
 				
-				<figure id="media.mediamanager.mediamanager.insert.link">
-					<title>Media-Datei einfügen - Eingefügte Referenz</title>
-					<graphic fileref="images/media/mediamanager/mediamanager_insert_link.png"/>
-				</figure>
+				<sect4 id="media.mediamanager.usage.insert_media.nooptions">
+					<title>Media-Daten einfügen: Ohne optionale Attribute</title>
+					
+					<figure id="media.mediamanager.mediamanager.insert.nooptions.cursor">
+						<title>Media-Datei einfügen: Ohne optionale Attribute - Cursor positionieren</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_cursor.png"/>
+					</figure>
 				
-				<figure id="media.mediamanager.mediamanager.insert.image">
-					<title>Media-Datei einfügen - Optionale Attribute (Beispiel: Bild einfügen in myLocal)</title>
-					<graphic fileref="images/media/mediamanager/mediamanager_insert_image.png"/>
-				</figure>
+					<figure id="media.mediamanager.mediamanager.insert.nooptions.file">
+						<title>Media-Datei einfügen: Ohne optionale Attribute - Datei auswählen</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_link_file.png"/>
+					</figure>
 				
-				<warning>
-					<para>
-						Wenn Sie während des Editierens der Inhalte oder zu einem späteren Zeitpunkt
-						die Text-Konverter 
-						(siehe <xref linkend="settings.text_converters"/>) Auswahl wechseln, wird die
-						Syntax der bereits eingefügten Referenzen 
-						<emphasis role="strong">nicht automatisch</emphasis> konvertiert.
-					</para>
-				</warning>
+					<figure id="media.mediamanager.mediamanager.insert.nooptions.ready">
+						<title>Media-Datei einfügen: Ohne optionale Attribute - Eingefügte(r) Referenz/Link</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_link_ready.png"/>
+					</figure>
+				</sect4>
+				
+				<sect4 id="media.mediamanager.usage.insert_media.withoptions">
+					<title>Media-Daten einfügen: Mit optionalen Attributen</title>
+					
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.cursor">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Cursor positionieren</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_cursor.png"/>
+					</figure>
+				
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.file">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Datei auswählen</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_image_file.png"/>
+					</figure>
+					
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.as_html">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Als HTML einfügen</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_image_as_html.png"/>
+					</figure>
+					
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.as_html.ready">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Eingefügtes HTML</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_image_as_html_ready.png"/>
+					</figure>
+				
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.as_reference">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Als Referenz einfügen</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_image_as_reference.png"/>
+					</figure>
+					
+					<figure id="media.mediamanager.mediamanager.insert.withoptions.as_reference_ready">
+						<title>Media-Datei einfügen: Mit optionalen Attributen - Eingefügte Referenz</title>
+						<graphic fileref="images/media/mediamanager/mediamanager_insert_image_as_reference_ready.png"/>
+					</figure>
+					
+					
+					<warning>
+						<para>
+							Wenn Sie während des Editierens der Inhalte oder zu einem späteren Zeitpunkt
+							die Text-Konverter 
+							(siehe <xref linkend="settings.text_converters"/>) Auswahl wechseln, wird die
+							Syntax der bereits eingefügten Referenzen 
+							<emphasis role="strong">nicht automatisch</emphasis> konvertiert.
+						</para>
+					</warning>
+				</sect4>
 			
 			</sect3>
 		</sect2>
