@@ -146,14 +146,14 @@ try {
 
 	// date element for date_start
 	$FORM->addElement('date', 'date_start', gettext('Start date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true, 'minYear' => date('Y')-1, 'maxYear' => date('Y')+5),
+		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => '2011', 'maxYear' => '2020', 'minYear' => date('Y')-1, 'maxYear' => date('Y')+5),
 		array('id' => 'simple_date_date_start'));
 		$FORM->addRule('date_start', gettext('Please select a full start date at least'), 'required');
 		$FORM->addRule('date_start', gettext('Please select a start date with day, month and year assigned at least'), 'checkDateOnEmptiness');
 		
 	// date element for date_end
 	$FORM->addElement('date', 'date_end', gettext('End date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true, 'minYear' => date('Y')-1, 'maxYear' => date('Y')+5),
+		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => '2011', 'maxYear' => '2020', 'minYear' => date('Y')-1, 'maxYear' => date('Y')+5),
 		array('id' => 'simple_date_date_end'));
 	
 	// textarea for location
