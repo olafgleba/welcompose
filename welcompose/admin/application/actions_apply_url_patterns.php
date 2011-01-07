@@ -176,32 +176,30 @@ try {
 				
 					// assign content to sql data array
 					$sqlData['content'] = $content;
-				}
-			}		
-				
-			// test sql data for pear errors
-			$HELPER->testSqlDataForPearErrors($sqlData);		
+					
+					// test sql data for pear errors
+					$HELPER->testSqlDataForPearErrors($sqlData);		
 
-			// insert it
-			try {
-				// begin transaction
-				$BASE->db->begin();
+					// insert it
+					try {
+						// begin transaction
+						$BASE->db->begin();
 				
-				// execute operation
-				$_class_reference->$classFunc['1']($_value['id'], $sqlData);
+						// execute operation
+						$_class_reference->$classFunc['1']($_value['id'], $sqlData);
 				
-				// commit
-				$BASE->db->commit();
-			} catch (Exception $e) {
-				// do rollback
-				$BASE->db->rollback();
+						// commit
+						$BASE->db->commit();
+					} catch (Exception $e) {
+						// do rollback
+						$BASE->db->rollback();
 				
-				// re-throw exception
-				throw $e;
-			}		
-				
+						// re-throw exception
+						throw $e;
+					}
+				}
+			}
 		} // foreach eof
-	
 	} // foreach eof
 
 	// clean buffer

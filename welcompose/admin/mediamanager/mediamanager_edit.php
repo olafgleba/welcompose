@@ -373,15 +373,15 @@ try {
 							
 							// apply text macros and text converter if required
 							if ($_value['text_converter'] > 0 || $_value['apply_macros'] > 0) {
-
+						
 								// extract content
 								$content = $_value['content_raw'];
-				
+										
 								// apply startup and pre text converter text macros 
 								if ($_value['apply_macros'] > 0) {
 									$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 								}
-				
+										
 								// apply text converter
 								if ($_value['text_converter'] > 0) {
 									$content = $TEXTCONVERTER->applyTextConverter(
@@ -389,37 +389,39 @@ try {
 										$content
 									);
 								}
-				
+										
 								// apply post text converter and shutdown text macros 
 								if ($_value['apply_macros'] > 0) {
 									$content = $TEXTMACRO->applyTextMacros($content, 'post');
 								}
-				
+								
 								// assign content to sql data array
 								$sqlDataSave['content'] = $content;
+								
+								
+								// test sql data for pear errors
+								$HELPER->testSqlDataForPearErrors($sqlDataSave);						
+								
+								// insert it
+								try {
+									// begin transaction
+									$BASE->db->begin();
+										
+									// execute operation
+									$_class_reference->$classFunc['1']($_value['id'], $sqlDataSave);
+										
+									// commit
+									$BASE->db->commit();
+								} catch (Exception $e) {
+									// do rollback
+									$BASE->db->rollback();
+										
+									// re-throw exception
+									throw $e;
+								}						
 							}
-						}		
-				
-						// test sql data for pear errors
-						$HELPER->testSqlDataForPearErrors($sqlDataSave);		
-
-						// insert it
-						try {
-							// begin transaction
-							$BASE->db->begin();
-				
-							// execute operation
-							$_class_reference->$classFunc['1']($_value['id'], $sqlDataSave);
-				
-							// commit
-							$BASE->db->commit();
-						} catch (Exception $e) {
-							// do rollback
-							$BASE->db->rollback();
-				
-							// re-throw exception
-							throw $e;
-						}						
+						}
+						
 					} // foreach eof	
 				} // foreach eof
 				
