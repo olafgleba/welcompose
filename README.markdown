@@ -43,17 +43,17 @@ One page each chapter (docbook html):
 
 ****
 
-## License ##
-
-The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all core parts of the application.
-
-****
-
 ## Getting started ##
 
 ****
 
 ## Support ##
+
+****
+
+## License ##
+
+The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all core parts of the application.
 
 ****
 
