@@ -29,12 +29,12 @@ The documentation is currently only available in german language.
 The user documention is available online
 [http://dokumentation.welcompose.de/handbuch/](http://dokumentation.welcompose.de/handbuch/)
 
-Available Downloads
+**Available Downloads**
 
-Docbook Documentation, one single html site
+One single page (docbook html)
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip)
 
-Docbook Documentation, one page each chapter
+One page each chapter (docbook html)
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip)
 
 ****
