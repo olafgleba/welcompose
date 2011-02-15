@@ -1,16 +1,20 @@
 # Welcompose Content Management System #
 
-Welcompose is a open source web content management system for small to middle Websites which focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP 5, Mysql 5 and uses Smarty as a template engine. Full flexibility in building and mixing templates, template types and template groups, a smooth and easy to use interface and supports the user to build W3C compliant websites.
+Welcompose is a open source web content management system for small to middle Websites which focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as a template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites.
 
 ****
 
 ## Suggested users ##
 
-* Developers who creates CMS driven websites for their clients without being restricted in their coding 
+* Developers who creates CMS driven websites for their clients
 * Designers who have a slightly knowledge of HTML/CSS but do not want to struggle with PHP
-* Clients who have no HTML knowledge at all and want just take care of their website contents 
+* Clients who have no HTML knowledge at all but want just take care of their website contents
 
-Please note: If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you.
+****
+
+## What Welcompose is not ##
+
+If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does (and don't want to) compare with Systems like Typo3, Drupal a.so.
 
 ****
 
@@ -20,11 +24,24 @@ Please note: If you are lookin for a *click-to-go* solution with dozens of plugi
 
 ## Documentation ##
 
+The documentation is currently only available in german language.
+
+The user documention is available online
+[http://dokumentation.welcompose.de/handbuch/](http://dokumentation.welcompose.de/handbuch/)
+
+Available Downloads
+
+Docbook Documentation, one single html site
+http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip
+
+Docbook Documentation, one page each chapter
+http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip
+
 ****
 
 ## License ##
 
-The AGPL v3 ist applied to all core parts of the application.
+The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all core parts of the application.
 
 ****
 
