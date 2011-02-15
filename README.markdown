@@ -33,11 +33,11 @@ Currently the documentation is only available in german language.
 
 **The documentation could be download also**:
 
-One single page (docbook html)
+One single page (docbook html):
 
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip)
 
-One page each chapter (docbook html)
+One page each chapter (docbook html):
 
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip)
 
