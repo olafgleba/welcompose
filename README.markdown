@@ -26,12 +26,12 @@ If you are lookin for a *click-to-go* solution with dozens of plugins, predefine
 
 Currently the documentation is only available in german language.
 
-The user documention is available online:
+**The user documention is available online**:
 
 [http://dokumentation.welcompose.de/handbuch/](http://dokumentation.welcompose.de/handbuch/)
 
 
-The documantation could be download also:
+**The documentation could be download also**:
 
 One single page (docbook html)
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip)
