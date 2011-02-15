@@ -8,7 +8,7 @@ Welcompose is a open source web content management system for small to middle We
 
 * Developers who creates CMS driven websites for their clients
 * Designers who have a slightly knowledge of HTML/CSS but do not want to struggle with PHP
-* Clients who have no HTML knowledge at all but want just take care of their website contents
+* Clients who have no HTML knowledge at all but want just take care of their website contents by themselves
 
 ****
 
@@ -54,10 +54,6 @@ The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all 
 ****
 
 ## Support ##
-
-****
-
-## Downloads ##
 
 ****
 
