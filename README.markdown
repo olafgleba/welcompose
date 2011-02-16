@@ -14,7 +14,7 @@ Welcompose is a open source web content management system for small to middle We
 
 ## Features ##
 
-... Features goes in here ...
+... Features goes in here, and here some more ...
 
 ****
 
