@@ -38,9 +38,15 @@ If you are lookin for a *click-to-go* solution with dozens of plugins, predefine
 
 Currently the documentation is only available in german language.
 
-**The user documentation is available online**:
+**Documentation available online**:
+
+User Documentation
 
 [http://dokumentation.welcompose.de/handbuch/](http://dokumentation.welcompose.de/handbuch/)
+
+Current API Documentation
+
+[http://dokumentation.welcompose.de/api/](http://dokumentation.welcompose.de/api/)
 
 
 **But could be download also**:
@@ -53,7 +59,7 @@ One page each chapter (DocBook html):
 
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip)
 
-Current API Documentation (Html):
+Current API Documentation (phpDocumentor):
 
 [http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip](http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip)
 
