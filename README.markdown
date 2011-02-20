@@ -21,7 +21,8 @@ Welcompose is a open source web content management system for small to middle We
 * Out of the box page types for blogs, simple content pages, date entry listings, guestbooks and more
 * Delivered with Textconverters Markdown, Textile and XHTML at least
 * Content related management of media
-* Intuitive and simple to learn handling for the developer but also the content editor  
+* Intuitive and simple to learn handling for the developer but also the content editor
+* Markup editor as a additional add on ([http://markitup.jaysalvat.com/home/](MarkItUp!))
 * Extensive options to build SEO web sites
 * Platform and Browser independent (Works with IE >= 7, FF >= 1.5, Safari >=3.12)
 
