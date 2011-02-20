@@ -30,7 +30,7 @@ Welcompose is a open source web content management system for small to middle We
 
 ## What Welcompose is \*not* ##
 
-If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does (and don't want to) compare with Systems like Typo3, Drupal a.so.
+If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does (and don't want to) compare with complex Systems like Typo3, Drupal a.so.
 
 ****
 
@@ -45,17 +45,17 @@ Currently the documentation is only available in german language.
 
 **But could be download also**:
 
-One single page (docbook html):
+One single page (DocBook html):
 
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-single.zip)
 
-One page each chapter (docbook html):
+One page each chapter (DocBook html):
 
 [http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip](http://downloads.welcompose.de/handbuch/welcompose-benutzerhandbuch-multi.zip)
 
-****
+Current API Documentation (Html):
 
-## Getting started ##
+[http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip](http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip)
 
 ****
 
