@@ -1,6 +1,6 @@
 # Welcompose Content Management System #
 
-Welcompose is a open source web content management system for small to middle Websites which focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as a template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites.
+Welcompose is a open source web content management system for small to middle Websites focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as a template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites.
 
 ****
 
@@ -14,7 +14,16 @@ Welcompose is a open source web content management system for small to middle We
 
 ## Features ##
 
-... Features goes in here, and here some more ...
+* Uses current technology to push up performance (PHP5, Mysql5, Smarty latest)
+* No proprietary syntax for page template creation
+* 100% flexibility in building and combining page templates
+* High Accessibility by seperating contents and templating
+* Out of the box page types for blogs, simple content pages, date entry listings, guestbooks and more
+* Delivered with Textconverters Markdown, Textile and XHTML at least
+* Content related management of media
+* Intuitive and simple to learn handling for the developer but also the content editor  
+* Extensive options to build SEO web sites
+* Platform and Browser independent (Works with IE >= 7, FF >= 1.5, Safari >=3.12)
 
 ****
 
