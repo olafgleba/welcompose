@@ -30,7 +30,7 @@ Welcompose is a open source web content management system for small to middle We
 
 ## What Welcompose is \*not* ##
 
-If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does (and don't want to) compare with complex Systems like Typo3, Drupal a.so.
+If you are lookin for a *click-to-go* solution with dozens of plugins, predefined content and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.so. 
 
 ****
 
@@ -65,14 +65,6 @@ Current API Documentation (phpDocumentor):
 
 ****
 
-## Support ##
-
-****
-
 ## License ##
 
 The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all core parts of the application.
-
-****
-
-## Websites build with Welcompose ##
