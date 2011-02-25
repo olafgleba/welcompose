@@ -117,6 +117,9 @@ public function mmInsertInternalLink ($text, $href)
 	$a->appendAttr(new HtmlTagAttr('href', $href));
 	
 	$html = $a->getHtml();
+	if (ini_get('magic_quotes_gpc')) {
+		$html = stripslashes($html);
+	}
 	return $this->escapeMultiline($html);
 }
 
