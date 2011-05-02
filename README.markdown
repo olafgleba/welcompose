@@ -34,6 +34,12 @@ If you are lookin for a *click-to-go* solution with dozens of plugins, predefine
 
 ****
 
+## Software Downloads ##
+
+[http://welcompose.de/cms/downloads/](http://welcompose.de/cms/downloads/)
+
+****
+
 ## Documentation ##
 
 Currently the documentation is only available in german language.
