@@ -49,7 +49,7 @@ Current API Documentation
 [http://dokumentation.welcompose.de/api/](http://dokumentation.welcompose.de/api/)
 
 
-**But could be download also**:
+**But could be downloaded also**:
 
 One single page (DocBook html):
 
