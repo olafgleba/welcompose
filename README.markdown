@@ -12,6 +12,17 @@ Welcompose is a open source web content management system for small to middle We
 
 ****
 
+## Websites using Welcompose (Excerpt) ##
+
+* [http://alexangrick.de/](HUndeschule Alex Angrick)
+* [http://jan-gregor-kremp.de/](Jan-Gregor Kremp)
+* [http://ankeloenne.com/](Büro Lönne GmbH)
+* [http://christine-westermann.de/](Christine Westermann)
+* [http://jessica-kastrop.de/](Jessica Kastrop)
+* [http://cordula-stratmann.de/](Cordula Stratmann)
+
+****
+
 ## Features ##
 
 * Uses current technology to push up performance (PHP5, Mysql5, Smarty latest)
