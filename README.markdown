@@ -45,7 +45,7 @@ If you are lookin for a *click-to-go* solution with dozens of plugins, predefine
 
 ****
 
-## Software Downloads ##
+## Software Download(s) ##
 
 [http://welcompose.de/cms/downloads/](http://welcompose.de/cms/downloads/)
 
