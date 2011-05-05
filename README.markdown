@@ -51,6 +51,12 @@ If you are lookin for a *click-to-go* solution with dozens of plugins, predefine
 
 ****
 
+## Issue Tracking and Tickets ##
+
+[http://welcompose.lighthouseapp.com/](http://welcompose.lighthouseapp.com/)
+
+****
+
 ## Documentation ##
 
 Currently the documentation is only available in german language.
