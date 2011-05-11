@@ -16,6 +16,7 @@ Welcompose is a open source web content management system for small to middle We
 
 * [http://alexangrick.de/](HUndeschule Alex Angrick)
 * [http://jan-gregor-kremp.de/](Jan-Gregor Kremp)
+* [http://www.cuxhaven-privat.de/](Cuxhaven Privat - Ferienportal)
 * [http://ankeloenne.com/](Büro Lönne GmbH)
 * [http://christine-westermann.de/](Christine Westermann)
 * [http://jessica-kastrop.de/](Jessica Kastrop)
