@@ -140,16 +140,39 @@ try {
 	if ($request['mm_include_types_other'] == 1) {
 		$types[] = 'other';
 	}
-	
-	// prepare select params
-	$select_params = array(
-		'types' => $types,
-		'tags' => $request['mm_tags'],
-		'timeframe' => $request['mm_timeframe'],
-		'order_macro' => 'DATE_ADDED:DESC',
-		'start' => $request['mm_start'],
-		'limit' => (($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])
-	);
+
+	/**
+	* To switch searching for a object id within the default tag search,
+	* we differ between the param array by query the input syntax. To  
+	* search for a object id the input syntax have to start
+	* with the internal prefix "wcom", followed by a colon and the object id.
+	* No whitespaces are allowed.
+	* 
+	* Example:
+	* 
+	* wcom:21
+	* 
+	*/	
+	if (Base_Cnc::filterRequest($request['mm_tags'], WCOM_REGEX_TAG_SEARCH_ID)) {	
+		// prepare select params
+		$select_params = array(
+			'types' => $types,
+			'id' => substr($request['mm_tags'], 5),
+			'timeframe' => $request['mm_timeframe'],
+			'order_macro' => 'DATE_ADDED:DESC',
+			'start' => $request['mm_start'],
+			'limit' => (($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])
+		);	
+	} else {	
+		$select_params = array(
+			'types' => $types,
+			'tags' => $request['mm_tags'],
+			'timeframe' => $request['mm_timeframe'],
+			'order_macro' => 'DATE_ADDED:DESC',
+			'start' => $request['mm_start'],
+			'limit' => (($request['mm_limit'] < 1) ? 8 : $request['mm_limit'])		
+		);
+	}
 	$BASE->utility->smarty->assign('objects', $OBJECT->selectObjects($select_params));
 	
 	// assign currently used media tags

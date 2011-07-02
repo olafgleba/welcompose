@@ -271,7 +271,7 @@ public function selectObjects ($params = array())
 	}
 	
 	// define some vars
-	$timeframe = null;
+	$id = null;	
 	$tags = null;
 	$order_macro = null;
 	$types = array();
@@ -294,6 +294,7 @@ public function selectObjects ($params = array())
 				break;
 			case 'start':
 			case 'limit':
+			case 'id':
 					$$_key = (int)$_value;
 				break;
 			case 'types':
@@ -357,7 +358,12 @@ public function selectObjects ($params = array())
 	$bind_params = array(
 		'project' => WCOM_CURRENT_PROJECT
 	);
-	
+
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `media_objects`.`id` = :id ";
+		$bind_params['id'] = $id;
+	}
+		
 	// add where clauses
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`media_objects`.`date_added`',

@@ -90,6 +90,10 @@ define("WCOM_REGEX_FORM_FIELD_ID", "=^([a-z0-9-_]+)$=Di");
 // Defines regular expression for non empty strings
 define("WCOM_REGEX_NON_EMPTY", "=^.+$=D");
 
+// Defines regular expression for object id search pattern
+// within a mediamanager tag search
+define("WCOM_REGEX_TAG_SEARCH_ID", "=^(wcom+)\:([0-9]+)$=D");
+
 // Defines regular expression for the help template
 // names
 define("WCOM_REGEX_HELP", "=^([a-z0-9-_]+)$=Di");
