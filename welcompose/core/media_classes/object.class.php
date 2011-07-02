@@ -271,7 +271,8 @@ public function selectObjects ($params = array())
 	}
 	
 	// define some vars
-	$id = null;	
+	$id = null;
+	$timeframe = null;	
 	$tags = null;
 	$order_macro = null;
 	$types = array();
