@@ -105,7 +105,6 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
-
 	if (isset($_POST['blogcomments'])) {
 		if (is_array($_POST['blogcomments'])) {
 			foreach ($_POST['blogcomments'] as $_blogcomment) {	
