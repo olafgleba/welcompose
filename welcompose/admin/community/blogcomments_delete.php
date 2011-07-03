@@ -105,22 +105,29 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 
-	try {
-		// start transaction
-		$BASE->db->begin();
+
+	if (isset($_POST['blogcomments'])) {
+		if (is_array($_POST['blogcomments'])) {
+			foreach ($_POST['blogcomments'] as $_blogcomment) {	
+					
+				try {
+					// start transaction
+					$BASE->db->begin();				
+			
+					// delete row
+					$BLOGCOMMENT->deleteBlogComment($_blogcomment);
 		
-		// delete row
-		$BLOGCOMMENT->deleteBlogComment(Base_Cnc::filterRequest($_REQUEST['id'],
-			WCOM_REGEX_NUMERIC));
+					// commit transaction
+					$BASE->db->commit();
+				} catch (Exception $e) {
+					// do rollback
+					$BASE->db->rollback();
 		
-		// commit transaction
-		$BASE->db->commit();
-	} catch (Exception $e) {
-		// do rollback
-		$BASE->db->rollback();
-		
-		// re-throw exception
-		throw $e;
+					// re-throw exception
+					throw $e;
+				}
+			}
+		}
 	}
 
 	// clean buffer

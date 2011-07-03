@@ -190,6 +190,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'a.selAllCheckboxes' : function(el){
+		el.onclick = function(){
+			Helper.selAllCheckboxes(this);
+			return false;
+		}
+	},
+	'a.deselAllCheckboxes' : function(el){
+		el.onclick = function(){
+			Helper.deselAllCheckboxes(this);
+			return false;
+		}
+	},
 	'.confirmDelNav' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelNavAction(this);

@@ -1332,7 +1332,12 @@ function Helper_changeBlogCommentStatus (elem)
 	
 		// find blog comment id
 		commentId = elem.parentNode.parentNode.parentNode;
-		commentId = Helper.getNextSiblingFirstChild(commentId, 4);
+		
+		if (Helper.isBrowser('sa')) {
+			commentId = Helper.getNextSiblingFirstChild(commentId, 5);
+		} else {
+			commentId = Helper.getNextSiblingFirstChild(commentId, 4);
+		}
 		commentId = String(commentId.href);
 		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");		
 

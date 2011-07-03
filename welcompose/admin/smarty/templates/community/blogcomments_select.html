@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
@@ -26,7 +27,7 @@
 <body>
 <div id="container">
 
-<div id="statuschange">
+<div id="statuschange" style="display:none;">
 <h1>{i18n Change of comment status successfully saved!}</h1>
 <p></p>	
 </div>
@@ -109,15 +110,16 @@
 </ul>
 <br class="clearb" />
 {/if}
+<form method="post" action="/admin/community/blogcomments_delete.php" name="blogcomments">
 <table summary="{i18n Blog Comments List}" class="blogcomments">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="260" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="140" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="120" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
 </tr>
 <tr>
 <th>{i18n Blog-Name}<br />{i18n Posting Title}</th>
@@ -127,6 +129,7 @@
 <th>{i18n View}</th>
 <th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
+<th></th>
 </tr>
 {foreach from=$blog_comments item=_comment}
 <tr>
@@ -153,7 +156,7 @@
 </td>
 <td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
 <td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="blogcomments_delete.php?id={$_comment.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td style="text-align: right;"><input type="checkbox" class="chbx" name="blogcomments[]" value="{$_comment.id}"></td>
 </tr>
 <tr id="o_{$_comment.id}" class="outer">
 <td colspan="7">
@@ -172,7 +175,12 @@
 </td>
 </tr>
 {/foreach}
+<tr>
+</tr>
 </table>
+<p style="text-align: right;"><a rel="blogcomment" href="#" class="selAllCheckboxes">{i18n Select all}</a> | <a rel="blogcomment" href="#" class="deselAllCheckboxes">{i18n Deselect all}</a></p>
+<div class="right"><input class="submit140" name="delete" value="{i18n Delete}" type="submit"></div>
+</form>
 {if count($page_index) > 1}
 <h3 class="pagenav">{i18n Pages:} </h3> 
 <ul class="pagenav"> 
