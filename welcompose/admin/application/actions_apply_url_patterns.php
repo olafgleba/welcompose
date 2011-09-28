@@ -120,14 +120,14 @@ try {
 	
 	// class loader array
 	$classLoad = array(
-		'SIMPLEPAGE' => array('selectSimplePages', 'updateSimplePage'),
-		'SIMPLEFORM' => array('selectSimpleForms', 'updateSimpleForm'),
-		'SIMPLEGUESTBOOK' => array('selectSimpleGuestbooks', 'updateSimpleGuestbook'),
-		'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
+		'ABBREVIATION' => array('selectAbbreviations', 'updateAbbreviation'),
 		'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
 		'BOX' => array('selectBoxes', 'updateBox'),
+		'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
 		'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox'),
-		'ABBREVIATION' => array('selectAbbreviations', 'updateAbbreviation')
+		'SIMPLEPAGE' => array('selectSimplePages', 'updateSimplePage'),
+		'SIMPLEFORM' => array('selectSimpleForms', 'updateSimpleForm'),
+		'SIMPLEGUESTBOOK' => array('selectSimpleGuestbooks', 'updateSimpleGuestbook')
 	);
 	
 	foreach ($classLoad as $classRef => $classFunc) {
