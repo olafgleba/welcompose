@@ -429,9 +429,9 @@ try {
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null,
 		'apply_macros' => 1,
-		'ping' => 1,
-		'comments_enable' => 1,
-		'trackbacks_enable' => 1
+		'ping' => 0,
+		'comments_enable' => 0,
+		'trackbacks_enable' => 0
 	));
 	
 	// validate it
