@@ -170,7 +170,7 @@ try {
 		// freeze the form
 		$FORM->freeze();
 		
-		// create the article group
+		// prepare sql data for navigation create
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $FORM->exportValue('name');
