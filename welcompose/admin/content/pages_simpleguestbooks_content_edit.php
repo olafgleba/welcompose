@@ -314,8 +314,6 @@ try {
 		$FORM->removeAttribute('name');
 		$FORM->removeAttribute('target');
 		
-		//$FORM->addAttribute('accept-charset' => 'utf-8');
-		
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
@@ -462,7 +460,7 @@ try {
 			$_SESSION['preview_ctrl'] = 1;
 		}
 				
-		// redirect
+		// save session
 		$SESSION->save();
 		
 		// clean the buffer
