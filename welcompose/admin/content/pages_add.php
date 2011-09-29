@@ -249,11 +249,20 @@ try {
 	$FORM->addRule('protect', gettext('The field protect accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
+	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
 		array('id' => 'page_draft', 'class' => 'chbx'));
 	$FORM->applyFilter('draft', 'trim');
 	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+	$FORM->addRule('draft', gettext('The field draft accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for exclude
+	$FORM->addElement('checkbox', 'exclude', gettext('Exclude'), null,
+		array('id' => 'page_exclude', 'class' => 'chbx'));
+	$FORM->applyFilter('exclude', 'trim');
+	$FORM->applyFilter('exclude', 'strip_tags');
+	$FORM->addRule('exclude', gettext('The field exclude accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
 	// checkbox for nofollow
@@ -379,7 +388,7 @@ try {
 			$name_url = $FORM->exportValue('name_url');
 			if (!$PAGE->testForUniqueUrlName($name_url)) {
 				$name_url = $name_url.'-'.$page_id;
-			}		
+			}
 			
 			// prepare sql data for page create
 			$sqlData = array();
@@ -395,6 +404,7 @@ try {
 			$sqlData['index_page'] = $FORM->exportValue('index_page');
 			$sqlData['protect'] = $FORM->exportValue('protect');
 			$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
+			$sqlData['exclude'] = $FORM->exportValue('exclude');
 			$sqlData['no_follow'] = $FORM->exportValue('no_follow');
 			$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 			$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');

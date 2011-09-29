@@ -216,7 +216,15 @@ try {
 		array('id' => 'page_draft', 'class' => 'chbx'));
 	$FORM->applyFilter('draft', 'trim');
 	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether to apply text macros accepts only 0 or 1'),
+	$FORM->addRule('draft', gettext('The field draft accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// checkbox for exclude
+	$FORM->addElement('checkbox', 'exclude', gettext('Exclude'), null,
+		array('id' => 'page_exclude', 'class' => 'chbx'));
+	$FORM->applyFilter('exclude', 'trim');
+	$FORM->applyFilter('exclude', 'strip_tags');
+	$FORM->addRule('exclude', gettext('The field exclude accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
 	// checkbox for nofollow
@@ -224,7 +232,7 @@ try {
 		array('id' => 'page_no_follow', 'class' => 'chbx'));
 	$FORM->applyFilter('no_follow', 'trim');
 	$FORM->applyFilter('no_follow', 'strip_tags');
-	$FORM->addRule('no_follow', gettext('The field protect accepts only 0 or 1'),
+	$FORM->addRule('no_follow', gettext('The field no_follow accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// multi select for rights
@@ -269,6 +277,7 @@ try {
 		'template_set' => Base_Cnc::ifsetor($page['template_set'], null),
 		'index_page' => Base_Cnc::ifsetor($page['index_page'], null),
 		'protect' => Base_Cnc::ifsetor($page['protect'], null),
+		'exclude' => Base_Cnc::ifsetor($page['exclude'], null),
 		'draft' => Base_Cnc::ifsetor($page['draft'], null),
 		'no_follow' => Base_Cnc::ifsetor($page['no_follow'], null),
 		'groups' => $selected_groups,
@@ -356,6 +365,7 @@ try {
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
 		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
+		$sqlData['exclude'] = $FORM->exportValue('exclude');
 		$sqlData['no_follow'] = $FORM->exportValue('no_follow');
 		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 		$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');

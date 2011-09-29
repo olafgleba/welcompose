@@ -94,14 +94,18 @@ public function addPage ($sqlData)
 		throw new Content_PageException('Input for parameter sqlData is not an array');	
 	}
 	
-	$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	if (!isset($sqlData['project'])) {
+		$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	}
 	
 	// insert row
 	$this->base->db->insert(WCOM_DB_CONTENT_PAGES, $sqlData);
 	
-	// test if page belongs to current project/user
-	if (!$this->pageBelongsToCurrentUser($sqlData['id'])) {
-		throw new Content_PageException('Given page does not belong to current project');
+	if (!isset($sqlData['project'])) {
+		// test if page belongs to current project/user
+		if (!$this->pageBelongsToCurrentUser($sqlData['id'])) {
+			throw new Content_PageException('Given page does not belong to current project');
+		}
 	}
 	
 	return (int)$sqlData['id'];
@@ -233,6 +237,7 @@ public function selectPage ($id)
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`exclude` AS `exclude`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`no_follow` AS `no_follow`,
 			`content_pages`.`draft` AS `draft`,
@@ -285,6 +290,7 @@ public function selectPage ($id)
  * <li>type, int, optional: Page type id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
+ * <li>exclude, int, optional: if set exclude page from navigation</li>
  * <li>draft, int, optional: if set include pages with param draft</li>
  * <li>protect, int, optional: if set exclude protected pages</li>
  * </ul>
@@ -311,6 +317,7 @@ public function selectPages ($params = array())
 	$start = null;
 	$limit = null;
 	$draft = null;
+	$exclude = null;
 	$protect = null;
 	$bind_params = array();
 	
@@ -330,6 +337,7 @@ public function selectPages ($params = array())
 			case 'type':
 			case 'start':
 			case 'limit':
+			case 'exclude':
 			case 'protect':
 					$$_key = (int)$_value;
 				break;
@@ -365,6 +373,7 @@ public function selectPages ($params = array())
 			`content_pages`.`optional_text` AS `optional_text`,
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
+			`content_pages`.`exclude` AS `exclude`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`no_follow` AS `no_follow`,
 			`content_pages`.`draft` AS `draft`,
@@ -427,7 +436,12 @@ public function selectPages ($params = array())
 	// Include only unprotected pages
 	if (!empty($protect) && is_numeric($protect)) {
 		$sql .= " AND `content_pages`.`protect` IS NULL ";
-	}	
+	}
+	// Include only visible pages
+	if (!empty($exclude) && is_numeric($exclude)) {
+		$sql .= " AND `content_pages`.`exclude` IS NULL ";
+	}
+		
 	// Include only result rows without drafts
 	if (is_null($draft) ) {
 		$sql .= " AND `content_pages`.`draft` = '0' ";
