@@ -106,7 +106,7 @@ try {
 	$filename = $template['type_name'].'_'.$template['name'].'.html';
 	
 	// print download headers
-	header("Content-Type: application/octet-stream");
+	header("Content-Type: application/octet-stream; charset=utf-8");
 	header("Content-Disposition: attachment; filename=".urlencode($filename));
 	
 	// print template source code
