@@ -480,6 +480,8 @@ Init.prototype = new Base();
 /* Methods of prototype @class Init */
 Init.prototype.load = Init_load;
 Init.prototype.getVars = Init_getVars;
+Init.prototype.getRelatedPages = Init_getRelatedPages;
+Init.prototype.showResponseGetRelatedPages = Init_showResponseGetRelatedPages;
 Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
 Init.prototype.setCookie = Init_setCookie;
@@ -565,6 +567,9 @@ function Init_getVars ()
 			} else {
 				Init.getCbxStatus(checkbox_status);
 			}
+		}		
+		if ($('page_apply_content') && $F('page_apply_content') == 1) {		
+			Init.getRelatedPages();
 		}
 		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
@@ -589,6 +594,63 @@ function Init_getVars ()
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+
+/**
+ * Lazy load of related page content for applying content
+ * on page creation
+ *
+ * @throws applyError on exception
+ */
+
+/**
+ * Lazy load of related pages to apply on page creation.
+ * <br />
+ * Get pages which have content table fields. This
+ * is used whenever the user chooses to prefill the
+ * created page with appropriate content of already applied pages 
+ * 
+ * @see #showResponseGetRelatedPages
+ * @throws applyError on exception
+ */
+function Init_getRelatedPages()
+{
+	try {	
+		var url = '../content/pages_apply_content.php';
+		
+		var elem = $('page_type');
+		var pars = 'type=' + elem.options[elem.selectedIndex].value;
+		
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Helper.showResponseGetRelatedPages
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Get related pages to apply on page creation xhr response.
+ * <br />
+ * Populate select form element with provided pages on load 
+ * 
+ * @see #getRelatedPages
+ * @param {object} req XHR response
+ * @throws applyError on exception
+ */
+function Init_showResponseGetRelatedPages(req)
+{
+	try {
+		Element.update($('page_apply_content_selection'), req.responseText);
+	} catch (e) {
+		_applyError(e);
+	}	
 }
 
 /**

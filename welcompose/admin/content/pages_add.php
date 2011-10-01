@@ -134,6 +134,8 @@ try {
 		$types[(int)$_type['id']] = htmlspecialchars($_type['name']);
 	}
 	
+	//$assume = array('' => 'No available content');
+	
 	// prepare template sets
 	$template_sets = array();
 	foreach ($TEMPLATESET->selectTemplateSets() as $_template_set) {
@@ -218,11 +220,25 @@ try {
 	
 	// select for type
 	$FORM->addElement('select', 'type', gettext('Type'), $types,
-		array('id' => 'page_type'));
+		array('id' => 'page_type', 'onchange' => 'javascript:Helper_getRelatedPages(this)'));
 	$FORM->applyFilter('type', 'trim');
 	$FORM->applyFilter('type', 'strip_tags');
 	$FORM->addRule('type', gettext('Please choose a page type'), 'required');
-	$FORM->addRule('type', gettext('Chosen page type is out of range'), 'in_array_keys', $types);
+	$FORM->addRule('type', gettext('Chosen page type is out of range'), 'in_array_keys', $types);	
+
+	// checkbox for apply foreign content
+	$FORM->addElement('checkbox', 'apply_content', gettext('Apply content'), null,
+		array('id' => 'page_apply_content', 'class' => 'chbx'));
+	$FORM->applyFilter('apply_content', 'trim');
+	$FORM->applyFilter('apply_content', 'strip_tags');
+	$FORM->addRule('apply_content', gettext('The field whether to apply foreign content accepts only 0 or 1'),
+		'regex', WCOM_REGEX_ZERO_OR_ONE);		
+			
+	// select to apply foreign contents
+	$FORM->addElement('select', 'apply_content_selection', gettext('Choose page'), array('' => gettext('There is no content available for this page type')),
+		array('id' => 'page_apply_content_selection'));
+	$FORM->applyFilter('apply_content_selection', 'trim');
+	$FORM->applyFilter('apply_content_selection', 'strip_tags');	
 	
 	// select for type
 	$FORM->addElement('select', 'template_set', gettext('Template set'), $template_sets,
@@ -424,8 +440,20 @@ try {
 				$PAGE->setIndexPage($page_id);
 			}
 			
-			// init page contents
-			$PAGE->initPageContents($page_id);
+			// we like to use former applied page content to populate the new page
+			if (intval($FORM->exportValue('apply_content')) === 1) {
+			
+				// get id of page to apply
+				$page_id_to_apply = Base_Cnc::filterRequest($_REQUEST['apply_content_selection'], WCOM_REGEX_NUMERIC);
+				
+				// init page contents and apply page contents
+				$PAGE->initPageContents($page_id, $page_id_to_apply);
+			} else {
+				
+				// if not set, just plain init the new page
+				// init page contents
+				$PAGE->initPageContents($page_id);
+			}
 			
 			// commit
 			$BASE->db->commit();

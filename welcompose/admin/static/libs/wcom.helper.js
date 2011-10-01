@@ -54,7 +54,6 @@ Helper.prototype = new Base();
  * Instance Methods from prototype @class Helper
  */
 Helper.prototype.launchPopup = Helper_launchPopup;
-
 Helper.prototype.getTextConverterValue = Helper_getTextConverterValue;
 Helper.prototype.getSelectionText = Helper_getSelectionText;
 Helper.prototype.getDelimiterValue = Helper_getDelimiterValue;
@@ -117,7 +116,8 @@ Helper.prototype.showResponseRunAction = Helper_showResponseRunAction;
 Helper.prototype.selAllCheckboxes = Helper_selAllCheckboxes;
 Helper.prototype.deselAllCheckboxes = Helper_deselAllCheckboxes;
 Helper.prototype.goToPageBox = Helper_goToPageBox;
-
+Helper.prototype.getRelatedPages = Helper_getRelatedPages;
+Helper.prototype.showResponseGetRelatedPages = Helper_showResponseGetRelatedPages;
 
 
 /**
@@ -2179,6 +2179,55 @@ function Helper_goToPageBox (elem)
 	} catch (e) {
 		_applyError(e);
 	}
+}
+
+/**
+ * Get related pages to apply on page creation.
+ * <br />
+ * Get pages which have content table fields. This
+ * is used whenever the user chooses to prefill the
+ * created page with appropriate content of already applied pages 
+ * 
+ * @see #showResponseGetRelatedPages
+ * @param {object} elem Provided element
+ * @throws applyError on exception
+ */
+function Helper_getRelatedPages(elem)
+{
+	try {	
+		var url = '../content/pages_apply_content.php';
+		var pars = 'type=' + elem.options[elem.selectedIndex].value;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Helper.showResponseGetRelatedPages
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Get related pages to apply on page creation xhr response.
+ * <br />
+ * Populate select form element with provided pages 
+ * 
+ * @see #getRelatedPages
+ * @param {object} req XHR response
+ * @throws applyError on exception
+ */
+function Helper_showResponseGetRelatedPages(req)
+{
+	try {
+		// update the select form element
+		Element.update($('page_apply_content_selection'), req.responseText);
+	} catch (e) {
+		_applyError(e);
+	}	
 }
 
 /**

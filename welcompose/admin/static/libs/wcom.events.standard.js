@@ -342,6 +342,11 @@ var definitions = {
 		el.onclick = function(){
 			Status.getCbx(new Array('simple_page_meta_use'));
 		}
+	},
+	'#page_apply_content' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('page_apply_content'));
+		}
 	}
 };
 Behaviour.register(definitions);

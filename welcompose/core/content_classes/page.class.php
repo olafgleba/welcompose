@@ -763,13 +763,17 @@ public function selectPageToGroupsMap ($page)
 /**
  * Prepares table structure for the selected page types. This task has to
  * be executed directly after the page creation. Takes the id of the just
- * created page as first argument. Returns boolean true.
+ * created page as first and optional the id of the applied page as second
+ * argument if provided. This second argument is used whenever the user
+ * chooses to prefill the created page with appropriate content of already applied pages. 
+ * Returns boolean true.
  * 
  * @throws Content_PageException
  * @param int Page id
+ * @param int Page id of page to apply
  * @return bool
  */
-public function initPageContents ($page)
+public function initPageContents ($page, $page_to_apply = null)
 {
 	// access check
 	if (!wcom_check_access('Content', 'Page', 'Manage')) {
@@ -778,7 +782,10 @@ public function initPageContents ($page)
 	
 	// input check
 	if (empty($page) || !is_numeric($page)) {
-		throw new Content_PageException('Input for parameter page  is expected to be numeric');
+		throw new Content_PageException('Input for parameter page is expected to be numeric');
+	}
+	if (!is_null($page_to_apply) && !is_numeric($page_to_apply)) {
+		throw new Content_PageException('Input for parameter page to apply is expected to be numeric');
 	}
 	
 	// test if page belongs to current project/user
@@ -788,9 +795,6 @@ public function initPageContents ($page)
 	
 	// get page information
 	$page_info = $this->selectPage($page);
-	
-	// load helper class
-	$HELPER = load('utility:helper');
 	
 	// handle the different page types
 	switch((string)$page_info['page_type_name']) {
@@ -803,7 +807,10 @@ public function initPageContents ($page)
 					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);				
+				);
+				if (!empty($page_to_apply) && is_numeric($page_to_apply)) {
+					$sqlData = array_merge($sqlData, $this->applyPageContents($page_to_apply));
+				}			
 				// create generator form
 				$GENERATORFORM = load('Content:GeneratorForm');
 				$GENERATORFORM->addGeneratorForm($page_info['id'], $sqlData);
@@ -817,7 +824,10 @@ public function initPageContents ($page)
 					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);				
+				);
+				if (!empty($page_to_apply) && is_numeric($page_to_apply)) {
+					$sqlData = array_merge($sqlData, $this->applyPageContents($page_to_apply));
+				}				
 				// create simple form
 				$SIMPLEFORM = load('content:simpleform');
 				$SIMPLEFORM->addSimpleForm($page_info['id'], $sqlData);
@@ -832,12 +842,16 @@ public function initPageContents ($page)
 					'apply_macros' => "1",
 					'allow_entry' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);				
+				);
+				// extend array
+				if (!empty($page_to_apply) && is_numeric($page_to_apply)) {
+					$sqlData = array_merge($sqlData, $this->applyPageContents($page_to_apply));
+				}				
 				// create simple guestbook
 				$SIMPLEGUESTBOOK = load('Content:SimpleGuestbook');
 				$SIMPLEGUESTBOOK->addSimpleGuestbook($page_info['id'], $sqlData);
 			break;
-		case 'WCOM_SIMPLE_PAGE':
+		case 'WCOM_SIMPLE_PAGE':		
 				// prepare sql data
 				$sqlData = array(
 					'id' => $page_info['id'],
@@ -846,7 +860,11 @@ public function initPageContents ($page)
 					'title_url' => $page_info['name_url'],
 					'apply_macros' => "1",
 					'date_added' => date('Y-m-d H:i:s')
-				);				
+				);
+				// extend array
+				if (!empty($page_to_apply) && is_numeric($page_to_apply)) {
+					$sqlData = array_merge($sqlData, $this->applyPageContents($page_to_apply));
+				}			
 				// create simple page
 				$SIMPLEPAGE = load('content:simplepage');
 				$SIMPLEPAGE->addSimplePage($page_info['id'], $sqlData);
@@ -859,6 +877,98 @@ public function initPageContents ($page)
 	}
 	
 	return true;
+}
+
+/**
+ * Prepares table structure to apply for the selected page types. This task has to
+ * be executed within the page creation. Takes the id of the page to apply
+ * first argument. Returns array.
+ * 
+ * @throws Content_PageException
+ * @param int Page id
+ * @param int Page id of page to apply
+ * @return array sqlData
+ */
+public function applyPageContents ($page)
+{
+	// access check
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be numeric');
+	}
+	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($page)) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
+	// get page to apply information
+	$page_to_apply_info = $this->selectPage($page);
+	
+	// handle the different page types
+	switch((string)$page_to_apply_info['page_type_name']) {
+		case 'WCOM_GENERATOR_FORM':
+				// load appropriate class
+				$GENERATORFORM = load('Content:GeneratorForm');
+				$page_to_apply = $GENERATORFORM->selectGeneratorForm($page_to_apply_info['id']);
+				// prepare sql data
+				$sqlData = array(
+					'content' => $page_to_apply['content'],
+					'content_raw' => $page_to_apply['content_raw'],
+					'text_converter' => $page_to_apply['text_converter']
+				);				
+				// return array
+				return $sqlData;
+			break;
+		case 'WCOM_SIMPLE_FORM':
+				// load appropriate class
+				$SIMPLEFORM = load('content:SimpleForm');
+				$page_to_apply = $SIMPLEFORM->selectSimpleForm($page_to_apply_info['id']);
+				// prepare sql data
+				$sqlData = array(
+					'content' => $page_to_apply['content'],
+					'content_raw' => $page_to_apply['content_raw'],
+					'text_converter' => $page_to_apply['text_converter']
+				);				
+				// return array
+				return $sqlData;
+			break;
+		case 'WCOM_SIMPLE_GUESTBOOK':
+				// load appropriate class
+				$SIMPLEGUESTBOOK = load('Content:SimpleGuestbook');
+				$page_to_apply = $SIMPLEGUESTBOOK->selectSimpleGuestbook($page_to_apply_info['id']);
+				// prepare sql data
+				$sqlData = array(
+					'content' => $page_to_apply['content'],
+					'content_raw' => $page_to_apply['content_raw'],
+					'text_converter' => $page_to_apply['text_converter']
+				);				
+				// return array
+				return $sqlData;
+			break;
+		case 'WCOM_SIMPLE_PAGE':
+				// load appropriate class
+				$SIMPLEPAGE = load('content:SimplePage');
+				$page_to_apply = $SIMPLEPAGE->selectSimplePage($page_to_apply_info['id']);
+				// prepare sql data
+				$sqlData = array(
+					'content' => $page_to_apply['content'],
+					'content_raw' => $page_to_apply['content_raw'],
+					'text_converter' => $page_to_apply['text_converter']
+				);				
+				// return array
+				return $sqlData;
+			break;
+		case 'WCOM_SIMPLE_DATE':
+		case 'WCOM_BLOG':
+		case 'WCOM_URL':
+		default:
+			break;
+	}
 }
 
 /**
