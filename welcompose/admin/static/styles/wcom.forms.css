@@ -135,6 +135,7 @@ height: 1.5em;
 }
 input.w130,
 input.w150,
+input.w155,
 input.w200,
 input.w300,
 input.w540,
@@ -150,6 +151,9 @@ width: 130px;
 }
 input.w150 {
 width: 150px;
+}
+input.w155 {
+width: 155px;
 }
 input.w200 {
 width: 200px;

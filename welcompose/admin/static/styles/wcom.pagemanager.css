@@ -73,6 +73,10 @@ display: block;
 width: 20px;
 height: 20px;
 }
+th a.down, th a.up {
+display:inline-block;
+position:relative;
+}
 a.down:link, a.down:visited {
 background: transparent url(../img/icons/down.gif) 0 0 no-repeat;
 }
@@ -296,7 +300,6 @@ float: left;
 width: auto;
 line-height: 1.5em;
 padding: 0;
-margin-right: 10px;
 }
 .filter label {
 display: block;

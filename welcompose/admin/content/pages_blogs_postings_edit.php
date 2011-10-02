@@ -189,6 +189,21 @@ try {
 	$FORM->applyFilter('start', 'strip_tags');
 	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 	
+	// hidden for limit
+	$FORM->addElement('hidden', 'limit');
+	$FORM->applyFilter('limit', 'trim');
+	$FORM->applyFilter('limit', 'strip_tags');
+	$FORM->addRule('limit', gettext('limit is expected to be numeric'), 'numeric');
+	
+	// hidden for search_name
+	$FORM->addElement('hidden', 'search_name');
+	$FORM->applyFilter('search_name', 'trim');
+	$FORM->applyFilter('search_name', 'strip_tags');
+	
+	// hidden for search_name
+	$FORM->addElement('hidden', 'macro');
+	$FORM->applyFilter('macro', 'trim');
+	
 	// hidden for frontend view control
 	$FORM->addElement('hidden', 'preview');
 	$FORM->applyFilter('preview', 'trim');
@@ -453,6 +468,9 @@ try {
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($blog_posting['id'], null),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME),
+		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
 		'title' => Base_Cnc::ifsetor($blog_posting['title'], null),
 		'title_url' => Base_Cnc::ifsetor($blog_posting['title_url'], null),
 		'summary' => Base_Cnc::ifsetor($blog_posting['summary_raw'], null),
@@ -758,17 +776,25 @@ try {
 			@ob_end_clean();
 		}
 
-		// save request start range
+		// save request params 
 		$start = $FORM->exportValue('start');
-		$start = (!empty($start)) ? $start : 0;
+		$limit = $FORM->exportValue('limit');
+		$search_name = $FORM->exportValue('search_name');
+		$macro = $FORM->exportValue('macro');
+		
+		// append request params
+		$redirect_params = (!empty($start)) ? '&start='.$start : '&start=0';
+		$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+		$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
+		$redirect_params .= (!empty($search_name)) ? '&search_name='.$search_name : '';
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_blogs_postings_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id')."&start=".$start);
+						$FORM->exportValue('page')."&id=".$FORM->exportValue('id').$redirect_params);
 		} else {
 			header("Location: pages_blogs_postings_select.php?page=".
-						$FORM->exportValue('page')."&start=".$start);
+						$FORM->exportValue('page').$redirect_params);
 		}
 		exit;
 	}

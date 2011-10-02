@@ -13,24 +13,9 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
- 
-<script type="text/javascript">
-var response = '{$session.response}';
-var mediamanager = 1;
-var pagetype = '{$page.page_type_name}';
-var checkbox_status = new Array('blog_posting_meta_use')
-</script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
-
-
 </head>
 
 <body>
@@ -258,5 +243,19 @@ var checkbox_status = new Array('blog_posting_meta_use')
 {include file="_inc_footer.html"}
 
 <!-- container --></div>
+
+<script type="text/javascript">
+var response = '{$session.response}';
+var mediamanager = 1;
+var pagetype = '{$page.page_type_name}';
+var checkbox_status = new Array('blog_posting_meta_use')
+</script>
+
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
 </body>
 </html>

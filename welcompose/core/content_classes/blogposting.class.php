@@ -348,11 +348,14 @@ public function selectBlogPosting ($id)
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
  * <li>order_marco, string, otpional: How to sort the result set.
+ * <li>title, string, optional: title.
+ * <li>search_name, string, opional: Search string input.
  * Supported macros:
  *    <ul>
  *		<li>DATE_MODIFIED: sorty by date modified</li>
  *		<li>DATE_ADDED: sort by date added</li>
  *	 	<li>RANDOM: sort by random</li>
+ *	 	<li>TITLE: sort by title</li>
  *    </ul>
  * </li>
  * </ul>
@@ -371,16 +374,18 @@ public function selectBlogPostings ($params = array())
 	// define some vars
 	$user = null;
 	$page = null;
+	$start = null;
+	$limit = null;
 	$draft = null;
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
-	$current_date = null;
 	$tag_word_url = null;
-	$timeframe = null;
 	$order_macro = null;
-	$start = null;
-	$limit = null;
+	$timeframe = null;
+	$current_date = null;
+	$title = null;
+	$search_name = null;
 	$bind_params = array();
 	
 	// input check
@@ -391,13 +396,15 @@ public function selectBlogPostings ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'order_macro':
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
-			case 'current_date':
 			case 'tag_word_url':
 			case 'timeframe':
-			case 'order_macro':
+			case 'current_date':
+			case 'title':
+			case 'search_name':
 					$$_key = (string)$_value;
 				break;
 			case 'user':
@@ -418,7 +425,8 @@ public function selectBlogPostings ($params = array())
 	$macros = array(
 		'DATE_ADDED' => '`content_blog_postings`.`date_added`',
 		'DATE_MODIFIED' => '`content_blog_postings`.`date_modified`',
-		'RANDOM' => 'rand()'
+		'RANDOM' => 'rand()',
+		'TITLE' => '`content_blog_postings`.`title`'
 	);
 	
 	// load helper class
@@ -578,13 +586,21 @@ public function selectBlogPostings ($params = array())
 		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
 		$bind_params['day_added'] = (string)$day_added;
 	}	
-	if (!empty($current_date)) {
-		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
-			$current_date);
-	}	
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
 			$timeframe);
+	}
+	if (!empty($current_date)) {
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
+			$current_date);
+	}
+	if (!empty($title) && is_string($title)) {
+		$sql .= " AND `content_blog_postings`.`title` = :title ";
+		$bind_params['title'] = (string)$title;
+	}
+	if (!empty($search_name)) {
+		$sql .= " AND ".$HELPER->_searchLikewise('`content_blog_postings`.`title`',
+			$search_name);
 	}
 	
 	// aggregate result set
@@ -643,9 +659,10 @@ public function countBlogPostings ($params = array())
 	$year_added = null;
 	$month_added = null;
 	$day_added = null;
-	$current_date = null;
 	$tag_word_url = null;
 	$timeframe = null;
+	$current_date = null;
+	$search_name = null;
 	$bind_params = array();
 	
 	// input check
@@ -659,9 +676,10 @@ public function countBlogPostings ($params = array())
 			case 'year_added':
 			case 'month_added':
 			case 'day_added':
-			case 'current_date':
 			case 'tag_word_url':
 			case 'timeframe':
+			case 'current_date':
+			case 'search_name':
 					$$_key = (string)$_value;
 				break;
 			case 'user':
@@ -746,14 +764,18 @@ public function countBlogPostings ($params = array())
 	if (!is_null($day_added) && is_numeric($day_added)) {
 		$sql .= " AND `content_blog_postings`.`day_added` = :day_added ";
 		$bind_params['day_added'] = (string)$day_added;
-	}
-	if (!empty($current_date)) {
-		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
-			$current_date);
 	}		
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_blog_postings`.`date_added`',
 			$timeframe);
+	}
+	if (!empty($current_date)) {
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_blog_postings`.`date_added`',
+			$current_date);
+	}
+	if (!empty($search_name)) {
+		$sql .= " AND `content_blog_postings`.`title` = :search_name ";
+		$bind_params['search_name'] = $search_name;
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);

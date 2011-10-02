@@ -137,8 +137,9 @@ try {
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
-		'limit' => 20,
-		'order_macro' => 'DATE_ADDED:DESC'
+		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20,
+		'order_macro' => (!empty($_REQUEST['macro'])) ? $_REQUEST['macro'] : 'DATE_ADDED:DESC',
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	));
 	$BASE->utility->smarty->assign('blog_postings', $blog_postings);
 	
@@ -146,7 +147,8 @@ try {
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC)
+		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
 	$posting_count = $BLOGPOSTING->countBlogPostings($select_params);
 	$BASE->utility->smarty->assign('posting_count', $posting_count);
@@ -155,7 +157,8 @@ try {
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC)
+		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
 	$total_posting_count = $BLOGPOSTING->countBlogPostings($select_params);
 	$BASE->utility->smarty->assign('total_posting_count', $total_posting_count);
@@ -170,7 +173,10 @@ try {
 	$request = array(
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	

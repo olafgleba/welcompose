@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
@@ -19,8 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
 </head>
 
 <body>
@@ -92,7 +91,15 @@
 <option value="1"{if $request.draft == "1"} selected="selected"{/if}>{i18n Yes}</option>
 <option value="0"{if $request.draft == "0"} selected="selected"{/if}>{i18n No}</option>
 </select>
-&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
+<label for="limit">{i18n Show per page}</label> 
+<select id="limit" name="limit">
+<option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
+<option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
+<option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
+</select>
+<label for="search_name">{i18n Search by title}</label> 
+<input type="text" name="search_name" class="w155" id="search_name" value="{$request.search_name}" />
+&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
 <!-- filter --></div>
@@ -104,7 +111,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;draft={$request.draft|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.draft)}&amp;draft={$request.draft|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li>  
 {/if}
 {/foreach}
 </ul>
@@ -113,19 +120,21 @@
 {if !empty($blog_postings)}
 <table summary="{i18n Available Blog Postings}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="295" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="285" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="190" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="120" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Title} <span class="az"></span> <span class="za"></span></th>
-<th class="template_name">{i18n Date} <span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Title} &nbsp;<a title="{i18n Display by title descending}" class="down"  href="pages_blogs_postings_select.php?page={$page.id}&amp;macro=TITLE:DESC&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></a> <a title="{i18n Display by title ascending}" class="up" href="pages_blogs_postings_select.php?page={$page.id}&amp;macro=TITLE&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></a><span class="az"></span> <span class="za"></span></th>
+<th class="template_name">{i18n Date} &nbsp;<a title="{i18n Display by date descending}" class="down"  href="pages_blogs_postings_select.php?page={$page.id}&amp;macro=DATE_ADDED:DESC&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></a> <a title="{i18n Display by date ascending}" class="up" href="pages_blogs_postings_select.php?page={$page.id}&amp;macro=DATE_ADDED&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></a><span class="az"></span> <span class="za"></span></th>
 <th class="template_name">{i18n Comments} <span class="az"></span> <span class="za"></span></th>
 <th class="template_name">{i18n Trackbacks} <span class="az"></span> <span class="za"></span></th>
 <th>{i18n Edit}</th>
+<th>{i18n Duplicate}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$blog_postings item=_posting}
@@ -134,8 +143,9 @@
 <td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%M %Z"}</td>
 <td><a href="../community/blogcomments_select.php?page={$page.id|escape:"url"}&amp;posting={$_posting.id|escape:"url"}">{$_posting.comment_count|escape:"html"}</a></td>
 <td>{$_posting.trackback_count|escape:"html"}</td>
-<td><a class="edit" href="pages_blogs_postings_edit.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
-<td><a class="delete confirmDelBlogPosting" href="pages_blogs_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+<td><a class="edit" href="pages_blogs_postings_edit.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Edit}"></a></td>
+<td><a class="duplicate" href="pages_blogs_postings_copy.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Duplicate}"></a></td>
+<td><a class="delete confirmDelBlogPosting" href="pages_blogs_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>
@@ -146,7 +156,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.draft)}&amp;draft={$request.draft|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li>
 {/if}
 {/foreach}
 </ul>
