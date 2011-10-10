@@ -1,6 +1,7 @@
 -- =============================================================================
 -- Diagram Name: wcom
 -- Created on: 12.02.2007 12:06:08
+-- Last Modified: 10.10.2011 14:46
 -- Diagram Version: 206
 -- =============================================================================
 DROP DATABASE IF EXISTS `wcom`;
@@ -630,6 +631,7 @@ CREATE TABLE `content_pages` (
   `protect` enum('0','1') DEFAULT '0',
   `index_page` enum('0','1') DEFAULT '0',
   `draft` enum('0','1') DEFAULT '0',
+	`exclude` enum('0','1') DEFAULT '0',
   `no_follow` enum('0','1') DEFAULT '0',
   `image_small` int(11) UNSIGNED,
   `image_medium` int(11) UNSIGNED,
