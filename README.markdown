@@ -10,7 +10,7 @@ If you are lookin for a *click-to-go* solution with hundreds of plugins, predefi
 
 The foremost goal was to give HTMl/CSS aware programmers and designers a way to build there own site structure without any intrusion of the CMS itself. No markup is predefined/printed at all. It all depends what the designer/programmer does within the templates.   
 
-****
+
 
 ## Suggested users ##
 
@@ -18,7 +18,7 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * Designers who have a slightly knowledge of HTML/CSS but do not want to struggle with PHP
 * Clients who have no HTML knowledge at all but want just take care of their website contents by themselves
 
-****
+
 
 ## Websites using Welcompose (Excerpt) ##
 
@@ -31,7 +31,7 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * [http://christine-westermann.de/](Christine Westermann)
 * [http://jessica-kastrop.de/](Jessica Kastrop)
 
-****
+
 
 ## Features ##
 
@@ -47,19 +47,19 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * Extensive options to build SEO web sites
 * Platform and Browser independent (Works with IE >= 7, FF >= 1.5, Safari >=3.12)
 
-****
+
 
 ## Software Downloads ##
 
 [http://welcompose.de/cms/downloads/](http://welcompose.de/cms/downloads/)
 
-****
+
 
 ## Issue Tracking and Tickets ##
 
 [http://welcompose.lighthouseapp.com/](http://welcompose.lighthouseapp.com/)
 
-****
+
 
 ## Documentation ##
 
@@ -90,7 +90,7 @@ Current API Documentation (phpDocumentor):
 
 [http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip](http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip)
 
-****
+
 
 ## License ##
 
