@@ -885,6 +885,12 @@
 			<editable>0</editable>
 		</text-macro>
 		<text-macro>
+			<name>Bundled Embed Video Generator</name>
+			<internal_name>embed_video</internal_name>
+			<type>pre</type>
+			<editable>0</editable>
+		</text-macro>
+		<text-macro>
 			<name>Bundled Media URL Generator</name>
 			<internal_name>get_media</internal_name>
 			<type>pre</type>

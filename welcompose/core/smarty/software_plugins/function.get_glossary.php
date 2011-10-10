@@ -86,10 +86,9 @@ function smarty_function_get_glossary ($params, &$smarty)
 					);
 			}
 		}
-	
+
 		// prepare result 
-		$result = $glossary_pager;
-	
+		$result = $glossary_pager;	
 	}
 	
 	if ($action == 'content') {
