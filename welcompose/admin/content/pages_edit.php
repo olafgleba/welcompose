@@ -364,7 +364,7 @@ try {
 		$sqlData['template_set'] = $FORM->exportValue('template_set');
 		$sqlData['index_page'] = $FORM->exportValue('index_page');
 		$sqlData['protect'] = $FORM->exportValue('protect');
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
+		$sqlData['draft'] = $FORM->exportValue('draft');
 		$sqlData['exclude'] = $FORM->exportValue('exclude');
 		$sqlData['no_follow'] = $FORM->exportValue('no_follow');
 		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');

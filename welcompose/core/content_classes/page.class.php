@@ -290,8 +290,8 @@ public function selectPage ($id)
  * <li>type, int, optional: Page type id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
- * <li>exclude, int, optional: if set exclude page from navigation</li>
- * <li>draft, int, optional: if set include pages with param draft</li>
+ * <li>exclude, int, optional: if set exclude page from navigation (only internal use)</li>
+ * <li>draft, int, optional: if set include pages with param draft (only internal use)</li>
  * <li>protect, int, optional: if set exclude protected pages</li>
  * </ul>
  * 
@@ -437,14 +437,14 @@ public function selectPages ($params = array())
 	if (!empty($protect) && is_numeric($protect)) {
 		$sql .= " AND `content_pages`.`protect` IS NULL ";
 	}
-	// Include only visible pages
-	if (!empty($exclude) && is_numeric($exclude)) {
+
+	// On default (var not set) include only visible pages
+	if (is_null($exclude)) {
 		$sql .= " AND `content_pages`.`exclude` IS NULL ";
-	}
-		
-	// Include only result rows without drafts
-	if (is_null($draft) ) {
-		$sql .= " AND `content_pages`.`draft` = '0' ";
+	}		
+	// On default (var not set) include only result rows without drafts
+	if (is_null($draft)) {
+		$sql .= " AND `content_pages`.`draft` IS NULL ";
 	}
 			
 	// add sorting
