@@ -335,6 +335,9 @@ height: 715px;
 color: #ff620d;
 padding-left: 10px;
 }
+#modalBody table p {
+padding-bottom: 12px;
+}
 
 #modalContainer span#indicator_pagesLinks {
 float: right;
@@ -351,7 +354,8 @@ padding: 0 12px 0 0;
 #modalContainer #globalboxes #firstNode table,
 #modalContainer #structuraltemplates #firstNode table,
 #modalContainer #abbreviations #firstNode table,
-#modalContainer #blogtags #firstNode table {
+#modalContainer #blogtags #firstNode table,
+#modalContainer #smartyplugins #firstNode table {
 float: left;
 width: 425px;
 padding: 0;
@@ -361,13 +365,69 @@ background: #f9f9f9;
 }
 /* eof */
 
+/* internal links - smarty plugins */
+#modalContainer #smartyplugins #firstNode table {
+width: 699px;
+}
+#modalContainer #smartyplugins #firstNode table td.initialNode {
+width: 300px;
+}
+#modalContainer #smartyplugins #firstNode table td.description p {
+padding-top: 3px;
+}
+#modalContainer #smartyplugins #firstNode table td a {
+color: #ff620d;
+}
+#modalContainer #smartyplugins #firstNode table td.description a {
+background-image: none;
+padding-left: 0;
+}
+#modalContainer #smartyplugins #firstNode table th {
+padding: 10px;
+background-color: #fff;
+}
+#modalContainer #smartyplugins #firstNode table tr:hover {
+background-color: inherit;
+}
+#modalContainer #smartyplugins #firstNode table td.description a:hover {
+text-decoration: underline;
+}
+#modalContainer #smartyplugins #firstNode table td dt {
+font-weight: bold;
+padding-bottom: 3px;
+}
+#modalContainer #smartyplugins #firstNode table td dd ul {
+padding-top: 6px;
+list-style: none;
+}
+#modalContainer #smartyplugins #firstNode table td dd li {
+padding-bottom: 3px;
+line-height: normal;
+}
+#modalContainer #smartyplugins #firstNode table td dd li:first-child {
+padding-bottom: 5px;
+line-height: normal;
+font-style: italic;
+}
+#modalContainer #smartyplugins #firstNode table td dt span {
+font-weight: normal;
+}
+#modalContainer #smartyplugins #firstNode table td dd {
+padding-bottom: 8px;
+line-height: 1.5em;
+}
+
+
+
+
 /* internal links - abbreviations */
 #modalContainer #abbreviations #firstNode table {
 width: 720px;
 }
 #modalContainer #abbreviations #firstNode table td,
 #modalContainer #structuraltemplates #firstNode table td,
-#modalContainer #blogtags #firstNode table td {
+#modalContainer #blogtags #firstNode table td,
+#modalContainer #smartyplugins #firstNode table td {
 color: #000;
 }
 td.abbreviation {

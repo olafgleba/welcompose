@@ -238,6 +238,56 @@ try {
 			'href' => $object['content']
 		);
 
+	} elseif ($_REQUEST['type'] == 'smartyplugin') {	
+	
+		// This callback is not pulled from database as it insert
+		// only syntax for correponding smarty plugin/snippet.
+		
+		// get target
+		$plugin = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_SMARTY_CLASS_NAME);
+		
+		switch ((string)$plugin) {
+			case 'select_simple' :
+				$syntax = '{select_simple ns="[Application|Community|Content|Media]" class="[classToUse]" method="[classMethodToUse]" var="[variable]" id="[id]"}';
+			break;
+			case 'select_simple_page' :
+				$syntax = '{select_simple ns="[Application|Community|Content|Media]" class="[classToUse]" method="[classMethodToUse]" var="[variable]" page="[page_id]" id="[id]"}';
+			break;
+			case 'select_named' :
+				$syntax = '{select_named ns="[Application|Community|Content|Media]" class="[classToUse]" method="[classMethodToUse]" var="[variable]"}';
+			break;
+			case 'tag_cloud' :
+				$syntax = '{tag_cloud page=$page.id var="[variable]" limit="[number]" range="[number]"}';
+			break;
+			case 'get_glossary' :
+				$syntax = '{get_glossary var="[variable]" action="[pager|content]"}';
+			break;
+			case 'breadcrumb' :
+				$syntax = '{breadcrumb current_page=$page.id var="[variable]"}';
+			break;
+			case 'social_bookmarks' :
+				$syntax = '{social_bookmarks page=$page.id var="[variable]"}';
+			break;
+			case 'include' :
+				$syntax = '{include file="wcom:[nameOfTemplateType].`$page.id`"}';
+			break;
+		}
+		// define insert type static as reference
+		// this is because we want to insert the raw content nonetheless the path references
+		$insert_type = 'InternalReference';
+
+		// redefine var _text
+		// this is because we defined the insert type manually and therefore
+		// the href preparation in line 92 - 97 could not take place here.
+		// so we have to make a condition again
+		$_text = (!empty($_REQUEST['text'])) ? stripslashes($_REQUEST['text']) : '';
+		
+		// prepare callback args
+		$args = array(
+			'text' => $_text,
+			'href' => $syntax
+		);
+
 	} elseif ($_REQUEST['type'] == 'abbreviation') {	
 		// load abbreviation class
 		$ABBREVIATION = load('Content:Abbreviation');

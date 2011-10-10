@@ -425,6 +425,9 @@ margin: 23px 2px 0 140px;
 height: 16px;
 list-style: none;
 }
+.actnav.sec {
+margin: 3px 2px 0 140px;
+}
 .actnav li {
 display: inline;
 }

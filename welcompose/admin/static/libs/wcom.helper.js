@@ -1066,7 +1066,8 @@ function Helper_processCallbacks (elem)
 			'globalboxes_links': this.callbacksPopupWindowWidth460,
 			'globalfiles_links': this.callbacksPopupWindowWidth460,
 			'globaltemplates_links': this.callbacksPopupWindowWidth460,
-			'boxes_links': this.callbacksPopupWindowWidth745
+			'boxes_links': this.callbacksPopupWindowWidth745,
+			'smartyplugins_links': this.callbacksPopupWindowWidth745
 		};
 
 		// temp var used in for loop
@@ -1089,7 +1090,8 @@ function Helper_processCallbacks (elem)
 			'globalboxes_links': 'templating',
 			'globalfiles_links': 'templating',
 			'globaltemplates_links': 'templating',
-			'boxes_links': 'templating'
+			'boxes_links': 'templating',
+			'smartyplugins_links': 'templating',
 		};
 		
 		// temp var used in for loop
