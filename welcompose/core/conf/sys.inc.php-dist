@@ -41,6 +41,9 @@ index.php_lifetime = 0
 [output]
 gunzip = 0
 
+[cookie]
+lifetime = 86400
+
 [plugins]
 textconverter_dir = 
 textmacro_dir = 

@@ -52,7 +52,7 @@ class Base_Cookie {
 	 * Expiration date of the cookie (offset to gmmktime())
 	 * @var int
 	 */
-	protected $_expiration = 7200;
+	protected $_expiration = null;
 	
 	/**
 	 * Cookie path
@@ -101,6 +101,12 @@ public function __construct($app_key, $cookie_name)
 	
 	// get cookie data
 	$this->readCookieData();
+	
+	// get base instance
+	$this->base = load('base:base');
+	
+	// Expiration date of the cookie (offset to gmmktime())
+	$this->_expiration = $this->base->_conf['cookie']['lifetime'];
 }
 
 /** 
