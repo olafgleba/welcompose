@@ -6,7 +6,7 @@ Welcompose is a open source web content management system for small to middle We
 
 ## What Welcompose is \*not* ##
 
-If you are lookin for a *click-to-go* solution with hundreds of plugins, predefined content or/and uneditable markup and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.so.
+If you are lookin for a *click-to-go* solution with hundreds of plugins, predefined content or/and uneditable markup and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.s.o.
 
 The foremost goal was to give HTMl/CSS aware programmers and designers a way to build there own site structure without any intrusion of the CMS itself. No markup is predefined/printed at all. It all depends what the designer/programmer does within the templates.   
 
