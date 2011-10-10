@@ -10,6 +10,7 @@
 <title>{i18n Welcompose Admin &ndash; Add Project}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
  
 <script type="text/javascript">
@@ -89,8 +90,10 @@ var response = '{$session.response}';
 <label class="cont h13" for="project_selected_users"><span class="bez">{$form.selected_users.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.selected_users.html}</label>
 
-{$form.submit.html}
+<label class="cont chbx" for="page_apply_structure"><span class="bez">{$form.apply_structure.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.apply_structure.html}</label>
 
+{$form.submit.html}
 </fieldset>
 </form>
 
