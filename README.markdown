@@ -1,15 +1,6 @@
 # Welcompose Content Management System #
 
-Welcompose is a open source web content management system for small to middle Websites focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites.
-
-
-
-## What Welcompose is \*not* ##
-
-If you are lookin for a *click-to-go* solution with hundreds of plugins, predefined content or/and uneditable markup and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.s.o.
-
-The foremost goal was to give HTMl/CSS aware programmers and designers a way to build there own site structure without any intrusion of the CMS itself. No markup is predefined/printed at all. It all depends what the designer/programmer does within the templates.   
-
+Welcompose is a open source web content management system for small to middle Websites focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites. 
 
 
 ## Suggested users ##
@@ -18,6 +9,12 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * Designers who have a slightly knowledge of HTML/CSS but do not want to struggle with PHP
 * Clients who have no HTML knowledge at all but want just take care of their website contents by themselves
 
+
+## What Welcompose is \*not* ##
+
+If you are lookin for a *click-to-go* solution with hundreds of plugins, predefined content or/and uneditable markup and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.s.o.
+
+The foremost goal was to give HTMl/CSS aware programmers and designers a way to build there own site structure without any intrusion of the CMS itself. No markup is predefined/printed at all. It all depends what the designer/programmer does within the templates.  
 
 
 ## Websites using Welcompose (Excerpt) ##
@@ -30,7 +27,6 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * [http://ankeloenne.com/](Büro Lönne GmbH)
 * [http://christine-westermann.de/](Christine Westermann)
 * [http://jessica-kastrop.de/](Jessica Kastrop)
-
 
 
 ## Features ##
