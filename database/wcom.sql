@@ -776,6 +776,26 @@ CREATE TABLE `content_blog_tags` (
 )
 ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
+-- Drop table content_event_tags
+DROP TABLE IF EXISTS `content_event_tags`;
+
+CREATE TABLE `content_event_tags` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page` int(11) UNSIGNED NOT NULL,
+  `first_char` char(1),
+  `word` varchar(255),
+  `word_url` varchar(255),
+  `occurrences` int(11) UNSIGNED,
+  PRIMARY KEY(`id`),
+  INDEX `page`(`page`),
+  INDEX `first_char`(`first_char`),
+  CONSTRAINT `content_event_tags.page2content_pages.id` FOREIGN KEY (`page`)
+    REFERENCES `content_pages`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
 -- Drop table content_boxes
 DROP TABLE IF EXISTS `content_boxes`;
 
@@ -1023,6 +1043,54 @@ CREATE TABLE `content_blog_postings` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `content_blog_postings.text_conv2application_text_conv.id` FOREIGN KEY (`text_converter`)
+    REFERENCES `application_text_converters`(`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+)
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- Drop table content_event_postings
+DROP TABLE IF EXISTS `content_event_postings`;
+
+CREATE TABLE `content_event_postings` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `page` int(11) UNSIGNED NOT NULL,
+  `user` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255),
+  `title_url` varchar(255),
+  `content_raw` text,
+  `content` text,
+  `text_converter` int(11) UNSIGNED,
+  `apply_macros` enum('0','1') NOT NULL DEFAULT '0',
+  `meta_use` enum('0','1') DEFAULT '0',
+  `meta_title_raw` varchar(255),
+  `meta_title` varchar(255),
+  `meta_keywords` text,
+  `meta_description` text,
+  `draft` enum('0','1') DEFAULT '0',
+  `tag_count` int(11) UNSIGNED DEFAULT '0',
+  `tag_array` text,
+  `date_modified` timestamp(14),
+  `date_added` datetime,
+  `day_added` char(2),
+  `month_added` char(2),
+  `year_added` char(4),
+  PRIMARY KEY(`id`),
+  INDEX `page`(`page`),
+  INDEX `user`(`user`),
+  INDEX `text_converter`(`text_converter`),
+  INDEX `day_added`(`day_added`),
+  INDEX `month_added`(`month_added`),
+  INDEX `year_added`(`year_added`),
+  CONSTRAINT `content_event_postings.page2content_pages.id` FOREIGN KEY (`page`)
+    REFERENCES `content_pages`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_event_postings.user2user_users.id` FOREIGN KEY (`user`)
+    REFERENCES `user_users`(`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `content_event_postings.text_conv2application_text_conv.id` FOREIGN KEY (`text_converter`)
     REFERENCES `application_text_converters`(`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE
@@ -1279,6 +1347,27 @@ CREATE TABLE `content_blog_tags2content_blog_postings` (
     ON UPDATE NO ACTION,
   CONSTRAINT `content_blog_tags.id2content_blog_postings.id` FOREIGN KEY (`tag`)
     REFERENCES `content_blog_tags`(`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+-- Drop table content_event_tags2content_event_postings
+DROP TABLE IF EXISTS `content_event_tags2content_event_postings`;
+
+CREATE TABLE `content_event_tags2content_event_postings` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `posting` int(11) UNSIGNED NOT NULL,
+  `tag` int(11) UNSIGNED NOT NULL,
+  PRIMARY KEY(`id`),
+  INDEX `posting`(`posting`),
+  INDEX `tag`(`tag`),
+  CONSTRAINT `content_event_postings.id2content_event_tags.id` FOREIGN KEY (`posting`)
+    REFERENCES `content_event_postings`(`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `content_event_tags.id2content_event_postings.id` FOREIGN KEY (`tag`)
+    REFERENCES `content_event_tags`(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
