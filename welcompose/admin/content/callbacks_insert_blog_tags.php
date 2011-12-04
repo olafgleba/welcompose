@@ -125,14 +125,14 @@ try {
 	
 	/**
 	* Two additional request params are available (dId, dPage), if this callback
-	* is invoked from a blog posting edit page, one (dPage) when invoked
-	* on a blog posting add page. Both params has no
-	* meaning for the callback params array above.
+	* is invoked from a blog posting edit page, both are available, only one (dPage)
+	* when we are on a posting add page. 
+	* Both params has no meaning for the callback params array above.
 	* 
 	* 'dId => posting id
 	* 'dPage' => page id
 	**/
-	
+			
 	// if we are in blog posting edit mode
 	if (!empty($_REQUEST['dId'])) {
 
@@ -140,22 +140,22 @@ try {
 		$blog_tags_all = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC)));
 			
 		// get blog tags of the current posting
-		$blog_tags_page = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC),'posting' => Base_Cnc::filterRequest($_REQUEST['dId'], WCOM_REGEX_NUMERIC)));
+		$blog_tags_posting = $BLOGTAG->selectBlogTags(array('page' => Base_Cnc::filterRequest($_REQUEST['dPage'], WCOM_REGEX_NUMERIC),'posting' => Base_Cnc::filterRequest($_REQUEST['dId'], WCOM_REGEX_NUMERIC)));
 		
 		// if tags are already set for the particular posting, 
-		// differ the two arrays, otherwise assign the all page tags
-		if (!empty($blog_tags_page)) {		
+		// differ the two arrays, otherwise assign all page tags
+		if (!empty($blog_tags_posting)) {		
 			// reduce arrays to get a useable result
 			// within array_diff() function in the next step
 			foreach ($blog_tags_all as $_key => $_field) {
 				$_blog_tags_all[$_field['id']] = $_field['word'];
 			}	
-			foreach ($blog_tags_page as $_key => $_field) {
-				$_blog_tags_page[$_field['id']] = $_field['word'];
+			foreach ($blog_tags_posting as $_key => $_field) {
+				$_blog_tags_posting[$_field['id']] = $_field['word'];
 			}
 			
 			// compare both arrays and save the different pairs  
-			$diff = array_diff($_blog_tags_all, $_blog_tags_page);
+			$diff = array_diff($_blog_tags_all, $_blog_tags_posting);
 				
 			// build the new tag array
 			foreach ($diff as $_key => $_field) {
