@@ -1071,6 +1071,58 @@ public function datetimeFromQuickFormDateWithNull ($values)
 	return sprintf('%s-%s-%s %s:%s:00', $year, $month, $day, $hour, $minute);
 }
 
+/**
+ * Creates date string as expected by MySQL's date fields from
+ * QuickForm's date element.
+ *
+ * @var array
+ * @return string
+ */
+public function dateFromQuickFormDate ($values)
+{
+	// import date elements from value array
+	$day = (int)Base_Cnc::ifsetor($values['d'], null);
+	$month = (int)Base_Cnc::ifsetor($values['m'], null);
+	$year = (int)Base_Cnc::ifsetor($values['Y'], null);
+	
+	// if any of the first three date elements is null, return NULL
+	if (empty($day) || empty($month) || empty($year)) {
+		return null;
+	}
+	
+	// prepare date string
+	$day = str_pad($day, 2, '0', STR_PAD_LEFT);
+	$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+	$year = str_pad($year, 4, '0', STR_PAD_LEFT);
+	
+	return sprintf('%s-%s-%s', $year, $month, $day);
+}
+
+/**
+ * Creates time string as expected by MySQL's time fields from
+ * QuickForm's date element.
+ *
+ * @var array
+ * @return string
+ */
+public function timeFromQuickFormDate ($values)
+{
+	// import date elements from value array
+	$hour = (int)Base_Cnc::ifsetor($values['H'], null);
+	$minute = (int)Base_Cnc::ifsetor($values['i'], null);
+	
+	// if any of the first time elements is null, return NULL
+	if (empty($hour)) {
+		return null;
+	}
+	
+	// prepare time string
+	$hour = str_pad($hour, 2, '0', STR_PAD_LEFT);
+	$minute = str_pad($minute, 2, '0', STR_PAD_LEFT);
+	
+	return sprintf('%s:%s:00', $hour, $minute);
+}
+
 // end of class
 }
 
