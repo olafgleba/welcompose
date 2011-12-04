@@ -42,6 +42,9 @@ index.php_lifetime = 0
 [output]
 gunzip = 0
 
+[cookie]
+lifetime = 86400
+
 [plugins]
 textconverter_dir = "/www/gits/welcompose/welcompose/core/plugins/textconverters"
 textmacro_dir = "/www/gits/welcompose/welcompose/core/plugins/textmacros"
@@ -77,10 +80,26 @@ blog_archive_month = "/index.php?project_name=<project_name>&amp;page_name=<page
 blog_archive_month_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 blog_archive_month_start = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
 blog_archive_month_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+event_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_start_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_start_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+event_atom_10_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_atom_10_start = "/index.php?project_name=<project_name>&amp;action=Atom10"
+event_atom_10_start_tag = "/index.php?project_name=<project_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+event_rss_20_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&amp;tag=<tag_word>"
+event_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rss20"
+event_rss_20_start_tag = "/index.php?project_name=<project_name>&amp;action=Rss20&amp;tag=<tag_word>"
 generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-global_template_url = "/global_template.php?name=<global_file_name>&amp;project_name=<project_name>"
-global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project_name=<project_name>&amp;start=<start>"
+global_template_url = "/global_template.php?project_name=<project_name>&amp;name=<global_template_name>"
+global_template_url_start = "/global_template.php?project_name=<project_name>&amp;name=<global_template_name>&amp;&amp;start=<start>"
 simple_date_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_date_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 simple_date_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
