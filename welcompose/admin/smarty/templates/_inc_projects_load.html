@@ -5,7 +5,7 @@
 <input type="hidden" name="go_back_file" value="{$go_back_file}" />
 </fieldset>
 <div id="projects"><span>{i18n Project}:</span>
-<select name="id" class="fselect">
+<select name="project_id" class="fselect">
 {foreach from=$projects item=_project}
 <option value="{$_project.id|escape:"html"}"{if $_project.id == $wcom_current_project} selected="selected"{/if}>{$_project.name|escape:"html"}</option>
 {/foreach}
