@@ -117,13 +117,11 @@ var definitions = {
 	'a.showNextNode' : function(el){
 		el.onclick = function(){
 			Helper.showNextNode(this);
-			return false;
 		}
 	},
 	'a.showNextNodeBoxes' : function(el){
 		el.onclick = function(){
 			Helper.showNextNodeBoxes(this);
-			return false;
 		}
 	},
 	'#insert_as_reference' : function(el){

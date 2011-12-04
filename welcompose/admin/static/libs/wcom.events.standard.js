@@ -244,9 +244,21 @@ var definitions = {
 			return false;
 		}
 	},
+	'.confirmDelEventPosting' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelEventPostingAction(this);
+			return false;
+		}
+	},
 	'.confirmDelSimpleDate' : function(el){
 		el.onclick = function(){
 			Helper.confirmDelSimpleDateAction(this);
+			return false;
+		}
+	},
+	'.confirmDelUser' : function(el){
+		el.onclick = function(){
+			Helper.confirmDelUserAction(this);
 			return false;
 		}
 	},

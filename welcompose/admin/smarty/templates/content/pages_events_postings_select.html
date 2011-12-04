@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="language" content="de" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta http-equiv="imagetoolbar" content="no" /> 
+<title>{i18n Welcompose Admin &ndash; Pages &#62; Event Postings}</title>
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
+
+<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
+<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
+</head>
+
+<body>
+<div id="container">
+
+<div id="logo">
+<p>{i18n Welcompose}</p>
+<!-- logo --></div>
+
+<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+
+<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+
+{include file="_inc_topnav.html" area="contents"}
+
+{include file="_inc_projects_load.html" go_back_area="content" go_back_file="pages_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+{include file="content/_inc_navigation.html"}
+
+<!-- topsubsubnavcon static -->
+<div id="topsubsubnavconstatic">
+<ul id="topsubsubnav">
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'EventPosting', 'Manage')}
+		<li class="on">{i18n Event Postings}</li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	{/if}
+</ul>
+</div>
+<!-- topsubsubnavcon static eof -->
+
+<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} : {i18n Event Postings}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+
+<div id="content">
+
+<h1>{i18n Event Postings}</h1>
+
+<div class="secnav474_nav_x"><a href="pages_events_postings_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<br class="clearb" />
+
+<div class="filter clearfix">
+<h2>{i18n Filter:}</h2>
+<form action="pages_events_postings_select.php" method="get">
+<fieldset>
+<input type="hidden" name="page" value="{$page.id|escape:"html"}" />
+<label for="timeframe">{i18n Timeframe}</label> 
+<select id="timeframe" name="timeframe">
+<option{if empty($request.timeframe)} selected="selected"{/if}>{i18n Please choose...}</option>
+{foreach from=$timeframes key=_timeframe_value item=_timeframe_name}
+<option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
+{/foreach}
+</select>
+<label for="draft">{i18n Draft}</label> 
+<select id="draft" name="draft">
+<option{if empty($request.draft)} selected="selected"{/if}>{i18n Please choose...}</option>
+<option value="1"{if $request.draft == "1"} selected="selected"{/if}>{i18n Yes}</option>
+<option value="0"{if $request.draft == "0"} selected="selected"{/if}>{i18n No}</option>
+</select>
+<label for="limit">{i18n Show per page}</label> 
+<select id="limit" name="limit">
+<option value="1"{if empty($request.limit)} selected="selected"{/if}>1</option>
+<option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
+<option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
+<option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
+</select>
+<label for="search_name">{i18n Search by title}</label> 
+<input type="text" name="search_name" class="w155" id="search_name" value="{$request.search_name}" />
+&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
+</fieldset>
+</form>
+<!-- filter --></div>
+
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li>  
+{/if}
+{/foreach}
+</ul>
+<br class="clearb" />
+{/if}
+{if !empty($event_postings)}
+<table summary="{i18n Available Event Postings}">
+<tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="275" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
+</tr>
+<tr>
+<th class="page template_name">{i18n Title} &nbsp;<a title="{i18n Display by title descending}" class="down"  href="pages_events_postings_select.php?page={$page.id}&amp;macro=TITLE:DESC&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></a> <a title="{i18n Display by title ascending}" class="up" href="pages_events_postings_select.php?page={$page.id}&amp;macro=TITLE&amp;limit={$request.limit}&amp;search_name={$request.search_name|escape:"url"}"></th>
+<th>{i18n Event Start Date (Time)} &nbsp;<a title="{i18n Display by event start date descending}" class="down"  href="pages_events_postings_select.php?page={$page.id}&amp;macro=DATE_START:DESC{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a> <a title="{i18n Display by date ascending}" class="up" href="pages_events_postings_select.php?page={$page.id}&amp;macro=DATE_START{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a></th>
+<th>{i18n End Date?}</th>
+<th class="template_name">{i18n Date} &nbsp;<a title="{i18n Display by date descending}" class="down"  href="pages_events_postings_select.php?page={$page.id}&amp;macro=DATE_ADDED:DESC{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a> <a title="{i18n Display by date ascending}" class="up" href="pages_events_postings_select.php?page={$page.id}&amp;macro=DATE_ADDED{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a></th>
+<th>{i18n Duplicate}</th>
+<th>{i18n Delete}</th>
+</tr>
+{foreach from=$event_postings item=_posting}
+<tr{if $_posting.draft > 0} class="draft"{/if}>
+<td class="page"><a href="pages_events_postings_edit.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Edit}">{$_posting.title|escape:"html"}</a></td>
+<td>{$_posting.date_start|date_format:"%a, %d.%m.%Y"}{if !empty($_posting.date_start_time_start)} ({$_posting.date_start_time_start|date_format:"%H.%M"}{if !empty($_posting.date_start_time_end)} - {$_posting.date_start_time_end|date_format:"%H.%M"}{/if}){/if}</td>
+<td>
+{if !empty($_posting.date_end)}
+{i18n yes}
+{else}
+{i18n no}
+{/if}
+<td>{$_posting.date_added|date_format:"%a, %e %b %Y %H:%M"}</td>
+<td><a class="duplicate" href="pages_events_postings_copy.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Duplicate}"></a></td>
+<td><a class="delete confirmDelEventPosting" href="pages_events_postings_delete.php?page={$page.id|escape:"url"}&amp;id={$_posting.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+</tr>
+{/foreach}
+</table>
+{if count($page_index) > 1}
+<h3 class="pagenav">{i18n Pages:} </h3> 
+<ul class="pagenav"> 
+{foreach from=$page_index item=_item}
+{if $_item.self == $request.start}
+<li class="on">{$_item.page}</a></li>
+{else}
+<li><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.draft_filter)}&amp;draft_filter={$request.draft_filter|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li>
+{/if}
+{/foreach}
+</ul>
+{/if}
+{else}
+<p>{i18n No event posting has been created yet.}</p>
+{/if}
+
+<!-- content --></div>
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>

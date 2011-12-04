@@ -374,6 +374,11 @@ var definitions = {
 		el.onclick = function(){
 			Status.getCbx(new Array('simple_guestbook_send_notification'));
 		}
+	},
+	'#event_posting_meta_use' : function(el){
+		el.onclick = function(){
+			Status.getCbx(new Array('event_posting_meta_use'));
+		}
 	}
 };
 Behaviour.register(definitions);
