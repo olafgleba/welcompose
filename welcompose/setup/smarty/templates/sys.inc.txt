@@ -41,6 +41,9 @@ index.php_lifetime = 0
 [output]
 gunzip = 0
 
+[cookie]
+lifetime = 86400
+
 [plugins]
 textconverter_dir = "{$configuration.root_disk}/core/plugins/textconverters"
 textmacro_dir = "{$configuration.root_disk}/core/plugins/textmacros"
@@ -76,9 +79,25 @@ blog_archive_month = "{$configuration.root_www}/index.php?project_name=<project_
 blog_archive_month_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 blog_archive_month_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
 blog_archive_month_start_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+event_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_tag_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_start_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_start_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_start_tag_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_atom_10 = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+event_atom_10_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_atom_10_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Atom10"
+event_atom_10_start_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_rss_20 = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+event_rss_20_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&amp;tag=<tag_word>"
+event_rss_20_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Rss20"
+event_rss_20_start_tag = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Rss20&amp;tag=<tag_word>"
 generator_form_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 generator_form_index_start = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;action=Index"
-global_template_url = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project_name=<project_name>"
+global_template_url = "{$configuration.root_www}/global_template.php?name=<global_template_name>&amp;project_name=<project_name>"
 global_template_url_start = "{$configuration.root_www}/global_template.php?name=<global_file_name>&amp;project_name=<project_name>&amp;start=<start>"
 simple_date_index = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_date_index_pager = "{$configuration.root_www}/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
