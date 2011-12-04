@@ -49,6 +49,12 @@ background-color: #fff;
 table tr:hover {
 background-color: #DCEBF7;
 }
+table tr:hover a {
+color: #FF620D;
+}
+table tr:hover a:active {
+background-color: transparent;
+}
 table#actions tr:hover {
 background-color: transparent;
 }
@@ -68,7 +74,7 @@ padding: 20px 40px 20px 0;
 }
 
 /* links */
-a.down, a.up, a.new, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.adopt, a.comment, a.commenthide, a.mm_cast, a.mm_edit, a.mm_delete {
+a.down, a.up, a.edit, a.delete, a.upload, a.uploadhide, a.download, a.duplicate, a.move, a.adopt, a.comment, a.commenthide, a.mm_cast, a.mm_edit, a.mm_delete {
 display: block;
 width: 20px;
 height: 20px;
@@ -88,12 +94,6 @@ background: transparent url(../img/icons/up.gif) 0 0 no-repeat;
 } 
 a.up:hover, a.up:active, a.up:focus {
 background: transparent url(../img/icons/up.gif) 0 -45px no-repeat;
-}
-a.new:link, a.new:visited {
-background: transparent url(../img/icons/page_add.gif) 0 0 no-repeat;
-}
-a.new:hover, a.new:active, a.new:focus {
-background: transparent url(../img/icons/page_add.gif) 0 -46px no-repeat;
 }
 a.edit:link, a.edit:visited {
 background: transparent url(../img/icons/page_edit.gif) 0 0 no-repeat;
@@ -174,6 +174,27 @@ a.mm_delete:hover, a.mm_delete:active, a.mm_delete:focus {
 background: transparent url(../img/icons/page_delete.gif) 0 -46px no-repeat;
 }
 
+/* Page creation */
+.newPageContainer {
+display: block;
+margin-right: 5px;
+text-align: right; 
+padding: 15px 0; 
+border-top: 1px solid #EBEBEB;
+}
+a.newPage, a.newPage:visited {
+display: inline-block;
+width: 138px;
+font-weight: bold; 
+line-height:20px;
+background: transparent url(../img/icons/page_add.gif) 0 0 no-repeat;
+color: #ff620d;
+}
+a.newPage:hover, a.newPage:active, a.newPage:focus {
+background: transparent url(../img/icons/page_add.gif) 0 -46px no-repeat;
+color: #ff620d;
+}
+
 /* buttons */
 #buttons {
 margin: 20px 0;
@@ -220,6 +241,11 @@ margin: 0;
 /* pages */
 .page, .page1, .page2, .page3, .page4, .page5 {
 text-align: left;
+padding-left: 4px;
+padding-right: 16px;
+}
+.page a, .page1 a, .page2 a, .page3 a, .page4 a, .page5 a {
+color: #333;
 }
 .page2 {
 padding-left: 15px;

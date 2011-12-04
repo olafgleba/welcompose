@@ -246,10 +246,10 @@ padding-bottom: 3px;
 #topsubsubnav {
 list-style: none;
 width: 956px;
-padding: 12px 0;
+padding: 14px 0;
 /*background: #f9f9f9 url(../img/bg_topsubsubnav_top.gif) 0 0 no-repeat;*/
 background-color: #ebebeb;
-height: 1.25em;
+height: 1.35em;
 }
 #topsubsubnav li {
 display: inline;

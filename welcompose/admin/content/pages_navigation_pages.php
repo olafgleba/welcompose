@@ -105,37 +105,18 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 		
 	// get page type from xhr
-	$type = Base_Cnc::filterRequest($_REQUEST['type'], WCOM_REGEX_NUMERIC);
-
-	// load pagetype class
-	$PAGETYPE = load('content:pagetype');
+	$navigation = Base_Cnc::filterRequest($_REQUEST['navigation'], WCOM_REGEX_NUMERIC);
 	
-	// get page types by delivered type id
-	$pagetype = $PAGETYPE->selectPageType($type);
-		
-	/**
-	* Within the listed page types there
-	* is no content form field
-	**/	
-	if ($pagetype['name'] == 'WCOM_BLOG' ||
-			$pagetype['name'] == 'WCOM_EVENT' || 
-			$pagetype['name'] == 'WCOM_URL' || 
-			$pagetype['name'] == 'WCOM_SIMPLE_DATE') {
-		$o .= '<option value="">'.gettext('There is no content available for this page type').'</option>';
-	} else {	
-		// get pages
-		$pages = $PAGE->selectPages();
-		
-		foreach ($pages as $_page) {	
-			switch((string)$_page['page_type_name']) {
-				case 'WCOM_GENERATOR_FORM':
-				case 'WCOM_SIMPLE_FORM':
-				case 'WCOM_SIMPLE_GUESTBOOK':
-				case 'WCOM_SIMPLE_PAGE':
-					$o .= '<option value="'.$_page['id'].'">'.$_page['name'].'</option>';
-				break;
-			}
-		}	
+	$select_params = array(
+		'navigation' => (int)$navigation,
+		'draft' => 1,
+		'exclude' => 1
+	);			
+	// get pages
+	$pages = $PAGE->selectPages($select_params);
+	
+	foreach ($pages as $_page) {	
+		$o .= '<option value="'.$_page['id'].'">'.$_page['name'].'</option>';
 	}
 
 	// xhr response

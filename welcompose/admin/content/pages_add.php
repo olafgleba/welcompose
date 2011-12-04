@@ -124,8 +124,8 @@ try {
 	
 	// prepare positions
 	$positions = array(
-		UTILITY_NESTEDSET_CREATE_BEFORE => gettext('Create node above'),
-		UTILITY_NESTEDSET_CREATE_AFTER => gettext('Create node below')
+		UTILITY_NESTEDSET_CREATE_BEFORE => gettext('Create node above the reference page'),
+		UTILITY_NESTEDSET_CREATE_AFTER => gettext('Create node below the reference page')
 	);
 	
 	// prepare page types
@@ -134,7 +134,11 @@ try {
 		$types[(int)$_type['id']] = htmlspecialchars($_type['name']);
 	}
 	
-	//$assume = array('' => 'No available content');
+	// prepare navigations
+	$navigations = array();
+	foreach ($NAVIGATION->selectNavigations() as $_navigation) {
+		$navigations[(int)$_navigation['id']] = htmlspecialchars($_navigation['name']);
+	}
 	
 	// prepare template sets
 	$template_sets = array();
@@ -163,19 +167,31 @@ try {
 	$FORM = $BASE->utility->loadQuickForm('page', 'post');
 	
 	// hidden for navigation
-	$FORM->addElement('hidden', 'navigation');
+	$FORM->addElement('hidden', 'navigation', '', array('id' => 'navigation'));
 	$FORM->applyFilter('navigation', 'trim');
 	$FORM->applyFilter('navigation', 'strip_tags');
-	$FORM->addRule('navigation', gettext('Navigation is not expected to be empty'), 'required');
-	$FORM->addRule('navigation', gettext('Navigation is expected to be numeric'), 'numeric');
 	
 	// hidden for reference
-	$FORM->addElement('hidden', 'reference');
+	$FORM->addElement('hidden', 'reference', '', array('id' => 'reference'));
 	$FORM->applyFilter('reference', 'trim');
 	$FORM->applyFilter('reference', 'strip_tags');
-	$FORM->addRule('reference', gettext('Reference is expected to be numeric'), 'numeric');
 	
-	// select for type
+	// select for navigation
+	$FORM->addElement('select', 'navigations', gettext('Within Navigation'), $navigations,
+		array('id' => 'page_navigations', 'onchange' => 'javascript:Helper_getNavigationPages(this)'));
+	$FORM->applyFilter('navigations', 'trim');
+	$FORM->applyFilter('navigations', 'strip_tags');
+	$FORM->addRule('navigations', gettext('Please choose a navigation'), 'required');
+	$FORM->addRule('navigations', gettext('Chosen navigation is out of range'), 'in_array_keys', $navigations);
+	
+	// select for reference pages
+	$FORM->addElement('select', 'pages', gettext('Reference page'), null,
+		array('id' => 'page_pages', 'onchange' => 'javascript:Helper_setPageToReference(this)'));
+	$FORM->applyFilter('pages', 'trim');
+	$FORM->applyFilter('pages', 'strip_tags');
+	$FORM->addRule('reference', gettext('Input for reference page is expected to be numeric'), 'numeric');
+		
+	// select for position
 	$FORM->addElement('select', 'position', gettext('Position'), $positions,
 		array('id' => 'page_position'));
 	$FORM->applyFilter('position', 'trim');
@@ -344,6 +360,15 @@ try {
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
+
+		$select_params = array(
+			'navigation' => (int)$_REQUEST['navigation'],
+			'draft' => 1,
+			'exclude' => 1
+		);
+					
+		$page_arrays = $PAGE->selectPages($select_params);
+		$BASE->utility->smarty->assign('page_arrays', $page_arrays);
 		
 		// build session
 		$session = array(
@@ -393,8 +418,8 @@ try {
 		// insert it
 		try {
 			// begin transaction
-			$BASE->db->begin();
-			
+			$BASE->db->begin();	
+								
 			// create node
 			$page_id = $NESTEDSET->createNode($FORM->exportValue('navigation'), $FORM->exportValue('reference'),
 				$FORM->exportValue('position'));

@@ -482,6 +482,8 @@ Init.prototype.load = Init_load;
 Init.prototype.getVars = Init_getVars;
 Init.prototype.getRelatedPages = Init_getRelatedPages;
 Init.prototype.showResponseGetRelatedPages = Init_showResponseGetRelatedPages;
+Init.prototype.getNavigationPages = Init_getNavigationPages;
+Init.prototype.showResponseGetNavigationPages = Init_showResponseGetNavigationPages;
 Init.prototype.getCbxStatus = Init_getCbxStatus;
 Init.prototype.processInit = Init_processInit;
 Init.prototype.setCookie = Init_setCookie;
@@ -568,8 +570,11 @@ function Init_getVars ()
 				Init.getCbxStatus(checkbox_status);
 			}
 		}		
-		if ($('page_apply_content') && $F('page_apply_content') == 1) {		
-			Init.getRelatedPages();
+		// if ($('page_apply_content') && $F('page_apply_content') == 1) {		
+		// 	Init.getRelatedPages();
+		// }
+		if ($('page_navigations')) {		
+				Init.getNavigationPages();
 		}
 		if (typeof mediamanager != 'undefined' && Init.isNumber(mediamanager)) {
 			if (mediamanager == 1) {
@@ -596,14 +601,6 @@ function Init_getVars ()
 	}
 }
 
-
-/**
- * Lazy load of related page content for applying content
- * on page creation
- *
- * @throws applyError on exception
- */
-
 /**
  * Lazy load of related pages to apply on page creation.
  * <br />
@@ -627,7 +624,7 @@ function Init_getRelatedPages()
 			{
 				method : 'get',
 				parameters : pars,
-				onComplete : Helper.showResponseGetRelatedPages
+				onComplete : Init.showResponseGetRelatedPages
 			});
 			
 	} catch (e) {
@@ -648,6 +645,68 @@ function Init_showResponseGetRelatedPages(req)
 {
 	try {
 		Element.update($('page_apply_content_selection'), req.responseText);
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Lazy load of related pages to apply on page creation.
+ * <br />
+ * Get pages which have content table fields. This
+ * is used whenever the user chooses to prefill the
+ * created page with appropriate content of already applied pages 
+ * 
+ * @see #showResponseGetNavigationPages
+ * @throws applyError on exception
+ */
+function Init_getNavigationPages()
+{
+	try {			
+		var url = '../content/pages_navigation_pages.php';		
+		var elem = $('page_navigations');
+		var elemVal = elem.options[elem.selectedIndex].value;
+		var pars = 'navigation=' + elemVal;
+		
+		// assume hidden navigation field
+		$('navigation').value = elemVal;
+				
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Init.showResponseGetNavigationPages
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Get related pages to apply on page creation xhr response.
+ * <br />
+ * Populate select form element with provided pages on load 
+ * 
+ * @see #getRelatedPages
+ * @param {object} req XHR response
+ * @throws applyError on exception
+ */
+function Init_showResponseGetNavigationPages(req)
+{
+	try {		
+		if (req.responseText != '') {			
+			// init element
+			var elem = $('page_pages');
+			
+			// update the select form element
+			Element.update(elem, req.responseText);
+		
+			// assume hidden reference field
+			var ref = elem.options[elem.selectedIndex].value;		
+			$('reference').value = ref;
+		}
 	} catch (e) {
 		_applyError(e);
 	}	

@@ -95,7 +95,9 @@ Helper.prototype.confirmDelTplGlobalAction = Helper_confirmDelTplGlobalAction;
 Helper.prototype.confirmDelTplGlobalfileAction = Helper_confirmDelTplGlobalfileAction;
 Helper.prototype.confirmDelAbbreviationAction = Helper_confirmDelAbbreviationAction;
 Helper.prototype.confirmDelBlogPostingAction = Helper_confirmDelBlogPostingAction;
-Helper.prototype.confirmMsgDelSimpleDateAction = Helper_confirmMsgDelSimpleDateAction;
+Helper.prototype.confirmDelSimpleDateAction = Helper_confirmDelSimpleDateAction;
+Helper.prototype.confirmDelEventPostingAction = Helper_confirmDelEventPostingAction;
+Helper.prototype.confirmDelUserAction = Helper_confirmDelUserAction;
 Helper.prototype.getAttrParentNode = Helper_getAttrParentNode;
 Helper.prototype.getAttrParentNodeNextNode = Helper_getAttrParentNodeNextNode;
 Helper.prototype.getAttr = Helper_getAttr;
@@ -118,6 +120,9 @@ Helper.prototype.deselAllCheckboxes = Helper_deselAllCheckboxes;
 Helper.prototype.goToPageBox = Helper_goToPageBox;
 Helper.prototype.getRelatedPages = Helper_getRelatedPages;
 Helper.prototype.showResponseGetRelatedPages = Helper_showResponseGetRelatedPages;
+Helper.prototype.getNavigationPages = Helper_getNavigationPages;
+Helper.prototype.showResponseGetNavigationPages = Helper_showResponseGetNavigationPages;
+Helper.prototype.setPageToReference = Helper_setPageToReference;
 
 
 /**
@@ -1061,6 +1066,7 @@ function Helper_processCallbacks (elem)
 		var win_names = {
 			'pages_links': this.callbacksPopupWindowWidth745,
 			'blog_tags': this.callbacksPopupWindowWidth460,
+			'event_tags': this.callbacksPopupWindowWidth460,
 			'structuraltemplates_links': this.callbacksPopupWindowWidth460,
 			'abbreviations_links': this.callbacksPopupWindowWidth745,
 			'globalboxes_links': this.callbacksPopupWindowWidth460,
@@ -1085,6 +1091,7 @@ function Helper_processCallbacks (elem)
 		var url_paths = {
 			'pages_links': 'content',
 			'blog_tags': 'content',
+			'event_tags': 'content',
 			'structuraltemplates_links': 'content',
 			'abbreviations_links': 'content',
 			'globalboxes_links': 'templating',
@@ -1168,7 +1175,7 @@ function Helper_callbacksInsert(elem)
 			pager_page : pager_page,
 			insert_type : insert_type,
 			type : this.elem.name,
-			posting_id : (this.elem.name == 'blog_posting') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
+			posting_id : (this.elem.name == 'blog_posting' || this.elem.name == 'event_posting') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
 			year : (this.elem.name == 'archive_year' || this.elem.name == 'archive_month') ? Helper.getAttrNextSibling('id', this.elem, 1) : '',
 			month : (this.elem.name == 'archive_month') ? Helper.getAttrNextSibling('id', this.elem, 2) : ''
 		};
@@ -1332,16 +1339,8 @@ function Helper_changeBlogCommentStatus (elem)
 		// get status value
 		statusId = elem.options[elem.selectedIndex].value;
 	
-		// find blog comment id
-		commentId = elem.parentNode.parentNode.parentNode;
-		
-		if (Helper.isBrowser('sa')) {
-			commentId = Helper.getNextSiblingFirstChild(commentId, 5);
-		} else {
-			commentId = Helper.getNextSiblingFirstChild(commentId, 4);
-		}
-		commentId = String(commentId.href);
-		commentId = commentId.replace(/(.*?)(id\=+)(\d+)/g, "$3");		
+		// find blog comment id (parent fieldset applicated id)
+		commentId = elem.parentNode.id;	
 
 		// properties
 		var url = this.parseBlogCommmentStatusChangePath;
@@ -1623,15 +1622,53 @@ function Helper_confirmDelBlogPostingAction(elem)
 }
 
 /**
+ * Confirm Event Posting delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelEventPostingAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelEventPosting);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
  * Confirm simple date delete.
  * 
  * @param {var} elem Current element
  * @throws applyError on exception
  */
-function Helper_confirmMsgDelSimpleDateAction(elem)
+function Helper_confirmDelSimpleDateAction(elem)
 {
 	try {	
 		var v = confirm(confirmMsgDelSimpleDate);
+
+		if (v == true) {
+			window.location.href = elem.href;
+		}
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Confirm user delete.
+ * 
+ * @param {var} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_confirmDelUserAction(elem)
+{
+	try {	
+		var v = confirm(confirmMsgDelUser);
 
 		if (v == true) {
 			window.location.href = elem.href;
@@ -2231,6 +2268,87 @@ function Helper_showResponseGetRelatedPages(req)
 		_applyError(e);
 	}	
 }
+
+/**
+ * Get navigation related pages within page creation.
+ * <br />
+ * Fetch pages which are related to the choosen navigation
+ * and apply the result to the page reference select 
+ * 
+ * @see #showResponseGetNavigationPages
+ * @param {object} elem Provided element
+ * @throws applyError on exception
+ */
+function Helper_getNavigationPages(elem)
+{
+	try {	
+		var url = '../content/pages_navigation_pages.php';		
+		var elem = elem;
+		var elemVal = elem.options[elem.selectedIndex].value;
+		var pars = 'navigation=' + elemVal;
+		
+		// assume hidden navigation field
+		$('navigation').value = elemVal;
+	
+		var myAjax = new Ajax.Request(
+			url,
+			{
+				method : 'get',
+				parameters : pars,
+				onComplete : Helper.showResponseGetNavigationPages
+			});
+			
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Get navigation related pages within page creation xhr response.
+ * <br />
+ * Populate select form element with provided pages 
+ * 
+ * @see #getNavigationPages
+ * @param {object} req XHR response
+ * @throws applyError on exception
+ */
+function Helper_showResponseGetNavigationPages(req)
+{
+	try {
+			// init element
+			var elem = $('page_pages');
+			
+			// update the select form element
+			Element.update(elem, req.responseText);
+		
+			// assume hidden reference field
+			var ref = elem.options[elem.selectedIndex].value;		
+			$('reference').value = ref;
+		
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
+/**
+ * Get page id value and apply it to hidden reference field.
+ * <br />
+ * Populate select form element with provided pages 
+ * 
+ * @param {object} elem Provided element
+ * @throws applyError on exception
+ */
+function Helper_setPageToReference(elem)
+{
+	try {		
+		// get option value
+		var ref = elem.options[elem.selectedIndex].value;		
+		$('reference').value = ref;		
+	} catch (e) {
+		_applyError(e);
+	}	
+}
+
 
 /**
  * Building new object instance of class Helper
