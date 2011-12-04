@@ -103,7 +103,7 @@ try {
 		$BASE->db->begin();
 		
 		// switch project
-		$PROJECT->switchProject(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+		$PROJECT->switchProject(Base_Cnc::filterRequest($_REQUEST['project_id'], WCOM_REGEX_NUMERIC));
 		
 		// commit transaction
 		$BASE->db->commit();
