@@ -119,6 +119,9 @@ try {
 		case 'WCOM_BLOG':
 				header("Location: pages_blogs_postings_select.php?page=".(int)$page['id']);
 			exit;
+		case 'WCOM_EVENT':
+				header("Location: pages_events_postings_select.php?page=".(int)$page['id']);
+			exit;
 		case 'WCOM_GENERATOR_FORM':
 				header("Location: pages_generatorforms_content_edit.php?id=".(int)$page['id']);
 			exit;
