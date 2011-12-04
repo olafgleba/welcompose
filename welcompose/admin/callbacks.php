@@ -319,6 +319,21 @@ try {
 			'text' => $_REQUEST['text'],
 			'href' => ''
 		);
+		
+	} elseif ($_REQUEST['type'] == 'eventtag') {
+		
+		// define insert type static as reference
+		// this is because we want to insert the raw content nonetheless the path references
+		$insert_type = 'InternalReference';
+		
+		// As we directly deliver the content to the textconverter without the
+		// need to query the database, there is nothing else to do here.
+		
+		// prepare callback args
+		$args = array(
+			'text' => $_REQUEST['text'],
+			'href' => ''
+		);
 	
 	// follow ups
 	} elseif ($_REQUEST['type'] == '') {	
