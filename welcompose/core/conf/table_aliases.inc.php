@@ -43,6 +43,9 @@ define("WCOM_DB_CONTENT_BLOG_PODCAST_CATEGORIES", "content_blog_podcast_categori
 define("WCOM_DB_CONTENT_BLOG_POSTINGS", "content_blog_postings");
 define("WCOM_DB_CONTENT_BLOG_TAGS", "content_blog_tags");
 define("WCOM_DB_CONTENT_BLOG_TAGS2CONTENT_BLOG_POSTINGS", "content_blog_tags2content_blog_postings");
+define("WCOM_DB_CONTENT_EVENT_POSTINGS", "content_event_postings");
+define("WCOM_DB_CONTENT_EVENT_TAGS", "content_event_tags");
+define("WCOM_DB_CONTENT_EVENT_TAGS2CONTENT_EVENT_POSTINGS", "content_event_tags2content_event_postings");
 define("WCOM_DB_CONTENT_BOXES", "content_boxes");
 define("WCOM_DB_CONTENT_GENERATOR_FORMS", "content_generator_forms");
 define("WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS", "content_generator_form_fields");
