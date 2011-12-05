@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,19 +70,16 @@
 {/if}
 <table summary="{i18n Available Blog Comment Status}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="465" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$blog_comment_statuses item=_blog_comment_status}
 <tr>
-<td class="template"><span>{$_blog_comment_status.name|escape:"html"}</span></td>
-<td><a class="edit" href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td class="page template"><a href="blogcommentstatuses_edit.php?id={$_blog_comment_status.id|escape:"url"}" title="{i18n Edit}">{$_blog_comment_status.name|escape:"html"}</a></td>
 <td><a class="delete" href="blogcommentstatuses_delete.php?id={$_blog_comment_status.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

@@ -62,6 +62,10 @@ var toggleElem = 2;
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
 <li class="on">{i18n Boxes}</li>
 <li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+{elseif $page.page_type_name == 'WCOM_EVENT'}
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Event Postings}<span></span></a></li>
+<li class="on">{i18n Boxes}</li>
 {elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
 <li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 <li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
@@ -111,26 +115,23 @@ var toggleElem = 2;
 <table summary="{i18n Available Boxes}">
 <tbody id="boxes">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 {if !empty($boxes)}
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$boxes item=_box}
 <tr>
-<td>{$_box.name|escape:"html"}</td>
-<td><a class="edit" href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}">{$_box.name|escape:"html"}</a></td>
 <td><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 {else}
 <tr id="noresult">
-<td colspan="3">{i18n No box has been created yet.}</td>
+<td colspan="2">{i18n No box has been created yet.}</td>
 </tr>
 {/if}
 </tbody>
@@ -160,7 +161,7 @@ var toggleElem = 2;
 <table summary="{i18n Available Boxes of all pages}" id="allboxes">
 <tbody>
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="275" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="270" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="255" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>

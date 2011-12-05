@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,23 +70,20 @@
 {/if}
 <table summary="{i18n Available Text Macros}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$text_macros item=_text_macro}
 <tr>
-<td><span>{$_text_macro.name|escape:"html"}</span></td>
 {if $_text_macro.editable}
-<td><a class="edit" href="textmacros_edit.php?id={$_text_macro.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="textmacros_edit.php?id={$_text_macro.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_text_macro.name|escape:"html"}</a></td>
 <td><a class="delete" href="textmacros_delete.php?id={$_text_macro.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 {else}
-<td>&nbsp;</td>
+<td class="page">{$_text_macro.name|escape:"html"}</td>
 <td>&nbsp;</td>
 {/if}
 </tr>

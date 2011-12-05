@@ -56,22 +56,19 @@
 {if !empty($template_sets)}
 <table summary="{i18n Available Template Sets}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="180" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="490" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="525" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
 <th>{i18n Description}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$template_sets item=_template_set}
 <tr>
-<td class="name">{$_template_set.name|escape:"html"}</td>
+<td class="page name"><a href="templatesets_edit.php?id={$_template_set.id|escape:"url"}" title="{i18n Edit}">{$_template_set.name|escape:"html"}</a></td>
 <td class="description">{$_template_set.description|escape:"html"}</td>
-<td><a class="edit" href="templatesets_edit.php?id={$_template_set.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplSets" href="templatesets_delete.php?id={$_template_set.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

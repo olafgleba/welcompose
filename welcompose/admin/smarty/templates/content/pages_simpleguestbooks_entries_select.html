@@ -21,7 +21,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -87,13 +86,19 @@
 <option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
 </select>
-<label for="search_name">{i18n Name}</label> 
-<input type="text" name="search_name" class="w150" id="search_name" value="" />
-&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
+<label for="limit">{i18n Show per page}</label> 
+<select id="limit" name="limit">
+<option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
+<option value="1"{if $request.limit == "1"} selected="selected"{/if}>1</option>
+<option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
+<option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
+</select>
+<label for="search_name">{i18n Search by name}</label> 
+<input type="text" name="search_name" class="w155" id="search_name" value="{$request.search_name}" />
+&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
 <!-- filter --></div>
-
 
 {if count($page_index) > 1}
 <h3 class="pagenav">{i18n Pages:} </h3> 
@@ -102,7 +107,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;search_name={$request.search_name|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li> 
+<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li> 
 {/if}
 {/foreach}
 </ul>
@@ -111,29 +116,26 @@
 {if !empty($simpleguestbook_entries)}
 <table summary="{i18n Available Simple Guestbook Entries}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="160" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="280" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="210" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="250" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="300" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">{i18n Name}</th>
+<th class="page">{i18n Name} &nbsp;<a title="{i18n Display by title descending}" class="down"  href="pages_simpleguestbooks_entries_select.php?page={$page.id}&amp;macro=NAME:DESC{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a> <a title="{i18n Display by title ascending}" class="up" href="pages_simpleguestbooks_entries_select.php?page={$page.id}&amp;macro=NAME{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a></th>
 <th>{i18n Subject}</th>
-<th>{i18n Date}</th>
+<th>{i18n Date} &nbsp;<a title="{i18n Display by date descending}" class="down"  href="pages_simpleguestbooks_entries_select.php?page={$page.id}&amp;macro=DATE_ADDED:DESC{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a> <a title="{i18n Display by date ascending}" class="up" href="pages_simpleguestbooks_entries_select.php?page={$page.id}&amp;macro=DATE_ADDED{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}"></a></th>
 <th>{i18n View}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$simpleguestbook_entries item=_entry}
 <tr>
-<td>{$_entry.name|escape:"html"}</td>
+<td class="page"><a href="pages_simpleguestbooks_entries_edit.php?page={$page.id|escape:"url"}&amp;id={$_entry.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Edit}">{$_entry.name|escape:"html"}</a></td>
 <td>{$_entry.subject|escape:"html"}</td>
-<td>{$_entry.date_added|date_format:"%a, %e %b %Y %H:%M %Z"}</td>
+<td>{$_entry.date_added|date_format:"%a, %e %b %Y %H:%M"}</td>
 <td><a class="comment showTableRow" href="#" id="e_{$_entry.id}" title="{i18n View entry message}"></a></td>
-<td><a class="edit" href="pages_simpleguestbooks_entries_edit.php?page={$page.id|escape:"url"}&amp;id={$_entry.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
-<td><a class="delete" href="pages_simpleguestbooks_entries_delete.php?page={$page.id|escape:"url"}&amp;id={$_entry.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+<td><a class="delete" href="pages_simpleguestbooks_entries_delete.php?page={$page.id|escape:"url"}&amp;id={$_entry.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_entry.id}" class="outer">
 <td colspan="7">
@@ -154,7 +156,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;search_name={$request.search_name|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li>  
+<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}{if isset($request.search_name)}&amp;search_name={$request.search_name|escape:"html"}{/if}">{$_item.page}</a></li>  
 {/if}
 {/foreach}
 </ul>

@@ -138,6 +138,27 @@ try {
 	$FORM->applyFilter('start', 'strip_tags');
 	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 	
+	// hidden for limit
+	$FORM->addElement('hidden', 'limit');
+	$FORM->applyFilter('limit', 'trim');
+	$FORM->applyFilter('limit', 'strip_tags');
+	$FORM->addRule('limit', gettext('limit is expected to be numeric'), 'numeric');
+	
+	// hidden for search_name
+	$FORM->addElement('hidden', 'search_name');
+	$FORM->applyFilter('search_name', 'trim');
+	$FORM->applyFilter('search_name', 'strip_tags');
+	
+	// hidden for macro
+	$FORM->addElement('hidden', 'macro');
+	$FORM->applyFilter('macro', 'trim');
+	
+	// hidden for timeframe
+	$FORM->addElement('hidden', 'timeframe');
+	$FORM->applyFilter('timeframe', 'trim');
+	$FORM->applyFilter('timeframe', 'strip_tags');
+	$FORM->addRule('timeframe', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
+	
 	// hidden for text_converter
 	$FORM->addElement('hidden', 'text_converter');
 	$FORM->applyFilter('text_converter', 'trim');
@@ -184,7 +205,11 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($guestbook_entry['id'], null),
 		'page' => Base_Cnc::ifsetor($guestbook_entry['book'], null),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME),
+		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
 		'name' => Base_Cnc::ifsetor($guestbook_entry['name'], null),
 		'email' => Base_Cnc::ifsetor($guestbook_entry['email'], null),
 		'subject' => Base_Cnc::ifsetor($guestbook_entry['subject'], null),
@@ -302,19 +327,29 @@ try {
 			@ob_end_clean();
 		}
 		
-		// save request start range
+		// save request params 
 		$start = $FORM->exportValue('start');
-		$start = (!empty($start)) ? $start : 0;
+		$limit = $FORM->exportValue('limit');
+		$timeframe = $FORM->exportValue('timeframe');
+		$macro = $FORM->exportValue('macro');
+		$search_name = $FORM->exportValue('search_name');
+		
+		// append request params
+		$redirect_params = (!empty($start)) ? '&start='.$start : '';
+		$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+		$redirect_params .= (!empty($timeframe)) ? '&timeframe='.$timeframe : '';
+		$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
+		$redirect_params .= (!empty($search_name)) ? '&search_name='.$search_name : '';	
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_simpleguestbooks_entries_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id')."&start=".$start);
+						$FORM->exportValue('page')."&id=".$FORM->exportValue('id').$redirect_params);
 		} else {
 			header("Location: pages_simpleguestbooks_entries_select.php?page=".
-						$FORM->exportValue('page')."&start=".$start);
+						$FORM->exportValue('page').$redirect_params);
 		}
-		exit;
+		exit;		
 	}
 } catch (Exception $e) {
 	// clean the buffer

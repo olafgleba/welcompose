@@ -62,18 +62,31 @@
 	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
 		<li class="on">{i18n Ping Services}</li>
 	{/if}
-{elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
+{elseif $page.page_type_name == 'WCOM_EVENT'}
 	{if wcom_check_access('Content', 'Page', 'Manage')}
-		<li class="on">{i18n Metadata}</li>
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
 	{/if}
-	{if wcom_check_access('Content', 'SimpleDate', 'Manage')}
-		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
+	{if wcom_check_access('Content', 'EventPosting', 'Manage')}
+		<li><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}">{i18n Event Postings}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
-		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+		<li class="on">{i18n Ping Services}</li>
+	{/if}
+{elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'SimpleDate', 'Manage')}
+		<li><a href="pages_simple_dates_select.php?page={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
+		<li class="on">{i18n Ping Services}</li>
 	{/if}
 {/if}
 </ul>
@@ -105,19 +118,16 @@
 {if !empty($ping_service_configurations)}
 <table summary="{i18n Available Blog Postings}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Ping Service Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$ping_service_configurations item=_configuration}
 <tr>
-<td>{$_configuration.ping_service_name|escape:"html"}</td>
-<td><a class="edit" href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Edit}">{$_configuration.ping_service_name|escape:"html"}</a></td>
 <td><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

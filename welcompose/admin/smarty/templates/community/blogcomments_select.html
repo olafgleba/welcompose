@@ -90,6 +90,12 @@
 <option value="{$_timeframe|escape:"html"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"html"}</option>
 {/foreach}
 </select>
+<label for="limit">{i18n Show per page}</label> 
+<select id="limit" name="limit">
+<option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
+<option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
+<option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
+</select>
 &nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
@@ -104,7 +110,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="blogcomments_select.php?page={$request.page|escape:"url"}&amp;timeframe={$request.timeframe|escape:"url"}&amp;posting={$request.posting|escape:"url"}&amp;start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+<li><a href="blogcomments_select.php?page={$request.page|escape:"url"}{if isset($request.posting)}&amp;posting={$request.posting|escape:"url"}{/if}{if isset($request.timeframe)}&amp;timeframe={$request.timeframe|escape:"url"}{/if}{if isset($request.draft)}&amp;draft={$request.draft|escape:"url"}{/if}&amp;start={$_item.self|escape:"url"}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}">{$_item.page}</a></li>
 {/if}
 {/foreach}
 </ul>
@@ -113,13 +119,12 @@
 <form method="post" action="/admin/community/blogcomments_delete.php" name="blogcomments">
 <table summary="{i18n Blog Comments List}" class="blogcomments">
 <tr>
+<td class="mini"><img src="../static/img/spacer.gif" width="270" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="260" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="220" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="120" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
 </tr>
 <tr>
 <th>{i18n Blog-Name}<br />{i18n Posting Title}</th>
@@ -127,13 +132,12 @@
 <th>{i18n First 80 chars of comment}</th>
 <th>{i18n Status}</th>
 <th>{i18n View}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 <th></th>
 </tr>
 {foreach from=$blog_comments item=_comment}
 <tr>
-<td>{$_comment.page_name|escape:"html"}<br/>{$_comment.blog_posting_title|escape:"html"|nl2br}</td>
+<td class="page"><a href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n Edit}">{$_comment.page_name|escape:"html"}<br/>{$_comment.blog_posting_title|escape:"html"|nl2br}</a></td>
 <td>{$_comment.name|escape:"html"}<br />
 {if !empty($_comment.email)}
 {$_comment.email|escape:"html"}
@@ -144,7 +148,7 @@
 {$_comment.content_raw|truncate:80}</td>
 <td>
 <form action="" method="post">
-<fieldset>
+<fieldset id="{$_comment.id|escape:"url"}">
 <select class="item_status changeBlogCommentStatus" name="item_status">
 <option value="">&nbsp;</option>
 {foreach from=$blog_comment_statuses item=_status}
@@ -155,11 +159,10 @@
 </form>
 </td>
 <td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
-<td><a class="edit" href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td style="text-align: right;"><input type="checkbox" class="chbx" name="blogcomments[]" value="{$_comment.id}"></td>
 </tr>
 <tr id="o_{$_comment.id}" class="outer">
-<td colspan="7">
+<td colspan="6">
 <div id="i_{$_comment.id}" class="inner">
 <fieldset>
 <h3>{i18n Comment}</h3>

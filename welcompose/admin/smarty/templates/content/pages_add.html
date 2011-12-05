@@ -10,6 +10,7 @@
 <title>{i18n Welcompose Admin &ndash; Add Page}</title>
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
  
 <script type="text/javascript">
@@ -101,6 +102,12 @@ var checkbox_status = new Array('page_apply_content');
 
 <fieldset class="topbg">
 {$form.hidden}
+	
+<label class="cont" for="page_navigations"><span class="bez">{$form.navigations.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.navigations.html}</label>
+
+<label class="cont" for="page_pages"><span class="bez">{$form.pages.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.pages.html}</label>
 
 <label class="cont" for="page_position"><span class="bez">{$form.position.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.position.html}</label>
@@ -114,16 +121,19 @@ var checkbox_status = new Array('page_apply_content');
 <label class="cont" for="page_type"><span class="bez">{$form.type.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.type.html}</label>
 
-<label class="cont chbx" for="page_apply_content"><span class="bez">{$form.apply_content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.apply_content.html}</label>
+<label class="cont" for="page_template_set"><span class="bez">{$form.template_set.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.template_set.html}</label>
 
-<div id="page_apply_content_container" class="pb35">
+<fieldset class="withinaction">
+<h2 style="border-top: 1px solid #EFEFEF; padding-top: 25px; width: 440px;">{i18n Options} <span class="showFormElements" id="options"><a href="#" title="{i18n Show this element}"><img src="../static/img/icons/open.gif" alt="" /></a></span></h2>
+<div id="options_container" style="display:none;">
+
+<label class="cont chbx" for="page_apply_content"><span class="bez">{$form.apply_content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.apply_content.html}</label>	
+<div id="page_apply_content_container">
 <label class="cont" for="page_apply_content_selection"><span class="bez">{$form.apply_content_selection.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_content_selection.html}</label>
 </div>
-
-<label class="cont" for="page_template_set"><span class="bez">{$form.template_set.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.template_set.html}</label>
 
 <label class="cont chbx" for="page_index_page"><span class="bez">{$form.index_page.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.index_page.html}</label>
@@ -143,8 +153,11 @@ var checkbox_status = new Array('page_apply_content');
 <label class="cont h13" for="page_groups"><span class="bez">{$form.groups.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.groups.html}</label>
 
+</div>
+</fieldset>
+
 <fieldset class="withinaction">
-<h2>{i18n Additional metadata} <span class="showFormElements" id="additional_metadata"><a href="#" title="{i18n Show this element}"><img src="../static/img/icons/open.gif" alt="" /></a></span></h2>
+<h2 style="border-top: 1px solid #EFEFEF; padding-top: 25px; width: 440px;">{i18n Additional metadata} <span class="showFormElements" id="additional_metadata"><a href="#" title="{i18n Show this element}"><img src="../static/img/icons/open.gif" alt="" /></a></span></h2>
 <div id="additional_metadata_container" style="display:none;">
 <label class="cont" for="page_alternate_name"><span class="bez">{$form.alternate_name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.alternate_name.html}</label>

@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -58,23 +57,20 @@
 {if !empty($template_types)}
 <table summary="{i18n Available Template Types}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="240" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="430" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="525" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
 <th>{i18n Description}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$template_types item=_template_type}
 <tr>
 {if $_template_type.editable}
-<td class="name">{$_template_type.name|escape:"html"}</td>
+<td class="page name"><a href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n Edit}">{$_template_type.name|escape:"html"}</a></td>
 <td class="description">{$_template_type.description|escape:"html"}</td>
-<td><a class="edit" href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplType" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
 <td>{$_template_type.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></td>

@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,33 +70,30 @@
 {if !empty($abbreviations)}
 <table summary="{i18n Available Abbreviations}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="200" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="350" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="220" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="410" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Abbreviation}</th>
 <th>{i18n Long form}</th>
 <th>{i18n View}</th>
 <th>{i18n Glossar Entry}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$abbreviations item=_abbreviation}
 
 <tr>
-<td class="page"><span>{$_abbreviation.name|escape:"html"}</span></td>
+<td class="page"><a href="abbreviations_edit.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Edit}">{$_abbreviation.name|escape:"html"}</a></td>
 <td>{$_abbreviation.long_form|escape:"html"|truncate:60}</td>
 <td>{if $_abbreviation.long_form|count_characters > 60}<a class="comment showTableRow" href="#" id="e_{$_abbreviation.id}" title="{i18n View entire long form}"></a>{/if}</td>
 <td>{if !empty($_abbreviation.content)}{i18n yes}{else}{i18n no}{/if}</td>
-<td><a class="edit" href="abbreviations_edit.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelAbbreviation" href="abbreviations_delete.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_abbreviation.id}" class="outer">
-<td colspan="6">
+<td colspan="5">
 <div id="i_{$_abbreviation.id}" class="inner">
 <fieldset>
 <h3>{i18n Full long form}</h3>

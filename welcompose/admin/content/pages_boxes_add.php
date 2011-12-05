@@ -131,13 +131,13 @@ try {
 	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
 
-	// textfield for title
+	// textfield for name
 	$FORM->addElement('text', 'name', gettext('Name'),
 		array('id' => 'box_name', 'maxlength' => 255, 'class' => 'w300 validate'));
 	$FORM->applyFilter('name', 'trim');
 	$FORM->applyFilter('name', 'strip_tags');
 	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A box with the given name already exists'),
+	$FORM->addRule('name', gettext('A page with the given name already exists'),
 		'testForNameUniqueness', array('page' => $page['id']));
 	
 	// textarea for content

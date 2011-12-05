@@ -86,6 +86,8 @@ var toggleElem = 1;
 <!-- rp_note --></div>
 {/if}
 
+<div class="newPageContainer"><a class="newPage" href="pages_add.php">{i18n Add new page}</a></div>
+
 {foreach from=$navigations item=_navigation}
 <div class="secnav474_nonav_c"></div>
 
@@ -97,40 +99,35 @@ var toggleElem = 1;
 <table id="nav_{$_navigation.name}" summary="{i18n Page structure}">
 <tbody>
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="375" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="460" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="10" height="1" alt="" /></td>
 {if count($navigations) > 1}
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="135" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="205" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="65" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
 {else}
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="200" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="290" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
 {/if}
+</tr>
+<tr>
 </tr>
 <tr>
 <th class="page">{i18n Page structure}</th>
 <th colspan="2">{i18n Move}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Edit Box}</th>
 {if count($navigations) > 1}<th>{i18n Move away}</th>{/if}
-<th>{i18n Add}</th>
 <th>{i18n Delete}</th>
 </tr>
 {assign var="navigation_id" value=$_navigation.id}
 {if count($page_arrays.$navigation_id) > 0}
 {foreach from=$page_arrays.$navigation_id item=_page}
 <tr>
-<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}">{$_page.name} {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n Index page}" title="{i18n Index page}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n Protected page}" title="{i18n Protected page}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n Excluded from navigation}" title="{i18n Excluded from navigation}" />{/if}</td>
+<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}"><a href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n Edit page contents}">{$_page.name}</a> {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n Index page}" title="{i18n Index page}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n Protected page}" title="{i18n Protected page}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n Excluded from navigation}" title="{i18n Excluded from navigation}" />{/if}</td>
 <td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n Down}"></a></td>
 <td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n Up}"></a></td>
-<td><a class="edit" href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n Edit page contents}"></a></td>
 <td>
 {assign var="page_id" value=$_page.id}
 {if count($box_arrays.$page_id) > 0}
@@ -139,7 +136,7 @@ var toggleElem = 1;
 <select class="page_boxes goToPageBox" id="{$_page.id}" name="page_boxes">
 	<option value="">{i18n Please choose...}</option>
 	{foreach from=$box_arrays.$page_id item=_box}
-	<option value="{$_box.id}">{$_box.name|escape:"html"|truncate:20}</option>
+	<option value="{$_box.id}">{$_box.name|escape:"html"|truncate:32}</option>
 	{/foreach}
 </select>
 </fieldset>
@@ -149,7 +146,6 @@ var toggleElem = 1;
 {/if}
 </td>
 {if count($navigations) > 1}<td><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="{i18n Move page to another navigation}"></a></td>{/if}
-<td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}&amp;reference={$_page.id|escape:"url"}" title="{i18n Add new page}"></a></td>
 <td><a class="delete confirmDelPage" href="pages_delete.php?id={$_page.id|escape:"url"}" title="{i18n Delete page}"></a></td>
 </tr>
 {/foreach}
@@ -158,10 +154,8 @@ var toggleElem = 1;
 <td class="page">{i18n No page has been created yet}</td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
 {if count($navigations) > 1}<td></td>{/if}
-<td><a class="new" href="pages_add.php?navigation={$_navigation.id|escape:"url"}" title="{i18n Add new page}"></a></td>
+<td></td>
 <td></td>
 </tr>
 {/if}
@@ -170,7 +164,6 @@ var toggleElem = 1;
 {/foreach}
 {/if}
 <!-- content --></div>
-
 <!-- main --></div>
 {include file="_inc_footer.html"}
 <!-- container --></div>

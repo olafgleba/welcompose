@@ -71,19 +71,16 @@
 {if !empty($podcast_categories)}
 <table summary="{i18n Available podcast categories}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$podcast_categories item=_category}
 <tr>
-<td class="page">{$_category.name|escape:"html"}</td>
-<td><a class="edit" href="podcastcategories_edit.php?id={$_category.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="podcastcategories_edit.php?id={$_category.id|escape:"url"}" title="{i18n Edit}">{$_category.name|escape:"html"}</a></td>
 <td><a class="delete" href="podcastcategories_delete.php?id={$_category.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

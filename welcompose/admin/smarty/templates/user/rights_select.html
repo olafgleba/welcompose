@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,26 +70,28 @@
 {if !empty($rights)}
 <table summary="{i18n Right List}" class="user">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="360" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="355" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="470" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="375" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name} <span class="az"></span> <span class="za"></span></th>
 <th class="email">{i18n Description}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$rights item=_right}
 <tr>
-<td>{$_right.name|escape:"html"}</td>
+<td class="page">
+{if $_right.editable}
+<a href="rights_edit.php?id={$_right.id|escape:"url"}" title="{i18n Edit}">{$_right.name|escape:"html"}</a>
+{else}
+{$_right.name|escape:"html"}
+{/if}	
+</td>
 <td>{$_right.description|escape:"html"|nl2br}</td>
 {if $_right.editable}
-<td><a class="edit" href="rights_edit.php?id={$_right.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="rights_delete.php?id={$_right.id|escape:"url"}" title="{i18n Delete}"></a></td>
 {else}
-<td>&nbsp;</td>
 <td>&nbsp;</td>
 {/if}
 </tr>

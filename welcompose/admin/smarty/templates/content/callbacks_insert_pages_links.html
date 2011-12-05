@@ -29,7 +29,6 @@ var insert_type = '{$callback_params.insert_type}';
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.popup.js"></script>
 
-
 </head>
 
 <body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
@@ -56,7 +55,7 @@ var insert_type = '{$callback_params.insert_type}';
 <tr>
 <td class="initialNode"><a class="{if $_page.level == 2}level_2 {/if}{if $_page.level == 3}level_3 {/if}{if $_page.level == 4}level_4 {/if}{if $_page.draft > 0}draft {/if}process_insert" id="{$_page.id}" name="page" href="#" title="{i18n Insert link}">{$_page.name|truncate:50:"...":true|escape:"html"}</a></td>
 {if $_page.page_type_name == 'WCOM_BLOG'}
-<td class="nextNode"><a class="showNextNode" id="{$_page.id}" name="pages_links" href="#" title="{i18n Display sub links}">&nbsp;</a></td>
+<td class="nextNode"><a class="showNextNode" id="{$_page.id}" rel="{$_page.page_type_name}" name="pages_links" href="#modalWindow" title="{i18n Display sub links}">&nbsp;</a></td>
 {else}
 <td>&nbsp;</td>
 {/if}

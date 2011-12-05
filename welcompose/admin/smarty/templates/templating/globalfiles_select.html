@@ -91,35 +91,32 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 {if !empty($global_files)}
 <table summary="{i18n Available Templates}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="330" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="255" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="120" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Name} <span class="az"></span> <span class="za"></span></th>
-<th class="">{i18n Description}  <span class="az"></span> <span class="za"></span></th>
-<th class="">{i18n File is...}  <span class="az"></span> <span class="za"></span></th>
+<th class="page template_name">{i18n Name}</th>
+<th class="">{i18n Description}</th>
+<th class="">{i18n File is...}</th>
 <th class="">{i18n Upload}</th>
 <th class="">{i18n Download}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$global_files item=_global_file}
 <tr>
-<td>{$_global_file.name|escape:"html"}</td>
+<td class="page"><a href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_global_file.name|escape:"html"}</a></td>
 <td>{$_global_file.description|escape:"html"}</td>
 <td>{if !empty($_global_file.name_on_disk)}{i18n available}{else}{i18n not available}{/if}</td>
 <td><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n Download}"></a></td>
-<td><a class="edit" href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_file.id}" class="outer">
-<td colspan="7">
+<td colspan="6">
 <div id="i_{$_global_file.id}" class="inner">
 <form action="globalfiles_upload.php?id={$_global_file.id}" id="upload" method="post" enctype="multipart/form-data">
 <fieldset>

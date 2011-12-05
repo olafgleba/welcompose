@@ -113,25 +113,22 @@
 {if !empty($simple_dates)}
 <table summary="{i18n Available Simple Dates}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="325" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="300" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="370" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="340" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="100" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="70" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="45" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Date} <span class="az"></span> <span class="za"></span></th>
+<th class="page template_name">{i18n Date} <span class="az"></span> <span class="za"></span></th>
 <th class="template_name">{i18n Location} <span class="az"></span> <span class="za"></span></th>
 <th class="template_name">{i18n Link(s)?} <span class="az"></span> <span class="za"></span></th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$simple_dates item=_dates}
 <tr{if $_dates.draft > 0} class="draft"{/if}>
-<td>{$_dates.date_start|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{if !empty($_dates.date_end)} - {$_dates.date_end|date_format:"%a, %d.%m.%Y, %H:%M %Z"}{/if}</td>
+<td class="page"><a href="pages_simple_dates_edit.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_dates.date_start|date_format:"%a, %d.%m.%Y, %H:%M"}{if !empty($_dates.date_end)} - {$_dates.date_end|date_format:"%a, %d.%m.%Y, %H:%M"}{/if}</a></td>
 <td>{$_dates.location_raw|truncate:60:"..."}</td>
 <td>{if !empty($_dates.link_1)}{i18n Yes}{else}{i18n No}{/if}</td>
-<td><a class="edit" href="pages_simple_dates_edit.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelSimpleDate" href="pages_simple_dates_delete.php?page={$page.id|escape:"url"}&amp;id={$_dates.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

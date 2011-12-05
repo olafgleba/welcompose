@@ -134,7 +134,8 @@ try {
 	$form_fields = $GENERATORFORMFIELD->selectGeneratorFormFields(array(
 		'form' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
-		'limit' => 20
+		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20,
+		'order_macro' => (!empty($_REQUEST['macro'])) ? $_REQUEST['macro'] : 'NAME:DESC'
 	));
 	$BASE->utility->smarty->assign('form_fields', $form_fields);
 	
@@ -146,11 +147,13 @@ try {
 	$BASE->utility->smarty->assign('field_count', $field_count);
 	
 	// prepare and assign page index
-	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($field_count, 20));
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($field_count, (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20));
 	
 	// import and assign request params
 	$request = array(
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO)
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	

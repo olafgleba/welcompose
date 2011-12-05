@@ -205,8 +205,7 @@ try {
 		
 	// print response 
 	print "<tr>\n";
-	print "<td>$_box</td>\n";
-	print "<td><a class=\"edit\" href=\"pages_boxes_edit.php?page=$page&amp;id=$_insert_id\" title=\"Bearbeiten\"></a></td>\n";
+	print "<td class=\"page\"><a href=\"pages_boxes_edit.php?page=$page&amp;id=$_insert_id\" title=\"Bearbeiten\">$_box</a></td>\n";
 	print "<td><a class=\"delete\" href=\"pages_boxes_delete.php?page=$page&amp;id=$_insert_id\" title=\"loeschen\"></a></td>\n";
 	print "</tr>\n";
 		

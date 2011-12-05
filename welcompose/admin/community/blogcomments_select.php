@@ -141,9 +141,9 @@ try {
 		'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
 		'status' => Base_Cnc::filterRequest($_REQUEST['status'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'order_macro' => 'DATE_ADDED:DESC',
-		'limit' => 20
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20
 	);
 	$BASE->utility->smarty->assign('blog_comments',
 		$BLOGCOMMENT->selectBlogComments($select_params));
@@ -163,7 +163,7 @@ try {
 	$BASE->utility->smarty->assign('blog_comment_count', $comment_count);
 	
 	// prepare and assign page index
-	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($comment_count, 20));
+	$BASE->utility->smarty->assign('page_index', $HELPER->calculatePageIndex($comment_count, (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20));
 	
 	// import and assign request params
 	$request = array(
@@ -171,7 +171,8 @@ try {
 		'posting' => Base_Cnc::filterRequest($_REQUEST['posting'], WCOM_REGEX_NUMERIC),
 		'status' => Base_Cnc::filterRequest($_REQUEST['status'], WCOM_REGEX_TIMEFRAME),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC)
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20
 	);
 	$BASE->utility->smarty->assign('request', $request);
 	

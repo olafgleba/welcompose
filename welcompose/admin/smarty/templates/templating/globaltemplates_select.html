@@ -21,7 +21,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -72,32 +71,29 @@
 {if !empty($global_templates)}
 <table summary="{i18n Available Templates}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="450" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="395" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="55" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="template_name">{i18n Name}</th>
+<th class="page template_name">{i18n Name}</th>
 <th class="">{i18n Description}</th>
 <th class="">{i18n Upload}</th>
 <th class="">{i18n Download}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$global_templates item=_global_template}
 <tr>
-<td>{$_global_template.name|escape:"html"}</td>
-<td>{$_global_template.description|escape:"html"}</td>
+<td class="page"><a href="globaltemplates_edit.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_global_template.name|escape:"html"}</td>
+<td>{$_global_template.description|escape:"html"}</a></td>
 <td><a class="upload showTableRow" href="#" id="e_{$_global_template.id}" title="{i18n Upload}"></a></td>
 <td><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"url"}" title="{i18n Download}"></a></td>
-<td><a class="edit" href="globaltemplates_edit.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
 <td><a class="delete confirmDelTplGlobal" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 <tr id="o_{$_global_template.id}" class="outer">
-<td colspan="6">
+<td colspan="5">
 <div id="i_{$_global_template.id}" class="inner">
 <form action="globaltemplates_upload.php?id={$_global_template.id}" method="post" enctype="multipart/form-data">
 <fieldset>

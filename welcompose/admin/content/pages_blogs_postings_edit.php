@@ -189,6 +189,12 @@ try {
 	$FORM->applyFilter('start', 'strip_tags');
 	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 	
+	// hidden for draft
+	$FORM->addElement('hidden', 'draft_filter');
+	$FORM->applyFilter('draft_filter', 'trim');
+	$FORM->applyFilter('draft_filter', 'strip_tags');
+	$FORM->addRule('draft_filter', gettext('draft is expected to be numeric'), 'numeric');
+	
 	// hidden for limit
 	$FORM->addElement('hidden', 'limit');
 	$FORM->applyFilter('limit', 'trim');
@@ -200,9 +206,15 @@ try {
 	$FORM->applyFilter('search_name', 'trim');
 	$FORM->applyFilter('search_name', 'strip_tags');
 	
-	// hidden for search_name
+	// hidden for macro
 	$FORM->addElement('hidden', 'macro');
 	$FORM->applyFilter('macro', 'trim');
+	
+	// hidden for timeframe
+	$FORM->addElement('hidden', 'timeframe');
+	$FORM->applyFilter('timeframe', 'trim');
+	$FORM->applyFilter('timeframe', 'strip_tags');
+	$FORM->addRule('timeframe', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
 	
 	// hidden for frontend view control
 	$FORM->addElement('hidden', 'preview');
@@ -452,7 +464,7 @@ try {
 	
 	// date element for date_added
 	$FORM->addElement('date', 'date_added', gettext('Creation date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => date('Y')-1, 'maxYear' => date('Y')+5),
+		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
 		array('id' => 'blog_posting_date_added'));
 	
 	// submit button (save and stay)
@@ -467,8 +479,10 @@ try {
 	$FORM->setDefaults(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($blog_posting['id'], null),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'draft_filter' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME),
 		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
 		'title' => Base_Cnc::ifsetor($blog_posting['title'], null),
@@ -779,12 +793,16 @@ try {
 		// save request params 
 		$start = $FORM->exportValue('start');
 		$limit = $FORM->exportValue('limit');
-		$search_name = $FORM->exportValue('search_name');
+		$draft_filter = $FORM->exportValue('draft_filter');
+		$timeframe = $FORM->exportValue('timeframe');
 		$macro = $FORM->exportValue('macro');
+		$search_name = $FORM->exportValue('search_name');
 		
 		// append request params
-		$redirect_params = (!empty($start)) ? '&start='.$start : '&start=0';
+		$redirect_params = (!empty($start)) ? '&start='.$start : '';
 		$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+		$redirect_params .= (!empty($draft_filter) || $draft_filter === (string)intval(0)) ? '&draft_filter='.$draft_filter : '';
+		$redirect_params .= (!empty($timeframe)) ? '&timeframe='.$timeframe : '';
 		$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
 		$redirect_params .= (!empty($search_name)) ? '&search_name='.$search_name : '';
 		

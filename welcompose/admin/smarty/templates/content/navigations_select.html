@@ -57,19 +57,16 @@
 {if !empty($navigations)}
 <table summary="{i18n Available navigations}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="475" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$navigations item=_navigation}
 <tr>
-<td class="page"><span>{$_navigation.name|escape:"html"}</span></td>
-<td><a class="edit" href="navigations_edit.php?id={$_navigation.id|escape:"url"}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="navigations_edit.php?id={$_navigation.id|escape:"url"}" title="{i18n Edit}">{$_navigation.name|escape:"html"}</a></td>
 <td><a class="delete confirmDelNav" href="navigations_delete.php?id={$_navigation.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

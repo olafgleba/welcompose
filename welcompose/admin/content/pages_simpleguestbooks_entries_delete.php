@@ -131,9 +131,23 @@ try {
 	if (!$BASE->debug_enabled()) {
 		@ob_end_clean();
 	}
+	
+	// save request params 
+	$start = Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC);
+	$limit = Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC);
+	$timeframe = Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME);
+	$search_name = Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME);
+	$macro = Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO);
+	
+	// append request params
+	$redirect_params = (!empty($start)) ? '&start='.$start : '';
+	$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+	$redirect_params .= (!empty($timeframe)) ? '&timeframe='.$timeframe : '';
+	$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
+	$redirect_params .= (!empty($search_name)) ? '&search_name='.$search_name : '';
 		
 	// go back to overview page
-	header("Location: pages_simpleguestbooks_entries_select.php?page=".(int)$page['id']);
+	header("Location: pages_simpleguestbooks_entries_select.php?page=".(int)$page['id'].$redirect_params);
 	exit;
 	
 } catch (Exception $e) {

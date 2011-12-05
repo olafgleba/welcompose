@@ -50,7 +50,7 @@ var insert_type = '{$callback_params.insert_type}';
 {foreach from=$pages_arrays item=_page}
 <tr>
 <td class="initialNode">{$_page.name|escape:"html"}</td>
-<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#" title="{i18n Display related boxes}">&nbsp;</a></td>
+<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#modalWindow" title="{i18n Display related boxes}">&nbsp;</a></td>
 </tr>
 {/foreach}
 </table>

@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,25 +70,21 @@
 {/if}
 <table summary="{i18n Available Projects}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="485" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="130" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$content_projects item=_project}
 <tr>
 {if $_project.editable}
-<td class="template"><span>{$_project.name|escape:"html"}</span></td>
-<td><a class="edit" href="projects_edit.php?id={$_project.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
+<td class="page template"><a href="projects_edit.php?id={$_project.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_project.name|escape:"html"}</a></td>
 <td><a class="delete confirmDelProject" href="projects_delete.php?id={$_project.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 {else}
-<td class="template"><span>{$_project.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
-<td class="edit">&nbsp;</td>
-<td class="delete confirmDelProject">&nbsp;</td>
+<td class="page template"><span>{$_project.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></span></td>
+<td class="delete confirmDelProject"></td>
 {/if}
 </tr>
 {/foreach}
@@ -101,7 +96,7 @@
 {if $_item.self == $request.start}
 <li class="on">{$_item.page}</a></li>
 {else}
-<li><a href="pingservices_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
+<li><a href="projects_select.php?start={$_item.self|escape:"url"}">{$_item.page}</a></li>
 {/if}
 {/foreach}
 </ul>

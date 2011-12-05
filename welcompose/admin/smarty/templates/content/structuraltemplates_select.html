@@ -20,7 +20,6 @@
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
 
-
 </head>
 
 <body>
@@ -71,22 +70,19 @@
 {if !empty($structural_templates)}
 <table summary="{i18n Available structural templates}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="180" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="490" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="530" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
 <th>{i18n Description}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$structural_templates item=_template}
 <tr>
-<td>{$_template.name|escape:"html"}</td>
+<td class="page"><a href="structuraltemplates_edit.php?id={$_template.id|escape:"url"}" title="{i18n Edit}">{$_template.name|escape:"html"}</a></td>
 <td>{$_template.description|escape:"html"}</td>
-<td><a class="edit" href="structuraltemplates_edit.php?id={$_template.id|escape:"url"}" title="{i18n Edit}"></a></td>
 <td><a class="delete" href="structuraltemplates_delete.php?id={$_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

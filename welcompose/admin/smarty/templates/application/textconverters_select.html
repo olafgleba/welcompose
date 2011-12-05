@@ -69,22 +69,19 @@
 {/if}
 <table summary="{i18n Available Text Converters}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="350" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="80" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="530" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="320" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
 <th class="page">{i18n Name}</th>
 <th class="page">{i18n Default}</th>
-<th>{i18n Edit}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$text_converters item=_text_converter}
 <tr>
-<td><span>{$_text_converter.name|escape:"html"}</span></td>
-<td><span>{if $_text_converter.default == 1}{i18n yes}{/if}</span></td>
-<td><a class="edit" href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}"></a></td>
+<td class="page"><a href="textconverters_edit.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_text_converter.name|escape:"html"}</a></td>
+<td>{if $_text_converter.default == 1}{i18n yes}{/if}</td>
 <td><a class="delete" href="textconverters_delete.php?id={$_text_converter.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
