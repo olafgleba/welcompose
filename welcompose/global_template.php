@@ -70,6 +70,14 @@ try {
 	
 	// set mime type
 	header(sprintf("Content-Type: %s", (!empty($template['mime_type']) ? $template['mime_type'] : 'text/plain')));
+	// header("Cache-Control: must-revalidate");
+	// $offset = 60 * 60 * 24 * 5;
+	// $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+	// header($ExpStr);
+	// 
+	// //$offsetMod = 60 * 60 * 24 * 2;
+	// $ExpStrMod = "Last-Modified: " . gmdate("D, d M Y H:i:s", strtotime($template['date_modified'])) . " GMT";
+	// header($ExpStrMod);
 	
 	// change delimiter if required
 	if (isset($template['change_delimiter']) && $template['change_delimiter']) {
@@ -78,7 +86,7 @@ try {
 	}
 
 	// prepare the template name
-	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)).".".WCOM_CURRENT_PROJECT);
+	define("WCOM_TEMPLATE", sprintf("wcomgtpl:%s", Base_Cnc::ifsetor($_REQUEST['name'], null)).".".WCOM_CURRENT_PROJECT);	
 	
 	// start gunzip compression
 	if ($BASE->_conf['output']['gunzip'] == 1) {

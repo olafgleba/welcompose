@@ -93,15 +93,19 @@ public function addTemplateSet ($sqlData)
 		throw new Templating_TemplateSetException('Input for parameter sqlData is not an array');	
 	}
 	
-	// make sure that the new template set will be assigned to the current project
-	$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	if (!isset($sqlData['project'])) {
+		// make sure that the new template set will be assigned to the current project
+		$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	}
 	
 	// insert row
 	$insert_id = $this->base->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_SETS, $sqlData);
 	
-	// test if template set belongs to current user/project
-	if (!$this->templateSetBelongsToCurrentUser($insert_id)) {
-		throw new Templating_TemplateSetException('Template set does not belong to current user or project');
+	if (!isset($sqlData['project'])) {
+		// test if template set belongs to current user/project
+		if (!$this->templateSetBelongsToCurrentUser($insert_id)) {
+			throw new Templating_TemplateSetException('Template set does not belong to current user or project');
+		}
 	}
 	
 	return $insert_id;

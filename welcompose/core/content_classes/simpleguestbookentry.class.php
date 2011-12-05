@@ -293,6 +293,7 @@ public function selectSimpleGuestbookEntry ($id)
  *		<li>DATE_MODIFIED: sorty by date modified</li>
  *		<li>DATE_ADDED: sort by date added</li>
  *	 	<li>RANDOM: sort by random</li>
+ *	 	<li>NAME: sort by name</li>
  *    </ul>
  * </li>
  * </ul>
@@ -344,7 +345,8 @@ public function selectSimpleGuestbookEntries ($params = array())
 	$macros = array(
 		'DATE_ADDED' => '`content_simple_guestbook_entries`.`date_added`',
 		'DATE_MODIFIED' => '`content_simple_guestbook_entries`.`date_modified`',
-		'RANDOM' => 'rand()'
+		'RANDOM' => 'rand()',
+		'NAME' => '`content_simple_guestbook_entries`.`name`',
 	);
 
 	// load helper class
@@ -490,6 +492,9 @@ public function countSimpleGuestbookEntries ($params = array())
 		}
 	}
 	
+	// load helper class
+	$HELPER = load('utility:helper');
+	
 	// prepare query
 	$sql = "
 		SELECT 
@@ -521,15 +526,12 @@ public function countSimpleGuestbookEntries ($params = array())
 	if (!empty($book) && is_numeric($book)) {
 		$sql .= " AND `content_simple_guestbook_entries`.`book` = :book ";
 		$bind_params['book'] = $book;
-	}
-	
+	}	
 	if (!empty($search_name)) {
-		$sql .= " AND `content_simple_guestbook_entries`.`name` = :search_name ";
-		$bind_params['search_name'] = $search_name;
+		$sql .= " AND ".$HELPER->_searchLikewise('`content_simple_guestbook_entries`.`name`',
+			$search_name);
 	}
-	
-	if (!empty($timeframe)) {		
-		$HELPER = load('utility:helper');
+	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_simple_guestbook_entries`.`date_added`',
 			$timeframe);
 	}

@@ -278,6 +278,10 @@ public function selectBlogPosting ($id)
 			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `page_url`,
 			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`exclude` AS `page_exclude`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`no_follow` AS `page_no_follow`,
+			`content_pages`.`draft` AS `page_draft`,
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
@@ -507,6 +511,10 @@ public function selectBlogPostings ($params = array())
 			`content_pages`.`optional_text` AS `page_optional_text`,
 			`content_pages`.`url` AS `page_url`,
 			`content_pages`.`protect` AS `page_protect`,
+			`content_pages`.`exclude` AS `page_exclude`,
+			`content_pages`.`index_page` AS `page_index_page`,
+			`content_pages`.`no_follow` AS `page_no_follow`,
+			`content_pages`.`draft` AS `page_draft`,			
 			`content_pages`.`index_page` AS `page_index_page`,
 			`content_pages`.`image_small` AS `page_image_small`,
 			`content_pages`.`image_medium` AS `page_image_medium`,
@@ -608,7 +616,6 @@ public function selectBlogPostings ($params = array())
 	
 	// add sorting
 	if (!empty($order_macro)) {
-		$HELPER = load('utility:helper');
 		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
 	}
 	
@@ -774,8 +781,8 @@ public function countBlogPostings ($params = array())
 			$current_date);
 	}
 	if (!empty($search_name)) {
-		$sql .= " AND `content_blog_postings`.`title` = :search_name ";
-		$bind_params['search_name'] = $search_name;
+		$sql .= " AND ".$HELPER->_searchLikewise('`content_blog_postings`.`title`',
+			$search_name);
 	}
 	
 	return $this->base->db->select($sql, 'field', $bind_params);

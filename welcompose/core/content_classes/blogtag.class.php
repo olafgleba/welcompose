@@ -551,7 +551,7 @@ public function selectBlogTags ($params = array())
 		$bind_params['page'] = $page;
 	}
 	// exclude draft postings
-	$sql .= " AND `content_blog_postings`.`draft` = '0' ";
+	//$sql .= " AND `content_blog_postings`.`draft` = '0' ";
 	
 	// aggregate result set
 	$sql .= " GROUP BY `content_blog_tags`.`id` ";

@@ -383,7 +383,7 @@ public function smartyFetchGlobalTemplate ($name)
 }
 
 /**
- * Fetches last modification date of  global template from database for usage in the
+ * Fetches last modification date of global template from database for usage in the
  * smarty resource plugin. Takes the global template name as first argument.
  * Returns UNIX timestamp.
  *

@@ -402,6 +402,7 @@ public function selectUsers ($params = array())
 		$sql .= " AND `user_groups`.`id` = :group ";
 		$bind_params['group'] = (int)$group;
 	}
+	// avoid the current user and skeleton users
 	if (!empty($exclude) && is_numeric($exclude)) {
 		$sql .= " AND `user_users`.`id` != ".WCOM_CURRENT_USER." ";
 		$sql .= " AND `user_users`.`email` != 'WCOM_ANONYMOUS' ";

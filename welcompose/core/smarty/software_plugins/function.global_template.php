@@ -63,7 +63,7 @@ function smarty_function_global_template ($params, &$smarty)
 	$patterns = array(
 		'<project_id>',
 		'<project_name>',
-		'<global_file_name>'
+		'<global_template_name>'
 	);
 	ksort($patterns);
 	

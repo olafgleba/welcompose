@@ -94,14 +94,18 @@ public function addNavigation ($sqlData)
 	}
 	
 	// make sure that the navigation will be assigned to the right project
-	$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	if (!isset($sqlData['project'])) {
+		$sqlData['project'] = WCOM_CURRENT_PROJECT;
+	}
 	
 	// insert row
 	$insert_id = $this->base->db->insert(WCOM_DB_CONTENT_NAVIGATIONS, $sqlData);
 	
-	// test if navigation belongs to current user/project
-	if (!$this->navigationBelongsToCurrentUser($insert_id)) {
-		throw new Content_NavigationException('Navigation does not belong to current user or project');
+	if (!isset($sqlData['project'])) {
+		// test if navigation belongs to current user/project
+		if (!$this->navigationBelongsToCurrentUser($insert_id)) {
+			throw new Content_NavigationException('Navigation does not belong to current user or project');
+		}
 	}
 	
 	return $insert_id;

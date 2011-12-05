@@ -267,7 +267,13 @@ public function selectGeneratorFormField ($id)
  * <li>form, int, optional: Form id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
+ * <li>order_marco, string, otpional: How to sort the result set.
  * </ul>
+ * Supported macros:
+ *    <ul>
+ *	 	<li>NAME: sort by name</li>
+ *    </ul>
+ * </li>
  * 
  * @throws Content_GeneratorFormFieldException
  * @param array Select params
@@ -284,6 +290,7 @@ public function selectGeneratorFormFields ($params = array())
 	$form = null;
 	$start = null;
 	$limit = null;
+	$order_macro = null;
 	$bind_params = array();
 	
 	// input check
@@ -294,6 +301,9 @@ public function selectGeneratorFormFields ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
 			case 'form':
 			case 'start':
 			case 'limit':
@@ -303,6 +313,15 @@ public function selectGeneratorFormFields ($params = array())
 				throw new Content_GeneratorFormFieldException("Unknown parameter $_key");
 		}
 	}
+	
+	// define order macros
+	$macros = array(
+		'NAME' => '`content_generator_form_fields`.`name`',
+		'TYPE' => '`content_generator_form_fields`.`type`'
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
 	
 	// prepare query
 	$sql = "
@@ -348,7 +367,12 @@ public function selectGeneratorFormFields ($params = array())
 		$bind_params['form'] = $form;
 	}
 	
-	$sql .= ' ORDER BY `content_generator_form_fields`.`sorting` ';
+	// add sorting
+	if (!empty($order_macro)) {
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	} else {
+		$sql .= ' ORDER BY `content_generator_form_fields`.`sorting` ';
+	}
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
