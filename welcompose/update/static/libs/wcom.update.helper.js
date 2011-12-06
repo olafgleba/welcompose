@@ -61,6 +61,7 @@ Helper.prototype.getDataParentNode = Helper_getDataParentNode;
 Helper.prototype.getParentNodeNextSibling = Helper_getParentNodeNextSibling;
 Helper.prototype.showDependingFormfield = Helper_showDependingFormfield;
 Helper.prototype.setFormfieldGroup = Helper_setFormfieldGroup;
+Helper.prototype.validate = Helper_validate;
 
 
 /**
@@ -291,6 +292,40 @@ function Helper_getParentNodeNextSibling (elem, level)
 	}
 	if (typeof a != 'undefined')
 		return a;
+}
+
+
+/**
+ * Validate form elements on the fly.
+ * <br />
+ * Get the form element id attribute value and populate the
+ * regex processed response into the layer <em>container</em>.
+ * This assumes that we have corresponding html markup/css.
+ * <br />
+ * For in depths explanation please have a look on the online
+ * project support area.
+ *
+ * @param {object} elem Current element
+ * @throws applyError on exception
+ */
+function Helper_validate(elem)
+{	
+	var url		= this.validatePath;
+	elemID		= $(elem).getAttribute('id');
+	var elemVal	= $F(elem);
+	var pars	= 'elemID=' + elemID + '&elemVal=' + elemVal;
+	var container = elemID + '_container';
+	
+	var myAjax = new Ajax.Updater ( 
+		{
+			failure: container,
+			success: container
+		},
+		url,
+		{
+			method: 'post',
+			parameters: pars
+		});		
 }
 
 /**

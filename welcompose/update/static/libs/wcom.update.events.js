@@ -51,14 +51,14 @@ var definitions = {
 		}
 		el.onblur = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {
-				Forms.setOnEvent(this, '','#000','solid');
+				Forms.setOnEvent(this, '','#666','solid');
 			}
 			return false;
 		}
 	},
 	'input.validate' : function(el){
 		el.onkeyup = function(){
-			validate(this);
+			Helper.validate(this);
 		}
 	},
 	'input.startUpdate' : function(el){

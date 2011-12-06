@@ -79,12 +79,12 @@ function _buildXMLHTTPRequest ()
 try {
 	<contents>
 } catch (e) {
-	_applyError(e);
+	_applyError(e, additionalStr);
 }</code></pre>
  * 
  * @param {object} exception error obj presented by catch statement
  */
-function _applyError (exception)
+function _applyError (exception, additionalStr)
 {
 	var errStr;
 	
@@ -93,19 +93,22 @@ function _applyError (exception)
 			return false;
 		break;
 		case 1 :
-			errStr = exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber;
+			if (additionalStr) {
+				errStr = additionalStr;
+			} else {
+				errStr = exception + '\r\n' + exception.fileName + '\r\n' + exception.lineNumber;
+			}
 		break;
 		case 2 :
-			errStr = e_msg_str_prefix + '\r\n\r\n' 
-					+ exception + '\r\n' 
-					+ exception.fileName + '\r\n' 
-					+ exception.lineNumber + '\r\n\r\n' 
-					+ e_msg_str_suffix;
+			if (additionalStr) {
+				errStr = additionalStr;
+			} else {
+				errStr = e_msg_str_prefix + '\r\n\r\n' + exception + '\r\n' + exception.fileName + '\r\n' + exception.lineNumber + '\r\n\r\n' + e_msg_str_suffix;
+			}
 		break;
 		default :
 			errStr = exception;
+		break;
 	}
 	alert (errStr);
 }
@@ -182,7 +185,8 @@ function Base ()
 		/**
 		 * Path for dynamically imported file
 		 */
-		this.parseHelpUrl = 'parse/parse.help.php';
+		this.parseHelpPath = 'parse/parse.help.php';
+		this.validatePath = 'validate.js.php';
 	} catch (e) {
 		_applyError(e);
 	}
@@ -450,9 +454,9 @@ function Help_show (elem)
 		} else {
 			this.processId = this.processId.replace(/_\d+/, '');
 			this.formId = Helper.getDataParentNode(this.elem, 1);
-		}	
-			
-		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+		}
+		
+		this.url = this.parseHelpPath + '?page=' + this.formId + '_' + this.processId;
 			
 		if (typeof this.req != 'undefined') {
 		
@@ -466,7 +470,7 @@ function Help_show (elem)
 		
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlHide);
-
+		
 		Behaviour.reapply('.' + this.elem.className);
 		
 	} catch (e) {
@@ -488,16 +492,16 @@ function Help_hide (elem)
 		this.attr = 'for';
 		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
 		this.processIdAfter = $(this.processId).parentNode.nextSibling;
-		
+	
 		this.elem.className = this.helpClass;
-		
-		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.4});
+	
+		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.3});
 
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlShow);
-	
+
 		Behaviour.reapply('.' + this.elem.className);
-		
+	
 	} catch (e) {
 		_applyError(e);
 	}
@@ -512,7 +516,7 @@ function Help_hide (elem)
  * @throws applyError on exception
  */
 function Help_processHelp (ttarget)
-{  
+{
 	try {
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {

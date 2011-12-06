@@ -182,7 +182,8 @@ function Base ()
 		/**
 		 * Path for dynamically imported file
 		 */
-		this.parseHelpUrl = 'parse/parse.help.php';
+		this.parseHelpPath = 'parse/parse.help.php';
+		this.validatePath = 'validate.js.php';
 	} catch (e) {
 		_applyError(e);
 	}
@@ -452,7 +453,7 @@ function Help_show (elem)
 			this.formId = Helper.getDataParentNode(this.elem, 1);
 		}	
 			
-		this.url = this.parseHelpUrl + '?page=' + this.formId + '_' + this.processId;
+		this.url = this.parseHelpPath + '?page=' + this.formId + '_' + this.processId;
 			
 		if (typeof this.req != 'undefined') {
 		
