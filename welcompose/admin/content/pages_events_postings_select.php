@@ -133,7 +133,7 @@ try {
 	$event_postings = $EVENTPOSTING->selectEventPostings(array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'draft' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20,
 		'order_macro' => (!empty($_REQUEST['macro'])) ? $_REQUEST['macro'] : 'DATE_ADDED:DESC',
@@ -145,7 +145,7 @@ try {
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'draft' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
 	$posting_count = $EVENTPOSTING->countEventPostings($select_params);
@@ -155,7 +155,7 @@ try {
 	$select_params = array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'draft' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME)
 	);
 	$total_posting_count = $EVENTPOSTING->countEventPostings($select_params);
@@ -170,7 +170,7 @@ try {
 	// import and assign request params
 	$request = array(
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
-		'draft' => Base_Cnc::filterRequest($_REQUEST['draft'], WCOM_REGEX_NUMERIC),
+		'draft_filter' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
 		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
