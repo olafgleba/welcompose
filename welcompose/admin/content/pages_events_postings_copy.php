@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: pages_events_postings_edit.php
+ * File: pages_events_postings_copy.php
  *
  * Copyright (c) 2008 creatics media.systems
  *
@@ -148,6 +148,12 @@ try {
 	$FORM->applyFilter('start', 'strip_tags');
 	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 	
+	// hidden for draft
+	$FORM->addElement('hidden', 'draft_filter');
+	$FORM->applyFilter('draft_filter', 'trim');
+	$FORM->applyFilter('draft_filter', 'strip_tags');
+	$FORM->addRule('draft_filter', gettext('draft is expected to be numeric'), 'numeric');
+	
 	// hidden for limit
 	$FORM->addElement('hidden', 'limit');
 	$FORM->applyFilter('limit', 'trim');
@@ -159,15 +165,15 @@ try {
 	$FORM->applyFilter('search_name', 'trim');
 	$FORM->applyFilter('search_name', 'strip_tags');
 	
-	// hidden for search_name
+	// hidden for macro
 	$FORM->addElement('hidden', 'macro');
 	$FORM->applyFilter('macro', 'trim');
 	
-	// hidden for frontend view control
-	$FORM->addElement('hidden', 'preview');
-	$FORM->applyFilter('preview', 'trim');
-	$FORM->applyFilter('preview', 'strip_tags');
-	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
+	// hidden for timeframe
+	$FORM->addElement('hidden', 'timeframe');
+	$FORM->applyFilter('timeframe', 'trim');
+	$FORM->applyFilter('timeframe', 'strip_tags');
+	$FORM->addRule('timeframe', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
@@ -184,6 +190,33 @@ try {
 	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
 	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
 		WCOM_REGEX_URL_NAME);
+		
+	// date element for date_start
+	$FORM->addElement('date', 'date_start', gettext('Start date'),
+		array('language' => 'en', 'format' => 'd.m.Y', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
+		array('id' => 'event_posting_date_start'));
+	$FORM->addGroupRule('date_start', gettext('Please enter a start date at least'), 'required');
+		
+	// date element for date_start_time_start
+	$FORM->addElement('date', 'date_start_time_start', gettext('Start time'),
+		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_start_time_start'));
+		
+	// date element for date_start_time_end
+	$FORM->addElement('date', 'date_start_time_end', gettext('End time'),
+		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_start_time_end'));
+	
+	// date element for date_end
+	$FORM->addElement('date', 'date_end', gettext('End date'),
+		array('language' => 'en', 'format' => 'd.m.Y', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
+		array('id' => 'event_posting_date_end'));
+		
+	// date element for date_end_time_start
+	$FORM->addElement('date', 'date_end_time_start', gettext('Start time'),
+		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_end_time_start'));
+		
+	// date element for date_end_time_end
+	$FORM->addElement('date', 'date_end_time_end', gettext('End time'),
+		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_end_time_end'));
 	
 	// textarea for content
 	$FORM->addElement('textarea', 'content', gettext('Content'),
@@ -259,8 +292,10 @@ try {
 	$FORM->setDefaults(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($event_posting['id'], null),
+		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'draft_filter' => Base_Cnc::filterRequest($_REQUEST['draft_filter'], WCOM_REGEX_NUMERIC),
 		'search_name' => Base_Cnc::filterRequest($_REQUEST['search_name'], WCOM_REGEX_SEARCH_NAME),
 		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
 		'title' => Base_Cnc::ifsetor($event_posting['title'], null),
@@ -275,8 +310,12 @@ try {
 		'tags' => $EVENTTAG->getTagStringFromSerializedArray(Base_Cnc::ifsetor($event_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($event_posting['draft'], null),
 		'date_added' => Base_Cnc::ifsetor($event_posting['date_added'], null),
-		// ctrl var for frontend view
-		'preview' => $_SESSION['preview_ctrl']
+		'date_start' => Base_Cnc::ifsetor($event_posting['date_start'], null),
+		'date_start_time_start' => Base_Cnc::ifsetor($event_posting['date_start_time_start'], null),
+		'date_start_time_end' => Base_Cnc::ifsetor($event_posting['date_start_time_end'], null),
+		'date_end' => Base_Cnc::ifsetor($event_posting['date_end'], null),
+		'date_end_time_start' => Base_Cnc::ifsetor($event_posting['date_end_time_start'], null),
+		'date_end_time_end' => Base_Cnc::ifsetor($event_posting['date_end_time_end'], null)
 	));
 	
 	// validate it
@@ -302,23 +341,6 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-		
-		// build session
-		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC),
-			'preview_ctrl' => Base_Cnc::filterRequest($_SESSION['preview_ctrl'], WCOM_REGEX_NUMERIC)
-		);
-		
-		// assign $_SESSION to smarty
-		$BASE->utility->smarty->assign('session', $session);
-		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}	
-		if (!empty($_SESSION['preview_ctrl'])) {
-		  	$_SESSION['preview_ctrl'] = '';
-		}
 
 		// select available projects
 		$select_params = array(
@@ -347,6 +369,8 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
+		$sqlData['page'] = $FORM->exportValue('page');
+		$sqlData['user'] = WCOM_CURRENT_USER;
 		$sqlData['title'] = $FORM->exportValue('title');
 		$sqlData['title_url'] = $FORM->exportValue('title_url');
 		$sqlData['content_raw'] = $FORM->exportValue('content');
@@ -364,6 +388,12 @@ try {
 		$sqlData['year_added'] = date('Y', strtotime($date_added));
 		$sqlData['month_added'] = date('m', strtotime($date_added));
 		$sqlData['day_added'] = date('d', strtotime($date_added));
+		$sqlData['date_start'] = $HELPER->dateFromQuickFormDate($FORM->exportValue('date_start'));
+		$sqlData['date_start_time_start'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_start_time_start'));
+		$sqlData['date_start_time_end'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_start_time_end'));
+		$sqlData['date_end'] = $HELPER->dateFromQuickFormDate($FORM->exportValue('date_end'));
+		$sqlData['date_end_time_start'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_end_time_start'));
+		$sqlData['date_end_time_end'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_end_time_end'));
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
@@ -400,7 +430,7 @@ try {
 			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
 			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
 		}
-
+		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
 		
@@ -410,21 +440,22 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$EVENTPOSTING->updateEventPosting($FORM->exportValue('id'), $sqlData);
+			$posting_id = $EVENTPOSTING->addEventPosting($sqlData);
 			
-			// update tags
-			$EVENTTAG->updatePostingTags($FORM->exportValue('page'), $FORM->exportValue('id'),
+			// add tags
+			$EVENTTAG->addPostingTags($FORM->exportValue('page'), $posting_id,
 				$EVENTTAG->_tagStringToArray($FORM->exportValue('tags')));
 			
 			// get tags
-			$tags = $EVENTTAG->selectEventTags(array('posting' => $FORM->exportValue('id')));
+			$tags = $EVENTTAG->selectEventTags(array('posting' => $posting_id));
 			
-			// update event posting
+			// update blog posting
 			$sqlData = array(
 				'tag_count' => count($tags),
 				'tag_array' => $EVENTTAG->getSerializedTagArrayFromTagArray($tags)
 			);
-			$EVENTPOSTING->updateEventPosting($FORM->exportValue('id'), $sqlData);
+			
+			$EVENTPOSTING->updateEventPosting($posting_id, $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -436,25 +467,6 @@ try {
 			throw $e;
 		}
 		
-		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
-		
-		// add response to session
-		if (!empty($saveAndRemainOnPage)) {
-			$_SESSION['response'] = 1;
-		}
-		
-		// preview control value
-		$activePreview = $FORM->exportValue('preview');
-				
-		// add preview_ctrl to session
-		if (!empty($activePreview)) {
-			$_SESSION['preview_ctrl'] = 1;
-		}
-				
-		// redirect
-		$SESSION->save();
-		
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
@@ -463,12 +475,16 @@ try {
 		// save request params 
 		$start = $FORM->exportValue('start');
 		$limit = $FORM->exportValue('limit');
-		$search_name = $FORM->exportValue('search_name');
+		$draft_filter = $FORM->exportValue('draft_filter');
+		$timeframe = $FORM->exportValue('timeframe');
 		$macro = $FORM->exportValue('macro');
+		$search_name = $FORM->exportValue('search_name');
 		
 		// append request params
-		$redirect_params = (!empty($start)) ? '&start='.$start : '&start=0';
+		$redirect_params = (!empty($start)) ? '&start='.$start : '';
 		$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+		$redirect_params .= (!empty($draft_filter) || $draft_filter === (string)intval(0)) ? '&draft_filter='.$draft_filter : '';
+		$redirect_params .= (!empty($timeframe)) ? '&timeframe='.$timeframe : '';
 		$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
 		$redirect_params .= (!empty($search_name)) ? '&search_name='.$search_name : '';
 		

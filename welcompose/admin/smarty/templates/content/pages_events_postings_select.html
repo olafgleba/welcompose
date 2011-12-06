@@ -82,15 +82,14 @@
 <option value="{$_timeframe_value}"{if $request.timeframe == $_timeframe_value} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
 </select>
-<label for="draft">{i18n Draft}</label> 
-<select id="draft" name="draft">
-<option{if empty($request.draft)} selected="selected"{/if}>{i18n Please choose...}</option>
-<option value="1"{if $request.draft == "1"} selected="selected"{/if}>{i18n Yes}</option>
-<option value="0"{if $request.draft == "0"} selected="selected"{/if}>{i18n No}</option>
+<label for="draft_filter">{i18n Draft}</label> 
+<select id="draft_filter" name="draft_filter">
+<option{if empty($request.draft_filter)} selected="selected"{/if}>{i18n Please choose...}</option>
+<option value="1"{if $request.draft_filter == "1"} selected="selected"{/if}>{i18n Yes}</option>
+<option value="0"{if $request.draft_filter == "0"} selected="selected"{/if}>{i18n No}</option>
 </select>
 <label for="limit">{i18n Show per page}</label> 
 <select id="limit" name="limit">
-<option value="1"{if empty($request.limit)} selected="selected"{/if}>1</option>
 <option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
 <option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
 <option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>

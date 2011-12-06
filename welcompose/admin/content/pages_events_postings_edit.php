@@ -162,12 +162,6 @@ try {
 	// hidden for search_name
 	$FORM->addElement('hidden', 'macro');
 	$FORM->applyFilter('macro', 'trim');
-	
-	// hidden for frontend view control
-	$FORM->addElement('hidden', 'preview');
-	$FORM->applyFilter('preview', 'trim');
-	$FORM->applyFilter('preview', 'strip_tags');
-	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
 
 	// textfield for title
 	$FORM->addElement('text', 'title', gettext('Title'),
@@ -311,9 +305,7 @@ try {
 		'date_start_time_end' => Base_Cnc::ifsetor($event_posting['date_start_time_end'], null),
 		'date_end' => Base_Cnc::ifsetor($event_posting['date_end'], null),
 		'date_end_time_start' => Base_Cnc::ifsetor($event_posting['date_end_time_start'], null),
-		'date_end_time_end' => Base_Cnc::ifsetor($event_posting['date_end_time_end'], null),
-		// ctrl var for frontend view
-		'preview' => $_SESSION['preview_ctrl']
+		'date_end_time_end' => Base_Cnc::ifsetor($event_posting['date_end_time_end'], null)
 	));
 	
 	// validate it
@@ -342,8 +334,7 @@ try {
 		
 		// build session
 		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC),
-			'preview_ctrl' => Base_Cnc::filterRequest($_SESSION['preview_ctrl'], WCOM_REGEX_NUMERIC)
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
 		);
 		
 		// assign $_SESSION to smarty
@@ -352,9 +343,6 @@ try {
 		// empty $_SESSION
 		if (!empty($_SESSION['response'])) {
 			$_SESSION['response'] = '';
-		}	
-		if (!empty($_SESSION['preview_ctrl'])) {
-		  	$_SESSION['preview_ctrl'] = '';
 		}
 
 		// select available projects
@@ -485,14 +473,6 @@ try {
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
 			$_SESSION['response'] = 1;
-		}
-		
-		// preview control value
-		$activePreview = $FORM->exportValue('preview');
-				
-		// add preview_ctrl to session
-		if (!empty($activePreview)) {
-			$_SESSION['preview_ctrl'] = 1;
 		}
 				
 		// redirect
