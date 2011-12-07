@@ -438,12 +438,27 @@ public function selectPages ($params = array())
 		$sql .= " AND `content_pages`.`protect` IS NULL ";
 	}
 
-	// On default (var not set) include only visible pages
-	if (is_null($exclude)) {
+	/** 
+	 * This two following conditions behaviour differs 
+	 * from the default pattern
+	 * 
+	 * 'exclude' and 'draft' are not supposed to be used as 
+	 * a param in smarty template plugins (e.g. {select_named}).
+	 * Both actions implies explicit impact on the frontend,
+	 * so the behaviour should stick to the respective checkbox
+	 * status only.
+	 *
+	 * To handle the admin view, we pass these both vars as 
+	 * not empty params in selectPages().
+	 *
+	 */
+	
+	// Include only non excluded pages
+	if (empty($exclude)) {
 		$sql .= " AND `content_pages`.`exclude` IS NULL ";
 	}		
-	// On default (var not set) include only result rows without drafts
-	if (is_null($draft)) {
+	// Include only visible pages
+	if (empty($draft)) {
 		$sql .= " AND `content_pages`.`draft` IS NULL ";
 	}
 			
