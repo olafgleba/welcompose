@@ -94,6 +94,7 @@ event_atom_10_start_tag =
 event_rss_20 = 
 event_rss_20_tag = 
 event_rss_20_start = 
+event_rss_20_start_tag = 
 generator_form_index = 
 generator_form_index_start = 
 global_template_url =
