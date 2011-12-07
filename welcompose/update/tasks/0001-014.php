@@ -85,6 +85,8 @@ try {
 	 * ---------------------
 	 *
 	 * - Update table content_pages row 'draft' => Set from '0' to NULL
+	 * - Update table content_pages row 'exclude' => Set from '0' to NULL
+	 *
 	 *   This is required for all Welcompose Installations below 0.9.4 as
 	 *   we introduce a different handling on function 'exclude' and 'draft'
 	 *   with 0.9.4
@@ -101,6 +103,18 @@ try {
 					`draft` = NULL
 				WHERE
 					`draft` = '0'
+			";
+			
+			// execute update
+			$BASE->db->execute($sql);
+			
+			$sql = "
+				UPDATE
+					".WCOM_DB_CONTENT_PAGES." 
+				SET
+					`exclude` = NULL
+				WHERE
+					`exclude` = '0'
 			";
 			
 			// execute update
