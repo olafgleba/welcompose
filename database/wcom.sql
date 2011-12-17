@@ -1259,7 +1259,6 @@ CREATE TABLE `content_generator_form_fields` (
   `required_message` varchar(255),
   `validator_regex` varchar(255),
   `validator_message` varchar(255),
-  `sorting` char(2),
   PRIMARY KEY(`id`),
   INDEX `form`(`form`),
   CONSTRAINT `content_generator_form_fields.form2content_generator_forms.id` FOREIGN KEY (`form`)
@@ -1349,12 +1348,12 @@ CREATE TABLE `content_blog_tags2content_blog_postings` (
   INDEX `tag`(`tag`),
   CONSTRAINT `content_blog_postings.id2content_blog_tags.id` FOREIGN KEY (`posting`)
     REFERENCES `content_blog_postings`(`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `content_blog_tags.id2content_blog_postings.id` FOREIGN KEY (`tag`)
     REFERENCES `content_blog_tags`(`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 )
 ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
@@ -1370,12 +1369,12 @@ CREATE TABLE `content_event_tags2content_event_postings` (
   INDEX `tag`(`tag`),
   CONSTRAINT `content_event_postings.id2content_event_tags.id` FOREIGN KEY (`posting`)
     REFERENCES `content_event_postings`(`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `content_event_tags.id2content_event_postings.id` FOREIGN KEY (`tag`)
     REFERENCES `content_event_tags`(`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 )
 ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
