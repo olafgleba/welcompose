@@ -189,14 +189,6 @@ try {
 		$FORM->addRule('validator_message', gettext('Please enter a validator message'), 'required');
 	}
 	
-	// textfield for sorting
-	$FORM->addElement('text', 'sorting', gettext('Sorting'),
-		array('id' => 'generator_form_field_sorting', 'maxlength' => 2, 'class' => 'w300'));
-	$FORM->applyFilter('sorting', 'trim');
-	$FORM->applyFilter('sorting', 'strip_tags');
-	$FORM->addRule('sorting', gettext('Enter a number for field sorting'), 'required');
-	$FORM->addRule('sorting', gettext('The sorting number may be only numeric'), 'numeric');
-	
 	// submit button
 	$FORM->addElement('submit', 'submit', gettext('Save'),
 		array('class' => 'submit200'));
@@ -278,7 +270,6 @@ try {
 		$sqlData['required_message'] = $FORM->exportValue('required_message');
 		$sqlData['validator_regex'] = $FORM->exportValue('validator_regex');
 		$sqlData['validator_message'] = $FORM->exportValue('validator_message');
-		$sqlData['sorting'] = $FORM->exportValue('sorting');
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);

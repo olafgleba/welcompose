@@ -80,10 +80,11 @@
 <input type="hidden" name="page" value="{$page.id|escape:"html"}" />
 <label for="limit">{i18n Show per page}</label> 
 <select id="limit" name="limit">
-<option value="10"{if empty($request.limit)} selected="selected"{/if}>10</option>
 <option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
 <option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
+<option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
 </select>
+
 &nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
 </fieldset>
 </form>
@@ -114,17 +115,17 @@
 <tr>
 <th class="page">{i18n Name} &nbsp;<a title="{i18n Display by name descending}" class="down"  href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=NAME:DESC{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a> <a title="{i18n Display by name ascending}" class="up" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=NAME{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a></th>
 <th>{i18n Label}</th>
-<th>{i18n Type} &nbsp;<a title="{i18n Display by type descending}" class="down"  href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE:DESC{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a> <a title="{i18n Display by type ascending}" class="up" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a></th>
+<th>{i18n Type} &nbsp;<a title="{i18n Display by type descending}" class="down" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE:DESC{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a> <a title="{i18n Display by type ascending}" class="up" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a></th>
 <th>{i18n Required}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$form_fields item=_field}
 <tr>
-<td class="page"><a href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Edit}">{$_field.name|escape:"html"}</a></td>
+<td class="page"><a href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Edit}">{$_field.name|escape:"html"}</a></td>
 <td>{$_field.label|escape:"html"}</td>
 <td>{$_field.type|escape:"html"}</td>
 <td>{if $_field.required == 0}{i18n No}{else}Yes{/if}</td>
-<td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
 </table>

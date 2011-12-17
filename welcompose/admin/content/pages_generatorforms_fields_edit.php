@@ -130,6 +130,22 @@ try {
 	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
 	
+	// hidden for start
+	$FORM->addElement('hidden', 'start');
+	$FORM->applyFilter('start', 'trim');
+	$FORM->applyFilter('start', 'strip_tags');
+	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	
+	// hidden for limit
+	$FORM->addElement('hidden', 'limit');
+	$FORM->applyFilter('limit', 'trim');
+	$FORM->applyFilter('limit', 'strip_tags');
+	$FORM->addRule('limit', gettext('limit is expected to be numeric'), 'numeric');
+	
+	// hidden for macro
+	$FORM->addElement('hidden', 'macro');
+	$FORM->applyFilter('macro', 'trim');
+	
 	// select for type
 	$FORM->addElement('select', 'type', gettext('Type'), $GENERATORFORMFIELD->getTypeListForForm(),
 		array('id' => 'generator_form_field_type'));
@@ -201,14 +217,6 @@ try {
 		$FORM->addRule('validator_message', gettext('Please enter a validator message'), 'required');
 	}
 	
-	// textfield for sorting
-	$FORM->addElement('text', 'sorting', gettext('Sorting'),
-		array('id' => 'generator_form_field_sorting', 'maxlength' => 2, 'class' => 'w300'));
-	$FORM->applyFilter('sorting', 'trim');
-	$FORM->applyFilter('sorting', 'strip_tags');
-	$FORM->addRule('sorting', gettext('Enter a number for field sorting'), 'required');
-	$FORM->addRule('sorting', gettext('The sorting number may be only numeric'), 'numeric');
-	
 	// submit button (save and stay)
 	$FORM->addElement('submit', 'save', gettext('Save edit'),
 		array('class' => 'submit200'));
@@ -221,6 +229,9 @@ try {
 	$FORM->setDefaults(array(
 		'id' => Base_Cnc::ifsetor($form_field['id'], null),
 		'page' => Base_Cnc::ifsetor($form_field['form'], null),
+		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
+		'limit' => Base_Cnc::filterRequest($_REQUEST['limit'], WCOM_REGEX_NUMERIC),
+		'macro' => Base_Cnc::filterRequest($_REQUEST['macro'], WCOM_REGEX_ORDER_MACRO),
 		'type' => Base_Cnc::ifsetor($form_field['type'], null),
 		'label' => Base_Cnc::ifsetor($form_field['label'], null),
 		'name' => Base_Cnc::ifsetor($form_field['name'], null),
@@ -229,8 +240,7 @@ try {
 		'required' => Base_Cnc::ifsetor($form_field['required'], null),
 		'required_message' => Base_Cnc::ifsetor($form_field['required_message'], null),
 		'validator_regex' => Base_Cnc::ifsetor($form_field['validator_regex'], null),
-		'validator_message' => Base_Cnc::ifsetor($form_field['validator_message'], null),
-		'sorting' => Base_Cnc::ifsetor($form_field['sorting'], null)
+		'validator_message' => Base_Cnc::ifsetor($form_field['validator_message'], null)
 	));
 	
 	// validate it
@@ -303,7 +313,6 @@ try {
 		$sqlData['required_message'] = $FORM->exportValue('required_message');
 		$sqlData['validator_regex'] = $FORM->exportValue('validator_regex');
 		$sqlData['validator_message'] = $FORM->exportValue('validator_message');
-		$sqlData['sorting'] = $FORM->exportValue('sorting');
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -342,11 +351,23 @@ try {
 			@ob_end_clean();
 		}
 		
+		// save request params 
+		$start = $FORM->exportValue('start');
+		$limit = $FORM->exportValue('limit');
+		$macro = $FORM->exportValue('macro');
+		
+		// append request params
+		$redirect_params = (!empty($start)) ? '&start='.$start : '';
+		$redirect_params .= (!empty($limit)) ? '&limit='.$limit : '&limit=20';
+		$redirect_params .= (!empty($macro)) ? '&macro='.$macro : '';
+		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_generatorforms_fields_edit.php?page=".$FORM->exportValue('page')."&id=".$FORM->exportValue('id'));
+			header("Location: pages_generatorforms_fields_edit.php?page=".
+						$FORM->exportValue('page')."&id=".$FORM->exportValue('id').$redirect_params);
 		} else {
-			header("Location: pages_generatorforms_fields_select.php?page=".$FORM->exportValue('page'));
+			header("Location: pages_generatorforms_fields_select.php?page=".
+						$FORM->exportValue('page').$redirect_params);
 		}
 		exit;
 	}

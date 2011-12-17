@@ -135,7 +135,7 @@ try {
 		'form' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
 		'limit' => (!empty($_REQUEST['limit'])) ? $_REQUEST['limit'] : 20,
-		'order_macro' => (!empty($_REQUEST['macro'])) ? $_REQUEST['macro'] : 'NAME:DESC'
+		'order_macro' => (!empty($_REQUEST['macro'])) ? $_REQUEST['macro'] : 'NAME'
 	));
 	$BASE->utility->smarty->assign('form_fields', $form_fields);
 	

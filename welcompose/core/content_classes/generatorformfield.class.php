@@ -222,8 +222,7 @@ public function selectGeneratorFormField ($id)
 			`content_generator_form_fields`.`required` AS `required`,
 			`content_generator_form_fields`.`required_message` AS `required_message`,
 			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
-			`content_generator_form_fields`.`validator_message` AS `validator_message`,
-			`content_generator_form_fields`.`sorting` AS `sorting`
+			`content_generator_form_fields`.`validator_message` AS `validator_message`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
 		JOIN
@@ -267,11 +266,12 @@ public function selectGeneratorFormField ($id)
  * <li>form, int, optional: Form id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
- * <li>order_marco, string, otpional: How to sort the result set.
+ * <li>order_marco, string, optional: How to sort the result set.
  * </ul>
  * Supported macros:
  *    <ul>
  *	 	<li>NAME: sort by name</li>
+ *	 	<li>TYPE: sort by field type</li>
  *    </ul>
  * </li>
  * 
@@ -336,8 +336,7 @@ public function selectGeneratorFormFields ($params = array())
 			`content_generator_form_fields`.`required` AS `required`,
 			`content_generator_form_fields`.`required_message` AS `required_message`,
 			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
-			`content_generator_form_fields`.`validator_message` AS `validator_message`,
-			`content_generator_form_fields`.`sorting` AS `sorting`
+			`content_generator_form_fields`.`validator_message` AS `validator_message`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
 		JOIN
@@ -370,8 +369,6 @@ public function selectGeneratorFormFields ($params = array())
 	// add sorting
 	if (!empty($order_macro)) {
 		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
-	} else {
-		$sql .= ' ORDER BY `content_generator_form_fields`.`sorting` ';
 	}
 	
 	// add limits
