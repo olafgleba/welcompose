@@ -79,7 +79,7 @@ try {
 	 * References
 	 * ----------
 	 *
-	 * Commit: no decent allocation possible
+	 * Commit: 8b9194d82f42e4231808f9ff3a1ab786d617cd95
 	 * 
 	 * Changes to be applied
 	 * ---------------------
