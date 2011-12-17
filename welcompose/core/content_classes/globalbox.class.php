@@ -258,6 +258,7 @@ public function selectGlobalBox ($id)
  *    <ul>
  *        <li>NAME: sort by name</li>
  *        <li>PRIORITY: sort by priority</li>
+ *        <li>RANDOM: sort by random selection</li>
  *        <li>DATE_MODIFIED: sort by date modified</li>
  *        <li>DATE_ADDED: sort by date added</li>
  *    </ul>
@@ -305,10 +306,11 @@ public function selectGlobalBoxes ($params = array())
 	
 	// define order macros
 	$macros = array(
-		'NAME' => '`name`',
-		'PRIORITY' => '`priority`',
-		'DATE_ADDED' => '`date_added`',
-		'DATE_MODIFIED' => '`date_modified`'
+		'NAME' => '`content_global_boxes`.`name`',
+		'PRIORITY' => '`content_global_boxes`.`priority`',
+		'RANDOM' => 'rand()',
+		'DATE_ADDED' => '`content_global_boxes`.`date_added`',
+		'DATE_MODIFIED' => '`content_global_boxes`.`date_modified`'
 	);
 	
 	// load helper class
@@ -340,7 +342,6 @@ public function selectGlobalBoxes ($params = array())
 	
 	// add sorting
 	if (!empty($order_macro)) {
-		$HELPER = load('utility:helper');
 		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
 	}
 	
