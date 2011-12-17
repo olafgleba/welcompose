@@ -218,6 +218,7 @@ public function selectBox ($id)
 			`content_boxes`.`content` AS `content`,
 			`content_boxes`.`text_converter` AS `text_converter`,
 			`content_boxes`.`apply_macros` AS `apply_macros`,
+			`content_boxes`.`priority` AS `priority`,
 			`content_boxes`.`date_modified` AS `date_modified`,
 			`content_boxes`.`date_added` AS `date_added`
 		FROM
@@ -313,6 +314,16 @@ public function selectBoxUsingName ($page, $name)
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>order_marco, string, otpional: How to sort the result set.
+ * Supported macros:
+ *    <ul>
+ *        <li>NAME: sort by name</li>
+ *        <li>PRIORITY: sort by priority</li>
+ *        <li>RANDOM: sort by random selection</li>
+ *        <li>DATE_MODIFIED: sort by date modified</li>
+ *        <li>DATE_ADDED: sort by date added</li>
+ *    </ul>
+ * </li>
  * <li>page, int, optional: Page id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
@@ -333,6 +344,7 @@ public function selectBoxes ($params = array())
 	$page = null;
 	$start = null;
 	$limit = null;
+	$order_macro = null;
 	$bind_params = array();
 	
 	// input check
@@ -343,6 +355,9 @@ public function selectBoxes ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
 			case 'page':
 			case 'start':
 			case 'limit':
@@ -352,6 +367,18 @@ public function selectBoxes ($params = array())
 				throw new Content_BoxException("Unknown parameter $_key");
 		}
 	}
+	
+	// define order macros
+	$macros = array(
+		'DATE_ADDED' => '`content_boxes`.`date_added`',
+		'DATE_MODIFIED' => '`content_boxes`.`date_modified`',
+		'RANDOM' => 'rand()',
+		'NAME' => '`content_boxes`.`name`',
+		'PRIORITY' => '`content_boxes`.`priority`'
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
 	
 	// prepare query
 	$sql = "
@@ -363,6 +390,7 @@ public function selectBoxes ($params = array())
 			`content_boxes`.`content` AS `content`,
 			`content_boxes`.`text_converter` AS `text_converter`,
 			`content_boxes`.`apply_macros` AS `apply_macros`,
+			`content_boxes`.`priority` AS `priority`,
 			`content_boxes`.`date_modified` AS `date_modified`,
 			`content_boxes`.`date_added` AS `date_added`
 		FROM
@@ -385,9 +413,11 @@ public function selectBoxes ($params = array())
 		$sql .= " AND `content_pages`.`id` = :page ";
 		$bind_params['page'] = $page;
 	}
-	
+		
 	// add sorting
-	$sql .= " ORDER BY `content_boxes`.`name` ";
+	if (!empty($order_macro)) {
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	}
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {
@@ -408,6 +438,16 @@ public function selectBoxes ($params = array())
  * <b>List of supported params:</b>
  * 
  * <ul>
+ * <li>order_marco, string, otpional: How to sort the result set.
+ * Supported macros:
+ *    <ul>
+ *        <li>NAME: sort by name</li>
+ *        <li>PRIORITY: sort by priority</li>
+ *        <li>RANDOM: sort by random selection</li>
+ *        <li>DATE_MODIFIED: sort by date modified</li>
+ *        <li>DATE_ADDED: sort by date added</li>
+ *    </ul>
+ * </li>
  * <li>page, int, optional: Page id</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
@@ -428,6 +468,7 @@ public function selectBoxesAndPages ($params = array())
 	$page = null;
 	$start = null;
 	$limit = null;
+	$order_macro = null;
 	$bind_params = array();
 	
 	// input check
@@ -438,6 +479,9 @@ public function selectBoxesAndPages ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'order_macro':
+					$$_key = (string)$_value;
+				break;
 			case 'page':
 			case 'start':
 			case 'limit':
@@ -447,6 +491,18 @@ public function selectBoxesAndPages ($params = array())
 				throw new Content_BoxException("Unknown parameter $_key");
 		}
 	}
+	
+	// define order macros
+	$macros = array(
+		'DATE_ADDED' => '`content_boxes`.`date_added`',
+		'DATE_MODIFIED' => '`content_boxes`.`date_modified`',
+		'RANDOM' => 'rand()',
+		'NAME' => '`content_boxes`.`name`',
+		'PRIORITY' => '`content_boxes`.`priority`'
+	);
+	
+	// load helper class
+	$HELPER = load('utility:helper');
 	
 	// prepare query
 	$sql = "
@@ -458,6 +514,7 @@ public function selectBoxesAndPages ($params = array())
 			`content_boxes`.`content` AS `content`,
 			`content_boxes`.`text_converter` AS `text_converter`,
 			`content_boxes`.`apply_macros` AS `apply_macros`,
+			`content_boxes`.`priority` AS `priority`,
 			`content_boxes`.`date_modified` AS `date_modified`,
 			`content_boxes`.`date_added` AS `date_added`,
 			`content_pages`.`id` AS `page_id`,
@@ -499,7 +556,9 @@ public function selectBoxesAndPages ($params = array())
 	$sql .= " AND `content_pages`.`name` != `content_boxes`.`name` ";
 	
 	// add sorting
-	$sql .= " ORDER BY `content_pages`.`name` ";
+	if (!empty($order_macro)) {
+		$sql .= " ORDER BY ".$HELPER->_sqlForOrderMacro($order_macro, $macros);
+	}
 	
 	// add limits
 	if (empty($start) && is_numeric($limit)) {

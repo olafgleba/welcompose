@@ -131,7 +131,8 @@ try {
 	$boxes = $BOX->selectBoxes(array(
 		'page' => Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
-		'limit' => 20
+		'limit' => 20,
+		'order_macro' => 'PRIORITY:DESC'
 	));
 	$BASE->utility->smarty->assign('boxes', $boxes);
 	

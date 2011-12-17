@@ -168,6 +168,13 @@ try {
 	$FORM->applyFilter('apply_macros', 'strip_tags');
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
+		
+	// textfield for priority
+	$FORM->addElement('text', 'priority', gettext('Priority'),
+		array('id' => 'box_priority', 'maxlength' => 2, 'class' => 'w300'));
+	$FORM->applyFilter('priority', 'trim');
+	$FORM->applyFilter('priority', 'strip_tags');
+	$FORM->addRule('priority', gettext('The priority number may be only numeric'), 'numeric');
 	
 	// submit button (save and stay)
 	$FORM->addElement('submit', 'save', gettext('Save edit'),
@@ -184,7 +191,8 @@ try {
 		'name' => Base_Cnc::ifsetor($box['name'], null),
 		'content' => Base_Cnc::ifsetor($box['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($box['text_converter'], null),
-		'apply_macros' => Base_Cnc::ifsetor($box['apply_macros'], null)
+		'apply_macros' => Base_Cnc::ifsetor($box['apply_macros'], null),
+		'priority' => Base_Cnc::ifsetor($box['priority'], null)
 	));
 	
 	// validate it
@@ -255,6 +263,7 @@ try {
 		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
 			$FORM->exportValue('text_converter') : null;
 		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
+		$sqlData['priority'] = $FORM->exportValue('priority');
 		
 		// apply text macros and text converter if required
 		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {

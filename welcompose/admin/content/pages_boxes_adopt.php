@@ -146,9 +146,9 @@ try {
 	$sqlData['name'] = $_box;
 	$sqlData['content_raw'] = $box['content_raw'];
 	$sqlData['content'] = $box['content'];
-	$sqlData['text_converter'] = ($box['text_converter'] > 0) ? 
-		$box['text_converter'] : null;
+	$sqlData['text_converter'] = ($box['text_converter'] > 0) ? $box['text_converter'] : null;
 	$sqlData['apply_macros'] = (string)intval($box['apply_macros']);
+	$sqlData['priority'] = $box['priority'];
 	
 	// apply text macros and text converter if required
 	if ($box['text_converter'] > 0 || $box['apply_macros'] > 0) {
@@ -206,6 +206,7 @@ try {
 	// print response 
 	print "<tr>\n";
 	print "<td class=\"page\"><a href=\"pages_boxes_edit.php?page=$page&amp;id=$_insert_id\" title=\"Bearbeiten\">$_box</a></td>\n";
+	print "<td>".$box['priority']."</td>";
 	print "<td><a class=\"delete\" href=\"pages_boxes_delete.php?page=$page&amp;id=$_insert_id\" title=\"loeschen\"></a></td>\n";
 	print "</tr>\n";
 		

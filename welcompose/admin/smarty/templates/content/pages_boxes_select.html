@@ -115,17 +115,20 @@ var toggleElem = 2;
 <table summary="{i18n Available Boxes}">
 <tbody id="boxes">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="870" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="460" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="390" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 {if !empty($boxes)}
 <tr>
 <th class="page">{i18n Name}</th>
+<th>{i18n Priority}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$boxes item=_box}
 <tr>
 <td class="page"><a href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}">{$_box.name|escape:"html"}</a></td>
+<td>{$_box.priority}</td>
 <td><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}
