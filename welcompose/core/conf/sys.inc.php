@@ -43,7 +43,7 @@ index.php_lifetime = 0
 gunzip = 0
 
 [cookie]
-lifetime = 86400
+lifetime = 2592000
 
 [plugins]
 textconverter_dir = "/www/gits/welcompose/welcompose/core/plugins/textconverters"

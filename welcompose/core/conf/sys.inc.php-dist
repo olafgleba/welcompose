@@ -6,7 +6,7 @@ wcom_public_root_www =
 [log]
 handler = "null"
 name = 
-level = PEAR_LOG_NOTICE
+level = PEAR_LOG_WARNING
 
 [environment]
 debug = false
@@ -42,7 +42,7 @@ index.php_lifetime = 0
 gunzip = 0
 
 [cookie]
-lifetime = 86400
+lifetime = 2592000
 
 [plugins]
 textconverter_dir = 
