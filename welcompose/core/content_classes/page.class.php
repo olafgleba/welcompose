@@ -435,7 +435,7 @@ public function selectPages ($params = array())
 	}		
 	// Include only unprotected pages
 	if (!empty($protect) && is_numeric($protect)) {
-		$sql .= " AND `content_pages`.`protect` IS NULL ";
+		$sql .= " AND `content_pages`.`protect` IS NULL OR 0 ";
 	}
 
 	/** 
@@ -455,11 +455,11 @@ public function selectPages ($params = array())
 	
 	// Include only non excluded pages
 	if (empty($exclude)) {
-		$sql .= " AND `content_pages`.`exclude` IS NULL ";
+		$sql .= " AND `content_pages`.`exclude` IS NULL OR 0 ";
 	}		
 	// Include only visible pages
 	if (empty($draft)) {
-		$sql .= " AND `content_pages`.`draft` IS NULL ";
+		$sql .= " AND `content_pages`.`draft` IS NULL OR 0 ";
 	}
 			
 	// add sorting
