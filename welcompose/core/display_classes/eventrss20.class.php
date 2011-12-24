@@ -23,7 +23,7 @@
  */
 
 // load the display interface
-if (!interface_exists('Display')) {Event
+if (!interface_exists('Display')) {
 	$path_parts = array(
 		dirname(__FILE__),
 		'display.interface.php'
