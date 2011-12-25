@@ -143,20 +143,6 @@
 <label class="cont h04act" for="event_posting_tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.tags.html}</label>
 
-<label class="cont chbx" for="event_posting_meta_use"><span class="bez">{$form.meta_use.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.meta_use.html}</label>
-
-<div id="event_posting_meta_use_container" class="pb35">
-<label class="cont" for="event_posting_meta_title"><span class="bez">{$form.meta_title.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.meta_title.html}</label>
-
-<label class="cont h04" for="event_posting_meta_keywords"><span class="bez">{$form.meta_keywords.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.meta_keywords.html}</label>
-
-<label class="cont h04" for="event_posting_meta_description"><span class="bez">{$form.meta_description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.meta_description.html}</label>
-</div>
-
 <label class="cont chbx" for="event_posting_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
@@ -184,7 +170,6 @@
 var response = '{$session.response}';
 var mediamanager = 1;
 var pagetype = '{$page.page_type_name}';
-var checkbox_status = new Array('event_posting_meta_use')
 </script>
 
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
