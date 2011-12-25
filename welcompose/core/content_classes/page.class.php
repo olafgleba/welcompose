@@ -374,9 +374,9 @@ public function selectPages ($params = array())
 			`content_pages`.`url` AS `url`,
 			`content_pages`.`protect` AS `protect`,
 			`content_pages`.`exclude` AS `exclude`,
+			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`index_page` AS `index_page`,
 			`content_pages`.`no_follow` AS `no_follow`,
-			`content_pages`.`draft` AS `draft`,
 			`content_pages`.`sitemap_changefreq` AS `sitemap_changefreq`,
 			`content_pages`.`sitemap_priority` AS `sitemap_priority`,
 			`content_page_types`.`name` AS `page_type_name`,
@@ -432,10 +432,10 @@ public function selectPages ($params = array())
 	if (!empty($type) && is_numeric($type)) {
 		$sql .= " AND `content_pages`.`type` = :type ";
 		$bind_params['type'] = $type;
-	}		
+	}
 	// Include only unprotected pages
 	if (!empty($protect) && is_numeric($protect)) {
-		$sql .= " AND `content_pages`.`protect` IS NULL OR 0 ";
+		$sql .= " AND `content_pages`.`protect` IS NULL ";
 	}
 
 	/** 
@@ -455,11 +455,11 @@ public function selectPages ($params = array())
 	
 	// Include only non excluded pages
 	if (empty($exclude)) {
-		$sql .= " AND `content_pages`.`exclude` IS NULL OR 0 ";
+		$sql .= " AND `content_pages`.`exclude` IS NULL ";
 	}		
 	// Include only visible pages
 	if (empty($draft)) {
-		$sql .= " AND `content_pages`.`draft` IS NULL OR 0 ";
+		$sql .= " AND `content_pages`.`draft` IS NULL ";
 	}
 			
 	// add sorting
