@@ -450,7 +450,7 @@ try {
 			$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
 			$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
 			
-			$HELPER->testSqlDataForPearErrors($sqlData);
+			$HELPER->testSqlDataForPearErrors($sqlData);		
 			
 			// execute operation
 			$PAGE->addPage($sqlData);
@@ -465,7 +465,7 @@ try {
 				$PAGE->setIndexPage($page_id);
 			}
 			
-			// we like to use former applied page content to populate the new page
+			// use former applied page content to populate the new page and corresponding boxes
 			if (intval($FORM->exportValue('apply_content')) === 1) {
 			
 				// get id of page to apply
@@ -473,10 +473,13 @@ try {
 				
 				// init page contents and apply page contents
 				$PAGE->initPageContents($page_id, $page_id_to_apply);
+				
+				// apply page boxes to the new page if available
+				$PAGE->applyPageBoxes($page_id, $page_id_to_apply);
+				
 			} else {
 				
 				// if not set, just plain init the new page
-				// init page contents
 				$PAGE->initPageContents($page_id);
 			}
 			

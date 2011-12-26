@@ -776,7 +776,7 @@ public function selectPageToGroupsMap ($page)
 }
 
 /**
- * Prepares table structure for the selected page types. This task has to
+ * Prepares and executes table structure for the selected page types. This task has to
  * be executed directly after the page creation. Takes the id of the just
  * created page as first and optional the id of the applied page as second
  * argument if provided. This second argument is used whenever the user
@@ -890,13 +890,13 @@ public function initPageContents ($page, $page_to_apply = null)
 		default:
 			break;
 	}
-	
+		
 	return true;
 }
 
 /**
- * Prepares table structure to apply for the selected page types. This task has to
- * be executed within the page creation. Takes the id of the page to apply
+ * Prepares sql Data to apply for the selected page types. This task has to
+ * be executed within the page creation. Takes the id of the page to apply as
  * first argument. Returns array.
  * 
  * @throws Content_PageException
@@ -983,6 +983,64 @@ public function applyPageContents ($page)
 		case 'WCOM_URL':
 		default:
 			break;
+	}
+}
+
+/**
+ * Apply the page boxes of the selected page. Takes the id of the just
+ * created page as first and the the id of the page to apply as second
+ * argument. Fails silently if no boxes found.
+ * 
+ * @throws Content_PageException
+ * @param int Page id
+ * @param int Page id of page contains boxes to apply
+ */
+public function applyPageBoxes ($page, $page_to_apply)
+{
+	// access check
+	if (!wcom_check_access('Content', 'Page', 'Manage')) {
+		throw new Content_PageException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($page) || !is_numeric($page)) {
+		throw new Content_PageException('Input for parameter page is expected to be numeric');
+	}
+	
+	// test if page belongs to current project/user
+	if (!$this->pageBelongsToCurrentUser($page)) {
+		throw new Content_PageException('Given page does not belong to current project');
+	}
+	
+	// load box class
+	$BOX = load('Content:Box');
+
+	if(!empty($page_to_apply) && is_numeric($page_to_apply)) {
+
+		// prepare params
+		$select_params = array(
+			'page' => $page_to_apply
+		);
+	
+		// get page boxes to apply
+		$page_boxes = $BOX->selectBoxes($select_params);
+		
+		foreach ($page_boxes as $page_box) {
+			// prepare sql data
+			$sqlData = array();
+			$sqlData['page'] = $page;
+			$sqlData['name'] = $page_box['name'];
+			$sqlData['content_raw'] = $page_box['content_raw'];
+			$sqlData['content'] = $page_box['content'];
+			$sqlData['text_converter'] = $page_box['text_converter'];
+			$sqlData['apply_macros'] = (string)intval($page_box['apply_macros']);
+			$sqlData['priority'] = $page_box['priority'];
+			$sqlData['date_modified'] = $page_box['date_modified'];
+			$sqlData['date_added'] = $page_box['date_added'];
+	
+			// add boxes to new page
+			$BOX->addBox($sqlData);
+		}
 	}
 }
 
