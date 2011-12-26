@@ -5194,7 +5194,8 @@ msgid ""
 msgstr ""
 "Wählen Sie, abhängig vom oben gewählten Seitentyp, eine Seite aus, deren "
 "Inhalte Sie übernehmen möchten. Die Text-Konverter Einstellungen der "
-"gewählten Seite werden für die neue Seite übernommen"
+"gewählten Seite werden für die neue Seite übernommen, ebenso wie alle "
+"zugeordneten Seitenboxen" 
 
 #: page_page_description.html:1
 msgid ""
