@@ -12,8 +12,6 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id$
- *
  * @copyright 2008 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
@@ -270,7 +268,7 @@ function Base ()
 		/**
 		 * Comprehensive popup height application wide
 		 */
-		this.callbacksPopupWindowHeight664 = '664';
+		this.callbacksPopupWindowHeight664 = '666';
 		
 		/**
 		 * Help string supposed to delivered within the DOM.

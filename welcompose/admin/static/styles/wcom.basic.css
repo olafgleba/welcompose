@@ -305,11 +305,8 @@ padding: 0 10px 10px 10px;
 background: transparent url(../img/bg_statuschange_bot.gif) left bottom no-repeat;
 }
 #uploadMessage {
-/*display: none;*/
-}
-#uploadMessage {
 position: absolute;
-top: 40%;
+top: 36%;
 left: 15%;
 width: 500px;
 background: transparent url(../img/bg_uploadmessage_top.gif) 0 0 no-repeat;
@@ -317,13 +314,19 @@ z-index: 2;
 }
 #uploadMessage h1 {
 margin: 0;
-padding: 10px 10px 0 10px;
+padding: 15px 15px 0 15px;
 color: #036;
+text-align: left;
+}
+#uploadMessage h1 img {
+position: absolute;
+right: 15px;
 }
 #uploadMessage p {
-margin: 0;
-padding: 0 10px 10px 10px;
-background: transparent url(../img/bg_uploadmessage_bot.gif) left bottom no-repeat;
+margin: 11px 0 0 0;
+padding: 0;
+line-height: 0;
+height: 3px;
 }
 
 /* response */
