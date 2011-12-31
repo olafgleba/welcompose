@@ -581,6 +581,10 @@ function Init_getVars ()
 				if (pagetype !== '') {
 					$('column').style.paddingTop = '142px';
 				}
+				// enhance padding on page type event
+				if (pagetype == 'WCOM_EVENT') {
+					$('column').style.paddingTop = '388px';
+				}
 						
 				this.url = this.parseMedLocalPath + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
 				if (typeof this.req != 'undefined') {
