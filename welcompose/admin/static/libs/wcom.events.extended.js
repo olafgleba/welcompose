@@ -301,9 +301,8 @@ var definitions = {
 		}
 	},
 	'#submit55' : function(el){
-		el.onfocus = function(){
+		el.onclick = function(){
 			Mediamanager.initializeUserMyFlickr(this);
-			//return false;
 			this.style.background = '#666 url(../static/img/submitindicator55.gif) no-repeat';
 		}
 	},
