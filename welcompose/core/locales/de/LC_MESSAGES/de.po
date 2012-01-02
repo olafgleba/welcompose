@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-18 21:56+0100\n"
+"POT-Creation-Date: 2012-01-02 19:05+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -140,7 +140,7 @@ msgstr "Bitte geben Sie einen gültigen Anfragepfad an"
 #: navigations_add.php:114 pages_add.php:332
 #: pages_blogs_pingserviceconfigurations_add.php:173
 #: pages_blogs_postings_add.php:424 pages_boxes_add.php:172
-#: pages_events_postings_add.php:247 pages_generatorforms_fields_add.php:193
+#: pages_events_postings_add.php:221 pages_generatorforms_fields_add.php:193
 #: pages_simple_dates_add.php:228 pagetypes_add.php:127
 #: podcastcategories_add.php:124 structuraltemplates_add.php:125
 #: globalfiles_add.php:120 globaltemplates_add.php:157 templates_add.php:162
@@ -219,7 +219,7 @@ msgstr "Parameter start muss numerisch sein"
 #: abbreviations_edit.php:167 globalboxes_edit.php:154
 #: navigations_edit.php:125 pages_blogs_pingserviceconfigurations_edit.php:184
 #: pages_blogs_postings_edit.php:471 pages_boxes_edit.php:180
-#: pages_edit.php:262 pages_events_postings_edit.php:276
+#: pages_edit.php:262 pages_events_postings_edit.php:250
 #: pages_generatorforms_content_edit.php:244
 #: pages_generatorforms_fields_edit.php:221 pages_simple_dates_edit.php:238
 #: pages_simpleforms_content_edit.php:267
@@ -669,7 +669,7 @@ msgstr "Sprache"
 
 #: abbreviations_edit.php:171 globalboxes_edit.php:158
 #: pages_blogs_postings_edit.php:475 pages_boxes_edit.php:184
-#: pages_edit.php:266 pages_events_postings_edit.php:280
+#: pages_edit.php:266 pages_events_postings_edit.php:254
 #: pages_generatorforms_content_edit.php:248
 #: pages_generatorforms_fields_edit.php:225 pages_simple_dates_edit.php:242
 #: pages_simpleforms_content_edit.php:271
@@ -776,8 +776,6 @@ msgstr "Alternativer Name"
 #: pages_blogs_postings_add.php:370 pages_blogs_postings_copy.php:281
 #: pages_blogs_postings_copy.php:416 pages_blogs_postings_edit.php:282
 #: pages_blogs_postings_edit.php:417 pages_edit.php:178
-#: pages_events_postings_add.php:222 pages_events_postings_copy.php:263
-#: pages_events_postings_edit.php:251
 #: pages_generatorforms_content_edit.php:207
 #: pages_simpleforms_content_edit.php:214
 #: pages_simpleguestbooks_content_edit.php:215
@@ -823,7 +821,7 @@ msgstr "Seite auswählen"
 
 #: pages_add.php:254 pages_apply_content.php:124
 msgid "There is no content available for this page type"
-msgstr "Der gewählte Seitentyp stellt keine übernehmbaren Inhalte bereit"
+msgstr "Für den gewählten Seitentyp können keine Inhalte übernommen werden"
 
 #: pages_add.php:260 pages_edit.php:190
 msgid "Template set"
@@ -856,8 +854,8 @@ msgstr "Das Feld \"Geschützt\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_add.php:285 pages_blogs_postings_add.php:387
 #: pages_blogs_postings_copy.php:433 pages_blogs_postings_edit.php:434
-#: pages_edit.php:215 pages_events_postings_add.php:234
-#: pages_events_postings_copy.php:275 pages_events_postings_edit.php:263
+#: pages_edit.php:215 pages_events_postings_add.php:208
+#: pages_events_postings_copy.php:249 pages_events_postings_edit.php:237
 #: pages_simple_dates_add.php:212 pages_simple_dates_edit.php:222
 #: pages_blogs_postings_select.html:88 pages_events_postings_select.html:85
 #: pages_simple_dates_select.html:89
@@ -1064,9 +1062,7 @@ msgstr "Nein"
 #: pages_blogs_postings_copy.php:272 pages_blogs_postings_copy.php:404
 #: pages_blogs_postings_edit.php:226 pages_blogs_postings_edit.php:273
 #: pages_blogs_postings_edit.php:405 pages_events_postings_add.php:138
-#: pages_events_postings_add.php:210 pages_events_postings_copy.php:179
-#: pages_events_postings_copy.php:251 pages_events_postings_edit.php:167
-#: pages_events_postings_edit.php:239
+#: pages_events_postings_copy.php:179 pages_events_postings_edit.php:167
 #: pages_generatorforms_content_edit.php:150
 #: pages_generatorforms_content_edit.php:195
 #: pages_simpleforms_content_edit.php:157
@@ -1172,8 +1168,6 @@ msgstr ""
 #: pages_blogs_postings_add.php:257 pages_blogs_postings_add.php:364
 #: pages_blogs_postings_copy.php:303 pages_blogs_postings_copy.php:410
 #: pages_blogs_postings_edit.php:304 pages_blogs_postings_edit.php:411
-#: pages_events_postings_add.php:216 pages_events_postings_copy.php:257
-#: pages_events_postings_edit.php:245
 #: pages_generatorforms_content_edit.php:201
 #: pages_simpleforms_content_edit.php:208
 #: pages_simpleguestbooks_content_edit.php:209
@@ -1276,9 +1270,7 @@ msgid "Discard cast"
 msgstr "Podcast löschen"
 
 #: pages_blogs_postings_add.php:350 pages_blogs_postings_copy.php:396
-#: pages_blogs_postings_edit.php:397 pages_events_postings_add.php:202
-#: pages_events_postings_copy.php:243 pages_events_postings_edit.php:231
-#: pages_generatorforms_content_edit.php:187
+#: pages_blogs_postings_edit.php:397 pages_generatorforms_content_edit.php:187
 #: pages_simpleforms_content_edit.php:194
 #: pages_simpleguestbooks_content_edit.php:195
 #: pages_simplepages_content_edit.php:180
@@ -1286,9 +1278,7 @@ msgid "Custom meta tags"
 msgstr "Eigene Meta-Tags"
 
 #: pages_blogs_postings_add.php:354 pages_blogs_postings_copy.php:400
-#: pages_blogs_postings_edit.php:401 pages_events_postings_add.php:206
-#: pages_events_postings_copy.php:247 pages_events_postings_edit.php:235
-#: pages_generatorforms_content_edit.php:191
+#: pages_blogs_postings_edit.php:401 pages_generatorforms_content_edit.php:191
 #: pages_simpleforms_content_edit.php:198
 #: pages_simpleguestbooks_content_edit.php:199
 #: pages_simplepages_content_edit.php:184
@@ -1296,8 +1286,8 @@ msgid "The field whether to use customized meta tags accepts only 0 or 1"
 msgstr "Das Feld \"Eigene Metatags\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_blogs_postings_add.php:376 pages_blogs_postings_copy.php:422
-#: pages_blogs_postings_edit.php:423 pages_events_postings_add.php:228
-#: pages_events_postings_copy.php:269 pages_events_postings_edit.php:257
+#: pages_blogs_postings_edit.php:423 pages_events_postings_add.php:202
+#: pages_events_postings_copy.php:243 pages_events_postings_edit.php:231
 #: mediamanager_edit.php:152 mediamanager_upload.php:129
 msgid "Tags"
 msgstr "Schlagworte"
@@ -1308,8 +1298,8 @@ msgid "Feed Summary"
 msgstr "Feed Kurzfassung"
 
 #: pages_blogs_postings_add.php:391 pages_blogs_postings_copy.php:437
-#: pages_blogs_postings_edit.php:438 pages_events_postings_add.php:238
-#: pages_events_postings_copy.php:279 pages_events_postings_edit.php:267
+#: pages_blogs_postings_edit.php:438 pages_events_postings_add.php:212
+#: pages_events_postings_copy.php:253 pages_events_postings_edit.php:241
 msgid "The field whether the posting is a draft accepts only 0 or 1"
 msgstr "Das Feld \"Entwurf\" kann nur den Wert 0 oder 1 haben"
 
@@ -1346,8 +1336,8 @@ msgid "The field whether trackbacks are enabled accepts only 0 or 1"
 msgstr "Das Feld \"Trackbacks?\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_blogs_postings_add.php:419 pages_blogs_postings_copy.php:465
-#: pages_blogs_postings_edit.php:466 pages_events_postings_add.php:242
-#: pages_events_postings_copy.php:283 pages_events_postings_edit.php:271
+#: pages_blogs_postings_edit.php:466 pages_events_postings_add.php:216
+#: pages_events_postings_copy.php:257 pages_events_postings_edit.php:245
 msgid "Creation date"
 msgstr "Erstellungsdatum"
 
@@ -1420,7 +1410,7 @@ msgstr "Zeit (bis)"
 msgid "End date"
 msgstr "Enddatum"
 
-#: pages_events_postings_copy.php:288 pages_events_postings_copy.html:63
+#: pages_events_postings_copy.php:262 pages_events_postings_copy.html:63
 #: pages_events_postings_copy.html:67
 msgid "Duplicate Event Posting"
 msgstr "Termin-Eintrag duplizieren"
@@ -2603,28 +2593,22 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_events_postings_add.html:115 pages_events_postings_add.html:118
 #: pages_events_postings_add.html:121 pages_events_postings_add.html:132
 #: pages_events_postings_add.html:135 pages_events_postings_add.html:143
-#: pages_events_postings_add.html:146 pages_events_postings_add.html:150
-#: pages_events_postings_add.html:153 pages_events_postings_add.html:156
-#: pages_events_postings_add.html:160 pages_events_postings_add.html:163
-#: pages_events_postings_add.html:166 pages_events_postings_copy.html:100
+#: pages_events_postings_add.html:146 pages_events_postings_add.html:149
+#: pages_events_postings_add.html:152 pages_events_postings_copy.html:100
 #: pages_events_postings_copy.html:103 pages_events_postings_copy.html:106
 #: pages_events_postings_copy.html:109 pages_events_postings_copy.html:112
 #: pages_events_postings_copy.html:115 pages_events_postings_copy.html:118
 #: pages_events_postings_copy.html:121 pages_events_postings_copy.html:132
 #: pages_events_postings_copy.html:135 pages_events_postings_copy.html:143
 #: pages_events_postings_copy.html:146 pages_events_postings_copy.html:149
-#: pages_events_postings_copy.html:153 pages_events_postings_copy.html:156
-#: pages_events_postings_copy.html:159 pages_events_postings_copy.html:163
-#: pages_events_postings_copy.html:166 pages_events_postings_edit.html:100
+#: pages_events_postings_copy.html:152 pages_events_postings_edit.html:100
 #: pages_events_postings_edit.html:103 pages_events_postings_edit.html:106
 #: pages_events_postings_edit.html:109 pages_events_postings_edit.html:112
 #: pages_events_postings_edit.html:115 pages_events_postings_edit.html:118
 #: pages_events_postings_edit.html:121 pages_events_postings_edit.html:132
 #: pages_events_postings_edit.html:135 pages_events_postings_edit.html:143
 #: pages_events_postings_edit.html:146 pages_events_postings_edit.html:149
-#: pages_events_postings_edit.html:153 pages_events_postings_edit.html:156
-#: pages_events_postings_edit.html:159 pages_events_postings_edit.html:163
-#: pages_events_postings_edit.html:166
+#: pages_events_postings_edit.html:152
 #: pages_generatorforms_content_edit.html:118
 #: pages_generatorforms_content_edit.html:121
 #: pages_generatorforms_content_edit.html:133
@@ -4424,7 +4408,6 @@ msgstr ""
 "hier eine Kurzfassung speziell für Newsfeeds definieren."
 
 #: blog_posting_blog_posting_meta_description.html:1
-#: event_posting_event_posting_meta_description.html:1
 #: generator_form_generator_form_meta_description.html:1
 #: simple_form_simple_form_meta_description.html:1
 #: simple_guestbook_simple_guestbook_meta_description.html:1
@@ -4435,7 +4418,6 @@ msgstr ""
 "genutzt werden soll."
 
 #: blog_posting_blog_posting_meta_keywords.html:1
-#: event_posting_event_posting_meta_keywords.html:1
 #: generator_form_generator_form_meta_keywords.html:1
 #: simple_form_simple_form_meta_keywords.html:1
 #: simple_guestbook_simple_guestbook_meta_keywords.html:1
@@ -4457,7 +4439,6 @@ msgstr ""
 "in diesem Feld genutzt werden."
 
 #: blog_posting_blog_posting_meta_use.html:1
-#: event_posting_event_posting_meta_use.html:1
 #: generator_form_generator_form_meta_use.html:1
 #: simple_form_simple_form_meta_use.html:1
 #: simple_guestbook_simple_guestbook_meta_use.html:1
@@ -4798,15 +4779,6 @@ msgstr ""
 #: event_posting_event_posting_date_start.html:1
 msgid "Please set the start date"
 msgstr "Bitte geben Sie das Startdatum an"
-
-#: event_posting_event_posting_meta_title.html:1
-msgid ""
-"Allows to define a custom string for the title tag. The title of this event "
-"posting can be embedded using the place holder %%title."
-msgstr ""
-"Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt werden "
-"soll. Der Titel der Termin-Eintrags kann über den Platzhalter <em>%%title</"
-"em> in diesem Feld genutzt werden."
 
 #: event_posting_event_posting_title.html:1
 msgid "Enter the title of your event posting."
@@ -5190,12 +5162,13 @@ msgstr ""
 msgid ""
 "Depending on your selection of the page type above, choose a page you wish "
 "to assume content for the new page. The applied text converter of the page "
-"you choose to assume will be considered for the new page also"
+"you choose to assume will be considered for the new page also. If available "
+"all related page boxes will be copied as well"
 msgstr ""
-"Wählen Sie, abhängig vom oben gewählten Seitentyp, eine Seite aus, deren "
-"Inhalte Sie übernehmen möchten. Die Text-Konverter Einstellungen der "
-"gewählten Seite werden für die neue Seite übernommen, ebenso wie alle "
-"zugeordneten Seitenboxen" 
+"Sie können hier, abhängig vom oben gewählten Seitentyp, eine Seite "
+"auswählen, deren Inhalte Sie übernehmen möchten. Die Text-Konverter "
+"Einstellungen der gewählten Seite werden für die neue Seite übernommen, "
+"ebenso wie alle zugeordneten Seitenboxen"
 
 #: page_page_description.html:1
 msgid ""
@@ -6028,9 +6001,9 @@ msgid "Welcompose Admin &ndash; Mediamanager &ndash; Edit Media"
 msgstr ""
 "Welcompose Administration &ndash; Mediamanager &ndash; Media bearbeiten"
 
-#: mediamanager_edit.html:36
-msgid "Please wait. Edits processing..."
-msgstr "Bitte warten Sie. Der Vorgang ist in Bearbeitung..."
+#: mediamanager_edit.html:36 mediamanager_upload.html:37
+msgid "Please wait. Upload processing..."
+msgstr "Bitte warten. Datei wird hochgeladen.."
 
 #: mediamanager_edit.html:42
 msgid "EDIT MEDIA"
@@ -6096,10 +6069,6 @@ msgstr "Dateigröße"
 #: mediamanager_upload.html:10
 msgid "Welcompose Admin &ndash; Mediamanager &ndash; Upload"
 msgstr "Welcompose Administration &ndash; Mediamanager &ndash; Media hochladen"
-
-#: mediamanager_upload.html:37
-msgid "Please wait. Upload processing..."
-msgstr "Bitte warten. Datei wird hochgeladen.."
 
 #: mediamanager_upload.html:43
 msgid "UPLOAD MEDIA"
@@ -7835,6 +7804,17 @@ msgstr "Zum Admin-Bereich"
 #: requirements.html:89
 msgid "Welcompose may work -- don't blame us for errors"
 msgstr "Welcompose mag funktionieren - oder auch nicht."
+
+#~ msgid ""
+#~ "Allows to define a custom string for the title tag. The title of this "
+#~ "event posting can be embedded using the place holder %%title."
+#~ msgstr ""
+#~ "Tragen Sie bitte hier den Titel ein, der als Meta-Tag Angabe genutzt "
+#~ "werden soll. Der Titel der Termin-Eintrags kann über den Platzhalter <em>%"
+#~ "%title</em> in diesem Feld genutzt werden."
+
+#~ msgid "Please wait. Edits processing..."
+#~ msgstr "Bitte warten Sie. Der Vorgang ist in Bearbeitung..."
 
 #~ msgid "Navigation is not expected to be empty"
 #~ msgstr "Die Navigation darf nicht leer sein"
