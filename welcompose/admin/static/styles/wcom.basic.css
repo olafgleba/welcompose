@@ -100,17 +100,33 @@ margin: 0 auto;
 text-align: left;
 }
 #container p.copyright {
-width: 941px;
-padding: 18px 5px 35px 5px;
-margin: 60px 20px 0 20px;
+width: 956px;
+padding: 25px 0 30px 0;
+margin: 80px 10px 0 10px;
 border-top: 1px solid #ebebeb;
-line-height: 1.4em;
 }
 .fright {
 float: right;
 width: 460px;
 text-align: right;
+line-height: 1.7em;
 }
+
+/* login */
+#login #container p.copyright {
+width: 720px;
+padding: 25px 0 30px 0;
+margin: 20px 10px 0 10px;
+border-top: 1px solid #ebebeb;
+}
+#login .fright {
+float: right;
+width: 320px;
+text-align: right;
+line-height: 1.7em;
+}
+
+
 #logo {
 position: absolute;
 top: 19px;
