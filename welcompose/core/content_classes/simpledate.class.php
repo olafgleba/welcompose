@@ -308,6 +308,7 @@ public function selectSimpleDate ($id)
  * <ul>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
+ * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
@@ -338,6 +339,7 @@ public function selectSimpleDates ($params = array())
 	$user = null;
 	$page = null;
 	$draft = null;
+	$current_date = null;
 	$timeframe = null;
 	$order_macro = null;
 	$start = null;
@@ -352,6 +354,7 @@ public function selectSimpleDates ($params = array())
 	// import params
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
+			case 'current_date':
 			case 'timeframe':
 			case 'order_macro':
 					$$_key = (string)$_value;
@@ -476,6 +479,10 @@ public function selectSimpleDates ($params = array())
 	if (!is_null($draft) && is_numeric($draft)) {
 		$sql .= " AND `content_simple_dates`.`draft` = :draft ";
 		$bind_params['draft'] = (string)$draft;
+	}
+	if (!empty($current_date)) {
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_simple_dates`.`date_start`',
+			$current_date);
 	}
 	if (!empty($timeframe)) {
 		$sql .= " AND ".$HELPER->_sqlForTimeFrame('`content_simple_dates`.`date_added`',
