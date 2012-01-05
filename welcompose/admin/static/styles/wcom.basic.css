@@ -100,9 +100,9 @@ margin: 0 auto;
 text-align: left;
 }
 #container p.copyright {
-width: 956px;
-padding: 25px 0 30px 0;
-margin: 80px 10px 0 10px;
+width: 936px;
+padding: 25px 10px 30px 10px;
+margin: 80px 15px 0 15px;
 border-top: 1px solid #ebebeb;
 }
 .fright {
@@ -114,9 +114,9 @@ line-height: 1.7em;
 
 /* login */
 #login #container p.copyright {
-width: 720px;
-padding: 25px 0 30px 0;
-margin: 20px 10px 0 10px;
+width: 690px;
+padding: 25px 10px 30px 10px;
+margin: 20px 15px 0 15px;
 border-top: 1px solid #ebebeb;
 }
 #login .fright {
