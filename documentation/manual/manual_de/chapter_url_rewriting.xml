@@ -746,7 +746,7 @@ index.php?project_name=eins&page_name=zwei&action=Index
 		 		<para>
 		 			Das Listing der URL-Konfiguration sowie die RewriteRules der
 		 			<filename>.htaccess</filename>-Datei beziehen sich immer auf die
-		 			jeweils aktuelle Version von Welcompose (Aktuell: 0.9.0).
+		 			jeweils aktuelle Version von Welcompose (Aktuell: 0.9.4).
 		 		</para>
 		 	</note>
 			
@@ -782,10 +782,26 @@ blog_archive_month = "http://example.tld/page/<page_name>/<posting_year_added>/<
 blog_archive_month_pager = "http://example.tld/page/<page_name>/<posting_year_added>/<posting_month_added>/offset/<start>/"
 blog_archive_month_start = "http://example.tld/<posting_year_added>/<posting_month_added>/"
 blog_archive_month_start_pager = "http://example.tld/<posting_year_added>/<posting_month_added>/offset/<start>/"
+event_index = "http://example.tld/page/<page_name>/"
+event_index_tag = "http://example.tld/page/<page_name>/tag/<tag_word>/"
+event_index_pager = "http://example.tld/page/<page_name>/offset/<start>/"
+event_index_tag_pager = "http://example.tld/page/<page_name>/tag/<tag_word>/offset/<start>/"
+event_index_start = "http://example.tld/"
+event_index_start_tag = "http://example.tld/tag/<tag_word>/"
+event_index_start_pager = "http://example.tld/offset/<start>/"
+event_index_start_tag_pager = "http://example.tld/tag/<tag_word>/offset/<start>/"
+event_atom_10 = "http://example.tld/page/<page_name>/Atom10/"
+event_atom_10_tag = "http://example.tld/page/<page_name>/Atom10/tag/<tag_word>/"
+event_atom_10_start = "http://example.tld/Atom10/"
+event_atom_10_start_tag = "http://example.tld/Atom10/tag/<tag_word>/"
+event_rss_20 = "http://example.tld/page/<page_name>/Rss20/"
+event_rss_20_tag = "http://example.tld/page/<page_name>/Rss20/tag/<tag_word>/"
+event_rss_20_start = "http://example.tld/Rss20/"
+event_rss_20_start_tag = "http://example.tld/Rss20/tag/<tag_word>/"
 generator_form_index = "http://example.tld/page/<page_name>/"
 generator_form_index_start = "http://example.tld/"
-global_template_url = "http://example.tld/gtpls/<global_file_name>"
-global_template_url_start = "http://example.tld/gtpls/<global_file_name>"
+global_template_url = "http://example.tld/gtpls/<global_template_name>"
+global_template_url_start = "http://example.tld/gtpls/<global_template_name>"
 simple_date_index = "http://example.tld/page/<page_name>/"
 simple_date_index_pager = "http://example.tld/page/<page_name>/offset/<start>/"
 simple_date_index_start = "http://example.tld/"

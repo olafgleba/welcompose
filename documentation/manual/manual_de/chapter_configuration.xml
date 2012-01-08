@@ -522,6 +522,41 @@ chmod = 0644
 			</para>
 		</sect2>
 		
+		<sect2 id="configuration.sys_inc.output">
+			<title>Komprimierung [output]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>gunzip</term>
+					<listitem>
+						<para>
+							Ist dieser Parameter gesetzt (<userinput>1</userinput>), werden alle Seiten und
+							CSS-Dateien Gzip-komprimiert ausgeliefert. Dieses beschleunigt den Seitenaufruf.
+							Mögliche Eingaben: <userinput>1</userinput> oder <userinput>0</userinput> (Standard).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
+		<sect2 id="configuration.sys_inc.cookie">
+			<title>Projektauswahl speichern [cookie]</title>
+		
+			<variablelist>
+				<varlistentry>
+					<term>lifetime</term>
+					<listitem>
+						<para>
+							Legen Sie fest, wie lange die Auswahl des aktuell eingestellten Projektes im Adminbereich
+							gültig ist. Angabe nicht relevant, wenn nur ein Projekt vorhanden ist.
+							Die Werteangaben erfolgen im Format Millisekunden und beliebig anpassbar.
+							Standardwert <userinput>2592000</userinput> (30 Tage).
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+		
 		<sect2 id="configuration.sys_inc.plugins">
 			<title>Plugins [plugins]</title>
 		
@@ -558,7 +593,7 @@ chmod = 0644
 			</para>
 			
 			<para>
-				Aktuelle URL-Muster (Welcompose Version 0.8.8 - 0.9.0):
+				Aktuelle URL-Muster (Welcompose Version 0.9.4):
 			</para>
 			
 				<programlisting language="ini"><![CDATA[
@@ -592,10 +627,26 @@ blog_archive_month = "/index.php?project_name=<project_name>&amp;page_name=<page
 blog_archive_month_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
 blog_archive_month_start = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>"
 blog_archive_month_start_pager = "/index.php?project_name=<project_name>&amp;action=ArchiveMonth&amp;posting_year_added=<posting_year_added>&amp;posting_month_added=<posting_month_added>&amp;start=<start>"
+event_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
+event_index_start_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>"
+event_index_start_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
+event_index_start_tag_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;tag=<tag_word>&amp;start=<start>"
+event_atom_10 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10"
+event_atom_10_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_atom_10_start = "/index.php?project_name=<project_name>&amp;action=Atom10"
+event_atom_10_start_tag = "/index.php?project_name=<project_name>&amp;action=Atom10&amp;tag=<tag_word>"
+event_rss_20 = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20"
+event_rss_20_tag = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Rss20&amp;tag=<tag_word>"
+event_rss_20_start = "/index.php?project_name=<project_name>&amp;action=Rss20"
+event_rss_20_start_tag = "/index.php?project_name=<project_name>&amp;action=Rss20&amp;tag=<tag_word>"
 generator_form_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 generator_form_index_start = "/index.php?project_name=<project_name>&amp;action=Index"
-global_template_url = "/global_template.php?name=<global_file_name>&amp;project=<project_name>"
-global_template_url_start = "/global_template.php?name=<global_file_name>&amp;project=<project_name>&amp;start=<start>"
+global_template_url = "/global_template.php?project_name=<project_name>&amp;name=<global_template_name>"
+global_template_url_start = "/global_template.php?project_name=<project_name>&amp;name=<global_template_name>&amp;&amp;start=<start>"
 simple_date_index = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"
 simple_date_index_pager = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index&amp;start=<start>"
 simple_date_index_start = "/index.php?project_name=<project_name>&amp;page_name=<page_name>&amp;action=Index"

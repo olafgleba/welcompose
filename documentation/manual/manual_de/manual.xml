@@ -46,8 +46,6 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_usage.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-		href="chapter_smartyplugins.xml" />
-	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_configuration.xml" />
 	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_extended_configuration.xml" /> -->

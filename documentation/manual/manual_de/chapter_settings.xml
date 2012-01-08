@@ -753,7 +753,7 @@ w:de{Toxoplasmose}
 
 				<para>
 					Das Textmakro Bundled Abbreviation Generator kümmert sich um das Setzen
-					der korrespondierenen <code>abbr</code> HTML-Tags und Links zu Glossarseiten.
+					der korrespondierenden <code>abbr</code> HTML-Tags und Links zu Glossarseiten.
 					Es ist integrativer Bestandteil von Welcompose und kann daher auch
 					nicht über das Backend gelöscht oder
 					deaktiviert werden.
@@ -769,8 +769,8 @@ w:de{Toxoplasmose}
 ]]></programlisting>
 
 				<para>
-					Während <code>get_abbreviation</code> quasi der Name des
-					Textmakros ist, sind <code>arg1</code> respektive
+					Während <code>get_abbreviation</code> den Namen des
+					Textmakros repräsentiert, sind <code>arg1</code> respektive
 					<code>arg2</code> Platzhalter für Argumente, die an den
 					Abkürzung-Generator zur Erzeugung der richtigen Syntax übergeben
 					werden. Die zwei einzig gültigen Argumente sind <code>id</code> und
@@ -818,11 +818,15 @@ w:de{Toxoplasmose}
 </abbr>
 ]]></programlisting>
 
-				<para>
-					Allerdings ist es in der Regel nicht nötig, selber die
-					Tags für die Integration der Abkürzungen zu schreiben, da dies
-					in Welcompose integrierte Funktionen für den Anwender tun.
-				</para>
+				<note>
+					<para>
+						Es in der Regel nicht nötig, selber die
+						Tags für die Integration der Abkürzungen zu schreiben, da dies
+						in Welcompose integrierte Funktionen für den Anwender tun.
+						Lesen Sie hierzu auch <xref linkend="contents.abbreviations"/> und
+						<xref linkend="usage.smarty_plugins.glossary"/>.
+					</para>
+				</note>
 
 			</sect3>
 			
@@ -830,11 +834,10 @@ w:de{Toxoplasmose}
 				<title>Bundled Embed Video Generator</title>
 				
 				<para>
-					Das Textmakro Bundled Media URL Generator kümmert sich um das Setzen
-					von Pfaden respektive URLs zu Media-Elementen wie Bildern.
-					Es wird vom in Welcompose integrierten Media Manager
-					verwendet und kann daher auch nicht über das Backend gelöscht oder
-					deaktiviert werden.
+					Das Textmakro Bundled Embed Video Generator ermöglicht es mit
+					wenigen Zeilen ein Video eines Video Sharing Service
+					in eine Seite einzubinden. Die Art der Einbindung richtet sich
+					nach den bereitgestellten Möglichkeiten der Anbieter.
 				</para>
 				
 				<para>
@@ -843,34 +846,84 @@ w:de{Toxoplasmose}
 				</para>
 				
 				<programlisting><![CDATA[
-{get_media arg1=value1}
+{embed_video arg1=value1 arg2=value2 arg3=value3 arg4=value4}
 ]]></programlisting>
 				
 				<para>
-					Es kennt nur ein einzelnes Argument: <code>id</code>.
-					Diesem wird jeweils die ID des Bildes oder Films
-					übergeben, das respektive der eingebunden werden soll:
+					Das Textmarkro hat folgende Argument, deren Angabe zwingend
+					erforderlich ist: <code>service</code>, <code>vid</code>,
+					<code>width</code> und <code>height</code>. Der Parameter
+					<code>service</code> ist gleich dem Namen
+					des Anbieters.
+					
+				</para>
+				
+				<para>
+					Es sind aktuell folgende Anbieter implementiert:
+				</para>
+				
+				<itemizedlist>
+					<listitem>
+						<para>
+							Youtube (Parametername: youtube)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Vimeo (Parametername: vimeo)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							DailyMotion (Parametername: dailymotion)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Clipfish (Parametername: clipfish)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Sevenload (Parametername: sevenload)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							MyVideo (Parametername: myvideo)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Google (Parametername: google)  
+						</para>
+					</listitem>
+				</itemizedlist>
+				
+				<para>
+					Der Parameter <code>vid</code> ist die Identifikationsnummer des eingebundenen
+					Films, der vom jeweiligen Anbieter vergeben wird. Die Parameter <code>vid</code>
+					und <code>vid</code> bestimmen die Anzeigefläche in ihrer Seite.
+				</para>
+
+				<para>
+					Somit würde ein gültige Eingabe wie beispielsweise wie folgt ausschauen:
 				</para>
 				
 				<programlisting><![CDATA[
-{get_media id="3"}
+{embed_video service="youtube" vid="4wr3AD8mZy0" width="500" height="408"}
 ]]></programlisting>
-				
-				<para>
-					Anstelle von <code>{get_media ...}</code> setzt das
-					Textmakro den Pfad respektive URL zum Media-Element,
-					beispielsweise:
-				</para>
-				
-				<programlisting><![CDATA[
-/files/global_files/4975b766cb7323f2724213d8b41fe685ca107d71_grafik.gif
-]]></programlisting>
-				
-				<para>
-					Allerdings ist es in der Regel nicht nötig, selber die
-					Tags für die Integration der Bilder zu schreiben, da dies
-					in Welcompose integrierte Funktionen für den Anwender tun.
-				</para>
+
+				<tip>
+					<para>
+						Um herauszufinden welche Werte sie konkret für Ihren Film
+						angeben müssen, rufen Sie den Film auf der Seite des
+						jeweiligen Anbieters auf. Dort stehen in der Regel Informationen
+						zu ID des Films, Breite und Höhe des Films zur Verfügung. Oftmals
+						ist bspw. die <code>vid</code> Teil des URL.
+					</para>
+				</tip>
+
 				
 			</sect3>
 						
@@ -911,7 +964,7 @@ w:de{Toxoplasmose}
 				</para>
 				
 				<programlisting><![CDATA[
-/files/global_files/4975b766cb7323f2724213d8b41fe685ca107d71_grafik.gif
+/files/global_files/grafik.jpg
 ]]></programlisting>
 				
 				<para>

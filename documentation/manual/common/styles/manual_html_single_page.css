@@ -188,7 +188,7 @@ background: transparent url(../images/userinput.png) 0 0 no-repeat;
 padding-left: 16px;
 }
 span.application:after {
-content: 'ÃÂÃÂ®';
+content: '»';
 padding-left: 0;
 }
 /* icons EOF */
