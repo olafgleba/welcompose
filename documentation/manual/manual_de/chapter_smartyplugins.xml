@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="smarty_plugins">
+	<title>Smarty Plugins</title>
+
+	<sect1 id="smarty_plugins.introduction">
+		<title>Einführung</title>
+
+			<para>
+				Ein Großteil der Funktionalität innerhalb der Seitenvorlagen in Welcompose basiert auf dem
+				Einsatz von Smarty Plugins. So wird das Nachladen von Datenbankinhalten über die Smarty Plugins
+				 <code>select_named</code> oder/und <code>select_simple</code> realisiert, die  
+				Vorlagen- und Seitenübergreifend eingesetzt werden.
+			</para>	
+			
+			<para>
+				Smarty Plugins, die speziellen Aufgaben übernehmen oder/und an einen Vorlagentyp
+				gebunden sind, werden hier mit Anwendungsbeispielen vorgestellt. Weitere allg. 
+				Informationen zu Smarty Plugins innerhalb von Welcompose gibt es in
+				 <xref linkend="templating.templates.usage.load_more_data"/>.
+			</para>
+			
+			<note>
+				<para>
+					Die einer Standardinstallation mitgelieferten Smarty Plugins finden Sie im
+					Verzeichnis <filename>core/smarty/software_plugins</filename>
+				</para>
+			</note>
+			
+		<sect2 id="usage.smarty_plugins.breadcrumb">
+			<title>Breadcrumb (Pfadnavigation)</title>	
+			<para>
+				Das Smarty Plugin <filename>breadcrumb</filename> erzeugt eine
+				Pfadnavigation.
+			</para>
+			<para>
+				Einsatzbar in Vorlagentyp: <emphasis role="strong">alle inhaltlichen Vorlagentypen</emphasis>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Pfadnavigation erstellen</emphasis>
+			 (Datei: <filename>function.breadcrumb.php</filename>)</para>			
+			<programlisting><![CDATA[
+{* Smarty Breadcrumb Plugin *}
+{breadcrumb current_page=$page.id var="breadcrumb"}
+
+{* Die Index Seite wird getrennt von den sonstigen Pfaden gesetzt *}
+<ul>
+{if $index_page.id != $page.id}
+	<li><a href="{get_url page_id=$index_page.id action="Index"}">{$index_page.name}</a></li>
+{/if}
+
+{foreach from=$breadcrumb item=_breadcrumb}
+{if $_breadcrumb.id == $page.id}
+	{* Keine Verlinkung, wenn die aktuelle Seite der Ergebnisseite entspricht *}
+	<li>{$_breadcrumb.name}</li>
+{else}
+	{* Verlinkung, wenn die aktuelle Seite nicht der Ergebnisseite entspricht *}
+	<li><a href="{get_url page_id=$_breadcrumb.id action="Index"}">{$_breadcrumb.name}</a></li>
+{/if}
+{/foreach}
+</ul>
+]]></programlisting>
+		</sect2>
+		
+		<sect2 id="usage.smarty_plugins.glossary">
+			<title>Get Glossary</title>	
+			<para>
+				Das Smarty Plugin <filename>get_glossary</filename> stellt die Glossarinhalte eines
+				Abkürzungsverzeichnisses zur Verfügung. Mehr Details zu Anwendung und Erstellung
+				von Abkürzungsverzeichnis finden Sie unter <xref linkend="contents.abbreviations"/>.
+			</para>
+			<para>
+				Einsatzbar in Vorlagentyp: <guimenuitem>simple_page_index</guimenuitem>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Glossary auslesen</emphasis>
+			 (Datei: <filename>function.get_glossary.php</filename>)</para>				
+			<programlisting><![CDATA[
+{* Smarty Get Glossary Plugin :: Linkleiste *}
+{get_glossary var="glossary" action="pager"}
+
+<ul>
+{foreach item="_glossary" from=$glossary}
+{if !empty($_glossary.has_link)}
+  <li><a href="#{$_glossary.char}">{$_glossary.char}</a></li>
+{else}
+  <li>{$_glossary.char}</li>
+{/if}
+{/foreach}
+</ul>
+
+{* Smarty Get Glossary Plugin :: Ausgabe der Abkürzungstabelle *}
+{get_glossary var="glossary" action="content"}
+
+<dl>
+{foreach item="_glossary" from=$glossary}
+{if !is_null($_glossary.anchor)}
+<h3>{$_glossary.anchor}<a id="{$_glossary.anchor}" name="{$_glossary.anchor}"></a></h3>
+{/if}
+  <dt>{$_glossary.name}<a id="{$_glossary.name}" name="{$_glossary.name}"></a></dt>
+  <dd>{$_glossary.long_form}</dd>
+  <dd>{$_glossary.content}</dd>
+{/foreach}
+</dl>
+]]></programlisting>
+		</sect2>
+		
+		<sect2 id="usage.smarty_plugins.tag_cloud">
+			<title>Tag Cloud</title>	
+			<para>
+				Das Smarty Plugin <filename>tag_cloud</filename> stellt eine verlinkte Liste
+				der innerhalb eines Blogs verwendeten Schlagworte bereit.
+			</para>
+			<para>
+				Einsatzbar in Vorlagentyp: <guimenuitem>blog_index</guimenuitem>, 
+				<guimenuitem>blog_item</guimenuitem>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Tag Cloud auslesen</emphasis>
+			 (Datei: <filename>function.tag_cloud.php</filename>)</para>			
+			<programlisting><![CDATA[
+{* Smarty Tag Cloud Plugin, Parameter 'limit' und 'range' anpassbar *}
+{tag_cloud var="tags" page=$page.id limit=20 range=6}
+<ul>
+{foreach from=$tags item=_tag}
+<li><a class="tag_{$_tag.relevance}" href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
+{/foreach}
+</ul>
+]]></programlisting>
+
+			<note>
+				<para>
+					Um unterschiedliches Styling je nach Relevanz der Schlagworte zu unterstützen,
+					wird in dem Beispiel eine dynamische Klassenangabe eingesetzt. Möchten Sie
+					dieses einsetzen, definieren sie in Ihrem Stylesheet CSS Klassen von 
+					<filename>tag_0</filename> bis <filename>tag_6</filename>, die sich aus
+					dem oben im Beispiel angegebenen Wert (<userinput>6</userinput>) im <emphasis>range</emphasis>
+					Parameter ergeben.
+				</para>
+			</note>
+		</sect2>
+		
+		<sect2 id="usage.smarty_plugins.social_bookmarks">
+			<title>Social Bookmarks</title>	
+			<para>
+				Das Smarty Plugin <filename>social_bookmarks</filename> generiert eine Linkliste
+				zu Social Bookmark Diensten, auf denen die aktuelle Seite eingetragen werden kann.
+				Es können Dienste (s. Anwendungsbeispiele) von der Anzeige explizit ausgeschlossen werden. 
+			</para>
+			
+			<para>
+				Folgende Dienste sind aktuell implementiert:
+			</para>
+			
+				<itemizedlist>
+					<listitem>
+						<para>
+							Mister Wong (Parametername: mister-wong)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Technorati (Parametername: technorati)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Del.icio.us (Parametername: delicious)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Facebook (Parametername: facebook)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Link Arena (Parametername: linkarena)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Twitter (Parametername: twitter)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Furl (Parametername: furl)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Yigg (Parametername: yigg)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Webnews (Parametername: webnews)  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Google (Parametername: google)  
+						</para>
+					</listitem>
+				</itemizedlist>
+			<para>
+				Einsatzbar in Vorlagentyp: <emphasis role="strong">alle inhaltlichen Vorlagentypen</emphasis>
+			</para>
+
+			<para>Seitenvorlage: <emphasis>Social Bookmarks generieren</emphasis>
+			 (Datei: <filename>function.social_bookmarks.php</filename>)</para>				
+			<programlisting><![CDATA[
+{* Anwendungsbeispiel: Seiten beliebigen Typs - Alle Dienste nutzen *}
+{social_bookmarks page=$page.id var="sb"}
+<ul>
+{foreach from="$sb" item="_sb}
+<li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
+{/foreach}
+</ul>
+
+{* Anwendungsbeispiel: Seiten vom Typ "blog_item" - Alle Dienste nutzen *}
+{social_bookmarks page=$page.id posting="$blog_posting.id var="sb"}
+<ul>
+{foreach from="$sb" item="_sb}
+<li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
+{/foreach}
+</ul>
+
+{* Anwendungsbeispiel: Seiten beliebigen Typs - Nur bestimmte Dienste (hier: technorati, twitter, google) nutzen *}
+{social_bookmarks page=$page.id services="technorati,twitter,google" var="sb"}
+<ul>
+{foreach from="$sb" item="_sb}
+<li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
+{/foreach}
+</ul>
+
+{* Anwendungsbeispiel: Seiten vom Typ "blog_item" - Nur bestimmte Dienste (hier: technorati, twitter, google) nutzen *}
+{social_bookmarks page=$page.id services="technorati,twitter,google" posting="$blog_posting.id var="sb"}
+<ul>
+{foreach from="$sb" item="_sb}
+<li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
+{/foreach}
+</ul>
+]]></programlisting>
+		</sect2>		
+	</sect1>	
+</chapter>

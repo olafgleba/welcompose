@@ -264,16 +264,6 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guimenuitem>Bearbeiten</guimenuitem></term>
-					<listitem>
-						<para>
-							Über die Schaltfläche <guibutton>Edit</guibutton>
-							gelangt man zu einem Formular zum Bearbeiten der
-							jeweiligen Vorlage.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
@@ -282,6 +272,11 @@
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			
+			<para>
+				Um die jeweiligen Inhalte einer Seitenvorlage zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Namen der Seitenvorlage</emphasis>.
+			</para>
 			
 			<para>
 				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
@@ -333,7 +328,7 @@
 							der (X)HTML-Code eingefügt werden. Links zu
 							anderen Seiten, Globalen Vorlagen und einigen
 							anderen Strukturelementen können über die
-							Hilftsfunktionen oberhalb des Inhaltsbereichs
+							Hilfsfunktionen oberhalb des Inhaltsbereichs
 							eingefügt werden.
 						</para>
 					</listitem>
@@ -355,11 +350,26 @@
 			<note>
 				<para>
 					Über der Textarea stehen Links zur Verfügung, die über ein Pop-up unterschiedliche
-					Dateien des Systems referenzieren die Ihnen die Gestaltung der Seitenvorlagen
+					Dateien des Systems referenzieren und Ihnen die Gestaltung der Seitenvorlagen
 					erleichtern. Details über Funktion und Anwendung der einzelnen Links finden sie
 					in den jeweiligen inhaltlichen Kapiteln.
 				</para>
 			</note>
+			
+			<para>
+				Die Smarty-Funktion zur Einbindung der Globalen Dateien
+				muss man nicht selber schreiben, sondern kann man sich von
+				einer Hilfsfunktion einsetzen lassen, die jeweils über den
+				Eingabefeldern für die Vorlagen-Inhalte sitzt. Über ein
+				Pop-up lässt sich die gewünschte Globale Datei auswählen.
+				Die Smarty-Funktion zur Einbindung der Globalen Datei generiert
+				die adäquate Syntax und setzt diese an der Stelle des zuvor gesetzten Cursors ein.
+			</para>
+
+			<figure id="templating.templates.usage.reference_global_files.pop_up">
+				<title>Interne Links mit Hilfsfunktion referenzieren</title>
+				<graphic fileref="images/templating/templates/usage.insert_links.pop_up.png"/>
+			</figure>
 			
 			
 		</sect2>
@@ -381,8 +391,7 @@
 				</para>
 
 				<para>
-					Um mehr Flexibilität zu gewährleisten, geht Welcompose einen
-					anderen Weg:
+					Um mehr Flexibilität zu gewährleisten, geht Welcompose einen anderen Weg:
 				</para>
 
 				<itemizedlist>
@@ -857,69 +866,6 @@ Wert: 3
 ]]></programlisting>
 				
 			</sect3>
-			
-			<sect3 id="templating.templates.usage.edit_templates_with_editor">
-				<title>Editor zur Vorlagen-Verwaltung verwenden</title>
-				
-				<para>
-					Wer trotz Verwaltung der Vorlagen nicht auf seinen
-					angestammten Editor verzichten will (beispielsweise
-					um von Syntax-Highlighting oder anderen Funktionen zu
-					profitieren), muss das nicht. Der Webbrowser Firefox
-					(und auch der grössere Bruder Mozilla/Seamonkey),
-					der für verschiedene Betriebssysteme erhältlich ist,
-					ermöglicht die Integration des gewünschten Editors zur
-					Bearbeitung von Inhalten innerhalb eines HTML-Formulars.
-				</para>
-				
-				<para>
-					Firefox bringt diese Funktionalität zwar nicht von Haus
-					aus mit, allerdings existieren verschiedene Erweiterungen
-					zu diesem Zweck:
-				</para>
-				
-				<variablelist>
-					<varlistentry>
-						<term>Mozex</term>
-						<listitem>
-							<para>
-								Mozex<footnote>
-								<para>
-									<ulink url="http://mozex.mozdev.org/"/>
-								</para>
-								</footnote> ermöglicht über das Kontextmenü das
-								Bearbeiten einer Textarea, wie sie für
-								die Darstellung des Vorlagen-Quellcodes
-								verwendet wird, in einem beliebigen Editor.
-								Die Erweiterung funktioniert aktuell sowohl
-								mit Windows, Linux und MacOS X (getestet in
-								Kombination mit Textmate).
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>It's All Text!</term>
-						<listitem>
-							<para>
-								It's All Text!<footnote>
-								<para>
-									<ulink url="https://addons.mozilla.org/de/firefox/addon/4125"/>
-								</para>
-								</footnote> kann über eine kleine Schaltfläche
-								in der Ecke einer Textarea aufgerufen werden.
-								Sollte mindestens auf Windows und MacOS X
-								funktionieren.
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-				
-				<para>
-					Sollten Sie weitere Tipps kennen, um das Editieren von
-					Vorlagen einfacher zu machen, nehmen wir diese gerne in
-					das Handbuch auf.
-				</para>
-			</sect3>
 		</sect2>
 	</sect1>
 	
@@ -1115,12 +1061,13 @@ Wert: 3
 			
 			<para>
 				Die Vorlagentypen regeln innerhalb von Welcompose, für welche
-				Art von Seite (beispielsweise Blog-Archiv oder Formular) eine
-				Vorlage dient. Ein Vorlagen-Typ ist somit so etwas wie der 
-				"Dateiname" der Vorlage und dient im Kombination mit den
-				Vorlagengruppen (siehe <xref
+				Art von Seite (beispielsweise Blog-Archiv, ein Formular oder 
+				ein Seitenfragment) eine Vorlage dient. Ein Vorlagen-Typ ist
+				 somit so etwas wie der "Dateiname" der Vorlage und dient im
+				Kombination mit den Vorlagengruppen (siehe <xref
 				linkend="templating.template_sets"/>) dazu, Vorlagen zu
-				organisieren.
+				organisieren (siehe auch
+				<xref linkend="templating.template_types.usage.include_templates"/>).
 			</para>
 			
 		</sect2>
@@ -1346,6 +1293,48 @@ Wert: 3
 								</entry>
 								<entry>
 									WCOM_BLOG
+								</entry>
+								<entry>
+									Rss20
+								</entry>
+							</row>
+							<row>
+								<entry>
+									event_atom10
+								</entry>
+								<entry>
+									ATOM-1.0-Feed einer Event Einträgen.
+								</entry>
+								<entry>
+									WCOM_EVENT
+								</entry>
+								<entry>
+									Atom10
+								</entry>
+							</row>
+							<row>
+								<entry>
+									event_index
+								</entry>
+								<entry>
+									Übersichtsseite der Einträge auf einer Seite vom Typ Event.
+								</entry>
+								<entry>
+									WCOM_EVENT
+								</entry>
+								<entry>
+									Index
+								</entry>
+							</row>
+							<row>
+								<entry>
+									event_rss20
+								</entry>
+								<entry>
+									RSS-2.0-Feed einer Event Einträgen.
+								</entry>
+								<entry>
+									WCOM_EVENT
 								</entry>
 								<entry>
 									Rss20
@@ -1854,16 +1843,6 @@ $smarty->fetch($template_name);
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guimenuitem>Bearbeiten</guimenuitem></term>
-					<listitem>
-						<para>
-							Über die Schaltfläche <guibutton>Bearbeiten</guibutton>
-							gelangt man zu einem Formular zum Bearbeiten der
-							jeweiligen Globalen Vorlage.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
@@ -1874,8 +1853,13 @@ $smarty->fetch($template_name);
 			</variablelist>
 			
 			<para>
+				Um die jeweiligen Inhalte einer Globalen Vorlagen zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Namen der Globalen Vorlage</emphasis>.
+			</para>
+			
+			<para>
 				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
-				kommt man zum Formular zum Hinzufügen einer neuen Globalen 
+				gelangt man zum Formular zum Hinzufügen einer neuen Globalen 
 				Vorlage.
 			</para>
 			
@@ -2349,32 +2333,27 @@ http://pfad/der/installation/global_template.php?name=beispiel.css
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guimenuitem>Bearbeiten</guimenuitem></term>
-					<listitem>
-						<para>
-							Über die Schaltfläche <guibutton>Bearbeiten</guibutton>
-							gelangt man zu einem Formular zum Bearbeiten der
-							jeweiligen Globalen Datei.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><guimenuitem>Löschen</guimenuitem></term>
 					<listitem>
 						<para>
 							Löscht die Globale Datei.
-						</para>
-						
+						</para>					
 						<warning>
 							<para>
 								Löschen Sie eine Globale Datei, bleiben
-								allfällige Referenzen auf diese Datei
-								in Vorlagen unberührt!
+								die Verweise auf diese Datei
+								in Vorlagen unberührt, werden also nicht automatisch
+								gelöscht.
 							</para>
 						</warning>
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			
+			<para>
+				Um die jeweiligen Inhalte einer Globalen Datei zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Namen der Globalen Datei</emphasis>.
+			</para>
 			
 			<para>
 				Sobald man auf den Link <guibutton>Neu anlegen</guibutton> klickt,
@@ -2431,7 +2410,7 @@ http://pfad/der/installation/global_template.php?name=beispiel.css
 			</para>
 
 			<programlisting><![CDATA[
-/pfad/der/installation/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png
+/pfad/der/installation/files/global_files/logo.png
 ]]></programlisting>
 
 			<para>
@@ -2450,7 +2429,7 @@ http://pfad/der/installation/global_template.php?name=beispiel.css
 			</para>
 
 			<programlisting><![CDATA[
-<img id="logo" src="/pfad/der/installation/files/global_files/fc038feddb4f211e7974f0408f1dc162a4015460_logo.png"
+<img id="logo" src="/pfad/der/installation/files/global_files/logo.png"
 	alt="Logo Beispielfirma" />
 ]]></programlisting>
 

@@ -36,6 +36,11 @@
 			</para>
 			
 			<para>
+				Um ein Projekt zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Namen des Projektes</emphasis>.
+			</para>
+			
+			<para>
 				Sobald mehr als ein Projekt existiert, steht im Kopfbereich des Admin-Interfaces ein
 				Auswahlmenü zur Verfügung, mit dem Sie unmittelbar zwischen den jeweiligen Projekten
 				wechseln können.
@@ -45,9 +50,14 @@
 				<title>Auswahlmenü bei mehreren Projekten</title>
 				<graphic fileref="images/settings/projects/project_manage_select.png"/>
 			</figure>
-			
+
+			<para>
+				Klickt man auf den Link <guibutton>Neu anlegen</guibutton>,
+				gelangt man zum Formular zum Hinzufügen eines neuen Projektes.
+			</para>
+						
 			<figure id="settings.projects.project_add">
-				<title>Auswahlmenü bei mehreren Projekten</title>
+				<title>Neues Projekt hinzufügen</title>
 				<graphic fileref="images/settings/projects/project_add.png"/>
 			</figure>
 			
@@ -620,78 +630,7 @@ class TextConverter_MeinTextKonverter extends TextConverter_XHTML
 					Administrationsbereichs genutzt werden.
 				</para>
 			</sect3>
-		</sect2>
-		
-		<sect2 id="settings.text_converters.wysiwyg">
-			<title>WYSIWYG</title>
-			
-			<para>
-				WYSIWYG- respektive sogenannte Rich-Text-Editoren wie
-				TinyMCE oder FCKEditor können mit Welcompose nicht genutzt
-				werden.
-			</para>
-			
-			<para>
-				Wer trotzdem nicht auf einen WYSIWYG-Editor verzichten will,
-				sollte über den Browser Firefox mit Hilfe von Erweiterungen
-				mindenstens beschränkte WYSIWYG-Funktionalität erhalten, ohne
-				den Quellcode von Welcompose modifizieren zu müssen:
-			</para>
-			
-			<variablelist>
-				<varlistentry>
-					<term>Xinha Here!</term>
-					<listitem>
-						<para>
-							Xinha Here!<footnote>
-							<para>
-								<ulink url="https://addons.mozilla.org/de/firefox/addon/1449"/>
-							</para>
-							</footnote> bindet den WYSIWYG-Editor Xinha<footnote>
-							<para>
-								<ulink url="http://xinha.webfactional.com/"/>
-							</para>
-							</footnote> ein.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term>Mimulus</term>
-					<listitem>
-						<para>
-							Mimulus<footnote>
-							<para>
-								<ulink url="http://inamidst.com/mimulus/"/>
-							</para>
-							</footnote> bietet einen schlanken WYSIWYG-Editor.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			
-			<para>
-				Achten Sie bei der Nutzung einer derartigen Extension einfach
-				darauf, dass Sie den Textkonverter XHTML verwenden.
-			</para>
-			
-			<warning>
-				<para>
-					Die Nutzung dieser oder anderer WYSIWYG-Editoren wird
-					nicht empfohlen und nicht unterstützt. Der Mediamanager
-					wie andere Hilfsfunktionen können durch die
-					WYSIWYG-Editoren in ihrer Funktionalität eingeschränkt
-					werden oder mit den Editoren nicht kompatibel sein.
-				</para>
-			</warning>
-			
-			<para>
-				Eine weitere Erleichterung zum Verfassen von Texten können
-				externe Editoren sein, die beispielsweise Syntax-Highlighting
-				bieten. Konsultieren Sie dazu <xref
-				linkend="templating.templates.usage.edit_templates_with_editor"/>.
-			</para>
-		</sect2>
-		
+		</sect2>		
 	</sect1>
 	
 	<sect1 id="settings.text_macros">
@@ -797,11 +736,9 @@ w:de{Toxoplasmose}
 			<title>Mitgelieferte Textmakros</title>
 			
 			<para>
-				Welcompose bringt drei Textmakros von Haus aus mit, die für
+				Welcompose bringt augenblicklich vier Textmakros von Haus aus mit, die für
 				die Bereitstellung von Welcompose-Funktionalität benötigt
-				werden. Sie dienen zur Erzeugung von Abkürzungen, der Links zwischen einzelnen
-				Welcompose-Seiten und dem Einbetten von Media-Elementen wie
-				Bildern und anderen binären Dateien.
+				werden oder/und zusätzliche Funktionaltität bereit zu stellen.
 			</para>
 							
 			<warning>
@@ -887,6 +824,54 @@ w:de{Toxoplasmose}
 					in Welcompose integrierte Funktionen für den Anwender tun.
 				</para>
 
+			</sect3>
+			
+			<sect3 id="settings.text_macros.builtin_text_macros.bundled_embed_video_generator">
+				<title>Bundled Embed Video Generator</title>
+				
+				<para>
+					Das Textmakro Bundled Media URL Generator kümmert sich um das Setzen
+					von Pfaden respektive URLs zu Media-Elementen wie Bildern.
+					Es wird vom in Welcompose integrierten Media Manager
+					verwendet und kann daher auch nicht über das Backend gelöscht oder
+					deaktiviert werden.
+				</para>
+				
+				<para>
+					Es orientiert sich an der Syntax von Smarty-Funktionen,
+					wie sie in Vorlagen verwendet werden:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_media arg1=value1}
+]]></programlisting>
+				
+				<para>
+					Es kennt nur ein einzelnes Argument: <code>id</code>.
+					Diesem wird jeweils die ID des Bildes oder Films
+					übergeben, das respektive der eingebunden werden soll:
+				</para>
+				
+				<programlisting><![CDATA[
+{get_media id="3"}
+]]></programlisting>
+				
+				<para>
+					Anstelle von <code>{get_media ...}</code> setzt das
+					Textmakro den Pfad respektive URL zum Media-Element,
+					beispielsweise:
+				</para>
+				
+				<programlisting><![CDATA[
+/files/global_files/4975b766cb7323f2724213d8b41fe685ca107d71_grafik.gif
+]]></programlisting>
+				
+				<para>
+					Allerdings ist es in der Regel nicht nötig, selber die
+					Tags für die Integration der Bilder zu schreiben, da dies
+					in Welcompose integrierte Funktionen für den Anwender tun.
+				</para>
+				
 			</sect3>
 						
 			<sect3 id="settings.text_macros.builtin_text_macros.bundled_media_url_generator">

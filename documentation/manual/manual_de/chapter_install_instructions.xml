@@ -77,7 +77,7 @@
 			</listitem>
 			<listitem>
 				<para>
-					Webserver mit PHP-Unterstützung (Apache, Lighttpd,
+					Webserver mit PHP-Unterstützung (Apache, Nginx, Lighttpd,
 					Cherokee etc.)
 				</para>
 			</listitem>
@@ -135,20 +135,32 @@
 			aktuelle Version von PDO (1.0.3 oder höher) respektive PDO
 			MySQL (1.0.2 oder höher) installiert sein. Sind Sie nicht
 			sicher, ob der Zielserver über die nötigen Voraussetzungen
-			verfügt, führen Sie das Setup-Programm von Welcompose aus. In
-			Schritt 2 und 3 wird Welcompose die aktuelle Serverkonfiguration
+			verfügt, führen Sie das Setup-Programm von Welcompose aus.
+		</para>
+		
+		<para>
+			In Schritt 2 und 3 der Setup-Routine wird Welcompose die aktuelle Serverkonfiguration
 			ermitteln und Ihnen sagen können, ob die Voraussetzungen
 			erfüllt werden. Sollte dem nicht der Fall sein, wird
 			gleichzeitig darauf hingewiesen, welche Versionen
 			installiert sein müssen, um die optimale Funktionsfähigkeit
-			von Welcompose zu garantieren. Sollte eine oder mehrere
-			Erweiterungen nicht vorhanden oder zu alt sein, können diese
-			mit Hilfe des
-			<link linkend="install_instructions.installation.ressourcen">PECL</link>
-			Installers (Linux, BSD, MacOS X) nachgeladen oder im Fall von
-			Windows von der
-			<link linkend="install_instructions.installation.ressourcen">PHP-Webseite</link>
-			als vorkompilierte DLLs bezogen werden.
+			von Welcompose zu garantieren. 
+		</para>
+		
+		<note>
+			<para>
+				Um <emphasis>unabhängig</emphasis> vom Installer zu prüfen, ob Ihr Webspace die
+				Voraussetzungen erfüllt, finden Sie im Download-Bereich der 
+				Welcompose Projektseite <ulink type="external" url="http://welcompose.de/cms/downloads/#misc">eine einzelne PHP Datei</ulink>, die genau dieses ermöglicht.
+			</para>
+		</note>
+
+		<para>
+			Wenn Sie Welcompose auf einem Shared Hosting Account installieren
+			wollen und nicht alle Voraussetzungen erfüllt sind, wenden
+			Sie sich bitte an den Support Ihres Providers und verweisen
+			Sie auf diese Seite. Viele Webhoster rüsten die
+			benötigten Funktionen gerne nach. 
 		</para>
 		
 		<tip>
@@ -163,13 +175,14 @@
 		
 		<tip>
 			<para>
-				Sollte Ihnen noch kein Welcompose-Installer zur Verfügung
-				stehen, erhalten Sie im Support-Bereich ein kleines
-				Script, das unabhängig von Welcompose prüft, ob Ihr
-				Webspace die Voraussetzung zum Betrieb von Welcompose
-				erfüllt.
+				Möchten Sie Welcompose auf ihren lokalen Webserver installieren, bieten
+				unter unixioden Betriebssystemen verschiedene Open-Source Erweiterungs-Manager wie 
+				<link linkend="install_instructions.installation.ressourcen">MacPorts</link> und
+				<link linkend="install_instructions.installation.ressourcen">Fink</link>
+				die Möglichkeit, die notwendigen Erweiterungen ohne viel Aufwand zu installieren.
 			</para>
 		</tip>
+
 		
 		<anchor id="install_instructions.installation.ressourcen"/>
 		<para>Externe Ressourcen:</para>
@@ -177,33 +190,16 @@
 		<itemizedlist>
 			<listitem>
 				<para>
-					<ulink type="external" url="http://pecl.php.net/">Verzeichnis
-					von PHP-Erweiterungen</ulink>
+					<ulink type="external" url="http://www.macports.org/">MacPorts Projektseite</ulink>
 				</para>
 			</listitem>
 			<listitem>
 				<para>
 					<ulink type="external"
-					url="http://www.php.net/manual/en/install.pecl.php">Installation
-					von PECL-Erweiterungen</ulink>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<ulink type="external"
-					url="http://pecl4win.php.net/">Vorkompilierte PHP-Erweiterungen
-					für Windows</ulink>
+					url="http://www.finkproject.org/index.php?phpLang=de">Fink Projektseite</ulink>
 				</para>
 			</listitem>
 		</itemizedlist>
-		
-		<para>
-			Wenn Sie Welcompose auf einem Shared Hosting Account installieren
-			wollen und nicht alle Voraussetzungen erfüllt sind, wenden
-			Sie sich bitte an den Support Ihres Providers und verweisen
-			Sie auf diese Seite. Die meisten Webhoster rüsten die
-			benötigten Funktionen gerne nach.
-		</para>
 	</sect1>
 	
 	<sect1 id="install_instructions.install_wcom">
@@ -223,13 +219,14 @@
 				Installation</link>.
 			</para>
 			<para>
-				<emphasis>Für alle Anwender wird die Verwendung des Package
-				Installers empfohlen</emphasis>. Dabei muss nur eine Datei auf den
+				<emphasis role="strong">Für alle Anwender wird die Verwendung des Package
+				Installers empfohlen</emphasis>. Hierbei muss lediglich 1 Datei auf den
 				Server kopiert und die Schreibrechte eines einzigen
 				Ordners verändert werden. Um den Rest kümmert sich der
-				Package Installer, der die restlichen Dateien auf den
-				Server kopiert und die Schreibrechte anpasst, bevor der
-				Konfigurationsassistent gestartet wird.
+				<link linkend="install_instructions.installation.package_installer">Package Installer</link>,
+				der die restlichen Dateien auf den Server kopiert und die Schreibrechte anpasst, bevor der
+				<link linkend="install_instructions.configure_wcom">Konfigurationsassistent</link>
+				gestartet wird.
 			</para>
 			
 			<para>
@@ -393,8 +390,23 @@
 					<filename>install-zlib.php</filename> (für den
 					komprimierten Installer) oder zur
 					<filename>install.php</filename> (für den unkomprimierten
-					Installer) in die Adresszeile Ihres Browsers eingeben. Es
-					sollte nun ein Formular mit der Überschrift
+					Installer) in die Adresszeile Ihres Browsers eingeben.
+				</para>
+
+		<programlisting language="smarty"><![CDATA[
+http://domain.tld/pfad/zu/welcompose/install-zlib.php
+]]></programlisting>
+ 					
+					<para>
+					oder (falls die zlib-Erweiterung auf Ihrem Webserver nicht verfügbar ist)
+				</para>
+				
+		<programlisting language="smarty"><![CDATA[
+http://domain.tld/pfad/zu/welcompose/install.php
+]]></programlisting>
+				
+					<para>
+					Es sollte nun ein Formular mit der Überschrift
 					<emphasis>Package Installation</emphasis> erscheinen.
 				</para>
 				
@@ -675,8 +687,13 @@
 		
 		<para>
 			Die Setup-Prozedur befindet sich im Ordner <filename>setup/</filename>
-			im Installationsverzeichnis von Welcompose.
+			im Installationsverzeichnis von Welcompose. Rufen Sie die Adresse
+			in Ihrem Webbrowser auf.
 		</para>
+		
+		<programlisting language="smarty"><![CDATA[
+http://domain.tld/pfad/zu/welcompose/setup/
+]]></programlisting>
 		
 		<sect2 id="install_instructions.configure_wcom.license">
 			<title>Lizenzierung</title>
@@ -991,20 +1008,10 @@
 							festgelegt, welches Gebietsschema für die Anzeige
 							von Welcompose verwendet wird. Es wird damit unter anderem
 							die Sprache der Administrationsoberfläche bestimmt. Voreingestellt ist
-							deutsch (<emphasis>de_DE</emphasis>) als Interface-Sprache. Zur Verfügung steht
-							momentan Englisch als Alternative (<emphasis>en_GB</emphasis>). Sollten Sie
-							nicht wissen, was und wie hier einzutragen ist, wird "<emphasis>C</emphasis>" als 
-							Einstellung empfohlen. Für mögliche Eingaben/Formate und deren Folgen konsultieren
-							Sie bitte <xref linkend="localization"/> und nutzen die <xref linkend="introduction.context_help"/>.
-							
-						<note>
-							<para>
-								Ab der aktuellen Welcompose Version 0.9.0 ist die Software vollständig
-								Unicode basiert. Tragen Sie bitte für die Spracheinstellung 
-								<userinput>de_DE.UTF-8</userinput> ein. Im nächsten Release
-								der Software wird dieses voreingestellt sein.
-							</para>
-						</note>
+							deutsch (<emphasis>de_DE.UTF-8</emphasis>) als Interface-Sprache. Als
+							Alternative steht momentan Englisch (<emphasis>en_GB.UTF-8</emphasis>) zur
+							Verfügung. Mögliche Eingaben/Formate werden in der <xref linkend="introduction.context_help"/>
+							des Eingabefeldes erläutert.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1060,5 +1067,61 @@
 				</para>
 			</warning>
 		</sect2>
+	</sect1>
+	
+	<sect1 id="install_instructions.short">
+		<title>Auf einen Blick</title>
+
+		<sect2 id="install_instructions.short.package_installer">
+			<title>Installation (Package Installer)</title>
+					
+		<orderedlist>
+			<listitem>
+				<para>
+					Laden Sie das gewünschte Welcompose-Archiv herunter.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Entpacken Sie das heruntergeladene Archiv. Sie finden nun einen Ordner mit Namen <filename>welcompose-x.x.x</filename> auf der Festplatte. Innerhalb dieses Ordners liegen die beiden Installer Package Dateien. Datei <filename>install.php</filename> ist die unkomprimierte, <filename>install-zlib.php</filename> die komprimierte (zlib) Version des Installers. Beide Varianten sind in ihrer Funktion identisch.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Legen Sie ein Verzeichnis auf Ihrem Webspace an, in das Sie Welcompose installieren möchten (sofern Sie Welcompose nicht in den Root Ihres Webspace installieren möchten).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Setzen Sie auf den angelegten Ordner folgende Schreibrechte: 777 (oder oktale Angabe 0777). U.u. können hier, abhängig von der Server-Umgebung, andere Angabe notwendig sein.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Laden Sie per FTP die gewünschte Installer Package Datei (Je nach Ausstattung des Webservers <filename>install.php</filename> oder <filename>install-zlib.php</filename>) in das angelegte Verzeichnis auf Ihren Webspace.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Geben Sie in einem Browser die Adresse zur hochgeladenen Datei ein. Es wird das Interface für den Installationsvorgang angezeigt.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Tragen Sie den Pfad zum Installationsordner ein. Beachten Sie, dass der Pfad relativ zur aufgerufenen Installationsdatei angegeben werden muss.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Belassen Sie die <guilabel>Expert Options</guilabel> auf ihren voreingetragenen Standard-Werten.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Klicken Sie auf <guibutton>Go to next step</guibutton>. Der Installer entpackt alle Dateien (dies kann einige Sekunden dauern) und leitet Sie zum Setup weiter.
+				</para>
+			</listitem>
+		</orderedlist>
+		</sect2>		
 	</sect1>
 </chapter>

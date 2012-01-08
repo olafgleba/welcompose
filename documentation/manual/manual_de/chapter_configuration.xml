@@ -15,10 +15,9 @@
 		
 		<note>
 			<para>
-				Die allermeisten Parameter der
-				hier aufgeführten Konfigurationsabschnitte brauchen Sie nicht manuell anpassen.
-				Sie werden während der Installation von Welcompose durch die Angaben im Setup-Prozeß
-				automatisch gesetzt und/oder generiert.  
+				Die allermeisten Parameter der hier aufgeführten Konfigurationsabschnitte brauchen
+				Sie nicht manuell anpassen. Sie werden während der Installation von Welcompose
+				durch die Angaben im Setup-Prozeß automatisch gesetzt und/oder generiert.  
 			</para>
 		</note>
 		
@@ -100,7 +99,7 @@
 [log]
 handler = "file"
 name = "/var/log/welcompose/welcompose.log"
-level = PEAR_LOG_NOTICE
+level = PEAR_LOG_WARNING
 ]]></programlisting>
 			
 				<para>	
@@ -118,7 +117,7 @@ level = PEAR_LOG_NOTICE
 [log]
 handler = "file"
 name = "/www/meinewebsite.tld/tmp/log/welcompose.log"
-level = PEAR_LOG_NOTICE
+level = PEAR_LOG_WARNING
 ]]></programlisting>
 			
 				<para>
@@ -203,7 +202,7 @@ level = PEAR_LOG_NOTICE
 [log]
 handler = "display"
 name = 
-level = PEAR_LOG_NOTICE
+level = PEAR_LOG_WARNING
 ]]></programlisting>
 			
 				<para>
@@ -226,7 +225,7 @@ level = PEAR_LOG_NOTICE
 [log]
 handler = "firebug"
 name = 
-level = PEAR_LOG_NOTICE
+level = PEAR_LOG_WARNING
 ]]></programlisting>
 			
 			</sect3>

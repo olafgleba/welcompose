@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="editors">
+	<title>WYSIWYG vs. Markup Editor</title>
+		
+	<sect1 id="editors.editors">
+		<title>Ø WYSIWYG</title>
+	
+		<para>
+			Viele Content Management Systeme stellen Tools bereit, die Anwender
+			in der Eingabe und Formatierung von Inhalten unterstützen.
+			So auch Welcompose (s. <xref linkend="editors.markup"/>).
+		</para>
+		
+		<para>
+			Während gewöhnlich sogenannte WYSIWYG-Editoren wie TinyMCE, FCKEditor oder ähnliche integriert werden,
+			haben wir uns als Entwickler von Welcompose explizit gegen die Integration eines Editors mit dieser
+			Funktionsweise entschieden. Stattdessen stellen wir eine für Welcompose angepasste
+			Version des Markup Editors <emphasis role="strong">MarkItup!</emphasis><footnote>
+			<para>
+				<ulink url="http://markitup.jaysalvat.com/"/>
+			</para>
+			</footnote> als Erweiterung (<emphasis>Addon</emphasis>) auf der Projektseite  
+			<ulink type="external" url="http://welcompose.de/cms/downloads/#misc">zum Download bereit</ulink>.
+		</para>
+			
+		<para>
+			Neben technischen Gründen, wie ungewisse Kompatibilität von ggf. per Copy&amp;Paste
+			übernommener Text aus Desktop-Programmen wie Microsoft Word und fehlender Einfluss auf die <emphasis>Übersetzung</emphasis>
+			der angewendeten Formatierung in sein HTML Pedant (und somit nicht kontrollierbare Syntax in der Ausgabe),
+			sind es vor allem Gründe der Benutzerführung, die uns dazu bewogen haben, keinen WYSIWYG-Editor
+			einzubinden.
+		</para>
+			
+		<para>
+			Der Benutzer sollte sich auf das Wesentliche - die Eingabe von Inhalten -
+			konzentrieren können. Ohne von den Möglichkeiten eines WYSIWYG-Editors, die sehr
+			komplex und somit lernintensiv sein können, überfordert zu werden.
+			Zudem gibt es (oder sollte es geben) für eine Webseite ein klares Konzept zur inhaltlichen
+			Gestaltung und Formatierung, die nicht innerhalb der eigentlichen Inhaltseingabe stattfinden
+			sollte (Inline Styles), sondern innerhalb eingebundener Layoutdateien festgelegt wird (Stylesheets),
+			die der Entwickler in Zusammenarbeit mit dem Kunden erstellt hat. Während zum Einen damit
+			das einheitliches Erscheinungsbild gewährleistet werden kann und kontrollierbar bleibt,
+			bedeutet dies für den Kunden als weiteren Vorteil weniger Lernaufwand in der Pflege der Inhalte.  
+		</para>
+	
+		<sect2 id="editors.markup">
+			<title>Markup Editor</title>
+	
+			<para>
+				Der als <emphasis>Addon</emphasis> auf der <ulink type="external" url="http://welcompose.de/cms/downloads/#misc">Welcompose Projektseite
+				angebotene Markup-Editor</ulink> bereitgestellte Editor steht nach Installation
+				auf allen Seiten, in den Inhalte eingegeben werden, zur Verfügung. Im heruntergeladenen
+				Ordner finden Sie eine kurze LIESMICH-Datei die beschreibt, wie der Editor in
+				Welcompose zu integrieren ist.  
+			</para>
+			
+			<note>
+				<para>
+					Bis zur Welcompose Version 1.0 wird der Editor nicht integraler Bestandteil von Welcompose sein.
+					Dies hat vor allem technische Gründe. Während Welcompose intern momentan noch die
+					<emphasis>Prototype</emphasis> Javascript Library nutzt, basiert die Implementierung
+					des Editor MarkItup auf der <emphasis>jQuery</emphasis> Library.
+				</para>
+			</note>
+			
+			<note>
+				<para>
+					Das Addon wird für die jeweils aktuelle Welcompose Version gepflegt und bereitgestellt. 
+					Möchten Sie den Editor nutzen, aktualisieren Sie bitte, falls erforderlich, zuvor Ihre Welcompose Installation. 
+				</para>
+			</note>
+			
+			<figure id="content.markup.editor.overview">
+				<title>Eingebundener Markup-Editor</title>
+				<graphic fileref="images/contents/editor/editor.overview.png"/>
+			</figure>
+				
+			<para>
+				Der Editor <emphasis role="strong">MarkItUp!</emphasis> stellt innerhalb
+				Welcompose ein reduziertes Set an Formatierungshilfen an, die sich im Arbeitsalltag als
+				sinnvoll erwiesen haben.   
+			</para>
+			
+			<variablelist>
+				<varlistentry>
+					<term>H1 - H6</term>
+					<listitem>
+						<para>
+							Überschriften der Ordnung 1 - 6.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Absatz</term>
+					<listitem>
+						<para>
+							Fügt den Start- und End-Tag für einen Absatz ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Zeilenumbruch</term>
+					<listitem>
+						<para>
+							Fügt einen Zeilenumbruch ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Fett</term>
+					<listitem>
+						<para>
+							Zeichnet einen selektierten Text als <emphasis>fett</emphasis> aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Kursiv</term>
+					<listitem>
+						<para>
+							Zeichnet einen selektierten Text als <emphasis>kursiv</emphasis> aus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>CS</term>
+					<listitem>
+						<para>
+							Fügt einem beliebigen Element eine CSS Klasse hinzu.
+						</para>
+						<para>						
+				<programlisting><![CDATA[
+<div>
+...
+<div class="klasse1">
+]]></programlisting>
+						</para>
+						<para>
+							Um die CSS-Klassen für ihr Projekt einzutragen, müssen ggf. mehrere Dateien angepasst
+							werden. Diese befinden sich im Ordner <filename>admin/static/libs/thirdparty/markitup/sets/</filename>.
+							Hier finden Sie Ordner, die <emphasis>markdown</emphasis>, <emphasis>textile</emphasis>,
+							<emphasis>xhtml</emphasis> heißen. In diesen befinden sich jeweils die Konfigurationsdateien
+							der einzelnen Textkonverter (<filename>set.js</filename>). Da der Textkonverter
+							<emphasis>markdown</emphasis> keine Klassenvergabe unterstützt, kann dieser
+							Ordner ignoriert werden. Öffnen Sie die <filename>sets.js</filename> Dateien in
+							den Ordner <filename>textile</filename> und  <filename>xhtml</filename>, finden Sie
+							jeweils einen Absatz, der wie folgt aussieht: 
+						</para>
+						<para>						
+				<programlisting><![CDATA[
+{name:'Klasse 1', replaceWith:'class="klasse1"' },
+{name:'Klasse 2', replaceWith:'class="klasse2"' }
+]]></programlisting>
+						</para>
+						<para>
+							Ersetzen sie <userinput>Klasse 1</userinput> respektive <userinput>Klasse 2</userinput> durch eine
+							frei gewählte Bezeichnung ihrer Klasse und den Wert <userinput>klasse1</userinput> (resp. 
+							<userinput>klasse2</userinput>) durch den realen Klassennamen. Es lassen sich beliebig
+							viele Deklarationen einfügen. Kopieren Sie hierzu eine vollständige Zeile und passen
+							die Werte an. Achten Sie auf darauf, nach jeder Zeile ein <userinput>Kommata</userinput>
+							zu setzen. Nach der abschließenden Zeile wird kein Kommata gesetzt.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Ungeordnete Liste</term>
+					<listitem>
+						<para>
+							Fügt eine Listen-Tag für eine ungeordnete Liste ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Geordnete Liste</term>
+					<listitem>
+						<para>
+							Fügt eine Listen-Tag für eine geordnete (nummerierte) Liste ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Listenpunkt</term>
+					<listitem>
+						<para>
+							Fügt einen Listenpunkt ein.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Verweis (externer Link)</term>
+					<listitem>
+						<para>
+							Fügt einen Verweis (externer Link) ein. Eingabe innerhalb eines Pop-Up.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Tabelle</term>
+					<listitem>
+						<para>
+							Fügt eine Tabelle ein. Eingabe in zwei Schritten (Zeilen, Spaltenanzahl) innerhalb eines Pop-Up.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+	
+		<sect2 id="editors.extensions">
+			<title>Erweiterungen zur Texteingabe</title>
+		
+			<para>
+				Die Texteingabe in Textfeldern ist leider alles andere als gut gelöst in den aktuellen Browsern.
+				Wer in der Erstellung oder Bearbeitung von Text in Textfeldern nicht auf 
+				Syntax-Highlighting, Einrückungen oder andere, angenehme Funktionen
+				seines Lieblings-Editor verzichten möchte, muss das nicht. Vorgestellt
+				werden hier zwei Editoren, bzw. Browser-Erweiterungen, die den Inhalt der jeweiligen Textarea
+				über ein Kürzel oder einen Button im Editor der Wahl aufrufen.
+			</para>
+		
+			<para>
+				Weder Firefox noch Safari bringt diese Funktionalität von Haus
+				aus mit, allerdings existieren für beide Browser beispielsweise folgende Erweiterungen
+				zu diesem Zweck:
+			</para>
+		
+			<variablelist>
+				<varlistentry>
+					<term>It's All Text! (Firefox Addon, Windows/Mac)</term>
+					<listitem>
+						<para>
+							It's All Text!<footnote>
+							<para>
+								<ulink url="https://addons.mozilla.org/de/firefox/addon/4125"/>
+							</para>
+							</footnote> kann über eine kleine Schaltfläche
+							in einer frei wählbaren Ecke einer Textarea aufgerufen werden und ruft hiermit
+							den von Ihnen voreingestellten Editor auf.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>QuickCursor (Safari, Mac, kostenpflichtig, 3,99 €)</term>
+					<listitem>
+						<para>
+							QuickCursor<footnote>
+							<para>
+								<ulink url="http://www.hogbaysoftware.com/products/quickcursor/"/>
+							</para>
+							</footnote> macht im Prinzip das gleiche. Führen
+							Sie den Cursor einfach über die zu bearbeitende Textarea und
+							rufen ein frei definierbare Tastenkürzel auf, um den Editor
+							Ihrer Wahl zu öffnen.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		
+			<note>
+				<para>
+				Sollten Sie weitere Tipps oder/und Erweiterungen kennen, um das Editieren von
+				Vorlagen und/oder Seiten einfacher zu machen, nehmen wir diese gerne in das Handbuch auf.
+				</para>
+			</note>
+		</sect2>
+	
+	</sect1>
+
+</chapter>

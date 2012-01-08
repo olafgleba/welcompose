@@ -157,7 +157,7 @@
 			Hauptnavigation sehen. Lassen Sie sich dabei von der Warnung
 			<computeroutput>Bitte definieren Sie eine Index-Seite!</computeroutput> nicht
 			verwirren; sie verschwindet, sobald die erste Seite angelegt wurde.
-			Über das Symbol unter dem Label <guibutton>Neu</guibutton>
+			Über den Link <guibutton>Neu Seite anlegen</guibutton>
 			gelangen Sie zur Eingabemaske, um die erste Seite anzulegen. Wir
 			beginnen mit der Seite <emphasis>Startseite</emphasis>.
 		</para>
@@ -166,58 +166,77 @@
 			<title>Neue Seite anlegen</title>
 			<graphic fileref="images/crash_course_demo/create_page_metadata.png"/>
 		</figure>
-		
+
 		<variablelist>
 			<varlistentry>
-				<term>
-					<guilabel>Position</guilabel>
-				</term>
+				<term><guilabel>In Navigation</guilabel></term>
 				<listitem>
 					<para>
-						Die Position bestimmt, wie die neue Seite in
-						Relation zum Menüpunkt, neben dem der Anwender auf
-						das Symbol zum Hinzufügen einer Seite geklickt hat,
-						in die Navigation eingefügt wird. Belassen Sie die
-						Auswahl bei der Option <guimenuitem>Unterhalb des
-						aktuellen Navigationseintrages</guimenuitem>.
+						Bestimmt, in welcher Navigation die neue Seite
+						angelegt wird. Da wird zum jetzigen Zeitpunkt nur
+						eine Navigation existiert, brauchen Sie hier nichts auswählen.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>
-					<guilabel>Name</guilabel>
-				</term>
+				<term><guilabel>Referenzseite</guilabel></term>
 				<listitem>
 					<para>
-						Geben Sie hier die Beschriftung des Menüpunkts ein,
-						also <userinput>Startseite</userinput>.
+						Gibt die Seite an, die der nachfolgend
+						gewählten Position als Referenz dienen soll. Da noch keine
+						Seite existiert, die als Referenz genutzt werden könnte, 
+						ist der Menupunkt nicht relevant.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>
-					<guilabel>Typ</guilabel>
-				</term>
+				<term><guilabel>Position</guilabel></term>
 				<listitem>
 					<para>
-						Der Seitentyp bestimmt, welche Inhalte in der Seite
-						gespeichert werden können. Da es sich um eine Seite
-						handelt, die nur aus Fliesstext besteht, wählen
-						Sie <guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> aus.
+						Bestimmt, an welcher Position die neue Seite angelegt wird.
+						Eine Seite kann entweder oberhalb oder unterhalb des zuvor ausgewählten
+						Referenzseite eingefügt werden. Auch hier brauchen Sie auswählen,
+						die erste angelegte Seite immer auf oberster Ebene steht.
 					</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term>
-					<guilabel>Vorlagengruppe</guilabel>
-				</term>
+				<term><guilabel>Name</guilabel></term>
+				<listitem>
+					<para>
+					Geben Sie hier die Beschriftung des Menüpunkts ein,
+					also <userinput>Startseite</userinput>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>URL-Name</guilabel></term>
+				<listitem>
+					<para>
+						Wird automatisch generiert.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Typ</guilabel></term>
+				<listitem>
+					<para>
+						Bestimmt den Seitentyp der Seite, respektive
+						mit welchen Inhalten die Seite befüllt werden
+						kann. Wählen Sie 
+						<guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> aus
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Vorlagengruppe</guilabel></term>
 				<listitem>
 					<para>
 						Mit dem <emphasis>Vorlagengruppe</emphasis> wird
 						bestimmt, welche Vorlagen zur Anzeige der Seite
-						verwendet werden sollen. Wählen Sie hier das
+						verwendet werden sollen. Wählen Sie hier die
 						<emphasis>Vorlagengruppe</emphasis> aus,
-						das wir im <xref linkend="crash_course_demo.preparation"/>
+						die wir im <xref linkend="crash_course_demo.preparation"/>
 						angelegt haben, also
 						<userinput>Standardaussehen</userinput>.
 					</para>
@@ -230,19 +249,18 @@
 				<listitem>
 					<para>
 						Setzen Sie hier einen Haken, um festzulegen, dass die
-						<emphasis>Startseite</emphasis> als erste Seite
+						<emphasis>Startseite</emphasis> als Standard
 						angezeigt werden soll, wenn Ihre Homepage aufgerufen
-						wird.
+						wird. Die Checkbox ist zu finden unter der Zwischenüberschrift
+						<emphasis role="strong">Optional</emphasis>. Klicken Sie auf
+						das Plus-Icon um die Unterpunkte anzuzeigen.
 					</para>
 				</listitem>
 			</varlistentry>
 		</variablelist>
 		
 		<para>
-			Die Felder <guilabel>Geschützt</guilabel> und
-			<guilabel>Benutzergruppen</guilabel> sowie die Optionen unter 
-			<guilabel>Zusätzliche Metadaten</guilabel>
-			 benötigen wir zur Umsetzung der
+			Die sonstigen Felder benötigen wir zur Umsetzung der
 			Demo-Webseite nicht, darum können sie vorerst beiseite gelassen
 			werden. Klicken Sie jetzt auf <guibutton>Speichern</guibutton>, 
 			um die Seite hinzuzufügen. Sie kommen dann zur Seitenübersicht
@@ -257,20 +275,18 @@
 		
 		<para>
 			Nun muss für die Seite <emphasis>Impressum</emphasis> die Prozedur wiederholt werden.
-			Klicken Sie wieder auf das <guibutton>Neu</guibutton> Symbol in der Zeile der
-			Seite (hier die bisher einzig vorhandene - <emphasis>Startseite</emphasis>), an deren
-			 Position sich die neue Seite orientieren soll.
+			Klicken Sie wieder auf den <guibutton>Neue Seite anlegen</guibutton> Link.
 		</para>
 		
 		<para>
-			Sie kommen wieder
-			zur Eingabemaske. Belassen Sie das Feld
-			<guilabel>Position</guilabel> wieder in der Standard-Auswahl
-			<guimenuitem>Unterhalb des aktuellen Navigationeintrages</guimenuitem>. Geben Sie beim
-			Feld <guilabel>Name</guilabel> den Namen der Seite, hier <userinput>Impressum</userinput>, ein.
+			Sie kommen wieder zur Eingabemaske. Belassen Sie das Feld
+			<guilabel>In Navigation</guilabel> sowie <guilabel>Referenzseite</guilabel>
+			wieder in der Standard-Auswahl und wählen beim Feld
+			<guilabel>Position</guilabel> <guimenuitem>Oberhalb der Referenzseite</guimenuitem>.
+			Geben Sie beim Feld <guilabel>Name</guilabel> den Namen der Seite, hier <userinput>Impressum</userinput>, ein.
 			Wählen Sie bei <guilabel>Typ</guilabel> wiederum den Seiten-Typ
 			<emphasis>WCOM_SIMPLE_PAGE</emphasis> aus und bei der
-			<guilabel>Vorlagengruppe</guilabel> unser 
+			<guilabel>Vorlagengruppe</guilabel> unsere 
 			Gruppe <emphasis>Standardaussehen</emphasis>. Die restlichen Felder
 			können Sie so belassen, wie sie sind.
 		</para>
@@ -279,7 +295,7 @@
 			<para>
 				Setzen Sie keinen Haken mehr beim Feld
 				<guilabel>Index page</guilabel>. Pro Webseite kann es nur
-				eine Index page geben. In unseren Fall ist dies bereits
+				eine Index-Seite geben. In unseren Fall ist dies bereits
 				 die Seite <emphasis>Startseite</emphasis>.
 			</para>
 		</warning>
@@ -287,11 +303,8 @@
 		<para>
 			Nach dem Klick auf die Schaltfläche <guibutton>Speichern</guibutton>
 			gelangen Sie wieder auf die Seitenübersicht. Sie sehen nun 
-			die Seite <emphasis>Impressum</emphasis> unter der Seite
-			<emphasis>Startseite</emphasis>, allerdings um eine Ebene
-			eingerückt. Um sie auszurücken, klicken Sie auf der Zeile
-			der Seite <emphasis>Impressum</emphasis> unter
-			<guibutton>Position</guibutton> auf den <emphasis>Pfeil nach unten</emphasis>. 
+			die Seite <emphasis>Impressum</emphasis> über der Seite
+			<emphasis>Startseite</emphasis>. 
 		</para>
 		
 		<para>
@@ -306,18 +319,12 @@
 		</note>
 		
 		<para>
-			Nach Anlegen aller drei Seiten verschieben wir die Seite <emphasis>Kontakt</emphasis> 
-			noch die Seite <emphasis>Impressum</emphasis> anhand des <emphasis>Pfeil nach oben</emphasis>
-			, so dass sie in der Navigation vor dem Impressum erscheint.
+			Nachdem Sie Kontaktseite angelegt haben, sieht die Seitenübersicht wie folgt aus: 
 		</para>
 		
-		<para>
-			Nun sollte die Seitenübersicht wie folgt aussehen: 
-		</para>
-		
-		<figure id="crash_course_demo.created_pages_all">
+		<figure id="crash_course_demo.created_pages_all_unsorted">
 			<title>Angelegte Seiten</title>
-			<graphic fileref="images/crash_course_demo/created_pages_all.png"/>
+			<graphic fileref="images/crash_course_demo/created_pages_all_unsorted.png"/>
 		</figure>
 	</sect1>
 	
@@ -676,7 +683,8 @@ aliquip ex ea commodo consequat.</p>
 		
 		<para>
 			Gehen Sie dazu wieder zurück zur Eingabemaske für die
-			Vorlage, die Sie vorher angelegt haben. Suchen Sie nach der
+			<guisubmenu>Seitenvorlagen</guisubmenu>, die Sie vorher angelegt haben
+			(<userinput>Vorlage Inhaltsseiten</userinput>). Suchen Sie nach der
 			Referenzierung der Style-Sheet-Datei:
 		</para>
 		
@@ -902,7 +910,7 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 					<term><guilabel>Inhalt</guilabel></term>
 					<listitem>
 						<para>
-							Inhalt der Global Box. 
+							Inhalt der Globalen Box.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -995,17 +1003,18 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 		</para> 
 
 		<para>
-			Um das Bild einzufügen, klicken Sie nun auf die verkleinerte Version des Bildes.
-			Ein weiteres Popup öffnet sich, in dessen Fenster sie Angaben
-			machen können, die Medienspezifisch sind (Bild: Alternativtext und Titel-Tag).
+			Um das Bild einzufügen, klicken Sie nun auf das Vorschaubild im Mediamanager.
+			Ein weiteres Popup öffnet sich.</para>
 			
 		<figure id="crash_course_demo.mediamanager_insert_image">
-			<title>Metainformationen zur binären Datei (hier: Bild)</title>
+			<title>Bild einfügen</title>
 			<graphic fileref="images/crash_course_demo/mediamanager_insert_image.png"/>
 		</figure>
 		
-		Klicken Sie auf <guibutton>Einfügen</guibutton> um das Popup zu schließen.
-		Der generierte Quelltext
+		<para>
+			Hier müssen keine weiteren Eingaben gemacht werden,- klicken sie
+			einfach auf <guibutton>Einfügen</guibutton>.
+			Das Fenster schließt sich. Der generierte Quelltext
 			
 		<programlisting language="smarty"><![CDATA[
 <img alt="" height="139" src="{get_media id="136"}" width="550"/>
@@ -1259,15 +1268,10 @@ background: transparent url(<%global_file name="bg_content.jpg"%>)
 		<para>
 			Suchen Sie nach der Vorlage, die Sie für die Inhaltsseiten
 			verwendet haben. Klicken Sie beim Eintrag auf das Symbol
-			<guibutton>Duplizieren</guibutton>. Damit kann die bestehende
-			Vorlage weiterverwendet und (mit leichten Änderungen) unter
+			<guibutton>Duplizieren</guibutton>. Damit wird die ausgewählte
+			Vorlage kopiert und (mit leichten Änderungen) unter
 			einem anderen Namen abgespeichert werden.
 		</para>
-		
-		<figure id="crash_course_demo.templates_form_duplicate">
-			<title>Duplizierte Vorlage anpassen</title>
-			<graphic fileref="images/crash_course_demo/templates_form_duplicate.png"/>
-		</figure>
 		
 		<variablelist>
 			<varlistentry>

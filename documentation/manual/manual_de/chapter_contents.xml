@@ -16,12 +16,12 @@
 			Inhaltstypen wie Formulare oder Blogs. Erst diese
 			Strukturelemente ergeben zusammengesetzt und kombiniert mit
 			einer Vorlage die fertige Seite. Einen schematische
-			Visualisierung dieses Ablaufs zeigt die Grafik <xref
+			Visualisierung dieser Bestandteile einer Seite zeigt die Grafik <xref
 			linkend="contents.how_it_works.site_building"/>.
 		</para>
 		
 		<figure id="contents.how_it_works.site_building">
-			<title>Zusammensetzung einer Seite</title>
+			<title>Strukturelemente einer Seite</title>
 			<graphic fileref="images/contents/how_it_works/site_building.png"/>
 		</figure>
 		
@@ -93,7 +93,7 @@
 				Seiten-Übersichtsseite einen Eintrag für die Navigation
 				samt einer leeren zugehörigen Seitenstruktur. Die 
 				Seitenstruktur teilt sich bei einer vorhandenen Navigation
-				in fünf, bei mehreren vorhandenen Navigationen in sechs
+				in vier, bei mehreren vorhandenen Navigationen in fünf
 				Spalten auf.
 			</para>
 			
@@ -113,14 +113,21 @@
 							erscheint. Der Namen wird zudem mit der
 							richtigen Einrückung gezeigt, wobei jede
 							Verschachtelungsebene durch einen grauen
-							Punkt vor dem Namen gezeigt wird. Eine Seite
-							über alle Navigationen hinweg kann mit einem
-							kleinen orangen I (i) markiert sein. Dies
-							signalisiert, dass es sich bei der Seite um die
-							sogenannte Index-Seite handelt, die beim Aufruf
-							des Welcompose-Ausgabebereits ohne irgendwelche
-							Parameter angezeigt wird. Geschützte Seiten sind
-							mit einem orangen Schloss-symbol versehen.
+							Punkt vor dem Namen gezeigt wird. Es gibt
+							verschiedene, unterschiedliche Anzeigen
+							des Seitennamens, die den Status einer
+							Seite repräsentieren. Ist eine Seite mit einem
+							kleinen orangen I (i) markiert sein, signalisiert
+							dies, dass diese Seite die sogenannte Index-Seite ist.
+							Diese Seite wird beim Aufruf
+							der Welcompose-Ausgabe bereits ohne irgendwelche
+							Parameter angezeigt (In der Regel entspricht dies dem
+							Domainnamen, der der Installation zugeordnet ist).
+							Geschützte Seiten sind mit einem orangen Schlosssymbol versehen,
+							Seiten, die als Entwurf gespeichert sind, werden ausgeraut
+							angezeigt. Seiten, die nicht in der Navigation inkludiert
+							werden sollen, werden mit einem stilisierten Ordnerstruktur-Symbol
+							angezeigt.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -134,21 +141,12 @@
 							oben respektive nach unten bewegt werden können.
 							Gleichzeitig wird darüber die Einrückung
 							beeinflusst. Das Prinzip hinter der Bewegung
-							beleuchtet grob <xref
-							linkend="contents.pages.manage.page_moving_results"/>.
+							beleuchtet grob folgende Darstellung.
 						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Bearbeiten</guilabel></term>
-					<listitem>
-						<para>
-							Über die Schaltfläche
-							<guibutton>Bearbeiten</guibutton> gelangen Sie zu
-							den Formularen, um die Metadaten der jeweiligen
-							Seiten (beispielsweise den Namen der Seite)
-							sowie deren Inhalte zu bearbeiten. 
-						</para>
+						<figure id="contents.pages.manage.page_moving_results">
+							<title>Seiten verschieben</title>
+							<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
+						</figure>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
@@ -178,56 +176,68 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guilabel>Neu</guilabel></term>
-					<listitem>
-						<para>
-							Fügt eine neue Seite zur aktuellen Navigation
-							relativ zum aktuellen Menüpunkt ein. Der Menüpunkt
-							wird entweder über oder unter dem aktuellen
-							Menüpunkt eingesetzt.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
 					<term><guilabel>Löschen</guilabel></term>
 					<listitem>
 						<para>
-							Löscht die Seite und alle ihre Inhalte.
+							Löscht die Seite und alle ihre Inhalte (nach vorheriger Sicherheitsabfrage)
+							endgültig.
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
 			
-			<figure id="contents.pages.manage.page_moving_results">
-				<title>Seiten verschieben</title>
-				<graphic fileref="images/contents/pages/manage.page_moving_results.png"/>
-			</figure>
-			
+			<para>
+				Um die jeweiligen Inhalte einer Seite zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Seitennamen</emphasis>.
+			</para>
+
+			<para>
+				Über den Link <guilabel>Neue Seite anlegen</guilabel>
+				legen Sie eine neue Seite an. Auf der aufgerufenen Seite
+				können Sie frei bestimmen, an welcher Stelle und
+				in welcher Navigation die neue Seite eingefügt wird.
+			</para>
+						
 			<para>
 				Beim Hinzufügen einer Seite werden eine Reihe von
 				Informationen abgefragt, mit denen die Anzeige sowie die
 				Inhalte der Seite beeinflusst werden können. Im Rahmen
 				von Welcompose werden diese Informationen als
-				Metadaten bezeichnet.
+				<emphasis>Metadaten</emphasis> bezeichnet.
 			</para>
-			
+						
 			<figure id="contents.pages.manage.add_page">
-				<title>Seite hinzufügen</title>
+				<title>Seite hinzufügen (Standardansicht)</title>
 				<graphic fileref="images/contents/pages/manage.add_page.png"/>
 			</figure>
 			
 			<variablelist>
 				<varlistentry>
+					<term><guilabel>In Navigation</guilabel></term>
+					<listitem>
+						<para>
+							Bestimmt, in welcher Navigation die neue Seite
+							angelegt wird.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Referenzseite</guilabel></term>
+					<listitem>
+						<para>
+							Gibt die Seite an, die der nachfolgend
+							gewählten Position als Referenz dienen soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
 					<term><guilabel>Position</guilabel></term>
 					<listitem>
 						<para>
-							Bestimmt, wie die neue Seite in die Navigation
-							eingefügt werden soll und zwar relativ
-							gesehen zum Menüpunkt, neben dem auf die
-							Schaltfläche <guibutton>Neu</guibutton>
-							geklickt wurde. Eine Seite kann entweder
-							oberhalb oder unterhalb des Menüpunkts
-							eingefügt werden.
+							Bestimmt, an welcher Position die neue Seite angelegt wird.
+							Eine Seite kann entweder oberhalb oder unterhalb des zuvor ausgewählten
+							Referenzseite eingefügt werden. Die Position der Seite kann zu einem
+							späteren Zeitpunkt geändert werden.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -267,8 +277,51 @@
 					<term><guilabel>Vorlagengruppe</guilabel></term>
 					<listitem>
 						<para>
-							Die Vorlagegruppe, der der neue Seite zugeorndet
+							Die Vorlagegruppe, der der neue Seite zugeordnet
 							werden soll.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<para>
+				Unter den Zwischenüberschriften <emphasis>Optional</emphasis> und 
+				<emphasis>Zusätzliche Metadaten</emphasis> finden sich 
+				ergänzende Felder, die optionale Einstellungsmöglichkeiten bieten. Um diese
+				anzuzeigen, klicken Sie bitte jeweils auf das <guibutton>Plus-Symbol</guibutton>.
+			</para>
+			 
+			<figure id="contents.pages.manage.extend_add_page">
+				<title>Seite hinzufügen (Erweiterte Ansicht)</title>
+				<graphic fileref="images/contents/pages/manage.extend_add_page.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Inhalte übernehmen</guilabel></term>
+					<listitem>
+						<para>
+							Sie haben beim Anlegen einer neuen Seite die Möglichkeit, Inhalte von
+							bestehenden Seiten zu übernehmen. So sparen Sie sich u.U. einiges an
+							Schreibarbeit beim Anlegen inhaltlich oder strukturell verwandter Seiten.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Seite auswählen</guilabel></term>
+					<listitem>
+						<para>
+							Abhängig vom im Auswahlmenu <guilabel>Typ</guilabel> ausgewählten Seitentyp
+							für die neue Seite, werden hier die Seiten zur Auswahl gelistet, aus
+							denen Sie Inhalte in die neue Seite übernehmen können. Die Funktion ist
+							für Seiten vom Typ <filename>WCOM_BLOG, WCOM_EVENT, WCOM_SIMPLE_DATE</filename> und 
+							<filename>WCOM_URL</filename> nicht verfügbar, da diese keine korrespondierenden
+							Inhaltsfelder bereitstellen.
+						</para>
+						<para>
+							Neben den <emphasis>Inhalten</emphasis> werden
+							ebenfalls die Einstellung des <emphasis>Text-Konverter</emphasis> übernommen sowie
+							alle der zu übernehmenden Seite zugeordneten <emphasis>Seitenboxen</emphasis>.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -278,7 +331,7 @@
 						<para>
 							Markiert die Seite als Index-Seite, die beim Aufruf des 
 							Ausgabe-Bereichs von Welcompose ohne weitere Parameter verwendet
-							wird ("Startseite").
+							wird (e.g. "Startseite").
 						</para>
 					</listitem>
 				</varlistentry>
@@ -309,6 +362,17 @@
 					</listitem>
 				</varlistentry>
 				<varlistentry>
+					<term><guilabel>Ausschließen</guilabel></term>
+					<listitem>
+						<para>
+							Ist diese Option aktiv, wird die Seite/der Menüpunkt nicht in 
+							der Navigation der Ausgabe angezeigt. Dieses kann sinnvoll sein um
+							Seiten, die nur durch kontextbezogene Verlinkung innerhalb anderer
+							Seiten erreichbar sein sollen, von der Anzeige in der Navigation auszuschließen. 
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
 					<term><guilabel>No Follow</guilabel></term>
 					<listitem>
 						<para>
@@ -333,7 +397,7 @@
 			</variablelist>
 			
 			<para>
-				Parallel zu den "normalen" Metadaten-Feldern bietet
+				Unter <emphasis>Zusätzliche Metadaten</emphasis> bietet
 				Welcompose einige ergänzende Felder, die beispielsweise
 				zur Befüllung mit Inhalt genutzt werden können. So erlaubt
 				das Feld <guilabel>Alternativer Name</guilabel> die Speicherung
@@ -356,7 +420,8 @@
 				<title>Aktuelle Seite auslesen</title>
 				
 				<para>
-					Das explizite Auslesen der jeweils aktuellen Seite in einer Seitenvorlage
+					Das explizite Auslesen der jeweils aktuellen Seite in einer 
+					<link linkend="templating.templates">Seitenvorlage</link>
 					ist in der Regel nicht nötig, da Welcompose dies automatisch
 					übernimmt und die Metadaten der aktuellen Seite über die
 					Smarty-Variable <code>{$page}</code> zur Verfügung stellt:
@@ -494,7 +559,7 @@ Seiten-Name: {$some_page.name}
 			<para>
 				Die Übersicht zeigt die vorhandenen Globalen Boxen in
 				alphabetischer Reihenfolge und bietet Links zum Hinzufügen,
-				Bearbeiten und Löschen von Globalen Boxen.
+				Bearbeiten (Klick auf Name) und Löschen von Globalen Boxen.
 			</para>
 			
 			<figure id="contents.global_boxes.manage.add_global_box">
@@ -559,8 +624,8 @@ Seiten-Name: {$some_page.name}
 			
 			<para>
 				Globale Boxen können über einen in allen Seitenvorlagen vorhandenen
-				Link ausgewählt und automatisch in eine Seitenvorlage eingesetzt werden.
-				Klicken Sie dazu auf den entsprechenden Link über dem Textbereich zum Editieren der
+				Link ausgewählt und automatisch in eine <link linkend="templating.templates">Seitenvorlage</link>
+				eingesetzt werden. Klicken Sie dazu auf den entsprechenden Link über dem Textbereich zum Editieren der
 				Vorlage (siehe <xref
 				linkend="contents.global_boxes.output.reference_global_box"/>). Hierbei wird
 				der Code automatisch eingesetzt und es muss nur noch die ID angepasst werden.
@@ -730,16 +795,16 @@ Inhalt der Global Box: {$global_box.content}
 					</listitem>
 				</varlistentry>
 			</variablelist>
-			
-			<figure id="contents.boxes.manage.add_box">
-				<title>Neue Box anlegen</title>
-				<graphic fileref="images/contents/boxes/manage.add_box.png"/>
-			</figure>
-			
+
 			<para>
 				Das Formular zum Hinzufügen respektive Editieren der 
 				Boxen besteht nur aus einigen wenigen Feldern:
 			</para>
+						
+			<figure id="contents.boxes.manage.add_box">
+				<title>Neue Box anlegen</title>
+				<graphic fileref="images/contents/boxes/manage.add_box.png"/>
+			</figure>
 			
 			<variablelist>
 				<varlistentry>
@@ -780,6 +845,15 @@ Inhalt der Global Box: {$global_box.content}
 						</para>
 					</listitem>
 				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Priorität</guilabel></term>
+					<listitem>
+						<para>
+							Legt die Sortierung in der Anzeige einer Seite im Admin-Interface fest.
+							Je größer die Zahl, desto stärker wird der Eintrag gewichtet.
+						</para>
+					</listitem>
+				</varlistentry>
 			</variablelist>
 			
 			<para>
@@ -792,7 +866,8 @@ Inhalt der Global Box: {$global_box.content}
 			<title>Ausgabe</title>
 			
 			<para>
-				Auch seitenabhängige Boxen können über einen in allen Seitenvorlagen vorhandenen
+				Auch seitenabhängige Boxen können über einen in allen 
+				<link linkend="templating.templates">Seitenvorlagen</link> vorhandenen
 				Link ausgewählt und automatisch in eine Seitenvorlage eingesetzt werden.
 				Klicken Sie dazu auf den entsprechenden Link über dem Textbereich zum Editieren der
 				Vorlage (siehe <xref linkend="contents.boxes.output.reference_box"/>). Hierbei wird

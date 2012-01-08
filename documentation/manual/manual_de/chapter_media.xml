@@ -200,6 +200,15 @@
 									wird das Ergebnis alle 1.0 Sekunden aktualisiert. Mehrfachangaben
 									sind möglich und werden durch ein Kommata getrennt.
 								</para>
+								<note>
+									<para>
+									Als Besonderheit können sie hier zusätzlich nach der ID einer Datei suchen.
+									Dieses erfordert die Angabe eines festgelegten Prefix (<code>wcom:</code>) mit
+									anschließender Angabe der ID. Bsp. <userinput>wcom:16</userinput> (Die 
+									Zahl 16 repräsentiert hier im Beispiel die ID einer Datei und muss auf Ihre
+									Medieninhalte entsprechend angepasst werden).
+									</para>
+								</note>
 							</listitem>
 						</varlistentry>
 						<varlistentry>
@@ -226,8 +235,8 @@
 						<para>
 						Alle Anzeigeoptionen im Bereich <guimenuitem>myLocal</guimenuitem> können alleinstehend
 						oder auch kombiniert genutzt werden.
-						Beispiel: Dateitypen: "Bilder", Schlagworte: "Fisch" zeigt ausschließlich Bilder
-						an, deren Verschlagwortung den Begriff "Fisch" enthält.
+						Beispiel: Dateitypen: <emphasis>Bilder</emphasis>, Schlagworte: <emphasis>Fisch</emphasis>
+						zeigt ausschließlich Bilder an, deren Verschlagwortung den Begriff <emphasis>Fisch</emphasis> enthält.
 						</para>
 					</note>
 				</sect4>

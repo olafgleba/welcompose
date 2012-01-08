@@ -260,10 +260,17 @@
 					Dateileichen zurückbleiben.
 				</para>
 				
+				<tip>
+					<para>
+						Belassen Sie den Ordner <filename>/files</filename> auf dem Webspace. Dieser wird durch eine Aktualisierung
+						nicht berührt. Somit ersparen Sie sich ein erneutes hochladen dieses Ordners aus Ihrem lokalen Backup.
+					</para>
+				</tip> 
+				
 				<para>
 					Haben Sie dies erledigt, gilt es, die aktuelle
 					Welcompose-Version zu beschaffen. Laden Sie dazu die
-					aktuelle Welcompose-Version in Quellform aus dem 
+					aktuelle Welcompose-Version aus dem 
 					<ulink type="external" url="http://welcompose.de/cms/downloads/">Download-Bereich
 					 der Software-Webseite</ulink> herunter. Sie erkennen die richtige Datei
 					an der Endung des Dateinamens (welcompose-x.x.x<filename>-full-src</filename>.suffix).
@@ -272,7 +279,7 @@
 				<para>
 					Entpacken Sie die Welcompose-Distribution und laden Sie
 					alle Daten aus dem entpackten Welcompose-Archiv
-					auf den Server.
+					auf den Server (Achten sie darauf, den ggf. auf dem Webspace verbliebenen Ordner <filename>/files</filename> nicht zu überschreiben, s. Tipp im Abschnitt zuvor).
 				</para>
 				
 				<note>
@@ -491,5 +498,61 @@
 				</note>
 			</sect2>
 
+	</sect1>
+	
+	<sect1 id="update.short">
+		<title>Auf einen Blick</title>
+				
+		<orderedlist>
+			<listitem>
+				<para>
+					Erstellen Sie eine Sicherungskopie Ihrer <emphasis role="strong">Datenbank</emphasis> sowie 
+					<emphasis role="strong">sämtlicher Verzeichnisse</emphasis> des Installationsortes von 
+					Welcompose auf Ihrem Webserver.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Laden Sie die gewünschte Welcompose Version zur Aktualisierung einer Installation aus dem
+					<ulink type="external" url="http://welcompose.de/cms/downloads/">Download-Bereich
+					 der Software-Webseite</ulink> herunter (welcompose-x.x.x<filename>-full-src</filename>.suffix).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Löschen Sie alle bestehenden Dateien und Ordner auf Ihrem Webspace, die der Standardinstallation
+					von Welcompose zugehörig sind.
+				</para>
+				<warning>
+					<para>
+						Sichern Sie die Konfigurationsdatei von Welcompose (<filename>core/conf/sys.inc.php</filename>)
+						und den Ordner <filename>files/</filename>. Dieser enthält alle Ihre binären Dateien.
+					</para>
+				</warning>
+			</listitem>
+			<listitem>
+				<para>
+					Entpacken Sie die Welcompose-Distribution und laden Sie alle Daten aus dem entpackten Welcompose-Archiv auf den Server.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Nachdem die Dateien hochgeladen sind, gleichen Sie Ihre lokale Kopie der <filename>sys.inc.php</filename>
+					Konfigurationsdatei mit der gleichnamigen Datei (Pfad: <filename>/core/conf/sys.inc.php</filename>) auf dem Server ab.
+					(Bitte lesen Sie hierzu auch die entsprechenden Hinweise in der ausführlichen Anleitung weiter oben).  
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Die Aktualisierungs-Assistent befindet sich im Ordner <filename>update/</filename>. 
+					Rufen Sie nun diese Adresse in Ihrem Webbrowser auf. Der Assistent leitet Sie durch den
+					Aktualisierungsprozeß.
+				</para>				
+		<programlisting language="smarty"><![CDATA[
+http://domain.tld/pfad/zu/welcompose/update/
+]]></programlisting>
+			</listitem>
+		</orderedlist>
+		
 	</sect1>
 </chapter>

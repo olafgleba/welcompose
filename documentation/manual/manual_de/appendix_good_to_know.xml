@@ -68,11 +68,12 @@
 		
 		<para>
 			Die wichtigsten Einstellungen, die getätigt werden müssen, um ein
-			sachgemässes Backup anzulegen, sind gelb hinterlegt. Achten Sie
+			sachgemässes Backup anzulegen, sind farbig hinterlegt. Achten Sie
 			insbesonders darauf, dass als Export-Format
 			<guimenuitem>SQL</guimenuitem> ausgewählt ist und sowohl
 			<guimenuitem>Struktur</guimenuitem> als auch
 			<guimenuitem>Daten</guimenuitem> in den Export eingeschlossen werden.
+			Ebenfalls sher wichtig ist die aktivieren der Option <emphasis> Disable foreign key checks</emphasis>.
 		</para>
 		
 		<para>

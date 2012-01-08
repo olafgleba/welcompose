@@ -72,8 +72,8 @@
 		<para>
 			Kümmern wir uns zuerst um die wichtigste Seite, die
 			Startseite. Sie repräsentiert zugleich die Blog-Übersichtsseite.
-			Klicken Sie dazu auf das Symbol zum Hinzufügen
-			einer Seite (<guibutton>Neu</guibutton>). Sie gelangen zur Eingabemaske.
+			Klicken Sie dazu auf den Link zum Hinzufügen
+			einer Seite (<guibutton>Neue Seite anlegen</guibutton>). Sie gelangen zur Eingabemaske.
 		</para>
 		
 		<figure id="crash_course_blog.create_pages.create_page_metadata">
@@ -201,8 +201,8 @@
 		
 		<para>
 			Jetzt tragen wir in unser bisher noch leeres Blog das erste Posting ein. 
-			Klicken Sie hierzu in der Zeile unserer angelegten Blogseite 
-			(<emphasis>Startseite</emphasis>) auf das <guibutton>Edit</guibutton> Symbol. Sie
+			Klicken Sie hierzu auf den Namen der angelegten Blogseite 
+			(<emphasis>Startseite</emphasis>). Sie
 			gelangen zur Übersichtsseite der Blog-Postings, die diesem Blog zugeordnet sind. 
 			Diese ist zum Zeitpunkt noch leer, da wir noch kein Posting angelegt haben. Dies
 			machen wir jetzt als Erstes. Klicken Sie auf <guilabel>Neu anlegen</guilabel>
@@ -327,7 +327,7 @@ aliquip ex ea commodo consequat.</p>
 					<para>
 						Speichern Sie Ihr Posting als <emphasis>Entwurf</emphasis>, 
 						wird ihr Posting gespeichert, aber nicht veröffentlicht.
-						Bitte belassen Sie für unseren Crash-Kurs die Checkbox inaktiv. 
+						Bitte lassen Sie für unseren Crash-Kurs die Checkbox inaktiv. 
 					</para>
 				</listitem>
 			</varlistentry>
@@ -338,8 +338,8 @@ aliquip ex ea commodo consequat.</p>
 				<listitem>
 					<para>
 						Ist die Checkbox mit einem Haken versehen, werden die angelegten Ping Services
-						über die Aktualisierung Ihres Postings informiert.
-						Bitte <emphasis role="strong">entfernen</emphasis> Sie für unseren Crash-Kurs den Haken. 
+						über die Aktualisierung Ihres Postings informiert. Wird nicht
+						verwandt in unser Demo.  
 					</para>
 				</listitem>
 			</varlistentry>
@@ -350,7 +350,7 @@ aliquip ex ea commodo consequat.</p>
 				<listitem>
 					<para>
 						Entscheiden Sie, ob Kommentare zum Posting erlaubt sind.
-						Lassen Sie für unseren Crash-Kurs die Checkbox angeklickt.
+						<emphasis role="strong">Aktivieren</emphasis> sie die Checkbox bitte.
 					</para>
 				</listitem>
 			</varlistentry>
@@ -361,7 +361,7 @@ aliquip ex ea commodo consequat.</p>
 				<listitem>
 					<para>
 						Entscheiden Sie, ob Trackbacks zum Posting erlaubt sind.
-						Lassen Sie für unseren Crash-Kurs die Checkbox angeklickt.						
+						Wird nicht verwandt in unser Demo.						
 					</para>
 				</listitem>
 			</varlistentry>

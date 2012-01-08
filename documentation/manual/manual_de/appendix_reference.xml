@@ -94,6 +94,37 @@
 				</varlistentry>
 			</variablelist>
 		</sect2>
+		
+		<sect2 id="reference.list_of_template_types.event">
+			<title>Event</title>
+				
+			<variablelist>
+				<varlistentry>
+					<term><emphasis>event_index</emphasis></term>
+					<listitem>
+						<para>
+							Zeigt die Hauptseite der vorhandenen Termineinträge an.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>event_rss20</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für RSS-2.0-Feed von Seiten des Typs <emphasis>Event</emphasis>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><emphasis>event_atom10</emphasis></term>
+					<listitem>
+						<para>
+							Vorlage für ATOM-1.0-Feed von Seiten des Typs <emphasis>Event</emphasis>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
 
 		<sect2 id="reference.list_of_template_types.generated_form">
 			<title>Generated Form</title>
@@ -103,7 +134,7 @@
 					<term><emphasis>generator_form_index</emphasis></term>
 					<listitem>
 						<para>
-							Hauptvorlage für für indivduell angelegte Formulare. Zeigt die eigentliche
+							Hauptvorlage für für individuell angelegte Formulare. Zeigt die eigentliche
 							Generated Form an.
 						</para>
 					</listitem>
@@ -128,8 +159,7 @@
 					<term><emphasis>simple_date_index</emphasis></term>
 					<listitem>
 						<para>
-							Hauptvorlage für Formulare. Zeigt Übersicht über die
-							vorhandenen Termineinträge an.
+							Zeigt die Hauptseite der vorhandenen Termineinträge an.
 						</para>
 					</listitem>
 				</varlistentry>

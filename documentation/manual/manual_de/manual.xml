@@ -38,11 +38,15 @@
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_settings.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_editors.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_demo.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_crash_course_blog.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_usage.xml" />
+	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+		href="chapter_smartyplugins.xml" />
 	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
 		href="chapter_configuration.xml" />
 	<!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
