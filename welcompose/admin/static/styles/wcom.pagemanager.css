@@ -247,6 +247,9 @@ padding-right: 16px;
 .page a, .page1 a, .page2 a, .page3 a, .page4 a, .page5 a {
 color: #333;
 }
+.page a:focus {
+background: transparent;
+}
 .page2 {
 padding-left: 15px;
 background: transparent url(../img/icons/page2.gif) left no-repeat;
