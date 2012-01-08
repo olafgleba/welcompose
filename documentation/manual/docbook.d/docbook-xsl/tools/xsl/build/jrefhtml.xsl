@@ -7,7 +7,7 @@
 <xsl:output
   method="html"
   indent="yes"
-  encoding="utf-8"/>
+  encoding="ISO-8859-1"/>
 
 <!-- ********************************************************************
      $Id: jrefhtml.xsl 6299 2006-09-14 07:30:40Z xmldoc $
