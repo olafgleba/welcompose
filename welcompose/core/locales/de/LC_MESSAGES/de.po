@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-07 16:11+0100\n"
+"POT-Creation-Date: 2012-01-15 17:07+0100\n"
 "PO-Revision-Date: 2007-04-28 08:44+0200\n"
 "Last-Translator: Olaf Gleba <>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -44,6 +44,7 @@ msgstr "Welcompose meldet"
 #: navigations_edit.php:116 pages_add.php:203 pages_boxes_add.php:135
 #: pages_boxes_edit.php:142 pages_edit.php:156
 #: pages_generatorforms_fields_add.php:138
+#: pages_generatorforms_fields_copy.php:165
 #: pages_generatorforms_fields_edit.php:165
 #: pages_simpleguestbooks_entries_edit.php:170 pagetypes_add.php:107
 #: pagetypes_edit.php:116 structuraltemplates_add.php:106
@@ -53,7 +54,7 @@ msgstr "Welcompose meldet"
 #: antispamplugins_select.html:80 blogcommentstatuses_select.html:77
 #: globalboxes_select.html:78 navigations_select.html:64
 #: pages_boxes_select.html:124 pages_boxes_select.html:175
-#: pages_generatorforms_fields_select.html:116
+#: pages_generatorforms_fields_select.html:117
 #: pages_simpleguestbooks_entries_select.html:125 pagetypes_select.html:65
 #: podcastcategories_select.html:78 structuraltemplates_select.html:78
 #: globalfiles_select.html:102 globaltemplates_select.html:81
@@ -158,6 +159,7 @@ msgstr "Speichern"
 #: pages_boxes_edit.php:138 pages_edit.php:152
 #: pages_events_postings_copy.php:135 pages_events_postings_edit.php:135
 #: pages_generatorforms_content_edit.php:140
+#: pages_generatorforms_fields_copy.php:123
 #: pages_generatorforms_fields_edit.php:123 pages_move_away.php:131
 #: pages_simple_dates_edit.php:131 pages_simpleforms_content_edit.php:147
 #: pages_simpleguestbooks_content_edit.php:140
@@ -184,6 +186,7 @@ msgstr "ID sollte nicht leer sein"
 #: pages_events_postings_copy.php:136 pages_events_postings_edit.php:136
 #: pages_generatorforms_content_edit.php:141
 #: pages_generatorforms_content_edit.php:147
+#: pages_generatorforms_fields_copy.php:124
 #: pages_generatorforms_fields_edit.php:124 pages_move_away.php:132
 #: pages_simple_dates_edit.php:132 pages_simpleforms_content_edit.php:148
 #: pages_simpleforms_content_edit.php:154
@@ -205,10 +208,10 @@ msgstr "ID sollte einen numerischen Wert haben"
 #: pingservices_edit.php:120 projects_edit.php:118 textconverters_edit.php:121
 #: textmacros_edit.php:127 pages_blogs_postings_copy.php:189
 #: pages_blogs_postings_edit.php:190 pages_events_postings_copy.php:149
-#: pages_events_postings_edit.php:149 pages_generatorforms_fields_edit.php:137
-#: pages_simple_dates_edit.php:145 pages_simpleguestbooks_entries_edit.php:139
-#: globalfiles_edit.php:122 globaltemplates_edit.php:133
-#: templates_edit.php:158
+#: pages_events_postings_edit.php:149 pages_generatorforms_fields_copy.php:137
+#: pages_generatorforms_fields_edit.php:137 pages_simple_dates_edit.php:145
+#: pages_simpleguestbooks_entries_edit.php:139 globalfiles_edit.php:122
+#: globaltemplates_edit.php:133 templates_edit.php:158
 msgid "start is expected to be numeric"
 msgstr "Parameter start muss numerisch sein"
 
@@ -307,8 +310,9 @@ msgstr "Ein gleichnamiges Textmakro existiert bereits"
 
 #: textmacros_add.php:131 textmacros_edit.php:148 pages_add.php:238
 #: pages_generatorforms_fields_add.php:123
+#: pages_generatorforms_fields_copy.php:150
 #: pages_generatorforms_fields_edit.php:150 antispamplugins_select.html:81
-#: pages_generatorforms_fields_select.html:118 templates_add.php:127
+#: pages_generatorforms_fields_select.html:119 templates_add.php:127
 #: templates_copy.php:143 templates_edit.php:161
 msgid "Type"
 msgstr "Typ"
@@ -917,6 +921,7 @@ msgstr ""
 #: pages_boxes_edit.php:131 pages_events_postings_add.php:134
 #: pages_events_postings_copy.php:142 pages_events_postings_edit.php:142
 #: pages_generatorforms_fields_add.php:119
+#: pages_generatorforms_fields_copy.php:130
 #: pages_generatorforms_fields_edit.php:130 pages_simple_dates_add.php:133
 #: pages_simple_dates_edit.php:138 pages_simpleguestbooks_entries_edit.php:132
 msgid "Page is not expected to be empty"
@@ -929,6 +934,7 @@ msgstr "Seite darf nicht leer sein"
 #: pages_boxes_edit.php:132 pages_events_postings_add.php:135
 #: pages_events_postings_copy.php:143 pages_events_postings_edit.php:143
 #: pages_generatorforms_fields_add.php:120
+#: pages_generatorforms_fields_copy.php:131
 #: pages_generatorforms_fields_edit.php:131 pages_simple_dates_add.php:134
 #: pages_simple_dates_edit.php:139 pages_simpleguestbooks_entries_edit.php:133
 msgid "Page is expected to be numeric"
@@ -1348,6 +1354,7 @@ msgstr "Feld \"Entwurf\" muss einen numerischen Wert haben"
 
 #: pages_blogs_postings_copy.php:201 pages_blogs_postings_edit.php:202
 #: pages_events_postings_copy.php:161 pages_events_postings_edit.php:155
+#: pages_generatorforms_fields_copy.php:143
 #: pages_generatorforms_fields_edit.php:143
 #: pages_simpleguestbooks_entries_edit.php:145
 msgid "limit is expected to be numeric"
@@ -1467,27 +1474,32 @@ msgid "Please enter a subject"
 msgstr "Bitte tragen Sie einen Betreff ein"
 
 #: pages_generatorforms_fields_add.php:127
+#: pages_generatorforms_fields_copy.php:154
 #: pages_generatorforms_fields_edit.php:154
 msgid "Select a field type"
 msgstr "Bitte wählen Sie einen Feldtyp"
 
 #: pages_generatorforms_fields_add.php:128
+#: pages_generatorforms_fields_copy.php:155
 #: pages_generatorforms_fields_edit.php:155
 msgid "Selected field type is out of range"
 msgstr "Der Feldtyp liegt außerhalb des gültigen Wertebereiches"
 
 #: pages_generatorforms_fields_add.php:132
+#: pages_generatorforms_fields_copy.php:159
 #: pages_generatorforms_fields_edit.php:159
-#: pages_generatorforms_fields_select.html:117
+#: pages_generatorforms_fields_select.html:118
 msgid "Label"
 msgstr "Beschriftung"
 
 #: pages_generatorforms_fields_add.php:142
+#: pages_generatorforms_fields_copy.php:169
 #: pages_generatorforms_fields_edit.php:169
 msgid "Please enter a field name"
 msgstr "Bitte tragen Sie einen Feldnamen ein"
 
 #: pages_generatorforms_fields_add.php:143
+#: pages_generatorforms_fields_copy.php:170
 #: pages_generatorforms_fields_edit.php:170
 msgid "Only alphanumeric field names are allowed"
 msgstr "Es sind nur Buchstaben und Nummern erlaubt"
@@ -1497,54 +1509,68 @@ msgid "A field with the given name already exists"
 msgstr "Ein gleichnamiges Feld existiert bereits"
 
 #: pages_generatorforms_fields_add.php:149
+#: pages_generatorforms_fields_copy.php:177
 #: pages_generatorforms_fields_edit.php:177
 msgid "Value"
 msgstr "Wert"
 
 #: pages_generatorforms_fields_add.php:155
+#: pages_generatorforms_fields_copy.php:183
 #: pages_generatorforms_fields_edit.php:183
 msgid "CSS class"
 msgstr "CSS Klasse"
 
 #: pages_generatorforms_fields_add.php:161
+#: pages_generatorforms_fields_copy.php:189
 #: pages_generatorforms_fields_edit.php:189
-#: pages_generatorforms_fields_select.html:119
+#: pages_generatorforms_fields_select.html:120
 msgid "Required"
 msgstr "Erforderlich"
 
 #: pages_generatorforms_fields_add.php:165
+#: pages_generatorforms_fields_copy.php:193
 #: pages_generatorforms_fields_edit.php:193
 msgid "The field required accepts only 0 or 1"
 msgstr "Das Feld \"Erforderlich\" kann nur den Wert 0 oder 1 haben"
 
 #: pages_generatorforms_fields_add.php:169
+#: pages_generatorforms_fields_copy.php:197
 #: pages_generatorforms_fields_edit.php:197
 msgid "Required message"
 msgstr "\"Erforderlich\" Text"
 
 #: pages_generatorforms_fields_add.php:174
+#: pages_generatorforms_fields_copy.php:202
 #: pages_generatorforms_fields_edit.php:202
 msgid "Please enter a required message"
 msgstr "Bitte tragen Sie einen \"Erforderlich\" Text ein"
 
 #: pages_generatorforms_fields_add.php:178
+#: pages_generatorforms_fields_copy.php:206
 #: pages_generatorforms_fields_edit.php:206
 msgid "Regular expression"
 msgstr "Regulärer Ausdruck"
 
 #: pages_generatorforms_fields_add.php:184
+#: pages_generatorforms_fields_copy.php:212
 #: pages_generatorforms_fields_edit.php:212
 msgid "Validator message"
 msgstr "Validierungstext"
 
 #: pages_generatorforms_fields_add.php:189
+#: pages_generatorforms_fields_copy.php:217
 #: pages_generatorforms_fields_edit.php:217
 msgid "Please enter a validator message"
 msgstr "Bitte tragen sie einen Validierungstext ein"
 
+#: pages_generatorforms_fields_copy.php:172
 #: pages_generatorforms_fields_edit.php:172
 msgid "A form field with the given name already exists"
 msgstr "Ein gleichnamiges Formularfeld existiert bereits"
+
+#: pages_generatorforms_fields_copy.php:221
+msgid "Duplicate Form Field"
+msgstr "Formularfeld duplizieren"
 
 #: pages_move_away.php:135
 msgid "New navigation"
@@ -1923,6 +1949,7 @@ msgstr "Community-Einstellungen"
 #: pages_generatorforms_content_edit.html:81
 #: pages_generatorforms_content_edit.html:87
 #: pages_generatorforms_fields_add.html:78
+#: pages_generatorforms_fields_copy.html:78
 #: pages_generatorforms_fields_edit.html:78
 #: pages_generatorforms_fields_select.html:67 pages_move_away.html:49
 #: pages_move_away.html:55 pages_select.html:52 pages_select.html:55
@@ -2149,6 +2176,7 @@ msgstr "Lade Projekt"
 #: pages_events_postings_select.html:64
 #: pages_generatorforms_content_edit.html:81
 #: pages_generatorforms_fields_add.html:78
+#: pages_generatorforms_fields_copy.html:78
 #: pages_generatorforms_fields_edit.html:78
 #: pages_generatorforms_fields_select.html:67 pages_move_away.html:49
 #: pages_select.html:52 pages_simple_dates_add.html:79
@@ -2231,6 +2259,7 @@ msgstr "Welcompose Admin &ndash; Projekte"
 #: pages_events_postings_select.html:29
 #: pages_generatorforms_content_edit.html:43
 #: pages_generatorforms_fields_add.html:40
+#: pages_generatorforms_fields_copy.html:40
 #: pages_generatorforms_fields_edit.html:40
 #: pages_generatorforms_fields_select.html:29 pages_move_away.html:30
 #: pages_select.html:33 pages_simple_dates_add.html:41
@@ -2282,6 +2311,7 @@ msgstr "Welcompose"
 #: pages_events_postings_select.html:32
 #: pages_generatorforms_content_edit.html:46
 #: pages_generatorforms_fields_add.html:43
+#: pages_generatorforms_fields_copy.html:43
 #: pages_generatorforms_fields_edit.html:43
 #: pages_generatorforms_fields_select.html:32 pages_move_away.html:33
 #: pages_select.html:36 pages_simple_dates_add.html:44
@@ -2332,6 +2362,7 @@ msgstr "Angemeldeter Benutzer"
 #: pages_events_postings_select.html:34
 #: pages_generatorforms_content_edit.html:48
 #: pages_generatorforms_fields_add.html:45
+#: pages_generatorforms_fields_copy.html:45
 #: pages_generatorforms_fields_edit.html:45
 #: pages_generatorforms_fields_select.html:34 pages_move_away.html:35
 #: pages_select.html:38 pages_simple_dates_add.html:46
@@ -2456,6 +2487,7 @@ msgstr "Neuen Ping-Service anlegen"
 #: pages_events_postings_edit.html:84
 #: pages_generatorforms_content_edit.html:102
 #: pages_generatorforms_fields_add.html:100
+#: pages_generatorforms_fields_copy.html:100
 #: pages_generatorforms_fields_edit.html:100 pages_simple_dates_add.html:101
 #: pages_simple_dates_edit.html:101 pages_simpleforms_content_edit.html:99
 #: pages_simpleguestbooks_content_edit.html:102
@@ -2627,6 +2659,15 @@ msgstr "Um weitere Inhalte anzulegen, füllen Sie bitte das Formular erneut aus"
 #: pages_generatorforms_fields_add.html:130
 #: pages_generatorforms_fields_add.html:133
 #: pages_generatorforms_fields_add.html:136
+#: pages_generatorforms_fields_copy.html:112
+#: pages_generatorforms_fields_copy.html:115
+#: pages_generatorforms_fields_copy.html:118
+#: pages_generatorforms_fields_copy.html:121
+#: pages_generatorforms_fields_copy.html:124
+#: pages_generatorforms_fields_copy.html:127
+#: pages_generatorforms_fields_copy.html:130
+#: pages_generatorforms_fields_copy.html:133
+#: pages_generatorforms_fields_copy.html:136
 #: pages_generatorforms_fields_edit.html:112
 #: pages_generatorforms_fields_edit.html:115
 #: pages_generatorforms_fields_edit.html:118
@@ -2786,7 +2827,7 @@ msgstr "Neu anlegen"
 #: pages_blogs_postings_select.html:108 pages_blogs_postings_select.html:150
 #: pages_events_postings_select.html:105 pages_events_postings_select.html:152
 #: pages_generatorforms_fields_select.html:94
-#: pages_generatorforms_fields_select.html:133
+#: pages_generatorforms_fields_select.html:136
 #: pages_simple_dates_select.html:101 pages_simple_dates_select.html:137
 #: pages_simpleguestbooks_entries_select.html:103
 #: pages_simpleguestbooks_entries_select.html:152
@@ -2818,8 +2859,8 @@ msgstr "Verfügbare Ping-Services"
 #: pages_blogs_postings_select.html:136 pages_blogs_postings_select.html:145
 #: pages_boxes_select.html:126 pages_boxes_select.html:132
 #: pages_events_postings_select.html:133 pages_events_postings_select.html:147
-#: pages_generatorforms_fields_select.html:120
-#: pages_generatorforms_fields_select.html:128 pages_select.html:122
+#: pages_generatorforms_fields_select.html:122
+#: pages_generatorforms_fields_select.html:131 pages_select.html:122
 #: pages_simple_dates_select.html:125 pages_simple_dates_select.html:132
 #: pages_simpleguestbooks_entries_select.html:129
 #: pages_simpleguestbooks_entries_select.html:137 pagetypes_select.html:66
@@ -2844,7 +2885,7 @@ msgstr "Löschen"
 #: pages_blogs_pingserviceconfigurations_select.html:130
 #: pages_blogs_postings_select.html:140 pages_boxes_select.html:130
 #: pages_events_postings_select.html:137
-#: pages_generatorforms_fields_select.html:124
+#: pages_generatorforms_fields_select.html:126
 #: pages_simple_dates_select.html:129
 #: pages_simpleguestbooks_entries_select.html:133 pagetypes_select.html:71
 #: podcastcategories_select.html:83 structuraltemplates_select.html:84
@@ -3216,6 +3257,7 @@ msgstr "Abkürzung bearbeiten"
 #: pages_boxes_edit.html:120 pages_events_postings_copy.html:85
 #: pages_events_postings_edit.html:85
 #: pages_generatorforms_content_edit.html:103
+#: pages_generatorforms_fields_copy.html:101
 #: pages_generatorforms_fields_edit.html:101 pages_simple_dates_edit.html:102
 #: pages_simpleforms_content_edit.html:100
 #: pages_simpleguestbooks_content_edit.html:103
@@ -3492,6 +3534,7 @@ msgstr "Welcompose Admin &ndash; Pages &#62; Neuen Ping-Service anlegen"
 #: pages_events_postings_edit.html:50 pages_events_postings_select.html:52
 #: pages_generatorforms_content_edit.html:66
 #: pages_generatorforms_fields_add.html:63
+#: pages_generatorforms_fields_copy.html:63
 #: pages_generatorforms_fields_edit.html:63
 #: pages_generatorforms_fields_select.html:52 pages_simple_dates_add.html:64
 #: pages_simple_dates_edit.html:64 pages_simple_dates_select.html:53
@@ -3527,6 +3570,7 @@ msgstr "Metadaten"
 #: pages_events_postings_select.html:58
 #: pages_generatorforms_content_edit.html:75
 #: pages_generatorforms_fields_add.html:72
+#: pages_generatorforms_fields_copy.html:72
 #: pages_generatorforms_fields_edit.html:72
 #: pages_generatorforms_fields_select.html:61 pages_simple_dates_add.html:70
 #: pages_simple_dates_edit.html:70 pages_simple_dates_select.html:59
@@ -3653,7 +3697,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: pages_blogs_postings_select.html:92 pages_events_postings_select.html:89
-#: pages_generatorforms_fields_select.html:127
+#: pages_generatorforms_fields_select.html:129
 #: pages_simple_dates_select.html:93 pages_simple_dates_select.html:131
 msgid "No"
 msgstr "Nein"
@@ -3691,8 +3735,9 @@ msgstr "Aufsteigend nach Datum"
 
 #: pages_blogs_postings_select.html:135 pages_blogs_postings_select.html:144
 #: pages_events_postings_select.html:132 pages_events_postings_select.html:146
-#: templates_select.html:111 templates_select.html:121 groups_select.html:69
-#: groups_select.html:83
+#: pages_generatorforms_fields_select.html:121
+#: pages_generatorforms_fields_select.html:130 templates_select.html:111
+#: templates_select.html:121 groups_select.html:69 groups_select.html:83
 msgid "Duplicate"
 msgstr "Duplizieren"
 
@@ -3717,6 +3762,7 @@ msgstr "Simple Form"
 #: pages_boxes_add.html:85 pages_boxes_edit.html:85 pages_boxes_select.html:80
 #: pages_edit.html:124 pages_generatorforms_content_edit.html:69
 #: pages_generatorforms_fields_add.html:66
+#: pages_generatorforms_fields_copy.html:66
 #: pages_generatorforms_fields_edit.html:66
 #: pages_generatorforms_fields_select.html:55
 msgid "Generator Form"
@@ -3727,6 +3773,9 @@ msgstr "Generator Form"
 #: pages_generatorforms_fields_add.html:69
 #: pages_generatorforms_fields_add.html:79
 #: pages_generatorforms_fields_add.html:85
+#: pages_generatorforms_fields_copy.html:69
+#: pages_generatorforms_fields_copy.html:79
+#: pages_generatorforms_fields_copy.html:85
 #: pages_generatorforms_fields_edit.html:69
 #: pages_generatorforms_fields_edit.html:79
 #: pages_generatorforms_fields_edit.html:85
@@ -3889,14 +3938,20 @@ msgstr "Welcompose Admin &ndash; Seiten &#62; Neue Formularfelder anlegen"
 msgid "Add Generator Form Field"
 msgstr "Neues Formularfeld anlegen"
 
+#: pages_generatorforms_fields_copy.html:10
 #: pages_generatorforms_fields_edit.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Edit Generator Form Field"
 msgstr "Welcompose Admin &ndash; Seiten &#62; Formularfeld bearbeiten"
 
+#: pages_generatorforms_fields_copy.html:79
 #: pages_generatorforms_fields_edit.html:79
 #: pages_generatorforms_fields_edit.html:83
 msgid "Edit Generator Form Field"
 msgstr "Formularfeld bearbeiten"
+
+#: pages_generatorforms_fields_copy.html:83
+msgid "Duplicate Generator Form Field"
+msgstr "Formularfeld duplizieren"
 
 #: pages_generatorforms_fields_select.html:10
 msgid "Welcompose Admin &ndash; Pages &#62; Generator Form Fields"
@@ -3906,23 +3961,23 @@ msgstr "Welcompose Admin &ndash; Seiten &#62; Formularfelder"
 msgid "Available Generator Form Fields"
 msgstr "Verfügbare Formularfelder"
 
-#: pages_generatorforms_fields_select.html:116
+#: pages_generatorforms_fields_select.html:117
 msgid "Display by name descending"
 msgstr "Absteigend nach Name"
 
-#: pages_generatorforms_fields_select.html:116
+#: pages_generatorforms_fields_select.html:117
 msgid "Display by name ascending"
 msgstr "Aufsteigend nach Name"
 
-#: pages_generatorforms_fields_select.html:118
+#: pages_generatorforms_fields_select.html:119
 msgid "Display by type descending"
 msgstr "Absteigend nach Typ"
 
-#: pages_generatorforms_fields_select.html:118
+#: pages_generatorforms_fields_select.html:119
 msgid "Display by type ascending"
 msgstr "Aufsteigend nach Typ"
 
-#: pages_generatorforms_fields_select.html:145
+#: pages_generatorforms_fields_select.html:148
 msgid "No form field has been created yet."
 msgstr "Sie haben noch kein Formularfeld angelegt"
 
@@ -6160,8 +6215,9 @@ msgid ""
 "Please note, that not all <strong>optional</strong> params are usable on "
 "every namespace, class and/or class methods. To find out what options are "
 "available for your class or method you like to apply please have a look at "
-"the <a title=\"External link to welcompose online API documentation\" href="
-"\"http://dokumentation.welcompose.de/api/\">API Documentation</a>"
+"the <a target=\"_blank\" title=\"External link to welcompose online API "
+"documentation\" href=\"http://dokumentation.welcompose.de/api/\">API "
+"Documentation</a>"
 msgstr ""
 "Bitte beachten Sie, das nicht alle als optional ausgewiesenen Parameter "
 "innerhalb aller PHP Klassen und Methoden verfügbar und damit anwendbar sind. "
