@@ -275,7 +275,7 @@ try {
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/pages_generatorforms_fields_edit.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/pages_generatorforms_fields_copy.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
