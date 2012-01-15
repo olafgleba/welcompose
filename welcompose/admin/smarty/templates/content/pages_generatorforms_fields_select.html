@@ -106,10 +106,11 @@
 {if !empty($form_fields)}
 <table summary="{i18n Available Generator Form Fields}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="250" height="5" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="250" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="140" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="165" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="230" height="5" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="210" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="110" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="60" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
@@ -117,6 +118,7 @@
 <th>{i18n Label}</th>
 <th>{i18n Type} &nbsp;<a title="{i18n Display by type descending}" class="down" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE:DESC{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a> <a title="{i18n Display by type ascending}" class="up" href="pages_generatorforms_fields_select.php?page={$page.id}&amp;macro=TYPE{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}"></a></th>
 <th>{i18n Required}</th>
+<th>{i18n Duplicate}</th>
 <th>{i18n Delete}</th>
 </tr>
 {foreach from=$form_fields item=_field}
@@ -125,6 +127,7 @@
 <td>{$_field.label|escape:"html"}</td>
 <td>{$_field.type|escape:"html"}</td>
 <td>{if $_field.required == 0}{i18n No}{else}Yes{/if}</td>
+<td><a class="duplicate" href="pages_generatorforms_fields_copy.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Duplicate}"></a></td>
 <td><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n Delete}"></a></td>
 </tr>
 {/foreach}

@@ -225,7 +225,8 @@ try {
 	$FORM->setDefaults(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null,
-		'apply_macros' => 1
+		'apply_macros' => 1,
+		'date_added' => date('Y-m-d H:i:s')
 	));
 	
 	// validate it

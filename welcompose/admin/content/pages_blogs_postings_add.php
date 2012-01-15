@@ -431,7 +431,8 @@ try {
 		'apply_macros' => 1,
 		'ping' => 0,
 		'comments_enable' => 0,
-		'trackbacks_enable' => 0
+		'trackbacks_enable' => 0,
+		'date_added' => date('Y-m-d H:i:s')
 	));
 	
 	// validate it

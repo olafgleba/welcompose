@@ -2322,9 +2322,12 @@ function Helper_showResponseGetNavigationPages(req)
 			Element.update(elem, req.responseText);
 		
 			// assume hidden reference field
-			var ref = elem.options[elem.selectedIndex].value;		
-			$('reference').value = ref;
-		
+			if (req.responseText != '') {
+				var ref = elem.options[elem.selectedIndex].value;
+				$('reference').value = ref;
+			} else {
+				$('reference').value = '';
+			}
 	} catch (e) {
 		_applyError(e);
 	}	

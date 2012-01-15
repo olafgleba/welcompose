@@ -279,7 +279,7 @@ try {
 		'apply_macros' => Base_Cnc::ifsetor($event_posting['apply_macros'], null),
 		'tags' => $EVENTTAG->getTagStringFromSerializedArray(Base_Cnc::ifsetor($event_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($event_posting['draft'], null),
-		'date_added' => Base_Cnc::ifsetor($event_posting['date_added'], null),
+		'date_added' => date('Y-m-d H:i:s'),
 		'date_start' => Base_Cnc::ifsetor($event_posting['date_start'], null),
 		'date_start_time_start' => Base_Cnc::ifsetor($event_posting['date_start_time_start'], null),
 		'date_start_time_end' => Base_Cnc::ifsetor($event_posting['date_start_time_end'], null),

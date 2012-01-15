@@ -496,7 +496,7 @@ try {
 		'ping' => 0,
 		'comments_enable' => Base_Cnc::ifsetor($blog_posting['comments_enable'], null),
 		'trackbacks_enable' => Base_Cnc::ifsetor($blog_posting['trackbacks_enable'], null),
-		'date_added' => Base_Cnc::ifsetor($blog_posting['date_added'], null),
+		'date_added' => date('Y-m-d H:i:s'),
 		'podcast_media_object' => Base_Cnc::ifsetor($blog_posting['podcast_media_object'], null),
 		'podcast_id' => Base_Cnc::ifsetor($blog_posting['podcast_id'], null),
 		'podcast_title' => Base_Cnc::ifsetor($blog_posting['podcast_title'], null),
