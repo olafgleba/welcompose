@@ -548,7 +548,7 @@ public function selectEventPostings ($params = array())
 			$timeframe);
 	}
 	if (!empty($current_date)) {
-		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_event_postings`.`date_added`',
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_event_postings`.`date_start`',
 			$current_date);
 	}
 	if (!empty($title) && is_string($title)) {
