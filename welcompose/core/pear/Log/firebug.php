@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/firebug.php,v 1.2 2007/02/08 09:23:15 tuupola Exp $
+ * $Header$
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 313304 $
  * @package Log
  */
 
@@ -13,7 +13,7 @@
  * http://www.getfirebug.com/
  *
  * @author  Mika Tuupola <tuupola@appelsiini.net>
- * @since   Log 1.x.x
+ * @since   Log 1.9.11
  * @package Log
  *
  * @example firebug.php     Using the firebug handler.
@@ -141,10 +141,12 @@ class Log_firebug extends Log
      */
     function flush() {
         if (count($this->_buffer)) {
-            print '<script type="text/javascript">' . "\n";
+            print '<script type="text/javascript">';
+            print "\nif ('console' in window) {\n";
             foreach ($this->_buffer as $line) {
-                print "$line\n";
+                print "  $line\n";
             }
+            print "}\n";
             print "</script>\n";
         };
         $this->_buffer = array();
@@ -177,15 +179,9 @@ class Log_firebug extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
         $method  = $this->_methods[$priority];
-        
-        /* normalize line breaks */
-        $message = str_replace("\r\n", "\n", $message);
-        
-        /* escape line breaks */
-        $message = str_replace("\n", "\\n\\\n", $message);
-        
-        /* escape quotes */
-        $message = str_replace('"', '\\"', $message);
+
+        /* normalize line breaks and escape quotes*/
+        $message = preg_replace("/\r?\n/", "\\n", addslashes($message));
         
         /* Build the string containing the complete log line. */
         $line = $this->_format($this->_lineFormat,
@@ -197,8 +193,10 @@ class Log_firebug extends Log
             $this->_buffer[] = sprintf('console.%s("%s");', $method, $line);
         } else {
             print '<script type="text/javascript">';
+            print "\nif ('console' in window) {\n";
             /* Build and output the complete log line. */
-            printf('console.%s("%s");', $method, $line);
+            printf('  console.%s("%s");', $method, $line);
+            print "\n}\n";
             print "</script>\n";
         }
         /* Notify observers about this log message. */
@@ -206,5 +204,4 @@ class Log_firebug extends Log
 
         return true;
     }
-
 }

@@ -1,18 +1,16 @@
 <?php
 /**
- *
  * Require Figlet class for rendering the text.
- *
  */
+require_once 'Text/CAPTCHA.php';
 require_once 'Text/Figlet.php';
-
 
 /**
  * Text_CAPTCHA_Driver_Figlet - Text_CAPTCHA driver Figlet based CAPTCHAs
  *
- * @license PHP License, version 3.0
- * @author Aaron Wormus <wormus@php.net>
- * @author Christian Wenz <wenz@php.net>
+ * @author  Aaron Wormus <wormus@php.net>
+ * @author  Christian Wenz <wenz@php.net>
+ * @license BSD License
  * @todo define an obfuscation algorithm 
  */
 
@@ -87,51 +85,52 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
      *
      * Initializes the new Text_CAPTCHA_Driver_Figlet object and creates a GD image
      *
-     * @param   array   $options    CAPTCHA options
+     * @param array $options CAPTCHA options
      * @access public
-     * @return  mixed   true upon success, PEAR error otherwise
+     * @return mixed true upon success, PEAR error otherwise
      */
     function init($options = array())
     {
         if (is_array($options)) {
-            if (!empty($options['output'])){
-              $this->_output = $options['output'];
+            if (!empty($options['output'])) {
+                $this->_output = $options['output'];
             } else {
-              $this->_output = 'html';
+                $this->_output = 'html';
             }
          
             if (isset($options['width']) && is_int($options['width'])) {
-              $this->_width = $options['width'];
+                $this->_width = $options['width'];
             } else {
-              $this->_width = 200; 
+                $this->_width = 200; 
             }
 
-            if (!empty($options['length'])){
+            if (!empty($options['length'])) {
                 $this->_length = $options['length'];
             } else {
                 $this->_length = 6;
             }
             
             if (!isset($options['phrase']) || empty($options['phrase'])) {
-                $this->_createPhrase($this->_length);
+                $phraseoptions = (isset($options['phraseOptions']) && is_array($options['phraseOptions'])) ? $options['phraseOptions'] : array();
+                $this->_createPhrase($phraseoptions);
             } else {
                 $this->_phrase = $options['phrase'];
             }
         }
         
-        if (empty($options['options']) || !is_array($options['options'])){
+        if (!isset($options['options']) || empty($options['options']) || !is_array($options['options'])) {
             die;
         } else {
-            if (!empty($options['options']['style']) && is_array($options['options']['style'])){
+            if (isset($options['options']['style']) && !empty($options['options']['style']) && is_array($options['options']['style'])) {
                 $this->_style = $options['options']['style'];
             }
             
-            if (empty($this->style['padding'])){
+            if (!isset($this->_style['padding']) || empty($this->_style['padding'])) {
                 $this->_style['padding'] = '5px';    
             }
             
-            if (!empty($options['options']['font_file'])){
-                if (is_array($options['options']['font_file'])){
+            if (isset($options['options']['font_file']) && !empty($options['options']['font_file'])) {
+                if (is_array($options['options']['font_file'])) {
                     $this->_font = $options['options']['font_file'][array_rand($options['options']['font_file'])];
                 } else {
                     $this->_font = $options['options']['font_file'];
@@ -144,11 +143,23 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
      * Create random CAPTCHA phrase
      * This method creates a random phrase
      *
-     * @access  private
+     * @param array $options Optionally supply advanced options for the phase creation;
+     *                       used for the initialization of Text_Password
+     *
+     * @access private
+     * @return void
      */
-    function _createPhrase()
+    function _createPhrase($options = array())
     {
-        $this->_phrase = Text_Password::create($this->_length);
+        if (!is_array($options) || count($options) === 0) {
+            $this->_phrase = Text_Password::create($this->_length);
+        } else {
+            if (count($options) === 1) {
+                $this->_phrase = Text_Password::create($this->_length, $options[0]);
+            } else {
+                $this->_phrase = Text_Password::create($this->_length, $options[0], $options[1]);
+            }
+        }
     }
 
     /**
@@ -156,20 +167,19 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
      *
      * This method creates a CAPTCHA image
      *
-     * @access  private
-     * @return  void   PEAR_Error on error
+     * @access private
+     * @return void PEAR_Error on error
      */
     function _createCAPTCHA()
-
     {
         $this->_fig = new Text_Figlet();
         
-        if (PEAR::isError($this->_fig->LoadFont($this->_font))){
+        if (PEAR::isError($this->_fig->LoadFont($this->_font))) {
             $this->_error = PEAR::raiseError('Error loading Text_Figlet font');
             return $this->_error;
         }
 
-	      $this->_output_string = $this->_fig->LineEcho($this->_phrase);        
+        $this->_output_string = $this->_fig->LineEcho($this->_phrase);
     }
 
     /**
@@ -177,8 +187,8 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
      *
      * This method returns the CAPTCHA depending on the output format
      *
-     * @access  public
-     * @return  mixed        Formatted captcha or PEAR error
+     * @access public
+     * @return mixed Formatted captcha or PEAR error
      */
     function getCAPTCHA()
     {
@@ -205,8 +215,8 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
      *
      * This method returns the CAPTCHA as HTML
      *
-     * @access  public
-     * @return  mixed        HTML Figlet image or PEAR error
+     * @access public
+     * @return mixed HTML Figlet image or PEAR error
      */
     function getCAPTCHAAsHTML()
     {
@@ -221,7 +231,7 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
         $textsize = ($this->_width / $charwidth) * 1.4;
         
         $css_output = "";
-        foreach ($this->_style as $key => $value){
+        foreach ($this->_style as $key => $value) {
             $css_output .= "$key: $value;"; 
         }
         
@@ -236,13 +246,13 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
     }
 
     /**
-     * Return CAPTCHA as Javascript version of HTML
+     * Return CAPTCHA as JavaScript version of HTML
      *
-     * This method returns the CAPTCHA as a Javascript string
+     * This method returns the CAPTCHA as a JavaScript string
      * I'm not exactly sure what the point of doing this would be.
      *
-     * @access  public
-     * @return  mixed        javascript string or PEAR error
+     * @access public
+     * @return mixed JavaScript string or PEAR error
      */
     function getCAPTCHAAsJavascript()
     {
@@ -253,8 +263,8 @@ class Text_CAPTCHA_Driver_Figlet extends Text_CAPTCHA
         
         $obfus_data = rawurlencode($data);
         
-        $javascript = "<script language=\"javascript\">
-          document.write(unescape(\"$obfus_data.\" ) );
+        $javascript = "<script type=\"text/javascript\">
+          document.write(unescape(\"${obfus_data}\"));
           </script>";
         
         return $javascript;

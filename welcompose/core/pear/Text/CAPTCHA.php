@@ -5,12 +5,11 @@
  * Class to create a Turing test for websites by
  * creating an image, ASCII art or something else 
  * with some (obfuscated) characters 
- *
  * 
- * @package Text_CAPTCHA
- * @license PHP License, version 3.0
- * @author Christian Wenz <wenz@php.net>
  * @category Text
+ * @package  Text_CAPTCHA
+ * @author   Christian Wenz <wenz@php.net>
+ * @license  BSD License
  */
 
 
@@ -62,7 +61,7 @@ require_once 'Text/Password.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        if (isset($_POST['phrase']) && isset($_SESSION['phrase']) &&
+        if (isset($_POST['phrase']) && is_string($_SESSION['phrase']) && isset($_SESSION['phrase']) &&
             strlen($_POST['phrase']) > 0 && strlen($_SESSION['phrase']) > 0 &&
             $_POST['phrase'] == $_SESSION['phrase']) {
             $msg = 'OK!';
@@ -72,7 +71,7 @@ require_once 'Text/Password.php';
             $msg = 'Please try again!';
         }
 
-        unlink(session_id() . '.png');   
+        unlink(sha1(session_id()) . '.png');   
 
     }
 
@@ -84,9 +83,13 @@ require_once 'Text/Password.php';
                    
         // Set CAPTCHA image options (font must exist!)
         $imageOptions = array(
-            'font_size' => 24,
-            'font_path' => './',
-            'font_file' => 'COUR.TTF'
+            'font_size'        => 24,
+            'font_path'        => './',
+            'font_file'        => 'COUR.TTF',
+            'text_color'       => '#DDFF99',
+            'lines_color'      => '#CCEEDD',
+            'background_color' => '#555555',
+            'antialias'        => true
         );
 
         // Set CAPTCHA options
@@ -101,7 +104,8 @@ require_once 'Text/Password.php';
         $c = Text_CAPTCHA::factory('Image');
         $retval = $c->init($options);
         if (PEAR::isError($retval)) {
-            echo 'Error initializing CAPTCHA!';
+            printf('Error initializing CAPTCHA: %s!',
+                $retval->getMessage());
             exit;
         }
     
@@ -111,20 +115,22 @@ require_once 'Text/Password.php';
         // Get CAPTCHA image (as PNG)
         $png = $c->getCAPTCHA();
         if (PEAR::isError($png)) {
-            echo 'Error generating CAPTCHA!';
+            printf('Error generating CAPTCHA: %s!',
+                $png->getMessage());
             exit;
         }
-        file_put_contents(md5(session_id()) . '.png', $png);
+        file_put_contents(sha1(session_id()) . '.png', $png);
     
         echo '<form method="post">' . 
-             '<img src="' . md5(session_id()) . '.png?' . time() . '" />' . 
+             '<img src="' . sha1(session_id()) . '.png?' . time() . '" />' . 
              '<input type="text" name="phrase" />' .
              '<input type="submit" /></form>';
     }
     ?>
 */
  
-class Text_CAPTCHA {
+class Text_CAPTCHA 
+{
 
     /**
      * Version number
@@ -132,7 +138,7 @@ class Text_CAPTCHA {
      * @access private
      * @var string
      */
-    var $_version = '0.2.1';
+    var $_version = '0.4.2';
 
     /**
      * Phrase
@@ -161,7 +167,7 @@ class Text_CAPTCHA {
         include_once "Text/CAPTCHA/Driver/$driver.php";
 
         $classname = "Text_CAPTCHA_Driver_$driver";
-        $obj =& new $classname;
+        $obj = new $classname;
         return $obj;
     }
 
@@ -170,12 +176,23 @@ class Text_CAPTCHA {
      *
      * This method creates a random phrase, 8 characters long
      *
-     * @access  private
+     * @param array $options optionally supply advanced options for the phrase creation
+     *
+     * @access private
+     * @return void
      */
-    function _createPhrase()
+    function _createPhrase($options = array())
     {
         $len = 8;
-        $this->_phrase = Text_Password::create($len);
+        if (!is_array($options) || count($options) === 0) {
+            $this->_phrase = Text_Password::create($len);
+        } else {
+            if (count($options) === 1) {
+                $this->_phrase = Text_Password::create($len, $options[0]);
+            } else {
+                $this->_phrase = Text_Password::create($len, $options[0], $options[1]);
+            }
+        }
     }
 
     /**
@@ -183,8 +200,8 @@ class Text_CAPTCHA {
      *
      * This method returns the CAPTCHA phrase
      *
-     * @access  public
-     * @return  phrase   secret phrase
+     * @access public
+     * @return phrase secret phrase
      */
     function getPhrase()
     {
@@ -197,9 +214,10 @@ class Text_CAPTCHA {
      * This method sets the CAPTCHA phrase 
      * (use null for a random phrase)
      *
+     * @param string $phrase the (new) phrase
+     *
      * @access  public
-     * @param   string   $phrase    the (new) phrase
-     * @void 
+     * @return void 
      */
     function setPhrase($phrase = null)
     {
@@ -217,7 +235,8 @@ class Text_CAPTCHA {
      * @access private
      * @return PEAR_Error
      */
-    function init() {
+    function init() 
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
 
@@ -228,7 +247,8 @@ class Text_CAPTCHA {
      * @access private
      * @return PEAR_Error
      */
-    function _createCAPTCHA() {
+    function _createCAPTCHA() 
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
 
@@ -240,9 +260,8 @@ class Text_CAPTCHA {
      * @access private
      * @return PEAR_Error
      */
-    function getCAPTCHA() {
+    function getCAPTCHA() 
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
-
 }
-?>

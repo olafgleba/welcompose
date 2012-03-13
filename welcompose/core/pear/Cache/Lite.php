@@ -19,7 +19,7 @@
 *
 * @package Cache_Lite
 * @category Caching
-* @version $Id: Lite.php,v 1.45 2006/06/03 08:10:33 fab Exp $
+* @version $Id: Lite.php 314953 2011-08-15 12:32:34Z tacker $
 * @author Fabien MARTY <fab@php.net>
 */
 
@@ -273,6 +273,14 @@ class Cache_Lite
     *     'hashedDirectoryUmask' => umask for hashed directory structure (int),
     *     'errorHandlingAPIBreak' => API break for better error handling ? (boolean)
     * );
+    * 
+    * If sys_get_temp_dir() is available and the 
+    * 'cacheDir' option is not provided in the 
+    * constructor options array its output is used 
+    * to determine the suitable temporary directory.
+    * 
+    * @see http://de.php.net/sys_get_temp_dir
+    * @see http://pear.php.net/bugs/bug.php?id=18328
     *
     * @param array $options options
     * @access public
@@ -281,6 +289,9 @@ class Cache_Lite
     {
         foreach($options as $key => $value) {
             $this->setOption($key, $value);
+        }
+        if (!isset($options['cacheDir']) && function_exists('sys_get_temp_dir')) {
+        	$this->setOption('cacheDir', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
         }
     }
     
@@ -375,12 +386,9 @@ class Cache_Lite
                     return true;
                 }
             }
-            if ($this->_automaticCleaningFactor>0) {
-                $rand = rand(1, $this->_automaticCleaningFactor);
-                if ($rand==1) {
-                    $this->clean(false, 'old');
-                }
-            }
+            if ($this->_automaticCleaningFactor>0 && ($this->_automaticCleaningFactor==1 || mt_rand(1, $this->_automaticCleaningFactor)==1)) {
+				$this->clean(false, 'old');			
+			}
             if ($this->_writeControl) {
                 $res = $this->_writeAndControl($data);
                 if (is_bool($res)) {
@@ -395,11 +403,11 @@ class Cache_Lite
                 $res = $this->_write($data);
             }
             if (is_object($res)) {
-	        	// $res is a PEAR_Error object 
+                // $res is a PEAR_Error object 
                 if (!($this->_errorHandlingAPIBreak)) {   
-	                return false; // we return false (old API)
-	            }
-	        }
+                    return false; // we return false (old API)
+                }
+            }
             return $res;
         }
         return false;
@@ -410,10 +418,11 @@ class Cache_Lite
     *
     * @param string $id cache id
     * @param string $group name of the cache group
+    * @param boolean $checkbeforeunlink check if file exists before removing it
     * @return boolean true if no problem
     * @access public
     */
-    function remove($id, $group = 'default')
+    function remove($id, $group = 'default', $checkbeforeunlink = false)
     {
         $this->_setFileName($id, $group);
         if ($this->_memoryCaching) {
@@ -424,6 +433,9 @@ class Cache_Lite
             if ($this->_onlyMemoryCaching) {
                 return true;
             }
+        }
+        if ( $checkbeforeunlink ) {
+            if (!file_exists($this->_file)) return true;
         }
         return $this->_unlink($this->_file);
     }
@@ -482,7 +494,7 @@ class Cache_Lite
         if ($this->_caching) {
             $array = array(
                 'counter' => $this->_memoryCachingCounter,
-                'array' => $this->_memoryCachingState
+                'array' => $this->_memoryCachingArray
             );
             $data = serialize($array);
             $this->save($data, $id, $group);
@@ -598,8 +610,8 @@ class Cache_Lite
             $motif = ($group) ? 'cache_'.$group.'_' : 'cache_';
         }
         if ($this->_memoryCaching) {
-            while (list($key, ) = each($this->_memoryCachingArray)) {
-                if (strpos($key, $motif, 0)) {
+	    foreach($this->_memoryCachingArray as $key => $v) {
+                if (strpos($key, $motif) !== false) {
                     unset($this->_memoryCachingArray[$key]);
                     $this->_memoryCachingCounter = $this->_memoryCachingCounter - 1;
                 }
@@ -612,7 +624,7 @@ class Cache_Lite
             return $this->raiseError('Cache_Lite : Unable to open cache directory !', -4);
         }
         $result = true;
-        while ($file = readdir($dh)) {
+        while (($file = readdir($dh)) !== false) {
             if (($file != '.') && ($file != '..')) {
                 if (substr($file, 0, 6)=='cache_') {
                     $file2 = $dir . $file;
@@ -621,13 +633,13 @@ class Cache_Lite
                             case 'old':
                                 // files older than lifeTime get deleted from cache
                                 if (!is_null($this->_lifeTime)) {
-                                    if ((mktime() - @filemtime($file2)) > $this->_lifeTime) {
+                                    if ((time() - @filemtime($file2)) > $this->_lifeTime) {
                                         $result = ($result and ($this->_unlink($file2)));
                                     }
                                 }
                                 break;
                             case 'notingrou':
-                                if (!strpos($file2, $motif, 0)) {
+                                if (strpos($file2, $motif) === false) {
                                     $result = ($result and ($this->_unlink($file2)));
                                 }
                                 break;
@@ -639,7 +651,7 @@ class Cache_Lite
                                 break;
                             case 'ingroup':
                             default:
-                                if (strpos($file2, $motif, 0)) {
+                                if (strpos($file2, $motif) !== false) {
                                     $result = ($result and ($this->_unlink($file2)));
                                 }
                                 break;
@@ -706,12 +718,14 @@ class Cache_Lite
     function _read()
     {
         $fp = @fopen($this->_file, "rb");
-        if ($this->_fileLocking) @flock($fp, LOCK_SH);
         if ($fp) {
+	    if ($this->_fileLocking) @flock($fp, LOCK_SH);
             clearstatcache();
             $length = @filesize($this->_file);
             $mqr = get_magic_quotes_runtime();
-            set_magic_quotes_runtime(0);
+            if ($mqr) {
+                set_magic_quotes_runtime(0);
+            }
             if ($this->_readControl) {
                 $hashControl = @fread($fp, 32);
                 $length = $length - 32;
@@ -721,7 +735,9 @@ class Cache_Lite
             } else {
                 $data = '';
             }
-            set_magic_quotes_runtime($mqr);
+            if ($mqr) {
+                set_magic_quotes_runtime($mqr);
+            }
             if ($this->_fileLocking) @flock($fp, LOCK_UN);
             @fclose($fp);
             if ($this->_readControl) {
@@ -765,8 +781,14 @@ class Cache_Lite
             if ($this->_readControl) {
                 @fwrite($fp, $this->_hash($data, $this->_readControlType), 32);
             }
-            $len = strlen($data);
-            @fwrite($fp, $data, $len);
+            $mqr = get_magic_quotes_runtime();
+            if ($mqr) {
+                set_magic_quotes_runtime(0);
+            }
+            @fwrite($fp, $data);
+            if ($mqr) {
+                set_magic_quotes_runtime($mqr);
+            }
             if ($this->_fileLocking) @flock($fp, LOCK_UN);
             @fclose($fp);
             return true;
@@ -785,11 +807,11 @@ class Cache_Lite
     {
         $result = $this->_write($data);
         if (is_object($result)) {
-            return $result; #ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ We return the PEAR_Error object
+            return $result; # We return the PEAR_Error object
         }
         $dataRead = $this->_read();
         if (is_object($dataRead)) {
-            return $result; #ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ We return the PEAR_Error object
+            return $dataRead; # We return the PEAR_Error object
         }
         if ((is_bool($dataRead)) && (!$dataRead)) {
             return false; 

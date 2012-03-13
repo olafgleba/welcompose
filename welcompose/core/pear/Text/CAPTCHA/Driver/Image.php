@@ -1,21 +1,19 @@
 <?php
 /**
- *
  * Require Image_Text class for generating the text.
- *
  */
+require_once 'Text/CAPTCHA.php';
 require_once 'Image/Text.php';
 
 /**
  * Text_CAPTCHA_Driver_Image - Text_CAPTCHA driver graphical CAPTCHAs
  *
  * Class to create a graphical Turing test 
- *
  * 
- * @license PHP License, version 3.0
- * @author Christian Wenz <wenz@php.net>
+ * @author  Christian Wenz <wenz@php.net>
+ * @license BSD License
  * @todo refine the obfuscation algorithm :-)
- * @todo learn how to use Image_Text better (or remove dependency)
+ * @todo consider removing Image_Text dependency
  */
 
 class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
@@ -67,8 +65,15 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
      * @access private
      * @var array
      */
-    var $_imageOptions;
-
+    var $_imageOptions = array(
+        'font_size'        => 24,
+        'font_path'        => './',
+        'font_file'        => 'COUR.TTF',
+        'text_color'       => '#000000',
+        'lines_color'      => '#CACACA',
+        'background_color' => '#555555',
+        'antialias'        => false);
+        
     /**
      * Whether the immage resource has been created
      *
@@ -90,9 +95,10 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
      *
      * Initializes the new Text_CAPTCHA_Driver_Image object and creates a GD image
      *
-     * @param   array   $options    CAPTCHA options
+     * @param array $options CAPTCHA options
+     *
      * @access public
-     * @return  mixed   true upon success, PEAR error otherwise
+     * @return mixed true upon success, PEAR error otherwise
      */
     function init($options = array())
     {
@@ -119,17 +125,18 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         }
         if (is_array($options)) { 
             if (isset($options['width']) && is_int($options['width'])) {
-              $this->_width = $options['width'];
+                $this->_width = $options['width'];
             } else {
-              $this->_width = 200; 
+                $this->_width = 200; 
             }
             if (isset($options['height']) && is_int($options['height'])) {
-              $this->_height = $options['height'];
+                $this->_height = $options['height'];
             } else {
-              $this->_height = 80; 
+                $this->_height = 80; 
             }
             if (!isset($options['phrase']) || empty($options['phrase'])) {
-                $this->_createPhrase();
+                $phraseoptions = (isset($options['phraseOptions']) && is_array($options['phraseOptions'])) ? $options['phraseOptions'] : array();
+                $this->_createPhrase($phraseoptions);
             } else {
                 $this->_phrase = $options['phrase'];
             }
@@ -138,23 +145,8 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
             } else {
                 $this->_output = $options['output'];
             } 
-            if (!isset($options['imageOptions']) || !is_array($options['imageOptions']) || count($options['imageOptions']) == 0) {
-                $this->_imageOptions = array(
-                    'font_size' => 24,
-                    'font_path' => './',
-                    'font_file' => 'COUR.TTF'
-                );
-            } else {
-                $this->_imageOptions = $options['imageOptions'];
-                if (!isset($this->_imageOptions['font_size'])) {
-                    $this->_imageOptions['font_size'] = 24;
-                }
-                if (!isset($this->_imageOptions['font_path'])) {
-                    $this->_imageOptions['font_path'] = './';
-                }
-                if (!isset($this->_imageOptions['font_file'])) {
-                    $this->_imageOptions['font_file'] = 'COUR.TTF';
-                }
+            if (isset($options['imageOptions']) && is_array($options['imageOptions']) && count($options['imageOptions']) > 0) {
+                $this->_imageOptions = array_merge($this->_imageOptions, $options['imageOptions']); 
             }
             return true;
         }
@@ -165,12 +157,23 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
      *
      * This method creates a random phrase, maximum 8 characters or width / 25, whatever is smaller
      *
-     * @access  private
+     * @param array $options Optionally supply advanced options for the phrase creation
+     * 
+     * @access private
+     * @return void
      */
-    function _createPhrase()
+    function _createPhrase($options = array())
     {
         $len = intval(min(8, $this->_width / 25));
-        $this->_phrase = Text_Password::create($len);
+        if (!is_array($options) || count($options) === 0) {
+            $this->_phrase = Text_Password::create($len);
+        } else {
+            if (count($options) === 1) {
+                $this->_phrase = Text_Password::create($len, $options[0]);
+            } else {
+                $this->_phrase = Text_Password::create($len, $options[0], $options[1]);
+            }
+        }
         $this->_created = false;
     }
 
@@ -202,39 +205,53 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         $options['font_size'] = $this->_imageOptions['font_size'];
         $options['font_path'] = $this->_imageOptions['font_path'];
         $options['font_file'] = $this->_imageOptions['font_file'];
-        $options['color'] = array('#FFFFFF', '#000000');
+        $options['color'] = array($this->_imageOptions['text_color']);
+        $options['background_color'] = $this->_imageOptions['background_color'];
         $options['max_lines'] = 1;
         $options['mode'] = 'auto';
-        $this->_imt = new Image_Text( 
-            $this->_phrase,
-            $options
-        );
-        if (PEAR::isError($this->_imt->init())) {
-            $this->_error = PEAR::raiseError('Error initializing Image_Text (font missing?!)');
+        do {
+            $this->_imt = new Image_Text( 
+                $this->_phrase,
+                $options
+            );
+            if (PEAR::isError($e = $this->_imt->init())) {
+                $this->_error = PEAR::raiseError(
+                    sprintf('Error initializing Image_Text (%s)', $e->getMessage()));
+                return $this->_error;
+            } else {
+                $this->_created = true; 
+            }
+            $result = $this->_imt->measurize();
+        } while ($result === false && --$options['font_size'] > 0);
+        if ($result === false) {
+            $this->_error = PEAR::raiseError('The text provided does not fit in the image dimensions');
             return $this->_error;
-        } else {
-            $this->_created = true; 
         }
-        $this->_imt->measurize();
-        $this->_imt->render(); 
+        $this->_imt->render();
         $this->_im =& $this->_imt->getImg(); 
-        $white = imagecolorallocate($this->_im, 0xFF, 0xFF, 0xFF);
+        
+        if (isset($this->_imageOptions['antialias']) && $this->_imageOptions['antialias'] === true && function_exists('imageantialias')) {
+            imageantialias($this->_im, true);
+        }
+        
+        $colors = $this->_imt->_convertString2RGB($this->_imageOptions['lines_color']);
+        $lines_color = imagecolorallocate($this->_im, $colors['r'], $colors['g'], $colors['b']);
         //some obfuscation
         for ($i = 0; $i < 3; $i++) {
             $x1 = rand(0, $this->_width - 1);
             $y1 = rand(0, round($this->_height / 10, 0));
             $x2 = rand(0, round($this->_width / 10, 0));
             $y2 = rand(0, $this->_height - 1);
-            imageline($this->_im, $x1, $y1, $x2, $y2, $white);
+            imageline($this->_im, $x1, $y1, $x2, $y2, $lines_color);
             $x1 = rand(0, $this->_width - 1);
             $y1 = $this->_height - rand(1, round($this->_height / 10, 0));
             $x2 = $this->_width - rand(1, round($this->_width / 10, 0));
             $y2 = rand(0, $this->_height - 1);
-            imageline($this->_im, $x1, $y1, $x2, $y2, $white);
+            imageline($this->_im, $x1, $y1, $x2, $y2, $lines_color);
             $cx = rand(0, $this->_width - 50) + 25;
             $cy = rand(0, $this->_height - 50) + 25;
             $w = rand(1, 24);
-            imagearc($this->_im, $cx, $cy, $w, $w, 0, 360, $white);
+            imagearc($this->_im, $cx, $cy, $w, $w, 0, 360, $lines_color);
         }
     }
 
@@ -357,6 +374,8 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
 
     /**
      * __wakeup method (PHP 5 only)
+     *
+     * @return void
      */
     function __wakeup()
     {

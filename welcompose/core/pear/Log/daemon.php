@@ -1,5 +1,10 @@
 <?php
-// $Id: daemon.php,v 1.2 2005/02/26 14:48:58 chagenbu Exp $
+/**
+ * $Header$
+ *
+ * @version $Revision: 250926 $
+ * @package Log
+ */
 
 /**
  * The Log_daemon class is a concrete implementation of the Log::
@@ -7,7 +12,7 @@
  * This class uses the syslog protocol: http://www.ietf.org/rfc/rfc3164.txt
  *
  * @author  Bart van der Schans <schans@dds.nl>
- * @version $Revision: 1.2 $
+ * @version $Revision: 250926 $
  * @package Log
  */
 class Log_daemon extends Log
