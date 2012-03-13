@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_blogs_pingserviceconfigurations_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -120,79 +118,71 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('ping_service_configuration', 'post');
+	$FORM = $BASE->utility->loadQuickForm('ping_service_configuration');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page->addRule('required', gettext('Page is not expected to be empty'));
+	$page->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// select for ping service
-	$FORM->addElement('select', 'ping_service', gettext('Ping service'), $ping_services,
-		array('id' => 'ping_service_configuration_ping_service'));
-	$FORM->applyFilter('ping_service', 'trim');
-	$FORM->applyFilter('ping_service', 'strip_tags');
-	$FORM->addRule('ping_service', gettext('Select a ping service'), 'required');
-	$FORM->addRule('ping_service', gettext('Chosen ping service is out of range'),
-		'in_array_keys', $ping_services);
-	
+	// select for ping service	
+	$ping_service = $FORM->addElement('select', 'ping_service',
+	 	array('id' => 'ping_service_configuration_ping_service'),
+		array('label' => gettext('Ping service'), 'options' => $ping_services)
+		);
+	$ping_service->addRule('required', gettext('Select a ping service'));
+
 	// textfield for site_name
-	$FORM->addElement('text', 'site_name', gettext('Site name'),
-		array('id' => 'ping_service_configuration_site_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('site_name', 'trim');
-	$FORM->applyFilter('site_name', 'strip_tags');
-	$FORM->addRule('site_name', gettext('Please enter a site name'), 'required');
+	$site_name = $FORM->addElement('text', 'site_name', 
+		array('id' => 'ping_service_configuration_site_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Site name'))
+		);
+	$site_name->addRule('required', gettext('Please enter a site name'));
 	
 	// textfield for site_url
-	$FORM->addElement('text', 'site_url', gettext('Weblog URL'),
-		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('site_url', 'trim');
-	$FORM->applyFilter('site_url', 'strip_tags');
-	$FORM->addRule('site_url', gettext('Please enter a site URL'), 'required');
-	$FORM->addRule('site_url', gettext('Please enter a valid site URL'), 'regex', WCOM_REGEX_URL);
+	$site_name = $FORM->addElement('text', 'site_url', 
+		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Weblog URL'))
+		);
+	$site_name->addRule('required', gettext('Please enter a site URL'));
+	$site_name->addRule('regex', gettext('Please enter a valid site URL'), WCOM_REGEX_URL);
 	
 	// textfield for site_index
-	$FORM->addElement('text', 'site_index', gettext('Changes URL'),
-		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('site_index', 'trim');
-	$FORM->applyFilter('site_index', 'strip_tags');
-	$FORM->addRule('site_index', gettext('Please enter a home page URL'), 'required');
-	$FORM->addRule('site_index', gettext('Please enter a valid home page URL'), 'regex', WCOM_REGEX_URL);
+	$site_index = $FORM->addElement('text', 'site_index', 
+		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Changes URL'))
+		);
+	$site_index->addRule('required', gettext('Please enter a home page URL'));
+	$site_index->addRule('regex', gettext('Please enter a valid home page URL'), WCOM_REGEX_URL);
 	
 	// textfield for site_feed
-	$FORM->addElement('text', 'site_feed', gettext('Feed URL'),
-		array('id' => 'ping_service_configuration_site_feed', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('site_feed', 'trim');
-	$FORM->applyFilter('site_feed', 'strip_tags');
-	$FORM->addRule('site_feed', gettext('Please enter a feed URL'), 'required');
-	$FORM->addRule('site_feed', gettext('Please enter a valid feed URL'), 'regex', WCOM_REGEX_URL);
-	
+	$site_feed = $FORM->addElement('text', 'site_feed', 
+		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Feed URL'))
+		);
+	$site_feed->addRule('required', gettext('Please enter a feed URL'));
+	$site_feed->addRule('regex', gettext('Please enter a valid feed URL'), WCOM_REGEX_URL);
+
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -238,16 +228,16 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['page'] = $FORM->exportValue('page');
-		$sqlData['ping_service'] = $FORM->exportValue('ping_service');
-		$sqlData['site_name'] = $FORM->exportValue('site_name');
-		$sqlData['site_url'] = $FORM->exportValue('site_url');
-		$sqlData['site_index'] = $FORM->exportValue('site_index');
-		$sqlData['site_feed'] = $FORM->exportValue('site_feed');
+		$sqlData['page'] = $page->getValue();
+		$sqlData['ping_service'] = $ping_service->getValue();
+		$sqlData['site_name'] = $site_name->getValue();
+		$sqlData['site_url'] = $site_url->getValue();
+		$sqlData['site_index'] = $site_index->getValue();
+		$sqlData['site_feed'] = $site_feed->getValue();
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -282,7 +272,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_blogs_pingserviceconfigurations_add.php?page=".$FORM->exportValue('page'));
+		header("Location: pages_blogs_pingserviceconfigurations_add.php?page=".$page->getValue());
 		exit;
 	}
 } catch (Exception $e) {

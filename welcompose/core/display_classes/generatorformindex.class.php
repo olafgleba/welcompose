@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: generatorformindex.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -103,6 +101,20 @@ class Display_GeneratorFormIndex implements Display {
 	 * @var array
 	 */
 	protected $_generator_form_fields = array();
+
+	/**
+	 * Set appropriate charset
+	 * 
+	 * @var string
+	 */
+	protected $_charset = 'utf-8';
+	
+	/**
+	 * Set appropriate mime type for plain text mails
+	 * 
+	 * @var string
+	 */
+	protected $_mime_type = 'text/plain';
 	
 /**
  * Creates new instance of display driver. Takes an array
@@ -178,8 +190,8 @@ public function __construct($project, $page)
 public function render ()
 {
 	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('generator_form', 'post',
-		$this->getLocationSelf(true));
+	$FORM = $this->base->utility->loadQuickForm('generator_form', 'post', 
+		array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
 	
 	foreach ($this->_generator_form_fields as $_field) {
 		// prepare id
@@ -195,13 +207,20 @@ public function render ()
 					$attributes = array(
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'fcheckbox '. $_field['class'] : 'fcheckbox'
-					);
-					
-					$element = $FORM->addElement('checkbox', $_field['name'], $_field['label'], null, $attributes);
+					);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					$element = $FORM->addElement('checkbox', $_field['name'], $attributes, $data);
 				break;
 			case 'hidden':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id
+					);
 					// create element
-					$element = $FORM->addElement('hidden', $_field['name']);
+					$element = $FORM->addElement('hidden', $_field['name'], $attributes);
 				break;
 			case 'select':
 					// prepare attributes
@@ -209,42 +228,53 @@ public function render ()
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'fselect '. $_field['class'] : 'fselect'
 					);
-					
 					// prepare values
 					$values = array();
-					foreach (explode(',', $_field['value']) as $_value) {
+					foreach (explode(',', str_replace(' ','',$_field['value'])) as $_value) {
 						$values[$_value] = $_value;
 					}
-					
+					// prepare data					
+					$data = array(
+						'label' => $_field['label'],
+						'options' => $values
+					);					
 					// create element
-					$element = $FORM->addElement('select', $_field['name'], $_field['label'], $values, $attributes);
-					
-					// add 'in_array_keys' rule
-					$FORM->addRule($_field['name'], sprintf('Selection in field %s is out of range', $_field['name']),
-						'in_array_keys', $values);
+					$element = $FORM->addElement('select', $_field['name'], $attributes, $data);
 				break;
 			case 'submit':
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'fsubmit '. $_field['class'] : 'fsubmit'
-					);
-					
+					);					
 					// create element
-					$element = $FORM->addElement('submit', $_field['name'], $_field['label'], $attributes);
+					$element = $FORM->addElement('submit', $_field['name'], $attributes);
 				break;
-			case 'text':
+			case 'reset':
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'maxlength' => 255,
-						'value' => $_field['value'],
-						'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
-					);
-					
+						'class' => (!empty($_field['class'])) ? 'freset '. $_field['class'] : 'freset',
+						'value' => $_field['label']
+					);					
 					// create element
-					$element = $FORM->addElement('text', $_field['name'], $_field['label'], $attributes);
+					$element = $FORM->addElement('reset', $_field['name'], $attributes);
 				break;
+		case 'text':
+				// prepare attributes
+				$attributes = array(
+					'id' => $field_id,
+					'maxlength' => 255,
+					'value' => $_field['value'],
+					'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
+				);					
+				// prepare data
+				$data = array(
+					'label' => $_field['label']
+				);					
+				// create element
+				$element = $FORM->addElement('text', $_field['name'], $attributes, $data);
+			break;
 			case 'textarea':
 					// prepare attributes
 					$attributes = array(
@@ -254,46 +284,34 @@ public function render ()
 						'cols' => 30,
 						'rows' => 6
 					);
-					
+					// prepare label
+					$data = array(
+						'label' => $_field['label']
+					);					
 					// create element
-					$element = $FORM->addElement('textarea', $_field['name'], $_field['label'], $attributes);
+					$element = $FORM->addElement('textarea', $_field['name'], $attributes, $data);
 				break;
 			case 'radio':
 					$i = 1;
-					foreach (explode(';', $_field['value']) as $_value) {
+					foreach (explode(';', str_replace(' ','',$_field['value'])) as $_value) {
 						if (empty($_value)) {
 							continue;
 						}
-
 						// prepare attributes
 						$attributes = array(
+							'value' => $_value,
 							'id' => $field_id . '_' . $i,
 							'class' => (!empty($_field['class'])) ? 'fradio '. $_field['class'] : 'fradio'
-						);
-
+						);						
+						// prepare data
+						$data = array(
+							'label' => $_field['label'],
+							'content' => $_value. '_' . $i
+						);					
 						// create element
-						$element = $FORM->addElement('radio', $_field['name'], $_field['label'], $_value, $_value, $attributes);
-
-						if (!$FORM->isSubmitted()) {
-							$element->setValue($_value);
-						}
+						$element = $FORM->addElement('radio', $_field['name'], $attributes, $data);						
 						$i++;
-						
-						// as we set values above yet, we
-						// need to prevent these elements to 
-						// get assigned twice on func setValue() on Line 315
-						$imply_radio_elements = 1;
 					}
-				break;
-			case 'reset':
-					// prepare attributes
-					$attributes = array(
-						'id' => $field_id,
-						'class' => (!empty($_field['class'])) ? 'freset '. $_field['class'] : 'freset'
-					);
-					
-					// create element
-					$element = $FORM->addElement('reset', $_field['name'], $_field['label'], $attributes);
 				break;
 			case 'file':
 					// prepare attributes
@@ -301,64 +319,67 @@ public function render ()
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'ffile '. $_field['class'] : 'ffile'
 					);
-					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
 					// create element
-					$element = $FORM->addElement('file', $_field['name'], $_field['label'], $attributes);
-					
-					// save field name for later use within attachments
-					$_field_name = $_field['name'];
+					$element = $FORM->addElement('file', $_field['name'], $attributes, $data);
 				break;
-		}
+		} // switch
 		
-		// set value
-		if (!$FORM->isSubmitted()) {
-			// prevent radio elements to be set twice
-			if(!isset($imply_radio_elements)) {
-				$element->setValue($_field['value']);
-			}
-		}
-		
-		// apply default filters
-		$FORM->applyFilter($_field['name'], 'trim');
-		$FORM->applyFilter($_field['name'], 'strip_tags');
+		// apply filters to all fields
+		$FORM->addRecursiveFilter('trim');
+		$FORM->addRecursiveFilter('strip_tags');
 		
 		// add required rule?
 		if ((int)$_field['required']) {
-			$FORM->addRule($_field['name'], $_field['required_message'], 'required');
+			$element->addRule('required', $_field['required_message']);
 		}
 		
 		// add regex rule?
 		if (!empty($_field['validator_regex'])) {
-			$FORM->addRule($_field['name'], $_field['validator_message'], 'regex', $field_regex);
+			$element->addRule('regex', $_field['validator_message'], $field_regex);
 		}
-	}
+		
+		// collect values
+		if ($FORM->isSubmitted()) {
+			foreach ($FORM->getElementsByName($_field['name']) as $element_field_name) {
+				if ($element_value = $element_field_name->getValue()) {
+					break;
+				}
+			}
+			// associate element names with their values
+			$_element[$_field['name']] = $element_value;
+		}
+
+	} // foreach
 	
 	// textfield for captcha if the captcha is enabled
-	if ($this->_generator_form['use_captcha'] != 'no') {
-		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'generator_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('_qf_captcha', 'trim');
-		$FORM->applyFilter('_qf_captcha', 'strip_tags');
-		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-			$this->captcha->captchaValue());
+	if ($this->_generator_form['use_captcha'] != 'no') {			
+		$_qf_captcha = $FORM->addElement('text', '_qf_captcha', 
+			array('id' => 'generator_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Captcha text'))
+			);
+		$_qf_captcha->addRule('required', gettext('Please enter the captcha text'));
+		$_qf_captcha->addRule('eq', gettext('Invalid captcha text entered'), $this->captcha->captchaValue());		
 	}
 	
-	// test if the form validates. if it validates, process it and
-	// skip the rest of the page
+	// test if the form validates. If it validates, 
+	// process it and skip the rest of the page
 	if ($FORM->validate()) {
 		// freeze the form
-		$FORM->freeze();
-		
+		$FORM->toggleFrozen(true);
+				
 		// prepare & assign form data
 		$form_data = array(
 			'now' => mktime()
 		);
 		foreach ($this->_generator_form_fields as $_field) {
-			$form_data[$_field['name']] = $FORM->exportValue($_field['name']);
+			$form_data[$_field['name']] = $_element[$_field['name']];
 		}
 		$this->base->utility->smarty->assign('form_data', $form_data);
-		
+		 
 		// fetch mail body
 		$body = $this->base->utility->smarty->fetch($this->getMailTemplateName(),
 			md5($_SERVER['REQUEST_URI']));
@@ -368,7 +389,7 @@ public function render ()
 		
 		// prepare From: address
 		$from = (($this->_generator_form['email_from'] == 'sender@generatorform.wcom') ?
-			$FORM->exportValue('email') : $this->_generator_form['email_from']);
+			$_element['email'] : $this->_generator_form['email_from']);
 		$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
 			null, $from);
 		
@@ -376,7 +397,7 @@ public function render ()
 		$headers = array();
 		$headers['From'] = $from;
 		$headers['Subject'] = $this->_generator_form['email_subject'];
-		$headers['Reply-To'] = $FORM->exportValue('email');
+		$headers['Reply-To'] = $_element['email'];
 		
 		// prepare params
 		$params = array();
@@ -417,7 +438,7 @@ public function render ()
 			}
 		}
 
-		$mime_body = $mime->get();
+		$mime_body = $mime->get(array('text_charset' => 'utf-8'));
 		$mime_headers = $mime->headers($headers);	
 		
 		$MAIL = Mail::factory('mail', $params);
@@ -425,9 +446,11 @@ public function render ()
 		// send mail
 		if ($MAIL->send($recipients, $mime_headers, $mime_body)) {
 			// delete attachment file(s) if exists
-			foreach ($_file as $f) {
-				if(file_exists($f)) {
-					unlink($f);
+			if(!empty($uploadfile)) {
+				foreach ($_file as $f) {
+					if(file_exists($f)) {
+						unlink($f);
+					}
 				}
 			}
 			
@@ -447,16 +470,10 @@ public function render ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
-	
-	$FORM->accept($renderer);
-	
+	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
 	// assign the form to smarty
-	$this->base->utility->smarty->assign('form', $renderer->toArray());
+	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 	// generate captcha if required
 	if ($this->_generator_form['use_captcha'] != 'no') {

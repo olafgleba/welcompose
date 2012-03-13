@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: flickr.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -673,7 +671,7 @@ public function __construct ($cache_dir, $options = array())
 	$this->_cache_dir = $cache_dir;
 	
 	// load PEAR's HTTP_Request
-	require('HTTP/Request.php');
+	require('HTTP/Request2.php');
 	
 	// import options
 	if (array_key_exists('cache_encrypt', $options) && is_bool($options['cache_encrypt'])) {
@@ -963,8 +961,8 @@ private function loadCacheLite ()
 		
 		// load PEAR::Crypt_RC4 if encryption is enabled
 		if ($this->_cache_encrypt) {
-			// load PEAR::Crypt_RC4
-			require('Crypt/Rc4.php');
+			// load PEAR::Crypt_RC42
+			require('Crypt/Rc42.php');
 			
 			// input check
 			if (empty($this->_cache_encrypt_passphrase) || !is_scalar($this->_cache_encrypt_passphrase)) {

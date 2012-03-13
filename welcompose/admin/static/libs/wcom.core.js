@@ -2,7 +2,7 @@
  * Project: Welcompose
  * File: wcom.core.js
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -11,10 +11,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
  
@@ -528,12 +528,24 @@ function Init_load ()
 function Init_getVars ()
 {
 	try {
+		if ($$('.page a').first()) {
+			// Tooltip
+			$$(".page a").each( function(link) {
+				new Tooltip(link, {
+					mouseFollow: false, 
+					opacity: 1, 
+					backgroundColor: '#333',
+					textColor: '#fff', 
+					appearDuration: '0.15'
+				});
+			});
+		}	
 		if ($$('.botbg').first() && !document.getElementById('abbreviations')) {
 			Form.focusFirstElement($$('.botbg').first());
 		}		
 		if (typeof response != 'undefined') {
 			if (response == 1) {
-				if($('rp')) Effect.Fade('rp', {duration: 0.6, delay: 2.0});
+				if($('rp')) Effect.Fade('rp', {duration: 0.4, delay: 1.5});
 			}
 		}
 		if (typeof preview_ctrl != 'undefined') {
@@ -567,10 +579,7 @@ function Init_getVars ()
 			} else {
 				Init.getCbxStatus(checkbox_status);
 			}
-		}		
-		// if ($('page_apply_content') && $F('page_apply_content') == 1) {		
-		// 	Init.getRelatedPages();
-		// }
+		}
 		if ($('page_navigations')) {		
 				Init.getNavigationPages();
 		}
@@ -583,7 +592,7 @@ function Init_getVars ()
 				}
 				// enhance padding on page type event
 				if (pagetype == 'WCOM_EVENT') {
-					$('column').style.paddingTop = '388px';
+					$('column').style.paddingTop = '229px';
 				}
 						
 				this.url = this.parseMedLocalPath + '?page=mediamanager' + '&mm_pagetype=' + pagetype;
@@ -1063,18 +1072,21 @@ function Help_hide (elem)
 		// properties
 		this.elem = elem;
 		this.attr = 'for';
-		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
-		this.processIdAfter = $(this.processId).parentNode.nextSibling;
-	
 		this.elem.className = this.helpClass;
+		this.processId = Helper.getAttrParentNode(this.attr, this.elem, 2);
+		var obj = $(this.processId).parentNode.nextSibling;
 	
-		Effect.Fade(this.processIdAfter,{delay: 0, duration: 0.3});
+		Effect.Fade(obj,{delay: 0, duration: 0.3, 
+			afterFinish: function() {
+				obj.remove();
+			}
+		});
 
 		Help.setCorrespondingFocus(this.elem, this.attr);
 		Element.update(this.elem, this.helpHtmlShow);
 
 		Behaviour.reapply('.' + this.elem.className);
-	
+		
 	} catch (e) {
 		_applyError(e);
 	}
@@ -1094,7 +1106,7 @@ function Help_processHelp (ttarget)
 		if (_req.readyState == 4) {
 			if (_req.status == 200) {
 				Element.insert($(ttarget).parentNode, {'after': _req.responseText});
-				var ttarget_after = $(ttarget).parentNode.nextSibling;			
+				var ttarget_after = $(ttarget).parentNode.nextSibling;
 				Element.hide(ttarget_after);
 				Effect.Appear(ttarget_after,{delay: 0, duration: 0.3});		
 			} else {

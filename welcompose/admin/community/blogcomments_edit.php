@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: blogcomments_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -107,70 +105,65 @@ try {
 		WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('blog_comment', 'post');
-	
+	$FORM = $BASE->utility->loadQuickForm('blog_comment');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'blog_comment_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'blog_comment_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+
 	// textfield for email
-	$FORM->addElement('text', 'email', gettext('E-mail'), 
-		array('id' => 'blog_comment_email', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter a valid email address'), 'email');
-	
+	$email = $FORM->addElement('text', 'email', 
+		array('id' => 'blog_comment_email', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$email->addRule('regex', gettext('Please enter a valid email address'), WCOM_REGEX_EMAIL);
+
 	// textfield for homepage
-	$FORM->addElement('text', 'homepage', gettext('Homepage'), 
-		array('id' => 'blog_comment_homepage', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('homepage', 'trim');
-	$FORM->applyFilter('homepage', 'strip_tags');
-	$FORM->addRule('homepage', gettext('Please enter a valid homepage URL'), 'regex',
-		WCOM_REGEX_URL);
-	
+	$homepage = $FORM->addElement('text', 'homepage', 
+		array('id' => 'blog_comment_homepage', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$homepage->addRule('regex', gettext('Please enter a valid homepage URL'), WCOM_REGEX_URL);
+
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'blog_comment_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
+	$content = $FORM->addElement('textarea', 'content',
+		array('id' => 'blog_comment_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit240'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($blog_comment['id'], null),
 		'name' => Base_Cnc::ifsetor($blog_comment['name'], null),
 		'email' => Base_Cnc::ifsetor($blog_comment['email'], null),
 		'homepage' => Base_Cnc::ifsetor($blog_comment['homepage'], null),
 		'content' => Base_Cnc::ifsetor($blog_comment['content_raw'], null)
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -197,22 +190,22 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['email'] = $FORM->exportValue('email');
-		$sqlData['homepage'] = $FORM->exportValue('homepage');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['email'] = $email->getValue();
+		$sqlData['homepage'] = $homepage->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
 		$sqlData['edited'] = "1";
 		
 		// apply text converter if required
 		if (Base_Cnc::ifsetor($blog_comment['text_converter'], null) > 0) {
 			$sqlData['content'] = $TEXTCONVERTER->applyTextConverter(
 				$blog_comment['text_converter'],
-				$FORM->exportValue('content')
+				$content->getValue()
 			);
 		}
 		
@@ -226,7 +219,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$BLOGCOMMENT->updateBlogComment($FORM->exportValue('id'),
+			$BLOGCOMMENT->updateBlogComment($id->getValue(),
 				$sqlData);
 			
 			// commit

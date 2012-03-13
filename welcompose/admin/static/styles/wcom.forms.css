@@ -3,7 +3,7 @@
  * Project: Welcompose
  * File: wcom.forms.css
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,11 +13,11 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
- * $Id$
- *
+
  * @copyright 2006 clkm
  * @author Cornelia Lange
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -95,6 +95,9 @@ label.cont.h13act {
 padding: 0;
 height: 13em;
 }
+label.cont.h24 {
+height: 24.7em;
+}
 label.cont.h46 {
 height: 46em;
 }
@@ -142,9 +145,13 @@ input.w540,
 input.w580 {
 width: 130px;
 border: 1px solid #666;
-padding: 2px 2px;
+padding: 3px;
 color: #000;
 background: #fff;
+}
+input[type=file] {
+border: 0;
+padding: 0;
 }
 input.w130 {
 width: 130px;
@@ -154,6 +161,7 @@ width: 150px;
 }
 input.w155 {
 width: 155px;
+padding: 2px;
 }
 input.w200 {
 width: 200px;
@@ -177,40 +185,36 @@ width: 580px;
 font-weight: bold;
 }
 textarea {
+float: left;
 border: 1px solid #666;
+padding: 3px;
 }
 textarea.w540h550 {
-float: left;
 width: 540px;
 height: 550px;
-padding: 3px;
 }
 textarea.w540h150 {
-float: left;
 width: 540px;
 height: 150px;
-padding: 3px;
 }
 textarea.w540h50 {
-float: left;
 width: 540px;
 height: 50px;
-padding: 3px;
 }
 textarea.w298h50 {
-float: left;
 width: 298px;
 height: 50px;
-padding: 3px;
 margin: 0;
 }
 select.multisel {
-width: 300px;
+width: 306px;
 border: 1px solid #666;
 }
-select.freesel {
-width: auto;
+select.multisel540 {
+width: 540px;
+border: 1px solid #666;
 }
+
 .flselect {
 margin: 1px 5px 0 0;
 padding: 0;
@@ -267,12 +271,12 @@ margin: 20px 0 0 200px;
 input.submit200 {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
-margin: 20px 0 0 140px;
+margin: 40px 0 0 140px;
 }
 input.submit200go {
 background: #ff620d url(../img/submit200.gif) no-repeat;
 width: 200px;
-margin: 20px 0 0 10px;
+margin: 40px 0 0 10px;
 }
 input.submit200upload {
 background: #ff620d url(../img/submit200.gif) no-repeat;
@@ -300,6 +304,36 @@ width: 240px;
 margin: 20px 0 0 260px;
 }
 
+/* Type Events */
+.datetime_entries label {
+display: inline-block;
+height: 1.5em;
+line-height: 1.5em;
+width: auto;
+margin: 5px 0 0 0;
+}
+.datetime_entries label[for='event_posting_date_start_time_start'] span.bez,
+.datetime_entries label[for='event_posting_date_start_time_end'] span.bez,
+.datetime_entries label[for='event_posting_date_end_time_start'] span.bez,
+.datetime_entries label[for='event_posting_date_end_time_end'] span.bez {
+width: 75px;
+}
+.datetime_entries label[for='event_posting_date_start'],
+.datetime_entries label[for='event_posting_date_end'] {
+width: 320px;
+}
+.datetime_entries label[for='event_posting_date_start_time_start'],
+.datetime_entries label[for='event_posting_date_start_time_end'],
+.datetime_entries label[for='event_posting_date_end_time_start'],
+.datetime_entries label[for='event_posting_date_end_time_end'] 		{
+width: 180px;
+}
+.datetime_entries p.help {
+	float: left;
+	width: 540px!important;
+	clear: both;
+}
+
 /* validate */
 #content span.validate {
 float: left;
@@ -321,6 +355,7 @@ line-height: 1.5em;
 width: 305px;
 margin: 0 0 10px 0;
 padding-left: 140px;
+padding-top: 5px;
 }
 #content p.helpTextarea540, #modalBody p.helpTextarea540 {
 display: block;
@@ -328,6 +363,7 @@ line-height: 1.5em;
 width: 540px;
 margin: 0 0 10px 0;
 padding-left: 140px;
+padding-top: 5px;
 }
 /* for community/settings.php/html -> span class bez260 */
 #content p.helpbez260 {
@@ -336,6 +372,7 @@ line-height: 1.5em;
 width: 305px;
 margin: 0 0 10px 0;
 padding-left: 260px;
+padding-top: 5px;
 }
 
 .iHelp a,
@@ -400,7 +437,7 @@ width:548px;
 }
 .info td {
 color: #000!important;
-padding-left: 0!important;
+padding: 4px 20px 4px 0!important;
 vertical-align: top;
 text-align: left;
 line-height:1.8em;

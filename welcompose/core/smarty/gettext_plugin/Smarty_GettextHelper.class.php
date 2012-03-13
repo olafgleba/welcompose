@@ -4,7 +4,7 @@
  * Project: Smarty::Gettext
  * File: compiler.i18n.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba

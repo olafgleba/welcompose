@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_simple_dates_edit.php
  *
- * Copyright (c) 2009 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2009 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -122,26 +120,27 @@ try {
 		WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('simple_date', 'post');
+	$FORM = $BASE->utility->loadQuickForm('simple_date');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	
 	// hidden for id
 	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
+
 	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
 	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
 	
 	// hidden for page
 	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
+
 	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
 	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
 	
 	// hidden for start
 	$FORM->addElement('hidden', 'start');
-	$FORM->applyFilter('start', 'trim');
-	$FORM->applyFilter('start', 'strip_tags');
+
 	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
 
 	// date element for date_start
@@ -183,54 +182,47 @@ try {
 	// checkbox for sold out
 	$FORM->addElement('checkbox', 'sold_out_1', gettext('Sold out'), null,
 		array('id' => 'simple_date_sold_out_1', 'class' => 'chbx'));
-	$FORM->applyFilter('sold_out_1', 'trim');
-	$FORM->applyFilter('sold_out_1', 'strip_tags');
+
 	$FORM->addRule('sold_out_1', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
 	$FORM->addElement('checkbox', 'sold_out_2', gettext('Sold out'), null,
 		array('id' => 'simple_date_sold_out_2', 'class' => 'chbx'));
-	$FORM->applyFilter('sold_out_2', 'trim');
-	$FORM->applyFilter('sold_out_2', 'strip_tags');
+
 	$FORM->addRule('sold_out_2', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 		
 	$FORM->addElement('checkbox', 'sold_out_3', gettext('Sold out'), null,
 		array('id' => 'simple_date_sold_out_3', 'class' => 'chbx'));
-	$FORM->applyFilter('sold_out_3', 'trim');
-	$FORM->applyFilter('sold_out_3', 'strip_tags');
+
 	$FORM->addRule('sold_out_3', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// select for text_converter
 	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
 		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'simple_date_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
+
 	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
 		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
 	
 	// checkbox for apply_macros
 	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
 		array('id' => 'simple_date_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
+
 	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for draft
 	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
 		array('id' => 'simple_date_draft', 'class' => 'chbx'));
-	$FORM->applyFilter('draft', 'trim');
-	$FORM->applyFilter('draft', 'strip_tags');
+
 	$FORM->addRule('draft', gettext('The field whether the date is a draft accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for ping
 	$FORM->addElement('checkbox', 'ping', gettext('Ping'), null,
 		array('id' => 'simple_date_ping', 'class' => 'chbx'));
-	$FORM->applyFilter('ping', 'trim');
-	$FORM->applyFilter('ping', 'strip_tags');
+
 	$FORM->addRule('ping', gettext('The field whether a ping should be issued accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
@@ -266,17 +258,9 @@ try {
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -322,7 +306,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();

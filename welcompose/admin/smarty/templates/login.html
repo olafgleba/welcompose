@@ -1,7 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<!DOCTYPE html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="language" content="de" />
@@ -43,10 +40,10 @@
 
 {$form.hidden}
 
-<label class="cont" for="user_login"><span class="bez">{$form.email.label}</span>
+<label class="cont" for="user_login"><span class="bez">{$form.email.label}{if $form.email.required}{if $form.email.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if}</span>
 {$form.email.html}</label>
 
-<label class="cont" for="user_secret"><span class="bez">{$form.secret.label}</span>
+<label class="cont" for="user_secret"><span class="bez">{$form.secret.label}{if $form.secret.required}{if $form.secret.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if}</span>
 {$form.secret.html}</label>
 
 {$form.submit.html}

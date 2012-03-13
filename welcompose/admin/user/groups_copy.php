@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: groups_copy.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id: groups_edit.php 901 2007-02-17 21:50:34Z andreas $
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -118,65 +116,61 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('group', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GROUP);
+	$FORM = $BASE->utility->loadQuickForm('group');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
-	
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+		
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', WCOM_REGEX_GROUP_NAME);
-	$FORM->addRule('name', gettext('A group with this name already exists'), 'testForNameUniqueness',
-		$FORM->exportValue('id'));
-	
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'group_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('regex', gettext('Please enter a valid name'), WCOM_REGEX_GROUP_NAME);
+	$name->addRule('callback', gettext('A group with the given name already exists'), 
+		array(
+			'callback' => array($GROUP, 'testForUniqueName')
+		)
+	);
+		
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'group_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
-	// multi select for rights
-	$multi_select = $FORM->addElement('select', 'rights', gettext('Rights'), $rights,
-		array('id' => 'group_rights', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
-	$multi_select->setSelected($selected_rights);
-	$FORM->addRule('rights', gettext('Selected right is out of range'), 'in_array_keys',
-		$rights);
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'group_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
+	// select for rights	
+	$rights = $FORM->addElement('select', 'rights',
+	 	array('id' => 'group_rights', 'class' => 'multisel540', 'multiple' => 'multiple', 'size' => 20),
+		array('label' => gettext('Rights'), 'options' => $rights)
+		);
+	$rights->setValue($selected_rights);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Duplicate group'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Duplicate group'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($group['id'], null),
 		'name' => Base_Cnc::ifsetor($group['name'], null),
 		'description' => Base_Cnc::ifsetor($group['description'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -195,7 +189,7 @@ try {
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('user/groups_edit.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('user/groups_copy.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
@@ -203,13 +197,13 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the user group
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['description'] = $FORM->exportValue('description');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['description'] = $description->getValue();
 		$sqlData['editable'] = "1";
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
@@ -226,7 +220,7 @@ try {
 			$group_id = $GROUP->addGroup($sqlData);
 			
 			// map group to rights
-			$GROUP->mapGroupToRights($group_id, $FORM->exportValue('rights'));
+			$GROUP->mapGroupToRights($group_id, $rights->getValue());
 			
 			// commit
 			$BASE->db->commit();

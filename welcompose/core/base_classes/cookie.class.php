@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: cookie.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,12 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
  * $Id: cookie.class.php 48 2007-01-19 15:49:28Z andreas $
  * 
- * @copyright 2008 creatics, Olaf Gleba
+ ** 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -82,8 +82,8 @@ public function __construct($app_key, $cookie_name)
 	// load cnc class
 	require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'cnc.class.php');
 	
-	// load PEAR::Crypt_RC4
-	require_once('Crypt/Rc4.php');
+	// load PEAR::Crypt_RC42
+	require_once('Crypt/RC42.php');
 	
 	// input check
 	if (empty($app_key) || !is_scalar($app_key)) {
@@ -96,8 +96,8 @@ public function __construct($app_key, $cookie_name)
 	$this->_app_key = $app_key;
 	$this->_cookie_name = $cookie_name;
 	
-	// create instance of PEAR::Crypt_RC4
-	$this->rc4 = new Crypt_RC4($this->_app_key);
+	// create instance of PEAR::Crypt_RC42
+	$this->rc42 = new Crypt_RC42($this->_app_key);
 	
 	// get cookie data
 	$this->readCookieData();
@@ -169,7 +169,7 @@ protected function writeCookieData ()
 	}
 	
 	// use current app key
-	$this->rc4->setKey($this->_app_key);
+	$this->rc42->key($this->_app_key);
 	
 	// serialize cookie data
 	$data = serialize($this->_data);
@@ -178,7 +178,7 @@ protected function writeCookieData ()
 	$fingerprint = sha1($this->_app_key.$data);
 	
 	// encrypt cookie data
-	$this->rc4->crypt($data);
+	$this->rc42->encrypt($data);
 	
 	// make encrypted data cookie safe and encode it with base64
 	$data = base64_encode($data);
@@ -213,7 +213,7 @@ protected function readCookieData ()
 	}
 	
 	// use current app key
-	$this->rc4->setKey($this->_app_key);
+	$this->rc42->key($this->_app_key);
 	
 	// get cookie data
 	$data = Base_Cnc::ifsetor($_COOKIE[$this->_cookie_name], null);
@@ -222,7 +222,7 @@ protected function readCookieData ()
 	$data = base64_decode($data);
 	
 	// decrypt cookie data
-	$this->rc4->decrypt($data);
+	$this->rc42->decrypt($data);
 	
 	// let's see if the fingerprint matches the decrypted data
 	if (Base_Cnc::ifsetor($_COOKIE["_fingerprint_".$this->_cookie_name], null) !== sha1($this->_app_key.$data)) {

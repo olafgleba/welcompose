@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript">
 var response = '{if isset($session.response)}{$session.response}{/if}';
@@ -21,6 +22,7 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -111,9 +113,9 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 <td class="page"><a href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_global_file.name|escape:"html"}</a></td>
 <td>{$_global_file.description|escape:"html"}</td>
 <td>{if !empty($_global_file.name_on_disk)}{i18n available}{else}{i18n not available}{/if}</td>
-<td><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n Upload}"></a></td>
-<td><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n Download}"></a></td>
-<td><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n Upload}"></a></td>
+<td class="page"><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n Download}"></a></td>
+<td class="page"><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete entry}"></a></td>
 </tr>
 <tr id="o_{$_global_file.id}" class="outer">
 <td colspan="6">

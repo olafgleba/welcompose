@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pingservices_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -99,63 +97,59 @@ try {
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('ping_service', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $PINGSERVICE);
+	$FORM = $BASE->utility->loadQuickForm('ping_service');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'ping_service_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A ping service with the given name already exists'), 'testForNameUniqueness');
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'ping_service_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('callback', gettext('A ping service with the given name already exists'), 
+		array(
+			'callback' => array($PINGSERVICE, 'testForUniqueName')
+		)
+	);
 	
 	// textfield for host
-	$FORM->addElement('text', 'host', gettext('Host'), 
-		array('id' => 'ping_service_host', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('host', 'trim');
-	$FORM->applyFilter('host', 'strip_tags');
-	$FORM->addRule('host', gettext('Please enter a host name'), 'required');
-	$FORM->addRule('host', gettext('Please enter a valid host name'), 'regex',
-		WCOM_REGEX_PING_SERVICE_HOST);
+	$host = $FORM->addElement('text', 'host', 
+		array('id' => 'ping_service_host', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Host'))
+		);
+	$host->addRule('required', gettext('Please enter a host name'));
+	$host->addRule('regex', gettext('Please enter a valid host name'), WCOM_REGEX_PING_SERVICE_HOST);
 	
-	// textfield for port
-	$FORM->addElement('text', 'port', gettext('Port'), 
-		array('id' => 'ping_service_port', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('port', 'trim');
-	$FORM->applyFilter('port', 'strip_tags');
-	$FORM->addRule('port', gettext('Please enter a port number'), 'required');
-	$FORM->addRule('port', gettext('Please enter a valid port number'), 'regex',
-		WCOM_REGEX_NUMERIC);
+	// textfield for port		
+	$port = $FORM->addElement('text', 'port', 
+		array('id' => 'ping_service_port', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Port'))
+		);
+	$port->addRule('required', gettext('Please enter a port number'));
+	$port->addRule('regex', gettext('Please enter a valid port number'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for path
-	$FORM->addElement('text', 'path', gettext('Path'), 
-		array('id' => 'ping_service_path', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('path', 'trim');
-	$FORM->applyFilter('path', 'strip_tags');
-	$FORM->addRule('path', gettext('Please enter a request path'), 'required');
-	$FORM->addRule('path', gettext('Please enter a valid request path'), 'regex',
-		WCOM_REGEX_PING_SERVICE_PATH);
-	
+	$path = $FORM->addElement('text', 'path', 
+		array('id' => 'ping_service_path', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Path'))
+		);
+	$path->addRule('required', gettext('Please enter a request path'));
+	$path->addRule('regex', gettext('Please enter a valid request path'), WCOM_REGEX_PING_SERVICE_PATH);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -195,15 +189,15 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['host'] = $FORM->exportValue('host');
-		$sqlData['port'] = $FORM->exportValue('port');
-		$sqlData['path'] = $FORM->exportValue('path');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['host'] = $host->getValue();
+		$sqlData['port'] = $port->getValue();
+		$sqlData['path'] = $path->getValue();
 		
 		// check sql data
 		$HELPER = load('utility:helper');

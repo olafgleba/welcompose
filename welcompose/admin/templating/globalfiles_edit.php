@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: globalfiles_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -103,60 +101,55 @@ try {
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
 	// get global file
-	$file = $GLOBALFILE->selectGlobalFile(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
+	$globalfile = $GLOBALFILE->selectGlobalFile(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('global_file', 'post');
-	
+	$FORM = $BASE->utility->loadQuickForm('global_file');
+	$FORM->setAttribute('enctype', 'multipart/form-data');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for start
-	$FORM->addElement('hidden', 'start');
-	$FORM->applyFilter('start', 'trim');
-	$FORM->applyFilter('start', 'strip_tags');
-	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
-	
+	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
+	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
+		
 	// file upload field
-	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
-		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit200'));
-	
+	$file = $FORM->addElement('file', 'file', 
+		array('id' => 'global_file_file'),
+		array('label' => gettext('File'))
+		);
+		
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'global_file_description', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'global_file_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
+	// submit button
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
-		'id' => Base_Cnc::ifsetor($file['id'], null),
-		'description' => Base_Cnc::ifsetor($file['description'], null)
-	));
+		'id' => Base_Cnc::ifsetor($globalfile['id'], null),
+		'description' => Base_Cnc::ifsetor($globalfile['description'], null)
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -171,7 +164,7 @@ try {
 	    $BASE->utility->smarty->assign('session', $session);
 	
 	    // assign file array 
-		$BASE->utility->smarty->assign('file', $file);
+		$BASE->utility->smarty->assign('file', $globalfile);
 
 	    // empty $_SESSION
 	    if (!empty($_SESSION['response'])) {
@@ -199,7 +192,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// handle changes of the description field
 		try {
@@ -208,7 +201,7 @@ try {
 	
 			// prepare sql data
 			$sqlData = array(
-				'description' => $FORM->exportValue('description')
+				'description' => $description->getValue()
 			);
 
 			// check sql data
@@ -216,7 +209,7 @@ try {
 			$HELPER->testSqlDataForPearErrors($sqlData);
 	
 			// update row
-			$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
+			$GLOBALFILE->updateGlobalFile($id->getValue(), $sqlData);
 	
 			// commit
 			$BASE->db->commit();
@@ -229,22 +222,24 @@ try {
 		}
 		
 		// handle file upload
-		if ($file_upload->isUploadedFile()) {
-			// get file data
-			$data = $file_upload->getValue();
-			
-			// clean file data
-			foreach ($data as $_key => $_value) {
-				$data[$_key] = trim(strip_tags($_value));
-			}
+		// get file data
+		$data = $file->getValue();
+		
+		// clean file data
+		foreach ($data as $_key => $_value) {
+			$data[$_key] = trim(strip_tags($_value));
+		}
+		
+		// file available to upload?
+		if (!empty($data['name'])) {
 			
 			// test if a file with prepared file name exits already
-			$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], $FORM->exportValue('id'), 'edit');
+			$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], $id->getValue(), 'edit');
 			
 			if ($check_global_file === true) {
 			
 				// remove old file from file store
-				$GLOBALFILE->removeGlobalFileFromStore($FORM->exportValue('id'));
+				$GLOBALFILE->removeGlobalFileFromStore($id->getValue());
 			
 				// move file to file store
 				$name_on_disk = $GLOBALFILE->moveGlobalFileToStore($data['name'], $data['tmp_name']);
@@ -262,7 +257,7 @@ try {
 					$BASE->db->begin();
 				
 					// update row
-					$GLOBALFILE->updateGlobalFile($FORM->exportValue('id'), $sqlData);
+					$GLOBALFILE->updateGlobalFile($id->getValue(), $sqlData);
 				
 					// commit
 					$BASE->db->commit();
@@ -275,7 +270,7 @@ try {
 				}
 		
 				// save request start range
-				$start = $FORM->exportValue('start');
+				$start = $start->getValue();
 				$start = (!empty($start)) ? $start : 0;
 				
 			} else {
@@ -298,7 +293,7 @@ try {
 			exit;
 		} else {
 			// redirect
-			header("Location: globalfiles_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: globalfiles_edit.php?id=".$id->getValue());
 			exit;
 		}
 					

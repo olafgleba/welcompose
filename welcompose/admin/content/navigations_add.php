@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: navigations_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -99,36 +97,35 @@ try {
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('navigation', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $NAVIGATION);
-	
+	$FORM = $BASE->utility->loadQuickForm('navigation');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'navigation_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A navigation with this name already exists'), 'testForNameUniqueness');
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'navigation_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('callback', gettext('A navigation with this name already exists'), 
+		array(
+			'callback' => array($NAVIGATION, 'testForUniqueName')
+		)
+	);
 
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -168,12 +165,12 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data for navigation create
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
-		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['name'] = $name->getValue();
 		
 		// check sql data
 		$HELPER = load('utility:helper');

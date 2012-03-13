@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: antispamplugins_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -128,170 +126,145 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('community_settings', 'post');
+	$FORM = $BASE->utility->loadQuickForm('community_settings');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+	
+	// Comments
 		
 	// select for comment display status
-	$FORM->addElement('select', 'blog_comment_display_status', gettext('Display status'),
-		$blog_comment_statuses, array('id' => 'community_settings_blog_comment_display_status'));
-	$FORM->applyFilter('blog_comment_display_status', 'trim');
-	$FORM->applyFilter('blog_comment_display_status', 'strip_tags');
-	$FORM->addRule('blog_comment_display_status', gettext('Chosen comment display status is out of range'),
-		'in_array_keys', $blog_comment_statuses);
+	$blog_comment_display_status = $FORM->addElement('select', 'blog_comment_display_status',
+	 	array('id' => 'community_settings_blog_comment_display_status'),
+		array('label' => gettext('Display status'), 'options' => $blog_comment_statuses)
+		);
 	
 	// select for comment default status
-	$FORM->addElement('select', 'blog_comment_default_status', gettext('Default status'),
-		$blog_comment_statuses, array('id' => 'community_settings_blog_comment_default_status'));
-	$FORM->applyFilter('blog_comment_default_status', 'trim');
-	$FORM->applyFilter('blog_comment_default_status', 'strip_tags');
-	$FORM->addRule('blog_comment_default_status', gettext('Chosen comment default status is out of range'),
-		'in_array_keys', $blog_comment_statuses);
+	$blog_comment_default_status = $FORM->addElement('select', 'blog_comment_default_status',
+	 	array('id' => 'community_settings_blog_comment_default_status'),
+		array('label' => gettext('Default status'), 'options' => $blog_comment_statuses)
+		);
 	
 	// select for comment spam status
-	$FORM->addElement('select', 'blog_comment_spam_status', gettext('Spam status'),
-		$blog_comment_statuses, array('id' => 'community_settings_blog_comment_spam_status'));
-	$FORM->applyFilter('blog_comment_spam_status', 'trim');
-	$FORM->applyFilter('blog_comment_spam_status', 'strip_tags');
-	$FORM->addRule('blog_comment_spam_status', gettext('Chosen comment spam status is out of range'),
-		'in_array_keys', $blog_comment_statuses);
+	$blog_comment_spam_status = $FORM->addElement('select', 'blog_comment_spam_status',
+	 	array('id' => 'community_settings_blog_comment_spam_status'),
+		array('label' => gettext('Spam status'), 'options' => $blog_comment_statuses)
+		);
 	
 	// select for comment ham status
-	$FORM->addElement('select', 'blog_comment_ham_status', gettext('Ham status'),
-		$blog_comment_statuses, array('id' => 'community_settings_blog_comment_ham_status'));
-	$FORM->applyFilter('blog_comment_ham_status', 'trim');
-	$FORM->applyFilter('blog_comment_ham_status', 'strip_tags');
-	$FORM->addRule('blog_comment_ham_status', gettext('Chosen comment ham status is out of range'),
-		'in_array_keys', $blog_comment_statuses);
+	$blog_comment_ham_status = $FORM->addElement('select', 'blog_comment_ham_status',
+	 	array('id' => 'community_settings_blog_comment_ham_status'),
+		array('label' => gettext('Ham status'), 'options' => $blog_comment_statuses)
+		);
 	
-	// select for comment ham status
-	$FORM->addElement('select', 'blog_comment_use_captcha', gettext('Use captcha'),
-		$captcha_types, array('id' => 'community_settings_blog_comment_use_captcha'));
-	$FORM->applyFilter('blog_comment_use_captcha', 'trim');
-	$FORM->applyFilter('blog_comment_use_captcha', 'strip_tags');
-	$FORM->addRule('blog_comment_use_captcha', gettext('Chosen captcha type is out of range'),
-		'in_array_keys', $captcha_types);
+	// select for wether to use captcha or not
+	$blog_comment_use_captcha = $FORM->addElement('select', 'blog_comment_use_captcha',
+	 	array('id' => 'community_settings_blog_comment_use_captcha'),
+		array('label' => gettext('Use captcha'), 'options' => $captcha_types)
+		);
 	
 	// textfield for timeframe threshold
-	$FORM->addElement('text', 'blog_comment_timeframe_threshold', gettext('Timeframe threshold'), 
-		array('id' => 'community_settings_blog_comment_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_comment_timeframe_threshold', 'trim');
-	$FORM->applyFilter('blog_comment_timeframe_threshold', 'strip_tags');
-	$FORM->addRule('blog_comment_timeframe_threshold',
-		gettext('Please enter a comment timeframe threshold'), 'required');
-	$FORM->addRule('blog_comment_timeframe_threshold',
-		gettext('Please enter a numeric comment timeframe threshold'), 'numeric');
+	$blog_comment_timeframe_threshold = $FORM->addElement('text', 'blog_comment_timeframe_threshold', 
+		array('id' => 'community_settings_blog_comment_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Timeframe threshold'))
+		);
+	$blog_comment_timeframe_threshold->addRule('required', gettext('Please enter a comment timeframe threshold'));
+	$blog_comment_timeframe_threshold->addRule('regex', gettext('Please enter a numeric comment timeframe threshold'), WCOM_REGEX_NUMERIC);
 	
 	// checkbox for enable autolearn
-	$FORM->addElement('checkbox', 'blog_comment_bayes_autolearn', gettext('Enable Bayes autolearning'), null,
-		array('id' => 'community_settings_blog_comment_bayes_autolearn', 'class' => 'chbx'));
-	$FORM->applyFilter('blog_comment_bayes_autolearn', 'trim');
-	$FORM->applyFilter('blog_comment_bayes_autolearn', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether autolearning is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$blog_comment_bayes_autolearn = $FORM->addElement('checkbox', 'blog_comment_bayes_autolearn',
+		array('id' => 'community_settings_blog_comment_bayes_autolearn', 'class' => 'chbx'),
+		array('label' => gettext('Enable Bayes autolearning'))
+		);
+	$blog_comment_bayes_autolearn->addRule('regex', gettext('The field whether autolearning is enabled accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for bayes autolearn threshold
-	$FORM->addElement('text', 'blog_comment_bayes_autolearn_threshold', gettext('Bayes autolearn threshold'), 
-		array('id' => 'community_settings_blog_comment_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_comment_bayes_autolearn_threshold', 'trim');
-	$FORM->applyFilter('blog_comment_bayes_autolearn_threshold', 'strip_tags');
-	$FORM->addRule('blog_comment_bayes_autolearn_threshold',
-		gettext('Please enter a comment bayes autolearn threshold'), 'required');
-	$FORM->addRule('blog_comment_bayes_autolearn_threshold',
-		gettext('Please enter a numeric comment bayes autolearn threshold'), 'numeric');
-	
+	$blog_comment_bayes_autolearn_threshold = $FORM->addElement('text', 'blog_comment_bayes_autolearn_threshold', 
+		array('id' => 'community_settings_blog_comment_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Bayes autolearn threshold'))
+		);
+	$blog_comment_bayes_autolearn_threshold->addRule('required', gettext('Please enter a comment bayes autolearn threshold'));
+	$blog_comment_bayes_autolearn_threshold->addRule('regex', gettext('Please enter a numeric comment bayes autolearn threshold'), WCOM_REGEX_BAYES);
+
 	// textfield for bayes spam threshold
-	$FORM->addElement('text', 'blog_comment_bayes_spam_threshold', gettext('Bayes spam threshold'), 
-		array('id' => 'community_settings_blog_comment_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_comment_bayes_spam_threshold', 'trim');
-	$FORM->applyFilter('blog_comment_bayes_spam_threshold', 'strip_tags');
-	$FORM->addRule('blog_comment_bayes_spam_threshold',
-		gettext('Please enter a comment bayes spam threshold'), 'required');
-	$FORM->addRule('blog_comment_bayes_spam_threshold',
-		gettext('Please enter a numeric comment bayes spam threshold'), 'numeric');
+	$blog_comment_bayes_spam_threshold = $FORM->addElement('text', 'blog_comment_bayes_spam_threshold', 
+		array('id' => 'community_settings_blog_comment_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Bayes spam threshold'))
+		);
+	$blog_comment_bayes_spam_threshold->addRule('required', gettext('Please enter a comment bayes spam threshold'));
+	$blog_comment_bayes_spam_threshold->addRule('regex', gettext('Please enter a numeric comment bayes spam threshold'), WCOM_REGEX_BAYES);
 	
 	// select for comment text converter
-	$FORM->addElement('select', 'blog_comment_text_converter', gettext('Text converter to apply'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'community_settings_blog_comment_text_converter'));
-	$FORM->applyFilter('blog_comment_text_converter', 'trim');
-	$FORM->applyFilter('blog_comment_text_converter', 'strip_tags');
-	$FORM->addRule('blog_comment_text_converter', gettext('Chosen blog comment text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
+	$blog_comment_text_converter = $FORM->addElement('select', 'blog_comment_text_converter',
+	 	array('id' => 'community_settings_blog_comment_text_converter'),
+		array('label' => gettext('Text converter to apply'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
+		
+		// Trackbacks
+		
 	// select for trackback display status
-	$FORM->addElement('select', 'blog_trackback_display_status', gettext('Display status'),
-		$blog_trackback_statuses, array('id' => 'community_settings_blog_trackback_display_status'));
-	$FORM->applyFilter('blog_trackback_display_status', 'trim');
-	$FORM->applyFilter('blog_trackback_display_status', 'strip_tags');
-	$FORM->addRule('blog_trackback_display_status', gettext('Chosen trackback display status is out of range'),
-		'in_array_keys', $blog_trackback_statuses);
-
+	$blog_trackback_display_status = $FORM->addElement('select', 'blog_trackback_display_status',
+	 	array('id' => 'community_settings_blog_trackback_display_status'),
+		array('label' => gettext('Display status'), 'options' => $blog_trackback_statuses)
+		);
+	
 	// select for trackback default status
-	$FORM->addElement('select', 'blog_trackback_default_status', gettext('Default status'),
-		$blog_trackback_statuses, array('id' => 'community_settings_blog_trackback_default_status'));
-	$FORM->applyFilter('blog_trackback_default_status', 'trim');
-	$FORM->applyFilter('blog_trackback_default_status', 'strip_tags');
-	$FORM->addRule('blog_trackback_default_status', gettext('Chosen trackback default status is out of range'),
-		'in_array_keys', $blog_trackback_statuses);
-
+	$blog_trackback_default_status = $FORM->addElement('select', 'blog_trackback_default_status',
+	 	array('id' => 'community_settings_blog_trackback_default_status'),
+		array('label' => gettext('Default status'), 'options' => $blog_trackback_statuses)
+		);
+	
 	// select for trackback spam status
-	$FORM->addElement('select', 'blog_trackback_spam_status', gettext('Spam status'),
-		$blog_trackback_statuses, array('id' => 'community_settings_blog_trackback_spam_status'));
-	$FORM->applyFilter('blog_trackback_spam_status', 'trim');
-	$FORM->applyFilter('blog_trackback_spam_status', 'strip_tags');
-	$FORM->addRule('blog_trackback_spam_status', gettext('Chosen trackback spam status is out of range'),
-		'in_array_keys', $blog_trackback_statuses);
-
+	$blog_trackback_spam_status = $FORM->addElement('select', 'blog_trackback_spam_status',
+	 	array('id' => 'community_settings_blog_trackback_spam_status'),
+		array('label' => gettext('Spam status'), 'options' => $blog_trackback_statuses)
+		);
+	
 	// select for trackback ham status
-	$FORM->addElement('select', 'blog_trackback_ham_status', gettext('Ham status'),
-		$blog_trackback_statuses, array('id' => 'community_settings_blog_trackback_ham_status'));
-	$FORM->applyFilter('blog_trackback_ham_status', 'trim');
-	$FORM->applyFilter('blog_trackback_ham_status', 'strip_tags');
-	$FORM->addRule('blog_trackback_ham_status', gettext('Chosen trackback ham status is out of range'),
-		'in_array_keys', $blog_trackback_statuses);
+	$blog_trackback_ham_status = $FORM->addElement('select', 'blog_trackback_ham_status',
+	 	array('id' => 'community_settings_blog_trackback_ham_status'),
+		array('label' => gettext('Ham status'), 'options' => $blog_trackback_statuses)
+		);
+		
 			
 	// textfield for timeframe threshold
-	$FORM->addElement('text', 'blog_trackback_timeframe_threshold', gettext('Timeframe threshold'), 
-		array('id' => 'community_settings_blog_trackback_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_trackback_timeframe_threshold', 'trim');
-	$FORM->applyFilter('blog_trackback_timeframe_threshold', 'strip_tags');
-	$FORM->addRule('blog_trackback_timeframe_threshold',
-		gettext('Please enter a trackback timeframe threshold'), 'required');
-	$FORM->addRule('blog_trackback_timeframe_threshold',
-		gettext('Please enter a numeric trackback timeframe threshold'), 'numeric');
-
+	$blog_trackback_timeframe_threshold = $FORM->addElement('text', 'blog_trackback_timeframe_threshold', 
+		array('id' => 'community_settings_blog_trackback_timeframe_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Timeframe threshold'))
+		);
+	$blog_trackback_timeframe_threshold->addRule('required', gettext('Please enter a trackback timeframe threshold'));
+	$blog_trackback_timeframe_threshold->addRule('regex', gettext('Please enter a numeric trackback timeframe threshold'), WCOM_REGEX_NUMERIC);
+	
 	// checkbox for enable autolearn
-	$FORM->addElement('checkbox', 'blog_trackback_bayes_autolearn', gettext('Enable Bayes autolearning'), null,
-		array('id' => 'community_settings_blog_trackback_bayes_autolearn', 'class' => 'chbx'));
-	$FORM->applyFilter('blog_trackback_bayes_autolearn', 'trim');
-	$FORM->applyFilter('blog_trackback_bayes_autolearn', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether autolearning is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-
+	$blog_trackback_bayes_autolearn = $FORM->addElement('checkbox', 'blog_trackback_bayes_autolearn',
+		array('id' => 'community_settings_blog_trackback_bayes_autolearn', 'class' => 'chbx'),
+		array('label' => gettext('Enable Bayes autolearning'))
+		);
+	$blog_trackback_bayes_autolearn->addRule('regex', gettext('The field whether autolearning is enabled accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+	
 	// textfield for bayes autolearn threshold
-	$FORM->addElement('text', 'blog_trackback_bayes_autolearn_threshold', gettext('Bayes autolearn threshold'), 
-		array('id' => 'community_settings_blog_trackback_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_trackback_bayes_autolearn_threshold', 'trim');
-	$FORM->applyFilter('blog_trackback_bayes_autolearn_threshold', 'strip_tags');
-	$FORM->addRule('blog_trackback_bayes_autolearn_threshold',
-		gettext('Please enter a trackback bayes autolearn threshold'), 'required');
-	$FORM->addRule('blog_trackback_bayes_autolearn_threshold',
-		gettext('Please enter a numeric trackback bayes autolearn threshold'), 'numeric');
+	$blog_trackback_bayes_autolearn_threshold = $FORM->addElement('text', 'blog_trackback_bayes_autolearn_threshold', 
+		array('id' => 'community_settings_blog_trackback_bayes_autolearn_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Bayes autolearn threshold'))
+		);
+	$blog_trackback_bayes_autolearn_threshold->addRule('required', gettext('Please enter a trackback bayes autolearn threshold'));
+	$blog_trackback_bayes_autolearn_threshold->addRule('regex', gettext('Please enter a numeric trackback bayes autolearn threshold'), WCOM_REGEX_BAYES);
 
 	// textfield for bayes spam threshold
-	$FORM->addElement('text', 'blog_trackback_bayes_spam_threshold', gettext('Bayes spam threshold'), 
-		array('id' => 'community_settings_blog_trackback_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('blog_trackback_bayes_spam_threshold', 'trim');
-	$FORM->applyFilter('blog_trackback_bayes_spam_threshold', 'strip_tags');
-	$FORM->addRule('blog_trackback_bayes_spam_threshold',
-		gettext('Please enter a trackback bayes spam threshold'), 'required');
-	$FORM->addRule('blog_trackback_bayes_spam_threshold',
-		gettext('Please enter a numeric trackback bayes spam threshold'), 'numeric');
+	$blog_trackback_bayes_spam_threshold = $FORM->addElement('text', 'blog_trackback_bayes_spam_threshold', 
+		array('id' => 'community_settings_blog_trackback_bayes_spam_threshold', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Bayes spam threshold'))
+		);
+	$blog_trackback_bayes_spam_threshold->addRule('required', gettext('Please enter a trackback bayes spam threshold'));
+	$blog_trackback_bayes_spam_threshold->addRule('regex', gettext('Please enter a numeric trackback bayes spam threshold'), WCOM_REGEX_BAYES);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit240bez260'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit240bez260', 'value' => gettext('Save edit'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'blog_comment_display_status' => Base_Cnc::ifsetor($settings['blog_comment_display_status'], null),
 		'blog_comment_default_status' => Base_Cnc::ifsetor($settings['blog_comment_default_status'], null),
 		'blog_comment_spam_status' => Base_Cnc::ifsetor($settings['blog_comment_spam_status'], null),
@@ -310,23 +283,15 @@ try {
 		'blog_trackback_bayes_autolearn' => Base_Cnc::ifsetor($settings['blog_trackback_bayes_autolearn'], null),
 		'blog_trackback_bayes_autolearn_threshold' => Base_Cnc::ifsetor($settings['blog_trackback_bayes_autolearn_threshold'], null),
 		'blog_trackback_bayes_spam_threshold' => Base_Cnc::ifsetor($settings['blog_trackback_bayes_spam_threshold'], null)
-	));
+	)));
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -366,28 +331,28 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['blog_comment_display_status'] = $FORM->exportValue('blog_comment_display_status');
-		$sqlData['blog_comment_default_status'] = $FORM->exportValue('blog_comment_default_status');
-		$sqlData['blog_comment_spam_status'] = $FORM->exportValue('blog_comment_spam_status');
-		$sqlData['blog_comment_ham_status'] = $FORM->exportValue('blog_comment_ham_status');
-		$sqlData['blog_comment_use_captcha'] = $FORM->exportValue('blog_comment_use_captcha');
-		$sqlData['blog_comment_timeframe_threshold'] = $FORM->exportValue('blog_comment_timeframe_threshold');
-		$sqlData['blog_comment_bayes_autolearn'] = (string)intval($FORM->exportValue('blog_comment_bayes_autolearn'));
-		$sqlData['blog_comment_bayes_autolearn_threshold'] = $FORM->exportValue('blog_comment_bayes_autolearn_threshold');
-		$sqlData['blog_comment_bayes_spam_threshold'] = $FORM->exportValue('blog_comment_bayes_spam_threshold');
-		$sqlData['blog_comment_text_converter'] = $FORM->exportValue('blog_comment_text_converter');
-		$sqlData['blog_trackback_display_status'] = $FORM->exportValue('blog_trackback_display_status');
-		$sqlData['blog_trackback_default_status'] = $FORM->exportValue('blog_trackback_default_status');
-		$sqlData['blog_trackback_spam_status'] = $FORM->exportValue('blog_trackback_spam_status');
-		$sqlData['blog_trackback_ham_status'] = $FORM->exportValue('blog_trackback_ham_status');
-		$sqlData['blog_trackback_timeframe_threshold'] = $FORM->exportValue('blog_trackback_timeframe_threshold');
-		$sqlData['blog_trackback_bayes_autolearn'] = (string)intval($FORM->exportValue('blog_trackback_bayes_autolearn'));
-		$sqlData['blog_trackback_bayes_autolearn_threshold'] = $FORM->exportValue('blog_trackback_bayes_autolearn_threshold');
-		$sqlData['blog_trackback_bayes_spam_threshold'] = $FORM->exportValue('blog_trackback_bayes_spam_threshold');
+		$sqlData['blog_comment_display_status'] = $blog_comment_display_status->getValue();
+		$sqlData['blog_comment_default_status'] = $blog_comment_default_status->getValue();
+		$sqlData['blog_comment_spam_status'] = $blog_comment_spam_status->getValue();
+		$sqlData['blog_comment_ham_status'] = $blog_comment_ham_status->getValue();
+		$sqlData['blog_comment_use_captcha'] = $blog_comment_use_captcha->getValue();
+		$sqlData['blog_comment_timeframe_threshold'] = $blog_comment_timeframe_threshold->getValue();
+		$sqlData['blog_comment_bayes_autolearn'] = (string)intval($blog_comment_bayes_autolearn->getValue());
+		$sqlData['blog_comment_bayes_autolearn_threshold'] = $blog_comment_bayes_autolearn_threshold->getValue();
+		$sqlData['blog_comment_bayes_spam_threshold'] = $blog_comment_bayes_spam_threshold->getValue();
+		$sqlData['blog_comment_text_converter'] = $blog_comment_text_converter->getValue();
+		$sqlData['blog_trackback_display_status'] = $blog_trackback_display_status->getValue();
+		$sqlData['blog_trackback_default_status'] = $blog_trackback_default_status->getValue();
+		$sqlData['blog_trackback_spam_status'] = $blog_trackback_spam_status->getValue();
+		$sqlData['blog_trackback_ham_status'] = $blog_trackback_ham_status->getValue();
+		$sqlData['blog_trackback_timeframe_threshold'] = $blog_trackback_timeframe_threshold->getValue();
+		$sqlData['blog_trackback_bayes_autolearn'] = (string)intval($blog_trackback_bayes_autolearn->getValue());
+		$sqlData['blog_trackback_bayes_autolearn_threshold'] = $blog_trackback_bayes_autolearn_threshold->getValue();
+		$sqlData['blog_trackback_bayes_spam_threshold'] = $blog_trackback_bayes_spam_threshold->getValue();
 		
 		// check sql data
 		$HELPER = load('utility:helper');

@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: license.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -58,13 +56,16 @@ try {
 	$SESSION = load('base:session');
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('license', 'post');
+	$FORM = $BASE->utility->loadQuickForm('license');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	
 	// checkbox for confirm_license
 	$FORM->addElement('checkbox', 'confirm_license', gettext('Confirm license'), null,
 		array('id' => 'license_confirm_license', 'class' => 'chbx'));
-	$FORM->applyFilter('confirm_license', 'trim');
-	$FORM->applyFilter('confirm_license', 'strip_tags');
+
 	$FORM->addRule('confirm_license', gettext('Please confirm the license'), 'required');
 	$FORM->addRule('confirm_license', gettext('The field to confirm the license accepts only 0 or 1'),
 		'regex', WCOM_REGEX_ZERO_OR_ONE);
@@ -87,7 +88,7 @@ try {
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -99,7 +100,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// save input to session
 		$_SESSION['update'] = array();

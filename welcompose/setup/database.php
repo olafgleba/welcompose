@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: database.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -70,34 +68,34 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('database', 'post');
+	$FORM = $BASE->utility->loadQuickForm('database');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	
 	// textfield for database
 	$FORM->addElement('text', 'database', gettext('Database'), 
 		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('database', 'trim');
-	$FORM->applyFilter('database', 'strip_tags');
+
 	$FORM->addRule('database', gettext('Please enter a database name'), 'required');
 	$FORM->addRule('database', gettext('Please enter a valid database name'), WCOM_REGEX_DATABASE_NAME);
 	
 	// textfield for user
 	$FORM->addElement('text', 'user', gettext('User'), 
 		array('id' => 'database_user', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('user', 'trim');
-	$FORM->applyFilter('user', 'strip_tags');
+
 	$FORM->addRule('user', gettext('Please enter a user name'), 'required');
 	
 	// textfield for password
 	$FORM->addElement('password', 'password', gettext('Password'), 
 		array('id' => 'database_password', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('password', 'trim');
-	$FORM->applyFilter('password', 'strip_tags');
+
 
 	// textfield for connection method
 	$FORM->addElement('select', 'connection_method', gettext('Connection Method'),
 		$connection_methods, array('id' => 'database_connection_method'));
-	$FORM->applyFilter('connection_method', 'trim');
-	$FORM->applyFilter('connection_method', 'strip_tags');
+
 	$FORM->addRule('connection_method', gettext('Please select a connection method'), 'required');
 	$FORM->addRule('connection_method', gettext('Your chosen connection method is out of range'),
 		'in_array_keys', $connection_methods);
@@ -105,8 +103,7 @@ try {
 	// textfield for host
 	$FORM->addElement('text', 'host', gettext('Host'), 
 		array('id' => 'database_host', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('host', 'trim');
-	$FORM->applyFilter('host', 'strip_tags');
+
 	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
 		$FORM->addRule('host', gettext('Please enter a host name'), 'required');
 	}
@@ -114,8 +111,7 @@ try {
 	// textfield for port
 	$FORM->addElement('text', 'port', gettext('Port'), 
 		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('port', 'trim');
-	$FORM->applyFilter('port', 'strip_tags');
+
 	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
 		$FORM->addRule('port', gettext('Please enter a port for your database connection'), 'required');
 		$FORM->addRule('port', gettext('The input must be numeric'), 'numeric');
@@ -124,8 +120,7 @@ try {
 	// textfield for unix socket
 	$FORM->addElement('text', 'unix_socket', gettext('Unix socket'), 
 		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('unix_socket', 'trim');
-	$FORM->applyFilter('unix_socket', 'strip_tags');
+
 	$FORM->addRule('unix_socket', gettext('Please enter a valid socket address'), 'regex', WCOM_REGEX_DATABASE_SOCKET);
 	
 	// add connection validation rule
@@ -154,7 +149,7 @@ try {
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -166,7 +161,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// save all the database settings to the session
 		$_SESSION['setup']['database_database'] = $FORM->exportValue('database');

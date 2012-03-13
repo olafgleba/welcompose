@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: textmacro.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -440,6 +438,68 @@ public function testForUniqueName ($name, $id = null)
 			`project` = :project
 		  AND
 			`name` = :name
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT,
+		'name' => $name
+	);
+	
+	// if id isn't empty, add id check
+	if (!empty($id) && is_numeric($id)) {
+		$sql .= " AND `id` != :id ";
+		$bind_params['id'] = (int)$id;
+	} 
+	
+	// execute query and evaluate result
+	if (intval($this->base->db->select($sql, 'field', $bind_params)) > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Tests given text macro internal internal name for uniqueness. Takes the text
+ * macro internal name as first argument and an optional text macro
+ * id as second argument. If the text macro id is given, this text macro
+ * won't be considered when checking for uniqueness (useful for updates).
+ * Returns boolean true if text macro name is unique.
+ *
+ * @throws Application_TextMacroException
+ * @param string Text macro internal name
+ * @param int Text macro id
+ * @return bool
+ */
+public function testForUniqueInternalName ($name, $id = null)
+{
+	// access check
+	if (!wcom_check_access('Application', 'TextMacro', 'Use')) {
+		throw new Application_TextMacroException("You are not allowed to perform this action");
+	}
+	
+	// input check
+	if (empty($name)) {
+		throw new Application_TextMacroException("Input for parameter name is not expected to be empty");
+	}
+	if (!is_scalar($name)) {
+		throw new Application_TextMacroException("Input for parameter name is expected to be scalar");
+	}
+	if (!is_null($id) && ((int)$id < 1 || !is_numeric($id))) {
+		throw new Application_TextMacroException("Input for parameter id is expected to be numeric");
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			COUNT(*) AS `total`
+		FROM
+			".WCOM_DB_APPLICATION_TEXT_MACROS." AS `application_text_macros`
+		WHERE
+			`project` = :project
+		  AND
+			`internal_name` = :name
 	";
 	
 	// prepare bind params

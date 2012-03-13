@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -143,131 +141,122 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('page', 'post');
+	$FORM = $BASE->utility->loadQuickForm('page');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'page_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'page_name', 'maxlength' => 255, 'class' => 'w300 urlify'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
 	
-	// textfield for url_name
-	$FORM->addElement('text', 'name_url', gettext('URL name'), 
-		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name_url', 'trim');
-	$FORM->applyFilter('name_url', 'strip_tags');
-	$FORM->addRule('name_url', gettext('Enter an URL name'), 'required');
-	$FORM->addRule('name_url', gettext('The URL name may only contain chars, numbers and hyphens'),
-		WCOM_REGEX_URL_NAME);
+	// textfield for url_name		
+	$name_url = $FORM->addElement('text', 'name_url', 
+		array('id' => 'page_name_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('URL name'))
+		);
+	$name_url->addRule('required', gettext('Enter an URL name'));
+	$name_url->addRule('regex', gettext('The URL name may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);
+
+	// select for type
+	$template_set = $FORM->addElement('select', 'template_set',
+	 	array('id' => 'page_template_set'),
+		array('label' => gettext('Template set'), 'options' => $template_sets)
+		);	
+	$template_set->addRule('required', gettext('Please choose a template set'));
 	
-	// textfield for alternate name
-	$FORM->addElement('text', 'alternate_name', gettext('Alternate name'), 
-		array('id' => 'page_alternate_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('alternate_name', 'trim');
-	$FORM->applyFilter('alternate_name', 'strip_tags');
-	
-	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'page_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
-	// textarea for optional_text
-	$FORM->addElement('textarea', 'optional_text', gettext('Optional text'),
-		array('id' => 'page_optional_text', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('optional_text', 'trim');
-	$FORM->applyFilter('optional_text', 'strip_tags');
-	
-	// select for template set
-	$FORM->addElement('select', 'template_set', gettext('Template set'), $template_sets,
-		array('id' => 'page_template_set'));
-	$FORM->applyFilter('template_set', 'trim');
-	$FORM->applyFilter('template_set', 'strip_tags');
-	$FORM->addRule('template_set', gettext('Please choose a template set'), 'required');
-	$FORM->addRule('template_set', gettext('Chosen template set is out of range'), 'in_array_keys',
-		$template_sets);
-	
-	// checkbox for index_page
-	$FORM->addElement('checkbox', 'index_page', gettext('Index page'), null,
-		array('id' => 'page_index_page', 'class' => 'chbx'));
-	$FORM->applyFilter('index_page', 'trim');
-	$FORM->applyFilter('index_page', 'strip_tags');
-	$FORM->addRule('index_page', gettext('The field index_page accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	// checkbox for index_page		
+	$index_page = $FORM->addElement('checkbox', 'index_page',
+		array('id' => 'page_index_page', 'class' => 'chbx'),
+		array('label' => gettext('Index page'))
+		);
+	$index_page->addRule('regex', gettext('The field index_page accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for protect
-	$FORM->addElement('checkbox', 'protect', gettext('Protect'), null,
-		array('id' => 'page_protect', 'class' => 'chbx'));
-	$FORM->applyFilter('protect', 'trim');
-	$FORM->applyFilter('protect', 'strip_tags');
-	$FORM->addRule('protect', gettext('The field protect accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
+	$protect = $FORM->addElement('checkbox', 'protect',
+		array('id' => 'page_protect', 'class' => 'chbx'),
+		array('label' => gettext('Protect'))
+		);
+	$protect->addRule('regex', gettext('The field protect accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);	
+
 	// checkbox for draft
-	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-		array('id' => 'page_draft', 'class' => 'chbx'));
-	$FORM->applyFilter('draft', 'trim');
-	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field draft accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
+	$draft = $FORM->addElement('checkbox', 'draft',
+		array('id' => 'page_draft', 'class' => 'chbx'),
+		array('label' => gettext('Draft'))
+		);
+	$draft->addRule('regex', gettext('The field draft accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);	
+
 	// checkbox for exclude
-	$FORM->addElement('checkbox', 'exclude', gettext('Exclude'), null,
-		array('id' => 'page_exclude', 'class' => 'chbx'));
-	$FORM->applyFilter('exclude', 'trim');
-	$FORM->applyFilter('exclude', 'strip_tags');
-	$FORM->addRule('exclude', gettext('The field exclude accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
+	$exclude = $FORM->addElement('checkbox', 'exclude',
+		array('id' => 'page_exclude', 'class' => 'chbx'),
+		array('label' => gettext('Exclude'))
+		);
+	$exclude->addRule('regex', gettext('The field exclude accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
 	// checkbox for nofollow
-	$FORM->addElement('checkbox', 'no_follow', gettext('No Follow'), null,
-		array('id' => 'page_no_follow', 'class' => 'chbx'));
-	$FORM->applyFilter('no_follow', 'trim');
-	$FORM->applyFilter('no_follow', 'strip_tags');
-	$FORM->addRule('no_follow', gettext('The field no_follow accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$no_follow = $FORM->addElement('checkbox', 'no_follow',
+		array('id' => 'page_no_follow', 'class' => 'chbx'),
+		array('label' => gettext('No Follow'))
+		);
+	$no_follow->addRule('regex', gettext('The field no_follow accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);	
+
 	// multi select for rights
-	$FORM->addElement('select', 'groups', gettext('Groups'), $groups,
-		array('id' => 'page_groups', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
-	$FORM->applyFilter('groups', 'trim');
-	$FORM->applyFilter('groups', 'strip_tags');
-	$FORM->addRule('groups', gettext('One of the chosen groups is out of range'), 'in_array_keys', $groups);
+	$groups = $FORM->addElement('select', 'groups',
+	 	array('id' => 'page_groups', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10),
+		array('label' => gettext('Groups'), 'options' => $groups)
+		);
+		
+	// textfield for alternate name
+	$alternate_name = $FORM->addElement('text', 'alternate_name', 
+		array('id' => 'page_alternate_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Alternate name'))
+		);
 	
-	// multi select for rights
-	$FORM->addElement('select', 'sitemap_changefreq', gettext('Sitemap change frequency'),
-		$sitemap_change_frequencies, array('id' => 'page_sitemap_changefreq'));
-	$FORM->applyFilter('sitemap_changefreq', 'trim');
-	$FORM->applyFilter('sitemap_changefreq', 'strip_tags');
-	$FORM->addRule('sitemap_changefreq', gettext('Chosen sitemap change frequency is out of range'),
-		'in_array_keys', $sitemap_change_frequencies);
+	// textarea for description
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'page_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
 	
-	// textfield for name
-	$FORM->addElement('text', 'sitemap_priority', gettext('Sitemap Priority'), 
-		array('id' => 'page_sitemap_priority', 'maxlength' => 3, 'class' => 'w300 validate'));
-	$FORM->applyFilter('sitemap_priority', 'trim');
-	$FORM->applyFilter('sitemap_priority', 'strip_tags');
-	$FORM->addRule('sitemap_priority', gettext('Please enter a sitemap priority between 0.1 and 1.0'),
-		'regex', WCOM_REGEX_SITEMAP_PRIORITY);
+	// textarea for optional_text
+	$optional_text = $FORM->addElement('textarea', 'optional_text', 
+		array('id' => 'page_optional_text', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Optional text'))
+		);
+
+	// select for sitemap change priority
+	$sitemap_changefreq = $FORM->addElement('select', 'sitemap_changefreq',
+	 	array('id' => 'page_sitemap_changefreq'),
+		array('label' => gettext('Sitemap change frequency'), 'options' => $sitemap_change_frequencies)
+		);
+		
+	// textfield sitemap priority value
+	$sitemap_priority = $FORM->addElement('text', 'sitemap_priority', 
+		array('id' => 'page_sitemap_priority', 'maxlength' => 3, 'class' => 'w300 validate'),
+		array('label' => gettext('Sitemap Priority'))
+		);
+	$sitemap_priority->addRule('regex', gettext('Please enter a sitemap priority between 0.1 and 1.0'), WCOM_REGEX_SITEMAP_PRIORITY);
 	
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($page['id'], null),
 		'name' => Base_Cnc::ifsetor($page['name'], null),
 		'name_url' => Base_Cnc::ifsetor($page['name_url'], null),
@@ -283,23 +272,16 @@ try {
 		'groups' => $selected_groups,
 		'sitemap_changefreq' => Base_Cnc::ifsetor($page['sitemap_changefreq'], null),
 		'sitemap_priority' => Base_Cnc::ifsetor($page['sitemap_priority'], null)
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -345,30 +327,30 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// test url name for uniqueness
-		//$url_name = $HELPER->createMeaningfulString($FORM->exportValue('name'));
-		$name_url = $FORM->exportValue('name_url');
-		if (!$PAGE->testForUniqueUrlName($name_url, $FORM->exportValue('id'))) {
-			$name_url = $name_url.'-'.$FORM->exportValue('id');
+		//$url_name = $HELPER->createMeaningfulString($name->getValue());
+		$name_url = $name_url->getValue();
+		if (!$PAGE->testForUniqueUrlName($name_url, $id->getValue())) {
+			$name_url = $name_url.'-'.$id->getValue();
 		}
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
+		$sqlData['name'] = $name->getValue();
 		$sqlData['name_url'] = $name_url;
-		$sqlData['alternate_name'] = $FORM->exportValue('alternate_name');
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['optional_text'] = $FORM->exportValue('optional_text');
-		$sqlData['template_set'] = $FORM->exportValue('template_set');
-		$sqlData['index_page'] = $FORM->exportValue('index_page');
-		$sqlData['protect'] = $FORM->exportValue('protect');
-		$sqlData['draft'] = $FORM->exportValue('draft');
-		$sqlData['exclude'] = $FORM->exportValue('exclude');
-		$sqlData['no_follow'] = $FORM->exportValue('no_follow');
-		$sqlData['sitemap_changefreq'] = $FORM->exportValue('sitemap_changefreq');
-		$sqlData['sitemap_priority'] = $FORM->exportValue('sitemap_priority');
+		$sqlData['alternate_name'] = $alternate_name->getValue();
+		$sqlData['description'] = $description->getValue();
+		$sqlData['optional_text'] = $optional_text->getValue();
+		$sqlData['template_set'] = $template_set->getValue();
+		$sqlData['index_page'] = $index_page->getValue();
+		$sqlData['protect'] = $protect->getValue();
+		$sqlData['draft'] = $draft->getValue();
+		$sqlData['exclude'] = $exclude->getValue();
+		$sqlData['no_follow'] = $no_follow->getValue();
+		$sqlData['sitemap_changefreq'] = $sitemap_changefreq->getValue();
+		$sqlData['sitemap_priority'] = $sitemap_priority->getValue();
 			
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -379,18 +361,18 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$PAGE->updatePage($FORM->exportValue('id'), $sqlData);
+			$PAGE->updatePage($id->getValue(), $sqlData);
 			
 			// map page to groups
-			if (intval($FORM->exportValue('protect')) === 1) {
-				$PAGE->mapPageToGroups($FORM->exportValue('id'), (array)$FORM->exportValue('groups'));
+			if (intval($protect->getValue()) === 1) {
+				$PAGE->mapPageToGroups($id->getValue(), (array)$groups->getValue());
 			} else {
-				$PAGE->mapPageToGroups($FORM->exportValue('id'), array());
+				$PAGE->mapPageToGroups($id->getValue(), array());
 			}
 			
 			// look at the index page field
-			if (intval($FORM->exportValue('index_page')) === 1) {
-				$PAGE->setIndexPage($FORM->exportValue('id'));
+			if (intval($index_page->getValue()) === 1) {
+				$PAGE->setIndexPage($id->getValue());
 			}
 			
 			// commit
@@ -404,7 +386,7 @@ try {
 		}
 
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -421,7 +403,7 @@ try {
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: pages_edit.php?id=".$id->getValue());
 		} else {
 			header("Location: pages_select.php");
 		}

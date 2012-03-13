@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_generatorforms_fields_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -113,120 +111,114 @@ try {
 		WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('generator_form_field', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GENERATORFORMFIELD);
+	$FORM = $BASE->utility->loadQuickForm('generator_form_field');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Page is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// hidden for start
-	$FORM->addElement('hidden', 'start');
-	$FORM->applyFilter('start', 'trim');
-	$FORM->applyFilter('start', 'strip_tags');
-	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
-	
+	// hidden for start	
+	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
+	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
+
 	// hidden for limit
-	$FORM->addElement('hidden', 'limit');
-	$FORM->applyFilter('limit', 'trim');
-	$FORM->applyFilter('limit', 'strip_tags');
-	$FORM->addRule('limit', gettext('limit is expected to be numeric'), 'numeric');
-	
+	$limit = $FORM->addElement('hidden', 'limit', array('id' => 'limit'));
+	$limit->addRule('regex', gettext('limit is expected to be numeric'), WCOM_REGEX_NUMERIC);
+
 	// hidden for macro
-	$FORM->addElement('hidden', 'macro');
-	$FORM->applyFilter('macro', 'trim');
-	
+	$macro = $FORM->addElement('hidden', 'macro', array('id' => 'macro'));
+
 	// select for type
-	$FORM->addElement('select', 'type', gettext('Type'), $GENERATORFORMFIELD->getTypeListForForm(),
-		array('id' => 'generator_form_field_type'));
-	$FORM->applyFilter('type', 'trim');
-	$FORM->applyFilter('type', 'strip_tags');
-	$FORM->addRule('type', gettext('Select a field type'), 'required');
-	$FORM->addRule('type', gettext('Selected field type is out of range'), 'in_array_keys',
-		$GENERATORFORMFIELD->getTypeListForForm());
+	$type = $FORM->addElement('select', 'type',
+	 	array('id' => 'generator_form_field_type'),
+		array('label' => gettext('Type'), 'options' => $GENERATORFORMFIELD->getTypeListForForm())
+		);
+	$type->addRule('required', gettext('Select a field type'));	
 	
 	// textfield for label
-	$FORM->addElement('text', 'label', gettext('Label'),
-		array('id' => 'generator_form_field_label', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('label', 'trim');
-	$FORM->applyFilter('label', 'strip_tags');
+	$label = $FORM->addElement('text', 'label', 
+		array('id' => 'generator_form_field_label', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Label'))
+		);	
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'),
-		array('id' => 'generator_form_field_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a field name'), 'required');
-	$FORM->addRule('name', gettext('Only alphanumeric field names are allowed'), 'regex',
-		WCOM_REGEX_OPERATOR_NAME);
-	$FORM->addRule('name', gettext('A form field with the given name already exists'),
-		'testForNameUniqueness', array('form' => $FORM->exportValue('page'),
-		'id' => $FORM->exportValue('id')));
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'generator_form_field_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a field name'));
+	$name->addRule('regex', gettext('Only alphanumeric field names are allowed'), WCOM_REGEX_OPERATOR_NAME);
+	$name->addRule('callback', gettext('A field with the given name already exists'), 
+		array(
+			'callback' => array($GENERATORFORMFIELD, 'testForUniqueName'),
+			'arguments' => array(array("form" => $page_id->getValue(), "id" => $id->getValue()))
+		)
+	);
 	
 	// textarea for value
-	$FORM->addElement('textarea', 'value', gettext('Value'),
-		array('id' => 'generator_form_field_value', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('value', 'trim');
-	$FORM->applyFilter('value', 'strip_tags');
+	$value = $FORM->addElement('textarea', 'value', 
+		array('id' => 'generator_form_field_value', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Value'))
+		);
 	
 	// textfield for class
-	$FORM->addElement('text', 'class', gettext('CSS class'),
-		array('id' => 'generator_form_field_class', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('class', 'trim');
-	$FORM->applyFilter('class', 'strip_tags');
+	$class = $FORM->addElement('text', 'class', 
+		array('id' => 'generator_form_field_class', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('CSS class'))
+		);
+
+	// checkbox for required		
+	$required = $FORM->addElement('checkbox', 'required',
+		array('id' => 'generator_form_field_required', 'class' => 'chbx'),
+		array('label' => gettext('Required'))
+		);
+	$required->addRule('regex', gettext('The field required accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
-	// checkbox for required
-	$FORM->addElement('checkbox', 'required', gettext('Required'), null,
-		array('id' => 'generator_form_field_required', 'class' => 'chbx'));
-	$FORM->applyFilter('required', 'trim');
-	$FORM->applyFilter('required', 'strip_tags');
-	$FORM->addRule('required', gettext('The field required accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
-	// textfield for message
-	$FORM->addElement('text', 'required_message', gettext('Required message'),
-		array('id' => 'generator_form_field_required_message', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('message', 'trim');
-	$FORM->applyFilter('message', 'strip_tags');
-	if ($FORM->exportValue('required') == 1) {
-		$FORM->addRule('required_message', gettext('Please enter a required message'), 'required');
-	}
-	
+	// textfield for required message
+	$required_message = $FORM->addElement('text', 'required_message', 
+		array('id' => 'generator_form_field_required_message', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Required message'))
+		);		
+	if ($required->getValue() == 1) {
+		$required_message->addRule('required', gettext('Please enter a required message'));
+	}		
+
 	// textfield for regular_expression
-	$FORM->addElement('text', 'validator_regex', gettext('Regular expression'),
-		array('id' => 'generator_form_field_validator_regex', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('validator_regex', 'trim');
-	$FORM->applyFilter('validator_regex', 'strip_tags');
-	
-	// textfield for message
-	$FORM->addElement('text', 'validator_message', gettext('Validator message'),
-		array('id' => 'generator_form_field_validator_message', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('validator_message', 'trim');
-	$FORM->applyFilter('validator_message', 'strip_tags');
-	if ($FORM->exportValue('validator_regex') == 1) {
-		$FORM->addRule('validator_message', gettext('Please enter a validator message'), 'required');
-	}
-	
+	$validator_regex = $FORM->addElement('text', 'validator_regex', 
+		array('id' => 'generator_form_field_validator_regex', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Regular expression'))
+		);
+		
+	// textfield for validator message
+	$validator_message = $FORM->addElement('text', 'validator_message', 
+		array('id' => 'generator_form_field_validator_message', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Validator message'))
+		);		
+	if ($validator_regex->getValue() == 1) {
+		$validator_message->addRule('required', gettext('Please enter a validator message'));
+	}	
+		
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($form_field['id'], null),
 		'page' => Base_Cnc::ifsetor($form_field['form'], null),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
@@ -241,23 +233,15 @@ try {
 		'required_message' => Base_Cnc::ifsetor($form_field['required_message'], null),
 		'validator_regex' => Base_Cnc::ifsetor($form_field['validator_regex'], null),
 		'validator_message' => Base_Cnc::ifsetor($form_field['validator_message'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -300,19 +284,19 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['type'] = $FORM->exportValue('type');
-		$sqlData['label'] = $FORM->exportValue('label');
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['value'] = $FORM->exportValue('value');
-		$sqlData['class'] = $FORM->exportValue('class');
-		$sqlData['required'] = (string)intval($FORM->exportValue('required'));
-		$sqlData['required_message'] = $FORM->exportValue('required_message');
-		$sqlData['validator_regex'] = $FORM->exportValue('validator_regex');
-		$sqlData['validator_message'] = $FORM->exportValue('validator_message');
+		$sqlData['type'] = $type->getValue();
+		$sqlData['label'] = $label->getValue();
+		$sqlData['name'] = $name->getValue();
+		$sqlData['value'] = $value->getValue();
+		$sqlData['class'] = $class->getValue();
+		$sqlData['required'] = (string)intval($required->getValue());
+		$sqlData['required_message'] = $required_message->getValue();
+		$sqlData['validator_regex'] = $validator_regex->getValue();
+		$sqlData['validator_message'] = $validator_message->getValue();
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -323,7 +307,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$GENERATORFORMFIELD->updateGeneratorFormField($FORM->exportValue('id'), $sqlData);
+			$GENERATORFORMFIELD->updateGeneratorFormField($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -336,7 +320,7 @@ try {
 		}
 
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -352,9 +336,9 @@ try {
 		}
 		
 		// save request params 
-		$start = $FORM->exportValue('start');
-		$limit = $FORM->exportValue('limit');
-		$macro = $FORM->exportValue('macro');
+		$start = $start->getValue();
+		$limit = $limit->getValue();
+		$macro = $macro->getValue();
 		
 		// append request params
 		$redirect_params = (!empty($start)) ? '&start='.$start : '';
@@ -364,10 +348,10 @@ try {
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_generatorforms_fields_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id').$redirect_params);
+						$page_id->getValue()."&id=".$id->getValue().$redirect_params);
 		} else {
 			header("Location: pages_generatorforms_fields_select.php?page=".
-						$FORM->exportValue('page').$redirect_params);
+						$page_id->getValue().$redirect_params);
 		}
 		exit;
 	}

@@ -11,10 +11,12 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -90,7 +92,7 @@
 <td>{$_abbreviation.long_form|escape:"html"|truncate:60}</td>
 <td>{if $_abbreviation.long_form|count_characters > 60}<a class="comment showTableRow" href="#" id="e_{$_abbreviation.id}" title="{i18n View entire long form}"></a>{/if}</td>
 <td>{if !empty($_abbreviation.content)}{i18n yes}{else}{i18n no}{/if}</td>
-<td><a class="delete confirmDelAbbreviation" href="abbreviations_delete.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="delete confirmDelAbbreviation" href="abbreviations_delete.php?id={$_abbreviation.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
 </tr>
 <tr id="o_{$_abbreviation.id}" class="outer">
 <td colspan="5">

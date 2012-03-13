@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: configuration.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -68,20 +66,22 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('configuration', 'post');
+	$FORM = $BASE->utility->loadQuickForm('configuration');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	
 	// textfield for project
 	$FORM->addElement('text', 'project', gettext('Project'), 
 		array('id' => 'configuration_project', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('project', 'trim');
-	$FORM->applyFilter('project', 'strip_tags');
+
 	$FORM->addRule('project', gettext('Please enter a project name'), 'required');
 	
 	// textfield for locale
 	$FORM->addElement('text', 'locale', gettext('Locale'),
 		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('locale', 'trim');
-	$FORM->applyFilter('locale', 'strip_tags');
+
 	$FORM->addRule('locale', gettext('Please enter a locale'), 'required');
 	$FORM->addRule('locale', gettext('Please enter a valid locale'), 'regex',
 		WCOM_REGEX_LOCALE_NAME);
@@ -113,7 +113,7 @@ try {
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
@@ -125,7 +125,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// save inputs to session
 		$_SESSION['setup']['configuration_project'] = $FORM->exportValue('project');

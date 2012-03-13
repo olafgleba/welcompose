@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: callbacks_insert_event_tags.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2011 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -144,7 +142,7 @@ try {
 		
 		// if tags are already set for the particular posting, 
 		// differ the two arrays, otherwise assign all page tags
-		if (!empty($event_tags_posting)) {		
+		if (!empty($event_tags_posting)) {
 			// reduce arrays to get a useable result
 			// within array_diff() function in the next step
 			foreach ($event_tags_all as $_key => $_field) {

@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: actions_delete_tpl_compiled.php
  *
- * Copyright (c) 2009 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2009 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -102,13 +100,11 @@ try {
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
 	
-	
 	// delete smarty compiled frontend templates
 	
 	// point to frontend smarty compiled dir temporarily
 	$BASE->utility->smarty->compile_dir = dirname(__FILE__).'/../../smarty/compiled';
 	$BASE->utility->smarty->clear_compiled_tpl();
-
 
 	// clean buffer
 	if (!$BASE->debug_enabled()) {

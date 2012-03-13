@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: simpleformindex.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
- * @author Andreas Ahlenstorf
+ *  
+ * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -105,7 +103,7 @@ class Display_SimpleFormIndex implements Display {
 	protected $_charset = 'utf-8';
 	
 	/**
-	 * Set appropriate mime type
+	 * Set appropriate mime type for plain text mails
 	 * 
 	 * @var string
 	 */
@@ -203,66 +201,69 @@ public function render ()
 protected function renderPersonalForm ()
 {
 	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
-		$this->getLocationSelf(true));
+	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post', 
+		array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
+		
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+	$FORM->addRecursiveFilter('strip_tags');
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'),
-		array('id' => 'simple_form_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'simple_form_name', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
 	
 	// textfield for email
-	$FORM->addElement('text', 'email', gettext('E-mail address'),
-		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
-	$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
+	$email = $FORM->addElement('text', 'email', 
+		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('E-mail'))
+		);
+	$email->addRule('required', gettext('Please enter an e-mail address'));
+	$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);		
 	
 	// textfield for homepage
-	$FORM->addElement('text', 'homepage', gettext('Homepage'),
-		array('id' => 'simple_form_homepage', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('homepage', 'trim');
-	$FORM->applyFilter('homepage', 'strip_tags');
-	$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
-		WCOM_REGEX_URL);
+	$homepage = $FORM->addElement('text', 'homepage', 
+		array('id' => 'simple_form_homepage', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('Homepage'))
+		);
+	$homepage->addRule('regex', gettext('Please enter a valid website URL'), WCOM_REGEX_URL);
 	
 	// textarea for message
-	$FORM->addElement('textarea', 'message', gettext('Message'),
-		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
-	$FORM->applyFilter('message', 'trim');
-	$FORM->applyFilter('message', 'strip_tags');
-	$FORM->addRule('message', gettext('Please enter a message'), 'required');
+	$message = $FORM->addElement('textarea', 'message', 
+		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'),
+		array('label' => gettext('Message'))
+		);
+	$message->addRule('required', gettext('Please enter a message'));
 	
 	// textfield for captcha if the captcha is enabled
 	if ($this->_simple_form['use_captcha'] != 'no') {
-		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('_qf_captcha', 'trim');
-		$FORM->applyFilter('_qf_captcha', 'strip_tags');
-		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-			$this->captcha->captchaValue());
-	}
+		$_qf_captcha = $FORM->addElement('text', '_qf_captcha', 
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Captcha text'))
+			);
+		$_qf_captcha->addRule('required', gettext('Please enter the captcha text'));
+		$_qf_captcha->addRule('eq', gettext('Invalid captcha text entered'), $this->captcha->captchaValue());	
+	}	
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'fsubmit'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'fsubmit', 'value' => gettext('Send'))
+		);
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page
 	if ($FORM->validate()) {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare & assign form data
 		$form_data = array(
-			'name' => $FORM->exportValue('name'),
-			'email' => $FORM->exportValue('email'),
-			'homepage' => $FORM->exportValue('homepage'),
-			'message' => $FORM->exportValue('message'),
+			'name' => $name->getValue(),
+			'email' => $email->getValue(),
+			'homepage' => $homepage->getValue(),
+			'message' => $message->getValue(),
 			'now' => mktime()
 		);
 		$this->base->utility->smarty->assign('form_data', $form_data);
@@ -276,7 +277,7 @@ protected function renderPersonalForm ()
 		
 		// prepare From: address
 		$from = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
-			$FORM->exportValue('email') : $this->_simple_form['email_from']);
+			$email->getValue() : $this->_simple_form['email_from']);
 		$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
 			null, $from);
 		
@@ -284,7 +285,7 @@ protected function renderPersonalForm ()
 		$headers = array();
 		$headers['From'] = $from;
 		$headers['Subject'] = $this->_simple_form['email_subject'];
-		$headers['Reply-To'] = $FORM->exportValue('email');
+		$headers['Reply-To'] = $email->getValue();
 		$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
 		
 		// prepare params
@@ -313,16 +314,10 @@ protected function renderPersonalForm ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
-	
-	$FORM->accept($renderer);
-	
+	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
 	// assign the form to smarty
-	$this->base->utility->smarty->assign('form', $renderer->toArray());
+	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 	// generate captcha if required
 	if ($this->_simple_form['use_captcha'] != 'no') {
@@ -365,110 +360,110 @@ protected function renderBusinessForm ()
 		gettext('Mrs.') => gettext('Mrs.')
 	);
 	
-	// start new HTML_QuickForm
-	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post',
-		$this->getLocationSelf(true));
+	$FORM = $this->base->utility->loadQuickForm('simpleform', 'post', 
+		array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
+		
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+	$FORM->addRecursiveFilter('strip_tags');
 	
 	// select for salutation
-	$FORM->addElement('select', 'salutation', gettext('Salutation'), $salutations,
-		array('id' => 'simple_form_salutation', 'class' => 'fselect'));
-	$FORM->applyFilter('salutation', 'trim');
-	$FORM->applyFilter('salutation', 'strip_tags');
-	$FORM->addRule('salutation', gettext('Please select a salutation'), 'required');
-	$FORM->addRule('salutation', gettext('Salutation is out of range'), 'in_array_keys', $salutations);
+	$salutation = $FORM->addElement('select', 'salutation',
+	 	array('id' => 'simple_form_salutation', 'class' => 'fselect'),
+		array('label' => gettext('Salutation'), 'options' => $salutations)
+		);
+	$salutation->addRule('required', gettext('Please select a salutation'));
 	
 	// textfield for first_name
-	$FORM->addElement('text', 'first_name', gettext('First name'),
-		array('id' => 'simple_form_first_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('first_name', 'trim');
-	$FORM->applyFilter('first_name', 'strip_tags');
-	$FORM->addRule('first_name', gettext('Please enter your first name'), 'required');
+	$first_name = $FORM->addElement('text', 'first_name', 
+		array('id' => 'simple_form_first_name', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('First name'))
+		);
+	$first_name->addRule('required', gettext('Please enter your first name'));
 	
 	// textfield for last_name
-	$FORM->addElement('text', 'last_name', gettext('Last name'),
-		array('id' => 'simple_form_last_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('last_name', 'trim');
-	$FORM->applyFilter('last_name', 'strip_tags');
-	$FORM->addRule('last_name', gettext('Please enter your last name'), 'required');
+	$last_name = $FORM->addElement('text', 'last_name', 
+		array('id' => 'simple_form_last_name', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('Last name'))
+		);
+	$last_name->addRule('required', gettext('Please enter your last name'));
 	
 	// textfield for address
-	$FORM->addElement('text', 'address', gettext('Address'),
-		array('id' => 'simple_form_address', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('address', 'trim');
-	$FORM->applyFilter('address', 'strip_tags');
-	
+	$address = $FORM->addElement('text', 'address', 
+		array('id' => 'simple_form_address', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('Address'))
+		);
+
 	// textfield for location
-	$FORM->addElement('text', 'location', gettext('ZIP/City'),
-		array('id' => 'simple_form_location', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('location', 'trim');
-	$FORM->applyFilter('location', 'strip_tags');
-	
+	$location = $FORM->addElement('text', 'location', 
+		array('id' => 'simple_form_location', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('ZIP/City'))
+		);
+
 	// checkbox for call_back
-	$FORM->addElement('checkbox', 'call_back', gettext('Please call me'), null,
-		array('id' => 'simple_form_call_back', 'class' => 'fcheckbox'));
-	$FORM->applyFilter('call_back', 'trim');
-	$FORM->applyFilter('call_back', 'strip_tags');
-	$FORM->addRule('call_back', gettext('The field call_back accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$call_back = $FORM->addElement('checkbox', 'call_back',
+		array('id' => 'simple_form_call_back', 'class' => 'fcheckbox'),
+		array('label' => gettext('Please call me'))
+		);
+	$call_back->addRule('regex', gettext('The field call_back accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for phone
-	$FORM->addElement('text', 'phone', gettext('Phone'),
-		array('id' => 'simple_form_phone', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('phone', 'trim');
-	$FORM->applyFilter('phone', 'strip_tags');
-	if ($FORM->exportValue('call_back') == 1) {
-		$FORM->addRule('phone', gettext('Please enter your phone number'), 'required');
+	$phone = $FORM->addElement('text', 'phone', 
+		array('id' => 'simple_form_phone', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('Phone'))
+		);
+	$phone->addRule('regex', gettext('Please enter a valid phone number'), WCOM_REGEX_PHONE_NUMBER);	
+	if ($call_back->getValue() == 1) {
+		$phone->addRule('required', gettext('Please enter your phone number'));
 	}
-	$FORM->addRule('phone', gettext('Please enter a valid phone number'), 'regex',
-		WCOM_REGEX_PHONE_NUMBER);
 	
 	// textfield for email
-	$FORM->addElement('text', 'email', gettext('E-mail address'),
-		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
-	$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
-	
-	// terxtarea for message
-	$FORM->addElement('textarea', 'message', gettext('Message'),
-		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
-	$FORM->applyFilter('message', 'trim');
-	$FORM->applyFilter('message', 'strip_tags');
-	$FORM->addRule('message', gettext('Please enter a message'), 'required');
+	$email = $FORM->addElement('text', 'email', 
+		array('id' => 'simple_form_email', 'maxlength' => 255, 'class' => 'ftextfield'),
+		array('label' => gettext('E-mail'))
+		);
+	$email->addRule('required', gettext('Please enter an e-mail address'));
+	$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);	
+
+	// textarea for message
+	$message = $FORM->addElement('textarea', 'message', 
+		array('id' => 'simple_form_message', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'),
+		array('label' => gettext('Message'))
+		);
+	$message->addRule('required', gettext('Please enter a message'));
 	
 	// textfield for captcha if the captcha is enabled
 	if ($this->_simple_form['use_captcha'] != 'no') {
-		$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('_qf_captcha', 'trim');
-		$FORM->applyFilter('_qf_captcha', 'strip_tags');
-		$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-		$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-			$this->captcha->captchaValue());
+		$_qf_captcha = $FORM->addElement('text', '_qf_captcha', 
+			array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Captcha text'))
+			);
+		$_qf_captcha->addRule('required', gettext('Please enter the captcha text'));
+		$_qf_captcha->addRule('eq', gettext('Invalid captcha text entered'), $this->captcha->captchaValue());	
 	}
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Send'),
-		array('class' => 'fsubmit'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'fsubmit', 'value' => gettext('Send'))
+		);		
 	
 	// test if the form validates. if it validates, process it and
 	// skip the rest of the page
 	if ($FORM->validate()) {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare & assign form data
 		$form_data = array(
-			'salutation' => $FORM->exportValue('salutation'),
-			'first_name' => $FORM->exportValue('first_name'),
-			'last_name' => $FORM->exportValue('last_name'),
-			'email' => $FORM->exportValue('email'),
-			'address' => $FORM->exportValue('address'),
-			'location' => $FORM->exportValue('location'),
-			'message' => $FORM->exportValue('message'),
-			'call_back' => $FORM->exportValue('call_back'),
-			'phone' => $FORM->exportValue('phone'),
+			'salutation' => $salutation->getValue(),
+			'first_name' => $first_name->getValue(),
+			'last_name' => $last_name->getValue(),
+			'email' => $email->getValue(),
+			'address' => $address->getValue(),
+			'location' => $location->getValue(),
+			'message' => $message->getValue(),
+			'call_back' => $call_back->getValue(),
+			'phone' => $phone->getValue(),
 			'now' => mktime()
 		);
 		$this->base->utility->smarty->assign('form_data', $form_data);
@@ -487,9 +482,9 @@ protected function renderBusinessForm ()
 		// headers
 		$headers = array();
 		$headers['From'] = (($this->_simple_form['email_from'] == 'sender@simpleform.wcom') ?
-			$FORM->exportValue('email') : $this->_simple_form['email_from']);
+			$email->getValue() : $this->_simple_form['email_from']);
 		$headers['Subject'] = $this->_simple_form['email_subject'];
-		$headers['Reply-To'] = $FORM->exportValue('email');
+		$headers['Reply-To'] = $email->getValue();
 		$headers['Content-Type'] = ''.$this->_mime_type.'; charset='.$this->_charset.'';
 		
 		// send mail
@@ -510,16 +505,10 @@ protected function renderBusinessForm ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-	// remove attribute on form tag for XHTML compliance
-	$FORM->removeAttribute('name');
-	$FORM->removeAttribute('target');
-	
-	$FORM->accept($renderer);
-	
+	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
 	// assign the form to smarty
-	$this->base->utility->smarty->assign('form', $renderer->toArray());
+	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 	// generate captcha if required
 	if ($this->_simple_form['use_captcha'] != 'no') {

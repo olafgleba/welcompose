@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_simpleguestbooks_entries_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -116,93 +114,83 @@ try {
 		WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('simple_guestbook_entry', 'post');
+	$FORM = $BASE->utility->loadQuickForm('simple_guestbook_entry');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 		
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// hidden for start
-	$FORM->addElement('hidden', 'start');
-	$FORM->applyFilter('start', 'trim');
-	$FORM->applyFilter('start', 'strip_tags');
-	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
-	
-	// hidden for limit
-	$FORM->addElement('hidden', 'limit');
-	$FORM->applyFilter('limit', 'trim');
-	$FORM->applyFilter('limit', 'strip_tags');
-	$FORM->addRule('limit', gettext('limit is expected to be numeric'), 'numeric');
-	
-	// hidden for search_name
-	$FORM->addElement('hidden', 'search_name');
-	$FORM->applyFilter('search_name', 'trim');
-	$FORM->applyFilter('search_name', 'strip_tags');
-	
-	// hidden for macro
-	$FORM->addElement('hidden', 'macro');
-	$FORM->applyFilter('macro', 'trim');
+	// hidden for start	
+	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
+	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for timeframe
-	$FORM->addElement('hidden', 'timeframe');
-	$FORM->applyFilter('timeframe', 'trim');
-	$FORM->applyFilter('timeframe', 'strip_tags');
-	$FORM->addRule('timeframe', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
+	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));
+	$timeframe->addRule('regex', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
 	
+	// hidden for limit
+	$limit = $FORM->addElement('hidden', 'limit', array('id' => 'limit'));
+	$limit->addRule('regex', gettext('limit is expected to be numeric'), WCOM_REGEX_NUMERIC);
+	
+	// hidden for search_name
+	$search_name = $FORM->addElement('hidden', 'search_name', array('id' => 'search_name'));
+
+	// hidden for macro
+	$macro = $FORM->addElement('hidden', 'macro', array('id' => 'macro'));
+
 	// hidden for text_converter
-	$FORM->addElement('hidden', 'text_converter');
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('text_converter', gettext('Id is expected to be numeric'), 'numeric');
+	$text_converter = $FORM->addElement('hidden', 'text_converter', array('id' => 'text_converter'));
+	$text_converter->addRule('regex', gettext('Text converter value is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'),
-		array('id' => 'simple_guestbook_entry_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	
-	// textfield for email
-	$FORM->addElement('text', 'email', gettext('E-mail'),
-		array('id' => 'simple_guestbook_entry_email', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
-	
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'simple_guestbook_entry_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+		
+	// textfield for email	
+	$email = $FORM->addElement('text', 'email', 
+		array('id' => 'simple_guestbook_entry_email', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('E-mail'))
+		);
+	$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);
+
 	// textfield for subject
-	$FORM->addElement('text', 'subject', gettext('Subject'),
-		array('id' => 'simple_guestbook_entry_subject', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('subject', 'trim');
-	$FORM->applyFilter('subject', 'strip_tags');
+	$subject = $FORM->addElement('text', 'subject', 
+		array('id' => 'simple_guestbook_entry_subject', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Subject'))
+		);
 	
 	// textarea for value
-	$FORM->addElement('textarea', 'content', gettext('Message'),
-		array('id' => 'simple_guestbook_entry_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('content', 'trim');
-	$FORM->applyFilter('content', 'strip_tags');
-	$FORM->addRule('content', gettext('Please enter your message'), 'required');
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'simple_guestbook_entry_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'),
+		array('label' => gettext('Message'))
+		);
+	$content->addRule('required', gettext('Please enter your message'));
 	
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($guestbook_entry['id'], null),
 		'page' => Base_Cnc::ifsetor($guestbook_entry['book'], null),
 		'timeframe' => Base_Cnc::filterRequest($_REQUEST['timeframe'], WCOM_REGEX_TIMEFRAME),
@@ -215,23 +203,16 @@ try {
 		'subject' => Base_Cnc::ifsetor($guestbook_entry['subject'], null),
 		'content' => Base_Cnc::ifsetor($guestbook_entry['content_raw'], null),
 		'text_converter' => Base_Cnc::ifsetor($guestbook_entry['text_converter'], null)
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -274,21 +255,21 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['book'] = $FORM->exportValue('page');
+		$sqlData['book'] = $page_id->getValue();
 		$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null);
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['email'] = $FORM->exportValue('email');
-		$sqlData['subject'] = $FORM->exportValue('subject');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['email'] = $email->getValue();
+		$sqlData['subject'] = $subject->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['content_raw'] = $content->getValue();
 			
 		// apply text converter
-		$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($FORM->exportValue('text_converter'),
-					$FORM->exportValue('content'));
+		$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($text_converter->getValue(),
+					$content->getValue());
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -299,7 +280,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$SIMPLEGUESTBOOKENTRY->updateSimpleGuestbookEntry($FORM->exportValue('id'), $sqlData);
+			$SIMPLEGUESTBOOKENTRY->updateSimpleGuestbookEntry($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -312,7 +293,7 @@ try {
 		}
 		
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -328,11 +309,11 @@ try {
 		}
 		
 		// save request params 
-		$start = $FORM->exportValue('start');
-		$limit = $FORM->exportValue('limit');
-		$timeframe = $FORM->exportValue('timeframe');
-		$macro = $FORM->exportValue('macro');
-		$search_name = $FORM->exportValue('search_name');
+		$start = $start->getValue();
+		$limit = $limit->getValue();
+		$timeframe = $timeframe->getValue();
+		$macro = $macro->getValue();
+		$search_name = $search_name->getValue();
 		
 		// append request params
 		$redirect_params = (!empty($start)) ? '&start='.$start : '';
@@ -344,10 +325,10 @@ try {
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_simpleguestbooks_entries_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id').$redirect_params);
+						$page_id->getValue()."&id=".$id->getValue().$redirect_params);
 		} else {
 			header("Location: pages_simpleguestbooks_entries_select.php?page=".
-						$FORM->exportValue('page').$redirect_params);
+						$page_id->getValue().$redirect_params);
 		}
 		exit;		
 	}

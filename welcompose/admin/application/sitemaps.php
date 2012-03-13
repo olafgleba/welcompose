@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: sitemaps.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -103,41 +101,36 @@ try {
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('sitemaps', 'post');
+	$FORM = $BASE->utility->loadQuickForm('sitemaps');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 		
 	// checkbox for gunzip compress
-	$FORM->addElement('checkbox', 'compress_gzip', gettext('Deflate (.gz)'), null,
-		array('id' => 'sitemaps_compress', 'class' => 'chbx'));
-	$FORM->applyFilter('sitemaps_compress', 'trim');
-	$FORM->applyFilter('sitemaps_compress', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$compress_gzip = $FORM->addElement('checkbox', 'compress_gzip',
+		array('id' => 'sitemaps_compress', 'class' => 'chbx'),
+		array('label' => gettext('Deflate (.gz)'))
+		);
+	$compress_gzip->addRule('regex', gettext('The field whether compress is enabled accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);	
 
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit240'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Run action'))
+		);
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'compress_gzip' => 0
-	));
+	)));
 
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -177,10 +170,10 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// generate sitemap
-		$SITEMAP->generateSitemap((int)$FORM->exportValue('compress_gzip'));
+		$SITEMAP->generateSitemap((int)$compress_gzip->getValue());
 
 		// add response to session
 		$_SESSION['response'] = 1;

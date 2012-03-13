@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_generatorforms_content_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * 
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -131,123 +129,117 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('generator_form', 'post');
+	$FORM = $BASE->utility->loadQuickForm('generator_form');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for navigation
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for frontend view control
-	$FORM->addElement('hidden', 'preview');
-	$FORM->applyFilter('preview', 'trim');
-	$FORM->applyFilter('preview', 'strip_tags');
-	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
+	$preview = $FORM->addElement('hidden', 'preview', array('id' => 'preview'));
+	$preview->addRule('regex', gettext('preview is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for title
-	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'generator_form_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
-	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	$title = $FORM->addElement('text', 'title', 
+		array('id' => 'generator_form_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
+	$title->addRule('required', gettext('Please enter a title'));
 	
-	// textfield for URL title
-	$FORM->addElement('text', 'title_url', gettext('URL title'),
-		array('id' => 'generator_form_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('title_url', 'trim');
-	$FORM->applyFilter('title_url', 'strip_tags');
-	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
-	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
-		WCOM_REGEX_URL_NAME);
+	// textfield for URL title		
+	$title_url = $FORM->addElement('text', 'title_url', 
+		array('id' => 'generator_form_title_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('URL title'))
+		);
+	$title_url->addRule('required', gettext('Enter an URL title'));
+	$title_url->addRule('regex', gettext('The URL title may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);
 	
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'generator_form_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
-	
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'generator_form_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);		
+
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'generator_form_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
-	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'generator_form_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'generator_form_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
 		
-	// checkbox for meta_use
-	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
-		array('id' => 'generator_form_meta_use', 'class' => 'chbx'));
-	$FORM->applyFilter('meta_use', 'trim');
-	$FORM->applyFilter('meta_use', 'strip_tags');
-	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	// checkbox for apply_macros
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'generator_form_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
+	// checkbox for meta_use		
+	$meta_use = $FORM->addElement('checkbox', 'meta_use',
+		array('id' => 'generator_form_meta_use', 'class' => 'chbx'),
+		array('label' => gettext('Custom meta tags'))
+		);
+	$meta_use->addRule('regex', gettext('The field whether to use customized meta tags accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for meta_title
-	$FORM->addElement('text', 'meta_title', gettext('Title'),
-		array('id' => 'generator_form_meta_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('meta_title', 'trim');
-	$FORM->applyFilter('meta_title', 'strip_tags');
+	$meta_title = $FORM->addElement('text', 'meta_title', 
+		array('id' => 'blog_posting_meta_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
 	
 	// textarea for meta_keywords
-	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
-		array('id' => 'generator_form_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_keywords', 'trim');
-	$FORM->applyFilter('meta_keywords', 'strip_tags');
+	$meta_keywords = $FORM->addElement('textarea', 'meta_keywords', 
+		array('id' => 'generator_form_meta_keywords', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Keywords'))
+		);
 
 	// textarea for meta_description
-	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
-		array('id' => 'generator_form_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_description', 'trim');
-	$FORM->applyFilter('meta_description', 'strip_tags');
-	
+	$meta_description = $FORM->addElement('textarea', 'meta_description', 
+		array('id' => 'generator_form_meta_description', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Description'))
+		);
+
 	// textfield for email_from
-	$FORM->addElement('text', 'email_from', gettext('From: address'),
-		array('id' => 'generator_form_email_from', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('email_from', 'trim');
-	$FORM->applyFilter('email_from', 'strip_tags');
-	$FORM->addRule('email_from', gettext('Please enter a From: address'), 'required');
-	$FORM->addRule('email_from', gettext('Please enter a valid From: address'), 'email');
-	
+	$email_from = $FORM->addElement('text', 'email_from', 
+		array('id' => 'generator_form_email_from', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('From: address'))
+		);
+	$email_from->addRule('required', gettext('Please enter a From: address'));
+	$email_from->addRule('regex', gettext('Please enter a valid From: address'), WCOM_REGEX_EMAIL);
+
 	// textfield for email_to
-	$FORM->addElement('text', 'email_to', gettext('To: address'),
-		array('id' => 'generator_form_email_to', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('email_to', 'trim');
-	$FORM->applyFilter('email_to', 'strip_tags');
-	$FORM->addRule('email_to', gettext('Please enter a To: address'), 'required');
-	$FORM->addRule('email_to', gettext('Please enter a valid To: address'), 'email');
-	
+	$email_to = $FORM->addElement('text', 'email_to', 
+		array('id' => 'generator_form_email_to', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('To: address'))
+		);
+	$email_to->addRule('required', gettext('Please enter a To: address'));
+	$email_to->addRule('regex', gettext('Please enter a valid To: address'), WCOM_REGEX_EMAIL);
+
 	// textfield for email_subject
-	$FORM->addElement('text', 'email_subject', gettext('Subject'),
-		array('id' => 'generator_form_email_subject', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('email_subject', 'trim');
-	$FORM->applyFilter('email_subject', 'strip_tags');
-	$FORM->addRule('email_subject', gettext('Please enter a subject'), 'required');
-	
+	$email_subject = $FORM->addElement('text', 'email_subject', 
+		array('id' => 'generator_form_email_subject', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Subject'))
+		);
+	$email_subject->addRule('required', gettext('Please enter a subject'));
+
 	// select for use_captcha
-	$FORM->addElement('select', 'use_captcha', gettext('Use captcha'), $captcha_types,
-		array('id' => 'generator_form_use_captcha'));
-	$FORM->applyFilter('use_captcha', 'trim');
-	$FORM->applyFilter('use_captcha', 'strip_tags');
-	$FORM->addRule('use_captcha', gettext('Chosen captcha type is out of range'),
-		'in_array_keys', $captcha_types);
-	
+	$use_captcha = $FORM->addElement('select', 'use_captcha',
+	 	array('id' => 'generator_form_use_captcha'),
+		array('label' => gettext('Use captcha'), 'options' => $captcha_types)
+		);		
+
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
-
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set text converter value or get default converter
 	if (isset($generator_form['text_converter'])) {
@@ -261,7 +253,7 @@ try {
 	}
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($generator_form['id'], null),
 		'title' => Base_Cnc::ifsetor($generator_form['title'], null),
 		'title_url' => Base_Cnc::ifsetor($generator_form['title_url'], null),
@@ -278,23 +270,15 @@ try {
 		'use_captcha' => Base_Cnc::ifsetor($generator_form['use_captcha'], null),
 		// ctrl var for frontend view
 		'preview' => $_SESSION['preview_ctrl']
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -341,47 +325,47 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $FORM->exportValue('title_url');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
-			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['title'] = $title->getValue();
+		$sqlData['title_url'] = $title_url->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? 
+			$text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
+		$sqlData['meta_use'] = $meta_use->getValue();
 		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
-		$sqlData['email_from'] = $FORM->exportValue('email_from');
-		$sqlData['email_to'] = $FORM->exportValue('email_to');
-		$sqlData['email_subject'] = $FORM->exportValue('email_subject');
-		$sqlData['use_captcha'] = $FORM->exportValue('use_captcha');
+		$sqlData['email_from'] = $email_from->getValue();
+		$sqlData['email_to'] = $email_to->getValue();
+		$sqlData['email_subject'] = $email_subject->getValue();
+		$sqlData['use_captcha'] = $use_captcha->getValue();
 		
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract content
-			$content = $FORM->exportValue('content');
+			$content = $content->getValue();
 			
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 			}
 			
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$content
 				);
 			}
 			
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
 			}
 			
@@ -390,12 +374,12 @@ try {
 		}
 		
 		// prepare custom meta tags
-		if ($FORM->exportValue('meta_use') == 1) { 
-			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
-			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
-				$FORM->exportValue('meta_title'));
-			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
-			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
+		if ($meta_use->getValue() == 1) { 
+			$sqlData['meta_title_raw'] = $meta_title->getValue();
+			$sqlData['meta_title'] = str_replace("%title", $title->getValue(), 
+				$meta_title->getValue());
+			$sqlData['meta_keywords'] = $meta_keywords->getValue();
+			$sqlData['meta_description'] = $meta_description->getValue();
 		}
 		
 		// test sql data for pear errors
@@ -407,7 +391,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$GENERATORFORM->updateGeneratorForm($FORM->exportValue('id'), $sqlData);
+			$GENERATORFORM->updateGeneratorForm($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -420,7 +404,7 @@ try {
 		}
 
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -428,7 +412,7 @@ try {
 		}
 		
 		// preview control value
-		$activePreview = $FORM->exportValue('preview');
+		$activePreview = $preview->getValue();
 				
 		// add preview_ctrl to session
 		if (!empty($activePreview)) {
@@ -445,7 +429,7 @@ try {
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_generatorforms_content_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: pages_generatorforms_content_edit.php?id=".$id->getValue());
 		} else {
 			header("Location: pages_select.php");
 		}

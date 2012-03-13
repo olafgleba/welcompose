@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: globalboxes_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -110,64 +108,60 @@ try {
 	$default_text_converter = $TEXTCONVERTER->selectDefaultTextConverter();
 		
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('global_box', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GLOBALBOX);
+	$FORM = $BASE->utility->loadQuickForm('global_box');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'global_box_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A global box with the given name already exists'), 'testForNameUniqueness');
+	$name = $FORM->addElement('text', 'name',
+		array('id' => 'global_box_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('callback', gettext('A global box with the given name already exists'), 
+		array(
+			'callback' => array($GLOBALBOX, 'testForUniqueName')
+		)
+	);
 	
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'global_box_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
-	
+	$content = $FORM->addElement('textarea', 'content',
+		array('id' => 'global_box_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
+
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'global_box_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
-	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'global_box_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'global_box_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
 		
-	// set defaults
-	$FORM->setDefaults(array(
+	// checkbox for apply_macros
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'abbreviation_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+		
+	// submit button
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
+		
+	// set defaults	
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'apply_macros' => 1,
 		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null
-	));
-	
+	)));	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -207,38 +201,38 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the global box
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
-			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
+		$sqlData['name'] = $name->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? 
+			$text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 			
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract content
-			$content = $FORM->exportValue('content');
+			$content = $content->getValue();
 
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 			}
 
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'), $content
+					$text_converter->getValue(), $content
 				);
 			}
 
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
 			}
 

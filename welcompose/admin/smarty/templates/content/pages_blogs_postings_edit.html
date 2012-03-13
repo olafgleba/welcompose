@@ -46,18 +46,18 @@
 <!-- topsubsubnavcon static -->
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
-	{if wcom_check_access('Content', 'Page', 'Manage')}
-		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-	{/if}
-	{if wcom_check_access('Content', 'BlogPosting', 'Manage')}
-		<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}" class="on">{i18n Blog Postings}<span></span></a></li>
-	{/if}
-	{if wcom_check_access('Content', 'Box', 'Manage')}
-		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
-	{/if}
-	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
-		<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
-	{/if}
+{if wcom_check_access('Content', 'Page', 'Manage')}
+	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+{/if}
+{if wcom_check_access('Content', 'BlogPosting', 'Manage')}
+	<li><a href="pages_blogs_postings_select.php?page={$page.id|escape:"url"}" class="on">{i18n Blog Postings}<span></span></a></li>
+{/if}
+{if wcom_check_access('Content', 'Box', 'Manage')}
+	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+{/if}
+{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
+	<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+{/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
@@ -228,7 +228,12 @@
 {$form.trackbacks_enable.html}</label>
 
 <label class="cont" for="blog_posting_date_added"><span class="bez">{$form.date_added.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.date_added.html}</label>
+<div id="blog_posting_date_added">
+{foreach from=$form.date_added.elements item=_date_added}
+{$_date_added.html}
+{/foreach}
+</div>
+</label>
 
 {$form.save.html}{$form.submit.html}
 

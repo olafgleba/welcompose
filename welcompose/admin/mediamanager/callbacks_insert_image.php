@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: callbacks_insert_image.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -93,84 +91,77 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('insert_image', 'post');
-	
+	$FORM = $BASE->utility->loadQuickForm('insert_image');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	// hidden for object id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for text converter id
-	$FORM->addElement('hidden', 'text_converter');
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	
+	$text_converter = $FORM->addElement('hidden', 'text_converter', array('id' => 'text_converter'));
+
 	// hidden for text
-	$FORM->addElement('hidden', 'text');
-	$FORM->applyFilter('text', 'htmlentities');
+	$text = $FORM->addElement('hidden', 'text', array('id' => 'text'));
+	$text->addFilter('htmlentities');
 	
 	// hidden field for pager_page
-	$FORM->addElement('hidden', 'form_target');
+	$form_target = $FORM->addElement('hidden', 'form_target', array('id' => 'form_target'));
 	
 	// textfield for image alt text
-	$FORM->addElement('text', 'alt', gettext('Alternative text'), 
-		array('id' => 'alt', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('alt', 'trim');
-	$FORM->applyFilter('alt', 'strip_tags');
-	
+	$alt = $FORM->addElement('text', 'alt', 
+		array('id' => 'alt', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Alternative text'))
+		);
+
 	// textfield for image title
-	$FORM->addElement('text', 'title', gettext('Title'), 
-		array('id' => 'title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
+	$title = $FORM->addElement('text', 'title', 
+		array('id' => 'title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
+
+	// checkbox to insert image as reference only
+	$set_dimensions = $FORM->addElement('checkbox', 'set_dimensions',
+		array('id' => 'set_dimensions', 'class' => 'chbx'),
+		array('label' => gettext('Set dimensions?'))
+	);
+	$set_dimensions->addRule('regex', gettext('The field whether to set dimensions accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox to insert image as reference only
-	$FORM->addElement('checkbox', 'set_dimensions', gettext('Set dimensions?'), null,
-		array('id' => 'set_dimensions', 'class' => 'chbx'));
-	$FORM->applyFilter('set_dimensions', 'trim');
-	$FORM->applyFilter('set_dimensions', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
-	// checkbox to insert image as reference only
-	$FORM->addElement('checkbox', 'insert_as_reference', gettext('Insert as reference'), null,
-		array('id' => 'insert_as_reference', 'class' => 'chbx'));
-	$FORM->applyFilter('insert_as_reference', 'trim');
-	$FORM->applyFilter('insert_as_reference', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$insert_as_reference = $FORM->addElement('checkbox', 'insert_as_reference',
+		array('id' => 'insert_as_reference', 'class' => 'chbx'),
+		array('label' => gettext('Insert as reference'))
+	);
+	$insert_as_reference->addRule('regex', gettext('The field whether to insert as reference accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Insert object'),
-		array('class' => 'submit200insertcallback'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200insertcallback', 'value' => gettext('Insert object'))
+		);
 
 	// reset button
-	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'close140'));
+	$reset = $FORM->addElement('reset', 'reset', 
+		array('class' => 'close140', 'value' => gettext('Cancel'))
+		);		
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'set_dimensions' => 1,
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
-	));
+	)));	
 	
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-	
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-	
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -189,17 +180,9 @@ try {
 	} else {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-	
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-	
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -209,13 +192,13 @@ try {
 		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
 
 		// get object
-		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));			
+		$object = $OBJECT->selectObject(intval($id->getValue()));			
 		
 		// get text converter	
-		$text_converter = (int)$FORM->exportValue('text_converter');
+		$text_converter = (int)$text_converter->getValue();
 
 		// insert media as reference or full html
-		if ((int)($FORM->exportValue('insert_as_reference')) > 0) {			
+		if ((int)($insert_as_reference->getValue()) > 0) {			
 			// define insert_type
 			$insert_type = 'InternalReference';
 			
@@ -230,12 +213,12 @@ try {
 			
 			// prepare callback args
 			$args = array(
-				'text' => $FORM->exportValue('text'),
+				'text' => $text->getValue(),
 				'src' => sprintf('{get_media id="%u"}', $object['id']),
-				'width' => ($FORM->exportValue('set_dimensions') == 1) ? $object['file_width'] : '',
-				'height' => ($FORM->exportValue('set_dimensions') == 1) ? $object['file_height'] : '',
-				'alt' => $FORM->exportValue('alt'),
-				'title' => $FORM->exportValue('title')
+				'width' => ($set_dimensions->getValue() == 1) ? $object['file_width'] : '',
+				'height' => ($set_dimensions->getValue() == 1) ? $object['file_height'] : '',
+				'alt' => $alt->getValue(),
+				'title' => $title->getValue()
 			);
 		}
 	

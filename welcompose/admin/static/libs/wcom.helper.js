@@ -2,7 +2,7 @@
  * Project: Welcompose
  * File: wcom.helper.js
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -11,12 +11,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -889,6 +887,17 @@ function Helper_showResponsePagesSecondLinks(req)
 		Behaviour.reapply('a.process_insert');
 		Behaviour.reapply('a.showNextNode');
 		Behaviour.reapply('a.showNextNodeBoxes');
+
+		// trigger tooltip
+		$$(".page a").each( function(link) {
+			new Tooltip(link, {
+				mouseFollow: false, 
+				opacity: 1, 
+				backgroundColor: '#333',
+				textColor: '#fff', 
+				appearDuration: '0.15'
+			});
+		});
 		
 	} catch (e) {
 		_applyError(e);
@@ -907,10 +916,21 @@ function Helper_showResponsePagesThirdLinks(req)
 	try {
 		Effect.Fade('indicator_pagesLinks', {duration: 0.4});
 		Effect.Appear('thirdNode',{duration: 0.6});	
-		$('thirdNode').innerHTML = req.responseText;		
+		$('thirdNode').innerHTML = req.responseText;
 		Behaviour.reapply('a.process_insert');
 		Behaviour.reapply('a.showNextNode');
 		
+		// trigger tooltip
+		$$(".page a").each( function(link) {
+			new Tooltip(link, {
+				mouseFollow: false, 
+				opacity: 1, 
+				backgroundColor: '#333',
+				textColor: '#fff', 
+				appearDuration: '0.15'
+			});
+		});
+				
 	} catch (e) {
 		_applyError(e);
 	}

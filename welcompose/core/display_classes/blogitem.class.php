@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: blogitem.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -201,71 +199,73 @@ public function render ()
 {
 	// only create form if commenting is allowed
 	if ($this->_posting['comments_enable']) {
+		
 		// start new HTML_QuickForm
-		$FORM = $this->base->utility->loadQuickForm('blog_comment', 'post',
-			$this->getLocationSelf(true));
+		$FORM = $this->base->utility->loadQuickForm('blog_comment', 'post', 
+			array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
+
+		// apply filters to all fields
+		$FORM->addRecursiveFilter('trim');
+		$FORM->addRecursiveFilter('strip_tags');
 		
 		// hidden for posting
-		$FORM->addElement('hidden', 'posting');
-		$FORM->applyFilter('posting', 'trim');
-		$FORM->applyFilter('posting', 'strip_tags');
-		$FORM->addRule('posting', gettext('Posting is not expected to be empty'), 'required');
-		$FORM->addRule('posting', gettext('Posting is expected to be numeric'), 'numeric');
+		$posting = $FORM->addElement('hidden', 'posting', array('id' => 'posting'));
+		$posting->addRule('required', gettext('Posting is not expected to be empty'));
+		$posting->addRule('regex', gettext('Posting is expected to be numeric'), WCOM_REGEX_NUMERIC);
 		
 		// textfield for name
-		$FORM->addElement('text', 'name', gettext('Name'),
-			array('id' => 'comment_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('name', 'trim');
-		$FORM->applyFilter('name', 'strip_tags');
-		$FORM->addRule('name', gettext('Please enter a name'), 'required');
+		$name = $FORM->addElement('text', 'name', 
+			array('id' => 'comment_name', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Name'))
+			);
+		$name->addRule('required', gettext('Please enter a name'));
 		
 		// textfield for email
-		$FORM->addElement('text', 'email', gettext('E-mail'),
-			array('id' => 'comment_email', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('email', 'trim');
-		$FORM->applyFilter('email', 'strip_tags');
-		$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
+		$email = $FORM->addElement('text', 'email', 
+			array('id' => 'comment_email', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('E-mail'))
+			);
+		$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);
 		
 		// textfield for homepage
-		$FORM->addElement('text', 'homepage', gettext('Homepage'),
-			array('id' => 'comment_homepage', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('homepage', 'trim');
-		$FORM->applyFilter('homepage', 'strip_tags');
-		$FORM->addRule('homepage', gettext('Please enter a valid website URL'), 'regex',
-			WCOM_REGEX_URL);
+		$homepage = $FORM->addElement('text', 'homepage', 
+			array('id' => 'comment_homepage', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Homepage'))
+			);
+		$homepage->addRule('regex', gettext('Please enter a valid website URL'), WCOM_REGEX_URL);
 		
-		// terxtarea for message
-		$FORM->addElement('textarea', 'comment', gettext('Comment'),
-			array('id' => 'comment_comment', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
-		$FORM->applyFilter('comment', 'trim');
-		$FORM->applyFilter('comment', 'strip_tags');
-		$FORM->addRule('comment', gettext('Please enter a comment'), 'required');
+		// textarea for message
+		$comment = $FORM->addElement('textarea', 'comment', 
+			array('id' => 'comment_comment', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'),
+			array('label' => gettext('Comment'))
+			);
+		$comment->addRule('required', gettext('Please enter a comment'));
 		
 		// textfield for captcha if the captcha is enabled
 		if ($this->_settings['blog_comment_use_captcha'] != 'no') {
-			$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-				array('id' => 'simple_form_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-			$FORM->applyFilter('_qf_captcha', 'trim');
-			$FORM->applyFilter('_qf_captcha', 'strip_tags');
-			$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-			$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-				$this->captcha->captchaValue());
+			$_qf_captcha = $FORM->addElement('text', '_qf_captcha', 
+				array('id' => 'comment_captcha', 'maxlength' => 255, 'class' => 'ftextfield'),
+				array('label' => gettext('Captcha text'))
+				);
+			$_qf_captcha->addRule('required', gettext('Please enter the captcha text'));
+			$_qf_captcha->addRule('eq', gettext('Invalid captcha text entered'), $this->captcha->captchaValue());		
 		}
 		
 		// submit button
-		$FORM->addElement('submit', 'submit', gettext('Send'),
-			array('class' => 'fsubmit'));
+		$submit = $FORM->addElement('submit', 'submit', 
+			array('class' => 'fsubmit', 'value' => gettext('Send'))
+			);
 		
 		// set defaults
-		$FORM->setDefaults(array(
-			'posting' => (int)$this->_posting['id']
-		));
+		$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
+				'posting' => (int)$this->_posting['id']
+		)));	
 		
 		// test if the form validates. if it validates, process it and
 		// skip the rest of the page
 		if ($FORM->validate()) {
 			// freeze the form
-			$FORM->freeze();
+			$FORM->toggleFrozen(true);
 			
 			// load Community_BlogComment class
 			$BLOGCOMMENT = load('Community:BlogComment');
@@ -283,13 +283,13 @@ public function render ()
 			$sqlData['posting'] = $this->_posting['id'];
 			$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null); 
 			$sqlData['status'] = $this->_settings['blog_comment_default_status'];
-			$sqlData['name'] = $FORM->exportValue('name');
-			$sqlData['email'] = $FORM->exportValue('email');
-			$sqlData['homepage'] = $FORM->exportValue('homepage');
-			$sqlData['content_raw'] = $FORM->exportValue('comment');
-			$sqlData['content'] = $FORM->exportValue('comment');
-			$sqlData['original_raw'] = $FORM->exportValue('comment');
-			$sqlData['original'] = $FORM->exportValue('comment');
+			$sqlData['name'] = $name->getValue();
+			$sqlData['email'] = $email->getValue();
+			$sqlData['homepage'] = $homepage->getValue();
+			$sqlData['content_raw'] = $comment->getValue();
+			$sqlData['content'] = $comment->getValue();
+			$sqlData['original_raw'] = $comment->getValue();
+			$sqlData['original'] = $comment->getValue();
 			$sqlData['text_converter'] = null;
 			$sqlData['edited'] = "0";
 			$sqlData['date_added'] = date('Y-m-d H:i:s');
@@ -297,9 +297,9 @@ public function render ()
 			// apply text converter if required
 			if (!empty($this->_settings['blog_comment_text_converter'])) {
 				$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($this->_settings['blog_comment_text_converter'],
-					$FORM->exportValue('comment'));
+					$comment->getValue());
 				$sqlData['original'] = $TEXTCONVERTER->applyTextConverter($this->_settings['blog_comment_text_converter'],
-					$FORM->exportValue('comment'));
+					$comment->getValue());
 				$sqlData['text_converter'] = $this->_settings['blog_comment_text_converter'];
 			}
 			
@@ -339,20 +339,14 @@ public function render ()
 			// redirect to itself
 			header($this->getRedirectLocationSelf());
 			exit;
-		}
-		
+		}		
+				
 		// render form
 		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-		$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-	
-		$FORM->accept($renderer);
+		//$renderer->setRequiredTemplate($this->getRequiredTemplate());
 
 		// assign the form to smarty
-		$this->base->utility->smarty->assign('form', $renderer->toArray());
+		$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// generate captcha if required
 		if ($this->_settings['blog_comment_use_captcha'] != 'no') {

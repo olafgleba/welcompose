@@ -11,15 +11,16 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
 <script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
 </head>
 
 <body>
@@ -80,9 +81,9 @@
 </td>
 <td>{$_group.description|escape:"html"|nl2br}</td>
 <td>{$_group.project_name|escape:"html"}</td>
-<td><a class="edit" href="groups_copy.php?id={$_group.id|escape:"url"}" title="{i18n Duplicate}"></a></td>
+<td class="page"><a class="edit" href="groups_copy.php?id={$_group.id|escape:"url"}" title="{i18n Duplicate entry}"></a></td>
 {if $_group.editable}
-<td><a class="delete" href="groups_delete.php?id={$_group.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="delete" href="groups_delete.php?id={$_group.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
 {else}
 <td>&nbsp;</td>
 {/if}

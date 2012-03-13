@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: callbacks_insert_image.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -93,7 +91,7 @@ try {
 	}
 
 	// prepare quality array
-	$quality = array(
+	$qualities = array(
 		'' => gettext('Default'),
 		'low' => gettext('Low'),
 		'high' => gettext('High'),
@@ -102,7 +100,7 @@ try {
 	);
 	
 	// prepare scale array
-	$scale = array(
+	$scales = array(
 		'' => gettext('Default'),
 		'showall' => gettext('Show all'),
 		'noborder' => gettext('No border'),
@@ -110,7 +108,7 @@ try {
 	);
 	
 	// prepare wmode array
-	$wmode = array(
+	$wmodes = array(
 		'' => gettext('Default'),
 		'window' => gettext('Window'),
 		'opaque' => gettext('Opaque'),
@@ -118,101 +116,94 @@ try {
 	);
 			
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('insert_x-shockwave-flash', 'post');
+	$FORM = $BASE->utility->loadQuickForm('insert_x-shockwave-flash');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for object id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for text converter id
-	$FORM->addElement('hidden', 'text_converter');
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	
+	$text_converter = $FORM->addElement('hidden', 'text_converter', array('id' => 'text_converter'));
+
 	// hidden for text
-	$FORM->addElement('hidden', 'text');
-	$FORM->applyFilter('text', 'htmlentities');
+	$text = $FORM->addElement('hidden', 'text', array('id' => 'text'));
+	$text = $FORM->addFilter('htmlentities');
 	
 	// hidden field for pager_page
-	$FORM->addElement('hidden', 'form_target');
+	$form_target = $FORM->addElement('hidden', 'form_target', array('id' => 'form_target'));
 
 	// select for param quality
-	$FORM->addElement('select', 'quality', gettext('Quality'), $quality,
-		array('id' => 'quality'));
-	$FORM->applyFilter('quality', 'trim');
-	$FORM->applyFilter('quality', 'strip_tags');
-	
+	$quality = $FORM->addElement('select', 'quality',
+	 	array('id' => 'quality'),
+		array('label' => gettext('Quality'), 'options' => $qualities)
+		);
+		
 	// select for param scale
-	$FORM->addElement('select', 'scale', gettext('Scale'), $scale,
-		array('id' => 'scale'));
-	$FORM->applyFilter('scale', 'trim');
-	$FORM->applyFilter('scale', 'strip_tags');
-	
+	$scale = $FORM->addElement('select', 'scale',
+	 	array('id' => 'scale'),
+		array('label' => gettext('Scale'), 'options' => $scales)
+		);
+
 	// select for param wmode
-	$FORM->addElement('select', 'wmode', gettext('WMode'), $wmode,
-		array('id' => 'wmode'));
-	$FORM->applyFilter('wmode', 'trim');
-	$FORM->applyFilter('wmode', 'strip_tags');
-	
+	$wmode = $FORM->addElement('select', 'wmode',
+	 	array('id' => 'wmode'),
+		array('label' => gettext('WMode'), 'options' => $wmodes)
+		);
+
 	// textfield for param bgcolor
-	$FORM->addElement('text', 'bgcolor', gettext('Background color'), 
-		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('bgcolor', 'trim');
-	$FORM->applyFilter('bgcolor', 'strip_tags');
-	$FORM->addRule('bgcolor', gettext('Please use a valid hexadezimal syntax'), 'regex', WCOM_REGEX_HEXADEZIMAL);
+	$bgcolor = $FORM->addElement('text', 'bgcolor', 
+		array('id' => 'bgcolor', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Background color'))
+		);
+	$bgcolor->addRule('regex', gettext('Please use a valid hexadezimal syntax'), WCOM_REGEX_HEXADEZIMAL);
 	
 	// checkbox for param play
-	$FORM->addElement('checkbox', 'play', gettext('Avoid instant 
-	playing'), null,
-		array('id' => 'play', 'class' => 'chbx'));
-	$FORM->applyFilter('play', 'trim');
-	$FORM->applyFilter('play', 'strip_tags');
-	
+	$play = $FORM->addElement('checkbox', 'play',
+		array('id' => 'play', 'class' => 'chbx'),
+		array('label' => gettext('Avoid instant playing'))
+	);
+
 	// checkbox for param loop
-	$FORM->addElement('checkbox', 'loop', gettext('Avoid looping'), null,
-		array('id' => 'loop', 'class' => 'chbx'));
-	$FORM->applyFilter('loop', 'trim');
-	$FORM->applyFilter('loop', 'strip_tags');
+	$loop = $FORM->addElement('checkbox', 'loop',
+		array('id' => 'loop', 'class' => 'chbx'),
+		array('label' => gettext('Avoid looping'))
+	);
 	
 	// checkbox to insert shockwave as reference only
-	$FORM->addElement('checkbox', 'insert_as_reference', gettext('Insert as reference'), null,
-		array('id' => 'insert_as_reference', 'class' => 'chbx'));
-	$FORM->applyFilter('insert_as_reference', 'trim');
-	$FORM->applyFilter('insert_as_reference', 'strip_tags');
-	$FORM->addRule('active', gettext('The field whether compress is enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$insert_as_reference = $FORM->addElement('checkbox', 'insert_as_reference',
+		array('id' => 'insert_as_reference', 'class' => 'chbx'),
+		array('label' => gettext('Insert as reference'))
+	);
+	$insert_as_reference->addRule('regex', gettext('The field whether to insert as reference accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Insert object'),
-		array('class' => 'submit200insertcallback'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200insertcallback', 'value' => gettext('Insert object'))
+		);
 
 	// reset button
-	$FORM->addElement('reset', 'reset', gettext('Cancel'),
-		array('class' => 'close140'));
+	$reset = $FORM->addElement('reset', 'reset', 
+		array('class' => 'close140', 'value' => gettext('Cancel'))
+		);
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
-	));
+	)));	
 			
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-	
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-	
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -229,10 +220,8 @@ try {
 		$BASE->utility->smarty->display('mediamanager/callbacks_insert_application-x-shockwave-flash.html', WCOM_TEMPLATE_KEY);
 
 	} else {
-		// render it either
+		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 	
 		// remove attribute on form tag for XHTML compliance
 		$FORM->removeAttribute('name');
@@ -241,7 +230,7 @@ try {
 		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -251,13 +240,13 @@ try {
 		$BASE->utility->smarty->assign('form_target', Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER));
 
 		// get object
-		$object = $OBJECT->selectObject(intval($FORM->exportValue('id')));
+		$object = $OBJECT->selectObject(intval($id->getValue()));
 
 		// get text converter	
-		$text_converter = (int)$FORM->exportValue('text_converter');		
+		$text_converter = (int)$text_converter->getValue();		
 		
 		// insert media as reference or full html
-		if ((int)($FORM->exportValue('insert_as_reference')) > 0) {			
+		if ((int)($insert_as_reference->getValue()) > 0) {			
 			// define insert_type
 			$insert_type = 'InternalReference';
 			
@@ -272,16 +261,16 @@ try {
 			
 			// prepare callback args
 			$args = array(
-				'text' => $FORM->exportValue('text'),
+				'text' => $text->getValue(),
 				'data' => sprintf('{get_media id="%u"}', $object['id']),
 				'width' => $object['file_width'],
 				'height' => $object['file_height'],
-				'quality' => $FORM->exportValue('quality'),
-				'scale' => $FORM->exportValue('scale'),
-				'wmode' => $FORM->exportValue('wmode'),
-				'bgcolor' => $FORM->exportValue('bgcolor'),
-				'play' => $FORM->exportValue('play'),
-				'loop' => $FORM->exportValue('loop')
+				'quality' => $quality->getValue(),
+				'scale' => $scale->getValue(),
+				'wmode' => $wmode->getValue(),
+				'bgcolor' => $bgcolor->getValue(),
+				'play' => $play->getValue(),
+				'loop' => $loop->getValue()
 			);
 		}
 

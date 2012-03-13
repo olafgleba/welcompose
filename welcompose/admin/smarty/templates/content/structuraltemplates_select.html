@@ -11,10 +11,12 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -83,7 +85,7 @@
 <tr>
 <td class="page"><a href="structuraltemplates_edit.php?id={$_template.id|escape:"url"}" title="{i18n Edit}">{$_template.name|escape:"html"}</a></td>
 <td>{$_template.description|escape:"html"}</td>
-<td><a class="delete" href="structuraltemplates_delete.php?id={$_template.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="delete" href="structuraltemplates_delete.php?id={$_template.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
 </tr>
 {/foreach}
 </table>

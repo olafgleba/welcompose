@@ -12,10 +12,12 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -88,9 +90,9 @@
 <tr>
 <td class="page"><a href="globaltemplates_edit.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Edit}">{$_global_template.name|escape:"html"}</td>
 <td>{$_global_template.description|escape:"html"}</a></td>
-<td><a class="upload showTableRow" href="#" id="e_{$_global_template.id}" title="{i18n Upload}"></a></td>
-<td><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"url"}" title="{i18n Download}"></a></td>
-<td><a class="delete confirmDelTplGlobal" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="upload showTableRow" href="#" id="e_{$_global_template.id}" title="{i18n Upload global template}"></a></td>
+<td class="page"><a class="download" href="globaltemplates_download.php?id={$_global_template.id|escape:"url"}" title="{i18n Download global template}"></a></td>
+<td class="page"><a class="delete confirmDelTplGlobal" href="globaltemplates_delete.php?id={$_global_template.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n Delete entry}"></a></td>
 </tr>
 <tr id="o_{$_global_template.id}" class="outer">
 <td colspan="5">

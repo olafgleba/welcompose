@@ -90,10 +90,10 @@ var response = '{$session.response}';
 
 {$form.hidden}
 
-<label class="cont" for="abbreviation_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="abbreviation_name"><span class="bez">{$form.name.label}{if $form.name.required}{if $form.name.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}</label>
 
-<label class="cont h04" for="abbreviation_long_form"><span class="bez">{$form.long_form.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04" for="abbreviation_long_form"><span class="bez">{$form.long_form.label}{if $form.long_form.required}{if $form.long_form.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.long_form.html}</label>
 
 <div class="act">
@@ -104,16 +104,16 @@ var response = '{$session.response}';
 </ul>
 </div>
 
-<label class="cont h13act" for="abbreviation_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h13act" for="abbreviation_content"><span class="bez">{$form.content.label}{if $form.content.required}{if $form.content.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.content.html}</label>
 
-<label class="cont" for="abbreviation_lang"><span class="bez">{$form.lang.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="abbreviation_lang"><span class="bez">{$form.lang.label}{if $form.lang.required}{if $form.lang.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.lang.html}</label>
 
-<label class="cont" for="abbreviation_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="abbreviation_text_converter"><span class="bez">{$form.text_converter.label}{if $form.text_converter.required}{if $form.text_converter.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.text_converter.html}</label>
 
-<label class="cont chbx" for="abbreviation_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="abbreviation_apply_macros"><span class="bez">{$form.apply_macros.label}{if $form.apply_macros.required}{if $form.apply_macros.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if} <span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
 {$form.submit.html}

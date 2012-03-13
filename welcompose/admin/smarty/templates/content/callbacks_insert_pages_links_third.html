@@ -1,13 +1,13 @@
 <table>
 {foreach from=$yearly_archives item=_year}
 <tr>
-<td class="initialNode"><a class="process_insert" id="{$page_id}" name="archive_year" href="#" title="{i18n Insert this link}">{$_year.year}</a><span id="{$_year.year}"</td>
+<td class="initialNode page"><a class="process_insert" id="{$page_id}" name="archive_year" href="#" title="{i18n Insert this link}">{$_year.year}</a><span id="{$_year.year}"</td>
 <td>&nbsp;</td>
 </tr>
 {foreach from=$monthly_archives item=_month}
 {if $_month.year == $_year.year}
 <tr>
-<td class="initialNode"><a class="process_insert" id="{$page_id}" name="archive_month" href="#" title="{i18n Insert this link}">{$_month.timestamp|date_format:"%B %Y"}</a><span id="{$_month.year}"></span><span id="{$_month.month}"></span></td>
+<td class="initialNode page"><a class="process_insert" id="{$page_id}" name="archive_month" href="#" title="{i18n Insert this link}">{$_month.timestamp|date_format:"%B %Y"}</a><span id="{$_month.year}"></span><span id="{$_month.month}"></span></td>
 <td>&nbsp;</td>
 </tr>
 {/if}

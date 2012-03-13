@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: structuraltemplates_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -103,66 +101,65 @@ try {
 	$structural_template = $STRUCTURALTEMPLATE->selectStructuralTemplate($template_id);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('structural_template', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $STRUCTURALTEMPLATE);
+	$FORM = $BASE->utility->loadQuickForm('structural_template');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
-	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
-	
-	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'structural_template_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A structural template with the given name already exists'),
-		'testForNameUniqueness', $FORM->exportValue('id'));
+	// hidden id
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+		
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'structural_template_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('callback', gettext('A structural template with the given name already exists'), 
+		array(
+			'callback' => array($STRUCTURALTEMPLATE, 'testForUniqueName'),
+			'arguments' => array($id->getValue())
+		)
+	);
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'structural_template_description', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'));
-	$FORM->applyFilter('content', 'trim');
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'structural_template_description', 'cols' => 3, 'rows' => '2', 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
 	
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'structural_template_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
-	
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'structural_template_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
+		
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($structural_template['id'], null),
 		'name' => Base_Cnc::ifsetor($structural_template['name'], null),
 		'description' => Base_Cnc::ifsetor($structural_template['description'], null),
 		'content' => Base_Cnc::ifsetor($structural_template['content'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -202,13 +199,13 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['description'] = $description->getValue();
+		$sqlData['content'] = $content->getValue();
 		
 		// check sql data for pear errors
 		$HELPER = load('utility:helper');
@@ -220,7 +217,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$STRUCTURALTEMPLATE->updateStructuralTemplate($FORM->exportValue('id'),
+			$STRUCTURALTEMPLATE->updateStructuralTemplate($id->getValue(),
 				$sqlData);
 			
 			// commit
@@ -234,7 +231,7 @@ try {
 		}
 		
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -251,7 +248,7 @@ try {
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: structuraltemplates_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: structuraltemplates_edit.php?id=".$id->getValue());
 		} else {
 			header("Location: structuraltemplates_select.php");
 		}

@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: globalfiles_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * 
+ * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -103,38 +101,36 @@ try {
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('global_file', 'post');
+	$FORM = $BASE->utility->loadQuickForm('global_file');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// file upload field
-	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
-		array('id' => 'global_file_file', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
+	$file = $FORM->addElement('file', 'file', 
+		array('id' => 'global_file_file'),
+		array('label' => gettext('File'))
+		);
+	$file->addRule('required', gettext('Please select a file'));
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'global_file_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'global_file_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -174,21 +170,24 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// handle file upload
-		if ($file_upload->isUploadedFile()) {
-			// get file data
-			$data = $file_upload->getValue();
-			
-			// clean file data
-			foreach ($data as $_key => $_value) {
-				$data[$_key] = trim(strip_tags($_value));
-			}
+		// get file data
+		$data = $file->getValue();
+		
+		// clean file data
+		foreach ($data as $_key => $_value) {
+			$data[$_key] = trim(strip_tags($_value));
+		}
+		
+		// file available to upload?
+		if (!empty($data['name'])) {
 
 			// test if a file with prepared file name exits already
 			$check_global_file = $GLOBALFILE->testForUniqueFilename($data['name'], null, 'add');
 			
+			// Unique file? 
 			if ($check_global_file === true) {
 							
 				// move file to file store
@@ -198,7 +197,7 @@ try {
 				$sqlData = array();
 				$sqlData['project'] = WCOM_CURRENT_PROJECT;
 				$sqlData['name'] = $data['name'];
-				$sqlData['description'] = $FORM->exportValue('description');
+				$sqlData['description'] = $description->getValue();
 				$sqlData['name_on_disk'] = $name_on_disk;
 				$sqlData['mime_type'] = $data['type'];
 				$sqlData['size'] = (int)$data['size'];

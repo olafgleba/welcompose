@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_events_postings_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2011 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -125,125 +123,123 @@ try {
 	$page = $PAGE->selectPage(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('event_posting', 'post');
-	
-	// hidden for page
-	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$FORM = $BASE->utility->loadQuickForm('event_posting');
 
-	// textfield for title
-	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'event_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
-	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
+	// hidden for page
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
+	// textfield for title	
+	$title = $FORM->addElement('text', 'title', 
+		array('id' => 'event_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'),
+		array('label' => gettext('Title'))
+		);
+	$title->addRule('required', gettext('Please enter a title'));
+		
 	// textfield for URL title
-	$FORM->addElement('text', 'title_url', gettext('URL title'),
-		array('id' => 'event_posting_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('title_url', 'trim');
-	$FORM->applyFilter('title_url', 'strip_tags');
-	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
-	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
-		WCOM_REGEX_URL_NAME);
+	$title_url = $FORM->addElement('text', 'title_url', 
+		array('id' => 'event_posting_title_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('URL title'))
+		);
+	$title_url->addRule('required', gettext('Enter an URL title'));
+	$title_url->addRule('regex', gettext('The URL title may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);
+	
+	
+	// $FORM->addGroupRule('date_start', gettext('Please enter a start date at least'), 'required');
 		
 	// date element for date_start
-	$FORM->addElement('date', 'date_start', gettext('Start date'),
-		array('language' => 'en', 'format' => 'd.m.Y', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
-		array('id' => 'event_posting_date_start'));
-	$FORM->addGroupRule('date_start', gettext('Please enter a start date at least'), 'required');
+	$date_start = $FORM->addElement('date', 'date_start', null,
+		array('label' => gettext('Start date'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'd.m.Y','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
+	$date_start->addRule('required', gettext('Please enter a start date at least'));
 		
 	// date element for date_start_time_start
-	$FORM->addElement('date', 'date_start_time_start', gettext('Start time'),
-		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_start_time_start'));
+	$date_start_time_start = $FORM->addElement('date', 'date_start_time_start', null,
+		array('label' => gettext('Start time'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'H:i')
+	);
 		
 	// date element for date_start_time_end
-	$FORM->addElement('date', 'date_start_time_end', gettext('End time'),
-		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_start_time_end'));
+	$date_start_time_end = $FORM->addElement('date', 'date_start_time_end', null,
+		array('label' => gettext('End time'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'H:i')
+	);
 	
 	// date element for date_end
-	$FORM->addElement('date', 'date_end', gettext('End date'),
-		array('language' => 'en', 'format' => 'd.m.Y', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
-		array('id' => 'event_posting_date_end'));
+	$date_end = $FORM->addElement('date', 'date_end', null,
+		array('label' => gettext('End date'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'd.m.Y','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
 		
 	// date element for date_end_time_start
-	$FORM->addElement('date', 'date_end_time_start', gettext('Start time'),
-		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_end_time_start'));
+	$date_end_time_start = $FORM->addElement('date', 'date_end_time_start', null,
+		array('label' => gettext('Start time'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'H:i')
+	);
 		
-	// date element for date_end_time_end
-	$FORM->addElement('date', 'date_end_time_end', gettext('End time'),
-		array('language' => 'en', 'format' => 'H:i \U\h\r', 'addEmptyOption' => true), array('id' => 'event_posting_date_end_time_end'));
+	// date element for date_end_time_end1
+	$date_end_time_end = $FORM->addElement('date', 'date_end_time_end', null,
+		array('label' => gettext('End time'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'H:i')
+	);		
 	
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'event_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
-	
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'event_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
+				
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'event_posting_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
-	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'event_posting_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'event_posting_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
+		
 	// textarea for tags
-	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'event_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
-	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');
-	
+	$tags = $FORM->addElement('textarea', 'tags', 
+		array('id' => 'event_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Tags'))
+		);
+		
+	// checkbox for apply_macros
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'event_posting_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+		
 	// checkbox for draft
-	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-		array('id' => 'event_posting_draft', 'class' => 'chbx'));
-	$FORM->applyFilter('draft', 'trim');
-	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether the posting is a draft accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$draft = $FORM->addElement('checkbox', 'draft',
+		array('id' => 'event_posting_draft', 'class' => 'chbx'),
+		array('label' => gettext('Draft'))
+		);
+	$draft->addRule('regex', gettext('The field whether the posting is a draft accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
 	// date element for date_added
-	$FORM->addElement('date', 'date_added', gettext('Creation date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
-		array('id' => 'event_posting_date_added'));
+	$date_added = $FORM->addElement('date', 'date_added', null,
+		array('label' => gettext('Creation date'),'language' => 'de', 'format' => 'd.m.Y H:i','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null,
 		'apply_macros' => 1,
 		'date_added' => date('Y-m-d H:i:s')
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -286,50 +282,50 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['page'] = $FORM->exportValue('page');
+		$sqlData['page'] = $page_id->getValue();
 		$sqlData['user'] = WCOM_CURRENT_USER;
-		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $FORM->exportValue('title_url');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? $FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
-		$sqlData['date_added'] = $date_added = $HELPER->datetimeFromQuickFormDate($FORM->exportValue('date_added'));
+		$sqlData['title'] = $title->getValue();
+		$sqlData['title_url'] = $title_url->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? $text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
+		$sqlData['draft'] = (string)intval($draft->getValue());
+		$sqlData['date_added'] = $date_added = $HELPER->datetimeFromQuickFormDate($date_added->getValue());
 		$sqlData['year_added'] = date('Y', strtotime($date_added));
 		$sqlData['month_added'] = date('m', strtotime($date_added));
 		$sqlData['day_added'] = date('d', strtotime($date_added));
-		$sqlData['date_start'] = $HELPER->dateFromQuickFormDate($FORM->exportValue('date_start'));
-		$sqlData['date_start_time_start'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_start_time_start'));
-		$sqlData['date_start_time_end'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_start_time_end'));
-		$sqlData['date_end'] = $HELPER->dateFromQuickFormDate($FORM->exportValue('date_end'));
-		$sqlData['date_end_time_start'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_end_time_start'));
-		$sqlData['date_end_time_end'] = $HELPER->timeFromQuickFormDate($FORM->exportValue('date_end_time_end'));
+		$sqlData['date_start'] = $HELPER->dateFromQuickFormDate($date_start->getValue());
+		$sqlData['date_start_time_start'] = $HELPER->timeFromQuickFormDate($date_start_time_start->getValue());
+		$sqlData['date_start_time_end'] = $HELPER->timeFromQuickFormDate($date_start_time_end->getValue());
+		$sqlData['date_end'] = $HELPER->dateFromQuickFormDate($date_end->getValue());
+		$sqlData['date_end_time_start'] = $HELPER->timeFromQuickFormDate($date_end_time_start->getValue());
+		$sqlData['date_end_time_end'] = $HELPER->timeFromQuickFormDate($date_end_time_end->getValue());
 		
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract content
-			$content = $FORM->exportValue('content');
+			$content = $content->getValue();
 
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 			}
 
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$content
 				);
 			}
 
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
 			}
 
@@ -349,8 +345,8 @@ try {
 			$posting_id = $EVENTPOSTING->addEventPosting($sqlData);
 			
 			// add tags
-			$EVENTTAG->addPostingTags($FORM->exportValue('page'), $posting_id,
-				$EVENTTAG->_tagStringToArray($FORM->exportValue('tags')));
+			$EVENTTAG->addPostingTags($page_id->getValue(), $posting_id,
+				$EVENTTAG->_tagStringToArray($tags->getValue()));
 			
 			// get tags
 			$tags = $EVENTTAG->selectEventTags(array('posting' => $posting_id));
@@ -385,7 +381,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_events_postings_add.php?page=".$FORM->exportValue('page'));
+		header("Location: pages_events_postings_add.php?page=".$page_id->getValue());
 		exit;
 	}
 } catch (Exception $e) {

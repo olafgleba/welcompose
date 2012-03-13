@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: users_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -105,92 +103,94 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('user', 'post');
-	$FORM->registerRule('testForEmailUniqueness', 'callback', 'testForUniqueEmail', $USER);
+	$FORM = $BASE->utility->loadQuickForm('user');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
-	// select for group
-	$FORM->addElement('select', 'group', gettext('Group'), $groups,
-		array('id' => 'user_group'));
-	$FORM->applyFilter('group', 'trim');
-	$FORM->applyFilter('group', 'strip_tags');
-	$FORM->addRule('group', gettext('Please select a group'), 'required');
-	$FORM->addRule('group', gettext('Selected group is out of range'), 'in_array_keys',
-		$groups);
-	
-	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'user_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
+	// select for group		
+	$group = $FORM->addElement('select', 'group',
+	 	array('id' => 'user_group'),
+		array('label' => gettext('Group'), 'options' => $groups)
+		);
+	$group->addRule('required', gettext('Please select a group'));
 	
 	// textfield for name
-	$FORM->addElement('text', 'email', gettext('E-mail'), 
-		array('id' => 'user_email', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('email', 'trim');
-	$FORM->applyFilter('email', 'strip_tags');
-	$FORM->addRule('email', gettext('Please enter an e-mail address'), 'required');
-	$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
-	$FORM->addRule('email', gettext('A user with this e-mail address already exists'),
-		'testForEmailUniqueness');
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'user_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	
+	// textfield for email
+	$email = $FORM->addElement('text', 'email', 
+		array('id' => 'user_email', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('E-mail'))
+		);
+	$email->addRule('required', gettext('Please enter an e-mail address'));
+	$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);
+	$email->addRule('callback', gettext('A user with this e-mail address already exists'), 
+		array(
+			'callback' => array($USER, 'testForUniqueEmail')
+		)
+	);
 	
 	// textfield for password
-	$FORM->addElement('password', 'password', gettext('Password'), 
-		array('id' => 'user_password', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('password', 'trim');
-	$FORM->applyFilter('password', 'strip_tags');
-	$FORM->addRule('password', gettext('Please enter a password'), 'required');
-	$FORM->addRule('password', gettext('Please enter a password with at least five characters'),
-		'minlength', 5);
+	$password = $FORM->addElement('password', 'password', 
+		array('id' => 'user_password', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Password'))
+		);
+	$password->addRule('required', gettext('Please enter a password'));
+	$password->addRule('minlength', gettext('Please enter a password with at least five characters'), 5);
+	
+	// textfield for password compare
+	$password_verify = $FORM->addElement('password', 'password_verify', 
+		array('id' => 'user_password_verify', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Password verify'))
+		);
+	$password_verify->addRule('required', gettext('Please enter your password again to verify your former input'));
+	$password_verify->addRule('compare', gettext('It seems your entered password does not compare to your former input'), 
+		array('operand' => $password->getValue())
+	);
 	
 	// textfield for homepage
-	$FORM->addElement('text', 'homepage', gettext('Homepage'), 
-		array('id' => 'user_homepage', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('homepage', 'trim');
-	$FORM->applyFilter('homepage', 'strip_tags');
-	$FORM->addRule('homepage', gettext("Please enter a valid homepage URL"), 'regex',
-		WCOM_REGEX_URL);
+	$homepage = $FORM->addElement('text', 'homepage', 
+		array('id' => 'user_homepage', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Homepage'))
+		);
+	$homepage->addRule('regex', gettext('Please enter a valid homepage URL'), WCOM_REGEX_URL);
 	
 	// checkbox for author
-	$FORM->addElement('checkbox', 'author', gettext('Author'), null,
-		array('id' => 'user_author', 'class' => 'chbx'));
-	$FORM->applyFilter('author', 'trim');
-	$FORM->applyFilter('author', 'strip_tags');
-	$FORM->addRule('author', gettext('The field author accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$author = $FORM->addElement('checkbox', 'author',
+		array('id' => 'user_author', 'class' => 'chbx'),
+		array('label' => gettext('Author'))
+		);
+	$author->addRule('regex', gettext('The field author accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for active
-	$FORM->addElement('checkbox', 'active', gettext('Active'), null,
-		array('id' => 'user_active', 'class' => 'chbx'));
-	$FORM->applyFilter('active', 'trim');
-	$FORM->applyFilter('active', 'strip_tags');
-	$FORM->addRule('active', gettext('The field active accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$active = $FORM->addElement('checkbox', 'active',
+		array('id' => 'user_active', 'class' => 'chbx'),
+		array('label' => gettext('Active'))
+		);
+	$active->addRule('regex', gettext('The field active accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'active' => 1
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -233,14 +233,14 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['email'] = $FORM->exportValue('email');
-		$sqlData['secret'] = crypt($FORM->exportValue('password'));
-		$sqlData['homepage'] = $FORM->exportValue('homepage');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['email'] = $email->getValue();
+		$sqlData['secret'] = crypt($password->getValue());
+		$sqlData['homepage'] = $homepage->getValue();
 		$sqlData['editable'] = "1";
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
@@ -257,11 +257,11 @@ try {
 			$user_id = $USER->addUser($sqlData);
 			
 			// map user to group
-			$USER->mapUserToGroup($user_id, $FORM->exportValue('group'));
+			$USER->mapUserToGroup($user_id, $group->getValue());
 			
 			// map user to project
-			$USER->mapUserToProject($user_id, (int)$FORM->exportValue('active'),
-				(int)$FORM->exportValue('author'));
+			$USER->mapUserToProject($user_id, (int)$active->getValue(),
+				(int)$author->getValue());
 			
 			// commit
 			$BASE->db->commit();

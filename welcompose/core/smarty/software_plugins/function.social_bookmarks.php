@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: function.social_bookmarks.php
  * 
- * Copyright (c) 2008 creatics media.systems
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de> media.systems
  * 
  * Project owner:
  * creatics media.systems, Olaf Gleba
@@ -13,12 +13,12 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
  * $Id: function.social_bookmarks.php 1370 2009-10-14 19:21:10Z olafgleba $
  * 
  * @copyright 2009 creatics media.systems, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 

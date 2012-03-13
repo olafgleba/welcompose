@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: templates_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -119,65 +117,67 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('template', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $TEMPLATE);
-	$FORM->registerRule('testForTypeAndSetUniqueness', 'callback', 'testForUniqueTypeAndSet', $TEMPLATE);
+	$FORM = $BASE->utility->loadQuickForm('template');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
-	// select for group
-	$FORM->addElement('select', 'type', gettext('Type'), $template_types,
-		array('id' => 'template_type'));
-	$FORM->applyFilter('type', 'trim');
-	$FORM->applyFilter('type', 'strip_tags');
-	$FORM->addRule('type', gettext('Please select a template type'), 'required');
-	$FORM->addRule('type', gettext('Chosen template type is out of range'), 'in_array_keys', $template_types);
-	$FORM->addRule('type', gettext('A template with the same type for your choosen set(s) already exists'), 'testForTypeAndSetUniqueness');
-		
-	// select for set
-	$FORM->addElement('select', 'sets', gettext('Sets'), $template_sets,
-		array('id' => 'template_sets', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10));
-	$FORM->applyFilter('sets', 'trim');
-	$FORM->applyFilter('sets', 'strip_tags');
-	$FORM->addRule('sets', gettext('Please select a template set'), 'required');
-	$FORM->addRule('set', gettext('Chosen template set is out of range'), 'in_array_keys', $template_sets);
+	// select for type
+	$type = $FORM->addElement('select', 'type',
+	 	array('id' => 'template_type'),
+		array('label' => gettext('Type'), 'options' => $template_types)
+		);
+	$type->addRule('required', gettext('Please select a template type'));
+	$type->addRule('callback', gettext('A template with the same type for your choosen set(s) already exists'), 
+		array(
+			'callback' => array($TEMPLATE, 'testForUniqueTypeAndSet')
+		)
+	);
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'template_name', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('A template with the given name already exists'), 'testForNameUniqueness');
-	
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'template_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('callback', gettext('A template with the given name already exists'), 
+		array(
+			'callback' => array($TEMPLATE, 'testForUniqueName')
+		)
+	);
+		
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'template_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'template_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'template_content', 'class' => 'w540h550', 'cols' => 3, 'rows' => 2));
-	 
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'template_content', 'cols' => 3, 'rows' => 2, 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
+		
+	// select for set	
+	$sets = $FORM->addElement('select', 'sets',
+	 	array('id' => 'template_sets', 'class' => 'multisel', 'multiple' => 'multiple', 'size' => 10),
+		array('label' => gettext('Sets'), 'options' => $template_sets)
+		);
+	$sets->addRule('required', gettext('Please select a template set'));
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -220,14 +220,14 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['type'] = $FORM->exportValue('type');
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['content'] = $FORM->exportValue('content');
+		$sqlData['type'] = $type->getValue();
+		$sqlData['name'] = $name->getValue();
+		$sqlData['description'] = $description->getValue();
+		$sqlData['content'] = $content->getValue();
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
 		// check sql data
@@ -243,8 +243,8 @@ try {
 			$template_id = $TEMPLATE->addTemplate($sqlData);
 			
 			// map template to selected sets
-			if (is_array($FORM->exportValue('sets'))) {
-				$TEMPLATE->mapTemplateToSets($template_id, $FORM->exportValue('sets'));
+			if (is_array($sets->getValue())) {
+				$TEMPLATE->mapTemplateToSets($template_id, $sets->getValue());
 			} else {
 				$TEMPLATE->mapTemplateToSets($template_id, array());
 			}

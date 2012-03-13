@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: globaltemplates_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -112,66 +110,62 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('global_template', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $GLOBALTEMPLATE);
-	
-	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'global_template_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('Please enter a valid global template name'), 'regex',
-		WCOM_REGEX_GLOBAL_TEMPLATE_NAME);
-	$FORM->addRule('name', gettext('A global template with the given name already exists'),
-		'testForNameUniqueness');
-	
+	$FORM = $BASE->utility->loadQuickForm('global_template');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+		
+	// textfield for name		
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'global_template_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('regex', gettext('Please enter a valid global template name'), WCOM_REGEX_GLOBAL_TEMPLATE_NAME);
+	$name->addRule('callback', gettext('A global template with the given name already exists'), 
+		array(
+			'callback' => array($GLOBALTEMPLATE, 'testForUniqueName')
+		)
+	);
+
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'global_template_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'global_template_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'global_template_content', 'class' => 'w540h550', 'cols' => 3, 'rows' => 2));
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'global_template_content', 'cols' => 3, 'rows' => 2, 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
 	
 	// select for mime type
-	$FORM->addElement('select', 'mime_type', gettext('MIME Type'), $mime_types,
-		array('id' => 'global_template_mime_type'));
-	$FORM->applyFilter('mime_type', 'trim');
-	$FORM->applyFilter('mime_type', 'strip_tags');
-	$FORM->addRule('mime_type', gettext('Please select a mime type'), 'required');
-	$FORM->addRule('mime_type', gettext('Selected mime type is out of range'), 'in_array_keys',
-		$mime_types);
+	$mime_type = $FORM->addElement('select', 'mime_type',
+	 	array('id' => 'global_template_mime_type'),
+		array('label' => gettext('MIME Type'), 'options' => $mime_types)
+		);
+	$mime_type->addRule('required', gettext('Please select a mime type'));
 	
 	// checkbox for change delimiter
-	$FORM->addElement('checkbox', 'change_delimiter', gettext('Change delimiter'), null,
-		array('id' => 'global_template_change_delimiter', 'class' => 'chbx'));
-	$FORM->applyFilter('change_delimiter', 'trim');
-	$FORM->applyFilter('change_delimiter', 'strip_tags');
-	$FORM->addRule('change_delimiter', gettext('The field whether to change the delimiver accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$change_delimiter = $FORM->addElement('checkbox', 'change_delimiter',
+		array('id' => 'global_template_change_delimiter', 'class' => 'chbx'),
+		array('label' => gettext('Change delimiter'))
+		);
+	$change_delimiter->addRule('regex', gettext('The field whether to change the delimiver accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -211,15 +205,15 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['mime_type'] = $FORM->exportValue('mime_type');
-		$sqlData['change_delimiter'] = (string)intval($FORM->exportValue('change_delimiter'));
+		$sqlData['name'] = $name->getValue();
+		$sqlData['description'] = $description->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['mime_type'] = $mime_type->getValue();
+		$sqlData['change_delimiter'] = (string)intval($change_delimiter->getValue());
 		$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
 		// check sql data

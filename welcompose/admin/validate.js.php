@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: validate.js.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -64,7 +62,7 @@ try {
 		switch ((string)$_POST['elemID']) {
 			case 'blog_comment_status_name':
 					$reg = WCOM_REGEX_BLOG_COMMENT_STATUS_NAME;
-					$desc = gettext('Only capitalized literal string');
+					$desc = gettext('Only capitalized alphanumeric literal string');
 				break;
 			case 'generator_form_field_name':
 					$reg = WCOM_REGEX_OPERATOR_NAME;
@@ -96,6 +94,7 @@ try {
 				break;
 			case 'blog_comment_homepage':
 			case 'user_homepage':
+			case 'url_page_url':
 			case 'ping_service_configuration_site_url':
 			case 'ping_service_configuration_site_index':
 			case 'ping_service_configuration_site_feed':
@@ -120,15 +119,15 @@ try {
 				break;
 			case 'template_set_name':
 					$reg = WCOM_REGEX_TEMPLATE_SET_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
+					$desc = gettext('Alphanumeric with underscores');
 				break;
 			case 'template_type_name':
 					$reg = WCOM_REGEX_TEMPLATE_TYPE_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
+					$desc = gettext('Alphanumeric with underscores');
 				break;
 			case 'text_converter_internal_name':
 					$reg = WCOM_REGEX_TEXT_CONVERTER_INTERNAL_NAME;
-					$desc = gettext('Alphanumeric literal string with dashes');
+					$desc = gettext('Alphanumeric with underscores');
 				break;
 			case 'blog_comment_email':
 			case 'generator_form_email_from':

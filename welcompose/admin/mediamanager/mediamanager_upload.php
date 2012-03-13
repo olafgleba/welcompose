@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: mediamanager_upload.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * 
+ * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -106,60 +104,58 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('media_upload', 'post');
+	$FORM = $BASE->utility->loadQuickForm('media_upload');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
 	//$FORM->registerRule('testForFilenameUniqueness', 'callback', 'testForUniqueFilename', $OBJECT);
 	
 	// hidden field for pager_page
-	$FORM->addElement('hidden', 'pager_page');
+	$pager_page = $FORM->addElement('hidden', 'pager_page', array('id' => 'pager_page'));
 	
 	// file upload field
-	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
-		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->addRule('file', gettext('Please select a file'), 'uploadedfile');
-	//$FORM->addRule('file', gettext('A file with the provided id already exists'),
-	//	'testForFilenameUniqueness');
+	$file = $FORM->addElement('file', 'file', 
+		array('id' => 'file'),
+		array('label' => gettext('File'))
+		);
+	$file->addRule('required', gettext('Please select a file'));
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'description', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
-	// textarea for tags
-	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'tags', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');
-	$FORM->addRule('tags', gettext('Please add at least one tag'), 'required');	
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Upload Media'),
-		array('class' => 'submit200upload'));
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'),
+		array('label' => gettext('Description'))
+		);
 
-	// reset button
-	$FORM->addElement('reset', 'reset', gettext('Close'),
-		array('class' => 'cancel140'));
+	// textarea for tags
+	$tags = $FORM->addElement('textarea', 'tags', 
+		array('id' => 'tags', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'),
+		array('label' => gettext('Tags'))
+		);
+	$tags->addRule('required', gettext('Please add at least one tag'));
+		
+	// submit button
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200upload', 'value' => gettext('Upload Media'))
+		);
+
+	// close button
+	$close = $FORM->addElement('reset', 'close', 
+		array('class' => 'cancel140', 'value' => gettext('Close'))
+		);
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'pager_page' => Base_Cnc::ifsetor($pager_page, null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		//$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-
-		$FORM->accept($renderer);
-
+	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -206,21 +202,24 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// handle file upload
-		if ($file_upload->isUploadedFile()) {
-			// get file data
-			$data = $file_upload->getValue();
+		// get file data
+		$data = $file->getValue();
+		
+		// clean file data
+		foreach ($data as $_key => $_value) {
+			$data[$_key] = trim(strip_tags($_value));
+		}
 			
-			// clean file data
-			foreach ($data as $_key => $_value) {
-				$data[$_key] = trim(strip_tags($_value));
-			}
+		// file available to upload?
+		if (!empty($data['name'])) {
 			
 			// test if a file with prepared file name exits already
 			$check_file = $OBJECT->testForUniqueFilename($data['name']);
 			
+			// Unique file? 
 			if ($check_file === true) {
 			
 				// move file to file store
@@ -235,8 +234,8 @@ try {
 				// prepare sql data
 				$sqlData = array();
 				$sqlData['project'] = WCOM_CURRENT_PROJECT;
-				$sqlData['description'] = $FORM->exportValue('description');
-				$sqlData['tags'] = $FORM->exportValue('tags');
+				$sqlData['description'] = $description->getValue();
+				$sqlData['tags'] = $tags->getValue();
 				$sqlData['file_name'] = $data['name'];
 				$sqlData['file_name_on_disk'] = $name_on_disk;
 				$sqlData['file_mime_type'] = $data['type'];
@@ -263,7 +262,7 @@ try {
 					$object = $OBJECT->addObject($sqlData);
 				
 					// insert tags
-					$TAG->addTags($object, $TAG->_tagStringToArray($FORM->exportValue('tags')));
+					$TAG->addTags($object, $TAG->_tagStringToArray($tags->getValue()));
 				
 					// commit
 					$BASE->db->commit();
@@ -279,7 +278,7 @@ try {
 				$_SESSION['response'] = 1;
 		
 				// add pager_page to session
-				$_SESSION['pager_page'] = $FORM->exportValue('pager_page');
+				$_SESSION['pager_page'] = $pager_page->getValue();
 			} else {
 				// add response to session
 				$_SESSION['response'] = 2;

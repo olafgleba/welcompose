@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_blogs_postings_add.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -166,266 +164,249 @@ try {
 	);
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('blog_posting', 'post');
+	$FORM = $BASE->utility->loadQuickForm('blog_posting');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-	$FORM->applyFilter('page', 'trim');
-	$FORM->applyFilter('page', 'strip_tags');
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
-	// textfield for title
-	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
-	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	// textfield for title	
+	$title = $FORM->addElement('text', 'title', 
+		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'),
+		array('label' => gettext('Title'))
+		);
+	$title->addRule('required', gettext('Please enter a title'));
 	
 	// textfield for URL title
-	$FORM->addElement('text', 'title_url', gettext('URL title'),
-		array('id' => 'blog_posting_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('title_url', 'trim');
-	$FORM->applyFilter('title_url', 'strip_tags');
-	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
-	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
-		WCOM_REGEX_URL_NAME);
+	$title_url = $FORM->addElement('text', 'title_url', 
+		array('id' => 'blog_posting_title_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('URL title'))
+		);
+	$title_url->addRule('required', gettext('Enter an URL title'));
+	$title_url->addRule('regex', gettext('The URL title may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);
 	
-	// textarea for summary
-	$FORM->addElement('textarea', 'summary', gettext('Summary'),
-		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('summary', 'trim');
-	
-	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'blog_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
+	// textarea for summary	
+	$summary = $FORM->addElement('textarea', 'summary', 
+		array('id' => 'blog_posting_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'),
+		array('label' => gettext('Summary'))
+		);
+
+	// textarea for content	
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'blog_posting_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);		
 	
 	/*
 	 * Podcast layer
 	 */
 	
-	// hidden for podcast id
-	$FORM->addElement('hidden', 'podcast_id', '', array('id' => 'podcast_id'));
-	$FORM->applyFilter('podcast_id', 'trim');
-	$FORM->applyFilter('podcast_id', 'strip_tags');
-	$FORM->addRule('podcast_id', gettext('The podcast id is expected to be numeric'), 'numeric');
-	
+	// hidden for podcast id	
+	$podcast_id = $FORM->addElement('hidden', 'podcast_id', array('id' => 'podcast_id'));
+	$podcast_id->addRule('regex', gettext('The podcast id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+
 	// hidden for mediafile id
-	$FORM->addElement('hidden', 'podcast_media_object', '', array('id' => 'podcast_media_object'));
-	$FORM->applyFilter('podcast_media_object', 'trim');
-	$FORM->applyFilter('podcast_media_object', 'strip_tags');
-	$FORM->addRule('podcast_media_object', gettext('The media file id is expected to be numeric'), 'numeric');
-	
+	$podcast_media_object = $FORM->addElement('hidden', 'podcast_media_object', array('id' => 'podcast_media_object'));
+	$podcast_media_object->addRule('regex', gettext('The media file id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+
 	// hidden for display status
-	$FORM->addElement('hidden', 'podcast_details_display', '', array('id' => 'podcast_details_display'));
-	$FORM->applyFilter('podcast_details_display', 'trim');
-	$FORM->addRule('id', gettext('Podcast details display is expected to be numeric'), 'numeric');
+	$podcast_details_display = $FORM->addElement('hidden', 'podcast_details_display', array('id' => 'podcast_details_display'));
+	$podcast_details_display->addRule('regex', gettext('Podcast details display is expected to be numeric'), WCOM_REGEX_NUMERIC);	
 	
-	// textfield for title
-	$FORM->addElement('text', 'podcast_title', gettext('Title'),
-		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('podcast_title', 'trim');
-	$FORM->applyFilter('podcast_title', 'strip_tags');
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_title', gettext('Please enter a podcast title'), 'required');
+	// textfield for title	
+	$podcast_title = $FORM->addElement('text', 'podcast_title', 
+		array('id' => 'blog_posting_podcast_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_title->addRule('required', gettext('Please enter a podcast title'));
 	}
 	
 	// select for description
-	$FORM->addElement('select', 'podcast_description', gettext('Description'), $podcast_description_sources,
-		array('id' => 'blog_posting_podcast_description'));
-	$FORM->applyFilter('podcast_description', 'trim');
-	$FORM->applyFilter('podcast_description', 'strip_tags');
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_description', gettext('Please select a podcast description source'), 'required');
-	}
-	$FORM->addRule('podcast_description', gettext('Podcast description source is out of range'),
-		'in_array_keys', $podcast_description_sources);
-	
+	$podcast_description = $FORM->addElement('select', 'podcast_description',
+	 	array('id' => 'blog_posting_podcast_description'),
+		array('label' => gettext('Description'), 'options' => $podcast_description_sources)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_description->addRule('required', gettext('Please select a podcast description source'));
+	}		
+
 	// select for summary
-	$FORM->addElement('select', 'podcast_summary', gettext('Summary'), $podcast_summary_sources,
-		array('id' => 'blog_posting_podcast_summary'));
-	$FORM->applyFilter('podcast_summary', 'trim');
-	$FORM->applyFilter('podcast_summary', 'strip_tags');
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_summary', gettext('Please select a podcast summary source'), 'required');
-	}
-	$FORM->addRule('podcast_summary', gettext('Podcast summary source is out of range'),
-		'in_array_keys', $podcast_summary_sources);
-	
+	$podcast_summary = $FORM->addElement('select', 'podcast_summary',
+	 	array('id' => 'blog_posting_podcast_summary'),
+		array('label' => gettext('Summary'), 'options' => $podcast_summary_sources)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_summary->addRule('required', gettext('Please select a podcast summary source'));
+	}		
+
 	// select for keywords
-	$FORM->addElement('select', 'podcast_keywords', gettext('Keywords'), $podcast_keywords_sources,
-		array('id' => 'blog_posting_podcast_keywords'));
-	$FORM->applyFilter('podcast_keywords', 'trim');
-	$FORM->applyFilter('podcast_keywords', 'strip_tags');
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_keywords', gettext('Please select a podcast keyword source'), 'required');
-	}
-	$FORM->addRule('podcast_keywords', gettext('Podcast keywords source is out of range'),
-		'in_array_keys', $podcast_keywords_sources);
-	
-	// select for category_1
-	$FORM->addElement('select', 'podcast_category_1', gettext('Category 1'), $podcast_categories,
-		array('id' => 'blog_posting_podcast_category_1'));
-	$FORM->applyFilter('podcast_category_1', 'trim');
-	$FORM->applyFilter('podcast_category_1', 'strip_tags');
-	$FORM->addRule('podcast_category_1', gettext('Podcast category 1 is out of range'),
-		'in_array_keys', $podcast_categories);
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_category_1', gettext('Please select a podcast category'), 'required');
+	$podcast_keywords = $FORM->addElement('select', 'podcast_keywords',
+	 	array('id' => 'blog_posting_podcast_keywords'),
+		array('label' => gettext('Keywords'), 'options' => $podcast_keywords_sources)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_keywords->addRule('required', gettext('Please select a podcast keyword source'));
+	}	
+
+	// select for category_1	
+	$podcast_category_1 = $FORM->addElement('select', 'podcast_category_1',
+	 	array('id' => 'blog_posting_podcast_category_1'),
+		array('label' => gettext('Category 1'), 'options' => $podcast_categories)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_category_1->addRule('required', gettext('Please select a podcast category'));
 	}
 	
 	// select for category_2
-	$FORM->addElement('select', 'podcast_category_2', gettext('Category 2'), $podcast_categories_with_empty,
-		array('id' => 'blog_posting_podcast_category_2'));
-	$FORM->applyFilter('podcast_category_2', 'trim');
-	$FORM->applyFilter('podcast_category_2', 'strip_tags');	
-	$FORM->addRule('podcast_category_2', gettext('Podcast category 2 is out of range'),
-		'in_array_keys', $podcast_categories_with_empty);
-	
-	// select for category_3
-	$FORM->addElement('select', 'podcast_category_3', gettext('Category 3'), $podcast_categories_with_empty,
-		array('id' => 'blog_posting_podcast_category_3'));
-	$FORM->applyFilter('podcast_category_3', 'trim');
-	$FORM->applyFilter('podcast_category_3', 'strip_tags');	
-	$FORM->addRule('podcast_category_3', gettext('Podcast category 3 is out of range'),
-		'in_array_keys', $podcast_categories_with_empty);
+	$podcast_category_2 = $FORM->addElement('select', 'podcast_category_2',
+	 	array('id' => 'blog_posting_podcast_category_2'),
+		array('label' => gettext('Category 2'), 'options' => $podcast_categories_with_empty)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_category_2->addRule('required', gettext('Please select a podcast category'));
+	}
 
-	// textfield for author
-	$FORM->addElement('text', 'podcast_author', gettext('Author'),
-		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('podcast_author', 'trim');
-	$FORM->applyFilter('podcast_author', 'strip_tags');
-	if ($FORM->exportValue('podcast_media_object') != "") {
-		$FORM->addRule('podcast_author', gettext('Please enter a podcast author'), 'required');
+	// select for category_3
+	$podcast_category_3 = $FORM->addElement('select', 'podcast_category_3',
+	 	array('id' => 'blog_posting_podcast_category_3'),
+		array('label' => gettext('Category 3'), 'options' => $podcast_categories_with_empty)
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_category_3->addRule('required', gettext('Please select a podcast category'));
+	}
+		
+	// textfield for author		
+	$podcast_author = $FORM->addElement('text', 'podcast_author', 
+		array('id' => 'blog_posting_podcast_author', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Author'))
+		);
+	if ($podcast_media_object->getValue() != "") {
+		$podcast_author->addRule('required', gettext('Please enter a podcast author'));
 	}
 	
 	// select for explicit
-	$FORM->addElement('select', 'podcast_explicit', gettext('Explicit'), $podcast_explicit,
-		array('id' => 'blog_posting_podcast_explicit'));
-	$FORM->applyFilter('podcast_explicit', 'trim');
-	$FORM->applyFilter('podcast_explicit', 'strip_tags');	
-	$FORM->addRule('podcast_explicit', gettext('Podcast explicit is out of range'),
-		'in_array_keys', $podcast_explicit);
+	$podcast_explicit = $FORM->addElement('select', 'podcast_explicit',
+	 	array('id' => 'blog_posting_podcast_explicit'),
+		array('label' => gettext('Explicit'), 'options' => $podcast_explicit)
+		);	
 	
 	// checkbox for explicit
-	$FORM->addElement('checkbox', 'podcast_block', gettext('Block'), null,
-		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'));
-	$FORM->applyFilter('podcast_block', 'trim');
-	$FORM->applyFilter('podcast_block', 'strip_tags');
-	$FORM->addRule('podcast_block', gettext('The field whether an episode should be blocked accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$podcast_block = $FORM->addElement('checkbox', 'podcast_block',
+		array('id' => 'blog_posting_podcast_block', 'class' => 'chbx'),
+		array('label' => gettext('Block'))
+		);
+	$podcast_block->addRule('regex', gettext('The field whether an episode should be blocked accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
 	// submit button
-	$FORM->addElement('button', 'toggleExtendedView', gettext('Show details'),
-		array('class' => 'toggleExtendedView120'));
-		
-	$FORM->addElement('button', 'showIDThree', gettext('Show ID3'),
-		array('class' => 'showIDThree120'));
-	
-	$FORM->addElement('button', 'discardPodcast', gettext('Discard cast'),
-		array('class' => 'discardPodcast120'));
+	$toggleExtendedView = $FORM->addElement('inputButton', 'toggleExtendedView', 
+		array('id' => 'toggleExtendedView', 'class' => 'toggleExtendedView120', 'value' => gettext('Show details'))
+		);
+	$showIDThree = $FORM->addElement('inputButton', 'showIDThree', 
+		array('id' => 'showIDThree', 'class' => 'showIDThree120', 'value' => gettext('Show ID3'))
+		);
+	$discardPodcast = $FORM->addElement('inputButton', 'discardPodcast', 
+		array('id' => 'discardPodcast', 'class' => 'discardPodcast120', 'value' => gettext('Discard cast'))
+		);
 	
 	/*
 	 * End of podcast layer
-	 */
+	 */	
 	
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'blog_posting_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
-	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'blog_posting_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'blog_posting_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
 		
-	// checkbox for meta_use
-	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
-		array('id' => 'blog_posting_meta_use', 'class' => 'chbx'));
-	$FORM->applyFilter('meta_use', 'trim');
-	$FORM->applyFilter('meta_use', 'strip_tags');
-	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	// checkbox for apply_macros
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'blog_posting_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
+	// checkbox for meta_use		
+	$meta_use = $FORM->addElement('checkbox', 'meta_use',
+		array('id' => 'blog_posting_meta_use', 'class' => 'chbx'),
+		array('label' => gettext('Custom meta tags'))
+		);
+	$meta_use->addRule('regex', gettext('The field whether to use customized meta tags accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for meta_title
-	$FORM->addElement('text', 'meta_title', gettext('Title'),
-		array('id' => 'blog_posting_meta_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('meta_title', 'trim');
-	$FORM->applyFilter('meta_title', 'strip_tags');
+	$meta_title = $FORM->addElement('text', 'meta_title', 
+		array('id' => 'blog_posting_meta_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
 	
 	// textarea for meta_keywords
-	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
-		array('id' => 'blog_posting_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_keywords', 'trim');
-	$FORM->applyFilter('meta_keywords', 'strip_tags');
+	$meta_keywords = $FORM->addElement('textarea', 'meta_keywords', 
+		array('id' => 'blog_posting_meta_keywords', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Keywords'))
+		);
 
 	// textarea for meta_description
-	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
-		array('id' => 'blog_posting_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_description', 'trim');
-	$FORM->applyFilter('meta_description', 'strip_tags');
+	$meta_description = $FORM->addElement('textarea', 'meta_description', 
+		array('id' => 'blog_posting_meta_description', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Description'))
+		);
 	
 	// textarea for tags
-	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
-	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');
+	$tags = $FORM->addElement('textarea', 'tags', 
+		array('id' => 'blog_posting_tags', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Tags'))
+		);
 	
 	// textarea for feed_summary
-	$FORM->addElement('textarea', 'feed_summary', gettext('Feed Summary'),
-		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'));
-	$FORM->applyFilter('feed_summary', 'trim');
+	$feed_summary = $FORM->addElement('textarea', 'feed_summary', 
+		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'),
+		array('label' => gettext('Feed Summary'))
+		);
 	
 	// checkbox for draft
-	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-		array('id' => 'blog_posting_draft', 'class' => 'chbx'));
-	$FORM->applyFilter('draft', 'trim');
-	$FORM->applyFilter('draft', 'strip_tags');
-	$FORM->addRule('draft', gettext('The field whether the posting is a draft accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$draft = $FORM->addElement('checkbox', 'draft',
+		array('id' => 'blog_posting_draft', 'class' => 'chbx'),
+		array('label' => gettext('Draft'))
+		);
+	$draft->addRule('regex', gettext('The field whether the posting is a draft accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
 	// checkbox for ping
-	$FORM->addElement('checkbox', 'ping', gettext('Ping'), null,
-		array('id' => 'blog_posting_ping', 'class' => 'chbx'));
-	$FORM->applyFilter('ping', 'trim');
-	$FORM->applyFilter('ping', 'strip_tags');
-	$FORM->addRule('ping', gettext('The field whether a ping should be issued accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$ping = $FORM->addElement('checkbox', 'ping',
+		array('id' => 'blog_posting_ping', 'class' => 'chbx'),
+		array('label' => gettext('Ping'))
+		);
+	$ping->addRule('regex', gettext('The field whether a ping should be issued accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 
 	// checkbox for comments_enable
-	$FORM->addElement('checkbox', 'comments_enable', gettext('Enable comments'), null,
-		array('id' => 'blog_posting_comments_enable', 'class' => 'chbx'));
-	$FORM->applyFilter('comments_enable', 'trim');
-	$FORM->applyFilter('comments_enable', 'strip_tags');
-	$FORM->addRule('comments_enable', gettext('The field whether comments are enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$comments_enable = $FORM->addElement('checkbox', 'comments_enable',
+		array('id' => 'blog_posting_comments_enable', 'class' => 'chbx'),
+		array('label' => gettext('Comments'))
+		);
+	$comments_enable->addRule('regex', gettext('The field whether comments are enabled accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+		
 	// checkbox for trackbacks_enable
-	$FORM->addElement('checkbox', 'trackbacks_enable', gettext('Enable trackbacks'), null,
-		array('id' => 'blog_posting_trackbacks_enable', 'class' => 'chbx'));
-	$FORM->applyFilter('trackbacks_enable', 'trim');
-	$FORM->applyFilter('trackbacks_enable', 'strip_tags');
-	$FORM->addRule('trackbacks_enable', gettext('The field whether trackbacks are enabled accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$trackbacks_enable = $FORM->addElement('checkbox', 'trackbacks_enable',
+		array('id' => 'blog_posting_trackbacks_enable', 'class' => 'chbx'),
+		array('label' => gettext('Enable trackbacks'))
+		);
+	$trackbacks_enable->addRule('regex', gettext('The field whether trackbacks are enabled accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// date element for date_added
-	$FORM->addElement('date', 'date_added', gettext('Creation date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
-		array('id' => 'blog_posting_date_added'));
-	
+	$date_added = $FORM->addElement('date', 'date_added', null,
+		array('label' => gettext('Creation date'),'language' => 'de', 'format' => 'd.m.Y H:i','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save'),
-		array('class' => 'submit200'));
-	
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save'))
+		);
+		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'text_converter' => ($default_text_converter > 0) ? $default_text_converter['id'] : null,
 		'apply_macros' => 1,
@@ -433,23 +414,18 @@ try {
 		'comments_enable' => 0,
 		'trackbacks_enable' => 0,
 		'date_added' => date('Y-m-d H:i:s')
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
+		// print_r($FORM->render($renderer)->toArray());
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -491,70 +467,74 @@ try {
 		
 		exit;
 	} else {
+		
+		// print_r($FORM->getValue());
+		// exit;
+		
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['page'] = $FORM->exportValue('page');
+		$sqlData['page'] = $page_id->getValue();
 		$sqlData['user'] = WCOM_CURRENT_USER;
-		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $FORM->exportValue('title_url');
-		$sqlData['summary_raw'] = $FORM->exportValue('summary');
-		$sqlData['summary'] = $FORM->exportValue('summary');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['feed_summary_raw'] = $FORM->exportValue('feed_summary');
-		$sqlData['feed_summary'] = $FORM->exportValue('feed_summary');
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
-			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['title'] = $title->getValue();
+		$sqlData['title_url'] = $title_url->getValue();
+		$sqlData['summary_raw'] = $summary->getValue();
+		$sqlData['summary'] = $summary->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['feed_summary_raw'] = $feed_summary->getValue();
+		$sqlData['feed_summary'] = $feed_summary->getValue();
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? 
+			$text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
+		$sqlData['meta_use'] = $meta_use->getValue();
 		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
-		$sqlData['ping'] = (string)intval($FORM->exportValue('ping'));
-		$sqlData['comments_enable'] = (string)intval($FORM->exportValue('comments_enable'));
-		$sqlData['trackbacks_enable'] = (string)intval($FORM->exportValue('trackbacks_enable'));
-		$sqlData['date_added'] = $date_added = $HELPER->datetimeFromQuickFormDate($FORM->exportValue('date_added'));
+		$sqlData['draft'] = (string)intval($draft->getValue());
+		$sqlData['ping'] = (string)intval($ping->getValue());
+		$sqlData['comments_enable'] = (string)intval($comments_enable->getValue());
+		$sqlData['trackbacks_enable'] = (string)intval($trackbacks_enable->getValue());
+		$sqlData['date_added'] = $date_added = $HELPER->datetimeFromQuickFormDate($date_added->getValue());
 		$sqlData['year_added'] = date('Y', strtotime($date_added));
 		$sqlData['month_added'] = date('m', strtotime($date_added));
 		$sqlData['day_added'] = date('d', strtotime($date_added));
 		
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract summary/content
-			$summary = $FORM->exportValue('summary');
-			$content = $FORM->exportValue('content');
-			$feed_summary = $FORM->exportValue('feed_summary');
+			$summary = $summary->getValue();
+			$content = $content->getValue();
+			$feed_summary = $feed_summary->getValue();
 
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'pre');
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'pre');
 			}
 
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$summary = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$summary
 				);
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$content
 				);
 				$feed_summary = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$feed_summary
 				);
 			}
 
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$summary = $TEXTMACRO->applyTextMacros($summary, 'post');
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
 				$feed_summary = $TEXTMACRO->applyTextMacros($feed_summary, 'post');
@@ -567,12 +547,12 @@ try {
 		}
 		
 		// prepare custom meta tags
-		if ($FORM->exportValue('meta_use') == 1) { 
-			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
-			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
-				$FORM->exportValue('meta_title'));
-			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
-			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
+		if ($meta_use->getValue() == 1) { 
+			$sqlData['meta_title_raw'] = $meta_title->getValue();
+			$sqlData['meta_title'] = str_replace("%title", $title->getValue(), 
+				$meta_title->getValue());
+			$sqlData['meta_keywords'] = $meta_keywords->getValue();
+			$sqlData['meta_description'] = $meta_description->getValue();
 		}
 		
 		// test sql data for pear errors
@@ -587,8 +567,8 @@ try {
 			$posting_id = $BLOGPOSTING->addBlogPosting($sqlData);
 			
 			// add tags
-			$BLOGTAG->addPostingTags($FORM->exportValue('page'), $posting_id,
-				$BLOGTAG->_tagStringToArray($FORM->exportValue('tags')));
+			$BLOGTAG->addPostingTags($page_id->getValue(), $posting_id,
+				$BLOGTAG->_tagStringToArray($tags->getValue()));
 			
 			// get tags
 			$tags = $BLOGTAG->selectBlogTags(array('posting' => $posting_id));
@@ -614,24 +594,24 @@ try {
 		/*
 		 * Process podcast
 		 */
-		if ($FORM->exportValue('podcast_media_object') != "") {
+		if ($podcast_media_object->getValue() != "") {
 			// prepare sql data
 			$sqlData = array();
 			$sqlData['blog_posting'] = (int)$posting_id;
-			$sqlData['media_object'] = (int)$FORM->exportValue('podcast_media_object');
-			$sqlData['title'] = $FORM->exportValue('podcast_title');
-			$sqlData['description_source'] = $FORM->exportValue('podcast_description');
-			$sqlData['summary_source'] = $FORM->exportValue('podcast_summary');
-			$sqlData['keywords_source'] = $FORM->exportValue('podcast_keywords');
-			$sqlData['category_1'] = (($FORM->exportValue('podcast_category_1') == "") ? null :
-				$FORM->exportValue('podcast_category_1'));
-			$sqlData['category_2'] = (($FORM->exportValue('podcast_category_2') == "") ? null :
-				$FORM->exportValue('podcast_category_2'));
-			$sqlData['category_3'] = (($FORM->exportValue('podcast_category_3') == "") ? null :
-				$FORM->exportValue('podcast_category_3'));
-			$sqlData['author'] = $FORM->exportValue('podcast_author');
-			$sqlData['block'] = (string)intval($FORM->exportValue('podcast_block'));
-			$sqlData['explicit'] = $FORM->exportValue('podcast_explicit');
+			$sqlData['media_object'] = (int)$podcast_media_object->getValue();
+			$sqlData['title'] = $podcast_title->getValue();
+			$sqlData['description_source'] = $podcast_description->getValue();
+			$sqlData['summary_source'] = $podcast_summary->getValue();
+			$sqlData['keywords_source'] = $podcast_keywords->getValue();
+			$sqlData['category_1'] = (($podcast_category_1->getValue() == "") ? null :
+				$podcast_category_1->getValue());
+			$sqlData['category_2'] = (($podcast_category_2->getValue() == "") ? null :
+				$podcast_category_2->getValue());
+			$sqlData['category_3'] = (($podcast_category_3->getValue() == "") ? null :
+				$podcast_category_3->getValue());
+			$sqlData['author'] = $podcast_author->getValue();
+			$sqlData['block'] = (string)intval($podcast_block->getValue());
+			$sqlData['explicit'] = $podcast_explicit->getValue();
 			
 			// test sql data for pear errors
 			$HELPER->testSqlDataForPearErrors($sqlData);
@@ -655,7 +635,7 @@ try {
 		}
 		
 		// issue pings if required
-		if ($FORM->exportValue('ping') == 1) {	
+		if ($ping->getValue() == 1) {	
 			
 			// load ping service configuration class
 			$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
@@ -664,7 +644,7 @@ try {
 			$PINGSERVICE = load('application:pingservice');
 			
 			// get configured ping service configurations
-			$configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array('page' => $page['id']));
+			$configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array('page' => $page_id->getValue()));
 			
 			// issue pings if configurations exits
 			if (!empty($configurations)) {
@@ -686,7 +666,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_blogs_postings_add.php?page=".$FORM->exportValue('page'));
+		header("Location: pages_blogs_postings_add.php?page=".$page_id->getValue());
 		exit;
 	}
 } catch (Exception $e) {

@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: utility.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,12 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
  * $Id: utility.class.php 48 2007-01-19 15:49:28Z andreas $
  * 
- * @copyright 2008 creatics, Olaf Gleba
+ ** 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -87,14 +87,13 @@ public function loadSmarty ($conf)
 }
 
 /**
- * Load HTML_QuickForm
+ * Load HTML_QuickForm2
  *
- * Creates new HTML_QuickForm object and returns it. For further
- * details see http://pear.php.net/manual/en/package.html.html-quickform.html-quickform.html-quickform.php
+ * Creates new HTML_QuickForm2 object and returns it. For further
+ * details see http://pear.php.net/manual/en/package.html.html-quickform2.tutorial.php
  * 
  * @param string Form's name
  * @param string Form's method
- * @param string Form's target
  * @param mixed Extra attributes for <form> tag
  * @param bool Whether to track if the form was submitted by adding
  * a special hidden field. If the name of such field is not present
@@ -103,21 +102,31 @@ public function loadSmarty ($conf)
  *
  * @return object Instance of HTML_QuickForm
  */
-public function loadQuickForm ($form_name = null, $method = 'post',
-	$action = null, $target = '_self', $attributes = 'accept-charset=utf-8', $track_submit = false)
+public function loadQuickForm ($form_name = null, $method = 'post', 
+				$attributes = array('accept-charset' => 'utf-8'), $track_submit = false)
 {
-	require_once('HTML/QuickForm.php');
-	return new HTML_QuickForm($form_name, $method, $action, $target, $attributes, $track_submit);
+	require_once('HTML/QuickForm2.php');
+	return new HTML_QuickForm2($form_name, $method, $attributes, $track_submit);
 }
 
+
+// public function loadQuickForm ($form_name = null, $method = 'post',
+// 	$action = null, $target = '_self', $attributes = 'accept-charset=utf-8', $track_submit = false)
+// {
+// 	require_once('HTML/QuickForm.php');
+// 	return new HTML_QuickForm($form_name, $method, $action, $target, $attributes, $track_submit);
+// }
+
 /**
- * Load new HTML_QuickForm Smarty Renderer
+ * Load new HTML_QuickForm2 Smarty Renderer
  * 
- * Creates new instance of HTML_QuickForm_Renderer_ArraySmarty using
- * the current instance of smarty. If Smarty is not loaded, a
+ * http://pear.php.net/pepr/pepr-proposal-show.php?id=653
+ * Register new renderer and creates new instance of
+ * HTML_QuickForm_Renderer_Smarty using the current
+ * instance of smarty. If Smarty is not loaded, a
  * Base_UtilityException will be thrown.
  * 
- * @return object Instance of HTML_QuickForm_Renderer_ArraySmarty
+ * @return object Instance of HTML_QuickForm_Renderer_Smarty
  */
 public function loadQuickFormSmartyRenderer()
 {
@@ -126,9 +135,23 @@ public function loadQuickFormSmartyRenderer()
 		throw new Base_UtilityException('Smarty is not loaded');
 	}
 	
-	// return new smarty renderer
-	require_once('HTML/QuickForm/Renderer/ArraySmarty.php');
-	return new HTML_QuickForm_Renderer_ArraySmarty($this->smarty);	
+	// load the QuickForm2 Renderer
+	require_once('HTML/QuickForm2/Renderer.php');
+	
+	// register new renderer
+	HTML_QuickForm2_Renderer::register('smarty', 'HTML_QuickForm2_Renderer_Smarty');
+	$renderer = HTML_QuickForm2_Renderer::factory('smarty');
+		
+	// trigger compat mode		
+	$renderer->setOption('old_compat', true);
+	
+	// grouping errors to be shown above the form
+	$renderer->setOption('group_errors', true);
+	
+	// redefine require note option
+	$renderer->setOption('required_note', '<p class="required_note">* '.gettext('Required fields').'</p>');
+	
+	return $renderer;
 }
 
 /**

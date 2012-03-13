@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: simpleguestbookindex.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -207,80 +205,82 @@ public function render ()
 {
 	// Define and render form only if option allow_entry is not null
 	if (!empty($this->_simple_guestbook['allow_entry'])) {
-		
+			
 		// start new HTML_QuickForm
-		$FORM = $this->base->utility->loadQuickForm('simpleguestbookentry', 'post',
-			$this->getLocationSelf(true));
+		$FORM = $this->base->utility->loadQuickForm('simpleguestbookentry', 'post', 
+			array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
+			
+		// apply filters to all fields
+		$FORM->addRecursiveFilter('trim');
+		$FORM->addRecursiveFilter('strip_tags');
 	
 		// hidden for book
-		$FORM->addElement('hidden', 'book');
-		$FORM->applyFilter('book', 'trim');
-		$FORM->applyFilter('book', 'strip_tags');
-		$FORM->addRule('book', gettext('Posting is not expected to be empty'), 'required');
-		$FORM->addRule('book', gettext('Posting is expected to be numeric'), 'numeric');
+		$book = $FORM->addElement('hidden', 'book', array('id' => 'book'));
+		$book->addRule('required', gettext('book is not expected to be empty'));
+		$book->addRule('regex', gettext('book is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 		// textfield for name
-		$FORM->addElement('text', 'name', gettext('Name'),
-			array('id' => 'guestbook_entry_name', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('name', 'trim');
-		$FORM->applyFilter('name', 'strip_tags');
-		$FORM->addRule('name', gettext('Please enter a name'), 'required');
+		$name = $FORM->addElement('text', 'name', 
+			array('id' => 'guestbook_entry_name', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Name'))
+			);
+		$name->addRule('required', gettext('Please enter a name'));
 	
 		// textfield for email
-		$FORM->addElement('text', 'email', gettext('E-mail'),
-			array('id' => 'guestbook_entry_email', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('email', 'trim');
-		$FORM->applyFilter('email', 'strip_tags');
-		$FORM->addRule('email', gettext('Please enter a valid e-mail address'), 'email');
+		$email = $FORM->addElement('text', 'email', 
+			array('id' => 'guestbook_entry_email', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('E-mail'))
+			);
+		$email->addRule('regex', gettext('Please enter a valid e-mail address'), WCOM_REGEX_EMAIL);
 	
 		// textfield for subject
-		$FORM->addElement('text', 'subject', gettext('Subject'),
-			array('id' => 'guestbook_entry_subject', 'maxlength' => 255, 'class' => 'ftextfield'));
-		$FORM->applyFilter('subject', 'trim');
-		$FORM->applyFilter('subject', 'strip_tags');
+		$subject = $FORM->addElement('text', 'subject', 
+			array('id' => 'guestbook_entry_subject', 'maxlength' => 255, 'class' => 'ftextfield'),
+			array('label' => gettext('Subject'))
+			);
 	
 		// textarea for message content
-		$FORM->addElement('textarea', 'content', gettext('Message'),
-			array('id' => 'guestbook_entry_content', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'));
-		$FORM->applyFilter('content', 'trim');
-		$FORM->applyFilter('content', 'strip_tags');
-		$FORM->addRule('content', gettext('Please enter a message'), 'required');
+		$content = $FORM->addElement('textarea', 'content', 
+			array('id' => 'guestbook_entry_content', 'cols' => 30, 'rows' => 6, 'class' => 'ftextarea'),
+			array('label' => gettext('Message'))
+			);
+		$content->addRule('required', gettext('Please enter a message'));
 	
 		// textfield for captcha if the captcha is enabled
 		if ($this->_simple_guestbook['use_captcha'] != 'no') {
-			$FORM->addElement('text', '_qf_captcha', gettext('Captcha text'),
-				array('id' => 'simple_guestbook_captcha', 'maxlength' => 255, 'class' => 'ftextfield'));
-			$FORM->applyFilter('_qf_captcha', 'trim');
-			$FORM->applyFilter('_qf_captcha', 'strip_tags');
-			$FORM->addRule('_qf_captcha', gettext('Please enter the captcha text'), 'required');
-			$FORM->addRule('_qf_captcha', gettext('Invalid captcha text entered'), 'is_equal',
-				$this->captcha->captchaValue());
+			$_qf_captcha = $FORM->addElement('text', '_qf_captcha', 
+				array('id' => 'simple_guestbook_captcha', 'maxlength' => 255, 'class' => 'ftextfield'),
+				array('label' => gettext('Captcha text'))
+				);
+			$_qf_captcha->addRule('required', gettext('Please enter the captcha text'));
+			$_qf_captcha->addRule('eq', gettext('Invalid captcha text entered'), $this->captcha->captchaValue());				
 		}
 	
 		// submit button
-		$FORM->addElement('submit', 'submit', gettext('Send'),
-			array('class' => 'fsubmit'));
+		$submit = $FORM->addElement('submit', 'submit', 
+			array('class' => 'fsubmit', 'value' => gettext('Send'))
+			);
 	
 		// set defaults
-		$FORM->setDefaults(array(
+		$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 			'book' => (int)$this->_simple_guestbook['id']
-		));
+		)));	
 	
 		// test if the form validates. if it validates, process it and
 		// skip the rest of the page
 		if ($FORM->validate()) {
 			// freeze the form
-			$FORM->freeze();
+			$FORM->toggleFrozen(true);
 	 	
 			// prepare sql data
 			$sqlData = array();
 			$sqlData['book'] = $this->_simple_guestbook['id'];
 			$sqlData['user'] = ((WCOM_CURRENT_USER_ANONYMOUS !== true) ? WCOM_CURRENT_USER : null);
-			$sqlData['name'] = $FORM->exportValue('name');
-			$sqlData['email'] = $FORM->exportValue('email');
-			$sqlData['subject'] = $FORM->exportValue('subject');
-			$sqlData['content'] = $FORM->exportValue('content');
-			$sqlData['content_raw'] = $FORM->exportValue('content');
+			$sqlData['name'] = $name->getValue();
+			$sqlData['email'] = $email->getValue();
+			$sqlData['subject'] = $subject->getValue();
+			$sqlData['content'] = $content->getValue();
+			$sqlData['content_raw'] = $content->getValue();
 			$sqlData['text_converter'] = null;
 			$sqlData['date_added'] = date('Y-m-d H:i:s');
 		
@@ -290,7 +290,7 @@ public function render ()
 			// apply text converter if required
 			if (!empty($this->_simple_guestbook['text_converter'])) {
 				$sqlData['content'] = $TEXTCONVERTER->applyTextConverter($this->_simple_guestbook['text_converter'],
-					$FORM->exportValue('content'));				
+					$content->getValue());				
 				$sqlData['text_converter'] = $this->_simple_guestbook['text_converter'];
 			}
 		
@@ -325,10 +325,10 @@ public function render ()
 				// prepare & assign form data
 				$form_data = array(
 					'book' => $this->_simple_guestbook['title'],
-					'name' => $FORM->exportValue('name'),
-					'email' => $FORM->exportValue('email'),
-					'subject' => $FORM->exportValue('subject'),
-					'content' => $FORM->exportValue('content'),
+					'name' => $name->getValue(),
+					'email' => $email->getValue(),
+					'subject' => $subject->getValue(),
+					'content' => $content->getValue(),
 					'now' => mktime()
 				);
 				$this->base->utility->smarty->assign('form_data', $form_data);
@@ -342,7 +342,7 @@ public function render ()
 		
 				// prepare From: address
 				$from = (($this->_simple_guestbook['notification_email_from'] == 'sender@simpleguestbook.wcom') ?
-					$FORM->exportValue('email') : $this->_simple_guestbook['notification_email_from']);
+					$email->getValue() : $this->_simple_guestbook['notification_email_from']);
 				$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
 					null, $from);
 		
@@ -400,16 +400,10 @@ public function render ()
 	
 		// render form
 		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-		$renderer->setRequiredTemplate($this->getRequiredTemplate());
-	
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-	
-		$FORM->accept($renderer);
-	
+		//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
 		// assign the form to smarty
-		$this->base->utility->smarty->assign('form', $renderer->toArray());
+		$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 	
 		// generate captcha if required
 		if ($this->_simple_guestbook['use_captcha'] != 'no') {

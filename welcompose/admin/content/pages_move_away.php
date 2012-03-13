@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_move_away.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -122,48 +120,40 @@ try {
 	}
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('page', 'post');
+	$FORM = $BASE->utility->loadQuickForm('page');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Page is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// select for template set
-	$FORM->addElement('select', 'navigation', gettext('New navigation'), $navigations,
-		array('id' => 'page_navigation'));
-	$FORM->applyFilter('navigation', 'trim');
-	$FORM->applyFilter('navigation', 'strip_tags');
-	$FORM->addRule('navigation', gettext('Please choose a new navigation'), 'required');
-	$FORM->addRule('navigation', gettext('Chosen navigation is out of range'), 'in_array_keys',
-		$navigations);
+	// select for navigation		
+	$navigation = $FORM->addElement('select', 'navigation',
+	 	array('id' => 'page_navigation'),
+		array('label' => gettext('Type'), 'options' => $navigations)
+		);
+	$navigation->addRule('required', gettext('Please choose a new navigation'));
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Move page away'),
-		array('class' => 'submit140'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit140', 'value' => gettext('Move page away'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($page['id'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -196,7 +186,7 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// insert it
 		try {
@@ -205,7 +195,7 @@ try {
 			
 			// execute operation
 			$NESTEDSET->changeNavigationOfNodeInTree($page['navigation'], $page['id'],
-				$FORM->exportValue('navigation'));
+				$navigation->getValue());
 			
 			// execute consistency test
 			$NESTEDSET->testConsistency(Base_Cnc::ifsetor($page['navigation'], null));

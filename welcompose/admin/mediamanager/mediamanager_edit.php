@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: mediamanager_upload.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
- * @author Andreas Ahlenstorf
+ * 
+ * @author Olaf Gleba
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -126,67 +124,66 @@ try {
 	}
 		
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('media_edit', 'post');
+	$FORM = $BASE->utility->loadQuickForm('media_edit');
+	$FORM->setAttribute('enctype', 'multipart/form-data');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden field for pager_page
-	$FORM->addElement('hidden', 'pager_page');
+	$pager_page = $FORM->addElement('hidden', 'pager_page', array('id' => 'pager_page'));
 	
 	// file upload field
-	$file_upload = $FORM->addElement('file', 'file', gettext('File'), 
-		array('id' => 'file', 'maxlength' => 255, 'class' => 'w300'));
+	$file = $FORM->addElement('file', 'file', 
+		array('id' => 'file'),
+		array('label' => gettext('File'))
+		);
+	//$file->addRule('maxfilesize', gettext('File is too big, allowed size 20kB'), 20480);
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'description', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
-	// textarea for tags
-	$FORM->addElement('textarea', 'tags', gettext('Tags'),
-		array('id' => 'tags', 'class' => 'w540h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('tags', 'trim');
-	$FORM->applyFilter('tags', 'strip_tags');
-	$FORM->addRule('tags', gettext('Please add at least one tag'), 'required');	
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit200upload'));
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'),
+		array('label' => gettext('Description'))
+		);
 
-	// reset button
-	$FORM->addElement('reset', 'reset', gettext('Close'),
-		array('class' => 'cancel140'));
+	// textarea for tags
+	$tags = $FORM->addElement('textarea', 'tags', 
+		array('id' => 'tags', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'),
+		array('label' => gettext('Tags'))
+		);
+	$tags->addRule('required', gettext('Please add at least one tag'));
+
+	// submit button
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200upload', 'value' => gettext('Save edit'))
+		);
+
+	// close button
+	$close = $FORM->addElement('reset', 'close', 
+		array('class' => 'cancel140', 'value' => gettext('Close'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($object['id'], null),
 		'type' => Base_Cnc::ifsetor($object['type'], null),
 		'description' => Base_Cnc::ifsetor($object['description'], null),
 		'tags' => Base_Cnc::ifsetor($object['tags'], null),
 		'pager_page' => Base_Cnc::ifsetor($pager_page, null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-
-		$FORM->accept($renderer);
-
+	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -239,13 +236,13 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// load helper class
 		$HELPER = load('utility:helper');
 		
-		$sqlData['description'] = $FORM->exportValue('description');
-		$sqlData['tags'] = $FORM->exportValue('tags');
+		$sqlData['description'] = $description->getValue();
+		$sqlData['tags'] = $tags->getValue();
 		
 		// check sql data
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -256,10 +253,10 @@ try {
 			$BASE->db->begin();
 			
 			// update tags
-			$TAG->updateTags($FORM->exportValue('id'), $TAG->_tagStringToArray($FORM->exportValue('tags')));
+			$TAG->updateTags($id->getValue(), $TAG->_tagStringToArray($tags->getValue()));
 			
 			// update row in database
-			$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
+			$OBJECT->updateObject($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -272,33 +269,36 @@ try {
 		}
 		
 		// handle file upload
-		if ($file_upload->isUploadedFile()) {
-			// get file data
-			$data = $file_upload->getValue();
-			
-			// clean file data
-			foreach ($data as $_key => $_value) {
-				$data[$_key] = trim(strip_tags($_value));
-			}
+		// get file data
+		$data = $file->getValue();
+		
+		// clean file data
+		foreach ($data as $_key => $_value) {
+			$data[$_key] = trim(strip_tags($_value));
+		}
+		
+		// file available to upload?
+		if (!empty($data['name'])) {
 			
 			// test if a file with prepared file name exits already
-			$check_file = $OBJECT->testForUniqueFilename($data['name'], $FORM->exportValue('id'));
-			
+			$check_file = $OBJECT->testForUniqueFilename($data['name'], $id->getValue());
+		
+			// Unique file? 
 			if ($check_file === true) {
-									
+								
 				// remove old thumbnail and object
-				$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
-				$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($FORM->exportValue('id'), WCOM_REGEX_NUMERIC));
-						
+				$OBJECT->removeImageThumbnail(Base_Cnc::filterRequest($id->getValue(), WCOM_REGEX_NUMERIC));
+				$OBJECT->removeObjectFromStore(Base_Cnc::filterRequest($id->getValue(), WCOM_REGEX_NUMERIC));
+					
 				// move file to file store
 				$name_on_disk = $OBJECT->moveObjectToStore($data['name'], $data['tmp_name']);
-			
+		
 				// create thumbnail
 				$thumbnail = $OBJECT->createImageThumbnail($data['name'], $name_on_disk, 200, 200, true, 'ffffff');
-			
+		
 				// if the file on disk is an image, get the image size
 				list($width, $height) = @getimagesize($OBJECT->getPathToObject($name_on_disk));
-			
+		
 				// prepare sql data
 				$sqlData = array();
 				$sqlData['file_name'] = $data['name'];
@@ -312,34 +312,34 @@ try {
 				$sqlData['preview_width'] = Base_Cnc::ifsetor($thumbnail['width'], null);
 				$sqlData['preview_height'] = Base_Cnc::ifsetor($thumbnail['height'], null);
 				$sqlData['preview_size'] = Base_Cnc::ifsetor($thumbnail['size'], null);
-			
+		
 				// check sql data
 				$HELPER->testSqlDataForPearErrors($sqlData);
-			
+		
 				// insert it
 				try {
 					// begin transaction
 					$BASE->db->begin();
-				
+			
 					// update row in database
-					$OBJECT->updateObject($FORM->exportValue('id'), $sqlData);
-				
+					$OBJECT->updateObject($id->getValue(), $sqlData);
+			
 					// commit
 					$BASE->db->commit();
 				} catch (Exception $e) {
 					// do rollback
 					$BASE->db->rollback();
-				
+			
 					// re-throw exception
 					throw $e;
 				}
-			
+		
 				// Load and resave all pages
 				// abstract of file: actions_apply_url_patterns.php
-			
+		
 				// prepare sql data
 				$sqlDataSave = array();
-	
+
 				// class loader array
 				$classLoad = array(
 					'SIMPLEPAGE' => array('selectSimplePages', 'updateSimplePage'),
@@ -347,41 +347,42 @@ try {
 					'SIMPLEGUESTBOOK' => array('selectSimpleGuestbooks', 'updateSimpleGuestbook'),
 					'GENERATORFORM' => array('selectGeneratorForms', 'updateGeneratorForm'),
 					'BLOGPOSTING' => array('selectBlogPostings', 'updateBlogPosting'),
+					'EVENTPOSTING' => array('selectEventPostings', 'updateEventPosting'),
 					'BOX' => array('selectBoxes', 'updateBox'),
 					'GLOBALBOX' => array('selectGlobalBoxes', 'updateGlobalBox')
 				);
-	
+
 				foreach ($classLoad as $classRef => $classFunc) {
-	
+
 					// define some vars
 					$_class = strtolower($classRef);
 					$_class_reference = $classRef;
-				
+			
 					// load the appropriate class
 					$_class_reference = load('content:'.$_class);
-				
+			
 					// collect results within var $_class
 					// example: $simplepages = $SIMPLEPAGE->selectSimplePages();
 					$_class = $_class_reference->$classFunc['0']();
-		
+	
 					// Iterate through the results
 					foreach ($_class as $_key => $_value) {	
 
 						// make sure field content is not NULL
 						// this may occur when a page is added but still not edited
 						if (!is_null($_value['content_raw'])) {	
-							
+						
 							// apply text macros and text converter if required
 							if ($_value['text_converter'] > 0 || $_value['apply_macros'] > 0) {
-						
+					
 								// extract content
 								$content = $_value['content_raw'];
-										
+									
 								// apply startup and pre text converter text macros 
 								if ($_value['apply_macros'] > 0) {
 									$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 								}
-										
+									
 								// apply text converter
 								if ($_value['text_converter'] > 0) {
 									$content = $TEXTCONVERTER->applyTextConverter(
@@ -389,48 +390,48 @@ try {
 										$content
 									);
 								}
-										
+									
 								// apply post text converter and shutdown text macros 
 								if ($_value['apply_macros'] > 0) {
 									$content = $TEXTMACRO->applyTextMacros($content, 'post');
 								}
-								
+							
 								// assign content to sql data array
 								$sqlDataSave['content'] = $content;
-								
-								
+							
+							
 								// test sql data for pear errors
 								$HELPER->testSqlDataForPearErrors($sqlDataSave);						
-								
+							
 								// insert it
 								try {
 									// begin transaction
 									$BASE->db->begin();
-										
+									
 									// execute operation
 									$_class_reference->$classFunc['1']($_value['id'], $sqlDataSave);
-										
+									
 									// commit
 									$BASE->db->commit();
 								} catch (Exception $e) {
 									// do rollback
 									$BASE->db->rollback();
-										
+									
 									// re-throw exception
 									throw $e;
 								}						
 							}
 						}
-						
+					
 					} // foreach eof	
 				} // foreach eof
-				
+			
 				// add response to session
 				$_SESSION['response'] = 1;
-		
+	
 				// add pager_page to session
-				$_SESSION['pager_page'] = $FORM->exportValue('pager_page');	
-			
+				$_SESSION['pager_page'] = $pager_page->getValue();	
+		
 			} else {
 				// add response to session
 				$_SESSION['response'] = 2;
@@ -446,7 +447,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: mediamanager_edit.php?id=".$FORM->exportValue('id'));
+		header("Location: mediamanager_edit.php?id=".$id->getValue());
 		exit;
 	}
 } catch (Exception $e) {

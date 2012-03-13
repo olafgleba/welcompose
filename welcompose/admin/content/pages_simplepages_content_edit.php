@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: pages_simplepages_content_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -124,91 +122,88 @@ try {
 	$simple_page = $SIMPLEPAGE->selectSimplePage(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('simple_page', 'post');
-	
-	// hidden for navigation
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$FORM = $BASE->utility->loadQuickForm('simple_page');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
+
+	// hidden id
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for frontend view control
-	$FORM->addElement('hidden', 'preview');
-	$FORM->applyFilter('preview', 'trim');
-	$FORM->applyFilter('preview', 'strip_tags');
-	$FORM->addRule('preview', gettext('Id is expected to be numeric'), 'numeric');
-	
-	// textfield for title	
-	$FORM->addElement('text', 'title', gettext('Title'),
-		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('title', 'trim');
-	$FORM->applyFilter('title', 'strip_tags');
-	$FORM->addRule('title', gettext('Please enter a title'), 'required');
+	$preview = $FORM->addElement('hidden', 'preview', array('id' => 'preview'));
+	$preview->addRule('regex', gettext('preview is expected to be numeric'), WCOM_REGEX_NUMERIC);
+		
+	// textfield for title
+	$title = $FORM->addElement('text', 'title', 
+		array('id' => 'simple_page_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
+	$title->addRule('required', gettext('Please enter a title'));
 	
 	// textfield for URL title
-	$FORM->addElement('text', 'title_url', gettext('URL title'),
-		array('id' => 'simple_page_title_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('title_url', 'trim');
-	$FORM->applyFilter('title_url', 'strip_tags');
-	$FORM->addRule('title_url', gettext('Enter an URL title'), 'required');
-	$FORM->addRule('title_url', gettext('The URL title may only contain chars, numbers and hyphens'),
-		WCOM_REGEX_URL_NAME);
-	
+	$title_url = $FORM->addElement('text', 'title_url', 
+		array('id' => 'simple_page_title_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('URL title'))
+		);
+	$title_url->addRule('required', gettext('Enter an URL title'));
+	$title_url->addRule('regex', gettext('The URL title may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);	
+
 	// textarea for content
-	$FORM->addElement('textarea', 'content', gettext('Content'),
-		array('id' => 'simple_page_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'));
-	$FORM->applyFilter('content', 'trim');
-		
+	$content = $FORM->addElement('textarea', 'content', 
+		array('id' => 'simple_page_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
+		array('label' => gettext('Content'))
+		);
+	
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'simple_page_text_converter'));
-	$FORM->applyFilter('text_converter', 'trim');
-	$FORM->applyFilter('text_converter', 'strip_tags');
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'simple_page_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
+
 	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'simple_page_apply_macros', 'class' => 'chbx'));
-	$FORM->applyFilter('apply_macros', 'trim');
-	$FORM->applyFilter('apply_macros', 'strip_tags');
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
-	// checkbox for meta_use
-	$FORM->addElement('checkbox', 'meta_use', gettext('Custom meta tags'), null,
-		array('id' => 'simple_page_meta_use', 'class' => 'chbx'));
-	$FORM->applyFilter('meta_use', 'trim');
-	$FORM->applyFilter('meta_use', 'strip_tags');
-	$FORM->addRule('meta_use', gettext('The field whether to use customized meta tags accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'simple_page_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
+	// checkbox for meta_use		
+	$meta_use = $FORM->addElement('checkbox', 'meta_use',
+		array('id' => 'simple_page_meta_use', 'class' => 'chbx'),
+		array('label' => gettext('Custom meta tags'))
+		);
+	$meta_use->addRule('regex', gettext('The field whether to use customized meta tags accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// textfield for meta_title
-	$FORM->addElement('text', 'meta_title', gettext('Title'),
-		array('id' => 'simple_page_meta_title', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('meta_title', 'trim');
-	$FORM->applyFilter('meta_title', 'strip_tags');
+	$meta_title = $FORM->addElement('text', 'meta_title', 
+		array('id' => 'simple_page_meta_title', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Title'))
+		);
 	
 	// textarea for meta_keywords
-	$FORM->addElement('textarea', 'meta_keywords', gettext('Keywords'),
-		array('id' => 'simple_page_meta_keywords', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_keywords', 'trim');
-	$FORM->applyFilter('meta_keywords', 'strip_tags');
+	$meta_keywords = $FORM->addElement('textarea', 'meta_keywords', 
+		array('id' => 'simple_page_meta_keywords', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Keywords'))
+		);
 
 	// textarea for meta_description
-	$FORM->addElement('textarea', 'meta_description', gettext('Description'),
-		array('id' => 'simple_page_meta_description', 'cols' => 3, 'rows' => 2, 'class' => 'w540h50'));
-	$FORM->applyFilter('meta_description', 'trim');
-	$FORM->applyFilter('meta_description', 'strip_tags');
-	
+	$meta_description = $FORM->addElement('textarea', 'meta_description', 
+		array('id' => 'simple_page_meta_description', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Description'))
+		);
+		
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 
 	// set text converter value or get default converter
 	if (isset($simple_page['text_converter'])) {
@@ -222,7 +217,7 @@ try {
 	}
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($simple_page['id'], null),
 		'title' => Base_Cnc::ifsetor($simple_page['title'], null),
 		'title_url' => Base_Cnc::ifsetor($simple_page['title_url'], null),
@@ -235,23 +230,16 @@ try {
 		'meta_description' => Base_Cnc::ifsetor($simple_page['meta_description'], null),
 		// ctrl var for frontend view
 		'preview' => $_SESSION['preview_ctrl']
-	));
+	)));
+	
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-		
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -301,43 +289,43 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['title'] = $FORM->exportValue('title');
-		$sqlData['title_url'] = $FORM->exportValue('title_url');
-		$sqlData['content_raw'] = $FORM->exportValue('content');
-		$sqlData['content'] = $FORM->exportValue('content');
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
-			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['meta_use'] = $FORM->exportValue('meta_use');
+		$sqlData['title'] = $title->getValue();
+		$sqlData['title_url'] = $title_url->getValue();
+		$sqlData['content_raw'] = $content->getValue();
+		$sqlData['content'] = $content->getValue();
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? 
+			$text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
+		$sqlData['meta_use'] = $meta_use->getValue();
 		$sqlData['meta_title_raw'] = null;
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
 		
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract content
-			$content = $FORM->exportValue('content');
+			$content = $content->getValue();
 			
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'pre');
 			}
 			
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$content = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$content
 				);
 			}
 			
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$content = $TEXTMACRO->applyTextMacros($content, 'post');
 			}
 			
@@ -346,12 +334,12 @@ try {
 		}
 		
 		// prepare custom meta tags
-		if ($FORM->exportValue('meta_use') == 1) { 
-			$sqlData['meta_title_raw'] = $FORM->exportValue('meta_title');
-			$sqlData['meta_title'] = str_replace("%title", $FORM->exportValue('title'), 
-				$FORM->exportValue('meta_title'));
-			$sqlData['meta_keywords'] = $FORM->exportValue('meta_keywords');
-			$sqlData['meta_description'] = $FORM->exportValue('meta_description');
+		if ($meta_use->getValue() == 1) { 
+			$sqlData['meta_title_raw'] = $meta_title->getValue();
+			$sqlData['meta_title'] = str_replace("%title", $title->getValue(), 
+				$meta_title->getValue());
+			$sqlData['meta_keywords'] = $meta_keywords->getValue();
+			$sqlData['meta_description'] = $meta_description->getValue();
 		}
 		
 		// test sql data for pear errors
@@ -363,7 +351,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$SIMPLEPAGE->updateSimplePage($FORM->exportValue('id'), $sqlData);
+			$SIMPLEPAGE->updateSimplePage($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -376,7 +364,7 @@ try {
 		}
 
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -384,7 +372,7 @@ try {
 		}
 
 		// preview control value
-		$activePreview = $FORM->exportValue('preview');
+		$activePreview = $preview->getValue();
 				
 		// add preview_ctrl to session
 		if (!empty($activePreview)) {
@@ -401,7 +389,7 @@ try {
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
-			header("Location: pages_simplepages_content_edit.php?id=".$FORM->exportValue('id'));
+			header("Location: pages_simplepages_content_edit.php?id=".$id->getValue());
 		} else {
 			header("Location: pages_select.php");
 		}

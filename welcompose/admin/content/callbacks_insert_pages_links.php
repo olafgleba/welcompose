@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: callbacks_insert_pages_links.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -148,8 +146,8 @@ try {
 		$BASE->utility->smarty->display('content/callbacks_insert_pages_links.html', WCOM_TEMPLATE_KEY);
 		
 	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'secondNode') {
-		// at the moment, we know, that the only page type reaching level 2 or 3 is
-		// of type WCOM_BLOG. so we can assume working with a page of type WCOM_BLOG.
+		// Currently we know that the only page type reaching level 2 or 3 is
+		// of type WCOM_BLOG. So we assume working with a page of type WCOM_BLOG
 		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
 		
 		// load blog posting class
@@ -174,8 +172,8 @@ try {
 		$BASE->utility->smarty->display('content/callbacks_insert_pages_links_second.html', WCOM_TEMPLATE_KEY);
 		
 	} elseif (!empty($_REQUEST['nextNode']) && $_REQUEST['nextNode'] == 'thirdNode') {
-		// at the moment, we know, that the only page type reaching level 2 or 3 is
-		// of type WCOM_BLOG. so we can assume working with a page of type WCOM_BLOG.
+		// Currently we know that the only page type reaching level 2 or 3 is
+		// of type WCOM_BLOG. So we assume working with a page of type WCOM_BLOG
 		$page_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
 		
 		// load blog posting class

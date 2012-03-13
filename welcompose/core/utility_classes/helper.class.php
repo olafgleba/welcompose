@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: helper.class.php
  * 
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  * 
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
- * $Id$
- * 
- * @copyright 2008 creatics, Olaf Gleba
+ *  
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -722,9 +720,9 @@ public function datesForTimeframe ($timeframe)
 
 
 /**
- * Creates sql fragment for given current date (now()). Takes the name of the
- * date field as first argument, the value of the parameter as second
- * argument. Returns string.
+ * Creates sql fragment for given current date (including current day). 
+ * Takes the name of the date field as first argument, the value of the
+ * parameter as second argument. Returns string.
  * 
  * @throws Utility_HelperException
  * @param string Date field name
@@ -744,10 +742,10 @@ public function _sqlForCurrentDate ($field, $current_date)
 	switch ((string)$current_date) {
 		case 'FORWARD':			
 			// compose and return sql fragment
-			return sprintf("%s > NOW() ", $field);
+			return sprintf("%s > CURRENT_DATE()-1 ", $field);
 		case 'BACKWARD':
 			// compose and return sql fragment
-			return sprintf("%s < NOW() ", $field);
+			return sprintf("%s < CURRENT_DATE()+1 ", $field);
 		default:
 			throw new Utility_HelperException("Unknown current_date supplied");
 	}

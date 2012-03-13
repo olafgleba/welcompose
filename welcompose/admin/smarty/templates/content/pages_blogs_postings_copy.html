@@ -228,7 +228,12 @@
 {$form.trackbacks_enable.html}</label>
 
 <label class="cont" for="blog_posting_date_added"><span class="bez">{$form.date_added.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.date_added.html}</label>
+<div id="blog_posting_date_added">
+{foreach from=$form.date_added.elements item=_date_added}
+{$_date_added.html}
+{/foreach}
+</div>
+</label>
 
 {$form.save.html}
 

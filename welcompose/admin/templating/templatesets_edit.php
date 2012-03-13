@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: templatesets_edit.php
  *
- * Copyright (c) 2008 creatics
+ * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,12 +13,10 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- *
- * $Id$
- *
- * @copyright 2008 creatics, Olaf Gleba
+ * 
  * @author Andreas Ahlenstorf
  * @package Welcompose
+ * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
@@ -102,58 +100,55 @@ try {
 	$template_set = $TEMPLATESET->selectTemplateSet(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	
 	// start new HTML_QuickForm
-	$FORM = $BASE->utility->loadQuickForm('template_set', 'post');
-	$FORM->registerRule('testForNameUniqueness', 'callback', 'testForUniqueName', $TEMPLATESET);
+	$FORM = $BASE->utility->loadQuickForm('template_set');
+
+	// apply filters to all fields
+	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-	$FORM->applyFilter('id', 'trim');
-	$FORM->applyFilter('id', 'strip_tags');
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for name
-	$FORM->addElement('text', 'name', gettext('Name'), 
-		array('id' => 'template_set_name', 'maxlength' => 255, 'class' => 'w300 validate'));
-	$FORM->applyFilter('name', 'trim');
-	$FORM->applyFilter('name', 'strip_tags');
-	$FORM->addRule('name', gettext('Please enter a name'), 'required');
-	$FORM->addRule('name', gettext('Please enter a valid name'), 'regex', WCOM_REGEX_TEMPLATE_SET_NAME);
-	$FORM->addRule('name', gettext('A template set with the given name already exists'),
-		'testForNameUniqueness', $FORM->exportValue('id'));
+	$name = $FORM->addElement('text', 'name', 
+		array('id' => 'template_set_name', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Name'))
+		);
+	$name->addRule('required', gettext('Please enter a name'));
+	$name->addRule('regex', gettext('Please enter a valid name'), WCOM_REGEX_TEMPLATE_SET_NAME);
+	$name->addRule('callback', gettext('A template set with the given name already exists'), 
+		array(
+			'callback' => array($TEMPLATESET, 'testForUniqueName'),
+			'arguments' => array($id->getValue())
+		)
+	);
 	
 	// textarea for description
-	$FORM->addElement('textarea', 'description', gettext('Description'),
-		array('id' => 'template_set_description', 'class' => 'w298h50', 'cols' => 3, 'rows' => 2));
-	$FORM->applyFilter('description', 'trim');
-	$FORM->applyFilter('description', 'strip_tags');
-	
+	$description = $FORM->addElement('textarea', 'description', 
+		array('id' => 'template_set_description', 'cols' => 3, 'rows' => 2, 'class' => 'w298h50'),
+		array('label' => gettext('Description'))
+		);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit200'));
-	
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
+
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::ifsetor($template_set['id'], null),
 		'name' => Base_Cnc::ifsetor($template_set['name'], null),
 		'description' => Base_Cnc::ifsetor($template_set['description'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/../quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
-
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
 	
 		// assign the form to smarty
-		$BASE->utility->smarty->assign('form', $renderer->toArray());
+		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
 		
 		// assign paths
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
@@ -180,12 +175,12 @@ try {
 		exit;
 	} else {
 		// freeze the form
-		$FORM->freeze();
+		$FORM->toggleFrozen(true);
 		
 		// create the article group
 		$sqlData = array();
-		$sqlData['name'] = $FORM->exportValue('name');
-		$sqlData['description'] = $FORM->exportValue('description');
+		$sqlData['name'] = $name->getValue();
+		$sqlData['description'] = $description->getValue();
 		
 		// check sql data
 		$HELPER = load('utility:helper');
@@ -197,7 +192,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$TEMPLATESET->updateTemplateSet($FORM->exportValue('id'), $sqlData);
+			$TEMPLATESET->updateTemplateSet($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();

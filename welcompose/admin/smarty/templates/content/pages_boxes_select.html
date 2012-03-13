@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript">
 var toggleElem = 2;
@@ -19,6 +20,7 @@ var toggleElem = 2;
 <script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
+<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
 <script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.core.js"></script>
 <script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -129,7 +131,7 @@ var toggleElem = 2;
 <tr>
 <td class="page"><a href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}">{$_box.name|escape:"html"}</a></td>
 <td>{$_box.priority}</td>
-<td><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="page"><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
 </tr>
 {/foreach}
 {else}
@@ -184,7 +186,7 @@ var toggleElem = 2;
 <td>{$_allbox.page_name|truncate:140}</td>
 <td>{$_allbox.content_raw|truncate:50|escape:html}</td>
 <td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a>{/if}</td>
-<td><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
+<td class="page"><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
 </tr>
 <tr id="o_{$_allbox.id}" class="outer">
 <td colspan="5">
