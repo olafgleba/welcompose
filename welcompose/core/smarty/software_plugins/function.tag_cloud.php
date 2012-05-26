@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *  
- * @author Andreas Ahlenstorf
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose
  * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -25,6 +25,7 @@ function smarty_function_tag_cloud ($params, &$smarty)
 	// define some vars
 	$var = null;
 	$page = null;
+	$type = null;
 	$limit = null;
 	$range = null;
 	
@@ -37,6 +38,7 @@ function smarty_function_tag_cloud ($params, &$smarty)
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'var':
+			case 'type':
 					$$_key = (string)$_value;
 				break;
 			case 'page':
@@ -64,8 +66,19 @@ function smarty_function_tag_cloud ($params, &$smarty)
 	);
 	require_once(implode(DIRECTORY_SEPARATOR, $path_parts));
 	
-	// load Content_BlogTag class
-	$BLOGTAG = load('Content:BlogTag');
+	// define class var depending on delivered var type
+	switch ($type) {
+		case 'Blog':
+			$_class_namespace = 'BlogTag';
+			$_class_reference = 'BLOGTAG';
+			$_class_method = 'selectBlogTags';
+		break;
+		case 'Event':
+			$_class_namespace = 'EventTag';
+			$_class_reference = 'EVENTTAG';
+			$_class_method = 'selectEventTags';
+		break;
+	}		
 	
 	// get blog tags
 	$params = array(
@@ -73,10 +86,15 @@ function smarty_function_tag_cloud ($params, &$smarty)
 		'order_macro' => 'OCCURRENCES:DESC',
 		'limit' => $limit
 	);
-	$tags = $BLOGTAG->selectBlogTags($params);
+	
+	// load the appropriate class
+	$_class_reference = load('content:'.$_class_namespace);
+		
+	// collect appropriate tags
+	$tags = $_class_reference->$_class_method($params);
 	
 	// execute prepare & return tag cloud
-	$smarty->assign($var, $BLOGTAG->prepareTagsForCloud($tags, $range));
+	$smarty->assign($var, $_class_reference->prepareTagsForCloud($tags, $range));
 }
 
 ?>
