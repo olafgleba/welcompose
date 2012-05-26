@@ -122,9 +122,14 @@ try {
 			$pagetype['name'] == 'WCOM_URL' || 
 			$pagetype['name'] == 'WCOM_SIMPLE_DATE') {
 		$o .= '<option value="">'.gettext('There is no content available for this page type').'</option>';
-	} else {	
+	} else {
+		
 		// get pages
-		$pages = $PAGE->selectPages();
+		$select_params = array (
+			'draft' => 1,
+			'exclude' => 1
+		);
+		$pages = $PAGE->selectPages($select_params);
 		
 		foreach ($pages as $_page) {	
 			switch((string)$_page['page_type_name']) {
