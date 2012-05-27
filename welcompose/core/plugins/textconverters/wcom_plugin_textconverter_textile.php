@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *  
- * @author Andreas Ahlenstorf
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose_Plugins
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
@@ -82,8 +82,21 @@ public function apply ($str)
 	}
 	$TEXTILE = new Textile();
 	
+	// Since the current textile converter class has a problem
+	// with supplied ampersands, we cannot use the usual approach.
+	// Instead of simply passing the string to the TextileThis method and
+	// return it in a single line we must do a string replace before
+	// returning the string. 
+	
+	// Usual approach
 	// apply textile
-	return $TEXTILE->TextileThis($str);
+	//return $TEXTILE->TextileThis($str);
+	
+	// Temporary approach
+	$str = $TEXTILE->TextileThis($str);	
+	$str = str_replace('&amp;amp;', '&amp;', $str);
+	
+	return $str;	
 }
 
 }
