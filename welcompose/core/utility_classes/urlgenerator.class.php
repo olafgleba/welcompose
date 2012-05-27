@@ -151,8 +151,12 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 	}
 	if (empty($this->_pages)) {
 		// get pages
-		$PAGE = load('Content:Page');
-		$this->_pages = $PAGE->selectPages();
+		$PAGE = load('Content:Page');		
+		$select_params = array(
+			'draft' => 1,
+			'exclude' => 1
+		);
+		$this->_pages = $PAGE->selectPages($select_params);
 	}
 	
 	// ok, the first step is to look for the page we'll link to
@@ -226,7 +230,8 @@ public function generateInternalLink ($args = array(), $remove_amps = false)
 		strtolower(preg_replace(WCOM_REGEX_ACTION_TO_URL_PATTERN, "_\\1", $action))
 	);
 	
-	// if the page where the link should point to is the index page, we have to use a different url pattern that
+	// if the page where the link should point to is the index page, 
+	// we have to use a different url pattern that
 	// ommits the page name
 	if ($current_page['index_page']) {
 		$url_pattern_name = $url_pattern_name."_start";
@@ -318,7 +323,11 @@ public function generateExternalLink ($args = array())
 	if (empty($this->_pages)) {
 		// get pages
 		$PAGE = load('Content:Page');
-		$this->_pages = $PAGE->selectPages();
+		$select_params = array(
+			'draft' => 1,
+			'exclude' => 1
+		);
+		$this->_pages = $PAGE->selectPages($select_params);
 	}
 	
 	// ok, the first step is to look for the page we'll link to
