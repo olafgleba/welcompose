@@ -19,14 +19,7 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 
 ## Websites using Welcompose (Excerpt) ##
 
-[http://www.autrado.de/](Autrado GmbH - Online Autohandel)
-[http://alexangrick.de/](HUndeschule Alex Angrick)
-[http://www.gruen-strom.de/](Grün-Strom e.V Umweltzentrum Hannover)
-[http://jan-gregor-kremp.de/](Jan-Gregor Kremp)
-[http://www.cuxhaven-privat.de/](Cuxhaven Privat - Ferienportal)
-[http://ankeloenne.com/](Büro Lönne GmbH)
-[http://christine-westermann.de/](Christine Westermann)
-[http://jessica-kastrop.de/](Jessica Kastrop)
+* [http://jessica-kastrop.de/](Jessica Kastrop)
 
 
 ## Features ##
