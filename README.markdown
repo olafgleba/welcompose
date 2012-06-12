@@ -19,7 +19,14 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 
 ## Websites using Welcompose (Excerpt) ##
 
-* [http://jessica-kastrop.de/](Jessica Kastrop)
+* [http://christine-westermann.de/](http://christine-westermann.de/)
+* [http://www.autrado.de/](http://www.autrado.de/)
+* [http://alexangrick.de/](http://alexangrick.de/)
+* [http://www.gruen-strom.de/](http://www.gruen-strom.de/)
+* [http://jan-gregor-kremp.de/](http://jan-gregor-kremp.de/)
+* [http://ankeloenne.com/](http://ankeloenne.com/)
+* [http://jessica-kastrop.de/](http://jessica-kastrop.de/)
+* [http://www.cuxhaven-privat.de/](http://www.cuxhaven-privat.de/)
 
 
 ## Features ##
