@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *  
- * @author Andreas Ahlenstorf
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose
  * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -49,8 +49,7 @@ function wcom_smarty_select_whitelist ($ns, $class, $method)
 		&& preg_match($_entry['methods'], $method)) {
 			return true;
 		}
-	}
-	
+	}	
 	return false;
 }
 
@@ -62,35 +61,25 @@ if (!defined('SMARTY_TPL_DIR')) {
 	define('SMARTY_TPL_DIR', realpath(dirname(__FILE__).'/../../smarty/'));
 }
 
-// load the wcom resource plugins
+// load the wcom resource plugin
 require_once(SMARTY_DIR.'software_extensions/resource.wcom.php');
-$resource_functions = array(
-	"wcomresource_FetchTemplate",
-	"wcomresource_FetchTimestamp",
-	"wcomresource_isSecure",
-	"wcomresource_isTrusted"
-);
-$smarty->register_resource("wcom", $resource_functions);
-unset($resource_functions);
+$smarty->registerResource("wcom", new Smarty_Resource_Wcom());
 
+// load the wcomgtpl resource plugin
 require_once(SMARTY_DIR.'software_extensions/resource.wcomgtpl.php');
-$resource_functions = array(
-	"wcomgtplresource_FetchTemplate",
-	"wcomgtplresource_FetchTimestamp",
-	"wcomgtplresource_isSecure",
-	"wcomgtplresource_isTrusted"
-);
-$smarty->register_resource("wcomgtpl", $resource_functions);
-unset($resource_functions);
+$smarty->registerResource("wcomgtpl", new Smarty_Resource_Wcomgtpl());
 
 // configure smarty
-$smarty->template_dir = SMARTY_TPL_DIR.'/templates';
-$smarty->compile_dir = SMARTY_TPL_DIR.'/compiled';
-$smarty->cache_dir = SMARTY_TPL_DIR.'/cache';
-$smarty->plugins_dir = array(
-	SMARTY_DIR.'my_plugins',
+$smarty->muteExpectedErrors();
+//$smarty->compile_check = false;
+
+$smarty->setTemplateDir(SMARTY_TPL_DIR.'/templates');
+$smarty->setCompileDir(SMARTY_TPL_DIR.'/compiled');
+$smarty->setCacheDir(SMARTY_TPL_DIR.'/cache');
+$smarty->setPluginsDir(array(
 	SMARTY_DIR.'plugins',
 	SMARTY_DIR.'software_plugins'
+	)
 );
 
 ?>
