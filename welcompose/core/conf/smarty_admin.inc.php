@@ -48,9 +48,6 @@ $smarty->registerPlugin('compiler', 'i18n', 'smarty_compiler_i18n');
 // configure smarty
 $smarty->debugging = false;
 
-// delete this after debugging and testing
-$smarty->force_compile = true;
-
 $smarty->auto_literal = false;
 $smarty->muteExpectedErrors();
 
