@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Next.php 311435 2011-05-26 10:30:06Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: Next.php 323363 2012-02-19 15:09:07Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /** Interface for Controller action handlers */
@@ -49,11 +49,13 @@ require_once 'HTML/QuickForm2/Controller/Action.php';
 /**
  * Action handler for a 'next' button of wizard-type multipage form
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Controller_Action_Next
     implements HTML_QuickForm2_Controller_Action
@@ -72,7 +74,7 @@ class HTML_QuickForm2_Controller_Action_Next
             return $next->handle('jump');
 
         // Consider this a 'finish' button, if there is no explicit one
-        } elseif($page->getController()->isWizard()) {
+        } elseif ($page->getController()->isWizard()) {
             if ($page->getController()->isValid()) {
                 return $page->handle('process');
             } else {

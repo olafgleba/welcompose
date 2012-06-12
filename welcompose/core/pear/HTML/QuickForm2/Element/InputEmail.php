@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for <input type="text" /> elements
+ * Class for <input type="email" /> elements
  *
  * PHP version 5
  *
@@ -49,7 +49,7 @@
 require_once 'HTML/QuickForm2/Element/Input.php';
 
 /**
- * Class for <input type="url" /> elements
+ * Class for <input type="email" /> elements
  *
  * @category   HTML
  * @package    HTML_QuickForm2

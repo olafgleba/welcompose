@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Exception.php 311435 2011-05-26 10:30:06Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: Exception.php 323321 2012-02-18 10:48:48Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
@@ -56,9 +56,13 @@ require_once 'PEAR/Exception.php';
  * It will rarely be thrown directly, its specialized subclasses will be
  * thrown most of the time.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Exception extends PEAR_Exception
 {
@@ -78,9 +82,13 @@ class HTML_QuickForm2_Exception extends PEAR_Exception
  * </code>
  * This code fill output "Class 'NonExistent' does not exist and no file to load"
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_NotFoundException extends HTML_QuickForm2_Exception
 {
@@ -99,9 +107,13 @@ class HTML_QuickForm2_NotFoundException extends HTML_QuickForm2_Exception
  * </code>
  * This code will output "Element type 'unknown' is not known"
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+s * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_InvalidArgumentException extends HTML_QuickForm2_Exception
 {

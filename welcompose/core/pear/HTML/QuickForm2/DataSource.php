@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,23 +34,25 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: DataSource.php 311435 2011-05-26 10:30:06Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: DataSource.php 323321 2012-02-18 10:48:48Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
  * Interface for data sources used by HTML_QuickForm2 objects
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 interface HTML_QuickForm2_DataSource
 {
@@ -59,7 +61,8 @@ interface HTML_QuickForm2_DataSource
     *
     * If data source doesn't have a requested value it should return null
     *
-    * @param    string  Element's name
+    * @param string $name Element's name
+    *
     * @return   mixed   Element's value
     */
     public function getValue($name);

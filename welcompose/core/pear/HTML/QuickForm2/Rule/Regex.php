@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Regex.php 311435 2011-05-26 10:30:06Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: Regex.php 323363 2012-02-19 15:09:07Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
@@ -63,11 +63,13 @@ require_once 'HTML/QuickForm2/Rule.php';
  * The Rule considers empty fields (file upload fields with UPLOAD_ERR_NO_FILE)
  * as valid and doesn't try to test them with the regular expression.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Rule_Regex extends HTML_QuickForm2_Rule
 {
@@ -93,7 +95,8 @@ class HTML_QuickForm2_Rule_Regex extends HTML_QuickForm2_Rule
    /**
     * Sets the regular expression to validate with
     *
-    * @param    string  Regular expression
+    * @param string $config Regular expression
+    *
     * @return   HTML_QuickForm2_Rule
     * @throws   HTML_QuickForm2_InvalidArgumentException    if $config is not a string
     */
@@ -113,7 +116,7 @@ class HTML_QuickForm2_Rule_Regex extends HTML_QuickForm2_Rule
     *
     * For this to work properly, slashes have to be used as regex delimiters.
     * The method takes care of transforming PHP unicode escapes in regexps to
-    * JS unicode escapes if using 'u' modifier (see bug #12376)
+    * JS unicode escapes if using 'u' modifier (see bug #12736)
     *
     * @return   string
     */

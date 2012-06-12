@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for <input type="text" /> elements
+ * Class for <input type="url" /> elements
  *
  * PHP version 5
  *

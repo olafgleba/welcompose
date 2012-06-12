@@ -40,7 +40,7 @@
  * @package    HTML_QuickForm2
  * @author     Alain D D Williams <addw@phcomp.co.uk> of Parliament Hill Computers
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SCCS: @(#)Smarty.php	1.9 11/09/11 11:29:25
+ * @version    SCCS: @(#)Smarty.php	1.12 11/11/11 16:29:11
  * @link       http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -157,7 +157,9 @@ require_once 'HTML/QuickForm2/Renderer/Array.php';
  * @category   HTML
  * @package    HTML_QuickForm2
  * @author     Alain D D Williams <addw@phcomp.co.uk>
- * @version    Release: SCCS: @(#)Smarty.php	1.9 11/09/11 11:29:25
+ * @version    Release: SCCS: @(#)Smarty.php	1.12 11/11/11 16:29:11
+ * @license    http://opensource.org/licenses/bsd-license.php New BSD License
+ * @link       http://pear.php.net/package/HTML_QuickForm2/Renderer/Smarty.php
  */
 class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
 {
@@ -170,16 +172,16 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
         $this->options += array(
             'old_compat' => false,
             'key_id'     => false,
-	    			'group_errors' => false,
+            'group_errors' => false,
             );
     }
 
    /**
     * Creates an array with fields that are common to all elements
     *
-    * @param    HTML_QuickForm2_Node    Element being rendered
+    * @param HTML_QuickForm2_Node $element Element being rendered
     *
-    * @return   array
+    * @return array
     */
     public function buildCommonFields(HTML_QuickForm2_Node $element)
     {
@@ -197,18 +199,20 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
 
         // User specified a key for the renderer array ?
         $data = $element->getData();
-        if(isset($data['SmartyKey']))
+        if(isset($data['SmartyKey'])) {
             $ary['SmartyKey'] = $key_val = $data['SmartyKey'];
+        }
 
-        if($key_val == '')
+        if($key_val == '') {
             $key_val = $ary['id'];
+        }
 
         if ($labels = $element->getLabel()) {
             if (!is_array($labels) || !$this->options['static_labels']) {
                 $ary['label'] = $labels;
             } else {
                 foreach ($labels as $key => $label) {
-                    $key = is_int($key)? $key + 1: $key;
+                    $key = is_int($key)? $key + 1 : $key;
                     if (1 === $key) {
                         $ary['label'] = $label;
                     } else {
@@ -239,21 +243,37 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
         // Radio buttons record the attribute value
         if($element->getType() == 'radio' || $element->getType() == 'checkbox') {
             $attribs = $element->getAttributes(false);
-            if(isset($attribs['value']))    // Perhaps throw error if not set
+            if(isset($attribs['value'])) {   // Perhaps throw error if not set
                 $ary['set_value'] = $attribs['value'];
+            }
         }
 
         return $ary;
     }
 
+    /**
+     * Called to start
+     *
+     * @param HTML_QuickForm2_Node $form
+     *
+     * @return void
+     */
     public function startForm(HTML_QuickForm2_Node $form)
     {
-        if($this->options['old_compat'])
+        if($this->options['old_compat']) {
             $this->options['group_hiddens'] = true;
+        }
 
         parent::startForm($form);
     }
 
+    /**
+     * Called at end
+     *
+     * @param HTML_QuickForm2_Node $form
+     * 
+     * @return void
+     */
     public function finishForm(HTML_QuickForm2_Node $form)
     {
         parent::finishForm($form);
@@ -272,18 +292,28 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
         }
 
         // Create top level elements keyed by form field 'name' or 'id'
-        if(isset($this->array['elements']['0']))
+        if(isset($this->array['elements']['0'])) {
             $this->linkToLevelAbove($this->array, $this->array['elements']);
+        }
 
         // For compat: it is expected that 'hidden' is a string, not an array:
-        if($this->options['old_compat'] && isset($this->array['hidden']) && is_array($this->array['hidden']))
+        if($this->options['old_compat'] && isset($this->array['hidden']) && is_array($this->array['hidden'])) {
             $this->array['hidden'] = join(' ', $this->array['hidden']);
+        }
     }
 
-    // Look through the elements (numerically indexed) array, make fields
-    // members of the level above. This is so that they can be easily accessed by smarty templates.
-    // If we find a group, recurse down. Used for smarty only.
-    // Key is 'name' or 'id'.
+    /**
+     * Look through the elements (numerically indexed) array, make fields
+     * members of the level above. This is so that they can be easily accessed by smarty templates.
+     * If we find a group, recurse down. Used for smarty only.
+     * Key is 'name' or 'id'.
+     *
+     * @param array &$top
+     * @param array $elements
+     * @param bool $inGroup
+     *
+     * @return void
+     */
     private function linkToLevelAbove(&$top, $elements, $inGroup = false)
     {
         $key = $this->options['key_id'] ? 'id' : 'name';
@@ -294,27 +324,32 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
             // If in a group, convert something like inGrp[F4grp][F4_1] to F4_1
             // Don't do if key_id as the value is a straight id.
             if( !$this->options['key_id'] && $inGroup && $top_key != '') {
-                if(!(preg_match("/\[?([\w_]*)\]?$/i", $top_key, $match)))
+                if(!(preg_match("/\[?([\w_]*)\]?$/i", $top_key, $match))) {
                     throw new HTML_QuickForm2_InvalidArgumentException(
                         "linkToLevelAbove can't obtain the name from '$top_key'");
+                }
                 // Allow group with empty field names - makes an array:
-                if($match[1] != '')    // Don't change for something like field[]
+                if($match[1] != '') {   // Don't change for something like field[]
                     $top_key = $match[1];
+                }
             }
 
             // Override key for renderer array ?
-            if(isset($elem['SmartyKey']))
+            if(isset($elem['SmartyKey'])) {
                 $top_key = $elem['SmartyKey'];
+            }
 
             // Radio buttons: several elements with the same name, make an array
             if(isset($elem['type']) && $elem['type'] == 'radio') {
-                if( ! isset($top[$top_key]))
+                if( ! isset($top[$top_key])) {
                     $top[$top_key] = array('id' => $top_key, 'type' => 'radio', 'elements' => array());
+                }
                 $top[$top_key][$elem['id']] = &$elem;
 
                 // So that it can be easily found put into 'elements' keyed by the value that it would have:
-                if(isset($elem['set_value']))
+                if(isset($elem['set_value'])) {
                     $top[$top_key]['elements'][$elem['set_value']] = &$elem;
+                }
 
             } else if(isset($elem['type']) && $elem['type'] == 'checkbox' &&
                       preg_match('/^([^\[\]]+)\[([^\]]+)\]$/', $elem['name'], $fn)) {
@@ -322,25 +357,31 @@ class HTML_QuickForm2_Renderer_Smarty extends HTML_QuickForm2_Renderer_Array
                 $name = $fn[1];
                 $index = $fn[2];
 
-                if( ! isset($top[$name]))
+                if( ! isset($top[$name])) {
                     $top[$name] = array('id' => $name, 'type' => 'checkbox', 'elements' => array());
+                }
                 $top[$name][$elem['id']] = &$elem;
 
                 // So that it can be easily found put into 'elements' keyed by the value that it would have:
-                if(isset($elem['set_value']))
+                if(isset($elem['set_value'])) {
                     $top[$name]['elements'][$index] = &$elem;
+                }
 
-            } else    // Normal field, just link into the level above.
-                if( ! isset($top[$top_key]))
+            } else {   // Normal field, just link into the level above.
+                if( ! isset($top[$top_key])) {
                     $top[$top_key] = &$elem;    // Link into the level above
+                }
+            }
 
             // If we have a group link its fields up to this level:
-            if(isset($elem['elements']['0']))
+            if(isset($elem['elements']['0'])) {
                 $this->linkToLevelAbove($elem, $elem['elements'], true);
+            }
 
             // Link errors to the top level:
-            if(isset($elem['error']) && isset($this->array[$elem['error']]))
+            if(isset($elem['error']) && isset($this->array[$elem['error']])) {
                 $this->array['errors'][$top_key] = $this->array[$elem['error']];
+            }
         }
     }
 

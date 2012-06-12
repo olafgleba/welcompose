@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: InputRadio.php 309777 2011-03-28 10:41:11Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: InputRadio.php 325186 2012-04-14 12:53:58Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
@@ -51,19 +51,21 @@ require_once 'HTML/QuickForm2/Element/InputCheckable.php';
 /**
  * Class for <input type="radio" /> elements
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Element_InputRadio extends HTML_QuickForm2_Element_InputCheckable
 {
     protected $attributes = array('type' => 'radio', 'value' => 'on');
 
     protected $frozenHtml = array(
-        'checked'   => '<tt>(x)</tt>',
-        'unchecked' => '<tt>(&nbsp;)</tt>'
+        'checked'   => '<code>(x)</code>',
+        'unchecked' => '<code>(&nbsp;)</code>'
     );
 }
 ?>

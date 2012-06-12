@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Node.php 317439 2011-09-28 16:08:55Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: Node.php 324926 2012-04-06 17:08:12Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
@@ -83,11 +83,13 @@ require_once 'HTML/QuickForm2/Rule.php';
  * by the subclasses. It also contains static methods handling generation
  * of unique ids for elements which do not have ids explicitly set.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 abstract class HTML_QuickForm2_Node extends HTML_Common2
 {
@@ -162,8 +164,9 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     * will result in an exception. Changing their values is delegated to
     * setName() and setId() methods, respectively
     *
-    * @param    string  Attribute name
-    * @param    string  Attribute value, null if attribute is being removed
+    * @param string $name  Attribute name
+    * @param string $value Attribute value, null if attribute is being removed
+    *
     * @throws   HTML_QuickForm2_InvalidArgumentException    if trying to
     *                                   remove a required attribute
     */
@@ -191,9 +194,9 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Class constructor
     *
-    * @param    string  Element name
-    * @param    mixed   Attributes (either a string or an array)
-    * @param    array   Element data (label, options and data used for element creation)
+    * @param string       $name       Element name
+    * @param string|array $attributes HTML attributes (either a string or an array)
+    * @param array        $data       Element data (label, options used for element setup)
     */
     public function __construct($name = null, $attributes = null, array $data = array())
     {
@@ -214,8 +217,9 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     *
     * Called when an element is created without explicitly given id
     *
-    * @param  string   Element name
-    * @return string   The generated element id
+    * @param string $elementName Element name
+    *
+    * @return string The generated element id
     */
     protected static function generateId($elementName)
     {
@@ -228,13 +232,17 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
 
         do {
             $token = array_shift($tokens);
+            // prevent generated ids starting with numbers
+            if ('' == $id && is_numeric($token)) {
+                $token = 'qf' . $token;
+            }
             // Handle the 'array[]' names
             if ('' === $token) {
                 if (empty($container)) {
                     $token = 0;
                 } else {
-                    $keys  = array_keys($container);
-                    $token = end($keys);
+                    $keys  = array_filter(array_keys($container), 'is_numeric');
+                    $token = empty($keys) ? 0 : end($keys);
                     while (isset($container[$token])) {
                         $token++;
                     }
@@ -262,7 +270,7 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Stores the explicitly given id to prevent duplicate id generation
     *
-    * @param    string  Element id
+    * @param string $id Element id
     */
     protected static function storeId($id)
     {
@@ -312,7 +320,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Sets the element's name
     *
-    * @param    string
+    * @param string $name
+    *
     * @return   HTML_QuickForm2_Node
     */
     abstract public function setName($name);
@@ -330,13 +339,14 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
 
 
    /**
-    * Sets the elements id
+    * Sets the element's id
     *
     * Please note that elements should always have an id in QuickForm2 and
     * therefore it will not be possible to remove the element's id or set it to
     * an empty value. If id is not explicitly given, it will be autogenerated.
     *
-    * @param    string  Element's id, will be autogenerated if not given
+    * @param string $id Element's id, will be autogenerated if not given
+    *
     * @return   HTML_QuickForm2_Node
     * @throws   HTML_QuickForm2_InvalidArgumentException if id contains invalid
     *           characters (i.e. spaces)
@@ -380,7 +390,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Sets the element's value
     *
-    * @param    mixed
+    * @param mixed $value
+    *
     * @return   HTML_QuickForm2_Node
     */
     abstract public function setValue($value);
@@ -403,7 +414,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Sets the element's label(s)
     *
-    * @param    string|array    Label for the element (may be an array of labels)
+    * @param string|array $label Label for the element (may be an array of labels)
+    *
     * @return   HTML_QuickForm2_Node
     */
     public function setLabel($label)
@@ -416,9 +428,10 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Changes the element's frozen status
     *
-    * @param    bool    Whether the element should be frozen or editable. If
-    *                   omitted, the method will not change the frozen status,
-    *                   just return its current value
+    * @param bool $freeze Whether the element should be frozen or editable. If
+    *                     omitted, the method will not change the frozen status,
+    *                     just return its current value
+    *
     * @return   bool    Old value of element's frozen status
     */
     public function toggleFrozen($freeze = null)
@@ -437,9 +450,10 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     * If persistent freeze is on, the element's value will be kept (and
     * submitted) in a hidden field when the element is frozen.
     *
-    * @param    bool    New value for "persistent freeze". If omitted, the
-    *                   method will not set anything, just return the current
-    *                   value of the flag.
+    * @param bool $persistent New value for "persistent freeze". If omitted, the
+    *                         method will not set anything, just return the current
+    *                         value of the flag.
+    *
     * @return   bool    Old value of "persistent freeze" flag
     */
     public function persistentFreeze($persistent = null)
@@ -455,9 +469,10 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Adds the link to the element containing current
     *
-    * @param    HTML_QuickForm2_Container  Element containing the current one,
-    *                                      null if the link should really be
-    *                                      removed (if removing from container)
+    * @param HTML_QuickForm2_Container $container Element containing
+    *                           the current one, null if the link should
+    *                           really be removed (if removing from container)
+    *
     * @throws   HTML_QuickForm2_InvalidArgumentException   If trying to set a
     *                               child of an element as its container
     */
@@ -515,23 +530,25 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Adds a validation rule
     *
-    * @param    HTML_QuickForm2_Rule|string     Validation rule or rule type
-    * @param    string|int                      If first parameter is rule type, then
-    *               message to display if validation fails, otherwise constant showing
-    *               whether to perfom validation client-side and/or server-side
-    * @param    mixed                           Additional data for the rule
-    * @param    int                             Whether to perfom validation server-side
-    *               and/or client side. Combination of HTML_QuickForm2_Rule::SERVER and
-    *               HTML_QuickForm2_Rule::CLIENT constants
+    * @param HTML_QuickForm2_Rule|string $rule           Validation rule or rule type
+    * @param string|int                  $messageOrRunAt If first parameter is rule type,
+    *            then message to display if validation fails, otherwise constant showing
+    *            whether to perfom validation client-side and/or server-side
+    * @param mixed                       $options        Configuration data for the rule
+    * @param int                         $runAt          Whether to perfom validation
+    *               server-side and/or client side. Combination of
+    *               HTML_QuickForm2_Rule::SERVER and HTML_QuickForm2_Rule::CLIENT constants
+    *
     * @return   HTML_QuickForm2_Rule            The added rule
     * @throws   HTML_QuickForm2_InvalidArgumentException    if $rule is of a
     *               wrong type or rule name isn't registered with Factory
     * @throws   HTML_QuickForm2_NotFoundException   if class for a given rule
     *               name cannot be found
     */
-    public function addRule($rule, $messageOrRunAt = '', $options = null,
-                            $runAt = HTML_QuickForm2_Rule::SERVER)
-    {
+    public function addRule(
+        $rule, $messageOrRunAt = '', $options = null,
+        $runAt = HTML_QuickForm2_Rule::SERVER
+    ) {
         if ($rule instanceof HTML_QuickForm2_Rule) {
             $rule->setOwner($this);
             $runAt = '' == $messageOrRunAt? HTML_QuickForm2_Rule::SERVER: $messageOrRunAt;
@@ -554,7 +571,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     * The method will *not* throw an Exception if the rule wasn't added to the
     * element.
     *
-    * @param    HTML_QuickForm2_Rule    Validation rule to remove
+    * @param HTML_QuickForm2_Rule $rule Validation rule to remove
+    *
     * @return   HTML_QuickForm2_Rule    Removed rule
     */
     public function removeRule(HTML_QuickForm2_Rule $rule)
@@ -579,9 +597,10 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     *     ->or_($second->createRule('nonempty'));
     * </code>
     *
-    * @param    string                  Rule type
-    * @param    string                  Message to display if validation fails
-    * @param    mixed                   Additional data for the rule
+    * @param string $type    Rule type
+    * @param string $message Message to display if validation fails
+    * @param mixed  $options Configuration data for the rule
+    *
     * @return   HTML_QuickForm2_Rule    The created rule
     * @throws   HTML_QuickForm2_InvalidArgumentException If rule type is unknown
     * @throws   HTML_QuickForm2_NotFoundException        If class for the rule
@@ -611,16 +630,17 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Adds element's client-side validation rules to a builder object
     *
-    * @param HTML_QuickForm2_JavascriptBuilder
+    * @param HTML_QuickForm2_JavascriptBuilder $builder
     */
     protected function renderClientRules(HTML_QuickForm2_JavascriptBuilder $builder)
     {
         if ($this->toggleFrozen()) {
             return;
         }
+        $onblur = HTML_QuickForm2_Rule::ONBLUR_CLIENT ^ HTML_QuickForm2_Rule::CLIENT;
         foreach ($this->rules as $rule) {
             if ($rule[1] & HTML_QuickForm2_Rule::CLIENT) {
-                $builder->addRule($rule[0], $rule[1] & (HTML_QuickForm2_Rule::ONBLUR_CLIENT ^ HTML_QuickForm2_Rule::CLIENT));
+                $builder->addRule($rule[0], $rule[1] & $onblur);
             }
         }
     }
@@ -646,7 +666,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Sets the error message to the element
     *
-    * @param    string
+    * @param string $error
+    *
     * @return   HTML_QuickForm2_Node
     */
     public function setError($error = null)
@@ -668,7 +689,9 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Returns Javascript code for getting the element's value
     *
-    * @param  bool  Whether it should return a parameter for qf.form.getContainerValue()
+    * @param bool $inContainer Whether it should return a parameter for
+    *                          qf.form.getContainerValue()
+    *
     * @return string
     */
     abstract public function getJavascriptValue($inContainer = false);
@@ -689,10 +712,11 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
      * A filter is simply a PHP callback which will be applied to the element value
      * when getValue() is called.
      *
-     * @param    callback    The PHP callback used for filter
-     * @param    array       Optional arguments for the callback. The first parameter
+     * @param callback $callback The PHP callback used for filter
+     * @param array    $options  Optional arguments for the callback. The first parameter
      *                       will always be the element value, then these options will
      *                       be used as parameters for the callback.
+     *
      * @return   HTML_QuickForm2_Node    The element
      * @throws   HTML_QuickForm2_InvalidArgumentException    If callback is incorrect
      */
@@ -719,11 +743,12 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
      * If the element is not a container and its value is not an array the behaviour
      * will be identical to filters added via addFilter().
      *
-     * @param    callback    The PHP callback used for filter
-     * @param    array       Optional arguments for the callback. The first parameter
+     * @param callback $callback The PHP callback used for filter
+     * @param array    $options  Optional arguments for the callback. The first parameter
      *                       will always be the element value, then these options will
      *                       be used as parameters for the callback.
-     * @return   HTML_QuickForm2_Container    The container
+     *
+     * @return   HTML_QuickForm2_Node    The element
      * @throws   HTML_QuickForm2_InvalidArgumentException    If callback is incorrect
      */
     public function addRecursiveFilter($callback, array $options = array())
@@ -740,11 +765,11 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
    /**
     * Helper function for applying filter callback to a value
     *
-    * @param    mixed   Value being filtered
-    * @param    mixed   Array key (not used, present to be able to use this
-    *                   method as a callback to array_walk_recursive())
-    * @param    array   Array containing callback and additional callback
-    *                   parameters
+    * @param mixed &$value Value being filtered
+    * @param mixed $key    Array key (not used, present to be able to use this
+    *                      method as a callback to array_walk_recursive())
+    * @param array $filter Array containing callback and additional callback
+    *                      parameters
     */
     protected static function applyFilter(&$value, $key, $filter)
     {
@@ -756,7 +781,8 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
     /**
      * Applies non-recursive filters on element value
      *
-     * @param    mixed   Element value
+     * @param mixed $value Element value
+     *
      * @return   mixed   Filtered value
      */
     protected function applyFilters($value)
@@ -766,5 +792,13 @@ abstract class HTML_QuickForm2_Node extends HTML_Common2
         }
         return $value;
     }
+
+   /**
+    * Renders the element using the given renderer
+    *
+    * @param HTML_QuickForm2_Renderer $renderer
+    * @return   HTML_QuickForm2_Renderer
+    */
+    abstract public function render(HTML_QuickForm2_Renderer $renderer);
 }
 ?>

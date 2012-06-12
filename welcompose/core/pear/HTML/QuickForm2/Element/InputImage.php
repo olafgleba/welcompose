@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2006-2011, Alexey Borzov <avb@php.net>,
+ * Copyright (c) 2006-2012, Alexey Borzov <avb@php.net>,
  *                          Bertrand Mansion <golgote@mamasam.com>
  * All rights reserved.
  *
@@ -34,13 +34,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: InputImage.php 311435 2011-05-26 10:30:06Z avb $
- * @link       http://pear.php.net/package/HTML_QuickForm2
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  SVN: $Id: InputImage.php 323363 2012-02-19 15:09:07Z avb $
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
 /**
@@ -51,11 +51,13 @@ require_once 'HTML/QuickForm2/Element/Input.php';
 /**
  * Class for <input type="image" /> elements
  *
- * @category   HTML
- * @package    HTML_QuickForm2
- * @author     Alexey Borzov <avb@php.net>
- * @author     Bertrand Mansion <golgote@mamasam.com>
- * @version    Release: 0.6.1
+ * @category HTML
+ * @package  HTML_QuickForm2
+ * @author   Alexey Borzov <avb@php.net>
+ * @author   Bertrand Mansion <golgote@mamasam.com>
+ * @license  http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: 2.0.0beta2
+ * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Element_InputImage extends HTML_QuickForm2_Element_Input
 {
@@ -70,8 +72,9 @@ class HTML_QuickForm2_Element_InputImage extends HTML_QuickForm2_Element_Input
    /**
     * Image buttons can not be frozen
     *
-    * @param    bool    Whether element should be frozen or editable. This
-    *                   parameter is ignored in case of image elements
+    * @param bool $freeze Whether element should be frozen or editable. This
+    *                     parameter is ignored in case of image elements
+    *
     * @return   bool    Always returns false
     */
     public function toggleFrozen($freeze = null)
@@ -82,7 +85,8 @@ class HTML_QuickForm2_Element_InputImage extends HTML_QuickForm2_Element_Input
    /**
     * Image button's value cannot be set via this method
     *
-    * @param    mixed   Element's value, this parameter is ignored
+    * @param mixed $value Element's value, this parameter is ignored
+    *
     * @return   HTML_QuickForm2_Element_InputImage
     */
     public function setValue($value)
@@ -116,9 +120,9 @@ class HTML_QuickForm2_Element_InputImage extends HTML_QuickForm2_Element_Input
     */
     public function __toString()
     {
-        if (false === strpos($this->attributes['name'], '[') ||
-            '[]' == substr($this->attributes['name'], -2))
-        {
+        if (false === strpos($this->attributes['name'], '[')
+            || '[]' == substr($this->attributes['name'], -2)
+        ) {
             return parent::__toString();
         } else {
             $this->attributes['name'] .= '[]';
@@ -133,9 +137,9 @@ class HTML_QuickForm2_Element_InputImage extends HTML_QuickForm2_Element_Input
         foreach ($this->getDataSources() as $ds) {
             if ($ds instanceof HTML_QuickForm2_DataSource_Submit) {
                 $name = $this->getName();
-                if (false === strpos($name, '[') &&
-                    null !== ($value = $ds->getValue($name . '_x')))
-                {
+                if (false === strpos($name, '[')
+                    && null !== ($value = $ds->getValue($name . '_x'))
+                ) {
                     $this->coordinates = array(
                         'x' => $value,
                         'y' => $ds->getValue($name . '_y')
