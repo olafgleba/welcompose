@@ -24,7 +24,7 @@ function smarty_function_get_path_to_object ($params, &$smarty)
 {
 	// input check
 	if (!is_array($params)) {
-		$smarty->trigger_error("Input for parameter params is not an array");
+		trigger_error("Input for parameter params is not an array");
 	}
 	
 	// load media object class

@@ -2,7 +2,7 @@
 
 /**
  * Project: Smarty::Gettext
- * File: compiler.i18n.php
+ * File: Smarty_GettextHelper.class.php
  *
  * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
@@ -15,7 +15,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +23,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * $Id: Smarty_GettextHelper.class.php 3 2006-06-06 08:05:42Z andreas $
- *
- * @copyright (c) 2008 creatics
- * @author sopic GmbH
+ * @author 	Andreas Ahlenstorf, Olaf Gleba
  * @package SmartyGettext
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  */
@@ -92,7 +89,7 @@ class Smarty_GettextHelper
 			$matches[1] = str_replace(':', '|', $matches[1]);
 			Smarty_GettextHelper::$map[$matches[0]] = array(
 				'counter' => Smarty_GettextHelper::$counter,
-				'value' => Smarty_GettextHelper::$compiler->_parse_var_props('$'.$matches[1])
+				'value' => Smarty_GettextHelper::$matches[1]
 			);
 
 			Smarty_GettextHelper::$counter++;

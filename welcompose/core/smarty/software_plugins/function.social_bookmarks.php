@@ -26,7 +26,7 @@ function smarty_function_social_bookmarks ($params, &$smarty)
 {
 	// input check
 	if (!is_array($params)) {
-		$smarty->trigger_error("Input for parameter params is not an array");
+		trigger_error("Input for parameter params is not an array");
 	}
 
 	// import object name from params array

@@ -24,7 +24,7 @@ function smarty_function_mm_insert_callback ($params, &$smarty)
 {
 	// input check
 	if (!is_array($params)) {
-		$smarty->trigger_error("Input for parameter params is not an array");
+		trigger_error("Input for parameter params is not an array");
 	}
 	
 	// load media object class
