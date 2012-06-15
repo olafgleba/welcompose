@@ -207,6 +207,68 @@ try {
 		$validator_message->addRule('required', gettext('Please enter a validator message'));
 	}	
 	
+	// Optional (HTML5) attributes
+		
+	// textfield for placeholder
+	$placeholder = $FORM->addElement('text', 'placeholder', 
+		array('id' => 'generator_form_field_placeholder', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('placeholder'))
+		);
+	
+	// textfield for placeholder
+	$pattern = $FORM->addElement('text', 'pattern', 
+		array('id' => 'generator_form_field_pattern', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('pattern'))
+		);
+		
+	// textfield for maxlength
+	$maxlength = $FORM->addElement('text', 'maxlength', 
+		array('id' => 'generator_form_field_maxlength', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('maxlength'))
+		);
+
+	// textfield for max
+	$min = $FORM->addElement('text', 'min', 
+		array('id' => 'generator_form_field_min', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('min'))
+		);
+	$min->addRule('regex', gettext('Only numeric values (with leadings) are allowed'), WCOM_REGEX_NUMERIC_WITH_LEADINGS);
+		
+	// textfield for max
+	$max = $FORM->addElement('text', 'max', 
+		array('id' => 'generator_form_field_max', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('max'))
+		);
+	$max->addRule('regex', gettext('Only numeric values (with leadings) are allowed'), WCOM_REGEX_NUMERIC_WITH_LEADINGS);
+		
+	// textfield for step
+	$step = $FORM->addElement('text', 'step', 
+		array('id' => 'generator_form_field_step', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('step'))
+		);
+	$step->addRule('regex', gettext('Only numeric values (with leadings) are allowed'), WCOM_REGEX_NUMERIC_WITH_LEADINGS);
+		
+	// checkbox for required (html5)		
+	$required_attr = $FORM->addElement('checkbox', 'required_attr',
+		array('id' => 'generator_form_field_required_attr', 'class' => 'chbx'),
+		array('label' => gettext('required'))
+		);
+	$required_attr->addRule('regex', gettext('The field required_attr accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+
+	// checkbox for autofocus		
+	$autofocus = $FORM->addElement('checkbox', 'autofocus',
+		array('id' => 'generator_form_field_autofocus', 'class' => 'chbx'),
+		array('label' => gettext('autofocus'))
+		);
+	$autofocus->addRule('regex', gettext('The field autofocus accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+			
+	// checkbox for readonly		
+	$readonly = $FORM->addElement('checkbox', 'readonly',
+		array('id' => 'generator_form_field_readonly', 'class' => 'chbx'),
+		array('label' => gettext('readonly'))
+		);
+	$readonly->addRule('regex', gettext('The field readonly accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+	
 	// submit button
 	$save = $FORM->addElement('submit', 'save', 
 		array('class' => 'submit200', 'value' => gettext('Duplicate Form Field'))
@@ -227,13 +289,26 @@ try {
 		'required' => Base_Cnc::ifsetor($form_field['required'], null),
 		'required_message' => Base_Cnc::ifsetor($form_field['required_message'], null),
 		'validator_regex' => Base_Cnc::ifsetor($form_field['validator_regex'], null),
-		'validator_message' => Base_Cnc::ifsetor($form_field['validator_message'], null)
+		'validator_message' => Base_Cnc::ifsetor($form_field['validator_message'], null),
+		'placeholder' => Base_Cnc::ifsetor($form_field['placeholder'], null),
+		'pattern' => Base_Cnc::ifsetor($form_field['pattern'], null),
+		'maxlength' => Base_Cnc::ifsetor($form_field['maxlength'], null),
+		'min' => Base_Cnc::ifsetor($form_field['min'], null),
+		'max' => Base_Cnc::ifsetor($form_field['max'], null),
+		'step' => Base_Cnc::ifsetor($form_field['step'], null),
+		'required_attr' => Base_Cnc::ifsetor($form_field['required_attr'], null),
+		'autofocus' => Base_Cnc::ifsetor($form_field['autofocus'], null),
+		'readonly' => Base_Cnc::ifsetor($form_field['readonly'], null)
 	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/../quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -280,6 +355,15 @@ try {
 		$sqlData['required_message'] = $required_message->getValue();
 		$sqlData['validator_regex'] = $validator_regex->getValue();
 		$sqlData['validator_message'] = $validator_message->getValue();
+		$sqlData['placeholder'] = $placeholder->getValue();
+		$sqlData['pattern'] = $pattern->getValue();
+		$sqlData['maxlength'] = $maxlength->getValue();
+		$sqlData['min'] = $min->getValue();
+		$sqlData['max'] = $max->getValue();
+		$sqlData['step'] = $step->getValue();
+		$sqlData['required_attr'] = $required_attr->getValue();
+		$sqlData['autofocus'] = $autofocus->getValue();
+		$sqlData['readonly'] = $readonly->getValue();
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);

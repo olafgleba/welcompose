@@ -192,6 +192,9 @@ public function render ()
 	// start new HTML_QuickForm
 	$FORM = $this->base->utility->loadQuickForm('generator_form', 'post', 
 		array('accept-charset' => 'utf-8','action' => $this->getLocationSelf(true)));
+		
+	// load generator form field class	
+	$GENERATORFORMFIELDS = load('Content:GeneratorFormField');
 	
 	foreach ($this->_generator_form_fields as $_field) {
 		// prepare id
@@ -207,12 +210,55 @@ public function render ()
 					$attributes = array(
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'fcheckbox '. $_field['class'] : 'fcheckbox'
-					);					
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'required_attr', 'autofocus'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
 					);					
 					$element = $FORM->addElement('checkbox', $_field['name'], $attributes, $data);
+				break;
+			case 'email':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'maxlength' => 255,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'femail '. $_field['class'] : 'femail'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('email', $_field['name'], $attributes, $data);
+				break;
+			case 'file':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'class' => (!empty($_field['class'])) ? 'ffile '. $_field['class'] : 'ffile'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'required_attr', 'autofocus'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('file', $_field['name'], $attributes, $data);
 				break;
 			case 'hidden':
 					// prepare attributes
@@ -222,12 +268,115 @@ public function render ()
 					// create element
 					$element = $FORM->addElement('hidden', $_field['name'], $attributes);
 				break;
+			case 'number':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'fnumber '. $_field['class'] : 'fnumber'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'min', 'max', 'step', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('number', $_field['name'], $attributes, $data);
+				break;
+			case 'radio':					
+					// add Group
+					$element = $FORM->addGroup($_field['name']);				
+				
+					$i = 1;
+					foreach (explode(';', str_replace(' ','',$_field['value'])) as $_value) {
+						if (empty($_value)) {
+							continue;
+						}
+						// prepare attributes
+						$attributes = array(
+							'value' => $_value,
+							'id' => $field_id . '_' . $i,
+							'class' => (!empty($_field['class'])) ? 'fradio '. $_field['class'] : 'fradio'
+						);
+						// prepare optional attributes and extend attributes array
+						$declare_attributes = array(
+							'required_attr', 'autofocus'
+						);
+						$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);						
+						// prepare data
+						$data = array(
+							'label' => $_field['label'],
+							'content' => $_value
+						);					
+						// create (grouped) element
+						$element->addElement('radio', $_field['name'], $attributes, $data);												
+						$i++;
+					}
+				break;
+			case 'range':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'frange '. $_field['class'] : 'frange'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'min', 'max', 'step', 'autofocus'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('range', $_field['name'], $attributes, $data);
+				break;
+			case 'reset':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'class' => (!empty($_field['class'])) ? 'freset '. $_field['class'] : 'freset',
+						'value' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('reset', $_field['name'], $attributes);
+				break;
+			case 'search':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'maxlength' => 255,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'fsearch '. $_field['class'] : 'fsearch'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('search', $_field['name'], $attributes, $data);
+				break;
 			case 'select':
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
 						'class' => (!empty($_field['class'])) ? 'fselect '. $_field['class'] : 'fselect'
 					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'required_attr','autofocus'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);
 					// prepare values
 					$values = array();
 					foreach (explode(',', str_replace(' ','',$_field['value'])) as $_value) {
@@ -250,31 +399,46 @@ public function render ()
 					// create element
 					$element = $FORM->addElement('submit', $_field['name'], $attributes);
 				break;
-			case 'reset':
+			case 'tel':
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => (!empty($_field['class'])) ? 'freset '. $_field['class'] : 'freset',
-						'value' => $_field['label']
+						'maxlength' => 255,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'ftel '. $_field['class'] : 'ftel'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
 					);					
 					// create element
-					$element = $FORM->addElement('reset', $_field['name'], $attributes);
+					$element = $FORM->addElement('tel', $_field['name'], $attributes, $data);
 				break;
-		case 'text':
-				// prepare attributes
-				$attributes = array(
-					'id' => $field_id,
-					'maxlength' => 255,
-					'value' => $_field['value'],
-					'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
-				);					
-				// prepare data
-				$data = array(
-					'label' => $_field['label']
-				);					
-				// create element
-				$element = $FORM->addElement('text', $_field['name'], $attributes, $data);
-			break;
+			case 'text':
+					// prepare attributes
+					$attributes = array(
+						'id' => $field_id,
+						'maxlength' => 255,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'ftextfield '. $_field['class'] : 'ftextfield'
+					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					// prepare data
+					$data = array(
+						'label' => $_field['label']
+					);					
+					// create element
+					$element = $FORM->addElement('text', $_field['name'], $attributes, $data);
+				break;
 			case 'textarea':
 					// prepare attributes
 					$attributes = array(
@@ -284,6 +448,11 @@ public function render ()
 						'cols' => 30,
 						'rows' => 6
 					);
+				// prepare optional attributes and extend attributes array
+				$declare_attributes = array(
+					'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+				);
+				$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);	
 					// prepare label
 					$data = array(
 						'label' => $_field['label']
@@ -291,40 +460,25 @@ public function render ()
 					// create element
 					$element = $FORM->addElement('textarea', $_field['name'], $attributes, $data);
 				break;
-			case 'radio':
-					$i = 1;
-					foreach (explode(';', str_replace(' ','',$_field['value'])) as $_value) {
-						if (empty($_value)) {
-							continue;
-						}
-						// prepare attributes
-						$attributes = array(
-							'value' => $_value,
-							'id' => $field_id . '_' . $i,
-							'class' => (!empty($_field['class'])) ? 'fradio '. $_field['class'] : 'fradio'
-						);						
-						// prepare data
-						$data = array(
-							'label' => $_field['label'],
-							'content' => $_value. '_' . $i
-						);					
-						// create element
-						$element = $FORM->addElement('radio', $_field['name'], $attributes, $data);						
-						$i++;
-					}
-				break;
-			case 'file':
+			case 'url':
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
-						'class' => (!empty($_field['class'])) ? 'ffile '. $_field['class'] : 'ffile'
+						'maxlength' => 255,
+						'value' => $_field['value'],
+						'class' => (!empty($_field['class'])) ? 'furl '. $_field['class'] : 'furl'
 					);
+					// prepare optional attributes and extend attributes array
+					$declare_attributes = array(
+						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
+					);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
 					);					
 					// create element
-					$element = $FORM->addElement('file', $_field['name'], $attributes, $data);
+					$element = $FORM->addElement('url', $_field['name'], $attributes, $data);
 				break;
 		} // switch
 		
@@ -335,7 +489,7 @@ public function render ()
 		// add required rule?
 		if ((int)$_field['required']) {
 			$element->addRule('required', $_field['required_message']);
-		}
+		}		
 		
 		// add regex rule?
 		if (!empty($_field['validator_regex'])) {
@@ -345,15 +499,18 @@ public function render ()
 		// collect values
 		if ($FORM->isSubmitted()) {
 			foreach ($FORM->getElementsByName($_field['name']) as $element_field_name) {
-				if ($element_value = $element_field_name->getValue()) {
-					break;
-				}
+				// grouped elements
+				if ($element_field_name->getType() == 'group') {
+						foreach ($element_field_name as $_element_field_name) {						
+							$elements[$_field['name']] .= $_element_field_name->getValue();
+						}
+				 } else {					
+					$elements[$_field['name']] .= $element_field_name->getValue();
+				}		
 			}
-			// associate element names with their values
-			$_element[$_field['name']] = $element_value;
-		}
-
+		}				
 	} // foreach
+	
 	
 	// textfield for captcha if the captcha is enabled
 	if ($this->_generator_form['use_captcha'] != 'no') {			
@@ -376,8 +533,8 @@ public function render ()
 			'now' => mktime()
 		);
 		foreach ($this->_generator_form_fields as $_field) {
-			$form_data[$_field['name']] = $_element[$_field['name']];
-		}
+			$form_data[$_field['name']] = $elements[$_field['name']];
+		}		
 		$this->base->utility->smarty->assign('form_data', $form_data);
 		 
 		// fetch mail body
@@ -470,7 +627,10 @@ public function render ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
+	// fetch {function} template to set
+	// required/error markup on each form fields
+	$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');
 
 	// assign the form to smarty
 	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -594,28 +754,6 @@ public function getLocationSelf ($remove_amps = false)
 public function setTemplateHeader ()
 {
 	return false;
-}
-
-/**
- * Returns QuickForm template to indicate required field.
- * 
- * @return string
- */
-public function getRequiredTemplate ()
-{
-	$tpl = '
-		{if $error}
-			{$label}<span style="color:red;">*</span>
-		{else}
-			{if $required}
-				{$label}*
-			{else}
-				{$label}
-			{/if}      
-		{/if}
-	';
-	
-	return $tpl;
 }
 
 /**

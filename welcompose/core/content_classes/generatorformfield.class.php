@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *  
- * @author Andreas Ahlenstorf
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose
  * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -220,7 +220,15 @@ public function selectGeneratorFormField ($id)
 			`content_generator_form_fields`.`required` AS `required`,
 			`content_generator_form_fields`.`required_message` AS `required_message`,
 			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
-			`content_generator_form_fields`.`validator_message` AS `validator_message`
+			`content_generator_form_fields`.`placeholder` AS `placeholder`,
+			`content_generator_form_fields`.`pattern` AS `pattern`,
+			`content_generator_form_fields`.`maxlength` AS `maxlength`,
+			`content_generator_form_fields`.`min` AS `min`,
+			`content_generator_form_fields`.`max` AS `max`,
+			`content_generator_form_fields`.`step` AS `step`,
+			`content_generator_form_fields`.`required_attr` AS `required_attr`,
+			`content_generator_form_fields`.`autofocus` AS `autofocus`,
+			`content_generator_form_fields`.`readonly` AS `readonly`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
 		JOIN
@@ -334,7 +342,16 @@ public function selectGeneratorFormFields ($params = array())
 			`content_generator_form_fields`.`required` AS `required`,
 			`content_generator_form_fields`.`required_message` AS `required_message`,
 			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
-			`content_generator_form_fields`.`validator_message` AS `validator_message`
+			`content_generator_form_fields`.`validator_message` AS `validator_message`,
+			`content_generator_form_fields`.`placeholder` AS `placeholder`,
+			`content_generator_form_fields`.`pattern` AS `pattern`,
+			`content_generator_form_fields`.`maxlength` AS `maxlength`,
+			`content_generator_form_fields`.`min` AS `min`,
+			`content_generator_form_fields`.`max` AS `max`,
+			`content_generator_form_fields`.`step` AS `step`,
+			`content_generator_form_fields`.`required_attr` AS `required_attr`,
+			`content_generator_form_fields`.`autofocus` AS `autofocus`,
+			`content_generator_form_fields`.`readonly` AS `readonly`
 		FROM
 			".WCOM_DB_CONTENT_GENERATOR_FORM_FIELDS." AS `content_generator_form_fields`
 		JOIN
@@ -474,7 +491,13 @@ public function getTypeListForForm ()
 		'radio' => 'radio',
 		'checkbox' => 'checkbox',
 		'select' => 'select',
-		'file' => 'file'
+		'file' => 'file',
+		'email' => 'email',
+		'url' => 'url',
+		'tel' => 'tel',
+		'number' => 'number',
+		'search' => 'search',
+		'range' => 'range'
 	);
 	
 	// sort types
@@ -482,6 +505,101 @@ public function getTypeListForForm ()
 	
 	// return type list
 	return $types;
+}
+
+/**
+ * Append optional attributes to the attributes form element array
+ * within the display form building class. Returns extended attributes array.
+ *
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>placeholder</li>
+ * <li>pattern</li>
+ * <li>maxlength</li>
+ * <li>min</li>
+ * <li>max</li>
+ * <li>step</li>
+ * <li>required_attr</li>
+ * <li>autofocus</li>
+ * <li>readonly</li>
+ * </ul>  
+ *
+ * @throws Content_GeneratorFormFieldException
+ * @param array Attributes scope to process
+ * @param array Form field reference
+ * @param array Attributes reference
+ * @return array
+ */
+public function prepareOptionalAttributes ($params = array(), $field_ref, $attribute_ref)
+{
+
+	// input check
+	if (!is_array($params)) {
+		throw new Content_GeneratorFormFieldException('Input for parameter params is not an array');	
+	}
+	if (!is_array($field_ref)) {
+		throw new Content_GeneratorFormFieldException('Input for parameter form field reference is not an array');	
+	}
+	if (!is_array($attribute_ref)) {
+		throw new Content_GeneratorFormFieldException('Input for parameter attribute reference is not an array');	
+	}	
+	
+	// import params and add optional attributes
+	foreach ($params as $_param) {
+		switch ($_param) {
+			case 'placeholder':
+					if (!empty($field_ref['placeholder'])) {
+						$attribute_ref['placeholder'] = $field_ref['placeholder'];
+					}
+				break;
+			case 'pattern':
+					if (!empty($field_ref['pattern'])) {
+						$attribute_ref['pattern'] = $field_ref['pattern'];
+					}
+				break;
+			case 'maxlength':
+					if (!empty($field_ref['maxlength'])) {
+						$attribute_ref['maxlength'] = $field_ref['maxlength'];
+					}
+				break;
+			case 'min':
+					if (!empty($field_ref['min'])) {
+						$attribute_ref['min'] = $field_ref['min'];
+					}
+				break;
+			case 'max':
+					if (!empty($field_ref['max'])) {
+						$attribute_ref['max'] = $field_ref['max'];
+					}
+				break;
+			case 'step':
+					if (!empty($field_ref['step'])) {
+						$attribute_ref['step'] = $field_ref['step'];
+					}
+				break;
+			case 'required_attr':
+					if (!is_null($field_ref['required_attr'])) {
+						$attribute_ref['required'] = 'required';
+					}
+				break;
+			case 'autofocus':
+					if (!is_null($field_ref['autofocus'])) {
+						$attribute_ref['autofocus'] = 'autofocus';
+					}
+				break;
+			case 'readonly':
+					if (!is_null($field_ref['readonly'])) {
+						$attribute_ref['readonly'] = 'readonly';
+					}
+				break;
+			default:
+				throw new Content_GeneratorFormFieldException("Unknown form field attribute");
+		}
+	}
+	
+	// return extended attribute array
+	return $attribute_ref;
 }
 
 /**
