@@ -334,10 +334,8 @@ function Helper_validate(elem)
  */
 function Helper_showDependingFormfield (elem)
 {
-	var f;
-		
 	// get element value
-	f = elem.options[elem.selectedIndex].value;
+	var f = $('database_connection_method').value;
 	
 	if (f == 'socket') {	
 		$('_host').style.display = 'none';
@@ -355,13 +353,12 @@ function Helper_showDependingFormfield (elem)
  * Switch form elements display relating to connection method.
  * Provide on load of page.
  *
- * @param {object} elem Current element
  * @throws applyError on exception
  */
 function Helper_setFormfieldGroup ()
-{		
+{
 	// get element value
-	f = document.database.connection_method.options[document.database.connection_method.selectedIndex].value;
+	var f = $('database_connection_method').value;
 	
 	if (f == 'socket') {	
 		$('_host').style.display = 'none';
