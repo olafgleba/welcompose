@@ -2,7 +2,7 @@
 
 /**
  * Project: Welcompose
- * File: structuraltemplates_add.php
+ * File: structuraltemplates_copy.php
  *
  * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
  *
@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  * 
- * @author Andreas Ahlenstorf
+ * @author Olaf Gleba
  * @package Welcompose
  * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
@@ -96,13 +96,21 @@ try {
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
+	// get structural template
+	$template_id = Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC);
+	$structural_template = $STRUCTURALTEMPLATE->selectStructuralTemplate($template_id);
+	
 	// start new HTML_QuickForm
 	$FORM = $BASE->utility->loadQuickForm('structural_template');
 
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
 	
-	// textfield for name
+	// hidden id
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+		
 	$name = $FORM->addElement('text', 'name', 
 		array('id' => 'structural_template_name', 'maxlength' => 255, 'class' => 'w300'),
 		array('label' => gettext('Name'))
@@ -110,7 +118,8 @@ try {
 	$name->addRule('required', gettext('Please enter a name'));
 	$name->addRule('callback', gettext('A structural template with the given name already exists'), 
 		array(
-			'callback' => array($STRUCTURALTEMPLATE, 'testForUniqueName')
+			'callback' => array($STRUCTURALTEMPLATE, 'testForUniqueName'),
+			'arguments' => array($id->getValue())
 		)
 	);
 	
@@ -125,12 +134,20 @@ try {
 		array('id' => 'structural_template_content', 'cols' => 3, 'rows' => '2', 'class' => 'w540h550'),
 		array('label' => gettext('Content'))
 		);
-	
-	// submit button
-	$submit = $FORM->addElement('submit', 'submit', 
-		array('class' => 'submit200', 'value' => gettext('Save'))
-		);
 		
+	// submit button (save and stay)
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Duplicate structural template'))
+		);
+	
+	// set defaults
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
+		'id' => Base_Cnc::ifsetor($structural_template['id'], null),
+		'name' => Base_Cnc::ifsetor($structural_template['name'], null),
+		'description' => Base_Cnc::ifsetor($structural_template['description'], null),
+		'content' => Base_Cnc::ifsetor($structural_template['content'], null)
+	)));
+	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
@@ -147,19 +164,6 @@ try {
 		$BASE->utility->smarty->assign('wcom_admin_root_www',
 			$BASE->_conf['path']['wcom_admin_root_www']);
 		
-		// build session
-		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
-		);
-		
-		// assign prepared session array to smarty
-		$BASE->utility->smarty->assign('session', $session);
-		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}
-		
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
@@ -173,7 +177,7 @@ try {
 		
 		// display the form
 		define("WCOM_TEMPLATE_KEY", md5($_SERVER['REQUEST_URI']));
-		$BASE->utility->smarty->display('content/structuraltemplates_add.html', WCOM_TEMPLATE_KEY);
+		$BASE->utility->smarty->display('content/structuraltemplates_copy.html', WCOM_TEMPLATE_KEY);
 		
 		// flush the buffer
 		@ob_end_flush();
@@ -183,7 +187,7 @@ try {
 		// freeze the form
 		$FORM->toggleFrozen(true);
 		
-		// create the structural template
+		// create the article group
 		$sqlData = array();
 		$sqlData['project'] = WCOM_CURRENT_PROJECT;
 		$sqlData['name'] = $name->getValue();
@@ -212,12 +216,6 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-	
-		// add response to session
-		$_SESSION['response'] = 1;
-	
-		// redirect
-		$SESSION->save();
 		
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {
@@ -225,7 +223,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: structuraltemplates_add.php");
+		header("Location: structuraltemplates_select.php");
 		exit;
 	}
 } catch (Exception $e) {

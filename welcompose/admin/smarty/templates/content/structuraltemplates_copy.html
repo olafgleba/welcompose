@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{i18n 'Welcompose Admin &ndash; Edit Structural Template'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
+ 
+<script type="text/javascript">
+var pagetype = '';
+</script>
+
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
+</head>
+
+<body>
+<div id="container">
+	
+<div id="lyLowerOpacity"> </div>
+
+<div id="logo">
+<p>{i18n 'Welcompose'}</p>
+<!-- logo --></div>
+
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
+
+{include file="_inc_topnav.html" area="contents"}
+
+{include file="_inc_projects_load.html" go_back_area="content" go_back_file="structuraltemplates_select.php"}
+
+<div id="main">
+
+<!-- topnavcon dynamic -->
+<div id="ly1"></div>
+<!-- topnavcon dynamic eof -->
+
+{include file="content/_inc_navigation.html"}
+
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: <a href="structuraltemplates_select.php">{i18n 'Structural Templates'}</a> &#62; {i18n 'Duplicate Structural Template'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+
+<div id="content">
+
+<h1>{i18n 'Duplicate Structural Template'}</h1>
+
+<div class="secnav710_navplus_x"><a href="structuraltemplates_select.php">{i18n 'Structural Templates'}</a></div>
+<br class="clearb" />
+
+{if !empty($form.errors)}
+<div id="error">
+<ul class="req">
+{foreach from=$form.errors item="error"}
+	<li>{$error}</li>
+{/foreach}
+</ul>
+<!-- error --></div>
+{/if}
+
+<!-- column -->
+<div id="column"></div>
+<!-- column -->
+
+<form class="botbg"{$form.attributes}>
+{$form.javascript}
+
+<fieldset class="topbg">
+
+{$form.hidden}
+
+<label class="cont" for="structural_template_name"><span class="bez">{$form.name.label}{qt el=$form.name}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.name.html}</label>
+
+<label class="cont h04" for="structural_template_description"><span class="bez">{$form.description.label}{qt el=$form.description}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.description.html}</label>
+
+<label class="cont h46" for="structural_template_content"><span class="bez">{$form.content.label}{qt el=$form.content}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.content.html}</label>
+
+{$form.save.html}{$form.submit.html}
+
+</fieldset>
+</form>
+
+<!-- content --></div>
+
+
+<!-- main --></div>
+
+{include file="_inc_footer.html"}
+
+<!-- container --></div>
+</body>
+</html>
