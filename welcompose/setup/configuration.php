@@ -70,47 +70,45 @@ try {
 
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
-
 	
 	// textfield for project
-	$FORM->addElement('text', 'project', gettext('Project'), 
-		array('id' => 'configuration_project', 'maxlength' => 255, 'class' => 'w300'));
-
-	$FORM->addRule('project', gettext('Please enter a project name'), 'required');
+	$project = $FORM->addElement('text', 'project', 
+		array('id' => 'configuration_project', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Project'))
+		);
+	$project->addRule('required', gettext('Please enter a project name'));
 	
 	// textfield for locale
-	$FORM->addElement('text', 'locale', gettext('Locale'),
-		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('locale', gettext('Please enter a locale'), 'required');
-	$FORM->addRule('locale', gettext('Please enter a valid locale'), 'regex',
-		WCOM_REGEX_LOCALE_NAME);
-	
-	// add locale validation rule
-	$FORM->registerRule('testLocale', 'callback', 'setup_locale_test_callback');
-	$FORM->addRule('locale', gettext('Your chosen locale is not available on your system'), 'testLocale');
+	$locale = $FORM->addElement('text', 'locale', 
+		array('id' => 'configuration_locale', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Locale'))
+		);
+	$locale->addRule('required', gettext('Please enter a locale'));	
+	$locale->addRule('regex', gettext('Please enter a valid locale'), WCOM_REGEX_LOCALE_NAME);	
+	$locale->addRule('callback', gettext('Your chosen locale is not available on your system'), 
+		array(
+			'callback' => 'setup_locale_test_callback'
+		)
+	);
 	
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Next step'),
-		array('class' => 'submit240'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit240', 'value' => gettext('Next step'))
+		);
 		
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'locale' => 'de_DE.UTF-8'
-	));
+	)));
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -128,8 +126,8 @@ try {
 		$FORM->toggleFrozen(true);
 		
 		// save inputs to session
-		$_SESSION['setup']['configuration_project'] = $FORM->exportValue('project');
-		$_SESSION['setup']['configuration_locale'] = $FORM->exportValue('locale');
+		$_SESSION['setup']['configuration_project'] = $project->getValue();
+		$_SESSION['setup']['configuration_locale'] = $locale->getValue();
 		
 		// redirect
 		$SESSION->save();

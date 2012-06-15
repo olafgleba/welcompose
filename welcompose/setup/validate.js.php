@@ -94,8 +94,6 @@ try {
 		// safari doesn't recognized void properly
 		print '&nbsp;';
 	}
-	
-	
 		
 	// flush the buffer
 	@ob_end_flush();

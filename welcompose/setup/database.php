@@ -72,81 +72,98 @@ try {
 
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
-
 	
 	// textfield for database
-	$FORM->addElement('text', 'database', gettext('Database'), 
-		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('database', gettext('Please enter a database name'), 'required');
-	$FORM->addRule('database', gettext('Please enter a valid database name'), WCOM_REGEX_DATABASE_NAME);
+	$database = $FORM->addElement('text', 'database', 
+		array('id' => 'database_database', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Database'))
+		);
+	$database->addRule('required', gettext('Please enter a database name'));
+	$database->addRule('regex', gettext('Please enter a valid database name'), WCOM_REGEX_DATABASE_NAME);	
 	
 	// textfield for user
-	$FORM->addElement('text', 'user', gettext('User'), 
-		array('id' => 'database_user', 'maxlength' => 255, 'class' => 'w300'));
-
-	$FORM->addRule('user', gettext('Please enter a user name'), 'required');
+	$user = $FORM->addElement('text', 'user', 
+		array('id' => 'database_user', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('User'))
+		);
+	$user->addRule('required', gettext('Please enter a user name'));
 	
 	// textfield for password
-	$FORM->addElement('password', 'password', gettext('Password'), 
-		array('id' => 'database_password', 'maxlength' => 255, 'class' => 'w300'));
-
+	$password = $FORM->addElement('password', 'password', 
+		array('id' => 'database_password', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Password'))
+		);
 
 	// textfield for connection method
-	$FORM->addElement('select', 'connection_method', gettext('Connection Method'),
-		$connection_methods, array('id' => 'database_connection_method'));
-
-	$FORM->addRule('connection_method', gettext('Please select a connection method'), 'required');
-	$FORM->addRule('connection_method', gettext('Your chosen connection method is out of range'),
-		'in_array_keys', $connection_methods);
+	$connection_method = $FORM->addElement('select', 'connection_method',
+	 	array('id' => 'database_connection_method'),
+		array('label' => gettext('Connection Method'), 'options' => $connection_methods)
+		);
+	$connection_method->addRule('required', gettext('Please select a connection method'));	
 	
 	// textfield for host
-	$FORM->addElement('text', 'host', gettext('Host'), 
-		array('id' => 'database_host', 'maxlength' => 255, 'class' => 'w300'));
-
-	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		$FORM->addRule('host', gettext('Please enter a host name'), 'required');
-	}
+	$host = $FORM->addElement('text', 'host', 
+		array('id' => 'database_host', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Host'))
+		);
 	
-	// textfield for port
-	$FORM->addElement('text', 'port', gettext('Port'), 
-		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		$FORM->addRule('port', gettext('Please enter a port for your database connection'), 'required');
-		$FORM->addRule('port', gettext('The input must be numeric'), 'numeric');
-	}
+	// textfield for port	
+	$port = $FORM->addElement('text', 'port', 
+		array('id' => 'database_port', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Port'))
+		);
 	
 	// textfield for unix socket
-	$FORM->addElement('text', 'unix_socket', gettext('Unix socket'), 
-		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('unix_socket', gettext('Please enter a valid socket address'), 'regex', WCOM_REGEX_DATABASE_SOCKET);
+	$unix_socket = $FORM->addElement('text', 'unix_socket', 
+		array('id' => 'database_unix_socket', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Unix socket'))
+		);
+	$unix_socket->addRule('regex', gettext('Please enter a valid socket address'), WCOM_REGEX_DATABASE_SOCKET);	
+		
+	if ($connection_method->getValue() == 'tcp_ip') {
+		$host->addRule('required', gettext('Please enter a host name'));
+		$port->addRule('required', gettext('Please enter a port for your database connection'));
+		$port->addRule('regex', gettext('The input must be numeric'), WCOM_REGEX_NUMERIC);
+	}
 	
 	// add connection validation rule
-	$FORM->registerRule('testConnection', 'callback', 'setup_database_connection_test_callback');
-	$FORM->registerRule('testVersion', 'callback', 'setup_database_version_test_callback');
-	$FORM->registerRule('testInnoDb', 'callback', 'setup_database_innodb_test_callback');
-	$FORM->addRule('database', gettext('Unable to connect to database server'), 'testConnection', $FORM);
-	$FORM->addRule('database', gettext('Selected database server is too old'), 'testVersion', $FORM);
-	$FORM->addRule('database', gettext('Selected database does not support InnoDB'), 'testInnoDb', $FORM);
-	
+	$database->addRule('callback', gettext('Unable to connect to database server'), 
+		array(
+			'callback' => 'setup_database_connection_test_callback',
+			'arguments' => array($user->getValue(), $password->getValue(), $connection_method->getValue(), $host->getValue(), $port->getValue(), $unix_socket->getValue())
+		)
+	);
+	$database->addRule('callback', gettext('Selected database server is too old'), 
+		array(
+			'callback' => 'setup_database_version_test_callback',
+			'arguments' => array($user->getValue(), $password->getValue(), $connection_method->getValue(), $host->getValue(), $port->getValue(), $unix_socket->getValue())
+		)
+	);
+	$database->addRule('callback', gettext('Selected database does not support InnoDB'), 
+		array(
+			'callback' => 'setup_database_innodb_test_callback',
+			'arguments' => array($user->getValue(), $password->getValue(), $connection_method->getValue(), $host->getValue(), $port->getValue(), $unix_socket->getValue())
+		)
+	);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Next step'),
-		array('class' => 'submit240'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit240', 'value' => gettext('Next step'))
+		);
+		
+	// set defaults
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
+		'connection_method' => 'tcp_ip'
+	)));
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 
-		// remove attribute on form tag for XHTML compliance
-		//$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -164,13 +181,13 @@ try {
 		$FORM->toggleFrozen(true);
 		
 		// save all the database settings to the session
-		$_SESSION['setup']['database_database'] = $FORM->exportValue('database');
-		$_SESSION['setup']['database_user'] = $FORM->exportValue('user');
-		$_SESSION['setup']['database_password'] = $FORM->exportValue('password');
-		$_SESSION['setup']['database_connection_method'] = $FORM->exportValue('connection_method');
-		$_SESSION['setup']['database_host'] = $FORM->exportValue('host');
-		$_SESSION['setup']['database_port'] = $FORM->exportValue('port');
-		$_SESSION['setup']['database_unix_socket'] = $FORM->exportValue('unix_socket');
+		$_SESSION['setup']['database_database'] = $database->getValue();
+		$_SESSION['setup']['database_user'] = $user->getValue();
+		$_SESSION['setup']['database_password'] = $password->getValue();
+		$_SESSION['setup']['database_connection_method'] = $connection_method->getValue();
+		$_SESSION['setup']['database_host'] = $host->getValue();
+		$_SESSION['setup']['database_port'] = $port->getValue();
+		$_SESSION['setup']['database_unix_socket'] = $unix_socket->getValue();
 		
 		// redirect
 		$SESSION->save();
@@ -198,21 +215,21 @@ try {
 	exit;
 }
 
-function setup_database_connection_test_callback ($database, &$FORM) {
+function setup_database_connection_test_callback ($database, $user, $password, $connection_method, $host, $port, $unix_socket) {
 	// prepare params to create connections
-	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		$dsn = sprintf("mysql:host=%s;port=%u;dbname=%s", $FORM->exportValue('host'),
-			$FORM->exportValue('port'), $FORM->exportValue('database'));
-	} elseif ($FORM->exportValue('connection_method') == 'socket') {
-		$dsn = sprintf("mysql:unix_socket=%s;dbname=%s", $FORM->exportValue('unix_socket'),
-			$FORM->exportValue('database'));
+	if ($connection_method == 'tcp_ip') {
+		$dsn = sprintf("mysql:host=%s;port=%u;dbname=%s", $host,
+			$port, $database);
+	} elseif ($connection_method == 'socket') {
+		$dsn = sprintf("mysql:unix_socket=%s;dbname=%s", $unix_socket,
+			$database);
 	}
 	
 	// prepare params array
 	$params = array(
 		'dsn' => $dsn,
-		'username' => $FORM->exportValue('user'),
-		'password' => $FORM->exportValue('password')
+		'username' => $user,
+		'password' => $password
 	);
 	
 	$path = dirname(__FILE__).'/../core/base_classes/pdo.class.php';
@@ -226,25 +243,25 @@ function setup_database_connection_test_callback ($database, &$FORM) {
 	}
 }
 
-function setup_database_version_test_callback ($database, &$FORM) {
+function setup_database_version_test_callback ($database, $user, $password, $connection_method, $host, $port, $unix_socket) {
 	// prepare params to create connections
 	$params = array();
-	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		if ($FORM->exportValue('host') != "") {
-			$params['host'] = $FORM->exportValue('host');
+	if ($connection_method == 'tcp_ip') {
+		if ($host != "") {
+			$params['host'] = $host;
 		}
-		if ($FORM->exportValue('port') != "") {
-			$params['port'] = $FORM->exportValue('port');
+		if ($port != "") {
+			$params['port'] = $port;
 		}
-		if ($FORM->exportValue('database') != "") {
-			$params['dbname'] = $FORM->exportValue('database');
+		if ($database != "") {
+			$params['dbname'] = $database;
 		}
-	} elseif ($FORM->exportValue('connection_method') == 'socket') {
-		if ($FORM->exportValue('unix_socket') != "") {
-			$params['unix_socket'] = $FORM->exportValue('unix_socket');
+	} elseif ($connection_method == 'socket') {
+		if ($unix_socket != "") {
+			$params['unix_socket'] = $unix_socket;
 		}
-		if ($FORM->exportValue('database') != "") {
-			$params['dbname'] = $FORM->exportValue('database');
+		if ($database != "") {
+			$params['dbname'] = $database;
 		}
 	}
 	$dsn = 'mysql:';
@@ -258,8 +275,8 @@ function setup_database_version_test_callback ($database, &$FORM) {
 	// prepare params array
 	$params = array(
 		'dsn' => $dsn,
-		'username' => $FORM->exportValue('user'),
-		'password' => $FORM->exportValue('password')
+		'username' => $user,
+		'password' => $password
 	);
 	
 	$path = dirname(__FILE__).'/../core/base_classes/pdo.class.php';
@@ -279,26 +296,26 @@ function setup_database_version_test_callback ($database, &$FORM) {
 		return true;
 	}
 }
-
-function setup_database_innodb_test_callback ($database, &$FORM) {
+ 
+function setup_database_innodb_test_callback ($database, $user, $password, $connection_method, $host, $port, $unix_socket) {
 	// prepare params to create connections
 	$params = array();
-	if ($FORM->exportValue('connection_method') == 'tcp_ip') {
-		if ($FORM->exportValue('host') != "") {
-			$params['host'] = $FORM->exportValue('host');
+	if ($connection_method == 'tcp_ip') {
+		if ($host != "") {
+			$params['host'] = $host;
 		}
-		if ($FORM->exportValue('port') != "") {
-			$params['port'] = $FORM->exportValue('port');
+		if ($port != "") {
+			$params['port'] = $port;
 		}
-		if ($FORM->exportValue('database') != "") {
-			$params['dbname'] = $FORM->exportValue('database');
+		if ($database != "") {
+			$params['dbname'] = $database;
 		}
-	} elseif ($FORM->exportValue('connection_method') == 'socket') {
-		if ($FORM->exportValue('unix_socket') != "") {
-			$params['unix_socket'] = $FORM->exportValue('unix_socket');
+	} elseif ($connection_method == 'socket') {
+		if ($unix_socket != "") {
+			$params['unix_socket'] = $unix_socket;
 		}
-		if ($FORM->exportValue('database') != "") {
-			$params['dbname'] = $FORM->exportValue('database');
+		if ($database != "") {
+			$params['dbname'] = $database;
 		}
 	}
 	$dsn = 'mysql:';
@@ -312,8 +329,8 @@ function setup_database_innodb_test_callback ($database, &$FORM) {
 	// prepare params array
 	$params = array(
 		'dsn' => $dsn,
-		'username' => $FORM->exportValue('user'),
-		'password' => $FORM->exportValue('password')
+		'username' => $user,
+		'password' => $password
 	);
 	
 	$path = dirname(__FILE__).'/../core/base_classes/pdo.class.php';
