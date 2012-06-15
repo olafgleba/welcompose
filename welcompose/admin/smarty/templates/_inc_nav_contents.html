@@ -3,32 +3,32 @@
 {if 
 	   wcom_check_access('Content', 'Page', 'Manage')
 	|| wcom_check_access('Content', 'BlogPosting', 'Manage')
-	|| wcom_check_access('Content', 'SimpleDate', 'Manage')
+	|| wcom_check_access('Content', 'EventPosting', 'Manage')
 	|| wcom_check_access('Content', 'SimpleForm', 'Manage')
 	|| wcom_check_access('Content', 'GeneratorForm', 'Manage')
 	|| wcom_check_access('Content', 'SimplePage', 'Manage')
 	|| wcom_check_access('Content', 'SimpleGuestbook', 'Manage')
 	|| wcom_check_access('Content', 'SimpleGuestbookEntry', 'Manage')
 }
-<li><a href="{$wcom_admin_root_www}/content/pages_select.php">{i18n Pages}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/pages_select.php">{i18n 'Pages'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'GlobalBox', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/globalboxes_select.php">{i18n Global Boxes}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/globalboxes_select.php">{i18n 'Global Boxes'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'Navigation', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/navigations_select.php">{i18n Navigations}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/navigations_select.php">{i18n 'Navigations'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'PageType', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/pagetypes_select.php">{i18n Page Types}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/pagetypes_select.php">{i18n 'Page Types'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'StructuralTemplate', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/structuraltemplates_select.php">{i18n Structural Templates}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/structuraltemplates_select.php">{i18n 'Structural Templates'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'BlogPodcastCategory', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/podcastcategories_select.php">{i18n Podcast Categories}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/podcastcategories_select.php">{i18n 'Podcast Categories'}</a></li>
 {/if}
 {if wcom_check_access('Content', 'Abbreviation', 'Manage')}
-<li><a href="{$wcom_admin_root_www}/content/abbreviations_select.php">{i18n Abbreviations}</a></li>
+<li><a href="{$wcom_admin_root_www}/content/abbreviations_select.php">{i18n 'Abbreviations'}</a></li>
 {/if}
 <li><a class="highlight" href=""><img src="../static/img/indicator.gif" height="19" alt="" /></a></li>
 </ul>

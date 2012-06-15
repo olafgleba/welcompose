@@ -828,12 +828,12 @@ public function testForUniqueTypeAndSet ($type, $id = null)
  * the template type.
  *
  * Takes the page id as first argument, the name of the template type
- * as second argument. Returns string.
+ * as second argument. Returns array.
  *
  * @throws Templating_TemplateException
  * @param int Page id
  * @param string Template type name
- * @return string Template
+ * @return array
  */
 public function smartyFetchTemplate ($page_id, $template_type_name)
 {
@@ -853,7 +853,8 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 	// prepare query
 	$sql = "
 		SELECT
-			`templating_templates`.`content` AS `template`
+			`templating_templates`.`content` AS `content`,
+			UNIX_TIMESTAMP(`templating_templates`.`date_modified`) AS `date_modified`
 		FROM
 			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
 		JOIN
@@ -890,78 +891,7 @@ public function smartyFetchTemplate ($page_id, $template_type_name)
 	);
 	
 	// execute query and return result
-	return $this->base->db->select($sql, 'field', $bind_params);
-}
-
-/**
- * Fetches last modification timestamp of a template. The right template
- * will be chosen using the id of the current page and the name of 
- * the template type.
- *
- * Takes the page id as first argument, the name of the template type
- * as second argument. Returns int.
- *
- * @throws Templating_TemplateException
- * @param int Page id
- * @param string Template type name
- * @return int Unix timestamp
- */
-public function smartyFetchTemplateTimestamp ($page_id, $template_type_name)
-{
-	// access check
-	if (!wcom_check_access('Templating', 'Template', 'Use')) {
-		throw new Templating_TemplateException("You are not allowed to perform this action");
-	}
-	
-	// input check
-	if (empty($page_id) || !is_numeric($page_id)) {
-		throw new Templating_TemplateException("Input for parameter page_id is not numeric");
-	}
-	if (empty($template_type_name) || !is_scalar($template_type_name)) {
-		throw new Templating_TemplateException("Input for parameter template_type_name is not scalar");
-	}
-	
-	// prepare query
-	$sql = "
-		SELECT
-			UNIX_TIMESTAMP(`templating_templates`.`date_modified`) AS `timestamp`
-		FROM
-			".WCOM_DB_CONTENT_PAGES." AS `content_pages`
-		JOIN
-			".WCOM_DB_TEMPLATING_TEMPLATE_SETS." AS `templating_template_sets`
-		  ON
-			`content_pages`.`template_set` = `templating_template_sets`.`id`
-		JOIN
-			".WCOM_DB_TEMPLATING_TEMPLATE_SETS2TEMPLATING_TEMPLATES." AS `templating_template_sets2templating_templates`
-		  ON
-			`templating_template_sets`.`id` = `templating_template_sets2templating_templates`.`set`
-		JOIN
-			".WCOM_DB_TEMPLATING_TEMPLATES." AS `templating_templates`
-		  ON
-			`templating_template_sets2templating_templates`.`template` = `templating_templates`.`id`
-		JOIN
-			".WCOM_DB_TEMPLATING_TEMPLATE_TYPES." AS `templating_template_types`
-		  ON
-			`templating_templates`.`type` = `templating_template_types`.`id`		
-		WHERE
-			`content_pages`.`id` = :page_id
-		AND
-			`content_pages`.`project` = :project
-		AND
-			`templating_template_types`.`name` = :template_type_name
-		LIMIT
-			1
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'page_id' => $page_id,
-		'project' => WCOM_CURRENT_PROJECT,
-		'template_type_name' => $template_type_name
-	);
-	
-	// execute query and return result
-	return $this->base->db->select($sql, 'field', $bind_params);
+	return $this->base->db->select($sql, 'multi', $bind_params);
 }
 
 // end of class

@@ -53,7 +53,6 @@ define("WCOM_DB_CONTENT_NODES", "content_nodes");
 define("WCOM_DB_CONTENT_PAGES", "content_pages");
 define("WCOM_DB_CONTENT_PAGES2USER_GROUPS", "content_pages2user_groups");
 define("WCOM_DB_CONTENT_PAGE_TYPES", "content_page_types");
-define("WCOM_DB_CONTENT_SIMPLE_DATES", "content_simple_dates");
 define("WCOM_DB_CONTENT_SIMPLE_FORMS", "content_simple_forms");
 define("WCOM_DB_CONTENT_SIMPLE_GUESTBOOKS", "content_simple_guestbooks");
 define("WCOM_DB_CONTENT_SIMPLE_GUESTBOOK_ENTRIES", "content_simple_guestbook_entries");

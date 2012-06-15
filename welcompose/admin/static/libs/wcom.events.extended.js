@@ -227,6 +227,18 @@ var definitions = {
 			return false;
 		}
 	},
+	'.showFormElements' : function(el){
+		el.onclick = function(){
+			Forms.showFormElements(this);
+			return false;
+		}
+	},
+	'.hideFormElements' : function(el){
+		el.onclick = function(){
+			Forms.hideFormElements(this);
+			return false;
+		}
+	},
 	'input' : function(el){
 		el.onfocus = function(){
 			if (this.type != 'reset' && this.type != 'submit' && this.type != 'button' && this.type != 'checkbox') {

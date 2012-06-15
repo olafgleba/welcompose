@@ -165,7 +165,7 @@ try {
 		$args = array(
 			'text' => $_text,
 			'href' => (!empty($_REQUEST['delimiter'])) ? 
-				sprintf('<%%global_template name="%s"%%>', $object['name']) : 
+				sprintf('=%%global_template name="%s"%%=', $object['name']) : 
 				sprintf('{global_template name="%s"}', $object['name'])	
 		);
 	
@@ -180,7 +180,7 @@ try {
 		$args = array(
 			'text' => $_text,
 			'href' => (!empty($_REQUEST['delimiter'])) ? 
-				sprintf('<%%global_file name="%s"%%>', $object['name']) : 
+				sprintf('=%%global_file name="%s"%%=', $object['name']) : 
 				sprintf('{global_file name="%s"}', $object['name'])	
 		);
 		
@@ -254,7 +254,7 @@ try {
 				$syntax = '{select_named ns="[Application|Community|Content|Media]" class="[classToUse]" method="[classMethodToUse]" var="[variable]"}';
 			break;
 			case 'tag_cloud' :
-				$syntax = '{tag_cloud page=$page.id var="[variable]" limit="[number]" range="[number]"}';
+				$syntax = '{tag_cloud page=$page.id var="[variable]" type="[variable]" limit="[number]" range="[number]"}';
 			break;
 			case 'get_glossary' :
 				$syntax = '{get_glossary var="[variable]" action="[pager|content]"}';

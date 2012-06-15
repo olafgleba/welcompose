@@ -316,13 +316,14 @@ public function selectEventPosting ($id)
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
- * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>tag_word_url, string, optional: Tag word</li>
  * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>start, int, optional: row offset</li>
  * <li>limit, int, optional: amount of rows to return</li>
- * <li>title, string, optional: title.
- * <li>search_name, string, opional: Search string input.
+ * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
+ * <li>title, string, optional: return rows based given title</li>
+ * <li>date_start, string, optional: return rows based on given datetime</li>
+ * <li>search_name, string, optional: return rows based on search string</li>
  * <li>order_marco, string, otpional: How to sort the result set.
  * Supported macros:
  *    <ul>
@@ -380,6 +381,7 @@ public function selectEventPostings ($params = array())
 			case 'timeframe':
 			case 'current_date':
 			case 'title':
+			case 'date_start':
 			case 'search_name':
 					$$_key = (string)$_value;
 				break;
@@ -589,12 +591,15 @@ public function selectEventPostings ($params = array())
  * <li>user, int, optional: User/author id</li>
  * <li>page, int, optional: Page id</li>
  * <li>draft, int, optional: Draft bit (0/1)</li>
- * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>tag_word_url, string, optional: Tag word</li>
  * <li>timeframe, string, optional: specific range of rows to return</li>
  * <li>year_added, string, optional: four digit year number</li>
  * <li>month_added, string, optional: two digit month number</li>
  * <li>day_added, string, optional: two digit day number</li>
+ * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
+ * <li>title, string, optional: return rows based given title</li>
+ * <li>date_start, string, optional: return rows based on given datetime</li>
+ * <li>search_name, string, optional: return rows based on search string</li>
  * </ul>
  * 
  * @throws Content_EventPostingException
@@ -618,6 +623,8 @@ public function countEventPostings ($params = array())
 	$tag_word_url = null;
 	$timeframe = null;
 	$current_date = null;
+	$title = null;
+	$date_start = null;
 	$search_name = null;
 	$bind_params = array();
 	
@@ -635,6 +642,8 @@ public function countEventPostings ($params = array())
 			case 'tag_word_url':
 			case 'timeframe':
 			case 'current_date':
+			case 'title':
+			case 'date_start':
 			case 'search_name':
 					$$_key = (string)$_value;
 				break;
@@ -722,8 +731,12 @@ public function countEventPostings ($params = array())
 			$timeframe);
 	}
 	if (!empty($current_date)) {
-		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_event_postings`.`date_added`',
+		$sql .= " AND ".$HELPER->_sqlForCurrentDate('`content_event_postings`.`date_start`',
 			$current_date);
+	}
+	if (!empty($title) && is_string($title)) {
+		$sql .= " AND `content_event_postings`.`title` = :title ";
+		$bind_params['title'] = (string)$title;
 	}
 	if (!empty($search_name)) {
 		$sql .= " AND ".$HELPER->_searchLikewise('`content_event_postings`.`title`',

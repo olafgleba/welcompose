@@ -103,8 +103,8 @@ try {
 	// delete smarty compiled frontend templates
 	
 	// point to frontend smarty compiled dir temporarily
-	$BASE->utility->smarty->compile_dir = dirname(__FILE__).'/../../smarty/compiled';
-	$BASE->utility->smarty->clear_compiled_tpl();
+	$BASE->utility->smarty->setCompileDir(dirname(__FILE__).'/../../smarty/compiled');
+	$BASE->utility->smarty->clearCompiledTemplate();
 
 	// clean buffer
 	if (!$BASE->debug_enabled()) {

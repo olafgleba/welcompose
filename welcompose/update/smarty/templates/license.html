@@ -4,10 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Update}</title>
+<title>{i18n 'Welcompose Update'}</title>
 <link rel="stylesheet" type="text/css" href="static/styles/wcom.update.css" media="screen, projection" />
 
 <script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
@@ -25,7 +22,7 @@
 <div id="header"> 
 
 <div id="logo">
-<p>{i18n Welcompose Update}</p>
+<p>{i18n 'Welcompose Update'}</p>
 <!-- logo --></div>
 
 {include file="_inc_navigation.html" on="license"}
@@ -34,8 +31,8 @@
 
 <div id="content">
 
-<h1>{i18n License}</h1>
-<p>{i18n Please read the license carefully and confirm to go on}.</p>
+<h1>{i18n 'License'}</h1>
+<p>{i18n 'Please read the license carefully and confirm to go on'}.</p>
 
 {if !empty($form.errors)}
 <div id="error">
@@ -684,7 +681,7 @@
 	<p>END OF TERMS AND CONDITIONS</p>
 </div>
 
-<label class="cont" for="license_confirm_license"><span class="bez">{$form.confirm_license.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="license_confirm_license"><span class="bez">{$form.confirm_license.label}{qt el=$form.confirm_license}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.confirm_license.html}</label>
 
 {$form.submit.html}

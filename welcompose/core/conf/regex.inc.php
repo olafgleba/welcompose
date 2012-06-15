@@ -253,4 +253,7 @@ define("WCOM_REGEX_SEARCH_NAME", "=^([aüößa-z-\.]+)$=Di");
 // Defines regular expression for bayes values
 define("WCOM_REGEX_BAYES", "=^([0-9\.]+)$=D");
 
+// Defines regular expression for numbers/numeric with leadings strings
+define("WCOM_REGEX_NUMERIC_WITH_LEADINGS", "=^([0-9\-]+)$=D");
+
 ?>

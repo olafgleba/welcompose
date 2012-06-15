@@ -70,6 +70,7 @@ public function loadSmarty ($conf)
 	// load smarty class
 	$file = dirname(__FILE__).'/../smarty/Smarty.class.php';
 	$file = Base_Compat::fixDirectorySeparator($file);
+	
 	require_once($file);
 
 	// create new smarty instance if none exists
@@ -108,14 +109,6 @@ public function loadQuickForm ($form_name = null, $method = 'post',
 	require_once('HTML/QuickForm2.php');
 	return new HTML_QuickForm2($form_name, $method, $attributes, $track_submit);
 }
-
-
-// public function loadQuickForm ($form_name = null, $method = 'post',
-// 	$action = null, $target = '_self', $attributes = 'accept-charset=utf-8', $track_submit = false)
-// {
-// 	require_once('HTML/QuickForm.php');
-// 	return new HTML_QuickForm($form_name, $method, $action, $target, $attributes, $track_submit);
-// }
 
 /**
  * Load new HTML_QuickForm2 Smarty Renderer

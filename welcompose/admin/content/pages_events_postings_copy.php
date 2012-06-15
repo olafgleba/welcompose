@@ -180,7 +180,10 @@ try {
 	$date_start = $FORM->addElement('date', 'date_start', null,
 		array('label' => gettext('Start date'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'd.m.Y','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
 	);
-	$date_start->addRule('required', gettext('Please enter a start date at least'));
+	$date_start->addRule('required', gettext('Please enter a start date at least'));	
+	$date_start->addRule('each', gettext('Please enter a full start date at least'),
+		$date_start->createRule('nonempty')
+		);
 		
 	// date element for date_start_time_start
 	$date_start_time_start = $FORM->addElement('date', 'date_start_time_start', null,
@@ -279,6 +282,10 @@ try {
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/../quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());

@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *  
- * @author Andreas Ahlenstorf
+ * @author Andreas Ahlenstorf, Olaf Gleba
  * @package Welcompose
  * @license http://www.opensource.org/licenses/osl-3.0.php Open Software License 3.0
  */
@@ -67,19 +67,11 @@ try {
 	
 	// set mime type
 	header(sprintf("Content-Type: %s", (!empty($template['mime_type']) ? $template['mime_type'] : 'text/plain')));
-	// header("Cache-Control: must-revalidate");
-	// $offset = 60 * 60 * 24 * 5;
-	// $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
-	// header($ExpStr);
-	// 
-	// //$offsetMod = 60 * 60 * 24 * 2;
-	// $ExpStrMod = "Last-Modified: " . gmdate("D, d M Y H:i:s", strtotime($template['date_modified'])) . " GMT";
-	// header($ExpStrMod);
-	
+
 	// change delimiter if required
 	if (isset($template['change_delimiter']) && $template['change_delimiter']) {
-		$BASE->utility->smarty->left_delimiter = '<%';
-		$BASE->utility->smarty->right_delimiter = '%>';
+		$BASE->utility->smarty->left_delimiter = '=%';
+		$BASE->utility->smarty->right_delimiter = '%=';
 	}
 
 	// prepare the template name

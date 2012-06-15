@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Login}</title>
+<title>{i18n 'Welcompose Admin &ndash; Login'}</title>
 <link rel="stylesheet" type="text/css" href="static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" type="text/css" href="static/styles/wcom.forms.css" media="screen, projection" />
-
 </head>
 
 <body id="login">
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
 <div id="main">
 
 <div id="content">
 
-<h1>{i18n Login}</h1>
+<h1>{i18n 'Login'}</h1>
 
 {if !empty($form.errors)}
 <div id="error">
@@ -33,17 +29,17 @@
 <!-- error --></div>
 {/if}
 
+
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 
 <fieldset class="topbg">
-
 {$form.hidden}
 
-<label class="cont" for="user_login"><span class="bez">{$form.email.label}{if $form.email.required}{if $form.email.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if}</span>
+<label class="cont" for="user_login"><span class="bez">{$form.email.label}{qt el=$form.email}</span>
 {$form.email.html}</label>
 
-<label class="cont" for="user_secret"><span class="bez">{$form.secret.label}{if $form.secret.required}{if $form.secret.error}<span class="req">*</span>{else}<span>*</span>{/if}{/if}</span>
+<label class="cont" for="user_secret"><span class="bez">{$form.secret.label}{qt el=$form.secret}</span>
 {$form.secret.html}</label>
 
 {$form.submit.html}
@@ -54,7 +50,7 @@
 <!-- content --></div>
 <!-- main --></div>
 
-{include file="_inc_footer.html"}
+{include file='_inc_footer.html'}
 
 <!-- container --></div>
 </body>

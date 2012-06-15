@@ -314,7 +314,10 @@ protected function renderPersonalForm ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+	
+	// fetch {function} template to set
+	// required/error markup on each form fields
+	$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');
 
 	// assign the form to smarty
 	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -505,7 +508,10 @@ protected function renderBusinessForm ()
 	
 	// render form
 	$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-	//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+	
+	// fetch {function} template to set
+	// required/error markup on each form fields
+	$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');
 
 	// assign the form to smarty
 	$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -638,28 +644,6 @@ public function getLocationSelf ($remove_amps = false)
 public function setTemplateHeader ()
 {
 	return false;
-}
-
-/**
- * Returns QuickForm template to indicate required field.
- * 
- * @return string
- */
-public function getRequiredTemplate ()
-{
-	$tpl = '
-		{if $error}
-			{$label}<span style="color:red;">*</span>
-		{else}
-			{if $required}
-				{$label}*
-			{else}
-				{$label}
-			{/if}      
-		{/if}
-	';
-	
-	return $tpl;
 }
 
 /**

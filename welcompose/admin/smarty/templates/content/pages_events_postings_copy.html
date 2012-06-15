@@ -4,18 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Pages &#62; Duplicate Event Posting}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Pages &#62; Duplicate Event Posting'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 </head>
 
 <body>
@@ -24,12 +21,12 @@
 <div id="lyLowerOpacity"> </div>
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -47,26 +44,26 @@
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
 	{if wcom_check_access('Content', 'Page', 'Manage')}
-		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Content', 'EventPosting', 'Manage')}
-		<li><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}" class="on">{i18n Event Postings}<span></span></a></li>
+		<li><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}" class="on">{i18n 'Event Postings'}<span></span></a></li>
 	{/if}
 	{if wcom_check_access('Content', 'Box', 'Manage')}
-		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n 'Boxes'}<span></span></a></li>
 	{/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} :
-	<a href="pages_events_postings_select.php?page={$page.id|escape:"url"}">{i18n Event Postings}</a> &#62; {i18n Duplicate Event Posting}</p></div>
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: <a href="pages_select.php">{i18n 'Pages'}</a> &#62; {$page.name} :
+	<a href="pages_events_postings_select.php?page={$page.id|escape:"url"}">{i18n 'Event Postings'}</a> &#62; {i18n 'Duplicate Event Posting'}</p></div>
 
 <div id="content">
 
-<h1>{i18n Duplicate Event Posting}</h1>
+<h1>{i18n 'Duplicate Event Posting'}</h1>
 
-<div class="secnav710_nav_x"><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}">{i18n Event Postings}</a></div>
+<div class="secnav710_nav_x"><a href="pages_events_postings_select.php?page={$page.id|escape:"url"}">{i18n 'Event Postings'}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -81,8 +78,8 @@
 
 {if $session.response == 1}
 <div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n You can continue editing your content.}</p>
+<h1>{i18n 'Your input was successfully saved!'}</h1>
+<p>{i18n 'You can continue editing your content.'}</p>
 <!-- rp --></div>
 {/if}
 
@@ -97,14 +94,14 @@
 
 {$form.hidden}
 
-<label class="cont" for="event_posting_title"><span class="bez">{$form.title.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.title.html}<span class="validate"><a class="urlifyLink" href="#">{i18n Adopt title}</a></span></label>
+<label class="cont" for="event_posting_title"><span class="bez">{$form.title.label}{qt el=$form.title}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.title.html}<span class="validate"><a class="urlifyLink" href="#">{i18n 'Adopt title'}</a></span></label>
 
-<label class="cont" for="event_posting_title_url"><span class="bez">{$form.title_url.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_title_url"><span class="bez">{$form.title_url.label}{qt el=$form.title_url}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.title_url.html}<span class="validate" id="event_posting_title_url_container"></span></label>
 
 <div class="datetime_entries clearfix">
-<label class="cont" for="event_posting_date_start"><span class="bez">{$form.date_start.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_start"><span class="bez">{$form.date_start.label}{qt el=$form.date_start}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_start">
 {foreach from=$form.date_start.elements item=_date_start}
 {$_date_start.html}
@@ -112,7 +109,7 @@
 </div>
 </label>
 
-<label class="cont" for="event_posting_date_start_time_start"><span class="bez">{$form.date_start_time_start.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_start_time_start"><span class="bez">{$form.date_start_time_start.label}{qt el=$form.date_start_time_start}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_start_time_start">
 {foreach from=$form.date_start_time_start.elements item=_date_start_time_start}
 {$_date_start_time_start.html}
@@ -120,7 +117,7 @@
 </div>
 </label>
 
-<label class="cont" for="event_posting_date_start_time_end"><span class="bez">{$form.date_start_time_end.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_start_time_end"><span class="bez">{$form.date_start_time_end.label}{qt el=$form.date_start_time_end}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_start_time_end">
 {foreach from=$form.date_start_time_end.elements item=_date_start_time_end}
 {$_date_start_time_end.html}
@@ -130,7 +127,7 @@
 </div>
 
 <div class="datetime_entries clearfix">
-<label class="cont" for="event_posting_date_end"><span class="bez">{$form.date_end.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_end"><span class="bez">{$form.date_end.label}{qt el=$form.date_end}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_end">
 {foreach from=$form.date_end.elements item=_date_end}
 {$_date_end.html}
@@ -138,7 +135,7 @@
 </div>
 </label>
 
-<label class="cont" for="event_posting_date_end_time_start"><span class="bez">{$form.date_end_time_start.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_end_time_start"><span class="bez">{$form.date_end_time_start.label}{qt el=$form.date_end_time_start}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_end_time_start">
 {foreach from=$form.date_end_time_start.elements item=_date_end_time_start}
 {$_date_end_time_start.html}
@@ -146,7 +143,7 @@
 </div>
 </label>
 
-<label class="cont" for="event_posting_date_end_time_end"><span class="bez">{$form.date_end_time_end.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_end_time_end"><span class="bez">{$form.date_end_time_end.label}{qt el=$form.date_end_time_end}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_end_time_end">
 {foreach from=$form.date_end_time_end.elements item=_date_end_time_end}
 {$_date_end_time_end.html}
@@ -157,33 +154,33 @@
 
 <div class="act">
 <ul class="actnav">
-<li><a class="insert" name="_event_posting_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_event_posting_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
-<li><a class="insert" name="_event_posting_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
+<li><a class="insert" name="_event_posting_content" href="#">{i18n 'Internal links'}</a><span id="pages_links"></span></li>
+<li><a class="insert" name="_event_posting_content" href="#">{i18n 'Structural templates'}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_event_posting_content" href="#">{i18n 'Abbreviations'}</a><span id="abbreviations_links"></span></li>
 </ul>
 </div>
 
-<label class="cont h46act" for="event_posting_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h46act" for="event_posting_content"><span class="bez">{$form.content.label}{qt el=$form.content}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.content.html}</label>
 	
-<label class="cont" for="event_posting_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_text_converter"><span class="bez">{$form.text_converter.label}{qt el=$form.text_converter}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.text_converter.html}</label>
 
 <div class="act">
 <ul class="actnav">
-<li><a class="insert" name="_event_posting_tags" href="#">{i18n Insert Available Tags}</a><span id="event_tags"></span></li>
+<li><a class="insert" name="_event_posting_tags" href="#">{i18n 'Insert Available Tags'}</a><span id="event_tags"></span></li>
 </ul>
 </div>
-<label class="cont h04act" for="event_posting_tags"><span class="bez">{$form.tags.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04act" for="event_posting_tags"><span class="bez">{$form.tags.label}{qt el=$form.tags}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.tags.html}</label>
 
-<label class="cont chbx" for="event_posting_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="event_posting_apply_macros"><span class="bez">{$form.apply_macros.label}{qt el=$form.apply_macros}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
-<label class="cont chbx" for="event_posting_draft"><span class="bez">{$form.draft.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="event_posting_draft"><span class="bez">{$form.draft.label}{qt el=$form.draft}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.draft.html}</label>
 
-<label class="cont" for="event_posting_date_added"><span class="bez">{$form.date_added.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="event_posting_date_added"><span class="bez">{$form.date_added.label}{qt el=$form.date_added}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 <div id="event_posting_date_added">
 {foreach from=$form.date_added.elements item=_date_added}
 {$_date_added.html}
@@ -212,11 +209,11 @@ var response = '{$session.response}';
 var preview_ctrl = '{$session.preview_ctrl}';
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.mediamanager.js"></script>
+<script src="../static/libs/wcom.events.extended.js"></script>
 </body>
 </html>

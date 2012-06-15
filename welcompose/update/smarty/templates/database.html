@@ -4,10 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Update}</title>
+<title>{i18n 'Welcompose Update'}</title>
 <link rel="stylesheet" type="text/css" href="static/styles/wcom.update.css" media="screen, projection" />
 
 <script type="text/javascript" src="static/libs/thirdparty/prototype.js"></script>
@@ -17,9 +14,7 @@
 <script type="text/javascript" src="static/libs/wcom.update.core.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.helper.js"></script>
 <script type="text/javascript" src="static/libs/wcom.update.events.js"></script>
-<script type="text/javascript" src="static/libs/wcom.update.updater.js"></script>
-
-</head>
+<script type="text/javascript" src="static/libs/wcom.update.updater.js"></script></head>
 
 <body>
 <div id="container">
@@ -27,7 +22,7 @@
 <div id="header"> 
 
 <div id="logo">
-<p>{i18n Welcompose Update}</p>
+<p>{i18n 'Welcompose Update'}</p>
 <!-- logo --></div>
 
 {include file="_inc_navigation.html" on="database"}
@@ -36,21 +31,21 @@
 
 <div id="content">
 
-<h1>{i18n Database}</h1>
+<h1>{i18n 'Database'}</h1>
 
-<p>{i18n Now, it's time to update your database structure. The update script has determined which modifications have to be done. As soon as you press on <em>Start</em>, the database update process will begin. Please note that the update scripts may ask you some questions. Answer them to complete the update process}.</p>
+<p>{i18n 'Now, it's time to update your database structure. The update script has determined which modifications have to be done. As soon as you press on <em>Start</em>, the database update process will begin. Please note that the update scripts may ask you some questions. Answer them to complete the update process'}.</p>
 
 
 <form class="botbg">
 <fieldset class="topbg">
 	
-<h2>{i18n Update tasks}</h2>
+<h2>{i18n 'Update tasks'}</h2>
 {if !empty($tasks)}
 <table id="tasks">
 <tbody>
 <tr>
-<th class="task">{i18n Task}</th>
-<th class="status">{i18n Status}</th>
+<th class="task">{i18n 'Task'}</th>
+<th class="status">{i18n 'Status'}</th>
 </tr>
 {foreach from=$tasks key=task item=file}
 <tr>
@@ -61,17 +56,17 @@
 </tbody>
 </table>
 
-<input type="button" class="submit240nomargin startUpdate" id="startupdate" value="{i18n Start update}" />
+<input type="button" class="submit240nomargin startUpdate" id="startupdate" value="{i18n 'Start update'}" />
 
 {else}
-<p class="notasks">{i18n Nothing to be done &ndash; go ahead!}</p>
+<p class="notasks">{i18n 'Nothing to be done &ndash; go ahead!'}</p>
 <div class="linkconfinish">
-<a href="finish.php" class="submit240">{i18n Finish update}</a>
+<a href="finish.php" class="submit240">{i18n 'Finish update'}</a>
 </div>
 {/if}
 
 <div class="linkconfinish" id="finishupdate">
-<a href="finish.php" class="submit240">{i18n Finish update}</a>
+<a href="finish.php" class="submit240">{i18n 'Finish update'}</a>
 </div>
 
 </fieldset>

@@ -4,30 +4,30 @@
 <ul id="topsubnav">
 {if wcom_check_access('Community', 'BlogComment', 'Manage')}
 	{if wcom_admin_navigation_is_self('blogcomments_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Blog Comments}</li>
+		<li class="on">{i18n 'Blog Comments'}</li>
 	{else}
-		<li><a href="blogcomments_select.php"{if wcom_admin_navigation_in_area('blogcomments_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Blog Comments}<span></span></a></li>
+		<li><a href="blogcomments_select.php"{if wcom_admin_navigation_in_area('blogcomments_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Blog Comments'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Community', 'BlogCommentStatus', 'Manage')}
 	{if wcom_admin_navigation_is_self('blogcommentstatuses_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Blog Comment Statuses}</li>
+		<li class="on">{i18n 'Blog Comment Statuses'}</li>
 	{else}
-		<li><a href="blogcommentstatuses_select.php"{if wcom_admin_navigation_in_area('blogcommentstatuses_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Blog Comment Statuses}<span></span></a></li>
+		<li><a href="blogcommentstatuses_select.php"{if wcom_admin_navigation_in_area('blogcommentstatuses_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Blog Comment Statuses'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Community', 'AntiSpamPlugin', 'Manage')}
 	{if wcom_admin_navigation_is_self('antispamplugins_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Anti Spam Plugins}</li>
+		<li class="on">{i18n 'Anti Spam Plugins'}</li>
 	{else}
-		<li><a href="antispamplugins_select.php"{if wcom_admin_navigation_in_area('antispamplugins_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Anti Spam Plugins}<span></span></a></li>
+		<li><a href="antispamplugins_select.php"{if wcom_admin_navigation_in_area('antispamplugins_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Anti Spam Plugins'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Community', 'Settings', 'Manage')}
 	{if wcom_admin_navigation_is_self('settings.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Community Settings}</li>
+		<li class="on">{i18n 'Community Settings'}</li>
 	{else}
-		<li><a href="settings.php"{if wcom_admin_navigation_in_area('settings.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Community Settings}<span></span></a></li>
+		<li><a href="settings.php"{if wcom_admin_navigation_in_area('settings.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Community Settings'}<span></span></a></li>
 	{/if}
 {/if}
 </ul>

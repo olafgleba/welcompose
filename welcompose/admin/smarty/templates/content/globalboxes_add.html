@@ -4,15 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Add Global Box}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Add Global Box'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
 var response = '{$session.response}';
@@ -20,16 +17,14 @@ var mediamanager = 1;
 var pagetype = '';
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.mediamanager.js"></script>
+<script src="../static/libs/wcom.events.extended.js"></script>
 </head>
 
 <body>
@@ -38,12 +33,12 @@ var pagetype = '';
 <div id="lyLowerOpacity"> </div>
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -57,13 +52,13 @@ var pagetype = '';
 
 {include file="content/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="globalboxes_select.php">{i18n Global Boxes}</a> &#62; {i18n Add Global Box}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: <a href="globalboxes_select.php">{i18n 'Global Boxes'}</a> &#62; {i18n 'Add Global Box'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Add Global Box}</h1>
+<h1>{i18n 'Add Global Box'}</h1>
 
-<div class="secnav710_nav_x"><a href="globalboxes_select.php">{i18n Global Boxes}</a></div>
+<div class="secnav710_nav_x"><a href="globalboxes_select.php">{i18n 'Global Boxes'}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -78,8 +73,8 @@ var pagetype = '';
 
 {if $session.response == 1}
 <div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
+<h1>{i18n 'Your input was successfully saved!'}</h1>
+<p>{i18n 'To apply further input, please repeat fill in the form'}</p>
 <!-- rp --></div>
 {/if}
 
@@ -94,24 +89,24 @@ var pagetype = '';
 
 {$form.hidden}
 
-<label class="cont" for="global_box_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="global_box_name"><span class="bez">{$form.name.label}{qt el=$form.name}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}</label>
 
 <div class="act">
 <ul class="actnav">
-<li><a class="insert" name="_global_box_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_global_box_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
-<li><a class="insert" name="_global_box_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
+<li><a class="insert" name="_global_box_content" href="#">{i18n 'Internal links'}</a><span id="pages_links"></span></li>
+<li><a class="insert" name="_global_box_content" href="#">{i18n 'Structural templates'}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_global_box_content" href="#">{i18n 'Abbreviations'}</a><span id="abbreviations_links"></span></li>
 </ul>
 </div>
 
-<label class="cont h46act" for="global_box_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h46act" for="global_box_content"><span class="bez">{$form.content.label}{qt el=$form.content}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.content.html}</label>
 
-<label class="cont" for="global_box_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="global_box_text_converter"><span class="bez">{$form.text_converter.label}{qt el=$form.text_converter}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.text_converter.html}</label>
 
-<label class="cont chbx" for="global_box_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="global_box_apply_macros"><span class="bez">{$form.apply_macros.label}{qt el=$form.apply_macros}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
 {$form.submit.html}

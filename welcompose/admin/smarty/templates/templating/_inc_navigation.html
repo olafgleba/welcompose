@@ -4,37 +4,37 @@
 <ul id="topsubnav">
 {if wcom_check_access('Templating', 'Template', 'Manage')}
 	{if wcom_admin_navigation_is_self('templates_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Templates}</li>
+		<li class="on">{i18n 'Templates'}</li>
 	{else}
-		<li><a href="templates_select.php"{if wcom_admin_navigation_in_area('templates_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Templates}<span></span></a></li>
+		<li><a href="templates_select.php"{if wcom_admin_navigation_in_area('templates_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Templates'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Templating', 'TemplateSet', 'Manage')}
 	{if wcom_admin_navigation_is_self('templatesets_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Template Sets}</li>
+		<li class="on">{i18n 'Template Sets'}</li>
 	{else}
-		<li><a href="templatesets_select.php"{if wcom_admin_navigation_in_area('templatesets_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Template Sets}<span></span></a></li>
+		<li><a href="templatesets_select.php"{if wcom_admin_navigation_in_area('templatesets_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Template Sets'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Templating', 'TemplateType', 'Manage')}
 	{if wcom_admin_navigation_is_self('templatetypes_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Template Types}</li>
+		<li class="on">{i18n 'Template Types'}</li>
 	{else}
-		<li><a href="templatetypes_select.php"{if wcom_admin_navigation_in_area('templatetypes_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Template Types}<span></span></a></li>
+		<li><a href="templatetypes_select.php"{if wcom_admin_navigation_in_area('templatetypes_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Template Types'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Templating', 'GlobalTemplate', 'Manage')}
 	{if wcom_admin_navigation_is_self('globaltemplates_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Global Templates}</li>
+		<li class="on">{i18n 'Global Templates'}</li>
 	{else}
-		<li><a href="globaltemplates_select.php"{if wcom_admin_navigation_in_area('globaltemplates_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Global Templates}<span></span></a></li>
+		<li><a href="globaltemplates_select.php"{if wcom_admin_navigation_in_area('globaltemplates_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Global Templates'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('Templating', 'GlobalFile', 'Manage')}
 	{if wcom_admin_navigation_is_self('globalfiles_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Global Files}</li>
+		<li class="on">{i18n 'Global Files'}</li>
 	{else}
-		<li><a href="globalfiles_select.php"{if wcom_admin_navigation_in_area('globalfiles_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Global Files}<span></span></a></li>
+		<li><a href="globalfiles_select.php"{if wcom_admin_navigation_in_area('globalfiles_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Global Files'}<span></span></a></li>
 	{/if}
 {/if}
 </ul>

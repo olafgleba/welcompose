@@ -83,7 +83,7 @@ try {
 	$secret = $FORM->addElement('password', 'secret', 
 		array('id' => 'user_secret', 'maxlength' => 255, 'class' => 'w300'),
 		array('label' => gettext('Password'))
-		);						
+		);
 	$secret->addRule('required', gettext('Please enter your password'));
 	$secret->addRule('callback', gettext('Invalid password'), 
 		array(
@@ -102,6 +102,10 @@ try {
 
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/quickform.tpl');
 		
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());

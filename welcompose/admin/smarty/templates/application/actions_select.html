@@ -4,36 +4,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Projects}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Projects'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="application"}
 
@@ -47,16 +42,16 @@
 
 {include file="application/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Settings}</strong>: {i18n Actions}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Settings'}</strong>: {i18n 'Actions'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Actions}</h1>
+<h1>{i18n 'Actions'}</h1>
 
 <div class="secnav710_navplus_x">&nbsp;</div>
 <br class="clearb" />
 
-<table summary="{i18n Available Actions}" id="actions">
+<table summary="{i18n 'Available Actions'}" id="actions">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="435" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="240" height="1" alt="" /></td>
@@ -64,29 +59,29 @@
 <td class="mini"><img src="../static/img/spacer.gif" width="20" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">{i18n Name}</th>
+<th class="page">{i18n 'Name'}</th>
 <th>&nbsp;</th>
-<th>{i18n Run action}</th>
+<th>{i18n 'Run action'}</th>
 <th>&nbsp;</th>
 </tr>
 <tr>
-<td class="actions"><strong>{i18n Apply URL Patterns}</strong>
-<p>{i18n Everytime you change the URL Patterns Layout within the Welcompose configuration file (sys.inc.php) you should perfom this action so your installation reflects the current path layout}.</p></td>
+<td class="actions"><strong>{i18n 'Apply URL Patterns'}</strong>
+<p>{i18n 'Everytime you change the URL Patterns Layout within the Welcompose configuration file (sys.inc.php) you should perfom this action so your installation reflects the current path layout'}.</p></td>
 <td>&nbsp;</td>	
-<td><a class="runaction" id="apply_url_patterns" href="../application/actions_apply_url_patterns.php" title="{i18n Run action}">{i18n Run action}</a></td>
+<td><a class="runaction" id="apply_url_patterns" href="../application/actions_apply_url_patterns.php" title="{i18n 'Run action'}">{i18n 'Run action'}</a></td>
 <td></td>
 </tr>
 <tr>
-<td class="actions"><strong>{i18n Apply Abbreviations and Glossary Page}</strong>
-<p>{i18n You should apply this action whenever you edited the attributes of a abbreviation.<br />Please note: To include abbreviations with a glossary entry, make sure you check the box below and choose your glossary target page}.</p>
+<td class="actions"><strong>{i18n 'Apply Abbreviations and Glossary Page'}</strong>
+<p>{i18n 'You should apply this action whenever you edited the attributes of a abbreviation.<br />Please note: To include abbreviations with a glossary entry, make sure you check the box below and choose your glossary target page'}.</p>
 <form action="templates_select.php" method="get">
 <fieldset class="actions">
-<label class="cont chbx" for="text_converter_default"><span class="bez"><strong>{i18n Apply Glossar Page?}</strong></span>
+<label class="cont chbx" for="text_converter_default"><span class="bez"><strong>{i18n 'Apply Glossar Page?'}</strong></span>
 <input id="apply_page" class="chbx toggleViewByChbx" name="apply_page" type="checkbox" value="1" /></label>
 <div class="target_toggleView" style="display:none;">
-<p>{i18n Please choose your glossary target page}.</p>
+<p>{i18n 'Please choose your glossary target page'}.</p>
 <select id="get_pages" name="get_pages">
-<option value="">{i18n Please choose...}</option>
+<option value="">{i18n 'Please choose...'}</option>
 {foreach from=$pages item=_page}
 <option value="{$_page.id|escape:"html"}">{$_page.name|escape:"html"}</option>
 {/foreach}
@@ -97,15 +92,15 @@
 </td>	
 <td>&nbsp;</td>	
 <td>
-<a class="runaction" id="apply_glossary_page" href="../application/actions_apply_glossary_page.php" title="{i18n Run action}">{i18n Run action}</a>
+<a class="runaction" id="apply_glossary_page" href="../application/actions_apply_glossary_page.php" title="{i18n 'Run action'}">{i18n 'Run action'}</a>
 </td>
 <td></td>
 </tr>
 <tr>
-<td class="actions"><strong>{i18n Delete Frontend Smarty Compiled Templates}</strong>
-<p>{i18n If you edit templates and rebind references within the backend, it might be necessary to delete the Smarty compiled templates of your frontend output to make sure your frontend view is always up to date. You can run this action whenever you like without disturbing anything}.</p></td>
+<td class="actions"><strong>{i18n 'Delete Frontend Smarty Compiled Templates'}</strong>
+<p>{i18n 'If you edit templates and rebind references within the backend, it might be necessary to delete the Smarty compiled templates of your frontend output to make sure your frontend view is always up to date. You can run this action whenever you like without disturbing anything'}.</p></td>
 <td>&nbsp;</td>	
-<td><a class="runaction" id="delete_tpl_compiled" href="../application/actions_delete_tpl_compiled.php" title="{i18n Run action}">{i18n Run action}</a></td>
+<td><a class="runaction" id="delete_tpl_compiled" href="../application/actions_delete_tpl_compiled.php" title="{i18n 'Run action'}">{i18n 'Run action'}</a></td>
 <td></td>
 </tr>
 </table>

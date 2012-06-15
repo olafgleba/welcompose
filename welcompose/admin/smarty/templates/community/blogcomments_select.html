@@ -4,43 +4,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Blog Comments}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Blog Comments'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="statuschange" style="display:none;">
-<h1>{i18n Change of comment status successfully saved!}</h1>
+<h1>{i18n 'Change of comment status successfully saved!'}</h1>
 <p></p>	
 </div>
 
 <div id="lyLowerOpacity"> </div>
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="community"}
 
@@ -54,49 +49,49 @@
 
 {include file="community/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Users}</strong>: {i18n Blog Comments}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Users'}</strong>: {i18n 'Blog Comments'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
-<h1>{i18n Blog Comments}</h1>
+<h1>{i18n 'Blog Comments'}</h1>
 
 <div class="secnav474_nav_x">&nbsp;</div>
 <br class="clearb" />
 
 <div class="filter clearfix">
 {if $total_blog_comment_count > 0}
-<h2>{i18n Filter:}</h2>
+<h2>{i18n 'Filter:'}</h2>
 <form action="blogcomments_select.php" method="get">
 <fieldset>
-<label for="page">{i18n Blog}</label> 
+<label for="page">{i18n 'Blog'}</label> 
 <select id="page" name="page">
-<option selected="selected">{i18n Please choose...}</option>
+<option selected="selected">{i18n 'Please choose...'}</option>
 {foreach from=$pages item=_page}
 {if $_page.page_type_name == "WCOM_BLOG"}
 <option value="{$_page.id|escape:"html"}"{if $request.page == $_page.id} selected="selected"{/if}>{$_page.name|escape:"html"}</option>
 {/if}
 {/foreach}
 </select>
-<label for="status">{i18n Status}</label> 
+<label for="status">{i18n 'Status'}</label> 
 <select id="status" name="status">
-<option selected="selected">{i18n Please choose...}</option>
+<option selected="selected">{i18n 'Please choose...'}</option>
 {foreach from=$blog_comment_statuses item=_status}
 <option value="{$_status.id|escape:"html"}"{if $request.status == $_status.id} selected="selected"{/if}>{$_status.name|escape:"html"}</option>
 {/foreach}
 </select>
-<label for="timeframe">{i18n Timeframe}</label> 
+<label for="timeframe">{i18n 'Timeframe'}</label> 
 <select id="timeframe" name="timeframe">
-<option selected="selected">{i18n Please choose...}</option>
+<option selected="selected">{i18n 'Please choose...'}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
 <option value="{$_timeframe|escape:"html"}"{if $request.timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name|escape:"html"}</option>
 {/foreach}
 </select>
-<label for="limit">{i18n Show per page}</label> 
+<label for="limit">{i18n 'Show per page'}</label> 
 <select id="limit" name="limit">
 <option value="20"{if empty($request.limit)} selected="selected"{/if}>20</option>
 <option value="50"{if $request.limit == "50"} selected="selected"{/if}>50</option>
 <option value="100"{if $request.limit == "100"} selected="selected"{/if}>100</option>
 </select>
-&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n Filter}" />
+&nbsp;&nbsp;<input type="submit" class="submit90" value="{i18n 'Filter'}" />
 </fieldset>
 </form>
 {/if}
@@ -104,7 +99,7 @@
 
 {if count($blog_comments) > 0}
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n 'Pages:'} </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -117,7 +112,7 @@
 <br class="clearb" />
 {/if}
 <form method="post" action="/admin/community/blogcomments_delete.php" name="blogcomments">
-<table summary="{i18n Blog Comments List}" class="blogcomments">
+<table summary="{i18n 'Blog Comments List'}" class="blogcomments">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="270" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="160" height="1" alt="" /></td>
@@ -127,17 +122,17 @@
 <td class="mini"><img src="../static/img/spacer.gif" width="35" height="1" alt="" /></td>
 </tr>
 <tr>
-<th>{i18n Blog-Name}<br />{i18n Posting Title}</th>
-<th>{i18n Author}<br />{i18n Mail/Homepage}</th>
-<th>{i18n First 80 chars of comment}</th>
-<th>{i18n Status}</th>
-<th>{i18n View}</th>
-<th>{i18n Delete}</th>
+<th>{i18n 'Blog-Name'}<br />{i18n 'Posting Title'}</th>
+<th>{i18n 'Author'}<br />{i18n 'Mail/Homepage'}</th>
+<th>{i18n 'First 80 chars of comment'}</th>
+<th>{i18n 'Status'}</th>
+<th>{i18n 'View'}</th>
+<th>{i18n 'Delete'}</th>
 <th></th>
 </tr>
 {foreach from=$blog_comments item=_comment}
 <tr>
-<td class="page"><a href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n Edit}">{$_comment.page_name|escape:"html"}<br/>{$_comment.blog_posting_title|escape:"html"|nl2br}</a></td>
+<td class="page"><a href="blogcomments_edit.php?id={$_comment.id|escape:"url"}" title="{i18n 'Edit'}">{$_comment.page_name|escape:"html"}<br/>{$_comment.blog_posting_title|escape:"html"|nl2br}</a></td>
 <td>{$_comment.name|escape:"html"}<br />
 {if !empty($_comment.email)}
 {$_comment.email|escape:"html"}
@@ -158,21 +153,21 @@
 </fieldset>
 </form>
 </td>
-<td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n View Comment}"></a></td>
+<td><a class="comment showTableRow" href="#" id="e_{$_comment.id}" title="{i18n 'View Comment'}"></a></td>
 <td style="text-align: right;"><input type="checkbox" class="chbx" name="blogcomments[]" value="{$_comment.id}"></td>
 </tr>
 <tr id="o_{$_comment.id}" class="outer">
 <td colspan="6">
 <div id="i_{$_comment.id}" class="inner">
 <fieldset>
-<h3>{i18n Comment}</h3>
+<h3>{i18n 'Comment'}</h3>
 <p>{$_comment.content_raw}</p>
 {if !empty($_comment.spam_report)}
-<h3>{i18n Spam report}</h3>
+<h3>{i18n 'Spam report'}</h3>
 <p>{$_comment.spam_report}</p>
 {/if}
-<h3>{i18n Edited}</h3>
-<p>{if !empty($_comment.edited)}{i18n yes}{else}{i18n no}{/if}</p>
+<h3>{i18n 'Edited'}</h3>
+<p>{if !empty($_comment.edited)}{i18n 'yes'}{else}{i18n 'no'}{/if}</p>
 </fieldset>
 </div>
 </td>
@@ -181,11 +176,11 @@
 <tr>
 </tr>
 </table>
-<p style="text-align: right;"><a rel="blogcomment" href="#" class="selAllCheckboxes">{i18n Select all}</a> | <a rel="blogcomment" href="#" class="deselAllCheckboxes">{i18n Deselect all}</a></p>
-<div class="right"><input class="submit140" name="delete" value="{i18n Delete}" type="submit"></div>
+<p style="text-align: right;"><a rel="blogcomment" href="#" class="selAllCheckboxes">{i18n 'Select all'}</a> | <a rel="blogcomment" href="#" class="deselAllCheckboxes">{i18n 'Deselect all'}</a></p>
+<div class="right"><input class="submit140" name="delete" value="{i18n 'Delete'}" type="submit"></div>
 </form>
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n 'Pages:'} </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -197,7 +192,7 @@
 </ul>
 {/if}
 {else}
-<p>{i18n No blog comment has been created yet.}</p>
+<p>{i18n 'No blog comment has been created yet.'}</p>
 {/if}
 <!-- content --></div>
 <!-- main --></div>

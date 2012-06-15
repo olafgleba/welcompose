@@ -4,39 +4,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Add Anti Spam Plugin}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Add Anti Spam Plugin'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
  
 <script type="text/javascript">
 var response = '{$session.response}';
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="community"}
 
@@ -50,13 +45,13 @@ var response = '{$session.response}';
 
 {include file="community/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Community}</strong>: <a href="antispamplugins_select.php">{i18n Anti Spam Plugins}</a> &#62; {i18n Add Anti Spam Plugin}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Community'}</strong>: <a href="antispamplugins_select.php">{i18n 'Anti Spam Plugins'}</a> &#62; {i18n 'Add Anti Spam Plugin'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Add Anti Spam Plugin}</h1>
+<h1>{i18n 'Add Anti Spam Plugin'}</h1>
 
-<div class="secnav710_navplus_x"><a href="antispamplugins_select.php">{i18n Anti Spam Plugins}</a></div>
+<div class="secnav710_navplus_x"><a href="antispamplugins_select.php">{i18n 'Anti Spam Plugins'}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -71,8 +66,8 @@ var response = '{$session.response}';
 
 {if $session.response == 1}
 <div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n To apply further input, please repeat fill in the form}</p>
+<h1>{i18n 'Your input was successfully saved!'}</h1>
+<p>{i18n 'To apply further input, please repeat fill in the form'}</p>
 <!-- rp --></div>
 {/if}
 
@@ -83,19 +78,19 @@ var response = '{$session.response}';
 
 {$form.hidden}
 
-<label class="cont" for="anti_spam_plugin_type"><span class="bez">{$form.type.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="anti_spam_plugin_type"><span class="bez">{$form.type.label}{qt el=$form.type}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.type.html}</label>
 
-<label class="cont" for="anti_spam_plugin_name"><span class="bez">{$form.name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="anti_spam_plugin_name"><span class="bez">{$form.name.label}{qt el=$form.name}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.name.html}</label>
 
-<label class="cont" for="anti_spam_plugin_internal_name"><span class="bez">{$form.internal_name.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="anti_spam_plugin_internal_name"><span class="bez">{$form.internal_name.label}{qt el=$form.internal_name}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.internal_name.html}<span class="validate" id="anti_spam_plugin_internal_name_container"></span></label>
 
-<label class="cont" for="anti_spam_plugin_priority"><span class="bez">{$form.priority.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="anti_spam_plugin_priority"><span class="bez">{$form.priority.label}{qt el=$form.priority}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.priority.html}</label>
 
-<label class="cont chbx" for="anti_spam_plugin_active"><span class="bez">{$form.active.label}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="anti_spam_plugin_active"><span class="bez">{$form.active.label}{qt el=$form.active}<span class="iHelp"><a href="#"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.active.html}</label>
 
 {$form.submit.html}

@@ -4,36 +4,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Template Types}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Template Types'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-</head>
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../static/libs/thirdparty/tooltips.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script></head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="templating"}
 
@@ -47,35 +42,35 @@
 
 {include file="templating/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Templating}</strong>: {i18n Template Types}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Templating'}</strong>: {i18n 'Template Types'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Template Types}</h1>
+<h1>{i18n 'Template Types'}</h1>
 
-<div class="secnav474_nav_x"><a href="templatetypes_add.php">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="templatetypes_add.php">{i18n 'Add new'}</a></div>
 <br class="clearb" />
 
 {if !empty($template_types)}
-<table summary="{i18n Available Template Types}">
+<table summary="{i18n 'Available Template Types'}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="320" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="525" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">{i18n Name}</th>
-<th>{i18n Description}</th>
-<th>{i18n Delete}</th>
+<th class="page">{i18n 'Name'}</th>
+<th>{i18n 'Description'}</th>
+<th>{i18n 'Delete'}</th>
 </tr>
 {foreach from=$template_types item=_template_type}
 <tr>
 {if $_template_type.editable}
-<td class="page name"><a href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n Edit}">{$_template_type.name|escape:"html"}</a></td>
+<td class="page name"><a href="templatetypes_edit.php?id={$_template_type.id|escape:"url"}" title="{i18n 'Edit'}">{$_template_type.name|escape:"html"}</a></td>
 <td class="description">{$_template_type.description|escape:"html"}</td>
-<td class="page"><a class="delete confirmDelTplType" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
+<td class="page"><a class="delete confirmDelTplType" href="templatetypes_delete.php?id={$_template_type.id|escape:"url"}" title="{i18n 'Delete entry'}"></a></td>
 {else}
-<td>{$_template_type.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n Not editable}" /></td>
+<td>{$_template_type.name|escape:"html"} <img src="../static/img/icons/lock.gif" width="11" height="12" alt="{i18n 'Not editable'}" /></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 {/if}
@@ -83,7 +78,7 @@
 {/foreach}
 </table>
 {else}
-<p>{i18n No template type has been created yet.}</p>
+<p>{i18n 'No template type has been created yet.'}</p>
 {/if}
 
 <!-- content --></div>

@@ -1,6 +1,6 @@
 <form action="" method="post" id="mediamanager">
 <fieldset>
-<h2>{i18n MEDIA MANAGER}<span class="iHelpMediamanager"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2><input type="text" id="hiddenFocus" value="" />
+<h2>{i18n 'MEDIA MANAGER'}<span class="iHelpMediamanager"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></h2><input type="text" id="hiddenFocus" value="" />
 
 <!-- help -->
 <div id="lyMediamanager"></div>
@@ -11,21 +11,21 @@
 
 <!-- mediamanager navigation (active: mm_myLocal) -->
 <ul class="mmnav">
-<li class="on"><span class="mm_myLocal">{i18n myLocal}</span></li>
-<li><a class="mm_myFlickr" href="#">{i18n myFlickr}</a></li>
-<li><a class="mm_upload" href="#">{i18n Upload}</a></li>
+<li class="on"><span class="mm_myLocal">{i18n 'myLocal'}</span></li>
+<li><a class="mm_myFlickr" href="#">{i18n 'myFlickr'}</a></li>
+<li><a class="mm_upload" href="#">{i18n 'Upload'}</a></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myLocal) eof -->
 
 <!-- element (include_types) wrap -->
 <div class="mmwrap">
-<span class="mm_include_types"><span class="bez">{i18n Include following types}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span class="mm_include_types"><span class="bez">{i18n 'Include following types'}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n 'Show this element'}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_include_types_wrap" style="display:none;">
-<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_img} checked="checked"{/if} /><span class="cbxspread">{i18n Images}</span></label>
-<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_doc} checked="checked"{/if} /><span class="cbxspread">{i18n Documents}</span></label>
-<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_audio} checked="checked"{/if} /><span class="cbxspread">{i18n Audio}</span></label>
-<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_video} checked="checked"{/if} /><span class="cbxspread">{i18n Video}</span></label>
-<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_other} checked="checked"{/if} /><span class="cbxspread">{i18n Other}</span></label>
+<label for="mm_include_types_img"><input id="mm_include_types_img" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_img} checked="checked"{/if} /><span class="cbxspread">{i18n 'Images'}</span></label>
+<label for="mm_include_types_doc"><input id="mm_include_types_doc" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_doc} checked="checked"{/if} /><span class="cbxspread">{i18n 'Documents'}</span></label>
+<label for="mm_include_types_audio"><input id="mm_include_types_audio" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_audio} checked="checked"{/if} /><span class="cbxspread">{i18n 'Audio'}</span></label>
+<label for="mm_include_types_video"><input id="mm_include_types_video" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_video} checked="checked"{/if} /><span class="cbxspread">{i18n 'Video'}</span></label>
+<label for="mm_include_types_other"><input id="mm_include_types_other" class="chbx" type="checkbox" value="1"{if $request.mm_include_types_other} checked="checked"{/if} /><span class="cbxspread">{i18n 'Other'}</span></label>
 </span>
 </span>
 </div>
@@ -33,7 +33,7 @@
 
 <!-- element (tags) wrap -->
 <div class="mmwrap">
-<label for="mm_tags" class="mm_tags"><span class="bez">{i18n Find by tags}<span class="hideMediamanagerElementMyLocal"><a href="#"><img title="{i18n Hide this element}" src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<label for="mm_tags" class="mm_tags"><span class="bez">{i18n 'Find by tags'}<span class="hideMediamanagerElementMyLocal"><a href="#"><img title="{i18n 'Hide this element'}" src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_tags_wrap">
 <input class="w200" type="text" id="mm_tags" value="{if !empty($request.mm_tags)}{$request.mm_tags|escape:"html"}{/if}" />
 </span>
@@ -43,7 +43,7 @@
 
 <!-- element (current tags) wrap -->
 <div class="mmwrap">
-<span class="mm_current_tags"><span class="bez">{i18n Current tags}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<span class="mm_current_tags"><span class="bez">{i18n 'Current tags'}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n 'Show this element'}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_current_tags_wrap" style="display:none;">
 <ul>
 {foreach from=$current_tags item=_current_tags}
@@ -57,10 +57,10 @@
 
 <!-- element (timeframe) wrap -->
 <div class="mmwrap">
-<label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n Find by timeframe}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<label for="mm_timeframe" class="mm_timeframe"><span class="bez">{i18n 'Find by timeframe'}<span class="showMediamanagerElementMyLocal"><a href="#"><img title="{i18n 'Show this element'}" src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_timeframe_wrap"  style="display:none;">
 <select id="mm_timeframe" name="mm_timeframe">
-<option value="">{i18n Please choose...}</option>
+<option value="">{i18n 'Please choose...'}</option>
 {foreach from=$timeframes key=_timeframe item=_timeframe_name}
 <option value="{$_timeframe}"{if $request.mm_timeframe == $_timeframe} selected="selected"{/if}>{$_timeframe_name}</option>
 {/foreach}
@@ -78,14 +78,14 @@
 <table class="mm_content">
 {foreach from=$objects item=_object}
 <tr>
-<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n Insert this media file into your content} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"html"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
+<td class="td_mm_media"><a class="mm_insert" name="{mm_insert_callback mime_type=$_object.file_mime_type}" id="{$_object.id}" href="#" title="{i18n 'Insert this media file into your content'} (id: {$_object.id})">{if !empty($_object.preview_name_on_disk)}<img src="{$media_store_www}/{$_object.preview_name_on_disk|escape:"url"}" alt="{$_object.file_name_on_disk|escape:"html"}" width="40" height="40" />{else}<img src="../static/img/icons/mime/{mm_icon mime_type=$_object.file_mime_type}" />{/if}</a> 
 </td>
-<td class="td_mm_meta"><span style="cursor:help" title="{i18n Filename}: {$_object.file_name|escape:"html"|nl2br}">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"html"|nl2br}</span></td>
+<td class="td_mm_meta"><span style="cursor:help" title="{i18n 'Filename'}: {$_object.file_name|escape:"html"|nl2br}">{$_object.file_name|truncate:30:"...":true|wordwrap:15:"\n":true|escape:"html"|nl2br}</span></td>
 {mm_is_podcast_format var=podcastable mime_type=$_object.file_mime_type}
-<td class="td_mm_casts">{if $request.mm_pagetype == 'WCOM_BLOG' && $podcastable}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n Use for podcast}"></a>{else}&nbsp;{/if}
+<td class="td_mm_casts">{if $request.mm_pagetype == 'WCOM_BLOG' && $podcastable}<a class="mm_cast" id="{$_object.id}" href="#" title="{i18n 'Use for podcast'}"></a>{else}&nbsp;{/if}
 </td>
-<td class="td_mm_edit"><a class="mm_edit" href="#" id="{$_object.id}" title="{i18n Edit}"></a></td>
-<td class="td_mm_del"><a class="mm_delete" href="#" id="{$_object.id}" title="{i18n Delete}"></a></td>
+<td class="td_mm_edit"><a class="mm_edit" href="#" id="{$_object.id}" title="{i18n 'Edit'}"></a></td>
+<td class="td_mm_del"><a class="mm_delete" href="#" id="{$_object.id}" title="{i18n 'Delete'}"></a></td>
 </tr>
 {/foreach}
 </table>
@@ -100,12 +100,12 @@
 <div class="mm_pager">
 {foreach from=$page_index item=_item}
 {if $_item.page == 1 && $_item.self != $request.mm_start}
-<a class="pager" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
+<a class="pager" id="{$_item.self}" href="#" title="{i18n 'Start'}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}<span id="pager_page_container" style="display:none;">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container" style="display:none;">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager" id="{$_item.last}" href="#" title="{i18n 'Previous'}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager" id="{$_item.next}" href="#" title="{i18n 'Next'}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
-<a class="pager" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
+<a class="pager" id="{$_item.self}" href="#" title="{i18n 'End'}">&gt;&gt;</a>
 {/if}
 {/foreach}
 </div>
@@ -123,19 +123,19 @@
 	
 <!-- mediamanager navigation (active: mm_myFlickr) -->
 <ul class="mmnav">
-<li><a class="mm_myLocal" href="#">{i18n myLocal}</a></li>
-<li class="on"><span class="mm_myFlickr">{i18n myFlickr}</span></li>
+<li><a class="mm_myLocal" href="#">{i18n 'myLocal'}</a></li>
+<li class="on"><span class="mm_myFlickr">{i18n 'myFlickr'}</span></li>
 </ul>
 <!-- mediamanager navigation (active: mm_myFlickr) eof -->
 
 <!-- element (user) wrap -->
 <div class="mmwrap">
-<span class="mm_user"><span class="bez">{i18n Flickr user}<span class="hideMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
+<span class="mm_user"><span class="bez">{i18n 'Flickr user'}<span class="hideMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/close.gif" alt="" /></a></span></span>
 <span id="mm_user_wrap">
 <table>
 <tr>
 <td><input class="w150" type="text" id="mm_user" value="{if !empty($request.mm_user)}{$request.mm_user|escape:"html"}{/if}" /></td>
-<td><input type="button" id="submit55" value="{i18n Load}" /></td>
+<td><input type="button" id="submit55" value="{i18n 'Load'}" /></td>
 </tr>
 </table>
 </span>
@@ -146,10 +146,10 @@
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n Find by Flickr photoset}<span class="hideMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<label for="mm_photoset" class="mm_photoset"><span class="bez">{i18n 'Find by Flickr photoset'}<span class="hideMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_photoset_wrap">
 <select id="mm_photoset">
-<option value="">{i18n Please choose...}</option>
+<option value="">{i18n 'Please choose...'}</option>
 {if !empty($photosets)}
 {foreach from=$photosets item=_photoset}
 <option value="{$_photoset.id|escape:"html"}"{if $request.mm_photoset == $_photoset.id} selected="selected"{/if}>{$_photoset.title|truncate:25:"..."|escape:"html"}</option>
@@ -163,7 +163,7 @@
 
 <!-- element (photoset) wrap -->
 <div class="mmwrap">
-<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n Find by Flickr tags}<span class="showMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
+<label for="mm_flickrtags" class="mm_flickrtags"><span class="bez">{i18n 'Find by Flickr tags'}<span class="showMediamanagerElementMyFlickr"><a href="#"><img src="../static/img/icons/open.gif" alt="" /></a></span></span>
 <span id="mm_flickrtags_wrap" style="display:none;">
 <input class="w200" type="text" id="mm_flickrtags" value="{if !empty($request.mm_flickrtags)}{$request.mm_flickrtags|escape:"html"}{/if}" />
 </span>
@@ -181,15 +181,15 @@
 {if !empty($photos)}
 {foreach from=$photos.photos item=_photo}
 <tr>
-<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n Insert this media file into your content} (id: {$_photo.id})"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"html"}" /></a></td>
+<td class="td_mm_media_flickr"><a class="mm_insertFlickr" name="flickr" href="#" title="{i18n 'Insert this media file into your content'} (id: {$_photo.id})"><img src="http://static.flickr.com/{$_photo.server}/{$_photo.id}_{$_photo.secret}_s.jpg" width="60" height="60" alt="{$_photo.title|escape:"html"}" /></a></td>
 <td colspan="4">{$_photo.title|escape:"html"}
 <select id="size" name="size">
-<option value="1">{i18n Image sizes...}</option>
-<option value="_s">{i18n Small (75px, square)}</option>
-<option value="_t">{i18n Thumbnail (100px)}</option>
-<option value="_m">{i18n Small (240px)}</option>
-<option value="">{i18n Medium (500px)}</option>
-<option value="_b">{i18n Large (1024px)}</option>
+<option value="1">{i18n 'Image sizes...'}</option>
+<option value="_s">{i18n 'Small (75px, square)'}</option>
+<option value="_t">{i18n 'Thumbnail (100px)'}</option>
+<option value="_m">{i18n 'Small (240px)'}</option>
+<option value="">{i18n 'Medium (500px)'}</option>
+<option value="_b">{i18n 'Large (1024px)'}</option>
 </select>
 <input type="hidden" value="http://www.flickr.com/photos/{$user.user_id}/{$_photo.id}/" />
 
@@ -213,12 +213,12 @@
 <div class="mm_pager">
 {foreach from=$page_index item=_item}
 {if $_item.page == 1 && $_item.self != $request.mm_start}
-<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n Start}">&lt;&lt;</a>
+<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n 'Start'}">&lt;&lt;</a>
 {/if}
-{if $_item.self == $request.mm_start}<span id="pager_page_container" style="display:none;">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n Previous}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n Next}">&gt;</a>{/if}
+{if $_item.self == $request.mm_start}<span id="pager_page_container" style="display:none;">{$_item.self}</span>{if !is_null($_item.last)}<a class="pager_myFlickr" id="{$_item.last}" href="#" title="{i18n 'Previous'}">&lt;</a>{/if}{$_item.page|escape:"html"} of {$_item.total_pages}{if !is_null($_item.next)}<a class="pager_myFlickr" id="{$_item.next}" href="#" title="{i18n 'Next'}">&gt;</a>{/if}
 {/if}
 {if $_item.page == $_item.total_pages && $_item.self != $request.mm_start }
-<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n End}">&gt;&gt;</a>
+<a class="pager_myFlickr" id="{$_item.self}" href="#" title="{i18n 'End'}">&gt;&gt;</a>
 {/if}
 {/foreach}
 </div>

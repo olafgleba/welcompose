@@ -4,23 +4,23 @@
 <ul id="topsubnav">
 {if wcom_check_access('User', 'User', 'Manage')}
 	{if wcom_admin_navigation_is_self('users_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Users}</li>
+		<li class="on">{i18n 'Users'}</li>
 	{else}
-		<li><a href="users_select.php"{if wcom_admin_navigation_in_area('users_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Users}<span></span></a></li>
+		<li><a href="users_select.php"{if wcom_admin_navigation_in_area('users_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Users'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('User', 'Group', 'Manage')}
 	{if wcom_admin_navigation_is_self('groups_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Groups}</li>
+		<li class="on">{i18n 'Groups'}</li>
 	{else}
-		<li><a href="groups_select.php"{if wcom_admin_navigation_in_area('groups_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Groups}<span></span></a></li>
+		<li><a href="groups_select.php"{if wcom_admin_navigation_in_area('groups_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Groups'}<span></span></a></li>
 	{/if}
 {/if}
 {if wcom_check_access('User', 'Right', 'Manage')}
 	{if wcom_admin_navigation_is_self('rights_select.php', $SCRIPT_NAME)}
-		<li class="on">{i18n Rights}</li>
+		<li class="on">{i18n 'Rights'}</li>
 	{else}
-		<li><a href="rights_select.php"{if wcom_admin_navigation_in_area('rights_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n Rights}<span></span></a></li>
+		<li><a href="rights_select.php"{if wcom_admin_navigation_in_area('rights_select.php', $SCRIPT_NAME)} class="on"{/if}>{i18n 'Rights'}<span></span></a></li>
 	{/if}
 {/if}
 </ul>

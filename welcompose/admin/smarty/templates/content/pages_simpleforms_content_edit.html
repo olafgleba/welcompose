@@ -4,15 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Edit Simple Form}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.forms.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Edit Simple Form'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
 var mediamanager = 1;
@@ -22,16 +19,14 @@ var checkbox_status = new Array('simple_form_meta_use')
 var preview_ctrl = '{$session.preview_ctrl}';
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.mediamanager.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.extended.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.mediamanager.js"></script>
+<script src="../static/libs/wcom.events.extended.js"></script>
 </head>
 
 <body>
@@ -40,12 +35,12 @@ var preview_ctrl = '{$session.preview_ctrl}';
 <div id="lyLowerOpacity"> </div>
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -63,25 +58,25 @@ var preview_ctrl = '{$session.preview_ctrl}';
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
 {if wcom_check_access('Content', 'Page', 'Manage')}
-	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
+	<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
 {/if}
 {if wcom_check_access('Content', 'SimpleForm', 'Manage')}
-	<li class="on">{i18n Simple Form}</li>
+	<li class="on">{i18n 'Simple Form'}</li>
 {/if}
 {if wcom_check_access('Content', 'Box', 'Manage')}
-	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n Boxes}<span></span></a></li>
+	<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n 'Boxes'}<span></span></a></li>
 {/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; {$page.name} : {i18n Edit Simple Form}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: <a href="pages_select.php">{i18n 'Pages'}</a> &#62; {$page.name} : {i18n 'Edit Simple Form'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Edit Simple Form}</h1>
+<h1>{i18n 'Edit Simple Form'}</h1>
 
-<div class="secnav710_nav_x"><a href="pages_select.php">{i18n Pages}</a></div>
+<div class="secnav710_nav_x"><a href="pages_select.php">{i18n 'Pages'}</a></div>
 <br class="clearb" />
 
 {if !empty($form.errors)}
@@ -96,8 +91,8 @@ var preview_ctrl = '{$session.preview_ctrl}';
 
 {if $session.response == 1}
 <div id="rp">
-<h1>{i18n Your input was successfully saved!}</h1>
-<p>{i18n You can continue editing your content.}</p>
+<h1>{i18n 'Your input was successfully saved!'}</h1>
+<p>{i18n 'You can continue editing your content.'}</p>
 <!-- rp --></div>
 {/if}
 
@@ -112,60 +107,60 @@ var preview_ctrl = '{$session.preview_ctrl}';
 
 {$form.hidden}
 
-<label class="cont" for="simple_form_title"><span class="bez">{$form.title.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
-{$form.title.html}<span class="validate"><a class="urlifyLink" href="#">{i18n Adopt title}</a></span></label>
+<label class="cont" for="simple_form_title"><span class="bez">{$form.title.label}{qt el=$form.title}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.title.html}<span class="validate"><a class="urlifyLink" href="#">{i18n 'Adopt title'}</a></span></label>
 
-<label class="cont" for="simple_form_title_url"><span class="bez">{$form.title_url.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_title_url"><span class="bez">{$form.title_url.label}{qt el=$form.title_url}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.title_url.html}<span class="validate" id="simple_form_title_url_container"></span></label>
 
 <div class="act">
 <ul class="actnav">
-<li><a class="insert" name="_simple_form_content" href="#">{i18n Internal links}</a><span id="pages_links"></span></li>
-<li><a class="insert" name="_simple_form_content" href="#">{i18n Structural templates}</a><span id="structuraltemplates_links"></span></li>
-<li><a class="insert" name="_simple_page_content" href="#">{i18n Abbreviations}</a><span id="abbreviations_links"></span></li>
-<li><a class="preview" id="{$page.id}" rel="Index" href="#">{i18n Frontend Preview}</a></li>
+<li><a class="insert" name="_simple_form_content" href="#">{i18n 'Internal links'}</a><span id="pages_links"></span></li>
+<li><a class="insert" name="_simple_form_content" href="#">{i18n 'Structural templates'}</a><span id="structuraltemplates_links"></span></li>
+<li><a class="insert" name="_simple_page_content" href="#">{i18n 'Abbreviations'}</a><span id="abbreviations_links"></span></li>
+<li><a class="preview" id="{$page.id}" rel="Index" href="#">{i18n 'Frontend Preview'}</a></li>
 </ul>
 </div>
 
-<label class="cont h46act" for="simple_form_content"><span class="bez">{$form.content.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h46act" for="simple_form_content"><span class="bez">{$form.content.label}{qt el=$form.content}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.content.html}</label>
 
-<label class="cont" for="simple_form_text_converter"><span class="bez">{$form.text_converter.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_text_converter"><span class="bez">{$form.text_converter.label}{qt el=$form.text_converter}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.text_converter.html}</label>
 
-<label class="cont chbx" for="simple_form_apply_macros"><span class="bez">{$form.apply_macros.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="simple_form_apply_macros"><span class="bez">{$form.apply_macros.label}{qt el=$form.apply_macros}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.apply_macros.html}</label>
 
-<label class="cont chbx" for="simple_form_meta_use"><span class="bez">{$form.meta_use.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont chbx" for="simple_form_meta_use"><span class="bez">{$form.meta_use.label}{qt el=$form.meta_use}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.meta_use.html}</label>
 
 <div id="simple_form_meta_use_container" class="pb35">
-<label class="cont" for="simple_form_meta_title"><span class="bez">{$form.meta_title.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_meta_title"><span class="bez">{$form.meta_title.label}{qt el=$form.meta_title}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.meta_title.html}</label>
 
-<label class="cont h04" for="simple_form_meta_keywords"><span class="bez">{$form.meta_keywords.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04" for="simple_form_meta_keywords"><span class="bez">{$form.meta_keywords.label}{qt el=$form.meta_keywords}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.meta_keywords.html}</label>
 
-<label class="cont h04" for="simple_form_meta_description"><span class="bez">{$form.meta_description.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont h04" for="simple_form_meta_description"><span class="bez">{$form.meta_description.label}{qt el=$form.meta_description}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.meta_description.html}</label>
 </div>
 
-<label class="cont" for="simple_form_type"><span class="bez">{$form.type.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_type"><span class="bez">{$form.type.label}{qt el=$form.type}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.type.html}</label>
 
-<!-- <label class="cont" for="simple_form_custom_type"><span class="bez">{$form.custom_type.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<!-- <label class="cont" for="simple_form_custom_type"><span class="bez">{$form.custom_type.label}{qt el=$form.custom_type}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.custom_type.html}</label> -->
 
-<label class="cont" for="simple_form_email_from"><span class="bez">{$form.email_from.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_email_from"><span class="bez">{$form.email_from.label}{qt el=$form.email_from}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.email_from.html}<span class="validate" id="simple_form_email_from_container"></span></label>
 
-<label class="cont" for="simple_form_email_to"><span class="bez">{$form.email_to.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_email_to"><span class="bez">{$form.email_to.label}{qt el=$form.email_to}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.email_to.html}<span class="validate" id="simple_form_email_to_container"></span></label>
 
-<label class="cont" for="simple_form_email_subject"><span class="bez">{$form.email_subject.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_email_subject"><span class="bez">{$form.email_subject.label}{qt el=$form.email_subject}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.email_subject.html}</label>
 
-<label class="cont" for="simple_form_use_captcha"><span class="bez">{$form.use_captcha.label}<span class="iHelp"><a href="#" title="{i18n Show help on this topic}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+<label class="cont" for="simple_form_use_captcha"><span class="bez">{$form.use_captcha.label}{qt el=$form.use_captcha}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.use_captcha.html}</label>
 
 {$form.save.html}{$form.submit.html}

@@ -4,41 +4,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Pages &#62; Boxes}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Pages &#62; Boxes'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript">
 var toggleElem = 2;
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../static/libs/thirdparty/tooltips.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -56,53 +51,53 @@ var toggleElem = 2;
 <div id="topsubsubnavconstatic">
 <ul id="topsubsubnav">
 {if $page.page_type_name == 'WCOM_SIMPLE_PAGE'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Page}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Simple Page'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
 {elseif $page.page_type_name == 'WCOM_BLOG'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Blog Postings}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Blog Postings'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n 'Ping Services'}<span></span></a></li>
 {elseif $page.page_type_name == 'WCOM_EVENT'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Event Postings}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Event Postings'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
 {elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Dates}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
-<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n Ping Services}<span></span></a></li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Simple Dates'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
+<li><a href="pages_blogs_pingserviceconfigurations_select.php?page={$page.id|escape:"url"}">{i18n 'Ping Services'}<span></span></a></li>
 {elseif $page.page_type_name == 'WCOM_SIMPLE_FORM'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Form}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Simple Form'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
 {elseif $page.page_type_name == 'WCOM_GENERATOR_FORM'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Generator Form}<span></span></a></li>
-<li><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n Generator Form Fields}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Generator Form'}<span></span></a></li>
+<li><a href="pages_generatorforms_fields_select.php?page={$page.id|escape:"url"}">{i18n 'Generator Form Fields'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
 {elseif $page.page_type_name == 'WCOM_SIMPLE_GUESTBOOK'}
-<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n Metadata}<span></span></a></li>
-<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n Simple Guestbook}<span></span></a></li>
-<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}">{i18n Simple Guestbook Entries}<span></span></a></li>
-<li class="on">{i18n Boxes}</li>
+<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Simple Guestbook'}<span></span></a></li>
+<li><a href="pages_simpleguestbooks_entries_select.php?page={$page.id|escape:"url"}">{i18n 'Simple Guestbook Entries'}<span></span></a></li>
+<li class="on">{i18n 'Boxes'}</li>
 {/if}
 </ul>
 </div>
 <!-- topsubsubnavcon static eof -->
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: <a href="pages_select.php">{i18n Pages}</a> &#62; <a href="pages_content_edit.php?id={$page.id}">{$page.name}</a> : {i18n Boxes}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: <a href="pages_select.php">{i18n 'Pages'}</a> &#62; <a href="pages_content_edit.php?id={$page.id}">{$page.name}</a> : {i18n 'Boxes'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Boxes}</h1>
+<h1>{i18n 'Boxes'}</h1>
 
-<div class="secnav474_nav_x"><a href="pages_boxes_add.php?page={$page.id|escape:"url"}">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="pages_boxes_add.php?page={$page.id|escape:"url"}">{i18n 'Add new'}</a></div>
 <br class="clearb" />
 
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages}: </h3> 
+<h3 class="pagenav">{i18n 'Pages'}: </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -114,7 +109,7 @@ var toggleElem = 2;
 </ul>
 <br class="clearb" />
 {/if}
-<table summary="{i18n Available Boxes}">
+<table summary="{i18n 'Available Boxes'}">
 <tbody id="boxes">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="460" height="5" alt="" /></td>
@@ -123,26 +118,26 @@ var toggleElem = 2;
 </tr>
 {if !empty($boxes)}
 <tr>
-<th class="page">{i18n Name}</th>
-<th>{i18n Priority}</th>
-<th>{i18n Delete}</th>
+<th class="page">{i18n 'Name'}</th>
+<th>{i18n 'Priority'}</th>
+<th>{i18n 'Delete'}</th>
 </tr>
 {foreach from=$boxes item=_box}
 <tr>
-<td class="page"><a href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Edit}">{$_box.name|escape:"html"}</a></td>
+<td class="page"><a href="pages_boxes_edit.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n 'Edit'}">{$_box.name|escape:"html"}</a></td>
 <td>{$_box.priority}</td>
-<td class="page"><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n Delete entry}"></a></td>
+<td class="page"><a class="delete" href="pages_boxes_delete.php?page={$page.id|escape:"url"}&amp;id={$_box.id|escape:"url"}" title="{i18n 'Delete entry'}"></a></td>
 </tr>
 {/foreach}
 {else}
 <tr id="noresult">
-<td colspan="2">{i18n No box has been created yet.}</td>
+<td colspan="2">{i18n 'No box has been created yet.'}</td>
 </tr>
 {/if}
 </tbody>
 </table>
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages}: </h3> 
+<h3 class="pagenav">{i18n 'Pages'}: </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -160,10 +155,10 @@ var toggleElem = 2;
 <div class="secnav474_nonav_c"></div>
 
 <div class="hli">
-<h2>{i18n Adopt existing Boxes} <a class="toggleElemBoxes" href="#"><img title="{i18n Show this element}" src="../static/img/icons/open.gif" alt="" /></a></h2>
+<h2>{i18n 'Adopt existing Boxes'} <a class="toggleElemBoxes" href="#"><img title="{i18n 'Show this element'}" src="../static/img/icons/open.gif" alt="" /></a></h2>
 <!-- hli --></div>
 
-<table summary="{i18n Available Boxes of all pages}" id="allboxes">
+<table summary="{i18n 'Available Boxes of all pages'}" id="allboxes">
 <tbody>
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="270" height="5" alt="" /></td>
@@ -174,25 +169,25 @@ var toggleElem = 2;
 </tr>
 {if !empty($allboxes)}
 <tr>
-<th class="page">{i18n Name}</th>
-<th>{i18n Page}</th>
-<th>{i18n Content (Raw)}</th>
-<th>{i18n View}</th>
-<th>{i18n Adopt Box}</th>
+<th class="page">{i18n 'Name'}</th>
+<th>{i18n 'Page'}</th>
+<th>{i18n 'Content (Raw)'}</th>
+<th>{i18n 'View'}</th>
+<th>{i18n 'Adopt Box'}</th>
 </tr>
 {foreach from=$allboxes item=_allbox}
 <tr>
 <td>{$_allbox.name|escape:"html"}</td>
 <td>{$_allbox.page_name|truncate:140}</td>
 <td>{$_allbox.content_raw|truncate:50|escape:html}</td>
-<td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n View box raw content}"></a>{/if}</td>
-<td class="page"><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n Adopt Box to current page}"></a></td>
+<td>{if $_allbox.content_raw|count_characters > 50}<a class="comment showTableRow" href="#" id="e_{$_allbox.id}" title="{i18n 'View box raw content'}"></a>{/if}</td>
+<td class="page"><a class="adopt" id="{$_allbox.id}" rel="{$page.id}" href="#" title="{i18n 'Adopt Box to current page'}"></a></td>
 </tr>
 <tr id="o_{$_allbox.id}" class="outer">
 <td colspan="5">
 <div id="i_{$_allbox.id}" class="inner">
 <fieldset>
-<h3>{i18n Content (Raw)}</h3>
+<h3>{i18n 'Content (Raw)'}</h3>
 {$_allbox.content_raw|escape:html}
 </fieldset>
 </div>
@@ -201,7 +196,7 @@ var toggleElem = 2;
 {/foreach}
 {else}
 <tr>
-<td colspan="5">{i18n No other page Box has been created yet}</td>
+<td colspan="5">{i18n 'No other page Box has been created yet'}</td>
 </tr>
 {/if}
 </tbody>

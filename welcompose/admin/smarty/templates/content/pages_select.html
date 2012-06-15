@@ -4,39 +4,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Pages}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Pages'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script type="text/javascript">
 var toggleElem = 1;
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../static/libs/thirdparty/tooltips.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
@@ -50,54 +47,54 @@ var toggleElem = 1;
 
 {include file="content/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Contents}</strong>: {i18n Pages}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Contents'}</strong>: {i18n 'Pages'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
-<h1>{i18n Pages}</h1>
+<h1>{i18n 'Pages'}</h1>
 
 {if empty($navigations)}
-<p>{i18n No navigation and no page has been created yet. Please create a <a href="navigations_select.php">navigation</a> first}.</p>
+<p>{i18n 'No navigation and no page has been created yet. Please create a <a href="navigations_select.php">navigation</a> first'}.</p>
 {else}
 
 {if $index_page_count < 1}
 <div class="rp_note">
 <img src="../static/img/warning.gif" alt="" />
-<h1>{i18n Please define an index page!}</h1>
-<p>{i18n If you don't do that, your webpage won't be usable.}</p>
+<h1>{i18n 'Please define an index page!'}</h1>
+<p>{i18n 'If you don\'t do that, your webpage won\'t be usable.'}</p>
 <!-- rp_note --></div>
 {elseif $index_page_count > 1}
 <div class="rp_note">
 <img src="../static/img/warning.gif" alt="" />
-<h1>{i18n You defined more than one index page.}</h1>
-<p>{i18n Please reduce the amount of index pages to one.}</p>
+<h1>{i18n 'You defined more than one index page.'}</h1>
+<p>{i18n 'Please reduce the amount of index pages to one.'}</p>
 <!-- rp_note --></div>
 {/if}
 {if $package_warning}
 <div class="rp_note">
 <img src="../static/img/warning.gif" alt="" />
-<h1>{i18n Install package still present!}</h1>
-<p>{i18n This is a severe security risk. Please remove the install package.}</p>
+<h1>{i18n 'Install package still present!'}</h1>
+<p>{i18n 'This is a severe security risk. Please remove the install package.'}</p>
 <!-- rp_note --></div>
 {/if}
 {if $setup_warning}
 <div class="rp_note">
 <img src="../static/img/warning.gif" alt="" />
-<h1>{i18n Setup directory still present!}</h1>
-<p>{i18n This is a severe security risk. Please remove the setup directory.}</p>
+<h1>{i18n 'Setup directory still present!'}</h1>
+<p>{i18n 'This is a severe security risk. Please remove the setup directory.'}</p>
 <!-- rp_note --></div>
 {/if}
 
-<div class="newPageContainer"><a class="newPage" href="pages_add.php">{i18n Add new page}</a></div>
+<div class="newPageContainer"><a class="newPage" href="pages_add.php">{i18n 'Add new page'}</a></div>
 
 {foreach from=$navigations item=_navigation}
 <div class="secnav474_nonav_c"></div>
 
 <div class="hli">
-<h2>{$_navigation.name} <a class="toggleElemNavigation" href="#"><img title="{i18n Hide this element}" src="../static/img/icons/close.gif" alt="" /></a></h2>
+<h2>{$_navigation.name} <a class="toggleElemNavigation" href="#" title="{i18n 'Hide this element'}"><img src="../static/img/icons/close.gif" alt="" /></a></h2>
 <!-- hli --></div>
 		
 
-<table id="nav_{$_navigation.name}" summary="{i18n Page structure}">
+<table id="nav_{$_navigation.name}" summary="{i18n 'Page structure'}">
 <tbody>
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="460" height="5" alt="" /></td>
@@ -116,43 +113,43 @@ var toggleElem = 1;
 <tr>
 </tr>
 <tr>
-<th class="page">{i18n Page structure}</th>
-<th colspan="2">{i18n Move}</th>
-<th>{i18n Edit Box}</th>
-{if count($navigations) > 1}<th>{i18n Move away}</th>{/if}
-<th>{i18n Delete}</th>
+<th class="page">{i18n 'Page structure'}</th>
+<th colspan="2">{i18n 'Move'}</th>
+<th>{i18n 'Edit Box'}</th>
+{if count($navigations) > 1}<th>{i18n 'Move away'}</th>{/if}
+<th>{i18n 'Delete'}</th>
 </tr>
 {assign var="navigation_id" value=$_navigation.id}
 {if count($page_arrays.$navigation_id) > 0}
-{foreach from=$page_arrays.$navigation_id item=_page}
+{foreach $page_arrays.$navigation_id as $_page}
 <tr>
-<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}"><a href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n Edit page contents}">{$_page.name}</a> {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n Index page}" title="{i18n Index page}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n Protected page}" title="{i18n Protected page}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n Excluded from navigation}" title="{i18n Excluded from navigation}" />{/if}</td>
-<td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n Down}"></a></td>
-<td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n Up}"></a></td>
+<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}"><a href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n 'Edit page contents'}">{$_page.name}</a> {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n 'Index page'}" title="{i18n 'Index page'}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n 'Protected page'}" title="{i18n 'Protected page'}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n 'Excluded from navigation'}" title="{i18n 'Excluded from navigation'}" />{/if}</td>
+<td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n 'Down'}"></a></td>
+<td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n 'Up'}"></a></td>
 <td>
 {assign var="page_id" value=$_page.id}
 {if count($box_arrays.$page_id) > 0}
 <form action="" method="post">
 <fieldset>
 <select class="page_boxes goToPageBox" id="{$_page.id}" name="page_boxes">
-	<option value="">{i18n Please choose...}</option>
-	{foreach from=$box_arrays.$page_id item=_box}
+	<option value="">{i18n 'Please choose...'}</option>
+	{foreach $box_arrays.$page_id as $_box}
 	<option value="{$_box.id}">{$_box.name|escape:"html"|truncate:32}</option>
 	{/foreach}
 </select>
 </fieldset>
 </form>
 {else}
-{i18n Yet no boxes}
+{i18n 'Yet no boxes'}
 {/if}
 </td>
-{if count($navigations) > 1}<td class="page"><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="{i18n Move page to another navigation}"></a></td>{/if}
-<td class="page"><a class="delete confirmDelPage" href="pages_delete.php?id={$_page.id|escape:"url"}" title="{i18n Delete page}"></a></td>
+{if count($navigations) > 1}<td class="page"><a class="move" href="pages_move_away.php?id={$_page.id|escape:"url"}" title="{i18n 'Move page to another navigation'}"></a></td>{/if}
+<td class="page"><a class="delete confirmDelPage" href="pages_delete.php?id={$_page.id|escape:"url"}" title="{i18n 'Delete page'}"></a></td>
 </tr>
 {/foreach}
 {else}
 <tr>
-<td class="page">{i18n No page has been created yet}</td>
+<td class="page">{i18n 'No page has been created yet'}</td>
 <td></td>
 <td></td>
 {if count($navigations) > 1}<td></td>{/if}

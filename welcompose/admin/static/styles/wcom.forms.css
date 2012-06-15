@@ -48,6 +48,11 @@ width: 690px;
 padding: 0 10px 0 0;
 overflow: hidden;
 }
+fieldset.withingrouped {
+width: 690px;
+padding: 20px 10px 20px 0;
+overflow: hidden;
+}
 fieldset.actions {
 width: auto;
 padding: 0 10px 10px 0;

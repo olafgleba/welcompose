@@ -4,13 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Boxes &ndash; Create Reference to Page related Boxes}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Boxes &ndash; Create Reference to Page related Boxes'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.mediamanager.css" media="screen, projection" />
  
 <script type="text/javascript">
 var form_target = '{$callback_params.form_target}';
@@ -21,13 +18,13 @@ var pager_page = '{$callback_params.pager_page}';
 var insert_type = '{$callback_params.insert_type}';
 </script>
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.popup.js"></script>
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.popup.js"></script>
 </head>
 
 <body id="modalWindow" onunload="Helper.closePopupTrackNoAlert()">
@@ -35,8 +32,8 @@ var insert_type = '{$callback_params.insert_type}';
 <div id="modalContainer">
 <div id="pages">
 <div id ="topic97">
-<h2>{i18n BOXES} <span>{i18n CREATE REFERENCE}</span></h2>
-<span class="close"><a href="#">{i18n Close Window}</a></span>
+<h2>{i18n 'BOXES'} <span>{i18n 'CREATE REFERENCE'}</span></h2>
+<span class="close"><a href="#">{i18n 'Close Window'}</a></span>
 <span id="indicator_pagesLinks" style="display:none;"><img src="../static/img/indicator.gif" alt="" width="25" height="25" /></span>
 </div>
 <br class="clearb" />
@@ -45,12 +42,12 @@ var insert_type = '{$callback_params.insert_type}';
 <div id="firstNode">
 <table>
 <tr>
-<td colspan="2"><strong>{i18n Pages}</strong></td>
+<td colspan="2"><strong>{i18n 'Pages'}</strong></td>
 </tr>
 {foreach from=$pages_arrays item=_page}
 <tr>
 <td class="initialNode">{$_page.name|escape:"html"}</td>
-<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#modalWindow" title="{i18n Display related boxes}">&nbsp;</a></td>
+<td class="nextNode"><a class="showNextNodeBoxes" id="{$_page.id}" name="boxes_links" href="#modalWindow" title="{i18n 'Display related boxes'}">&nbsp;</a></td>
 </tr>
 {/foreach}
 </table>

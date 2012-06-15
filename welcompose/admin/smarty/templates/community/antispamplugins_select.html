@@ -4,37 +4,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="language" content="de" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta http-equiv="imagetoolbar" content="no" /> 
-<title>{i18n Welcompose Admin &ndash; Anti Spam Plugins}</title>
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.basic.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.navigation.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
-<link rel="stylesheet" type="text/css" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
+<title>{i18n 'Welcompose Admin &ndash; Anti Spam Plugins'}</title>
+<link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
-<script type="text/javascript" src="../static/libs/thirdparty/prototype.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/behaviours.js"></script>
-<script type="text/javascript" src="../static/libs/thirdparty/tooltips.js"></script>
-<script type="text/javascript" src="../parse/parse.js.php?file=wcom.strings.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.core.js"></script>
-<script type="text/javascript" src="../static/libs/wcom.helper.js" charset="utf-8"></script>
-<script type="text/javascript" src="../static/libs/wcom.events.standard.js"></script>
-
-
+<script src="../static/libs/thirdparty/prototype.js"></script>
+<script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
+<script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../static/libs/thirdparty/tooltips.js"></script>
+<script src="../parse/parse.js.php?file=wcom.strings.js"></script>
+<script src="../static/libs/wcom.core.js"></script>
+<script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
+<script src="../static/libs/wcom.events.standard.js"></script>
 </head>
 
 <body>
 <div id="container">
 
 <div id="logo">
-<p>{i18n Welcompose}</p>
+<p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n Logged in as user}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n Logout}"></a></div>
+<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="community"}
 
@@ -48,18 +43,18 @@
 
 {include file="community/_inc_navigation.html"}
 
-<div id="brc"><p><strong>{i18n Community}</strong>: {i18n Anti Spam Plugins}<img src="../static/img/bc_right.gif" alt="" /></p></div>
+<div id="brc"><p><strong>{i18n 'Community'}</strong>: {i18n 'Anti Spam Plugins'}<img src="../static/img/bc_right.gif" alt="" /></p></div>
 
 <div id="content">
 
-<h1>{i18n Anti Spam Plugins}</h1>
+<h1>{i18n 'Anti Spam Plugins'}</h1>
 
-<div class="secnav474_nav_x"><a href="antispamplugins_add.php">{i18n Add new}</a></div>
+<div class="secnav474_nav_x"><a href="antispamplugins_add.php">{i18n 'Add new'}</a></div>
 <br class="clearb" />
 
 {if !empty($anti_spam_plugins)}
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n 'Pages:'} </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -71,7 +66,7 @@
 </ul>
 <br class="clearb" />
 {/if}
-<table summary="{i18n Available Anti Spam Plugins}">
+<table summary="{i18n 'Available Anti Spam Plugins'}">
 <tr>
 <td class="mini"><img src="../static/img/spacer.gif" width="460" height="5" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="130" height="5" alt="" /></td>
@@ -80,24 +75,24 @@
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
 </tr>
 <tr>
-<th class="page">{i18n Name}</th>
-<th>{i18n Internal Name}</th>
-<th>{i18n Type}</th>
-<th>{i18n Active}</th>
-<th>{i18n Delete}</th>
+<th class="page">{i18n 'Name'}</th>
+<th>{i18n 'Internal Name'}</th>
+<th>{i18n 'Type'}</th>
+<th>{i18n 'Active'}</th>
+<th>{i18n 'Delete'}</th>
 </tr>
 {foreach from=$anti_spam_plugins item=_anti_spam_plugin}
 <tr>
-<td class="page"><a href="antispamplugins_edit.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n Edit}">{$_anti_spam_plugin.name|escape:"html"}</a></td>
+<td class="page"><a href="antispamplugins_edit.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n 'Edit'}">{$_anti_spam_plugin.name|escape:"html"}</a></td>
 <td>{$_anti_spam_plugin.internal_name|escape:"html"}</td>
-<td class="template"><span>{if $_anti_spam_plugin.type == 'comment'}{i18n Comment plugin}{elseif $_anti_spam_plugin.type == 'trackback'}{i18n Trackback plugin}{/if}</span></td>
-<td class="template">{if $_anti_spam_plugin.active}{i18n yes}{else}{i18n no}{/if}</td>
-<td class="page"><a class="delete" href="antispamplugins_delete.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n Delete}"></a></td>
+<td class="template"><span>{if $_anti_spam_plugin.type == 'comment'}{i18n 'Comment plugin'}{elseif $_anti_spam_plugin.type == 'trackback'}{i18n 'Trackback plugin'}{/if}</span></td>
+<td class="template">{if $_anti_spam_plugin.active}{i18n 'yes'}{else}{i18n 'no'}{/if}</td>
+<td class="page"><a class="delete" href="antispamplugins_delete.php?id={$_anti_spam_plugin.id|escape:"url"}" title="{i18n 'Delete'}"></a></td>
 </tr>
 {/foreach}
 </table>
 {if count($page_index) > 1}
-<h3 class="pagenav">{i18n Pages:} </h3> 
+<h3 class="pagenav">{i18n 'Pages:'} </h3> 
 <ul class="pagenav"> 
 {foreach from=$page_index item=_item}
 {if $_item.self == $request.start}
@@ -109,7 +104,7 @@
 </ul>
 {/if}
 {else}
-<p>{i18n No anti spam plugin has been created yet.}</p>
+<p>{i18n 'No anti spam plugin has been created yet.'}</p>
 {/if}
 
 <!-- content --></div>

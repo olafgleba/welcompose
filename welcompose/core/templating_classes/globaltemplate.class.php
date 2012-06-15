@@ -358,7 +358,7 @@ public function smartyFetchGlobalTemplate ($name)
 			`templating_global_templates`.`content` AS `content`,
 			`templating_global_templates`.`mime_type` AS `mime_type`,
 			`templating_global_templates`.`change_delimiter` AS `change_delimiter`,
-			`templating_global_templates`.`date_modified` AS `date_modified`,
+			UNIX_TIMESTAMP(`templating_global_templates`.`date_modified`) AS `date_modified`,
 			`templating_global_templates`.`date_added` AS `date_added`
 		FROM
 			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
@@ -378,54 +378,6 @@ public function smartyFetchGlobalTemplate ($name)
 	
 	// execute query and return result
 	return $this->base->db->select($sql, 'row', $bind_params);
-}
-
-/**
- * Fetches last modification date of global template from database for usage in the
- * smarty resource plugin. Takes the global template name as first argument.
- * Returns UNIX timestamp.
- *
- * @throws Templating_GlobalTemplateException
- * @param string Name
- * @return int
- */
-public function smartyFetchGlobalTemplateTimestamp ($name)
-{
-	// access check
-	if (!wcom_check_access('Templating', 'GlobalTemplate', 'Use')) {
-		throw new Templating_GlobalTemplateException("You are not allowed to perform this action");
-	}
-	
-	// input check
-	if (empty($name) || !is_scalar($name)) {
-		throw new Templating_GlobalTemplateException('Input for parameter name is not scalar');
-	}
-	
-	// initialize bind params
-	$bind_params = array();
-	
-	// prepare query
-	$sql = "
-		SELECT
-			UNIX_TIMESTAMP(`templating_global_templates`.`date_modified`) AS `date_modified`
-		FROM
-			".WCOM_DB_TEMPLATING_GLOBAL_TEMPLATES." AS `templating_global_templates`
-		WHERE 
-			`templating_global_templates`.`name` = :name
-		  AND
-			`templating_global_templates`.`project` = :project
-		LIMIT
-			1
-	";
-	
-	// prepare bind params
-	$bind_params = array(
-		'name' => (string)$name,
-		'project' => WCOM_CURRENT_PROJECT
-	);
-	
-	// execute query and return result
-	return $this->base->db->select($sql, 'field', $bind_params);
 }
 
 /**

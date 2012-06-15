@@ -1231,7 +1231,7 @@ function Helper_callbacksInsert(elem)
  * <pre><code>
 <form method="post" name="blogtags">
 ... form checkbox Elements
-<a href="#" class="submit240 process_insert_array" rel="blogtag">{i18n Insert Tag(s)}</a>
+<a href="#" class="submit240 process_insert_array" rel="blogtag">{i18n 'Insert Tag(s)'}</a>
 </form>
  * </code></pre>
  *
