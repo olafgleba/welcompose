@@ -400,6 +400,26 @@ try {
 		array('id' => 'blog_posting_feed_summary', 'cols' => 3, 'rows' => '2', 'class' => 'w540h150'),
 		array('label' => gettext('Feed Summary'))
 		);
+		
+	// optional inputs
+	
+	// textarea for optional content 1
+	$optional_content_1 = $FORM->addElement('textarea', 'optional_content_1', 
+		array('id' => 'blog_posting_optional_content_1', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Optional Content 1'))
+		);
+		
+	// textarea for optional content 2
+	$optional_content_2 = $FORM->addElement('textarea', 'optional_content_2', 
+		array('id' => 'blog_posting_optional_content_2', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Optional Content 2'))
+		);
+		
+	// textarea for optional content 3
+	$optional_content_3 = $FORM->addElement('textarea', 'optional_content_3', 
+		array('id' => 'blog_posting_optional_content_3', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Optional Content 3'))
+		);
 	
 	// checkbox for draft
 	$draft = $FORM->addElement('checkbox', 'draft',
@@ -460,6 +480,9 @@ try {
 		'meta_title' => Base_Cnc::ifsetor($blog_posting['meta_title_raw'], null),
 		'meta_keywords' => Base_Cnc::ifsetor($blog_posting['meta_keywords'], null),
 		'meta_description' => Base_Cnc::ifsetor($blog_posting['meta_description'], null),
+		'optional_content_1' => Base_Cnc::ifsetor($blog_posting['optional_content_1'], null),
+		'optional_content_2' => Base_Cnc::ifsetor($blog_posting['optional_content_2'], null),
+		'optional_content_3' => Base_Cnc::ifsetor($blog_posting['optional_content_3'], null),
 		'tags' => $BLOGTAG->getTagStringFromSerializedArray(Base_Cnc::ifsetor($blog_posting['tag_array'], null)),
 		'draft' => Base_Cnc::ifsetor($blog_posting['draft'], null),
 		'ping' => 0,
@@ -545,6 +568,9 @@ try {
 		$sqlData['meta_title'] = null;
 		$sqlData['meta_keywords'] = null;
 		$sqlData['meta_description'] = null;
+		$sqlData['optional_content_1'] = $optional_content_1->getValue();
+		$sqlData['optional_content_2'] = $optional_content_2->getValue();
+		$sqlData['optional_content_3'] = $optional_content_3->getValue();
 		$sqlData['draft'] = (string)intval($draft->getValue());
 		$sqlData['ping'] = (string)intval($ping->getValue());
 		$sqlData['comments_enable'] = (string)intval($comments_enable->getValue());

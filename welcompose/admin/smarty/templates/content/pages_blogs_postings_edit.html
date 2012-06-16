@@ -1,9 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<!DOCTYPE html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
 <title>{i18n 'Welcompose Admin &ndash; Pages &#62; Edit Blog Posting'}</title>
 <link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
@@ -211,6 +208,18 @@
 
 <label class="cont h13" for="blog_posting_feed_summary"><span class="bez">{$form.feed_summary.label}{qt el=$form.feed_summary}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.feed_summary.html}</label>
+
+<fieldset class="withinaction" style="padding-bottom: 10px; margin-bottom: 10px;">
+<h2>{i18n 'Optional Content'}</h2>
+<label class="cont h04" for="blog_posting_optional_content_1"><span class="bez">{$form.optional_content_1.label}{qt el=$form.optional_content_1}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.optional_content_1.html}</label>
+
+<label class="cont h04" for="blog_posting_optional_content_2"><span class="bez">{$form.optional_content_2.label}{qt el=$form.optional_content_2}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.optional_content_2.html}</label>
+
+<label class="cont h04" for="blog_posting_optional_content_3"><span class="bez">{$form.optional_content_3.label}{qt el=$form.optional_3}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
+{$form.optional_content_3.html}</label>
+</fieldset>
 
 <label class="cont chbx" for="blog_posting_draft"><span class="bez">{$form.draft.label}{qt el=$form.draft}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.draft.html}</label>
