@@ -768,21 +768,6 @@
 			<editable>0</editable>
 		</template-type>
 		<template-type>
-			<name>simple_date_index</name>
-			<description/>
-			<editable>0</editable>
-		</template-type>
-		<template-type>
-			<name>simple_date_rss20</name>
-			<description/>
-			<editable>0</editable>
-		</template-type>
-		<template-type>
-			<name>simple_date_atom10</name>
-			<description/>
-			<editable>0</editable>
-		</template-type>
-		<template-type>
 			<name>generator_form_index</name>
 			<description/>
 			<editable>0</editable>
