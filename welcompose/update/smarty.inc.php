@@ -41,17 +41,21 @@ if (!defined('SMARTY_TPL_DIR')) {
 // configure i18n
 require(SMARTY_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'Smarty_GettextHelper.class.php');
 require(SMARTY_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'compiler.i18n.php');
-$smarty->register_compiler_function('i18n', 'smarty_compiler_i18n');
+$smarty->registerPlugin('compiler', 'i18n', 'smarty_compiler_i18n');
 
 // configure smarty
-$smarty->debug = false;
-$smarty->template_dir = SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'templates';
-$smarty->compile_dir = SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'compiled';
-$smarty->cache_dir = SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'cache';
-$smarty->plugins_dir = array(
+$smarty->debugging = false;
+$smarty->auto_literal = false;
+$smarty->muteExpectedErrors();
+
+$smarty->setTemplateDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'templates');
+$smarty->setCompileDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'compiled');
+$smarty->setCacheDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'cache');
+$smarty->setPluginsDir(array(
 	SMARTY_DIR.DIRECTORY_SEPARATOR.'my_plugins',
 	SMARTY_DIR.DIRECTORY_SEPARATOR.'plugins',
 	SMARTY_DIR.DIRECTORY_SEPARATOR.'software_plugins'
+	)
 );
 
 ?>

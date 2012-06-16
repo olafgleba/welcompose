@@ -58,6 +58,9 @@ try {
 	// get page name
 	$page = Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_HELP);
 	
+	// set header
+	header("Content-Type: text/html; charset=utf-8");
+	
 	// display the correlated navigation template
 	$BASE->utility->smarty->display('help/'.$page.'.html');
 	

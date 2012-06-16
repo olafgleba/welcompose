@@ -60,32 +60,28 @@ try {
 
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
-
 	
 	// checkbox for confirm_license
-	$FORM->addElement('checkbox', 'confirm_license', gettext('Confirm license'), null,
-		array('id' => 'license_confirm_license', 'class' => 'chbx'));
-
-	$FORM->addRule('confirm_license', gettext('Please confirm the license'), 'required');
-	$FORM->addRule('confirm_license', gettext('The field to confirm the license accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
+	$confirm_license = $FORM->addElement('checkbox', 'confirm_license',
+		array('id' => 'license_confirm_license', 'class' => 'chbx'),
+		array('label' => gettext('Confirm license'))
+		);
+	$confirm_license->addRule('required', gettext('Please confirm the license'));
+	$confirm_license->addRule('regex', gettext('Field license must be valued by 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+		
 	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Go to next step'),
-		array('class' => 'submit240nomargin'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit240nomargin', 'value' => gettext('Next step'))
+		);
 		
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
-		$quickform_tpl_path = dirname(__FILE__).'/quickform.tpl.php';
-		include(Base_Compat::fixDirectorySeparator($quickform_tpl_path));
 
-		// remove attribute on form tag for XHTML compliance
-		$FORM->removeAttribute('name');
-		$FORM->removeAttribute('target');
-		
-		$FORM->accept($renderer);
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());

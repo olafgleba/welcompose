@@ -56,14 +56,14 @@ try {
 	gettextInitSoftware($BASE->_conf['locales']['all']);
 	
 	// delimiters for js files
-	$BASE->utility->smarty->left_delimiter = '<%';
-	$BASE->utility->smarty->right_delimiter = '%>';
+	$BASE->utility->smarty->left_delimiter = '%=';
+	$BASE->utility->smarty->right_delimiter = '=%';
 	
 	// set new tpl dir
-	$BASE->utility->smarty->template_dir = dirname(__FILE__).'/../static/libs';
+	$BASE->utility->smarty->setTemplateDir(dirname(__FILE__).'/../static/libs');
 	
 	// set header
-	header("Content-Type: text/javascript");
+	header("Content-Type: text/javascript; charset=utf-8");
 	
 	// fetch javascript
 	if (!is_null(Base_Cnc::filterRequest($_REQUEST['file'], WCOM_REGEX_UPDATE_JS))) {
