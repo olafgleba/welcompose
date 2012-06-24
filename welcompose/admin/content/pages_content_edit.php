@@ -123,6 +123,9 @@ try {
 		case 'WCOM_GENERATOR_FORM':
 				header("Location: pages_generatorforms_content_edit.php?id=".(int)$page['id']);
 			exit;
+		case 'WCOM_SIMPLE_DATE':
+				header("Location: pages_simple_dates_select.php?page=".(int)$page['id']);
+			exit;
 		case 'WCOM_SIMPLE_FORM':
 				header("Location: pages_simpleforms_content_edit.php?id=".(int)$page['id']);
 			exit;
