@@ -361,7 +361,7 @@ try {
 				}
 			}
 			
-			// add new template type event_index to every project
+			// add new template type simple_date_index to every project
 			foreach ($projects as $_project) {
 				// get existing template types
 				$sql = "
@@ -411,7 +411,7 @@ try {
 			}
 			
 
-			// add new template type event_rss20 to every project
+			// add new template type simple_date_rss20 to every project
 			foreach ($projects as $_project) {
 				// get existing template types
 				$sql = "
@@ -460,7 +460,7 @@ try {
 				}
 			}
 			
-			// add new template type event_atom10 to every project
+			// add new template type simple_date_atom10 to every project
 			foreach ($projects as $_project) {
 				// get existing template types
 				$sql = "
