@@ -5,10 +5,12 @@
 <link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 
 <script src="../static/libs/thirdparty/prototype.js"></script>
 <script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script src="../static/libs/thirdparty/behaviours.js"></script>
+<script src="../static/libs/thirdparty/tooltips.js"></script>
 <script src="../parse/parse.js.php?file=wcom.strings.js"></script>
 <script src="../static/libs/wcom.core.js"></script>
 <script src="../static/libs/wcom.helper.js" charset="utf-8"></script>
@@ -64,6 +66,16 @@
 	{if wcom_check_access('Content', 'Box', 'Manage')}
 		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n 'Boxes'}<span></span></a></li>
 	{/if}
+{elseif $page.page_type_name == 'WCOM_SIMPLE_DATE'}
+	{if wcom_check_access('Content', 'Page', 'Manage')}
+		<li><a href="pages_edit.php?id={$page.id|escape:"url"}">{i18n 'Metadata'}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'SimpleDate', 'Manage')}
+		<li><a href="pages_content_edit.php?id={$page.id|escape:"url"}">{i18n 'Simple Dates'}<span></span></a></li>
+	{/if}
+	{if wcom_check_access('Content', 'Box', 'Manage')}
+		<li><a href="pages_boxes_select.php?page={$page.id|escape:"url"}">{i18n 'Boxes'}<span></span></a></li>
+	{/if}
 	{if wcom_check_access('Application', 'PingServiceConfiguration', 'Manage')}
 		<li class="on">{i18n 'Ping Services'}</li>
 	{/if}
@@ -107,7 +119,7 @@
 {foreach from=$ping_service_configurations item=_configuration}
 <tr>
 <td class="page"><a href="pages_blogs_pingserviceconfigurations_edit.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n 'Edit'}">{$_configuration.ping_service_name|escape:"html"}</a></td>
-<td><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n 'Delete'}"></a></td>
+<td class="page"><a class="delete" href="pages_blogs_pingserviceconfigurations_delete.php?page={$page.id|escape:"url"}&amp;id={$_configuration.id|escape:"url"}" title="{i18n 'Delete entry'}"></a></td>
 </tr>
 {/foreach}
 </table>

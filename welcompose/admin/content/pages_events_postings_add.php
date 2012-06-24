@@ -147,9 +147,6 @@ try {
 		);
 	$title_url->addRule('required', gettext('Enter an URL title'));
 	$title_url->addRule('regex', gettext('The URL title may only contain chars, numbers and hyphens'), WCOM_REGEX_URL_NAME);
-	
-	
-	// $FORM->addGroupRule('date_start', gettext('Please enter a start date at least'), 'required');
 		
 	// date element for date_start
 	$date_start = $FORM->addElement('date', 'date_start', null,
@@ -159,8 +156,6 @@ try {
 	$date_start->addRule('each', gettext('Please enter a full start date at least'),
 		$date_start->createRule('nonempty')
 		);
-	
-	
 		
 	// date element for date_start_time_start
 	$date_start_time_start = $FORM->addElement('date', 'date_start_time_start', null,

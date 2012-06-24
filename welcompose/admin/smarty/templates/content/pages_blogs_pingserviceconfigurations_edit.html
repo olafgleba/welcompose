@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.forms.css" media="screen, projection" />
 
+<script type="text/javascript">
+var response = '{$session.response}';
+</script>
+
 <script src="../static/libs/thirdparty/prototype.js"></script>
 <script src="../static/libs/thirdparty/scriptaculous.js?load=effects"></script>
 <script src="../static/libs/thirdparty/behaviours.js"></script>
@@ -87,6 +91,13 @@
 <br class="clearb" />
 {/if}
 
+{if $session.response == 1}
+<div id="rp">
+<h1>{i18n 'Your input was successfully saved!'}</h1>
+<p>{i18n 'You can continue editing your content.'}</p>
+<!-- rp --></div>
+{/if}
+
 <form class="botbg"{$form.attributes}>
 {$form.javascript}
 
@@ -109,7 +120,7 @@
 <label class="cont" for="ping_service_configuration_site_feed"><span class="bez">{$form.site_feed.label}{qt el=$form.site_feed}<span class="iHelp"><a href="#" title="{i18n 'Show help on this topic'}"><img src="../static/img/icons/help.gif" alt="" /></a></span></span>
 {$form.site_feed.html}<span class="validate" id="ping_service_configuration_site_feed_container"></span></label>
 
-{$form.submit.html}
+{$form.save.html}{$form.submit.html}
 
 </fieldset>
 </form>

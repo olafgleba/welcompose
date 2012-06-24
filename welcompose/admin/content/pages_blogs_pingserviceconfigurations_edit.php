@@ -126,61 +126,67 @@ try {
 
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
-
 	
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// select for ping service
-	$FORM->addElement('select', 'ping_service', gettext('Ping service'), $ping_services,
-		array('id' => 'ping_service_configuration_ping_service'));
+	// select for ping service	
+	$ping_service = $FORM->addElement('select', 'ping_service',
+	 	array('id' => 'ping_service_configuration_ping_service'),
+		array('label' => gettext('Ping service'), 'options' => $ping_services)
+		);
+	$ping_service->addRule('required', gettext('Select a ping service'));
 
-	$FORM->addRule('ping_service', gettext('Select a ping service'), 'required');
-	$FORM->addRule('ping_service', gettext('Chosen ping service is out of range'),
-		'in_array_keys', $ping_services);
-	
 	// textfield for site_name
-	$FORM->addElement('text', 'site_name', gettext('Site name'),
-		array('id' => 'ping_service_configuration_site_name', 'maxlength' => 255, 'class' => 'w300'));
-
-	$FORM->addRule('site_name', gettext('Please enter a site name'), 'required');
+	$site_name = $FORM->addElement('text', 'site_name', 
+		array('id' => 'ping_service_configuration_site_name', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Site name'))
+		);
+	$site_name->addRule('required', gettext('Please enter a site name'));
 	
 	// textfield for site_url
-	$FORM->addElement('text', 'site_url', gettext('Weblog URL'),
-		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('site_url', gettext('Please enter a site URL'), 'required');
-	$FORM->addRule('site_url', gettext('Please enter a valid site URL'), 'regex', WCOM_REGEX_URL);
+	$site_url = $FORM->addElement('text', 'site_url', 
+		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Weblog URL'))
+		);
+	$site_url->addRule('required', gettext('Please enter a site URL'));
+	$site_url->addRule('regex', gettext('Please enter a valid site URL'), WCOM_REGEX_URL);
 	
 	// textfield for site_index
-	$FORM->addElement('text', 'site_index', gettext('Changes URL'),
-		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('site_index', gettext('Please enter a home page URL'), 'required');
-	$FORM->addRule('site_index', gettext('Please enter a valid home page URL'), 'regex', WCOM_REGEX_URL);
+	$site_index = $FORM->addElement('text', 'site_index', 
+		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Changes URL'))
+		);
+	$site_index->addRule('required', gettext('Please enter a home page URL'));
+	$site_index->addRule('regex', gettext('Please enter a valid home page URL'), WCOM_REGEX_URL);
 	
 	// textfield for site_feed
-	$FORM->addElement('text', 'site_feed', gettext('Feed URL'),
-		array('id' => 'ping_service_configuration_site_feed', 'maxlength' => 255, 'class' => 'w300 validate'));
-
-	$FORM->addRule('site_feed', gettext('Please enter a feed URL'), 'required');
-	$FORM->addRule('site_feed', gettext('Please enter a valid feed URL'), 'regex', WCOM_REGEX_URL);
-	
-	// submit button
-	$FORM->addElement('submit', 'submit', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$site_feed = $FORM->addElement('text', 'site_feed', 
+		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('label' => gettext('Feed URL'))
+		);
+	$site_feed->addRule('required', gettext('Please enter a feed URL'));
+	$site_feed->addRule('regex', gettext('Please enter a valid feed URL'), WCOM_REGEX_URL);
+		
+	// submit button (save and stay)
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
+		
+	// submit button (save and go back)
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'page' => Base_Cnc::ifsetor($ping_service_configuration['page'], null),
 		'id' => Base_Cnc::ifsetor($ping_service_configuration['id'], null),
 		'ping_service' => Base_Cnc::ifsetor($ping_service_configuration['ping_service'], null),
@@ -188,7 +194,7 @@ try {
 		'site_url' => Base_Cnc::ifsetor($ping_service_configuration['site_url'], null),
 		'site_index' => Base_Cnc::ifsetor($ping_service_configuration['site_index'], null),
 		'site_feed' => Base_Cnc::ifsetor($ping_service_configuration['site_feed'], null)
-	));
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
@@ -212,6 +218,19 @@ try {
 		
 		// calculate and assign ping service count
 		$BASE->utility->smarty->assign('ping_service_count', count($ping_services));
+		
+		// build session
+		$session = array(
+			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
+		);
+		
+		// assign $_SESSION to smarty
+		$BASE->utility->smarty->assign('session', $session);
+		
+		// empty $_SESSION
+		if (!empty($_SESSION['response'])) {
+			$_SESSION['response'] = '';
+		}	
 		
 		// select available projects
 		$select_params = array(
@@ -237,11 +256,12 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['ping_service'] = $FORM->exportValue('ping_service');
-		$sqlData['site_name'] = $FORM->exportValue('site_name');
-		$sqlData['site_url'] = $FORM->exportValue('site_url');
-		$sqlData['site_index'] = $FORM->exportValue('site_index');
-		$sqlData['site_feed'] = $FORM->exportValue('site_feed');
+		$sqlData['page'] = $page_id->getValue();
+		$sqlData['ping_service'] = $ping_service->getValue();
+		$sqlData['site_name'] = $site_name->getValue();
+		$sqlData['site_url'] = $site_url->getValue();
+		$sqlData['site_index'] = $site_index->getValue();
+		$sqlData['site_feed'] = $site_feed->getValue();
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);
@@ -252,8 +272,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$PINGSERVICECONFIGURATION->updatePingServiceConfiguration($FORM->exportValue('id'),
-				$sqlData);
+			$PINGSERVICECONFIGURATION->updatePingServiceConfiguration($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -264,7 +283,14 @@ try {
 			// re-throw exception
 			throw $e;
 		}
+
+		// controll value
+		$saveAndRemainOnPage = $save->getValue();
 		
+		// add response to session
+		if (!empty($saveAndRemainOnPage)) {
+			$_SESSION['response'] = 1;
+		}		
 		// redirect
 		$SESSION->save();
 		
@@ -272,9 +298,15 @@ try {
 		if (!$BASE->debug_enabled()) {
 			@ob_end_clean();
 		}
-		
+
 		// redirect
-		header("Location: pages_blogs_pingserviceconfigurations_select.php?page=".$FORM->exportValue('page'));
+		if (!empty($saveAndRemainOnPage)) {
+			header("Location: pages_blogs_pingserviceconfigurations_edit.php?page=".
+						$page_id->getValue()."&id=".$id->getValue());
+		} else {
+			header("Location: pages_blogs_pingserviceconfigurations_select.php?page=".
+							$page_id->getValue());
+		}
 		exit;
 	}
 } catch (Exception $e) {

@@ -127,115 +127,110 @@ try {
 
 	
 	// hidden for id
-	$FORM->addElement('hidden', 'id');
-
-	$FORM->addRule('id', gettext('Id is not expected to be empty'), 'required');
-	$FORM->addRule('id', gettext('Id is expected to be numeric'), 'numeric');
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
+	$id->addRule('required', gettext('Id is not expected to be empty'));
+	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for page
-	$FORM->addElement('hidden', 'page');
-
-	$FORM->addRule('page', gettext('Page is not expected to be empty'), 'required');
-	$FORM->addRule('page', gettext('Page is expected to be numeric'), 'numeric');
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
-	// hidden for start
-	$FORM->addElement('hidden', 'start');
-
-	$FORM->addRule('start', gettext('start is expected to be numeric'), 'numeric');
+	// hidden for start	
+	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
+	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// date element for date_start
-	$FORM->addElement('date', 'date_start', gettext('Start date'),
-		array('language' => 'en', 'format' => 'd.m.Y \u\m H:i', 'addEmptyOption' => true, 'minYear' => date('Y')-5, 'maxYear' => date('Y')+5),
-		array('id' => 'simple_date_date_start'));
-		$FORM->addRule('date_start', gettext('Please select a full start date at least'), 'required');
-		$FORM->addRule('date_start', gettext('Please select a start date with day, month and year assigned at least'), 'checkDateOnEmptiness');
+	$date_start = $FORM->addElement('date', 'date_start', null,
+		array('label' => gettext('Start date'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'd.m.Y','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
+	$date_start->addRule('required', gettext('Please enter a start date at least'));	
+	$date_start->addRule('each', gettext('Please enter a full start date at least'),
+		$date_start->createRule('nonempty')
+		);
 		
 	// date element for date_end
-	$FORM->addElement('date', 'date_end', gettext('End date'),
-		array('language' => 'en', 'format' => 'd.m.Y', 'addEmptyOption' => true,'minYear' => date('Y')-5, 'maxYear' => date('Y')+5), 		array('id' => 'simple_date_date_end'));
+	$date_end = $FORM->addElement('date', 'date_end', null,
+		array('label' => gettext('End date'),'language' => 'en', 'addEmptyOption' => true, 'format' => 'd.m.Y','minYear' => date('Y')-5, 'maxYear' => date('Y')+5)
+	);
 	
 	// textarea for location
-	$FORM->addElement('textarea', 'location', gettext('Location'),
-		array('id' => 'simple_date_location', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'));
-	$FORM->applyFilter('location', 'trim');
-	$FORM->addRule('location', gettext('Please enter a location for your date entry'), 'required');
+	$location = $FORM->addElement('textarea', 'location', 
+		array('id' => 'simple_date_location', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
+		array('label' => gettext('Location'))
+		);		
 	
 	// inputs for links
-	$FORM->addElement('text', 'link_1', gettext('Link 1'),
-		array('id' => 'simple_date_link_1', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('link_1', 'trim');
-	$FORM->addRule('link_1', gettext('Please enter a valid target URL for field Link 1'), 'regex',
-		WCOM_REGEX_URL);
-
-	$FORM->addElement('text', 'link_2', gettext('Link 2'),
-		array('id' => 'simple_date_link_2', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('link_2', 'trim');
-	$FORM->addRule('link_2', gettext('Please enter a valid target URL for field Link 2'), 'regex',
-		WCOM_REGEX_URL);
+	$link_1 = $FORM->addElement('text', 'link_1', 
+		array('id' => 'simple_date_link_1', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Link 1'))
+		);
+	$link_1->addRule('regex', gettext('Please enter a valid target URL for field Link 1'), WCOM_REGEX_URL);
+		
+	$link_2 = $FORM->addElement('text', 'link_2', 
+		array('id' => 'simple_date_link_2', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Link 2'))
+		);
+	$link_2->addRule('regex', gettext('Please enter a valid target URL for field Link 2'), WCOM_REGEX_URL);
 	
-	$FORM->addElement('text', 'link_3', gettext('Link 3'),
-		array('id' => 'simple_date_link_3', 'maxlength' => 255, 'class' => 'w300'));
-	$FORM->applyFilter('link_3', 'trim');
-	$FORM->addRule('link_3', gettext('Please enter a valid target URL for field Link 3'), 'regex',
-		WCOM_REGEX_URL);
+	$link_3 = $FORM->addElement('text', 'link_3', 
+		array('id' => 'simple_date_link_3', 'maxlength' => 255, 'class' => 'w300'),
+		array('label' => gettext('Link 3'))
+		);
+	$link_3->addRule('regex', gettext('Please enter a valid target URL for field Link 3'), WCOM_REGEX_URL);
 	
 	// checkbox for sold out
-	$FORM->addElement('checkbox', 'sold_out_1', gettext('Sold out'), null,
-		array('id' => 'simple_date_sold_out_1', 'class' => 'chbx'));
-
-	$FORM->addRule('sold_out_1', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
-	$FORM->addElement('checkbox', 'sold_out_2', gettext('Sold out'), null,
-		array('id' => 'simple_date_sold_out_2', 'class' => 'chbx'));
-
-	$FORM->addRule('sold_out_2', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-		
-	$FORM->addElement('checkbox', 'sold_out_3', gettext('Sold out'), null,
-		array('id' => 'simple_date_sold_out_3', 'class' => 'chbx'));
-
-	$FORM->addRule('sold_out_3', gettext('The field whether to apply a sold_out status accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$sold_out_1 = $FORM->addElement('checkbox', 'sold_out_1',
+		array('id' => 'simple_date_sold_out_1', 'class' => 'chbx'),
+		array('label' => gettext('Sold out'))
+		);
+	$sold_out_1->addRule('regex', gettext('The field whether to apply a sold_out status accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+	
+	$sold_out_2 = $FORM->addElement('checkbox', 'sold_out_2',
+		array('id' => 'simple_date_sold_out_2', 'class' => 'chbx'),
+		array('label' => gettext('Sold out'))
+		);
+	$sold_out_2->addRule('regex', gettext('The field whether to apply a sold_out status accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
+	
+	$sold_out_3 = $FORM->addElement('checkbox', 'sold_out_3',
+		array('id' => 'simple_date_sold_out_3', 'class' => 'chbx'),
+		array('label' => gettext('Sold out'))
+		);
+	$sold_out_3->addRule('regex', gettext('The field whether to apply a sold_out status accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// select for text_converter
-	$FORM->addElement('select', 'text_converter', gettext('Text converter'),
-		$TEXTCONVERTER->getTextConverterListForForm(), array('id' => 'simple_date_text_converter'));
-
-	$FORM->addRule('text_converter', gettext('Chosen text converter is out of range'),
-		'in_array_keys', $TEXTCONVERTER->getTextConverterListForForm());
-	
+	$text_converter = $FORM->addElement('select', 'text_converter',
+	 	array('id' => 'simple_date_text_converter'),
+		array('label' => gettext('Text converter'), 'options' => $TEXTCONVERTER->getTextConverterListForForm())
+		);
+		
 	// checkbox for apply_macros
-	$FORM->addElement('checkbox', 'apply_macros', gettext('Apply text macros'), null,
-		array('id' => 'simple_date_apply_macros', 'class' => 'chbx'));
-
-	$FORM->addRule('apply_macros', gettext('The field whether to apply text macros accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
+	$apply_macros = $FORM->addElement('checkbox', 'apply_macros',
+		array('id' => 'simple_date_apply_macros', 'class' => 'chbx'),
+		array('label' => gettext('Apply text macros'))
+		);
+	$apply_macros->addRule('regex', gettext('The field whether to apply text macros accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 	
 	// checkbox for draft
-	$FORM->addElement('checkbox', 'draft', gettext('Draft'), null,
-		array('id' => 'simple_date_draft', 'class' => 'chbx'));
+	$draft = $FORM->addElement('checkbox', 'draft',
+		array('id' => 'simple_date_draft', 'class' => 'chbx'),
+		array('label' => gettext('Draft'))
+		);
+	$draft->addRule('regex', gettext('The field whether the posting is a draft accepts only 0 or 1'), WCOM_REGEX_ZERO_OR_ONE);
 
-	$FORM->addRule('draft', gettext('The field whether the date is a draft accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
-	
-	// checkbox for ping
-	$FORM->addElement('checkbox', 'ping', gettext('Ping'), null,
-		array('id' => 'simple_date_ping', 'class' => 'chbx'));
-
-	$FORM->addRule('ping', gettext('The field whether a ping should be issued accepts only 0 or 1'),
-		'regex', WCOM_REGEX_ZERO_OR_ONE);
 	
 	// submit button (save and stay)
-	$FORM->addElement('submit', 'save', gettext('Save edit'),
-		array('class' => 'submit200'));
+	$save = $FORM->addElement('submit', 'save', 
+		array('class' => 'submit200', 'value' => gettext('Save edit'))
+		);
 		
 	// submit button (save and go back)
-	$FORM->addElement('submit', 'submit', gettext('Save edit and go back'),
-		array('class' => 'submit200go'));
+	$submit = $FORM->addElement('submit', 'submit', 
+		array('class' => 'submit200go', 'value' => gettext('Save edit and go back'))
+		);
 	
 	// set defaults
-	$FORM->setDefaults(array(
+	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'page' => Base_Cnc::ifsetor($page['id'], null),
 		'id' => Base_Cnc::ifsetor($simple_date['id'], null),
 		'start' => Base_Cnc::filterRequest($_REQUEST['start'], WCOM_REGEX_NUMERIC),
@@ -250,14 +245,17 @@ try {
 		'sold_out_3' => Base_Cnc::ifsetor($simple_date['sold_out_3'], null),
 		'text_converter' => Base_Cnc::ifsetor($simple_date['text_converter'], null),
 		'apply_macros' => Base_Cnc::ifsetor($simple_date['apply_macros'], null),
-		'draft' => Base_Cnc::ifsetor($simple_date['draft'], null),
-		'ping' => 0
-	));
+		'draft' => Base_Cnc::ifsetor($simple_date['draft'], null)
+	)));
 	
 	// validate it
 	if (!$FORM->validate()) {
 		// render it
 		$renderer = $BASE->utility->loadQuickFormSmartyRenderer();
+		
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$BASE->utility->smarty->fetch(dirname(__FILE__).'/../quickform.tpl');
 	
 		// assign the form to smarty
 		$BASE->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
@@ -310,44 +308,43 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['page'] = $FORM->exportValue('page');
+		$sqlData['page'] = $page_id->getValue();
 		$sqlData['user'] = WCOM_CURRENT_USER;
-		$sqlData['date_start'] = $HELPER->datetimeFromQuickFormDateWithNull($FORM->exportValue('date_start'));
-		$sqlData['date_end'] = $HELPER->datetimeFromQuickFormDateWithNull($FORM->exportValue('date_end'));
-		$sqlData['location_raw'] = $FORM->exportValue('location');
-		$sqlData['location'] = $FORM->exportValue('location');
-		$sqlData['link_1'] = $FORM->exportValue('link_1');
-		$sqlData['link_2'] = $FORM->exportValue('link_2');
-		$sqlData['link_3'] = $FORM->exportValue('link_3');
-		$sqlData['sold_out_1'] = (string)intval($FORM->exportValue('sold_out_1'));
-		$sqlData['sold_out_2'] = (string)intval($FORM->exportValue('sold_out_2'));
-		$sqlData['sold_out_3'] = (string)intval($FORM->exportValue('sold_out_3'));
-		$sqlData['text_converter'] = ($FORM->exportValue('text_converter') > 0) ? 
-			$FORM->exportValue('text_converter') : null;
-		$sqlData['apply_macros'] = (string)intval($FORM->exportValue('apply_macros'));
-		$sqlData['draft'] = (string)intval($FORM->exportValue('draft'));
-		$sqlData['ping'] = (string)intval($FORM->exportValue('ping'));
+		$sqlData['date_start'] = $HELPER->dateFromQuickFormDate($date_start->getValue());
+		$sqlData['date_end'] = $HELPER->dateFromQuickFormDate($date_end->getValue());
+		$sqlData['location_raw'] = $location->getValue();
+		$sqlData['location'] = $location->getValue();
+		$sqlData['link_1'] = $link_1->getValue();
+		$sqlData['link_2'] = $link_2->getValue();
+		$sqlData['link_3'] = $link_3->getValue();
+		$sqlData['sold_out_1'] = (string)intval($sold_out_1->getValue());
+		$sqlData['sold_out_2'] = (string)intval($sold_out_2->getValue());
+		$sqlData['sold_out_3'] = (string)intval($sold_out_3->getValue());
+		$sqlData['text_converter'] = ($text_converter->getValue() > 0) ? 
+			$text_converter->getValue() : null;
+		$sqlData['apply_macros'] = (string)intval($apply_macros->getValue());
+		$sqlData['draft'] = (string)intval($draft->getValue());	
 		
 		// apply text macros and text converter if required
-		if ($FORM->exportValue('text_converter') > 0 || $FORM->exportValue('apply_macros') > 0) {
+		if ($text_converter->getValue() > 0 || $apply_macros->getValue() > 0) {
 			// extract summary/content
-			$location = $FORM->exportValue('location');
+			$location = $location->getValue();
 
 			// apply startup and pre text converter text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$location = $TEXTMACRO->applyTextMacros($location, 'pre');
 			}
 
 			// apply text converter
-			if ($FORM->exportValue('text_converter') > 0) {
+			if ($text_converter->getValue() > 0) {
 				$location = $TEXTCONVERTER->applyTextConverter(
-					$FORM->exportValue('text_converter'),
+					$text_converter->getValue(),
 					$location
 				);
 			}
 
 			// apply post text converter and shutdown text macros 
-			if ($FORM->exportValue('apply_macros') > 0) {
+			if ($apply_macros->getValue() > 0) {
 				$location = $TEXTMACRO->applyTextMacros($location, 'post');
 			}
 
@@ -364,7 +361,7 @@ try {
 			$BASE->db->begin();
 			
 			// execute operation
-			$SIMPLEDATE->updateSimpleDate($FORM->exportValue('id'), $sqlData);
+			$SIMPLEDATE->updateSimpleDate($id->getValue(), $sqlData);
 			
 			// commit
 			$BASE->db->commit();
@@ -375,29 +372,9 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-				
-		// issue pings if required
-		if ($FORM->exportValue('ping') == 1) {	
-			
-			// load ping service configuration class
-			$PINGSERVICECONFIGURATION = load('application:pingserviceconfiguration');
-			
-			// load ping service class
-			$PINGSERVICE = load('application:pingservice');
-			
-			// get configured ping service configurations
-			$configurations = $PINGSERVICECONFIGURATION->selectPingServiceConfigurations(array('page' => $page['id']));
-
-			// issue pings if configurations exits
-			if (!empty($configurations)) {
-				foreach ($configurations as $_configuration) {
-					$PINGSERVICE->pingService($_configuration['id']);
-				}
-			}
-		}
 
 		// controll value
-		$saveAndRemainOnPage = $FORM->exportValue('save');
+		$saveAndRemainOnPage = $save->getValue();
 		
 		// add response to session
 		if (!empty($saveAndRemainOnPage)) {
@@ -413,16 +390,16 @@ try {
 		}
 
 		// save request start range
-		$start = $FORM->exportValue('start');
+		$start = $start->getValue();
 		$start = (!empty($start)) ? $start : 0;
 		
 		// redirect
 		if (!empty($saveAndRemainOnPage)) {
 			header("Location: pages_simple_dates_edit.php?page=".
-						$FORM->exportValue('page')."&id=".$FORM->exportValue('id')."&start=".$start);
+						$page_id->getValue()."&id=".$id->getValue()."&start=".$start);
 		} else {
 			header("Location: pages_simple_dates_select.php?page=".
-						$FORM->exportValue('page')."&start=".$start);
+						$page_id->getValue()."&start=".$start);
 		}
 		exit;
 	}

@@ -124,9 +124,9 @@ try {
 	$FORM->addRecursiveFilter('trim');
 	
 	// hidden for page
-	$page = $FORM->addElement('hidden', 'page', array('id' => 'page'));
-	$page->addRule('required', gettext('Page is not expected to be empty'));
-	$page->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
+	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
+	$page_id->addRule('required', gettext('Page is not expected to be empty'));
+	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// select for ping service	
 	$ping_service = $FORM->addElement('select', 'ping_service',
@@ -143,12 +143,12 @@ try {
 	$site_name->addRule('required', gettext('Please enter a site name'));
 	
 	// textfield for site_url
-	$site_name = $FORM->addElement('text', 'site_url', 
+	$site_url = $FORM->addElement('text', 'site_url', 
 		array('id' => 'ping_service_configuration_site_url', 'maxlength' => 255, 'class' => 'w300 validate'),
 		array('label' => gettext('Weblog URL'))
 		);
-	$site_name->addRule('required', gettext('Please enter a site URL'));
-	$site_name->addRule('regex', gettext('Please enter a valid site URL'), WCOM_REGEX_URL);
+	$site_url->addRule('required', gettext('Please enter a site URL'));
+	$site_url->addRule('regex', gettext('Please enter a valid site URL'), WCOM_REGEX_URL);
 	
 	// textfield for site_index
 	$site_index = $FORM->addElement('text', 'site_index', 
@@ -236,7 +236,7 @@ try {
 		
 		// prepare sql data
 		$sqlData = array();
-		$sqlData['page'] = $page->getValue();
+		$sqlData['page'] = $page_id->getValue();
 		$sqlData['ping_service'] = $ping_service->getValue();
 		$sqlData['site_name'] = $site_name->getValue();
 		$sqlData['site_url'] = $site_url->getValue();
@@ -276,7 +276,7 @@ try {
 		}
 		
 		// redirect
-		header("Location: pages_blogs_pingserviceconfigurations_add.php?page=".$page->getValue());
+		header("Location: pages_blogs_pingserviceconfigurations_add.php?page=".$page_id->getValue());
 		exit;
 	}
 } catch (Exception $e) {
