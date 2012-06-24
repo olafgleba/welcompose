@@ -462,6 +462,25 @@
 			</groups>
 		</right>
 		<right>
+			<name>CONTENT_SIMPLEDATE_USE</name>
+			<description>Allows usage of simple dates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+				<name>WCOM_ANONYMOUS</name>
+			</groups>
+		</right>
+		<right>
+			<name>CONTENT_SIMPLEDATE_MANAGE</name>
+			<description>Allows management of simple dates.</description>
+			<editable>0</editable>
+			<groups>
+				<name>WCOM_ADMIN</name>
+				<name>WCOM_REGULAR</name>
+			</groups>
+		</right>
+		<right>
 			<name>CONTENT_SIMPLEFORM_USE</name>
 			<description>Allows usage of simple forms.</description>
 			<editable>0</editable>
