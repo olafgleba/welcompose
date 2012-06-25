@@ -406,7 +406,7 @@ try {
 	// textarea for optional content 1
 	$optional_content_1 = $FORM->addElement('textarea', 'optional_content_1', 
 		array('id' => 'blog_posting_optional_content_1', 'cols' => 3, 'rows' => '2', 'class' => 'w540h50'),
-		array('label' => gettext('Content 1'))
+		array('label' => gettext('Optional Content 1'))
 		);
 		
 	// textarea for optional content 2
