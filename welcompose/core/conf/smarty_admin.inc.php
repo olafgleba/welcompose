@@ -49,6 +49,7 @@ $smarty->registerPlugin('compiler', 'i18n', 'smarty_compiler_i18n');
 $smarty->debugging = false;
 $smarty->auto_literal = false;
 $smarty->muteExpectedErrors();
+$smarty->force_compile = false;
 
 $smarty->setTemplateDir(SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'templates');
 $smarty->setCompileDir(SMARTY_ADMIN_TPL_DIR.DIRECTORY_SEPARATOR.'compiled');

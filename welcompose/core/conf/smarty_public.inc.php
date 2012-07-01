@@ -71,7 +71,6 @@ $smarty->registerResource("wcomgtpl", new Smarty_Resource_Wcomgtpl());
 
 // configure smarty
 $smarty->muteExpectedErrors();
-//$smarty->compile_check = false;
 
 $smarty->setTemplateDir(SMARTY_TPL_DIR.'/templates');
 $smarty->setCompileDir(SMARTY_TPL_DIR.'/compiled');

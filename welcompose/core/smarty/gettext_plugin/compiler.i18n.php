@@ -48,7 +48,7 @@ function smarty_compiler_i18n ($tag_attrs, $smarty)
 	}
 
 	$template_code = "<?php ";	
-	$template_code .= "print gettext($map);";
+	$template_code .= "echo gettext($map);";
 	$template_code .= "?>";
 	
 	return $template_code;	
