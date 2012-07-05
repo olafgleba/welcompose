@@ -318,6 +318,97 @@ public function selectPageTypes ($params = array())
 }
 
 /**
+ * TEMPORARY METHOD, ONLY USED FOR HIDING WHILE ADDING A NEW PAGE
+ * BECAUSE WE DO NOT WANT TO STRUGGLE WITH THE ORIGINAL METHOD
+ *
+ * Release 0.9.6 : Hide deprecated SimpleDate Page Type
+ *
+ * Method to select one or more page types. Takes key=>value array
+ * with select params as first argument. Returns array.
+ * 
+ * <b>List of supported params:</b>
+ * 
+ * <ul>
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * <li>exclude, string, optional: internal name of page type to exclude from listing</li>
+ * </ul>
+ * 
+ * @throws Content_PageTypeException
+ * @param array Select params
+ * @return array
+ */
+public function selectPageTypesOnPageAdd ($params = array())
+{
+	// access check
+	if (!wcom_check_access('Content', 'PageType', 'Use')) {
+		throw new Content_PageTypeException("You are not allowed to perform this action");
+	}
+	
+	// define some vars
+	$start = null;
+	$limit = null;
+	$exclude = null;
+	$bind_params = array();
+	
+	// input check
+	if (!is_array($params)) {
+		throw new Content_PageTypeException('Input for parameter params is not an array');	
+	}
+	
+	// import params
+	foreach ($params as $_key => $_value) {
+		switch ((string)$_key) {
+			case 'start':
+			case 'limit':
+					$$_key = (int)$_value;
+				break;
+			case 'exclude':
+					$$_key = (string)$_value;
+				break;
+			default:
+				throw new Content_PageTypeException("Unknown parameter $_key");
+		}
+	}
+	
+	// prepare query
+	$sql = "
+		SELECT 
+			`content_page_types`.`id` AS `id`,
+			`content_page_types`.`project` AS `project`,
+			`content_page_types`.`name` AS `name`,
+			`content_page_types`.`internal_name` AS `internal_name`,
+			`content_page_types`.`editable` AS `editable`
+		FROM
+			".WCOM_DB_CONTENT_PAGE_TYPES." AS `content_page_types`
+		WHERE 
+			`content_page_types`.`project` = :project
+	";
+	
+	// prepare bind params
+	$bind_params = array(
+		'project' => WCOM_CURRENT_PROJECT
+	);
+
+	if (!empty($exclude) && is_scalar($exclude)) {
+		$sql .= " AND `content_page_types`.`name` != '$exclude' ";
+	}
+		
+	// add sorting
+	$sql .= " ORDER BY `content_page_types`.`name` ";
+	
+	// add limits
+	if (empty($start) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u", $limit);
+	}
+	if (!empty($start) && is_numeric($start) && !empty($limit) && is_numeric($limit)) {
+		$sql .= sprintf(" LIMIT %u, %u", $start, $limit);
+	}
+
+	return $this->base->db->select($sql, 'multi', $bind_params);
+}
+
+/**
  * Tests given page type name for uniqueness. Takes the page type
  * name as first argument and an optional page type id as second
  * argument. If the page type id is given, this page type won't be

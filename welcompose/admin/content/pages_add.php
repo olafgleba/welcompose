@@ -128,7 +128,7 @@ try {
 	
 	// prepare page types
 	$types = array();
-	foreach ($PAGETYPE->selectPageTypes() as $_type) {
+	foreach ($PAGETYPE->selectPageTypesOnPageAdd(array('exclude' => 'WCOM_SIMPLE_DATE')) as $_type) {
 		$types[(int)$_type['id']] = htmlspecialchars($_type['name']);
 	}
 	
