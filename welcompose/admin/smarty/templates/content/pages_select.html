@@ -120,9 +120,9 @@ var toggleElem = 1;
 {if count($page_arrays.$navigation_id) > 0}
 {foreach $page_arrays.$navigation_id as $_page}
 <tr>
-<td class="page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}"><a href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n 'Edit page contents'}">{$_page.name}</a> {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n 'Index page'}" title="{i18n 'Index page'}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n 'Protected page'}" title="{i18n 'Protected page'}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n 'Excluded from navigation'}" title="{i18n 'Excluded from navigation'}" />{/if}</td>
-<td><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n 'Down'}"></a></td>
-<td><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n 'Up'}"></a></td>
+<td class="page page{if $_page.level > 1 && $_page.level < 6}{$_page.level}{elseif $_page.level >= 6}6{/if}{if $_page.draft > 0} draft{/if}" id="page{$_page.id|escape:"url"}"><a href="pages_content_edit.php?id={$_page.id|escape:"url"}" title="{i18n 'Edit page contents'}">{$_page.name}</a> {if $_page.index_page}<img src="../static/img/icons/index.gif" alt="{i18n 'Index page'}" title="{i18n 'Index page'}" />{/if} {if $_page.protect}<img src="../static/img/icons/lock.gif" alt="{i18n 'Protected page'}" title="{i18n 'Protected page'}" />{/if}{if $_page.exclude > 0}<img src="../static/img/icons/exclude.gif" alt="{i18n 'Excluded from navigation'}" title="{i18n 'Excluded from navigation'}" />{/if}</td>
+<td class="page"><a class="down" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=down#{$_page.id|escape:"url"}" title="{i18n 'Down'}"></a></td>
+<td class="page"><a class="up" href="pages_move.php?id={$_page.id|escape:"url"}&amp;direction=up#{$_page.id|escape:"url"}" title="{i18n 'Up'}"></a></td>
 <td>
 {assign var="page_id" value=$_page.id}
 {if count($box_arrays.$page_id) > 0}
