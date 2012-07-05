@@ -24,13 +24,13 @@
 /**
  * debug output strings (used with debug state 2)
  */
-var e_msg_str_prefix = '=%i18n An javascript error occured: %=';
-var e_msg_str_suffix = '=%i18n If the error remains, please get in touch with our support.%=';
+var e_msg_str_prefix = "%=i18n 'An javascript error occured:' =%";
+var e_msg_str_suffix = "%=i18n 'If the error remains, please get in touch with our support.'=%";
 
 /**
  * used in func getHelp(), removeHelp()
  */
-var hideHelp = '<%i18n Hide help on this topic%=';
-var showHelp = '<%i18n Show help on this topic%=';
+var hideHelp = "%=i18n 'Hide help on this topic'=%";
+var showHelp = "%=i18n 'Show help on this topic'=%";
 
-var alertOnMissingHelpFiles = '=%i18n There is currently no help available.%=';
+var alertOnMissingHelpFiles = "%=i18n 'There is currently no help available.'=%";
