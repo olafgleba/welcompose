@@ -4552,6 +4552,9 @@ msgid ""
 "some more unique inputs or conditional variables to handle callbacks. The "
 "input is not affected by the textconverter"
 msgstr ""
+"Eingabefelder mit frei wählbaren Inhalt. Dies kann sinnvoll sein, wenn "
+"zusätzliche Angaben benötigt werden um in den Seitenvorlagen ausgelesen "
+"zu werden. Der Inhalt ist unabhängig vom gewählten Textkonverter." 
 
 #: blog_posting_blog_posting_ping.html:1 simple_date_simple_date_ping.html:1
 msgid ""
