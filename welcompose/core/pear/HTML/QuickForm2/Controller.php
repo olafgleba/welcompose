@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Controller.php 323321 2012-02-18 10:48:48Z avb $
+ * @version  SVN: $Id: Controller.php 325701 2012-05-15 15:00:09Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -64,7 +64,7 @@ require_once 'HTML/QuickForm2/DataSource/Session.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Controller implements IteratorAggregate
@@ -468,42 +468,11 @@ class HTML_QuickForm2_Controller implements IteratorAggregate
     {
         $values = array();
         foreach (array_keys($this->pages) as $id) {
-            $pageValues = $this->getSessionContainer()->getValues($id);
-            // skip elements representing actions
-            foreach ($pageValues as $key => $value) {
-                if (0 !== strpos($key, '_qf')) {
-                    if (isset($values[$key]) && is_array($value)) {
-                        $values[$key] = self::arrayMerge($values[$key], $value);
-                    } else {
-                        $values[$key] = $value;
-                    }
-                }
-            }
+            $values = HTML_QuickForm2_Container::arrayMerge(
+                $values, $this->getSessionContainer()->getValues($id)
+            );
         }
         return $values;
-    }
-
-   /**
-    * Merges two arrays
-    *
-    * Merges two arrays like the PHP function array_merge_recursive does,
-    * the difference being that existing integer keys will not be renumbered.
-    *
-    * @param array $a
-    * @param array $b
-    *
-    * @return   array   resulting array
-    */
-    protected static function arrayMerge($a, $b)
-    {
-        foreach ($b as $k => $v) {
-            if (!is_array($v) || isset($a[$k]) && !is_array($a[$k])) {
-                $a[$k] = $v;
-            } else {
-                $a[$k] = self::arrayMerge(isset($a[$k])? $a[$k]: array(), $v);
-            }
-        }
-        return $a;
     }
 
    /**

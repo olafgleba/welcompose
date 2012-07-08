@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Group.php 325158 2012-04-13 21:04:26Z avb $
+ * @version  SVN: $Id: Group.php 326287 2012-06-21 18:44:44Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -56,7 +56,7 @@ require_once 'HTML/QuickForm2/Container.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Container_Group extends HTML_QuickForm2_Container
@@ -214,30 +214,24 @@ class HTML_QuickForm2_Container_Group extends HTML_QuickForm2_Container
     protected function renameChild(HTML_QuickForm2_Node $element)
     {
         $tokens = explode('[', str_replace(']', '', $element->getName()));
-        if ($this === $element->getContainer()) {
-            // Child has already been renamed by its group before
-            if (!is_null($this->previousName) && $this->previousName !== '') {
-                $gtokens = explode('[', str_replace(']', '', $this->previousName));
-                $pos = array_search(end($gtokens), $tokens);
-                if (!is_null($pos)) {
-                    $tokens = array_slice($tokens, $pos+1);
-                }
+        // Child has already been renamed by its group before
+        if ($this === $element->getContainer() && strlen($this->previousName)) {
+            $gtokens = explode('[', str_replace(']', '', $this->previousName));
+            if ($gtokens === array_slice($tokens, 0, count($gtokens))) {
+                array_splice($tokens, 0, count($gtokens));
             }
         }
-        if (is_null($this->name) || $this->name === '') {
-            if (is_null($this->previousName) || $this->previousName === '') {
-                return $element;
-            } else {
-                $elname = $tokens[0];
-                unset($tokens[0]);
-                foreach ($tokens as $v) {
-                    $elname .= '['.$v.']';
-                }
+
+        if (strlen($this->name)) {
+            $element->setName($this->name . '[' . implode('][', $tokens) . ']');
+        } elseif (strlen($this->previousName)) {
+            $elname = array_shift($tokens);
+            foreach ($tokens as $token) {
+                $elname .= '[' . $token . ']';
             }
-        } else {
-            $elname = $this->getName().'['.implode('][', $tokens).']';
+            $element->setName($elname);
         }
-        $element->setName($elname);
+
         return $element;
     }
 

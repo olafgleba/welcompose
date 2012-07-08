@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Container.php 325159 2012-04-13 21:42:23Z avb $
+ * @version  SVN: $Id: Container.php 325701 2012-05-15 15:00:09Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -56,7 +56,7 @@ require_once 'HTML/QuickForm2/Node.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  *
  * @method HTML_QuickForm2_Element_Button        addButton(string $name, $attributes = null, array $data = array())
@@ -213,7 +213,7 @@ abstract class HTML_QuickForm2_Container extends HTML_QuickForm2_Node
     *
     * @return   array   resulting array
     */
-    protected static function arrayMerge($a, $b)
+    public static function arrayMerge($a, $b)
     {
         foreach ($b as $k => $v) {
             if (!is_array($v) || isset($a[$k]) && !is_array($a[$k])) {
@@ -556,7 +556,7 @@ abstract class HTML_QuickForm2_Container extends HTML_QuickForm2_Node
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_ContainerIterator extends RecursiveArrayIterator implements RecursiveIterator

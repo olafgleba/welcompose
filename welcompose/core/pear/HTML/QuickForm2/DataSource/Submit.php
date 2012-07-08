@@ -60,7 +60,7 @@ require_once 'HTML/QuickForm2/DataSource.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 interface HTML_QuickForm2_DataSource_Submit extends HTML_QuickForm2_DataSource

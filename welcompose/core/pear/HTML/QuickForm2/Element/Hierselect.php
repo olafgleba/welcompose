@@ -73,7 +73,7 @@ require_once 'HTML/QuickForm2/Element/Script.php';
  * @author   Bertrand Mansion <bmansion@mamasam.com>
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Element_Hierselect extends HTML_QuickForm2_Container_Group

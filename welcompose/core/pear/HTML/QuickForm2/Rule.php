@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Rule.php 323321 2012-02-18 10:48:48Z avb $
+ * @version  SVN: $Id: Rule.php 325773 2012-05-22 14:45:59Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -54,7 +54,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 abstract class HTML_QuickForm2_Rule
@@ -180,9 +180,19 @@ abstract class HTML_QuickForm2_Rule
     * @param string $message Error message to display if validation fails
     *
     * @return   HTML_QuickForm2_Rule
+    * @throws HTML_QuickForm2_InvalidArgumentException if trying to validate
+    *       HTML_QuickForm2_Element_InputHidden with a non-empty error message
+    *       (e.g. not in Rule chain)
     */
     public function setMessage($message)
     {
+        if ($this->owner instanceof HTML_QuickForm2_Element_InputHidden
+            && strlen($message)
+        ) {
+            throw new HTML_QuickForm2_InvalidArgumentException(
+                "Hidden elements cannot have validation errors"
+            );
+        }
         $this->message = (string)$message;
         return $this;
     }
@@ -203,7 +213,9 @@ abstract class HTML_QuickForm2_Rule
     * @param HTML_QuickForm2_Node $owner Element to validate
     *
     * @throws   HTML_QuickForm2_InvalidArgumentException    if trying to set
-    *       an instance of HTML_QuickForm2_Element_Static as rule owner
+    *       an instance of HTML_QuickForm2_Element_Static as rule owner; if
+    *       trying to validate HTML_QuickForm2_Element_InputHidden with a
+    *       non-empty error message (e.g. not in Rule chain)
     */
     public function setOwner(HTML_QuickForm2_Node $owner)
     {
@@ -213,6 +225,13 @@ abstract class HTML_QuickForm2_Rule
         if ($owner instanceof HTML_QuickForm2_Element_Static) {
             throw new HTML_QuickForm2_InvalidArgumentException(
                 get_class($this) . ' cannot validate Static elements'
+            );
+        }
+        if ($owner instanceof HTML_QuickForm2_Element_InputHidden
+            && strlen($this->getMessage())
+        ) {
+            throw new HTML_QuickForm2_InvalidArgumentException(
+                "Hidden elements cannot have validation errors"
             );
         }
         if (null !== $this->owner) {
@@ -282,6 +301,7 @@ abstract class HTML_QuickForm2_Rule
         $globalValid = false;
         $localValid  = $this->validateOwner();
         foreach ($this->chainedRules as $item) {
+            /* @var $multiplier HTML_QuickForm2_Rule */
             foreach ($item as $multiplier) {
                 if (!($localValid = $localValid && $multiplier->validate())) {
                     break;
@@ -354,6 +374,7 @@ abstract class HTML_QuickForm2_Rule
     {
         $triggers = array_flip($this->getOwnJavascriptTriggers());
         foreach ($this->chainedRules as $item) {
+            /* @var $multiplier HTML_QuickForm2_Rule */
             foreach ($item as $multiplier) {
                 foreach ($multiplier->getJavascriptTriggers() as $trigger) {
                     $triggers[$trigger] = true;
@@ -396,6 +417,7 @@ abstract class HTML_QuickForm2_Rule
             $chained = array();
             foreach ($this->chainedRules as $item) {
                 $multipliers = array();
+                /* @var $multiplier HTML_QuickForm2_Rule */
                 foreach ($item as $multiplier) {
                     $multipliers[] = $multiplier->getJavascript(false);
                 }

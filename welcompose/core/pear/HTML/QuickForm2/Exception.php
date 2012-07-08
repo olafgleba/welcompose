@@ -61,7 +61,7 @@ require_once 'PEAR/Exception.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Exception extends PEAR_Exception
@@ -87,7 +87,7 @@ class HTML_QuickForm2_Exception extends PEAR_Exception
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_NotFoundException extends HTML_QuickForm2_Exception
@@ -112,7 +112,7 @@ class HTML_QuickForm2_NotFoundException extends HTML_QuickForm2_Exception
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
-s * @version  Release: 2.0.0beta2
+s * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_InvalidArgumentException extends HTML_QuickForm2_Exception

@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: QuickForm2.php 323365 2012-02-19 19:25:49Z avb $
+ * @version  SVN: $Id: QuickForm2.php 325701 2012-05-15 15:00:09Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -61,7 +61,7 @@ require_once 'HTML/QuickForm2/DataSource/SuperGlobal.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2 extends HTML_QuickForm2_Container
@@ -114,6 +114,7 @@ class HTML_QuickForm2 extends HTML_QuickForm2_Container
                 'hidden', '_qf__' . $id, array('id' => 'qf:' . $id)
             ));
         }
+        $this->addFilter(array($this, 'skipInternalFields'));
     }
 
     protected function onAttributeChange($name, $value = null)
@@ -233,6 +234,24 @@ class HTML_QuickForm2 extends HTML_QuickForm2_Container
         $this->renderClientRules($renderer->getJavascriptBuilder());
         $renderer->finishForm($this);
         return $renderer;
+    }
+
+    /**
+     * Filter for form's getValue() removing internal fields' values from the array
+     *
+     * @param array $value
+     *
+     * @return array
+     * @link http://pear.php.net/bugs/bug.php?id=19403
+     */
+    protected function skipInternalFields($value)
+    {
+        foreach (array_keys($value) as $key) {
+            if ('_qf' === substr($key, 0, 3)) {
+                unset($value[$key]);
+            }
+        }
+        return $value;
     }
 }
 ?>

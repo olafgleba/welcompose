@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  SVN: $Id: Repeat.php 325176 2012-04-14 10:44:45Z avb $
+ * @version  SVN: $Id: Repeat.php 325694 2012-05-15 07:46:13Z avb $
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 
@@ -62,7 +62,7 @@ require_once 'HTML/QuickForm2/JavascriptBuilder.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Container_Repeat_JavascriptBuilder
@@ -146,7 +146,7 @@ class HTML_QuickForm2_Container_Repeat_JavascriptBuilder
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  */
 class HTML_QuickForm2_Container_Repeat extends HTML_QuickForm2_Container
@@ -424,6 +424,7 @@ class HTML_QuickForm2_Container_Repeat extends HTML_QuickForm2_Container
      * deduce indexes taken by repeat items.
      *
      * @see setIndexField()
+     * @throws HTML_QuickForm2_Exception
      */
     protected function updateValue()
     {
@@ -626,7 +627,7 @@ class HTML_QuickForm2_Container_Repeat extends HTML_QuickForm2_Container
             /* @var HTML_QuickForm2_Node $child */
             foreach ($this->getRecursiveIterator() as $child) {
                 if (strlen($error = $child->getError())) {
-                    $this->childErrors[$child->getId()] = $error;
+                    $this->childErrors[spl_object_hash($child)][$index] = $error;
                 }
             }
         }
@@ -660,8 +661,8 @@ class HTML_QuickForm2_Container_Repeat extends HTML_QuickForm2_Container
         );
         list ($rules, $scripts) = $evalBuilder->getFormJavascriptAsStrings();
 
-        return "new qf.Repeat(document.getElementById({$myId}), {$protoId}, {$triggers},\n"
-               . $rules . ",\n" . $scripts . "\n);";
+        return "new qf.elements.Repeat(document.getElementById({$myId}), {$protoId}, "
+               . "{$triggers},\n{$rules},\n{$scripts}\n);";
     }
 
     /**
@@ -699,8 +700,10 @@ class HTML_QuickForm2_Container_Repeat extends HTML_QuickForm2_Container
             $this->replaceIndexTemplates($index, $backup);
             /* @var HTML_QuickForm2_Node $child */
             foreach ($this->getRecursiveIterator() as $child) {
-                if (isset($this->childErrors[$id = $child->getId()])) {
-                    $child->setError($this->childErrors[$id]);
+                if (isset($this->childErrors[$hash = spl_object_hash($child)])
+                    && isset($this->childErrors[$hash][$index])
+                ) {
+                    $child->setError($this->childErrors[$hash][$index]);
                 }
             }
             $this->getPrototype()->render($renderer);

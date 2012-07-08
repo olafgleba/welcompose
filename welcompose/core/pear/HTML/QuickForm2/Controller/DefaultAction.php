@@ -60,7 +60,7 @@ require_once 'HTML/QuickForm2/Element/InputImage.php';
  * @author   Alexey Borzov <avb@php.net>
  * @author   Bertrand Mansion <golgote@mamasam.com>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
- * @version  Release: 2.0.0beta2
+ * @version  Release: 2.0.0
  * @link     http://pear.php.net/package/HTML_QuickForm2
  * @link     http://www.alanflavell.org.uk/www/formquestion.html
  * @link     http://muffinresearch.co.uk/archives/2005/12/08/fun-with-multiple-submit-buttons/
