@@ -136,15 +136,12 @@ try {
 
 	// hidden for set
 	$set_request = $FORM->addElement('hidden', 'set_request', array('id' => 'set_request'));
-	$set_request->addRule('regex', gettext('set_request is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for type
 	$type_request = $FORM->addElement('hidden', 'type_request', array('id' => 'type_request'));
-	$type_request->addRule('regex', gettext('type_request is expected to be numeric'), WCOM_REGEX_NUMERIC);
 		
 	// hidden for start
 	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
-
 	
 	// textfield for type
 	$type = $FORM->addElement('select', 'type',
