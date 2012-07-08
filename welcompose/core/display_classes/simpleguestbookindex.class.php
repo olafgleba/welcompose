@@ -216,8 +216,6 @@ public function render ()
 	
 		// hidden for book
 		$book = $FORM->addElement('hidden', 'book', array('id' => 'book'));
-		$book->addRule('required', gettext('book is not expected to be empty'));
-		$book->addRule('regex', gettext('book is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 		// textfield for name
 		$name = $FORM->addElement('text', 'name', 
