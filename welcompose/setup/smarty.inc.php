@@ -39,7 +39,6 @@ if (!defined('SMARTY_TPL_DIR')) {
 }
 
 // configure i18n
-require(SMARTY_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'Smarty_GettextHelper.class.php');
 require(SMARTY_DIR.DIRECTORY_SEPARATOR.'gettext_plugin'.DIRECTORY_SEPARATOR.'compiler.i18n.php');
 $smarty->registerPlugin('compiler', 'i18n', 'smarty_compiler_i18n');
 
