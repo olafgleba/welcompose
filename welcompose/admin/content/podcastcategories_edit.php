@@ -106,9 +106,7 @@ try {
 	$FORM->addRecursiveFilter('trim');
 
 	// hidden id
-	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));	
 		
 	// textfield for category
 	$category = $FORM->addElement('text', 'category', 

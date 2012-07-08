@@ -126,13 +126,9 @@ try {
 	
 	// hidden for page
 	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
-	$page_id->addRule('required', gettext('Page is not expected to be empty'));
-	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 		
 	// textfield for name		
 	$name = $FORM->addElement('text', 'name', 

@@ -14,7 +14,7 @@
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
  *
-
+ *
  * @copyright 2008 creatics media.systems, Olaf Gleba
  * @author Andreas Ahlenstorf
  * @package Welcompose
@@ -133,29 +133,21 @@ try {
 
 	// hidden for id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
-	
+
 	// hidden for page
 	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
-	$page_id->addRule('required', gettext('Page is not expected to be empty'));
-	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for start	
 	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
-	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for timeframe
-	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));
-	$timeframe->addRule('regex', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
+	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));	
 	
 	// hidden for draft	
 	$draft_filter = $FORM->addElement('hidden', 'draft_filter', array('id' => 'draft_filter'));
-	$draft_filter->addRule('regex', gettext('draft is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for limit
 	$limit = $FORM->addElement('hidden', 'limit', array('id' => 'limit'));
-	$limit->addRule('regex', gettext('limit is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for search_name
 	$search_name = $FORM->addElement('hidden', 'search_name', array('id' => 'search_name'));

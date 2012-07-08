@@ -173,25 +173,18 @@ try {
 	
 	// hidden for id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
-	
+
 	// hidden for page
 	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
-	$page_id->addRule('required', gettext('Page is not expected to be empty'));
-	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for start	
 	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
-	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for draft	
 	$draft_filter = $FORM->addElement('hidden', 'draft_filter', array('id' => 'draft_filter'));
-	$draft_filter->addRule('regex', gettext('draft is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for limit
 	$limit = $FORM->addElement('hidden', 'limit', array('id' => 'limit'));
-	$limit->addRule('regex', gettext('limit is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for search_name
 	$search_name = $FORM->addElement('hidden', 'search_name', array('id' => 'search_name'));
@@ -200,13 +193,10 @@ try {
 	$macro = $FORM->addElement('hidden', 'macro', array('id' => 'macro'));
 	
 	// hidden for timeframe
-	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));
-	$timeframe->addRule('regex', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
+	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));	
 
 	// hidden for frontend view control
-	$preview = $FORM->addElement('hidden', 'preview', array('id' => 'preview'));
-	$preview->addRule('regex', gettext('preview is expected to be numeric'), WCOM_REGEX_NUMERIC);
-
+	$preview = $FORM->addElement('hidden', 'preview', array('id' => 'preview'));	
 
 	// textfield for title	
 	$title = $FORM->addElement('text', 'title', 
@@ -241,15 +231,12 @@ try {
 	
 	// hidden for podcast id	
 	$podcast_id = $FORM->addElement('hidden', 'podcast_id', array('id' => 'podcast_id'));
-	$podcast_id->addRule('regex', gettext('The podcast id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for mediafile id
 	$podcast_media_object = $FORM->addElement('hidden', 'podcast_media_object', array('id' => 'podcast_media_object'));
-	$podcast_media_object->addRule('regex', gettext('The media file id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for display status
 	$podcast_details_display = $FORM->addElement('hidden', 'podcast_details_display', array('id' => 'podcast_details_display'));
-	$podcast_details_display->addRule('regex', gettext('Podcast details display is expected to be numeric'), WCOM_REGEX_NUMERIC);	
 	
 	// textfield for title	
 	$podcast_title = $FORM->addElement('text', 'podcast_title', 

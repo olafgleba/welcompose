@@ -133,8 +133,6 @@ try {
 
 	// hidden for id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for set
 	$set_request = $FORM->addElement('hidden', 'set_request', array('id' => 'set_request'));
@@ -146,7 +144,7 @@ try {
 		
 	// hidden for start
 	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
-	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
+
 	
 	// textfield for type
 	$type = $FORM->addElement('select', 'type',

@@ -119,28 +119,20 @@ try {
 	// apply filters to all fields
 	$FORM->addRecursiveFilter('trim');
 
-
 	// hidden for id
-	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));		
 		
 	// hidden for page
 	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
-	$page_id->addRule('required', gettext('Page is not expected to be empty'));
-	$page_id->addRule('regex', gettext('Page is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for start	
 	$start = $FORM->addElement('hidden', 'start', array('id' => 'start'));
-	$start->addRule('regex', gettext('start is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for timeframe
-	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));
-	$timeframe->addRule('regex', gettext('timeframe may only contain chars and underscores'), WCOM_REGEX_TIMEFRAME);
+	$timeframe = $FORM->addElement('hidden', 'timeframe', array('id' => 'timeframe'));	
 	
 	// hidden for limit
 	$limit = $FORM->addElement('hidden', 'limit', array('id' => 'limit'));
-	$limit->addRule('regex', gettext('limit is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for search_name
 	$search_name = $FORM->addElement('hidden', 'search_name', array('id' => 'search_name'));
@@ -150,7 +142,6 @@ try {
 
 	// hidden for text_converter
 	$text_converter = $FORM->addElement('hidden', 'text_converter', array('id' => 'text_converter'));
-	$text_converter->addRule('regex', gettext('Text converter value is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for name
 	$name = $FORM->addElement('text', 'name', 

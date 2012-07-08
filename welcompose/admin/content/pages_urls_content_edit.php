@@ -111,8 +111,6 @@ try {
 	
 	// hidden id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for target url
 	$url = $FORM->addElement('text', 'url', 

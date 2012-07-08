@@ -132,8 +132,6 @@ try {
 
 	// hidden for id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden field for pager_page
 	$pager_page = $FORM->addElement('hidden', 'pager_page', array('id' => 'pager_page'));

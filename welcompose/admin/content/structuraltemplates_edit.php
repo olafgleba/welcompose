@@ -108,9 +108,7 @@ try {
 	
 	// hidden id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
-		
+	
 	$name = $FORM->addElement('text', 'name', 
 		array('id' => 'structural_template_name', 'maxlength' => 255, 'class' => 'w300'),
 		array('label' => gettext('Name'))

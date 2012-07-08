@@ -123,8 +123,8 @@ try {
 	
 	// hidden for object id
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
+	
+	
 	
 	// hidden for text converter id
 	$text_converter = $FORM->addElement('hidden', 'text_converter', array('id' => 'text_converter'));

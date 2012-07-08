@@ -136,12 +136,9 @@ try {
 	
 	// hidden for navigation
 	$id = $FORM->addElement('hidden', 'id', array('id' => 'id'));
-	$id->addRule('required', gettext('Id is not expected to be empty'));
-	$id->addRule('regex', gettext('Id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// hidden for frontend view control
 	$preview = $FORM->addElement('hidden', 'preview', array('id' => 'preview'));
-	$preview->addRule('regex', gettext('preview is expected to be numeric'), WCOM_REGEX_NUMERIC);
 	
 	// textfield for title
 	$title = $FORM->addElement('text', 'title', 
