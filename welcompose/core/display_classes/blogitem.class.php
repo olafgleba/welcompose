@@ -210,8 +210,6 @@ public function render ()
 		
 		// hidden for posting
 		$posting = $FORM->addElement('hidden', 'posting', array('id' => 'posting'));
-		$posting->addRule('required', gettext('Posting is not expected to be empty'));
-		$posting->addRule('regex', gettext('Posting is expected to be numeric'), WCOM_REGEX_NUMERIC);
 		
 		// textfield for name
 		$name = $FORM->addElement('text', 'name', 
@@ -343,7 +341,10 @@ public function render ()
 				
 		// render form
 		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-		//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');
 
 		// assign the form to smarty
 		$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());

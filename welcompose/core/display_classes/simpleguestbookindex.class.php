@@ -398,7 +398,10 @@ public function render ()
 	
 		// render form
 		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-		//$renderer->setRequiredTemplate($this->getRequiredTemplate());
+
+		// fetch {function} template to set
+		// required/error markup on each form fields
+		$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');
 
 		// assign the form to smarty
 		$this->base->utility->smarty->assign('form', $FORM->render($renderer)->toArray());
