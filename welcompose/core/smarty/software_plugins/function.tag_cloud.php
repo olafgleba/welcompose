@@ -78,6 +78,11 @@ function smarty_function_tag_cloud ($params, &$smarty)
 			$_class_reference = 'EVENTTAG';
 			$_class_method = 'selectEventTags';
 		break;
+		default:
+			$_class_namespace = 'BlogTag';
+			$_class_reference = 'BLOGTAG';
+			$_class_method = 'selectBlogTags';
+		break;
 	}		
 	
 	// get blog tags
