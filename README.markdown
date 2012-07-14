@@ -65,11 +65,11 @@ Currently the documentation is only available in german language.
 
 User Documentation
 
-[http://dokumentation.welcompose.de/handbuch/](http://dokumentation.welcompose.de/handbuch/)
+[http://docs.welcompose.de/handbuch/](http://docs.welcompose.de/handbuch/)
 
 Current API Documentation
 
-[http://dokumentation.welcompose.de/api/](http://dokumentation.welcompose.de/api/)
+[http://docs.welcompose.de/api/](http://docs.welcompose.de/api/)
 
 
 **But could be downloaded also**:
