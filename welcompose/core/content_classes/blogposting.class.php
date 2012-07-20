@@ -355,7 +355,7 @@ public function selectBlogPosting ($id)
  * <li>current_date, string, optional: return rows based on current date (FORWARD/BACKWARD)</li>
  * <li>title, string, optional: return rows based given title</li>
  * <li>search_name, string, optional: return rows based on search string</li>
- * Supported macros:
+ * <li>Supported macros:
  *    <ul>
  *		<li>DATE_MODIFIED: sorty by date modified</li>
  *		<li>DATE_ADDED: sort by date added</li>
