@@ -143,25 +143,44 @@ padding: 0 0 3px 7px;
 }
 #loggedin {
 position: absolute;
-top: 50px;
+top: 48px;
 left: 765px;
 width: 145px;
 height: 40px;
-line-height: 120%;
+line-height: 145%;
 font-size: 0.95em;
 }
-#loggedin span {
+#loggedin .page {
+padding-right: 0;
+}
+#loggedin p:nth-child(1) {
+background: url(../img/user-small.gif) 0 3px no-repeat;
+padding-left: 16px; 
 font-weight: bold;
+}
+#loggedin p:nth-child(2) {
+background: url(../img/public-page.gif) 0 4px no-repeat;
+padding-left: 16px; 
+}
+#loggedin a {
+color: #333;
+background-color: transparent;
+text-decoration: none; 
+}
+#loggedin a:hover, #loggedin a:active {
+color: #ff620d;
+background-color: transparent;
+text-decoration: none; 
 }
 #logout {
 position: absolute;
-top: 44px;
-left: 915px;
-width: 60px;
+top: 42px;
+left: 920px;
+width: 45px;
 }
 #logout a:link, #logout a:visited {
 display: block;
-width: 60px;
+width: 45px;
 height: 40px;
 background: transparent url(../img/icons/logout.gif) 0 0 no-repeat;
 }

@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <title>{i18n 'Welcompose Admin &ndash; Structural Templates'}</title>
 <link rel="stylesheet" href="../static/styles/wcom.basic.css" media="screen, projection" />
+<link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.navigation.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/wcom.pagemanager.css" media="screen, projection" />
 <link rel="stylesheet" href="../static/styles/thirdparty/tooltips.css" media="screen, projection" />
@@ -23,7 +24,7 @@
 <p>{i18n 'Welcompose'}</p>
 <!-- logo --></div>
 
-<div id="loggedin"><p>{i18n 'Logged in as user'}:<br /><span>{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</span></p></div>
+<div id="loggedin"><p class="page"><a title="{i18n 'Edit user'}" href="../user/users_edit.php?id={$_wcom_current_user.id}">{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</a></p><p class="page"><a target="_blank" title="{i18n 'Public page, open in new window'}" href="../../index.php?project_name={$_wcom_current_project.name_url}">{i18n 'Public page'}</a></p></div>
 
 <div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 

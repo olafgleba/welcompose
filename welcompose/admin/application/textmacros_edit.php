@@ -96,6 +96,10 @@ try {
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
+	// assign current project values
+	$_wcom_current_project = $PROJECT->selectProject(WCOM_CURRENT_PROJECT);
+	$BASE->utility->smarty->assign('_wcom_current_project', $_wcom_current_project);
+	
 	// get text macro
 	$text_macro = $TEXTMACRO->selectTextMacro(Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC));
 	

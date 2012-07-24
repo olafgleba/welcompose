@@ -104,6 +104,10 @@ try {
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
+	// assign current project values
+	$_wcom_current_project = $PROJECT->selectProject(WCOM_CURRENT_PROJECT);
+	$BASE->utility->smarty->assign('_wcom_current_project', $_wcom_current_project);
+	
 	// make sure, that the page parameter is present
 	if (is_null(Base_Cnc::filterRequest($_REQUEST['page'], WCOM_REGEX_NUMERIC))) {
 		header("Location: pages_select.php");

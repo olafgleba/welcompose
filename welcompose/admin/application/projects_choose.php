@@ -92,6 +92,10 @@ try {
 	$_wcom_current_user = $USER->selectUser(WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('_wcom_current_user', $_wcom_current_user);
 	
+	// assign current project values
+	$_wcom_current_project = $PROJECT->selectProject(WCOM_CURRENT_PROJECT);
+	$BASE->utility->smarty->assign('_wcom_current_project', $_wcom_current_project);
+	
 	// assign current user and project id
 	$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 	$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
