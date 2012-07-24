@@ -172,7 +172,6 @@ try {
 	// hidden for page
 	$page_id = $FORM->addElement('hidden', 'page', array('id' => 'page'));
 
-
 	// textfield for title	
 	$title = $FORM->addElement('text', 'title', 
 		array('id' => 'blog_posting_title', 'maxlength' => 255, 'class' => 'w300 urlify'),
@@ -206,15 +205,12 @@ try {
 	
 	// hidden for podcast id	
 	$podcast_id = $FORM->addElement('hidden', 'podcast_id', array('id' => 'podcast_id'));
-	$podcast_id->addRule('regex', gettext('The podcast id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for mediafile id
 	$podcast_media_object = $FORM->addElement('hidden', 'podcast_media_object', array('id' => 'podcast_media_object'));
-	$podcast_media_object->addRule('regex', gettext('The media file id is expected to be numeric'), WCOM_REGEX_NUMERIC);
 
 	// hidden for display status
-	$podcast_details_display = $FORM->addElement('hidden', 'podcast_details_display', array('id' => 'podcast_details_display'));
-	$podcast_details_display->addRule('regex', gettext('Podcast details display is expected to be numeric'), WCOM_REGEX_NUMERIC);	
+	$podcast_details_display = $FORM->addElement('hidden', 'podcast_details_display', array('id' => 'podcast_details_display'));	
 	
 	// textfield for title	
 	$podcast_title = $FORM->addElement('text', 'podcast_title', 
