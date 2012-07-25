@@ -27,7 +27,7 @@
 
 <div id="loggedin"><p class="page"><a title="{i18n 'Edit user'}" href="../user/users_edit.php?id={$_wcom_current_user.id}">{if empty($_wcom_current_user.name)}{$_wcom_current_user.email}{else}{$_wcom_current_user.name}{/if}</a></p><p class="page"><a target="_blank" title="{i18n 'Public page, open in new window'}" href="../../index.php?project_name={$_wcom_current_project.name_url}">{i18n 'Public page'}</a></p></div>
 
-<div id="logout"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
+<div id="logout" class="page"><a href="../logout.php" title="{i18n 'Logout'}"></a></div>
 
 {include file="_inc_topnav.html" area="contents"}
 
