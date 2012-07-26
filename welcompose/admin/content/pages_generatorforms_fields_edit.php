@@ -370,15 +370,16 @@ try {
 		$sqlData['required'] = (string)intval($required->getValue());
 		$sqlData['required_message'] = $required_message->getValue();
 		$sqlData['validator_regex'] = $validator_regex->getValue();
+		$sqlData['validator_message'] = $validator_message->getValue();
 		$sqlData['placeholder'] = $placeholder->getValue();
 		$sqlData['pattern'] = $pattern->getValue();
 		$sqlData['maxlength'] = $maxlength->getValue();
 		$sqlData['min'] = $min->getValue();
 		$sqlData['max'] = $max->getValue();
 		$sqlData['step'] = $step->getValue();
-		$sqlData['required_attr'] = $required_attr->getValue();
-		$sqlData['autofocus'] = $autofocus->getValue();
-		$sqlData['readonly'] = $readonly->getValue();
+		$sqlData['required_attr'] = (string)intval($required_attr->getValue());
+		$sqlData['autofocus'] = (string)intval($autofocus->getValue());
+		$sqlData['readonly'] = (string)intval($readonly->getValue());
 		
 		// test sql data for pear errors
 		$HELPER->testSqlDataForPearErrors($sqlData);

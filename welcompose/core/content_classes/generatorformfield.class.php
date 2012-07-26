@@ -220,6 +220,7 @@ public function selectGeneratorFormField ($id)
 			`content_generator_form_fields`.`required` AS `required`,
 			`content_generator_form_fields`.`required_message` AS `required_message`,
 			`content_generator_form_fields`.`validator_regex` AS `validator_regex`,
+			`content_generator_form_fields`.`validator_message` AS `validator_message`,
 			`content_generator_form_fields`.`placeholder` AS `placeholder`,
 			`content_generator_form_fields`.`pattern` AS `pattern`,
 			`content_generator_form_fields`.`maxlength` AS `maxlength`,
@@ -579,17 +580,17 @@ public function prepareOptionalAttributes ($params = array(), $field_ref, $attri
 					}
 				break;
 			case 'required_attr':
-					if (!is_null($field_ref['required_attr'])) {
+					if (!empty($field_ref['required_attr'])) {
 						$attribute_ref['required'] = 'required';
 					}
 				break;
 			case 'autofocus':
-					if (!is_null($field_ref['autofocus'])) {
+					if (!empty($field_ref['autofocus'])) {
 						$attribute_ref['autofocus'] = 'autofocus';
 					}
 				break;
 			case 'readonly':
-					if (!is_null($field_ref['readonly'])) {
+					if (!empty($field_ref['readonly'])) {
 						$attribute_ref['readonly'] = 'readonly';
 					}
 				break;

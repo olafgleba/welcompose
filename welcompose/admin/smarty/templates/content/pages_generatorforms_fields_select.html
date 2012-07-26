@@ -121,7 +121,7 @@
 <td class="page"><a href="pages_generatorforms_fields_edit.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n 'Edit'}">{$_field.name|escape:"html"}</a></td>
 <td>{$_field.label|escape:"html"}</td>
 <td>{$_field.type|escape:"html"}</td>
-<td>{if $_field.required == 0}{i18n 'No'}{else}Yes{/if}</td>
+<td>{if $_field.required == 0}{i18n 'No'}{else}{i18n 'Yes'}{/if}</td>
 <td class="page"><a class="duplicate" href="pages_generatorforms_fields_copy.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n 'Duplicate entry'}"></a></td>
 <td class="page"><a class="delete" href="pages_generatorforms_fields_delete.php?page={$page.id|escape:"url"}&amp;id={$_field.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}{if isset($request.limit) && $request.limit > 0}&amp;limit={$request.limit|escape:"url"}{/if}{if isset($request.macro)}&amp;macro={$request.macro}{/if}" title="{i18n 'Delete entry'}"></a></td>
 </tr>
