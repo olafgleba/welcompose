@@ -163,7 +163,7 @@ try {
 	
 	// textfield for site_feed
 	$site_feed = $FORM->addElement('text', 'site_feed', 
-		array('id' => 'ping_service_configuration_site_index', 'maxlength' => 255, 'class' => 'w300 validate'),
+		array('id' => 'ping_service_configuration_site_feed', 'maxlength' => 255, 'class' => 'w300 validate'),
 		array('label' => gettext('Feed URL'))
 		);
 	$site_feed->addRule('required', gettext('Please enter a feed URL'));
