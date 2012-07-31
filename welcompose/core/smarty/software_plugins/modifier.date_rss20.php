@@ -1,6 +1,11 @@
 <?php
 
-require_once $smarty->_get_plugin_filepath('shared','make_timestamp');
+foreach ($smarty->plugins_dir as $value) { 
+    $filepath = $value ."/shared.make_timestamp.php"; 
+    if (file_exists($filepath)) { 
+        require_once $filepath; 
+    } 
+}
 
 function smarty_modifier_date_rss20($string)
 {
