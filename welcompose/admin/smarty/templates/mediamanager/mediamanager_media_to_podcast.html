@@ -1,6 +1,6 @@
 <div id="mediafile_metadata">
 <p><span class="fir">{i18n 'Filename'}:</span><span class="sec">{if $object.file_mime_type == 'application/pdf'}<a href="{get_www_path_to_object name=$object.file_name_on_disk}" target="_blank" title="Opens in new Window">{$object.file_name}</a>{else}{$object.file_name}{/if}</span></p>
-<p><span class="fir">{i18n 'Media type'}:</span><span class="sec">{$object.file_mime_type}</span></p><p><span class="fir">{i18n 'Media size'}:</span><span class="sec">{$object.file_size/1000000|truncate:4:true} MB</span></p>
+<p><span class="fir">{i18n 'Media type'}:</span><span class="sec">{$object.file_mime_type}</span></p><p><span class="fir">{i18n 'Media size'}:</span><span class="sec">{($object.file_size/1000000)|string_format:"%.3f"} MB</span></p>
 </div>
 
 <div id="mediafile_player">

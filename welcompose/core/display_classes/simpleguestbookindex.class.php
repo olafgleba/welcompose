@@ -175,7 +175,7 @@ public function __construct($project, $page)
 	// load gettext
 	$gettext_path = dirname(__FILE__).'/../includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
-	gettextInitSoftware($BASE->_conf['locales']['all']);
+	gettextInitSoftware($this->base->_conf['locales']['all']);
 }
 
 /**
@@ -398,7 +398,7 @@ public function render ()
 	
 		// render form
 		$renderer = $this->base->utility->loadQuickFormSmartyRenderer();
-
+	
 		// fetch {function} template to set
 		// required/error markup on each form fields
 		$this->base->utility->smarty->fetch(dirname(__FILE__).'/../../admin/quickform.tpl');

@@ -1,7 +1,7 @@
 {function name=qt}
 {strip}
 	{if $el["required"]}
-		{if $el["error"]}
+		{if !empty($el["error"])}
 			<span class="req">*</span>
 		{else}
 			<span>*</span>
