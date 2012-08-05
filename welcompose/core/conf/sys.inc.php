@@ -6,7 +6,7 @@ wcom_public_root_www =
 [log]
 handler = "file"
 name = "/www/gits/welcompose/welcompose/tmp/log/welcompose.log"
-level = PEAR_LOG_WARNING
+level = PEAR_LOG_DEBUG
 
 [environment]
 debug = true
