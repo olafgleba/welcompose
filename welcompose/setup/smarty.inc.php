@@ -51,7 +51,6 @@ $smarty->setTemplateDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'templates');
 $smarty->setCompileDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'compiled');
 $smarty->setCacheDir(SMARTY_TPL_DIR.DIRECTORY_SEPARATOR.'cache');
 $smarty->setPluginsDir(array(
-	SMARTY_DIR.DIRECTORY_SEPARATOR.'my_plugins',
 	SMARTY_DIR.DIRECTORY_SEPARATOR.'plugins',
 	SMARTY_DIR.DIRECTORY_SEPARATOR.'software_plugins'
 	)
