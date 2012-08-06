@@ -15,7 +15,7 @@ $ autoconf
 $ ./configure 
 $ make html-chunk
 
-Getting a pdf from the xml sources is a bit trickier. You'll need a recent Java VM and Apache FOP (http://xmlgraphics.apache.org/fop/). Pick a binary distribution (they include "-bin" in their names) of FOP 0.20.x. DO NOT USE A NEWER VERSION LIKE 0.91. THEY WON'T WORK AT THE MOMENT. After you unpacked the binary distribution, make sure JAVA_HOME points to the home directory of the Java VM. To gnerate the PDF, use:
+Getting a pdf from the xml sources is a bit trickier. You'll need a recent Java VM and Apache FOP (http://xmlgraphics.apache.org/fop/). Pick a binary distribution (they include "-bin" in their names) of FOP 0.20.x. DO NOT USE A NEWER VERSION LIKE 0.91. THEY WON'T WORK AT THE MOMENT. After you unpacked the binary distribution, make sure JAVA_HOME points to the home directory of the Java VM. To generate the PDF, use:
 
 $ cd manual/de
 $ autoconf
@@ -29,6 +29,10 @@ $ make clean
 If you like to build all the manuals at one, use the makefile in this directory here. Simply type:
 
 $ make html-chunk
+
+If you like to build one chapter per site, use the makefile in this directory here. Simply type:
+
+$ make html-single-page
 
 It will go through every subdirectory which name starts with "manual" and build the chunked html manual. Building other formats (pdf etc.) is not possible at the moment.
 

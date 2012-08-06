@@ -64,9 +64,9 @@ $ phpdoc --directory /pfad/zu/welcompose/core \
 			<para>
 				Sollte der phpDocumentor die Erstellung der API-Doku mit einer
 				<emphasis>"Memory exhausted"</emphasis> Meldung abbrechen, erhöhen sie den
-				Wert des Parameter <code>memory_size</code> in der PHP Konfigurationsdatei
-				(<filename>php.ini</filename>) auf 512 MB. In der Standardeinstellung steht dieser auf 128 MB, was
-				zu oben genannten Fehler führt.
+				Wert des Parameter <code>memory_limit</code> in der PHP Konfigurationsdatei
+				(<filename>php.ini</filename>) auf 512 MB oder höher. In der Standardeinstellung steht dieser
+				oft auf 128 MB, was zu oben genannten Fehler führt.
 			</para>
 		</tip>
 	</sect1>

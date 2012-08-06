@@ -66,14 +66,6 @@
 				Navigation dar. Das heisst, dass jede Seite einem Menüpunkt
 				entspricht und man ohne Seite keinen Menüpunkt erhält. 
 			</para>
-			
-			<para>
-				Da Welcompose bereits etliche Seitentypen (siehe
-				<xref linkend="templating.template_types.usage.which_template_type_for_which_view.list_of_template_types"/>
-				unterstützt (und es wohl noch einige mehr werden dürften), werden die
-				Eigenschaften und die Verwendung der verschiedenen
-				Seitentypen zukünftig in separaten Kapiteln erklärt.
-			</para>
 		</sect2>
 		
 		<sect2 id="contents.pages.manage">
@@ -269,7 +261,7 @@
 							Bestimmt den Seitentyp der Seite, respektive
 							mit welchen Inhalten die Seite befüllt werden
 							kann. Diese Einstellung kann später nicht mehr
-							geändert werden.
+							geändert werden (s. auch <xref linkend="contents.page_types.usage.list_of_page_types"/>).
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1101,8 +1093,9 @@ Name der Navigation: {$navigation.name}
 			
 			<tip>
 				<para>
-					Wie sie mehrstufige Navigationen erstellen, erläutern wir im Anwendungsbereich
-					<xref linkend="usage.nested_navigation"/>.
+					Anwendungsbeispiele für ein- oder mehrstufige Navigationen finden Sie unter
+					<link linkend="usage.navigations">Navigationen</link> in der Rubrik 
+					<link linkend="usage">Anwendungsbeispiele</link>.
 				</para>
 			</tip>
 			
@@ -1110,137 +1103,187 @@ Name der Navigation: {$navigation.name}
 	</sect1>
 	
 	
-	<!-- <sect1 id="contents.page_types">
+	<sect1 id="contents.page_types">
 		<title>Seitentypen</title>
 		
 		<sect2 id="contents.page_types.introduction">
 			<title>Einführung</title>
 						
 			<para>
-				...
+				Seitentypen definieren, welche <link linkend="contents.how_it_works">Strukturelemente</link>
+				und Inhaltstypen für ihre neue Seite verfügbar sind.
+				Im Zusammenspiel mit der entsprechenden <link linkend="templating.introduction">Seitenvorlage</link>
+				entsteht die eigentliche Webseite.
 			</para>
 			
-			<note>
-				<para>
-					Da viel zu kompliziert eigene Seitentypen anzulegen, hier keine Erklärung...
-				</para>
-			</note>
+			<para>
+				Möchte man bspw. eine Seite anlegen, die vorrangig ein Formular mit frei wählbaren
+				Formularelementen enthalten soll, wäre der Seitentyp <guimenuitem>WCOM_GENERATOR_FORM</guimenuitem>
+				der passende Typ hierfür. Für eine inhaltliche Seite, die vorrangig aus textlichen und medialen
+				Inhalten bestehen wird, ist der Seitentyp <guimenuitem>WCOM_SIMPLE_PAGE</guimenuitem> zumeist
+				sinnvoll und passend.
+			</para>
 
 		</sect2>
 		
-		<sect2 id="contents.page_types.page_types_introduction">
-			<title>WCOM_BLOG</title>
-			
+		<sect2 id="contents.page_types.manage">
+			<title>Verwaltung</title>
+						
 			<para>
-				...
+				Die Anlage von neuen Seitentypen (die prinzipiell möglich ist), wird zum jetzigen
+				Zeitpunkt nicht beschrieben, da neben des Anlegen eines neuen Seitentyps im Admininterface
+				noch eine Vielzahl an weiteren Schritten notwendig sind, die nur von erfahrenen
+				Programmierern durchgeführt werden sollten.
 			</para>
 			
-			<figure id="contents.page_types.wcom_blog_overview">
-				<title>Blog-Einträge Übersicht</title>
-				<graphic fileref="images/contents/page_types/wcom_blog_overview.png"/>
-			</figure>
+			<tip>
+				<para>
+					Wünsche und Anregungen für neue Seitentypen können
+					<emphasis role="strong">sehr gerne</emphasis> im 
+					<ulink type="external" url="http://forum.welcompose.de">Forum von Welcompose</ulink>
+					gestellt werden.
+				</para>
+			</tip>
+		</sect2>
+		
+		
+		<sect2 id="contents.page_types.usage">
+			<title>Anwendung</title>
 
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Name</guilabel></term>
-					<listitem>
-						<para>
-							Der Name der Box. Kommt ausser im 
-							Administrationsbereich nicht zum Einsatz. Muss
-							innerhalb eines Projekts einzigartig sein.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Inhalt</guilabel></term>
-					<listitem>
-						<para>
-							Inhalt der Box. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Textkonverter</guilabel></term>
-					<listitem>
-						<para>
-							Textkonverter, der auf den Inhalt der 
-							Box appliziert werden soll (siehe <xref
-							linkend="settings.text_converters"/>).
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Makros anwenden</guilabel></term>
-					<listitem>
-						<para>
-							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
-							Box appliziert werden sollen (siehe <xref
-							linkend="settings.text_macros"/>).
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>	
+			<para>
+				Immer, wenn Sie eine neue <link linkend="contents.pages.manage.add_page">inhaltliche Seite anlegen</link>, müssen Sie den Typ der Seitenvorlage angeben,
+				den sie einsetzen möchten.
+			</para>			
+			
+			<figure id="contents.page_types.usage.choose_page_type">
+				<title>Seitentyp auswählen</title>
+				<graphic fileref="images/contents/page_types/usage.choose_page_type.png"/>
+			</figure>
 			
 			<para>
-				...
+				Welcompose bringt von Haus aus eine Vielzahl an vordefinierten
+				Seitentypen mit,- doch welcher Seiten-Typ eignet sich für welche Anwendung?
 			</para>
+			
+			<table frame="none" id="contents.page_types.usage.list_of_page_types">
+				<title>Liste der Seiten-Typen</title>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>
+								Seiten-Typ
+							</entry>
+							<entry>
+								Beschreibung
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								WCOM_BLOG
+							</entry>
+							<entry>
+								Seiten vom Typ <link linkend="usage.blog">WCOM_BLOG</link> stellen die typische Funktionalität
+								eines Weblogs bereit. Neben der Blog-Übersicht existieren Seiten für die Blog-Beiträge.
+								Neben der Verschlagwortung von Beiträgen und der Kommentarfunktion,
+								können Feeds im Format RSS 2.0 und Atom 1.0 für die Besucher der Seiten bereitgestellt werden.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_EVENT
+							</entry>
+							<entry>
+								Der Seitentyp <link linkend="usage.event">WCOM_EVENT</link> ist prädestiniert um terminliche Inhalte wie
+								Veranstaltungen, Seminare oder sonstige Events, die an ein oder über mehreren Tagen stattfinden
+								abzubilden. Im Gegensatz zum Seitentyp <emphasis>WCOM_BLOG</emphasis> gibt es hier nur
+								eine Übersichtsseite und keine Beitrags-Seiten.
+								Wie bei Seiten vom Typ <emphasis>WCOM_BLOG</emphasis> sind hier valide RSS 2.0
+								oder/und Atom 1.0 Feeds verfügbar.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_GENERATOR_FORM
+							</entry>
+							<entry>
+								Die Anwendung des Seitentyps <link linkend="usage.generated_forms">WCOM_GENERATOR_FORM</link> bietet sich immer dann an, 
+								wenn die Möglicheiten des Seitentyps <link linkend="usage.simple_forms">WCOM_SIMPLE_FORM</link>
+								nicht komplex genug sind. Mit diesem Seitentyp können Sie individuelle Formulare gestalten.
+								Eine Vielzahl an Feldtypen stehen hierzu zur Verfügung.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_SIMPLE_FORM
+							</entry>
+							<entry>
+								Formulare des Seitentyps <link linkend="usage.simple_forms">WCOM_SIMPLE_FORM</link> bieten 
+								zwei konfiguierte Formulare an, die sich nur in den zur Verfügung stehenden Formularfelder
+								unterscheiden. Eine große Anzahl an Anwendungen sind durch diese beiden Formulartypen bereits
+								abgedeckt. Zur Verfügung stehen die Formulartypen <guimenuitem>Privates Formular</guimenuitem> und
+								<guimenuitem>Geschäftliches Formular</guimenuitem>.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<emphasis>WCOM_SIMPLE_DATE</emphasis>
+							</entry>
+							<entry>
+									<para>
+										<emphasis role="strong">Der Einsatz diesen Seitentyps wird ab Welcompose Version 0.9.4
+										nicht mehr empfohlen!</emphasis> Stattdessen sollten Sie den mit der o.g. Version
+										eingeführten Seitentyp <link linkend="usage.event">WCOM_EVENT</link>
+										nutzen, um termingebundene Inhalte abzubilden. Der Seitentyp
+										wird nicht mehr weiterentwickelt. 
+									</para>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_SIMPLE_GUESTBOOK
+							</entry>
+							<entry>
+								Der Seitentyp <link linkend="usage.simple_guestbooks">WCOM_SIMPLE_GUESTBOOK</link> bietet
+								dem Anwender die Möglichkeit, ein einfaches Gästebuch nativ in die Webseiten zu integrieren.
+								Als Option kann ein beliebiger Empfänger benachrichtigt werden sobald ein neuer Beitrag
+								eingetragen wurde.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_SIMPLE_PAGE
+							</entry>
+							<entry>
+								Der Seitentyp <link linkend="usage.simple_page">WCOM_SIMPLE_PAGE</link> ist sozusagen die
+							 	<emphasis>Mutter aller Seitenvorlagen</emphasis> und sicherlich der am häufigsten genutzte Typ.
+							 	Während die sonstigen Seitentypen dezidierten Einsatzzwecken dienen und darum spezielle
+							 	Variablen bereitstellen, eignet sich dieser Seitentyp für die Darstellung beliebiger Inhalte.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								WCOM_URL
+							</entry>
+							<entry>
+								Der Seitentyp <link linkend="usage.url">WCOM_URL</link> benötigt keine dezidierte Seitenvorlage.
+								Er dient zu Referenzierung von absoluten oder/und externen HTTP Adressen.
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
 			
 			<note>
 				<para>
-					Sie können beliebig viele Boxen (siehe <xref linkend="contents.boxes"/>) 
-					für Ihre Blog-Seite anlegen.
+					Im Abschnitt <link linkend="usage.page_types">Anwendungsbeispiele</link> finden Sie
+					neben weitere Infos zum Einsatz der Seiten-Typen in Verbindung mit den Seitenvorlagen.
 				</para>
 			</note>
-			
-			<figure id="contents.page_types.wcom_blog_item_overview">
-				<title>Blog-Eintrag</title>
-				<graphic fileref="images/contents/page_types/wcom_blog_item_overview.png"/>
-			</figure>
 
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Name</guilabel></term>
-					<listitem>
-						<para>
-							Der Name der Box. Kommt ausser im 
-							Administrationsbereich nicht zum Einsatz. Muss
-							innerhalb eines Projekts einzigartig sein.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Inhalt</guilabel></term>
-					<listitem>
-						<para>
-							Inhalt der Box. 
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Textkonverter</guilabel></term>
-					<listitem>
-						<para>
-							Textkonverter, der auf den Inhalt der 
-							Box appliziert werden soll (siehe <xref
-							linkend="settings.text_converters"/>).
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Makros anwenden</guilabel></term>
-					<listitem>
-						<para>
-							Entscheidet, ob die vorhandenen Textmakros auf den Inhalt der
-							Box appliziert werden sollen (siehe <xref
-							linkend="settings.text_macros"/>).
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>		
-
-			
-		</sect2>
-	</sect1> -->	
+		</sect2>		
+	</sect1>	
 	
 	
 	<sect1 id="contents.structural_templates">

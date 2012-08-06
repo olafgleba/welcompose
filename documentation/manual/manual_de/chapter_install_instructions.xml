@@ -354,7 +354,7 @@
 				
 				<para>
 					Welche Schreibrechte genau gesetzt werden müssen, kann von 
-					Server zu Server relativ stark variieren. Auf der sicheren
+					Server zu Server relativ stark variieren. Zumeist auf der sicheren
 					Seite sind Sie, wenn Sie alle verfügbaren Rechte an den
 					Ordner vergeben. Bei den meisten Datentransferprogrammen
 					erfolgt dies, indem Sie Checkboxen anklicken &ndash; und
@@ -517,6 +517,18 @@ http://domain.tld/pfad/zu/welcompose/install.php
 					oktalen chmod-Wert mit führender Null anzugeben (z.B.
 					<userinput>0777</userinput>).
 				</para>
+				
+				<note>
+					<para>
+						Auch hier gilt: Welche Rechte für die Verzeichnisse und
+						Dateien vergeben werden müssen, kann von Hoster
+						zu Hoster unterschiedlich sein. Im Zweifelsfalle hilft hier der
+						Support ihres Hosters weiter. Sie können aber auch gerne
+						im <ulink type="external"
+					url="http://forum.welcompose.de/">Welcompose Forum</ulink> nachfragen,- 
+					unter Umständen gibt es hier schon Beispiele ihren Hoster betreffend.
+					</para>
+				</note>
 				
 				<para>
 					Nachdem Sie Rechte angepasst haben, können Sie auf 

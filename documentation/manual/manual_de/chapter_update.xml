@@ -189,7 +189,8 @@
 					Inhalte. Dies können Sie beispielsweise mit dem
 					<ulink type="external"
 					url="http://dev.mysql.com/downloads/gui-tools/">MySQL
-					Administrator</ulink> oder <ulink type="external"
+					Administrator</ulink>, <ulink type="external"
+					url="http://www.sequelpro.com/">Sequel Pro (Mac)</ulink> oder <ulink type="external"
 					url="http://www.phpmyadmin.net/">phpMyAdmin</ulink>
 					erledigen. Eine Anleitung zur Erstellung der 
 					Datenbank-Sicherung finden Sie im

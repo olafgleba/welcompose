@@ -746,7 +746,7 @@ index.php?project_name=eins&page_name=zwei&action=Index
 		 		<para>
 		 			Das Listing der URL-Konfiguration sowie die RewriteRules der
 		 			<filename>.htaccess</filename>-Datei beziehen sich immer auf die
-		 			jeweils aktuelle Version von Welcompose (Aktuell: 0.9.4).
+		 			jeweils aktuelle Version von Welcompose (Aktuell: 0.9.6).
 		 		</para>
 		 	</note>
 			

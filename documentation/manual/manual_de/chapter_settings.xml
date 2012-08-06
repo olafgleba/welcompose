@@ -63,7 +63,7 @@
 			
 				<variablelist>
 					<varlistentry>
-						<term>Name</term>
+						<term><guimenuitem>Name</guimenuitem></term>
 						<listitem>
 							<para>
 								Freiwählbarer Name des Projektes
@@ -71,7 +71,7 @@
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term>Benutzer zuweisen</term>
+						<term><guimenuitem>Benutzer zuweisen</guimenuitem></term>
 						<listitem>
 							<para>
 								Bestehende Benutzer des aktuellen Projektes können dem neuen Projekt
@@ -99,6 +99,189 @@
 						ist nur im Moment der Projekt Initialisierung möglich.
 					</para>
 				</tip>
+		</sect2>
+	</sect1>
+
+	<sect1 id="settings.pingservices">
+		<title>Ping-Services</title>
+		
+		<sect2 id="settings.pingservices.introduction">
+			<title>Einführung</title>
+			
+			<para>
+				Wenn neue Blog Artikel veröffentlicht werden, will man zumeist auch, dass die Welt
+				davon erfährt. Die sog. Ping-Services sind zumeist kostenlos nutzbare, externe Dienste, die wiederum 
+				ggf. andere Dienste und Suchmaschinen darüber informieren, dass ein neuer Beitrag in Ihrem Blog
+				veröffentlicht wurde.
+			</para>	
+			
+			<para>
+				Einmal konfigurierte Ping-Dienste stehen dann zur Auswahl auf den jeweiligen Blog-Seiten zur
+				Verfügung (s. <xref linkend="settings.pingservices.usage"/>).
+			</para>
+		</sect2>
+		
+		<sect2 id="settings.pingservices.manage">
+			<title>Verwaltung</title>
+			
+			<figure id="settings.pingservices.pingservices_manage">
+				<title>Übersicht der eingetragenen Ping-Services</title>
+				<graphic fileref="images/settings/pingservices/pingservices_manage.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht der vorhandenen Ping-Services in alphabetischer Reihenfolge bietet neben der Anzeige
+				des Ping-Services, Links zum Bearbeitung und Löschen eines Projektes, sowie den Link zum 
+				<guibutton>Neu anlegen</guibutton> eines Services.
+			</para>
+			
+			<para>
+				Um einen Ping-Service zu <emphasis role="strong">bearbeiten</emphasis>, klicken Sie
+				bitte auf den <emphasis role="strong">Namen des Ping-Service</emphasis>.
+			</para>
+						
+			<figure id="settings.pingservices.pingservices_add">
+				<title>Neuen Ping-Services hinzufügen</title>
+				<graphic fileref="images/settings/pingservices/pingservices_add.png"/>
+			</figure>
+			
+			<variablelist>
+				<varlistentry>
+					<term><guimenuitem>Name</guimenuitem></term>
+					<listitem>
+						<para>
+							Tragen Sie hier bitte den Namen Ihres neuen Ping-Services ein. 
+							Der Name dient zur Identifizierung und Unterscheidung einzelner Ping-Services.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Host</guimenuitem></term>
+					<listitem>
+						<para>
+							Der anzusprechende Host. Dieses kann ein gültiger Domainname sein, 
+							wie bspw. weblog.com oder auch eine gültige IP-Adresse.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Port</guimenuitem></term>
+					<listitem>
+						<para>
+							Geben Sie hier den Remote Server Port an. Wenn der Servicebetrieber
+							keine speziellen Angaben macht, ist <userinput>80</userinput> eine gute Wahl.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Pfad</guimenuitem></term>
+					<listitem>
+						<para>
+							Der Pfad des anzusprechenden Remote Hosts. Beispiel: <userinput>/RPC2</userinput>. 
+							Zwingend ist hier mindestens ein Schrägstrich einzutragen.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>			
+		</sect2>
+		
+		<sect2 id="settings.pingservices.usage">
+			<title>Verwendung der Ping-Services</title>
+
+			<para>
+				Der Einsatz der in den <guimenu>Einstellungen</guimenu> konfigurierten Ping-Services kann nur auf inhaltlichen Seiten
+				des Typs <emphasis>WCOM_BLOG</emphasis> genutzt werden. Hat man eine Blog-Seite zur
+				Bearbeitung aufgerufen, sehen sie in der Kontextnavigation den Menüpunkt 
+				<guisubmenu>Ping-Services</guisubmenu>. Über diesen Menupunkt lassen sich beliebig viele
+				Ping-Services für die jeweilige Blog-Seite eintragen.
+			</para>
+			
+			<note>
+				<para>
+					Lassen Sie sich nicht verwirren durch die gleichnamige Benennung der Navigationspunkte.
+					Während unter <guimenu>Einstellungen</guimenu> die externen Ping-Dienste mit den vom
+					Betreiber vorgegebenen Einstellungen und Pfade konfiguriert werden, definieren sie im Bereich
+					<guimenu>Inhalte</guimenu> auf Seiten des Typs <emphasis>WCOM_BLOG</emphasis> die 
+					individuellen Angaben, mit denen Sie die jeweilige Blog-Seite beim ausgewählten Ping-Service
+					<emphasis>anmelden</emphasis>.
+				</para>
+			
+				<para>
+					So ist es möglich, für jede Blog-Seite, die sie in Welcompose anlegen, beliebig viele und
+					unterschiedliche Ping-Services zu adressieren.
+				</para>
+			</note>
+			
+			<figure id="settings.pingservices.usage.pingservices_add">
+				<title>Neuen Ping-Service einer Blog-Seite hinzufügen</title>
+				<graphic fileref="images/settings/pingservices/pingservices_content_add.png"/>
+			</figure>
+						
+			<variablelist>
+				<varlistentry>
+					<term><guimenuitem>Ping-Service</guimenuitem></term>
+					<listitem>
+						<para>
+							Hier wählen Sie einen der zuvor konfigurierten Ping-Services aus, den
+							Sie für die Blog-Seite verwenden möchten.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Seitenname</guimenuitem></term>
+					<listitem>
+						<para>
+							Tragen Sie bitte den Namen Ihres Weblogs ein, wie er innerhalb der Webseiten
+							des Ping-Service Providers angezeigt werden soll.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Seiten-URL</guimenuitem></term>
+					<listitem>
+						<para>
+							Der Pfad zur Index-Seite Ihres Weblogs, der das Übertragungsprotokoll (http://)
+							und den vollständigen Domainnamen beinhalten muss. Beispiel: <userinput>http://ihrweblog.de</userinput>
+							, <userinput>http://ihrweblog.de/page/blog/</userinput> oder auch 
+							<userinput>http://ihrweblog.de?index.php?page_name=blog</userinput> (bei parameterisierten URLs).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Weblog URL</guimenuitem></term>
+					<listitem>
+						<para>
+							Der Pfad zur Seite, der bei einer Aktualisierung vom Ping-Services Provider
+							genutzt werden soll. In den allermeisten Fällen ist dieser Pfad identisch
+							mit dem im Feld <guimenuitem>Seiten-URL</guimenuitem> eingetragenen Pfad.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Feed URL</guimenuitem></term>
+					<listitem>
+						<para>
+							Der Pfad zum Newsfeed, der das Übertragungsprotokoll (http://) und den
+							vollständigen Domainnamen beinhalten muss. Beispiel: <userinput>http://ihrweblog.de/feeds/</userinput>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<sect3 id="settings.pingservices.usage.ping_use">			
+				<title>Benachrichtigung aktivieren</title>
+				
+				<para>
+					Nun, da alle Angaben gemacht wurden, können wir auf jeder Blog-Eintragsseite
+					entscheiden, ob und wann der oder die Ping-Services benachrichtigt werden sollen
+					wenn die Seite gespeichert wird. In der Standardeinstellung ist die Checkbox nicht aktiviert.
+				</para>
+						
+				<figure id="contents.pingservices.usage.ping">
+					<title>Ping-Services auf einer Blog-Beitragsseite aktivieren/deaktivieren</title>
+					<graphic fileref="images/contents/pingservices/ping_use.png"/>
+				</figure>
+			</sect3>
 		</sect2>
 	</sect1>
 			
@@ -150,29 +333,42 @@
 			
 		</sect2>
 		
+		<sect2 id="settings.text_converters.manage">
+			<title>Verwaltung</title>
+			
+			<figure id="settings.text_converters.text_converters_manage">
+				<title>Übersicht über die vorhandenen Textkonverter</title>
+				<graphic fileref="images/settings/text_converters/text_converters_manage.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht der vorhandenen Textkonverter in alphabetischer Reihenfolge bietet neben der Anzeige
+				des Textkonverters, Links zum Bearbeiten und Löschen, sowie den Link zum 
+				<guibutton>Neu anlegen</guibutton> eines Textkonverters.
+			</para>
+			
+			<note>
+				<para>
+					Lesen Sie bitte hierzu auch <xref linkend="settings.text_converters.use_other_text_converters"/>
+					und <xref linkend="settings.text_converters.use_other_text_converters.register_plugin"/>
+				</para>
+			</note>		
+		</sect2>
+		
 		<sect2 id="settings.text_converters.usage">
-			<title>Verwendung der Textkonverter</title>
+			<title>Anwendung der Textkonverter</title>
 			
 			<para>
 				Die Textkonverter werden überall im Webinterface angeboten,
 				wo sich Inhalte für die jeweiligen Seiten eingeben lassen.
 				Sie können pro Seite, Blog Posting oder Box über eine
-				Auswahlliste ausgewählt werden. 
+				Auswahlliste ausgewählt werden. Pro Seite ist nur ein Textkonverters nutzbar.
 			</para>
 			
 			<figure id="settings.text_converters.usage.choose_text_converter">
 				<title>Auswahl des Textkonverters</title>
 				<graphic fileref="images/settings/text_converters/usage.choose_text_converter.png"/>
 			</figure>
-			
-			<para>
-				Es ist nur die Nutzung eines Textkonverters auf einmal
-				möglich. Sollte der Wunsch danach bestehen, zwei Textkonverter
-				zu kombinieren, muss dies über ein Plug-in und einen separaten
-				Textkonverter realisiert werden (siehe <xref
-				linkend="settings.text_converters.use_other_text_converters"/>). Dies
-				wird zum jetzigen Zeitpunkt nicht empfohlen.
-			</para>
 			
 			<note>
 				<para>
@@ -183,7 +379,7 @@
 			</note>
 			
 			<para>
-				Hilftsfunktionen von Welcompose, beispielsweise zum Setzen
+				Hilfsfunktionen von Welcompose, beispielsweise zum Setzen
 				interner Links oder zum Einfügen eines Bildes berücksichtigen
 				automatisch den jeweils gewählten Textkonverter. Das heisst,
 				dass je nach Textkonverter automatisch die richtige Syntax
@@ -204,6 +400,7 @@
 				</para>
 			</note>
 		</sect2>
+
 		
 		<sect2 id="settings.text_converters.xhtml_markdown_and_textile">
 			<title>XHTML, Markdown und Textile</title>
@@ -305,14 +502,6 @@
 		
 		<sect2 id="settings.text_converters.use_other_text_converters">
 			<title>Eigene Textkonverter integrieren</title>
-			
-			<warning>
-				<para>
-					Die API für Textkonverter befindet sich noch unter
-					starker Entwicklung und kann sich von Version zu
-					Version drastisch ändern.
-				</para>
-			</warning>
 			
 			<note>
 				<para>
@@ -698,6 +887,28 @@ w:de{Toxoplasmose}
 			
 		</sect2>
 		
+		<sect2 id="settings.text_macros.manage">
+			<title>Verwaltung</title>
+			
+			<figure id="settings.text_macros.text_macros_manage">
+				<title>Übersicht über die vorhandenen Textmakros</title>
+				<graphic fileref="images/settings/text_macros/text_macros_manage.png"/>
+			</figure>
+			
+			<para>
+				Die Übersicht der vorhandenen Textmakros in alphabetischer Reihenfolge bietet neben der Anzeige
+				des Textmakro, Links zum Bearbeiten und Löschen, sowie den Link zum 
+				<guibutton>Neu anlegen</guibutton> eines Textmakro.
+			</para>
+			
+			<note>
+				<para>
+					Lesen Sie bitte hierzu auch <xref linkend="settings.text_macros.integrate_other_text_macros.create"/>
+					und <xref linkend="settings.text_macros.integrate_other_text_macros.register"/>
+				</para>
+			</note>		
+		</sect2>
+		
 		<sect2 id="settings.text_macros.usage">
 			<title>Anwendung der Textmakros</title>
 			
@@ -902,8 +1113,8 @@ w:de{Toxoplasmose}
 				
 				<para>
 					Der Parameter <code>vid</code> ist die Identifikationsnummer des eingebundenen
-					Films, der vom jeweiligen Anbieter vergeben wird. Die Parameter <code>vid</code>
-					und <code>vid</code> bestimmen die Anzeigefläche in ihrer Seite.
+					Films, der vom jeweiligen Anbieter vergeben wird. Die Parameter <code>width</code>
+					und <code>height</code> bestimmen die Anzeigefläche in ihrer Seite.
 				</para>
 
 				<para>
@@ -1052,6 +1263,14 @@ http://www.example.com/mein-blog/archiv/2007/06/
 			<sect3 id="settings.text_macros.integrate_other_text_macros.create">
 				<title>Erstellung eines Textmakros</title>
 				
+			<note>
+				<para>
+					Wer ein Textmakros integrieren möchte, sollte mit den
+					Grundlagen objektorientierter Programmierung in PHP 5
+					vertraut sein. 
+				</para>
+			</note>
+				
 				<para>
 					Textmakros werden in Form von einfachen PHP-Funktionen
 					realisiert, in deren Rahmen man prinzipiell machen kann,
@@ -1160,7 +1379,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 					im Verzeichnis
 					<filename>core/plugins/textmacros/</filename> abgelegt
 					wurde, ist es einsatzbereit und muss nur noch in
-					Welcompose aktiviert werden.
+					Welcompose registriert und damit aktiviert werden.
 				</para>
 				
 			</sect3>
@@ -1170,9 +1389,9 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 				
 				<para>
 					Um ein neu hinzugefügtes Textmakro nutzen zu können, muss
-					es vorab registriert werden. Dies geschieht im
+					es registriert werden. Dies geschieht im
 					Administrationsbereich unter <guimenu>Settings</guimenu>
-					beim Unterpunkt <guisubmenu>Text Macros</guisubmenu>. Wenn
+					im Unterpunkt <guisubmenu>Text Macros</guisubmenu>. Wenn
 					Sie dort auf den Link <guibutton>Add new</guibutton>
 					klicken, gelangen Sie zum Formular zum Anlegen eines neuen
 					Textmakros.
@@ -1267,45 +1486,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 				</para>
 			</note>
 		</sect2>
-
-		<sect2 id="settings.google_sitemaps.setup">
-			<title>Einrichtung</title>
-
-			<figure id="settings.google_sitemaps.edit_sitemaps">
-				<title>Seiten editieren: Sitemap Metadaten</title>
-				<graphic fileref="images/usage/sitemaps/edit_sitemaps.png"/>
-			</figure>
-
-			<variablelist>
-				<varlistentry>
-					<term><guilabel>Sitemap Änderungshäufigkeit</guilabel></term>
-					<listitem>
-						<para>
-							Wählen sie ein Zeitinterval aus, der Google sagt, wie
-							häufig aktualisierte Inhalte erwartet werden können.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guilabel>Sitemap Priorität</guilabel></term>
-					<listitem>
-						<para>
-							Wert, der Google die interne Gewichtung mitteilt. 0.5
-							ist hier der Mittelwert.
-							<note>
-								<para>
-									Bitte beachten sie, das dieser Wert keinen Einfluß auf das Ranking
-									der betreffenden Seite hat, sondern Google nur mitteilt, welche
-									Seiten der Crawler vorrangig berücksichtigen soll.
-								</para>
-							</note>
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-
-		</sect2>
-
+		
 		<sect2 id="settings.google_sitemaps.generate">
 			<title>Sitemaps erstellen</title>
 
@@ -1338,7 +1519,7 @@ function wcom_plugin_textmacro_wikipedia_callback ($args)
 				Diese beinhaltet alle Seiten, die ihrer Domain zugeordnet und nicht
 				im <emphasis>Entwurf-Modus</emphasis> gespeichert oder
 				als <emphasis>Geschützt</emphasis> ausgezeichnet sind 
-				(s. <xref linkend="contents.pages.manage.add_page"/>).
+				(s. <xref linkend="contents.pages.manage.extend_add_page"/>).
 			</para>
 
 			<para>
@@ -1374,6 +1555,44 @@ http://ihre-domain.tld/sitemap.xml.gz
 					auch nicht ;-) Weitere Information zu Sitemaps finden sie auf Google<footnote><para><ulink  url="http://www.google.com/support/webmasters/bin/topic.py?topic=8476"/></para></footnote>.
 				</para>
 			</tip>
+
+		</sect2>
+
+		<sect2 id="settings.google_sitemaps.usage">
+			<title>Anwendung</title>
+
+			<figure id="settings.google_sitemaps.edit_sitemaps">
+				<title>Seiten Metadaten: Sitemap Angaben</title>
+				<graphic fileref="images/usage/sitemaps/edit_sitemaps.png"/>
+			</figure>
+
+			<variablelist>
+				<varlistentry>
+					<term><guilabel>Sitemap Änderungshäufigkeit</guilabel></term>
+					<listitem>
+						<para>
+							Wählen sie ein Zeitinterval aus, der Google sagt, wie
+							häufig aktualisierte Inhalte erwartet werden können.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guilabel>Sitemap Priorität</guilabel></term>
+					<listitem>
+						<para>
+							Wert, der Google die interne Gewichtung mitteilt. 0.5
+							ist hier der Mittelwert.
+							<note>
+								<para>
+									Bitte beachten sie, das dieser Wert keinen Einfluß auf das Ranking
+									der betreffenden Seite hat, sondern Google nur mitteilt, welche
+									Seiten der Crawler vorrangig berücksichtigen soll.
+								</para>
+							</note>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 
 		</sect2>
 	</sect1>

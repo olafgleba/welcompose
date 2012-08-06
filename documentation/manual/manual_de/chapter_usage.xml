@@ -10,43 +10,42 @@
 		<para>
 			Die hier gelisteten Anwendungsbeispiele dienen als <emphasis>Blaupausen</emphasis> für 
 			Ihre <xref linkend="templating.templates"/>. Nachdem Sie die entsprechenden inhaltlichen
-			Seiten angelegt haben, kopieren Sie die folgenden Anwendungbeispiele und fügen sie in
-			Ihre jeweiligen Seitenvorlagen ein. Nach dem Speichern der Vorlage
-			kann die korrespondierende Ausgabeseite im Browser aufgerufen werden.
+			Seiten angelegt haben, kopieren Sie die folgenden Anwendungsbeispiele und fügen sie in
+			Ihre jeweils angelegten Seitenvorlagen ein.
 		</para>
 		
 		<para>
 			Wo es erforderlich ist auf Besonderheiten in der Beziehung zwischen Seitenvorlage und
 			den Seiteninhalten einzugehen, finden Sie in den Quelltextdateien detaillierte Kommentare.
 			Die Anwendungsbeispiele für die Seitenvorlagen beinhalten dort HTML-Markup,
-			wo es zum Verständnis der Seitenvorlage sinnvoll ist. Dieses HTML-Markup kann (und sollte)
-			von Ihnen an Ihre Bedürfnisse angepasst werden.
+			wo es zum Verständnis der Seitenvorlage sinnvoll ist. Das hier abgebildete Markup
+			hat zumeist Beispielcharakter. Dieses HTML-Markup kann (und sollte) von Ihnen an Ihre
+			Bedürfnisse angepasst werden.
 		</para>
 		
 		<note>
 			<para>
-				Beachten Sie, dass die Beispiele nur die Bereiche umfassen, die für die jeweilige Vorlage
+				Beachten Sie, dass die Anwendungsbeispiele nur die Bereiche umfassen, die für die jeweilige Vorlage
 				spezifischen Variablen und Abfragen enthält. Das für eine Webseite notwendige
 				HTML-Gerüst ist <emphasis role="strong">nicht</emphasis> Teil dieser Beispiele.   
 			</para>
 			<para>
 				Ausgenommen hiervon sind <emphasis role="strong">sämtliche</emphasis> Vorlagenbeispiele,
 				die Feeds (RSS 2.0, Atom 1.0) abbilden. Diese fügen Sie bitte 
-				<emphasis role="strong">ohne</emphasis> weiteren HTML-Kontext in Ihre Vorlagen ein.   
+				<emphasis role="strong">ohne</emphasis> weiteren HTML-Kontext in Ihre Vorlagen ein.
+				An den entsprechenden Stellen weisen Hinweise hierauf hin.   
 			</para>
 		</note>
 		
 		<para>
-			Beispiel: Einfügen der Anwendungsbeispiele in einem HTML-Kontext
+			Beispiel: Einfügen der Anwendungsbeispiele in einem HTML(5)-Kontext
 		</para>
 				
 		<programlisting language="smarty"><![CDATA[
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
 <head>
+<meta charset="utf-8">
 <title></title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
@@ -169,20 +168,20 @@ posting=$blog_posting.id}
 {/if}
 
 {if $blog_posting.comments_enable == 1}
-<h2>Kommentar hinzuf&uuml;gen</h2>
+<h2>Kommentar hinzufügen</h2>
 
 {* Beispiel:  XHTML als Textkonverter für Kommentareinträge *}
-<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+<p>Bitte füllen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
 wird nicht ver&ouml;ffentlicht. (X)HTML ist erlaubt.</p>
 
 {* Beispiel: MARKDOWN als Textkonverter für Kommentareinträge *}
-<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
-wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
+<p>Bitte füllen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, dafür
 <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
 {* Beispiel: TEXTILE als Textkonverter für Kommentareinträge *}
-<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
-wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
+<p>Bitte füllen Sie alle Felder mit einem * aus. Ihre E-Mail-Adresse
+wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, dafür
 <a href="http://textism.com/tools/textile/">Textile</a>.</p>
 
 {if !empty($form.errors)}
@@ -194,7 +193,7 @@ wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
 {/if}
 
 {if $session.form_submitted == 1}
-<h2>Danke f&uuml;r Ihren Kommentar!</h2>
+<h2>Danke für Ihren Kommentar!</h2>
 {/if}
 
 <form {$form.attributes}>
@@ -203,10 +202,10 @@ wird nicht ver&ouml;ffentlicht. HTML ist nicht erlaubt, daf&uuml;r
 <fieldset>
 {$form.hidden}
 
-<label for="name">{$form.name.label}</label> {$form.name.html}<br />
-<label for="email">{$form.email.label}</label> {$form.email.html}<br />
-<label for="homepage">{$form.homepage.label}</label> {$form.homepage.html}<br />
-<label for="comment">{$form.comment.label}</label> {$form.comment.html}<br />
+<label for="name">{$form.name.label}{qt el=$form.name}</label> {$form.name.html}<br />
+<label for="email">{$form.email.label}{qt el=$form.email}</label> {$form.email.html}<br />
+<label for="homepage">{$form.homepage.label}{qt el=$form.homepage}</label> {$form.homepage.html}<br />
+<label for="comment">{$form.comment.label}{qt el=$form.comment}</label> {$form.comment.html}<br />
 
 {* Beispiel: Wenn ein numerische Captcha genutzt werden soll *}
 <p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
@@ -399,18 +398,18 @@ start=$_item.self}">{$_item.page}</a></li>
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
-    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title>
+    <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
     <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
-    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
+    <atom:link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" page=$page.id order_macro="DATE_ADDED:DESC" draft=0}
     {foreach from=$blog_postings item=_blog_posting}
     <item>
       <title>{$_blog_posting.title|escape:"html"}</title>
-      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</link>
+      <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</link>
       <description>
         {if !empty($_blog_posting.feed_summary)}
           {$_blog_posting.feed_summary|escape:"html"}
@@ -422,7 +421,7 @@ start=$_item.self}">{$_item.page}</a></li>
         {/if}
       </description>
       <pubDate>{$_blog_posting.date_added|date_rss20}</pubDate>
-      <guid>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</guid>
+      <guid>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</guid>
     </item>
     {/foreach}
   </channel>
@@ -431,10 +430,10 @@ start=$_item.self}">{$_item.page}</a></li>
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre
 						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
-						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup>
 						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -448,20 +447,20 @@ start=$_item.self}">{$_item.page}</a></li>
 				<programlisting language="smarty"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
-  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title> 
+  <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
   <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
-  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 
   {select_named ns="Content" class="BlogPosting" method="selectBlogPostings" var="blog_postings" page=$page.id draft=0  order_macro="DATE_ADDED:DESC"}
   {foreach from=$blog_postings item=_blog_posting}
   <entry>
     <title type="html">{$_blog_posting.title|escape:"html"}</title>
-    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}"/>
+    <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}"/>
     <published>{$_blog_posting.date_added|date_atom}</published>
     <updated>{$_blog_posting.date_modified|date_atom}</updated>
-    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+    <content type="xhtml" xml:lang="de" xml:base="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}">
 	<div xmlns="http://www.w3.org/1999/xhtml">
       {if !empty($_blog_posting.feed_summary)}
         {$_blog_posting.feed_summary|escape:"html"}
@@ -473,7 +472,7 @@ start=$_item.self}">{$_item.page}</a></li>
       {/if}
 	</div>
     </content>
-    <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</id>
+    <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_posting.id}</id>
     <author>
 	  <name>{$_blog_posting.user_name}</name>
     </author>
@@ -484,10 +483,10 @@ start=$_item.self}">{$_item.page}</a></li>
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre
 						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
-						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup>
 						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -503,23 +502,23 @@ start=$_item.self}">{$_item.page}</a></li>
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
-    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title>
+    <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
     <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
-    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsRss20"}" rel="self" type="application/rss+xml" />
+    <atom:link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="CommentsRss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" page=$page.id order_macro="DATE_ADDED:DESC"}
     {foreach from=$blog_comments item=_blog_comment}
     <item>
       <title>Kommentar von {$_blog_comment.name|escape:"html"} auf Beitrag &#171;{$_blog_comment.blog_posting_title|escape:"html"}&#187;</title>
-      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</link>
+      <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}</link>
       <description>
         {$_blog_comment.content|escape:"html"}
       </description>
       <pubDate>{$_blog_comment.date_added|date_rss20}</pubDate>
-      <guid isPermaLink="false">tag:%%%IHRE-DOMAIN.TLD%%%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</guid>
+      <guid isPermaLink="false">tag:%IHRE-DOMAIN.TLD%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</guid>
     </item>
     {/foreach}
   </channel>
@@ -528,10 +527,10 @@ start=$_item.self}">{$_item.page}</a></li>
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre
 						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
-						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup>
 						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -546,25 +545,25 @@ start=$_item.self}">{$_item.page}</a></li>
 				<programlisting language="smarty"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
-  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="CommentsAtom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title> 
+  <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="CommentsAtom10"}" rel="self" title="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
   <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
-  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 	
   {select_named ns="Community" class="BlogComment" method="selectBlogComments" var="blog_comments" page=$page.id order_macro="DATE_ADDED:DESC"}
   {foreach from=$blog_comments item=_blog_comment}
   <entry>
     <title type="html">Kommentar von {$_blog_comment.name|escape:"html"} auf Beitrag &#171;{$_blog_comment.blog_posting_title|escape:"html"}&#187;</title>
-    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}"/>
+    <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_blog_comment.blog_posting_id}"/>
     <published>{$_blog_comment.date_added|date_atom}</published>
     <updated>{$_blog_comment.date_modified|date_atom}</updated>
-    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+    <content type="xhtml" xml:lang="de" xml:base="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}">
       <div xmlns="http://www.w3.org/1999/xhtml">
         {$_blog_comment.content}
       </div>
     </content>
-    <id>tag:%%%IHRE-DOMAIN.TLD%%%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</id>
+    <id>tag:%IHRE-DOMAIN.TLD%,{$_blog_comment.date_added|date_format:"%Y-%m-%d"}:{$_blog_comment.id}</id>
     <author>
       <name>{$_blog_comment.name}</name>
     </author>
@@ -575,10 +574,10 @@ start=$_item.self}">{$_item.page}</a></li>
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre
 						jeweilige Umgebung angepasst und <emphasis role="strong">inklusive</emphasis> der
-						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup>
+						Zeichenfolge ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup>
 						wird beispielsweise <markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -631,7 +630,7 @@ start=$_item.self}">{$_item.page}</a></li>
 			<para>
 				Der Seitentyp <guimenuitem>WCOM_EVENT</guimenuitem> ist prädestiniert um
 				terminliche Inhalte wie Veranstaltungen, Seminare oder sonstige Events,
-				die an ein oder über mehrere Tage stattfinden abzubilden. Wie bei Blogseiten sind hier
+				die an ein oder über mehreren Tagen stattfinden abzubilden. Wie bei Blogseiten sind hier
 				valide RSS 2.0 oder/und Atom 1.0 Feeds verfügbar.
 			</para>
 			
@@ -703,23 +702,23 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
-    <link>%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title>
+    <link>%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
     <generator>Welcompose 0.9.4 (http://welcompose.de/)</generator>
-    <atom:link href="%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
+    <atom:link href="%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Content" class="EventPosting" method="selectEventPostings" var="event_postings" page=$page.id order_macro="DATE_ADDED:DESC" draft=0}
     {foreach from=$event_postings item=_event_posting}
     <item>
       <title>{$_event_posting.title|escape:"html"}</title>
-      <link>%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Index}#{$_event_posting.title_url}</link>
+      <link>%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Index}#{$_event_posting.title_url}</link>
       <description>
           {$_event_posting.content|escape:"html"}
       </description>
       <pubDate>{$_event_posting.date_added|date_rss20}</pubDate>
-      <guid>%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}#{$_event_posting.title_url}</guid>
+      <guid>%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}#{$_event_posting.title_url}</guid>
     </item>
     {/foreach}
   </channel>
@@ -728,10 +727,10 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
 						angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
-						ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+						ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup> wird beispielsweise
 						<markup><![CDATA[welcompose.de]]></markup>. 
 					</para>
 				</note>
@@ -746,25 +745,25 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 				<programlisting language="smarty"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
-  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title> 
+  <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
   <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
-  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 
   {select_named ns="Content" class="EventPosting" method="selectEventPostings" var="event_postings" page=$page.id draft=0 tag_word_url=$request.tag order_macro="DATE_ADDED:DESC"}
   {foreach from=$event_postings item=_event_posting}
   <entry>
     <title type="html">{$_event_posting.title|escape:"html"}</title>
-    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_event_posting.id}"/>
+    <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_event_posting.id}"/>
     <published>{$_event_posting.date_added|date_atom}</published>
     <updated>{$_event_posting.date_modified|date_atom}</updated>
-    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+    <content type="xhtml" xml:lang="de" xml:base="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}">
 		<div xmlns="http://www.w3.org/1999/xhtml">
       {$_event_posting.content|escape:"html"}
 		</div>
     </content>
-    <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action=Item posting_id=$_event_posting.id}</id>
+    <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action=Item posting_id=$_event_posting.id}</id>
     <author>
 	  <name>{$_event_posting.user_name}</name>
     </author>
@@ -775,10 +774,10 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 
 				<note>
 					<para>
-						Auch hier gilt: Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
 						angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
-						ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+						ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup> wird beispielsweise
 						<markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -849,7 +848,7 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 
 {* Wenn das Formular erfolgreich abgeschickt wurde *}
 {if $session.form_submitted == 1}
-<h2>Danke f&uuml;r Ihre Anfrage</h2>
+<h2>Danke für Ihre Anfrage</h2>
 {/if}
 
 <form {$form.attributes}>
@@ -862,7 +861,7 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 
 {* Ein Inputfeld vom Typ 'text' mit der Bezeichnung 'name' *}
 {* Diese Syntax beschreibt gleichzeitig auch die Standardangabe für ein Formularfeld *}
-<label for="generator_form_name">{$form.name.label}</label>{$form.name.html}<br />
+<label for="generator_form_name">{$form.name.label}{qt el=$form.name}</label>{$form.name.html}<br />
 
 ... weitere Formularfelder ...
 
@@ -886,6 +885,7 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 
 {/if}
 
+{* Setzt voraus, dass es ein Formularfeld vom Typ 'submit' gleichen Namens gibt *}
 {$form.submit.html}
 </fieldset>
 </form>
@@ -901,56 +901,12 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 			<programlisting language="smarty"><![CDATA[
 {$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M"}
 
-{$form_data.<<<name-des-formularfeldes>>>}
+{$form_data.<name-des-formularfeldes>}
 
 {* Ein Beispieleintrag mit dem Feldnamen email *}
 {$form_data.email}
 
 ]]></programlisting>
-
-
-			<sect3 id="usage.generated_forms.fieldtypes">
-				<title>Folgende Feldtypen stehen zur Auswahl</title>
-				
-				<table frame="none" id="usage.generated_forms.fieldtypes.list_of_field_types">
-					<title>Liste der Feldtypen</title>
-					<tgroup cols="4">
-						<thead>
-							<row>
-								<entry>
-									Feld-Typ Name
-								</entry>
-								<entry>
-									Beschreibung
-								</entry>
-								<entry>
-									Seiten-Typ
-								</entry>
-								<entry>
-									URL-Action
-								</entry>
-							</row>
-						</thead>
-						<tbody>
-							<row>
-								<entry>
-									blog_archive_month
-								</entry>
-								<entry>
-									Monatsarchiv einer Blog-Seite
-								</entry>
-								<entry>
-									WCOM_BLOG
-								</entry>
-								<entry>
-									ArchiveMonth
-								</entry>
-							</row>
-						</tbody>
-					</tgroup>
-				</table>
-			</sect3>
-				
 		
 			<sect3 id="usage.generated_forms.fieldtyp.default">
 				<title>Standardsyntax eines Formularfeldes</title>
@@ -961,10 +917,10 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 				</para>
 
 			<programlisting language="smarty"><![CDATA[
-<label for="generator_form_<<<name-des-formularfeldes>>>">{$form.<<name-des-formularfeldes>>>.label}</label>{$form.<<name-des-formularfeldes>>>.html}
+<label for="generator_form_<name-des-formularfeldes>">{$form.<name-des-formularfeldes>.label}{qt el=$form.<name-des-formularfeldes>}</label>{$form.<name-des-formularfeldes>.html}
 
 {* Ein Beispieleintrag mit dem Feldnamen email *}
-<label for="generator_form_email">{$form.email.label}</label>{$form.email.html}
+<label for="generator_form_email">{$form.email.label}{qt el=$form.email}</label>{$form.email.html}
 ]]></programlisting>
 			</sect3>
 			
@@ -977,56 +933,18 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 					Bei Formularfeldern vom Typ <emphasis>radio</emphasis> und <emphasis>submit</emphasis> ist
 					zudem eine von Standard abweichende Syntax in der Seitenvorlage erforderlich.
 				</para>
-				
-			<sect4 id="usage.generated_forms.fieldtyp.select">
-				<title>Formulartyp select</title>
-
-				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>select</emphasis></para>
-				<variablelist>
-					<varlistentry>
-						<term><guimenuitem>Beschriftung</guimenuitem></term>
-						<listitem>
-							<para>
-								Geben Sie hier den Text an, der für das Auswahlmenu
-								angezeigt werden soll. Bsp. <emphasis>Auswahl</emphasis>
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guimenuitem>Name</guimenuitem></term>
-						<listitem>
-							<para>
-								Geben Sie hier den Namen für das Formularfeld an. Dieser
-								Name wird als Angabe in den Seitenvorlagen genutzt.
-								Bsp. <emphasis>auswahl</emphasis>
-							</para>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><guimenuitem>Wert</guimenuitem></term>
-						<listitem>
-							<para>
-								Um mehrere Werte in einem Auswahlmenu anzugeben, geben Sie
-								die einzelnen Werte bitte hintereinander und trennen diese
-								jeweils mit einem <emphasis role="strong">Kommata</emphasis>.
-								 Bsp. <emphasis>Wert1,Wert2,Wert3</emphasis>
-							</para>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-			</sect4>
 								
 			<sect4 id="usage.generated_forms.fieldtyp.submit">
 				<title>Formulartyp submit</title>
 				
-				<para>Seitenvorlage: Angabe eines Input-Feldes vom Typ <emphasis>submit</emphasis></para>
+				<para><emphasis role="strong">Seitenvorlage:</emphasis> Angabe eines Input-Feldes vom Typ <emphasis>submit</emphasis></para>
 
 				<programlisting language="smarty"><![CDATA[
 {* Ein Inputfeld vom Typ 'submit' mit dem Namen 'senden' *}
 {$form.senden.html}
 ]]></programlisting>
 
-				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>submit</emphasis></para>
+				<para><emphasis role="strong">Inhaltliche Seite:</emphasis> Angaben für den Formulartyp <emphasis>submit</emphasis></para>
 				<variablelist>
 					<varlistentry>
 						<term><guimenuitem>Beschriftung</guimenuitem></term>
@@ -1063,15 +981,21 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 			<sect4 id="usage.generated_forms.fieldtyp.radio">
 				<title>Formulartyp radio</title>
 
-				<para>Seitenvorlage: Angabe eines Input-Feldes vom Typ <emphasis>radio</emphasis></para>
+				<para><emphasis role="strong">Seitenvorlage:</emphasis> Angabe eines Input-Feldes vom Typ <emphasis>radio</emphasis></para>
 			<programlisting language="smarty"><![CDATA[
+{* Da eine Gruppe von Radio-Elementen kein originäres Label hat, definiert
+man ein HTML-Element seiner Wahl (hier h4). An diesem setzen wir auch die Indikator, 
+wenn die Auswahl mindestens eines Radiobuttons als erforderlich konfiguriert wurde. *}
+
+<h4>Radiogruppe{qt el=$form.radiogruppe}</h4>
+
 {* Ein Inputfeld vom Typ 'radio' mit dem Namen 'radiogruppe' *}
-{foreach from=$form.radiogruppe item=_radiogruppe}
+{foreach from=$form.radiogruppe.elements item=_radiogruppe}
 {$_radiogruppe.html}
 {/foreach}
 ]]></programlisting>
 
-				<para>Inhaltliche Seite: Angaben für den Formulartyp <emphasis>radio</emphasis></para>
+				<para><emphasis role="strong">Inhaltliche Seite:</emphasis> Angaben für den Formulartyp <emphasis>radio</emphasis></para>
 				<variablelist>
 					<varlistentry>
 						<term><guimenuitem>Beschriftung</guimenuitem></term>
@@ -1105,9 +1029,249 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 					</varlistentry>
 				</variablelist>
 			</sect4>
+			
+			<sect4 id="usage.generated_forms.fieldtyp.select">
+				<title>Formulartyp select</title>
+				
+				<para><emphasis role="strong">Seitenvorlage:</emphasis> Angabe eines Input-Feldes vom Typ <emphasis>select</emphasis></para>
+				
+				<para><emphasis>Hier gibt es keine vom Standard abweichende Syntax.</emphasis></para>
+
+				<para><emphasis role="strong">Inhaltliche Seite:</emphasis> Angaben für den Formulartyp <emphasis>select</emphasis></para>
+				<variablelist>
+					<varlistentry>
+						<term><guimenuitem>Beschriftung</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Text an, der für das Auswahlmenu
+								angezeigt werden soll. Bsp. <emphasis>Auswahl</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Name</guimenuitem></term>
+						<listitem>
+							<para>
+								Geben Sie hier den Namen für das Formularfeld an. Dieser
+								Name wird als Angabe in den Seitenvorlagen genutzt.
+								Bsp. <emphasis>Auswahl</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guimenuitem>Wert</guimenuitem></term>
+						<listitem>
+							<para>
+								Um mehrere Werte in einem Auswahlmenu anzugeben, geben Sie
+								die einzelnen Werte bitte hintereinander und trennen diese
+								jeweils mit einem <emphasis role="strong">Kommata</emphasis>.
+								 Bsp. <emphasis>Wert1,Wert2,Wert3</emphasis>
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect4>
 		</sect3>
 
 		</sect2>
+		
+		<sect2 id="usage.simple_forms">
+			<title>Einfache Formulare (WCOM_SIMPLE_FORM)</title>
+			<para>
+				Formulare des Seitentyps <guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> bieten zwei vorkonfiguierte
+				Formulare an, die sich nur in den zur Verfügung stehenden Formularfelder unterscheiden.
+				Eine große Anzahl an Anwendungen sind durch diese beiden Formulartypen bereits abgedeckt.
+				Zur Verfügung stehen die Formulartypen <guimenuitem>Privates Formular</guimenuitem> und 
+				<guimenuitem>Geschäftliches Formular</guimenuitem>.  
+			</para>
+
+			<para>
+				Zur Verfügung stehende Formularfelder der beiden Formulartypen:  
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><guimenuitem>Privates Formular</guimenuitem></term>
+					<listitem>
+						<para>
+							Name, E-Mail, Homepage, Nachricht
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guimenuitem>Geschäftliches Formular</guimenuitem></term>
+					<listitem>
+						<para>
+							Anrede, Vorname, Nachname, Adresse, Ort, Rückruf, Telefon, E-Mail, Nachricht
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			
+			<sect3 id="usage.simple_forms.typ.personalForm">
+				<title>Privates Formular</title>
+				
+				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Inhalte der Simple Form *}
+{$simple_form.content}
+
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke für Ihre Anfrage</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset id="formular">
+{$form.hidden}
+
+{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Privates Formular' ausgewählt wurde *}
+<label for="simple_form_name">{$form.name.label}{qt el=$form.name}</label>{$form.name.html}<br />
+<label for="simple_form_email">{$form.email.label}{qt el=$form.email}</label>{$form.email.html}<br />
+<label for="simple_form_homepage">{$form.homepage.label}{qt el=$form.homepage}</label> {$form.homepage.html}<br />
+<label for="simple_form_message">{$form.message.label}{qt el=$form.message}</label>{$form.message.html}<br />
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $simple_form.use_captcha == 'numeral'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $simple_form.use_captcha == 'image'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+]]></programlisting>
+
+				<para>
+					Um die E-Mail des Typs <emphasis>Privates Formular</emphasis> zu versenden, wird
+					eine korrespondierende E-Mail Vorlage benötigt.
+				</para>	
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_personal_form_mail</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M"}
+
+{$form_data.name}
+{$form_data.email}
+{$form_data.homepage}
+{$form_data.message}
+]]></programlisting>
+
+			</sect3>
+
+			<sect3 id="usage.simple_forms.typ.businessForm">
+				<title>Geschäftliches Formular</title>			
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{* Inhalte der Simple Form *}
+{$simple_form.content}
+
+{* Validierungsfehler ausgeben, wenn vorhanden *}
+{if !empty($form.errors)}
+<ul>
+{foreach from=$form.errors item="error"}
+  <li>{$error}</li>
+{/foreach}
+</ul>
+{/if}
+{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
+
+{* Wenn das Formular erfolgreich abgeschickt wurde *}
+{if $session.form_submitted == 1}
+<h2>Danke für Ihre Anfrage</h2>
+{/if}
+
+<form {$form.attributes}>
+{$form.javascript}
+
+<fieldset id="formular">
+{$form.hidden}
+
+{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Geschäftliches Formular' ausgewählt wurde *}
+<label for="simple_form_salutation">{$form.salutation.label}{qt el=$form.salutation}</label>{$form.salutation.html}<br />
+<label for="simple_form_first_name">{$form.first_name.label}{qt el=$form.first_name}</label>{$form.first_name.html}<br />
+<label for="simple_form_last_name">{$form.last_name.label}{qt el=$form.last_name}</label>{$form.last_name.html}<br />
+<label for="simple_form_address">{$form.address.label}{qt el=$form.address}</label>{$form.address.html}<br />
+<label for="simple_form_location">{$form.location.label}{qt el=$form.location}</label>{$form.location.html}<br />
+<label for="simple_form_call_back">{$form.call_back.label}{qt el=$form.call_back}</label>{$form.call_back.html}<br />
+<label for="simple_form_phone">{$form.phone.label}{qt el=$form.phone}</label>{$form.phone.html}<br />
+<label for="simple_form_email">{$form.email.label}{qt el=$form.email}</label>{$form.email.html}<br />
+<label for="simple_form_message">{$form.message.label}{qt el=$form.message}</label>{$form.message.html}<br />
+
+{* Wenn ein numerische Captcha genutzt werden soll *}
+{if $simple_form.use_captcha == 'numeral'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
+<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
+<p><strong>{$captcha}</strong></p>
+<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
+
+{* Wenn ein Bild-Captcha genutzt werden soll *}
+{elseif $simple_form.use_captcha == 'image'}
+
+<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
+ href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
+<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
+<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
+
+{/if}
+
+{$form.submit.html}
+</fieldset>
+</form>
+]]></programlisting>
+
+				<para>
+					Um die E-Mail des Typs <emphasis>Geschäftliches Formular</emphasis> zu versenden, wird
+					eine korrespondierende E-Mail Vorlage benötigt.
+				</para>	
+			
+				<para>Vorlagentyp: <guimenuitem>simple_form_business_form_mail</guimenuitem></para>
+
+				<programlisting language="smarty"><![CDATA[
+{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M"}
+
+{$form_data.salutation}
+{$form_data.first_name}
+{$form_data.last_name}
+{$form_data.address}
+{$form_data.location}
+{$form_data.call_back}
+{$form_data.phone}
+{$form_data.email}
+{$form_data.message}
+]]></programlisting>
+			</sect3>
+
+		</sect2>
+
 
 		<sect2 id="usage.simple_guestbooks">
 			<title>Einfaches Gästebuch (WCOM_SIMPLE_GUESTBOOK)</title>
@@ -1160,9 +1324,9 @@ var="event_posting_count" tag_word_url=$request.tag draft=0 page=$page.id}
 Textkonverter berücksichtigt. *}
 {select_simple ns="Application" class="Textconverter" method="selectTextConverter" var="_text_converter" id=$simple_guestbook.text_converter}
 
-{if $_text_converter.internal_name == 'textile'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, daf&uuml;r <a href="http://textism.com/tools/textile/">Textile</a>
-{elseif $_text_converter.internal_name == 'markdown'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, daf&uuml;r <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
-{elseif $_text_converter.internal_name == 'xhtml'}<p>Bitte f&uuml;llen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt.{/if}
+{if $_text_converter.internal_name == 'textile'}<p>Bitte füllen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, dafür <a href="http://textism.com/tools/textile/">Textile</a>
+{elseif $_text_converter.internal_name == 'markdown'}<p>Bitte füllen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt, dafür <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+{elseif $_text_converter.internal_name == 'xhtml'}<p>Bitte füllen Sie alle Felder mit einem * aus. HTML ist nicht erlaubt.{/if}
 </p>
 	
 {* Validierungsfehler ausgeben, wenn vorhanden *}
@@ -1177,7 +1341,7 @@ Textkonverter berücksichtigt. *}
 
 {* Wenn das Formular erfolgreich abgeschickt wurde *}
 {if $session.form_submitted == 1}
-<h2>Danke f&uuml;r Ihren Eintrag!</h2>
+<h2>Danke für Ihren Eintrag!</h2>
 {/if}
 
 <form {$form.attributes}>
@@ -1186,10 +1350,10 @@ Textkonverter berücksichtigt. *}
 <fieldset>
 {$form.hidden}
 
-<label for="guestbook_entry_name">{$form.name.label}</label> {$form.name.html}<br />
-<label for="guestbook_entry_email">{$form.email.label}</label> {$form.email.html}<br />
-<label for="guestbook_entry_subject">{$form.subject.label}</label> {$form.subject.html}<br />
-<label for="guestbook_entry_content">{$form.content.label}</label> {$form.content.html}<br />
+<label for="guestbook_entry_name">{$form.name.label}{qt el=$form.name}</label> {$form.name.html}<br />
+<label for="guestbook_entry_email">{$form.email.label}{qt el=$form.email}</label> {$form.email.html}<br />
+<label for="guestbook_entry_subject">{$form.subject.label}{qt el=$form.subject}</label> {$form.subject.html}<br />
+<label for="guestbook_entry_content">{$form.content.label}{qt el=$form.content}</label> {$form.content.html}<br />
 
 {* Wenn ein numerische Captcha genutzt werden soll *}
 {if $simple_guestbook.use_captcha == 'numeral'}
@@ -1300,31 +1464,31 @@ Textkonverter berücksichtigt. *}
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title>
-    <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+    <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title>
+    <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</link>
     <description/>
     <language>de-DE</language>
     <generator>Welcompose 0.9.0 (http://welcompose.de/)</generator>
-    <atom:link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
+    <atom:link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Rss20"}" rel="self" type="application/rss+xml" />
 
     {select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" page=$page.id order_macro="DATE_START" draft=0}
     {foreach from=$dates item=_date}
     <item>
       <title>{$_date.date_start|date_format:"%a, %d.%m.%Y, %H:%M Uhr"}, {$_date.location|escape:"html"}</title>
-      <link>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</link>
+      <link>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</link>
       <description>
       {* Bitte entfernen Sie im realen Einsatz das Leerzeichen zwischen '<' und '![CDATA[' sowie diese Kommentarzeile *}
       < ![CDATA[
         <ul>
-       {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
-       {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
-       {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
+       {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
+       {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
+       {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
         </ul>
       {* Bitte entfernen Sie im realen Einsatz das Leerzeichen zwischen ']]' und '>' sowie diese Kommentarzeile *}
       ]] >
       </description>
       <pubDate>{$_date.date_added|date_rss20}</pubDate>
-      <guid isPermaLink="false">tag:%%%IHRE-DOMAIN.TLD%%%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</guid>
+      <guid isPermaLink="false">tag:%IHRE-DOMAIN.TLD%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</guid>
     </item>
     {/foreach}
   </channel>
@@ -1333,10 +1497,10 @@ Textkonverter berücksichtigt. *}
 
 				<note>
 					<para>
-						Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+						Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
 						angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
-						ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+						ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup> wird beispielsweise
 						<markup><![CDATA[welcompose.de]]></markup>. 
 					</para>
 				</note>
@@ -1351,29 +1515,29 @@ Textkonverter berücksichtigt. *}
 				<programlisting language="smarty"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>%%%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%%%</title> 
-  <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
+  <title>%TITEL-DER-IM-NEWSREADER-ANGEZEIGT-WIRD%</title> 
+  <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" rel="self" title="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id action="Atom10"}" type="application/atom+xml" />
   <generator uri="http://www.welcompose.de/" version="0.9.0">Welcompose</generator>
-  <id>http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}</id>
+  <id>http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}</id>
   <updated>{$_date.date_modified|date_atom}</updated>
 
   {select_named ns="Content" class="SimpleDate" method="selectSimpleDates" var="dates" page=$page.id draft=0 order_macro="DATE_START"}
   {foreach from=$dates item=_date}
   <entry>
     <title type="html">{$_date.date_start|date_format:"%a, %d.%m.%Y, %H:%M Uhr"}, {$_date.location|escape:"html"}</title>
-    <link href="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}"/>
+    <link href="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}"/>
     <published>{$_date.date_added|date_atom}</published>
     <updated>{$_date.date_modified|date_atom}</updated>
-    <content type="xhtml" xml:lang="de" xml:base="http://%%%IHRE-DOMAIN.TLD%%%{get_url page_id=$page.id}">
+    <content type="xhtml" xml:lang="de" xml:base="http://%IHRE-DOMAIN.TLD%{get_url page_id=$page.id}">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <ul>
-        {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
-        {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
-        {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%%%KARTEN NUR NOCH AN DER ABENDKASSE%%%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
+        {if !empty($_date.link_1)}<li>{if $_date.sold_out_1 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_1}">Tickets</a>{/if}</li>{/if}
+        {if !empty($_date.link_2)}<li>{if $_date.sold_out_2 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_2}">Tickets</a>{/if}</li>{/if}
+        {if !empty($_date.link_3)}<li>{if $_date.sold_out_3 == '1'}%KARTEN NUR NOCH AN DER ABENDKASSE%{else}<a href="{$_date.link_3}">Tickets</a>{/if}</li>{/if} 
         </ul>
       </div>
     </content>
-    <id>tag:%%%IHRE-DOMAIN.TLD%%%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</id>
+    <id>tag:%IHRE-DOMAIN.TLD%,{$_date.date_added|date_format:"%Y-%m-%d"}:{$_date.id}</id>
     <author><name>{$_date.user_name}</name></author>
   </entry>
   {/foreach}
@@ -1382,10 +1546,10 @@ Textkonverter berücksichtigt. *}
 
 				<note>
 					<para>
-						Auch hier gilt: Alle Angaben, die durch die 
-						Zeichenfolge <markup><![CDATA[%%%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
+						Auch hier gilt: Alle versalen Angaben, die durch die 
+						Zeichenfolge <markup><![CDATA[%]]></markup> umschlossen sind, müssen an Ihre jeweilige Umgebung
 						angepasst und <emphasis role="strong">inklusive</emphasis> der Zeichenfolge
-						ersetzt werden. Aus <markup><![CDATA[%%%IHRE-DOMAIN.TLD%%%]]></markup> wird beispielsweise
+						ersetzt werden. Aus <markup><![CDATA[%IHRE-DOMAIN.TLD%]]></markup> wird beispielsweise
 						<markup><![CDATA[welcompose.de]]></markup>.
 					</para>
 				</note>
@@ -1399,203 +1563,6 @@ Textkonverter berücksichtigt. *}
 						und <ulink type="external" url="http://www.atompub.org/rfc4287.html">http://www.atompub.org/rfc4287.html</ulink>  
 					</para>
 				</tip>
-			</sect3>
-
-		</sect2>
-		
-		<sect2 id="usage.simple_forms">
-			<title>Einfache Formulare (WCOM_SIMPLE_FORM)</title>
-			<para>
-				Formulare des Seitentyps <guimenuitem>WCOM_SIMPLE_FORM</guimenuitem> bieten zwei vorkonfiguierte
-				Formulare an, die sich nur in den zur Verfügung stehenden Formularfelder unterscheiden.
-				Eine große Anzahl an Anwendungen sind durch diese beiden Formulartypen bereits abgedeckt.
-				Zur Verfügung stehen die Formulartypen <guimenuitem>Privates Formular</guimenuitem> und 
-				<guimenuitem>Geschäftliches Formular</guimenuitem>.  
-			</para>
-
-			<para>
-				Zur Verfügung stehende Formularfelder der beiden Formulartypen:  
-			</para>
-			<variablelist>
-				<varlistentry>
-					<term><guimenuitem>Privates Formular</guimenuitem></term>
-					<listitem>
-						<para>
-							Name, E-Mail, Homepage, Nachricht
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><guimenuitem>Geschäftliches Formular</guimenuitem></term>
-					<listitem>
-						<para>
-							Anrede, Vorname, Nachname, Adresse, Ort, Rückruf, Telefon, E-Mail, Nachricht
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			
-			<sect3 id="usage.simple_forms.typ.personalForm">
-				<title>Privates Formular</title>
-				
-				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
-
-				<programlisting language="smarty"><![CDATA[
-{* Inhalte der Simple Form *}
-{$simple_form.content}
-
-{* Validierungsfehler ausgeben, wenn vorhanden *}
-{if !empty($form.errors)}
-<ul>
-{foreach from=$form.errors item="error"}
-  <li>{$error}</li>
-{/foreach}
-</ul>
-{/if}
-{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
-
-{* Wenn das Formular erfolgreich abgeschickt wurde *}
-{if $session.form_submitted == 1}
-<h2>Danke f&uuml;r Ihre Anfrage</h2>
-{/if}
-
-<form {$form.attributes}>
-{$form.javascript}
-
-<fieldset id="formular">
-{$form.hidden}
-
-{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Privates Formular' ausgewählt wurde *}
-<label for="simple_form_name">{$form.name.label}</label>{$form.name.html}<br />
-<label for="simple_form_email">{$form.email.label}</label>{$form.email.html}<br />
-<label for="simple_form_homepage">{$form.homepage.label}</label> {$form.homepage.html}<br />
-<label for="simple_form_message">{$form.message.label}</label>{$form.message.html}<br />
-
-{* Wenn ein numerische Captcha genutzt werden soll *}
-{if $simple_form.use_captcha == 'numeral'}
-
-<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
-<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
-<p><strong>{$captcha}</strong></p>
-<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
-
-{* Wenn ein Bild-Captcha genutzt werden soll *}
-{elseif $simple_form.use_captcha == 'image'}
-
-<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
- href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
-<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
-<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
-
-{/if}
-
-{$form.submit.html}
-</fieldset>
-</form>
-]]></programlisting>
-
-				<para>
-					Um die E-Mail des Typs <emphasis>Privates Formular</emphasis> zu versenden, wird
-					eine korrespondierende E-Mail Vorlage benötigt.
-				</para>	
-			
-				<para>Vorlagentyp: <guimenuitem>simple_form_personal_form_mail</guimenuitem></para>
-
-				<programlisting language="smarty"><![CDATA[
-{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M"}
-
-{$form_data.name}
-{$form_data.email}
-{$form_data.homepage}
-{$form_data.message}
-]]></programlisting>
-
-			</sect3>
-
-			<sect3 id="usage.simple_forms.typ.businessForm">
-				<title>Geschäftliches Formular</title>			
-			
-				<para>Vorlagentyp: <guimenuitem>simple_form_index</guimenuitem></para>
-
-				<programlisting language="smarty"><![CDATA[
-{* Inhalte der Simple Form *}
-{$simple_form.content}
-
-{* Validierungsfehler ausgeben, wenn vorhanden *}
-{if !empty($form.errors)}
-<ul>
-{foreach from=$form.errors item="error"}
-  <li>{$error}</li>
-{/foreach}
-</ul>
-{/if}
-{* EOF Validierungsfehler ausgeben, wenn vorhanden *}
-
-{* Wenn das Formular erfolgreich abgeschickt wurde *}
-{if $session.form_submitted == 1}
-<h2>Danke f&uuml;r Ihre Anfrage</h2>
-{/if}
-
-<form {$form.attributes}>
-{$form.javascript}
-
-<fieldset id="formular">
-{$form.hidden}
-
-{* Zur Verfügung stehende Formularfelder, wenn als Formulartyp 'Geschäftliches Formular' ausgewählt wurde *}
-<label for="simple_form_salutation">{$form.salutation.label}</label>{$form.salutation.html}<br />
-<label for="simple_form_first_name">{$form.first_name.label}</label>{$form.first_name.html}<br />
-<label for="simple_form_last_name">{$form.last_name.label}</label>{$form.last_name.html}<br />
-<label for="simple_form_address">{$form.address.label}</label>{$form.address.html}<br />
-<label for="simple_form_location">{$form.location.label}</label>{$form.location.html}<br />
-<label for="simple_form_call_back">{$form.call_back.label}</label>{$form.call_back.html}<br />
-<label for="simple_form_phone">{$form.phone.label}</label>{$form.phone.html}<br />
-<label for="simple_form_email">{$form.email.label}</label>{$form.email.html}<br />
-<label for="simple_form_message">{$form.message.label}</label>{$form.message.html}<br />
-
-{* Wenn ein numerische Captcha genutzt werden soll *}
-{if $simple_form.use_captcha == 'numeral'}
-
-<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes 
-<a title="Externer Link zu Wikipedia - Begriffserklärung" href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie das Ergebnis der Rechenaufgabe in das nachfolgende Feld ein (Beispiele: <em>max(3,5)</em> = <strong>5</strong>; <em>min(2,8)</em> = <strong>2</strong>; <em>3 + 5</em> = <strong>8</strong>).</p>
-<p><strong>{$captcha}</strong></p>
-<label for="simple_form_captcha">&nbsp;</label>{$form._qf_captcha.html}<br />
-
-{* Wenn ein Bild-Captcha genutzt werden soll *}
-{elseif $simple_form.use_captcha == 'image'}
-
-<p>Zur Spamvermeidung nutzt das Formular ein sogenanntes <a title="Externer Link zu Wikipedia - Begriffserklärung"
- href="http://de.wikipedia.org/wiki/Captcha">Captcha</a>. Bitte tragen Sie die Zeichenfolge in das nachfolgende Feld ein.</p>
-<p><img src="{$captcha}" width="200" height="60" alt="Captcha" /></p>
-<label for="simple_form_captcha">{$form._qf_captcha.label}</label>{$form._qf_captcha.html}<br />
-
-{/if}
-
-{$form.submit.html}
-</fieldset>
-</form>
-]]></programlisting>
-
-				<para>
-					Um die E-Mail des Typs <emphasis>Geschäftliches Formular</emphasis> zu versenden, wird
-					eine korrespondierende E-Mail Vorlage benötigt.
-				</para>	
-			
-				<para>Vorlagentyp: <guimenuitem>simple_form_business_form_mail</guimenuitem></para>
-
-				<programlisting language="smarty"><![CDATA[
-{$form_data.now|date_format:"%a, %d.%m.%Y, %H:%M"}
-
-{$form_data.salutation}
-{$form_data.first_name}
-{$form_data.last_name}
-{$form_data.address}
-{$form_data.location}
-{$form_data.call_back}
-{$form_data.phone}
-{$form_data.email}
-{$form_data.message}
-]]></programlisting>
 			</sect3>
 
 		</sect2>
@@ -1669,7 +1636,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 
 {* Ausgabe *}
 {foreach from=$pages item=_page}
-{if $_page.id == WCOM_CURRENT_PAGE}
+{if $_page.id == $page.id}
   <li>{$_page.name}</li>
 {else}
   <li><a href="{get_url page_id=$_page.id}">{$_page.name}</a></li>
@@ -1917,7 +1884,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {get_glossary var="glossary" action="pager"}
 
 <ul>
-{foreach item="_glossary" from=$glossary}
+{foreach from=$glossary item="_glossary"}
 {if !empty($_glossary.has_link)}
   <li><a href="#{$_glossary.char}">{$_glossary.char}</a></li>
 {else}
@@ -1930,7 +1897,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {get_glossary var="glossary" action="content"}
 
 <dl>
-{foreach item="_glossary" from=$glossary}
+{foreach from=$glossary item="_glossary"}
 {if !is_null($_glossary.anchor)}
 <h3>{$_glossary.anchor}<a id="{$_glossary.anchor}" name="{$_glossary.anchor}"></a></h3>
 {/if}
@@ -1950,14 +1917,14 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 			</para>
 			<para>
 				Einsatzbar in Vorlagentyp: <guimenuitem>blog_index</guimenuitem>, 
-				<guimenuitem>blog_item</guimenuitem>
+				<guimenuitem>blog_item</guimenuitem>, <guimenuitem>event_index</guimenuitem>
 			</para>
 
 			<para>Seitenvorlage: <emphasis>Tag Cloud auslesen</emphasis>
 			 (Datei: <filename>function.tag_cloud.php</filename>)</para>			
 			<programlisting><![CDATA[
-{* Smarty Tag Cloud Plugin, Parameter 'limit' und 'range' anpassbar *}
-{tag_cloud var="tags" page=$page.id limit=20 range=6}
+{* Smarty Tag Cloud Plugin, Parameter 'type', 'limit' und 'range' anpassbar *}
+{tag_cloud var="tags" type="[Blog|Event]" page=$page.id limit=20 range=6}
 <ul>
 {foreach from=$tags item=_tag}
 <li><a class="tag_{$_tag.relevance}" href="{get_url page_id=$page.id action=Index tag_word=$_tag.word_url}">{$_tag.word}</a></li>
@@ -1965,6 +1932,17 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 </ul>
 ]]></programlisting>
 
+			<warning>
+				<para>
+					Bis zur Version 0.9.2 war dieses Plugin ausschließlich für den Seitentyp <emphasis>Blog</emphasis> einsetzbar.
+					Seitdem mit Welcompose 0.9.4 der Seitentyp <emphasis>Event</emphasis> hinzu gekommen ist, für den ebenfalls
+					Tags angelegt werden können, ist die Angabe des Parameter <filename>type</filename> erforderlich. Um
+					die Anwendung in älteren Installationen nicht zu gefährden, fragt das Plugin momentan als Standard die Tags
+					des Seitentyps Blog ab. Unbenommen dessen sollten sie so bald als möglich den Plugin-Aufruf in
+					Seitenvorlagen für Blogseiten um den Parameter <filename>type</filename> erweitern.
+				</para>
+			</warning>
+			
 			<note>
 				<para>
 					Um unterschiedliches Styling je nach Relevanz der Schlagworte zu unterstützen,
@@ -2051,7 +2029,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {* Anwendungsbeispiel: Seiten beliebigen Typs - Alle Dienste nutzen *}
 {social_bookmarks page=$page.id var="sb"}
 <ul>
-{foreach from="$sb" item="_sb}
+{foreach from=$sb item="_sb"}
 <li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
 {/foreach}
 </ul>
@@ -2059,7 +2037,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {* Anwendungsbeispiel: Seiten vom Typ "blog_item" - Alle Dienste nutzen *}
 {social_bookmarks page=$page.id posting="$blog_posting.id var="sb"}
 <ul>
-{foreach from="$sb" item="_sb}
+{foreach from=$sb item="_sb"}
 <li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
 {/foreach}
 </ul>
@@ -2067,7 +2045,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {* Anwendungsbeispiel: Seiten beliebigen Typs - Nur bestimmte Dienste (hier: technorati, twitter, google) nutzen *}
 {social_bookmarks page=$page.id services="technorati,twitter,google" var="sb"}
 <ul>
-{foreach from="$sb" item="_sb}
+{foreach from=$sb item="_sb"}
 <li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
 {/foreach}
 </ul>
@@ -2075,7 +2053,7 @@ ist, achten Sie bitte auf mgl. Sperren in ihrem Browser. *}
 {* Anwendungsbeispiel: Seiten vom Typ "blog_item" - Nur bestimmte Dienste (hier: technorati, twitter, google) nutzen *}
 {social_bookmarks page=$page.id services="technorati,twitter,google" posting="$blog_posting.id var="sb"}
 <ul>
-{foreach from="$sb" item="_sb}
+{foreach from=$sb item="_sb"}
 <li><a title="Diesen Artikel auf {$_sb.service} speichern" href="{$_sb.url}"><img src="{$_sb.image}" alt="" /></a></li>
 {/foreach}
 </ul>

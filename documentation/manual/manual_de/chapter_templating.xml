@@ -151,16 +151,15 @@
 		
 		<para>
 			Damit Welcompose weiss, welche Vorlage es für welche Seite
-			respektive Ansicht aus einem Vorlagengruppe auswählen muss, 
+			respektive Ansicht aus einer Vorlagengruppe auswählen muss, 
 			kommen die <emphasis role="bold">Vorlagentypen</emphasis> zum
 			Einsatz. Sie definieren, für welchen Zweck respektive Ansicht eine
 			Vorlage geeignet ist. So wird die Vorlage zur Darstellung eines
-			Formulars auch wirklich zur Darstellung eines Formulars und nicht
-			einer Inhaltsseite verwendet. Und da pro Vorlagengruppe nur jeweils
+			Formulars ausschließlich zur Darstellung eines Formulars und nicht
+			etwa einer Inhaltsseite verwendet. Und da pro Vorlagengruppe nur jeweils
 			eine Vorlage mit einem bestimmten Typ erlaubt ist, kommt es auch
-			zu keinem Durcheinander, dass Welcompose auf einmal nicht
-			entscheiden kann, welche der verschiedenen Vorlagen mit dem
-			gleichen Typ gewählt werden soll. 
+			zu keinen internen Kollisionen in Welcompose, welche der 
+			verschiedenen Vorlagen mit dem gleichen Typ gewählt werden soll. 
 		</para>
 		
 		<para>
@@ -173,14 +172,6 @@
 			gewünschten Typs vorhanden ist. Wenn ja, wird diese zur
 			Aufbereitung der Seite verwendet. Wenn nicht, wird ein Fehler
 			angezeigt. 
-		</para>
-		
-		<para>
-			Wie man sich dieses Prinzip zu Nutze machen kann, um beispielsweise
-			Vorlagen schnell und einfach zu wechseln oder für verschiedene
-			Seiten verschiedene Designs zu haben, zeigen die
-			Anwendungsbeispiele, die in den Kapiteln zu Vorlagen,
-			Vorlagengruppenn und Vorlagentypen enthalten sind.
 		</para>
 	</sect1>
 	
@@ -196,7 +187,7 @@
 				normalen HTML-Dateien hinterlegt, bei denen die Inhalte, die
 				mit Welcompose verwaltet werden sollen, durch Platzhalter
 				ersetzt werden. Diese werden wiederum von Welcompose beim
-				Seitenaufruf mit den jeweiligen Inhalten vertauscht.
+				Seitenaufruf durch die jeweiligen Inhalten ersetzt.
 				Selbstverständlich ist man nicht nur auf HTML begrenzt und
 				kann jede Markup-Sprache verwenden, die man benötigt &ndash;
 				oder sogar nur nackten Text.
@@ -526,7 +517,7 @@
 					Variables</computeroutput> listet die Smarty Debug Console
 					die bis zum Aufruf von <code>{debug}</code> der Vorlage
 					zugewiesenen Variablen (links, <varname>{$page}</varname> usw.)
-					inklusive ihrer aktuellen Inhalte (rechts, grüne Schrift).
+					inklusive ihrer aktuellen Inhalte und Werte (rechts).
 				</para>
 
 				<para>
@@ -1917,13 +1908,15 @@ $smarty->fetch($template_name);
 						<para>
 							Legt fest, ob Smarty für die Verarbeitung der
 							Vorlage einen anderen Delimiter verwenden soll.
-							Dies ist bei Dateien nötig, in denen viele 
-							geschweifte Klammern (<code><![CDATA[{]]></code>
-							und <code><![CDATA[}]]></code>) vorkommen, da
-							sonst die Inhalte als Befehle interpretiert werden
-							können. Ist die Box angekreuzt, verwendet Smarty
-							als Delimiter <code><![CDATA[<%]]></code> und
-							<code><![CDATA[%>]]></code>, wodurch die
+							Dies ist beispielsweise bei CSS oder Javascript-Dateien
+							notwendig, deren Syntax geschweifte Klammern (<code><![CDATA[{]]></code>
+							und <code><![CDATA[}]]></code>) beinhaltet. Da das
+							Vorlagensystem von Welcompose auf Smarty basiert, das 
+							ebenfalls geschweifte Klammern verwendet, muss bei einigen
+							Dateitypen der Delimiter gewechselt werden, damit der 
+							Inhalt der Datei korrekt verarbeitet werden kann. Ist die Box angekreuzt,
+							verwendet Smarty als Delimiter <code><![CDATA[=%]]></code> und
+							<code><![CDATA[%=]]></code>, wodurch die
 							geschweiften Klammern nicht mehr interpretiert
 							werden. Für welchen Dateityp so ein
 							Delimiter-Wechsel sinnvoll sein dürfte, zeigt
@@ -2014,6 +2007,12 @@ $smarty->fetch($template_name);
 					</tbody>
 				</tgroup>
 			</table>
+			
+			<note>
+				<para>
+					Siehe auch <link linkend="update_history.0.9.6">Änderungshistorie</link>.
+				</para>
+			</note>
 			
 		</sect2>
 		
@@ -2176,7 +2175,7 @@ http://pfad/der/installation/global_template.php?name=beispiel.css
 	position: relative;
 	margin: 0 auto;
 	width: 993px;
-	background: #fff url(<%global_file name="container-bg.gif"%>) top right no-repeat;
+	background: #fff url(=%global_file name="container-bg.gif"%=) top right no-repeat;
 	text-align: left;
 }
 ]]></programlisting>

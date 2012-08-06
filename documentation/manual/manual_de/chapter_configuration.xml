@@ -266,7 +266,7 @@ level = PEAR_LOG_WARNING
 					<term>debug</term>
 					<listitem>
 						<para>
-							Ist momentan nicht dokumentiert (Stand: <?dbtimestamp format="d.m.Y"?>)
+							Diese Einstellung ist momentan nicht verfügbar (Stand: <?dbtimestamp format="d.m.Y"?>)
 						</para>
 					</listitem>
 				</varlistentry>
@@ -299,11 +299,11 @@ level = PEAR_LOG_WARNING
 							und Englisch (<userinput>en_GB.UTF-8</userinput>, Standard) zur
 							Verfügung. Die Angaben beziehen sich auf Text und Datumsangaben
 							(<code>LC_ALL</code>). Wird durch die Angaben
-							im Setup-Prozeß eingefügt.							
+							im Setup-Prozeß eingefügt.
 							<note>
 								<para>
-									Für alle Welcompose Version &lt; 0.9.0, die noch mit der
-									Zeichenkodierung ISO-8859-1 arbeiten, tragen Sie bitte hier
+									Für alle Welcompose Version <emphasis role="strong">kleiner</emphasis> 0.9.0, die noch
+									mit der Zeichenkodierung ISO-8859-1 arbeiten, tragen Sie bitte hier
 									(<userinput>de_DE</userinput>) ein.
 								</para>
 							</note>
@@ -378,7 +378,7 @@ level = PEAR_LOG_WARNING
 					<term>debug</term>
 					<listitem>
 						<para>
-							Ist momentan nicht dokumentiert (Stand: <?dbtimestamp format="d.m.Y"?>)
+							Diese Einstellung ist momentan nicht verfügbar (Stand: <?dbtimestamp format="d.m.Y"?>)
 						</para>
 					</listitem>
 				</varlistentry>
@@ -518,7 +518,7 @@ chmod = 0644
 			<title>Caching [caching]</title>
 		
 			<para>
-				Diese Einstellung ist momentan noch nicht verfügbar (Stand: <?dbtimestamp format="d.m.Y"?>)
+				Diese Einstellung ist momentan nicht verfügbar (Stand: <?dbtimestamp format="d.m.Y"?>)
 			</para>
 		</sect2>
 		
@@ -593,7 +593,7 @@ chmod = 0644
 			</para>
 			
 			<para>
-				Aktuelle URL-Muster (Welcompose Version 0.9.4):
+				Aktuelle URL-Muster (Welcompose Version 0.9.6):
 			</para>
 			
 				<programlisting language="ini"><![CDATA[

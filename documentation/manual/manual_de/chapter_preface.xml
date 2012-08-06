@@ -40,7 +40,7 @@
 		<title>Konventionen</title>
 		
 		<para>
-			Semantische Auszeichnungen und Symbol/Icon-Nutzung innerhalb des Handbuches.
+			Auszeichnungen und Symbol/Icon-Nutzung innerhalb des Handbuches.
 		</para>
 
 		<sect2 id="preface.conventions.icons">
@@ -134,19 +134,19 @@
 	
 			<tip>
 				<para>
-					Kontextbezogene, systemunabhängige Tipps.
+					Kontextbezogene Tipps
 				</para>
 			</tip>
 
 			<note>
 				<para>
-					Kontextbezogene Informationen und Hinweise.
+					Kontextbezogene Informationen und Hinweise
 				</para>
 			</note>
 
 			<warning>
 				<para>
-					Kontextbezogene Hinweise zu möglichen Fehlerquellen.
+					Kontextbezogene Hinweise zu möglichen Fehlerquellen
 				</para>
 			</warning>
 
