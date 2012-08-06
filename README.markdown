@@ -19,12 +19,13 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 
 ## Websites using Welcompose (Excerpt) ##
 
+* [http://marcoschreyl.de/](http://marcoschreyl.de/)
 * [http://christine-westermann.de/](http://christine-westermann.de/)
+* [http://jan-gregor-kremp.de/](http://jan-gregor-kremp.de/)
+* [http://ankeloenne.com/](http://ankeloenne.com/)
 * [http://www.gruen-strom.de/](http://www.gruen-strom.de/)
 * [http://www.autrado.de/](http://www.autrado.de/)
 * [http://alexangrick.de/](http://alexangrick.de/)
-* [http://jan-gregor-kremp.de/](http://jan-gregor-kremp.de/)
-* [http://ankeloenne.com/](http://ankeloenne.com/)
 * [http://jessica-kastrop.de/](http://jessica-kastrop.de/)
 * [http://www.cuxhaven-privat.de/](http://www.cuxhaven-privat.de/)
 
@@ -41,7 +42,7 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * Intuitive and simple to learn backend for the developer but also the content editor
 * Markup editor as a additional add on ([MarkItUp!](http://markitup.jaysalvat.com/home/))
 * Extensive options to build SEO web sites
-* Platform and Browser independent (Works with IE >= 7, FF >= 1.5, Safari >=3.12)
+* Platform and Browser independent (Works with IE >= 8, FF >= 1.5, Safari >=3.12)
 
 
 
@@ -84,7 +85,7 @@ One page each chapter (DocBook html):
 
 Current API Documentation (phpDocumentor):
 
-[http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip](http://downloads.welcompose.de/api/welcompose-api-0.9.2.zip)
+[http://downloads.welcompose.de/api/welcompose-api-0.9.6.zip](http://downloads.welcompose.de/api/welcompose-api-0.9.6.zip)
 
 
 
