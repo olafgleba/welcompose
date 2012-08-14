@@ -379,7 +379,7 @@ public function render ()
 					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);
 					// prepare values
 					$values = array();
-					foreach (explode(',', str_replace(' ','',$_field['value'])) as $_value) {
+					foreach (explode(',', $_field['value']) as $_value) {
 						$values[$_value] = $_value;
 					}
 					// prepare data					
