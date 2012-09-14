@@ -744,6 +744,9 @@ public function testForUniqueTypeAndSet ($type, $id = null)
 		throw new Templating_TemplateException("You are not allowed to perform this action");
 	}
 	
+	// define some vars
+	$set = null;	
+	
 	// input check
 	if (empty($type)) {
 		throw new Templating_TemplateException("Input for parameter type is not expected to be empty");

@@ -293,19 +293,6 @@ try {
 		// assign current user and project id
 		$BASE->utility->smarty->assign('wcom_current_user', WCOM_CURRENT_USER);
 		$BASE->utility->smarty->assign('wcom_current_project', WCOM_CURRENT_PROJECT);
-		
-		// build session
-		$session = array(
-			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC)
-		);
-		
-		// assign $_SESSION to smarty
-		$BASE->utility->smarty->assign('session', $session);
-		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}
 
 		// select available projects
 		$select_params = array(
@@ -417,9 +404,6 @@ try {
 			// re-throw exception
 			throw $e;
 		}
-		
-		// add response to session
-		$_SESSION['response'] = 1;
 		
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {

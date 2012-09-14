@@ -394,6 +394,7 @@ public function render ()
 					// prepare attributes
 					$attributes = array(
 						'id' => $field_id,
+						'value' => $_field['label'],
 						'class' => (!empty($_field['class'])) ? 'fsubmit '. $_field['class'] : 'fsubmit'
 					);					
 					// create element

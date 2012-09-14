@@ -519,17 +519,6 @@ try {
 			'response' => Base_Cnc::filterRequest($_SESSION['response'], WCOM_REGEX_NUMERIC),
 			'preview_ctrl' => Base_Cnc::filterRequest($_SESSION['preview_ctrl'], WCOM_REGEX_NUMERIC)
 		);
-		
-		// assign $_SESSION to smarty
-		$BASE->utility->smarty->assign('session', $session);
-		
-		// empty $_SESSION
-		if (!empty($_SESSION['response'])) {
-			$_SESSION['response'] = '';
-		}	
-		if (!empty($_SESSION['preview_ctrl'])) {
-		  	$_SESSION['preview_ctrl'] = '';
-		}
 
 		// select available projects
 		$select_params = array(
@@ -738,20 +727,6 @@ try {
 				}
 			}
 		}
-
-		// add response to session
-		$_SESSION['response'] = 1;
-		
-		// preview control value
-		$activePreview = $preview->getValue();
-				
-		// add preview_ctrl to session
-		if (!empty($activePreview)) {
-			$_SESSION['preview_ctrl'] = 1;
-		}
-				
-		// redirect
-		$SESSION->save();
 				
 		// clean the buffer
 		if (!$BASE->debug_enabled()) {
