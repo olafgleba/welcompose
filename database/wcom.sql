@@ -111,7 +111,7 @@ CREATE TABLE `templating_global_templates` (
   `project` int(11) UNSIGNED NOT NULL,
   `name` varchar(255),
   `description` text,
-  `content` text,
+  `content` longtext,
   `mime_type` varchar(50),
   `change_delimiter` enum('0','1') DEFAULT '0',
   `date_modified` timestamp,
