@@ -249,10 +249,12 @@ public function selectGlobalBox ($id)
  * with select params as first argument. Returns array.
  * 
  * <b>List of supported params:</b>
- * 
  * <ul>
- * <li>order_marco, string, otpional: How to sort the result set.
- * Supported macros:
+ * <li>start, int, optional: row offset</li>
+ * <li>limit, int, optional: amount of rows to return</li>
+ * <li>range, array, optional: specific range of rows to return (e.g. "1,4")</li>
+ * <li>order_marco, string, otpional: How to sort the result set</li>
+ * <li>Supported macros:
  *    <ul>
  *        <li>NAME: sort by name</li>
  *        <li>PRIORITY: sort by priority</li>
@@ -260,9 +262,7 @@ public function selectGlobalBox ($id)
  *        <li>DATE_MODIFIED: sort by date modified</li>
  *        <li>DATE_ADDED: sort by date added</li>
  *    </ul>
- * </li>
- * <li>start, int, optional: row offset</li>
- * <li>limit, int, optional: amount of rows to return</li>
+ *  </li>
  * </ul>
  * 
  * @throws Content_GlobalBoxException
@@ -280,6 +280,7 @@ public function selectGlobalBoxes ($params = array())
 	$order_macro = null;
 	$start = null;
 	$limit = null;
+	$range = null;
 	$bind_params = array();
 	
 	// input check
@@ -291,6 +292,7 @@ public function selectGlobalBoxes ($params = array())
 	foreach ($params as $_key => $_value) {
 		switch ((string)$_key) {
 			case 'order_macro':
+			case 'range':
 					$$_key = (string)$_value;
 				break;
 			case 'start':
@@ -337,6 +339,13 @@ public function selectGlobalBoxes ($params = array())
 	$bind_params = array(
 		'project' => WCOM_CURRENT_PROJECT 
 	);
+	
+	// reduce result set by range
+	if (!empty($range)) {		
+		$parts = explode(',', $range);		
+		$sql .= sprintf(" AND `content_global_boxes`.`id` >= %u ", $parts[0]);
+		$sql .= sprintf(" AND `content_global_boxes`.`id` <= %u ", $parts[1]);
+	}
 	
 	// add sorting
 	if (!empty($order_macro)) {
