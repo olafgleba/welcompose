@@ -545,9 +545,14 @@ public function render ()
 		// prepare sending information
 		$recipients = $this->_generator_form['email_to'];
 		
+		// we look up for a custom form field with name 'email'
+		// if not exist we substitute witch the generic 
+		$provided_email = (isset($form_data['email']) ? $form_data['email'] : 'sender@generatorform.wcom');
+		
 		// prepare From: address
+	  // it assumes a existing generator form field with name 'email'
 		$from = (($this->_generator_form['email_from'] == 'sender@generatorform.wcom') ?
-			$_element['email'] : $this->_generator_form['email_from']);
+			$form_data['email'] : $this->_generator_form['email_from']);
 		$from = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
 			null, $from);
 		
@@ -555,7 +560,7 @@ public function render ()
 		$headers = array();
 		$headers['From'] = $from;
 		$headers['Subject'] = $this->_generator_form['email_subject'];
-		$headers['Reply-To'] = $_element['email'];
+		$headers['Reply-To'] = $from;
 		
 		// prepare params
 		$params = array();
