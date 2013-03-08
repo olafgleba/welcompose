@@ -139,6 +139,9 @@ try {
 	);
 	$BASE->utility->smarty->assign('global_files', $GLOBALFILE->selectGlobalFiles($select_params));
 	
+	// assign image path
+	$BASE->utility->smarty->assign('global_file_store_www', $BASE->_conf['global_file']['store_www']);
+	
 	// count available global files
 	$file_count = $GLOBALFILE->countGlobalFiles();
 	$BASE->utility->smarty->assign('file_count', $file_count);

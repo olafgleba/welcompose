@@ -86,9 +86,10 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 {if !empty($global_files)}
 <table summary="{i18n 'Available Templates'}">
 <tr>
-<td class="mini"><img src="../static/img/spacer.gif" width="320" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="255" height="1" alt="" /></td>
-<td class="mini"><img src="../static/img/spacer.gif" width="120" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="300" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="180" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
+<td class="mini"><img src="../static/img/spacer.gif" width="90" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="40" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="50" height="1" alt="" /></td>
 <td class="mini"><img src="../static/img/spacer.gif" width="30" height="1" alt="" /></td>
@@ -96,6 +97,7 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 <tr>
 <th class="page template_name">{i18n 'Name'}</th>
 <th class="">{i18n 'Description'}</th>
+<th class="">{i18n 'View'}</th>
 <th class="">{i18n 'File is...'}</th>
 <th class="">{i18n 'Upload'}</th>
 <th class="">{i18n 'Download'}</th>
@@ -105,7 +107,8 @@ var selection = '{if isset($session.selection)}{$session.selection}{/if}';
 <tr>
 <td class="page"><a href="globalfiles_edit.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n 'Edit'}">{$_global_file.name|escape:"html"}</a></td>
 <td>{$_global_file.description|escape:"html"}</td>
-<td>{if !empty($_global_file.name_on_disk)}{i18n 'available'}{else}{i18n 'not available'}{/if}</td>
+<td class="page"><a class="up" title="{i18n 'Open in new Window/Tab'}" target="_new" href="{$global_file_store_www}/{$_global_file.name_on_disk}"></a></td>
+<td class="page">{if !empty($_global_file.name_on_disk)}{i18n 'available'}{else}{i18n 'not available'}{/if}</td>
 <td class="page"><a class="upload showTableRow" href="#" id="e_{$_global_file.id}" title="{i18n 'Upload'}"></a></td>
 <td class="page"><a class="download" href="globalfiles_download.php?id={$_global_file.id|escape:"url"}" title="{i18n 'Download'}"></a></td>
 <td class="page"><a class="delete confirmDelTplGlobalfile" href="globalfiles_delete.php?id={$_global_file.id|escape:"url"}{if isset($request.start) && $request.start > 0}&amp;start={$request.start|escape:"url"}{/if}" title="{i18n 'Delete entry'}"></a></td>
