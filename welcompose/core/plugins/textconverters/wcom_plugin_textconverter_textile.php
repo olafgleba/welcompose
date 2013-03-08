@@ -26,12 +26,13 @@ class TextConverter_Textile extends TextConverter_Xhtml
 
 public function mmInsertImage ($text, $src, $width, $height, $alt, $title)
 {
-	// fix textile rendering bug: set space when alt attribute is empty
-	$alt = (!empty($alt)) ? $alt : ' ';
-	
-	$tag = '!%1$s (%4$s)!%6$s';
-	$html = sprintf($tag, $src, $width, $height, $alt, $title, $text);
-	
+	if (!empty($alt)) {
+	  $tag = '!%1$s(%2$s)!%3$s';
+	  $html = sprintf($tag, $src, $alt, $text);	
+	} else {
+	  $tag = '!%1$s!%2$s';
+	  $html = sprintf($tag, $src, $text);	
+	}	
 	return $html;
 }
 
@@ -77,22 +78,39 @@ public function apply ($str)
 	
 	// load textile
 	if (!class_exists('Textile')) {
-		$path = dirname(__FILE__).'/../../third_party/textile.php';
+		// based on some special needs (s.below), we establish a modified 
+		// copy of the original Textile class
+		$path = dirname(__FILE__).'/../../third_party/textile-wcom.php';
 		require(Base_Compat::fixDirectorySeparator($path));
 	}
-	$TEXTILE = new Textile();
 	
-	// Since the current textile converter class has a problem
-	// with supplied ampersands, we cannot use the usual approach.
-	// Instead of simply passing the string to the TextileThis method and
-	// return it in a single line we must do a string replace before
-	// returning the string. 
+  /**
+   * To allow RWD Layouts, we must prevent the default width/height assignment
+   * on images by Textile. We establish a new class option ('_set_dimensions') within the
+   * Textile class initialisation. See header comments in ./textile-wcom.php also.
+   *
+   * _set_dimensions	bool	true, false (default)
+   *
+   * Enable width/height assignment, example
+   * $TEXTILE = new Textile('html5', true);
+   *
+   */
+   
+	$TEXTILE = new Textile('html5');
+
+  /**
+   * Since the original Textile converter class has a problem with supplied
+   * with supplied paired ampersands, we cannot use the usual approach. Instead of simply
+   * passing the string to the TextileThis method and return it in a single line
+   * we must do a string replace before returning the string.
+   *
+   * Usual approach:
+   *
+   * return $TEXTILE->TextileThis($str);
+   *
+   */
 	
-	// Usual approach
-	// apply textile
-	//return $TEXTILE->TextileThis($str);
-	
-	// Temporary approach
+	// current approach
 	$str = $TEXTILE->TextileThis($str);	
 	$str = str_replace('&amp;amp;', '&amp;', $str);
 	
