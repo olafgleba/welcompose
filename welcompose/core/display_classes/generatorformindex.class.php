@@ -292,7 +292,7 @@ public function render ()
 					$element = $FORM->addGroup($_field['name']);				
 				
 					$i = 1;
-					foreach (explode(';', str_replace(' ','',$_field['value'])) as $_value) {
+					foreach (explode(';', $_field['value']) as $_value) {
 						if (empty($_value)) {
 							continue;
 						}
