@@ -698,9 +698,9 @@ aliquip ex ea commodo consequat.</p>
 			Löschen Sie nun die Referenz (Attribute <emphasis>href</emphasis>) auf die Datei
 			<filename>styles/wcom_demo_basic.css</filename> und platzieren Sie den
 			Cursor zwischen den Anführungszeichen. Klicken Sie nun auf
-			den Link <guibutton>Globale Dateien</guibutton>, der über
+			den Link <guibutton>Globale Vorlagen</guibutton>, der über
 			dem Textfeld plaziert ist. Es öffnet sich ein Pop-up, in dem die bisher
-			angelegten Globalen Dateien gelistet werden. Klicken Sie auf die
+			angelegten Globalen Vorlagen gelistet werden. Klicken Sie auf die
 			soeben angelegte <filename>wcom_demo_basic.css</filename>. Das
 			Pop-up schliesst sich und der Code 
 			<markup>{global_template name="wcom_demo_basic.css"}</markup> wird als
