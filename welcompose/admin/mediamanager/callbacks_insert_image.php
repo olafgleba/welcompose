@@ -150,7 +150,7 @@ try {
 	// set defaults
 	$FORM->addDataSource(new HTML_QuickForm2_DataSource_Array(array(
 		'id' => Base_Cnc::filterRequest($_REQUEST['id'], WCOM_REGEX_NUMERIC),
-		'set_dimensions' => 1,
+		'set_dimensions' => 0,
 		'text_converter' => Base_Cnc::filterRequest($_REQUEST['text_converter'], WCOM_REGEX_NUMERIC),
 		'text' => Base_Cnc::ifsetor($_REQUEST['text'], null),
 		'form_target' => Base_Cnc::filterRequest($_REQUEST['form_target'], WCOM_REGEX_CSS_IDENTIFIER)
