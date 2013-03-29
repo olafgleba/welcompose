@@ -215,7 +215,7 @@ public function render ()
 					$declare_attributes = array(
 						'required_attr', 'autofocus'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -234,7 +234,7 @@ public function render ()
 					$declare_attributes = array(
 						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -252,7 +252,7 @@ public function render ()
 					$declare_attributes = array(
 						'required_attr', 'autofocus'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -279,7 +279,7 @@ public function render ()
 					$declare_attributes = array(
 						'min', 'max', 'step', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -306,7 +306,7 @@ public function render ()
 						$declare_attributes = array(
 							'required_attr', 'autofocus'
 						);
-						$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);						
+						$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);						
 						// prepare data
 						$data = array(
 							'label' => $_field['label'],
@@ -328,7 +328,7 @@ public function render ()
 					$declare_attributes = array(
 						'min', 'max', 'step', 'autofocus'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -358,7 +358,7 @@ public function render ()
 					$declare_attributes = array(
 						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -376,7 +376,7 @@ public function render ()
 					$declare_attributes = array(
 						'required_attr','autofocus'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);
 					// prepare values
 					$values = array();
 					foreach (explode(',', $_field['value']) as $_value) {
@@ -412,7 +412,7 @@ public function render ()
 					$declare_attributes = array(
 						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -432,7 +432,7 @@ public function render ()
 					$declare_attributes = array(
 						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -453,7 +453,7 @@ public function render ()
 				$declare_attributes = array(
 					'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 				);
-				$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);	
+				$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);	
 					// prepare label
 					$data = array(
 						'label' => $_field['label']
@@ -473,7 +473,7 @@ public function render ()
 					$declare_attributes = array(
 						'placeholder', 'pattern', 'maxlength', 'required_attr', 'autofocus', 'readonly'
 					);
-					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, &$_field, &$attributes);					
+					$GENERATORFORMFIELDS->prepareOptionalAttributes($declare_attributes, $_field, $attributes);					
 					// prepare data
 					$data = array(
 						'label' => $_field['label']
@@ -496,6 +496,9 @@ public function render ()
 		if (!empty($_field['validator_regex'])) {
 			$element->addRule('regex', $_field['validator_message'], $field_regex);
 		}
+		
+		// init var
+		$elements = array();
 		
 		// collect values
 		if ($FORM->isSubmitted()) {

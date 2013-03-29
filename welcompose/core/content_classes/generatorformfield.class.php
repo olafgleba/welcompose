@@ -532,7 +532,7 @@ public function getTypeListForForm ()
  * @param array Attributes reference
  * @return array
  */
-public function prepareOptionalAttributes ($params = array(), $field_ref, $attribute_ref)
+public function prepareOptionalAttributes ($params = array(), &$field_ref, &$attribute_ref)
 {
 
 	// input check
