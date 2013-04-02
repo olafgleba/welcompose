@@ -631,7 +631,12 @@ public function getLocationSelf ($remove_amps = false)
 	if (empty($url)) {
 		return '#';
 	} else {
-		return $url;
+		// append hash anchor if config param is set.
+		if (empty($this->base->_conf['forms']['anchor_identifier'])) {
+		    return $url;
+		} else {
+		    return $url.'#'.$this->base->_conf['forms']['anchor_identifier'];
+		}
 	}
 }
 

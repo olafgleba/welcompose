@@ -138,8 +138,11 @@ public function loadQuickFormSmartyRenderer()
 	// trigger compat mode		
 	$renderer->setOption('old_compat', true);
 	
+	// get base instance
+	$BASE = load('base:base');
+	
 	// grouping errors to be shown above the form
-	$renderer->setOption('group_errors', true);
+	$renderer->setOption('group_errors', (bool)$BASE->_conf['forms']['group_errors']);
 	
 	// redefine require note option
 	$renderer->setOption('required_note', '<p class="required_note">* '.gettext('Required fields').'</p>');
