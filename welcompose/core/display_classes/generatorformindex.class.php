@@ -497,8 +497,8 @@ public function render ()
 			$element->addRule('regex', $_field['validator_message'], $field_regex);
 		}
 		
-		// init var
-		$elements = array();
+		// init element array var
+		$elements[] = '';
 		
 		// collect values
 		if ($FORM->isSubmitted()) {
