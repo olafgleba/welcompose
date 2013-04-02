@@ -44,6 +44,10 @@ gunzip = 0
 [cookie]
 lifetime = 2592000
 
+[forms]
+group_errors = true
+anchor_identifier = 
+
 [plugins]
 textconverter_dir = 
 textmacro_dir = 

@@ -47,7 +47,7 @@ lifetime = 2592000
 
 [forms]
 group_errors = true
-anchor_identifier = ""
+anchor_identifier = 
 
 [plugins]
 textconverter_dir = "/www/gits/welcompose/welcompose/core/plugins/textconverters"
