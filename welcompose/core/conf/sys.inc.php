@@ -45,6 +45,10 @@ gunzip = 0
 [cookie]
 lifetime = 2592000
 
+[forms]
+group_errors = true
+anchor_identifier = ""
+
 [plugins]
 textconverter_dir = "/www/gits/welcompose/welcompose/core/plugins/textconverters"
 textmacro_dir = "/www/gits/welcompose/welcompose/core/plugins/textmacros"
