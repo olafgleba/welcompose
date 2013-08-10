@@ -1,7 +1,6 @@
 {capture name='_smarty_debug' assign=debug_output}
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Smarty Debug Console</title>
 <style type="text/css">
@@ -96,14 +95,14 @@ td {
 </head>
 <body>
 
-<h1>Welcompose Smarty Debug Console for :  {if isset($template_name)}{$template_name|debug_print_var nofilter}{else}Total Time {$execution_time|string_format:"%.5f"}{/if}</h1>
+<h1>Smarty Debug Console  -  {if isset($template_name)}{$template_name|debug_print_var nofilter}{else}Total Time {$execution_time|string_format:"%.5f"}{/if}</h1>
 
 {if !empty($template_data)}
 <h2>included templates &amp; config files (load time in seconds)</h2>
 
 <div>
 {foreach $template_data as $template}
-  {$template.name}
+  <font color=brown>{$template.name}</font>
   <span class="exectime">
    (compile {$template['compile_time']|string_format:"%.5f"}) (render {$template['render_time']|string_format:"%.5f"}) (cache {$template['cache_time']|string_format:"%.5f"})
   </span>
@@ -137,7 +136,7 @@ td {
 {/capture}
 <script type="text/javascript">
 {$id = $template_name|default:''|md5}
-    _smarty_console = window.open("","console{$id}","width=768,height=640,resizable,scrollbars=yes");
-    _smarty_console.document.write("{$debug_output|escape:'javascript' nofilter}");
-    _smarty_console.document.close();
+	_smarty_console = window.open("","console{$id}","width=768,height=640,resizable,scrollbars=yes");
+	_smarty_console.document.write("{$debug_output|escape:'javascript' nofilter}");
+	_smarty_console.document.close();
 </script>
