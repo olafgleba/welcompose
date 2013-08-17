@@ -218,11 +218,10 @@ height: 1%;
 
 <h1>Requirements</h1>
 <p>Please make sure that your webspace meets all the requirements for running Welcompose. If any errors or
-warnings occur, please consult the install manual how to fix it. There are instructions how to tell you
-webspace provider about it too.</p>
+warnings occur, please consult the <a href="http://docs.welcompose.de/handbuch/install_instructions.html">install manual</a> how to fix it.</p>
 
 <p><strong>Attention</strong>: Please note that we're only checking the capabilities of PHP here. This test does not
-check if your database is new enough.</p>
+check the database version or engine, as we cannot connnect the database at this point.</p>
 
 <?php
 // initialize error counter
