@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ogwcom/welcompose.png)](https://travis-ci.org/ogwcom/welcompose)
+
 # Welcompose Content Management System #
 
 Welcompose is a open source web content management system for small to middle Websites focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites. 
