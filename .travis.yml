@@ -8,3 +8,5 @@ php:
 branches:
   only:
     - master
+    
+script: ./scripts/build.sh
