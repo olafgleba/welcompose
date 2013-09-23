@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ogwcom/welcompose.png)](https://travis-ci.org/ogwcom/welcompose)
+[![Build Status](https://travis-ci.org/olafgleba/welcompose.png)](https://travis-ci.org/olafgleba/welcompose)
 
 # Welcompose Content Management System #
 
