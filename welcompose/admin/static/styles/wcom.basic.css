@@ -21,7 +21,7 @@
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
-/* 
+/*
 generic styles, basic structure and common classes
 */
 
@@ -37,7 +37,7 @@ border: 0 none;
 body {
 font: 95% Arial, Helvetica, sans-serif;
 color: #333;
-background: #d9d9d9 url(../img/bg_body.gif); 
+background: #d9d9d9;
 padding: 16px 0 16px 0;
 text-align: center;
 }
@@ -57,7 +57,7 @@ height: 56px;
 width: 60px;
 background: transparent url(../img/icons/users.gif) 0 -109px no-repeat;
 }
-h2, h3, h4, p, a, li, th, td, label, select, input, textarea, 
+h2, h3, h4, p, a, li, th, td, label, select, input, textarea,
 span .bez, fieldset.void, #projects span {
 font-size: 0.80em;
 }
@@ -65,7 +65,7 @@ h2 a, h3 a, h4 a, h2 p, p a, li a, th a, td a, label a, select a, input a,
 li h2, li h3, li h4, li p, li a,
 td h2, td h3, td h4, th p, th a, th li, th label, th select, th input, th textarea,
 td p, td a, td li, td label, td select, td input, td textarea,
-label select, label input, label p, label a,  
+label select, label input, label p, label a,
 textarea {
 font-size: 100%;
 }
@@ -132,7 +132,7 @@ position: absolute;
 top: 19px;
 left: 765px;
 width: 200px;
-background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat; 
+background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat;
 padding-top: 3px;
 }
 #logo p {
@@ -155,22 +155,22 @@ padding-right: 0;
 }
 #loggedin p:nth-child(1) {
 background: url(../img/user-small.gif) 0 3px no-repeat;
-padding-left: 16px; 
+padding-left: 16px;
 font-weight: bold;
 }
 #loggedin p:nth-child(2) {
 background: url(../img/public-page.gif) 0 4px no-repeat;
-padding-left: 16px; 
+padding-left: 16px;
 }
 #loggedin a {
 color: #333;
 background-color: transparent;
-text-decoration: none; 
+text-decoration: none;
 }
 #loggedin a:hover, #loggedin a:active {
 color: #ff620d;
 background-color: transparent;
-text-decoration: none; 
+text-decoration: none;
 }
 #logout {
 position: absolute;
@@ -412,7 +412,7 @@ padding: 0 12px 10px 12px;
 line-height: 1.5em;
 background: transparent url(../img/bg_response_bot.gif) left bottom no-repeat;
 }
-#content .rp_note img { 
+#content .rp_note img {
 float: right;
 margin: 6px 6px 6px 20px;
 }
@@ -435,7 +435,7 @@ position: absolute;
 top: 19px;
 left: 519px;
 width: 200px;
-background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat;  
+background: transparent url(../img/bg_logo_top.gif) 0 0 no-repeat;
 padding-top: 3px;
 }
 #login #main {
@@ -448,7 +448,7 @@ width: 710px;
 }
 
 .act {
-display: block; 
+display: block;
 width: 690px;
 }
 /* .shownav is for show/hide nav within popups */
