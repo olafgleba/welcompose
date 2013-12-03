@@ -1,25 +1,23 @@
-[![Build Status](https://travis-ci.org/olafgleba/welcompose.png)](https://travis-ci.org/olafgleba/welcompose)
-
-# Welcompose Content Management System #
+# Welcompose [![Build Status](https://travis-ci.org/olafgleba/welcompose.png)](https://travis-ci.org/olafgleba/welcompose)
 
 Welcompose is a open source web content management system for small to middle Websites focused on being flexible in building structure and contents foremost. It is written (and requires) in PHP5, Mysql5 and uses Smarty as template engine. Full flexibility in building and combining templates, template types and template groups, a smooth and easy to use interface supports the user to build W3C compliant websites. 
 
 
-## Suggested users ##
+## Suggested users
 
 * Developers who creates CMS driven websites for their clients
 * Designers who have a slightly knowledge of HTML/CSS but do not want to struggle with PHP
 * Clients who have no HTML knowledge at all but want just take care of their website contents by themselves
 
 
-## What Welcompose is \*not* ##
+## What Welcompose is \*not*
 
 If you are lookin for a *click-to-go* solution with hundreds of plugins, predefined content or/and uneditable markup and WYSIWYG text editing, Welcompose might be not for you. The System provides a easy and flexible way to build websites, but does not (and don't want to) compare with complex Systems like Typo3, Drupal a.s.o.
 
 The foremost goal was to give HTMl/CSS aware programmers and designers a way to build there own site structure without any intrusion of the CMS itself. No markup is predefined/printed at all. It all depends what the designer/programmer does within the templates.  
 
 
-## Websites using Welcompose (Excerpt) ##
+## Websites using Welcompose (Excerpt)
 
 * [http://marcoschreyl.de/](http://marcoschreyl.de/)
 * [http://christine-westermann.de/](http://christine-westermann.de/)
@@ -32,7 +30,7 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 * [http://www.cuxhaven-privat.de/](http://www.cuxhaven-privat.de/)
 
 
-## Features ##
+## Features
 
 * Uses current technology to push up performance (PHP5, Mysql5, Smarty latest)
 * No proprietary syntax for page template creation
@@ -48,19 +46,19 @@ The foremost goal was to give HTMl/CSS aware programmers and designers a way to 
 
 
 
-## Software Downloads ##
+## Software Downloads
 
 [http://welcompose.de/cms/downloads/](http://welcompose.de/cms/downloads/)
 
 
 
-## Issue Tracking and Tickets ##
+## Issue Tracking and Tickets
 
 [http://welcompose.lighthouseapp.com/](http://welcompose.lighthouseapp.com/)
 
 
 
-## Documentation ##
+## Documentation
 
 Currently the documentation is only available in german language.
 
@@ -91,6 +89,6 @@ Current API Documentation (phpDocumentor):
 
 
 
-## License ##
+## License
 
 The [AGPLv3](http://www.opensource.org/licenses/agpl-v3.html) is applied to all core parts of the application.
