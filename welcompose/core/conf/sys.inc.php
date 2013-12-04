@@ -1,7 +1,7 @@
 ; <?php /*
 [path]
 wcom_admin_root_www = /admin
-wcom_public_root_www = 
+wcom_public_root_www =
 
 [log]
 handler = "file"
@@ -20,7 +20,7 @@ numeric = "C"
 driver = "pdo"
 dsn = "mysql:unix_socket=/tmp/mysql.sock;dbname=wcom-current"
 username = "root"
-password = 
+password = "local"
 table_alias_constants = true
 debug = false
 backticks = true
@@ -28,12 +28,12 @@ backticks = true
 [media]
 store_www = "/files/media"
 store_disk = "/www/wcom/welcompose/files/media"
-chmod = 
+chmod =
 
 [global_file]
 store_www = "/files/global_files"
 store_disk = "/www/wcom/welcompose/files/global_files"
-chmod = 
+chmod =
 
 [caching]
 index.php_mode = 0
@@ -47,7 +47,7 @@ lifetime = 2592000
 
 [forms]
 group_errors = true
-anchor_identifier = 
+anchor_identifier =
 
 [plugins]
 textconverter_dir = "/www/wcom/welcompose/core/plugins/textconverters"
