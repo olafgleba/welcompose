@@ -13,7 +13,7 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
+ *
  * @author Olaf Gleba
  * @package Welcompose
  * @link http://welcompose.de
@@ -42,27 +42,27 @@ require(Base_Compat::fixDirectorySeparator($deregister_globals_path));
 try {
 	// start output buffering
 	@ob_start();
-	
+
 	// load smarty
 	$smarty_update_conf = dirname(__FILE__).'/../smarty.inc.php';
 	$BASE->utility->loadSmarty(Base_Compat::fixDirectorySeparator($smarty_update_conf), true);
-	
+
 	// load gettext
 	$gettext_path = dirname(__FILE__).'/../../core/includes/gettext.inc.php';
 	include(Base_Compat::fixDirectorySeparator($gettext_path));
 	gettextInitSoftware($BASE->_conf['locales']['all']);
-	
+
 	// start Base_Session
 	/* @var $SESSION session */
 	$SESSION = load('base:session');
-	
+
 	// connect to database
 	$BASE->loadClass('database');
-	
+
 	// define major/minor task number
 	define('TASK_MAJOR', '0001');
 	define('TASK_MINOR', '013');
-	
+
 	// get schema version from database
 	$sql = "
 		SELECT
@@ -74,14 +74,14 @@ try {
 	";
 	$version = $BASE->db->select($sql, 'field');
 	list($major, $minor) = explode('-', $version);
-	
+
 	/*
 	 * References
 	 * ----------
 	 *
 	 * Changeset: 6e782baabffa83c7ee97a1e60d946e4b64ea86bf
 	 * Ticket: 21
-	 * 
+	 *
 	 * Changes to be applied
 	 * ---------------------
 	 *
@@ -120,7 +120,7 @@ try {
 				  `draft` enum('0','1') DEFAULT '0',
 				  `tag_count` int(11) UNSIGNED DEFAULT '0',
 				  `tag_array` text,
-				  `date_modified` timestamp(14),
+				  `date_modified` timestamp,
 				  `date_added` datetime,
 				  `day_added` char(2),
 				  `month_added` char(2),
@@ -150,12 +150,12 @@ try {
 				    REFERENCES `application_text_converters`(`id`)
 				    ON DELETE SET NULL
 				    ON UPDATE CASCADE
-				) 
+				)
 				ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 			";
 
 			$BASE->db->execute($sql);
-			
+
 			// create content_event_tags
 			$BASE->db->execute('DROP TABLE IF EXISTS '.WCOM_DB_CONTENT_EVENT_TAGS);
 
@@ -174,12 +174,12 @@ try {
 				    REFERENCES `content_pages`(`id`)
 				    ON DELETE CASCADE
 				    ON UPDATE CASCADE
-				) 
+				)
 				ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 			";
 
 			$BASE->db->execute($sql);
-			
+
 			// create content_event_tags
 			$BASE->db->execute('DROP TABLE IF EXISTS '.WCOM_DB_CONTENT_EVENT_TAGS2CONTENT_EVENT_POSTINGS);
 
@@ -199,7 +199,7 @@ try {
 				    REFERENCES `content_event_tags`(`id`)
 				    ON DELETE NO ACTION
 				    ON UPDATE NO ACTION
-				) 
+				)
 				ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 			";
 
@@ -360,7 +360,7 @@ try {
 					}
 				}
 			}
-			
+
 			// add new template type event_index to every project
 			foreach ($projects as $_project) {
 				// get existing template types
@@ -383,7 +383,7 @@ try {
 					'description' => '',
 					'editable' => '0'
 				);
-				
+
 				// if the template type already exists, force update
 				$insert = true;
 				foreach ($template_types as $_template_type) {
@@ -409,7 +409,7 @@ try {
 					$BASE->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 				}
 			}
-			
+
 
 			// add new template type event_rss20 to every project
 			foreach ($projects as $_project) {
@@ -433,7 +433,7 @@ try {
 					'description' => '',
 					'editable' => '0'
 				);
-				
+
 				// if the template type already exists, force update
 				$insert = true;
 				foreach ($template_types as $_template_type) {
@@ -459,7 +459,7 @@ try {
 					$BASE->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 				}
 			}
-			
+
 			// add new template type event_atom10 to every project
 			foreach ($projects as $_project) {
 				// get existing template types
@@ -482,7 +482,7 @@ try {
 					'description' => '',
 					'editable' => '0'
 				);
-				
+
 				// if the template type already exists, force update
 				$insert = true;
 				foreach ($template_types as $_template_type) {
@@ -508,7 +508,7 @@ try {
 					$BASE->db->insert(WCOM_DB_TEMPLATING_TEMPLATE_TYPES, $sqlData);
 				}
 			}
-			
+
 			// add new page type WCOM_EVENT to every project
 			foreach ($projects as $_project) {
 				// get existing template types
@@ -531,7 +531,7 @@ try {
 					'internal_name' => 'Event',
 					'editable' => '0'
 				);
-				
+
 				// if the template type already exists, force update
 				$insert = true;
 				foreach ($page_types as $_page_type) {
