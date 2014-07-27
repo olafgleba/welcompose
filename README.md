@@ -25,7 +25,7 @@ If you are lookin for a *click-to-go* solution with hundreds of plugins, predefi
 * 100% flexibility in building and combining page templates
 * High Accessibility by seperating contents and templating
 * Out of the box page types for blogs, simple content pages, date entry listings, guestbooks and more
-* Delivered with Textconverters Markdown, Textile and XHTML at least
+* Comes with with Textconverters Markdown, Textile and XHTML at least
 * Content related management of media
 * Intuitive and simple to learn backend for the developer but also the content editor
 * Markup editor as a additional add on ([MarkItUp!](http://markitup.jaysalvat.com/home/))
