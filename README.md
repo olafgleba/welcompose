@@ -1,3 +1,7 @@
+# DEPRECATED
+
+**Please do not install Welcompose from now on as we dropped active development. [More info (german)](http://welcompose.de/cms/news/2015/10/11/ein-winken-zum-abschied-welcompose/)** 
+
 # Welcompose [![Build Status](https://travis-ci.org/olafgleba/welcompose.png)](https://travis-ci.org/olafgleba/welcompose)
 
 Welcompose is a open source web content management system for small to middle Websites. It is focused on being flexible in building structure and content and is easy to use at once. It requires PHP5, Mysql5 and uses the latest smarty version for templating.
