@@ -4,7 +4,7 @@
  * Project: Welcompose
  * File: 0001-011.php
  *
- * Copyright (c) 2008-2012 creatics, Olaf Gleba <og@welcompose.de>
+ * Copyright (c) 2009 creatics
  *
  * Project owner:
  * creatics, Olaf Gleba
@@ -13,10 +13,12 @@
  *
  * This file is licensed under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE v3
  * http://www.opensource.org/licenses/agpl-v3.html
- * 
+ *
+ * $Id: 0001-011.php 1416 2009-12-31 13:22:12Z olafgleba $
+ *
+ * @copyright 2009 creatics, Olaf Gleba
  * @author Olaf Gleba
  * @package Welcompose
- * @link http://welcompose.de
  * @license http://www.opensource.org/licenses/agpl-v3.html GNU AFFERO GENERAL PUBLIC LICENSE v3
  */
 
