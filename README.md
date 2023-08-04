@@ -1,6 +1,6 @@
 # DEPRECATED
 
-**Please do not install Welcompose from now on as we dropped active development. [More info (german)](http://welcompose.de/cms/news/2015/10/11/ein-winken-zum-abschied-welcompose/)** 
+**Please do not install Welcompose from now on as we dropped active development** 
 
 # Welcompose [![Build Status](https://travis-ci.org/olafgleba/welcompose.png)](https://travis-ci.org/olafgleba/welcompose)
 
